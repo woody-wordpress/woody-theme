@@ -11,18 +11,26 @@
 {% endif %}
 
 {% if element.gallery_items | default %}
-    <div class="{{ grid }}">
-        {% for image in element.gallery_items %}
-            <div class="column">
-                <a class="card" href="">
-                    <img src="{{ TimberImage(image).src('featured-small') }}" {% if image.alt|default %} alt="{{ image.alt }}" {% endif %}/>
-                    {% if image.caption %}
-                        <div class="card-divider">
-                            <small>{{ image.caption }}</small>
-                        </div>
-                    {% endif %}
-                </a>
-            </div>
-        {% endfor %}
-    </div>
+    {% if element.display_fullwidth | default %}
+        <div class="section-fullwidth">
+        {% endif %}
+        <div class="{{ grid }}">
+            {% for image in element.gallery_items %}
+                <div class="column">
+                    <a class="card" href="">
+                        <img src="{{ TimberImage(image).src('featured-small') }}" {% if image.alt|default %} alt="{{ image.alt }}" {% endif %}/>
+                        {% if image.caption %}
+                            <div class="card-divider">
+                                <small>{{ image.caption }}</small>
+                            </div>
+                        {% endif %}
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        {% if element.display_fullwidth | default %}
+        </div>
+    {% endif %}
 {% endif %}
+
+{{ dump(element.display_fullwidth)}}

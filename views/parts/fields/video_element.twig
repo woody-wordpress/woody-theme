@@ -1,6 +1,17 @@
 {% if element.title | default %}
-    <h2>{{ element.title }}</h2>
+    <h2 class="text-center">{{ element.title }}</h2>
 {% endif %}
-{% if element.movie | default %}
-    {{ element.movie }}
+{% if element.slogan | default %}
+    {{ element.slogan }}
+{% endif %}
+{% if element.display_fullwidth %}
+    <div class="section-fullwidth">
+    {% endif %}
+    {% if element.movie | default %}
+        <div class="responsive-embed widescreen">
+            {{ element.movie }}
+        </div>
+    {% endif %}
+    {% if element.display_fullwidth %}
+    </div>
 {% endif %}
