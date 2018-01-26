@@ -227,7 +227,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "message": "Afficher en plein écran",
+                            "message": "Afficher sur toute la largeur de l'écran",
                             "default_value": 0,
                             "ui": 0,
                             "ui_on_text": "",
@@ -721,6 +721,22 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5a6b3e22883d6",
+                            "label": "Contenu",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
                             "key": "field_5a60d38730595",
                             "label": "Titre",
                             "name": "title",
@@ -773,6 +789,41 @@
                             },
                             "width": "",
                             "height": ""
+                        },
+                        {
+                            "key": "field_5a6b3e34883d7",
+                            "label": "Mise en page",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_5a6b3e4a883d8",
+                            "label": "Affichage",
+                            "name": "display_fullwidth",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "Afficher sur toute la largeur de l'écran",
+                            "default_value": 0,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
                         }
                     ],
                     "min": "",
@@ -987,7 +1038,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "return_format": "url",
+                            "return_format": "array",
                             "preview_size": "thumbnail",
                             "library": "all",
                             "min_width": "",
@@ -1034,19 +1085,18 @@
                             "label": "Position de l'image",
                             "name": "alignement",
                             "type": "select",
-                            "instructions": "Choisissez la position de votre image par rapport au texte",
+                            "instructions": "",
                             "required": 1,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "50",
+                                "width": "33",
                                 "class": "",
                                 "id": ""
                             },
                             "choices": {
                                 "left": "à gauche",
                                 "right": "à droite",
-                                "top": "au dessus",
-                                "bottom": "en dessous"
+                                "bg": "derrière le texte"
                             },
                             "default_value": [
                                 "left"
@@ -1059,6 +1109,33 @@
                             "placeholder": ""
                         },
                         {
+                            "key": "field_5a6b33bb37a8b",
+                            "label": "Affichage",
+                            "name": "display_fullwidth",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_5a69a645596ca",
+                                        "operator": "==",
+                                        "value": "bg"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "33",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "Afficher sur toute la largeur de l'écran",
+                            "default_value": 0,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
+                        {
                             "key": "field_5a69aa466c9ce",
                             "label": "Taille de l'image",
                             "name": "img_size",
@@ -1067,7 +1144,7 @@
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "50",
+                                "width": "33",
                                 "class": "",
                                 "id": ""
                             },
@@ -1302,5 +1379,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1516958316
+    "modified": 1516980106
 }
