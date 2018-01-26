@@ -1,0 +1,28 @@
+{% extends "base.twig" %}
+
+{% block content %}
+    <main class="section page">
+        <div class="wrapper">
+            {% if post.display_media == 'none' %}
+                {% include '/parts/content/header-basic.twig' %}
+            {% elseif post.display_media == 'img' or post.display_media == 'mov' %}
+                {% if post.template == 'fullwidth' %}
+                    {% include '/parts/content/header-media-fullwidth.twig' %}
+                {% elseif post.template == 'media_left' %}
+                    {% include '/parts/content/header-media-left.twig' %}
+                {% elseif post.template == 'media_right' %}
+                    {% include '/parts/content/header-media-right.twig' %}
+                {% endif %}
+            {% endif %}
+
+            <div class="content"></div>
+            {% for key, element in post.get_field('content_element') %}
+                <div class="element_{{ element.acf_fc_layout }} grid-container">
+                    {% include['parts/fields/' ~ element.acf_fc_layout ~ '.twig',
+                        'parts/fields/empty.twig'] %}
+                </div>
+            {% endfor %}
+        </div>
+        <!-- wrapper -->
+    </main>
+{% endblock %}

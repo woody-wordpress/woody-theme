@@ -1,0 +1,13 @@
+{% if element.title | default %}
+    <h2>{{ element.title }}</h2>
+{% endif %}
+{% if element.slogan | default %}
+    <h5>{{ element.slogan }}</h5>
+{% endif %}
+{% if element.text | default %}
+    <p>{{ element.text }}</p>
+{% endif %}
+
+{% if element.link.title and element.link.url | default %}
+    <a class="button" href="{{ element.link.url }}" {% if element.link.target %} target="{{ element.link.target }}" {% endif %}>{{ element.link.title }}</a>
+{% endif %}

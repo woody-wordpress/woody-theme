@@ -1,0 +1,13 @@
+{% if element.title | default %}
+    <h2>{{ element.title }}</h2>
+{% endif %}
+{% if element.repeater | default %}
+    {% for field in element.repeater %}
+        {% if field.file | default %}
+            <a class="button" href="{{ field.file.url }}">
+                {% if field.label | default %}{{ field.label }}
+                {% else %}{{ field.file.filename }}{% endif %}
+            </a>
+        {% endif %}
+    {% endfor %}
+{% endif %}

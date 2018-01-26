@@ -1,0 +1,21 @@
+<div class="hero-section">
+
+    {% if post.display_media == 'img' %}
+        <div class="hero-section-img" style="height:400px; width:100%; background:url('{{ post.img.src('featured-large') }}') center center no-repeat; background-size:cover;"></div>
+    {% elseif post.display_media == 'mov' %}
+        <div class="hero-section-movie">
+            {{ post.get_field('movie') }}
+        </div>
+    {% endif %}
+    <div class="hero-section-text">
+        <h1 class="page__title">{{post.title}}</h1>
+        <h5>{{post.subtitle}}</h5>
+    </div>
+    {% if post.display_taxonomies == 1 %}
+        <ul class="thematic-tags">
+            {% for term in post.terms('thematic') %}
+                <li>{{ term }}</li>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>

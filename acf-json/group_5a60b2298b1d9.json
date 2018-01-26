@@ -1,0 +1,224 @@
+{
+    "key": "group_5a60b2298b1d9",
+    "title": "En tête du contenu",
+    "fields": [
+        {
+            "key": "field_5a61ee15d4a8f",
+            "label": "Contenu",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5a60b2fbbdafc",
+            "label": "Sous-titre",
+            "name": "subtitle",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "Le sous-titre de votre page",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5a60b3a5bdafe",
+            "label": "Afficher un visuel de fond",
+            "name": "display_media",
+            "type": "radio",
+            "instructions": "Choisissez le type de média que vous souhaitez afficher dans l'en-tête de votre page",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "none": "Aucun",
+                "img": "Image",
+                "mov": "Vidéo"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "save_other_choice": 0,
+            "default_value": "none",
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        {
+            "key": "field_5a60b239bdafb",
+            "label": "Visuel",
+            "name": "img",
+            "type": "image",
+            "instructions": "Choisissez l'image qui s'affichera en en-tête de votre contenu",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5a60b3a5bdafe",
+                        "operator": "==",
+                        "value": "img"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "img-responsive",
+                "id": ""
+            },
+            "return_format": "url",
+            "preview_size": "featured-small",
+            "library": "all",
+            "min_width": 1400,
+            "min_height": 400,
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": 4,
+            "mime_types": "jpg, jpeg, png, gif"
+        },
+        {
+            "key": "field_5a60b33bbdafd",
+            "label": "Vidéo",
+            "name": "movie",
+            "type": "oembed",
+            "instructions": "Entrez l'url de la vidéo à afficher dans l'en-tête de votre contenu",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5a60b3a5bdafe",
+                        "operator": "==",
+                        "value": "mov"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "width": 640,
+            "height": 390
+        },
+        {
+            "key": "field_5a61edf7d4a8e",
+            "label": "Mise en page",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5a61ee6c797c3",
+            "label": "Template",
+            "name": "template",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "fullwidth": "Textes avec média en fond",
+                "media_left": "Média à gauche \/ Textes à droite",
+                "media_right": "Média à droite \/ Textes à gauche"
+            },
+            "default_value": [
+                "fullwidth"
+            ],
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "ajax": 0,
+            "return_format": "value",
+            "placeholder": ""
+        },
+        {
+            "key": "field_5a61eeec797c4",
+            "label": "Afficher la thématique",
+            "name": "display_taxonomies",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "Afficher le(s) tag(s) thématiques dans le header",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_taxonomy",
+                "operator": "==",
+                "value": "page_type:article"
+            }
+        ],
+        [
+            {
+                "param": "post_taxonomy",
+                "operator": "==",
+                "value": "page_type:blog_article"
+            }
+        ],
+        [
+            {
+                "param": "post_taxonomy",
+                "operator": "==",
+                "value": "page_type:experience"
+            }
+        ],
+        [
+            {
+                "param": "post_taxonomy",
+                "operator": "==",
+                "value": "page_type:basic_page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "field",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Groupe de champ pour le header du contenu (Titres, médias, taxonomies, ...)",
+    "modified": 1516902880
+}

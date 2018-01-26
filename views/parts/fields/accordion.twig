@@ -1,0 +1,17 @@
+{% if element.title | default %}
+    <h2>{{ element.title }}</h2>
+{% endif %}
+{% if element.repeater | default %}
+    <ul class="accordion" data-accordion data-allow-all-closed="true">
+        {% for slug, field in element.repeater %}
+            <li class="accordion-item" data-accordion-item>
+                <!-- Accordion tab title -->
+                <a href="#accordion-{{ key }}{{ slug }}" class="accordion-title">{{ field.title }}</a>
+                <!-- Accordion tab content: it would start in the open state due to using the `is-active` state class. -->
+                <div class="accordion-content" data-tab-content id="accordion-{{ key }}{{ slug }}">
+                    {{ field.text }}
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
