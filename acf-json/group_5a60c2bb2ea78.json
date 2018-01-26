@@ -52,6 +52,22 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5a6aea24a5b3c",
+                            "label": "Contenu",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
                             "key": "field_5a69a4b25207c",
                             "label": "Titre",
                             "name": "title",
@@ -71,10 +87,10 @@
                             "maxlength": ""
                         },
                         {
-                            "key": "field_5a60cd227bb55",
-                            "label": "Galerie de photos",
-                            "name": "fields_group",
-                            "type": "group",
+                            "key": "field_5a60cd587bb56",
+                            "label": "Images",
+                            "name": "gallery_items",
+                            "type": "gallery",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -83,133 +99,139 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "layout": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5a60cd587bb56",
-                                    "label": "Images",
-                                    "name": "gallery_items",
-                                    "type": "gallery",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "min": 2,
-                                    "max": 24,
-                                    "insert": "append",
-                                    "library": "all",
-                                    "min_width": 200,
-                                    "min_height": 200,
-                                    "min_size": "",
-                                    "max_width": "",
-                                    "max_height": "",
-                                    "max_size": "",
-                                    "mime_types": "jpg, jpeg, png, gif"
-                                },
-                                {
-                                    "key": "field_5a60cd9e7bb57",
-                                    "label": "Colonnes",
-                                    "name": "grid_size",
-                                    "type": "select",
-                                    "instructions": "Ce choix n'est pas compatible avec l'option \"Transformer la galerie en diaporama\" et ne sera pas pris en compte si celle-ci est activée",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "25",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "choices": {
-                                        "col_2": "2 colonnes",
-                                        "col_3": "3 colonnes",
-                                        "col_4": "4 colonnes",
-                                        "col_5": "5 colonnes",
-                                        "col_6": "6 colonnes"
-                                    },
-                                    "default_value": [
-                                        "col_3"
-                                    ],
-                                    "allow_null": 0,
-                                    "multiple": 0,
-                                    "ui": 0,
-                                    "ajax": 0,
-                                    "return_format": "value",
-                                    "placeholder": ""
-                                },
-                                {
-                                    "key": "field_5a60ce217bb58",
-                                    "label": "Diaporama",
-                                    "name": "make_slideshow",
-                                    "type": "true_false",
-                                    "instructions": "Activez cette option pour afficher vos images dans un diaporama",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "25",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "message": "Transformer la galerie en diaporama",
-                                    "default_value": 0,
-                                    "ui": 0,
-                                    "ui_on_text": "",
-                                    "ui_off_text": ""
-                                },
-                                {
-                                    "key": "field_5a60ce667bb59",
-                                    "label": "Affichage",
-                                    "name": "display_fullwidth",
-                                    "type": "true_false",
-                                    "instructions": "Activez cette option pour afficher votre galerie\/diaporama en plein écran",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "25",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "message": "Afficher en plein écran",
-                                    "default_value": 0,
-                                    "ui": 0,
-                                    "ui_on_text": "",
-                                    "ui_off_text": ""
-                                },
-                                {
-                                    "key": "field_5a660747de8a8",
-                                    "label": "Taille des images",
-                                    "name": "img_size",
-                                    "type": "select",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "25",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "choices": {
-                                        "featured-small": "featured-small",
-                                        "featured-medium": "featured-medium",
-                                        "featured-large": "featured-large",
-                                        "featured-xlarge": "featured-xlarge",
-                                        "fp-small": "FP Small",
-                                        "fp-medium": "FP Medium",
-                                        "fp-large": "FP Large",
-                                        "fp-xlarge": "FP XLarge"
-                                    },
-                                    "default_value": [],
-                                    "allow_null": 1,
-                                    "multiple": 0,
-                                    "ui": 0,
-                                    "ajax": 0,
-                                    "return_format": "value",
-                                    "placeholder": ""
-                                }
-                            ]
+                            "min": 2,
+                            "max": 24,
+                            "insert": "append",
+                            "library": "all",
+                            "min_width": 200,
+                            "min_height": 200,
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": "jpg, jpeg, png, gif"
+                        },
+                        {
+                            "key": "field_5a6ae916a5b3b",
+                            "label": "Mise en page",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_5a660747de8a8",
+                            "label": "Format des images",
+                            "name": "img_size",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "100",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "featured-small": "featured-small",
+                                "featured-medium": "featured-medium",
+                                "featured-large": "featured-large",
+                                "featured-xlarge": "featured-xlarge",
+                                "fp-small": "FP Small",
+                                "fp-medium": "FP Medium",
+                                "fp-large": "FP Large",
+                                "fp-xlarge": "FP XLarge"
+                            },
+                            "default_value": [],
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 0,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_5a60ce217bb58",
+                            "label": "Diaporama",
+                            "name": "make_slideshow",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "25",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "Transformer la galerie en diaporama",
+                            "default_value": 0,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
+                        {
+                            "key": "field_5a60cd9e7bb57",
+                            "label": "Nombre de colonnes",
+                            "name": "grid_size",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_5a60ce217bb58",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "25",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "col_2": "2 colonnes",
+                                "col_3": "3 colonnes",
+                                "col_4": "4 colonnes",
+                                "col_6": "6 colonnes"
+                            },
+                            "default_value": [
+                                "col_3"
+                            ],
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_5a60ce667bb59",
+                            "label": "Affichage",
+                            "name": "display_fullwidth",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "25",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "Afficher en plein écran",
+                            "default_value": 0,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
                         },
                         {
                             "key": "field_5a6a1938907d9",
@@ -220,7 +242,7 @@
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "",
+                                "width": "25",
                                 "class": "",
                                 "id": ""
                             },
@@ -243,6 +265,22 @@
                     "label": "FAQ",
                     "display": "block",
                     "sub_fields": [
+                        {
+                            "key": "field_5a6aea947bf45",
+                            "label": "Contenu",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
                         {
                             "key": "field_5a60cf3959fb7",
                             "label": "Titre",
@@ -322,6 +360,22 @@
                             ]
                         },
                         {
+                            "key": "field_5a6aeaaa7bf46",
+                            "label": "Mise en page",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
                             "key": "field_5a6a1952907da",
                             "label": "Template",
                             "name": "template",
@@ -353,6 +407,22 @@
                     "label": "Call to action",
                     "display": "block",
                     "sub_fields": [
+                        {
+                            "key": "field_5a6aeadb7bf47",
+                            "label": "Contenu",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
                         {
                             "key": "field_5a60d06bd725f",
                             "label": "Titre",
@@ -426,6 +496,22 @@
                             "return_format": "array"
                         },
                         {
+                            "key": "field_5a6aeaf07bf48",
+                            "label": "Mise en page",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
                             "key": "field_5a6a1967907db",
                             "label": "Template",
                             "name": "template",
@@ -434,7 +520,7 @@
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "",
+                                "width": "50",
                                 "class": "",
                                 "id": ""
                             },
@@ -446,6 +532,25 @@
                             "ajax": 0,
                             "return_format": "value",
                             "placeholder": ""
+                        },
+                        {
+                            "key": "field_5a6aeb0d7bf49",
+                            "label": "Ajouter un fond de couleur",
+                            "name": "add_bg",
+                            "type": "true_false",
+                            "instructions": "Ajout d'un fond dans le couleur principale de votre site, sur toute la largeur de l'écran",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 0,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
                         }
                     ],
                     "min": "",
@@ -457,6 +562,22 @@
                     "label": "Sélection de contenu",
                     "display": "block",
                     "sub_fields": [
+                        {
+                            "key": "field_5a6aebe87bf4a",
+                            "label": "Contenu",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
                         {
                             "key": "field_5a60d1ec8cccf",
                             "label": "Titre",
@@ -523,10 +644,10 @@
                             "return_format": "object"
                         },
                         {
-                            "key": "field_5a60d29c8ccd2",
+                            "key": "field_5a6aec107bf4b",
                             "label": "Mise en page",
-                            "name": "display",
-                            "type": "group",
+                            "name": "",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -535,61 +656,59 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "layout": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5a60d2b08ccd3",
-                                    "label": "Colonnes",
-                                    "name": "grid_size",
-                                    "type": "select",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "choices": {
-                                        "col_2": "2 colonnes",
-                                        "col_3": "3 colonnes",
-                                        "col_4": "4 colonnes",
-                                        "col_5": "5 colonnes",
-                                        "col_6": "6 colonnes"
-                                    },
-                                    "default_value": [
-                                        "col_3"
-                                    ],
-                                    "allow_null": 0,
-                                    "multiple": 0,
-                                    "ui": 0,
-                                    "ajax": 0,
-                                    "return_format": "value",
-                                    "placeholder": ""
-                                },
-                                {
-                                    "key": "field_5a6a0b860503b",
-                                    "label": "Template",
-                                    "name": "template",
-                                    "type": "select",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "choices": [],
-                                    "default_value": [],
-                                    "allow_null": 0,
-                                    "multiple": 0,
-                                    "ui": 0,
-                                    "ajax": 0,
-                                    "return_format": "value",
-                                    "placeholder": ""
-                                }
-                            ]
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_5a60d2b08ccd3",
+                            "label": "Nombre de colonnes",
+                            "name": "grid_size",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "col_2": "2 colonnes",
+                                "col_3": "3 colonnes",
+                                "col_4": "4 colonnes",
+                                "col_6": "6 colonnes"
+                            },
+                            "default_value": [
+                                "col_3"
+                            ],
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_5a6a0b860503b",
+                            "label": "Template",
+                            "name": "template",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": [],
+                            "default_value": [],
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -802,6 +921,22 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5a6aeeba27cb6",
+                            "label": "Contenu",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
                             "key": "field_5a69a595596c6",
                             "label": "Titre",
                             "name": "title",
@@ -879,12 +1014,28 @@
                             "return_format": "array"
                         },
                         {
+                            "key": "field_5a6aef1427cb7",
+                            "label": "Mise en page",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
                             "key": "field_5a69a645596ca",
                             "label": "Position de l'image",
                             "name": "alignement",
                             "type": "select",
                             "instructions": "Choisissez la position de votre image par rapport au texte",
-                            "required": 0,
+                            "required": 1,
                             "conditional_logic": 0,
                             "wrapper": {
                                 "width": "50",
@@ -941,6 +1092,178 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "5a6ae7956b16e": {
+                    "key": "5a6ae7956b16e",
+                    "name": "quote",
+                    "label": "Citation",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5a6aefc327cba",
+                            "label": "Contenu",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_5a6ae7a16b16f",
+                            "label": "Titre",
+                            "name": "title",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "Saisissez le titre de votre bloc (optionel)",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_5a6ae7bc6b170",
+                            "label": "Texte",
+                            "name": "text",
+                            "type": "wysiwyg",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "tabs": "visual",
+                            "toolbar": "basic",
+                            "media_upload": 0,
+                            "delay": 0
+                        },
+                        {
+                            "key": "field_5a6ae7dd6b171",
+                            "label": "Auteur",
+                            "name": "signature",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_5a6ae8176b172",
+                            "label": "Photo",
+                            "name": "img",
+                            "type": "image",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "preview_size": "thumbnail",
+                            "library": "all",
+                            "min_width": "",
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": "jpg, jpeg, png"
+                        },
+                        {
+                            "key": "field_5a6aefd227cbb",
+                            "label": "Mise en page",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_5a6aef4327cb8",
+                            "label": "Position de l'image",
+                            "name": "alignement",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "left": "à gauche",
+                                "right": "à droite",
+                                "top": "au dessus",
+                                "bottom": "en dessous"
+                            },
+                            "default_value": [],
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_5a6aef8e27cb9",
+                            "label": "Template",
+                            "name": "template",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": [],
+                            "default_value": [],
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Ajouter un bloc de contenu",
@@ -979,5 +1302,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1516902852
+    "modified": 1516958316
 }

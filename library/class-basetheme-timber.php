@@ -5,7 +5,7 @@ class base_theme_Timber extends TimberSite {
   public function execute() {
 
     // Define Twig directories
-    Timber::$dirname = array('views', 'views/parts', 'views/parts/content', 'views/parts/page', 'views/parts/fields');
+    // Timber::$dirname = array('views', 'views/parts', 'views/parts/content', 'views/parts/page', 'views/parts/fields');
   }
 
   // Adding functionality to Twig

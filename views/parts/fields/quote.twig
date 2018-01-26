@@ -1,0 +1,16 @@
+{% if element.img %}
+    <div class="quote-img">
+        <img src="{{ TimberImage(element.img).src('featured-small') }}" alt="" }}/>
+    </div>
+{% endif %}
+<div class="quote-content">
+    {% if element.title | default %}
+        <h2>{{ element.title }}</h2>
+    {% endif %}
+    {% if element.text | default %}
+        {{ element.text }}
+    {% endif %}
+    {% if element.signature | default %}
+        <span>{{ element.signature }}</span>
+    {% endif %}
+</div>
