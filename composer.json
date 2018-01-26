@@ -4,8 +4,8 @@
     "description": "",
     "license": "proprietary",
     "authors": [{
-        "name": "Léo POIROUX",
-        "email": "leo@raccourci.fr"
+        "name": "Raccourci Agency",
+        "email": "contact@raccourci.fr"
     }],
     "require": {
         "php": ">=5.6",
