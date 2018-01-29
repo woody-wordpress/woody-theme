@@ -22,6 +22,61 @@ add_image_size( 'fp-medium', 1024 );
 add_image_size( 'fp-large', 1200 );
 add_image_size( 'fp-xlarge', 1920 );
 
+/**
+** RC Custom sizes
+**/
+
+// Ratio 8:1 => Panoramique
+add_image_size('ratio_8_1_small', 360, 45, true);
+add_image_size('ratio_8_1_medium', 640, 80, true);
+add_image_size('ratio_8_1', 1200, 150, true);
+add_image_size('ratio_8_1_xlarge', 1920, 240, true);
+
+// Ratio 4:1 => Panoramique moyen
+add_image_size('ratio_4_1_small', 360, 90, true);
+add_image_size('ratio_4_1_medium', 640, 160, true);
+add_image_size('ratio_4_1', 1200, 300, true);
+add_image_size('ratio_4_1_xlarge', 1920, 480, true);
+
+// Ratio 8:3 => Paysage long
+add_image_size('ratio_8_3_small', 360, 135, true);
+add_image_size('ratio_8_3_medium', 640, 240, true);
+add_image_size('ratio_8_3', 1200, 450, true);
+add_image_size('ratio_8_3_xlarge', 1920, 720, true);
+
+// Ratio 16:9 => Paysage
+add_image_size('ratio_16_9_small', 360, 200, true);
+add_image_size('ratio_16_9_medium', 640, 360, true);
+add_image_size('ratio_16_9', 1200, 675, true);
+add_image_size('ratio_16_9_xlarge', 1920, 1080, true);
+
+// Ratio 16:10 => Paysage haut
+add_image_size('ratio_16_10_small', 360, 225, true);
+add_image_size('ratio_16_10_medium', 640, 400, true);
+add_image_size('ratio_16_10', 1200, 750, true);
+add_image_size('ratio_16_10_xlarge', 1920, 1200, true);
+
+// Square
+add_image_size('ratio_square_small', 140, 140, true);
+add_image_size('ratio_square_medium', 360, 360, true);
+add_image_size('ratio_square', 660, 660, true);
+
+// Ratio 10:16 => Portrait large
+add_image_size('ratio_10_16_small', 200, 320, true);
+add_image_size('ratio_10_16_medium', 360, 576, true);
+add_image_size('ratio_10_16', 675, 1080, true);
+
+// Ratio 9:16 => Portrait
+add_image_size('ratio_9_16_small', 200, 360, true);
+add_image_size('ratio_9_16_medium', 360, 640, true);
+add_image_size('ratio_9_16', 675, 1200, true);
+
+// Free => Proportions libre
+add_image_size('ratio_free_small', 360);
+add_image_size('ratio_free_medium', 640);
+add_image_size('ratio_free', 1200);
+add_image_size('ratio_free_xlarge', 1920);
+
 // Register the new image sizes for use in the add media modal in wp-admin
 // This is the place where you can set readable names for images size
 function basetheme_custom_sizes( $sizes ) {
@@ -30,6 +85,16 @@ function basetheme_custom_sizes( $sizes ) {
 		'fp-medium' => __( 'FP Medium' ),
 		'fp-large'  => __( 'FP Large' ),
 		'fp-xlarge'  => __( 'FP XLarge' ),
+        'ratio_8_1' => __( 'Panoramique' ),
+        'ratio_4_1' => __( 'Panoramique moyen' ),
+        'ratio_8_3' => __( 'Paysage long' ),
+        'ratio_16_9' => __( 'Paysage' ),
+        'ratio_16_10' => __( 'Paysage haut' ),
+        'ratio_square' => __( 'Carré' ),
+        'ratio_10_16' => __( 'Portrait large' ),
+        'ratio_9_16' => __( 'Portrait' ),
+        'ratio_free' => __( 'Proportions libres' ),
+
 	) );
 }
 add_filter( 'image_size_names_choose', 'basetheme_custom_sizes' );
