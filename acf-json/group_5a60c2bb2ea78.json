@@ -141,14 +141,15 @@
                                 "id": ""
                             },
                             "choices": {
-                                "featured-small": "featured-small",
-                                "featured-medium": "featured-medium",
-                                "featured-large": "featured-large",
-                                "featured-xlarge": "featured-xlarge",
-                                "fp-small": "FP Small",
-                                "fp-medium": "FP Medium",
-                                "fp-large": "FP Large",
-                                "fp-xlarge": "FP XLarge"
+                                "ratio_8_1": "Panoramique",
+                                "ratio_4_1": "Panoramique moyen",
+                                "ratio_8_3": "Paysage long",
+                                "ratio_16_9": "Paysage",
+                                "ratio_16_10": "Paysage haut",
+                                "ratio_square": "Carré",
+                                "ratio_10_16": "Portrait large",
+                                "ratio_9_16": "Portrait",
+                                "ratio_free": "Proportions libres"
                             },
                             "default_value": [],
                             "allow_null": 1,
@@ -1149,14 +1150,15 @@
                                 "id": ""
                             },
                             "choices": {
-                                "featured-small": "featured-small",
-                                "featured-medium": "featured-medium",
-                                "featured-large": "featured-large",
-                                "featured-xlarge": "featured-xlarge",
-                                "fp-small": "FP Small",
-                                "fp-medium": "FP Medium",
-                                "fp-large": "FP Large",
-                                "fp-xlarge": "FP XLarge"
+                                "ratio_8_1": "Panoramique",
+                                "ratio_4_1": "Panoramique moyen",
+                                "ratio_8_3": "Paysage long",
+                                "ratio_16_9": "Paysage",
+                                "ratio_16_10": "Paysage haut",
+                                "ratio_square": "Carré",
+                                "ratio_10_16": "Portrait large",
+                                "ratio_9_16": "Portrait",
+                                "ratio_free": "Proportions libres"
                             },
                             "default_value": [],
                             "allow_null": 0,
@@ -1305,8 +1307,7 @@
                             "choices": {
                                 "left": "à gauche",
                                 "right": "à droite",
-                                "top": "au dessus",
-                                "bottom": "en dessous"
+                                "top": "au dessus"
                             },
                             "default_value": [],
                             "allow_null": 0,
@@ -1379,5 +1380,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1516980106
+    "modified": 1517308348
 }
