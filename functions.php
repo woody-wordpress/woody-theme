@@ -51,9 +51,6 @@ require_once( 'library/sticky-posts.php' );
 /** Configure responsive image sizes */
 require_once( 'library/responsive-images.php' );
 
-/** Refactor administrations pages */
-require_once( 'library/admin-refactor.php' );
-
 /** Create taxonomies **/
 require_once( 'library/taxonomies.php' );
 
@@ -66,7 +63,7 @@ require_once( 'library/taxonomies.php' );
 ** Get Timber parameters file
 **/
 require_once( 'library/class-basetheme-timber.php' );
-$basetheme_timber = new base_theme_Timber();
+$basetheme_timber = new Basetheme_Timber();
 $basetheme_timber->execute();
 
 /**
@@ -75,3 +72,10 @@ $basetheme_timber->execute();
 include get_template_directory().'/library/class-basetheme-acf.php';
 $basetheme_acf = new Basetheme_ACF();
 $basetheme_acf->execute();
+
+/**
+** A better backoffice for easier work
+**/
+include get_template_directory().'/library/class-basetheme-admin-refactor.php';
+$basetheme_adminRef = new Basetheme_adminRefactor();
+$basetheme_adminRef->execute();

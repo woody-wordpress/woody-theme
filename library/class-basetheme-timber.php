@@ -1,6 +1,6 @@
 <?php
 
-class base_theme_Timber extends TimberSite {
+class Basetheme_Timber extends TimberSite {
 
   public function execute() {
 

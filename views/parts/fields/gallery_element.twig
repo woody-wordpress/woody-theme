@@ -2,8 +2,10 @@
     {% set grid = 'grid-x grid-padding-x small-up-2' %}
 {% elseif element.grid_size == 'col_3' %}
     {% set grid = 'grid-x grid-padding-x small-up-2 medium-up-3' %}
+{% elseif element.grid_size == 'col_4' %}
+    {% set grid = 'grid-x grid-padding-x small-up-2 medium-up-4' %}
 {% elseif element.grid_size == 'col_6' %}
-    {% set grid = 'grid-x grid-padding-x small-up-3 medium-up-4' %}
+    {% set grid = 'grid-x grid-padding-x small-up-3 medium-up-6' %}
 {% endif %}
 
 {% if element.title | default %}
