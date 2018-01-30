@@ -80,11 +80,7 @@ add_image_size('ratio_free_xlarge', 1920);
 // Register the new image sizes for use in the add media modal in wp-admin
 // This is the place where you can set readable names for images size
 function basetheme_custom_sizes( $sizes ) {
-	return array_merge( $sizes, array(
-		'fp-small'  => __( 'FP Small' ),
-		'fp-medium' => __( 'FP Medium' ),
-		'fp-large'  => __( 'FP Large' ),
-		'fp-xlarge'  => __( 'FP XLarge' ),
+	return array(
         'ratio_8_1' => __( 'Panoramique' ),
         'ratio_4_1' => __( 'Panoramique moyen' ),
         'ratio_8_3' => __( 'Paysage long' ),
@@ -93,9 +89,8 @@ function basetheme_custom_sizes( $sizes ) {
         'ratio_square' => __( 'Carré' ),
         'ratio_10_16' => __( 'Portrait large' ),
         'ratio_9_16' => __( 'Portrait' ),
-        'ratio_free' => __( 'Proportions libres' ),
-
-	) );
+        'ratio_free' => __( 'Proportions libres' )
+	);
 }
 add_filter( 'image_size_names_choose', 'basetheme_custom_sizes' );
 

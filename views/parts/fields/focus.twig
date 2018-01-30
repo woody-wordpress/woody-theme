@@ -15,7 +15,7 @@
         {% if grid_classes %}
             <div class="section-img {{ grid_classes }}{% if element.display_fullwidth and element.alignement == 'bg' | default  %} section-fullwidth{% endif %}">
             {% endif %}
-            <img src="{{ TimberImage(element.img).src('featured-large') }}" {% if element.img.alt|default %} alt="{{ element.img.alt }}" {% endif %}/>
+            <img src="{{ TimberImage(element.img).src(element.img_size) }}" {% if element.img.alt|default %} alt="{{ element.img.alt }}" {% endif %}/>
             {% if grid_classes %}
             </div>
         {% endif %}
