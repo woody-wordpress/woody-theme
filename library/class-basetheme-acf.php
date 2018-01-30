@@ -13,6 +13,7 @@ class Basetheme_ACF {
         // Overriding field img_size
         // See https://www.advancedcustomfields.com/resources/acf-load_field/ for more informations
         add_filter('acf/load_field/name=img_size', array($this, 'image_size_acf_load_field'));
+        // add_filter('acf/load_field/name=template', array($this, 'template_gallery_acf_load_field'));
     }
 
     function disallow_acf_deactivation($actions, $plugin_file, $plugin_data, $context) {
@@ -43,9 +44,14 @@ class Basetheme_ACF {
         return $field;
     }
 
-    // function grid_size_acf_load_field($field){
-    //     // Reset existing choices
-    //     $field['choices'] = array();
-    // }
+    function template_gallery_acf_load_field($field){
+
+        // Reset existing choices
+        $field['choices'] = array();
+        if(strpos($field['parent'], 'field') !== FALSE){
+            $parent = get_field_object($field['parent']);
+        }
+        $woody_tpls = site_url('/vendor/rc/woody/views');
+    }
 
 }

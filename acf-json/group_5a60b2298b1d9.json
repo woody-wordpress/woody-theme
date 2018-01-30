@@ -84,7 +84,7 @@
         {
             "key": "field_5a60b239bdafb",
             "label": "Visuel",
-            "name": "img",
+            "name": "hero_img",
             "type": "image",
             "instructions": "Choisissez l'image qui s'affichera en en-tête de votre contenu",
             "required": 0,
@@ -116,7 +116,7 @@
         {
             "key": "field_5a60b33bbdafd",
             "label": "Vidéo",
-            "name": "movie",
+            "name": "hero_movie",
             "type": "oembed",
             "instructions": "Entrez l'url de la vidéo à afficher dans l'en-tête de votre contenu",
             "required": 0,
@@ -239,5 +239,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Groupe de champ pour le header du contenu (Titres, médias, taxonomies, ...)",
-    "modified": 1516981259
+    "modified": 1517322958
 }

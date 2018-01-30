@@ -237,7 +237,7 @@
                         {
                             "key": "field_5a6a1938907d9",
                             "label": "Template",
-                            "name": "template",
+                            "name": "template_gallery",
                             "type": "select",
                             "instructions": "",
                             "required": 0,
@@ -961,6 +961,28 @@
                                     "maxlength": ""
                                 }
                             ]
+                        },
+                        {
+                            "key": "field_5a709aa1cdce1",
+                            "label": "Template",
+                            "name": "template",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": [],
+                            "default_value": [],
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -1380,5 +1402,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1517308348
+    "modified": 1517347554
 }
