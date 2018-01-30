@@ -1,16 +1,39 @@
-{% if element.img %}
-    <div class="quote-img">
-        <img src="{{ TimberImage(element.img).src('featured-small') }}" alt="" }}/>
+{% if element.alignement == 'left' %}
+    {% set block_classes = 'image-left grid-x grid-margin-x align-middle' %}
+    {% set grid_classes = 'cell small-12 medium-6' %}
+{% elseif element.alignement == 'right' %}
+    {% set block_classes = 'image-right grid-x grid-margin-x flex-dir-row-reverse align-middle' %}
+    {% set grid_classes = 'cell small-12 medium-6' %}
+{% elseif element.alignement == 'top' %}
+    {% set block_classes = 'image-top' %}
+    {% set grid_classes = 'cell small-12 text-center' %}
+{% endif %}
+
+{% if block_classes %}
+    <div class="{{ block_classes }}">
+    {% endif %}
+    {% if element.img %}
+        <div class="quote-img{% if grid_classes %} {{ grid_classes }}{% endif %}">
+            <img
+                class="img-circle"
+                src="{{ TimberImage(element.img).src( 'ratio_square' ) }}"
+                srcset="{{ TimberImage(element.img).src( 'ratio_square_small' ) }} 320w, {{ TimberImage(element.img).src( 'ratio_square_medium' ) }} 640w"
+                {% if image.alt|default %}
+                alt="{{ image.alt }}"
+                {% endif %}/>
+        </div>
+    {% endif %}
+    <div class="quote-content{% if grid_classes %} {{ grid_classes }}{% endif %}">
+        {% if element.title | default %}
+            <h2>{{ element.title }}</h2>
+        {% endif %}
+        {% if element.text | default %}
+            {{ element.text }}
+        {% endif %}
+        {% if element.signature | default %}
+            <span>{{ element.signature }}</span>
+        {% endif %}
+    </div>
+    {% if block_classes %}
     </div>
 {% endif %}
-<div class="quote-content">
-    {% if element.title | default %}
-        <h2>{{ element.title }}</h2>
-    {% endif %}
-    {% if element.text | default %}
-        {{ element.text }}
-    {% endif %}
-    {% if element.signature | default %}
-        <span>{{ element.signature }}</span>
-    {% endif %}
-</div>

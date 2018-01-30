@@ -15,14 +15,27 @@
         {% if grid_classes %}
             <div class="section-img {{ grid_classes }}{% if element.display_fullwidth and element.alignement == 'bg' | default  %} section-fullwidth{% endif %}">
             {% endif %}
-            <img src="{{ TimberImage(element.img).src(element.img_size) }}" {% if element.img.alt|default %} alt="{{ element.img.alt }}" {% endif %}/>
+            <img
+                src="{{ TimberImage(element.img).src(element.img_size) }}"
+                srcset="{{ TimberImage(element.img).src( srcset_small ) }} 568w, {{ TimberImage(element.img).src( srcset_small ) }} 992w, {{ TimberImage(element.img).src( srcset_xlarge ) }} 1400w"
+                "
+                {% if element.img.alt|default %}
+                alt="
+                {{ element.img.alt }}
+                "
+                {% endif %}/>
             {% if grid_classes %}
             </div>
         {% endif %}
     {% endif %}
 
     {% if grid_classes %}
-        <div class="section-text {{ grid_classes }}{% if element.display_fullwidth | default  %} grid-container{% endif %}">
+        <div class="
+                section-text
+                {{ grid_classes }}
+                {% if element.display_fullwidth | default  %}
+                grid-container{% endif %}
+                ">
         {% endif %}
         {% if element.title | default %}
             <h2>{{ element.title }}</h2>

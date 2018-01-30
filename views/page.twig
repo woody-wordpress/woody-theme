@@ -17,6 +17,12 @@
 
             <div class="content"></div>
             {% for key, element in post.get_field('content_element') %}
+                {% if element.img_size %}
+                    {# if element have an image size option, we set variables to populate srcset attribute #}
+                    {% set srcset_small = element.img_size ~ '_small' %}
+                    {% set srcset_medium = element.img_size ~ '_medium' %}
+                    {% set srcset_xlarge = element.img_size ~ '_xlarge' %}
+                {% endif %}
                 <div class="element_{{ element.acf_fc_layout }} grid-container">
                     {% include['parts/fields/' ~ element.acf_fc_layout ~ '.twig',
                         'parts/fields/empty.twig'] %}
