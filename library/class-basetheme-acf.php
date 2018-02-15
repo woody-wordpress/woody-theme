@@ -12,8 +12,9 @@ class Basetheme_ACF {
         add_filter('plugin_action_links', array($this, 'disallow_acf_deactivation'), 10, 4);
         // Overriding field img_size
         // See https://www.advancedcustomfields.com/resources/acf-load_field/ for more informations
+        add_filter('acf/load_field/name=woody_tpl', array($this, 'woodytpl_acf_load_field'));
         add_filter('acf/load_field/name=img_size', array($this, 'image_size_acf_load_field'));
-        // add_filter('acf/load_field/name=template', array($this, 'template_gallery_acf_load_field'));
+
     }
 
     function disallow_acf_deactivation($actions, $plugin_file, $plugin_data, $context) {
@@ -44,14 +45,28 @@ class Basetheme_ACF {
         return $field;
     }
 
-    function template_gallery_acf_load_field($field){
-
+    function woodytpl_acf_load_field($field){
         // Reset existing choices
-        $field['choices'] = array();
-        if(strpos($field['parent'], 'field') !== FALSE){
-            $parent = get_field_object($field['parent']);
-        }
+        // $field['choices'] = array();
+
+        // Define path to Woody library
         $woody_tpls = site_url('/vendor/rc/woody/views');
+
+        if(strpos($field['parent'], 'field') !== FALSE){
+            // d($field);
+            // $field['choices'][] = $field['parent'];
+        }
+
+        // global $post;
+        // $id = $post->ID;
+        // $field_key = "field_5a6a1938907d9";
+        // $value = get_field_object($field_key);
+        //
+        // d($value);
+
+
+
+        return $field;
     }
 
 }

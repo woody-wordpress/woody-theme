@@ -216,6 +216,29 @@
                             "placeholder": ""
                         },
                         {
+                            "key": "field_5a6a1938907d9",
+                            "label": "Template",
+                            "name": "woody_tpl",
+                            "type": "radio",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "25",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "choix1": "To be replaced"
+                            },
+                            "allow_null": 0,
+                            "other_choice": 0,
+                            "save_other_choice": 0,
+                            "default_value": "",
+                            "layout": "horizontal",
+                            "return_format": "value"
+                        },
+                        {
                             "key": "field_5a60ce667bb59",
                             "label": "Affichage",
                             "name": "display_fullwidth",
@@ -233,28 +256,6 @@
                             "ui": 0,
                             "ui_on_text": "",
                             "ui_off_text": ""
-                        },
-                        {
-                            "key": "field_5a6a1938907d9",
-                            "label": "Template",
-                            "name": "template_gallery",
-                            "type": "select",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "25",
-                                "class": "",
-                                "id": ""
-                            },
-                            "choices": [],
-                            "default_value": [],
-                            "allow_null": 0,
-                            "multiple": 0,
-                            "ui": 0,
-                            "ajax": 0,
-                            "return_format": "value",
-                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -379,8 +380,8 @@
                         {
                             "key": "field_5a6a1952907da",
                             "label": "Template",
-                            "name": "template",
-                            "type": "select",
+                            "name": "woody_tpl",
+                            "type": "radio",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -389,14 +390,15 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "choices": [],
-                            "default_value": [],
+                            "choices": {
+                                "choix1": "To be replaced"
+                            },
                             "allow_null": 0,
-                            "multiple": 0,
-                            "ui": 0,
-                            "ajax": 0,
-                            "return_format": "value",
-                            "placeholder": ""
+                            "other_choice": 0,
+                            "save_other_choice": 0,
+                            "default_value": "",
+                            "layout": "horizontal",
+                            "return_format": "value"
                         }
                     ],
                     "min": "",
@@ -515,8 +517,8 @@
                         {
                             "key": "field_5a6a1967907db",
                             "label": "Template",
-                            "name": "template",
-                            "type": "select",
+                            "name": "woody_tpl",
+                            "type": "radio",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -525,14 +527,15 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "choices": [],
-                            "default_value": [],
+                            "choices": {
+                                "choix1": "To be replaced"
+                            },
                             "allow_null": 0,
-                            "multiple": 0,
-                            "ui": 0,
-                            "ajax": 0,
-                            "return_format": "value",
-                            "placeholder": ""
+                            "other_choice": 0,
+                            "save_other_choice": 0,
+                            "default_value": "",
+                            "layout": "horizontal",
+                            "return_format": "value"
                         },
                         {
                             "key": "field_5a6aeb0d7bf49",
@@ -692,8 +695,8 @@
                         {
                             "key": "field_5a6a0b860503b",
                             "label": "Template",
-                            "name": "template",
-                            "type": "select",
+                            "name": "woody_tpl",
+                            "type": "radio",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -702,14 +705,15 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "choices": [],
-                            "default_value": [],
+                            "choices": {
+                                "choix1": "To be replaced"
+                            },
                             "allow_null": 0,
-                            "multiple": 0,
-                            "ui": 0,
-                            "ajax": 0,
-                            "return_format": "value",
-                            "placeholder": ""
+                            "other_choice": 0,
+                            "save_other_choice": 0,
+                            "default_value": "",
+                            "layout": "horizontal",
+                            "return_format": "value"
                         }
                     ],
                     "min": "",
@@ -965,8 +969,8 @@
                         {
                             "key": "field_5a709aa1cdce1",
                             "label": "Template",
-                            "name": "template",
-                            "type": "select",
+                            "name": "woody_tpl",
+                            "type": "radio",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -975,14 +979,15 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "choices": [],
-                            "default_value": [],
+                            "choices": {
+                                "choix1": "To be replaced"
+                            },
                             "allow_null": 0,
-                            "multiple": 0,
-                            "ui": 0,
-                            "ajax": 0,
-                            "return_format": "value",
-                            "placeholder": ""
+                            "other_choice": 0,
+                            "save_other_choice": 0,
+                            "default_value": "",
+                            "layout": "horizontal",
+                            "return_format": "value"
                         }
                     ],
                     "min": "",
@@ -1342,8 +1347,8 @@
                         {
                             "key": "field_5a6aef8e27cb9",
                             "label": "Template",
-                            "name": "template",
-                            "type": "select",
+                            "name": "woody_tpl",
+                            "type": "radio",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -1352,14 +1357,15 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "choices": [],
-                            "default_value": [],
+                            "choices": {
+                                "choix1": "To be replaced"
+                            },
                             "allow_null": 0,
-                            "multiple": 0,
-                            "ui": 0,
-                            "ajax": 0,
-                            "return_format": "value",
-                            "placeholder": ""
+                            "other_choice": 0,
+                            "save_other_choice": 0,
+                            "default_value": "",
+                            "layout": "horizontal",
+                            "return_format": "value"
                         }
                     ],
                     "min": "",
@@ -1402,5 +1408,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1517347554
+    "modified": 1518627925
 }
