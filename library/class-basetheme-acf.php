@@ -51,25 +51,35 @@ class Basetheme_ACF {
     function woodytpl_acf_load_field($field){
 
         // Reset existing choices
-         $field['choices'] = array(
-             'tempate_1' => 'Template 1'
-         );
+         $field['choices'] = array();
 
         // Define path to Woody library
-        $woody_tpls = site_url('/vendor/rc/woody/views');
+        $path = dirname(get_home_path());
+        $woody_tpls = $path . '/vendor/rc/woody/views';
 
         if(strpos($field['parent'], 'field') !== FALSE){
-            $the_parent = $field['parent'];
+            $the_parent_field = $field['parent'];
+            d($field);
             // Lorsque le champ parent est chargé, il charge tous ses enfants.
             // Il repasse donc dans le filtre que nous sommes en train d'écrire et provoque une boucle infinie
-            // $parent_field = get_field_object($the_parent);
-            // error_log('bla', 3, dirname(__FILE__) . '/debug.log');
-            d($field);
-            // d($parent_field);
-            global $wpdb;
-            $posts = $wpdb->get_results("SELECT post_excerpt FROM wp_posts WHERE post_name = '$the_parent'");
-            d($posts);
+            // Il faut donc supprimer le filtre mais il ne s'applique plus aux champs suivants
+            remove_filter('acf/load_field/name=woody_tpl', array($this, 'woodytpl_acf_load_field'));
+            $parent_field = get_field_object($the_parent_field);
+            $parent_layout = $field['parent_layout'];
+            foreach ($parent_field['layouts'] as $key => $layout) {
+                if($layout['key'] == $parent_layout){
+                    $tpl_folder = $woody_tpls . '/blocks/' . $layout['name'];
+                    $files = scandir($tpl_folder);
 
+                    foreach ($files as $key => $file) {
+                        $avoid = array('.','twig', $layout['name']);
+                        $name = str_replace($avoid, '', $file);
+                        if(!empty($name)){
+                            $field['choices'][] = $name;
+                        }
+                    }
+                }
+            }
         }
 
         return $field;
