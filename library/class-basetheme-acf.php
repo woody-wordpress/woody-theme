@@ -14,7 +14,7 @@ class Basetheme_ACF {
         // See https://www.advancedcustomfields.com/resources/acf-load_field/ for more informations
         add_filter('acf/load_field/name=woody_tpl', array($this, 'woodytpl_acf_load_field'));
         add_filter('acf/load_field/name=img_size', array($this, 'image_size_acf_load_field'));
-
+        add_filter('acf/fields/flexible_content/layout_title/name=content_element', array($this, 'custom_flexible_content_layout_title'), 10, 4);
     }
 
     function disallow_acf_deactivation($actions, $plugin_file, $plugin_data, $context) {
@@ -23,6 +23,7 @@ class Basetheme_ACF {
         }
         return $actions;
     }
+
 
     // Get all aditional images sizes created in /library/responsive-images.php
     // so user can chose wich size to use for each gallery
@@ -45,28 +46,44 @@ class Basetheme_ACF {
         return $field;
     }
 
+
+
     function woodytpl_acf_load_field($field){
+
         // Reset existing choices
-        // $field['choices'] = array();
+         $field['choices'] = array(
+             'tempate_1' => 'Template 1'
+         );
 
         // Define path to Woody library
         $woody_tpls = site_url('/vendor/rc/woody/views');
 
         if(strpos($field['parent'], 'field') !== FALSE){
-            // d($field);
-            // $field['choices'][] = $field['parent'];
+            $the_parent = $field['parent'];
+            // Lorsque le champ parent est chargé, il charge tous ses enfants.
+            // Il repasse donc dans le filtre que nous sommes en train d'écrire et provoque une boucle infinie
+            // $parent_field = get_field_object($the_parent);
+            // error_log('bla', 3, dirname(__FILE__) . '/debug.log');
+            d($field);
+            // d($parent_field);
+            global $wpdb;
+            $posts = $wpdb->get_results("SELECT post_excerpt FROM wp_posts WHERE post_name = '$the_parent'");
+            d($posts);
+
         }
 
-        // global $post;
-        // $id = $post->ID;
-        // $field_key = "field_5a6a1938907d9";
-        // $value = get_field_object($field_key);
-        //
-        // d($value);
-
-
-
         return $field;
+    }
+
+
+    // Rewrite title of content_element rows to display a more readable title chosed by the user himself
+    function custom_flexible_content_layout_title( $title, $field, $layout, $i ){
+
+        $admin_title = get_sub_field('admin_group_name');
+        if(!empty($admin_title)){
+            $title = $admin_title;
+        }
+        return $title;
     }
 
 }
