@@ -23,6 +23,25 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5a85ac47143e3",
+                            "label": "Nom du bloc pour l'administration",
+                            "name": "admin_group_name",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
                             "key": "field_5a60cbc59012d",
                             "label": "Texte",
                             "name": "text",
@@ -51,6 +70,25 @@
                     "label": "Galerie photos",
                     "display": "block",
                     "sub_fields": [
+                        {
+                            "key": "field_5a85ac79143e5",
+                            "label": "Nom du bloc pour l'administration",
+                            "name": "admin_group_name",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
                         {
                             "key": "field_5a6aea24a5b3c",
                             "label": "Contenu",
@@ -229,7 +267,7 @@
                                 "id": ""
                             },
                             "choices": {
-                                "choix1": "To be replaced"
+                                "tempate_1": "Template 1"
                             },
                             "allow_null": 0,
                             "other_choice": 0,
@@ -267,6 +305,25 @@
                     "label": "FAQ",
                     "display": "block",
                     "sub_fields": [
+                        {
+                            "key": "field_5a85ace6143e8",
+                            "label": "Nom du bloc pour l'administration",
+                            "name": "admin_group_name",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
                         {
                             "key": "field_5a6aea947bf45",
                             "label": "Contenu",
@@ -391,7 +448,7 @@
                                 "id": ""
                             },
                             "choices": {
-                                "choix1": "To be replaced"
+                                "tempate_1": "Template 1"
                             },
                             "allow_null": 0,
                             "other_choice": 0,
@@ -410,6 +467,25 @@
                     "label": "Call to action",
                     "display": "block",
                     "sub_fields": [
+                        {
+                            "key": "field_5a85acc1143e7",
+                            "label": "Nom du bloc pour l'administration",
+                            "name": "admin_group_name",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
                         {
                             "key": "field_5a6aeadb7bf47",
                             "label": "Contenu",
@@ -528,7 +604,7 @@
                                 "id": ""
                             },
                             "choices": {
-                                "choix1": "To be replaced"
+                                "tempate_1": "Template 1"
                             },
                             "allow_null": 0,
                             "other_choice": 0,
@@ -566,6 +642,25 @@
                     "label": "Sélection de contenu",
                     "display": "block",
                     "sub_fields": [
+                        {
+                            "key": "field_5a85acfa143e9",
+                            "label": "Nom du bloc pour l'administration",
+                            "name": "admin_group_name",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
                         {
                             "key": "field_5a6aebe87bf4a",
                             "label": "Contenu",
@@ -706,7 +801,7 @@
                                 "id": ""
                             },
                             "choices": {
-                                "choix1": "To be replaced"
+                                "tempate_1": "Template 1"
                             },
                             "allow_null": 0,
                             "other_choice": 0,
@@ -725,6 +820,25 @@
                     "label": "Video",
                     "display": "block",
                     "sub_fields": [
+                        {
+                            "key": "field_5a85ad12143ea",
+                            "label": "Nom du bloc pour l'administration",
+                            "name": "admin_group_name",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
                         {
                             "key": "field_5a6b3e22883d6",
                             "label": "Contenu",
@@ -841,6 +955,25 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5a85ad24143eb",
+                            "label": "Nom du bloc pour l'administration",
+                            "name": "admin_group_name",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
                             "key": "field_5a69a4625207b",
                             "label": "Titre",
                             "name": "title",
@@ -888,6 +1021,25 @@
                     "label": "Fichiers à télécharger",
                     "display": "block",
                     "sub_fields": [
+                        {
+                            "key": "field_5a85ad35143ec",
+                            "label": "Nom du bloc pour l'administration",
+                            "name": "admin_group_name",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
                         {
                             "key": "field_5a69a4085207a",
                             "label": "Titre",
@@ -980,7 +1132,7 @@
                                 "id": ""
                             },
                             "choices": {
-                                "choix1": "To be replaced"
+                                "tempate_1": "Template 1"
                             },
                             "allow_null": 0,
                             "other_choice": 0,
@@ -999,6 +1151,25 @@
                     "label": "Focus",
                     "display": "block",
                     "sub_fields": [
+                        {
+                            "key": "field_5a85ad45143ed",
+                            "label": "Nom du bloc pour l'administration",
+                            "name": "admin_group_name",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
                         {
                             "key": "field_5a6aeeba27cb6",
                             "label": "Contenu",
@@ -1206,6 +1377,25 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5a85ad5c143ee",
+                            "label": "Nom du bloc pour l'administration",
+                            "name": "admin_group_name",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
                             "key": "field_5a6aefc327cba",
                             "label": "Contenu",
                             "name": "",
@@ -1358,7 +1548,7 @@
                                 "id": ""
                             },
                             "choices": {
-                                "choix1": "To be replaced"
+                                "tempate_1": "Template 1"
                             },
                             "allow_null": 0,
                             "other_choice": 0,
@@ -1408,5 +1598,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1518627925
+    "modified": 1518710137
 }
