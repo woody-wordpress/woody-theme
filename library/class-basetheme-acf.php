@@ -12,8 +12,8 @@ class Basetheme_ACF {
         add_filter('plugin_action_links', array($this, 'disallow_acf_deactivation'), 10, 4);
         // Overriding field img_size
         // See https://www.advancedcustomfields.com/resources/acf-load_field/ for more informations
-        add_filter('acf/load_field/name=woody_tpl', array($this, 'woodytpl_acf_load_field'));
         add_filter('acf/load_field/name=img_size', array($this, 'image_size_acf_load_field'));
+        add_filter('acf/load_field/name=content_element', array($this, 'content_element_acf_load_field'));
         add_filter('acf/fields/flexible_content/layout_title/name=content_element', array($this, 'custom_flexible_content_layout_title'), 10, 4);
     }
 
@@ -46,45 +46,71 @@ class Basetheme_ACF {
         return $field;
     }
 
-
-
-    function woodytpl_acf_load_field($field){
-
-        // Reset existing choices
-         $field['choices'] = array();
+    function content_element_acf_load_field($field){
+        // d($field);
 
         // Define path to Woody library
         $path = dirname(get_home_path());
         $woody_tpls = $path . '/vendor/rc/woody/views';
 
-        if(strpos($field['parent'], 'field') !== FALSE){
-            $the_parent_field = $field['parent'];
-            d($field);
-            // Lorsque le champ parent est chargé, il charge tous ses enfants.
-            // Il repasse donc dans le filtre que nous sommes en train d'écrire et provoque une boucle infinie
-            // Il faut donc supprimer le filtre mais il ne s'applique plus aux champs suivants
-            remove_filter('acf/load_field/name=woody_tpl', array($this, 'woodytpl_acf_load_field'));
-            $parent_field = get_field_object($the_parent_field);
-            $parent_layout = $field['parent_layout'];
-            foreach ($parent_field['layouts'] as $key => $layout) {
-                if($layout['key'] == $parent_layout){
-                    $tpl_folder = $woody_tpls . '/blocks/' . $layout['name'];
-                    $files = scandir($tpl_folder);
+        foreach ($field['layouts'] as $key => $layout) {
+            // We get woody's folder corresponding to our parent_layout name and scan the folder
+            $tpl_folder = $woody_tpls . '/blocks/' . $layout['name'];
+            if(is_dir($tpl_folder)){
+                $files = scandir($tpl_folder);
+                if(!empty($files)){
+
+                    $data = [];
 
                     foreach ($files as $key => $file) {
                         $avoid = array('.','twig', $layout['name']);
                         $name = str_replace($avoid, '', $file);
                         if(!empty($name)){
-                            $field['choices'][] = $name;
+                            $readable_name = str_replace('tpl_', 'Template ', $name);
+                            $data[] =  $readable_name;
                         }
                     }
+
+                    $field_register = [
+                            'key' => 'field_woodytpl_' . $layout['name'] . '_' . $key,
+                            'label' => 'Template',
+                            'name' => 'woody_tpl',
+                            'type' => 'radio',
+                            'parent' => $field['key'],
+                            'menu_order' => 10,
+                            'wrapper' => [
+                                'width' => '100',
+                                'class' => '',
+                                'id' => ''
+                            ],
+                            'choices' => $data,
+                            '_name' => 'woody_tpl',
+                            '_prepare' => 0,
+                            '_valid' => 1,
+                            'required' => 0,
+                            'instructions' => '',
+                            'allow_null' => 1,
+                            'other_choice' => 0,
+                            'layout' => 0,
+                            'class' => '',
+                            'default_value' => '',
+                            'placeholder' => '',
+                            'prepend' => '',
+                            'append' => '',
+                            'maxlength' => '',
+                            'parent_layout' => $layout['key']
+                    ];
+
+                    $field['layouts'][$layout['key']]['sub_fields'][] = $field_register;
+
                 }
             }
         }
 
+
+
         return $field;
     }
-
 
     // Rewrite title of content_element rows to display a more readable title chosed by the user himself
     function custom_flexible_content_layout_title( $title, $field, $layout, $i ){
