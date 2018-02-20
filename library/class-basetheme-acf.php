@@ -54,60 +54,54 @@ class Basetheme_ACF {
         $woody_tpls = $path . '/vendor/rc/woody/views';
 
         foreach ($field['layouts'] as $key => $layout) {
-            // We get woody's folder corresponding to our parent_layout name and scan the folder
-            $tpl_folder = $woody_tpls . '/blocks/' . $layout['name'];
-            if(is_dir($tpl_folder)){
-                $files = scandir($tpl_folder);
-                if(!empty($files)){
+            $woody = new Woody($layout['name']);
+            $tpls = $woody->getTemplates();
+            $thumbnail = $woody->getThumbnail();
 
-                    $data = [];
+            if(!empty($tpls)){
+                $data = [];
 
-                    foreach ($files as $key => $file) {
-                        $avoid = array('.','twig', $layout['name']);
-                        $name = str_replace($avoid, '', $file);
-                        if(!empty($name)){
-                            $readable_name = str_replace('tpl_', 'Template ', $name);
-                            $data[] =  $readable_name;
-                        }
-                    }
+                // Register field woody_tpl => allow user to choose an existing template
+                $field_register = [
+                    'ID' => 'field_woodytpl_' . $layout['name'] . '_' . $key,
+                    'key' => 'field_woodytpl_' . $layout['name'] . '_' . $key,
+                    'label' => 'Modèles',
+                    'name' => 'woody_tpl',
+                    'type' => 'radio',
+                    'parent' => $field['key'],
+                    'menu_order' => 10,
+                    'wrapper' => [
+                        'width' => '100',
+                        'class' => '',
+                        'id' => ''
+                    ],
+                    'choices' => $tpls,
+                    '_name' => 'woody_tpl',
+                    '_prepare' => 0,
+                    '_valid' => 1,
+                    'required' => 0,
+                    'instructions' => '',
+                    'allow_null' => 1,
+                    'other_choice' => 0,
+                    'layout' => 0,
+                    'class' => '',
+                    'default_value' => '',
+                    'placeholder' => '',
+                    'prepend' => '',
+                    'append' => '',
+                    'maxlength' => '',
+                    'parent_layout' => $layout['key']
+                ];
 
-                    $field_register = [
-                            'key' => 'field_woodytpl_' . $layout['name'] . '_' . $key,
-                            'label' => 'Template',
-                            'name' => 'woody_tpl',
-                            'type' => 'radio',
-                            'parent' => $field['key'],
-                            'menu_order' => 10,
-                            'wrapper' => [
-                                'width' => '100',
-                                'class' => '',
-                                'id' => ''
-                            ],
-                            'choices' => $data,
-                            '_name' => 'woody_tpl',
-                            '_prepare' => 0,
-                            '_valid' => 1,
-                            'required' => 0,
-                            'instructions' => '',
-                            'allow_null' => 1,
-                            'other_choice' => 0,
-                            'layout' => 0,
-                            'class' => '',
-                            'default_value' => '',
-                            'placeholder' => '',
-                            'prepend' => '',
-                            'append' => '',
-                            'maxlength' => '',
-                            'parent_layout' => $layout['key']
-                    ];
-
-                    $field['layouts'][$layout['key']]['sub_fields'][] = $field_register;
-
+                if($layout['name'] == 'content_selection'){
+                    $field_register['label'] = 'Modèles pour les éléments sélectionnés';
+                } else {
+                    $field_register['label'] = 'Modèles';
                 }
+
+                $field['layouts'][$layout['key']]['sub_fields'][] = $field_register;
             }
         }
-
-
 
         return $field;
     }
