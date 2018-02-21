@@ -47,6 +47,14 @@ class Basetheme_ACF {
         return $field;
     }
 
+    function woody_card_tpl_acf_load_field($field){
+        $field['choices'] = [];
+        // $woody = new Woody(null, 'card');
+        // d($woody);
+
+        return $field;
+    }
+
 
     /**
     * Creating a new radio field 'woody_tpl' based on availables templates in the woody plugin
@@ -103,15 +111,6 @@ class Basetheme_ACF {
                 $field['layouts'][$layout['key']]['sub_fields'][] = $field_register;
             }
         }
-
-        return $field;
-    }
-
-    function woody_card_tpl_acf_load_field($field){
-        // d($field);
-        $field['choices'] = [];
-
-
 
         return $field;
     }
