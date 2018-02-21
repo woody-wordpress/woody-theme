@@ -49,8 +49,15 @@ class Basetheme_ACF {
 
     function woody_card_tpl_acf_load_field($field){
         $field['choices'] = [];
-        // $woody = new Woody(null, 'card');
-        // d($woody);
+        $woody = new Woody('Cards', 'card');
+        if(!empty($woody->templates)){
+            foreach ($woody->templates as $key => $template) {
+                $choices[$template['version']] =
+                '<img width="90" height="90" src="' . $template['thumbnails']['small'] . '" alt="' . $template['name'] . '" />
+                <div><small>' . $template['name'] . '</small></div>';
+            }
+            $field['choices'] = $choices;
+        }
 
         return $field;
     }
