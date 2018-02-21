@@ -690,6 +690,29 @@
                             "endpoint": 0
                         },
                         {
+                            "key": "field_5a8d91e56b020",
+                            "label": "Modèles de éléments sélectionnés",
+                            "name": "woody_card_tpl",
+                            "type": "radio",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "100",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": [
+                                "Template"
+                            ],
+                            "allow_null": 0,
+                            "other_choice": 0,
+                            "save_other_choice": 0,
+                            "default_value": "",
+                            "layout": "vertical",
+                            "return_format": "value"
+                        },
+                        {
                             "key": "field_5a60d2b08ccd3",
                             "label": "Nombre de colonnes",
                             "name": "grid_size",
@@ -1460,5 +1483,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1519059884
+    "modified": 1519230266
 }
