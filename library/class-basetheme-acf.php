@@ -47,11 +47,6 @@ class Basetheme_ACF {
     }
 
     function content_element_acf_load_field($field){
-        // d($field);
-
-        // Define path to Woody library
-        $path = dirname(get_home_path());
-        $woody_tpls = $path . '/vendor/rc/woody/views';
 
         foreach ($field['layouts'] as $key => $layout) {
             $woody = new Woody($layout['name']);
