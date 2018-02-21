@@ -13,6 +13,7 @@ class Basetheme_ACF {
         // Overriding field img_size
         // See https://www.advancedcustomfields.com/resources/acf-load_field/ for more informations
         add_filter('acf/load_field/name=img_size', array($this, 'image_size_acf_load_field'));
+        add_filter('acf/load_field/name=woody_card_tpl', array($this, 'woody_card_tpl_acf_load_field'));
         add_filter('acf/load_field/name=content_element', array($this, 'content_element_acf_load_field'));
         add_filter('acf/fields/flexible_content/layout_title/name=content_element', array($this, 'custom_flexible_content_layout_title'), 10, 4);
     }
@@ -51,23 +52,21 @@ class Basetheme_ACF {
     * Creating a new radio field 'woody_tpl' based on availables templates in the woody plugin
     **/
     function content_element_acf_load_field($field){
-
         // Get every layouts from the 'content_element_field'
         foreach ($field['layouts'] as $key => $layout) {
             // Create woody object => all we need to work
             $woody = new Woody($layout['name']);
-
             if(!empty($woody->templates)){
                 // If there's templates in the woody object,
                 // we fill an array 'choices' with woody's values
                 $choices = [];
                 foreach ($woody->templates as $key => $template) {
-                    $choices[$template['version']] = '<img width="90" height="90" src="' . $template['thumbnails']['small'] . '"
-                    alt="' . $template['name'] . '"
+                    $choices[$template['version']] =
+                    '<img width="90" height="90" src="' . $template['thumbnails']['small'] . '" alt="' . $template['name'] . '" />
                     <div><small>' . $template['name'] . '</small></div>';
                 }
 
-                // Register field woody_tpl
+                //Register field woody_tpl
                 $field_register = [
                     'ID' => 'field_woodytpl_' . $layout['name'] . '_' . $key,
                     'key' => 'field_woodytpl_' . $layout['name'] . '_' . $key,
@@ -89,6 +88,7 @@ class Basetheme_ACF {
                     'instructions' => '',
                     'allow_null' => 1,
                     'other_choice' => 0,
+                    'save_other_choice' => 0,
                     'layout' => 0,
                     'class' => '',
                     'default_value' => '',
@@ -96,18 +96,22 @@ class Basetheme_ACF {
                     'prepend' => '',
                     'append' => '',
                     'maxlength' => '',
-                    'parent_layout' => $layout['key']
+                    'parent_layout' => $layout['key'],
+                    'return_format' => 0
                 ];
-
-                if($layout['name'] == 'content_selection'){
-                    $field_register['label'] = 'Modèles pour les éléments sélectionnés';
-                } else {
-                    $field_register['label'] = 'Modèles';
-                }
 
                 $field['layouts'][$layout['key']]['sub_fields'][] = $field_register;
             }
         }
+
+        return $field;
+    }
+
+    function woody_card_tpl_acf_load_field($field){
+        // d($field);
+        $field['choices'] = [];
+
+
 
         return $field;
     }

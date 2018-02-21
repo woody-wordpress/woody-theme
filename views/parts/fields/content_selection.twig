@@ -4,8 +4,4 @@
 {% if element.slogan | default %}
     <h5>{{ element.slogan }}</h5>
 {% endif %}
-{% for item in element.content_selection %}
-    {{ dump(item.img) }}
-    {{ dump(item.title) }}
-
-{% endfor %}
+{% for item in element.content_selection %}{% endfor %}
