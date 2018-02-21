@@ -46,17 +46,28 @@ class Basetheme_ACF {
         return $field;
     }
 
+
+    /**
+    * Creating a new radio field 'woody_tpl' based on availables templates in the woody plugin
+    **/
     function content_element_acf_load_field($field){
 
+        // Get every layouts from the 'content_element_field'
         foreach ($field['layouts'] as $key => $layout) {
+            // Create woody object => all we need to work
             $woody = new Woody($layout['name']);
-            $tpls = $woody->getTemplates();
-            $thumbnail = $woody->getThumbnail();
 
-            if(!empty($tpls)){
-                $data = [];
+            if(!empty($woody->templates)){
+                // If there's templates in the woody object,
+                // we fill an array 'choices' with woody's values
+                $choices = [];
+                foreach ($woody->templates as $key => $template) {
+                    $choices[$template['version']] = '<img width="90" height="90" src="' . $template['thumbnails']['small'] . '"
+                    alt="' . $template['name'] . '"
+                    <div><small>' . $template['name'] . '</small></div>';
+                }
 
-                // Register field woody_tpl => allow user to choose an existing template
+                // Register field woody_tpl
                 $field_register = [
                     'ID' => 'field_woodytpl_' . $layout['name'] . '_' . $key,
                     'key' => 'field_woodytpl_' . $layout['name'] . '_' . $key,
@@ -70,7 +81,7 @@ class Basetheme_ACF {
                         'class' => '',
                         'id' => ''
                     ],
-                    'choices' => $tpls,
+                    'choices' => $choices,
                     '_name' => 'woody_tpl',
                     '_prepare' => 0,
                     '_valid' => 1,
