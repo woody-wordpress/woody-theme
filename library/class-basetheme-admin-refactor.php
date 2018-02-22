@@ -11,6 +11,8 @@ class Basetheme_adminRefactor {
       add_action( 'admin_menu' , array($this,'basetheme_remove_pageparentdiv'));
       add_action( 'init', array($this, 'basetheme_remove_pages_editor'));
       add_action('admin_menu', array($this, 'basetheme_remove_menus'));
+      add_action( 'add_meta_boxes', array($this,'basetheme_add_pageparentdiv') );
+
     }
 
     /**
@@ -28,19 +30,18 @@ class Basetheme_adminRefactor {
     //  * @param  string $post_type
     //  * @return null
     //  */
-    // function basetheme_add_pageparentdiv( $post_type ) {
-    //     if ( in_array( $post_type, array( 'post', 'page' ) ) ) {
-    //         add_meta_box(
-    //             'pageparentdiv',
-    //             'Mise en page - Templates',
-    //             'page_attributes_meta_box',
-    //              null,
-    //             'side',
-    //             'high'
-    //         );
-    //     }
-    // }
-    // add_action( 'add_meta_boxes', 'basetheme_add_pageparentdiv' );
+    function basetheme_add_pageparentdiv( $post_type ) {
+        if ( in_array( $post_type, array( 'post', 'page' ) ) ) {
+            add_meta_box(
+                'pageparentdiv',
+                'Mise en page - Templates',
+                'page_attributes_meta_box',
+                 null,
+                'side',
+                'high'
+            );
+        }
+    }
 
     /**
      * We remove the content text editor cause we'll use ACF to create pages
