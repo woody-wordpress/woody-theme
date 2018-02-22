@@ -207,6 +207,11 @@
                 "param": "post_taxonomy",
                 "operator": "==",
                 "value": "page_type:article"
+            },
+            {
+                "param": "page_template",
+                "operator": "!=",
+                "value": "page-templates\/page-landingpage.php"
             }
         ],
         [
@@ -214,6 +219,11 @@
                 "param": "post_taxonomy",
                 "operator": "==",
                 "value": "page_type:blog_article"
+            },
+            {
+                "param": "page_template",
+                "operator": "!=",
+                "value": "page-templates\/page-landingpage.php"
             }
         ],
         [
@@ -221,6 +231,11 @@
                 "param": "post_taxonomy",
                 "operator": "==",
                 "value": "page_type:experience"
+            },
+            {
+                "param": "page_template",
+                "operator": "!=",
+                "value": "page-templates\/page-landingpage.php"
             }
         ],
         [
@@ -228,6 +243,11 @@
                 "param": "post_taxonomy",
                 "operator": "==",
                 "value": "page_type:basic_page"
+            },
+            {
+                "param": "page_template",
+                "operator": "!=",
+                "value": "page-templates\/page-landingpage.php"
             }
         ]
     ],
@@ -239,5 +259,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Groupe de champ pour le header du contenu (Titres, médias, taxonomies, ...)",
-    "modified": 1517322958
+    "modified": 1519313745
 }

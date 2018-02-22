@@ -8,10 +8,10 @@ class Basetheme_adminRefactor {
 
     protected function register_hooks() {
       add_filter('wpseo_metabox_prio', array($this, 'basetheme_yoast_move_meta_box_bottom'));
-      add_action( 'admin_menu' , array($this,'basetheme_remove_pageparentdiv'));
+      // add_action( 'admin_menu' , array($this,'basetheme_remove_pageparentdiv'));
+      // add_action( 'add_meta_boxes', array($this,'basetheme_add_pageparentdiv') );
       add_action( 'init', array($this, 'basetheme_remove_pages_editor'));
       add_action('admin_menu', array($this, 'basetheme_remove_menus'));
-      add_action( 'add_meta_boxes', array($this,'basetheme_add_pageparentdiv') );
 
     }
 
