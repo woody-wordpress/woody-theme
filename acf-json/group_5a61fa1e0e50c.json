@@ -36,11 +36,11 @@
     ],
     "menu_order": -1,
     "position": "acf_after_title",
-    "style": "seamless",
+    "style": "default",
     "label_placement": "top",
     "instruction_placement": "field",
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1519287143
+    "modified": 1519310404
 }
