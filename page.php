@@ -2,7 +2,7 @@
 
 $context = Timber::get_context();
 $context['post'] = new TimberPost();
-$context['post']->img = new TimberImage($post->img);
+$context['post']->img = new TimberImage($post->hero_img);
 $context['post']->woody_parts = [];
 
 // We get all layouts used on the page and removed duplicates
