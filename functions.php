@@ -73,6 +73,13 @@ $basetheme_acf = new Basetheme_ACF();
 $basetheme_acf->execute();
 
 /**
+** Improve Menus
+**/
+include get_template_directory().'/library/class-basetheme-menus.php';
+$basetheme_acf = new Basetheme_menu();
+$basetheme_acf->execute();
+
+/**
 ** A better backoffice for easier work
 **/
 include get_template_directory().'/library/class-basetheme-admin-refactor.php';

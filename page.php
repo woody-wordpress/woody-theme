@@ -12,10 +12,6 @@ $context['post']->thumbnail = new TimberImage($post->_thumbnail_id);
 // Declare woody_parts
 $context['post']->woody_parts = [];
 
-// Get main menu
-// $context['main_menu'] = new Timber\Menu('main-menu');
-// d($context['main_menu']);
-
 // We get all layouts used on the page and removed duplicates
 if(!empty($context['post']->content_element)){
     $content_element_layouts = array_unique($context['post']->content_element);

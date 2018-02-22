@@ -44,6 +44,9 @@ class Basetheme_Timber extends TimberSite {
     //   "footer" => new Timber\Menu('footer'),
     // );
 
+    $context['main_menu'] = new Timber\Menu('main-menu');
+    d($context['main_menu']);
+
     return $context;
   }
 }
