@@ -634,6 +634,57 @@
                             "endpoint": 0
                         },
                         {
+                            "key": "field_5a96b77a3341b",
+                            "label": "Taille des images",
+                            "name": "img_size",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "ratio_8_1": "Panoramique",
+                                "ratio_4_1": "Panoramique moyen",
+                                "ratio_8_3": "Paysage long",
+                                "ratio_16_9": "Paysage",
+                                "ratio_16_10": "Paysage haut",
+                                "ratio_square": "Carré",
+                                "ratio_10_16": "Portrait large",
+                                "ratio_9_16": "Portrait",
+                                "ratio_free": "Proportions libres"
+                            },
+                            "default_value": [],
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_5a8e7f9df6053",
+                            "label": "Affichage",
+                            "name": "display_fullwidth",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "Afficher sur toute la largeur de l'écran",
+                            "default_value": 0,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
+                        {
                             "key": "field_5a8d91e56b020",
                             "label": "Modèles de éléments sélectionnés",
                             "name": "woody_card_tpl",
@@ -656,25 +707,6 @@
                             "default_value": "",
                             "layout": "vertical",
                             "return_format": "value"
-                        },
-                        {
-                            "key": "field_5a8e7f9df6053",
-                            "label": "Affichage",
-                            "name": "display_fullwidth",
-                            "type": "true_false",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "message": "Afficher sur toute la largeur de l'écran",
-                            "default_value": 0,
-                            "ui": 0,
-                            "ui_on_text": "",
-                            "ui_off_text": ""
                         }
                     ],
                     "min": "",
@@ -2201,5 +2233,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1519398291
+    "modified": 1519826932
 }
