@@ -17,24 +17,28 @@
 
             <div class="content"></div>
             {% for key, element in post.get_field('content_element') %}
+                {{ dump(element.display_fullwidth) }}
+                {% if element.display_fullwidth | default %}
+                    <div class="section-fullwidth">
 
-                {% if element.img_size %}
-                    {# if element have an image size option, we set variables to populate srcset attribute #}
-                    {% set srcset_small = element.img_size ~ '_small' %}
-                    {% set srcset_medium = element.img_size ~ '_medium' %}
-                    {% set srcset_xlarge = element.img_size ~ '_xlarge' %}
-                {% endif %}
-                {% if element.woody_tpl |default%}
-                    {% set layout = element.acf_fc_layout %}
-                    {% if element.woody_tpl == 'tpl_1' %}
-                        {% include[post.woody_parts[layout].0] %}
-                    {% elseif element.woody_tpl == 'tpl_2' %}
-                        {% include[post.woody_parts[layout].1] %}
-                    {% endif %}
-                {% else %}
-                    <div class="element_{{ element.acf_fc_layout }} grid-container">
-                        {% include['parts/fields/' ~ element.acf_fc_layout ~ '.twig',
-                            'parts/fields/empty.twig'] %}
+                        {% if element.img_size %}
+                            {# if element have an image size option, we set variables to populate srcset attribute #}
+                            {% set srcset_small = element.img_size ~ '_small' %}
+                            {% set srcset_medium = element.img_size ~ '_medium' %}
+                            {% set srcset_xlarge = element.img_size ~ '_xlarge' %}
+                        {% endif %}
+                        {% if element.woody_tpl |default%}
+                            {% set layout = element.acf_fc_layout %}
+                            {% if element.woody_tpl == 'tpl_1' %}
+                                {% include[post.woody_parts[layout].0] %}
+                            {% elseif element.woody_tpl == 'tpl_2' %}
+                                {% include[post.woody_parts[layout].1] %}
+                            {% endif %}
+                        {% else %}
+                            <div class="element_{{ element.acf_fc_layout }} grid-container">
+                                {% include['parts/fields/empty.twig'] %}
+                            </div>
+                        {% endif %}
                     </div>
                 {% endif %}
             {% endfor %}

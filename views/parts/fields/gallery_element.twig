@@ -13,24 +13,18 @@
 {% endif %}
 
 {% if element.gallery_items | default %}
-    {% if element.display_fullwidth | default %}
-        <div class="section-fullwidth">
-        {% endif %}
-        <div class="{{ grid }}">
-            {% for image in element.gallery_items %}
-                <div class="column">
-                    <a class="card" href="">
-                        <img src="{{ TimberImage(image).src(element.img_size) }}" srcset="{{ TimberImage(image).src( srcset_small ) }} 568w, {{ TimberImage(image).src( srcset_medium ) }} 992w" {% if image.alt|default %} alt="{{ image.alt }}" {% endif %}/>
-                        {% if image.caption %}
-                            <div class="card-divider">
-                                <small>{{ image.caption }}</small>
-                            </div>
-                        {% endif %}
-                    </a>
-                </div>
-            {% endfor %}
-        </div>
-        {% if element.display_fullwidth | default %}
-        </div>
-    {% endif %}
+    <div class="{{ grid }}">
+        {% for image in element.gallery_items %}
+            <div class="column">
+                <a class="card" href="">
+                    <img src="{{ TimberImage(image).src(element.img_size) }}" srcset="{{ TimberImage(image).src( srcset_small ) }} 568w, {{ TimberImage(image).src( srcset_medium ) }} 992w" {% if image.alt|default %} alt="{{ image.alt }}" {% endif %}/>
+                    {% if image.caption %}
+                        <div class="card-divider">
+                            <small>{{ image.caption }}</small>
+                        </div>
+                    {% endif %}
+                </a>
+            </div>
+        {% endfor %}
+    </div>
 {% endif %}
