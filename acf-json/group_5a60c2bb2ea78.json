@@ -2205,18 +2205,11 @@
                         {
                             "key": "field_5a980bc2af6ae",
                             "label": "Ajouter un bloc",
-                            "name": "hawwwai_bloc_selection",
-                            "type": "relationship",
+                            "name": "hawwwai_block",
+                            "type": "post_object",
                             "instructions": "",
                             "required": 0,
-                            "conditional_logic": [
-                                [
-                                    {
-                                        "field": "",
-                                        "operator": "!="
-                                    }
-                                ]
-                            ],
+                            "conditional_logic": 0,
                             "wrapper": {
                                 "width": "",
                                 "class": "",
@@ -2226,14 +2219,11 @@
                                 "hawwwai_block"
                             ],
                             "taxonomy": [],
-                            "filters": [
-                                "search",
-                                "taxonomy"
-                            ],
-                            "elements": "",
-                            "min": "",
-                            "max": 1,
-                            "return_format": "object"
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "return_format": "object",
+                            "acf_relationship_create": 1,
+                            "ui": 1
                         }
                     ],
                     "min": "",
@@ -2276,5 +2266,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1519923294
+    "modified": 1519924435
 }
