@@ -166,38 +166,6 @@
                             "endpoint": 0
                         },
                         {
-                            "key": "field_5a660747de8a8",
-                            "label": "Format des images",
-                            "name": "img_size",
-                            "type": "select",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "100",
-                                "class": "",
-                                "id": ""
-                            },
-                            "choices": {
-                                "ratio_8_1": "Panoramique",
-                                "ratio_4_1": "Panoramique moyen",
-                                "ratio_8_3": "Paysage long",
-                                "ratio_16_9": "Paysage",
-                                "ratio_16_10": "Paysage haut",
-                                "ratio_square": "Carré",
-                                "ratio_10_16": "Portrait large",
-                                "ratio_9_16": "Portrait",
-                                "ratio_free": "Proportions libres"
-                            },
-                            "default_value": [],
-                            "allow_null": 1,
-                            "multiple": 0,
-                            "ui": 0,
-                            "ajax": 0,
-                            "return_format": "value",
-                            "placeholder": ""
-                        },
-                        {
                             "key": "field_5a60ce667bb59",
                             "label": "Affichage",
                             "name": "display_fullwidth",
@@ -632,38 +600,6 @@
                             },
                             "placement": "top",
                             "endpoint": 0
-                        },
-                        {
-                            "key": "field_5a96b77a3341b",
-                            "label": "Taille des images",
-                            "name": "img_size",
-                            "type": "select",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "50",
-                                "class": "",
-                                "id": ""
-                            },
-                            "choices": {
-                                "ratio_8_1": "Panoramique",
-                                "ratio_4_1": "Panoramique moyen",
-                                "ratio_8_3": "Paysage long",
-                                "ratio_16_9": "Paysage",
-                                "ratio_16_10": "Paysage haut",
-                                "ratio_square": "Carré",
-                                "ratio_10_16": "Portrait large",
-                                "ratio_9_16": "Portrait",
-                                "ratio_free": "Proportions libres"
-                            },
-                            "default_value": [],
-                            "allow_null": 0,
-                            "multiple": 0,
-                            "ui": 0,
-                            "ajax": 0,
-                            "return_format": "value",
-                            "placeholder": ""
                         },
                         {
                             "key": "field_5a8e7f9df6053",
@@ -1199,38 +1135,6 @@
                             "ui": 0,
                             "ui_on_text": "",
                             "ui_off_text": ""
-                        },
-                        {
-                            "key": "field_5a69aa466c9ce",
-                            "label": "Taille de l'image",
-                            "name": "img_size",
-                            "type": "select",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "33",
-                                "class": "",
-                                "id": ""
-                            },
-                            "choices": {
-                                "ratio_8_1": "Panoramique",
-                                "ratio_4_1": "Panoramique moyen",
-                                "ratio_8_3": "Paysage long",
-                                "ratio_16_9": "Paysage",
-                                "ratio_16_10": "Paysage haut",
-                                "ratio_square": "Carré",
-                                "ratio_10_16": "Portrait large",
-                                "ratio_9_16": "Portrait",
-                                "ratio_free": "Proportions libres"
-                            },
-                            "default_value": [],
-                            "allow_null": 0,
-                            "multiple": 0,
-                            "ui": 0,
-                            "ajax": 0,
-                            "return_format": "value",
-                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -2195,6 +2099,96 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "5a980ba7af6ad": {
+                    "key": "5a980ba7af6ad",
+                    "name": "hawwwai_block",
+                    "label": "Bloc Hawwwai",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5a980d1eaf6b1",
+                            "label": "Ajouter un bloc",
+                            "name": "create_block",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "Créer un nouveau bloc Hawwwai ?",
+                            "default_value": 0,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
+                        {
+                            "key": "field_5a980c78af6af",
+                            "label": "Block Hawwwai",
+                            "name": "hawwwai_block",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_5a980d1eaf6b1",
+                                        "operator": "==",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_5a980bc2af6ae",
+                            "label": "Sélectionner un bloc existant",
+                            "name": "hawwwai_bloc_selection",
+                            "type": "relationship",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_5a980d1eaf6b1",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "post_type": [
+                                "hawwwai_block"
+                            ],
+                            "taxonomy": [],
+                            "filters": [
+                                "search",
+                                "taxonomy"
+                            ],
+                            "elements": "",
+                            "min": "",
+                            "max": 1,
+                            "return_format": "object"
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Ajouter un bloc",
@@ -2233,5 +2227,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1519826932
+    "modified": 1519915832
 }

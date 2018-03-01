@@ -100,3 +100,97 @@ function jb_pre_get_posts( WP_Query $wp_query ) {
 if ( is_admin() ) {
 	add_action( 'pre_get_posts', 'jb_pre_get_posts' );
 }
+
+// ************************************************* //
+// TESTING HAWWWAI FUNCTIONS
+// ************************************************* //
+
+/**
+ * Creating options pages for Hawwwai settings
+**/
+if( function_exists('acf_add_options_page') ) {
+
+	acf_add_options_page(array(
+		'page_title' 	=> 'Paramètres du plugin',
+		'menu_title'	=> 'Hawwwai',
+		'menu_slug' 	=> 'hawwwai',
+		'capability'	=> 'edit_posts',
+        'icon_url'      => 'dashicons-palmtree',
+		'redirect'		=> false
+	));
+
+    acf_add_options_sub_page(array(
+        'page_title' 	=> 'Ajouter un bloc hawwwai',
+		'menu_title'	=> 'Ajouter un bloc hawwwai',
+		'parent_slug' 	=> 'hawwwai',
+    ));
+}
+
+/**
+ * Create custom post type => hawwwai_block
+**/
+function create_hawwwai_block() {
+    $args = array(
+      'labels' => array(
+        'name' => 'Blocs Hawwwai',
+        'singular_name' => 'Bloc Hawwwai',
+        'menu_name' => 'Blocs Hawwwai',
+        'add_new' => 'Ajouter',
+        'add_new_item' => 'Ajouter nouveau un bloc Hawwwai',
+        'edit_item' => 'Modifier le bloc Hawwwai',
+        'new_item' => 'Nouveau bloc Hawwwai',
+        'view_item' => 'Voir le bloc',
+        'view_items' => 'Voir les blocs',
+        'search_items' => 'Chercher des blocs',
+        'not_found' => 'Aucun bloc trouvé',
+        'not_found_in_trash' => 'Aucun bloc trouvé dans la poubelle',
+        'all_items' => 'Tous les blocs Hawwwai',
+        'attributes' => 'Attributs du bloc'
+      ),
+      'public' => true,
+      'show_in_menu' => false,
+      'has_archive' => false,
+      'supports' => array('title','thumbnail')
+  );
+  register_post_type( 'hawwwai_block', $args);
+}
+add_action( 'init', 'create_hawwwai_block' );
+
+/**
+ * Redirect option page "Ajouter un bloc Hawwwai" to /post-new.php?post_type=hawwwai_block
+**/
+function redirect_to_hawwwai_block_edit(){
+    global $pagenow;
+    if($pagenow == 'admin.php' && isset($_GET['page']) && $_GET['page'] == 'acf-options-ajouter-un-bloc-hawwwai'){
+        d($_GET['page']);
+        wp_redirect(admin_url('/post-new.php?post_type=hawwwai_block', 'http'), 301);
+    }
+}
+add_action('admin_init', 'redirect_to_hawwwai_block_edit');
+
+
+/**
+ * Add new taxonomy to organize Hawwwai blocks
+**/
+register_taxonomy(
+    'block_type',
+    'hawwwai_block',
+    array(
+        'label' => 'Type de bloc',
+        'labels' => array(
+            'name' => 'Types de blocs',
+            'singular_name' => 'Type de bloc',
+            'menu_name' => 'Type de bloc',
+            'all_items' => 'Tous les types de blocs',
+            'edit_item' => 'Modifier les types de blocs',
+            'view_item' => 'Voir les types de blocs',
+            'update_item' => 'Mettre à jour les types de blocs',
+            'add_new_item' => 'Ajouter un type de bloc',
+            'new_item_name' => 'Nouveau type de bloc',
+            'search_items' => 'Rechercher parmi types de blocs',
+            'popular_items' => 'Types de blocs les plus utilisées'
+        ),
+        'hierarchical' => false,
+        'show_ui' => true,
+    )
+);
