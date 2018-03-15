@@ -5,7 +5,7 @@
         {
             "key": "field_5aa82e78df61b",
             "label": "Type de bloc",
-            "name": "hawwwai_type",
+            "name": "hawwwai_block_type_select",
             "type": "taxonomy",
             "instructions": "Choisissez le type de bloc à ajouter",
             "required": 1,
@@ -45,5 +45,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1521133798
+    "modified": 1521134227
 }
