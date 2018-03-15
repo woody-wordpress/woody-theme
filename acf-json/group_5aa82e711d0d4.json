@@ -39,8 +39,11 @@
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
-    "hide_on_screen": "",
+    "hide_on_screen": [
+        "categories",
+        "tags"
+    ],
     "active": 1,
     "description": "",
-    "modified": 1521133256
+    "modified": 1521133798
 }
