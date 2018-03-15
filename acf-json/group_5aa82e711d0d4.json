@@ -5,13 +5,13 @@
         {
             "key": "field_5aa82e78df61b",
             "label": "Type de bloc",
-            "name": "hawwwai_block_type",
+            "name": "hawwwai_type",
             "type": "taxonomy",
-            "instructions": "",
-            "required": 0,
+            "instructions": "Choisissez le type de bloc à ajouter",
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -19,7 +19,7 @@
             "field_type": "select",
             "allow_null": 0,
             "add_term": 0,
-            "save_terms": 0,
+            "save_terms": 1,
             "load_terms": 0,
             "return_format": "id",
             "multiple": 0
@@ -42,5 +42,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1521121511
+    "modified": 1521133256
 }
