@@ -19,14 +19,16 @@ if(!empty($context['post']->content_element)){
 foreach ($content_element_layouts as $key => $layout) {
     // Then, for each layout we get twig's templates paths
     $woody = new Woody($layout);
-    if(!empty($woody->templates)){
+    $templates = $woody->getTemplates();
+    if(!empty($templates)){
         $context['post']->woody_parts[$layout] = $woody->getTwigsPaths($layout);
     }
 }
 if(in_array('content_selection', $content_element_layouts)){
     $woody_cards = new Woody('Cards', 'card');
-    if(!empty($woody_cards->templates)){
-        $context['post']->woody_parts['cards'] = $woody->getTwigsPaths($layout, 'card');
+    $cardTemplates = $woody_cards->getTemplates();
+    if(!empty($cardTemplates)){
+        $context['post']->woody_parts['cards'] = $woody_cards->getTwigsPaths($layout, 'card');
     }
 }
 
