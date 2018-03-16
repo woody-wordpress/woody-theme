@@ -16,10 +16,9 @@ class Basetheme_ACF {
         // See https://www.advancedcustomfields.com/resources/acf-load_field/ for more informations
         add_filter('acf/load_field/name=img_size', array($this, 'image_size_acf_load_field'));
         add_filter('acf/load_field/name=woody_card_tpl', array($this, 'woody_card_tpl_acf_load_field'));
-        //add_filter('acf/load_field/name=woody_hawwwai_tpl', array($this, 'woody_hawwwai_tpl_acf_load_field'));
         add_filter('acf/load_field/name=content_element', array($this, 'content_element_acf_load_field'));
         add_filter('acf/fields/flexible_content/layout_title/name=content_element', array($this, 'custom_flexible_content_layout_title'), 10, 4);
-        add_filter( 'acf/settings/save_json',  array($this, 'cleanUpAcfJson'));
+        add_action('acf/save_post', array($this, 'cleanUpAcfJson'), 20);
     }
 
     function disallow_acf_deactivation($actions, $plugin_file, $plugin_data, $context) {
@@ -63,23 +62,6 @@ class Basetheme_ACF {
             }
             $field['choices'] = $choices;
         }
-
-        return $field;
-    }
-
-    function woody_hawwwai_tpl_acf_load_field($field){
-        $field['choices'] = [
-            'test' => 'test d\'option'
-        ];
-        // $woody = new Woody('Cards', 'card');
-        // if(!empty($woody->templates)){
-        //     foreach ($woody->templates as $key => $template) {
-        //         $choices[$template['version']] =
-        //         '<img width="90" height="90" src="' . $template['thumbnails']['small'] . '" alt="' . $template['name'] . '" />
-        //         <div><small>' . $template['name'] . '</small></div>';
-        //     }
-        //     $field['choices'] = $choices;
-        // }
 
         return $field;
     }
@@ -155,17 +137,42 @@ class Basetheme_ACF {
     }
 
     // Cleanup acf-json
-    function cleanUpAcfJson($path){
-        $finder = new Finder();
-        $finder->files()->in($path);
-        foreach ($finder as $file) {
-            $name = $file->getfileName();
-            $path = $file->getPathName();
-            if($name != 'group_5a60c2bb2ea78.json') continue;
-            $json = file_get_contents($path);
-            $field = json_decode($json);
-        }
-        // print_r($field); exit;
+    function cleanUpAcfJson($post_id){
+        die;
+        // $finder = new Finder();
+        // $finder->files()->in($path);
+        // foreach ($finder as $file) {
+        //     $name = $file->getfileName();
+        //     $path = $file->getPathName();
+        //     if($name != 'group_5a60c2bb2ea78.json') continue;
+        //     $json = file_get_contents($path);
+        //     $field = json_decode($json, true);
+        // }
+        // bail early if no ACF data
+        // if( empty($_POST['acf']) ) {
+        //
+        //     return;
+        //
+        // }
 
+
+        // array of field values
+        $fields = $_POST['acf'];
+
+        foreach ($fields as $k_field => $value) {
+            $layouts = $value['layouts'];
+            foreach ($layouts as $k_layout => $layout) {
+                $subfields = $layout['sub_fields'];
+                    foreach ($subfields as $k_subfield => $subfield) {
+                        if(strpos($subfield['key'], 'field_woodytpl_') === 0){
+                            unset($_POST['acf'][$k_field]['layouts'][$k_layout]['sub_fields'][$k_subfield]);
+                        }
+                    }
+                }
+            };
+
+            print_r($_POST['acf']); exit;
+
+        return $post_id;
     }
 }
