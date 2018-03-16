@@ -1,5 +1,7 @@
 <?php
 
+use Symfony\Component\Finder\Finder;
+
 class Basetheme_ACF {
 
     const ACF = "acf-pro/acf.php";
@@ -14,8 +16,11 @@ class Basetheme_ACF {
         // See https://www.advancedcustomfields.com/resources/acf-load_field/ for more informations
         add_filter('acf/load_field/name=img_size', array($this, 'image_size_acf_load_field'));
         add_filter('acf/load_field/name=woody_card_tpl', array($this, 'woody_card_tpl_acf_load_field'));
+        add_filter('acf/load_field/name=woody_hawwwai_tpl', array($this, 'woody_hawwwai_tpl_acf_load_field'));
+
         add_filter('acf/load_field/name=content_element', array($this, 'content_element_acf_load_field'));
         add_filter('acf/fields/flexible_content/layout_title/name=content_element', array($this, 'custom_flexible_content_layout_title'), 10, 4);
+        // add_filter( 'acf/settings/save_json',  array($this, 'cleanUpAcfJson'));
     }
 
     function disallow_acf_deactivation($actions, $plugin_file, $plugin_data, $context) {
@@ -63,6 +68,22 @@ class Basetheme_ACF {
         return $field;
     }
 
+    function woody_hawwwai_tpl_acf_load_field($field){
+        $field['choices'] = [
+            'test' => 'test d\'option'
+        ];
+        // $woody = new Woody('Cards', 'card');
+        // if(!empty($woody->templates)){
+        //     foreach ($woody->templates as $key => $template) {
+        //         $choices[$template['version']] =
+        //         '<img width="90" height="90" src="' . $template['thumbnails']['small'] . '" alt="' . $template['name'] . '" />
+        //         <div><small>' . $template['name'] . '</small></div>';
+        //     }
+        //     $field['choices'] = $choices;
+        // }
+
+        return $field;
+    }
 
     /**
     * Creating a new radio field 'woody_tpl' based on availables templates in the woody plugin
@@ -134,4 +155,15 @@ class Basetheme_ACF {
         return $title;
     }
 
+    // Cleanup acf-json
+    function cleanUpAcfJson($path){
+        $finder = new Finder();
+        $finder->files()->in($path);
+        var_dump($path);
+        var_dump($finder);
+        foreach ($finder as $file) {
+            var_dump($file->name('group_5a60c2bb2ea78.json')); exit;
+        }
+
+    }
 }

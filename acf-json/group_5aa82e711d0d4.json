@@ -44,6 +44,6 @@
         "tags"
     ],
     "active": 1,
-    "description": "",
-    "modified": 1521134227
+    "description": "Sélection du type de bloc hawwwai basée sur la taxonomie \"hawwwai_block_type\" (Météo, Social, Marées, ...)",
+    "modified": 1521193546
 }
