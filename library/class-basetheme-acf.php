@@ -18,7 +18,7 @@ class Basetheme_ACF {
         add_filter('acf/load_field/name=woody_card_tpl', array($this, 'woody_card_tpl_acf_load_field'));
         add_filter('acf/load_field/name=content_element', array($this, 'content_element_acf_load_field'));
         add_filter('acf/fields/flexible_content/layout_title/name=content_element', array($this, 'custom_flexible_content_layout_title'), 10, 4);
-        add_action('acf/save_post', array($this, 'cleanUpAcfJson'), 20);
+        // add_action('acf/save_post', array($this, 'cleanUpAcfJson'), 20);
     }
 
     function disallow_acf_deactivation($actions, $plugin_file, $plugin_data, $context) {
