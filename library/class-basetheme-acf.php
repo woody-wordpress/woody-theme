@@ -50,8 +50,9 @@ class Basetheme_ACF {
     function woody_card_tpl_acf_load_field($field){
         $field['choices'] = [];
         $woody = new Woody('Cards', 'card');
-        if(!empty($woody->templates)){
-            foreach ($woody->templates as $key => $template) {
+        $woody_templates = $woody->getTemplates();
+        if(!empty($templates)){
+            foreach ($woody_templates as $key => $template) {
                 $choices[$template['version']] =
                 '<img width="90" height="90" src="' . $template['thumbnails']['small'] . '" alt="' . $template['name'] . '" />
                 <div><small>' . $template['name'] . '</small></div>';
@@ -71,11 +72,12 @@ class Basetheme_ACF {
         foreach ($field['layouts'] as $key => $layout) {
             // Create woody object => all we need to work
             $woody = new Woody($layout['name']);
-            if(!empty($woody->templates)){
+            $woody_templates = $woody->getTemplates();
+            if(!empty($woody_templates)){
                 // If there's templates in the woody object,
                 // we fill an array 'choices' with woody's values
                 $choices = [];
-                foreach ($woody->templates as $key => $template) {
+                foreach ($woody_templates as $key => $template) {
                     $choices[$template['version']] =
                     '<img width="90" height="90" src="' . $template['thumbnails']['small'] . '" alt="' . $template['name'] . '" />
                     <div><small>' . $template['name'] . '</small></div>';
