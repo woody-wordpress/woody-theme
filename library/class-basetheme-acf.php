@@ -16,11 +16,10 @@ class Basetheme_ACF {
         // See https://www.advancedcustomfields.com/resources/acf-load_field/ for more informations
         add_filter('acf/load_field/name=img_size', array($this, 'image_size_acf_load_field'));
         add_filter('acf/load_field/name=woody_card_tpl', array($this, 'woody_card_tpl_acf_load_field'));
-        add_filter('acf/load_field/name=woody_hawwwai_tpl', array($this, 'woody_hawwwai_tpl_acf_load_field'));
-
+        //add_filter('acf/load_field/name=woody_hawwwai_tpl', array($this, 'woody_hawwwai_tpl_acf_load_field'));
         add_filter('acf/load_field/name=content_element', array($this, 'content_element_acf_load_field'));
         add_filter('acf/fields/flexible_content/layout_title/name=content_element', array($this, 'custom_flexible_content_layout_title'), 10, 4);
-        // add_filter( 'acf/settings/save_json',  array($this, 'cleanUpAcfJson'));
+        add_filter( 'acf/settings/save_json',  array($this, 'cleanUpAcfJson'));
     }
 
     function disallow_acf_deactivation($actions, $plugin_file, $plugin_data, $context) {
@@ -157,11 +156,14 @@ class Basetheme_ACF {
     function cleanUpAcfJson($path){
         $finder = new Finder();
         $finder->files()->in($path);
-        var_dump($path);
-        var_dump($finder);
         foreach ($finder as $file) {
-            var_dump($file->name('group_5a60c2bb2ea78.json')); exit;
+            $name = $file->getfileName();
+            $path = $file->getPathName();
+            if($name != 'group_5a60c2bb2ea78.json') continue;
+            $json = file_get_contents($path);
+            $field = json_decode($json);
         }
+        // print_r($field); exit;
 
     }
 }
