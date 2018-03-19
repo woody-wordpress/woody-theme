@@ -2259,7 +2259,7 @@
                             "taxonomy": [],
                             "allow_null": 0,
                             "multiple": 0,
-                            "return_format": "object",
+                            "return_format": "id",
                             "acf_relationship_create": 1,
                             "ui": 1
                         }
@@ -2304,5 +2304,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Différents blocs de contenu disponibles sur les pages",
-    "modified": 1521214465
+    "modified": 1521469123
 }
