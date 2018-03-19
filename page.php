@@ -14,14 +14,44 @@ $context['post']->woody_parts = [];
 
 // We get all layouts used on the page and removed duplicates
 if(!empty($context['post']->content_element)){
+
     $content_element_layouts = array_unique($context['post']->content_element);
+
+
+    if (in_array('hawwwai_block', $context['post']->content_element)) {
+        // $test = get_post_taxonomies(166);
+        // var_dump($test);
+
+        // TODO: get all hawwai_blocks taxonomies in page
+        $hawwwai_blocks = [];
+        // get all hawwwai blocks post slugs
+        // foreach ($variable as $key => $value) {
+        // }
+
+        // $hawwwai_terms = wp_get_post_terms(166, 'hawwwai_block_type');
+        // if (!empty($hawwwai_terms[0]->slug)) {
+        //     $hawwwai_blocks[] = $hawwwai_terms[0]->slug;
+        // }
+
+        $hawwwai_blocks = array_unique($hawwwai_blocks);
+
+        $content_element_layouts = array_merge($content_element_layouts, $hawwwai_blocks);
+        // add all taxonomies to $content_element_layouts
+    }
+
 }
+
+
 foreach ($content_element_layouts as $key => $layout) {
     // Then, for each layout we get twig's templates paths
-    $woody = new Woody($layout);
+    $type = 'block';
+    if (strpos($layout, 'wp_hawwwai') !== false) {
+        $type = 'hawwwai';
+    }
+    $woody = new Woody($layout, $type);
     $templates = $woody->getTemplates();
     if(!empty($templates)){
-        $context['post']->woody_parts[$layout] = $woody->getTwigsPaths($layout);
+        $context['post']->woody_parts[$layout] = $woody->getTwigsPaths($layout, $type);
     }
 }
 if(in_array('content_selection', $content_element_layouts)){
@@ -32,6 +62,9 @@ if(in_array('content_selection', $content_element_layouts)){
     }
 }
 
+// print_r('<pre>');
+// var_dump($context['post']->woody_parts);
+// exit;
 
 
 Timber::render(array($context['post']->post_name.'.twig', 'page.twig'), $context);
