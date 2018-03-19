@@ -2203,6 +2203,44 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5aabc30003022",
+                            "label": "Titre",
+                            "name": "title",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_5aabc33603023",
+                            "label": "Slogan",
+                            "name": "slogan",
+                            "type": "wysiwyg",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "tabs": "visual",
+                            "toolbar": "basic",
+                            "media_upload": 0,
+                            "delay": 0
+                        },
+                        {
                             "key": "field_5a980bc2af6ae",
                             "label": "Ajouter un bloc",
                             "name": "hawwwai_block",
@@ -2265,6 +2303,6 @@
     "instruction_placement": "field",
     "hide_on_screen": "",
     "active": 1,
-    "description": "",
-    "modified": 1519924435
+    "description": "Différents blocs de contenu disponibles sur les pages",
+    "modified": 1521214465
 }

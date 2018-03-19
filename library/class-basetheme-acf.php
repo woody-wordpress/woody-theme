@@ -63,7 +63,6 @@ class Basetheme_ACF {
         return $field;
     }
 
-
     /**
     * Creating a new radio field 'woody_tpl' based on availables templates in the woody plugin
     **/
