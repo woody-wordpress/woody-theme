@@ -11,6 +11,7 @@ $context['post']->thumbnail = new TimberImage($post->_thumbnail_id);
 
 // Declare woody_parts
 $context['post']->woody_parts = [];
+$context['post']->hawwwai_blocks = [];
 
 // We get all layouts used on the page and removed duplicates
 if (!empty($context['post']->content_element)) {
@@ -20,22 +21,20 @@ if (!empty($context['post']->content_element)) {
     if (in_array('hawwwai_block', $context['post']->content_element)) {
 
         $hawwwai_blocks = [];
-
         // get all hawwwai blocks post slugs
         foreach ($context['post']->content_element as $key => $elm) {
-            if ($elm === 'hawwwai_block') {
 
+            if ($elm === 'hawwwai_block') {
                 // add hawwwai_block taxonomy (weather, tide, ...) to $hawwwai_blocks
                 $elm_key = 'content_element_'.$key.'_'.'hawwwai_block';
                 if (isset($context['post']->{$elm_key})) {
                     $post_ID = $context['post']->{$elm_key};
-
                     $hawwwai_terms = wp_get_post_terms($post_ID, 'hawwwai_block_type');
                     if (!empty($hawwwai_terms) && !empty($hawwwai_terms[0]->slug)) {
                         $hawwwai_blocks[] = $hawwwai_terms[0]->slug;
                     }
+                    $context['post']->hawwwai_blocks['blocks'][$post_ID]['data'] = $plugin_hawwwai_kernel->getContainer()->get('hawwwai.api.weather')->hawwwai_block_data($post_ID);
                 }
-
             }
         }
 
@@ -51,8 +50,12 @@ foreach ($hawwwai_blocks as $key => $layout) {
     $templates = $woody->getTwigsPaths($layout, $type);
     if(!empty($templates)){
         $context['post']->woody_parts[$type][$layout] = $templates;
+        $context['post']->hawwwai_blocks['woody_parts'][$layout] = $templates;
+
     }
 }
+print_r($context['post']); exit;
+
 
 foreach ($content_element_layouts as $key => $layout) {
     $type = 'block';
