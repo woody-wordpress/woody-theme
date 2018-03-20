@@ -54,7 +54,6 @@ foreach ($hawwwai_blocks as $key => $layout) {
 
     }
 }
-print_r($context['post']); exit;
 
 
 foreach ($content_element_layouts as $key => $layout) {
