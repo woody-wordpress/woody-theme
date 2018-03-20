@@ -34,6 +34,7 @@ if (!empty($context['post']->content_element)) {
                         $hawwwai_blocks[] = $hawwwai_terms[0]->slug;
                     }
                     $context['post']->hawwwai_blocks['blocks'][$post_ID]['data'] = $plugin_hawwwai_kernel->getContainer()->get('hawwwai.api.weather')->hawwwai_block_data($post_ID);
+                    $context['post']->hawwwai_blocks['blocks'][$post_ID]['block_infos']['thumbnail'] = get_post_thumbnail_id($post_ID);
                 }
             }
         }
