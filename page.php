@@ -13,10 +13,9 @@ $context['post']->thumbnail = new TimberImage($post->_thumbnail_id);
 $context['post']->woody_parts = [];
 
 // We get all layouts used on the page and removed duplicates
-if(!empty($context['post']->content_element)){
+if (!empty($context['post']->content_element)) {
 
     $content_element_layouts = array_unique($context['post']->content_element);
-
 
     if (in_array('hawwwai_block', $context['post']->content_element)) {
 
@@ -40,41 +39,35 @@ if(!empty($context['post']->content_element)){
             }
         }
 
-        // add $hawwwai_blocks to $content_element_layouts array
+        // make $hawwwai_blocks with unique values
         $hawwwai_blocks = array_unique($hawwwai_blocks);
-        $content_element_layouts = array_merge($content_element_layouts, $hawwwai_blocks);
     }
 
 }
 
-
-foreach ($content_element_layouts as $key => $layout) {
-    // Then, for each layout we get twig's templates paths
-    $type = 'block';
-    if (strpos($layout, 'wp_hawwwai') !== false) {
-        $type = 'hawwwai';
-    }
+foreach ($hawwwai_blocks as $key => $layout) {
+    $type = 'hawwwai';
     $woody = new Woody($layout, $type);
     $templates = $woody->getTwigsPaths($layout, $type);
     if(!empty($templates)){
-        if ($type == 'hawwwai') {
-            $context['post']->woody_parts[$type][$layout] = $templates;
-        }
-        else {
-            $context['post']->woody_parts[$layout] = $templates;
-        }
-    }
-}
-if(in_array('content_selection', $content_element_layouts)){
-    $woody_cards = new Woody('Cards', 'card');
-    $cardTemplates = $woody_cards->getTwigsPaths($layout, 'card');
-    if(!empty($cardTemplates)){
-        $context['post']->woody_parts['cards'] = $cardTemplates;
+        $context['post']->woody_parts[$type][$layout] = $templates;
     }
 }
 
-// print_r('<pre>');
-// var_dump($context['post']->woody_parts);
-// exit;
+foreach ($content_element_layouts as $key => $layout) {
+    $type = 'block';
+    $woody = new Woody($layout, $type);
+    $templates = $woody->getTwigsPaths($layout, $type);
+    if(!empty($templates)){
+        $context['post']->woody_parts[$layout] = $templates;
+    }
+}
+if (in_array('content_selection', $content_element_layouts)) {
+    $woody_cards = new Woody('Cards', 'card');
+    $cardTemplates = $woody_cards->getTwigsPaths($layout, 'card');
+    if (!empty($cardTemplates)) {
+        $context['post']->woody_parts['cards'] = $cardTemplates;
+    }
+}
 
 Timber::render(array($context['post']->post_name.'.twig', 'page.twig'), $context);
