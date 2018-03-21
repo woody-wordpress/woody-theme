@@ -1,6 +1,9 @@
 {% extends "base.twig" %}
 
 {% block content %}
+    {# Admin Edit #}
+    <a target="_self" href="{{ post.edit_link() }}">Modifier la page actuelle</a>
+
     <main class="section page">
         <div class="wrapper">
             {% if post.display_media == 'none' %}
