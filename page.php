@@ -21,7 +21,7 @@ if (!empty($context['post']->content_element)) {
     $context = $plugin_hawwwai_kernel->handleBlockContext($context);
 
     foreach ($content_element_layouts as $layout) {
-        $type = 'block';
+        $type = 'blocks';
         $woody = new Woody($layout, $type);
         $templates = $woody->getTwigsPaths($layout, $type);
         if (!empty($templates)) {
@@ -38,4 +38,3 @@ if (!empty($context['post']->content_element)) {
 
     Timber::render(array($context['post']->post_name . '.twig', 'page.twig'), $context);
 }
-
