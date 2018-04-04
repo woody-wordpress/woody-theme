@@ -49,12 +49,13 @@ class Basetheme_ACF {
 
     function woody_card_tpl_acf_load_field($field){
         $field['choices'] = [];
-        $woody = new Woody('Cards', 'card');
+        $woody = new Woody('Cards', 'cards');
         $woody_templates = $woody->getTemplates();
-        if(!empty($templates)){
+        if(!empty($woody_templates)){
             foreach ($woody_templates as $key => $template) {
+                $thumbs_folder = PATH_TO_THEME . '/dist/img/woody/' . $template['thumbnails']['small']['relative'];
                 $choices[$template['version']] =
-                '<img width="90" height="90" src="' . $template['thumbnails']['small'] . '" alt="' . $template['name'] . '" />
+                '<img width="90" height="90" src="' . $thumbs_folder . '" alt="' . $template['name'] . '" />
                 <div><small>' . $template['name'] . '</small></div>';
             }
             $field['choices'] = $choices;
@@ -77,8 +78,9 @@ class Basetheme_ACF {
                 // we fill an array 'choices' with woody's values
                 $choices = [];
                 foreach ($woody_templates as $key => $template) {
+                    $thumbs_folder = PATH_TO_THEME . '/dist/img/woody/' . $template['thumbnails']['small']['relative'];
                     $choices[$template['version']] =
-                    '<img width="90" height="90" src="' . $template['thumbnails']['small'] . '" alt="' . $template['name'] . '" />
+                    '<img width="90" height="90" src="' . $thumbs_folder . '" alt="' . $template['name'] . '" />
                     <div><small>' . $template['name'] . '</small></div>';
                 }
 

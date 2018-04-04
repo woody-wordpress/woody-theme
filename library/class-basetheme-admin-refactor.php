@@ -12,6 +12,7 @@ class Basetheme_adminRefactor {
       // add_action( 'add_meta_boxes', array($this,'basetheme_add_pageparentdiv') );
       add_action( 'init', array($this, 'basetheme_remove_pages_editor'));
       add_action('admin_menu', array($this, 'basetheme_remove_menus'));
+      add_action('admin_enqueue_scripts', array($this, 'basetheme_admin_style'));
 
     }
 
@@ -72,6 +73,11 @@ class Basetheme_adminRefactor {
 
     public function basetheme_yoast_move_meta_box_bottom() {
       return 'low';
+    }
+
+    // Update CSS within in Admin
+    public function basetheme_admin_style() {
+      wp_enqueue_style('admin-styles', get_template_directory_uri().'/admin.css');
     }
 
 }
