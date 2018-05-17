@@ -1,6 +1,6 @@
 {
     "key": "group_5a60c2bb2ea78",
-    "title": "Contenu",
+    "title": "Contenu de section",
     "fields": [
         {
             "key": "field_5a60c2c590126",
@@ -23,25 +23,6 @@
                     "display": "block",
                     "sub_fields": [
                         {
-                            "key": "field_5a85ac47143e3",
-                            "label": "Nom du bloc pour l'administration",
-                            "name": "admin_group_name",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
-                        },
-                        {
                             "key": "field_5a60cbc59012d",
                             "label": "Texte",
                             "name": "text",
@@ -59,6 +40,33 @@
                             "toolbar": "full",
                             "media_upload": 0,
                             "delay": 0
+                        },
+                        {
+                            "key": "field_woodytpl_text_element_tpl_2",
+                            "label": "Modèles",
+                            "name": "woody_tpl",
+                            "type": "radio",
+                            "wrapper": {
+                                "width": "100",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "tpl_1": "<img width=\"90\" height=\"90\" src=\"PATH_TO_THEME\/dist\/img\/woody\/blocks\/text_element\/tpl_1\/thumbnail.tpl_1.jpg\" alt=\"Modèle 1\" \/>\n                    <div><small>Modèle 1<\/small><\/div>",
+                                "tpl_2": "<img width=\"90\" height=\"90\" src=\"PATH_TO_THEME\/dist\/img\/woody\/blocks\/text_element\/tpl_2\/thumbnail.tpl_2.jpg\" alt=\"Modèle 2\" \/>\n                    <div><small>Modèle 2<\/small><\/div>"
+                            },
+                            "required": 0,
+                            "instructions": "",
+                            "allow_null": 1,
+                            "other_choice": 0,
+                            "save_other_choice": 0,
+                            "layout": 0,
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": "",
+                            "return_format": 0
                         }
                     ],
                     "min": "",
@@ -70,25 +78,6 @@
                     "label": "Galerie photos",
                     "display": "block",
                     "sub_fields": [
-                        {
-                            "key": "field_5a85ac79143e5",
-                            "label": "Nom du bloc pour l'administration",
-                            "name": "admin_group_name",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
-                        },
                         {
                             "key": "field_5a6aea24a5b3c",
                             "label": "Contenu",
@@ -147,7 +136,7 @@
                             "max_width": "",
                             "max_height": "",
                             "max_size": "",
-                            "mime_types": "jpg, jpeg, png, gif"
+                            "mime_types": "jpg, jpeg, png, gif, mp4"
                         },
                         {
                             "key": "field_5a6ae916a5b3b",
@@ -198,23 +187,33 @@
                             "placeholder": ""
                         },
                         {
-                            "key": "field_5a60ce667bb59",
-                            "label": "Affichage",
-                            "name": "display_fullwidth",
-                            "type": "true_false",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
+                            "key": "field_woodytpl_gallery_element_tpl_3",
+                            "label": "Modèles",
+                            "name": "woody_tpl",
+                            "type": "radio",
                             "wrapper": {
-                                "width": "25",
+                                "width": "100",
                                 "class": "",
                                 "id": ""
                             },
-                            "message": "Afficher sur toute la largeur de l'écran",
-                            "default_value": 0,
-                            "ui": 0,
-                            "ui_on_text": "",
-                            "ui_off_text": ""
+                            "choices": {
+                                "tpl_1": "<img width=\"90\" height=\"90\" src=\"PATH_TO_THEME\/dist\/img\/woody\/blocks\/gallery_element\/tpl_1\/thumbnail.tpl_1.jpg\" alt=\"Modèle 1\" \/>\n                    <div><small>Modèle 1<\/small><\/div>",
+                                "tpl_2": "<img width=\"90\" height=\"90\" src=\"PATH_TO_THEME\/dist\/img\/woody\/blocks\/gallery_element\/tpl_2\/thumbnail.tpl_2.jpg\" alt=\"Modèle 2\" \/>\n                    <div><small>Modèle 2<\/small><\/div>",
+                                "tpl_4": "<img width=\"90\" height=\"90\" src=\"PATH_TO_THEME\/dist\/img\/woody\/blocks\/gallery_element\/tpl_4\/thumbnail.tpl_4.jpg\" alt=\"Modèle 4\" \/>\n                    <div><small>Modèle 4<\/small><\/div>",
+                                "tpl_3": "<img width=\"90\" height=\"90\" src=\"PATH_TO_THEME\/dist\/img\/woody\/blocks\/gallery_element\/tpl_3\/thumbnail.tpl_3.jpg\" alt=\"Modèle 3\" \/>\n                    <div><small>Modèle 3<\/small><\/div>"
+                            },
+                            "required": 0,
+                            "instructions": "",
+                            "allow_null": 1,
+                            "other_choice": 0,
+                            "save_other_choice": 0,
+                            "layout": 0,
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": "",
+                            "return_format": 0
                         }
                     ],
                     "min": "",
@@ -226,25 +225,6 @@
                     "label": "FAQ",
                     "display": "block",
                     "sub_fields": [
-                        {
-                            "key": "field_5a85ace6143e8",
-                            "label": "Nom du bloc pour l'administration",
-                            "name": "admin_group_name",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
-                        },
                         {
                             "key": "field_5a6aea947bf45",
                             "label": "Contenu",
@@ -354,6 +334,33 @@
                             },
                             "placement": "top",
                             "endpoint": 0
+                        },
+                        {
+                            "key": "field_woodytpl_accordion_tpl_2",
+                            "label": "Modèles",
+                            "name": "woody_tpl",
+                            "type": "radio",
+                            "wrapper": {
+                                "width": "100",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "tpl_1": "<img width=\"90\" height=\"90\" src=\"PATH_TO_THEME\/dist\/img\/woody\/blocks\/accordion\/tpl_1\/thumbnail.tpl_1.jpg\" alt=\"Modèle 1\" \/>\n                    <div><small>Modèle 1<\/small><\/div>",
+                                "tpl_2": "<img width=\"90\" height=\"90\" src=\"PATH_TO_THEME\/dist\/img\/woody\/blocks\/accordion\/tpl_2\/thumbnail.tpl_2.jpg\" alt=\"Modèle 2\" \/>\n                    <div><small>Modèle 2<\/small><\/div>"
+                            },
+                            "required": 0,
+                            "instructions": "",
+                            "allow_null": 1,
+                            "other_choice": 0,
+                            "save_other_choice": 0,
+                            "layout": 0,
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": "",
+                            "return_format": 0
                         }
                     ],
                     "min": "",
@@ -365,25 +372,6 @@
                     "label": "Call to action",
                     "display": "block",
                     "sub_fields": [
-                        {
-                            "key": "field_5a85acc1143e7",
-                            "label": "Nom du bloc pour l'administration",
-                            "name": "admin_group_name",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
-                        },
                         {
                             "key": "field_5a6aeadb7bf47",
                             "label": "Contenu",
@@ -489,23 +477,30 @@
                             "endpoint": 0
                         },
                         {
-                            "key": "field_5a8e7f69f6052",
-                            "label": "Affichage",
-                            "name": "display_fullwidth",
-                            "type": "true_false",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
+                            "key": "field_woodytpl_call_to_action_tpl_1",
+                            "label": "Modèles",
+                            "name": "woody_tpl",
+                            "type": "radio",
                             "wrapper": {
-                                "width": "",
+                                "width": "100",
                                 "class": "",
                                 "id": ""
                             },
-                            "message": "Afficher sur toute la largeur de l'écran",
-                            "default_value": 0,
-                            "ui": 0,
-                            "ui_on_text": "",
-                            "ui_off_text": ""
+                            "choices": {
+                                "tpl_1": "<img width=\"90\" height=\"90\" src=\"PATH_TO_THEME\/dist\/img\/woody\/blocks\/call_to_action\/tpl_1\/thumbnail.tpl_1.jpg\" alt=\"Modèle 1\" \/>\n                    <div><small>Modèle 1<\/small><\/div>"
+                            },
+                            "required": 0,
+                            "instructions": "",
+                            "allow_null": 1,
+                            "other_choice": 0,
+                            "save_other_choice": 0,
+                            "layout": 0,
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": "",
+                            "return_format": 0
                         }
                     ],
                     "min": "",
@@ -517,25 +512,6 @@
                     "label": "Sélection de contenu",
                     "display": "block",
                     "sub_fields": [
-                        {
-                            "key": "field_5a85acfa143e9",
-                            "label": "Nom du bloc pour l'administration",
-                            "name": "admin_group_name",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
-                        },
                         {
                             "key": "field_5a6aebe87bf4a",
                             "label": "Contenu",
@@ -666,25 +642,6 @@
                             "placeholder": ""
                         },
                         {
-                            "key": "field_5a8e7f9df6053",
-                            "label": "Affichage",
-                            "name": "display_fullwidth",
-                            "type": "true_false",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "50",
-                                "class": "",
-                                "id": ""
-                            },
-                            "message": "Afficher sur toute la largeur de l'écran",
-                            "default_value": 0,
-                            "ui": 0,
-                            "ui_on_text": "",
-                            "ui_off_text": ""
-                        },
-                        {
                             "key": "field_5a8d91e56b020",
                             "label": "Modèles de éléments sélectionnés",
                             "name": "woody_card_tpl",
@@ -698,8 +655,8 @@
                                 "id": ""
                             },
                             "choices": {
-                                "tpl_1": "<img width=\"90\" height=\"90\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/plugins\/woody\/views\/cards\/tpl_1\/thumbnail.tpl_1.jpg\" alt=\"Modèle 1\" \/>\n                <div><small>Modèle 1<\/small><\/div>",
-                                "tpl_2": "<img width=\"90\" height=\"90\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/plugins\/woody\/views\/cards\/tpl_2\/thumbnail.tpl_2.jpg\" alt=\"Modèle 2\" \/>\n                <div><small>Modèle 2<\/small><\/div>"
+                                "tpl_1": "<img width=\"90\" height=\"90\" src=\"PATH_TO_THEME\/dist\/img\/woody\/cards\/tpl_1\/thumbnail.tpl_1.jpg\" alt=\"Modèle 1\" \/>\n                <div><small>Modèle 1<\/small><\/div>",
+                                "tpl_2": "<img width=\"90\" height=\"90\" src=\"PATH_TO_THEME\/dist\/img\/woody\/cards\/tpl_2\/thumbnail.tpl_2.jpg\" alt=\"Modèle 2\" \/>\n                <div><small>Modèle 2<\/small><\/div>"
                             },
                             "allow_null": 0,
                             "other_choice": 0,
@@ -707,6 +664,32 @@
                             "default_value": "",
                             "layout": "vertical",
                             "return_format": "value"
+                        },
+                        {
+                            "key": "field_woodytpl_content_selection_tpl_1",
+                            "label": "Modèles",
+                            "name": "woody_tpl",
+                            "type": "radio",
+                            "wrapper": {
+                                "width": "100",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "tpl_1": "<img width=\"90\" height=\"90\" src=\"PATH_TO_THEME\/dist\/img\/woody\/blocks\/content_selection\/tpl_1\/thumbnail.tpl_1.jpg\" alt=\"Modèle 1\" \/>\n                    <div><small>Modèle 1<\/small><\/div>"
+                            },
+                            "required": 0,
+                            "instructions": "",
+                            "allow_null": 1,
+                            "other_choice": 0,
+                            "save_other_choice": 0,
+                            "layout": 0,
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": "",
+                            "return_format": 0
                         }
                     ],
                     "min": "",
@@ -718,25 +701,6 @@
                     "label": "Video",
                     "display": "block",
                     "sub_fields": [
-                        {
-                            "key": "field_5a85ad12143ea",
-                            "label": "Nom du bloc pour l'administration",
-                            "name": "admin_group_name",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
-                        },
                         {
                             "key": "field_5a6b3e22883d6",
                             "label": "Contenu",
@@ -824,23 +788,30 @@
                             "endpoint": 0
                         },
                         {
-                            "key": "field_5a6b3e4a883d8",
-                            "label": "Affichage",
-                            "name": "display_fullwidth",
-                            "type": "true_false",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
+                            "key": "field_woodytpl_video_element_tpl_1",
+                            "label": "Modèles",
+                            "name": "woody_tpl",
+                            "type": "radio",
                             "wrapper": {
-                                "width": "50",
+                                "width": "100",
                                 "class": "",
                                 "id": ""
                             },
-                            "message": "Afficher sur toute la largeur de l'écran",
-                            "default_value": 0,
-                            "ui": 0,
-                            "ui_on_text": "",
-                            "ui_off_text": ""
+                            "choices": {
+                                "tpl_1": "<img width=\"90\" height=\"90\" src=\"PATH_TO_THEME\/dist\/img\/woody\/blocks\/video_element\/tpl_1\/thumbnail.tpl_1.jpg\" alt=\"Modèle 1\" \/>\n                    <div><small>Modèle 1<\/small><\/div>"
+                            },
+                            "required": 0,
+                            "instructions": "",
+                            "allow_null": 1,
+                            "other_choice": 0,
+                            "save_other_choice": 0,
+                            "layout": 0,
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": "",
+                            "return_format": 0
                         }
                     ],
                     "min": "",
@@ -852,25 +823,6 @@
                     "label": "Html brut",
                     "display": "block",
                     "sub_fields": [
-                        {
-                            "key": "field_5a85ad24143eb",
-                            "label": "Nom du bloc pour l'administration",
-                            "name": "admin_group_name",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
-                        },
                         {
                             "key": "field_5a69a4625207b",
                             "label": "Titre",
@@ -908,25 +860,6 @@
                             "toolbar": "basic",
                             "media_upload": 0,
                             "delay": 1
-                        },
-                        {
-                            "key": "field_5a8e7fbaf6054",
-                            "label": "Affichage",
-                            "name": "display_fullwith",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
                         }
                     ],
                     "min": "",
@@ -938,25 +871,6 @@
                     "label": "Fichiers à télécharger",
                     "display": "block",
                     "sub_fields": [
-                        {
-                            "key": "field_5a85ad35143ec",
-                            "label": "Nom du bloc pour l'administration",
-                            "name": "admin_group_name",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
-                        },
                         {
                             "key": "field_5a69a4085207a",
                             "label": "Titre",
@@ -1034,6 +948,32 @@
                                     "maxlength": ""
                                 }
                             ]
+                        },
+                        {
+                            "key": "field_woodytpl_download_files_tpl_1",
+                            "label": "Modèles",
+                            "name": "woody_tpl",
+                            "type": "radio",
+                            "wrapper": {
+                                "width": "100",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "tpl_1": "<img width=\"90\" height=\"90\" src=\"PATH_TO_THEME\/dist\/img\/woody\/blocks\/download_files\/tpl_1\/thumbnail.tpl_1.jpg\" alt=\"Modèle 1\" \/>\n                    <div><small>Modèle 1<\/small><\/div>"
+                            },
+                            "required": 0,
+                            "instructions": "",
+                            "allow_null": 1,
+                            "other_choice": 0,
+                            "save_other_choice": 0,
+                            "layout": 0,
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": "",
+                            "return_format": 0
                         }
                     ],
                     "min": "",
@@ -1045,25 +985,6 @@
                     "label": "Focus",
                     "display": "block",
                     "sub_fields": [
-                        {
-                            "key": "field_5a85ad45143ed",
-                            "label": "Nom du bloc pour l'administration",
-                            "name": "admin_group_name",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
-                        },
                         {
                             "key": "field_5a6aeeba27cb6",
                             "label": "Contenu",
@@ -1174,33 +1095,6 @@
                             "endpoint": 0
                         },
                         {
-                            "key": "field_5a6b33bb37a8b",
-                            "label": "Affichage",
-                            "name": "display_fullwidth",
-                            "type": "true_false",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": [
-                                [
-                                    {
-                                        "field": "field_5a69a645596ca",
-                                        "operator": "==",
-                                        "value": "bg"
-                                    }
-                                ]
-                            ],
-                            "wrapper": {
-                                "width": "33",
-                                "class": "",
-                                "id": ""
-                            },
-                            "message": "Afficher sur toute la largeur de l'écran",
-                            "default_value": 0,
-                            "ui": 0,
-                            "ui_on_text": "",
-                            "ui_off_text": ""
-                        },
-                        {
                             "key": "field_5a69aa466c9ce",
                             "label": "Taille de l'image",
                             "name": "img_size",
@@ -1231,6 +1125,34 @@
                             "ajax": 0,
                             "return_format": "value",
                             "placeholder": ""
+                        },
+                        {
+                            "key": "field_woodytpl_focus_tpl_3",
+                            "label": "Modèles",
+                            "name": "woody_tpl",
+                            "type": "radio",
+                            "wrapper": {
+                                "width": "100",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "tpl_1": "<img width=\"90\" height=\"90\" src=\"PATH_TO_THEME\/dist\/img\/woody\/blocks\/focus\/tpl_1\/thumbnail.tpl_1.jpg\" alt=\"Modèle 1\" \/>\n                    <div><small>Modèle 1<\/small><\/div>",
+                                "tpl_2": "<img width=\"90\" height=\"90\" src=\"PATH_TO_THEME\/dist\/img\/woody\/blocks\/focus\/tpl_2\/thumbnail.tpl_2.jpg\" alt=\"Modèle 2\" \/>\n                    <div><small>Modèle 2<\/small><\/div>",
+                                "tpl_3": "<img width=\"90\" height=\"90\" src=\"PATH_TO_THEME\/dist\/img\/woody\/blocks\/focus\/tpl_3\/thumbnail.tpl_3.jpg\" alt=\"Modèle 3\" \/>\n                    <div><small>Modèle 3<\/small><\/div>"
+                            },
+                            "required": 0,
+                            "instructions": "",
+                            "allow_null": 1,
+                            "other_choice": 0,
+                            "save_other_choice": 0,
+                            "layout": 0,
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": "",
+                            "return_format": 0
                         }
                     ],
                     "min": "",
@@ -2013,23 +1935,30 @@
                             "endpoint": 0
                         },
                         {
-                            "key": "field_5a8e7ff3c93e0",
-                            "label": "Affichage",
-                            "name": "display_fullwidth",
-                            "type": "true_false",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
+                            "key": "field_woodytpl_strong_points_tpl_1",
+                            "label": "Modèles",
+                            "name": "woody_tpl",
+                            "type": "radio",
                             "wrapper": {
-                                "width": "",
+                                "width": "100",
                                 "class": "",
                                 "id": ""
                             },
-                            "message": "Afficher sur toute la largeur de l'écran",
-                            "default_value": 0,
-                            "ui": 0,
-                            "ui_on_text": "",
-                            "ui_off_text": ""
+                            "choices": {
+                                "tpl_1": "<img width=\"90\" height=\"90\" src=\"PATH_TO_THEME\/dist\/img\/woody\/blocks\/strong_points\/tpl_1\/thumbnail.tpl_1.jpg\" alt=\"Modèle 1\" \/>\n                    <div><small>Modèle 1<\/small><\/div>"
+                            },
+                            "required": 0,
+                            "instructions": "",
+                            "allow_null": 1,
+                            "other_choice": 0,
+                            "save_other_choice": 0,
+                            "layout": 0,
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": "",
+                            "return_format": 0
                         }
                     ],
                     "min": "",
@@ -2041,25 +1970,6 @@
                     "label": "Citation",
                     "display": "block",
                     "sub_fields": [
-                        {
-                            "key": "field_5a85ad5c143ee",
-                            "label": "Nom du bloc pour l'administration",
-                            "name": "admin_group_name",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
-                        },
                         {
                             "key": "field_5a6aefc327cba",
                             "label": "Contenu",
@@ -2174,23 +2084,32 @@
                             "endpoint": 0
                         },
                         {
-                            "key": "field_5a8e8016c93e1",
-                            "label": "Affichage",
-                            "name": "display_fullwidth",
-                            "type": "true_false",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
+                            "key": "field_woodytpl_quote_tpl_3",
+                            "label": "Modèles",
+                            "name": "woody_tpl",
+                            "type": "radio",
                             "wrapper": {
-                                "width": "",
+                                "width": "100",
                                 "class": "",
                                 "id": ""
                             },
-                            "message": "Afficher sur toute la largeur de l'écran",
-                            "default_value": 0,
-                            "ui": 0,
-                            "ui_on_text": "",
-                            "ui_off_text": ""
+                            "choices": {
+                                "tpl_1": "<img width=\"90\" height=\"90\" src=\"PATH_TO_THEME\/dist\/img\/woody\/blocks\/quote\/tpl_1\/thumbnail.tpl_1.jpg\" alt=\"Modèle 1\" \/>\n                    <div><small>Modèle 1<\/small><\/div>",
+                                "tpl_2": "<img width=\"90\" height=\"90\" src=\"PATH_TO_THEME\/dist\/img\/woody\/blocks\/quote\/tpl_2\/thumbnail.tpl_2.jpg\" alt=\"Modèle 2\" \/>\n                    <div><small>Modèle 2<\/small><\/div>",
+                                "tpl_3": "<img width=\"90\" height=\"90\" src=\"PATH_TO_THEME\/dist\/img\/woody\/blocks\/quote\/tpl_3\/thumbnail.tpl_3.jpg\" alt=\"Modèle 3\" \/>\n                    <div><small>Modèle 3<\/small><\/div>"
+                            },
+                            "required": 0,
+                            "instructions": "",
+                            "allow_null": 1,
+                            "other_choice": 0,
+                            "save_other_choice": 0,
+                            "layout": 0,
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": "",
+                            "return_format": 0
                         }
                     ],
                     "min": "",
@@ -2238,7 +2157,7 @@
                             "tabs": "visual",
                             "toolbar": "basic",
                             "media_upload": 0,
-                            "delay": 0
+                            "delay": 1
                         },
                         {
                             "key": "field_5a980bc2af6ae",
@@ -2262,6 +2181,51 @@
                             "return_format": "object",
                             "acf_relationship_create": 1,
                             "ui": 1
+                        },
+                        {
+                            "key": "field_5aabda349af20",
+                            "label": "Description",
+                            "name": "description",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_woodytpl_hawwwai_block_tpl_1",
+                            "label": "Modèles",
+                            "name": "woody_tpl",
+                            "type": "radio",
+                            "wrapper": {
+                                "width": "100",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "tpl_1": "<img width=\"90\" height=\"90\" src=\"PATH_TO_THEME\/dist\/img\/woody\/blocks\/hawwwai_block\/tpl_1\/thumbnail.tpl_1.jpg\" alt=\"Modèle 1\" \/>\n                    <div><small>Modèle 1<\/small><\/div>"
+                            },
+                            "required": 0,
+                            "instructions": "",
+                            "allow_null": 1,
+                            "other_choice": 0,
+                            "save_other_choice": 0,
+                            "layout": 0,
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": "",
+                            "return_format": 0
                         }
                     ],
                     "min": "",
@@ -2276,23 +2240,9 @@
     "location": [
         [
             {
-                "param": "post_taxonomy",
+                "param": "post_type",
                 "operator": "==",
-                "value": "page_type:article"
-            }
-        ],
-        [
-            {
-                "param": "post_taxonomy",
-                "operator": "==",
-                "value": "page_type:blog_article"
-            }
-        ],
-        [
-            {
-                "param": "post_taxonomy",
-                "operator": "==",
-                "value": "page_type:basic_page"
+                "value": "post"
             }
         ]
     ],
@@ -2304,5 +2254,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Différents blocs de contenu disponibles sur les pages",
-    "modified": 1521470173
+    "modified": 1526542622
 }

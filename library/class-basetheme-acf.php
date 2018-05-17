@@ -15,7 +15,6 @@ class Basetheme_ACF {
         add_filter('acf/load_field/name=img_size', array($this, 'image_size_acf_load_field'));
         add_filter('acf/load_field/name=woody_card_tpl', array($this, 'woody_card_tpl_acf_load_field'));
         add_filter('acf/load_field/name=content_element', array($this, 'content_element_acf_load_field'));
-        add_filter('acf/fields/flexible_content/layout_title/name=content_element', array($this, 'custom_flexible_content_layout_title'), 10, 4);
     }
 
     function disallow_acf_deactivation($actions, $plugin_file, $plugin_data, $context) {
@@ -123,16 +122,6 @@ class Basetheme_ACF {
         }
 
         return $field;
-    }
-
-    // Rewrite title of content_element rows to display a more readable title chosed by the user himself
-    function custom_flexible_content_layout_title( $title, $field, $layout, $i ){
-
-        $admin_title = get_sub_field('admin_group_name');
-        if(!empty($admin_title)){
-            $title = $admin_title;
-        }
-        return $title;
     }
 
 }
