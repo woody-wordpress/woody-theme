@@ -1,0 +1,146 @@
+{
+    "key": "group_5b04253179424",
+    "title": "Slide",
+    "fields": [
+        {
+            "key": "field_5b0425413bdbf",
+            "label": "Textes",
+            "name": "slide_heading",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5b041c24d0dd7"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
+        },
+        {
+            "key": "field_5b04258d3bdc0",
+            "label": "Type de média",
+            "name": "slide_media_type",
+            "type": "button_group",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "img": "Image",
+                "movie": "Vidéo"
+            },
+            "allow_null": 0,
+            "default_value": "img",
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        {
+            "key": "field_5b0426583bdc1",
+            "label": "Image",
+            "name": "img",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b04258d3bdc0",
+                        "operator": "==",
+                        "value": "img"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "jpg, jpeg, gif, png"
+        },
+        {
+            "key": "field_5b04267c3bdc2",
+            "label": "Vidéo",
+            "name": "movie",
+            "type": "oembed",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b04258d3bdc0",
+                        "operator": "==",
+                        "value": "movie"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "width": "",
+            "height": ""
+        },
+        {
+            "key": "field_5b042d4cd86e7",
+            "label": "Template",
+            "name": "woody_tpl",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": [
+                "choix à réécrire en fonction du yml woody"
+            ],
+            "allow_null": 0,
+            "other_choice": 0,
+            "save_other_choice": 0,
+            "default_value": 0,
+            "layout": "vertical",
+            "return_format": "value"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Slide pour les diaporamas (En-tête + média)",
+    "modified": 1527000895
+}

@@ -1,0 +1,66 @@
+{
+    "key": "group_5b0431f5bbbea",
+    "title": "Focus",
+    "fields": [
+        {
+            "key": "field_5b043208d0f7c",
+            "label": "Slides",
+            "name": "slides",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "block",
+            "button_label": "Ajouter un slide",
+            "sub_fields": [
+                {
+                    "key": "field_5b043241d0f7d",
+                    "label": "Slide",
+                    "name": "slide",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_5b04253179424"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Elément de contenu (Répète le groupe \"Slide\")",
+    "modified": 1527006952
+}

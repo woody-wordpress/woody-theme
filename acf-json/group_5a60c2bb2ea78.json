@@ -2252,7 +2252,7 @@
     "label_placement": "top",
     "instruction_placement": "field",
     "hide_on_screen": "",
-    "active": 1,
+    "active": 0,
     "description": "Différents blocs de contenu disponibles sur les pages",
-    "modified": 1526542622
+    "modified": 1526997418
 }

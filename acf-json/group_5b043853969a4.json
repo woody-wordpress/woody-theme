@@ -1,0 +1,66 @@
+{
+    "key": "group_5b043853969a4",
+    "title": "Fichiers à télécharger",
+    "fields": [
+        {
+            "key": "field_5b04385cf155c",
+            "label": "Fichiers",
+            "name": "files",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "Ajouter un fichier",
+            "sub_fields": [
+                {
+                    "key": "field_5b043869f155d",
+                    "label": "Fichier",
+                    "name": "file",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_5b042b2f42591"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Répète le groupe \"Fichier\"",
+    "modified": 1527003412
+}

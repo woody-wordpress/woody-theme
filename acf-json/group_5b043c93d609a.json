@@ -1,0 +1,98 @@
+{
+    "key": "group_5b043c93d609a",
+    "title": "Background parameters",
+    "fields": [
+        {
+            "key": "field_5b043ca4a6fe3",
+            "label": "Couleur de fond",
+            "name": "background_color",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "color_primary": "Couleur principale",
+                "color_secondary": "Couleur secondaire",
+                "color_black": "Noir",
+                "color_darkgray": "Gris foncé",
+                "color_lightgray": "Gris clair"
+            },
+            "allow_null": 1,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        {
+            "key": "field_5b043d94a6fe4",
+            "label": "Image de fond",
+            "name": "background_img",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "jpg, jpeg, png"
+        },
+        {
+            "key": "field_5b043dbea6fe5",
+            "label": "Opacité de l'image de fond",
+            "name": "background_img_opacity",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "100": "100%",
+                "75": "75%",
+                "50": "50%",
+                "25": "25%",
+                "10": "10%"
+            },
+            "allow_null": 0,
+            "default_value": 100,
+            "layout": "horizontal",
+            "return_format": "value"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Permet de personnaliser le fond d'une section (couleur \/ image)",
+    "modified": 1527004760
+}

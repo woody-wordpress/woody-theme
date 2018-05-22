@@ -1,0 +1,108 @@
+{
+    "key": "group_5b0433ff0bb17",
+    "title": "FAQ",
+    "fields": [
+        {
+            "key": "field_5b0433ff4eb18",
+            "label": "Titre",
+            "name": "title",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5b04340e4eb19",
+            "label": "Accordéon",
+            "name": "accordion",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "Ajouter une section à l'accordéon",
+            "sub_fields": [
+                {
+                    "key": "field_5b0434294eb1a",
+                    "label": "Section de l'accordéon",
+                    "name": "accordion_section",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_5b04294e31eac"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                }
+            ]
+        },
+        {
+            "key": "field_5b0437076f029",
+            "label": "Template",
+            "name": "woody_tpl",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": [
+                "Il n'y a pas de choix de template disponible pour cet élément"
+            ],
+            "allow_null": 0,
+            "other_choice": 0,
+            "save_other_choice": 0,
+            "default_value": "",
+            "layout": "vertical",
+            "return_format": "value"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Elément de contenu (Titre + Accordéon)",
+    "modified": 1527004242
+}

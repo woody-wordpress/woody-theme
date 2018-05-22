@@ -1,0 +1,89 @@
+{
+    "key": "group_5b043b2171504",
+    "title": "Carte géographique manuelle",
+    "fields": [
+        {
+            "key": "field_5b043b28ab46a",
+            "label": "Marqueurs",
+            "name": "markers",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "block",
+            "button_label": "Ajouter un marqueur",
+            "sub_fields": [
+                {
+                    "key": "field_5b043b3aab46b",
+                    "label": "Marqueur",
+                    "name": "marker",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_5b042ba749e73"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                }
+            ]
+        },
+        {
+            "key": "field_5b043b60ab46c",
+            "label": "Template",
+            "name": "woody_tpl",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": [
+                "Il n'y a pas de choix de template disponible pour cet élément"
+            ],
+            "allow_null": 0,
+            "other_choice": 0,
+            "save_other_choice": 0,
+            "default_value": 0,
+            "layout": "vertical",
+            "return_format": "value"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Affiche une carte avec des marqueurs multiples",
+    "modified": 1527004111
+}

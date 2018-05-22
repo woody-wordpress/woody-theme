@@ -1,0 +1,100 @@
+{
+    "key": "group_5b043929b0859",
+    "title": "Sélection de contenu manuelle (grille)",
+    "fields": [
+        {
+            "key": "field_5b043938dfadc",
+            "label": "Contenu",
+            "name": "content_selection",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": [],
+            "filters": [
+                "search",
+                "taxonomy"
+            ],
+            "elements": [
+                "featured_image"
+            ],
+            "min": "",
+            "max": "",
+            "return_format": "object",
+            "acf_relationship_create": 0
+        },
+        {
+            "key": "field_5b043995dfadd",
+            "label": "Template de la grille",
+            "name": "woody_tpl",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": [
+                "Il n'y a pas de choix de template disponible pour cet élément"
+            ],
+            "allow_null": 0,
+            "other_choice": 0,
+            "save_other_choice": 0,
+            "default_value": 0,
+            "layout": "vertical",
+            "return_format": "value"
+        },
+        {
+            "key": "field_5b0439c6dfade",
+            "label": "Template des cartes",
+            "name": "woody_card_tpl",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "tpl_1": "<img width=\"90\" height=\"90\" src=\"PATH_TO_THEME\/dist\/img\/woody\/cards\/tpl_1\/thumbnail.tpl_1.jpg\" alt=\"Modèle 1\" \/>\n                <div><small>Modèle 1<\/small><\/div>",
+                "tpl_2": "<img width=\"90\" height=\"90\" src=\"PATH_TO_THEME\/dist\/img\/woody\/cards\/tpl_2\/thumbnail.tpl_2.jpg\" alt=\"Modèle 2\" \/>\n                <div><small>Modèle 2<\/small><\/div>"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "save_other_choice": 0,
+            "default_value": 0,
+            "layout": "vertical",
+            "return_format": "value"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Sélection de pages du site + choix de templates de grille et de carte",
+    "modified": 1527004177
+}

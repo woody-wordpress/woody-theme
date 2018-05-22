@@ -1,0 +1,45 @@
+{
+    "key": "group_5b0434b1ad43c",
+    "title": "Point fort",
+    "fields": [
+        {
+            "key": "field_5b0434b27cfc3",
+            "label": "Point fort",
+            "name": "feature",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5b041c24d0dd7"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Elément de contenu permettant d'ajouter icône + texte (Répète le groupe \"En-tête\")",
+    "modified": 1527005274
+}
