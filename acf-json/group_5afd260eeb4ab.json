@@ -557,71 +557,6 @@
                     "return_format": "value"
                 },
                 {
-                    "key": "field_5afd3d01ee316",
-                    "label": "Agencement 2 colonnes",
-                    "name": "column_display_layout",
-                    "type": "button_group",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_5afd2c9616ecd",
-                                "operator": "==",
-                                "value": "grid_col2"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "choices": {
-                        "50_50": "50% | 50%",
-                        "33_66": "33% | 66%",
-                        "66_33": "66% | 33%",
-                        "25_75": "25% | 75%",
-                        "75_25": "75% | 25%"
-                    },
-                    "allow_null": 0,
-                    "default_value": "",
-                    "layout": "horizontal",
-                    "return_format": "value"
-                },
-                {
-                    "key": "field_5afd3dd5ee317",
-                    "label": "Agencement 3 colonnes",
-                    "name": "column_display_layout",
-                    "type": "button_group",
-                    "instructions": "Pour une grille 3 colonnes",
-                    "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_5afd2c9616ecd",
-                                "operator": "==",
-                                "value": "grid_col3"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "choices": {
-                        "33_33_33": "33% | 33% | 33%",
-                        "50_25_25": "50% | 25% | 25%",
-                        "25_25_50": "25% | 25% | 50%",
-                        "25_50_25": "25% | 25% | 50%"
-                    },
-                    "allow_null": 0,
-                    "default_value": "",
-                    "layout": "horizontal",
-                    "return_format": "value"
-                },
-                {
                     "key": "field_5afd2ce516ece",
                     "label": "Afficher sur toute la largeur de l'écran",
                     "name": "display_fullwidth",
@@ -811,5 +746,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1527109074
+    "modified": 1527109174
 }
