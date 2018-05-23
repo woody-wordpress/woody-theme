@@ -779,30 +779,6 @@
             "endpoint": 0
         },
         {
-            "key": "field_5b042bb10f9de",
-            "label": "Image",
-            "name": "img",
-            "type": "image",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "array",
-            "preview_size": "thumbnail",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": "jpeg, jpg, png"
-        },
-        {
             "key": "field_5b042c040f9e1",
             "label": "Titre",
             "name": "title",
@@ -839,6 +815,45 @@
             "maxlength": "",
             "rows": 3,
             "new_lines": "br"
+        },
+        {
+            "key": "field_5b042bb10f9de",
+            "label": "Image",
+            "name": "img",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "jpeg, jpg, png"
+        },
+        {
+            "key": "field_5b05205f97c50",
+            "label": "Lien",
+            "name": "link",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
         }
     ],
     "location": [
@@ -858,5 +873,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Créer un marqueur  (Cloné dans le groupe \"Carte géo manuelle\")",
-    "modified": 1527002007
+    "modified": 1527062692
 }

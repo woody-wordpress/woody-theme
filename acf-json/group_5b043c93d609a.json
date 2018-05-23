@@ -36,7 +36,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -60,7 +60,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -94,5 +94,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Permet de personnaliser le fond d'une section (couleur \/ image)",
-    "modified": 1527004760
+    "modified": 1527061918
 }

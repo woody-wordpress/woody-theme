@@ -69,7 +69,7 @@
                 "id": ""
             },
             "default_value": "",
-            "tabs": "visual",
+            "tabs": "all",
             "toolbar": "full",
             "media_upload": 1,
             "delay": 1
@@ -92,5 +92,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Editeur wysiwyg \/ code html",
-    "modified": 1527007017
+    "modified": 1527061381
 }

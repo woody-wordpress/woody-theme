@@ -3,6 +3,22 @@
     "title": "Sélection de contenu manuelle (grille)",
     "fields": [
         {
+            "key": "field_5b0517e51107b",
+            "label": "Contenu",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
             "key": "field_5b043938dfadc",
             "label": "Contenu",
             "name": "content_selection",
@@ -30,6 +46,22 @@
             "max": "",
             "return_format": "object",
             "acf_relationship_create": 0
+        },
+        {
+            "key": "field_5b0517f11107c",
+            "label": "Mise en page",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
         },
         {
             "key": "field_5b043995dfadd",
@@ -96,5 +128,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Sélection de pages du site + choix de templates de grille et de carte",
-    "modified": 1527004177
+    "modified": 1527060532
 }

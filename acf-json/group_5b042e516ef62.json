@@ -3,6 +3,22 @@
     "title": "Citation",
     "fields": [
         {
+            "key": "field_5b0516cfb5599",
+            "label": "Contenu",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
             "key": "field_5b042e9e78181",
             "label": "Texte",
             "name": "text",
@@ -65,6 +81,22 @@
             "maxlength": ""
         },
         {
+            "key": "field_5b0516dfb559a",
+            "label": "Mise en page",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
             "key": "field_5b042ef3910cb",
             "label": "Template",
             "name": "woody_tpl",
@@ -105,5 +137,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Portrait + Texte + Signature)",
-    "modified": 1527006704
+    "modified": 1527060218
 }

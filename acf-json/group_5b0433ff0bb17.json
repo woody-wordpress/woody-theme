@@ -3,6 +3,22 @@
     "title": "FAQ",
     "fields": [
         {
+            "key": "field_5b05170c5fa21",
+            "label": "Contenu",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
             "key": "field_5b0433ff4eb18",
             "label": "Titre",
             "name": "title",
@@ -37,7 +53,7 @@
             "collapsed": "",
             "min": 0,
             "max": 0,
-            "layout": "table",
+            "layout": "row",
             "button_label": "Ajouter une section à l'accordéon",
             "sub_fields": [
                 {
@@ -62,6 +78,22 @@
                     "prefix_name": 0
                 }
             ]
+        },
+        {
+            "key": "field_5b05171b5fa22",
+            "label": "Mise en page",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
         },
         {
             "key": "field_5b0437076f029",
@@ -104,5 +136,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Titre + Accordéon)",
-    "modified": 1527004242
+    "modified": 1527062400
 }

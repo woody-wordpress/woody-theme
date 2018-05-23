@@ -3,6 +3,22 @@
     "title": "Slide",
     "fields": [
         {
+            "key": "field_5b051862b4402",
+            "label": "Textes",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
             "key": "field_5b0425413bdbf",
             "label": "Textes",
             "name": "slide_heading",
@@ -22,6 +38,22 @@
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0
+        },
+        {
+            "key": "field_5b051889b4403",
+            "label": "Médias",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
         },
         {
             "key": "field_5b04258d3bdc0",
@@ -102,6 +134,22 @@
             "height": ""
         },
         {
+            "key": "field_5b05189bb4404",
+            "label": "Mise en page",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
             "key": "field_5b042d4cd86e7",
             "label": "Template",
             "name": "woody_tpl",
@@ -142,5 +190,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Slide pour les diaporamas (En-tête + média)",
-    "modified": 1527000895
+    "modified": 1527060658
 }

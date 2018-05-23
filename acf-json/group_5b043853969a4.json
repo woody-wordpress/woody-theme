@@ -18,7 +18,7 @@
             "collapsed": "",
             "min": 0,
             "max": 0,
-            "layout": "table",
+            "layout": "row",
             "button_label": "Ajouter un fichier",
             "sub_fields": [
                 {
@@ -62,5 +62,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Répète le groupe \"Fichier\"",
-    "modified": 1527003412
+    "modified": 1527062435
 }

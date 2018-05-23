@@ -42,8 +42,8 @@
         {
             "key": "field_5b04475f63df2",
             "label": "Contenu",
-            "name": "contenu",
-            "type": "text",
+            "name": "",
+            "type": "tab",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -52,11 +52,8 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "placement": "top",
+            "endpoint": 0
         },
         {
             "key": "field_5b04314f27b84",
@@ -140,5 +137,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Liste de photos)",
-    "modified": 1527007107
+    "modified": 1527060341
 }

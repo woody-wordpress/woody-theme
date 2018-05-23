@@ -40,6 +40,6 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": 1,
-    "description": "Elément de contenu permettant d'ajouter icône + texte (Répète le groupe \"En-tête\")",
-    "modified": 1527005274
+    "description": "Elément de contenu permettant d'ajouter icône + texte (Clone du groupe \"En-tête\")",
+    "modified": 1527060409
 }

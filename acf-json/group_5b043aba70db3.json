@@ -3,6 +3,22 @@
     "title": "Sélection de contenu manuelle (slides)",
     "fields": [
         {
+            "key": "field_5b051836d3a5c",
+            "label": "Contenu",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
             "key": "field_5b043acb38031",
             "label": "Contenu",
             "name": "content_selection",
@@ -30,6 +46,22 @@
             "max": "",
             "return_format": "object",
             "acf_relationship_create": 0
+        },
+        {
+            "key": "field_5b051845d3a5d",
+            "label": "Mise en page",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
         },
         {
             "key": "field_5b043aed38032",
@@ -72,5 +104,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Sélection de pages du site + template de slide",
-    "modified": 1527004161
+    "modified": 1527060572
 }
