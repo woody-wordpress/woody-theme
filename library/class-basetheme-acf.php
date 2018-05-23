@@ -13,9 +13,9 @@ class Basetheme_ACF {
         // Overriding field img_size
         // See https://www.advancedcustomfields.com/resources/acf-load_field/ for more informations
         add_filter('acf/load_field/name=img_size', array($this, 'image_size_acf_load_field'));
-        // add_filter('acf/load_field/name=woody_card_tpl', array($this, 'woody_card_tpl_acf_load_field'));
-        // add_filter('acf/load_field/name=content_element', array($this, 'content_element_acf_load_field'));
         add_filter('acf/load_field/name=woody_tpl', array($this, 'woody_tpl_acf_load_field'));
+        add_filter('acf/load_field/name=section_layout', array($this, 'section_layout_acf_load_field'));
+
     }
 
     function disallow_acf_deactivation($actions, $plugin_file, $plugin_data, $context) {
@@ -69,6 +69,17 @@ class Basetheme_ACF {
         $field['choices'] = [];
         $woody = new Woody();
         $components = $woody->getTemplatesByAcfGroup($field['parent']);
+        if(empty($components)) return;
+        foreach ($components as $key => $component) {
+            $field['choices'][$key] = '<img class="img-responsive" src="' . $component['thumbnails']['small'] . '" alt="' . $key . '"/> ';
+        }
+        return $field;
+    }
+
+    function section_layout_acf_load_field($field){
+        $field['choices'] = [];
+        $woody = new Woody();
+        $components = $woody->getTemplatesByAcfGroup($field['key']);
         if(empty($components)) return;
         foreach ($components as $key => $component) {
             $field['choices'][$key] = '<img class="img-responsive" src="' . $component['thumbnails']['small'] . '" alt="' . $key . '"/> ';
