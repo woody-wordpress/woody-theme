@@ -64,70 +64,16 @@ class Basetheme_ACF {
     //     return $field;
     // }
 
-    /**
-    * Creating a new radio field 'woody_tpl' based on availables templates in the woody plugin
-    **/
-    // function content_element_acf_load_field($field){
-    //     // Get every layouts from the 'content_element_field'
-    //     foreach ($field['layouts'] as $key => $layout) {
-    //         // Create woody object => all we need to work
-    //         $woody = new Woody($layout['name']);
-    //         $woody_templates = $woody->getTemplates();
-    //         if(!empty($woody_templates)){
-    //             // If there's templates in the woody object,
-    //             // we fill an array 'choices' with woody's values
-    //             $choices = [];
-    //             foreach ($woody_templates as $key => $template) {
-    //                 $thumbs_folder = PATH_TO_THEME . '/dist/img/woody/' . $template['thumbnails']['small']['relative'];
-    //                 $choices[$template['version']] =
-    //                 '<img width="90" height="90" src="' . $thumbs_folder . '" alt="' . $template['name'] . '" />
-    //                 <div><small>' . $template['name'] . '</small></div>';
-    //             }
-    //
-    //             //Register field woody_tpl
-    //             $field_register = [
-    //                 'ID' => 'field_woodytpl_' . $layout['name'] . '_' . $key,
-    //                 'key' => 'field_woodytpl_' . $layout['name'] . '_' . $key,
-    //                 'label' => 'Modèles',
-    //                 'name' => 'woody_tpl',
-    //                 'type' => 'radio',
-    //                 'parent' => $field['key'],
-    //                 'menu_order' => 10,
-    //                 'wrapper' => [
-    //                     'width' => '100',
-    //                     'class' => '',
-    //                     'id' => ''
-    //                 ],
-    //                 'choices' => $choices,
-    //                 '_name' => 'woody_tpl',
-    //                 '_prepare' => 0,
-    //                 '_valid' => 1,
-    //                 'required' => 0,
-    //                 'instructions' => '',
-    //                 'allow_null' => 1,
-    //                 'other_choice' => 0,
-    //                 'save_other_choice' => 0,
-    //                 'layout' => 0,
-    //                 'class' => '',
-    //                 'default_value' => '',
-    //                 'placeholder' => '',
-    //                 'prepend' => '',
-    //                 'append' => '',
-    //                 'maxlength' => '',
-    //                 'parent_layout' => $layout['key'],
-    //                 'return_format' => 0
-    //             ];
-    //
-    //             $field['layouts'][$layout['key']]['sub_fields'][] = $field_register;
-    //         }
-    //     }
-    //
-    //     return $field;
-    // }
 
     function woody_tpl_acf_load_field($field){
-        
-        d($field['parent']);
+        $field['choices'] = [];
+        $woody = new Woody();
+        $components = $woody->getTemplatesByAcfGroup($field['parent']);
+        if(empty($components)) return;
+        foreach ($components as $key => $component) {
+            $field['choices'][$key] = '<img class="img-responsive" src="' . $component['thumbnails']['small'] . '" alt="' . $key . '"/> ';
+        }
+        d($field);
         return $field;
     }
 

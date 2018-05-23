@@ -6,10 +6,34 @@
 
     <main class="section page">
         <div class="wrapper">
-
-
             <div class="content grid-container">
-                
+                {% for key, section in post.get_field('section') %}
+                    {% include[woody_parts[section.section_layout]] %}
+
+                    <pre>
+                        {{ dump(woody_parts) }}
+                    </pre>
+                    {% if section.icon | default or section.pretitle | default or (section.title | default and section.display_title | default) or section.subtitle | default or section.description | default %}
+                        <div class="section-heading">
+                            {% if section.icon | default %}
+                                <span class="section-pretitle">{{ section.icon }}</span>
+                            {% endif %}
+                            {% if section.pretitle | default %}
+                                <span class="section-pretitle">{{ section.pretitle }}</span>
+                            {% endif %}
+                            {% if section.title | default and section.display_title | default  %}
+                                <h2 class="section-title">{{ section.title }}</h2>
+                            {% endif %}
+                            {% if section.subtitle | default %}
+                                <span class="section-pretitle">{{ section.subtitle }}</span>
+                            {% endif %}
+                            {% if section.description | default %}
+                                <span class="section-pretitle">{{ section.description }}</span>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+
+                {% endfor %}
             </div>
         </div>
         <!-- wrapper -->
