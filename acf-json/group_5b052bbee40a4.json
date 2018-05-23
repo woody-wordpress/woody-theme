@@ -1,9 +1,9 @@
 {
-    "key": "group_5b043929b0859",
-    "title": "Sélection de contenu manuelle (grille)",
+    "key": "group_5b052bbee40a4",
+    "title": "En-tête de page",
     "fields": [
         {
-            "key": "field_5b0517e51107b",
+            "key": "field_5b052d9aea19c",
             "label": "Contenu",
             "name": "",
             "type": "tab",
@@ -19,10 +19,10 @@
             "endpoint": 0
         },
         {
-            "key": "field_5b043938dfadc",
-            "label": "Contenu",
-            "name": "content_selection",
-            "type": "relationship",
+            "key": "field_5b052bbab3867",
+            "label": "En-tête",
+            "name": "heading",
+            "type": "clone",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -31,24 +31,16 @@
                 "class": "",
                 "id": ""
             },
-            "post_type": [
-                "page"
+            "clone": [
+                "group_5b041c24d0dd7"
             ],
-            "taxonomy": [],
-            "filters": [
-                "search",
-                "taxonomy"
-            ],
-            "elements": [
-                "featured_image"
-            ],
-            "min": "",
-            "max": "",
-            "return_format": "object",
-            "acf_relationship_create": 0
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
         },
         {
-            "key": "field_5b0517f11107c",
+            "key": "field_5b052da8ea19d",
             "label": "Mise en page",
             "name": "",
             "type": "tab",
@@ -64,8 +56,8 @@
             "endpoint": 0
         },
         {
-            "key": "field_5b043995dfadd",
-            "label": "Template de la grille",
+            "key": "field_5b052d70ea19b",
+            "label": "Template",
             "name": "woody_tpl",
             "type": "radio",
             "instructions": "",
@@ -77,35 +69,12 @@
                 "id": ""
             },
             "choices": [
-                "Il n'y a pas de choix de template disponible pour cet élément"
+                "Il n'y a aucun choix disponible pour cet élément"
             ],
             "allow_null": 0,
             "other_choice": 0,
             "save_other_choice": 0,
-            "default_value": 0,
-            "layout": "vertical",
-            "return_format": "value"
-        },
-        {
-            "key": "field_5b0439c6dfade",
-            "label": "Template des cartes",
-            "name": "woody_card_tpl",
-            "type": "radio",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": [
-                "Override this"
-            ],
-            "allow_null": 0,
-            "other_choice": 0,
-            "save_other_choice": 0,
-            "default_value": 0,
+            "default_value": "",
             "layout": "vertical",
             "return_format": "value"
         }
@@ -115,17 +84,17 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "post"
+                "value": "page"
             }
         ]
     ],
     "menu_order": 0,
-    "position": "normal",
+    "position": "acf_after_title",
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": 1,
-    "description": "Sélection de pages du site + choix de templates de grille et de carte",
-    "modified": 1527065465
+    "description": "",
+    "modified": 1527066054
 }

@@ -409,14 +409,14 @@
                         },
                         "5b04451f46546": {
                             "key": "5b04451f46546",
-                            "name": "content_selection",
+                            "name": "content_selection_slides",
                             "label": "Sélection de contenu manuelle (slides)",
                             "display": "block",
                             "sub_fields": [
                                 {
                                     "key": "field_5b04453546547",
                                     "label": "Sélection de contenu manuelle (slides)",
-                                    "name": "content_selection",
+                                    "name": "content_selection_slides",
                                     "type": "clone",
                                     "instructions": "",
                                     "required": 0,
@@ -440,14 +440,14 @@
                         },
                         "5b0444e846544": {
                             "key": "5b0444e846544",
-                            "name": "content_selection",
+                            "name": "content_selection_grid",
                             "label": "Sélection de contenu manuelle (grille)",
                             "display": "block",
                             "sub_fields": [
                                 {
                                     "key": "field_5b04450146545",
                                     "label": "Sélection de contenu manuelle (grille)",
-                                    "name": "content_selection",
+                                    "name": "content_selection_grid",
                                     "type": "clone",
                                     "instructions": "",
                                     "required": 0,
@@ -551,7 +551,7 @@
                     "key": "field_5afd3d01ee316",
                     "label": "Agencement 2 colonnes",
                     "name": "column_display_layout",
-                    "type": "radio",
+                    "type": "button_group",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
@@ -576,8 +576,6 @@
                         "75_25": "75% | 25%"
                     },
                     "allow_null": 0,
-                    "other_choice": 0,
-                    "save_other_choice": 0,
                     "default_value": "",
                     "layout": "horizontal",
                     "return_format": "value"
@@ -586,7 +584,7 @@
                     "key": "field_5afd3dd5ee317",
                     "label": "Agencement 3 colonnes",
                     "name": "column_display_layout",
-                    "type": "radio",
+                    "type": "button_group",
                     "instructions": "Pour une grille 3 colonnes",
                     "required": 0,
                     "conditional_logic": [
@@ -610,8 +608,6 @@
                         "25_50_25": "25% | 25% | 50%"
                     },
                     "allow_null": 0,
-                    "other_choice": 0,
-                    "save_other_choice": 0,
                     "default_value": "",
                     "layout": "horizontal",
                     "return_format": "value"
@@ -655,6 +651,136 @@
                     "layout": "block",
                     "prefix_label": 0,
                     "prefix_name": 0
+                },
+                {
+                    "key": "field_5b052c0336230",
+                    "label": "Marges intérieures",
+                    "name": "section_paddings",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5b052c3b36231",
+                            "label": "Au dessus",
+                            "name": "section_padding_top",
+                            "type": "button_group",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": [
+                                "Aucune",
+                                "Petite",
+                                "Moyenne",
+                                "Grande"
+                            ],
+                            "allow_null": 0,
+                            "default_value": 2,
+                            "layout": "horizontal",
+                            "return_format": "value"
+                        },
+                        {
+                            "key": "field_5b052c9136232",
+                            "label": "En dessous",
+                            "name": "section_padding_bottom",
+                            "type": "button_group",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": [
+                                "Aucune",
+                                "Petite",
+                                "Moyenne",
+                                "Grande"
+                            ],
+                            "allow_null": 0,
+                            "default_value": 2,
+                            "layout": "horizontal",
+                            "return_format": "value"
+                        }
+                    ]
+                },
+                {
+                    "key": "field_5b052cb536233",
+                    "label": "Marges extérieures",
+                    "name": "section_margins",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5b052ccf36234",
+                            "label": "Au dessus",
+                            "name": "section_margin_top",
+                            "type": "button_group",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": [
+                                "Aucune",
+                                "Petite",
+                                "Moyenne",
+                                "Grande"
+                            ],
+                            "allow_null": 0,
+                            "default_value": 0,
+                            "layout": "horizontal",
+                            "return_format": "value"
+                        },
+                        {
+                            "key": "field_5b052cfd36235",
+                            "label": "En dessous",
+                            "name": "section_margin_bottom",
+                            "type": "button_group",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": [
+                                "Aucune",
+                                "Petite",
+                                "Moyenne",
+                                "Grande"
+                            ],
+                            "allow_null": 0,
+                            "default_value": 0,
+                            "layout": "horizontal",
+                            "return_format": "value"
+                        }
+                    ]
                 }
             ]
         }
@@ -676,5 +802,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1527061954
+    "modified": 1527066212
 }

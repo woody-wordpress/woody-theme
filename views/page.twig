@@ -6,39 +6,10 @@
 
     <main class="section page">
         <div class="wrapper">
-            {% if post.display_media == 'none' %}
-                {% include '/parts/hero-sections/header-basic.twig' %}
-            {% elseif post.display_media == 'img' or post.display_media == 'mov' %}
-                {% if post.template == 'fullwidth' %}
-                    {% include '/parts/hero-sections/header-media-fullwidth.twig' %}
-                {% elseif post.template == 'media_left' %}
-                    {% include '/parts/hero-sections/header-media-left.twig' %}
-                {% elseif post.template == 'media_right' %}
-                    {% include '/parts/hero-sections/header-media-right.twig' %}
-                {% endif %}
-            {% endif %}
+
 
             <div class="content grid-container">
-                {% for key, element in post.get_field('content_element') %}
-
-                    {% if element.img_size %}
-                        {# if element have an image size option, we set variables to populate srcset attribute #}
-                        {% set srcset_small = element.img_size ~ '_small' %}
-                        {% set srcset_medium = element.img_size ~ '_medium' %}
-                        {% set srcset_xlarge = element.img_size ~ '_xlarge' %}
-                    {% endif %}
-                    <div class="element_{{ element.acf_fc_layout }}{% if element.display_fullwidth == true %} section-fullwidth{% endif %}">
-
-                        {% if element.woody_tpl | default %}
-                            {% set index = element.woody_tpl | split('tpl_').1 %}
-                            {% set layout = element.acf_fc_layout %}
-                            {% include[post.woody_parts[layout][index - 1]] %}
-                        {% else %}
-                            {% include['parts/fields/empty.twig'] %}
-                        {% endif %}
-                    </div>
-
-                {% endfor %}
+                
             </div>
         </div>
         <!-- wrapper -->
