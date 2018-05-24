@@ -4,13 +4,13 @@
     {# Admin Edit #}
     <a target="_self" href="{{ post.edit_link() }}">Modifier la page actuelle</a>
 
-    <main class="section page">
-        <div class="wrapper">
-            <div class="content grid-container">
-                {% for key, section in the_sections %}
-                    {{ section }}
-                {% endfor %}
+    <main class="content-type-page">
+        <div class="content-wrapper">
+            {% for key, section in the_sections %}
+            <div class="page-section page-section-{{ key }}">
+                {{ section }}
             </div>
+            {% endfor %}
         </div>
         <!-- wrapper -->
     </main>

@@ -61,7 +61,22 @@ foreach ($sections as $key => $section) {
 
 
     // Vars to display the section properly
-    $display = [];
+    $display = [
+        'display_fullwidth' => (!empty($section['display_fullwidth'])) ? $section['display_fullwidth'] : '',
+        'background' => [
+            'color' => (!empty($section['background_color'])) ? $section['background_color'] : '',
+            'img' => (!empty($section['background_img'])) ? $section['background_img'] : '',
+            'img_opacity' => (!empty($section['background_img_opacity'])) ? $section['background_img_opacity'] : '',
+        ],
+        'paddings' => [
+            'top' => (!empty($section['section_paddings']['section_padding_top'])) ? $section['section_paddings']['section_padding_top'] : '',
+            'bottom' => (!empty($section['section_paddings']['section_padding_bottom'])) ? $section['section_paddings']['section_padding_bottom'] : '',
+        ],
+        'margins' => [
+            'top' => (!empty($section['section_margins']['section_margin_top'])) ? $section['section_margins']['section_margin_top'] : '',
+            'bottom' => (!empty($section['section_margins']['section_margin_bottom'])) ? $section['section_margins']['section_margin_bottom'] : '',
+        ]
+    ];
 
     // Section_content components
     $components = [];
@@ -78,10 +93,6 @@ foreach ($sections as $key => $section) {
     ];
 
     $context['the_sections'][] = Timber::compile($context['woody_components']['section-section_full-tpl_1'], $the_section);
-
-    // print '<pre>';
-    // print_r($the_section);
-    // exit();
 }
 
 // print '<pre>';
