@@ -15,6 +15,7 @@ $plugins = [
     'bea-media-analytics/bea-media-analytics.php',
     'bea-sanitize-filename/bea-sanitize-filename.php',
     'rocket-lazy-load/rocket-lazy-load.php',
+    'enhanced-media-library/enhanced-media-library.php',
 ];
 
 $debug_plugins = [
