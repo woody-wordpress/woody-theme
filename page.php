@@ -5,29 +5,28 @@ $context = Timber::get_context();
 // Creating Timber object to access twig keys
 $context['post'] = new TimberPost();
 
-// Get the TimberPost availables methods
-$post_methods = get_class_methods('TimberPost');
-
-// Creating object Timber Image for hero_image and post thumbnail
-// $context['post']->img = new TimberImage($post->hero_img);
+// Creating object Timber Image for post thumbnail
 // $context['post']->thumbnail = new TimberImage($post->_thumbnail_id);
 
+// Declare Woody and get the list of woody components
 $woody = new Woody();
 $context['woody_components'] = $woody->getTwigsPaths();
 
-// Get the sections of the page
+// Create a empty array to fill with rendered twig components and get the sections of the page
+$context['sections'] = [];
 $sections = $context['post']->get_field('section');
 
-$context['sections'] = [];
-
 foreach ($sections as $key => $section) {
-    // Foreach section put the post data into vars to pass them to related twig tpl
 
+    // ** DEBUG **//
     // print '<pre>';
     // print_r($section);
     // exit();
+    // ** DEBUG **//
 
-    // Section_heading data
+    // Foreach section, fill vars to display in the woody's components
+
+    // Data for section header
     $header = [
         'display_title' => (!empty($section['display_title'])) ? $section['display_title'] : '',
         'title' => (!empty($section['title'])) ? $section['title'] : '',
@@ -41,7 +40,7 @@ foreach ($sections as $key => $section) {
     }
 
 
-    // Section_footer data
+    // Data for section footer
     $footer = [];
     if(!empty($section['links'])){
         foreach ($section['links'] as $key => $link_data) {
@@ -60,7 +59,7 @@ foreach ($sections as $key => $section) {
     }
 
 
-    // Vars to display the section properly
+    // Data for display options
     $display = [
         'display_fullwidth' => (!empty($section['display_fullwidth'])) ? $section['display_fullwidth'] : '',
         'background' => [
@@ -78,28 +77,33 @@ foreach ($sections as $key => $section) {
         ]
     ];
 
-    // Section_content components
+    // Render the section layout with rendered woody's components
     $components = [];
-
     if(!empty($section['section_layout'])){
         $the_layout = Timber::compile($context['woody_components'][$section['section_layout']], $components);
     }
 
+    // Fill $the_section var with rendered woody's components to fill $context['the_sections']
     $the_section = [
         'header' => $the_header,
         'footer' => $the_footer,
         'layout' => $the_layout,
         'display' => $display
     ];
-
     $context['the_sections'][] = Timber::compile($context['woody_components']['section-section_full-tpl_1'], $the_section);
 }
 
+// ** DEBUG **//
+// Get the TimberPost availables methods
+//$post_methods = get_class_methods('TimberPost');
 // print '<pre>';
+// print_r($post_methods);
 // // print_r($context['woody_components']['section-section_full-tpl_1']);
 // // print_r($context['the_sections']);
 // // print_r($context['woody_components']);
 // // print_r($context['post']);
 // exit();
+// ** DEBUG **//
 
+// Render the $context in page.twig
 Timber::render('page.twig', $context);
