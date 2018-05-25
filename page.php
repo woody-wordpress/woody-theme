@@ -18,12 +18,6 @@ $sections = $context['post']->get_field('section');
 
 foreach ($sections as $key => $section) {
 
-    // ** DEBUG **//
-    // print '<pre>';
-    // print_r($section);
-    // exit();
-    // ** DEBUG **//
-
     // Foreach section, fill vars to display in the woody's components
 
     // Data for section header
@@ -59,23 +53,117 @@ foreach ($sections as $key => $section) {
     }
 
 
-    // Data for display options
+    // Creating data for display options
     $display = [
-        'display_fullwidth' => (!empty($section['display_fullwidth'])) ? $section['display_fullwidth'] : '',
-        'background' => [
-            'color' => (!empty($section['background_color'])) ? $section['background_color'] : '',
-            'img' => (!empty($section['background_img'])) ? $section['background_img'] : '',
-            'img_opacity' => (!empty($section['background_img_opacity'])) ? $section['background_img_opacity'] : '',
-        ],
-        'paddings' => [
-            'top' => (!empty($section['section_paddings']['section_padding_top'])) ? $section['section_paddings']['section_padding_top'] : '',
-            'bottom' => (!empty($section['section_paddings']['section_padding_bottom'])) ? $section['section_paddings']['section_padding_bottom'] : '',
-        ],
-        'margins' => [
-            'top' => (!empty($section['section_margins']['section_margin_top'])) ? $section['section_margins']['section_margin_top'] : '',
-            'bottom' => (!empty($section['section_margins']['section_margin_bottom'])) ? $section['section_margins']['section_margin_bottom'] : '',
-        ]
+        'background_img' => (!empty($section['background_img'])) ? $section['background_img'] : '',
     ];
+
+    $classes_array = [];
+
+    // Set the container class
+    if($section['display_fullwidth'] === 0){
+        $classes_array[] = 'grid-container';
+    }
+
+    // Set the background-color class
+    if(!empty($section['background_color'])){
+        switch ($section['background_color']) {
+            case 'color_primary':
+                $classes_array[] = 'bg-primary';
+            break;
+            case 'color_secondary':
+                $classes_array[] = 'bg-secondary';
+            break;
+            case 'color_black':
+                $classes_array[] = 'bg-black';
+            break;
+            case 'color_darkgray':
+                $classes_array[] = 'bg-darkgray';
+            break;
+            case 'color_lightgray':
+                $classes_array[] = 'bg-lightgray';
+            break;
+        }
+    }
+
+    // Set the background-image opacity class
+    if(!empty($section['background_img_opacity'])){
+        switch ($section['background_img_opacity']) {
+            case '75':
+                $classes_array[] = 'bgimg-op75';
+            break;
+            case '50':
+                $classes_array[] = 'bgimg-op50';
+            break;
+            case '25':
+                $classes_array[] = 'bgimg-op25';
+            break;
+            case '10':
+                $classes_array[] = 'bgimg-op10';
+            break;
+        }
+    }
+
+    // Set the padding's classes
+    if(!empty($section['section_paddings']['section_padding_top'])){
+        switch ($section['section_paddings']['section_padding_top']) {
+            case '1':
+                $classes_array[] = 'padd-top-sm';
+            break;
+            case '2':
+                $classes_array[] = 'padd-top-md';
+            break;
+            case '3':
+                $classes_array[] = 'padd-top-lg';
+            break;
+        }
+    }
+
+    if(!empty($section['section_paddings']['section_padding_bottom'])){
+        switch ($section['section_paddings']['section_padding_bottom']) {
+            case '1':
+                $classes_array[] = 'padd-bottom-sm';
+            break;
+            case '2':
+                $classes_array[] = 'padd-bottom-md';
+            break;
+            case '3':
+                $classes_array[] = 'padd-bottom-lg';
+            break;
+        }
+    }
+
+    // Set the margin's classes
+    if(!empty($section['section_margins']['section_margin_top'])){
+        switch ($section['section_margins']['section_margin_top']) {
+            case '1':
+                $classes_array[] = 'marg-top-sm';
+            break;
+            case '2':
+                $classes_array[] = 'marg-top-md';
+            break;
+            case '3':
+                $classes_array[] = 'marg-top-lg';
+            break;
+        }
+    }
+
+    if(!empty($section['section_margins']['section_margin_bottom'])){
+        switch ($section['section_margins']['section_margin_bottom']) {
+            case '1':
+                $classes_array[] = 'marg-bottom-sm';
+            break;
+            case '2':
+                $classes_array[] = 'marg-bottom-md';
+            break;
+            case '3':
+                $classes_array[] = 'marg-bottom-lg';
+            break;
+        }
+    }
+
+    // Implode classes
+    $display['classes'] = implode(' ', $classes_array);
 
     // Render the section layout with rendered woody's components
     $components = [];
@@ -91,6 +179,12 @@ foreach ($sections as $key => $section) {
         'display' => $display
     ];
     $context['the_sections'][] = Timber::compile($context['woody_components']['section-section_full-tpl_1'], $the_section);
+
+    // ** DEBUG **//
+    // print '<pre>';
+    // print_r($display);
+    // exit();
+    // ** DEBUG **//
 }
 
 // ** DEBUG **//
