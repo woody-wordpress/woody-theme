@@ -14,6 +14,12 @@
  * @since FoundationPress 1.0.0
  */
 
+/** Plugins Activation **/
+require_once( 'library/plugins-activation.php' );
+
+/** Plugins Options **/
+require_once( 'library/plugins-options.php' );
+
 /** Various clean up functions */
 require_once( 'library/cleanup.php' );
 
@@ -61,9 +67,11 @@ require_once( 'library/taxonomies.php' );
 /**
 ** Get Timber parameters file
 **/
-require_once( 'library/class-basetheme-timber.php' );
-$basetheme_timber = new Basetheme_Timber();
-$basetheme_timber->execute();
+if (class_exists('TimberSite')) {
+    require_once( 'library/class-basetheme-timber.php' );
+    $basetheme_timber = new Basetheme_Timber();
+    $basetheme_timber->execute();
+}
 
 /**
 ** Improve ACF
