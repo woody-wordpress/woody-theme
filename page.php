@@ -61,7 +61,7 @@ foreach ($sections as $key => $section) {
     $classes_array = [];
 
     // Set the container class
-    if($section['display_fullwidth'] === 0){
+    if(empty($section['display_fullwidth'])){
         $classes_array[] = 'grid-container';
     }
 
