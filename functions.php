@@ -60,6 +60,9 @@ require_once( 'library/responsive-images.php' );
 /** Create taxonomies **/
 require_once( 'library/taxonomies.php' );
 
+/** Sync ACF fields **/
+require_once( 'library/acf_sync.php' );
+
 
 /** If your site requires protocol relative url's for theme assets, uncomment the line below */
 // require_once( 'library/class-basetheme-protocol-relative-theme-assets.php' );
