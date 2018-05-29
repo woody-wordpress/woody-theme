@@ -26,10 +26,12 @@ class Basetheme_ACF {
         $field['choices'] = [];
         $woody = new Woody();
         $components = $woody->getTemplatesByAcfGroup($field['parent']);
-        if(empty($components)) return $field;
-        foreach ($components as $key => $component) {
-            $field['choices'][$key] = '<img class="img-responsive" src="' . $component['thumbnails']['small'] . '" alt="' . $key . '"/> ';
+        if(!empty($components)){
+            foreach ($components as $key => $component) {
+                $field['choices'][$key] = '<img class="img-responsive" src="' . $component['thumbnails']['small'] . '" alt="' . $key . '"/> ';
+            }
         }
+
         return $field;
     }
 
@@ -37,9 +39,10 @@ class Basetheme_ACF {
         $field['choices'] = [];
         $woody = new Woody();
         $components = $woody->getTemplatesByAcfGroup($field['key']);
-        if(empty($components)) return $field;
-        foreach ($components as $key => $component) {
-            $field['choices'][$key] = '<img class="img-responsive" src="' . $component['thumbnails']['small'] . '" alt="' . $key . '"/> ';
+        if(!empty($components)){
+            foreach ($components as $key => $component) {
+                $field['choices'][$key] = '<img class="img-responsive" src="' . $component['thumbnails']['small'] . '" alt="' . $key . '"/> ';
+            }
         }
         return $field;
     }
