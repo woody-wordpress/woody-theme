@@ -1,6 +1,24 @@
 {
     "key": "group_5b041c24d0dd7",
     "title": "En-tête de contenu",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "En-tête générique avec Icône - Sur-titre - Titre - Sous-titre - Description",
+    "modified": 1527575306,
     "fields": [
         {
             "key": "field_5b041d61adb72",
@@ -776,23 +794,5 @@
             "media_upload": 0,
             "delay": 1
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "En-tête générique avec Icône - Sur-titre - Titre - Sous-titre - Description",
-    "modified": 1527061329
+    ]
 }

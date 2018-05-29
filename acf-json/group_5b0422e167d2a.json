@@ -1,6 +1,24 @@
 {
     "key": "group_5b0422e167d2a",
     "title": "Bouton \/ Lien",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Une icône et un champ lien utilisés en clone dans d'autres groupes",
+    "modified": 1527575306,
     "fields": [
         {
             "key": "field_5b0422ed7d07b",
@@ -715,23 +733,5 @@
             },
             "return_format": "array"
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Une icône et un champ lien utilisés en clone dans d'autres groupes",
-    "modified": 1526999628
+    ]
 }

@@ -1,6 +1,24 @@
 {
     "key": "group_5b043929b0859",
     "title": "Sélection de contenu manuelle (grille)",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Sélection de pages du site + choix de templates de grille et de carte",
+    "modified": 1527575308,
     "fields": [
         {
             "key": "field_5b0517e51107b",
@@ -63,29 +81,7 @@
             "placement": "top",
             "endpoint": 0
         },
-        {
-            "key": "field_5b043995dfadd",
-            "label": "Template de la grille",
-            "name": "woody_tpl",
-            "type": "radio",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": [
-                "Il n'y a pas de choix de template disponible pour cet élément"
-            ],
-            "allow_null": 0,
-            "other_choice": 0,
-            "save_other_choice": 0,
-            "default_value": 0,
-            "layout": "vertical",
-            "return_format": "value"
-        },
+        null,
         {
             "key": "field_5b0439c6dfade",
             "label": "Template des cartes",
@@ -109,23 +105,5 @@
             "layout": "vertical",
             "return_format": "value"
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Sélection de pages du site + choix de templates de grille et de carte",
-    "modified": 1527065465
+    ]
 }

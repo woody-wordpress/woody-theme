@@ -1,6 +1,27 @@
 {
     "key": "group_5aa82e711d0d4",
     "title": "Type de bloc Hawwwai",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "hawwwai_block"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "categories",
+        "tags"
+    ],
+    "active": 1,
+    "description": "Sélection du type de bloc hawwwai basée sur la taxonomie \"hawwwai_block_type\" (Météo, Social, Marées, ...)",
+    "modified": 1527575308,
     "fields": [
         {
             "key": "field_5aa82e78df61b",
@@ -24,26 +45,5 @@
             "return_format": "id",
             "multiple": 0
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "hawwwai_block"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "acf_after_title",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": [
-        "categories",
-        "tags"
-    ],
-    "active": 1,
-    "description": "Sélection du type de bloc hawwwai basée sur la taxonomie \"hawwwai_block_type\" (Météo, Social, Marées, ...)",
-    "modified": 1521193546
+    ]
 }

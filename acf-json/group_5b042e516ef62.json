@@ -1,6 +1,24 @@
 {
     "key": "group_5b042e516ef62",
     "title": "Citation",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Elément de contenu (Portrait + Texte + Signature)",
+    "modified": 1527575306,
     "fields": [
         {
             "key": "field_5b0516cfb5599",
@@ -109,9 +127,9 @@
                 "class": "",
                 "id": ""
             },
-            "choices": [
-                "Il n'y a pas de choix disponible pour cet élément"
-            ],
+            "choices": {
+                "blocks-quote-tpl_1": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/blocks\/quote\/tpl_1\/thumbnail.png\" alt=\"blocks-quote-tpl_1\"\/> "
+            },
             "allow_null": 0,
             "other_choice": 0,
             "save_other_choice": 0,
@@ -119,23 +137,5 @@
             "layout": "vertical",
             "return_format": "value"
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Elément de contenu (Portrait + Texte + Signature)",
-    "modified": 1527060218
+    ]
 }

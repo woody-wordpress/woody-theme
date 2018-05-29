@@ -1,6 +1,24 @@
 {
     "key": "group_5b0434b1ad43c",
     "title": "Point fort",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Elément de contenu permettant d'ajouter icône + texte (Clone du groupe \"En-tête\")",
+    "modified": 1527575307,
     "fields": [
         {
             "key": "field_5b0434b27cfc3",
@@ -23,23 +41,5 @@
             "prefix_label": 0,
             "prefix_name": 0
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Elément de contenu permettant d'ajouter icône + texte (Clone du groupe \"En-tête\")",
-    "modified": 1527060409
+    ]
 }

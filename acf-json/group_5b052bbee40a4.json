@@ -1,6 +1,24 @@
 {
     "key": "group_5b052bbee40a4",
     "title": "En-tête de page",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1527575306,
     "fields": [
         {
             "key": "field_5b052d9aea19c",
@@ -68,9 +86,10 @@
                 "class": "",
                 "id": ""
             },
-            "choices": [
-                "Il n'y a aucun choix disponible pour cet élément"
-            ],
+            "choices": {
+                "blocks-slide-tpl_02": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/blocks\/slide\/tpl_02\/thumbnail.png\" alt=\"blocks-slide-tpl_02\"\/> ",
+                "blocks-slide-tpl_01": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/blocks\/slide\/tpl_01\/thumbnail.png\" alt=\"blocks-slide-tpl_01\"\/> "
+            },
             "allow_null": 0,
             "other_choice": 0,
             "save_other_choice": 0,
@@ -78,23 +97,5 @@
             "layout": "vertical",
             "return_format": "value"
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "page"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "acf_after_title",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "",
-    "modified": 1527066054
+    ]
 }
