@@ -1,24 +1,6 @@
 {
     "key": "group_5b043c93d609a",
     "title": "Background parameters",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Permet de personnaliser le fond d'une section (couleur \/ image)",
-    "modified": 1527575305,
     "fields": [
         {
             "key": "field_5b043ca4a6fe3",
@@ -34,11 +16,11 @@
                 "id": ""
             },
             "choices": {
-                "color_primary": "Couleur principale",
-                "color_secondary": "Couleur secondaire",
-                "color_black": "Noir",
-                "color_darkgray": "Gris foncé",
-                "color_lightgray": "Gris clair"
+                "bg-primary": "Couleur principale",
+                "bg-secondary": "Couleur secondaire",
+                "bg-black": "Noir",
+                "bg-darkgray": "Gris foncé",
+                "bg-lightgray": "Gris clair"
             },
             "allow_null": 1,
             "default_value": "",
@@ -83,16 +65,34 @@
                 "id": ""
             },
             "choices": {
-                "100": "100%",
-                "75": "75%",
-                "50": "50%",
-                "25": "25%",
-                "10": "10%"
+                "bgimg-op100": "100%",
+                "bgimg-op75": "75%",
+                "bgimg-op50": "50%",
+                "bgimg-op25": "25%",
+                "bgimg-op10": "10%"
             },
             "allow_null": 0,
             "default_value": 100,
             "layout": "horizontal",
             "return_format": "value"
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Permet de personnaliser le fond d'une section (couleur \/ image)",
+    "modified": 1527578669
 }

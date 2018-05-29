@@ -1,24 +1,6 @@
 {
     "key": "group_5afd260eeb4ab",
     "title": "Sections",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "page"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "field",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1527575307,
     "fields": [
         {
             "key": "field_5afd2c6916ecb",
@@ -642,12 +624,12 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "choices": [
-                                "Aucune",
-                                "Petite",
-                                "Moyenne",
-                                "Grande"
-                            ],
+                            "choices": {
+                                "padd-top-none": "Aucune",
+                                "padd-top-sm": "Petite",
+                                "padd-top-md": "Moyenne",
+                                "padd-top-lg": "Grande"
+                            },
                             "allow_null": 0,
                             "default_value": 2,
                             "layout": "horizontal",
@@ -666,12 +648,12 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "choices": [
-                                "Aucune",
-                                "Petite",
-                                "Moyenne",
-                                "Grande"
-                            ],
+                            "choices": {
+                                "padd-bottom-none": "Aucune",
+                                "padd-bottom-sm": "Petite",
+                                "padd-bottom-md": "Moyenne",
+                                "padd-bottom-lg": "Grande"
+                            },
                             "allow_null": 0,
                             "default_value": 2,
                             "layout": "horizontal",
@@ -707,12 +689,12 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "choices": [
-                                "Aucune",
-                                "Petite",
-                                "Moyenne",
-                                "Grande"
-                            ],
+                            "choices": {
+                                "marg-top-none": "Aucune",
+                                "marg-top-sm": "Petite",
+                                "marg-top-md": "Moyenne",
+                                "marg-top-lg": "Grande"
+                            },
                             "allow_null": 0,
                             "default_value": 0,
                             "layout": "horizontal",
@@ -731,12 +713,12 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "choices": [
-                                "Aucune",
-                                "Petite",
-                                "Moyenne",
-                                "Grande"
-                            ],
+                            "choices": {
+                                "marg-bottom-none": "Aucune",
+                                "marg-bottom-sm": "Petite",
+                                "marg-bottom-md": "Moyenne",
+                                "marg-bottom-lg": "Grande"
+                            },
                             "allow_null": 0,
                             "default_value": 0,
                             "layout": "horizontal",
@@ -746,5 +728,23 @@
                 }
             ]
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "field",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
+    "modified": 1527578808
 }

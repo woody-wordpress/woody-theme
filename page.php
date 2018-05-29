@@ -20,38 +20,15 @@ foreach ($sections as $key => $section) {
 
     // Foreach section, fill vars to display in the woody's components
 
-    // Data for section header
-    $header = [
-        'display_title' => (!empty($section['display_title'])) ? $section['display_title'] : '',
-        'title' => (!empty($section['title'])) ? $section['title'] : '',
-        'pretitle' => (!empty($section['pretitle'])) ? $section['pretitle'] : '',
-        'subtitle' => (!empty($section['subtitle'])) ? $section['subtitle'] : '',
-        'icon' => (!empty($section['icon'])) ? $section['icon'] : '',
-        'description' => (!empty($section['description'])) ? $section['description'] : ''
-    ];
+    // Send $section to section's header tpl
     if(!empty($header)){
-        $the_header = Timber::compile($context['woody_components']['section-section_header-tpl_1'], $header);
+        $the_header = Timber::compile($context['woody_components']['section-section_header-tpl_1'], $section);
     }
 
-
-    // Data for section footer
-    $footer = [];
-    if(!empty($section['links'])){
-        foreach ($section['links'] as $key => $link_data) {
-            $footer['buttons'][] = [
-                'icon' => (!empty($link_data['icon'])) ? $link_data['icon'] :'',
-                'link' => [
-                    'title' => (!empty($link_data['link']['title'])) ? $link_data['link']['title'] :'',
-                    'url' => (!empty($link_data['link']['url'])) ? $link_data['link']['url'] :'',
-                    'target' => (!empty($link_data['link']['target'])) ? $link_data['link']['target'] :'',
-                ]
-            ];
-        }
-    }
+    // Send $section to section's footer tpl
     if(!empty($footer)){
-        $the_footer = Timber::compile($context['woody_components']['section-section_footer-tpl_1'], $footer);
+        $the_footer = Timber::compile($context['woody_components']['section-section_footer-tpl_1'], $section);
     }
-
 
     // Creating data for display options
     $display = [
@@ -63,103 +40,6 @@ foreach ($sections as $key => $section) {
     // Set the container class
     if(empty($section['display_fullwidth'])){
         $classes_array[] = 'grid-container';
-    }
-
-    // Set the background-color class
-    if(!empty($section['background_color'])){
-        switch ($section['background_color']) {
-            case 'color_primary':
-                $classes_array[] = 'bg-primary';
-            break;
-            case 'color_secondary':
-                $classes_array[] = 'bg-secondary';
-            break;
-            case 'color_black':
-                $classes_array[] = 'bg-black';
-            break;
-            case 'color_darkgray':
-                $classes_array[] = 'bg-darkgray';
-            break;
-            case 'color_lightgray':
-                $classes_array[] = 'bg-lightgray';
-            break;
-        }
-    }
-
-    // Set the background-image opacity class
-    if(!empty($section['background_img_opacity'])){
-        switch ($section['background_img_opacity']) {
-            case '75':
-                $classes_array[] = 'bgimg-op75';
-            break;
-            case '50':
-                $classes_array[] = 'bgimg-op50';
-            break;
-            case '25':
-                $classes_array[] = 'bgimg-op25';
-            break;
-            case '10':
-                $classes_array[] = 'bgimg-op10';
-            break;
-        }
-    }
-
-    // Set the padding's classes
-    if(!empty($section['section_paddings']['section_padding_top'])){
-        switch ($section['section_paddings']['section_padding_top']) {
-            case '1':
-                $classes_array[] = 'padd-top-sm';
-            break;
-            case '2':
-                $classes_array[] = 'padd-top-md';
-            break;
-            case '3':
-                $classes_array[] = 'padd-top-lg';
-            break;
-        }
-    }
-
-    if(!empty($section['section_paddings']['section_padding_bottom'])){
-        switch ($section['section_paddings']['section_padding_bottom']) {
-            case '1':
-                $classes_array[] = 'padd-bottom-sm';
-            break;
-            case '2':
-                $classes_array[] = 'padd-bottom-md';
-            break;
-            case '3':
-                $classes_array[] = 'padd-bottom-lg';
-            break;
-        }
-    }
-
-    // Set the margin's classes
-    if(!empty($section['section_margins']['section_margin_top'])){
-        switch ($section['section_margins']['section_margin_top']) {
-            case '1':
-                $classes_array[] = 'marg-top-sm';
-            break;
-            case '2':
-                $classes_array[] = 'marg-top-md';
-            break;
-            case '3':
-                $classes_array[] = 'marg-top-lg';
-            break;
-        }
-    }
-
-    if(!empty($section['section_margins']['section_margin_bottom'])){
-        switch ($section['section_margins']['section_margin_bottom']) {
-            case '1':
-                $classes_array[] = 'marg-bottom-sm';
-            break;
-            case '2':
-                $classes_array[] = 'marg-bottom-md';
-            break;
-            case '3':
-                $classes_array[] = 'marg-bottom-lg';
-            break;
-        }
     }
 
     // Implode classes
