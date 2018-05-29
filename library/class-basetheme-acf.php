@@ -11,7 +11,7 @@ class Basetheme_ACF {
     protected function register_hooks() {
         add_filter('plugin_action_links', array($this, 'disallow_acf_deactivation'), 10, 4);
         add_filter('acf/load_field/name=woody_tpl', array($this, 'woody_tpl_acf_load_field'));
-        add_filter('acf/load_field/name=section_layout', array($this, 'section_layout_acf_load_field'));
+        // add_filter('acf/load_field/name=section_layout', array($this, 'section_layout_acf_load_field'));
 
     }
 
@@ -25,10 +25,15 @@ class Basetheme_ACF {
     function woody_tpl_acf_load_field($field){
         $field['choices'] = [];
         $woody = new Woody();
-        $components = $woody->getTemplatesByAcfGroup($field['parent']);
+        switch ($field['key']) {
+            case 'field_5afd2c9616ecd':
+                $components = $woody->getTemplatesByAcfGroup($field['key']);
+            break;
+            default: $components = $woody->getTemplatesByAcfGroup($field['parent']);
+        }
         if(!empty($components)){
             foreach ($components as $key => $component) {
-                $field['choices'][$key] = '<img class="img-responsive" src="' . $component['thumbnails']['small'] . '" alt="' . $key . '"/> ';
+                $field['choices'][$key] = '<img class="img-responsive" src="/app/themes/site-theme/dist/img/woody/' . $component['thumbnails']['small'] . '" alt="' . $key . '" width="150" height="150"/> ';
             }
         }
 
@@ -38,7 +43,9 @@ class Basetheme_ACF {
     function section_layout_acf_load_field($field){
         $field['choices'] = [];
         $woody = new Woody();
-        $components = $woody->getTemplatesByAcfGroup($field['key']);
+        print '<pre>';
+        print_r($field);
+        exit;
         if(!empty($components)){
             foreach ($components as $key => $component) {
                 $field['choices'][$key] = '<img class="img-responsive" src="' . $component['thumbnails']['small'] . '" alt="' . $key . '"/> ';

@@ -462,7 +462,7 @@
                 {
                     "key": "field_5afd2c9616ecd",
                     "label": "Grille",
-                    "name": "section_layout",
+                    "name": "woody_tpl",
                     "type": "radio",
                     "instructions": "",
                     "required": 1,
@@ -473,19 +473,19 @@
                         "id": ""
                     },
                     "choices": {
-                        "grids-grid_4_cols-tpl_1": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_4_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_4_cols-tpl_1\"\/> ",
-                        "grids-grid_5_cols-tpl_1": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_5_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_5_cols-tpl_1\"\/> ",
-                        "grids-grid_2_cols-tpl_1": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_2_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_1\"\/> ",
-                        "grids-grid_2_cols-tpl_2": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_2_cols\/tpl_2\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_2\"\/> ",
-                        "grids-grid_2_cols-tpl_5": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_2_cols\/tpl_5\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_5\"\/> ",
-                        "grids-grid_2_cols-tpl_4": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_2_cols\/tpl_4\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_4\"\/> ",
-                        "grids-grid_2_cols-tpl_3": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_2_cols\/tpl_3\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_3\"\/> ",
-                        "grids-grid_3_cols-tpl_1": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_3_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_1\"\/> ",
-                        "grids-grid_3_cols-tpl_2": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_3_cols\/tpl_2\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_2\"\/> ",
-                        "grids-grid_3_cols-tpl_4": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_3_cols\/tpl_4\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_4\"\/> ",
-                        "grids-grid_3_cols-tpl_3": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_3_cols\/tpl_3\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_3\"\/> ",
-                        "grids-grid_1_cols-tpl_1": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_1_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_1_cols-tpl_1\"\/> ",
-                        "grids-grid_6_cols-tpl_1": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_6_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_6_cols-tpl_1\"\/> "
+                        "grids-grid_4_cols-tpl_1": "<img class=\"img-responsive\" src=\"grids\/grid_4_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_4_cols-tpl_1\"\/> ",
+                        "grids-grid_5_cols-tpl_1": "<img class=\"img-responsive\" src=\"grids\/grid_5_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_5_cols-tpl_1\"\/> ",
+                        "grids-grid_2_cols-tpl_1": "<img class=\"img-responsive\" src=\"grids\/grid_2_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_1\"\/> ",
+                        "grids-grid_2_cols-tpl_2": "<img class=\"img-responsive\" src=\"grids\/grid_2_cols\/tpl_2\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_2\"\/> ",
+                        "grids-grid_2_cols-tpl_5": "<img class=\"img-responsive\" src=\"grids\/grid_2_cols\/tpl_5\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_5\"\/> ",
+                        "grids-grid_2_cols-tpl_4": "<img class=\"img-responsive\" src=\"grids\/grid_2_cols\/tpl_4\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_4\"\/> ",
+                        "grids-grid_2_cols-tpl_3": "<img class=\"img-responsive\" src=\"grids\/grid_2_cols\/tpl_3\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_3\"\/> ",
+                        "grids-grid_3_cols-tpl_1": "<img class=\"img-responsive\" src=\"grids\/grid_3_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_1\"\/> ",
+                        "grids-grid_3_cols-tpl_2": "<img class=\"img-responsive\" src=\"grids\/grid_3_cols\/tpl_2\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_2\"\/> ",
+                        "grids-grid_3_cols-tpl_4": "<img class=\"img-responsive\" src=\"grids\/grid_3_cols\/tpl_4\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_4\"\/> ",
+                        "grids-grid_3_cols-tpl_3": "<img class=\"img-responsive\" src=\"grids\/grid_3_cols\/tpl_3\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_3\"\/> ",
+                        "grids-grid_1_cols-tpl_1": "<img class=\"img-responsive\" src=\"grids\/grid_1_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_1_cols-tpl_1\"\/> ",
+                        "grids-grid_6_cols-tpl_1": "<img class=\"img-responsive\" src=\"grids\/grid_6_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_6_cols-tpl_1\"\/> "
                     },
                     "allow_null": 0,
                     "other_choice": 0,
@@ -684,5 +684,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1527581543
+    "modified": 1527591774
 }

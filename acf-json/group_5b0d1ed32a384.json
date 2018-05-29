@@ -68,7 +68,15 @@
                     "type": "group",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5b0d2800bb187",
+                                "operator": "==",
+                                "value": "custom_content"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -239,14 +247,19 @@
                                 "id": ""
                             },
                             "choices": {
-                                "title": "titre",
-                                "subtitle": "subtitle",
-                                "thematic": "Tag thématique",
+                                "subtitle": "Sous-titre",
+                                "tags_1": "Taxonomie principale",
+                                "tags_2": "Taxonomie secondaire",
                                 "author": "Auteur"
                             },
                             "allow_custom": 0,
                             "save_custom": 0,
-                            "default_value": [],
+                            "default_value": [
+                                "subtitle",
+                                "tags_1",
+                                "tags_2",
+                                "author"
+                            ],
                             "layout": "vertical",
                             "toggle": 0,
                             "return_format": "value"
@@ -310,5 +323,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1527586420
+    "modified": 1527591184
 }

@@ -43,8 +43,8 @@ foreach ($sections as $key => $section) {
 
     // Render the section layout with rendered woody's components
     $components = [];
-    if(!empty($section['section_layout'])){
-        $the_layout = Timber::compile($context['woody_components'][$section['section_layout']], $components);
+    if(!empty($section['woody_tpl'])){
+        $the_layout = Timber::compile($context['woody_components'][$section['woody_tpl']], $components);
     }
 
     // Fill $the_section var with rendered woody's components to fill $context['the_sections']
@@ -58,7 +58,7 @@ foreach ($sections as $key => $section) {
 
     // ** DEBUG **//
     // print '<pre>';
-    // print_r($display);
+    // print_r($section);
     // exit();
     // ** DEBUG **//
 }
