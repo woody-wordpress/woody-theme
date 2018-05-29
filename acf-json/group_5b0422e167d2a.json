@@ -1,24 +1,6 @@
 {
     "key": "group_5b0422e167d2a",
     "title": "Bouton \/ Lien",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Une icône et un champ lien utilisés en clone dans d'autres groupes",
-    "modified": 1527575306,
     "fields": [
         {
             "key": "field_5b0422ed7d07b",
@@ -29,14 +11,14 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
             "default_value": "",
             "save_format": "element",
             "allow_null": 0,
-            "show_preview": 1,
+            "show_preview": 0,
             "enqueue_fa": 0,
             "fa_live_preview": "",
             "choices": {
@@ -727,11 +709,29 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
             "return_format": "array"
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Une icône et un champ lien utilisés en clone dans d'autres groupes",
+    "modified": 1527582472
 }

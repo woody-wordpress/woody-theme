@@ -75,7 +75,7 @@
             "default_value": "",
             "save_format": "element",
             "allow_null": 1,
-            "show_preview": 1,
+            "show_preview": 0,
             "enqueue_fa": 0,
             "fa_live_preview": "",
             "choices": {
@@ -794,5 +794,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "En-tête générique avec Icône - Sur-titre - Titre - Sous-titre - Description",
-    "modified": 1527577675
+    "modified": 1527582496
 }

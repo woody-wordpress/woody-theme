@@ -1,24 +1,6 @@
 {
     "key": "group_5b0433ff0bb17",
     "title": "FAQ",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Elément de contenu (Titre + Accordéon)",
-    "modified": 1527575307,
     "fields": [
         {
             "key": "field_5b05170c5fa21",
@@ -71,7 +53,7 @@
             "collapsed": "",
             "min": 0,
             "max": 0,
-            "layout": "row",
+            "layout": "block",
             "button_label": "Ajouter une section à l'accordéon",
             "sub_fields": [
                 {
@@ -126,9 +108,7 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "blocks-accordion-tpl_1": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/blocks\/accordion\/tpl_1\/thumbnail.png\" alt=\"blocks-accordion-tpl_1\"\/> "
-            },
+            "choices": [],
             "allow_null": 0,
             "other_choice": 0,
             "save_other_choice": 0,
@@ -136,5 +116,23 @@
             "layout": "vertical",
             "return_format": "value"
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Elément de contenu (Titre + Accordéon)",
+    "modified": 1527582146
 }

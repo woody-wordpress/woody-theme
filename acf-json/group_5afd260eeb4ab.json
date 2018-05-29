@@ -15,12 +15,31 @@
                 "class": "",
                 "id": ""
             },
-            "collapsed": "field_5b0422535e4b7",
+            "collapsed": "field_5b0d1dc8907e7",
             "min": 1,
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter une section",
             "sub_fields": [
+                {
+                    "key": "field_5b0d1dc8907e7",
+                    "label": "Titre",
+                    "name": "bo_section_title",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "Titre visible lorsque la section est refermée (uniquement pour le backoffice)",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
                 {
                     "key": "field_5b051c3b6717b",
                     "label": "En-tête & Pied de section",
@@ -36,25 +55,6 @@
                     },
                     "placement": "top",
                     "endpoint": 0
-                },
-                {
-                    "key": "field_5afd3c75ee315",
-                    "label": "Afficher le titre de la section sur le site",
-                    "name": "display_title",
-                    "type": "true_false",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "message": "",
-                    "default_value": 1,
-                    "ui": 1,
-                    "ui_on_text": "",
-                    "ui_off_text": ""
                 },
                 {
                     "key": "field_5b0422535e4b7",
@@ -159,6 +159,37 @@
                             "min": "",
                             "max": ""
                         },
+                        "5b0d21eb9d80a": {
+                            "key": "5b0d21eb9d80a",
+                            "name": "manual_focus",
+                            "label": "Mise en avant manuelle",
+                            "display": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_5b0d22019d80b",
+                                    "label": "Mise en avant",
+                                    "name": "content_selection",
+                                    "type": "clone",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "clone": [
+                                        "group_5b0d1ed32a384"
+                                    ],
+                                    "display": "seamless",
+                                    "layout": "block",
+                                    "prefix_label": 0,
+                                    "prefix_name": 0
+                                }
+                            ],
+                            "min": "",
+                            "max": ""
+                        },
                         "5b04437946534": {
                             "key": "5b04437946534",
                             "name": "free_text",
@@ -252,37 +283,6 @@
                             "min": "",
                             "max": ""
                         },
-                        "5b0444354653a": {
-                            "key": "5b0444354653a",
-                            "name": "focus",
-                            "label": "Focus",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b04443b4653b",
-                                    "label": "Focus",
-                                    "name": "focus",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b0431f5bbbea"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "block",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
-                            ],
-                            "min": "",
-                            "max": ""
-                        },
                         "5b04444c4653c": {
                             "key": "5b04444c4653c",
                             "name": "accordion",
@@ -317,12 +317,12 @@
                         "5b04447d4653e": {
                             "key": "5b04447d4653e",
                             "name": "feature",
-                            "label": "Point fort",
+                            "label": "En-tête",
                             "display": "block",
                             "sub_fields": [
                                 {
                                     "key": "field_5b0444884653f",
-                                    "label": "Point fort",
+                                    "label": "En-tête",
                                     "name": "feature",
                                     "type": "clone",
                                     "instructions": "",
@@ -334,7 +334,7 @@
                                         "id": ""
                                     },
                                     "clone": [
-                                        "group_5b0434b1ad43c"
+                                        "group_5b041c24d0dd7"
                                     ],
                                     "display": "seamless",
                                     "layout": "block",
@@ -407,68 +407,6 @@
                             "min": "",
                             "max": ""
                         },
-                        "5b04451f46546": {
-                            "key": "5b04451f46546",
-                            "name": "content_selection_slides",
-                            "label": "Sélection de contenu manuelle (slides)",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b04453546547",
-                                    "label": "Sélection de contenu manuelle (slides)",
-                                    "name": "content_selection_slides",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b043aba70db3"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "block",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
-                            ],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b0444e846544": {
-                            "key": "5b0444e846544",
-                            "name": "content_selection_grid",
-                            "label": "Sélection de contenu manuelle (grille)",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b04450146545",
-                                    "label": "Sélection de contenu manuelle (grille)",
-                                    "name": "content_selection_grid",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b043929b0859"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "block",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
-                            ],
-                            "min": "",
-                            "max": ""
-                        },
                         "5b04455b46548": {
                             "key": "5b04455b46548",
                             "name": "manual_map",
@@ -501,7 +439,7 @@
                             "max": ""
                         }
                     },
-                    "button_label": "Ajouter un élément",
+                    "button_label": "Ajouter un composant",
                     "min": "",
                     "max": ""
                 },
@@ -746,5 +684,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1527578808
+    "modified": 1527581543
 }

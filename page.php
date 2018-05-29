@@ -21,14 +21,10 @@ foreach ($sections as $key => $section) {
     // Foreach section, fill vars to display in the woody's components
 
     // Send $section to section's header tpl
-    if(!empty($header)){
-        $the_header = Timber::compile($context['woody_components']['section-section_header-tpl_1'], $section);
-    }
+    $the_header = Timber::compile($context['woody_components']['section-section_header-tpl_1'], $section);
 
     // Send $section to section's footer tpl
-    if(!empty($footer)){
-        $the_footer = Timber::compile($context['woody_components']['section-section_footer-tpl_1'], $section);
-    }
+    $the_footer = Timber::compile($context['woody_components']['section-section_footer-tpl_1'], $section);
 
     // Creating data for display options
     $display = [

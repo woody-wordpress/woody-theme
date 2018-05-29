@@ -1,24 +1,6 @@
 {
     "key": "group_5b043853969a4",
     "title": "Fichiers à télécharger",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Répète le groupe \"Fichier\"",
-    "modified": 1527575307,
     "fields": [
         {
             "key": "field_5b04385cf155c",
@@ -36,7 +18,7 @@
             "collapsed": "",
             "min": 0,
             "max": 0,
-            "layout": "row",
+            "layout": "block",
             "button_label": "Ajouter un fichier",
             "sub_fields": [
                 {
@@ -62,5 +44,23 @@
                 }
             ]
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Répète le groupe \"Fichier\"",
+    "modified": 1527582163
 }
