@@ -5,8 +5,6 @@ $context = Timber::get_context();
 // Creating Timber object to access twig keys
 $context['post'] = new TimberPost();
 
-// Creating object Timber Image for post thumbnail
-// $context['post']->thumbnail = new TimberImage($post->_thumbnail_id);
 
 // Declare Woody and get the list of woody components
 $woody = new Woody();
@@ -15,7 +13,28 @@ $context['woody_components'] = $woody->getTwigsPaths();
 /** ****************************
  * Displaying the page's heading
  **************************** **/
+$page_heading = [];
+$page_heading['content'] = get_field('field_5b052bbab3867');
+$page_heading['media_type'] = get_field('field_5b0e5cc3d4b1a');
 
+if($page_heading['media_type'] == 'img'){
+    $page_heading['media'] = get_field('field_5b0e5ddfd4b1b');
+} else{
+    $page_heading['media'] = get_field('field_5b0e5df0d4b1c');
+}
+
+$page_heading['title_as_h1'] = get_field('field_5b0e54ebfa657');
+$page_heading['classes'] = get_field('field_5b0e5ef78f6be');
+
+$page_heading_tpl = get_field('field_5b052d70ea19b');
+
+$context['page_heading'] = Timber::compile($context['woody_components'][$page_heading_tpl], $page_heading);
+
+// ** DEBUG **//
+// print '<pre>';
+// print_r($page_heading['classes']);
+// exit();
+// ** DEBUG **//
 
 /** ************************
  * Displaying the sections
@@ -88,13 +107,6 @@ foreach ($sections as $key => $section) {
         'display' => $display,
     ];
     $context['the_sections'][] = Timber::compile($context['woody_components']['section-section_full-tpl_1'], $the_section);
-
-        // ** DEBUG **//
-        // print '<pre>';
-        // print_r($display);
-        // exit();
-        // ** DEBUG **//
-
 }
 
 // Render the $context in page.twig

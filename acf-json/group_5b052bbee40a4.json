@@ -40,6 +40,105 @@
             "prefix_name": 0
         },
         {
+            "key": "field_5b0e5cc3d4b1a",
+            "label": "Ajouter un média",
+            "name": "media_type",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "img": "Image",
+                "movie": "Vidéo"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "save_other_choice": 0,
+            "default_value": "img",
+            "layout": "vertical",
+            "return_format": "value"
+        },
+        {
+            "key": "field_5b0e5ddfd4b1b",
+            "label": "Image",
+            "name": "img",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b0e5cc3d4b1a",
+                        "operator": "==",
+                        "value": "img"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "70",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_5b0e5df0d4b1c",
+            "label": "Vidéo",
+            "name": "movie",
+            "type": "oembed",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b0e5cc3d4b1a",
+                        "operator": "==",
+                        "value": "movie"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "70",
+                "class": "",
+                "id": ""
+            },
+            "width": 320,
+            "height": 195
+        },
+        {
+            "key": "field_5b0e54ebfa657",
+            "label": "Le titre de l'en-tête est le h1 de la page",
+            "name": "title_as_h1",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_5b052da8ea19d",
             "label": "Mise en page",
             "name": "",
@@ -75,6 +174,30 @@
             "default_value": "",
             "layout": "vertical",
             "return_format": "value"
+        },
+        {
+            "key": "field_5b0e5ef78f6be",
+            "label": "Opacité du média",
+            "name": "background_img_opacity",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "bgimg-op100": "100%",
+                "bgimg-op90": "90%",
+                "bgimg-op75": "75%",
+                "bgimg-op50": "50%"
+            },
+            "allow_null": 0,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value"
         }
     ],
     "location": [
@@ -94,5 +217,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1527578052
+    "modified": 1527666214
 }
