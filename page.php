@@ -45,7 +45,8 @@ $sections = $context['post']->get_field('section');
 
 // Foreach section, fill vars to display in the woody's components
 foreach ($sections as $key => $section) {
-
+    $classes_array = [];
+    $display= [];
     // Send $section to section's header tpl
     $the_header = Timber::compile($context['woody_components']['section-section_header-tpl_1'], $section);
 
@@ -106,6 +107,7 @@ foreach ($sections as $key => $section) {
         'layout' => $the_layout,
         'display' => $display,
     ];
+
     $context['the_sections'][] = Timber::compile($context['woody_components']['section-section_full-tpl_1'], $the_section);
 }
 
