@@ -94,10 +94,12 @@ foreach ($sections as $key => $section) {
     if(!empty($section['section_content'])){
 
         foreach ($section['section_content'] as $key => $layout) {
+            // if($layout['acf_fc_layout'] == 'feature'){
+            //     print '<pre>';
+            //     print_r($layout);
+            //     exit;
+            // }
             $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
-            // print '<pre>';
-            // print_r($layout);
-            // exit;
         }
 
         if(!empty($section['woody_tpl'])){

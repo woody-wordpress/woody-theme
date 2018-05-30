@@ -1,9 +1,9 @@
 {
-    "key": "group_5b0430471a3d6",
-    "title": "Vidéo",
+    "key": "group_5b0ec29dbd905",
+    "title": "Bloc de texte + icône",
     "fields": [
         {
-            "key": "field_5b0ec0eda1e20",
+            "key": "field_5b0ec2bc0a8d0",
             "label": "Contenu",
             "name": "",
             "type": "tab",
@@ -19,10 +19,10 @@
             "endpoint": 0
         },
         {
-            "key": "field_5b043061435ea",
-            "label": "Vidéo",
-            "name": "movie",
-            "type": "oembed",
+            "key": "field_5b0ec29f0a8cf",
+            "label": "En-tête",
+            "name": "heading",
+            "type": "clone",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -31,11 +31,16 @@
                 "class": "",
                 "id": ""
             },
-            "width": "",
-            "height": ""
+            "clone": [
+                "group_5b041c24d0dd7"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
         },
         {
-            "key": "field_5b0ec0faa1e21",
+            "key": "field_5b0ec2c90a8d1",
             "label": "Mise en page",
             "name": "",
             "type": "tab",
@@ -51,7 +56,7 @@
             "endpoint": 0
         },
         {
-            "key": "field_5b0ec105a1e22",
+            "key": "field_5b0ec2d50a8d2",
             "label": "Template",
             "name": "woody_tpl",
             "type": "radio",
@@ -88,6 +93,6 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": 1,
-    "description": "Elément de contenu (Vidéo embed)",
-    "modified": 1527686436
+    "description": "",
+    "modified": 1527686904
 }
