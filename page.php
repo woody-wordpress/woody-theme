@@ -10,6 +10,13 @@ $context['post'] = new TimberPost();
 $woody = new Woody();
 $context['woody_components'] = $woody->getTwigsPaths();
 
+// ** DEBUG **//
+// print '<pre>';
+// print_r($context['woody_components']);
+// exit();
+// ** DEBUG **//
+
+
 /** ****************************
  * Displaying the page's heading
  **************************** **/
@@ -29,12 +36,6 @@ $page_heading['classes'] = get_field('field_5b0e5ef78f6be');
 $page_heading_tpl = get_field('field_5b052d70ea19b');
 
 $context['page_heading'] = Timber::compile($context['woody_components'][$page_heading_tpl], $page_heading);
-
-// ** DEBUG **//
-// print '<pre>';
-// print_r($page_heading['classes']);
-// exit();
-// ** DEBUG **//
 
 /** ************************
  * Displaying the sections
@@ -90,14 +91,18 @@ foreach ($sections as $key => $section) {
     $components = [];
 
     // Get every section_content's layouts in the post
-    if(!empty($section['section_content']))
-    foreach ($section['section_content'] as $key => $layout) {
-        $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+    if(!empty($section['section_content'])){
 
-    }
+        foreach ($section['section_content'] as $key => $layout) {
+            $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            // print '<pre>';
+            // print_r($layout);
+            // exit;
+        }
 
-    if(!empty($section['woody_tpl'])){
-        $the_layout = Timber::compile($context['woody_components'][$section['woody_tpl']], $components);
+        if(!empty($section['woody_tpl'])){
+            $the_layout = Timber::compile($context['woody_components'][$section['woody_tpl']], $components);
+        }
     }
 
     // Fill $the_section var with rendered woody's components to fill $context['the_sections']
