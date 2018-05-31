@@ -1,9 +1,6 @@
 {% extends "base.twig" %}
 
 {% block content %}
-    {# Admin Edit #}
-    <a target="_self" href="{{ post.edit_link() }}">Modifier la page actuelle</a>
-
     <main class="content-type-page">
         <div class="content-wrapper">
             {% if page_heading | default %}

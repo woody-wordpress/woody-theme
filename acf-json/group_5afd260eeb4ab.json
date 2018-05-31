@@ -91,7 +91,7 @@
                         "id": ""
                     },
                     "clone": [
-                        "group_5b043614df4a6"
+                        "field_5b0436150b9d4"
                     ],
                     "display": "seamless",
                     "layout": "block",
@@ -684,5 +684,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1527687137
+    "modified": 1527688936
 }

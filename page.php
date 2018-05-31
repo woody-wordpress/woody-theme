@@ -94,7 +94,7 @@ foreach ($sections as $key => $section) {
     if(!empty($section['section_content'])){
 
         foreach ($section['section_content'] as $key => $layout) {
-            // if($layout['acf_fc_layout'] == 'feature'){
+            // if($layout['acf_fc_layout'] == 'links'){
             //     print '<pre>';
             //     print_r($layout);
             //     exit;
