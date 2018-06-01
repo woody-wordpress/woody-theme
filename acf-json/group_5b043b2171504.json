@@ -16,7 +16,7 @@
                 "id": ""
             },
             "collapsed": "",
-            "min": 0,
+            "min": 1,
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter un marqueur",
@@ -62,5 +62,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Affiche une carte avec des marqueurs multiples",
-    "modified": 1527582126
+    "modified": 1527848138
 }

@@ -32,7 +32,7 @@
                 "id": ""
             },
             "collapsed": "",
-            "min": 0,
+            "min": 1,
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter un contenu",
@@ -323,5 +323,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1527591184
+    "modified": 1527847535
 }

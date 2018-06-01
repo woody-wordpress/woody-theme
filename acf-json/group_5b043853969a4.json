@@ -32,7 +32,7 @@
                 "id": ""
             },
             "collapsed": "",
-            "min": 0,
+            "min": 1,
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter un fichier",
@@ -139,5 +139,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Répète le groupe \"Fichier\"",
-    "modified": 1527690977
+    "modified": 1527848177
 }
