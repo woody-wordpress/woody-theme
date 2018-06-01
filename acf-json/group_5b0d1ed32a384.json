@@ -247,7 +247,10 @@
                                 "id": ""
                             },
                             "choices": {
+                                "pretitle": "Surtitre",
                                 "subtitle": "Sous-titre",
+                                "description": "Description",
+                                "icon": "Icône",
                                 "tags_1": "Taxonomie principale",
                                 "tags_2": "Taxonomie secondaire",
                                 "author": "Auteur"
@@ -255,7 +258,10 @@
                             "allow_custom": 0,
                             "save_custom": 0,
                             "default_value": [
+                                "pretitle",
                                 "subtitle",
+                                "description",
+                                "icon",
                                 "tags_1",
                                 "tags_2",
                                 "author"
@@ -323,5 +329,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1527847535
+    "modified": 1527855162
 }

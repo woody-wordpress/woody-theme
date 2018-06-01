@@ -10,13 +10,6 @@ $context['post'] = new TimberPost();
 $woody = new Woody();
 $context['woody_components'] = $woody->getTwigsPaths();
 
-// ** DEBUG **//
-// print '<pre>';
-// print_r($context['woody_components']);
-// exit();
-// ** DEBUG **//
-
-
 /** ****************************
  * Displaying the page's heading
  **************************** **/
@@ -94,13 +87,88 @@ foreach ($sections as $key => $section) {
     if(!empty($section['section_content'])){
 
         foreach ($section['section_content'] as $key => $layout) {
-            // if($layout['acf_fc_layout'] == 'manual_focus'){
-            //     print '<pre>';
-            //     print_r($layout);
-            //     exit;
-            // }
 
-            $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            // If the layout is a manual content selection, we create the $items array to push it into woody tpls
+            if($layout['acf_fc_layout'] == 'manual_focus'){
+                $the_items = [];
+                foreach ($layout['content_selection'] as $key => $item_wrapper) {
+                    // Selected content is custom
+                    if($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])){
+                        $item = $item_wrapper['custom_content'];
+                        $the_items['items'][$key]['title'] = (!empty($item['title'])) ? $item['title'] : '';
+                        $the_items['items'][$key]['pretitle'] = (!empty($item['pretitle'])) ? $item['pretitle'] : '';
+                        $the_items['items'][$key]['subtitle'] = (!empty($item['subtitle'])) ? $item['subtitle'] : '';
+                        $the_items['items'][$key]['icon'] = (!empty($item['icon'])) ? $item['icon'] : '';
+                        $the_items['items'][$key]['description'] = (!empty($item['description'])) ? $item['description'] : '';
+                        // Get the choice of the media
+                        if($item['media_type'] == 'img' && !empty($item['img'])){
+                            $the_items['items'][$key]['img'] = new TimberImage($item['img']);
+                        } elseif($item['media_type'] == 'movie' && !empty($item['movie'])){
+                            $the_items['items'][$key]['movie'] = $item['movie'];
+                        }
+
+                    // Selected content is an existing post
+                    } elseif($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content'])){
+                        $item = $item_wrapper['existing_content'];
+
+                        if(!empty($item['content_selection'])){
+                            // Search for focus fields and, if empty, search for post field
+                            if(!empty($item['content_selection']->get_field('focus_title'))){
+                                $the_items['items'][$key]['title'] = $item['content_selection']->get_field('focus_title');
+                            } elseif(!empty($item['content_selection']->get_field('title'))){
+                                $the_items['items'][$key]['title'] = $item['content_selection']->get_field('title');
+                            }
+
+                            if(in_array('pretitle', $item['display_elements'])){
+                                if(!empty($item['content_selection']->get_field('focus_pretitle'))){
+                                    $the_items['items'][$key]['pretitle'] = $item['content_selection']->get_field('focus_pretitle');
+                                } elseif(!empty($item['content_selection']->get_field('pretitle'))){
+                                    $the_items['items'][$key]['pretitle'] = $item['content_selection']->get_field('pretitle');
+                                }
+                            }
+
+                            if(in_array('subtitle', $item['display_elements'])){
+                                if(!empty($item['content_selection']->get_field('focus_subtitle'))){
+                                    $the_items['items'][$key]['subtitle'] = $item['content_selection']->get_field('focus_subtitle');
+                                } elseif(!empty($item['content_selection']->get_field('subtitle'))){
+                                    $the_items['items'][$key]['subtitle'] = $item['content_selection']->get_field('subtitle');
+                                }
+                            }
+
+                            if(in_array('icon', $item['display_elements'])){
+                                if(!empty($item['content_selection']->get_field('focus_icon'))){
+                                    $the_items['items'][$key]['icon'] = $item['content_selection']->get_field('focus_icon');
+                                } elseif(!empty($item['content_selection']->get_field('icon'))){
+                                    $the_items['items'][$key]['icon'] = $item['content_selection']->get_field('icon');
+                                }
+                            }
+
+                            if(in_array('description', $item['display_elements'])){
+                                if(!empty($item['content_selection']->get_field('focus_description'))){
+                                    $the_items['items'][$key]['description'] = $item['content_selection']->get_field('focus_description');
+                                } elseif(!empty($item['content_selection']->get_field('description'))){
+                                    $the_items['items'][$key]['description'] = $item['content_selection']->get_field('description');
+                                }
+                            }
+
+                            if(!empty($item['content_selection']->get_thumbnail())){
+                                $the_items['items'][$key]['img'] = $item['content_selection']->get_thumbnail();
+                            }
+                        }
+                    }
+                }
+
+                // print '<pre>';
+                // print_r($the_items);
+                // exit;
+
+                $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_items);
+
+            } else{
+                $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+
+            }
+
         }
 
         if(!empty($section['woody_tpl'])){
