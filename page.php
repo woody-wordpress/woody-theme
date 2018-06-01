@@ -94,7 +94,7 @@ foreach ($sections as $key => $section) {
     if(!empty($section['section_content'])){
 
         foreach ($section['section_content'] as $key => $layout) {
-            // if($layout['acf_fc_layout'] == 'accordion'){
+            // if($layout['acf_fc_layout'] == 'manual_focus'){
             //     print '<pre>';
             //     print_r($layout);
             //     exit;
