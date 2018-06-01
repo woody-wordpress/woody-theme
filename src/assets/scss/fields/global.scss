@@ -1,7 +1,0 @@
-.section-fullwidth {
-    @include fullwidthSection;
-
-    &.bg-primary {
-        @include padding(2,2,2,2);
-    }
-}

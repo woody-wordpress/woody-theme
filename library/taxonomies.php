@@ -28,30 +28,3 @@ register_taxonomy(
         'show_ui' => false,
     )
 );
-
-/**
-* Creating basics taxonomies
-* If you need as specific taxonomy for your website, please use register_taxonomy( $taxonomy, $object_type, $args ) in your subtheme
-**/
-
-register_taxonomy(
-    'thematic',
-    'page',
-    array(
-        'label' => 'Thématiques',
-        'labels' => array(
-            'name' => 'Thématiques',
-            'singular_name' => 'Thématique',
-            'menu_name' => 'Thématique',
-            'all_items' => 'Toutes les thématiques',
-            'edit_item' => 'Modifier les thématiques',
-            'view_item' => 'Voir les thématiques',
-            'update_item' => 'Mettre à jour les thématiques',
-            'add_new_item' => 'Ajouter une thématique',
-            'new_item_name' => 'Nouvelle thématique',
-            'search_items' => 'Rechercher parmi les thématiques',
-            'popular_items' => 'Thématiques les plus utilisées'
-        ),
-        'hierarchical' => false
-    )
-);

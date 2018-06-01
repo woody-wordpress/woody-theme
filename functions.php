@@ -20,44 +20,60 @@ require_once( 'library/plugins-activation.php' );
 /** Plugins Options **/
 require_once( 'library/plugins-options.php' );
 
-/** Various clean up functions */
+/** Various clean up functions
+ * Supprime des éléments tels que les feed links dans le header, des liens dievers, etc ...
+ */
 require_once( 'library/cleanup.php' );
 
 /** Required for Foundation to work properly */
 require_once( 'library/foundation.php' );
 
-/** Format comments */
-require_once( 'library/class-basetheme-comments.php' );
+/** Format comments
+ * Formate les commentaires (réécriture du dom) pour ajouter indentation  => Inutile
+*/
+// require_once( 'library/class-basetheme-comments.php' );
+
 
 /** Register all navigation menus */
-require_once( 'library/navigation.php' );
-
+// require_once( 'library/navigation.php' );
 /** Add menu walkers for top-bar and off-canvas */
-require_once( 'library/class-basetheme-top-bar-walker.php' );
-require_once( 'library/class-basetheme-mobile-walker.php' );
+// require_once( 'library/class-basetheme-top-bar-walker.php' );
+// require_once( 'library/class-basetheme-mobile-walker.php' );
 
-/** Create widget areas in sidebar and footer */
-require_once( 'library/widget-areas.php' );
+/** Create widget areas in sidebar and footer
+ * Inutile => nous n'utilisons pas les widgets
+*/
+// require_once( 'library/widget-areas.php' );
 
-/** Return entry meta information for posts */
-require_once( 'library/entry-meta.php' );
+/** Return entry meta information for posts
+ *  Pas sur que ça nous serve vraiment
+*/
+// require_once( 'library/entry-meta.php' );
 
 /** Enqueue scripts */
 require_once( 'library/enqueue-scripts.php' );
 
-/** Add theme support */
+/** Add theme support
+ * Ajoute des fonctionnalités de base
+*/
 require_once( 'library/theme-support.php' );
 
-/** Add Nav Options to Customer */
-require_once( 'library/custom-nav.php' );
+/** Add Nav Options to Customer
+ * Utile pour un menu custom ? Pas sur
+*/
+// require_once( 'library/custom-nav.php' );
 
 /** Change WP's sticky post class */
-require_once( 'library/sticky-posts.php' );
+// require_once( 'library/sticky-posts.php' );
 
-/** Configure responsive image sizes */
+/** Configure responsive image sizes
+ * Styles d'images personnalisés
+*/
 require_once( 'library/responsive-images.php' );
 
-/** Create taxonomies **/
+/** Create taxonomies
+ * Taxonomies globales à tous nos sites
+ * **/
 require_once( 'library/taxonomies.php' );
 
 /** Sync ACF fields **/
@@ -85,6 +101,8 @@ $basetheme_acf->execute();
 
 /**
 ** Improve Menus
+** Permet la synchronisation entre la hierarchie des pages et le menu
+** Attention => id du menu en dur
 **/
 include get_template_directory().'/library/class-basetheme-menus.php';
 $basetheme_acf = new Basetheme_menu();

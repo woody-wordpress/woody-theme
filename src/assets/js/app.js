@@ -3,17 +3,8 @@ import whatInput from 'what-input';
 
 window.$ = $;
 
-import Foundation from 'foundation-sites';
+// import Foundation from 'foundation-sites';
 // If you want to pick and choose which modules to include, comment out the above and uncomment
 // the line below
-//import './lib/foundation-explicit-pieces';
-
+import './lib/foundation-explicit-pieces';
 import './lib/demosite';
-
-$(document).foundation(function() {
-	var element = $('.accordion');
-	// element.click(function() {
-// 	alert('Accordion');
-// });
-	var elem = new Foundation.Accordion(element, options);
-});

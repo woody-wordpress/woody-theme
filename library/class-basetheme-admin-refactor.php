@@ -8,8 +8,6 @@ class Basetheme_adminRefactor {
 
     protected function register_hooks() {
       add_filter('wpseo_metabox_prio', array($this, 'basetheme_yoast_move_meta_box_bottom'));
-      // add_action( 'admin_menu' , array($this,'basetheme_remove_pageparentdiv'));
-      // add_action( 'add_meta_boxes', array($this,'basetheme_add_pageparentdiv') );
       add_action( 'init', array($this, 'basetheme_remove_pages_editor'));
       add_action('admin_menu', array($this, 'basetheme_remove_menus'));
       add_action('admin_enqueue_scripts', array($this, 'basetheme_admin_style'));
@@ -17,45 +15,16 @@ class Basetheme_adminRefactor {
     }
 
     /**
-     * We remove the pageparentdiv box to create our own
-     *
-     * @return null
-     */
-    function basetheme_remove_pageparentdiv() {
-        remove_meta_box( 'pageparentdiv' , 'page' , 'side' );
-    }
-
-    // /**
-    //  * Add the pageparentdiv box back in at the top of the sidebar
-    //  *
-    //  * @param  string $post_type
-    //  * @return null
-    //  */
-    function basetheme_add_pageparentdiv( $post_type ) {
-        if ( in_array( $post_type, array( 'post', 'page' ) ) ) {
-            add_meta_box(
-                'pageparentdiv',
-                'Mise en page - Templates',
-                'page_attributes_meta_box',
-                 null,
-                'side',
-                'high'
-            );
-        }
-    }
-
-    /**
-     * We remove the content text editor cause we'll use ACF to create pages
-     *
-     * @return null
+     * Benoit Bouchaud
+     * On vire l'éditeur de texte basique de WP, inutile avec ACF
      */
     function basetheme_remove_pages_editor(){
         remove_post_type_support( 'page', 'editor' );
     }
 
     /**
-     * We remove some admin menu entries for non admin users
-     * @return null
+     * Benoit Bouchaud
+     * On masque certaines entrées de menu pour les non administrateurs
      */
     function basetheme_remove_menus(){
         global $submenu;
@@ -71,11 +40,18 @@ class Basetheme_adminRefactor {
         }
     }
 
+    /**
+     * Benoit Bouchaud
+     * On déplace la metabox Yoast en bas de page
+     */
     public function basetheme_yoast_move_meta_box_bottom() {
       return 'low';
     }
 
-    // Update CSS within in Admin
+    /**
+     * Benoit Bouchaud
+     * On ajoute admin.css aux styles du backoffice
+     */
     public function basetheme_admin_style() {
       wp_enqueue_style('admin-styles', get_template_directory_uri().'/admin.css');
     }

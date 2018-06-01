@@ -45,24 +45,6 @@
   My custom styles:
   Add your scss files below to structure your project styles
 */
+
 // Global
 @import "global/_accessibility";
-@import "global/colors";
-@import "global/wp-admin";
-@import "global/wp-overrides"; // Modules
-@import "modules/navigation";
-@import "modules/content";
-@import "modules/footer";
-@import "modules/editor-style"; // Components
-@import "components/buttons";
-@import "components/cards";
-@import "components/featured-image";
-@import "components/dividers";
-@import "components/links";
-@import "components/images";
-@import "custom_mixins";
-@import "components/lists";
-@import "fields/index";
-@import "sections/index";
-@import "settings_overrides"; // Woody
-@import "woody"

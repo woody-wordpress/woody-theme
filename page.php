@@ -94,11 +94,12 @@ foreach ($sections as $key => $section) {
     if(!empty($section['section_content'])){
 
         foreach ($section['section_content'] as $key => $layout) {
-            // if($layout['acf_fc_layout'] == 'links'){
+            // if($layout['acf_fc_layout'] == 'accordion'){
             //     print '<pre>';
             //     print_r($layout);
             //     exit;
             // }
+
             $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
         }
 
