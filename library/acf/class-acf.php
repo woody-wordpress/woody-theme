@@ -7,15 +7,17 @@
  * @since HawwwaiTheme 1.0.0
  */
 
-class HawwwaiTheme_ACF {
-
+class HawwwaiTheme_ACF
+{
     const ACF = "acf-pro/acf.php";
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->register_hooks();
     }
 
-    protected function register_hooks() {
+    protected function register_hooks()
+    {
         acf_update_setting('save_json', get_template_directory() . '/acf-json');
         acf_append_setting('load_json', get_template_directory() . '/acf-json');
 
@@ -27,9 +29,10 @@ class HawwwaiTheme_ACF {
      * Benoit Bouchaud
      * On bloque l'accès à la désactivation du plugin ACF
      */
-    public function disallow_acf_deactivation($actions, $plugin_file, $plugin_data, $context) {
+    public function disallow_acf_deactivation($actions, $plugin_file, $plugin_data, $context)
+    {
         if (array_key_exists('deactivate', $actions) and $plugin_file == self::ACF) {
-            unset( $actions['deactivate'] );
+            unset($actions['deactivate']);
         }
         return $actions;
     }
@@ -38,8 +41,8 @@ class HawwwaiTheme_ACF {
      * Benoit Bouchaud
      * On ajoute les templates Woody disponibles dans les option du champ radio woody_tpl
      */
-    public function woody_tpl_acf_load_field($field){
-
+    public function woody_tpl_acf_load_field($field)
+    {
         $woody = new Woody();
 
         switch ($field['key']) {
@@ -51,7 +54,7 @@ class HawwwaiTheme_ACF {
         }
 
         $field['choices'] = [];
-        if(!empty($components)){
+        if (!empty($components)) {
             foreach ($components as $key => $component) {
                 $field['choices'][$key] = '<img class="img-responsive" src="/app/themes/site-theme/dist/img/woody/' . $component['thumbnails']['small'] . '" alt="' . $key . '" width="150" height="150" />';
             }

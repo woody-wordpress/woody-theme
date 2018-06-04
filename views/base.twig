@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html class="no-js" {{site.language_attributes}}>
-<head>
-  <meta charset="{{site.charset}}">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  {{wp_head}}
+    <head>
+        <meta charset="{{site.charset}}">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <!-- WP Header-->
+        {{ wp_head }}
+        <!-- /WP Header-->
+    </head>
 
-</head>
+    <body class="{{body_class}}">
+        <!-- Theme Header -->
+        {% include 'parts/page/header.twig' %}
+        <!-- /Theme Header -->
 
-<body class="{{body_class}}">
+        <!-- Theme Content -->
+        {{ block('content') }}
+        <!-- /Theme Content -->
 
-    {% include 'parts/page/header.twig' %}
+        <!-- Theme Footer -->
+        {% include 'parts/page/footer.twig' %}
+        <!-- /Theme Footer -->
 
-      {% block content %}
-      {% endblock %}
+        <!-- WP Footer-->
+        {{ wp_footer }}
+        <!-- /WP Footer-->
+    </body>
 
-    {% include 'parts/page/footer.twig' %}
-
-
-  {{wp_footer}}
-
-  <!-- Google Analytics -->
-
-</body>
 </html>

@@ -7,13 +7,15 @@
  * @since HawwwaiTheme 1.0.0
  */
 
-class HawwwaiTheme_Taxonomy {
-
-    public function __construct() {
+class HawwwaiTheme_Taxonomy
+{
+    public function __construct()
+    {
         $this->register_hooks();
     }
 
-    protected function register_hooks() {
+    protected function register_hooks()
+    {
         register_taxonomy(
             'page_type',
             'page',

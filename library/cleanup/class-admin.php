@@ -6,36 +6,44 @@
  * @since HawwwaiTheme 1.0.0
  */
 
-class HawwwaiTheme_Cleanup_Admin {
-
-    public function __construct() {
+class HawwwaiTheme_Cleanup_Admin
+{
+    public function __construct()
+    {
         $this->register_hooks();
     }
 
-    protected function register_hooks() {
-      add_filter('wpseo_metabox_prio', array($this, 'yoast_move_meta_box_bottom'));
-      add_action('init', array($this, 'remove_pages_editor'));
-      add_action('admin_menu', array($this, 'remove_menus'));
-      add_action('admin_enqueue_scripts', array($this, 'admin_style'));
+    protected function register_hooks()
+    {
+        add_filter('wpseo_metabox_prio', array($this, 'yoast_move_meta_box_bottom'));
+        add_action('init', array($this, 'remove_pages_editor'));
+        add_action('admin_menu', array($this, 'remove_menus'));
+        add_action('admin_enqueue_scripts', array($this, 'admin_style'));
+
+        if (is_admin()) {
+            add_action('pre_get_posts', 'custom_pre_get_posts');
+        }
     }
 
     /**
      * Benoit Bouchaud
      * On vire l'éditeur de texte basique de WP, inutile avec ACF
      */
-    public function remove_pages_editor(){
-        remove_post_type_support( 'page', 'editor' );
+    public function remove_pages_editor()
+    {
+        remove_post_type_support('page', 'editor');
     }
 
     /**
      * Benoit Bouchaud
      * On masque certaines entrées de menu pour les non administrateurs
      */
-    public function remove_menus(){
+    public function remove_menus()
+    {
         global $submenu;
 
         $user = wp_get_current_user();
-        if(!in_array('administrator', $user->roles)){
+        if (!in_array('administrator', $user->roles)) {
             remove_menu_page('plugins.php'); // Plugins
             remove_menu_page('tools.php'); // Tools
             remove_menu_page('edit.php'); // Posts
@@ -49,7 +57,8 @@ class HawwwaiTheme_Cleanup_Admin {
      * Benoit Bouchaud
      * On déplace la metabox Yoast en bas de page
      */
-    public function yoast_move_meta_box_bottom() {
+    public function yoast_move_meta_box_bottom()
+    {
         return 'low';
     }
 
@@ -57,10 +66,21 @@ class HawwwaiTheme_Cleanup_Admin {
      * Benoit Bouchaud
      * On ajoute admin.css aux styles du backoffice
      */
-    public function admin_style() {
+    public function admin_style()
+    {
         wp_enqueue_style('admin-styles', get_template_directory_uri() . '/admin.css');
     }
 
+    /**
+     * Disable Posts' meta from being preloaded
+     * This fixes memory problems in the WordPress Admin
+     */
+    public function custom_pre_get_posts(WP_Query $wp_query)
+    {
+        if (in_array($wp_query->get('post_type'), array('page'))) {
+            $wp_query->set('update_post_meta_cache', false);
+        }
+    }
 }
 
 // Execute Class
