@@ -1,29 +1,11 @@
 {
     "key": "group_5b0d380ce3492",
     "title": "Informations mises en avant",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "page"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "side",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Infos affichées en sidebar et utilisées pour les remontées de contenu",
-    "modified": 1528108280,
     "fields": [
         {
             "key": "field_5b11394d9a268",
             "label": "Icône",
-            "name": "icon",
+            "name": "focus_icon",
             "type": "font-awesome",
             "instructions": "",
             "required": 0,
@@ -719,6 +701,25 @@
             }
         },
         {
+            "key": "field_5b1151099b943",
+            "label": "Surtitre",
+            "name": "focus_pretitle",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_5b0d380e04203",
             "label": "Titre",
             "name": "focus_title",
@@ -738,9 +739,28 @@
             "maxlength": ""
         },
         {
+            "key": "field_5b1151229b944",
+            "label": "Sous-titre",
+            "name": "focus_subtitle",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_5b0d382404204",
             "label": "Accroche",
-            "name": "focus_teaser",
+            "name": "focus_description",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -756,5 +776,23 @@
             "rows": 3,
             "new_lines": "br"
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Infos affichées en sidebar et utilisées pour les remontées de contenu",
+    "modified": 1527854709
 }
