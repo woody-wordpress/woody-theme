@@ -18,7 +18,7 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Liste de photos)",
-    "modified": 1527575307,
+    "modified": 1528108280,
     "fields": [
         {
             "key": "field_5b04475363df1",
@@ -128,20 +128,13 @@
                 "id": ""
             },
             "choices": {
-                "cards-media_card-tpl_1": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/cards\/media_card\/tpl_1\/thumbnail.png\" alt=\"cards-media_card-tpl_1\"\/> ",
-                "grids-grid_4_cols-tpl_1": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_4_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_4_cols-tpl_1\"\/> ",
-                "grids-grid_5_cols-tpl_1": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_5_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_5_cols-tpl_1\"\/> ",
-                "grids-grid_2_cols-tpl_1": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_2_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_1\"\/> ",
-                "grids-grid_2_cols-tpl_2": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_2_cols\/tpl_2\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_2\"\/> ",
-                "grids-grid_2_cols-tpl_5": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_2_cols\/tpl_5\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_5\"\/> ",
-                "grids-grid_2_cols-tpl_4": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_2_cols\/tpl_4\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_4\"\/> ",
-                "grids-grid_2_cols-tpl_3": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_2_cols\/tpl_3\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_3\"\/> ",
-                "grids-grid_3_cols-tpl_1": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_3_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_1\"\/> ",
-                "grids-grid_3_cols-tpl_2": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_3_cols\/tpl_2\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_2\"\/> ",
-                "grids-grid_3_cols-tpl_4": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_3_cols\/tpl_4\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_4\"\/> ",
-                "grids-grid_3_cols-tpl_3": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_3_cols\/tpl_3\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_3\"\/> ",
-                "grids-grid_1_cols-tpl_1": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_1_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_1_cols-tpl_1\"\/> ",
-                "grids-grid_6_cols-tpl_1": "<img class=\"img-responsive\" src=\"\/home\/admin\/www\/wordpress\/superot\/current\/vendor\/rc\/woody\/views\/grids\/grid_6_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_6_cols-tpl_1\"\/> "
+                "blocks-media_gallery-tpl_6": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/blocks\/media_gallery\/tpl_6\/thumbnail.png\" alt=\"blocks-media_gallery-tpl_6\" width=\"150\" height=\"150\" \/>",
+                "blocks-media_gallery-tpl_1": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/blocks\/media_gallery\/tpl_1\/thumbnail.png\" alt=\"blocks-media_gallery-tpl_1\" width=\"150\" height=\"150\" \/>",
+                "blocks-media_gallery-tpl_2": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/blocks\/media_gallery\/tpl_2\/thumbnail.png\" alt=\"blocks-media_gallery-tpl_2\" width=\"150\" height=\"150\" \/>",
+                "blocks-media_gallery-tpl_5": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/blocks\/media_gallery\/tpl_5\/thumbnail.png\" alt=\"blocks-media_gallery-tpl_5\" width=\"150\" height=\"150\" \/>",
+                "blocks-media_gallery-tpl_4": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/blocks\/media_gallery\/tpl_4\/thumbnail.png\" alt=\"blocks-media_gallery-tpl_4\" width=\"150\" height=\"150\" \/>",
+                "blocks-media_gallery-tpl_3": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/blocks\/media_gallery\/tpl_3\/thumbnail.png\" alt=\"blocks-media_gallery-tpl_3\" width=\"150\" height=\"150\" \/>",
+                "cards-media_card-tpl_1": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/cards\/media_card\/tpl_1\/thumbnail.png\" alt=\"cards-media_card-tpl_1\" width=\"150\" height=\"150\" \/>"
             },
             "allow_null": 0,
             "other_choice": 0,

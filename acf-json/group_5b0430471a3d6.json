@@ -1,6 +1,24 @@
 {
     "key": "group_5b0430471a3d6",
     "title": "Vidéo",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Elément de contenu (Vidéo embed)",
+    "modified": 1528108282,
     "fields": [
         {
             "key": "field_5b0ec0eda1e20",
@@ -63,7 +81,9 @@
                 "class": "",
                 "id": ""
             },
-            "choices": [],
+            "choices": {
+                "blocks-movie-tpl_1": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/blocks\/movie\/tpl_1\/thumbnail.png\" alt=\"blocks-movie-tpl_1\" width=\"150\" height=\"150\" \/>"
+            },
             "allow_null": 0,
             "other_choice": 0,
             "save_other_choice": 0,
@@ -71,23 +91,5 @@
             "layout": "vertical",
             "return_format": "value"
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Elément de contenu (Vidéo embed)",
-    "modified": 1527686436
+    ]
 }

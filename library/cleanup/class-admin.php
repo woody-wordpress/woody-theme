@@ -1,24 +1,29 @@
 <?php
+/**
+ * Admin Theme Cleanup
+ *
+ * @package HawwwaiTheme
+ * @since HawwwaiTheme 1.0.0
+ */
 
-class Basetheme_adminRefactor {
+class HawwwaiTheme_Cleanup_Admin {
 
-    public function execute() {
+    public function __construct() {
         $this->register_hooks();
     }
 
     protected function register_hooks() {
-      add_filter('wpseo_metabox_prio', array($this, 'basetheme_yoast_move_meta_box_bottom'));
-      add_action( 'init', array($this, 'basetheme_remove_pages_editor'));
-      add_action('admin_menu', array($this, 'basetheme_remove_menus'));
-      add_action('admin_enqueue_scripts', array($this, 'basetheme_admin_style'));
-
+      add_filter('wpseo_metabox_prio', array($this, 'yoast_move_meta_box_bottom'));
+      add_action('init', array($this, 'remove_pages_editor'));
+      add_action('admin_menu', array($this, 'remove_menus'));
+      add_action('admin_enqueue_scripts', array($this, 'admin_style'));
     }
 
     /**
      * Benoit Bouchaud
      * On vire l'éditeur de texte basique de WP, inutile avec ACF
      */
-    function basetheme_remove_pages_editor(){
+    public function remove_pages_editor(){
         remove_post_type_support( 'page', 'editor' );
     }
 
@@ -26,7 +31,7 @@ class Basetheme_adminRefactor {
      * Benoit Bouchaud
      * On masque certaines entrées de menu pour les non administrateurs
      */
-    function basetheme_remove_menus(){
+    public function remove_menus(){
         global $submenu;
 
         $user = wp_get_current_user();
@@ -44,16 +49,19 @@ class Basetheme_adminRefactor {
      * Benoit Bouchaud
      * On déplace la metabox Yoast en bas de page
      */
-    public function basetheme_yoast_move_meta_box_bottom() {
-      return 'low';
+    public function yoast_move_meta_box_bottom() {
+        return 'low';
     }
 
     /**
      * Benoit Bouchaud
      * On ajoute admin.css aux styles du backoffice
      */
-    public function basetheme_admin_style() {
-      wp_enqueue_style('admin-styles', get_template_directory_uri().'/admin.css');
+    public function admin_style() {
+        wp_enqueue_style('admin-styles', get_template_directory_uri() . '/admin.css');
     }
 
 }
+
+// Execute Class
+$HawwwaiTheme_Cleanup_Admin = new HawwwaiTheme_Cleanup_Admin();

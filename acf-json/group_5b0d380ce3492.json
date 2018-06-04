@@ -1,6 +1,24 @@
 {
     "key": "group_5b0d380ce3492",
     "title": "Informations mises en avant",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Infos affichées en sidebar et utilisées pour les remontées de contenu",
+    "modified": 1528108280,
     "fields": [
         {
             "key": "field_5b11394d9a268",
@@ -738,23 +756,5 @@
             "rows": 3,
             "new_lines": "br"
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "page"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "side",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Infos affichées en sidebar et utilisées pour les remontées de contenu",
-    "modified": 1527848276
+    ]
 }

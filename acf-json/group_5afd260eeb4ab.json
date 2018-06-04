@@ -1,6 +1,24 @@
 {
     "key": "group_5afd260eeb4ab",
     "title": "Sections",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "field",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
+    "modified": 1528108281,
     "fields": [
         {
             "key": "field_5afd2c6916ecb",
@@ -473,19 +491,19 @@
                         "id": ""
                     },
                     "choices": {
-                        "grids-grid_4_cols-tpl_1": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_4_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_4_cols-tpl_1\" width=\"150\" height=\"150\"\/> ",
-                        "grids-grid_5_cols-tpl_1": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_5_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_5_cols-tpl_1\" width=\"150\" height=\"150\"\/> ",
-                        "grids-grid_2_cols-tpl_1": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_1\" width=\"150\" height=\"150\"\/> ",
-                        "grids-grid_2_cols-tpl_2": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_2\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_2\" width=\"150\" height=\"150\"\/> ",
-                        "grids-grid_2_cols-tpl_5": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_5\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_5\" width=\"150\" height=\"150\"\/> ",
-                        "grids-grid_2_cols-tpl_4": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_4\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_4\" width=\"150\" height=\"150\"\/> ",
-                        "grids-grid_2_cols-tpl_3": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_3\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_3\" width=\"150\" height=\"150\"\/> ",
-                        "grids-grid_3_cols-tpl_1": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_3_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_1\" width=\"150\" height=\"150\"\/> ",
-                        "grids-grid_3_cols-tpl_2": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_3_cols\/tpl_2\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_2\" width=\"150\" height=\"150\"\/> ",
-                        "grids-grid_3_cols-tpl_4": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_3_cols\/tpl_4\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_4\" width=\"150\" height=\"150\"\/> ",
-                        "grids-grid_3_cols-tpl_3": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_3_cols\/tpl_3\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_3\" width=\"150\" height=\"150\"\/> ",
-                        "grids-grid_1_cols-tpl_1": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_1_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_1_cols-tpl_1\" width=\"150\" height=\"150\"\/> ",
-                        "grids-grid_6_cols-tpl_1": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_6_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_6_cols-tpl_1\" width=\"150\" height=\"150\"\/> "
+                        "grids-grid_4_cols-tpl_1": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_4_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_4_cols-tpl_1\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_5_cols-tpl_1": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_5_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_5_cols-tpl_1\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_2_cols-tpl_1": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_1\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_2_cols-tpl_2": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_2\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_2\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_2_cols-tpl_5": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_5\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_5\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_2_cols-tpl_4": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_4\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_4\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_2_cols-tpl_3": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_3\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_3\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_3_cols-tpl_1": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_3_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_1\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_3_cols-tpl_2": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_3_cols\/tpl_2\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_2\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_3_cols-tpl_4": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_3_cols\/tpl_4\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_4\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_3_cols-tpl_3": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_3_cols\/tpl_3\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_3\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_1_cols-tpl_1": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_1_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_1_cols-tpl_1\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_6_cols-tpl_1": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_6_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_6_cols-tpl_1\" width=\"150\" height=\"150\" \/>"
                     },
                     "allow_null": 0,
                     "other_choice": 0,
@@ -666,23 +684,5 @@
                 }
             ]
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "page"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "field",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1527688936
+    ]
 }

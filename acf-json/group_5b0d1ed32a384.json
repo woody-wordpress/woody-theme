@@ -1,6 +1,24 @@
 {
     "key": "group_5b0d1ed32a384",
     "title": "Mise en avant manuelle",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
+    "modified": 1528108280,
     "fields": [
         {
             "key": "field_5b0d1ecc7c825",
@@ -305,23 +323,5 @@
             "layout": "vertical",
             "return_format": "value"
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1527847535
+    ]
 }
