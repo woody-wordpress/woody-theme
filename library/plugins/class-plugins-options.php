@@ -29,6 +29,7 @@ class HawwwaiTheme_Plugins_Options
         update_option('minify_html_relative', 'yes', '', 'yes');
         update_option('minify_html_scheme', 'no', '', 'yes');
         update_option('minify_html_utf8', 'no', '', 'yes');
+        update_option('acm_server_settings', (WP_ENV == 'dev') ? array('server_enable' => false) : array('server_enable' => true), '', 'yes');
     }
 }
 

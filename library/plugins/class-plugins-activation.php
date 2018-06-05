@@ -29,6 +29,7 @@ class HawwwaiTheme_Plugins_Activation
             'enhanced-media-library/enhanced-media-library.php',
             'minify-html-markup/minify-html.php',
             'wp-deferred-javascripts/wp-deferred-javascripts.php',
+            'advanced-cron-manager/advanced-cron-manager.php',
         ];
 
         $this->debug_plugins = [
