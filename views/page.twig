@@ -6,6 +6,7 @@
             {% if page_heading | default %}
                 {{ page_heading }}
             {% endif %}
+
             {% for key, section in the_sections %}
                 <div class="page-section page-section-{{ key }}">
                     {{ section }}
