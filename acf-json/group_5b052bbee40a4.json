@@ -99,7 +99,7 @@
             "key": "field_5b0e5df0d4b1c",
             "label": "Vidéo",
             "name": "movie",
-            "type": "clone",
+            "type": "group",
             "instructions": "",
             "required": 0,
             "conditional_logic": [
@@ -116,13 +116,30 @@
                 "class": "",
                 "id": ""
             },
-            "clone": [
-                "group_5b16b09337a33"
-            ],
-            "display": "seamless",
             "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0
+            "sub_fields": [
+                {
+                    "key": "field_5b16b2f2aa625",
+                    "label": "Fichiers vidéos",
+                    "name": "movie_files",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_5b16b09337a33"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                }
+            ]
         },
         {
             "key": "field_5b0e54ebfa657",
@@ -222,5 +239,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1528206828
+    "modified": 1528207094
 }

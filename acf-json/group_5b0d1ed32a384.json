@@ -165,7 +165,7 @@
                             "key": "field_5b0d293ebb18d",
                             "label": "Vidéo",
                             "name": "movie",
-                            "type": "clone",
+                            "type": "group",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": [
@@ -182,13 +182,30 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "clone": [
-                                "group_5b16b09337a33"
-                            ],
-                            "display": "seamless",
                             "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
+                            "sub_fields": [
+                                {
+                                    "key": "field_5b16b2b2d0f42",
+                                    "label": "Fichiers vidéos",
+                                    "name": "movie_field",
+                                    "type": "clone",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "clone": [
+                                        "group_5b16b09337a33"
+                                    ],
+                                    "display": "seamless",
+                                    "layout": "block",
+                                    "prefix_label": 0,
+                                    "prefix_name": 0
+                                }
+                            ]
                         }
                     ]
                 },
@@ -334,5 +351,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1528206884
+    "modified": 1528207050
 }
