@@ -70,11 +70,11 @@ Foundation.plugin(DropdownMenu, 'DropdownMenu');
 // import { Orbit } from 'foundation-sites/js/foundation.orbit';
 // Foundation.plugin(Orbit, 'Orbit');
 
-// import { ResponsiveMenu } from 'foundation-sites/js/foundation.responsiveMenu';
-// Foundation.plugin(ResponsiveMenu, 'ResponsiveMenu');
+import { ResponsiveMenu } from 'foundation-sites/js/foundation.responsiveMenu';
+Foundation.plugin(ResponsiveMenu, 'ResponsiveMenu');
 
-// import { ResponsiveToggle } from 'foundation-sites/js/foundation.responsiveToggle';
-// Foundation.plugin(ResponsiveToggle, 'ResponsiveToggle');
+import { ResponsiveToggle } from 'foundation-sites/js/foundation.responsiveToggle';
+Foundation.plugin(ResponsiveToggle, 'ResponsiveToggle');
 
 // import { Reveal } from 'foundation-sites/js/foundation.reveal';
 // Foundation.plugin(Reveal, 'Reveal');

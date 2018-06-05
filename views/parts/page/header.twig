@@ -1,45 +1,42 @@
 <header class="site-header" role="banner">
-    <div class="site-title-bar title-bar" id="main-menu">
-        <div class="title-bar-left">
-            <button class="menu-icon" type="button" data-toggle="main-menu"></button>
-            <span class="site-mobile-title title-bar-title">
-                <a href="{{ site.url }}" rel="home">{{ site.name }}</a>
-            </span>
-        </div>
+    <div class="title-bar" data-responsive-toggle="responsive-menu" data-hide-for="medium">
+        <button class="menu-icon" type="button" data-toggle="responsive-menu"></button>
+        <div class="title-bar-title">Menu</div>
     </div>
-    <nav class="site-navigation top-bar" role="navigation">
+
+    <div class="top-bar" id="responsive-menu">
         <div class="top-bar-left">
-            <div class="site-desktop-title top-bar-title">
-                <a href="{{ site.url }}" rel="home">{{ site.name }}</a>
-            </div>
-        </div>
-    </nav>
-    <ul class="dropdown menu" data-dropdown-menu="data-dropdown-menu">
-        <li>
-            <a href="#">Item 1</a>
-            <ul class="menu">
-                <li>
-                    <a href="#">Item 1A</a>
+            <ul class="dropdown menu" data-dropdown-menu="data-dropdown-menu">
+                <li class="menu-text">Site Title</li>
+                <li class="has-submenu">
+                    <a href="#0">One</a>
+                    <ul class="submenu menu vertical" data-submenu="data-submenu">
+                        <li>
+                            <a href="#0">One</a>
+                        </li>
+                        <li>
+                            <a href="#0">Two</a>
+                        </li>
+                        <li>
+                            <a href="#0">Three</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="#">Item 1B</a>
+                    <a href="#0">Two</a>
                 </li>
                 <li>
-                    <a href="#">Item 1C</a>
-                </li>
-                <li>
-                    <a href="#">Item 1A</a>
+                    <a href="#0">Three</a>
                 </li>
             </ul>
-        </li>
-        <li>
-            <a href="#">Item 2</a>
-        </li>
-        <li>
-            <a href="#">Item 3</a>
-        </li>
-        <li>
-            <a href="#">Item 4</a>
-        </li>
-    </ul>
+        </div>
+        <div class="top-bar-right">
+            <ul class="menu">
+                <li><input type="search" placeholder="Search"></li>
+                <li>
+                    <button type="button" class="button">Search</button>
+                </li>
+            </ul>
+        </div>
+    </div>
 </header>
