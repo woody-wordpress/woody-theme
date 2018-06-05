@@ -1,65 +1,41 @@
 import $ from 'jquery';
-import {
-    Foundation
-}
-from 'foundation-sites/js/foundation.core';
+
+import { Foundation } from 'foundation-sites/js/foundation.core';
 Foundation.addToJquery($);
 
-// *******************************************************************
 // Add Foundation Utils to Foundation global namespace for backwards
 // compatibility.
-// *******************************************************************
 
-import {
-    rtl,
-    GetYoDigits,
-    transitionend
-}
-from 'foundation-sites/js/foundation.util.core';
-Foundation.rtl = rtl;
-Foundation.GetYoDigits = GetYoDigits;
-Foundation.transitionend = transitionend;
+// import { rtl, GetYoDigits, transitionend } from 'foundation-sites/js/foundation.util.core';
+// Foundation.rtl = rtl;
+// Foundation.GetYoDigits = GetYoDigits;
+// Foundation.transitionend = transitionend;
 
 // import { Box } from 'foundation-sites/js/foundation.util.box'
-// Foundation.Box = Box;
-
 // import { onImagesLoaded } from 'foundation-sites/js/foundation.util.imageLoader';
-// Foundation.onImagesLoaded = onImagesLoaded;
-
 // import { Keyboard } from 'foundation-sites/js/foundation.util.keyboard';
-// Foundation.Keyboard = Keyboard;
-
 // import { MediaQuery } from 'foundation-sites/js/foundation.util.mediaQuery';
-// Foundation.MediaQuery = MediaQuery;
-
 // import { Motion, Move } from 'foundation-sites/js/foundation.util.motion';
+// import { Nest } from 'foundation-sites/js/foundation.util.nest';
+// import { Timer } from 'foundation-sites/js/foundation.util.timer';
+
+// Foundation.Box = Box;
+// Foundation.onImagesLoaded = onImagesLoaded;
+// Foundation.Keyboard = Keyboard;
+// Foundation.MediaQuery = MediaQuery;
 // Foundation.Motion = Motion;
 // Foundation.Move = Move;
-
-// import { Nest } from 'foundation-sites/js/foundation.util.nest';
 // Foundation.Nest = Nest;
-
-// import { Timer } from 'foundation-sites/js/foundation.util.timer';
 // Foundation.Timer = Timer;
 
 // Touch and Triggers previously were almost purely sede effect driven,
 // so no // need to add it to Foundation, just init them.
 
-import {
-    Touch
-}
-from 'foundation-sites/js/foundation.util.touch';
-Touch.init($);
+// import { Touch } from 'foundation-sites/js/foundation.util.touch';
+// Touch.init($);
 
-import {
-    Triggers
-}
-from 'foundation-sites/js/foundation.util.triggers';
-Triggers.init($, Foundation);
-
-// *******************************************************************
-// Plugins
-// *******************************************************************
+// import { Triggers } from 'foundation-sites/js/foundation.util.triggers';
+// Triggers.init($, Foundation);
 
 // import { Abide } from 'foundation-sites/js/foundation.abide';
 // Foundation.plugin(Abide, 'Abide');
@@ -76,8 +52,8 @@ Triggers.init($, Foundation);
 // import { Dropdown } from 'foundation-sites/js/foundation.dropdown';
 // Foundation.plugin(Dropdown, 'Dropdown');
 
-// import { DropdownMenu } from 'foundation-sites/js/foundation.dropdownMenu';
-// Foundation.plugin(DropdownMenu, 'DropdownMenu');
+import { DropdownMenu } from 'foundation-sites/js/foundation.dropdownMenu';
+Foundation.plugin(DropdownMenu, 'DropdownMenu');
 
 // import { Equalizer } from 'foundation-sites/js/foundation.equalizer';
 // Foundation.plugin(Equalizer, 'Equalizer');
@@ -123,9 +99,3 @@ Triggers.init($, Foundation);
 
 // import { ResponsiveAccordionTabs } from 'foundation-sites/js/foundation.responsiveAccordionTabs';
 // Foundation.plugin(ResponsiveAccordionTabs, 'ResponsiveAccordionTabs');
-
-// *******************************************************************
-// Start
-// *******************************************************************
-
-$(document).foundation();

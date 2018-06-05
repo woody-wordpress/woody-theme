@@ -22,9 +22,9 @@ class HawwwaiTheme_Plugins_Options
         update_option('acf_pro_license', 'b3JkZXJfaWQ9MTIyNTQwfHR5cGU9ZGV2ZWxvcGVyfGRhdGU9MjAxOC0wMS0xNSAwOTozMToyMw==', '', 'yes');
         update_option('wp_php_console', array('password' => 'root', 'register' => true, 'short' => true, 'stack' => true), '', 'yes');
         update_option('rocket_lazyload_options', array('images' => true, 'iframes' => true, 'youtube' => true), '', 'yes');
-        update_option('minify_html_active', 'yes', '', 'yes');
-        update_option('minify_javascript', 'yes', '', 'yes');
-        update_option('minify_html_comments', 'yes', '', 'yes');
+        update_option('minify_html_active', (WP_ENV == 'dev') ? 'no' : 'yes', '', 'yes');
+        update_option('minify_javascript', (WP_ENV == 'dev') ? 'no' : 'yes', '', 'yes');
+        update_option('minify_html_comments', (WP_ENV == 'dev') ? 'no' : 'yes', '', 'yes');
         update_option('minify_html_xhtml', 'yes', '', 'yes');
         update_option('minify_html_relative', 'yes', '', 'yes');
         update_option('minify_html_scheme', 'no', '', 'yes');
