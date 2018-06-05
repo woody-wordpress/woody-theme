@@ -1,24 +1,6 @@
 {
     "key": "group_5b052bbee40a4",
     "title": "En-tête de page",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "page"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "acf_after_title",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "",
-    "modified": 1528202728,
     "fields": [
         {
             "key": "field_5b052d9aea19c",
@@ -117,7 +99,7 @@
             "key": "field_5b0e5df0d4b1c",
             "label": "Vidéo",
             "name": "movie",
-            "type": "oembed",
+            "type": "clone",
             "instructions": "",
             "required": 0,
             "conditional_logic": [
@@ -134,8 +116,13 @@
                 "class": "",
                 "id": ""
             },
-            "width": 320,
-            "height": 195
+            "clone": [
+                "group_5b16b09337a33"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
         },
         {
             "key": "field_5b0e54ebfa657",
@@ -217,5 +204,23 @@
             "layout": "horizontal",
             "return_format": "value"
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1528206828
 }
