@@ -12,10 +12,7 @@ $context = Timber::get_context();
 // Creating Timber object to access twig keys
 $context['post'] = new TimberPost();
 
-
-// Declare Woody and get the list of woody components
-$woody = new Woody();
-$context['woody_components'] = $woody->getTwigsPaths();
+$context['woody_components'] = Woody::getTwigsPaths();
 
 /** ****************************
  * Displaying the page's heading

@@ -19,3 +19,6 @@ $finder->files()->in(__DIR__ . '/library')->name('*.php');
 foreach ($finder as $file) {
     require_once(__DIR__ . '/library/' . $file->getRelativePathname());
 }
+
+// Change Timber locations
+Timber::$locations = array('views', Woody::getTemplatesDirname());

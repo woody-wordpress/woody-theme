@@ -43,14 +43,12 @@ class HawwwaiTheme_ACF
      */
     public function woody_tpl_acf_load_field($field)
     {
-        $woody = new Woody();
-
         switch ($field['key']) {
             case 'field_5afd2c9616ecd':
-                $components = $woody->getTemplatesByAcfGroup($field['key']);
+                $components = Woody::getTemplatesByAcfGroup($field['key']);
             break;
             default:
-                $components = $woody->getTemplatesByAcfGroup($field['parent']);
+                $components = Woody::getTemplatesByAcfGroup($field['parent']);
         }
 
         $field['choices'] = [];

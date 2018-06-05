@@ -18,7 +18,7 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Liste de photos)",
-    "modified": 1528108280,
+    "modified": 1528196532,
     "fields": [
         {
             "key": "field_5b04475363df1",
@@ -127,15 +127,7 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "blocks-media_gallery-tpl_6": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/blocks\/media_gallery\/tpl_6\/thumbnail.png\" alt=\"blocks-media_gallery-tpl_6\" width=\"150\" height=\"150\" \/>",
-                "blocks-media_gallery-tpl_1": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/blocks\/media_gallery\/tpl_1\/thumbnail.png\" alt=\"blocks-media_gallery-tpl_1\" width=\"150\" height=\"150\" \/>",
-                "blocks-media_gallery-tpl_2": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/blocks\/media_gallery\/tpl_2\/thumbnail.png\" alt=\"blocks-media_gallery-tpl_2\" width=\"150\" height=\"150\" \/>",
-                "blocks-media_gallery-tpl_5": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/blocks\/media_gallery\/tpl_5\/thumbnail.png\" alt=\"blocks-media_gallery-tpl_5\" width=\"150\" height=\"150\" \/>",
-                "blocks-media_gallery-tpl_4": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/blocks\/media_gallery\/tpl_4\/thumbnail.png\" alt=\"blocks-media_gallery-tpl_4\" width=\"150\" height=\"150\" \/>",
-                "blocks-media_gallery-tpl_3": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/blocks\/media_gallery\/tpl_3\/thumbnail.png\" alt=\"blocks-media_gallery-tpl_3\" width=\"150\" height=\"150\" \/>",
-                "cards-media_card-tpl_1": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/cards\/media_card\/tpl_1\/thumbnail.png\" alt=\"cards-media_card-tpl_1\" width=\"150\" height=\"150\" \/>"
-            },
+            "choices": [],
             "allow_null": 0,
             "other_choice": 0,
             "save_other_choice": 0,

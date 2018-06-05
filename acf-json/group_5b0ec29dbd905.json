@@ -18,7 +18,7 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1528108278,
+    "modified": 1528196528,
     "fields": [
         {
             "key": "field_5b0ec2bc0a8d0",
@@ -86,9 +86,7 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "blocks-feature-tpl_01": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/blocks\/feature\/tpl_01\/thumbnail.png\" alt=\"blocks-feature-tpl_01\" width=\"150\" height=\"150\" \/>"
-            },
+            "choices": [],
             "allow_null": 0,
             "other_choice": 0,
             "save_other_choice": 0,

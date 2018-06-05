@@ -18,7 +18,7 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Titre + Accordéon)",
-    "modified": 1528108279,
+    "modified": 1528196530,
     "fields": [
         {
             "key": "field_5b05170c5fa21",
@@ -126,9 +126,7 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "blocks-accordion-tpl_1": "<img class=\"img-responsive\" src=\"\/app\/themes\/site-theme\/dist\/img\/woody\/blocks\/accordion\/tpl_1\/thumbnail.png\" alt=\"blocks-accordion-tpl_1\" width=\"150\" height=\"150\" \/>"
-            },
+            "choices": [],
             "allow_null": 0,
             "other_choice": 0,
             "save_other_choice": 0,

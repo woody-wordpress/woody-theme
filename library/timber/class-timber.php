@@ -8,15 +8,12 @@ class HawwwaiTheme_Timber extends TimberSite
     {
         parent::__construct();
         $this->register_hooks();
-
-        $woody = new Woody();
-        Timber::$dirname = array('views', $woody->getTemplatesDirName());
     }
 
     protected function register_hooks()
     {
         // add_filter( 'timber/twig', array( $this, 'basetheme_add_to_twig'));
-        add_filter('timber/context', array($this, 'add_to_context'));
+        // add_filter('timber/context', array($this, 'add_to_context'));
     }
 
     // Global context, available to all templates
