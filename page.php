@@ -105,7 +105,7 @@ foreach ($sections as $key => $section) {
                         $the_items['items'][$key]['description'] = (!empty($item['description'])) ? $item['description'] : '';
                         // Get the choice of the media
                         if ($item['media_type'] == 'img' && !empty($item['img'])) {
-                            $the_items['items'][$key]['img'] = new TimberImage($item['img']);
+                            $the_items['items'][$key]['img'] = $item['img'];
                         } elseif ($item['media_type'] == 'movie' && !empty($item['movie'])) {
                             $the_items['items'][$key]['movie'] = $item['movie'];
                         }
@@ -154,17 +154,12 @@ foreach ($sections as $key => $section) {
                                 }
                             }
 
-                            if (!empty($item['content_selection']->get_thumbnail())) {
-                                $the_items['items'][$key]['img'] = $item['content_selection']->get_thumbnail();
+                            if (!empty($item['content_selection']->get_field('focus_img'))) {
+                                $the_items['items'][$key]['img'] = $item['content_selection']->get_field('focus_img');
                             }
                         }
                     }
                 }
-
-                // print '<pre>';
-                // print_r($the_items);
-                // exit;
-
                 $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_items);
             } else {
                 $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
