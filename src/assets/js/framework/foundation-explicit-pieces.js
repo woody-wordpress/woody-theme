@@ -40,8 +40,8 @@ Foundation.addToJquery($);
 // import { Abide } from 'foundation-sites/js/foundation.abide';
 // Foundation.plugin(Abide, 'Abide');
 
-// import { Accordion } from 'foundation-sites/js/foundation.accordion';
-// Foundation.plugin(Accordion, 'Accordion');
+import { Accordion } from 'foundation-sites/js/foundation.accordion';
+Foundation.plugin(Accordion, 'Accordion');
 
 // import { AccordionMenu } from 'foundation-sites/js/foundation.accordionMenu';
 // Foundation.plugin(AccordionMenu, 'AccordionMenu');

@@ -8,6 +8,9 @@ class HawwwaiTheme_Timber extends TimberSite
     {
         parent::__construct();
         $this->register_hooks();
+
+        $woody = new Woody();
+        Timber::$dirname = array('views', $woody->getTemplatesDirName());
     }
 
     protected function register_hooks()
