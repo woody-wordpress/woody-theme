@@ -42,4 +42,4 @@ class HawwwaiTheme_Taxonomy
 }
 
 // Execute Class
-$HawwwaiTheme_Taxonomy = new HawwwaiTheme_Taxonomy();
+new HawwwaiTheme_Taxonomy();

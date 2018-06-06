@@ -18,7 +18,6 @@ class HawwwaiTheme_Cleanup_Admin
         add_filter('wpseo_metabox_prio', array($this, 'yoast_move_meta_box_bottom'));
         add_action('init', array($this, 'remove_pages_editor'));
         add_action('admin_menu', array($this, 'remove_menus'));
-        add_action('admin_enqueue_scripts', array($this, 'admin_style'));
 
         if (is_admin()) {
             add_action('pre_get_posts', 'custom_pre_get_posts');
@@ -63,15 +62,6 @@ class HawwwaiTheme_Cleanup_Admin
     }
 
     /**
-     * Benoit Bouchaud
-     * On ajoute admin.css aux styles du backoffice
-     */
-    public function admin_style()
-    {
-        wp_enqueue_style('admin-styles', get_template_directory_uri() . '/admin.css');
-    }
-
-    /**
      * Disable Posts' meta from being preloaded
      * This fixes memory problems in the WordPress Admin
      */
@@ -84,4 +74,4 @@ class HawwwaiTheme_Cleanup_Admin
 }
 
 // Execute Class
-$HawwwaiTheme_Cleanup_Admin = new HawwwaiTheme_Cleanup_Admin();
+new HawwwaiTheme_Cleanup_Admin();

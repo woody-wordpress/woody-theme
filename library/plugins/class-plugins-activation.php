@@ -50,7 +50,7 @@ class HawwwaiTheme_Plugins_Activation
 
     protected function register_hooks()
     {
-        include_once(ABSPATH . 'wp-admin/includes/plugin.php');
+        require_once(ABSPATH . 'wp-admin/includes/plugin.php');
         foreach ($this->plugins as $plugin) {
             if (!is_plugin_active($plugin)) {
                 $result = activate_plugin($plugin);
@@ -72,4 +72,4 @@ class HawwwaiTheme_Plugins_Activation
 }
 
 // Execute Class
-$HawwwaiTheme_Plugins_Activation = new HawwwaiTheme_Plugins_Activation();
+new HawwwaiTheme_Plugins_Activation();

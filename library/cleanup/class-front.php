@@ -111,4 +111,4 @@ class HawwwaiTheme_Cleanup_Front
 }
 
 // Execute Class
-$HawwwaiTheme_Cleanup_Front = new HawwwaiTheme_Cleanup_Front();
+new HawwwaiTheme_Cleanup_Front();

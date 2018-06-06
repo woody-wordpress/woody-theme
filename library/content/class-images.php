@@ -125,4 +125,4 @@ class HawwwaiTheme_Images
 }
 
 // Execute Class
-$HawwwaiTheme_Images = new HawwwaiTheme_Images();
+new HawwwaiTheme_Images();

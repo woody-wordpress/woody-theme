@@ -16,6 +16,7 @@ class HawwwaiTheme_Plugins_Options
 
     protected function register_hooks()
     {
+        // Plugins Settings
         update_option('timezone_string', '', '', 'yes'); // Mettre vide si le serveur est déjà configuré sur la bonne timezone Europe/Paris
         update_option('date_format', 'j F Y', '', 'yes');
         update_option('time_format', 'G\hi', '', 'yes');
@@ -23,15 +24,23 @@ class HawwwaiTheme_Plugins_Options
         update_option('wp_php_console', array('password' => 'root', 'register' => true, 'short' => true, 'stack' => true), '', 'yes');
         update_option('rocket_lazyload_options', array('images' => true, 'iframes' => true, 'youtube' => true), '', 'yes');
         update_option('minify_html_active', (WP_ENV == 'dev') ? 'no' : 'yes', '', 'yes');
-        update_option('minify_javascript', (WP_ENV == 'dev') ? 'no' : 'yes', '', 'yes');
+        update_option('minify_javascript', 'yes', '', 'yes');
         update_option('minify_html_comments', (WP_ENV == 'dev') ? 'no' : 'yes', '', 'yes');
         update_option('minify_html_xhtml', 'yes', '', 'yes');
         update_option('minify_html_relative', 'yes', '', 'yes');
         update_option('minify_html_scheme', 'no', '', 'yes');
         update_option('minify_html_utf8', 'no', '', 'yes');
-        update_option('acm_server_settings', (WP_ENV == 'dev') ? array('server_enable' => false) : array('server_enable' => true), '', 'yes');
+        update_option('acm_server_settings', array('server_enable' => true), '', 'yes');
+
+        // Cron force Disable HTTP
+        add_action('init', function () {
+            if (defined('DOING_CRON') && DOING_CRON && php_sapi_name() != 'cli') {
+                print "No way !!!";
+                die();
+            }
+        });
     }
 }
 
 // Execute Class
-$HawwwaiTheme_Plugins_Options = new HawwwaiTheme_Plugins_Options();
+new HawwwaiTheme_Plugins_Options();

@@ -63,4 +63,4 @@ class HawwwaiTheme_ACF
 }
 
 // Execute Class
-$HawwwaiTheme_ACF = new HawwwaiTheme_ACF();
+new HawwwaiTheme_ACF();
