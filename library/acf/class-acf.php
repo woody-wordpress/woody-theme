@@ -54,7 +54,7 @@ class HawwwaiTheme_ACF
         $field['choices'] = [];
         if (!empty($components)) {
             foreach ($components as $key => $component) {
-                $field['choices'][$key] = '<img class="img-responsive" src="/app/themes/site-theme/dist/img/woody/' . $component['thumbnails']['small'] . '" alt="' . $key . '" width="150" height="150" />';
+                $field['choices'][$key] = '<img class="img-responsive" src="' . get_stylesheet_directory_uri() . '/dist/img/woody/' . $component['thumbnails']['small'] . '" alt="' . $key . '" width="150" height="150" />';
             }
         }
 

@@ -20,7 +20,7 @@ class HawwwaiTheme_Enqueue_Assets
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'));
     }
 
-    private function enqueue_libraries()
+    public function enqueue_libraries()
     {
 
         // Deregister the jquery version bundled with WordPress.
@@ -35,7 +35,7 @@ class HawwwaiTheme_Enqueue_Assets
         }
     }
 
-    private function enqueue_assets()
+    public function enqueue_assets()
     {
         // Enqueue Founation scripts
         wp_enqueue_script('main-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->asset_path('js/main.js'), 'jquery', '', true);
@@ -44,7 +44,7 @@ class HawwwaiTheme_Enqueue_Assets
         wp_enqueue_style('main-stylesheet', get_stylesheet_directory_uri() . '/dist/' . $this->asset_path('css/main.css'), array(), '', 'all');
     }
 
-    private function enqueue_admin_assets()
+    public function enqueue_admin_assets()
     {
         // Enqueue Founation scripts
         //wp_enqueue_script('admin-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->asset_path('js/main.js'), 'jquery', '', true);

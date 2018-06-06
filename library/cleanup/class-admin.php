@@ -20,7 +20,7 @@ class HawwwaiTheme_Cleanup_Admin
         add_action('admin_menu', array($this, 'remove_menus'));
 
         if (is_admin()) {
-            add_action('pre_get_posts', 'custom_pre_get_posts');
+            add_action('pre_get_posts', array($this, 'custom_pre_get_posts'));
         }
     }
 

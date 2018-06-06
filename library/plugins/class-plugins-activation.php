@@ -9,12 +9,13 @@
 
 class HawwwaiTheme_Plugins_Activation
 {
-    public $plugins;
-    public $debug_plugins;
+    public $activate_plugins;
+    public $deactivate_plugins;
+    public $dev_plugins;
 
     public function __construct()
     {
-        $this->plugins = [
+        $this->activate_plugins = [
             'advanced-custom-fields-pro/acf.php',
             'acf-relationship-create-pro/acf-relationship-create-pro.php',
             'timber-library/timber.php',
@@ -32,17 +33,21 @@ class HawwwaiTheme_Plugins_Activation
             'advanced-cron-manager/advanced-cron-manager.php',
         ];
 
-        $this->debug_plugins = [
+        $this->dev_plugins = [
             'debug-bar/debug-bar.php',
             'debug-bar-timber/debug-bar-timber.php',
             'kint-debugger/kint-debugger.php',
             'wp-php-console/wp-php-console.php',
         ];
 
+        $this->deactivate_plugins = [
+
+        ];
+
         // Enable debug plugins on DEV
         if (WP_ENV == 'dev') {
-            $this->plugins = array_merge($this->plugins, $this->debug_plugins);
-            $this->debug_plugins = [];
+            $this->activate_plugins = array_merge($this->activate_plugins, $this->dev_plugins);
+            $this->dev_plugins = [];
         }
 
         $this->register_hooks();
@@ -51,7 +56,7 @@ class HawwwaiTheme_Plugins_Activation
     protected function register_hooks()
     {
         require_once(ABSPATH . 'wp-admin/includes/plugin.php');
-        foreach ($this->plugins as $plugin) {
+        foreach ($this->activate_plugins as $plugin) {
             if (!is_plugin_active($plugin)) {
                 $result = activate_plugin($plugin);
 
@@ -67,7 +72,8 @@ class HawwwaiTheme_Plugins_Activation
             }
         }
 
-        deactivate_plugins($this->debug_plugins);
+        deactivate_plugins($this->dev_plugins);
+        deactivate_plugins($this->deactivate_plugins);
     }
 }
 
