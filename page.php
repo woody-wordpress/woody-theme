@@ -14,6 +14,7 @@ $context['post'] = new TimberPost();
 
 $context['woody_components'] = Woody::getTwigsPaths();
 
+// rcd(get_class_methods(TimberPost), true);
 /** ****************************
  * Displaying the page's heading
  **************************** **/
@@ -103,6 +104,10 @@ foreach ($sections as $key => $section) {
                         $the_items['items'][$key]['subtitle'] = (!empty($item['subtitle'])) ? $item['subtitle'] : '';
                         $the_items['items'][$key]['icon'] = (!empty($item['icon'])) ? $item['icon'] : '';
                         $the_items['items'][$key]['description'] = (!empty($item['description'])) ? $item['description'] : '';
+                        $the_items['items'][$key]['link']['url'] = (!empty($item['link']['url'])) ? $item['link']['url'] : '';
+                        $the_items['items'][$key]['link']['title'] = (!empty($item['link']['title'])) ? $item['link']['title'] : '';
+                        $the_items['items'][$key]['link']['target'] = (!empty($item['link']['target'])) ? $item['link']['target'] : '';
+
                         // Get the choice of the media
                         if ($item['media_type'] == 'img' && !empty($item['img'])) {
                             $the_items['items'][$key]['img'] = $item['img'];
@@ -115,6 +120,8 @@ foreach ($sections as $key => $section) {
                         $item = $item_wrapper['existing_content'];
 
                         if (!empty($item['content_selection'])) {
+                            $the_items['items'][$key]['link']['url'] = $item['content_selection']->get_path();
+                            $the_items['items'][$key]['link']['title'] = (!empty($item['link_label'])) ? $item['link_label'] : '';
                             // Search for focus fields and, if empty, search for post field
                             if (!empty($item['content_selection']->get_field('focus_title'))) {
                                 $the_items['items'][$key]['title'] = $item['content_selection']->get_field('focus_title');
@@ -160,6 +167,8 @@ foreach ($sections as $key => $section) {
                         }
                     }
                 }
+                // rcd($the_items, true);
+
                 $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_items);
             } else {
                 $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);

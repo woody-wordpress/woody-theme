@@ -8,7 +8,6 @@ document.body.appendChild(pswpDOM);
 
 // Init Gallery
 export function initPhotoSwipeFromDOM(gallerySelector) {
-
     // parse slide data (url, title, size ...) from DOM elements
     // (children of gallerySelector)
     var parseThumbnailElements = function(el) {
@@ -154,7 +153,9 @@ export function initPhotoSwipeFromDOM(gallerySelector) {
                     rect = thumbnail.getBoundingClientRect();
 
                 return { x: rect.left, y: rect.top + pageYScroll, w: rect.width };
-            }
+            },
+            showHideOpacity: true,
+            history: false
 
         };
 

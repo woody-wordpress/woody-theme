@@ -106,6 +106,21 @@
                             "prefix_name": 0
                         },
                         {
+                            "key": "field_5b19509d883f4",
+                            "label": "Lien",
+                            "name": "link",
+                            "type": "link",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array"
+                        },
+                        {
                             "key": "field_5b0d28f9bb18b",
                             "label": "Média",
                             "name": "media_type",
@@ -256,6 +271,25 @@
                             "ui": 1
                         },
                         {
+                            "key": "field_5b1959119e47c",
+                            "label": "Texte du bouton \"Lire la suite\"",
+                            "name": "link_label",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
                             "key": "field_5b0d390b1cdfc",
                             "label": "Afficher \/ Masquer des éléments",
                             "name": "display_elements",
@@ -351,5 +385,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1528207050
+    "modified": 1528380773
 }
