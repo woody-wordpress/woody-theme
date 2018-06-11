@@ -99,3 +99,5 @@ Foundation.plugin(ResponsiveToggle, 'ResponsiveToggle');
 
 // import { ResponsiveAccordionTabs } from 'foundation-sites/js/foundation.responsiveAccordionTabs';
 // Foundation.plugin(ResponsiveAccordionTabs, 'ResponsiveAccordionTabs');
+
+$(document).foundation();
