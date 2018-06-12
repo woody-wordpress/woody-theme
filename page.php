@@ -54,9 +54,7 @@ foreach ($sections as $key => $section) {
 
     // Creating data for display options => set the container classes
     $classes_array = [];
-    if (empty($section['display_fullwidth'])) {
-        $classes_array[] = 'grid-container';
-    }
+    $display['gridContainer'] = (empty($section['display_fullwidth'])) ? 'grid-container' : '';
 
     if (!empty($section['background_img'])) {
         $display['background_img'] = $section['background_img'];
