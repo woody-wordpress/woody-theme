@@ -104,7 +104,7 @@
                         "5b0d21eb9d80a": {
                             "key": "5b0d21eb9d80a",
                             "name": "manual_focus",
-                            "label": "Mise en avant manuelle",
+                            "label": "Mise en avant (sélection manuelle)",
                             "display": "block",
                             "sub_fields": [
                                 {
@@ -381,7 +381,7 @@
                             "max": ""
                         }
                     },
-                    "button_label": "Ajouter un composant",
+                    "button_label": "Ajouter un bloc",
                     "min": "",
                     "max": ""
                 },
@@ -684,5 +684,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1528789502
+    "modified": 1528804101
 }

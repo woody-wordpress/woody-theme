@@ -90,6 +90,10 @@ foreach ($sections as $key => $section) {
     if (!empty($section['section_content'])) {
         foreach ($section['section_content'] as $key => $layout) {
 
+            // if ($layout['acf_fc_layout'] == 'files') {
+            //     rcd($layout, true);
+            // }
+
             // If the layout is a manual content selection, we create the $items array to push it into woody tpls
             if ($layout['acf_fc_layout'] == 'manual_focus') {
                 $the_items = [];
