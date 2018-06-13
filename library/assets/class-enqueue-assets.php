@@ -42,6 +42,7 @@ class HawwwaiTheme_Enqueue_Assets
 
         // Enqueue the main Stylesheet.
         wp_enqueue_style('main-stylesheet', get_stylesheet_directory_uri() . '/dist/' . $this->asset_path('css/main.css'), array(), '', 'all');
+        wp_enqueue_style('font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css', array(), '', 'all');
     }
 
     public function enqueue_admin_assets()
