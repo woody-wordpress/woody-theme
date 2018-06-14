@@ -1,6 +1,6 @@
 {
     "key": "group_5b0d1ed32a384",
-    "title": "Mise en avant manuelle",
+    "title": "Mise en avant(sélection manuelle)",
     "fields": [
         {
             "key": "field_5b0d1ecc7c825",
@@ -39,7 +39,7 @@
             "sub_fields": [
                 {
                     "key": "field_5b0d2800bb187",
-                    "label": "Type de contenu",
+                    "label": "Type",
                     "name": "content_selection_type",
                     "type": "radio",
                     "instructions": "Le contenu libre permet de créer des mises en avant personnalisées\r\nLe contenu existant permet de mettre en avant des pages du site",
@@ -79,7 +79,7 @@
                     ],
                     "wrapper": {
                         "width": "",
-                        "class": "",
+                        "class": "hide-label",
                         "id": ""
                     },
                     "layout": "block",
@@ -242,14 +242,14 @@
                     ],
                     "wrapper": {
                         "width": "",
-                        "class": "",
+                        "class": "hide-label",
                         "id": ""
                     },
                     "layout": "block",
                     "sub_fields": [
                         {
                             "key": "field_5b0d38ed1cdfb",
-                            "label": "Contenu",
+                            "label": "Choix de la page",
                             "name": "content_selection",
                             "type": "post_object",
                             "instructions": "",
@@ -291,7 +291,7 @@
                         },
                         {
                             "key": "field_5b0d390b1cdfc",
-                            "label": "Afficher \/ Masquer des éléments",
+                            "label": "Affichage",
                             "name": "display_elements",
                             "type": "checkbox",
                             "instructions": "",
@@ -322,7 +322,7 @@
                                 "tags_2",
                                 "author"
                             ],
-                            "layout": "vertical",
+                            "layout": "horizontal",
                             "toggle": 0,
                             "return_format": "value"
                         }
@@ -356,7 +356,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-label",
                 "id": ""
             },
             "choices": [],
@@ -385,5 +385,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1528380773
+    "modified": 1528961008
 }

@@ -63,7 +63,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-label",
                 "id": ""
             },
             "choices": [],
@@ -92,5 +92,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Editeur wysiwyg \/ code html",
-    "modified": 1528791059
+    "modified": 1528961033
 }
