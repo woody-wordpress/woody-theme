@@ -1,44 +1,228 @@
-.acf-field-radio[data-name="woody_tpl"] .acf-radio-list {
+// Styles pour le selecteur de templates Woody => override style des radios par défaut
+.acf-field-radio[data-name="woody_tpl"] {
+    input[type="radio"] {
+        display: none;
+    }
+    .acf-radio-list {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    li {
+        display: flex;
+        text-align: center;
+        margin-right: 0 !important;
+        >label {
+            padding: 6px;
+            margin: 10px;
+            opacity: .75;
+            border-radius: 3px;
+            transition: .3s;
+            border: 1px dotted #c3c3c3;
+            box-shadow: 0 2px 0 #fff;
+            &:hover {
+                opacity: .95;
+                background-color: #eee;
+            }
+            &.selected {
+                border-color: #0073aa #006799 #006799;
+                background-color: #0085ba;
+                opacity: 1;
+                box-shadow: 0 2px 0 #006799;
+            }
+
+        }
+    }
+}
+
+// On masque les titres de champs inutiles
+.acf-field.hide-label,
+.acf-field[data-key=field_5b043f0525968],
+.acf-field[data-key=field_5afd2c6916ecb] {
+    >.acf-label {
+        display: none;
+    }
+}
+
+// On masque les icones des fichiers lorsque ils sont inutiles (ex. fichier vidéo)
+.acf-field.nofile-thumb {
+    .file-icon {
+        display: none;
+    }
+    .acf-file-uploader .file-info {
+        margin-left: 0;
+    }
+}
+
+// On ajoute des icones dans les tabs de contenu / En-tête / Mise en page
+// et on revoit le style des tabs
+.acf-fields>.acf-tab-wrap .acf-tab-group {
+    border-bottom: none !important;
+    padding-bottom: 10px;
     display: flex;
-    flex-wrap: wrap;
+    li {
+        margin-right: 0;
+        flex-grow: 1;
+        transition: .3s;
+        a {
+            background-color: #23282d !important;
+            transition: .3s !important;
+            border: none !important;
+            font-weight: 500;
+            text-align: center;
+            color: #fff !important;
+            &:hover {
+                background-color: darken(#23282d, 10%) !important;
+            }
+            &:before {
+                display: inline-block;
+                padding-right: 7px;
+                font-family: 'dashicons';
+                font-weight: normal;
+                font-style: normal;
+                font-size: 16px;
+                transform: translateY(2px);
+            }
+        }
+        &.active {
+            a {
+                padding-bottom: 5px !important;
+                background-color: #0073aa !important;
+                color: #fff !important;
+                &:before {
+                    color: #fff;
+                }
+            }
+        }
+    }
 }
 
-.acf-field-radio[data-name="woody_tpl"] li {
-    display: flex;
-    text-align: center;
-    margin-right: 0 !important;
+#acf-group_5afd260eeb4ab,
+#acf-group_5b052bbee40a4 {
+    .acf-tab-group {
+        li:nth-of-type(1) a {
+            &:before {
+                content: '\f119';
+            }
+        }
+        li:nth-of-type(2) a {
+            &:before {
+                content: '\f100';
+            }
+        }
+    }
 }
 
-.acf-field-radio[data-name="woody_tpl"] li>label {
-    padding: 6px;
-    margin: 10px;
-    opacity: .75;
-    border-radius: 3px;
-    transition: .3s;
-    border: 1px dotted #c3c3c3;
-    box-shadow: 0 2px 0 #fff;
+#acf-group_5afd260eeb4ab {
+    .acf-tab-group {
+        li:nth-of-type(3) a {
+            &:before {
+                content: '\f134';
+            }
+        }
+    }
 }
 
-.acf-field-radio[data-name="woody_tpl"] li>label:hover {
-    opacity: .95;
-    background-color: #eee;
+// On ajoute une ombre aux layouts ouverts pour les mettre en avant
+.acf-repeater {
+    .acf-row:not(.-collapsed) {
+        >.acf-fields {
+            background-color: darken(#fff, 5%);
+        }
+    }
 }
 
-.acf-field-radio[data-name="woody_tpl"] li>label.selected {
-    border-color: #0073aa #006799 #006799;
-    background-color: #0085ba;
-    opacity: 1;
-    box-shadow: 0 2px 0 #006799;
+// On modifie le style du bouton "Expand/Collapse all"
+.acf-flexible-content {
+    .layout {
+        transition: box-shadow .3s;
+    }
+    .layout:not(.-collapsed) {
+        box-shadow: 0 2px 35px 5px #d5d5d5;
+    }
 }
 
-.acf-field-radio[data-name="woody_tpl"] li>label>div small {
-    font-weight: bold;
+.acf-field.acf-field-flexible-content,
+.acf-field.acf-field-repeater {
+    padding-top: 45px !important;
+    .field-repeater-toggle-all,
+    .field-flexible-toggle {
+        position: absolute !important;
+        top: 5px;
+        right: 0;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 5px 10px !important;
+        height: auto !important;
+        width: 100%;
+        &:hover {
+            color: #006799;
+            &:before {
+                color: #006799;
+            }
+        }
+    }
+    .field-repeater-toggle-all {
+        background: #f6f6f6 !important;
+    }
+    .field-flexible-toggle {
+        background: darken(#f6f6f6, 7%) !important;
+    }
 }
 
-.acf-field-radio[data-name="woody_tpl"] li>label.selected>div small {
-    color: #fff;
+.field-repeater-toggle-all.collapsed-row::before,
+.field-flexible-toggle-all.collapsed-row::before {
+    content: '\f140' !important;
 }
 
-.acf-field-radio[data-name="woody_tpl"] input[type="radio"] {
-    display: none;
+.field-repeater-toggle::before,
+.field-flexible-toggle::before {
+    content: '\f142' !important;
+}
+
+// On affine le style des boutons d'ajout
+.acf-button.button.button-primary {
+    font-weight: 500 !important;
+    border-radius: 0 !important;
+    border: none !important;
+    text-shadow: none;
+}
+
+.acf-field-5b043f0525968>.acf-input>.acf-flexible-content,
+.acf-field-5afd2c6916ecb>.acf-input>.acf-repeater {
+    >.acf-actions {
+        .acf-button.button.button-primary {
+            width: 100%;
+            text-align: center;
+            margin-top: 10px;
+            padding: 10px;
+            height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &:before {
+                display: inline-block;
+                font-family: 'dashicons';
+                font-size: 18px;
+                margin-right: 8px;
+                content: '\f502'
+            }
+        }
+    }
+}
+
+.acf-field-5afd2c6916ecb>.acf-input>.acf-repeater {
+    >.acf-actions {
+        .acf-button.button.button-primary {
+            background-color: #23282d;
+        }
+    }
+}
+
+.acf-field-5b043f0525968>.acf-input>.acf-flexible-content {
+    >.acf-actions {
+        .acf-button.button.button-primary {
+            background-color: #006799;
+        }
+    }
 }
