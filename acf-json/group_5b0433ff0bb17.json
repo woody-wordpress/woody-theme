@@ -55,6 +55,9 @@
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter une section à l'accordéon",
+            "hide_collapse": 0,
+            "collapse_all_repeater": 1,
+            "btn-icon-only": 1,
             "sub_fields": [
                 {
                     "key": "field_5b0434294eb1a",
@@ -134,5 +137,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Titre + Accordéon)",
-    "modified": 1528960910
+    "modified": 1528964299
 }

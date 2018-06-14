@@ -36,6 +36,9 @@
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter un fichier",
+            "hide_collapse": 0,
+            "collapse_all_repeater": 1,
+            "btn-icon-only": 1,
             "sub_fields": [
                 {
                     "key": "field_5b043869f155d",
@@ -139,5 +142,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Répète le groupe \"Fichier\"",
-    "modified": 1528960931
+    "modified": 1528964325
 }
