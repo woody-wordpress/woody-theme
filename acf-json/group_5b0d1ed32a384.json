@@ -54,7 +54,7 @@
                         "id": ""
                     },
                     "default_value": "",
-                    "placeholder": "Titre visible lorsque la section est refermée (uniquement pour le backoffice)",
+                    "placeholder": "Titre visible lorsque le contenu est refermé (uniquement pour le backoffice)",
                     "prepend": "",
                     "append": "",
                     "maxlength": ""
@@ -407,5 +407,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1529002907
+    "modified": 1529067190
 }

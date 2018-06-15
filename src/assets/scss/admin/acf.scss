@@ -137,15 +137,22 @@
 }
 
 // On ajoute une ombre aux layouts ouverts pour les mettre en avant
+// Et on change les couleurs de fond des lignes des répéteurs
 .acf-repeater {
-    .acf-row:not(.-collapsed) {
+    .acf-row {
+        >.acf-row-handle,
         >.acf-fields {
-            background-color: darken(#fff, 5%);
+            background-color: darken(#fff, 3%);
+        }
+        &:nth-of-type(2n+1) {
+            >.acf-row-handle,
+            >.acf-fields {
+                background-color: darken(#fff, 8%);
+            }
         }
     }
 }
 
-// On modifie le style du bouton "Expand/Collapse all"
 .acf-flexible-content {
     .layout {
         transition: box-shadow .3s;
@@ -155,6 +162,7 @@
     }
 }
 
+// On modifie le style du bouton "Expand/Collapse all"
 .acf-field.acf-field-flexible-content,
 .acf-field.acf-field-repeater {
     padding-top: 45px !important;
@@ -176,11 +184,9 @@
             }
         }
     }
-    .field-repeater-toggle-all {
-        background: #f6f6f6 !important;
-    }
+    .field-repeater-toggle-all,
     .field-flexible-toggle {
-        background: darken(#f6f6f6, 7%) !important;
+        background: rgba(#000, .08) !important;
     }
 }
 
@@ -202,18 +208,21 @@
     text-shadow: none;
 }
 
+.acf-field-5b0d20457c829>.acf-input>.acf-repeater,
 .acf-field-5b043f0525968>.acf-input>.acf-flexible-content,
 .acf-field-5afd2c6916ecb>.acf-input>.acf-repeater {
     >.acf-actions {
         .acf-button.button.button-primary {
             width: 100%;
             text-align: center;
-            margin-top: 20px;
+            margin-top: 30px;
             padding: 10px;
             height: auto;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: background-color .3s;
+            box-shadow: none !important;
             &:before {
                 display: inline-block;
                 font-family: 'dashicons';
@@ -225,6 +234,7 @@
     }
 }
 
+// Ajouter une section
 .acf-field-5afd2c6916ecb>.acf-input>.acf-repeater {
     >.acf-actions {
         .acf-button.button.button-primary {
@@ -236,6 +246,7 @@
     }
 }
 
+// Ajouter un bloc
 .acf-field-5b043f0525968>.acf-input>.acf-flexible-content {
     >.acf-actions {
         .acf-button.button.button-primary {
@@ -247,18 +258,33 @@
     }
 }
 
+// Ajouter un contenu
+.acf-field-5b0d20457c829>.acf-input>.acf-repeater {
+    >.acf-actions {
+        .acf-button.button.button-primary {
+            background-color: #00a0d2;
+            &:hover {
+                background-color: darken(#00a0d2, 10%);
+            }
+        }
+    }
+}
+
 // On marque le titre admin de section pour mieux les séparer
-.acf-field-5b0d1dc8907e7 input[type=text] {
-    font-size: 1.4em !important;
-    font-weight: bold;
-    background: transparent;
-    box-shadow: none;
-    border: none;
-    &:placeholder-shown {
-        font-size: 14px !important;
-        font-weight: 300;
-        border: 1px solid #ddd;
-        box-shadow: inset 0 1px 2px rgba( 0, 0, 0, 0.07);
-        background-color: #fff;
+.acf-field-5b22415792db0,
+.acf-field-5b0d1dc8907e7 {
+    input[type=text] {
+        font-size: 1.4em !important;
+        font-weight: bold;
+        background: transparent;
+        box-shadow: none;
+        border: none;
+        &:placeholder-shown {
+            font-size: 14px !important;
+            font-weight: 300;
+            border: 1px solid #ddd;
+            box-shadow: inset 0 1px 2px rgba( 0, 0, 0, 0.07);
+            background-color: #fff;
+        }
     }
 }
