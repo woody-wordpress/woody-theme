@@ -1,3 +1,18 @@
+@mixin placeholder {
+    ::-webkit-input-placeholder {
+        @content
+    }
+    :-moz-placeholder {
+        @content
+    }
+    ::-moz-placeholder {
+        @content
+    }
+    :-ms-input-placeholder {
+        @content
+    }
+}
+
 // Styles pour le selecteur de templates Woody => override style des radios par défaut
 .acf-field-radio[data-name="woody_tpl"] {
     input[type="radio"] {
@@ -29,7 +44,6 @@
                 opacity: 1;
                 box-shadow: 0 2px 0 #006799;
             }
-
         }
     }
 }
@@ -194,7 +208,7 @@
         .acf-button.button.button-primary {
             width: 100%;
             text-align: center;
-            margin-top: 10px;
+            margin-top: 20px;
             padding: 10px;
             height: auto;
             display: flex;
@@ -215,6 +229,9 @@
     >.acf-actions {
         .acf-button.button.button-primary {
             background-color: #23282d;
+            &:hover {
+                background-color: darken(#23282d, 10%);
+            }
         }
     }
 }
@@ -223,6 +240,31 @@
     >.acf-actions {
         .acf-button.button.button-primary {
             background-color: #006799;
+            &:hover {
+                background-color: darken(#006799, 10%);
+            }
         }
     }
 }
+
+// On marque le titre admin de section pour mieux les séparer
+// .acf-row:not(.-collapsed) {
+.acf-field-5b0d1dc8907e7 input[type=text] {
+    text-align: center;
+    font-size: 1.4em !important;
+    font-weight: bold;
+    background: rgba(255, 255, 255, .3);
+    box-shadow: none;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+    :-webkit-input-placeholder {
+        font-size: 1em;
+        font-weight: 300;
+    }
+    @include placeholder {
+        font-size: 1em;
+        font-weight: 300;
+    }
+}
+
+// }
