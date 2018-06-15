@@ -31,6 +31,7 @@ class HawwwaiTheme_Plugins_Activation
             'minify-html-markup/minify-html.php',
             'wp-deferred-javascripts/wp-deferred-javascripts.php',
             'advanced-cron-manager/advanced-cron-manager.php',
+            'acf-repeater-flexible-content-collapser/acf-repeater-flexible-content-collapser.php'
         ];
 
         $this->dev_plugins = [
