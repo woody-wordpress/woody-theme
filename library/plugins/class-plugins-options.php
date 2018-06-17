@@ -30,15 +30,9 @@ class HawwwaiTheme_Plugins_Options
         update_option('minify_html_relative', 'yes', '', 'yes');
         update_option('minify_html_scheme', 'no', '', 'yes');
         update_option('minify_html_utf8', 'no', '', 'yes');
+        update_option('upload_path', 'wp-content/uploads/' . WP_SITE_KEY, '', 'yes');
+        update_option('upload_path_url', 'wp-content/uploads/' . WP_SITE_KEY, '', 'yes');
         update_option('acm_server_settings', array('server_enable' => true), '', 'yes');
-
-        // Cron force Disable HTTP
-        add_action('init', function () {
-            if (defined('DOING_CRON') && DOING_CRON && php_sapi_name() != 'cli') {
-                print "No way !!!";
-                die();
-            }
-        });
     }
 }
 
