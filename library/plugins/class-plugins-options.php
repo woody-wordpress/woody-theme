@@ -30,8 +30,8 @@ class HawwwaiTheme_Plugins_Options
         update_option('minify_html_relative', 'yes', '', 'yes');
         update_option('minify_html_scheme', 'no', '', 'yes');
         update_option('minify_html_utf8', 'no', '', 'yes');
-        update_option('upload_path', 'wp-content/uploads/' . WP_SITE_KEY, '', 'yes');
-        update_option('upload_path_url', 'wp-content/uploads/' . WP_SITE_KEY, '', 'yes');
+        update_option('upload_path', WP_CONTENT_DIR . '/uploads/' . WP_SITE_KEY, '', 'yes');
+        update_option('upload_url_path', WP_CONTENT_URL . '/uploads/' . WP_SITE_KEY, '', 'yes');
         update_option('acm_server_settings', array('server_enable' => true), '', 'yes');
     }
 }
