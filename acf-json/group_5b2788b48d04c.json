@@ -110,9 +110,15 @@
                 "class": "",
                 "id": ""
             },
-            "choices": [
-                "Dynamically populated with all taxonomies terms"
-            ],
+            "choices": {
+                "9": "Fakr - Cat A - Fakr - Catégorie",
+                "10": "Fakr – Cat B - Fakr - Catégorie",
+                "11": "Fakr – Cat C - Fakr - Catégorie",
+                "12": "Fakr - Client A - Fakr - Clientèle",
+                "13": "Fakr - Client B - Fakr - Clientèle",
+                "14": "Fakr - Client C - Fakr - Clientèle",
+                "8": "Instagram - Catégories média"
+            },
             "default_value": [],
             "allow_null": 0,
             "multiple": 1,
@@ -130,7 +136,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "45",
                 "class": "",
                 "id": ""
             },
@@ -154,7 +160,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "30",
                 "class": "",
                 "id": ""
             },
@@ -173,7 +179,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "30",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -184,25 +190,6 @@
             "min": 1,
             "max": "",
             "step": ""
-        },
-        {
-            "key": "field_5b27a4d203e45",
-            "label": "Ajouter une pagination",
-            "name": "focused_paginate",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "70",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
         },
         {
             "key": "field_5b2788e084ed2",
@@ -259,5 +246,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1529319266
+    "modified": 1529322061
 }
