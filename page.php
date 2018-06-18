@@ -169,9 +169,67 @@ foreach ($sections as $key => $section) {
                         }
                     }
                 }
-                // rcd($the_items, true);
 
                 $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_items);
+            //
+            } elseif ($layout['acf_fc_layout'] == 'auto_focus') {
+                $tax_query = [
+                    'relation' => 'AND',
+                    'page_type' => array(
+                        'taxonomy' => 'page_type',
+                        'terms' => $layout['focused_content_type'],
+                        'field' => 'taxonomy_term_id',
+                        'operator' => 'IN'
+                    ),
+                ];
+
+                // If custom terms are selected, creating an array with all of them ordered by taxonomies
+                $custom_tax = [];
+                if (!empty($layout['focused_taxonomy_terms'])) {
+
+                    // Get the relation choice btw custom terms
+                    $tax_query['custom_tax']['relation'] = (!empty($layout['focused_taxonomy_terms_andor'])) ? $layout['focused_taxonomy_terms_andor'] : 'OR';
+
+                    foreach ($layout['focused_taxonomy_terms'] as $focused_term_key => $focused_term) {
+                        $term = get_term($focused_term);
+                        $custom_tax[$term->taxonomy][] = $focused_term;
+                    }
+
+                    // Create the tax_query's custom taxonomies args
+                    foreach ($custom_tax as $taxo => $terms) {
+                        $tax_query['custom_tax'][] = array(
+                            'taxonomy' => $taxo,
+                            'terms' => $terms,
+                            'field' => 'taxonomy_term_id',
+                            'operator' => 'IN'
+                        );
+                    }
+                }
+
+                // Create $the_query
+                $the_query = [
+                    'post_type' => (!empty($layout['focused_post_type'])) ? $layout['focused_post_type'] : 'page',
+                    'tax_query' => $tax_query,
+                    'nopaging' => true,
+                    'posts_per_page' => (!empty($layout['focused_count'])) ? $layout['focused_count'] : -1,
+                ];
+
+                $focused_posts = new WP_Query($the_query);
+
+                $the_items = [];
+                if (!empty($focused_posts->posts)) {
+                    foreach ($focused_posts->posts as $key => $post) {
+                        $post = Timber::get_post($post->ID);
+                        // rcd($post, true);
+
+                        if (!empty($post->get_field('focus_title'))) {
+                            $the_items['items'][$key]['title'] = $post->get_field('focus_title');
+                        } elseif (!empty($post->get_field('title'))) {
+                            $the_items['items'][$key]['title'] = $post->get_field('title');
+                        }
+                    }
+                }
+                rcd($the_items, true);
             } else {
                 $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             }

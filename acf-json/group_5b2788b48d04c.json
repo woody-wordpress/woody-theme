@@ -31,10 +31,10 @@
                 "class": "",
                 "id": ""
             },
-            "choices": [
-                "Pages",
-                "Fiches touristiques"
-            ],
+            "choices": {
+                "page": "Pages",
+                "touristic_sheet": "Fiches touristiques"
+            },
             "allow_custom": 0,
             "save_custom": 0,
             "default_value": [],
@@ -54,7 +54,7 @@
                     {
                         "field": "field_5b27899284ed4",
                         "operator": "==",
-                        "value": "0"
+                        "value": "page"
                     }
                 ]
             ],
@@ -141,8 +141,8 @@
                 "id": ""
             },
             "choices": {
-                "or": "OU",
-                "and": "ET"
+                "OR": "OU",
+                "AND": "ET"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -246,5 +246,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1529322061
+    "modified": 1529327402
 }

@@ -100,7 +100,7 @@ class HawwwaiTheme_ACF
             $tax_machine_name = $term->taxonomy;
             $tax = get_taxonomy($tax_machine_name);
             $tax_name = $tax->label;
-            $field['choices'][$term->term_id] = $term->name . ' - ' . $tax_name;
+            $field['choices'][$term->term_taxonomy_id] = $term->name . ' - ' . $tax_name;
         }
 
         return $field;
