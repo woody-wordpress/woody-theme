@@ -1,0 +1,263 @@
+{
+    "key": "group_5b2788b48d04c",
+    "title": "Mise en avant(sélection automatique)",
+    "fields": [
+        {
+            "key": "field_5b2788cc84ed1",
+            "label": "Contenu",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5b27899284ed4",
+            "label": "Catégorie de contenu",
+            "name": "focused_post_type",
+            "type": "checkbox",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": [
+                "Pages",
+                "Fiches touristiques"
+            ],
+            "allow_custom": 0,
+            "save_custom": 0,
+            "default_value": [],
+            "layout": "horizontal",
+            "toggle": 0,
+            "return_format": "value"
+        },
+        {
+            "key": "field_5b27890c84ed3",
+            "label": "Types de publications",
+            "name": "focused_content_type",
+            "type": "taxonomy",
+            "instructions": "Choisissez le(s) type(s) de publication que vous souhaitez mettre en avant",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b27899284ed4",
+                        "operator": "==",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "hide-label",
+                "id": ""
+            },
+            "taxonomy": "page_type",
+            "field_type": "checkbox",
+            "allow_null": 0,
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "multiple": 0
+        },
+        {
+            "key": "field_5b27a67203e48",
+            "label": "Ordre de tri",
+            "name": "focused_sort",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "random": "Aléatoire",
+                "created_desc": "Du plus récent au plus ancien",
+                "created_asc": "Du plus ancien au plus récent"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "save_other_choice": 0,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        {
+            "key": "field_5b27a02e9d7c5",
+            "label": "Etiquettes (termes de taxonomie)",
+            "name": "focused_taxonomy_terms",
+            "type": "select",
+            "instructions": "Choisissez les termes de taxonomie que vous voulez voir remonter dans votre sélection",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": [
+                "Dynamically populated with all taxonomies terms"
+            ],
+            "default_value": [],
+            "allow_null": 0,
+            "multiple": 1,
+            "ui": 1,
+            "ajax": 1,
+            "return_format": "value",
+            "placeholder": ""
+        },
+        {
+            "key": "field_5b27a25103e43",
+            "label": "Et \/ Ou entre les étiquettes",
+            "name": "focused_taxonomy_terms_andor",
+            "type": "radio",
+            "instructions": "Si ET : les contenus ayant les etiquettes A <strong>ET<\/strong> B seront affichés <\/br>\r\nSi OU : les contenus ayant les étiquettes A <strong>OU<\/strong> B",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "or": "OU",
+                "and": "ET"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "save_other_choice": 0,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        {
+            "key": "field_5b27a0ad9d7c6",
+            "label": "Afficher les étiquettes sur les contenus",
+            "name": "focused_terms_labels",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5b27a3d703e44",
+            "label": "Nombre d'éléments à afficher",
+            "name": "focused_count",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": 1,
+            "max": "",
+            "step": ""
+        },
+        {
+            "key": "field_5b27a4d203e45",
+            "label": "Ajouter une pagination",
+            "name": "focused_paginate",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "70",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5b2788e084ed2",
+            "label": "Mise en page",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5b27a51703e46",
+            "label": "Template",
+            "name": "woody_tpl",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label",
+                "id": ""
+            },
+            "choices": [],
+            "allow_null": 0,
+            "other_choice": 0,
+            "save_other_choice": 0,
+            "default_value": "",
+            "layout": "vertical",
+            "return_format": "value"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
+    "modified": 1529319266
+}

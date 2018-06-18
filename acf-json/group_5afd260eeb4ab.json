@@ -112,7 +112,7 @@
                             "sub_fields": [
                                 {
                                     "key": "field_5b0d22019d80b",
-                                    "label": "Mise en avant",
+                                    "label": "Sélection",
                                     "name": "content_selection",
                                     "type": "clone",
                                     "instructions": "",
@@ -125,6 +125,37 @@
                                     },
                                     "clone": [
                                         "group_5b0d1ed32a384"
+                                    ],
+                                    "display": "seamless",
+                                    "layout": "",
+                                    "prefix_label": 0,
+                                    "prefix_name": 0
+                                }
+                            ],
+                            "min": "",
+                            "max": ""
+                        },
+                        "5b27a7859ddea": {
+                            "key": "5b27a7859ddea",
+                            "name": "auto_focus",
+                            "label": "Mise en avant (sélection automatique)",
+                            "display": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_5b27a7859ddeb",
+                                    "label": "Sélection",
+                                    "name": "content_selection",
+                                    "type": "clone",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "clone": [
+                                        "group_5b2788b48d04c"
                                     ],
                                     "display": "seamless",
                                     "layout": "block",
@@ -421,19 +452,19 @@
                         "id": ""
                     },
                     "choices": {
-                        "grids-grid_4_cols-tpl_1": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_4_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_4_cols-tpl_1\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_5_cols-tpl_1": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_5_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_5_cols-tpl_1\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_2_cols-tpl_1": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_1\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_2_cols-tpl_2": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_2\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_2\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_2_cols-tpl_5": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_5\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_5\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_2_cols-tpl_4": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_4\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_4\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_2_cols-tpl_3": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_3\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_3\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_3_cols-tpl_1": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_3_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_1\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_3_cols-tpl_2": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_3_cols\/tpl_2\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_2\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_3_cols-tpl_4": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_3_cols\/tpl_4\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_4\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_3_cols-tpl_3": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_3_cols\/tpl_3\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_3\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_1_cols-tpl_1": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_1_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_1_cols-tpl_1\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_6_cols-tpl_1": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/site-theme\/dist\/img\/woody\/grids\/grid_6_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_6_cols-tpl_1\" width=\"150\" height=\"150\" \/>"
+                        "grids-grid_4_cols-tpl_1": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_4_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_4_cols-tpl_1\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_5_cols-tpl_1": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_5_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_5_cols-tpl_1\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_2_cols-tpl_1": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_1\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_2_cols-tpl_2": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_2\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_2\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_2_cols-tpl_5": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_5\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_5\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_2_cols-tpl_4": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_4\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_4\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_2_cols-tpl_3": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_3\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_3\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_3_cols-tpl_1": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_3_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_1\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_3_cols-tpl_2": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_3_cols\/tpl_2\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_2\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_3_cols-tpl_4": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_3_cols\/tpl_4\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_4\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_3_cols-tpl_3": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_3_cols\/tpl_3\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_3\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_1_cols-tpl_1": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_1_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_1_cols-tpl_1\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_6_cols-tpl_1": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_6_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_6_cols-tpl_1\" width=\"150\" height=\"150\" \/>"
                     },
                     "allow_null": 0,
                     "other_choice": 0,
@@ -690,5 +721,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1528996119
+    "modified": 1529318347
 }
