@@ -2,9 +2,9 @@
 
 /**
  *
- * getAutoFocus_data
- * Benoit Bouchaud
- * Retourne un ensemble de posts avec une donnée compatbile Woody
+ * Nom : getAutoFocus_data
+ * Auteur : Benoit Bouchaud
+ * Return : Retourne un ensemble de posts avec une donnée compatbile Woody
  * @param    the_post - Un objet Timber\Post
  * @param    query_form - Champs de formulaire permettant de monter la query
  * @return   the_items - Un tableau de données
@@ -91,9 +91,9 @@ function getAutoFocus_data($the_post, $query_form)
 
 /**
  *
- * getManualFocus_data
- * Benoit Bouchaud
- * Retourne un ensemble de posts avec une donnée compatbile Woody
+ * Nom : getManualFocus_data
+ * Auteur : Benoit Bouchaud
+ * Return : Retourne un ensemble de posts avec une donnée compatbile Woody
  * @param    items - Tous les contenus crées ou sélectionnés dans une sélectio manuelle
  * @return   the_items - Un tableau de données
  *
@@ -120,9 +120,9 @@ function getManualFocus_data($items)
 
 /**
  *
- * getCustomPreview
- * Benoit Bouchaud
- * Retourne les données d'une preview basée sur des champs custom
+ * Nom : getCustomPreview
+ * Auteur : Benoit Bouchaud
+ * Return : Retourne les données d'une preview basée sur des champs custom
  * @param    item - Un tableau de données (Vignette créée dans le backoffice - N'est pas directement liéée à un contenu existant)
  * @return   data - Un tableau de données
  *
@@ -157,9 +157,9 @@ function getManualFocus_data($items)
 
  /**
  *
- * getExistingPreview
- * Benoit Bouchaud
- * Retourne les données d'une preview basée sur un post existant
+ * Nom : getExistingPreview
+ * Auteur : Benoit Bouchaud
+ * Return : Retourne les données d'une preview basée sur un post existant
  * @param    item - Un tableau contenant un objet Timber\Post + de la donnée
  * @return   data - Un tableau de données
  *
@@ -183,9 +183,9 @@ function getManualFocus_data($items)
 
   /**
  *
- * getPagePreview
- * Benoit Bouchaud
- * Retourne la donnée de base d'un post pour afficher une preview
+ * Nom : getPagePreview
+ * Auteur : Benoit Bouchaud
+ * Return : Retourne la donnée de base d'un post pour afficher une preview
  * @param    item - Un objet Timber\Post
  * @return   data - Un tableau de données
  *
@@ -244,9 +244,9 @@ function getManualFocus_data($items)
 
 /**
  *
- * getDisplayOptions
- * Benoit Bouchaud
- * Retourne un tableau de classes de personnalisation d'affichage
+ * Nom : getDisplayOptions
+ * Auteur : Benoit Bouchaud
+ * Return : Retourne un tableau de classes de personnalisation d'affichage
  * @param    item - Un objet Timber\Post
  * @return   data - Un tableau de données
  *
@@ -283,7 +283,7 @@ function getManualFocus_data($items)
          $classes_array[] = $scope['scope_margins']['scope_margin_bottom'];
      }
 
-     // Implode classes
+     // On transforme le tableau en une chaine de caractères
      $display['classes'] = implode(' ', $classes_array);
 
 
