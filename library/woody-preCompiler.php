@@ -241,3 +241,51 @@ function getManualFocus_data($items)
 
      return $data;
  }
+
+/**
+ *
+ * getDisplayOptions
+ * Benoit Bouchaud
+ * Retourne un tableau de classes de personnalisation d'affichage
+ * @param    item - Un objet Timber\Post
+ * @return   data - Un tableau de données
+ *
+ */
+
+ function getDisplayOptions($scope)
+ {
+     $display = [];
+     $classes_array=[];
+
+     $display['gridContainer'] = (empty($scope['display_fullwidth'])) ? 'grid-container' : '';
+
+     if (!empty($scope['background_img'])) {
+         $display['background_img'] = $scope['background_img'];
+         $classes_array[] = 'isRel';
+     }
+
+     if (!empty($scope['background_color'])) {
+         $classes_array[] = $scope['background_color'];
+     }
+     if (!empty($scope['background_img_opacity'])) {
+         $classes_array[] = $scope['background_img_opacity'];
+     }
+     if (!empty($scope['scope_paddings']['scope_padding_top'])) {
+         $classes_array[] = $scope['scope_paddings']['scope_padding_top'];
+     }
+     if (!empty($scope['scope_paddings']['scope_padding_bottom'])) {
+         $classes_array[] = $scope['scope_paddings']['scope_padding_bottom'];
+     }
+     if (!empty($scope['scope_margins']['scope_margin_top'])) {
+         $classes_array[] = $scope['scope_margins']['scope_margin_top'];
+     }
+     if (!empty($scope['scope_margins']['scope_margin_bottom'])) {
+         $classes_array[] = $scope['scope_margins']['scope_margin_bottom'];
+     }
+
+     // Implode classes
+     $display['classes'] = implode(' ', $classes_array);
+
+
+     return $display;
+ }

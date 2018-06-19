@@ -4,11 +4,15 @@ import Swiper from 'swiper';
 $('.swiper-container').each(function() {
     var $this = $(this);
     var slidesPerView = $this.data('slides-per-view');
-    console.info(slidesPerView);
+    if (slidesPerView > 1) {
+        var spaceBetween = 30;
+    } else {
+        var spaceBetween = 0;
+    }
     new Swiper($this, {
         // Optional parameters
         slidesPerView: slidesPerView,
-        // spaceBetween: 30,
+        spaceBetween: spaceBetween,
         keyboard: {
             enabled: true,
         },

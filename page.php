@@ -15,10 +15,9 @@ $context['post'] = new TimberPost();
 $context['woody_components'] = Woody::getTwigsPaths();
 
 // rcd(get_class_methods(TimberPost), true);
-// rcd($context['post']->parent(), true);
 
 /** ****************************
- * Displaying the page's heading
+ * Compilation de l'en-tête de page
  **************************** **/
 $page_heading = [];
 $page_heading['content'] = get_field('field_5b052bbab3867');
@@ -38,63 +37,31 @@ $page_heading_tpl = get_field('field_5b052d70ea19b');
 $context['page_heading'] = Timber::compile($context['woody_components'][$page_heading_tpl], $page_heading);
 
 /** ************************
- * Displaying the sections
+ * Compilation des sections
  ************************ **/
-// Create a empty array to fill with rendered twig components and get the sections of the page
+
 $context['sections'] = [];
 $sections = $context['post']->get_field('section');
 
 // Foreach section, fill vars to display in the woody's components
 foreach ($sections as $key => $section) {
-    $display= [];
-    // Send $section to section's header tpl
+
+    // On compile les données du header de section
     $the_header = Timber::compile($context['woody_components']['section-section_header-tpl_1'], $section);
 
-    // Send $section to section's footer tpl
+    // On compile les données du footer de section
     $the_footer = Timber::compile($context['woody_components']['section-section_footer-tpl_1'], $section);
 
-    // Creating data for display options => set the container classes
-    $classes_array = [];
-    $display['gridContainer'] = (empty($section['display_fullwidth'])) ? 'grid-container' : '';
-
-    if (!empty($section['background_img'])) {
-        $display['background_img'] = $section['background_img'];
-        $classes_array[] = 'isRel';
-    }
-
-    if (!empty($section['background_color'])) {
-        $classes_array[] = $section['background_color'];
-    }
-    if (!empty($section['background_img_opacity'])) {
-        $classes_array[] = $section['background_img_opacity'];
-    }
-    if (!empty($section['section_paddings']['section_padding_top'])) {
-        $classes_array[] = $section['section_paddings']['section_padding_top'];
-    }
-    if (!empty($section['section_paddings']['section_padding_bottom'])) {
-        $classes_array[] = $section['section_paddings']['section_padding_bottom'];
-    }
-    if (!empty($section['section_margins']['section_margin_top'])) {
-        $classes_array[] = $section['section_margins']['section_margin_top'];
-    }
-    if (!empty($section['section_margins']['section_margin_bottom'])) {
-        $classes_array[] = $section['section_margins']['section_margin_bottom'];
-    }
-
-    // Implode classes
-    $display['classes'] = implode(' ', $classes_array);
-
-    // Render the section layout with rendered woody's components
+    // Pour chaque bloc d'une section, on compile les données dans un template Woody
+    // Puis on les compile dans le template de grille Woody selectionné
     $components = [];
 
-    // Get every section_content's layouts in the post
     if (!empty($section['section_content'])) {
         foreach ($section['section_content'] as $key => $layout) {
             if ($layout['acf_fc_layout'] == 'manual_focus') {
                 $the_items = getManualFocus_data($layout['content_selection']);
                 $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_items);
             } elseif ($layout['acf_fc_layout'] == 'auto_focus') {
-                // rcd($layout, true);
                 $the_items = getAutoFocus_data($context['post'], $layout);
                 $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_items);
             } else {
@@ -107,7 +74,11 @@ foreach ($sections as $key => $section) {
         }
     }
 
-    // Fill $the_section var with rendered woody's components to fill $context['the_sections']
+    // On récupère les données d'affichage personnalisables
+    $display = getDisplayOptions($section);
+
+    // On ajoute les 3 parties compilées d'une section + ses paramètres d'affichage
+    // puis on compile le tout dans le template de section Woody
     $the_section = [
         'header' => $the_header,
         'footer' => $the_footer,

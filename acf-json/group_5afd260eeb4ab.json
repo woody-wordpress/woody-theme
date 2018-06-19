@@ -516,7 +516,7 @@
                 {
                     "key": "field_5b052c0336230",
                     "label": "Marges intérieures",
-                    "name": "section_paddings",
+                    "name": "scope_paddings",
                     "type": "group",
                     "instructions": "",
                     "required": 0,
@@ -531,7 +531,7 @@
                         {
                             "key": "field_5b052c3b36231",
                             "label": "Au dessus",
-                            "name": "section_padding_top",
+                            "name": "scope_padding_top",
                             "type": "button_group",
                             "instructions": "",
                             "required": 0,
@@ -548,14 +548,14 @@
                                 "padd-top-lg": "Grande"
                             },
                             "allow_null": 0,
-                            "default_value": 2,
+                            "default_value": "padd-top-md",
                             "layout": "horizontal",
                             "return_format": "value"
                         },
                         {
                             "key": "field_5b052c9136232",
                             "label": "En dessous",
-                            "name": "section_padding_bottom",
+                            "name": "scope_padding_bottom",
                             "type": "button_group",
                             "instructions": "",
                             "required": 0,
@@ -572,7 +572,7 @@
                                 "padd-bottom-lg": "Grande"
                             },
                             "allow_null": 0,
-                            "default_value": 2,
+                            "default_value": "padd-bottom-md",
                             "layout": "horizontal",
                             "return_format": "value"
                         }
@@ -581,7 +581,7 @@
                 {
                     "key": "field_5b052cb536233",
                     "label": "Marges extérieures",
-                    "name": "section_margins",
+                    "name": "scope_margins",
                     "type": "group",
                     "instructions": "",
                     "required": 0,
@@ -596,7 +596,7 @@
                         {
                             "key": "field_5b052ccf36234",
                             "label": "Au dessus",
-                            "name": "section_margin_top",
+                            "name": "scope_margin_top",
                             "type": "button_group",
                             "instructions": "",
                             "required": 0,
@@ -613,14 +613,14 @@
                                 "marg-top-lg": "Grande"
                             },
                             "allow_null": 0,
-                            "default_value": 0,
+                            "default_value": "marg-top-none",
                             "layout": "horizontal",
                             "return_format": "value"
                         },
                         {
                             "key": "field_5b052cfd36235",
                             "label": "En dessous",
-                            "name": "section_margin_bottom",
+                            "name": "scope_margin_bottom",
                             "type": "button_group",
                             "instructions": "",
                             "required": 0,
@@ -637,7 +637,7 @@
                                 "marg-bottom-lg": "Grande"
                             },
                             "allow_null": 0,
-                            "default_value": 0,
+                            "default_value": "marg-bottom-none",
                             "layout": "horizontal",
                             "return_format": "value"
                         }
@@ -721,5 +721,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1529318347
+    "modified": 1529416503
 }
