@@ -247,8 +247,8 @@ function getManualFocus_data($items)
  * Nom : getDisplayOptions
  * Auteur : Benoit Bouchaud
  * Return : Retourne un tableau de classes de personnalisation d'affichage
- * @param    item - Un objet Timber\Post
- * @return   data - Un tableau de données
+ * @param    scope - Le tableau contenant les infos d'affichage
+ * @return   display - Un tableau de données
  *
  */
 
