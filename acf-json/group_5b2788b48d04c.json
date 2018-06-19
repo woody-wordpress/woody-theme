@@ -98,6 +98,31 @@
             "return_format": "value"
         },
         {
+            "key": "field_5b28d791038fa",
+            "label": "Hierarchie",
+            "name": "focused_hierarchy",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "no_hierarchy": "Pas de hierarchie",
+                "child_of": "Enfants directs de la page",
+                "brother_of": "Pages de même niveau"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "save_other_choice": 0,
+            "default_value": "no_hierarchy",
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        {
             "key": "field_5b27a02e9d7c5",
             "label": "Etiquettes (termes de taxonomie)",
             "name": "focused_taxonomy_terms",
@@ -192,6 +217,43 @@
             "step": ""
         },
         {
+            "key": "field_5b2917f0ff061",
+            "label": "Affichage",
+            "name": "display_elements",
+            "type": "checkbox",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "pretitle": "Surtitre",
+                "subtitle": "Sous-titre",
+                "description": "Description",
+                "icon": "Icône",
+                "tags_1": "Taxonomie principale",
+                "tags_2": "Taxonomie secondaire",
+                "author": "Auteur"
+            },
+            "allow_custom": 0,
+            "save_custom": 0,
+            "default_value": [
+                "pretitle",
+                "subtitle",
+                "description",
+                "icon",
+                "tags_1",
+                "tags_2",
+                "author"
+            ],
+            "layout": "horizontal",
+            "toggle": 0,
+            "return_format": "value"
+        },
+        {
             "key": "field_5b2788e084ed2",
             "label": "Mise en page",
             "name": "",
@@ -246,5 +308,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1529327402
+    "modified": 1529412622
 }

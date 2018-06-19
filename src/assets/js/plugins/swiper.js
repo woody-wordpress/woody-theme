@@ -4,11 +4,11 @@ import Swiper from 'swiper';
 $('.swiper-container').each(function() {
     var $this = $(this);
     var slidesPerView = $this.data('slides-per-view');
-
+    console.info(slidesPerView);
     new Swiper($this, {
         // Optional parameters
         slidesPerView: slidesPerView,
-        spaceBetween: 30,
+        // spaceBetween: 30,
         keyboard: {
             enabled: true,
         },
@@ -16,7 +16,7 @@ $('.swiper-container').each(function() {
         // If we need pagination
         pagination: {
             el: '.swiper-pagination',
-            dynamicBullets: true,
+            // dynamicBullets: true,
             clickable: true
         },
 
