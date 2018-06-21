@@ -1,6 +1,6 @@
 {
     "key": "group_5b052bbee40a4",
-    "title": "En-tête de page",
+    "title": "Visuel et accroche",
     "fields": [
         {
             "key": "field_5b052d9aea19c",
@@ -41,7 +41,7 @@
         },
         {
             "key": "field_5b0e5cc3d4b1a",
-            "label": "Ajouter un média",
+            "label": "Type de média",
             "name": "media_type",
             "type": "radio",
             "instructions": "",
@@ -142,25 +142,6 @@
             ]
         },
         {
-            "key": "field_5b0e54ebfa657",
-            "label": "Le titre de l'en-tête est le h1 de la page",
-            "name": "title_as_h1",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
             "key": "field_5b052da8ea19d",
             "label": "Mise en page",
             "name": "",
@@ -239,5 +220,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1528971293
+    "modified": 1529585313
 }
