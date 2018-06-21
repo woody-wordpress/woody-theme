@@ -7,7 +7,7 @@ $('.swiper-container').each(function() {
     if (slidesPerView > 1) {
         var spaceBetween = 30;
     } else {
-        var spaceBetween = 0;
+        var spaceBetween = $this.data('slides-spacing');
     }
     new Swiper($this, {
         // Optional parameters
