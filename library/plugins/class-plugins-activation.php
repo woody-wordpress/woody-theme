@@ -26,7 +26,6 @@ class HawwwaiTheme_Plugins_Activation
             'yoimages/yoimages.php',
             'bea-media-analytics/bea-media-analytics.php',
             'bea-sanitize-filename/bea-sanitize-filename.php',
-            'rocket-lazy-load/rocket-lazy-load.php',
             'enhanced-media-library/enhanced-media-library.php',
             'minify-html-markup/minify-html.php',
             'wp-deferred-javascripts/wp-deferred-javascripts.php',
@@ -43,7 +42,7 @@ class HawwwaiTheme_Plugins_Activation
         ];
 
         $this->deactivate_plugins = [
-
+            'rocket-lazy-load/rocket-lazy-load.php'
         ];
 
         // Enable debug plugins on DEV
