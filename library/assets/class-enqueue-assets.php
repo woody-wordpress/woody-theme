@@ -52,6 +52,7 @@ class HawwwaiTheme_Enqueue_Assets
 
         // Enqueue the main Stylesheet.
         wp_enqueue_style('admin-stylesheet', get_stylesheet_directory_uri() . '/dist/' . $this->asset_path('css/admin.css'), array(), '', 'all');
+        wp_enqueue_script('admin-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->asset_path('js/amdin.js'), 'jquery', '', true);
     }
 
     private function asset_path($filename)
