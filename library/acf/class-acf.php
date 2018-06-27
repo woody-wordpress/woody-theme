@@ -24,8 +24,7 @@ class HawwwaiTheme_ACF
         add_filter('plugin_action_links', array($this, 'disallow_acf_deactivation'), 10, 4);
         add_filter('acf/load_field/name=woody_tpl', array($this, 'woody_tpl_acf_load_field'));
         add_filter('acf/load_field/name=focused_taxonomy_terms', array($this, 'focused_taxonomy_terms_load_field'));
-        add_filter('acf/load_field/name=playlist_title', array($this, 'playlist_title_load_field'));
-
+        add_filter('acf/load_field/name=playlist_name', array($this, 'playlist_name_load_field'));
     }
 
     /**
@@ -108,8 +107,20 @@ class HawwwaiTheme_ACF
         return $field;
     }
 
-    public function playlist_title_load_field($field){
-        rcd($field);
+    public function playlist_name_load_field($field)
+    {
+        global $post;
+
+        $post_title = $post->post_title;
+        $type_term = get_the_terms($post->ID, 'page_type');
+        $type = $type_term[0]->slug;
+
+        if ($type == 'playlist_tourism') {
+            $field['value'] = 'WP - Playlist ' . $post->post_title;
+            return $field;
+        } else {
+            return $field;
+        }
     }
 }
 

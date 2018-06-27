@@ -741,6 +741,11 @@
                 "param": "post_type",
                 "operator": "==",
                 "value": "page"
+            },
+            {
+                "param": "post_taxonomy",
+                "operator": "!=",
+                "value": "page_type:playlist_tourism"
             }
         ]
     ],
@@ -752,5 +757,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1530103450
+    "modified": 1530106166
 }
