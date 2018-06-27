@@ -24,6 +24,8 @@ class HawwwaiTheme_ACF
         add_filter('plugin_action_links', array($this, 'disallow_acf_deactivation'), 10, 4);
         add_filter('acf/load_field/name=woody_tpl', array($this, 'woody_tpl_acf_load_field'));
         add_filter('acf/load_field/name=focused_taxonomy_terms', array($this, 'focused_taxonomy_terms_load_field'));
+        add_filter('acf/load_field/name=playlist_title', array($this, 'playlist_title_load_field'));
+
     }
 
     /**
@@ -104,6 +106,10 @@ class HawwwaiTheme_ACF
         }
 
         return $field;
+    }
+
+    public function playlist_title_load_field($field){
+        rcd($field);
     }
 }
 

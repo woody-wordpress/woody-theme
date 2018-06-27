@@ -16,6 +16,12 @@ class HawwwaiTheme_Taxonomy
 
     protected function register_hooks()
     {
+        add_action('init', array($this, 'register_content_type_taxonomy'), 0);
+    }
+
+    public function register_content_type_taxonomy()
+    {
+        // On créé la taxonomie "Type de publication"
         register_taxonomy(
             'page_type',
             'page',
@@ -38,6 +44,19 @@ class HawwwaiTheme_Taxonomy
                 'show_ui' => false,
             )
         );
+
+        // On inclut les termes génériques à la taxo
+        wp_insert_term('Actualite', 'page_type', array('slug' => 'article'));
+        wp_insert_term('Article de blog', 'page_type', array('slug' => 'blog_article'));
+        wp_insert_term('Experience', 'page_type', array('slug' => 'experience'));
+        wp_insert_term('Page de contenu', 'page_type', array('slug' => 'basic_page'));
+        wp_insert_term('Personne', 'page_type', array('slug' => 'member'));
+
+        // Si le plugin Hawwwai est activé
+        // TODO : uncomment the condition when the hawwwai plugin will run
+        // if(is_plugin_active('hawwwai')){
+        wp_insert_term('Playlist tourisme', 'page_type', array('slug' => 'playlist_tourism'));
+        // }
     }
 }
 

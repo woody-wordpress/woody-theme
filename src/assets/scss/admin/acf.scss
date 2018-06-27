@@ -205,7 +205,9 @@
     font-weight: 500 !important;
     border-radius: 0 !important;
     border: none !important;
+    box-shadow: none !important;
     text-shadow: none;
+    height: auto !important;
 }
 
 .acf-field-5b0d20457c829>.acf-input>.acf-repeater,
@@ -222,7 +224,6 @@
             align-items: center;
             justify-content: center;
             transition: background-color .3s;
-            box-shadow: none !important;
             &:before {
                 display: inline-block;
                 font-family: 'dashicons';
@@ -285,6 +286,18 @@
             border: 1px solid #ddd;
             box-shadow: inset 0 1px 2px rgba( 0, 0, 0, 0.07);
             background-color: #fff;
+        }
+    }
+}
+
+// Configurer ma playlist
+.acf-field-5b33902f31b18 {
+    text-align: center !important;
+    display: block !important;
+    >.acf-input {
+        width: 100%;
+        .dashicons {
+            margin-right: 8px;
         }
     }
 }

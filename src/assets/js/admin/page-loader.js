@@ -1,1 +1,1 @@
-alert('page-loader');
+alert('Page loader');

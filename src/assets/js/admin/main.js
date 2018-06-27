@@ -1,1 +1,1 @@
-import 'admin/page-loader';
+import './page-loader';

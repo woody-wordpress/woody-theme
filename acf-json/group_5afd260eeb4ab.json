@@ -413,10 +413,41 @@
                             ],
                             "min": "",
                             "max": ""
+                        },
+                        "5b33a263d91e5": {
+                            "key": "5b33a263d91e5",
+                            "name": "playlist_bloc",
+                            "label": "Playlist",
+                            "display": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_5b33a27ed91e6",
+                                    "label": "Bloc de playlist",
+                                    "name": "playlist_bloc",
+                                    "type": "clone",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "clone": [
+                                        "group_5b33890e6fa0b"
+                                    ],
+                                    "display": "seamless",
+                                    "layout": "block",
+                                    "prefix_label": 0,
+                                    "prefix_name": 0
+                                }
+                            ],
+                            "min": "",
+                            "max": ""
                         }
                     },
                     "button_label": "Ajouter un bloc",
-                    "min": 1,
+                    "min": "",
                     "max": "",
                     "hide_collapse": 0,
                     "collapse_all_flexible": 1,
@@ -721,5 +752,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1529416503
+    "modified": 1530103450
 }
