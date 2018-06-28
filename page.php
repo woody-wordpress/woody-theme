@@ -43,6 +43,8 @@ $page_type = $page_type_term[0]->slug;
 
 if ($page_type === 'playlist_tourism') {
     // TODO : Renvoyer vers la fonction d'appel à l'API render
+    $playlist_conf_id = get_field('field_5b338ff331b17');
+    $context['playlist_template'] = $apirenderBridge->getApiRenderTemplate($playlist_conf_id);
 } else {
     /** ************************
     * Compilation des sections
