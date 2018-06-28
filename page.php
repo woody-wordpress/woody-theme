@@ -39,7 +39,7 @@ $context['page_heading'] = Timber::compile($context['woody_components'][$page_he
 /** ************************
  * Compilation des sections
  ************************ **/
-
+rcd($context['post']->get_field('section'), true);
 $context['sections'] = [];
 $sections = $context['post']->get_field('section');
 
@@ -64,6 +64,9 @@ foreach ($sections as $key => $section) {
             } elseif ($layout['acf_fc_layout'] == 'auto_focus') {
                 $the_items = getAutoFocus_data($context['post'], $layout);
                 $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_items);
+            } elseif ($layout['acf_fc_layout'] == 'playlist_bloc') {
+                // TODO : Renvoyer vers la fonction d'appel à l'API render
+                print 'Ceci est une playlist d\'objets touristiques';
             } else {
                 $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             }

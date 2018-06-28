@@ -16,7 +16,7 @@
                 "id": ""
             },
             "collapsed": "field_5b0d1dc8907e7",
-            "min": 1,
+            "min": 0,
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter une section",
@@ -757,5 +757,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1530106166
+    "modified": 1530181285
 }
