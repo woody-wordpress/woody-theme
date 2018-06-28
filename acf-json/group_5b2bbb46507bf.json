@@ -174,9 +174,9 @@
     "location": [
         [
             {
-                "param": "post_taxonomy",
+                "param": "post_type",
                 "operator": "==",
-                "value": "page_type:basic_page"
+                "value": "page"
             }
         ]
     ],
@@ -188,5 +188,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1529587013
+    "modified": 1530186514
 }
