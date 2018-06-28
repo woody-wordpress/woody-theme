@@ -808,6 +808,13 @@
                 "operator": "==",
                 "value": "page"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "touristic_sheet"
+            }
         ]
     ],
     "menu_order": 0,
@@ -818,5 +825,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Infos affichées en sidebar et utilisées pour les remontées de contenu",
-    "modified": 1528959433
+    "modified": 1530187590
 }

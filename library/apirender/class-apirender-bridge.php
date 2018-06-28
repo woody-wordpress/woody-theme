@@ -1,6 +1,6 @@
 <?php
 
-class ApirenderBridge
+class HawwwaiTheme_ApirenderBridge
 {
     // Construct
     public function __construct()
@@ -32,4 +32,4 @@ class ApirenderBridge
 }
 
 // Execute Class
-$apirenderBridge = new ApirenderBridge();
+$apirenderBridge = new HawwwaiTheme_ApirenderBridge();
