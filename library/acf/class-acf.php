@@ -113,10 +113,11 @@ class HawwwaiTheme_ACF
 
         $post_title = $post->post_title;
         $type_term = get_the_terms($post->ID, 'page_type');
-        $type = $type_term[0]->slug;
-
-        if ($type == 'playlist_tourism') {
-            $field['value'] = 'WP - Playlist ' . $post->post_title;
+        if (!empty($type_term)) {
+            $type = $type_term[0]->slug;
+            if ($type == 'playlist_tourism') {
+                $field['value'] = 'WP - Playlist ' . $post->post_title;
+            }
         }
 
         return $field;
