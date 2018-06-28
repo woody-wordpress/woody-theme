@@ -117,10 +117,9 @@ class HawwwaiTheme_ACF
 
         if ($type == 'playlist_tourism') {
             $field['value'] = 'WP - Playlist ' . $post->post_title;
-            return $field;
-        } else {
-            return $field;
         }
+
+        return $field;
     }
 }
 
