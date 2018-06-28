@@ -38,7 +38,7 @@ Timber::$locations = array('views', Woody::getTemplatesDirname());
 //     if ($result && ! is_wp_error($result)) {
 //         $post_id = $result;
 //         update_field('touristic_sheet_id', '22081985', $post_id);
-//         update_field('focus_subtitle', 'Bordereau de la fiche', $post_id);
+//         update_field('focus_pretitle', 'Bordereau de la fiche', $post_id);
 //         update_field('focus_title', 'Titre de la fiche', $post_id);
 //         update_field('focus_subtitle', 'Commune de la fiche', $post_id);
 //         update_field('focus_description', 'Description commerciale de la fiche', $post_id);
