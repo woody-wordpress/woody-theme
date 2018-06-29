@@ -2,9 +2,12 @@
 
 class HawwwaiTheme_ApirenderBridge
 {
+    private $pluginHawwwai;
+
     // Construct
-    public function __construct()
+    public function setPlugin($plugin_hawwwai_kernel)
     {
+        $this->pluginHawwwai = $plugin_hawwwai_kernel;
     }
 
     /**
@@ -16,14 +19,16 @@ class HawwwaiTheme_ApirenderBridge
      * @return   generatedHtml - Un bout de DOM Html
      *
      */
-    public function getApiRenderTemplate($conf_id)
+    public function getApiRenderTemplate($confId)
     {
         $lang = get_locale();
+        $lang = 'fr';
         $generatedHtml = false;
-        if (is_plugin_active('hawwwai')) {
-            $hawwwaiPlaylistModule = $plugin_hawwwai_kernel->getModule('playlist');
+
+        if (!empty($this->pluginHawwwai)) {
+            $hawwwaiPlaylistModule = $this->pluginHawwwai->getModule('wp_hawwwai_playlist');
             if (!empty($hawwwaiPlaylistModule)) {
-                $generatedHtml = $hawwwaiPlaylistModule->renderPlaylist($confId, $lang);
+                $generatedHtml = $hawwwaiPlaylistModule->getPlaylistsManager()->renderPlaylist($confId, $lang);
             }
         }
 
@@ -33,3 +38,6 @@ class HawwwaiTheme_ApirenderBridge
 
 // Execute Class
 $apirenderBridge = new HawwwaiTheme_ApirenderBridge();
+if (is_plugin_active('hawwwai-plugin/hawwwai.php')) {
+    $apirenderBridge->setPlugin($plugin_hawwwai_kernel);
+}

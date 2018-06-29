@@ -45,6 +45,7 @@ if ($page_type === 'playlist_tourism') {
     // TODO : Renvoyer vers la fonction d'appel à l'API render
     $playlist_conf_id = get_field('field_5b338ff331b17');
     $context['playlist_template'] = $apirenderBridge->getApiRenderTemplate($playlist_conf_id);
+// rcd($context['playlist_template'], true);
 } else {
     /** ************************
     * Compilation des sections

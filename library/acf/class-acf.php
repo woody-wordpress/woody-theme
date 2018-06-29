@@ -121,13 +121,12 @@ class HawwwaiTheme_ACF
         }
 
         // Rename confname in api
-        if(!empty($field['value'] && is_plugin_active('hawwwai')){
+        if (!empty($field['value'] && is_plugin_active('hawwwai'))) {
             $name = $field['value'];
             $hawwwaiPlaylistModule = $plugin_hawwwai_kernel->getModule('playlist');
             if (!empty($hawwwaiPlaylistModule)) {
                 $response = $hawwwaiPlaylistModule->getConfEditorManager()->renameConf($confId, $name);
             }
-
         }
 
         return $field;
