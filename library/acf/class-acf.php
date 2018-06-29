@@ -120,6 +120,15 @@ class HawwwaiTheme_ACF
             }
         }
 
+        // Rename conf in api
+        if (!empty($plugin_hawwwai_kernel)) {
+            $hawwwaiPlaylistModule = $plugin_hawwwai_kernel->getModule('playlist');
+            if (!empty($hawwwaiPlaylistModule)) {
+                $response = $hawwwaiPlaylistModule->getConfEditorManager()->renameConf($confId, $name);
+            }
+        }
+
+
         return $field;
     }
 }
