@@ -41,12 +41,12 @@ class HawwwaiTheme_Taxonomy
                     'popular_items' => 'Types de publications les plus utilisées'
                 ),
                 'hierarchical' => false,
-                'show_ui' => false,
+                'show_ui' => true,
             )
         );
 
         // On inclut les termes génériques à la taxo
-        wp_insert_term('Actualite', 'page_type', array('slug' => 'article'));
+        wp_insert_term('Actu', 'page_type', array('slug' => 'article'));
         wp_insert_term('Article de blog', 'page_type', array('slug' => 'blog_article'));
         wp_insert_term('Experience', 'page_type', array('slug' => 'experience'));
         wp_insert_term('Page de contenu', 'page_type', array('slug' => 'basic_page'));
