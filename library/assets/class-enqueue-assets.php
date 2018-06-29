@@ -53,11 +53,6 @@ class HawwwaiTheme_Enqueue_Assets
         // Enqueue the main Stylesheet.
         wp_enqueue_style('admin-stylesheet', get_stylesheet_directory_uri() . '/dist/' . $this->asset_path('css/admin.css'), array(), '', 'all');
         wp_enqueue_script('admin-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->asset_path('js/admin.js'), 'jquery', false, true);
-
-        $config_vars = array(
-            'current_lang' => 'fr'
-        );
-        wp_localize_script('admin-javascripts', 'config_php_vars', $config_vars);
     }
 
     private function asset_path($filename)

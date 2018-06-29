@@ -35,12 +35,12 @@
         ]
     ],
     "menu_order": -100,
-    "position": "side",
+    "position": "acf_after_title",
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "field",
     "hide_on_screen": "",
     "active": 1,
     "description": "Selection du type de contenu basé sur la taxonomie \"page_type\"",
-    "modified": 1529068032
+    "modified": 1530278591
 }
