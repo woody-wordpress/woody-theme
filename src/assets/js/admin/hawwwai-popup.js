@@ -21,9 +21,9 @@ $('.acf-field-5b33902f31b18').click(function() {
     console.info('Contexte : ' + context + ', conf_id : ' + conf_id + ', Playlist name : ' + playlist_name);
     // Construction et affichage de l'iframe de l'éditeur de playlist
     if (conf_id.length == 0) {
-        var editorUrl = '/facetconfs/choix-playlist/crt-reunion/fr?context=' + context + '&name=' + playlist_name;
+        var editorUrl = 'https://api.tourism-system.rc-preprod.com/render/facetconfs/choix-playlist/crt-reunion/fr?context=' + context + '&name=' + playlist_name;
     } else {
-        var editorUrl = '/facetconfs/cles-config/' + conf_id + '/crt-reunion/fr';
+        var editorUrl = 'https://api.tourism-system.rc-preprod.com/render/facetconfs/cles-config/' + conf_id + '/crt-reunion/fr';
     }
     var iframe = '<div class="playlist-editor" data-role="popup"><iframe src="' + editorUrl + '"><p>Your browser does not support iframes.</p></iframe><span class="close-iframe dashicons dashicons-no-alt"></span></div>';
     $('#acf-group_5b33890e6fa0b').append(iframe);
