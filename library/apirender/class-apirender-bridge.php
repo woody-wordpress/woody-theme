@@ -19,11 +19,10 @@ class HawwwaiTheme_ApirenderBridge
     public function getApiRenderTemplate($conf_id)
     {
         $lang = get_locale();
-        $generatedHtml = false;
         if (!empty($plugin_hawwwai_kernel)) {
             $hawwwaiPlaylistModule = $plugin_hawwwai_kernel->getModule('playlist');
             if (!empty($hawwwaiPlaylistModule)) {
-                $generatedHtml = $hawwwaiPlaylistModule->renderPlaylist($confId, $lang);
+                $response = $hawwwaiPlaylistModule->getConfEditorManager()->renameConf($confId, $name);
             }
         }
 
