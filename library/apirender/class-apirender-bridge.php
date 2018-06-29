@@ -20,7 +20,7 @@ class HawwwaiTheme_ApirenderBridge
     {
         $lang = get_locale();
         $generatedHtml = false;
-        if (!empty($plugin_hawwwai_kernel)) {
+        if (is_plugin_active('hawwwai')) {
             $hawwwaiPlaylistModule = $plugin_hawwwai_kernel->getModule('playlist');
             if (!empty($hawwwaiPlaylistModule)) {
                 $generatedHtml = $hawwwaiPlaylistModule->renderPlaylist($confId, $lang);
