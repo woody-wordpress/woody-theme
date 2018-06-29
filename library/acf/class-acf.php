@@ -121,6 +121,7 @@ class HawwwaiTheme_ACF
         }
 
         // Rename conf in api
+        $name == $field['value'];
         if (!empty($plugin_hawwwai_kernel)) {
             $hawwwaiPlaylistModule = $plugin_hawwwai_kernel->getModule('playlist');
             if (!empty($hawwwaiPlaylistModule)) {
