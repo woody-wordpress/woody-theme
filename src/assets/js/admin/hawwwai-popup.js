@@ -19,13 +19,42 @@ $('.acf-field-5b33902f31b18').click(function() {
 
     // Log des résultats des variables : OK
     console.info('Contexte : ' + context + ', conf_id : ' + conf_id + ', Playlist name : ' + playlist_name);
-    // Construction et affichage de l'iframe de l'éditeur de playlist
+
+    // Construction de l'iframe de l'éditeur de playlist / Url différente si l'on a un conf_id ou pas
     if (conf_id.length == 0) {
         var editorUrl = 'https://api.tourism-system.rc-preprod.com/render/facetconfs/choix-playlist/crt-reunion/fr?context=' + context + '&name=' + playlist_name;
+
+        // eventListener => On récupère le conf_id que nous envoie l'éditeur
+        window.addEventListener('message',
+            function(e) {
+                // if (e.origin !== editorUrl) {
+                //     return;
+                // }
+                $this.siblings('.acf-field-5b338ff331b17').find('input[type="text"]').attr('value', message.conf_id);
+            },
+            false);
     } else {
         var editorUrl = 'https://api.tourism-system.rc-preprod.com/render/facetconfs/cles-config/' + conf_id + '/crt-reunion/fr';
     }
-    var iframe = '<div class="playlist-editor" data-role="popup"><iframe src="' + editorUrl + '"><p>Your browser does not support iframes.</p></iframe><span class="close-iframe dashicons dashicons-no-alt"></span></div>';
-    $('#acf-group_5b33890e6fa0b').append(iframe);
+
+    var iframe = '<div class="playlist-editor" data-role="popup"><iframe src="' + editorUrl + '"><p>Your browser does not support iframes.</p></iframe><span class="close-playlist-editor dashicons dashicons-no-alt"></span></div>';
+
+    // Ajout de l'iframe au DOM si 1st click, sinon, class de visibilité
+    if ($('.playlist-editor').length == 0) {
+        $('#acf-group_5b33890e6fa0b').append(iframe);
+    } else {
+        $('.playlist-editor').removeClass('closed').addClass('opened');
+    }
+
+    // postMessage pour test event listener
+    // var message = {
+    //     conf_id: "245"
+    // };
+    // window.postMessage(message, '*');
+
+    // On masque l'iframe au click sur le bouton "close"
+    $('.close-playlist-editor').click(function() {
+        $('.playlist-editor').removeClass('opened').addClass('closed');
+    });
 
 });
