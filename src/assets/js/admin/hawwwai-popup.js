@@ -30,7 +30,7 @@ $('.acf-field-5b33902f31b18').click(function() {
                 // if (e.origin !== editorUrl) {
                 //     return;
                 // }
-                $this.siblings('.acf-field-5b338ff331b17').find('input[type="text"]').attr('value', message.conf_id);
+                $this.siblings('.acf-field-5b338ff331b17').find('input[type="text"]').attr('value', e.conf_id);
             },
             false);
     } else {
