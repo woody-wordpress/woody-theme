@@ -22,7 +22,7 @@ $('.acf-field-5b33902f31b18').click(function() {
 
     // Construction de l'iframe de l'éditeur de playlist / Url différente si l'on a un conf_id ou pas
     if (conf_id.length == 0) {
-        var editorUrl = 'https://api.tourism-system.rc-preprod.com/render/facetconfs/choix-playlist/crt-reunion/fr?context=' + context + '&name=' + playlist_name;
+        var editorUrl = 'https://api.tourism-system.rc-preprod.com/render/facetconfs/choix-playlist/crt-reunion/fr?context=' + context + '&name=' + playlist_name + '&login=reunion_website&pwd=9f4f5a30' ;
 
         // eventListener => On récupère le conf_id que nous envoie l'éditeur
         window.addEventListener('message',
@@ -34,7 +34,7 @@ $('.acf-field-5b33902f31b18').click(function() {
             },
             false);
     } else {
-        var editorUrl = 'https://api.tourism-system.rc-preprod.com/render/facetconfs/cles-config/' + conf_id + '/crt-reunion/fr';
+        var editorUrl = 'https://api.tourism-system.rc-preprod.com/render/facetconfs/cles-config/' + conf_id + '/crt-reunion/fr?login=reunion_website&pwd=9f4f5a30';
     }
 
     var iframe = '<div class="playlist-editor" data-role="popup"><iframe src="' + editorUrl + '"><p>Your browser does not support iframes.</p></iframe><span class="close-playlist-editor dashicons dashicons-no-alt"></span></div>';
