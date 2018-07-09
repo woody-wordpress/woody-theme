@@ -121,13 +121,14 @@ class HawwwaiTheme_ACF
         }
 
         // Rename confname in api
-        if (!empty($field['value'] && is_plugin_active('hawwwai'))) {
-            $name = $field['value'];
-            $hawwwaiPlaylistModule = $plugin_hawwwai_kernel->getModule('playlist');
-            if (!empty($hawwwaiPlaylistModule)) {
-                $response = $hawwwaiPlaylistModule->getConfEditorManager()->renameConf($confId, $name);
-            }
-        }
+//        if (!empty($field['value'] && is_plugin_active('hawwwai'))) {
+//            $name = $field['value'];
+//            $hawwwaiPlaylistModule = $plugin_hawwwai_kernel->getModule('playlist');
+//            if (!empty($hawwwaiPlaylistModule)) {
+//                $response = $hawwwaiPlaylistModule->getConfEditorManager()->renameConf($confId, $name);
+//            }
+//        }
+        $response = apply_filters( 'wp_hawwwai_sit_conf_editor_rename', $confId, $name );
 
         return $field;
     }
