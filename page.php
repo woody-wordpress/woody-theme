@@ -17,24 +17,21 @@ $context['woody_components'] = Woody::getTwigsPaths();
 // rcd(get_class_methods(TimberPost), true);
 
 /** ****************************
- * Compilation de l'en-tête de page
+ * Compilation du visuel et accroche
  **************************** **/
 $page_heading = [];
-$page_heading['content'] = get_field('field_5b052bbab3867');
-$page_heading['media_type'] = get_field('field_5b0e5cc3d4b1a');
-
-if ($page_heading['media_type'] == 'img') {
-    $page_heading['media'] = get_field('field_5b0e5ddfd4b1b');
-} else {
-    $page_heading['media'] = get_field('field_5b0e5df0d4b1c');
+$page_heading = get_acf_group_fields(33);
+if (!empty($page_heading)) {
+    $context['page_heading'] = Timber::compile($context['woody_components'][$page_heading['woody_tpl']], $page_heading);
 }
 
-$page_heading['title_as_h1'] = get_field('field_5b0e54ebfa657');
-$page_heading['classes'] = get_field('field_5b0e5ef78f6be');
+/** ****************************
+ * Compilation de l'en tête de page
+ **************************** **/
+$page_teaser = [];
+$page_teaser = get_acf_group_fields(725);
+// rcd($page_heading, true);
 
-$page_heading_tpl = get_field('field_5b052d70ea19b');
-
-$context['page_heading'] = Timber::compile($context['woody_components'][$page_heading_tpl], $page_heading);
 
 
 

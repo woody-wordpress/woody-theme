@@ -11,7 +11,7 @@
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "30",
                 "class": "",
                 "id": ""
             },
@@ -42,5 +42,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Selection du type de contenu basé sur la taxonomie \"page_type\"",
-    "modified": 1531227192
+    "modified": 1531231890
 }

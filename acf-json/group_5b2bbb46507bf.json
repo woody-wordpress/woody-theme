@@ -136,7 +136,7 @@
         {
             "key": "field_5b44bfc2e2e21",
             "label": "Ajouter un média",
-            "name": "ajouter_un_media",
+            "name": "add_media",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -188,7 +188,7 @@
         {
             "key": "field_5b44ba5c74495",
             "label": "Image",
-            "name": "img",
+            "name": "teaser_img",
             "type": "image",
             "instructions": "",
             "required": 0,
@@ -338,5 +338,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Les infos principales de la page + la possibilité d'ajouter les liens de partage et d'ajout aux favoris",
-    "modified": 1531225471
+    "modified": 1531231424
 }

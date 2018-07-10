@@ -24,7 +24,7 @@ class HawwwaiTheme_ACF
         add_filter('plugin_action_links', array($this, 'disallow_acf_deactivation'), 10, 4);
         add_filter('acf/load_field/name=woody_tpl', array($this, 'woody_tpl_acf_load_field'));
         add_filter('acf/load_field/name=focused_taxonomy_terms', array($this, 'focused_taxonomy_terms_load_field'));
-        add_filter('acf/load_field/name=playlist_name', array($this, 'playlist_name_load_field'));
+        // add_filter('acf/load_field/name=playlist_name', array($this, 'playlist_name_load_field'));
     }
 
     /**
@@ -107,24 +107,24 @@ class HawwwaiTheme_ACF
         return $field;
     }
 
-    public function playlist_name_load_field($field)
-    {
-        global $post;
-        $confId = get_field('playlist_conf_id', $post->ID);
+    // public function playlist_name_load_field($field)
+    // {
+    //     global $post;
+    //     if (!empty($post)) {
+    //         $confId = get_field('playlist_conf_id', $post->ID);
+    //         $post_title = $post->post_title;
+    //         $type_term = get_the_terms($post->ID, 'page_type');
+    //         if (!empty($type_term)) {
+    //             $type = $type_term[0]->slug;
+    //             if ($type == 'playlist_tourism') {
+    //                 $field['value'] = 'WP - Playlist ' . $post->post_title;
+    //             }
+    //         }
+    //         $response = apply_filters('wp_hawwwai_sit_conf_editor_rename', $confId, $field['value']);
+    //     }
 
-        $post_title = $post->post_title;
-        $type_term = get_the_terms($post->ID, 'page_type');
-        if (!empty($type_term)) {
-            $type = $type_term[0]->slug;
-            if ($type == 'playlist_tourism') {
-                $field['value'] = 'WP - Playlist ' . $post->post_title;
-            }
-        }
-
-        $response = apply_filters('wp_hawwwai_sit_conf_editor_rename', $confId, $field['value']);
-
-        return $field;
-    }
+    //     return $field;
+    // }
 }
 
 // Execute Class

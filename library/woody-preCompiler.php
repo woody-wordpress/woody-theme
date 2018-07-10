@@ -289,3 +289,26 @@ function getManualFocus_data($items)
 
      return $display;
  }
+
+ function get_acf_group_fields($group_id)
+ {
+     global $post;
+     $post_id = $post->ID;
+
+     $page_teaser_fields = array();
+
+     $fields = acf_get_fields($group_id);
+
+     foreach ($fields as $field) {
+         $field_value = false;
+         if (!empty($field['name'])) {
+             $field_value = get_field($field['name'], $post_id);
+         }
+
+         if ($field_value && !empty($field_value)) {
+             $page_teaser_fields[$field['name']] = $field_value;
+         }
+     }
+
+     return $page_teaser_fields;
+ }
