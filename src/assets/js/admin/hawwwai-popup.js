@@ -1,120 +1,73 @@
 import $ from 'jquery';
 
-// Page de type palylist
-var appendEditorPage = function() {
-    // Si le bouton "Configurer ma playlist existe" :
-    if ($('#acf-group_5b33890e6fa0b .acf-field-5b33902f31b18').length != 0) {
-        clearInterval(appendEditorPageIntval);
-        $('.acf-field-5b33902f31b18').click(function() {
-            var $this = $(this),
-                // On récupère la valeur du champ conf_id pour la passer à l'éditeur si elle est définie
-                conf_id = $this.siblings('.acf-field-5b338ff331b17').find('input[type="text"]').attr('value'),
-                context = 'playlist_page',
-                page_title = $('input[name="post_title"]').val(),
-                playlist_name = 'WP - Playlist ' + page_title;
+// Create Iframe
+var pageTitle = '',
+    currentConfig = {},
+    $iframe = $('<div/>').append('<div id="hawwwai-playlist-editor" class="closed" data-role="popup"><iframe src=""><p>Your browser does not support iframes.</p></iframe><span class="close-playlist-editor dashicons dashicons-no-alt"></span></div>').children();
 
-            // Log des résultats des variables
-            console.info('Contexte : ' + context + ', conf_id : ' + conf_id + ', Playlist name : ' + playlist_name);
+// Append iFrame
+$iframe.each(function() {
+    var $this = $(this);
 
-            var iframe = iframeConstructor($this, conf_id, context, playlist_name);
-            toggleIframe(iframe, $('#acf-group_5b33890e6fa0b'));
-        });
-    }
-}
+    $this
+        .appendTo('body')
+        .find('.close-playlist-editor').click(function(e) {
+            e.stopPropagation();
+            $this.removeClass('opened').addClass('closed');
+        })
+});
 
-var appendEditorPageIntval = setInterval(appendEditorPage, 100);
+//eventListener => On récupère le confID que nous envoie l 'éditeur
+window.addEventListener('message', function(e) {
+    currentConfig.confID_field.attr('value', e.data.conf_id);
+}, false);
 
-// Bloc de playlist dans une section
-var appendEditorBlock = function() {
-    $('.acf-flexible-content .acf-field-5b33902f31b18').each(function() {
-        var $this = $(this);
-        $this.click(function() {
-            // On récupère la valeur du champ conf_id pour la passer à l'éditeur le cas échéant
-            var conf_id = $this.siblings('.acf-field-5b338ff331b17').find('input[type="text"]').attr('value'),
-                context = 'playlist_block',
-                page_title = $('input[name="post_title"]').val(),
-                section_title = $this.parents('.acf-row').find('.acf-field-5b0d1dc8907e7 input').val(),
-                playlist_name = 'WP - Bloc Playlist ' + page_title + ' - ' + section_title;
+// Callback function to execute when mutations are observed
+var callback = function(mutationsList) {
+    for (var mutation of mutationsList) {
+        if (mutation.type == 'childList') {
+            $('.acf-field-5b33902f31b18').each(function() {
+                var $this = $(this);
 
-            // Log des résultats des variables
-            console.info('Contexte : ' + context + ', conf_id : ' + conf_id + ', Playlist name : ' + playlist_name);
+                var context = 'playlist_page';
+                if ($this.parents('.acf-flexible-content') != 0) {
+                    context = 'playlist_block';
+                }
 
-            var iframe = iframeConstructor($this, conf_id, context, playlist_name);
+                $this.unbind().click(function() {
+                    pageTitle = $('input[name="post_title"]').val();
 
-            toggleIframe(iframe, $this.parents('.layout'));
+                    if (context == 'playlist_block') {
+                        var sectionTitle = $this.parents('.acf-row').find('.acf-field-5b0d1dc8907e7 input').val();
+                        var playlistName = 'WP - Bloc Playlist ' + pageTitle + ' - ' + sectionTitle;
+                    } else {
+                        var playlistName = 'WP - Playlist ' + pageTitle;
+                    }
 
-        });
-    });
-}
+                    // Set Context
+                    currentConfig.context = context;
+                    currentConfig.playlistName = playlistName;
 
-// Ajouter une section => on réinitailise la fonction interceptAddBlockClick
-var interceptAddSectionClick = function() {
-    $('.acf-field-5afd2c6916ecb .acf-button').click(function() {
-        setTimeout(interceptAddBlockClick, 200);
-    });
-}
+                    // On récupère la valeur du champ confID pour la passer à l'éditeur si elle est définie
+                    currentConfig.confID_field = $this.siblings('.acf-field-5b338ff331b17').find('input[type="text"]');
+                    currentConfig.confID = currentConfig.confID_field.attr('value');
 
-// Ajouter un bloc => on réinitailise la fonction interceptAcfFcPopUpClick
-var interceptAddBlockClick = function() {
-    $('.acf-field-5b043f0525968 .acf-button').click(function() {
-        setTimeout(interceptAcfFcPopUpClick, 200);
-    });
-}
+                    if (currentConfig.confID.length != 0) {
+                        currentConfig.iframeUrl = 'https://api.tourism-system.rc-preprod.com/render/facetconfs/cles-config/' + currentConfig.confID + '/crt-reunion/fr?login=reunion_website&pwd=9f4f5a30';
+                    } else {
+                        currentConfig.iframeUrl = 'https://api.tourism-system.rc-preprod.com/render/facetconfs/choix-playlist/crt-reunion/fr?context=' + currentConfig.context + '&name=' + currentConfig.playlistName + '&login=reunion_website&pwd=9f4f5a30';
+                    }
 
-// Choisir un bloc de type playlist => on réinitailise la fonction appendEditorBlock
-var interceptAcfFcPopUpClick = function() {
-    $('.acf-fc-popup li a').click(function() {
-        var $this = $(this);
-        if ($this.attr('data-layout') == 'playlist_bloc') {
-            // alert('The data layout :' + $this.attr('data-layout'));
-            setTimeout(appendEditorBlock, 200);
+                    $iframe.find('iframe').attr('src', currentConfig.iframeUrl).end().removeClass('closed').addClass('opened');
+                });
+            });
         }
-    });
-}
-
-// Ensemble des fonctions à lancer à l'initalisation de la page
-var launch = function() {
-    appendEditorBlock();
-    interceptAddBlockClick();
-    interceptAddSectionClick();
-}
-launch();
-
-// Construction de l'iframe de l'éditeur de playlist / Url différente si l'on a un conf_id ou pas
-function iframeConstructor($this, conf_id, context, playlist_name) {
-
-    if (conf_id.length == 0) {
-        var editorUrl = 'https://api.tourism-system.rc-preprod.com/render/facetconfs/choix-playlist/crt-reunion/fr?context=' + context + '&name=' + playlist_name + '&login=reunion_website&pwd=9f4f5a30';
-        // eventListener => On récupère le conf_id que nous envoie l'éditeur
-        window.addEventListener('message',
-            function(e) {
-                // if (e.origin !== editorUrl) {
-                //     return;
-                // }
-                $this.siblings('.acf-field-5b338ff331b17').find('input[type="text"]').attr('value', e.data.conf_id);
-            },
-            false);
-    } else {
-        var editorUrl = 'https://api.tourism-system.rc-preprod.com/render/facetconfs/cles-config/' + conf_id + '/crt-reunion/fr?login=reunion_website&pwd=9f4f5a30';
     }
+};
 
-    var iframe = '<div class="playlist-editor" data-role="popup"><iframe src="' + editorUrl + '"><p>Your browser does not support iframes.</p></iframe><span class="close-playlist-editor dashicons dashicons-no-alt"></span></div>';
-
-    return iframe;
-}
-
-// Ouverture et fermeture de l'iframe de l'éditeur
-function toggleIframe(iframe, target) {
-    // Ajout de l'iframe au DOM si 1st click, sinon, class de visibilité
-    if ($('.playlist-editor').length == 0) {
-        target.append(iframe);
-    } else {
-        $('.playlist-editor').removeClass('closed').addClass('opened');
-    }
-
-    // On masque l'iframe au click sur le bouton "close"
-    $('.close-playlist-editor').click(function(e) {
-        e.stopPropagation();
-        $('.playlist-editor').removeClass('opened').addClass('closed');
-    });
-}
+// Create an observer instance linked to the callback function
+var observer = new MutationObserver(callback);
+var targetNode = document.getElementById('post'); // Select the node that will be observed for mutations
+var config = { attributes: false, childList: true, subtree: true }; // Options for the observer (which mutations to observe)
+observer.observe(targetNode, config); // Start observing the target node for configured mutations
+// observer.disconnect(); // Later, you can stop observing
