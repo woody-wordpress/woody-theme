@@ -19,8 +19,6 @@ class HawwwaiTheme_Plugins_Activation
             'advanced-custom-fields-pro/acf.php',
             'acf-relationship-create-pro/acf-relationship-create-pro.php',
             'timber-library/timber.php',
-            'wordpress-seo/wp-seo.php',
-            'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
             'advanced-custom-fields-font-awesome/acf-font-awesome.php',
             'regenerate-thumbnails/regenerate-thumbnails.php',
             'yoimages/yoimages.php',
@@ -31,7 +29,9 @@ class HawwwaiTheme_Plugins_Activation
             'wp-deferred-javascripts/wp-deferred-javascripts.php',
             'advanced-cron-manager/advanced-cron-manager.php',
             'acf-repeater-flexible-content-collapser/acf-repeater-flexible-content-collapser.php',
-            'fakerpress/fakerpress.php'
+            'fakerpress/fakerpress.php',
+            'redirection/redirection.php',
+            'permalink-manager/permalink-manager.php',
         ];
 
         $this->dev_plugins = [
@@ -42,7 +42,9 @@ class HawwwaiTheme_Plugins_Activation
         ];
 
         $this->deactivate_plugins = [
-            'rocket-lazy-load/rocket-lazy-load.php'
+            'rocket-lazy-load/rocket-lazy-load.php',
+            'wordpress-seo/wp-seo.php',
+            'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
         ];
 
         // Enable debug plugins on DEV
