@@ -1,6 +1,6 @@
 {
     "key": "group_5a61fa1e0e50c",
-    "title": "Type de page",
+    "title": "Type de publication",
     "fields": [
         {
             "key": "field_5a61fa38b704f",
@@ -36,11 +36,11 @@
     ],
     "menu_order": -100,
     "position": "acf_after_title",
-    "style": "default",
+    "style": "seamless",
     "label_placement": "top",
     "instruction_placement": "field",
     "hide_on_screen": "",
     "active": 1,
     "description": "Selection du type de contenu basé sur la taxonomie \"page_type\"",
-    "modified": 1530278591
+    "modified": 1531227192
 }

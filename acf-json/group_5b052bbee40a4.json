@@ -54,7 +54,7 @@
             },
             "choices": {
                 "img": "Image",
-                "movie": "Vidéo"
+                "movie": "Vidéo d'habillage"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -97,10 +97,10 @@
         },
         {
             "key": "field_5b0e5df0d4b1c",
-            "label": "Vidéo",
+            "label": "Vidéo d'habillage",
             "name": "movie",
             "type": "group",
-            "instructions": "",
+            "instructions": "Cette vidéo doit être courte, muette et peu mouvementée",
             "required": 0,
             "conditional_logic": [
                 [
@@ -140,6 +140,49 @@
                     "prefix_name": 0
                 }
             ]
+        },
+        {
+            "key": "field_5b44b7fedb880",
+            "label": "Ajouter une vidéo de présentation (youtube, dailymotion, vimeo, ...)",
+            "name": "add_social_movie",
+            "type": "true_false",
+            "instructions": "Cette vidéo pourra être visionnée grâce à un bouton \"Voir la vidéo\"",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5b44b70d5a8dd",
+            "label": "Vidéo de présentation",
+            "name": "social_movie",
+            "type": "oembed",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b44b7fedb880",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "width": "",
+            "height": ""
         },
         {
             "key": "field_5b052da8ea19d",
@@ -219,6 +262,6 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": 1,
-    "description": "",
-    "modified": 1529585313
+    "description": "Le bloc en haut de page contenant un média et des textes d'accroche",
+    "modified": 1531223297
 }

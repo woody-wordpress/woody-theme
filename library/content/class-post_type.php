@@ -62,7 +62,7 @@ class HawwwaiTheme_Post_Type
 
     );
 
-        // On enregistre notre custom post type qu'on nomme ici "serietv" et ses arguments
+        // On enregistre notre custom post type qu'on nomme ici "touristic_sheet" et ses arguments
         register_post_type('touristic_sheet', $args);
     }
 }

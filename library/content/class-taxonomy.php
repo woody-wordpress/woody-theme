@@ -41,7 +41,7 @@ class HawwwaiTheme_Taxonomy
                     'popular_items' => 'Types de publications les plus utilisées'
                 ),
                 'hierarchical' => false,
-                'show_ui' => true,
+                'show_ui' => false
             )
         );
 

@@ -738,14 +738,30 @@
     "location": [
         [
             {
-                "param": "post_type",
+                "param": "post_taxonomy",
                 "operator": "==",
-                "value": "page"
-            },
+                "value": "page_type:basic_page"
+            }
+        ],
+        [
             {
                 "param": "post_taxonomy",
-                "operator": "!=",
-                "value": "page_type:playlist_tourism"
+                "operator": "==",
+                "value": "page_type:article"
+            }
+        ],
+        [
+            {
+                "param": "post_taxonomy",
+                "operator": "==",
+                "value": "page_type:blog_article"
+            }
+        ],
+        [
+            {
+                "param": "post_taxonomy",
+                "operator": "==",
+                "value": "page_type:experience"
             }
         ]
     ],
@@ -757,5 +773,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1530181450
+    "modified": 1531222602
 }
