@@ -119,7 +119,13 @@ class HawwwaiTheme_ACF
             if ($type == 'playlist_tourism') {
                 $field['value'] = 'WP - Playlist ' . $post->post_title;
             } else {
-                //rcd($post);
+                $sections = get_field('field_5afd2c6916ecb', $post->ID);
+                foreach ($sections[0]['section_content'] as $key => $layouts) {
+                    // rcd($layouts);
+                    // if ($layout['acf_fc_layout'] == 'playlist_bloc') {
+                    //     rcd($layout);
+                    // }
+                }
             }
         }
 
@@ -132,6 +138,8 @@ class HawwwaiTheme_ACF
 //            }
 //        }
         $response = apply_filters('wp_hawwwai_sit_conf_editor_rename', $confId, $field['value']);
+
+        rcd($response);
 
         return $field;
     }
