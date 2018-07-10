@@ -42,7 +42,9 @@ $page_type_term = wp_get_post_terms($context['post']->ID, 'page_type');
 $page_type = $page_type_term[0]->slug;
 
 if ($page_type === 'playlist_tourism') {
-    // TODO : Renvoyer vers la fonction d'appel à l'API render
+    /** ************************
+    * Appel apirender pour récupérer le html de la playlist
+    ************************ **/
     $playlist_conf_id = get_field('field_5b338ff331b17');
     $context['playlist_template'] = apply_filters('wp_hawwwai_sit_playlist_render', $playlist_conf_id, 'fr');
 } else {
