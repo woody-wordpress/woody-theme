@@ -110,6 +110,7 @@ class HawwwaiTheme_ACF
     public function playlist_name_load_field($field)
     {
         global $post;
+        $confId = get_field('playlist_conf_id', $post->ID);
 
         $post_title = $post->post_title;
         $type_term = get_the_terms($post->ID, 'page_type');
@@ -117,6 +118,8 @@ class HawwwaiTheme_ACF
             $type = $type_term[0]->slug;
             if ($type == 'playlist_tourism') {
                 $field['value'] = 'WP - Playlist ' . $post->post_title;
+            } else {
+                //rcd($post);
             }
         }
 
@@ -128,9 +131,13 @@ class HawwwaiTheme_ACF
 //                $response = $hawwwaiPlaylistModule->getConfEditorManager()->renameConf($confId, $name);
 //            }
 //        }
-        $response = apply_filters( 'wp_hawwwai_sit_conf_editor_rename', $confId, $name );
+        $response = apply_filters('wp_hawwwai_sit_conf_editor_rename', $confId, $field['value']);
 
         return $field;
+    }
+
+    public function playlist_name_load_value()
+    {
     }
 }
 

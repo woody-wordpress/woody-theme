@@ -44,8 +44,7 @@ $page_type = $page_type_term[0]->slug;
 if ($page_type === 'playlist_tourism') {
     // TODO : Renvoyer vers la fonction d'appel à l'API render
     $playlist_conf_id = get_field('field_5b338ff331b17');
-    $context['playlist_template'] = apply_filters( 'wp_hawwwai_sit_playlist_render', $playlist_conf_id, 'fr');
-// rcd($context['playlist_template'], true);
+    $context['playlist_template'] = apply_filters('wp_hawwwai_sit_playlist_render', $playlist_conf_id, 'fr');
 } else {
     /** ************************
     * Compilation des sections
@@ -77,7 +76,9 @@ if ($page_type === 'playlist_tourism') {
                         $the_items = getAutoFocus_data($context['post'], $layout);
                         $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_items);
                     } elseif ($layout['acf_fc_layout'] == 'playlist_bloc') {
-                        // TODO : Renvoyer vers la fonction d'appel à l'API render
+                        // rcd($layout);
+                        $playlist_conf_id = $layout['playlist_conf_id'];
+                        $components['items'][] = apply_filters('wp_hawwwai_sit_playlist_render', $playlist_conf_id, 'fr');
                     } else {
                         $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                     }
