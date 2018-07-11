@@ -9,3 +9,4 @@ $('[id^="tagsdiv-"').hide();
 // On referme la metabox "Attributs de page" + "Révisions"
 $('#pageparentdiv').addClass('closed');
 $('#revisionsdiv').addClass('closed');
+$('#wpseo_meta').addClass('closed');
