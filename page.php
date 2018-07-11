@@ -32,6 +32,7 @@ if (!empty($page_heading)) {
  **************************** **/
 $page_teaser = [];
 $page_teaser = get_acf_group_fields(725);
+$page_teaser['classes'] = $page_teaser['background_img_opacity'] . ' ' . $page_teaser['background_color'];
 if (!empty($page_teaser)) {
     $context['page_teaser'] = Timber::compile($context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
 }
