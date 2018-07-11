@@ -444,6 +444,37 @@
                             ],
                             "min": "",
                             "max": ""
+                        },
+                        "5b461c83b7c8c": {
+                            "key": "5b461c83b7c8c",
+                            "name": "call_to_action",
+                            "label": "Appel à l'action",
+                            "display": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_5b461c93b7c8d",
+                                    "label": "Appel à l'action",
+                                    "name": "call_to_action",
+                                    "type": "clone",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "clone": [
+                                        "group_5b461a3831284"
+                                    ],
+                                    "display": "seamless",
+                                    "layout": "block",
+                                    "prefix_label": 0,
+                                    "prefix_name": 0
+                                }
+                            ],
+                            "min": "",
+                            "max": ""
                         }
                     },
                     "button_label": "Ajouter un bloc",
@@ -773,5 +804,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1531222602
+    "modified": 1531314349
 }

@@ -20,22 +20,60 @@
         },
         {
             "key": "field_5b2bbb4aec6b1",
-            "label": "Titre principal de la page",
-            "name": "page_teaser_title",
-            "type": "text",
-            "instructions": "Si ce champ est saisi, ce sera le h1 de la page. Sinon, ce sera le titre du \"Visuel et accroche\"",
+            "label": "Afficher le titre de la page",
+            "name": "page_teaser_display_title",
+            "type": "true_false",
+            "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "33",
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "h1 de la page",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5b2bbc42ec6b3",
+            "label": "Afficher le bouton d'ajout aux favoris",
+            "name": "page_teaser_display_favs_btn",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5b2bbcadec6b4",
+            "label": "Afficher les liens de partage",
+            "name": "page_teaser_display_shares",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         {
             "key": "field_5b2bbbfaec6b2",
@@ -55,44 +93,6 @@
             "toolbar": "basic",
             "media_upload": 0,
             "delay": 0
-        },
-        {
-            "key": "field_5b2bbc42ec6b3",
-            "label": "Afficher le bouton d'ajout aux favoris",
-            "name": "page_teaser_display_favs_btn",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
-            "key": "field_5b2bbcadec6b4",
-            "label": "Afficher les liens de partage",
-            "name": "page_teaser_display_shares",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
         },
         {
             "key": "field_5b2bbdff88b35",
@@ -359,5 +359,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Les infos principales de la page + la possibilité d'ajouter les liens de partage et d'ajout aux favoris",
-    "modified": 1531303596
+    "modified": 1531313137
 }

@@ -6,9 +6,8 @@
             {% if page_heading | default %}
                 {{ page_heading }}
             {% endif %}
-            {% if page_teaser | default %}
-                {{ page_teaser }}
-            {% endif %}
+            {# L'en-tête de page est toujours affichée même si aucun champ n'est saisi afin d'afficher le fil d'arianne #}
+            {{ page_teaser }}
             {% if playlist_template | default %}{{ playlist_template }}
             {% endif %}
             {% for key, section in the_sections %}

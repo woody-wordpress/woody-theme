@@ -16,31 +16,39 @@ $context['woody_components'] = Woody::getTwigsPaths();
 
 // rcd(get_class_methods(TimberPost), true);
 
-/** ****************************
- * Compilation du visuel et accroche
- **************************** **/
-$page_heading = [];
-$page_heading = getAcfGroupFields(33);
-if (!empty($page_heading)) {
-    $context['page_heading'] = Timber::compile($context['woody_components'][$page_heading['heading_woody_tpl']], $page_heading);
-}
-
-/** ****************************
- * Création du fil d'ariane
- **************************** **/
-$breacrumb = yoast_breadcrumb('Before breadcrumb', 'After breadcrumb', true);
-
-rcd($breacrumb, true);
 
 /** ****************************
  * Compilation de l'en tête de page
  **************************** **/
 $page_teaser = [];
 $page_teaser = getAcfGroupFields(725);
+if (!empty($page_teaser['page_teaser_display_title'])) {
+    $page_teaser['page_teaser_title'] = $context['post']->post_title;
+}
 $page_teaser['classes'] = $page_teaser['background_img_opacity'] . ' ' . $page_teaser['background_color'];
+if (!empty($page_teaser['background_img'])) {
+    $page_teaser['classes'] = $page_teaser['classes'] . ' isRel';
+}
+$page_teaser['breadcrumb'] = yoast_breadcrumb('<div class="breadcrumb-wrapper padd-top-sm padd-bottom-sm">', '</div>', false);
+
+// rcd($page_teaser, true);
+
 if (!empty($page_teaser)) {
     $context['page_teaser'] = Timber::compile($context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
 }
+
+/** ****************************
+ * Compilation du visuel et accroche
+ **************************** **/
+$page_heading = [];
+$page_heading = getAcfGroupFields(33);
+if (empty($page_teaser['page_teaser_display_title'])) {
+    $page_heading['title_as_h1'] = true;
+}
+if (!empty($page_heading)) {
+    $context['page_heading'] = Timber::compile($context['woody_components'][$page_heading['heading_woody_tpl']], $page_heading);
+}
+
 
  /** ************************
   * Check type de publication
@@ -89,6 +97,9 @@ if ($page_type === 'playlist_tourism') {
                         $playlist_conf_id = $layout['playlist_conf_id'];
                         $components['items'][] = apply_filters('wp_hawwwai_sit_playlist_render', $playlist_conf_id, 'fr');
                     } else {
+                        if ($layout['acf_fc_layout'] == 'call_to_action') {
+                            // rcd($layout, true);
+                        }
                         $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                     }
                 }

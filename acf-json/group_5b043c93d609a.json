@@ -1,24 +1,6 @@
 {
     "key": "group_5b043c93d609a",
     "title": "Background parameters",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Permet de personnaliser le fond d'une section (couleur \/ image)",
-    "modified": 1528359923,
     "fields": [
         {
             "key": "field_5b043ca4a6fe3",
@@ -34,6 +16,7 @@
                 "id": ""
             },
             "choices": {
+                "none": "Aucune",
                 "bg-primary": "Couleur principale",
                 "bg-secondary": "Couleur secondaire",
                 "bg-black": "Noir",
@@ -41,7 +24,7 @@
                 "bg-lightgray": "Gris clair"
             },
             "allow_null": 1,
-            "default_value": "",
+            "default_value": "none",
             "layout": "horizontal",
             "return_format": "value"
         },
@@ -94,5 +77,23 @@
             "layout": "horizontal",
             "return_format": "value"
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Permet de personnaliser le fond d'une section (couleur \/ image)",
+    "modified": 1531316512
 }
