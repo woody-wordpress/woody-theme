@@ -21,7 +21,7 @@
         {
             "key": "field_5b2bbb4aec6b1",
             "label": "Titre principal de la page",
-            "name": "page_main_title",
+            "name": "page_teaser_title",
             "type": "text",
             "instructions": "Si ce champ est saisi, ce sera le h1 de la page. Sinon, ce sera le titre du \"Visuel et accroche\"",
             "required": 0,
@@ -40,7 +40,7 @@
         {
             "key": "field_5b2bbbfaec6b2",
             "label": "Description de la page",
-            "name": "page_main_desc",
+            "name": "page_teaser_desc",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -59,7 +59,7 @@
         {
             "key": "field_5b2bbc42ec6b3",
             "label": "Afficher le bouton d'ajout aux favoris",
-            "name": "display_favorite_btn",
+            "name": "page_teaser_display_favs_btn",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -78,7 +78,7 @@
         {
             "key": "field_5b2bbcadec6b4",
             "label": "Afficher les liens de partage",
-            "name": "display_sharing_link",
+            "name": "page_teaser_display_shares",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -97,7 +97,7 @@
         {
             "key": "field_5b2bbdff88b35",
             "label": "Boutons",
-            "name": "buttons",
+            "name": "page_teaser_buttons",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -136,7 +136,7 @@
         {
             "key": "field_5b44bfc2e2e21",
             "label": "Ajouter un média",
-            "name": "add_media",
+            "name": "page_teaser_add_media",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -155,7 +155,7 @@
         {
             "key": "field_5b44b9b274494",
             "label": "Type de média",
-            "name": "media_type",
+            "name": "page_teaser_media_type",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -188,7 +188,7 @@
         {
             "key": "field_5b44ba5c74495",
             "label": "Image",
-            "name": "teaser_img",
+            "name": "page_teaser_img",
             "type": "image",
             "instructions": "",
             "required": 0,
@@ -225,7 +225,7 @@
         {
             "key": "field_5b44c0858b0ff",
             "label": "Vidéo",
-            "name": "comp_movie",
+            "name": "page_teaser_movie",
             "type": "oembed",
             "instructions": "",
             "required": 0,
@@ -254,7 +254,7 @@
         {
             "key": "field_5b44bab874496",
             "label": "Widget",
-            "name": "widget",
+            "name": "page_teaser_widget",
             "type": "wysiwyg",
             "instructions": "",
             "required": 0,
@@ -302,7 +302,7 @@
         {
             "key": "field_5b2bc0f256db1",
             "label": "Template",
-            "name": "teaser_woody_tpl",
+            "name": "page_teaser_woody_tpl",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -338,5 +338,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Les infos principales de la page + la possibilité d'ajouter les liens de partage et d'ajout aux favoris",
-    "modified": 1531291876
+    "modified": 1531297208
 }

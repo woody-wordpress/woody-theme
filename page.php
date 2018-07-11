@@ -25,16 +25,18 @@ if (!empty($page_heading)) {
     $context['page_heading'] = Timber::compile($context['woody_components'][$page_heading['heading_woody_tpl']], $page_heading);
 }
 
+// rcd($page_heading, true);
 
 /** ****************************
  * Compilation de l'en tête de page
  **************************** **/
 $page_teaser = [];
 $page_teaser = get_acf_group_fields(725);
-if (!empty($page_heading)) {
-    $context['page_teaser'] = Timber::compile($context['woody_components'][$page_teaser['teaser_woody_tpl']], $page_teaser);
+if (!empty($page_teaser)) {
+    $context['page_teaser'] = Timber::compile($context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
 }
 
+// rcd($page_teaser, true);
 
 
 $page_type_term = wp_get_post_terms($context['post']->ID, 'page_type');

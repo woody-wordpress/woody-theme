@@ -21,7 +21,7 @@
         {
             "key": "field_5b052bbab3867",
             "label": "En-tête",
-            "name": "heading",
+            "name": "page_heading_heading",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -42,7 +42,7 @@
         {
             "key": "field_5b0e5cc3d4b1a",
             "label": "Type de média",
-            "name": "media_type",
+            "name": "page_heading_media_type",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -66,7 +66,7 @@
         {
             "key": "field_5b0e5ddfd4b1b",
             "label": "Image",
-            "name": "img",
+            "name": "page_heading_img",
             "type": "image",
             "instructions": "",
             "required": 0,
@@ -98,7 +98,7 @@
         {
             "key": "field_5b0e5df0d4b1c",
             "label": "Vidéo d'habillage",
-            "name": "movie",
+            "name": "page_heading_movie",
             "type": "group",
             "instructions": "Cette vidéo doit être courte, muette et peu mouvementée",
             "required": 0,
@@ -144,7 +144,7 @@
         {
             "key": "field_5b44b7fedb880",
             "label": "Ajouter une vidéo de présentation (youtube, dailymotion, vimeo, ...)",
-            "name": "add_social_movie",
+            "name": "page_heading_add_social_movie",
             "type": "true_false",
             "instructions": "Cette vidéo pourra être visionnée grâce à un bouton \"Voir la vidéo\"",
             "required": 0,
@@ -163,7 +163,7 @@
         {
             "key": "field_5b44b70d5a8dd",
             "label": "Vidéo de présentation",
-            "name": "social_movie",
+            "name": "page_heading_social_movie",
             "type": "oembed",
             "instructions": "",
             "required": 0,
@@ -224,7 +224,7 @@
         {
             "key": "field_5b0e5ef78f6be",
             "label": "Opacité du média",
-            "name": "background_img_opacity",
+            "name": "page_heading_background_img_opacity",
             "type": "button_group",
             "instructions": "",
             "required": 0,
@@ -263,5 +263,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Le bloc en haut de page contenant un média et des textes d'accroche",
-    "modified": 1531291927
+    "modified": 1531296979
 }
