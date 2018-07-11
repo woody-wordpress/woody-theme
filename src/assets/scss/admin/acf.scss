@@ -1,20 +1,5 @@
-@mixin placeholder {
-    ::-webkit-input-placeholder {
-        @content
-    }
-    :-moz-placeholder {
-        @content
-    }
-    ::-moz-placeholder {
-        @content
-    }
-    :-ms-input-placeholder {
-        @content
-    }
-}
-
-// Styles pour le selecteur de templates Woody => override style des radios par défaut
-.acf-field-radio[data-name="woody_tpl"] {
+//Styles pour le selecteur de templates Woody => override style des radios par défaut
+.acf-field-radio[data-name*="woody_tpl"] {
     input[type="radio"] {
         display: none;
     }

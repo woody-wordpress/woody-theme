@@ -22,7 +22,7 @@ class HawwwaiTheme_ACF
         acf_append_setting('load_json', get_template_directory() . '/acf-json');
 
         add_filter('plugin_action_links', array($this, 'disallow_acf_deactivation'), 10, 4);
-        add_filter('acf/load_field/name=woody_tpl', array($this, 'woody_tpl_acf_load_field'));
+        add_filter('acf/load_field/type=radio', array($this, 'woody_tpl_acf_load_field'));
         add_filter('acf/load_field/name=focused_taxonomy_terms', array($this, 'focused_taxonomy_terms_load_field'));
         // add_filter('acf/load_field/name=playlist_name', array($this, 'playlist_name_load_field'));
     }
@@ -45,21 +45,23 @@ class HawwwaiTheme_ACF
      */
     public function woody_tpl_acf_load_field($field)
     {
-        switch ($field['key']) {
-            case 'field_5afd2c9616ecd':
-                $components = Woody::getTemplatesByAcfGroup($field['key']);
-            break;
-            default:
-                $components = Woody::getTemplatesByAcfGroup($field['parent']);
-        }
+        if (strpos($field['name'], 'woody_tpl') !== false) {
+            $field['choices'] = [];
 
-        $field['choices'] = [];
-        if (!empty($components)) {
-            foreach ($components as $key => $component) {
-                $field['choices'][$key] = '<img class="img-responsive" src="' . get_stylesheet_directory_uri() . '/dist/img/woody/' . $component['thumbnails']['small'] . '" alt="' . $key . '" width="150" height="150" />';
+            switch ($field['key']) {
+                case 'field_5afd2c9616ecd':
+                    $components = Woody::getTemplatesByAcfGroup($field['key']);
+                break;
+                default:
+                    $components = Woody::getTemplatesByAcfGroup($field['parent']);
+            }
+
+            if (!empty($components)) {
+                foreach ($components as $key => $component) {
+                    $field['choices'][$key] = '<img class="img-responsive" src="' . get_stylesheet_directory_uri() . '/dist/img/woody/' . $component['thumbnails']['small'] . '" alt="' . $key . '" width="150" height="150" />';
+                }
             }
         }
-
         return $field;
     }
 

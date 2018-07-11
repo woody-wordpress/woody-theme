@@ -22,16 +22,18 @@ $context['woody_components'] = Woody::getTwigsPaths();
 $page_heading = [];
 $page_heading = get_acf_group_fields(33);
 if (!empty($page_heading)) {
-    $context['page_heading'] = Timber::compile($context['woody_components'][$page_heading['woody_tpl']], $page_heading);
+    $context['page_heading'] = Timber::compile($context['woody_components'][$page_heading['heading_woody_tpl']], $page_heading);
 }
+
 
 /** ****************************
  * Compilation de l'en tête de page
  **************************** **/
 $page_teaser = [];
 $page_teaser = get_acf_group_fields(725);
-// rcd($page_heading, true);
-
+if (!empty($page_heading)) {
+    $context['page_teaser'] = Timber::compile($context['woody_components'][$page_teaser['teaser_woody_tpl']], $page_teaser);
+}
 
 
 
