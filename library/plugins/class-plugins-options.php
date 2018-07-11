@@ -33,6 +33,8 @@ class HawwwaiTheme_Plugins_Options
         update_option('upload_path', WP_CONTENT_DIR . '/uploads/' . WP_SITE_KEY, '', 'yes');
         update_option('upload_url_path', WP_CONTENT_URL . '/uploads/' . WP_SITE_KEY, '', 'yes');
         update_option('acm_server_settings', array('server_enable' => true), '', 'yes');
+        update_option('permalink_structure', '/%postname%/', '', 'yes');
+        update_option('permalink-manager-permastructs', array('post_types' => array('touristic_sheet' => '')), '', 'yes');
 
         $wpseo_titles = get_option('wpseo_titles');
         if ($wpseo_titles['breadcrumbs-enable'] == false) {

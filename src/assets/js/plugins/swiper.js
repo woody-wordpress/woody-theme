@@ -28,7 +28,7 @@ $('.swiper-container').each(function() {
         var centeredSlides = false;
     }
 
-    console.info(spaceBetween);
+    //console.info(spaceBetween);
 
     new Swiper($this, {
         // Optional parameters
