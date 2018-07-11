@@ -290,7 +290,16 @@ function getManualFocus_data($items)
      return $display;
  }
 
- function get_acf_group_fields($group_id)
+ /**
+ *
+ * Nom : getAcfGroupFields
+ * Auteur : Benoit Bouchaud
+ * Return : Retourne un tableau avec les valeurs des champs d'un groupe ACF poyr un post donné
+ * @param    group_id - Le post id du groupe ACF /**** !!! Différent de l'id du post dont on récupère les valeurs ****\
+ * @return   page_teaser_fields - Un tableau de données
+ *
+ */
+ function getAcfGroupFields($group_id)
  {
      global $post;
      $post_id = $post->ID;

@@ -20,32 +20,37 @@ $context['woody_components'] = Woody::getTwigsPaths();
  * Compilation du visuel et accroche
  **************************** **/
 $page_heading = [];
-$page_heading = get_acf_group_fields(33);
+$page_heading = getAcfGroupFields(33);
 if (!empty($page_heading)) {
     $context['page_heading'] = Timber::compile($context['woody_components'][$page_heading['heading_woody_tpl']], $page_heading);
 }
 
-// rcd($page_heading, true);
+/** ****************************
+ * Création du fil d'ariane
+ **************************** **/
+$breacrumb = yoast_breadcrumb('Before breadcrumb', 'After breadcrumb', true);
+
+rcd($breacrumb, true);
 
 /** ****************************
  * Compilation de l'en tête de page
  **************************** **/
 $page_teaser = [];
-$page_teaser = get_acf_group_fields(725);
+$page_teaser = getAcfGroupFields(725);
 $page_teaser['classes'] = $page_teaser['background_img_opacity'] . ' ' . $page_teaser['background_color'];
 if (!empty($page_teaser)) {
     $context['page_teaser'] = Timber::compile($context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
 }
 
-// rcd($page_teaser, true);
-
-
+ /** ************************
+  * Check type de publication
+  ************************ **/
 $page_type_term = wp_get_post_terms($context['post']->ID, 'page_type');
 $page_type = $page_type_term[0]->slug;
 
 if ($page_type === 'playlist_tourism') {
     /** ************************
-    * Appel apirender pour récupérer le html de la playlist
+    * Appel apirender pour récupérer le DOM de la playlist
     ************************ **/
     $playlist_conf_id = get_field('field_5b338ff331b17');
     $context['playlist_template'] = apply_filters('wp_hawwwai_sit_playlist_render', $playlist_conf_id, 'fr');
@@ -110,5 +115,5 @@ if ($page_type === 'playlist_tourism') {
     }
 }
 
-// Render the $context in page.twig
+// On rend le $context dans le page.twig
 Timber::render('page.twig', $context);

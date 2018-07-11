@@ -33,6 +33,12 @@ class HawwwaiTheme_Plugins_Options
         update_option('upload_path', WP_CONTENT_DIR . '/uploads/' . WP_SITE_KEY, '', 'yes');
         update_option('upload_url_path', WP_CONTENT_URL . '/uploads/' . WP_SITE_KEY, '', 'yes');
         update_option('acm_server_settings', array('server_enable' => true), '', 'yes');
+
+        $wpseo_titles = get_option('wpseo_titles');
+        if ($wpseo_titles['breadcrumbs-enable'] == false) {
+            $wpseo_titles['breadcrumbs-enable'] = true;
+            update_option('wpseo_titles', $wpseo_titles, '', 'yes');
+        }
     }
 }
 

@@ -32,6 +32,7 @@ class HawwwaiTheme_Plugins_Activation
             'fakerpress/fakerpress.php',
             'redirection/redirection.php',
             'permalink-manager/permalink-manager.php',
+            'wordpress-seo/wp-seo.php'
         ];
 
         $this->dev_plugins = [
@@ -43,7 +44,6 @@ class HawwwaiTheme_Plugins_Activation
 
         $this->deactivate_plugins = [
             'rocket-lazy-load/rocket-lazy-load.php',
-            'wordpress-seo/wp-seo.php',
             'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
         ];
 
