@@ -31,7 +31,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "collapsed": "field_5b471f9c4eff0",
+            "collapsed": "field_5b472edae3000",
             "min": 0,
             "max": 0,
             "layout": "block",
@@ -40,6 +40,25 @@
             "collapse_all_repeater": 0,
             "btn-icon-only": 0,
             "sub_fields": [
+                {
+                    "key": "field_5b472edae3000",
+                    "label": "Titre pour l'administration",
+                    "name": "tab_bo_title",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "hide-label",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "Titre visible lorsque l'onglet est refermé (uniquement pour l'adlinistration)",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
                 {
                     "key": "field_5b4728182f9b0",
                     "label": "Onglet",
@@ -118,5 +137,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1531382878
+    "modified": 1531384704
 }

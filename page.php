@@ -96,10 +96,17 @@ if ($page_type === 'playlist_tourism') {
                         // rcd($layout);
                         $playlist_conf_id = $layout['playlist_conf_id'];
                         $components['items'][] = apply_filters('wp_hawwwai_sit_playlist_render', $playlist_conf_id, 'fr');
+                    } elseif ($layout['acf_fc_layout'] == 'tabs_group') {
+                        foreach ($layout['tabs'] as $index => $tab) {
+                            $digits = 6;
+                            $layout['tabs'][$index]['tab_id'] = 'p' . $context['post']->ID . '-tab-' . rand(pow(10, $digits-1), pow(10, $digits)-1) . '-' . $index;
+                        }
+                        // rcd($layout['tabs'], true);
+                        $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                     } else {
                         if ($layout['acf_fc_layout'] == 'call_to_action' && !empty($layout['button']['add_modal'])) {
                             // On créé un id unique pour la modal si l'option pop-in est sélectionnée
-                            $layout['modal_id'] = 'post-' . $context['post']->ID . '-cta-' . $key;
+                            $layout['modal_id'] = 'p' . $context['post']->ID . '-cta-' . $key;
                         }
                         $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                     }
