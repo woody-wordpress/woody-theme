@@ -93,15 +93,27 @@ if ($page_type === 'playlist_tourism') {
                         $the_items = getAutoFocus_data($context['post'], $layout);
                         $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_items);
                     } elseif ($layout['acf_fc_layout'] == 'playlist_bloc') {
-                        // rcd($layout);
                         $playlist_conf_id = $layout['playlist_conf_id'];
                         $components['items'][] = apply_filters('wp_hawwwai_sit_playlist_render', $playlist_conf_id, 'fr');
                     } elseif ($layout['acf_fc_layout'] == 'tabs_group') {
-                        foreach ($layout['tabs'] as $index => $tab) {
-                            $digits = 6;
-                            $layout['tabs'][$index]['tab_id'] = 'p' . $context['post']->ID . '-tab-' . rand(pow(10, $digits-1), pow(10, $digits)-1) . '-' . $index;
+
+                        // On déclare le tableau à remplir
+                        $the_items = [];
+                        // On génère un ID pour le groupe de tabs
+                        $layout['tabs_id'] = 'tabs-' . uniqid();
+                        foreach ($layout['tabs'] as $key => $tab) {
+                            $tab_content = [];
+                            $layout['tabs'][$key]['tab_id'] = 'tab-' . uniqid();
+                            // On récupère le DOM chaque bloc ajouté dans l'onglet
+                            if (!empty($tab['section_content'])) {
+                                foreach ($tab['section_content'] as $tab_layout) {
+                                    $tab_content['items'][] = Timber::compile($context['woody_components'][$tab_layout['woody_tpl']], $tab_layout);
+                                }
+
+                                $layout['tabs'][$key]['section_content'] = Timber::compile($context['woody_components'][$tab['tab_woody_tpl']], $tab_content);
+                            }
                         }
-                        // rcd($layout['tabs'], true);
+
                         $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                     } else {
                         if ($layout['acf_fc_layout'] == 'call_to_action' && !empty($layout['button']['add_modal'])) {

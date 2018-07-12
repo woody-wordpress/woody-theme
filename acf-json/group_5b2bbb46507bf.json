@@ -112,7 +112,7 @@
             "max": 0,
             "layout": "table",
             "button_label": "Ajouter un bouton",
-            "hide_collapse": 0,
+            "hide_collapse": 1,
             "collapse_all_repeater": 0,
             "btn-icon-only": 0,
             "sub_fields": [
@@ -359,5 +359,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Les infos principales de la page + la possibilité d'ajouter les liens de partage et d'ajout aux favoris",
-    "modified": 1531313137
+    "modified": 1531402081
 }

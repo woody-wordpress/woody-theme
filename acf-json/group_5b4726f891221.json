@@ -717,15 +717,34 @@
             }
         },
         {
-            "key": "field_5b47273c78097",
-            "label": "Titre \/ Lien",
+            "key": "field_5b4773c2c9ef8",
+            "label": "Titre",
             "name": "tab_title",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "40",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5b47273c78097",
+            "label": "Lien",
+            "name": "tab_link",
             "type": "link",
             "instructions": "Si aucun contenu n'est ajouté, le lien sera utilisé au clic sur l'onglet",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "80",
+                "width": "40",
                 "class": "",
                 "id": ""
             },
@@ -807,5 +826,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Utilisé pour afficher des bloc des des tabs",
-    "modified": 1531384473
+    "modified": 1531402267
 }
