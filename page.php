@@ -98,8 +98,8 @@ if ($page_type === 'playlist_tourism') {
                         $components['items'][] = apply_filters('wp_hawwwai_sit_playlist_render', $playlist_conf_id, 'fr');
                     } else {
                         if ($layout['acf_fc_layout'] == 'call_to_action' && !empty($layout['button']['add_modal'])) {
+                            // On créé un id unique pour la modal si l'option pop-in est sélectionnée
                             $layout['modal_id'] = 'post-' . $context['post']->ID . '-cta-' . $key;
-                            // rcd($layout, true);
                         }
                         $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                     }
