@@ -1,9 +1,9 @@
 {
-    "key": "group_5b0ec29dbd905",
-    "title": "Bloc de texte + icône",
+    "key": "group_5b471f2922b04",
+    "title": "Onglets",
     "fields": [
         {
-            "key": "field_5b0ec2bc0a8d0",
+            "key": "field_5b471f334efed",
             "label": "Contenu",
             "name": "",
             "type": "tab",
@@ -19,28 +19,52 @@
             "endpoint": 0
         },
         {
-            "key": "field_5b0ec29f0a8cf",
-            "label": "En-tête",
-            "name": "heading",
-            "type": "clone",
+            "key": "field_5b471f474efee",
+            "label": "Onglets",
+            "name": "tabs",
+            "type": "repeater",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-label",
                 "id": ""
             },
-            "clone": [
-                "group_5b041c24d0dd7"
-            ],
-            "display": "seamless",
+            "collapsed": "field_5b471f9c4eff0",
+            "min": 0,
+            "max": 0,
             "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0
+            "button_label": "Ajouter un onglet",
+            "hide_collapse": 0,
+            "collapse_all_repeater": 0,
+            "btn-icon-only": 0,
+            "sub_fields": [
+                {
+                    "key": "field_5b4728182f9b0",
+                    "label": "Onglet",
+                    "name": "tabs_contents",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_5b4726f891221"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                }
+            ]
         },
         {
-            "key": "field_5b0ec2c90a8d1",
+            "key": "field_5b47229222dd7",
             "label": "Mise en page",
             "name": "",
             "type": "tab",
@@ -56,7 +80,7 @@
             "endpoint": 0
         },
         {
-            "key": "field_5b0ec2d50a8d2",
+            "key": "field_5b4722a022dd8",
             "label": "Template",
             "name": "woody_tpl",
             "type": "radio",
@@ -65,7 +89,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "hide-label",
+                "class": "",
                 "id": ""
             },
             "choices": [],
@@ -93,6 +117,6 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": 1,
-    "description": "Clone du bloc en-tête (peut-être utilisé pour les \"points forts\" ou les \"on aime\"",
-    "modified": 1531380404
+    "description": "",
+    "modified": 1531382878
 }

@@ -475,6 +475,37 @@
                             ],
                             "min": "",
                             "max": ""
+                        },
+                        "5b4722d2c1c12": {
+                            "key": "5b4722d2c1c12",
+                            "name": "tabs_group",
+                            "label": "Groupe d'onglets",
+                            "display": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_5b4722e2c1c13",
+                                    "label": "Onglets",
+                                    "name": "onglets",
+                                    "type": "clone",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "clone": [
+                                        "group_5b471f2922b04"
+                                    ],
+                                    "display": "seamless",
+                                    "layout": "block",
+                                    "prefix_label": 0,
+                                    "prefix_name": 0
+                                }
+                            ],
+                            "min": "",
+                            "max": ""
                         }
                     },
                     "button_label": "Ajouter un bloc",
@@ -486,7 +517,7 @@
                 },
                 {
                     "key": "field_5afd2faf953bc",
-                    "label": "Mise en page",
+                    "label": "Mise en page <small>(section)<\/small>",
                     "name": "",
                     "type": "tab",
                     "instructions": "",
@@ -516,6 +547,7 @@
                     "choices": {
                         "grids-grid_4_cols-tpl_1": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_4_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_4_cols-tpl_1\" width=\"150\" height=\"150\" \/>",
                         "grids-grid_5_cols-tpl_1": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_5_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_5_cols-tpl_1\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_2_cols-tpl_6": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_6\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_6\" width=\"150\" height=\"150\" \/>",
                         "grids-grid_2_cols-tpl_1": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_1\" width=\"150\" height=\"150\" \/>",
                         "grids-grid_2_cols-tpl_2": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_2\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_2\" width=\"150\" height=\"150\" \/>",
                         "grids-grid_2_cols-tpl_5": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_5\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_5\" width=\"150\" height=\"150\" \/>",
@@ -804,5 +836,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1531314349
+    "modified": 1531383046
 }
