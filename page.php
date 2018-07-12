@@ -49,7 +49,6 @@ if (!empty($page_heading)) {
     $context['page_heading'] = Timber::compile($context['woody_components'][$page_heading['heading_woody_tpl']], $page_heading);
 }
 
-
  /** ************************
   * Check type de publication
   ************************ **/
@@ -66,7 +65,6 @@ if ($page_type === 'playlist_tourism') {
     /** ************************
     * Compilation des sections
     ************************ **/
-
     $context['sections'] = [];
     $sections = $context['post']->get_field('section');
 
@@ -74,7 +72,7 @@ if ($page_type === 'playlist_tourism') {
         // Foreach section, fill vars to display in the woody's components
         foreach ($sections as $key => $section) {
 
-    // On compile les données du header de section
+            // On compile les données du header de section
             $the_header = Timber::compile($context['woody_components']['section-section_header-tpl_1'], $section);
 
             // On compile les données du footer de section
@@ -95,30 +93,26 @@ if ($page_type === 'playlist_tourism') {
                     } elseif ($layout['acf_fc_layout'] == 'playlist_bloc') {
                         $playlist_conf_id = $layout['playlist_conf_id'];
                         $components['items'][] = apply_filters('wp_hawwwai_sit_playlist_render', $playlist_conf_id, 'fr');
-                    } elseif ($layout['acf_fc_layout'] == 'tabs_group') {
-
-                        // On déclare le tableau à remplir
-                        $the_items = [];
-                        // On génère un ID pour le groupe de tabs
-                        $layout['tabs_id'] = 'tabs-' . uniqid();
-                        foreach ($layout['tabs'] as $key => $tab) {
-                            $tab_content = [];
-                            $layout['tabs'][$key]['tab_id'] = 'tab-' . uniqid();
-                            // On récupère le DOM chaque bloc ajouté dans l'onglet
-                            if (!empty($tab['section_content'])) {
-                                foreach ($tab['section_content'] as $tab_layout) {
-                                    $tab_content['items'][] = Timber::compile($context['woody_components'][$tab_layout['woody_tpl']], $tab_layout);
-                                }
-
-                                $layout['tabs'][$key]['section_content'] = Timber::compile($context['woody_components'][$tab['tab_woody_tpl']], $tab_content);
-                            }
-                        }
-
-                        $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                     } else {
                         if ($layout['acf_fc_layout'] == 'call_to_action' && !empty($layout['button']['add_modal'])) {
                             // On créé un id unique pour la modal si l'option pop-in est sélectionnée
-                            $layout['modal_id'] = 'p' . $context['post']->ID . '-cta-' . $key;
+                            $layout['modal_id'] = 'cta-modal' . uniqid();
+                        }
+                        if ($layout['acf_fc_layout'] == 'tabs_group') {
+                            // On génère un ID pour le groupe de tabs
+                            $layout['tabs_id'] = 'tabs-' . uniqid();
+                            foreach ($layout['tabs'] as $key => $tab) {
+                                $tab_content = [];
+                                $layout['tabs'][$key]['tab_id'] = 'tab-' . uniqid();
+                                // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
+                                if (!empty($tab['section_content'])) {
+                                    foreach ($tab['section_content'] as $tab_layout) {
+                                        $tab_content['items'][] = Timber::compile($context['woody_components'][$tab_layout['woody_tpl']], $tab_layout);
+                                    }
+                                    // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
+                                    $layout['tabs'][$key]['section_content'] = Timber::compile($context['woody_components'][$tab['tab_woody_tpl']], $tab_content);
+                                }
+                            }
                         }
                         $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                     }
