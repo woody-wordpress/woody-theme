@@ -40,13 +40,14 @@ if (!empty($page_teaser)) {
 /** ****************************
  * Compilation du visuel et accroche
  **************************** **/
-$page_heading = [];
-$page_heading = getAcfGroupFields(33);
+$page_hero = [];
+$page_hero = getAcfGroupFields(33);
+// rcd($page_hero, true);
 if (empty($page_teaser['page_teaser_display_title'])) {
-    $page_heading['title_as_h1'] = true;
+    $page_hero['title_as_h1'] = true;
 }
-if (!empty($page_heading)) {
-    $context['page_heading'] = Timber::compile($context['woody_components'][$page_heading['heading_woody_tpl']], $page_heading);
+if (!empty($page_hero)) {
+    $context['page_hero'] = Timber::compile($context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
 }
 
  /** ************************

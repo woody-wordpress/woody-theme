@@ -3,8 +3,8 @@
 {% block content %}
     <main class="content-type-page">
         <div class="content-wrapper">
-            {% if page_heading | default %}
-                {{ page_heading }}
+            {% if page_hero | default %}
+                {{ page_hero }}
             {% endif %}
             {# L'en-tête de page est toujours affichée même si aucun champ n'est saisi afin d'afficher le fil d'arianne #}
             {{ page_teaser }}
