@@ -76,8 +76,8 @@ Foundation.plugin(ResponsiveMenu, 'ResponsiveMenu');
 import { ResponsiveToggle } from 'foundation-sites/js/foundation.responsiveToggle';
 Foundation.plugin(ResponsiveToggle, 'ResponsiveToggle');
 
-// import { Reveal } from 'foundation-sites/js/foundation.reveal';
-// Foundation.plugin(Reveal, 'Reveal');
+import { Reveal } from 'foundation-sites/js/foundation.reveal';
+Foundation.plugin(Reveal, 'Reveal');
 
 // import { Slider } from 'foundation-sites/js/foundation.slider';
 // Foundation.plugin(Slider, 'Slider');

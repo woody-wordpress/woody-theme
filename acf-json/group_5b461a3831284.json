@@ -94,14 +94,14 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "25",
                         "class": "",
                         "id": ""
                     },
                     "default_value": "",
                     "save_format": "element",
                     "allow_null": 1,
-                    "show_preview": 1,
+                    "show_preview": 0,
                     "enqueue_fa": 1,
                     "fa_live_preview": "",
                     "choices": {
@@ -792,11 +792,30 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "40",
                         "class": "",
                         "id": ""
                     },
                     "return_format": "array"
+                },
+                {
+                    "key": "field_5b47095f7b264",
+                    "label": "Ouvrir le lien dans une pop-in",
+                    "name": "add_modal",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "35",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
                 }
             ]
         },
@@ -832,14 +851,14 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "25",
                         "class": "",
                         "id": ""
                     },
                     "default_value": "",
                     "save_format": "element",
                     "allow_null": 0,
-                    "show_preview": 1,
+                    "show_preview": 0,
                     "enqueue_fa": 0,
                     "fa_live_preview": "",
                     "choices": {
@@ -1530,7 +1549,7 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "30",
                         "class": "",
                         "id": ""
                     },
@@ -1549,7 +1568,7 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "45",
                         "class": "",
                         "id": ""
                     },
@@ -1637,5 +1656,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Un bloc d'appel à laction avec texte et lien\/fichier + couleur de fond possible",
-    "modified": 1531316348
+    "modified": 1531375138
 }

@@ -17,6 +17,7 @@ class HawwwaiTheme_Cleanup_Admin
     {
         add_filter('wpseo_metabox_prio', array($this, 'yoast_move_meta_box_bottom'));
         add_action('init', array($this, 'remove_pages_editor'));
+        add_action('admin_menu', array($this, 'remove_comments_meta_box'));
         add_action('admin_menu', array($this, 'remove_menus'));
 
         if (is_admin()) {
@@ -59,6 +60,15 @@ class HawwwaiTheme_Cleanup_Admin
     public function yoast_move_meta_box_bottom()
     {
         return 'low';
+    }
+
+    /**
+     * Benoit Bouchaud
+     * On retire la metabox pour les commentaires
+     */
+    public function remove_comments_meta_box()
+    {
+        remove_meta_box('commentsdiv', 'page', 'normal');
     }
 
     /**

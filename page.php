@@ -97,7 +97,8 @@ if ($page_type === 'playlist_tourism') {
                         $playlist_conf_id = $layout['playlist_conf_id'];
                         $components['items'][] = apply_filters('wp_hawwwai_sit_playlist_render', $playlist_conf_id, 'fr');
                     } else {
-                        if ($layout['acf_fc_layout'] == 'call_to_action') {
+                        if ($layout['acf_fc_layout'] == 'call_to_action' && !empty($layout['button']['add_modal'])) {
+                            $layout['modal_id'] = 'post-' . $context['post']->ID . '-cta-' . $key;
                             // rcd($layout, true);
                         }
                         $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
