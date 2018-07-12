@@ -88,8 +88,8 @@ Foundation.plugin(Reveal, 'Reveal');
 // import { Sticky } from 'foundation-sites/js/foundation.sticky';
 // Foundation.plugin(Sticky, 'Sticky');
 
-// import { Tabs } from 'foundation-sites/js/foundation.tabs';
-// Foundation.plugin(Tabs, 'Tabs');
+import { Tabs } from 'foundation-sites/js/foundation.tabs';
+Foundation.plugin(Tabs, 'Tabs');
 
 // import { Toggler } from 'foundation-sites/js/foundation.toggler';
 // Foundation.plugin(Toggler, 'Toggler');
