@@ -32,6 +32,7 @@ class HawwwaiTheme_Plugins_Activation
             'fakerpress/fakerpress.php',
             'redirection/redirection.php',
             'permalink-manager/permalink-manager.php',
+            'media-file-renamer/media-file-renamer.php',
             'wordpress-seo/wp-seo.php'
         ];
 
