@@ -81,8 +81,29 @@
             "return_format": "value"
         },
         {
+            "key": "field_5b4c617b5b6f1",
+            "label": "Paramètres de fond",
+            "name": "gallery_bg_params",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5b043c93d609a"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
+        },
+        {
             "key": "field_5b04475363df1",
-            "label": "En-tête",
+            "label": "En-tête et pied de bloc",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -116,6 +137,21 @@
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0
+        },
+        {
+            "key": "field_5b4c615a5b6f0",
+            "label": "Bouton \/ Lien",
+            "name": "gallery_link",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
         }
     ],
     "location": [
@@ -135,5 +171,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Liste de photos)",
-    "modified": 1528973709
+    "modified": 1531725236
 }

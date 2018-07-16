@@ -58,7 +58,7 @@ class HawwwaiTheme_ACF
 
             if (!empty($components)) {
                 foreach ($components as $key => $component) {
-                    $field['choices'][$key] = '<img class="img-responsive" src="' . get_stylesheet_directory_uri() . '/dist/img/woody/' . $component['thumbnails']['small'] . '" alt="' . $key . '" width="150" height="150" /><div class="tpl_title">' . $component['tpl_name'] . '</div><small class="tpl_desc">' . $component['tpl_description'] . '</small>';
+                    $field['choices'][$key] = '<img class="img-responsive" src="' . get_stylesheet_directory_uri() . '/dist/img/woody/' . $component['thumbnails']['small'] . '" alt="' . $key . '" width="150" height="150" />';
                 }
             }
         }
