@@ -81,6 +81,25 @@
             "return_format": "value"
         },
         {
+            "key": "field_5b4c8ed824324",
+            "label": "Coller les miniatures",
+            "name": "gallery_no_padding",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_5b4c617b5b6f1",
             "label": "Paramètres de fond",
             "name": "gallery_bg_params",
@@ -171,5 +190,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Liste de photos)",
-    "modified": 1531725236
+    "modified": 1531737603
 }

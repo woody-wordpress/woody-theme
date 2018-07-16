@@ -74,14 +74,15 @@ if ($page_type === 'playlist_tourism') {
         foreach ($sections as $key => $section) {
 
             // On compile les données du header de section
-            $the_header = Timber::compile($context['woody_components']['section-section_header-tpl_1'], $section);
+            $the_header = Timber::compile($context['woody_components']['section-section_header-tpl_01'], $section);
 
             // On compile les données du footer de section
-            $the_footer = Timber::compile($context['woody_components']['section-section_footer-tpl_1'], $section);
+            $the_footer = Timber::compile($context['woody_components']['section-section_footer-tpl_01'], $section);
 
             // Pour chaque bloc d'une section, on compile les données dans un template Woody
             // Puis on les compile dans le template de grille Woody selectionné
             $components = [];
+            $components['no_padding'] = $section['scope_no_padding'];
 
             if (!empty($section['section_content'])) {
                 foreach ($section['section_content'] as $key => $layout) {
@@ -99,6 +100,7 @@ if ($page_type === 'playlist_tourism') {
                             // On créé un id unique pour la modal si l'option pop-in est sélectionnée
                             $layout['modal_id'] = 'cta-modal' . uniqid();
                         }
+
                         if ($layout['acf_fc_layout'] == 'tabs_group') {
                             // On génère un ID pour le groupe de tabs
                             $layout['tabs_id'] = 'tabs-' . uniqid();
@@ -136,7 +138,7 @@ if ($page_type === 'playlist_tourism') {
         'display' => $display,
     ];
 
-            $context['the_sections'][] = Timber::compile($context['woody_components']['section-section_full-tpl_1'], $the_section);
+            $context['the_sections'][] = Timber::compile($context['woody_components']['section-section_full-tpl_01'], $the_section);
         }
     }
 }

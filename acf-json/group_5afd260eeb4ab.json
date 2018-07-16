@@ -545,20 +545,20 @@
                         "id": ""
                     },
                     "choices": {
-                        "grids-grid_4_cols-tpl_1": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_4_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_4_cols-tpl_1\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_5_cols-tpl_1": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_5_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_5_cols-tpl_1\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_2_cols-tpl_6": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_6\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_6\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_2_cols-tpl_1": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_1\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_2_cols-tpl_2": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_2\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_2\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_2_cols-tpl_5": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_5\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_5\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_2_cols-tpl_4": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_4\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_4\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_2_cols-tpl_3": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_3\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_3\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_3_cols-tpl_1": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_3_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_1\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_3_cols-tpl_2": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_3_cols\/tpl_2\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_2\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_3_cols-tpl_4": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_3_cols\/tpl_4\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_4\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_3_cols-tpl_3": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_3_cols\/tpl_3\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_3\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_1_cols-tpl_1": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_1_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_1_cols-tpl_1\" width=\"150\" height=\"150\" \/>",
-                        "grids-grid_6_cols-tpl_1": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_6_cols\/tpl_1\/thumbnail.png\" alt=\"grids-grid_6_cols-tpl_1\" width=\"150\" height=\"150\" \/>"
+                        "grids-grid_4_cols-tpl_01": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_4_cols\/tpl_01\/thumbnail.png\" alt=\"grids-grid_4_cols-tpl_01\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_5_cols-tpl_01": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_5_cols\/tpl_01\/thumbnail.png\" alt=\"grids-grid_5_cols-tpl_01\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_2_cols-tpl_04": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_04\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_04\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_2_cols-tpl_03": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_03\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_03\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_2_cols-tpl_02": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_02\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_02\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_2_cols-tpl_05": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_05\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_05\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_2_cols-tpl_06": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_06\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_06\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_2_cols-tpl_01": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_2_cols\/tpl_01\/thumbnail.png\" alt=\"grids-grid_2_cols-tpl_01\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_3_cols-tpl_04": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_3_cols\/tpl_04\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_04\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_3_cols-tpl_03": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_3_cols\/tpl_03\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_03\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_3_cols-tpl_02": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_3_cols\/tpl_02\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_02\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_3_cols-tpl_01": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_3_cols\/tpl_01\/thumbnail.png\" alt=\"grids-grid_3_cols-tpl_01\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_1_cols-tpl_01": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_1_cols\/tpl_01\/thumbnail.png\" alt=\"grids-grid_1_cols-tpl_01\" width=\"150\" height=\"150\" \/>",
+                        "grids-grid_6_cols-tpl_01": "<img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/grids\/grid_6_cols\/tpl_01\/thumbnail.png\" alt=\"grids-grid_6_cols-tpl_01\" width=\"150\" height=\"150\" \/>"
                     },
                     "allow_null": 0,
                     "other_choice": 0,
@@ -566,6 +566,25 @@
                     "default_value": "",
                     "layout": "vertical",
                     "return_format": "value"
+                },
+                {
+                    "key": "field_5b4c8f882d826",
+                    "label": "Coller les blocs",
+                    "name": "scope_no_padding",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 1,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
                 },
                 {
                     "key": "field_5afd2ce516ece",
@@ -576,7 +595,7 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "50",
                         "class": "",
                         "id": ""
                     },
@@ -836,5 +855,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1531383046
+    "modified": 1531742478
 }
