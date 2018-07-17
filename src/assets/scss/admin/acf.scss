@@ -11,6 +11,9 @@
         display: flex;
         text-align: center;
         margin-right: 0 !important;
+        width: 25%;
+        justify-content: center;
+        align-items: flex-start;
         >label {
             padding: 6px;
             margin: 10px;
@@ -284,5 +287,65 @@
         .dashicons {
             margin-right: 8px;
         }
+    }
+}
+
+// On applique du style aux descritpions et titres des templates dans les champs woody_tpl
+.tpl-choice-wrapper {
+    position: relative;
+    .tpl-title {
+        margin: 10px auto 5px auto;
+        max-width: 90%;
+        line-height: 1.2em;
+    }
+    .toggle-desc {
+        color: #006799;
+        transition: color .3s;
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+    .tpl-desc {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        background-color: #23282d;
+        color: #fff;
+        width: 320px;
+        max-height: 320px;
+        overflow-y: scroll;
+        box-shadow: 0 3px 24px rgba( 0, 0, 0, .3);
+        padding: 20px;
+        z-index: 100000;
+        line-height: 1.2em;
+        .close-desc {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            transition: color .3s;
+            &:hover {
+                color: #006799;
+            }
+        }
+        .tpl-title {
+            margin-bottom: 1.67em;
+            margin-top: 0;
+        }
+    }
+    .desc-backdrop {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 99999;
+    }
+}
+
+.selected .tpl-choice-wrapper {
+    .tpl-title,
+    .toggle-desc {
+        color: #fff;
     }
 }

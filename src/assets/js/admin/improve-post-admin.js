@@ -10,3 +10,22 @@ $('[id^="tagsdiv-"').hide();
 $('#pageparentdiv').addClass('closed');
 $('#revisionsdiv').addClass('closed');
 $('#wpseo_meta').addClass('closed');
+
+// On toggle la description de chaque template dans les champs woody_tpl
+$('.tpl-choice-wrapper').each(function() {
+    var $this = $(this);
+
+    $this.find('.toggle-desc').click(function(e) {
+        e.stopPropagation();
+        $this.find('.tpl-desc').toggleClass('hidden');
+        $this.find('.desc-backdrop').toggleClass('hidden');
+    });
+    $this.find('.close-desc').click(function() {
+        $this.find('.tpl-desc').addClass('hidden');
+        $this.find('.desc-backdrop').addClass('hidden');
+    });
+    $this.find('.desc-backdrop').click(function() {
+        $this.find('.tpl-desc').addClass('hidden');
+        $(this).addClass('hidden');
+    });
+});
