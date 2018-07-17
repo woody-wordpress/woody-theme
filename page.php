@@ -88,9 +88,11 @@ if ($page_type === 'playlist_tourism') {
                 foreach ($section['section_content'] as $key => $layout) {
                     if ($layout['acf_fc_layout'] == 'manual_focus') {
                         $the_items = getManualFocus_data($layout['content_selection']);
+                        $the_items['focus_no_padding'] = $layout['focus_no_padding'];
                         $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_items);
                     } elseif ($layout['acf_fc_layout'] == 'auto_focus') {
                         $the_items = getAutoFocus_data($context['post'], $layout);
+                        $the_items['focus_no_padding'] = $layout['focus_no_padding'];
                         $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_items);
                     } elseif ($layout['acf_fc_layout'] == 'playlist_bloc') {
                         $playlist_conf_id = $layout['playlist_conf_id'];
