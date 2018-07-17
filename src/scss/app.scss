@@ -2,7 +2,7 @@
 @import 'foundation';
 @import 'motion-ui';
 @include foundation-global-styles;
-//@include foundation-grid;
+// @include foundation-grid;
 // @include foundation-flex-grid;
 @include foundation-xy-grid-classes;
 @include foundation-typography;
@@ -45,11 +45,8 @@
 // @include foundation-prototype-classes;
 // @include motion-ui-transitions;
 // @include motion-ui-animations;
-/*
-  My custom styles:
-  Add your scss files below to structure your project styles
-*/
-
-// Global
-@import "global/_accessibility";
-@import 'woody';
+@import "global/accessibility";
+@import "plugins/lightgallery";
+@import "plugins/cookieconsent";
+@import "plugins/swiper";
+@import "woody";
