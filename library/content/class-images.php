@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Images
  *
@@ -14,8 +15,72 @@ class WoodyTheme_Images
         $this->register_hooks();
     }
 
+    public static function imagemagick(WP_REST_Request $request)
+    {
+        /**
+         * Exemple : http://www.superot.wp.rc-dev.com/wp-json/woody/crop/50/100/aHR0cDovL3d3dy5zdXBlcm90LndwLnJjLWRldi5jb20vYXBwL3VwbG9hZHMvc3VwZXJvdC8yMDE4LzA3L3Blb3BsZS1tYW4tMi5qcGc=
+         */
+
+        // Get parameters
+        $params = $request->get_params();
+        $width = $params['width'];
+        $height = $params['height'];
+
+        // Filename
+        $url = parse_url(base64_decode($params['url']));
+        $filename = WP_WEBROOT_DIR . $url['path'];
+        if (!file_exists($filename)) {
+            die('Image introuvale');
+        }
+
+        // New Filename
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        $new_filename = str_replace('.'.$ext, '-'.$width.'x'.$height.'.'.$ext, $filename);
+
+        // Imagick execution
+        if (!file_exists($new_filename)) {
+            $image = new Imagick($filename);
+            $w = $image->getImageWidth();
+            $h = $image->getImageHeight();
+
+            if ($w == $h) {
+                if ($width >= $height) {
+                    $resize_w = $width;
+                    $resize_h = $width;
+                } else {
+                    $resize_w = $height;
+                    $resize_h = $height;
+                }
+            } elseif ($w > $h) {
+                $resize_w = $w * $height / $h;
+                $resize_h = $height;
+            } else {
+                $resize_w = $width;
+                $resize_h = $h * $width / $w;
+            }
+
+            $image->resizeImage($resize_w, $resize_h, Imagick::FILTER_LANCZOS, 0.9);
+            $image->cropImage($width, $height, ($resize_w - $width) / 2, ($resize_h - $height) / 2);
+            $image->writeImage($new_filename);
+        }
+
+        if (file_exists($new_filename)) {
+            header('Content-type: ' . mime_content_type($new_filename));
+            print file_get_contents($new_filename);
+        } else {
+            die('Erreur de génération de la miniature');
+        }
+    }
+
     protected function register_hooks()
     {
+        add_action('rest_api_init', function () {
+            register_rest_route('woody', '/crop/(?P<width>[0-9]{1,4})/(?P<height>[0-9]{1,4})/(?P<url>[-=\w]+)', array(
+              'methods' => 'GET',
+              'callback' => array('WoodyTheme_Images', 'imagemagick')
+            ));
+        });
+
         // Ratio 8:1 => Panoramique
         add_image_size('ratio_8_1_small', 360, 45, true);
         add_image_size('ratio_8_1_medium', 640, 80, true);
