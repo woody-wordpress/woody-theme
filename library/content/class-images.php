@@ -3,11 +3,11 @@
  * Images
  *
  * @link https://www.advancedcustomfields.com/resources/acf-settings
- * @package HawwwaiTheme
- * @since HawwwaiTheme 1.0.0
+ * @package WoodyTheme
+ * @since WoodyTheme 1.0.0
  */
 
-class HawwwaiTheme_Images
+class WoodyTheme_Images
 {
     public function __construct()
     {
@@ -125,4 +125,4 @@ class HawwwaiTheme_Images
 }
 
 // Execute Class
-new HawwwaiTheme_Images();
+new WoodyTheme_Images();

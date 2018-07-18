@@ -1,14 +1,14 @@
 <?php
 /**
- * HawwwaiTheme functions and definitions
+ * WoodyTheme functions and definitions
  *
  * Set up the theme and provides some helper functions, which are used in the
  * theme as custom template tags. Others are attached to action and filter
  * hooks in WordPress to change core functionality.
  *
  * @link https://codex.wordpress.org/Theme_Development
- * @package HawwwaiTheme
- * @since HawwwaiTheme 1.0.0
+ * @package WoodyTheme
+ * @since WoodyTheme 1.0.0
  */
 
 use Symfony\Component\Finder\Finder;

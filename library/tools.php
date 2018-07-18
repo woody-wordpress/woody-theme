@@ -2,8 +2,8 @@
 /**
  * Toolbox
  *
- * @package HawwwaiTheme
- * @since HawwwaiTheme 1.0.0
+ * @package WoodyTheme
+ * @since WoodyTheme 1.0.0
  */
 
 /**

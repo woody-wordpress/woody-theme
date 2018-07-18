@@ -3,11 +3,11 @@
  * ACF sync field
  *
  * @link https://www.advancedcustomfields.com/resources/acf-settings
- * @package HawwwaiTheme
- * @since HawwwaiTheme 1.0.0
+ * @package WoodyTheme
+ * @since WoodyTheme 1.0.0
  */
 
-class HawwwaiTheme_ACF
+class WoodyTheme_ACF
 {
     const ACF = "acf-pro/acf.php";
 
@@ -139,4 +139,4 @@ class HawwwaiTheme_ACF
 }
 
 // Execute Class
-new HawwwaiTheme_ACF();
+new WoodyTheme_ACF();

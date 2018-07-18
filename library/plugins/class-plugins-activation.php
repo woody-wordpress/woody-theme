@@ -3,11 +3,11 @@
  * Activation of required plugins
  *
  * @link https://codex.wordpress.org/Function_Reference/activate_plugin
- * @package HawwwaiTheme
- * @since HawwwaiTheme 1.0.0
+ * @package WoodyTheme
+ * @since WoodyTheme 1.0.0
  */
 
-class HawwwaiTheme_Plugins_Activation
+class WoodyTheme_Plugins_Activation
 {
     public $activate_plugins;
     public $deactivate_plugins;
@@ -82,4 +82,4 @@ class HawwwaiTheme_Plugins_Activation
 }
 
 // Execute Class
-new HawwwaiTheme_Plugins_Activation();
+new WoodyTheme_Plugins_Activation();

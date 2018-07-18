@@ -3,11 +3,11 @@
  * Default options of plugins
  *
  * @link https://codex.wordpress.org/Function_Reference/update_option
- * @package HawwwaiTheme
- * @since HawwwaiTheme 1.0.0
+ * @package WoodyTheme
+ * @since WoodyTheme 1.0.0
  */
 
-class HawwwaiTheme_Plugins_Options
+class WoodyTheme_Plugins_Options
 {
     public function __construct()
     {
@@ -45,4 +45,4 @@ class HawwwaiTheme_Plugins_Options
 }
 
 // Execute Class
-new HawwwaiTheme_Plugins_Options();
+new WoodyTheme_Plugins_Options();

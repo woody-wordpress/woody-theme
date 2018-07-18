@@ -1,6 +1,6 @@
 <?php
 
-// class HawwwaiTheme_Timber extends TimberSite
+// class WoodyTheme_Timber extends TimberSite
 // {
 
 //     // Adding functionality to Twig
@@ -44,4 +44,4 @@
 // }
 
 // // Execute Class
-// $HawwwaiTheme_Timber = new HawwwaiTheme_Timber();
+// $WoodyTheme_Timber = new WoodyTheme_Timber();

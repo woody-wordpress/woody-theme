@@ -2,11 +2,11 @@
 /**
  * Assets enqueue
  *
- * @package HawwwaiTheme
- * @since HawwwaiTheme 1.0.0
+ * @package WoodyTheme
+ * @since WoodyTheme 1.0.0
  */
 
-class HawwwaiTheme_Enqueue_Assets
+class WoodyTheme_Enqueue_Assets
 {
     public function __construct()
     {
@@ -72,4 +72,4 @@ class HawwwaiTheme_Enqueue_Assets
 }
 
 // Execute Class
-new HawwwaiTheme_Enqueue_Assets();
+new WoodyTheme_Enqueue_Assets();

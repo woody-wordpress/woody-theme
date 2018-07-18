@@ -2,11 +2,11 @@
 /**
  * Cron
  *
- * @package HawwwaiTheme
- * @since HawwwaiTheme 1.0.0
+ * @package WoodyTheme
+ * @since WoodyTheme 1.0.0
  */
 
-class HawwwaiTheme_Cron
+class WoodyTheme_Cron
 {
     public function __construct()
     {
@@ -26,4 +26,4 @@ class HawwwaiTheme_Cron
 }
 
 // Execute Class
-new HawwwaiTheme_Cron();
+new WoodyTheme_Cron();
