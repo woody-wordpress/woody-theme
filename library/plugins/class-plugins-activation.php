@@ -3,11 +3,11 @@
  * Activation of required plugins
  *
  * @link https://codex.wordpress.org/Function_Reference/activate_plugin
- * @package HawwwaiTheme
- * @since HawwwaiTheme 1.0.0
+ * @package WoodyTheme
+ * @since WoodyTheme 1.0.0
  */
 
-class HawwwaiTheme_Plugins_Activation
+class WoodyTheme_Plugins_Activation
 {
     public $activate_plugins;
     public $deactivate_plugins;
@@ -20,8 +20,6 @@ class HawwwaiTheme_Plugins_Activation
             'acf-relationship-create-pro/acf-relationship-create-pro.php',
             'timber-library/timber.php',
             'advanced-custom-fields-font-awesome/acf-font-awesome.php',
-            'regenerate-thumbnails/regenerate-thumbnails.php',
-            'yoimages/yoimages.php',
             'bea-media-analytics/bea-media-analytics.php',
             'bea-sanitize-filename/bea-sanitize-filename.php',
             'enhanced-media-library/enhanced-media-library.php',
@@ -32,8 +30,8 @@ class HawwwaiTheme_Plugins_Activation
             'fakerpress/fakerpress.php',
             'redirection/redirection.php',
             'permalink-manager/permalink-manager.php',
-            'media-file-renamer/media-file-renamer.php',
-            'wordpress-seo/wp-seo.php'
+            'wordpress-seo/wp-seo.php',
+            'yoimages/yoimages.php',
         ];
 
         $this->dev_plugins = [
@@ -46,6 +44,8 @@ class HawwwaiTheme_Plugins_Activation
         $this->deactivate_plugins = [
             'rocket-lazy-load/rocket-lazy-load.php',
             'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
+            'media-file-renamer/media-file-renamer.php',
+            'regenerate-thumbnails/regenerate-thumbnails.php',
         ];
 
         // Enable debug plugins on DEV
@@ -82,4 +82,4 @@ class HawwwaiTheme_Plugins_Activation
 }
 
 // Execute Class
-new HawwwaiTheme_Plugins_Activation();
+new WoodyTheme_Plugins_Activation();

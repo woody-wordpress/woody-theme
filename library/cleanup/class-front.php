@@ -2,11 +2,11 @@
 /**
  * Front Theme Cleanup
  *
- * @package HawwwaiTheme
- * @since HawwwaiTheme 1.0.0
+ * @package WoodyTheme
+ * @since WoodyTheme 1.0.0
  */
 
-class HawwwaiTheme_Cleanup_Front
+class WoodyTheme_Cleanup_Front
 {
     public function __construct()
     {
@@ -111,4 +111,4 @@ class HawwwaiTheme_Cleanup_Front
 }
 
 // Execute Class
-new HawwwaiTheme_Cleanup_Front();
+new WoodyTheme_Cleanup_Front();

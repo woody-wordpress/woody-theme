@@ -1,6 +1,6 @@
 <?php
 
-class HawwwaiTheme_ApirenderBridge
+class WoodyTheme_ApirenderBridge
 {
     private $pluginHawwwai;
 
@@ -37,7 +37,7 @@ class HawwwaiTheme_ApirenderBridge
 }
 
 // Execute Class
-// $apirenderBridge = new HawwwaiTheme_ApirenderBridge();
+// $apirenderBridge = new WoodyTheme_ApirenderBridge();
 // if (is_plugin_active('hawwwai-plugin/hawwwai.php')) {
 //     $apirenderBridge->setPlugin($plugin_hawwwai_kernel);
 // }

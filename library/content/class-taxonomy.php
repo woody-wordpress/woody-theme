@@ -3,11 +3,11 @@
  * Taxonomy
  *
  * @link https://www.advancedcustomfields.com/resources/acf-settings
- * @package HawwwaiTheme
- * @since HawwwaiTheme 1.0.0
+ * @package WoodyTheme
+ * @since WoodyTheme 1.0.0
  */
 
-class HawwwaiTheme_Taxonomy
+class WoodyTheme_Taxonomy
 {
     public function __construct()
     {
@@ -61,4 +61,4 @@ class HawwwaiTheme_Taxonomy
 }
 
 // Execute Class
-new HawwwaiTheme_Taxonomy();
+new WoodyTheme_Taxonomy();

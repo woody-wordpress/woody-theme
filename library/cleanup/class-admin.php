@@ -2,11 +2,11 @@
 /**
  * Admin Theme Cleanup
  *
- * @package HawwwaiTheme
- * @since HawwwaiTheme 1.0.0
+ * @package WoodyTheme
+ * @since WoodyTheme 1.0.0
  */
 
-class HawwwaiTheme_Cleanup_Admin
+class WoodyTheme_Cleanup_Admin
 {
     public function __construct()
     {
@@ -84,4 +84,4 @@ class HawwwaiTheme_Cleanup_Admin
 }
 
 // Execute Class
-new HawwwaiTheme_Cleanup_Admin();
+new WoodyTheme_Cleanup_Admin();

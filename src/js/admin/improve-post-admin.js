@@ -20,10 +20,12 @@ $('.tpl-choice-wrapper').each(function() {
         $this.find('.tpl-desc').toggleClass('hidden');
         $this.find('.desc-backdrop').toggleClass('hidden');
     });
+
     $this.find('.close-desc').click(function() {
         $this.find('.tpl-desc').addClass('hidden');
         $this.find('.desc-backdrop').addClass('hidden');
     });
+
     $this.find('.desc-backdrop').click(function() {
         $this.find('.tpl-desc').addClass('hidden');
         $(this).addClass('hidden');
