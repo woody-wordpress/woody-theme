@@ -66,6 +66,8 @@ class WoodyTheme_Images
 
         if (file_exists($new_filename)) {
             header('Content-type: ' . mime_content_type($new_filename));
+            header('Cache-Control: max-age=315360000');
+            header('Expires: Thu, 31 Dec 2037 23:55:55 GMT');
             print file_get_contents($new_filename);
         } else {
             die('Erreur de génération de la miniature');
