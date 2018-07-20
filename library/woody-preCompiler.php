@@ -282,6 +282,9 @@ function getManualFocus_data($items)
      if (!empty($scope['scope_margins']['scope_margin_bottom'])) {
          $classes_array[] = $scope['scope_margins']['scope_margin_bottom'];
      }
+     if (!empty($scope['section_divider'])) {
+         $display['section_divider'] = $scope['section_divider'];
+     }
 
      // On transforme le tableau en une chaine de caractères
      $display['classes'] = implode(' ', $classes_array);

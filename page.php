@@ -72,7 +72,6 @@ if ($page_type === 'playlist_tourism') {
     if (!empty($sections)) {
         // Foreach section, fill vars to display in the woody's components
         foreach ($sections as $key => $section) {
-
             // On compile les données du header de section
             $the_header = Timber::compile($context['woody_components']['section-section_header-tpl_01'], $section);
 
