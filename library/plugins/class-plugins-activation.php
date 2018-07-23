@@ -22,16 +22,15 @@ class WoodyTheme_Plugins_Activation
             'advanced-custom-fields-font-awesome/acf-font-awesome.php',
             'bea-media-analytics/bea-media-analytics.php',
             'bea-sanitize-filename/bea-sanitize-filename.php',
-            'enhanced-media-library/enhanced-media-library.php',
             'minify-html-markup/minify-html.php',
             'wp-deferred-javascripts/wp-deferred-javascripts.php',
             'advanced-cron-manager/advanced-cron-manager.php',
             'acf-repeater-flexible-content-collapser/acf-repeater-flexible-content-collapser.php',
-            'fakerpress/fakerpress.php',
             'redirection/redirection.php',
             'permalink-manager/permalink-manager.php',
             'wordpress-seo/wp-seo.php',
             'yoimages/yoimages.php',
+            'enhanced-media-library/enhanced-media-library.php',
         ];
 
         $this->dev_plugins = [
@@ -39,6 +38,7 @@ class WoodyTheme_Plugins_Activation
             'debug-bar-timber/debug-bar-timber.php',
             'kint-debugger/kint-debugger.php',
             'wp-php-console/wp-php-console.php',
+            'fakerpress/fakerpress.php',
         ];
 
         $this->deactivate_plugins = [
