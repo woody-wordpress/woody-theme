@@ -1,22 +1,60 @@
 {
     "key": "group_5b5584826a751",
-    "title": "Infos complémentaires",
+    "title": "Médias - Infos complémentaires",
     "fields": [
         {
             "key": "field_5b5585503c855",
-            "label": "Copyright",
-            "name": "media_copyright",
+            "label": "Auteur",
+            "name": "media_author",
             "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "hide-label",
+                "class": "",
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "Copyright",
+            "placeholder": "©",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5b55a88e70cbf",
+            "label": "Latitude",
+            "name": "media_lat",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5b55a89e70cc0",
+            "label": "Longitude",
+            "name": "media_lng",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
             "prepend": "",
             "append": "",
             "maxlength": ""
@@ -35,9 +73,9 @@
     "position": "acf_after_title",
     "style": "default",
     "label_placement": "top",
-    "instruction_placement": "label",
+    "instruction_placement": "field",
     "hide_on_screen": "",
     "active": 1,
-    "description": "",
-    "modified": 1532324432
+    "description": "Champs complémentaires pour les médias (auteur, localisation)",
+    "modified": 1532333213
 }

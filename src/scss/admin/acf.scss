@@ -349,3 +349,23 @@
         color: #fff;
     }
 }
+
+// Champs complémentaires pour les images
+.acf-field-5b55a89e70cc0,
+.acf-field-5b55a88e70cbf,
+.acf-field-5b5585503c855 {
+    display: flex !important;
+    justify-content: space-between;
+    .acf-label {
+        text-align: right;
+        padding-top: 6px;
+        margin: 0 10px 0 auto !important;
+        label {
+            font-weight: normal !important;
+            color: #666;
+        }
+    }
+    .acf-input {
+        width: 65%;
+    }
+}
