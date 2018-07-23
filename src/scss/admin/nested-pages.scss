@@ -23,15 +23,19 @@
                     font-family: dashicons;
                     content: '\f474';
                     transform: rotate3d(0, 1, 0, 180deg);
-                    color: #666;
+                    color: #aeaeae;
                     transition: color .3s;
-                }
-                &.open:after {
-                    content: '\f335';
                 }
                 &:hover {
                     background-color: #0073aa !important;
                     &:after {
+                        color: #fff;
+                    }
+                }
+                &.open {
+                    background-color: #0073aa !important;
+                    &:after {
+                        content: '\f335';
                         color: #fff;
                     }
                 }
@@ -41,10 +45,9 @@
 
     #npmenuitems {
         ul {
-            li {
+            li:not(:nth-of-type(1)) {
                 display: none !important;
             }
         }
     }
-
 }
