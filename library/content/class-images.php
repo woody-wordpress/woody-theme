@@ -47,11 +47,6 @@ class WoodyTheme_Images
         add_image_size('ratio_4_3', 1200, 900, true);
         add_image_size('ratio_4_3_xlarge', 1920, 1440, true);
 
-        // Carré
-        add_image_size('ratio_square_small', 360, 360, true);
-        add_image_size('ratio_square_medium', 640, 640, true);
-        add_image_size('ratio_square', 1200, 1200, true);
-
         // Ratio 3:4 => Portrait 1
         add_image_size('ratio_3_4_small', 360, 480, true);
         add_image_size('ratio_3_4_medium', 640, 854, true);
@@ -66,6 +61,11 @@ class WoodyTheme_Images
         add_image_size('ratio_a4_small', 360, 509, true);
         add_image_size('ratio_a4_medium', 640, 905, true);
         add_image_size('ratio_a4', 1200, 1697, true);
+
+        // Carré
+        add_image_size('ratio_square_small', 360, 360, true);
+        add_image_size('ratio_square_medium', 640, 640, true);
+        add_image_size('ratio_square', 1200, 1200, true);
 
         // Free => Proportions libre
         add_image_size('ratio_free_small', 360);
@@ -90,15 +90,15 @@ class WoodyTheme_Images
     public function woody_custom_sizes($sizes)
     {
         return array(
-            'ratio_8_1' => __('Panoramique 1 (1200x150px)'),
-            'ratio_4_1' => __('Panoramique 2 (1200x300px)'),
-            'ratio_2_1' => __('Paysage 1 (1200x600px)'),
-            'ratio_16_9' => __('Paysage 2 (1200x675px)'),
-            'ratio_4_3' => __('Paysage 3 (1200x900px)'),
+            'ratio_8_1' => __('Pano A (1920x240)'),
+            'ratio_4_1' => __('Pano B (1920x480)'),
+            'ratio_2_1' => __('Paysage A (1920x960)'),
+            'ratio_16_9' => __('Paysage B (1920x1080)'),
+            'ratio_4_3' => __('Paysage C (1920x1440)'),
+            'ratio_3_4_medium' => __('Portrait A (1200x1600)'),
+            'ratio_10_16_medium' => __('Portrait B (1200x1920)'),
+            'ratio_a4_medium' => __('Format A4'),
             'ratio_square' => __('Carré'),
-            'ratio_3_4_medium' => __('Portrait 1 (640x853px)'),
-            'ratio_10_16_medium' => __('Portrait 2 (640x1024px)'),
-            'ratio_a4_medium' => __('Format A4 (640x905px)'),
             'ratio_free' => __('Proportions libres')
         );
     }

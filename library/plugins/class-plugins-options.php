@@ -36,181 +36,59 @@ class WoodyTheme_Plugins_Options
         update_option('permalink_structure', '/%postname%/', '', 'yes');
         update_option('permalink-manager-permastructs', array('post_types' => array('touristic_sheet' => '')), '', 'yes');
 
+        // Yoast settings
         $wpseo_titles = get_option('wpseo_titles');
         if ($wpseo_titles['breadcrumbs-enable'] == false) {
             $wpseo_titles['breadcrumbs-enable'] = true;
             update_option('wpseo_titles', $wpseo_titles, '', 'yes');
         }
 
+        // YoImages settings
         $yoimg_crop_settings = get_option('yoimg_crop_settings');
-        $yoimg_crop_settings['sameratio_cropping_is_active'] = true;
-        $yoimg_crop_settings['crop_sizes'] = [
-            'thumbnail' => [
-                    'active' => '0',
-                    'name' => 'Miniature'
-            ],
-            'ratio_8_1_small' => [
-                    'active' => '1',
-                    'name' => 'Panoramique 1 (360x45px)'
-            ],
-            'ratio_8_1_medium' => [
-                    'active' => '1',
-                    'name' => 'Panoramique 1 (640x80px)'
-            ],
-
-            'ratio_8_1' => [
-                    'active' => '1',
-                    'name' => 'Panoramique 1 (1200x150px)'
-            ],
-            'ratio_8_1_xlarge' => [
-                    'active' => '1',
-                    'name' => 'Panoramique 1 (1920x240px)',
-            ],
-            'ratio_4_1_small' => [
-                    'active' => '1',
-                    'name' => 'Panoramique 2 (360x90px)'
-            ],
-
-            'ratio_4_1_medium' => [
-                    'active' => '1',
-                    'name' => 'Panoramique 2 (640x160px)'
-            ],
-
-            'ratio_4_1' => [
-                    'active' => '1',
-                    'name' => 'Panoramique 2 (1200x300px)'
-            ],
-
-            'ratio_4_1_xlarge' => [
-                    'active' => '1',
-                    'name' => 'Panoramique 2 (1920x480px)'
-            ],
-
-            'ratio_2_1_small' => [
-                    'active' => '1',
-                    'name' => 'Paysage 1 (360x180px)'
-            ],
-
-            'ratio_2_1_medium' => [
-                    'active' => '1',
-                    'name' => 'Paysage 1 (640x220px)'
-            ],
-
-            'ratio_2_1' => [
-                    'active' => '1',
-                    'name' => 'Paysage 1 (1200x600px)'
-            ],
-
-            'ratio_2_1_xlarge' => [
-                    'active' => '1',
-                    'name' => 'Paysage 1 (1920x960px)'
-            ],
-
-            'ratio_16_9_small' => [
-                    'active' => '1',
-                    'name' => 'Paysage 2 (360x203px)'
-            ],
-
-            'ratio_16_9_medium' => [
-                    'active' => '1',
-                    'name' => 'Paysage 2 (640x360px)'
-            ],
-
-            'ratio_16_9' => [
-                    'active' => '1',
-                    'name' => 'Paysage 2 (1200x675px)'
-            ],
-
-            'ratio_16_9_xlarge' => [
-                    'active' => '1',
-                    'name' => 'Paysage 2 (1920x1080px)'
-            ],
-
-            'ratio_4_3_small' => [
-                    'active' => '1',
-                    'name' => 'Paysage 3 (360x270px)'
-            ],
-
-            'ratio_4_3_medium' => [
-                    'active' => '1',
-                    'name' => 'Paysage 3 (640x480px)'
-            ],
-
-            'ratio_4_3' => [
-                    'active' => '1',
-                    'name' => 'Paysage 3 (1200x900px)'
-            ],
-
-            'ratio_4_3_xlarge' => [
-                    'active' => '1',
-                    'name' => 'Paysage 3 (1920x1440px)'
-            ],
-
-            'ratio_square_small' => [
-                    'active' => '1',
-                    'name' => 'Carré (360x360px)'
-            ],
-
-            'ratio_square_medium' => [
-                    'active' => '1',
-                    'name' => 'Carré (640x640px)'
-            ],
-
-            'ratio_square' => [
-                    'active' => '1',
-                    'name' => 'Carré (1200x1200px)'
-            ],
-
-            'ratio_3_4_small' => [
-                    'active' => '1',
-                    'name' => 'Portrait 1 (360x480px)'
-            ],
-
-            'ratio_3_4_medium' => [
-                    'active' => '1',
-                    'name' => 'Portrait 1 (640x854px)'
-            ],
-
-            'ratio_3_4' => [
-                    'active' => '1',
-                    'name' => 'Portrait 1 (1200x1600px)'
-            ],
-
-            'ratio_10_16_small' => [
-                    'active' => '1',
-                    'name' => 'Portrait 2 (360x576px)'
-            ],
-
-            'ratio_10_16_medium' => [
-                    'active' => '1',
-                    'name' => 'Portrait 2 (360x576px)'
-            ],
-
-            'ratio_10_16' => [
-                    'active' => '1',
-                    'name' => 'Portrait 2 (1200x1920px)'
-            ],
-
-            'ratio_a4_small' => [
-                    'active' => '1',
-                    'name' => 'Format A4 (360x509px)'
-            ],
-
-            'ratio_a4_medium' => [
-                    'active' => '1',
-                    'name' => 'Format A4 (640x905px)'
-            ],
-
-            'ratio_a4' => [
-                    'active' => '1',
-                    'name' => 'Format A4 (1200x1697px)'
-            ],
+        $yoimg_crop_settings_new = $yoimg_crop_settings;
+        $yoimg_crop_settings_new['cropping_is_active'] = true;
+        $yoimg_crop_settings_new['retina_cropping_is_active'] = false;
+        $yoimg_crop_settings_new['sameratio_cropping_is_active'] = true;
+        $yoimg_crop_settings_new['crop_qualities'] = array(75);
+        $yoimg_crop_settings_new['cachebusting_is_active'] = (WP_ENV == 'dev') ? false : true;
+        $yoimg_crop_settings_new['crop_sizes'] = [
+            'thumbnail'             => ['active' => false, 'name' => 'Miniature'],
+            'ratio_8_1_small'       => ['active' => true, 'name' => 'Pano A (360x45)'],
+            'ratio_8_1_medium'      => ['active' => true, 'name' => 'Pano A (640x80)'],
+            'ratio_8_1'             => ['active' => true, 'name' => 'Pano A (1200x150)'],
+            'ratio_8_1_xlarge'      => ['active' => true, 'name' => 'Pano A (1920x240)'],
+            'ratio_4_1_small'       => ['active' => true, 'name' => 'Pano B (360x90)'],
+            'ratio_4_1_medium'      => ['active' => true, 'name' => 'Pano B (640x160)'],
+            'ratio_4_1'             => ['active' => true, 'name' => 'Pano B (1200x300)'],
+            'ratio_4_1_xlarge'      => ['active' => true, 'name' => 'Pano B (1920x480)'],
+            'ratio_2_1_small'       => ['active' => true, 'name' => 'Paysage A (360x180)'],
+            'ratio_2_1_medium'      => ['active' => true, 'name' => 'Paysage A (640x220)'],
+            'ratio_2_1'             => ['active' => true, 'name' => 'Paysage A (1200x600)'],
+            'ratio_2_1_xlarge'      => ['active' => true, 'name' => 'Paysage A (1920x960)'],
+            'ratio_16_9_small'      => ['active' => true, 'name' => 'Paysage B (360x203)'],
+            'ratio_16_9_medium'     => ['active' => true, 'name' => 'Paysage B (640x360)'],
+            'ratio_16_9'            => ['active' => true, 'name' => 'Paysage B (1200x675)'],
+            'ratio_16_9_xlarge'     => ['active' => true, 'name' => 'Paysage B (1920x1080)'],
+            'ratio_4_3_small'       => ['active' => true, 'name' => 'Paysage C (360x270)'],
+            'ratio_4_3_medium'      => ['active' => true, 'name' => 'Paysage C (640x480)'],
+            'ratio_4_3'             => ['active' => true, 'name' => 'Paysage C (1200x900)'],
+            'ratio_4_3_xlarge'      => ['active' => true, 'name' => 'Paysage C (1920x1440)'],
+            'ratio_3_4_small'       => ['active' => true, 'name' => 'Portrait A (360x480)'],
+            'ratio_3_4_medium'      => ['active' => true, 'name' => 'Portrait A (640x854)'],
+            'ratio_3_4'             => ['active' => true, 'name' => 'Portrait A (1200x1600)'],
+            'ratio_10_16_small'     => ['active' => true, 'name' => 'Portrait B (360x576)'],
+            'ratio_10_16_medium'    => ['active' => true, 'name' => 'Portrait B (360x576)'],
+            'ratio_10_16'           => ['active' => true, 'name' => 'Portrait B (1200x1920)'],
+            'ratio_a4_small'        => ['active' => true, 'name' => 'Format A4'],
+            'ratio_a4_medium'       => ['active' => true, 'name' => 'Format A4'],
+            'ratio_a4'              => ['active' => true, 'name' => 'Format A4'],
+            'ratio_square_small'    => ['active' => true, 'name' => 'Carr&eacute;'],
+            'ratio_square_medium'   => ['active' => true, 'name' => 'Carr&eacute;'],
+            'ratio_square'          => ['active' => true, 'name' => 'Carr&eacute;'],
         ];
-
-        update_option('yoimg_crop_settings', $wpseo_titles, '', 'yes');
-
-        // print_r($yoimg_crop_settings, true);
-        // exit;
+        if (strcmp(json_encode($yoimg_crop_settings), json_encode($yoimg_crop_settings_new)) !== 0) { // Update if different
+            update_option('yoimg_crop_settings', $yoimg_crop_settings_new, '', 'yes');
+        }
     }
 }
 
