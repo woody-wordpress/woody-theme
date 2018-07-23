@@ -51,6 +51,8 @@ class WoodyTheme_Cleanup_Admin
             remove_submenu_page('themes.php', 'widgets.php'); // Theme widgets
             remove_menu_page('edit.php?post_type=acf-field-group'); // Advanced Custom Fields
         }
+        remove_menu_page('edit.php'); // Articles
+        remove_menu_page('edit-comments.php'); // Commentaires
     }
 
     /**
