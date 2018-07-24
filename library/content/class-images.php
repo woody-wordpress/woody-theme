@@ -104,17 +104,17 @@ class WoodyTheme_Images
     }
 
     // define the wp_generate_attachment_metadata callback
-    public function woodyCustomAttachmentMetadata($metadata, $post_ID)
+    public function woodyCustomAttachmentMetadata($metadata, $wpPostId)
     {
-        if (wp_attachment_is_image($post_ID)) {
+        if (wp_attachment_is_image($wpPostId)) {
 
             // Get current post
-            $post = get_post($post_ID);
+            $post = get_post($wpPostId);
 
             // Create an array with the image meta (Title, Caption, Description) to be updated
             // Note:  comment out the Excerpt/Caption or Content/Description lines if not needed
             $my_image_meta = [];
-            $my_image_meta['ID'] = $post_ID; // Specify the image (ID) to be updated
+            $my_image_meta['ID'] = $wpPostId; // Specify the image (ID) to be updated
 
             if (empty($metadata['image_meta']['title'])) {
                 $new_title = ucwords(strtolower(preg_replace('%\s*[-_\s]+\s*%', ' ', $post->post_title)));
@@ -135,14 +135,33 @@ class WoodyTheme_Images
             }
 
             // Set the image Alt-Text
-            update_post_meta($post_ID, '_wp_attachment_image_alt', $new_description);
+            update_post_meta($wpPostId, '_wp_attachment_image_alt', $new_description);
 
             // Set the image meta (e.g. Title, Excerpt, Content)
             wp_update_post($my_image_meta);
+
+            // Set ACF Fields (Credit)
+            if (!empty($metadata['image_meta']['credit'])) {
+                update_field('media_author', $metadata['image_meta']['credit'], $wpPostId);
+            }
         }
 
         return $metadata;
     }
+
+    // public function output_iptc_data($image_path)
+    // {
+    //     $size = getimagesize($image_path, $info);
+    //     if (is_array($info)) {
+    //         $iptc = iptcparse($info["APP13"]);
+    //         foreach (array_keys($iptc) as $s) {
+    //             $c = count($iptc[$s]);
+    //             for ($i=0; $i <$c; $i++) {
+    //                 echo $s.' = '.$iptc[$s][$i].'<br>';
+    //             }
+    //         }
+    //     }
+    // }
 
     // public static function imagemagick(WP_REST_Request $request)
     // {
