@@ -7,10 +7,10 @@
 //     public function __construct()
 //     {
 //         parent::__construct();
-//         $this->register_hooks();
+//         $this->registerHooks();
 //     }
 
-//     protected function register_hooks()
+//     protected function registerHooks()
 //     {
 //         // add_filter( 'timber/twig', array( $this, 'basetheme_add_to_twig'));
 //         // add_filter('timber/context', array($this, 'add_to_context'));

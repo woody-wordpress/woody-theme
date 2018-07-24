@@ -10,29 +10,29 @@ class WoodyTheme_Cleanup_Front
 {
     public function __construct()
     {
-        $this->register_hooks();
+        $this->registerHooks();
     }
 
-    protected function register_hooks()
+    protected function registerHooks()
     {
-        add_action('after_setup_theme', array($this, 'start_cleanup'));
+        add_action('after_setup_theme', array($this, 'startCleanup'));
     }
 
-    public function start_cleanup()
+    public function startCleanup()
     {
         // Launching operation cleanup.
-        add_action('init', array($this, 'cleanup_head'));
+        add_action('init', array($this, 'cleanupHead'));
         // Remove WP version from RSS.
-        add_filter('the_generator', array($this, 'remove_rss_version'));
+        add_filter('the_generator', array($this, 'removeRssVersion'));
         // Remove pesky injected css for recent comments widget.
-        add_filter('wp_head', array($this, 'remove_wp_widget_recent_comments_style'), 1);
+        add_filter('wp_head', array($this, 'removeWpWidgetRecentCommentsStyle'), 1);
         // Clean up comment styles in the head.
-        add_action('wp_head', array($this, 'remove_recent_comments_style'), 1);
+        add_action('wp_head', array($this, 'removeRecentCommentsStyle'), 1);
         // Remove inline width attribute from figure tag
-        add_filter('img_caption_shortcode', array($this, 'remove_figure_inline_style'), 10, 3);
+        add_filter('img_caption_shortcode', array($this, 'removeFigureInlineStyle'), 10, 3);
     }
 
-    public function cleanup_head()
+    public function cleanupHead()
     {
         // EditURI link.
         remove_action('wp_head', 'rsd_link');
@@ -62,19 +62,19 @@ class WoodyTheme_Cleanup_Front
         remove_action('wp_print_styles', 'print_emoji_styles');
     }
 
-    public function remove_rss_version()
+    public function removeRssVersion()
     {
         return '';
     }
 
-    public function remove_wp_widget_recent_comments_style()
+    public function removeWpWidgetRecentCommentsStyle()
     {
         if (has_filter('wp_head', 'wp_widget_recent_comments_style')) {
             remove_filter('wp_head', 'wp_widget_recent_comments_style');
         }
     }
 
-    public function remove_recent_comments_style()
+    public function removeRecentCommentsStyle()
     {
         global $wp_widget_factory;
         if (isset($wp_widget_factory->widgets['WP_Widget_Recent_Comments'])) {
@@ -82,7 +82,7 @@ class WoodyTheme_Cleanup_Front
         }
     }
 
-    public function remove_figure_inline_style($output, $attr, $content)
+    public function removeFigureInlineStyle($output, $attr, $content)
     {
         $atts = shortcode_atts(array(
             'id'      => '',

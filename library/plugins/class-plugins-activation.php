@@ -55,10 +55,10 @@ class WoodyTheme_Plugins_Activation
             $this->dev_plugins = [];
         }
 
-        $this->register_hooks();
+        $this->registerHooks();
     }
 
-    protected function register_hooks()
+    protected function registerHooks()
     {
         require_once(ABSPATH . 'wp-admin/includes/plugin.php');
         foreach ($this->activate_plugins as $plugin) {

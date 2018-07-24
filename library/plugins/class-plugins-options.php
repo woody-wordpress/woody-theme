@@ -11,10 +11,28 @@ class WoodyTheme_Plugins_Options
 {
     public function __construct()
     {
-        $this->register_hooks();
+        $this->registerHooks();
     }
 
-    protected function register_hooks()
+    private function updateOption($option_name, $settings, $autoload = 'yes')
+    {
+        $option = get_option($option_name);
+
+        if (is_array($settings)) {
+            $new_option = $option;
+            foreach ($settings as $key => $val) {
+                $new_option[$key] = $val;
+            }
+        } else {
+            $new_option = $settings;
+        }
+
+        if (strcmp(json_encode($option), json_encode($new_option)) !== 0) { // Update if different
+            update_option($option_name, $new_option, '', $autoload);
+        }
+    }
+
+    protected function registerHooks()
     {
         // Plugins Settings
         update_option('timezone_string', '', '', 'yes'); // Mettre vide si le serveur est déjà configuré sur la bonne timezone Europe/Paris
@@ -37,21 +55,21 @@ class WoodyTheme_Plugins_Options
         update_option('permalink-manager-permastructs', array('post_types' => array('touristic_sheet' => '')), '', 'yes');
 
         // Yoast settings
-        $wpseo_titles = get_option('wpseo_titles');
-        if ($wpseo_titles['breadcrumbs-enable'] == false) {
-            $wpseo_titles['breadcrumbs-enable'] = true;
-            update_option('wpseo_titles', $wpseo_titles, '', 'yes');
-        }
+        $wpseo_titles['breadcrumbs-enable'] = true;
+        $this->updateOption('wpseo_titles', $wpseo_titles);
+
+        // Enhanced Media Library
+        $wpuxss_eml_lib_options['grid_show_caption-enable'] = true;
+        $wpuxss_eml_lib_options['grid_caption_type'] = 'title';
+        $this->updateOption('wpuxss_eml_lib_options', $wpuxss_eml_lib_options);
 
         // YoImages settings
-        $yoimg_crop_settings = get_option('yoimg_crop_settings');
-        $yoimg_crop_settings_new = $yoimg_crop_settings;
-        $yoimg_crop_settings_new['cropping_is_active'] = true;
-        $yoimg_crop_settings_new['retina_cropping_is_active'] = false;
-        $yoimg_crop_settings_new['sameratio_cropping_is_active'] = true;
-        $yoimg_crop_settings_new['crop_qualities'] = array(75);
-        $yoimg_crop_settings_new['cachebusting_is_active'] = (WP_ENV == 'dev') ? false : true;
-        $yoimg_crop_settings_new['crop_sizes'] = [
+        $yoimg_crop_settings['cropping_is_active'] = true;
+        $yoimg_crop_settings['retina_cropping_is_active'] = false;
+        $yoimg_crop_settings['sameratio_cropping_is_active'] = true;
+        $yoimg_crop_settings['crop_qualities'] = array(75);
+        $yoimg_crop_settings['cachebusting_is_active'] = (WP_ENV == 'dev') ? false : true;
+        $yoimg_crop_settings['crop_sizes'] = [
             'thumbnail'             => ['active' => false, 'name' => 'Miniature'],
             'ratio_8_1_small'       => ['active' => true, 'name' => 'Pano A (360x45)'],
             'ratio_8_1_medium'      => ['active' => true, 'name' => 'Pano A (640x80)'],
@@ -86,9 +104,7 @@ class WoodyTheme_Plugins_Options
             'ratio_square_medium'   => ['active' => true, 'name' => 'Carr&eacute;'],
             'ratio_square'          => ['active' => true, 'name' => 'Carr&eacute;'],
         ];
-        if (strcmp(json_encode($yoimg_crop_settings), json_encode($yoimg_crop_settings_new)) !== 0) { // Update if different
-            update_option('yoimg_crop_settings', $yoimg_crop_settings_new, '', 'yes');
-        }
+        $this->updateOption('yoimg_crop_settings', $yoimg_crop_settings);
     }
 }
 

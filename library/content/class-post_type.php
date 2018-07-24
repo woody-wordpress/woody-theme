@@ -11,17 +11,17 @@ class WoodyTheme_Post_Type
 {
     public function __construct()
     {
-        $this->register_hooks();
+        $this->registerHooks();
     }
 
-    protected function register_hooks()
+    protected function registerHooks()
     {
         //if (!empty($plugin_hawwwai_kernel)) {
-        add_action('init', array($this, 'register_tourism_sheet_post_type'), 0);
+        add_action('init', array($this, 'registerTourismSheetPostType'), 0);
         //}
     }
 
-    public function register_tourism_sheet_post_type()
+    public function registerTourismSheetPostType()
     {
         // On rentre les différentes dénominations de notre custom post type qui seront affichées dans l'administration
         $labels = array(

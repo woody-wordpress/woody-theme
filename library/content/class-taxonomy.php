@@ -11,15 +11,15 @@ class WoodyTheme_Taxonomy
 {
     public function __construct()
     {
-        $this->register_hooks();
+        $this->registerHooks();
     }
 
-    protected function register_hooks()
+    protected function registerHooks()
     {
-        add_action('init', array($this, 'register_content_type_taxonomy'), 0);
+        add_action('init', array($this, 'registerContentTypeTaxonomy'), 0);
     }
 
-    public function register_content_type_taxonomy()
+    public function registerContentTypeTaxonomy()
     {
         // On créé la taxonomie "Type de publication"
         register_taxonomy(
