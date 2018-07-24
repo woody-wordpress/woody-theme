@@ -52,6 +52,7 @@ class WoodyTheme_Cleanup_Admin
             remove_menu_page('options-general.php'); // Settings
             remove_submenu_page('themes.php', 'widgets.php'); // Theme widgets
             remove_menu_page('edit.php?post_type=acf-field-group'); // Advanced Custom Fields
+            remove_menu_page('edit.php?post_type=touristic_sheet'); // Fiches SIT
         }
         remove_menu_page('edit.php'); // Articles
         remove_menu_page('edit-comments.php'); // Commentaires
@@ -76,6 +77,7 @@ class WoodyTheme_Cleanup_Admin
     }
 
     /**
+     * Source https://junaidbhura.com/wordpress-admin-fix-fatal-error-allowed-memory-size-error/
      * Disable Posts' meta from being preloaded
      * This fixes memory problems in the WordPress Admin
      */
@@ -96,7 +98,7 @@ class WoodyTheme_Cleanup_Admin
         remove_submenu_page('themes.php', 'nav-menus.php');
 
         // On créé un nouvel item de menu à la racine du menu d'admin
-        add_menu_page('Menus', 'Menus', 'edit_theme_options', 'nav-menus.php', none, 'dashicons-list-view', 68);
+        add_menu_page('Menus', 'Menus', 'edit_theme_options', 'nav-menus.php', none, 'dashicons-menu', 31);
 
         // La création d'un nouveau menu envoie automatiquemenrt sur /admin.php :/
         // Donc, si l'url == /admin.php?page=nav-menus.php => on redirige vers /nav-menus.php

@@ -9,4 +9,5 @@ $('.nav-menus-php #select-menu-to-edit option:contains("Menu principal")').remov
 // On retire la class active sur l'onglet Apparence lorsque l'on est sur la page nav-menus.php
 if (window.location.pathname == '/wp/wp-admin/nav-menus.php') {
     $('#adminmenu').find('#menu-appearance').removeClass('wp-has-current-submenu');
+    $('#adminmenu').find('#menu-appearance a').removeClass('wp-has-current-submenu');
 }

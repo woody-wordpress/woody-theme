@@ -58,6 +58,7 @@ class WoodyTheme_Post_Type
         'has_archive'         => false,
         'rewrite'			  => array( 'slug' => 'touristic_sheet'),
         'show_in_menu'        => true,
+        'menu_icon'           => 'dashicons-location',
         'show_in_nav_menus'   => false
 
     );
