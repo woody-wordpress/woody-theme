@@ -12,10 +12,10 @@ class WoodyTheme_Images
 {
     public function __construct()
     {
-        $this->register_hooks();
+        $this->registerHooks();
     }
 
-    protected function register_hooks()
+    protected function registerHooks()
     {
         // Ratio 8:1 => Panoramique 1
         add_image_size('ratio_8_1_small', 360, 45, true);
@@ -74,8 +74,8 @@ class WoodyTheme_Images
         add_image_size('ratio_free_xlarge', 1920);
 
         // Filters
-        add_filter('image_size_names_choose', array($this, 'woody_custom_sizes'));
-        add_filter('wp_generate_attachment_metadata', array($this, 'woody_custom_attachment_metadata'), 10, 2);
+        add_filter('image_size_names_choose', array($this, 'woodyCustomSizes'));
+        add_filter('wp_generate_attachment_metadata', array($this, 'woodyCustomAttachmentMetadata'), 10, 2);
 
         // add_action('rest_api_init', function () {
         //     register_rest_route('woody', '/crop/(?P<width>[0-9]{1,4})/(?P<height>[0-9]{1,4})/(?P<url>[-=\w]+)', array(
@@ -87,7 +87,7 @@ class WoodyTheme_Images
 
     // Register the new image sizes for use in the add media modal in wp-admin
     // This is the place where you can set readable names for images size
-    public function woody_custom_sizes($sizes)
+    public function woodyCustomSizes($sizes)
     {
         return array(
             'ratio_8_1' => __('Pano A (1920x240)'),
@@ -104,7 +104,7 @@ class WoodyTheme_Images
     }
 
     // define the wp_generate_attachment_metadata callback
-    public function woody_custom_attachment_metadata($metadata, $post_ID)
+    public function woodyCustomAttachmentMetadata($metadata, $post_ID)
     {
         if (wp_attachment_is_image($post_ID)) {
 

@@ -11,10 +11,10 @@ class WoodyTheme_Menus
 {
     public function __construct()
     {
-        $this->register_hooks();
+        $this->registerHooks();
     }
 
-    protected function register_hooks()
+    protected function registerHooks()
     {
         add_theme_support('menus');
     }

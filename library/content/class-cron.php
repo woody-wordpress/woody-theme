@@ -10,10 +10,10 @@ class WoodyTheme_Cron
 {
     public function __construct()
     {
-        $this->register_hooks();
+        $this->registerHooks();
     }
 
-    protected function register_hooks()
+    protected function registerHooks()
     {
         // Cron force Disable HTTP
         add_action('init', function () {

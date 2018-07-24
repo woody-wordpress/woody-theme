@@ -10,17 +10,17 @@ class WoodyTheme_Enqueue_Assets
 {
     public function __construct()
     {
-        $this->register_hooks();
+        $this->registerHooks();
     }
 
-    protected function register_hooks()
+    protected function registerHooks()
     {
-        add_action('wp_enqueue_scripts', array($this, 'enqueue_libraries'));
-        add_action('wp_enqueue_scripts', array($this, 'enqueue_assets'));
-        add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'));
+        add_action('wp_enqueue_scripts', array($this, 'enqueueLibraries'));
+        add_action('wp_enqueue_scripts', array($this, 'enqueueAssets'));
+        add_action('admin_enqueue_scripts', array($this, 'enqueueAdminAssets'));
     }
 
-    public function enqueue_libraries()
+    public function enqueueLibraries()
     {
 
         // Deregister the jquery version bundled with WordPress.
@@ -35,27 +35,27 @@ class WoodyTheme_Enqueue_Assets
         }
     }
 
-    public function enqueue_assets()
+    public function enqueueAssets()
     {
         // Enqueue Founation scripts
-        wp_enqueue_script('main-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->asset_path('js/main.js'), 'jquery', '', true);
+        wp_enqueue_script('main-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('js/main.js'), 'jquery', '', true);
 
         // Enqueue the main Stylesheet.
-        wp_enqueue_style('main-stylesheet', get_stylesheet_directory_uri() . '/dist/' . $this->asset_path('css/main.css'), array(), '', 'all');
+        wp_enqueue_style('main-stylesheet', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('css/main.css'), array(), '', 'all');
         wp_enqueue_style('font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css', array(), '', 'all');
     }
 
-    public function enqueue_admin_assets()
+    public function enqueueAdminAssets()
     {
-        // Enqueue Founation scripts
-        //wp_enqueue_script('admin-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->asset_path('js/main.js'), 'jquery', '', true);
+        // Enqueue Foundation scripts
+        //wp_enqueue_script('admin-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('js/main.js'), 'jquery', '', true);
 
         // Enqueue the main Stylesheet.
-        wp_enqueue_style('admin-stylesheet', get_stylesheet_directory_uri() . '/dist/' . $this->asset_path('css/admin.css'), array(), '', 'all');
-        wp_enqueue_script('admin-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->asset_path('js/admin.js'), 'jquery', false, true);
+        wp_enqueue_style('admin-stylesheet', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('css/admin.css'), array(), '', 'all');
+        wp_enqueue_script('admin-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('js/admin.js'), 'jquery', false, true);
     }
 
-    private function asset_path($filename)
+    private function assetPath($filename)
     {
         $manifest = [];
         $manifest_path = get_stylesheet_directory() . '/dist/rev-manifest.json';

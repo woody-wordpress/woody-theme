@@ -13,10 +13,10 @@ class WoodyTheme_ACF
 
     public function __construct()
     {
-        $this->register_hooks();
+        $this->registerHooks();
     }
 
-    protected function register_hooks()
+    protected function registerHooks()
     {
         acf_update_setting('save_json', get_template_directory() . '/acf-json');
         acf_append_setting('load_json', get_template_directory() . '/acf-json');

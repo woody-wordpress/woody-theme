@@ -10,17 +10,16 @@ class WoodyTheme_Cleanup_Admin
 {
     public function __construct()
     {
-        $this->register_hooks();
+        $this->registerHooks();
     }
 
-    protected function register_hooks()
+    protected function registerHooks()
     {
-        add_filter('wpseo_metabox_prio', array($this, 'yoast_move_meta_box_bottom'));
-        add_action('init', array($this, 'remove_pages_editor'));
-        add_action('admin_menu', array($this, 'remove_comments_meta_box'));
-        add_action('admin_menu', array($this, 'remove_admin_menus'));
-        add_action('admin_menu', array($this, 'move_appearance_menusItem'));
-
+        add_filter('wpseo_metabox_prio', array($this, 'yoastMoveMetaBoxBottom'));
+        add_action('init', array($this, 'removePagesEditor'));
+        add_action('admin_menu', array($this, 'removeCommentsMetaBox'));
+        add_action('admin_menu', array($this, 'removeAdminMenus'));
+        add_action('admin_menu', array($this, 'moveAppearanceMenusItem'));
 
         if (is_admin()) {
             add_action('pre_get_posts', array($this, 'custom_pre_get_posts'));
@@ -31,7 +30,7 @@ class WoodyTheme_Cleanup_Admin
      * Benoit Bouchaud
      * On vire l'éditeur de texte basique de WP, inutile avec ACF
      */
-    public function remove_pages_editor()
+    public function removePagesEditor()
     {
         remove_post_type_support('page', 'editor');
     }
@@ -40,7 +39,7 @@ class WoodyTheme_Cleanup_Admin
      * Benoit Bouchaud
      * On masque certaines entrées de menu pour les non administrateurs
      */
-    public function remove_admin_menus()
+    public function removeAdminMenus()
     {
         global $submenu;
 
@@ -64,7 +63,7 @@ class WoodyTheme_Cleanup_Admin
      * Benoit Bouchaud
      * On déplace la metabox Yoast en bas de page
      */
-    public function yoast_move_meta_box_bottom()
+    public function yoastMoveMetaBoxBottom()
     {
         return 'low';
     }
@@ -73,7 +72,7 @@ class WoodyTheme_Cleanup_Admin
      * Benoit Bouchaud
      * On retire la metabox pour les commentaires
      */
-    public function remove_comments_meta_box()
+    public function removeCommentsMetaBox()
     {
         remove_meta_box('commentsdiv', 'page', 'normal');
     }
@@ -94,7 +93,7 @@ class WoodyTheme_Cleanup_Admin
      * Benoit Bouchaud
      * On déplace le menu "Menus" pour le mettre à la racine du menu d'admin
      */
-    public function move_appearance_menusItem()
+    public function moveAppearanceMenusItem()
     {
         // On retire le sous-menu Menus dans Apparence
         remove_submenu_page('themes.php', 'nav-menus.php');
