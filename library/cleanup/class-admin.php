@@ -19,7 +19,17 @@ class WoodyTheme_Cleanup_Admin
         add_action('init', array($this, 'removePagesEditor'));
         add_action('admin_menu', array($this, 'removeCommentsMetaBox'));
         add_action('admin_menu', array($this, 'removeAdminMenus'));
-        add_action('admin_menu', array($this, 'moveAppearanceMenusItem'));
+        add_action('admin_menu', array($this, 'removeNavMenusItem'));
+        add_action('wp_dashboard_setup', array($this, 'removeDashboardWidgets'));
+
+
+        global $submenu;
+        $user = wp_get_current_user();
+        if (!in_array('administrator', $user->roles)) {
+            add_action('admin_head', array($this, 'removeScreenOptions'));
+            add_filter('screen_options_show_screen', '__return_false');
+        }
+
 
         if (is_admin()) {
             add_action('pre_get_posts', array($this, 'custom_pre_get_posts'));
@@ -84,16 +94,13 @@ class WoodyTheme_Cleanup_Admin
      * Benoit Bouchaud
      * On déplace le menu "Menus" pour le mettre à la racine du menu d'admin
      */
-    public function moveAppearanceMenusItem()
+    public function removeNavMenusItem()
     {
         // On retire le sous-menu Menus dans Apparence
         remove_submenu_page('themes.php', 'nav-menus.php');
 
-        // $user = $user ? new WP_User($user) : wp_get_current_user();
-        // rcd($user, true);
-
         // On créé un nouvel item de menu à la racine du menu d'admin
-        add_menu_page('Menus', 'Menus', 'read', 'nav-menus.php', '', 'dashicons-menu', 31);
+        add_menu_page('Menus', 'Menus', 'edit_pages', 'nav-menus.php', '', 'dashicons-menu', 31);
 
         // La création d'un nouveau menu envoie automatiquemenrt sur /admin.php :/
         // Donc, si l'url == /admin.php?page=nav-menus.php => on redirige vers /nav-menus.php
@@ -101,6 +108,26 @@ class WoodyTheme_Cleanup_Admin
         if ($pagenow == 'admin.php' && isset($_GET['page']) && $_GET['page'] == 'nav-menus.php') {
             wp_redirect(admin_url('/nav-menus.php'), 301);
         }
+    }
+
+    /**
+     * Benoit Bouchaud
+     * On retire les tabs "Options de l'écran" et "Aide" pour les non admin
+     */
+    public function removeScreenOptions()
+    {
+        $screen = get_current_screen();
+        $screen->remove_help_tabs();
+    }
+
+    /**
+     * Benoit Bouchaud
+     * On retire les boxes inutiles du dashboard
+     */
+    public function removeDashboardWidgets()
+    {
+        remove_meta_box('dashboard_activity', 'dashboard', 'normal');
+        remove_meta_box('dashboard_primary', 'dashboard', 'side');
     }
 }
 
