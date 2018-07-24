@@ -18,8 +18,8 @@ class WoodyTheme_Cleanup_Admin
         add_filter('wpseo_metabox_prio', array($this, 'yoastMoveMetaBoxBottom'));
         add_action('init', array($this, 'removePagesEditor'));
         add_action('admin_menu', array($this, 'removeCommentsMetaBox'));
+        add_action('admin_menu', array($this, 'removeAdminMenus'));
         add_action('admin_menu', array($this, 'removeNavMenusItem'));
-        add_action('admin_menu', array($this, 'moveAppearanceMenusItem'));
         add_action('wp_dashboard_setup', array($this, 'removeDashboardWidgets'));
 
 
