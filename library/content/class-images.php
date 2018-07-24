@@ -74,8 +74,9 @@ class WoodyTheme_Images
         add_image_size('ratio_free_xlarge', 1920);
 
         // Filters
-        add_filter('image_size_names_choose', array($this, 'woodyCustomSizes'));
-        add_filter('wp_generate_attachment_metadata', array($this, 'woodyCustomAttachmentMetadata'), 10, 2);
+        add_filter('image_size_names_choose', array($this, 'imageSizeNamesChoose'));
+        add_filter('wp_read_image_metadata', array($this, 'readImageMetadata'), 10, 4);
+        add_filter('wp_generate_attachment_metadata', array($this, 'generateAttachmentMetadata'), 10, 2);
 
         // add_action('rest_api_init', function () {
         //     register_rest_route('woody', '/crop/(?P<width>[0-9]{1,4})/(?P<height>[0-9]{1,4})/(?P<url>[-=\w]+)', array(
@@ -87,7 +88,7 @@ class WoodyTheme_Images
 
     // Register the new image sizes for use in the add media modal in wp-admin
     // This is the place where you can set readable names for images size
-    public function woodyCustomSizes($sizes)
+    public function imageSizeNamesChoose($sizes)
     {
         return array(
             'ratio_8_1' => __('Pano A (1920x240)'),
@@ -104,7 +105,47 @@ class WoodyTheme_Images
     }
 
     // define the wp_generate_attachment_metadata callback
-    public function woodyCustomAttachmentMetadata($metadata, $wpPostId)
+    public function readImageMetadata($meta, $file, $sourceImageType, $iptc)
+    {
+        if (is_callable('exif_read_data') && in_array($sourceImageType, apply_filters('wp_read_image_metadata_types', array( IMAGETYPE_JPEG, IMAGETYPE_TIFF_II, IMAGETYPE_TIFF_MM )))) {
+            $exif = @exif_read_data($file);
+
+            if (!empty($exif['GPSLatitude']) && !empty($exif['GPSLatitudeRef'])) {
+                $lat_deg = $this->calc($exif['GPSLatitude'][0]);
+                $lat_min = $this->calc($exif['GPSLatitude'][1]);
+                $lat_sec = $this->calc($exif['GPSLatitude'][2]);
+                $meta['latitude'] = $this->dmsToDecimal($lat_deg, $lat_min, $lat_sec, $exif['GPSLatitudeRef']);
+            }
+
+            if (!empty($exif['GPSLongitude']) && !empty($exif['GPSLongitudeRef'])) {
+                $lng_deg = $this->calc($exif['GPSLongitude'][0]);
+                $lng_min = $this->calc($exif['GPSLongitude'][1]);
+                $lng_sec = $this->calc($exif['GPSLongitude'][2]);
+                $meta['longitude'] = $this->dmsToDecimal($lng_deg, $lng_min, $lng_sec, $exif['GPSLongitudeRef']);
+            }
+        }
+
+        return $meta;
+    }
+
+    public function calc($val)
+    {
+        $val = explode('/', $val);
+        return $val[0] / $val[1];
+    }
+
+    public function dmsToDecimal($deg, $min, $sec, $ref)
+    {
+        $direction = 1;
+        if (strtoupper($ref) == "S" || strtoupper($ref) == "W" || $deg < 0) {
+            $direction = -1;
+            $deg = abs($deg);
+        }
+        return ($deg + ($min / 60) + ($sec / 3600)) * $direction;
+    }
+
+    // define the wp_generate_attachment_metadata callback
+    public function generateAttachmentMetadata($metadata, $wpPostId)
     {
         if (wp_attachment_is_image($wpPostId)) {
 
@@ -143,6 +184,14 @@ class WoodyTheme_Images
             // Set ACF Fields (Credit)
             if (!empty($metadata['image_meta']['credit'])) {
                 update_field('media_author', $metadata['image_meta']['credit'], $wpPostId);
+            }
+
+            if (!empty($metadata['image_meta']['latitude'])) {
+                update_field('media_lat', $metadata['image_meta']['latitude'], $wpPostId);
+            }
+
+            if (!empty($metadata['image_meta']['longitude'])) {
+                update_field('media_lng', $metadata['image_meta']['longitude'], $wpPostId);
             }
         }
 
