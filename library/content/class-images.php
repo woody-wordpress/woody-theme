@@ -73,8 +73,14 @@ class WoodyTheme_Images
         add_image_size('ratio_free', 1200);
         add_image_size('ratio_free_xlarge', 1920);
 
+        // Remove default
+        remove_image_size('small');
+        remove_image_size('large');
+        remove_image_size('medium_large');
+
         // Filters
-        add_filter('image_size_names_choose', array($this, 'imageSizeNamesChoose'));
+        // add_filter('intermediate_image_sizes_advanced', array($this, 'removeAutoThumbs'), 10, 1);
+        add_filter('image_size_names_choose', array($this, 'imageSizeNamesChoose'), 10, 1);
         add_filter('wp_read_image_metadata', array($this, 'readImageMetadata'), 10, 4);
         add_filter('wp_generate_attachment_metadata', array($this, 'generateAttachmentMetadata'), 10, 2);
 
@@ -85,6 +91,16 @@ class WoodyTheme_Images
         //     ));
         // });
     }
+
+    // Remove default image sizes here.
+    // public function removeAutoThumbs($sizes)
+    // {
+    //     // Thumbnail only the thumbnail
+    //     return array(
+    //         'thumbnail' => $sizes['thumbnail'],
+    //         'medium' => $sizes['medium']
+    //     );
+    // }
 
     // Register the new image sizes for use in the add media modal in wp-admin
     // This is the place where you can set readable names for images size
@@ -197,20 +213,6 @@ class WoodyTheme_Images
 
         return $metadata;
     }
-
-    // public function output_iptc_data($image_path)
-    // {
-    //     $size = getimagesize($image_path, $info);
-    //     if (is_array($info)) {
-    //         $iptc = iptcparse($info["APP13"]);
-    //         foreach (array_keys($iptc) as $s) {
-    //             $c = count($iptc[$s]);
-    //             for ($i=0; $i <$c; $i++) {
-    //                 echo $s.' = '.$iptc[$s][$i].'<br>';
-    //             }
-    //         }
-    //     }
-    // }
 
     // public static function imagemagick(WP_REST_Request $request)
     // {
