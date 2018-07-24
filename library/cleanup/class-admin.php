@@ -18,7 +18,9 @@ class WoodyTheme_Cleanup_Admin
         add_filter('wpseo_metabox_prio', array($this, 'yoast_move_meta_box_bottom'));
         add_action('init', array($this, 'remove_pages_editor'));
         add_action('admin_menu', array($this, 'remove_comments_meta_box'));
-        add_action('admin_menu', array($this, 'remove_menus'));
+        add_action('admin_menu', array($this, 'remove_admin_menus'));
+        add_action('admin_menu', array($this, 'move_appearance_menusItem'));
+
 
         if (is_admin()) {
             add_action('pre_get_posts', array($this, 'custom_pre_get_posts'));
@@ -38,7 +40,7 @@ class WoodyTheme_Cleanup_Admin
      * Benoit Bouchaud
      * On masque certaines entrées de menu pour les non administrateurs
      */
-    public function remove_menus()
+    public function remove_admin_menus()
     {
         global $submenu;
 
@@ -81,6 +83,26 @@ class WoodyTheme_Cleanup_Admin
     {
         if (in_array($wp_query->get('post_type'), array('page'))) {
             $wp_query->set('update_post_meta_cache', false);
+        }
+    }
+
+    /**
+     * Benoit Bouchaud
+     * On déplace le menu "Menus" pour le mettre à la racine du menu d'admin
+     */
+    public function move_appearance_menusItem()
+    {
+        // On retire le sous-menu Menus dans Apparence
+        remove_submenu_page('themes.php', 'nav-menus.php');
+
+        // On créé un nouvel item de menu à la racine du menu d'admin
+        add_menu_page('Menus', 'Menus', 'edit_theme_options', 'nav-menus.php', none, 'dashicons-list-view', 68);
+
+        // La création d'un nouveau menu envoie automatiquemenrt sur /admin.php :/
+        // Donc, si l'url == /admin.php?page=nav-menus.php => on redirige vers /nav-menus.php
+        global $pagenow;
+        if ($pagenow == 'admin.php' && isset($_GET['page']) && $_GET['page'] == 'nav-menus.php') {
+            wp_redirect(admin_url('/nav-menus.php'), 301);
         }
     }
 }
