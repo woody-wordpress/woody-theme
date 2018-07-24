@@ -50,6 +50,8 @@ class WoodyTheme_Cleanup_Admin
             remove_menu_page('tools.php'); // Tools
             remove_menu_page('edit.php'); // Posts
             remove_menu_page('options-general.php'); // Settings
+            remove_menu_page('themes.php'); // Apparence
+            remove_submenu_page('users.php', 'user-new.php'); // Ajouter un utilisateur
             remove_submenu_page('themes.php', 'widgets.php'); // Theme widgets
             remove_menu_page('edit.php?post_type=acf-field-group'); // Advanced Custom Fields
             remove_menu_page('edit.php?post_type=touristic_sheet'); // Fiches SIT
