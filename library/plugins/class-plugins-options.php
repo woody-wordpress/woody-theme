@@ -50,6 +50,8 @@ class WoodyTheme_Plugins_Options
         update_option('minify_html_utf8', 'no', '', 'yes');
         update_option('upload_path', WP_CONTENT_DIR . '/uploads/' . WP_SITE_KEY, '', 'yes');
         update_option('upload_url_path', WP_CONTENT_URL . '/uploads/' . WP_SITE_KEY, '', 'yes');
+        update_option('uploads_use_yearmonth_folders', true, '', 'yes');
+        update_option('thumbnail_crop', true, '', 'yes');
         update_option('acm_server_settings', array('server_enable' => true), '', 'yes');
         update_option('permalink_structure', '/%postname%/', '', 'yes');
         update_option('permalink-manager-permastructs', array('post_types' => array('touristic_sheet' => '')), '', 'yes');
@@ -68,7 +70,7 @@ class WoodyTheme_Plugins_Options
         $yoimg_crop_settings['retina_cropping_is_active'] = false;
         $yoimg_crop_settings['sameratio_cropping_is_active'] = true;
         $yoimg_crop_settings['crop_qualities'] = array(75);
-        $yoimg_crop_settings['cachebusting_is_active'] = (WP_ENV == 'dev') ? false : true;
+        $yoimg_crop_settings['cachebusting_is_active'] = true;
         $yoimg_crop_settings['crop_sizes'] = [
             'thumbnail'             => ['active' => false, 'name' => 'Miniature'],
             'ratio_8_1_small'       => ['active' => true, 'name' => 'Pano A (360x45)'],

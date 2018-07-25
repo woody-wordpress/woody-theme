@@ -73,9 +73,16 @@ class WoodyTheme_Images
         add_image_size('ratio_free', 1200);
         add_image_size('ratio_free_xlarge', 1920);
 
+        // Remove default
+        remove_image_size('small');
+        remove_image_size('large');
+        remove_image_size('medium_large');
+
         // Filters
-        add_filter('image_size_names_choose', array($this, 'woodyCustomSizes'));
-        add_filter('wp_generate_attachment_metadata', array($this, 'woodyCustomAttachmentMetadata'), 10, 2);
+        // add_filter('intermediate_image_sizes_advanced', array($this, 'removeAutoThumbs'), 10, 1);
+        add_filter('image_size_names_choose', array($this, 'imageSizeNamesChoose'), 10, 1);
+        add_filter('wp_read_image_metadata', array($this, 'readImageMetadata'), 10, 4);
+        add_filter('wp_generate_attachment_metadata', array($this, 'generateAttachmentMetadata'), 10, 2);
 
         // add_action('rest_api_init', function () {
         //     register_rest_route('woody', '/crop/(?P<width>[0-9]{1,4})/(?P<height>[0-9]{1,4})/(?P<url>[-=\w]+)', array(
@@ -85,9 +92,19 @@ class WoodyTheme_Images
         // });
     }
 
+    // Remove default image sizes here.
+    // public function removeAutoThumbs($sizes)
+    // {
+    //     // Thumbnail only the thumbnail
+    //     return array(
+    //         'thumbnail' => $sizes['thumbnail'],
+    //         'medium' => $sizes['medium']
+    //     );
+    // }
+
     // Register the new image sizes for use in the add media modal in wp-admin
     // This is the place where you can set readable names for images size
-    public function woodyCustomSizes($sizes)
+    public function imageSizeNamesChoose($sizes)
     {
         return array(
             'ratio_8_1' => __('Pano A (1920x240)'),
@@ -104,17 +121,57 @@ class WoodyTheme_Images
     }
 
     // define the wp_generate_attachment_metadata callback
-    public function woodyCustomAttachmentMetadata($metadata, $post_ID)
+    public function readImageMetadata($meta, $file, $sourceImageType, $iptc)
     {
-        if (wp_attachment_is_image($post_ID)) {
+        if (is_callable('exif_read_data') && in_array($sourceImageType, apply_filters('wp_read_image_metadata_types', array( IMAGETYPE_JPEG, IMAGETYPE_TIFF_II, IMAGETYPE_TIFF_MM )))) {
+            $exif = @exif_read_data($file);
+
+            if (!empty($exif['GPSLatitude']) && !empty($exif['GPSLatitudeRef'])) {
+                $lat_deg = $this->calc($exif['GPSLatitude'][0]);
+                $lat_min = $this->calc($exif['GPSLatitude'][1]);
+                $lat_sec = $this->calc($exif['GPSLatitude'][2]);
+                $meta['latitude'] = $this->dmsToDecimal($lat_deg, $lat_min, $lat_sec, $exif['GPSLatitudeRef']);
+            }
+
+            if (!empty($exif['GPSLongitude']) && !empty($exif['GPSLongitudeRef'])) {
+                $lng_deg = $this->calc($exif['GPSLongitude'][0]);
+                $lng_min = $this->calc($exif['GPSLongitude'][1]);
+                $lng_sec = $this->calc($exif['GPSLongitude'][2]);
+                $meta['longitude'] = $this->dmsToDecimal($lng_deg, $lng_min, $lng_sec, $exif['GPSLongitudeRef']);
+            }
+        }
+
+        return $meta;
+    }
+
+    public function calc($val)
+    {
+        $val = explode('/', $val);
+        return $val[0] / $val[1];
+    }
+
+    public function dmsToDecimal($deg, $min, $sec, $ref)
+    {
+        $direction = 1;
+        if (strtoupper($ref) == "S" || strtoupper($ref) == "W" || $deg < 0) {
+            $direction = -1;
+            $deg = abs($deg);
+        }
+        return ($deg + ($min / 60) + ($sec / 3600)) * $direction;
+    }
+
+    // define the wp_generate_attachment_metadata callback
+    public function generateAttachmentMetadata($metadata, $wpPostId)
+    {
+        if (wp_attachment_is_image($wpPostId)) {
 
             // Get current post
-            $post = get_post($post_ID);
+            $post = get_post($wpPostId);
 
             // Create an array with the image meta (Title, Caption, Description) to be updated
             // Note:  comment out the Excerpt/Caption or Content/Description lines if not needed
             $my_image_meta = [];
-            $my_image_meta['ID'] = $post_ID; // Specify the image (ID) to be updated
+            $my_image_meta['ID'] = $wpPostId; // Specify the image (ID) to be updated
 
             if (empty($metadata['image_meta']['title'])) {
                 $new_title = ucwords(strtolower(preg_replace('%\s*[-_\s]+\s*%', ' ', $post->post_title)));
@@ -135,10 +192,23 @@ class WoodyTheme_Images
             }
 
             // Set the image Alt-Text
-            update_post_meta($post_ID, '_wp_attachment_image_alt', $new_description);
+            update_post_meta($wpPostId, '_wp_attachment_image_alt', $new_description);
 
             // Set the image meta (e.g. Title, Excerpt, Content)
             wp_update_post($my_image_meta);
+
+            // Set ACF Fields (Credit)
+            if (!empty($metadata['image_meta']['credit'])) {
+                update_field('media_author', $metadata['image_meta']['credit'], $wpPostId);
+            }
+
+            if (!empty($metadata['image_meta']['latitude'])) {
+                update_field('media_lat', $metadata['image_meta']['latitude'], $wpPostId);
+            }
+
+            if (!empty($metadata['image_meta']['longitude'])) {
+                update_field('media_lng', $metadata['image_meta']['longitude'], $wpPostId);
+            }
         }
 
         return $metadata;
