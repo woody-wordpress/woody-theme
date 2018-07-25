@@ -2,8 +2,6 @@
 
 class WoodyTheme_Process extends WP_Background_Process
 {
-    use WoodyTheme_Logger;
-
     /**
      * @var string
      */
@@ -23,7 +21,8 @@ class WoodyTheme_Process extends WP_Background_Process
      */
     protected function task($item)
     {
-        //$this->log($item['function']);
+        // $logger = new WoodyTheme_Logger();
+        // $logger->log($item['function']);
 
         if (!empty($item['function'])) {
             if (!empty($item['args'])) {

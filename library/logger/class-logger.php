@@ -1,6 +1,6 @@
 <?php
 
-trait WoodyTheme_Logger
+class WoodyTheme_Logger
 {
     /**
      * Log
