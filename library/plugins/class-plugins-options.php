@@ -16,7 +16,7 @@ class WoodyTheme_Plugins_Options
 
     private function updateOption($option_name, $settings, $autoload = 'yes')
     {
-        $option = get_option($option_name);
+        $option = get_option($option_name, array());
 
         if (is_array($settings)) {
             $new_option = $option;
@@ -27,7 +27,7 @@ class WoodyTheme_Plugins_Options
             $new_option = $settings;
         }
 
-        if (!empty($option) && strcmp(json_encode($option), json_encode($new_option)) !== 0) { // Update if different
+        if (strcmp(json_encode($option), json_encode($new_option)) !== 0) { // Update if different
             update_option($option_name, $new_option, '', $autoload);
         }
     }
@@ -77,6 +77,7 @@ class WoodyTheme_Plugins_Options
         $yoimg_crop_settings['cachebusting_is_active'] = true;
         $yoimg_crop_settings['crop_sizes'] = [
             'thumbnail'             => ['active' => false, 'name' => 'Miniature'],
+            'medium'                => ['active' => false, 'name' => 'Medium'],
             'ratio_8_1_small'       => ['active' => true, 'name' => 'Pano A (360x45)'],
             'ratio_8_1_medium'      => ['active' => true, 'name' => 'Pano A (640x80)'],
             'ratio_8_1'             => ['active' => true, 'name' => 'Pano A (1200x150)'],
