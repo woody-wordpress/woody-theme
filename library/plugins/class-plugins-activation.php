@@ -31,7 +31,8 @@ class WoodyTheme_Plugins_Activation
             'wordpress-seo/wp-seo.php',
             'yoimages/yoimages.php',
             'enhanced-media-library/enhanced-media-library.php',
-            'wp-nested-pages/nestedpages.php'
+            'wp-nested-pages/nestedpages.php',
+            'members/members.php'
         ];
 
         $this->dev_plugins = [
