@@ -1,24 +1,6 @@
 {
     "key": "group_5b043614df4a6",
     "title": "Boutons \/ Liens",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Répète le groupe \"Bouton \/ Lien\"",
-    "modified": 1532503240,
     "fields": [
         {
             "key": "field_5b0ec6aa849c5",
@@ -54,8 +36,8 @@
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter un bouton",
-            "hide_collapse": 0,
-            "collapse_all_repeater": 1,
+            "hide_collapse": 1,
+            "collapse_all_repeater": 0,
             "btn-icon-only": 0,
             "sub_fields": [
                 {
@@ -110,9 +92,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "choices": {
-                "blocks-links-tpl_01": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/links\/tpl_01\/thumbnail.png\" alt=\"blocks-links-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Liens - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Liens - Template 1<\/h4>Affiche un groupe liens sous forme de boutons<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-            },
+            "choices": [],
             "allow_null": 0,
             "other_choice": 0,
             "save_other_choice": 0,
@@ -144,5 +124,23 @@
             "layout": "vertical",
             "return_format": "value"
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Répète le groupe \"Bouton \/ Lien\"",
+    "modified": 1532506429
 }
