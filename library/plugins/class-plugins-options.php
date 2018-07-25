@@ -27,7 +27,7 @@ class WoodyTheme_Plugins_Options
             $new_option = $settings;
         }
 
-        if (strcmp(json_encode($option), json_encode($new_option)) !== 0) { // Update if different
+        if (!empty($option) && strcmp(json_encode($option), json_encode($new_option)) !== 0) { // Update if different
             update_option($option_name, $new_option, '', $autoload);
         }
     }
@@ -38,7 +38,6 @@ class WoodyTheme_Plugins_Options
         update_option('timezone_string', '', '', 'yes'); // Mettre vide si le serveur est déjà configuré sur la bonne timezone Europe/Paris
         update_option('date_format', 'j F Y', '', 'yes');
         update_option('time_format', 'G\hi', '', 'yes');
-        update_option('acf_pro_license', 'b3JkZXJfaWQ9MTIyNTQwfHR5cGU9ZGV2ZWxvcGVyfGRhdGU9MjAxOC0wMS0xNSAwOTozMToyMw==', '', 'yes');
         update_option('wp_php_console', array('password' => 'root', 'register' => true, 'short' => true, 'stack' => true), '', 'yes');
         update_option('rocket_lazyload_options', array('images' => true, 'iframes' => true, 'youtube' => true), '', 'yes');
         update_option('minify_html_active', (WP_ENV == 'dev') ? 'no' : 'yes', '', 'yes');
@@ -48,13 +47,18 @@ class WoodyTheme_Plugins_Options
         update_option('minify_html_relative', 'yes', '', 'yes');
         update_option('minify_html_scheme', 'no', '', 'yes');
         update_option('minify_html_utf8', 'no', '', 'yes');
-        update_option('upload_path', WP_CONTENT_DIR . '/uploads/' . WP_SITE_KEY, '', 'yes');
-        update_option('upload_url_path', WP_CONTENT_URL . '/uploads/' . WP_SITE_KEY, '', 'yes');
+        update_option('upload_path', WP_UPLOAD_DIR, '', 'yes');
+        update_option('upload_url_path', WP_UPLOAD_URL, '', 'yes');
         update_option('uploads_use_yearmonth_folders', true, '', 'yes');
         update_option('thumbnail_crop', true, '', 'yes');
         update_option('acm_server_settings', array('server_enable' => true), '', 'yes');
         update_option('permalink_structure', '/%postname%/', '', 'yes');
         update_option('permalink-manager-permastructs', array('post_types' => array('touristic_sheet' => '')), '', 'yes');
+
+        // ACF Key
+        $acf_pro_license = array('key'	=> 'b3JkZXJfaWQ9MTIyNTQwfHR5cGU9ZGV2ZWxvcGVyfGRhdGU9MjAxOC0wMS0xNSAwOTozMToyMw==', 'url' => home_url());
+        $acf_pro_license = base64_encode(maybe_serialize($acf_pro_license));
+        $this->updateOption('acf_pro_license', $acf_pro_license);
 
         // Yoast settings
         $wpseo_titles['breadcrumbs-enable'] = true;
