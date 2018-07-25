@@ -1,31 +1,6 @@
 {
     "key": "group_5b0d380ce3492",
     "title": "Mise en avant de page",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "page"
-            }
-        ],
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "touristic_sheet"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "side",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Infos affichées en sidebar et utilisées pour les remontées de contenu",
-    "modified": 1532503240,
     "fields": [
         {
             "key": "field_5b11394d9a268",
@@ -42,7 +17,7 @@
             },
             "default_value": "",
             "save_format": "element",
-            "allow_null": 0,
+            "allow_null": 1,
             "show_preview": 1,
             "enqueue_fa": 0,
             "fa_live_preview": "",
@@ -825,5 +800,30 @@
             "max_size": "",
             "mime_types": ""
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "touristic_sheet"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Infos affichées en sidebar et utilisées pour les remontées de contenu",
+    "modified": 1532527153
 }
