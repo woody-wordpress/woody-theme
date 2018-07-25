@@ -13,9 +13,17 @@
 
 use Symfony\Component\Finder\Finder;
 
-$finder = new Finder();
-$finder->files()->in(__DIR__ . '/library')->name('*.php');
+if (!class_exists('PC', false) && WP_ENV == 'dev') {
+    PhpConsole\Helper::register();
+}
 
+$finder = new Finder();
+$finder->files()->in(__DIR__ . '/library')->name('*.php')
+    ->notName('tools.php')
+    ->notName('woody-preCompiler.php');
+
+require_once(__DIR__ . '/library/tools.php');
+require_once(__DIR__ . '/library/woody-preCompiler.php');
 foreach ($finder as $file) {
     require_once(__DIR__ . '/library/' . $file->getRelativePathname());
 }
