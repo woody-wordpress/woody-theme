@@ -21,7 +21,7 @@
     ],
     "active": 1,
     "description": "Sélection du type de bloc hawwwai basée sur la taxonomie \"hawwwai_block_type\" (Météo, Social, Marées, ...)",
-    "modified": 1528359924,
+    "modified": 1532503241,
     "fields": [
         {
             "key": "field_5aa82e78df61b",

@@ -1,6 +1,24 @@
 {
     "key": "group_5b04314e0ec21",
     "title": "Galerie de photos",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Elément de contenu (Liste de photos)",
+    "modified": 1532503240,
     "fields": [
         {
             "key": "field_5b04475f63df2",
@@ -72,7 +90,14 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "choices": [],
+            "choices": {
+                "blocks-media_gallery-tpl_04": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/media_gallery\/tpl_04\/thumbnail.png\" alt=\"blocks-media_gallery-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 4 colonnes - 25%<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 4 colonnes - 25%<\/h4>Grille 4 égales - 25% de large<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-media_gallery-tpl_03": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/media_gallery\/tpl_03\/thumbnail.png\" alt=\"blocks-media_gallery-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 3 colonnes - 66%<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 3 colonnes - 66%<\/h4>3 colonnes égales - 66% de large<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-media_gallery-tpl_02": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/media_gallery\/tpl_02\/thumbnail.png\" alt=\"blocks-media_gallery-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 2 colonnes - 50%<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 2 colonnes - 50%<\/h4>2 colonnes égales - 50% de large<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-media_gallery-tpl_05": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/media_gallery\/tpl_05\/thumbnail.png\" alt=\"blocks-media_gallery-tpl_05\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 5 colonnes - 20%<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 5 colonnes - 20%<\/h4>Grille 5 colonnes égales - 20% de large<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-media_gallery-tpl_06": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/media_gallery\/tpl_06\/thumbnail.png\" alt=\"blocks-media_gallery-tpl_06\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 6 colonnes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 6 colonnes<\/h4>Grille 6 colonnes égales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-media_gallery-tpl_01": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/media_gallery\/tpl_01\/thumbnail.png\" alt=\"blocks-media_gallery-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 1 colonne - 100%<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 1 colonne - 100%<\/h4>Grille 1 colonne 100% de large<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+            },
             "allow_null": 0,
             "other_choice": 0,
             "save_other_choice": 0,
@@ -172,23 +197,5 @@
             },
             "return_format": "array"
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Elément de contenu (Liste de photos)",
-    "modified": 1531737603
+    ]
 }

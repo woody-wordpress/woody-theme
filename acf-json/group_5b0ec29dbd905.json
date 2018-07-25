@@ -1,6 +1,24 @@
 {
     "key": "group_5b0ec29dbd905",
     "title": "Bloc de texte + icône",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Clone du bloc en-tête (peut-être utilisé pour les \"points forts\" ou les \"on aime\"",
+    "modified": 1532503240,
     "fields": [
         {
             "key": "field_5b0ec2bc0a8d0",
@@ -68,7 +86,9 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "choices": [],
+            "choices": {
+                "blocks-feature-tpl_01": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/feature\/tpl_01\/thumbnail.png\" alt=\"blocks-feature-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Icone et texte - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Icone et texte - Template 1<\/h4>Icone avec textes en-dessous (pretitre, titre, sous-titre, description)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+            },
             "allow_null": 0,
             "other_choice": 0,
             "save_other_choice": 0,
@@ -76,23 +96,5 @@
             "layout": "vertical",
             "return_format": "value"
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Clone du bloc en-tête (peut-être utilisé pour les \"points forts\" ou les \"on aime\"",
-    "modified": 1531380404
+    ]
 }

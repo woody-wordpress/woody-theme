@@ -1,6 +1,45 @@
 {
     "key": "group_5afd260eeb4ab",
     "title": "Sections",
+    "location": [
+        [
+            {
+                "param": "post_taxonomy",
+                "operator": "==",
+                "value": "page_type:basic_page"
+            }
+        ],
+        [
+            {
+                "param": "post_taxonomy",
+                "operator": "==",
+                "value": "page_type:article"
+            }
+        ],
+        [
+            {
+                "param": "post_taxonomy",
+                "operator": "==",
+                "value": "page_type:blog_article"
+            }
+        ],
+        [
+            {
+                "param": "post_taxonomy",
+                "operator": "==",
+                "value": "page_type:experience"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "field",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
+    "modified": 1532503240,
     "fields": [
         {
             "key": "field_5afd2c6916ecb",
@@ -835,44 +874,5 @@
                 }
             ]
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_taxonomy",
-                "operator": "==",
-                "value": "page_type:basic_page"
-            }
-        ],
-        [
-            {
-                "param": "post_taxonomy",
-                "operator": "==",
-                "value": "page_type:article"
-            }
-        ],
-        [
-            {
-                "param": "post_taxonomy",
-                "operator": "==",
-                "value": "page_type:blog_article"
-            }
-        ],
-        [
-            {
-                "param": "post_taxonomy",
-                "operator": "==",
-                "value": "page_type:experience"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "field",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1532068867
+    ]
 }
