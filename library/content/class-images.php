@@ -10,9 +10,12 @@
 
 class WoodyTheme_Images
 {
+    protected $process;
+
     public function __construct()
     {
         $this->registerHooks();
+        $this->process = new WoodyTheme_Process();
     }
 
     protected function registerHooks()
@@ -73,13 +76,8 @@ class WoodyTheme_Images
         add_image_size('ratio_free', 1200);
         add_image_size('ratio_free_xlarge', 1920);
 
-        // Remove default
-        remove_image_size('small');
-        remove_image_size('large');
-        remove_image_size('medium_large');
-
         // Filters
-        // add_filter('intermediate_image_sizes_advanced', array($this, 'removeAutoThumbs'), 10, 1);
+        add_filter('intermediate_image_sizes_advanced', array($this, 'removeAutoThumbs'), 10, 2);
         add_filter('image_size_names_choose', array($this, 'imageSizeNamesChoose'), 10, 1);
         add_filter('wp_read_image_metadata', array($this, 'readImageMetadata'), 10, 4);
         add_filter('wp_generate_attachment_metadata', array($this, 'generateAttachmentMetadata'), 10, 2);
@@ -93,14 +91,50 @@ class WoodyTheme_Images
     }
 
     // Remove default image sizes here.
-    // public function removeAutoThumbs($sizes)
-    // {
-    //     // Thumbnail only the thumbnail
-    //     return array(
-    //         'thumbnail' => $sizes['thumbnail'],
-    //         'medium' => $sizes['medium']
-    //     );
-    // }
+    public function removeAutoThumbs($sizes, $metadata)
+    {
+        // Added to queue the generation of other thumbnails
+        $defer_sizes = $sizes;
+        unset($defer_sizes['thumbnail']);
+        unset($defer_sizes['medium']);
+        unset($defer_sizes['small']);
+        unset($defer_sizes['large']);
+        unset($defer_sizes['medium_large']);
+
+        $item = [
+            'function' => [get_class($this), 'generateThumbnails'],
+            'args' => ['metadata' => $metadata, 'sizes' => $defer_sizes]
+        ];
+        $this->process->push_to_queue($item);
+        $this->process->save()->dispatch();
+
+        // Thumbnail only the thumbnail
+        return array(
+            'thumbnail' => $sizes['thumbnail'],
+            'medium' => $sizes['medium']
+        );
+    }
+
+    public function generateThumbnails($args)
+    {
+        global $wpdb;
+        extract($args); // create $sizes + $metadata
+
+        if (!empty($sizes) && !empty($metadata)) {
+            $post_id = $wpdb->get_col($wpdb->prepare("SELECT post_id FROM $wpdb->postmeta WHERE meta_value='%s';", $metadata['file']));
+            if (!empty($post_id) && is_numeric($post_id[0])) {
+                $post_id = current($post_id);
+                $attachment_metadata = maybe_unserialize(wp_get_attachment_metadata($post_id));
+
+                $editor = wp_get_image_editor(WP_UPLOAD_DIR . '/' . $metadata['file']);
+                if (!is_wp_error($editor)) {
+                    $attachment_metadata['sizes'] = $editor->multi_resize($sizes);
+                }
+
+                wp_update_attachment_metadata($post_id, $attachment_metadata);
+            }
+        }
+    }
 
     // Register the new image sizes for use in the add media modal in wp-admin
     // This is the place where you can set readable names for images size
