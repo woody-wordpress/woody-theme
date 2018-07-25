@@ -1,7 +1,26 @@
 {
     "key": "group_5b5584826a751",
     "title": "Médias - Infos complémentaires",
-    "fields": [{
+    "location": [
+        [
+            {
+                "param": "attachment",
+                "operator": "==",
+                "value": "image"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "field",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Champs complémentaires pour les médias (auteur, localisation)",
+    "modified": 1532503240,
+    "fields": [
+        {
             "key": "field_5b5585503c855",
             "label": "Auteur",
             "name": "media_author",
@@ -58,21 +77,5 @@
             "append": "",
             "maxlength": ""
         }
-    ],
-    "location": [
-        [{
-            "param": "attachment",
-            "operator": "==",
-            "value": "image"
-        }]
-    ],
-    "menu_order": 0,
-    "position": "acf_after_title",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "field",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Champs complémentaires pour les médias (auteur, localisation)",
-    "modified": 1532333213
+    ]
 }

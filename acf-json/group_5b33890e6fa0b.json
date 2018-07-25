@@ -1,6 +1,24 @@
 {
     "key": "group_5b33890e6fa0b",
     "title": "Playlist Tourisme",
+    "location": [
+        [
+            {
+                "param": "post_taxonomy",
+                "operator": "==",
+                "value": "page_type:playlist_tourism"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Formulaire connecté à l'éditeur Hawwwai",
+    "modified": 1532503240,
     "fields": [
         {
             "key": "field_5b338f0d31b16",
@@ -57,23 +75,5 @@
             "new_lines": "wpautop",
             "esc_html": 0
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_taxonomy",
-                "operator": "==",
-                "value": "page_type:playlist_tourism"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Formulaire connecté à l'éditeur Hawwwai",
-    "modified": 1530102638
+    ]
 }

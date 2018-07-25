@@ -1,6 +1,24 @@
 {
     "key": "group_5b16b09337a33",
     "title": "HTML5 Vidéo",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Fichiers pour ajout de vidéo (poster, mp4, ogg\/ogv, webm)",
+    "modified": 1532503240,
     "fields": [
         {
             "key": "field_5b16b13c06118",
@@ -83,23 +101,5 @@
             "max_size": "",
             "mime_types": "ogg, ogv"
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Fichiers pour ajout de vidéo (poster, mp4, ogg\/ogv, webm)",
-    "modified": 1528971052
+    ]
 }
