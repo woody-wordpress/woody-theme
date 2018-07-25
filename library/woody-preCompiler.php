@@ -304,23 +304,26 @@ function getManualFocus_data($items)
  */
  function getAcfGroupFields($group_id)
  {
-     global $post;
-     $post_id = $post->ID;
+    global $post;
+    $post_id = $post->ID;
 
-     $page_teaser_fields = array();
+    $page_teaser_fields = array();
 
-     $fields = acf_get_fields($group_id);
+    $fields = acf_get_fields($group_id);
 
-     foreach ($fields as $field) {
-         $field_value = false;
-         if (!empty($field['name'])) {
-             $field_value = get_field($field['name'], $post_id);
-         }
+    if(!empty($fields)){
+        foreach ($fields as $field) {
+            $field_value = false;
+            if (!empty($field['name'])) {
+                $field_value = get_field($field['name'], $post_id);
+            }
 
-         if ($field_value && !empty($field_value)) {
-             $page_teaser_fields[$field['name']] = $field_value;
-         }
-     }
+            if ($field_value && !empty($field_value)) {
+                $page_teaser_fields[$field['name']] = $field_value;
+            }
+        }
+    }
+     
 
      return $page_teaser_fields;
  }

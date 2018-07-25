@@ -21,7 +21,7 @@ $context['woody_components'] = Woody::getTwigsPaths();
  * Compilation de l'en tête de page
  **************************** **/
 $page_teaser = [];
-$page_teaser = getAcfGroupFields(725);
+$page_teaser = getAcfGroupFields('group_5b2bbb46507bf');
 if (!empty($page_teaser['page_teaser_display_title'])) {
     $page_teaser['page_teaser_title'] = $context['post']->post_title;
 }
@@ -41,7 +41,7 @@ if (!empty($page_teaser)) {
  * Compilation du visuel et accroche
  **************************** **/
 $page_hero = [];
-$page_hero = getAcfGroupFields(33);
+$page_hero = getAcfGroupFields('group_5b052bbee40a4');
 // rcd($page_hero, true);
 if (empty($page_teaser['page_teaser_display_title'])) {
     $page_hero['title_as_h1'] = true;
