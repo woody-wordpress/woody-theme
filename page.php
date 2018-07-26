@@ -118,6 +118,21 @@ if ($page_type === 'playlist_tourism') {
                                 }
                             }
                         }
+
+                        if ($layout['acf_fc_layout'] == 'slides_group') {
+                            foreach ($layout['slides'] as $key => $slide) {
+                                $slide_content = [];
+                                // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
+                                if (!empty($slide['section_content'])) {
+                                    foreach ($slide['section_content'] as $slide_layout) {
+                                        $slide_content['items'][] = Timber::compile($context['woody_components'][$slide_layout['woody_tpl']], $slide_layout);
+                                    }
+                                    // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
+                                    $layout['slides'][$key]['section_content'] = Timber::compile($context['woody_components'][$slide['slide_woody_tpl']], $slide_content);
+                                }
+                            }
+                        }
+
                         $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                     }
                 }

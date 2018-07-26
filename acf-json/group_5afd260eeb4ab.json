@@ -1,45 +1,6 @@
 {
     "key": "group_5afd260eeb4ab",
     "title": "Sections",
-    "location": [
-        [
-            {
-                "param": "post_taxonomy",
-                "operator": "==",
-                "value": "page_type:basic_page"
-            }
-        ],
-        [
-            {
-                "param": "post_taxonomy",
-                "operator": "==",
-                "value": "page_type:article"
-            }
-        ],
-        [
-            {
-                "param": "post_taxonomy",
-                "operator": "==",
-                "value": "page_type:blog_article"
-            }
-        ],
-        [
-            {
-                "param": "post_taxonomy",
-                "operator": "==",
-                "value": "page_type:experience"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "field",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1532503240,
     "fields": [
         {
             "key": "field_5afd2c6916ecb",
@@ -545,6 +506,68 @@
                             ],
                             "min": "",
                             "max": ""
+                        },
+                        "layout_5b59cb00f9b2b": {
+                            "key": "layout_5b59cb00f9b2b",
+                            "name": "slides_group",
+                            "label": "Groupe de slides",
+                            "display": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_5b59cb12f9b2c",
+                                    "label": "Slides",
+                                    "name": "slides",
+                                    "type": "clone",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "clone": [
+                                        "group_5b59c98dd0621"
+                                    ],
+                                    "display": "seamless",
+                                    "layout": "block",
+                                    "prefix_label": 0,
+                                    "prefix_name": 0
+                                }
+                            ],
+                            "min": "",
+                            "max": ""
+                        },
+                        "layout_5b59dfb696d2d": {
+                            "key": "layout_5b59dfb696d2d",
+                            "name": "touristic_mini_sheet",
+                            "label": "Mini fiche touristique",
+                            "display": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_5b59dfcd96d2e",
+                                    "label": "Mini fiche touristique",
+                                    "name": "touristic_sheet_teaser",
+                                    "type": "clone",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "clone": [
+                                        "group_5b59dec21f82e"
+                                    ],
+                                    "display": "seamless",
+                                    "layout": "block",
+                                    "prefix_label": 0,
+                                    "prefix_name": 0
+                                }
+                            ],
+                            "min": "",
+                            "max": ""
                         }
                     },
                     "button_label": "Ajouter un bloc",
@@ -874,5 +897,44 @@
                 }
             ]
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_taxonomy",
+                "operator": "==",
+                "value": "page_type:basic_page"
+            }
+        ],
+        [
+            {
+                "param": "post_taxonomy",
+                "operator": "==",
+                "value": "page_type:article"
+            }
+        ],
+        [
+            {
+                "param": "post_taxonomy",
+                "operator": "==",
+                "value": "page_type:blog_article"
+            }
+        ],
+        [
+            {
+                "param": "post_taxonomy",
+                "operator": "==",
+                "value": "page_type:experience"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "field",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
+    "modified": 1532609557
 }
