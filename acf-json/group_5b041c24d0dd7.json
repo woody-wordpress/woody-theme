@@ -1,24 +1,6 @@
 {
     "key": "group_5b041c24d0dd7",
     "title": "En-tête",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "En-tête générique avec Icône - Sur-titre - Titre - Sous-titre - Description",
-    "modified": 1532503240,
     "fields": [
         {
             "key": "field_5b041d61adb72",
@@ -78,15 +60,47 @@
             "maxlength": ""
         },
         {
+            "key": "field_5b59bbd0e094c",
+            "label": "Type d'icône",
+            "name": "icon_type",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "picto": "Pictogramme",
+                "img": "Image"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
             "key": "field_5b041c31adb70",
             "label": "Icone",
             "name": "icon",
             "type": "font-awesome",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b59bbd0e094c",
+                        "operator": "==",
+                        "value": "picto"
+                    }
+                ]
+            ],
             "wrapper": {
-                "width": "33",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -776,6 +790,38 @@
             }
         },
         {
+            "key": "field_5b59bc12e094d",
+            "label": "Image",
+            "name": "icon_img",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b59bbd0e094c",
+                        "operator": "==",
+                        "value": "img"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "jpeg, jpg, png, svg, gif"
+        },
+        {
             "key": "field_5b041dbfadb74",
             "label": "Description",
             "name": "description",
@@ -794,5 +840,23 @@
             "media_upload": 0,
             "delay": 1
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "En-tête générique avec Icône - Sur-titre - Titre - Sous-titre - Description",
+    "modified": 1532600492
 }
