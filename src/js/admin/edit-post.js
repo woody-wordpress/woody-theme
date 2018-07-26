@@ -6,10 +6,8 @@ $('.acf-postbox').addClass('closed');
 // On masque les metaboxes de taxonomies dans l'edition des posts (on les rajoutera ensuite dans des champs ACF)
 $('[id^="tagsdiv-"').hide();
 
-// On referme la metabox "Attributs de page" + "Revisions"
-$('#pageparentdiv').addClass('closed');
-$('#revisionsdiv').addClass('closed');
-$('#wpseo_meta').addClass('closed');
+// On referme les metaboxes par défaut sur l'édition d'un post
+$('#pageparentdiv, #revisionsdiv, #wpseo_meta, #members-cp').addClass('closed');
 
 // On toggle la description de chaque template dans les champs woody_tpl
 $('.tpl-choice-wrapper').each(function() {
