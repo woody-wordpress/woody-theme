@@ -126,9 +126,16 @@ class WoodyTheme_Images
                 $post_id = current($post_id);
                 $attachment_metadata = maybe_unserialize(wp_get_attachment_metadata($post_id));
 
+                // Get thumbnail
+                $thumbnail = $attachment_metadata['sizes']['thumbnail'];
+                $medium = $attachment_metadata['sizes']['medium'];
+
+                // Generate multiple resizes
                 $editor = wp_get_image_editor(WP_UPLOAD_DIR . '/' . $metadata['file']);
                 if (!is_wp_error($editor)) {
                     $attachment_metadata['sizes'] = $editor->multi_resize($sizes);
+                    $attachment_metadata['sizes']['thumbnail'] = $thumbnail;
+                    $attachment_metadata['sizes']['medium'] = $medium;
                 }
 
                 wp_update_attachment_metadata($post_id, $attachment_metadata);
