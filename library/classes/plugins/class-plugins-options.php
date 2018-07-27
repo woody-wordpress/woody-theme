@@ -114,6 +114,3 @@ class WoodyTheme_Plugins_Options
         $this->updateOption('yoimg_crop_settings', $yoimg_crop_settings);
     }
 }
-
-// Execute Class
-new WoodyTheme_Plugins_Options();

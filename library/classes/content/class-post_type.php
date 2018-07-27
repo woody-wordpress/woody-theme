@@ -67,6 +67,3 @@ class WoodyTheme_Post_Type
         register_post_type('touristic_sheet', $args);
     }
 }
-
-// Execute Class
-new WoodyTheme_Post_Type();

@@ -137,6 +137,3 @@ class WoodyTheme_ACF
     //     return $field;
     // }
 }
-
-// Execute Class
-new WoodyTheme_ACF();

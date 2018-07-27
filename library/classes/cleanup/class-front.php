@@ -109,6 +109,3 @@ class WoodyTheme_Cleanup_Front
         }
     }
 }
-
-// Execute Class
-new WoodyTheme_Cleanup_Front();

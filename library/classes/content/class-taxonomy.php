@@ -59,6 +59,3 @@ class WoodyTheme_Taxonomy
         // }
     }
 }
-
-// Execute Class
-new WoodyTheme_Taxonomy();

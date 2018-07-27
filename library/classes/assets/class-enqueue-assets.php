@@ -70,6 +70,3 @@ class WoodyTheme_Enqueue_Assets
         return $filename;
     }
 }
-
-// Execute Class
-new WoodyTheme_Enqueue_Assets();

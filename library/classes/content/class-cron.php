@@ -24,6 +24,3 @@ class WoodyTheme_Cron
         });
     }
 }
-
-// Execute Class
-new WoodyTheme_Cron();

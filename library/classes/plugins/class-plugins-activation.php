@@ -82,6 +82,3 @@ class WoodyTheme_Plugins_Activation
         deactivate_plugins($this->deactivate_plugins);
     }
 }
-
-// Execute Class
-new WoodyTheme_Plugins_Activation();

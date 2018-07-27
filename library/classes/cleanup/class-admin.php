@@ -130,6 +130,3 @@ class WoodyTheme_Cleanup_Admin
         remove_meta_box('dashboard_primary', 'dashboard', 'side');
     }
 }
-
-// Execute Class
-new WoodyTheme_Cleanup_Admin();

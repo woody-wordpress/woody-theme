@@ -314,6 +314,3 @@ class WoodyTheme_Images
     //     }
     // }
 }
-
-// Execute Class
-new WoodyTheme_Images();

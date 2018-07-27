@@ -19,6 +19,3 @@ class WoodyTheme_Menus
         add_theme_support('menus');
     }
 }
-
-// Execute Class
-new WoodyTheme_Menus();
