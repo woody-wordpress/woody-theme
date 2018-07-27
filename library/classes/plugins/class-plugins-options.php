@@ -36,6 +36,7 @@ class WoodyTheme_Plugins_Options
     {
         // Plugins Settings
         update_option('timezone_string', '', '', 'yes'); // Mettre vide si le serveur est déjà configuré sur la bonne timezone Europe/Paris
+        update_option('WPLANG', 'fr_FR', '', 'yes');
         update_option('date_format', 'j F Y', '', 'yes');
         update_option('time_format', 'G\hi', '', 'yes');
         update_option('wp_php_console', array('password' => 'root', 'register' => true, 'short' => true, 'stack' => true), '', 'yes');
@@ -63,6 +64,15 @@ class WoodyTheme_Plugins_Options
         // Yoast settings
         $wpseo_titles['breadcrumbs-enable'] = true;
         $this->updateOption('wpseo_titles', $wpseo_titles);
+
+        // SSO
+        $wposso_options = [
+            'client_id' => '3_582geteg4eckcwcscwo4kwwgcowk8cgo00cccksc0w040s8s4c',
+            'client_secret' => '4qm2ajhrj1mo4oc8sgc0s484c8kkg4g4oo8o8sswkk0gc8wscw',
+            'server_url' => 'https://connect.studio.raccourci.fr',
+            'redirect_to_dashboard' => 1,
+        ];
+        $this->updateOption('wposso_options', $wposso_options);
 
         // Enhanced Media Library
         $wpuxss_eml_lib_options['grid_show_caption-enable'] = true;

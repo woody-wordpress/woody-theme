@@ -32,7 +32,9 @@ class WoodyTheme_Plugins_Activation
             'yoimages/yoimages.php',
             'enhanced-media-library/enhanced-media-library.php',
             'wp-nested-pages/nestedpages.php',
-            'members/members.php'
+            'members/members.php',
+            'hawwwai-plugin/hawwwai.php',
+            'single-sign-on-client/wposso.php',
         ];
 
         $this->dev_plugins = [
