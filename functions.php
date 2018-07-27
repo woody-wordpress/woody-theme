@@ -18,14 +18,14 @@ if (!class_exists('PC', false) && WP_ENV == 'dev') {
 }
 
 $finder = new Finder();
-$finder->files()->in(__DIR__ . '/library')->name('*.php')
+$finder->files()->in(__DIR__ . '/library/*')->name('*.php')
     ->notName('tools.php')
     ->notName('woody-preCompiler.php');
 
 require_once(__DIR__ . '/library/tools.php');
 require_once(__DIR__ . '/library/woody-preCompiler.php');
 foreach ($finder as $file) {
-    require_once(__DIR__ . '/library/' . $file->getRelativePathname());
+    require_once($file->getPathname());
 }
 
 // Change Timber locations
