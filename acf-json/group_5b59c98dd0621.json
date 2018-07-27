@@ -31,13 +31,13 @@
                 "class": "",
                 "id": ""
             },
-            "collapsed": "",
+            "collapsed": "field_5b59c9bfc6e6a",
             "min": 0,
             "max": 0,
             "layout": "block",
             "button_label": "",
             "hide_collapse": 0,
-            "collapse_all_repeater": 0,
+            "collapse_all_repeater": 1,
             "btn-icon-only": 0,
             "sub_fields": [
                 {
@@ -158,5 +158,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1532604853
+    "modified": 1532614208
 }
