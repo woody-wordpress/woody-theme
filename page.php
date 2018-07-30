@@ -133,6 +133,37 @@ if ($page_type === 'playlist_tourism') {
                             }
                         }
 
+                        if($layout['acf_fc_layout'] == 'socialwall'){
+                            $layout['gallery_items'] = [];
+                            if($layout['socialwall_type'] == 'manual'){
+                                foreach ($layout['socialwall_manual'] as $key => $media_item) {
+                                    $layout['gallery_items'][] = $media_item;    
+                                }
+                                unset($layout['socialwall_manual']);
+                            } elseif($layout['socialwall_type'] == 'auto'){
+                                $get_media_by_terms = [];
+                                foreach ($layout['socialwall_auto'] as $key => $media_term) {
+                                    $get_media_by_terms[] =  $media_term;
+                                }
+                                $args = [
+                                        // 'post_type' => 'attachment',
+                                        'tax_query' => array(
+                                            array(
+                                            'taxonomy' => 'media_category',
+                                            'terms' => $get_media_by_terms,
+                                            'field' => 'taxonomy_term_id',
+                                            'operator' => 'IN'
+                                            )
+                                        )
+                                    ];
+                                    $query = new WP_Query( $args );
+                                    rcd($query, true);
+                                $layout['gallery_items'][] = $media_item;    
+
+                            }
+                            
+                        }
+
                         $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                     }
                 }
