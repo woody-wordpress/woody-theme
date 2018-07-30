@@ -33,7 +33,7 @@
             },
             "choices": {
                 "auto": "Automatique",
-                "manuel": "Manuel"
+                "manual": "Manuel"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -46,7 +46,7 @@
             "key": "field_5b5b2fbfe946c",
             "label": "Socialwall automatique (filtré sur 1 ou plusieurs hashtags)",
             "name": "socialwall_auto",
-            "type": "relationship",
+            "type": "taxonomy",
             "instructions": "",
             "required": 0,
             "conditional_logic": [
@@ -63,18 +63,15 @@
                 "class": "",
                 "id": ""
             },
-            "post_type": [
-                "attachment"
-            ],
-            "taxonomy": [],
-            "filters": [
-                "search"
-            ],
-            "elements": "",
-            "min": "",
-            "max": "",
-            "return_format": "object",
-            "acf_relationship_create": 0
+            "acf_relationship_create": 0,
+            "taxonomy": "media_category",
+            "field_type": "checkbox",
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "multiple": 0,
+            "allow_null": 0
         },
         {
             "key": "field_5b5b3064e946d",
@@ -88,7 +85,7 @@
                     {
                         "field": "field_5b5b310be946e",
                         "operator": "==",
-                        "value": "manuel"
+                        "value": "manual"
                     }
                 ]
             ],
@@ -240,6 +237,6 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": 1,
-    "description": "",
-    "modified": 1532696414
+    "description": "Une galerie, automatique ou manuelle avec des choix de grilles très spécifiques",
+    "modified": 1532931945
 }

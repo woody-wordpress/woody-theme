@@ -572,7 +572,7 @@
                         "layout_5b5b33af38ad8": {
                             "key": "layout_5b5b33af38ad8",
                             "name": "socialwall",
-                            "label": "socialwall",
+                            "label": "Socialwall",
                             "display": "block",
                             "sub_fields": [
                                 {
@@ -968,5 +968,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1532696532
+    "modified": 1532928620
 }
