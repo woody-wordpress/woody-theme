@@ -21,17 +21,17 @@ class WoodyTheme_ACF
         acf_update_setting('save_json', get_template_directory() . '/acf-json');
         acf_append_setting('load_json', get_template_directory() . '/acf-json');
 
-        add_filter('plugin_action_links', array($this, 'disallow_acf_deactivation'), 10, 4);
-        add_filter('acf/load_field/type=radio', array($this, 'woody_tpl_acf_load_field'));
-        add_filter('acf/load_field/name=focused_taxonomy_terms', array($this, 'focused_taxonomy_terms_load_field'));
-        // add_filter('acf/load_field/name=playlist_name', array($this, 'playlist_name_load_field'));
+        add_filter('plugin_action_links', array($this, 'disallowAcfDeactivation'), 10, 4);
+        add_filter('acf/load_field/type=radio', array($this, 'woodyTplAcfLoadField'));
+        add_filter('acf/load_field/name=focused_taxonomy_terms', array($this, 'focusedTaxonomyTermsLoadField'));
+        // add_filter('acf/load_field/name=playlist_name', array($this, 'playlistNameLoadField'));
     }
 
     /**
      * Benoit Bouchaud
      * On bloque l'accès à la désactivation du plugin ACF
      */
-    public function disallow_acf_deactivation($actions, $plugin_file, $plugin_data, $context)
+    public function disallowAcfDeactivation($actions, $plugin_file, $plugin_data, $context)
     {
         if (array_key_exists('deactivate', $actions) and $plugin_file == self::ACF) {
             unset($actions['deactivate']);
@@ -43,7 +43,7 @@ class WoodyTheme_ACF
      * Benoit Bouchaud
      * On ajoute les templates Woody disponibles dans les option du champ radio woody_tpl
      */
-    public function woody_tpl_acf_load_field($field)
+    public function woodyTplAcfLoadField($field)
     {
         if (strpos($field['name'], 'woody_tpl') !== false) {
             $field['choices'] = [];
@@ -78,7 +78,7 @@ class WoodyTheme_ACF
      * Benoit Bouchaud
      * On ajoute tous les termes de taxonomie du site dans le sélecteur de termes de la mise en avant automatique
      */
-    public function focused_taxonomy_terms_load_field($field)
+    public function focusedTaxonomyTermsLoadField($field)
     {
         // Reset field's choices + create $terms for future choices
         $field['choices'] = [];
@@ -118,7 +118,7 @@ class WoodyTheme_ACF
         return $field;
     }
 
-    // public function playlist_name_load_field($field)
+    // public function playlistNameLoadField($field)
     // {
     //     global $post;
     //     if (!empty($post)) {
