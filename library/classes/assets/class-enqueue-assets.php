@@ -18,6 +18,7 @@ class WoodyTheme_Enqueue_Assets
         add_action('wp_enqueue_scripts', array($this, 'enqueueLibraries'));
         add_action('wp_enqueue_scripts', array($this, 'enqueueAssets'));
         add_action('admin_enqueue_scripts', array($this, 'enqueueAdminAssets'));
+        add_action('login_enqueue_scripts', array($this, 'enqueueAdminAssets'));
     }
 
     public function enqueueLibraries()
@@ -42,7 +43,7 @@ class WoodyTheme_Enqueue_Assets
 
         // Enqueue the main Stylesheet.
         wp_enqueue_style('main-stylesheet', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('css/main.css'), array(), '', 'all');
-        wp_enqueue_style('font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css', array(), '', 'all');
+        wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', array(), '', 'all');
     }
 
     public function enqueueAdminAssets()
