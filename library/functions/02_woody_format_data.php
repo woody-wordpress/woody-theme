@@ -375,8 +375,14 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
     ];
 
     $attachments = new WP_Query( $get_attachments );
+    $acf_attachements = [];
+    foreach ($attachments->posts as $key => $attachment) {
+        // On transforme chacune des images en objet image ACF pour être compatible avec le tpl Woody
+        $acf_attachment = acf_get_attachment($attachment);
+        $acf_attachements[] = $acf_attachment;
+    }
 
-    return $attachments;
+    return $acf_attachements;
 }
 
 /**
