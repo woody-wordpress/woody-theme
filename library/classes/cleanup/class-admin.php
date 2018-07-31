@@ -15,24 +15,23 @@ class WoodyTheme_Cleanup_Admin
 
     protected function registerHooks()
     {
-        add_filter('wpseo_metabox_prio', array($this, 'yoastMoveMetaBoxBottom'));
-        add_action('init', array($this, 'removePagesEditor'));
-        add_action('admin_menu', array($this, 'removeCommentsMetaBox'));
-        add_action('admin_menu', array($this, 'removeAdminMenus'));
-        add_action('admin_menu', array($this, 'removeNavMenusItem'));
-        add_action('wp_dashboard_setup', array($this, 'removeDashboardWidgets'));
+        add_filter('wpseo_metabox_prio', [$this, 'yoastMoveMetaBoxBottom']);
+        add_action('init', [$this, 'removePagesEditor']);
+        add_action('admin_menu', [$this, 'removeCommentsMetaBox']);
+        add_action('admin_menu', [$this, 'removeAdminMenu']);
+        add_action('admin_menu', [$this, 'removeNavMenuItem']);
+        add_action('wp_before_admin_bar_render', [$this, 'customAdminBarMenu']);
+        add_action('wp_dashboard_setup', [$this, 'removeDashboardWidgets']);
 
-
-        global $submenu;
         $user = wp_get_current_user();
         if (!in_array('administrator', $user->roles)) {
-            add_action('admin_head', array($this, 'removeScreenOptions'));
+            add_action('admin_head', [$this, 'removeScreenOptions']);
             add_filter('screen_options_show_screen', '__return_false');
         }
 
 
         if (is_admin()) {
-            add_action('pre_get_posts', array($this, 'custom_pre_get_posts'));
+            add_action('pre_get_posts', [$this, 'custom_pre_get_posts']);
         }
     }
 
@@ -49,15 +48,36 @@ class WoodyTheme_Cleanup_Admin
      * Benoit Bouchaud
      * On masque certaines entrées de menu pour les non administrateurs
      */
-    public function removeAdminMenus()
+    public function customAdminBarMenu()
     {
-        global $submenu;
+        global $wp_admin_bar;
+        $wp_admin_bar->remove_menu('wp-logo');
+        $wp_admin_bar->remove_menu('customize');
+        $wp_admin_bar->remove_menu('comments');
+    }
+
+    /**
+     * Benoit Bouchaud
+     * On masque certaines entrées de menu pour les non administrateurs
+     */
+    public function removeAdminMenu()
+    {
         $user = wp_get_current_user();
         if (!in_array('administrator', $user->roles)) {
             remove_menu_page('themes.php'); // Apparence
         }
         remove_menu_page('edit.php'); // Articles
         remove_menu_page('edit-comments.php'); // Commentaires
+
+        // Personnaliser
+        global $submenu;
+        if (isset($submenu[ 'themes.php' ])) {
+            foreach ($submenu[ 'themes.php' ] as $index => $menu_item) {
+                if (in_array('customize', $menu_item)) {
+                    unset($submenu[ 'themes.php' ][ $index ]);
+                }
+            }
+        }
     }
 
     /**
@@ -94,7 +114,7 @@ class WoodyTheme_Cleanup_Admin
      * Benoit Bouchaud
      * On déplace le menu "Menus" pour le mettre à la racine du menu d'admin
      */
-    public function removeNavMenusItem()
+    public function removeNavMenuItem()
     {
         // On retire le sous-menu Menus dans Apparence
         remove_submenu_page('themes.php', 'nav-menus.php');
