@@ -85,86 +85,62 @@ if ($page_type === 'playlist_tourism') {
 
             if (!empty($section['section_content'])) {
                 foreach ($section['section_content'] as $key => $layout) {
-                    if ($layout['acf_fc_layout'] == 'manual_focus') {
-                        $the_items = getManualFocus_data($layout['content_selection']);
-                        $the_items['focus_no_padding'] = $layout['focus_no_padding'];
-                        $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_items);
-                    } elseif ($layout['acf_fc_layout'] == 'auto_focus') {
-                        $the_items = getAutoFocus_data($context['post'], $layout);
-                        $the_items['focus_no_padding'] = $layout['focus_no_padding'];
-                        $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_items);
-                    } elseif ($layout['acf_fc_layout'] == 'playlist_bloc') {
-                        $playlist_conf_id = $layout['playlist_conf_id'];
-                        $components['items'][] = apply_filters('wp_hawwwai_sit_playlist_render', $playlist_conf_id, 'fr');
-                    } else {
-                        if ($layout['acf_fc_layout'] == 'call_to_action' && !empty($layout['button']['add_modal'])) {
+
+                    switch ($layout['acf_fc_layout']) {
+                        case 'manual_focus':
+                            $the_items = getManualFocus_data($layout['content_selection']);
+                            $the_items['focus_no_padding'] = $layout['focus_no_padding'];
+                            $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_items);
+                        break;
+                        case 'auto_focus':
+                            $the_items = getAutoFocus_data($context['post'], $layout);
+                            $the_items['focus_no_padding'] = $layout['focus_no_padding'];
+                            $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_items);
+                        break;
+                        case 'playlist_bloc':
+                            $playlist_conf_id = $layout['playlist_conf_id'];
+                            $components['items'][] = apply_filters('wp_hawwwai_sit_playlist_render', $playlist_conf_id, 'fr');
+                        break;
+                        case 'call_to_action' :
                             // On créé un id unique pour la modal si l'option pop-in est sélectionnée
-                            $layout['modal_id'] = 'cta-modal' . uniqid();
-                        }
-
-                        if ($layout['acf_fc_layout'] == 'tabs_group') {
-                            // On génère un ID pour le groupe de tabs
-                            $layout['tabs_id'] = 'tabs-' . uniqid();
-                            foreach ($layout['tabs'] as $key => $tab) {
-                                $tab_content = [];
-                                $layout['tabs'][$key]['tab_id'] = 'tab-' . uniqid();
-                                // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
-                                if (!empty($tab['section_content'])) {
-                                    foreach ($tab['section_content'] as $tab_layout) {
-                                        $tab_content['items'][] = Timber::compile($context['woody_components'][$tab_layout['woody_tpl']], $tab_layout);
-                                    }
-                                    // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
-                                    $layout['tabs'][$key]['section_content'] = Timber::compile($context['woody_components'][$tab['tab_woody_tpl']], $tab_content);
-                                }
+                            if(!empty($layout['button']['add_modal'])){
+                                $layout['modal_id'] = 'cta-' . uniqid();
                             }
-                        }
-
-                        if ($layout['acf_fc_layout'] == 'slides_group') {
-                            foreach ($layout['slides'] as $key => $slide) {
-                                $slide_content = [];
-                                // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
-                                if (!empty($slide['section_content'])) {
-                                    foreach ($slide['section_content'] as $slide_layout) {
-                                        $slide_content['items'][] = Timber::compile($context['woody_components'][$slide_layout['woody_tpl']], $slide_layout);
-                                    }
-                                    // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
-                                    $layout['slides'][$key]['section_content'] = Timber::compile($context['woody_components'][$slide['slide_woody_tpl']], $slide_content);
-                                }
-                            }
-                        }
-
-                        if($layout['acf_fc_layout'] == 'socialwall'){
+                            $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                        break;
+                        case 'tabs_group' :
+                            $layout['tabs'] = nestedGridsComponents($layout['tabs'], 'tab_woody_tpl', 'tabs');
+                            $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                        break;
+                        case 'slides_group' :
+                            $layout['slides'] = nestedGridsComponents($layout['slides'], 'slide_woody_tpl');
+                            $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                        break;
+                        case 'socialwall' :
                             $layout['gallery_items'] = [];
                             if($layout['socialwall_type'] == 'manual'){
                                 foreach ($layout['socialwall_manual'] as $key => $media_item) {
-                                    $layout['gallery_items'][] = $media_item;    
+                                    // On ajoute une entrée "gallery_items" pour être compatible avec le tpl woody
+                                    $layout['gallery_items'][] = $media_item;
                                 }
-                                unset($layout['socialwall_manual']);
                             } elseif($layout['socialwall_type'] == 'auto'){
-                                $get_media_by_terms = [];
-                                foreach ($layout['socialwall_auto'] as $key => $media_term) {
-                                    $get_media_by_terms[] =  $media_term;
+                                // On récupère les termes sélectionnés
+                                $queried_terms = [];
+                                foreach ($layout['socialwall_auto'] as $key => $term) {
+                                    $queried_terms[] =  $term;
                                 }
-                                $args = [
-                                        // 'post_type' => 'attachment',
-                                        'tax_query' => array(
-                                            array(
-                                            'taxonomy' => 'media_category',
-                                            'terms' => $get_media_by_terms,
-                                            'field' => 'taxonomy_term_id',
-                                            'operator' => 'IN'
-                                            )
-                                        )
-                                    ];
-                                    $query = new WP_Query( $args );
-                                    rcd($query, true);
-                                $layout['gallery_items'][] = $media_item;    
-
+                                // On récupère les images en fonction des termes sélectionnés
+                                $attachments = getAttachmentsByTerms('media_category', $queried_terms);
+                                // On transforme chacune des images en objet image ACF pour être compatible avec le tpl Woody
+                                foreach ($attachments->posts as $key => $attachment) {
+                                    $attachment = acf_get_attachment($attachment);
+                                    $layout['gallery_items'][] = $attachment;
+                                }
                             }
-                            
-                        }
-
-                        $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                            $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                        break;
+                        default:
+                            $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                     }
                 }
 

@@ -59,6 +59,7 @@ function getAutoFocus_data($the_post, $query_form)
                 ];
 
 
+
     // Si Hiérarchie = Enfants directs de la page
     // On passe le post ID dans le paramètre post_parent de la query
     if ($query_form['focused_hierarchy'] == 'child_of') {
@@ -73,6 +74,7 @@ function getAutoFocus_data($the_post, $query_form)
 
     // On créé la wp_query avec les paramètres définis
     $focused_posts = new WP_Query($the_query);
+    // rcd($the_query, true);
 
     // On transforme la donnée des posts récupérés pour coller aux templates de blocs Woody
     if (!empty($focused_posts->posts)) {
@@ -200,49 +202,49 @@ function getManualFocus_data($items)
      } elseif (!empty($item->get_title())) {
          $data['title'] = $item->get_title();
      }
-
      if (in_array('pretitle', $item_wrapper['display_elements'])) {
-         if (!empty($item->get_field('focus_pretitle'))) {
-             $data['pretitle'] = $item->get_field('focus_pretitle');
-         } elseif (!empty($item->get_field('pretitle'))) {
-             $data['pretitle'] = $item->get_field('pretitle');
-         }
+         $data['pretitle'] = getFieldAndFallback($item, 'focus_pretitle', 'pretitle');
      }
-
      if (in_array('subtitle', $item_wrapper['display_elements'])) {
-         if (!empty($item->get_field('focus_subtitle'))) {
-             $data['subtitle'] = $item->get_field('focus_subtitle');
-         } elseif (!empty($item->get_field('subtitle'))) {
-             $data['subtitle'] = $item->get_field('subtitle');
-         }
+        $data['subtitle'] = getFieldAndFallback($item, 'focus_subtitle', 'subtitle');
      }
-
      if (in_array('icon', $item_wrapper['display_elements'])) {
-         if (!empty($item->get_field('focus_icon'))) {
-             $data['icon'] = $item->get_field('focus_icon');
-         } elseif (!empty($item->get_field('icon'))) {
-             $data['icon'] = $item->get_field('icon');
-         }
+        $data['icon'] = getFieldAndFallback($item, 'focus_icon', 'icon');
      }
-
      if (in_array('description', $item_wrapper['display_elements'])) {
-         if (!empty($item->get_field('focus_description'))) {
-             $data['description'] = $item->get_field('focus_description');
-         } elseif (!empty($item->get_field('description'))) {
-             $data['description'] = $item->get_field('description');
-         }
+        $data['description'] = getFieldAndFallback($item, 'focus_description', 'description');
      }
 
-     if (!empty($item->get_field('focus_img'))) {
-         $data['img'] = $item->get_field('focus_img');
-     } elseif (!empty($item->get_field('field_5b0e5ddfd4b1b'))) {
-         // Get focus img if exists
-         $data['img'] = $item->get_field('field_5b0e5ddfd4b1b');
-     }
-
-     $data['link']['url'] = $item->get_path();
+    $data['img'] = getFieldAndFallback($item, 'focus_img', 'field_5b0e5ddfd4b1b');
+    $data['link']['url'] = $item->get_path();
 
      return $data;
+ }
+
+
+ /**
+ *
+ * Nom : getFieldAndFallback
+ * Auteur : Benoit Bouchaud
+ * Return : Retourne un tableau de classes de personnalisation d'affichage
+ * @param    item - Le scope (un objet post)
+ * @param    field - Le champ prioritaire
+ * @param    fallback - Le champ de remplacement
+ * @return   data - Un tableau de données
+ *
+ */
+ function getFieldAndFallback($item, $field, $fallback){
+    $value = [];
+
+    if (!empty($item->get_field($field))) {
+             $value = $item->get_field($field);
+    } elseif (!empty($item->get_field($fallback))) {
+        $value = $item->get_field($fallback);
+    } else{
+        $value = '';
+    }
+
+    return $value;
  }
 
 /**
@@ -301,7 +303,7 @@ function getManualFocus_data($items)
  * Nom : getAcfGroupFields
  * Auteur : Benoit Bouchaud
  * Return : Retourne un tableau avec les valeurs des champs d'un groupe ACF poyr un post donné
- * @param    group_id - Le post id du groupe ACF /**** !!! Différent de l'id du post dont on récupère les valeurs ****\
+ * @param    group_id - La clé du groupe ACF
  * @return   page_teaser_fields - Un tableau de données
  *
  */
@@ -329,4 +331,90 @@ function getManualFocus_data($items)
 
 
      return $page_teaser_fields;
+ }
+
+
+/**
+ *
+ * Nom : getAttchmentsByTerms
+ * Auteur : Benoit Bouchaud
+ * Return : Retourne un tableau d'objets image au format acf_image
+ * @param    taxonomy - Le slug du vocabulaire dans lequelle on recherche
+ * @param    terms - Les termes ciblés dans le vocabulaire
+ * @param    query_args - Un tableau d'arguments pour la wp_query
+ * @return   attachements - Un tableau d'objets images au format "ACF"
+ *
+ */
+function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array()){
+
+    // On définit certains arguments par défaut pour la requête
+    $default_args = [
+        'size' => -1,
+        'operator' => 'IN',
+        'relation' => 'OR',
+        'post_mime_type' => 'image' // Could be image/gif for gif only, video, video/mp4, application, application.pdf, ...
+    ];
+    $query_args = array_merge($default_args, $query_args);
+
+    // On créé la requête
+    $get_attachments = [
+        'post_type'      => 'attachment',
+        'post_status' => 'inherit',
+        'post_mime_type' => $query_args['post_mime_type'],
+        'post_per_page' => $query_args['size'],
+        'nopaging' => true,
+        'tax_query' => array(
+            array(
+                'taxonomy' => $taxonomy,
+                'terms' => $terms,
+                'field' => 'taxonomy_term_id',
+                'relation' => $query_args['relation'],
+                'operator' => $query_args['operator']
+            )
+        )
+    ];
+
+    $attachments = new WP_Query( $get_attachments );
+
+    return $attachments;
+}
+
+/**
+ *
+ * Nom : nestedGridsComponents
+ * Auteur : Benoit Bouchaud
+ * Return : Retourne un DOM html
+ * @param    taxonomy - Le slug du vocabulaire dans lequelle on recherche
+ * @param    terms - Les termes ciblés dans le vocabulaire
+ * @param    query_args - Un tableau d'arguments pour la wp_query
+ * @return   attachements - Un tableau d'objets images au format "ACF"
+ *
+ */
+
+ function nestedGridsComponents($scope, $gridTplField, $uniqIid_prefix = ''){
+    $woodyComponents = Woody::getTwigsPaths();
+
+    if(!empty($uniqIid_prefix)){
+        $scope['group_id'] = $uique_id . '-' . uniqid();
+    }
+
+    foreach ($scope as $key => $grid) {
+        $grid_content = [];
+        if(!empty($uniqIid_prefix)){
+            $scope[$key]['el_id'] = $uique_id . '-' . uniqid();
+        }
+        // rcd($grid, true);
+
+       // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
+       if (!empty($grid['section_content'])) {
+
+           foreach ($grid['section_content'] as $layout) {
+
+               $grid_content['items'][] = Timber::compile($woodyComponents[$layout['woody_tpl']], $layout);
+            }
+            // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
+            $scope[$key]['section_content'] = Timber::compile($woodyComponents[$grid[$gridTplField]], $grid_content);
+       }
+    }
+    return $scope;
  }
