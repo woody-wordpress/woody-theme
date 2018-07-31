@@ -381,7 +381,6 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
         $acf_attachment = acf_get_attachment($attachment);
         $acf_attachements[] = $acf_attachment;
     }
-
     return $acf_attachements;
 }
 
@@ -409,7 +408,6 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
         if(!empty($uniqIid_prefix)){
             $scope[$key]['el_id'] = $uique_id . '-' . uniqid();
         }
-        // rcd($grid, true);
 
        // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
        if (!empty($grid['section_content'])) {

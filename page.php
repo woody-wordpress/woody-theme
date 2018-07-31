@@ -10,7 +10,7 @@
 $context = Timber::get_context();
 $context['post'] = new TimberPost();
 $context['woody_components'] = Woody::getTwigsPaths();
-// rcd(get_class_methods(TimberPost), true);
+PC::debug(get_class_methods(TimberPost), 'TwigMethods');
 
 /** ****************************
  * Compilation de l'en tête de page
@@ -120,8 +120,11 @@ if ($page_type === 'playlist_tourism') {
                                 foreach ($layout['socialwall_auto'] as $key => $term) {
                                     $queried_terms[] =  $term;
                                 }
+
                                 // On récupère les images en fonction des termes sélectionnés
                                 $layout['gallery_items'] = getAttachmentsByTerms('media_category', $queried_terms);
+
+                                // rcd($layout, true);
                             }
                             $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                         break;
