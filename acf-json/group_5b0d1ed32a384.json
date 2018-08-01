@@ -78,10 +78,10 @@
                     },
                     "allow_null": 0,
                     "other_choice": 0,
-                    "save_other_choice": 0,
-                    "default_value": "",
+                    "default_value": "existing_content",
                     "layout": "vertical",
-                    "return_format": "value"
+                    "return_format": "value",
+                    "save_other_choice": 0
                 },
                 {
                     "key": "field_5b0d28c4bb189",
@@ -423,5 +423,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1533128975
+    "modified": 1533132701
 }
