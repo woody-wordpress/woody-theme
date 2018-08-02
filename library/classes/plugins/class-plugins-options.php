@@ -14,24 +14,6 @@ class WoodyTheme_Plugins_Options
         $this->registerHooks();
     }
 
-    private function updateOption($option_name, $settings, $autoload = 'yes')
-    {
-        $option = get_option($option_name, array());
-
-        if (is_array($settings)) {
-            $new_option = $option;
-            foreach ($settings as $key => $val) {
-                $new_option[$key] = $val;
-            }
-        } else {
-            $new_option = $settings;
-        }
-
-        if (strcmp(json_encode($option), json_encode($new_option)) !== 0) { // Update if different
-            update_option($option_name, $new_option, '', $autoload);
-        }
-    }
-
     protected function registerHooks()
     {
         // Plugins Settings
@@ -55,6 +37,10 @@ class WoodyTheme_Plugins_Options
         update_option('acm_server_settings', array('server_enable' => true), '', 'yes');
         update_option('permalink_structure', '/%postname%/', '', 'yes');
         update_option('permalink-manager-permastructs', array('post_types' => array('touristic_sheet' => '')), '', 'yes');
+
+        // Media Library
+        $wpuxss_eml_taxonomies = array('media_category' => array('assigned' => false));
+        $this->updateOption('wpuxss_eml_taxonomies', $wpuxss_eml_taxonomies);
 
         // ACF Key
         $acf_pro_license = array('key'	=> 'b3JkZXJfaWQ9MTIyNTQwfHR5cGU9ZGV2ZWxvcGVyfGRhdGU9MjAxOC0wMS0xNSAwOTozMToyMw==', 'url' => home_url());
@@ -122,5 +108,20 @@ class WoodyTheme_Plugins_Options
             'ratio_square'          => ['active' => true, 'name' => 'Carr&eacute;'],
         ];
         $this->updateOption('yoimg_crop_settings', $yoimg_crop_settings);
+    }
+
+    private function updateOption($option_name, $settings, $autoload = 'yes')
+    {
+        $option = get_option($option_name, array());
+
+        if (is_array($settings)) {
+            $new_option = array_replace_recursive($option, $settings);
+        } else {
+            $new_option = $settings;
+        }
+
+        if (strcmp(json_encode($option), json_encode($new_option)) !== 0) { // Update if different
+            update_option($option_name, $new_option, '', $autoload);
+        }
     }
 }
