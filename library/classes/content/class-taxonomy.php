@@ -37,7 +37,7 @@ class WoodyTheme_Taxonomy
                     'update_item' => 'Mettre à jour les types de publications',
                     'add_new_item' => 'Ajouter un type de publication',
                     'new_item_name' => 'Nouveau type de publication',
-                    'search_items' => 'Rechercher parmi types de publications',
+                    'search_items' => 'Rechercher parmi les types de publications',
                     'popular_items' => 'Types de publications les plus utilisées'
                 ),
                 'hierarchical' => false,
@@ -51,5 +51,83 @@ class WoodyTheme_Taxonomy
         wp_insert_term('Contenu', 'page_type', array('slug' => 'basic_page'));
         wp_insert_term('Page d\'atterrissage', 'page_type', array('slug' => 'landing_page'));
         wp_insert_term('Personne', 'page_type', array('slug' => 'member'));
+
+        // On créé la taxonomie "Thématiques"
+        register_taxonomy(
+            'page_themes',
+            'page',
+            array(
+                'label' => 'Thématiques',
+                'labels' => array(
+                    'name' => 'Thématiques',
+                    'singular_name' => 'Thématique',
+                    'menu_name' => 'Thématiques',
+                    'all_items' => 'Toutes les thématiques',
+                    'edit_item' => 'Modifier les thématiques',
+                    'view_item' => 'Voir les thématiques',
+                    'update_item' => 'Mettre à jour les thématiques',
+                    'add_new_item' => 'Ajouter une thématique',
+                    'new_item_name' => 'Nouvelle thématique',
+                    'search_items' => 'Rechercher parmi les thématiques',
+                    'popular_items' => 'Thématiques les plus utilisées'
+                ),
+                'hierarchical' => true,
+                'show_ui' => true
+            )
+        );
+
+        // On créé la taxonomie "Lieux"
+        register_taxonomy(
+            'page_places',
+            'page',
+            array(
+                'label' => 'Lieux',
+                'labels' => array(
+                    'name' => 'Lieux',
+                    'singular_name' => 'Lieu',
+                    'menu_name' => 'Lieux',
+                    'all_items' => 'Tous les lieux',
+                    'edit_item' => 'Modifier les lieux',
+                    'view_item' => 'Voir les lieux',
+                    'update_item' => 'Mettre à jour les lieux',
+                    'add_new_item' => 'Ajouter un lieu',
+                    'new_item_name' => 'Nouveau lieu',
+                    'search_items' => 'Rechercher parmi les lieux',
+                    'popular_items' => 'Lieux les plus utilisés'
+                ),
+                'hierarchical' => true,
+                'show_ui' => true
+            )
+        );
+
+        // On créé la taxonomie "Thématiques"
+        register_taxonomy(
+            'page_seasons',
+            'page',
+            array(
+                'label' => 'Saisons',
+                'labels' => array(
+                    'name' => 'Saisons',
+                    'singular_name' => 'Saison',
+                    'menu_name' => 'Saisons',
+                    'all_items' => 'Toutes les saisons',
+                    'edit_item' => 'Modifier les saisons',
+                    'view_item' => 'Voir les saisons',
+                    'update_item' => 'Mettre à jour les saisons',
+                    'add_new_item' => 'Ajouter une saison',
+                    'new_item_name' => 'Nouvelle saison',
+                    'search_items' => 'Rechercher parmi les saisons',
+                    'popular_items' => 'Saisons les plus utilisées'
+                ),
+                'hierarchical' => false,
+                'show_ui' => false
+            )
+        );
+
+        // On inclut les termes génériques à la taxo
+        wp_insert_term('Été', 'page_seasons', array('slug' => 'summer'));
+        wp_insert_term('Printemps', 'page_seasons', array('slug' => 'spring'));
+        wp_insert_term('Automne', 'page_seasons', array('slug' => 'autumn'));
+        wp_insert_term('Hiver', 'page_seasons', array('slug' => 'winter'));
     }
 }
