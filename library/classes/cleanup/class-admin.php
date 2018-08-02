@@ -17,6 +17,7 @@ class WoodyTheme_Cleanup_Admin
     {
         add_filter('wpseo_metabox_prio', [$this, 'yoastMoveMetaBoxBottom']);
         add_action('init', [$this, 'removePagesEditor']);
+        add_action('init', [$this, 'removeTaxonomies']);
         add_action('admin_menu', [$this, 'removeCommentsMetaBox']);
         add_action('admin_menu', [$this, 'removeAdminMenu']);
         add_action('admin_menu', [$this, 'removeNavMenuItem']);
@@ -28,7 +29,6 @@ class WoodyTheme_Cleanup_Admin
             add_action('admin_head', [$this, 'removeScreenOptions']);
             add_filter('screen_options_show_screen', '__return_false');
         }
-
 
         if (is_admin()) {
             add_action('pre_get_posts', [$this, 'custom_pre_get_posts']);
@@ -42,6 +42,21 @@ class WoodyTheme_Cleanup_Admin
     public function removePagesEditor()
     {
         remove_post_type_support('page', 'editor');
+    }
+
+    /**
+     * Léo POIROUX
+     * On vire les taxos catégories/étiquettes des articles
+     */
+    public function removeTaxonomies()
+    {
+        global $wp_taxonomies;
+        $taxonomies = array( 'category', 'post_tag' );
+        foreach ($taxonomies as $taxonomy) {
+            if (taxonomy_exists($taxonomy)) {
+                unset($wp_taxonomies[$taxonomy]);
+            }
+        }
     }
 
     /**
