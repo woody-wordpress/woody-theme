@@ -325,20 +325,16 @@
                                 "id": ""
                             },
                             "choices": {
+                                "icon": "Icône",
                                 "pretitle": "Surtitre",
                                 "subtitle": "Sous-titre",
-                                "description": "Description",
-                                "icon": "Icône"
+                                "description": "Description"
                             },
                             "allow_custom": 0,
                             "default_value": [
-                                "pretitle",
-                                "subtitle",
-                                "description",
                                 "icon",
-                                "tags_1",
-                                "tags_2",
-                                "author"
+                                "pretitle",
+                                "subtitle"
                             ],
                             "layout": "horizontal",
                             "toggle": 0,
@@ -423,5 +419,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1533132701
+    "modified": 1533213088
 }
