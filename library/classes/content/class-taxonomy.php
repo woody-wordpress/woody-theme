@@ -100,7 +100,7 @@ class WoodyTheme_Taxonomy
             )
         );
 
-        // On créé la taxonomie "Thématiques"
+        // On créé la taxonomie "Saisons"
         register_taxonomy(
             'page_seasons',
             'page',
@@ -129,5 +129,29 @@ class WoodyTheme_Taxonomy
         wp_insert_term('Printemps', 'page_seasons', array('slug' => 'spring'));
         wp_insert_term('Automne', 'page_seasons', array('slug' => 'autumn'));
         wp_insert_term('Hiver', 'page_seasons', array('slug' => 'winter'));
+
+        // On créé la taxonomie "Types de média"
+        register_taxonomy(
+            'attachment_types',
+            'attachment',
+            array(
+                'label' => 'Types de média',
+                'labels' => array(
+                    'name' => 'Types de média',
+                    'singular_name' => 'Type de média',
+                    'menu_name' => 'Types de média',
+                    'all_items' => 'Toutes les types de média',
+                    'edit_item' => 'Modifier les types de média',
+                    'view_item' => 'Voir les types de média',
+                    'update_item' => 'Mettre à jour les types de média',
+                    'add_new_item' => 'Ajouter une type de média',
+                    'new_item_name' => 'Nouveau type de média',
+                    'search_items' => 'Rechercher parmi les types de média',
+                    'popular_items' => 'Types de média les plus utilisés'
+                ),
+                'hierarchical' => false,
+                'show_ui' => false
+            )
+        );
     }
 }
