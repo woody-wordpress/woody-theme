@@ -21,8 +21,8 @@ class WoodyTheme_Plugins_Options
         update_option('WPLANG', 'fr_FR', '', 'yes');
         update_option('date_format', 'j F Y', '', 'yes');
         update_option('time_format', 'G\hi', '', 'yes');
-        update_option('wp_php_console', array('password' => 'root', 'register' => true, 'short' => true, 'stack' => true), '', 'yes');
-        update_option('rocket_lazyload_options', array('images' => true, 'iframes' => true, 'youtube' => true), '', 'yes');
+        update_option('wp_php_console', ['password' => 'root', 'register' => true, 'short' => true, 'stack' => true], '', 'yes');
+        update_option('rocket_lazyload_options', ['images' => true, 'iframes' => true, 'youtube' => true], '', 'yes');
         update_option('minify_html_active', (WP_ENV == 'dev') ? 'no' : 'yes', '', 'yes');
         update_option('minify_javascript', 'yes', '', 'yes');
         update_option('minify_html_comments', (WP_ENV == 'dev') ? 'no' : 'yes', '', 'yes');
@@ -34,16 +34,32 @@ class WoodyTheme_Plugins_Options
         update_option('upload_url_path', WP_UPLOAD_URL, '', 'yes');
         update_option('uploads_use_yearmonth_folders', true, '', 'yes');
         update_option('thumbnail_crop', true, '', 'yes');
-        update_option('acm_server_settings', array('server_enable' => true), '', 'yes');
+        update_option('acm_server_settings', ['server_enable' => true], '', 'yes');
         update_option('permalink_structure', '/%postname%/', '', 'yes');
-        update_option('permalink-manager-permastructs', array('post_types' => array('touristic_sheet' => '')), '', 'yes');
+        update_option('permalink-manager-permastructs', ['post_types' => ['touristic_sheet' => '']], '', 'yes');
 
-        // Media Library
-        $wpuxss_eml_taxonomies = array('media_category' => array('assigned' => false));
+        // Media Library Taxonomy
+        $wpuxss_eml_taxonomies = [
+            'media_category' => [
+                'assigned' => false
+            ],
+            'attachment_types' => [
+                'assigned' => true,
+                'admin_filter' => true,
+                'media_uploader_filter' => true,
+                'media_popup_taxonomy_edit' => false,
+            ],
+            'attachment_hashtags' => [
+                'assigned' => true,
+                'admin_filter' => true,
+                'media_uploader_filter' => true,
+                'media_popup_taxonomy_edit' => true,
+            ],
+        ];
         $this->updateOption('wpuxss_eml_taxonomies', $wpuxss_eml_taxonomies);
 
         // ACF Key
-        $acf_pro_license = array('key'	=> 'b3JkZXJfaWQ9MTIyNTQwfHR5cGU9ZGV2ZWxvcGVyfGRhdGU9MjAxOC0wMS0xNSAwOTozMToyMw==', 'url' => home_url());
+        $acf_pro_license = ['key' => 'b3JkZXJfaWQ9MTIyNTQwfHR5cGU9ZGV2ZWxvcGVyfGRhdGU9MjAxOC0wMS0xNSAwOTozMToyMw==', 'url' => home_url()];
         $acf_pro_license = base64_encode(maybe_serialize($acf_pro_license));
         $this->updateOption('acf_pro_license', $acf_pro_license);
 
