@@ -41,7 +41,7 @@ class WoodyTheme_Taxonomy
                     'popular_items' => 'Types de publications les plus utilisées'
                 ),
                 'hierarchical' => false,
-                'show_ui' => true //TODO passer à false quand les types de publications seront définitifs
+                'show_ui' => false //TODO passer à false quand les types de publications seront définitifs
             )
         );
 
