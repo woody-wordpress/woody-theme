@@ -17,7 +17,6 @@ class WoodyTheme_Plugins_Activation
     {
         $this->activate_plugins = [
             'advanced-custom-fields-pro/acf.php',
-            'acf-relationship-create-pro/acf-relationship-create-pro.php',
             'timber-library/timber.php',
             'advanced-custom-fields-font-awesome/acf-font-awesome.php',
             'bea-media-analytics/bea-media-analytics.php',
@@ -50,6 +49,7 @@ class WoodyTheme_Plugins_Activation
             'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
             'media-file-renamer/media-file-renamer.php',
             'regenerate-thumbnails/regenerate-thumbnails.php',
+            'acf-relationship-create-pro/acf-relationship-create-pro.php',
         ];
 
         // Enable debug plugins on DEV
