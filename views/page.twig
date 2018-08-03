@@ -6,9 +6,12 @@
             {% if page_hero | default %}
                 {{ page_hero }}
             {% endif %}
-            {# L'en-tête de page est toujours affichée même si aucun champ n'est saisi afin d'afficher le fil d'arianne #}
-            {{ page_teaser }}
-            {% if playlist_template | default %}{{ playlist_template }}
+            {% block page_teaser %}
+                {# L'en-tête de page est toujours affichée même si aucun champ n'est saisi afin d'afficher le fil d'arianne #}
+                {{ page_teaser }}
+            {% endblock %}
+            {% if playlist_template | default %}
+                {{ playlist_template }}
             {% endif %}
             {% for key, section in the_sections %}
                 <div class="page-section page-section-{{ key }}">

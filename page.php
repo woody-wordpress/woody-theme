@@ -10,7 +10,7 @@
 $context = Timber::get_context();
 $context['post'] = new TimberPost();
 $context['woody_components'] = Woody::getTwigsPaths();
-PC::debug(get_class_methods(TimberPost), 'TwigMethods');
+// PC::debug(get_class_methods(TimberPost), 'TwigMethods');
 
 /** ****************************
  * Compilation de l'en tête de page
@@ -35,7 +35,7 @@ if (!empty($page_teaser)) {
  **************************** **/
 $page_hero = [];
 $page_hero = getAcfGroupFields('group_5b052bbee40a4');
-if (!empty($page_hero)) {
+if (!empty($page_hero['page_heading_movie'] || !empty($apeg_hero['page_heading_img']))) {
     if (empty($page_teaser['page_teaser_display_title'])) {
         $page_hero['title_as_h1'] = true;
     }
@@ -76,7 +76,6 @@ if ($page_type === 'playlist_tourism') {
 
             if (!empty($section['section_content'])) {
                 foreach ($section['section_content'] as $key => $layout) {
-
                     switch ($layout['acf_fc_layout']) {
                         case 'manual_focus':
                             $the_items = getManualFocus_data($layout['content_selection']);
@@ -92,29 +91,29 @@ if ($page_type === 'playlist_tourism') {
                             $playlist_conf_id = $layout['playlist_conf_id'];
                             $components['items'][] = apply_filters('wp_hawwwai_sit_playlist_render', $playlist_conf_id, 'fr');
                         break;
-                        case 'call_to_action' :
+                        case 'call_to_action':
                             // On créé un id unique pour la modal si l'option pop-in est sélectionnée
-                            if(!empty($layout['button']['add_modal'])){
+                            if (!empty($layout['button']['add_modal'])) {
                                 $layout['modal_id'] = 'cta-' . uniqid();
                             }
                             $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                         break;
-                        case 'tabs_group' :
+                        case 'tabs_group':
                             $layout['tabs'] = nestedGridsComponents($layout['tabs'], 'tab_woody_tpl', 'tabs');
                             $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                         break;
-                        case 'slides_group' :
+                        case 'slides_group':
                             $layout['slides'] = nestedGridsComponents($layout['slides'], 'slide_woody_tpl');
                             $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                         break;
-                        case 'socialwall' :
+                        case 'socialwall':
                             $layout['gallery_items'] = [];
-                            if($layout['socialwall_type'] == 'manual'){
+                            if ($layout['socialwall_type'] == 'manual') {
                                 foreach ($layout['socialwall_manual'] as $key => $media_item) {
                                     // On ajoute une entrée "gallery_items" pour être compatible avec le tpl woody
                                     $layout['gallery_items'][] = $media_item;
                                 }
-                            } elseif($layout['socialwall_type'] == 'auto'){
+                            } elseif ($layout['socialwall_type'] == 'auto') {
                                 // On récupère les termes sélectionnés
                                 $queried_terms = [];
                                 foreach ($layout['socialwall_auto'] as $key => $term) {
@@ -155,5 +154,11 @@ if ($page_type === 'playlist_tourism') {
     }
 }
 
+if (!empty(is_front_page())) {
+    $template = 'front.twig';
+} else {
+    $template = 'page.twig';
+}
+
 // On rend le $context dans le page.twig
-Timber::render('page.twig', $context);
+Timber::render($template, $context);
