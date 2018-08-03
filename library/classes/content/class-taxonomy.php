@@ -153,5 +153,28 @@ class WoodyTheme_Taxonomy
                 'show_ui' => false
             )
         );
+
+        // On créé la taxonomie "Hashtags"
+        register_taxonomy(
+            'attachment_hashtags',
+            'attachment',
+            array(
+                'label' => 'Hashtags',
+                'labels' => array(
+                    'name' => 'Hashtags',
+                    'singular_name' => 'Hashtag',
+                    'menu_name' => 'Hashtags',
+                    'all_items' => 'Toutes les hashtags',
+                    'edit_item' => 'Modifier les hashtags',
+                    'view_item' => 'Voir les hashtags',
+                    'update_item' => 'Mettre à jour les hashtags',
+                    'new_item_name' => 'Nouveau hashtag',
+                    'search_items' => 'Rechercher parmi les hashtags',
+                    'popular_items' => 'Hashtags les plus utilisés'
+                ),
+                'hierarchical' => false,
+                'show_ui' => true
+            )
+        );
     }
 }
