@@ -82,6 +82,13 @@ class WoodyTheme_ACF
                     <div class="tpl-desc hidden"><h4 class="tpl-title">' . $tpl_name . '</h4>' . $tpl_desc . '<span class="dashicons dashicons-no close-desc"></span></div>
                     <div class="desc-backdrop hidden"></div>
                     </div>';
+                    if ($field['name'] == 'section_woody_tpl') {
+                        foreach ($field['choices'] as $name => $value) {
+                            if (strpos($name, 'basic-grid_1_cols-tpl_01') !== false) {
+                                $field['default_value'] = $name;
+                            }
+                        }
+                    }
                 }
             }
         }
