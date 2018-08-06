@@ -54,7 +54,7 @@
                         "id": ""
                     },
                     "default_value": "",
-                    "placeholder": "",
+                    "placeholder": "Titre visible lorsque l'onglet est refermé (uniquement pour l'adlinistration)",
                     "prepend": "",
                     "append": "",
                     "maxlength": ""
@@ -158,5 +158,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1532614208
+    "modified": 1533533467
 }
