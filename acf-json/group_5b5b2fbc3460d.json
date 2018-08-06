@@ -98,12 +98,12 @@
             "max": "",
             "insert": "prepend",
             "library": "all",
-            "min_width": "",
+            "min_width": 600,
             "min_height": "",
             "min_size": "",
             "max_width": "",
             "max_height": "",
-            "max_size": "",
+            "max_size": 8,
             "mime_types": ""
         },
         {
@@ -255,5 +255,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Une galerie, automatique ou manuelle avec des choix de grilles très spécifiques",
-    "modified": 1533543533
+    "modified": 1533544482
 }

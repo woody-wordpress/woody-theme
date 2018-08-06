@@ -214,12 +214,12 @@
             "return_format": "array",
             "preview_size": "thumbnail",
             "library": "all",
-            "min_width": "",
+            "min_width": 600,
             "min_height": "",
             "min_size": "",
             "max_width": "",
             "max_height": "",
-            "max_size": "",
+            "max_size": 8,
             "mime_types": "jpg, jpeg, gif, svg, png"
         },
         {
@@ -376,5 +376,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Les infos principales de la page + la possibilité d'ajouter les liens de partage et d'ajout aux favoris",
-    "modified": 1533543345
+    "modified": 1533544318
 }

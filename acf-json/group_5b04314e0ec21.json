@@ -35,12 +35,12 @@
             "max": "",
             "insert": "append",
             "library": "all",
-            "min_width": "",
+            "min_width": 1920,
             "min_height": "",
             "min_size": "",
             "max_width": "",
             "max_height": "",
-            "max_size": "",
+            "max_size": 8,
             "mime_types": "jpg, jpeg, png, gif"
         },
         {
@@ -207,5 +207,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Liste de photos)",
-    "modified": 1533543287
+    "modified": 1533544359
 }

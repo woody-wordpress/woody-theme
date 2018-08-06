@@ -792,12 +792,12 @@
             "return_format": "array",
             "preview_size": "thumbnail",
             "library": "all",
-            "min_width": "",
+            "min_width": 1200,
             "min_height": "",
             "min_size": "",
             "max_width": "",
             "max_height": "",
-            "max_size": "",
+            "max_size": 8,
             "mime_types": ""
         }
     ],
@@ -825,5 +825,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Infos affichées en sidebar et utilisées pour les remontées de contenu",
-    "modified": 1532527153
+    "modified": 1533544417
 }
