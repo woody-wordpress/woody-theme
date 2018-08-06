@@ -23,6 +23,8 @@ class WoodyTheme_Cleanup_Admin
         add_action('admin_menu', [$this, 'removeNavMenuItem']);
         add_action('wp_before_admin_bar_render', [$this, 'customAdminBarMenu']);
         add_action('wp_dashboard_setup', [$this, 'removeDashboardWidgets']);
+        add_filter('tiny_mce_before_init', [$this, 'tiny_mce_remove_unused_formats']);
+
 
         $user = wp_get_current_user();
         if (!in_array('administrator', $user->roles)) {
@@ -165,5 +167,15 @@ class WoodyTheme_Cleanup_Admin
     {
         remove_meta_box('dashboard_activity', 'dashboard', 'normal');
         remove_meta_box('dashboard_primary', 'dashboard', 'side');
+    }
+
+    /**
+     * Benoit Bouchaud
+     * On retire le Heading 1=h2, Heading 6=h6, Adress=adress, Pre=pre des styles de texte disponibles dans l'éditeur de texte
+     */
+    public function tiny_mce_remove_unused_formats($init)
+    {
+        $init['block_formats'] = 'Paragraph=p;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;';
+        return $init;
     }
 }
