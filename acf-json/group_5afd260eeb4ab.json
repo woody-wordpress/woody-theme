@@ -609,8 +609,66 @@
                     "btn-icon-only": 0
                 },
                 {
+                    "key": "field_5b051c3b6717b",
+                    "label": "En-tête & Pied",
+                    "name": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "placement": "top",
+                    "endpoint": 0
+                },
+                {
+                    "key": "field_5b0422535e4b7",
+                    "label": "En-tête de section",
+                    "name": "heading",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_5b041c24d0dd7"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                },
+                {
+                    "key": "field_5b04235bfa866",
+                    "label": "Bouton(s) de fin de section",
+                    "name": "links",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "field_5b0436150b9d4"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                },
+                {
                     "key": "field_5afd2faf953bc",
-                    "label": "Mise en page <small>(section)<\/small>",
+                    "label": "Mise en page",
                     "name": "",
                     "type": "tab",
                     "instructions": "",
@@ -699,7 +757,7 @@
                 },
                 {
                     "key": "field_5b4c8f882d826",
-                    "label": "Coller les blocs",
+                    "label": "Retirer les marges autour des blocs",
                     "name": "scope_no_padding",
                     "type": "true_false",
                     "instructions": "",
@@ -885,64 +943,6 @@
                             "return_format": "value"
                         }
                     ]
-                },
-                {
-                    "key": "field_5b051c3b6717b",
-                    "label": "En-tête & Pied",
-                    "name": "",
-                    "type": "tab",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "placement": "top",
-                    "endpoint": 0
-                },
-                {
-                    "key": "field_5b0422535e4b7",
-                    "label": "En-tête de section",
-                    "name": "heading",
-                    "type": "clone",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "clone": [
-                        "group_5b041c24d0dd7"
-                    ],
-                    "display": "seamless",
-                    "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0
-                },
-                {
-                    "key": "field_5b04235bfa866",
-                    "label": "Bouton(s) de fin de section",
-                    "name": "links",
-                    "type": "clone",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "clone": [
-                        "field_5b0436150b9d4"
-                    ],
-                    "display": "seamless",
-                    "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0
                 }
             ]
         }
@@ -985,5 +985,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1533550543
+    "modified": 1533560742
 }

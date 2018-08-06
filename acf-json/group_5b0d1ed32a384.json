@@ -401,7 +401,7 @@
         },
         {
             "key": "field_5b4c8f3733d98",
-            "label": "Coller les vignettes",
+            "label": "Retirer les marges autour des mises en avant",
             "name": "focus_no_padding",
             "type": "true_false",
             "instructions": "",
@@ -436,5 +436,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1533543820
+    "modified": 1533560660
 }

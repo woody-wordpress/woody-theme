@@ -28,7 +28,14 @@ $('.swiper-container').each(function() {
         var centeredSlides = false;
     }
 
-    //console.info(spaceBetween);
+    // if (typeof($this.data('swiperargs')) !== undefined) {
+    //     var swiperArgs = $this.data('swiperargs');
+    //     console.warn($this.data('swiperargs'));
+    // } else {
+    //     var swiperArgs = '';
+    // }
+
+    // console.warn(swiperArgs);
 
     new Swiper($this, {
         // Optional parameters
