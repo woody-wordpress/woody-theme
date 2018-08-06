@@ -1,24 +1,6 @@
 {
     "key": "group_5b461a3831284",
     "title": "Appel à l'action",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Un bloc d'appel à laction avec texte et lien\/fichier + couleur de fond possible",
-    "modified": 1532503240,
     "fields": [
         {
             "key": "field_5b461a2b131b3",
@@ -2325,16 +2307,30 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "blocks-call_to_action-tpl_02": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/call_to_action\/tpl_02\/thumbnail.png\" alt=\"blocks-call_to_action-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 2<\/h4>Affiche un bloc avec texte et\/ou lien ou fichier à télécharger en dessous + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-call_to_action-tpl_01": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/call_to_action\/tpl_01\/thumbnail.png\" alt=\"blocks-call_to_action-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 1<\/h4>Affiche un bloc avec texte et\/ou lien ou fichier à télécharger à droite + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-            },
+            "choices": [],
             "allow_null": 0,
             "other_choice": 0,
             "save_other_choice": 0,
             "default_value": "",
             "layout": "vertical",
             "return_format": "value"
+        },
+        {
+            "key": "field_5b681e66b1056",
+            "label": "Options avancées",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
         },
         {
             "key": "field_5b461b46131ba",
@@ -2357,5 +2353,23 @@
             "prefix_label": 0,
             "prefix_name": 0
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Un bloc d'appel à laction avec texte et lien\/fichier + couleur de fond possible",
+    "modified": 1533543316
 }

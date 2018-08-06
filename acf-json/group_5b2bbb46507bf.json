@@ -1,24 +1,6 @@
 {
     "key": "group_5b2bbb46507bf",
     "title": "En-tête de page",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "page"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Les infos principales de la page + la possibilité d'ajouter les liens de partage et d'ajout aux favoris",
-    "modified": 1532503240,
     "fields": [
         {
             "key": "field_5b2bc0e256db0",
@@ -330,16 +312,30 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "blocks-page_teaser-tpl_02": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/page_teaser\/tpl_02\/thumbnail.png\" alt=\"blocks-page_teaser-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">En tête de page - Template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">En tête de page - Template 2<\/h4>Affiche les infos indispensables d'une page : titre + desc + social shares + ajout aux favoris + image\/video ou widget à droite<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-page_teaser-tpl_01": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/page_teaser\/tpl_01\/thumbnail.png\" alt=\"blocks-page_teaser-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">En tête de page - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">En tête de page - Template 1<\/h4>Affiche les infos indispensables d'une page : titre + desc + social shares + ajout aux favoris + image\/video ou widget à droite<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-            },
+            "choices": [],
             "allow_null": 0,
             "other_choice": 0,
             "save_other_choice": 0,
             "default_value": "",
             "layout": "vertical",
             "return_format": "value"
+        },
+        {
+            "key": "field_5b681e0f93118",
+            "label": "Options avancées",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
         },
         {
             "key": "field_5b45f29c46f7f",
@@ -362,5 +358,23 @@
             "prefix_label": 0,
             "prefix_name": 0
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Les infos principales de la page + la possibilité d'ajouter les liens de partage et d'ajout aux favoris",
+    "modified": 1533543345
 }

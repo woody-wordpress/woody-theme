@@ -16,7 +16,6 @@
                 "id": ""
             },
             "choices": {
-                ": Aucune": ": Aucune",
                 "bg-primary": "Couleur principale",
                 "bg-secondary": "Couleur secondaire",
                 "bg-black": "Noir",
@@ -94,5 +93,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Permet de personnaliser le fond d'une section (couleur \/ image)",
-    "modified": 1532610603
+    "modified": 1533542830
 }

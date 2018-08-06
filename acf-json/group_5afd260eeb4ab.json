@@ -662,6 +662,23 @@
                     "return_format": "value"
                 },
                 {
+                    "key": "field_5b68200fd0bbe",
+                    "label": "Options avancées",
+                    "name": "",
+                    "type": "accordion",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "open": 0,
+                    "multi_expand": 0,
+                    "endpoint": 0
+                },
+                {
                     "key": "field_5b519f3d7397f",
                     "label": "Séparateur au dessus",
                     "name": "section_divider",
@@ -949,7 +966,7 @@
             {
                 "param": "post_taxonomy",
                 "operator": "==",
-                "value": "page_type:blog_article"
+                "value": "page_type:article"
             }
         ],
         [
@@ -968,5 +985,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1533131730
+    "modified": 1533543434
 }
