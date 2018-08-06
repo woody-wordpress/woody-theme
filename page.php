@@ -132,8 +132,8 @@ if ($page_type === 'playlist_tourism') {
                     }
                 }
 
-                if (!empty($section['woody_tpl'])) {
-                    $the_layout = Timber::compile($context['woody_components'][$section['woody_tpl']], $components);
+                if (!empty($section['section_woody_tpl'])) {
+                    $the_layout = Timber::compile($context['woody_components'][$section['section_woody_tpl']], $components);
                 }
             }
 

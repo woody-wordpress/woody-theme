@@ -171,7 +171,7 @@ class WoodyTheme_Cleanup_Admin
 
     /**
      * Benoit Bouchaud
-     * On retire le Heading 1=h2, Heading 6=h6, Adress=adress, Pre=pre des styles de texte disponibles dans l'éditeur de texte
+     * On retire le Heading 1=h2, Heading 6=h6, Adress=adress, Pre=pre disponibles dans l'éditeur de texte
      */
     public function tiny_mce_remove_unused_formats($init)
     {
