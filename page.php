@@ -30,6 +30,8 @@ if (!empty($page_teaser)) {
     $context['page_teaser'] = Timber::compile($context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
 }
 
+$context['page_type'] = getTermsSlugs($context['post']->ID, 'page_type', true);
+
 /** ****************************
  * Compilation du visuel et accroche
  **************************** **/

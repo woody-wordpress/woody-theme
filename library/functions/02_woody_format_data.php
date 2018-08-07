@@ -113,6 +113,8 @@ function getManualFocus_data($items)
         // La donnée de la vignette correspond à un post sélectionné
         } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content'])) {
             $item = $item_wrapper['existing_content'];
+            $status = $item['content_selection']->post_status;
+            if($status === 'draft') continue;
             $the_items['items'][$key] = getExistingPreview($item);
         }
     }
@@ -339,7 +341,7 @@ function getManualFocus_data($items)
  * Nom : getAttchmentsByTerms
  * Auteur : Benoit Bouchaud
  * Return : Retourne un tableau d'objets image au format acf_image
- * @param    taxonomy - Le slug du vocabulaire dans lequelle on recherche
+ * @param    taxonomy - Le slug du vocabulaire dans lequel on recherche
  * @param    terms - Les termes ciblés dans le vocabulaire
  * @param    query_args - Un tableau d'arguments pour la wp_query
  * @return   attachements - Un tableau d'objets images au format "ACF"
@@ -389,10 +391,10 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
  * Nom : nestedGridsComponents
  * Auteur : Benoit Bouchaud
  * Return : Retourne un DOM html
- * @param    taxonomy - Le slug du vocabulaire dans lequelle on recherche
- * @param    terms - Les termes ciblés dans le vocabulaire
- * @param    query_args - Un tableau d'arguments pour la wp_query
- * @return   attachements - Un tableau d'objets images au format "ACF"
+ * @param    scope - L'élément parent qui contient les grilles
+ * @param    gridTplField - Le slug du champ 'Template'
+ * @param    uniqIid_prefix - Un préfixe d'id, si besoin de créer un id unique (tabs)
+ * @return   scope - Un DOM Html
  *
  */
 
@@ -422,3 +424,27 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
     }
     return $scope;
  }
+
+ /**
+ *
+ * Nom : getTermsSlugs
+ * Auteur : Benoit Bouchaud
+ * Return : Retourne un tableau de termes
+ * @param    taxonomy - Le slug du vocabulaire dans lequel on recherche
+ * @param    postId - Le post dans lequel on recherche
+ * @return   slugs - Un tableau de slugs de termes
+ *
+ */
+function getTermsSlugs($postId, $taxonomy, $implode = false){
+    $slugs = [];
+    $terms = get_the_terms($postId, $taxonomy);
+    foreach ($terms as $term) {
+        $slugs[] = $term->slug;
+    }
+
+    if($implode == true){
+        $slugs = implode(' ', $slugs);
+    }
+
+    return $slugs;
+}

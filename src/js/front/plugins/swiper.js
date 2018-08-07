@@ -1,8 +1,12 @@
 import $ from 'jquery';
 import Swiper from 'swiper';
 
+var $i = 0;
+
 $('.swiper-container').each(function() {
     var $this = $(this);
+    
+    $this.addClass('swiper-' + $i);
 
     if (typeof($this.data('slides-per-view')) !== undefined) {
         var slidesPerView = $this.data('slides-per-view');
@@ -37,8 +41,9 @@ $('.swiper-container').each(function() {
 
     // console.warn(swiperArgs);
 
-    new Swiper($this, {
+    new Swiper('.swiper-' + $i, {
         // Optional parameters
+        // containerModifierClass : 'swiper-' + $i + '-', 
         slidesPerView: slidesPerView,
         spaceBetween: spaceBetween,
         freeMode: true,
@@ -61,4 +66,6 @@ $('.swiper-container').each(function() {
             prevEl: '.swiper-button-prev',
         },
     });
+
+    $i++;
 });

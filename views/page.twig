@@ -1,7 +1,7 @@
 {% extends "base.twig" %}
 
 {% block content %}
-    <main class="content-type-page">
+    <main class="content-type-page {% if page_type|default %}{{ page_type }}{% endif %}">
         <div class="content-wrapper">
             {% if page_hero | default %}
                 {{ page_hero }}
