@@ -371,3 +371,18 @@
         width: 65%;
     }
 }
+
+// Accorédons "Options avancées"
+.acf-field-5b681e0f93118,
+.acf-field_5b681f7dba008,
+.acf-field_5b6821997df66,
+.acf-field_5b6820abd37c0,
+.acf-field_5b681e66b1056,
+.acf-field_5b68204875187,
+.acf-field_5b68207900a28,
+.acf-field-5b68200fd0bbe {
+    margin: 20px !important;
+    >.acf-accordion-title {
+        color: #006799;
+    }
+}
