@@ -1,24 +1,6 @@
 {
     "key": "group_5b4726f891221",
     "title": "Onglet",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Utilisé pour afficher des bloc des des tabs",
-    "modified": 1532503240,
     "fields": [
         {
             "key": "field_5b4726fa78095",
@@ -51,7 +33,7 @@
             },
             "default_value": "fa-dot-circle-o",
             "save_format": "element",
-            "allow_null": 0,
+            "allow_null": 1,
             "show_preview": 0,
             "enqueue_fa": 0,
             "fa_live_preview": "",
@@ -837,5 +819,23 @@
             "layout": "vertical",
             "return_format": "value"
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Utilisé pour afficher des bloc des des tabs",
+    "modified": 1533722035
 }

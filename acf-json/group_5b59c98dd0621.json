@@ -50,7 +50,7 @@
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
-                        "class": "",
+                        "class": "hide-label",
                         "id": ""
                     },
                     "default_value": "",
@@ -175,5 +175,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1533543481
+    "modified": 1533727338
 }
