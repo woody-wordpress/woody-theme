@@ -79,11 +79,11 @@ function getAutoFocus_data($the_post, $query_form)
     // On transforme la donnée des posts récupérés pour coller aux templates de blocs Woody
     if (!empty($focused_posts->posts)) {
         foreach ($focused_posts->posts as $key => $post) {
-            $post = Timber::get_post($post->ID);
             $data = [];
-
+            $post = Timber::get_post($post->ID);
+            $status = $post->post_status;
+            if($post->post_status === 'draft') continue;
             $data = getPagePreview($query_form, $post);
-
             $the_items['items'][$key] = $data;
         }
     }
