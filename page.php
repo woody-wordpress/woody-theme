@@ -7,10 +7,14 @@
  * @since WoodyTheme 1.0.0
  */
 
+
+
 $context = Timber::get_context();
 $context['post'] = new TimberPost();
 $context['woody_components'] = Woody::getTwigsPaths();
 // PC::debug(get_class_methods(TimberPost), 'TwigMethods');
+
+include get_template_directory() . '/header.php';
 
 /** ****************************
  * Compilation de l'en tête de page
@@ -37,7 +41,7 @@ $context['page_type'] = getTermsSlugs($context['post']->ID, 'page_type', true);
  **************************** **/
 $page_hero = [];
 $page_hero = getAcfGroupFields('group_5b052bbee40a4');
-if (!empty($page_hero['page_heading_movie'] || !empty($apeg_hero['page_heading_img']))) {
+if (!empty($page_hero['page_heading_movie'] || !empty($page_hero['page_heading_img']))) {
     if (empty($page_teaser['page_teaser_display_title'])) {
         $page_hero['title_as_h1'] = true;
     }

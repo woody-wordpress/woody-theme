@@ -1,20 +1,2 @@
 {% extends "page.twig" %}
 {% block page_teaser %}{% endblock %}
-{# {% block content %}
-    <main class="content-type-page">
-        <div class="content-wrapper">
-            <h2>Frontpage</h2>
-            {% if page_hero | default %}
-                {{ page_hero }}
-            {% endif %}
-            {{ page_teaser }}
-            {% if playlist_template | default %}{{ playlist_template }}
-            {% endif %}
-            {% for key, section in the_sections %}
-                <div class="page-section page-section-{{ key }}">
-                    {{ section }}
-                </div>
-            {% endfor %}
-        </div>
-    </main>
-{% endblock %} #}

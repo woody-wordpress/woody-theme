@@ -1,18 +1,13 @@
 {% extends "base.twig" %}
 
 {% block content %}
-    <main class="content-type-page {% if page_type|default %}{{ page_type }}{% endif %}">
+    <main id="main-content" class="content-type-page {{ page_type|default }}">
         <div class="content-wrapper">
-            {% if page_hero | default %}
-                {{ page_hero }}
-            {% endif %}
+            {{ page_hero|default }}
             {% block page_teaser %}
-                {# L'en-tête de page est toujours affichée même si aucun champ n'est saisi afin d'afficher le fil d'arianne #}
                 {{ page_teaser }}
             {% endblock %}
-            {% if playlist_template | default %}
-                {{ playlist_template }}
-            {% endif %}
+            {{ playlist_template|default }}
             {% for key, section in the_sections %}
                 <div class="page-section page-section-{{ key }}">
                     {{ section }}

@@ -85,8 +85,8 @@ Foundation.plugin(Reveal, 'Reveal');
 // import { SmoothScroll } from 'foundation-sites/js/foundation.smoothScroll';
 // Foundation.plugin(SmoothScroll, 'SmoothScroll');
 
-// import { Sticky } from 'foundation-sites/js/foundation.sticky';
-// Foundation.plugin(Sticky, 'Sticky');
+import { Sticky } from 'foundation-sites/js/foundation.sticky';
+Foundation.plugin(Sticky, 'Sticky');
 
 import { Tabs } from 'foundation-sites/js/foundation.tabs';
 Foundation.plugin(Tabs, 'Tabs');
