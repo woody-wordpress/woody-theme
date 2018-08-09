@@ -230,25 +230,18 @@
                 "pretitle": "Surtitre",
                 "subtitle": "Sous-titre",
                 "description": "Description",
-                "icon": "Icône",
-                "tags_1": "Taxonomie principale",
-                "tags_2": "Taxonomie secondaire",
-                "author": "Auteur"
+                "icon": "Icône"
             },
             "allow_custom": 0,
-            "save_custom": 0,
             "default_value": [
                 "pretitle",
                 "subtitle",
-                "description",
-                "icon",
-                "tags_1",
-                "tags_2",
-                "author"
+                "icon"
             ],
             "layout": "horizontal",
             "toggle": 0,
-            "return_format": "value"
+            "return_format": "value",
+            "save_custom": 0
         },
         {
             "key": "field_5b2788e084ed2",
@@ -341,5 +334,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1533560620
+    "modified": 1533817727
 }
