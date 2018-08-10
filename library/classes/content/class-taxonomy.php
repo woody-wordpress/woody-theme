@@ -51,6 +51,7 @@ class WoodyTheme_Taxonomy
         wp_insert_term('Contenu', 'page_type', array('slug' => 'basic_page'));
         wp_insert_term('Page d\'atterrissage', 'page_type', array('slug' => 'landing_page'));
         wp_insert_term('Personne', 'page_type', array('slug' => 'member'));
+        wp_insert_term('Séjour', 'page_type', array('slug' => 'trip'));
 
         // On créé la taxonomie "Thématiques"
         register_taxonomy(

@@ -1,0 +1,258 @@
+{
+    "key": "group_5b6c5e6ff381d",
+    "title": "Informations séjour",
+    "fields": [
+        {
+            "key": "field_5b6c670eb54f2",
+            "label": "Prix",
+            "name": "group_price",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_5b6d47c62d0ab",
+                    "label": "Type",
+                    "name": "price_type",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "static_single": "Prix fixe par personne",
+                        "evolving_single": "Prix évolutif par personne",
+                        "static_package": "Forfait fixe",
+                        "evolving_package": "Forfait évolutif"
+                    },
+                    "default_value": [
+                        "static_single"
+                    ],
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 0,
+                    "return_format": "value",
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_5b6c674cb54f5",
+                    "label": "Prix",
+                    "name": "price",
+                    "type": "number",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "€",
+                    "min": "",
+                    "max": "",
+                    "step": ""
+                },
+                {
+                    "key": "field_5b6d48b82d0ac",
+                    "label": "Evolue à partir de",
+                    "name": "price_evolve_from",
+                    "type": "number",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5b6d47c62d0ab",
+                                "operator": "==",
+                                "value": "evolving_single"
+                            }
+                        ],
+                        [
+                            {
+                                "field": "field_5b6d47c62d0ab",
+                                "operator": "==",
+                                "value": "evolving_package"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "personnes",
+                    "min": "",
+                    "max": "",
+                    "step": ""
+                },
+                {
+                    "key": "field_5b6d49432d0ae",
+                    "label": "Nouveau prix",
+                    "name": "evolving_new_price",
+                    "type": "number",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5b6d47c62d0ab",
+                                "operator": "==",
+                                "value": "evolving_single"
+                            }
+                        ],
+                        [
+                            {
+                                "field": "field_5b6d47c62d0ab",
+                                "operator": "==",
+                                "value": "evolving_package"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "€",
+                    "min": "",
+                    "max": "",
+                    "step": ""
+                },
+                {
+                    "key": "field_5b6d4c280ed33",
+                    "label": "Précision",
+                    "name": "suffix_price",
+                    "type": "text",
+                    "instructions": "<small>Si laissé vide, valeur par défaut : \"par personne\" ou \"forfait groupe\" en fonction du type de prix<\/small>",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                }
+            ]
+        },
+        {
+            "key": "field_5b6c5e7cb54ee",
+            "label": "Durée",
+            "name": "group_duration",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_5b6c66b2b54f0",
+                    "label": "Accroche",
+                    "name": "prefix_days",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "Ex : Suggestion à réaliser en",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5b6c6248b54ef",
+                    "label": "Nombre de jours",
+                    "name": "count_days",
+                    "type": "number",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "34",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "min": "",
+                    "max": "",
+                    "step": ""
+                },
+                {
+                    "key": "field_5b6c66c3b54f1",
+                    "label": "Précision",
+                    "name": "suffix_days",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_taxonomy",
+                "operator": "==",
+                "value": "page_type:trip"
+            }
+        ]
+    ],
+    "menu_order": 10,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Affiche le prix et la duré d'un séjour",
+    "modified": 1533882728
+}

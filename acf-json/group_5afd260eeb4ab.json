@@ -966,7 +966,7 @@
             {
                 "param": "post_taxonomy",
                 "operator": "==",
-                "value": "page_type:article"
+                "value": "page_type:landing_page"
             }
         ],
         [
@@ -975,9 +975,16 @@
                 "operator": "==",
                 "value": "page_type:experience"
             }
+        ],
+        [
+            {
+                "param": "post_taxonomy",
+                "operator": "==",
+                "value": "page_type:trip"
+            }
         ]
     ],
-    "menu_order": 0,
+    "menu_order": 20,
     "position": "normal",
     "style": "default",
     "label_placement": "top",
@@ -985,5 +992,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1533560742
+    "modified": 1533880575
 }
