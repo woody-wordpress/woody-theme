@@ -98,7 +98,7 @@
                     "default_value": "",
                     "placeholder": "",
                     "prepend": "",
-                    "append": "personnes",
+                    "append": "pers.",
                     "min": "",
                     "max": "",
                     "step": ""
@@ -210,7 +210,7 @@
                     "default_value": "",
                     "placeholder": "",
                     "prepend": "",
-                    "append": "",
+                    "append": "jours",
                     "min": "",
                     "max": "",
                     "step": ""
@@ -235,6 +235,65 @@
                     "maxlength": ""
                 }
             ]
+        },
+        {
+            "key": "field_5b6d54a10381f",
+            "label": "Nombre de personnes",
+            "name": "group_peoples",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_5b6d54b703820",
+                    "label": "Minimum",
+                    "name": "peoples_min",
+                    "type": "number",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "min": "",
+                    "max": "",
+                    "step": ""
+                },
+                {
+                    "key": "field_5b6d54c303821",
+                    "label": "Maximum",
+                    "name": "peoples_max",
+                    "type": "number",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "min": "",
+                    "max": "",
+                    "step": ""
+                }
+            ]
         }
     ],
     "location": [
@@ -254,5 +313,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Affiche le prix et la duré d'un séjour",
-    "modified": 1533882728
+    "modified": 1533885370
 }
