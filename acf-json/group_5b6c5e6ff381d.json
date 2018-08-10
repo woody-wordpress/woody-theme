@@ -3,9 +3,25 @@
     "title": "Informations séjour",
     "fields": [
         {
+            "key": "field_5b6d613b9fe7d",
+            "label": "Contenu",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
             "key": "field_5b6c670eb54f2",
             "label": "Prix",
-            "name": "group_price",
+            "name": "the_price",
             "type": "group",
             "instructions": "",
             "required": 0,
@@ -163,7 +179,7 @@
         {
             "key": "field_5b6c5e7cb54ee",
             "label": "Durée",
-            "name": "group_duration",
+            "name": "the_duration",
             "type": "group",
             "instructions": "",
             "required": 0,
@@ -239,7 +255,7 @@
         {
             "key": "field_5b6d54a10381f",
             "label": "Nombre de personnes",
-            "name": "group_peoples",
+            "name": "the_peoples",
             "type": "group",
             "instructions": "",
             "required": 0,
@@ -294,6 +310,104 @@
                     "step": ""
                 }
             ]
+        },
+        {
+            "key": "field_5b6d7edd22621",
+            "label": "Tracé GPS",
+            "name": "trace_gps",
+            "type": "file",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": "kml, kmz, gpx, json"
+        },
+        {
+            "key": "field_5b6d61489fe7e",
+            "label": "Mise en page",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5b6d616a9fe7f",
+            "label": "Template",
+            "name": "tripinfos_woody_tpl",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": [],
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_5b6d84d91944f",
+            "label": "Options avancées",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
+            "key": "field_5b6d851219450",
+            "label": "Couleur de fond",
+            "name": "tripinfos_background_color",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "bg-primary": "Couleur principale",
+                "bg-secondary": "Couleur secondaire",
+                "bg-black": "Noir",
+                "bg-darkgray": "Gris foncé",
+                "bg-lightgray": "Gris clair"
+            },
+            "allow_null": 1,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value"
         }
     ],
     "location": [
@@ -313,5 +427,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Affiche le prix et la duré d'un séjour",
-    "modified": 1533885370
+    "modified": 1533898056
 }

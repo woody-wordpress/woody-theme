@@ -299,11 +299,11 @@ function rc_is($val, $keys = array(), $default = null)
 }
 
 /**
- * [rc_dsm Debug]
+ * [rcd Debug]
  * @param  [type] $val     [Valeur à debug]
  * @param  bool   $exit    [Force l'affichage du debug si vrai]
  */
-function rc_dsm($val, $exit = false, $pre = true)
+function rcd($val, $exit = false, $pre = true)
 {
     if ($pre) {
         print '<pre style="background:lightblue">';
@@ -316,11 +316,6 @@ function rc_dsm($val, $exit = false, $pre = true)
     if ($exit) {
         exit();
     }
-}
-
-function rcd($val, $exit = false, $pre = true)
-{
-    return rc_dsm($val, $exit, $pre);
 }
 
 /**

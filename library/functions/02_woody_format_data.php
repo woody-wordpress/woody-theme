@@ -82,7 +82,9 @@ function getAutoFocus_data($the_post, $query_form)
             $data = [];
             $post = Timber::get_post($post->ID);
             $status = $post->post_status;
-            if($post->post_status === 'draft') continue;
+            if ($post->post_status === 'draft') {
+                continue;
+            }
             $data = getPagePreview($query_form, $post);
             $the_items['items'][$key] = $data;
         }
@@ -114,7 +116,9 @@ function getManualFocus_data($items)
         } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content'])) {
             $item = $item_wrapper['existing_content'];
             $status = $item['content_selection']->post_status;
-            if($status === 'draft') continue;
+            if ($status === 'draft') {
+                continue;
+            }
             $the_items['items'][$key] = getExistingPreview($item);
         }
     }
@@ -208,17 +212,17 @@ function getManualFocus_data($items)
          $data['pretitle'] = getFieldAndFallback($item, 'focus_pretitle', 'pretitle');
      }
      if (in_array('subtitle', $item_wrapper['display_elements'])) {
-        $data['subtitle'] = getFieldAndFallback($item, 'focus_subtitle', 'subtitle');
+         $data['subtitle'] = getFieldAndFallback($item, 'focus_subtitle', 'subtitle');
      }
      if (in_array('icon', $item_wrapper['display_elements'])) {
-        $data['icon'] = getFieldAndFallback($item, 'focus_icon', 'icon');
+         $data['icon'] = getFieldAndFallback($item, 'focus_icon', 'icon');
      }
      if (in_array('description', $item_wrapper['display_elements'])) {
-        $data['description'] = getFieldAndFallback($item, 'focus_description', 'description');
+         $data['description'] = getFieldAndFallback($item, 'focus_description', 'description');
      }
 
-    $data['img'] = getFieldAndFallback($item, 'focus_img', 'field_5b0e5ddfd4b1b');
-    $data['link']['url'] = $item->get_path();
+     $data['img'] = getFieldAndFallback($item, 'focus_img', 'field_5b0e5ddfd4b1b');
+     $data['link']['url'] = $item->get_path();
 
      return $data;
  }
@@ -235,18 +239,19 @@ function getManualFocus_data($items)
  * @return   data - Un tableau de données
  *
  */
- function getFieldAndFallback($item, $field, $fallback){
-    $value = [];
+ function getFieldAndFallback($item, $field, $fallback)
+ {
+     $value = [];
 
-    if (!empty($item->get_field($field))) {
-             $value = $item->get_field($field);
-    } elseif (!empty($item->get_field($fallback))) {
-        $value = $item->get_field($fallback);
-    } else{
-        $value = '';
-    }
+     if (!empty($item->get_field($field))) {
+         $value = $item->get_field($field);
+     } elseif (!empty($item->get_field($fallback))) {
+         $value = $item->get_field($fallback);
+     } else {
+         $value = '';
+     }
 
-    return $value;
+     return $value;
  }
 
 /**
@@ -347,7 +352,8 @@ function getManualFocus_data($items)
  * @return   attachements - Un tableau d'objets images au format "ACF"
  *
  */
-function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array()){
+function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array())
+{
 
     // On définit certains arguments par défaut pour la requête
     $default_args = [
@@ -376,7 +382,7 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
         )
     ];
 
-    $attachments = new WP_Query( $get_attachments );
+    $attachments = new WP_Query($get_attachments);
     $acf_attachements = [];
     foreach ($attachments->posts as $key => $attachment) {
         // On transforme chacune des images en objet image ACF pour être compatible avec le tpl Woody
@@ -398,31 +404,30 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
  *
  */
 
- function nestedGridsComponents($scope, $gridTplField, $uniqIid_prefix = ''){
-    $woodyComponents = Woody::getTwigsPaths();
+ function nestedGridsComponents($scope, $gridTplField, $uniqIid_prefix = '')
+ {
+     $woodyComponents = Woody::getTwigsPaths();
 
-    if(!empty($uniqIid_prefix)){
-        $scope['group_id'] = $uique_id . '-' . uniqid();
-    }
+     if (!empty($uniqIid_prefix)) {
+         $scope['group_id'] = $uique_id . '-' . uniqid();
+     }
 
-    foreach ($scope as $key => $grid) {
-        $grid_content = [];
-        if(!empty($uniqIid_prefix)){
-            $scope[$key]['el_id'] = $uique_id . '-' . uniqid();
-        }
+     foreach ($scope as $key => $grid) {
+         $grid_content = [];
+         if (!empty($uniqIid_prefix)) {
+             $scope[$key]['el_id'] = $uique_id . '-' . uniqid();
+         }
 
-       // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
-       if (!empty($grid['section_content'])) {
-
-           foreach ($grid['section_content'] as $layout) {
-
-               $grid_content['items'][] = Timber::compile($woodyComponents[$layout['woody_tpl']], $layout);
-            }
-            // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
-            $scope[$key]['section_content'] = Timber::compile($woodyComponents[$grid[$gridTplField]], $grid_content);
-       }
-    }
-    return $scope;
+         // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
+         if (!empty($grid['section_content'])) {
+             foreach ($grid['section_content'] as $layout) {
+                 $grid_content['items'][] = Timber::compile($woodyComponents[$layout['woody_tpl']], $layout);
+             }
+             // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
+             $scope[$key]['section_content'] = Timber::compile($woodyComponents[$grid[$gridTplField]], $grid_content);
+         }
+     }
+     return $scope;
  }
 
  /**
@@ -435,14 +440,15 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
  * @return   slugs - Un tableau de slugs de termes
  *
  */
-function getTermsSlugs($postId, $taxonomy, $implode = false){
+function getTermsSlugs($postId, $taxonomy, $implode = false)
+{
     $slugs = [];
     $terms = get_the_terms($postId, $taxonomy);
     foreach ($terms as $term) {
         $slugs[] = $term->slug;
     }
 
-    if($implode == true){
+    if ($implode == true) {
         $slugs = implode(' ', $slugs);
     }
 

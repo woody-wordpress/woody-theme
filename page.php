@@ -59,6 +59,13 @@ if ($page_type === 'playlist_tourism') {
     ************************ **/
     $playlist_conf_id = get_field('field_5b338ff331b17');
     $context['playlist_template'] = apply_filters('wp_hawwwai_sit_playlist_render', $playlist_conf_id, 'fr');
+} elseif ($page_type === 'trip') {
+    $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d');
+    //TODO: Gérer le fichier gps pour affichage s/ carte
+    if ($trip_infos['the_duration']['count_days']) {
+        $trip_infos['the_duration']['count_days'] = humanDays($trip_infos['the_duration']['count_days']);
+    }
+    $context['trip_infos'] = Timber::compile($context['woody_components'][$trip_infos['tripinfos_woody_tpl']], $trip_infos);
 } else {
     /** ************************
     * Compilation des sections
