@@ -64,8 +64,8 @@ Foundation.plugin(Equalizer, 'Equalizer');
 // import { Magellan } from 'foundation-sites/js/foundation.magellan';
 // Foundation.plugin(Magellan, 'Magellan');
 
-// import { OffCanvas } from 'foundation-sites/js/foundation.offcanvas';
-// Foundation.plugin(OffCanvas, 'OffCanvas');
+import { OffCanvas } from 'foundation-sites/js/foundation.offcanvas';
+Foundation.plugin(OffCanvas, 'OffCanvas');
 
 // import { Orbit } from 'foundation-sites/js/foundation.orbit';
 // Foundation.plugin(Orbit, 'Orbit');

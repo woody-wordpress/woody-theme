@@ -25,7 +25,7 @@
 @include foundation-responsive-embed;
 // @include foundation-label;
 // @include foundation-media-object;
-// @include foundation-off-canvas;
+@include foundation-off-canvas;
 // @include foundation-orbit;
 // @include foundation-pagination;
 // @include foundation-progress-bar;
@@ -49,5 +49,5 @@
 @import "./plugins/lightgallery";
 @import "./plugins/cookieconsent";
 @import "./plugins/swiper";
-// @import "logged-in/_index";
+@import "./plugins/leaflet";
 @import "woody";

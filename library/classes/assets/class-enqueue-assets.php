@@ -29,6 +29,11 @@ class WoodyTheme_Enqueue_Assets
 
         // CDN hosted jQuery placed in the header, as some plugins require that jQuery is loaded in the header.
         wp_enqueue_script('jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js', array(), '', true);
+        // Touristic maps libraries - TODO:try to call in packagist
+        wp_enqueue_script('leaflet', 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js', array(), '', true);
+        wp_enqueue_script('tangram', 'https://unpkg.com/tangram/dist/tangram.min.js', array(), '', true);
+        wp_enqueue_script('universal-map', 'https://api.tourism-system.com/render/assets/scripts/raccourci/universal-map.debug.js', array('jquery', 'leaflet', 'tangram'), '', true);
+
 
         // Add the comment-reply library on pages where it is necessary
         if (is_singular() && comments_open() && get_option('thread_comments')) {
