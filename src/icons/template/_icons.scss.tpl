@@ -1,11 +1,11 @@
 @font-face {
     font-family: "<%= fontName %>";
-    src: url('<%= fontPath %><%= fontName %>.eot<%= cacheBuster %>');
+    src: url('<%= fontPath %><%= fontName %>.eot<%= cacheBusterQueryString %>');
     src: url('<%= fontPath %><%= fontName %>.eot?<%= cacheBuster %>#iefix') format('eot'),
-        url('<%= fontPath %><%= fontName %>.woff2<%= cacheBuster %>') format('woff2'),
-        url('<%= fontPath %><%= fontName %>.woff<%= cacheBuster %>') format('woff'),
-        url('<%= fontPath %><%= fontName %>.ttf<%= cacheBuster %>') format('truetype'),
-        url('<%= fontPath %><%= fontName %>.svg<%= cacheBuster %>#<%= fontName %>') format('svg');
+        url('<%= fontPath %><%= fontName %>.woff2<%= cacheBusterQueryString %>') format('woff2'),
+        url('<%= fontPath %><%= fontName %>.woff<%= cacheBusterQueryString %>') format('woff'),
+        url('<%= fontPath %><%= fontName %>.ttf<%= cacheBusterQueryString %>') format('truetype'),
+        url('<%= fontPath %><%= fontName %>.svg<%= cacheBusterQueryString %>#<%= fontName %>') format('svg');
 }
 
 @mixin <%= cssClass%>-styles {

@@ -790,6 +790,29 @@
             }
         },
         {
+            "key": "field_5b72f56b6f4aa",
+            "label": "Icone woody",
+            "name": "woody_icon",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+            },
+            "default_value": [],
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 1,
+            "ajax": 1,
+            "return_format": "value",
+            "placeholder": ""
+        },
+        {
             "key": "field_5b59bc12e094d",
             "label": "Image",
             "name": "icon_img",
@@ -858,5 +881,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "En-tête générique avec Icône - Sur-titre - Titre - Sous-titre - Description",
-    "modified": 1532600492
+    "modified": 1534256519
 }

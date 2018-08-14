@@ -23,6 +23,7 @@ class WoodyTheme_ACF
 
         add_filter('plugin_action_links', array($this, 'disallowAcfDeactivation'), 10, 4);
         add_filter('acf/load_field/type=radio', array($this, 'woodyTplAcfLoadField'));
+        add_filter('acf/load_field/name=woody_icon', array($this, 'woodyIconLoadField'));
         add_filter('acf/load_field/name=focused_taxonomy_terms', array($this, 'focusedTaxonomyTermsLoadField'));
 
         // add_filter('acf/load_field/name=playlist_name', array($this, 'playlistNameLoadField'));
@@ -136,6 +137,21 @@ class WoodyTheme_ACF
             $tax = get_taxonomy($tax_machine_name);
             $tax_name = $tax->label;
             $field['choices'][$term->term_taxonomy_id] = $term->name . ' - ' . $tax_name;
+        }
+
+        return $field;
+    }
+
+    /**
+    * Benoit Bouchaud
+    * On remplit le select "icones" avec les woody-icons disponibles
+    */
+    public function woodyIconLoadField($field)
+    {
+        $icons = getWoodyIcons();
+
+        foreach ($icons as $key => $icon) {
+            $field['choices'][$key] = '<div class="wicon-woody-icons ' . $key . '"></div><div>' . $icon . '</div>';
         }
 
         return $field;
