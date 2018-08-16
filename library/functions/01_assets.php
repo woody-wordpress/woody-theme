@@ -25,11 +25,20 @@ function humanDays($number)
 function getWoodyIcons()
 {
     $the_icons = [];
-    $svg_icons = get_template_directory() . '/src/icons/svg';
 
-    $icon_finder = new Finder();
-    $icon_finder->files()->name('*.svg')->in($svg_icons);
-    foreach ($icon_finder as $key => $icon) {
+    $core_icons = woodyIconsFolder(get_template_directory() . '/src/icons/icons_set_01');
+    $site_icons = woodyIconsFolder(get_stylesheet_directory() . '/src/icons');
+
+    $the_icons = array_merge($core_icons, $site_icons);
+
+    return $the_icons;
+}
+
+function woodyIconsFolder($folder)
+{
+    $icons_finder = new Finder();
+    $icons_finder->files()->name('*.svg')->in($folder);
+    foreach ($icons_finder as $key => $icon) {
         $icon_name = str_replace('.svg', '', $icon->getRelativePathname());
         $icon_class = 'wicon-' . $icon_name;
         $icon_human_name = str_replace('-', ' ', $icon_name);

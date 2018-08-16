@@ -83,6 +83,7 @@ if ($page_type === 'playlist_tourism') {
         foreach ($sections as $key => $section) {
             $the_header = '';
             $the_footer = '';
+
             if (!empty($section['icon']) || !empty($section['pretitle']) || !empty($section['title']) || !empty($section['subtitle']) || !empty($section['description'])) {
                 $the_header = Timber::compile($context['woody_components']['section-section_header-tpl_01'], $section);
             }
@@ -117,6 +118,10 @@ if ($page_type === 'playlist_tourism') {
                             if (!empty($layout['button']['add_modal'])) {
                                 $layout['modal_id'] = 'cta-' . uniqid();
                             }
+
+                            // rcd($layout, true);
+
+
                             $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                         break;
                         case 'tabs_group':

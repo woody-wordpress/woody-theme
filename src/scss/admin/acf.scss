@@ -387,3 +387,13 @@
         color: #006799;
     }
 }
+
+// Selecteur d'icones woody
+.wicon-select {
+    display: flex;
+    align-items: center;
+    .wicon-woody-icons {
+        margin-right: 10px;
+        font-size: 14px;
+    }
+}
