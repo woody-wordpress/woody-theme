@@ -119,9 +119,6 @@ if ($page_type === 'playlist_tourism') {
                                 $layout['modal_id'] = 'cta-' . uniqid();
                             }
 
-                            // rcd($layout, true);
-
-
                             $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                         break;
                         case 'tabs_group':

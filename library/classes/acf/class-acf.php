@@ -23,7 +23,7 @@ class WoodyTheme_ACF
 
         add_filter('plugin_action_links', array($this, 'disallowAcfDeactivation'), 10, 4);
         add_filter('acf/load_field/type=radio', array($this, 'woodyTplAcfLoadField'));
-        add_filter('acf/load_field/name=selection', array($this, 'woodyIconLoadField'));
+        add_filter('acf/load_field/type=select', array($this, 'woodyIconLoadField'));
         add_filter('acf/load_field/name=focused_taxonomy_terms', array($this, 'focusedTaxonomyTermsLoadField'));
 
         // add_filter('acf/load_field/name=playlist_name', array($this, 'playlistNameLoadField'));
@@ -150,7 +150,6 @@ class WoodyTheme_ACF
     {
         if (strpos($field['name'], 'woody_icon') !== false) {
             $icons = getWoodyIcons();
-
             foreach ($icons as $key => $icon) {
                 $field['choices'][$key] = '<div class="wicon-select"><span class="wicon-woody-icons ' . $key . '"></span><span>' . $icon . '</span></div>';
             }
