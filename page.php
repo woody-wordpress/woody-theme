@@ -115,7 +115,7 @@ if ($page_type === 'playlist_tourism') {
                         break;
                         case 'call_to_action':
                             // On créé un id unique pour la modal si l'option pop-in est sélectionnée
-                            if (!empty($layout['button']['add_modal'])) {
+                            if (!empty($layout['cta_button_group']['add_modal'])) {
                                 $layout['modal_id'] = 'cta-' . uniqid();
                             }
 
