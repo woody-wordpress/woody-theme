@@ -413,14 +413,12 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
  {
      $woodyComponents = Woody::getTwigsPaths();
 
-     if (!empty($uniqIid_prefix)) {
-         $scope['group_id'] = $uique_id . '-' . uniqid();
-     }
+
 
      foreach ($scope as $key => $grid) {
          $grid_content = [];
-         if (!empty($uniqIid_prefix)) {
-             $scope[$key]['el_id'] = $uique_id . '-' . uniqid();
+         if (!empty($uniqIid_prefix) && is_numeric($key)) {
+             $scope[$key]['el_id'] = $uniqIid_prefix . '-' . uniqid();
          }
 
          // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
@@ -432,6 +430,10 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
              $scope[$key]['section_content'] = Timber::compile($woodyComponents[$grid[$gridTplField]], $grid_content);
          }
      }
+     if (!empty($uniqIid_prefix)) {
+         $scope['group_id'] = $uniqIid_prefix . '-' . uniqid();
+     }
+
      return $scope;
  }
 
