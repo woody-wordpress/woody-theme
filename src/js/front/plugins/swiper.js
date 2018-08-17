@@ -5,7 +5,7 @@ var $i = 0;
 
 $('.swiper-container').each(function() {
     var $this = $(this);
-    
+
     $this.addClass('swiper-' + $i);
 
     if (typeof($this.data('slides-per-view')) !== undefined) {
@@ -43,7 +43,6 @@ $('.swiper-container').each(function() {
 
     new Swiper('.swiper-' + $i, {
         // Optional parameters
-        // containerModifierClass : 'swiper-' + $i + '-', 
         slidesPerView: slidesPerView,
         spaceBetween: spaceBetween,
         freeMode: true,
@@ -62,8 +61,8 @@ $('.swiper-container').each(function() {
 
         // Navigation arrows
         navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
+            nextEl: '.' + $this.data('nav') + ' .swiper-button-next',
+            prevEl: '.' + $this.data('nav') + ' .swiper-button-prev',
         },
     });
 
