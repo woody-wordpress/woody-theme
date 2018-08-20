@@ -210,18 +210,24 @@ function getManualFocus_data($items)
      } elseif (!empty($item->get_title())) {
          $data['title'] = $item->get_title();
      }
-     if (in_array('pretitle', $item_wrapper['display_elements'])) {
-         $data['pretitle'] = getFieldAndFallback($item, 'focus_pretitle', 'pretitle');
+
+    //  rcd($item_wrapper['display_elements']);
+
+     if(is_array($item_wrapper['display_elements'])){
+        if (in_array('pretitle', $item_wrapper['display_elements'])) {
+            $data['pretitle'] = getFieldAndFallback($item, 'focus_pretitle', 'pretitle');
+        }
+        if (in_array('subtitle', $item_wrapper['display_elements'])) {
+            $data['subtitle'] = getFieldAndFallback($item, 'focus_subtitle', 'subtitle');
+        }
+        if (in_array('icon', $item_wrapper['display_elements'])) {
+            $data['icon'] = getFieldAndFallback($item, 'focus_icon', 'icon');
+        }
+        if (in_array('description', $item_wrapper['display_elements'])) {
+            $data['description'] = getFieldAndFallback($item, 'focus_description', 'description');
+        }
      }
-     if (in_array('subtitle', $item_wrapper['display_elements'])) {
-         $data['subtitle'] = getFieldAndFallback($item, 'focus_subtitle', 'subtitle');
-     }
-     if (in_array('icon', $item_wrapper['display_elements'])) {
-         $data['icon'] = getFieldAndFallback($item, 'focus_icon', 'icon');
-     }
-     if (in_array('description', $item_wrapper['display_elements'])) {
-         $data['description'] = getFieldAndFallback($item, 'focus_description', 'description');
-     }
+     
 
      $data['location'] = [];
      $data['location']['lat'] = (!empty($item->get_field('post_latitude'))) ? $item->get_field('post_latitude') : '';
