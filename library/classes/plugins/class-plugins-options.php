@@ -124,6 +124,16 @@ class WoodyTheme_Plugins_Options
             'ratio_square'          => ['active' => true, 'name' => 'Carr&eacute;'],
         ];
         $this->updateOption('yoimg_crop_settings', $yoimg_crop_settings);
+
+
+
+        // Update permalinks by posts titles
+        $permalink_options = [
+            'general' => [
+                'force_custom_slugs' => 1
+            ]
+        ];
+        $this->updateOption('permalink-manager', $permalink_options);
     }
 
     private function updateOption($option_name, $settings, $autoload = 'yes')
