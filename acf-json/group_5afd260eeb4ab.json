@@ -383,37 +383,6 @@
                             "min": "",
                             "max": ""
                         },
-                        "5b04455b46548": {
-                            "key": "5b04455b46548",
-                            "name": "manual_map",
-                            "label": "Carte géographique manuelle",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b04456446549",
-                                    "label": "Carte géographique manuelle",
-                                    "name": "manual_map",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b043b2171504"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "block",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
-                            ],
-                            "min": "",
-                            "max": ""
-                        },
                         "5b33a263d91e5": {
                             "key": "5b33a263d91e5",
                             "name": "playlist_bloc",
@@ -992,5 +961,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1533880575
+    "modified": 1534753771
 }
