@@ -18,7 +18,6 @@ class WoodyTheme_Plugins_Activation
         $this->activate_plugins = [
             'advanced-custom-fields-pro/acf.php',
             'timber-library/timber.php',
-            'advanced-custom-fields-font-awesome/acf-font-awesome.php',
             'bea-media-analytics/bea-media-analytics.php',
             'bea-sanitize-filename/bea-sanitize-filename.php',
             'minify-html-markup/minify-html.php',
