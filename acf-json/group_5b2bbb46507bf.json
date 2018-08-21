@@ -357,6 +357,30 @@
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0
+        },
+        {
+            "key": "field_5b7c2481185c9",
+            "label": "Marge interieure basse",
+            "name": "teaser_margin_bottom",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "padd-bottom-sm": "Petite",
+                "padd-bottom-md": "Moyenne",
+                "padd-bottom-lg": "Grande",
+                "padd-bottom-xlg": "Très grande"
+            },
+            "allow_null": 0,
+            "default_value": "padd-bottom-md",
+            "layout": "horizontal",
+            "return_format": "value"
         }
     ],
     "location": [
@@ -376,5 +400,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Les infos principales de la page + la possibilité d'ajouter les liens de partage et d'ajout aux favoris",
-    "modified": 1533544318
+    "modified": 1534856607
 }

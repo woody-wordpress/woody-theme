@@ -25,10 +25,25 @@ if (!empty($page_teaser)) {
     if (!empty($page_teaser['page_teaser_display_title'])) {
         $page_teaser['page_teaser_title'] = $context['post']->post_title;
     }
-    $page_teaser['classes'] = $page_teaser['background_img_opacity'] . ' ' . $page_teaser['background_color'];
-    if (!empty($page_teaser['background_img'])) {
-        $page_teaser['classes'] = $page_teaser['classes'] . ' isRel';
+    $page_teaser['the_classes'] = [];
+    if (!empty($page_teaser['background_img_opacity'])) {
+        $page_teaser['the_classes'][] = $page_teaser['background_img_opacity'];
     }
+
+    if (!empty($page_teaser['background_color'])) {
+        $page_teaser['the_classes'][] = $page_teaser['background_color'];
+    }
+
+    if (!empty($page_teaser['teaser_margin_bottom'])) {
+        $page_teaser['the_classes'][] = $page_teaser['teaser_margin_bottom'];
+    }
+
+    if (!empty($page_teaser['background_img'])) {
+        $page_teaser['the_classes'][] = 'isRel';
+    }
+
+    $page_teaser['classes'] = implode(' ', $page_teaser['the_classes']);
+
     $page_teaser['breadcrumb'] = yoast_breadcrumb('<div class="breadcrumb-wrapper padd-top-sm padd-bottom-sm">', '</div>', false);
 
     $context['page_teaser'] = Timber::compile($context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
