@@ -815,7 +815,8 @@
                                 "padd-top-none": "Aucune",
                                 "padd-top-sm": "Petite",
                                 "padd-top-md": "Moyenne",
-                                "padd-top-lg": "Grande"
+                                "padd-top-lg": "Grande",
+                                "padd-top-xlg": "Très grande"
                             },
                             "allow_null": 0,
                             "default_value": "padd-top-md",
@@ -839,7 +840,8 @@
                                 "padd-bottom-none": "Aucune",
                                 "padd-bottom-sm": "Petite",
                                 "padd-bottom-md": "Moyenne",
-                                "padd-bottom-lg": "Grande"
+                                "padd-bottom-lg": "Grande",
+                                "padd-bottom-xlg": "Très grande"
                             },
                             "allow_null": 0,
                             "default_value": "padd-bottom-md",
@@ -880,7 +882,8 @@
                                 "marg-top-none": "Aucune",
                                 "marg-top-sm": "Petite",
                                 "marg-top-md": "Moyenne",
-                                "marg-top-lg": "Grande"
+                                "marg-top-lg": "Grande",
+                                "marg-top-xlg": "Très grande"
                             },
                             "allow_null": 0,
                             "default_value": "marg-top-none",
@@ -904,7 +907,8 @@
                                 "marg-bottom-none": "Aucune",
                                 "marg-bottom-sm": "Petite",
                                 "marg-bottom-md": "Moyenne",
-                                "marg-bottom-lg": "Grande"
+                                "marg-bottom-lg": "Grande",
+                                "marg-bottom-xlg": "Très grande"
                             },
                             "allow_null": 0,
                             "default_value": "marg-bottom-none",
@@ -961,5 +965,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1534753771
+    "modified": 1534858195
 }
