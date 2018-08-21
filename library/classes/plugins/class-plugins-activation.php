@@ -32,7 +32,7 @@ class WoodyTheme_Plugins_Activation
             'wp-nested-pages/nestedpages.php',
             'members/members.php',
             'hawwwai-plugin/hawwwai.php',
-            'single-sign-on-client/wposso.php',
+            'single-sign-on-client/wposso.php'
         ];
 
         $this->dev_plugins = [

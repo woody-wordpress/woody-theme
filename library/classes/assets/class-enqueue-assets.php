@@ -43,7 +43,7 @@ class WoodyTheme_Enqueue_Assets
 
     public function enqueueAssets()
     {
-        // Enqueue Founation scripts
+        // Enqueue the main Scripts
         wp_enqueue_script('main-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('js/main.js'), 'jquery', '', true);
 
         // Enqueue the main Stylesheet.
@@ -53,12 +53,11 @@ class WoodyTheme_Enqueue_Assets
 
     public function enqueueAdminAssets()
     {
-        // Enqueue Foundation scripts
-        //wp_enqueue_script('admin-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('js/main.js'), 'jquery', '', true);
+        // Enqueue the main Scripts
+        wp_enqueue_script('admin-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('js/admin.js'), array('jquery'), false, true);
 
         // Enqueue the main Stylesheet.
         wp_enqueue_style('admin-stylesheet', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('css/admin.css'), array(), '', 'all');
-        wp_enqueue_script('admin-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('js/admin.js'), 'jquery', false, true);
     }
 
     private function assetPath($filename)
