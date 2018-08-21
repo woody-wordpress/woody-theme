@@ -128,17 +128,23 @@ class WoodyTheme_Plugins_Options
 
 
         // Update permalinks by posts titles
-        $permalink_options = [
-            'general' => [
-                'force_custom_slugs' => 1
-            ]
-        ];
+        $permalink_options = ['general' => ['force_custom_slugs' => 1]];
         $this->updateOption('permalink-manager', $permalink_options);
+
+        // Set default options for NestedPages
+        $this->updateOption('nestedpages_menusync', 'nosync');
+        $this->updateOption('nestedpages_disable_menu', 'true');
+        $nestedpages_roles = ['editor'];
+        $this->updateOption('nestedpages_allowsorting', $nestedpages_roles);
     }
 
     private function updateOption($option_name, $settings, $autoload = 'yes')
     {
         $option = get_option($option_name, array());
+
+        if (empty($option)) {
+            $option = array();
+        }
 
         if (is_array($settings)) {
             $new_option = array_replace_recursive($option, $settings);
