@@ -27,7 +27,7 @@ class WoodyTheme_Taxonomy
             'page',
             array(
                 'label' => 'Type de publication',
-                'labels' => array(
+                'labels' => [
                     'name' => 'Types de publications',
                     'singular_name' => 'Type de publication',
                     'menu_name' => 'Type de publication',
@@ -39,9 +39,15 @@ class WoodyTheme_Taxonomy
                     'new_item_name' => 'Nouveau type de publication',
                     'search_items' => 'Rechercher parmi les types de publications',
                     'popular_items' => 'Types de publications les plus utilisées'
-                ),
+                ],
                 'hierarchical' => false,
-                'show_ui' => false //TODO passer à false quand les types de publications seront définitifs
+                'show_ui' => false,
+                'capabilities' => [
+                    'manage_terms' => false,
+                    'edit_terms' => false,
+                    'delete_terms' => false,
+                    'assign_terms' => true
+                ]
             )
         );
 
@@ -55,11 +61,11 @@ class WoodyTheme_Taxonomy
 
         // On créé la taxonomie "Thématiques"
         register_taxonomy(
-            'page_themes',
-            'page',
+            'themes',
+            ['page', 'attachment'],
             array(
                 'label' => 'Thématiques',
-                'labels' => array(
+                'labels' => [
                     'name' => 'Thématiques',
                     'singular_name' => 'Thématique',
                     'menu_name' => 'Thématiques',
@@ -71,19 +77,25 @@ class WoodyTheme_Taxonomy
                     'new_item_name' => 'Nouvelle thématique',
                     'search_items' => 'Rechercher parmi les thématiques',
                     'popular_items' => 'Thématiques les plus utilisées'
-                ),
+                ],
                 'hierarchical' => true,
-                'show_ui' => true
+                'show_ui' => true,
+                'capabilities' => [
+                    'manage_terms' => true,
+                    'edit_terms' => true,
+                    'delete_terms' => true,
+                    'assign_terms' => true
+                ]
             )
         );
 
         // On créé la taxonomie "Lieux"
         register_taxonomy(
-            'page_places',
-            'page',
+            'places',
+            ['page', 'attachment'],
             array(
                 'label' => 'Lieux',
-                'labels' => array(
+                'labels' => [
                     'name' => 'Lieux',
                     'singular_name' => 'Lieu',
                     'menu_name' => 'Lieux',
@@ -95,19 +107,25 @@ class WoodyTheme_Taxonomy
                     'new_item_name' => 'Nouveau lieu',
                     'search_items' => 'Rechercher parmi les lieux',
                     'popular_items' => 'Lieux les plus utilisés'
-                ),
+                ],
                 'hierarchical' => true,
-                'show_ui' => true
+                'show_ui' => true,
+                'capabilities' => [
+                    'manage_terms' => true,
+                    'edit_terms' => true,
+                    'delete_terms' => true,
+                    'assign_terms' => true
+                ]
             )
         );
 
         // On créé la taxonomie "Saisons"
         register_taxonomy(
-            'page_seasons',
-            'page',
+            'seasons',
+            ['page', 'attachment'],
             array(
                 'label' => 'Saisons',
-                'labels' => array(
+                'labels' => [
                     'name' => 'Saisons',
                     'singular_name' => 'Saison',
                     'menu_name' => 'Saisons',
@@ -119,17 +137,24 @@ class WoodyTheme_Taxonomy
                     'new_item_name' => 'Nouvelle saison',
                     'search_items' => 'Rechercher parmi les saisons',
                     'popular_items' => 'Saisons les plus utilisées'
-                ),
-                'hierarchical' => false,
-                'show_ui' => false
+                ],
+                'hierarchical' => true,
+                'show_ui' => true,
+                'show_in_menu' => false,
+                'capabilities' => [
+                    'manage_terms' => false,
+                    'edit_terms' => false,
+                    'delete_terms' => false,
+                    'assign_terms' => true
+                ]
             )
         );
 
         // On inclut les termes génériques à la taxo
-        wp_insert_term('Été', 'page_seasons', array('slug' => 'summer'));
-        wp_insert_term('Printemps', 'page_seasons', array('slug' => 'spring'));
-        wp_insert_term('Automne', 'page_seasons', array('slug' => 'autumn'));
-        wp_insert_term('Hiver', 'page_seasons', array('slug' => 'winter'));
+        wp_insert_term('Été', 'seasons', array('slug' => 'summer'));
+        wp_insert_term('Printemps', 'seasons', array('slug' => 'spring'));
+        wp_insert_term('Automne', 'seasons', array('slug' => 'autumn'));
+        wp_insert_term('Hiver', 'seasons', array('slug' => 'winter'));
 
         // On créé la taxonomie "Types de média"
         register_taxonomy(
@@ -137,7 +162,7 @@ class WoodyTheme_Taxonomy
             'attachment',
             array(
                 'label' => 'Types de média',
-                'labels' => array(
+                'labels' => [
                     'name' => 'Types de média',
                     'singular_name' => 'Type de média',
                     'menu_name' => 'Types de média',
@@ -149,9 +174,15 @@ class WoodyTheme_Taxonomy
                     'new_item_name' => 'Nouveau type de média',
                     'search_items' => 'Rechercher parmi les types de média',
                     'popular_items' => 'Types de média les plus utilisés'
-                ),
+                ],
                 'hierarchical' => false,
-                'show_ui' => false
+                'show_ui' => false,
+                'capabilities' => [
+                    'manage_terms' => false,
+                    'edit_terms' => false,
+                    'delete_terms' => false,
+                    'assign_terms' => true
+                ]
             )
         );
 
@@ -161,7 +192,7 @@ class WoodyTheme_Taxonomy
             'attachment',
             array(
                 'label' => 'Hashtags',
-                'labels' => array(
+                'labels' => [
                     'name' => 'Hashtags',
                     'singular_name' => 'Hashtag',
                     'menu_name' => 'Hashtags',
@@ -172,9 +203,15 @@ class WoodyTheme_Taxonomy
                     'new_item_name' => 'Nouveau hashtag',
                     'search_items' => 'Rechercher parmi les hashtags',
                     'popular_items' => 'Hashtags les plus utilisés'
-                ),
+                ],
                 'hierarchical' => false,
-                'show_ui' => true
+                'show_ui' => true,
+                'capabilities' => [
+                    'manage_terms' => true,
+                    'edit_terms' => true,
+                    'delete_terms' => true,
+                    'assign_terms' => true
+                ]
             )
         );
     }
