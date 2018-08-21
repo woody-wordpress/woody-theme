@@ -98,32 +98,6 @@
     }
 }
 
-#acf-group_5afd260eeb4ab,
-#acf-group_5b052bbee40a4 {
-    .acf-tab-group {
-        li:nth-of-type(1) a {
-            &:before {
-                content: '\f119';
-            }
-        }
-        li:nth-of-type(2) a {
-            &:before {
-                content: '\f100';
-            }
-        }
-    }
-}
-
-#acf-group_5afd260eeb4ab {
-    .acf-tab-group {
-        li:nth-of-type(3) a {
-            &:before {
-                content: '\f134';
-            }
-        }
-    }
-}
-
 // On ajoute une ombre aux layouts ouverts pour les mettre en avant
 // Et on change les couleurs de fond des lignes des répéteurs
 .acf-repeater {
