@@ -305,7 +305,7 @@
                                 "class": "hide-label",
                                 "id": ""
                             },
-                            "default_value": "",
+                            "default_value": "Découvrir",
                             "placeholder": "Texte du bouton \"Lire la suite\"",
                             "prepend": "",
                             "append": "",
@@ -436,5 +436,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1533560660
+    "modified": 1534937955
 }

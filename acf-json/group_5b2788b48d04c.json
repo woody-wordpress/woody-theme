@@ -136,10 +136,11 @@
                 "id": ""
             },
             "choices": {
-                "9": "Automne - Saisons",
-                "7": "Été - Saisons",
-                "10": "Hiver - Saisons",
-                "8": "Printemps - Saisons"
+                "19": "Automne - Saisons",
+                "17": "Été - Saisons",
+                "20": "Hiver - Saisons",
+                "18": "Printemps - Saisons",
+                "16": "Instagram - Types de média"
             },
             "default_value": [],
             "allow_null": 0,
@@ -174,25 +175,6 @@
             "return_format": "value"
         },
         {
-            "key": "field_5b27a0ad9d7c6",
-            "label": "Afficher les étiquettes sur les contenus",
-            "name": "focused_terms_labels",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "30",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
             "key": "field_5b27a3d703e44",
             "label": "Nombre d'éléments à afficher",
             "name": "focused_count",
@@ -212,6 +194,25 @@
             "min": 1,
             "max": "",
             "step": ""
+        },
+        {
+            "key": "field_5b7d67f609abc",
+            "label": "Textes des boutons \"Lire la suite\"",
+            "name": "link_label",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Découvrir",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         },
         {
             "key": "field_5b2917f0ff061",
@@ -334,5 +335,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1533817727
+    "modified": 1534938219
 }
