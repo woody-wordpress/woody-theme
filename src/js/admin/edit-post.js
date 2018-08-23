@@ -77,4 +77,49 @@ $('#post').each(function() {
     acf.addAction('append_field/key=field_5b22415792db0', countElements);
     acf.addAction('remove_field/key=field_5b22415792db0', countElements);
 
-})
+    var getAutorFocusData = function($parent) {
+        var query_params = {};
+
+        $parent.find('input:checked, select option').each(function() {
+            var name = $(this).parents('.acf-field').data('name');
+
+            if (!query_params[name]) query_params[name] = [];
+            query_params[name].push($(this).val());
+
+            if ($(this).attr('type') == 'text') {
+                $(this).keyup(function() {
+                    query_params[name].push($(this).val());
+                });
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: '/wp-json/woody/autofocus-count',
+            data: query_params,
+            success: function(data) {
+                console.log('Endpoint exists');
+                console.log(data)
+                return data;
+            },
+            error: function() {
+                console.log('Endpoint doesn\'t exists');
+            },
+        });
+    }
+
+    var getAutoFocusQuery = function(field) {
+        var query_params = null;
+        var $parent = field.$el.parent();
+        getAutorFocusData($parent);
+
+        $parent.find('input, select, option').change(function() {
+            getAutorFocusData($parent);
+        });
+    }
+
+    acf.addAction('ready_field/key=field_5b27899284ed4', getAutoFocusQuery);
+    acf.addAction('append_field/key=field_5b27899284ed4', getAutoFocusQuery);
+    acf.addAction('remove_field/key=field_5b27899284ed4', getAutoFocusQuery);
+
+});
