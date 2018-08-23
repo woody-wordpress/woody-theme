@@ -334,27 +334,28 @@ function getManualFocus_data($items)
  function getAcfGroupFields($group_id)
  {
      global $post;
-     $post_id = $post->ID;
+     if (!empty($post)) {
+         $post_id = $post->ID;
 
-     $page_teaser_fields = array();
+         $page_teaser_fields = array();
 
-     $fields = acf_get_fields($group_id);
+         $fields = acf_get_fields($group_id);
 
-     if (!empty($fields)) {
-         foreach ($fields as $field) {
-             $field_value = false;
-             if (!empty($field['name'])) {
-                 $field_value = get_field($field['name'], $post_id);
-             }
+         if (!empty($fields)) {
+             foreach ($fields as $field) {
+                 $field_value = false;
+                 if (!empty($field['name'])) {
+                     $field_value = get_field($field['name'], $post_id);
+                 }
 
-             if ($field_value && !empty($field_value)) {
-                 $page_teaser_fields[$field['name']] = $field_value;
+                 if ($field_value && !empty($field_value)) {
+                     $page_teaser_fields[$field['name']] = $field_value;
+                 }
              }
          }
+
+         return $page_teaser_fields;
      }
-
-
-     return $page_teaser_fields;
  }
 
 
@@ -463,13 +464,16 @@ function getTermsSlugs($postId, $taxonomy, $implode = false)
 {
     $slugs = [];
     $terms = get_the_terms($postId, $taxonomy);
-    foreach ($terms as $term) {
-        $slugs[] = $term->slug;
+    if (!empty($terms)) {
+        foreach ($terms as $term) {
+            $slugs[] = $term->slug;
+        }
+
+        if ($implode == true) {
+            $slugs = implode(' ', $slugs);
+        }
     }
 
-    if ($implode == true) {
-        $slugs = implode(' ', $slugs);
-    }
 
     return $slugs;
 }
