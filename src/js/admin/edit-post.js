@@ -69,7 +69,7 @@ $('#post').each(function() {
             setTimeout(() => {
                 var count = $(this).find('.acf-table .acf-row').length - 1;
                 fitChoiceAction($bigparent, count);
-            }, 1000);
+            }, 2000);
         });
     };
 
