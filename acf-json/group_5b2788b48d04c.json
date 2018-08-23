@@ -198,7 +198,7 @@
         {
             "key": "field_5b7d67f609abc",
             "label": "Textes des boutons \"Lire la suite\"",
-            "name": "link_label",
+            "name": "links_label",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -208,7 +208,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "Découvrir",
+            "default_value": "Lire la suite",
             "placeholder": "",
             "prepend": "",
             "append": "",
@@ -335,5 +335,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1534938219
+    "modified": 1534943636
 }

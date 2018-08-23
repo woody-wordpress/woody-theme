@@ -86,9 +86,8 @@ function getAutoFocus_data($the_post, $query_form)
                 continue;
             }
             $data = getPagePreview($query_form, $post);
-
             // On ajoute un texte dans le bouton "Lire la suite" s'il a été saisi
-            $data['link']['title'] = (!empty($the_post->get_field('field_5b7d67f609abc'))) ? $the_post->get_field('field_5b7d67f609abc') : '';
+            $data['link']['title'] = (!empty($query_form['links_label'])) ? $query_form['links_label'] : '';
 
             $the_items['items'][$key] = $data;
         }
