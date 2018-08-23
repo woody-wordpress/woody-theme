@@ -15,12 +15,11 @@
         justify-content: center;
         align-items: flex-start;
         >label {
-
+            width: 100%;
             margin: 10px;
             opacity: .75;
             transition: .3s;
             background-color: #eee;
-
             &:hover {
                 opacity: .95;
             }
@@ -39,6 +38,10 @@
     padding: 6px;
     border: 1px solid #0073aa; // box-shadow: 0 2px 0 #fff;
     transition: transform .3s;
+    >img {
+        width: 100%;
+        height: auto;
+    }
     .tpl-title {
         margin: 10px auto 5px auto;
         max-width: 90%;
