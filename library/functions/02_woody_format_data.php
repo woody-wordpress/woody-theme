@@ -11,7 +11,7 @@
  *
  */
 
-function getAutoFocus_data($the_post, $query_form)
+function getAutoFocus_data($the_post, $query_form, $count_items = false)
 {
     $the_items = [];
 
@@ -74,26 +74,29 @@ function getAutoFocus_data($the_post, $query_form)
 
     // On créé la wp_query avec les paramètres définis
     $focused_posts = new WP_Query($the_query);
-    // rcd($the_query, true);
 
-    // On transforme la donnée des posts récupérés pour coller aux templates de blocs Woody
-    if (!empty($focused_posts->posts)) {
-        foreach ($focused_posts->posts as $key => $post) {
-            $data = [];
-            $post = Timber::get_post($post->ID);
-            $status = $post->post_status;
-            if ($post->post_status === 'draft') {
-                continue;
+    if (!empty($count_items)) {
+        return count($focused_posts);
+    } else {
+        // On transforme la donnée des posts récupérés pour coller aux templates de blocs Woody
+        if (!empty($focused_posts->posts)) {
+            foreach ($focused_posts->posts as $key => $post) {
+                $data = [];
+                $post = Timber::get_post($post->ID);
+                $status = $post->post_status;
+                if ($post->post_status === 'draft') {
+                    continue;
+                }
+                $data = getPagePreview($query_form, $post);
+                // On ajoute un texte dans le bouton "Lire la suite" s'il a été saisi
+                $data['link']['title'] = (!empty($query_form['links_label'])) ? $query_form['links_label'] : '';
+
+                $the_items['items'][$key] = $data;
             }
-            $data = getPagePreview($query_form, $post);
-            // On ajoute un texte dans le bouton "Lire la suite" s'il a été saisi
-            $data['link']['title'] = (!empty($query_form['links_label'])) ? $query_form['links_label'] : '';
-
-            $the_items['items'][$key] = $data;
         }
-    }
 
-    return $the_items;
+        return $the_items;
+    }
 }
 
 /**

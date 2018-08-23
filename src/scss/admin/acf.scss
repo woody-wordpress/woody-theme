@@ -15,23 +15,128 @@
         justify-content: center;
         align-items: flex-start;
         >label {
-            padding: 6px;
+
             margin: 10px;
             opacity: .75;
-            border-radius: 3px;
             transition: .3s;
-            border: 1px dotted #c3c3c3;
-            box-shadow: 0 2px 0 #fff;
+            background-color: #eee;
+
             &:hover {
                 opacity: .95;
-                background-color: #eee;
             }
             &.selected {
                 border-color: #0073aa #006799 #006799;
                 background-color: #0085ba;
                 opacity: 1;
-                box-shadow: 0 2px 0 #006799;
             }
+        }
+    }
+}
+
+// On applique du style aux descritpions et titres des templates dans les champs woody_tpl
+.tpl-choice-wrapper {
+    position: relative;
+    padding: 6px;
+    border: 1px solid #0073aa; // box-shadow: 0 2px 0 #fff;
+    transition: transform .3s;
+    .tpl-title {
+        margin: 10px auto 5px auto;
+        max-width: 90%;
+        line-height: 1.2em;
+    }
+    .toggle-desc {
+        color: #006799;
+        transition: color .3s;
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+    .tpl-desc {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        background-color: #23282d;
+        color: #fff;
+        width: 320px;
+        max-height: 320px;
+        overflow-y: scroll;
+        box-shadow: 0 3px 24px rgba( 0, 0, 0, .3);
+        padding: 20px;
+        z-index: 100000;
+        line-height: 1.2em;
+        .close-desc {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            transition: color .3s;
+            &:hover {
+                color: #006799;
+            }
+        }
+        .tpl-title {
+            margin-bottom: 1.67em;
+            margin-top: 0;
+        }
+    }
+    .desc-backdrop {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 99999;
+    }
+    &:before {
+        font-family: dashicons;
+        display: block;
+        position: absolute;
+        line-height: 1em;
+        top: -6px;
+        right: -6px;
+    }
+    &.fit {
+        &:before {
+            content: '\f147';
+            background-color: #0073aa;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 14px;
+            padding: 3px 3px 2px 2px;
+        }
+        &:hover {
+            box-shadow: 0 5px 4px rgba(#000, .15);
+            transform: translateY(-2px);
+        }
+    }
+    &.notfit {
+        border: 1px dotted lighten(#000, 60%);
+
+        &:before {
+            content: '\f534';
+            color: #f2a49d;
+            font-size: 20px;
+        }
+        >img {
+            opacity: .4;
+        }
+        .toggle-desc,
+        .tpl-title {
+            color: lighten(#000, 80%);
+        }
+
+    }
+}
+
+.selected .tpl-choice-wrapper {
+    .tpl-title,
+    .toggle-desc {
+        color: #fff;
+    }
+    &.fit {
+        &:hover {
+            box-shadow: none;
+            transform: translateY(0);
         }
     }
 }
@@ -263,66 +368,6 @@
         .dashicons {
             margin-right: 8px;
         }
-    }
-}
-
-// On applique du style aux descritpions et titres des templates dans les champs woody_tpl
-.tpl-choice-wrapper {
-    position: relative;
-    .tpl-title {
-        margin: 10px auto 5px auto;
-        max-width: 90%;
-        line-height: 1.2em;
-    }
-    .toggle-desc {
-        color: #006799;
-        transition: color .3s;
-        &:hover {
-            transform: scale(1.1);
-        }
-    }
-    .tpl-desc {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translateX(-50%) translateY(-50%);
-        background-color: #23282d;
-        color: #fff;
-        width: 320px;
-        max-height: 320px;
-        overflow-y: scroll;
-        box-shadow: 0 3px 24px rgba( 0, 0, 0, .3);
-        padding: 20px;
-        z-index: 100000;
-        line-height: 1.2em;
-        .close-desc {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            transition: color .3s;
-            &:hover {
-                color: #006799;
-            }
-        }
-        .tpl-title {
-            margin-bottom: 1.67em;
-            margin-top: 0;
-        }
-    }
-    .desc-backdrop {
-        width: 100vw;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 99999;
-    }
-}
-
-.selected .tpl-choice-wrapper {
-    .tpl-title,
-    .toggle-desc {
-        color: #fff;
     }
 }
 
