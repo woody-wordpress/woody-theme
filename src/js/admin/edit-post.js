@@ -43,13 +43,17 @@ $('#post').each(function() {
         $bigparent.find('.tpl-choice-wrapper').each(function() {
             var $this = $(this);
 
+            var fittedfor = $this.data('fittedfor');
+            var acceptsmax = $this.data('acceptsmax');
+            if (fittedfor == 'all') fittedfor = 0;
+
             // On affiche un état en fonction du nombre d'élément
-            if (!$this.hasClass('fittedfor-' + count) && !$this.hasClass('fittedfor-all')) {
-                $this.removeClass('fit');
-                $this.addClass('notfit');
-            } else {
+            if (count >= fittedfor && count <= acceptsmax) {
                 $this.removeClass('notfit');
                 $this.addClass('fit');
+            } else {
+                $this.removeClass('fit');
+                $this.addClass('notfit');
             }
         });
     }
@@ -65,7 +69,7 @@ $('#post').each(function() {
             setTimeout(() => {
                 var count = $(this).find('.acf-table .acf-row').length - 1;
                 fitChoiceAction($bigparent, count);
-            }, 4000);
+            }, 1000);
         });
     };
 

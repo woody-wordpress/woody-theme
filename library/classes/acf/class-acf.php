@@ -65,19 +65,19 @@ class WoodyTheme_ACF
 
                     $fitted_for = (!empty($component['items_count'][0]['fitted_for'])) ? $component['items_count'][0]['fitted_for'] : '';
                     $accepts_max = (!empty($component['items_count'][0]['accepts_max'])) ? $component['items_count'][0]['accepts_max'] : '';
-                    $count_classes = [];
+                    $count_data = [];
 
                     if (!empty($fitted_for)) {
-                        $count_classes[] = 'fittedfor-' . $fitted_for;
+                        $count_data[] = 'data-fittedfor="' . $fitted_for . '"';
                     }
 
                     if (!empty($accepts_max)) {
-                        $count_classes[] = 'acceptsmax-' . $accepts_max;
+                        $count_data[] = 'data-acceptsmax="' . $accepts_max . '"';
                     }
 
-                    $count_classes = implode(' ', $count_classes);
+                    $count_data = implode(' ', $count_data);
 
-                    $field['choices'][$key] = '<div class="tpl-choice-wrapper ' . $count_classes . '">
+                    $field['choices'][$key] = '<div class="tpl-choice-wrapper" ' . $count_data . '>
                     <img class="img-responsive" src="' . get_stylesheet_directory_uri() . '/dist/img/woody/views/' . $component['thumbnails']['small'] . '" alt="' . $key . '" width="150" height="150" />
                     <h5 class="tpl-title">' . $tpl_name . '</h5>
                     <div class="dashicons dashicons-info toggle-desc"></div>
