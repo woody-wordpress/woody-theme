@@ -10,47 +10,63 @@ $('#post').each(function() {
     // On referme les metaboxes par défaut sur l'édition d'un post
     $('#pageparentdiv, #revisionsdiv, #wpseo_meta, #members-cp').addClass('closed');
 
-    // On toggle la description de chaque template dans les champs woody_tpl
-    $('.tpl-choice-wrapper').each(function() {
-        var $this = $(this);
+    // Action sur les focus
+    var toggleChoiceAction = function($bigparent) {
+        //console.log('toggleChoiceAction', $bigparent);
+        $bigparent.find('.tpl-choice-wrapper').each(function() {
+            var $this = $(this);
 
-        $this.find('.toggle-desc').click(function(e) {
-            e.stopPropagation();
-            $this.find('.tpl-desc').toggleClass('hidden');
-            $this.find('.desc-backdrop').toggleClass('hidden');
-        });
+            // On toggle la description de chaque template dans les champs woody_tpl
+            $this.find('.toggle-desc').click(function(e) {
+                e.stopPropagation();
+                $this.find('.tpl-desc').toggleClass('hidden');
+                $this.find('.desc-backdrop').toggleClass('hidden');
+            });
 
-        $this.find('.close-desc').click(function() {
-            $this.find('.tpl-desc').addClass('hidden');
-            $this.find('.desc-backdrop').addClass('hidden');
-        });
+            $this.find('.close-desc').click(function() {
+                $this.find('.tpl-desc').addClass('hidden');
+                $this.find('.desc-backdrop').addClass('hidden');
+            });
 
-        $this.find('.desc-backdrop').click(function() {
-            $this.find('.tpl-desc').addClass('hidden');
-            $(this).addClass('hidden');
+            $this.find('.desc-backdrop').click(function() {
+                $this.find('.tpl-desc').addClass('hidden');
+                $(this).addClass('hidden');
+            });
         });
-    });
+    }
+
+    // Action sur les focus
+    var fitChoiceAction = function($bigparent, count) {
+        //console.log('fitChoiceAction', $bigparent);
+        //console.log(count);
+
+        $bigparent.find('.tpl-choice-wrapper').each(function() {
+            var $this = $(this);
+
+            // On affiche un état en fonction du nombre d'élément
+            if (!$this.hasClass('fittedfor-' + count) && !$this.hasClass('fittedfor-all')) {
+                $this.removeClass('fit');
+                $this.addClass('notfit');
+            } else {
+                $this.removeClass('notfit');
+                $this.addClass('fit');
+            }
+        });
+    }
 
     var countElements = function(field) {
-        var count = 0;
+        var $parent = field.parent().$el;
+        var $bigparent = field.parent().parent().$el;
 
         // add class to this field
-        field.$el
-            .parents('.acf-field-5b0d20457c829')
-            .find('.acf-table').each(function() {
-                count = $(this).find('.acf-row').length - 1;
-            })
-            .end()
-            .end()
-            .parents('.layout').find('.acf-field-5b0d21aa7c82f .tpl-choice-wrapper').each(function() {
-                if (!$(this).hasClass('fittedfor-' + count) && !$(this).hasClass('fittedfor-0')) {
-                    $(this).removeClass('fit');
-                    $(this).addClass('notfit');
-                } else {
-                    $(this).removeClass('notfit');
-                    $(this).addClass('fit');
-                }
-            });
+        $parent.each(function() {
+            toggleChoiceAction($bigparent);
+
+            setTimeout(() => {
+                var count = $(this).find('.acf-table .acf-row').length - 1;
+                fitChoiceAction($bigparent, count);
+            }, 4000);
+        });
     };
 
     acf.addAction('ready_field/key=field_5b22415792db0', countElements);
