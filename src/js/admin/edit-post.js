@@ -84,17 +84,17 @@ $('#post').each(function() {
         var query_params = {};
         query_params['current_post'] = $('#post_ID').val();
 
-        $parent.find('input:checked, select option').each(function() {
+        $parent.find('input:checked, select option, input[type="number"]').each(function() {
             var name = $(this).parents('.acf-field').data('name');
 
             if (!query_params[name]) query_params[name] = [];
             query_params[name].push($(this).val());
-
-            if ($(this).attr('type') == 'text') {
-                $(this).keyup(function() {
-                    query_params[name].push($(this).val());
-                });
-            }
+            // if ($(this).attr('type') == 'number') {
+            //     $(this).keyup(function() {
+            //         console.log($(this).val());
+            //         query_params[name].push($(this).val());
+            //     });
+            // }
         });
 
         $.ajax({
@@ -129,7 +129,11 @@ $('#post').each(function() {
 
         getAutorFocusData($parent);
 
-        $parent.find('input, select, option').change(function() {
+        $parent.find('input[type="checkbox"], input[type="radio"], select, option').change(function() {
+            getAutorFocusData($parent);
+        });
+
+        $parent.find('input[type="number"]').keyup(function() {
             getAutorFocusData($parent);
         });
 

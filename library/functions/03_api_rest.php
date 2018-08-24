@@ -43,8 +43,8 @@ function countAutofocusEl(\WP_REST_Request $request)
     $the_query = [
         'post_type' => (!empty($params['focused_post_type'])) ? $params['focused_post_type'] : 'page',
         'tax_query' => $tax_query,
-        'nopaging' => true,
-        'posts_per_page' => (!empty($params['focused_count'])) ? $params['focused_count'] : -1
+        // 'nopaging' => true,
+        'posts_per_page' => (!empty($params['focused_count'])) ? $params['focused_count'][0] : -1
     ];
 
     // Si Hiérarchie = Enfants directs de la page
@@ -59,6 +59,9 @@ function countAutofocusEl(\WP_REST_Request $request)
 
     // On créé la wp_query avec les paramètres définis
     $focused_posts = new WP_Query($the_query);
+
+    // rcd($focused_posts);
+
     $focused_posts_count = $focused_posts->post_count;
 
     return $focused_posts_count;

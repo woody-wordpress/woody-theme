@@ -54,7 +54,7 @@ function getAutoFocus_data($the_post, $query_form)
     $the_query = [
                     'post_type' => (!empty($query_form['focused_post_type'])) ? $query_form['focused_post_type'] : 'page',
                     'tax_query' => $tax_query,
-                    'nopaging' => true,
+                    // 'nopaging' => true,
                     'posts_per_page' => (!empty($query_form['focused_count'])) ? $query_form['focused_count'] : -1,
                 ];
 
@@ -91,6 +91,8 @@ function getAutoFocus_data($the_post, $query_form)
             $the_items['items'][$key] = $data;
         }
     }
+
+    // rcd($focused_posts, true);
 
     return $the_items;
 }
