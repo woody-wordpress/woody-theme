@@ -27,7 +27,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "",
                 "class": "",
                 "id": ""
             },
@@ -36,11 +36,11 @@
                 "touristic_sheet": "Fiches touristiques"
             },
             "allow_custom": 0,
-            "save_custom": 0,
             "default_value": [],
             "layout": "horizontal",
             "toggle": 0,
-            "return_format": "value"
+            "return_format": "value",
+            "save_custom": 0
         },
         {
             "key": "field_5b27890c84ed3",
@@ -59,79 +59,29 @@
                 ]
             ],
             "wrapper": {
-                "width": "50",
+                "width": "",
                 "class": "hide-label",
                 "id": ""
             },
             "taxonomy": "page_type",
             "field_type": "checkbox",
-            "allow_null": 0,
             "add_term": 0,
             "save_terms": 0,
             "load_terms": 0,
             "return_format": "id",
-            "multiple": 0
-        },
-        {
-            "key": "field_5b27a67203e48",
-            "label": "Ordre de tri",
-            "name": "focused_sort",
-            "type": "radio",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "random": "Aléatoire",
-                "created_desc": "Du plus récent au plus ancien",
-                "created_asc": "Du plus ancien au plus récent"
-            },
-            "allow_null": 0,
-            "other_choice": 0,
-            "save_other_choice": 0,
-            "default_value": "",
-            "layout": "horizontal",
-            "return_format": "value"
-        },
-        {
-            "key": "field_5b28d791038fa",
-            "label": "Hierarchie",
-            "name": "focused_hierarchy",
-            "type": "radio",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "no_hierarchy": "Pas de hierarchie",
-                "child_of": "Enfants directs de la page",
-                "brother_of": "Pages de même niveau"
-            },
-            "allow_null": 0,
-            "other_choice": 0,
-            "save_other_choice": 0,
-            "default_value": "no_hierarchy",
-            "layout": "horizontal",
-            "return_format": "value"
+            "multiple": 0,
+            "allow_null": 0
         },
         {
             "key": "field_5b27a02e9d7c5",
-            "label": "Etiquettes (termes de taxonomie)",
+            "label": "Tags",
             "name": "focused_taxonomy_terms",
             "type": "select",
-            "instructions": "Choisissez les termes de taxonomie que vous voulez voir remonter dans votre sélection",
+            "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -152,38 +102,76 @@
         },
         {
             "key": "field_5b27a25103e43",
-            "label": "Et \/ Ou entre les étiquettes",
+            "label": "Si les contenus sont tagués avec :",
             "name": "focused_taxonomy_terms_andor",
             "type": "radio",
-            "instructions": "Si ET : les contenus ayant les etiquettes A <strong>ET<\/strong> B seront affichés <\/br>\r\nSi OU : les contenus ayant les étiquettes A <strong>OU<\/strong> B",
+            "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "45",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
             "choices": {
-                "OR": "OU",
-                "AND": "ET"
+                "OR": "un des termes sélectionnés",
+                "AND": "tous les termes sélectionnés"
             },
             "allow_null": 0,
             "other_choice": 0,
-            "save_other_choice": 0,
-            "default_value": "",
+            "default_value": "OR",
             "layout": "horizontal",
-            "return_format": "value"
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_5b28d791038fa",
+            "label": "Hiérarchie \/ Arborescence",
+            "name": "focused_hierarchy",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b27899284ed4",
+                        "operator": "!=",
+                        "value": "touristic_sheet"
+                    },
+                    {
+                        "field": "field_5b27899284ed4",
+                        "operator": "==",
+                        "value": "page"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "no_hierarchy": "Pas de hierarchie",
+                "child_of": "Enfants directs de la page",
+                "brother_of": "Pages de même niveau"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "no_hierarchy",
+            "layout": "horizontal",
+            "return_format": "value",
+            "save_other_choice": 0
         },
         {
             "key": "field_5b27a3d703e44",
-            "label": "Nombre d'éléments à afficher",
+            "label": "Nombre d'éléments max",
             "name": "focused_count",
             "type": "number",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "25",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -196,15 +184,40 @@
             "step": ""
         },
         {
-            "key": "field_5b7d67f609abc",
-            "label": "Textes des boutons \"Lire la suite\"",
-            "name": "links_label",
-            "type": "text",
+            "key": "field_5b27a67203e48",
+            "label": "Ordre de tri",
+            "name": "focused_sort",
+            "type": "radio",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "30",
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "random": "Aléatoire",
+                "created_desc": "Du plus récent au plus ancien",
+                "created_asc": "Du plus ancien au plus récent"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_5b7d67f609abc",
+            "label": "Textes des boutons sur les cartes",
+            "name": "links_label",
+            "type": "text",
+            "instructions": "Pas de bouton si vide",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -223,7 +236,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -335,5 +348,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1535089218
+    "modified": 1535112823
 }

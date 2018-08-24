@@ -108,7 +108,7 @@ $('#post').each(function() {
                 if (data === 0) {
                     var the_message = '<div class="woody-count-message"><span class="count alert"><small>Aucune mise en avant ne correspond à votre sélection. Merci de modifier vos paramètres</small></span></div>';
                 } else {
-                    var the_message = '<div class="woody-count-message"><small>Nombre de pages mises en avant :</small><span class="count">' + data + '</span></div>';
+                    var the_message = '<div class="woody-count-message"><small>Nombre d\'éléments mis en avant :</small><span class="count">' + data + '</span></div>';
                 }
                 if ($count_message.length == 0) {
                     message_wrapper.append(the_message);
