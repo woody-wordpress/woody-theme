@@ -419,3 +419,27 @@
         font-size: 14px;
     }
 }
+
+// Nombre d'éléments remontés en sélection automatique
+.woody-count-message {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0;
+    padding: 5px 10px;
+
+    .count {
+        position: relative;
+        color: #006799;
+        margin-left: 8px;
+        font-size: 1.3em;
+        font-weight: 700;
+        &.alert {
+            color: #ef644f;
+        }
+    }
+    small {
+        font-weight: 500;
+    }
+}

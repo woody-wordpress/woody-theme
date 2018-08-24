@@ -77,8 +77,12 @@ $('#post').each(function() {
     acf.addAction('append_field/key=field_5b22415792db0', countElements);
     acf.addAction('remove_field/key=field_5b22415792db0', countElements);
 
+    // **
+    // Update tpl-choice-wrapper classes for autofocus layout
+    // **
     var getAutorFocusData = function($parent) {
         var query_params = {};
+        query_params['current_post'] = $('#post_ID').val();
 
         $parent.find('input:checked, select option').each(function() {
             var name = $(this).parents('.acf-field').data('name');
@@ -98,8 +102,19 @@ $('#post').each(function() {
             url: '/wp-json/woody/autofocus-count',
             data: query_params,
             success: function(data) {
-                console.log('Endpoint exists');
-                console.log(data)
+                fitChoiceAction($parent, data);
+                var message_wrapper = $parent.find('.acf-tab-wrap');
+                var $count_message = $('.woody-count-message');
+                if (data === 0) {
+                    var the_message = '<div class="woody-count-message"><span class="count alert"><small>Aucune mise en avant ne correspond à votre sélection. Merci de modifier vos paramètres</small></span></div>';
+                } else {
+                    var the_message = '<div class="woody-count-message"><small>Nombre de pages mises en avant :</small><span class="count">' + data + '</span></div>';
+                }
+                if ($count_message.length == 0) {
+                    message_wrapper.append(the_message);
+                } else {
+                    $count_message.html(the_message);
+                }
                 return data;
             },
             error: function() {
@@ -111,14 +126,17 @@ $('#post').each(function() {
     var getAutoFocusQuery = function(field) {
         var query_params = null;
         var $parent = field.$el.parent();
+
         getAutorFocusData($parent);
 
         $parent.find('input, select, option').change(function() {
             getAutorFocusData($parent);
         });
+
     }
 
     acf.addAction('ready_field/key=field_5b27899284ed4', getAutoFocusQuery);
+    // acf.addAction('showField/key=field_5b27899284ed4', getAutoFocusQuery);
     acf.addAction('append_field/key=field_5b27899284ed4', getAutoFocusQuery);
     acf.addAction('remove_field/key=field_5b27899284ed4', getAutoFocusQuery);
 

@@ -44,22 +44,24 @@ function countAutofocusEl(\WP_REST_Request $request)
         'post_type' => (!empty($params['focused_post_type'])) ? $params['focused_post_type'] : 'page',
         'tax_query' => $tax_query,
         'nopaging' => true,
-        'posts_per_page' => (!empty($params['focused_count'])) ? $params['focused_count'] : -1;
+        'posts_per_page' => (!empty($params['focused_count'])) ? $params['focused_count'] : -1
     ];
 
     // Si Hiérarchie = Enfants directs de la page
     // On passe le post ID dans le paramètre post_parent de la query
-    if ($params['focused_hierarchy'] == 'child_of') {
-        $the_query['post_parent'] = $the_post->ID;
-    } elseif ($params['focused_hierarchy'] == 'brother_of') {
-        $the_query['post_parent'] = $the_post->post_parent;
+    $post_parent = wp_get_post_parent_id($params['current_post']);
+
+    if ($params['focused_hierarchy'][0] == 'child_of') {
+        $the_query['post_parent'] = $params['current_post'];
+    } elseif ($params['focused_hierarchy'][0] == 'brother_of') {
+        $the_query['post_parent'] = $post_parent;
     }
 
     // On créé la wp_query avec les paramètres définis
     $focused_posts = new WP_Query($the_query);
     $focused_posts_count = $focused_posts->post_count;
 
-    return $focused_posts;
+    return $focused_posts_count;
 }
 
 add_action('rest_api_init', function () {
