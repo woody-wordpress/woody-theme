@@ -31,7 +31,7 @@ class WoodyTheme_Plugins_Activation
             'enhanced-media-library/enhanced-media-library.php',
             'wp-nested-pages/nestedpages.php',
             'members/members.php',
-            'hawwwai-plugin/hawwwai.php',
+            'woody-plugin/woody.php',
             'single-sign-on-client/wposso.php'
         ];
 
