@@ -11,7 +11,7 @@
  *
  */
 
-function getAutoFocus_data($the_post, $query_form, $count_items = false)
+function getAutoFocus_data($the_post, $query_form)
 {
     $the_items = [];
 
@@ -54,7 +54,7 @@ function getAutoFocus_data($the_post, $query_form, $count_items = false)
     $the_query = [
                     'post_type' => (!empty($query_form['focused_post_type'])) ? $query_form['focused_post_type'] : 'page',
                     'tax_query' => $tax_query,
-                    'nopaging' => true,
+                    // 'nopaging' => true,
                     'posts_per_page' => (!empty($query_form['focused_count'])) ? $query_form['focused_count'] : -1,
                 ];
 
@@ -75,28 +75,26 @@ function getAutoFocus_data($the_post, $query_form, $count_items = false)
     // On créé la wp_query avec les paramètres définis
     $focused_posts = new WP_Query($the_query);
 
-    if (!empty($count_items)) {
-        return count($focused_posts);
-    } else {
-        // On transforme la donnée des posts récupérés pour coller aux templates de blocs Woody
-        if (!empty($focused_posts->posts)) {
-            foreach ($focused_posts->posts as $key => $post) {
-                $data = [];
-                $post = Timber::get_post($post->ID);
-                $status = $post->post_status;
-                if ($post->post_status === 'draft') {
-                    continue;
-                }
-                $data = getPagePreview($query_form, $post);
-                // On ajoute un texte dans le bouton "Lire la suite" s'il a été saisi
-                $data['link']['title'] = (!empty($query_form['links_label'])) ? $query_form['links_label'] : '';
-
-                $the_items['items'][$key] = $data;
+    // On transforme la donnée des posts récupérés pour coller aux templates de blocs Woody
+    if (!empty($focused_posts->posts)) {
+        foreach ($focused_posts->posts as $key => $post) {
+            $data = [];
+            $post = Timber::get_post($post->ID);
+            $status = $post->post_status;
+            if ($post->post_status === 'draft') {
+                continue;
             }
-        }
+            $data = getPagePreview($query_form, $post);
+            // On ajoute un texte dans le bouton "Lire la suite" s'il a été saisi
+            $data['link']['title'] = (!empty($query_form['links_label'])) ? $query_form['links_label'] : '';
 
-        return $the_items;
+            $the_items['items'][$key] = $data;
+        }
     }
+
+    // rcd($focused_posts, true);
+
+    return $the_items;
 }
 
 /**
