@@ -24,6 +24,7 @@ new WoodyTheme_Cron();
 new WoodyTheme_Post_Type();
 new WoodyTheme_Taxonomy();
 new WoodyTheme_Images();
+// new WoodyTheme_Videos();
 
 // Menu
 new WoodyTheme_Menus();
