@@ -3,7 +3,7 @@ import * as selectize from "selectize";
 import * as arrive from "arrive";
 
 var attachment_selectize = function(target) {
-    console.log('attachment OK');
+    //console.log('attachment OK');
     $(target)
         .css('overflow', 'unset')
         .find('input:not(.selectized)').selectize({
