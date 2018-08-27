@@ -2,6 +2,71 @@
 
 use Symfony\Component\Finder\Finder;
 
+/**
+ *
+ * Nom : getAcfGroupFields
+ * Auteur : Benoit Bouchaud
+ * Return : Retourne un tableau avec les valeurs des champs d'un groupe ACF poyr un post donné
+ * @param    group_id - La clé du groupe ACF
+ * @return   page_teaser_fields - Un tableau de données
+ *
+ */
+ function getAcfGroupFields($group_id)
+ {
+     global $post;
+     if (!empty($post)) {
+         $post_id = $post->ID;
+
+         $page_teaser_fields = array();
+
+         $fields = acf_get_fields($group_id);
+
+         if (!empty($fields)) {
+             foreach ($fields as $field) {
+                 $field_value = false;
+                 if (!empty($field['name'])) {
+                     $field_value = get_field($field['name'], $post_id);
+                 }
+
+                 if ($field_value && !empty($field_value)) {
+                     $page_teaser_fields[$field['name']] = $field_value;
+                 }
+             }
+         }
+
+         return $page_teaser_fields;
+     }
+ }
+
+  /**
+ *
+ * Nom : getTermsSlugs
+ * Auteur : Benoit Bouchaud
+ * Return : Retourne un tableau de termes
+ * @param    taxonomy - Le slug du vocabulaire dans lequel on recherche
+ * @param    postId - Le post dans lequel on recherche
+ * @return   slugs - Un tableau de slugs de termes
+ *
+ */
+function getTermsSlugs($postId, $taxonomy, $implode = false)
+{
+    $slugs = [];
+    $terms = get_the_terms($postId, $taxonomy);
+    if (!empty($terms)) {
+        foreach ($terms as $term) {
+            $slugs[] = $term->slug;
+        }
+
+        if ($implode == true) {
+            $slugs = implode(' ', $slugs);
+        }
+    }
+
+
+    return $slugs;
+}
+
+
 function humanDays($number)
 {
     if ($number % 7 === 0) {
