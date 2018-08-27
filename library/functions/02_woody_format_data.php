@@ -475,3 +475,18 @@ function getTermsSlugs($postId, $taxonomy, $implode = false)
 
     return $slugs;
 }
+
+function isWoodyInstagram($media_item, $is_instagram = false)
+{
+    $media_types = [];
+    $media_terms = get_the_terms($media_item['ID'], 'attachment_types');
+    foreach ($media_terms as $key => $media_term) {
+        $media_types[] = $media_term->slug;
+    }
+
+    if (in_array('instagram', $media_types)) {
+        $is_instagram = true;
+    }
+
+    return $is_instagram;
+}

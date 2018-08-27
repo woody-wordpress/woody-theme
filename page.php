@@ -150,6 +150,8 @@ if ($page_type === 'playlist_tourism') {
                                 foreach ($layout['socialwall_manual'] as $key => $media_item) {
                                     // On ajoute une entrée "gallery_items" pour être compatible avec le tpl woody
                                     $layout['gallery_items'][] = $media_item;
+                                    $is_instagram = isWoodyInstagram($media_item);
+                                    $layout['gallery_items'][$key]['is_instagram'] = $is_instagram;
                                 }
                             } elseif ($layout['socialwall_type'] == 'auto') {
                                 // On récupère les termes sélectionnés
@@ -161,7 +163,11 @@ if ($page_type === 'playlist_tourism') {
                                 // On récupère les images en fonction des termes sélectionnés
                                 $layout['gallery_items'] = getAttachmentsByTerms('media_category', $queried_terms);
 
-                                // rcd($layout, true);
+                                foreach ($layout['gallery_items'] as $key => $media_item) {
+                                    // On ajoute une entrée "gallery_items" pour être compatible avec le tpl woody
+                                    $is_instagram = isWoodyInstagram($media_item);
+                                    $layout['gallery_items'][$key]['is_instagram'] = $is_instagram;
+                                }
                             }
                             $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                         break;
