@@ -92,8 +92,6 @@ function getAutoFocus_data($the_post, $query_form)
         }
     }
 
-    // rcd($focused_posts, true);
-
     return $the_items;
 }
 
@@ -160,6 +158,7 @@ function getManualFocus_data($items)
      // On récupère le choix de média afin d'envoyer une image OU une vidéo
      if ($item['media_type'] == 'img' && !empty($item['img'])) {
          $data['img'] = $item['img'];
+         $data['img']['attachment_more_data'] = getAttachmentMoreData($item['img']['ID']);
      } elseif ($item['media_type'] == 'movie' && !empty($item['movie'])) {
          $data['movie'] = $item['movie'];
      }
@@ -237,6 +236,7 @@ function getManualFocus_data($items)
      $data['location']['lat'] = (!empty($item->get_field('post_latitude'))) ? $item->get_field('post_latitude') : '';
      $data['location']['lng'] = (!empty($item->get_field('post_longitude'))) ? $item->get_field('post_longitude') : '';
      $data['img'] = getFieldAndFallback($item, 'focus_img', 'field_5b0e5ddfd4b1b');
+     $data['img']['attachment_more_data'] = getAttachmentMoreData($data['img']['ID']);
      $data['link']['url'] = $item->get_path();
 
      return $data;
@@ -319,43 +319,6 @@ function getManualFocus_data($items)
 
      return $display;
  }
-
- /**
- *
- * Nom : getAcfGroupFields
- * Auteur : Benoit Bouchaud
- * Return : Retourne un tableau avec les valeurs des champs d'un groupe ACF poyr un post donné
- * @param    group_id - La clé du groupe ACF
- * @return   page_teaser_fields - Un tableau de données
- *
- */
- function getAcfGroupFields($group_id)
- {
-     global $post;
-     if (!empty($post)) {
-         $post_id = $post->ID;
-
-         $page_teaser_fields = array();
-
-         $fields = acf_get_fields($group_id);
-
-         if (!empty($fields)) {
-             foreach ($fields as $field) {
-                 $field_value = false;
-                 if (!empty($field['name'])) {
-                     $field_value = get_field($field['name'], $post_id);
-                 }
-
-                 if ($field_value && !empty($field_value)) {
-                     $page_teaser_fields[$field['name']] = $field_value;
-                 }
-             }
-         }
-
-         return $page_teaser_fields;
-     }
- }
-
 
 /**
  *
@@ -450,43 +413,58 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
 
  /**
  *
- * Nom : getTermsSlugs
+ * Nom : isWoodyInstagram
  * Auteur : Benoit Bouchaud
- * Return : Retourne un tableau de termes
+ * Return : Booleen
  * @param    taxonomy - Le slug du vocabulaire dans lequel on recherche
- * @param    postId - Le post dans lequel on recherche
- * @return   slugs - Un tableau de slugs de termes
+ * @param    media_item - Le media (WP post)
+ * @return   is_instagram - Booléen
  *
  */
-function getTermsSlugs($postId, $taxonomy, $implode = false)
-{
-    $slugs = [];
-    $terms = get_the_terms($postId, $taxonomy);
-    if (!empty($terms)) {
-        foreach ($terms as $term) {
-            $slugs[] = $term->slug;
-        }
-
-        if ($implode == true) {
-            $slugs = implode(' ', $slugs);
-        }
-    }
-
-
-    return $slugs;
-}
 
 function isWoodyInstagram($media_item, $is_instagram = false)
 {
     $media_types = [];
-    $media_terms = get_the_terms($media_item['ID'], 'attachment_types');
-    foreach ($media_terms as $key => $media_term) {
-        $media_types[] = $media_term->slug;
+
+
+    if (is_array($media_item)) {
+        $the_id = $media_item['ID'];
+    } elseif (is_numeric($media_item)) {
+        $the_id = $media_item;
     }
 
-    if (in_array('instagram', $media_types)) {
-        $is_instagram = true;
+    $media_terms = get_the_terms($the_id, 'attachment_types');
+
+    if (!empty($media_terms)) {
+        foreach ($media_terms as $key => $media_term) {
+            $media_types[] = $media_term->slug;
+        }
+
+        if (in_array('instagram', $media_types)) {
+            $is_instagram = true;
+        }
     }
 
     return $is_instagram;
+}
+
+function getAttachmentMoreData($attachment_id)
+{
+    $attachment_data = [];
+
+    $attachment_data['author'] = get_field('field_5b5585503c855', $attachment_id);
+    $attachment_data['lat'] = get_field('field_5b55a88e70cbf', $attachment_id);
+    $attachment_data['lng'] = get_field('field_5b55a89e70cc0', $attachment_id);
+    $attachment_data['is_instagram'] = isWoodyInstagram($attachment_id);
+
+    if(!empty($attachment_data['is_instagram'])){
+        $img_all_data = get_post_meta($attachment_id);
+        $img_all_metadata = unserialize($img_all_data['_wp_attachment_metadata'][0]);
+        $instagram_metadata = $img_all_metadata['hawwwai-instagram'];
+        rcd($img_all_metadata, true);
+        $attachment_data['instagram-metadata'] = $instagram_metadata;
+        rcd($attachment_data['instagram-metadata'], true);
+    }
+
+    return $attachment_data;
 }
