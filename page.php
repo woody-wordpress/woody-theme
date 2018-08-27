@@ -60,6 +60,9 @@ if (($page_hero['page_heading_media_type'] == 'movie' && !empty($page_hero['page
     if (empty($page_teaser['page_teaser_display_title'])) {
         $page_hero['title_as_h1'] = true;
     }
+    if ($page_hero['page_heading_img']) {
+        $page_hero['page_heading_img']['attachment_more_data'] = getAttachmentMoreData($page_hero['page_heading_img']['ID']);
+    }
     $context['page_hero'] = Timber::compile($context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
 }
 
@@ -156,7 +159,6 @@ if ($page_type === 'playlist_tourism') {
                             $layout['gallery_items'] = [];
                             if ($layout['socialwall_type'] == 'manual') {
                                 foreach ($layout['socialwall_manual'] as $key => $media_item) {
-
                                     // On ajoute une entrée "gallery_items" pour être compatible avec le tpl woody
                                     $layout['gallery_items'][] = $media_item;
                                     $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
@@ -172,9 +174,7 @@ if ($page_type === 'playlist_tourism') {
                                 $layout['gallery_items'] = getAttachmentsByTerms('media_category', $queried_terms);
 
                                 foreach ($layout['gallery_items'] as $key => $media_item) {
-                                    // On ajoute une entrée "gallery_items" pour être compatible avec le tpl woody
-                                    $is_instagram = isWoodyInstagram($media_item);
-                                    $layout['gallery_items'][$key]['is_instagram'] = $is_instagram;
+                                    $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
                                 }
                             }
                             $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);

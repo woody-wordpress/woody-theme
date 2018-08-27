@@ -426,7 +426,6 @@ function isWoodyInstagram($media_item, $is_instagram = false)
 {
     $media_types = [];
 
-
     if (is_array($media_item)) {
         $the_id = $media_item['ID'];
     } elseif (is_numeric($media_item)) {
@@ -457,13 +456,13 @@ function getAttachmentMoreData($attachment_id)
     $attachment_data['lng'] = get_field('field_5b55a89e70cc0', $attachment_id);
     $attachment_data['is_instagram'] = isWoodyInstagram($attachment_id);
 
-    if(!empty($attachment_data['is_instagram'])){
+    if (!empty($attachment_data['is_instagram'])) {
         $img_all_data = get_post_meta($attachment_id);
         $img_all_metadata = unserialize($img_all_data['_wp_attachment_metadata'][0]);
-        $instagram_metadata = $img_all_metadata['hawwwai-instagram'];
-        rcd($img_all_metadata, true);
-        $attachment_data['instagram-metadata'] = $instagram_metadata;
-        rcd($attachment_data['instagram-metadata'], true);
+        $instagram_metadata = $img_all_metadata['woody-instagram'];
+        $attachment_data['instagram_metadata'] = $instagram_metadata;
+
+        // rcd($attachment_data['instagram_metadata'], true);
     }
 
     return $attachment_data;
