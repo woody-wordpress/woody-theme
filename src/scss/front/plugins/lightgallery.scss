@@ -16,3 +16,12 @@ $lg-path-fonts: '#{$dist_dir}/fonts/plugins/lightgallery';
 @import "lg-fullscreen";
 // @import "lg-share";
 @import "lg-core";
+
+// Fix opened lg-thumbnail transform bug => set to 0% in Y axis so the transfor
+.lg-outer {
+    &.lg-thumb-open {
+        .lg-thumb-outer {
+            @include translate3d(0, 0, 0);
+        }
+    }
+}

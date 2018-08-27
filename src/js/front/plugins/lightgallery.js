@@ -4,5 +4,8 @@ import * as thumbnail from 'lg-thumbnail';
 
 $(".woodyGallery").lightGallery({
     mode: 'lg-fade',
-    cssEasing: 'cubic-bezier(0.25, 0, 0.25, 1)'
+    selector: '.mediaCard',
+    cssEasing: 'cubic-bezier(0.25, 0, 0.25, 1)',
+    thumbWidth: 120,
+    thumbHeight: '90px'
 });
