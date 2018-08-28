@@ -20,6 +20,7 @@ class WoodyTheme_ACF
     {
         acf_update_setting('save_json', get_template_directory() . '/acf-json');
         acf_append_setting('load_json', get_template_directory() . '/acf-json');
+
         add_filter('plugin_action_links', array($this, 'disallowAcfDeactivation'), 10, 4);
         add_filter('acf/load_field/type=radio', array($this, 'woodyTplAcfLoadField'));
         add_filter('acf/load_field/type=select', array($this, 'woodyIconLoadField'));
@@ -27,7 +28,6 @@ class WoodyTheme_ACF
         add_filter('acf/location/rule_types', array($this, 'woodyAcfAddPageTypeLocationRule'));
         add_filter('acf/location/rule_values/the_page_type', array($this, 'woodyAcfAddPageTypeChoices'));
         add_filter('acf/location/rule_match/the_page_type', array($this, 'woodyAcfPageTypeMatch'), 10, 3);
-        add_filter('acf/location/screen', array($this, 'woodyAcfPageTypeOptions'), 10, 2);
         // add_filter('acf/load_field/name=playlist_name', array($this, 'playlistNameLoadField'));
     }
 
@@ -163,68 +163,49 @@ class WoodyTheme_ACF
 
     public function woodyAcfAddPageTypeLocationRule($choices)
     {
-        // $choices['page']['page_type'] = 'Type de publication';
         $choices['Woody']['the_page_type'] = 'Type de publication';
-
-        // rcd($choices, true);
-
         return $choices;
     }
 
     public function woodyAcfAddPageTypeChoices($choices)
     {
         $page_types = get_terms(array('taxonomy' => 'page_type', 'hide_empty' => false, 'hierarchical' => true));
-        // rcd($page_types, true);
         foreach ($page_types as $key => $type) {
             $choices[$type->term_id] = $type->name;
         }
         return $choices;
     }
 
-    public function woodyAcfPageTypeMatch($match, $rule, $options){
-        global $post;
-        $selected_term = $rule['value'];
+    public function woodyAcfPageTypeMatch($match, $rule, $options)
+    {
         $children_terms_ids = [];
-
-        // if(empty($options['ajax'])){
-        //     $current_page_type = wp_get_post_terms($post->ID, 'page_type');
-        // } else{
-            $current_page_type = $options['taxonomy'];
-        // }
-
         $children_terms = get_terms(array('taxonomy' => 'page_type', 'hide_empty' => false, 'parent' => $rule['value']));
-        if(!empty($children_terms)){
-            foreach ($children_terms as $key => $term) {
+        if (!empty($children_terms)) {
+            foreach ($children_terms as $term) {
                 $children_terms_ids[] = $term->term_id;
             }
         }
-        if(!empty($current_page_type)){
-            if($rule['operator'] == "=="){
-                if(in_array($current_page_type, $children_terms_ids)){
-                    $match = true;
-                }
-            }
-            elseif($rule['operator'] == "!="){
-                if(!in_array($current_page_type, $children_terms_ids)){
-                    $match = true;
-                }
+
+        $selected_term_ids = [];
+        if ($options['ajax']) {
+            $selected_term_ids = $options['post_taxonomy'];
+        } else {
+            $current_page_type = wp_get_post_terms($options['post_id'], 'page_type');
+            $selected_term_ids[] = $current_page_type[0]->term_id;
+        }
+
+        foreach ($selected_term_ids as $term_id) {
+            if (in_array($term_id, $children_terms_ids)) {
+                $match = true;
             }
         }
 
-        rcd($options, true);
+        if ($rule['operator'] == "!=") {
+            $match = !$match;
+        }
 
         return $match;
-
     }
-
-        public function woodyAcfPageTypeOptions( $options, $field_group ){
-
-            // rcd($field_group, true);
-            $options['taxonomy'] = $field_group['ID'];
-            return $options;
-        }
-
-        // rcd($options, true);
 
     // public function playlistNameLoadField($field)
     // {
