@@ -16,7 +16,7 @@ class WoodyTheme_Taxonomy
 
     protected function registerHooks()
     {
-        add_action('init', array($this, 'registerContentTypeTaxonomy'), 0);
+        add_action('after_setup_theme', array($this, 'registerContentTypeTaxonomy'), 10);
     }
 
     public function registerContentTypeTaxonomy()
@@ -40,12 +40,13 @@ class WoodyTheme_Taxonomy
                     'search_items' => 'Rechercher parmi les types de publications',
                     'popular_items' => 'Types de publications les plus utilisées'
                 ],
-                'hierarchical' => false,
-                'show_ui' => false,
+                'hierarchical' => true,
+                'show_ui' => true,
+                'show_in_menu' => true,
                 'capabilities' => [
-                    'manage_terms' => false,
+                    'manage_terms' => true,
                     'edit_terms' => false,
-                    'delete_terms' => false,
+                    'delete_terms' => true,
                     'assign_terms' => true
                 ]
             )
@@ -58,6 +59,9 @@ class WoodyTheme_Taxonomy
         wp_insert_term('Page d\'atterrissage', 'page_type', array('slug' => 'landing_page'));
         wp_insert_term('Personne', 'page_type', array('slug' => 'member'));
         wp_insert_term('Séjour', 'page_type', array('slug' => 'trip'));
+        wp_insert_term('Itinéraire', 'page_type', array('slug' => 'itinerary'));
+        wp_insert_term('Liste de contenus', 'page_type', array('slug' => 'content_list'));
+        wp_insert_term('Brochure', 'page_type', array('slug' => 'booklet'));
 
         // On créé la taxonomie "Thématiques"
         register_taxonomy(

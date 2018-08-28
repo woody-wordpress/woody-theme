@@ -23,7 +23,8 @@ if (targetNode != null) {
 
     //eventListener => On récupère le confID que nous envoie l 'éditeur
     window.addEventListener('message', function(e) {
-        currentConfig.confID_field.attr('value', e.data.conf_id);
+        currentConfig.confID_field.attr('value', e.data);
+        console.log(e);
 
     }, false);
 
