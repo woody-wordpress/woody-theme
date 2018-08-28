@@ -236,7 +236,9 @@ function getManualFocus_data($items)
      $data['location']['lat'] = (!empty($item->get_field('post_latitude'))) ? $item->get_field('post_latitude') : '';
      $data['location']['lng'] = (!empty($item->get_field('post_longitude'))) ? $item->get_field('post_longitude') : '';
      $data['img'] = getFieldAndFallback($item, 'focus_img', 'field_5b0e5ddfd4b1b');
-     $data['img']['attachment_more_data'] = getAttachmentMoreData($data['img']['ID']);
+     if(!empty($data['img'])){
+        $data['img']['attachment_more_data'] = getAttachmentMoreData($data['img']['ID']);
+     }
      $data['link']['url'] = $item->get_path();
 
      return $data;
