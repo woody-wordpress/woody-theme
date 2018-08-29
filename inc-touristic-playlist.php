@@ -17,7 +17,7 @@ $context['body_class'] .= ' apirender apirender-playlist apirender-wordpress';
  * Appel apirender pour récupérer le DOM de la playlist
  ************************ **/
 $playlist_conf_id = get_field('field_5b338ff331b17');
-$partialPlaylist = apply_filters('wp_hawwwai_sit_playlist_render', $playlist_conf_id, 'fr');
+$partialPlaylist = apply_filters('wp_woody_hawwwai_playlist_render', $playlist_conf_id, 'fr');
 
 if (!$partialPlaylist) {
     print_r('error fetching playlist');

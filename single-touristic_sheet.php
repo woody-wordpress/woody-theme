@@ -70,20 +70,20 @@ $context['playlistId'] = null;
 
 
 // Get API auth data
-$authData = apply_filters('wp_hawwwai_get_api_auth', null);
-if (!empty($authData)) {
-    $context['apiLogin'] = $authData['login'];
-    $context['apiPassword'] = $authData['password'];
+$credentials = get_option('woody_credentials');
+if (!empty($credentials)) {
+    $context['apiLogin'] = $credentials['public_login'];
+    $context['apiPassword'] = $credentials['public_password'];
 } else {
-    print_r('No API authentification set');
+    print_r('No API wp_woody_hawwwai_sheet_render set');
     exit;
 }
 
 /** ************************
  * Appel apirender pour récupérer le DOM de la fiche
  ************************ **/
-$partialSheet = apply_filters('wp_hawwwai_sit_sheet_render', $sheet_id, $sheet_lang, $params);
-if (empty($partialSheet) || empty($partialSheet['content'])) {
+$partialSheet = apply_filters('wp_woody_hawwwai_sheet_render', $sheet_id, $sheet_lang, $params);
+if (empty($partialSheet)) {
     print_r('Error while fetching API Render content for Sheet #' .$sheet_id);
     exit;
 }
