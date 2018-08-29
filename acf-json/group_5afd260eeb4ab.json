@@ -1,29 +1,6 @@
 {
     "key": "group_5afd260eeb4ab",
     "title": "Sections",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "page"
-            },
-            {
-                "param": "page_type_and_children",
-                "operator": "!=",
-                "value": "15"
-            }
-        ]
-    ],
-    "menu_order": 11,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "field",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1535547972,
     "fields": [
         {
             "key": "field_5afd2c6916ecb",
@@ -942,5 +919,28 @@
                 }
             ]
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            },
+            {
+                "param": "page_type_and_children",
+                "operator": "!=",
+                "value": "playlist_tourism"
+            }
+        ]
+    ],
+    "menu_order": 11,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "field",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
+    "modified": 1535543663
 }
