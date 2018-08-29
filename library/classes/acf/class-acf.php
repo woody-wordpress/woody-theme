@@ -18,7 +18,9 @@ class WoodyTheme_ACF
 
     protected function registerHooks()
     {
-        acf_update_setting('save_json', get_template_directory() . '/acf-json');
+        if (WP_ENV == 'dev') {
+            acf_update_setting('save_json', get_template_directory() . '/acf-json');
+        }
         acf_append_setting('load_json', get_template_directory() . '/acf-json');
 
         add_filter('plugin_action_links', array($this, 'disallowAcfDeactivation'), 10, 4);
