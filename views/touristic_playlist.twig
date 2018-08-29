@@ -1,6 +1,9 @@
 {% extends "page.twig" %}
 
 {% block metas %}
+    <script>
+        var DrupalAngularConfig = {{ PL_CONF_TESTING|json_encode(constant('JSON_PRETTY_PRINT'))|raw }};
+    </script>
 {% endblock metas %}
 
 {% block styles %}
@@ -16,10 +19,7 @@
 
 {% block scripts %}
 
-    <script>
-        var DrupalAngularConfig = {{ PL_CONF_TESTING|json_encode(constant('JSON_PRETTY_PRINT'))|raw }};
 
-    </script>
 
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>

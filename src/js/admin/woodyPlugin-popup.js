@@ -61,13 +61,21 @@ if (targetNode != null) {
                         currentConfig.confID_field = $this.siblings('.acf-field-5b338ff331b17').find('input[type="text"]');
                         currentConfig.confID = currentConfig.confID_field.attr('value');
 
-                        if (currentConfig.confID.length != 0) {
-                            currentConfig.iframeUrl = 'https://api.tourism-system.rc-preprod.com/render/facetconfs/cles-config/' + currentConfig.confID + '/crt-reunion/fr?login=reunion_website&pwd=9f4f5a30';
-                        } else {
-                            currentConfig.iframeUrl = 'https://api.tourism-system.rc-preprod.com/render/facetconfs/choix-playlist/crt-reunion/fr?context=' + currentConfig.context + '&name=' + currentConfig.playlistName + '&login=reunion_website&pwd=9f4f5a30';
+                        //
+                        if (window.siteConfig) {
+                            console.log(siteConfig);
+                            if (currentConfig.confID.length != 0) {
+                                currentConfig.iframeUrl = 'https://api.tourism-system.rc-preprod.com/render/facetconfs/cles-config/' + currentConfig.confID + '/'+ siteConfig.site_key +'/fr?login='+ siteConfig.login +'&pwd='+ siteConfig.password;
+                            } else {
+                                currentConfig.iframeUrl = 'https://api.tourism-system.rc-preprod.com/render/facetconfs/choix-playlist/'+ siteConfig.site_key +'/fr?context=' + currentConfig.context + '&name=' + currentConfig.playlistName + '&login='+ siteConfig.login +'&pwd='+ siteConfig.password;
+                            }
+
+                            $iframe.find('iframe').attr('src', currentConfig.iframeUrl).end().removeClass('closed').addClass('opened');
+                        }
+                        else {
+                            console.error('No siteConfig set (required)');
                         }
 
-                        $iframe.find('iframe').attr('src', currentConfig.iframeUrl).end().removeClass('closed').addClass('opened');
                     });
                 });
             }
