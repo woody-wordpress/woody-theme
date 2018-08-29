@@ -90,6 +90,17 @@ class WoodyTheme_Enqueue_Assets
 
         // Enqueue the main Stylesheet.
         wp_enqueue_style('admin-stylesheet', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('css/admin.css'), array(), '', 'all');
+
+        // Added global vars
+        $siteConfig = [];
+        $siteConfig['site_key'] = WP_SITE_KEY;
+        $credentials = get_option('woody_credentials');
+        if (!empty($credentials['login']) && !empty($credentials['password'])) {
+            $siteConfig['login'] = $credentials['login'];
+            $siteConfig['password'] = $credentials['password'];
+        }
+        wp_enqueue_script('admin-siteconfig', 'https://use.typekit.net/.js', array(), '1.0');
+        wp_add_inline_script('admin-siteconfig', 'var siteConfig = ' . json_encode($siteConfig));
     }
 
     private function assetPath($filename)
