@@ -23,7 +23,11 @@ class WoodyTheme_ACF
 
         add_filter('plugin_action_links', array($this, 'disallowAcfDeactivation'), 10, 4);
         add_filter('acf/load_field/type=radio', array($this, 'woodyTplAcfLoadField'));
+        add_filter('acf/load_field/type=select', array($this, 'woodyIconLoadField'));
         add_filter('acf/load_field/name=focused_taxonomy_terms', array($this, 'focusedTaxonomyTermsLoadField'));
+        add_filter('acf/location/rule_types', array($this, 'woodyAcfAddPageTypeLocationRule'));
+        add_filter('acf/location/rule_values/the_page_type', array($this, 'woodyAcfAddPageTypeChoices'));
+        add_filter('acf/location/rule_match/the_page_type', array($this, 'woodyAcfPageTypeMatch'), 10, 3);
         // add_filter('acf/load_field/name=playlist_name', array($this, 'playlistNameLoadField'));
     }
 
@@ -61,16 +65,38 @@ class WoodyTheme_ACF
                     $tpl_name = (!empty($component['name'])) ? $component['name'] : '{Noname :/}';
                     $tpl_desc = (!empty($component['description'])) ? $component['description'] : '{Nodesc :/}';
 
-                    $field['choices'][$key] = '<div class="tpl-choice-wrapper">
+                    $fitted_for = (!empty($component['items_count'][0]['fitted_for'])) ? $component['items_count'][0]['fitted_for'] : '';
+                    $accepts_max = (!empty($component['items_count'][0]['accepts_max'])) ? $component['items_count'][0]['accepts_max'] : '';
+                    $count_data = [];
+
+                    if (!empty($fitted_for)) {
+                        $count_data[] = 'data-fittedfor="' . $fitted_for . '"';
+                    }
+
+                    if (!empty($accepts_max)) {
+                        $count_data[] = 'data-acceptsmax="' . $accepts_max . '"';
+                    }
+
+                    $count_data = implode(' ', $count_data);
+
+                    $field['choices'][$key] = '<div class="tpl-choice-wrapper" ' . $count_data . '>
                     <img class="img-responsive" src="' . get_stylesheet_directory_uri() . '/dist/img/woody/views/' . $component['thumbnails']['small'] . '" alt="' . $key . '" width="150" height="150" />
                     <h5 class="tpl-title">' . $tpl_name . '</h5>
                     <div class="dashicons dashicons-info toggle-desc"></div>
                     <div class="tpl-desc hidden"><h4 class="tpl-title">' . $tpl_name . '</h4>' . $tpl_desc . '<span class="dashicons dashicons-no close-desc"></span></div>
                     <div class="desc-backdrop hidden"></div>
                     </div>';
+                    if ($field['name'] == 'section_woody_tpl' || $field['name'] == 'tab_woody_tpl' || $field['name'] == 'slide_woody_tpl') {
+                        foreach ($field['choices'] as $name => $value) {
+                            if (strpos($name, 'basic-grid_1_cols-tpl_01') !== false) {
+                                $field['default_value'] = $name;
+                            }
+                        }
+                    }
                 }
             }
         }
+
         return $field;
     }
 
@@ -116,6 +142,69 @@ class WoodyTheme_ACF
         }
 
         return $field;
+    }
+
+    /**
+    * Benoit Bouchaud
+    * On remplit le select "icones" avec les woody-icons disponibles
+    */
+    public function woodyIconLoadField($field)
+    {
+        if (strpos($field['name'], 'woody_icon') !== false) {
+            $icons = getWoodyIcons();
+            foreach ($icons as $key => $icon) {
+                $field['choices'][$key] = '<div class="wicon-select"><span class="wicon-woody-icons ' . $key . '"></span><span>' . $icon . '</span></div>';
+            }
+        }
+
+        return $field;
+    }
+
+
+    public function woodyAcfAddPageTypeLocationRule($choices)
+    {
+        $choices['Woody']['the_page_type'] = 'Type de publication';
+        return $choices;
+    }
+
+    public function woodyAcfAddPageTypeChoices($choices)
+    {
+        $page_types = get_terms(array('taxonomy' => 'page_type', 'hide_empty' => false, 'hierarchical' => true));
+        foreach ($page_types as $key => $type) {
+            $choices[$type->term_id] = $type->name;
+        }
+        return $choices;
+    }
+
+    public function woodyAcfPageTypeMatch($match, $rule, $options)
+    {
+        $children_terms_ids = [];
+        $children_terms = get_terms(array('taxonomy' => 'page_type', 'hide_empty' => false, 'parent' => $rule['value']));
+        if (!empty($children_terms)) {
+            foreach ($children_terms as $term) {
+                $children_terms_ids[] = $term->term_id;
+            }
+        }
+
+        $selected_term_ids = [];
+        if ($options['ajax']) {
+            $selected_term_ids = $options['post_taxonomy'];
+        } else {
+            $current_page_type = wp_get_post_terms($options['post_id'], 'page_type');
+            $selected_term_ids[] = $current_page_type[0]->term_id;
+        }
+
+        foreach ($selected_term_ids as $term_id) {
+            if (in_array($term_id, $children_terms_ids)) {
+                $match = true;
+            }
+        }
+
+        if ($rule['operator'] == "!=") {
+            $match = !$match;
+        }
+
+        return $match;
     }
 
     // public function playlistNameLoadField($field)

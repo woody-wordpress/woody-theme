@@ -1,24 +1,6 @@
 {
     "key": "group_5b0d1ed32a384",
     "title": "Mise en avant(sélection manuelle)",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1532503240,
     "fields": [
         {
             "key": "field_5b0d1ecc7c825",
@@ -96,10 +78,10 @@
                     },
                     "allow_null": 0,
                     "other_choice": 0,
-                    "save_other_choice": 0,
-                    "default_value": "",
+                    "default_value": "existing_content",
                     "layout": "vertical",
-                    "return_format": "value"
+                    "return_format": "value",
+                    "save_other_choice": 0
                 },
                 {
                     "key": "field_5b0d28c4bb189",
@@ -323,7 +305,7 @@
                                 "class": "hide-label",
                                 "id": ""
                             },
-                            "default_value": "",
+                            "default_value": "Découvrir",
                             "placeholder": "Texte du bouton \"Lire la suite\"",
                             "prepend": "",
                             "append": "",
@@ -343,28 +325,21 @@
                                 "id": ""
                             },
                             "choices": {
+                                "icon": "Icône",
                                 "pretitle": "Surtitre",
                                 "subtitle": "Sous-titre",
-                                "description": "Description",
-                                "icon": "Icône",
-                                "tags_1": "Taxonomie principale",
-                                "tags_2": "Taxonomie secondaire",
-                                "author": "Auteur"
+                                "description": "Description"
                             },
                             "allow_custom": 0,
-                            "save_custom": 0,
                             "default_value": [
-                                "pretitle",
-                                "subtitle",
-                                "description",
                                 "icon",
-                                "tags_1",
-                                "tags_2",
-                                "author"
+                                "pretitle",
+                                "subtitle"
                             ],
                             "layout": "horizontal",
                             "toggle": 0,
-                            "return_format": "value"
+                            "return_format": "value",
+                            "save_custom": 0
                         }
                     ]
                 }
@@ -399,15 +374,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "choices": {
-                "blocks-focus-tpl_04": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/focus\/tpl_04\/thumbnail.png\" alt=\"blocks-focus-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Focus - Template 3<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Focus - Template 3<\/h4>Grille 3 blocs 33% 33% 33% avec actif centré (template 3 + image carée + slider au dela de 3)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-focus-tpl_03": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/focus\/tpl_03\/thumbnail.png\" alt=\"blocks-focus-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Focus - Template 3<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Focus - Template 3<\/h4>Grille 3 blocs 33% 33% 33% - Cartes basiques (template 2 + image carrée + slider au dela de 3)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-focus-tpl_02": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/focus\/tpl_02\/thumbnail.png\" alt=\"blocks-focus-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Focus - Template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Focus - Template 2<\/h4>Grille 3 blocs - 1 carte split en 100% (template 1 + image carrée) + 2 cartes basiques (template 1 + image 16:9 + slider au dela de 2)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-focus-tpl_05": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/focus\/tpl_05\/thumbnail.png\" alt=\"blocks-focus-tpl_05\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Focus - Template 5<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Focus - Template 5<\/h4>Grille bloc 100% - Cartes basiques (tpl_02 + image carrée + slider au delà de 1) <span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-focus-tpl_07": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/focus\/tpl_07\/thumbnail.png\" alt=\"blocks-focus-tpl_07\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Focus - Template 7<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Focus - Template 7<\/h4>Grille de 10 contenus - Mixed 3\/4 colonnes - Carte basique (template 4 + image 4:3 + slider au delà de 10)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-focus-tpl_06": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/focus\/tpl_06\/thumbnail.png\" alt=\"blocks-focus-tpl_06\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Focus - Template 6<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Focus - Template 6<\/h4>Grille bloc 100% - Cartes basiques (template 2 + image 16:9 + slider au delà de 1)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-focus-tpl_01": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/focus\/tpl_01\/thumbnail.png\" alt=\"blocks-focus-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Focus - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Focus - Template 1<\/h4>Grille 4 blocs - 1 carte split en 100% (template 1 + image carrée) + 3 cartes basiques (template 1 + image 16:9 + slider au dela de 3)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-            },
+            "choices": [],
             "allow_null": 0,
             "other_choice": 0,
             "save_other_choice": 0,
@@ -416,8 +383,25 @@
             "return_format": "value"
         },
         {
+            "key": "field_5b6821997df66",
+            "label": "Options avancées",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
             "key": "field_5b4c8f3733d98",
-            "label": "Coller les vignettes",
+            "label": "Retirer les marges autour des mises en avant",
             "name": "focus_no_padding",
             "type": "true_false",
             "instructions": "",
@@ -434,5 +418,23 @@
             "ui_on_text": "",
             "ui_off_text": ""
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
+    "modified": 1534937955
 }

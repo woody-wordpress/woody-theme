@@ -1,24 +1,6 @@
 {
     "key": "group_5b2788b48d04c",
     "title": "Mise en avant(sélection automatique)",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1532503240,
     "fields": [
         {
             "key": "field_5b2788cc84ed1",
@@ -45,7 +27,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "",
                 "class": "",
                 "id": ""
             },
@@ -54,11 +36,11 @@
                 "touristic_sheet": "Fiches touristiques"
             },
             "allow_custom": 0,
-            "save_custom": 0,
             "default_value": [],
             "layout": "horizontal",
             "toggle": 0,
-            "return_format": "value"
+            "return_format": "value",
+            "save_custom": 0
         },
         {
             "key": "field_5b27890c84ed3",
@@ -77,52 +59,92 @@
                 ]
             ],
             "wrapper": {
-                "width": "50",
+                "width": "",
                 "class": "hide-label",
                 "id": ""
             },
             "taxonomy": "page_type",
             "field_type": "checkbox",
-            "allow_null": 0,
             "add_term": 0,
             "save_terms": 0,
             "load_terms": 0,
             "return_format": "id",
-            "multiple": 0
+            "multiple": 0,
+            "allow_null": 0
         },
         {
-            "key": "field_5b27a67203e48",
-            "label": "Ordre de tri",
-            "name": "focused_sort",
+            "key": "field_5b27a02e9d7c5",
+            "label": "Tags",
+            "name": "focused_taxonomy_terms",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "19": "Automne - Saisons",
+                "17": "Été - Saisons",
+                "20": "Hiver - Saisons",
+                "18": "Printemps - Saisons",
+                "16": "Instagram - Types de média"
+            },
+            "default_value": [],
+            "allow_null": 0,
+            "multiple": 1,
+            "ui": 1,
+            "ajax": 1,
+            "return_format": "value",
+            "placeholder": ""
+        },
+        {
+            "key": "field_5b27a25103e43",
+            "label": "Si les contenus sont tagués avec :",
+            "name": "focused_taxonomy_terms_andor",
             "type": "radio",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
             "choices": {
-                "random": "Aléatoire",
-                "created_desc": "Du plus récent au plus ancien",
-                "created_asc": "Du plus ancien au plus récent"
+                "OR": "un des termes sélectionnés",
+                "AND": "tous les termes sélectionnés"
             },
             "allow_null": 0,
             "other_choice": 0,
-            "save_other_choice": 0,
-            "default_value": "",
+            "default_value": "OR",
             "layout": "horizontal",
-            "return_format": "value"
+            "return_format": "value",
+            "save_other_choice": 0
         },
         {
             "key": "field_5b28d791038fa",
-            "label": "Hierarchie",
+            "label": "Hiérarchie \/ Arborescence",
             "name": "focused_hierarchy",
             "type": "radio",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b27899284ed4",
+                        "operator": "!=",
+                        "value": "touristic_sheet"
+                    },
+                    {
+                        "field": "field_5b27899284ed4",
+                        "operator": "==",
+                        "value": "page"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -135,86 +157,21 @@
             },
             "allow_null": 0,
             "other_choice": 0,
-            "save_other_choice": 0,
             "default_value": "no_hierarchy",
             "layout": "horizontal",
-            "return_format": "value"
-        },
-        {
-            "key": "field_5b27a02e9d7c5",
-            "label": "Etiquettes (termes de taxonomie)",
-            "name": "focused_taxonomy_terms",
-            "type": "select",
-            "instructions": "Choisissez les termes de taxonomie que vous voulez voir remonter dans votre sélection",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": [],
-            "default_value": [],
-            "allow_null": 0,
-            "multiple": 1,
-            "ui": 1,
-            "ajax": 1,
             "return_format": "value",
-            "placeholder": ""
-        },
-        {
-            "key": "field_5b27a25103e43",
-            "label": "Et \/ Ou entre les étiquettes",
-            "name": "focused_taxonomy_terms_andor",
-            "type": "radio",
-            "instructions": "Si ET : les contenus ayant les etiquettes A <strong>ET<\/strong> B seront affichés <\/br>\r\nSi OU : les contenus ayant les étiquettes A <strong>OU<\/strong> B",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "45",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "OR": "OU",
-                "AND": "ET"
-            },
-            "allow_null": 0,
-            "other_choice": 0,
-            "save_other_choice": 0,
-            "default_value": "",
-            "layout": "horizontal",
-            "return_format": "value"
-        },
-        {
-            "key": "field_5b27a0ad9d7c6",
-            "label": "Afficher les étiquettes sur les contenus",
-            "name": "focused_terms_labels",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "30",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
+            "save_other_choice": 0
         },
         {
             "key": "field_5b27a3d703e44",
-            "label": "Nombre d'éléments à afficher",
+            "label": "Nombre d'éléments max",
             "name": "focused_count",
             "type": "number",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "25",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -227,6 +184,50 @@
             "step": ""
         },
         {
+            "key": "field_5b27a67203e48",
+            "label": "Ordre de tri",
+            "name": "focused_sort",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "random": "Aléatoire",
+                "created_desc": "Du plus récent au plus ancien",
+                "created_asc": "Du plus ancien au plus récent"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_5b7d67f609abc",
+            "label": "Textes des boutons sur les cartes",
+            "name": "links_label",
+            "type": "text",
+            "instructions": "Pas de bouton si vide",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Lire la suite",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_5b2917f0ff061",
             "label": "Affichage",
             "name": "display_elements",
@@ -235,7 +236,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -243,25 +244,18 @@
                 "pretitle": "Surtitre",
                 "subtitle": "Sous-titre",
                 "description": "Description",
-                "icon": "Icône",
-                "tags_1": "Taxonomie principale",
-                "tags_2": "Taxonomie secondaire",
-                "author": "Auteur"
+                "icon": "Icône"
             },
             "allow_custom": 0,
-            "save_custom": 0,
             "default_value": [
                 "pretitle",
                 "subtitle",
-                "description",
-                "icon",
-                "tags_1",
-                "tags_2",
-                "author"
+                "icon"
             ],
             "layout": "horizontal",
             "toggle": 0,
-            "return_format": "value"
+            "return_format": "value",
+            "save_custom": 0
         },
         {
             "key": "field_5b2788e084ed2",
@@ -292,15 +286,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "choices": {
-                "blocks-focus-tpl_04": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/focus\/tpl_04\/thumbnail.png\" alt=\"blocks-focus-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Focus - Template 3<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Focus - Template 3<\/h4>Grille 3 blocs 33% 33% 33% avec actif centré (template 3 + image carée + slider au dela de 3)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-focus-tpl_03": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/focus\/tpl_03\/thumbnail.png\" alt=\"blocks-focus-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Focus - Template 3<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Focus - Template 3<\/h4>Grille 3 blocs 33% 33% 33% - Cartes basiques (template 2 + image carrée + slider au dela de 3)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-focus-tpl_02": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/focus\/tpl_02\/thumbnail.png\" alt=\"blocks-focus-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Focus - Template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Focus - Template 2<\/h4>Grille 3 blocs - 1 carte split en 100% (template 1 + image carrée) + 2 cartes basiques (template 1 + image 16:9 + slider au dela de 2)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-focus-tpl_05": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/focus\/tpl_05\/thumbnail.png\" alt=\"blocks-focus-tpl_05\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Focus - Template 5<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Focus - Template 5<\/h4>Grille bloc 100% - Cartes basiques (tpl_02 + image carrée + slider au delà de 1) <span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-focus-tpl_07": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/focus\/tpl_07\/thumbnail.png\" alt=\"blocks-focus-tpl_07\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Focus - Template 7<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Focus - Template 7<\/h4>Grille de 10 contenus - Mixed 3\/4 colonnes - Carte basique (template 4 + image 4:3 + slider au delà de 10)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-focus-tpl_06": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/focus\/tpl_06\/thumbnail.png\" alt=\"blocks-focus-tpl_06\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Focus - Template 6<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Focus - Template 6<\/h4>Grille bloc 100% - Cartes basiques (template 2 + image 16:9 + slider au delà de 1)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-focus-tpl_01": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/focus\/tpl_01\/thumbnail.png\" alt=\"blocks-focus-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Focus - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Focus - Template 1<\/h4>Grille 4 blocs - 1 carte split en 100% (template 1 + image carrée) + 3 cartes basiques (template 1 + image 16:9 + slider au dela de 3)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-            },
+            "choices": [],
             "allow_null": 0,
             "other_choice": 0,
             "save_other_choice": 0,
@@ -309,8 +295,25 @@
             "return_format": "value"
         },
         {
+            "key": "field_5b6820abd37c0",
+            "label": "Options avancées",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
             "key": "field_5b4c8e6c134f8",
-            "label": "Coller les vignettes",
+            "label": "Retirer les marges autour des mises en avant",
             "name": "focus_no_padding",
             "type": "true_false",
             "instructions": "",
@@ -327,5 +330,23 @@
             "ui_on_text": "",
             "ui_off_text": ""
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
+    "modified": 1535112823
 }

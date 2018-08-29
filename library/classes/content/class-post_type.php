@@ -16,54 +16,10 @@ class WoodyTheme_Post_Type
 
     protected function registerHooks()
     {
-        //if (!empty($plugin_hawwwai_kernel)) {
-        add_action('init', array($this, 'registerTourismSheetPostType'), 0);
-        //}
+        add_action('init', array($this, 'registerPostType'));
     }
 
-    public function registerTourismSheetPostType()
+    public function registerPostType()
     {
-        // On rentre les différentes dénominations de notre custom post type qui seront affichées dans l'administration
-        $labels = array(
-            // Le nom au pluriel
-            'name'                => 'Fiche SIT',
-            // Le nom au singulier
-            'singular_name'       => 'Fiche SIT',
-            // Le libellé affiché dans le menu
-            'menu_name'           => 'Fiches SIT',
-            // Les différents libellés de l'administration
-            'all_items'           => 'Toutes les fiches SIT',
-            'view_item'           => 'Voir les fiches SIT',
-            'add_new_item'        => 'Ajouter une fiche SIT',
-            'add_new'             => 'Ajouter',
-            'edit_item'           => 'Editer la fiche SIT',
-            'update_item'         => 'Modifier la fiche SIT',
-            'search_items'        => 'Rechercher une fiche SIT',
-            'not_found'           => 'Non trouvée',
-            'not_found_in_trash'  => 'Non trouvée dans la corbeille',
-        );
-
-        // On peut définir ici d'autres options pour notre custom post type
-        $args = array(
-        'label'               => 'Fiches SITs',
-        'description'         => 'Imports des fiches depuis SIT source',
-        'labels'              => $labels,
-        // On définit les options disponibles dans l'éditeur de notre custom post type ( un titre, un auteur...)
-        'supports'            => array( 'title', 'custom-fields'),
-        /*
-        * Différentes options supplémentaires
-        */
-        'hierarchical'        => false,
-        'public'              => true,
-        'has_archive'         => false,
-        'rewrite'			  => array( 'slug' => 'touristic_sheet'),
-        'show_in_menu'        => true,
-        'menu_icon'           => 'dashicons-location',
-        'show_in_nav_menus'   => false
-
-    );
-
-        // On enregistre notre custom post type qu'on nomme ici "touristic_sheet" et ses arguments
-        register_post_type('touristic_sheet', $args);
     }
 }

@@ -23,7 +23,9 @@ if (targetNode != null) {
 
     //eventListener => On récupère le confID que nous envoie l 'éditeur
     window.addEventListener('message', function(e) {
-        currentConfig.confID_field.attr('value', e.data.conf_id);
+        currentConfig.confID_field.attr('value', e.data);
+        console.log(e);
+
     }, false);
 
     // Callback function to execute when mutations are observed
@@ -34,19 +36,24 @@ if (targetNode != null) {
                     var $this = $(this);
 
                     var context = 'playlist_page';
-                    if ($this.parents('.acf-flexible-content') != 0) {
+                    if ($this.parents('.acf-flexible-content').length != 0) {
                         context = 'playlist_block';
                     }
-
                     $this.unbind().click(function() {
-                        pageTitle = $('input[name="post_title"]').val();
+                        var pageTitle = $('input[name="post_title"]').val(),
+                            post_ID = $('#post_ID').val();
 
                         if (context == 'playlist_block') {
                             var sectionTitle = $this.parents('.acf-row').find('.acf-field-5b0d1dc8907e7 input').val();
-                            var playlistName = 'WP - Bloc Playlist ' + pageTitle + ' - ' + sectionTitle;
+                            if (sectionTitle == '') {
+                                sectionTitle = 'section sans titre';
+                            }
+                            var playlistName = 'WP - Sélection de fiches - post_' + post_ID + ' - ' + pageTitle + ' - ' + sectionTitle;
                         } else {
-                            var playlistName = 'WP - Playlist ' + pageTitle;
+                            var playlistName = 'WP - Playlist - post_' + post_ID + ' - ' + pageTitle;
                         }
+
+                        $('.acf-field-5b338f0d31b16 input[type="text"]').attr('value', playlistName);
 
                         // Set Context
                         currentConfig.context = context;

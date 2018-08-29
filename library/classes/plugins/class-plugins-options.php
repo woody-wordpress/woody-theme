@@ -14,24 +14,6 @@ class WoodyTheme_Plugins_Options
         $this->registerHooks();
     }
 
-    private function updateOption($option_name, $settings, $autoload = 'yes')
-    {
-        $option = get_option($option_name, array());
-
-        if (is_array($settings)) {
-            $new_option = $option;
-            foreach ($settings as $key => $val) {
-                $new_option[$key] = $val;
-            }
-        } else {
-            $new_option = $settings;
-        }
-
-        if (strcmp(json_encode($option), json_encode($new_option)) !== 0) { // Update if different
-            update_option($option_name, $new_option, '', $autoload);
-        }
-    }
-
     protected function registerHooks()
     {
         // Plugins Settings
@@ -39,8 +21,8 @@ class WoodyTheme_Plugins_Options
         update_option('WPLANG', 'fr_FR', '', 'yes');
         update_option('date_format', 'j F Y', '', 'yes');
         update_option('time_format', 'G\hi', '', 'yes');
-        update_option('wp_php_console', array('password' => 'root', 'register' => true, 'short' => true, 'stack' => true), '', 'yes');
-        update_option('rocket_lazyload_options', array('images' => true, 'iframes' => true, 'youtube' => true), '', 'yes');
+        update_option('wp_php_console', ['password' => 'root', 'register' => true, 'short' => true, 'stack' => true], '', 'yes');
+        update_option('rocket_lazyload_options', ['images' => true, 'iframes' => true, 'youtube' => true], '', 'yes');
         update_option('minify_html_active', (WP_ENV == 'dev') ? 'no' : 'yes', '', 'yes');
         update_option('minify_javascript', 'yes', '', 'yes');
         update_option('minify_html_comments', (WP_ENV == 'dev') ? 'no' : 'yes', '', 'yes');
@@ -52,12 +34,32 @@ class WoodyTheme_Plugins_Options
         update_option('upload_url_path', WP_UPLOAD_URL, '', 'yes');
         update_option('uploads_use_yearmonth_folders', true, '', 'yes');
         update_option('thumbnail_crop', true, '', 'yes');
-        update_option('acm_server_settings', array('server_enable' => true), '', 'yes');
+        update_option('acm_server_settings', ['server_enable' => true], '', 'yes');
         update_option('permalink_structure', '/%postname%/', '', 'yes');
-        update_option('permalink-manager-permastructs', array('post_types' => array('touristic_sheet' => '')), '', 'yes');
+        update_option('permalink-manager-permastructs', ['post_types' => ['touristic_sheet' => '']], '', 'yes');
+
+        // Media Library Taxonomy
+        $wpuxss_eml_taxonomies = [
+            'media_category' => [
+                'assigned' => false
+            ],
+            'attachment_types' => [
+                'assigned' => true,
+                'admin_filter' => true,
+                'media_uploader_filter' => true,
+                'media_popup_taxonomy_edit' => false,
+            ],
+            'attachment_hashtags' => [
+                'assigned' => true,
+                'admin_filter' => true,
+                'media_uploader_filter' => true,
+                'media_popup_taxonomy_edit' => true,
+            ],
+        ];
+        $this->updateOption('wpuxss_eml_taxonomies', $wpuxss_eml_taxonomies);
 
         // ACF Key
-        $acf_pro_license = array('key'	=> 'b3JkZXJfaWQ9MTIyNTQwfHR5cGU9ZGV2ZWxvcGVyfGRhdGU9MjAxOC0wMS0xNSAwOTozMToyMw==', 'url' => home_url());
+        $acf_pro_license = ['key' => 'b3JkZXJfaWQ9MTIyNTQwfHR5cGU9ZGV2ZWxvcGVyfGRhdGU9MjAxOC0wMS0xNSAwOTozMToyMw==', 'url' => home_url()];
         $acf_pro_license = base64_encode(maybe_serialize($acf_pro_license));
         $this->updateOption('acf_pro_license', $acf_pro_license);
 
@@ -88,39 +90,70 @@ class WoodyTheme_Plugins_Options
         $yoimg_crop_settings['crop_sizes'] = [
             'thumbnail'             => ['active' => false, 'name' => 'Miniature'],
             'medium'                => ['active' => false, 'name' => 'Medium'],
-            'ratio_8_1_small'       => ['active' => true, 'name' => 'Pano A (360x45)'],
-            'ratio_8_1_medium'      => ['active' => true, 'name' => 'Pano A (640x80)'],
-            'ratio_8_1'             => ['active' => true, 'name' => 'Pano A (1200x150)'],
-            'ratio_8_1_xlarge'      => ['active' => true, 'name' => 'Pano A'],
-            'ratio_4_1_small'       => ['active' => true, 'name' => 'Pano B (360x90)'],
-            'ratio_4_1_medium'      => ['active' => true, 'name' => 'Pano B (640x160)'],
-            'ratio_4_1'             => ['active' => true, 'name' => 'Pano B (1200x300)'],
-            'ratio_4_1_xlarge'      => ['active' => true, 'name' => 'Pano B'],
-            'ratio_2_1_small'       => ['active' => true, 'name' => 'Paysage A (360x180)'],
-            'ratio_2_1_medium'      => ['active' => true, 'name' => 'Paysage A (640x220)'],
-            'ratio_2_1'             => ['active' => true, 'name' => 'Paysage A (1200x600)'],
-            'ratio_2_1_xlarge'      => ['active' => true, 'name' => 'Paysage A'],
-            'ratio_16_9_small'      => ['active' => true, 'name' => 'Paysage B (360x203)'],
-            'ratio_16_9_medium'     => ['active' => true, 'name' => 'Paysage B (640x360)'],
-            'ratio_16_9'            => ['active' => true, 'name' => 'Paysage B (1200x675)'],
-            'ratio_16_9_xlarge'     => ['active' => true, 'name' => 'Paysage B'],
-            'ratio_4_3_small'       => ['active' => true, 'name' => 'Paysage C (360x270)'],
-            'ratio_4_3_medium'      => ['active' => true, 'name' => 'Paysage C (640x480)'],
-            'ratio_4_3'             => ['active' => true, 'name' => 'Paysage C (1200x900)'],
-            'ratio_4_3_xlarge'      => ['active' => true, 'name' => 'Paysage C'],
-            'ratio_3_4_small'       => ['active' => true, 'name' => 'Portrait A (360x480)'],
-            'ratio_3_4_medium'      => ['active' => true, 'name' => 'Portrait A (640x854)'],
+            'ratio_8_1_small'       => ['active' => true, 'name' => 'Pano A'],
+            'ratio_8_1_medium'      => ['active' => true, 'name' => 'Pano A'],
+            'ratio_8_1_large'       => ['active' => true, 'name' => 'Pano A'],
+            'ratio_8_1'             => ['active' => true, 'name' => 'Pano A'],
+            'ratio_4_1_small'       => ['active' => true, 'name' => 'Pano B'],
+            'ratio_4_1_medium'      => ['active' => true, 'name' => 'Pano B'],
+            'ratio_4_1_large'       => ['active' => true, 'name' => 'Pano B'],
+            'ratio_4_1'             => ['active' => true, 'name' => 'Pano B'],
+            'ratio_2_1_small'       => ['active' => true, 'name' => 'Paysage A'],
+            'ratio_2_1_medium'      => ['active' => true, 'name' => 'Paysage A'],
+            'ratio_2_1_large'       => ['active' => true, 'name' => 'Paysage A'],
+            'ratio_2_1'             => ['active' => true, 'name' => 'Paysage A'],
+            'ratio_16_9_small'      => ['active' => true, 'name' => 'Paysage B'],
+            'ratio_16_9_medium'     => ['active' => true, 'name' => 'Paysage B'],
+            'ratio_16_9_large'      => ['active' => true, 'name' => 'Paysage B'],
+            'ratio_16_9'            => ['active' => true, 'name' => 'Paysage B'],
+            'ratio_4_3_small'       => ['active' => true, 'name' => 'Paysage C'],
+            'ratio_4_3_medium'      => ['active' => true, 'name' => 'Paysage C'],
+            'ratio_4_3_large'       => ['active' => true, 'name' => 'Paysage C'],
+            'ratio_4_3 '            => ['active' => true, 'name' => 'Paysage C'],
+            'ratio_3_4_small'       => ['active' => true, 'name' => 'Portrait A'],
+            'ratio_3_4_medium'      => ['active' => true, 'name' => 'Portrait A'],
             'ratio_3_4'             => ['active' => true, 'name' => 'Portrait A'],
-            'ratio_10_16_small'     => ['active' => true, 'name' => 'Portrait B (360x576)'],
-            'ratio_10_16_medium'    => ['active' => true, 'name' => 'Portrait B (360x576)'],
+            'ratio_10_16_small'     => ['active' => true, 'name' => 'Portrait B'],
+            'ratio_10_16_medium'    => ['active' => true, 'name' => 'Portrait B'],
             'ratio_10_16'           => ['active' => true, 'name' => 'Portrait B'],
-            'ratio_a4_small'        => ['active' => true, 'name' => 'Format A4 (360x509)'],
-            'ratio_a4_medium'       => ['active' => true, 'name' => 'Format A4 (640x905)'],
+            'ratio_a4_small'        => ['active' => true, 'name' => 'Format A4'],
+            'ratio_a4_medium'       => ['active' => true, 'name' => 'Format A4'],
             'ratio_a4'              => ['active' => true, 'name' => 'Format A4'],
-            'ratio_square_small'    => ['active' => true, 'name' => 'Carr&eacute; (360x360)'],
-            'ratio_square_medium'   => ['active' => true, 'name' => 'Carr&eacute; (640x640)'],
+            'ratio_square_small'    => ['active' => true, 'name' => 'Carr&eacute;'],
+            'ratio_square_medium'   => ['active' => true, 'name' => 'Carr&eacute;'],
             'ratio_square'          => ['active' => true, 'name' => 'Carr&eacute;'],
         ];
         $this->updateOption('yoimg_crop_settings', $yoimg_crop_settings);
+
+
+
+        // Update permalinks by posts titles
+        $permalink_options = ['general' => ['force_custom_slugs' => 1]];
+        $this->updateOption('permalink-manager', $permalink_options);
+
+        // Set default options for NestedPages
+        $this->updateOption('nestedpages_menusync', 'nosync');
+        $this->updateOption('nestedpages_disable_menu', 'true');
+        $nestedpages_roles = ['editor'];
+        $this->updateOption('nestedpages_allowsorting', $nestedpages_roles);
+    }
+
+    private function updateOption($option_name, $settings, $autoload = 'yes')
+    {
+        $option = get_option($option_name, array());
+
+        if (empty($option)) {
+            $option = array();
+        }
+
+        if (is_array($settings)) {
+            $new_option = array_replace_recursive($option, $settings);
+        } else {
+            $new_option = $settings;
+        }
+
+        if (strcmp(json_encode($option), json_encode($new_option)) !== 0) { // Update if different
+            update_option($option_name, $new_option, '', $autoload);
+        }
     }
 }

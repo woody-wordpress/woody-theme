@@ -54,7 +54,7 @@ function getAutoFocus_data($the_post, $query_form)
     $the_query = [
                     'post_type' => (!empty($query_form['focused_post_type'])) ? $query_form['focused_post_type'] : 'page',
                     'tax_query' => $tax_query,
-                    'nopaging' => true,
+                    // 'nopaging' => true,
                     'posts_per_page' => (!empty($query_form['focused_count'])) ? $query_form['focused_count'] : -1,
                 ];
 
@@ -74,15 +74,19 @@ function getAutoFocus_data($the_post, $query_form)
 
     // On créé la wp_query avec les paramètres définis
     $focused_posts = new WP_Query($the_query);
-    // rcd($the_query, true);
 
     // On transforme la donnée des posts récupérés pour coller aux templates de blocs Woody
     if (!empty($focused_posts->posts)) {
         foreach ($focused_posts->posts as $key => $post) {
-            $post = Timber::get_post($post->ID);
             $data = [];
-
+            $post = Timber::get_post($post->ID);
+            $status = $post->post_status;
+            if ($post->post_status === 'draft') {
+                continue;
+            }
             $data = getPagePreview($query_form, $post);
+            // On ajoute un texte dans le bouton "Lire la suite" s'il a été saisi
+            $data['link']['title'] = (!empty($query_form['links_label'])) ? $query_form['links_label'] : '';
 
             $the_items['items'][$key] = $data;
         }
@@ -113,6 +117,10 @@ function getManualFocus_data($items)
         // La donnée de la vignette correspond à un post sélectionné
         } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content'])) {
             $item = $item_wrapper['existing_content'];
+            $status = $item['content_selection']->post_status;
+            if ($status === 'draft') {
+                continue;
+            }
             $the_items['items'][$key] = getExistingPreview($item);
         }
     }
@@ -150,6 +158,7 @@ function getManualFocus_data($items)
      // On récupère le choix de média afin d'envoyer une image OU une vidéo
      if ($item['media_type'] == 'img' && !empty($item['img'])) {
          $data['img'] = $item['img'];
+         $data['img']['attachment_more_data'] = getAttachmentMoreData($item['img']['ID']);
      } elseif ($item['media_type'] == 'movie' && !empty($item['movie'])) {
          $data['movie'] = $item['movie'];
      }
@@ -197,26 +206,40 @@ function getManualFocus_data($items)
  {
      $data = [];
 
+     $data['page_type'] = getTermsSlugs($item->ID, 'page_type', true);
+
      if (!empty($item->get_field('focus_title'))) {
          $data['title'] = $item->get_field('focus_title');
      } elseif (!empty($item->get_title())) {
          $data['title'] = $item->get_title();
      }
-     if (in_array('pretitle', $item_wrapper['display_elements'])) {
-         $data['pretitle'] = getFieldAndFallback($item, 'focus_pretitle', 'pretitle');
-     }
-     if (in_array('subtitle', $item_wrapper['display_elements'])) {
-        $data['subtitle'] = getFieldAndFallback($item, 'focus_subtitle', 'subtitle');
-     }
-     if (in_array('icon', $item_wrapper['display_elements'])) {
-        $data['icon'] = getFieldAndFallback($item, 'focus_icon', 'icon');
-     }
-     if (in_array('description', $item_wrapper['display_elements'])) {
-        $data['description'] = getFieldAndFallback($item, 'focus_description', 'description');
+
+     //  rcd($item_wrapper['display_elements']);
+
+     if (is_array($item_wrapper['display_elements'])) {
+         if (in_array('pretitle', $item_wrapper['display_elements'])) {
+             $data['pretitle'] = getFieldAndFallback($item, 'focus_pretitle', 'pretitle');
+         }
+         if (in_array('subtitle', $item_wrapper['display_elements'])) {
+             $data['subtitle'] = getFieldAndFallback($item, 'focus_subtitle', 'subtitle');
+         }
+         if (in_array('icon', $item_wrapper['display_elements'])) {
+             $data['icon'] = getFieldAndFallback($item, 'focus_icon', 'icon');
+         }
+         if (in_array('description', $item_wrapper['display_elements'])) {
+             $data['description'] = getFieldAndFallback($item, 'focus_description', 'description');
+         }
      }
 
-    $data['img'] = getFieldAndFallback($item, 'focus_img', 'field_5b0e5ddfd4b1b');
-    $data['link']['url'] = $item->get_path();
+
+     $data['location'] = [];
+     $data['location']['lat'] = (!empty($item->get_field('post_latitude'))) ? $item->get_field('post_latitude') : '';
+     $data['location']['lng'] = (!empty($item->get_field('post_longitude'))) ? $item->get_field('post_longitude') : '';
+     $data['img'] = getFieldAndFallback($item, 'focus_img', 'field_5b0e5ddfd4b1b');
+     if(!empty($data['img'])){
+        $data['img']['attachment_more_data'] = getAttachmentMoreData($data['img']['ID']);
+     }
+     $data['link']['url'] = $item->get_path();
 
      return $data;
  }
@@ -233,18 +256,19 @@ function getManualFocus_data($items)
  * @return   data - Un tableau de données
  *
  */
- function getFieldAndFallback($item, $field, $fallback){
-    $value = [];
+ function getFieldAndFallback($item, $field, $fallback)
+ {
+     $value = [];
 
-    if (!empty($item->get_field($field))) {
-             $value = $item->get_field($field);
-    } elseif (!empty($item->get_field($fallback))) {
-        $value = $item->get_field($fallback);
-    } else{
-        $value = '';
-    }
+     if (!empty($item->get_field($field))) {
+         $value = $item->get_field($field);
+     } elseif (!empty($item->get_field($fallback))) {
+         $value = $item->get_field($fallback);
+     } else {
+         $value = '';
+     }
 
-    return $value;
+     return $value;
  }
 
 /**
@@ -298,54 +322,19 @@ function getManualFocus_data($items)
      return $display;
  }
 
- /**
- *
- * Nom : getAcfGroupFields
- * Auteur : Benoit Bouchaud
- * Return : Retourne un tableau avec les valeurs des champs d'un groupe ACF poyr un post donné
- * @param    group_id - La clé du groupe ACF
- * @return   page_teaser_fields - Un tableau de données
- *
- */
- function getAcfGroupFields($group_id)
- {
-     global $post;
-     $post_id = $post->ID;
-
-     $page_teaser_fields = array();
-
-     $fields = acf_get_fields($group_id);
-
-     if (!empty($fields)) {
-         foreach ($fields as $field) {
-             $field_value = false;
-             if (!empty($field['name'])) {
-                 $field_value = get_field($field['name'], $post_id);
-             }
-
-             if ($field_value && !empty($field_value)) {
-                 $page_teaser_fields[$field['name']] = $field_value;
-             }
-         }
-     }
-
-
-     return $page_teaser_fields;
- }
-
-
 /**
  *
  * Nom : getAttchmentsByTerms
  * Auteur : Benoit Bouchaud
  * Return : Retourne un tableau d'objets image au format acf_image
- * @param    taxonomy - Le slug du vocabulaire dans lequelle on recherche
+ * @param    taxonomy - Le slug du vocabulaire dans lequel on recherche
  * @param    terms - Les termes ciblés dans le vocabulaire
  * @param    query_args - Un tableau d'arguments pour la wp_query
  * @return   attachements - Un tableau d'objets images au format "ACF"
  *
  */
-function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array()){
+function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array())
+{
 
     // On définit certains arguments par défaut pour la requête
     $default_args = [
@@ -374,14 +363,13 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
         )
     ];
 
-    $attachments = new WP_Query( $get_attachments );
+    $attachments = new WP_Query($get_attachments);
     $acf_attachements = [];
     foreach ($attachments->posts as $key => $attachment) {
         // On transforme chacune des images en objet image ACF pour être compatible avec le tpl Woody
         $acf_attachment = acf_get_attachment($attachment);
         $acf_attachements[] = $acf_attachment;
     }
-
     return $acf_attachements;
 }
 
@@ -390,37 +378,94 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
  * Nom : nestedGridsComponents
  * Auteur : Benoit Bouchaud
  * Return : Retourne un DOM html
- * @param    taxonomy - Le slug du vocabulaire dans lequelle on recherche
- * @param    terms - Les termes ciblés dans le vocabulaire
- * @param    query_args - Un tableau d'arguments pour la wp_query
- * @return   attachements - Un tableau d'objets images au format "ACF"
+ * @param    scope - L'élément parent qui contient les grilles
+ * @param    gridTplField - Le slug du champ 'Template'
+ * @param    uniqIid_prefix - Un préfixe d'id, si besoin de créer un id unique (tabs)
+ * @return   scope - Un DOM Html
  *
  */
 
- function nestedGridsComponents($scope, $gridTplField, $uniqIid_prefix = ''){
-    $woodyComponents = Woody::getTwigsPaths();
+ function nestedGridsComponents($scope, $gridTplField, $uniqIid_prefix = '')
+ {
+     $woodyComponents = Woody::getTwigsPaths();
 
-    if(!empty($uniqIid_prefix)){
-        $scope['group_id'] = $uique_id . '-' . uniqid();
-    }
 
-    foreach ($scope as $key => $grid) {
-        $grid_content = [];
-        if(!empty($uniqIid_prefix)){
-            $scope[$key]['el_id'] = $uique_id . '-' . uniqid();
-        }
-        // rcd($grid, true);
 
-       // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
-       if (!empty($grid['section_content'])) {
+     foreach ($scope as $key => $grid) {
+         $grid_content = [];
+         if (!empty($uniqIid_prefix) && is_numeric($key)) {
+             $scope[$key]['el_id'] = $uniqIid_prefix . '-' . uniqid();
+         }
 
-           foreach ($grid['section_content'] as $layout) {
+         // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
+         if (!empty($grid['section_content'])) {
+             foreach ($grid['section_content'] as $layout) {
+                 $grid_content['items'][] = Timber::compile($woodyComponents[$layout['woody_tpl']], $layout);
+             }
+             // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
+             $scope[$key]['section_content'] = Timber::compile($woodyComponents[$grid[$gridTplField]], $grid_content);
+         }
+     }
+     if (!empty($uniqIid_prefix)) {
+         $scope['group_id'] = $uniqIid_prefix . '-' . uniqid();
+     }
 
-               $grid_content['items'][] = Timber::compile($woodyComponents[$layout['woody_tpl']], $layout);
-            }
-            // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
-            $scope[$key]['section_content'] = Timber::compile($woodyComponents[$grid[$gridTplField]], $grid_content);
-       }
-    }
-    return $scope;
+     return $scope;
  }
+
+ /**
+ *
+ * Nom : isWoodyInstagram
+ * Auteur : Benoit Bouchaud
+ * Return : Booleen
+ * @param    taxonomy - Le slug du vocabulaire dans lequel on recherche
+ * @param    media_item - Le media (WP post)
+ * @return   is_instagram - Booléen
+ *
+ */
+
+function isWoodyInstagram($media_item, $is_instagram = false)
+{
+    $media_types = [];
+
+    if (is_array($media_item)) {
+        $the_id = $media_item['ID'];
+    } elseif (is_numeric($media_item)) {
+        $the_id = $media_item;
+    }
+
+    $media_terms = get_the_terms($the_id, 'attachment_types');
+
+    if (!empty($media_terms)) {
+        foreach ($media_terms as $key => $media_term) {
+            $media_types[] = $media_term->slug;
+        }
+
+        if (in_array('instagram', $media_types)) {
+            $is_instagram = true;
+        }
+    }
+
+    return $is_instagram;
+}
+
+function getAttachmentMoreData($attachment_id)
+{
+    $attachment_data = [];
+
+    $attachment_data['author'] = get_field('field_5b5585503c855', $attachment_id);
+    $attachment_data['lat'] = get_field('field_5b55a88e70cbf', $attachment_id);
+    $attachment_data['lng'] = get_field('field_5b55a89e70cc0', $attachment_id);
+    $attachment_data['is_instagram'] = isWoodyInstagram($attachment_id);
+
+    if (!empty($attachment_data['is_instagram'])) {
+        $img_all_data = get_post_meta($attachment_id);
+        $img_all_metadata = unserialize($img_all_data['_wp_attachment_metadata'][0]);
+        $instagram_metadata = $img_all_metadata['woody-instagram'];
+        $attachment_data['instagram_metadata'] = $instagram_metadata;
+
+        // rcd($attachment_data['instagram_metadata'], true);
+    }
+
+    return $attachment_data;
+}

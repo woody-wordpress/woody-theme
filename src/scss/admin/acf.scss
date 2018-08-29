@@ -15,23 +15,131 @@
         justify-content: center;
         align-items: flex-start;
         >label {
-            padding: 6px;
+            width: 100%;
             margin: 10px;
             opacity: .75;
-            border-radius: 3px;
             transition: .3s;
-            border: 1px dotted #c3c3c3;
-            box-shadow: 0 2px 0 #fff;
+            background-color: #eee;
             &:hover {
                 opacity: .95;
-                background-color: #eee;
             }
             &.selected {
                 border-color: #0073aa #006799 #006799;
                 background-color: #0085ba;
                 opacity: 1;
-                box-shadow: 0 2px 0 #006799;
             }
+        }
+    }
+}
+
+// On applique du style aux descritpions et titres des templates dans les champs woody_tpl
+.tpl-choice-wrapper {
+    position: relative;
+    padding: 6px;
+    border: 1px solid #0073aa; // box-shadow: 0 2px 0 #fff;
+    transition: transform .3s;
+    >img {
+        width: 100%;
+        height: auto;
+    }
+    .tpl-title {
+        margin: 10px auto 5px auto;
+        max-width: 90%;
+        line-height: 1.2em;
+    }
+    .toggle-desc {
+        color: #006799;
+        transition: color .3s;
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+    .tpl-desc {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        background-color: #23282d;
+        color: #fff;
+        width: 320px;
+        max-height: 320px;
+        overflow-y: scroll;
+        box-shadow: 0 3px 24px rgba( 0, 0, 0, .3);
+        padding: 20px;
+        z-index: 100000;
+        line-height: 1.2em;
+        .close-desc {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            transition: color .3s;
+            &:hover {
+                color: #006799;
+            }
+        }
+        .tpl-title {
+            margin-bottom: 1.67em;
+            margin-top: 0;
+        }
+    }
+    .desc-backdrop {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 99999;
+    }
+    &:before {
+        font-family: dashicons;
+        display: block;
+        position: absolute;
+        line-height: 1em;
+        top: -6px;
+        right: -6px;
+    }
+    &.fit {
+        &:before {
+            content: '\f147';
+            background-color: #0073aa;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 14px;
+            padding: 3px 3px 2px 2px;
+        }
+        &:hover {
+            box-shadow: 0 5px 4px rgba(#000, .15);
+            transform: translateY(-2px);
+        }
+    }
+    &.notfit {
+        border: 1px dotted lighten(#000, 60%);
+
+        &:before {
+            content: '\f534';
+            color: #f2a49d;
+            font-size: 20px;
+        }
+        >img {
+            opacity: .4;
+        }
+        .toggle-desc,
+        .tpl-title {
+            color: lighten(#000, 80%);
+        }
+
+    }
+}
+
+.selected .tpl-choice-wrapper {
+    .tpl-title,
+    .toggle-desc {
+        color: #fff;
+    }
+    &.fit {
+        &:hover {
+            box-shadow: none;
+            transform: translateY(0);
         }
     }
 }
@@ -93,32 +201,6 @@
                 &:before {
                     color: #fff;
                 }
-            }
-        }
-    }
-}
-
-#acf-group_5afd260eeb4ab,
-#acf-group_5b052bbee40a4 {
-    .acf-tab-group {
-        li:nth-of-type(1) a {
-            &:before {
-                content: '\f119';
-            }
-        }
-        li:nth-of-type(2) a {
-            &:before {
-                content: '\f100';
-            }
-        }
-    }
-}
-
-#acf-group_5afd260eeb4ab {
-    .acf-tab-group {
-        li:nth-of-type(3) a {
-            &:before {
-                content: '\f134';
             }
         }
     }
@@ -260,6 +342,8 @@
 }
 
 // On marque le titre admin de section pour mieux les séparer
+.acf-field-5b59c9bfc6e6a,
+.acf-field-5b472edae3000,
 .acf-field-5b22415792db0,
 .acf-field-5b0d1dc8907e7 {
     input[type=text] {
@@ -290,66 +374,6 @@
     }
 }
 
-// On applique du style aux descritpions et titres des templates dans les champs woody_tpl
-.tpl-choice-wrapper {
-    position: relative;
-    .tpl-title {
-        margin: 10px auto 5px auto;
-        max-width: 90%;
-        line-height: 1.2em;
-    }
-    .toggle-desc {
-        color: #006799;
-        transition: color .3s;
-        &:hover {
-            transform: scale(1.1);
-        }
-    }
-    .tpl-desc {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translateX(-50%) translateY(-50%);
-        background-color: #23282d;
-        color: #fff;
-        width: 320px;
-        max-height: 320px;
-        overflow-y: scroll;
-        box-shadow: 0 3px 24px rgba( 0, 0, 0, .3);
-        padding: 20px;
-        z-index: 100000;
-        line-height: 1.2em;
-        .close-desc {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            transition: color .3s;
-            &:hover {
-                color: #006799;
-            }
-        }
-        .tpl-title {
-            margin-bottom: 1.67em;
-            margin-top: 0;
-        }
-    }
-    .desc-backdrop {
-        width: 100vw;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 99999;
-    }
-}
-
-.selected .tpl-choice-wrapper {
-    .tpl-title,
-    .toggle-desc {
-        color: #fff;
-    }
-}
-
 // Champs complémentaires pour les images
 .acf-field-5b55a89e70cc0,
 .acf-field-5b55a88e70cbf,
@@ -367,5 +391,66 @@
     }
     .acf-input {
         width: 65%;
+    }
+}
+
+// Accorédons "Options avancées"
+.acf-field-5b681e0f93118,
+.acf-field-5b681f7dba008,
+.acf-field-5b6821997df66,
+.acf-field-5b6820abd37c0,
+.acf-field-5b681e66b1056,
+.acf-field-5b68204875187,
+.acf-field-5b68207900a28,
+.acf-field-5b6d84d91944f,
+.acf-field-5b68200fd0bbe {
+    margin: 20px !important;
+    >.acf-accordion-title {
+        color: #006799;
+    }
+}
+
+// Selecteur d'icones woody
+.wicon-select {
+    display: flex;
+    align-items: center;
+    .wicon-woody-icons {
+        margin-right: 10px;
+        font-size: 14px;
+    }
+}
+
+// Nombre d'éléments remontés en sélection automatique
+.woody-count-message {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0;
+    padding: 5px 10px;
+
+    .count {
+        position: relative;
+        color: #006799;
+        margin-left: 8px;
+        font-size: 1.3em;
+        font-weight: 700;
+        &.alert {
+            color: #ef644f;
+        }
+    }
+    small {
+        font-weight: 500;
+    }
+}
+
+// Selection auto : types de publication
+.acf-field-5b27890c84ed3 {
+    .acf-checkbox-list {
+        display: flex;
+        flex-wrap: wrap;
+        li {
+            margin-right: 20px;
+        }
     }
 }

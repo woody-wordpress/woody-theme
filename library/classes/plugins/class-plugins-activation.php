@@ -17,9 +17,7 @@ class WoodyTheme_Plugins_Activation
     {
         $this->activate_plugins = [
             'advanced-custom-fields-pro/acf.php',
-            'acf-relationship-create-pro/acf-relationship-create-pro.php',
             'timber-library/timber.php',
-            'advanced-custom-fields-font-awesome/acf-font-awesome.php',
             'bea-media-analytics/bea-media-analytics.php',
             'bea-sanitize-filename/bea-sanitize-filename.php',
             'minify-html-markup/minify-html.php',
@@ -33,8 +31,8 @@ class WoodyTheme_Plugins_Activation
             'enhanced-media-library/enhanced-media-library.php',
             'wp-nested-pages/nestedpages.php',
             'members/members.php',
-            'hawwwai-plugin/hawwwai.php',
-            'single-sign-on-client/wposso.php',
+            'woody-plugin/woody.php',
+            'single-sign-on-client/wposso.php'
         ];
 
         $this->dev_plugins = [
@@ -50,6 +48,7 @@ class WoodyTheme_Plugins_Activation
             'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
             'media-file-renamer/media-file-renamer.php',
             'regenerate-thumbnails/regenerate-thumbnails.php',
+            'acf-relationship-create-pro/acf-relationship-create-pro.php',
         ];
 
         // Enable debug plugins on DEV

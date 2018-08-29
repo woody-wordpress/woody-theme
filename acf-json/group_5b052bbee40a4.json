@@ -1,24 +1,6 @@
 {
     "key": "group_5b052bbee40a4",
     "title": "Visuel et accroche",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "page"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "acf_after_title",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Le bloc en haut de page contenant un média et des textes d'accroche",
-    "modified": 1532503241,
     "fields": [
         {
             "key": "field_5b052d9aea19c",
@@ -105,12 +87,12 @@
             "return_format": "array",
             "preview_size": "ratio_16_9_small",
             "library": "all",
-            "min_width": "",
+            "min_width": 1920,
             "min_height": "",
             "min_size": "",
             "max_width": "",
             "max_height": "",
-            "max_size": "",
+            "max_size": 8,
             "mime_types": ""
         },
         {
@@ -231,9 +213,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "choices": {
-                "blocks-hero-tpl_01": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/hero\/tpl_01\/thumbnail.png\" alt=\"blocks-hero-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Hero - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Hero - Template 1<\/h4>Visuel et accroche (Icône, Sur-titre, Titre, sous-titre, description) + image ou vidéo de fond + video complémentaire<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-            },
+            "choices": [],
             "allow_null": 0,
             "other_choice": 0,
             "save_other_choice": 0,
@@ -265,5 +245,23 @@
             "layout": "horizontal",
             "return_format": "value"
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Le bloc en haut de page contenant un média et des textes d'accroche",
+    "modified": 1533544507
 }

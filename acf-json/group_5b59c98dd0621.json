@@ -50,11 +50,11 @@
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
-                        "class": "",
+                        "class": "hide-label",
                         "id": ""
                     },
                     "default_value": "",
-                    "placeholder": "",
+                    "placeholder": "Titre visible lorsque l'onglet est refermé (uniquement pour l'adlinistration)",
                     "prepend": "",
                     "append": "",
                     "maxlength": ""
@@ -120,6 +120,23 @@
             "save_other_choice": 0
         },
         {
+            "key": "field_5b68204875187",
+            "label": "Options avancées",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
             "key": "field_5b59cdb118a98",
             "label": "Paramètres de fond",
             "name": "slides_bg_parameters",
@@ -158,5 +175,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1532614208
+    "modified": 1533727338
 }

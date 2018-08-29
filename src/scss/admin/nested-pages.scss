@@ -33,10 +33,10 @@
                     }
                 }
                 &.open {
-                    background-color: #0073aa !important;
+                    background-color: #dadada !important;
                     &:after {
                         content: '\f335';
-                        color: #fff;
+                        color: rgba(0, 0, 0, .4);
                     }
                 }
             }
