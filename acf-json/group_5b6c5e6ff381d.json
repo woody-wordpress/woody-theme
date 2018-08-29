@@ -1,6 +1,24 @@
 {
     "key": "group_5b6c5e6ff381d",
     "title": "Informations séjour",
+    "location": [
+        [
+            {
+                "param": "post_taxonomy",
+                "operator": "==",
+                "value": "page_type:trip"
+            }
+        ]
+    ],
+    "menu_order": 10,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Affiche le prix et la duré d'un séjour",
+    "modified": 1535538375,
     "fields": [
         {
             "key": "field_5b6d613b9fe7d",
@@ -409,23 +427,5 @@
             "layout": "horizontal",
             "return_format": "value"
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_taxonomy",
-                "operator": "==",
-                "value": "page_type:trip"
-            }
-        ]
-    ],
-    "menu_order": 10,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Affiche le prix et la duré d'un séjour",
-    "modified": 1533898056
+    ]
 }

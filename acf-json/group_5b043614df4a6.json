@@ -1,6 +1,24 @@
 {
     "key": "group_5b043614df4a6",
     "title": "Boutons \/ Liens",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Répète le groupe \"Bouton \/ Lien\"",
+    "modified": 1535538374,
     "fields": [
         {
             "key": "field_5b0ec6aa849c5",
@@ -124,23 +142,5 @@
             "layout": "vertical",
             "return_format": "value"
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Répète le groupe \"Bouton \/ Lien\"",
-    "modified": 1532506429
+    ]
 }

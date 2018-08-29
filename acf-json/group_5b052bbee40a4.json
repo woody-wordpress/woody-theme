@@ -1,6 +1,24 @@
 {
     "key": "group_5b052bbee40a4",
     "title": "Visuel et accroche",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Le bloc en haut de page contenant un média et des textes d'accroche",
+    "modified": 1535538375,
     "fields": [
         {
             "key": "field_5b052d9aea19c",
@@ -245,23 +263,5 @@
             "layout": "horizontal",
             "return_format": "value"
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "page"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "acf_after_title",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Le bloc en haut de page contenant un média et des textes d'accroche",
-    "modified": 1533544507
+    ]
 }

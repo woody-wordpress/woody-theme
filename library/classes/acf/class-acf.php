@@ -26,8 +26,8 @@ class WoodyTheme_ACF
         add_filter('acf/load_field/type=select', array($this, 'woodyIconLoadField'));
         add_filter('acf/load_field/name=focused_taxonomy_terms', array($this, 'focusedTaxonomyTermsLoadField'));
         add_filter('acf/location/rule_types', array($this, 'woodyAcfAddPageTypeLocationRule'));
-        add_filter('acf/location/rule_values/the_page_type', array($this, 'woodyAcfAddPageTypeChoices'));
-        add_filter('acf/location/rule_match/the_page_type', array($this, 'woodyAcfPageTypeMatch'), 10, 3);
+        add_filter('acf/location/rule_values/page_type_and_children', array($this, 'woodyAcfAddPageTypeChoices'));
+        add_filter('acf/location/rule_match/page_type_and_children', array($this, 'woodyAcfPageTypeMatch'), 10, 3);
         // add_filter('acf/load_field/name=playlist_name', array($this, 'playlistNameLoadField'));
     }
 
@@ -163,7 +163,7 @@ class WoodyTheme_ACF
 
     public function woodyAcfAddPageTypeLocationRule($choices)
     {
-        $choices['Woody']['the_page_type'] = 'Type de publication';
+        $choices['Woody']['page_type_and_children'] = 'Type de publication (et ses enfants)';
         return $choices;
     }
 
@@ -187,11 +187,18 @@ class WoodyTheme_ACF
         }
 
         $selected_term_ids = [];
-        if ($options['ajax']) {
-            $selected_term_ids = $options['post_taxonomy'];
+        if ($options['ajax'] && !empty($options['post_terms']) && !empty($options['post_terms']['page_type'])) {
+            $selected_term_ids = $options['post_terms']['page_type'];
         } else {
             $current_page_type = wp_get_post_terms($options['post_id'], 'page_type');
-            $selected_term_ids[] = $current_page_type[0]->term_id;
+            if (!empty($current_page_type[0]) && !empty($current_page_type[0]->term_id)) {
+                $selected_term_ids[] = $current_page_type[0]->term_id;
+            }
+        }
+
+        // Toujours vide à la création de page
+        if (empty($selected_term_ids)) {
+            return false;
         }
 
         foreach ($selected_term_ids as $term_id) {

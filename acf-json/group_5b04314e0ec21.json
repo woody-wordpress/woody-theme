@@ -1,6 +1,24 @@
 {
     "key": "group_5b04314e0ec21",
     "title": "Galerie de photos",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Elément de contenu (Liste de photos)",
+    "modified": 1535538374,
     "fields": [
         {
             "key": "field_5b04475f63df2",
@@ -189,23 +207,5 @@
             "prefix_label": 0,
             "prefix_name": 0
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Elément de contenu (Liste de photos)",
-    "modified": 1533560572
+    ]
 }

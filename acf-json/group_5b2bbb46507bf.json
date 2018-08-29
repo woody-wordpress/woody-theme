@@ -1,6 +1,24 @@
 {
     "key": "group_5b2bbb46507bf",
     "title": "En-tête de page",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Les infos principales de la page + la possibilité d'ajouter les liens de partage et d'ajout aux favoris",
+    "modified": 1535538374,
     "fields": [
         {
             "key": "field_5b2bc0e256db0",
@@ -382,23 +400,5 @@
             "layout": "horizontal",
             "return_format": "value"
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "page"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Les infos principales de la page + la possibilité d'ajouter les liens de partage et d'ajout aux favoris",
-    "modified": 1534856607
+    ]
 }

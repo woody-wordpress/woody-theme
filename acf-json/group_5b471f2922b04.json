@@ -18,7 +18,7 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1532503240,
+    "modified": 1535538375,
     "fields": [
         {
             "key": "field_5b471f334efed",
@@ -129,9 +129,7 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "blocks-tabs-tpl_01": "<div class=\"tpl-choice-wrapper\">\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody\/views\/blocks\/tabs\/tpl_01\/thumbnail.png\" alt=\"blocks-tabs-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Onlgets - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Onlgets - Template 1<\/h4>Grilles de blocs au choix dans des onglets (barre d'onglets au dessus)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-            },
+            "choices": [],
             "allow_null": 0,
             "other_choice": 0,
             "save_other_choice": 0,
