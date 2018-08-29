@@ -1,8 +1,7 @@
 {
     "key": "group_5b052bbee40a4",
     "title": "Visuel et accroche",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b052d9aea19c",
             "label": "Contenu",
             "name": "",
@@ -71,13 +70,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b0e5cc3d4b1a",
-                        "operator": "==",
-                        "value": "img"
-                    }
-                ]
+                [{
+                    "field": "field_5b0e5cc3d4b1a",
+                    "operator": "==",
+                    "value": "img"
+                }]
             ],
             "wrapper": {
                 "width": "70",
@@ -103,13 +100,11 @@
             "instructions": "Cette vidéo doit être courte, muette et peu mouvementée",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b0e5cc3d4b1a",
-                        "operator": "==",
-                        "value": "movie"
-                    }
-                ]
+                [{
+                    "field": "field_5b0e5cc3d4b1a",
+                    "operator": "==",
+                    "value": "movie"
+                }]
             ],
             "wrapper": {
                 "width": "70",
@@ -117,29 +112,27 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [
-                {
-                    "key": "field_5b16b2f2aa625",
-                    "label": "Fichiers vidéos",
-                    "name": "movie_files",
-                    "type": "clone",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "clone": [
-                        "group_5b16b09337a33"
-                    ],
-                    "display": "seamless",
-                    "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0
-                }
-            ]
+            "sub_fields": [{
+                "key": "field_5b16b2f2aa625",
+                "label": "Fichiers vidéos",
+                "name": "movie_files",
+                "type": "clone",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "clone": [
+                    "group_5b16b09337a33"
+                ],
+                "display": "seamless",
+                "layout": "block",
+                "prefix_label": 0,
+                "prefix_name": 0
+            }]
         },
         {
             "key": "field_5b44b7fedb880",
@@ -168,13 +161,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b44b7fedb880",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
+                [{
+                    "field": "field_5b44b7fedb880",
+                    "operator": "==",
+                    "value": "1"
+                }]
             ],
             "wrapper": {
                 "width": "",
@@ -247,13 +238,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "page"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "page"
+        }]
     ],
     "menu_order": 0,
     "position": "acf_after_title",
@@ -263,5 +252,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Le bloc en haut de page contenant un média et des textes d'accroche",
-    "modified": 1533544507
+    "modified": 1535545335
 }

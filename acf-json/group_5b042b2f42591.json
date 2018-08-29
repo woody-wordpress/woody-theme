@@ -1,8 +1,7 @@
 {
     "key": "group_5b042b2f42591",
     "title": "Fichier",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b042b30ab6a3",
             "label": "Icône",
             "name": "file_woody_icon",
@@ -64,13 +63,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -80,5 +77,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Groupe utilisé en clone pour d'autres groupes (Fichier + Icône + Libellé)",
-    "modified": 1534428072
+    "modified": 1535545335
 }

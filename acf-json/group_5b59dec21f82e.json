@@ -1,8 +1,7 @@
 {
     "key": "group_5b59dec21f82e",
     "title": "Mini fiche",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b59deee9fc65",
             "label": "Contenu",
             "name": "",
@@ -80,13 +79,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -96,5 +93,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Relation à <strong>un<\/strong> post de type fiche touristique",
-    "modified": 1532609399
+    "modified": 1535545335
 }

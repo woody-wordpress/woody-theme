@@ -2,13 +2,11 @@
     "key": "group_5b33890e6fa0b",
     "title": "Playlist Tourisme",
     "location": [
-        [
-            {
-                "param": "post_taxonomy",
-                "operator": "==",
-                "value": "page_type:playlist_tourism"
-            }
-        ]
+        [{
+            "param": "post_taxonomy",
+            "operator": "==",
+            "value": "page_type:playlist_tourism"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -18,9 +16,8 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Formulaire connecté à l'éditeur Hawwwai",
-    "modified": 1532503240,
-    "fields": [
-        {
+    "modified": 1535545335,
+    "fields": [{
             "key": "field_5b338f0d31b16",
             "label": "Nom",
             "name": "playlist_name",

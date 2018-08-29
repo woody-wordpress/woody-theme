@@ -1,8 +1,7 @@
 {
     "key": "group_5b043614df4a6",
     "title": "Boutons \/ Liens",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b0ec6aa849c5",
             "label": "Contenu",
             "name": "",
@@ -39,29 +38,27 @@
             "hide_collapse": 1,
             "collapse_all_repeater": 0,
             "btn-icon-only": 0,
-            "sub_fields": [
-                {
-                    "key": "field_5b0436670b9d6",
-                    "label": "Bouton \/ Lien",
-                    "name": "link",
-                    "type": "clone",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "clone": [
-                        "group_5b0422e167d2a"
-                    ],
-                    "display": "seamless",
-                    "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0
-                }
-            ]
+            "sub_fields": [{
+                "key": "field_5b0436670b9d6",
+                "label": "Bouton \/ Lien",
+                "name": "link",
+                "type": "clone",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "clone": [
+                    "group_5b0422e167d2a"
+                ],
+                "display": "seamless",
+                "layout": "block",
+                "prefix_label": 0,
+                "prefix_name": 0
+            }]
         },
         {
             "key": "field_5b0ec9fe849c6",
@@ -126,13 +123,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -142,5 +137,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Répète le groupe \"Bouton \/ Lien\"",
-    "modified": 1532506429
+    "modified": 1535545335
 }

@@ -2,13 +2,11 @@
     "key": "group_5b0ec29dbd905",
     "title": "Bloc de texte + icône",
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -18,9 +16,8 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Clone du bloc en-tête (peut-être utilisé pour les \"points forts\" ou les \"on aime\"",
-    "modified": 1532503240,
-    "fields": [
-        {
+    "modified": 1535545335,
+    "fields": [{
             "key": "field_5b0ec2bc0a8d0",
             "label": "Contenu",
             "name": "",

@@ -1,8 +1,7 @@
 {
     "key": "group_5b041c24d0dd7",
     "title": "En-tête",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b041d61adb72",
             "label": "Titre",
             "name": "title",
@@ -91,21 +90,18 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b59bbd0e094c",
-                        "operator": "==",
-                        "value": "picto"
-                    }
-                ]
+                [{
+                    "field": "field_5b59bbd0e094c",
+                    "operator": "==",
+                    "value": "picto"
+                }]
             ],
             "wrapper": {
                 "width": "33",
                 "class": "",
                 "id": ""
             },
-            "choices": {
-            },
+            "choices": {},
             "default_value": [],
             "allow_null": 1,
             "multiple": 0,
@@ -122,13 +118,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b59bbd0e094c",
-                        "operator": "==",
-                        "value": "img"
-                    }
-                ]
+                [{
+                    "field": "field_5b59bbd0e094c",
+                    "operator": "==",
+                    "value": "img"
+                }]
             ],
             "wrapper": {
                 "width": "",
@@ -167,13 +161,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -183,5 +175,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "En-tête générique avec Icône - Sur-titre - Titre - Sous-titre - Description",
-    "modified": 1534424113
+    "modified": 1535545335
 }

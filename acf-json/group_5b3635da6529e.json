@@ -1,8 +1,7 @@
 {
     "key": "group_5b3635da6529e",
     "title": "Coordonnées GPS",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b3635c0fc651",
             "label": "Latitude",
             "name": "post_latitude",
@@ -42,20 +41,16 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "page"
-            }
-        ],
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "touristic_sheet"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "page"
+        }],
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "touristic_sheet"
+        }]
     ],
     "menu_order": 0,
     "position": "side",
@@ -65,5 +60,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1534158611
+    "modified": 1535545335
 }

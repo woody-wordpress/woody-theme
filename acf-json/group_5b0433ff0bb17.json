@@ -1,8 +1,7 @@
 {
     "key": "group_5b0433ff0bb17",
     "title": "FAQ",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b05170c5fa21",
             "label": "Contenu",
             "name": "",
@@ -58,29 +57,27 @@
             "hide_collapse": 1,
             "collapse_all_repeater": 1,
             "btn-icon-only": 0,
-            "sub_fields": [
-                {
-                    "key": "field_5b0434294eb1a",
-                    "label": "Section de l'accordéon",
-                    "name": "accordion_section",
-                    "type": "clone",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "clone": [
-                        "group_5b04294e31eac"
-                    ],
-                    "display": "seamless",
-                    "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0
-                }
-            ]
+            "sub_fields": [{
+                "key": "field_5b0434294eb1a",
+                "label": "Section de l'accordéon",
+                "name": "accordion_section",
+                "type": "clone",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "clone": [
+                    "group_5b04294e31eac"
+                ],
+                "display": "seamless",
+                "layout": "block",
+                "prefix_label": 0,
+                "prefix_name": 0
+            }]
         },
         {
             "key": "field_5b05171b5fa22",
@@ -121,13 +118,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -137,5 +132,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Titre + Accordéon)",
-    "modified": 1532506510
+    "modified": 1535545335
 }

@@ -1,8 +1,7 @@
 {
     "key": "group_5b0422e167d2a",
     "title": "Bouton \/ Lien",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b0422ed7d07b",
             "label": "Icône",
             "name": "button_woody_icon",
@@ -41,13 +40,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -57,5 +54,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Une icône et un champ lien utilisés en clone dans d'autres groupes",
-    "modified": 1534428063
+    "modified": 1535545335
 }

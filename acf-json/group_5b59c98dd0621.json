@@ -1,8 +1,7 @@
 {
     "key": "group_5b59c98dd0621",
     "title": "Slides",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b59c993c6e68",
             "label": "Contenu",
             "name": "",
@@ -39,8 +38,7 @@
             "hide_collapse": 0,
             "collapse_all_repeater": 1,
             "btn-icon-only": 0,
-            "sub_fields": [
-                {
+            "sub_fields": [{
                     "key": "field_5b59c9bfc6e6a",
                     "label": "Titre pour l'administration",
                     "name": "slide_bo_title",
@@ -159,13 +157,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -175,5 +171,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1533727338
+    "modified": 1535545335
 }

@@ -1,8 +1,7 @@
 {
     "key": "group_5b5b2fbc3460d",
     "title": "Socialwall",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b5b3223e946f",
             "label": "Contenu",
             "name": "",
@@ -50,13 +49,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b5b310be946e",
-                        "operator": "==",
-                        "value": "auto"
-                    }
-                ]
+                [{
+                    "field": "field_5b5b310be946e",
+                    "operator": "==",
+                    "value": "auto"
+                }]
             ],
             "wrapper": {
                 "width": "",
@@ -80,13 +77,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b5b310be946e",
-                        "operator": "==",
-                        "value": "manual"
-                    }
-                ]
+                [{
+                    "field": "field_5b5b310be946e",
+                    "operator": "==",
+                    "value": "manual"
+                }]
             ],
             "wrapper": {
                 "width": "",
@@ -238,13 +233,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -254,5 +247,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Une galerie, automatique ou manuelle avec des choix de grilles très spécifiques",
-    "modified": 1533638284
+    "modified": 1535545335
 }
