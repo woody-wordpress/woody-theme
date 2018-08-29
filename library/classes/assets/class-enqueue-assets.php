@@ -34,7 +34,13 @@ class WoodyTheme_Enqueue_Assets
         // Dependencies of main.js
         wp_enqueue_script('cookieconsent', 'https://cdn.jsdelivr.net/npm/cookieconsent@3.1.0/build/cookieconsent.min.js', array(), '', true);
         wp_enqueue_script('swiper', 'https://cdn.jsdelivr.net/npm/swiper@4.3.5/dist/js/swiper.min.js', array(), '', true);
-        wp_enqueue_script('lightgallery', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/dist/js/lightgallery-all.min.js', array('jquery'), '', true);
+        wp_enqueue_script('lightgallery', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/dist/js/lightgallery.min.js', array('jquery'), '', true);
+        wp_enqueue_script('lg-pager', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-pager.min.js', array('lightgallery'), '', true);
+        wp_enqueue_script('lg-thumbnail', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-thumbnail.min.js', array('lightgallery'), '', true);
+        wp_enqueue_script('lg-video', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-video.min.js', array('lightgallery'), '', true);
+        wp_enqueue_script('lg-zoom', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-zoom.min.js', array('lightgallery'), '', true);
+        wp_enqueue_script('lg-fullscreen', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-fullscreen.min.js', array('lightgallery'), '', true);
+        wp_enqueue_script('lg-autoplay', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-autoplay.min.js', array('lightgallery'), '', true);
 
         // Touristic maps libraries - TODO:try to call in packagist
         wp_enqueue_script('leaflet', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet-src.min.js', array(), '', true);
@@ -51,7 +57,19 @@ class WoodyTheme_Enqueue_Assets
     public function enqueueAssets()
     {
         // Enqueue the main Scripts
-        wp_enqueue_script('main-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('js/main.js'), array('jquery', 'swiper', 'cookieconsent', 'lightgallery'), '', true);
+        $dependencies = [
+            'jquery',
+            'swiper',
+            'cookieconsent',
+            'lightgallery',
+            'lg-pager',
+            'lg-thumbnail',
+            'lg-video',
+            'lg-zoom',
+            'lg-fullscreen',
+            'lg-autoplay'
+        ];
+        wp_enqueue_script('main-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('js/main.js'), $dependencies, '', true);
 
         // Enqueue the main Stylesheet.
         wp_enqueue_style('main-stylesheet', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('css/main.css'), array(), '', 'all');
@@ -65,7 +83,12 @@ class WoodyTheme_Enqueue_Assets
         wp_enqueue_script('selectize', 'https://cdn.jsdelivr.net/npm/selectize@0.12.6/dist/js/standalone/selectize.min.js', array('jquery'), '', true);
 
         // Enqueue the main Scripts
-        wp_enqueue_script('admin-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('js/admin.js'), array('jquery', 'arrive', 'selectize'), false, true);
+        $dependencies = [
+            'jquery',
+            'arrive',
+            'selectize'
+        ];
+        wp_enqueue_script('admin-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('js/admin.js'), $dependencies, false, true);
 
         // Enqueue the main Stylesheet.
         wp_enqueue_style('admin-stylesheet', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('css/admin.css'), array(), '', 'all');
