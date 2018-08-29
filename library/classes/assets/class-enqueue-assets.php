@@ -62,7 +62,7 @@ class WoodyTheme_Enqueue_Assets
     {
         // Dependencies of admin.js
         wp_enqueue_script('arrive', 'https://cdn.jsdelivr.net/npm/arrive@2.4.1/src/arrive.min.js', array(), '', true);
-        wp_enqueue_script('selectize', 'https://cdn.jsdelivr.net/npm/selectize@0.12.6/dist/js/selectize.min.js', array(), '', true);
+        wp_enqueue_script('selectize', 'https://cdn.jsdelivr.net/npm/selectize@0.12.6/dist/js/standalone/selectize.min.js', array('jquery'), '', true);
 
         // Enqueue the main Scripts
         wp_enqueue_script('admin-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('js/admin.js'), array('jquery', 'arrive', 'selectize'), false, true);
