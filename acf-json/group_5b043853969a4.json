@@ -1,7 +1,26 @@
 {
     "key": "group_5b043853969a4",
     "title": "Fichiers à télécharger",
-    "fields": [{
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Répète le groupe \"Fichier\"",
+    "modified": 1535538374,
+    "fields": [
+        {
             "key": "field_5b0ec65286b3d",
             "label": "Contenu",
             "name": "",
@@ -38,27 +57,29 @@
             "hide_collapse": 1,
             "collapse_all_repeater": 1,
             "btn-icon-only": 0,
-            "sub_fields": [{
-                "key": "field_5b043869f155d",
-                "label": "Fichier",
-                "name": "file",
-                "type": "clone",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "clone": [
-                    "group_5b042b2f42591"
-                ],
-                "display": "seamless",
-                "layout": "block",
-                "prefix_label": 0,
-                "prefix_name": 0
-            }]
+            "sub_fields": [
+                {
+                    "key": "field_5b043869f155d",
+                    "label": "Fichier",
+                    "name": "file",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_5b042b2f42591"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                }
+            ]
         },
         {
             "key": "field_5b0ec65d86b3e",
@@ -121,21 +142,5 @@
             "layout": "vertical",
             "return_format": "value"
         }
-    ],
-    "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Répète le groupe \"Fichier\"",
-    "modified": 1535545335
+    ]
 }

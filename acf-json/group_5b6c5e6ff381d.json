@@ -1,7 +1,26 @@
 {
     "key": "group_5b6c5e6ff381d",
     "title": "Informations séjour",
-    "fields": [{
+    "location": [
+        [
+            {
+                "param": "post_taxonomy",
+                "operator": "==",
+                "value": "page_type:trip"
+            }
+        ]
+    ],
+    "menu_order": 10,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Affiche le prix et la duré d'un séjour",
+    "modified": 1535538375,
+    "fields": [
+        {
             "key": "field_5b6d613b9fe7d",
             "label": "Contenu",
             "name": "",
@@ -31,7 +50,8 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5b6d47c62d0ab",
                     "label": "Type",
                     "name": "price_type",
@@ -89,16 +109,20 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5b6d47c62d0ab",
-                            "operator": "==",
-                            "value": "evolving_single"
-                        }],
-                        [{
-                            "field": "field_5b6d47c62d0ab",
-                            "operator": "==",
-                            "value": "evolving_package"
-                        }]
+                        [
+                            {
+                                "field": "field_5b6d47c62d0ab",
+                                "operator": "==",
+                                "value": "evolving_single"
+                            }
+                        ],
+                        [
+                            {
+                                "field": "field_5b6d47c62d0ab",
+                                "operator": "==",
+                                "value": "evolving_package"
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "25",
@@ -121,16 +145,20 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5b6d47c62d0ab",
-                            "operator": "==",
-                            "value": "evolving_single"
-                        }],
-                        [{
-                            "field": "field_5b6d47c62d0ab",
-                            "operator": "==",
-                            "value": "evolving_package"
-                        }]
+                        [
+                            {
+                                "field": "field_5b6d47c62d0ab",
+                                "operator": "==",
+                                "value": "evolving_single"
+                            }
+                        ],
+                        [
+                            {
+                                "field": "field_5b6d47c62d0ab",
+                                "operator": "==",
+                                "value": "evolving_package"
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "25",
@@ -180,7 +208,8 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5b6c66b2b54f0",
                     "label": "Accroche",
                     "name": "prefix_days",
@@ -255,7 +284,8 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5b6d54b703820",
                     "label": "Minimum",
                     "name": "peoples_min",
@@ -397,21 +427,5 @@
             "layout": "horizontal",
             "return_format": "value"
         }
-    ],
-    "location": [
-        [{
-            "param": "post_taxonomy",
-            "operator": "==",
-            "value": "page_type:trip"
-        }]
-    ],
-    "menu_order": 10,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Affiche le prix et la duré d'un séjour",
-    "modified": 1535545335
+    ]
 }

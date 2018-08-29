@@ -1,7 +1,26 @@
 {
     "key": "group_5b461a3831284",
     "title": "Appel à l'action",
-    "fields": [{
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Un bloc d'appel à laction avec texte et lien\/fichier + couleur de fond possible",
+    "modified": 1535538373,
+    "fields": [
+        {
             "key": "field_5b461a2b131b3",
             "label": "Contenu",
             "name": "",
@@ -111,7 +130,9 @@
                 "wicon--07-cargo-ship-1": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--07-cargo-ship-1\"><\/span><span>Cargo ship 1<\/span><\/div>",
                 "wicon--26-rocket": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--26-rocket\"><\/span><span>Rocket<\/span><\/div>",
                 "wicon--05-attack-plane": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--05-attack-plane\"><\/span><span>Attack plane<\/span><\/div>",
-                "wicon--04-attack-plane-4": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--04-attack-plane-4\"><\/span><span>Attack plane 4<\/span><\/div>"
+                "wicon--04-attack-plane-4": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--04-attack-plane-4\"><\/span><span>Attack plane 4<\/span><\/div>",
+                "wicon-053-instagram": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-053-instagram\"><\/span><span>Instagram<\/span><\/div>",
+                "wicon-052-external": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-052-external\"><\/span><span>External<\/span><\/div>"
             },
             "default_value": [],
             "allow_null": 1,
@@ -173,11 +194,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b4621c8aebdd",
-                    "operator": "==",
-                    "value": "link"
-                }]
+                [
+                    {
+                        "field": "field_5b4621c8aebdd",
+                        "operator": "==",
+                        "value": "link"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -185,7 +208,8 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5b7595f282076",
                     "label": "Lien",
                     "name": "link",
@@ -235,11 +259,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b4621c8aebdd",
-                    "operator": "==",
-                    "value": "file"
-                }]
+                [
+                    {
+                        "field": "field_5b4621c8aebdd",
+                        "operator": "==",
+                        "value": "file"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -247,27 +273,29 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
-                "key": "field_5b462226aebde",
-                "label": "Fichier",
-                "name": "file",
-                "type": "clone",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "45",
-                    "class": "",
-                    "id": ""
-                },
-                "clone": [
-                    "group_5b042b2f42591"
-                ],
-                "display": "seamless",
-                "layout": "block",
-                "prefix_label": 0,
-                "prefix_name": 0
-            }]
+            "sub_fields": [
+                {
+                    "key": "field_5b462226aebde",
+                    "label": "Fichier",
+                    "name": "file",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "45",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_5b042b2f42591"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                }
+            ]
         },
         {
             "key": "field_5b461b36131b9",
@@ -344,21 +372,5 @@
             "prefix_label": 0,
             "prefix_name": 0
         }
-    ],
-    "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Un bloc d'appel à laction avec texte et lien\/fichier + couleur de fond possible",
-    "modified": 1535545335
+    ]
 }

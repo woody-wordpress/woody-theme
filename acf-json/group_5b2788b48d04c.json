@@ -1,7 +1,26 @@
 {
     "key": "group_5b2788b48d04c",
     "title": "Mise en avant(sélection automatique)",
-    "fields": [{
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
+    "modified": 1535538374,
+    "fields": [
+        {
             "key": "field_5b2788cc84ed1",
             "label": "Contenu",
             "name": "",
@@ -49,11 +68,13 @@
             "instructions": "Choisissez le(s) type(s) de publication que vous souhaitez mettre en avant",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b27899284ed4",
-                    "operator": "==",
-                    "value": "page"
-                }]
+                [
+                    {
+                        "field": "field_5b27899284ed4",
+                        "operator": "==",
+                        "value": "page"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -83,10 +104,10 @@
                 "id": ""
             },
             "choices": {
-                "19": "Automne - Saisons",
-                "17": "Été - Saisons",
-                "20": "Hiver - Saisons",
-                "18": "Printemps - Saisons",
+                "13": "Automne - Saisons",
+                "11": "Été - Saisons",
+                "14": "Hiver - Saisons",
+                "12": "Printemps - Saisons",
                 "16": "Instagram - Types de média"
             },
             "default_value": [],
@@ -129,7 +150,8 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
+                [
+                    {
                         "field": "field_5b27899284ed4",
                         "operator": "!=",
                         "value": "touristic_sheet"
@@ -326,21 +348,5 @@
             "ui_on_text": "",
             "ui_off_text": ""
         }
-    ],
-    "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1535545335
+    ]
 }

@@ -2,11 +2,13 @@
     "key": "group_5a61fa1e0e50c",
     "title": "Type de publication",
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "page"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
     ],
     "menu_order": -100,
     "position": "acf_after_title",
@@ -16,27 +18,29 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Selection du type de contenu basé sur la taxonomie \"page_type\"",
-    "modified": 1535545335,
-    "fields": [{
-        "key": "field_5a61fa38b704f",
-        "label": "Type de publication",
-        "name": "content_type",
-        "type": "taxonomy",
-        "instructions": "Choisissez le type de publication que vous souhaitez créer",
-        "required": 1,
-        "conditional_logic": 0,
-        "wrapper": {
-            "width": "30",
-            "class": "",
-            "id": ""
-        },
-        "taxonomy": "page_type",
-        "field_type": "select",
-        "allow_null": 0,
-        "add_term": 0,
-        "save_terms": 1,
-        "load_terms": 0,
-        "return_format": "object",
-        "multiple": 0
-    }]
+    "modified": 1535538373,
+    "fields": [
+        {
+            "key": "field_5a61fa38b704f",
+            "label": "Type de publication",
+            "name": "content_type",
+            "type": "taxonomy",
+            "instructions": "Choisissez le type de publication que vous souhaitez créer",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "page_type",
+            "field_type": "select",
+            "allow_null": 0,
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 0,
+            "return_format": "object",
+            "multiple": 0
+        }
+    ]
 }

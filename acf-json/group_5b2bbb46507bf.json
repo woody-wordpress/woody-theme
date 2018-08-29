@@ -1,7 +1,26 @@
 {
     "key": "group_5b2bbb46507bf",
     "title": "En-tête de page",
-    "fields": [{
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Les infos principales de la page + la possibilité d'ajouter les liens de partage et d'ajout aux favoris",
+    "modified": 1535538374,
+    "fields": [
+        {
             "key": "field_5b2bc0e256db0",
             "label": "Contenu",
             "name": "",
@@ -114,21 +133,23 @@
             "hide_collapse": 1,
             "collapse_all_repeater": 0,
             "btn-icon-only": 0,
-            "sub_fields": [{
-                "key": "field_5b2bbe1388b36",
-                "label": "Bouton",
-                "name": "button",
-                "type": "link",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "return_format": "array"
-            }]
+            "sub_fields": [
+                {
+                    "key": "field_5b2bbe1388b36",
+                    "label": "Bouton",
+                    "name": "button",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array"
+                }
+            ]
         },
         {
             "key": "field_5b44bfc2e2e21",
@@ -157,11 +178,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b44bfc2e2e21",
-                    "operator": "==",
-                    "value": "1"
-                }]
+                [
+                    {
+                        "field": "field_5b44bfc2e2e21",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "50",
@@ -188,7 +211,8 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
+                [
+                    {
                         "field": "field_5b44b9b274494",
                         "operator": "==",
                         "value": "img"
@@ -224,7 +248,8 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
+                [
+                    {
                         "field": "field_5b44bfc2e2e21",
                         "operator": "==",
                         "value": "1"
@@ -252,7 +277,8 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
+                [
+                    {
                         "field": "field_5b44b9b274494",
                         "operator": "==",
                         "value": "widget"
@@ -374,21 +400,5 @@
             "layout": "horizontal",
             "return_format": "value"
         }
-    ],
-    "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "page"
-        }]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Les infos principales de la page + la possibilité d'ajouter les liens de partage et d'ajout aux favoris",
-    "modified": 1535545335
+    ]
 }

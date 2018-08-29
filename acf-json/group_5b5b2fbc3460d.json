@@ -1,7 +1,26 @@
 {
     "key": "group_5b5b2fbc3460d",
     "title": "Socialwall",
-    "fields": [{
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Une galerie, automatique ou manuelle avec des choix de grilles très spécifiques",
+    "modified": 1535538375,
+    "fields": [
+        {
             "key": "field_5b5b3223e946f",
             "label": "Contenu",
             "name": "",
@@ -49,11 +68,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b5b310be946e",
-                    "operator": "==",
-                    "value": "auto"
-                }]
+                [
+                    {
+                        "field": "field_5b5b310be946e",
+                        "operator": "==",
+                        "value": "auto"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -77,11 +98,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b5b310be946e",
-                    "operator": "==",
-                    "value": "manual"
-                }]
+                [
+                    {
+                        "field": "field_5b5b310be946e",
+                        "operator": "==",
+                        "value": "manual"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -231,21 +254,5 @@
             "prefix_label": 0,
             "prefix_name": 0
         }
-    ],
-    "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Une galerie, automatique ou manuelle avec des choix de grilles très spécifiques",
-    "modified": 1535545335
+    ]
 }

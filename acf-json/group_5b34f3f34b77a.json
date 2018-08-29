@@ -2,11 +2,13 @@
     "key": "group_5b34f3f34b77a",
     "title": "Informations fiche touristique",
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "touristic_sheet"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "touristic_sheet"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "acf_after_title",
@@ -16,8 +18,9 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1535545335,
-    "fields": [{
+    "modified": 1535538374,
+    "fields": [
+        {
             "key": "field_5b34f3f6718b1",
             "label": "Identifiant de fiche",
             "name": "touristic_sheet_id",
