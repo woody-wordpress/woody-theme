@@ -1,24 +1,6 @@
 {
     "key": "group_5b33890e6fa0b",
     "title": "Playlist Tourisme",
-    "location": [
-        [
-            {
-                "param": "post_taxonomy",
-                "operator": "==",
-                "value": "page_type:playlist_tourism"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Formulaire connecté à l'éditeur Hawwwai",
-    "modified": 1535547972,
     "fields": [
         {
             "key": "field_5b338f0d31b16",
@@ -41,14 +23,33 @@
         },
         {
             "key": "field_5b338ff331b17",
-            "label": "Identifiant de configuration hawwwwai",
+            "label": "Id conf playlist",
             "name": "playlist_conf_id",
             "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5b86a911d8685",
+            "label": "Id playlist",
+            "name": "playlist_id",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -75,5 +76,23 @@
             "new_lines": "wpautop",
             "esc_html": 0
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_taxonomy",
+                "operator": "==",
+                "value": "page_type:playlist_tourism"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Formulaire connecté à l'éditeur Hawwwai",
+    "modified": 1535544800
 }

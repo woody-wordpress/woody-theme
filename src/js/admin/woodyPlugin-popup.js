@@ -23,9 +23,7 @@ if (targetNode != null) {
 
     //eventListener => On récupère le confID que nous envoie l 'éditeur
     window.addEventListener('message', function(e) {
-        currentConfig.confID_field.attr('value', e.data);
-        console.log(e);
-
+        currentConfig.confID_field.attr('value', e.data.confId);
     }, false);
 
     // Callback function to execute when mutations are observed
