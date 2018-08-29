@@ -30,3 +30,9 @@
         </div>
     </main>
 {% endblock %}
+
+{% block inline_scripts %}
+    <script>
+        var siteConfig = {{site_config}};
+    </script>
+{% endblock %}

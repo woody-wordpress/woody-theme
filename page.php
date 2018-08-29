@@ -192,11 +192,11 @@ if ($context['page_type'] === 'playlist_tourism') {
             // On ajoute les 3 parties compilées d'une section + ses paramètres d'affichage
             // puis on compile le tout dans le template de section Woody
             $the_section = [
-        'header' => $the_header,
-        'footer' => $the_footer,
-        'layout' => $the_layout,
-        'display' => $display,
-    ];
+                'header' => $the_header,
+                'footer' => $the_footer,
+                'layout' => $the_layout,
+                'display' => $display,
+            ];
 
             $context['the_sections'][] = Timber::compile($context['woody_components']['section-section_full-tpl_01'], $the_section);
         }
@@ -207,6 +207,15 @@ if (!empty(is_front_page())) {
     $template = 'front.twig';
 } else {
     $template = 'page.twig';
+}
+
+$context['site_config'] = [];
+$context['site_config']['site_key'] = WP_SITE_KEY;
+$credentials = get_option('woody_credentials');
+if (!empty($credentials['public_login']) && !empty($credentials['public_password'])) {
+    $context['site_config']['login'] = $credentials['public_login'];
+    $context['site_config']['password'] = $credentials['public_password'];
+    $context['site_config'] = json_encode($context['site_config']);
 }
 
 // On rend le $context dans le page.twig

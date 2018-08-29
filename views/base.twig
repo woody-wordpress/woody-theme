@@ -27,13 +27,12 @@
         {% include 'parts/footer.twig' %}
         <!-- /Theme Footer -->
 
+        <!-- Twig Inline Scripts tags -->
+        {% block inline_scripts %}{% endblock inline_scripts %}
+        <!-- /Twig Inline Scripts tags -->
+
         <!-- WP Footer-->
         {{ wp_footer }}
         <!-- /WP Footer-->
-
-        <!-- Twig Scripts tags -->
-        {% block scripts %} {% endblock scripts %}
-        <!-- /Twig Scripts tags -->
     </body>
-
 </html>
