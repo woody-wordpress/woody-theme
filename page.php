@@ -82,9 +82,8 @@ if (!empty(getAcfGroupFields('group_5b6c5e6ff381d'))) {
  /** ************************
   * Check type de publication
   ************************ **/
-$page_type_term = wp_get_post_terms($context['post']->ID, 'page_type');
-$page_type = (!empty($page_type_term)) ? $page_type_term[0]->slug : '';
-if ($page_type === 'playlist_tourism') {
+
+if ($context['page_type'] === 'playlist_tourism') {
     include 'inc-touristic-playlist.php';
 } else {
     /** ************************
