@@ -173,7 +173,7 @@ class WoodyTheme_ACF
     {
         $page_types = get_terms(array('taxonomy' => 'page_type', 'hide_empty' => false, 'hierarchical' => true));
         foreach ($page_types as $key => $type) {
-            $choices[$type->term_id] = $type->name;
+            $choices[$type->slug] = $type->name;
         }
         return $choices;
     }
@@ -181,7 +181,11 @@ class WoodyTheme_ACF
     public function woodyAcfPageTypeMatch($match, $rule, $options)
     {
         $children_terms_ids = [];
-        $children_terms = get_terms(array('taxonomy' => 'page_type', 'hide_empty' => false, 'parent' => $rule['value']));
+        $parent_term = get_term_by('slug', $rule['value'], 'page_type');
+        $parent_term_id = $parent_term->term_id;
+        \PC::debug($parent_term_id, 'Parent term id');
+        $children_terms = get_terms(array('taxonomy' => 'page_type', 'hide_empty' => false, 'parent' => $parent_term_id));
+
         if (!empty($children_terms)) {
             foreach ($children_terms as $term) {
                 $children_terms_ids[] = $term->term_id;
@@ -204,7 +208,7 @@ class WoodyTheme_ACF
         }
 
         foreach ($selected_term_ids as $term_id) {
-            if (in_array($term_id, $children_terms_ids)) {
+            if (in_array($term_id, $children_terms_ids) || $term_id == $parent_term_id) {
                 $match = true;
             }
         }
