@@ -32,7 +32,8 @@ class WoodyTheme_Plugins_Activation
             'wp-nested-pages/nestedpages.php',
             'members/members.php',
             'woody-plugin/woody.php',
-            'single-sign-on-client/wposso.php'
+            'single-sign-on-client/wposso.php',
+            'ssl-insecure-content-fixer/ssl-insecure-content-fixer.php',
         ];
 
         $this->dev_plugins = [
