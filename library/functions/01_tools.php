@@ -529,3 +529,17 @@ function rc_xmlToArray($xml, $options = array())
       $xml->getName() => $propertiesArray
   );
 }
+
+
+/**
+ * [rc_clean_season Retourne une langue nettoyée des saisons]
+ * @param  string  $lang     [Langue à nettoyer]
+ * @return string  $lang     [Langue netoyée]
+ */
+function rc_clean_season($lang)
+{
+    foreach (array('winter', 'hiver', 'summer', 'ete', 'rentals') as $removed_word) {
+        $lang = str_replace('-' . $removed_word, '', $lang);
+    }
+    return $lang;
+}

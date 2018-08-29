@@ -1,3 +1,3 @@
+import 'woody-library/assets/js/_index';
 import './framework/foundation-explicit-pieces';
-import './plugins/lightgallery';
 import './plugins/cookieconsent';

@@ -29,6 +29,13 @@ class WoodyTheme_Enqueue_Assets
 
         // CDN hosted jQuery placed in the header, as some plugins require that jQuery is loaded in the header.
         wp_enqueue_script('jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js', array(), '', true);
+        wp_enqueue_script('lazysizes', 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/4.1.1/lazysizes-umd.min.js', array(), '', true);
+
+        // Dependencies of main.js
+        wp_enqueue_script('cookieconsent', 'https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js', array(), '', true);
+        wp_enqueue_script('swiper', 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/js/swiper.min.js', array(), '', true);
+        wp_enqueue_script('lightgallery', 'https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.11/js/lightgallery-all.min.js', array(), '', true);
+
         // Touristic maps libraries - TODO:try to call in packagist
         wp_enqueue_script('leaflet', 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js', array(), '', true);
         wp_enqueue_script('tangram', 'https://unpkg.com/tangram/dist/tangram.min.js', array(), '', true);
@@ -44,7 +51,7 @@ class WoodyTheme_Enqueue_Assets
     public function enqueueAssets()
     {
         // Enqueue the main Scripts
-        wp_enqueue_script('main-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('js/main.js'), 'jquery', '', true);
+        wp_enqueue_script('main-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('js/main.js'), array('jquery', 'swiper', 'cookieconsent', 'lightgallery'), '', true);
 
         // Enqueue the main Stylesheet.
         wp_enqueue_style('main-stylesheet', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('css/main.css'), array(), '', 'all');
@@ -53,8 +60,12 @@ class WoodyTheme_Enqueue_Assets
 
     public function enqueueAdminAssets()
     {
+        // Dependencies of admin.js
+        wp_enqueue_script('arrive', 'https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js', array(), '', true);
+        wp_enqueue_script('selectize', 'https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js', array(), '', true);
+
         // Enqueue the main Scripts
-        wp_enqueue_script('admin-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('js/admin.js'), array('jquery'), false, true);
+        wp_enqueue_script('admin-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('js/admin.js'), array('jquery', 'arrive', 'selectize'), false, true);
 
         // Enqueue the main Stylesheet.
         wp_enqueue_style('admin-stylesheet', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('css/admin.css'), array(), '', 'all');

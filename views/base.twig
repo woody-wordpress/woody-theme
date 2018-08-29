@@ -5,9 +5,13 @@
         <meta charset="{{site.charset}}">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width,initial-scale=1">
+        {% block metas %}{% endblock metas %}
+
         <!-- WP Header-->
         {{ wp_head }}
         <!-- /WP Header-->
+
+        {% block styles %}{% endblock styles %}
     </head>
 
     <body class="{{body_class}}">
@@ -26,6 +30,10 @@
         <!-- WP Footer-->
         {{ wp_footer }}
         <!-- /WP Footer-->
+
+        <!-- Twig Scripts tags -->
+        {% block scripts %} {% endblock scripts %}
+        <!-- /Twig Scripts tags -->
     </body>
 
 </html>
