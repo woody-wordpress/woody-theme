@@ -53,7 +53,7 @@
         {% endif %}
         /*Only for test in development mode (commented in Prod)*/
         DrupalAngularConfig.mapProviderKeys = {
-            otmKey: '' || null,
+            otmKey: 'raccourci' || null,
             gmKey: 'AIzaSyBoBeERZdWmRxos2ImcufRAZo43XpNw4' || null,
             ignKey: '' || null
         };
@@ -67,18 +67,21 @@
     {# <!-- <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="crossorigin=""></script> --> #}
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
     <script src="https://unpkg.com/tangram/dist/tangram.min.js"></script>
-    <script src="http://matchingnotes.com/javascripts/leaflet-google.js"></script>
+    {# <script src="http://matchingnotes.com/javascripts/leaflet-google.js"></script> #}
+
 
     <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsO5_R55uWaDHz4w9EUi7KesvXQ1qT740&v=3.exp&libraries=geometry,places"></script> -->
 
     <!-- <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="http://gadget.open-system.fr/widgets-libs/rel/noyau-1.0.min.js"></script> -->
+
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
-     <script src="https://api.tourism-system.com/render/assets/scripts/vendor.js"></script>
+    <script src="https://api.tourism-system.com/render/assets/scripts/vendor.js"></script>
     <script src="https://api.tourism-system.com/render/assets/scripts/misclibs.js"></script>
     <script src="https://api.tourism-system.com/render/assets/app.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js"></script>
+    <script src="https://api.tourism-system.com/render/assets/scripts/raccourci/universal-map.min.js"></script>
 
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
