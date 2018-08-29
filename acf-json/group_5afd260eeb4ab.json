@@ -78,120 +78,12 @@
                             "name": "quote",
                             "label": "Citation",
                             "display": "block",
-                            "sub_fields": [],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b0d21eb9d80a": {
-                            "key": "5b0d21eb9d80a",
-                            "name": "manual_focus",
-                            "label": "Mise en avant (sélection manuelle)",
-                            "display": "block",
-                            "sub_fields": [],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b27a7859ddea": {
-                            "key": "5b27a7859ddea",
-                            "name": "auto_focus",
-                            "label": "Mise en avant (sélection automatique)",
-                            "display": "block",
-                            "sub_fields": [],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b04437946534": {
-                            "key": "5b04437946534",
-                            "name": "free_text",
-                            "label": "Texte libre",
-                            "display": "block",
-                            "sub_fields": [],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b0443c346536": {
-                            "key": "5b0443c346536",
-                            "name": "movie",
-                            "label": "Vidéo",
-                            "display": "block",
-                            "sub_fields": [],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b0443f146538": {
-                            "key": "5b0443f146538",
-                            "name": "gallery",
-                            "label": "Galerie photos",
-                            "display": "block",
-                            "sub_fields": [],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b04444c4653c": {
-                            "key": "5b04444c4653c",
-                            "name": "accordion",
-                            "label": "FAQ",
-                            "display": "block",
-                            "sub_fields": [],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b04447d4653e": {
-                            "key": "5b04447d4653e",
-                            "name": "feature",
-                            "label": "Titres & icône",
-                            "display": "block",
-                            "sub_fields": [],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b04449e46540": {
-                            "key": "5b04449e46540",
-                            "name": "links",
-                            "label": "Bouton(s) \/ Lien(s)",
-                            "display": "block",
-                            "sub_fields": [],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b0444c446542": {
-                            "key": "5b0444c446542",
-                            "name": "files",
-                            "label": "Fichiers à télécharger",
-                            "display": "block",
-                            "sub_fields": [],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b33a263d91e5": {
-                            "key": "5b33a263d91e5",
-                            "name": "playlist_bloc",
-                            "label": "Playlist",
-                            "display": "block",
-                            "sub_fields": [],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b461c83b7c8c": {
-                            "key": "5b461c83b7c8c",
-                            "name": "call_to_action",
-                            "label": "Appel à l'action",
-                            "display": "block",
-                            "sub_fields": [],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b4722d2c1c12": {
-                            "key": "5b4722d2c1c12",
-                            "name": "tabs_group",
-                            "label": "Groupe d'onglets",
-                            "display": "block",
                             "sub_fields": [
                                 {
-                                    "key": "field_5b4722e2c1c13_field_5b471f334efed",
-                                    "label": "Contenu",
-                                    "name": "",
-                                    "type": "tab",
+                                    "key": "field_5b043f2f25969",
+                                    "label": "Citation",
+                                    "name": "quote",
+                                    "type": "clone",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
