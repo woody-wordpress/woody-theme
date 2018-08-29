@@ -1,6 +1,6 @@
 import $ from 'jquery';
-import * as selectize from "selectize";
-import * as arrive from "arrive";
+// import * as selectize from "selectize";
+// import * as arrive from "arrive";
 
 var attachment_selectize = function(target) {
     //console.log('attachment OK');
