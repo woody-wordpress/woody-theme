@@ -40,7 +40,6 @@ class WoodyTheme_Enqueue_Assets
         wp_enqueue_script('lg-video', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-video.min.js', array('lightgallery'), '', true);
         wp_enqueue_script('lg-zoom', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-zoom.min.js', array('lightgallery'), '', true);
         wp_enqueue_script('lg-fullscreen', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-fullscreen.min.js', array('lightgallery'), '', true);
-        wp_enqueue_script('lg-autoplay', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-autoplay.min.js', array('lightgallery'), '', true);
 
         // Touristic maps libraries - TODO:try to call in packagist
         wp_enqueue_script('leaflet', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet-src.min.js', array(), '', true);
@@ -66,8 +65,7 @@ class WoodyTheme_Enqueue_Assets
             'lg-thumbnail',
             'lg-video',
             'lg-zoom',
-            'lg-fullscreen',
-            'lg-autoplay'
+            'lg-fullscreen'
         ];
         wp_enqueue_script('main-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('js/main.js'), $dependencies, '', true);
 
