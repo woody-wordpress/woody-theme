@@ -41,7 +41,7 @@ class WoodyTheme_Enqueue_Assets
         wp_enqueue_script('lg-zoom', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-zoom.min.js', array('lightgallery'), '', true);
         wp_enqueue_script('lg-fullscreen', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-fullscreen.min.js', array('lightgallery'), '', true);
 
-        // Touristic maps libraries - TODO:try to call in packagist
+        // Touristic maps libraries
         wp_enqueue_script('leaflet', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet-src.min.js', array(), '', true);
         wp_enqueue_script('tangram', 'https://cdn.jsdelivr.net/npm/tangram@0.15.3/dist/tangram.min.js', array(), '', true);
         wp_enqueue_script('universal-map', 'https://api.tourism-system.com/render/assets/scripts/raccourci/universal-map.debug.js', array('jquery', 'leaflet', 'tangram'), '', true);
