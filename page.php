@@ -85,11 +85,7 @@ if (!empty(getAcfGroupFields('group_5b6c5e6ff381d'))) {
 $page_type_term = wp_get_post_terms($context['post']->ID, 'page_type');
 $page_type = (!empty($page_type_term)) ? $page_type_term[0]->slug : '';
 if ($page_type === 'playlist_tourism') {
-    /** ************************
-    * Appel apirender pour récupérer le DOM de la playlist
-    ************************ **/
-    $playlist_conf_id = get_field('field_5b338ff331b17');
-    $context['playlist_template'] = apply_filters('wp_hawwwai_sit_playlist_render', $playlist_conf_id, 'fr');
+    include 'inc-touristic-playlist.php';
 } else {
     /** ************************
     * Compilation des sections
