@@ -7,14 +7,15 @@
  * @since WoodyTheme 1.0.0
  */
 
-
-
 $context = Timber::get_context();
 $context['post'] = new TimberPost();
 $context['woody_components'] = Woody::getTwigsPaths();
 // PC::debug(get_class_methods(TimberPost), 'TwigMethods');
 
 include get_template_directory() . '/header.php';
+
+$context['current_url'] = get_permalink();
+$context['active_social_shares'] = getActiveShares();
 
 /** ****************************
  * Compilation de l'en tête de page
@@ -84,6 +85,7 @@ if (!empty(getAcfGroupFields('group_5b6c5e6ff381d'))) {
   ************************ **/
 
 if ($context['page_type'] === 'playlist_tourism') {
+    \PC::debug($context['page_type'], 'Type de page');
     include 'inc-touristic-playlist.php';
 } else {
     /** ************************

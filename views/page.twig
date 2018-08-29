@@ -4,6 +4,7 @@
     <main id="main-content" class="content-type-page {{ page_type|default }}">
         <div class="content-wrapper">
             {{ page_hero|default }}
+            {# {% include 'parts/shares.twig' %} #}
             {% block page_teaser %}
                 <header class="page-teaser">
                     {% if trip_infos | default %}
