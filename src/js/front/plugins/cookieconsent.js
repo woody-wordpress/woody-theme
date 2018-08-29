@@ -1,5 +1,3 @@
-import 'cookieconsent';
-
 window.cookieconsent.initialise({
     "palette": {
         "popup": {
