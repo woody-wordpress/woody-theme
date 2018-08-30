@@ -20,6 +20,26 @@ class WoodyTheme_Images
 
     protected function registerHooks()
     {
+        // Actions
+        add_action('add_attachment', array($this, 'addDefaultMediaType'));
+        add_action('woody_update', array($this, 'addImageSizes'));
+
+        // Filters
+        add_filter('intermediate_image_sizes_advanced', array($this, 'removeAutoThumbs'), 10, 2);
+        add_filter('image_size_names_choose', array($this, 'imageSizeNamesChoose'), 10, 1);
+        add_filter('wp_read_image_metadata', array($this, 'readImageMetadata'), 10, 4);
+        add_filter('wp_generate_attachment_metadata', array($this, 'generateAttachmentMetadata'), 10, 2);
+
+        // add_action('rest_api_init', function () {
+        //     register_rest_route('woody', '/crop/(?P<width>[0-9]{1,4})/(?P<height>[0-9]{1,4})/(?P<url>[-=\w]+)', array(
+        //       'methods' => 'GET',
+        //       'callback' => array('WoodyTheme_Images', 'imagemagick')
+        //     ));
+        // });
+    }
+
+    public function addImageSizes()
+    {
         // Ratio 8:1 => Panoramique 1
         add_image_size('ratio_8_1_small', 360, 45, true);
         add_image_size('ratio_8_1_medium', 640, 80, true);
@@ -75,21 +95,6 @@ class WoodyTheme_Images
         add_image_size('ratio_free_medium', 640);
         add_image_size('ratio_free_large', 1200);
         add_image_size('ratio_free', 1920);
-
-        // Filters
-        add_filter('intermediate_image_sizes_advanced', array($this, 'removeAutoThumbs'), 10, 2);
-        add_filter('image_size_names_choose', array($this, 'imageSizeNamesChoose'), 10, 1);
-        add_filter('wp_read_image_metadata', array($this, 'readImageMetadata'), 10, 4);
-        add_filter('wp_generate_attachment_metadata', array($this, 'generateAttachmentMetadata'), 10, 2);
-
-        // add_action('rest_api_init', function () {
-        //     register_rest_route('woody', '/crop/(?P<width>[0-9]{1,4})/(?P<height>[0-9]{1,4})/(?P<url>[-=\w]+)', array(
-        //       'methods' => 'GET',
-        //       'callback' => array('WoodyTheme_Images', 'imagemagick')
-        //     ));
-        // });
-
-        add_action('add_attachment', array($this, 'addDefaultMediaType'));
     }
 
     public function addDefaultMediaType($post_id)

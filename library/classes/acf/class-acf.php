@@ -18,19 +18,23 @@ class WoodyTheme_ACF
 
     protected function registerHooks()
     {
+        add_action('acf/init', array($this, 'acfUpdateSetting'));
+        add_filter('plugin_action_links', array($this, 'disallowAcfDeactivation'), 10, 4);
+        add_filter('acf/load_field/type=radio', array($this, 'woodyTplAcfLoadField'), 10, 1);
+        add_filter('acf/load_field/type=select', array($this, 'woodyIconLoadField'), 10, 1);
+        add_filter('acf/load_field/name=focused_taxonomy_terms', array($this, 'focusedTaxonomyTermsLoadField'), 10, 1);
+        add_filter('acf/location/rule_types', array($this, 'woodyAcfAddPageTypeLocationRule'), 10, 1);
+        add_filter('acf/location/rule_values/page_type_and_children', array($this, 'woodyAcfAddPageTypeChoices'), 10, 1);
+        add_filter('acf/location/rule_match/page_type_and_children', array($this, 'woodyAcfPageTypeMatch'), 10, 3);
+        // add_filter('acf/load_field/name=playlist_name', array($this, 'playlistNameLoadField'));
+    }
+
+    public function acfUpdateSetting()
+    {
         if (WP_ENV == 'dev') {
             acf_update_setting('save_json', get_template_directory() . '/acf-json');
         }
         acf_append_setting('load_json', get_template_directory() . '/acf-json');
-
-        add_filter('plugin_action_links', array($this, 'disallowAcfDeactivation'), 10, 4);
-        add_filter('acf/load_field/type=radio', array($this, 'woodyTplAcfLoadField'));
-        add_filter('acf/load_field/type=select', array($this, 'woodyIconLoadField'));
-        add_filter('acf/load_field/name=focused_taxonomy_terms', array($this, 'focusedTaxonomyTermsLoadField'));
-        add_filter('acf/location/rule_types', array($this, 'woodyAcfAddPageTypeLocationRule'));
-        add_filter('acf/location/rule_values/page_type_and_children', array($this, 'woodyAcfAddPageTypeChoices'));
-        add_filter('acf/location/rule_match/page_type_and_children', array($this, 'woodyAcfPageTypeMatch'), 10, 3);
-        // add_filter('acf/load_field/name=playlist_name', array($this, 'playlistNameLoadField'));
     }
 
     /**
@@ -182,7 +186,7 @@ class WoodyTheme_ACF
     {
         $children_terms_ids = [];
         $parent_term = get_term_by('slug', $rule['value'], 'page_type');
-        if(!empty($parent_term)){
+        if (!empty($parent_term)) {
             $parent_term_id = $parent_term->term_id;
             $children_terms = get_terms(array('taxonomy' => 'page_type', 'hide_empty' => false, 'parent' => $parent_term_id));
         }

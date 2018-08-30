@@ -25,7 +25,6 @@ class WoodyTheme_Cleanup_Admin
         add_action('wp_dashboard_setup', [$this, 'removeDashboardWidgets']);
         add_filter('tiny_mce_before_init', [$this, 'tiny_mce_remove_unused_formats']);
 
-
         $user = wp_get_current_user();
         if (!in_array('administrator', $user->roles)) {
             add_action('admin_head', [$this, 'removeScreenOptions']);

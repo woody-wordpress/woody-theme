@@ -16,6 +16,11 @@ class WoodyTheme_Plugins_Options
 
     protected function registerHooks()
     {
+        add_action('woody_update', array($this, 'defineOptions'));
+    }
+
+    protected function defineOptions()
+    {
         // Plugins Settings
         update_option('timezone_string', '', '', 'yes'); // Mettre vide si le serveur est déjà configuré sur la bonne timezone Europe/Paris
         update_option('WPLANG', 'fr_FR', '', 'yes');
@@ -180,7 +185,7 @@ class WoodyTheme_Plugins_Options
         }
 
         if (strcmp(json_encode($option), json_encode($new_option)) !== 0) { // Update if different
-            update_option($option_name, $new_option, '', $autoload);
+            update_option($option_name, $new_option, $autoload);
         }
     }
 }

@@ -31,3 +31,10 @@ new WoodyTheme_Menus();
 
 // Roles
 new WoodyTheme_Roles();
+
+// Set changelog
+$revision = get_option('rc_revision');
+if ($revision != RC_REVISION) {
+    do_action('woody_update');
+    update_option('rc_revision', RC_REVISION, true);
+}

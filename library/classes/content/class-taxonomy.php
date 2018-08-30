@@ -16,7 +16,7 @@ class WoodyTheme_Taxonomy
 
     protected function registerHooks()
     {
-        add_action('after_setup_theme', array($this, 'registerContentTypeTaxonomy'), 10);
+        add_action('woody_update', array($this, 'registerContentTypeTaxonomy'), 10);
     }
 
     public function registerContentTypeTaxonomy()

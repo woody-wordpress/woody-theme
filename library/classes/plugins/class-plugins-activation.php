@@ -15,6 +15,16 @@ class WoodyTheme_Plugins_Activation
 
     public function __construct()
     {
+        $this->registerHooks();
+    }
+
+    protected function registerHooks()
+    {
+        add_action('woody_update', array($this, 'activatePlugins'));
+    }
+
+    public function activatePlugins()
+    {
         $this->activate_plugins = [
             'advanced-custom-fields-pro/acf.php',
             'timber-library/timber.php',
@@ -58,11 +68,6 @@ class WoodyTheme_Plugins_Activation
             $this->dev_plugins = [];
         }
 
-        $this->registerHooks();
-    }
-
-    protected function registerHooks()
-    {
         require_once(ABSPATH . 'wp-admin/includes/plugin.php');
         foreach ($this->activate_plugins as $plugin) {
             if (!is_plugin_active($plugin)) {
