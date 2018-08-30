@@ -20,7 +20,5 @@ class WoodyTheme_Roles
 
     public function addRolesOnPluginActivation()
     {
-        add_role('woody_admin', 'Woody Admin', array());
-        add_role('woody_editor', 'Woody Editeur', array());
     }
 }
