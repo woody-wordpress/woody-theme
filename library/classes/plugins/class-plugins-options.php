@@ -19,7 +19,7 @@ class WoodyTheme_Plugins_Options
         add_action('woody_update', array($this, 'defineOptions'));
     }
 
-    protected function defineOptions()
+    public function defineOptions()
     {
         // Plugins Settings
         update_option('timezone_string', '', '', 'yes'); // Mettre vide si le serveur est déjà configuré sur la bonne timezone Europe/Paris

@@ -49,13 +49,13 @@ class WoodyTheme_Plugins_Activation
 
         $this->dev_plugins = [
             'debug-bar/debug-bar.php',
-            'debug-bar-timber/debug-bar-timber.php',
-            'kint-debugger/kint-debugger.php',
             'wp-php-console/wp-php-console.php',
-            'fakerpress/fakerpress.php',
         ];
 
         $this->deactivate_plugins = [
+            'debug-bar-timber/debug-bar-timber.php',
+            'kint-debugger/kint-debugger.php',
+            'fakerpress/fakerpress.php',
             'rocket-lazy-load/rocket-lazy-load.php',
             'media-file-renamer/media-file-renamer.php',
             'regenerate-thumbnails/regenerate-thumbnails.php',
