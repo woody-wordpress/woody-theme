@@ -44,6 +44,7 @@ class WoodyTheme_Plugins_Activation
             'members/members.php',
             'woody-plugin/woody.php',
             'single-sign-on-client/wposso.php',
+            'regenerate-thumbnails/regenerate-thumbnails.php',
             'ssl-insecure-content-fixer/ssl-insecure-content-fixer.php',
         ];
 
@@ -58,7 +59,6 @@ class WoodyTheme_Plugins_Activation
             'fakerpress/fakerpress.php',
             'rocket-lazy-load/rocket-lazy-load.php',
             'media-file-renamer/media-file-renamer.php',
-            'regenerate-thumbnails/regenerate-thumbnails.php',
             'acf-relationship-create-pro/acf-relationship-create-pro.php',
         ];
 
