@@ -32,9 +32,19 @@ new WoodyTheme_Menus();
 // Roles
 new WoodyTheme_Roles();
 
-// Set changelog
-$revision = get_option('rc_revision');
-if ($revision != RC_REVISION) {
-    do_action('woody_update');
-    update_option('rc_revision', RC_REVISION, true);
+// Execute hook_update like Drupal if theme version change
+add_action('after_setup_theme', 'PREFIX_check_theme_version');
+function PREFIX_check_theme_version()
+{
+    $current_version = wp_get_theme(get_template())->get('Version');
+    $old_version = get_option('woody_theme_version');
+
+    if ($old_version !== $current_version) {
+        // Call all hooks
+        do_action('woody_update');
+
+        // update not to run twice
+        update_option('woody_theme_version', $current_version, true);
+        update_option('woody_theme_update', time(), true);
+    }
 }
