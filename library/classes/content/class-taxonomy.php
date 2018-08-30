@@ -143,7 +143,7 @@ class WoodyTheme_Taxonomy
                         'search_items' => 'Rechercher parmi les saisons',
                         'popular_items' => 'Saisons les plus utilisées'
                     ],
-                    'hierarchical' => false,
+                    'hierarchical' => true,
                     'show_ui' => true,
                     'show_in_menu' => true,
                     'capabilities' => [
