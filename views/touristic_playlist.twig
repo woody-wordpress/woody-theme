@@ -3,7 +3,7 @@
 {% block metas %}
     {{ parent() }}
     <script>
-        var DrupalAngularConfig = {{ PL_CONF_TESTING|json_encode(constant('JSON_PRETTY_PRINT'))|raw }};
+        var DrupalAngularConfig = {{ PL_CONF_TESTING|json_encode(constant('JSON_PRETTY_PRINT'))|raw }} || {};
     </script>
 {% endblock metas %}
 
@@ -18,36 +18,12 @@
     <link rel="stylesheet" href="https://api.tourism-system.com/render/assets/styles/playlist.css">
 {% endblock styles %}
 
-{% block inline_scripts %}
+{% block __inline_scripts %}
 
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/10.1.0/nouislider.min.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.0.4/wNumb.min.js'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.2/chosen.jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment-with-locales.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.27/daterangepicker.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twig.js/0.8.9/twig.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.8.0/lodash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.8/uuid.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js"></script>
+    {# MAP SCRIPTS #}
+    {# <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfQ5H4V8Q7YqtgxaeHxhIqdq42x5QbyEs&v=3.exp&libraries=geometry,places" defer async></script>
+    <script src="https://googlemaps.github.io/js-rich-marker/src/richmarker-compiled.js" defer async></script>
+    <script src="https://api.tourism-system.com/render/assets/scripts/raccourci/playlist-map.debug.js" defer async></script>
+    <script src="https://api.tourism-system.com/render/assets/scripts/raccourci/playlist-map.leaflet.debug.js?otmKey=IVvN8vTvQ9OC94ltxJGaKw&gmKey=AIzaSyCfQ5H4V8Q7YqtgxaeHxhIqdq42x5QbyEs" defer async></script> #}
 
-    {# <script src="https://api.tourism-system.com/render/assets/scripts/raccourci/sticky.js"></script> #}
-    <script src="https://api.tourism-system.com/render/assets/scripts/raccourci/sheet_item.debug.js"></script>
-    <script src="https://api.tourism-system.com/render/assets/scripts/raccourci/playlist.debug.js"></script>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfQ5H4V8Q7YqtgxaeHxhIqdq42x5QbyEs&v=3.exp&libraries=geometry,places" defer async></script>
-
-    {% if options.useGoogleMap is defined and options.useGoogleMap %}
-        <script src="https://googlemaps.github.io/js-rich-marker/src/richmarker-compiled.js" defer async></script>
-        <script src="https://api.tourism-system.com/render/assets/scripts/raccourci/playlist-map.debug.js" defer async></script>
-    {% else %}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js" defer async></script>
-        <script src="https://unpkg.com/tangram/dist/tangram.min.js" defer async></script>
-
-        <script src="https://api.tourism-system.com/render/assets/scripts/raccourci/playlist-map.leaflet.debug.js?otmKey=IVvN8vTvQ9OC94ltxJGaKw&gmKey=AIzaSyCfQ5H4V8Q7YqtgxaeHxhIqdq42x5QbyEs" defer async></script>
-        <!-- <script src="https://api.tourism-system.com/render/assets/scripts/raccourci/playlist-map.leaflet.debug.js?" defer async></script> -->
-    {% endif %}
-
-{% endblock inline_scripts %}
+{% endblock __inline_scripts %}

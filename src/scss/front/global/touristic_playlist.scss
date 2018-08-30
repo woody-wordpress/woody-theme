@@ -4,7 +4,13 @@
         content: none;
     }
 
-    #api_filter label {
-        font-size: 1em;
+    #api_filter {
+        label {
+            font-size: 1em;
+        }
+        .wrap-date input {
+            font-size: 1em;
+            margin: 0;
+        }
     }
 }
