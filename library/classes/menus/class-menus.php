@@ -31,6 +31,7 @@ class WoodyTheme_Menus
 
         $pages_depth1 = get_pages($args);
 
+        $menu_links = [];
         foreach ($pages_depth1 as $key => $page) {
             // Exclude frontpage from menu links
             if (get_permalink($page->ID) === get_home_url() . '/') {
