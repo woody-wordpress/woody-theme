@@ -69,7 +69,7 @@ class WoodyTheme_Plugins_Options
                 'taxonomy_auto_assign' => false,
                 'admin_filter' => true,
                 'media_uploader_filter' => true,
-                'media_popup_taxonomy_edit' => true,
+                'media_popup_taxonomy_edit' => false,
             ],
             'attachment_types' => [
                 'assigned' => true,
@@ -85,7 +85,31 @@ class WoodyTheme_Plugins_Options
                 'taxonomy_auto_assign' => false,
                 'admin_filter' => true,
                 'media_uploader_filter' => true,
-                'media_popup_taxonomy_edit' => true,
+                'media_popup_taxonomy_edit' => false,
+            ],
+            'themes' => [
+                'assigned' => true,
+                'eml_media' => false,
+                'taxonomy_auto_assign' => false,
+                'admin_filter' => true,
+                'media_uploader_filter' => true,
+                'media_popup_taxonomy_edit' => false,
+            ],
+            'places' => [
+                'assigned' => true,
+                'eml_media' => false,
+                'taxonomy_auto_assign' => false,
+                'admin_filter' => true,
+                'media_uploader_filter' => true,
+                'media_popup_taxonomy_edit' => false,
+            ],
+            'seasons' => [
+                'assigned' => true,
+                'eml_media' => false,
+                'taxonomy_auto_assign' => false,
+                'admin_filter' => true,
+                'media_uploader_filter' => true,
+                'media_popup_taxonomy_edit' => false,
             ],
         ];
         $this->updateOption('wpuxss_eml_taxonomies', $wpuxss_eml_taxonomies);

@@ -64,8 +64,6 @@ class WoodyTheme_Taxonomy
                 'hierarchical' => true,
                 'show_ui' => false,
                 'show_in_menu' => false,
-                'public' => false,
-                'rewrite' => false,
                 'capabilities' => [
                     'manage_terms' => false,
                     'edit_terms' => false,
@@ -97,8 +95,6 @@ class WoodyTheme_Taxonomy
                 'hierarchical' => true,
                 'show_ui' => true,
                 'show_in_menu' => true,
-                'public' => false,
-                'rewrite' => false,
                 'capabilities' => [
                     'manage_terms' => 'Configurer les thématiques',
                     'edit_terms' => 'Editer les thématiques',
@@ -130,8 +126,6 @@ class WoodyTheme_Taxonomy
                 'hierarchical' => true,
                 'show_ui' => true,
                 'show_in_menu' => true,
-                'public' => false,
-                'rewrite' => false,
                 'capabilities' => [
                     'manage_terms' => 'Configurer les lieux',
                     'edit_terms' => 'Editer les lieux',
@@ -163,8 +157,6 @@ class WoodyTheme_Taxonomy
                 'hierarchical' => true,
                 'show_ui' => true,
                 'show_in_menu' => (is_admin()) ? true : false,
-                'public' => false,
-                'rewrite' => false,
                 'capabilities' => [
                     'manage_terms' => (is_admin()) ? true : false,
                     'edit_terms' => (is_admin()) ? true : false,
@@ -198,8 +190,6 @@ class WoodyTheme_Taxonomy
                 'hierarchical' => false,
                 'show_ui' => false,
                 'show_in_menu' => false,
-                'public' => false,
-                'rewrite' => false,
             )
         );
 
@@ -225,8 +215,6 @@ class WoodyTheme_Taxonomy
                 'hierarchical' => true,
                 'show_ui' => true,
                 'show_in_menu' => true,
-                'public' => false,
-                'rewrite' => false,
                 'capabilities' => [
                     'manage_terms' => 'Configurer les catégories de médias',
                     'edit_terms' => 'Editer les catégories de médias',
@@ -257,8 +245,6 @@ class WoodyTheme_Taxonomy
                 'hierarchical' => false,
                 'show_ui' => true,
                 'show_in_menu' => true,
-                'public' => false,
-                'rewrite' => false,
                 'capabilities' => [
                     'manage_terms' => 'Configurer les hashtags',
                     'edit_terms' => 'Editer les hashtags',
