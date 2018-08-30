@@ -1,24 +1,6 @@
 {
     "key": "group_5b2788b48d04c",
     "title": "Mise en avant(sélection automatique)",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1535547972,
     "fields": [
         {
             "key": "field_5b2788cc84ed1",
@@ -104,11 +86,63 @@
                 "id": ""
             },
             "choices": {
-                "13": "Automne - Saisons",
-                "11": "Été - Saisons",
-                "14": "Hiver - Saisons",
-                "12": "Printemps - Saisons",
-                "16": "Instagram - Types de média"
+                "70": "Baie du Mont Saint Michel - Lieux",
+                "73": "Belle ïle - Lieux",
+                "75": "Bretagne NOrd - Lieux",
+                "67": "Coeur de Bretagne - Lieux",
+                "68": "Côte de Granit rose - Lieux",
+                "74": "Finistère Sud - Lieux",
+                "72": "Golf du Morbihan - Lieux",
+                "69": "Ouessant - Lieux",
+                "71": "Quiberon la Sublime - Lieux",
+                "16": "Automne - Saisons",
+                "14": "Été - Saisons",
+                "17": "Hiver - Saisons",
+                "15": "Printemps - Saisons",
+                "18": "Instagram - Types de média",
+                "25": "ancienthistory - Hashtags",
+                "48": "bretagna - Hashtags",
+                "31": "bretagne - Hashtags",
+                "23": "bretagnetourisme - Hashtags",
+                "19": "brittany - Hashtags",
+                "53": "brocelandia - Hashtags",
+                "32": "broceliande - Hashtags",
+                "34": "broceliandeforest - Hashtags",
+                "60": "castello - Hashtags",
+                "57": "castle - Hashtags",
+                "46": "chateau - Hashtags",
+                "45": "fees - Hashtags",
+                "58": "foresta - Hashtags",
+                "49": "foret - Hashtags",
+                "59": "foretdebroceliande - Hashtags",
+                "26": "france - Hashtags",
+                "20": "francefr - Hashtags",
+                "54": "francia - Hashtags",
+                "39": "golden - Hashtags",
+                "35": "hommage - Hashtags",
+                "36": "incendie - Hashtags",
+                "40": "instantcalm - Hashtags",
+                "50": "josselin - Hashtags",
+                "44": "lac - Hashtags",
+                "29": "lake - Hashtags",
+                "47": "landscape - Hashtags",
+                "42": "miroir - Hashtags",
+                "56": "nature - Hashtags",
+                "51": "paimpont - Hashtags",
+                "55": "panorama - Hashtags",
+                "30": "rating - Hashtags",
+                "43": "retouralamaison - Hashtags",
+                "22": "review - Hashtags",
+                "27": "sculpture - Hashtags",
+                "38": "summer2018 - Hashtags",
+                "37": "summervibes - Hashtags",
+                "41": "three - Hashtags",
+                "21": "tourism - Hashtags",
+                "28": "travel - Hashtags",
+                "52": "travelling - Hashtags",
+                "33": "trip - Hashtags",
+                "61": "view - Hashtags",
+                "24": "visitbrittany - Hashtags"
             },
             "default_value": [],
             "allow_null": 0,
@@ -276,6 +310,43 @@
             "save_custom": 0
         },
         {
+            "key": "field_5b879c561373c",
+            "label": "En-tête",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5b879c721373d",
+            "label": "En-tête de block",
+            "name": "block_heading",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5b041c24d0dd7"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
+        },
+        {
             "key": "field_5b2788e084ed2",
             "label": "Mise en page",
             "name": "",
@@ -348,5 +419,23 @@
             "ui_on_text": "",
             "ui_off_text": ""
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
+    "modified": 1535606959
 }
