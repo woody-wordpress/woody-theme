@@ -214,8 +214,6 @@ function getManualFocus_data($items)
          $data['title'] = $item->get_title();
      }
 
-     //  rcd($item_wrapper['display_elements']);
-
      if (is_array($item_wrapper['display_elements'])) {
          if (in_array('pretitle', $item_wrapper['display_elements'])) {
              $data['pretitle'] = getFieldAndFallback($item, 'focus_pretitle', 'pretitle');

@@ -62,6 +62,8 @@ class WoodyTheme_Taxonomy
         wp_insert_term('Itinéraire', 'page_type', array('slug' => 'itinerary'));
         wp_insert_term('Liste de contenus', 'page_type', array('slug' => 'content_list'));
         wp_insert_term('Brochure', 'page_type', array('slug' => 'booklet'));
+        wp_insert_term('Page d\'accueil', 'page_type', array('slug' => 'front_page'));
+
 
         // On créé la taxonomie "Thématiques"
         register_taxonomy(
