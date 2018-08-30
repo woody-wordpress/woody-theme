@@ -53,7 +53,7 @@ class WoodyTheme_Cleanup_Admin
     public function removeTaxonomies()
     {
         global $wp_taxonomies;
-        $taxonomies = array( 'category', 'post_tag' );
+        $taxonomies = array( 'post_tag' );
         foreach ($taxonomies as $taxonomy) {
             if (taxonomy_exists($taxonomy)) {
                 unset($wp_taxonomies[$taxonomy]);
