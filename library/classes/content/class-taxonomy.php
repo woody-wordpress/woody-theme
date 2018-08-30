@@ -162,13 +162,13 @@ class WoodyTheme_Taxonomy
                 ],
                 'hierarchical' => true,
                 'show_ui' => true,
-                'show_in_menu' => false,
+                'show_in_menu' => (is_admin()) ? true : false,
                 'public' => false,
                 'rewrite' => false,
                 'capabilities' => [
-                    'manage_terms' => false,
-                    'edit_terms' => false,
-                    'delete_terms' => false,
+                    'manage_terms' => (is_admin()) ? true : false,
+                    'edit_terms' => (is_admin()) ? true : false,
+                    'delete_terms' => (is_admin()) ? true : false,
                     'assign_terms' => 'Assigner les saisons'
                 ]
             )
