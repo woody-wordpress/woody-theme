@@ -717,8 +717,8 @@
             ]
         },
         {
-            "key": "field_5b879d4755fa8",
-            "label": "En-tête",
+            "key": "field_5b87f3e3bc5cf",
+            "label": "Titre du bloc",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -733,9 +733,9 @@
             "endpoint": 0
         },
         {
-            "key": "field_5b879d9255faa",
-            "label": "En-tête du bloc",
-            "name": "block_heading",
+            "key": "field_5b87f406bc5d0",
+            "label": "Titre du bloc",
+            "name": "teaser_block_title",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -746,7 +746,7 @@
                 "id": ""
             },
             "clone": [
-                "group_5b041c24d0dd7"
+                "field_5b87f315b2034"
             ],
             "display": "seamless",
             "layout": "block",
@@ -844,5 +844,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1535607250
+    "modified": 1535629342
 }

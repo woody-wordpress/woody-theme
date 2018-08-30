@@ -124,9 +124,14 @@ if ($context['page_type'] === 'playlist_tourism') {
                 foreach ($section['section_content'] as $key => $layout) {
                     switch ($layout['acf_fc_layout']) {
                         case 'manual_focus':
-                        // \PC::debug($layout, 'Focus');
                             $the_items = getManualFocus_data($layout['content_selection']);
                             $the_items['focus_no_padding'] = $layout['focus_no_padding'];
+                            $the_items['block_titles']['title'] = $layout['title'];
+                            $the_items['block_titles']['pretitle'] = $layout['pretitle'];
+                            $the_items['block_titles']['subtitle'] = $layout['subtitle'];
+                            $the_items['block_titles']['icon_type'] = $layout['icon_type'];
+                            $the_items['block_titles']['icon_img'] = $layout['icon_img'];
+                            $the_items['block_titles']['woody_icon'] = $layout['woody_icon'];
                             $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_items);
                         break;
                         case 'auto_focus':

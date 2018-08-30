@@ -1,267 +1,272 @@
 {
-    "key": "group_5b052bbee40a4",
-    "title": "Visuel et accroche",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "page"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "acf_after_title",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Le bloc en haut de page contenant un média et des textes d'accroche",
-    "modified": 1535547972,
-    "fields": [
-        {
-            "key": "field_5b052d9aea19c",
-            "label": "Contenu",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
-            "key": "field_5b052bbab3867",
-            "label": "En-tête",
-            "name": "page_heading_heading",
-            "type": "clone",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "clone": [
-                "group_5b041c24d0dd7"
-            ],
-            "display": "seamless",
-            "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0
-        },
-        {
-            "key": "field_5b0e5cc3d4b1a",
-            "label": "Type de média",
-            "name": "page_heading_media_type",
-            "type": "radio",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "30",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "img": "Image",
-                "movie": "Vidéo d'habillage"
-            },
-            "allow_null": 0,
-            "other_choice": 0,
-            "save_other_choice": 0,
-            "default_value": "img",
-            "layout": "vertical",
-            "return_format": "value"
-        },
-        {
-            "key": "field_5b0e5ddfd4b1b",
-            "label": "Image",
-            "name": "page_heading_img",
-            "type": "image",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b0e5cc3d4b1a",
-                        "operator": "==",
-                        "value": "img"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "70",
-                "class": "hide-label",
-                "id": ""
-            },
-            "return_format": "array",
-            "preview_size": "ratio_16_9_small",
-            "library": "all",
-            "min_width": 1920,
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": 8,
-            "mime_types": ""
-        },
-        {
-            "key": "field_5b0e5df0d4b1c",
-            "label": "Vidéo d'habillage",
-            "name": "page_heading_movie",
-            "type": "group",
-            "instructions": "Cette vidéo doit être courte, muette et peu mouvementée",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b0e5cc3d4b1a",
-                        "operator": "==",
-                        "value": "movie"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "70",
-                "class": "hide-label",
-                "id": ""
-            },
-            "layout": "block",
-            "sub_fields": [
-                {
-                    "key": "field_5b16b2f2aa625",
-                    "label": "Fichiers vidéos",
-                    "name": "movie_files",
-                    "type": "clone",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "clone": [
-                        "group_5b16b09337a33"
-                    ],
-                    "display": "seamless",
-                    "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0
-                }
-            ]
-        },
-        {
-            "key": "field_5b44b7fedb880",
-            "label": "Ajouter une vidéo de présentation (youtube, dailymotion, vimeo, ...)",
-            "name": "page_heading_add_social_movie",
-            "type": "true_false",
-            "instructions": "Cette vidéo pourra être visionnée grâce à un bouton \"Voir la vidéo\"",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
-            "key": "field_5b44b70d5a8dd",
-            "label": "Vidéo de présentation",
-            "name": "page_heading_social_movie",
-            "type": "oembed",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b44b7fedb880",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "width": "",
-            "height": ""
-        },
-        {
-            "key": "field_5b052da8ea19d",
-            "label": "Mise en page",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
-            "key": "field_5b052d70ea19b",
-            "label": "Template",
-            "name": "heading_woody_tpl",
-            "type": "radio",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "hide-label",
-                "id": ""
-            },
-            "choices": [],
-            "allow_null": 0,
-            "other_choice": 0,
-            "save_other_choice": 0,
-            "default_value": "",
-            "layout": "vertical",
-            "return_format": "value"
-        },
-        {
-            "key": "field_5b0e5ef78f6be",
-            "label": "Opacité du média",
-            "name": "page_heading_background_img_opacity",
-            "type": "button_group",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "bgimg-op100": "100%",
-                "bgimg-op90": "90%",
-                "bgimg-op75": "75%",
-                "bgimg-op50": "50%"
-            },
-            "allow_null": 0,
-            "default_value": "",
-            "layout": "horizontal",
-            "return_format": "value"
-        }
-    ]
-}
+                                    "key": "group_5b052bbee40a4",
+                                    "title": "Visuel et accroche",
+                                    "fields": [
+                                        {
+                                            "key": "field_5b052d9aea19c",
+                                            "label": "Contenu",
+                                            "name": "",
+                                            "type": "tab",
+                                            "instructions": "",
+                                            "required": 0,
+                                            "conditional_logic": 0,
+                                            "wrapper": {
+                                                "width": "",
+                                                "class": "",
+                                                "id": ""
+                                            },
+                                            "placement": "top",
+                                            "endpoint": 0
+                                        },
+                                        {
+                                            "key": "field_5b052bbab3867",
+                                            "label": "En-tête",
+                                            "name": "page_heading_heading",
+                                            "type": "clone",
+                                            "instructions": "",
+                                            "required": 0,
+                                            "conditional_logic": 0,
+                                            "wrapper": {
+                                                "width": "",
+                                                "class": "",
+                                                "id": ""
+                                            },
+                                            "clone": [
+                                                "group_5b041c24d0dd7"
+                                            ],
+                                            "display": "seamless",
+                                            "layout": "block",
+                                            "prefix_label": 0,
+                                            "prefix_name": 0
+                                        },
+                                        {
+                                            "key": "field_5b0e5cc3d4b1a",
+                                            "label": "Type de média",
+                                            "name": "page_heading_media_type",
+                                            "type": "radio",
+                                            "instructions": "",
+                                            "required": 0,
+                                            "conditional_logic": 0,
+                                            "wrapper": {
+                                                "width": "30",
+                                                "class": "",
+                                                "id": ""
+                                            },
+                                            "choices": {
+                                                "img": "Image",
+                                                "movie": "Vidéo d'habillage"
+                                            },
+                                            "allow_null": 0,
+                                            "other_choice": 0,
+                                            "save_other_choice": 0,
+                                            "default_value": "img",
+                                            "layout": "vertical",
+                                            "return_format": "value"
+                                        },
+                                        {
+                                            "key": "field_5b0e5ddfd4b1b",
+                                            "label": "Image",
+                                            "name": "page_heading_img",
+                                            "type": "image",
+                                            "instructions": "",
+                                            "required": 0,
+                                            "conditional_logic": [
+                                                [
+                                                    {
+                                                        "field": "field_5b0e5cc3d4b1a",
+                                                        "operator": "==",
+                                                        "value": "img"
+                                                    }
+                                                ]
+                                            ],
+                                            "wrapper": {
+                                                "width": "70",
+                                                "class": "hide-label",
+                                                "id": ""
+                                            },
+                                            "return_format": "array",
+                                            "preview_size": "ratio_16_9_small",
+                                            "library": "all",
+                                            "min_width": 1920,
+                                            "min_height": "",
+                                            "min_size": "",
+                                            "max_width": "",
+                                            "max_height": "",
+                                            "max_size": 8,
+                                            "mime_types": ""
+                                        },
+                                        {
+                                            "key": "field_5b0e5df0d4b1c",
+                                            "label": "Vidéo d'habillage",
+                                            "name": "page_heading_movie",
+                                            "type": "group",
+                                            "instructions": "Cette vidéo doit être courte, muette et peu mouvementée",
+                                            "required": 0,
+                                            "conditional_logic": [
+                                                [
+                                                    {
+                                                        "field": "field_5b0e5cc3d4b1a",
+                                                        "operator": "==",
+                                                        "value": "movie"
+                                                    }
+                                                ]
+                                            ],
+                                            "wrapper": {
+                                                "width": "70",
+                                                "class": "hide-label",
+                                                "id": ""
+                                            },
+                                            "layout": "block",
+                                            "sub_fields": [
+                                                {
+                                                    "key": "field_5b16b2f2aa625",
+                                                    "label": "Fichiers vidéos",
+                                                    "name": "movie_files",
+                                                    "type": "clone",
+                                                    "instructions": "",
+                                                    "required": 0,
+                                                    "conditional_logic": 0,
+                                                    "wrapper": {
+                                                        "width": "",
+                                                        "class": "",
+                                                        "id": ""
+                                                    },
+                                                    "clone": [
+                                                        "group_5b16b09337a33"
+                                                    ],
+                                                    "display": "seamless",
+                                                    "layout": "block",
+                                                    "prefix_label": 0,
+                                                    "prefix_name": 0
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "key": "field_5b44b7fedb880",
+                                            "label": "Ajouter une vidéo de présentation (youtube, dailymotion, vimeo, ...)",
+                                            "name": "page_heading_add_social_movie",
+                                            "type": "true_false",
+                                            "instructions": "Cette vidéo pourra être visionnée grâce à un bouton \"Voir la vidéo\"",
+                                            "required": 0,
+                                            "conditional_logic": 0,
+                                            "wrapper": {
+                                                "width": "",
+                                                "class": "",
+                                                "id": ""
+                                            },
+                                            "message": "",
+                                            "default_value": 0,
+                                            "ui": 1,
+                                            "ui_on_text": "",
+                                            "ui_off_text": ""
+                                        },
+                                        {
+                                            "key": "field_5b44b70d5a8dd",
+                                            "label": "Vidéo de présentation",
+                                            "name": "page_heading_social_movie",
+                                            "type": "oembed",
+                                            "instructions": "",
+                                            "required": 0,
+                                            "conditional_logic": [
+                                                [
+                                                    {
+                                                        "field": "field_5b44b7fedb880",
+                                                        "operator": "==",
+                                                        "value": "1"
+                                                    }
+                                                ]
+                                            ],
+                                            "wrapper": {
+                                                "width": "",
+                                                "class": "",
+                                                "id": ""
+                                            },
+                                            "width": "",
+                                            "height": ""
+                                        },
+                                        {
+                                            "key": "field_5b052da8ea19d",
+                                            "label": "Mise en page",
+                                            "name": "",
+                                            "type": "tab",
+                                            "instructions": "",
+                                            "required": 0,
+                                            "conditional_logic": 0,
+                                            "wrapper": {
+                                                "width": "",
+                                                "class": "",
+                                                "id": ""
+                                            },
+                                            "placement": "top",
+                                            "endpoint": 0
+                                        },
+                                        {
+                                            "key": "field_5b052d70ea19b",
+                                            "label": "Template",
+                                            "name": "heading_woody_tpl",
+                                            "type": "radio",
+                                            "instructions": "",
+                                            "required": 0,
+                                            "conditional_logic": 0,
+                                            "wrapper": {
+                                                "width": "",
+                                                "class": "hide-label",
+                                                "id": ""
+                                            },
+                                            "choices": [],
+                                            "allow_null": 0,
+                                            "other_choice": 0,
+                                            "save_other_choice": 0,
+                                            "default_value": "",
+                                            "layout": "vertical",
+                                            "return_format": "value"
+                                        },
+                                        {
+                                            "key": "field_5b0e5ef78f6be",
+                                            "label": "Opacité du média",
+                                            "name": "page_heading_background_img_opacity",
+                                            "type": "button_group",
+                                            "instructions": "",
+                                            "required": 0,
+                                            "conditional_logic": 0,
+                                            "wrapper": {
+                                                "width": "",
+                                                "class": "",
+                                                "id": ""
+                                            },
+                                            "choices": {
+                                                "bgimg-op100": "100%",
+                                                "bgimg-op90": "90%",
+                                                "bgimg-op75": "75%",
+                                                "bgimg-op50": "50%"
+                                            },
+                                            "allow_null": 0,
+                                            "default_value": "",
+                                            "layout": "horizontal",
+                                            "return_format": "value"
+                                        }
+                                    ],
+                                    "location": [
+                                        [
+                                            {
+                                                "param": "post_type",
+                                                "operator": "==",
+                                                "value": "page"
+                                            },
+                                            {
+                                                "param": "page_type_and_children",
+                                                "operator": "!=",
+                                                "value": "front_page"
+                                            }
+                                        ]
+                                    ],
+                                    "menu_order": 0,
+                                    "position": "acf_after_title",
+                                    "style": "default",
+                                    "label_placement": "top",
+                                    "instruction_placement": "label",
+                                    "hide_on_screen": "",
+                                    "active": 1,
+                                    "description": "Le bloc en haut de page contenant un média et des textes d'accroche",
+                                    "modified": 1535628635
+                                }
