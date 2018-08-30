@@ -190,6 +190,36 @@ class WoodyTheme_Taxonomy
             )
         );
 
+        // On créé la taxonomie "Types de média"
+        register_taxonomy(
+            'attachment_categories',
+            'attachment',
+            array(
+                'label' => 'Catégories de média',
+                'labels' => [
+                    'name' => 'Catégories de média',
+                    'singular_name' => 'Catégorie du média',
+                    'menu_name' => 'Catégories de média',
+                    'all_items' => 'Toutes les catégories de média',
+                    'edit_item' => 'Modifier les catégories de média',
+                    'view_item' => 'Voir les catégories de média',
+                    'update_item' => 'Mettre à jour les catégories de média',
+                    'add_new_item' => 'Ajouter une catégorie de média',
+                    'new_item_name' => 'Nouvelle catégorie de média',
+                    'search_items' => 'Rechercher parmi les catégories de média',
+                    'popular_items' => 'Catégories de média les plus utilisés'
+                ],
+                'hierarchical' => true,
+                'show_ui' => true,
+                'capabilities' => [
+                    'manage_terms' => true,
+                    'edit_terms' => true,
+                    'delete_terms' => true,
+                    'assign_terms' => true
+                ]
+            )
+        );
+
         // On créé la taxonomie "Hashtags"
         register_taxonomy(
             'attachment_hashtags',

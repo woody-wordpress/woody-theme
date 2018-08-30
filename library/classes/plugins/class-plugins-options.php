@@ -52,16 +52,32 @@ class WoodyTheme_Plugins_Options
         // Media Library Taxonomy
         $wpuxss_eml_taxonomies = [
             'media_category' => [
-                'assigned' => false
+                'assigned' => false,
+                'eml_media' => false,
+                'admin_filter' => false,
+                'media_uploader_filter' => false,
+                'media_popup_taxonomy_edit' => false,
+            ],
+            'attachment_categories' => [
+                'assigned' => true,
+                'eml_media' => false,
+                'taxonomy_auto_assign' => false,
+                'admin_filter' => true,
+                'media_uploader_filter' => true,
+                'media_popup_taxonomy_edit' => true,
             ],
             'attachment_types' => [
                 'assigned' => true,
+                'eml_media' => false,
+                'taxonomy_auto_assign' => false,
                 'admin_filter' => true,
                 'media_uploader_filter' => true,
                 'media_popup_taxonomy_edit' => false,
             ],
             'attachment_hashtags' => [
                 'assigned' => true,
+                'eml_media' => false,
+                'taxonomy_auto_assign' => false,
                 'admin_filter' => true,
                 'media_uploader_filter' => true,
                 'media_popup_taxonomy_edit' => true,

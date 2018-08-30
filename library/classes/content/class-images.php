@@ -88,6 +88,13 @@ class WoodyTheme_Images
         //       'callback' => array('WoodyTheme_Images', 'imagemagick')
         //     ));
         // });
+
+        add_action('add_attachment', array($this, 'addDefaultMediaType'));
+    }
+
+    public function addDefaultMediaType($post_id)
+    {
+        wp_set_object_terms($post_id, 'Média ajouté manuellement', 'attachment_types', true);
     }
 
     // Remove default image sizes here.
