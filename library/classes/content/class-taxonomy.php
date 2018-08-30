@@ -41,8 +41,8 @@ class WoodyTheme_Taxonomy
                     'popular_items' => 'Types de publications les plus utilisées'
                 ],
                 'hierarchical' => true,
-                'show_ui' => false,
-                'show_in_menu' => false,
+                'show_ui' => true,
+                'show_in_menu' => true,
                 'capabilities' => [
                     'manage_terms' => 'Configurer les types de page',
                     'edit_terms' => 'Editer les types de page',
@@ -85,6 +85,7 @@ class WoodyTheme_Taxonomy
                     ],
                     'hierarchical' => true,
                     'show_ui' => true,
+                    'show_in_menu' => true,
                     'capabilities' => [
                         'manage_terms' => 'Configurer les thématiques',
                         'edit_terms' => 'Editer les thématiques',
@@ -115,6 +116,7 @@ class WoodyTheme_Taxonomy
                     ],
                     'hierarchical' => true,
                     'show_ui' => true,
+                    'show_in_menu' => true,
                     'capabilities' => [
                         'manage_terms' => 'Configurer les lieux',
                         'edit_terms' => 'Editer les lieux',
@@ -181,7 +183,8 @@ class WoodyTheme_Taxonomy
                         'popular_items' => 'Types de média les plus utilisés'
                     ],
                     'hierarchical' => false,
-                    'show_ui' => false,
+                    'show_ui' => true,
+                    'show_in_menu' => true,
                     'capabilities' => [
                         'manage_terms' => 'Configurer les types de médias',
                         'edit_terms' => 'Editer les types de médias',
@@ -212,6 +215,7 @@ class WoodyTheme_Taxonomy
                     ],
                     'hierarchical' => true,
                     'show_ui' => true,
+                    'show_in_menu' => true,
                     'capabilities' => [
                         'manage_terms' => 'Configurer les catégories de médias',
                         'edit_terms' => 'Editer les catégories de médias',
@@ -241,6 +245,7 @@ class WoodyTheme_Taxonomy
                 ],
                 'hierarchical' => false,
                 'show_ui' => true,
+                'show_in_menu' => true,
                 'capabilities' => [
                     'manage_terms' => 'Configurer les hashtag',
                     'edit_terms' => 'Editer les hashtag',
