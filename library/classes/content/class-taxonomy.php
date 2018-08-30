@@ -44,10 +44,10 @@ class WoodyTheme_Taxonomy
                 'show_ui' => false,
                 'show_in_menu' => false,
                 'capabilities' => [
-                    'manage_terms' => false,
-                    'edit_terms' => false,
-                    'delete_terms' => false,
-                    'assign_terms' => true
+                    'manage_terms' => 'Configurer les types de page',
+                    'edit_terms' => 'Editer les types de page',
+                    'delete_terms' => 'Supprimer les types de page',
+                    'assign_terms' => 'Assigner les types de page'
                 ]
             )
         );
@@ -85,10 +85,10 @@ class WoodyTheme_Taxonomy
                 'hierarchical' => true,
                 'show_ui' => true,
                 'capabilities' => [
-                    'manage_terms' => true,
-                    'edit_terms' => true,
-                    'delete_terms' => true,
-                    'assign_terms' => true
+                    'manage_terms' => 'Configurer les thématiques',
+                    'edit_terms' => 'Editer les thématiques',
+                    'delete_terms' => 'Supprimer les thématiques',
+                    'assign_terms' => 'Assigner les thématiques'
                 ]
             )
         );
@@ -115,10 +115,10 @@ class WoodyTheme_Taxonomy
                 'hierarchical' => true,
                 'show_ui' => true,
                 'capabilities' => [
-                    'manage_terms' => true,
-                    'edit_terms' => true,
-                    'delete_terms' => true,
-                    'assign_terms' => true
+                    'manage_terms' => 'Configurer les lieux',
+                    'edit_terms' => 'Editer les lieux',
+                    'delete_terms' => 'Supprimer les lieux',
+                    'assign_terms' => 'Assigner les lieux'
                 ]
             )
         );
@@ -146,10 +146,10 @@ class WoodyTheme_Taxonomy
                 'show_ui' => true,
                 'show_in_menu' => false,
                 'capabilities' => [
-                    'manage_terms' => false,
-                    'edit_terms' => false,
-                    'delete_terms' => false,
-                    'assign_terms' => true
+                    'manage_terms' => 'Configurer les saisons',
+                    'edit_terms' => 'Editer les saisons',
+                    'delete_terms' => 'Supprimer les saison',
+                    'assign_terms' => 'Assigner les saisons'
                 ]
             )
         );
@@ -182,10 +182,10 @@ class WoodyTheme_Taxonomy
                 'hierarchical' => false,
                 'show_ui' => false,
                 'capabilities' => [
-                    'manage_terms' => false,
-                    'edit_terms' => false,
-                    'delete_terms' => false,
-                    'assign_terms' => true
+                    'manage_terms' => 'Configurer les types de médias',
+                    'edit_terms' => 'Editer les types de médias',
+                    'delete_terms' => 'Supprimer les types de médias',
+                    'assign_terms' => 'Assigner les types de médias'
                 ]
             )
         );
@@ -212,10 +212,10 @@ class WoodyTheme_Taxonomy
                 'hierarchical' => true,
                 'show_ui' => true,
                 'capabilities' => [
-                    'manage_terms' => true,
-                    'edit_terms' => true,
-                    'delete_terms' => true,
-                    'assign_terms' => true
+                    'manage_terms' => 'Configurer les catégories de médias',
+                    'edit_terms' => 'Editer les catégories de médias',
+                    'delete_terms' => 'Supprimer les catégories de médias',
+                    'assign_terms' => 'Assigner les catégories de médias'
                 ]
             )
         );
@@ -241,10 +241,10 @@ class WoodyTheme_Taxonomy
                 'hierarchical' => false,
                 'show_ui' => true,
                 'capabilities' => [
-                    'manage_terms' => true,
-                    'edit_terms' => true,
-                    'delete_terms' => true,
-                    'assign_terms' => true
+                     'manage_terms' => 'Configurer les hashtag',
+                    'edit_terms' => 'Editer les hashtag',
+                    'delete_terms' => 'Supprimer les hashtag',
+                    'assign_terms' => 'Assigner les hashtag'
                 ]
             )
         );

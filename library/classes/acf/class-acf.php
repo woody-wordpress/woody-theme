@@ -182,8 +182,11 @@ class WoodyTheme_ACF
     {
         $children_terms_ids = [];
         $parent_term = get_term_by('slug', $rule['value'], 'page_type');
-        $parent_term_id = $parent_term->term_id;
-        $children_terms = get_terms(array('taxonomy' => 'page_type', 'hide_empty' => false, 'parent' => $parent_term_id));
+        if(!empty($parent_term)){
+            $parent_term_id = $parent_term->term_id;
+            $children_terms = get_terms(array('taxonomy' => 'page_type', 'hide_empty' => false, 'parent' => $parent_term_id));
+        }
+
 
         if (!empty($children_terms)) {
             foreach ($children_terms as $term) {
