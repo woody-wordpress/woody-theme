@@ -28,3 +28,6 @@ new WoodyTheme_Images();
 
 // Menu
 new WoodyTheme_Menus();
+
+// Roles
+new WoodyTheme_Roles();
