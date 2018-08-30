@@ -190,7 +190,7 @@ class WoodyTheme_Taxonomy
             )
         );
 
-        // On créé la taxonomie "Types de média"
+        // On créé la taxonomie "Catégories de média"
         register_taxonomy(
             'attachment_categories',
             'attachment',
