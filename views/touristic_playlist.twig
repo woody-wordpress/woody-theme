@@ -1,6 +1,7 @@
 {% extends "page.twig" %}
 
 {% block metas %}
+    {{ parent() }}
     <script>
         var DrupalAngularConfig = {{ PL_CONF_TESTING|json_encode(constant('JSON_PRETTY_PRINT'))|raw }};
     </script>
@@ -17,9 +18,7 @@
     <link rel="stylesheet" href="https://api.tourism-system.com/render/assets/styles/playlist.css">
 {% endblock styles %}
 
-{% block scripts %}
-
-
+{% block inline_scripts %}
 
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -51,4 +50,4 @@
         <!-- <script src="https://api.tourism-system.com/render/assets/scripts/raccourci/playlist-map.leaflet.debug.js?" defer async></script> -->
     {% endif %}
 
-{% endblock scripts %}
+{% endblock inline_scripts %}

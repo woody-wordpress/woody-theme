@@ -12,6 +12,15 @@ $context['post'] = new TimberPost();
 $context['woody_components'] = Woody::getTwigsPaths();
 // PC::debug(get_class_methods(TimberPost), 'TwigMethods');
 
+$context['site_config'] = [];
+$context['site_config']['site_key'] = WP_SITE_KEY;
+$credentials = get_option('woody_credentials');
+if (!empty($credentials['public_login']) && !empty($credentials['public_password'])) {
+    $context['site_config']['login'] = $credentials['public_login'];
+    $context['site_config']['password'] = $credentials['public_password'];
+    $context['site_config'] = json_encode($context['site_config']);
+}
+
 include get_template_directory() . '/header.php';
 
 $context['current_url'] = get_permalink();
@@ -207,15 +216,6 @@ if (!empty(is_front_page())) {
     $template = 'front.twig';
 } else {
     $template = 'page.twig';
-}
-
-$context['site_config'] = [];
-$context['site_config']['site_key'] = WP_SITE_KEY;
-$credentials = get_option('woody_credentials');
-if (!empty($credentials['public_login']) && !empty($credentials['public_password'])) {
-    $context['site_config']['login'] = $credentials['public_login'];
-    $context['site_config']['password'] = $credentials['public_password'];
-    $context['site_config'] = json_encode($context['site_config']);
 }
 
 // On rend le $context dans le page.twig
