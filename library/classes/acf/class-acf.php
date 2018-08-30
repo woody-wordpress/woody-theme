@@ -20,11 +20,11 @@ class WoodyTheme_ACF
     {
         add_action('acf/init', array($this, 'acfUpdateSetting'));
         add_filter('plugin_action_links', array($this, 'disallowAcfDeactivation'), 10, 4);
-        add_filter('acf/load_field/type=radio', array($this, 'woodyTplAcfLoadField'), 10, 1);
-        add_filter('acf/load_field/type=select', array($this, 'woodyIconLoadField'), 10, 1);
-        add_filter('acf/load_field/name=focused_taxonomy_terms', array($this, 'focusedTaxonomyTermsLoadField'), 10, 1);
-        add_filter('acf/location/rule_types', array($this, 'woodyAcfAddPageTypeLocationRule'), 10, 1);
-        add_filter('acf/location/rule_values/page_type_and_children', array($this, 'woodyAcfAddPageTypeChoices'), 10, 1);
+        add_filter('acf/load_field/type=radio', array($this, 'woodyTplAcfLoadField'));
+        add_filter('acf/load_field/type=select', array($this, 'woodyIconLoadField'));
+        add_filter('acf/load_field/name=focused_taxonomy_terms', array($this, 'focusedTaxonomyTermsLoadField'));
+        add_filter('acf/location/rule_types', array($this, 'woodyAcfAddPageTypeLocationRule'));
+        add_filter('acf/location/rule_values/page_type_and_children', array($this, 'woodyAcfAddPageTypeChoices'));
         add_filter('acf/location/rule_match/page_type_and_children', array($this, 'woodyAcfPageTypeMatch'), 10, 3);
         // add_filter('acf/load_field/name=playlist_name', array($this, 'playlistNameLoadField'));
     }
