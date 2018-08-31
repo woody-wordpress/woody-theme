@@ -51,11 +51,11 @@ class WoodyTheme_Plugins_Activation
         ];
 
         $this->dev_plugins = [
-            'debug-bar/debug-bar.php',
             'wp-php-console/wp-php-console.php',
         ];
 
         $this->deactivate_plugins = [
+            'debug-bar/debug-bar.php',
             'debug-bar-timber/debug-bar-timber.php',
             'kint-debugger/kint-debugger.php',
             'fakerpress/fakerpress.php',
@@ -68,6 +68,8 @@ class WoodyTheme_Plugins_Activation
         if (WP_ENV == 'dev') {
             $this->activate_plugins = array_merge($this->activate_plugins, $this->dev_plugins);
             $this->dev_plugins = [];
+        } else {
+            $this->deactivate_plugins = array_merge($this->deactivate_plugins, $this->dev_plugins);
         }
 
         require_once(ABSPATH . 'wp-admin/includes/plugin.php');

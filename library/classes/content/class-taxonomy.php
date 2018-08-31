@@ -65,9 +65,9 @@ class WoodyTheme_Taxonomy
                 'show_ui' => false,
                 'show_in_menu' => false,
                 'capabilities' => [
-                    'manage_terms' => 'edit_posts',
-                    'edit_terms' => 'edit_posts',
-                    'delete_terms' => 'edit_posts',
+                    'manage_terms' => (is_admin()) ? 'edit_posts' : false,
+                    'edit_terms' => (is_admin()) ? 'edit_posts' : false,
+                    'delete_terms' => (is_admin()) ? 'edit_posts' : false,
                     'assign_terms' => 'edit_posts'
                 ]
             )
@@ -156,11 +156,11 @@ class WoodyTheme_Taxonomy
                 ],
                 'hierarchical' => true,
                 'show_ui' => true,
-                'show_in_menu' => (is_admin()) ? true : false,
+                'show_in_menu' => (is_admin()) ? 'edit_posts' : false,
                 'capabilities' => [
-                    'manage_terms' => (is_admin()) ? true : false,
-                    'edit_terms' => (is_admin()) ? true : false,
-                    'delete_terms' => (is_admin()) ? true : false,
+                    'manage_terms' => (is_admin()) ? 'edit_posts' : false,
+                    'edit_terms' => (is_admin()) ? 'edit_posts' : false,
+                    'delete_terms' => (is_admin()) ? 'edit_posts' : false,
                     'assign_terms' => 'Assigner les saisons'
                 ]
             )
