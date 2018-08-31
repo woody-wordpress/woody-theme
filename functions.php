@@ -29,4 +29,6 @@ foreach ($finder as $file) {
 require_once(__DIR__ . '/library/classes/autoloader.php');
 
 // Change Timber locations
-Timber::$locations = array('views', Woody::getTemplatesDirname());
+if (class_exists('Timber', false)) {
+    Timber::$locations = array('views', Woody::getTemplatesDirname());
+}

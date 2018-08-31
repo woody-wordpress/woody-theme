@@ -5,7 +5,7 @@ new WoodyTheme_Plugins_Activation();
 new WoodyTheme_Plugins_Options();
 
 // PHP Console
-if (!class_exists('PC', false) && WP_ENV == 'dev') {
+if (!class_exists('PC', false) && class_exists('PhpConsole', false) && WP_ENV == 'dev') {
     PhpConsole\Helper::register();
 }
 
