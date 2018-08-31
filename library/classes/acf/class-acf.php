@@ -185,16 +185,14 @@ class WoodyTheme_ACF
     public function woodyAcfPageTypeMatch($match, $rule, $options)
     {
         $children_terms_ids = [];
-        $parent_term = get_term_by('slug', $rule['value'], 'page_type');
-        if (!empty($parent_term)) {
-            $parent_term_id = $parent_term->term_id;
-            $children_terms = get_terms(array('taxonomy' => 'page_type', 'hide_empty' => false, 'parent' => $parent_term_id));
-        }
+        $current_term = get_term_by('slug', $rule['value'], 'page_type');
+        if (!empty($current_term)) {
+            $children_terms = get_terms(array('taxonomy' => 'page_type', 'hide_empty' => false, 'parent' => $current_term->term_id));
 
-
-        if (!empty($children_terms)) {
-            foreach ($children_terms as $term) {
-                $children_terms_ids[] = $term->term_id;
+            if (!empty($children_terms)) {
+                foreach ($children_terms as $term) {
+                    $children_terms_ids[] = $term->term_id;
+                }
             }
         }
 
@@ -214,7 +212,7 @@ class WoodyTheme_ACF
         }
 
         foreach ($selected_term_ids as $term_id) {
-            if (in_array($term_id, $children_terms_ids) || $term_id == $parent_term_id) {
+            if (in_array($term_id, $children_terms_ids) || $term_id == $current_term->term_id) {
                 $match = true;
             }
         }
