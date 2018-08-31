@@ -65,9 +65,9 @@ class WoodyTheme_Taxonomy
                 'show_ui' => false,
                 'show_in_menu' => false,
                 'capabilities' => [
-                    'manage_terms' => false,
-                    'edit_terms' => false,
-                    'delete_terms' => false,
+                    'manage_terms' => 'edit_posts',
+                    'edit_terms' => 'edit_posts',
+                    'delete_terms' => 'edit_posts',
                     'assign_terms' => 'edit_posts'
                 ]
             )
