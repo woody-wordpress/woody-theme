@@ -105,11 +105,11 @@ function getAutoFocus_data($the_post, $query_form)
  *
  */
 
-function getManualFocus_data($items)
+function getManualFocus_data($layout)
 {
     $the_items = [];
 
-    foreach ($items as $key => $item_wrapper) {
+    foreach ($layout['content_selection'] as $key => $item_wrapper) {
         // La donnée de la vignette est saisie en backoffice
         if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
             $the_items['items'][$key] = getCustomPreview($item_wrapper['custom_content']);
@@ -121,7 +121,8 @@ function getManualFocus_data($items)
             if ($status === 'draft') {
                 continue;
             }
-            $the_items['items'][$key] = getExistingPreview($item);
+            $page_preview = getPagePreview($layout, $item['content_selection']);
+            $the_items['items'][$key] = (!empty($page_preview)) ?  $page_preview : '';
         }
     }
 
@@ -154,7 +155,6 @@ function getManualFocus_data($items)
             'target' => (!empty($item['link']['target'])) ? $item['link']['target'] : '',
         ]
     ];
-
      // On récupère le choix de média afin d'envoyer une image OU une vidéo
      if ($item['media_type'] == 'img' && !empty($item['img'])) {
          $data['img'] = $item['img'];
@@ -168,26 +168,24 @@ function getManualFocus_data($items)
 
  /**
  *
- * Nom : getExistingPreview
+ * Nom : getFocusBlockTitles
  * Auteur : Benoit Bouchaud
- * Return : Retourne les données d'une preview basée sur un post existant
- * @param    item - Un tableau contenant un objet Timber\Post + de la donnée
+ * Return : Retourne les données d'es champs titre du bloc
+ * @param    layout - data du layout focus en tableau
  * @return   data - Un tableau de données
  *
  */
 
- function getExistingPreview($item)
+ function getFocusBlockTitles($layout)
  {
      $data = [];
 
-     if (empty($item['content_selection'])) {
-         return;
-     }
-
-     $data = getPagePreview($item, $item['content_selection']);
-
-     // On ajoute un texte dans le bouton "Lire la suite" s'il a été saisi
-     $data['link']['title'] = (!empty($item['link_label'])) ? $item['link_label'] : '';
+     $data['title'] = (!empty($layout['title'])) ? $layout['title'] : '';
+     $data['pretitle'] = (!empty($layout['pretitle'])) ? $layout['pretitle'] : '';
+     $data['subtitle'] = (!empty($layout['subtitle'])) ? $layout['subtitle'] : '';
+     $data['icon_type'] = (!empty($layout['icon_type'])) ? $layout['icon_type'] : '';
+     $data['icon_img'] = (!empty($layout['icon_img'])) ? $layout['icon_img'] : '';
+     $data['woody_icon'] = (!empty($layout['woody_icon'])) ? $layout['woody_icon'] : '';
 
      return $data;
  }
@@ -229,14 +227,15 @@ function getManualFocus_data($items)
          }
      }
 
+     if (!empty($item_wrapper['display_button'])) {
+         $data['link']['link_label'] = getFieldAndFallBack($item, 'focus_button_title');
+     }
 
      $data['location'] = [];
      $data['location']['lat'] = (!empty($item->get_field('post_latitude'))) ? $item->get_field('post_latitude') : '';
      $data['location']['lng'] = (!empty($item->get_field('post_longitude'))) ? $item->get_field('post_longitude') : '';
      $data['img'] = getFieldAndFallback($item, 'focus_img', 'field_5b0e5ddfd4b1b');
-     if(!empty($data['img'])){
-        $data['img']['attachment_more_data'] = getAttachmentMoreData($data['img']['ID']);
-     }
+     $data['img']['attachment_more_data'] = (!empty($data['img'])) ? getAttachmentMoreData($data['img']['ID']) : '';
      $data['link']['url'] = $item->get_path();
 
      return $data;
@@ -254,7 +253,7 @@ function getManualFocus_data($items)
  * @return   data - Un tableau de données
  *
  */
- function getFieldAndFallback($item, $field, $fallback)
+ function getFieldAndFallback($item, $field, $fallback = '')
  {
      $value = [];
 
@@ -285,37 +284,18 @@ function getManualFocus_data($items)
      $classes_array=[];
 
      $display['gridContainer'] = (empty($scope['display_fullwidth'])) ? 'grid-container' : '';
-
-     if (!empty($scope['background_img'])) {
-         $display['background_img'] = $scope['background_img'];
-         $classes_array[] = 'isRel';
-     }
-
-     if (!empty($scope['background_color'])) {
-         $classes_array[] = $scope['background_color'];
-     }
-     if (!empty($scope['background_img_opacity'])) {
-         $classes_array[] = $scope['background_img_opacity'];
-     }
-     if (!empty($scope['scope_paddings']['scope_padding_top'])) {
-         $classes_array[] = $scope['scope_paddings']['scope_padding_top'];
-     }
-     if (!empty($scope['scope_paddings']['scope_padding_bottom'])) {
-         $classes_array[] = $scope['scope_paddings']['scope_padding_bottom'];
-     }
-     if (!empty($scope['scope_margins']['scope_margin_top'])) {
-         $classes_array[] = $scope['scope_margins']['scope_margin_top'];
-     }
-     if (!empty($scope['scope_margins']['scope_margin_bottom'])) {
-         $classes_array[] = $scope['scope_margins']['scope_margin_bottom'];
-     }
-     if (!empty($scope['section_divider'])) {
-         $display['section_divider'] = $scope['section_divider'];
-     }
+     $display['background_img'] = (!empty($scope['background_img'])) ? $scope['background_img'] : '';
+     $classes_array[] = (!empty($display['background_img'])) ? 'isRel' : '';
+     $classes_array[] = (!empty($scope['background_color'])) ? $scope['background_color'] : '';
+     $classes_array[] = (!empty($scope['background_img_opacity'])) ? $scope['background_img_opacity'] : '';
+     $classes_array[] = (!empty($scope['scope_paddings']['scope_padding_top'])) ? $scope['scope_paddings']['scope_padding_top'] : '';
+     $classes_array[] = (!empty($scope['scope_paddings']['scope_padding_bottom'])) ? $scope['scope_paddings']['scope_padding_bottom'] : '';
+     $classes_array[] = (!empty($scope['scope_margins']['scope_margin_top'])) ?  $scope['scope_margins']['scope_margin_top'] : '';
+     $classes_array[] = (!empty($scope['scope_margins']['scope_margin_bottom'])) ? $scope['scope_margins']['scope_margin_bottom'] : '';
+     $display['section_divider'] = (!empty($scope['section_divider'])) ? $scope['section_divider'] : '';
 
      // On transforme le tableau en une chaine de caractères
      $display['classes'] = implode(' ', $classes_array);
-
 
      return $display;
  }

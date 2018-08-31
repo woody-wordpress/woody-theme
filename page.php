@@ -124,19 +124,16 @@ if ($context['page_type'] === 'playlist_tourism') {
                 foreach ($section['section_content'] as $key => $layout) {
                     switch ($layout['acf_fc_layout']) {
                         case 'manual_focus':
-                            $the_items = getManualFocus_data($layout['content_selection']);
-                            $the_items['focus_no_padding'] = $layout['focus_no_padding'];
-                            $the_items['block_titles']['title'] = $layout['title'];
-                            $the_items['block_titles']['pretitle'] = $layout['pretitle'];
-                            $the_items['block_titles']['subtitle'] = $layout['subtitle'];
-                            $the_items['block_titles']['icon_type'] = $layout['icon_type'];
-                            $the_items['block_titles']['icon_img'] = $layout['icon_img'];
-                            $the_items['block_titles']['woody_icon'] = $layout['woody_icon'];
-                            $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_items);
-                        break;
                         case 'auto_focus':
-                            $the_items = getAutoFocus_data($context['post'], $layout);
+                            if ($layout['acf_fc_layout'] == 'manual_focus') {
+                                $the_items = getManualFocus_data($layout);
+                            } else {
+                                $the_items = getAutoFocus_data($context['post'], $layout);
+                            }
                             $the_items['focus_no_padding'] = $layout['focus_no_padding'];
+                            $the_items['block_titles'] = getFocusBlockTitles($layout);
+                            $the_items['display_button'] = $layout['display_button'];
+
                             $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_items);
                         break;
                         case 'playlist_bloc':
@@ -148,7 +145,6 @@ if ($context['page_type'] === 'playlist_tourism') {
                             if (!empty($layout['cta_button_group']['add_modal'])) {
                                 $layout['modal_id'] = 'cta-' . uniqid();
                             }
-
                             $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                         break;
                         case 'tabs_group':
@@ -164,7 +160,6 @@ if ($context['page_type'] === 'playlist_tourism') {
                                 // On ajoute une entrée "gallery_items" pour être compatible avec le tpl woody
                                 $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
                             }
-
                             $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                         break;
                         case 'socialwall':
@@ -181,7 +176,6 @@ if ($context['page_type'] === 'playlist_tourism') {
                                 foreach ($layout['socialwall_auto'] as $key => $term) {
                                     $queried_terms[] =  $term;
                                 }
-
                                 // On récupère les images en fonction des termes sélectionnés
                                 $layout['gallery_items'] = getAttachmentsByTerms('media_category', $queried_terms);
 
