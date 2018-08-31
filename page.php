@@ -94,7 +94,6 @@ if (!empty(getAcfGroupFields('group_5b6c5e6ff381d'))) {
   ************************ **/
 
 if ($context['page_type'] === 'playlist_tourism') {
-    \PC::debug($context['page_type'], 'Type de page');
     include 'inc-touristic-playlist.php';
 } else {
     /** ************************

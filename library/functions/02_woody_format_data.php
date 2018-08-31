@@ -212,29 +212,32 @@ function getManualFocus_data($layout)
          $data['title'] = $item->get_title();
      }
 
+
+     $fallback_field_group = $item->get_field('field_5b052bbab3867');
+
      if (is_array($item_wrapper['display_elements'])) {
          if (in_array('pretitle', $item_wrapper['display_elements'])) {
-             $data['pretitle'] = getFieldAndFallback($item, 'focus_pretitle', 'pretitle');
+             $data['pretitle'] = getFieldAndFallback($item, 'focus_pretitle', $fallback_field_group, 'pretitle');
          }
          if (in_array('subtitle', $item_wrapper['display_elements'])) {
-             $data['subtitle'] = getFieldAndFallback($item, 'focus_subtitle', 'subtitle');
+             $data['subtitle'] = getFieldAndFallback($item, 'focus_subtitle', $fallback_field_group, 'subtitle');
          }
          if (in_array('icon', $item_wrapper['display_elements'])) {
-             $data['icon'] = getFieldAndFallback($item, 'focus_icon', 'icon');
+             $data['icon'] = getFieldAndFallback($item, 'focus_icon', $fallback_field_group, 'woody-icon');
          }
          if (in_array('description', $item_wrapper['display_elements'])) {
-             $data['description'] = getFieldAndFallback($item, 'focus_description', 'description');
+             $data['description'] = getFieldAndFallback($item, 'focus_description', $fallback_field_group, 'description');
          }
      }
 
      if (!empty($item_wrapper['display_button'])) {
-         $data['link']['link_label'] = getFieldAndFallBack($item, 'focus_button_title');
+         $data['link']['link_label'] = getFieldAndFallBack($item, 'focus_button_title', $item);
      }
 
      $data['location'] = [];
      $data['location']['lat'] = (!empty($item->get_field('post_latitude'))) ? $item->get_field('post_latitude') : '';
      $data['location']['lng'] = (!empty($item->get_field('post_longitude'))) ? $item->get_field('post_longitude') : '';
-     $data['img'] = getFieldAndFallback($item, 'focus_img', 'field_5b0e5ddfd4b1b');
+     $data['img'] = getFieldAndFallback($item, 'focus_img', $item, 'field_5b0e5ddfd4b1b');
      $data['img']['attachment_more_data'] = (!empty($data['img'])) ? getAttachmentMoreData($data['img']['ID']) : '';
      $data['link']['url'] = $item->get_path();
 
@@ -253,14 +256,14 @@ function getManualFocus_data($layout)
  * @return   data - Un tableau de données
  *
  */
- function getFieldAndFallback($item, $field, $fallback = '')
+ function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = '')
  {
      $value = [];
 
      if (!empty($item->get_field($field))) {
          $value = $item->get_field($field);
-     } elseif (!empty($item->get_field($fallback))) {
-         $value = $item->get_field($fallback);
+     } elseif (!empty($fallback_item->get_field($fallback_field))) {
+         $value = $fallback_item->get_field($fallback_field);
      } else {
          $value = '';
      }

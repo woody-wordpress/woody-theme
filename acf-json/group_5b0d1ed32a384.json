@@ -662,25 +662,6 @@
                             "return_format": "object",
                             "acf_relationship_create": 0,
                             "ui": 1
-                        },
-                        {
-                            "key": "field_5b1959119e47c",
-                            "label": "Texte du bouton \"Lire la suite\"",
-                            "name": "link_label",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "hide-label",
-                                "id": ""
-                            },
-                            "default_value": "Découvrir",
-                            "placeholder": "Texte du bouton \"Lire la suite\"",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
                         }
                     ]
                 }
@@ -733,7 +714,9 @@
                 "icon": "Icône"
             },
             "allow_custom": 0,
-            "default_value": [],
+            "default_value": [
+                "description"
+            ],
             "layout": "horizontal",
             "toggle": 0,
             "return_format": "value",
@@ -867,5 +850,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1535697232
+    "modified": 1535708996
 }
