@@ -2,13 +2,11 @@
     "key": "group_5b043c93d609a",
     "title": "Background parameters",
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -18,9 +16,8 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Permet de personnaliser le fond d'une section (couleur \/ image)",
-    "modified": 1535547972,
-    "fields": [
-        {
+    "modified": 1535725320,
+    "fields": [{
             "key": "field_5b043ca4a6fe3",
             "label": "Couleur de fond",
             "name": "background_color",

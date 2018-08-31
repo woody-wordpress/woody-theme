@@ -2,13 +2,11 @@
     "key": "group_5b04294e31eac",
     "title": "Titre + texte",
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -18,9 +16,8 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Tite + texte, utilisé en clône dans d'autres groupes (Ex : FAQ)",
-    "modified": 1535547972,
-    "fields": [
-        {
+    "modified": 1535725320,
+    "fields": [{
             "key": "field_5b0429518062b",
             "label": "Titre",
             "name": "title",

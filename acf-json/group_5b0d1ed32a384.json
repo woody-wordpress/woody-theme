@@ -1,8 +1,7 @@
 {
     "key": "group_5b0d1ed32a384",
     "title": "Mise en avant(sélection manuelle)",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b0d1ecc7c825",
             "label": "Contenu",
             "name": "",
@@ -39,8 +38,7 @@
             "hide_collapse": 0,
             "collapse_all_repeater": 1,
             "btn-icon-only": 0,
-            "sub_fields": [
-                {
+            "sub_fields": [{
                     "key": "field_5b22415792db0",
                     "label": "Titre administration",
                     "name": "bo_selection_title",
@@ -91,13 +89,11 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [
-                            {
-                                "field": "field_5b0d2800bb187",
-                                "operator": "==",
-                                "value": "custom_content"
-                            }
-                        ]
+                        [{
+                            "field": "field_5b0d2800bb187",
+                            "operator": "==",
+                            "value": "custom_content"
+                        }]
                     ],
                     "wrapper": {
                         "width": "",
@@ -105,8 +101,7 @@
                         "id": ""
                     },
                     "layout": "block",
-                    "sub_fields": [
-                        {
+                    "sub_fields": [{
                             "key": "field_5b0d28dabb18a",
                             "label": "En-tête",
                             "name": "heading",
@@ -174,13 +169,11 @@
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": [
-                                [
-                                    {
-                                        "field": "field_5b0d28f9bb18b",
-                                        "operator": "==",
-                                        "value": "img"
-                                    }
-                                ]
+                                [{
+                                    "field": "field_5b0d28f9bb18b",
+                                    "operator": "==",
+                                    "value": "img"
+                                }]
                             ],
                             "wrapper": {
                                 "width": "70",
@@ -206,13 +199,11 @@
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": [
-                                [
-                                    {
-                                        "field": "field_5b0d28f9bb18b",
-                                        "operator": "==",
-                                        "value": "movie"
-                                    }
-                                ]
+                                [{
+                                    "field": "field_5b0d28f9bb18b",
+                                    "operator": "==",
+                                    "value": "movie"
+                                }]
                             ],
                             "wrapper": {
                                 "width": "70",
@@ -220,8 +211,7 @@
                                 "id": ""
                             },
                             "layout": "block",
-                            "sub_fields": [
-                                {
+                            "sub_fields": [{
                                     "key": "field_5b16b2b2d0f42",
                                     "label": "Fichiers vidéos",
                                     "name": "movie_field",
@@ -446,13 +436,11 @@
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": [
-                                [
-                                    {
-                                        "field": "field_5b59bbd0e094c",
-                                        "operator": "==",
-                                        "value": "picto"
-                                    }
-                                ]
+                                [{
+                                    "field": "field_5b59bbd0e094c",
+                                    "operator": "==",
+                                    "value": "picto"
+                                }]
                             ],
                             "wrapper": {
                                 "width": "33",
@@ -564,13 +552,11 @@
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": [
-                                [
-                                    {
-                                        "field": "field_5b59bbd0e094c",
-                                        "operator": "==",
-                                        "value": "img"
-                                    }
-                                ]
+                                [{
+                                    "field": "field_5b59bbd0e094c",
+                                    "operator": "==",
+                                    "value": "img"
+                                }]
                             ],
                             "wrapper": {
                                 "width": "",
@@ -625,13 +611,11 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [
-                            {
-                                "field": "field_5b0d2800bb187",
-                                "operator": "==",
-                                "value": "existing_content"
-                            }
-                        ]
+                        [{
+                            "field": "field_5b0d2800bb187",
+                            "operator": "==",
+                            "value": "existing_content"
+                        }]
                     ],
                     "wrapper": {
                         "width": "",
@@ -639,31 +623,29 @@
                         "id": ""
                     },
                     "layout": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_5b0d38ed1cdfb",
-                            "label": "Choix de la page",
-                            "name": "content_selection",
-                            "type": "post_object",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "post_type": [
-                                "page"
-                            ],
-                            "taxonomy": [],
-                            "allow_null": 0,
-                            "multiple": 0,
-                            "return_format": "object",
-                            "acf_relationship_create": 0,
-                            "ui": 1
-                        }
-                    ]
+                    "sub_fields": [{
+                        "key": "field_5b0d38ed1cdfb",
+                        "label": "Choix de la page",
+                        "name": "content_selection",
+                        "type": "post_object",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "post_type": [
+                            "page"
+                        ],
+                        "taxonomy": [],
+                        "allow_null": 0,
+                        "multiple": 0,
+                        "return_format": "object",
+                        "acf_relationship_create": 0,
+                        "ui": 1
+                    }]
                 }
             ]
         },
@@ -694,13 +676,11 @@
             "instructions": "Pour les contenus existants uniquement",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b0d2800bb187",
-                        "operator": "==",
-                        "value": "existing_content"
-                    }
-                ]
+                [{
+                    "field": "field_5b0d2800bb187",
+                    "operator": "==",
+                    "value": "existing_content"
+                }]
             ],
             "wrapper": {
                 "width": "",
@@ -834,13 +814,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -850,5 +828,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1535708996
+    "modified": 1535725320
 }

@@ -2,13 +2,11 @@
     "key": "group_5b59c6f2d866c",
     "title": "Slide",
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -18,9 +16,8 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Slide de blocs Woody dans une grille de section (Utilisé dans un répéteur pour faire un Groupe de slides)",
-    "modified": 1535547972,
-    "fields": [
-        {
+    "modified": 1535725320,
+    "fields": [{
             "key": "field_5b59c6ff44164",
             "label": "Contenu",
             "name": "",

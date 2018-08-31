@@ -1,8 +1,7 @@
 {
     "key": "group_5b2788b48d04c",
     "title": "Mise en avant(sélection automatique)",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b2788cc84ed1",
             "label": "Contenu",
             "name": "",
@@ -50,13 +49,11 @@
             "instructions": "Choisissez le(s) type(s) de publication que vous souhaitez mettre en avant",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b27899284ed4",
-                        "operator": "==",
-                        "value": "page"
-                    }
-                ]
+                [{
+                    "field": "field_5b27899284ed4",
+                    "operator": "==",
+                    "value": "page"
+                }]
             ],
             "wrapper": {
                 "width": "",
@@ -135,8 +132,7 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
+                [{
                         "field": "field_5b27899284ed4",
                         "operator": "!=",
                         "value": "touristic_sheet"
@@ -375,13 +371,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -391,5 +385,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1535693008
+    "modified": 1535725320
 }
