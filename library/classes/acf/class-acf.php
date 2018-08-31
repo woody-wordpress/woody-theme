@@ -59,12 +59,14 @@ class WoodyTheme_ACF
             $field['choices'] = [];
 
             switch ($field['key']) {
-                case 'field_5afd2c9616ecd':
+                case 'field_5afd2c9616ecd': // Cas des sections
                     $components = Woody::getTemplatesByAcfGroup($field['key']);
                 break;
                 default:
                     $components = Woody::getTemplatesByAcfGroup($field['parent']);
+                    \PC::debug($field);
             }
+
 
             if (!empty($components)) {
                 foreach ($components as $key => $component) {
@@ -212,7 +214,7 @@ class WoodyTheme_ACF
         }
 
         foreach ($selected_term_ids as $term_id) {
-            if (in_array($term_id, $children_terms_ids) || $term_id == $current_term->term_id) {
+            if (in_array($term_id, $children_terms_ids) || (!empty($current_term) && $term_id == $current_term->term_id)) {
                 $match = true;
             }
         }
