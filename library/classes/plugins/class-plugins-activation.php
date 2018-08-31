@@ -46,8 +46,7 @@ class WoodyTheme_Plugins_Activation
             'single-sign-on-client/wposso.php',
             'regenerate-thumbnails/regenerate-thumbnails.php',
             'ssl-insecure-content-fixer/ssl-insecure-content-fixer.php',
-            'wp-optimize/wp-optimize.php',
-            'wp-super-cache/wp-cache.php',
+            'wp-optimize/wp-optimize.php'
         ];
 
         $this->dev_plugins = [
