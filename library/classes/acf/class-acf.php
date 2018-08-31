@@ -63,8 +63,14 @@ class WoodyTheme_ACF
                     $components = Woody::getTemplatesByAcfGroup($field['key']);
                 break;
                 default:
+                if (is_numeric($field['parent'])) {
+                    // From 08/31/18, return of $field['parent'] is the acf post id instead of the key
+                    $parent_field_as_post = get_post($field['parent']);
+                    $components = Woody::getTemplatesByAcfGroup($parent_field_as_post->post_name);
+                } else {
                     $components = Woody::getTemplatesByAcfGroup($field['parent']);
-                    \PC::debug($field);
+                }
+
             }
 
 
