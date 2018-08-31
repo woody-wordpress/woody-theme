@@ -46,12 +46,12 @@ class WoodyTheme_Plugins_Activation
             'single-sign-on-client/wposso.php',
             'regenerate-thumbnails/regenerate-thumbnails.php',
             'ssl-insecure-content-fixer/ssl-insecure-content-fixer.php',
-            'wp-optimize/wp-optimize.php'
+            'wp-optimize/wp-optimize.php',
+            'query-monitor/query-monitor.php',
         ];
 
         $this->dev_plugins = [
             'debug-bar/debug-bar.php',
-            'query-monitor/query-monitor.php',
             'wp-php-console/wp-php-console.php',
         ];
 
