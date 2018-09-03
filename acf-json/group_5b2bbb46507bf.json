@@ -253,13 +253,13 @@
             "return_format": "array",
             "preview_size": "thumbnail",
             "library": "all",
-            "min_width": 600,
+            "min_width": 640,
             "min_height": "",
             "min_size": "",
             "max_width": "",
             "max_height": "",
-            "max_size": 8,
-            "mime_types": "jpg, jpeg, gif, svg, png"
+            "max_size": "",
+            "mime_types": "jpeg, jpg, png, gif"
         },
         {
             "key": "field_5b44c0858b0ff",

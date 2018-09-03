@@ -115,13 +115,13 @@
             "max": "",
             "insert": "prepend",
             "library": "all",
-            "min_width": 600,
+            "min_width": 640,
             "min_height": "",
             "min_size": "",
             "max_width": "",
             "max_height": "",
-            "max_size": 8,
-            "mime_types": ""
+            "max_size": "",
+            "mime_types": "jpeg, jpg, png, gif"
         },
         {
             "key": "field_5b5b32e1e9474",

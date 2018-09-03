@@ -53,12 +53,12 @@
             "max": "",
             "insert": "append",
             "library": "all",
-            "min_width": 1920,
+            "min_width": 640,
             "min_height": "",
             "min_size": "",
             "max_width": "",
             "max_height": "",
-            "max_size": 8,
+            "max_size": "",
             "mime_types": "jpg, jpeg, png, gif"
         },
         {

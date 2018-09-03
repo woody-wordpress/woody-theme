@@ -36,13 +36,13 @@
             "return_format": "array",
             "preview_size": "ratio_16_9_small",
             "library": "all",
-            "min_width": "",
+            "min_width": 640,
             "min_height": "",
             "min_size": "",
             "max_width": "",
             "max_height": "",
             "max_size": "",
-            "mime_types": "jpg, jpeg, png"
+            "mime_types": "jpeg, jpg, png, gif"
         },
         {
             "key": "field_5b16b09606115",
