@@ -16,7 +16,7 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Selection du type de contenu basé sur la taxonomie \"page_type\"",
-    "modified": 1535725320,
+    "modified": 1535725321,
     "fields": [{
         "key": "field_5a61fa38b704f",
         "label": "Type de publication",
