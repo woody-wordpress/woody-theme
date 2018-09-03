@@ -175,7 +175,7 @@ class WoodyTheme_Plugins_Options
             'ratio_4_3_small'       => ['active' => true, 'name' => 'Paysage C'],
             'ratio_4_3_medium'      => ['active' => true, 'name' => 'Paysage C'],
             'ratio_4_3_large'       => ['active' => true, 'name' => 'Paysage C'],
-            'ratio_4_3 '            => ['active' => true, 'name' => 'Paysage C'],
+            'ratio_4_3'             => ['active' => true, 'name' => 'Paysage C'],
             'ratio_3_4_small'       => ['active' => true, 'name' => 'Portrait A'],
             'ratio_3_4_medium'      => ['active' => true, 'name' => 'Portrait A'],
             'ratio_3_4'             => ['active' => true, 'name' => 'Portrait A'],
