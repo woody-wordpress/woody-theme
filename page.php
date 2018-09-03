@@ -70,7 +70,7 @@ if (($page_hero['page_heading_media_type'] == 'movie' && !empty($page_hero['page
     if (empty($page_teaser['page_teaser_display_title'])) {
         $page_hero['title_as_h1'] = true;
     }
-    if ($page_hero['page_heading_img']) {
+    if (!empty($page_hero['page_heading_img'])) {
         $page_hero['page_heading_img']['attachment_more_data'] = getAttachmentMoreData($page_hero['page_heading_img']['ID']);
     }
     $context['page_hero'] = Timber::compile($context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
