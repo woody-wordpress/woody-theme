@@ -148,7 +148,7 @@ class WoodyTheme_Images
                     $attachment_metadata['sizes'] = $editor->multi_resize($sizes);
                     $attachment_metadata['sizes']['thumbnail'] = $thumbnail;
                     $attachment_metadata['sizes']['medium'] = $medium;
-                    $attachment_metadata['sizes']['mime-type'] = $attachment_metadata['sizes']['thumbnail']['mime-type']
+                    $attachment_metadata['sizes']['mime-type'] = $attachment_metadata['sizes']['thumbnail']['mime-type'];
                 }
 
                 wp_update_attachment_metadata($post_id, $attachment_metadata);
