@@ -36,7 +36,7 @@ class WoodyTheme_Plugins_Activation
             'advanced-cron-manager/advanced-cron-manager.php',
             'acf-repeater-flexible-content-collapser/acf-repeater-flexible-content-collapser.php',
             'redirection/redirection.php',
-            'permalink-manager/permalink-manager.php',
+            'permalink-manager-pro/permalink-manager.php',
             'wordpress-seo/wp-seo.php',
             'yoimages/yoimages.php',
             'enhanced-media-library/enhanced-media-library.php',

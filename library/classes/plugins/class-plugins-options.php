@@ -192,7 +192,24 @@ class WoodyTheme_Plugins_Options
         $this->updateOption('yoimg_crop_settings', $yoimg_crop_settings);
 
         // Update permalinks by posts titles
-        $permalink_options = ['general' => ['force_custom_slugs' => 1]];
+        $permalink_options = [
+            'general' => [
+                'auto_update_uris' => 1,
+                'force_custom_slugs' => 1,
+                'canonical_redirect' => 1,
+                'pagination_redirect' => 0,
+                'redirect' => 301,
+                'trailing_slashes' => 0,
+                'fix_language_mismatch' => 1,
+                'auto_remove_duplicates' => 1,
+                'setup_redirects' => 1,
+                'deep_detect' => 1,
+            ],
+            'licence' => [
+                'licence_key' => '8058C9F5-83C7421C-A57A61BC-D75B00E3',
+                'expiration_date' => '4102398000',
+            ]
+        ];
         $this->updateOption('permalink-manager', $permalink_options);
 
         // Set default options for NestedPages
