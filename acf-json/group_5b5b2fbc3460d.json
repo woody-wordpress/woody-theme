@@ -2,11 +2,13 @@
     "key": "group_5b5b2fbc3460d",
     "title": "Socialwall",
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -16,8 +18,9 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Une galerie, automatique ou manuelle avec des choix de grilles très spécifiques",
-    "modified": 1535725320,
-    "fields": [{
+    "modified": 1535955122,
+    "fields": [
+        {
             "key": "field_5b5b3223e946f",
             "label": "Contenu",
             "name": "",
@@ -65,11 +68,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b5b310be946e",
-                    "operator": "==",
-                    "value": "auto"
-                }]
+                [
+                    {
+                        "field": "field_5b5b310be946e",
+                        "operator": "==",
+                        "value": "auto"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -93,11 +98,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b5b310be946e",
-                    "operator": "==",
-                    "value": "manual"
-                }]
+                [
+                    {
+                        "field": "field_5b5b310be946e",
+                        "operator": "==",
+                        "value": "manual"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -182,7 +189,9 @@
                 "class": "",
                 "id": ""
             },
-            "choices": [],
+            "choices": {
+                "blocks-socialwall-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/blocks\/socialwall\/tpl_01\/thumbnail.png\" alt=\"blocks-socialwall-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille SocialWall<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille SocialWall<\/h4>Affiche l'en-tête dans la grille en haut de la colonne de gauche<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+            },
             "allow_null": 0,
             "other_choice": 0,
             "default_value": "",

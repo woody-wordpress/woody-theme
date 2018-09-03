@@ -2,11 +2,13 @@
     "key": "group_5b59c98dd0621",
     "title": "Slides",
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -16,8 +18,9 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1535725320,
-    "fields": [{
+    "modified": 1535955121,
+    "fields": [
+        {
             "key": "field_5b59c993c6e68",
             "label": "Contenu",
             "name": "",
@@ -54,7 +57,8 @@
             "hide_collapse": 0,
             "collapse_all_repeater": 1,
             "btn-icon-only": 0,
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5b59c9bfc6e6a",
                     "label": "Titre pour l'administration",
                     "name": "slide_bo_title",
@@ -125,7 +129,9 @@
                 "class": "",
                 "id": ""
             },
-            "choices": [],
+            "choices": {
+                "blocks-slides-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/blocks\/slides\/tpl_01\/thumbnail.png\" alt=\"blocks-slides-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Slides - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Slides - Template 1<\/h4>Grilles de blocs au choix dans un diaporama (flèches de défilement sur le côté)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+            },
             "allow_null": 0,
             "other_choice": 0,
             "default_value": "",

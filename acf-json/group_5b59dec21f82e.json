@@ -2,11 +2,13 @@
     "key": "group_5b59dec21f82e",
     "title": "Mini fiche",
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -16,8 +18,9 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Relation à <strong>un<\/strong> post de type fiche touristique",
-    "modified": 1535725320,
-    "fields": [{
+    "modified": 1535955121,
+    "fields": [
+        {
             "key": "field_5b59deee9fc65",
             "label": "Contenu",
             "name": "",
@@ -85,7 +88,9 @@
                 "class": "",
                 "id": ""
             },
-            "choices": [],
+            "choices": {
+                "blocks-mini_sheet-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/blocks\/mini_sheet\/tpl_01\/thumbnail.png\" alt=\"blocks-mini_sheet-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Mini fiche touristique - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Mini fiche touristique - Template 1<\/h4>Mise en avant d'une fichie touristique avec infos principales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+            },
             "allow_null": 0,
             "other_choice": 0,
             "default_value": "",

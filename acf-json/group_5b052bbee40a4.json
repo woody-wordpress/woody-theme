@@ -1,7 +1,8 @@
 {
     "key": "group_5b052bbee40a4",
     "title": "Visuel et accroche",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5b052d9aea19c",
             "label": "Contenu",
             "name": "",
@@ -70,11 +71,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b0e5cc3d4b1a",
-                    "operator": "==",
-                    "value": "img"
-                }]
+                [
+                    {
+                        "field": "field_5b0e5cc3d4b1a",
+                        "operator": "==",
+                        "value": "img"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "70",
@@ -84,12 +87,12 @@
             "return_format": "array",
             "preview_size": "ratio_16_9_small",
             "library": "all",
-            "min_width": 1920,
+            "min_width": 640,
             "min_height": "",
             "min_size": "",
             "max_width": "",
             "max_height": "",
-            "max_size": 8,
+            "max_size": "",
             "mime_types": ""
         },
         {
@@ -100,11 +103,13 @@
             "instructions": "Cette vidéo doit être courte, muette et peu mouvementée",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b0e5cc3d4b1a",
-                    "operator": "==",
-                    "value": "movie"
-                }]
+                [
+                    {
+                        "field": "field_5b0e5cc3d4b1a",
+                        "operator": "==",
+                        "value": "movie"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "70",
@@ -112,27 +117,29 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
-                "key": "field_5b16b2f2aa625",
-                "label": "Fichiers vidéos",
-                "name": "movie_files",
-                "type": "clone",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "clone": [
-                    "group_5b16b09337a33"
-                ],
-                "display": "seamless",
-                "layout": "block",
-                "prefix_label": 0,
-                "prefix_name": 0
-            }]
+            "sub_fields": [
+                {
+                    "key": "field_5b16b2f2aa625",
+                    "label": "Fichiers vidéos",
+                    "name": "movie_files",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_5b16b09337a33"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                }
+            ]
         },
         {
             "key": "field_5b44b7fedb880",
@@ -161,11 +168,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b44b7fedb880",
-                    "operator": "==",
-                    "value": "1"
-                }]
+                [
+                    {
+                        "field": "field_5b44b7fedb880",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -204,7 +213,11 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "choices": [],
+            "choices": {
+                "blocks-hero-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/blocks\/hero\/tpl_03\/thumbnail.png\" alt=\"blocks-hero-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Hero - Image 8:1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Hero - Image 8:1<\/h4>Visuel (8:1) et accroche (Icône, Sur-titre, Titre, sous-titre, description) + image ou vidéo de fond + video complémentaire<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-hero-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/blocks\/hero\/tpl_02\/thumbnail.png\" alt=\"blocks-hero-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Hero - Image 4:1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Hero - Image 4:1<\/h4>Visuel (4:1) et accroche (Icône, Sur-titre, Titre, sous-titre, description) + image ou vidéo de fond + video complémentaire<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-hero-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/blocks\/hero\/tpl_01\/thumbnail.png\" alt=\"blocks-hero-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Hero - Image 2:1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Hero - Image 2:1<\/h4>Visuel (2:1) et accroche (Icône, Sur-titre, Titre, sous-titre, description) + image ou vidéo de fond + video complémentaire<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+            },
             "allow_null": 0,
             "other_choice": 0,
             "save_other_choice": 0,
@@ -238,7 +251,8 @@
         }
     ],
     "location": [
-        [{
+        [
+            {
                 "param": "post_type",
                 "operator": "==",
                 "value": "page"
@@ -258,5 +272,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Le bloc en haut de page contenant un média et des textes d'accroche",
-    "modified": 1535725320
+    "modified": 1535959489
 }

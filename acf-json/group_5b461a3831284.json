@@ -2,11 +2,13 @@
     "key": "group_5b461a3831284",
     "title": "Appel à l'action",
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -16,8 +18,9 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Un bloc d'appel à laction avec texte et lien\/fichier + couleur de fond possible",
-    "modified": 1535725320,
-    "fields": [{
+    "modified": 1535955120,
+    "fields": [
+        {
             "key": "field_5b461a2b131b3",
             "label": "Contenu",
             "name": "",
@@ -191,11 +194,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b4621c8aebdd",
-                    "operator": "==",
-                    "value": "link"
-                }]
+                [
+                    {
+                        "field": "field_5b4621c8aebdd",
+                        "operator": "==",
+                        "value": "link"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -203,7 +208,8 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5b7595f282076",
                     "label": "Lien",
                     "name": "link",
@@ -253,11 +259,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b4621c8aebdd",
-                    "operator": "==",
-                    "value": "file"
-                }]
+                [
+                    {
+                        "field": "field_5b4621c8aebdd",
+                        "operator": "==",
+                        "value": "file"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -265,27 +273,29 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
-                "key": "field_5b462226aebde",
-                "label": "Fichier",
-                "name": "file",
-                "type": "clone",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "45",
-                    "class": "",
-                    "id": ""
-                },
-                "clone": [
-                    "group_5b042b2f42591"
-                ],
-                "display": "seamless",
-                "layout": "block",
-                "prefix_label": 0,
-                "prefix_name": 0
-            }]
+            "sub_fields": [
+                {
+                    "key": "field_5b462226aebde",
+                    "label": "Fichier",
+                    "name": "file",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "45",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_5b042b2f42591"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                }
+            ]
         },
         {
             "key": "field_5b461b36131b9",
@@ -316,7 +326,12 @@
                 "class": "",
                 "id": ""
             },
-            "choices": [],
+            "choices": {
+                "blocks-call_to_action-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_04\/thumbnail.png\" alt=\"blocks-call_to_action-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 4<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 4<\/h4>Affiche un bloc avec texte centré (icone sur fond de couleur rond) et\/ou lien ou fichier à télécharger en dessous + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-call_to_action-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_03\/thumbnail.png\" alt=\"blocks-call_to_action-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 3<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 3<\/h4>Affiche un bloc avec texte centré et\/ou lien ou fichier à télécharger en dessous + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-call_to_action-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_02\/thumbnail.png\" alt=\"blocks-call_to_action-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 2<\/h4>Affiche un bloc avec texte aligné à gauche et\/ou lien ou fichier à télécharger en dessous + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-call_to_action-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_01\/thumbnail.png\" alt=\"blocks-call_to_action-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 1<\/h4>Affiche un bloc avec texte et\/ou lien ou fichier à télécharger à droite + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+            },
             "allow_null": 0,
             "other_choice": 0,
             "save_other_choice": 0,
