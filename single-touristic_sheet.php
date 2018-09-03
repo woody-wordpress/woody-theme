@@ -120,6 +120,8 @@ foreach ($partialSheet['metas'] as $key_meta => $meta) {
     $context['metas'][] = $tag;
 }
 
+// $KEYS = getMapKeys($javascript=true);
+
 /**** *********************** ****
  ****   Print full template
  **** ************************** **/
