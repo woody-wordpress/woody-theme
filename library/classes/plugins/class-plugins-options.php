@@ -133,8 +133,18 @@ class WoodyTheme_Plugins_Options
         $this->updateOption('wposso_options', $wposso_options);
 
         // Enhanced Media Library
-        $wpuxss_eml_lib_options['grid_show_caption-enable'] = true;
-        $wpuxss_eml_lib_options['grid_caption_type'] = 'title';
+        $wpuxss_eml_lib_options = [
+            'force_filters' => false,
+            'filters_to_show' => ['types','dates','taxonomies'],
+            'show_count' => 0,
+            'include_children' => true,
+            'media_orderby' => 'date',
+            'media_order' => 'DESC',
+            'natural_sort' => false,
+            'grid_show_caption' => true,
+            'grid_caption_type' => 'title',
+            'enhance_media_shortcodes' => false,
+        ];
         $this->updateOption('wpuxss_eml_lib_options', $wpuxss_eml_lib_options);
 
         // YoImages settings

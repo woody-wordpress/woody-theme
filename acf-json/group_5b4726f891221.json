@@ -2,13 +2,11 @@
     "key": "group_5b4726f891221",
     "title": "Onglet",
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -18,9 +16,8 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Utilisé pour afficher des bloc des des tabs",
-    "modified": 1535547972,
-    "fields": [
-        {
+    "modified": 1535725320,
+    "fields": [{
             "key": "field_5b4726fa78095",
             "label": "Contenu",
             "name": "",

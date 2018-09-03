@@ -18,7 +18,8 @@ class WoodyTheme_ACF
 
     protected function registerHooks()
     {
-        add_action('acf/init', array($this, 'acfUpdateSetting'));
+        $this->acfUpdateSetting();
+
         add_filter('plugin_action_links', array($this, 'disallowAcfDeactivation'), 10, 4);
         add_filter('acf/load_field/type=radio', array($this, 'woodyTplAcfLoadField'));
         add_filter('acf/load_field/type=select', array($this, 'woodyIconLoadField'));
@@ -59,12 +60,20 @@ class WoodyTheme_ACF
             $field['choices'] = [];
 
             switch ($field['key']) {
-                case 'field_5afd2c9616ecd':
+                case 'field_5afd2c9616ecd': // Cas des sections
                     $components = Woody::getTemplatesByAcfGroup($field['key']);
                 break;
                 default:
+                if (is_numeric($field['parent'])) {
+                    // From 08/31/18, return of $field['parent'] is the acf post id instead of the key
+                    $parent_field_as_post = get_post($field['parent']);
+                    $components = Woody::getTemplatesByAcfGroup($parent_field_as_post->post_name);
+                } else {
                     $components = Woody::getTemplatesByAcfGroup($field['parent']);
+                }
+
             }
+
 
             if (!empty($components)) {
                 foreach ($components as $key => $component) {
@@ -185,16 +194,14 @@ class WoodyTheme_ACF
     public function woodyAcfPageTypeMatch($match, $rule, $options)
     {
         $children_terms_ids = [];
-        $parent_term = get_term_by('slug', $rule['value'], 'page_type');
-        if (!empty($parent_term)) {
-            $parent_term_id = $parent_term->term_id;
-            $children_terms = get_terms(array('taxonomy' => 'page_type', 'hide_empty' => false, 'parent' => $parent_term_id));
-        }
+        $current_term = get_term_by('slug', $rule['value'], 'page_type');
+        if (!empty($current_term)) {
+            $children_terms = get_terms(array('taxonomy' => 'page_type', 'hide_empty' => false, 'parent' => $current_term->term_id));
 
-
-        if (!empty($children_terms)) {
-            foreach ($children_terms as $term) {
-                $children_terms_ids[] = $term->term_id;
+            if (!empty($children_terms)) {
+                foreach ($children_terms as $term) {
+                    $children_terms_ids[] = $term->term_id;
+                }
             }
         }
 
@@ -214,7 +221,7 @@ class WoodyTheme_ACF
         }
 
         foreach ($selected_term_ids as $term_id) {
-            if (in_array($term_id, $children_terms_ids) || $term_id == $parent_term_id) {
+            if (in_array($term_id, $children_terms_ids) || (!empty($current_term) && $term_id == $current_term->term_id)) {
                 $match = true;
             }
         }

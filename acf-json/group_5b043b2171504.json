@@ -2,13 +2,11 @@
     "key": "group_5b043b2171504",
     "title": "Carte géographique manuelle",
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -18,13 +16,30 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Affiche une carte avec des marqueurs multiples",
-    "modified": 1535547972,
-    "fields": [
-        {
-            "key": "field_5b043b28ab46a",
-            "label": "Marqueurs",
-            "name": "markers",
-            "type": "repeater",
+    "modified": 1535725320,
+    "fields": [{
+        "key": "field_5b043b28ab46a",
+        "label": "Marqueurs",
+        "name": "markers",
+        "type": "repeater",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+        },
+        "collapsed": "",
+        "min": 1,
+        "max": 0,
+        "layout": "block",
+        "button_label": "Ajouter un marqueur",
+        "sub_fields": [{
+            "key": "field_5b043b3aab46b",
+            "label": "Marqueur",
+            "name": "marker",
+            "type": "clone",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -33,34 +48,13 @@
                 "class": "",
                 "id": ""
             },
-            "collapsed": "",
-            "min": 1,
-            "max": 0,
+            "clone": [
+                "group_5b042ba749e73"
+            ],
+            "display": "seamless",
             "layout": "block",
-            "button_label": "Ajouter un marqueur",
-            "sub_fields": [
-                {
-                    "key": "field_5b043b3aab46b",
-                    "label": "Marqueur",
-                    "name": "marker",
-                    "type": "clone",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "clone": [
-                        "group_5b042ba749e73"
-                    ],
-                    "display": "seamless",
-                    "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0
-                }
-            ]
-        }
-    ]
+            "prefix_label": 0,
+            "prefix_name": 0
+        }]
+    }]
 }

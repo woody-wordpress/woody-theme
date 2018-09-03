@@ -1,8 +1,7 @@
 {
     "key": "group_5b2788b48d04c",
     "title": "Mise en avant(sélection automatique)",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b2788cc84ed1",
             "label": "Contenu",
             "name": "",
@@ -50,17 +49,15 @@
             "instructions": "Choisissez le(s) type(s) de publication que vous souhaitez mettre en avant",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b27899284ed4",
-                        "operator": "==",
-                        "value": "page"
-                    }
-                ]
+                [{
+                    "field": "field_5b27899284ed4",
+                    "operator": "==",
+                    "value": "page"
+                }]
             ],
             "wrapper": {
                 "width": "",
-                "class": "hide-label",
+                "class": "",
                 "id": ""
             },
             "taxonomy": "page_type",
@@ -135,8 +132,7 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
+                [{
                         "field": "field_5b27899284ed4",
                         "operator": "!=",
                         "value": "touristic_sheet"
@@ -212,25 +208,6 @@
             "save_other_choice": 0
         },
         {
-            "key": "field_5b7d67f609abc",
-            "label": "Textes des boutons sur les cartes",
-            "name": "links_label",
-            "type": "text",
-            "instructions": "Pas de bouton si vide",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "Lire la suite",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
             "key": "field_5b2917f0ff061",
             "label": "Affichage",
             "name": "display_elements",
@@ -239,7 +216,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "60",
                 "class": "",
                 "id": ""
             },
@@ -251,14 +228,31 @@
             },
             "allow_custom": 0,
             "default_value": [
-                "pretitle",
-                "subtitle",
-                "icon"
+                "description"
             ],
             "layout": "horizontal",
             "toggle": 0,
             "return_format": "value",
             "save_custom": 0
+        },
+        {
+            "key": "field_5b88eae6c0adc",
+            "label": "Afficher les boutons \"Lire la suite\"",
+            "name": "display_button",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "40",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         {
             "key": "field_5b87f2e8b2033",
@@ -377,13 +371,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -393,5 +385,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1535629379
+    "modified": 1535725320
 }

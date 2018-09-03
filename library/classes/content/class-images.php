@@ -22,7 +22,7 @@ class WoodyTheme_Images
     {
         // Actions
         add_action('add_attachment', array($this, 'addDefaultMediaType'));
-        add_action('woody_update', array($this, 'addImageSizes'));
+        add_action('after_setup_theme', array($this, 'addImageSizes'));
 
         // Filters
         add_filter('intermediate_image_sizes_advanced', array($this, 'removeAutoThumbs'), 10, 2);

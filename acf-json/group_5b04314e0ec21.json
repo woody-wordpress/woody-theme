@@ -2,13 +2,11 @@
     "key": "group_5b04314e0ec21",
     "title": "Galerie de photos",
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -18,9 +16,8 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Liste de photos)",
-    "modified": 1535547972,
-    "fields": [
-        {
+    "modified": 1535725320,
+    "fields": [{
             "key": "field_5b04475f63df2",
             "label": "Contenu",
             "name": "",
