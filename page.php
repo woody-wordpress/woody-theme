@@ -77,7 +77,7 @@ if (($page_hero['page_heading_media_type'] == 'movie' && !empty($page_hero['page
         preg_match_all('@src="([^"]+)"@', $page_hero['page_heading_social_movie'], $result);
         $iframe_url = $result[1][0];
         if (strpos($iframe_url, 'youtube') != false) {
-            $enable_api_url = $iframe_url . '?autoplay=true&rel=0';
+            $enable_api_url = $iframe_url . '?&autoplay=1&rel=0';
             $page_hero['page_heading_social_movie'] = str_replace($iframe_url, $enable_api_url, $page_hero['page_heading_social_movie']);
         }
     }
