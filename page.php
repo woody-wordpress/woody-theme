@@ -77,7 +77,7 @@ if (($page_hero['page_heading_media_type'] == 'movie' && !empty($page_hero['page
         preg_match_all('@src="([^"]+)"@', $page_hero['page_heading_social_movie'], $result);
         $iframe_url = $result[1][0];
         if (strpos($iframe_url, 'youtube') != false) {
-            $enable_api_url = $iframe_url . '?version=3&enablejsapi=1&autoplay=true&rel=0';
+            $enable_api_url = $iframe_url . '?autoplay=true&rel=0';
             $page_hero['page_heading_social_movie'] = str_replace($iframe_url, $enable_api_url, $page_hero['page_heading_social_movie']);
         }
     }
@@ -178,13 +178,9 @@ if ($context['page_type'] === 'playlist_tourism') {
                                     $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
                                 }
                             } elseif ($layout['socialwall_type'] == 'auto') {
-                                // On récupère les termes sélectionnés
-                                $queried_terms = [];
-                                foreach ($layout['socialwall_auto'] as $key => $term) {
-                                    $queried_terms[] =  $term;
-                                }
+
                                 // On récupère les images en fonction des termes sélectionnés
-                                $layout['gallery_items'] = getAttachmentsByTerms('media_category', $queried_terms);
+                                $layout['gallery_items'] = (!empty($layout['socialwall_auto'])) ? getAttachmentsByTerms('attachment_hashtags', $layout['socialwall_auto']) : '';
 
                                 foreach ($layout['gallery_items'] as $key => $media_item) {
                                     $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
