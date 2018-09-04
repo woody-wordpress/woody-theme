@@ -73,6 +73,14 @@ if (($page_hero['page_heading_media_type'] == 'movie' && !empty($page_hero['page
     if (!empty($page_hero['page_heading_img'])) {
         $page_hero['page_heading_img']['attachment_more_data'] = getAttachmentMoreData($page_hero['page_heading_img']['ID']);
     }
+    if ($page_hero['page_heading_social_movie']) {
+        preg_match_all('@src="([^"]+)"@', $page_hero['page_heading_social_movie'], $result);
+        $iframe_url = $result[1][0];
+        if (strpos($iframe_url, 'youtube') != false) {
+            $enable_api_url = $iframe_url . '?version=3&enablejsapi=1&autoplay=true&rel=0';
+            $page_hero['page_heading_social_movie'] = str_replace($iframe_url, $enable_api_url, $page_hero['page_heading_social_movie']);
+        }
+    }
     $context['page_hero'] = Timber::compile($context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
 }
 
