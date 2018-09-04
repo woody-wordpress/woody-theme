@@ -244,7 +244,6 @@ function getManualFocus_data($layout)
      return $data;
  }
 
-
  /**
  *
  * Nom : getFieldAndFallback
@@ -255,7 +254,7 @@ function getManualFocus_data($layout)
  * @param    fallback - Le champ de remplacement
  * @return   data - Un tableau de données
  *
- */
+ **/
  function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = '')
  {
      $value = [];
@@ -444,7 +443,7 @@ function getAttachmentMoreData($attachment_id)
     if (!empty($attachment_data['is_instagram'])) {
         $img_all_data = get_post_meta($attachment_id);
         $img_all_metadata = unserialize($img_all_data['_wp_attachment_metadata'][0]);
-        $instagram_metadata = $img_all_metadata['woody-instagram'];
+        $instagram_metadata = (!empty($img_all_metadata['woody-instagram')) ? $img_all_metadata['woody-instagram'] : '';
         $attachment_data['instagram_metadata'] = $instagram_metadata;
 
         // rcd($attachment_data['instagram_metadata'], true);
