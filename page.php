@@ -73,7 +73,7 @@ if (($page_hero['page_heading_media_type'] == 'movie' && !empty($page_hero['page
     if (!empty($page_hero['page_heading_img'])) {
         $page_hero['page_heading_img']['attachment_more_data'] = getAttachmentMoreData($page_hero['page_heading_img']['ID']);
     }
-    if ($page_hero['page_heading_social_movie']) {
+    if (!empty($page_hero['page_heading_social_movie'])) {
         preg_match_all('@src="([^"]+)"@', $page_hero['page_heading_social_movie'], $result);
         $iframe_url = $result[1][0];
         if (strpos($iframe_url, 'youtube') != false) {

@@ -32,7 +32,7 @@ class WoodyTheme_Plugins_Activation
             'bea-sanitize-filename/bea-sanitize-filename.php',
             'minify-html-markup/minify-html.php',
             'wp-deferred-javascripts/wp-deferred-javascripts.php',
-            'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
+            // 'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
             'advanced-cron-manager/advanced-cron-manager.php',
             'acf-repeater-flexible-content-collapser/acf-repeater-flexible-content-collapser.php',
             'redirection/redirection.php',
