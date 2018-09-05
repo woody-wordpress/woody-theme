@@ -14,18 +14,24 @@
 function getAutoFocus_data($the_post, $query_form)
 {
     $the_items = [];
+    $tax_query = [];
 
     // Création du paramètre tax_query pour la wp_query
     // Référence : https://codex.wordpress.org/Class_Reference/WP_Query
-    $tax_query = [
-            'relation' => 'AND',
-            'page_type' => array(
-            'taxonomy' => 'page_type',
-            'terms' => $query_form['focused_content_type'],
-            'field' => 'taxonomy_term_id',
-            'operator' => 'IN'
-        ),
-    ];
+
+    if (!empty($query_form['focused_content_type'])) { 
+
+        $tax_query = [
+                'relation' => 'AND',
+                'page_type' => array(
+                'taxonomy' => 'page_type',
+                'terms' => $query_form['focused_content_type'],
+                'field' => 'taxonomy_term_id',
+                'operator' => 'IN'
+            ),
+        ];
+
+    }
 
     // Si des termes ont été choisi pour filtrer les résultats
     // on créé tableau custom_tax à passer au paramètre tax_query
@@ -49,15 +55,16 @@ function getAutoFocus_data($the_post, $query_form)
         }
     }
 
+
     // On créé la wp_query en fonction des choix faits dans le backoffice
     // NB : si aucun choix n'a été fait, on remonte automatiquement tous les contenus de type page
     $the_query = [
-                    'post_type' => (!empty($query_form['focused_post_type'])) ? $query_form['focused_post_type'] : 'page',
-                    'tax_query' => $tax_query,
-                    // 'nopaging' => true,
-                    'posts_per_page' => (!empty($query_form['focused_count'])) ? $query_form['focused_count'] : -1,
-                ];
+        'post_type' => (!empty($query_form['focused_post_type'])) ? $query_form['focused_post_type'] : 'page',
+         // 'nopaging' => true,
+        'posts_per_page' => -1,
+    ];
 
+    $the_query['tax_query'] = (!empty($tax_query)) ? $tax_query : '' ;
 
 
     // Si Hiérarchie = Enfants directs de la page
