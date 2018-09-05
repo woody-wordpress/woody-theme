@@ -36,7 +36,7 @@ if (!empty($page_teaser)) {
         $page_teaser['page_teaser_title'] = $context['post']->post_title;
     }
 
-    if ($page_teaser['page_teaser_media_type'] == 'map') {
+    if (!empty($page_teaser['page_teaser_media_type']) && $page_teaser['page_teaser_media_type'] == 'map') {
         $page_teaser['post_coordinates'] = (!empty(getAcfGroupFields('group_5b3635da6529e'))) ? getAcfGroupFields('group_5b3635da6529e') : '';
     }
 
@@ -186,9 +186,10 @@ if ($context['page_type'] === 'playlist_tourism') {
 
                                 // On récupère les images en fonction des termes sélectionnés
                                 $layout['gallery_items'] = (!empty($layout['socialwall_auto'])) ? getAttachmentsByTerms('attachment_hashtags', $layout['socialwall_auto']) : '';
-
-                                foreach ($layout['gallery_items'] as $key => $media_item) {
-                                    $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
+                                if (!empty($layout['gallery_items'])) {
+                                    foreach ($layout['gallery_items'] as $key => $media_item) {
+                                        $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
+                                    }
                                 }
                             }
                             $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
