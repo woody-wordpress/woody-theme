@@ -19,6 +19,9 @@ class WoodyTheme_Enqueue_Assets
         add_action('wp_enqueue_scripts', array($this, 'enqueueAssets'));
         add_action('admin_enqueue_scripts', array($this, 'enqueueAdminAssets'));
         add_action('login_enqueue_scripts', array($this, 'enqueueAdminAssets'));
+
+        // Si vous utilisez HTML5, wdjs_use_html5 est un filtre qui enlève l’attribut type="text/javascript"
+        add_filter('wdjs_use_html5', '__return_true');
     }
 
     public function enqueueLibraries()
