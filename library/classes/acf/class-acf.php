@@ -18,7 +18,9 @@ class WoodyTheme_ACF
 
     protected function registerHooks()
     {
-        $this->acfUpdateSetting();
+        // $this->acfUpdateSetting();
+
+        add_action('after_setup_theme', array($this, 'acfUpdateSetting'), 9, 3);
 
         add_filter('plugin_action_links', array($this, 'disallowAcfDeactivation'), 10, 4);
         add_filter('acf/load_field/type=radio', array($this, 'woodyTplAcfLoadField'));
