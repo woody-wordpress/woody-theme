@@ -35,6 +35,11 @@ if (!empty($page_teaser)) {
     if (!empty($page_teaser['page_teaser_display_title'])) {
         $page_teaser['page_teaser_title'] = $context['post']->post_title;
     }
+
+    if ($page_teaser['page_teaser_media_type'] == 'map') {
+        $page_teaser['post_coordinates'] = (!empty(getAcfGroupFields('group_5b3635da6529e'))) ? getAcfGroupFields('group_5b3635da6529e') : '';
+    }
+
     $page_teaser['the_classes'] = [];
     if (!empty($page_teaser['background_img_opacity'])) {
         $page_teaser['the_classes'][] = $page_teaser['background_img_opacity'];

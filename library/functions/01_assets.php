@@ -38,13 +38,14 @@ use Symfony\Component\Finder\Finder;
      }
  }
 
-  /**
+ /**
  *
  * Nom : getTermsSlugs
  * Auteur : Benoit Bouchaud
  * Return : Retourne un tableau de termes
- * @param    taxonomy - Le slug du vocabulaire dans lequel on recherche
  * @param    postId - Le post dans lequel on recherche
+ * @param    taxonomy - Le slug du vocabulaire dans lequel on recherche
+ * @param    implode - Booleén => retourne une chaine de caractères si true
  * @return   slugs - Un tableau de slugs de termes
  *
  */
@@ -66,6 +67,15 @@ function getTermsSlugs($postId, $taxonomy, $implode = false)
     return $slugs;
 }
 
+ /**
+ *
+ * Nom : humanDays
+ * Auteur : Benoit Bouchaud
+ * Return : Retourne une chaine de caractères (jours) en fonction d'un nombre donné
+ * @param    number - int
+ * @return   human_string - Un chaine de caractères
+ *
+ */
 
 function humanDays($number)
 {
@@ -87,10 +97,18 @@ function humanDays($number)
     return $human_string;
 }
 
+ /**
+ *
+ * Nom : getWoodyIcons
+ * Auteur : Benoit Bouchaud
+ * Return : Un tableau
+ * @return   the_icons - La liste de tous les icones du site
+ *
+ */
 function getWoodyIcons()
 {
     $the_icons = [];
-
+    //TODO: Récupérer une variable globale en fonction du set d'icones choisis dans le thème pour remplacer '/src/icons/icons_set_01'
     $core_icons = woodyIconsFolder(get_template_directory() . '/src/icons/icons_set_01');
     $site_icons = woodyIconsFolder(get_stylesheet_directory() . '/src/icons');
 
