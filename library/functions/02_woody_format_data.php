@@ -66,7 +66,6 @@ function getAutoFocus_data($the_post, $query_form)
 
     $the_query['tax_query'] = (!empty($tax_query)) ? $tax_query : '' ;
 
-
     // Si Hiérarchie = Enfants directs de la page
     // On passe le post ID dans le paramètre post_parent de la query
     if ($query_form['focused_hierarchy'] == 'child_of') {
@@ -116,22 +115,22 @@ function getManualFocus_data($layout)
 {
     $the_items = [];
 
-    foreach ($layout['content_selection'] as $key => $item_wrapper) {
-        // La donnée de la vignette est saisie en backoffice
-        if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
-            $the_items['items'][$key] = getCustomPreview($item_wrapper['custom_content']);
+        foreach ($layout['content_selection'] as $key => $item_wrapper) {
+            // La donnée de la vignette est saisie en backoffice
+            if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
+                $the_items['items'][$key] = getCustomPreview($item_wrapper['custom_content']);
 
-        // La donnée de la vignette correspond à un post sélectionné
-        } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content'])) {
-            $item = $item_wrapper['existing_content'];
-            $status = $item['content_selection']->post_status;
-            if ($status === 'draft') {
-                continue;
+            // La donnée de la vignette correspond à un post sélectionné
+            } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
+                $item = $item_wrapper['existing_content'];
+                $status = $item['content_selection']->post_status;
+                if ($status === 'draft') {
+                    continue;
+                }
+                $page_preview = getPagePreview($layout, $item['content_selection']);
+                $the_items['items'][$key] = (!empty($page_preview)) ?  $page_preview : '';
             }
-            $page_preview = getPagePreview($layout, $item['content_selection']);
-            $the_items['items'][$key] = (!empty($page_preview)) ?  $page_preview : '';
-        }
-    }
+        }  
 
     return $the_items;
 }
