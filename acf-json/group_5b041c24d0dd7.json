@@ -18,7 +18,7 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "En-tête générique avec Icône - Sur-titre - Titre - Sous-titre - Description",
-    "modified": 1535956000,
+    "modified": 1536232424,
     "fields": [
         {
             "key": "field_5b041d61adb72",
@@ -205,7 +205,9 @@
                 "wicon--07-cargo-ship-1": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--07-cargo-ship-1\"><\/span><span>Cargo ship 1<\/span><\/div>",
                 "wicon--26-rocket": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--26-rocket\"><\/span><span>Rocket<\/span><\/div>",
                 "wicon--05-attack-plane": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--05-attack-plane\"><\/span><span>Attack plane<\/span><\/div>",
-                "wicon--04-attack-plane-4": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--04-attack-plane-4\"><\/span><span>Attack plane 4<\/span><\/div>"
+                "wicon--04-attack-plane-4": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--04-attack-plane-4\"><\/span><span>Attack plane 4<\/span><\/div>",
+                "wicon-054-quote-right": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-054-quote-right\"><\/span><span>Quote right<\/span><\/div>",
+                "wicon-055-quote-left": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-055-quote-left\"><\/span><span>Quote left<\/span><\/div>"
             },
             "default_value": [],
             "allow_null": 1,

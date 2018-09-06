@@ -1,6 +1,24 @@
 {
     "key": "group_5b0d1ed32a384",
     "title": "Mise en avant(sélection manuelle)",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
+    "modified": 1536232425,
     "fields": [
         {
             "key": "field_5b0d1ecc7c825",
@@ -851,23 +869,5 @@
             "ui_on_text": "",
             "ui_off_text": ""
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1536211108
+    ]
 }

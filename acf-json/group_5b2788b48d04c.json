@@ -1,6 +1,24 @@
 {
     "key": "group_5b2788b48d04c",
     "title": "Mise en avant(sélection automatique)",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
+    "modified": 1536232425,
     "fields": [
         {
             "key": "field_5b2788cc84ed1",
@@ -54,14 +72,8 @@
                 "id": ""
             },
             "choices": {
-                "23": "avec enfants - Thématiques",
-                "22": "Couples - Thématiques",
-                "21": "Famille - Thématiques",
-                "18": "Automne - Saisons",
-                "16": "Été - Saisons",
-                "19": "Hiver - Saisons",
-                "17": "Printemps - Saisons",
-                "20": "Instagram - Types de média"
+                "1": "Non classifié(e) - Catégories",
+                "85": "Import manuelle - Types de média"
             },
             "default_value": [],
             "allow_null": 0,
@@ -358,23 +370,5 @@
             "ui_on_text": "",
             "ui_off_text": ""
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1536210755
+    ]
 }

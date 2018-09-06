@@ -1,6 +1,24 @@
 {
     "key": "group_5b042f5ad9ecc",
     "title": "Texte libre",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Elément de contenu (Editeur wysiwyg \/ code html",
+    "modified": 1536232427,
     "fields": [
         {
             "key": "field_5b044711dcad5",
@@ -67,7 +85,7 @@
                 "id": ""
             },
             "choices": {
-                "blocks-custom_text-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.crt-bretagne.wp.rc-dev.com\/app\/themes\/crt-bretagne\/dist\/img\/woody-library\/views\/blocks\/custom_text\/tpl_01\/thumbnail.png\" alt=\"blocks-custom_text-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Texte<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Texte<\/h4>Affiche une en-tête et le contenu de l'éditeur visuel<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+                "blocks-custom_text-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/blocks\/custom_text\/tpl_01\/thumbnail.png\" alt=\"blocks-custom_text-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Texte<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Texte<\/h4>Affiche une en-tête et le contenu de l'éditeur visuel<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -114,23 +132,5 @@
             "prefix_label": 0,
             "prefix_name": 0
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Elément de contenu (Editeur wysiwyg \/ code html",
-    "modified": 1536131300
+    ]
 }

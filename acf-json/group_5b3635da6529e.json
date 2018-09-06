@@ -2,11 +2,13 @@
     "key": "group_5b3635da6529e",
     "title": "Coordonnées GPS",
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "page"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "side",
@@ -16,8 +18,9 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1535956001,
-    "fields": [{
+    "modified": 1536232424,
+    "fields": [
+        {
             "key": "field_5b3635c0fc651",
             "label": "Latitude",
             "name": "post_latitude",
