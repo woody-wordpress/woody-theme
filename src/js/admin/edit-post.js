@@ -121,9 +121,12 @@ $('#post').each(function() {
     var getAutoFocusQuery = function(field) {
         var query_params = null;
         var $parent = field.$el.parent();
+        var $bigparent = field.parent().parent().$el;
 
         $parent.each(function() {
             var $this = $(this);
+            toggleChoiceAction($bigparent);
+
             getAutorFocusData($this);
 
             $this.find('input[type="checkbox"], input[type="radio"], select, option').change(function() {

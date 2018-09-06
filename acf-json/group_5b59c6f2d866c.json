@@ -1,24 +1,6 @@
 {
     "key": "group_5b59c6f2d866c",
     "title": "Slide",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Slide de blocs Woody dans une grille de section (Utilisé dans un répéteur pour faire un Groupe de slides)",
-    "modified": 1536232427,
     "fields": [
         {
             "key": "field_5b59c6ff44164",
@@ -50,7 +32,7 @@
                 "id": ""
             },
             "clone": [
-                "field_5b043f0525968"
+                "group_5b91291196e19"
             ],
             "display": "seamless",
             "layout": "block",
@@ -106,5 +88,23 @@
             "return_format": "value",
             "save_other_choice": 0
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Slide de blocs Woody dans une grille de section (Utilisé dans un répéteur pour faire un Groupe de slides)",
+    "modified": 1536235475
 }

@@ -374,8 +374,6 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
  {
      $woodyComponents = Woody::getTwigsPaths();
 
-
-
      foreach ($scope as $key => $grid) {
          $grid_content = [];
          if (!empty($uniqIid_prefix) && is_numeric($key)) {
@@ -383,12 +381,12 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
          }
 
          // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
-         if (!empty($grid['section_content'])) {
-             foreach ($grid['section_content'] as $layout) {
+         if (!empty($grid['light_section_content'])) {
+             foreach ($grid['light_section_content'] as $layout) {
                  $grid_content['items'][] = Timber::compile($woodyComponents[$layout['woody_tpl']], $layout);
              }
              // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
-             $scope[$key]['section_content'] = Timber::compile($woodyComponents[$grid[$gridTplField]], $grid_content);
+             $scope[$key]['light_section_content'] = Timber::compile($woodyComponents[$grid[$gridTplField]], $grid_content);
          }
      }
      if (!empty($uniqIid_prefix)) {
