@@ -19,8 +19,7 @@ function getAutoFocus_data($the_post, $query_form)
     // Création du paramètre tax_query pour la wp_query
     // Référence : https://codex.wordpress.org/Class_Reference/WP_Query
 
-    if (!empty($query_form['focused_content_type'])) { 
-
+    if (!empty($query_form['focused_content_type'])) {
         $tax_query = [
                 'relation' => 'AND',
                 'page_type' => array(
@@ -30,7 +29,6 @@ function getAutoFocus_data($the_post, $query_form)
                 'operator' => 'IN'
             ),
         ];
-
     }
 
     // Si des termes ont été choisi pour filtrer les résultats
@@ -59,8 +57,7 @@ function getAutoFocus_data($the_post, $query_form)
     // On créé la wp_query en fonction des choix faits dans le backoffice
     // NB : si aucun choix n'a été fait, on remonte automatiquement tous les contenus de type page
     $the_query = [
-        'post_type' => (!empty($query_form['focused_post_type'])) ? $query_form['focused_post_type'] : 'page',
-         // 'nopaging' => true,
+        'post_type' => 'page',
         'posts_per_page' => -1,
     ];
 
@@ -115,22 +112,22 @@ function getManualFocus_data($layout)
 {
     $the_items = [];
 
-        foreach ($layout['content_selection'] as $key => $item_wrapper) {
-            // La donnée de la vignette est saisie en backoffice
-            if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
-                $the_items['items'][$key] = getCustomPreview($item_wrapper['custom_content']);
+    foreach ($layout['content_selection'] as $key => $item_wrapper) {
+        // La donnée de la vignette est saisie en backoffice
+        if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
+            $the_items['items'][$key] = getCustomPreview($item_wrapper['custom_content']);
 
-            // La donnée de la vignette correspond à un post sélectionné
-            } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
-                $item = $item_wrapper['existing_content'];
-                $status = $item['content_selection']->post_status;
-                if ($status === 'draft') {
-                    continue;
-                }
-                $page_preview = getPagePreview($layout, $item['content_selection']);
-                $the_items['items'][$key] = (!empty($page_preview)) ?  $page_preview : '';
+        // La donnée de la vignette correspond à un post sélectionné
+        } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
+            $item = $item_wrapper['existing_content'];
+            $status = $item['content_selection']->post_status;
+            if ($status === 'draft') {
+                continue;
             }
-        }  
+            $page_preview = getPagePreview($layout, $item['content_selection']);
+            $the_items['items'][$key] = (!empty($page_preview)) ?  $page_preview : '';
+        }
+    }
 
     return $the_items;
 }
