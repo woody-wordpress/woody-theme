@@ -189,8 +189,26 @@ function getManualFocus_data($layout)
  {
      $data = [];
      //TODO: remplacer la langue 'fr' par la variable lang du post
-     $sheet_data_json = apply_filters('wp_woody_hawwwai_sheet_render', $sheet_id, 'fr', array(), 'json');
-     \PC::debug($sheet_data_json, 'Json fiche');
+     $sheet_data = apply_filters('wp_woody_hawwwai_sheet_render', $sheet_id, 'fr', array(), 'json');
+
+     if (!empty($sheet_data) && !empty($sheet_data['formated_object'])) {
+         $sheet_formated = $sheet_data['formated_object'];
+         $sheet_unformated = $sheet_data['object'];
+         \PC::debug($sheet_data, 'Data sheet');
+
+         $data = [
+            'title' => (!empty($sheet_formated['businessName'])) ? $sheet_formated['businessName'] : '',
+            'subtitle' => (!empty($sheet_unformated['libelleBordereau'])) ? $sheet_unformated['libelleBordereau'] : '',
+            'description' => (!empty($sheet_formated['description'])) ? $sheet_formated['description'] : '',
+            'locality' => (!empty($sheet_formated['locality'])) ? $sheet_formated['locality'] : '',
+            'img' => (!empty($sheet_formated['firstImage']['list_item'])) ? $sheet_formated['firstImage']['list_item']['manual'] : '',
+         ];
+
+         $data['location'] = [];
+         $data['location']['lat'] = (!empty($sheet_formated['geolocations'])) ? $sheet_formated['geolocations']['latitude'] : '';
+         $data['location']['lat'] = (!empty($sheet_formated['geolocations'])) ? $sheet_formated['geolocations']['longitude'] : '';
+         $data['link']['url'] ='';
+     }
 
      return $data;
  }
