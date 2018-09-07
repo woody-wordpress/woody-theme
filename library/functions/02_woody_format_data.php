@@ -127,8 +127,7 @@ function getManualFocus_data($layout)
             if ($item['content_selection']->post_type == 'page') {
                 $post_preview = getPagePreview($layout, $item['content_selection']);
             } elseif ($item['content_selection']->post_type == 'touristic_sheet') {
-                \PC::debug($item['content_selection']->custom['touristic_sheet_id'], 'ID fiche');
-                $post_preview = getTouristicSheetPreview($item['content_selection']->custom['touristic_sheet_id']);
+                $post_preview = getTouristicSheetPreview($item['content_selection']->custom['touristic_sheet_id'], $item);
             }
 
             $the_items['items'][$key] = (!empty($post_preview)) ?  $post_preview : '';
@@ -185,7 +184,7 @@ function getManualFocus_data($layout)
  *
  */
 
- function getTouristicSheetPreview($sheet_id)
+ function getTouristicSheetPreview($sheet_id, $sheet_wp)
  {
      $data = [];
      //TODO: remplacer la langue 'fr' par la variable lang du post
@@ -194,7 +193,6 @@ function getManualFocus_data($layout)
      if (!empty($sheet_data) && !empty($sheet_data['formated_object'])) {
          $sheet_formated = $sheet_data['formated_object'];
          $sheet_unformated = $sheet_data['object'];
-         \PC::debug($sheet_data, 'Data sheet');
 
          $data = [
             'title' => (!empty($sheet_formated['businessName'])) ? $sheet_formated['businessName'] : '',
@@ -207,7 +205,10 @@ function getManualFocus_data($layout)
          $data['location'] = [];
          $data['location']['lat'] = (!empty($sheet_formated['geolocations'])) ? $sheet_formated['geolocations']['latitude'] : '';
          $data['location']['lat'] = (!empty($sheet_formated['geolocations'])) ? $sheet_formated['geolocations']['longitude'] : '';
-         $data['link']['url'] ='';
+         $data['link']['url'] = (!empty($sheet_wp['content_selection']->guid)) ? $sheet_wp['content_selection']->guid : '';
+
+
+         \PC::debug($sheet_formated, 'Fiche formatée');
      }
 
      return $data;
