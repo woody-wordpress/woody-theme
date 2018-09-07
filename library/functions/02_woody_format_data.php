@@ -124,8 +124,14 @@ function getManualFocus_data($layout)
             if ($status === 'draft') {
                 continue;
             }
-            $page_preview = getPagePreview($layout, $item['content_selection']);
-            $the_items['items'][$key] = (!empty($page_preview)) ?  $page_preview : '';
+            if ($item['content_selection']->post_type == 'page') {
+                $post_preview = getPagePreview($layout, $item['content_selection']);
+            } elseif ($item['content_selection']->post_type == 'touristic_sheet') {
+                \PC::debug($item['content_selection']->custom['touristic_sheet_id'], 'ID fiche');
+                $post_preview = getTouristicSheetPreview($item['content_selection']->custom['touristic_sheet_id']);
+            }
+
+            $the_items['items'][$key] = (!empty($post_preview)) ?  $post_preview : '';
         }
     }
 
@@ -168,6 +174,27 @@ function getManualFocus_data($layout)
 
      return $data;
  }
+
+ /**
+ *
+ * Nom : getTouristicSheetPreview
+ * Auteur : Benoit Bouchaud
+ * Return : Retourne les données d'une preview basée sur des champs custom
+ * @param    sheet_id - Un tableau de données
+ * @return   data - Un tableau de données
+ *
+ */
+
+ function getTouristicSheetPreview($sheet_id)
+ {
+     $data = [];
+     //TODO: remplacer la langue 'fr' par la variable lang du post
+     $sheet_data_json = apply_filters('wp_woody_hawwwai_sheet_render', $sheet_id, 'fr', array(), 'json');
+     \PC::debug($sheet_data_json, 'Json fiche');
+
+     return $data;
+ }
+
 
  /**
  *
