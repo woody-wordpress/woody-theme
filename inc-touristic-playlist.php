@@ -49,9 +49,9 @@ function add_sheet_headers()
 // do_action('send_headers', 'add_sheet_headers');
 
 /************** TEST *************************************/
-if (PL_CONF_TESTING !== null) {
-    $context['PL_CONF_TESTING'] = json_decode(PL_CONF_TESTING, true);
-}
+// if (PL_CONF_TESTING !== null) {
+//     $context['PL_CONF_TESTING'] = json_decode(PL_CONF_TESTING, true);
+// }
 /***********************************************/
 
 

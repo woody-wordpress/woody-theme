@@ -2,9 +2,6 @@
 
 {% block metas %}
     {{ parent() }}
-    <script>
-        var DrupalAngularConfig = {{ PL_CONF_TESTING|json_encode(constant('JSON_PRETTY_PRINT'))|raw }} || {};
-    </script>
 {% endblock metas %}
 
 {% block styles %}
