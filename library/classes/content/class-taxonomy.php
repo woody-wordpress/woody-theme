@@ -152,9 +152,9 @@ class WoodyTheme_Taxonomy
                 'show_ui' => true,
                 'show_in_menu' => false,
                 'capabilities' => [
-                    'manage_terms' => false,
-                    'edit_terms' => false,
-                    'delete_terms' => false,
+                    'manage_terms' => 'Configurer les saisons',
+                    'edit_terms' => 'Editer les saisons',
+                    'delete_terms' => 'Supprimer les saisons',
                     'assign_terms' => 'Assigner les saisons'
                 ]
             )
