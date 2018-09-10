@@ -56,8 +56,8 @@ class WoodyTheme_Taxonomy
                     'popular_items' => 'Types de publications les plus utilisées'
                 ],
                 'hierarchical' => true,
-                'show_ui' => false,
-                'show_in_menu' => false,
+                'show_ui' => true,
+                'show_in_menu' => true,
                 'capabilities' => [
                     'manage_terms' => false,
                     'edit_terms' => false,
