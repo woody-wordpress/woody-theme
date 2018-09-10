@@ -59,9 +59,9 @@ class WoodyTheme_Taxonomy
                 'show_ui' => true,
                 'show_in_menu' => true,
                 'capabilities' => [
-                    'manage_terms' => false,
-                    'edit_terms' => false,
-                    'delete_terms' => false,
+                    'manage_terms' => 'Configurer les types de publications',
+                    'edit_terms' => 'Editer les types de publications',
+                    'delete_terms' => 'Supprimer les types de publications',
                     'assign_terms' => 'edit_posts'
                 ]
             )
