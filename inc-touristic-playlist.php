@@ -18,22 +18,33 @@ $context['body_class'] .= ' apirender apirender-playlist apirender-wordpress';
  ************************ **/
 
 
-$playlist_conf_id = get_field('field_5b338ff331b17');
-$partialPlaylist = apply_filters('wp_woody_hawwwai_playlist_render', $playlist_conf_id, 'fr');
+$playlistConfId = get_field('field_5b338ff331b17');
 
-// rcd($playlist_conf_id);
+// build query in array
+$query = [
+    'page' => 1,
+];
 
+$partialPlaylist = apply_filters('wp_woody_hawwwai_playlist_render', $playlistConfId, 'fr', $query);
 if (!$partialPlaylist) {
     print_r('error fetching playlist');
     exit;
 }
+
+// Todo return playlistId in apirender playlist endpoint
+$playlistId = isset($partialPlaylist['playlistId']) ? $partialPlaylist['playlistId'] : null;
+
+$apiRenderUri = isset($partialPlaylist['apirender_uri']) ? $partialPlaylist['apirender_uri'] : null;
+// rcd($playlistConfId);
+
 
 /***************************
  * Configuration des HTTP headers
  *****************************/
 function add_sheet_headers()
 {
-    // global $playlist_id;
+    global $playlistId;
+    global $apiRenderUri;
     global $partialPlaylist;
 
     header('Vary : Cookie, Accept-Encoding');
@@ -42,18 +53,16 @@ function add_sheet_headers()
         header('Cache-Control: public, max-age=604800, must-revalidate');
     }
     header('Last-Modified: ' .gmdate('D, d M Y H:i:s', strtotime($partialPlaylist['modified'])).' GMT', false);
-    // header('x-ts-idplaylist: ' .$playlist_id);
+    if (!empty($playlistId)) {
+        header('x-ts-idplaylist: ' .$playlistId);
+    }
+    if (!empty($apiRenderUri)) {
+        header('x-apirender-url: ' .$apiRenderUri);
+    }
 };
 
-// add_action('send_headers', 'add_sheet_headers', 10, 1);
-// do_action('send_headers', 'add_sheet_headers');
-
-/************** TEST *************************************/
-// if (PL_CONF_TESTING !== null) {
-//     $context['PL_CONF_TESTING'] = json_decode(PL_CONF_TESTING, true);
-// }
-/***********************************************/
-
+add_action('send_headers', 'add_sheet_headers', 10, 1);
+do_action('send_headers', 'add_sheet_headers');
 
 
 /**** *********************** ****
