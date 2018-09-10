@@ -15,7 +15,7 @@ class WoodyTheme_Roles
 
     protected function registerHooks()
     {
-        add_action('woody_update', [$this, 'addRolesOnPluginActivation']);
+        add_action('woody_update', [$this, 'addRolesOnPluginActivation'], 2);
     }
 
     public function addRolesOnPluginActivation()
