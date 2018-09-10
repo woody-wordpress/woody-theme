@@ -173,10 +173,10 @@ class WoodyTheme_Enqueue_Assets
             'lg-zoom',
             'lg-fullscreen'
         ];
-        wp_enqueue_script('main-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('js/main.js'), $dependencies, '', true);
+        wp_enqueue_script('main-javascripts', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('js/main.js'), $dependencies, '', true);
 
         // Enqueue the main Stylesheet.
-        wp_enqueue_style('main-stylesheet', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('css/main.css'), array(), '', 'all');
+        wp_enqueue_style('main-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/main.css'), array(), '', 'all');
         wp_enqueue_style('font-awesome', 'https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css', array(), '', 'all');
     }
 
@@ -192,7 +192,7 @@ class WoodyTheme_Enqueue_Assets
             'arrive',
             'selectize'
         ];
-        wp_enqueue_script('admin-javascripts', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('js/admin.js'), $dependencies, false, true);
+        wp_enqueue_script('admin-javascripts', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('js/admin.js'), $dependencies, false, true);
 
         // Added global vars
         $siteConfig = [];
@@ -205,13 +205,13 @@ class WoodyTheme_Enqueue_Assets
         wp_add_inline_script('admin-javascripts', 'var siteConfig = ' . json_encode($siteConfig), 'before') . ';';
 
         // Enqueue the main Stylesheet.
-        wp_enqueue_style('admin-stylesheet', get_stylesheet_directory_uri() . '/dist/' . $this->assetPath('css/admin.css'), array(), '', 'all');
+        wp_enqueue_style('admin-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/admin.css'), array(), '', 'all');
     }
 
     private function assetPath($filename)
     {
         $manifest = [];
-        $manifest_path = get_stylesheet_directory() . '/dist/rev-manifest.json';
+        $manifest_path = WP_HOME . '/app/dist/rev-manifest.json';
         if (file_exists($manifest_path)) {
             $manifest = json_decode(file_get_contents($manifest_path), true);
 
