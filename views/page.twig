@@ -7,18 +7,7 @@
             {# {% include 'parts/shares.twig' %} #}
             {% block page_teaser %}
                 <header class="page-teaser">
-                    {% if trip_infos | default %}
-                        <div class="grid-container">
-                            <div class="grid-x grid-padding-x">
-                                <div class="cell medium-9 large-8">{{ page_teaser }}</div>
-                                <div class="cell medium-3 large-4 flexCol faEnd">{{ trip_infos|default }}</div>
-                            </div>
-                        </div>
-                    {% else %}
-                        {{ page_teaser }}
-                        {{ trip_infos|default }}
-                    {% endif %}
-
+                    {{ page_teaser }}
                 </header>
             {% endblock %}
             {{ playlist_template|default }}

@@ -27,6 +27,20 @@ $context['current_url'] = get_permalink();
 $context['active_social_shares'] = getActiveShares();
 
 /** ****************************
+ * Compilation du bloc prix
+ **************************** **/
+$trip_infos = [];
+if (!empty(getAcfGroupFields('group_5b6c5e6ff381d'))) {
+    $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d');
+    //TODO: Gérer le fichier gps pour affichage s/ carte
+    if ($trip_infos['the_duration']['count_days']) {
+        $trip_infos['the_duration']['count_days'] = humanDays($trip_infos['the_duration']['count_days']);
+    }
+    $context['trip_infos'] = Timber::compile($context['woody_components'][$trip_infos['tripinfos_woody_tpl']], $trip_infos);
+}
+
+
+/** ****************************
  * Compilation de l'en tête de page
  **************************** **/
 $page_teaser = [];
@@ -61,6 +75,8 @@ if (!empty($page_teaser)) {
 
     $page_teaser['breadcrumb'] = yoast_breadcrumb('<div class="breadcrumb-wrapper padd-top-sm padd-bottom-sm">', '</div>', false);
 
+    $page_teaser['trip_infos'] = $context['trip_infos'];
+
     $context['page_teaser'] = Timber::compile($context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
 }
 
@@ -87,19 +103,6 @@ if (($page_hero['page_heading_media_type'] == 'movie' && !empty($page_hero['page
         }
     }
     $context['page_hero'] = Timber::compile($context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
-}
-
-/** ****************************
- * Compilation du bloc prix
- **************************** **/
-$trip_infos = [];
-if (!empty(getAcfGroupFields('group_5b6c5e6ff381d'))) {
-    $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d');
-    //TODO: Gérer le fichier gps pour affichage s/ carte
-    if ($trip_infos['the_duration']['count_days']) {
-        $trip_infos['the_duration']['count_days'] = humanDays($trip_infos['the_duration']['count_days']);
-    }
-    $context['trip_infos'] = Timber::compile($context['woody_components'][$trip_infos['tripinfos_woody_tpl']], $trip_infos);
 }
 
  /** ************************
