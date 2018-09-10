@@ -23,14 +23,8 @@ class WoodyTheme_Taxonomy
     public function insertTerms()
     {
         // On inclut les termes génériques à la taxo
-        wp_insert_term('Actu', 'page_type', array('slug' => 'article'));
-        wp_insert_term('Expérience', 'page_type', array('slug' => 'experience'));
-        wp_insert_term('Contenu', 'page_type', array('slug' => 'basic_page'));
-        wp_insert_term('Page d\'atterrissage', 'page_type', array('slug' => 'landing_page'));
-        wp_insert_term('Personne', 'page_type', array('slug' => 'member'));
+        wp_insert_term('Page de contenu', 'page_type', array('slug' => 'basic_page'));
         wp_insert_term('Séjour', 'page_type', array('slug' => 'trip'));
-        wp_insert_term('Liste de contenus', 'page_type', array('slug' => 'content_list'));
-        wp_insert_term('Brochure', 'page_type', array('slug' => 'booklet'));
         wp_insert_term('Page d\'accueil', 'page_type', array('slug' => 'front_page'));
 
         // On inclut les termes génériques à la taxo
