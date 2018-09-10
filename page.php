@@ -71,11 +71,9 @@ if (!empty($page_teaser)) {
         $page_teaser['the_classes'][] = 'isRel';
     }
 
-    $page_teaser['classes'] = implode(' ', $page_teaser['the_classes']);
-
+    $page_teaser['classes'] = (!empty($page_teaser['the_classes'])) ? implode(' ', $page_teaser['the_classes']) : '';
     $page_teaser['breadcrumb'] = yoast_breadcrumb('<div class="breadcrumb-wrapper padd-top-sm padd-bottom-sm">', '</div>', false);
-
-    $page_teaser['trip_infos'] = $context['trip_infos'];
+    $page_teaser['trip_infos'] = (!empty($context['trip_infos'])) ? $context['trip_infos'] : '';
 
     $context['page_teaser'] = Timber::compile($context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
 }
@@ -170,12 +168,14 @@ if ($context['page_type'] === 'playlist_tourism') {
                             $layout['slides'] = nestedGridsComponents($layout['slides'], 'slide_woody_tpl');
                             $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                         break;
-                         case 'gallery':
+                        case 'gallery':
+                        if (!empty($layout['gallery_items'])) {
                             foreach ($layout['gallery_items'] as $key => $media_item) {
                                 // On ajoute une entrée "gallery_items" pour être compatible avec le tpl woody
                                 $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
                             }
                             $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                        }
                         break;
                         case 'socialwall':
                             $layout['gallery_items'] = [];
