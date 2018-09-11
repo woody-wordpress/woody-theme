@@ -182,27 +182,27 @@ class WoodyTheme_Enqueue_Assets
 
     public function enqueueAdminAssets()
     {
-        // Dependencies of admin.js
-        wp_enqueue_script('arrive', 'https://cdn.jsdelivr.net/npm/arrive@2.4.1/src/arrive.min.js', array(), '', true);
-        wp_enqueue_script('selectize', 'https://cdn.jsdelivr.net/npm/selectize@0.12.6/dist/js/standalone/selectize.min.js', array('jquery'), '', true);
+        // // Dependencies of admin.js
+        // wp_enqueue_script('arrive', 'https://cdn.jsdelivr.net/npm/arrive@2.4.1/src/arrive.min.js', array(), '', true);
+        // wp_enqueue_script('selectize', 'https://cdn.jsdelivr.net/npm/selectize@0.12.6/dist/js/standalone/selectize.min.js', array('jquery'), '', true);
 
-        // Enqueue the main Scripts
-        $dependencies = [
-            'jquery',
-            'arrive',
-            'selectize'
-        ];
-        wp_enqueue_script('admin-javascripts', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('js/admin.js'), $dependencies, false, true);
+        // // Enqueue the main Scripts
+        // $dependencies = [
+        //     'jquery',
+        //     'arrive',
+        //     'selectize'
+        // ];
+        // wp_enqueue_script('admin-javascripts', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('js/admin.js'), $dependencies, false, true);
 
-        // Added global vars
-        $siteConfig = [];
-        $siteConfig['site_key'] = WP_SITE_KEY;
-        $credentials = get_option('woody_credentials');
-        if (!empty($credentials['login']) && !empty($credentials['password'])) {
-            $siteConfig['login'] = $credentials['login'];
-            $siteConfig['password'] = $credentials['password'];
-        }
-        wp_add_inline_script('admin-javascripts', 'var siteConfig = ' . json_encode($siteConfig), 'before') . ';';
+        // // Added global vars
+        // $siteConfig = [];
+        // $siteConfig['site_key'] = WP_SITE_KEY;
+        // $credentials = get_option('woody_credentials');
+        // if (!empty($credentials['login']) && !empty($credentials['password'])) {
+        //     $siteConfig['login'] = $credentials['login'];
+        //     $siteConfig['password'] = $credentials['password'];
+        // }
+        // wp_add_inline_script('admin-javascripts', 'var siteConfig = ' . json_encode($siteConfig), 'before') . ';';
 
         // Enqueue the main Stylesheet.
         wp_enqueue_style('admin-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/admin.css'), array(), '', 'all');

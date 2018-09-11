@@ -83,7 +83,7 @@ $('#post').each(function() {
     var getAutorFocusData = function($parent) {
         var query_params = {};
         query_params['current_post'] = $('#post_ID').val();
-        console.log($parent);
+        //console.log($parent);
         $parent.find('input:checked, select option, input[type="number"]').each(function() {
             var name = $(this).parents('.acf-field').data('name');
 
