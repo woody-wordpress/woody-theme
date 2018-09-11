@@ -11,6 +11,7 @@ if (!class_exists('PC', false) && class_exists('PhpConsole', false) && WP_ENV ==
 
 // ACF
 new WoodyTheme_ACF();
+new WoodyTheme_ACF_Counter();
 
 // Cleanup
 new WoodyTheme_Cleanup_Admin();
