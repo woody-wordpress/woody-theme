@@ -1,24 +1,6 @@
 {
     "key": "group_5b043c93d609a",
     "title": "Background parameters",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Permet de personnaliser le fond d'une section (couleur \/ image)",
-    "modified": 1536232424,
     "fields": [
         {
             "key": "field_5b043ca4a6fe3",
@@ -39,6 +21,31 @@
                 "bg-black": "Noir",
                 "bg-darkgray": "Gris foncé",
                 "bg-lightgray": "Gris clair"
+            },
+            "allow_null": 1,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        {
+            "key": "field_5b978a13feaa6",
+            "label": "Bordure",
+            "name": "border_color",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "border-primary": "Couleur principale",
+                "border-secondary": "Couleur secondaire",
+                "border-black": "Noir",
+                "border-darkgray": "Gris foncé",
+                "border-lightgray": "Gris clair"
             },
             "allow_null": 1,
             "default_value": "",
@@ -93,5 +100,23 @@
             "layout": "horizontal",
             "return_format": "value"
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Permet de personnaliser le fond d'une section (couleur \/ image)",
+    "modified": 1536650928
 }

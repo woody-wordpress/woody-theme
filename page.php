@@ -63,6 +63,11 @@ if (!empty($page_teaser)) {
         $page_teaser['the_classes'][] = $page_teaser['background_color'];
     }
 
+    if (!empty($page_teaser['border_color'])) {
+        $page_teaser['the_classes'][] = $page_teaser['border_color'];
+    }
+
+
     if (!empty($page_teaser['teaser_margin_bottom'])) {
         $page_teaser['the_classes'][] = $page_teaser['teaser_margin_bottom'];
     }
