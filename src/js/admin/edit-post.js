@@ -2,13 +2,13 @@ import $ from 'jquery';
 
 $('#post').each(function() {
     // On ferme toutes les metaboxes ACF
-    $('.acf-postbox').addClass('closed');
+    // $('.acf-postbox').addClass('closed');
 
     // On masque les metaboxes de taxonomies dans l'edition des posts (on les rajoutera ensuite dans des champs ACF)
-    $('[id^="tagsdiv-"').hide();
+    // $('[id^="tagsdiv-"').hide();
 
     // On referme les metaboxes par défaut sur l'édition d'un post
-    $('#pageparentdiv, #revisionsdiv, #wpseo_meta, #members-cp').addClass('closed');
+    // $('#pageparentdiv, #revisionsdiv, #wpseo_meta, #members-cp').addClass('closed');
 
     // Action sur les focus
     var toggleChoiceAction = function($bigparent) {
