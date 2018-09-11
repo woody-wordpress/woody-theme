@@ -192,7 +192,7 @@ class WoodyTheme_Enqueue_Assets
             'arrive',
             'selectize'
         ];
-        wp_enqueue_script('admin-javascripts', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('js/admin.js'), $dependencies, false, true);
+        wp_enqueue_script('admin-javascripts', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('js/admin.js'), $dependencies, wp_get_theme(get_template())->get('Version'), true);
 
         // Added global vars
         $siteConfig = [];
@@ -205,7 +205,7 @@ class WoodyTheme_Enqueue_Assets
         wp_add_inline_script('admin-javascripts', 'var siteConfig = ' . json_encode($siteConfig), 'before') . ';';
 
         // Enqueue the main Stylesheet.
-        wp_enqueue_style('admin-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/admin.css'), array(), '', 'all');
+        wp_enqueue_style('admin-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/admin.css'), array(), wp_get_theme(get_template())->get('Version'), 'all');
     }
 
     private function assetPath($filename)
