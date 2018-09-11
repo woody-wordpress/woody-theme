@@ -340,6 +340,7 @@ function getManualFocus_data($layout)
      $display['background_img'] = (!empty($scope['background_img'])) ? $scope['background_img'] : '';
      $classes_array[] = (!empty($display['background_img'])) ? 'isRel' : '';
      $classes_array[] = (!empty($scope['background_color'])) ? $scope['background_color'] : '';
+     $classes_array[] = (!empty($scope['border_color'])) ? $scope['border_color'] : '';
      $classes_array[] = (!empty($scope['background_img_opacity'])) ? $scope['background_img_opacity'] : '';
      $classes_array[] = (!empty($scope['scope_paddings']['scope_padding_top'])) ? $scope['scope_paddings']['scope_padding_top'] : '';
      $classes_array[] = (!empty($scope['scope_paddings']['scope_padding_bottom'])) ? $scope['scope_paddings']['scope_padding_bottom'] : '';
