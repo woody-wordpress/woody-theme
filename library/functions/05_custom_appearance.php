@@ -1,6 +1,7 @@
 <?php
 
-function getActiveShares(){
+function getActiveShares()
+{
     $active_shares = [
         'facebook' => true,
         'twitter' => true,

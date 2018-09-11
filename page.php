@@ -9,7 +9,14 @@
 
 $context = Timber::get_context();
 $context['post'] = new TimberPost();
-$context['woody_components'] = Woody::getTwigsPaths();
+
+$woodyComponents = wp_cache_get('woody_components');
+if (empty($woodyComponents)) {
+    $woodyComponents = Woody::getComponents();
+    wp_cache_set('woody_components', $woodyComponents);
+}
+
+$context['woody_components'] = Woody::getTwigsPaths($woodyComponents);
 // PC::debug(get_class_methods(TimberPost), 'TwigMethods');
 
 $context['site_config'] = [];

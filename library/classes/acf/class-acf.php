@@ -61,17 +61,23 @@ class WoodyTheme_ACF
         if (strpos($field['name'], 'woody_tpl') !== false) {
             $field['choices'] = [];
 
+            $woodyComponents = wp_cache_get('woody_components');
+            if (empty($woodyComponents)) {
+                $woodyComponents = Woody::getComponents();
+                wp_cache_set('woody_components', $woodyComponents);
+            }
+
             switch ($field['key']) {
                 case 'field_5afd2c9616ecd': // Cas des sections
-                    $components = Woody::getTemplatesByAcfGroup($field['key']);
+                    $components = Woody::getTemplatesByAcfGroup($woodyComponents, $field['key']);
                 break;
                 default:
                 if (is_numeric($field['parent'])) {
                     // From 08/31/18, return of $field['parent'] is the acf post id instead of the key
                     $parent_field_as_post = get_post($field['parent']);
-                    $components = Woody::getTemplatesByAcfGroup($parent_field_as_post->post_name);
+                    $components = Woody::getTemplatesByAcfGroup($woodyComponents, $parent_field_as_post->post_name);
                 } else {
-                    $components = Woody::getTemplatesByAcfGroup($field['parent']);
+                    $components = Woody::getTemplatesByAcfGroup($woodyComponents, $field['parent']);
                 }
 
             }

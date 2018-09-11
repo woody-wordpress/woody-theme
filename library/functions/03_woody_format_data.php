@@ -21,14 +21,14 @@ function getAutoFocus_data($the_post, $query_form)
 
     if (!empty($query_form['focused_content_type'])) {
         $tax_query = [
-                'relation' => 'AND',
-                'page_type' => array(
-                'taxonomy' => 'page_type',
-                'terms' => $query_form['focused_content_type'],
-                'field' => 'taxonomy_term_id',
-                'operator' => 'IN'
-            ),
-        ];
+            'relation' => 'AND',
+            'page_type' => array(
+            'taxonomy' => 'page_type',
+            'terms' => $query_form['focused_content_type'],
+            'field' => 'taxonomy_term_id',
+            'operator' => 'IN'
+        ),
+    ];
     }
 
     // Si des termes ont été choisi pour filtrer les résultats
@@ -36,7 +36,7 @@ function getAutoFocus_data($the_post, $query_form)
     $custom_tax = [];
     if (!empty($query_form['focused_taxonomy_terms'])) {
 
-        // On récupère la relation choisie (ET/OU) entre les termes
+    // On récupère la relation choisie (ET/OU) entre les termes
         // et on génère un tableau de term_id pour chaque taxonomie
         $tax_query['custom_tax']['relation'] = (!empty($query_form['focused_taxonomy_terms_andor'])) ? $query_form['focused_taxonomy_terms_andor'] : 'OR';
         foreach ($query_form['focused_taxonomy_terms'] as $focused_term_key => $focused_term) {
@@ -45,11 +45,11 @@ function getAutoFocus_data($the_post, $query_form)
         }
         foreach ($custom_tax as $taxo => $terms) {
             $tax_query['custom_tax'][] = array(
-                'taxonomy' => $taxo,
-                'terms' => $terms,
-                'field' => 'taxonomy_term_id',
-                'operator' => 'IN'
-            );
+            'taxonomy' => $taxo,
+            'terms' => $terms,
+            'field' => 'taxonomy_term_id',
+            'operator' => 'IN'
+        );
         }
     }
 
@@ -57,9 +57,9 @@ function getAutoFocus_data($the_post, $query_form)
     // On créé la wp_query en fonction des choix faits dans le backoffice
     // NB : si aucun choix n'a été fait, on remonte automatiquement tous les contenus de type page
     $the_query = [
-        'post_type' => 'page',
-        'posts_per_page' => -1,
-    ];
+    'post_type' => 'page',
+    'posts_per_page' => -1,
+];
 
     $the_query['tax_query'] = (!empty($tax_query)) ? $tax_query : '' ;
 
@@ -147,34 +147,34 @@ function getManualFocus_data($layout)
  *
  */
 
- function getCustomPreview($item)
- {
-     $data = [];
+function getCustomPreview($item)
+{
+    $data = [];
 
-     $data = [
-        'title' => (!empty($item['title'])) ? $item['title'] : '',
-        'pretitle' => (!empty($item['pretitle'])) ? $item['pretitle'] : '',
-        'subtitle' => (!empty($item['subtitle'])) ? $item['subtitle'] : '',
-        'icon' => (!empty($item['icon'])) ? $item['icon'] : '',
-        'description' => (!empty($item['description'])) ? $item['description'] : '',
-        'link' => [
-            'url' => (!empty($item['link']['url'])) ? $item['link']['url'] : '',
-            'title' => (!empty($item['link']['title'])) ? $item['link']['title'] : '',
-            'target' => (!empty($item['link']['target'])) ? $item['link']['target'] : '',
-        ]
-    ];
-     // On récupère le choix de média afin d'envoyer une image OU une vidéo
-     if ($item['media_type'] == 'img' && !empty($item['img'])) {
-         $data['img'] = $item['img'];
-         $data['img']['attachment_more_data'] = getAttachmentMoreData($item['img']['ID']);
-     } elseif ($item['media_type'] == 'movie' && !empty($item['movie'])) {
-         $data['movie'] = $item['movie'];
-     }
+    $data = [
+    'title' => (!empty($item['title'])) ? $item['title'] : '',
+    'pretitle' => (!empty($item['pretitle'])) ? $item['pretitle'] : '',
+    'subtitle' => (!empty($item['subtitle'])) ? $item['subtitle'] : '',
+    'icon' => (!empty($item['icon'])) ? $item['icon'] : '',
+    'description' => (!empty($item['description'])) ? $item['description'] : '',
+    'link' => [
+        'url' => (!empty($item['link']['url'])) ? $item['link']['url'] : '',
+        'title' => (!empty($item['link']['title'])) ? $item['link']['title'] : '',
+        'target' => (!empty($item['link']['target'])) ? $item['link']['target'] : '',
+    ]
+];
+    // On récupère le choix de média afin d'envoyer une image OU une vidéo
+    if ($item['media_type'] == 'img' && !empty($item['img'])) {
+        $data['img'] = $item['img'];
+        $data['img']['attachment_more_data'] = getAttachmentMoreData($item['img']['ID']);
+    } elseif ($item['media_type'] == 'movie' && !empty($item['movie'])) {
+        $data['movie'] = $item['movie'];
+    }
 
-     return $data;
- }
+    return $data;
+}
 
- /**
+/**
  *
  * Nom : getTouristicSheetPreview
  * Auteur : Benoit Bouchaud
@@ -184,38 +184,38 @@ function getManualFocus_data($layout)
  *
  */
 
- function getTouristicSheetPreview($sheet_id, $sheet_wp)
- {
-     $data = [];
-     //TODO: remplacer la langue 'fr' par la variable lang du post
-     $sheet_data = apply_filters('wp_woody_hawwwai_sheet_render', $sheet_id, 'fr', array(), 'json');
+function getTouristicSheetPreview($sheet_id, $sheet_wp)
+{
+    $data = [];
+    //TODO: remplacer la langue 'fr' par la variable lang du post
+    $sheet_data = apply_filters('wp_woody_hawwwai_sheet_render', $sheet_id, 'fr', array(), 'json');
 
-     if (!empty($sheet_data) && !empty($sheet_data['formated_object'])) {
-         $sheet_formated = $sheet_data['formated_object'];
-         $sheet_unformated = $sheet_data['object'];
+    if (!empty($sheet_data) && !empty($sheet_data['formated_object'])) {
+        $sheet_formated = $sheet_data['formated_object'];
+        $sheet_unformated = $sheet_data['object'];
 
-         $data = [
-            'title' => (!empty($sheet_formated['businessName'])) ? $sheet_formated['businessName'] : '',
-            'subtitle' => (!empty($sheet_unformated['libelleBordereau'])) ? $sheet_unformated['libelleBordereau'] : '',
-            'description' => (!empty($sheet_formated['description'])) ? $sheet_formated['description'] : '',
-            'locality' => (!empty($sheet_formated['locality'])) ? $sheet_formated['locality'] : '',
-            'img' => (!empty($sheet_formated['firstImage']['list_item'])) ? $sheet_formated['firstImage']['list_item']['manual'] : '',
-         ];
+        $data = [
+        'title' => (!empty($sheet_formated['businessName'])) ? $sheet_formated['businessName'] : '',
+        'subtitle' => (!empty($sheet_unformated['libelleBordereau'])) ? $sheet_unformated['libelleBordereau'] : '',
+        'description' => (!empty($sheet_formated['description'])) ? $sheet_formated['description'] : '',
+        'locality' => (!empty($sheet_formated['locality'])) ? $sheet_formated['locality'] : '',
+        'img' => (!empty($sheet_formated['firstImage']['list_item'])) ? $sheet_formated['firstImage']['list_item']['manual'] : '',
+        ];
 
-         $data['location'] = [];
-         $data['location']['lat'] = (!empty($sheet_formated['geolocations'])) ? $sheet_formated['geolocations']['latitude'] : '';
-         $data['location']['lat'] = (!empty($sheet_formated['geolocations'])) ? $sheet_formated['geolocations']['longitude'] : '';
-         $data['link']['url'] = (!empty($sheet_wp['content_selection']->guid)) ? $sheet_wp['content_selection']->guid : '';
-
-
-         \PC::debug($sheet_formated, 'Fiche formatée');
-     }
-
-     return $data;
- }
+        $data['location'] = [];
+        $data['location']['lat'] = (!empty($sheet_formated['geolocations'])) ? $sheet_formated['geolocations']['latitude'] : '';
+        $data['location']['lat'] = (!empty($sheet_formated['geolocations'])) ? $sheet_formated['geolocations']['longitude'] : '';
+        $data['link']['url'] = (!empty($sheet_wp['content_selection']->guid)) ? $sheet_wp['content_selection']->guid : '';
 
 
- /**
+        \PC::debug($sheet_formated, 'Fiche formatée');
+    }
+
+    return $data;
+}
+
+
+/**
  *
  * Nom : getFocusBlockTitles
  * Auteur : Benoit Bouchaud
@@ -225,21 +225,21 @@ function getManualFocus_data($layout)
  *
  */
 
- function getFocusBlockTitles($layout)
- {
-     $data = [];
+function getFocusBlockTitles($layout)
+{
+    $data = [];
 
-     $data['title'] = (!empty($layout['title'])) ? $layout['title'] : '';
-     $data['pretitle'] = (!empty($layout['pretitle'])) ? $layout['pretitle'] : '';
-     $data['subtitle'] = (!empty($layout['subtitle'])) ? $layout['subtitle'] : '';
-     $data['icon_type'] = (!empty($layout['icon_type'])) ? $layout['icon_type'] : '';
-     $data['icon_img'] = (!empty($layout['icon_img'])) ? $layout['icon_img'] : '';
-     $data['woody_icon'] = (!empty($layout['woody_icon'])) ? $layout['woody_icon'] : '';
+    $data['title'] = (!empty($layout['title'])) ? $layout['title'] : '';
+    $data['pretitle'] = (!empty($layout['pretitle'])) ? $layout['pretitle'] : '';
+    $data['subtitle'] = (!empty($layout['subtitle'])) ? $layout['subtitle'] : '';
+    $data['icon_type'] = (!empty($layout['icon_type'])) ? $layout['icon_type'] : '';
+    $data['icon_img'] = (!empty($layout['icon_img'])) ? $layout['icon_img'] : '';
+    $data['woody_icon'] = (!empty($layout['woody_icon'])) ? $layout['woody_icon'] : '';
 
-     return $data;
- }
+    return $data;
+}
 
-  /**
+/**
  *
  * Nom : getPagePreview
  * Auteur : Benoit Bouchaud
@@ -249,51 +249,51 @@ function getManualFocus_data($layout)
  *
  */
 
- function getPagePreview($item_wrapper, $item)
- {
-     $data = [];
+function getPagePreview($item_wrapper, $item)
+{
+    $data = [];
 
-     $data['page_type'] = getTermsSlugs($item->ID, 'page_type', true);
+    $data['page_type'] = getTermsSlugs($item->ID, 'page_type', true);
 
-     if (!empty($item->get_field('focus_title'))) {
-         $data['title'] = $item->get_field('focus_title');
-     } elseif (!empty($item->get_title())) {
-         $data['title'] = $item->get_title();
-     }
+    if (!empty($item->get_field('focus_title'))) {
+        $data['title'] = $item->get_field('focus_title');
+    } elseif (!empty($item->get_title())) {
+        $data['title'] = $item->get_title();
+    }
 
 
-     $fallback_field_group = $item->get_field('field_5b052bbab3867');
+    $fallback_field_group = $item->get_field('field_5b052bbab3867');
 
-     if (is_array($item_wrapper['display_elements'])) {
-         if (in_array('pretitle', $item_wrapper['display_elements'])) {
-             $data['pretitle'] = getFieldAndFallback($item, 'focus_pretitle', $fallback_field_group, 'pretitle');
-         }
-         if (in_array('subtitle', $item_wrapper['display_elements'])) {
-             $data['subtitle'] = getFieldAndFallback($item, 'focus_subtitle', $fallback_field_group, 'subtitle');
-         }
-         if (in_array('icon', $item_wrapper['display_elements'])) {
-             $data['icon'] = getFieldAndFallback($item, 'focus_icon', $fallback_field_group, 'woody_icon');
-         }
-         if (in_array('description', $item_wrapper['display_elements'])) {
-             $data['description'] = getFieldAndFallback($item, 'focus_description', $fallback_field_group, 'description');
-         }
-     }
+    if (is_array($item_wrapper['display_elements'])) {
+        if (in_array('pretitle', $item_wrapper['display_elements'])) {
+            $data['pretitle'] = getFieldAndFallback($item, 'focus_pretitle', $fallback_field_group, 'pretitle');
+        }
+        if (in_array('subtitle', $item_wrapper['display_elements'])) {
+            $data['subtitle'] = getFieldAndFallback($item, 'focus_subtitle', $fallback_field_group, 'subtitle');
+        }
+        if (in_array('icon', $item_wrapper['display_elements'])) {
+            $data['icon'] = getFieldAndFallback($item, 'focus_icon', $fallback_field_group, 'woody_icon');
+        }
+        if (in_array('description', $item_wrapper['display_elements'])) {
+            $data['description'] = getFieldAndFallback($item, 'focus_description', $fallback_field_group, 'description');
+        }
+    }
 
-     if (!empty($item_wrapper['display_button'])) {
-         $data['link']['link_label'] = getFieldAndFallBack($item, 'focus_button_title', $item);
-     }
+    if (!empty($item_wrapper['display_button'])) {
+        $data['link']['link_label'] = getFieldAndFallBack($item, 'focus_button_title', $item);
+    }
 
-     $data['location'] = [];
-     $data['location']['lat'] = (!empty($item->get_field('post_latitude'))) ? $item->get_field('post_latitude') : '';
-     $data['location']['lng'] = (!empty($item->get_field('post_longitude'))) ? $item->get_field('post_longitude') : '';
-     $data['img'] = getFieldAndFallback($item, 'focus_img', $item, 'field_5b0e5ddfd4b1b');
-     $data['img']['attachment_more_data'] = (!empty($data['img'])) ? getAttachmentMoreData($data['img']['ID']) : '';
-     $data['link']['url'] = $item->get_path();
+    $data['location'] = [];
+    $data['location']['lat'] = (!empty($item->get_field('post_latitude'))) ? $item->get_field('post_latitude') : '';
+    $data['location']['lng'] = (!empty($item->get_field('post_longitude'))) ? $item->get_field('post_longitude') : '';
+    $data['img'] = getFieldAndFallback($item, 'focus_img', $item, 'field_5b0e5ddfd4b1b');
+    $data['img']['attachment_more_data'] = (!empty($data['img'])) ? getAttachmentMoreData($data['img']['ID']) : '';
+    $data['link']['url'] = $item->get_path();
 
-     return $data;
- }
+    return $data;
+}
 
- /**
+/**
  *
  * Nom : getFieldAndFallback
  * Auteur : Benoit Bouchaud
@@ -304,22 +304,22 @@ function getManualFocus_data($layout)
  * @return   data - Un tableau de données
  *
  **/
- function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = '')
- {
-     $value = [];
+function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = '')
+{
+    $value = [];
 
-     if (!empty($item->get_field($field))) {
-         $value = $item->get_field($field);
-     } elseif (!empty($fallback_item) && is_array($fallback_item)) {
-         $value = $fallback_item[$fallback_field];
-     } elseif (!empty($fallback_item->get_field($fallback_field))) {
-         $value = $fallback_item->get_field($fallback_field);
-     } else {
-         $value = '';
-     }
+    if (!empty($item->get_field($field))) {
+        $value = $item->get_field($field);
+    } elseif (!empty($fallback_item) && is_array($fallback_item)) {
+        $value = $fallback_item[$fallback_field];
+    } elseif (!empty($fallback_item->get_field($fallback_field))) {
+        $value = $fallback_item->get_field($fallback_field);
+    } else {
+        $value = '';
+    }
 
-     return $value;
- }
+    return $value;
+}
 
 /**
  *
@@ -331,28 +331,28 @@ function getManualFocus_data($layout)
  *
  */
 
- function getDisplayOptions($scope)
- {
-     $display = [];
-     $classes_array=[];
+function getDisplayOptions($scope)
+{
+    $display = [];
+    $classes_array=[];
 
-     $display['gridContainer'] = (empty($scope['display_fullwidth'])) ? 'grid-container' : '';
-     $display['background_img'] = (!empty($scope['background_img'])) ? $scope['background_img'] : '';
-     $classes_array[] = (!empty($display['background_img'])) ? 'isRel' : '';
-     $classes_array[] = (!empty($scope['background_color'])) ? $scope['background_color'] : '';
-     $classes_array[] = (!empty($scope['border_color'])) ? $scope['border_color'] : '';
-     $classes_array[] = (!empty($scope['background_img_opacity'])) ? $scope['background_img_opacity'] : '';
-     $classes_array[] = (!empty($scope['scope_paddings']['scope_padding_top'])) ? $scope['scope_paddings']['scope_padding_top'] : '';
-     $classes_array[] = (!empty($scope['scope_paddings']['scope_padding_bottom'])) ? $scope['scope_paddings']['scope_padding_bottom'] : '';
-     $classes_array[] = (!empty($scope['scope_margins']['scope_margin_top'])) ?  $scope['scope_margins']['scope_margin_top'] : '';
-     $classes_array[] = (!empty($scope['scope_margins']['scope_margin_bottom'])) ? $scope['scope_margins']['scope_margin_bottom'] : '';
-     $display['section_divider'] = (!empty($scope['section_divider'])) ? $scope['section_divider'] : '';
+    $display['gridContainer'] = (empty($scope['display_fullwidth'])) ? 'grid-container' : '';
+    $display['background_img'] = (!empty($scope['background_img'])) ? $scope['background_img'] : '';
+    $classes_array[] = (!empty($display['background_img'])) ? 'isRel' : '';
+    $classes_array[] = (!empty($scope['background_color'])) ? $scope['background_color'] : '';
+    $classes_array[] = (!empty($scope['border_color'])) ? $scope['border_color'] : '';
+    $classes_array[] = (!empty($scope['background_img_opacity'])) ? $scope['background_img_opacity'] : '';
+    $classes_array[] = (!empty($scope['scope_paddings']['scope_padding_top'])) ? $scope['scope_paddings']['scope_padding_top'] : '';
+    $classes_array[] = (!empty($scope['scope_paddings']['scope_padding_bottom'])) ? $scope['scope_paddings']['scope_padding_bottom'] : '';
+    $classes_array[] = (!empty($scope['scope_margins']['scope_margin_top'])) ?  $scope['scope_margins']['scope_margin_top'] : '';
+    $classes_array[] = (!empty($scope['scope_margins']['scope_margin_bottom'])) ? $scope['scope_margins']['scope_margin_bottom'] : '';
+    $display['section_divider'] = (!empty($scope['section_divider'])) ? $scope['section_divider'] : '';
 
-     // On transforme le tableau en une chaine de caractères
-     $display['classes'] = implode(' ', $classes_array);
+    // On transforme le tableau en une chaine de caractères
+    $display['classes'] = implode(' ', $classes_array);
 
-     return $display;
- }
+    return $display;
+}
 
 /**
  *
@@ -368,32 +368,32 @@ function getManualFocus_data($layout)
 function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array())
 {
 
-    // On définit certains arguments par défaut pour la requête
+// On définit certains arguments par défaut pour la requête
     $default_args = [
-        'size' => -1,
-        'operator' => 'IN',
-        'relation' => 'OR',
-        'post_mime_type' => 'image' // Could be image/gif for gif only, video, video/mp4, application, application.pdf, ...
-    ];
+    'size' => -1,
+    'operator' => 'IN',
+    'relation' => 'OR',
+    'post_mime_type' => 'image' // Could be image/gif for gif only, video, video/mp4, application, application.pdf, ...
+];
     $query_args = array_merge($default_args, $query_args);
 
     // On créé la requête
     $get_attachments = [
-        'post_type'      => 'attachment',
-        'post_status' => 'inherit',
-        'post_mime_type' => $query_args['post_mime_type'],
-        'post_per_page' => $query_args['size'],
-        'nopaging' => true,
-        'tax_query' => array(
-            array(
-                'taxonomy' => $taxonomy,
-                'terms' => $terms,
-                'field' => 'taxonomy_term_id',
-                'relation' => $query_args['relation'],
-                'operator' => $query_args['operator']
-            )
+    'post_type'      => 'attachment',
+    'post_status' => 'inherit',
+    'post_mime_type' => $query_args['post_mime_type'],
+    'post_per_page' => $query_args['size'],
+    'nopaging' => true,
+    'tax_query' => array(
+        array(
+            'taxonomy' => $taxonomy,
+            'terms' => $terms,
+            'field' => 'taxonomy_term_id',
+            'relation' => $query_args['relation'],
+            'operator' => $query_args['operator']
         )
-    ];
+    )
+];
 
     $attachments = new WP_Query($get_attachments);
     $acf_attachements = [];
@@ -417,33 +417,39 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
  *
  */
 
- function nestedGridsComponents($scope, $gridTplField, $uniqIid_prefix = '')
- {
-     $woodyComponents = Woody::getTwigsPaths();
+function nestedGridsComponents($scope, $gridTplField, $uniqIid_prefix = '')
+{
+    $woodyComponents = wp_cache_get('woody_components');
+    if (empty($woodyComponents)) {
+        $woodyComponents = Woody::getComponents();
+        wp_cache_set('woody_components', $woodyComponents);
+    }
 
-     foreach ($scope as $key => $grid) {
-         $grid_content = [];
-         if (!empty($uniqIid_prefix) && is_numeric($key)) {
-             $scope[$key]['el_id'] = $uniqIid_prefix . '-' . uniqid();
-         }
+    $woodyTwigsPaths = Woody::getTwigsPaths($woodyComponents);
 
-         // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
-         if (!empty($grid['light_section_content'])) {
-             foreach ($grid['light_section_content'] as $layout) {
-                 $grid_content['items'][] = Timber::compile($woodyComponents[$layout['woody_tpl']], $layout);
-             }
-             // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
-             $scope[$key]['light_section_content'] = Timber::compile($woodyComponents[$grid[$gridTplField]], $grid_content);
-         }
-     }
-     if (!empty($uniqIid_prefix)) {
-         $scope['group_id'] = $uniqIid_prefix . '-' . uniqid();
-     }
+    foreach ($scope as $key => $grid) {
+        $grid_content = [];
+        if (!empty($uniqIid_prefix) && is_numeric($key)) {
+            $scope[$key]['el_id'] = $uniqIid_prefix . '-' . uniqid();
+        }
 
-     return $scope;
- }
+        // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
+        if (!empty($grid['light_section_content'])) {
+            foreach ($grid['light_section_content'] as $layout) {
+                $grid_content['items'][] = Timber::compile($woodyTwigsPaths[$layout['woody_tpl']], $layout);
+            }
+            // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
+            $scope[$key]['light_section_content'] = Timber::compile($woodyTwigsPaths[$grid[$gridTplField]], $grid_content);
+        }
+    }
+    if (!empty($uniqIid_prefix)) {
+        $scope['group_id'] = $uniqIid_prefix . '-' . uniqid();
+    }
 
- /**
+    return $scope;
+}
+
+/**
  *
  * Nom : isWoodyInstagram
  * Auteur : Benoit Bouchaud
