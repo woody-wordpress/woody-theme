@@ -145,9 +145,10 @@ class WoodyTheme_ACF
 
             // Get terms for each taxonomy and push them in $terms
             $tax_terms = get_terms(array(
-                    'taxonomy' => $taxonomy,
-                    'hide_empty' => false,
-                ));
+                'taxonomy' => $taxonomy,
+                'hide_empty' => false,
+            ));
+
             foreach ($tax_terms as $key => $term) {
                 if ($term->name == 'Uncategorized') {
                     continue;

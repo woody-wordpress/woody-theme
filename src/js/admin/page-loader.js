@@ -1,3 +1,3 @@
-import $ from 'jquery';
+// import $ from 'jquery';
 
-$('body.wp-admin').addClass('windowReady');
+// $('body.wp-admin').addClass('windowReady');
