@@ -34,7 +34,6 @@ class WoodyTheme_Plugins_Activation
             'wp-deferred-javascripts/wp-deferred-javascripts.php',
             // 'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
             'advanced-cron-manager/advanced-cron-manager.php',
-            'acf-repeater-flexible-content-collapser/acf-repeater-flexible-content-collapser.php',
             'redirection/redirection.php',
             'permalink-manager-pro/permalink-manager.php',
             'wordpress-seo/wp-seo.php',
@@ -55,6 +54,7 @@ class WoodyTheme_Plugins_Activation
         ];
 
         $this->deactivate_plugins = [
+            'acf-repeater-flexible-content-collapser/acf-repeater-flexible-content-collapser.php',
             'debug-bar/debug-bar.php',
             'debug-bar-timber/debug-bar-timber.php',
             'kint-debugger/kint-debugger.php',
