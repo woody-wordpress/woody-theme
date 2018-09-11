@@ -195,19 +195,28 @@ function getTouristicSheetPreview($sheet_id, $sheet_wp)
         $sheet_unformated = $sheet_data['object'];
 
         $data = [
-        'title' => (!empty($sheet_formated['businessName'])) ? $sheet_formated['businessName'] : '',
-        'subtitle' => (!empty($sheet_unformated['libelleBordereau'])) ? $sheet_unformated['libelleBordereau'] : '',
-        'description' => (!empty($sheet_formated['description'])) ? $sheet_formated['description'] : '',
-        'locality' => (!empty($sheet_formated['locality'])) ? $sheet_formated['locality'] : '',
-        'img' => (!empty($sheet_formated['firstImage']['list_item'])) ? $sheet_formated['firstImage']['list_item']['manual'] : '',
+            'title' => (!empty($sheet_formated['businessName'])) ? $sheet_formated['businessName'] : '',
+            'sheet_type' => (!empty($sheet_unformated['data']['libelleBordereau'])) ? $sheet_unformated['data']['libelleBordereau'] : '',
+            'description' => (!empty($sheet_formated['description'])) ? $sheet_formated['description'] : '',
+            'locality' => (!empty($sheet_formated['locality'])) ? $sheet_formated['locality'] : '',
+            'img' => (!empty($sheet_formated['firstImage']['list_item'])) ? $sheet_formated['firstImage']['list_item']['manual'] : '',
         ];
 
         $data['location'] = [];
         $data['location']['lat'] = (!empty($sheet_formated['geolocations'])) ? $sheet_formated['geolocations']['latitude'] : '';
-        $data['location']['lat'] = (!empty($sheet_formated['geolocations'])) ? $sheet_formated['geolocations']['longitude'] : '';
+        $data['location']['lng'] = (!empty($sheet_formated['geolocations'])) ? $sheet_formated['geolocations']['longitude'] : '';
+
         $data['link']['url'] = (!empty($sheet_wp['content_selection']->guid)) ? $sheet_wp['content_selection']->guid : '';
 
+        if ($sheet_formated['bordereau'] === 'HOT') {
+            $rating = [];
+            for ($i=0; $i <= $sheet_formated['labelRatings'][0]['repeated']; $i++) {
+                $rating[] = '<span class="wicon"><span>';
+            }
+            $data['rating'] = implode('', $rating);
+        }
 
+        \PC::debug($data['rating'], 'Rating');
         \PC::debug($sheet_formated, 'Fiche formatée');
     }
 
