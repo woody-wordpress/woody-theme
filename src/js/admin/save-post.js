@@ -1,27 +1,29 @@
 import $ from 'jquery';
 
-var $button = $('#publishing-action');
+$('form#post').each(function() {
+    var $button = $('input#publish[value="Mettre à jour"]');
+    $button.addClass('woody-update');
 
-$button.parents('form').submit(function() {
-    var $input = $button.find('input.button');
-    var $spinner = $button.find('.spinner');
+    $button.parents('form').submit(function(e) {
+        var $spinner = $button.siblings('.spinner');
 
-    $input.addClass('disabled');
-    $spinner.addClass('is-active');
-    $('#hiddenaction').attr('value', 'editajaxpost');
+        $button.addClass('disabled');
+        $spinner.addClass('is-active');
+        $('#hiddenaction').attr('value', 'editajaxpost');
 
-    $.ajax({
-        type: "POST",
-        data: $(this).serialize(),
-        url: "post.php",
-        success: function(data) {
-            $input.removeClass('disabled');
-            $spinner.removeClass('is-active');
-        },
-        error: function() {
-            alert('error')
-        }
+        $.ajax({
+            type: "POST",
+            data: $(this).serialize(),
+            url: "post.php",
+            success: function(data) {
+                $button.removeClass('disabled');
+                $spinner.removeClass('is-active');
+            },
+            error: function() {
+                alert('error')
+            }
+        });
+
+        e.preventDefault();
     });
-
-    return false;
 });
