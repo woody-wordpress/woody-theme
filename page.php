@@ -183,7 +183,6 @@ if ($context['page_type'] === 'playlist_tourism') {
                         case 'gallery':
                         if (!empty($layout['gallery_items'])) {
                             foreach ($layout['gallery_items'] as $key => $media_item) {
-                                // On ajoute une entrée "gallery_items" pour être compatible avec le tpl woody
                                 $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
                             }
                             $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
