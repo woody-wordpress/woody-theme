@@ -188,37 +188,40 @@ function getTouristicSheetPreview($sheet_id, $sheet_wp)
 {
     $data = [];
     //TODO: remplacer la langue 'fr' par la variable lang du post
-    $sheet_data = apply_filters('wp_woody_hawwwai_sheet_render', $sheet_id, 'fr', array(), 'json');
+    $sheet_data = apply_filters('wp_woody_hawwwai_sheet_render', $sheet_id, 'fr', array(), 'json', 'item');
+    if (!empty($sheet_data['items'])) {
+        foreach ($sheet_data['items'] as $key => $item) {
+            $data = [
+                'title' => (!empty($item['title'])) ? $item['title'] : '',
+                'sheet_type' => (!empty($item['bordereau'])) ? $item['bordereau'] : '',
+                'description' => (!empty($item['desc'])) ? $item['desc'] : '',
+                'locality' => (!empty($item['town'])) ? $item['town'] : '',
+                'img' => [
+                    'resizer' => true,
+                    'url' => (!empty($item['img']['url'])) ? $item['img']['url']['manual'] : '',
+                    'alt' => (!empty($item['img']['alt'])) ? $item['img']['alt'] : '',
+                    'title' => (!empty($item['img']['title'])) ? $item['img']['title'] : ''
+                ],
+                'link' =>[
+                    'url' => (!empty($sheet_wp['content_selection']->guid)) ? $sheet_wp['content_selection']->guid : '',
+                ]
+            ];
 
-    if (!empty($sheet_data) && !empty($sheet_data['formated_object'])) {
-        $sheet_formated = $sheet_data['formated_object'];
-        $sheet_unformated = $sheet_data['object'];
+            $data['location'] = [];
+            $data['location']['lat'] = (!empty($item['gps'])) ? $item['gps']['latitude'] : '';
+            $data['location']['lng'] = (!empty($item['gps'])) ? $item['gps']['longitude'] : '';
 
-        $data = [
-            'title' => (!empty($sheet_formated['businessName'])) ? $sheet_formated['businessName'] : '',
-            'sheet_type' => (!empty($sheet_unformated['data']['libelleBordereau'])) ? $sheet_unformated['data']['libelleBordereau'] : '',
-            'description' => (!empty($sheet_formated['description'])) ? $sheet_formated['description'] : '',
-            'locality' => (!empty($sheet_formated['locality'])) ? $sheet_formated['locality'] : '',
-            'img' => (!empty($sheet_formated['firstImage']['list_item'])) ? $sheet_formated['firstImage']['list_item']['manual'] : '',
-        ];
-
-        $data['location'] = [];
-        $data['location']['lat'] = (!empty($sheet_formated['geolocations'])) ? $sheet_formated['geolocations']['latitude'] : '';
-        $data['location']['lng'] = (!empty($sheet_formated['geolocations'])) ? $sheet_formated['geolocations']['longitude'] : '';
-
-        $data['link']['url'] = (!empty($sheet_wp['content_selection']->guid)) ? $sheet_wp['content_selection']->guid : '';
-
-        if ($sheet_formated['bordereau'] === 'HOT') {
-            $rating = [];
-            for ($i=0; $i <= $sheet_formated['labelRatings'][0]['repeated']; $i++) {
-                $rating[] = '<span class="wicon"><span>';
+            if ($item['bordereau'] === 'HOT' or $item['bordereau'] == 'HPA') {
+                $rating = [];
+                for ($i=0; $i <= $item['ratings'][0]['value']; $i++) {
+                    $rating[] = '<span class="wicon"><span>';
+                }
+                $data['rating'] = implode('', $rating);
             }
-            $data['rating'] = implode('', $rating);
         }
-
-        \PC::debug($data['rating'], 'Rating');
-        \PC::debug($sheet_formated, 'Fiche formatée');
     }
+
+    \PC::debug($sheet_data, 'Item fiche');
 
     return $data;
 }
