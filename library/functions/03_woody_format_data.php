@@ -195,7 +195,7 @@ function getTouristicSheetPreview($sheet_id, $sheet_wp)
                 'title' => (!empty($item['title'])) ? $item['title'] : '',
                 'sheet_type' => (!empty($item['bordereau'])) ? $item['bordereau'] : '',
                 'description' => (!empty($item['desc'])) ? $item['desc'] : '',
-                'locality' => (!empty($item['town'])) ? $item['town'] : '',
+                'town' => (!empty($item['town'])) ? $item['town'] : '',
                 'img' => [
                     'resizer' => true,
                     'url' => (!empty($item['img']['url'])) ? $item['img']['url']['manual'] : '',
@@ -214,7 +214,7 @@ function getTouristicSheetPreview($sheet_id, $sheet_wp)
             if ($item['bordereau'] === 'HOT' or $item['bordereau'] == 'HPA') {
                 $rating = [];
                 for ($i=0; $i <= $item['ratings'][0]['value']; $i++) {
-                    $rating[] = '<span class="wicon"><span>';
+                    $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
                 }
                 $data['rating'] = implode('', $rating);
             }
