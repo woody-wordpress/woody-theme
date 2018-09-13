@@ -1,29 +1,30 @@
-// .wp-admin {
-//     &:after {
-//         position: fixed;
-//         top: 0;
-//         left: 0;
-//         width: 100vw;
-//         height: 100vh;
-//         background-color: #f5f5f5;
-//         background-image: url('../img/wp-admin/material-loader.gif');
-//         background-repeat: no-repeat;
-//         background-size: 266px 200px;
-//         background-position: center center;
-//         display: flex;
-//         align-items: center;
-//         justify-content: center;
-//         color: #0073aa;
-//         z-index: 10000;
-//         content: '';
-//         transition: .2s ease-out;
-//     }
-//     &.windowReady {
-//         &:after {
-//             opacity: 0;
-//             transform: scaleY(0);
-//             pointer-events: none;
-//             transform-origin: center top;
-//         }
-//     }
-// }
+.wp-admin {
+    &:after {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(#f1f1f1, 0.9);
+        //background-image: url('../img/wp-admin/loader.png');
+        background-repeat: no-repeat;
+        background-size: 266px 200px;
+        background-position: center center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #0073aa;
+        z-index: 10000;
+        content: '';
+        transition: .2s ease-out;
+    }
+
+    &.windowReady {
+        &:after {
+            opacity: 0;
+            transform: scaleY(0);
+            pointer-events: none;
+            transform-origin: center top;
+        }
+    }
+}
