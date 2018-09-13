@@ -28,11 +28,9 @@ class WoodyTheme_Plugins_Activation
         $this->activate_plugins = [
             'advanced-custom-fields-pro/acf.php',
             'timber-library/timber.php',
-            'bea-media-analytics/bea-media-analytics.php',
             'bea-sanitize-filename/bea-sanitize-filename.php',
             'minify-html-markup/minify-html.php',
             'wp-deferred-javascripts/wp-deferred-javascripts.php',
-            // 'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
             'advanced-cron-manager/advanced-cron-manager.php',
             'redirection/redirection.php',
             'permalink-manager-pro/permalink-manager.php',
@@ -43,17 +41,19 @@ class WoodyTheme_Plugins_Activation
             'members/members.php',
             'woody-plugin/woody.php',
             'single-sign-on-client/wposso.php',
-            'regenerate-thumbnails/regenerate-thumbnails.php',
             'ssl-insecure-content-fixer/ssl-insecure-content-fixer.php',
             'wp-optimize/wp-optimize.php',
-            'query-monitor/query-monitor.php',
         ];
 
         $this->dev_plugins = [
+            'query-monitor/query-monitor.php',
             'wp-php-console/wp-php-console.php',
         ];
 
         $this->deactivate_plugins = [
+            'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
+            'bea-media-analytics/bea-media-analytics.php',
+            'regenerate-thumbnails/regenerate-thumbnails.php',
             'acf-repeater-flexible-content-collapser/acf-repeater-flexible-content-collapser.php',
             'debug-bar/debug-bar.php',
             'debug-bar-timber/debug-bar-timber.php',
