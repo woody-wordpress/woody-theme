@@ -9,14 +9,7 @@
 
 $context = Timber::get_context();
 $context['post'] = new TimberPost();
-
-$woodyComponents = wp_cache_get('woody_components');
-if (empty($woodyComponents)) {
-    $woodyComponents = Woody::getComponents();
-    wp_cache_set('woody_components', $woodyComponents);
-}
-
-$context['woody_components'] = Woody::getTwigsPaths($woodyComponents);
+$context['woody_components'] = getWoodyTwigPaths();
 // PC::debug(get_class_methods(TimberPost), 'TwigMethods');
 
 $context['site_config'] = [];
@@ -150,65 +143,47 @@ if ($context['page_type'] === 'playlist_tourism') {
                     switch ($layout['acf_fc_layout']) {
                         case 'manual_focus':
                         case 'auto_focus':
-                            if ($layout['acf_fc_layout'] == 'manual_focus') {
-                                $the_items = getManualFocus_data($layout);
-                            } else {
-                                $the_items = getAutoFocus_data($context['post'], $layout);
-                            }
-                            $the_items['focus_no_padding'] = $layout['focus_no_padding'];
-                            $the_items['block_titles'] = getFocusBlockTitles($layout);
-                            $the_items['display_button'] = $layout['display_button'];
-
-                            $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_items);
-                        break;
-                        case 'playlist_bloc':
-                            $playlist_conf_id = $layout['playlist_conf_id'];
-                            $components['items'][] = apply_filters('wp_hawwwai_sit_playlist_render', $playlist_conf_id, 'fr');
-                        break;
-                        case 'call_to_action':
-                            // On créé un id unique pour la modal si l'option pop-in est sélectionnée
-                            if (!empty($layout['cta_button_group']['add_modal'])) {
-                                $layout['modal_id'] = 'cta-' . uniqid();
-                            }
-                            $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
-                        break;
-                        case 'tabs_group':
-                            $layout['tabs'] = nestedGridsComponents($layout['tabs'], 'tab_woody_tpl', 'tabs');
-                            $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
-                        break;
-                        case 'slides_group':
-                            $layout['slides'] = nestedGridsComponents($layout['slides'], 'slide_woody_tpl');
-                            $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
-                        break;
-                        case 'gallery':
-                        if (!empty($layout['gallery_items'])) {
-                            foreach ($layout['gallery_items'] as $key => $media_item) {
-                                $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
-                            }
-                            $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
-                        }
-                        break;
-                        case 'socialwall':
-                            $layout['gallery_items'] = [];
-                            if ($layout['socialwall_type'] == 'manual') {
-                                foreach ($layout['socialwall_manual'] as $key => $media_item) {
-                                    // On ajoute une entrée "gallery_items" pour être compatible avec le tpl woody
-                                    $layout['gallery_items'][] = $media_item;
-                                    $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
-                                }
-                            } elseif ($layout['socialwall_type'] == 'auto') {
-
-                                // On récupère les images en fonction des termes sélectionnés
-                                $layout['gallery_items'] = (!empty($layout['socialwall_auto'])) ? getAttachmentsByTerms('attachment_hashtags', $layout['socialwall_auto']) : '';
-                                if (!empty($layout['gallery_items'])) {
-                                    foreach ($layout['gallery_items'] as $key => $media_item) {
-                                        $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
-                                    }
-                                }
-                            }
-                            $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                            $components['items'][] = formatFocusesData($layout, $context['post'], $context['woody_components']);
                         break;
                         default:
+                            if ($layout['acf_fc_layout'] == 'playlist_bloc') {
+                                $playlist_conf_id = $layout['playlist_conf_id'];
+                            }
+                            if ($layout['acf_fc_layout'] == 'call_to_action') {
+                                if (!empty($layout['cta_button_group']['add_modal'])) {
+                                    $layout['modal_id'] = 'cta-' . uniqid();
+                                }
+                            }
+                            if ($layout['acf_fc_layout'] == 'tabs_group') {
+                                $layout['tabs'] = nestedGridsComponents($layout['tabs'], 'tab_woody_tpl', 'tabs');
+                            }
+                             if ($layout['acf_fc_layout'] == 'slides_group') {
+                                 $layout['slides'] = nestedGridsComponents($layout['slides'], 'slide_woody_tpl');
+                             }
+                             if ($layout['acf_fc_layout'] == 'gallery') {
+                                 foreach ($layout['gallery_items'] as $key => $media_item) {
+                                     $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
+                                 }
+                             }
+                             if ($layout['acf_fc_layout'] == 'socialwall') {
+                                 $layout['gallery_items'] = [];
+                                 if ($layout['socialwall_type'] == 'manual') {
+                                     foreach ($layout['socialwall_manual'] as $key => $media_item) {
+                                         // On ajoute une entrée "gallery_items" pour être compatible avec le tpl woody
+                                         $layout['gallery_items'][] = $media_item;
+                                         $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
+                                     }
+                                 } elseif ($layout['socialwall_type'] == 'auto') {
+                                     // On récupère les images en fonction des termes sélectionnés
+                                     $layout['gallery_items'] = (!empty($layout['socialwall_auto'])) ? getAttachmentsByTerms('attachment_hashtags', $layout['socialwall_auto']) : '';
+                                     if (!empty($layout['gallery_items'])) {
+                                         foreach ($layout['gallery_items'] as $key => $media_item) {
+                                             $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
+                                         }
+                                     }
+                                 }
+                             }
+
                             $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                     }
                 }
