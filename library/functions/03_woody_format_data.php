@@ -431,9 +431,8 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
 
 function nestedGridsComponents($scope, $gridTplField, $uniqIid_prefix = '')
 {
-    $woodyTwigsPaths = getWoodyTwigPaths();
     global $post;
-    \PC::debug($post->ID);
+    $woodyTwigsPaths = getWoodyTwigPaths();
     foreach ($scope as $key => $grid) {
         $grid_content = [];
         if (!empty($uniqIid_prefix) && is_numeric($key)) {

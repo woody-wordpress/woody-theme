@@ -165,7 +165,7 @@ if ($context['page_type'] === 'playlist_tourism') {
                                      $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
                                  }
                              }
-                             if ($layout['acf_fc_layout'] == 'social_wall') {
+                             if ($layout['acf_fc_layout'] == 'socialwall') {
                                  $layout['gallery_items'] = [];
                                  if ($layout['socialwall_type'] == 'manual') {
                                      foreach ($layout['socialwall_manual'] as $key => $media_item) {
