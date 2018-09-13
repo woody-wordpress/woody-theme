@@ -10,46 +10,12 @@
 $context = Timber::get_context();
 $context['post'] = new TimberPost();
 
-$woodyComponents = wp_cache_get('woody_components');
-if (empty($woodyComponents)) {
-    $woodyComponents = Woody::getComponents();
-    wp_cache_set('woody_components', $woodyComponents);
-}
-
-$context['woody_components'] = Woody::getTwigsPaths($woodyComponents);
-
-// rcd(get_class_methods(TimberPost), true);
-
-/** ****************************
- * Compilation de l'en tête de page
- **************************** **/
-// $page_teaser = [];
-// $page_teaser = getAcfGroupFields('group_5b2bbb46507bf');
-// if (!empty($page_teaser)) {
-//     if (!empty($page_teaser['page_teaser_display_title'])) {
-//         $page_teaser['page_teaser_title'] = $context['post']->post_title;
-//     }
-//     $page_teaser['classes'] = $page_teaser['background_img_opacity'] . ' ' . $page_teaser['background_color'];
-//     if (!empty($page_teaser['background_img'])) {
-//         $page_teaser['classes'] = $page_teaser['classes'] . ' isRel';
-//     }
-//     $page_teaser['breadcrumb'] = yoast_breadcrumb('<div class="breadcrumb-wrapper padd-top-sm padd-bottom-sm">', '</div>', false);
-
-//     $context['page_teaser'] = Timber::compile($context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
+// $woodyComponents = wp_cache_get('woody_components');
+// if (empty($woodyComponents)) {
+//     $woodyComponents = Woody::getComponents();
+//     wp_cache_set('woody_components', $woodyComponents);
 // }
-
-/** ****************************
- * Compilation du visuel et accroche
- **************************** **/
-// $page_hero = [];
-// $page_hero = getAcfGroupFields('group_5b052bbee40a4');
-// if (!empty($page_hero)) {
-//     if (empty($page_teaser['page_teaser_display_title'])) {
-//         $page_hero['title_as_h1'] = true;
-//     }
-//     $context['page_hero'] = Timber::compile($context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
-// }
-
+// $context['woody_components'] = Woody::getTwigsPaths($woodyComponents);
 
 $params = [];
 

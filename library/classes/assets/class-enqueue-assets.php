@@ -8,8 +8,13 @@
 
 class WoodyTheme_Enqueue_Assets
 {
+    protected $mapKeys;
+    protected $siteConfig;
+
     public function __construct()
     {
+        $this->mapKeys = getMapKeys(); // defined in functions touristic_maps
+        $this->siteConfig = $this->getSiteConfig();
         $this->registerHooks();
     }
 
@@ -22,10 +27,79 @@ class WoodyTheme_Enqueue_Assets
 
         // Si vous utilisez HTML5, wdjs_use_html5 est un filtre qui enlève l’attribut type="text/javascript"
         add_filter('wdjs_use_html5', '__return_true');
+
+        // hack for googlemap script enqueuing
+        add_filter('clean_url', array($this, 'so_handle_038'), 99, 3);
+    }
+
+    // TODO move elsewhere ?
+    protected function getSiteConfig()
+    {
+        // Added global vars
+        $siteConfig = [];
+        $siteConfig['site_key'] = WP_SITE_KEY;
+        $credentials = get_option('woody_credentials');
+        if (!empty($credentials['login']) && !empty($credentials['password'])) {
+            $siteConfig['login'] = $credentials['login'];
+            $siteConfig['password'] = $credentials['password'];
+        }
+        $siteConfig['mapProviderKeys'] = $this->mapKeys;
+        return $siteConfig;
+    }
+
+
+    protected function getGlobalScriptString()
+    {
+        return $globalScript = "function(){".
+            // global vars
+            "window.useLeafletLibrary = true;".
+            "window.apirenderlistEnabled = true;".
+
+            // inject siteConfig
+            "window.siteConfig = ". json_encode($this->siteConfig) .";".
+
+            // init DrupalAngularConfig if doesn't exist
+            "window.DrupalAngularConfig = window.DrupalAngularConfig || {};".
+            // fill DrupalAngularConfig (some properties may already exists)
+            "window.DrupalAngularConfig.apiAccount = window.DrupalAngularConfig.apiAccount || {};".
+
+            "window.DrupalAngularConfig.apiAccount.login = true;".
+            "window.DrupalAngularConfig.apiAccount.login = ". json_encode($this->siteConfig['login']) .";".
+            "window.DrupalAngularConfig.apiAccount.password = ". json_encode($this->siteConfig['password']) .";".
+            // inject mapKeys in DrupalAngularAppConfig
+            "window.DrupalAngularConfig.mapProviderKeys = ". json_encode($this->mapKeys) .";".
+
+            // "console.warn(window.DrupalAngularConfig);".
+        "}";
+    }
+
+    // print inline scripts after specified scripts (labJS only)
+    public function labjsAfterMyScript($wait, $handle)
+    {
+        // after jQuery => add globalScript
+        if ('jquery' === $handle) {
+            $wait = $this->getGlobalScriptString();
+        }
+
+        // after ngScripts => bootstrap angular app
+        elseif ('ng_scripts' === $handle) {
+            $wait = "function(){angular.bootstrap(document, ['drupalAngularApp']);}";
+        }
+        return $wait;
     }
 
     public function enqueueLibraries()
     {
+        if (! function_exists('is_plugin_active')) {
+            require_once(ABSPATH . '/wp-admin/includes/plugin.php');
+        }
+        //plugin deferred labJS is activated
+        if (is_plugin_active('wp-deferred-javascripts/wp-deferred-javascripts.php')) {
+            add_action('wdjs_deferred_script_wait', array($this, 'labjsAfterMyScript'), 10, 2);
+        } else {
+            wp_add_inline_script('jquery', $this->getGlobalScriptString(), 'after') . ';';
+            wp_add_inline_script('ng_scripts', "function(){angular.bootstrap(document, ['drupalAngularApp']);}", 'after') . ';';
+        }
 
         // Get page type
         global $post;
@@ -44,9 +118,12 @@ class WoodyTheme_Enqueue_Assets
 
         // define apiurl according to WP_ENV
         $apirender_base_uri = 'https://api.tourism-system.com/render';
+        $jsModeSuffix = 'min';
         switch (WP_ENV) {
             case 'dev':
-                // $apirender_base_uri = 'http://127.0.0.1:8000'; // use localhost apirender (gulp serve)
+                $jsModeSuffix = 'debug';
+                // \PC::Debug($js_dependencies_rcmap);
+                $apirender_base_uri = 'http://127.0.0.1:8000'; // use localhost apirender (gulp serve)
                 // $apirender_base_uri = 'https://api.tourism-system.rc-preprod.com/render';
                 break;
             case 'preprod':
@@ -60,10 +137,7 @@ class WoodyTheme_Enqueue_Assets
         ];
 
         // get map keys
-        $map_keys = getMapKeys();
-        if ($isTouristicSheet) {
-            $js_dependencies_rcmap[] = 'tangram'; // need to load tangram always for now (bug in vendor angular)
-        }
+        $map_keys = $this->mapKeys;
         if (isset($map_keys['otmKey'])) {
             $js_dependencies_rcmap[] = 'tangram';
         }
@@ -71,16 +145,11 @@ class WoodyTheme_Enqueue_Assets
             $js_dependencies_rcmap[] = 'gg_maps';
         }
 
-        // TODO print mapkeys in every page (DrupalAngularConfig & siteConfig)
-        // wp_add_inline_script('leaflet', 'var helloworld = ' . wp_json_encode($map_keys) . ';', 'after');
-
-        if (WP_ENV === 'dev' && ($isTouristicPlaylist || $isTouristicSheet)) {
-            // $map_keys['otmKey'] = 'raccourci';
-            // $js_dependencies_rcmap[] = 'tangram';
-            // $map_keys['gmKey'] = 'AIzaSyCfQ5H4V8Q7YqtgxaeHxhIqdq42x5QbyEs';
-            // $js_dependencies_rcmap[] = 'gg_maps';
-            \PC::Debug($js_dependencies_rcmap);
-            \PC::Debug($map_keys);
+        // SHEET: need to load tangram always for now (bug in vendor angular)
+        if ($isTouristicSheet) {
+            if (!in_array('tangram', $js_dependencies_rcmap)) {
+                array_push($js_dependencies_rcmap, 'tangram');
+            }
         }
 
         // CDN hosted jQuery placed in the header, as some plugins require that jQuery is loaded in the header.
@@ -99,17 +168,17 @@ class WoodyTheme_Enqueue_Assets
 
         // Touristic maps libraries
         wp_enqueue_script('leaflet', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet-src.min.js', array(), '', true);
-        if (isset($map_keys['otmKey'])) {
-            // need to load tangram always for now (bug in vendor angular) ↓
-        } // ↓
-        wp_enqueue_script('tangram', 'https://cdn.jsdelivr.net/npm/tangram@0.15.3/dist/tangram.min.js', array(), '', true);
+        if (isset($map_keys['otmKey']) || $isTouristicSheet) {
+            // need to load tangram always in TOURISTIC SHEET for now (bug in vendor angular) ↓
+            wp_enqueue_script('tangram', 'https://cdn.jsdelivr.net/npm/tangram@0.15.3/dist/tangram.min.js', array(), '', true);
+        }
 
         if (isset($map_keys['gmKey'])) {
-            wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?key='. $map_keys['gmKey'] .'&v=3.exp&libraries=geometry,places', array(), '', true);
+            wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?key='. $map_keys['gmKey'] .'&v=3.33&libraries=geometry,places', array(), '', true);
         } elseif ($isTouristicSheet) { // absolutely needed in angular
-            wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,places', array(), '', true);
+            wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?v=3.33&libraries=geometry,places', array(), '', true);
         }
-        wp_enqueue_script('universal-map', $apirender_base_uri.'/assets/scripts/raccourci/universal-map.debug.js', $js_dependencies_rcmap, '', true);
+        wp_enqueue_script('universal-map', $apirender_base_uri.'/assets/scripts/raccourci/universal-map.'. $jsModeSuffix .'.js', $js_dependencies_rcmap, '', true);
 
         // Playlist libraries
         if ($isTouristicPlaylist) {
@@ -127,30 +196,28 @@ class WoodyTheme_Enqueue_Assets
             wp_enqueue_script('moment', 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment-with-locales.min.js', array(), '', true);
             wp_enqueue_script('picker', 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.27/daterangepicker.min.js', array('bootstrap'), '', true);
             wp_enqueue_script('twigjs', 'https://cdnjs.cloudflare.com/ajax/libs/twig.js/0.8.9/twig.min.js', array(), '', true);
-            // https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.8/uuid.min.js
-            // wp_enqueue_script('lodash', 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.8.0/lodash.min.js', array(), '', true);
+            wp_enqueue_script('twigjs', 'https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.8/uuid.min.js', array(), '', true);
             wp_enqueue_script('lodash', 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js', array(), '', true);
             wp_enqueue_script('arrive', 'https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js', array('jquery'), '', true);
             wp_enqueue_script('sheet_item', $apirender_base_uri.'/assets/scripts/raccourci/sheet_item.min.js', array('jquery'), '', true);
 
             $js_dependencies__playlist = [
                 'bootstrap','match8','nouislider','wnumb','chosen','moment','picker','twigjs','lodash','arrive','sheet_item'];
-            wp_enqueue_script('playlist', $apirender_base_uri.'/assets/scripts/raccourci/playlist.debug.js', $js_dependencies__playlist, '', true);
+            wp_enqueue_script('playlist', $apirender_base_uri.'/assets/scripts/raccourci/playlist.'. $jsModeSuffix .'.js', $js_dependencies__playlist, '', true);
             $playlist_map_query = !empty($map_keys) ? '?'.http_build_query($map_keys) : '';
-            wp_enqueue_script('playlist_map', $apirender_base_uri.'/assets/scripts/raccourci/playlist-map.leaflet.debug.js'.$playlist_map_query, array_merge($js_dependencies_rcmap, array('playlist')), '', true);
+            wp_enqueue_script('playlist_map', $apirender_base_uri.'/assets/scripts/raccourci/playlist-map.leaflet.'. $jsModeSuffix .'.js'.$playlist_map_query, array_merge($js_dependencies_rcmap, array('playlist')), '', true);
         }
 
         // Sheet libraries
         elseif ($isTouristicSheet) {
-            wp_enqueue_script('jsapi', 'https://www.google.com/jsapi', array('gg_maps'), '', true);
-            // wp_enqueue_script('lodash', 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.8.0/lodash.min.js', array(), '', true);
-            wp_enqueue_script('lodash', 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js', array(), '', true);
             wp_enqueue_script('ng_vendor', $apirender_base_uri.'/assets/scripts/vendor.js', array(), '', true);
+            wp_enqueue_script('jsapi', 'https://www.google.com/jsapi', array(), '', true);
+            wp_enqueue_script('lodash', 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js', array(), '', true);
             wp_enqueue_script('ng_libs', $apirender_base_uri.'/assets/scripts/misclibs.js', array(), '', true);
             wp_enqueue_script('ng_app', $apirender_base_uri.'/assets/app.js', array(), '', true);
             wp_enqueue_script('ng_scripts', $apirender_base_uri.'/assets/scripts/scripts.js', array(), '', true);
             wp_enqueue_script('match8', 'https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js', array('jquery'), '', true);
-            wp_enqueue_script('sheet_item', $apirender_base_uri.'/assets/scripts/raccourci/sheet_item.min.js', array('match8'), '', true);
+            wp_enqueue_script('sheet_item', $apirender_base_uri.'/assets/scripts/raccourci/sheet_item.'. $jsModeSuffix .'.js', array('match8'), '', true);
         }
 
         // Add the comment-reply library on pages where it is necessary
@@ -195,14 +262,7 @@ class WoodyTheme_Enqueue_Assets
         wp_enqueue_script('admin-javascripts', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('js/admin.js'), $dependencies, wp_get_theme(get_template())->get('Version'), true);
 
         // Added global vars
-        $siteConfig = [];
-        $siteConfig['site_key'] = WP_SITE_KEY;
-        $credentials = get_option('woody_credentials');
-        if (!empty($credentials['login']) && !empty($credentials['password'])) {
-            $siteConfig['login'] = $credentials['login'];
-            $siteConfig['password'] = $credentials['password'];
-        }
-        wp_add_inline_script('admin-javascripts', 'var siteConfig = ' . json_encode($siteConfig), 'before') . ';';
+        wp_add_inline_script('admin-javascripts', 'var siteConfig = ' . json_encode($this->siteConfig), 'before') . ';';
 
         // Enqueue the main Stylesheet.
         wp_enqueue_style('admin-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/admin.css'), array(), wp_get_theme(get_template())->get('Version'), 'all');
@@ -221,5 +281,21 @@ class WoodyTheme_Enqueue_Assets
         }
 
         return $filename;
+    }
+
+    public function so_handle_038($url, $original_url, $_context)
+    {
+        // array of strings to search for & make sure url are printing as it should
+        $jsWithGetParams = [
+            'googleapis.com', // googlemap js needle
+            'assets/scripts/raccourci/playlist-map', // rc playlist-map js needle
+        ];
+        foreach ($jsWithGetParams as $key => $jsScriptNeedle) {
+            if (strstr($url, $jsScriptNeedle) !== false) {
+                $url = str_replace("&#038;", "&", $url); // or $url = $original_url
+            }
+        }
+
+        return $url;
     }
 }

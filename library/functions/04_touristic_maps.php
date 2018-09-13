@@ -3,6 +3,9 @@
 
 // TODO get same every call after first (save first result)
 // Create class ?
+
+// Get all Map Keys
+// DEV mode : otm key is always 'raccourci'
 function getMapKeys($encoded = false)
 {
     $map_keys = [];
@@ -20,8 +23,6 @@ function getMapKeys($encoded = false)
     if (is_array($ignkeys) && !empty($ignkeys)) {
         $map_keys['ignKey'] = shuffle($ignkeys)[0];
     }
-
-    // $map_keys['otmKey'] = 'test';
 
     return $encoded ? wp_json_encode($map_keys) : $map_keys;
 }
