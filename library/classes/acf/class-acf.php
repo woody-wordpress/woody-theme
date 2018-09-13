@@ -6,6 +6,7 @@
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
+use Symfony\Component\Finder\Finder;
 
 class WoodyTheme_ACF
 {
@@ -18,38 +19,31 @@ class WoodyTheme_ACF
 
     protected function registerHooks()
     {
-        // $this->acfUpdateSetting();
-
-        add_action('after_setup_theme', array($this, 'acfUpdateSetting'), 10, 3);
-
-        add_filter('plugin_action_links', array($this, 'disallowAcfDeactivation'), 10, 4);
+        add_filter('acf/settings/save_json', array($this,'acfJsonSave'));
+        add_filter('acf/settings/load_json', array($this,'acfJsonLoad'));
         add_filter('acf/load_field/type=radio', array($this, 'woodyTplAcfLoadField'));
         add_filter('acf/load_field/type=select', array($this, 'woodyIconLoadField'));
         add_filter('acf/load_field/name=focused_taxonomy_terms', array($this, 'focusedTaxonomyTermsLoadField'));
         add_filter('acf/location/rule_types', array($this, 'woodyAcfAddPageTypeLocationRule'));
         add_filter('acf/location/rule_values/page_type_and_children', array($this, 'woodyAcfAddPageTypeChoices'));
         add_filter('acf/location/rule_match/page_type_and_children', array($this, 'woodyAcfPageTypeMatch'), 10, 3);
-        // add_filter('acf/load_field/name=playlist_name', array($this, 'playlistNameLoadField'));
     }
 
-    public function acfUpdateSetting()
+    public function acfJsonSave($path)
     {
+        // Save ACF Json on Dev
         if (WP_ENV == 'dev') {
-            acf_update_setting('save_json', get_template_directory() . '/acf-json');
+            $path = get_template_directory() . '/acf-json';
         }
-        acf_append_setting('load_json', get_template_directory() . '/acf-json');
+        return $path;
     }
 
-    /**
-     * Benoit Bouchaud
-     * On bloque l'accès à la désactivation du plugin ACF
-     */
-    public function disallowAcfDeactivation($actions, $plugin_file, $plugin_data, $context)
+    public function acfJsonLoad($paths)
     {
-        if (array_key_exists('deactivate', $actions) and $plugin_file == self::ACF) {
-            unset($actions['deactivate']);
-        }
-        return $actions;
+        // remove original path (optional)
+        unset($paths[0]);
+        $paths[] = get_template_directory() . '/acf-json';
+        return $paths;
     }
 
     /**
