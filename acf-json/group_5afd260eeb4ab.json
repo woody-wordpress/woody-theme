@@ -2,8 +2,7 @@
     "key": "group_5afd260eeb4ab",
     "title": "Sections",
     "location": [
-        [
-            {
+        [{
                 "param": "post_type",
                 "operator": "==",
                 "value": "page"
@@ -23,927 +22,890 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1536232429,
-    "fields": [
-        {
-            "key": "field_5afd2c6916ecb",
-            "label": "Sections",
-            "name": "section",
-            "type": "repeater",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "hide-label",
-                "id": ""
+    "modified": 1536826694,
+    "fields": [{
+        "key": "field_5afd2c6916ecb",
+        "label": "Sections",
+        "name": "section",
+        "type": "repeater",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+            "width": "",
+            "class": "hide-label",
+            "id": ""
+        },
+        "collapsed": "field_5b0d1dc8907e7",
+        "min": 0,
+        "max": 0,
+        "layout": "block",
+        "button_label": "Ajouter une section",
+        "hide_collapse": 0,
+        "collapse_all_repeater": 1,
+        "btn-icon-only": 0,
+        "sub_fields": [{
+                "key": "field_5b0d1dc8907e7",
+                "label": "Titre administration",
+                "name": "bo_section_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "hide-label",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "Titre visible lorsque la section est refermée (uniquement pour le backoffice)",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
             },
-            "collapsed": "field_5b0d1dc8907e7",
-            "min": 0,
-            "max": 0,
-            "layout": "block",
-            "button_label": "Ajouter une section",
-            "hide_collapse": 0,
-            "collapse_all_repeater": 1,
-            "btn-icon-only": 0,
-            "sub_fields": [
-                {
-                    "key": "field_5b0d1dc8907e7",
-                    "label": "Titre administration",
-                    "name": "bo_section_title",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "hide-label",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "Titre visible lorsque la section est refermée (uniquement pour le backoffice)",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
+            {
+                "key": "field_5afd2fd8953bd",
+                "label": "Contenu",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
                 },
-                {
-                    "key": "field_5afd2fd8953bd",
-                    "label": "Contenu",
-                    "name": "",
-                    "type": "tab",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "placement": "top",
-                    "endpoint": 0
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5b043f0525968",
+                "label": "Contenu de la section",
+                "name": "section_content",
+                "type": "flexible_content",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "hide-label",
+                    "id": ""
                 },
-                {
-                    "key": "field_5b043f0525968",
-                    "label": "Contenu de la section",
-                    "name": "section_content",
-                    "type": "flexible_content",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "hide-label",
-                        "id": ""
-                    },
-                    "layouts": {
-                        "5b043f22b981d": {
-                            "key": "5b043f22b981d",
-                            "name": "quote",
+                "layouts": {
+                    "5b043f22b981d": {
+                        "key": "5b043f22b981d",
+                        "name": "quote",
+                        "label": "Citation",
+                        "display": "block",
+                        "sub_fields": [{
+                            "key": "field_5b043f2f25969",
                             "label": "Citation",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b043f2f25969",
-                                    "label": "Citation",
-                                    "name": "quote",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b042e516ef62"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "block",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
+                            "name": "quote",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b042e516ef62"
                             ],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b0d21eb9d80a": {
-                            "key": "5b0d21eb9d80a",
-                            "name": "manual_focus",
-                            "label": "Mise en avant (sélection manuelle)",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b0d22019d80b",
-                                    "label": "Sélection",
-                                    "name": "content_selection",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b0d1ed32a384"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
+                        "min": "",
+                        "max": ""
+                    },
+                    "5b0d21eb9d80a": {
+                        "key": "5b0d21eb9d80a",
+                        "name": "manual_focus",
+                        "label": "Mise en avant (sélection manuelle)",
+                        "display": "block",
+                        "sub_fields": [{
+                            "key": "field_5b0d22019d80b",
+                            "label": "Sélection",
+                            "name": "content_selection",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b0d1ed32a384"
                             ],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b27a7859ddea": {
-                            "key": "5b27a7859ddea",
-                            "name": "auto_focus",
-                            "label": "Mise en avant (sélection automatique)",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b27a7859ddeb",
-                                    "label": "Sélection",
-                                    "name": "content_selection",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b2788b48d04c"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "block",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
+                            "display": "seamless",
+                            "layout": "",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
+                        "min": "",
+                        "max": ""
+                    },
+                    "5b27a7859ddea": {
+                        "key": "5b27a7859ddea",
+                        "name": "auto_focus",
+                        "label": "Mise en avant (sélection automatique)",
+                        "display": "block",
+                        "sub_fields": [{
+                            "key": "field_5b27a7859ddeb",
+                            "label": "Sélection",
+                            "name": "content_selection",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b2788b48d04c"
                             ],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b04437946534": {
-                            "key": "5b04437946534",
-                            "name": "free_text",
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
+                        "min": "",
+                        "max": ""
+                    },
+                    "5b04437946534": {
+                        "key": "5b04437946534",
+                        "name": "free_text",
+                        "label": "Texte libre",
+                        "display": "block",
+                        "sub_fields": [{
+                            "key": "field_5b04438746535",
                             "label": "Texte libre",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b04438746535",
-                                    "label": "Texte libre",
-                                    "name": "free_text",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b042f5ad9ecc"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "block",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
+                            "name": "free_text",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b042f5ad9ecc"
                             ],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b0443c346536": {
-                            "key": "5b0443c346536",
-                            "name": "movie",
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
+                        "min": "",
+                        "max": ""
+                    },
+                    "5b0443c346536": {
+                        "key": "5b0443c346536",
+                        "name": "movie",
+                        "label": "Vidéo",
+                        "display": "block",
+                        "sub_fields": [{
+                            "key": "field_5b0443cd46537",
                             "label": "Vidéo",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b0443cd46537",
-                                    "label": "Vidéo",
-                                    "name": "movie",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b0430471a3d6"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "block",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
+                            "name": "movie",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b0430471a3d6"
                             ],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b0443f146538": {
-                            "key": "5b0443f146538",
-                            "name": "gallery",
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
+                        "min": "",
+                        "max": ""
+                    },
+                    "5b0443f146538": {
+                        "key": "5b0443f146538",
+                        "name": "gallery",
+                        "label": "Galerie photos",
+                        "display": "block",
+                        "sub_fields": [{
+                            "key": "field_5b0443ff46539",
                             "label": "Galerie photos",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b0443ff46539",
-                                    "label": "Galerie photos",
-                                    "name": "gallery",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b04314e0ec21"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "block",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
+                            "name": "gallery",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b04314e0ec21"
                             ],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b04444c4653c": {
-                            "key": "5b04444c4653c",
-                            "name": "accordion",
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
+                        "min": "",
+                        "max": ""
+                    },
+                    "5b04444c4653c": {
+                        "key": "5b04444c4653c",
+                        "name": "accordion",
+                        "label": "FAQ",
+                        "display": "block",
+                        "sub_fields": [{
+                            "key": "field_5b0444534653d",
                             "label": "FAQ",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b0444534653d",
-                                    "label": "FAQ",
-                                    "name": "accordion",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b0433ff0bb17"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "block",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
+                            "name": "accordion",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b0433ff0bb17"
                             ],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b04447d4653e": {
-                            "key": "5b04447d4653e",
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
+                        "min": "",
+                        "max": ""
+                    },
+                    "5b04447d4653e": {
+                        "key": "5b04447d4653e",
+                        "name": "feature",
+                        "label": "Titres & icône",
+                        "display": "block",
+                        "sub_fields": [{
+                            "key": "field_5b0444884653f",
+                            "label": "En-tête",
                             "name": "feature",
-                            "label": "Titres & icône",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b0444884653f",
-                                    "label": "En-tête",
-                                    "name": "feature",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b0ec29dbd905"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "block",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b0ec29dbd905"
                             ],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b04449e46540": {
-                            "key": "5b04449e46540",
-                            "name": "links",
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
+                        "min": "",
+                        "max": ""
+                    },
+                    "5b04449e46540": {
+                        "key": "5b04449e46540",
+                        "name": "links",
+                        "label": "Bouton(s) \/ Lien(s)",
+                        "display": "block",
+                        "sub_fields": [{
+                            "key": "field_5b0444ac46541",
                             "label": "Bouton(s) \/ Lien(s)",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b0444ac46541",
-                                    "label": "Bouton(s) \/ Lien(s)",
-                                    "name": "links",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b043614df4a6"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "block",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
+                            "name": "links",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b043614df4a6"
                             ],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b0444c446542": {
-                            "key": "5b0444c446542",
-                            "name": "files",
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
+                        "min": "",
+                        "max": ""
+                    },
+                    "5b0444c446542": {
+                        "key": "5b0444c446542",
+                        "name": "files",
+                        "label": "Fichiers à télécharger",
+                        "display": "block",
+                        "sub_fields": [{
+                            "key": "field_5b0444d346543",
                             "label": "Fichiers à télécharger",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b0444d346543",
-                                    "label": "Fichiers à télécharger",
-                                    "name": "files",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b043853969a4"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "block",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
+                            "name": "files",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b043853969a4"
                             ],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b33a263d91e5": {
-                            "key": "5b33a263d91e5",
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
+                        "min": "",
+                        "max": ""
+                    },
+                    "5b33a263d91e5": {
+                        "key": "5b33a263d91e5",
+                        "name": "playlist_bloc",
+                        "label": "Playlist",
+                        "display": "block",
+                        "sub_fields": [{
+                            "key": "field_5b33a27ed91e6",
+                            "label": "Bloc de playlist",
                             "name": "playlist_bloc",
-                            "label": "Playlist",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b33a27ed91e6",
-                                    "label": "Bloc de playlist",
-                                    "name": "playlist_bloc",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b33890e6fa0b"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "block",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b33890e6fa0b"
                             ],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b461c83b7c8c": {
-                            "key": "5b461c83b7c8c",
-                            "name": "call_to_action",
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
+                        "min": "",
+                        "max": ""
+                    },
+                    "5b461c83b7c8c": {
+                        "key": "5b461c83b7c8c",
+                        "name": "call_to_action",
+                        "label": "Appel à l'action",
+                        "display": "block",
+                        "sub_fields": [{
+                            "key": "field_5b461c93b7c8d",
                             "label": "Appel à l'action",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b461c93b7c8d",
-                                    "label": "Appel à l'action",
-                                    "name": "call_to_action",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b461a3831284"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "block",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
+                            "name": "call_to_action",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b461a3831284"
                             ],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b4722d2c1c12": {
-                            "key": "5b4722d2c1c12",
-                            "name": "tabs_group",
-                            "label": "Groupe d'onglets",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b4722e2c1c13",
-                                    "label": "Onglets",
-                                    "name": "onglets",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b471f2922b04"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "block",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
+                        "min": "",
+                        "max": ""
+                    },
+                    "5b4722d2c1c12": {
+                        "key": "5b4722d2c1c12",
+                        "name": "tabs_group",
+                        "label": "Groupe d'onglets",
+                        "display": "block",
+                        "sub_fields": [{
+                            "key": "field_5b4722e2c1c13",
+                            "label": "Onglets",
+                            "name": "onglets",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b471f2922b04"
                             ],
-                            "min": "",
-                            "max": ""
-                        },
-                        "layout_5b59cb00f9b2b": {
-                            "key": "layout_5b59cb00f9b2b",
-                            "name": "slides_group",
-                            "label": "Groupe de slides",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b59cb12f9b2c",
-                                    "label": "Slides",
-                                    "name": "slides",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b59c98dd0621"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "block",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
+                        "min": "",
+                        "max": ""
+                    },
+                    "layout_5b59cb00f9b2b": {
+                        "key": "layout_5b59cb00f9b2b",
+                        "name": "slides_group",
+                        "label": "Groupe de slides",
+                        "display": "block",
+                        "sub_fields": [{
+                            "key": "field_5b59cb12f9b2c",
+                            "label": "Slides",
+                            "name": "slides",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b59c98dd0621"
                             ],
-                            "min": "",
-                            "max": ""
-                        },
-                        "layout_5b59dfb696d2d": {
-                            "key": "layout_5b59dfb696d2d",
-                            "name": "touristic_mini_sheet",
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
+                        "min": "",
+                        "max": ""
+                    },
+                    "layout_5b59dfb696d2d": {
+                        "key": "layout_5b59dfb696d2d",
+                        "name": "touristic_mini_sheet",
+                        "label": "Mini fiche touristique",
+                        "display": "block",
+                        "sub_fields": [{
+                            "key": "field_5b59dfcd96d2e",
                             "label": "Mini fiche touristique",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b59dfcd96d2e",
-                                    "label": "Mini fiche touristique",
-                                    "name": "touristic_sheet_teaser",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b59dec21f82e"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "block",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
+                            "name": "touristic_sheet_teaser",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b59dec21f82e"
                             ],
-                            "min": "",
-                            "max": ""
-                        },
-                        "layout_5b5b33af38ad8": {
-                            "key": "layout_5b5b33af38ad8",
-                            "name": "socialwall",
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
+                        "min": "",
+                        "max": ""
+                    },
+                    "layout_5b5b33af38ad8": {
+                        "key": "layout_5b5b33af38ad8",
+                        "name": "socialwall",
+                        "label": "Socialwall",
+                        "display": "block",
+                        "sub_fields": [{
+                            "key": "field_5b5b33c738ad9",
                             "label": "Socialwall",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b5b33c738ad9",
-                                    "label": "Socialwall",
-                                    "name": "socialwall",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "hide-label",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b5b2fbc3460d"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "block",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
+                            "name": "socialwall",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "hide-label",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b5b2fbc3460d"
                             ],
-                            "min": "",
-                            "max": ""
-                        }
-                    },
-                    "button_label": "Ajouter un bloc",
-                    "min": "",
-                    "max": "",
-                    "hide_collapse": 0,
-                    "collapse_all_flexible": 1,
-                    "btn-icon-only": 0
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
+                        "min": "",
+                        "max": ""
+                    }
                 },
-                {
-                    "key": "field_5b051c3b6717b",
-                    "label": "En-tête & Pied",
-                    "name": "",
-                    "type": "tab",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "placement": "top",
-                    "endpoint": 0
+                "button_label": "Ajouter un bloc",
+                "min": "",
+                "max": "",
+                "hide_collapse": 0,
+                "collapse_all_flexible": 1,
+                "btn-icon-only": 0
+            },
+            {
+                "key": "field_5b051c3b6717b",
+                "label": "En-tête & Pied",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
                 },
-                {
-                    "key": "field_5b0422535e4b7",
-                    "label": "En-tête de section",
-                    "name": "heading",
-                    "type": "clone",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "clone": [
-                        "group_5b041c24d0dd7"
-                    ],
-                    "display": "seamless",
-                    "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5b0422535e4b7",
+                "label": "En-tête de section",
+                "name": "heading",
+                "type": "clone",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
                 },
-                {
-                    "key": "field_5b04235bfa866",
-                    "label": "Bouton(s) de fin de section",
-                    "name": "links",
-                    "type": "clone",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "clone": [
-                        "field_5b0436150b9d4"
-                    ],
-                    "display": "seamless",
-                    "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0
+                "clone": [
+                    "group_5b041c24d0dd7"
+                ],
+                "display": "seamless",
+                "layout": "block",
+                "prefix_label": 0,
+                "prefix_name": 0
+            },
+            {
+                "key": "field_5b04235bfa866",
+                "label": "Bouton(s) de fin de section",
+                "name": "links",
+                "type": "clone",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
                 },
-                {
-                    "key": "field_5afd2faf953bc",
-                    "label": "Mise en page",
-                    "name": "",
-                    "type": "tab",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "placement": "top",
-                    "endpoint": 0
+                "clone": [
+                    "field_5b0436150b9d4"
+                ],
+                "display": "seamless",
+                "layout": "block",
+                "prefix_label": 0,
+                "prefix_name": 0
+            },
+            {
+                "key": "field_5afd2faf953bc",
+                "label": "Mise en page",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
                 },
-                {
-                    "key": "field_5afd2c9616ecd",
-                    "label": "Grille",
-                    "name": "section_woody_tpl",
-                    "type": "radio",
-                    "instructions": "",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "100",
-                        "class": "",
-                        "id": ""
-                    },
-                    "choices": {
-                        "grids_split-grid_2_cols-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_split\/grid_2_cols\/tpl_04\/thumbnail.png\" alt=\"grids_split-grid_2_cols-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille split 2 colonnes 75% 25% - 2eme colonne avec x éléments possibles<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille split 2 colonnes 75% 25% - 2eme colonne avec x éléments possibles<\/h4>2 colonne 75% 25% - 2eme colonne avec x éléments possibles<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_split-grid_2_cols-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_split\/grid_2_cols\/tpl_03\/thumbnail.png\" alt=\"grids_split-grid_2_cols-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille split 2 colonnes 66% 33% - 2eme colonne sur 2 lignes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille split 2 colonnes 66% 33% - 2eme colonne sur 2 lignes<\/h4>2 colonne 66% 33% avec 2 lignes dans la seconde colonne<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_split-grid_2_cols-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_split\/grid_2_cols\/tpl_02\/thumbnail.png\" alt=\"grids_split-grid_2_cols-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille split 2 colonnes 75% 25% - 2eme colonne sur 2 lignes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille split 2 colonnes 75% 25% - 2eme colonne sur 2 lignes<\/h4>2 colonne 75% 25% avec 2 lignes dans la seconde colonne<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_split-grid_2_cols-tpl_05": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_split\/grid_2_cols\/tpl_05\/thumbnail.png\" alt=\"grids_split-grid_2_cols-tpl_05\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille split 2 colonnes 66% 33% - 2eme colonne avec x éléments possibles<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille split 2 colonnes 66% 33% - 2eme colonne avec x éléments possibles<\/h4>2 colonne 66% 33% - 2eme colonne avec x éléments possibles<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_split-grid_2_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_split\/grid_2_cols\/tpl_01\/thumbnail.png\" alt=\"grids_split-grid_2_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille split 2 colonnes - 2eme colonne sur 2 lignes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille split 2 colonnes - 2eme colonne sur 2 lignes<\/h4>2 colonne égales avec 2 lignes dans la seconde colonne<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_4_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_4_cols\/tpl_01\/thumbnail.png\" alt=\"grids_basic-grid_4_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 4 colonnes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 4 colonnes<\/h4>Grille 4 colonnes égales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_5_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_5_cols\/tpl_01\/thumbnail.png\" alt=\"grids_basic-grid_5_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 5 colonnes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 5 colonnes<\/h4>Grille 5 colonnes égales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_2_cols-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_2_cols\/tpl_04\/thumbnail.png\" alt=\"grids_basic-grid_2_cols-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 2 colonnes - 25 | 75<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 2 colonnes - 25 | 75<\/h4>2 colonne 1 quart | 3 quarts<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_2_cols-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_2_cols\/tpl_03\/thumbnail.png\" alt=\"grids_basic-grid_2_cols-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 2 colonnes - 33 | 66<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 2 colonnes - 33 | 66<\/h4>2 colonne 1 tiers | 2 tiers<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_2_cols-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_2_cols\/tpl_02\/thumbnail.png\" alt=\"grids_basic-grid_2_cols-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 2 colonnes - 66 | 33<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 2 colonnes - 66 | 33<\/h4>2 colonnes 2\/3 | 1\/3<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_2_cols-tpl_05": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_2_cols\/tpl_05\/thumbnail.png\" alt=\"grids_basic-grid_2_cols-tpl_05\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 2 colonnes - 75 | 25<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 2 colonnes - 75 | 25<\/h4>2 colonne 3 quarts | 1 quart<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_2_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_2_cols\/tpl_01\/thumbnail.png\" alt=\"grids_basic-grid_2_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 2 colonnes - 50 | 50<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 2 colonnes - 50 | 50<\/h4>2 colonnes égales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_3_cols-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_3_cols\/tpl_04\/thumbnail.png\" alt=\"grids_basic-grid_3_cols-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 3 colonnes - 25 | 50 | 25<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 3 colonnes - 25 | 50 | 25<\/h4>2 colonnes 1\/4 | 1\/2 | 1\/4<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_3_cols-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_3_cols\/tpl_03\/thumbnail.png\" alt=\"grids_basic-grid_3_cols-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 3 colonnes - 25 | 25 | 50<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 3 colonnes - 25 | 25 | 50<\/h4>3 colonnes 1\/4 | 1\/4 | 1\/2<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_3_cols-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_3_cols\/tpl_02\/thumbnail.png\" alt=\"grids_basic-grid_3_cols-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 3 colonnes - 50 | 25 | 25<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 3 colonnes - 50 | 25 | 25<\/h4>3 colonnes 1\/2 | 1\/4 | 1\/4<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_3_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_3_cols\/tpl_01\/thumbnail.png\" alt=\"grids_basic-grid_3_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 3 colonnes - 33 | 33 | 33<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 3 colonnes - 33 | 33 | 33<\/h4>3 colonnes égales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_1_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_1_cols\/tpl_01\/thumbnail.png\" alt=\"grids_basic-grid_1_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 1 colonne<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 1 colonne<\/h4>Grille 1 colonne 100%<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_6_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_6_cols\/tpl_01\/thumbnail.png\" alt=\"grids_basic-grid_6_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 6 colonnes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 6 colonnes<\/h4>Grille 6 colonnes égales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-                    },
-                    "allow_null": 0,
-                    "other_choice": 0,
-                    "default_value": "grids_basic-grid_1_cols-tpl_01",
-                    "layout": "vertical",
-                    "return_format": "value",
-                    "save_other_choice": 0
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5afd2c9616ecd",
+                "label": "Grille",
+                "name": "section_woody_tpl",
+                "type": "radio",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "100",
+                    "class": "",
+                    "id": ""
                 },
-                {
-                    "key": "field_5b68200fd0bbe",
-                    "label": "Options avancées",
-                    "name": "",
-                    "type": "accordion",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "open": 0,
-                    "multi_expand": 0,
-                    "endpoint": 0
+                "choices": {
+                    "grids_split-grid_2_cols-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_split\/grid_2_cols\/tpl_04\/thumbnail.png\" alt=\"grids_split-grid_2_cols-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille split 2 colonnes 75% 25% - 2eme colonne avec x éléments possibles<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille split 2 colonnes 75% 25% - 2eme colonne avec x éléments possibles<\/h4>2 colonne 75% 25% - 2eme colonne avec x éléments possibles<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                    "grids_split-grid_2_cols-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_split\/grid_2_cols\/tpl_03\/thumbnail.png\" alt=\"grids_split-grid_2_cols-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille split 2 colonnes 66% 33% - 2eme colonne sur 2 lignes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille split 2 colonnes 66% 33% - 2eme colonne sur 2 lignes<\/h4>2 colonne 66% 33% avec 2 lignes dans la seconde colonne<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                    "grids_split-grid_2_cols-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_split\/grid_2_cols\/tpl_02\/thumbnail.png\" alt=\"grids_split-grid_2_cols-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille split 2 colonnes 75% 25% - 2eme colonne sur 2 lignes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille split 2 colonnes 75% 25% - 2eme colonne sur 2 lignes<\/h4>2 colonne 75% 25% avec 2 lignes dans la seconde colonne<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                    "grids_split-grid_2_cols-tpl_05": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_split\/grid_2_cols\/tpl_05\/thumbnail.png\" alt=\"grids_split-grid_2_cols-tpl_05\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille split 2 colonnes 66% 33% - 2eme colonne avec x éléments possibles<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille split 2 colonnes 66% 33% - 2eme colonne avec x éléments possibles<\/h4>2 colonne 66% 33% - 2eme colonne avec x éléments possibles<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                    "grids_split-grid_2_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_split\/grid_2_cols\/tpl_01\/thumbnail.png\" alt=\"grids_split-grid_2_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille split 2 colonnes - 2eme colonne sur 2 lignes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille split 2 colonnes - 2eme colonne sur 2 lignes<\/h4>2 colonne égales avec 2 lignes dans la seconde colonne<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                    "grids_basic-grid_4_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_4_cols\/tpl_01\/thumbnail.png\" alt=\"grids_basic-grid_4_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 4 colonnes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 4 colonnes<\/h4>Grille 4 colonnes égales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                    "grids_basic-grid_5_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_5_cols\/tpl_01\/thumbnail.png\" alt=\"grids_basic-grid_5_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 5 colonnes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 5 colonnes<\/h4>Grille 5 colonnes égales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                    "grids_basic-grid_2_cols-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_2_cols\/tpl_04\/thumbnail.png\" alt=\"grids_basic-grid_2_cols-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 2 colonnes - 25 | 75<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 2 colonnes - 25 | 75<\/h4>2 colonne 1 quart | 3 quarts<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                    "grids_basic-grid_2_cols-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_2_cols\/tpl_03\/thumbnail.png\" alt=\"grids_basic-grid_2_cols-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 2 colonnes - 33 | 66<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 2 colonnes - 33 | 66<\/h4>2 colonne 1 tiers | 2 tiers<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                    "grids_basic-grid_2_cols-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_2_cols\/tpl_02\/thumbnail.png\" alt=\"grids_basic-grid_2_cols-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 2 colonnes - 66 | 33<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 2 colonnes - 66 | 33<\/h4>2 colonnes 2\/3 | 1\/3<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                    "grids_basic-grid_2_cols-tpl_05": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_2_cols\/tpl_05\/thumbnail.png\" alt=\"grids_basic-grid_2_cols-tpl_05\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 2 colonnes - 75 | 25<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 2 colonnes - 75 | 25<\/h4>2 colonne 3 quarts | 1 quart<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                    "grids_basic-grid_2_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_2_cols\/tpl_01\/thumbnail.png\" alt=\"grids_basic-grid_2_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 2 colonnes - 50 | 50<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 2 colonnes - 50 | 50<\/h4>2 colonnes égales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                    "grids_basic-grid_3_cols-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_3_cols\/tpl_04\/thumbnail.png\" alt=\"grids_basic-grid_3_cols-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 3 colonnes - 25 | 50 | 25<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 3 colonnes - 25 | 50 | 25<\/h4>2 colonnes 1\/4 | 1\/2 | 1\/4<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                    "grids_basic-grid_3_cols-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_3_cols\/tpl_03\/thumbnail.png\" alt=\"grids_basic-grid_3_cols-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 3 colonnes - 25 | 25 | 50<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 3 colonnes - 25 | 25 | 50<\/h4>3 colonnes 1\/4 | 1\/4 | 1\/2<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                    "grids_basic-grid_3_cols-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_3_cols\/tpl_02\/thumbnail.png\" alt=\"grids_basic-grid_3_cols-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 3 colonnes - 50 | 25 | 25<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 3 colonnes - 50 | 25 | 25<\/h4>3 colonnes 1\/2 | 1\/4 | 1\/4<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                    "grids_basic-grid_3_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_3_cols\/tpl_01\/thumbnail.png\" alt=\"grids_basic-grid_3_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 3 colonnes - 33 | 33 | 33<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 3 colonnes - 33 | 33 | 33<\/h4>3 colonnes égales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                    "grids_basic-grid_1_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_1_cols\/tpl_01\/thumbnail.png\" alt=\"grids_basic-grid_1_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 1 colonne<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 1 colonne<\/h4>Grille 1 colonne 100%<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                    "grids_basic-grid_6_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/grids_basic\/grid_6_cols\/tpl_01\/thumbnail.png\" alt=\"grids_basic-grid_6_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 6 colonnes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 6 colonnes<\/h4>Grille 6 colonnes égales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
                 },
-                {
-                    "key": "field_5b519f3d7397f",
-                    "label": "Séparateur au dessus",
-                    "name": "section_divider",
-                    "type": "true_false",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "33",
-                        "class": "",
-                        "id": ""
-                    },
-                    "message": "",
-                    "default_value": 0,
-                    "ui": 1,
-                    "ui_on_text": "",
-                    "ui_off_text": ""
+                "allow_null": 0,
+                "other_choice": 0,
+                "default_value": "grids_basic-grid_1_cols-tpl_01",
+                "layout": "vertical",
+                "return_format": "value",
+                "save_other_choice": 0
+            },
+            {
+                "key": "field_5b68200fd0bbe",
+                "label": "Options avancées",
+                "name": "",
+                "type": "accordion",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
                 },
-                {
-                    "key": "field_5b4c8f882d826",
-                    "label": "Retirer les marges autour des blocs",
-                    "name": "scope_no_padding",
-                    "type": "true_false",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "33",
-                        "class": "",
-                        "id": ""
-                    },
-                    "message": "",
-                    "default_value": 0,
-                    "ui": 1,
-                    "ui_on_text": "",
-                    "ui_off_text": ""
+                "open": 0,
+                "multi_expand": 0,
+                "endpoint": 0
+            },
+            {
+                "key": "field_5b519f3d7397f",
+                "label": "Séparateur au dessus",
+                "name": "section_divider",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "33",
+                    "class": "",
+                    "id": ""
                 },
-                {
-                    "key": "field_5afd2ce516ece",
-                    "label": "Pleine largeur",
-                    "name": "display_fullwidth",
-                    "type": "true_false",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "33",
-                        "class": "",
-                        "id": ""
-                    },
-                    "message": "",
-                    "default_value": 0,
-                    "ui": 1,
-                    "ui_on_text": "",
-                    "ui_off_text": ""
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5b4c8f882d826",
+                "label": "Retirer les marges autour des blocs",
+                "name": "scope_no_padding",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "33",
+                    "class": "",
+                    "id": ""
                 },
-                {
-                    "key": "field_5b043e762ffae",
-                    "label": "Image et couleur de fond",
-                    "name": "section_background",
-                    "type": "clone",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "clone": [
-                        "group_5b043c93d609a"
-                    ],
-                    "display": "seamless",
-                    "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5afd2ce516ece",
+                "label": "Pleine largeur",
+                "name": "display_fullwidth",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "33",
+                    "class": "",
+                    "id": ""
                 },
-                {
-                    "key": "field_5b052c0336230",
-                    "label": "Marges intérieures",
-                    "name": "scope_paddings",
-                    "type": "group",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "layout": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_5b052c3b36231",
-                            "label": "Au dessus",
-                            "name": "scope_padding_top",
-                            "type": "button_group",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "50",
-                                "class": "",
-                                "id": ""
-                            },
-                            "choices": {
-                                "padd-top-none": "Aucune",
-                                "padd-top-sm": "Petite",
-                                "padd-top-md": "Moyenne",
-                                "padd-top-lg": "Grande",
-                                "padd-top-xlg": "Très grande"
-                            },
-                            "allow_null": 0,
-                            "default_value": "padd-top-md",
-                            "layout": "horizontal",
-                            "return_format": "value"
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5b043e762ffae",
+                "label": "Image et couleur de fond",
+                "name": "section_background",
+                "type": "clone",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "clone": [
+                    "group_5b043c93d609a"
+                ],
+                "display": "seamless",
+                "layout": "block",
+                "prefix_label": 0,
+                "prefix_name": 0
+            },
+            {
+                "key": "field_5b052c0336230",
+                "label": "Marges intérieures",
+                "name": "scope_paddings",
+                "type": "group",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "block",
+                "sub_fields": [{
+                        "key": "field_5b052c3b36231",
+                        "label": "Au dessus",
+                        "name": "scope_padding_top",
+                        "type": "button_group",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "50",
+                            "class": "",
+                            "id": ""
                         },
-                        {
-                            "key": "field_5b052c9136232",
-                            "label": "En dessous",
-                            "name": "scope_padding_bottom",
-                            "type": "button_group",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "50",
-                                "class": "",
-                                "id": ""
-                            },
-                            "choices": {
-                                "padd-bottom-none": "Aucune",
-                                "padd-bottom-sm": "Petite",
-                                "padd-bottom-md": "Moyenne",
-                                "padd-bottom-lg": "Grande",
-                                "padd-bottom-xlg": "Très grande"
-                            },
-                            "allow_null": 0,
-                            "default_value": "padd-bottom-md",
-                            "layout": "horizontal",
-                            "return_format": "value"
-                        }
-                    ]
-                },
-                {
-                    "key": "field_5b052cb536233",
-                    "label": "Marges extérieures",
-                    "name": "scope_margins",
-                    "type": "group",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "layout": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_5b052ccf36234",
-                            "label": "Au dessus",
-                            "name": "scope_margin_top",
-                            "type": "button_group",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "50",
-                                "class": "",
-                                "id": ""
-                            },
-                            "choices": {
-                                "marg-top-none": "Aucune",
-                                "marg-top-sm": "Petite",
-                                "marg-top-md": "Moyenne",
-                                "marg-top-lg": "Grande",
-                                "marg-top-xlg": "Très grande"
-                            },
-                            "allow_null": 0,
-                            "default_value": "marg-top-none",
-                            "layout": "horizontal",
-                            "return_format": "value"
+                        "choices": {
+                            "padd-top-none": "Aucune",
+                            "padd-top-sm": "Petite",
+                            "padd-top-md": "Moyenne",
+                            "padd-top-lg": "Grande",
+                            "padd-top-xlg": "Très grande"
                         },
-                        {
-                            "key": "field_5b052cfd36235",
-                            "label": "En dessous",
-                            "name": "scope_margin_bottom",
-                            "type": "button_group",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "50",
-                                "class": "",
-                                "id": ""
-                            },
-                            "choices": {
-                                "marg-bottom-none": "Aucune",
-                                "marg-bottom-sm": "Petite",
-                                "marg-bottom-md": "Moyenne",
-                                "marg-bottom-lg": "Grande",
-                                "marg-bottom-xlg": "Très grande"
-                            },
-                            "allow_null": 0,
-                            "default_value": "marg-bottom-none",
-                            "layout": "horizontal",
-                            "return_format": "value"
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
+                        "allow_null": 0,
+                        "default_value": "padd-top-md",
+                        "layout": "horizontal",
+                        "return_format": "value"
+                    },
+                    {
+                        "key": "field_5b052c9136232",
+                        "label": "En dessous",
+                        "name": "scope_padding_bottom",
+                        "type": "button_group",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "50",
+                            "class": "",
+                            "id": ""
+                        },
+                        "choices": {
+                            "padd-bottom-none": "Aucune",
+                            "padd-bottom-sm": "Petite",
+                            "padd-bottom-md": "Moyenne",
+                            "padd-bottom-lg": "Grande",
+                            "padd-bottom-xlg": "Très grande"
+                        },
+                        "allow_null": 0,
+                        "default_value": "padd-bottom-md",
+                        "layout": "horizontal",
+                        "return_format": "value"
+                    }
+                ]
+            },
+            {
+                "key": "field_5b052cb536233",
+                "label": "Marges extérieures",
+                "name": "scope_margins",
+                "type": "group",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "block",
+                "sub_fields": [{
+                        "key": "field_5b052ccf36234",
+                        "label": "Au dessus",
+                        "name": "scope_margin_top",
+                        "type": "button_group",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "50",
+                            "class": "",
+                            "id": ""
+                        },
+                        "choices": {
+                            "marg-top-none": "Aucune",
+                            "marg-top-sm": "Petite",
+                            "marg-top-md": "Moyenne",
+                            "marg-top-lg": "Grande",
+                            "marg-top-xlg": "Très grande"
+                        },
+                        "allow_null": 0,
+                        "default_value": "marg-top-none",
+                        "layout": "horizontal",
+                        "return_format": "value"
+                    },
+                    {
+                        "key": "field_5b052cfd36235",
+                        "label": "En dessous",
+                        "name": "scope_margin_bottom",
+                        "type": "button_group",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "50",
+                            "class": "",
+                            "id": ""
+                        },
+                        "choices": {
+                            "marg-bottom-none": "Aucune",
+                            "marg-bottom-sm": "Petite",
+                            "marg-bottom-md": "Moyenne",
+                            "marg-bottom-lg": "Grande",
+                            "marg-bottom-xlg": "Très grande"
+                        },
+                        "allow_null": 0,
+                        "default_value": "marg-bottom-none",
+                        "layout": "horizontal",
+                        "return_format": "value"
+                    }
+                ]
+            }
+        ]
+    }]
 }

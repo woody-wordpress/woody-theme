@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>018-agenda</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="018-agenda" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M8,10 L8,44 L42,44 L42,10 L8,10 Z M44,8 L44,46 L6,46 L6,8 L44,8 Z" id="Rectangle" fill="#000000" fill-rule="nonzero"></path>
+        <polygon id="Line" fill="#000000" fill-rule="nonzero" points="7 22.5 7 20.5 42.5 20.5 42.5 22.5"></polygon>
+        <polygon id="Line-2" fill="#000000" fill-rule="nonzero" points="15.5 3.5 17.5 3.5 17.5 14.5 15.5 14.5"></polygon>
+        <polygon id="Line-2-Copy" fill="#000000" fill-rule="nonzero" points="24.25 3.5 26.25 3.5 26.25 14.5 24.25 14.5"></polygon>
+        <polygon id="Line-2-Copy-2" fill="#000000" fill-rule="nonzero" points="34.25 3.5 36.25 3.5 36.25 14.5 34.25 14.5"></polygon>
+    </g>
+</svg>

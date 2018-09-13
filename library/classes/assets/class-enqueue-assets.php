@@ -20,10 +20,11 @@ class WoodyTheme_Enqueue_Assets
 
     protected function registerHooks()
     {
-        add_action('wp_enqueue_scripts', array($this, 'enqueueLibraries'));
-        add_action('wp_enqueue_scripts', array($this, 'enqueueAssets'));
-        add_action('admin_enqueue_scripts', array($this, 'enqueueAdminAssets'));
-        add_action('login_enqueue_scripts', array($this, 'enqueueAdminAssets'));
+        add_action('wp_default_scripts', [$this, 'removeJqueryMigrate']);
+        add_action('wp_enqueue_scripts', [$this, 'enqueueLibraries']);
+        add_action('wp_enqueue_scripts', [$this, 'enqueueAssets']);
+        add_action('admin_enqueue_scripts', [$this, 'enqueueAdminAssets']);
+        add_action('login_enqueue_scripts', [$this, 'enqueueAdminAssets']);
 
         // Si vous utilisez HTML5, wdjs_use_html5 est un filtre qui enlève l’attribut type="text/javascript"
         add_filter('wdjs_use_html5', '__return_true');
@@ -86,6 +87,17 @@ class WoodyTheme_Enqueue_Assets
             $wait = "function(){angular.bootstrap(document, ['drupalAngularApp']);}";
         }
         return $wait;
+    }
+
+    public function removeJqueryMigrate($scripts)
+    {
+        if (WP_ENV != 'dev' && isset($scripts->registered['jquery'])) {
+            $script = $scripts->registered['jquery'];
+
+            if ($script->deps) {
+                $script->deps = array_diff($script->deps, array('jquery-migrate'));
+            }
+        }
     }
 
     public function enqueueLibraries()

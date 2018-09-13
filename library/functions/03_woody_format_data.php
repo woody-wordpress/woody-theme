@@ -188,37 +188,40 @@ function getTouristicSheetPreview($sheet_id, $sheet_wp)
 {
     $data = [];
     //TODO: remplacer la langue 'fr' par la variable lang du post
-    $sheet_data = apply_filters('wp_woody_hawwwai_sheet_render', $sheet_id, 'fr', array(), 'json');
+    $sheet_data = apply_filters('wp_woody_hawwwai_sheet_render', $sheet_id, 'fr', array(), 'json', 'item');
+    if (!empty($sheet_data['items'])) {
+        foreach ($sheet_data['items'] as $key => $item) {
+            $data = [
+                'title' => (!empty($item['title'])) ? $item['title'] : '',
+                'sheet_type' => (!empty($item['bordereau'])) ? $item['bordereau'] : '',
+                'description' => (!empty($item['desc'])) ? $item['desc'] : '',
+                'town' => (!empty($item['town'])) ? $item['town'] : '',
+                'img' => [
+                    'resizer' => true,
+                    'url' => (!empty($item['img']['url'])) ? $item['img']['url']['manual'] : '',
+                    'alt' => (!empty($item['img']['alt'])) ? $item['img']['alt'] : '',
+                    'title' => (!empty($item['img']['title'])) ? $item['img']['title'] : ''
+                ],
+                'link' =>[
+                    'url' => (!empty($sheet_wp['content_selection']->guid)) ? $sheet_wp['content_selection']->guid : '',
+                ]
+            ];
 
-    if (!empty($sheet_data) && !empty($sheet_data['formated_object'])) {
-        $sheet_formated = $sheet_data['formated_object'];
-        $sheet_unformated = $sheet_data['object'];
+            $data['location'] = [];
+            $data['location']['lat'] = (!empty($item['gps'])) ? $item['gps']['latitude'] : '';
+            $data['location']['lng'] = (!empty($item['gps'])) ? $item['gps']['longitude'] : '';
 
-        $data = [
-            'title' => (!empty($sheet_formated['businessName'])) ? $sheet_formated['businessName'] : '',
-            'sheet_type' => (!empty($sheet_unformated['data']['libelleBordereau'])) ? $sheet_unformated['data']['libelleBordereau'] : '',
-            'description' => (!empty($sheet_formated['description'])) ? $sheet_formated['description'] : '',
-            'locality' => (!empty($sheet_formated['locality'])) ? $sheet_formated['locality'] : '',
-            'img' => (!empty($sheet_formated['firstImage']['list_item'])) ? $sheet_formated['firstImage']['list_item']['manual'] : '',
-        ];
-
-        $data['location'] = [];
-        $data['location']['lat'] = (!empty($sheet_formated['geolocations'])) ? $sheet_formated['geolocations']['latitude'] : '';
-        $data['location']['lng'] = (!empty($sheet_formated['geolocations'])) ? $sheet_formated['geolocations']['longitude'] : '';
-
-        $data['link']['url'] = (!empty($sheet_wp['content_selection']->guid)) ? $sheet_wp['content_selection']->guid : '';
-
-        if ($sheet_formated['bordereau'] === 'HOT') {
-            $rating = [];
-            for ($i=0; $i <= $sheet_formated['labelRatings'][0]['repeated']; $i++) {
-                $rating[] = '<span class="wicon"><span>';
+            if ($item['bordereau'] === 'HOT' or $item['bordereau'] == 'HPA') {
+                $rating = [];
+                for ($i=0; $i <= $item['ratings'][0]['value']; $i++) {
+                    $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
+                }
+                $data['rating'] = implode('', $rating);
             }
-            $data['rating'] = implode('', $rating);
         }
-
-        \PC::debug($data['rating'], 'Rating');
-        \PC::debug($sheet_formated, 'Fiche formatée');
     }
+
+    \PC::debug($sheet_data, 'Item fiche');
 
     return $data;
 }
@@ -428,14 +431,8 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
 
 function nestedGridsComponents($scope, $gridTplField, $uniqIid_prefix = '')
 {
-    $woodyComponents = wp_cache_get('woody_components');
-    if (empty($woodyComponents)) {
-        $woodyComponents = Woody::getComponents();
-        wp_cache_set('woody_components', $woodyComponents);
-    }
-
-    $woodyTwigsPaths = Woody::getTwigsPaths($woodyComponents);
-
+    global $post;
+    $woodyTwigsPaths = getWoodyTwigPaths();
     foreach ($scope as $key => $grid) {
         $grid_content = [];
         if (!empty($uniqIid_prefix) && is_numeric($key)) {
@@ -445,8 +442,22 @@ function nestedGridsComponents($scope, $gridTplField, $uniqIid_prefix = '')
         // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
         if (!empty($grid['light_section_content'])) {
             foreach ($grid['light_section_content'] as $layout) {
+                switch ($layout['acf_fc_layout']) {
+                    case 'auto_focus':
+                    case 'manual_focus':
+                        $grid_content['items'][] = formatFocusesData($layout, $post->ID, $woodyTwigsPaths);
+                    break;
+                    default:
+                    if ($layout['acf_fc_layout'] == 'call_to_action') {
+                        if (!empty($layout['cta_button_group']['add_modal'])) {
+                            $layout['modal_id'] = 'cta-' . uniqid();
+                        }
+                    }
+                }
+
                 $grid_content['items'][] = Timber::compile($woodyTwigsPaths[$layout['woody_tpl']], $layout);
             }
+
             // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
             $scope[$key]['light_section_content'] = Timber::compile($woodyTwigsPaths[$grid[$gridTplField]], $grid_content);
         }
@@ -457,6 +468,26 @@ function nestedGridsComponents($scope, $gridTplField, $uniqIid_prefix = '')
 
     return $scope;
 }
+
+
+function formatFocusesData($layout, $current_post, $twigPaths)
+{
+    $return = '';
+
+    if ($layout['acf_fc_layout'] == 'manual_focus') {
+        $the_items = getManualFocus_data($layout);
+    } else {
+        $the_items = getAutoFocus_data($current_post, $layout);
+    }
+    $the_items['focus_no_padding'] = $layout['focus_no_padding'];
+    $the_items['block_titles'] = getFocusBlockTitles($layout);
+    $the_items['display_button'] = $layout['display_button'];
+
+    $return = Timber::compile($twigPaths[$layout['woody_tpl']], $the_items);
+
+    return $return;
+}
+
 
 /**
  *
@@ -494,6 +525,7 @@ function isWoodyInstagram($media_item, $is_instagram = false)
     return $is_instagram;
 }
 
+
 function getAttachmentMoreData($attachment_id)
 {
     $attachment_data = [];
@@ -513,4 +545,18 @@ function getAttachmentMoreData($attachment_id)
     }
 
     return $attachment_data;
+}
+
+function getWoodyTwigPaths()
+{
+    $woodyTwigsPaths = [];
+    $woodyComponents = wp_cache_get('woody_components');
+    if (empty($woodyComponents)) {
+        $woodyComponents = Woody::getComponents();
+        wp_cache_set('woody_components', $woodyComponents);
+    }
+
+    $woodyTwigsPaths = Woody::getTwigsPaths($woodyComponents);
+
+    return $woodyTwigsPaths;
 }

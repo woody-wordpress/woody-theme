@@ -1,3 +1,5 @@
-// import $ from 'jquery';
+import $ from 'jquery';
 
-// $('body.wp-admin').addClass('windowReady');
+window.onload = function() {
+    $('body.wp-admin').addClass('windowReady');
+}

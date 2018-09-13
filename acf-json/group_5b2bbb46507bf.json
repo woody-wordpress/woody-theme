@@ -1,6 +1,29 @@
 {
     "key": "group_5b2bbb46507bf",
     "title": "En-tête de page",
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            },
+            {
+                "param": "page_type_and_children",
+                "operator": "!=",
+                "value": "front_page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Les infos principales de la page + la possibilité d'ajouter les liens de partage et d'ajout aux favoris",
+    "modified": 1536818002,
     "fields": [
         {
             "key": "field_5b2bc0e256db0",
@@ -352,9 +375,9 @@
                 "id": ""
             },
             "choices": {
-                "blocks-page_teaser-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/blocks\/page_teaser\/tpl_03\/thumbnail.png\" alt=\"blocks-page_teaser-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">En tête de page - Template 3<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">En tête de page - Template 3<\/h4>Affiche les infos indispensables d'une page : titre + desc + social shares + ajout aux favoris + image\/video ou widget à droite<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-page_teaser-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/blocks\/page_teaser\/tpl_02\/thumbnail.png\" alt=\"blocks-page_teaser-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">En tête de page - Template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">En tête de page - Template 2<\/h4>Affiche les infos indispensables d'une page alignées au centre : titre + desc + social shares + ajout aux favoris<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-page_teaser-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/blocks\/page_teaser\/tpl_01\/thumbnail.png\" alt=\"blocks-page_teaser-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">En tête de page - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">En tête de page - Template 1<\/h4>Affiche les infos indispensables d'une page alignées à gauche : titre + desc + social shares + ajout aux favoris<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+                "blocks-page_teaser-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/page_teaser\/tpl_03\/thumbnail.png\" alt=\"blocks-page_teaser-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">En tête de page - Template 3<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">En tête de page - Template 3<\/h4>Affiche les infos indispensables d'une page : titre + desc + social shares + ajout aux favoris + image\/video ou widget à droite<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-page_teaser-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/page_teaser\/tpl_02\/thumbnail.png\" alt=\"blocks-page_teaser-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">En tête de page - Template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">En tête de page - Template 2<\/h4>Affiche les infos indispensables d'une page alignées au centre : titre + desc + social shares + ajout aux favoris<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-page_teaser-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/page_teaser\/tpl_01\/thumbnail.png\" alt=\"blocks-page_teaser-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">En tête de page - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">En tête de page - Template 1<\/h4>Affiche les infos indispensables d'une page alignées à gauche : titre + desc + social shares + ajout aux favoris<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -425,28 +448,5 @@
             "layout": "horizontal",
             "return_format": "value"
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "page"
-            },
-            {
-                "param": "page_type_and_children",
-                "operator": "!=",
-                "value": "front_page"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Les infos principales de la page + la possibilité d'ajouter les liens de partage et d'ajout aux favoris",
-    "modified": 1536235630
+    ]
 }

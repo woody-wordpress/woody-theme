@@ -22,7 +22,7 @@ class WoodyTheme_Plugins_Options
     public function defineOptions()
     {
         // Plugins Settings
-        update_option('timezone_string', '', '', 'yes'); // Mettre vide si le serveur est déjà configuré sur la bonne timezone Europe/Paris
+        update_option('timezone_string', 'Europe/Paris', '', 'yes');
         update_option('WPLANG', 'fr_FR', '', 'yes');
         update_option('date_format', 'j F Y', '', 'yes');
         update_option('time_format', 'G\hi', '', 'yes');
