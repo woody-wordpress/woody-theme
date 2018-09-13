@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-$('form#post').each(function() {
+$('body.post-type-page form#post').each(function() {
     var $button = $('input#publish[value="Mettre à jour"]');
     $button.addClass('woody-update');
 
