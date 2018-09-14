@@ -17,25 +17,33 @@ $context['body_class'] .= ' apirender apirender-playlist apirender-wordpress';
  * Appel apirender pour récupérer le DOM de la playlist
  ************************ **/
 
-
 $playlistConfId = get_field('field_5b338ff331b17');
 
-// build query in array
-$query = [
-    'page' => 1,
-];
+$checkMethod = !empty($_POST) ? INPUT_POST : INPUT_GET;
 
+// allowed parameters need to be added here
+$checkParams = array(
+    'test' => FILTER_VALIDATE_INT,
+    'page'   => array(
+        'filter' => FILTER_VALIDATE_INT,
+        'flags'  => array(FILTER_REQUIRE_SCALAR, FILTER_NULL_ON_FAILURE),
+        'options'   => array('min_range' => 1)
+    ),
+);
+
+// build query in validated array
+$query = filter_input_array($checkMethod, $checkParams, $add_non_existing = false);
+// \PC::debug($query);
+
+// Get from Apirender
 $partialPlaylist = apply_filters('wp_woody_hawwwai_playlist_render', $playlistConfId, 'fr', $query);
 if (!$partialPlaylist) {
     print_r('error fetching playlist');
     exit;
 }
 
-// Todo return playlistId in apirender playlist endpoint
-$playlistId = isset($partialPlaylist['playlistId']) ? $partialPlaylist['playlistId'] : null;
-
-$apiRenderUri = isset($partialPlaylist['apirender_uri']) ? $partialPlaylist['apirender_uri'] : null;
-// rcd($playlistConfId);
+$playlistId = isset($partialPlaylist['playlistId']) ? $partialPlaylist['playlistId'] : null; // returned by apirender
+$apiRenderUri = isset($partialPlaylist['apirender_uri']) ? $partialPlaylist['apirender_uri'] : null; // returned by plugin woody fn
 
 
 /***************************
