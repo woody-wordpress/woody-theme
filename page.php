@@ -137,6 +137,7 @@ if ($context['page_type'] === 'playlist_tourism') {
             // Puis on les compile dans le template de grille Woody selectionné
             $components = [];
             $components['no_padding'] = $section['scope_no_padding'];
+            $components['alignment'] = (!empty($section['section_alignment'])) ? $section['section_alignment'] : '';
 
             if (!empty($section['section_content'])) {
                 foreach ($section['section_content'] as $key => $layout) {
