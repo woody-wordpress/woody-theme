@@ -133,10 +133,11 @@ class WoodyTheme_Enqueue_Assets
         $jsModeSuffix = 'min';
         switch (WP_ENV) {
             case 'dev':
-                $jsModeSuffix = 'debug';
+            $jsModeSuffix = 'debug';
+                $apirender_base_uri = 'https://api.tourism-system.com/render';
                 // \PC::Debug($js_dependencies_rcmap);
-                $apirender_base_uri = 'http://127.0.0.1:8000'; // use localhost apirender (gulp serve)
                 // $apirender_base_uri = 'https://api.tourism-system.rc-preprod.com/render';
+                // $apirender_base_uri = 'http://127.0.0.1:8000'; // use localhost apirender (gulp serve)
                 break;
             case 'preprod':
                 $apirender_base_uri = 'https://api.tourism-system.rc-preprod.com/render';
