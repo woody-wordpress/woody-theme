@@ -5,15 +5,15 @@
         left: 0;
         width: 100vw;
         height: 100vh;
-        background-color: rgba(#f1f1f1, 0.9);
-        //background-image: url('../img/wp-admin/loader.png');
+        background-color: rgba(#fff, 0.9);
+        background-image: url('../img/wp-admin/loader_woody.png');
         background-repeat: no-repeat;
-        background-size: 266px 200px;
+        background-size: 100px 110px;
         background-position: center center;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #0073aa;
+        color: #fff;
         z-index: 10000;
         content: '';
         transition: .2s ease-out;
@@ -22,7 +22,7 @@
     &.windowReady {
         &:after {
             opacity: 0;
-            transform: scaleY(0);
+            //transform: scaleY(0);
             pointer-events: none;
             transform-origin: center top;
         }

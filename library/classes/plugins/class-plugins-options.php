@@ -30,10 +30,10 @@ class WoodyTheme_Plugins_Options
         update_option('rocket_lazyload_options', ['images' => true, 'iframes' => true, 'youtube' => true], '', 'yes');
         update_option('minify_html_active', (WP_ENV == 'dev') ? 'no' : 'yes', '', 'yes');
         update_option('minify_javascript', 'yes', '', 'yes');
-        update_option('minify_html_comments', (WP_ENV == 'dev') ? 'no' : 'yes', '', 'yes');
+        update_option('minify_html_comments', 'yes', '', 'yes');
         update_option('minify_html_xhtml', 'yes', '', 'yes');
         update_option('minify_html_relative', 'yes', '', 'yes');
-        update_option('minify_html_scheme', 'no', '', 'yes');
+        update_option('minify_html_scheme', 'yes', '', 'yes');
         update_option('minify_html_utf8', 'no', '', 'yes');
         update_option('upload_path', WP_UPLOAD_DIR, '', 'yes');
         update_option('upload_url_path', WP_UPLOAD_URL, '', 'yes');

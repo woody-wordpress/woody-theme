@@ -14,6 +14,7 @@ new WoodyTheme_ACF();
 new WoodyTheme_ACF_Counter();
 
 // Cleanup
+new WoodyTheme_Cleanup_Minify();
 new WoodyTheme_Cleanup_Admin();
 new WoodyTheme_Cleanup_Front();
 

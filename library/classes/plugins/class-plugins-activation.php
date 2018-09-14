@@ -29,7 +29,6 @@ class WoodyTheme_Plugins_Activation
             'advanced-custom-fields-pro/acf.php',
             'timber-library/timber.php',
             'bea-sanitize-filename/bea-sanitize-filename.php',
-            'minify-html-markup/minify-html.php',
             'wp-deferred-javascripts/wp-deferred-javascripts.php',
             'advanced-cron-manager/advanced-cron-manager.php',
             'redirection/redirection.php',
@@ -51,6 +50,7 @@ class WoodyTheme_Plugins_Activation
         ];
 
         $this->deactivate_plugins = [
+            'minify-html-markup/minify-html.php',
             'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
             'bea-media-analytics/bea-media-analytics.php',
             'regenerate-thumbnails/regenerate-thumbnails.php',
