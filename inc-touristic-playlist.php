@@ -21,15 +21,22 @@ $playlistConfId = get_field('field_5b338ff331b17');
 
 $checkMethod = !empty($_POST) ? INPUT_POST : INPUT_GET;
 
-// allowed parameters need to be added here
-$checkParams = array(
-    'test' => FILTER_VALIDATE_INT,
-    'page'   => array(
+// allowed parameters for Wordpress playlists need to be added here
+$checkParams = [
+
+    // page number (12 items by page)
+    'page'   => [
         'filter' => FILTER_VALIDATE_INT,
-        'flags'  => array(FILTER_REQUIRE_SCALAR, FILTER_NULL_ON_FAILURE),
-        'options'   => array('min_range' => 1)
-    ),
-);
+        'flags'  => [FILTER_REQUIRE_SCALAR, FILTER_NULL_ON_FAILURE],
+        'options'   => ['min_range' => 1]
+    ],
+
+    // id of created facet autoselection returning filtered playlist
+    'autoselect_id'   => [
+        'filter' => FILTER_VALIDATE_INT,
+        'flags'  => [FILTER_REQUIRE_SCALAR, FILTER_NULL_ON_FAILURE],
+    ],
+];
 
 // build query in validated array
 $query = filter_input_array($checkMethod, $checkParams, $add_non_existing = false);
