@@ -26,6 +26,7 @@ $('body.post-type-page.post-php form#post').submit(function(e) {
             $button_publish.removeClass('disabled');
             $button_preview.removeClass('disabled');
             $spinner.removeClass('is-active');
+            window.onbeforeunload = null;
 
             // If preview button click, open new brower tab
             if ($button_preview.hasClass('clickAfterAjax')) {
