@@ -77,6 +77,7 @@ class WoodyTheme_ACF
             }
 
 
+
             if (!empty($components)) {
                 foreach ($components as $key => $component) {
                     $tpl_name = (!empty($component['name'])) ? $component['name'] : '{Noname :/}';
