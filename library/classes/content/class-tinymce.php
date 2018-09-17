@@ -24,12 +24,12 @@ class WoodyTheme_Tinymce
     {
         $style_formats = array(
         array(
-            'title' => 'Bouton 1',
+            'title' => 'Bouton principal',
             'selector' => 'a',
             'classes' => 'button primary'
         ),
         array(
-            'title' => 'Bouton 2',
+            'title' => 'Bouton secondaire',
             'selector' => 'a',
             'classes' => 'button secondary'
         ),
