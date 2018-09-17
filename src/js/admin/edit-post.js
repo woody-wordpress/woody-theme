@@ -62,6 +62,8 @@ $('#post').each(function() {
         var $parent = field.parent().$el;
         var $bigparent = field.parent().parent().$el;
 
+        console.log($bigparent);
+
         // add class to this field
         $parent.each(function() {
             toggleChoiceAction($bigparent);
@@ -80,7 +82,7 @@ $('#post').each(function() {
     // **
     // Update tpl-choice-wrapper classes for autofocus layout
     // **
-    var getAutorFocusData = function($parent) {
+    var getAutoFocusData = function($parent) {
         var query_params = {};
         query_params['current_post'] = $('#post_ID').val();
         //console.log($parent);
@@ -121,20 +123,22 @@ $('#post').each(function() {
     var getAutoFocusQuery = function(field) {
         var query_params = null;
         var $parent = field.$el.parent();
-        var $bigparent = field.parent().parent().$el;
+        var $bigparent = field.parent().$el;
+
+        console.warn($bigparent);
 
         $parent.each(function() {
             var $this = $(this);
             toggleChoiceAction($bigparent);
 
-            getAutorFocusData($this);
+            getAutoFocusData($this);
 
             $this.find('input[type="checkbox"], input[type="radio"], select, option').change(function() {
-                getAutorFocusData($this);
+                getAutoFocusData($this);
             });
 
             $this.find('input[type="number"]').keyup(function() {
-                getAutorFocusData($this);
+                getAutoFocusData($this);
             });
         });
 

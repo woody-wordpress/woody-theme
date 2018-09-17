@@ -276,18 +276,20 @@ function getPagePreview($item_wrapper, $item)
 
     $fallback_field_group = $item->get_field('field_5b052bbab3867');
 
+    $pretitle = $item->get_field('field_5b87f20257a1d');
+
     if (is_array($item_wrapper['display_elements'])) {
         if (in_array('pretitle', $item_wrapper['display_elements'])) {
-            $data['pretitle'] = getFieldAndFallback($item, 'focus_pretitle', $fallback_field_group, 'pretitle');
+            $data['pretitle'] = getFieldAndFallback($item, 'focus_pretitle', $item, 'field_5b87f20257a1d');
         }
         if (in_array('subtitle', $item_wrapper['display_elements'])) {
-            $data['subtitle'] = getFieldAndFallback($item, 'focus_subtitle', $fallback_field_group, 'subtitle');
+            $data['subtitle'] = getFieldAndFallback($item, 'focus_subtitle', $item, 'field_5b87f23b57a1e');
         }
         if (in_array('icon', $item_wrapper['display_elements'])) {
-            $data['icon'] = getFieldAndFallback($item, 'focus_icon', $fallback_field_group, 'woody_icon');
+            $data['icon'] = getFieldAndFallback($item, 'focus_icon', '');
         }
         if (in_array('description', $item_wrapper['display_elements'])) {
-            $data['description'] = getFieldAndFallback($item, 'focus_description', $fallback_field_group, 'description');
+            $data['description'] = getFieldAndFallback($item, 'focus_description', $item, 'field_5b2bbbfaec6b2');
         }
     }
 
@@ -324,7 +326,7 @@ function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = ''
         $value = $item->get_field($field);
     } elseif (!empty($fallback_item) && is_array($fallback_item)) {
         $value = $fallback_item[$fallback_field];
-    } elseif (!empty($fallback_item->get_field($fallback_field))) {
+    } elseif (!empty($fallback_item) && !empty($fallback_item->get_field($fallback_field))) {
         $value = $fallback_item->get_field($fallback_field);
     } else {
         $value = '';
