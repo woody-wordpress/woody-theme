@@ -434,7 +434,7 @@
                 "id": ""
             },
             "choices": {
-                "blocks-trip_infos-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.crt-bretagne.wp.rc-dev.com\/app\/dist\/crt-bretagne\/img\/woody-library\/views\/blocks\/trip_infos\/tpl_02\/thumbnail.png\" alt=\"blocks-trip_infos-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Infos séjour - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Infos séjour - Template 1<\/h4>Affiche le prix et la durée d'un séjour - Centrés l'un sur l'autre<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-trip_infos-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.crt-bretagne.wp.rc-dev.com\/app\/dist\/crt-bretagne\/img\/woody-library\/views\/blocks\/trip_infos\/tpl_02\/thumbnail.png\" alt=\"blocks-trip_infos-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Infos séjour - Template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Infos séjour - Template 2<\/h4>Affiche le prix et la durée d'un séjour - Centrés l'un sur l'autre<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
                 "blocks-trip_infos-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.crt-bretagne.wp.rc-dev.com\/app\/dist\/crt-bretagne\/img\/woody-library\/views\/blocks\/trip_infos\/tpl_01\/thumbnail.png\" alt=\"blocks-trip_infos-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Infos séjour - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Infos séjour - Template 1<\/h4>Affiche le prix et la durée d'un séjour - Centrés l'un sur l'autre<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
             },
             "allow_null": 0,
@@ -490,9 +490,9 @@
     "location": [
         [
             {
-                "param": "post_taxonomy",
+                "param": "page_type_and_children",
                 "operator": "==",
-                "value": "page_type:trip"
+                "value": "trip"
             }
         ]
     ],
@@ -504,5 +504,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Affiche le prix et la duré d'un séjour",
-    "modified": 1537169433
+    "modified": 1537204181
 }
