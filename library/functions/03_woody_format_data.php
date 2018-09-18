@@ -549,7 +549,7 @@ function getAttachmentMoreData($attachment_id)
     return $attachment_data;
 }
 
-function getWoodyTwigPaths()
+function getWoodyTwigPaths($page_parts=false)
 {
     $woodyTwigsPaths = [];
     $woodyComponents = wp_cache_get('woody_components');
@@ -558,7 +558,7 @@ function getWoodyTwigPaths()
         wp_cache_set('woody_components', $woodyComponents);
     }
 
-    $woodyTwigsPaths = Woody::getTwigsPaths($woodyComponents);
+    $woodyTwigsPaths = Woody::getTwigsPaths($woodyComponents, $page_parts);
 
     return $woodyTwigsPaths;
 }

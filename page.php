@@ -25,6 +25,10 @@ include get_template_directory() . '/header.php';
 
 $context['current_url'] = get_permalink();
 $context['active_social_shares'] = getActiveShares();
+$context['page_type'] = getTermsSlugs($context['post']->ID, 'page_type', true);
+$context['page_parts'] = (function_exists('getSubThemeCompiledParts')) ? getSubThemeCompiledParts() : '';
+
+
 
 /** ****************************
  * Compilation du bloc prix
@@ -39,51 +43,28 @@ if (!empty(getAcfGroupFields('group_5b6c5e6ff381d'))) {
     $context['trip_infos'] = Timber::compile($context['woody_components'][$trip_infos['tripinfos_woody_tpl']], $trip_infos);
 }
 
-
 /** ****************************
  * Compilation de l'en tête de page
  **************************** **/
 $page_teaser = [];
 $page_teaser = getAcfGroupFields('group_5b2bbb46507bf');
 if (!empty($page_teaser)) {
-    if (!empty($page_teaser['page_teaser_display_title'])) {
-        $page_teaser['page_teaser_title'] = $context['post']->post_title;
-    }
-
+    $page_teaser['page_teaser_title'] = (!empty($page_teaser['page_teaser_display_title'])) ? $context['post']->post_title : '';
+    $page_teaser['the_classes'] = [];
+    $page_teaser['the_classes'][] = (!empty($page_teaser['background_img_opacity'])) ? $page_teaser['background_img_opacity'] : '';
+    $page_teaser['the_classes'][] = (!empty($page_teaser['background_color'])) ? $page_teaser['background_color'] : '';
+    $page_teaser['the_classes'][] = (!empty($page_teaser['border_color'])) ? $page_teaser['border_color'] : '';
+    $page_teaser['the_classes'][] =  (!empty($page_teaser['teaser_margin_bottom'])) ? $page_teaser['teaser_margin_bottom'] : '';
+    $page_teaser['the_classes'][] = (!empty($page_teaser['background_img'])) ? 'isRel' : '';
+    $page_teaser['classes'] = (!empty($page_teaser['the_classes'])) ? implode(' ', $page_teaser['the_classes']) : '';
+    $page_teaser['breadcrumb'] = yoast_breadcrumb('<div class="breadcrumb-wrapper padd-top-sm padd-bottom-sm">', '</div>', false);
+    $page_teaser['trip_infos'] = (!empty($context['trip_infos'])) ? $context['trip_infos'] : '';
     if (!empty($page_teaser['page_teaser_media_type']) && $page_teaser['page_teaser_media_type'] == 'map') {
         $page_teaser['post_coordinates'] = (!empty(getAcfGroupFields('group_5b3635da6529e'))) ? getAcfGroupFields('group_5b3635da6529e') : '';
     }
 
-    $page_teaser['the_classes'] = [];
-    if (!empty($page_teaser['background_img_opacity'])) {
-        $page_teaser['the_classes'][] = $page_teaser['background_img_opacity'];
-    }
-
-    if (!empty($page_teaser['background_color'])) {
-        $page_teaser['the_classes'][] = $page_teaser['background_color'];
-    }
-
-    if (!empty($page_teaser['border_color'])) {
-        $page_teaser['the_classes'][] = $page_teaser['border_color'];
-    }
-
-
-    if (!empty($page_teaser['teaser_margin_bottom'])) {
-        $page_teaser['the_classes'][] = $page_teaser['teaser_margin_bottom'];
-    }
-
-    if (!empty($page_teaser['background_img'])) {
-        $page_teaser['the_classes'][] = 'isRel';
-    }
-
-    $page_teaser['classes'] = (!empty($page_teaser['the_classes'])) ? implode(' ', $page_teaser['the_classes']) : '';
-    $page_teaser['breadcrumb'] = yoast_breadcrumb('<div class="breadcrumb-wrapper padd-top-sm padd-bottom-sm">', '</div>', false);
-    $page_teaser['trip_infos'] = (!empty($context['trip_infos'])) ? $context['trip_infos'] : '';
-
     $context['page_teaser'] = Timber::compile($context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
 }
-
-$context['page_type'] = getTermsSlugs($context['post']->ID, 'page_type', true);
 
 /** ****************************
  * Compilation du visuel et accroche
@@ -94,9 +75,8 @@ if (!empty($page_hero['page_heading_media_type']) && ($page_hero['page_heading_m
     if (empty($page_teaser['page_teaser_display_title'])) {
         $page_hero['title_as_h1'] = true;
     }
-    if (!empty($page_hero['page_heading_img'])) {
-        $page_hero['page_heading_img']['attachment_more_data'] = getAttachmentMoreData($page_hero['page_heading_img']['ID']);
-    }
+
+    $page_hero['page_heading_img']['attachment_more_data'] = (!empty($page_hero['page_heading_img'])) ? getAttachmentMoreData($page_hero['page_heading_img']['ID']) : '';
     if (!empty($page_hero['page_heading_social_movie'])) {
         preg_match_all('@src="([^"]+)"@', $page_hero['page_heading_social_movie'], $result);
         $iframe_url = $result[1][0];
