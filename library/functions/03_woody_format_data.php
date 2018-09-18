@@ -193,9 +193,9 @@ function getTouristicSheetPreview($sheet_id, $sheet_wp)
         foreach ($sheet_data['items'] as $key => $item) {
             $data = [
                 'title' => (!empty($item['title'])) ? $item['title'] : '',
-                'sheet_type' => (!empty($item['bordereau'])) ? $item['bordereau'] : '',
+                'sheet_type' => (!empty($item['type'])) ? $item['type'] : '',
                 'description' => (!empty($item['desc'])) ? $item['desc'] : '',
-                'town' => (!empty($item['town'])) ? $item['town'] : '',
+                'sheet_town' => (!empty($item['town'])) ? $item['town'] : '',
                 'img' => [
                     'resizer' => true,
                     'url' => (!empty($item['img']['url'])) ? $item['img']['url']['manual'] : '',
@@ -210,18 +210,19 @@ function getTouristicSheetPreview($sheet_id, $sheet_wp)
             $data['location'] = [];
             $data['location']['lat'] = (!empty($item['gps'])) ? $item['gps']['latitude'] : '';
             $data['location']['lng'] = (!empty($item['gps'])) ? $item['gps']['longitude'] : '';
+            $data['sheet_itinerary'] = (!empty($item['itineraryLength'])) ? $item['itineraryLength']['value'] . $item['itineraryLength']['unit'] : '';
 
             if ($item['bordereau'] === 'HOT' or $item['bordereau'] == 'HPA') {
                 $rating = [];
                 for ($i=0; $i <= $item['ratings'][0]['value']; $i++) {
                     $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
                 }
-                $data['rating'] = implode('', $rating);
+                $data['sheet_rating'] = implode('', $rating);
             }
         }
     }
 
-    \PC::debug($sheet_data, 'Item fiche');
+    // \PC::debug($sheet_data, 'Item fiche');
 
     return $data;
 }
