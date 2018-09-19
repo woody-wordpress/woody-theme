@@ -215,6 +215,7 @@ class WoodyTheme_Plugins_Options
         $redirection_options = [
             'expire_404' => '-1',
             'expire_redirect' => '-1',
+            'ip_logging' => 0,
         ];
         $this->updateOption('redirection_options', $redirection_options);
 
