@@ -212,6 +212,12 @@ class WoodyTheme_Plugins_Options
         ];
         $this->updateOption('permalink-manager', $permalink_options);
 
+        $redirection_options = [
+            'expire_404' => '-1',
+            'expire_redirect' => '-1',
+        ];
+        $this->updateOption('redirection_options', $redirection_options);
+
         // Set default options for NestedPages
         $this->updateOption('nestedpages_menusync', 'nosync');
         $this->updateOption('nestedpages_disable_menu', 'true');
