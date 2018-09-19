@@ -27,18 +27,20 @@ class WoodyTheme_ACF_Counter
     public function countAutofocusEl(\WP_REST_Request $request)
     {
         $params = $request->get_params();
-
+        $tax_query = [];
         // Création du paramètre tax_query pour la wp_query
         // Référence : https://codex.wordpress.org/Class_Reference/WP_Query
-        $tax_query = [
+        if (!empty($params['focused_content_type'])) {
+            $tax_query = [
             'relation' => 'AND',
-            'page_type' => [
-                'taxonomy' => 'page_type',
-                'terms' => $params['focused_content_type'],
-                'field' => 'taxonomy_term_id',
-                'operator' => 'IN'
-            ],
-        ];
+                'page_type' => [
+                    'taxonomy' => 'page_type',
+                    'terms' => $params['focused_content_type'],
+                    'field' => 'taxonomy_term_id',
+                    'operator' => 'IN'
+                ],
+            ];
+        }
 
         // Si des termes ont été choisi pour filtrer les résultats
         // on créé tableau custom_tax à passer au paramètre tax_query

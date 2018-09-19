@@ -26,7 +26,7 @@ include get_template_directory() . '/header.php';
 $context['current_url'] = get_permalink();
 $context['active_social_shares'] = getActiveShares();
 $context['page_type'] = getTermsSlugs($context['post']->ID, 'page_type', true);
-$context['page_parts'] = (function_exists('getSubThemeCompiledParts')) ? getSubThemeCompiledParts() : '';
+$context['page_parts'] = SubWoodyTheme_TemplateParts::getSubThemeCompiledParts();
 
 
 
@@ -37,9 +37,8 @@ $trip_infos = [];
 if (!empty(getAcfGroupFields('group_5b6c5e6ff381d'))) {
     $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d');
     //TODO: Gérer le fichier gps pour affichage s/ carte
-    if ($trip_infos['the_duration']['count_days']) {
-        $trip_infos['the_duration']['count_days'] = humanDays($trip_infos['the_duration']['count_days']);
-    }
+    $trip_infos['the_duration']['count_days'] = ($trip_infos['the_duration']['count_days']) ? humanDays($trip_infos['the_duration']['count_days']) : '';
+    $trip_infos['the_price']['price'] = (!empty($trip_infos['the_price']['price'])) ? str_replace('.', ',', $trip_infos['the_price']['price']) : '';
     $context['trip_infos'] = Timber::compile($context['woody_components'][$trip_infos['tripinfos_woody_tpl']], $trip_infos);
 }
 
