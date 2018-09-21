@@ -26,12 +26,14 @@ class WoodyTheme_Tinymce
         array(
             'title' => 'Bouton principal',
             'selector' => 'a',
-            'classes' => 'button primary'
+            'classes' => 'button primary',
+            'exact' => true
         ),
         array(
             'title' => 'Bouton secondaire',
             'selector' => 'a',
-            'classes' => 'button secondary'
+            'classes' => 'button secondary',
+            'exact' => true
         ),
     );
         $init_array['style_formats'] = json_encode($style_formats);

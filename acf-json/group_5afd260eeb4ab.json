@@ -962,13 +962,13 @@
             }
         ]
     ],
-    "menu_order": 11,
-    "position": "normal",
+    "menu_order": 12,
+    "position": "acf_after_title",
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "field",
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1536911803
+    "modified": 1537457812
 }

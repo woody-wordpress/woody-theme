@@ -11,8 +11,8 @@
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "30",
-                "class": "",
+                "width": "50",
+                "class": "hide-label",
                 "id": ""
             },
             "taxonomy": "page_type",
@@ -36,11 +36,11 @@
     ],
     "menu_order": -100,
     "position": "acf_after_title",
-    "style": "seamless",
+    "style": "default",
     "label_placement": "top",
     "instruction_placement": "field",
     "hide_on_screen": "",
     "active": 1,
     "description": "Sélection du type de contenu basé sur la taxonomie \"page_type\"",
-    "modified": 1536846611
+    "modified": 1537458105
 }

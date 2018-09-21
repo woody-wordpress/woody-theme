@@ -134,7 +134,7 @@
             "return_format": "array",
             "preview_size": "thumbnail",
             "library": "all",
-            "min_width": 640,
+            "min_width": "",
             "min_height": "",
             "min_size": "",
             "max_width": "",
@@ -177,5 +177,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "En-tête générique avec Icône - Sur-titre - Titre - Sous-titre - Description",
-    "modified": 1536914550
+    "modified": 1537517396
 }

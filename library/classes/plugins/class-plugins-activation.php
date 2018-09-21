@@ -42,6 +42,7 @@ class WoodyTheme_Plugins_Activation
             'single-sign-on-client/wposso.php',
             'ssl-insecure-content-fixer/ssl-insecure-content-fixer.php',
             'wp-optimize/wp-optimize.php',
+            'mce-table-buttons/mce_table_buttons.php'
         ];
 
         $this->dev_plugins = [
