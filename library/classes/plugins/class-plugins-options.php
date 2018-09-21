@@ -32,7 +32,7 @@ class WoodyTheme_Plugins_Options
         update_option('minify_javascript', 'yes', '', 'yes');
         update_option('minify_html_comments', 'yes', '', 'yes');
         update_option('minify_html_xhtml', 'no', '', 'yes');
-        update_option('minify_html_relative', 'no', '', 'yes');
+        update_option('minify_html_relative', 'yes', '', 'yes');
         update_option('minify_html_scheme', 'no', '', 'yes');
         update_option('minify_html_utf8', 'no', '', 'yes');
         update_option('upload_path', WP_UPLOAD_DIR, '', 'yes');

@@ -284,7 +284,7 @@ class WoodyTheme_Enqueue_Assets
     private function assetPath($filename)
     {
         $manifest = [];
-        $manifest_path = WP_HOME . '/app/dist/rev-manifest.json';
+        $manifest_path = WP_HOME . '/app/dist/' . WP_SITE_KEY . '/rev-manifest.json';
         if (file_exists($manifest_path)) {
             $manifest = json_decode(file_get_contents($manifest_path), true);
 
