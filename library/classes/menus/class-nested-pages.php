@@ -22,7 +22,6 @@ class WoodyTheme_NestedPages
     public static function flushPostCache($post_id, $parent, $key)
     {
         // Flush Object when move post with NestedPage plugin
-        $post = get_post($post_id);
-        wp_update_post($post);
+        clean_post_cache($post_id);
     }
 }
