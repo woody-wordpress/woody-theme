@@ -30,7 +30,7 @@ new WoodyTheme_Tinymce();
 // new WoodyTheme_Videos();
 
 // Menu
-new WoodyTheme_Menus();
+new WoodyTheme_NestedPages();
 
 // Roles
 new WoodyTheme_Roles();
