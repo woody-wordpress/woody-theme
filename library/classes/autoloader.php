@@ -22,6 +22,7 @@ new WoodyTheme_Cleanup_Front();
 new WoodyTheme_Enqueue_Assets();
 
 // Content
+new WoodyTheme_Yoast();
 new WoodyTheme_Cron();
 new WoodyTheme_Post_Type();
 new WoodyTheme_Taxonomy();

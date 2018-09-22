@@ -16,7 +16,8 @@ class WoodyTheme_Plugins_Options
 
     protected function registerHooks()
     {
-        add_action('woody_theme_update', array($this, 'defineOptions'), 1);
+        //add_action('woody_theme_update', array($this, 'defineOptions'), 1);
+        add_action('init', array($this, 'defineOptions'), 1);
     }
 
     public function defineOptions()
@@ -224,6 +225,138 @@ class WoodyTheme_Plugins_Options
         $this->updateOption('nestedpages_disable_menu', 'true');
         $nestedpages_roles = ['editor'];
         $this->updateOption('nestedpages_allowsorting', $nestedpages_roles);
+
+        // Yoast SEO
+        $wpseo = [
+            'ms_defaults_set'            => false,
+            'disableadvanced_meta'       => true,
+            'onpage_indexability'        => true,
+            // 'baiduverify'                => '', // Text field.
+            // 'googleverify'               => '', // Text field.
+            // 'msverify'                   => '', // Text field.
+            // 'yandexverify'               => '',
+            // 'site_type'                  => '', // List of options.
+            // 'has_multiple_authors'       => '',
+            // 'environment_type'           => '',
+            'content_analysis_active'    => true,
+            'keyword_analysis_active'    => true,
+            'enable_admin_bar_menu'      => false,
+            'enable_cornerstone_content' => true,
+            'enable_xml_sitemap'         => true,
+            'enable_text_link_counter'   => false,
+            'show_onboarding_notice'     => false,
+        ];
+        $this->updateOption('wpseo', $wpseo);
+
+        $wpseo_titles = [
+            'title_test' => 0,
+            'forcerewritetitle' => true,
+            'separator' => 'sc-pipe',
+            'title-home-wpseo' => '%%sitename%%',
+            'title-author-wpseo' => '%%name%%, Auteur de %%sitename%% %%page%%',
+            'title-archive-wpseo' => '%%date%% %%sep%% %%sitename%%',
+            'title-search-wpseo' => 'Vous recherchez %%searchphrase%% %%sep%% %%sitename%%',
+            'title-404-wpseo' => 'Page non trouvée %%sep%% %%sitename%%',
+            'metadesc-home-wpseo' => '%%Description%%',
+            'metadesc-author-wpseo' => '',
+            'metadesc-archive-wpseo' => '',
+            'rssbefore' => '',
+            'rssafter' => 'La page %%POSTLINK%% est apparu la 1ère fois sur %%BLOGLINK%%.',
+            'noindex-author-wpseo' => true,
+            'noindex-author-noposts-wpseo' => true,
+            'noindex-archive-wpseo' => true,
+            'disable-author' => true,
+            'disable-date' => true,
+            'disable-post_format' => false,
+            'disable-attachment' => true,
+            'is-media-purge-relevant' => false,
+            'breadcrumbs-404crumb' => 'Erreur 404: Page non trouvée',
+            'breadcrumbs-display-blog-page' => false,
+            'breadcrumbs-boldlast' => false,
+            'breadcrumbs-archiveprefix' => 'Archives',
+            'breadcrumbs-enable' => true,
+            'breadcrumbs-home' => 'Accueil',
+            'breadcrumbs-prefix' => '',
+            'breadcrumbs-searchprefix' => 'Vous recherchez',
+            'breadcrumbs-sep' => '»',
+            'website_name' => '',
+            'person_name' => '',
+            'alternate_website_name' => '',
+            'company_logo' => '',
+            'company_name' => '',
+            'company_or_person' => '',
+            'stripcategorybase' => false,
+            'title-post' => '%%title%% %%sep%% %%sitename%%',
+            'metadesc-post' => '',
+            'noindex-post' => true,
+            'showdate-post' => false,
+            'display-metabox-pt-post' => false,
+            'title-page' => '%%title%% %%sep%% %%sitename%%',
+            'metadesc-page' => '%%Description%%',
+            'noindex-page' => false,
+            'showdate-page' => false,
+            'display-metabox-pt-page' => true,
+            'title-attachment' => '%%title%% %%sep%% %%sitename%%',
+            'metadesc-attachment' => '',
+            'noindex-attachment' => false,
+            'showdate-attachment' => false,
+            'display-metabox-pt-attachment' => true,
+            'title-touristic_sheet' => '%%title%% %%sep%% %%sitename%%',
+            'metadesc-touristic_sheet' => '%%Description%%',
+            'noindex-touristic_sheet' => false,
+            'showdate-touristic_sheet' => false,
+            'display-metabox-pt-touristic_sheet' => true,
+            'title-tax-category' => '%%term_title%% Archives %%sep%% %%sitename%%',
+            'metadesc-tax-category' => '',
+            'display-metabox-tax-category' => true,
+            'noindex-tax-category' => false,
+            'title-tax-post_format' => '%%term_title%% Archives %%sep%% %%sitename%%',
+            'metadesc-tax-post_format' => '',
+            'display-metabox-tax-post_format' => false,
+            'noindex-tax-post_format' => true,
+            'title-tax-page_type' => '%%term_title%% Archives %%sep%% %%sitename%%',
+            'metadesc-tax-page_type' => '',
+            'display-metabox-tax-page_type' => true,
+            'noindex-tax-page_type' => false,
+            'title-tax-themes' => '%%term_title%% Archives %%sep%% %%sitename%%',
+            'metadesc-tax-themes' => '',
+            'display-metabox-tax-themes' => true,
+            'noindex-tax-themes' => false,
+            'title-tax-places' => '%%term_title%% Archives %%sep%% %%sitename%%',
+            'metadesc-tax-places' => '',
+            'display-metabox-tax-places' => true,
+            'noindex-tax-places' => false,
+            'title-tax-seasons' => '%%term_title%% Archives %%sep%% %%sitename%%',
+            'metadesc-tax-seasons' => '',
+            'display-metabox-tax-seasons' => true,
+            'noindex-tax-seasons' => false,
+            'title-tax-attachment_types' => '%%term_title%% Archives %%sep%% %%sitename%%',
+            'metadesc-tax-attachment_types' => '',
+            'display-metabox-tax-attachment_types' => true,
+            'noindex-tax-attachment_types' => false,
+            'title-tax-attachment_categories' => '%%term_title%% Archives %%sep%% %%sitename%%',
+            'metadesc-tax-attachment_categories' => '',
+            'display-metabox-tax-attachment_categories' => true,
+            'noindex-tax-attachment_categories' => false,
+            'title-tax-attachment_hashtags' => '%%term_title%% Archives %%sep%% %%sitename%%',
+            'metadesc-tax-attachment_hashtags' => '',
+            'display-metabox-tax-attachment_hashtags' => true,
+            'noindex-tax-attachment_hashtags' => false,
+            'post_types-post-maintax' => 0,
+            'post_types-page-maintax' => 0,
+            'post_types-attachment-maintax' => 0,
+            'taxonomy-page_type-ptparent' => 0,
+            'taxonomy-themes-ptparent' => 0,
+            'taxonomy-places-ptparent' => 0,
+            'taxonomy-seasons-ptparent' => 0,
+            'taxonomy-attachment_types-ptparent' => 0,
+            'taxonomy-attachment_categories-ptparent' => 0,
+            'taxonomy-attachment_hashtags-ptparent' => 0,
+            'title-tax-post_tag' => '%%term_title%% Archives %%page%% %%sep%% %%sitename%%',
+            'metadesc-tax-post_tag' => '',
+            'noindex-tax-post_tag' => false,
+        ];
+        //$this->updateOption('wpseo_titles', $wpseo_titles);
     }
 
     private function updateOption($option_name, $settings, $autoload = 'yes')
