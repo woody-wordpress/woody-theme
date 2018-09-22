@@ -235,8 +235,8 @@ class WoodyTheme_Plugins_Options
             // 'msverify'                   => '', // Text field.
             // 'yandexverify'               => '',
             // 'site_type'                  => '', // List of options.
-            // 'has_multiple_authors'       => '',
-            // 'environment_type'           => '',
+            'has_multiple_authors'       => false,
+            'environment_type'           => (WP_ENV == 'prod' && WP_ENV !=  'crt-bretagne') ? 'production' : '', // TODO remove crt-bretagne after MEL
             'content_analysis_active'    => true,
             'keyword_analysis_active'    => true,
             'enable_admin_bar_menu'      => false,
