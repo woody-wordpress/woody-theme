@@ -22,13 +22,13 @@ new WoodyTheme_Cleanup_Front();
 new WoodyTheme_Enqueue_Assets();
 
 // Content
-new WoodyTheme_Yoast();
 new WoodyTheme_Cron();
 new WoodyTheme_Post_Type();
 new WoodyTheme_Taxonomy();
 new WoodyTheme_Images();
 new WoodyTheme_Tinymce();
 // new WoodyTheme_Videos();
+// new WoodyTheme_Yoast();
 
 // Menu
 new WoodyTheme_NestedPages();

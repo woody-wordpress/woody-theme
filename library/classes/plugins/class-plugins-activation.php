@@ -42,7 +42,8 @@ class WoodyTheme_Plugins_Activation
             'single-sign-on-client/wposso.php',
             'ssl-insecure-content-fixer/ssl-insecure-content-fixer.php',
             'wp-optimize/wp-optimize.php',
-            'mce-table-buttons/mce_table_buttons.php'
+            'mce-table-buttons/mce_table_buttons.php',
+            'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
         ];
 
         $this->dev_plugins = [
@@ -52,7 +53,6 @@ class WoodyTheme_Plugins_Activation
 
         $this->deactivate_plugins = [
             'minify-html-markup/minify-html.php',
-            'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
             'bea-media-analytics/bea-media-analytics.php',
             'regenerate-thumbnails/regenerate-thumbnails.php',
             'acf-repeater-flexible-content-collapser/acf-repeater-flexible-content-collapser.php',
