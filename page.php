@@ -8,6 +8,7 @@
  */
 
 $context = Timber::get_context();
+$context['title'] = wp_title(null, false);
 $context['post'] = new TimberPost();
 $context['woody_components'] = getWoodyTwigPaths();
 // PC::debug(get_class_methods(TimberPost), 'TwigMethods');
@@ -26,8 +27,9 @@ include get_template_directory() . '/header.php';
 $context['current_url'] = get_permalink();
 $context['active_social_shares'] = getActiveShares();
 $context['page_type'] = getTermsSlugs($context['post']->ID, 'page_type', true);
-$context['page_parts'] = SubWoodyTheme_TemplateParts::getSubThemeCompiledParts();
-
+if (class_exists('SubWoodyTheme_TemplateParts')) {
+    $context['page_parts'] = SubWoodyTheme_TemplateParts::getSubThemeCompiledParts();
+}
 
 
 /** ****************************

@@ -13,6 +13,9 @@
 
 use Symfony\Component\Finder\Finder;
 
+// Theme Support
+add_theme_support('html5');
+
 // Load functions
 $finder = new Finder();
 $finder->files()->in(__DIR__ . '/library/functions')->name('*.php')->sortByName();
