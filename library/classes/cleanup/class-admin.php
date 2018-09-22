@@ -166,6 +166,7 @@ class WoodyTheme_Cleanup_Admin
     {
         // global $wp_meta_boxes;
         // \PC::debug($wp_meta_boxes);
+        remove_action('welcome_panel', 'wp_welcome_panel');
         remove_meta_box('dashboard_right_now', 'dashboard', 'normal');
         remove_meta_box('dashboard_activity', 'dashboard', 'normal');
         remove_meta_box('dashboard_primary', 'dashboard', 'side');
