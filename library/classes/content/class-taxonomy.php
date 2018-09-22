@@ -17,7 +17,7 @@ class WoodyTheme_Taxonomy
 
     protected function registerHooks()
     {
-        add_action('admin_init', array($this, 'insertTerms'), 1);
+        add_action('woody_theme_update', array($this, 'insertTerms'), 1);
     }
 
     public function insertTerms()
@@ -28,10 +28,10 @@ class WoodyTheme_Taxonomy
         wp_insert_term('Page d\'accueil', 'page_type', array('slug' => 'front_page'));
 
         // On inclut les termes génériques à la taxo
-        wp_insert_term('Été', 'seasons', array('slug' => 'summer'));
-        wp_insert_term('Printemps', 'seasons', array('slug' => 'spring'));
-        wp_insert_term('Automne', 'seasons', array('slug' => 'autumn'));
-        wp_insert_term('Hiver', 'seasons', array('slug' => 'winter'));
+        wp_insert_term('Été', 'seasons', array('slug' => 'ete'));
+        wp_insert_term('Printemps', 'seasons', array('slug' => 'printemps'));
+        wp_insert_term('Automne', 'seasons', array('slug' => 'automne'));
+        wp_insert_term('Hiver', 'seasons', array('slug' => 'hiver'));
     }
 
     public function registerTaxonomy()
