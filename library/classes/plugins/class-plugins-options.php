@@ -16,8 +16,7 @@ class WoodyTheme_Plugins_Options
 
     protected function registerHooks()
     {
-        //add_action('woody_theme_update', array($this, 'defineOptions'), 1);
-        add_action('init', array($this, 'defineOptions'), 1);
+        add_action('woody_theme_update', array($this, 'defineOptions'), 1);
     }
 
     public function defineOptions()
@@ -356,7 +355,7 @@ class WoodyTheme_Plugins_Options
             'metadesc-tax-post_tag' => '',
             'noindex-tax-post_tag' => false,
         ];
-        //$this->updateOption('wpseo_titles', $wpseo_titles);
+        $this->updateOption('wpseo_titles', $wpseo_titles);
     }
 
     private function updateOption($option_name, $settings, $autoload = 'yes')
