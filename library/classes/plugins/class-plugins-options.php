@@ -229,12 +229,8 @@ class WoodyTheme_Plugins_Options
         $wpseo = [
             'ms_defaults_set'            => false,
             'disableadvanced_meta'       => true,
-            'onpage_indexability'        => true,
-            // 'baiduverify'                => '', // Text field.
-            // 'googleverify'               => '', // Text field.
-            // 'msverify'                   => '', // Text field.
-            // 'yandexverify'               => '',
-            // 'site_type'                  => '', // List of options.
+            'onpage_indexability'        => false,
+            // 'googleverify'               => '',
             'has_multiple_authors'       => false,
             'environment_type'           => (WP_ENV == 'prod' && WP_ENV !=  'crt-bretagne') ? 'production' : '', // TODO remove crt-bretagne after MEL
             'content_analysis_active'    => true,
