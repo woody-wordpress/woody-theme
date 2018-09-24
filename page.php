@@ -22,6 +22,15 @@ if (!empty($credentials['public_login']) && !empty($credentials['public_password
     $context['site_config'] = json_encode($context['site_config']);
 }
 
+// Icons
+$icons = ['favicon', '16', '32', '64', '120', '128', '152', '167', '180', '192'];
+foreach ($icons as $icon) {
+    $icon_ext = ($icon == 'favicon') ? $icon . '.ico' : 'favicon.' . $icon . 'w-' . $icon . 'h.png';
+    if (file_exists(WP_CONTENT_DIR . '/dist/' . WP_SITE_KEY . '/favicon/' . $icon_ext)) {
+        $context['icons'][$icon] = WP_HOME . '/app/dist/' . WP_SITE_KEY . '/favicon/' . $icon_ext;
+    }
+}
+
 include get_template_directory() . '/header.php';
 
 $context['current_url'] = get_permalink();
