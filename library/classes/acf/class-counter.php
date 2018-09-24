@@ -69,8 +69,8 @@ class WoodyTheme_ACF_Counter
         $the_query = [
             'post_type' => (!empty($params['focused_post_type'])) ? $params['focused_post_type'] : 'page',
             'tax_query' => $tax_query,
-            // 'nopaging' => true,
-            'posts_per_page' => (!empty($params['focused_count'])) ? $params['focused_count'][0] : -1
+            'post_status' => 'publish',
+            'posts_per_page' => (!empty($params['focused_count'])) ? intval($params['focused_count'][0]) : 16
         ];
 
         // Si Hiérarchie = Enfants directs de la page

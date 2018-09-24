@@ -10,25 +10,24 @@
  * @return   the_items - Un tableau de données
  *
  */
-
 function getAutoFocus_data($the_post, $query_form)
 {
+    \PC::debug($query_form, '$query_form');
     $the_items = [];
     $tax_query = [];
 
     // Création du paramètre tax_query pour la wp_query
     // Référence : https://codex.wordpress.org/Class_Reference/WP_Query
-
     if (!empty($query_form['focused_content_type'])) {
         $tax_query = [
             'relation' => 'AND',
             'page_type' => array(
-            'taxonomy' => 'page_type',
-            'terms' => $query_form['focused_content_type'],
-            'field' => 'taxonomy_term_id',
-            'operator' => 'IN'
-        ),
-    ];
+                'taxonomy' => 'page_type',
+                'terms' => $query_form['focused_content_type'],
+                'field' => 'taxonomy_term_id',
+                'operator' => 'IN'
+            ),
+        ];
     }
 
     // Si des termes ont été choisi pour filtrer les résultats
@@ -36,7 +35,7 @@ function getAutoFocus_data($the_post, $query_form)
     $custom_tax = [];
     if (!empty($query_form['focused_taxonomy_terms'])) {
 
-    // On récupère la relation choisie (ET/OU) entre les termes
+        // On récupère la relation choisie (ET/OU) entre les termes
         // et on génère un tableau de term_id pour chaque taxonomie
         $tax_query['custom_tax']['relation'] = (!empty($query_form['focused_taxonomy_terms_andor'])) ? $query_form['focused_taxonomy_terms_andor'] : 'OR';
         foreach ($query_form['focused_taxonomy_terms'] as $focused_term_key => $focused_term) {
@@ -45,21 +44,21 @@ function getAutoFocus_data($the_post, $query_form)
         }
         foreach ($custom_tax as $taxo => $terms) {
             $tax_query['custom_tax'][] = array(
-            'taxonomy' => $taxo,
-            'terms' => $terms,
-            'field' => 'taxonomy_term_id',
-            'operator' => 'IN'
-        );
+                'taxonomy' => $taxo,
+                'terms' => $terms,
+                'field' => 'taxonomy_term_id',
+                'operator' => 'IN'
+            );
         }
     }
-
 
     // On créé la wp_query en fonction des choix faits dans le backoffice
     // NB : si aucun choix n'a été fait, on remonte automatiquement tous les contenus de type page
     $the_query = [
-    'post_type' => 'page',
-    'posts_per_page' => -1,
-];
+        'post_type' => 'page',
+        'posts_per_page' =>  (!empty($query_form['focused_count'])) ? $query_form['focused_count'] : 16,
+        'post_status' => 'publish',
+    ];
 
     $the_query['tax_query'] = (!empty($tax_query)) ? $tax_query : '' ;
 
@@ -83,14 +82,10 @@ function getAutoFocus_data($the_post, $query_form)
         foreach ($focused_posts->posts as $key => $post) {
             $data = [];
             $post = Timber::get_post($post->ID);
-            $status = $post->post_status;
-            if ($post->post_status === 'draft') {
-                continue;
-            }
             $data = getPagePreview($query_form, $post);
+
             // On ajoute un texte dans le bouton "Lire la suite" s'il a été saisi
             $data['link']['title'] = (!empty($query_form['links_label'])) ? $query_form['links_label'] : '';
-
             $the_items['items'][$key] = $data;
         }
     }
@@ -107,7 +102,6 @@ function getAutoFocus_data($the_post, $query_form)
  * @return   the_items - Un tableau de données
  *
  */
-
 function getManualFocus_data($layout)
 {
     $the_items = [];
@@ -121,7 +115,7 @@ function getManualFocus_data($layout)
         } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
             $item = $item_wrapper['existing_content'];
             $status = $item['content_selection']->post_status;
-            if ($status === 'draft') {
+            if ($status !== 'publish') {
                 continue;
             }
             if ($item['content_selection']->post_type == 'page') {
@@ -146,7 +140,6 @@ function getManualFocus_data($layout)
  * @return   data - Un tableau de données
  *
  */
-
 function getCustomPreview($item)
 {
     $data = [];
@@ -223,10 +216,8 @@ function getTouristicSheetPreview($sheet_id, $sheet_wp)
     }
 
     // \PC::debug($sheet_data, 'Item fiche');
-
     return $data;
 }
-
 
 /**
  *
@@ -261,7 +252,6 @@ function getFocusBlockTitles($layout)
  * @return   data - Un tableau de données
  *
  */
-
 function getPagePreview($item_wrapper, $item)
 {
     $data = [];
@@ -383,32 +373,32 @@ function getDisplayOptions($scope)
 function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array())
 {
 
-// On définit certains arguments par défaut pour la requête
+    // On définit certains arguments par défaut pour la requête
     $default_args = [
-    'size' => -1,
-    'operator' => 'IN',
-    'relation' => 'OR',
-    'post_mime_type' => 'image' // Could be image/gif for gif only, video, video/mp4, application, application.pdf, ...
-];
+        'size' => -1,
+        'operator' => 'IN',
+        'relation' => 'OR',
+        'post_mime_type' => 'image' // Could be image/gif for gif only, video, video/mp4, application, application.pdf, ...
+    ];
     $query_args = array_merge($default_args, $query_args);
 
     // On créé la requête
     $get_attachments = [
-    'post_type'      => 'attachment',
-    'post_status' => 'inherit',
-    'post_mime_type' => $query_args['post_mime_type'],
-    'post_per_page' => $query_args['size'],
-    'nopaging' => true,
-    'tax_query' => array(
-        array(
-            'taxonomy' => $taxonomy,
-            'terms' => $terms,
-            'field' => 'taxonomy_term_id',
-            'relation' => $query_args['relation'],
-            'operator' => $query_args['operator']
+        'post_type'      => 'attachment',
+        'post_status' => 'inherit',
+        'post_mime_type' => $query_args['post_mime_type'],
+        'post_per_page' => $query_args['size'],
+        'nopaging' => true,
+        'tax_query' => array(
+            array(
+                'taxonomy' => $taxonomy,
+                'terms' => $terms,
+                'field' => 'taxonomy_term_id',
+                'relation' => $query_args['relation'],
+                'operator' => $query_args['operator']
+            )
         )
-    )
-];
+    ];
 
     $attachments = new WP_Query($get_attachments);
     $acf_attachements = [];
@@ -431,7 +421,6 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
  * @return   scope - Un DOM Html
  *
  */
-
 function nestedGridsComponents($scope, $gridTplField, $uniqIid_prefix = '')
 {
     global $post;
@@ -472,7 +461,6 @@ function nestedGridsComponents($scope, $gridTplField, $uniqIid_prefix = '')
     return $scope;
 }
 
-
 function formatFocusesData($layout, $current_post, $twigPaths)
 {
     $return = '';
@@ -482,6 +470,7 @@ function formatFocusesData($layout, $current_post, $twigPaths)
     } else {
         $the_items = getAutoFocus_data($current_post, $layout);
     }
+
     $the_items['focus_no_padding'] = $layout['focus_no_padding'];
     $the_items['block_titles'] = getFocusBlockTitles($layout);
     $the_items['display_button'] = $layout['display_button'];
@@ -490,7 +479,6 @@ function formatFocusesData($layout, $current_post, $twigPaths)
 
     return $return;
 }
-
 
 /**
  *
@@ -502,7 +490,6 @@ function formatFocusesData($layout, $current_post, $twigPaths)
  * @return   is_instagram - Booléen
  *
  */
-
 function isWoodyInstagram($media_item, $is_instagram = false)
 {
     $media_types = [];
@@ -527,7 +514,6 @@ function isWoodyInstagram($media_item, $is_instagram = false)
 
     return $is_instagram;
 }
-
 
 function getAttachmentMoreData($attachment_id)
 {
