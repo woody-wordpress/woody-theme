@@ -1,7 +1,8 @@
 {
     "key": "group_5b461a3831284",
     "title": "Appel à l'action",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5b461a2b131b3",
             "label": "Contenu",
             "name": "",
@@ -91,11 +92,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b4621c8aebdd",
-                    "operator": "==",
-                    "value": "link"
-                }]
+                [
+                    {
+                        "field": "field_5b4621c8aebdd",
+                        "operator": "==",
+                        "value": "link"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -103,7 +106,8 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5b7595f282076_field_5b0422ed7d07b",
                     "label": "Icône",
                     "name": "button_woody_icon",
@@ -149,6 +153,30 @@
                     "__label": "Lien"
                 },
                 {
+                    "key": "field_5ba8aaececfcf",
+                    "label": "Taille du bouton",
+                    "name": "cta_link_button_size",
+                    "type": "button_group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "tiny": "Très petit",
+                        "small": "Petit",
+                        "basic": "Basique",
+                        "large": "Gros"
+                    },
+                    "allow_null": 0,
+                    "default_value": "basic",
+                    "layout": "horizontal",
+                    "return_format": "value"
+                },
+                {
                     "key": "field_5b47095f7b264",
                     "label": "Ouvrir le lien dans une pop-in",
                     "name": "add_modal",
@@ -177,11 +205,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b4621c8aebdd",
-                    "operator": "==",
-                    "value": "file"
-                }]
+                [
+                    {
+                        "field": "field_5b4621c8aebdd",
+                        "operator": "==",
+                        "value": "file"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -189,7 +219,8 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5b462226aebde_field_5b042b30ab6a3",
                     "label": "Icône",
                     "name": "file_woody_icon",
@@ -262,6 +293,30 @@
                     "__key": "field_5b042b61ab6a5",
                     "__name": "label",
                     "__label": "Libellé du bouton"
+                },
+                {
+                    "key": "field_5ba8aba9ecfd0",
+                    "label": "Taille du bouton",
+                    "name": "cta_file_button_size",
+                    "type": "button_group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "tiny": "Très petit",
+                        "small": "Petit",
+                        "basic": "Basique",
+                        "large": "Gros"
+                    },
+                    "allow_null": 0,
+                    "default_value": "basic",
+                    "layout": "horizontal",
+                    "return_format": "value"
                 }
             ]
         },
@@ -345,7 +400,8 @@
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0,
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "ID": 0,
                     "key": "field_5b461b46131ba_field_5b043ca4a6fe3",
                     "label": "Couleur de fond",
@@ -386,13 +442,52 @@
                 },
                 {
                     "ID": 0,
+                    "key": "field_5b461b46131ba_field_5b978a13feaa6",
+                    "label": "Bordure",
+                    "name": "border_color",
+                    "prefix": "acf[field_5b461b46131ba]",
+                    "type": "button_group",
+                    "value": null,
+                    "menu_order": 1,
+                    "instructions": "",
+                    "required": 0,
+                    "id": "",
+                    "class": "",
+                    "conditional_logic": 0,
+                    "parent": "group_5b461a3831284",
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "_name": "border_color",
+                    "_prepare": 0,
+                    "_valid": 1,
+                    "choices": {
+                        "border-primary": "Couleur principale",
+                        "border-secondary": "Couleur secondaire",
+                        "border-black": "Noir",
+                        "border-darkgray": "Gris foncé",
+                        "border-lightgray": "Gris clair"
+                    },
+                    "allow_null": 1,
+                    "default_value": "",
+                    "layout": "horizontal",
+                    "return_format": "value",
+                    "_clone": "field_5b461b46131ba",
+                    "__key": "field_5b978a13feaa6",
+                    "__name": "border_color",
+                    "__label": "Bordure"
+                },
+                {
+                    "ID": 0,
                     "key": "field_5b461b46131ba_field_5b043d94a6fe4",
                     "label": "Image de fond",
                     "name": "background_img",
                     "prefix": "acf[field_5b461b46131ba]",
                     "type": "image",
                     "value": null,
-                    "menu_order": 1,
+                    "menu_order": 2,
                     "instructions": "",
                     "required": 0,
                     "id": "",
@@ -430,7 +525,7 @@
                     "prefix": "acf[field_5b461b46131ba]",
                     "type": "button_group",
                     "value": null,
-                    "menu_order": 2,
+                    "menu_order": 3,
                     "instructions": "",
                     "required": 0,
                     "id": "",
@@ -464,11 +559,13 @@
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -478,5 +575,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Un bloc d'appel à laction avec texte et lien\/fichier + couleur de fond possible",
-    "modified": 1536914596
+    "modified": 1537781030
 }
