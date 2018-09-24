@@ -67,7 +67,7 @@ if (targetNode != null) {
                         //
                         if (window.siteConfig) {
                             console.log(siteConfig);
-                            if (typeof currentConfig.confId != undefined && currentConfig.confID.length != 0) {
+                            if (typeof currentConfig != undefined && currentConfig.confID.length != 0) {
                                 currentConfig.iframeUrl = 'https://api.tourism-system.rc-preprod.com/render/facetconfs/cles-config/' + currentConfig.confID + '/' + siteConfig.site_key + '/fr?login=' + siteConfig.login + '&pwd=' + siteConfig.password;
                             } else {
                                 currentConfig.iframeUrl = 'https://api.tourism-system.rc-preprod.com/render/facetconfs/choix-playlist/' + siteConfig.site_key + '/fr?context=' + currentConfig.context + '&name=' + currentConfig.playlistName + '&login=' + siteConfig.login + '&pwd=' + siteConfig.password;
