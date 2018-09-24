@@ -12,7 +12,6 @@
  */
 function getAutoFocus_data($the_post, $query_form)
 {
-    \PC::debug($query_form, '$query_form');
     $the_items = [];
     $tax_query = [];
 
