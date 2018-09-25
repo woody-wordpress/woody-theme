@@ -96,7 +96,7 @@ class WoodyTheme_ACF
                     $count_data = implode(' ', $count_data);
 
                     $field['choices'][$key] = '<div class="tpl-choice-wrapper" ' . $count_data . '>
-                    <img class="img-responsive" src="' . WP_HOME . '/app/dist/' . WP_SITE_KEY . '/img/woody-library/views/' . $component['thumbnails']['small'] . '?version=' . get_option('woody_theme_version') . '" alt="' . $key . '" width="150" height="150" />
+                    <img class="img-responsive lazyload" data-src="' . WP_HOME . '/app/dist/' . WP_SITE_KEY . '/img/woody-library/views/' . $component['thumbnails']['small'] . '?version=' . get_option('woody_theme_version') . '" alt="' . $key . '" width="150" height="150" />
                     <h5 class="tpl-title">' . $tpl_name . '</h5>
                     <div class="dashicons dashicons-info toggle-desc"></div>
                     <div class="tpl-desc hidden"><h4 class="tpl-title">' . $tpl_name . '</h4>' . $tpl_desc . '<span class="dashicons dashicons-no close-desc"></span></div>
