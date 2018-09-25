@@ -145,5 +145,5 @@ $('#post').each(function() {
 
     acf.addAction('ready_field/key=field_5b27890c84ed3', getAutoFocusQuery);
     acf.addAction('append_field/key=field_5b27890c84ed3', getAutoFocusQuery);
-    acf.addAction('remove_field/key=field_5b27890c84ed3', getAutoFocusQuery);
+    //acf.addAction('remove_field/key=field_5b27890c84ed3', getAutoFocusQuery);
 });
