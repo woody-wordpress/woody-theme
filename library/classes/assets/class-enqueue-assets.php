@@ -214,11 +214,10 @@ class WoodyTheme_Enqueue_Assets
             wp_enqueue_script('twigjs', 'https://cdnjs.cloudflare.com/ajax/libs/twig.js/0.8.9/twig.min.js', array(), '', true);
             wp_enqueue_script('twigjs', 'https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.8/uuid.min.js', array(), '', true);
             wp_enqueue_script('lodash', 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js', array(), '', true);
-            wp_enqueue_script('arrive', 'https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js', array('jquery'), '', true);
+            wp_enqueue_script('arrive', 'https://cdn.jsdelivr.net/npm/arrive@2.4.1/src/arrive.min.js', array('jquery'), '', true);
             wp_enqueue_script('sheet_item', $apirender_base_uri.'/assets/scripts/raccourci/sheet_item.min.js', array('jquery'), '', true);
 
-            $js_dependencies__playlist = [
-                'bootstrap','match8','nouislider','wnumb','chosen','moment','picker','twigjs','lodash','arrive','sheet_item'];
+            $js_dependencies__playlist = ['bootstrap','match8','nouislider','wnumb','chosen','moment','picker','twigjs','lodash','arrive','sheet_item'];
             wp_enqueue_script('playlist', $apirender_base_uri.'/assets/scripts/raccourci/playlist.'. $jsModeSuffix .'.js', $js_dependencies__playlist, '', true);
             $playlist_map_query = !empty($map_keys) ? '?'.http_build_query($map_keys) : '';
             wp_enqueue_script('playlist_map', $apirender_base_uri.'/assets/scripts/raccourci/playlist-map.leaflet.'. $jsModeSuffix .'.js'.$playlist_map_query, array_merge($js_dependencies_rcmap, array('playlist')), '', true);
@@ -265,15 +264,15 @@ class WoodyTheme_Enqueue_Assets
     public function enqueueAdminAssets()
     {
         // Dependencies of admin.js
-        wp_enqueue_script('arrive', 'https://cdn.jsdelivr.net/npm/arrive@2.4.1/src/arrive.min.js', array(), '', true);
-        wp_enqueue_script('selectize', 'https://cdn.jsdelivr.net/npm/selectize@0.12.6/dist/js/standalone/selectize.min.js', array('jquery'), '', true);
+        // wp_enqueue_script('arrive', 'https://cdn.jsdelivr.net/npm/arrive@2.4.1/src/arrive.min.js', array(), '', true);
+        // wp_enqueue_script('selectize', 'https://cdn.jsdelivr.net/npm/selectize@0.12.6/dist/js/standalone/selectize.min.js', array('jquery'), '', true);
         wp_enqueue_script('lazysizes', 'https://cdn.jsdelivr.net/npm/lazysizes@4.1.2/lazysizes.min.js', array(), '', true);
 
         // Enqueue the main Scripts
         $dependencies = [
             'jquery',
-            'arrive',
-            'selectize'
+            // 'arrive',
+            // 'selectize'
         ];
         wp_enqueue_script('admin-javascripts', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('js/admin.js'), $dependencies, wp_get_theme(get_template())->get('Version'), true);
 
