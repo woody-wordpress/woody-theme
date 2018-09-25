@@ -1,5 +1,5 @@
 import $ from 'jquery';
 
-window.onload = function() {
-    $('body.wp-admin').addClass('windowReady');
-}
+//window.onload = function() {
+$('body.wp-admin').addClass('windowReady');
+//}
