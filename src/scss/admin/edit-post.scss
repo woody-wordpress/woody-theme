@@ -1,20 +1,20 @@
-#post-body-content {
-    // Afin de ne pas avoir à remonter tout en haut du post pour l'enregistrer :)
-    max-height: 100vh;
-    overflow-y: scroll;
+// #post-body-content {
+//     // Afin de ne pas avoir à remonter tout en haut du post pour l'enregistrer :)
+//     max-height: 100vh;
+//     overflow-y: scroll;
 
-    &:after {
-        display: block;
-        content: '';
-        width: 100%;
-        height: 40px;
-        position: sticky;
-        z-index: 1;
-        bottom: 0;
-        left: 0;
-        background-image: linear-gradient(to bottom, transparent, #f1f1f1);
-    }
-}
+//     &:after {
+//         display: block;
+//         content: '';
+//         width: 100%;
+//         height: 40px;
+//         position: sticky;
+//         z-index: 1;
+//         bottom: 0;
+//         left: 0;
+//         background-image: linear-gradient(to bottom, transparent, #f1f1f1);
+//     }
+// }
 
 //TODO: retirer ces lignes quand on aura unset la metabox
 #pageparentdiv {
