@@ -260,7 +260,6 @@ class WoodyTheme_Enqueue_Assets
 
         // Enqueue the main Stylesheet.
         wp_enqueue_style('main-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/main.css'), array(), '', 'all');
-        wp_enqueue_style('font-awesome', 'https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css', array(), '', 'all');
     }
 
     public function enqueueAdminAssets()
@@ -287,7 +286,7 @@ class WoodyTheme_Enqueue_Assets
     private function assetPath($filename)
     {
         $manifest = [];
-        $manifest_path = WP_HOME . '/app/dist/' . WP_SITE_KEY . '/rev-manifest.json';
+        $manifest_path = WP_CONTENT_DIR . '/dist/' . WP_SITE_KEY . '/rev-manifest.json';
         if (file_exists($manifest_path)) {
             $manifest = json_decode(file_get_contents($manifest_path), true);
 
