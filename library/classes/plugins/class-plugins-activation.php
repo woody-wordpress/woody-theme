@@ -46,11 +46,6 @@ class WoodyTheme_Plugins_Activation
             'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
         ];
 
-        $this->dev_plugins = [
-            'query-monitor/query-monitor.php',
-            'wp-php-console/wp-php-console.php',
-        ];
-
         $this->deactivate_plugins = [
             'minify-html-markup/minify-html.php',
             'bea-media-analytics/bea-media-analytics.php',
@@ -65,12 +60,16 @@ class WoodyTheme_Plugins_Activation
             'acf-relationship-create-pro/acf-relationship-create-pro.php',
         ];
 
-        // Enable debug plugins on DEV
-        if (WP_ENV == 'dev') {
-            $this->activate_plugins = array_merge($this->activate_plugins, $this->dev_plugins);
-            $this->dev_plugins = [];
+        if (SAVEQUERIES == true) {
+            $this->activate_plugins[] = 'query-monitor/query-monitor.php';
         } else {
-            $this->deactivate_plugins = array_merge($this->deactivate_plugins, $this->dev_plugins);
+            $this->deactivate_plugins[] = 'query-monitor/query-monitor.php';
+        }
+
+        if (WP_DEBUG == true) {
+            $this->activate_plugins[] = 'wp-php-console/wp-php-console.php';
+        } else {
+            $this->deactivate_plugins[] = 'wp-php-console/wp-php-console.php';
         }
 
         require_once(ABSPATH . 'wp-admin/includes/plugin.php');
@@ -90,7 +89,6 @@ class WoodyTheme_Plugins_Activation
             }
         }
 
-        deactivate_plugins($this->dev_plugins);
         deactivate_plugins($this->deactivate_plugins);
     }
 }
