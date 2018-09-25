@@ -28,6 +28,7 @@ class WoodyTheme_ACF_Counter
     {
         $params = $request->get_params();
         $tax_query = [];
+
         // Création du paramètre tax_query pour la wp_query
         // Référence : https://codex.wordpress.org/Class_Reference/WP_Query
         if (!empty($params['focused_content_type'])) {
@@ -73,23 +74,18 @@ class WoodyTheme_ACF_Counter
             'posts_per_page' => (!empty($params['focused_count'])) ? intval($params['focused_count'][0]) : 16
         ];
 
-        // Si Hiérarchie = Enfants directs de la page
-        // On passe le post ID dans le paramètre post_parent de la query
-        $post_parent = wp_get_post_parent_id($params['current_post']);
-
         if ($params['focused_hierarchy'][0] == 'child_of') {
             $the_query['post_parent'] = $params['current_post'];
         } elseif ($params['focused_hierarchy'][0] == 'brother_of') {
+            // Si Hiérarchie = Enfants directs de la page
+            // On passe le post ID dans le paramètre post_parent de la query
+            $post_parent = wp_get_post_parent_id($params['current_post']);
             $the_query['post_parent'] = $post_parent;
         }
 
-        $the_query_key = 'autofocus_count-' . md5(serialize($the_query));
-        if (false === ($focused_posts_count = get_transient($the_query_key))) {
-            // It wasn't there, so regenerate the data and save the transient
-            $focused_posts = new WP_Query($the_query);
-            $focused_posts_count = $focused_posts->post_count;
-            set_transient($the_query_key, $focused_posts_count);
-        }
+        // It wasn't there, so regenerate the data and save the transient
+        $focused_posts = new WP_Query($the_query);
+        $focused_posts_count = $focused_posts->post_count;
 
         return $focused_posts_count;
     }
