@@ -83,9 +83,13 @@ class WoodyTheme_ACF_Counter
             $the_query['post_parent'] = $post_parent;
         }
 
-        // On créé la wp_query avec les paramètres définis
-        $focused_posts = new WP_Query($the_query);
-        $focused_posts_count = $focused_posts->post_count;
+        $the_query_key = 'autofocus_count-' . md5(serialize($the_query));
+        if (false === ($focused_posts_count = get_transient($the_query_key))) {
+            // It wasn't there, so regenerate the data and save the transient
+            $focused_posts = new WP_Query($the_query);
+            $focused_posts_count = $focused_posts->post_count;
+            set_transient($the_query_key, $focused_posts_count);
+        }
 
         return $focused_posts_count;
     }
