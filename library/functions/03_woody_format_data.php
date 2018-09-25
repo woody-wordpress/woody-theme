@@ -528,8 +528,6 @@ function getAttachmentMoreData($attachment_id)
         $img_all_metadata = (!empty($img_all_data['_wp_attachment_metadata'][0])) ? unserialize($img_all_data['_wp_attachment_metadata'][0]) : '';
         $instagram_metadata = (!empty($img_all_metadata['woody-instagram'])) ? $img_all_metadata['woody-instagram'] : '';
         $attachment_data['instagram_metadata'] = $instagram_metadata;
-
-        // rcd($attachment_data['instagram_metadata'], true);
     }
 
     return $attachment_data;
