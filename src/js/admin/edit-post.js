@@ -121,11 +121,10 @@ $('#post').each(function() {
     }
 
     var getAutoFocusQuery = function(field) {
-        var query_params = null;
         var $parent = field.$el.parent();
         var $bigparent = field.parent().$el;
 
-        console.warn($bigparent);
+        //console.warn($bigparent);
 
         $parent.each(function() {
             var $this = $(this);
@@ -145,8 +144,6 @@ $('#post').each(function() {
     }
 
     acf.addAction('ready_field/key=field_5b27890c84ed3', getAutoFocusQuery);
-    // acf.addAction('showField/key=field_5b27890c84ed3', getAutoFocusQuery);
     acf.addAction('append_field/key=field_5b27890c84ed3', getAutoFocusQuery);
     acf.addAction('remove_field/key=field_5b27890c84ed3', getAutoFocusQuery);
-
 });
