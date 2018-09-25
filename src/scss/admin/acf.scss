@@ -56,7 +56,6 @@
     }
 
     .toggle-desc {
-        color: #006799;
         transition: color .3s;
 
         &:hover {
@@ -122,6 +121,7 @@
             border-radius: 50%;
             font-size: 14px;
             padding: 3px 3px 2px 2px;
+            z-index: 1;
         }
 
         &:hover {
@@ -135,8 +135,9 @@
 
         &:before {
             content: '\f534';
-            color: #f2a49d;
+            color: red;
             font-size: 20px;
+            z-index: 1;
         }
 
         >img {
