@@ -188,7 +188,7 @@ class WoodyTheme_ACF
 
     public function woodyAcfAddPageTypeChoices($choices)
     {
-        $page_types = get_terms(array('taxonomy' => 'page_type', 'hide_empty' => false, 'hierarchical' => true));
+        $page_types = $this->getPageTypeTerms();
         foreach ($page_types as $key => $type) {
             $choices[$type->slug] = $type->name;
         }
@@ -201,24 +201,21 @@ class WoodyTheme_ACF
             return $match;
         }
 
-        $transient = get_transient('woody_children_terms_ids');
-        if (false === $transient || !isset($transient[$rule['value']])) {
-            $children_terms_ids = [];
-            $current_term = get_term_by('slug', $rule['value'], 'page_type');
-            if (!empty($current_term)) {
-                $children_terms = get_terms(array('taxonomy' => 'page_type', 'hide_empty' => false, 'parent' => $current_term->term_id));
-
-                if (!empty($children_terms)) {
-                    foreach ($children_terms as $term) {
-                        $children_terms_ids[] = $term->term_id;
-                    }
-                }
-
-                $transient[$rule['value']] = $children_terms_ids;
-                set_transient('woody_children_terms_ids', $transient);
+        $page_types = $this->getPageTypeTerms();
+        foreach ($page_types as $term) {
+            if ($term->slug == $rule['value']) {
+                $current_term = $term;
+                break;
             }
-        } else {
-            $children_terms_ids = $transient[$rule['value']];
+        }
+
+        $children_terms_ids = [];
+        if (!empty($current_term)) {
+            foreach ($page_types as $term) {
+                if ($term->parent == $current_term->term_id) {
+                    $children_terms_ids[] = $term->term_id;
+                }
+            }
         }
 
         $selected_term_ids = [];
@@ -249,8 +246,19 @@ class WoodyTheme_ACF
         return $match;
     }
 
+    public function getPageTypeTerms()
+    {
+        $page_types = get_transient('woody_terms_page_type');
+        if (false === $page_types) {
+            $page_types = get_terms(array('taxonomy' => 'page_type', 'hide_empty' => false, 'hierarchical' => true));
+            set_transient('woody_terms_page_type', $page_types);
+        }
+
+        return $page_types;
+    }
+
     public function cleanTransient()
     {
-        delete_transient('woody_children_terms_ids');
+        delete_transient('woody_terms_page_type');
     }
 }
