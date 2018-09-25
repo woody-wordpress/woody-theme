@@ -234,9 +234,9 @@ class WoodyTheme_Plugins_Options
             'has_multiple_authors'       => false,
             'environment_type'           => (WP_ENV == 'prod' && WP_ENV !=  'crt-bretagne') ? 'production' : '', // TODO remove crt-bretagne after MEL
             'content_analysis_active'    => true,
-            'keyword_analysis_active'    => true,
+            'keyword_analysis_active'    => false,
             'enable_admin_bar_menu'      => false,
-            'enable_cornerstone_content' => true,
+            'enable_cornerstone_content' => false,
             'enable_xml_sitemap'         => true,
             'enable_text_link_counter'   => false,
             'show_onboarding_notice'     => false,
