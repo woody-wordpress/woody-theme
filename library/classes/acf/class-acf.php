@@ -197,10 +197,6 @@ class WoodyTheme_ACF
 
     public function woodyAcfPageTypeMatch($match, $rule, $options)
     {
-        if (empty($options['post_type']) || $options['post_type'] != 'page') {
-            return $match;
-        }
-
         $page_types = $this->getPageTypeTerms();
         foreach ($page_types as $term) {
             if ($term->slug == $rule['value']) {
@@ -221,7 +217,7 @@ class WoodyTheme_ACF
         $selected_term_ids = [];
         if ($options['ajax'] && !empty($options['post_terms']) && !empty($options['post_terms']['page_type'])) {
             $selected_term_ids = $options['post_terms']['page_type'];
-        } else {
+        } elseif (!empty($options['post_id'])) {
             $current_page_type = wp_get_post_terms($options['post_id'], 'page_type');
             if (!empty($current_page_type[0]) && !empty($current_page_type[0]->term_id)) {
                 $selected_term_ids[] = $current_page_type[0]->term_id;
