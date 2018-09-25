@@ -62,13 +62,9 @@ class WoodyTheme_Plugins_Activation
 
         if (SAVEQUERIES == true) {
             $this->activate_plugins[] = 'query-monitor/query-monitor.php';
-        } else {
-            $this->deactivate_plugins[] = 'query-monitor/query-monitor.php';
-        }
-
-        if (WP_DEBUG == true) {
             $this->activate_plugins[] = 'wp-php-console/wp-php-console.php';
         } else {
+            $this->deactivate_plugins[] = 'query-monitor/query-monitor.php';
             $this->deactivate_plugins[] = 'wp-php-console/wp-php-console.php';
         }
 

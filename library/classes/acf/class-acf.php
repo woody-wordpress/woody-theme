@@ -19,6 +19,8 @@ class WoodyTheme_ACF
 
     protected function registerHooks()
     {
+        add_action('woody_theme_update', array($this,'cleanTransient'));
+        add_action('woody_subtheme_update', array($this,'cleanTransient'));
         add_filter('acf/settings/save_json', array($this,'acfJsonSave'));
         add_filter('acf/settings/load_json', array($this,'acfJsonLoad'));
         add_filter('acf/load_field/type=radio', array($this, 'woodyTplAcfLoadField'));
@@ -195,16 +197,28 @@ class WoodyTheme_ACF
 
     public function woodyAcfPageTypeMatch($match, $rule, $options)
     {
-        $children_terms_ids = [];
-        $current_term = get_term_by('slug', $rule['value'], 'page_type');
-        if (!empty($current_term)) {
-            $children_terms = get_terms(array('taxonomy' => 'page_type', 'hide_empty' => false, 'parent' => $current_term->term_id));
+        if (empty($options['post_type']) || $options['post_type'] != 'page') {
+            return $match;
+        }
 
-            if (!empty($children_terms)) {
-                foreach ($children_terms as $term) {
-                    $children_terms_ids[] = $term->term_id;
+        $transient = get_transient('woody_children_terms_ids');
+        if (false === $transient || !isset($transient[$rule['value']])) {
+            $children_terms_ids = [];
+            $current_term = get_term_by('slug', $rule['value'], 'page_type');
+            if (!empty($current_term)) {
+                $children_terms = get_terms(array('taxonomy' => 'page_type', 'hide_empty' => false, 'parent' => $current_term->term_id));
+
+                if (!empty($children_terms)) {
+                    foreach ($children_terms as $term) {
+                        $children_terms_ids[] = $term->term_id;
+                    }
                 }
+
+                $transient[$rule['value']] = $children_terms_ids;
+                set_transient('woody_children_terms_ids', $transient);
             }
+        } else {
+            $children_terms_ids = $transient[$rule['value']];
         }
 
         $selected_term_ids = [];
@@ -235,22 +249,8 @@ class WoodyTheme_ACF
         return $match;
     }
 
-    // public function playlistNameLoadField($field)
-    // {
-    //     global $post;
-    //     if (!empty($post)) {
-    //         $confId = get_field('playlist_conf_id', $post->ID);
-    //         $post_title = $post->post_title;
-    //         $type_term = get_the_terms($post->ID, 'page_type');
-    //         if (!empty($type_term)) {
-    //             $type = $type_term[0]->slug;
-    //             if ($type == 'playlist_tourism') {
-    //                 $field['value'] = 'WP - Playlist ' . $post->post_title;
-    //             }
-    //         }
-    //         $response = apply_filters('wp_hawwwai_sit_conf_editor_rename', $confId, $field['value']);
-    //     }
-
-    //     return $field;
-    // }
+    public function cleanTransient()
+    {
+        delete_transient('woody_children_terms_ids');
+    }
 }
