@@ -64,7 +64,7 @@ if (targetNode != null) {
 
                         //
                         if (window.siteConfig) {
-                            console.log(siteConfig);
+                            // console.log(siteConfig);
                             if (typeof currentConfig.confID != 'undefined' && currentConfig.confID.length != 0) {
                                 currentConfig.iframeUrl = 'https://api.tourism-system.rc-preprod.com/render/facetconfs/cles-config/' + currentConfig.confID + '/' + siteConfig.site_key + '/fr?login=' + siteConfig.login + '&pwd=' + siteConfig.password;
                             } else {

@@ -62,7 +62,7 @@ $('#post').each(function() {
         var $parent = field.parent().$el;
         var $bigparent = field.parent().parent().$el;
 
-        console.log($bigparent);
+        // console.log($bigparent);
 
         // add class to this field
         $parent.each(function() {
