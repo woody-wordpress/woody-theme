@@ -338,13 +338,13 @@
 }
 
 .leaflet-control-layers-toggle {
-    background-image: url(images/layers.png);
+    background-image: url(https://cdn.jsdelivr.net/npm/leaflet@1.3.4/dist/images/layers.png);
     width: 36px;
     height: 36px;
 }
 
 .leaflet-retina .leaflet-control-layers-toggle {
-    background-image: url(images/layers-2x.png);
+    background-image: url(https://cdn.jsdelivr.net/npm/leaflet@1.3.4/dist/images/layers-2x.png);
     background-size: 26px 26px;
 }
 
