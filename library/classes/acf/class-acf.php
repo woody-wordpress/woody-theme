@@ -57,10 +57,10 @@ class WoodyTheme_ACF
         if (strpos($field['name'], 'woody_tpl') !== false) {
             $field['choices'] = [];
 
-            $woodyComponents = wp_cache_get('woody_components');
+            $woodyComponents = get_transient('woody_components');
             if (empty($woodyComponents)) {
                 $woodyComponents = Woody::getComponents();
-                wp_cache_set('woody_components', $woodyComponents);
+                set_transient('woody_components', $woodyComponents);
             }
 
             switch ($field['key']) {
@@ -256,5 +256,6 @@ class WoodyTheme_ACF
     public function cleanTransient()
     {
         delete_transient('woody_terms_page_type');
+        delete_transient('woody_components');
     }
 }
