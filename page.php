@@ -31,8 +31,6 @@ foreach ($icons as $icon) {
     }
 }
 
-include get_template_directory() . '/header.php';
-
 $context['current_url'] = get_permalink();
 $context['active_social_shares'] = getActiveShares();
 $context['page_type'] = getTermsSlugs($context['post']->ID, 'page_type', true);
