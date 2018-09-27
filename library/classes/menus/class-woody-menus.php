@@ -125,11 +125,36 @@ class WoodyTheme_Menus
     {
         $return = '';
 
-        foreach ($args['submenu_parts'] as $key => $part) {
-            $submenu_parts['items'][] = self::getCompiledSubmenuPart(array_slice($items, $part['from'], $part['to']), $part['grid'], $part['items_tpl']);
+        $twig_paths = getWoodyTwigPaths();
+
+        $default = [
+            'grid' => $twig_paths['grids_basic-grid_1_cols-tpl_01'],
+            'custom_function' => '',
+            'submenu_parts' => [
+                0 => [
+                    'grid' => $twig_paths['grids_basic-grid_4_cols-tpl_01'],
+                    'from' => 0,
+                    'to' => 99,
+                    'items_tpl' => $twig_paths['nav_items-nav_item_image-tpl_01'],
+                    'custom_function' => '',
+                ],
+            ]
+        ];
+
+        if (is_array($args)) {
+            $args = array_merge($default, $args);
         }
 
-        $return = Timber::compile($args['grid'], $submenu_parts);
+        if (!empty($args['custom_function']) && function_exists($args['custom_function'])) {
+            $return = $args['custom_function'];
+        } elseif (!empty($args['grid']) && !empty($args['submenu_parts'])) {
+            foreach ($args['submenu_parts'] as $key => $part) {
+                $custom_function = (!empty($part['custom_function'])) ? $part['custom_function'] : '';
+                $submenu_parts['items'][] = self::getCompiledSubmenuPart(array_slice($items, $part['from'], $part['to']), $part['grid'], $part['items_tpl'], $custom_function);
+            }
+            $return = Timber::compile($args['grid'], $submenu_parts);
+        }
+
         return $return;
     }
 
@@ -141,19 +166,22 @@ class WoodyTheme_Menus
     * @param items - Tableau des liens de la partie
     * @param grid_tpl - Le template Woody à utiliser pour rendre la partie
     * @param items_tpl - Le template Woody à utiliser pour rendre les items de la partie
+    * @param custom_function - Une fonction permettant de surcharger le menu de base
     * @return return - Une chaine de caractère
     *
     */
-    public static function getCompiledSubmenuPart($items, $grid_tpl, $items_tpl)
+    public static function getCompiledSubmenuPart($items, $grid_tpl, $items_tpl, $custom_function)
     {
         $return = '';
-
-        // rcd($items, true);
-        foreach ($items as $key => $item) {
-            $part_items['items'][] = Timber::compile($items_tpl, $item);
+        if (!isset($custom_function) && function_exists($custom_function)) {
+            $return = $custom_function;
+        } elseif (!empty($items) && !empty($grid_tpl) && !empty($items_tpl)) {
+            // rcd($items, true);
+            foreach ($items as $key => $item) {
+                $part_items['items'][] = Timber::compile($items_tpl, $item);
+            }
+            $return = Timber::compile($grid_tpl, $part_items);
         }
-
-        $return = Timber::compile($grid_tpl, $part_items);
 
         return $return;
     }
