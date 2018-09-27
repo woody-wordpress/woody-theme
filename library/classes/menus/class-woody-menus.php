@@ -98,7 +98,7 @@ class WoodyTheme_Menus
         foreach ($posts as $key => $post) {
             $return[$key] = [
                 'the_id' => $post->ID,
-                'the_url' => $post->guid,
+                'the_url' => get_permalink($post->ID),
             ];
 
             $return[$key]['the_fields']['title'] = (!empty(get_field('in_menu_title', $post->ID))) ? get_field('in_menu_title', $post->ID) : $post->post_title;
@@ -107,6 +107,9 @@ class WoodyTheme_Menus
             $return[$key]['the_fields']['subtitle'] = (!empty(get_field('in_menu_subtitle', $post->ID))) ? get_field('in_menu_subtitle', $post->ID) : get_field('field_5b87f23b57a1e', $post->ID);
             $return[$key]['img'] = (!empty(get_field('in_menu_img', $post->ID))) ? get_field('in_menu_img', $post->ID) : get_field('field_5b0e5ddfd4b1b', $post->ID);
         }
+
+        // rcd($return, true);
+
 
         return $return;
     }
@@ -130,15 +133,8 @@ class WoodyTheme_Menus
         $default = [
             'grid' => $twig_paths['grids_basic-grid_1_cols-tpl_01'],
             'custom_function' => '',
-            'submenu_parts' => [
-                0 => [
-                    'grid' => $twig_paths['grids_basic-grid_4_cols-tpl_01'],
-                    'from' => 0,
-                    'to' => 99,
-                    'items_tpl' => $twig_paths['nav_items-nav_item_image-tpl_01'],
-                    'custom_function' => '',
-                ],
-            ]
+            'alignement' => 'align-stretch',
+            'no_padding' => 0,
         ];
 
         if (is_array($args)) {
@@ -149,9 +145,12 @@ class WoodyTheme_Menus
             $return = $args['custom_function'];
         } elseif (!empty($args['grid']) && !empty($args['submenu_parts'])) {
             foreach ($args['submenu_parts'] as $key => $part) {
-                $custom_function = (!empty($part['custom_function'])) ? $part['custom_function'] : '';
-                $submenu_parts['items'][] = self::getCompiledSubmenuPart(array_slice($items, $part['from'], $part['to']), $part['grid'], $part['items_tpl'], $custom_function);
+                $submenu_parts['items'][] = self::getCompiledSubmenuPart(array_slice($items, $part['from'], $part['to']), $part);
             }
+            $submenu_parts['is_list'] = true;
+            $submenu_parts['alignement'] = $args['alignement'];
+            $submenu_parts['no_padding'] = $args['no_padding'];
+
             $return = Timber::compile($args['grid'], $submenu_parts);
         }
 
@@ -170,17 +169,21 @@ class WoodyTheme_Menus
     * @return return - Une chaine de caractère
     *
     */
-    public static function getCompiledSubmenuPart($items, $grid_tpl, $items_tpl, $custom_function)
+    public static function getCompiledSubmenuPart($items, $args)
     {
         $return = '';
-        if (!isset($custom_function) && function_exists($custom_function)) {
-            $return = $custom_function;
-        } elseif (!empty($items) && !empty($grid_tpl) && !empty($items_tpl)) {
-            // rcd($items, true);
+
+        if (!empty($args['custom_function']) && function_exists($args['custom_function'])) {
+            $return = $args['custom_function'];
+        } elseif (!empty($items) && !empty($args['grid']) && !empty($args['items_tpl'])) {
             foreach ($items as $key => $item) {
-                $part_items['items'][] = Timber::compile($items_tpl, $item);
+                $part_items['items'][] = Timber::compile($args['items_tpl'], $item);
             }
-            $return = Timber::compile($grid_tpl, $part_items);
+
+            $part_items['alignement'] = $args['alignement'];
+            $part_items['no_padding'] = $args['no_padding'];
+
+            $return = Timber::compile($args['grid'], $part_items);
         }
 
         return $return;
