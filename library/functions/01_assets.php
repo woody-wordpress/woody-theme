@@ -138,3 +138,25 @@ function woodyIconsFolder($folder)
 
     return $return;
 }
+
+ /**
+ *
+ * Nom : getWoodyTwigPaths
+ * Auteur : Benoit Bouchaud
+ * Return : Un tableau
+ * @return   the_icons - La liste de tous les icones du site
+ *
+ */
+function getWoodyTwigPaths()
+{
+    $woodyTwigsPaths = [];
+    $woodyComponents = wp_cache_get('woody_components');
+    if (empty($woodyComponents)) {
+        $woodyComponents = Woody::getComponents();
+        wp_cache_set('woody_components', $woodyComponents);
+    }
+
+    $woodyTwigsPaths = Woody::getTwigsPaths($woodyComponents);
+
+    return $woodyTwigsPaths;
+}
