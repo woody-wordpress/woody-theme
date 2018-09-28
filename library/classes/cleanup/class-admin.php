@@ -149,13 +149,15 @@ class WoodyTheme_Cleanup_Admin
         remove_submenu_page('themes.php', 'nav-menus.php');
 
         // On créé un nouvel item de menu à la racine du menu d'admin
-        add_menu_page('Menus', 'Menus', 'edit_pages', 'nav-menus.php', '', 'dashicons-menu', 31);
+        if (!in_array('administrator', $user->roles)) {
+            add_menu_page('Menus', 'Menus', 'edit_pages', 'nav-menus.php', '', 'dashicons-menu', 31);
 
-        // La création d'un nouveau menu envoie automatiquemenrt sur /admin.php :/
-        // Donc, si l'url == /admin.php?page=nav-menus.php => on redirige vers /nav-menus.php
-        global $pagenow;
-        if ($pagenow == 'admin.php' && isset($_GET['page']) && $_GET['page'] == 'nav-menus.php') {
-            wp_redirect(admin_url('/nav-menus.php'), 301);
+            // La création d'un nouveau menu envoie automatiquemenrt sur /admin.php :/
+            // Donc, si l'url == /admin.php?page=nav-menus.php => on redirige vers /nav-menus.php
+            global $pagenow;
+            if ($pagenow == 'admin.php' && isset($_GET['page']) && $_GET['page'] == 'nav-menus.php') {
+                wp_redirect(admin_url('/nav-menus.php'), 301);
+            }
         }
     }
 
