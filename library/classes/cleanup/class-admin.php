@@ -148,6 +148,7 @@ class WoodyTheme_Cleanup_Admin
         // On retire le sous-menu Menus dans Apparence
         remove_submenu_page('themes.php', 'nav-menus.php');
 
+        $user = wp_get_current_user();
         // On créé un nouvel item de menu à la racine du menu d'admin
         if (!in_array('administrator', $user->roles)) {
             add_menu_page('Menus', 'Menus', 'edit_pages', 'nav-menus.php', '', 'dashicons-menu', 31);
