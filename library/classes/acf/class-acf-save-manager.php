@@ -27,7 +27,6 @@ class WoodyTheme_ACF_Save_Manager
     {
         $this->groups = [];
         $this->groups = apply_filters('woody_acf_save_paths', $this->groups);
-        \PC::debug($this->groups);
     }
 
     public function update_field_group($group)
