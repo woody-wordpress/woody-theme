@@ -532,17 +532,3 @@ function getAttachmentMoreData($attachment_id)
 
     return $attachment_data;
 }
-
-function getWoodyTwigPaths($page_parts=false)
-{
-    $woodyTwigsPaths = [];
-    $woodyComponents = wp_cache_get('woody_components');
-    if (empty($woodyComponents)) {
-        $woodyComponents = Woody::getComponents();
-        wp_cache_set('woody_components', $woodyComponents);
-    }
-
-    $woodyTwigsPaths = Woody::getTwigsPaths($woodyComponents, $page_parts);
-
-    return $woodyTwigsPaths;
-}

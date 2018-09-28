@@ -21,8 +21,7 @@ class WoodyTheme_Process extends WP_Background_Process
      */
     protected function task($item)
     {
-        // $logger = new WoodyTheme_Logger();
-        // $logger->log($item['function']);
+        // \WoodyTheme_Logger::log($item['function']);
 
         if (!empty($item['function'])) {
             if (!empty($item['args'])) {

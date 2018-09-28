@@ -35,6 +35,8 @@ new WoodyTheme_Tinymce();
 
 // Menu
 new WoodyTheme_NestedPages();
+new WoodyTheme_Menus();
+
 
 // Roles
 new WoodyTheme_Roles();
