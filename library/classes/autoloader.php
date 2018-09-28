@@ -10,6 +10,9 @@ if (!class_exists('PC', false) && class_exists('PhpConsole', false) && WP_ENV ==
 }
 
 // ACF
+if (WP_ENV == 'dev') {
+    new WoodyTheme_ACF_Save_Manager();
+}
 new WoodyTheme_ACF();
 new WoodyTheme_ACF_Counter();
 

@@ -73,99 +73,6 @@
                         "id": ""
                     },
                     "layouts": {
-                        "5b043f22b981d": {
-                            "key": "5b043f22b981d",
-                            "name": "quote",
-                            "label": "Citation",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b043f2f25969",
-                                    "label": "Citation",
-                                    "name": "quote",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b042e516ef62"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "block",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
-                            ],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b0d21eb9d80a": {
-                            "key": "5b0d21eb9d80a",
-                            "name": "manual_focus",
-                            "label": "Mise en avant (sélection manuelle)",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b0d22019d80b",
-                                    "label": "Sélection",
-                                    "name": "content_selection",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b0d1ed32a384"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
-                            ],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b27a7859ddea": {
-                            "key": "5b27a7859ddea",
-                            "name": "auto_focus",
-                            "label": "Mise en avant (sélection automatique)",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b27a7859ddeb",
-                                    "label": "Sélection",
-                                    "name": "content_selection",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b2788b48d04c"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "block",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
-                            ],
-                            "min": "",
-                            "max": ""
-                        },
                         "5b04437946534": {
                             "key": "5b04437946534",
                             "name": "free_text",
@@ -259,10 +166,103 @@
                             "min": "",
                             "max": ""
                         },
+                        "5b0d21eb9d80a": {
+                            "key": "5b0d21eb9d80a",
+                            "name": "manual_focus",
+                            "label": "Mise en avant (sélection manuelle)",
+                            "display": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_5b0d22019d80b",
+                                    "label": "Sélection",
+                                    "name": "content_selection",
+                                    "type": "clone",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "clone": [
+                                        "group_5b0d1ed32a384"
+                                    ],
+                                    "display": "seamless",
+                                    "layout": "",
+                                    "prefix_label": 0,
+                                    "prefix_name": 0
+                                }
+                            ],
+                            "min": "",
+                            "max": ""
+                        },
+                        "5b27a7859ddea": {
+                            "key": "5b27a7859ddea",
+                            "name": "auto_focus",
+                            "label": "Mise en avant (sélection automatique)",
+                            "display": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_5b27a7859ddeb",
+                                    "label": "Sélection",
+                                    "name": "content_selection",
+                                    "type": "clone",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "clone": [
+                                        "group_5b2788b48d04c"
+                                    ],
+                                    "display": "seamless",
+                                    "layout": "block",
+                                    "prefix_label": 0,
+                                    "prefix_name": 0
+                                }
+                            ],
+                            "min": "",
+                            "max": ""
+                        },
+                        "5b043f22b981d": {
+                            "key": "5b043f22b981d",
+                            "name": "quote",
+                            "label": "Citation",
+                            "display": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_5b043f2f25969",
+                                    "label": "Citation",
+                                    "name": "quote",
+                                    "type": "clone",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "clone": [
+                                        "group_5b042e516ef62"
+                                    ],
+                                    "display": "seamless",
+                                    "layout": "block",
+                                    "prefix_label": 0,
+                                    "prefix_name": 0
+                                }
+                            ],
+                            "min": "",
+                            "max": ""
+                        },
                         "5b04444c4653c": {
                             "key": "5b04444c4653c",
                             "name": "accordion",
-                            "label": "FAQ",
+                            "label": "Accordéon (FAQ)",
                             "display": "block",
                             "sub_fields": [
                                 {
@@ -293,7 +293,7 @@
                         "5b04447d4653e": {
                             "key": "5b04447d4653e",
                             "name": "feature",
-                            "label": "Titres & icône",
+                            "label": "Titre & icône",
                             "display": "block",
                             "sub_fields": [
                                 {
@@ -373,37 +373,6 @@
                                     },
                                     "clone": [
                                         "group_5b043853969a4"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "block",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
-                            ],
-                            "min": "",
-                            "max": ""
-                        },
-                        "5b33a263d91e5": {
-                            "key": "5b33a263d91e5",
-                            "name": "playlist_bloc",
-                            "label": "Playlist",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b33a27ed91e6",
-                                    "label": "Bloc de playlist",
-                                    "name": "playlist_bloc",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b33890e6fa0b"
                                     ],
                                     "display": "seamless",
                                     "layout": "block",
@@ -507,37 +476,6 @@
                             "min": "",
                             "max": ""
                         },
-                        "layout_5b59dfb696d2d": {
-                            "key": "layout_5b59dfb696d2d",
-                            "name": "touristic_mini_sheet",
-                            "label": "Mini fiche touristique",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b59dfcd96d2e",
-                                    "label": "Mini fiche touristique",
-                                    "name": "touristic_sheet_teaser",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b59dec21f82e"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "block",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
-                            ],
-                            "min": "",
-                            "max": ""
-                        },
                         "layout_5b5b33af38ad8": {
                             "key": "layout_5b5b33af38ad8",
                             "name": "socialwall",
@@ -572,10 +510,7 @@
                     },
                     "button_label": "Ajouter un bloc",
                     "min": "",
-                    "max": "",
-                    "hide_collapse": 0,
-                    "collapse_all_flexible": 1,
-                    "btn-icon-only": 0
+                    "max": ""
                 },
                 {
                     "key": "field_5b051c3b6717b",
@@ -665,25 +600,26 @@
                         "id": ""
                     },
                     "choices": {
-                        "grids_split-grid_2_cols-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_split\/grid_2_cols\/tpl_04\/thumbnail.png\" alt=\"grids_split-grid_2_cols-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille split 2 colonnes 75% 25% - 2eme colonne avec x éléments possibles<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille split 2 colonnes 75% 25% - 2eme colonne avec x éléments possibles<\/h4>2 colonne 75% 25% - 2eme colonne avec x éléments possibles<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_split-grid_2_cols-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_split\/grid_2_cols\/tpl_03\/thumbnail.png\" alt=\"grids_split-grid_2_cols-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille split 2 colonnes 66% 33% - 2eme colonne sur 2 lignes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille split 2 colonnes 66% 33% - 2eme colonne sur 2 lignes<\/h4>2 colonne 66% 33% avec 2 lignes dans la seconde colonne<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_split-grid_2_cols-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_split\/grid_2_cols\/tpl_02\/thumbnail.png\" alt=\"grids_split-grid_2_cols-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille split 2 colonnes 75% 25% - 2eme colonne sur 2 lignes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille split 2 colonnes 75% 25% - 2eme colonne sur 2 lignes<\/h4>2 colonne 75% 25% avec 2 lignes dans la seconde colonne<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_split-grid_2_cols-tpl_05": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_split\/grid_2_cols\/tpl_05\/thumbnail.png\" alt=\"grids_split-grid_2_cols-tpl_05\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille split 2 colonnes 66% 33% - 2eme colonne avec x éléments possibles<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille split 2 colonnes 66% 33% - 2eme colonne avec x éléments possibles<\/h4>2 colonne 66% 33% - 2eme colonne avec x éléments possibles<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_split-grid_2_cols-tpl_06": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_split\/grid_2_cols\/tpl_06\/thumbnail.png\" alt=\"grids_split-grid_2_cols-tpl_06\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille split 2 colonnes 50% 50% - 2eme colonne avec x éléments possibles<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille split 2 colonnes 50% 50% - 2eme colonne avec x éléments possibles<\/h4>2 colonne 50% 50% - 2eme colonne avec x éléments possibles<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_split-grid_2_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_split\/grid_2_cols\/tpl_01\/thumbnail.png\" alt=\"grids_split-grid_2_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille split 2 colonnes - 2eme colonne sur 2 lignes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille split 2 colonnes - 2eme colonne sur 2 lignes<\/h4>2 colonne égales avec 2 lignes dans la seconde colonne<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_4_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_4_cols\/tpl_01\/thumbnail.png\" alt=\"grids_basic-grid_4_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 4 colonnes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 4 colonnes<\/h4>Grille 4 colonnes égales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_5_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_5_cols\/tpl_01\/thumbnail.png\" alt=\"grids_basic-grid_5_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 5 colonnes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 5 colonnes<\/h4>Grille 5 colonnes égales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_2_cols-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_2_cols\/tpl_04\/thumbnail.png\" alt=\"grids_basic-grid_2_cols-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 2 colonnes - 25 | 75<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 2 colonnes - 25 | 75<\/h4>2 colonne 1 quart | 3 quarts<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_2_cols-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_2_cols\/tpl_03\/thumbnail.png\" alt=\"grids_basic-grid_2_cols-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 2 colonnes - 33 | 66<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 2 colonnes - 33 | 66<\/h4>2 colonne 1 tiers | 2 tiers<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_2_cols-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_2_cols\/tpl_02\/thumbnail.png\" alt=\"grids_basic-grid_2_cols-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 2 colonnes - 66 | 33<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 2 colonnes - 66 | 33<\/h4>2 colonnes 2\/3 | 1\/3<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_2_cols-tpl_05": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_2_cols\/tpl_05\/thumbnail.png\" alt=\"grids_basic-grid_2_cols-tpl_05\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 2 colonnes - 75 | 25<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 2 colonnes - 75 | 25<\/h4>2 colonne 3 quarts | 1 quart<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_2_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_2_cols\/tpl_01\/thumbnail.png\" alt=\"grids_basic-grid_2_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 2 colonnes - 50 | 50<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 2 colonnes - 50 | 50<\/h4>2 colonnes égales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_3_cols-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_3_cols\/tpl_04\/thumbnail.png\" alt=\"grids_basic-grid_3_cols-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 3 colonnes - 25 | 50 | 25<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 3 colonnes - 25 | 50 | 25<\/h4>2 colonnes 1\/4 | 1\/2 | 1\/4<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_3_cols-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_3_cols\/tpl_03\/thumbnail.png\" alt=\"grids_basic-grid_3_cols-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 3 colonnes - 25 | 25 | 50<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 3 colonnes - 25 | 25 | 50<\/h4>3 colonnes 1\/4 | 1\/4 | 1\/2<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_3_cols-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_3_cols\/tpl_02\/thumbnail.png\" alt=\"grids_basic-grid_3_cols-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 3 colonnes - 50 | 25 | 25<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 3 colonnes - 50 | 25 | 25<\/h4>3 colonnes 1\/2 | 1\/4 | 1\/4<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_3_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_3_cols\/tpl_01\/thumbnail.png\" alt=\"grids_basic-grid_3_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 3 colonnes - 33 | 33 | 33<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 3 colonnes - 33 | 33 | 33<\/h4>3 colonnes égales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_1_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_1_cols\/tpl_01\/thumbnail.png\" alt=\"grids_basic-grid_1_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 1 colonne<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 1 colonne<\/h4>Grille 1 colonne 100%<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                        "grids_basic-grid_6_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_6_cols\/tpl_01\/thumbnail.png\" alt=\"grids_basic-grid_6_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 6 colonnes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 6 colonnes<\/h4>Grille 6 colonnes égales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+                        "grids_split-grid_2_cols-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_split\/grid_2_cols\/tpl_04\/thumbnail.png?version=1.5.4\" alt=\"grids_split-grid_2_cols-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille split 2 colonnes 75% 25% - 2eme colonne avec x éléments possibles<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille split 2 colonnes 75% 25% - 2eme colonne avec x éléments possibles<\/h4>2 colonne 75% 25% - 2eme colonne avec x éléments possibles<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                        "grids_split-grid_2_cols-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_split\/grid_2_cols\/tpl_03\/thumbnail.png?version=1.5.4\" alt=\"grids_split-grid_2_cols-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille split 2 colonnes 66% 33% - 2eme colonne sur 2 lignes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille split 2 colonnes 66% 33% - 2eme colonne sur 2 lignes<\/h4>2 colonne 66% 33% avec 2 lignes dans la seconde colonne<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                        "grids_split-grid_2_cols-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_split\/grid_2_cols\/tpl_02\/thumbnail.png?version=1.5.4\" alt=\"grids_split-grid_2_cols-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille split 2 colonnes 75% 25% - 2eme colonne sur 2 lignes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille split 2 colonnes 75% 25% - 2eme colonne sur 2 lignes<\/h4>2 colonne 75% 25% avec 2 lignes dans la seconde colonne<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                        "grids_split-grid_2_cols-tpl_05": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_split\/grid_2_cols\/tpl_05\/thumbnail.png?version=1.5.4\" alt=\"grids_split-grid_2_cols-tpl_05\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille split 2 colonnes 66% 33% - 2eme colonne avec x éléments possibles<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille split 2 colonnes 66% 33% - 2eme colonne avec x éléments possibles<\/h4>2 colonne 66% 33% - 2eme colonne avec x éléments possibles<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                        "grids_split-grid_2_cols-tpl_06": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_split\/grid_2_cols\/tpl_06\/thumbnail.png?version=1.5.4\" alt=\"grids_split-grid_2_cols-tpl_06\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille split 2 colonnes 50% 50% - 2eme colonne avec x éléments possibles<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille split 2 colonnes 50% 50% - 2eme colonne avec x éléments possibles<\/h4>2 colonne 50% 50% - 2eme colonne avec x éléments possibles<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                        "grids_split-grid_2_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_split\/grid_2_cols\/tpl_01\/thumbnail.png?version=1.5.4\" alt=\"grids_split-grid_2_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille split 2 colonnes - 2eme colonne sur 2 lignes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille split 2 colonnes - 2eme colonne sur 2 lignes<\/h4>2 colonne égales avec 2 lignes dans la seconde colonne<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                        "grids_basic-grid_4_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_4_cols\/tpl_01\/thumbnail.png?version=1.5.4\" alt=\"grids_basic-grid_4_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 4 colonnes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 4 colonnes<\/h4>Grille 4 colonnes égales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                        "grids_basic-grid_5_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_5_cols\/tpl_01\/thumbnail.png?version=1.5.4\" alt=\"grids_basic-grid_5_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 5 colonnes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 5 colonnes<\/h4>Grille 5 colonnes égales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                        "grids_basic-grid_2_cols-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_2_cols\/tpl_04\/thumbnail.png?version=1.5.4\" alt=\"grids_basic-grid_2_cols-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 2 colonnes - 25 | 75<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 2 colonnes - 25 | 75<\/h4>2 colonne 1 quart | 3 quarts<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                        "grids_basic-grid_2_cols-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_2_cols\/tpl_03\/thumbnail.png?version=1.5.4\" alt=\"grids_basic-grid_2_cols-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 2 colonnes - 33 | 66<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 2 colonnes - 33 | 66<\/h4>2 colonne 1 tiers | 2 tiers<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                        "grids_basic-grid_2_cols-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_2_cols\/tpl_02\/thumbnail.png?version=1.5.4\" alt=\"grids_basic-grid_2_cols-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 2 colonnes - 66 | 33<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 2 colonnes - 66 | 33<\/h4>2 colonnes 2\/3 | 1\/3<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                        "grids_basic-grid_2_cols-tpl_05": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_2_cols\/tpl_05\/thumbnail.png?version=1.5.4\" alt=\"grids_basic-grid_2_cols-tpl_05\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 2 colonnes - 75 | 25<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 2 colonnes - 75 | 25<\/h4>2 colonne 3 quarts | 1 quart<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                        "grids_basic-grid_2_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_2_cols\/tpl_01\/thumbnail.png?version=1.5.4\" alt=\"grids_basic-grid_2_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 2 colonnes - 50 | 50<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 2 colonnes - 50 | 50<\/h4>2 colonnes égales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                        "grids_basic-grid_3_cols-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_3_cols\/tpl_04\/thumbnail.png?version=1.5.4\" alt=\"grids_basic-grid_3_cols-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 3 colonnes - 25 | 50 | 25<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 3 colonnes - 25 | 50 | 25<\/h4>2 colonnes 1\/4 | 1\/2 | 1\/4<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                        "grids_basic-grid_3_cols-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_3_cols\/tpl_03\/thumbnail.png?version=1.5.4\" alt=\"grids_basic-grid_3_cols-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 3 colonnes - 25 | 25 | 50<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 3 colonnes - 25 | 25 | 50<\/h4>3 colonnes 1\/4 | 1\/4 | 1\/2<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                        "grids_basic-grid_3_cols-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_3_cols\/tpl_02\/thumbnail.png?version=1.5.4\" alt=\"grids_basic-grid_3_cols-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 3 colonnes - 50 | 25 | 25<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 3 colonnes - 50 | 25 | 25<\/h4>3 colonnes 1\/2 | 1\/4 | 1\/4<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                        "grids_basic-grid_3_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_3_cols\/tpl_01\/thumbnail.png?version=1.5.4\" alt=\"grids_basic-grid_3_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 3 colonnes - 33 | 33 | 33<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 3 colonnes - 33 | 33 | 33<\/h4>3 colonnes égales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                        "grids_basic-grid_1_cols-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_1_cols\/tpl_02\/thumbnail.png?version=1.5.4\" alt=\"grids_basic-grid_1_cols-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 1 colonne centrée 66%<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 1 colonne centrée 66%<\/h4>Grille 1 colonne 66%<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                        "grids_basic-grid_1_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_1_cols\/tpl_01\/thumbnail.png?version=1.5.4\" alt=\"grids_basic-grid_1_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 1 colonne<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 1 colonne<\/h4>Grille 1 colonne 100%<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                        "grids_basic-grid_6_cols-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/grids_basic\/grid_6_cols\/tpl_01\/thumbnail.png?version=1.5.4\" alt=\"grids_basic-grid_6_cols-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 6 colonnes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 6 colonnes<\/h4>Grille 6 colonnes égales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
                     },
                     "allow_null": 0,
                     "other_choice": 0,
@@ -970,5 +906,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1537457812
+    "modified": 1538122296
 }
