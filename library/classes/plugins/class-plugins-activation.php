@@ -47,17 +47,8 @@ class WoodyTheme_Plugins_Activation
         ];
 
         $this->deactivate_plugins = [
-            'minify-html-markup/minify-html.php',
-            'bea-media-analytics/bea-media-analytics.php',
             'regenerate-thumbnails/regenerate-thumbnails.php',
-            'acf-repeater-flexible-content-collapser/acf-repeater-flexible-content-collapser.php',
-            'debug-bar/debug-bar.php',
-            'debug-bar-timber/debug-bar-timber.php',
-            'kint-debugger/kint-debugger.php',
             'fakerpress/fakerpress.php',
-            'rocket-lazy-load/rocket-lazy-load.php',
-            'media-file-renamer/media-file-renamer.php',
-            'acf-relationship-create-pro/acf-relationship-create-pro.php',
         ];
 
         if (SAVEQUERIES == true) {
