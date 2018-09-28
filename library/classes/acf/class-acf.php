@@ -6,7 +6,6 @@
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
-use Symfony\Component\Finder\Finder;
 
 class WoodyTheme_ACF
 {
@@ -21,7 +20,9 @@ class WoodyTheme_ACF
     {
         add_action('woody_theme_update', array($this,'cleanTransient'));
         add_action('woody_subtheme_update', array($this,'cleanTransient'));
-        add_filter('acf/settings/save_json', array($this,'acfJsonSave'));
+        if (WP_ENV == 'dev') {
+            add_filter('woody_acf_save_paths', array($this,'acfJsonSave'));
+        }
         add_filter('acf/settings/load_json', array($this,'acfJsonLoad'));
         add_filter('acf/load_field/type=radio', array($this, 'woodyTplAcfLoadField'));
         add_filter('acf/load_field/type=select', array($this, 'woodyIconLoadField'));
@@ -31,19 +32,20 @@ class WoodyTheme_ACF
         add_filter('acf/location/rule_match/page_type_and_children', array($this, 'woodyAcfPageTypeMatch'), 10, 3);
     }
 
-    public function acfJsonSave($path)
+    /**
+     * Register ACF Json Save directory
+     */
+    public function acfJsonSave($groups)
     {
-        // Save ACF Json on Dev
-        if (WP_ENV == 'dev') {
-            $path = get_template_directory() . '/acf-json';
-        }
-        return $path;
+        $groups['default'] = get_template_directory() . '/acf-json';
+        return $groups;
     }
 
+    /**
+     * Register ACF Json load directory
+     */
     public function acfJsonLoad($paths)
     {
-        // remove original path (optional)
-        unset($paths[0]);
         $paths[] = get_template_directory() . '/acf-json';
         return $paths;
     }
