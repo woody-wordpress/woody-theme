@@ -104,37 +104,6 @@
                             "min": "",
                             "max": ""
                         },
-                        "5b0443c346536": {
-                            "key": "5b0443c346536",
-                            "name": "movie",
-                            "label": "Vidéo",
-                            "display": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5b0443cd46537",
-                                    "label": "Vidéo",
-                                    "name": "movie",
-                                    "type": "clone",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "clone": [
-                                        "group_5b0430471a3d6"
-                                    ],
-                                    "display": "seamless",
-                                    "layout": "block",
-                                    "prefix_label": 0,
-                                    "prefix_name": 0
-                                }
-                            ],
-                            "min": "",
-                            "max": ""
-                        },
                         "5b0443f146538": {
                             "key": "5b0443f146538",
                             "name": "gallery",
@@ -156,6 +125,37 @@
                                     },
                                     "clone": [
                                         "group_5b04314e0ec21"
+                                    ],
+                                    "display": "seamless",
+                                    "layout": "block",
+                                    "prefix_label": 0,
+                                    "prefix_name": 0
+                                }
+                            ],
+                            "min": "",
+                            "max": ""
+                        },
+                        "5b0443c346536": {
+                            "key": "5b0443c346536",
+                            "name": "movie",
+                            "label": "Vidéo",
+                            "display": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_5b0443cd46537",
+                                    "label": "Vidéo",
+                                    "name": "movie",
+                                    "type": "clone",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "clone": [
+                                        "group_5b0430471a3d6"
                                     ],
                                     "display": "seamless",
                                     "layout": "block",
@@ -906,5 +906,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1538122296
+    "modified": 1538124037
 }
