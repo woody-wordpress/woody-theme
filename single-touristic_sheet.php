@@ -10,10 +10,10 @@
 $context = Timber::get_context();
 $context['post'] = new TimberPost();
 
-// $woodyComponents = wp_cache_get('woody_components');
+// $woodyComponents = get_transient('woody_components');
 // if (empty($woodyComponents)) {
 //     $woodyComponents = Woody::getComponents();
-//     wp_cache_set('woody_components', $woodyComponents);
+//     set_transient('woody_components', $woodyComponents);
 // }
 // $context['woody_components'] = Woody::getTwigsPaths($woodyComponents);
 

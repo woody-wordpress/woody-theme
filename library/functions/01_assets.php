@@ -150,10 +150,10 @@ function woodyIconsFolder($folder)
 function getWoodyTwigPaths()
 {
     $woodyTwigsPaths = [];
-    $woodyComponents = wp_cache_get('woody_components');
+    $woodyComponents = get_transient('woody_components');
     if (empty($woodyComponents)) {
         $woodyComponents = Woody::getComponents();
-        wp_cache_set('woody_components', $woodyComponents);
+        set_transient('woody_components', $woodyComponents);
     }
 
     $woodyTwigsPaths = Woody::getTwigsPaths($woodyComponents);
