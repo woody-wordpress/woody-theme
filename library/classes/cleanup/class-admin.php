@@ -58,17 +58,6 @@ class WoodyTheme_Cleanup_Admin
                 unset($wp_taxonomies[$taxonomy]);
             }
         }
-
-        $terms = get_terms(array(
-            'taxonomy' => 'attachment_hashtags',
-            'hide_empty' => false,
-        ));
-        foreach ($terms as $term) {
-            if ($term->slug == 'visitrennes' || $term->slug == 'broceliande') {
-                continue;
-            }
-            wp_delete_term($term->term_id, 'attachment_hashtags');
-        }
     }
 
     /**
