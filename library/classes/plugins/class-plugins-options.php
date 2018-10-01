@@ -195,7 +195,7 @@ class WoodyTheme_Plugins_Options
         $permalink_options = [
             'general' => [
                 'auto_update_uris' => 1,
-                'force_custom_slugs' => 1,
+                'force_custom_slugs' => 0,
                 'canonical_redirect' => 1,
                 'pagination_redirect' => 0,
                 'redirect' => 301,
