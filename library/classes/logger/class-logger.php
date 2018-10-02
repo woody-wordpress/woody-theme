@@ -5,6 +5,7 @@ class WoodyTheme_Logger
     // main files
     const DEBUG = 'debug';
     const WARMUP = 'last_warmup';
+    const EVENTS = 'events';
 
     /**
      * Log
@@ -13,6 +14,9 @@ class WoodyTheme_Logger
      */
     public static function log($message, $file = self::DEBUG, $rewrite = false)
     {
+        if (!ENABLE_LOG_FILES) {
+            return false;
+        }
         $file = WP_ROOT_DIR . '/logs/' . $file . '.log';
 
         if (file_exists($file) && !$rewrite) {
@@ -25,7 +29,8 @@ class WoodyTheme_Logger
             $message = json_encode($message, true);
         }
 
-        file_put_contents($file, $existing_log . "\n" . date('Y-m-d H:i:s') . ' : ' . $message);
+        $written = file_put_contents($file, $existing_log . "\n" . date('Y-m-d H:i:s') . ' : ' . $message);
+        chmod($file, 0777);
     }
 
 
@@ -36,6 +41,9 @@ class WoodyTheme_Logger
      */
     public static function error($message, $file = self::DEBUG, $rewrite = false)
     {
+        if (!ENABLE_LOG_FILES) {
+            return false;
+        }
         $file = WP_ROOT_DIR . '/logs/' . $file . '.log';
 
         if (file_exists($file) && !$rewrite) {
