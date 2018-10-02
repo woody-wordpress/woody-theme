@@ -42,13 +42,16 @@ if (class_exists('SubWoodyTheme_TemplateParts')) {
 /** ****************************
  * Compilation du bloc prix
  **************************** **/
-$trip_infos = [];
-if (!empty(getAcfGroupFields('group_5b6c5e6ff381d'))) {
-    $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d');
+
+$trip_infos = getAcfGroupFields('group_5b6c5e6ff381d');
+
+if (!empty($trip_infos['the_duration']['count_days']) || !empty($trip_infos['the_length']['length']) || !empty($trip_infos['the_price']['price'])) {
     //TODO: Gérer le fichier gps pour affichage s/ carte
     $trip_infos['the_duration']['count_days'] = ($trip_infos['the_duration']['count_days']) ? humanDays($trip_infos['the_duration']['count_days']) : '';
     $trip_infos['the_price']['price'] = (!empty($trip_infos['the_price']['price'])) ? str_replace('.', ',', $trip_infos['the_price']['price']) : '';
     $context['trip_infos'] = Timber::compile($context['woody_components'][$trip_infos['tripinfos_woody_tpl']], $trip_infos);
+} else {
+    $trip_infos = [];
 }
 
 /** ****************************
@@ -70,7 +73,6 @@ if (!empty($page_teaser)) {
     if (!empty($page_teaser['page_teaser_media_type']) && $page_teaser['page_teaser_media_type'] == 'map') {
         $page_teaser['post_coordinates'] = (!empty(getAcfGroupFields('group_5b3635da6529e'))) ? getAcfGroupFields('group_5b3635da6529e') : '';
     }
-
     $context['page_teaser'] = Timber::compile($context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
 }
 

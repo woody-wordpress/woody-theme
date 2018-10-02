@@ -21,21 +21,21 @@ class WoodyTheme_Images
     protected function registerHooks()
     {
         // Actions
-        add_action('add_attachment', array($this, 'addDefaultMediaType'));
-        add_action('after_setup_theme', array($this, 'addImageSizes'));
+        add_action('add_attachment', [$this, 'addDefaultMediaType']);
+        add_action('after_setup_theme', [$this, 'addImageSizes']);
 
         // Filters
-        add_filter('intermediate_image_sizes_advanced', array($this, 'removeAutoThumbs'), 10, 2);
-        add_filter('image_size_names_choose', array($this, 'imageSizeNamesChoose'), 10, 1);
-        add_filter('wp_read_image_metadata', array($this, 'readImageMetadata'), 10, 4);
-        add_filter('wp_generate_attachment_metadata', array($this, 'generateAttachmentMetadata'), 10, 2);
+        add_filter('intermediate_image_sizes_advanced', [$this, 'removeAutoThumbs'], 10, 2);
+        add_filter('image_size_names_choose', [$this, 'imageSizeNamesChoose'], 10, 1);
+        add_filter('wp_read_image_metadata', [$this, 'readImageMetadata'], 10, 4);
+        add_filter('wp_generate_attachment_metadata', [$this, 'generateAttachmentMetadata'], 10, 2);
 
-        // add_action('rest_api_init', function () {
-        //     register_rest_route('woody', '/crop/(?P<width>[0-9]{1,4})/(?P<height>[0-9]{1,4})/(?P<url>[-=\w]+)', array(
-        //       'methods' => 'GET',
-        //       'callback' => array('WoodyTheme_Images', 'imagemagick')
-        //     ));
-        // });
+        add_action('rest_api_init', function () {
+            register_rest_route('woody', '/crop/(?P<attachment_id>[0-9]{1,10})/(?P<ratio>\S+)', array(
+              'methods' => 'GET',
+              'callback' => [$this, 'cropImageAPI']
+            ));
+        });
     }
 
     public function addImageSizes()
@@ -105,54 +105,11 @@ class WoodyTheme_Images
     // Remove default image sizes here.
     public function removeAutoThumbs($sizes, $metadata)
     {
-        // Added to queue the generation of other thumbnails
-        $defer_sizes = $sizes;
-        unset($defer_sizes['thumbnail']);
-        unset($defer_sizes['medium']);
-        unset($defer_sizes['small']);
-        unset($defer_sizes['large']);
-        unset($defer_sizes['medium_large']);
-
-        $item = [
-            'function' => [get_class($this), 'generateThumbnails'],
-            'args' => ['metadata' => $metadata, 'sizes' => $defer_sizes]
-        ];
-        $this->process->push_to_queue($item);
-        $this->process->save()->dispatch();
-
         // Thumbnail only the thumbnail
         return array(
             'thumbnail' => $sizes['thumbnail'],
             'medium' => $sizes['medium']
         );
-    }
-
-    public function generateThumbnails($args)
-    {
-        global $wpdb;
-        extract($args); // create $sizes + $metadata
-
-        if (!empty($sizes) && !empty($metadata)) {
-            $post_id = $wpdb->get_col($wpdb->prepare("SELECT post_id FROM $wpdb->postmeta WHERE meta_value='%s';", $metadata['file']));
-            if (!empty($post_id) && is_numeric($post_id[0])) {
-                $post_id = current($post_id);
-                $attachment_metadata = maybe_unserialize(wp_get_attachment_metadata($post_id));
-
-                // Get thumbnail
-                $thumbnail = $attachment_metadata['sizes']['thumbnail'];
-                $medium = $attachment_metadata['sizes']['medium'];
-
-                // Generate multiple resizes
-                $editor = wp_get_image_editor(WP_UPLOAD_DIR . '/' . $metadata['file']);
-                if (!is_wp_error($editor)) {
-                    $attachment_metadata['sizes'] = $editor->multi_resize($sizes);
-                    $attachment_metadata['sizes']['thumbnail'] = $thumbnail;
-                    $attachment_metadata['sizes']['medium'] = $medium;
-                }
-
-                wp_update_attachment_metadata($post_id, $attachment_metadata);
-            }
-        }
     }
 
     // Register the new image sizes for use in the add media modal in wp-admin
@@ -173,7 +130,10 @@ class WoodyTheme_Images
         );
     }
 
-    // define the wp_generate_attachment_metadata callback
+    /* ------------------------ */
+    /* Read EXIF/IPTC Metadatas */
+    /* ------------------------ */
+
     public function readImageMetadata($meta, $file, $sourceImageType, $iptc)
     {
         if (is_callable('exif_read_data') && in_array($sourceImageType, apply_filters('wp_read_image_metadata_types', array( IMAGETYPE_JPEG, IMAGETYPE_TIFF_II, IMAGETYPE_TIFF_MM )))) {
@@ -197,13 +157,13 @@ class WoodyTheme_Images
         return $meta;
     }
 
-    public function calc($val)
+    private function calc($val)
     {
         $val = explode('/', $val);
         return $val[0] / $val[1];
     }
 
-    public function dmsToDecimal($deg, $min, $sec, $ref)
+    private function dmsToDecimal($deg, $min, $sec, $ref)
     {
         $direction = 1;
         if (strtoupper($ref) == "S" || strtoupper($ref) == "W" || $deg < 0) {
@@ -213,18 +173,22 @@ class WoodyTheme_Images
         return ($deg + ($min / 60) + ($sec / 3600)) * $direction;
     }
 
+    /* ------------------------ */
+    /* Default Metadatas        */
+    /* ------------------------ */
+
     // define the wp_generate_attachment_metadata callback
-    public function generateAttachmentMetadata($metadata, $wpPostId)
+    public function generateAttachmentMetadata($metadata, $attachment_id)
     {
-        if (wp_attachment_is_image($wpPostId)) {
+        if (wp_attachment_is_image($attachment_id)) {
 
             // Get current post
-            $post = get_post($wpPostId);
+            $post = get_post($attachment_id);
 
             // Create an array with the image meta (Title, Caption, Description) to be updated
             // Note:  comment out the Excerpt/Caption or Content/Description lines if not needed
             $my_image_meta = [];
-            $my_image_meta['ID'] = $wpPostId; // Specify the image (ID) to be updated
+            $my_image_meta['ID'] = $attachment_id; // Specify the image (ID) to be updated
 
             if (empty($metadata['image_meta']['title'])) {
                 $new_title = ucwords(strtolower(preg_replace('%\s*[-_\s]+\s*%', ' ', $post->post_title)));
@@ -245,84 +209,130 @@ class WoodyTheme_Images
             }
 
             // Set the image Alt-Text
-            update_post_meta($wpPostId, '_wp_attachment_image_alt', $new_description);
+            update_post_meta($attachment_id, '_wp_attachment_image_alt', $new_description);
 
             // Set the image meta (e.g. Title, Excerpt, Content)
             wp_update_post($my_image_meta);
 
             // Set ACF Fields (Credit)
             if (!empty($metadata['image_meta']['credit'])) {
-                update_field('media_author', $metadata['image_meta']['credit'], $wpPostId);
+                update_field('media_author', $metadata['image_meta']['credit'], $attachment_id);
             }
 
             if (!empty($metadata['image_meta']['latitude'])) {
-                update_field('media_lat', $metadata['image_meta']['latitude'], $wpPostId);
+                update_field('media_lat', $metadata['image_meta']['latitude'], $attachment_id);
             }
 
             if (!empty($metadata['image_meta']['longitude'])) {
-                update_field('media_lng', $metadata['image_meta']['longitude'], $wpPostId);
+                update_field('media_lng', $metadata['image_meta']['longitude'], $attachment_id);
+            }
+
+            // Crop API
+            global $_wp_additional_image_sizes;
+            foreach ($_wp_additional_image_sizes as $ratio => $size) {
+                if (empty($metadata['sizes'][$ratio])) {
+                    $metadata['sizes'][$ratio] = [
+                        'file' => '../../../../../wp-json/woody/crop/' . $attachment_id . '/' . $ratio,
+                        'height' => $size['height'],
+                        'width' => $size['width'],
+                        'mime-type' => $metadata['sizes']['thumbnail']['mime-type'],
+                    ];
+                }
             }
         }
 
         return $metadata;
     }
 
-    // public static function imagemagick(WP_REST_Request $request)
-    // {
-    //     /**
-    //      * Exemple : http://www.superot.wp.rc-dev.com/wp-json/woody/crop/50/100/aHR0cDovL3d3dy5zdXBlcm90LndwLnJjLWRldi5jb20vYXBwL3VwbG9hZHMvc3VwZXJvdC8yMDE4LzA3L3Blb3BsZS1tYW4tMi5qcGc=
-    //      */
+    /* ------------------------ */
+    /* CROP API                 */
+    /* ------------------------ */
 
-    //     // Get parameters
-    //     $params = $request->get_params();
-    //     $width = $params['width'];
-    //     $height = $params['height'];
+    public function cropImageAPI(WP_REST_Request $request)
+    {
+        /**
+        * Exemple : http://www.superot.wp.rc-dev.com/wp-json/woody/crop/382/ratio_square
+        */
+        global $_wp_additional_image_sizes;
 
-    //     // Filename
-    //     $url = parse_url(base64_decode($params['url']));
-    //     $filename = WP_WEBROOT_DIR . $url['path'];
-    //     if (!file_exists($filename)) {
-    //         die('Image introuvale');
-    //     }
+        $params = $request->get_params();
+        $ratio_name = $params['ratio'];
+        $attachment_id = $params['attachment_id'];
+        $image_url = '';
 
-    //     // New Filename
-    //     $ext = pathinfo($filename, PATHINFO_EXTENSION);
-    //     $new_filename = str_replace('.'.$ext, '-'.$width.'x'.$height.'.'.$ext, $filename);
+        if (!empty($_wp_additional_image_sizes[$ratio_name])) {
+            $size = $_wp_additional_image_sizes[$ratio_name];
+            $attachment_metadata = maybe_unserialize(wp_get_attachment_metadata($attachment_id));
 
-    //     // Imagick execution
-    //     if (!file_exists($new_filename)) {
-    //         $image = new Imagick($filename);
-    //         $w = $image->getImageWidth();
-    //         $h = $image->getImageHeight();
+            if (empty($attachment_metadata['sizes'][$ratio_name]) || strpos($attachment_metadata['sizes'][$ratio_name]['file'], 'wp-json') !== false) {
+                $img_path = WP_UPLOAD_DIR . '/' . $attachment_metadata['file'];
+                $img_path_parts = pathinfo($img_path);
 
-    //         if ($w == $h) {
-    //             if ($width >= $height) {
-    //                 $resize_w = $width;
-    //                 $resize_h = $width;
-    //             } else {
-    //                 $resize_w = $height;
-    //                 $resize_h = $height;
-    //             }
-    //         } elseif ($w > $h) {
-    //             $resize_w = $w * $height / $h;
-    //             $resize_h = $height;
-    //         } else {
-    //             $resize_w = $width;
-    //             $resize_h = $h * $width / $w;
-    //         }
+                $cropped_image_filename = $img_path_parts['filename'] . '-' . $size['width'] . 'x' . $size['height'] . '.' . $img_path_parts['extension'];
+                $cropped_image_path = $img_path_parts['dirname'] . '/' . $cropped_image_filename;
 
-    //         $image->resizeImage($resize_w, $resize_h, Imagick::FILTER_LANCZOS, 0.9);
-    //         $image->cropImage($width, $height, ($resize_w - $width) / 2, ($resize_h - $height) / 2);
-    //         $image->writeImage($new_filename);
-    //     }
+                // get the size of the image
+                list($width_orig, $height_orig) = getimagesize($img_path);
+                $expect_ratio = (float) $size['height'] / $size['width'];
 
-    //     if (file_exists($new_filename)) {
-    //         header('Content-type: ' . mime_content_type($new_filename));
-    //         header('Cache-Control: max-age=315360000');
-    //         header('Expires: Thu, 31 Dec 2037 23:55:55 GMT');
-    //         print file_get_contents($new_filename);
-    //     } else {
-    //         die('Erreur de génération de la miniature');
-    //     }
-    // }
+                if ($expect_ratio < 1) {
+                    // Crop Paysage
+                    $req_width = $width_orig;
+                    $req_height = round($width_orig * $expect_ratio);
+                    $req_x = 0;
+                    $req_y = round(($height_orig - $req_height)/2);
+                } elseif ($expect_ratio > 1) {
+                    // Crop Portrait
+                    $req_width = round($height_orig / $expect_ratio);
+                    $req_height = $height_orig;
+                    $req_x = round(($width_orig - $req_width)/2);
+                    $req_y = 0;
+                } elseif ($expect_ratio == 1) {
+                    // Crop Carré
+                    $ratio_orig = (float) $height_orig / $width_orig;
+                    if ($ratio_orig < 1) {
+                        //Image origine en Paysage
+                        $req_width = $height_orig;
+                        $req_height = $height_orig;
+                        $req_x = round(($width_orig - $req_width)/2);
+                        $req_y = 0;
+                    } elseif ($ratio_orig > 1) {
+                        //Image origine en Portrait
+                        $req_width = $width_orig;
+                        $req_height = $width_orig;
+                        $req_x = 0;
+                        $req_y = round(($height_orig - $req_height)/2);
+                    } elseif ($ratio_orig == 1) {
+                        //Image origine en Carré
+                        $req_width = $width_orig;
+                        $req_height = $height_orig;
+                        $req_x = 0;
+                        $req_y = 0;
+                    }
+                }
+
+                $img_editor = wp_get_image_editor($img_path);
+                if (!is_wp_error($img_editor)) {
+                    $img_editor->crop($req_x, $req_y, $req_width, $req_height, $size['width'], $size['height'], false);
+                    $img_editor->set_quality(75);
+                    $img_editor->save($cropped_image_path);
+
+                    // Get Image cropped data
+                    $img_cropped_parts = pathinfo($cropped_image_path);
+                    $attachment_metadata['sizes'][$ratio_name]['file'] = $img_cropped_parts['basename'];
+                    wp_update_attachment_metadata($attachment_id, $attachment_metadata);
+                }
+                unset($img_editor);
+            }
+
+            $image_url = wp_get_attachment_image_url($attachment_id, $ratio_name);
+        }
+
+        if (!empty($image_url)) {
+            wp_redirect($image_url, 301);
+        } else {
+            header('HTTP/1.0 404 Not Found');
+        }
+        exit;
+    }
 }
