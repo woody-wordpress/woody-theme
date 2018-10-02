@@ -10,19 +10,16 @@
 
 class WoodyTheme_Images
 {
-    protected $process;
-
     public function __construct()
     {
         $this->registerHooks();
-        $this->process = new WoodyTheme_Process();
+        $this->addImageSizes();
     }
 
     protected function registerHooks()
     {
         // Actions
         add_action('add_attachment', [$this, 'addDefaultMediaType']);
-        add_action('after_setup_theme', [$this, 'addImageSizes']);
 
         // Filters
         add_filter('intermediate_image_sizes_advanced', [$this, 'removeAutoThumbs'], 10, 2);
