@@ -329,7 +329,7 @@ class WoodyTheme_Images
         }
 
         if (!empty($image_url)) {
-            wp_redirect($image_url);
+            wp_redirect($image_url, 301);
         } else {
             header('HTTP/1.0 404 Not Found');
         }
