@@ -17,7 +17,7 @@ use Symfony\Component\Finder\Finder;
      if (!empty($post)) {
          $post_id = $post->ID;
 
-         $page_teaser_fields = array();
+         $the_fields = array();
 
          $fields = acf_get_fields($group_id);
 
@@ -29,12 +29,12 @@ use Symfony\Component\Finder\Finder;
                  }
 
                  if ($field_value && !empty($field_value)) {
-                     $page_teaser_fields[$field['name']] = $field_value;
+                     $the_fields[$field['name']] = $field_value;
                  }
              }
          }
 
-         return $page_teaser_fields;
+         return $the_fields;
      }
  }
 

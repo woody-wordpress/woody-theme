@@ -19,22 +19,6 @@
             "endpoint": 0
         },
         {
-            "key": "field_5bb3261577f38",
-            "label": "Mise en page",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
             "key": "field_5bb3262577f39",
             "label": "Slides",
             "name": "landswpr_slides",
@@ -275,6 +259,41 @@
                     "prefix_name": 0
                 }
             ]
+        },
+        {
+            "key": "field_5bb3261577f38",
+            "label": "Mise en page",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5bb33637168ed",
+            "label": "Template",
+            "name": "landswpr_woody_tpl",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         }
     ],
     "location": [
@@ -298,6 +317,6 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": 1,
-    "description": "",
-    "modified": 1538468552
+    "description": "Diaporama de slides (image ou video) en page d'accueil",
+    "modified": 1538471498
 }
