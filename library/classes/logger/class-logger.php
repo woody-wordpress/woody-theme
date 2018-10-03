@@ -6,6 +6,7 @@ class WoodyTheme_Logger
     const DEBUG = 'debug';
     const WARMUP = 'last_warmup';
     const EVENTS = 'events';
+    // const API = 'api_requests';
 
     /**
      * Log
@@ -23,6 +24,8 @@ class WoodyTheme_Logger
             $existing_log = file_get_contents($file);
         } else {
             $existing_log = '';
+            file_put_contents($file, '');
+            chmod($file, 0777);
         }
 
         if (is_array($message) || is_object($message)) {
@@ -30,7 +33,6 @@ class WoodyTheme_Logger
         }
 
         $written = file_put_contents($file, $existing_log . "\n" . date('Y-m-d H:i:s') . ' : ' . $message);
-        chmod($file, 0777);
     }
 
 
@@ -50,6 +52,8 @@ class WoodyTheme_Logger
             $existing_log = file_get_contents($file);
         } else {
             $existing_log = '';
+            file_put_contents($file, '');
+            chmod($file, 0777);
         }
 
         if (is_array($message) || is_object($message)) {
