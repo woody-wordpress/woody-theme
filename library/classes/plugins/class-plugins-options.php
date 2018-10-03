@@ -195,15 +195,15 @@ class WoodyTheme_Plugins_Options
         $permalink_options = [
             'general' => [
                 'auto_update_uris' => 1,
-                'force_custom_slugs' => 0,
+                'show_native_slug_field' => 0,
                 'canonical_redirect' => 1,
-                'pagination_redirect' => 0,
-                'redirect' => 301,
-                'trailing_slashes' => 0,
-                'fix_language_mismatch' => 1,
-                'auto_remove_duplicates' => 1,
                 'setup_redirects' => 1,
-                'deep_detect' => 1,
+                'redirect' => 301,
+                'trailing_slashes' => 20,
+                'pagination_redirect' => 0,
+                'auto_remove_duplicates' => 1,
+                'fix_language_mismatch' => 1,
+                'force_custom_slugs' => 1,
             ],
             'licence' => [
                 'licence_key' => '8058C9F5-83C7421C-A57A61BC-D75B00E3',
