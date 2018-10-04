@@ -44,27 +44,26 @@ class WoodyTheme_Menus
     {
         $return = [];
         $submenus = get_fields('options');
-        if(empty($submenus)){
+        if (empty($submenus)) {
             return;
         }
         
         foreach ($submenus as $key => $submenu) {
-            if(strpos($key, 'submenu_') === false){
+            if (strpos($key, 'submenu_') === false) {
                 unset($submenus[$key]);
-            } 
-            if(str_replace('submenu_', '', $key) != $post_id){
+            }
+            if (str_replace('submenu_', '', $key) != $post_id) {
                 unset($submenus[$key]);
-            }  
+            }
 
-            if(!empty($submenu)){
-               foreach($submenu as $part_key => $menu_part){
-                   $part_posts = [];
-                   foreach($menu_part as $link_key => $link){
-
-                   }
-               }
-            }            
-        }                
+            if (!empty($submenu)) {
+                foreach ($submenu as $part_key => $menu_part) {
+                    $part_posts = [];
+                    foreach ($menu_part as $link_key => $link) {
+                    }
+                }
+            }
+        }
 
         return $return;
     }
@@ -82,7 +81,7 @@ class WoodyTheme_Menus
     public static function getMenuLinks($posts, $post_parent = 0, $limit = -1)
     {
         $return = [];
-        if(empty($posts)){
+        if (empty($posts)) {
             $args = array(
             'post_type'        => 'page',
             'post_parent'      => $post_parent,
@@ -92,8 +91,7 @@ class WoodyTheme_Menus
             'numberposts'      => $limit
         );
 
-        $posts = get_posts($args);
-
+            $posts = get_posts($args);
         } else {
             $posts = $posts;
         }
