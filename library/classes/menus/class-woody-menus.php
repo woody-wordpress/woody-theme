@@ -32,54 +32,23 @@ class WoodyTheme_Menus
     {
         $return = [];
         $return = self::getMenuLinks(0, $limit);
-        // foreach ($return as $key => $item_depth1) {
 
-        //     foreach($args as $submenu_key => $submenu_args){
-        //         if($submenu_key === $key){
-        //             if(empty($submenu_args)){
-        //                 continue;
-        //             }
-        //             if(!empty($submenu_args['submenu_parts'])){
-        //                 foreach($submenu_args['submenu_parts'] as $part_key => $part){
-        //                     if(!empty($part['has_subitems'])){
-        //                         // rcd($part['max_depth']);
-        //                         $return[$key]['subitems'] = self::getSubmenuData($item_depth1, $part['max_depth']);
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
+        foreach ($return as $key => $value) {
+            $submenus = self::getSubmenus($value['the_id']);
+        }
+
         return $return;
     }
 
-    /**
-    *
-    * Nom : getSubmenu
-    * Auteur : Benoit Bouchaud
-    * Return : Retourne les menu de x niveaux inférieurs en fonction du paramètre $max_depth
-    * @param item_depth1 - L'item de menu parent
-    * @param limit - Le nombre maximum de niveaux inférieurs à remonter
-    * @return return - Un tableau
-    *
-    */
-    // public static function getSubmenuData($item_depth1, $max_depth = 1)
-    // {
-    //     $return = [];
-    //     $return = self::getMenuLinks($item_depth1['the_id']);
-    //     if (!empty($return) && $max_depth >= 3) {
-    //         foreach ($return as $key_depth2 => $item_detph2) {
-    //             rcd($item_detph2);
-    //             $return[$key_depth2]['subitems'] = self::getMenuLinks($item_detph2['the_id']);
-    //             // if (!empty($return[$key_depth2]['subitems']) && $max_depth >= 4) {
-    //             //     foreach ($return[$key_depth2]['subitems'] as $key_depth3 => $item_detph3) {
-    //             //         $return[$key_depth2]['subitems'][$key_depth3]['subitems'] = self::getMenuLinks($item_detph3['the_id']);
-    //             //     }
-    //             // }
-    //         }
-    //     }
-    //     return $return;
-    // }
+    public static function getSubmenus($post_id)
+    {
+        $return = [];
+        $fields = get_fields('options');
+        foreach ($fields as $key => $field) {
+        }
+        // rcd($fields);
+        return $return;
+    }
 
     /**
     *
@@ -120,98 +89,6 @@ class WoodyTheme_Menus
             $return[$key]['img'] = (!empty(get_field('in_menu_img', $post->ID))) ? get_field('in_menu_img', $post->ID) : get_field('field_5b0e5ddfd4b1b', $post->ID);
         }
 
-        // rcd($return, true);
-
-
         return $return;
     }
-
-    /**
-    *
-    * Nom : getCompiledSubmenu
-    * Auteur : Benoit Bouchaud
-    * Return : Retourne le sous-menu sous forme de html (twig compilé)
-    * @param items - Tableau des liens du sous-menu
-    * @param args - Les paramètres du sous menu (template + template de chaque partie du sous menu)
-    * @return return - Une chaine de caractère
-    *
-    */
-    // public static function getCompiledSubmenu($items, $args)
-    // {
-    //     $return = '';
-
-    //     $twig_paths = getWoodyTwigPaths();
-
-    //     $default = [
-    //         'grid' => $twig_paths['grids_basic-grid_1_cols-tpl_01'],
-    //         'custom_function' => '',
-    //         'alignement' => 'align-stretch',
-    //         'no_padding' => 0,
-    //     ];
-
-    //     if (empty($args)) {
-    //         return;
-    //     }
-
-    //     if (is_array($args)) {
-    //         $args = array_merge($default, $args);
-    //     }
-
-    //     if (!empty($args['custom_function']) && function_exists($args['custom_function'])) {
-    //         $return = $args['custom_function'];
-    //     } elseif (!empty($args['grid']) && !empty($args['submenu_parts'])) {
-    //         foreach ($args['submenu_parts'] as $key => $part) {
-    //             if (empty($part)) {
-    //                 $submenu_parts['items'][] = '';
-    //             } else {
-    //                 $submenu_parts['items'][] = self::getCompiledSubmenuPart(array_slice($items, $part['from'], $part['length']), $part);
-    //             }
-    //         }
-    //         $submenu_parts['is_list'] = true;
-    //         $submenu_parts['alignement'] = $args['alignement'];
-    //         $submenu_parts['no_padding'] = $args['no_padding'];
-
-    //         $return = Timber::compile($args['grid'], $submenu_parts);
-    //     }
-
-    //     return $return;
-    // }
-
-    /**
-    *
-    * Nom : getCompiledSubmenuPart
-    * Auteur : Benoit Bouchaud
-    * Return : Retourne une partie de sous-menu sous forme de html (twig compilé)
-    * @param items - Tableau des liens de la partie
-    * @param grid_tpl - Le template Woody à utiliser pour rendre la partie
-    * @param items_tpl - Le template Woody à utiliser pour rendre les items de la partie
-    * @param custom_function - Une fonction permettant de surcharger le menu de base
-    * @return return - Une chaine de caractère
-    *
-    */
-    // public static function getCompiledSubmenuPart($items, $args)
-    // {
-    //     $return = '';
-    //     if (!empty($args['custom_function']) && function_exists($args['custom_function'])) {
-    //         $return = $args['custom_function'];
-    //     } elseif (!empty($items) && !empty($args['grid']) && !empty($args['items_tpl'])) {
-    //         foreach ($items as $key => $item) {
-    //             if (!empty($item['subitems']) && $args['max_depth'] >= 3 && !empty($args['subitems_tpl'])) {
-    //                 foreach ($item['subitems'] as $index => $subitem) {
-    //                     $subitem['depth_index'] = '3';
-    //                     $item['the_subitems'][$index] = Timber::compile($args['subitems_tpl'], $subitem);
-    //                     unset($item['subitems']);
-    //                 }
-    //             }
-    //             $item['depth_index'] = '2';
-    //             $part_items['items'][] = Timber::compile($args['items_tpl'], $item);
-    //         }
-    //         $part_items['alignement'] = $args['alignement'];
-    //         $part_items['no_padding'] = $args['no_padding'];
-
-    //         $return = Timber::compile($args['grid'], $part_items);
-    //     }
-
-    //     return $return;
-    // }
 }
