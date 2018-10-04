@@ -20,79 +20,303 @@ class WoodyTheme_Roles
 
     public function addRolesOnPluginActivation()
     {
-        // Administrator
-        $role = get_role('administrator');
+        $capabilities = [
+            'activate_plugins' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'delete_others_pages' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+            ],
+            'delete_others_posts' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'delete_pages' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+            ],
+            'delete_posts' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'delete_private_pages' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+            ],
+            'delete_private_posts' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'delete_published_pages' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+            ],
+            'delete_published_posts' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'edit_dashboard' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+            ],
+            'edit_others_pages' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+            ],
+            'edit_others_posts' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'edit_pages' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+            ],
+            'edit_posts' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'edit_private_pages' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+            ],
+            'edit_private_posts' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'edit_published_pages' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+            ],
+            'edit_published_posts' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'edit_theme_options' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'export' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'import' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'list_users' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'manage_categories' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'manage_links' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'manage_options' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'moderate_comments' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'promote_users' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'publish_pages' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+            ],
+            'publish_posts' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'read_private_pages' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+            ],
+            'read_private_posts' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'read' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+            ],
+            'remove_users' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'switch_themes' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'upload_files' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+            ],
+            'customize' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'delete_site' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'Configurer les thématiques' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+            ],
+            'Editer les thématiques' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+            ],
+            'Supprimer les thématiques' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+            ],
+            'Assigner les thématiques' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+            ],
+            'Configurer les lieux' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+            ],
+            'Editer les lieux' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+            ],
+            'Supprimer les lieux' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+            ],
+            'Assigner les lieux' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+            ],
+            'Configurer les saisons' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'Editer les saisons' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'Supprimer les saisons' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'Assigner les saisons' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+            ],
+            'Configurer les catégories de médias' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+            ],
+            'Editer les catégories de médias' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+            ],
+            'Supprimer les catégories de médias' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+            ],
+            'Assigner les catégories de médias' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+            ],
+            'Configurer les hashtags' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+            ],
+            'Editer les hashtags' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+            ],
+            'Supprimer les hashtags' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+            ],
+            'Assigner les hashtags' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+            ],
+        ];
 
-        $role->add_cap('Configurer les thématiques');
-        $role->add_cap('Editer les thématiques');
-        $role->add_cap('Supprimer les thématiques');
-        $role->add_cap('Assigner les thématiques');
-
-        $role->add_cap('Configurer les lieux');
-        $role->add_cap('Editer les lieux');
-        $role->add_cap('Supprimer les lieux');
-        $role->add_cap('Assigner les lieux');
-
-        $role->add_cap('Assigner les saisons');
-
-        $role->add_cap('Configurer les catégories de médias');
-        $role->add_cap('Editer les catégories de médias');
-        $role->add_cap('Supprimer les catégories de médias');
-        $role->add_cap('Assigner les catégories de médias');
-
-        $role->add_cap('Configurer les hashtags');
-        $role->add_cap('Editer les hashtags');
-        $role->add_cap('Supprimer les hashtags');
-        $role->add_cap('Assigner les hashtags');
-
-        // Editor
-        $role = get_role('editor');
-
-        $role->add_cap('Configurer les thématiques');
-        $role->add_cap('Editer les thématiques');
-        $role->add_cap('Supprimer les thématiques');
-        $role->add_cap('Assigner les thématiques');
-
-        $role->add_cap('Configurer les lieux');
-        $role->add_cap('Editer les lieux');
-        $role->add_cap('Supprimer les lieux');
-        $role->add_cap('Assigner les lieux');
-
-        $role->add_cap('Assigner les saisons');
-
-        $role->add_cap('Configurer les catégories de médias');
-        $role->add_cap('Editer les catégories de médias');
-        $role->add_cap('Supprimer les catégories de médias');
-        $role->add_cap('Assigner les catégories de médias');
-
-        $role->add_cap('Configurer les hashtags');
-        $role->add_cap('Editer les hashtags');
-        $role->add_cap('Supprimer les hashtags');
-        $role->add_cap('Assigner les hashtags');
-
-        // Contributor
-        $role = get_role('contributor');
-
-        $role->remove_cap('Configurer les thématiques');
-        $role->remove_cap('Editer les thématiques');
-        $role->remove_cap('Supprimer les thématiques');
-        $role->add_cap('Assigner les thématiques');
-
-        $role->remove_cap('Configurer les lieux');
-        $role->remove_cap('Editer les lieux');
-        $role->remove_cap('Supprimer les lieux');
-        $role->add_cap('Assigner les lieux');
-
-        $role->add_cap('Assigner les saisons');
-
-        $role->remove_cap('Configurer les catégories de médias');
-        $role->remove_cap('Editer les catégories de médias');
-        $role->remove_cap('Supprimer les catégories de médias');
-        $role->add_cap('Assigner les catégories de médias');
-
-        $role->remove_cap('Configurer les hashtags');
-        $role->remove_cap('Editer les hashtags');
-        $role->remove_cap('Supprimer les hashtags');
-        $role->add_cap('Assigner les hashtags');
+        foreach ($capabilities as $capability => $roles) {
+            foreach ($roles as $role => $boolean) {
+                $current_role = get_role($role);
+                if ($boolean) {
+                    $current_role->add_cap($capability);
+                } else {
+                    $current_role->remove_cap($capability);
+                }
+            }
+        }
     }
 }
