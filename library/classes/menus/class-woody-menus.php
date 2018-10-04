@@ -31,11 +31,11 @@ class WoodyTheme_Menus
     public static function getMainMenu($limit = 6)
     {
         $return = [];
-        $return = self::getMenuLinks(0, $limit);
+        $return = self::getMenuLinks(null, 0, $limit);
 
-        foreach ($return as $key => $value) {
-            $submenus = self::getSubmenus($value['the_id']);
-        }
+        // foreach ($return as $key => $value) {
+        //     $return[$key]['submenu'] = self::getSubmenus($value['the_id']);
+        // }
 
         return $return;
     }
@@ -43,10 +43,29 @@ class WoodyTheme_Menus
     public static function getSubmenus($post_id)
     {
         $return = [];
-        $fields = get_fields('options');
-        foreach ($fields as $key => $field) {
+        $submenus = get_fields('options');
+        if(empty($submenus)){
+            return;
         }
-        // rcd($fields);
+        
+        foreach ($submenus as $key => $submenu) {
+            if(strpos($key, 'submenu_') === false){
+                unset($submenus[$key]);
+            } 
+            if(str_replace('submenu_', '', $key) != $post_id){
+                unset($submenus[$key]);
+            }  
+
+            if(!empty($submenu)){
+               foreach($submenu as $part_key => $menu_part){
+                   $part_posts = [];
+                   foreach($menu_part as $link_key => $link){
+
+                   }
+               }
+            }            
+        }                
+
         return $return;
     }
 
@@ -60,11 +79,11 @@ class WoodyTheme_Menus
     * @return return - Un tableau
     *
     */
-    public static function getMenuLinks($post_parent = 0, $limit = -1)
+    public static function getMenuLinks($posts, $post_parent = 0, $limit = -1)
     {
         $return = [];
-
-        $args = array(
+        if(empty($posts)){
+            $args = array(
             'post_type'        => 'page',
             'post_parent'      => $post_parent,
             'post_status'      => 'publish',
@@ -75,6 +94,10 @@ class WoodyTheme_Menus
 
         $posts = get_posts($args);
 
+        } else {
+            $posts = $posts;
+        }
+        
 
         foreach ($posts as $key => $post) {
             $return[$key] = [
