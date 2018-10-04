@@ -33,9 +33,10 @@ class WoodyTheme_Menus
         $return = [];
         $return = self::getMenuLinks(null, 0, $limit);
 
-        // foreach ($return as $key => $value) {
-        //     $return[$key]['submenu'] = self::getSubmenus($value['the_id']);
-        // }
+        foreach ($return as $key => $value) {
+            $return[$key]['submenu'] = self::getSubmenus($value['the_id']);
+        }
+
 
         return $return;
     }
@@ -43,26 +44,43 @@ class WoodyTheme_Menus
     public static function getSubmenus($post_id)
     {
         $return = [];
-        $submenus = get_fields('options');
-        if (empty($submenus)) {
-            return;
-        }
-
-        foreach ($submenus as $key => $submenu) {
-            if (strpos($key, 'submenu_') === false) {
-                unset($submenus[$key]);
-            }
-            if (str_replace('submenu_', '', $key) != $post_id) {
-                unset($submenus[$key]);
-            }
-
-            if (!empty($submenu)) {
-                foreach ($submenu as $part_key => $menu_part) {
-                    $part_posts = [];
-                    foreach ($menu_part as $link_key => $link) {
+            
+        $submenus = self::getTheRightOption($post_id);
+        if(empty($submenus)) return;
+        foreach($submenus as $submenu_key => $submenu){
+            if(empty($submenu)) return;
+            foreach($submenu as $part_key => $submenu_part){
+                if(empty($submenu_part)) return;
+                foreach($submenu_part as $links_key => $links){
+                    if(empty($links)) return;
+                    if(is_array($links)){
+                        foreach($links as $link_key => $link){
+                            $parts[$part_key][] = $link['submenu_links_objects'];
+                            $return[$part_key] = self::getMenuLinks($parts[$part_key]);
+                        }
+                    } else {
+                        //TODO: push title in the return part                        
                     }
                 }
+                
             }
+        }
+        
+        return $return;
+    }
+
+    public static function getTheRightOption($post_id){
+        $return = [];
+
+        $return = get_fields('options');
+        foreach($return as $key => $value){
+            if(strpos($key, 'submenu_') === false){
+                unset($return[$key]);
+            } 
+
+            if(str_replace('submenu_', '', $key) != $post_id){
+                unset($return[$key]);
+            }  
         }
 
         return $return;
@@ -81,7 +99,7 @@ class WoodyTheme_Menus
     public static function getMenuLinks($posts, $post_parent = 0, $limit = -1)
     {
         $return = [];
-        if (empty($posts)) {
+        if(empty($posts)){
             $args = array(
             'post_type'        => 'page',
             'post_parent'      => $post_parent,
@@ -91,10 +109,12 @@ class WoodyTheme_Menus
             'numberposts'      => $limit
         );
 
-            $posts = get_posts($args);
+        $posts = get_posts($args);
+
         } else {
             $posts = $posts;
         }
+        
 
         foreach ($posts as $key => $post) {
             $return[$key] = [
