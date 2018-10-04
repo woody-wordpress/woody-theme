@@ -353,12 +353,13 @@ class WoodyTheme_Plugins_Options
         ];
         $this->updateOption('wpseo_titles', $wpseo_titles);
 
+        // Duplicate Post
         $duplicate_post_roles = [
             'administrator',
             'editor',
         ];
         $this->updateOption('duplicate_post_roles', $duplicate_post_roles);
-        $this->updateOption('duplicate_post_title_suffix', '(contenu dupliqué)');
+        update_option('duplicate_post_title_suffix', '(contenu dupliqué)', '', 'yes');
     }
 
     private function updateOption($option_name, $settings, $autoload = 'yes')
