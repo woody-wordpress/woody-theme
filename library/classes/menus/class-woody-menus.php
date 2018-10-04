@@ -47,7 +47,7 @@ class WoodyTheme_Menus
         if (empty($submenus)) {
             return;
         }
-        
+
         foreach ($submenus as $key => $submenu) {
             if (strpos($key, 'submenu_') === false) {
                 unset($submenus[$key]);
@@ -95,7 +95,6 @@ class WoodyTheme_Menus
         } else {
             $posts = $posts;
         }
-        
 
         foreach ($posts as $key => $post) {
             $return[$key] = [
