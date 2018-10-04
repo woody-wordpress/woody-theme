@@ -83,6 +83,7 @@ class WoodyTheme_Cleanup_Admin
             remove_menu_page('themes.php'); // Apparence
             remove_menu_page('tools.php'); // Outils
             remove_menu_page('profile.php'); // Profil
+            remove_menu_page('edit.php?post_type=touristic_sheet'); // Fiches SIT
         }
         remove_menu_page('edit.php'); // Articles
         remove_menu_page('edit-comments.php'); // Commentaires
