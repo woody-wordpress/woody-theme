@@ -1,6 +1,63 @@
 #wpbody-content {
 
     .nestedpages {
+        .row {
+            &:hover {
+                .edit-indicator {
+                    display: inline;
+                    color: #555;
+                    background-color: #f7f7f7;
+                    border: 1px solid #e1e1e1;
+                    margin: 0 -3px 0 10px;
+                    padding: 7px 8px;
+
+                    &:hover {
+                        background-color: #0074a2;
+                        color: #fff;
+                        transition: all 200ms ease;
+                        border-color: #0074a2;
+                    }
+                }
+            }
+        }
+
+        .action-buttons {
+
+            .np-quick-edit,
+            .np-view-button {
+                display: none;
+            }
+
+            .nestedpages-dropdown {
+                .clone-post {
+                    display: none;
+                }
+            }
+        }
+
+        .np-assigned-pt-actions {
+            a {
+                color: #555;
+                background-color: #f7f7f7;
+                border: 1px solid #e1e1e1;
+                margin: 0 10px 0 0;
+                padding: 6px 8px;
+                height: 18px;
+                line-height: 18px;
+
+                &:hover {
+                    background-color: #0074a2;
+                    color: #fff;
+                    transition: all 200ms ease;
+                    border-color: #0074a2;
+                }
+            }
+
+            .edit_as_new_draft {
+                display: none;
+            }
+        }
+
         .child-toggle {
             a {
                 background-color: transparent !important;

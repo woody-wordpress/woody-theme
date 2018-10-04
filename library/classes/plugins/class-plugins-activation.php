@@ -44,6 +44,7 @@ class WoodyTheme_Plugins_Activation
             'wp-optimize/wp-optimize.php',
             'mce-table-buttons/mce_table_buttons.php',
             'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
+            'duplicate-post/duplicate-post.php',
         ];
 
         $this->deactivate_plugins = [
