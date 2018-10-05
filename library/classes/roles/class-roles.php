@@ -33,7 +33,7 @@ class WoodyTheme_Roles
             ],
             'delete_others_posts' => [
                 'administrator' => true,
-                'editor' => false,
+                'editor' => true,
                 'contributor' => false,
             ],
             'delete_pages' => [
@@ -43,7 +43,7 @@ class WoodyTheme_Roles
             ],
             'delete_posts' => [
                 'administrator' => true,
-                'editor' => false,
+                'editor' => true,
                 'contributor' => false,
             ],
             'delete_private_pages' => [
@@ -53,7 +53,7 @@ class WoodyTheme_Roles
             ],
             'delete_private_posts' => [
                 'administrator' => true,
-                'editor' => false,
+                'editor' => true,
                 'contributor' => false,
             ],
             'delete_published_pages' => [
@@ -63,8 +63,8 @@ class WoodyTheme_Roles
             ],
             'delete_published_posts' => [
                 'administrator' => true,
-                'editor' => false,
-                'contributor' => false,
+                'editor' => true,
+                'contributor' => true,
             ],
             'edit_dashboard' => [
                 'administrator' => true,
@@ -78,8 +78,8 @@ class WoodyTheme_Roles
             ],
             'edit_others_posts' => [
                 'administrator' => true,
-                'editor' => false,
-                'contributor' => false,
+                'editor' => true,
+                'contributor' => true,
             ],
             'edit_pages' => [
                 'administrator' => true,
@@ -88,8 +88,8 @@ class WoodyTheme_Roles
             ],
             'edit_posts' => [
                 'administrator' => true,
-                'editor' => false,
-                'contributor' => false,
+                'editor' => true,
+                'contributor' => true,
             ],
             'edit_private_pages' => [
                 'administrator' => true,
@@ -98,8 +98,8 @@ class WoodyTheme_Roles
             ],
             'edit_private_posts' => [
                 'administrator' => true,
-                'editor' => false,
-                'contributor' => false,
+                'editor' => true,
+                'contributor' => true,
             ],
             'edit_published_pages' => [
                 'administrator' => true,
@@ -108,8 +108,8 @@ class WoodyTheme_Roles
             ],
             'edit_published_posts' => [
                 'administrator' => true,
-                'editor' => false,
-                'contributor' => false,
+                'editor' => true,
+                'contributor' => true,
             ],
             'edit_theme_options' => [
                 'administrator' => true,
@@ -163,8 +163,8 @@ class WoodyTheme_Roles
             ],
             'publish_posts' => [
                 'administrator' => true,
-                'editor' => false,
-                'contributor' => false,
+                'editor' => true,
+                'contributor' => true,
             ],
             'read_private_pages' => [
                 'administrator' => true,
@@ -173,8 +173,8 @@ class WoodyTheme_Roles
             ],
             'read_private_posts' => [
                 'administrator' => true,
-                'editor' => false,
-                'contributor' => false,
+                'editor' => true,
+                'contributor' => true,
             ],
             'read' => [
                 'administrator' => true,
