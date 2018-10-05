@@ -123,17 +123,23 @@ function getWoodyIcons()
 
 function woodyIconsFolder($folder)
 {
-    $return = array();
-
-    $icons_finder = new Finder();
-    $icons_finder->files()->name('*.svg')->in($folder);
-    foreach ($icons_finder as $key => $icon) {
-        $icon_name = str_replace('.svg', '', $icon->getRelativePathname());
-        $icon_class = 'wicon-' . $icon_name;
-        $icon_human_name = str_replace('-', ' ', $icon_name);
-        $icon_human_name = substr($icon_human_name, 4);
-        $icon_human_name = ucfirst($icon_human_name);
-        $return[$icon_class] = $icon_human_name;
+    $return = [];
+    $icons_folder = get_transient('woody_icons_folder');
+    if (empty($icons_folder[$folder])) {
+        $icons_finder = new Finder();
+        $icons_finder->files()->name('*.svg')->in($folder);
+        foreach ($icons_finder as $key => $icon) {
+            $icon_name = str_replace('.svg', '', $icon->getRelativePathname());
+            $icon_class = 'wicon-' . $icon_name;
+            $icon_human_name = str_replace('-', ' ', $icon_name);
+            $icon_human_name = substr($icon_human_name, 4);
+            $icon_human_name = ucfirst($icon_human_name);
+            $return[$icon_class] = $icon_human_name;
+        }
+        $icons_folder[$folder] = $return;
+        set_transient('woody_icons_folder', $icons_folder);
+    } else {
+        $return = $icons_folder[$folder];
     }
 
     return $return;

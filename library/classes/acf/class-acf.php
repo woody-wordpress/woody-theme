@@ -267,6 +267,7 @@ class WoodyTheme_ACF
     {
         delete_transient('woody_terms_page_type');
         delete_transient('woody_components');
+        delete_transient('woody_icons_folder');
     }
 
     public function cleanTermsChoicesTransient()
