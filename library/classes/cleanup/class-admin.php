@@ -140,7 +140,6 @@ class WoodyTheme_Cleanup_Admin
                 'menu_slug'     => 'custom-menus',
                 'capability'    => 'edit_pages',
                 'icon_url'      => 'dashicons-menu',
-                'autoload'      => true,
                 'position'      => 30,
                 'redirect'      => true
             ));

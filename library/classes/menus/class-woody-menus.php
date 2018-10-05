@@ -99,6 +99,7 @@ class WoodyTheme_Menus
     * Nom : getMenuLinks
     * Auteur : Benoit Bouchaud
     * Return : Récupère les champs utiles au menu de tous les post enfants du $post_parent
+    * @param posts - Un tableau de posts (optionnel)
     * @param post_parent - L'id du post parent
     * @param limit - Le nombre maximum de posts à remonter
     * @return return - Un tableau
@@ -134,6 +135,46 @@ class WoodyTheme_Menus
             $return[$key]['the_fields']['pretitle'] = (!empty(get_field('in_menu_pretitle', $post->ID))) ? get_field('in_menu_pretitle', $post->ID) : get_field('field_5b87f20257a1d', $post->ID);
             $return[$key]['the_fields']['subtitle'] = (!empty(get_field('in_menu_subtitle', $post->ID))) ? get_field('in_menu_subtitle', $post->ID) : get_field('field_5b87f23b57a1e', $post->ID);
             $return[$key]['img'] = (!empty(get_field('in_menu_img', $post->ID))) ? get_field('in_menu_img', $post->ID) : get_field('field_5b0e5ddfd4b1b', $post->ID);
+        }
+
+        return $return;
+    }
+
+
+    /**
+     *
+     * Nom : getCompiledSubmenu
+     * Auteur : Benoit Bouchaud
+     * Return : Récupère les champs utiles au menu de tous les post enfants du $post_parent
+     * @param menu_link - Le tableau du lien 0 avec son sous-menu
+     * @param menu_display - Un tableau des tpl twigs à appliquer
+     * @return return - html
+     *
+     */
+    public static function getCompiledSubmenu($menu_link, $menu_display)
+    {
+        $return = '';
+        $twig_paths = getWoodyTwigPaths();
+        if (!empty($menu_link['submenu'])) {
+            $the_submenu = [];
+            $submenu['display'] = $menu_display[$menu_link['the_id']];
+            $i = 0;
+            foreach ($menu_link['submenu'] as $key => $part) {
+                foreach ($part['links'] as $link_key => $link) {
+                    $link_display = $submenu['display']['parts'][$i]['links_tpl'];
+                    $part['links'][$link_key] = Timber::compile($twig_paths[$link_display], $link);
+                }
+
+                $the_part = [];
+                $part_display = $submenu['display']['parts'][$i]['part_tpl'];
+                $the_part['items'] = $part['links'];
+
+                $menu_link['submenu'][$key] = Timber::compile($twig_paths[$part_display], $the_part);
+                $the_submenu['items'][] = $menu_link['submenu'][$key];
+                $i++;
+            }
+
+            $return = Timber::compile($twig_paths[$submenu['display']['grid_tpl']], $the_submenu);
         }
 
         return $return;
