@@ -29,20 +29,21 @@
         {% block styles %}{% endblock styles %}
     </head>
 
-    <body class="{{body_class}} flex-container medium-flex-dir-column-reverse">
+    <body class="{{body_class}}">
+        <div class="main-wrapper flex-container medium-flex-dir-column-reverse">
+            <div class="site-content">
+                <!-- Theme Content -->
+                {{ block('content') }}
+                <!-- /Theme Content -->
 
-        <div class="site-content">
-            <!-- Theme Content -->
-            {{ block('content') }}
-            <!-- /Theme Content -->
-
-            <!-- Theme Footer -->
-            {% include 'parts/footer.twig' %}
-            <!-- /Theme Footer -->
+                <!-- Theme Footer -->
+                {% include 'parts/footer.twig' %}
+                <!-- /Theme Footer -->
+            </div>
+            <!-- Theme Header -->
+            {% include 'parts/header.twig' %}
+            <!-- /Theme Header -->
         </div>
-        <!-- Theme Header -->
-        {% include 'parts/header.twig' %}
-        <!-- /Theme Header -->
 
         <!-- Twig Inline Scripts tags -->
         {% block inline_scripts %}{% endblock inline_scripts %}
