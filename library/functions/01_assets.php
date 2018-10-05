@@ -11,32 +11,30 @@ use Symfony\Component\Finder\Finder;
  * @return   page_teaser_fields - Un tableau de données
  *
  */
- function getAcfGroupFields($group_id)
- {
-     global $post;
-     if (!empty($post)) {
-         $post_id = $post->ID;
+function getAcfGroupFields($group_id)
+{
+    $post = get_post();
+    if (!empty($post)) {
+        $post_id = $post->ID;
+        $the_fields = array();
+        $fields = acf_get_fields($group_id);
 
-         $the_fields = array();
+        if (!empty($fields)) {
+            foreach ($fields as $field) {
+                $field_value = false;
+                if (!empty($field['name'])) {
+                    $field_value = get_field($field['name'], $post_id);
+                }
 
-         $fields = acf_get_fields($group_id);
+                if ($field_value && !empty($field_value)) {
+                    $the_fields[$field['name']] = $field_value;
+                }
+            }
+        }
 
-         if (!empty($fields)) {
-             foreach ($fields as $field) {
-                 $field_value = false;
-                 if (!empty($field['name'])) {
-                     $field_value = get_field($field['name'], $post_id);
-                 }
-
-                 if ($field_value && !empty($field_value)) {
-                     $the_fields[$field['name']] = $field_value;
-                 }
-             }
-         }
-
-         return $the_fields;
-     }
- }
+        return $the_fields;
+    }
+}
 
  /**
  *

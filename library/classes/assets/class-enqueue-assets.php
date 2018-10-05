@@ -117,7 +117,7 @@ class WoodyTheme_Enqueue_Assets
         }
 
         // Get page type
-        global $post;
+        $post = get_post();
         $pageType = (!empty($post) && !empty($post->ID)) ? getTermsSlugs($post->ID, 'page_type') : [];
 
         $isTouristicPlaylist = in_array('playlist_tourism', $pageType);
