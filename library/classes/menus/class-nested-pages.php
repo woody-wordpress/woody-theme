@@ -22,5 +22,15 @@ class WoodyTheme_NestedPages
     {
         // Flush Object when move post with NestedPage plugin
         clean_post_cache($post_id);
+
+        // Save Permalinks
+        // $post = get_post($post_id);
+        // $chunk = [[
+        //     'ID' => $post_id,
+        //     'post_name' => $post->post_name,
+        //     'post_title' => $post->post_title,
+        // ]];
+        // $mode = 'custom_uris';
+        // Permalink_Manager_URI_Functions_Post::regenerate_all_permalinks($chunk, $mode);
     }
 }
