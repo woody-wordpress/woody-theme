@@ -206,6 +206,31 @@ class WoodyTheme_Roles
                 'editor' => false,
                 'contributor' => false,
             ],
+            'wpseo_bulk_edit' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'wpseo_edit_advanced_metadata' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'wpseo_manage_options' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+            ],
+            'copy_posts' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+            ],
+            'view_query_monitor' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+            ],
             'Configurer les thématiques' => [
                 'administrator' => true,
                 'editor' => true,
