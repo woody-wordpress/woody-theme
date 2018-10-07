@@ -33,8 +33,10 @@ class WoodyTheme_Menus
         $return = [];
         $return = self::getMenuLinks(null, 0, $limit);
 
-        foreach ($return as $key => $value) {
-            $return[$key]['submenu'] = self::getSubmenus($value['the_id']);
+        if (!empty($return) && is_array($return)) {
+            foreach ($return as $key => $value) {
+                $return[$key]['submenu'] = self::getSubmenus($value['the_id']);
+            }
         }
 
         return $return;
@@ -45,7 +47,7 @@ class WoodyTheme_Menus
         $return = [];
 
         $fields_groups_wrapper = self::getTheRightOption($post_id);
-        if (empty($fields_groups_wrapper)) {
+        if (empty($fields_groups_wrapper) || !is_array($fields_groups_wrapper)) {
             return;
         }
 
@@ -81,13 +83,15 @@ class WoodyTheme_Menus
         $return = [];
 
         $return = get_fields('options');
-        foreach ($return as $key => $value) {
-            if (strpos($key, 'submenu_') === false) {
-                unset($return[$key]);
-            }
+        if (!empty($return) && is_array($return)) {
+            foreach ($return as $key => $value) {
+                if (strpos($key, 'submenu_') === false) {
+                    unset($return[$key]);
+                }
 
-            if (str_replace('submenu_', '', $key) != $post_id) {
-                unset($return[$key]);
+                if (str_replace('submenu_', '', $key) != $post_id) {
+                    unset($return[$key]);
+                }
             }
         }
 
@@ -105,36 +109,34 @@ class WoodyTheme_Menus
     * @return return - Un tableau
     *
     */
-    public static function getMenuLinks($posts, $post_parent = 0, $limit = -1)
+    public static function getMenuLinks($posts = [], $post_parent = 0, $limit = -1)
     {
         $return = [];
         if (empty($posts)) {
             $args = array(
-            'post_type'        => 'page',
-            'post_parent'      => $post_parent,
-            'post_status'      => 'publish',
-            'order'            => 'ASC',
-            'orderby'          => 'menu_order',
-            'numberposts'      => $limit
-        );
-
+                'post_type'        => 'page',
+                'post_parent'      => $post_parent,
+                'post_status'      => 'publish',
+                'order'            => 'ASC',
+                'orderby'          => 'menu_order',
+                'numberposts'      => $limit
+            );
             $posts = get_posts($args);
-        } else {
-            $posts = $posts;
         }
 
-
-        foreach ($posts as $key => $post) {
-            $return[$key] = [
+        if (!empty($posts) && is_array($posts)) {
+            foreach ($posts as $key => $post) {
+                $return[$key] = [
                 'the_id' => $post->ID,
                 'the_url' => get_permalink($post->ID),
             ];
 
-            $return[$key]['the_fields']['title'] = (!empty(get_field('in_menu_title', $post->ID))) ? get_field('in_menu_title', $post->ID) : $post->post_title;
-            $return[$key]['the_fields']['icon'] = (!empty(get_field('in_menu_woody_icon', $post->ID))) ? get_field('in_menu_woody_icon', $post->ID) : '';
-            $return[$key]['the_fields']['pretitle'] = (!empty(get_field('in_menu_pretitle', $post->ID))) ? get_field('in_menu_pretitle', $post->ID) : get_field('field_5b87f20257a1d', $post->ID);
-            $return[$key]['the_fields']['subtitle'] = (!empty(get_field('in_menu_subtitle', $post->ID))) ? get_field('in_menu_subtitle', $post->ID) : get_field('field_5b87f23b57a1e', $post->ID);
-            $return[$key]['img'] = (!empty(get_field('in_menu_img', $post->ID))) ? get_field('in_menu_img', $post->ID) : get_field('field_5b0e5ddfd4b1b', $post->ID);
+                $return[$key]['the_fields']['title'] = (!empty(get_field('in_menu_title', $post->ID))) ? get_field('in_menu_title', $post->ID) : $post->post_title;
+                $return[$key]['the_fields']['icon'] = (!empty(get_field('in_menu_woody_icon', $post->ID))) ? get_field('in_menu_woody_icon', $post->ID) : '';
+                $return[$key]['the_fields']['pretitle'] = (!empty(get_field('in_menu_pretitle', $post->ID))) ? get_field('in_menu_pretitle', $post->ID) : get_field('field_5b87f20257a1d', $post->ID);
+                $return[$key]['the_fields']['subtitle'] = (!empty(get_field('in_menu_subtitle', $post->ID))) ? get_field('in_menu_subtitle', $post->ID) : get_field('field_5b87f23b57a1e', $post->ID);
+                $return[$key]['img'] = (!empty(get_field('in_menu_img', $post->ID))) ? get_field('in_menu_img', $post->ID) : get_field('field_5b0e5ddfd4b1b', $post->ID);
+            }
         }
 
         return $return;
