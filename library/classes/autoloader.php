@@ -42,7 +42,7 @@ new WoodyTheme_Menus();
 new WoodyTheme_Roles();
 
 // Execute hook_update like Drupal if theme version change
-add_action('after_setup_theme', 'woodyThemeCheckThemeVersion');
+add_action('init', 'woodyThemeCheckThemeVersion', 1);
 function woodyThemeCheckThemeVersion()
 {
     $current_version = wp_get_theme(get_template())->get('Version');
