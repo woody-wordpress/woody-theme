@@ -20,7 +20,7 @@ class WoodyTheme_Plugins_Activation
 
     protected function registerHooks()
     {
-        add_action('after_setup_theme', array($this, 'activatePlugins'), 2);
+        add_action('init', array($this, 'activatePlugins'), 1);
     }
 
     public function activatePlugins()
