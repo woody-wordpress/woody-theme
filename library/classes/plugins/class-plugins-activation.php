@@ -45,10 +45,10 @@ class WoodyTheme_Plugins_Activation
             'mce-table-buttons/mce_table_buttons.php',
             'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
             'duplicate-post/duplicate-post.php',
-            'vcaching/vcaching.php',
         ];
 
         $this->deactivate_plugins = [
+            'vcaching/vcaching.php',
             'regenerate-thumbnails/regenerate-thumbnails.php',
             'fakerpress/fakerpress.php',
         ];
