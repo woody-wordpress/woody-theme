@@ -48,6 +48,7 @@ class WoodyTheme_Plugins_Activation
         ];
 
         $this->deactivate_plugins = [
+            'vcaching/vcaching.php',
             'regenerate-thumbnails/regenerate-thumbnails.php',
             'fakerpress/fakerpress.php',
         ];
