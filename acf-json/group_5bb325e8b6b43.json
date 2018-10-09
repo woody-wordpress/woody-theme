@@ -31,12 +31,31 @@
                 "class": "",
                 "id": ""
             },
-            "collapsed": "",
+            "collapsed": "field_5bbcac7027b56",
             "min": 0,
             "max": 0,
-            "layout": "table",
+            "layout": "block",
             "button_label": "Ajouter un slide",
             "sub_fields": [
+                {
+                    "key": "field_5bbcac7027b56",
+                    "label": "Titre d'administration",
+                    "name": "bo_landswpr_title",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "hide-label",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "Titre visible lorsque le slide est refermé (uniquement pour le backoffice)",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
                 {
                     "key": "field_5bb3266177f3a",
                     "label": "Média",
@@ -241,7 +260,7 @@
                     "key": "field_5bb3297e77f43",
                     "label": "Lien(s)",
                     "name": "landswpr_slide_links",
-                    "type": "clone",
+                    "type": "repeater",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -250,13 +269,34 @@
                         "class": "",
                         "id": ""
                     },
-                    "clone": [
-                        "group_5b043614df4a6"
-                    ],
-                    "display": "seamless",
+                    "collapsed": "",
+                    "min": 0,
+                    "max": 0,
                     "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0
+                    "button_label": "Ajouter un bouton",
+                    "sub_fields": [
+                        {
+                            "key": "field_5bbcaab563652",
+                            "label": "Bouton(s)",
+                            "name": "landswpr_slide_link",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "hide-label",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b0422e167d2a"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ]
                 }
             ]
         },
@@ -318,5 +358,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Diaporama de slides (image ou video) en page d'accueil",
-    "modified": 1538471498
+    "modified": 1539091881
 }
