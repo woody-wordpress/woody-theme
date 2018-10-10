@@ -320,7 +320,7 @@
             "key": "field_5bb33637168ed",
             "label": "Template",
             "name": "landswpr_woody_tpl",
-            "type": "text",
+            "type": "radio",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -329,11 +329,15 @@
                 "class": "",
                 "id": ""
             },
+            "layout": "vertical",
+            "choices": {
+                "swipers-landing_swipers-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/swipers\/landing_swipers\/tpl_01\/thumbnail.png?version=1.7.2\" alt=\"swipers-landing_swipers-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">LandSwiper<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">LandSwiper<\/h4>Swiper items<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+            },
             "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "other_choice": 0,
+            "save_other_choice": 0,
+            "allow_null": 0,
+            "return_format": "value"
         }
     ],
     "location": [
@@ -358,5 +362,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Diaporama de slides (image ou video) en page d'accueil",
-    "modified": 1539091881
+    "modified": 1539155305
 }
