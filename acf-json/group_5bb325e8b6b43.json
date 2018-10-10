@@ -153,7 +153,7 @@
                                 {
                                     "key": "field_5bb3283377f3e",
                                     "label": "Poster",
-                                    "name": "landswpr_slide_movie_poster",
+                                    "name": "movie_poster_file",
                                     "type": "image",
                                     "instructions": "Impératif pour l'affichage de la vidéo.\r\nCorrespond généralement à la première image de la vidéo",
                                     "required": 0,
@@ -385,5 +385,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Diaporama de slides (image ou video) en page d'accueil",
-    "modified": 1539187456
+    "modified": 1539187518
 }
