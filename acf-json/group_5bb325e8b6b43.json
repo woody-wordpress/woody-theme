@@ -314,9 +314,9 @@
                 "id": ""
             },
             "choices": {
-                "ratio_16_9": "1920x1080",
-                "ratio_2_1": "1920x960",
-                "ratio_4_1": "1920x480"
+                "ratio_16_9": "Paysage 1920x1080",
+                "ratio_2_1": "Paysage 1920x960",
+                "ratio_4_1": "Panoramique 1920x480"
             },
             "allow_null": 0,
             "default_value": "ratio_2_1",
@@ -385,5 +385,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Diaporama de slides (image ou video) en page d'accueil",
-    "modified": 1539185212
+    "modified": 1539186871
 }
