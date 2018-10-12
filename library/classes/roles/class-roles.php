@@ -34,7 +34,7 @@ class WoodyTheme_Roles
             'delete_others_posts' => [
                 'administrator' => true,
                 'editor' => true,
-                'contributor' => false,
+                'contributor' => true,
             ],
             'delete_pages' => [
                 'administrator' => true,
@@ -44,7 +44,7 @@ class WoodyTheme_Roles
             'delete_posts' => [
                 'administrator' => true,
                 'editor' => true,
-                'contributor' => false,
+                'contributor' => true,
             ],
             'delete_private_pages' => [
                 'administrator' => true,
@@ -54,7 +54,7 @@ class WoodyTheme_Roles
             'delete_private_posts' => [
                 'administrator' => true,
                 'editor' => true,
-                'contributor' => false,
+                'contributor' => true,
             ],
             'delete_published_pages' => [
                 'administrator' => true,
