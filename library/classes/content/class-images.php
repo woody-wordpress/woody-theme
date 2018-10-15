@@ -260,55 +260,71 @@ class WoodyTheme_Images
         if (!empty($_wp_additional_image_sizes[$ratio_name])) {
             $size = $_wp_additional_image_sizes[$ratio_name];
             $attachment_metadata = maybe_unserialize(wp_get_attachment_metadata($attachment_id));
-
             $img_path = WP_UPLOAD_DIR . '/' . $attachment_metadata['file'];
             if (file_exists($img_path)) {
                 $img_path_parts = pathinfo($img_path);
-
                 if (empty($attachment_metadata['sizes'][$ratio_name]) || strpos($attachment_metadata['sizes'][$ratio_name]['file'], 'wp-json') !== false) {
-                    $cropped_image_filename = $img_path_parts['filename'] . '-' . $size['width'] . 'x' . $size['height'] . '.' . $img_path_parts['extension'];
-                    $cropped_image_path = $img_path_parts['dirname'] . '/' . $cropped_image_filename;
 
                     // get the size of the image
                     list($width_orig, $height_orig) = getimagesize($img_path);
-                    $expect_ratio = (float) $size['height'] / $size['width'];
+                    $ratio_expect = (float) $size['height'] / $size['width'];
+                    $ratio_orig = (float) $height_orig / $width_orig;
 
-                    if ($expect_ratio < 1) {
-                        // Crop Paysage
+                    if ($size['height'] == 0) {
                         $req_width = $width_orig;
-                        $req_height = round($width_orig * $expect_ratio);
-                        $req_x = 0;
-                        $req_y = round(($height_orig - $req_height)/2);
-                    } elseif ($expect_ratio > 1) {
-                        // Crop Portrait
-                        $req_width = round($height_orig / $expect_ratio);
                         $req_height = $height_orig;
-                        $req_x = round(($width_orig - $req_width)/2);
-                        $req_y = 0;
-                    } elseif ($expect_ratio == 1) {
-                        // Crop Carré
-                        $ratio_orig = (float) $height_orig / $width_orig;
+
                         if ($ratio_orig < 1) {
-                            //Image origine en Paysage
-                            $req_width = $height_orig;
+                            $size['height'] = round($size['width'] * $ratio_orig);
+                        } elseif ($ratio_orig > 1) {
+                            $size['height'] = round($size['width'] / $ratio_orig);
+                        } elseif ($ratio_orig == 1) {
+                            $size['height'] = $size['width'];
+                        }
+                        $req_x = 0;
+                        $req_y = 0;
+                    } else {
+                        if ($ratio_expect < 1) {
+                            // Crop Paysage
+                            $req_width = $width_orig;
+                            $req_height = round($width_orig * $ratio_expect);
+                            $req_x = 0;
+                            $req_y = round(($height_orig - $req_height)/2);
+                        } elseif ($ratio_expect > 1) {
+                            // Crop Portrait
+                            $req_width = round($height_orig / $ratio_expect);
                             $req_height = $height_orig;
                             $req_x = round(($width_orig - $req_width)/2);
                             $req_y = 0;
-                        } elseif ($ratio_orig > 1) {
-                            //Image origine en Portrait
-                            $req_width = $width_orig;
-                            $req_height = $width_orig;
-                            $req_x = 0;
-                            $req_y = round(($height_orig - $req_height)/2);
-                        } elseif ($ratio_orig == 1) {
-                            //Image origine en Carré
-                            $req_width = $width_orig;
-                            $req_height = $height_orig;
-                            $req_x = 0;
-                            $req_y = 0;
+                        } elseif ($ratio_expect == 1) {
+                            // Crop Carré
+                            if ($ratio_orig < 1) {
+                                //Image origine en Paysage
+                                $req_width = $height_orig;
+                                $req_height = $height_orig;
+                                $req_x = round(($width_orig - $req_width)/2);
+                                $req_y = 0;
+                            } elseif ($ratio_orig > 1) {
+                                //Image origine en Portrait
+                                $req_width = $width_orig;
+                                $req_height = $width_orig;
+                                $req_x = 0;
+                                $req_y = round(($height_orig - $req_height)/2);
+                            } elseif ($ratio_orig == 1) {
+                                //Image origine en Carré
+                                $req_width = $width_orig;
+                                $req_height = $height_orig;
+                                $req_x = 0;
+                                $req_y = 0;
+                            }
                         }
                     }
 
+                    // Set filename
+                    $cropped_image_filename = $img_path_parts['filename'] . '-' . $size['width'] . 'x' . $size['height'] . '.' . $img_path_parts['extension'];
+                    $cropped_image_path = $img_path_parts['dirname'] . '/' . $cropped_image_filename;
+
+                    // Crop
                     $img_editor = wp_get_image_editor($img_path);
                     if (!is_wp_error($img_editor)) {
                         $img_editor->crop($req_x, $req_y, $req_width, $req_height, $size['width'], $size['height'], false);
