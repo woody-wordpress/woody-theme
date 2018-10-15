@@ -211,10 +211,13 @@ function getTouristicSheetPreview($sheet_id, $sheet_wp)
                 }
                 $data['sheet_rating'] = implode('', $rating);
             }
+
+            if (!empty($item['dates'])) {
+                $data['date'] = $item['dates'][0];
+            }
         }
     }
 
-    // \PC::debug($sheet_data, 'Item fiche');
     return $data;
 }
 
