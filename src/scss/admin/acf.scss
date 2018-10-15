@@ -522,3 +522,11 @@
 .acf-field-5b2bbb4aec6b1 {
     max-height: 85px;
 }
+
+
+// On masque les tabs sur le champ "Playlist" lorsque l'on est sur une page de type "Playlist"
+#acf-group_5b33890e6fa0b {
+    .acf-tab-wrap {
+        display: none;
+    }
+}

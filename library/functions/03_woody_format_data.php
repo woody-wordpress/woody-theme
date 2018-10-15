@@ -130,6 +130,19 @@ function getManualFocus_data($layout)
     return $the_items;
 }
 
+function getAutoFocusSheetData($confId)
+{
+    $items = [];
+    $playlist = apply_filters('wp_woody_hawwwai_playlist_render', $confId, 'fr', array(), 'json');
+    if (!empty($playlist['items'])) {
+        foreach ($playlist['items'] as $key => $item) {
+            $items['items'][] = getTouristicSheetPreview($item['sheetId'], '');
+        }
+    }
+
+    return $items;
+}
+
 /**
  *
  * Nom : getCustomPreview
@@ -469,15 +482,19 @@ function formatFocusesData($layout, $current_post, $twigPaths)
 {
     $return = '';
 
+
+
     if ($layout['acf_fc_layout'] == 'manual_focus') {
         $the_items = getManualFocus_data($layout);
-    } else {
+    } elseif ($layout['acf_fc_layout'] == 'auto_focus') {
         $the_items = getAutoFocus_data($current_post, $layout);
+    } elseif ($layout['acf_fc_layout'] == 'auto_focus_sheets' && !empty($layout['playlist_conf_id'])) {
+        $the_items = getAutoFocusSheetData($layout['playlist_conf_id']);
     }
 
-    $the_items['focus_no_padding'] = $layout['focus_no_padding'];
+    $the_items['focus_no_padding'] = (!empty($layout['display_button'])) ? $layout['focus_no_padding'] : '';
     $the_items['block_titles'] = getFocusBlockTitles($layout);
-    $the_items['display_button'] = $layout['display_button'];
+    $the_items['display_button'] = (!empty($layout['display_button'])) ? $layout['display_button'] : '';
 
     $return = Timber::compile($twigPaths[$layout['woody_tpl']], $the_items);
 

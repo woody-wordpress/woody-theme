@@ -144,6 +144,7 @@ if ($context['page_type'] === 'playlist_tourism') {
                     switch ($layout['acf_fc_layout']) {
                         case 'manual_focus':
                         case 'auto_focus':
+                        case 'auto_focus_sheets':
                             $components['items'][] = formatFocusesData($layout, $context['post'], $context['woody_components']);
                         break;
                         default:
