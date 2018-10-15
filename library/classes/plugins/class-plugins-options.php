@@ -16,7 +16,7 @@ class WoodyTheme_Plugins_Options
 
     protected function registerHooks()
     {
-        add_action('woody_theme_update', array($this, 'defineOptions'), 1);
+        add_action('woody_theme_update', array($this, 'defineOptions'));
     }
 
     public function defineOptions()
@@ -28,7 +28,7 @@ class WoodyTheme_Plugins_Options
         update_option('time_format', 'G\hi', '', 'yes');
         update_option('wp_php_console', ['password' => 'root', 'register' => true, 'short' => true, 'stack' => true], '', 'yes');
         update_option('rocket_lazyload_options', ['images' => true, 'iframes' => true, 'youtube' => true], '', 'yes');
-        update_option('minify_html_active', (WP_ENV == 'dev') ? 'no' : 'yes', '', 'yes');
+        update_option('minify_html_active', (WP_ENV == 'dev') ? 'no' : 'no', '', 'yes');
         update_option('minify_javascript', 'yes', '', 'yes');
         update_option('minify_html_comments', 'yes', '', 'yes');
         update_option('minify_html_xhtml', 'no', '', 'yes');
@@ -195,15 +195,15 @@ class WoodyTheme_Plugins_Options
         $permalink_options = [
             'general' => [
                 'auto_update_uris' => 1,
-                'force_custom_slugs' => 1,
+                'show_native_slug_field' => 0,
                 'canonical_redirect' => 1,
-                'pagination_redirect' => 0,
-                'redirect' => 301,
-                'trailing_slashes' => 0,
-                'fix_language_mismatch' => 1,
-                'auto_remove_duplicates' => 1,
                 'setup_redirects' => 1,
-                'deep_detect' => 1,
+                'redirect' => 301,
+                'trailing_slashes' => 20,
+                'pagination_redirect' => 0,
+                'auto_remove_duplicates' => 1,
+                'fix_language_mismatch' => 1,
+                'force_custom_slugs' => 1,
             ],
             'licence' => [
                 'licence_key' => '8058C9F5-83C7421C-A57A61BC-D75B00E3',
@@ -352,6 +352,14 @@ class WoodyTheme_Plugins_Options
             'noindex-tax-post_tag' => false,
         ];
         $this->updateOption('wpseo_titles', $wpseo_titles);
+
+        // Duplicate Post
+        $duplicate_post_roles = [
+            'administrator',
+            'editor',
+        ];
+        $this->updateOption('duplicate_post_roles', $duplicate_post_roles);
+        update_option('duplicate_post_title_suffix', '(contenu dupliqué)', '', 'yes');
     }
 
     private function updateOption($option_name, $settings, $autoload = 'yes')

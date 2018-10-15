@@ -11,32 +11,30 @@ use Symfony\Component\Finder\Finder;
  * @return   page_teaser_fields - Un tableau de données
  *
  */
- function getAcfGroupFields($group_id)
- {
-     global $post;
-     if (!empty($post)) {
-         $post_id = $post->ID;
+function getAcfGroupFields($group_id)
+{
+    $post = get_post();
+    if (!empty($post)) {
+        $post_id = $post->ID;
+        $the_fields = array();
+        $fields = acf_get_fields($group_id);
 
-         $page_teaser_fields = array();
+        if (!empty($fields)) {
+            foreach ($fields as $field) {
+                $field_value = false;
+                if (!empty($field['name'])) {
+                    $field_value = get_field($field['name'], $post_id);
+                }
 
-         $fields = acf_get_fields($group_id);
+                if ($field_value && !empty($field_value)) {
+                    $the_fields[$field['name']] = $field_value;
+                }
+            }
+        }
 
-         if (!empty($fields)) {
-             foreach ($fields as $field) {
-                 $field_value = false;
-                 if (!empty($field['name'])) {
-                     $field_value = get_field($field['name'], $post_id);
-                 }
-
-                 if ($field_value && !empty($field_value)) {
-                     $page_teaser_fields[$field['name']] = $field_value;
-                 }
-             }
-         }
-
-         return $page_teaser_fields;
-     }
- }
+        return $the_fields;
+    }
+}
 
  /**
  *
@@ -123,18 +121,46 @@ function getWoodyIcons()
 
 function woodyIconsFolder($folder)
 {
-    $return = array();
-
-    $icons_finder = new Finder();
-    $icons_finder->files()->name('*.svg')->in($folder);
-    foreach ($icons_finder as $key => $icon) {
-        $icon_name = str_replace('.svg', '', $icon->getRelativePathname());
-        $icon_class = 'wicon-' . $icon_name;
-        $icon_human_name = str_replace('-', ' ', $icon_name);
-        $icon_human_name = substr($icon_human_name, 4);
-        $icon_human_name = ucfirst($icon_human_name);
-        $return[$icon_class] = $icon_human_name;
+    $return = [];
+    $icons_folder = get_transient('woody_icons_folder');
+    if (empty($icons_folder[$folder])) {
+        $icons_finder = new Finder();
+        $icons_finder->files()->name('*.svg')->in($folder);
+        foreach ($icons_finder as $key => $icon) {
+            $icon_name = str_replace('.svg', '', $icon->getRelativePathname());
+            $icon_class = 'wicon-' . $icon_name;
+            $icon_human_name = str_replace('-', ' ', $icon_name);
+            $icon_human_name = substr($icon_human_name, 4);
+            $icon_human_name = ucfirst($icon_human_name);
+            $return[$icon_class] = $icon_human_name;
+        }
+        $icons_folder[$folder] = $return;
+        set_transient('woody_icons_folder', $icons_folder);
+    } else {
+        $return = $icons_folder[$folder];
     }
 
     return $return;
+}
+
+ /**
+ *
+ * Nom : getWoodyTwigPaths
+ * Auteur : Benoit Bouchaud
+ * Return : Un tableau
+ * @return   the_icons - La liste de tous les icones du site
+ *
+ */
+function getWoodyTwigPaths()
+{
+    $woodyTwigsPaths = [];
+    $woodyComponents = get_transient('woody_components');
+    if (empty($woodyComponents)) {
+        $woodyComponents = Woody::getComponents();
+        set_transient('woody_components', $woodyComponents);
+    }
+
+    $woodyTwigsPaths = Woody::getTwigsPaths($woodyComponents);
+
+    return $woodyTwigsPaths;
 }

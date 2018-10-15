@@ -10,6 +10,9 @@ if (!class_exists('PC', false) && class_exists('PhpConsole', false) && WP_ENV ==
 }
 
 // ACF
+if (WP_ENV == 'dev') {
+    new WoodyTheme_ACF_Save_Manager();
+}
 new WoodyTheme_ACF();
 new WoodyTheme_ACF_Counter();
 
@@ -32,12 +35,14 @@ new WoodyTheme_Tinymce();
 
 // Menu
 new WoodyTheme_NestedPages();
+new WoodyTheme_Menus();
+
 
 // Roles
 new WoodyTheme_Roles();
 
 // Execute hook_update like Drupal if theme version change
-add_action('after_setup_theme', 'woodyThemeCheckThemeVersion');
+add_action('init', 'woodyThemeCheckThemeVersion', 1);
 function woodyThemeCheckThemeVersion()
 {
     $current_version = wp_get_theme(get_template())->get('Version');

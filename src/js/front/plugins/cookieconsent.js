@@ -13,7 +13,7 @@ window.cookieconsent.initialise({
     "static": true,
     "content": {
         "message": "Ce site Web utilise des cookies pour vous assurer la meilleure expérience.",
-        "dismiss": "OK je comprend !",
+        "dismiss": "OK je comprends !",
         "link": "En savoir plus",
         "href": "/mentions-legales"
     }

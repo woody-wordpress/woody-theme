@@ -10,6 +10,9 @@
                     {{ page_teaser }}
                 </header>
             {% endblock %}
+
+            {% block home_slider %}{% endblock %}
+
             {{ playlist_template|default }}
             {% for key, section in the_sections %}
                 <div class="page-section page-section-{{ key }}">

@@ -309,12 +309,22 @@
 
 // On affine le style des boutons d'ajout
 .acf-button.button.button-primary {
-    font-weight: 500 !important;
     border-radius: 0 !important;
-    border: none !important;
+    border: 12px solid #fff;
     box-shadow: none !important;
     text-shadow: none;
     height: auto !important;
+
+    p {
+        font-size: 20px;
+        line-height: 25px;
+    }
+
+    .dashicons {
+        width: 25px;
+        height: 25px;
+        font-size: 25px;
+    }
 }
 
 .acf-field-5b0d20457c829>.acf-input>.acf-repeater,
@@ -386,7 +396,8 @@
 .acf-field-5b59c9bfc6e6a,
 .acf-field-5b472edae3000,
 .acf-field-5b22415792db0,
-.acf-field-5b0d1dc8907e7 {
+.acf-field-5b0d1dc8907e7,
+.acf-field-5bbcac7027b56 {
     input[type=text] {
         font-size: 1.4em !important;
         font-weight: bold;

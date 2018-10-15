@@ -45,6 +45,9 @@ class WoodyTheme_Enqueue_Assets
             $siteConfig['password'] = $credentials['password'];
         }
         $siteConfig['mapProviderKeys'] = $this->mapKeys;
+
+        // Add hook to overide siteconfig
+        $siteConfig = apply_filters('woody_theme_siteconfig', $siteConfig);
         return $siteConfig;
     }
 
@@ -114,7 +117,7 @@ class WoodyTheme_Enqueue_Assets
         }
 
         // Get page type
-        global $post;
+        $post = get_post();
         $pageType = (!empty($post) && !empty($post->ID)) ? getTermsSlugs($post->ID, 'page_type') : [];
 
         $isTouristicPlaylist = in_array('playlist_tourism', $pageType);

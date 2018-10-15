@@ -31,8 +31,6 @@ foreach ($icons as $icon) {
     }
 }
 
-include get_template_directory() . '/header.php';
-
 $context['current_url'] = get_permalink();
 $context['active_social_shares'] = getActiveShares();
 $context['page_type'] = getTermsSlugs($context['post']->ID, 'page_type', true);
@@ -40,17 +38,28 @@ if (class_exists('SubWoodyTheme_TemplateParts')) {
     $context['page_parts'] = SubWoodyTheme_TemplateParts::getSubThemeCompiledParts();
 }
 
+/** ****************************
+ * Compilation du Diaporama en page d'accueil
+ **************************** **/
+$home_slider = getAcfGroupFields('group_5bb325e8b6b43');
+
+if (!empty($home_slider)) {
+    $context['home_slider'] = Timber::compile($context['woody_components'][$home_slider['landswpr_woody_tpl']], $home_slider);
+}
 
 /** ****************************
  * Compilation du bloc prix
  **************************** **/
-$trip_infos = [];
-if (!empty(getAcfGroupFields('group_5b6c5e6ff381d'))) {
-    $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d');
+
+$trip_infos = getAcfGroupFields('group_5b6c5e6ff381d');
+
+if (!empty($trip_infos['the_duration']['count_days']) || !empty($trip_infos['the_length']['length']) || !empty($trip_infos['the_price']['price'])) {
     //TODO: Gérer le fichier gps pour affichage s/ carte
     $trip_infos['the_duration']['count_days'] = ($trip_infos['the_duration']['count_days']) ? humanDays($trip_infos['the_duration']['count_days']) : '';
     $trip_infos['the_price']['price'] = (!empty($trip_infos['the_price']['price'])) ? str_replace('.', ',', $trip_infos['the_price']['price']) : '';
     $context['trip_infos'] = Timber::compile($context['woody_components'][$trip_infos['tripinfos_woody_tpl']], $trip_infos);
+} else {
+    $trip_infos = [];
 }
 
 /** ****************************
@@ -72,7 +81,6 @@ if (!empty($page_teaser)) {
     if (!empty($page_teaser['page_teaser_media_type']) && $page_teaser['page_teaser_media_type'] == 'map') {
         $page_teaser['post_coordinates'] = (!empty(getAcfGroupFields('group_5b3635da6529e'))) ? getAcfGroupFields('group_5b3635da6529e') : '';
     }
-
     $context['page_teaser'] = Timber::compile($context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
 }
 
@@ -82,6 +90,7 @@ if (!empty($page_teaser)) {
 $page_hero = [];
 $page_hero = getAcfGroupFields('group_5b052bbee40a4');
 if (!empty($page_hero['page_heading_media_type']) && ($page_hero['page_heading_media_type'] == 'movie' && !empty($page_hero['page_heading_movie']) || ($page_hero['page_heading_media_type'] == 'img' && !empty($page_hero['page_heading_img'])))) {
+    //TODO: A vérifier => vu une incohérence sur un site !
     if (empty($page_teaser['page_teaser_display_title'])) {
         $page_hero['title_as_h1'] = true;
     }

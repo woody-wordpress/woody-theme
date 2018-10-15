@@ -6,7 +6,6 @@
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
-use Symfony\Component\Finder\Finder;
 
 class WoodyTheme_ACF
 {
@@ -21,7 +20,12 @@ class WoodyTheme_ACF
     {
         add_action('woody_theme_update', array($this,'cleanTransient'));
         add_action('woody_subtheme_update', array($this,'cleanTransient'));
-        add_filter('acf/settings/save_json', array($this,'acfJsonSave'));
+        if (WP_ENV == 'dev') {
+            add_filter('woody_acf_save_paths', array($this,'acfJsonSave'));
+        }
+        add_action('create_term', array($this,'cleanTermsChoicesTransient'));
+        add_action('edit_term', array($this,'cleanTermsChoicesTransient'));
+        add_action('delete_term', array($this,'cleanTermsChoicesTransient'));
         add_filter('acf/settings/load_json', array($this,'acfJsonLoad'));
         add_filter('acf/load_field/type=radio', array($this, 'woodyTplAcfLoadField'));
         add_filter('acf/load_field/type=select', array($this, 'woodyIconLoadField'));
@@ -31,19 +35,20 @@ class WoodyTheme_ACF
         add_filter('acf/location/rule_match/page_type_and_children', array($this, 'woodyAcfPageTypeMatch'), 10, 3);
     }
 
-    public function acfJsonSave($path)
+    /**
+     * Register ACF Json Save directory
+     */
+    public function acfJsonSave($groups)
     {
-        // Save ACF Json on Dev
-        if (WP_ENV == 'dev') {
-            $path = get_template_directory() . '/acf-json';
-        }
-        return $path;
+        $groups['default'] = get_template_directory() . '/acf-json';
+        return $groups;
     }
 
+    /**
+     * Register ACF Json load directory
+     */
     public function acfJsonLoad($paths)
     {
-        // remove original path (optional)
-        unset($paths[0]);
         $paths[] = get_template_directory() . '/acf-json';
         return $paths;
     }
@@ -57,10 +62,10 @@ class WoodyTheme_ACF
         if (strpos($field['name'], 'woody_tpl') !== false) {
             $field['choices'] = [];
 
-            $woodyComponents = wp_cache_get('woody_components');
+            $woodyComponents = get_transient('woody_components');
             if (empty($woodyComponents)) {
                 $woodyComponents = Woody::getComponents();
-                wp_cache_set('woody_components', $woodyComponents);
+                set_transient('woody_components', $woodyComponents);
             }
 
             switch ($field['key']) {
@@ -125,41 +130,46 @@ class WoodyTheme_ACF
     public function focusedTaxonomyTermsLoadField($field)
     {
         // Reset field's choices + create $terms for future choices
-        $field['choices'] = [];
+        $choices = [];
         $terms = [];
 
-        // Get all site taxonomies and exclude those we don't want to use
-        $taxonomies = get_taxonomies();
-        $excluded_taxonomies = array('page_type', 'post_tag', 'nav_menu', 'link_category', 'post_format');
+        $choices = get_transient('woody_terms_choices');
+        if (empty($choices)) {
 
-        foreach ($taxonomies as $key => $taxonomy) {
-            // Don't loop through useless taxonomies
-            if (in_array($taxonomy, $excluded_taxonomies)) {
-                continue;
-            }
+            // Get all site taxonomies and exclude those we don't want to use
+            $taxonomies = get_taxonomies();
 
-            // Get terms for each taxonomy and push them in $terms
-            $tax_terms = get_terms(array(
-                'taxonomy' => $taxonomy,
-                'hide_empty' => false,
-            ));
+            // Remove useless taxonomies
+            unset($taxonomies['category']);
+            unset($taxonomies['page_type']);
+            unset($taxonomies['post_tag']);
+            unset($taxonomies['nav_menu']);
+            unset($taxonomies['link_category']);
+            unset($taxonomies['post_format']);
+            unset($taxonomies['attachment_categories']);
+            unset($taxonomies['attachment_types']);
+            unset($taxonomies['attachment_hashtags']);
 
-            foreach ($tax_terms as $key => $term) {
-                if ($term->name == 'Uncategorized') {
-                    continue;
+            foreach ($taxonomies as $key => $taxonomy) {
+                // Get terms for each taxonomy and push them in $terms
+                $tax_terms = get_terms(array(
+                    'taxonomy' => $taxonomy,
+                    'hide_empty' => false,
+                ));
+
+                $tax = get_taxonomy($taxonomy);
+                foreach ($tax_terms as $key => $term) {
+                    if ($term->name == 'Uncategorized') {
+                        continue;
+                    }
+                    $choices[$term->term_taxonomy_id] = $tax->label . ' - ' . $term->name;
                 }
-                $terms[] = $term;
             }
+
+            set_transient('woody_terms_choices', $choices);
         }
 
-        // Forach term, get its + its taxonomy human name and push it into $field['choices']
-        foreach ($terms as $key => $term) {
-            $tax_machine_name = $term->taxonomy;
-            $tax = get_taxonomy($tax_machine_name);
-            $tax_name = $tax->label;
-            $field['choices'][$term->term_taxonomy_id] = $term->name . ' - ' . $tax_name;
-        }
-
+        $field['choices'] = $choices;
         return $field;
     }
 
@@ -256,5 +266,12 @@ class WoodyTheme_ACF
     public function cleanTransient()
     {
         delete_transient('woody_terms_page_type');
+        delete_transient('woody_components');
+        delete_transient('woody_icons_folder');
+    }
+
+    public function cleanTermsChoicesTransient()
+    {
+        delete_transient('woody_terms_choices');
     }
 }

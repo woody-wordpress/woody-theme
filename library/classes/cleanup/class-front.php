@@ -13,12 +13,7 @@ class WoodyTheme_Cleanup_Front
         $this->registerHooks();
     }
 
-    protected function registerHooks()
-    {
-        add_action('after_setup_theme', array($this, 'startCleanup'));
-    }
-
-    public function startCleanup()
+    public function registerHooks()
     {
         // Launching operation cleanup.
         add_action('init', array($this, 'cleanupHead'));

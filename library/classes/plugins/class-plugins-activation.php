@@ -20,7 +20,7 @@ class WoodyTheme_Plugins_Activation
 
     protected function registerHooks()
     {
-        add_action('after_setup_theme', array($this, 'activatePlugins'), 2);
+        add_action('init', array($this, 'activatePlugins'), 1);
     }
 
     public function activatePlugins()
@@ -44,20 +44,13 @@ class WoodyTheme_Plugins_Activation
             'wp-optimize/wp-optimize.php',
             'mce-table-buttons/mce_table_buttons.php',
             'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
+            'duplicate-post/duplicate-post.php',
         ];
 
         $this->deactivate_plugins = [
-            'minify-html-markup/minify-html.php',
-            'bea-media-analytics/bea-media-analytics.php',
+            'vcaching/vcaching.php',
             'regenerate-thumbnails/regenerate-thumbnails.php',
-            'acf-repeater-flexible-content-collapser/acf-repeater-flexible-content-collapser.php',
-            'debug-bar/debug-bar.php',
-            'debug-bar-timber/debug-bar-timber.php',
-            'kint-debugger/kint-debugger.php',
             'fakerpress/fakerpress.php',
-            'rocket-lazy-load/rocket-lazy-load.php',
-            'media-file-renamer/media-file-renamer.php',
-            'acf-relationship-create-pro/acf-relationship-create-pro.php',
         ];
 
         if (SAVEQUERIES == true) {

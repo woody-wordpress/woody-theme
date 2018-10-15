@@ -422,18 +422,19 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
  */
 function nestedGridsComponents($scope, $gridTplField, $uniqIid_prefix = '')
 {
-    global $post;
-    $woodyTwigsPaths = getWoodyTwigPaths();
-    foreach ($scope as $key => $grid) {
-        $grid_content = [];
-        if (!empty($uniqIid_prefix) && is_numeric($key)) {
-            $scope[$key]['el_id'] = $uniqIid_prefix . '-' . uniqid();
-        }
+    $post = get_post();
+    if (!empty($post)) {
+        $woodyTwigsPaths = getWoodyTwigPaths();
+        foreach ($scope as $key => $grid) {
+            $grid_content = [];
+            if (!empty($uniqIid_prefix) && is_numeric($key)) {
+                $scope[$key]['el_id'] = $uniqIid_prefix . '-' . uniqid();
+            }
 
-        // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
-        if (!empty($grid['light_section_content'])) {
-            foreach ($grid['light_section_content'] as $layout) {
-                switch ($layout['acf_fc_layout']) {
+            // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
+            if (!empty($grid['light_section_content'])) {
+                foreach ($grid['light_section_content'] as $layout) {
+                    switch ($layout['acf_fc_layout']) {
                     case 'auto_focus':
                     case 'manual_focus':
                         $grid_content['items'][] = formatFocusesData($layout, $post->ID, $woodyTwigsPaths);
@@ -446,15 +447,16 @@ function nestedGridsComponents($scope, $gridTplField, $uniqIid_prefix = '')
                     }
                 }
 
-                $grid_content['items'][] = Timber::compile($woodyTwigsPaths[$layout['woody_tpl']], $layout);
-            }
+                    $grid_content['items'][] = Timber::compile($woodyTwigsPaths[$layout['woody_tpl']], $layout);
+                }
 
-            // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
-            $scope[$key]['light_section_content'] = Timber::compile($woodyTwigsPaths[$grid[$gridTplField]], $grid_content);
+                // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
+                $scope[$key]['light_section_content'] = Timber::compile($woodyTwigsPaths[$grid[$gridTplField]], $grid_content);
+            }
         }
-    }
-    if (!empty($uniqIid_prefix)) {
-        $scope['group_id'] = $uniqIid_prefix . '-' . uniqid();
+        if (!empty($uniqIid_prefix)) {
+            $scope['group_id'] = $uniqIid_prefix . '-' . uniqid();
+        }
     }
 
     return $scope;
@@ -531,18 +533,4 @@ function getAttachmentMoreData($attachment_id)
     }
 
     return $attachment_data;
-}
-
-function getWoodyTwigPaths($page_parts=false)
-{
-    $woodyTwigsPaths = [];
-    $woodyComponents = wp_cache_get('woody_components');
-    if (empty($woodyComponents)) {
-        $woodyComponents = Woody::getComponents();
-        wp_cache_set('woody_components', $woodyComponents);
-    }
-
-    $woodyTwigsPaths = Woody::getTwigsPaths($woodyComponents, $page_parts);
-
-    return $woodyTwigsPaths;
 }

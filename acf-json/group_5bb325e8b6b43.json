@@ -1,0 +1,389 @@
+{
+    "key": "group_5bb325e8b6b43",
+    "title": "Diaporama",
+    "fields": [
+        {
+            "key": "field_5bb3260577f37",
+            "label": "Contenu",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5bb3262577f39",
+            "label": "Slides",
+            "name": "landswpr_slides",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "field_5bbcac7027b56",
+            "min": 0,
+            "max": 0,
+            "layout": "block",
+            "button_label": "Ajouter un slide",
+            "sub_fields": [
+                {
+                    "key": "field_5bbcac7027b56",
+                    "label": "Titre d'administration",
+                    "name": "bo_landswpr_title",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "hide-label",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "Titre visible lorsque le slide est refermé (uniquement pour le backoffice)",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5bb3266177f3a",
+                    "label": "Média",
+                    "name": "landswpr_slide_media",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5bb326b977f3b",
+                            "label": "Type de média",
+                            "name": "landswpr_slide_media_type",
+                            "type": "radio",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "img": "Image",
+                                "movie": "Vidéo"
+                            },
+                            "allow_null": 0,
+                            "other_choice": 0,
+                            "default_value": "img",
+                            "layout": "vertical",
+                            "return_format": "value",
+                            "save_other_choice": 0
+                        },
+                        {
+                            "key": "field_5bb3274577f3c",
+                            "label": "Image",
+                            "name": "landswpr_slide_img",
+                            "type": "image",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_5bb326b977f3b",
+                                        "operator": "==",
+                                        "value": "img"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "hide-label",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "preview_size": "thumbnail",
+                            "library": "all",
+                            "min_width": "",
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": ""
+                        },
+                        {
+                            "key": "field_5bb327a477f3d",
+                            "label": "Vidéo",
+                            "name": "landswpr_slide_movie",
+                            "type": "group",
+                            "instructions": "Une vidéo muette, courte et légère.\r\nSi votre vidéo comporte du son, il sera coupé afin de respecter les standards en vigueur et autoriser l'autoplay.",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_5bb326b977f3b",
+                                        "operator": "==",
+                                        "value": "movie"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "layout": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_5bb3283377f3e",
+                                    "label": "Poster",
+                                    "name": "movie_poster_file",
+                                    "type": "image",
+                                    "instructions": "Impératif pour l'affichage de la vidéo.\r\nCorrespond généralement à la première image de la vidéo",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "return_format": "array",
+                                    "preview_size": "thumbnail",
+                                    "library": "all",
+                                    "min_width": "",
+                                    "min_height": "",
+                                    "min_size": "",
+                                    "max_width": "",
+                                    "max_height": "",
+                                    "max_size": "",
+                                    "mime_types": ""
+                                },
+                                {
+                                    "key": "field_5bb3287f77f3f",
+                                    "label": "Vidéo mp4",
+                                    "name": "mp4_movie_file",
+                                    "type": "file",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "-50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "min_size": "",
+                                    "max_size": "",
+                                    "mime_types": "mp4"
+                                },
+                                {
+                                    "key": "field_5bb328ab77f40",
+                                    "label": "Vidéo Webm",
+                                    "name": "movie_webm_file",
+                                    "type": "file",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "min_size": "",
+                                    "max_size": "",
+                                    "mime_types": "webm"
+                                },
+                                {
+                                    "key": "field_5bb328d077f41",
+                                    "label": "Vidéo OGG\/OGV",
+                                    "name": "movi_ogg_file",
+                                    "type": "file",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "min_size": "",
+                                    "max_size": "",
+                                    "mime_types": "ogg, ogv"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "key": "field_5bb3294777f42",
+                    "label": "Textes",
+                    "name": "landswpr_slide_texts",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_5b041c24d0dd7"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                },
+                {
+                    "key": "field_5bb3297e77f43",
+                    "label": "Lien(s)",
+                    "name": "landswpr_slide_links",
+                    "type": "repeater",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "collapsed": "",
+                    "min": 0,
+                    "max": 0,
+                    "layout": "block",
+                    "button_label": "Ajouter un bouton",
+                    "sub_fields": [
+                        {
+                            "key": "field_5bbcaab563652",
+                            "label": "Bouton(s)",
+                            "name": "landswpr_slide_link",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "hide-label",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b0422e167d2a"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "field_5bbe19ea18045",
+            "label": "Taille d'image",
+            "name": "landswpr_img_style",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "ratio_16_9": "Paysage 1920x1080",
+                "ratio_2_1": "Paysage 1920x960",
+                "ratio_4_1": "Panoramique 1920x480"
+            },
+            "allow_null": 0,
+            "default_value": "ratio_2_1",
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        {
+            "key": "field_5bb3261577f38",
+            "label": "Mise en page",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5bb33637168ed",
+            "label": "Template",
+            "name": "landswpr_woody_tpl",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "vertical",
+            "choices": {
+                "swipers-landing_swipers-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/swipers\/landing_swipers\/tpl_01\/thumbnail.png?version=1.7.2\" alt=\"swipers-landing_swipers-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">LandSwiper<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">LandSwiper<\/h4>Swiper items<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+            },
+            "default_value": "",
+            "other_choice": 0,
+            "save_other_choice": 0,
+            "allow_null": 0,
+            "return_format": "value"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            },
+            {
+                "param": "page_type_and_children",
+                "operator": "==",
+                "value": "front_page"
+            }
+        ]
+    ],
+    "menu_order": -20,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Diaporama de slides (image ou video) en page d'accueil",
+    "modified": 1539187518
+}

@@ -1,8 +1,7 @@
 {
     "key": "group_5b461a3831284",
     "title": "Appel à l'action",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b461a2b131b3",
             "label": "Contenu",
             "name": "",
@@ -54,7 +53,7 @@
                 "id": ""
             },
             "default_value": "",
-            "tabs": "visual",
+            "tabs": "all",
             "toolbar": "full",
             "media_upload": 0,
             "delay": 1
@@ -92,13 +91,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b4621c8aebdd",
-                        "operator": "==",
-                        "value": "link"
-                    }
-                ]
+                [{
+                    "field": "field_5b4621c8aebdd",
+                    "operator": "==",
+                    "value": "link"
+                }]
             ],
             "wrapper": {
                 "width": "",
@@ -106,8 +103,7 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [
-                {
+            "sub_fields": [{
                     "key": "field_5b7595f282076_field_5b0422ed7d07b",
                     "label": "Icône",
                     "name": "button_woody_icon",
@@ -205,13 +201,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b4621c8aebdd",
-                        "operator": "==",
-                        "value": "file"
-                    }
-                ]
+                [{
+                    "field": "field_5b4621c8aebdd",
+                    "operator": "==",
+                    "value": "file"
+                }]
             ],
             "wrapper": {
                 "width": "",
@@ -219,8 +213,7 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [
-                {
+            "sub_fields": [{
                     "key": "field_5b462226aebde_field_5b042b30ab6a3",
                     "label": "Icône",
                     "name": "file_woody_icon",
@@ -233,9 +226,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "choices": {
-
-                    },
+                    "choices": {},
                     "default_value": [],
                     "allow_null": 1,
                     "multiple": 0,
@@ -350,11 +341,11 @@
                 "id": ""
             },
             "choices": {
-                "blocks-call_to_action-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_04\/thumbnail.png\" alt=\"blocks-call_to_action-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 4<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 4<\/h4>Affiche un bloc avec texte centré (icone sur fond de couleur rond) et\/ou lien ou fichier à télécharger en dessous + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-call_to_action-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_03\/thumbnail.png\" alt=\"blocks-call_to_action-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 3<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 3<\/h4>Affiche un bloc avec texte centré et\/ou lien ou fichier à télécharger en dessous + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-call_to_action-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_02\/thumbnail.png\" alt=\"blocks-call_to_action-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 2<\/h4>Affiche un bloc avec texte aligné à gauche et\/ou lien ou fichier à télécharger en dessous + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-call_to_action-tpl_05": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_05\/thumbnail.png\" alt=\"blocks-call_to_action-tpl_05\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 5<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 5<\/h4>Affiche un bloc avec texte et\/ou lien ou fichier à télécharger en dessous + icone en haut à gauche + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-call_to_action-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_01\/thumbnail.png\" alt=\"blocks-call_to_action-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 1<\/h4>Affiche un bloc avec texte et\/ou lien ou fichier à télécharger à droite + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+                "blocks-call_to_action-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_04\/thumbnail.png?version=1.7.3\" alt=\"blocks-call_to_action-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 4<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 4<\/h4>Affiche un bloc avec texte centré (icone sur fond de couleur rond) et\/ou lien ou fichier à télécharger en dessous + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-call_to_action-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_03\/thumbnail.png?version=1.7.3\" alt=\"blocks-call_to_action-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 3<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 3<\/h4>Affiche un bloc avec texte centré et\/ou lien ou fichier à télécharger en dessous + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-call_to_action-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_02\/thumbnail.png?version=1.7.3\" alt=\"blocks-call_to_action-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 2<\/h4>Affiche un bloc avec texte aligné à gauche et\/ou lien ou fichier à télécharger en dessous + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-call_to_action-tpl_05": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_05\/thumbnail.png?version=1.7.3\" alt=\"blocks-call_to_action-tpl_05\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 5<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 5<\/h4>Affiche un bloc avec texte et\/ou lien ou fichier à télécharger en dessous + icone en haut à gauche + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-call_to_action-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_01\/thumbnail.png?version=1.7.3\" alt=\"blocks-call_to_action-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 1<\/h4>Affiche un bloc avec texte et\/ou lien ou fichier à télécharger à droite + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -400,8 +391,7 @@
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0,
-            "sub_fields": [
-                {
+            "sub_fields": [{
                     "ID": 0,
                     "key": "field_5b461b46131ba_field_5b043ca4a6fe3",
                     "label": "Couleur de fond",
@@ -559,13 +549,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -575,5 +563,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Un bloc d'appel à laction avec texte et lien\/fichier + couleur de fond possible",
-    "modified": 1537781030
+    "modified": 1539595046
 }

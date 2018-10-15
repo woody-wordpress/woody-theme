@@ -20,10 +20,11 @@ class WoodyTheme_Cleanup_Admin
         add_action('init', [$this, 'removeTaxonomies']);
         add_action('admin_menu', [$this, 'removeCommentsMetaBox']);
         add_action('admin_menu', [$this, 'removeAdminMenu']);
-        add_action('admin_menu', [$this, 'removeNavMenuItem']);
+        add_action('admin_menu', [$this, 'customMenusPage']);
         add_action('wp_before_admin_bar_render', [$this, 'customAdminBarMenu']);
         add_action('wp_dashboard_setup', [$this, 'removeDashboardWidgets']);
         add_filter('tiny_mce_before_init', [$this, 'tiny_mce_remove_unused_formats']);
+        add_filter('page_row_actions', [$this, 'actionsNestedPages'], 10, 2);
 
         $user = wp_get_current_user();
         if (!in_array('administrator', $user->roles)) {
@@ -83,6 +84,7 @@ class WoodyTheme_Cleanup_Admin
             remove_menu_page('themes.php'); // Apparence
             remove_menu_page('tools.php'); // Outils
             remove_menu_page('profile.php'); // Profil
+            remove_menu_page('edit.php?post_type=touristic_sheet'); // Fiches SIT
         }
         remove_menu_page('edit.php'); // Articles
         remove_menu_page('edit-comments.php'); // Commentaires
@@ -128,24 +130,36 @@ class WoodyTheme_Cleanup_Admin
         }
     }
 
-    /**
-     * Benoit Bouchaud
-     * On déplace le menu "Menus" pour le mettre à la racine du menu d'admin
-     */
-    public function removeNavMenuItem()
+    public function customMenusPage()
     {
-        // On retire le sous-menu Menus dans Apparence
-        remove_submenu_page('themes.php', 'nav-menus.php');
+        if (function_exists('acf_add_options_page')) {
+            // Page principale
+            acf_add_options_page(array(
+                'page_title'    => 'Personnalisation des menus',
+                'menu_title'    => 'Menus',
+                'menu_slug'     => 'custom-menus',
+                'capability'    => 'edit_pages',
+                'icon_url'      => 'dashicons-menu',
+                'position'      => 30,
+                'redirect'      => true
+            ));
 
-        // On créé un nouvel item de menu à la racine du menu d'admin
-        // add_menu_page('Menus', 'Menus', 'edit_pages', 'nav-menus.php', '', 'dashicons-menu', 31);
+            // Première sous-page
+            acf_add_options_sub_page(array(
+                'page_title'    => 'Menu principal',
+                'menu_title'    => 'Menu principal',
+                'parent_slug'   => 'custom-menus',
+            ));
+        }
+    }
 
-        // La création d'un nouveau menu envoie automatiquemenrt sur /admin.php :/
-        // Donc, si l'url == /admin.php?page=nav-menus.php => on redirige vers /nav-menus.php
-        // global $pagenow;
-        // if ($pagenow == 'admin.php' && isset($_GET['page']) && $_GET['page'] == 'nav-menus.php') {
-        //     wp_redirect(admin_url('/nav-menus.php'), 301);
-        // }
+    public function actionsNestedPages($actions, $post)
+    {
+        $actions['view'] = '<a href="'. apply_filters('nestedpages_view_link', get_the_permalink(), $post) .'" target="_blank">'
+                . apply_filters('nestedpages_view_link_text', __('View', 'wp-nested-pages'), $post)
+                . '</a>';
+
+        return $actions;
     }
 
     /**

@@ -1,2 +1,11 @@
 {% extends "page.twig" %}
+
+{% block home_slider %}
+    {% if home_slider | default %}
+        <div class="home-slider">
+            {{ home_slider }}
+        </div>
+    {% endif %}
+{% endblock %}
+
 {% block page_teaser %}{% endblock %}

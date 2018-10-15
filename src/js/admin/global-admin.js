@@ -1,7 +1,5 @@
 import $ from 'jquery';
 
-if ($('body').hasClass('themes-php')) {
-    //console.warn($('.theme-actions'));
+$('body.themes-php').each(function() {
     $('.theme-actions').remove();
-    //console.warn($('.theme-actions'));
-}
+});
