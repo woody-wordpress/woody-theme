@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>034-fleche-suivant</title>
+    <desc>Created with Sketch.</desc>
+    <g id="034-fleche-suivant" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group-2" transform="translate(25.500000, 25.500000) rotate(-90.000000) translate(-25.500000, -25.500000) translate(12.000000, 6.000000)" fill-rule="nonzero" stroke="#000000" stroke-width="8">
+            <path d="M13.5,0 L13.5,38.5" id="Path-3"></path>
+            <polyline id="Path-4" points="0 24 13.6632936 39 27 24"></polyline>
+        </g>
+    </g>
+</svg>

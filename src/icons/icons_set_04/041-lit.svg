@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>041-lit</title>
+    <desc>Created with Sketch.</desc>
+    <g id="041-lit" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(8.995000, 19.495595)" fill="#000000" fill-rule="nonzero">
+            <g id="000-lit">
+                <g id="ICONSET-01">
+                    <g id="000-lit">
+                        <path d="M5.52500536,0.265657738 L2.90688214,0.265657738 C0.286258333,0.265657738 0.286258333,2.88378095 0.286258333,2.88378095 L0.286258333,5.50440476 L8.14562917,5.50440476 L8.14562917,2.88378095 C8.14562917,0.265657738 5.52500536,0.265657738 5.52500536,0.265657738 Z" id="Shape"></path>
+                        <path d="M29.1031179,0.265657738 L13.3843762,0.265657738 C10.766253,0.265657738 10.766253,2.88378095 10.766253,2.88378095 L10.766253,18.6050232 L29.1031179,18.6050232 C31.7237417,18.6050232 31.7237417,15.9843994 31.7237417,15.9843994 L31.7237417,2.88378095 C31.7237417,0.265657738 29.1031179,0.265657738 29.1031179,0.265657738 Z" id="Shape-path"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+        <path d="M6,7 L6,43.125" id="Path-6" stroke="#000000" stroke-width="4" stroke-linecap="round" fill-rule="nonzero"></path>
+        <path d="M44.25,20 L44.25,43.125" id="Path-6-Copy" stroke="#000000" stroke-width="4" stroke-linecap="round" fill-rule="nonzero"></path>
+        <path d="M15.5,29 L6,29" id="Path-7" stroke="#000000" stroke-width="4" stroke-linecap="round" fill-rule="nonzero"></path>
+        <path d="M15.5,36.25 L6,36.25" id="Path-7-Copy" stroke="#000000" stroke-width="4" stroke-linecap="round" fill-rule="nonzero"></path>
+    </g>
+</svg>
