@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>041-lit</title>
+    <desc>Created with Sketch.</desc>
+    <g id="041-lit" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(8.995000, 19.495595)" fill-rule="nonzero">
+            <g id="000-lit">
+                <g id="ICONSET-01">
+                    <g id="000-lit">
+                        <path d="M5.52500536,0.265657738 L2.90688214,0.265657738 C0.286258333,0.265657738 0.286258333,2.88378095 0.286258333,2.88378095 L0.286258333,5.50440476 L8.14562917,5.50440476 L8.14562917,2.88378095 C8.14562917,0.265657738 5.52500536,0.265657738 5.52500536,0.265657738 Z" id="Shape" fill="#000000"></path>
+                        <path d="M12.766253,16.6050232 L29.1031179,16.6050232 C29.4639883,16.6050232 29.5254155,16.5640717 29.6073093,16.4002841 C29.6891875,16.2365277 29.7237417,16.0292029 31.7237417,15.9843994 L29.7237417,15.9843994 L29.7237417,2.88378095 C29.7237417,2.52449601 29.6832566,2.46382632 29.5196855,2.38211884 C29.3557337,2.30022114 29.1481552,2.26565774 29.1031179,2.26565774 L13.3843762,2.26565774 C13.0245998,2.26565774 12.9638758,2.30614037 12.8823728,2.46914654 C12.800729,2.63243413 12.766253,2.83929005 10.766253,2.88378095 L12.766253,2.88378095 L12.766253,16.6050232 Z" id="Shape-path" stroke="#000000" stroke-width="4"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+        <path d="M6,7 L6,43.125" id="Path-6" stroke="#000000" stroke-width="4" stroke-linecap="round" fill-rule="nonzero"></path>
+        <path d="M44.25,20 L44.25,43.125" id="Path-6-Copy" stroke="#000000" stroke-width="4" stroke-linecap="round" fill-rule="nonzero"></path>
+        <path d="M15.5,29 L6,29" id="Path-7" stroke="#000000" stroke-width="4" stroke-linecap="round" fill-rule="nonzero"></path>
+        <path d="M15.5,36.25 L6,36.25" id="Path-7-Copy" stroke="#000000" stroke-width="4" stroke-linecap="round" fill-rule="nonzero"></path>
+    </g>
+</svg>

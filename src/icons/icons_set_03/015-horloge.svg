@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>015-horloge</title>
+    <desc>Created with Sketch.</desc>
+    <g id="015-horloge" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(3.995000, 3.995000)" fill-rule="nonzero">
+            <g id="013-horloge">
+                <g id="ICONSET-01">
+                    <g id="013-horloge">
+                        <polygon id="Shape" fill="#000000" points="22.105662 20.9265813 30.9221607 30.37323 29.2417607 32.1012413 18.576822 22.618184 18.383576 21.1254287 19.1425567 6.87563667 21.357884 6.87563667"></polygon>
+                        <path d="M41.8615647,21.005 C41.8615647,32.5237625 32.5237625,41.8615647 21.005,41.8615647 C9.48623741,41.8615647 0.148435333,32.5237625 0.148435333,21.005 C0.148435333,9.48623741 9.48623741,0.148435333 21.005,0.148435333 C26.5365049,0.148435333 31.8414537,2.34581709 35.7528183,6.25718169 C39.6641829,10.1685463 41.8615647,15.4734951 41.8615647,21.005 Z" id="Shape-path" stroke="#000000" stroke-width="4"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
