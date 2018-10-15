@@ -4,7 +4,6 @@
     <title>028-plus-02</title>
     <desc>Created with Sketch.</desc>
     <g id="028-plus-02" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <polygon id="Line-3" fill="#000000" fill-rule="nonzero" points="23.25 2.5 27.25 2.5 27.25 47.5 23.25 47.5"></polygon>
-        <polygon id="Line" fill="#000000" fill-rule="nonzero" points="2.5 27.5 2.5 23.5 47.5 23.5 47.5 27.5"></polygon>
+        <path d="M27.25,23.5 L47.5,23.5 L47.5,27.5 L27.25,27.5 L27.25,47.5 L23.25,47.5 L23.25,27.5 L2.5,27.5 L2.5,23.5 L23.25,23.5 L23.25,2.5 L27.25,2.5 L27.25,23.5 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
     </g>
 </svg>

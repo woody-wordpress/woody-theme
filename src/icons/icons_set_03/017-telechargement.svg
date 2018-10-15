@@ -3,19 +3,17 @@
     <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
     <title>017-telechargement</title>
     <desc>Created with Sketch.</desc>
-    <g id="017-telechargement" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-        <g id="Group" transform="translate(14.000000, 4.000000)" fill-rule="nonzero" stroke="#000000" stroke-width="4">
+    <g id="017-telechargement" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(3.000000, 2.000000)" fill="#000000" fill-rule="nonzero">
             <g id="023-telechargement">
                 <g id="ICONSET-01">
                     <g id="023-telechargement">
                         <g id="Group-2-Copy">
-                            <path d="M10.5,0 L10.5,30" id="Path-3"></path>
-                            <polyline id="Path-4" points="0 19 10.6632936 31 21 19"></polyline>
+                            <path d="M23.5,27.8032955 L30.484673,19.6947092 C31.2055652,18.8578172 32.4683989,18.7637808 33.3052908,19.484673 C34.1421828,20.2055652 34.2362192,21.4683989 33.515327,22.3052908 L23.1786206,34.3052908 C22.3888334,35.2221638 20.9720924,35.2330832 20.1682664,34.3284929 L9.50497271,22.3284929 C8.77126634,21.5028121 8.84582632,20.2386791 9.67150709,19.5049727 C10.4971879,18.7712663 11.7613209,18.8458263 12.4950273,19.6715071 L19.5,27.5545942 L19.5,2 C19.5,0.8954305 20.3954305,0 21.5,0 C22.6045695,0 23.5,0.8954305 23.5,2 L23.5,27.8032955 Z M39,30.7084905 C39,29.603921 39.8954305,28.7084905 41,28.7084905 C42.1045695,28.7084905 43,29.603921 43,30.7084905 L43,42 C43,43.1045695 42.1045695,44 41,44 L2.84375,44 C1.7391805,44 0.84375,43.1045695 0.84375,42 L0.84375,30.7084905 C0.84375,29.603921 1.7391805,28.7084905 2.84375,28.7084905 C3.9483195,28.7084905 4.84375,29.603921 4.84375,30.7084905 L4.84375,40 L39,40 L39,30.7084905 Z" id="Combined-Shape"></path>
                         </g>
                     </g>
                 </g>
             </g>
         </g>
-        <polyline id="Path-2" stroke="#000000" stroke-width="4" fill-rule="nonzero" points="5.84375 32.7084905 5.84375 44 44 44 44 32.7084905"></polyline>
     </g>
 </svg>

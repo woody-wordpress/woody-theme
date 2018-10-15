@@ -5,8 +5,6 @@
     <desc>Created with Sketch.</desc>
     <g id="042-lien" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <path d="M41,14.5673749 L29.7717615,25 L27,22.149192 L38.9994523,11 L32,11 L32,7 L45,7 L45,19.75 L41,19.75 L41,14.5673749 Z M38,40 L38,25.4472459 L42,25.4472459 L42,44 L8,44 L8,10 L27.6593844,10 L27.6593844,14 L12,14 L12,40 L38,40 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
-        <path d="M43.1400089,9 L28,23.3900089" id="Path" fill="#D8D8D8" fill-rule="nonzero"></path>
-        <polyline id="Path" fill-rule="nonzero" points="27.6593844 12 18.9834394 12 10 12 10 42 40 42 40 25.4472459"></polyline>
         <polyline id="Path" fill-rule="nonzero" points="32 9 43 9 43 19.75"></polyline>
     </g>
 </svg>
