@@ -199,7 +199,7 @@ function formatGeomapData($layout, $twigPaths)
         $layout['markers'][$key]['compiled_marker']  = Timber::compile('/_objects/markerObject.twig', $marker);
 
         if (!empty($marker['title']) || !empty($marker['description']) || !empty($marker['img'])) {
-            $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-basic_card-tpl_01'], $marker);
+            // $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-basic_card-tpl_01'], $marker);
         }
     }
 
@@ -377,6 +377,8 @@ function getPagePreview($item_wrapper, $item)
     $data['img'] = getFieldAndFallback($item, 'focus_img', $item, 'field_5b0e5ddfd4b1b');
     $data['img']['attachment_more_data'] = (!empty($data['img'])) ? getAttachmentMoreData($data['img']['ID']) : '';
     $data['link']['url'] = $item->get_path();
+
+    // $post_type = get_post_terms($item->ID, 'page_type');
 
     return $data;
 }
