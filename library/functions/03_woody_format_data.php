@@ -198,9 +198,9 @@ function formatGeomapData($layout, $twigPaths)
         }
         $layout['markers'][$key]['compiled_marker']  = Timber::compile('/_objects/markerObject.twig', $marker);
 
-        // if (!empty($marker['title']) || !empty($marker['description']) || !empty($marker['img'])) {
-        //     $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-basic_card-tpl_01'], $marker);
-        // }
+        if (!empty($marker['title']) || !empty($marker['description']) || !empty($marker['img'])) {
+            $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-basic_card-tpl_01'], $marker);
+        }
     }
 
     // rcd($layout['markers'], true);
