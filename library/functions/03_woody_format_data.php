@@ -130,6 +130,15 @@ function getManualFocus_data($layout)
     return $the_items;
 }
 
+/**
+ *
+ * Nom : getAutoFocusSheetData
+ * Auteur : Benoit Bouchaud
+ * Return : Retourne un tableau de données relatives aux foches SIT
+ * @param    confId L'identifiant de conf de la playlist
+ * @return   items - Un tableau de données
+ *
+ */
 function getAutoFocusSheetData($confId)
 {
     $items = [];
@@ -141,6 +150,63 @@ function getAutoFocusSheetData($confId)
     }
 
     return $items;
+}
+
+/**
+ *
+ * Nom : formatFocusesData
+ * Auteur : Benoit Bouchaud
+ * Return : Retourne le html d'une mise en avant de contenu
+ * @param    layout Le wrapper du champ de mise en avant
+ * @param    current_post le post courant (pour les autofocus hierarchiques)
+ * @param    twigPaths les chemins des templates woody
+ * @return   items - Un tableau de données
+ *
+ */
+
+function formatFocusesData($layout, $current_post, $twigPaths)
+{
+    $return = '';
+    $the_items = [];
+    if ($layout['acf_fc_layout'] == 'manual_focus') {
+        $the_items = getManualFocus_data($layout);
+    } elseif ($layout['acf_fc_layout'] == 'auto_focus') {
+        $the_items = getAutoFocus_data($current_post, $layout);
+    } elseif ($layout['acf_fc_layout'] == 'auto_focus_sheets' && !empty($layout['playlist_conf_id'])) {
+        $the_items = getAutoFocusSheetData($layout['playlist_conf_id']);
+    }
+
+    $the_items['focus_no_padding'] = (!empty($layout['display_button'])) ? $layout['focus_no_padding'] : '';
+    $the_items['block_titles'] = getFocusBlockTitles($layout);
+    $the_items['display_button'] = (!empty($layout['display_button'])) ? $layout['display_button'] : '';
+
+    $return = Timber::compile($twigPaths[$layout['woody_tpl']], $the_items);
+
+    return $return;
+}
+
+function formatGeomapData($layout, $twigPaths)
+{
+    $return = '';
+    if (empty($layout['markers'])) {
+        return;
+    }
+
+    foreach ($layout['markers'] as $key => $marker) {
+        if (empty($marker['title']) && empty($marker['description']) && empty($marker['img']) && !empty($marker['link']['url'])) {
+            $layout['markers'][$key]['marker_as_link'] = true;
+        }
+        $layout['markers'][$key]['compiled_marker']  = Timber::compile('/_objects/markerObject.twig', $marker);
+
+        // if (!empty($marker['title']) || !empty($marker['description']) || !empty($marker['img'])) {
+        //     $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-basic_card-tpl_01'], $marker);
+        // }
+    }
+
+    // rcd($layout['markers'], true);
+
+    $return = Timber::compile($twigPaths[$layout['woody_tpl']], $layout);
+    return $return;
 }
 
 /**
@@ -476,29 +542,6 @@ function nestedGridsComponents($scope, $gridTplField, $uniqIid_prefix = '')
     }
 
     return $scope;
-}
-
-function formatFocusesData($layout, $current_post, $twigPaths)
-{
-    $return = '';
-
-
-
-    if ($layout['acf_fc_layout'] == 'manual_focus') {
-        $the_items = getManualFocus_data($layout);
-    } elseif ($layout['acf_fc_layout'] == 'auto_focus') {
-        $the_items = getAutoFocus_data($current_post, $layout);
-    } elseif ($layout['acf_fc_layout'] == 'auto_focus_sheets' && !empty($layout['playlist_conf_id'])) {
-        $the_items = getAutoFocusSheetData($layout['playlist_conf_id']);
-    }
-
-    $the_items['focus_no_padding'] = (!empty($layout['display_button'])) ? $layout['focus_no_padding'] : '';
-    $the_items['block_titles'] = getFocusBlockTitles($layout);
-    $the_items['display_button'] = (!empty($layout['display_button'])) ? $layout['display_button'] : '';
-
-    $return = Timber::compile($twigPaths[$layout['woody_tpl']], $the_items);
-
-    return $return;
 }
 
 /**
