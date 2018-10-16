@@ -176,7 +176,7 @@ function formatFocusesData($layout, $current_post, $twigPaths)
         $the_items = getAutoFocusSheetData($layout['playlist_conf_id']);
     }
 
-    $the_items['focus_no_padding'] = (!empty($layout['display_button'])) ? $layout['focus_no_padding'] : '';
+    $the_items['focus_no_padding'] = (!empty($layout['focus_no_padding'])) ? $layout['focus_no_padding'] : '';
     $the_items['block_titles'] = getFocusBlockTitles($layout);
     $the_items['display_button'] = (!empty($layout['display_button'])) ? $layout['display_button'] : '';
 
@@ -281,7 +281,6 @@ function getTouristicSheetPreview($sheet_id, $sheet_wp)
             $data['location'] = [];
             $data['location']['lat'] = (!empty($item['gps'])) ? $item['gps']['latitude'] : '';
             $data['location']['lng'] = (!empty($item['gps'])) ? $item['gps']['longitude'] : '';
-            $data['sheet_itinerary'] = (!empty($item['itineraryLength'])) ? $item['itineraryLength']['value'] . $item['itineraryLength']['unit'] : '';
 
             if ($item['bordereau'] === 'HOT' or $item['bordereau'] == 'HPA') {
                 $rating = [];
@@ -294,6 +293,9 @@ function getTouristicSheetPreview($sheet_id, $sheet_wp)
             if (!empty($item['dates'])) {
                 $data['date'] = $item['dates'][0];
             }
+            $data['date'] = (!empty($item['dates'])) ? $item['dates'][0] : '';
+            $data['sheet_itinerary']['locomotions'] = (!empty($item['locomotions'])) ? $item['locomotions'] : '';
+            $data['sheet_itinerary']['length'] = (!empty($item['itineraryLength'])) ? $item['itineraryLength']['value'] . $item['itineraryLength']['unit'] : '';
         }
     }
 
