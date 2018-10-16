@@ -34,7 +34,7 @@ new WoodyTheme_Tinymce();
 // new WoodyTheme_Yoast();
 
 // Menu
-new WoodyTheme_NestedPages();
+//new WoodyTheme_NestedPages();
 new WoodyTheme_Menus();
 
 

@@ -36,7 +36,6 @@ class WoodyTheme_Plugins_Activation
             'wordpress-seo/wp-seo.php',
             'yoimages/yoimages.php',
             'enhanced-media-library/enhanced-media-library.php',
-            'wp-nested-pages/nestedpages.php',
             'members/members.php',
             'woody-plugin/woody.php',
             'single-sign-on-client/wposso.php',
@@ -48,6 +47,7 @@ class WoodyTheme_Plugins_Activation
         ];
 
         $this->deactivate_plugins = [
+            'wp-nested-pages/nestedpages.php',
             'vcaching/vcaching.php',
             'regenerate-thumbnails/regenerate-thumbnails.php',
             'fakerpress/fakerpress.php',
