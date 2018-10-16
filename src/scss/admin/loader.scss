@@ -22,9 +22,14 @@
     &.windowReady {
         &:after {
             opacity: 0;
-            //transform: scaleY(0);
             pointer-events: none;
             transform-origin: center top;
+        }
+    }
+
+    &.windowError {
+        &:after {
+            background-image: url('../img/wp-admin/loader_woody_error.png');
         }
     }
 }
