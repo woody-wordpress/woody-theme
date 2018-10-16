@@ -36,6 +36,7 @@ class WoodyTheme_Plugins_Activation
             'wordpress-seo/wp-seo.php',
             'yoimages/yoimages.php',
             'enhanced-media-library/enhanced-media-library.php',
+            'duracelltomi-google-tag-manager/duracelltomi-google-tag-manager-for-wordpress.php',
             'members/members.php',
             'woody-plugin/woody.php',
             'single-sign-on-client/wposso.php',
