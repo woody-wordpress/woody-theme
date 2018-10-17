@@ -31,6 +31,9 @@ class WoodyTheme_ACF
         add_filter('acf/load_field/type=select', array($this, 'woodyIconLoadField'));
         add_filter('acf/load_field/name=focused_taxonomy_terms', array($this, 'focusedTaxonomyTermsLoadField'));
         add_filter('acf/load_field/name=list_el_terms', array($this, 'focusedTaxonomyTermsLoadField'));
+        add_filter('acf/load_field/name=list_filter_custom_terms', array($this, 'focusedTaxonomyTermsLoadField'));
+        add_filter('acf/load_field/name=list_filter_taxonomy', array($this, 'pageTaxonomiesLoadField'));
+
         add_filter('acf/location/rule_types', array($this, 'woodyAcfAddPageTypeLocationRule'));
         add_filter('acf/location/rule_values/page_type_and_children', array($this, 'woodyAcfAddPageTypeChoices'));
         add_filter('acf/location/rule_match/page_type_and_children', array($this, 'woodyAcfPageTypeMatch'), 10, 3);
@@ -138,18 +141,10 @@ class WoodyTheme_ACF
         if (empty($choices)) {
 
             // Get all site taxonomies and exclude those we don't want to use
-            $taxonomies = get_taxonomies();
+            $taxonomies = get_object_taxonomies();
 
             // Remove useless taxonomies
-            unset($taxonomies['category']);
             unset($taxonomies['page_type']);
-            unset($taxonomies['post_tag']);
-            unset($taxonomies['nav_menu']);
-            unset($taxonomies['link_category']);
-            unset($taxonomies['post_format']);
-            unset($taxonomies['attachment_categories']);
-            unset($taxonomies['attachment_types']);
-            unset($taxonomies['attachment_hashtags']);
 
             foreach ($taxonomies as $key => $taxonomy) {
                 // Get terms for each taxonomy and push them in $terms
@@ -168,6 +163,24 @@ class WoodyTheme_ACF
             }
 
             set_transient('woody_terms_choices', $choices);
+        }
+
+        $field['choices'] = $choices;
+        return $field;
+    }
+
+
+    public function pageTaxonomiesLoadField($field)
+    {
+        $choices = get_transient('woody_page_taxonomies_choices');
+        if (empty($choices)) {
+            $taxonomies = get_object_taxonomies('page', 'objects');
+
+            foreach ($taxonomies as $key => $taxonomy) {
+                $choices[$taxonomy->name] = $taxonomy->label;
+            }
+
+            set_transient('woody_page_taxonomies_choices', $choices);
         }
 
         $field['choices'] = $choices;

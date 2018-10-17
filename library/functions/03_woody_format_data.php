@@ -73,6 +73,8 @@ function getAutoFocus_data($the_post, $query_form)
         $the_query['post_parent'] = $the_post->post_parent;
     }
 
+    // rcd($the_query, true);
+
     // On créé la wp_query avec les paramètres définis
     $focused_posts = new WP_Query($the_query);
 
@@ -84,6 +86,7 @@ function getAutoFocus_data($the_post, $query_form)
             $data = getPagePreview($query_form, $post);
 
             // On ajoute un texte dans le bouton "Lire la suite" s'il a été saisi
+            // TODO:ça ne marche pas du tout ça => utiliser le champ lire la suite de chaque post
             $data['link']['title'] = (!empty($query_form['links_label'])) ? $query_form['links_label'] : '';
             $the_items['items'][$key] = $data;
         }
@@ -163,7 +166,6 @@ function getAutoFocusSheetData($confId)
  * @return   items - Un tableau de données
  *
  */
-
 function formatFocusesData($layout, $current_post, $twigPaths)
 {
     $return = '';
@@ -184,6 +186,37 @@ function formatFocusesData($layout, $current_post, $twigPaths)
 
     return $return;
 }
+
+function formatFullContentList($layout, $current_post, $twigPaths)
+{
+    $return = '';
+    $the_list = [];
+
+    $the_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields']);
+    $the_list['the_grid'] =  Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_items);
+
+    $the_list['filters'] = (!empty($layout['the_list_filters']['list_filters'])) ? $layout['the_list_filters']['list_filters'] : '';
+    if (!empty($the_list['filters'])) {
+        foreach ($the_list['filters'] as $key => $filter) {
+            if ($filter['list_filter_type'] == 'taxonomy') {
+                $terms = get_terms($filter['list_filter_taxonomy'], array(
+                    'hide_empty' => false,
+                ));
+
+                foreach ($terms as $focused_term_key => $term) {
+                    $the_list['filters'][$key]['list_filter_custom_terms'][] = [
+                        'value' => $term->term_id,
+                        'label' => $term->name
+                    ];
+                }
+            }
+        }
+    }
+
+    $return =  Timber::compile($twigPaths[$layout['the_list_filters']['listfilter_woody_tpl']], $the_list);
+    return $return;
+}
+
 
 function formatGeomapData($layout, $twigPaths)
 {

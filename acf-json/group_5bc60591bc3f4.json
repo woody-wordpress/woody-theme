@@ -3,27 +3,6 @@
     "title": "Pagination de liste",
     "fields": [
         {
-            "key": "field_5bc6059fe62a2",
-            "label": "Nombre d'éléments par page",
-            "name": "list_pager_count",
-            "type": "number",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "30",
-                "class": "",
-                "id": ""
-            },
-            "default_value": 16,
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "min": 2,
-            "max": 32,
-            "step": ""
-        },
-        {
             "key": "field_5bc60639e62a3",
             "label": "Type de pagination",
             "name": "list_pager_type",
@@ -90,5 +69,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1539704718
+    "modified": 1539768692
 }

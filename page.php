@@ -150,6 +150,9 @@ if ($context['page_type'] === 'playlist_tourism') {
                         case 'geo_map':
                             $components['items'][] = formatGeomapData($layout, $context['woody_components']);
                         break;
+                        case 'content_list':
+                            $components['items'][] = formatFullContentList($layout, $context['post'], $context['woody_components']);
+                        break;
                         default:
                             if ($layout['acf_fc_layout'] == 'playlist_bloc') {
                                 $playlist_conf_id = $layout['playlist_conf_id'];

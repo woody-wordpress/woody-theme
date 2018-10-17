@@ -37,6 +37,7 @@
                 "field_5b27a25103e43",
                 "field_5b28d791038fa",
                 "field_5b27a67203e48",
+                "field_5b27a3d703e44",
                 "field_5b2917f0ff061",
                 "field_5b88eae6c0adc"
             ],
@@ -64,7 +65,7 @@
         {
             "key": "field_5bc60362c66ba",
             "label": "Template",
-            "name": "woody_tpl",
+            "name": "listgrid_woody_tpl",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -74,7 +75,14 @@
                 "class": "",
                 "id": ""
             },
-            "choices": [],
+            "choices": {
+                "lists-grids_lists-tpl_302": "<div class=\"tpl-choice-wrapper\" data-fittedfor=\"5\">\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/lists\/grids_lists\/tpl_302\/thumbnail.png?version=1.7.5\" alt=\"lists-grids_lists-tpl_302\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Grille 3 colonnes Mixed (deux 4:3 - une 10:16)<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Grille 3 colonnes Mixed (deux 4:3 - une 10:16)<\/h4>Grille de répétition 5 contenus - Mixed 3 colonnes décalées - Carte textes centré sur image (images 4:3\/image 16:9) puis 3 contenus 4:3<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "lists-grids_lists-tpl_501": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/lists\/grids_lists\/tpl_501\/thumbnail.png?version=1.7.5\" alt=\"lists-grids_lists-tpl_501\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Variation de grille 5 éléments<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Variation de grille 5 éléments<\/h4>Composition basique pour 5 éléments<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "lists-grids_lists-tpl_201": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/lists\/grids_lists\/tpl_201\/thumbnail.png?version=1.7.5\" alt=\"lists-grids_lists-tpl_201\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Variation de grille 2 éléments<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Variation de grille 2 éléments<\/h4>2 colonnes égales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "lists-grids_lists-tpl_601": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/lists\/grids_lists\/tpl_601\/thumbnail.png?version=1.7.5\" alt=\"lists-grids_lists-tpl_601\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Variation de grille 7 éléments<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Variation de grille 7 éléments<\/h4>Composition basique pour 7 éléments<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "lists-grids_lists-tpl_301": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/lists\/grids_lists\/tpl_301\/thumbnail.png?version=1.7.5\" alt=\"lists-grids_lists-tpl_301\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Variation de grille 3, 6 ou 9 éléments<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Variation de grille 3, 6 ou 9 éléments<\/h4>3 colonnes égales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "lists-grids_lists-tpl_401": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/lists\/grids_lists\/tpl_401\/thumbnail.png?version=1.7.5\" alt=\"lists-grids_lists-tpl_401\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Variation de grille 4 ou 8 éléments<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Variation de grille 4 ou 8 éléments<\/h4>Grille 4 colonnes égales<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+            },
             "allow_null": 0,
             "other_choice": 0,
             "default_value": "",
@@ -100,5 +108,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1539704193
+    "modified": 1539769936
 }
