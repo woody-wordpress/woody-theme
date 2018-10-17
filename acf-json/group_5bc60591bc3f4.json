@@ -1,0 +1,94 @@
+{
+    "key": "group_5bc60591bc3f4",
+    "title": "Pagination de liste",
+    "fields": [
+        {
+            "key": "field_5bc6059fe62a2",
+            "label": "Nombre d'éléments par page",
+            "name": "list_pager_count",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 16,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": 2,
+            "max": 32,
+            "step": ""
+        },
+        {
+            "key": "field_5bc60639e62a3",
+            "label": "Type de pagination",
+            "name": "list_pager_type",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "70",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "basic_pager": "Pagination classique (nombres)",
+                "infinite_scroll": "Scroll infini (chargement dynamique)"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "basic_pager",
+            "layout": "horizontal",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_5bc606cae62a4",
+            "label": "Position",
+            "name": "list_pager_position",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "align-left": "à gauche",
+                "align-center": "centrée",
+                "align-right": "à droite"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "align-right",
+            "layout": "horizontal",
+            "return_format": "value",
+            "save_other_choice": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1539704718
+}

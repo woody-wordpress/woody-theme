@@ -30,6 +30,7 @@ class WoodyTheme_ACF
         add_filter('acf/load_field/type=radio', array($this, 'woodyTplAcfLoadField'));
         add_filter('acf/load_field/type=select', array($this, 'woodyIconLoadField'));
         add_filter('acf/load_field/name=focused_taxonomy_terms', array($this, 'focusedTaxonomyTermsLoadField'));
+        add_filter('acf/load_field/name=list_el_terms', array($this, 'focusedTaxonomyTermsLoadField'));
         add_filter('acf/location/rule_types', array($this, 'woodyAcfAddPageTypeLocationRule'));
         add_filter('acf/location/rule_values/page_type_and_children', array($this, 'woodyAcfAddPageTypeChoices'));
         add_filter('acf/location/rule_match/page_type_and_children', array($this, 'woodyAcfPageTypeMatch'), 10, 3);
