@@ -96,7 +96,10 @@ class WoodyTheme_Images
 
     public function addDefaultMediaType($post_id)
     {
-        wp_set_object_terms($post_id, 'Média ajouté manuellement', 'attachment_types', true);
+        $terms_list = wp_get_post_terms($post_id, 'attachment_types');
+        if (!empty($terms_list)) {
+            wp_set_object_terms($post_id, 'Média ajouté manuellement', 'attachment_types', true);
+        }
     }
 
     // Remove default image sizes here.
