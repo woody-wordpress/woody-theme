@@ -132,12 +132,12 @@ class WoodyTheme_Roles
                 'contributor' => false,
             ],
             'manage_categories' => [
-                'administrator' => false,
+                'administrator' => true,
                 'editor' => false,
                 'contributor' => false,
             ],
             'manage_links' => [
-                'administrator' => false,
+                'administrator' => true,
                 'editor' => false,
                 'contributor' => false,
             ],
@@ -197,12 +197,12 @@ class WoodyTheme_Roles
                 'contributor' => true,
             ],
             'customize' => [
-                'administrator' => false,
+                'administrator' => true,
                 'editor' => false,
                 'contributor' => false,
             ],
             'delete_site' => [
-                'administrator' => false,
+                'administrator' => true,
                 'editor' => false,
                 'contributor' => false,
             ],
