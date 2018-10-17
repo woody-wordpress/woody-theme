@@ -90,10 +90,6 @@ class WoodyTheme_Menus
 
         if (!empty($return) && is_array($return)) {
             foreach ($return as $key => $value) {
-                if ($post_id == 17865) {
-                    continue;
-                }
-
                 if (strpos($key, 'submenu_') === false) {
                     unset($return[$key]);
                 }
