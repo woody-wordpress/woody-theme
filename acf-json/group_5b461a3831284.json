@@ -1,7 +1,8 @@
 {
     "key": "group_5b461a3831284",
     "title": "Appel à l'action",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5b461a2b131b3",
             "label": "Contenu",
             "name": "",
@@ -91,11 +92,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b4621c8aebdd",
-                    "operator": "==",
-                    "value": "link"
-                }]
+                [
+                    {
+                        "field": "field_5b4621c8aebdd",
+                        "operator": "==",
+                        "value": "link"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -103,7 +106,8 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5b7595f282076_field_5b0422ed7d07b",
                     "label": "Icône",
                     "name": "button_woody_icon",
@@ -201,11 +205,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b4621c8aebdd",
-                    "operator": "==",
-                    "value": "file"
-                }]
+                [
+                    {
+                        "field": "field_5b4621c8aebdd",
+                        "operator": "==",
+                        "value": "file"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -213,7 +219,8 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5b462226aebde_field_5b042b30ab6a3",
                     "label": "Icône",
                     "name": "file_woody_icon",
@@ -391,7 +398,8 @@
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0,
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "ID": 0,
                     "key": "field_5b461b46131ba_field_5b043ca4a6fe3",
                     "label": "Couleur de fond",
@@ -546,14 +554,54 @@
                     "__label": "Opacité de l'image de fond"
                 }
             ]
+        },
+        {
+            "key": "field_5bc848bdf3c00",
+            "label": "Effets visuels",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
+            "key": "field_5bc848daf3c01",
+            "label": "Effets visuel",
+            "name": "the_visual_effects",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5bc845beeae52"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -563,5 +611,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Un bloc d'appel à laction avec texte et lien\/fichier + couleur de fond possible",
-    "modified": 1539595046
+    "modified": 1539852585
 }

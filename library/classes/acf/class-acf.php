@@ -141,7 +141,7 @@ class WoodyTheme_ACF
         if (empty($choices)) {
 
             // Get all site taxonomies and exclude those we don't want to use
-            $taxonomies = get_object_taxonomies();
+            $taxonomies = get_object_taxonomies('page');
 
             // Remove useless taxonomies
             unset($taxonomies['page_type']);

@@ -121,7 +121,7 @@ if ($context['page_type'] === 'playlist_tourism') {
     $sections = $context['post']->get_field('section');
 
     if (!empty($sections)) {
-        foreach ($sections as $key => $section) {
+        foreach ($sections as $section_id => $section) {
             $the_header = '';
             $the_footer = '';
             $the_layout = '';
@@ -140,8 +140,10 @@ if ($context['page_type'] === 'playlist_tourism') {
             $components['alignment'] = (!empty($section['section_alignment'])) ? $section['section_alignment'] : '';
 
             if (!empty($section['section_content'])) {
-                foreach ($section['section_content'] as $key => $layout) {
+                foreach ($section['section_content'] as $layout_id => $layout) {
+                    $layout['uniqid'] = 'section_' . $section_id . '-' . 'layout_' . $layout_id;
                     switch ($layout['acf_fc_layout']) {
+
                         case 'manual_focus':
                         case 'auto_focus':
                         case 'auto_focus_sheets':

@@ -437,7 +437,10 @@
                 "pretitle": "Surtitre",
                 "subtitle": "Sous-titre",
                 "description": "Description",
-                "icon": "Icône"
+                "icon": "Icône",
+                "price": "Prix <small>(séjour uniquement)<\/small>",
+                "duration": "Durée <small>(séjour uniquement)<\/small>",
+                "length": "Distance <small>(séjour uniquement)<\/small>"
             },
             "allow_custom": 0,
             "default_value": [
@@ -593,5 +596,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1537166070
+    "modified": 1539787431
 }
