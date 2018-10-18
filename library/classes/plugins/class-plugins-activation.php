@@ -11,7 +11,6 @@ class WoodyTheme_Plugins_Activation
 {
     public $activate_plugins;
     public $deactivate_plugins;
-    public $dev_plugins;
 
     public function __construct()
     {

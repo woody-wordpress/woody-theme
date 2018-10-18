@@ -3,6 +3,7 @@
 // Plugins
 new WoodyTheme_Plugins_Activation();
 new WoodyTheme_Plugins_Options();
+new WoodyTheme_Plugins_Order();
 
 // PHP Console
 if (!class_exists('PC', false) && class_exists('PhpConsole', false) && WP_ENV == 'dev') {
@@ -35,7 +36,6 @@ new WoodyTheme_Tinymce();
 
 // Menu
 new WoodyTheme_Menus();
-
 
 // Roles
 new WoodyTheme_Roles();
