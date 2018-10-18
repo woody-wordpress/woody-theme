@@ -24,7 +24,6 @@ class WoodyTheme_Cleanup_Admin
         add_action('wp_before_admin_bar_render', [$this, 'customAdminBarMenu']);
         add_action('wp_dashboard_setup', [$this, 'removeDashboardWidgets']);
         add_filter('tiny_mce_before_init', [$this, 'tiny_mce_remove_unused_formats']);
-        add_filter('page_row_actions', [$this, 'actionsNestedPages'], 10, 2);
 
         $user = wp_get_current_user();
         if (!in_array('administrator', $user->roles)) {
@@ -151,15 +150,6 @@ class WoodyTheme_Cleanup_Admin
                 'parent_slug'   => 'custom-menus',
             ));
         }
-    }
-
-    public function actionsNestedPages($actions, $post)
-    {
-        $actions['view'] = '<a href="'. apply_filters('nestedpages_view_link', get_the_permalink(), $post) .'" target="_blank">'
-                . apply_filters('nestedpages_view_link_text', __('View', 'wp-nested-pages'), $post)
-                . '</a>';
-
-        return $actions;
     }
 
     /**

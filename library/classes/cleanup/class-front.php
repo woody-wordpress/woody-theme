@@ -16,9 +16,9 @@ class WoodyTheme_Cleanup_Front
     public function registerHooks()
     {
         // Launching operation cleanup.
-        add_action('init', array($this, 'cleanupHead'));
+        add_action('init', array($this, 'cleanupHead'), 1);
         // Remove WP version from RSS.
-        add_filter('the_generator', array($this, 'removeRssVersion'));
+        add_filter('the_generator', array($this, 'removeRssVersion'), 1);
         // Remove pesky injected css for recent comments widget.
         add_filter('wp_head', array($this, 'removeWpWidgetRecentCommentsStyle'), 1);
         // Clean up comment styles in the head.

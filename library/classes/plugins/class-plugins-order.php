@@ -16,7 +16,7 @@ class WoodyTheme_Plugins_Order
 
     protected function registerHooks()
     {
-        add_action('woody_theme_update', [$this, 'orderPlugins']);
+        add_action('woody_theme_update', [$this, 'orderPlugins'], 1);
     }
 
     public function orderPlugins()

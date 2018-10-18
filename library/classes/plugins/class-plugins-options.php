@@ -16,7 +16,7 @@ class WoodyTheme_Plugins_Options
 
     protected function registerHooks()
     {
-        add_action('woody_theme_update', array($this, 'defineOptions'));
+        add_action('woody_theme_update', [$this, 'defineOptions'], 1);
     }
 
     public function defineOptions()

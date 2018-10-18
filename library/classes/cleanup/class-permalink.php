@@ -16,7 +16,7 @@ class WoodyTheme_Cleanup_Permalink
     public function registerHooks()
     {
         // Launching operation cleanup.
-        add_action('woody_theme_update', array($this, 'cleanupPermalink'));
+        add_action('woody_theme_update', [$this, 'cleanupPermalink'], 1);
     }
 
     public function cleanupPermalink()
