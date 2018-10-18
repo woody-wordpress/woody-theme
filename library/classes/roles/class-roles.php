@@ -46,7 +46,7 @@ class WoodyTheme_Roles
                 'administrator' => true,
                 'editor' => true,
                 'contributor' => true,
-                'translator' => true,
+                'translator' => false,
             ],
             'delete_pages' => [
                 'administrator' => true,
@@ -58,7 +58,7 @@ class WoodyTheme_Roles
                 'administrator' => true,
                 'editor' => true,
                 'contributor' => true,
-                'translator' => true,
+                'translator' => false,
             ],
             'delete_private_pages' => [
                 'administrator' => true,
@@ -70,7 +70,7 @@ class WoodyTheme_Roles
                 'administrator' => true,
                 'editor' => true,
                 'contributor' => true,
-                'translator' => true,
+                'translator' => false,
             ],
             'delete_published_pages' => [
                 'administrator' => true,
@@ -82,7 +82,7 @@ class WoodyTheme_Roles
                 'administrator' => true,
                 'editor' => true,
                 'contributor' => true,
-                'translator' => true,
+                'translator' => false,
             ],
             'edit_dashboard' => [
                 'administrator' => true,
@@ -398,6 +398,18 @@ class WoodyTheme_Roles
                 'administrator' => true,
                 'editor' => true,
                 'contributor' => true,
+                'translator' => false,
+            ],
+            'wpml_manage_string_translation' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+                'translator' => true,
+            ],
+            'wpml_manage_translation_management' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
                 'translator' => false,
             ],
             'wpml_manage_media_translation' => [
