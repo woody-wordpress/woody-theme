@@ -192,7 +192,10 @@
                 "pretitle": "Surtitre",
                 "subtitle": "Sous-titre",
                 "description": "Description",
-                "icon": "Icône"
+                "icon": "Icône",
+                "price": "Prix <small>(séjour uniquement)<\/small>",
+                "duration": "Durée <small>(séjour uniquement)<\/small>",
+                "length": "Distance <small>(séjour uniquement)<\/small>"
             },
             "allow_custom": 0,
             "default_value": [
@@ -383,5 +386,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1539596337
+    "modified": 1539787412
 }
