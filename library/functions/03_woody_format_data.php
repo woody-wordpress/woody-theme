@@ -187,14 +187,33 @@ function formatFocusesData($layout, $current_post, $twigPaths)
     return $return;
 }
 
+/**
+ *
+ * Nom : formatFullContentList
+ * Auteur : Benoit Bouchaud
+ * Return : Retourne le html d'une mise en avant de contenu
+ * @param    layout Le wrapper du champ
+ * @param    current_post le post courant (pour la hierarchie)
+ * @param    twigPaths les chemins des templates woody
+ * @return   return - Twig compilé
+ *
+ */
+
 function formatFullContentList($layout, $current_post, $twigPaths)
 {
     $return = '';
     $the_list = [];
+    $the_list['permalink'] = get_permalink($current_post->ID);
 
     $the_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields']);
-    $the_list['the_grid'] =  Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_items);
 
+    $params = filter_input_array(INPUT_POST);
+
+    // Uncomment to see results when submtting the form
+    // rcd($params);
+
+    $the_list['the_grid'] =  Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_items);
+    $the_list['uniqid'] = $layout['uniqid'];
     $the_list['filters'] = (!empty($layout['the_list_filters']['list_filters'])) ? $layout['the_list_filters']['list_filters'] : '';
     if (!empty($the_list['filters'])) {
         foreach ($the_list['filters'] as $key => $filter) {
@@ -209,6 +228,10 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                         'label' => $term->name
                     ];
                 }
+            } elseif ($filter['list_filter_type'] == 'price') {
+                $the_list['filters'][$key]['minmax'] = getMinMaxWoodyPostFieldValues($the_items['items'], 'trip', 'the_price', 'price');
+            } elseif ($filter['list_filter_type'] == 'duration') {
+                $the_list['filters'][$key]['minmax'] = getMinMaxWoodyPostFieldValues($the_items['items'], 'trip', 'the_duration', 'count_days');
             }
         }
     }
@@ -216,7 +239,6 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     $return =  Timber::compile($twigPaths[$layout['the_list_filters']['listfilter_woody_tpl']], $the_list);
     return $return;
 }
-
 
 function formatGeomapData($layout, $twigPaths)
 {
@@ -373,6 +395,7 @@ function getPagePreview($item_wrapper, $item)
     $data = [];
 
     $data['page_type'] = getTermsSlugs($item->ID, 'page_type', true);
+    $data['post_id'] = $item->ID;
 
     if (!empty($item->get_field('focus_title'))) {
         $data['title'] = $item->get_field('focus_title');
@@ -397,6 +420,15 @@ function getPagePreview($item_wrapper, $item)
         }
         if (in_array('description', $item_wrapper['display_elements'])) {
             $data['description'] = getFieldAndFallback($item, 'focus_description', $item, 'field_5b2bbbfaec6b2');
+        }
+        if (in_array('price', $item_wrapper['display_elements'])) {
+            $data['the_price'] = $item->get_field('field_5b6c670eb54f2');
+        }
+        if (in_array('duration', $item_wrapper['display_elements'])) {
+            $data['the_duration'] = $item->get_field('field_5b6c5e7cb54ee');
+        }
+        if (in_array('length', $item_wrapper['display_elements'])) {
+            $data['the_length'] = $item->get_field('field_5b95423386e8f');
         }
     }
 

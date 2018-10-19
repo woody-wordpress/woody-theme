@@ -164,3 +164,41 @@ function getWoodyTwigPaths()
 
     return $woodyTwigsPaths;
 }
+
+
+/**
+ *
+ * Nom : getMinMaxFieldValues
+ * Auteur : Benoit Bouchaud
+ * Return : Retourne le html d'une mise en avant de contenu
+ * @param    posts Les pages au format Woody (formatés par le getPagePreview)
+ * @param    post_type le type de page (taxonomie) dans lequel on recherche
+ * @param    field le champ dans lequel on cherche
+ * @param    subfield le sous-champ si nécessaire
+ * @return   return - Un tableau avec une entrée min + une entrée max
+ *
+ */
+function getMinMaxWoodyPostFieldValues($posts, $post_type, $field, $subfield = '')
+{
+    $return = [];
+    $range = [];
+    foreach ($posts as $key => $post) {
+        if ($post_type !== $post['page_type']) {
+            continue;
+        }
+        if (empty($subfield) && !empty($post[$field])) {
+            $range[] = $post[$field];
+        } elseif (!empty($post[$field][$subfield])) {
+            $range[] = $post[$field][$subfield];
+        }
+    }
+
+    if (empty($range)) {
+        return;
+    }
+
+    $return['min'] = min($range);
+    $return['max'] = max($range);
+
+    return $return;
+}

@@ -1,8 +1,7 @@
 {
     "key": "group_5bc6079fe9b0a",
     "title": "Filtres de liste",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5bc607f02a89c",
             "label": "Contenu",
             "name": "",
@@ -31,27 +30,26 @@
                 "class": "",
                 "id": ""
             },
-            "collapsed": "field_5bc6e6b0bd875",
+            "collapsed": "field_5bc85c363dc30",
             "min": 0,
             "max": 0,
             "layout": "block",
-            "button_label": "",
-            "sub_fields": [
-                {
-                    "key": "field_5bc6e6b0bd875",
-                    "label": "Titre pour l'administration",
-                    "name": "bo_filter_title",
+            "button_label": "Ajouter un filtre",
+            "sub_fields": [{
+                    "key": "field_5bc85c363dc30",
+                    "label": "Nom du filtre",
+                    "name": "list_filter_name",
                     "type": "text",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
-                        "class": "hide-label",
+                        "class": "",
                         "id": ""
                     },
                     "default_value": "",
-                    "placeholder": "Titre visible lorsque le filtre est refermé (uniquement pour le backoffice)",
+                    "placeholder": "",
                     "prepend": "",
                     "append": "",
                     "maxlength": ""
@@ -60,7 +58,7 @@
                     "key": "field_5bc607c62a89b",
                     "label": "Type de filtre",
                     "name": "list_filter_type",
-                    "type": "radio",
+                    "type": "select",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -71,14 +69,19 @@
                     },
                     "choices": {
                         "taxonomy": "Famille de tags",
-                        "custom_terms": "Groupe de tags personnalisé"
+                        "custom_terms": "Groupe de tags personnalisé",
+                        "price": "Prix séjour",
+                        "duration": "Durée séjour"
                     },
+                    "default_value": [
+                        "taxonomy"
+                    ],
                     "allow_null": 0,
-                    "other_choice": 0,
-                    "default_value": "taxonomy",
-                    "layout": "horizontal",
+                    "multiple": 0,
+                    "ui": 0,
                     "return_format": "value",
-                    "save_other_choice": 0
+                    "ajax": 0,
+                    "placeholder": ""
                 },
                 {
                     "key": "field_5bc608af2a89f",
@@ -88,13 +91,11 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [
-                            {
-                                "field": "field_5bc607c62a89b",
-                                "operator": "==",
-                                "value": "taxonomy"
-                            }
-                        ]
+                        [{
+                            "field": "field_5bc607c62a89b",
+                            "operator": "==",
+                            "value": "taxonomy"
+                        }]
                     ],
                     "wrapper": {
                         "width": "",
@@ -123,32 +124,18 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [
-                            {
-                                "field": "field_5bc607c62a89b",
-                                "operator": "==",
-                                "value": "custom_terms"
-                            }
-                        ]
+                        [{
+                            "field": "field_5bc607c62a89b",
+                            "operator": "==",
+                            "value": "custom_terms"
+                        }]
                     ],
                     "wrapper": {
                         "width": "",
                         "class": "",
                         "id": ""
                     },
-                    "choices": {
-                        "23": "Thématiques - avec enfants",
-                        "22": "Thématiques - Couples",
-                        "21": "Thématiques - Famille",
-                        "18": "Saisons - Automne",
-                        "112": "Saisons - Automne",
-                        "16": "Saisons - Été",
-                        "110": "Saisons - Été",
-                        "19": "Saisons - Hiver",
-                        "113": "Saisons - Hiver",
-                        "17": "Saisons - Printemps",
-                        "111": "Saisons - Printemps"
-                    },
+                    "choices": {},
                     "default_value": [],
                     "allow_null": 0,
                     "multiple": 1,
@@ -164,7 +151,18 @@
                     "type": "radio",
                     "instructions": "(Comportement lorsque l'utilisateur coche plusieurs tags)",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [{
+                            "field": "field_5bc607c62a89b",
+                            "operator": "==",
+                            "value": "taxonomy"
+                        }],
+                        [{
+                            "field": "field_5bc607c62a89b",
+                            "operator": "==",
+                            "value": "custom_terms"
+                        }]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -213,7 +211,7 @@
                 "id": ""
             },
             "choices": {
-                "lists-list_full-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/lists\/list_full\/tpl_01\/thumbnail.png?version=1.7.5\" alt=\"lists-list_full-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">template global liste<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">template global liste<\/h4>...<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+                "lists-list_full-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/lists\/list_full\/tpl_01\/thumbnail.png?version=1.7.6\" alt=\"lists-list_full-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">template global liste<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">template global liste<\/h4>...<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -224,13 +222,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -240,5 +236,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1539781843
+    "modified": 1539864441
 }
