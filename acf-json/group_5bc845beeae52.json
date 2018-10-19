@@ -3,10 +3,10 @@
     "title": "Effets visuels",
     "fields": [
         {
-            "key": "field_5bc845c51f361",
+            "key": "field_5bc9a8afc37bb",
             "label": "Effets visuels",
             "name": "visual_effects",
-            "type": "repeater",
+            "type": "group",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -15,110 +15,144 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "collapsed": "",
-            "min": 0,
-            "max": 0,
             "layout": "block",
-            "button_label": "Ajouter un effet",
             "sub_fields": [
                 {
-                    "key": "field_5bc846651f362",
-                    "label": "Type d'effet",
-                    "name": "visual_effect_type",
-                    "type": "select",
+                    "key": "field_5bc9a8d0c37bc",
+                    "label": "Transformation",
+                    "name": "transform",
+                    "type": "repeater",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "65",
+                        "width": "",
                         "class": "",
                         "id": ""
                     },
-                    "choices": {
-                        "trnslt-top": "Décalage vers le haut",
-                        "trnslt-bottom": "Décalage vers le bas",
-                        "rotate-left": "Rotation anti-horaire",
-                        "rotate-right": "Rotation horaire"
-                    },
-                    "default_value": [],
-                    "allow_null": 0,
-                    "multiple": 0,
-                    "ui": 0,
-                    "return_format": "value",
-                    "ajax": 0,
-                    "placeholder": ""
-                },
-                {
-                    "key": "field_5bc847b11f363",
-                    "label": "Valeur de décalage <small>(en pixels)<\/small>",
-                    "name": "visual_effect_trnslt_value",
-                    "type": "number",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_5bc846651f362",
-                                "operator": "==",
-                                "value": "trnslt-top"
-                            }
-                        ],
-                        [
-                            {
-                                "field": "field_5bc846651f362",
-                                "operator": "==",
-                                "value": "trnslt-bottom"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "35",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": 60,
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "px",
-                    "min": "",
-                    "max": "",
-                    "step": ""
-                },
-                {
-                    "key": "field_5bc8482c1f365",
-                    "label": "Valeur de rotation <small>(en degrés)<\/small>",
-                    "name": "visual_effect_rotate_value",
-                    "type": "number",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_5bc846651f362",
-                                "operator": "==",
-                                "value": "rotate-left"
-                            }
-                        ],
-                        [
-                            {
-                                "field": "field_5bc846651f362",
-                                "operator": "==",
-                                "value": "rotate-right"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "35",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": 3,
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "degrés",
-                    "min": "",
-                    "max": "",
-                    "step": ""
+                    "collapsed": "",
+                    "min": 0,
+                    "max": 1,
+                    "layout": "block",
+                    "button_label": "Ajouter une transformation",
+                    "sub_fields": [
+                        {
+                            "key": "field_5bc9a8e8c37bd",
+                            "label": "Type de transformation",
+                            "name": "transform_type",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "trnslt-top": "Décalage vers le haut",
+                                "trnslt-bottom": "Décalage vers le bas",
+                                "rotate-left": "Rotation anti-horaire",
+                                "rotate-right": "Rotation horaire"
+                            },
+                            "default_value": [],
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_5bc9a924c37be",
+                            "label": "Valeur de décalage <small>(en pixels)<\/small>",
+                            "name": "transform_trnslt_value",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_5bc9a8e8c37bd",
+                                        "operator": "==",
+                                        "value": "trnslt-top"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "field": "field_5bc9a8e8c37bd",
+                                        "operator": "==",
+                                        "value": "trnslt-bottom"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "30": "30px",
+                                "60": "60px",
+                                "90": "90px",
+                                "120": "120px",
+                                "150": "150px"
+                            },
+                            "default_value": [
+                                60
+                            ],
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_5bc9a9fdea491",
+                            "label": "Valeur de rotation <small>(en degrés)<\/small>",
+                            "name": "transform_rotate_value",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_5bc9a8e8c37bd",
+                                        "operator": "==",
+                                        "value": "rotate-left"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "field": "field_5bc9a8e8c37bd",
+                                        "operator": "==",
+                                        "value": "rotate-right"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "3": "3 degrés",
+                                "5": "5 degrés",
+                                "10": "10 degrés",
+                                "15": "15 degrés"
+                            },
+                            "default_value": [
+                                3
+                            ],
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
+                        }
+                    ]
                 }
             ]
         }
@@ -140,5 +174,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Permet d'ajouter des effets de type décalage, rotation, paralax",
-    "modified": 1539853224
+    "modified": 1539943051
 }

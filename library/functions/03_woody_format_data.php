@@ -92,6 +92,8 @@ function getAutoFocus_data($the_post, $query_form)
         }
     }
 
+    // rcd($the_items, true);
+
     return $the_items;
 }
 
@@ -665,4 +667,31 @@ function getAttachmentMoreData($attachment_id)
     }
 
     return $attachment_data;
+}
+
+function formatVisualEffectData($effects)
+{
+    $return = '';
+    foreach ($effects as $effect_key => $effect) {
+        if (!empty($effect)) {
+            switch ($effect_key) {
+                case 'transform':
+                    foreach ($effect as $transform) {
+                        switch ($transform['transform_type']) {
+                            case 'trnslt-top':
+                            case 'trnslt-bottom':
+                                $return['transform'][] = $transform['transform_type'] . '-' . $transform['transform_trnslt_value'];
+                            break;
+                        }
+                    }
+                break;
+            }
+        }
+    }
+
+    if (!empty($return['transform'])) {
+        $return['transform'] = implode('_', $return['transform']);
+    }
+
+    return $return;
 }

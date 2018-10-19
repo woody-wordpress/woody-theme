@@ -143,6 +143,8 @@ if ($context['page_type'] === 'playlist_tourism') {
             if (!empty($section['section_content'])) {
                 foreach ($section['section_content'] as $layout_id => $layout) {
                     $layout['uniqid'] = 'section_' . $section_id . '-' . 'layout_' . $layout_id;
+                    $layout['visual_effects'] = (!empty($layout['visual_effects'])) ? formatVisualEffectData($layout['visual_effects']) : '';
+
                     switch ($layout['acf_fc_layout']) {
 
                         case 'manual_focus':
