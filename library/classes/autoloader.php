@@ -23,6 +23,9 @@ new WoodyTheme_Cleanup_Admin();
 new WoodyTheme_Cleanup_Front();
 new WoodyTheme_Cleanup_Permalink();
 
+// Dashboard
+new WoodyTheme_Dashboard();
+
 // Assets
 new WoodyTheme_Enqueue_Assets();
 
