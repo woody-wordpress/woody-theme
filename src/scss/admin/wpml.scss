@@ -18,4 +18,9 @@
     .icl_pop_info_wrap {
         display: none;
     }
+
+    // Masque l'entrée "toutes les langues" dans le selecteur dans la barre d'admin
+    #wp-admin-bar-WPML_ALS_all {
+        display: none;
+    }
 }
