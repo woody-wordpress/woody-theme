@@ -18,25 +18,25 @@ class WoodyTheme_ACF
 
     protected function registerHooks()
     {
-        add_action('woody_theme_update', array($this,'cleanTransient'));
-        add_action('woody_subtheme_update', array($this,'cleanTransient'));
+        add_action('woody_theme_update', [$this,'cleanTransient']);
+        add_action('woody_subtheme_update', [$this,'cleanTransient']);
         if (WP_ENV == 'dev') {
-            add_filter('woody_acf_save_paths', array($this,'acfJsonSave'));
+            add_filter('woody_acf_save_paths', [$this,'acfJsonSave']);
         }
-        add_action('create_term', array($this,'cleanTermsChoicesTransient'));
-        add_action('edit_term', array($this,'cleanTermsChoicesTransient'));
-        add_action('delete_term', array($this,'cleanTermsChoicesTransient'));
-        add_filter('acf/settings/load_json', array($this,'acfJsonLoad'));
-        add_filter('acf/load_field/type=radio', array($this, 'woodyTplAcfLoadField'));
-        add_filter('acf/load_field/type=select', array($this, 'woodyIconLoadField'));
-        add_filter('acf/load_field/name=focused_taxonomy_terms', array($this, 'focusedTaxonomyTermsLoadField'));
-        add_filter('acf/load_field/name=list_el_terms', array($this, 'focusedTaxonomyTermsLoadField'));
-        add_filter('acf/load_field/name=list_filter_custom_terms', array($this, 'focusedTaxonomyTermsLoadField'));
-        add_filter('acf/load_field/name=list_filter_taxonomy', array($this, 'pageTaxonomiesLoadField'));
-
-        add_filter('acf/location/rule_types', array($this, 'woodyAcfAddPageTypeLocationRule'));
-        add_filter('acf/location/rule_values/page_type_and_children', array($this, 'woodyAcfAddPageTypeChoices'));
-        add_filter('acf/location/rule_match/page_type_and_children', array($this, 'woodyAcfPageTypeMatch'), 10, 3);
+        add_action('create_term', [$this,'cleanTermsChoicesTransient']);
+        add_action('edit_term', [$this,'cleanTermsChoicesTransient']);
+        add_action('delete_term', [$this,'cleanTermsChoicesTransient']);
+        add_filter('acf/settings/load_json', [$this,'acfJsonLoad']);
+        add_filter('acf/load_field/type=radio', [$this, 'woodyTplAcfLoadField']);
+        add_filter('acf/load_field/type=select', [$this, 'woodyIconLoadField']);
+        add_filter('acf/load_field/name=focused_taxonomy_terms', [$this, 'focusedTaxonomyTermsLoadField']);
+        add_filter('acf/load_field/name=list_el_terms', [$this, 'focusedTaxonomyTermsLoadField']);
+        add_filter('acf/load_field/name=list_filter_custom_terms', [$this, 'focusedTaxonomyTermsLoadField']);
+        add_filter('acf/load_field/name=list_filter_taxonomy', [$this, 'pageTaxonomiesLoadField']);
+        add_filter('acf/fields/google_map/api', [$this, 'acfGoogleMapKey']);
+        add_filter('acf/location/rule_types', [$this, 'woodyAcfAddPageTypeLocationRule']);
+        add_filter('acf/location/rule_values/page_type_and_children', [$this, 'woodyAcfAddPageTypeChoices']);
+        add_filter('acf/location/rule_match/page_type_and_children', [$this, 'woodyAcfPageTypeMatch'], 10, 3);
     }
 
     /**
@@ -55,6 +55,21 @@ class WoodyTheme_ACF
     {
         $paths[] = get_template_directory() . '/acf-json';
         return $paths;
+    }
+
+    /**
+     * Register Raccourci GoogleMapKey
+     */
+    public function acfGoogleMapKey($api)
+    {
+        $keys = [
+            'AIzaSyAIWyOS5ifngsd2S35IKbgEXXgiSAnEjsw',
+            'AIzaSyBMx446Q--mQj9mzuZhb7BGVDxac6NfFYc',
+            'AIzaSyB8Fozhi1FKU8oWYJROw8_FgOCbn3wdrhs',
+        ];
+        $rand_keys = array_rand($keys, 1);
+        $api['key'] = $rand_keys[0];
+        return $api;
     }
 
     /**

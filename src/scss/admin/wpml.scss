@@ -1,13 +1,21 @@
 #icl_div {
-    .inside>strong {
-        display: none;
-    }
 
-    .inside>label {
-        display: none;
-    }
-
+    // Masque les choix de duplication des médias
+    .inside>strong,
+    .inside>label,
     .inside>br {
+        display: none;
+    }
+
+    // Masque le selecteur de priorité de traduction
+    #icl_translation_priority_dropdown {
+        display: none;
+    }
+
+    // Masque le bouton copier depuis ...
+    // Inutile avec nos champs ACF
+    #icl_cfo,
+    .icl_pop_info_wrap {
         display: none;
     }
 }
