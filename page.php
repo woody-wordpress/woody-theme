@@ -43,7 +43,8 @@ if (class_exists('SubWoodyTheme_TemplateParts')) {
  **************************** **/
 $home_slider = getAcfGroupFields('group_5bb325e8b6b43');
 
-if (!empty($home_slider)) {
+
+if (!empty($home_slider['landswpr_slides'])) {
     $context['home_slider'] = Timber::compile($context['woody_components'][$home_slider['landswpr_woody_tpl']], $home_slider);
 }
 
