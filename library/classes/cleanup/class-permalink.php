@@ -21,7 +21,7 @@ class WoodyTheme_Cleanup_Permalink
 
     public function cleanupPermalink()
     {
-        $permalinks = get_option('permalink-manager-uris');
+        $permalinks = get_option('permalink-manager-uris', []);
 
         $cleanup_permalinks = [];
         foreach ($permalinks as $post_id => $permalink) {
