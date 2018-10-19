@@ -1,6 +1,10 @@
 #icl_div {
 
     // Masque les choix de duplication des médias
+    .inside {
+        overflow: auto;
+    }
+
     .inside>strong,
     .inside>label,
     .inside>br {
