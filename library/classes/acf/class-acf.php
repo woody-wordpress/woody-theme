@@ -68,7 +68,7 @@ class WoodyTheme_ACF
             'AIzaSyB8Fozhi1FKU8oWYJROw8_FgOCbn3wdrhs',
         ];
         $rand_keys = array_rand($keys, 1);
-        $api['key'] = $rand_keys[0];
+        $api['key'] = $keys[$rand_keys];
         return $api;
     }
 
