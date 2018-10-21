@@ -35,6 +35,16 @@ class WoodyTheme_Tinymce
             'classes' => 'button secondary',
             'exact' => true
         ),
+        array(
+            'title' => 'Liste "On aime"',
+            'selector' => 'ul',
+            'classes' => 'list-unstyled list-wicon love-icon'
+        ),
+        array(
+            'title' => 'Liste "Les plus"',
+            'selector' => 'ul',
+            'classes' => 'list-unstyled list-wicon plus-icon'
+        )
     );
         $init_array['style_formats'] = json_encode($style_formats);
         return $init_array;
