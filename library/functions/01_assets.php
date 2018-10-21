@@ -172,7 +172,7 @@ function getWoodyTwigPaths()
  * Auteur : Benoit Bouchaud
  * Return : Retourne le html d'une mise en avant de contenu
  * @param    posts Les pages au format Woody (formatés par le getPagePreview)
- * @param    post_type le type de page (taxonomie) dans lequel on recherche
+ * @param    post_type le type de page (taxonomie) dans lequel on recherche + enfants si il y en a
  * @param    field le champ dans lequel on cherche
  * @param    subfield le sous-champ si nécessaire
  * @return   return - Un tableau avec une entrée min + une entrée max
@@ -183,6 +183,9 @@ function getMinMaxWoodyPostFieldValues($posts, $post_type, $field, $subfield = '
     $return = [];
     $range = [];
     foreach ($posts as $key => $post) {
+        // TODO:get trip children to display min an dmax prices
+        // $children = get_term_children($post_type, 'page_type');
+        // PC::debug($children);
         if ($post_type !== $post['page_type']) {
             continue;
         }
