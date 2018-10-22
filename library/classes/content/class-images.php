@@ -277,10 +277,8 @@ class WoodyTheme_Images
                         $req_width = $width_orig;
                         $req_height = $height_orig;
 
-                        if ($ratio_orig < 1) {
+                        if ($ratio_orig != 1) {
                             $size['height'] = round($size['width'] * $ratio_orig);
-                        } elseif ($ratio_orig > 1) {
-                            $size['height'] = round($size['width'] / $ratio_orig);
                         } elseif ($ratio_orig == 1) {
                             $size['height'] = $size['width'];
                         }
