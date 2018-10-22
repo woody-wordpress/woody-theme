@@ -184,9 +184,18 @@ function getMinMaxWoodyPostFieldValues($posts, $post_type, $field, $subfield = '
     $range = [];
     foreach ($posts as $key => $post) {
         // TODO:get trip children to display min an dmax prices
-        // $children = get_term_children($post_type, 'page_type');
-        // PC::debug($children);
-        if ($post_type !== $post['page_type']) {
+        $type_term = get_term_by('slug', $post_type, 'page_type');
+        $children = get_term_children($type_term->term_id, 'page_type');
+
+        $terms = [$post_type];
+        if (!empty($children)) {
+            foreach ($children as $key => $value) {
+                $term_object = get_term($value);
+                $terms[] = $term_object->slug;
+            }
+        }
+
+        if (!in_array($post['page_type'], $terms)) {
             continue;
         }
         if (empty($subfield) && !empty($post[$field])) {
