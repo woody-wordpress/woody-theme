@@ -129,8 +129,6 @@ function getAutoFocus_data($the_post, $query_form)
     // On créé la wp_query avec les paramètres définis
     $focused_posts = new WP_Query($the_query);
 
-    // PC::debug($focused_posts);
-
     // On transforme la donnée des posts récupérés pour coller aux templates de blocs Woody
     if (!empty($focused_posts->posts)) {
         foreach ($focused_posts->posts as $key => $post) {
@@ -263,45 +261,6 @@ function formatFullContentList($layout, $current_post, $twigPaths)
 
     $the_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields']);
 
-    $params = filter_input_array(INPUT_POST);
-
-    // Traitement des données du post
-    if (!empty($params) && $layout['uniqid'] === $params['uniqid']) {
-        $the_filtered_items = [
-            'empty' => 'Désolé, aucun contenu ne correspond à votre recherche'
-        ];
-        foreach ($params as $param_key => $param) {
-            if (strpos($param_key, 'taxonomy_terms') !== false && !empty($param)) {
-                $filter_index = str_replace('taxonomy_terms_', '', $param_key);
-                $andor = $layout['the_list_filters']['list_filters'][$filter_index]['list_filter_andor'];
-                $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_' . $param_key]['andor'] = $andor;
-                $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_' . $param_key]['terms'] = $param;
-            }
-
-            if (strpos($param_key, 'trip_price') !== false && !empty($param)) {
-                $the_index = str_replace('trip_price_', '', $param_key);
-                if (strpos($the_index, '_min') !== false) {
-                    $the_index = str_replace('_min', '', $the_index);
-                    $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_price' . $the_index]['min'] = $param;
-                } else {
-                    $the_index = str_replace('_max', '', $the_index);
-                    $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_price' . $the_index]['max'] = $param;
-                }
-            }
-            if (strpos($param_key, 'trip_count_days') !== false && !empty($param)) {
-                $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_' . $param_key] = $param;
-            }
-        }
-
-        PC::debug($layout['the_list_filters']['list_filters'], 'Filtres');
-
-        $the_filtered_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields']);
-        $the_list['the_grid'] =  Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_filtered_items);
-    } else {
-        $the_list['the_grid'] =  Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_items);
-    }
-
-
     $the_list['filters'] = (!empty($layout['the_list_filters']['list_filters'])) ? $layout['the_list_filters']['list_filters'] : '';
     if (!empty($the_list['filters'])) {
         foreach ($the_list['filters'] as $key => $filter) {
@@ -323,6 +282,67 @@ function formatFullContentList($layout, $current_post, $twigPaths)
             }
         }
     }
+
+    $params = filter_input_array(INPUT_POST);
+
+    // Traitement des données du post
+    if (!empty($params) && $layout['uniqid'] === $params['uniqid']) {
+        $the_filtered_items = [
+            'empty' => 'Désolé, aucun contenu ne correspond à votre recherche'
+        ];
+        foreach ($params as $param_key => $param) {
+            if (strpos($param_key, 'taxonomy_terms') !== false && !empty($param)) {
+                $filter_index = str_replace('taxonomy_terms_', '', $param_key);
+                $andor = $layout['the_list_filters']['list_filters'][$filter_index]['list_filter_andor'];
+                $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_' . $param_key]['andor'] = $andor;
+                $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_' . $param_key]['terms'] = $param;
+
+                // Update filter value on load
+                if ($the_list['filters'][$filter_index]['list_filter_type'] == 'taxonomy' || $the_list['filters'][$filter_index]['list_filter_type'] == 'custom_terms') {
+                    foreach ($param as $term_key => $term) {
+                        foreach ($the_list['filters'][$filter_index]['list_filter_custom_terms'] as $filter_term_key => $filter_term) {
+                            if ($filter_term['value'] == $term) {
+                                $the_list['filters'][$filter_index]['list_filter_custom_terms'][$filter_term_key]['checked'] = true;
+                            }
+                        }
+                    }
+                }
+            } elseif (strpos($param_key, 'trip_price') !== false && !empty($param)) {
+                $filter_index = str_replace('trip_price_', '', $param_key);
+                if (strpos($filter_index, '_min') !== false) {
+                    $filter_index = str_replace('_min', '', $filter_index);
+
+                    // Update filter value on load
+                    $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_price' . $filter_index]['min'] = $param;
+                    if ($the_list['filters'][$filter_index]['list_filter_type'] == 'price') {
+                        $the_list['filters'][$filter_index]['minmax']['default_min'] = round($param);
+                    }
+                } else {
+                    $filter_index = str_replace('_max', '', $filter_index);
+
+                    // Update filter value on load
+                    $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_price' . $filter_index]['max'] = $param;
+                    if ($the_list['filters'][$filter_index]['list_filter_type'] == 'price') {
+                        $the_list['filters'][$filter_index]['minmax']['default_max'] = round($param);
+                    }
+                }
+            } elseif (strpos($param_key, 'trip_count_days') !== false && !empty($param)) {
+                $filter_index = str_replace('trip_count_days_', '', $param_key);
+
+                // Update filter value on load
+                $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_' . $param_key] = $param;
+                if ($the_list['filters'][$filter_index]['list_filter_type'] == 'duration') {
+                    $the_list['filters'][$filter_index]['minmax']['default'] = $param;
+                }
+            }
+        }
+
+        $the_filtered_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields']);
+        $the_list['the_grid'] =  Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_filtered_items);
+    } else {
+        $the_list['the_grid'] =  Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_items);
+    }
+
     $return =  Timber::compile($twigPaths[$layout['the_list_filters']['listfilter_woody_tpl']], $the_list);
     return $return;
 }
