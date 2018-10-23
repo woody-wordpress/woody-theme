@@ -17,15 +17,11 @@
 
 {% block styles %}
     <link rel="stylesheet" href="https://api.tourism-system.com/render/assets/angular/styles/vendor.css">
-    <link rel="stylesheet" href="https://api.tourism-system.com/render/assets/styles/sheet.css">
-    <!-- <link rel="stylesheet" href="https://api.tourism-system.com/render/assets/styles/lego/lego.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.min.css">
 
-    {# <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
-        integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
-        crossorigin=""/> #}
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.3.4/dist/leaflet.css"/>
-    <!-- <link rel="stylesheet" href="https://api.tourism-system.com/render/assets/styles/vendor/fresco.css"> -->
+    {# <link rel="stylesheet" href="https://api.tourism-system.com/render/assets/styles/sheet.css"> #}
+    {# <link rel="stylesheet" href="https://api.tourism-system.com/render/assets/styles/vendor/fresco.css"> #}
 {% endblock styles %}
 
 {% block inline_scripts %}
@@ -42,7 +38,6 @@
         {% if season is defined %}
         DrupalAngularConfig.season = "{{ season|default }}" || null;
         {% endif %}
-
     </script>
 
 
@@ -52,8 +47,6 @@
         <script src="https://api.tourism-system.com/render/assets/scripts/vendor/fresco.js"></script>
         <script type="text/javascript" src="www.google-analytics.com/ga.js"></script>
     -->
-
-
     <!--
             {% if object.data.bordereau in ['PRD','ITI'] and global.request.attributes is defined and global.request.attributes.get('part') == 'preview' %}
         <script src="{{ global.request.basepath }}/assets/scripts/raccourci/itinerary.js"></script>

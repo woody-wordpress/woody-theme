@@ -5,22 +5,18 @@
 {% endblock metas %}
 
 {% block styles %}
-    <link rel="stylesheet" href="https://api.tourism-system.com/static/assets/fonts/raccourci-font.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" >
-    <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/10.1.0/nouislider.min.css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.2/chosen.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.27/daterangepicker.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css"/>
 
-    <link rel="stylesheet" href="https://api.tourism-system.com/render/assets/styles/playlist.css">
+    <link rel="stylesheet" href="https://api.tourism-system.com/static/assets/fonts/raccourci-font.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.min.css">
+
+    {# <link rel="stylesheet" href="https://api.tourism-system.com/render/assets/styles/playlist.css"> #}
+
+    {# Libraries (todo replace when possible) #}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@10.1.0/distribute/nouislider.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chosen-js@1.8.2/chosen.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-daterangepicker@2.1.27/daterangepicker.min.css">
+
 {% endblock styles %}
 
-{% block __inline_scripts %}
-
-    {# MAP SCRIPTS #}
-    {# <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfQ5H4V8Q7YqtgxaeHxhIqdq42x5QbyEs&v=3.exp&libraries=geometry,places" defer async></script>
-    <script src="https://googlemaps.github.io/js-rich-marker/src/richmarker-compiled.js" defer async></script>
-    <script src="https://api.tourism-system.com/render/assets/scripts/raccourci/playlist-map.debug.js" defer async></script>
-    <script src="https://api.tourism-system.com/render/assets/scripts/raccourci/playlist-map.leaflet.debug.js?otmKey=IVvN8vTvQ9OC94ltxJGaKw&gmKey=AIzaSyCfQ5H4V8Q7YqtgxaeHxhIqdq42x5QbyEs" defer async></script> #}
-
-{% endblock __inline_scripts %}
+{# ADD Inline Scripts in Class Enqueue Assets file if needed #}

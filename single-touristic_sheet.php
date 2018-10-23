@@ -20,7 +20,7 @@ $context['post'] = new TimberPost();
 $params = [];
 
 // override Body Classes
-$context['body_class'] .= ' apirender apirender-wordpress';
+$context['custom_body_classes'] = 'apirender apirender-wordpress';
 
 $sheet_id = $context['post']->touristic_sheet_id;
 $sheet_lang = $context['post']->touristic_sheet_lang;
