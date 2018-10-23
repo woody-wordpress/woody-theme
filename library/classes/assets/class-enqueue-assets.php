@@ -203,12 +203,15 @@ class WoodyTheme_Enqueue_Assets
 
         // Playlist libraries
         if ($isTouristicPlaylist) {
-            // TODO LATER get children page_type
-            // $children_terms_ids = [];
-            // $parent_term = get_term_by('playlist_tourism', $rule['value'], 'page_type');
-            // $parent_term_id = $parent_term->term_id;
-            // $children_terms = get_terms(array('taxonomy' => 'page_type', 'hide_empty' => false, 'parent' => $parent_term_id));
+            // CSS_Libraries (todo replace when possible)
+            wp_enqueue_style('rc_font_css', 'https://api.tourism-system.com/static/assets/fonts/raccourci-font.css', array(), '');
+            wp_enqueue_style('leaflet_css', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.min.css', array(), '');
+            wp_enqueue_style('bootstrap_css', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css', array(), '');
+            wp_enqueue_style('nouislider_css', 'https://cdn.jsdelivr.net/npm/nouislider@10.1.0/distribute/nouislider.min.css', array(), '');
+            wp_enqueue_style('chosen_css', 'https://cdn.jsdelivr.net/npm/chosen-js@1.8.2/chosen.min.css', array(), '');
+            wp_enqueue_style('picker_css', 'https://cdn.jsdelivr.net/npm/bootstrap-daterangepicker@2.1.27/daterangepicker.min.css', array(), '');
 
+            // JS Libraries
             wp_enqueue_script('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js', array(), '', true);
             wp_enqueue_script('match8', 'https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js', array('jquery'), '', true);
             wp_enqueue_script('wnumb', 'https://cdn.jsdelivr.net/npm/wnumb@1.0.4/wNumb.min.js', array('jquery'), '', true);
@@ -229,6 +232,12 @@ class WoodyTheme_Enqueue_Assets
 
         // Sheet libraries
         elseif ($isTouristicSheet) {
+            // CSS_Libraries (todo replace when possible)
+            wp_enqueue_style('rc_font_css', 'https://api.tourism-system.com/static/assets/fonts/raccourci-font.css', array(), '');
+            wp_enqueue_style('leaflet_css', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.min.css', array(), '');
+            // wp_enqueue_style('bootstrap_css', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css', array(), '');
+
+            // JS Libraries
             wp_enqueue_script('ng_vendor', $apirender_base_uri.'/assets/scripts/vendor.js', array(), '', true);
             wp_enqueue_script('jsapi', 'https://www.google.com/jsapi', array(), '', true);
             wp_enqueue_script('lodash', 'https://cdn.jsdelivr.net/npm/lodash@3.8.0/index.min.js"', array(), '', true);
