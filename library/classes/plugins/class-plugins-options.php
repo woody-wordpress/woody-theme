@@ -111,6 +111,46 @@ class WoodyTheme_Plugins_Options
                 'media_uploader_filter' => true,
                 'media_popup_taxonomy_edit' => false,
             ],
+            'language' => [
+                'eml_media' => false,
+                'taxonomy_auto_assign' => false,
+                'assigned' => false,
+                'admin_filter' => false,
+                'media_uploader_filter' => false,
+                'media_popup_taxonomy_edit' => false
+            ],
+            'post_translations' => [
+                'eml_media' => false,
+                'taxonomy_auto_assign' => false,
+                'assigned' => false,
+                'admin_filter' => false,
+                'media_uploader_filter' => false,
+                'media_popup_taxonomy_edit' => false
+            ],
+            'term_language' => [
+                'eml_media' => false,
+                'taxonomy_auto_assign' => false,
+                'assigned' => false,
+                'admin_filter' => false,
+                'media_uploader_filter' => false,
+                'media_popup_taxonomy_edit' => false
+            ],
+            'term_translations' => [
+                'eml_media' => false,
+                'taxonomy_auto_assign' => false,
+                'assigned' => false,
+                'admin_filter' => false,
+                'media_uploader_filter' => false,
+                'media_popup_taxonomy_edit' => false
+            ],
+            'page_type' => [
+                'eml_media' => false,
+                'taxonomy_auto_assign' => false,
+                'assigned' => false,
+                'admin_filter' => false,
+                'media_uploader_filter' => false,
+                'media_popup_taxonomy_edit' => false
+            ]
         ];
         $this->updateOption('wpuxss_eml_taxonomies', $wpuxss_eml_taxonomies);
 
