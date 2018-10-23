@@ -6,7 +6,7 @@ new WoodyTheme_Plugins_Options();
 new WoodyTheme_Plugins_Order();
 
 // PHP Console
-if (!class_exists('PC', false) && class_exists('PhpConsole', false) && WP_ENV == 'dev') {
+if (WP_ENV == 'dev' && !class_exists('PC', false) && class_exists('PhpConsole', false)) {
     PhpConsole\Helper::register();
 }
 
@@ -15,6 +15,7 @@ if (WP_ENV == 'dev') {
     new WoodyTheme_ACF_Save_Manager();
 }
 new WoodyTheme_ACF();
+new WoodyTheme_ACF_PrivateGroups();
 new WoodyTheme_ACF_Counter();
 
 // Cleanup
