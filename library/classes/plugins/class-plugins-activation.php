@@ -44,13 +44,11 @@ class WoodyTheme_Plugins_Activation
             'mce-table-buttons/mce_table_buttons.php',
             'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
             'duplicate-post/duplicate-post.php',
+            'polylang-pro/polylang.php',
         ];
 
         $this->deactivate_plugins = [
-            'wp-nested-pages/nestedpages.php',
             'vcaching/vcaching.php',
-            'regenerate-thumbnails/regenerate-thumbnails.php',
-            'fakerpress/fakerpress.php',
         ];
 
         if (SAVEQUERIES == true) {
