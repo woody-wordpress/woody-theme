@@ -29,7 +29,7 @@
         {% block styles %}{% endblock styles %}
     </head>
 
-    <body class="{{body_class}}">
+    <body class="{{ custom_body_classes|default }} {{body_class}}">
         <div class="main-wrapper flex-container medium-flex-dir-column-reverse">
             <div class="site-content">
                 <!-- Theme Content -->

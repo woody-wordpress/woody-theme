@@ -11,7 +11,7 @@
  */
 
 
-$context['body_class'] .= ' apirender apirender-playlist apirender-wordpress';
+$context['custom_body_classes'] = 'apirender apirender-playlist apirender-wordpress';
 
 /** ************************
  * Appel apirender pour récupérer le DOM de la playlist
