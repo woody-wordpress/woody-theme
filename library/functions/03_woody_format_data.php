@@ -212,7 +212,14 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     $params = filter_input_array(INPUT_POST);
 
     // Uncomment to see results when submtting the form
-    // rcd($params);
+    rcd($params);
+
+    // Form treatment
+    if (!empty($params)) {
+        $filters = have_rows('list_filters', $current_post->ID);
+        $title = $current_post->the_title();
+        rcd($current_post->ID);
+    }
 
     $the_list['the_grid'] =  Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_items);
     $the_list['uniqid'] = $layout['uniqid'];
