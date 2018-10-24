@@ -35,25 +35,23 @@ $context['current_url'] = get_permalink();
 $context['active_social_shares'] = getActiveShares();
 $context['page_type'] = getTermsSlugs($context['post']->ID, 'page_type', true);
 if (class_exists('SubWoodyTheme_TemplateParts')) {
-    $context['page_parts'] = SubWoodyTheme_TemplateParts::getSubThemeCompiledParts();
+    $SubWoodyTheme_TemplateParts = new SubWoodyTheme_TemplateParts();
+    $context['page_parts'] = $SubWoodyTheme_TemplateParts->getParts();
 }
 
-/** ****************************
+/*********************************************
  * Compilation du Diaporama en page d'accueil
- **************************** **/
+ *********************************************/
 $home_slider = getAcfGroupFields('group_5bb325e8b6b43');
-
-
 if (!empty($home_slider['landswpr_slides'])) {
     $context['home_slider'] = Timber::compile($context['woody_components'][$home_slider['landswpr_woody_tpl']], $home_slider);
 }
 
-/** ****************************
+/*********************************************
  * Compilation du bloc prix
- **************************** **/
+ *********************************************/
 
 $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d');
-
 if (!empty($trip_infos['the_duration']['count_days']) || !empty($trip_infos['the_length']['length']) || !empty($trip_infos['the_price']['price'])) {
     //TODO: Gérer le fichier gps pour affichage s/ carte
     $trip_infos['the_duration']['count_days'] = ($trip_infos['the_duration']['count_days']) ? humanDays($trip_infos['the_duration']['count_days']) : '';
@@ -63,9 +61,9 @@ if (!empty($trip_infos['the_duration']['count_days']) || !empty($trip_infos['the
     $trip_infos = [];
 }
 
-/** ****************************
+/*********************************************
  * Compilation de l'en tête de page
- **************************** **/
+ *********************************************/
 $page_teaser = [];
 $page_teaser = getAcfGroupFields('group_5b2bbb46507bf');
 if (!empty($page_teaser)) {
@@ -85,9 +83,9 @@ if (!empty($page_teaser)) {
     $context['page_teaser'] = Timber::compile($context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
 }
 
-/** ****************************
+/*********************************************
  * Compilation du visuel et accroche
- **************************** **/
+ *********************************************/
 $page_hero = [];
 $page_hero = getAcfGroupFields('group_5b052bbee40a4');
 if (!empty($page_hero['page_heading_media_type']) && ($page_hero['page_heading_media_type'] == 'movie' && !empty($page_hero['page_heading_movie']) || ($page_hero['page_heading_media_type'] == 'img' && !empty($page_hero['page_heading_img'])))) {
@@ -108,16 +106,16 @@ if (!empty($page_hero['page_heading_media_type']) && ($page_hero['page_heading_m
     $context['page_hero'] = Timber::compile($context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
 }
 
- /** ************************
-  * Check type de publication
-  ************************ **/
+/*********************************************
+ * Check type de publication
+ *********************************************/
 
 if ($context['page_type'] === 'playlist_tourism') {
     include 'inc-touristic-playlist.php';
 } else {
-    /** ************************
+    /*********************************************
     * Compilation des sections
-    ************************ **/
+    *********************************************/
     $context['sections'] = [];
     $sections = $context['post']->get_field('section');
 
