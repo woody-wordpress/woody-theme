@@ -169,7 +169,7 @@ class WoodyTheme_Roles
                 'translator' => false,
             ],
             'manage_links' => [
-                'administrator' => true,
+                'administrator' => false,
                 'editor' => false,
                 'contributor' => false,
                 'translator' => false,
