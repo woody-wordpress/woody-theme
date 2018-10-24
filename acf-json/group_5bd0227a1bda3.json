@@ -11,7 +11,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "70",
                 "class": "hide-label",
                 "id": ""
             },
@@ -35,13 +35,14 @@
                 [
                     {
                         "field": "field_5bd022eddaa51",
-                        "operator": "!=empty"
+                        "operator": ">",
+                        "value": "5"
                     }
                 ]
             ],
             "wrapper": {
-                "width": "",
-                "class": "",
+                "width": "30",
+                "class": "hide-label",
                 "id": ""
             },
             "message": "Pré-filtrer la playlist",
@@ -49,10 +50,10 @@
             "esc_html": 0
         },
         {
-            "key": "field_5bd02b27fb995",
-            "label": "Qu'est qu'un lien rapide ?",
-            "name": "",
-            "type": "message",
+            "key": "field_5bd060e1dde02",
+            "label": "Identifiant de pré-filtrage",
+            "name": "playlist_autoselection_id",
+            "type": "number",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -61,7 +62,45 @@
                 "class": "",
                 "id": ""
             },
-            "message": "<small>Un lien rapide permet de créer une url courte vers une page profonde ou vers une playlist pré-filtrée sur certains critères (Exemple : lien vers la playlist \"Tous les hôtels\", pré-filtrée 4 étoiles).<\/small>",
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": "",
+            "max": "",
+            "step": ""
+        },
+        {
+            "key": "field_5bd02b27fb995",
+            "label": "Qu'est qu'un lien rapide ?",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
+            "key": "field_5bd060cadde01",
+            "label": "Infos lien rapide",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label",
+                "id": ""
+            },
+            "message": "Un lien rapide permet de créer une url courte vers une page profonde ou vers une playlist pré-filtrée sur certains critères (Exemple : lien vers la playlist \"Tous les hôtels\", pré-filtrée 4 étoiles).",
             "new_lines": "wpautop",
             "esc_html": 0
         }
@@ -83,5 +122,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Permet de choisir une page pour créer un lien rapide",
-    "modified": 1540369459
+    "modified": 1540384025
 }

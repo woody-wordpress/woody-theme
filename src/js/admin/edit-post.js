@@ -12,7 +12,6 @@ $('#post').each(function() {
 
     // Action sur les focus
     var toggleChoiceAction = function($bigparent) {
-        //console.log('toggleChoiceAction', $bigparent);
         $bigparent.find('.tpl-choice-wrapper').each(function() {
             var $this = $(this);
 
@@ -37,8 +36,6 @@ $('#post').each(function() {
 
     // Action sur les focus
     var fitChoiceAction = function($bigparent, count) {
-        //console.log('fitChoiceAction', $bigparent);
-        //console.log(count);
 
         $bigparent.find('.tpl-choice-wrapper').each(function() {
             var $this = $(this);
@@ -61,8 +58,6 @@ $('#post').each(function() {
     var countElements = function(field) {
         var $parent = field.parent().$el;
         var $bigparent = field.parent().parent().$el;
-
-        // console.log($bigparent);
 
         // add class to this field
         $parent.each(function() {
@@ -146,4 +141,42 @@ $('#post').each(function() {
     acf.addAction('ready_field/key=field_5b27890c84ed3', getAutoFocusQuery);
     acf.addAction('append_field/key=field_5b27890c84ed3', getAutoFocusQuery);
     //acf.addAction('remove_field/key=field_5b27890c84ed3', getAutoFocusQuery);
+
+    
+});
+
+$('#acf-group_5bd0227a1bda3').each(function(){
+    var getShortLinkData = function(field){
+        var post_id = field.val();
+
+        $.ajax({
+            type: 'POST',
+            url: '/wp-json/woody/short-link',
+            data: post_id,
+            success: function(data) {
+                if (data.length !== 0) {
+                    if(data['page_type'] == 'playlist_tourism' && data['conf_id'] !== ""){
+                        filter_field.show();
+                        window.hawwwai = {};
+                        window.hawwwai.short_link_conf_id = data['conf_id'];
+                    } else {
+                        filter_field.hide();
+                    }
+                } 
+                return data;
+            },
+            error: function() {
+                console.log('Endpoint doesn\'t exists');
+            },
+        });
+    }
+
+    window.filter_field = acf.getField('field_5bd023a8daa52');
+    filter_field.hide();
+    var short_link_url_field = acf.getField('field_5bd022eddaa51'); 
+    short_link_url_field.on('change', function(){
+        $('#acf-field_5bd060e1dde02').attr('value', '');
+        getShortLinkData(short_link_url_field);
+    });
+    acf.addAction('ready_field/key=field_5bd022eddaa51', getShortLinkData);
 });

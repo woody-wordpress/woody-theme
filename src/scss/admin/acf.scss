@@ -532,3 +532,42 @@
         display: none;
     }
 }
+
+// Bouton préfilter la playlist (liens rapides)
+.acf-field-5bd023a8daa52{
+    .acf-input{
+        background: #0073aa;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        cursor:pointer;
+        &:before{
+            margin-right:10px;
+            display: inline-block;
+            font-size: 20px;
+            line-height: 1;
+            font-family: dashicons;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            content:'\f108';
+        }
+    }
+}
+
+// Bouton remttre à playlist à zéro
+.acf-field-5bd075349943c{
+    .acf-input{
+        padding:0 10px;
+        background-color:darken(#fff, 3%);
+        color:lighten(#000, 30%);
+        margin-bottom:15px;
+        cursor:pointer;
+        text-align:center;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+    }
+}

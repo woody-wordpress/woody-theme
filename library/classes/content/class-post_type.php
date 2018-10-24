@@ -39,6 +39,7 @@ class WoodyTheme_Post_Type
                 'not_found_in_trash'  => 'Non trouvé dans la corbeille',
             ),
             'hierarchical'        => true,
+            'public'              => true,
             'show_ui'             => true,
             'supports'            => array('title', 'custom-fields', 'page-attributes'),
             'show_in_menu'        => true,

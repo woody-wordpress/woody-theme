@@ -17,6 +17,7 @@ if (WP_ENV == 'dev') {
 new WoodyTheme_ACF();
 new WoodyTheme_ACF_PrivateGroups();
 new WoodyTheme_ACF_Counter();
+new WoodyTheme_ACF_ShorLink();
 
 // Cleanup
 new WoodyTheme_Cleanup_Minify();
