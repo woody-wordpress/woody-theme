@@ -123,7 +123,7 @@ function woodyIconsFolder($folder)
 {
     $return = [];
     $icons_folder = get_transient('woody_icons_folder');
-    if (empty($icons_folder[$folder])) {
+    if (!array_key_exists($folder, $icons_folder)) {
         $icons_finder = new Finder();
         $icons_finder->files()->name('*.svg')->in($folder);
         foreach ($icons_finder as $key => $icon) {
