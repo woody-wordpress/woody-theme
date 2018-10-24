@@ -1,0 +1,87 @@
+{
+    "key": "group_5bd0227a1bda3",
+    "title": "Choisir une page",
+    "fields": [
+        {
+            "key": "field_5bd022eddaa51",
+            "label": "Page",
+            "name": "short_link_page_url",
+            "type": "page_link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label",
+                "id": ""
+            },
+            "post_type": [
+                "page",
+                "touristic_sheet"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "allow_archives": 1,
+            "multiple": 0
+        },
+        {
+            "key": "field_5bd023a8daa52",
+            "label": "Préfiltrer",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5bd022eddaa51",
+                        "operator": "!=empty"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Pré-filtrer la playlist",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_5bd02b27fb995",
+            "label": "Qu'est qu'un lien rapide ?",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "<small>Un lien rapide permet de créer une url courte vers une page profonde ou vers une playlist pré-filtrée sur certains critères (Exemple : lien vers la playlist \"Tous les hôtels\", pré-filtrée 4 étoiles).<\/small>",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "short_link"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Permet de choisir une page pour créer un lien rapide",
+    "modified": 1540369459
+}

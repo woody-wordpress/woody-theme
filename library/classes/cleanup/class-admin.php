@@ -43,6 +43,7 @@ class WoodyTheme_Cleanup_Admin
     public function removePagesEditor()
     {
         remove_post_type_support('page', 'editor');
+        remove_post_type_support('short_link', 'editor');
     }
 
     /**
