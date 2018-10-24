@@ -35,7 +35,7 @@ $context['current_url'] = get_permalink();
 $context['active_social_shares'] = getActiveShares();
 $context['page_type'] = getTermsSlugs($context['post']->ID, 'page_type', true);
 if (class_exists('SubWoodyTheme_TemplateParts')) {
-    $SubWoodyTheme_TemplateParts = new SubWoodyTheme_TemplateParts();
+    $SubWoodyTheme_TemplateParts = new SubWoodyTheme_TemplateParts($context['woody_components']);
     $context['page_parts'] = $SubWoodyTheme_TemplateParts->getParts();
 }
 
