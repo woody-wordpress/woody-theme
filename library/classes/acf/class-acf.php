@@ -156,26 +156,37 @@ class WoodyTheme_ACF
         if (empty($choices)) {
 
             // Get all site taxonomies and exclude those we don't want to use
-            $taxonomies = get_object_taxonomies('page');
-            // Remove useless taxonomies
-            unset($taxonomies['page_type']);
-            unset($taxonomies['post_translations']);
+            $taxonomies = get_object_taxonomies('page', 'objects');
 
-            foreach ($taxonomies as $key => $taxonomy) {
+            // Remove useless taxonomies
+            $unset_taxonomies = [
+                'page_type',
+                'post_translations', // Polylang
+                'language', // Polylang
+            ];
+
+            foreach ($taxonomies as $taxonomy) {
+                // Remove useless taxonomies
+                if (in_array($taxonomy->name, $unset_taxonomies)) {
+                    continue;
+                }
+
                 // Get terms for each taxonomy and push them in $terms
                 $tax_terms = get_terms(array(
-                    'taxonomy' => $taxonomy,
+                    'taxonomy' => $taxonomy->name,
                     'hide_empty' => false,
                 ));
 
-                $tax = get_taxonomy($taxonomy);
-                foreach ($tax_terms as $key => $term) {
+                foreach ($tax_terms as $term) {
                     if ($term->name == 'Uncategorized') {
                         continue;
                     }
-                    $choices[$term->term_taxonomy_id] = $tax->label . ' - ' . $term->name;
+                    $choices[$term->term_taxonomy_id] = $taxonomy->label . ' - ' . $term->name;
                 }
             }
+
+            // Sort by values
+            sort($choices);
 
             set_transient('woody_terms_choices', $choices);
         }
