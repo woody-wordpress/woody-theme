@@ -161,7 +161,7 @@ if ($context['page_type'] === 'playlist_tourism') {
                                 $playlist_conf_id = $layout['playlist_conf_id'];
                             }
                             if ($layout['acf_fc_layout'] == 'call_to_action') {
-                                if (!empty($layout['cta_button_group']['add_modal'])) {
+                                if (!empty($layout['cta_button_group']['add_modal']) || !empty($layout['cta_widget_group']['cta_widget'])) {
                                     $layout['modal_id'] = 'cta-' . uniqid();
                                 }
                             }
