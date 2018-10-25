@@ -25,9 +25,6 @@ class WoodyTheme_Plugins_Order
         // Tous les plugins dans cette liste ne doivent pas forcément être activés.
         // Mais si il le sont, ils le seront dans le bon ordre
         $plugins_weight = [
-            'wpml-multilingual-cms/sitepress.php' => 10,
-            'wpml-string-translation/plugin.php' => 15,
-            'wpml-media-translation/plugin.php' => 20,
             'woody-plugin/woody.php' => 100,
         ];
 

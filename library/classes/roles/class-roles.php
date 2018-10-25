@@ -400,30 +400,6 @@ class WoodyTheme_Roles
                 'contributor' => true,
                 'translator' => false,
             ],
-            'wpml_manage_string_translation' => [
-                'administrator' => true,
-                'editor' => true,
-                'contributor' => false,
-                'translator' => true,
-            ],
-            'wpml_manage_translation_management' => [
-                'administrator' => true,
-                'editor' => true,
-                'contributor' => false,
-                'translator' => false,
-            ],
-            'wpml_manage_media_translation' => [
-                'administrator' => true,
-                'editor' => true,
-                'contributor' => true,
-                'translator' => true,
-            ],
-            'wpml_manage_taxonomy_translation' => [
-                'administrator' => true,
-                'editor' => true,
-                'contributor' => false,
-                'translator' => true,
-            ],
         ];
 
         foreach ($capabilities as $capability => $roles) {
