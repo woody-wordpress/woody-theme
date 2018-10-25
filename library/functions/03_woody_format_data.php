@@ -165,7 +165,6 @@ function getManualFocus_data($layout)
         // La donnée de la vignette est saisie en backoffice
         if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
             $the_items['items'][$key] = getCustomPreview($item_wrapper['custom_content']);
-
         // La donnée de la vignette correspond à un post sélectionné
         } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
             $item = $item_wrapper['existing_content'];
@@ -383,12 +382,12 @@ function formatGeomapData($layout, $twigPaths)
 function getCustomPreview($item)
 {
     $data = [];
-
     $data = [
     'title' => (!empty($item['title'])) ? $item['title'] : '',
     'pretitle' => (!empty($item['pretitle'])) ? $item['pretitle'] : '',
     'subtitle' => (!empty($item['subtitle'])) ? $item['subtitle'] : '',
-    'icon' => (!empty($item['icon'])) ? $item['icon'] : '',
+    'icon_type' => (!empty($item['icon_type'])) ? $item['icon_type'] : '',
+    'woody_icon' => (!empty($item['woody_icon'])) ? $item['woody_icon'] : '',
     'description' => (!empty($item['description'])) ? $item['description'] : '',
     'link' => [
         'url' => (!empty($item['link']['url'])) ? $item['link']['url'] : '',
