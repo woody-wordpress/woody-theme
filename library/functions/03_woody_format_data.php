@@ -103,6 +103,7 @@ function getAutoFocus_data($the_post, $query_form)
         'post_type' => 'page',
         'posts_per_page' =>  (!empty($query_form['focused_count'])) ? $query_form['focused_count'] : 16,
         'post_status' => 'publish',
+        'post__not_in' => array($the_post->ID)
     ];
 
     $the_query['tax_query'] = (!empty($tax_query)) ? $tax_query : '' ;
