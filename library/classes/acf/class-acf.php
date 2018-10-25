@@ -157,9 +157,9 @@ class WoodyTheme_ACF
 
             // Get all site taxonomies and exclude those we don't want to use
             $taxonomies = get_object_taxonomies('page');
-
             // Remove useless taxonomies
             unset($taxonomies['page_type']);
+            unset($taxonomies['post_translations']);
 
             foreach ($taxonomies as $key => $taxonomy) {
                 // Get terms for each taxonomy and push them in $terms
