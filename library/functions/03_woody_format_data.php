@@ -97,14 +97,34 @@ function getAutoFocus_data($the_post, $query_form)
         }
     }
 
+    switch ($query_form['focused_sort']) {
+        case 'random':
+            $orderby = 'rand';
+            $order = 'ASC';
+            break;
+        case 'created_desc':
+            $orderby = 'post_date';
+            $order = 'DESC';
+            break;
+        case 'created_asc':
+            $orderby = 'post_date';
+            $order = 'ASC';
+            break;
+        default:
+    }
+
     // On créé la wp_query en fonction des choix faits dans le backoffice
     // NB : si aucun choix n'a été fait, on remonte automatiquement tous les contenus de type page
     $the_query = [
         'post_type' => 'page',
         'posts_per_page' =>  (!empty($query_form['focused_count'])) ? $query_form['focused_count'] : 16,
         'post_status' => 'publish',
-        'post__not_in' => array($the_post->ID)
+        'post__not_in' => array($the_post->ID),
+        'order' => $order,
+        'orderby' => $orderby
     ];
+
+    // rcd($the_query, true);
 
     $the_query['tax_query'] = (!empty($tax_query)) ? $tax_query : '' ;
 
@@ -120,6 +140,8 @@ function getAutoFocus_data($the_post, $query_form)
         $the_query['post_parent'] = $the_post->post_parent;
     }
 
+    // Si on trouve une metaquery (recherche sur champs ACF)
+    // On définit une relation AND par défaut
     if (!empty($the_meta_query)) {
         $the_meta_query_relation = [
             'relation' => 'AND'
