@@ -186,7 +186,9 @@ class WoodyTheme_ACF
             }
 
             // Sort by values
-            sort($choices);
+            if (is_array($choices)) {
+                sort($choices);
+            }
 
             set_transient('woody_terms_choices', $choices);
         }
