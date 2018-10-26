@@ -17,6 +17,7 @@ class WoodyTheme_Roles
     {
         add_action('woody_theme_update', [$this, 'addRoles']);
         add_action('woody_theme_update', [$this, 'addCapabilities']);
+        add_filter('auth_cookie_expiration', [$this, 'authCookieExpirationFilter'], 10, 3);
     }
 
     public function addRoles()
@@ -25,6 +26,15 @@ class WoodyTheme_Roles
         add_role('editor', 'Éditeur');
         add_role('contributor', 'Contributeur');
         add_role('translator', 'Traducteur');
+    }
+
+    public function authCookieExpirationFilter($expiration, $user_id, $remember)
+    {
+        if ($remember && !user_can($user_id, 'edit_posts')) {
+            return YEAR_IN_SECONDS;
+        }
+
+        return $expiration;
     }
 
     public function addCapabilities()
