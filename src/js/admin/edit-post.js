@@ -1,6 +1,17 @@
 import $ from 'jquery';
 
 $('#post').each(function() {
+
+    // Show on scroll
+    var $preview_button = $('#minor-publishing-actions .preview.button');
+    $(window).scroll(function() {
+        if ($(window).scrollTop() < 800) {
+            $preview_button.removeClass('sticky');
+        } else {
+            $preview_button.addClass('sticky');
+        }
+    });
+
     // On ferme toutes les metaboxes ACF
     // $('.acf-postbox').addClass('closed');
 
@@ -142,11 +153,10 @@ $('#post').each(function() {
     acf.addAction('append_field/key=field_5b27890c84ed3', getAutoFocusQuery);
     //acf.addAction('remove_field/key=field_5b27890c84ed3', getAutoFocusQuery);
 
-    
 });
 
-$('#acf-group_5bd0227a1bda3').each(function(){
-    var getShortLinkData = function(field){
+$('#acf-group_5bd0227a1bda3').each(function() {
+    var getShortLinkData = function(field) {
         var post_id = field.val();
 
         $.ajax({
@@ -155,14 +165,14 @@ $('#acf-group_5bd0227a1bda3').each(function(){
             data: post_id,
             success: function(data) {
                 if (data.length !== 0) {
-                    if(data['page_type'] == 'playlist_tourism' && data['conf_id'] !== ""){
+                    if (data['page_type'] == 'playlist_tourism' && data['conf_id'] !== "") {
                         filter_field.show();
                         window.hawwwai = {};
                         window.hawwwai.short_link_conf_id = data['conf_id'];
                     } else {
                         filter_field.hide();
                     }
-                } 
+                }
                 return data;
             },
             error: function() {
@@ -173,8 +183,8 @@ $('#acf-group_5bd0227a1bda3').each(function(){
 
     window.filter_field = acf.getField('field_5bd023a8daa52');
     filter_field.hide();
-    var short_link_url_field = acf.getField('field_5bd022eddaa51'); 
-    short_link_url_field.on('change', function(){
+    var short_link_url_field = acf.getField('field_5bd022eddaa51');
+    short_link_url_field.on('change', function() {
         $('#acf-field_5bd060e1dde02').attr('value', '');
         getShortLinkData(short_link_url_field);
     });
