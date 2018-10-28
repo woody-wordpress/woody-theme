@@ -1,9 +1,10 @@
 #scroll_to_top {
     display: none;
     position: fixed;
-    top: 50px;
+    bottom: 15px;
     left: 50%;
     transform: translateX(-25px);
+    z-index: 999;
 
     .inner {
         display: flex;
