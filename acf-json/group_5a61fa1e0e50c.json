@@ -16,7 +16,7 @@
                 "id": ""
             },
             "taxonomy": "page_type",
-            "field_type": "select",
+            "field_type": "radio",
             "allow_null": 0,
             "add_term": 0,
             "save_terms": 1,
@@ -42,5 +42,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Sélection du type de contenu basé sur la taxonomie \"page_type\"",
-    "modified": 1537458105
+    "modified": 1540828750
 }

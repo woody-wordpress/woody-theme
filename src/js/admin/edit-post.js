@@ -91,13 +91,12 @@ $('#post').each(function() {
     var getAutoFocusData = function($parent) {
         var query_params = {};
         query_params['current_post'] = $('#post_ID').val();
-        //console.log($parent);
-        $parent.find('input:checked, select option, input[type="number"]').each(function() {
-            var name = $(this).parents('.acf-field').data('name');
 
+        $parent.find('input:checked, input[type="number"]').each(function() {
+            var $this = $(this);
+            var name = $this.parents('.acf-field').data('name');
             if (!query_params[name]) query_params[name] = [];
-            query_params[name].push($(this).val());
-
+            query_params[name].push($this.val());
         });
 
         $.ajax({
@@ -138,7 +137,7 @@ $('#post').each(function() {
 
             getAutoFocusData($this);
 
-            $this.find('input[type="checkbox"], input[type="radio"], select, option').change(function() {
+            $this.find('input[type="checkbox"], input[type="radio"]').change(function() {
                 getAutoFocusData($this);
             });
 

@@ -187,7 +187,7 @@ class WoodyTheme_ACF
 
             // Sort by values
             if (is_array($choices)) {
-                sort($choices);
+                asort($choices);
             }
 
             set_transient('woody_terms_choices', $choices);
@@ -310,10 +310,13 @@ class WoodyTheme_ACF
         delete_transient('woody_terms_page_type');
         delete_transient('woody_components');
         delete_transient('woody_icons_folder');
+        delete_transient('woody_page_taxonomies_choices');
+        delete_transient('woody_terms_choices');
     }
 
     public function cleanTermsChoicesTransient()
     {
+        delete_transient('woody_page_taxonomies_choices');
         delete_transient('woody_terms_choices');
     }
 }
