@@ -45,24 +45,24 @@ class WoodyTheme_Menus
     public static function getSubmenus($post_id)
     {
         $return = [];
-
         $fields_groups_wrapper = self::getTheRightOption($post_id);
+
         if (empty($fields_groups_wrapper) || !is_array($fields_groups_wrapper)) {
             return;
         }
 
         foreach ($fields_groups_wrapper as $fields_groups) {
             if (empty($fields_groups)) {
-                return;
+                continue;
             }
             foreach ($fields_groups as $group_key => $field_group) {
                 if (empty($field_group)) {
-                    return;
+                    continue;
                 }
                 if (is_array($field_group)) {
                     foreach ($field_group as $field) {
                         if (empty($field)) {
-                            return;
+                            continue;
                         }
                         if (!is_array($field)) {
                             $return[$group_key]['part_title'] = $field;
