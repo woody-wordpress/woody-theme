@@ -142,7 +142,8 @@ if ($context['page_type'] === 'playlist_tourism') {
                 foreach ($section['section_content'] as $layout_id => $layout) {
                     $layout['post'] = [
                         'ID' => $context['post']->ID,
-                        'title' => $context['post']->title
+                        'title' => $context['post']->title,
+                        'page_type' => $context['page_type']
                     ];
                     $layout['uniqid'] = 'section_' . $section_id . '_' . 'section_content_' . $layout_id;
                     $layout['visual_effects'] = (!empty($layout['visual_effects'])) ? formatVisualEffectData($layout['visual_effects']) : '';
