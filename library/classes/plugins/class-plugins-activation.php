@@ -45,6 +45,7 @@ class WoodyTheme_Plugins_Activation
             'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
             'duplicate-post/duplicate-post.php',
             'polylang-pro/polylang.php',
+            'publish-view/publish-view.php',
         ];
 
         $this->deactivate_plugins = [

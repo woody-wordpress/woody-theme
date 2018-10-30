@@ -1,7 +1,8 @@
 {
     "key": "group_5b461a3831284",
     "title": "Appel à l'action",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5b461a2b131b3",
             "label": "Contenu",
             "name": "",
@@ -30,7 +31,51 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {},
+            "choices": {
+                "wicon-002-twitter": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-002-twitter\"><\/span><span>Twitter<\/span><\/div>",
+                "wicon-006-linkedin": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-006-linkedin\"><\/span><span>Linkedin<\/span><\/div>",
+                "wicon-039-pin": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-039-pin\"><\/span><span>Pin<\/span><\/div>",
+                "wicon-023-ampoule": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-023-ampoule\"><\/span><span>Ampoule<\/span><\/div>",
+                "wicon-026-precedent": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-026-precedent\"><\/span><span>Precedent<\/span><\/div>",
+                "wicon-004-youtube": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-004-youtube\"><\/span><span>Youtube<\/span><\/div>",
+                "wicon-037-citation-02": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-037-citation-02\"><\/span><span>Citation 02<\/span><\/div>",
+                "wicon-036-citation-01": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-036-citation-01\"><\/span><span>Citation 01<\/span><\/div>",
+                "wicon-025-suivant": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-025-suivant\"><\/span><span>Suivant<\/span><\/div>",
+                "wicon-034-fleche-suivant": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-034-fleche-suivant\"><\/span><span>Fleche suivant<\/span><\/div>",
+                "wicon-007-viadeo": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-007-viadeo\"><\/span><span>Viadeo<\/span><\/div>",
+                "wicon-027-restaurant": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-027-restaurant\"><\/span><span>Restaurant<\/span><\/div>",
+                "wicon-013-smiley-excellent": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-013-smiley-excellent\"><\/span><span>Smiley excellent<\/span><\/div>",
+                "wicon-032-coeur-contour": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-032-coeur-contour\"><\/span><span>Coeur contour<\/span><\/div>",
+                "wicon-040-imprimante": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-040-imprimante\"><\/span><span>Imprimante<\/span><\/div>",
+                "wicon-029-croix-fermer": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-029-croix-fermer\"><\/span><span>Croix fermer<\/span><\/div>",
+                "wicon-017-telechargement": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-017-telechargement\"><\/span><span>Telechargement<\/span><\/div>",
+                "wicon-042-lien": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-042-lien\"><\/span><span>Lien<\/span><\/div>",
+                "wicon-000-facebook": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-000-facebook\"><\/span><span>Facebook<\/span><\/div>",
+                "wicon-015-horloge": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-015-horloge\"><\/span><span>Horloge<\/span><\/div>",
+                "wicon-005-pinterest": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-005-pinterest\"><\/span><span>Pinterest<\/span><\/div>",
+                "wicon-012-smiley-bien": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-012-smiley-bien\"><\/span><span>Smiley bien<\/span><\/div>",
+                "wicon-020-photos": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-020-photos\"><\/span><span>Photos<\/span><\/div>",
+                "wicon-024-loupe": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-024-loupe\"><\/span><span>Loupe<\/span><\/div>",
+                "wicon-031-etoile-pleine": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-031-etoile-pleine\"><\/span><span>Etoile pleine<\/span><\/div>",
+                "wicon-021-info": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-021-info\"><\/span><span>Info<\/span><\/div>",
+                "wicon-030-etoile-contour": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-030-etoile-contour\"><\/span><span>Etoile contour<\/span><\/div>",
+                "wicon-003-google": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-003-google\"><\/span><span>Google<\/span><\/div>",
+                "wicon-010-flickr": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-010-flickr\"><\/span><span>Flickr<\/span><\/div>",
+                "wicon-035-fleche-precedent": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-035-fleche-precedent\"><\/span><span>Fleche precedent<\/span><\/div>",
+                "wicon-009-vimeo": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-009-vimeo\"><\/span><span>Vimeo<\/span><\/div>",
+                "wicon-019-oeuil": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-019-oeuil\"><\/span><span>Oeuil<\/span><\/div>",
+                "wicon-011-instagram": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-011-instagram\"><\/span><span>Instagram<\/span><\/div>",
+                "wicon-014-livre": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-014-livre\"><\/span><span>Livre<\/span><\/div>",
+                "wicon-022-itineraire": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-022-itineraire\"><\/span><span>Itineraire<\/span><\/div>",
+                "wicon-033-coeur": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-033-coeur\"><\/span><span>Coeur<\/span><\/div>",
+                "wicon-038-pin-contour": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-038-pin-contour\"><\/span><span>Pin contour<\/span><\/div>",
+                "wicon-018-agenda": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-018-agenda\"><\/span><span>Agenda<\/span><\/div>",
+                "wicon-041-lit": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-041-lit\"><\/span><span>Lit<\/span><\/div>",
+                "wicon-028-plus-02": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-028-plus-02\"><\/span><span>Plus 02<\/span><\/div>",
+                "wicon-008-snapchat": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-008-snapchat\"><\/span><span>Snapchat<\/span><\/div>",
+                "wicon-001-facebook-messenger": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-001-facebook-messenger\"><\/span><span>Facebook messenger<\/span><\/div>",
+                "wicon-016-bulle": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-016-bulle\"><\/span><span>Bulle<\/span><\/div>"
+            },
             "default_value": [],
             "allow_null": 1,
             "multiple": 0,
@@ -59,6 +104,116 @@
             "delay": 1
         },
         {
+            "key": "field_5bd80ed696cd3",
+            "label": "Bouton(s)",
+            "name": "cta_buttons",
+            "type": "clone",
+            "instructions": "<small>New<\/small>",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5b043614df4a6"
+            ],
+            "display": "group",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
+        },
+        {
+            "key": "field_5bd17939c12a7",
+            "label": "Ajouter un téléphone",
+            "name": "cta_display_phone",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5bd1e66171646",
+            "label": "Texte avant le numéro",
+            "name": "cta_phone_before",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5bd17939c12a7",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "40",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5bd17963c12a8",
+            "label": "Numéro de téléphone",
+            "name": "cta_phone",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5bd17939c12a7",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5bd80f5b96cd4",
+            "label": "ANCIENS CHAMPS",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
             "key": "field_5b4621c8aebdd",
             "label": "Type d'action",
             "name": "action_type",
@@ -85,88 +240,6 @@
             "save_other_choice": 0
         },
         {
-            "key": "field_5bd17d9017515",
-            "label": "Code du widget",
-            "name": "cta_widget_group",
-            "type": "group",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [{
-                    "field": "field_5b4621c8aebdd",
-                    "operator": "==",
-                    "value": "code"
-                }]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "layout": "block",
-            "sub_fields": [{
-                    "key": "field_5bd1803c704f8",
-                    "label": "Icône du bouton",
-                    "name": "button_woody_icon",
-                    "type": "select",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "50",
-                        "class": "",
-                        "id": ""
-                    },
-                    "choices": {},
-                    "default_value": [],
-                    "allow_null": 1,
-                    "multiple": 0,
-                    "ui": 1,
-                    "ajax": 1,
-                    "return_format": "value",
-                    "placeholder": ""
-                },
-                {
-                    "key": "field_5bd1806f704f9",
-                    "label": "Texte du bouton",
-                    "name": "label",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "50",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_5bd18097704fa",
-                    "label": "Code du widget",
-                    "name": "cta_widget",
-                    "type": "wysiwyg",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "tabs": "text",
-                    "media_upload": 0,
-                    "toolbar": "full",
-                    "delay": 0
-                }
-            ]
-        },
-        {
             "key": "field_5b461ab1131b6",
             "label": "Lien",
             "name": "cta_button_group",
@@ -174,11 +247,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b4621c8aebdd",
-                    "operator": "==",
-                    "value": "link"
-                }]
+                [
+                    {
+                        "field": "field_5b4621c8aebdd",
+                        "operator": "==",
+                        "value": "link"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -186,7 +261,8 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5b7595f282076_field_5b0422ed7d07b",
                     "label": "Icône",
                     "name": "button_woody_icon",
@@ -284,11 +360,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b4621c8aebdd",
-                    "operator": "==",
-                    "value": "file"
-                }]
+                [
+                    {
+                        "field": "field_5b4621c8aebdd",
+                        "operator": "==",
+                        "value": "file"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -296,7 +374,8 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5b462226aebde_field_5b042b30ab6a3",
                     "label": "Icône",
                     "name": "file_woody_icon",
@@ -395,48 +474,90 @@
             ]
         },
         {
-            "key": "field_5bd17939c12a7",
-            "label": "Ajouter un numéro de téléphone",
-            "name": "cta_display_phone",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
-            "key": "field_5bd17963c12a8",
-            "label": "Numéro de téléphone",
-            "name": "cta_phone",
-            "type": "text",
+            "key": "field_5bd17d9017515",
+            "label": "Code du widget",
+            "name": "cta_widget_group",
+            "type": "group",
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5bd17939c12a7",
-                    "operator": "==",
-                    "value": "1"
-                }]
+                [
+                    {
+                        "field": "field_5b4621c8aebdd",
+                        "operator": "==",
+                        "value": "code"
+                    }
+                ]
             ],
             "wrapper": {
-                "width": "50",
+                "width": "",
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_5bd1803c704f8",
+                    "label": "Icône du bouton",
+                    "name": "button_woody_icon",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                    },
+                    "default_value": [],
+                    "allow_null": 1,
+                    "multiple": 0,
+                    "ui": 1,
+                    "ajax": 1,
+                    "return_format": "value",
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_5bd1806f704f9",
+                    "label": "Texte du bouton",
+                    "name": "label",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5bd18097704fa",
+                    "label": "Code du widget",
+                    "name": "cta_widget",
+                    "type": "wysiwyg",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "text",
+                    "media_upload": 0,
+                    "toolbar": "full",
+                    "delay": 0
+                }
+            ]
         },
         {
             "key": "field_5b461b36131b9",
@@ -468,11 +589,11 @@
                 "id": ""
             },
             "choices": {
-                "blocks-call_to_action-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_04\/thumbnail.png?version=1.8.6\" alt=\"blocks-call_to_action-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 4<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 4<\/h4>Affiche un bloc avec texte centré (icone sur fond de couleur rond) et\/ou lien ou fichier à télécharger en dessous + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-call_to_action-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_03\/thumbnail.png?version=1.8.6\" alt=\"blocks-call_to_action-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 3<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 3<\/h4>Affiche un bloc avec texte centré et\/ou lien ou fichier à télécharger en dessous + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-call_to_action-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_02\/thumbnail.png?version=1.8.6\" alt=\"blocks-call_to_action-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 2<\/h4>Affiche un bloc avec texte aligné à gauche et\/ou lien ou fichier à télécharger en dessous + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-call_to_action-tpl_05": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_05\/thumbnail.png?version=1.8.6\" alt=\"blocks-call_to_action-tpl_05\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 5<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 5<\/h4>Affiche un bloc avec texte et\/ou lien ou fichier à télécharger en dessous + icone en haut à gauche + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-call_to_action-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_01\/thumbnail.png?version=1.8.6\" alt=\"blocks-call_to_action-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 1<\/h4>Affiche un bloc avec texte et\/ou lien ou fichier à télécharger à droite + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+                "blocks-call_to_action-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_04\/thumbnail.png?version=1.9.0\" alt=\"blocks-call_to_action-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 4<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 4<\/h4>Affiche un bloc avec texte centré (icone sur fond de couleur rond) et\/ou lien ou fichier à télécharger en dessous + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-call_to_action-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_03\/thumbnail.png?version=1.9.0\" alt=\"blocks-call_to_action-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 3<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 3<\/h4>Affiche un bloc avec texte centré et\/ou lien ou fichier à télécharger en dessous + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-call_to_action-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_02\/thumbnail.png?version=1.9.0\" alt=\"blocks-call_to_action-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 2<\/h4>Affiche un bloc avec texte aligné à gauche et\/ou lien ou fichier à télécharger en dessous + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-call_to_action-tpl_05": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_05\/thumbnail.png?version=1.9.0\" alt=\"blocks-call_to_action-tpl_05\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 5<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 5<\/h4>Affiche un bloc avec texte et\/ou lien ou fichier à télécharger en dessous + icone en haut à gauche + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-call_to_action-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_01\/thumbnail.png?version=1.9.0\" alt=\"blocks-call_to_action-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 1<\/h4>Affiche un bloc avec texte et\/ou lien ou fichier à télécharger à droite + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -518,7 +639,8 @@
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0,
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "ID": 0,
                     "key": "field_5b461b46131ba_field_5b043ca4a6fe3",
                     "label": "Couleur de fond",
@@ -714,11 +836,13 @@
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -728,5 +852,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Un bloc d'appel à laction avec texte et lien\/fichier + couleur de fond possible",
-    "modified": 1540456671
+    "modified": 1540893531
 }

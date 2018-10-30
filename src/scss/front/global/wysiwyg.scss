@@ -1,0 +1,32 @@
+.wp-caption {
+    position: relative;
+
+    img {
+        width: 100%;
+    }
+
+    &.aligncenter {
+        margin: 20px auto;
+    }
+
+    &.alignright {
+        float: right;
+        margin-left: 20px;
+    }
+
+    &.alignleft {
+        float: left;
+        margin-right: 20px;
+    }
+
+    .wp-caption-text {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(#000, .2);
+        color: #fff;
+        margin: 0;
+        padding: 3px 5px;
+    }
+}

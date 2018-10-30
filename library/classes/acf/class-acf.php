@@ -156,25 +156,38 @@ class WoodyTheme_ACF
         if (empty($choices)) {
 
             // Get all site taxonomies and exclude those we don't want to use
-            $taxonomies = get_object_taxonomies('page');
+            $taxonomies = get_object_taxonomies('page', 'objects');
 
             // Remove useless taxonomies
-            unset($taxonomies['page_type']);
+            $unset_taxonomies = [
+                'page_type',
+                'post_translations', // Polylang
+                'language', // Polylang
+            ];
 
-            foreach ($taxonomies as $key => $taxonomy) {
+            foreach ($taxonomies as $taxonomy) {
+                // Remove useless taxonomies
+                if (in_array($taxonomy->name, $unset_taxonomies)) {
+                    continue;
+                }
+
                 // Get terms for each taxonomy and push them in $terms
                 $tax_terms = get_terms(array(
-                    'taxonomy' => $taxonomy,
+                    'taxonomy' => $taxonomy->name,
                     'hide_empty' => false,
                 ));
 
-                $tax = get_taxonomy($taxonomy);
-                foreach ($tax_terms as $key => $term) {
+                foreach ($tax_terms as $term) {
                     if ($term->name == 'Uncategorized') {
                         continue;
                     }
-                    $choices[$term->term_taxonomy_id] = $tax->label . ' - ' . $term->name;
+                    $choices[$term->term_taxonomy_id] = $taxonomy->label . ' - ' . $term->name;
                 }
+            }
+
+            // Sort by values
+            if (is_array($choices)) {
+                asort($choices);
             }
 
             set_transient('woody_terms_choices', $choices);
@@ -297,10 +310,13 @@ class WoodyTheme_ACF
         delete_transient('woody_terms_page_type');
         delete_transient('woody_components');
         delete_transient('woody_icons_folder');
+        delete_transient('woody_page_taxonomies_choices');
+        delete_transient('woody_terms_choices');
     }
 
     public function cleanTermsChoicesTransient()
     {
+        delete_transient('woody_page_taxonomies_choices');
         delete_transient('woody_terms_choices');
     }
 }

@@ -38,11 +38,12 @@ class WoodyTheme_ACF_ShorLink
         return $shortLinkData;
     }
 
-    public function redirectShortLink(){
+    public function redirectShortLink()
+    {
         $post_id = get_the_ID();
         $post_type = get_post_type($post_id);
 
-        if($post_type !== 'short_link'){
+        if ($post_type !== 'short_link') {
             return;
         }
         $autoselect_id = get_field('playlist_autoselection_id', $post_id);
@@ -50,12 +51,12 @@ class WoodyTheme_ACF_ShorLink
         $linked_id = url_to_postid($linked_url);
         $linked_post_type = get_the_terms($linked_id, 'page_type');
 
-        if($linked_post_type[0]->slug == 'playlist_tourism' && !empty($autoselect_id)){
+        if ($linked_post_type[0]->slug == 'playlist_tourism' && !empty($autoselect_id)) {
             $short_link_final_url = $linked_url . '?autoselect_id=' . $autoselect_id;
-        } else{
+        } else {
             $short_link_final_url = $linked_url;
         }
-        
+
         wp_redirect($short_link_final_url);
         exit;
     }

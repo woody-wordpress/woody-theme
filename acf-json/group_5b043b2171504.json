@@ -19,6 +19,54 @@
             "endpoint": 0
         },
         {
+            "key": "field_5bd82b3c23a27",
+            "label": "Zoomer la carte automatiquement",
+            "name": "map_zoom_auto",
+            "type": "true_false",
+            "instructions": "En activant cette fonctionnalité la carte se zoomera automatiquement en fonction des marqueurs",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5bd82a1523a26",
+            "label": "Zoom de la carte",
+            "name": "map_zoom",
+            "type": "number",
+            "instructions": "Vous pouvez choisir un zoom entre \"5\" et \"20\" (5 étant très éloigné \/ 20 étant très proche)",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5bd82b3c23a27",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 10,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": 5,
+            "max": 20,
+            "step": 1
+        },
+        {
             "key": "field_5b043b28ab46a",
             "label": "Marqueurs",
             "name": "markers",
@@ -109,7 +157,7 @@
                 "id": ""
             },
             "choices": {
-                "blocks-geo_map-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/geo_map\/tpl_01\/thumbnail.png?version=1.7.3\" alt=\"blocks-geo_map-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Carte géographique<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Carte géographique<\/h4>Marqueurs personnalisés affichés sur une carte<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+                "blocks-geo_map-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/geo_map\/tpl_01\/thumbnail.png?version=1.9.0\" alt=\"blocks-geo_map-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Carte géographique<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Carte géographique<\/h4>Marqueurs personnalisés affichés sur une carte<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -136,5 +184,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Affiche une carte avec des marqueurs multiples",
-    "modified": 1539675668
+    "modified": 1540894191
 }

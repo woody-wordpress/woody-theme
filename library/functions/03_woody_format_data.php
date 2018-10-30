@@ -97,13 +97,34 @@ function getAutoFocus_data($the_post, $query_form)
         }
     }
 
+    switch ($query_form['focused_sort']) {
+        case 'random':
+            $orderby = 'rand';
+            $order = 'ASC';
+            break;
+        case 'created_desc':
+            $orderby = 'post_date';
+            $order = 'DESC';
+            break;
+        case 'created_asc':
+            $orderby = 'post_date';
+            $order = 'ASC';
+            break;
+        default:
+    }
+
     // On créé la wp_query en fonction des choix faits dans le backoffice
     // NB : si aucun choix n'a été fait, on remonte automatiquement tous les contenus de type page
     $the_query = [
         'post_type' => 'page',
         'posts_per_page' =>  (!empty($query_form['focused_count'])) ? $query_form['focused_count'] : 16,
         'post_status' => 'publish',
+        'post__not_in' => array($the_post->ID),
+        'order' => $order,
+        'orderby' => $orderby
     ];
+
+    // rcd($the_query, true);
 
     $the_query['tax_query'] = (!empty($tax_query)) ? $tax_query : '' ;
 
@@ -119,6 +140,8 @@ function getAutoFocus_data($the_post, $query_form)
         $the_query['post_parent'] = $the_post->post_parent;
     }
 
+    // Si on trouve une metaquery (recherche sur champs ACF)
+    // On définit une relation AND par défaut
     if (!empty($the_meta_query)) {
         $the_meta_query_relation = [
             'relation' => 'AND'
@@ -165,7 +188,6 @@ function getManualFocus_data($layout)
         // La donnée de la vignette est saisie en backoffice
         if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
             $the_items['items'][$key] = getCustomPreview($item_wrapper['custom_content']);
-
         // La donnée de la vignette correspond à un post sélectionné
         } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
             $item = $item_wrapper['existing_content'];
@@ -354,18 +376,29 @@ function formatGeomapData($layout, $twigPaths)
         return;
     }
 
+    // Set boolean to fitBounds
+    $layout['map_zoom_auto'] = ($layout['map_zoom_auto']) ? 'true' : 'false';
+
+    // Calcul center of map
+    $sum_lat = $sum_lng = 0;
+    foreach ($layout['markers'] as $key => $marker) {
+        $sum_lat += $marker['map_position']['lat'];
+        $sum_lng += $marker['map_position']['lng'];
+    }
+    $layout['default_lat'] = $sum_lat / count($layout['markers']);
+    $layout['default_lng'] = $sum_lng / count($layout['markers']);
+
+    // Get markers
     foreach ($layout['markers'] as $key => $marker) {
         if (empty($marker['title']) && empty($marker['description']) && empty($marker['img']) && !empty($marker['link']['url'])) {
             $layout['markers'][$key]['marker_as_link'] = true;
         }
         $layout['markers'][$key]['compiled_marker']  = Timber::compile('/_objects/markerObject.twig', $marker);
 
-        if (!empty($marker['title']) || !empty($marker['description']) || !empty($marker['img'])) {
-            // $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-basic_card-tpl_01'], $marker);
-        }
+        // if (!empty($marker['title']) || !empty($marker['description']) || !empty($marker['img'])) {
+        //  $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-basic_card-tpl_01'], $marker);
+        // }
     }
-
-    // rcd($layout['markers'], true);
 
     $return = Timber::compile($twigPaths[$layout['woody_tpl']], $layout);
     return $return;
@@ -383,12 +416,12 @@ function formatGeomapData($layout, $twigPaths)
 function getCustomPreview($item)
 {
     $data = [];
-
     $data = [
     'title' => (!empty($item['title'])) ? $item['title'] : '',
     'pretitle' => (!empty($item['pretitle'])) ? $item['pretitle'] : '',
     'subtitle' => (!empty($item['subtitle'])) ? $item['subtitle'] : '',
-    'icon' => (!empty($item['icon'])) ? $item['icon'] : '',
+    'icon_type' => (!empty($item['icon_type'])) ? $item['icon_type'] : '',
+    'woody_icon' => (!empty($item['woody_icon'])) ? $item['woody_icon'] : '',
     'description' => (!empty($item['description'])) ? $item['description'] : '',
     'link' => [
         'url' => (!empty($item['link']['url'])) ? $item['link']['url'] : '',

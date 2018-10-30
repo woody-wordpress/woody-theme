@@ -399,6 +399,7 @@
 .acf-field-5b0d1dc8907e7,
 .acf-field-5bc5905487dff,
 .acf-field-5bbcac7027b56,
+.acf-field-5bd81b41a3040,
 .acf-field-5bc6e6b0bd875 {
     input[type=text] {
         font-size: 1.4em !important;
@@ -509,14 +510,13 @@
 }
 
 // Selection auto : types de publication
-.acf-field-5b27890c84ed3 {
+.acf-field-5b27a02e9d7c5 {
     .acf-checkbox-list {
-        display: flex;
-        flex-wrap: wrap;
-
-        li {
-            margin-right: 20px;
-        }
+        border-radius: 3px;
+        max-height: 120px;
+        overflow: scroll;
+        border: 1px solid #DFDFDF;
+        padding: 10px;
     }
 }
 
@@ -534,40 +534,41 @@
 }
 
 // Bouton préfilter la playlist (liens rapides)
-.acf-field-5bd023a8daa52{
-    .acf-input{
+.acf-field-5bd023a8daa52 {
+    .acf-input {
         background: #0073aa;
         color: #fff;
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
-        cursor:pointer;
-        &:before{
-            margin-right:10px;
+        cursor: pointer;
+
+        &:before {
+            margin-right: 10px;
             display: inline-block;
             font-size: 20px;
             line-height: 1;
             font-family: dashicons;
             font-weight: 400;
             -webkit-font-smoothing: antialiased;
-            content:'\f108';
+            content: '\f108';
         }
     }
 }
 
 // Bouton remttre à playlist à zéro
-.acf-field-5bd075349943c{
-    .acf-input{
-        padding:0 10px;
-        background-color:darken(#fff, 3%);
-        color:lighten(#000, 30%);
-        margin-bottom:15px;
-        cursor:pointer;
-        text-align:center;
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        justify-content:center;
+.acf-field-5bd075349943c {
+    .acf-input {
+        padding: 0 10px;
+        background-color: darken(#fff, 3%);
+        color: lighten(#000, 30%);
+        margin-bottom: 15px;
+        cursor: pointer;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 }

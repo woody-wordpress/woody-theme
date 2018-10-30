@@ -18,6 +18,7 @@ new WoodyTheme_ACF();
 new WoodyTheme_ACF_PrivateGroups();
 new WoodyTheme_ACF_Counter();
 new WoodyTheme_ACF_ShorLink();
+new WoodyTheme_ACF_Filters();
 
 // Cleanup
 new WoodyTheme_Cleanup_Minify();

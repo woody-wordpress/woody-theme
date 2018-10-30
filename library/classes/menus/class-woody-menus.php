@@ -45,24 +45,24 @@ class WoodyTheme_Menus
     public static function getSubmenus($post_id)
     {
         $return = [];
-
         $fields_groups_wrapper = self::getTheRightOption($post_id);
+
         if (empty($fields_groups_wrapper) || !is_array($fields_groups_wrapper)) {
             return;
         }
 
         foreach ($fields_groups_wrapper as $fields_groups) {
             if (empty($fields_groups)) {
-                return;
+                continue;
             }
             foreach ($fields_groups as $group_key => $field_group) {
                 if (empty($field_group)) {
-                    return;
+                    continue;
                 }
                 if (is_array($field_group)) {
                     foreach ($field_group as $field) {
                         if (empty($field)) {
-                            return;
+                            continue;
                         }
                         if (!is_array($field)) {
                             $return[$group_key]['part_title'] = $field;
@@ -166,21 +166,27 @@ class WoodyTheme_Menus
         if (!empty($menu_link['submenu'])) {
             $the_submenu = [];
             $the_submenu['is_list'] = true;
-            $the_submenu['alignment'] = 'align-top';
+            $the_submenu['no_padding'] = (!empty($menu_display[$menu_link['the_id']]['no_padding'])) ? $menu_display[$menu_link['the_id']]['no_padding'] : 0;
+            $the_submenu['alignment'] = (!empty($menu_display[$menu_link['the_id']]['alignment'])) ? $menu_display[$menu_link['the_id']]['alignment'] : 'align-top';
             $submenu['display'] = $menu_display[$menu_link['the_id']];
             $i = 0;
+
             foreach ($menu_link['submenu'] as $key => $part) {
                 if (!empty($part['links'])) {
+                    $the_part = [];
+                    $the_part['alignment'] = (!empty($submenu['display']['parts'][$i]['alignment'])) ? $submenu['display']['parts'][$i]['alignment'] : 'align-top';
+                    $the_part['no_padding'] = (!empty($submenu['display']['parts'][$i]['no_padding'])) ? $submenu['display']['parts'][$i]['no_padding'] : 0;
+
                     foreach ($part['links'] as $link_key => $link) {
                         if (!empty($submenu['display']['parts'][$i]['links_tpl'])) {
                             $link_display = $submenu['display']['parts'][$i]['links_tpl'];
+
                             $part['links'][$link_key] = Timber::compile($twig_paths[$link_display], $link);
                         }
                     }
                 }
 
-                $the_part = [];
-                $the_part['alignment'] = 'align-top';
+
 
                 if (!empty($submenu['display']['parts'][$i]['part_tpl'])) {
                     $part_display = $submenu['display']['parts'][$i]['part_tpl'];

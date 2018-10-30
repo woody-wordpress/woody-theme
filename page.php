@@ -122,14 +122,10 @@ if ($context['page_type'] === 'playlist_tourism') {
     if (!empty($sections)) {
         foreach ($sections as $section_id => $section) {
             $the_header = '';
-            $the_footer = '';
             $the_layout = '';
 
             if (!empty($section['icon']) || !empty($section['pretitle']) || !empty($section['title']) || !empty($section['subtitle']) || !empty($section['description'])) {
                 $the_header = Timber::compile($context['woody_components']['section-section_header-tpl_01'], $section);
-            }
-            if (!empty($section['links'])) {
-                $the_footer = Timber::compile($context['woody_components']['section-section_footer-tpl_01'], $section);
             }
 
             // Pour chaque bloc d'une section, on compile les données dans un template Woody
@@ -140,6 +136,11 @@ if ($context['page_type'] === 'playlist_tourism') {
 
             if (!empty($section['section_content'])) {
                 foreach ($section['section_content'] as $layout_id => $layout) {
+                    $layout['post'] = [
+                        'ID' => $context['post']->ID,
+                        'title' => $context['post']->title,
+                        'page_type' => $context['page_type']
+                    ];
                     $layout['uniqid'] = 'section_' . $section_id . '_' . 'section_content_' . $layout_id;
                     $layout['visual_effects'] = (!empty($layout['visual_effects'])) ? formatVisualEffectData($layout['visual_effects']) : '';
 
@@ -160,10 +161,8 @@ if ($context['page_type'] === 'playlist_tourism') {
                             if ($layout['acf_fc_layout'] == 'playlist_bloc') {
                                 $playlist_conf_id = $layout['playlist_conf_id'];
                             }
-                            if ($layout['acf_fc_layout'] == 'call_to_action') {
-                                if (!empty($layout['cta_button_group']['add_modal']) || !empty($layout['cta_widget_group']['cta_widget'])) {
-                                    $layout['modal_id'] = 'cta-' . uniqid();
-                                }
+                            if ($layout['acf_fc_layout'] == 'call_to_action' || $layout['acf_fc_layout'] == 'links' || $layout['acf_fc_layout'] == 'gallery') {
+                                $layout['modal_id'] = $layout['acf_fc_layout'] . '_' . uniqid();
                             }
                             if ($layout['acf_fc_layout'] == 'tabs_group') {
                                 $layout['tabs'] = nestedGridsComponents($layout['tabs'], 'tab_woody_tpl', 'tabs');
@@ -211,7 +210,6 @@ if ($context['page_type'] === 'playlist_tourism') {
             // puis on compile le tout dans le template de section Woody
             $the_section = [
                 'header' => $the_header,
-                'footer' => $the_footer,
                 'layout' => $the_layout,
                 'display' => $display,
             ];

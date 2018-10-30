@@ -20,6 +20,10 @@
             font-size: 1em;
         }
 
+        // HIDE NAV FOR SHEETS CAUSE ITS NOT WORKING YET !! TODO
+        .nav-container.sheet-nav {
+            display: none !important;
+        }
     }
 }
 

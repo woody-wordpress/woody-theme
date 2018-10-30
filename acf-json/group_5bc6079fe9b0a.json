@@ -71,7 +71,8 @@
                         "taxonomy": "Famille de tags",
                         "custom_terms": "Groupe de tags personnalisé",
                         "price": "Prix séjour",
-                        "duration": "Durée séjour"
+                        "duration": "Durée séjour",
+                        "map": "Carte"
                     },
                     "default_value": [
                         "taxonomy"
@@ -103,6 +104,8 @@
                         "id": ""
                     },
                     "choices": {
+                        "language": "Langues",
+                        "post_translations": false,
                         "page_type": "Types de publications",
                         "themes": "Thématiques",
                         "places": "Lieux",
@@ -210,9 +213,7 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "lists-list_full-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/lists\/list_full\/tpl_01\/thumbnail.png?version=1.7.6\" alt=\"lists-list_full-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">template global liste<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">template global liste<\/h4>...<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-            },
+            "choices": {},
             "allow_null": 0,
             "other_choice": 0,
             "default_value": "",
@@ -236,5 +237,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1539864441
+    "modified": 1540900219
 }

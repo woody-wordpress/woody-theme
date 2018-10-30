@@ -43,6 +43,15 @@
         color: #fff;
         text-decoration: none;
         text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799;
+
+        &.sticky {
+            position: fixed;
+            top: 32px;
+            right: 0;
+            border-color: #0085ba;
+            box-shadow: 3px 0px 15px #333;
+            z-index: 999;
+        }
     }
 }
 
