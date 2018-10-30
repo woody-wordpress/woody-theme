@@ -81,6 +81,43 @@
             "prefix_name": 0
         },
         {
+            "key": "field_5bd815583c13d",
+            "label": "Bouton(s)",
+            "name": "gallery_buttons",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5b043614df4a6"
+            ],
+            "display": "group",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
+        },
+        {
+            "key": "field_5bd815883c13e",
+            "label": "ANCIENS CHAMPS",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
             "key": "field_5b4c615a5b6f0",
             "label": "Bouton \/ Lien",
             "name": "gallery_link",
@@ -273,5 +310,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Liste de photos)",
-    "modified": 1539852720
+    "modified": 1540890229
 }
