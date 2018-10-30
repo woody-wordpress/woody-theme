@@ -1,21 +1,126 @@
 {
     "key": "group_5b0422e167d2a",
     "title": "Bouton \/ Lien",
-    "fields": [{
+    "fields": [
+        {
+            "key": "field_5bd80bae735cb",
+            "label": "Type de bouton",
+            "name": "button_type",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "link": "Lien",
+                "file": "Fichier à télécharger",
+                "code": "Widget \/ Formulaire"
+            },
+            "default_value": [
+                "link"
+            ],
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_5b04231f7d07c",
+            "label": "Lien",
+            "name": "link",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5bd80bae735cb",
+                        "operator": "==",
+                        "value": "link"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
+            "key": "field_5bd80c00735cc",
+            "label": "Fichier",
+            "name": "file",
+            "type": "file",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5bd80bae735cb",
+                        "operator": "==",
+                        "value": "file"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_5bd80c10735cd",
+            "label": "Widget",
+            "name": "widget",
+            "type": "textarea",
+            "instructions": "Collez ici le code de votre widget",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5bd80bae735cb",
+                        "operator": "==",
+                        "value": "code"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 4,
+            "new_lines": ""
+        },
+        {
             "key": "field_5b0422ed7d07b",
-            "label": "Icône",
+            "label": "Icône du bouton",
             "name": "button_woody_icon",
             "type": "select",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "30",
                 "class": "",
                 "id": ""
             },
             "choices": {
-
             },
             "default_value": [],
             "allow_null": 1,
@@ -26,27 +131,96 @@
             "placeholder": ""
         },
         {
-            "key": "field_5b04231f7d07c",
-            "label": "Lien",
-            "name": "link",
-            "type": "link",
+            "key": "field_5bd80d03735d0",
+            "label": "Texte du bouton",
+            "name": "button_text",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5bd80bae735cb",
+                        "operator": "!=",
+                        "value": "link"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5bd80c65735cf",
+            "label": "Taille du bouton",
+            "name": "button_size",
+            "type": "select",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "30",
                 "class": "",
                 "id": ""
             },
-            "return_format": "array"
+            "choices": {
+                "small": "Petit",
+                "medium": "Normal",
+                "large": "Gros"
+            },
+            "default_value": [
+                "medium"
+            ],
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_5bd80c3e735ce",
+            "label": "Ouvrir dans une pop-in",
+            "name": "add_modal",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5bd80bae735cb",
+                        "operator": "==",
+                        "value": "link"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -56,5 +230,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Une icône et un champ lien utilisés en clone dans d'autres groupes",
-    "modified": 1536914720
+    "modified": 1540889313
 }
