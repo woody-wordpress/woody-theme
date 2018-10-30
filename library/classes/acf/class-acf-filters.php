@@ -32,7 +32,7 @@ class WoodyTheme_ACF_Filters
         return substr($text, 0, -2) . '<span class="hidden-number">▒▒</span>';
     }
 
-    public function humanizeFilesize($bytes, $decimals = 2)
+    public function humanizeFilesize($bytes, $decimals = 0)
     {
         $factor = floor((strlen($bytes) - 1) / 3);
         if ($factor > 0) {
