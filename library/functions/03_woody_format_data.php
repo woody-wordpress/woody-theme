@@ -376,18 +376,29 @@ function formatGeomapData($layout, $twigPaths)
         return;
     }
 
+    // Set boolean to fitBounds
+    $layout['map_zoom_auto'] = ($layout['map_zoom_auto']) ? 'true' : 'false';
+
+    // Calcul center of map
+    $sum_lat = $sum_lng = 0;
+    foreach ($layout['markers'] as $key => $marker) {
+        $sum_lat += $marker['map_position']['lat'];
+        $sum_lng += $marker['map_position']['lng'];
+    }
+    $layout['default_lat'] = $sum_lat / count($layout['markers']);
+    $layout['default_lng'] = $sum_lng / count($layout['markers']);
+
+    // Get markers
     foreach ($layout['markers'] as $key => $marker) {
         if (empty($marker['title']) && empty($marker['description']) && empty($marker['img']) && !empty($marker['link']['url'])) {
             $layout['markers'][$key]['marker_as_link'] = true;
         }
         $layout['markers'][$key]['compiled_marker']  = Timber::compile('/_objects/markerObject.twig', $marker);
 
-        if (!empty($marker['title']) || !empty($marker['description']) || !empty($marker['img'])) {
-            // $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-basic_card-tpl_01'], $marker);
-        }
+        // if (!empty($marker['title']) || !empty($marker['description']) || !empty($marker['img'])) {
+        //  $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-basic_card-tpl_01'], $marker);
+        // }
     }
-
-    // rcd($layout['markers'], true);
 
     $return = Timber::compile($twigPaths[$layout['woody_tpl']], $layout);
     return $return;
