@@ -22,11 +22,17 @@ class WoodyTheme_ACF_Filters
     {
         //$twig->addExtension(new Twig_Extension_StringLoader());
         $twig->addFilter(new Twig_SimpleFilter('phone_click', [$this, 'phoneClick_Filter']));
+        $twig->addFilter(new Twig_SimpleFilter('dump', [$this, 'dump_Filter']));
         return $twig;
     }
 
     public function phoneClick_Filter($text)
     {
         return substr($text, 0, -2) . '<span class="hidden-number">▒▒</span>';
+    }
+
+    public function dump_Filter($text)
+    {
+        return rcd($text);
     }
 }
