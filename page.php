@@ -161,10 +161,8 @@ if ($context['page_type'] === 'playlist_tourism') {
                             if ($layout['acf_fc_layout'] == 'playlist_bloc') {
                                 $playlist_conf_id = $layout['playlist_conf_id'];
                             }
-                            if ($layout['acf_fc_layout'] == 'call_to_action') {
-                                if (!empty($layout['cta_button_group']['add_modal']) || !empty($layout['cta_widget_group']['cta_widget'])) {
-                                    $layout['modal_id'] = 'cta-' . uniqid();
-                                }
+                            if ($layout['acf_fc_layout'] == 'call_to_action' || $layout['acf_fc_layout'] == 'links' || $layout['acf_fc_layout'] == 'gallery') {
+                                $layout['modal_id'] = $layout['acf_fc_layout'] . '_' . uniqid();
                             }
                             if ($layout['acf_fc_layout'] == 'tabs_group') {
                                 $layout['tabs'] = nestedGridsComponents($layout['tabs'], 'tab_woody_tpl', 'tabs');
