@@ -122,14 +122,10 @@ if ($context['page_type'] === 'playlist_tourism') {
     if (!empty($sections)) {
         foreach ($sections as $section_id => $section) {
             $the_header = '';
-            $the_footer = '';
             $the_layout = '';
 
             if (!empty($section['icon']) || !empty($section['pretitle']) || !empty($section['title']) || !empty($section['subtitle']) || !empty($section['description'])) {
                 $the_header = Timber::compile($context['woody_components']['section-section_header-tpl_01'], $section);
-            }
-            if (!empty($section['links'])) {
-                $the_footer = Timber::compile($context['woody_components']['section-section_footer-tpl_01'], $section);
             }
 
             // Pour chaque bloc d'une section, on compile les données dans un template Woody
@@ -216,7 +212,6 @@ if ($context['page_type'] === 'playlist_tourism') {
             // puis on compile le tout dans le template de section Woody
             $the_section = [
                 'header' => $the_header,
-                'footer' => $the_footer,
                 'layout' => $the_layout,
                 'display' => $display,
             ];

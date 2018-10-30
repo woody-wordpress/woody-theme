@@ -1,7 +1,8 @@
 {
     "key": "group_5ba8ef4753801",
     "title": "Affichage: menu",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5ba8ef5bce474",
             "label": "Image",
             "name": "in_menu_img",
@@ -108,11 +109,13 @@
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "page"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "side",
@@ -121,6 +124,6 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": 1,
-    "description": "",
-    "modified": 1539008605
+    "description": "Surcharges des pages pour affichage des titres, images, icones dans les menus",
+    "modified": 1540886517
 }
