@@ -257,8 +257,29 @@
                     "prefix_name": 0
                 },
                 {
+                    "key": "field_5bd816cd77cd7",
+                    "label": "Bouton(s)",
+                    "name": "landswpr_slide_smart_links",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_5b043614df4a6"
+                    ],
+                    "display": "group",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                },
+                {
                     "key": "field_5bb3297e77f43",
-                    "label": "Lien(s)",
+                    "label": "! ANCIENS ! Lien(s)",
                     "name": "landswpr_slide_links",
                     "type": "repeater",
                     "instructions": "",
@@ -354,7 +375,8 @@
             },
             "layout": "vertical",
             "choices": {
-                "swipers-landing_swipers-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/swipers\/landing_swipers\/tpl_01\/thumbnail.png?version=1.7.2\" alt=\"swipers-landing_swipers-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">LandSwiper<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">LandSwiper<\/h4>Swiper items<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+                "swipers-landing_swipers-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/swipers\/landing_swipers\/tpl_02\/thumbnail.png?version=1.9.0\" alt=\"swipers-landing_swipers-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Landing Swiper (Custom pagination)<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Landing Swiper (Custom pagination)<\/h4>Swiper items<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "swipers-landing_swipers-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/swipers\/landing_swipers\/tpl_01\/thumbnail.png?version=1.9.0\" alt=\"swipers-landing_swipers-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">LandSwiper<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">LandSwiper<\/h4>Swiper items<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
             },
             "default_value": "",
             "other_choice": 0,
@@ -385,5 +407,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Diaporama de slides (image ou video) en page d'accueil",
-    "modified": 1539187518
+    "modified": 1540888687
 }
