@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>044-enveloppe</title>
+    <desc>Created with Sketch.</desc>
+    <g id="044-enveloppe" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <path d="M44.8981224,14.3868068 C44.8981224,13.6368878 44.200102,13 43.3747347,13 L7.52378571,13 C6.69961224,13 6,13.6350764 6,14.3868068 L6,36.5880337 C6,37.3375905 6.69802041,37.9748406 7.52378571,37.9748406 L43.3747347,37.9748406 C43.8216429,37.9748406 44.1615,37.8266682 44.4046531,37.6038661 C44.4229592,37.5900995 44.4388776,37.5741592 44.4563878,37.559668 C44.4655408,37.5502487 44.4754898,37.5419163 44.4850408,37.532497 C44.7329694,37.3107818 44.8981224,36.998859 44.8981224,36.5880337 L44.8981224,14.3868068 Z" id="Path" stroke="#000000" stroke-width="4"></path>
+        <polyline id="Path-8" stroke="#000000" stroke-width="4" fill-rule="nonzero" points="13 19 25 28.8535156 37.5566406 19"></polyline>
+    </g>
+</svg>

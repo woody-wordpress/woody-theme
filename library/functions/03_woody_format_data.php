@@ -303,6 +303,14 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                 $the_list['filters'][$key]['minmax'] = getMinMaxWoodyPostFieldValues($the_items['items'], 'trip', 'the_duration', 'count_days');
             }
         }
+        $the_list['filters']['button'] = (!empty($layout['the_list_filters']['filter_button'])) ? $layout['the_list_filters']['filter_button'] : '';
+        $the_list['filters']['display']['background_img'] = (!empty($layout['the_list_filters']['background_img'])) ? $layout['the_list_filters']['background_img'] : '';
+        $the_list['filters']['display']['classes'][] = (!empty($layout['the_list_filters']['background_color'])) ? $layout['the_list_filters']['background_color'] : '';
+        $the_list['filters']['display']['classes'][] = (!empty($layout['the_list_filters']['background_img_opacity'])) ? $layout['the_list_filters']['background_img_opacity'] : '';
+        $the_list['filters']['display']['classes'][] = (!empty($layout['the_list_filters']['border_color'])) ? $layout['the_list_filters']['border_color'] : '';
+        $the_list['filters']['display']['classes'] = implode(' ', $the_list['filters']['display']['classes']);
+        PC::debug($layout['the_list_filters'], 'List filters');
+        PC::debug($the_list['filters']['display'], 'Display');
     }
 
     $params = filter_input_array(INPUT_POST);
