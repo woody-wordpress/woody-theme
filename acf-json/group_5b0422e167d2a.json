@@ -172,11 +172,11 @@
             },
             "choices": {
                 "small": "Petit",
-                "medium": "Normal",
+                "normal": "Normal",
                 "large": "Gros"
             },
             "default_value": [
-                "medium"
+                "normal"
             ],
             "allow_null": 0,
             "multiple": 0,
@@ -230,5 +230,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Une icône et un champ lien utilisés en clone dans d'autres groupes",
-    "modified": 1540889313
+    "modified": 1540909776
 }
