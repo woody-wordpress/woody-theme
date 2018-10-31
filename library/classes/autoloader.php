@@ -18,7 +18,6 @@ new WoodyTheme_ACF();
 new WoodyTheme_ACF_PrivateGroups();
 new WoodyTheme_ACF_Counter();
 new WoodyTheme_ACF_ShorLink();
-new WoodyTheme_ACF_Filters();
 
 // Cleanup
 new WoodyTheme_Cleanup_Minify();
@@ -40,6 +39,9 @@ new WoodyTheme_Images();
 new WoodyTheme_Tinymce();
 // new WoodyTheme_Videos();
 // new WoodyTheme_Yoast();
+
+// Timber
+new WoodyTheme_Twig_Filters();
 
 // Menu
 new WoodyTheme_Menus();
