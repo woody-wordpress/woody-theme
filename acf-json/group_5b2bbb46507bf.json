@@ -323,7 +323,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": 10,
+            "default_value": 7,
             "placeholder": "",
             "prepend": "",
             "append": "",
@@ -509,5 +509,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Les infos principales de la page + la possibilité d'ajouter les liens de partage et d'ajout aux favoris",
-    "modified": 1540890800
+    "modified": 1540890900
 }

@@ -1,8 +1,7 @@
 {
     "key": "group_5b043b2171504",
     "title": "Carte géographique manuelle",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5bc594372f95a",
             "label": "Contenu",
             "name": "",
@@ -45,20 +44,18 @@
             "instructions": "Vous pouvez choisir un zoom entre \"5\" et \"20\" (5 étant très éloigné \/ 20 étant très proche)",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5bd82b3c23a27",
-                        "operator": "!=",
-                        "value": "1"
-                    }
-                ]
+                [{
+                    "field": "field_5bd82b3c23a27",
+                    "operator": "!=",
+                    "value": "1"
+                }]
             ],
             "wrapper": {
                 "width": "33",
                 "class": "",
                 "id": ""
             },
-            "default_value": 10,
+            "default_value": 7,
             "placeholder": "",
             "prepend": "",
             "append": "",
@@ -107,8 +104,7 @@
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter un marqueur",
-            "sub_fields": [
-                {
+            "sub_fields": [{
                     "key": "field_5bc5905487dff",
                     "label": "Titre pour l'administration",
                     "name": "bo_marker_title",
@@ -191,13 +187,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -207,5 +201,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Affiche une carte avec des marqueurs multiples",
-    "modified": 1540917344
+    "modified": 1540917400
 }
