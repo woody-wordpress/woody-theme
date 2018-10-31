@@ -9,24 +9,25 @@
         display: flex;
         width: 45px;
         height: 45px;
-        background: $black;
+        background-color: $secondary-color;
         border-radius: 50%;
         align-items: center;
         justify-content: center;
         cursor: pointer;
+        transition: background-color .25s ease-in;
 
         &:after {
             content: '';
-            width: 16px;
-            height: 16px;
-            border-top: 5px solid #fff;
-            border-left: 5px solid #fff;
+            width: 15px;
+            height: 15px;
+            border-top: 2.5px solid #fff;
+            border-left: 2.5px solid #fff;
             transform: rotate(45deg);
             margin-top: 5px;
         }
 
         &:hover {
-            background: $primary-color;
+            background-color: $primary-color;
         }
     }
 }
