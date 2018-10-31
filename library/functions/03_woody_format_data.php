@@ -309,8 +309,8 @@ function formatFullContentList($layout, $current_post, $twigPaths)
         $the_list['filters']['display']['classes'][] = (!empty($layout['the_list_filters']['background_img_opacity'])) ? $layout['the_list_filters']['background_img_opacity'] : '';
         $the_list['filters']['display']['classes'][] = (!empty($layout['the_list_filters']['border_color'])) ? $layout['the_list_filters']['border_color'] : '';
         $the_list['filters']['display']['classes'] = implode(' ', $the_list['filters']['display']['classes']);
-        PC::debug($layout['the_list_filters'], 'List filters');
-        PC::debug($the_list['filters']['display'], 'Display');
+        //PC::debug($layout['the_list_filters'], 'List filters');
+        //PC::debug($the_list['filters']['display'], 'Display');
     }
 
     $params = filter_input_array(INPUT_POST);
