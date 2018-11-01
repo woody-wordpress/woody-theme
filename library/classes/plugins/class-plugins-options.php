@@ -204,6 +204,10 @@ class WoodyTheme_Plugins_Options
             'ratio_4_1_medium'      => ['active' => true, 'name' => 'Pano B'],
             'ratio_4_1_large'       => ['active' => true, 'name' => 'Pano B'],
             'ratio_4_1'             => ['active' => true, 'name' => 'Pano B'],
+            'ratio_3_1_small'       => ['active' => true, 'name' => 'Pano C'],
+            'ratio_3_1_medium'      => ['active' => true, 'name' => 'Pano C'],
+            'ratio_3_1_large'       => ['active' => true, 'name' => 'Pano C'],
+            'ratio_3_1'             => ['active' => true, 'name' => 'Pano C'],
             'ratio_2_1_small'       => ['active' => true, 'name' => 'Paysage A'],
             'ratio_2_1_medium'      => ['active' => true, 'name' => 'Paysage A'],
             'ratio_2_1_large'       => ['active' => true, 'name' => 'Paysage A'],
@@ -231,39 +235,47 @@ class WoodyTheme_Plugins_Options
         ];
         $this->updateOption('yoimg_crop_settings', $yoimg_crop_settings);
 
-        // Update permalinks by posts titles
-        $permalink_options = [
-            'general' => [
-                'auto_update_uris' => 1,
-                'show_native_slug_field' => 0,
-                'canonical_redirect' => 1,
-                'setup_redirects' => 1,
-                'redirect' => 301,
-                'trailing_slashes' => 20,
-                'pagination_redirect' => 0,
-                'auto_remove_duplicates' => 1,
-                'fix_language_mismatch' => 1,
-                'force_custom_slugs' => 1,
-            ],
-            'licence' => [
-                'licence_key' => '8058C9F5-83C7421C-A57A61BC-D75B00E3',
-                'expiration_date' => '4102398000',
-            ]
-        ];
-        $this->updateOption('permalink-manager', $permalink_options);
+        // // Update permalinks by posts titles
+        // $permalink_options = [
+        //     'general' => [
+        //         'auto_update_uris' => 1,
+        //         'show_native_slug_field' => 0,
+        //         'canonical_redirect' => 1,
+        //         'setup_redirects' => 1,
+        //         'redirect' => 301,
+        //         'trailing_slashes' => 20,
+        //         'pagination_redirect' => 0,
+        //         'auto_remove_duplicates' => 1,
+        //         'fix_language_mismatch' => 1,
+        //         'force_custom_slugs' => 1,
+        //     ],
+        //     'licence' => [
+        //         'licence_key' => '8058C9F5-83C7421C-A57A61BC-D75B00E3',
+        //         'expiration_date' => '4102398000',
+        //     ]
+        // ];
+        // $this->updateOption('permalink-manager', $permalink_options);
 
         $redirection_options = [
-            'expire_404' => '-1',
-            'expire_redirect' => '-1',
+            'monitor_post' => 2,
+            'monitor_types' => [
+                0 => 'page',
+                1 => 'post',
+                2 => 'touristic_sheet',
+                3 => 'short_link',
+                4 => 'trash',
+            ],
+            'associated_redirect' => '',
+            'auto_target' => '',
+            'expire_redirect' => -1,
+            'expire_404' => -1,
+            'newsletter' => false,
+            'redirect_cache' => 1,
             'ip_logging' => 0,
+            'last_group_id' => 2,
+            'rest_api' => 0
         ];
         $this->updateOption('redirection_options', $redirection_options);
-
-        // Set default options for NestedPages
-        $this->updateOption('nestedpages_menusync', 'nosync');
-        $this->updateOption('nestedpages_disable_menu', 'true');
-        $nestedpages_roles = ['editor'];
-        $this->updateOption('nestedpages_allowsorting', $nestedpages_roles);
 
         // Yoast SEO
         $wpseo = [
