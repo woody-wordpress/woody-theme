@@ -204,6 +204,10 @@ class WoodyTheme_Plugins_Options
             'ratio_4_1_medium'      => ['active' => true, 'name' => 'Pano B'],
             'ratio_4_1_large'       => ['active' => true, 'name' => 'Pano B'],
             'ratio_4_1'             => ['active' => true, 'name' => 'Pano B'],
+            'ratio_3_1_small'       => ['active' => true, 'name' => 'Pano C'],
+            'ratio_3_1_medium'      => ['active' => true, 'name' => 'Pano C'],
+            'ratio_3_1_large'       => ['active' => true, 'name' => 'Pano C'],
+            'ratio_3_1'             => ['active' => true, 'name' => 'Pano C'],
             'ratio_2_1_small'       => ['active' => true, 'name' => 'Paysage A'],
             'ratio_2_1_medium'      => ['active' => true, 'name' => 'Paysage A'],
             'ratio_2_1_large'       => ['active' => true, 'name' => 'Paysage A'],
@@ -258,12 +262,6 @@ class WoodyTheme_Plugins_Options
             'ip_logging' => 0,
         ];
         $this->updateOption('redirection_options', $redirection_options);
-
-        // Set default options for NestedPages
-        $this->updateOption('nestedpages_menusync', 'nosync');
-        $this->updateOption('nestedpages_disable_menu', 'true');
-        $nestedpages_roles = ['editor'];
-        $this->updateOption('nestedpages_allowsorting', $nestedpages_roles);
 
         // Yoast SEO
         $wpseo = [
