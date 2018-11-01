@@ -31,6 +31,7 @@ class WoodyTheme_Plugins_Activation
             'wp-deferred-javascripts/wp-deferred-javascripts.php',
             'advanced-cron-manager/advanced-cron-manager.php',
             'redirection/redirection.php',
+            'permalink-manager-pro/permalink-manager.php',
             'wordpress-seo/wp-seo.php',
             'yoimages/yoimages.php',
             'enhanced-media-library/enhanced-media-library.php',
@@ -49,7 +50,6 @@ class WoodyTheme_Plugins_Activation
 
         $this->deactivate_plugins = [
             'vcaching/vcaching.php',
-            'permalink-manager-pro/permalink-manager.php',
         ];
 
         if (SAVEQUERIES == true) {
