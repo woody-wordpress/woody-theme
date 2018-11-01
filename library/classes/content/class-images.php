@@ -44,42 +44,48 @@ class WoodyTheme_Images
 
     public function addImageSizes()
     {
-        // Ratio 8:1 => Panoramique 1
+        // Ratio 8:1 => Pano A
         add_image_size('ratio_8_1_small', 360, 45, true);
         add_image_size('ratio_8_1_medium', 640, 80, true);
         add_image_size('ratio_8_1_large', 1200, 150, true);
         add_image_size('ratio_8_1', 1920, 240, true);
 
-        // Ratio 4:1 => Panoramique 2
+        // Ratio 4:1 => Pano B
         add_image_size('ratio_4_1_small', 360, 90, true);
         add_image_size('ratio_4_1_medium', 640, 160, true);
         add_image_size('ratio_4_1_large', 1200, 300, true);
         add_image_size('ratio_4_1', 1920, 480, true);
 
-        // Ratio 2:1 => Paysage 1
+        // Ratio 3:1 => Pano C
+        add_image_size('ratio_3_1_small', 360, 120, true);
+        add_image_size('ratio_3_1_medium', 640, 213, true);
+        add_image_size('ratio_3_1_large', 1200, 400, true);
+        add_image_size('ratio_3_1', 1920, 640, true);
+
+        // Ratio 2:1 => Paysage A
         add_image_size('ratio_2_1_small', 360, 180, true);
         add_image_size('ratio_2_1_medium', 640, 320, true);
         add_image_size('ratio_2_1_large', 1200, 600, true);
         add_image_size('ratio_2_1', 1920, 960, true);
 
-        // Ratio 16:9 => Paysage 2
+        // Ratio 16:9 => Paysage B
         add_image_size('ratio_16_9_small', 360, 203, true);
         add_image_size('ratio_16_9_medium', 640, 360, true);
         add_image_size('ratio_16_9_large', 1200, 675, true);
         add_image_size('ratio_16_9', 1920, 1080, true);
 
-        // Ratio 4:3 => Paysage 3
+        // Ratio 4:3 => Paysage C
         add_image_size('ratio_4_3_small', 360, 270, true);
         add_image_size('ratio_4_3_medium', 640, 480, true);
         add_image_size('ratio_4_3_large', 1200, 900, true);
         add_image_size('ratio_4_3', 1920, 1440, true);
 
-        // Ratio 3:4 => Portrait 1
+        // Ratio 3:4 => Portrait A
         add_image_size('ratio_3_4_small', 360, 480, true);
         add_image_size('ratio_3_4_medium', 640, 854, true);
         add_image_size('ratio_3_4', 1200, 1600, true);
 
-        // Ratio 10:16 => Portrait 2
+        // Ratio 10:16 => Portrait B
         add_image_size('ratio_10_16_small', 360, 576, true);
         add_image_size('ratio_10_16_medium', 640, 1024, true);
         add_image_size('ratio_10_16', 1200, 1920, true);
@@ -122,6 +128,7 @@ class WoodyTheme_Images
         return array(
             'ratio_8_1' => __('Pano A (1920x240)'),
             'ratio_4_1' => __('Pano B (1920x480)'),
+            'ratio_3_1' => __('Pano C (1920x640)'),
             'ratio_2_1' => __('Paysage A (1920x960)'),
             'ratio_16_9' => __('Paysage B (1920x1080)'),
             'ratio_4_3' => __('Paysage C (1920x1440)'),

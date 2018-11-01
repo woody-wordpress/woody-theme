@@ -144,58 +144,7 @@ if ($context['page_type'] === 'playlist_tourism') {
                     $layout['uniqid'] = 'section_' . $section_id . '_' . 'section_content_' . $layout_id;
                     $layout['visual_effects'] = (!empty($layout['visual_effects'])) ? formatVisualEffectData($layout['visual_effects']) : '';
 
-                    switch ($layout['acf_fc_layout']) {
-
-                        case 'manual_focus':
-                        case 'auto_focus':
-                        case 'auto_focus_sheets':
-                            $components['items'][] = formatFocusesData($layout, $context['post'], $context['woody_components']);
-                        break;
-                        case 'geo_map':
-                            $components['items'][] = formatGeomapData($layout, $context['woody_components']);
-                        break;
-                        case 'content_list':
-                            $components['items'][] = formatFullContentList($layout, $context['post'], $context['woody_components']);
-                        break;
-                        default:
-                            if ($layout['acf_fc_layout'] == 'playlist_bloc') {
-                                $playlist_conf_id = $layout['playlist_conf_id'];
-                            }
-                            if ($layout['acf_fc_layout'] == 'call_to_action' || $layout['acf_fc_layout'] == 'links' || $layout['acf_fc_layout'] == 'gallery') {
-                                $layout['modal_id'] = $layout['acf_fc_layout'] . '_' . uniqid();
-                            }
-                            if ($layout['acf_fc_layout'] == 'tabs_group') {
-                                $layout['tabs'] = nestedGridsComponents($layout['tabs'], 'tab_woody_tpl', 'tabs');
-                            }
-                             if ($layout['acf_fc_layout'] == 'slides_group') {
-                                 $layout['slides'] = nestedGridsComponents($layout['slides'], 'slide_woody_tpl');
-                             }
-                             if ($layout['acf_fc_layout'] == 'gallery') {
-                                 foreach ($layout['gallery_items'] as $key => $media_item) {
-                                     $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
-                                 }
-                             }
-                             if ($layout['acf_fc_layout'] == 'socialwall') {
-                                 $layout['gallery_items'] = [];
-                                 if ($layout['socialwall_type'] == 'manual') {
-                                     foreach ($layout['socialwall_manual'] as $key => $media_item) {
-                                         // On ajoute une entrée "gallery_items" pour être compatible avec le tpl woody
-                                         $layout['gallery_items'][] = $media_item;
-                                         $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
-                                     }
-                                 } elseif ($layout['socialwall_type'] == 'auto') {
-                                     // On récupère les images en fonction des termes sélectionnés
-                                     $layout['gallery_items'] = (!empty($layout['socialwall_auto'])) ? getAttachmentsByTerms('attachment_hashtags', $layout['socialwall_auto']) : '';
-                                     if (!empty($layout['gallery_items'])) {
-                                         foreach ($layout['gallery_items'] as $key => $media_item) {
-                                             $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
-                                         }
-                                     }
-                                 }
-                             }
-
-                            $components['items'][] = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
-                    }
+                    $components['items'][] = getComponentItem($layout, $context);
                 }
 
                 if (!empty($section['section_woody_tpl'])) {

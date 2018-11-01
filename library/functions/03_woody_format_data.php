@@ -1,5 +1,64 @@
 <?php
 
+function getComponentItem($layout, $context)
+{
+    $return = '';
+
+    switch ($layout['acf_fc_layout']) {
+        case 'manual_focus':
+        case 'auto_focus':
+        case 'auto_focus_sheets':
+            $return = formatFocusesData($layout, $context['post'], $context['woody_components']);
+        break;
+        case 'geo_map':
+            $return = formatGeomapData($layout, $context['woody_components']);
+        break;
+        case 'content_list':
+            $return = formatFullContentList($layout, $context['post'], $context['woody_components']);
+        break;
+        default:
+            if ($layout['acf_fc_layout'] == 'playlist_bloc') {
+                $playlist_conf_id = $layout['playlist_conf_id'];
+            }
+            if ($layout['acf_fc_layout'] == 'call_to_action' || $layout['acf_fc_layout'] == 'links' || $layout['acf_fc_layout'] == 'gallery') {
+                $layout['modal_id'] = $layout['acf_fc_layout'] . '_' . uniqid();
+            }
+            if ($layout['acf_fc_layout'] == 'tabs_group') {
+                $layout['tabs'] = nestedGridsComponents($layout['tabs'], 'tab_woody_tpl', 'tabs', $context);
+            }
+            if ($layout['acf_fc_layout'] == 'slides_group') {
+                $layout['slides'] = nestedGridsComponents($layout['slides'], 'slide_woody_tpl', $context);
+            }
+            if ($layout['acf_fc_layout'] == 'gallery') {
+                foreach ($layout['gallery_items'] as $key => $media_item) {
+                    $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
+                }
+            }
+            if ($layout['acf_fc_layout'] == 'socialwall') {
+                $layout['gallery_items'] = [];
+                if ($layout['socialwall_type'] == 'manual') {
+                    foreach ($layout['socialwall_manual'] as $key => $media_item) {
+                        // On ajoute une entrée "gallery_items" pour être compatible avec le tpl woody
+                        $layout['gallery_items'][] = $media_item;
+                        $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
+                    }
+                } elseif ($layout['socialwall_type'] == 'auto') {
+                    // On récupère les images en fonction des termes sélectionnés
+                    $layout['gallery_items'] = (!empty($layout['socialwall_auto'])) ? getAttachmentsByTerms('attachment_hashtags', $layout['socialwall_auto']) : '';
+                    if (!empty($layout['gallery_items'])) {
+                        foreach ($layout['gallery_items'] as $key => $media_item) {
+                            $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
+                        }
+                    }
+                }
+            }
+
+            $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+    }
+
+    return $return;
+}
+
 /**
  *
  * Nom : getAutoFocus_data
@@ -719,43 +778,28 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
  * @return   scope - Un DOM Html
  *
  */
-function nestedGridsComponents($scope, $gridTplField, $uniqIid_prefix = '')
+function nestedGridsComponents($scope, $gridTplField, $uniqIid_prefix = '', $context)
 {
-    $post = get_post();
-    if (!empty($post)) {
-        $woodyTwigsPaths = getWoodyTwigPaths();
-        foreach ($scope as $key => $grid) {
-            $grid_content = [];
-            if (!empty($uniqIid_prefix) && is_numeric($key)) {
-                $scope[$key]['el_id'] = $uniqIid_prefix . '-' . uniqid();
+    $woodyTwigsPaths = getWoodyTwigPaths();
+    foreach ($scope as $grid_key => $grid) {
+        $grid_content = [];
+        if (!empty($uniqIid_prefix) && is_numeric($grid_key)) {
+            $scope[$grid_key]['el_id'] = $uniqIid_prefix . '-' . uniqid();
+        }
+
+        // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
+        if (!empty($grid['light_section_content'])) {
+            foreach ($grid['light_section_content'] as $layout) {
+                $grid_content['items'][] = getComponentItem($layout, $context);
             }
 
-            // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
-            if (!empty($grid['light_section_content'])) {
-                foreach ($grid['light_section_content'] as $layout) {
-                    switch ($layout['acf_fc_layout']) {
-                    case 'auto_focus':
-                    case 'manual_focus':
-                        $grid_content['items'][] = formatFocusesData($layout, $post->ID, $woodyTwigsPaths);
-                    break;
-                    default:
-                    if ($layout['acf_fc_layout'] == 'call_to_action') {
-                        if (!empty($layout['cta_button_group']['add_modal'])) {
-                            $layout['modal_id'] = 'cta-' . uniqid();
-                        }
-                    }
-                }
-
-                    $grid_content['items'][] = Timber::compile($woodyTwigsPaths[$layout['woody_tpl']], $layout);
-                }
-
-                // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
-                $scope[$key]['light_section_content'] = Timber::compile($woodyTwigsPaths[$grid[$gridTplField]], $grid_content);
-            }
+            // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
+            $scope[$grid_key]['light_section_content'] = Timber::compile($woodyTwigsPaths[$grid[$gridTplField]], $grid_content);
         }
-        if (!empty($uniqIid_prefix)) {
-            $scope['group_id'] = $uniqIid_prefix . '-' . uniqid();
-        }
+    }
+
+    if (!empty($uniqIid_prefix)) {
+        $scope['group_id'] = $uniqIid_prefix . '-' . uniqid();
     }
 
     return $scope;
