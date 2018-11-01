@@ -58,7 +58,7 @@ class WoodyTheme_Images
 
         // Ratio 3:1 => Pano C
         add_image_size('ratio_3_1_small', 360, 120, true);
-        add_image_size('ratio_3_1_medium', 640, 213, true);
+        add_image_size('ratio_3_1_medium', 640, 214, true);
         add_image_size('ratio_3_1_large', 1200, 400, true);
         add_image_size('ratio_3_1', 1920, 640, true);
 
