@@ -183,8 +183,6 @@ function getAutoFocus_data($the_post, $query_form)
         'orderby' => $orderby
     ];
 
-    // rcd($the_query, true);
-
     $the_query['tax_query'] = (!empty($tax_query)) ? $tax_query : '' ;
 
     // Si Hiérarchie = Enfants directs de la page
@@ -225,8 +223,6 @@ function getAutoFocus_data($the_post, $query_form)
         }
     }
 
-    // rcd($the_items, true);
-
     return $the_items;
 }
 
@@ -257,7 +253,7 @@ function getManualFocus_data($layout)
             if ($item['content_selection']->post_type == 'page') {
                 $post_preview = getPagePreview($layout, $item['content_selection']);
             } elseif ($item['content_selection']->post_type == 'touristic_sheet') {
-                $post_preview = getTouristicSheetPreview($item['content_selection']->custom['touristic_sheet_id'], $item);
+                $post_preview = getTouristicSheetPreview($layout, $item['content_selection']->custom['touristic_sheet_id'], $item);
             }
 
             $the_items['items'][$key] = (!empty($post_preview)) ?  $post_preview : '';
@@ -282,7 +278,7 @@ function getAutoFocusSheetData($confId)
     $playlist = apply_filters('wp_woody_hawwwai_playlist_render', $confId, 'fr', array(), 'json');
     if (!empty($playlist['items'])) {
         foreach ($playlist['items'] as $key => $item) {
-            $items['items'][] = getTouristicSheetPreview($item['sheetId'], '');
+            $items['items'][] = getTouristicSheetPreview($layout = NULL, $item['sheetId'], '');
         }
     }
 
@@ -512,12 +508,13 @@ function getCustomPreview($item)
  * Nom : getTouristicSheetPreview
  * Auteur : Benoit Bouchaud
  * Return : Retourne les données d'une preview basée sur des champs custom
+ * @param    layout Le wrapper du champ de mise en avant
  * @param    sheet_id - Un tableau de données
  * @return   data - Un tableau de données
  *
  */
 
-function getTouristicSheetPreview($sheet_id, $sheet_wp)
+function getTouristicSheetPreview($layout = NULL, $sheet_id, $sheet_wp)
 {
     $data = [];
     //TODO: remplacer la langue 'fr' par la variable lang du post
@@ -526,9 +523,6 @@ function getTouristicSheetPreview($sheet_id, $sheet_wp)
         foreach ($sheet_data['items'] as $key => $item) {
             $data = [
                 'title' => (!empty($item['title'])) ? $item['title'] : '',
-                'sheet_type' => (!empty($item['type'])) ? $item['type'] : '',
-                'description' => (!empty($item['desc'])) ? $item['desc'] : '',
-                'sheet_town' => (!empty($item['town'])) ? $item['town'] : '',
                 'img' => [
                     'resizer' => true,
                     'url' => (!empty($item['img']['url'])) ? $item['img']['url']['manual'] : '',
@@ -540,6 +534,18 @@ function getTouristicSheetPreview($sheet_id, $sheet_wp)
                 ]
             ];
 
+            if(is_array($layout['display_elements'])) {
+                if (in_array('sheet_type', $layout['display_elements'])) {
+                    $data['sheet_type'] = (!empty($item['type'])) ? $item['type'] : '';
+                }
+                if (in_array('description', $layout['display_elements'])) {
+                    $data['description'] = (!empty($item['desc'])) ? $item['desc'] : '';
+                }
+                if (in_array('sheet_town', $layout['display_elements'])) {
+                   $data['sheet_town'] = (!empty($item['town'])) ? $item['town'] : '';
+                }
+            }
+
             $data['location'] = [];
             $data['location']['lat'] = (!empty($item['gps'])) ? $item['gps']['latitude'] : '';
             $data['location']['lng'] = (!empty($item['gps'])) ? $item['gps']['longitude'] : '';
@@ -549,15 +555,22 @@ function getTouristicSheetPreview($sheet_id, $sheet_wp)
                 for ($i=0; $i <= $item['ratings'][0]['value']; $i++) {
                     $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
                 }
-                $data['sheet_rating'] = implode('', $rating);
+                if (in_array('sheet_rating', $layout['display_elements'])) {
+                    $data['sheet_rating'] = implode('', $rating);
+                }
             }
 
             if (!empty($item['dates'])) {
                 $data['date'] = $item['dates'][0];
             }
             $data['date'] = (!empty($item['dates'])) ? $item['dates'][0] : '';
-            $data['sheet_itinerary']['locomotions'] = (!empty($item['locomotions'])) ? $item['locomotions'] : '';
-            $data['sheet_itinerary']['length'] = (!empty($item['itineraryLength'])) ? $item['itineraryLength']['value'] . $item['itineraryLength']['unit'] : '';
+
+            if(is_array($layout['display_elements'])) {
+                if (in_array('sheet_itinerary', $layout['display_elements'])) {
+                    $data['sheet_itinerary']['locomotions'] = (!empty($item['locomotions'])) ? $item['locomotions'] : '';
+                    $data['sheet_itinerary']['length'] = (!empty($item['itineraryLength'])) ? $item['itineraryLength']['value'] . $item['itineraryLength']['unit'] : '';
+                }
+            }
         }
     }
 
