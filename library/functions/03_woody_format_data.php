@@ -555,8 +555,10 @@ function getTouristicSheetPreview($layout = NULL, $sheet_id, $sheet_wp)
                 for ($i=0; $i <= $item['ratings'][0]['value']; $i++) {
                     $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
                 }
-                if (in_array('sheet_rating', $layout['display_elements'])) {
-                    $data['sheet_rating'] = implode('', $rating);
+                if(is_array($layout['display_elements'])) {
+                    if (in_array('sheet_rating', $layout['display_elements'])) {
+                        $data['sheet_rating'] = implode('', $rating);
+                    }
                 }
             }
 
