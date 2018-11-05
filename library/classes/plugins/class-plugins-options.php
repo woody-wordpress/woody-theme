@@ -261,15 +261,42 @@ class WoodyTheme_Plugins_Options
         ];
         $this->updateOption('permalink-manager', $permalink_options);
 
+        // Polylang
+        $polylang = [
+            'rewrite' => 1,
+            'hide_default' => 1,
+            'force_lang' => 1,
+            'redirect_lang' => 0,
+            'media_support' => 1,
+            'uninstall' => 0,
+            'sync' => [
+                'taxonomies',
+            ],
+            'post_types' => [
+                'touristic_sheet',
+                'short_link',
+            ],
+            'taxonomies' => [
+                'themes',
+                'places',
+                'seasons',
+            ],
+            'media' => [
+                'duplicate' => 1,
+            ],
+        ];
+        $this->updateOption('polylang', $polylang);
+
+        // Redirections
         $redirection_options = [
             'support' => false,
             'monitor_post' => 2,
             'monitor_types' => [
-                0 => 'post',
-                1 => 'page',
-                2 => 'touristic_sheet',
-                3 => 'short_link',
-                4 => 'trash',
+                'post',
+                'page',
+                'touristic_sheet',
+                'short_link',
+                'trash',
             ],
             'associated_redirect' => '',
             'auto_target' => '',
