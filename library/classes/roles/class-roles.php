@@ -18,6 +18,9 @@ class WoodyTheme_Roles
         add_action('woody_theme_update', [$this, 'addRoles']);
         add_action('woody_theme_update', [$this, 'addCapabilities']);
         add_filter('auth_cookie_expiration', [$this, 'authCookieExpirationFilter'], 10, 3);
+        // add_filter('redirection_role', function ($role) {
+        //     return 'editor';
+        // });
     }
 
     public function addRoles()
