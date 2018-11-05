@@ -35,7 +35,7 @@ class WoodyTheme_ACF_Counter
             // Référence : https://codex.wordpress.org/Class_Reference/WP_Query
             if (!empty($params['focused_content_type'])) {
                 $tax_query = [
-                'relation' => 'AND',
+                    'relation' => 'AND',
                     'page_type' => [
                         'taxonomy' => 'page_type',
                         'terms' => $params['focused_content_type'],
@@ -52,7 +52,7 @@ class WoodyTheme_ACF_Counter
 
                 // On récupère la relation choisie (ET/OU) entre les termes
                 // et on génère un tableau de term_id pour chaque taxonomie
-                $tax_query['custom_tax']['relation'] = (!empty($params['focused_taxonomy_terms_andor'])) ? $params['focused_taxonomy_terms_andor'] : 'OR';
+                $tax_query['custom_tax']['relation'] = (!empty($params['focused_taxonomy_terms_andor'])) ? current($params['focused_taxonomy_terms_andor']) : 'OR';
                 foreach ($params['focused_taxonomy_terms'] as $focused_term_key => $focused_term) {
                     $term = get_term($focused_term);
                     $custom_tax[$term->taxonomy][] = $focused_term;
