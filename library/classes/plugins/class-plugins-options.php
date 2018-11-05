@@ -262,9 +262,25 @@ class WoodyTheme_Plugins_Options
         $this->updateOption('permalink-manager', $permalink_options);
 
         $redirection_options = [
-            'expire_404' => '-1',
-            'expire_redirect' => '-1',
+            'support' => false,
+            'monitor_post' => 2,
+            'monitor_types' => [
+                0 => 'post',
+                1 => 'page',
+                2 => 'touristic_sheet',
+                3 => 'short_link',
+                4 => 'trash',
+            ],
+            'associated_redirect' => '',
+            'auto_target' => '',
+            'expire_redirect' => -1,
+            'expire_404' => -1,
+            'newsletter' => false,
+            'redirect_cache' => 1,
             'ip_logging' => 0,
+            'last_group_id' => 2,
+            'rest_api' => 0,
+            'https' => false
         ];
         $this->updateOption('redirection_options', $redirection_options);
 
