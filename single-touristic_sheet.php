@@ -10,6 +10,14 @@
 $context = Timber::get_context();
 $context['post'] = new TimberPost();
 
+function removeType(&$title)
+{
+    // replace bordereau
+}
+
+// removeType($context['title']);
+
+
 // $woodyComponents = get_transient('woody_components');
 // if (empty($woodyComponents)) {
 //     $woodyComponents = Woody::getComponents();

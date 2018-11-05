@@ -205,6 +205,7 @@ class WoodyTheme_Enqueue_Assets
 
             wp_enqueue_script('slick', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', array('jquery'), '', true);
             wp_enqueue_script('match8', 'https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js', array('jquery'), '', true);
+            wp_enqueue_script('fresco', $apirender_base_uri.'/assets/scripts/lib/fresco.js', array('jquery'), '', true);
             wp_enqueue_script('sheet_item', $apirender_base_uri.'/assets/scripts/raccourci/sheet_item.'. $jsModeSuffix .'.js', array('match8'), '', true);
         }
 
