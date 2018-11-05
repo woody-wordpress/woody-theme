@@ -15,9 +15,6 @@ $('#post').each(function() {
     // On ferme toutes les metaboxes ACF
     // $('.acf-postbox').addClass('closed');
 
-    // On masque les metaboxes de taxonomies dans l'edition des posts (on les rajoutera ensuite dans des champs ACF)
-    // $('[id^="tagsdiv-"').hide();
-
     // On referme les metaboxes par défaut sur l'édition d'un post
     // $('#pageparentdiv, #revisionsdiv, #wpseo_meta, #members-cp').addClass('closed');
 
@@ -88,42 +85,65 @@ $('#post').each(function() {
     // **
     // Update tpl-choice-wrapper classes for autofocus layout
     // **
+    var getAutoFocusData_AJAX = null;
     var getAutoFocusData = function($parent) {
         var query_params = {};
-        query_params['current_post'] = $('#post_ID').val();
 
+        // Append Message
+        var $message_wrapper = $parent.find('.acf-tab-wrap');
+        if ($message_wrapper.find('.woody-count-message').length == 0) {
+            var $message = $('<div>').append('<div class="woody-count-message"> \
+                <span class="loading"><small>Chargement du nombre d\'éléments mis en avant ...</small></span> \
+                <span class="success" style="display:none;"><small>Nombre d\'éléments mis en avant :</small><span class="count"></span></span> \
+                <span class="alert" style="display:none;"><small>Aucune mise en avant ne correspond à votre sélection. Merci de modifier vos paramètres</small></span> \
+                </div>').children();
+            $message_wrapper.append($message);
+        } else {
+            var $message = $message_wrapper.find('.woody-count-message');
+        }
+
+        $message
+            .find('.loading').show().end()
+            .find('.success').hide().end()
+            .find('.alert').hide().end();
+
+        // Create query
+        query_params['current_post'] = $('#post_ID').val();
         $parent.find('input:checked, input[type="number"]').each(function() {
             var $this = $(this);
             var name = $this.parents('.acf-field').data('name');
             if (!query_params[name]) query_params[name] = [];
             query_params[name].push($this.val());
         });
-
         $parent.find('select').each(function() {
             var $this = $(this);
             var name = $this.parents('.acf-field').data('name');
             query_params[name] = $this.val();
         });
 
-        $.ajax({
+        // Ajax
+        if (getAutoFocusData_AJAX !== null) {
+            getAutoFocusData_AJAX.abort();
+        }
+
+        getAutoFocusData_AJAX = $.ajax({
             type: 'POST',
             url: '/wp-json/woody/autofocus-count',
             data: query_params,
             success: function(data) {
                 fitChoiceAction($parent, data);
-                var message_wrapper = $parent.find('.acf-tab-wrap');
-                var $count_message = $parent.find('.woody-count-message');
+
                 if (data === 0) {
-                    var the_message = '<div class="woody-count-message"><span class="count alert"><small>Aucune mise en avant ne correspond à votre sélection. Merci de modifier vos paramètres</small></span></div>';
+                    $message
+                        .find('.loading').hide().end()
+                        .find('.success').hide().end()
+                        .find('.alert').show().end();
                 } else {
-                    var the_message = '<div class="woody-count-message"><small>Nombre d\'éléments mis en avant :</small><span class="count">' + data + '</span></div>';
+                    $message
+                        .find('.loading').hide().end()
+                        .find('.success').show().find('.count').html(data).end().end()
+                        .find('.alert').hide().end();
                 }
-                if ($count_message.length == 0) {
-                    message_wrapper.append(the_message);
-                } else {
-                    $count_message.html(the_message);
-                }
-                return data;
             },
             error: function() {
                 console.log('Endpoint doesn\'t exists');
