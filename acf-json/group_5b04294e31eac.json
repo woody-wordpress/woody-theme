@@ -1,24 +1,6 @@
 {
     "key": "group_5b04294e31eac",
     "title": "Titre + texte",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Tite + texte, utilisé en clône dans d'autres groupes (Ex : FAQ)",
-    "modified": 1536232428,
     "fields": [
         {
             "key": "field_5b0429518062b",
@@ -43,7 +25,7 @@
             "key": "field_5b04295c8062c",
             "label": "Texte",
             "name": "text",
-            "type": "textarea",
+            "type": "wysiwyg",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -53,10 +35,28 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
-            "maxlength": "",
-            "rows": 3,
-            "new_lines": "wpautop"
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 1
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Tite + texte, utilisé en clône dans d'autres groupes (Ex : FAQ)",
+    "modified": 1541453478
 }
