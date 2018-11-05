@@ -27,7 +27,7 @@ class WoodyTheme_ACF_Counter
     public function countAutofocusEl(\WP_REST_Request $request)
     {
         $params = $request->get_params();
-        $transient_key = 'woodydebug_afc_' . md5(serialize($params));
+        $transient_key = 'woody_afc_' . md5(serialize($params));
         if (false === ($focused_posts_count = get_transient($transient_key))) {
             $tax_query = [];
 
@@ -102,7 +102,7 @@ class WoodyTheme_ACF_Counter
             // It wasn't there, so regenerate the data and save the transient
             $focused_posts = new WP_Query($the_query);
             $focused_posts_count = $focused_posts->post_count;
-            set_transient($transient_key, $focused_posts_count, 30);
+            set_transient($transient_key, $focused_posts_count, 2*60);
         }
 
         return $focused_posts_count;
