@@ -99,6 +99,12 @@ $('#post').each(function() {
             query_params[name].push($this.val());
         });
 
+        $parent.find('select').each(function() {
+            var $this = $(this);
+            var name = $this.parents('.acf-field').data('name');
+            query_params[name] = $this.val();
+        });
+
         $.ajax({
             type: 'POST',
             url: '/wp-json/woody/autofocus-count',
@@ -129,15 +135,13 @@ $('#post').each(function() {
         var $parent = field.$el.parent();
         var $bigparent = field.parent().$el;
 
-        //console.warn($bigparent);
-
         $parent.each(function() {
             var $this = $(this);
             toggleChoiceAction($bigparent);
 
             getAutoFocusData($this);
 
-            $this.find('input[type="checkbox"], input[type="radio"]').change(function() {
+            $this.find('input[type="checkbox"], input[type="radio"], select').on('change', function() {
                 getAutoFocusData($this);
             });
 
@@ -150,10 +154,9 @@ $('#post').each(function() {
 
     acf.addAction('ready_field/key=field_5b27890c84ed3', getAutoFocusQuery);
     acf.addAction('append_field/key=field_5b27890c84ed3', getAutoFocusQuery);
-    //acf.addAction('remove_field/key=field_5b27890c84ed3', getAutoFocusQuery);
-
 });
 
+// TODO refactoring
 $('#acf-group_5bd0227a1bda3').each(function() {
     var getShortLinkData = function(field) {
         var post_id = field.val();
@@ -187,5 +190,6 @@ $('#acf-group_5bd0227a1bda3').each(function() {
         $('#acf-field_5bd060e1dde02').attr('value', '');
         getShortLinkData(short_link_url_field);
     });
+
     acf.addAction('ready_field/key=field_5bd022eddaa51', getShortLinkData);
 });

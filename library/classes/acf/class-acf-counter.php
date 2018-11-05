@@ -27,7 +27,7 @@ class WoodyTheme_ACF_Counter
     public function countAutofocusEl(\WP_REST_Request $request)
     {
         $params = $request->get_params();
-        $transient_key = 'woody_afc_' . md5(serialize($params));
+        $transient_key = 'woodydebug_afc_' . md5(serialize($params));
         if (false === ($focused_posts_count = get_transient($transient_key))) {
             $tax_query = [];
 
@@ -53,9 +53,11 @@ class WoodyTheme_ACF_Counter
                 // On récupère la relation choisie (ET/OU) entre les termes
                 // et on génère un tableau de term_id pour chaque taxonomie
                 $tax_query['custom_tax']['relation'] = (!empty($params['focused_taxonomy_terms_andor'])) ? current($params['focused_taxonomy_terms_andor']) : 'OR';
-                foreach ($params['focused_taxonomy_terms'] as $focused_term_key => $focused_term) {
-                    $term = get_term($focused_term);
-                    $custom_tax[$term->taxonomy][] = $focused_term;
+
+                // Get terms
+                foreach ($params['focused_taxonomy_terms'] as $focused_term_id) {
+                    $focused_term = get_term($focused_term_id);
+                    $custom_tax[$focused_term->taxonomy][] = $focused_term_id;
                 }
                 foreach ($custom_tax as $taxo => $terms) {
                     $tax_query['custom_tax'][] = array(
@@ -67,18 +69,20 @@ class WoodyTheme_ACF_Counter
                 }
             }
 
+            \PC::debug($tax_query);
+
             // On créé la wp_query en fonction des choix faits dans le backoffice
             // NB : si aucun choix n'a été fait, on remonte automatiquement tous les contenus de type page
             $the_query = [
                 'post_type' => (!empty($params['focused_post_type'])) ? $params['focused_post_type'] : 'page',
                 'tax_query' => $tax_query,
                 'post_status' => 'publish',
-                'posts_per_page' => (!empty($params['focused_count'])) ? intval($params['focused_count'][0]) : 16
+                'posts_per_page' => (!empty($params['focused_count'])) ? intval(current($params['focused_count'])) : 16
             ];
 
-            if ($params['focused_hierarchy'][0] == 'child_of') {
+            if (current($params['focused_hierarchy']) == 'child_of') {
                 $the_query['post_parent'] = $params['current_post'];
-            } elseif ($params['focused_hierarchy'][0] == 'brother_of') {
+            } elseif (current($params['focused_hierarchy']) == 'brother_of') {
                 // Si Hiérarchie = Enfants directs de la page
                 // On passe le post ID dans le paramètre post_parent de la query
                 $post_parent = wp_get_post_parent_id($params['current_post']);
@@ -88,7 +92,7 @@ class WoodyTheme_ACF_Counter
             // It wasn't there, so regenerate the data and save the transient
             $focused_posts = new WP_Query($the_query);
             $focused_posts_count = $focused_posts->post_count;
-            set_transient($transient_key, $focused_posts_count, 2*60);
+            set_transient($transient_key, $focused_posts_count, 30);
         }
 
         return $focused_posts_count;
