@@ -30,8 +30,10 @@ function getComponentItem($layout, $context)
                 $layout['slides'] = nestedGridsComponents($layout['slides'], 'slide_woody_tpl', $context);
             }
             if ($layout['acf_fc_layout'] == 'gallery') {
-                foreach ($layout['gallery_items'] as $key => $media_item) {
-                    $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
+                if(!empty($layout['gallery_items'])){
+                    foreach ($layout['gallery_items'] as $key => $media_item) {
+                        $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
+                    }
                 }
             }
             if ($layout['acf_fc_layout'] == 'socialwall') {
