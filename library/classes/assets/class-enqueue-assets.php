@@ -190,12 +190,11 @@ class WoodyTheme_Enqueue_Assets
 
         // Sheet libraries
         elseif ($isTouristicSheet) {
-            // CSS_Libraries (todo replace when possible)
+            // CSS Libraries (todo replace when possible)
             wp_enqueue_style('rc_font_css', 'https://api.tourism-system.com/static/assets/fonts/raccourci-font.css', array(), '');
             wp_enqueue_style('leaflet_css', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.min.css', array(), '');
             wp_enqueue_style('slick_css', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css', array(), '');
-
-
+            wp_enqueue_style('fresco_css', 'https://api.tourism-system.com/render/assets/styles/lib/fresco.css', array(), '');
             wp_enqueue_style('bootstrap_css', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css', array(), '');
 
             // JS Libraries
