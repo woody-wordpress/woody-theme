@@ -335,6 +335,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     $the_list = [];
     $the_list['permalink'] = get_permalink($current_post->ID);
     $the_list['uniqid'] = $layout['uniqid'];
+    $the_list['has_map'] = false;
 
     $the_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields']);
 
@@ -356,6 +357,8 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                 $the_list['filters'][$key]['minmax'] = getMinMaxWoodyPostFieldValues($the_items['items'], 'trip', 'the_price', 'price');
             } elseif ($filter['list_filter_type'] == 'duration') {
                 $the_list['filters'][$key]['minmax'] = getMinMaxWoodyPostFieldValues($the_items['items'], 'trip', 'the_duration', 'count_days');
+            } elseif ($filter['list_filter_type'] == 'map'){
+                $the_list['has_map'] = true;
             }
         }
         $the_list['filters']['button'] = (!empty($layout['the_list_filters']['filter_button'])) ? $layout['the_list_filters']['filter_button'] : '';
