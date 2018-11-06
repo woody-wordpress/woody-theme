@@ -120,11 +120,16 @@ function getAutoFocus_data($the_post, $query_form)
             if (strpos($filter_key, 'taxonomy_terms') !== false) {
                 $tax_query[$filter_key] = [];
                 $tax_query[$filter_key]['relation'] = $filter['andor'];
-
-                foreach ($filter['terms'] as $focused_term) {
-                    $term = get_term($focused_term);
-                    $filter_tax[$filter_key][$term->taxonomy][] = $focused_term;
+                if(!is_array($filter['terms'])){
+                    $term = get_term($filter['terms']);
+                    $filter_tax[$filter_key][$term->taxonomy][] = $filter['terms'];
+                } else {
+                    foreach ($filter['terms'] as $focused_term) {
+                        $term = get_term($focused_term);
+                        $filter_tax[$filter_key][$term->taxonomy][] = $focused_term;
+                    }
                 }
+
                 foreach ($filter_tax[$filter_key] as $taxo => $terms) {
                     $tax_query[$filter_key][] = array(
                         'taxonomy' => $taxo,
@@ -389,10 +394,18 @@ function formatFullContentList($layout, $current_post, $twigPaths)
 
                 // Update filter value on load
                 if ($the_list['filters'][$filter_index]['list_filter_type'] == 'taxonomy' || $the_list['filters'][$filter_index]['list_filter_type'] == 'custom_terms') {
-                    foreach ($param as $term_key => $term) {
+                    if(!is_array($param)){
                         foreach ($the_list['filters'][$filter_index]['list_filter_custom_terms'] as $filter_term_key => $filter_term) {
-                            if ($filter_term['value'] == $term) {
+                            if ($filter_term['value'] == $param) {
                                 $the_list['filters'][$filter_index]['list_filter_custom_terms'][$filter_term_key]['checked'] = true;
+                            }
+                        }
+                    } else {
+                        foreach ($param as $term_key => $term) {
+                            foreach ($the_list['filters'][$filter_index]['list_filter_custom_terms'] as $filter_term_key => $filter_term) {
+                                if ($filter_term['value'] == $term) {
+                                    $the_list['filters'][$filter_index]['list_filter_custom_terms'][$filter_term_key]['checked'] = true;
+                                }
                             }
                         }
                     }
