@@ -35,7 +35,7 @@ class WoodyTheme_ACF_Counter
             // Référence : https://codex.wordpress.org/Class_Reference/WP_Query
             if (!empty($params['focused_content_type'])) {
                 $tax_query = [
-                'relation' => 'AND',
+                    'relation' => 'AND',
                     'page_type' => [
                         'taxonomy' => 'page_type',
                         'terms' => $params['focused_content_type'],
@@ -52,18 +52,32 @@ class WoodyTheme_ACF_Counter
 
                 // On récupère la relation choisie (ET/OU) entre les termes
                 // et on génère un tableau de term_id pour chaque taxonomie
-                $tax_query['custom_tax']['relation'] = (!empty($params['focused_taxonomy_terms_andor'])) ? $params['focused_taxonomy_terms_andor'] : 'OR';
-                foreach ($params['focused_taxonomy_terms'] as $focused_term_key => $focused_term) {
-                    $term = get_term($focused_term);
-                    $custom_tax[$term->taxonomy][] = $focused_term;
-                }
-                foreach ($custom_tax as $taxo => $terms) {
-                    $tax_query['custom_tax'][] = array(
-                        'taxonomy' => $taxo,
-                        'terms' => $terms,
-                        'field' => 'taxonomy_term_id',
-                        'operator' => 'IN'
-                    );
+                $focused_taxonomy_terms_andor = (!empty($params['focused_taxonomy_terms_andor'])) ? current($params['focused_taxonomy_terms_andor']) : 'OR';
+                if ($focused_taxonomy_terms_andor == 'OR') {
+                    $tax_query['custom_tax']['relation'] = 'OR';
+                    // Get terms
+                    foreach ($params['focused_taxonomy_terms'] as $focused_term_id) {
+                        $focused_term = get_term($focused_term_id);
+                        $custom_tax[$focused_term->taxonomy][] = $focused_term_id;
+                    }
+                    foreach ($custom_tax as $taxo => $terms) {
+                        $tax_query['custom_tax'][] = array(
+                            'taxonomy' => $taxo,
+                            'terms' => $terms,
+                            'field' => 'taxonomy_term_id',
+                            'operator' => 'IN'
+                        );
+                    }
+                } else {
+                    foreach ($params['focused_taxonomy_terms'] as $focused_term_id) {
+                        $focused_term = get_term($focused_term_id);
+                        $tax_query['custom_tax_'.$focused_term_id] = array(
+                            'taxonomy' => $focused_term->taxonomy,
+                            'terms' => $focused_term_id,
+                            'field' => 'taxonomy_term_id',
+                            'operator' => 'IN'
+                        );
+                    }
                 }
             }
 
@@ -73,12 +87,12 @@ class WoodyTheme_ACF_Counter
                 'post_type' => (!empty($params['focused_post_type'])) ? $params['focused_post_type'] : 'page',
                 'tax_query' => $tax_query,
                 'post_status' => 'publish',
-                'posts_per_page' => (!empty($params['focused_count'])) ? intval($params['focused_count'][0]) : 16
+                'posts_per_page' => (!empty($params['focused_count'])) ? intval(current($params['focused_count'])) : 16
             ];
 
-            if ($params['focused_hierarchy'][0] == 'child_of') {
+            if (current($params['focused_hierarchy']) == 'child_of') {
                 $the_query['post_parent'] = $params['current_post'];
-            } elseif ($params['focused_hierarchy'][0] == 'brother_of') {
+            } elseif (current($params['focused_hierarchy']) == 'brother_of') {
                 // Si Hiérarchie = Enfants directs de la page
                 // On passe le post ID dans le paramètre post_parent de la query
                 $post_parent = wp_get_post_parent_id($params['current_post']);

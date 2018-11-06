@@ -379,7 +379,11 @@ class WoodyTheme_Images
         // Set filename
         $cropped_image_filename = $img_path_parts['filename'] . '-' . $size['width'] . 'x' . $size['height'] . '.' . $img_path_parts['extension'];
         $cropped_image_path = $img_path_parts['dirname'] . '/' . $cropped_image_filename;
-        unlink($cropped_image_path);
+
+        // Remove image before recreate
+        if (file_exists($cropped_image_path)) {
+            unlink($cropped_image_path);
+        }
 
         // Crop
         $img_editor = wp_get_image_editor($img_path);

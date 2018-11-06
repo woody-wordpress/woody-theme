@@ -43,6 +43,11 @@ class WoodyTheme_Plugins_Options
         update_option('permalink_structure', '/%postname%/', '', 'yes');
         update_option('permalink-manager-permastructs', ['post_types' => ['touristic_sheet' => '']], '', 'yes');
 
+        // Force Disable indexation
+        if (WP_ENV != 'prod') {
+            update_option('blog_public', false, '', 'yes');
+        }
+
         // SSL Insecure Content Fixer
         $ssl_insecure_content_fixer = [
             'fix_level' => (WP_ENV == 'dev') ? 'off' : 'simple',
@@ -256,10 +261,53 @@ class WoodyTheme_Plugins_Options
         ];
         $this->updateOption('permalink-manager', $permalink_options);
 
+        // Polylang
+        $polylang = [
+            'rewrite' => 1,
+            'hide_default' => 1,
+            'force_lang' => 1,
+            'redirect_lang' => 0,
+            'media_support' => 1,
+            'uninstall' => 0,
+            'sync' => [
+                'taxonomies',
+            ],
+            'post_types' => [
+                'touristic_sheet',
+                'short_link',
+            ],
+            'taxonomies' => [
+                'themes',
+                'places',
+                'seasons',
+            ],
+            'media' => [
+                'duplicate' => 1,
+            ],
+        ];
+        $this->updateOption('polylang', $polylang);
+
+        // Redirections
         $redirection_options = [
-            'expire_404' => '-1',
-            'expire_redirect' => '-1',
+            'support' => false,
+            'monitor_post' => 2,
+            'monitor_types' => [
+                'post',
+                'page',
+                'touristic_sheet',
+                'short_link',
+                'trash',
+            ],
+            'associated_redirect' => '',
+            'auto_target' => '',
+            'expire_redirect' => -1,
+            'expire_404' => -1,
+            'newsletter' => false,
+            'redirect_cache' => 1,
             'ip_logging' => 0,
+            'last_group_id' => 2,
+            'rest_api' => 0,
+            'https' => false
         ];
         $this->updateOption('redirection_options', $redirection_options);
 
