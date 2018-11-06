@@ -413,6 +413,24 @@ class WoodyTheme_Roles
                 'contributor' => true,
                 'translator' => false,
             ],
+            'Configurer les types de publications' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'Editer les types de publications' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'Supprimer les types de publications' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ]
         ];
 
         foreach ($capabilities as $capability => $roles) {

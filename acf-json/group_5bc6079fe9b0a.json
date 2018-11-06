@@ -73,7 +73,8 @@
                         "taxonomy": "Famille de tags",
                         "custom_terms": "Groupe de tags personnalisé",
                         "price": "Prix séjour",
-                        "duration": "Durée séjour"
+                        "duration": "Durée séjour",
+                        "map": "Carte"
                     },
                     "default_value": [
                         "taxonomy"
@@ -107,7 +108,7 @@
                         "id": ""
                     },
                     "choices": {
-                        "language": "Langues",
+                        "language": "Languages",
                         "post_translations": false,
                         "page_type": "Types de publications",
                         "themes": "Thématiques",
@@ -408,5 +409,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Choix des filtres pour les listes de contenu",
-    "modified": 1540911656
+    "modified": 1541434822
 }
