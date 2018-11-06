@@ -78,7 +78,7 @@ function add_sheet_headers()
     global $sheet_id;
     global $partialSheet;
 
-    header('Vary : Cookie, Accept-Encoding');
+    header('Vary: Cookie, Accept-Encoding');
     header('Cache-Control: no-cache, no-store, must-revalidate, max-age = 0');
     if (!is_admin()) {
         header('Cache-Control: public, max-age=604800, must-revalidate');
