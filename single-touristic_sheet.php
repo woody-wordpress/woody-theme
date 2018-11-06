@@ -7,25 +7,39 @@
  * @since WoodyTheme 1.0.0
  */
 
+function filter_touristic_sheet_wpseo_title($title)
+{
+    $removeList = [
+        // remove langs
+        'EN - ',
+        'IT - ',
+        'ES - ',
+        'DE - ',
+        'NL - ',
+        // remove types
+        'FMA - ',
+        'PCU - ',
+        'PNU - ',
+        'PNA - ',
+        'RES - ',
+        'DEG - ',
+        'HOT - ',
+        'ASC - ',
+        'LOI - ',
+        'VIL - ',
+        'HPA - ',
+        'HLO - ',
+        'ORG - ',
+        'ITI - ',
+    ];
+    $title = str_replace($removeList, '', $title);
+    return $title;
+}
+add_filter('wpseo_title', 'filter_touristic_sheet_wpseo_title');
+
+
 $context = Timber::get_context();
 $context['post'] = new TimberPost();
-
-function removeType(&$title)
-{
-    // replace bordereau
-}
-
-// removeType($context['title']);
-
-
-// $woodyComponents = get_transient('woody_components');
-// if (empty($woodyComponents)) {
-//     $woodyComponents = Woody::getComponents();
-//     set_transient('woody_components', $woodyComponents);
-// }
-// $context['woody_components'] = Woody::getTwigsPaths($woodyComponents);
-
-$params = [];
 
 // override Body Classes
 $context['custom_body_classes'] = 'apirender apirender-wordpress';
@@ -40,6 +54,7 @@ $sheet_lang = rc_clean_season($sheet_lang);
 // if(!empty($seasons_languages['languages_winter'][$sheet_lang])) $season = 'winter';
 // elseif(!empty($seasons_languages['languages_summer'][$sheet_lang])) $season = 'summer';
 
+$params = [];
 // Set season param if required
 if (!is_null($season)) {
     $params['season'] = $season;
