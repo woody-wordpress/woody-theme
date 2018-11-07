@@ -10,13 +10,7 @@
 function filter_touristic_sheet_wpseo_title($title)
 {
     $removeList = [
-        // remove langs
-        'EN - ',
-        'IT - ',
-        'ES - ',
-        'DE - ',
-        'NL - ',
-        // remove types
+        // remove types #1
         'FMA - ',
         'PCU - ',
         'PNU - ',
@@ -31,6 +25,12 @@ function filter_touristic_sheet_wpseo_title($title)
         'HLO - ',
         'ORG - ',
         'ITI - ',
+        // remove langs #2
+        'EN - ',
+        'IT - ',
+        'ES - ',
+        'DE - ',
+        'NL - ',
     ];
     $title = str_replace($removeList, '', $title);
     return $title;
