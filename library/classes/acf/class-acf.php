@@ -312,6 +312,7 @@ class WoodyTheme_ACF
         delete_transient('woody_icons_folder');
         delete_transient('woody_page_taxonomies_choices');
         delete_transient('woody_terms_choices');
+        flush_rewrite_rules();
     }
 
     public function cleanTermsChoicesTransient()
