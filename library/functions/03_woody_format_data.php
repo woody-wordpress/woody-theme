@@ -71,7 +71,7 @@ function getComponentItem($layout, $context)
  * @return   the_items - Un tableau de données
  *
  */
-function getAutoFocus_data($the_post, $query_form)
+function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 0)
 {
     $the_items = [];
     $tax_query = [];
@@ -179,6 +179,11 @@ function getAutoFocus_data($the_post, $query_form)
         default:
     }
 
+    if($orderby == 'rand' && $paginate == true){
+        $seed = date("dmY");
+        $orderby = 'RAND(' . $seed . ')';
+    }
+
     // On créé la wp_query en fonction des choix faits dans le backoffice
     // NB : si aucun choix n'a été fait, on remonte automatiquement tous les contenus de type page
     $the_query = [
@@ -187,8 +192,15 @@ function getAutoFocus_data($the_post, $query_form)
         'post_status' => 'publish',
         'post__not_in' => array($the_post->ID),
         'order' => $order,
-        'orderby' => $orderby
+        'orderby' => $orderby,
     ];
+
+    if($paginate == true){
+        $explode_uniqid = explode('_', $uniqid);
+        $the_page_name = 'section' . $explode_uniqid[1] . '_' . $explode_uniqid[4];
+        $the_page = (!empty($_GET[$the_page_name])) ? htmlentities(stripslashes($_GET[$the_page_name])) : '';
+        $the_query['paged'] = (!empty($the_page)) ? $the_page : 1;
+    }
 
     $the_query['tax_query'] = (!empty($tax_query)) ? $tax_query : '' ;
 
@@ -228,6 +240,7 @@ function getAutoFocus_data($the_post, $query_form)
             $data['link']['title'] = (!empty($query_form['links_label'])) ? $query_form['links_label'] : '';
             $the_items['items'][$key] = $data;
         }
+        $the_items['max_num_pages'] = $focused_posts->max_num_pages;
     }
 
     return $the_items;
@@ -343,8 +356,8 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     $the_list['permalink'] = get_permalink($current_post->ID);
     $the_list['uniqid'] = $layout['uniqid'];
     $the_list['has_map'] = false;
-
-    $the_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields']);
+    $paginate = ($layout['the_list_pager']['list_pager_type'] == 'basic_pager') ? true : false;
+    $the_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields'], $paginate, $layout['uniqid']);
 
     $the_list['filters'] = (!empty($layout['the_list_filters']['list_filters'])) ? $layout['the_list_filters']['list_filters'] : '';
     if (!empty($the_list['filters'])) {
@@ -374,8 +387,6 @@ function formatFullContentList($layout, $current_post, $twigPaths)
         $the_list['filters']['display']['classes'][] = (!empty($layout['the_list_filters']['background_img_opacity'])) ? $layout['the_list_filters']['background_img_opacity'] : '';
         $the_list['filters']['display']['classes'][] = (!empty($layout['the_list_filters']['border_color'])) ? $layout['the_list_filters']['border_color'] : '';
         $the_list['filters']['display']['classes'] = implode(' ', $the_list['filters']['display']['classes']);
-        //PC::debug($layout['the_list_filters'], 'List filters');
-        //PC::debug($the_list['filters']['display'], 'Display');
     }
 
     $params = filter_input_array(INPUT_POST);
@@ -440,13 +451,37 @@ function formatFullContentList($layout, $current_post, $twigPaths)
             }
         }
 
-        $the_filtered_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields']);
+        $the_filtered_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields'], $paginate, $layout['uniqid']);
         $the_list['the_grid'] =  Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_filtered_items);
     } else {
         $the_list['the_grid'] =  Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_items);
     }
 
+    if (!empty($layout['the_list_pager']) && $layout['the_list_pager']['list_pager_type'] != 'none') {
+        $max_num_pages = (!empty($the_filtered_items)) ? $the_filtered_items['max_num_pages'] : $the_items['max_num_pages'];
+        $items_by_page = (!empty($layout['the_list_elements']['list_el_req_fields']['focused_count'])) ? $layout['the_list_elements']['list_el_req_fields']['focused_count'] : 16 ;
+        $the_list['pager'] = formatListPager($layout['the_list_pager'], $max_num_pages, $the_list['uniqid']);
+        $the_list['pager_position'] = $layout['the_list_pager']['list_pager_position'];
+    }
+
     $return =  Timber::compile($twigPaths[$layout['the_list_filters']['listfilter_woody_tpl']], $the_list);
+    return $return;
+}
+
+function formatListPager($pager_params, $max_num_pages, $uniqid){
+    $return = [];
+    $explode_uniqid = explode('_', $uniqid);
+    $the_page_name = 'section' . $explode_uniqid[1] . '_' . $explode_uniqid[4];
+    $get_the_page = (!empty($_GET[$the_page_name])) ? htmlentities(stripslashes($_GET[$the_page_name])) : 1;
+
+    $pager_args = [
+        'total' => $max_num_pages,
+        'format' => '?' . $the_page_name . '=%#%',
+        'current' => $get_the_page,
+        'mid_size' => 3
+    ];
+
+    $return = paginate_links($pager_args);
     return $return;
 }
 
