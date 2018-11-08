@@ -36,6 +36,9 @@ function getComponentItem($layout, $context)
                     }
                 }
             }
+            if($layout['acf_fc_layout'] == 'links'){
+                $layout['woody_tpl'] = 'blocks-links-tpl_01';
+            }
             if ($layout['acf_fc_layout'] == 'socialwall') {
                 $layout['gallery_items'] = [];
                 if ($layout['socialwall_type'] == 'manual') {
@@ -54,6 +57,8 @@ function getComponentItem($layout, $context)
                     }
                 }
             }
+
+            PC::debug($layout['woody_tpl'], 'woody_tpl');
 
             $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
     }
