@@ -344,19 +344,19 @@ class WoodyTheme_Roles
             ],
             'Configurer les saisons' => [
                 'administrator' => true,
-                'editor' => false,
+                'editor' => true,
                 'contributor' => false,
                 'translator' => false,
             ],
             'Editer les saisons' => [
                 'administrator' => true,
-                'editor' => false,
+                'editor' => true,
                 'contributor' => false,
                 'translator' => false,
             ],
             'Supprimer les saisons' => [
                 'administrator' => true,
-                'editor' => false,
+                'editor' => true,
                 'contributor' => false,
                 'translator' => false,
             ],
