@@ -58,8 +58,6 @@ function getComponentItem($layout, $context)
                 }
             }
 
-            PC::debug($layout['woody_tpl'], 'woody_tpl');
-
             $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
     }
 
