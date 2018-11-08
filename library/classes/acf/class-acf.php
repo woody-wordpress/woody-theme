@@ -181,7 +181,7 @@ class WoodyTheme_ACF
                     if ($term->name == 'Uncategorized') {
                         continue;
                     }
-                    $choices[$term->term_taxonomy_id] = $taxonomy->label . ' - ' . $term->name;
+                    $choices[$term->term_id] = $taxonomy->label . ' - ' . $term->name;
                 }
             }
 

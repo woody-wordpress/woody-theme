@@ -39,7 +39,7 @@ class WoodyTheme_ACF_Counter
                     'page_type' => [
                         'taxonomy' => 'page_type',
                         'terms' => $params['focused_content_type'],
-                        'field' => 'taxonomy_term_id',
+                        'field' => 'term_id',
                         'operator' => 'IN'
                     ],
                 ];
@@ -64,7 +64,7 @@ class WoodyTheme_ACF_Counter
                         $tax_query['custom_tax'][] = array(
                             'taxonomy' => $taxo,
                             'terms' => $terms,
-                            'field' => 'taxonomy_term_id',
+                            'field' => 'term_id',
                             'operator' => 'IN'
                         );
                     }
@@ -74,7 +74,7 @@ class WoodyTheme_ACF_Counter
                         $tax_query['custom_tax_'.$focused_term_id] = array(
                             'taxonomy' => $focused_term->taxonomy,
                             'terms' => $focused_term_id,
-                            'field' => 'taxonomy_term_id',
+                            'field' => 'term_id',
                             'operator' => 'IN'
                         );
                     }

@@ -30,13 +30,13 @@ function getComponentItem($layout, $context)
                 $layout['slides'] = nestedGridsComponents($layout['slides'], 'slide_woody_tpl', $context);
             }
             if ($layout['acf_fc_layout'] == 'gallery') {
-                if(!empty($layout['gallery_items'])){
+                if (!empty($layout['gallery_items'])) {
                     foreach ($layout['gallery_items'] as $key => $media_item) {
                         $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
                     }
                 }
             }
-            if($layout['acf_fc_layout'] == 'links'){
+            if ($layout['acf_fc_layout'] == 'links') {
                 $layout['woody_tpl'] = 'blocks-links-tpl_01';
             }
             if ($layout['acf_fc_layout'] == 'socialwall') {
@@ -87,7 +87,7 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
             'page_type' => array(
                 'taxonomy' => 'page_type',
                 'terms' => $query_form['focused_content_type'],
-                'field' => 'taxonomy_term_id',
+                'field' => 'term_id',
                 'operator' => 'IN'
             ),
         ];
@@ -109,7 +109,7 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
             $tax_query['custom_tax'][] = array(
                 'taxonomy' => $taxo,
                 'terms' => $terms,
-                'field' => 'taxonomy_term_id',
+                'field' => 'term_id',
                 'operator' => 'IN'
             );
         }
@@ -123,7 +123,7 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
             if (strpos($filter_key, 'taxonomy_terms') !== false) {
                 $tax_query[$filter_key] = [];
                 $tax_query[$filter_key]['relation'] = $filter['andor'];
-                if(!is_array($filter['terms'])){
+                if (!is_array($filter['terms'])) {
                     $term = get_term($filter['terms']);
                     $filter_tax[$filter_key][$term->taxonomy][] = $filter['terms'];
                 } else {
@@ -137,7 +137,7 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
                     $tax_query[$filter_key][] = array(
                         'taxonomy' => $taxo,
                         'terms' => $terms,
-                        'field' => 'taxonomy_term_id',
+                        'field' => 'term_id',
                         'operator' => 'IN'
                     );
                 }
@@ -182,7 +182,7 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
         default:
     }
 
-    if($orderby == 'rand' && $paginate == true){
+    if ($orderby == 'rand' && $paginate == true) {
         $seed = date("dmY");
         $orderby = 'RAND(' . $seed . ')';
     }
@@ -198,7 +198,7 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
         'orderby' => $orderby,
     ];
 
-    if($paginate == true){
+    if ($paginate == true) {
         $explode_uniqid = explode('_', $uniqid);
         $the_page_name = 'section' . $explode_uniqid[1] . '_' . $explode_uniqid[4];
         $the_page = (!empty($_GET[$the_page_name])) ? htmlentities(stripslashes($_GET[$the_page_name])) : '';
@@ -301,7 +301,7 @@ function getAutoFocusSheetData($confId)
     $playlist = apply_filters('wp_woody_hawwwai_playlist_render', $confId, 'fr', array(), 'json');
     if (!empty($playlist['items'])) {
         foreach ($playlist['items'] as $key => $item) {
-            $items['items'][] = getTouristicSheetPreview($layout = NULL, $item['sheetId'], '');
+            $items['items'][] = getTouristicSheetPreview($layout = null, $item['sheetId'], '');
         }
     }
 
@@ -380,7 +380,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                 $the_list['filters'][$key]['minmax'] = getMinMaxWoodyPostFieldValues($the_items['items'], 'trip', 'the_price', 'price');
             } elseif ($filter['list_filter_type'] == 'duration') {
                 $the_list['filters'][$key]['minmax'] = getMinMaxWoodyPostFieldValues($the_items['items'], 'trip', 'the_duration', 'count_days');
-            } elseif ($filter['list_filter_type'] == 'map'){
+            } elseif ($filter['list_filter_type'] == 'map') {
                 $the_list['has_map'] = true;
             }
         }
@@ -408,7 +408,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
 
                 // Update filter value on load
                 if ($the_list['filters'][$filter_index]['list_filter_type'] == 'taxonomy' || $the_list['filters'][$filter_index]['list_filter_type'] == 'custom_terms') {
-                    if(!is_array($param)){
+                    if (!is_array($param)) {
                         foreach ($the_list['filters'][$filter_index]['list_filter_custom_terms'] as $filter_term_key => $filter_term) {
                             if ($filter_term['value'] == $param) {
                                 $the_list['filters'][$filter_index]['list_filter_custom_terms'][$filter_term_key]['checked'] = true;
@@ -471,7 +471,8 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     return $return;
 }
 
-function formatListPager($pager_params, $max_num_pages, $uniqid){
+function formatListPager($pager_params, $max_num_pages, $uniqid)
+{
     $return = [];
     $explode_uniqid = explode('_', $uniqid);
     $the_page_name = 'section' . $explode_uniqid[1] . '_' . $explode_uniqid[4];
@@ -570,7 +571,7 @@ function getCustomPreview($item)
  *
  */
 
-function getTouristicSheetPreview($layout = NULL, $sheet_id, $sheet_wp)
+function getTouristicSheetPreview($layout = null, $sheet_id, $sheet_wp)
 {
     $data = [];
     //TODO: remplacer la langue 'fr' par la variable lang du post
@@ -590,7 +591,7 @@ function getTouristicSheetPreview($layout = NULL, $sheet_id, $sheet_wp)
                 ]
             ];
 
-            if(is_array($layout['display_elements'])) {
+            if (is_array($layout['display_elements'])) {
                 if (in_array('sheet_type', $layout['display_elements'])) {
                     $data['sheet_type'] = (!empty($item['type'])) ? $item['type'] : '';
                 }
@@ -598,7 +599,7 @@ function getTouristicSheetPreview($layout = NULL, $sheet_id, $sheet_wp)
                     $data['description'] = (!empty($item['desc'])) ? $item['desc'] : '';
                 }
                 if (in_array('sheet_town', $layout['display_elements'])) {
-                   $data['sheet_town'] = (!empty($item['town'])) ? $item['town'] : '';
+                    $data['sheet_town'] = (!empty($item['town'])) ? $item['town'] : '';
                 }
             }
 
@@ -611,7 +612,7 @@ function getTouristicSheetPreview($layout = NULL, $sheet_id, $sheet_wp)
                 for ($i=0; $i <= $item['ratings'][0]['value']; $i++) {
                     $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
                 }
-                if(is_array($layout['display_elements'])) {
+                if (is_array($layout['display_elements'])) {
                     if (in_array('sheet_rating', $layout['display_elements'])) {
                         $data['sheet_rating'] = implode('', $rating);
                     }
@@ -623,7 +624,7 @@ function getTouristicSheetPreview($layout = NULL, $sheet_id, $sheet_wp)
             }
             $data['date'] = (!empty($item['dates'])) ? $item['dates'][0] : '';
 
-            if(is_array($layout['display_elements'])) {
+            if (is_array($layout['display_elements'])) {
                 if (in_array('sheet_itinerary', $layout['display_elements'])) {
                     $data['sheet_itinerary']['locomotions'] = (!empty($item['locomotions'])) ? $item['locomotions'] : '';
                     $data['sheet_itinerary']['length'] = (!empty($item['itineraryLength'])) ? $item['itineraryLength']['value'] . $item['itineraryLength']['unit'] : '';
@@ -821,7 +822,7 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
             array(
                 'taxonomy' => $taxonomy,
                 'terms' => $terms,
-                'field' => 'taxonomy_term_id',
+                'field' => 'term_id',
                 'relation' => $query_args['relation'],
                 'operator' => $query_args['operator']
             )
