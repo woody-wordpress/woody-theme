@@ -200,7 +200,7 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
 
     if ($paginate == true) {
         $explode_uniqid = explode('_', $uniqid);
-        $the_page_name = 'section' . $explode_uniqid[1] . '_' . $explode_uniqid[4];
+        $the_page_name = 'section_' . $explode_uniqid[1] . '_' . $explode_uniqid[4];
         $the_page = (!empty($_GET[$the_page_name])) ? htmlentities(stripslashes($_GET[$the_page_name])) : '';
         $the_query['paged'] = (!empty($the_page)) ? $the_page : 1;
     }
@@ -475,12 +475,12 @@ function formatListPager($pager_params, $max_num_pages, $uniqid)
 {
     $return = [];
     $explode_uniqid = explode('_', $uniqid);
-    $the_page_name = 'section' . $explode_uniqid[1] . '_' . $explode_uniqid[4];
+    $the_page_name = 'section_' . $explode_uniqid[1] . '_' . $explode_uniqid[4];
     $get_the_page = (!empty($_GET[$the_page_name])) ? htmlentities(stripslashes($_GET[$the_page_name])) : 1;
 
     $pager_args = [
         'total' => $max_num_pages,
-        'format' => '?' . $the_page_name . '=%#%',
+        'format' => '?' . $the_page_name . '=%#%#' . $uniqid,
         'current' => $get_the_page,
         'mid_size' => 3
     ];
