@@ -403,8 +403,6 @@ function formatFullContentList($layout, $current_post, $twigPaths)
 
     $params = filter_input_array(INPUT_POST);
 
-    PC::debug($params);
-
     // Traitement des données du post
     if (!empty($params) && $layout['uniqid'] === $params['uniqid']) {
         $the_filtered_items = [
