@@ -209,8 +209,8 @@ function getMinMaxWoodyPostFieldValues($posts, $post_type, $field, $subfield = '
         return;
     }
 
-    $return['min'] = min($range);
-    $return['max'] = max($range);
+    $return['min'] = round(min($range));
+    $return['max'] = round(max($range) + 1);
 
     return $return;
 }

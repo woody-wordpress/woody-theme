@@ -382,6 +382,15 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                 $the_list['filters'][$key]['minmax'] = getMinMaxWoodyPostFieldValues($the_items['items'], 'trip', 'the_duration', 'count_days');
             } elseif ($filter['list_filter_type'] == 'map') {
                 $the_list['has_map'] = true;
+                $places = get_terms('places');
+                if(!empty($places)){
+                    foreach ($places as $place) {
+                        $the_list['map_filter_places'][] = [
+                            'value' => $place->term_id,
+                            'label' => $place->name
+                        ];
+                    }
+                }
             }
         }
         $the_list['filters']['button'] = (!empty($layout['the_list_filters']['filter_button'])) ? $layout['the_list_filters']['filter_button'] : '';
@@ -393,6 +402,8 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     }
 
     $params = filter_input_array(INPUT_POST);
+
+    PC::debug($params);
 
     // Traitement des données du post
     if (!empty($params) && $layout['uniqid'] === $params['uniqid']) {
@@ -482,7 +493,8 @@ function formatListPager($pager_params, $max_num_pages, $uniqid)
         'total' => $max_num_pages,
         'format' => '?' . $the_page_name . '=%#%#' . $uniqid,
         'current' => $get_the_page,
-        'mid_size' => 3
+        'mid_size' => 3,
+        'type' => 'list'
     ];
 
     $return = paginate_links($pager_args);
