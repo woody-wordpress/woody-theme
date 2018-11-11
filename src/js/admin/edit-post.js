@@ -149,8 +149,8 @@ $('#post').each(function() {
                         .find('.alert').hide().end();
                 }
             },
-            error: function() {
-                console.log('Endpoint doesn\'t exists');
+            error: function(data) {
+                console.error('woody_autofocus_count', data);
             },
         });
     }
@@ -201,8 +201,8 @@ $('#acf-group_5bd0227a1bda3').each(function() {
                 }
                 return data;
             },
-            error: function() {
-                console.log('Endpoint doesn\'t exists');
+            error: function(data) {
+                console.error('short-link', data);
             },
         });
     }

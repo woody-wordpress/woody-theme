@@ -25,14 +25,15 @@ class WoodyTheme_ACF_Counter
         $params = $_POST['params'];
         if (is_array($params) && !empty($params['current_post'])) {
             $transient_key = 'woody_afc_' . md5(serialize($params));
-            if (false === ($focused_posts_count = get_transient($transient_key))) {
-                $tax_query = [];
+            if (false === ($return = get_transient($transient_key))) {
+                $tax_query = [
+                    'relation' => 'AND'
+                ];
 
                 // Création du paramètre tax_query pour la wp_query
                 // Référence : https://codex.wordpress.org/Class_Reference/WP_Query
                 if (!empty($params['focused_content_type'])) {
                     $tax_query = [
-                        'relation' => 'AND',
                         'page_type' => [
                             'taxonomy' => 'page_type',
                             'terms' => $params['focused_content_type'],
