@@ -108,7 +108,7 @@ class WoodyTheme_ACF_Counter
 
     private function JsonResponse($response)
     {
-        if (!empty($response)) {
+        if (!is_null($response)) {
             wp_send_json($response);
         } else {
             header("HTTP/1.0 400 Bad Request");

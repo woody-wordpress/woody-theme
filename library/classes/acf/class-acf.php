@@ -29,10 +29,19 @@ class WoodyTheme_ACF
         add_filter('acf/settings/load_json', [$this,'acfJsonLoad']);
         add_filter('acf/load_field/type=radio', [$this, 'woodyTplAcfLoadField']);
         add_filter('acf/load_field/type=select', [$this, 'woodyIconLoadField']);
+
         add_filter('acf/load_field/name=focused_taxonomy_terms', [$this, 'focusedTaxonomyTermsLoadField']);
+        add_filter('acf/load_value/name=focused_taxonomy_terms', [$this, 'termsLoadValue'], 10, 3);
+
         add_filter('acf/load_field/name=list_el_terms', [$this, 'focusedTaxonomyTermsLoadField']);
+        add_filter('acf/load_value/name=list_el_terms', [$this, 'termsLoadValue'], 10, 3);
+
         add_filter('acf/load_field/name=list_filter_custom_terms', [$this, 'focusedTaxonomyTermsLoadField']);
+        add_filter('acf/load_value/name=list_filter_custom_terms', [$this, 'termsLoadValue'], 10, 3);
+
         add_filter('acf/load_field/name=list_filter_taxonomy', [$this, 'pageTaxonomiesLoadField']);
+        add_filter('acf/load_value/name=list_filter_taxonomy', [$this, 'termsLoadValue'], 10, 3);
+
         add_filter('acf/fields/google_map/api', [$this, 'acfGoogleMapKey']);
         add_filter('acf/location/rule_types', [$this, 'woodyAcfAddPageTypeLocationRule']);
         add_filter('acf/location/rule_values/page_type_and_children', [$this, 'woodyAcfAddPageTypeChoices']);
@@ -152,7 +161,8 @@ class WoodyTheme_ACF
         $choices = [];
         $terms = [];
 
-        $choices = get_transient('woody_terms_choices');
+        $lang = $this->getCurrentLang();
+        $choices = get_transient('woody_terms_choices_' . $lang);
         if (empty($choices)) {
 
             // Get all site taxonomies and exclude those we don't want to use
@@ -190,17 +200,17 @@ class WoodyTheme_ACF
                 asort($choices);
             }
 
-            set_transient('woody_terms_choices', $choices);
+            set_transient('woody_terms_choices_' . $lang, $choices);
         }
 
         $field['choices'] = $choices;
         return $field;
     }
 
-
     public function pageTaxonomiesLoadField($field)
     {
-        $choices = get_transient('woody_page_taxonomies_choices');
+        $lang = $this->getCurrentLang();
+        $choices = get_transient('woody_page_taxonomies_choices_' . $lang);
         if (empty($choices)) {
             $taxonomies = get_object_taxonomies('page', 'objects');
 
@@ -208,11 +218,27 @@ class WoodyTheme_ACF
                 $choices[$taxonomy->name] = $taxonomy->label;
             }
 
-            set_transient('woody_page_taxonomies_choices', $choices);
+            set_transient('woody_page_taxonomies_choices_' . $lang, $choices);
         }
 
         $field['choices'] = $choices;
         return $field;
+    }
+
+    /**
+     * Léo POIROUX
+     * On traduit les termes lors que la synchronisation d'une page dans les blocs Focus ou Liste de contenus
+     */
+    public function termsLoadValue($value, $post_id, $field)
+    {
+        $lang = $this->getCurrentLang();
+        if (is_array($value) && function_exists('pll_get_term')) {
+            foreach ($value as $key => $term_id) {
+                $value[$key] = pll_get_term($term_id, $lang);
+            }
+        }
+
+        return $value;
     }
 
     /**
@@ -303,6 +329,18 @@ class WoodyTheme_ACF
         }
 
         return $page_types;
+    }
+
+    private function getCurrentLang()
+    {
+        $active_lang = 'fr';
+
+        // Polylang
+        if (function_exists('pll_current_language')) {
+            $active_lang = pll_current_language();
+        }
+
+        return $active_lang;
     }
 
     public function cleanTransient()

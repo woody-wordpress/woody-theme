@@ -150,7 +150,7 @@ class WoodyTheme_Taxonomy
                 ],
                 'hierarchical' => true,
                 'show_ui' => true,
-                'show_in_menu' => false,
+                'show_in_menu' => true,
                 'capabilities' => [
                     'manage_terms' => 'Configurer les saisons',
                     'edit_terms' => 'Editer les saisons',
