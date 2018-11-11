@@ -128,8 +128,12 @@ $('#post').each(function() {
 
         getAutoFocusData_AJAX = $.ajax({
             type: 'POST',
-            url: '/wp-json/woody/autofocus-count',
-            data: query_params,
+            dataType: 'json',
+            url: ajaxurl,
+            data: {
+                action: 'woody_autofocus_count',
+                params: query_params
+            },
             success: function(data) {
                 fitChoiceAction($parent, data);
 

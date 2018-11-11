@@ -16,95 +16,103 @@ class WoodyTheme_ACF_Counter
 
     protected function registerHooks()
     {
-        add_action('rest_api_init', function () {
-            register_rest_route('woody', 'autofocus-count', array(
-                'methods' => 'POST',
-                'callback' => [$this, 'countAutofocusEl'],
-            ));
-        });
+        add_action('wp_ajax_woody_autofocus_count', [$this, 'autoFocusCount']);
     }
 
-    public function countAutofocusEl(\WP_REST_Request $request)
+    public function autoFocusCount()
     {
-        $params = $request->get_params();
-        $transient_key = 'woody_afc_' . md5(serialize($params));
-        if (false === ($focused_posts_count = get_transient($transient_key))) {
-            $tax_query = [];
+        $return = null;
+        $params = $_POST['params'];
+        if (is_array($params) && !empty($params['current_post'])) {
+            $transient_key = 'woody_afc_' . md5(serialize($params));
+            if (false === ($focused_posts_count = get_transient($transient_key))) {
+                $tax_query = [];
 
-            // Création du paramètre tax_query pour la wp_query
-            // Référence : https://codex.wordpress.org/Class_Reference/WP_Query
-            if (!empty($params['focused_content_type'])) {
-                $tax_query = [
-                    'relation' => 'AND',
-                    'page_type' => [
-                        'taxonomy' => 'page_type',
-                        'terms' => $params['focused_content_type'],
-                        'field' => 'term_id',
-                        'operator' => 'IN'
-                    ],
-                ];
-            }
+                // Création du paramètre tax_query pour la wp_query
+                // Référence : https://codex.wordpress.org/Class_Reference/WP_Query
+                if (!empty($params['focused_content_type'])) {
+                    $tax_query = [
+                        'relation' => 'AND',
+                        'page_type' => [
+                            'taxonomy' => 'page_type',
+                            'terms' => $params['focused_content_type'],
+                            'field' => 'term_id',
+                            'operator' => 'IN'
+                        ],
+                    ];
+                }
 
-            // Si des termes ont été choisi pour filtrer les résultats
-            // on créé tableau custom_tax à passer au paramètre tax_query
-            $custom_tax = [];
-            if (!empty($params['focused_taxonomy_terms'])) {
+                // Si des termes ont été choisi pour filtrer les résultats
+                // on créé tableau custom_tax à passer au paramètre tax_query
+                $custom_tax = [];
+                if (!empty($params['focused_taxonomy_terms'])) {
 
                 // On récupère la relation choisie (ET/OU) entre les termes
-                // et on génère un tableau de term_id pour chaque taxonomie
-                $focused_taxonomy_terms_andor = (!empty($params['focused_taxonomy_terms_andor'])) ? current($params['focused_taxonomy_terms_andor']) : 'OR';
-                if ($focused_taxonomy_terms_andor == 'OR') {
-                    $tax_query['custom_tax']['relation'] = 'OR';
-                    // Get terms
-                    foreach ($params['focused_taxonomy_terms'] as $focused_term_id) {
-                        $focused_term = get_term($focused_term_id);
-                        $custom_tax[$focused_term->taxonomy][] = $focused_term_id;
-                    }
-                    foreach ($custom_tax as $taxo => $terms) {
-                        $tax_query['custom_tax'][] = array(
-                            'taxonomy' => $taxo,
-                            'terms' => $terms,
-                            'field' => 'term_id',
-                            'operator' => 'IN'
-                        );
-                    }
-                } else {
-                    foreach ($params['focused_taxonomy_terms'] as $focused_term_id) {
-                        $focused_term = get_term($focused_term_id);
-                        $tax_query['custom_tax_'.$focused_term_id] = array(
-                            'taxonomy' => $focused_term->taxonomy,
-                            'terms' => $focused_term_id,
-                            'field' => 'term_id',
-                            'operator' => 'IN'
-                        );
+                    // et on génère un tableau de term_id pour chaque taxonomie
+                    $focused_taxonomy_terms_andor = (!empty($params['focused_taxonomy_terms_andor'])) ? current($params['focused_taxonomy_terms_andor']) : 'OR';
+                    if ($focused_taxonomy_terms_andor == 'OR') {
+                        $tax_query['custom_tax']['relation'] = 'OR';
+                        // Get terms
+                        foreach ($params['focused_taxonomy_terms'] as $focused_term_id) {
+                            $focused_term = get_term($focused_term_id);
+                            $custom_tax[$focused_term->taxonomy][] = $focused_term_id;
+                        }
+                        foreach ($custom_tax as $taxo => $terms) {
+                            $tax_query['custom_tax'][] = array(
+                                'taxonomy' => $taxo,
+                                'terms' => $terms,
+                                'field' => 'term_id',
+                                'operator' => 'IN'
+                            );
+                        }
+                    } else {
+                        foreach ($params['focused_taxonomy_terms'] as $focused_term_id) {
+                            $focused_term = get_term($focused_term_id);
+                            $tax_query['custom_tax_'.$focused_term_id] = array(
+                                'taxonomy' => $focused_term->taxonomy,
+                                'terms' => $focused_term_id,
+                                'field' => 'term_id',
+                                'operator' => 'IN'
+                            );
+                        }
                     }
                 }
+
+                // On créé la wp_query en fonction des choix faits dans le backoffice
+                // NB : si aucun choix n'a été fait, on remonte automatiquement tous les contenus de type page
+                $the_query = [
+                    'post_type' => (!empty($params['focused_post_type'])) ? $params['focused_post_type'] : 'page',
+                    'tax_query' => $tax_query,
+                    'post_status' => 'publish',
+                    'posts_per_page' => (!empty($params['focused_count'])) ? intval(current($params['focused_count'])) : 16
+                ];
+
+                if (current($params['focused_hierarchy']) == 'child_of') {
+                    $the_query['post_parent'] = $params['current_post'];
+                } elseif (current($params['focused_hierarchy']) == 'brother_of') {
+                    // Si Hiérarchie = Enfants directs de la page
+                    // On passe le post ID dans le paramètre post_parent de la query
+                    $post_parent = wp_get_post_parent_id($params['current_post']);
+                    $the_query['post_parent'] = $post_parent;
+                }
+
+                // It wasn't there, so regenerate the data and save the transient
+                $focused_posts = new WP_Query($the_query);
+                $return = $focused_posts->post_count;
+                set_transient($transient_key, $return, 2*60);
             }
-
-            // On créé la wp_query en fonction des choix faits dans le backoffice
-            // NB : si aucun choix n'a été fait, on remonte automatiquement tous les contenus de type page
-            $the_query = [
-                'post_type' => (!empty($params['focused_post_type'])) ? $params['focused_post_type'] : 'page',
-                'tax_query' => $tax_query,
-                'post_status' => 'publish',
-                'posts_per_page' => (!empty($params['focused_count'])) ? intval(current($params['focused_count'])) : 16
-            ];
-
-            if (current($params['focused_hierarchy']) == 'child_of') {
-                $the_query['post_parent'] = $params['current_post'];
-            } elseif (current($params['focused_hierarchy']) == 'brother_of') {
-                // Si Hiérarchie = Enfants directs de la page
-                // On passe le post ID dans le paramètre post_parent de la query
-                $post_parent = wp_get_post_parent_id($params['current_post']);
-                $the_query['post_parent'] = $post_parent;
-            }
-
-            // It wasn't there, so regenerate the data and save the transient
-            $focused_posts = new WP_Query($the_query);
-            $focused_posts_count = $focused_posts->post_count;
-            set_transient($transient_key, $focused_posts_count, 2*60);
         }
 
-        return $focused_posts_count;
+        $this->JsonResponse($return);
+    }
+
+    private function JsonResponse($response)
+    {
+        if (!empty($response)) {
+            wp_send_json($response);
+        } else {
+            header("HTTP/1.0 400 Bad Request");
+            die();
+        }
     }
 }
