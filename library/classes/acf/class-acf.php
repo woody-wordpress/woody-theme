@@ -162,8 +162,8 @@ class WoodyTheme_ACF
         $terms = [];
 
         $lang = $this->getCurrentLang();
-        $choices = get_transient('woody_terms_choices_' . $lang);
-        if (empty($choices)) {
+        $choices = get_transient('woody_terms_choices');
+        if (empty($choices[$lang])) {
 
             // Get all site taxonomies and exclude those we don't want to use
             $taxonomies = get_object_taxonomies('page', 'objects');
@@ -191,37 +191,37 @@ class WoodyTheme_ACF
                     if ($term->name == 'Uncategorized') {
                         continue;
                     }
-                    $choices[$term->term_id] = $taxonomy->label . ' - ' . $term->name;
+                    $choices[$lang][$term->term_id] = $taxonomy->label . ' - ' . $term->name;
                 }
             }
 
             // Sort by values
-            if (is_array($choices)) {
-                asort($choices);
+            if (is_array($choices[$lang])) {
+                asort($choices[$lang]);
             }
 
-            set_transient('woody_terms_choices_' . $lang, $choices);
+            set_transient('woody_terms_choices', $choices);
         }
 
-        $field['choices'] = $choices;
+        $field['choices'] = $choices[$lang];
         return $field;
     }
 
     public function pageTaxonomiesLoadField($field)
     {
         $lang = $this->getCurrentLang();
-        $choices = get_transient('woody_page_taxonomies_choices_' . $lang);
-        if (empty($choices)) {
+        $choices = get_transient('woody_page_taxonomies_choices');
+        if (empty($choices[$lang])) {
             $taxonomies = get_object_taxonomies('page', 'objects');
 
             foreach ($taxonomies as $key => $taxonomy) {
-                $choices[$taxonomy->name] = $taxonomy->label;
+                $choices[$lang][$taxonomy->name] = $taxonomy->label;
             }
 
-            set_transient('woody_page_taxonomies_choices_' . $lang, $choices);
+            set_transient('woody_page_taxonomies_choices', $choices);
         }
 
-        $field['choices'] = $choices;
+        $field['choices'] = $choices[$lang];
         return $field;
     }
 
