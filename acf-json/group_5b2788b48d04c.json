@@ -190,10 +190,7 @@
                 "subtitle": "Sous-titre",
                 "description": "Description",
                 "duration": "Durée <small>(séjour uniquement)<\/small>",
-                "length": "Distance <small>(séjour uniquement)<\/small>",
-                "_themes": "Thématique principal(e)<\/small>",
-                "_places": "Lieu principal(e)<\/small>",
-                "_seasons": "Saison principal(e)<\/small>"
+                "length": "Distance <small>(séjour uniquement)<\/small>"
             },
             "allow_custom": 0,
             "default_value": [
