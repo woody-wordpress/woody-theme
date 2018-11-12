@@ -42,6 +42,8 @@ class WoodyTheme_ACF
         add_filter('acf/load_field/name=list_filter_taxonomy', [$this, 'pageTaxonomiesLoadField']);
         add_filter('acf/load_value/name=list_filter_taxonomy', [$this, 'termsLoadValue'], 10, 3);
 
+        add_filter('acf/load_field/name=display_elements', [$this, 'displayElementLoadField'], 10, 3);
+
         add_filter('acf/fields/google_map/api', [$this, 'acfGoogleMapKey']);
         add_filter('acf/location/rule_types', [$this, 'woodyAcfAddPageTypeLocationRule']);
         add_filter('acf/location/rule_values/page_type_and_children', [$this, 'woodyAcfAddPageTypeChoices']);
@@ -320,6 +322,23 @@ class WoodyTheme_ACF
         return $match;
     }
 
+    public function displayElementLoadField($field){
+        $taxonomies = get_transient('woody_website_pages_taxonomies');
+        if (empty($taxonomies)) {
+            $taxonomies = get_object_taxonomies('page', 'objects');
+            unset($taxonomies['language']);
+            unset($taxonomies['page_type']);
+            unset($taxonomies['post_translations']);
+
+            set_transient('woody_website_pages_taxonomies', $taxonomies);
+        }
+        foreach ($taxonomies as $key => $taxonomy) {
+            $field['choices']['tag_' . $taxonomy->name] = (!empty($taxonomy->labels->singular_name)) ? $taxonomy->labels->singular_name . ' principal(e)</small>' : $taxonmy->label .' <small>Tag principal</small>';
+        }
+        ksort($field['choices'], SORT_STRING);
+        return $field;
+    }
+
     public function getPageTypeTerms()
     {
         $page_types = get_transient('woody_terms_page_type');
@@ -350,6 +369,7 @@ class WoodyTheme_ACF
         delete_transient('woody_icons_folder');
         delete_transient('woody_page_taxonomies_choices');
         delete_transient('woody_terms_choices');
+        delete_transient('woody_website_pages_taxonomies');
         flush_rewrite_rules();
     }
 
