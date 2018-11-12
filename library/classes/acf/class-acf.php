@@ -333,9 +333,8 @@ class WoodyTheme_ACF
             set_transient('woody_website_pages_taxonomies', $taxonomies);
         }
         foreach ($taxonomies as $key => $taxonomy) {
-            $field['choices']['tag_' . $taxonomy->name] = (!empty($taxonomy->labels->singular_name)) ? $taxonomy->labels->singular_name . ' principal(e)</small>' : $taxonmy->label .' <small>Tag principal</small>';
+            $field['choices']['_' . $taxonomy->name] = (!empty($taxonomy->labels->singular_name)) ? $taxonomy->labels->singular_name . ' principal(e)</small>' : $taxonmy->label .' <small>Tag principal</small>';
         }
-        ksort($field['choices'], SORT_STRING);
         return $field;
     }
 
