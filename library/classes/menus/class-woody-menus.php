@@ -131,6 +131,9 @@ class WoodyTheme_Menus
 
         if (!empty($posts) && is_array($posts)) {
             foreach ($posts as $key => $post) {
+                if(!is_object($post)){
+                    continue;
+                }
                 $return[$key] = [
                     'the_id' => $post->ID,
                     'the_url' => get_permalink($post->ID),
