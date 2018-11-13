@@ -90,9 +90,7 @@ do_action('send_headers', 'add_sheet_headers');
  ****   Print full template
  **** ************************** **/
 if (!empty($partialPlaylist['content'])) {
-$context['playlist_template'] = $partialPlaylist['content'];
-    // // On rend le $context dans le touristic_playlist.twig
-    // Timber::render('touristic_playlist.twig', $context);
+    $context['playlist_template'] = $partialPlaylist['content'];
 } else {
     print_r('error fetching playlist');
     exit;
