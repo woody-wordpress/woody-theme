@@ -27,7 +27,7 @@ function getComponentItem($layout, $context)
                 $layout['tabs'] = nestedGridsComponents($layout['tabs'], 'tab_woody_tpl', 'tabs', $context);
             }
             if ($layout['acf_fc_layout'] == 'slides_group') {
-                $layout['slides'] = nestedGridsComponents($layout['slides'], 'slide_woody_tpl', $context);
+                $layout['slides'] = nestedGridsComponents($layout['slides'], 'slide_woody_tpl', 'slides', $context);
             }
             if ($layout['acf_fc_layout'] == 'gallery') {
                 if (!empty($layout['gallery_items'])) {
