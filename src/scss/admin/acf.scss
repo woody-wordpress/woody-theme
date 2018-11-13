@@ -572,3 +572,7 @@
         justify-content: center;
     }
 }
+
+.acf-tooltip > ul > li > a[data-layout="slides_group"]{
+    display:none;
+}
