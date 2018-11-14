@@ -45,6 +45,7 @@ class WoodyTheme_Plugins_Activation
             'duplicate-post/duplicate-post.php',
             'polylang-pro/polylang.php',
             'publish-view/publish-view.php',
+            'velvet-blues-update-urls/velvet-blues-update-urls.php'
         ];
 
         $this->deactivate_plugins = [

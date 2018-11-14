@@ -1,5 +1,4 @@
 {% extends "base.twig" %}
-
 {% block content %}
     <main id="main-content" class="content-type-page {{ page_type|default }}">
         <div class="content-wrapper">
@@ -13,18 +12,23 @@
 
             {% block home_slider %}{% endblock %}
 
-            {{ playlist_template|default }}
             {% for key, section in the_sections %}
                 <div class="page-section page-section-{{ key }}">
                     {{ section }}
                 </div>
             {% endfor %}
+
+            {% if playlist_template|default %}
+                <div class="page-playlist-wrapper">
+                    {{ playlist_template }}
+                </div>
+            {% endif %}
         </div>
     </main>
 {% endblock %}
 
 {% block metas %}
     <script>
-        var siteConfig = {{site_config}};
+        var siteConfig = {{ site_config }};
     </script>
 {% endblock %}

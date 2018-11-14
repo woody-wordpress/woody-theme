@@ -68,7 +68,7 @@ if (!empty($trip_infos['the_duration']['count_days']) || !empty($trip_infos['the
 $page_teaser = [];
 $page_teaser = getAcfGroupFields('group_5b2bbb46507bf');
 if (!empty($page_teaser)) {
-    $page_teaser['page_teaser_title'] = (!empty($page_teaser['page_teaser_display_title'])) ? $context['post']->post_title : '';
+    $page_teaser['page_teaser_title'] = (!empty($page_teaser['page_teaser_display_title'])) ? str_replace('-', '&#8209',$context['post']->post_title) : '';
     $page_teaser['the_classes'] = [];
     $page_teaser['the_classes'][] = (!empty($page_teaser['background_img_opacity'])) ? $page_teaser['background_img_opacity'] : '';
     $page_teaser['the_classes'][] = (!empty($page_teaser['background_color'])) ? $page_teaser['background_color'] : '';
@@ -81,6 +81,7 @@ if (!empty($page_teaser)) {
     if (!empty($page_teaser['page_teaser_media_type']) && $page_teaser['page_teaser_media_type'] == 'map') {
         $page_teaser['post_coordinates'] = (!empty(getAcfGroupFields('group_5b3635da6529e'))) ? getAcfGroupFields('group_5b3635da6529e') : '';
     }
+
     $context['page_teaser'] = Timber::compile($context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
 }
 
@@ -103,6 +104,9 @@ if (!empty($page_hero['page_heading_media_type']) && ($page_hero['page_heading_m
             $page_hero['page_heading_social_movie'] = str_replace($iframe_url, $yt_params_url, $page_hero['page_heading_social_movie']);
         }
     }
+
+    $page_hero['title'] = (!empty($page_hero['title'])) ? str_replace('-', '&#8209', $page_hero['title']) : '';
+
     $context['page_hero'] = Timber::compile($context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
 }
 
@@ -112,7 +116,9 @@ if (!empty($page_hero['page_heading_media_type']) && ($page_hero['page_heading_m
 
 if ($context['page_type'] === 'playlist_tourism') {
     include 'inc-touristic-playlist.php';
-} else {
+}
+
+
     // TODO: Retirer la condition pour que l'on compile les sections pour les playlists aussi.
     /*********************************************
     * Compilation des sections
@@ -167,7 +173,6 @@ if ($context['page_type'] === 'playlist_tourism') {
             $context['the_sections'][] = Timber::compile($context['woody_components']['section-section_full-tpl_01'], $the_section);
         }
     }
-}
 
 if (!empty(is_front_page())) {
     $template = 'front.twig';
