@@ -15,23 +15,21 @@ class WoodyTheme_Cleanup_Admin
 
     protected function registerHooks()
     {
-        add_filter('wpseo_metabox_prio', [$this, 'yoastMoveMetaBoxBottom']);
-        add_action('init', [$this, 'removePagesEditor']);
-        add_action('init', [$this, 'removeTaxonomies']);
-        add_action('admin_menu', [$this, 'removeCommentsMetaBox']);
-        add_action('admin_menu', [$this, 'removeAdminMenu']);
-        add_action('admin_menu', [$this, 'customMenusPage']);
-        add_action('wp_before_admin_bar_render', [$this, 'customAdminBarMenu']);
-        add_action('wp_dashboard_setup', [$this, 'removeDashboardWidgets']);
-        add_filter('tiny_mce_before_init', [$this, 'tiny_mce_remove_unused_formats']);
+        if (is_user_logged_in()) {
+            add_filter('wpseo_metabox_prio', [$this, 'yoastMoveMetaBoxBottom']);
+            add_action('init', [$this, 'removePagesEditor']);
+            add_action('admin_menu', [$this, 'removeAdminMenu']);
+            add_action('admin_menu', [$this, 'customMenusPage']);
+            add_action('wp_before_admin_bar_render', [$this, 'customAdminBarMenu']);
+            add_action('wp_dashboard_setup', [$this, 'removeDashboardWidgets']);
+            add_filter('tiny_mce_before_init', [$this, 'tiny_mce_remove_unused_formats']);
 
-        $user = wp_get_current_user();
-        if (!in_array('administrator', $user->roles)) {
-            add_action('admin_head', [$this, 'removeScreenOptions']);
-            add_filter('screen_options_show_screen', '__return_false');
-        }
+            $user = wp_get_current_user();
+            if (!in_array('administrator', $user->roles)) {
+                add_action('admin_head', [$this, 'removeScreenOptions']);
+                add_filter('screen_options_show_screen', '__return_false');
+            }
 
-        if (is_admin()) {
             add_action('pre_get_posts', [$this, 'custom_pre_get_posts']);
         }
     }
@@ -43,22 +41,18 @@ class WoodyTheme_Cleanup_Admin
     public function removePagesEditor()
     {
         remove_post_type_support('page', 'editor');
-        remove_post_type_support('short_link', 'editor');
-    }
+        remove_post_type_support('page', 'comments');
+        remove_post_type_support('page', 'thumbnail');
+        remove_post_type_support('page', 'excerpt');
+        remove_post_type_support('page', 'trackbacks');
+        remove_post_type_support('page', 'post-formats');
 
-    /**
-     * Léo POIROUX
-     * On vire les taxos catégories/étiquettes des articles
-     */
-    public function removeTaxonomies()
-    {
-        global $wp_taxonomies;
-        $taxonomies = array( 'post_tag' );
-        foreach ($taxonomies as $taxonomy) {
-            if (taxonomy_exists($taxonomy)) {
-                unset($wp_taxonomies[$taxonomy]);
-            }
-        }
+        remove_post_type_support('short_link', 'editor');
+        remove_post_type_support('short_link', 'comments');
+        remove_post_type_support('short_link', 'thumbnail');
+        remove_post_type_support('short_link', 'excerpt');
+        remove_post_type_support('short_link', 'trackbacks');
+        remove_post_type_support('short_link', 'post-formats');
     }
 
     /**
@@ -107,15 +101,6 @@ class WoodyTheme_Cleanup_Admin
     public function yoastMoveMetaBoxBottom()
     {
         return 'low';
-    }
-
-    /**
-     * Benoit Bouchaud
-     * On retire la metabox pour les commentaires
-     */
-    public function removeCommentsMetaBox()
-    {
-        remove_meta_box('commentsdiv', 'page', 'normal');
     }
 
     /**
