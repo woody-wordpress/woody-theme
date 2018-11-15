@@ -331,7 +331,7 @@ function formatFocusesData($layout, $current_post, $twigPaths)
         $the_items = getAutoFocusSheetData($layout['playlist_conf_id']);
     }
 
-    $the_items['focus_no_padding'] = (!empty($layout['focus_no_padding'])) ? $layout['focus_no_padding'] : '';
+    $the_items['no_padding'] = (!empty($layout['focus_no_padding'])) ? $layout['focus_no_padding'] : '';
     $the_items['block_titles'] = getFocusBlockTitles($layout);
     $the_items['display_button'] = (!empty($layout['display_button'])) ? $layout['display_button'] : '';
 
