@@ -48,6 +48,36 @@ class WoodyTheme_Post_Type
             'show_in_nav_menus'   => false
         );
 
+        $woody_claims = array(
+            'label'               => 'Blocs de publicité',
+            'description'         => 'Contenus pub à afficher sur des pages',
+            'labels'              => array(
+                'name'                => 'Blocs de publicité',
+                'singular_name'       => 'Bloc de publicité',
+                'menu_name'           => 'Publicités',
+                'all_items'           => 'Tous les blocs de publicité',
+                'view_item'           => 'Voir les blocs de publicité',
+                'add_new_item'        => 'Ajouter bloc de publicité',
+                'add_new'             => 'Ajouter un bloc de publicité',
+                'edit_item'           => 'Editer le bloc de publicité',
+                'update_item'         => 'Modifier le bloc de publicité',
+                'search_items'        => 'Rechercher un bloc de publicité',
+                'not_found'           => 'Non trouvé',
+                'not_found_in_trash'  => 'Non trouvé dans la corbeille',
+            ),
+            'hierarchical'        => false,
+            'public'              => true,
+            'show_ui'             => true,
+            'supports'            => array('title', 'custom-fields'),
+            'show_in_menu'        => true,
+            'menu_icon'           => 'dashicons-admin-comments',
+            'menu_position'       => 30,
+            'show_in_nav_menus'   => false
+        );
+
         register_post_type('short_link', $short_link);
+        register_post_type('woody_claims', $woody_claims);
     }
+
+
 }
