@@ -1,9 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
-    <title>026-precedent</title>
-    <desc>Created with Sketch.</desc>
-    <g id="026-precedent" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <polygon id="Path-4" fill="#000000" fill-rule="nonzero" transform="translate(25.012570, 26.088253) scale(-1, 1) rotate(-90.000000) translate(-25.012570, -26.088253) " points="42.0953447 12.380652 45.9046553 15.619348 25.3249108 39.8249663 4.12048525 15.6484612 7.87951475 12.3515388 25.2660567 32.1750337"></polygon>
-    </g>
-</svg>
+<svg height="50" viewBox="0 0 50 50" width="50" xmlns="http://www.w3.org/2000/svg"><path d="m42.0953447 12.380652 3.8093106 3.238696-20.5797445 24.2056183-21.20442555-24.1765051 3.7590295-3.2969224 17.38654195 19.8234949z" transform="matrix(0 -1 -1 0 51.100823 51.100823)"/></svg>

@@ -1,9 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
-    <title>028-plus-02</title>
-    <desc>Created with Sketch.</desc>
-    <g id="028-plus-02" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <path d="M27.25,23.5 L47.5,23.5 L47.5,27.5 L27.25,27.5 L27.25,47.5 L23.25,47.5 L23.25,27.5 L2.5,27.5 L2.5,23.5 L23.25,23.5 L23.25,2.5 L27.25,2.5 L27.25,23.5 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
-    </g>
-</svg>
+<svg height="50" viewBox="0 0 50 50" width="50" xmlns="http://www.w3.org/2000/svg"><path d="m27.25 23.5h20.25v4h-20.25v20h-4v-20h-20.75v-4h20.75v-21h4z"/></svg>

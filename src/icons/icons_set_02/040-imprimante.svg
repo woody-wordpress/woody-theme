@@ -1,17 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
-    <title>040-imprimante</title>
-    <desc>Created with Sketch.</desc>
-    <g id="040-imprimante" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Group" transform="translate(3.995000, 3.995000)" fill="#000000" fill-rule="nonzero">
-            <g id="074-imprimante">
-                <g id="ICONSET-01">
-                    <g id="074-imprimante">
-                        <path d="M34.5025,15.7921665 C39.4233836,15.9795094 41.8849702,19.2764824 41.8849702,23.6156214 L41.8849702,36.666228 L34.5025,36.666228 L34.5025,42.005 L7.5075,42.005 L7.5075,36.666228 L0.125029762,36.666228 L0.125029762,23.6156214 C0.126648534,18.5456283 2.58747194,15.9371975 7.5075,15.7903293 L7.5075,0.005 L34.5025,0.005 L34.5025,15.7921665 Z M30.5025,28.38 L11.5075,28.38 L11.5075,38.005 L30.5025,38.005 L30.5025,28.38 Z M11.5075,15.7837571 L30.5025,15.7837571 L30.5025,4.005 L11.5075,4.005 L11.5075,15.7837571 Z" id="Combined-Shape"></path>
-                    </g>
-                </g>
-            </g>
-        </g>
-    </g>
-</svg>
+<svg height="50" viewBox="0 0 50 50" width="50" xmlns="http://www.w3.org/2000/svg"><path d="m34.5025 15.7921665c4.9208836.1873429 7.3824702 3.4843159 7.3824702 7.8234549v13.0506066h-7.3824702v5.338772h-26.995v-5.338772h-7.38247024v-13.0506066c.00161877-5.0699931 2.46244218-7.6784239 7.38247024-7.8252921v-15.7853293h26.995zm-4 12.5878335h-18.995v9.625h18.995zm-18.995-12.5962429h18.995v-11.7787571h-18.995z" transform="translate(3.995 3.995)"/></svg>
