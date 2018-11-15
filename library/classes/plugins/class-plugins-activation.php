@@ -45,20 +45,20 @@ class WoodyTheme_Plugins_Activation
             'duplicate-post/duplicate-post.php',
             'polylang-pro/polylang.php',
             'publish-view/publish-view.php',
-            'velvet-blues-update-urls/velvet-blues-update-urls.php'
+            'velvet-blues-update-urls/velvet-blues-update-urls.php',
+            'vcaching/vcaching.php',
         ];
 
         $this->deactivate_plugins = [
-            'vcaching/vcaching.php',
             'permalink-manager-pro/permalink-manager.php',
         ];
 
-        if (SAVEQUERIES == true) {
-            $this->activate_plugins[] = 'query-monitor/query-monitor.php';
-            $this->activate_plugins[] = 'wp-php-console/wp-php-console.php';
-        } else {
+        if (WP_ENV == 'prod') {
             $this->deactivate_plugins[] = 'query-monitor/query-monitor.php';
             $this->deactivate_plugins[] = 'wp-php-console/wp-php-console.php';
+        } else {
+            $this->activate_plugins[] = 'query-monitor/query-monitor.php';
+            $this->activate_plugins[] = 'wp-php-console/wp-php-console.php';
         }
 
         require_once(ABSPATH . 'wp-admin/includes/plugin.php');
