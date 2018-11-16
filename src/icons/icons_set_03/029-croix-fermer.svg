@@ -1,11 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
-    <title>029-croix-fermer</title>
-    <desc>Created with Sketch.</desc>
-    <g id="029-croix-fermer" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Group-2" transform="translate(25.000000, 25.000000) rotate(-315.000000) translate(-25.000000, -25.000000) translate(2.000000, 2.000000)" fill="#000000" fill-rule="nonzero">
-            <path d="M25.25,21.5 L43.5,21.5 C44.6045695,21.5 45.5,22.3954305 45.5,23.5 C45.5,24.6045695 44.6045695,25.5 43.5,25.5 L25.25,25.5 L25.25,43.5 C25.25,44.6045695 24.3545695,45.5 23.25,45.5 C22.1454305,45.5 21.25,44.6045695 21.25,43.5 L21.25,25.5 L2.5,25.5 C1.3954305,25.5 0.5,24.6045695 0.5,23.5 C0.5,22.3954305 1.3954305,21.5 2.5,21.5 L21.25,21.5 L21.25,2.5 C21.25,1.3954305 22.1454305,0.5 23.25,0.5 C24.3545695,0.5 25.25,1.3954305 25.25,2.5 L25.25,21.5 Z" id="Combined-Shape"></path>
-        </g>
-    </g>
-</svg>
+<svg height="50" viewBox="0 0 50 50" width="50" xmlns="http://www.w3.org/2000/svg"><path d="m25.25 21.5h18.25c1.1045695 0 2 .8954305 2 2s-.8954305 2-2 2h-18.25v18c0 1.1045695-.8954305 2-2 2s-2-.8954305-2-2v-18h-18.75c-1.1045695 0-2-.8954305-2-2s.8954305-2 2-2h18.75v-19c0-1.1045695.8954305-2 2-2s2 .8954305 2 2z" transform="matrix(.70710678 .70710678 -.70710678 .70710678 25 -7.526912)"/></svg>

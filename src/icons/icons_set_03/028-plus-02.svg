@@ -1,9 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
-    <title>028-plus-02</title>
-    <desc>Created with Sketch.</desc>
-    <g id="028-plus-02" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <path d="M27.25,23.5 L45.5,23.5 C46.6045695,23.5 47.5,24.3954305 47.5,25.5 C47.5,26.6045695 46.6045695,27.5 45.5,27.5 L27.25,27.5 L27.25,45.5 C27.25,46.6045695 26.3545695,47.5 25.25,47.5 C24.1454305,47.5 23.25,46.6045695 23.25,45.5 L23.25,27.5 L4.5,27.5 C3.3954305,27.5 2.5,26.6045695 2.5,25.5 C2.5,24.3954305 3.3954305,23.5 4.5,23.5 L23.25,23.5 L23.25,4.5 C23.25,3.3954305 24.1454305,2.5 25.25,2.5 C26.3545695,2.5 27.25,3.3954305 27.25,4.5 L27.25,23.5 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
-    </g>
-</svg>
+<svg height="50" viewBox="0 0 50 50" width="50" xmlns="http://www.w3.org/2000/svg"><path d="m27.25 23.5h18.25c1.1045695 0 2 .8954305 2 2s-.8954305 2-2 2h-18.25v18c0 1.1045695-.8954305 2-2 2s-2-.8954305-2-2v-18h-18.75c-1.1045695 0-2-.8954305-2-2s.8954305-2 2-2h18.75v-19c0-1.1045695.8954305-2 2-2s2 .8954305 2 2z"/></svg>
