@@ -1,1 +1,10 @@
-<svg height="50" viewBox="0 0 50 50" width="50" xmlns="http://www.w3.org/2000/svg"><g fill="#000" fill-rule="nonzero"><path d="m24.25 3.5h2v43h-2z"/><path d="m3.5 26.5v-2h43v2z"/></g></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
+    <title>028-plus-02</title>
+    <desc>Created with Sketch.</desc>
+    <g id="028-plus-02" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon id="Line-3" fill="#000000" fill-rule="nonzero" points="24.25 3.5 26.25 3.5 26.25 46.5 24.25 46.5"></polygon>
+        <polygon id="Line" fill="#000000" fill-rule="nonzero" points="3.5 26.5 3.5 24.5 46.5 24.5 46.5 26.5"></polygon>
+    </g>
+</svg>

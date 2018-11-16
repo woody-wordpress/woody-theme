@@ -1,1 +1,9 @@
-<svg height="50" viewBox="0 0 50 50" width="50" xmlns="http://www.w3.org/2000/svg"><path d="m6 14 19.2954837 22 18.7045163-22" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="9" transform="matrix(0 -1 1 0 0 50)"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
+    <title>025-suivant</title>
+    <desc>Created with Sketch.</desc>
+    <g id="025-suivant" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M25.2425151,29.1150606 L40.5716204,11.0851735 C42.1814346,9.19173177 45.0213847,8.96180619 46.9148265,10.5716204 C48.8082682,12.1814346 49.0381938,15.0213847 47.4283796,16.9148265 L28.7238633,38.9148265 C26.945013,41.0070863 23.7231883,41.0318731 21.9123572,38.9672301 L2.61687345,16.9672301 C0.978117491,15.0987809 1.16432065,12.2556294 3.03276985,10.6168735 C4.90121905,8.97811749 7.74437059,9.16432065 9.38312655,11.0327699 L25.2425151,29.1150606 Z" id="Path-4" fill="#000000" fill-rule="nonzero" transform="translate(25.000015, 24.999956) rotate(-90.000000) translate(-25.000015, -24.999956) "></path>
+    </g>
+</svg>

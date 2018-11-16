@@ -703,11 +703,6 @@ function getPagePreview($item_wrapper, $item)
         $data['title'] = $item->get_title();
     }
 
-
-    $fallback_field_group = $item->get_field('field_5b052bbab3867');
-
-    $pretitle = $item->get_field('field_5b87f20257a1d');
-
     if (is_array($item_wrapper['display_elements'])) {
         if (in_array('pretitle', $item_wrapper['display_elements'])) {
             $data['pretitle'] = getFieldAndFallback($item, 'focus_pretitle', $item, 'field_5b87f20257a1d');
@@ -730,7 +725,13 @@ function getPagePreview($item_wrapper, $item)
         if (in_array('length', $item_wrapper['display_elements'])) {
             $data['the_length'] = $item->get_field('field_5b95423386e8f');
         }
+        // TODO : Ajouter une option d'affichage Nombre de Personnes dans l'ACF
+        // if (in_array('peoples', $item_wrapper['display_elements'])) {
+        //     $data['the_peoples'] = $item->get_field('field_5b6d54a10381f');
+        // }
     }
+
+    $data['the_peoples'] = $item->get_field('field_5b6d54a10381f');
 
     if (!empty($item_wrapper['display_button'])) {
         $data['link']['link_label'] = getFieldAndFallBack($item, 'focus_button_title', $item);
