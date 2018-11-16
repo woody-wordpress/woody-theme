@@ -32,10 +32,11 @@
     transition: max-height 1s
 }
 
-.cc-link,
-.cc-revoke:hover {
-    text-decoration: underline
-}
+// HACK to remove underline
+// .cc-link,
+// .cc-revoke:hover {
+//     text-decoration: underline
+// }
 
 .cc-revoke,
 .cc-window {
@@ -110,10 +111,6 @@
     border-style: solid;
     text-align: center;
     white-space: nowrap
-}
-
-.cc-banner .cc-btn:last-child {
-    min-width: 140px
 }
 
 .cc-highlight .cc-btn:first-child {
@@ -214,8 +211,11 @@
 }
 
 .cc-banner .cc-message {
-    -ms-flex: 1;
-    flex: 1
+    display: block;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    max-width: 100%;
+    margin-right: 1em
 }
 
 .cc-compliance {
@@ -227,7 +227,7 @@
     align-content: space-between
 }
 
-.cc-compliance>.cc-btn {
+.cc-floating .cc-compliance>.cc-btn {
     -ms-flex: 1;
     flex: 1
 }
@@ -237,6 +237,7 @@
 }
 
 @media print {
+
     .cc-revoke,
     .cc-window {
         display: none
@@ -254,32 +255,44 @@ screen and (max-width:736px) and (orientation:landscape) {
     .cc-window.cc-top {
         top: 0
     }
+
     .cc-window.cc-bottom {
         bottom: 0
     }
+
     .cc-window.cc-banner,
+    .cc-window.cc-floating,
     .cc-window.cc-left,
     .cc-window.cc-right {
         left: 0;
         right: 0
     }
+
     .cc-window.cc-banner {
         -ms-flex-direction: column;
         flex-direction: column
     }
+
     .cc-window.cc-banner .cc-compliance {
-        -ms-flex: 1;
-        flex: 1
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto
     }
+
     .cc-window.cc-floating {
         max-width: none
     }
+
     .cc-window .cc-message {
         margin-bottom: 1em
     }
+
     .cc-window.cc-banner {
         -ms-flex-align: unset;
         align-items: unset
+    }
+
+    .cc-window.cc-banner .cc-message {
+        margin-right: 0
     }
 }
 
