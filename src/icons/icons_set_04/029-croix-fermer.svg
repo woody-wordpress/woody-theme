@@ -1,1 +1,12 @@
-<svg height="50" viewBox="0 0 50 50" width="50" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="9" transform="matrix(.70710678 .70710678 -.70710678 .70710678 25 -4.698485)"><path d="m21.25.5v41"/><path d="m.5 21.5h41"/></g></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
+    <title>029-croix-fermer</title>
+    <desc>Created with Sketch.</desc>
+    <g id="029-croix-fermer" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-2" transform="translate(25.000000, 25.000000) rotate(-315.000000) translate(-25.000000, -25.000000) " fill="#000000" fill-rule="nonzero">
+            <path d="M20.75,4.5 C20.75,2.01471863 22.7647186,5.68434189e-14 25.25,5.68434189e-14 C27.7352814,5.68434189e-14 29.75,2.01471863 29.75,4.5 L29.75,45.5 C29.75,47.9852814 27.7352814,50 25.25,50 C22.7647186,50 20.75,47.9852814 20.75,45.5 L20.75,4.5 Z" id="Line-3"></path>
+            <path d="M4.5,30 C2.01471863,30 -1.13686838e-13,27.9852814 -1.13686838e-13,25.5 C-1.13686838e-13,23.0147186 2.01471863,21 4.5,21 L45.5,21 C47.9852814,21 50,23.0147186 50,25.5 C50,27.9852814 47.9852814,30 45.5,30 L4.5,30 Z" id="Line"></path>
+        </g>
+    </g>
+</svg>
