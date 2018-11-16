@@ -100,6 +100,7 @@ class WoodyTheme_ACF
         $sections = [
             'section_01' => 'grids_basic-grid_1_cols-tpl_01',
             'section_02' => 'grids_basic-grid_1_cols-tpl_02',
+            'section_04' => 'grids_basic-grid_2_cols-tpl_01',
             'section_04' => 'grids_basic-grid_2_cols-tpl_02',
             'section_05' => 'grids_basic-grid_2_cols-tpl_05',
             'section_06' => 'grids_basic-grid_2_cols-tpl_03',
@@ -173,6 +174,48 @@ class WoodyTheme_ACF
             'lists_and_focuses_50' => 'lists-list_full-tpl_301'
         ];
 
+        $galleries = [
+            'gallery_01' => 'blocks-media_gallery-tpl_102',
+            'gallery_02' => 'blocks-media_gallery-tpl_103',
+            'gallery_03' => 'blocks-media_gallery-tpl_104',
+            'gallery_04' => 'blocks-media_gallery-tpl_101',
+            'gallery_05' => 'blocks-media_gallery-tpl_105',
+            'gallery_06' => 'blocks-media_gallery-tpl_107',
+            'gallery_07' => 'blocks-media_gallery-tpl_108',
+            'gallery_08' => 'blocks-media_gallery-tpl_106',
+            'gallery_09' => 'blocks-media_gallery-tpl_109',
+            'gallery_10' => 'blocks-media_gallery-tpl_202',
+            'gallery_11' => 'blocks-media_gallery-tpl_203',
+            'gallery_12' => 'blocks-media_gallery-tpl_204',
+            'gallery_13' => 'blocks-media_gallery-tpl_201',
+            'gallery_14' => 'blocks-media_gallery-tpl_205',
+            'gallery_15' => 'blocks-media_gallery-tpl_302',
+            'gallery_16' => 'blocks-media_gallery-tpl_303',
+            'gallery_17' => 'blocks-media_gallery-tpl_304',
+            'gallery_18' => 'blocks-media_gallery-tpl_301',
+            'gallery_19' => 'blocks-media_gallery-tpl_305',
+            'gallery_20' => 'blocks-media_gallery-tpl_403',
+            'gallery_21' => 'blocks-media_gallery-tpl_404',
+            'gallery_22' => 'blocks-media_gallery-tpl_401',
+            'gallery_23' => 'blocks-media_gallery-tpl_405',
+            'gallery_24' => 'blocks-media_gallery-tpl_503',
+            'gallery_25' => 'blocks-media_gallery-tpl_504',
+            'gallery_26' => 'blocks-media_gallery-tpl_501',
+            'gallery_27' => 'blocks-media_gallery-tpl_505',
+            'gallery_28' => 'blocks-media_gallery-tpl_603',
+            'gallery_29' => 'blocks-media_gallery-tpl_604',
+            'gallery_30' => 'blocks-media_gallery-tpl_601',
+            'gallery_31' => 'blocks-media_gallery-tpl_605',
+            'gallery_32' => 'blocks-media_gallery-tpl_206',
+            'gallery_33' => 'blocks-media_gallery-tpl_207',
+            'gallery_34' => 'blocks-media_gallery-tpl_306',
+            'gallery_35' => 'blocks-media_gallery-tpl_307',
+            'gallery_36' => 'blocks-media_gallery-tpl_208',
+            'gallery_37' => 'blocks-media_gallery-tpl_209',
+            'gallery_38' => 'blocks-media_gallery-tpl_210',
+            'gallery_39' => 'blocks-media_gallery-tpl_211',
+        ];
+
         $cta = [
             'cta_01' => 'blocks-call_to_action-tpl_01',
             'cta_02' => 'blocks-call_to_action-tpl_02',
@@ -181,7 +224,7 @@ class WoodyTheme_ACF
             'cta_05' => 'blocks-call_to_action-tpl_04',
         ];
 
-        $return = $teasers + $heroes + $sections + $lists_and_focuses + $cta;
+        $return = $teasers + $heroes + $sections + $lists_and_focuses + $galleries + $cta;
 
         return $return;
     }
@@ -251,14 +294,19 @@ class WoodyTheme_ACF
                     }
                 }
 
-                $order = array_flip($this->sortWoodyTpls());
-                foreach($order as $order_key => $value){
+                $woody_tpls_order = get_transient('woody_tpls_order');
+                if (empty($woody_tpls_order)) {
+                    $woody_tpls_order = array_flip($this->sortWoodyTpls());
+                    set_transient('woody_tpls_order', $woody_tpls_order);
+                }
+
+                foreach($woody_tpls_order as $order_key => $value){
                     if(!array_key_exists($order_key, $field['choices'])){
-                        unset($order[$order_key]);
+                        unset($woody_tpls_order[$order_key]);
                     }
                 }
 
-                $field['choices'] = array_merge($order, $field['choices']);
+                $field['choices'] = array_merge($woody_tpls_order, $field['choices']);
             }
         }
 
@@ -476,6 +524,7 @@ class WoodyTheme_ACF
     public function cleanTransient()
     {
         delete_transient('woody_terms_page_type');
+        delete_transient('woody_tpls_order');
         delete_transient('woody_components');
         delete_transient('woody_icons_folder');
         delete_transient('woody_page_taxonomies_choices');
