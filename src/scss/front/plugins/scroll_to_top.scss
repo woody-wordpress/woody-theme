@@ -1,4 +1,7 @@
 #scroll_to_top {
+    @include breakpoint(small medium){
+        display: none !important;
+    }
     display: none;
     position: fixed;
     bottom: 15px;

@@ -1,4 +1,5 @@
-{{ page_parts.main_menu }}
+{{ page_parts.main_menu|default }}
+{{ page_parts.mobile_menu|default }}
 
 {% if page_parts.top_header %}
     {{ page_parts.top_header }}
