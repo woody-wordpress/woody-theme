@@ -83,6 +83,109 @@ class WoodyTheme_ACF
         return $api;
     }
 
+    public function sortWoodyTpls(){
+
+        $heroes = [
+            'hero_01' => 'blocks-hero-tpl_01',
+            'hero_02' => 'blocks-hero-tpl_02',
+            'hero_03' => 'blocks-hero-tpl_03'
+        ];
+
+        $teasers = [
+            'teaser_01' => 'blocks-page_teaser-tpl_01',
+            'teaser_02' => 'blocks-page_teaser-tpl_02',
+            'teaser_03' => 'blocks-page_teaser-tpl_03'
+        ];
+
+        $sections = [
+            'section_01' => 'grids_basic-grid_1_cols-tpl_01',
+            'section_02' => 'grids_basic-grid_1_cols-tpl_02',
+            'section_04' => 'grids_basic-grid_2_cols-tpl_02',
+            'section_05' => 'grids_basic-grid_2_cols-tpl_05',
+            'section_06' => 'grids_basic-grid_2_cols-tpl_03',
+            'section_07' => 'grids_basic-grid_2_cols-tpl_04',
+            'section_08' => 'grids_basic-grid_3_cols-tpl_01',
+            'section_09' => 'grids_basic-grid_3_cols-tpl_02',
+            'section_10' => 'grids_basic-grid_3_cols-tpl_03',
+            'section_11' => 'grids_basic-grid_3_cols-tpl_04',
+            'section_12' => 'grids_basic-grid_4_cols-tpl_01',
+            'section_13' => 'grids_basic-grid_5_cols-tpl_01',
+            'section_14' => 'grids_basic-grid_6_cols-tpl_01',
+            'section_15' => 'grids_split-grid_2_cols-tpl_06',
+            'section_16' => 'grids_split-grid_2_cols-tpl_05',
+            'section_17' => 'grids_split-grid_2_cols-tpl_04',
+            'section_18' => 'grids_split-grid_2_cols-tpl_01',
+            'section_19' => 'grids_split-grid_2_cols-tpl_03',
+            'section_20' => 'grids_split-grid_2_cols-tpl_02'
+        ];
+
+        $lists_and_focuses = [
+            'lists_and_focuses_01' => 'blocks-focus-tpl_103',
+            'lists_and_focuses_02' => 'blocks-focus-tpl_104',
+            'lists_and_focuses_03' => 'blocks-focus-tpl_105',
+            'lists_and_focuses_04' => 'blocks-focus-tpl_102',
+            'lists_and_focuses_05' => 'blocks-focus-tpl_101',
+            'lists_and_focuses_06' => 'blocks-focus-tpl_110',
+            'lists_and_focuses_07' => 'blocks-focus-tpl_106',
+            'lists_and_focuses_08' => 'blocks-focus-tpl_107',
+            'lists_and_focuses_09' => 'blocks-focus-tpl_108',
+            'lists_and_focuses_10' => 'blocks-focus-tpl_109',
+            'lists_and_focuses_11' => 'blocks-focus-tpl_111',
+            'lists_and_focuses_12' => 'lists-list_grids-tpl_207',
+            'lists_and_focuses_13' => 'lists-list_grids-tpl_202',
+            'lists_and_focuses_14' => 'lists-list_grids-tpl_206',
+            'lists_and_focuses_15' => 'lists-list_grids-tpl_203',
+            'lists_and_focuses_16' => 'lists-list_grids-tpl_204',
+            'lists_and_focuses_17' => 'lists-list_grids-tpl_201',
+            'lists_and_focuses_18' => 'lists-list_grids-tpl_205',
+            'lists_and_focuses_19' => 'blocks-focus-tpl_201',
+            'lists_and_focuses_20' => 'blocks-focus-tpl_301',
+            'lists_and_focuses_21' => 'blocks-focus-tpl_304',
+            'lists_and_focuses_22' => 'blocks-focus-tpl_306',
+            'lists_and_focuses_23' => 'blocks-focus-tpl_303',
+            'lists_and_focuses_24' => 'blocks-focus-tpl_302',
+            'lists_and_focuses_25' => 'blocks-focus-tpl_305',
+            'lists_and_focuses_25' => 'lists-list_grids-tpl_307',
+            'lists_and_focuses_26' => 'lists-list_grids-tpl_302',
+            'lists_and_focuses_27' => 'lists-list_grids-tpl_306',
+            'lists_and_focuses_28' => 'lists-list_grids-tpl_303',
+            'lists_and_focuses_29' => 'lists-list_grids-tpl_304',
+            'lists_and_focuses_30' => 'lists-list_grids-tpl_301',
+            'lists_and_focuses_31' => 'lists-list_grids-tpl_305',
+            'lists_and_focuses_32' => 'lists-list_grids-tpl_310',
+            'lists_and_focuses_33' => 'blocks-focus-tpl_401',
+            'lists_and_focuses_34' => 'blocks-focus-tpl_402',
+            'lists_and_focuses_35' => 'blocks-focus-tpl_403',
+            'lists_and_focuses_36' => 'blocks-focus-tpl_501',
+            'lists_and_focuses_37' => 'blocks-focus-tpl_502',
+            'lists_and_focuses_38' => 'blocks-focus-tpl_601',
+            'lists_and_focuses_39' => 'blocks-focus-tpl_602',
+            'lists_and_focuses_40' => 'blocks-focus-tpl_603',
+            'lists_and_focuses_41' => 'blocks-focus-tpl_701',
+            'lists_and_focuses_42' => 'blocks-focus-tpl_1001',
+            'lists_and_focuses_43' => 'blocks-focus_map-tpl_01',
+            'lists_and_focuses_44' => 'lists-list_full-tpl_101',
+            'lists_and_focuses_45' => 'lists-list_full-tpl_102',
+            'lists_and_focuses_46' => 'lists-list_full-tpl_105',
+            'lists_and_focuses_47' => 'lists-list_full-tpl_103',
+            'lists_and_focuses_48' => 'lists-list_full-tpl_104',
+            'lists_and_focuses_49' => 'lists-list_full-tpl_201',
+            'lists_and_focuses_50' => 'lists-list_full-tpl_301'
+        ];
+
+        $cta = [
+            'cta_01' => 'blocks-call_to_action-tpl_01',
+            'cta_02' => 'blocks-call_to_action-tpl_02',
+            'cta_03' => 'blocks-call_to_action-tpl_05',
+            'cta_04' => 'blocks-call_to_action-tpl_03',
+            'cta_05' => 'blocks-call_to_action-tpl_04',
+        ];
+
+        $return = $teasers + $heroes + $sections + $lists_and_focuses + $cta;
+
+        return $return;
+    }
+
     /**
      * Benoit Bouchaud
      * On ajoute les templates Woody disponibles dans les option du champ radio woody_tpl
@@ -147,6 +250,15 @@ class WoodyTheme_ACF
                         }
                     }
                 }
+
+                $order = array_flip($this->sortWoodyTpls());
+                foreach($order as $order_key => $value){
+                    if(!array_key_exists($order_key, $field['choices'])){
+                        unset($order[$order_key]);
+                    }
+                }
+
+                $field['choices'] = array_merge($order, $field['choices']);
             }
         }
 
