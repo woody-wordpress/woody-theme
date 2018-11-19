@@ -440,6 +440,14 @@ class WoodyTheme_Plugins_Options
         $this->updateOption('wpseo_titles', $wpseo_titles);
 
         // Duplicate Post
+        $duplicate_post_types_enabled = [
+            'post',
+            'page',
+            'short_link',
+            'woody_claims',
+        ];
+        $this->updateOption('duplicate_post_types_enabled', $duplicate_post_types_enabled);
+
         $duplicate_post_roles = [
             'administrator',
             'editor',
