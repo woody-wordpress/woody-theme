@@ -36,7 +36,11 @@ $context['current_url'] = get_permalink();
 $context['active_social_shares'] = getActiveShares();
 $context['page_type'] = getTermsSlugs($context['post']->ID, 'page_type', true);
 if (class_exists('SubWoodyTheme_TemplateParts')) {
+
     $SubWoodyTheme_TemplateParts = new SubWoodyTheme_TemplateParts($context['woody_components']);
+    if(!empty($SubWoodyTheme_TemplateParts->website_logo)){
+        $context['website_logo'] = $SubWoodyTheme_TemplateParts->website_logo;
+    }
     $context['page_parts'] = $SubWoodyTheme_TemplateParts->getParts();
 }
 

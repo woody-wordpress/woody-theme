@@ -2,6 +2,11 @@
 {% block content %}
     <main id="main-content" class="content-type-page {{ page_type|default }}">
         <div class="content-wrapper">
+            <div class="mobile-header hide-for-large title-bar">
+                <a href="/">
+                    {{ website_logo|default('Website logo') }}
+                </a>
+            </div>
             {{ page_hero|default }}
             {# {% include 'parts/shares.twig' %} #}
             {% block page_teaser %}
