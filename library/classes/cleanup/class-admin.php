@@ -76,10 +76,14 @@ class WoodyTheme_Cleanup_Admin
         $user = wp_get_current_user();
         if (!in_array('administrator', $user->roles)) {
             remove_menu_page('themes.php'); // Apparence
-            remove_menu_page('tools.php'); // Outils
             remove_menu_page('profile.php'); // Profil
             remove_menu_page('edit.php?post_type=touristic_sheet'); // Fiches SIT
         }
+
+        if (!in_array('administrator', $user->roles) && !in_array('editor', $user->roles)) {
+            remove_menu_page('tools.php'); // Outils
+        }
+
         remove_menu_page('edit.php'); // Articles
         remove_menu_page('edit-comments.php'); // Commentaires
 
