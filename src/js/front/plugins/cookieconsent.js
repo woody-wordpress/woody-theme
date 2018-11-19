@@ -2,7 +2,7 @@ var style = getComputedStyle(document.body);
 var userLang = navigator.language || navigator.userLanguage;
 console.log("The Navigator language is: " + userLang);
 
-if (userLang.includes('fr-')) {
+if (userLang.includes('fr-') || userLang == 'fr') {
     var message = "Ce site web active par défaut des cookies de mesure d'audience et pour des fonctionnalités anonymes.";
     var dismiss = "OK je comprends !";
     var allow = "J'accepte les cookies";
