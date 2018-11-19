@@ -169,6 +169,12 @@ class WoodyTheme_Roles
                 'contributor' => false,
                 'translator' => false,
             ],
+            'check404' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+                'translator' => false,
+            ],
             'list_users' => [
                 'administrator' => true,
                 'editor' => false,
