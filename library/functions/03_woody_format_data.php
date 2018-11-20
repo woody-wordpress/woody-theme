@@ -365,7 +365,18 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     $the_list['filters'] = (!empty($layout['the_list_filters']['list_filters'])) ? $layout['the_list_filters']['list_filters'] : '';
     if (!empty($the_list['filters'])) {
         foreach ($the_list['filters'] as $key => $filter) {
-            if ($filter['list_filter_type'] == 'taxonomy') {
+
+            if($filter['list_filter_type'] == 'custom_terms'){
+                if(!empty($filter['list_filter_custom_terms'])){
+                    foreach ($filter['list_filter_custom_terms'] as $form_term_key => $form_term) {
+                        $term = get_term($form_term['value']);
+                        $the_list['filters'][$key]['list_filter_custom_terms'][$form_term_key] = [
+                            'value' => $term->term_id,
+                            'label' => $term->name
+                        ];
+                    }
+                }
+            } elseif ($filter['list_filter_type'] == 'taxonomy') {
                 $terms = get_terms($filter['list_filter_taxonomy'], array(
                     'hide_empty' => false,
                 ));
@@ -725,7 +736,18 @@ function getPagePreview($item_wrapper, $item)
         if (in_array('length', $item_wrapper['display_elements'])) {
             $data['the_length'] = $item->get_field('field_5b95423386e8f');
         }
-        // TODO : Ajouter une option d'affichage Nombre de Personnes dans l'ACF
+
+        if (in_array('_themes', $item_wrapper['display_elements'])) {
+            $data['terms']['theme'] = getPrimaryTerm('themes', $item->ID, array('name', 'slug', 'term_id'));
+        }
+        if (in_array('_places', $item_wrapper['display_elements'])) {
+            $data['terms']['place'] = getPrimaryTerm('places', $item->ID, array('name', 'slug', 'term_id'));
+        }
+        if (in_array('_seasons', $item_wrapper['display_elements'])) {
+            $data['terms']['season'] = getPrimaryTerm('seasons', $item->ID, array('name', 'slug', 'term_id'));
+        }
+
+        // TODO: Ajouter une option d'affichage Nombre de Personnes dans l'ACF
         // if (in_array('peoples', $item_wrapper['display_elements'])) {
         //     $data['the_peoples'] = $item->get_field('field_5b6d54a10381f');
         // }

@@ -238,3 +238,27 @@ function getPageTerms($post_id){
 
         return $return;
 }
+
+function getPrimaryTerm($taxonomy, $post_id, $fields = []){
+    $return = '';
+    // $field values can be : count, description, filter, name, perent, slug, taxonomy, term_group, term_id, term_taxonomy_id
+    if (class_exists('WPSEO_Primary_Term')) {
+        $wpseo_primary_term = new WPSEO_Primary_Term( $taxonomy, $post_id );
+        $primary_id = $wpseo_primary_term->get_primary_term();
+        $primary_term = get_term($primary_id);
+        if (!is_wp_error($primary_term) && !empty($primary_term)) {
+            if(empty($fields)){
+                    $return = $primary_term;
+            } else{
+                foreach ($fields as $field) {
+                    $return[$field] = $primary_term->$field;
+                }
+            }
+        }
+
+    } else {
+        return false;
+    }
+
+    return $return;
+}
