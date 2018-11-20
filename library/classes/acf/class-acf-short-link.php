@@ -46,11 +46,17 @@ class WoodyTheme_ACF_ShorLink
         if ($post_type !== 'short_link') {
             return;
         }
+
         $autoselect_id = get_field('playlist_autoselection_id', $post_id);
         $linked_url = get_field('short_link_page_url', $post_id);
-        $linked_id = url_to_postid($linked_url);
-        $linked_post_type = get_the_terms($linked_id, 'page_type');
+        if (is_numeric($linked_url)) {
+            $linked_id = $linked_url;
+            $linked_url = get_permalink($linked_id);
+        } else {
+            $linked_id = url_to_postid($linked_url);
+        }
 
+        $linked_post_type = get_the_terms($linked_id, 'page_type');
         if ($linked_post_type[0]->slug == 'playlist_tourism' && !empty($autoselect_id)) {
             $short_link_final_url = $linked_url . '?autoselect_id=' . $autoselect_id;
         } else {
