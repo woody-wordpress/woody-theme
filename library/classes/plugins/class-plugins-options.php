@@ -459,10 +459,15 @@ class WoodyTheme_Plugins_Options
         update_option('varnish_caching_enable', true, '', 'yes');
         update_option('varnish_caching_ttl', (WP_ENV == 'dev') ? 120 : 10800, '', 'yes');
         update_option('varnish_caching_homepage_ttl', (WP_ENV == 'dev') ? 120 : 10800, '', 'yes');
-        update_option('varnish_caching_ips', (WP_ENV == 'prod') ? 'wpv1.rc.prod' : '127.0.0.1', '', 'yes');
+        if ((WP_SITE_KEY == 'crt-bretagne' || WP_SITE_KEY == 'broceliande') && WP_ENV == 'prod') {
+            update_option('varnish_caching_ips', '127.0.0.1:6081', '', 'yes');
+        } else {
+            update_option('varnish_caching_ips', (WP_ENV == 'prod') ? 'wpv1.rc.prod' : '127.0.0.1', '', 'yes');
+        }
         update_option('varnish_caching_purge_key', 'l6ka6sb3hff9fzhx4h2qa38iqgyedznou5hawcj4rgfxlvx9m69zyqtz78yfsmws', '', 'yes');
         update_option('varnish_caching_cookie', 'y0ecy4qrkcw5rkfdyxyuf9dsoi62omz5fnpkdou8er5xcfeg7hvkqskyn7ps961j', '', 'yes');
         update_option('varnish_caching_debug', (WP_ENV == 'prod') ? false : true, '', 'yes');
+        update_option('varnish_caching_dynamic_host', true, '', 'yes');
     }
 
     private function updateOption($option_name, $settings, $autoload = 'yes')
