@@ -460,7 +460,7 @@ class WoodyTheme_Plugins_Options
         update_option('varnish_caching_ttl', (WP_ENV == 'dev') ? 120 : 10800, '', 'yes');
         update_option('varnish_caching_homepage_ttl', (WP_ENV == 'dev') ? 120 : 10800, '', 'yes');
         if ((WP_SITE_KEY == 'crt-bretagne' || WP_SITE_KEY == 'broceliande') && WP_ENV == 'prod') {
-            update_option('varnish_caching_ips', '127.0.0.1:6081', '', 'yes');
+            update_option('varnish_caching_ips', '10.75.10.13:6081', '', 'yes');
         } else {
             update_option('varnish_caching_ips', (WP_ENV == 'prod') ? 'wpv1.rc.prod' : '127.0.0.1', '', 'yes');
         }
