@@ -24,6 +24,7 @@ new WoodyTheme_Cleanup_Minify();
 new WoodyTheme_Cleanup_Admin();
 new WoodyTheme_Cleanup_Front();
 new WoodyTheme_Cleanup_Permalink();
+new WoodyTheme_Cleanup_OptionsTable();
 
 // Dashboard
 new WoodyTheme_Dashboard();
