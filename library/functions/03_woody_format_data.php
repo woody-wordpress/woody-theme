@@ -365,7 +365,18 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     $the_list['filters'] = (!empty($layout['the_list_filters']['list_filters'])) ? $layout['the_list_filters']['list_filters'] : '';
     if (!empty($the_list['filters'])) {
         foreach ($the_list['filters'] as $key => $filter) {
-            if ($filter['list_filter_type'] == 'taxonomy') {
+
+            if($filter['list_filter_type'] == 'custom_terms'){
+                if(!empty($filter['list_filter_custom_terms'])){
+                    foreach ($filter['list_filter_custom_terms'] as $form_term_key => $form_term) {
+                        $term = get_term($form_term['value']);
+                        $the_list['filters'][$key]['list_filter_custom_terms'][$form_term_key] = [
+                            'value' => $term->term_id,
+                            'label' => $term->name
+                        ];
+                    }
+                }
+            } elseif ($filter['list_filter_type'] == 'taxonomy') {
                 $terms = get_terms($filter['list_filter_taxonomy'], array(
                     'hide_empty' => false,
                 ));
