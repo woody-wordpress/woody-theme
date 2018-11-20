@@ -44,6 +44,8 @@ if (class_exists('SubWoodyTheme_TemplateParts')) {
     $context['page_parts'] = $SubWoodyTheme_TemplateParts->getParts();
 }
 
+$context['page_terms'] = implode(' ', getPageTerms($context['post']->ID));
+
 /*********************************************
  * Compilation du Diaporama en page d'accueil
  *********************************************/

@@ -214,3 +214,27 @@ function getMinMaxWoodyPostFieldValues($posts, $post_type, $field, $subfield = '
 
     return $return;
 }
+
+function getPageTerms($post_id){
+
+    $return = [];
+
+    $taxonomies = get_transient('woody_website_pages_taxonomies');
+    if (empty($taxonomies)) {
+        $taxonomies = get_object_taxonomies('page', 'objects');
+        unset($taxonomies['language']);
+        unset($taxonomies['page_type']);
+        unset($taxonomies['post_translations']);
+        set_transient('woody_website_pages_taxonomies', $taxonomies);
+        }
+
+        foreach ($taxonomies as $taxonomy) {
+            $terms = wp_get_post_terms($post_id, $taxonomy->name);
+            foreach ($terms as $term) {
+                $return[] = 'term-' . $term->slug;
+            }
+
+        }
+
+        return $return;
+}

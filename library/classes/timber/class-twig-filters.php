@@ -56,6 +56,7 @@ class WoodyTheme_Twig_Filters
             $truncate = '';
             preg_match_all('/(<\/?([\w+]+)[^>]*>)?([^<>]*)/', $text, $tags, PREG_SET_ORDER);
             foreach ($tags as $tag) {
+                PC::debug($tag[2], 'Ellipsis');
                 if (!preg_match('/img|br|input|hr|area|base|basefont|col|frame|isindex|link|meta|param/s', $tag[2])) {
                     if (preg_match('/<[\w]+[^>]*>/s', $tag[0])) {
                         array_unshift($openTags, $tag[2]);
@@ -92,6 +93,7 @@ class WoodyTheme_Twig_Filters
                 }
             }
         } else {
+            $text = strip_tags($text);
             if (mb_strlen($text) <= $length) {
                 return $text;
             } else {
