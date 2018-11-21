@@ -468,6 +468,12 @@ class WoodyTheme_Roles
                 'contributor' => false,
                 'translator' => false,
             ],
+            'woody_process_mediasync' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
 
             // Taxonomies
             'Configurer les thématiques' => [
