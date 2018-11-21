@@ -18,9 +18,24 @@ class WoodyTheme_Roles
         add_action('woody_theme_update', [$this, 'addRoles']);
         add_action('woody_theme_update', [$this, 'addCapabilities']);
         add_filter('auth_cookie_expiration', [$this, 'authCookieExpirationFilter'], 10, 3);
+        add_action('members_register_cap_groups', [$this, 'registerMembersGroups']);
         // add_filter('redirection_role', function ($role) {
         //     return 'editor';
         // });
+    }
+
+    /**
+     * Registers the user capability group for the Members plugin.
+     *
+     * @link https://wordpress.org/plugins/members/
+     */
+    public function registerMembersGroups()
+    {
+        members_register_cap_group('woody', array(
+            'label'    => __('Woody', 'woody'),
+            'icon'     => 'dashicons-admin-settings',
+            'priority' => 30,
+        ));
     }
 
     public function addRoles()
@@ -43,140 +58,56 @@ class WoodyTheme_Roles
     public function addCapabilities()
     {
         $capabilities = [
+            'switch_themes' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'edit_themes' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'edit_theme_options' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
             'activate_plugins' => [
                 'administrator' => true,
                 'editor' => false,
                 'contributor' => false,
                 'translator' => false,
             ],
-            'delete_others_pages' => [
-                'administrator' => true,
-                'editor' => true,
-                'contributor' => false,
-                'translator' => false,
-            ],
-            'delete_others_posts' => [
-                'administrator' => true,
-                'editor' => true,
-                'contributor' => true,
-                'translator' => false,
-            ],
-            'delete_pages' => [
-                'administrator' => true,
-                'editor' => true,
-                'contributor' => false,
-                'translator' => false,
-            ],
-            'delete_posts' => [
-                'administrator' => true,
-                'editor' => true,
-                'contributor' => true,
-                'translator' => false,
-            ],
-            'delete_private_pages' => [
-                'administrator' => true,
-                'editor' => true,
-                'contributor' => false,
-                'translator' => false,
-            ],
-            'delete_private_posts' => [
-                'administrator' => true,
-                'editor' => true,
-                'contributor' => true,
-                'translator' => false,
-            ],
-            'delete_published_pages' => [
-                'administrator' => true,
-                'editor' => true,
-                'contributor' => false,
-                'translator' => false,
-            ],
-            'delete_published_posts' => [
-                'administrator' => true,
-                'editor' => true,
-                'contributor' => true,
-                'translator' => false,
-            ],
-            'edit_dashboard' => [
-                'administrator' => true,
-                'editor' => true,
-                'contributor' => true,
-                'translator' => true,
-            ],
-            'edit_others_pages' => [
-                'administrator' => true,
-                'editor' => true,
-                'contributor' => true,
-                'translator' => true,
-            ],
-            'edit_others_posts' => [
-                'administrator' => true,
-                'editor' => true,
-                'contributor' => true,
-                'translator' => true,
-            ],
-            'edit_pages' => [
-                'administrator' => true,
-                'editor' => true,
-                'contributor' => true,
-                'translator' => true,
-            ],
-            'edit_posts' => [
-                'administrator' => true,
-                'editor' => true,
-                'contributor' => true,
-                'translator' => true,
-            ],
-            'edit_private_pages' => [
-                'administrator' => true,
-                'editor' => true,
-                'contributor' => true,
-                'translator' => true,
-            ],
-            'edit_private_posts' => [
-                'administrator' => true,
-                'editor' => true,
-                'contributor' => true,
-                'translator' => true,
-            ],
-            'edit_published_pages' => [
-                'administrator' => true,
-                'editor' => true,
-                'contributor' => true,
-                'translator' => true,
-            ],
-            'edit_published_posts' => [
-                'administrator' => true,
-                'editor' => true,
-                'contributor' => true,
-                'translator' => true,
-            ],
-            'edit_theme_options' => [
+            'edit_plugins' => [
                 'administrator' => true,
                 'editor' => false,
                 'contributor' => false,
                 'translator' => false,
             ],
-            'export' => [
+            'edit_users' => [
                 'administrator' => true,
                 'editor' => false,
                 'contributor' => false,
                 'translator' => false,
             ],
-            'import' => [
+            'edit_files' => [
                 'administrator' => true,
                 'editor' => false,
                 'contributor' => false,
                 'translator' => false,
             ],
-            'check404' => [
+            'manage_options' => [
                 'administrator' => true,
-                'editor' => true,
+                'editor' => false,
                 'contributor' => false,
                 'translator' => false,
             ],
-            'list_users' => [
-                'administrator' => true,
+            'moderate_comments' => [
+                'administrator' => false,
                 'editor' => false,
                 'contributor' => false,
                 'translator' => false,
@@ -193,25 +124,37 @@ class WoodyTheme_Roles
                 'contributor' => false,
                 'translator' => false,
             ],
-            'manage_options' => [
+            'upload_files' => [
                 'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+                'translator' => true,
+            ],
+            'import' => [
+                'administrator' => false,
                 'editor' => false,
                 'contributor' => false,
                 'translator' => false,
             ],
-            'moderate_comments' => [
+            'unfiltered_html' => [
                 'administrator' => true,
-                'editor' => false,
-                'contributor' => false,
-                'translator' => false,
+                'editor' => true,
+                'contributor' => true,
+                'translator' => true,
             ],
-            'promote_users' => [
+            'edit_posts' => [
                 'administrator' => true,
-                'editor' => false,
-                'contributor' => false,
-                'translator' => false,
+                'editor' => true,
+                'contributor' => true,
+                'translator' => true,
             ],
-            'publish_pages' => [
+            'edit_others_posts' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+                'translator' => true,
+            ],
+            'edit_published_posts' => [
                 'administrator' => true,
                 'editor' => true,
                 'contributor' => true,
@@ -223,12 +166,7 @@ class WoodyTheme_Roles
                 'contributor' => true,
                 'translator' => true,
             ],
-            'read_private_pages' => [
-                'administrator' => true,
-                'editor' => true,
-                'contributor' => true,
-            ],
-            'read_private_posts' => [
+            'edit_pages' => [
                 'administrator' => true,
                 'editor' => true,
                 'contributor' => true,
@@ -240,66 +178,298 @@ class WoodyTheme_Roles
                 'contributor' => true,
                 'translator' => true,
             ],
-            'remove_users' => [
-                'administrator' => true,
-                'editor' => false,
-                'contributor' => false,
-                'translator' => false,
-            ],
-            'switch_themes' => [
-                'administrator' => true,
-                'editor' => false,
-                'contributor' => false,
-                'translator' => false,
-            ],
-            'upload_files' => [
+            'edit_others_pages' => [
                 'administrator' => true,
                 'editor' => true,
                 'contributor' => true,
                 'translator' => true,
             ],
-            'customize' => [
+            'edit_published_pages' => [
                 'administrator' => true,
-                'editor' => false,
-                'contributor' => false,
-                'translator' => false,
+                'editor' => true,
+                'contributor' => true,
+                'translator' => true,
             ],
-            'delete_site' => [
+            'publish_pages' => [
                 'administrator' => true,
-                'editor' => false,
-                'contributor' => false,
-                'translator' => false,
+                'editor' => true,
+                'contributor' => true,
+                'translator' => true,
             ],
-            'wpseo_bulk_edit' => [
-                'administrator' => true,
-                'editor' => false,
-                'contributor' => false,
-                'translator' => false,
-            ],
-            'wpseo_edit_advanced_metadata' => [
-                'administrator' => true,
-                'editor' => false,
-                'contributor' => false,
-                'translator' => false,
-            ],
-            'wpseo_manage_options' => [
-                'administrator' => true,
-                'editor' => false,
-                'contributor' => false,
-                'translator' => false,
-            ],
-            'copy_posts' => [
+            'delete_pages' => [
                 'administrator' => true,
                 'editor' => true,
                 'contributor' => false,
                 'translator' => false,
             ],
-            'view_query_monitor' => [
+            'delete_others_pages' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'delete_published_pages' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'delete_posts' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+                'translator' => false,
+            ],
+            'delete_others_posts' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+                'translator' => false,
+            ],
+            'delete_published_posts' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+                'translator' => false,
+            ],
+            'delete_private_posts' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+                'translator' => false,
+            ],
+            'edit_private_posts' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+                'translator' => true,
+            ],
+            'read_private_posts' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+                'translator' => true,
+            ],
+            'delete_private_pages' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+                'translator' => false,
+            ],
+            'edit_private_pages' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+                'translator' => true,
+            ],
+            'read_private_pages' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+                'translator' => true,
+            ],
+            'delete_users' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'create_users' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'unfiltered_upload' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+                'translator' => true,
+            ],
+            'edit_dashboard' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+                'translator' => true,
+            ],
+            'update_plugins' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'delete_plugins' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'install_plugins' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'update_themes' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'install_themes' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'update_core' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'list_users' => [
                 'administrator' => true,
                 'editor' => false,
                 'contributor' => false,
                 'translator' => false,
             ],
+            'remove_users' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'add_users' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'promote_users' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'edit_theme_options' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'delete_themes' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'export' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'edit_comment' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'approve_comment' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'unapprove_comment' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'reply_comment' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'quick_edit_comment' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'spam_comment' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'unspam_comment' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'trash_comment' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'untrash_comment' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'delete_comment' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'edit_permalink' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+                'translator' => true,
+            ],
+
+            // Woody Caps
+            'woody_instagram' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+                'translator' => false,
+            ],
+            'woody_pages' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+                'translator' => true,
+            ],
+            'woody_process_importer' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'woody_process_cleaning' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'woody_process_checker404' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+                'translator' => false,
+            ],
+
+            // Taxonomies
             'Configurer les thématiques' => [
                 'administrator' => true,
                 'editor' => true,
@@ -436,7 +606,89 @@ class WoodyTheme_Roles
                 'editor' => false,
                 'contributor' => false,
                 'translator' => false,
-            ]
+            ],
+
+            // Yoast
+            'wpseo_bulk_edit' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'wpseo_edit_advanced_metadata' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'wpseo_manage_options' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+
+            // Duplicate
+            'copy_posts' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+                'translator' => false,
+            ],
+
+            // Query Monitor
+            'view_query_monitor' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+                'translator' => false,
+            ],
+
+            // Members
+            'restrict_content' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'list_roles' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'create_roles' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'delete_roles' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'edit_roles' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+
+            // Custom
+            'delete_site' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'customize' => [
+                'administrator' => false,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
         ];
 
         foreach ($capabilities as $capability => $roles) {
