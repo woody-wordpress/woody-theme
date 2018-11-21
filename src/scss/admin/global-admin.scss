@@ -1,3 +1,9 @@
 body.themes-php .themes.single-theme .theme-actions {
     display: none;
 }
+
+body.admin-bar {
+    .woody-component-headnavs {
+        top: 32px;
+    }
+}
