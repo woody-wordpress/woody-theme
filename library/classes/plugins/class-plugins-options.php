@@ -456,9 +456,9 @@ class WoodyTheme_Plugins_Options
         update_option('duplicate_post_title_suffix', '(contenu dupliqué)', '', 'yes');
 
         // Varnish
-        update_option('varnish_caching_enable', true, '', 'yes');
-        update_option('varnish_caching_ttl', (WP_ENV == 'dev') ? 120 : 10800, '', 'yes');
-        update_option('varnish_caching_homepage_ttl', (WP_ENV == 'dev') ? 120 : 10800, '', 'yes');
+        update_option('varnish_caching_enable', (WP_ENV == 'dev') ? false : true, '', 'yes');
+        update_option('varnish_caching_ttl', (WP_ENV == 'dev') ? 600 : 10800, '', 'yes');
+        update_option('varnish_caching_homepage_ttl', (WP_ENV == 'dev') ? 600 : 10800, '', 'yes');
         if ((WP_SITE_KEY == 'crt-bretagne' || WP_SITE_KEY == 'broceliande') && WP_ENV == 'prod') {
             update_option('varnish_caching_ips', '10.75.10.13:6081', '', 'yes');
         } else {
