@@ -133,12 +133,15 @@ class WoodyTheme_Cleanup_Admin
                 'redirect'      => true
             ));
 
-            // Première sous-page
-            acf_add_options_sub_page(array(
+            if (function_exists('acf_add_options_sub_page')) {
+                // Première sous-page
+                acf_add_options_sub_page(array(
                 'page_title'    => 'Menu principal',
                 'menu_title'    => 'Menu principal',
                 'parent_slug'   => 'custom-menus',
+                'capability'    => 'edit_pages',
             ));
+            }
         }
     }
 
