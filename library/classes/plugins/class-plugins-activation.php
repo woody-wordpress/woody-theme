@@ -46,19 +46,39 @@ class WoodyTheme_Plugins_Activation
             'polylang-pro/polylang.php',
             'publish-view/publish-view.php',
             'velvet-blues-update-urls/velvet-blues-update-urls.php',
-            'vcaching/vcaching.php',
         ];
 
         $this->deactivate_plugins = [
             'permalink-manager-pro/permalink-manager.php',
         ];
 
-        if (WP_ENV == 'prod') {
-            $this->deactivate_plugins[] = 'query-monitor/query-monitor.php';
-            $this->deactivate_plugins[] = 'wp-php-console/wp-php-console.php';
-        } else {
-            $this->activate_plugins[] = 'query-monitor/query-monitor.php';
-            $this->activate_plugins[] = 'wp-php-console/wp-php-console.php';
+        switch (WP_ENV) {
+            case 'dev':
+                // Enable
+                $this->activate_plugins[] = 'query-monitor/query-monitor.php';
+                $this->activate_plugins[] = 'wp-php-console/wp-php-console.php';
+
+                // Disable
+                $this->deactivate_plugins[] = 'vcaching/vcaching.php';
+                break;
+
+            case 'preprod':
+                // Enable
+                $this->activate_plugins[] = 'vcaching/vcaching.php';
+                $this->activate_plugins[] = 'query-monitor/query-monitor.php';
+
+                // Disable
+                $this->deactivate_plugins[] = 'wp-php-console/wp-php-console.php';
+                break;
+
+            case 'prod':
+                // Enable
+                $this->activate_plugins[] = 'vcaching/vcaching.php';
+
+                // Disable
+                $this->deactivate_plugins[] = 'query-monitor/query-monitor.php';
+                $this->deactivate_plugins[] = 'wp-php-console/wp-php-console.php';
+                break;
         }
 
         require_once(ABSPATH . 'wp-admin/includes/plugin.php');
