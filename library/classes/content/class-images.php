@@ -284,6 +284,7 @@ class WoodyTheme_Images
         $_wp_additional_image_sizes['thumbnail'] = ['height' => 150, 'width' => 150, 'crop' => true];
         $_wp_additional_image_sizes['medium'] = ['height' => 300, 'width' => 300, 'crop' => true];
         $_wp_additional_image_sizes['large'] = ['height' => 1024, 'width' => 1024, 'crop' => true];
+        $_wp_additional_image_sizes['full'] = ['height' => 0, 'width' => 1024, 'crop' => true];
 
         if (!empty($_wp_additional_image_sizes[$ratio_name])) {
             $size = $_wp_additional_image_sizes[$ratio_name];
@@ -295,6 +296,22 @@ class WoodyTheme_Images
                     if (!empty($image_crop)) {
                         $attachment_metadata['sizes'][$ratio_name]['file'] = $image_crop;
                         wp_update_attachment_metadata($attachment_id, $attachment_metadata);
+
+                        // Save metadata to all languages
+                        $default_language = pll_default_language();
+                        $current_lang = pll_get_post_language($attachment_id);
+                        if ($current_lang == $default_language) {
+                            $languages = pll_languages_list();
+                            foreach ($languages as $lang) {
+                                if ($lang == $default_language) {
+                                    continue;
+                                }
+
+                                // Replace attachment_metadata by FR metadatas
+                                $t_attachment_id = pll_get_post($attachment->ID, $lang);
+                                wp_update_attachment_metadata($t_attachment_id, $attachment_metadata);
+                            }
+                        }
                     }
                 }
 
