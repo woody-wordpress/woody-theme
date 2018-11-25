@@ -308,7 +308,7 @@ class WoodyTheme_Images
                                 }
 
                                 // Replace attachment_metadata by FR metadatas
-                                $t_attachment_id = pll_get_post($attachment->ID, $lang);
+                                $t_attachment_id = pll_get_post($attachment_id, $lang);
                                 wp_update_attachment_metadata($t_attachment_id, $attachment_metadata);
                             }
                         }
