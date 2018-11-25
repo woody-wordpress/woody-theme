@@ -244,6 +244,7 @@ class WoodyTheme_Images
             $_wp_additional_image_sizes['thumbnail'] = ['height' => 150, 'width' => 150, 'crop' => true];
             $_wp_additional_image_sizes['medium'] = ['height' => 300, 'width' => 300, 'crop' => true];
             $_wp_additional_image_sizes['large'] = ['height' => 1024, 'width' => 1024, 'crop' => true];
+            $_wp_additional_image_sizes['full'] = ['height' => 0, 'width' => 1024, 'crop' => true];
 
             // Get Mime-Type
             $mime_type = mime_content_type(WP_UPLOAD_DIR . '/' . $metadata['file']);
