@@ -32,13 +32,16 @@ foreach ($icons as $icon) {
     }
 }
 
+// GTM
+$context['gtm'] = RC_GTM;
+
+// Woody
 $context['current_url'] = get_permalink();
 $context['active_social_shares'] = getActiveShares();
 $context['page_type'] = getTermsSlugs($context['post']->ID, 'page_type', true);
 if (class_exists('SubWoodyTheme_TemplateParts')) {
-
     $SubWoodyTheme_TemplateParts = new SubWoodyTheme_TemplateParts($context['woody_components']);
-    if(!empty($SubWoodyTheme_TemplateParts->website_logo)){
+    if (!empty($SubWoodyTheme_TemplateParts->website_logo)) {
         $context['website_logo'] = $SubWoodyTheme_TemplateParts->website_logo;
     }
     $context['page_parts'] = $SubWoodyTheme_TemplateParts->getParts();
@@ -74,7 +77,7 @@ if (!empty($trip_infos['the_duration']['count_days']) || !empty($trip_infos['the
 $page_teaser = [];
 $page_teaser = getAcfGroupFields('group_5b2bbb46507bf');
 if (!empty($page_teaser)) {
-    $page_teaser['page_teaser_title'] = (!empty($page_teaser['page_teaser_display_title'])) ? str_replace('-', '&#8209',$context['post']->post_title) : '';
+    $page_teaser['page_teaser_title'] = (!empty($page_teaser['page_teaser_display_title'])) ? str_replace('-', '&#8209', $context['post']->post_title) : '';
     $page_teaser['the_classes'] = [];
     $page_teaser['the_classes'][] = (!empty($page_teaser['background_img_opacity'])) ? $page_teaser['background_img_opacity'] : '';
     $page_teaser['the_classes'][] = (!empty($page_teaser['background_color'])) ? $page_teaser['background_color'] : '';
