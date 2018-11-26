@@ -619,7 +619,7 @@ function getTouristicSheetPreview($layout = null, $sheet_id, $sheet_wp)
                     'title' => (!empty($item['img']['title'])) ? $item['img']['title'] : ''
                 ],
                 'link' =>[
-                    'url' => (!empty($sheet_wp['content_selection']->guid)) ? $sheet_wp['content_selection']->guid : '',
+                    'url' => (!empty($sheet_wp['content_selection']->guid)) ? $sheet_wp['content_selection']->guid : $item['link'],
                 ]
             ];
 
