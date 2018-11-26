@@ -301,6 +301,9 @@ class WoodyTheme_Images
                     ];
                 }
             }
+
+            // Remove full size
+            unset($metadata['sizes']['full']);
         }
 
         return $metadata;
