@@ -20,7 +20,7 @@ class WoodyTheme_Images
     {
         // Actions
         add_action('add_attachment', [$this, 'addDefaultMediaType']);
-        add_action('save_post', [$this, 'updateAttachment'], 10, 3);
+        add_action('acf/save_post', [$this, 'updateAttachment']);
 
         // Filters
         add_filter('intermediate_image_sizes_advanced', [$this, 'removeAutoThumbs'], 10, 2);
@@ -189,10 +189,13 @@ class WoodyTheme_Images
     /* Sync attachment data     */
     /* ------------------------ */
 
-    public function updateAttachment($attachment_id, $attachment, $update)
+    public function updateAttachment($attachment_id)
     {
         $attachment_type = get_post_type($attachment_id);
         if ($attachment_type == 'attachment') {
+
+            // Get metadatas (crop sizes)
+            $attachment_metadata = wp_get_attachment_metadata($attachment_id);
 
             // Get ACF Fields (Author, Lat, Lng)
             $fields = get_fields($attachment_id);
@@ -206,7 +209,6 @@ class WoodyTheme_Images
                     if ($lang == $default_language) {
                         continue;
                     }
-
                     // Replace attachment_metadata by FR metadatas
                     $t_attachment_id = pll_get_post($attachment_id, $lang);
                     if (!empty($t_attachment_id)) {
