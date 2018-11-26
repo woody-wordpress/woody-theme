@@ -1,70 +1,69 @@
 <!DOCTYPE html>
 <html class="no-js" {{site.language_attributes}}>
-    <head>
-        <title>{{ title }}</title>
-        <meta charset="{{site.charset}}">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
+<head>
+<title>{{ title }}</title>
+<meta charset="{{site.charset}}">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-        {% if gtm|default %}
-        <!-- Google Tag Manager -->
-        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','{{ gtm }}');</script>
-        <!-- End Google Tag Manager -->
-        {% endif %}
+{% if gtm|default %}
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','{{ gtm }}');</script>
+<!-- End Google Tag Manager -->
+{% endif %}
 
-        <link rel='shortcut icon' type='image/x-icon' href="{{ icons.favicon }}"> <!-- Favicon -->
-        <link rel="shortcut icon" type="image/png" href="{{ icons.64 }}"> <!-- Favicon -->
-        <link rel="apple-touch-icon" href="{{ icons.120 }}"> <!-- iPhone -->
-        <link rel="apple-touch-icon" sizes="180x180" href="{{ icons.180 }}"> <!-- iPhone retina -->
-        <link rel="apple-touch-icon" sizes="152x152" href="{{ icons.152 }}"> <!-- iPad -->
-        <link rel="apple-touch-icon" sizes="167x167" href="{{ icons.167 }}"> <!-- iPad retina -->
-        <link rel="icon" sizes="192x192" href="{{ icons.192 }}"> <!-- Chrome -->
-        <link rel="icon" sizes="128x128" href="{{ icons.128 }}"> <!-- Chrome -->
+<link rel='shortcut icon' type='image/x-icon' href="{{ icons.favicon }}"> <!-- Favicon -->
+<link rel="shortcut icon" type="image/png" href="{{ icons.64 }}"> <!-- Favicon -->
+<link rel="apple-touch-icon" href="{{ icons.120 }}"> <!-- iPhone -->
+<link rel="apple-touch-icon" sizes="180x180" href="{{ icons.180 }}"> <!-- iPhone retina -->
+<link rel="apple-touch-icon" sizes="152x152" href="{{ icons.152 }}"> <!-- iPad -->
+<link rel="apple-touch-icon" sizes="167x167" href="{{ icons.167 }}"> <!-- iPad retina -->
+<link rel="icon" sizes="192x192" href="{{ icons.192 }}"> <!-- Chrome -->
+<link rel="icon" sizes="128x128" href="{{ icons.128 }}"> <!-- Chrome -->
 
-        <!-- WP Metas-->
-        {% block metas %}{% endblock metas %}
-        <!-- /WP Metas-->
+<!-- WP Metas-->
+{% block metas %}{% endblock metas %}
+<!-- /WP Metas-->
 
-        <!-- WP Header-->
-        {{ wp_head }}
-        <!-- /WP Header-->
+<!-- WP Header-->
+{{ wp_head }}
+<!-- /WP Header-->
 
-        {% block styles %}{% endblock styles %}
-    </head>
+{% block styles %}{% endblock styles %}
+</head>
+<body class="{{ custom_body_classes|default }} {{body_class}}">
+    {% if gtm|default %}
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ gtm }}"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    {% endif %}
 
-    <body class="{{ custom_body_classes|default }} {{body_class}}">
-        {% if gtm|default %}
-        <!-- Google Tag Manager (noscript) -->
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ gtm }}"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-        <!-- End Google Tag Manager (noscript) -->
-        {% endif %}
+    <div class="main-wrapper flex-container flex-dir-column large-flex-dir-column-reverse">
+        <div class="site-content">
+            <!-- Theme Content -->
+            {{ block('content') }}
+            <!-- /Theme Content -->
 
-        <div class="main-wrapper flex-container flex-dir-column large-flex-dir-column-reverse">
-            <div class="site-content">
-                <!-- Theme Content -->
-                {{ block('content') }}
-                <!-- /Theme Content -->
-
-                <!-- Theme Footer -->
-                {% include 'parts/footer.twig' %}
-                <!-- /Theme Footer -->
-            </div>
-            <!-- Theme Header -->
-            {% include 'parts/header.twig' %}
-            <!-- /Theme Header -->
+            <!-- Theme Footer -->
+            {% include 'parts/footer.twig' %}
+            <!-- /Theme Footer -->
         </div>
+        <!-- Theme Header -->
+        {% include 'parts/header.twig' %}
+        <!-- /Theme Header -->
+    </div>
 
-        <!-- Twig Inline Scripts tags -->
-        {% block inline_scripts %}{% endblock inline_scripts %}
-        <!-- /Twig Inline Scripts tags -->
+    <!-- Twig Inline Scripts tags -->
+    {% block inline_scripts %}{% endblock inline_scripts %}
+    <!-- /Twig Inline Scripts tags -->
 
-        <!-- WP Footer-->
-        {{ wp_footer }}
-        <!-- /WP Footer-->
-    </body>
+    <!-- WP Footer-->
+    {{ wp_footer }}
+    <!-- /WP Footer-->
+</body>
 </html>
