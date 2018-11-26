@@ -302,8 +302,15 @@ class WoodyTheme_Images
                 }
             }
 
-            // Remove full size
-            unset($metadata['sizes']['full']);
+            // Added full size
+            $filename = explode('/', $metadata['file']);
+            $filename = end($filename);
+            $metadata['sizes']['full'] = [
+                'file' => $filename,
+                'height' => $metadata['height'],
+                'width' => $metadata['width'],
+                'mime-type' => $mime_type
+            ];
         }
 
         return $metadata;
