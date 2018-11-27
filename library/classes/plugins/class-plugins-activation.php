@@ -38,7 +38,6 @@ class WoodyTheme_Plugins_Activation
             'woody-plugin/woody.php',
             'single-sign-on-client/wposso.php',
             'ssl-insecure-content-fixer/ssl-insecure-content-fixer.php',
-            'wp-optimize/wp-optimize.php',
             'mce-table-buttons/mce_table_buttons.php',
             'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
             'duplicate-post/duplicate-post.php',
@@ -48,6 +47,7 @@ class WoodyTheme_Plugins_Activation
         ];
 
         $this->deactivate_plugins = [
+            'wp-optimize/wp-optimize.php',
             'duracelltomi-google-tag-manager/duracelltomi-google-tag-manager-for-wordpress.php',
             'permalink-manager-pro/permalink-manager.php',
         ];
