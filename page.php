@@ -14,6 +14,7 @@ $context['woody_components'] = getWoodyTwigPaths();
 // PC::debug(get_class_methods(TimberPost), 'TwigMethods');
 // PC::debug($context['woody_components'], 'Woody components');
 
+
 $context['site_config'] = [];
 $context['site_config']['site_key'] = WP_SITE_KEY;
 $credentials = get_option('woody_credentials');
