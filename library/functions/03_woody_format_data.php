@@ -179,6 +179,10 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
             $orderby = 'post_date';
             $order = 'ASC';
             break;
+        case 'menu_order':
+            $orderby = 'menu_order';
+            $order = 'ASC';
+            break;
         default:
     }
 
@@ -238,9 +242,7 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
             $post = Timber::get_post($post->ID);
             $data = getPagePreview($query_form, $post);
 
-            // On ajoute un texte dans le bouton "Lire la suite" s'il a été saisi
-            // TODO:ça ne marche pas du tout ça => utiliser le champ lire la suite de chaque post
-            $data['link']['title'] = (!empty($query_form['links_label'])) ? $query_form['links_label'] : '';
+            // $data['link']['title'] = (!empty($query_form['links_label'])) ? $query_form['links_label'] : '';
             $the_items['items'][$key] = $data;
         }
         $the_items['max_num_pages'] = $focused_posts->max_num_pages;
@@ -361,7 +363,8 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     $the_list['has_map'] = false;
     $paginate = ($layout['the_list_pager']['list_pager_type'] == 'basic_pager') ? true : false;
     $the_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields'], $paginate, $layout['uniqid']);
-
+    $the_items['display_button'] = (!empty($layout['the_list_elements']['list_el_req_fields']['display_button'])) ? $layout['the_list_elements']['list_el_req_fields']['display_button'] : '';
+    PC::debug($layout);
     $the_list['filters'] = (!empty($layout['the_list_filters']['list_filters'])) ? $layout['the_list_filters']['list_filters'] : '';
     if (!empty($the_list['filters'])) {
         foreach ($the_list['filters'] as $key => $filter) {
@@ -486,6 +489,8 @@ function formatFullContentList($layout, $current_post, $twigPaths)
         }
 
         $the_filtered_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields'], $paginate, $layout['uniqid']);
+        $the_filtered_items['display_button'] = (!empty($layout['the_list_elements']['list_el_req_fields']['display_button'])) ? $layout['the_list_elements']['list_el_req_fields']['display_button'] : '';
+
         $the_list['the_grid'] =  Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_filtered_items);
     } else {
         $the_list['the_grid'] =  Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_items);
@@ -606,6 +611,8 @@ function getCustomPreview($item)
 function getTouristicSheetPreview($layout = null, $sheet_id, $sheet_wp)
 {
     $data = [];
+
+    PC::debug($sheet_id, 'identifiant de fiche');
     //TODO: remplacer la langue 'fr' par la variable lang du post
     $sheet_data = apply_filters('wp_woody_hawwwai_sheet_render', $sheet_id, 'fr', array(), 'json', 'item');
     if (!empty($sheet_data['items'])) {
@@ -754,6 +761,7 @@ function getPagePreview($item_wrapper, $item)
     }
 
     $data['the_peoples'] = $item->get_field('field_5b6d54a10381f');
+
 
     if (!empty($item_wrapper['display_button'])) {
         $data['link']['link_label'] = getFieldAndFallBack($item, 'focus_button_title', $item);

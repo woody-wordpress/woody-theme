@@ -161,7 +161,8 @@
             "choices": {
                 "random": "Aléatoire",
                 "created_desc": "Du plus récent au plus ancien",
-                "created_asc": "Du plus ancien au plus récent"
+                "created_asc": "Du plus ancien au plus récent",
+                "menu_order": "Suivre l'ordre défini dans Woody Pages"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -383,5 +384,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1542041391
+    "modified": 1543315591
 }
