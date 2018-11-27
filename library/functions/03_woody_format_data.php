@@ -364,7 +364,6 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     $paginate = ($layout['the_list_pager']['list_pager_type'] == 'basic_pager') ? true : false;
     $the_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields'], $paginate, $layout['uniqid']);
     $the_items['display_button'] = (!empty($layout['the_list_elements']['list_el_req_fields']['display_button'])) ? $layout['the_list_elements']['list_el_req_fields']['display_button'] : '';
-    PC::debug($layout);
     $the_list['filters'] = (!empty($layout['the_list_filters']['list_filters'])) ? $layout['the_list_filters']['list_filters'] : '';
     if (!empty($the_list['filters'])) {
         foreach ($the_list['filters'] as $key => $filter) {
