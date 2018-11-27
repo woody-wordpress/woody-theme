@@ -367,9 +367,8 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     $the_list['filters'] = (!empty($layout['the_list_filters']['list_filters'])) ? $layout['the_list_filters']['list_filters'] : '';
     if (!empty($the_list['filters'])) {
         foreach ($the_list['filters'] as $key => $filter) {
-
-            if($filter['list_filter_type'] == 'custom_terms'){
-                if(!empty($filter['list_filter_custom_terms'])){
+            if ($filter['list_filter_type'] == 'custom_terms') {
+                if (!empty($filter['list_filter_custom_terms'])) {
                     foreach ($filter['list_filter_custom_terms'] as $form_term_key => $form_term) {
                         $term = get_term($form_term['value']);
                         $the_list['filters'][$key]['list_filter_custom_terms'][$form_term_key] = [
@@ -396,18 +395,19 @@ function formatFullContentList($layout, $current_post, $twigPaths)
             } elseif ($filter['list_filter_type'] == 'map') {
                 $the_list['has_map'] = true;
                 foreach ($the_items['items'] as $item) {
-                    if(!empty($item['location']['lat']) && !empty($item['location']['lng']))
-                    $the_list['filters'][$key]['markers'][] = [
+                    if (!empty($item['location']['lat']) && !empty($item['location']['lng'])) {
+                        $the_list['filters'][$key]['markers'][] = [
                         'map_position' => [
                             'lat' => $item['location']['lat'],
                             'lng' => $item['location']['lng']
                         ],
                         'compiled_marker' => "<svg class='rich-marker' width='55' height='72' viewbox='50.302 134.829 55 72' overflow='visible' xml:space='preserve'><path class='svg-{{ marker_color|default }}' d='m 77.764997,136.67611 c 14.163118,0 25.647903,11.15711 25.647903,24.92004 0,13.76259 -10.660376,28.8546 -25.647903,43.41776 -16.220447,-15.76086 -25.647894,-29.65517 -25.647894,-43.41776 0,-13.76293 11.484775,-24.92004 25.647894,-24.92004 z' fill='undefined' stroke='undefined' stroke-width='2px'></path><circle fill='#FFF' stroke='undefined' stroke-width='0px' cx='65.302' cy='148.829' r='6.938' opacity='1.0' transform='matrix(2.7385413,0,0,2.7385413,-101.1597,-245.98577)'></circle></svg>"
                     ];
+                    }
                 }
 
                 $places = get_terms('places');
-                if(!empty($places)){
+                if (!empty($places)) {
                     foreach ($places as $place) {
                         $the_list['map_filter_places'][] = [
                             'value' => $place->term_id,
@@ -610,10 +610,9 @@ function getCustomPreview($item)
 function getTouristicSheetPreview($layout = null, $sheet_id, $sheet_wp)
 {
     $data = [];
+    $lang = pll_current_language();
 
-    PC::debug($sheet_id, 'identifiant de fiche');
-    //TODO: remplacer la langue 'fr' par la variable lang du post
-    $sheet_data = apply_filters('wp_woody_hawwwai_sheet_render', $sheet_id, 'fr', array(), 'json', 'item');
+    $sheet_data = apply_filters('wp_woody_hawwwai_sheet_render', $sheet_id, $lang, array(), 'json', 'item');
     if (!empty($sheet_data['items'])) {
         foreach ($sheet_data['items'] as $key => $item) {
             $data = [

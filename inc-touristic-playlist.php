@@ -48,8 +48,10 @@ foreach ($query as $key => $param) {
     }
 }
 
+$lang = pll_current_language();
+
 // Get from Apirender
-$partialPlaylist = apply_filters('wp_woody_hawwwai_playlist_render', $playlistConfId, 'fr', $query);
+$partialPlaylist = apply_filters('wp_woody_hawwwai_playlist_render', $playlistConfId, $lang, $query);
 if (!$partialPlaylist) {
     print_r('error fetching playlist');
     exit;
