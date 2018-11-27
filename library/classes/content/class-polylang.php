@@ -18,7 +18,7 @@ class WoodyTheme_Polylang
         add_filter('pll_is_cache_active', [$this, 'isCacheActive']);
     }
 
-    protected function isCacheActive()
+    public function isCacheActive()
     {
         return true;
     }
