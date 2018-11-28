@@ -50,13 +50,13 @@ class WoodyTheme_Plugins_Activation
             'wp-optimize/wp-optimize.php',
             'duracelltomi-google-tag-manager/duracelltomi-google-tag-manager-for-wordpress.php',
             'permalink-manager-pro/permalink-manager.php',
+            'wp-php-console/wp-php-console.php',
         ];
 
         switch (WP_ENV) {
             case 'dev':
                 // Enable
                 $this->activate_plugins[] = 'query-monitor/query-monitor.php';
-                $this->activate_plugins[] = 'wp-php-console/wp-php-console.php';
 
                 // Disable
                 $this->deactivate_plugins[] = 'vcaching/vcaching.php';
@@ -65,7 +65,6 @@ class WoodyTheme_Plugins_Activation
             case 'preprod':
                 // Enable
                 $this->activate_plugins[] = 'vcaching/vcaching.php';
-                $this->activate_plugins[] = 'query-monitor/query-monitor.php';
 
                 // Disable
                 $this->deactivate_plugins[] = 'wp-php-console/wp-php-console.php';
@@ -77,7 +76,6 @@ class WoodyTheme_Plugins_Activation
 
                 // Disable
                 $this->deactivate_plugins[] = 'query-monitor/query-monitor.php';
-                $this->deactivate_plugins[] = 'wp-php-console/wp-php-console.php';
                 break;
         }
 
