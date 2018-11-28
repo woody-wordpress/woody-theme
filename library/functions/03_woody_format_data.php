@@ -297,13 +297,14 @@ function getManualFocus_data($layout)
  * @return   items - Un tableau de données
  *
  */
-function getAutoFocusSheetData($confId)
+function getAutoFocusSheetData($layout)
 {
     $items = [];
+    $confId = $layout['playlist_conf_id'];
     $playlist = apply_filters('wp_woody_hawwwai_playlist_render', $confId, 'fr', array(), 'json');
     if (!empty($playlist['items'])) {
         foreach ($playlist['items'] as $key => $item) {
-            $items['items'][] = getTouristicSheetPreview($layout = null, $item['sheetId'], '');
+            $items['items'][] = getTouristicSheetPreview($layout, $item['sheetId'], '');
         }
     }
 
@@ -330,7 +331,7 @@ function formatFocusesData($layout, $current_post, $twigPaths)
     } elseif ($layout['acf_fc_layout'] == 'auto_focus') {
         $the_items = getAutoFocus_data($current_post, $layout);
     } elseif ($layout['acf_fc_layout'] == 'auto_focus_sheets' && !empty($layout['playlist_conf_id'])) {
-        $the_items = getAutoFocusSheetData($layout['playlist_conf_id']);
+        $the_items = getAutoFocusSheetData($layout);
     }
 
     $the_items['no_padding'] = (!empty($layout['focus_no_padding'])) ? $layout['focus_no_padding'] : '';
