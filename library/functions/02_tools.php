@@ -321,17 +321,22 @@ function rcd($val, $exit = false, $pre = true)
  * @param  [type] $val     [Valeur à debug]
  * @param  bool   $exit    [Force l'affichage du debug si vrai]
  */
-function wd($val, $key = '', $type = 'log')
+function wd($val, $key = '', $level = '')
 {
-    switch ($type) {
+    $logger = new ChromeLogger();
+
+    switch ($level) {
         case 'error':
-            \ChromePhp::error($key, $val);
+            $logger->error($key, $val);
             break;
         case 'warn':
-            \ChromePhp::warn($key, $val);
+            $logger->warning($key, $val);
+            break;
+        case 'info':
+            $logger->notice($key, $val);
             break;
         default:
-            \ChromePhp::log($key, $val);
+            $logger->debug($key, $val);
             break;
     }
 }
