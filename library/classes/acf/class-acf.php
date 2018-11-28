@@ -83,8 +83,8 @@ class WoodyTheme_ACF
         return $api;
     }
 
-    public function sortWoodyTpls(){
-
+    public function sortWoodyTpls()
+    {
         $heroes = [
             'hero_01' => 'blocks-hero-tpl_01',
             'hero_02' => 'blocks-hero-tpl_02',
@@ -94,7 +94,8 @@ class WoodyTheme_ACF
         $teasers = [
             'teaser_01' => 'blocks-page_teaser-tpl_01',
             'teaser_02' => 'blocks-page_teaser-tpl_02',
-            'teaser_03' => 'blocks-page_teaser-tpl_03'
+            'teaser_03' => 'blocks-page_teaser-tpl_03',
+            'teaser_04' => 'blocks-page_teaser-tpl_04'
         ];
 
         $sections = [
@@ -309,8 +310,8 @@ class WoodyTheme_ACF
                     set_transient('woody_tpls_order', $woody_tpls_order);
                 }
 
-                foreach($woody_tpls_order as $order_key => $value){
-                    if(!array_key_exists($order_key, $field['choices'])){
+                foreach ($woody_tpls_order as $order_key => $value) {
+                    if (!array_key_exists($order_key, $field['choices'])) {
                         unset($woody_tpls_order[$order_key]);
                     }
                 }
@@ -491,7 +492,8 @@ class WoodyTheme_ACF
         return $match;
     }
 
-    public function displayElementLoadField($field){
+    public function displayElementLoadField($field)
+    {
         $taxonomies = get_transient('woody_website_pages_taxonomies');
         if (empty($taxonomies)) {
             $taxonomies = get_object_taxonomies('page', 'objects');
