@@ -526,8 +526,10 @@
 }
 
 
-// On masque les tabs sur le champ "Playlist" lorsque l'on est sur une page de type "Playlist"
+// On masque les tabs et le choix d'affichage sur le champ "Playlist" lorsque l'on est sur une page de type "Playlist"
+
 #acf-group_5b33890e6fa0b {
+    .acf-field-5bfeaaf039785,
     .acf-tab-wrap {
         display: none;
     }

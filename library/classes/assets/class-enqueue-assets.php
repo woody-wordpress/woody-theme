@@ -149,7 +149,7 @@ class WoodyTheme_Enqueue_Assets
         wp_enqueue_script('leaflet', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet-src.min.js', array(), '', true);
         if (isset($map_keys['otmKey']) || $isTouristicSheet) {
             // need to load tangram always in TOURISTIC SHEET for now (bug in vendor angular) ↓
-            wp_enqueue_script('tangram', 'https://cdn.jsdelivr.net/npm/tangram@0.15.4/dist/tangram.min.js', array(), '', true);
+            wp_enqueue_script('tangram', 'https://styles.touristicmaps.com/tangram.min.js', array(), '', true);
         }
 
         if (isset($map_keys['gmKey'])) {
