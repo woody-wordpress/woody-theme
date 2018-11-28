@@ -28,10 +28,10 @@ class WoodyTheme_Taxonomy
         wp_insert_term('Page d\'accueil', 'page_type', array('slug' => 'front_page'));
 
         // On inclut les termes génériques à la taxo
-        wp_insert_term('Été', 'seasons', array('slug' => 'ete'));
-        wp_insert_term('Printemps', 'seasons', array('slug' => 'printemps'));
-        wp_insert_term('Automne', 'seasons', array('slug' => 'automne'));
-        wp_insert_term('Hiver', 'seasons', array('slug' => 'hiver'));
+        // wp_insert_term('Été', 'seasons', array('slug' => 'ete'));
+        // wp_insert_term('Printemps', 'seasons', array('slug' => 'printemps'));
+        // wp_insert_term('Automne', 'seasons', array('slug' => 'automne'));
+        // wp_insert_term('Hiver', 'seasons', array('slug' => 'hiver'));
     }
 
     public function registerTaxonomy()
