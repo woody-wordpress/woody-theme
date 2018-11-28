@@ -1,41 +1,42 @@
 {% extends "base.twig" %}
 {% block content %}
-    <main id="main-content" class="content-type-page {{ page_type|default }}">
-        <div class="content-wrapper {{ page_terms|default('no-terms') }}">
-            <div class="mobile-header hide-for-large title-bar">
-                <a class="brand-logo" href="/">
-                    {{ website_logo|default('Website logo') }}
-                </a>
-            </div>
-
-            {{ page_hero|default }}
-
-            {# {% include 'parts/shares.twig' %} #}
-            {% block page_teaser %}
-                <header id="the-page-teaser" class="page-teaser">
-                    {{ page_teaser }}
-                </header>
-            {% endblock %}
-
-            {% block home_slider %}{% endblock %}
-
-            {% for key, section in the_sections %}
-                <div class="page-section page-section-{{ key }}">
-                    {{ section }}
-                </div>
-            {% endfor %}
-
-            {% if playlist_template|default %}
-                <div class="page-playlist-wrapper">
-                    {{ playlist_template }}
-                </div>
-            {% endif %}
+<main id="main-content" class="content-type-page {{ page_type|default }}">
+    <div class="content-wrapper {{ page_terms|default('no-terms') }}">
+        <div class="mobile-header hide-for-xlarge title-bar">
+            <a class="brand-logo" href="/">
+                {{ website_logo|default('Website logo') }}
+            </a>
         </div>
-    </main>
+
+        {{ page_hero|default }}
+
+        {# {% include 'parts/shares.twig' %} #}
+        {% block page_teaser %}
+        <header id="the-page-teaser" class="page-teaser">
+            {{ page_teaser }}
+        </header>
+        {% endblock %}
+
+        {% block home_slider %}{% endblock %}
+
+        {% for key, section in the_sections %}
+        <div class="page-section page-section-{{ key }}">
+            {{ section }}
+        </div>
+        {% endfor %}
+
+        {% if playlist_template|default %}
+        <div class="page-playlist-wrapper">
+            {{ playlist_template }}
+        </div>
+        {% endif %}
+    </div>
+</main>
 {% endblock %}
 
 {% block metas %}
-    <script>
-        var siteConfig = {{ site_config }};
-    </script>
+<script>
+    var siteConfig = {{ site_config }};
+
+</script>
 {% endblock %}
