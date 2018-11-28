@@ -26,16 +26,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="icon" sizes="128x128" href="{{ icons.128 }}"> <!-- Chrome -->
 
 <!-- WP Metas-->
-{% block metas %}{% endblock metas %}
+{{ block('metas') }}
 <!-- /WP Metas-->
 
 <!-- WP Header-->
 {{ wp_head }}
 <!-- /WP Header-->
 
-{% block styles %}{% endblock styles %}
+<!-- WP Styles -->
+{{ block('styles') }}
+<!-- /WP Styles -->
 </head>
-<body class="{{ custom_body_classes|default }} {{body_class}}">
+<body class="{{body_class}}">
     {% if gtm|default %}
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ gtm }}"
@@ -53,13 +55,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             {% include 'parts/footer.twig' %}
             <!-- /Theme Footer -->
         </div>
+
         <!-- Theme Header -->
         {% include 'parts/header.twig' %}
         <!-- /Theme Header -->
     </div>
 
     <!-- Twig Inline Scripts tags -->
-    {% block inline_scripts %}{% endblock inline_scripts %}
+    {{ block('inline_scripts') }}
     <!-- /Twig Inline Scripts tags -->
 
     <!-- WP Footer-->

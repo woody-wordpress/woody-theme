@@ -7,11 +7,11 @@
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  *
- *  Timber $context variable available
+ *  Timber $this->context variable available
  */
 
 
-$context['custom_body_classes'] = 'apirender apirender-playlist apirender-wordpress';
+$this->context['custom_body_classes'] = 'apirender apirender-playlist apirender-wordpress';
 
 /** ************************
  * Appel apirender pour récupérer le DOM de la playlist
@@ -92,7 +92,7 @@ do_action('send_headers', 'add_sheet_headers');
  ****   Print full template
  **** ************************** **/
 if (!empty($partialPlaylist['content'])) {
-    $context['playlist_template'] = $partialPlaylist['content'];
+    $this->context['playlist_template'] = $partialPlaylist['content'];
 } else {
     print_r('error fetching playlist');
     exit;
