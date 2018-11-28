@@ -5,11 +5,6 @@ new WoodyTheme_Plugins_Activation();
 new WoodyTheme_Plugins_Options();
 new WoodyTheme_Plugins_Order();
 
-// PHP Console
-if (WP_ENV == 'dev' && !class_exists('PC', false) && class_exists('PhpConsole', false)) {
-    PhpConsole\Helper::register();
-}
-
 // ACF
 if (WP_ENV == 'dev') {
     new WoodyTheme_ACF_Save_Manager();
