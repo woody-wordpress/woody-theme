@@ -192,7 +192,7 @@ $('#acf-group_5bd0227a1bda3').each(function() {
             success: function(data) {
                 if (data.length !== 0) {
                     if (data['page_type'] == 'playlist_tourism' && data['conf_id'] !== "") {
-                        filter_field.show();
+                        filter_field.$el.removeClass('acf-hidden').css('display', 'block');
                         window.hawwwai = {};
                         window.hawwwai.short_link_conf_id = data['conf_id'];
                     } else {
