@@ -495,6 +495,11 @@ class WoodyTheme_ACF
 
     public function displayElementLoadField($field)
     {
+        // Exlude
+        // wd($field, 'Champ');
+        if($field['key'] !== 'field_5bfeaaf039785'){
+            return $field;
+        }
         $taxonomies = get_transient('woody_website_pages_taxonomies');
         if (empty($taxonomies)) {
             $taxonomies = get_object_taxonomies('page', 'objects');
