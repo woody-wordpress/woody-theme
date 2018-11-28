@@ -436,7 +436,7 @@
                 "sheet_type": "Type <small>(fiche uniquement)<\/small>",
                 "sheet_town": "Ville <small>(fiche uniquement)<\/small>",
                 "sheet_rating": "Note <small>(fiche uniquement)<\/small>",
-                "sheet_itinerary": "Itinéraire <small>(fiche uniquement)<\/small>",
+                "sheet_itinerary": "Itinéraire <small>(fiche uniquement)<\/small>"
             },
             "allow_custom": 0,
             "default_value": [

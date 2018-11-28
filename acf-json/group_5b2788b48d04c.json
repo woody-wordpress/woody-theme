@@ -191,11 +191,7 @@
                 "subtitle": "Sous-titre",
                 "description": "Description",
                 "duration": "Durée <small>(séjour uniquement)<\/small>",
-                "length": "Distance <small>(séjour uniquement)<\/small>",
-                "sheet_type": "Type <small>(fiche uniquement)<\/small>",
-                "sheet_town": "Ville <small>(fiche uniquement)<\/small>",
-                "sheet_rating": "Note <small>(fiche uniquement)<\/small>",
-                "sheet_itinerary": "Itinéraire <small>(fiche uniquement)<\/small>",
+                "length": "Distance <small>(séjour uniquement)<\/small>"
             },
             "allow_custom": 0,
             "default_value": [
@@ -358,5 +354,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1543415554
+    "modified": 1543416346
 }
