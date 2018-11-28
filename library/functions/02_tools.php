@@ -297,26 +297,6 @@ function rc_is($val, $keys = array(), $default = null)
 }
 
 /**
- * [rcd Debug]
- * @param  [type] $val     [Valeur à debug]
- * @param  bool   $exit    [Force l'affichage du debug si vrai]
- */
-function rcd($val, $exit = false, $pre = true)
-{
-    if ($pre) {
-        print '<pre style="background:lightblue">';
-    }
-    print_r($val);
-    if ($pre) {
-        print '</pre>';
-    }
-
-    if ($exit) {
-        exit();
-    }
-}
-
-/**
  * rc_xmlToArray
  *
  * @param [type] $xml
