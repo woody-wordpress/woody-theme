@@ -13,6 +13,11 @@
 
 use Symfony\Component\Finder\Finder;
 
+// PHP Console
+if (WP_ENV == 'dev' && !class_exists('PC', false) && class_exists('PhpConsole', false)) {
+    PhpConsole\Helper::register();
+}
+
 // Theme Support
 add_theme_support('html5');
 
