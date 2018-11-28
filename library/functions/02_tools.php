@@ -317,31 +317,6 @@ function rcd($val, $exit = false, $pre = true)
 }
 
 /**
- * [rcd Debug]
- * @param  [type] $val     [Valeur à debug]
- * @param  bool   $exit    [Force l'affichage du debug si vrai]
- */
-function wd($val, $key = '', $level = '')
-{
-    $logger = new ChromeLogger();
-
-    switch ($level) {
-        case 'error':
-            $logger->error($key, $val);
-            break;
-        case 'warn':
-            $logger->warning($key, $val);
-            break;
-        case 'info':
-            $logger->notice($key, $val);
-            break;
-        default:
-            $logger->debug($key, $val);
-            break;
-    }
-}
-
-/**
  * rc_xmlToArray
  *
  * @param [type] $xml
