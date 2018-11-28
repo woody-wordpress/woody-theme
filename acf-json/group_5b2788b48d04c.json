@@ -53,7 +53,7 @@
                 "class": "",
                 "id": ""
             },
-            "choices": false,
+            "choices": {},
             "default_value": [],
             "allow_null": 0,
             "multiple": 1,
@@ -192,8 +192,10 @@
                 "description": "Description",
                 "duration": "Durée <small>(séjour uniquement)<\/small>",
                 "length": "Distance <small>(séjour uniquement)<\/small>",
-                "sheet_type": "Type <small>(fiches tourisme uniquement)<\/small>",
-                "sheet_town": "Type <small>(fiches tourisme uniquement)<\/small>"
+                "sheet_type": "Type <small>(fiche uniquement)<\/small>",
+                "sheet_town": "Ville <small>(fiche uniquement)<\/small>",
+                "sheet_rating": "Note <small>(fiche uniquement)<\/small>",
+                "sheet_itinerary": "Itinéraire <small>(fiche uniquement)<\/small>",
             },
             "allow_custom": 0,
             "default_value": [
@@ -294,8 +296,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "choices": {
-            },
+            "choices": {},
             "allow_null": 0,
             "other_choice": 0,
             "save_other_choice": 0,
@@ -357,5 +358,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1543414225
+    "modified": 1543415554
 }
