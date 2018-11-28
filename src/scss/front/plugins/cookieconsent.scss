@@ -20,11 +20,11 @@
     transform: translateY(2em)
 }
 
-.cc-animate.cc-revoke.cc-active.cc-bottom,
-.cc-animate.cc-revoke.cc-active.cc-top,
-.cc-revoke:hover {
-    transform: translateY(0)
-}
+// .cc-animate.cc-revoke.cc-active.cc-bottom,
+// .cc-animate.cc-revoke.cc-active.cc-top,
+// .cc-revoke:hover {
+//     transform: translateY(0)
+// }
 
 .cc-grower {
     max-height: 0;
@@ -344,20 +344,19 @@ screen and (max-width:736px) and (orientation:landscape) {
 
 
 // Woody theme Overrides
-@include breakpoint(large down){
-    .cc-revoke{
-        font-size:rem-calc(12);
-        justify-content: flex-end;
-        &.cc-bottom{
-            border-radius:0;
-            left:0;
-            width:100%;
-            transform:translateY(100%);
-            transition:transform .3s ease-in-out;
-            + div[aria-label='cookieconsent']{
-                transform:translateY(30px);
-            }
+.cc-animate.cc-revoke {
+    font-size: rem-calc(12);
+    justify-content: flex-end;
+
+    &.cc-bottom {
+        border-radius: 0;
+        left: 0;
+        width: 100%;
+        transform: translateY(100%);
+        transition: transform .3s ease-in-out;
+
+        +div[aria-label='cookieconsent'] {
+            transform: translateY(30px);
         }
     }
 }
-
