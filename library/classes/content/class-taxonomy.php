@@ -17,7 +17,7 @@ class WoodyTheme_Taxonomy
 
     protected function registerHooks()
     {
-        add_action('woody_theme_update', array($this, 'insertTerms'));
+        add_action('after_switch_theme', array($this, 'insertTerms'));
     }
 
     public function insertTerms()
