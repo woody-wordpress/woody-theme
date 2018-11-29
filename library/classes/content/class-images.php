@@ -426,8 +426,6 @@ class WoodyTheme_Images
 
     private function cropImage($img_path, $size, $debug = false)
     {
-        $return = '';
-
         // Get infos from original image
         $img_path_parts = pathinfo($img_path);
 
@@ -476,7 +474,9 @@ class WoodyTheme_Images
 
             // Remove image before recreate
             if (file_exists($cropped_image_path)) {
-                unlink($cropped_image_path);
+                //unlink($cropped_image_path);
+                $img_cropped_parts = pathinfo($cropped_image_path);
+                return $img_cropped_parts['basename'];
             }
 
             // Crop
@@ -487,12 +487,12 @@ class WoodyTheme_Images
                 $img_editor->save($cropped_image_path);
 
                 // Get Image cropped data
-                $img_cropped_parts = pathinfo($cropped_image_path);
-                $return = $img_cropped_parts['basename'];
+                if (file_exists($cropped_image_path)) {
+                    $img_cropped_parts = pathinfo($cropped_image_path);
+                    return $img_cropped_parts['basename'];
+                }
             }
             unset($img_editor);
         }
-
-        return $return;
     }
 }
