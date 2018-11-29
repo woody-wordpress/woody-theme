@@ -9,7 +9,6 @@
 class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 {
     protected $twig_tpl = '';
-    protected $playlist_settings = [];
 
     public function __construct()
     {
@@ -228,31 +227,32 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         }
 
         // Get from Apirender
-        $this->playlist_settings = apply_filters('wp_woody_hawwwai_playlist_render', $playlistConfId, pll_current_language(), $query);
+        $this->context['playlist_tourism'] = apply_filters('wp_woody_hawwwai_playlist_render', $playlistConfId, pll_current_language(), $query);
 
         // Return template
-        if (!empty($this->playlist_settings['content'])) {
-            $this->context['playlist_template'] = $this->playlist_settings['content'];
-        } else {
+        if (empty($this->context['playlist_tourism']['content'])) {
             if (is_admin()) {
-                $this->context['playlist_template'] = '<h1>Playlist non configurée</h1>';
+                $this->context['playlist_tourism']['content'] = '<center style="margin: 80px 0">Playlist non configurée</center>';
             } else {
-                $this->context['playlist_template'] = '';
+                $this->context['playlist_tourism']['content'] = '';
             }
         }
     }
 
+    /***************************
+     * Configuration des HTTP headers
+     *****************************/
     public function playlistHeaders()
     {
         $headers = [];
-        if (!empty($this->playlist_settings['modified'])) {
-            $headers['Last-Modified'] =  gmdate('D, d M Y H:i:s', strtotime($this->playlist_settings['modified'])) . ' GMT';
+        if (!empty($this->context['playlist_tourism']['modified'])) {
+            $headers['Last-Modified'] =  gmdate('D, d M Y H:i:s', strtotime($this->context['playlist_tourism']['modified'])) . ' GMT';
         }
-        if (!empty($this->playlist_settings['playlistId'])) {
-            $headers['x-ts-idplaylist'] = $this->playlist_settings['playlistId'];
+        if (!empty($this->context['playlist_tourism']['playlistId'])) {
+            $headers['x-ts-idplaylist'] = $this->context['playlist_tourism']['playlistId'];
         }
-        if (!empty($this->playlist_settings['apiRenderUri'])) {
-            $headers['x-apirender-url'] = $this->playlist_settings['apiRenderUri'];
+        if (!empty($this->context['playlist_tourism']['apirender_uri'])) {
+            $headers['x-apirender-url'] = $this->context['playlist_tourism']['apirender_uri'];
         }
         return $headers;
     }

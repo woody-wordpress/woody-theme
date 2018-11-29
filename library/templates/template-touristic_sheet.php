@@ -18,15 +18,11 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
     protected function registerHooks()
     {
         add_filter('wpseo_title', [$this, 'filterTouristicSheetWpseoTitle']);
-        add_action('send_headers', [$this, 'add_sheet_headers'], 10, 1);
-        do_action('send_headers', [$this, 'add_sheet_headers']);
     }
 
     protected function getHeaders()
     {
-        if ($this->context['page_type'] === 'playlist_tourism') {
-            return $this->playlistHeaders();
-        }
+        return $this->sheetHeaders();
     }
 
     protected function setTwigTpl()
@@ -68,16 +64,12 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
         //     $params['season'] = $season;
         // }
 
-        $partialSheet = apply_filters('wp_woody_hawwwai_sheet_render', $sheet_id, $sheet_lang, $params);
-        if (empty($partialSheet)) {
-            print_r('Error while fetching API Render content for Sheet #' .$sheet_id);
-            exit;
-        }
+        $this->context['sheet_tourism'] = apply_filters('wp_woody_hawwwai_sheet_render', $sheet_id, $sheet_lang, $params);
 
         // Set METAS
-        // TODO (Doubled set metas (apirender & wordpress))
+        // TODO: (Doubled set metas (apirender & wordpress))
         $this->context['metas'] = [];
-        foreach ($partialSheet['metas'] as $key_meta => $meta) {
+        foreach ($this->context['sheet_tourism']['metas'] as $key_meta => $meta) {
             $tag = '<'.$meta['#tag'];
             foreach ($meta['#attributes'] as $key_attr => $attribute) {
                 $tag .= ' '.$key_attr.'="'.$attribute.'"';
@@ -94,9 +86,6 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
         // $page_teaser['classes'] = 'bg-black';
         // $page_teaser['breadcrumb'] = yoast_breadcrumb('<div class="breadcrumb-wrapper padd-top-sm padd-bottom-sm">', '</div>', false);
         // $this->context['page_teaser'] = Timber::compile($this->context['woody_components']['blocks-page_teaser-tpl_01'], $page_teaser);
-
-        // Get Content
-        $this->context['sheet_template'] = $partialSheet['content'];
     }
 
     public function filterTouristicSheetWpseoTitle($title)
@@ -131,17 +120,21 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
     /***************************
      * Configuration des HTTP headers
      *****************************/
-    public function add_sheet_headers()
+    public function sheetHeaders()
     {
-        global $sheet_id;
-        global $partialSheet;
-
-        header('Vary: Cookie, Accept-Encoding');
-        header('Cache-Control: no-cache, no-store, must-revalidate, max-age = 0');
-        if (!is_admin()) {
-            header('Cache-Control: public, max-age=604800, must-revalidate');
+        $headers = [];
+        if (!empty($this->context['sheet_tourism']['modified'])) {
+            $headers['Last-Modified'] =  gmdate('D, d M Y H:i:s', strtotime($this->context['sheet_tourism']['modified'])) . ' GMT';
         }
-        header('Last-Modified: ' .gmdate('D, d M Y H:i:s', strtotime($partialSheet['modified'])).' GMT', false);
-        header('x-ts-idfiche: ' .$sheet_id);
+        // if (!empty($this->context['sheet_tourism']['playlistId'])) {
+        //     $headers['x-ts-idplaylist'] = $this->context['sheet_tourism']['playlistId'];
+        // }
+        if (!empty($this->context['post']->touristic_sheet_id)) {
+            $headers['x-ts-idfiche'] = $this->context['post']->touristic_sheet_id;
+        }
+        if (!empty($this->context['sheet_tourism']['apirender_uri'])) {
+            $headers['x-apirender-url'] = $this->context['sheet_tourism']['apirender_uri'];
+        }
+        return $headers;
     }
 }
