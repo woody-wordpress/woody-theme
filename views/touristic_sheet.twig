@@ -7,6 +7,12 @@
 {% endblock metas %}
 
 {% block content %}
+{# TODO: Contextiualisation du breadcrumb selon la playlist source #}
+{# {% block page_teaser %}
+        <header id="the-page-teaser" class="page-teaser">
+            {{ page_teaser }}
+        </header>
+{% endblock %} #}
 <main class="content-type-page">
     <div class="content-wrapper">
         {% if sheet_template | default %}{{ sheet_template }}{% endif %}

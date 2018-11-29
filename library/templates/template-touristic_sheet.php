@@ -79,6 +79,15 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
             $this->context['metas'][] = $tag;
         }
 
+        /*********************************************
+         * Compilation de l'en tête de page
+         *********************************************/
+        // $page_teaser = [];
+
+        // $page_teaser['classes'] = 'bg-black';
+        // $page_teaser['breadcrumb'] = yoast_breadcrumb('<div class="breadcrumb-wrapper padd-top-sm padd-bottom-sm">', '</div>', false);
+        // $this->context['page_teaser'] = Timber::compile($this->context['woody_components']['blocks-page_teaser-tpl_01'], $page_teaser);
+
         // Get Content
         $this->context['sheet_template'] = $partialSheet['content'];
     }
