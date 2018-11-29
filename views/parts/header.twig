@@ -1,4 +1,10 @@
 <div class="woody-component-headnavs">
+    {% if lang_switcher|default %}
+        <ul class="tools list-unstyled flex-container align-middle">
+            <li>{{ lang_switcher|default }}</li>
+        </ul>
+    {% endif %}
+
     {{ page_parts.top_header|default }}
     {{ page_parts.main_menu|default }}
 </div>

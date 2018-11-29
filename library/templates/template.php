@@ -65,8 +65,9 @@ abstract class WoodyTheme_TemplateAbstract
         // Added Icons
         $this->addIcons();
 
-        // Added language switcher
-        // $this->setLanguageSwitcher();
+        // Added langSwitcher
+        $this->addLanguageSwitcher();
+
     }
 
     private function addWoodyComponents()
@@ -116,32 +117,48 @@ abstract class WoodyTheme_TemplateAbstract
         }
     }
 
-    private function setLanguageSwitcher(){
-        $langSwitcher =  pll_the_languages();
-        if ( ! function_exists( 'pll_the_languages' ) ) return;
-        // Gets the pll_the_languages() raw code
+    private function addLanguageSwitcher(){
+        $data = [];
+
+        if (!function_exists('pll_the_languages')) return;
+        // Get polylang languages
         $languages = pll_the_languages( array(
             'display_names_as'       => 'slug',
-            'hide_if_no_translation' => 1,
+            'hide_if_no_translation' => 0,
             'raw'                    => true
         ) );
 
-        // Checks if the $languages is not empty
-        if ( ! empty( $languages ) ) {
-
-            foreach ( $languages as $language ) {
-                wd($language, 'Langue');
-                // Variables containing language data
-                $id             = $language['id'];
-                $slug           = $language['slug'];
-                $url            = $language['url'];
-                $current        = $language['current_lang'] ? ' languages__item--current' : '';
-                $no_translation = $language['no_translation'];
-                // Checks if the page has translation in this language
-                if($no_translation) {
-                    $url = WP_SITEURL;
+        if (!empty($languages)) {
+            foreach ($languages as $language ) {
+                if(!empty($language['current_lang'])){
+                    $data['current_lang'] = $language['slug'];
+                } else {
+                    // $data['langs'][$language['slug']]['id'] = $language['id'];
+                    $data['langs'][$language['slug']]['url'] = $language['url'];
+                    $data['langs'][$language['slug']]['no_translation'] = $language['no_translation'];
                 }
             }
         }
+
+        // Get potential external languages
+        if(class_exists('SubWoodyTheme_Languages')){
+            $SubWoodyTheme_Languages = new SubWoodyTheme_Languages($this->context['woody_components']);
+            if(method_exists($SubWoodyTheme_Languages, 'languagesCustomization')){
+                $languages_customization = $SubWoodyTheme_Languages->languagesCustomization();
+                if(!empty($languages_customization['template'])){
+                    $template = $languages_customization['template'];
+                }
+                if(!empty($languages_customization['external_langs'])){
+                    foreach ($languages_customization['external_langs'] as $lang_key => $language ) {
+                        $data['langs'][$lang_key]['url'] = $language['url'];
+                    }
+                }
+            }
+        }
+
+        // Set a default template
+        $template = $this->context['woody_components']['pages_parts-lang_switcher-tpl_01'];
+
+        $this->context['lang_switcher'] = Timber::compile($template, $data);
     }
 }
