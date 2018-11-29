@@ -8,12 +8,13 @@
 
 abstract class WoodyTheme_TemplateAbstract
 {
-    protected $context;
+    protected $context = [];
 
     // Force les classes filles à définir cette méthode
     abstract protected function setTwigTpl();
     abstract protected function extendContext();
     abstract protected function registerHooks();
+    abstract protected function getHeaders();
 
     public function __construct()
     {
@@ -23,11 +24,20 @@ abstract class WoodyTheme_TemplateAbstract
         $this->setTwigTpl();
         $this->extendContext();
         $this->registerHooks();
+
+        $headers = $this->getHeaders();
+        if (!empty($headers)) {
+            foreach ($headers as $key => $val) {
+                header($key . ': ' . $val);
+            }
+        }
     }
 
     public function render()
     {
-        Timber::render($this->twig_tpl, $this->context);
+        if (!empty($this->twig_tpl) && !empty($this->context)) {
+            Timber::render($this->twig_tpl, $this->context);
+        }
     }
 
     private function initContext()

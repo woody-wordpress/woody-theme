@@ -8,7 +8,7 @@
 
 class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 {
-    protected $twig_tpl;
+    protected $twig_tpl = '';
 
     public function __construct()
     {
@@ -17,6 +17,13 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
     protected function registerHooks()
     {
+    }
+
+    protected function getHeaders()
+    {
+        if ($this->context['page_type'] === 'playlist_tourism') {
+            return $this->playlistHeaders();
+        }
     }
 
     protected function setTwigTpl()
@@ -124,7 +131,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
          * Check type de publication
          *********************************************/
         if ($this->context['page_type'] === 'playlist_tourism') {
-            require_once 'parts/inc-touristic-playlist.php';
+            $this->playlistContext();
         }
 
         /*********************************************
@@ -180,5 +187,73 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $this->context['the_sections'][] = Timber::compile($this->context['woody_components']['section-section_full-tpl_01'], $the_section);
             }
         }
+    }
+
+    protected function playlistContext()
+    {
+        $this->context['body_class'] .= ' apirender apirender-playlist apirender-wordpress';
+
+        /** ************************
+         * Appel apirender pour récupérer le DOM de la playlist
+         ************************ **/
+        $playlistConfId = get_field('field_5b338ff331b17');
+
+        // allowed parameters for Wordpress playlists need to be added here
+        $checkMethod = !empty($_POST) ? INPUT_POST : INPUT_GET;
+        $checkQueryVars = [
+            // page number (12 items by page)
+            'page'   => [
+                'filter' => FILTER_VALIDATE_INT,
+                'flags'  => [FILTER_REQUIRE_SCALAR, FILTER_NULL_ON_FAILURE],
+                'options'   => ['min_range' => 1]
+            ],
+        ];
+        $checkAutoSelect = [
+            // id of created facet autoselection returning filtered playlist
+            'autoselect_id'   => [
+                'filter' => FILTER_VALIDATE_INT,
+                'flags'  => [FILTER_REQUIRE_SCALAR, FILTER_NULL_ON_FAILURE],
+            ],
+        ];
+
+        // build query in validated array
+        $query = filter_input_array($checkMethod, $checkAutoSelect, $add_non_existing = false);
+        $query_GQV = filter_var_array(['page' => get_query_var('page', 1)], $checkQueryVars);
+        $query = array_merge((array)$query, $query_GQV);
+        foreach ($query as $key => $param) {
+            if (!$param) {
+                unset($query[$key]);
+            }
+        }
+
+        // Get from Apirender
+        $this->context['playlist_tourism'] = apply_filters('wp_woody_hawwwai_playlist_render', $playlistConfId, pll_current_language(), $query);
+
+        // Return template
+        if (empty($this->context['playlist_tourism']['content'])) {
+            if (is_admin()) {
+                $this->context['playlist_tourism']['content'] = '<center style="margin: 80px 0">Playlist non configurée</center>';
+            } else {
+                $this->context['playlist_tourism']['content'] = '';
+            }
+        }
+    }
+
+    /***************************
+     * Configuration des HTTP headers
+     *****************************/
+    public function playlistHeaders()
+    {
+        $headers = [];
+        if (!empty($this->context['playlist_tourism']['modified'])) {
+            $headers['Last-Modified'] =  gmdate('D, d M Y H:i:s', strtotime($this->context['playlist_tourism']['modified'])) . ' GMT';
+        }
+        if (!empty($this->context['playlist_tourism']['playlistId'])) {
+            $headers['x-ts-idplaylist'] = $this->context['playlist_tourism']['playlistId'];
+        }
+        if (!empty($this->context['playlist_tourism']['apirender_uri'])) {
+            $headers['x-apirender-url'] = $this->context['playlist_tourism']['apirender_uri'];
+        }
+        return $headers;
     }
 }

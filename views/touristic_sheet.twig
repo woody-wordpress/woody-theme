@@ -15,7 +15,9 @@
 {% endblock %} #}
 <main class="content-type-page">
     <div class="content-wrapper">
-        {% if sheet_template | default %}{{ sheet_template }}{% endif %}
+        {% if sheet_tourism.content|default %}
+        {{ sheet_tourism.content }}
+        {% endif %}
     </div>
 </main>
 {% endblock content %}
