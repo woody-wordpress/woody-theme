@@ -241,25 +241,25 @@ class WoodyTheme_Plugins_Options
         $this->updateOption('yoimg_crop_settings', $yoimg_crop_settings);
 
         // Update permalinks by posts titles
-        $permalink_options = [
-            'general' => [
-                'auto_update_uris' => 1,
-                'show_native_slug_field' => 0,
-                'canonical_redirect' => 1,
-                'setup_redirects' => 1,
-                'redirect' => 301,
-                'trailing_slashes' => 20,
-                'pagination_redirect' => 0,
-                'auto_remove_duplicates' => 1,
-                'fix_language_mismatch' => 1,
-                'force_custom_slugs' => 1,
-            ],
-            'licence' => [
-                'licence_key' => '8058C9F5-83C7421C-A57A61BC-D75B00E3',
-                'expiration_date' => '4102398000',
-            ]
-        ];
-        $this->updateOption('permalink-manager', $permalink_options);
+        // $permalink_options = [
+        //     'general' => [
+        //         'auto_update_uris' => 1,
+        //         'show_native_slug_field' => 0,
+        //         'canonical_redirect' => 1,
+        //         'setup_redirects' => 1,
+        //         'redirect' => 301,
+        //         'trailing_slashes' => 20,
+        //         'pagination_redirect' => 0,
+        //         'auto_remove_duplicates' => 1,
+        //         'fix_language_mismatch' => 1,
+        //         'force_custom_slugs' => 1,
+        //     ],
+        //     'licence' => [
+        //         'licence_key' => '8058C9F5-83C7421C-A57A61BC-D75B00E3',
+        //         'expiration_date' => '4102398000',
+        //     ]
+        // ];
+        // $this->updateOption('permalink-manager', $permalink_options);
 
         // Polylang
         $polylang = [
@@ -288,9 +288,13 @@ class WoodyTheme_Plugins_Options
         $this->updateOption('polylang', $polylang);
 
         // Redirections
+        global $wpdb;
+        $rows = $wpdb->get_results("SELECT id FROM {$wpdb->prefix}redirection_groups WHERE name = 'Modified Posts'");
+        $monitor_post = (!empty($rows[0]->id)) ? $rows[0]->id : 1;
+
         $redirection_options = [
             'support' => false,
-            'monitor_post' => 2,
+            'monitor_post' => $monitor_post,
             'monitor_types' => [
                 'post',
                 'page',
@@ -305,7 +309,7 @@ class WoodyTheme_Plugins_Options
             'newsletter' => false,
             'redirect_cache' => 1,
             'ip_logging' => 0,
-            'last_group_id' => 2,
+            'last_group_id' => $monitor_post,
             'rest_api' => 0,
             'https' => false
         ];
