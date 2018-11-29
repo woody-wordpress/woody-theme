@@ -18,12 +18,10 @@ abstract class WoodyTheme_TemplateAbstract
 
     public function __construct()
     {
+        $this->registerHooks();
         $this->initContext();
-
-        // Children Classes
         $this->setTwigTpl();
         $this->extendContext();
-        $this->registerHooks();
 
         $headers = $this->getHeaders();
         if (!empty($headers)) {

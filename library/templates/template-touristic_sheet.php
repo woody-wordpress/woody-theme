@@ -90,31 +90,17 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
 
     public function filterTouristicSheetWpseoTitle($title)
     {
-        $removeList = [
-            // remove types #1
-            'FMA - ',
-            'PCU - ',
-            'PNU - ',
-            'PNA - ',
-            'RES - ',
-            'DEG - ',
-            'HOT - ',
-            'ASC - ',
-            'LOI - ',
-            'VIL - ',
-            'HPA - ',
-            'HLO - ',
-            'ORG - ',
-            'ITI - ',
-            // remove langs #2
-            'EN - ',
-            'IT - ',
-            'ES - ',
-            'DE - ',
-            'NL - ',
-        ];
+        // Si title commence par une langue en 2 caractère
+        if (substr($title, 3, 1) == '-') {
+            $title = substr($title, 10);
+        } else {
+            $title = substr($title, 6);
+        }
 
-        return str_replace($removeList, '', $title);
+        // Remove idFiche
+        $title = preg_replace('/ - [0-9]+/', '', $title);
+
+        return $title;
     }
 
     /***************************
