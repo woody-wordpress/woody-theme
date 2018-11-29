@@ -44,6 +44,11 @@ class WoodyTheme_Tinymce
             'title' => 'Liste "Les plus"',
             'selector' => 'ul',
             'classes' => 'list-unstyled list-wicon plus-icon'
+        ),
+        array(
+            'title' => 'Mega titre',
+            'selector' => 'h2',
+            'classes' => 'mega-title'
         )
     );
         $init_array['style_formats'] = json_encode($style_formats);

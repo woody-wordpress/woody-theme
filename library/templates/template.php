@@ -62,6 +62,9 @@ abstract class WoodyTheme_TemplateAbstract
 
         // Added Icons
         $this->addIcons();
+
+        // Added language switcher
+        // $this->setLanguageSwitcher();
     }
 
     private function addWoodyComponents()
@@ -107,6 +110,35 @@ abstract class WoodyTheme_TemplateAbstract
             $icon_ext = ($icon == 'favicon') ? $icon . '.ico' : 'favicon.' . $icon . 'w-' . $icon . 'h.png';
             if (file_exists(WP_CONTENT_DIR . '/dist/' . WP_SITE_KEY . '/favicon/' . $icon_ext)) {
                 $this->context['icons'][$icon] = WP_HOME . '/app/dist/' . WP_SITE_KEY . '/favicon/' . $icon_ext;
+            }
+        }
+    }
+
+    private function setLanguageSwitcher(){
+        $langSwitcher =  pll_the_languages();
+        if ( ! function_exists( 'pll_the_languages' ) ) return;
+        // Gets the pll_the_languages() raw code
+        $languages = pll_the_languages( array(
+            'display_names_as'       => 'slug',
+            'hide_if_no_translation' => 1,
+            'raw'                    => true
+        ) );
+
+        // Checks if the $languages is not empty
+        if ( ! empty( $languages ) ) {
+
+            foreach ( $languages as $language ) {
+                wd($language, 'Langue');
+                // Variables containing language data
+                $id             = $language['id'];
+                $slug           = $language['slug'];
+                $url            = $language['url'];
+                $current        = $language['current_lang'] ? ' languages__item--current' : '';
+                $no_translation = $language['no_translation'];
+                // Checks if the page has translation in this language
+                if($no_translation) {
+                    $url = WP_SITEURL;
+                }
             }
         }
     }
