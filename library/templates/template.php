@@ -66,7 +66,7 @@ abstract class WoodyTheme_TemplateAbstract
         $this->addIcons();
 
         // Added language switcher
-        $this->setLanguageSwitcher();
+        // $this->setLanguageSwitcher();
     }
 
     private function addWoodyComponents()
