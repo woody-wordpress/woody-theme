@@ -433,63 +433,65 @@ class WoodyTheme_Images
 
         // get the size of the image
         list($width_orig, $height_orig) = getimagesize($img_path);
-        $ratio_orig = (float) $height_orig / $width_orig;
+        if (!empty($width_orig) && !empty($height_orig)) {
+            $ratio_orig = (float) $height_orig / $width_orig;
 
-        // Ratio Free
-        if ($size['height'] == 0) {
-            $req_width = $width_orig;
-            $req_height = $height_orig;
+            // Ratio Free
+            if ($size['height'] == 0) {
+                $req_width = $width_orig;
+                $req_height = $height_orig;
 
-            if ($ratio_orig != 1) {
-                $size['height'] = round($size['width'] * $ratio_orig);
-            } elseif ($ratio_orig == 1) {
-                $size['height'] = $size['width'];
+                if ($ratio_orig == 1) {
+                    $size['height'] = $size['width'];
+                } else {
+                    $size['height'] = round($size['width'] * $ratio_orig);
+                }
             }
+
+            // Get ratio diff
+            $ratio_expect = (float) $size['height'] / $size['width'];
+            $ratio_diff = $ratio_orig - $ratio_expect;
+
+            // Calcul du crop size
+            if ($ratio_diff > 0) {
+                $req_width = $width_orig;
+                $req_height = round($width_orig * $ratio_expect);
+                $req_x = 0;
+                $req_y = round(($height_orig - $req_height)/2);
+            } elseif ($ratio_diff < 0) {
+                $req_width = round($height_orig / $ratio_expect);
+                $req_height = $height_orig;
+                $req_x = round(($width_orig - $req_width)/2);
+                $req_y = 0;
+            } elseif ($ratio_diff == 0) {
+                $req_width = $width_orig;
+                $req_height = $height_orig;
+                $req_x = 0;
+                $req_y = 0;
+            }
+
+            // Set filename
+            $cropped_image_filename = $img_path_parts['filename'] . '-' . $size['width'] . 'x' . $size['height'] . '.' . $img_path_parts['extension'];
+            $cropped_image_path = $img_path_parts['dirname'] . '/' . $cropped_image_filename;
+
+            // Remove image before recreate
+            if (file_exists($cropped_image_path)) {
+                unlink($cropped_image_path);
+            }
+
+            // Crop
+            $img_editor = wp_get_image_editor($img_path);
+            if (!is_wp_error($img_editor)) {
+                $img_editor->crop($req_x, $req_y, $req_width, $req_height, $size['width'], $size['height'], false);
+                $img_editor->set_quality(75);
+                $img_editor->save($cropped_image_path);
+
+                // Get Image cropped data
+                $img_cropped_parts = pathinfo($cropped_image_path);
+                $return = $img_cropped_parts['basename'];
+            }
+            unset($img_editor);
         }
-
-        // Get ratio diff
-        $ratio_expect = (float) $size['height'] / $size['width'];
-        $ratio_diff = $ratio_orig - $ratio_expect;
-
-        // Calcul du crop size
-        if ($ratio_diff > 0) {
-            $req_width = $width_orig;
-            $req_height = round($width_orig * $ratio_expect);
-            $req_x = 0;
-            $req_y = round(($height_orig - $req_height)/2);
-        } elseif ($ratio_diff < 0) {
-            $req_width = round($height_orig / $ratio_expect);
-            $req_height = $height_orig;
-            $req_x = round(($width_orig - $req_width)/2);
-            $req_y = 0;
-        } elseif ($ratio_diff == 0) {
-            $req_width = $width_orig;
-            $req_height = $height_orig;
-            $req_x = 0;
-            $req_y = 0;
-        }
-
-        // Set filename
-        $cropped_image_filename = $img_path_parts['filename'] . '-' . $size['width'] . 'x' . $size['height'] . '.' . $img_path_parts['extension'];
-        $cropped_image_path = $img_path_parts['dirname'] . '/' . $cropped_image_filename;
-
-        // Remove image before recreate
-        if (file_exists($cropped_image_path)) {
-            unlink($cropped_image_path);
-        }
-
-        // Crop
-        $img_editor = wp_get_image_editor($img_path);
-        if (!is_wp_error($img_editor)) {
-            $img_editor->crop($req_x, $req_y, $req_width, $req_height, $size['width'], $size['height'], false);
-            $img_editor->set_quality(75);
-            $img_editor->save($cropped_image_path);
-
-            // Get Image cropped data
-            $img_cropped_parts = pathinfo($cropped_image_path);
-            $return = $img_cropped_parts['basename'];
-        }
-        unset($img_editor);
 
         return $return;
     }

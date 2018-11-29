@@ -1,2 +1,2 @@
 <?php
-include get_template_directory() . '/page.php';
+require_once 'page.php';

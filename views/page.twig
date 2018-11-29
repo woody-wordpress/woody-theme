@@ -1,4 +1,5 @@
 {% extends "base.twig" %}
+
 {% block content %}
 <main id="main-content" class="content-type-page {{ page_type|default }}">
     <div class="content-wrapper {{ page_terms|default('no-terms') }}">
@@ -25,9 +26,9 @@
         </div>
         {% endfor %}
 
-        {% if playlist_template|default %}
+        {% if playlist_tourism.content|default %}
         <div class="page-playlist-wrapper">
-            {{ playlist_template }}
+            {{ playlist_tourism.content }}
         </div>
         {% endif %}
     </div>
@@ -35,8 +36,5 @@
 {% endblock %}
 
 {% block metas %}
-<script>
-    var siteConfig = {{ site_config }};
-
-</script>
+<script>var siteConfig = {{ site_config }};</script>
 {% endblock %}
