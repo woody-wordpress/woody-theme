@@ -21,8 +21,7 @@ class WoodyTheme_ApirenderBridge
      */
     public function getApiRenderTemplate($confId)
     {
-        $lang = get_locale();
-        $lang = 'fr';
+        $lang = $this->getCurrentLang();
         $generatedHtml = false;
 
         if (!empty($this->pluginHawwwai)) {
@@ -33,6 +32,18 @@ class WoodyTheme_ApirenderBridge
         }
 
         return $generatedHtml;
+    }
+
+    private function getCurrentLang()
+    {
+        $active_lang = 'fr';
+
+        // Polylang
+        if (function_exists('pll_current_language')) {
+            $active_lang = pll_current_language();
+        }
+
+        return $active_lang;
     }
 }
 
