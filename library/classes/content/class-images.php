@@ -27,6 +27,7 @@ class WoodyTheme_Images
         add_filter('image_size_names_choose', [$this, 'imageSizeNamesChoose'], 10, 1);
         add_filter('wp_read_image_metadata', [$this, 'readImageMetadata'], 10, 4);
         add_filter('wp_generate_attachment_metadata', [$this, 'generateAttachmentMetadata'], 10, 2);
+        add_filter('wp_handle_upload_prefilter', [$this, 'maxUploadSize']);
 
         // API Crop
         add_action('rest_api_init', function () {
@@ -121,6 +122,27 @@ class WoodyTheme_Images
     public function removeAutoThumbs($sizes, $metadata)
     {
         return [];
+    }
+
+    public function maxUploadSize($file)
+    {
+        if (WP_SITE_KEY == 'crt-bretagne') {
+            $limit = 20000;
+            $limit_output = '20Mo';
+        } else {
+            $limit = 10000;
+            $limit_output = '10Mo';
+        }
+
+        $size = $file['size'];
+        $size = $size / 1024;
+        $type = $file['type'];
+        $is_image = strpos($type, 'image') !== false;
+        if ($is_image && $size > $limit) {
+            $file['error'] = 'Une image doit faire moins de ' . $limit_output;
+        }
+
+        return $file;
     }
 
     // Register the new image sizes for use in the add media modal in wp-admin
