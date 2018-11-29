@@ -17,12 +17,12 @@ abstract class WoodyTheme_TemplateAbstract
 
     public function __construct()
     {
-        $this->registerHooks();
         $this->initContext();
 
         // Children Classes
         $this->setTwigTpl();
         $this->extendContext();
+        $this->registerHooks();
     }
 
     public function render()

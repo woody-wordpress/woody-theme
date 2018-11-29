@@ -11,7 +11,7 @@
  */
 
 
-$this->context['custom_body_classes'] = 'apirender apirender-playlist apirender-wordpress';
+$this->context['body_class'] .= ' apirender apirender-playlist apirender-wordpress';
 
 /** ************************
  * Appel apirender pour récupérer le DOM de la playlist
@@ -64,6 +64,8 @@ $apiRenderUri = isset($partialPlaylist['apirender_uri']) ? $partialPlaylist['api
 /***************************
  * Configuration des HTTP headers
  *****************************/
+
+//TODO: Refactor - Craspec
 function add_sheet_headers()
 {
     global $playlistId;

@@ -52,6 +52,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
     protected function pageContext()
     {
+        $this->context['active_social_shares'] = getActiveShares();
+
         /*********************************************
          * Compilation du visuel et accroche
          *********************************************/
@@ -99,12 +101,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
             $this->context['page_teaser'] = Timber::compile($this->context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
         }
-    }
-
-    protected function commonContext()
-    {
-        $this->context['active_social_shares'] = getActiveShares();
-        $this->context['page_terms'] = implode(' ', getPageTerms($this->context['post']->ID));
 
         /*********************************************
          * Compilation du bloc prix
@@ -118,17 +114,19 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         } else {
             $trip_infos = [];
         }
+    }
+
+    protected function commonContext()
+    {
+        $this->context['page_terms'] = implode(' ', getPageTerms($this->context['post']->ID));
 
         /*********************************************
          * Check type de publication
          *********************************************/
-
         if ($this->context['page_type'] === 'playlist_tourism') {
             require_once 'parts/inc-touristic-playlist.php';
         }
 
-
-        // TODO: Retirer la condition pour que l'on compile les sections pour les playlists aussi.
         /*********************************************
         * Compilation des sections
         *********************************************/
