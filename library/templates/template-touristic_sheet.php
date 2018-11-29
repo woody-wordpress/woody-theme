@@ -22,6 +22,13 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
         do_action('send_headers', [$this, 'add_sheet_headers']);
     }
 
+    protected function getHeaders()
+    {
+        if ($this->context['page_type'] === 'playlist_tourism') {
+            return $this->playlistHeaders();
+        }
+    }
+
     protected function setTwigTpl()
     {
         $this->twig_tpl = 'touristic_sheet.twig';
