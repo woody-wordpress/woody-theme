@@ -87,6 +87,9 @@ class WoodyTheme_Cleanup_Admin
         remove_menu_page('edit.php'); // Articles
         remove_menu_page('edit-comments.php'); // Commentaires
 
+        remove_menu_page('tools.php?page=export_personal_data'); // Exporter les données
+        remove_menu_page('tools.php?page=remove_personal_data'); // Effacer les données
+
         // Personnaliser
         global $submenu;
         if (isset($submenu[ 'themes.php' ])) {
