@@ -547,6 +547,7 @@ function formatGeomapData($layout, $twigPaths)
 
     // Get markers
     foreach ($layout['markers'] as $key => $marker) {
+        $the_marker = [];
         if (empty($marker['title']) && empty($marker['description']) && empty($marker['img']) && !empty($marker['link']['url'])) {
             $layout['markers'][$key]['marker_as_link'] = true;
         }
