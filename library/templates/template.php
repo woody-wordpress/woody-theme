@@ -156,6 +156,10 @@ abstract class WoodyTheme_TemplateAbstract
             }
         }
 
+        if(empty($data['langs'])){
+            return;
+        }
+
         // Set a default template
         $template = $this->context['woody_components']['pages_parts-lang_switcher-tpl_01'];
 
