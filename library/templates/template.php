@@ -150,6 +150,7 @@ abstract class WoodyTheme_TemplateAbstract
                 if(!empty($languages_customization['external_langs'])){
                     foreach ($languages_customization['external_langs'] as $lang_key => $language ) {
                         $data['langs'][$lang_key]['url'] = $language['url'];
+                        $data['langs'][$lang_key]['target'] = '_blank';
                     }
                 }
             }
