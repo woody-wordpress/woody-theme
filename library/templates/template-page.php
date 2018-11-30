@@ -30,6 +30,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     {
         if (!empty(is_front_page())) {
             $this->twig_tpl = 'front.twig';
+        } elseif (!empty(is_404())) {
+            $this->twig_tpl = 'page404.twig';
         } else {
             $this->twig_tpl = 'page.twig';
         }
@@ -41,6 +43,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
         if (!empty(is_front_page())) {
             $this->frontpageContext();
+        } elseif (!empty(is_404())) {
+            $this->page404Context();
         } else {
             $this->pageContext();
         }
@@ -55,6 +59,16 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         if (!empty($home_slider['landswpr_slides'])) {
             $this->context['home_slider'] = Timber::compile($this->context['woody_components'][$home_slider['landswpr_woody_tpl']], $home_slider);
         }
+    }
+
+    protected function page404Context()
+    {
+        $this->context['content'] = [
+            'title' => __("Oups !", 'woody-theme'),
+            'subtitle' => __("404 - Page non trouvée", 'woody-theme'),
+            'text' => __("La page que vous recherchez a peut-être été supprimée ou est temporairement indisponible.", 'woody-theme'),
+            'btn' => __("Aller à la page d'accueil", 'woody-theme'),
+        ];
     }
 
     protected function pageContext()
