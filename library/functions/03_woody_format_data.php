@@ -547,14 +547,23 @@ function formatGeomapData($layout, $twigPaths)
 
     // Get markers
     foreach ($layout['markers'] as $key => $marker) {
+        $the_marker = [];
         if (empty($marker['title']) && empty($marker['description']) && empty($marker['img']) && !empty($marker['link']['url'])) {
             $layout['markers'][$key]['marker_as_link'] = true;
         }
         $layout['markers'][$key]['compiled_marker']  = Timber::compile('/_objects/markerObject.twig', $marker);
 
-        // if (!empty($marker['title']) || !empty($marker['description']) || !empty($marker['img'])) {
-        //  $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-basic_card-tpl_01'], $marker);
-        // }
+        if (!empty($marker['title']) || !empty($marker['description']) || !empty($marker['img'])) {
+
+            $the_marker['item']['title'] = (!empty($marker['title'])) ? $marker['title'] : '';
+            $the_marker['item']['description'] = (!empty($marker['description'])) ? $marker['description'] : '';
+            if(!empty($marker['img'])){
+                $the_marker['image_style'] = 'ratio_16_9';
+                $the_marker['item']['img'] = $marker['img'];
+            }
+            $the_marker['item']['link'] = (!empty($marker['link'])) ? $marker['link'] : '';
+         $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-basic_card-tpl_01'], $the_marker);
+        }
     }
 
     $return = Timber::compile($twigPaths[$layout['woody_tpl']], $layout);
