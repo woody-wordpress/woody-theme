@@ -34,4 +34,5 @@ require_once(__DIR__ . '/library/classes/autoloader.php');
 // Change Timber locations
 if (class_exists('Timber', false)) {
     Timber::$locations = array('views', Woody::getTemplatesDirname());
+    //Timber::$cache = true;
 }
