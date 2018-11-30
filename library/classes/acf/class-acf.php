@@ -369,14 +369,14 @@ class WoodyTheme_ACF
             }
 
             // Sort by values
-            if (is_array($choices[$lang])) {
+            if (!empty($choices[$lang]) && is_array($choices[$lang])) {
                 asort($choices[$lang]);
             }
 
             set_transient('woody_terms_choices', $choices);
         }
 
-        $field['choices'] = $choices[$lang];
+        $field['choices'] = (!empty($choices[$lang])) ? $choices[$lang] : [];
         return $field;
     }
 
@@ -394,7 +394,7 @@ class WoodyTheme_ACF
             set_transient('woody_page_taxonomies_choices', $choices);
         }
 
-        $field['choices'] = $choices[$lang];
+        $field['choices'] = (!empty($choices[$lang])) ? $choices[$lang] : [];
         return $field;
     }
 
@@ -495,7 +495,7 @@ class WoodyTheme_ACF
 
     public function displayElementLoadField($field)
     {
-        if($field['key'] == 'field_5bfeaaf039785'){
+        if ($field['key'] == 'field_5bfeaaf039785') {
             return $field;
         }
         $taxonomies = get_transient('woody_website_pages_taxonomies');

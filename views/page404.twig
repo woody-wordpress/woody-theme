@@ -1,0 +1,23 @@
+{% extends "base.twig" %}
+
+{% block content %}
+<main id="main-content" class="content-type-page {{ page_type|default }}">
+    <div class="content-wrapper {{ page_terms|default('no-terms') }}">
+        <div class="mobile-header hide-for-xlarge title-bar">
+            <a class="brand-logo" href="/">
+                {{ website_logo|default('Website logo') }}
+            </a>
+        </div>
+
+        <div class="page-section">
+            <div style="margin: 40px 0; width: 100%; text-align: center;">
+                <h1>{{ content.title }}</h1>
+                <h2>{{ content.subtitle }}</h2>
+                <p>{{ content.text }}</p>
+                {# TODO: URL de la page d'accueil à modifier en fonction de la langue #}
+                <p><a class="btn btn-primary" href="/">{{ content.btn }}</a></p>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
