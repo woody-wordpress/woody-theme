@@ -240,11 +240,9 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
         foreach ($focused_posts->posts as $key => $post) {
             $data = [];
             $post = Timber::get_post($post->ID);
-            if ($post->ID == 3522) {
-                print '<!--';
-                rcd($post);
-                print '-->';
-            }
+            print '<!-- Post ';
+            rcd($post);
+            print '-->';
             $data = getPagePreview($query_form, $post);
 
             // $data['link']['title'] = (!empty($query_form['links_label'])) ? $query_form['links_label'] : '';
