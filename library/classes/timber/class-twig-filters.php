@@ -24,7 +24,13 @@ class WoodyTheme_Twig_Filters
         $twig->addFilter(new Twig_SimpleFilter('phone_click', [$this, 'phoneClick']));
         $twig->addFilter(new Twig_SimpleFilter('humanize_filesize', [$this, 'humanizeFilesize']));
         $twig->addFilter(new Twig_SimpleFilter('ellipsis', [$this, 'ellipsis']));
+        $twig->addFilter(new Twig_SimpleFilter('random_number', [$this, 'random_number']));
+
+        // debug
         $twig->addFilter(new Twig_SimpleFilter('dump', [$this, 'dump']));
+        $twig->addFilter(new Twig_SimpleFilter('rcd', [$this, 'rcd']));
+        $twig->addFilter(new Twig_SimpleFilter('wd', [$this, 'wd']));
+
         return $twig;
     }
 
@@ -126,8 +132,24 @@ class WoodyTheme_Twig_Filters
         return $truncate;
     }
 
+    public function random_number($text)
+    {
+        return uniqid();
+    }
+
+    // Debug
     public function dump($text)
     {
         return rcd($text);
+    }
+
+    public function rcd($text)
+    {
+        return rcd($text);
+    }
+
+    public function wd($text)
+    {
+        return wd($text);
     }
 }
