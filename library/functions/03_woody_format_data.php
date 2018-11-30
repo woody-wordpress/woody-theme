@@ -553,9 +553,13 @@ function formatGeomapData($layout, $twigPaths)
         $layout['markers'][$key]['compiled_marker']  = Timber::compile('/_objects/markerObject.twig', $marker);
 
         if (!empty($marker['title']) || !empty($marker['description']) || !empty($marker['img'])) {
+
             $the_marker['item']['title'] = (!empty($marker['title'])) ? $marker['title'] : '';
             $the_marker['item']['description'] = (!empty($marker['description'])) ? $marker['description'] : '';
-            $the_marker['item']['img'] = (!empty($marker['img'])) ? $marker['img'] : '';
+            if(!empty($marker['img'])){
+                $the_marker['image_style'] = 'ratio_16_9';
+                $the_marker['item']['img'] = $marker['img'];
+            }
             $the_marker['item']['link'] = (!empty($marker['link'])) ? $marker['link'] : '';
          $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-basic_card-tpl_01'], $the_marker);
         }
