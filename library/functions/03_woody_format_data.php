@@ -240,6 +240,11 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
         foreach ($focused_posts->posts as $key => $post) {
             $data = [];
             $post = Timber::get_post($post->ID);
+            if ($post->ID == 3522) {
+                print '<!--';
+                rcd($post);
+                print '-->';
+            }
             $data = getPagePreview($query_form, $post);
 
             // $data['link']['title'] = (!empty($query_form['links_label'])) ? $query_form['links_label'] : '';
@@ -263,10 +268,6 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
 function getManualFocus_data($layout)
 {
     $the_items = [];
-
-    print '<!-- layout ';
-    rcd($layout);
-    print '-->';
 
     foreach ($layout['content_selection'] as $key => $item_wrapper) {
         // La donnée de la vignette est saisie en backoffice
@@ -598,10 +599,6 @@ function getCustomPreview($item)
             'target' => (!empty($item['link']['target'])) ? $item['link']['target'] : '',
         ]
     ];
-
-    print '<!-- getCustomPreview ';
-    rcd($item);
-    print '-->';
 
     // On récupère le choix de média afin d'envoyer une image OU une vidéo
     if ($item['media_type'] == 'img' && !empty($item['img'])) {
