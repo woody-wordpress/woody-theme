@@ -264,6 +264,10 @@ function getManualFocus_data($layout)
 {
     $the_items = [];
 
+    print '<!-- layout ';
+    rcd($layout);
+    print '-->';
+
     foreach ($layout['content_selection'] as $key => $item_wrapper) {
         // La donnée de la vignette est saisie en backoffice
         if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
@@ -554,15 +558,14 @@ function formatGeomapData($layout, $twigPaths)
         $layout['markers'][$key]['compiled_marker']  = Timber::compile('/_objects/markerObject.twig', $marker);
 
         if (!empty($marker['title']) || !empty($marker['description']) || !empty($marker['img'])) {
-
             $the_marker['item']['title'] = (!empty($marker['title'])) ? $marker['title'] : '';
             $the_marker['item']['description'] = (!empty($marker['description'])) ? $marker['description'] : '';
-            if(!empty($marker['img'])){
+            if (!empty($marker['img'])) {
                 $the_marker['image_style'] = 'ratio_16_9';
                 $the_marker['item']['img'] = $marker['img'];
             }
             $the_marker['item']['link'] = (!empty($marker['link'])) ? $marker['link'] : '';
-         $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-basic_card-tpl_01'], $the_marker);
+            $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-basic_card-tpl_01'], $the_marker);
         }
     }
 
@@ -583,18 +586,23 @@ function getCustomPreview($item)
 {
     $data = [];
     $data = [
-    'title' => (!empty($item['title'])) ? $item['title'] : '',
-    'pretitle' => (!empty($item['pretitle'])) ? $item['pretitle'] : '',
-    'subtitle' => (!empty($item['subtitle'])) ? $item['subtitle'] : '',
-    'icon_type' => (!empty($item['icon_type'])) ? $item['icon_type'] : '',
-    'woody_icon' => (!empty($item['woody_icon'])) ? $item['woody_icon'] : '',
-    'description' => (!empty($item['description'])) ? $item['description'] : '',
-    'link' => [
-        'url' => (!empty($item['link']['url'])) ? $item['link']['url'] : '',
-        'title' => (!empty($item['link']['title'])) ? $item['link']['title'] : '',
-        'target' => (!empty($item['link']['target'])) ? $item['link']['target'] : '',
-    ]
-];
+        'title' => (!empty($item['title'])) ? $item['title'] : '',
+        'pretitle' => (!empty($item['pretitle'])) ? $item['pretitle'] : '',
+        'subtitle' => (!empty($item['subtitle'])) ? $item['subtitle'] : '',
+        'icon_type' => (!empty($item['icon_type'])) ? $item['icon_type'] : '',
+        'woody_icon' => (!empty($item['woody_icon'])) ? $item['woody_icon'] : '',
+        'description' => (!empty($item['description'])) ? $item['description'] : '',
+        'link' => [
+            'url' => (!empty($item['link']['url'])) ? $item['link']['url'] : '',
+            'title' => (!empty($item['link']['title'])) ? $item['link']['title'] : '',
+            'target' => (!empty($item['link']['target'])) ? $item['link']['target'] : '',
+        ]
+    ];
+
+    print '<!-- getCustomPreview ';
+    rcd($item);
+    print '-->';
+
     // On récupère le choix de média afin d'envoyer une image OU une vidéo
     if ($item['media_type'] == 'img' && !empty($item['img'])) {
         $data['img'] = $item['img'];
