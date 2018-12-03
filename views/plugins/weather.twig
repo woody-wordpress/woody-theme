@@ -1,0 +1,34 @@
+<div class="grid-x grid-margin-x grid-margin-y medium-up-2 xlarge-up-4">
+    {% for day in days %}
+        <div class="cell weatherDay-infos bg-{{ bg_color }}" style="background:url('{{ day.summary.img }}') center bottom / cover">
+            <div class="weatherDay-summary padd-all-md flex-container flex-dir-column align-middle">
+                <div class="date h5">{{ day.date }}</div>
+                <div class="sky">{{  day.summary.sky }}</div>
+                <div class="weather-icon">
+                    <span class="{{ day.summary.icon }}"></span>
+                </div>
+                <div class="temperature">{{ day.summary.average_temp }}<sup>°</sup><span class="unit">C</span></div>
+                <div class="minmax-temp">
+                    <small class="min-temp">min : {{ day.summary.min_temp }}<sup>°</sup><span class="unit">C</span> / </small>
+                    <small class="max-temp">max : {{ day.summary.max_temp }}<sup>°</sup><span class="unit">C</span></small>
+                </div>
+                <div class="more-infos">
+                    <small class="wind">Vent : {{ day.summary.wind }}<span class="unit">km/h</span></small>
+                    <small class="humidity">Humidité : {{ day.summary.humidity }}<span class="unit">%</span></small>
+                </div>
+            </div>
+            <div class="weatherDay-details grid-x small-up-4 padd-all-sm">
+                {% for name, detail in day.details %}
+                    <div class="cell weartherDay-detail">
+                        <div class="name">{{ name }}</div>
+                        <!-- <div class="sky">{{  detail.sky }}</div> -->
+                        <div class="weather-icon">
+                            <span class="{{ detail.icon }}"></span>
+                        </div>
+                        <div class="temperature">{{ detail.temp }}<sup>°</sup><span class="unit">C</span></div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>

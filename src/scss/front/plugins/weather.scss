@@ -1,0 +1,38 @@
+.weatherDay{
+    &-summary{
+        text-align: center;
+        .sky{
+            text-transform: uppercase;
+            font-size:rem-calc(12);
+        }
+        .weather-icon{
+            font-size: rem-calc(92);
+        }
+        .temperature{
+            font-weight: bold;
+            font-size: rem-calc(24);
+        }
+        .more-infos small{
+            display: block;
+        }
+    }
+    &-details{
+        background-color: rgba($black,.1);
+        text-align: center;
+        .name{
+            font-weight: bold;
+            font-size:rem-calc(12);
+        }
+        .sky{
+            text-transform: uppercase;
+            font-size:rem-calc(10);
+        }
+        .weather-icon{
+            font-size: rem-calc(54);
+        }
+        .temperature{
+            font-weight: bold;
+            font-size: rem-calc(13);
+        }
+    }
+}

@@ -76,31 +76,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $this->context['active_social_shares'] = getActiveShares();
 
         /*********************************************
-         * Compilation du visuel et accroche
-         *********************************************/
-        $page_hero = [];
-        $page_hero = getAcfGroupFields('group_5b052bbee40a4');
-        if (!empty($page_hero['page_heading_media_type']) && ($page_hero['page_heading_media_type'] == 'movie' && !empty($page_hero['page_heading_movie']) || ($page_hero['page_heading_media_type'] == 'img' && !empty($page_hero['page_heading_img'])))) {
-            if (empty($page_teaser['page_teaser_display_title'])) {
-                $page_hero['title_as_h1'] = true;
-            }
-
-            $page_hero['page_heading_img']['attachment_more_data'] = (!empty($page_hero['page_heading_img'])) ? getAttachmentMoreData($page_hero['page_heading_img']['ID']) : '';
-            if (!empty($page_hero['page_heading_social_movie'])) {
-                preg_match_all('@src="([^"]+)"@', $page_hero['page_heading_social_movie'], $result);
-                $iframe_url = $result[1][0];
-                if (strpos($iframe_url, 'youtube') != false) {
-                    $yt_params_url = $iframe_url . '?&autoplay=0&rel=0';
-                    $page_hero['page_heading_social_movie'] = str_replace($iframe_url, $yt_params_url, $page_hero['page_heading_social_movie']);
-                }
-            }
-
-            $page_hero['title'] = (!empty($page_hero['title'])) ? str_replace('-', '&#8209', $page_hero['title']) : '';
-
-            $this->context['page_hero'] = Timber::compile($this->context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
-        }
-
-        /*********************************************
          * Compilation de l'en tête de page
          *********************************************/
         $page_teaser = [];
@@ -147,6 +122,32 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         if ($this->context['page_type'] === 'playlist_tourism') {
             $this->playlistContext();
         }
+
+         /*********************************************
+         * Compilation du visuel et accroche
+         *********************************************/
+        $page_hero = [];
+        $page_hero = getAcfGroupFields('group_5b052bbee40a4');
+        if (!empty($page_hero['page_heading_media_type']) && ($page_hero['page_heading_media_type'] == 'movie' && !empty($page_hero['page_heading_movie']) || ($page_hero['page_heading_media_type'] == 'img' && !empty($page_hero['page_heading_img'])))) {
+            if (empty($page_teaser['page_teaser_display_title'])) {
+                $page_hero['title_as_h1'] = true;
+            }
+
+            $page_hero['page_heading_img']['attachment_more_data'] = (!empty($page_hero['page_heading_img'])) ? getAttachmentMoreData($page_hero['page_heading_img']['ID']) : '';
+            if (!empty($page_hero['page_heading_social_movie'])) {
+                preg_match_all('@src="([^"]+)"@', $page_hero['page_heading_social_movie'], $result);
+                $iframe_url = $result[1][0];
+                if (strpos($iframe_url, 'youtube') != false) {
+                    $yt_params_url = $iframe_url . '?&autoplay=0&rel=0';
+                    $page_hero['page_heading_social_movie'] = str_replace($iframe_url, $yt_params_url, $page_hero['page_heading_social_movie']);
+                }
+            }
+
+            $page_hero['title'] = (!empty($page_hero['title'])) ? str_replace('-', '&#8209', $page_hero['title']) : '';
+
+            $this->context['page_hero'] = Timber::compile($this->context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
+        }
+
 
         /*********************************************
         * Compilation des sections

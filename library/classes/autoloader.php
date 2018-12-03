@@ -44,6 +44,9 @@ new WoodyTheme_Twig_Filters();
 // Menu
 new WoodyTheme_Menus();
 
+// Shortcodes
+new WoodyTheme_Shortcodes();
+
 // Roles
 new WoodyTheme_Roles();
 

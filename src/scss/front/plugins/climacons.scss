@@ -1,0 +1,94 @@
+$climacons-path-fonts: '#{$dist_dir}/fonts/plugins/climacons';
+
+@font-face {
+    font-family: 'climacons';
+    src:  url('#{$climacons-path-fonts}/climacons.eot?kpmlnd');
+    src:  url('#{$climacons-path-fonts}/climacons.eot?kpmlnd#iefix') format('embedded-opentype'),
+      url('#{$climacons-path-fonts}/climacons.ttf?kpmlnd') format('truetype'),
+      url('#{$climacons-path-fonts}/climacons.woff?kpmlnd') format('woff'),
+      url('#{$climacons-path-fonts}/climacons.svg?kpmlnd#climacons') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  [class^="climacon-"], [class*=" climacon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'climacons' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .climacon-cloud-rain-low:before {
+    content: "\e900";
+  }
+  .climacon-cloud-rain-low-sun:before {
+    content: "\e903";
+  }
+  .climacon-cloud-rain-mid-sun:before {
+    content: "\e904";
+  }
+  .climacon-cloud-rain-mid:before {
+    content: "\e905";
+  }
+  .climacon-cloud-fog-sun:before {
+    content: "\e90a";
+  }
+  .climacon-cloud-fog:before {
+    content: "\e90b";
+  }
+  .climacon-cloud-hail-sun:before {
+    content: "\e910";
+  }
+  .climacon-cloud-hail:before {
+    content: "\e911";
+  }
+  .climacon-storm-sun:before {
+    content: "\e913";
+  }
+  .climacon-storm:before {
+    content: "\e914";
+  }
+  .climacon-cloud-rain-sun:before {
+    content: "\e91a";
+  }
+  .climacon-cloud-rain:before {
+    content: "\e91b";
+  }
+  .climacon-cloud-snow-mid:before {
+    content: "\e91c";
+  }
+  .climacon-cloud-snow-mid-sun:before {
+    content: "\e91f";
+  }
+  .climacon-cloud-snow-sun:before {
+    content: "\e920";
+  }
+  .climacon-cloud-snow:before {
+    content: "\e921";
+  }
+  .climacon-cloud-sun:before {
+    content: "\e922";
+  }
+  .climacon-cloud-wind-sun:before {
+    content: "\e924";
+  }
+  .climacon-cloud-wind:before {
+    content: "\e925";
+  }
+  .climacon-cloud:before {
+    content: "\e926";
+  }
+  .climacon-sun:before {
+    content: "\e929";
+  }
+  .climacon-thermometer:before {
+    content: "\e901";
+  }
