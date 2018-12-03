@@ -1,7 +1,4 @@
 .weatherDay{
-    .temperature{
-        font-weight: bold;
-    }
     &-summary{
         text-align: center;
         .sky{
@@ -12,6 +9,7 @@
             font-size: rem-calc(92);
         }
         .temperature{
+            font-weight: bold;
             font-size: rem-calc(24);
             margin-top: -20px;
         }
