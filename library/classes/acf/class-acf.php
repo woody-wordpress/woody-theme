@@ -101,7 +101,7 @@ class WoodyTheme_ACF
         $sections = [
             'section_01' => 'grids_basic-grid_1_cols-tpl_01',
             'section_02' => 'grids_basic-grid_1_cols-tpl_02',
-            'section_04' => 'grids_basic-grid_2_cols-tpl_01',
+            'section_03' => 'grids_basic-grid_2_cols-tpl_01',
             'section_04' => 'grids_basic-grid_2_cols-tpl_02',
             'section_05' => 'grids_basic-grid_2_cols-tpl_05',
             'section_06' => 'grids_basic-grid_2_cols-tpl_03',
