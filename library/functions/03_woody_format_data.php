@@ -980,6 +980,7 @@ function getAttachmentMoreData($attachment_id)
     $attachment_data['lat'] = get_field('field_5b55a88e70cbf', $attachment_id);
     $attachment_data['lng'] = get_field('field_5b55a89e70cc0', $attachment_id);
     $attachment_data['is_instagram'] = isWoodyInstagram($attachment_id);
+    $attachment_data['linked_page'] = get_field('field_5c0553157e6d0', $attachment_id);
 
     if (!empty($attachment_data['is_instagram'])) {
         $img_all_data = get_post_meta($attachment_id);

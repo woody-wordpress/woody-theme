@@ -25,6 +25,7 @@ class WoodyTheme_Twig_Filters
         $twig->addFilter(new Twig_SimpleFilter('humanize_filesize', [$this, 'humanizeFilesize']));
         $twig->addFilter(new Twig_SimpleFilter('ellipsis', [$this, 'ellipsis']));
         $twig->addFilter(new Twig_SimpleFilter('random_number', [$this, 'random_number']));
+        $twig->addFilter(new Twig_SimpleFilter('createdFrom', [$this, 'createdFrom']));
 
         // debug
         $twig->addFilter(new Twig_SimpleFilter('dump', [$this, 'dump']));
@@ -151,5 +152,42 @@ class WoodyTheme_Twig_Filters
     public function wd($text)
     {
         return wd($text);
+    }
+
+    public function createdFrom($text){
+        $return = pll__('Publiée il y a ');
+
+        $now = date('Y-m-d H:i:s');
+        $created = date('Y-m-d H:i:s', $text);
+
+        $datetime1 = new DateTime(date('Y-m-d H:i:s'));//start time
+        $datetime2 = new DateTime(date('Y-m-d H:i:s', $text));//end time
+        $interval = $datetime1->diff($datetime2);
+
+        wd($interval);
+
+        if($interval->i < 1){
+            $return .= $interval->s . ' secondes';
+        } elseif ($interval->h < 1) {
+            $return .= $interval->i . ' minutes';
+        } elseif ($interval->d < 1) {
+            $return .= $interval->h . ' heures';
+        } elseif($interval->m < 1){
+            $return .= $interval->d . ' jours';
+        } elseif($interval->m >= 1 && $interval->y < 1){
+            if($interval->d == 0){
+                $return .= $interval->m . ' mois';
+            } else {
+                $return .= $interval->m . ' mois et ' . $interval->d . ' jours';
+            }
+        } elseif($interval->y > 1){
+            if($interval->m == 0){
+                $return .= $interval->y . ' ans';
+            } else {
+                $return .= $interval->y . ' ans et ' . $interval->m . ' mois';
+            }
+        }
+
+        return $return;
     }
 }

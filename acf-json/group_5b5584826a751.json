@@ -1,24 +1,6 @@
 {
     "key": "group_5b5584826a751",
     "title": "Médias - Infos complémentaires",
-    "location": [
-        [
-            {
-                "param": "attachment",
-                "operator": "==",
-                "value": "image"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "acf_after_title",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "field",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Champs complémentaires pour les médias (auteur, localisation)",
-    "modified": 1536232425,
     "fields": [
         {
             "key": "field_5b5585503c855",
@@ -76,6 +58,39 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "field_5c0553157e6d0",
+            "label": "Page liée",
+            "name": "media_linked_page",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "attachment",
+                "operator": "==",
+                "value": "image"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "field",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Champs complémentaires pour les médias (auteur, localisation)",
+    "modified": 1543853017
 }
