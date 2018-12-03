@@ -32,21 +32,21 @@
 
         if(!empty($atts['images'])){
             $imgs = [
-                'storm' => WP_DIST_URL . '/img/plugins/weather/stormy.jpg',
-                'sun' => WP_DIST_URL . '/img/plugins/weather/sunny.jpg',
-                'rain' => WP_DIST_URL . '/img/plugins/weather/rainy.jpg',
-                'cloud' => WP_DIST_URL . '/img/plugins/weather/cloudy.jpg',
+                WP_DIST_URL . '/img/plugins/weather/stormy.jpg',
+                WP_DIST_URL . '/img/plugins/weather/snowy.jpg',
+                WP_DIST_URL . '/img/plugins/weather/rainy.jpg',
+                WP_DIST_URL . '/img/plugins/weather/cloudy.jpg'
             ];
         }
 
         // Test icones
-        $icons = ['climacon-storm', 'climacon-sun', 'climacon-cloud-rain', 'climacon-cloud'];
+        $icons = ['climacon-storm', 'climacon-cloud-snow', 'climacon-cloud-rain', 'climacon-cloud'];
 
         foreach ($return['days'] as $day_key => $day) {
             $return['days'][$day_key]['summary'] = [
                 'sky' => 'nuageux',
                 'icon' => $icons[$day_key],
-                'img' => (!empty($imgs)) ? $imgs['cloud'] : '',
+                'img' => (!empty($imgs)) ? $imgs[$day_key] : '',
                 'average_temp' => '13',
                 'min_temp' => '12',
                 'max_temp' => '13',
