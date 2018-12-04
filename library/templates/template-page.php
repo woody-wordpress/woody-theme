@@ -76,6 +76,19 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $this->context['active_social_shares'] = getActiveShares();
 
         /*********************************************
+         * Compilation du bloc prix
+         *********************************************/
+        $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d');
+        if (!empty($trip_infos['the_duration']['count_days']) || !empty($trip_infos['the_length']['length']) || !empty($trip_infos['the_price']['price'])) {
+            //TODO: Gérer le fichier gps pour affichage s/ carte
+            $trip_infos['the_duration']['count_days'] = ($trip_infos['the_duration']['count_days']) ? humanDays($trip_infos['the_duration']['count_days']) : '';
+            $trip_infos['the_price']['price'] = (!empty($trip_infos['the_price']['price'])) ? str_replace('.', ',', $trip_infos['the_price']['price']) : '';
+            $this->context['trip_infos'] = Timber::compile($this->context['woody_components'][$trip_infos['tripinfos_woody_tpl']], $trip_infos);
+        } else {
+            $trip_infos = [];
+        }
+
+        /*********************************************
          * Compilation de l'en tête de page
          *********************************************/
         $page_teaser = [];
@@ -96,19 +109,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             }
 
             $this->context['page_teaser'] = Timber::compile($this->context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
-        }
-
-        /*********************************************
-         * Compilation du bloc prix
-         *********************************************/
-        $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d');
-        if (!empty($trip_infos['the_duration']['count_days']) || !empty($trip_infos['the_length']['length']) || !empty($trip_infos['the_price']['price'])) {
-            //TODO: Gérer le fichier gps pour affichage s/ carte
-            $trip_infos['the_duration']['count_days'] = ($trip_infos['the_duration']['count_days']) ? humanDays($trip_infos['the_duration']['count_days']) : '';
-            $trip_infos['the_price']['price'] = (!empty($trip_infos['the_price']['price'])) ? str_replace('.', ',', $trip_infos['the_price']['price']) : '';
-            $this->context['trip_infos'] = Timber::compile($this->context['woody_components'][$trip_infos['tripinfos_woody_tpl']], $trip_infos);
-        } else {
-            $trip_infos = [];
         }
     }
 
