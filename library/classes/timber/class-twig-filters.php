@@ -164,8 +164,6 @@ class WoodyTheme_Twig_Filters
         $datetime2 = new DateTime(date('Y-m-d H:i:s', $text));//end time
         $interval = $datetime1->diff($datetime2);
 
-        wd($interval);
-
         if($interval->i < 1){
             $return .= $interval->s . ' secondes';
         } elseif ($interval->h < 1) {
