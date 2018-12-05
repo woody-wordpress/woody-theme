@@ -85,6 +85,7 @@ class WoodyTheme_ACF_Counter
                     'post_type' => (!empty($params['focused_post_type'])) ? $params['focused_post_type'] : 'page',
                     'tax_query' => $tax_query,
                     'post_status' => 'publish',
+                    'post__not_in' => array($params['current_post']),
                     'posts_per_page' => (!empty($params['focused_count'])) ? intval(current($params['focused_count'])) : 16
                 ];
 
