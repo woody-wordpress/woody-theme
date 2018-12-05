@@ -28,10 +28,14 @@ class WoodyTheme_Menus
     * @return return - Un tableau
     *
     */
-    public static function getMainMenu($limit = 6)
+    public static function getMainMenu($limit = 6, $depth_1_ids = array())
     {
         $return = [];
-        $return = self::getMenuLinks(null, 0, $limit);
+        if(!empty($depth_1_ids)){
+            $return = self::getMenuLinks($depth_1_ids, 0, $limit);
+        } else {
+            $return = self::getMenuLinks(null, 0, $limit);
+        }
 
         if (!empty($return) && is_array($return)) {
             foreach ($return as $key => $value) {
@@ -117,6 +121,7 @@ class WoodyTheme_Menus
     public static function getMenuLinks($posts = [], $post_parent = 0, $limit = -1)
     {
         $return = [];
+        // TODO: empty($post) is usefull if depth_1 links are based on WoodyPage pages's weight +> to remove
         if (empty($posts)) {
             $args = array(
                 'post_type'        => 'page',
@@ -130,21 +135,24 @@ class WoodyTheme_Menus
         }
 
         if (!empty($posts) && is_array($posts)) {
-            foreach ($posts as $key => $post) {
+            foreach ($posts as $post_key => $post) {
+                if(is_int($post)){
+                    $post =  get_post($post);
+                }
                 if(!is_object($post)){
                     continue;
                 }
-                $return[$key] = [
+                $return[$post_key] = [
                     'the_id' => $post->ID,
                     'the_url' => get_permalink($post->ID),
                 ];
 
-                $return[$key]['the_fields']['title'] = (!empty(get_field('in_menu_title', $post->ID))) ? get_field('in_menu_title', $post->ID) : $post->post_title;
-                $return[$key]['the_fields']['woody_icon'] = (!empty(get_field('in_menu_woody_icon', $post->ID))) ? get_field('in_menu_woody_icon', $post->ID) : '';
-                $return[$key]['the_fields']['icon_type'] = 'picto';
-                $return[$key]['the_fields']['pretitle'] = (!empty(get_field('in_menu_pretitle', $post->ID))) ? get_field('in_menu_pretitle', $post->ID) : '';
-                $return[$key]['the_fields']['subtitle'] = (!empty(get_field('in_menu_subtitle', $post->ID))) ? get_field('in_menu_subtitle', $post->ID) : '';
-                $return[$key]['img'] = (!empty(get_field('in_menu_img', $post->ID))) ? get_field('in_menu_img', $post->ID) : get_field('field_5b0e5ddfd4b1b', $post->ID);
+                $return[$post_key]['the_fields']['title'] = (!empty(get_field('in_menu_title', $post->ID))) ? get_field('in_menu_title', $post->ID) : $post->post_title;
+                $return[$post_key]['the_fields']['woody_icon'] = (!empty(get_field('in_menu_woody_icon', $post->ID))) ? get_field('in_menu_woody_icon', $post->ID) : '';
+                $return[$post_key]['the_fields']['icon_type'] = 'picto';
+                $return[$post_key]['the_fields']['pretitle'] = (!empty(get_field('in_menu_pretitle', $post->ID))) ? get_field('in_menu_pretitle', $post->ID) : '';
+                $return[$post_key]['the_fields']['subtitle'] = (!empty(get_field('in_menu_subtitle', $post->ID))) ? get_field('in_menu_subtitle', $post->ID) : '';
+                $return[$post_key]['img'] = (!empty(get_field('in_menu_img', $post->ID))) ? get_field('in_menu_img', $post->ID) : get_field('field_5b0e5ddfd4b1b', $post->ID);
             }
 
             return $return;
