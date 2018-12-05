@@ -20,17 +20,19 @@
 
         {% block home_slider %}{% endblock %}
 
+        {% if playlist_tourism.content|default %}
+        <div class="page-playlist-wrapper">
+            {{ playlist_tourism.content }}
+        </div>
+        {% endif %}
+
         {% for key, section in the_sections %}
         <div class="page-section page-section-{{ key }}">
             {{ section }}
         </div>
         {% endfor %}
 
-        {% if playlist_tourism.content|default %}
-        <div class="page-playlist-wrapper">
-            {{ playlist_tourism.content }}
-        </div>
-        {% endif %}
+
     </div>
 </main>
 {% endblock %}

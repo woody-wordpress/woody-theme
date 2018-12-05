@@ -238,7 +238,13 @@ class WoodyTheme_ACF
             'cta_05' => 'blocks-call_to_action-tpl_04',
         ];
 
-        $return = $teasers + $heroes + $sections + $lists_and_focuses + $galleries + $cta;
+        $socialwalls = [
+            'sw_01' => 'blocks-socialwall-tpl_01',
+            'sw_02' => 'blocks-socialwall-tpl_02',
+            'sw_03' => 'blocks-novascotia-tpl_01'
+        ];
+
+        $return = $teasers + $heroes + $sections + $lists_and_focuses + $galleries + $cta + $socialwalls;
 
         return $return;
     }
