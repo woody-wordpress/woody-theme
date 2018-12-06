@@ -428,6 +428,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
             }
         }
         $the_list['filters']['button'] = (!empty($layout['the_list_filters']['filter_button'])) ? $layout['the_list_filters']['filter_button'] : '';
+        $the_list['filters']['reset'] = (!empty($layout['the_list_filters']['reset_button'])) ? $layout['the_list_filters']['reset_button'] : '';
         $the_list['filters']['display']['background_img'] = (!empty($layout['the_list_filters']['background_img'])) ? $layout['the_list_filters']['background_img'] : '';
         $the_list['filters']['display']['classes'][] = (!empty($layout['the_list_filters']['background_color'])) ? $layout['the_list_filters']['background_color'] : '';
         $the_list['filters']['display']['classes'][] = (!empty($layout['the_list_filters']['background_img_opacity'])) ? $layout['the_list_filters']['background_img_opacity'] : '';
