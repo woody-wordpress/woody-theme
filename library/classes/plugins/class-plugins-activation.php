@@ -77,7 +77,7 @@ class WoodyTheme_Plugins_Activation
 
                 // Disable
                 $this->deactivate_plugins[] = 'query-monitor/query-monitor.php';
-                $this->activate_plugins[] = 'wp-php-console/wp-php-console.php';
+                $this->deactivate_plugins[] = 'wp-php-console/wp-php-console.php';
                 break;
         }
 
