@@ -437,6 +437,11 @@ function formatFullContentList($layout, $current_post, $twigPaths)
 
     $params = filter_input_array(INPUT_POST);
 
+    // On revient aux paramètres par défaut si le bouton reset a été cliqué
+    if(array_key_exists('reset', $params)){
+        $params = [];
+    };
+
     // Traitement des données du post
     if (!empty($params) && $layout['uniqid'] === $params['uniqid']) {
         $the_filtered_items = [
@@ -508,8 +513,10 @@ function formatFullContentList($layout, $current_post, $twigPaths)
         $the_filtered_items['display_button'] = (!empty($layout['the_list_elements']['list_el_req_fields']['display_button'])) ? $layout['the_list_elements']['list_el_req_fields']['display_button'] : '';
 
         $the_list['the_grid'] =  Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_filtered_items);
+        $the_list['items_count'] = $the_filtered_items['wp_query']->found_posts;
     } else {
         $the_list['the_grid'] =  Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_items);
+        $the_list['items_count'] = $the_items['wp_query']->found_posts;
     }
 
     if (!empty($layout['the_list_pager']) && $layout['the_list_pager']['list_pager_type'] != 'none') {
