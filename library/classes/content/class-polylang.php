@@ -36,6 +36,11 @@ class WoodyTheme_Polylang
         // cd ~/www/wordpress/current/web/app/themes/woody-theme
         // wp i18n make-pot . languages/woody-theme.pot
 
+        // Yoast
+        __("Page non trouvée %%sep%% %%sitename%%", 'woody-theme');
+        __("Erreur 404 : Page non trouvée", 'woody-theme');
+
+        // Woody blocs
         __("M'y rendre", 'woody-theme');
         __("Voir l'itinéraire", 'woody-theme');
         __("Voir la vidéo", 'woody-theme');

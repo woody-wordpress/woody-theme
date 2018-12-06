@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.4.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2018-11-30T12:04:51+01:00\n"
-"PO-Revision-Date: 2018-11-30 12:05+0100\n"
+"POT-Creation-Date: 2018-12-06T11:39:58+01:00\n"
+"PO-Revision-Date: 2018-12-06 11:40+0100\n"
 "Last-Translator: POIROUX Léo <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -28,27 +28,35 @@ msgstr ""
 msgid "Raccourci Agency"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:39
+#: library/classes/content/class-polylang.php:40
+msgid "Page non trouvée %%sep%% %%sitename%%"
+msgstr "Page not found  %%sep%% %%sitename%%"
+
+#: library/classes/content/class-polylang.php:41
+msgid "Erreur 404 : Page non trouvée"
+msgstr "Error 404 : Page not found"
+
+#: library/classes/content/class-polylang.php:44
 msgid "M'y rendre"
 msgstr "Getting there"
 
-#: library/classes/content/class-polylang.php:40
+#: library/classes/content/class-polylang.php:45
 msgid "Voir l'itinéraire"
 msgstr "See the itinerary"
 
-#: library/classes/content/class-polylang.php:41
+#: library/classes/content/class-polylang.php:46
 msgid "Voir la vidéo"
 msgstr "Watch video"
 
-#: library/classes/content/class-polylang.php:42
+#: library/classes/content/class-polylang.php:47
 msgid "Affiner ma recherche"
 msgstr "Refine my search"
 
-#: library/classes/content/class-polylang.php:43
+#: library/classes/content/class-polylang.php:48
 msgid "Voir les résultats sur la carte"
 msgstr "See results on map"
 
-#: library/classes/content/class-polylang.php:44
+#: library/classes/content/class-polylang.php:49
 msgid "Voir la carte"
 msgstr "View map"
 
@@ -57,8 +65,8 @@ msgid "Oups !"
 msgstr "Oops!"
 
 #: library/templates/template-page.php:68
-msgid "404 - Page non trouvée"
-msgstr "404 - Page not found"
+msgid "Page non trouvée"
+msgstr "Page not found"
 
 #: library/templates/template-page.php:69
 msgid ""
