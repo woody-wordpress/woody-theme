@@ -439,12 +439,13 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     $params = filter_input_array(INPUT_POST);
 
     // On revient aux paramètres par défaut si le bouton reset a été cliqué
-    if(array_key_exists('reset', $params)){
-        $params = [];
-    };
+
 
     // Traitement des données du post
     if (!empty($params) && $layout['uniqid'] === $params['uniqid']) {
+        if(array_key_exists('reset', $params)){
+            $params = [];
+        };
         $the_filtered_items = [
             'empty' => 'Désolé, aucun contenu ne correspond à votre recherche'
         ];

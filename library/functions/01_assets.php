@@ -194,7 +194,7 @@ function getMinMaxWoodyFieldValues($query_vars = array(), $field, $minormax = 'm
 
     if(!empty($query_result->posts)){
         $return = get_field($field, $query_result->posts[0]->ID);
-        $return = (empty($return)) ? 0 : $return;
+        $return = (empty($return)) ? 1 : $return;
     }
 
     return $return;
