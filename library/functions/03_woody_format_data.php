@@ -155,12 +155,18 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
                         'type'      => 'NUMERIC',
                         'compare'	=> '<='
                 ];
-            } elseif (strpos($filter_key, 'filter_trip_count_days') !== false) {
+            } elseif (strpos($filter_key, 'filter_trip_duration') !== false) {
                 $the_meta_query[] = [
                     'key'		=> 'the_duration_count_days',
-                    'value'		=> $filter,
+                    'value'		=> $filter['min'],
                     'type'      => 'NUMERIC',
-                    'compare'	=> '='
+                    'compare'	=> '>='
+                ];
+                $the_meta_query[] = [
+                        'key'		=> 'the_duration_count_days',
+                        'value'		=> $filter['max'],
+                        'type'      => 'NUMERIC',
+                        'compare'	=> '<='
                 ];
             }
         }
@@ -233,11 +239,11 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
     }
 
     // On créé la wp_query avec les paramètres définis
-    $focused_posts = new WP_Query($the_query);
+    $query_result = new WP_Query($the_query);
 
     // On transforme la donnée des posts récupérés pour coller aux templates de blocs Woody
-    if (!empty($focused_posts->posts)) {
-        foreach ($focused_posts->posts as $key => $post) {
+    if (!empty($query_result->posts)) {
+        foreach ($query_result->posts as $key => $post) {
             $data = [];
             $post = Timber::get_post($post->ID);
             $data = getPagePreview($query_form, $post);
@@ -245,7 +251,8 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
             // $data['link']['title'] = (!empty($query_form['links_label'])) ? $query_form['links_label'] : '';
             $the_items['items'][$key] = $data;
         }
-        $the_items['max_num_pages'] = $focused_posts->max_num_pages;
+        $the_items['max_num_pages'] = $query_result->max_num_pages;
+        $the_items['wp_query'] = $query_result;
     }
 
     return $the_items;
@@ -390,9 +397,11 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                     ];
                 }
             } elseif ($filter['list_filter_type'] == 'price') {
-                $the_list['filters'][$key]['minmax'] = getMinMaxWoodyPostFieldValues($the_items['items'], 'trip', 'the_price', 'price');
+                $the_list['filters'][$key]['minmax']['max'] = getMinMaxWoodyFieldValues($the_items['wp_query']->query_vars, 'the_price_price');
+                $the_list['filters'][$key]['minmax']['min'] = getMinMaxWoodyFieldValues($the_items['wp_query']->query_vars, 'the_price_price', 'min');
             } elseif ($filter['list_filter_type'] == 'duration') {
-                $the_list['filters'][$key]['minmax'] = getMinMaxWoodyPostFieldValues($the_items['items'], 'trip', 'the_duration', 'count_days');
+                $the_list['filters'][$key]['minmax']['max'] = getMinMaxWoodyFieldValues($the_items['wp_query']->query_vars, 'the_duration_count_days');
+                $the_list['filters'][$key]['minmax']['min'] = getMinMaxWoodyFieldValues($the_items['wp_query']->query_vars, 'the_duration_count_days', 'min');
             } elseif ($filter['list_filter_type'] == 'map') {
                 $the_list['has_map'] = true;
                 foreach ($the_items['items'] as $item) {
@@ -434,6 +443,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
             'empty' => 'Désolé, aucun contenu ne correspond à votre recherche'
         ];
         foreach ($params as $param_key => $param) {
+
             if (strpos($param_key, 'taxonomy_terms') !== false && !empty($param)) {
                 $filter_index = str_replace('taxonomy_terms_', '', $param_key);
                 $andor = $layout['the_list_filters']['list_filters'][$filter_index]['list_filter_andor'];
@@ -465,25 +475,31 @@ function formatFullContentList($layout, $current_post, $twigPaths)
 
                     // Update filter value on load
                     $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_price' . $filter_index]['min'] = $param;
-                    if ($the_list['filters'][$filter_index]['list_filter_type'] == 'price') {
+                    // if ($the_list['filters'][$filter_index]['list_filter_type'] == 'price') {
                         $the_list['filters'][$filter_index]['minmax']['default_min'] = round($param);
-                    }
+                    // }
                 } else {
                     $filter_index = str_replace('_max', '', $filter_index);
 
                     // Update filter value on load
                     $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_price' . $filter_index]['max'] = $param;
-                    if ($the_list['filters'][$filter_index]['list_filter_type'] == 'price') {
-                        $the_list['filters'][$filter_index]['minmax']['default_max'] = round($param);
-                    }
+                    $the_list['filters'][$filter_index]['minmax']['default_max'] = round($param);
                 }
-            } elseif (strpos($param_key, 'trip_count_days') !== false && !empty($param)) {
-                $filter_index = str_replace('trip_count_days_', '', $param_key);
+            } elseif (strpos($param_key, 'trip_duration') !== false && !empty($param)) {
+                $filter_index = str_replace('trip_duration_', '', $param_key);
+                if (strpos($filter_index, '_min') !== false) {
+                    $filter_index = str_replace('_min', '', $filter_index);
 
-                // Update filter value on load
-                $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_' . $param_key] = $param;
-                if ($the_list['filters'][$filter_index]['list_filter_type'] == 'duration') {
-                    $the_list['filters'][$filter_index]['minmax']['default'] = $param;
+                    // Update filter value on load
+                    $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_duration' . $filter_index]['min'] = $param;
+                    $the_list['filters'][$filter_index]['minmax']['default_min'] = $param;
+                } else {
+                    $filter_index = str_replace('_max', '', $filter_index);
+
+                    // Update filter value on load
+                    $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_duration' . $filter_index]['max'] = $param;
+                    $the_list['filters'][$filter_index]['minmax']['default_max'] = $param;
+
                 }
             }
         }
