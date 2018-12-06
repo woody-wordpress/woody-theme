@@ -144,14 +144,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "choices": {
-                        "182": "Lieux - Lieu 1",
-                        "184": "Lieux - Lieu 2",
-                        "186": "Lieux - Lieu 3",
-                        "176": "Thématiques - Thème A",
-                        "178": "Thématiques - Thème B",
-                        "180": "Thématiques - Thème C"
-                    },
+                    "choices": {},
                     "default_value": [],
                     "allow_null": 0,
                     "multiple": 1,
@@ -305,74 +298,6 @@
             "layout": "block",
             "sub_fields": [
                 {
-                    "key": "field_5bd871d14bacf",
-                    "label": "Icône",
-                    "name": "filter_button_woody_icon",
-                    "type": "select",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "50",
-                        "class": "",
-                        "id": ""
-                    },
-                    "choices": {
-                        "wicon-002-twitter": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-002-twitter\"><\/span><span>Twitter<\/span><\/div>",
-                        "wicon-006-linkedin": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-006-linkedin\"><\/span><span>Linkedin<\/span><\/div>",
-                        "wicon-039-pin": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-039-pin\"><\/span><span>Pin<\/span><\/div>",
-                        "wicon-023-ampoule": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-023-ampoule\"><\/span><span>Ampoule<\/span><\/div>",
-                        "wicon-026-precedent": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-026-precedent\"><\/span><span>Precedent<\/span><\/div>",
-                        "wicon-004-youtube": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-004-youtube\"><\/span><span>Youtube<\/span><\/div>",
-                        "wicon-037-citation-02": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-037-citation-02\"><\/span><span>Citation 02<\/span><\/div>",
-                        "wicon-036-citation-01": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-036-citation-01\"><\/span><span>Citation 01<\/span><\/div>",
-                        "wicon-025-suivant": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-025-suivant\"><\/span><span>Suivant<\/span><\/div>",
-                        "wicon-034-fleche-suivant": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-034-fleche-suivant\"><\/span><span>Fleche suivant<\/span><\/div>",
-                        "wicon-007-viadeo": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-007-viadeo\"><\/span><span>Viadeo<\/span><\/div>",
-                        "wicon-027-restaurant": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-027-restaurant\"><\/span><span>Restaurant<\/span><\/div>",
-                        "wicon-013-smiley-excellent": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-013-smiley-excellent\"><\/span><span>Smiley excellent<\/span><\/div>",
-                        "wicon-032-coeur-contour": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-032-coeur-contour\"><\/span><span>Coeur contour<\/span><\/div>",
-                        "wicon-040-imprimante": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-040-imprimante\"><\/span><span>Imprimante<\/span><\/div>",
-                        "wicon-029-croix-fermer": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-029-croix-fermer\"><\/span><span>Croix fermer<\/span><\/div>",
-                        "wicon-017-telechargement": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-017-telechargement\"><\/span><span>Telechargement<\/span><\/div>",
-                        "wicon-042-lien": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-042-lien\"><\/span><span>Lien<\/span><\/div>",
-                        "wicon-000-facebook": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-000-facebook\"><\/span><span>Facebook<\/span><\/div>",
-                        "wicon-015-horloge": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-015-horloge\"><\/span><span>Horloge<\/span><\/div>",
-                        "wicon-005-pinterest": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-005-pinterest\"><\/span><span>Pinterest<\/span><\/div>",
-                        "wicon-012-smiley-bien": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-012-smiley-bien\"><\/span><span>Smiley bien<\/span><\/div>",
-                        "wicon-020-photos": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-020-photos\"><\/span><span>Photos<\/span><\/div>",
-                        "wicon-024-loupe": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-024-loupe\"><\/span><span>Loupe<\/span><\/div>",
-                        "wicon-031-etoile-pleine": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-031-etoile-pleine\"><\/span><span>Etoile pleine<\/span><\/div>",
-                        "wicon-021-info": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-021-info\"><\/span><span>Info<\/span><\/div>",
-                        "wicon-030-etoile-contour": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-030-etoile-contour\"><\/span><span>Etoile contour<\/span><\/div>",
-                        "wicon-003-google": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-003-google\"><\/span><span>Google<\/span><\/div>",
-                        "wicon-010-flickr": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-010-flickr\"><\/span><span>Flickr<\/span><\/div>",
-                        "wicon-035-fleche-precedent": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-035-fleche-precedent\"><\/span><span>Fleche precedent<\/span><\/div>",
-                        "wicon-009-vimeo": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-009-vimeo\"><\/span><span>Vimeo<\/span><\/div>",
-                        "wicon-019-oeuil": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-019-oeuil\"><\/span><span>Oeuil<\/span><\/div>",
-                        "wicon-011-instagram": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-011-instagram\"><\/span><span>Instagram<\/span><\/div>",
-                        "wicon-014-livre": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-014-livre\"><\/span><span>Livre<\/span><\/div>",
-                        "wicon-043-phone": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-043-phone\"><\/span><span>Phone<\/span><\/div>",
-                        "wicon-022-itineraire": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-022-itineraire\"><\/span><span>Itineraire<\/span><\/div>",
-                        "wicon-033-coeur": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-033-coeur\"><\/span><span>Coeur<\/span><\/div>",
-                        "wicon-038-pin-contour": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-038-pin-contour\"><\/span><span>Pin contour<\/span><\/div>",
-                        "wicon-018-agenda": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-018-agenda\"><\/span><span>Agenda<\/span><\/div>",
-                        "wicon-041-lit": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-041-lit\"><\/span><span>Lit<\/span><\/div>",
-                        "wicon-028-plus-02": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-028-plus-02\"><\/span><span>Plus 02<\/span><\/div>",
-                        "wicon-008-snapchat": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-008-snapchat\"><\/span><span>Snapchat<\/span><\/div>",
-                        "wicon-001-facebook-messenger": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-001-facebook-messenger\"><\/span><span>Facebook messenger<\/span><\/div>",
-                        "wicon-044-enveloppe": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-044-enveloppe\"><\/span><span>Enveloppe<\/span><\/div>",
-                        "wicon-016-bulle": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-016-bulle\"><\/span><span>Bulle<\/span><\/div>"
-                    },
-                    "default_value": [],
-                    "allow_null": 1,
-                    "multiple": 0,
-                    "ui": 1,
-                    "ajax": 1,
-                    "return_format": "value",
-                    "placeholder": ""
-                },
-                {
                     "key": "field_5bd871bd4bace",
                     "label": "Texte",
                     "name": "filter_button_text",
@@ -392,6 +317,25 @@
                     "maxlength": ""
                 }
             ]
+        },
+        {
+            "key": "field_5c0935b0aba59",
+            "label": "Bouton \"Réinitialiser\"",
+            "name": "reset_button",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         {
             "key": "field_5bc608002a89d",
@@ -422,14 +366,7 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "lists-list_full-tpl_101": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/lists\/list_full\/tpl_101\/thumbnail.png?version=2.0.2\" alt=\"lists-list_full-tpl_101\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Liste (filtres au dessus + checkboxes + sliders)<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Liste (filtres au dessus + checkboxes + sliders)<\/h4>...<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "lists-list_full-tpl_201": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/lists\/list_full\/tpl_201\/thumbnail.png?version=2.0.2\" alt=\"lists-list_full-tpl_201\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Liste (filtres à droite)<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Liste (filtres à droite)<\/h4>...<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "lists-list_full-tpl_102": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/lists\/list_full\/tpl_102\/thumbnail.png?version=2.0.2\" alt=\"lists-list_full-tpl_102\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Liste (filtres au dessus + select uniquement)<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Liste (filtres au dessus + select uniquement)<\/h4>Filtres qui peuvent s'assembler et composer une phrase<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "lists-list_full-tpl_301": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/lists\/list_full\/tpl_301\/thumbnail.png?version=2.0.2\" alt=\"lists-list_full-tpl_301\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Liste (filtres à gauche)<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Liste (filtres à gauche)<\/h4>...<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "lists-list_full-tpl_103": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/lists\/list_full\/tpl_103\/thumbnail.png?version=2.0.2\" alt=\"lists-list_full-tpl_103\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Liste (filtres au dessus + checkboxes + sliders \/ carte à gauche)<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Liste (filtres au dessus + checkboxes + sliders \/ carte à gauche)<\/h4>...<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "lists-list_full-tpl_104": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/lists\/list_full\/tpl_104\/thumbnail.png?version=2.0.2\" alt=\"lists-list_full-tpl_104\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Liste (filtres au dessus + select uniquement \/ carte à gauche)<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Liste (filtres au dessus + select uniquement \/ carte à gauche)<\/h4>Filtres qui composent une phrase<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-            },
+            "choices": {},
             "allow_null": 0,
             "other_choice": 0,
             "default_value": "",
@@ -493,5 +430,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Choix des filtres pour les listes de contenu",
-    "modified": 1541522771
+    "modified": 1544107787
 }

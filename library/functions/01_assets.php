@@ -168,49 +168,34 @@ function getWoodyTwigPaths()
 
 /**
  *
- * Nom : getMinMaxFieldValues
+ * Nom : getMinMaxWoodyFieldValues
  * Auteur : Benoit Bouchaud
  * Return : Retourne le html d'une mise en avant de contenu
- * @param    posts Les pages au format Woody (formatés par le getPagePreview)
- * @param    post_type le type de page (taxonomie) dans lequel on recherche + enfants si il y en a
+ * @param    query_vars Les champs de tris pour rechercher les champ dans une selection de posts
  * @param    field le champ dans lequel on cherche
- * @param    subfield le sous-champ si nécessaire
- * @return   return - Un tableau avec une entrée min + une entrée max
+ * @param    minormax Sting => 'min' ou 'max' (Default max)
+ * @return   return - Un nombre
  *
  */
-function getMinMaxWoodyPostFieldValues($posts, $post_type, $field, $subfield = '')
-{
-    $return = [];
-    $range = [];
-    foreach ($posts as $key => $post) {
-        // TODO:get trip children to display min an dmax prices
-        $type_term = get_term_by('slug', $post_type, 'page_type');
-        $children = get_term_children($type_term->term_id, 'page_type');
 
-        $terms = [$post_type];
-        if (!empty($children)) {
-            foreach ($children as $key => $value) {
-                $term_object = get_term($value);
-                $terms[] = $term_object->slug;
-            }
-        }
+function getMinMaxWoodyFieldValues($query_vars = array(), $field, $minormax = 'max'){
+    $return = 0;
 
-        if (!in_array($post['page_type'], $terms)) {
-            continue;
-        }
-        if (empty($subfield) && !empty($post[$field])) {
-            $range[] = $post[$field];
-        } elseif (!empty($post[$field][$subfield])) {
-            $range[] = $post[$field][$subfield];
-        }
-    }
-
-    if (empty($range)) {
+    if(empty($query_vars) || empty($field)){
         return;
     }
+    $query_vars['meta_key'] = $field;
+    $query_vars['posts_per_page'] = 1;
+    $query_vars['paged'] = false;
+    $query_vars['orderby'] = 'meta_value_num';
+    $query_vars['order'] = ($minormax == 'max') ? 'DESC' : 'ASC';
 
-    $return['min'] = round(min($range));
-    $return['max'] = round(max($range) + 1);
+    $query_result = new WP_Query($query_vars);
+
+    if(!empty($query_result->posts)){
+        $return = get_field($field, $query_result->posts[0]->ID);
+        $return = (empty($return)) ? 0 : $return;
+    }
 
     return $return;
 }
