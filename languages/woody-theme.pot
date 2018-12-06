@@ -2,14 +2,14 @@
 # This file is distributed under the .
 msgid ""
 msgstr ""
-"Project-Id-Version: Woody (Thème parent) 2.4.7\n"
+"Project-Id-Version: Woody (Thème parent) 2.4.8\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2018-11-30T12:04:51+01:00\n"
+"POT-Creation-Date: 2018-12-06T11:39:58+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.0.1\n"
 "X-Domain: woody-theme\n"
@@ -26,27 +26,35 @@ msgstr ""
 msgid "Raccourci Agency"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:39
-msgid "M'y rendre"
-msgstr ""
-
 #: library/classes/content/class-polylang.php:40
-msgid "Voir l'itinéraire"
+msgid "Page non trouvée %%sep%% %%sitename%%"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:41
-msgid "Voir la vidéo"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:42
-msgid "Affiner ma recherche"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:43
-msgid "Voir les résultats sur la carte"
+msgid "Erreur 404 : Page non trouvée"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:44
+msgid "M'y rendre"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:45
+msgid "Voir l'itinéraire"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:46
+msgid "Voir la vidéo"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:47
+msgid "Affiner ma recherche"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:48
+msgid "Voir les résultats sur la carte"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:49
 msgid "Voir la carte"
 msgstr ""
 
@@ -55,7 +63,7 @@ msgid "Oups !"
 msgstr ""
 
 #: library/templates/template-page.php:68
-msgid "404 - Page non trouvée"
+msgid "Page non trouvée"
 msgstr ""
 
 #: library/templates/template-page.php:69

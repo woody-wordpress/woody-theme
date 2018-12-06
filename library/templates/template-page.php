@@ -65,7 +65,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     {
         $this->context['content'] = [
             'title' => __("Oups !", 'woody-theme'),
-            'subtitle' => __("404 - Page non trouvée", 'woody-theme'),
+            'subtitle' => '404 - ' . __("Page non trouvée", 'woody-theme'),
             'text' => __("La page que vous recherchez a peut-être été supprimée ou est temporairement indisponible.", 'woody-theme'),
             'btn' => __("Aller à la page d'accueil", 'woody-theme'),
         ];
@@ -123,9 +123,9 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             $this->playlistContext();
         }
 
-         /*********************************************
-         * Compilation du visuel et accroche
-         *********************************************/
+        /*********************************************
+        * Compilation du visuel et accroche
+        *********************************************/
         $page_hero = [];
         $page_hero = getAcfGroupFields('group_5b052bbee40a4');
         if (!empty($page_hero['page_heading_media_type']) && ($page_hero['page_heading_media_type'] == 'movie' && !empty($page_hero['page_heading_movie']) || ($page_hero['page_heading_media_type'] == 'img' && !empty($page_hero['page_heading_img'])))) {
