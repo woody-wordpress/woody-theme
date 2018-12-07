@@ -2,14 +2,14 @@
 # This file is distributed under the .
 msgid ""
 msgstr ""
-"Project-Id-Version: Woody (Thème parent) 2.4.8\n"
+"Project-Id-Version: Woody (Thème parent) 2.4.9\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2018-12-06T11:39:58+01:00\n"
+"POT-Creation-Date: 2018-12-07T09:56:27+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.0.1\n"
 "X-Domain: woody-theme\n"
@@ -39,23 +39,51 @@ msgid "M'y rendre"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:45
-msgid "Voir l'itinéraire"
+msgid "Ajouter à mes favoris"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:46
-msgid "Voir la vidéo"
+msgid "Voir l'itinéraire"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:47
-msgid "Affiner ma recherche"
+msgid "Voir la vidéo"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:48
-msgid "Voir les résultats sur la carte"
+msgid "Affiner ma recherche"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:49
+msgid "Voir les résultats sur la carte"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:50
 msgid "Voir la carte"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:51
+msgid "Partager sur Facebook"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:52
+msgid "Partager sur Twitter"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:53
+msgid "Partager sur Google+"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:54
+msgid "Partager sur Instagram"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:55
+msgid "Partager sur Pinterest"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:56
+msgid "Partager par email"
 msgstr ""
 
 #: library/templates/template-page.php:67

@@ -42,10 +42,17 @@ class WoodyTheme_Polylang
 
         // Woody blocs
         __("M'y rendre", 'woody-theme');
+        __("Ajouter à mes favoris", 'woody-theme');
         __("Voir l'itinéraire", 'woody-theme');
         __("Voir la vidéo", 'woody-theme');
         __("Affiner ma recherche", 'woody-theme');
         __("Voir les résultats sur la carte", 'woody-theme');
         __("Voir la carte", 'woody-theme');
+        __("Partager sur Facebook", 'woody-theme');
+        __("Partager sur Twitter", 'woody-theme');
+        __("Partager sur Google+", 'woody-theme');
+        __("Partager sur Instagram", 'woody-theme');
+        __("Partager sur Pinterest", 'woody-theme');
+        __("Partager par email", 'woody-theme');
     }
 }
