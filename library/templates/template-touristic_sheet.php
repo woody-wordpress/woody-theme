@@ -98,7 +98,7 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
         }
 
         // Remove idFiche
-        $title = preg_replace('/#[0-9]+\z/', '', $title);
+        $title = preg_replace('/ #[0-9]+/', '', $title);
 
         return $title;
     }
