@@ -54,5 +54,6 @@ class WoodyTheme_Polylang
         __("Partager sur Instagram", 'woody-theme');
         __("Partager sur Pinterest", 'woody-theme');
         __("Partager par email", 'woody-theme');
+        __("Accès au menu principal", 'woody-theme');
     }
 }
