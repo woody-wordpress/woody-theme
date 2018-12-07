@@ -344,19 +344,22 @@ screen and (max-width:736px) and (orientation:landscape) {
 
 
 // Woody theme Overrides
-.cc-animate.cc-revoke {
-    font-size: rem-calc(12);
-    justify-content: flex-end;
+body{
+    .cc-revoke {
+        font-size: rem-calc(12);
+        justify-content: flex-end;
 
-    &.cc-bottom {
-        border-radius: 0;
-        left: 0;
-        width: 100%;
-        transform: translateY(100%);
-        transition: transform .3s ease-in-out;
+        &.cc-bottom {
+            border-radius: 0;
+            left: 0;
+            width: 100%;
+            transform: translateY(100%);
+            transition: transform .3s ease-in-out;
 
-        +div[aria-label='cookieconsent'] {
-            transform: translateY(30px);
+            +div[aria-label='cookieconsent'] {
+                transform: translateY(30px);
+            }
         }
     }
 }
+
