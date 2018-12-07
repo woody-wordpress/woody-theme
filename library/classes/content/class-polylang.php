@@ -55,5 +55,10 @@ class WoodyTheme_Polylang
         __("Partager sur Pinterest", 'woody-theme');
         __("Partager par email", 'woody-theme');
         __("Accès au menu principal", 'woody-theme');
+        __("Que recherchez-vous ?", "woody-theme");
+        __("Rechercher", 'woody-theme');
+        __('Offre touristique', 'woody-theme');
+        __('Désolé, aucun contenu touristique ne correspond à votre recherche', 'woody-theme');
+        __('Désolé, aucune page ne correspond à votre recherche', 'woody-theme');
     }
 }
