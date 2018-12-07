@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.4.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2018-12-06T11:39:58+01:00\n"
-"PO-Revision-Date: 2018-12-06 11:40+0100\n"
+"POT-Creation-Date: 2018-12-07T10:05:54+01:00\n"
+"PO-Revision-Date: 2018-12-07 10:09+0100\n"
 "Last-Translator: POIROUX Léo <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #. Author of the theme
 msgid "Raccourci Agency"
-msgstr ""
+msgstr "Raccourci Agency"
 
 #: library/classes/content/class-polylang.php:40
 msgid "Page non trouvée %%sep%% %%sitename%%"
@@ -41,24 +41,56 @@ msgid "M'y rendre"
 msgstr "Getting there"
 
 #: library/classes/content/class-polylang.php:45
+msgid "Ajouter à mes favoris"
+msgstr "Add to my favorites"
+
+#: library/classes/content/class-polylang.php:46
 msgid "Voir l'itinéraire"
 msgstr "See the itinerary"
 
-#: library/classes/content/class-polylang.php:46
+#: library/classes/content/class-polylang.php:47
 msgid "Voir la vidéo"
 msgstr "Watch video"
 
-#: library/classes/content/class-polylang.php:47
+#: library/classes/content/class-polylang.php:48
 msgid "Affiner ma recherche"
 msgstr "Refine my search"
 
-#: library/classes/content/class-polylang.php:48
+#: library/classes/content/class-polylang.php:49
 msgid "Voir les résultats sur la carte"
 msgstr "See results on map"
 
-#: library/classes/content/class-polylang.php:49
+#: library/classes/content/class-polylang.php:50
 msgid "Voir la carte"
 msgstr "View map"
+
+#: library/classes/content/class-polylang.php:51
+msgid "Partager sur Facebook"
+msgstr "Share on Facebook"
+
+#: library/classes/content/class-polylang.php:52
+msgid "Partager sur Twitter"
+msgstr "Share on Twitter"
+
+#: library/classes/content/class-polylang.php:53
+msgid "Partager sur Google+"
+msgstr "Share on Google+"
+
+#: library/classes/content/class-polylang.php:54
+msgid "Partager sur Instagram"
+msgstr "Share on Instagram"
+
+#: library/classes/content/class-polylang.php:55
+msgid "Partager sur Pinterest"
+msgstr "Share on Pinterest"
+
+#: library/classes/content/class-polylang.php:56
+msgid "Partager par email"
+msgstr "Share by email"
+
+#: library/classes/content/class-polylang.php:57
+msgid "Accès au menu principal"
+msgstr "Go to main menu"
 
 #: library/templates/template-page.php:67
 msgid "Oups !"
