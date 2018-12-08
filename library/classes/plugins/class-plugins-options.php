@@ -17,6 +17,12 @@ class WoodyTheme_Plugins_Options
     protected function registerHooks()
     {
         add_action('woody_theme_update', [$this, 'defineOptions'], 1);
+        add_action('woody_theme_update', [$this, 'flushRewriteRules'], 10);
+    }
+
+    public function flushRewriteRules()
+    {
+        flush_rewrite_rules();
     }
 
     public function defineOptions()

@@ -17,7 +17,7 @@ class WoodyTheme_SiteMap
     {
         add_action('init', [$this, 'customRewriteRule'], 10, 0);
         add_action('after_setup_theme', [$this, 'reduceQueryLoad'], 99);
-        add_action('pre_get_posts', [$this, 'getSitemap'], 1);
+        add_action('template_redirect', [$this, 'getSitemap'], 1);
     }
 
     public function customRewriteRule()
@@ -54,15 +54,11 @@ class WoodyTheme_SiteMap
      */
     public function getSitemap($query)
     {
-        // if (!$query->is_main_query()) {
-        //     return;
-        // }
-
         $sitemap = get_query_var('sitemap');
         if (!empty($sitemap)) {
-            print 'toto';
-
-            return;
+            add_filter('template_include', function () {
+                return get_template_directory() . '/sitemap.php';
+            });
         }
     }
 }
