@@ -333,7 +333,7 @@ class WoodyTheme_Plugins_Options
             'keyword_analysis_active'    => false,
             'enable_admin_bar_menu'      => false,
             'enable_cornerstone_content' => false,
-            'enable_xml_sitemap'         => true,
+            'enable_xml_sitemap'         => false,
             'enable_text_link_counter'   => false,
             'show_onboarding_notice'     => false,
         ];

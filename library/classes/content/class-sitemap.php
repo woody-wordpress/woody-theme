@@ -27,8 +27,9 @@ class WoodyTheme_SiteMap
         $wp->add_query_var('sitemap');
         $wp->add_query_var('sitemap_n');
 
-        add_rewrite_rule('sitemap\.xml$', 'index.php?sitemap=1', 'top');
-        add_rewrite_rule('sitemap([0-9]+)?\.xml$', 'index.php?sitemap=1&page=$matches[1]', 'top');
+        add_rewrite_rule('sitemap\.xsl$', 'index.php?sitemap=xsl', 'top');
+        add_rewrite_rule('sitemap\.xml$', 'index.php?sitemap=index', 'top');
+        add_rewrite_rule('sitemap-([0-9]+)?\.xml$', 'index.php?sitemap=list&page=$matches[1]', 'top');
     }
 
     /**
