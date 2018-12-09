@@ -23,7 +23,7 @@ class WoodyTheme_Template_Sitemap
     public function render()
     {
         if (!empty($this->twig_tpl) && !empty($this->context)) {
-            header('Content-Type: text/xml');
+            header('Content-Type: text/xml; charset=UTF-8');
             Timber::render($this->twig_tpl, $this->context);
         }
     }
@@ -41,7 +41,7 @@ class WoodyTheme_Template_Sitemap
                     for ($i=1; $i <= $query->max_num_pages; $i++) {
                         $this->context['sitemaps'][] = [
                             'loc' => 'sitemap-' . $i . '.xml',
-                            'lastmod' => '2018-11-07T13:11:11+01:00',
+                            'lastmod' => date('c', time()),
                         ];
                     }
                 }
@@ -53,8 +53,8 @@ class WoodyTheme_Template_Sitemap
                     while ($query->have_posts()) {
                         $post = $query->the_post();
                         $this->context['urls'][] = [
-                            'loc' => get_permalink($post->ID),
-                            'lastmod' => '2018-11-07T13:11:11+01:00',
+                            'loc' => get_permalink($post),
+                            'lastmod' => get_the_modified_date('c', $post),
                         ];
                     }
                 }
@@ -71,10 +71,10 @@ class WoodyTheme_Template_Sitemap
     private function getPosts()
     {
         $query = new WP_Query([
-            'post_type' => 'page',
+            'post_type' => ['page', 'touristic_sheet'],
             'orderby' => 'menu_order',
             'order'   => 'DESC',
-            'posts_per_page' => 50,
+            'posts_per_page' => 100,
             'paged' => (get_query_var('page')) ? get_query_var('page') : 1
         ]);
 
