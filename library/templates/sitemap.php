@@ -70,6 +70,7 @@ class WoodyTheme_Template_Sitemap
 
     private function getPosts()
     {
+        // TODO: Search by lang if multiple domains
         $query = new WP_Query([
             'post_type' => ['page', 'touristic_sheet'],
             'orderby' => 'menu_order',
