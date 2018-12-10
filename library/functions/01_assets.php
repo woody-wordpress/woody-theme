@@ -178,10 +178,11 @@ function getWoodyTwigPaths()
  *
  */
 
-function getMinMaxWoodyFieldValues($query_vars = array(), $field, $minormax = 'max'){
+function getMinMaxWoodyFieldValues($query_vars = array(), $field, $minormax = 'max')
+{
     $return = 0;
 
-    if(empty($query_vars) || empty($field)){
+    if (empty($query_vars) || empty($field)) {
         return;
     }
     $query_vars['meta_key'] = $field;
@@ -192,7 +193,7 @@ function getMinMaxWoodyFieldValues($query_vars = array(), $field, $minormax = 'm
 
     $query_result = new WP_Query($query_vars);
 
-    if(!empty($query_result->posts)){
+    if (!empty($query_result->posts)) {
         $return = get_field($field, $query_result->posts[0]->ID);
         $return = (empty($return)) ? 1 : $return;
     }
@@ -200,8 +201,8 @@ function getMinMaxWoodyFieldValues($query_vars = array(), $field, $minormax = 'm
     return $return;
 }
 
-function getPageTerms($post_id){
-
+function getPageTerms($post_id)
+{
     $return = [];
 
     $taxonomies = get_transient('woody_website_pages_taxonomies');
@@ -211,36 +212,35 @@ function getPageTerms($post_id){
         unset($taxonomies['page_type']);
         unset($taxonomies['post_translations']);
         set_transient('woody_website_pages_taxonomies', $taxonomies);
+    }
+
+    foreach ($taxonomies as $taxonomy) {
+        $terms = wp_get_post_terms($post_id, $taxonomy->name);
+        foreach ($terms as $term) {
+            $return[] = 'term-' . $term->slug;
         }
+    }
 
-        foreach ($taxonomies as $taxonomy) {
-            $terms = wp_get_post_terms($post_id, $taxonomy->name);
-            foreach ($terms as $term) {
-                $return[] = 'term-' . $term->slug;
-            }
-
-        }
-
-        return $return;
+    return $return;
 }
 
-function getPrimaryTerm($taxonomy, $post_id, $fields = []){
+function getPrimaryTerm($taxonomy, $post_id, $fields = [])
+{
     $return = '';
     // $field values can be : count, description, filter, name, perent, slug, taxonomy, term_group, term_id, term_taxonomy_id
     if (class_exists('WPSEO_Primary_Term')) {
-        $wpseo_primary_term = new WPSEO_Primary_Term( $taxonomy, $post_id );
+        $wpseo_primary_term = new WPSEO_Primary_Term($taxonomy, $post_id);
         $primary_id = $wpseo_primary_term->get_primary_term();
         $primary_term = get_term($primary_id);
         if (!is_wp_error($primary_term) && !empty($primary_term)) {
-            if(empty($fields)){
-                    $return = $primary_term;
-            } else{
+            if (empty($fields)) {
+                $return = $primary_term;
+            } else {
                 foreach ($fields as $field) {
                     $return[$field] = $primary_term->$field;
                 }
             }
         }
-
     } else {
         return false;
     }

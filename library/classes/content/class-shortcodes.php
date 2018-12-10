@@ -6,10 +6,10 @@
  * @since WoodyTheme 1.0.0
  */
 
- use \Woody\Services\Providers;
+use \Woody\Services\Providers;
 
- class WoodyTheme_Shortcodes{
-
+class WoodyTheme_Shortcodes
+{
     public function __construct()
     {
         $this->registerHooks();
@@ -22,25 +22,26 @@
         add_shortcode('recherche-globale', [$this, 'esSearchPage']);
     }
 
-    private function getWeather($atts){
+    private function getWeather($atts)
+    {
         $return = [];
 
         // $atts diuspoanibles : fond, images, localite
 
-        $today = date('l d M',strtotime('now'));
+        $today = date('l d M', strtotime('now'));
         for ($i=0; $i < 4 ; $i++) {
             $return['days'][] = [
-                'date' => date('l d M',strtotime('+ ' . $i . ' days'))
+                'date' => date('l d M', strtotime('+ ' . $i . ' days'))
             ];
         }
 
-        if(!empty($atts['images'])){
+        if (!empty($atts['images'])) {
             $imgs = [
-                WP_DIST_URL . '/img/plugins/weather/stormy.jpg',
-                WP_DIST_URL . '/img/plugins/weather/snowy.jpg',
-                WP_DIST_URL . '/img/plugins/weather/rainy.jpg',
-                WP_DIST_URL . '/img/plugins/weather/cloudy.jpg'
-            ];
+            WP_DIST_URL . '/img/plugins/weather/stormy.jpg',
+            WP_DIST_URL . '/img/plugins/weather/snowy.jpg',
+            WP_DIST_URL . '/img/plugins/weather/rainy.jpg',
+            WP_DIST_URL . '/img/plugins/weather/cloudy.jpg'
+        ];
         }
 
         // Test icones
@@ -48,48 +49,48 @@
 
         foreach ($return['days'] as $day_key => $day) {
             $return['days'][$day_key]['summary'] = [
-                'sky' => 'nuageux',
-                'icon' => $icons[$day_key],
-                'img' => (!empty($imgs)) ? $imgs[$day_key] : '',
-                'average_temp' => '13',
-                'min_temp' => '12',
-                'max_temp' => '13',
-                'wind' => '18',
-                'humidity' => '97'
-            ];
+            'sky' => 'nuageux',
+            'icon' => $icons[$day_key],
+            'img' => (!empty($imgs)) ? $imgs[$day_key] : '',
+            'average_temp' => '13',
+            'min_temp' => '12',
+            'max_temp' => '13',
+            'wind' => '18',
+            'humidity' => '97'
+        ];
             $return['days'][$day_key]['details'] = [
-                'midnight' => [
-                    'sky' => 'pluie',
-                    'icon' => 'climacon-cloud-rain',
-                    'temp' => '11'
-                ],
-                'morning' => [
-                    'sky' => 'nuageux',
-                    'icon' => 'climacon-cloud',
-                    'temp' => '12'
-                ],
-                'afternoon' => [
-                    'sky' => 'nuageux',
-                    'icon' => 'climacon-cloud',
-                    'temp' => '13'
-                ],
-                'evening' => [
-                    'sky' => 'nuageux',
-                    'icon' => 'climacon-cloud',
-                    'temp' => '11'
-                ]
-            ];
+            'midnight' => [
+                'sky' => 'pluie',
+                'icon' => 'climacon-cloud-rain',
+                'temp' => '11'
+            ],
+            'morning' => [
+                'sky' => 'nuageux',
+                'icon' => 'climacon-cloud',
+                'temp' => '12'
+            ],
+            'afternoon' => [
+                'sky' => 'nuageux',
+                'icon' => 'climacon-cloud',
+                'temp' => '13'
+            ],
+            'evening' => [
+                'sky' => 'nuageux',
+                'icon' => 'climacon-cloud',
+                'temp' => '11'
+            ]
+        ];
         }
 
         return $return;
     }
 
-    public function theWeather($atts){
-
+    public function theWeather($atts)
+    {
         $return = '';
         $vars = $this->getWeather($atts);
 
-        if(!empty($atts['fond'])){
+        if (!empty($atts['fond'])) {
             $vars['bg_color'] = $atts['fond'];
         }
 
@@ -97,9 +98,8 @@
         return $return;
     }
 
-
-    public function esSearchPage($atts){
-
+    public function esSearchPage($atts)
+    {
         $args['tags'] = (!empty($atts['tags'])) ? explode('|', $atts['tags']) : '';
         $args['lang'] = (!empty($atts['lang'])) ? $atts['lang'] : pll_default_language();
         $args['site_key'] = WP_SITE_KEY;
@@ -120,4 +120,4 @@
         $return = Timber::compile($this->twigPaths['woody_widgets-es_search-tpl_01'], $result);
         return $return;
     }
- }
+}

@@ -76,9 +76,8 @@ class WoodyTheme_Post_Type
         );
 
         register_post_type('short_link', $short_link);
-        if(WP_SITE_KEY == 'superot' ||WP_SITE_KEY == 'sarlat' ||WP_SITE_KEY == 'crt-bretagne'){
+        if (WP_SITE_KEY == 'superot' ||WP_SITE_KEY == 'sarlat' ||WP_SITE_KEY == 'crt-bretagne') {
             register_post_type('woody_claims', $woody_claims);
         }
     }
-
 }

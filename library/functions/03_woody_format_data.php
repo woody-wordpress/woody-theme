@@ -443,14 +443,13 @@ function formatFullContentList($layout, $current_post, $twigPaths)
 
     // Traitement des données du post
     if (!empty($params) && $layout['uniqid'] === $params['uniqid']) {
-        if(array_key_exists('reset', $params)){
+        if (array_key_exists('reset', $params)) {
             $params = [];
         };
         $the_filtered_items = [
             'empty' => 'Désolé, aucun contenu ne correspond à votre recherche'
         ];
         foreach ($params as $param_key => $param) {
-
             if (strpos($param_key, 'taxonomy_terms') !== false && !empty($param)) {
                 $filter_index = str_replace('taxonomy_terms_', '', $param_key);
                 $andor = $layout['the_list_filters']['list_filters'][$filter_index]['list_filter_andor'];
@@ -483,8 +482,8 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                     // Update filter value on load
                     $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_price' . $filter_index]['min'] = $param;
                     // if ($the_list['filters'][$filter_index]['list_filter_type'] == 'price') {
-                        $the_list['filters'][$filter_index]['minmax']['default_min'] = round($param);
-                    // }
+                    $the_list['filters'][$filter_index]['minmax']['default_min'] = round($param);
+                // }
                 } else {
                     $filter_index = str_replace('_max', '', $filter_index);
 
@@ -506,7 +505,6 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                     // Update filter value on load
                     $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_duration' . $filter_index]['max'] = $param;
                     $the_list['filters'][$filter_index]['minmax']['default_max'] = $param;
-
                 }
             }
         }
