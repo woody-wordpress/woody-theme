@@ -18,8 +18,24 @@ class WoodyTheme_Shortcodes
 
     protected function registerHooks()
     {
-        add_shortcode('ma_meteo', [$this,'theWeather']);
-        add_shortcode('recherche-globale', [$this, 'esSearchPage']);
+        add_shortcode('woody_meteo', [$this,'weatherShortCode']);
+        add_shortcode('woody_recherche', [$this, 'searchShortCode']);
+    }
+
+    /** ***********************
+     * METEO
+     *********************** */
+    public function weatherShortCode($atts)
+    {
+        $return = '';
+        $vars = $this->getWeather($atts);
+
+        if (!empty($atts['fond'])) {
+            $vars['bg_color'] = $atts['fond'];
+        }
+
+        $return = Timber::compile($this->twigPaths['woody_widgets-weather-tpl_01'], $vars);
+        return $return;
     }
 
     private function getWeather($atts)
@@ -85,39 +101,49 @@ class WoodyTheme_Shortcodes
         return $return;
     }
 
-    public function theWeather($atts)
+    /** ***********************
+     * RECHERCHE
+     *********************** */
+    public function searchShortCode($atts)
     {
-        $return = '';
-        $vars = $this->getWeather($atts);
-
-        if (!empty($atts['fond'])) {
-            $vars['bg_color'] = $atts['fond'];
-        }
-
-        $return = Timber::compile($this->twigPaths['woody_widgets-weather-tpl_01'], $posts);
-        return $return;
-    }
-
-    public function esSearchPage($atts)
-    {
-        $args['tags'] = (!empty($atts['tags'])) ? explode('|', $atts['tags']) : '';
-        $args['lang'] = (!empty($atts['lang'])) ? $atts['lang'] : pll_default_language();
-        $args['site_key'] = WP_SITE_KEY;
-        $result = [];
-
         $query = filter_input(INPUT_GET, 'query', FILTER_SANITIZE_STRING);
-        $result['posts']['pages'] = [];
-        $posts_ids = apply_filters('wp_woody_pages_search', ['query' => $query]);
 
-        foreach ($posts_ids as $id) {
-            $post = Timber::get_post($id);
-            $result['posts']['pages'][] = getPagePreview(['display_elements' => ['description'], 'display_button' => true], $post);
-        }
+        // Search inside pages
+        $pages_response = apply_filters('wp_woody_pages_search', ['query' => $query]);
 
+        $result = [];
         $result['query'] = $query;
         $result['display_button'] = true;
 
-        $return = Timber::compile($this->twigPaths['woody_widgets-es_search-tpl_01'], $result);
-        return $return;
+        $result['posts']['pages'] = [];
+        if (!empty($pages_response['posts'])) {
+            foreach ($pages_response['posts'] as $post_id) {
+                $post = Timber::get_post($post_id);
+                $result['posts']['pages'][] = getPagePreview(['display_elements' => ['description'], 'display_button' => true], $post);
+            }
+        }
+
+        $result['total']['pages'] = 0;
+        if (!empty($pages_response['total'])) {
+            $result['total']['pages'] = $pages_response['total'];
+        }
+
+        // Search inside sheets
+        $sheets_response = apply_filters('wp_woody_hawwwai_sheets_search', ['query' => $query]);
+
+        $result['posts']['touristic_sheets'] = [];
+        if (!empty($sheets_response['sheets'])) {
+            foreach ($sheets_response['sheets'] as $sheet) {
+                //$post = Timber::get_post($post_id);
+                //$result['posts']['touristic_sheets'][] = getPagePreview(['display_elements' => ['description'], 'display_button' => true], $post);
+            }
+        }
+
+        $result['total']['touristic_sheets'] = 0;
+        if (!empty($sheets_response['total'])) {
+            $result['total']['touristic_sheets'] = $sheets_response['total'];
+        }
+
+        return Timber::compile($this->twigPaths['woody_widgets-es_search-tpl_01'], $result);
     }
 }
