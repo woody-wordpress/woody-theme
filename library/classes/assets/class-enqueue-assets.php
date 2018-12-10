@@ -185,7 +185,7 @@ class WoodyTheme_Enqueue_Assets
             wp_enqueue_script('uuid', 'https://cdn.jsdelivr.net/npm/node-uuid@1.4.8/uuid.min.js', array(), '', true);
             wp_enqueue_script('lodash', 'https://cdn.jsdelivr.net/npm/lodash@3.8.0/index.min.js', array(), '', true);
             wp_enqueue_script('arrive', 'https://cdn.jsdelivr.net/npm/arrive@2.4.1/src/arrive.min.js', array('jquery'), '', true);
-            wp_enqueue_script('sheet_item', $apirender_base_uri.'/assets/scripts/raccourci/sheet_item.min.js', array('jquery'), '', true);
+            wp_enqueue_script('sheet_item', $apirender_base_uri.'/assets/scripts/raccourci/sheet_item.min.js', array('jquery'), $wThemeVersion, true);
 
             $js_dependencies__playlist = ['bootstrap','match8','nouislider','wnumb','chosen','moment','picker','twigjs','lodash','arrive','sheet_item'];
             wp_enqueue_script('playlist', $apirender_base_uri.'/assets/scripts/raccourci/playlist.'. $jsModeSuffix .'.js', $js_dependencies__playlist, $wThemeVersion, true);
@@ -203,18 +203,18 @@ class WoodyTheme_Enqueue_Assets
             wp_enqueue_style('bootstrap_css', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css', array(), '');
 
             // JS Libraries
-            wp_enqueue_script('ng_vendor', $apirender_base_uri.'/assets/scripts/vendor.js', array(), '', true);
+            wp_enqueue_script('ng_vendor', $apirender_base_uri.'/assets/scripts/vendor.js', array(), $wThemeVersion, true);
             wp_enqueue_script('jsapi', 'https://www.google.com/jsapi', array(), '', true);
             wp_enqueue_script('lodash', 'https://cdn.jsdelivr.net/npm/lodash@3.8.0/index.min.js"', array(), '', true);
-            wp_enqueue_script('ng_libs', $apirender_base_uri.'/assets/scripts/misclibs.js', array(), '', true);
-            wp_enqueue_script('ng_app', $apirender_base_uri.'/assets/app.js', array(), '', true);
-            wp_enqueue_script('ng_scripts', $apirender_base_uri.'/assets/scripts/scripts.js', array(), '', true);
+            wp_enqueue_script('ng_libs', $apirender_base_uri.'/assets/scripts/misclibs.js', array(), $wThemeVersion, true);
+            wp_enqueue_script('ng_app', $apirender_base_uri.'/assets/app.js', array(), $wThemeVersion, true);
+            wp_enqueue_script('ng_scripts', $apirender_base_uri.'/assets/scripts/scripts.js', array(), $wThemeVersion, true);
 
             wp_enqueue_script('slick', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', array('jquery'), '', true);
             wp_enqueue_script('match8', 'https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js', array('jquery'), '', true);
-            wp_enqueue_script('sheet_item', $apirender_base_uri.'/assets/scripts/raccourci/sheet_item.'. $jsModeSuffix .'.js', array('match8'), '', true);
-            wp_enqueue_script('itinerary', $apirender_base_uri.'/assets/scripts/raccourci/itinerary.'. $jsModeSuffix .'.js', array('jquery','ng_scripts'), '', true);
-            wp_enqueue_script('fresco', $apirender_base_uri.'/assets/scripts/lib/fresco.js', array('jquery'), '', true);
+            wp_enqueue_script('sheet_item', $apirender_base_uri.'/assets/scripts/raccourci/sheet_item.'. $jsModeSuffix .'.js', array('match8'), $wThemeVersion, true);
+            wp_enqueue_script('itinerary', $apirender_base_uri.'/assets/scripts/raccourci/itinerary.'. $jsModeSuffix .'.js', array('jquery','ng_scripts'), $wThemeVersion, true);
+            wp_enqueue_script('fresco', $apirender_base_uri.'/assets/scripts/lib/fresco.js', array('jquery'), $wThemeVersion, true);
         }
 
         // Add the comment-reply library on pages where it is necessary
