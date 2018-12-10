@@ -584,7 +584,7 @@ function formatGeomapData($layout, $twigPaths)
                 $the_marker['item']['img'] = $marker['img'];
             }
             $the_marker['item']['link'] = (!empty($marker['link'])) ? $marker['link'] : '';
-            $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-basic_card-tpl_01'], $the_marker);
+            $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker);
         }
     }
 
