@@ -468,7 +468,13 @@ class WoodyTheme_Roles
                 'contributor' => false,
                 'translator' => false,
             ],
-            'woody_process_mediasync' => [
+            'woody_process_medias_sync' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'woody_process_hawwwai_sync' => [
                 'administrator' => true,
                 'editor' => false,
                 'contributor' => false,
