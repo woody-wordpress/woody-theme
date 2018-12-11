@@ -10,6 +10,7 @@ class WoodyTheme_Template_Sitemap
 {
     protected $twig_tpl = '';
     protected $context = [];
+    protected $mode = '';
 
     public function __construct()
     {
@@ -23,7 +24,15 @@ class WoodyTheme_Template_Sitemap
     public function render()
     {
         if (!empty($this->twig_tpl) && !empty($this->context)) {
-            header('Content-Type: text/xml; charset=UTF-8');
+            switch ($this->mode) {
+                case 'index':
+                case 'list':
+                    header('Content-Type: text/xml; charset=UTF-8');
+                    break;
+                case 'xsl':
+                    header('Content-Type: text/xsl; charset=UTF-8');
+                    break;
+            }
             Timber::render($this->twig_tpl, $this->context);
         }
     }
@@ -31,9 +40,8 @@ class WoodyTheme_Template_Sitemap
     private function initContext()
     {
         $this->context = Timber::get_context();
-
-        $mode = get_query_var('sitemap');
-        switch ($mode) {
+        $this->mode = get_query_var('sitemap');
+        switch ($this->mode) {
             case 'index':
                 $query = $this->getPosts();
                 if (!empty($query)) {
@@ -70,12 +78,21 @@ class WoodyTheme_Template_Sitemap
 
     private function getPosts()
     {
-        // TODO: Search by lang if multiple domains
+        $polylang = get_option('polylang');
+        if ($polylang['force_lang'] == 1) {
+            // Si le site est alias, on fusionne toutes les pages dans le même sitemap
+            $languages = pll_languages_list();
+        } else {
+            // Si le site est en multi domaines, on cree un sitemap par langue
+            $languages = pll_current_language();
+        }
+
         $query = new WP_Query([
             'post_type' => ['page', 'touristic_sheet'],
             'orderby' => 'menu_order',
             'order'   => 'DESC',
-            'posts_per_page' => 100,
+            'lang' => $languages,
+            'posts_per_page' => 200,
             'paged' => (get_query_var('page')) ? get_query_var('page') : 1
         ]);
 

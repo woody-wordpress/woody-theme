@@ -65,7 +65,6 @@ abstract class WoodyTheme_TemplateAbstract
 
         // Added langSwitcher
         $this->addLanguageSwitcher();
-
     }
 
     private function addWoodyComponents()
@@ -115,20 +114,23 @@ abstract class WoodyTheme_TemplateAbstract
         }
     }
 
-    private function addLanguageSwitcher(){
+    private function addLanguageSwitcher()
+    {
         $data = [];
 
-        if (!function_exists('pll_the_languages')) return;
+        if (!function_exists('pll_the_languages')) {
+            return;
+        }
         // Get polylang languages
-        $languages = pll_the_languages( array(
+        $languages = pll_the_languages(array(
             'display_names_as'       => 'slug',
             'hide_if_no_translation' => 0,
             'raw'                    => true
-        ) );
+        ));
 
         if (!empty($languages)) {
-            foreach ($languages as $language ) {
-                if(!empty($language['current_lang'])){
+            foreach ($languages as $language) {
+                if (!empty($language['current_lang'])) {
                     $data['current_lang'] = $language['slug'];
                 } else {
                     // $data['langs'][$language['slug']]['id'] = $language['id'];
@@ -139,16 +141,16 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         // Get potential external languages
-        if(class_exists('SubWoodyTheme_Languages')){
+        if (class_exists('SubWoodyTheme_Languages')) {
             $SubWoodyTheme_Languages = new SubWoodyTheme_Languages($this->context['woody_components']);
-            if(method_exists($SubWoodyTheme_Languages, 'languagesCustomization')){
+            if (method_exists($SubWoodyTheme_Languages, 'languagesCustomization')) {
                 $languages_customization = $SubWoodyTheme_Languages->languagesCustomization();
-                if(!empty($languages_customization['template'])){
+                if (!empty($languages_customization['template'])) {
                     $template = $languages_customization['template'];
                 }
                 $data['flags'] = (!empty($languages_customization['flags'])) ? $languages_customization['flags'] : false;
-                if(!empty($languages_customization['external_langs'])){
-                    foreach ($languages_customization['external_langs'] as $lang_key => $language ) {
+                if (!empty($languages_customization['external_langs'])) {
+                    foreach ($languages_customization['external_langs'] as $lang_key => $language) {
                         $data['langs'][$lang_key]['url'] = $language['url'];
                         $data['langs'][$lang_key]['target'] = '_blank';
                     }
@@ -156,7 +158,7 @@ abstract class WoodyTheme_TemplateAbstract
             }
         }
 
-        if(empty($data['langs'])){
+        if (empty($data['langs'])) {
             return;
         }
 

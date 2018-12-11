@@ -31,7 +31,7 @@ class WoodyTheme_Menus
     public static function getMainMenu($limit = 6, $depth_1_ids = array())
     {
         $return = [];
-        if(!empty($depth_1_ids)){
+        if (!empty($depth_1_ids)) {
             $return = self::getMenuLinks($depth_1_ids, 0, $limit);
         } else {
             $return = self::getMenuLinks(null, 0, $limit);
@@ -136,10 +136,10 @@ class WoodyTheme_Menus
 
         if (!empty($posts) && is_array($posts)) {
             foreach ($posts as $post_key => $post) {
-                if(is_int($post)){
+                if (is_int($post)) {
                     $post =  get_post($post);
                 }
-                if(!is_object($post)){
+                if (!is_object($post)) {
                     continue;
                 }
                 $return[$post_key] = [

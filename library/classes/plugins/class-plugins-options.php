@@ -246,33 +246,12 @@ class WoodyTheme_Plugins_Options
         ];
         $this->updateOption('yoimg_crop_settings', $yoimg_crop_settings);
 
-        // Update permalinks by posts titles
-        // $permalink_options = [
-        //     'general' => [
-        //         'auto_update_uris' => 1,
-        //         'show_native_slug_field' => 0,
-        //         'canonical_redirect' => 1,
-        //         'setup_redirects' => 1,
-        //         'redirect' => 301,
-        //         'trailing_slashes' => 20,
-        //         'pagination_redirect' => 0,
-        //         'auto_remove_duplicates' => 1,
-        //         'fix_language_mismatch' => 1,
-        //         'force_custom_slugs' => 1,
-        //     ],
-        //     'licence' => [
-        //         'licence_key' => '8058C9F5-83C7421C-A57A61BC-D75B00E3',
-        //         'expiration_date' => '4102398000',
-        //     ]
-        // ];
-        // $this->updateOption('permalink-manager', $permalink_options);
-
         // Polylang
         $polylang = [
+            'browser' => 0,
             'rewrite' => 1,
             'hide_default' => 1,
-            'force_lang' => 1,
-            'redirect_lang' => 0,
+            'redirect_lang' => 1,
             'media_support' => 1,
             'uninstall' => 0,
             'sync' => [
