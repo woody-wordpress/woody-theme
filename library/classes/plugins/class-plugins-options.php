@@ -251,7 +251,6 @@ class WoodyTheme_Plugins_Options
             'browser' => 0,
             'rewrite' => 1,
             'hide_default' => 1,
-            'force_lang' => 1,
             'redirect_lang' => 1,
             'media_support' => 1,
             'uninstall' => 0,
