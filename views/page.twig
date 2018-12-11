@@ -20,6 +20,12 @@
 
         {% block home_slider %}{% endblock %}
 
+        {% if bookblock %}
+            <div class="bookblock-wrapper">
+                {{ bookblock }}
+            </div>
+        {% endif %}
+
         {% if playlist_tourism.content|default %}
         <div class="page-playlist-wrapper">
             {{ playlist_tourism.content }}

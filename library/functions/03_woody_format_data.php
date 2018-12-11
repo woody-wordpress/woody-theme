@@ -285,7 +285,7 @@ function getManualFocus_data($layout)
             if ($item['content_selection']->post_type == 'page') {
                 $post_preview = getPagePreview($layout, $item['content_selection']);
             } elseif ($item['content_selection']->post_type == 'touristic_sheet') {
-                $post_preview = getTouristicSheetPreview($layout, $item['content_selection']->custom['touristic_sheet_id'], $item);
+                $post_preview = getTouristicSheetPreview($layout, $item['content_selection']->custom['touristic_sheet_id']);
             }
 
             $the_items['items'][$key] = (!empty($post_preview)) ?  $post_preview : '';
@@ -311,7 +311,7 @@ function getAutoFocusSheetData($layout)
     $playlist = apply_filters('wp_woody_hawwwai_playlist_render', $confId, 'fr', array(), 'json');
     if (!empty($playlist['items'])) {
         foreach ($playlist['items'] as $key => $item) {
-            $items['items'][] = getTouristicSheetPreview($layout, $item['sheetId'], '');
+            $items['items'][] = getTouristicSheetPreview($layout, $item['sheetId']);
         }
     }
 
@@ -640,7 +640,7 @@ function getCustomPreview($item)
  *
  */
 
-function getTouristicSheetPreview($layout = null, $sheet_id, $sheet_wp)
+function getTouristicSheetPreview($layout = null, $sheet_id)
 {
     $data = [];
     $lang = pll_current_language();
@@ -657,7 +657,7 @@ function getTouristicSheetPreview($layout = null, $sheet_id, $sheet_wp)
                     'title' => (!empty($item['img']['title'])) ? $item['img']['title'] : ''
                 ],
                 'link' =>[
-                    'url' => (!empty($sheet_wp['content_selection']->guid)) ? $sheet_wp['content_selection']->guid : $item['link'],
+                    'url' => (!empty($item['link'])) ? $item['link'] : ''
                 ]
             ];
 
