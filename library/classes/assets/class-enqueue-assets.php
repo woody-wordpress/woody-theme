@@ -144,6 +144,7 @@ class WoodyTheme_Enqueue_Assets
         wp_enqueue_script('lg-zoom', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-zoom.min.js', array('lightgallery'), '', true);
         wp_enqueue_script('lg-fullscreen', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-fullscreen.min.js', array('lightgallery'), '', true);
         wp_enqueue_script('nouislider', 'https://cdn.jsdelivr.net/npm/nouislider@10.1.0/distribute/nouislider.min.js', array('jquery'), '', true);
+        wp_enqueue_script('moment', 'https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js', array(), '', true);
 
         // Touristic maps libraries
         wp_enqueue_script('leaflet', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet-src.min.js', array(), '', true);
@@ -174,7 +175,6 @@ class WoodyTheme_Enqueue_Assets
             wp_enqueue_script('match8', 'https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js', array('jquery'), '', true);
             wp_enqueue_script('wnumb', 'https://cdn.jsdelivr.net/npm/wnumb@1.0.4/wNumb.min.js', array('jquery'), '', true);
             wp_enqueue_script('chosen', 'https://cdn.jsdelivr.net/npm/chosen-js@1.8.2/chosen.jquery.min.js', array('jquery'), '', true);
-            wp_enqueue_script('moment', 'https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js', array(), '', true);
             wp_enqueue_script('picker', 'https://cdn.jsdelivr.net/npm/bootstrap-daterangepicker@2.1.27/daterangepicker.min.js', array('bootstrap'), '', true);
             wp_enqueue_script('twigjs', 'https://cdn.jsdelivr.net/npm/twig@0.8.9/twig.min.js', array(), '', true);
             wp_enqueue_script('uuid', 'https://cdn.jsdelivr.net/npm/node-uuid@1.4.8/uuid.min.js', array(), '', true);
