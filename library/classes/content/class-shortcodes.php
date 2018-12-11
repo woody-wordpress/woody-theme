@@ -136,8 +136,7 @@ class WoodyTheme_Shortcodes
         $result['posts']['touristic_sheets'] = [];
         if (!empty($sheets_response['sheets'])) {
             foreach ($sheets_response['sheets'] as $sheet) {
-                //$post = Timber::get_post($post_id);
-                //$result['posts']['touristic_sheets'][] = getPagePreview(['display_elements' => ['description'], 'display_button' => true], $post);
+                $result['posts']['touristic_sheets'][] = getTouristicSheetPreview(['display_elements' => ['description', 'sheet_town', 'sheet_type']], $sheet['data']['idFiche']);
             }
         }
 
