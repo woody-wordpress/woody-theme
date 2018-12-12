@@ -312,14 +312,15 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     public function playlistHeaders()
     {
         $headers = [];
+        $headers['xkey'] = [];
         if (!empty($this->context['playlist_tourism']['modified'])) {
             $headers['Last-Modified'] =  gmdate('D, d M Y H:i:s', strtotime($this->context['playlist_tourism']['modified'])) . ' GMT';
         }
         if (!empty($this->context['playlist_tourism']['playlistId'])) {
-            $headers['xkey'] = 'ts-idplaylist-' . $this->context['playlist_tourism']['playlistId'];
+            $headers['xkey'][] = 'ts-idplaylist-' . $this->context['playlist_tourism']['playlistId'];
         }
         if (!empty($this->context['playlist_tourism']['confId'])) {
-            $headers['xkey'] = 'hawwwai-idconf-' . $this->context['playlist_tourism']['confId'];
+            $headers['xkey'][] = 'hawwwai-idconf-' . $this->context['playlist_tourism']['confId'];
         }
         if (!empty($this->context['playlist_tourism']['apirender_uri'])) {
             $headers['x-apirender-url'] = $this->context['playlist_tourism']['apirender_uri'];

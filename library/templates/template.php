@@ -26,7 +26,15 @@ abstract class WoodyTheme_TemplateAbstract
         $headers = $this->getHeaders();
         if (!empty($headers)) {
             foreach ($headers as $key => $val) {
-                header($key . ': ' . $val);
+                // allow val to be an array of value to set
+                if (is_array($val)) {
+                    foreach ($val as $key2 => $val2) {
+                        header($key . ': ' . $val2);
+                    }
+                }
+                else {
+                    header($key . ': ' . $val);
+                }
             }
         }
     }
