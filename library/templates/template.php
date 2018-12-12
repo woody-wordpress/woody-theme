@@ -197,7 +197,7 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         if (class_exists('SubWoodyTheme_esSearch')) {
-            $SubWoodyTheme_esSearch = new SubWoodyTheme_Languages($this->context['woody_components']);
+            $SubWoodyTheme_esSearch = new SubWoodyTheme_esSearch($this->context['woody_components']);
             if (method_exists($SubWoodyTheme_esSearch, 'esSearchBlockCustomization')) {
                 $esSearchBlockCustomization = $SubWoodyTheme_esSearch->esSearchBlockCustomization();
                 if (!empty($esSearchBlockCustomization['template'])) {

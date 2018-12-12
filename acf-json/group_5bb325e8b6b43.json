@@ -232,6 +232,29 @@
                                     "mime_types": "ogg, ogv"
                                 }
                             ]
+                        },
+                        {
+                            "key": "field_5c111bf05e17f",
+                            "label": "Opacité du média",
+                            "name": "landswpr_media_op",
+                            "type": "button_group",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "media-op100": "100%",
+                                "media-op90": "90%",
+                                "media-op75": "75%"
+                            },
+                            "allow_null": 0,
+                            "default_value": "media-op100",
+                            "layout": "horizontal",
+                            "return_format": "value"
                         }
                     ]
                 },
@@ -375,8 +398,9 @@
             },
             "layout": "vertical",
             "choices": {
-                "swipers-landing_swipers-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/swipers\/landing_swipers\/tpl_02\/thumbnail.png?version=1.9.0\" alt=\"swipers-landing_swipers-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Landing Swiper (Custom pagination)<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Landing Swiper (Custom pagination)<\/h4>Swiper items<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "swipers-landing_swipers-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/swipers\/landing_swipers\/tpl_01\/thumbnail.png?version=1.9.0\" alt=\"swipers-landing_swipers-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">LandSwiper<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">LandSwiper<\/h4>Swiper items<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+                "swipers-landing_swipers-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.crt-bretagne.wp.rc-dev.com\/app\/dist\/crt-bretagne\/img\/woody-library\/views\/swipers\/landing_swipers\/tpl_03\/thumbnail.png?version=2.5.9\" alt=\"swipers-landing_swipers-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Landing Swiper (Pagination avec Titres)<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Landing Swiper (Pagination avec Titres)<\/h4>Swiper items with parallax effect<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "swipers-landing_swipers-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.crt-bretagne.wp.rc-dev.com\/app\/dist\/crt-bretagne\/img\/woody-library\/views\/swipers\/landing_swipers\/tpl_02\/thumbnail.png?version=2.5.9\" alt=\"swipers-landing_swipers-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Landing Swiper (Custom pagination)<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Landing Swiper (Custom pagination)<\/h4>Swiper items<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "swipers-landing_swipers-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.crt-bretagne.wp.rc-dev.com\/app\/dist\/crt-bretagne\/img\/woody-library\/views\/swipers\/landing_swipers\/tpl_01\/thumbnail.png?version=2.5.9\" alt=\"swipers-landing_swipers-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">LandSwiper<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">LandSwiper<\/h4>Swiper items<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
             },
             "default_value": "",
             "other_choice": 0,
@@ -407,5 +431,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Diaporama de slides (image ou video) en page d'accueil",
-    "modified": 1540888687
+    "modified": 1544625409
 }
