@@ -290,6 +290,12 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         // Get from Apirender
         $this->context['playlist_tourism'] = apply_filters('wp_woody_hawwwai_playlist_render', $playlistConfId, pll_current_language(), $query);
 
+        // save confId
+        if (!empty($playlistConfId) && is_array($this->context['playlist_tourism'])) {
+            $this->context['playlist_tourism']['confId'] = $playlistConfId;
+        }
+
+
         // Return template
         if (empty($this->context['playlist_tourism']['content'])) {
             if (is_admin()) {
@@ -310,7 +316,10 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             $headers['Last-Modified'] =  gmdate('D, d M Y H:i:s', strtotime($this->context['playlist_tourism']['modified'])) . ' GMT';
         }
         if (!empty($this->context['playlist_tourism']['playlistId'])) {
-            $headers['x-ts-idplaylist'] = $this->context['playlist_tourism']['playlistId'];
+            $headers['xkey'] = 'ts-idplaylist-' . $this->context['playlist_tourism']['playlistId'];
+        }
+        if (!empty($this->context['playlist_tourism']['confId'])) {
+            $headers['xkey'] = 'hawwwai-idconf-' . $this->context['playlist_tourism']['confId'];
         }
         if (!empty($this->context['playlist_tourism']['apirender_uri'])) {
             $headers['x-apirender-url'] = $this->context['playlist_tourism']['apirender_uri'];
