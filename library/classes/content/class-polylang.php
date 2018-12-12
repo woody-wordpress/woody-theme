@@ -25,6 +25,9 @@ class WoodyTheme_Polylang
         return true;
     }
 
+    /**
+     * Translate frontpage
+     */
     public function pageOnFront($value, $option)
     {
         if (pll_current_language() != pll_default_language()) {
@@ -40,13 +43,14 @@ class WoodyTheme_Polylang
         load_theme_textdomain('woody-theme', get_template_directory() . '/languages');
     }
 
+    /**
+     * Commande pour créer automatiquement woody-theme.pot
+     * A ouvrir ensuite avec PoEdit.app sous Mac
+     * cd ~/www/wordpress/current/web/app/themes/woody-theme
+     * wp i18n make-pot . languages/woody-theme.pot
+     */
     private function twigExtractPot()
     {
-        // Commande pour créer automatiquement woody-theme.pot
-        // A ouvrir ensuite avec PoEdit.app sous Mac
-        // cd ~/www/wordpress/current/web/app/themes/woody-theme
-        // wp i18n make-pot . languages/woody-theme.pot
-
         // Yoast
         __("Page non trouvée %%sep%% %%sitename%%", 'woody-theme');
         __("Erreur 404 : Page non trouvée", 'woody-theme');
