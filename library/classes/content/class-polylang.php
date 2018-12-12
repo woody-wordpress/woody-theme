@@ -47,6 +47,7 @@ class WoodyTheme_Polylang
         __("Voir la vidéo", 'woody-theme');
         __("Affiner ma recherche", 'woody-theme');
         __("Voir les résultats sur la carte", 'woody-theme');
+        __("résultats", 'woody-theme');
         __("Voir la carte", 'woody-theme');
         __("Partager sur Facebook", 'woody-theme');
         __("Partager sur Twitter", 'woody-theme');
@@ -57,6 +58,12 @@ class WoodyTheme_Polylang
         __("Accès au menu principal", 'woody-theme');
         __("Que recherchez-vous ?", "woody-theme");
         __("Rechercher", 'woody-theme');
+        __("Réinitialiser", 'woody-theme');
+        __("Choisissez vos dates", 'woody-theme');
+        __("adulte(s)", 'woody-theme');
+        __("enfant(s)", 'woody-theme');
+        __("jours", 'woody-theme');
+        __('Pages', 'woody-theme');
         __('Offre touristique', 'woody-theme');
         __('Désolé, aucun contenu touristique ne correspond à votre recherche', 'woody-theme');
         __('Désolé, aucune page ne correspond à votre recherche', 'woody-theme');

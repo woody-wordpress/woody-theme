@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.4.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2018-12-07T10:05:54+01:00\n"
-"PO-Revision-Date: 2018-12-07 10:09+0100\n"
+"POT-Creation-Date: 2018-12-12T14:24:57+01:00\n"
+"PO-Revision-Date: 2018-12-12 14:27+0100\n"
 "Last-Translator: POIROUX Léo <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -61,36 +61,84 @@ msgid "Voir les résultats sur la carte"
 msgstr "See results on map"
 
 #: library/classes/content/class-polylang.php:50
+msgid "résultats"
+msgstr "results"
+
+#: library/classes/content/class-polylang.php:51
 msgid "Voir la carte"
 msgstr "View map"
 
-#: library/classes/content/class-polylang.php:51
+#: library/classes/content/class-polylang.php:52
 msgid "Partager sur Facebook"
 msgstr "Share on Facebook"
 
-#: library/classes/content/class-polylang.php:52
+#: library/classes/content/class-polylang.php:53
 msgid "Partager sur Twitter"
 msgstr "Share on Twitter"
 
-#: library/classes/content/class-polylang.php:53
+#: library/classes/content/class-polylang.php:54
 msgid "Partager sur Google+"
 msgstr "Share on Google+"
 
-#: library/classes/content/class-polylang.php:54
+#: library/classes/content/class-polylang.php:55
 msgid "Partager sur Instagram"
 msgstr "Share on Instagram"
 
-#: library/classes/content/class-polylang.php:55
+#: library/classes/content/class-polylang.php:56
 msgid "Partager sur Pinterest"
 msgstr "Share on Pinterest"
 
-#: library/classes/content/class-polylang.php:56
+#: library/classes/content/class-polylang.php:57
 msgid "Partager par email"
 msgstr "Share by email"
 
-#: library/classes/content/class-polylang.php:57
+#: library/classes/content/class-polylang.php:58
 msgid "Accès au menu principal"
 msgstr "Go to main menu"
+
+#: library/classes/content/class-polylang.php:59
+msgid "Que recherchez-vous ?"
+msgstr "What are you looking for ?"
+
+#: library/classes/content/class-polylang.php:60
+msgid "Rechercher"
+msgstr "Search"
+
+#: library/classes/content/class-polylang.php:61
+msgid "Réinitialiser"
+msgstr "Reset"
+
+#: library/classes/content/class-polylang.php:62
+msgid "Choisissez vos dates"
+msgstr "Choose your dates"
+
+#: library/classes/content/class-polylang.php:63
+msgid "adulte(s)"
+msgstr "Adult(s)"
+
+#: library/classes/content/class-polylang.php:64
+msgid "enfant(s)"
+msgstr "Child(s)"
+
+#: library/classes/content/class-polylang.php:65
+msgid "jours"
+msgstr "Days"
+
+#: library/classes/content/class-polylang.php:66
+msgid "Pages"
+msgstr "Pages"
+
+#: library/classes/content/class-polylang.php:67
+msgid "Offre touristique"
+msgstr "Tourist offer"
+
+#: library/classes/content/class-polylang.php:68
+msgid "Désolé, aucun contenu touristique ne correspond à votre recherche"
+msgstr "Sorry, no tourist content matches your search"
+
+#: library/classes/content/class-polylang.php:69
+msgid "Désolé, aucune page ne correspond à votre recherche"
+msgstr "Sorry, no pages match your search"
 
 #: library/templates/template-page.php:67
 msgid "Oups !"
