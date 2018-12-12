@@ -29,7 +29,7 @@ abstract class WoodyTheme_TemplateAbstract
                 // allow val to be an array of value to set
                 if (is_array($val)) {
                     foreach ($val as $key2 => $val2) {
-                        header($key . ': ' . $val2);
+                        header($key . ': ' . $val2, false);
                     }
                 }
                 else {
