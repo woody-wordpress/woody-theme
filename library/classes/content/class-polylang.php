@@ -63,9 +63,9 @@ class WoodyTheme_Polylang
         __("adulte(s)", 'woody-theme');
         __("enfant(s)", 'woody-theme');
         __("jours", 'woody-theme');
-        __('Pages', 'woody-theme');
-        __('Offre touristique', 'woody-theme');
-        __('Désolé, aucun contenu touristique ne correspond à votre recherche', 'woody-theme');
-        __('Désolé, aucune page ne correspond à votre recherche', 'woody-theme');
+        __("Pages", 'woody-theme');
+        __("Offre touristique", 'woody-theme');
+        __("Désolé, aucun contenu touristique ne correspond à votre recherche", 'woody-theme');
+        __("Désolé, aucune page ne correspond à votre recherche", 'woody-theme');
     }
 }
