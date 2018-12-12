@@ -20,6 +20,8 @@ class WoodyTheme_Cleanup_Admin
             add_action('init', [$this, 'removePagesEditor']);
             add_action('admin_menu', [$this, 'removeAdminMenu']);
             add_action('admin_menu', [$this, 'customMenusPage']);
+            add_action('admin_menu', [$this, 'woodySettingsPage']);
+
             add_action('wp_before_admin_bar_render', [$this, 'customAdminBarMenu']);
             add_action('wp_dashboard_setup', [$this, 'removeDashboardWidgets']);
             add_filter('tiny_mce_before_init', [$this, 'tiny_mce_remove_unused_formats']);
@@ -147,6 +149,21 @@ class WoodyTheme_Cleanup_Admin
                 'capability'    => 'edit_pages',
             ));
             }
+        }
+    }
+
+    public function woodySettingsPage()
+    {
+        if (function_exists('acf_add_options_page')) {
+            // Page principale
+            acf_add_options_page(array(
+                'page_title'    => 'MyWoody - Réglages',
+                'menu_title'    => 'MyWoody',
+                'menu_slug'     => 'woody-settings',
+                'capability'    => 'edit_pages',
+                'icon_url'      => 'dashicons-admin-generic',
+                'position'      => 40,
+            ));
         }
     }
 
