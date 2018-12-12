@@ -118,6 +118,8 @@ class WoodyTheme_Shortcodes
         $result['posts']['pages'] = [];
         if (!empty($pages_response['posts'])) {
             foreach ($pages_response['posts'] as $post_id) {
+                $post_id = explode('_', $post_id);
+                $post_id = end($post_id);
                 $post = Timber::get_post($post_id);
                 $result['posts']['pages'][] = getPagePreview(['display_elements' => ['description'], 'display_button' => true], $post);
             }
@@ -134,8 +136,7 @@ class WoodyTheme_Shortcodes
         $result['posts']['touristic_sheets'] = [];
         if (!empty($sheets_response['sheets'])) {
             foreach ($sheets_response['sheets'] as $sheet) {
-                //$post = Timber::get_post($post_id);
-                //$result['posts']['touristic_sheets'][] = getPagePreview(['display_elements' => ['description'], 'display_button' => true], $post);
+                $result['posts']['touristic_sheets'][] = getTouristicSheetPreview(['display_elements' => ['description', 'sheet_town', 'sheet_type']], $sheet['data']['idFiche']);
             }
         }
 
