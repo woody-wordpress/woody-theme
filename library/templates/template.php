@@ -71,8 +71,11 @@ abstract class WoodyTheme_TemplateAbstract
         // Added Icons
         $this->addIcons();
 
-        // Added langSwitcher
+        // Add langSwitcher
         $this->addLanguageSwitcher();
+
+        // Add addEsSearchBlock
+        $this->addEsSearchBlock();
     }
 
     private function addWoodyComponents()
@@ -171,8 +174,41 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         // Set a default template
-        $template = $this->context['woody_components']['pages_parts-lang_switcher-tpl_01'];
+        $template = $this->context['woody_components']['woody_widgets-lang_switcher-tpl_01'];
 
         $this->context['lang_switcher'] = Timber::compile($template, $data);
+    }
+
+    private function addEsSearchBlock(){
+        $data = [];
+
+        $data['search_url'] = get_field('es_search_page_url', 'option');
+        if(empty($data['search_url'])){
+            return;
+        }
+
+        $suggest = get_field('es_search_block_suggests', 'option');
+        if(!empty($suggest) && !empty($suggest['suggest_pages'])){
+            $data['suggest']['title'] = (!empty($suggest['suggest_title'])) ? $suggest['suggest_title'] : '';
+            foreach ($suggest['suggest_pages'] as $page) {
+                $post = Timber::get_post($page['suggest_page']);
+                $data['suggest']['pages'][] = getPagePreview('', $post);
+            }
+        }
+
+        if (class_exists('SubWoodyTheme_esSearch')) {
+            $SubWoodyTheme_esSearch = new SubWoodyTheme_Languages($this->context['woody_components']);
+            if (method_exists($SubWoodyTheme_esSearch, 'esSearchBlockCustomization')) {
+                $esSearchBlockCustomization = $SubWoodyTheme_esSearch->esSearchBlockCustomization();
+                if (!empty($esSearchBlockCustomization['template'])) {
+                    $template = $languages_customization['template'];
+                }
+            }
+        }
+
+        // Set a default template
+        $template = $this->context['woody_components']['woody_widgets-es_search_block-tpl_01'];
+
+        $this->context['es_search_block'] = Timber::compile($template, $data);
     }
 }
