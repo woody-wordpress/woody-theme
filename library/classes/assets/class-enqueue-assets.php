@@ -101,7 +101,7 @@ class WoodyTheme_Enqueue_Assets
                 // $apirender_base_uri = 'http://127.0.0.1:8000'; // use localhost apirender (gulp serve)
                 break;
             case 'preprod':
-                $jsModeSuffix = 'min';
+                $jsModeSuffix = 'debug';
                 $apirender_base_uri = 'https://api.tourism-system.rc-preprod.com/render';
                 break;
             default:
