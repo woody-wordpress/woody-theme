@@ -480,6 +480,12 @@ class WoodyTheme_Roles
                 'contributor' => false,
                 'translator' => false,
             ],
+            'woody_hawwwai_reports' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+                'translator' => false,
+            ],
 
             // Taxonomies
             'Configurer les thématiques' => [

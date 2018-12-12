@@ -17,7 +17,7 @@ class WoodyTheme_Polylang
     {
         add_filter('pll_is_cache_active', [$this, 'isCacheActive']);
         add_action('after_setup_theme', [$this, 'loadThemeTextdomain']);
-        add_filter('option_page_on_front', [$this, 'pageOnFront']);
+        add_filter('option_page_on_front', [$this, 'pageOnFront'], 10, 2);
     }
 
     public function isCacheActive()
