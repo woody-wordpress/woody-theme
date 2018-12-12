@@ -28,7 +28,8 @@ class WoodyTheme_Polylang
     public function pageOnFront($value, $option)
     {
         if (pll_current_language() != pll_default_language()) {
-            return pll_get_post($value);
+            $t_value = pll_get_post($value);
+            return (!empty($t_value)) ? $t_value : $value;
         } else {
             return $value;
         }
