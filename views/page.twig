@@ -20,7 +20,7 @@
 
         {% block home_slider %}{% endblock %}
 
-        {% if bookblock %}
+        {% if bookblock|default %}
             <div class="bookblock-wrapper">
                 {{ bookblock }}
             </div>

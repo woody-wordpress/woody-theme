@@ -184,7 +184,7 @@ abstract class WoodyTheme_TemplateAbstract
             $data['suggest']['title'] = (!empty($suggest['suggest_title'])) ? $suggest['suggest_title'] : '';
             foreach ($suggest['suggest_pages'] as $page) {
                 $post = Timber::get_post($page['suggest_page']);
-                $data['suggest']['pages'][] = getPagePreview(['display_elements' => ['description']], $post);
+                $data['suggest']['pages'][] = getPagePreview('', $post);
             }
         }
 
