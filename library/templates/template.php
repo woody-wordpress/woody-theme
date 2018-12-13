@@ -76,6 +76,9 @@ abstract class WoodyTheme_TemplateAbstract
 
         // Add addEsSearchBlock
         $this->addEsSearchBlock();
+
+        // Set a global dist dir
+        $this->context['dist_dir'] = WP_DIST_DIR;
     }
 
     private function addWoodyComponents()
@@ -197,7 +200,7 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         if (class_exists('SubWoodyTheme_esSearch')) {
-            $SubWoodyTheme_esSearch = new SubWoodyTheme_Languages($this->context['woody_components']);
+            $SubWoodyTheme_esSearch = new SubWoodyTheme_esSearch($this->context['woody_components']);
             if (method_exists($SubWoodyTheme_esSearch, 'esSearchBlockCustomization')) {
                 $esSearchBlockCustomization = $SubWoodyTheme_esSearch->esSearchBlockCustomization();
                 if (!empty($esSearchBlockCustomization['template'])) {
