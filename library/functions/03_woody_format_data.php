@@ -408,12 +408,22 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                 $the_list['has_map'] = true;
                 foreach ($the_items['items'] as $item) {
                     if (!empty($item['location']['lat']) && !empty($item['location']['lng'])) {
+                        $the_marker = [
+                            'image_style' => 'ratio_16_9',
+                            'item' => [
+                                'title' => $item['title'],
+                                'description' => $item['description'],
+                                'img' => $item['img']
+                            ]
+                        ];
+
                         $the_list['filters'][$key]['markers'][] = [
                         'map_position' => [
                             'lat' => $item['location']['lat'],
                             'lng' => $item['location']['lng']
                         ],
-                        'compiled_marker' => $layout['default_marker']
+                        'compiled_marker' => $layout['default_marker'],
+                        'marker_thumb_html' => Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker)
                     ];
                     }
                 }
