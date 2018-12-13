@@ -76,6 +76,9 @@ abstract class WoodyTheme_TemplateAbstract
 
         // Add addEsSearchBlock
         $this->addEsSearchBlock();
+
+        // Set a global dist dir
+        $this->context['dist_dir'] = WP_DIST_DIR;
     }
 
     private function addWoodyComponents()

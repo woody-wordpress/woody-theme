@@ -115,6 +115,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     protected function commonContext()
     {
         $this->context['page_terms'] = implode(' ', getPageTerms($this->context['post']->ID));
+        $this->context['default_marker'] = file_get_contents($this->context['dist_dir'] . '/img/default-marker.svg');
 
         /*********************************************
          * Check type de publication

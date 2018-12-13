@@ -157,8 +157,8 @@ class WoodyTheme_Cleanup_Admin
         if (function_exists('acf_add_options_page')) {
             // Page principale
             acf_add_options_page(array(
-                'page_title'    => 'MyWoody - Réglages',
-                'menu_title'    => 'MyWoody',
+                'page_title'    => 'Paramètres',
+                'menu_title'    => 'Paramètres',
                 'menu_slug'     => 'woody-settings',
                 'capability'    => 'edit_pages',
                 'icon_url'      => 'dashicons-admin-generic',
