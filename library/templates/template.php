@@ -142,6 +142,7 @@ abstract class WoodyTheme_TemplateAbstract
         $output_params = !empty($autoselect_id) ? $autoselect_id.'&' : '';
         $output_params .= !empty($page) ? $page.'&' : '';
         $output_params = substr($output_params, 0, -1);
+        $output_params = !empty($output_params) ? '?'.$output_params : '';
 
         // Get polylang languages
         $languages = pll_the_languages(array(
@@ -156,8 +157,7 @@ abstract class WoodyTheme_TemplateAbstract
                     $data['current_lang'] = $language['slug'];
                 } else {
                     // $data['langs'][$language['slug']]['id'] = $language['id'];
-                    $data['langs'][$language['slug']]['url'] = $language['url'];
-                    $data['langs'][$language['slug']]['url'] .= !empty($output_params) ? '?'.$output_params : '';
+                    $data['langs'][$language['slug']]['url'] = $language['url'] . $output_params;
                     $data['langs'][$language['slug']]['no_translation'] = $language['no_translation'];
                 }
             }
