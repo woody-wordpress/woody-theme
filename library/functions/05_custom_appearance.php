@@ -11,7 +11,5 @@ function getActiveShares()
         'pinterest' => true
     ];
 
-    wd($return, 'return');
-
     return $return;
 }
