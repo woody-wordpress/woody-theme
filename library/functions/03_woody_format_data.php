@@ -506,6 +506,8 @@ function formatFullContentList($layout, $current_post, $twigPaths)
             }
         }
         $the_list['has_map'] = true;
+    } else{
+        unset($the_list['filters']['the_map']);
     }
 
     if (!empty($layout['the_list_pager']) && $layout['the_list_pager']['list_pager_type'] != 'none') {
