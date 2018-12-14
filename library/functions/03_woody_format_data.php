@@ -74,7 +74,7 @@ function getComponentItem($layout, $context)
  * @return   the_items - Un tableau de données
  *
  */
-function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 0)
+function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 0, $ignore_maxnum = false)
 {
     $the_items = [];
     $tax_query = [];
@@ -207,6 +207,10 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
         'order' => $order,
         'orderby' => $orderby,
     ];
+
+    if($ignore_maxnum === true){
+        $the_query['posts_per_page'] = -1;
+    }
 
     if ($paginate == true) {
         $explode_uniqid = explode('_', $uniqid);
@@ -404,29 +408,6 @@ function formatFullContentList($layout, $current_post, $twigPaths)
             } elseif ($filter['list_filter_type'] == 'duration') {
                 $the_list['filters'][$key]['minmax']['max'] = getMinMaxWoodyFieldValues($the_items['wp_query']->query_vars, 'the_duration_count_days');
                 $the_list['filters'][$key]['minmax']['min'] = getMinMaxWoodyFieldValues($the_items['wp_query']->query_vars, 'the_duration_count_days', 'min');
-            } elseif ($filter['list_filter_type'] == 'map') {
-                $the_list['has_map'] = true;
-                foreach ($the_items['items'] as $item) {
-                    if (!empty($item['location']['lat']) && !empty($item['location']['lng'])) {
-                        $the_list['filters'][$key]['markers'][] = [
-                        'map_position' => [
-                            'lat' => $item['location']['lat'],
-                            'lng' => $item['location']['lng']
-                        ],
-                        'compiled_marker' => $layout['default_marker']
-                    ];
-                    }
-                }
-
-                $places = get_terms('places');
-                if (!empty($places)) {
-                    foreach ($places as $place) {
-                        $the_list['map_filter_places'][] = [
-                            'value' => $place->term_id,
-                            'label' => $place->name
-                        ];
-                    }
-                }
             }
         }
         $the_list['filters']['button'] = (!empty($layout['the_list_filters']['filter_button'])) ? $layout['the_list_filters']['filter_button'] : '';
@@ -439,9 +420,6 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     }
 
     $params = filter_input_array(INPUT_POST);
-
-    // On revient aux paramètres par défaut si le bouton reset a été cliqué
-
 
     // Traitement des données du post
     if (!empty($params) && $layout['uniqid'] === $params['uniqid']) {
@@ -510,7 +488,6 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                 }
             }
         }
-
         $the_filtered_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields'], $paginate, $layout['uniqid']);
         $the_filtered_items['display_button'] = (!empty($layout['the_list_elements']['list_el_req_fields']['display_button'])) ? $layout['the_list_elements']['list_el_req_fields']['display_button'] : '';
 
@@ -519,6 +496,16 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     } else {
         $the_list['the_grid'] =  Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_items);
         $the_list['items_count'] = $the_items['wp_query']->found_posts;
+    }
+
+    $the_list['filters']['the_map'] = creatListMapFilter($current_post, $layout, $paginate, $the_list['filters'], $twigPaths);
+    if(!empty($the_list['filters']['the_map'])){
+        foreach ($the_list['filters'] as $filter_key => $filter) {
+            if(is_numeric($filter_key) && $filter['list_filter_type'] == 'map'){
+                unset($the_list['filters'][$filter_key]);
+            }
+        }
+        $the_list['has_map'] = true;
     }
 
     if (!empty($layout['the_list_pager']) && $layout['the_list_pager']['list_pager_type'] != 'none') {
@@ -530,6 +517,41 @@ function formatFullContentList($layout, $current_post, $twigPaths)
 
     $return =  Timber::compile($twigPaths[$layout['the_list_filters']['listfilter_woody_tpl']], $the_list);
     return $return;
+}
+
+function creatListMapFilter($current_post, $layout, $paginate, $filters, $twigPaths){
+
+    if(!empty($filters)){
+        foreach ($filters as $key => $filter) {
+            if (is_numeric($key)) {
+                if ($filter['list_filter_type'] == 'map') {
+                    $every_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields'], $paginate, $layout['uniqid'], true);
+                    foreach ($every_items['items'] as $item) {
+                        if (!empty($item['location']['lat']) && !empty($item['location']['lng'])) {
+                            $the_marker = [
+                            'image_style' => 'ratio_16_9',
+                            'item' => [
+                                'title' => $item['title'],
+                                'description' => $item['description'],
+                                'img' => $item['img']
+                            ]
+                        ];
+
+                            $filters[$key]['markers'][] = [
+                            'map_position' => [
+                                'lat' => $item['location']['lat'],
+                                'lng' => $item['location']['lng']
+                            ],
+                            'compiled_marker' => $layout['default_marker'],
+                            'marker_thumb_html' => Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker)
+                        ];
+                        }
+                    }
+                    return $filters[$key];
+                }
+            }
+        }
+    }
 }
 
 function formatListPager($pager_params, $max_num_pages, $uniqid)
@@ -757,10 +779,10 @@ function getPagePreview($item_wrapper, $item)
 
     if (is_array($item_wrapper['display_elements'])) {
         if (in_array('pretitle', $item_wrapper['display_elements'])) {
-            $data['pretitle'] = getFieldAndFallback($item, 'focus_pretitle', $item, 'field_5b87f20257a1d');
+            $data['pretitle'] = getFieldAndFallback($item, 'focus_pretitle', get_field('page_heading_heading', $item->id), 'pretitle', $item, 'field_5b87f20257a1d');
         }
         if (in_array('subtitle', $item_wrapper['display_elements'])) {
-            $data['subtitle'] = getFieldAndFallback($item, 'focus_subtitle', $item, 'field_5b87f23b57a1e');
+            $data['subtitle'] = getFieldAndFallback($item, 'focus_subtitle', get_field('page_heading_heading', $item->id), 'subtitle', $item, 'field_5b87f23b57a1e');
         }
         if (in_array('icon', $item_wrapper['display_elements'])) {
             $data['icon'] = getFieldAndFallback($item, 'focus_icon', '');
@@ -824,16 +846,17 @@ function getPagePreview($item_wrapper, $item)
  * @return   data - Un tableau de données
  *
  **/
-function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = '')
+function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = '', $lastfallback_item = '', $lastfallback_field = '')
 {
     $value = [];
-
     if (!empty($item->get_field($field))) {
         $value = $item->get_field($field);
     } elseif (!empty($fallback_item) && is_array($fallback_item)) {
         $value = $fallback_item[$fallback_field];
     } elseif (!empty($fallback_item) && !empty($fallback_item->get_field($fallback_field))) {
         $value = $fallback_item->get_field($fallback_field);
+    } elseif (!empty($lastfallback_item) && !empty($lastfallback_item->get_field($lastfallback_field))) {
+        $value = $lastfallback_item->get_field($lastfallback_field);
     } else {
         $value = '';
     }
@@ -902,7 +925,7 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
         'post_type'      => 'attachment',
         'post_status' => 'inherit',
         'post_mime_type' => $query_args['post_mime_type'],
-        'post_per_page' => $query_args['size'],
+        'posts_per_page' => $query_args['size'],
         'nopaging' => true,
         'tax_query' => array(
             array(
