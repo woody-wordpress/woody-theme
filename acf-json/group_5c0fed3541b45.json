@@ -1,6 +1,6 @@
 {
     "key": "group_5c0fed3541b45",
-    "title": "Réglages Woody",
+    "title": "Paramètres Woody",
     "fields": [
         {
             "key": "field_5c10c11662d6f",
@@ -20,7 +20,7 @@
         },
         {
             "key": "field_5c0fed703ca3e",
-            "label": "Sur quelle page s'affiche la recherche globale ?",
+            "label": "Page de recherche",
             "name": "es_search_page_url",
             "type": "page_link",
             "instructions": "",
@@ -88,7 +88,7 @@
                     },
                     "collapsed": "",
                     "min": 0,
-                    "max": 0,
+                    "max": 4,
                     "layout": "block",
                     "button_label": "Ajouter une suggestion",
                     "sub_fields": [
@@ -136,5 +136,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1544603456
+    "modified": 1544792415
 }
