@@ -25,3 +25,11 @@ $lg-path-fonts: '#{$dist_dir}/fonts/plugins/lightgallery';
         }
     }
 }
+
+.lg-backdrop {
+    z-index: 104000;
+}
+
+.lg-outer {
+    z-index: 105000;
+}
