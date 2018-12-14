@@ -187,7 +187,6 @@ class WoodyTheme_Menus
                     $the_part = [];
                     $the_part['alignment'] = (!empty($submenu['display']['parts'][$i]['alignment'])) ? $submenu['display']['parts'][$i]['alignment'] : 'align-top';
                     $the_part['no_padding'] = (!empty($submenu['display']['parts'][$i]['no_padding'])) ? $submenu['display']['parts'][$i]['no_padding'] : 0;
-
                     foreach ($part['links'] as $link_key => $link) {
                         if (!empty($submenu['display']['parts'][$i]['links_tpl'])) {
                             $link_display = $submenu['display']['parts'][$i]['links_tpl'];
@@ -197,8 +196,6 @@ class WoodyTheme_Menus
                     }
                 }
 
-
-
                 if (!empty($submenu['display']['parts'][$i]['part_tpl'])) {
                     $part_display = $submenu['display']['parts'][$i]['part_tpl'];
                     $the_part['items'] = $part['links'];
@@ -206,9 +203,13 @@ class WoodyTheme_Menus
                     $menu_link['submenu'][$key] = Timber::compile($twig_paths[$part_display], $the_part);
                 } elseif (!empty($submenu['display']['parts'][$i]['custom_function'])) {
                     $menu_link['submenu'][$key] = $submenu['display']['parts'][$i]['custom_function'];
+                } else{
+                    unset($menu_link['submenu'][$key]);
                 }
 
-                $the_submenu['items'][] = $menu_link['submenu'][$key];
+                if(!empty($menu_link['submenu'][$key])){
+                    $the_submenu['items'][] = $menu_link['submenu'][$key];
+                }
                 $i++;
             }
 
