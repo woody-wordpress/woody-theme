@@ -31,8 +31,7 @@ abstract class WoodyTheme_TemplateAbstract
                     foreach ($val as $key2 => $val2) {
                         header($key . ': ' . $val2, false);
                     }
-                }
-                else {
+                } else {
                     header($key . ': ' . $val);
                 }
             }
@@ -135,7 +134,7 @@ abstract class WoodyTheme_TemplateAbstract
         if (!function_exists('pll_the_languages')) {
             return;
         }
-        
+
         // Save the $_GET
         $autoselect_id = !empty($_GET['autoselect_id']) ? 'autoselect_id='.$_GET['autoselect_id'] : '';
         $page = !empty($_GET['page']) ? 'page='.$_GET['page'] : '';
@@ -191,16 +190,17 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['lang_switcher'] = Timber::compile($template, $data);
     }
 
-    private function addEsSearchBlock(){
+    private function addEsSearchBlock()
+    {
         $data = [];
 
         $data['search_url'] = get_field('es_search_page_url', 'option');
-        if(empty($data['search_url'])){
+        if (empty($data['search_url'])) {
             return;
         }
 
         $suggest = get_field('es_search_block_suggests', 'option');
-        if(!empty($suggest) && !empty($suggest['suggest_pages'])){
+        if (!empty($suggest) && !empty($suggest['suggest_pages'])) {
             $data['suggest']['title'] = (!empty($suggest['suggest_title'])) ? $suggest['suggest_title'] : '';
             foreach ($suggest['suggest_pages'] as $page) {
                 $post = Timber::get_post($page['suggest_page']);

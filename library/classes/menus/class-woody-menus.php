@@ -203,11 +203,11 @@ class WoodyTheme_Menus
                     $menu_link['submenu'][$key] = Timber::compile($twig_paths[$part_display], $the_part);
                 } elseif (!empty($submenu['display']['parts'][$i]['custom_function'])) {
                     $menu_link['submenu'][$key] = $submenu['display']['parts'][$i]['custom_function'];
-                } else{
+                } else {
                     unset($menu_link['submenu'][$key]);
                 }
 
-                if(!empty($menu_link['submenu'][$key])){
+                if (!empty($menu_link['submenu'][$key])) {
                     $the_submenu['items'][] = $menu_link['submenu'][$key];
                 }
                 $i++;

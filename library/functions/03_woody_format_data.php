@@ -208,7 +208,7 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
         'orderby' => $orderby,
     ];
 
-    if($ignore_maxnum === true){
+    if ($ignore_maxnum === true) {
         $the_query['posts_per_page'] = -1;
     }
 
@@ -499,14 +499,14 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     }
 
     $the_list['filters']['the_map'] = creatListMapFilter($current_post, $layout, $paginate, $the_list['filters'], $twigPaths);
-    if(!empty($the_list['filters']['the_map'])){
+    if (!empty($the_list['filters']['the_map'])) {
         foreach ($the_list['filters'] as $filter_key => $filter) {
-            if(is_numeric($filter_key) && $filter['list_filter_type'] == 'map'){
+            if (is_numeric($filter_key) && $filter['list_filter_type'] == 'map') {
                 unset($the_list['filters'][$filter_key]);
             }
         }
         $the_list['has_map'] = true;
-    } else{
+    } else {
         unset($the_list['filters']['the_map']);
     }
 
@@ -521,9 +521,9 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     return $return;
 }
 
-function creatListMapFilter($current_post, $layout, $paginate, $filters, $twigPaths){
-
-    if(!empty($filters)){
+function creatListMapFilter($current_post, $layout, $paginate, $filters, $twigPaths)
+{
+    if (!empty($filters)) {
         foreach ($filters as $key => $filter) {
             if (is_numeric($key)) {
                 if ($filter['list_filter_type'] == 'map') {
