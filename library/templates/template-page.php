@@ -73,7 +73,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
     protected function pageContext()
     {
-        $this->context['active_social_shares'] = getActiveShares();
+        $social_shares = getActiveShares();
+        $this->context['social_shares'] = Timber::compile($this->context['woody_components']['blocks-shares-tpl_01'], $social_shares);
 
         /*********************************************
          * Compilation du bloc prix
@@ -104,6 +105,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             $page_teaser['classes'] = (!empty($page_teaser['the_classes'])) ? implode(' ', $page_teaser['the_classes']) : '';
             $page_teaser['breadcrumb'] = yoast_breadcrumb('<div class="breadcrumb-wrapper padd-top-sm padd-bottom-sm">', '</div>', false);
             $page_teaser['trip_infos'] = (!empty($this->context['trip_infos'])) ? $this->context['trip_infos'] : '';
+            $page_teaser['social_shares'] = (!empty($this->context['social_shares'])) ? $this->context['social_shares'] : '';
             if (!empty($page_teaser['page_teaser_media_type']) && $page_teaser['page_teaser_media_type'] == 'map') {
                 $page_teaser['post_coordinates'] = (!empty(getAcfGroupFields('group_5b3635da6529e'))) ? getAcfGroupFields('group_5b3635da6529e') : '';
             }
