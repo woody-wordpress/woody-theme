@@ -309,7 +309,7 @@ class WoodyTheme_Plugins_Options
             'onpage_indexability'        => false,
             // 'googleverify'               => '',
             'has_multiple_authors'       => false,
-            'environment_type'           => (WP_ENV == 'prod' && WP_ENV !=  'crt-bretagne') ? 'production' : '', // TODO: remove crt-bretagne after MEL
+            'environment_type'           => (WP_ENV == 'prod') ? 'production' : '',
             'content_analysis_active'    => false,
             'keyword_analysis_active'    => false,
             'enable_admin_bar_menu'      => false,
