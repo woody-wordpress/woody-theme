@@ -20,15 +20,11 @@ class WoodyTheme_Commands
 
     public function flush($args)
     {
-        do_action('woody_theme_update');
-        \WP_CLI::success('woody_theme_update');
-
         do_action('woody_subtheme_update');
         \WP_CLI::success('woody_subtheme_update');
 
-        // Flush Rewrite Rules
-        flush_rewrite_rules();
-        \WP_CLI::success('flush_rewrite_rules');
+        do_action('woody_theme_update');
+        \WP_CLI::success('woody_theme_update');
 
         // Clear the cache to prevent an update_option() from saving a stale db_version to the cache
         wp_cache_flush();
