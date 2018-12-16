@@ -15,10 +15,10 @@ class WoodyTheme_Commands
 
     protected function registerHooks()
     {
-        \WP_CLI::add_command('woody', [$this, 'deploy']);
+        \WP_CLI::add_command('woody', [$this, 'flush']);
     }
 
-    public function deploy($args)
+    public function flush($args)
     {
         do_action('woody_theme_update');
         \WP_CLI::success('woody_theme_update');
