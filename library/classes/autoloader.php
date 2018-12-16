@@ -1,5 +1,8 @@
 <?php
 
+// Commands
+new WoodyTheme_Commands();
+
 // Plugins
 new WoodyTheme_Plugins_Activation();
 new WoodyTheme_Plugins_Options();
