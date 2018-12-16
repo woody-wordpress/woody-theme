@@ -16,7 +16,9 @@
 <main class="content-type-page">
     <div class="content-wrapper">
         {% if sheet_tourism.content|default %}
-        {{ sheet_tourism.content }}
+        <div class="page-sheet-wrapper">
+            {{ sheet_tourism.content }}
+        </div>
         {% endif %}
     </div>
 </main>
