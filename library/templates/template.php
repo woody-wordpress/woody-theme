@@ -135,7 +135,7 @@ abstract class WoodyTheme_TemplateAbstract
         if (!function_exists('pll_the_languages')) {
             return;
         }
-        
+
         // Save the $_GET
         $autoselect_id = !empty($_GET['autoselect_id']) ? 'autoselect_id='.$_GET['autoselect_id'] : '';
         $page = !empty($_GET['page']) ? 'page='.$_GET['page'] : '';
@@ -175,6 +175,7 @@ abstract class WoodyTheme_TemplateAbstract
                 if (!empty($languages_customization['external_langs'])) {
                     foreach ($languages_customization['external_langs'] as $lang_key => $language) {
                         $data['langs'][$lang_key]['url'] = $language['url'];
+                        $data['langs'][$lang_key]['name'] = $language['name'];
                         $data['langs'][$lang_key]['target'] = '_blank';
                     }
                 }
