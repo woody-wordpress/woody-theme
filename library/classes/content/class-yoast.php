@@ -15,17 +15,31 @@ class WoodyTheme_Yoast
 
     protected function registerHooks()
     {
-        // Add action
         //add_action('wpseo_register_extra_replacements', [$this, 'registerCustomYoastVariables']);
         add_action('wpseo_add_opengraph_additional_images', [$this, 'wpseoAddOpengraphAdditionalImages'], 10, 1);
+        add_filter('wpseo_opengraph_image', [$this, 'wpseoOpengraphImage'], 10, 1);
     }
 
     public function wpseoAddOpengraphAdditionalImages($object)
     {
         global $post;
         if (!empty($post)) {
-            $image = get_field('field_5b0e5ddfd4b1b', $post->ID);
+            $attachment = get_field('field_5b0e5ddfd4b1b', $post->ID);
+            $image = [
+                'url' => site_url() . '/ogimage.jpg', // fake url
+                'width' => 1200,
+                'height' => 675,
+            ];
             $object->add_image($image);
+        }
+    }
+
+    public function wpseoOpengraphImage($url)
+    {
+        global $post;
+        if (!empty($post)) {
+            $attachment = get_field('field_5b0e5ddfd4b1b', $post->ID);
+            return $attachment['sizes']['ratio_16_9_large'];
         }
     }
 
