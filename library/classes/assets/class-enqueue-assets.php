@@ -22,7 +22,7 @@ class WoodyTheme_Enqueue_Assets
         $this->globalScriptString = $this->setGlobalScriptString();
 
         // Get page type
-        global $post;
+        $post = get_post();
         $pageType = (!empty($post) && !empty($post->ID)) ? getTermsSlugs($post->ID, 'page_type') : [];
         $this->isTouristicPlaylist = in_array('playlist_tourism', $pageType);
         $this->isTouristicSheet = !empty($post) && $post->post_type === 'touristic_sheet';
