@@ -51,7 +51,9 @@ class WoodyTheme_Plugins_Options
 
         // Force Disable indexation
         if (WP_ENV != 'prod') {
-            update_option('blog_public', false, '', 'yes');
+            update_option('blog_public', '0', '', 'yes');
+        } else {
+            update_option('blog_public', '1', '', 'yes');
         }
 
         // SSL Insecure Content Fixer

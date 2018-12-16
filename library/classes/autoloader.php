@@ -36,6 +36,7 @@ new WoodyTheme_Tinymce();
 new WoodyTheme_Links();
 new WoodyTheme_Polylang();
 new WoodyTheme_SiteMap();
+new WoodyTheme_Robots();
 new WoodyTheme_Yoast();
 // new WoodyTheme_Videos();
 

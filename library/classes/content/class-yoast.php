@@ -23,8 +23,10 @@ class WoodyTheme_Yoast
     public function wpseoAddOpengraphAdditionalImages($object)
     {
         global $post;
-        $image = get_field('field_5b0e5ddfd4b1b', $post->ID);
-        $object->add_image($image);
+        if (!empty($post)) {
+            $image = get_field('field_5b0e5ddfd4b1b', $post->ID);
+            $object->add_image($image);
+        }
     }
 
     // // define the action for register yoast_variable replacments
