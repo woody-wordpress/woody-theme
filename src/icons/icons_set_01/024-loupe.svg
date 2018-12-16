@@ -1,10 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
-    <title>024-loupe</title>
-    <desc>Created with Sketch.</desc>
-    <g id="024-loupe" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <path d="M29,37 C20.163444,37 13,29.836556 13,21 C13,12.163444 20.163444,5 29,5 C37.836556,5 45,12.163444 45,21 C45,29.836556 37.836556,37 29,37 Z M29,35 C36.7319865,35 43,28.7319865 43,21 C43,13.2680135 36.7319865,7 29,7 C21.2680135,7 15,13.2680135 15,21 C15,28.7319865 21.2680135,35 29,35 Z" id="Oval" fill="#000000" fill-rule="nonzero"></path>
-        <polygon id="Line-4" fill="#000000" fill-rule="nonzero" points="18 30.5857864 19.4142136 32 7.45463898 43.9595746 6.04042542 42.545361"></polygon>
-    </g>
-</svg>
+<svg height="50" viewBox="0 0 50 50" width="50" xmlns="http://www.w3.org/2000/svg"><path d="m29 37c-8.836556 0-16-7.163444-16-16s7.163444-16 16-16 16 7.163444 16 16-7.163444 16-16 16zm0-2c7.7319865 0 14-6.2680135 14-14s-6.2680135-14-14-14-14 6.2680135-14 14 6.2680135 14 14 14z"/><path d="m18 30.5857864 1.4142136 1.4142136-11.95957462 11.9595746-1.41421356-1.4142136z"/></svg>

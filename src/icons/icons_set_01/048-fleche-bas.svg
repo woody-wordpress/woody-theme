@@ -1,12 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
-    <title>048-fleche-bas</title>
-    <desc>Created with Sketch.</desc>
-    <g id="048-fleche-bas" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Group-2-Copy" transform="translate(10.000000, 5.000000)" fill="#000000" fill-rule="nonzero">
-            <polygon id="Path-3" points="13.5 0 15.5 0 15.5 38.5 13.5 38.5"></polygon>
-            <polygon id="Path-4" points="27.2526741 23.3355423 28.7473259 24.6644577 14.6722848 40.4948742 0.260720907 24.6733992 1.73927909 23.3266008 14.6543025 37.5051258"></polygon>
-        </g>
-    </g>
-</svg>
+<svg height="50" viewBox="0 0 50 50" width="50" xmlns="http://www.w3.org/2000/svg"><g transform="translate(10 5)"><path d="m13.5 0h2v38.5h-2z"/><path d="m27.2526741 23.3355423 1.4946518 1.3289154-14.0750411 15.8304165-14.41156389-15.821475 1.47855818-1.3467984 12.91502341 14.178525z"/></g></svg>
