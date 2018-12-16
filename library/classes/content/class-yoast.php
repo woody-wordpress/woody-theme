@@ -26,15 +26,13 @@ class WoodyTheme_Yoast
         if (!empty($post)) {
             $attachment = get_field('field_5b0e5ddfd4b1b', $post->ID);
 
-            $alt = (!empty($attachment['description'])) ? $attachment['description'] : '';
-            $alt .= (!empty($attachment['caption'])) ? ' ©' . $attachment['caption'] : '';
-
             $image = [
                 'url' => site_url() . '/ogimage.jpg', // fake url
                 'width' => 1200,
                 'height' => 675,
-                'alt' => $alt,
+                'alt' => $attachment['description'],
             ];
+
             $object->add_image($image);
         }
     }
