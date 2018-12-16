@@ -151,39 +151,39 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             $this->context['page_hero'] = Timber::compile($this->context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
         }
 
-         /*********************************************
-         * Compilation du bloc de réservation
-         *********************************************/
+        /*********************************************
+        * Compilation du bloc de réservation
+        *********************************************/
         $bookblock = [];
         $bookblock = getAcfGroupFields('group_5c0e4121ee3ed');
 
-        if(!empty($bookblock['bookblock_playlists'][0]['pl_post_id'])){
+        if (!empty($bookblock['bookblock_playlists'][0]['pl_post_id'])) {
             $bookblock['the_classes'] = [];
             $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_img_opacity'])) ? $bookblock['bookblock_bg_params']['background_img_opacity'] : '';
             $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_color'])) ? $bookblock['bookblock_bg_params']['background_color'] : '';
             $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['border_color'])) ? $bookblock['bookblock_bg_params']['border_color'] : '';
             $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_img'])) ? 'isRel' : '';
-            if(!empty($bookblock['bookblock_bg_params']['background_img_opacity']) || !empty($bookblock['bookblock_bg_params']['background_color']) || !empty($bookblock['bookblock_bg_params']['border_color'])){
+            if (!empty($bookblock['bookblock_bg_params']['background_img_opacity']) || !empty($bookblock['bookblock_bg_params']['background_color']) || !empty($bookblock['bookblock_bg_params']['border_color'])) {
                 $bookblock['the_classes'][] = 'padd-all-md';
             }
             $bookblock['classes'] = (!empty($bookblock['the_classes'])) ? implode(' ', $bookblock['the_classes']) : '';
-            if(!empty($bookblock['bookblock_playlists'])){
+            if (!empty($bookblock['bookblock_playlists'])) {
                 foreach ($bookblock['bookblock_playlists'] as $pl_key => $pl) {
                     $bookblock['bookblock_playlists'][$pl_key]['permalink'] = get_permalink($pl['pl_post_id']);
                     $pl_confId = get_field('field_5b338ff331b17', $pl['pl_post_id']);
-                    if(!empty($pl_confId)){
+                    if (!empty($pl_confId)) {
                         $pl_lang = pll_get_post_language($pl['pl_post_id']);
                         $pl_params = apply_filters('wp_woody_hawwwai_playlist_render', $pl_confId, $pl_lang, array(), 'json');
                         $facets = (!empty($pl_params['filters'])) ? $pl_params['filters'] : '';
-                        if(!empty($facets)){
+                        if (!empty($facets)) {
                             foreach ($facets as $facet) {
-                                if($facet['type'] === 'daterangeWithAvailabilities'){
+                                if ($facet['type'] === 'daterangeWithAvailabilities') {
                                     $bookblock['bookblock_playlists'][$pl_key]['filters']['id'] = $facet['id'];
                                     $bookblock['bookblock_playlists'][$pl_key]['filters']['daterange'] = true;
                                     $bookblock['bookblock_playlists'][$pl_key]['filters']['translations'] = (!empty($facet['TR'])) ? $facet['TR'] : '';
                                     $bookblock['bookblock_playlists'][$pl_key]['filters']['display_options'] = (!empty($facet['display_options'])) ? $facet['display_options'] : '';
-                                    if(!empty($facet['display_options']['persons']['values'])){
-                                        foreach ($facet['display_options']['persons']['values'] as $person ) {
+                                    if (!empty($facet['display_options']['persons']['values'])) {
+                                        foreach ($facet['display_options']['persons']['values'] as $person) {
                                             $bookblock['bookblock_playlists'][$pl_key]['filters'][$person['field']] = $person['display'];
                                         }
                                     }

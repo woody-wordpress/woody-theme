@@ -1,5 +1,8 @@
 <?php
 
+// Commands
+new WoodyTheme_Commands();
+
 // Plugins
 new WoodyTheme_Plugins_Activation();
 new WoodyTheme_Plugins_Options();
@@ -36,8 +39,9 @@ new WoodyTheme_Tinymce();
 new WoodyTheme_Links();
 new WoodyTheme_Polylang();
 new WoodyTheme_SiteMap();
+new WoodyTheme_Robots();
+new WoodyTheme_Yoast();
 // new WoodyTheme_Videos();
-// new WoodyTheme_Yoast();
 
 // Timber
 new WoodyTheme_Twig_Filters();

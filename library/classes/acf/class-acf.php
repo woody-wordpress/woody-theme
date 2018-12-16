@@ -556,7 +556,6 @@ class WoodyTheme_ACF
         delete_transient('woody_page_taxonomies_choices');
         delete_transient('woody_terms_choices');
         delete_transient('woody_website_pages_taxonomies');
-        flush_rewrite_rules();
     }
 
     public function cleanTermsChoicesTransient()
