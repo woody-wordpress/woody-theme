@@ -21,16 +21,19 @@ class WoodyTheme_Enqueue_Assets
         $this->siteConfig = $this->setSiteConfig();
         $this->globalScriptString = $this->setGlobalScriptString();
 
+        $this->registerHooks();
+    }
+
+    private function setGlobalVars()
+    {
         // Get page type
-        $post = get_post();
+        global $post;
         $pageType = (!empty($post) && !empty($post->ID)) ? getTermsSlugs($post->ID, 'page_type') : [];
         $this->isTouristicPlaylist = in_array('playlist_tourism', $pageType);
         $this->isTouristicSheet = !empty($post) && $post->post_type === 'touristic_sheet';
 
         // Theme Version
         $this->wThemeVersion = get_option('woody_theme_version');
-
-        $this->registerHooks();
     }
 
     protected function registerHooks()
@@ -88,6 +91,9 @@ class WoodyTheme_Enqueue_Assets
 
     public function enqueueLibraries()
     {
+        // Define $this->isTouristicPlaylist, $this->isTouristicSheet et $this->wThemeVersion
+        $this->setGlobalVars();
+
         // Deregister the jquery version bundled with WordPress & define another
         wp_deregister_script('jquery');
         $jQuery_version = '3.3.1';
@@ -229,6 +235,9 @@ class WoodyTheme_Enqueue_Assets
 
     public function enqueueAssets()
     {
+        // Define $this->isTouristicPlaylist, $this->isTouristicSheet et $this->wThemeVersion
+        $this->setGlobalVars();
+
         // Enqueue the main Scripts
         $dependencies = [
             'jquery',
@@ -253,17 +262,20 @@ class WoodyTheme_Enqueue_Assets
 
     public function enqueueAdminAssets()
     {
+        // Define $this->isTouristicPlaylist, $this->isTouristicSheet et $this->wThemeVersion
+        $this->setGlobalVars();
+
         wp_enqueue_script('lazysizes', 'https://cdn.jsdelivr.net/npm/lazysizes@4.1.2/lazysizes.min.js', array(), '', true);
 
         // Enqueue the main Scripts
         $dependencies = ['jquery'];
-        wp_enqueue_script('admin-javascripts', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('js/admin.js'), $dependencies, wp_get_theme(get_template())->get('Version'), true);
+        wp_enqueue_script('admin-javascripts', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('js/admin.js'), $dependencies, $this->wThemeVersion, true);
 
         // Added global vars
         wp_add_inline_script('admin-javascripts', 'var siteConfig = ' . json_encode($this->siteConfig) . ';', 'before');
 
         // Enqueue the main Stylesheet.
-        wp_enqueue_style('admin-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/admin.css'), array(), wp_get_theme(get_template())->get('Version'), 'all');
+        wp_enqueue_style('admin-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/admin.css'), array(), $this->wThemeVersion, 'all');
     }
 
     private function assetPath($filename)
