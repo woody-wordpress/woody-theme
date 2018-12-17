@@ -16,11 +16,11 @@
 <div class="woody-component-mobilenavs">
     {{ page_parts.mobile_menu|default }}
     <ul class="tools list-unstyled flex-container align-middle hide-for-xlarge">
-        {% if es_search_block|default %}
-            <li>{{ es_search_block }}</li>
+        {% if es_search_block_mobile|default %}
+            <li>{{ es_search_block_mobile }}</li>
         {% endif %}
-        {% if lang_switcher|default %}
-            <li>{{ lang_switcher }}</li>
+        {% if lang_switcher_mobile|default %}
+            <li>{{ lang_switcher_mobile }}</li>
         {% endif %}
     </ul>
 </div>
