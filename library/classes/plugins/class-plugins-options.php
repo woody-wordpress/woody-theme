@@ -272,6 +272,12 @@ class WoodyTheme_Plugins_Options
                 'duplicate' => 1,
             ],
         ];
+
+        // En dev on travaille toujours en prefix
+        if (WP_ENV == dev) {
+            $polylang['force_lang'] = 1;
+        }
+
         $this->updateOption('polylang', $polylang);
 
         // Redirections
