@@ -83,5 +83,7 @@ class WoodyTheme_Polylang
         __("Désolé, aucun contenu touristique ne correspond à votre recherche", 'woody-theme');
         __("Désolé, aucune page ne correspond à votre recherche", 'woody-theme');
         __('Fermer', 'woody-theme');
+        __('résultat', 'woody-theme');
+        __('Aucun résultat', 'woody-theme');
     }
 }
