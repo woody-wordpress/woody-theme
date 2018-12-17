@@ -50,11 +50,11 @@ class WoodyTheme_Plugins_Options
         update_option('permalink-manager-permastructs', ['post_types' => ['touristic_sheet' => '']], '', 'yes');
 
         // Force Disable indexation
-        // if (WP_ENV != 'prod') {
-        //     update_option('blog_public', false, '', 'yes');
-        // } else {
-        //     update_option('blog_public', true, '', 'yes');
-        // }
+        if (WP_ENV != 'prod') {
+            update_option('blog_public', 0, '', 'yes');
+        } else {
+            update_option('blog_public', 1, '', 'yes');
+        }
 
         // SSL Insecure Content Fixer
         $ssl_insecure_content_fixer = [

@@ -20,7 +20,7 @@ class WoodyTheme_Robots
 
     public function robotsTxt($output, $public)
     {
-        if ($public) {
+        if ('0' != $public) {
             // Add Disallow
             $output = [
                 '# Woody Robots',
