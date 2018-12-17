@@ -292,7 +292,7 @@ class WoodyTheme_Plugins_Options
             'associated_redirect' => '',
             'auto_target' => '',
             'expire_redirect' => -1,
-            'expire_404' => -1,
+            'expire_404' => 30,
             'newsletter' => false,
             'redirect_cache' => 1,
             'ip_logging' => 0,
