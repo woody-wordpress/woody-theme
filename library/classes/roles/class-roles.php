@@ -19,9 +19,10 @@ class WoodyTheme_Roles
         add_action('woody_theme_update', [$this, 'addCapabilities']);
         add_filter('auth_cookie_expiration', [$this, 'authCookieExpirationFilter'], 10, 3);
         add_action('members_register_cap_groups', [$this, 'registerMembersGroups']);
-        // add_filter('redirection_role', function ($role) {
-        //     return 'editor';
-        // });
+        add_action('members_register_caps', [$this, 'membersRegisterCaps']);
+        add_filter('redirection_role', function ($role) {
+            return 'manage_redirection';
+        });
     }
 
     /**
@@ -35,6 +36,14 @@ class WoodyTheme_Roles
             'label'    => __('Woody', 'woody'),
             'icon'     => 'dashicons-admin-settings',
             'priority' => 30,
+        ));
+    }
+
+    public function membersRegisterCaps()
+    {
+        members_register_cap('manage_redirection', array(
+            'label' => _x('Manage Redirections', '', 'woody'),
+            'group' => 'woody',
         ));
     }
 
@@ -704,6 +713,14 @@ class WoodyTheme_Roles
             'customize' => [
                 'administrator' => false,
                 'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+
+            // Redirection
+            'manage_redirection' => [
+                'administrator' => true,
+                'editor' => true,
                 'contributor' => false,
                 'translator' => false,
             ],
