@@ -351,6 +351,8 @@ body{
         justify-content: flex-end;
 
         &.cc-bottom {
+            background-color: $primary-color !important;
+            color:set-color($primary-color);
             border-radius: 0;
             left: 0;
             width: 100%;
