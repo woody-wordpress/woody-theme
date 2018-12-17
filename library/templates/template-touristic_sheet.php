@@ -67,9 +67,42 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
         $this->context['sheet_tourism'] = apply_filters('wp_woody_hawwwai_sheet_render', $sheet_id, $sheet_lang, $params);
 
         // Set METAS
-        // TODO: (Doubled set metas (apirender & wordpress))
+
         $this->context['metas'] = [];
         foreach ($this->context['sheet_tourism']['metas'] as $key_meta => $meta) {
+            // Remove doubled metas (apirender & wordpress)
+            if (!empty($meta['#attributes']['property']) &&
+                ($meta['#attributes']['property'] == 'og:type'
+                || $meta['#attributes']['property'] == 'og:url'
+                || $meta['#attributes']['property'] == 'og:title')
+            ) {
+                continue;
+            }
+
+            if (!empty($meta['#attributes']['name']) &&
+                ($meta['#attributes']['name'] == 'twitter:card'
+                || $meta['#attributes']['name'] == 'twitter:title')
+            ) {
+                continue;
+            }
+
+            if (!empty($meta['#attributes']['name']) &&
+                ($meta['#attributes']['name'] == 'twitter:card'
+                || $meta['#attributes']['name'] == 'twitter:title')
+            ) {
+                continue;
+            }
+
+            if (!empty($meta['#attributes']['rel']) && $meta['#attributes']['rel'] == 'canonical') {
+                continue;
+            }
+
+            // TODO: Remove when english version online
+            if (WP_SITE_KEY == 'crt-bretagne' && !empty($meta['#attributes']['rel']) && $meta['#attributes']['rel'] == 'alternate') {
+                continue;
+            }
+
+            // Extract tags
             $tag = '<'.$meta['#tag'];
             foreach ($meta['#attributes'] as $key_attr => $attribute) {
                 $tag .= ' '.$key_attr.'="'.$attribute.'"';

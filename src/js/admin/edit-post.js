@@ -180,7 +180,6 @@ $('#post').each(function() {
     acf.addAction('append_field/key=field_5b27890c84ed3', getAutoFocusQuery);
 });
 
-// TODO refactoring
 $('#acf-group_5bd0227a1bda3').each(function() {
     var getShortLinkData = function(field) {
         var post_id = field.val();
