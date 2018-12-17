@@ -531,7 +531,6 @@ function creatListMapFilter($current_post, $layout, $paginate, $filters, $twigPa
                     if(!empty($every_items['items'])){
                         foreach ($every_items['items'] as $item) {
                             if (!empty($item['location']['lat']) && !empty($item['location']['lng'])) {
-                                wd($item, 'item');
                                 $the_marker = [
                                 'image_style' => 'ratio_16_9',
                                 'item' => [
