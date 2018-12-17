@@ -495,7 +495,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
         $the_list['items_count'] = $the_filtered_items['wp_query']->found_posts;
     } else {
         $the_list['the_grid'] =  Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_items);
-        $the_list['items_count'] = $the_items['wp_query']->found_posts;
+        $the_list['items_count'] = (!empty($the_items['wp_query']->found_posts)) ? $the_items['wp_query']->found_posts : '' ;
     }
 
     $the_list['filters']['the_map'] = creatListMapFilter($current_post, $layout, $paginate, $the_list['filters'], $twigPaths);
@@ -528,25 +528,29 @@ function creatListMapFilter($current_post, $layout, $paginate, $filters, $twigPa
             if (is_numeric($key)) {
                 if ($filter['list_filter_type'] == 'map') {
                     $every_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields'], $paginate, $layout['uniqid'], true);
-                    foreach ($every_items['items'] as $item) {
-                        if (!empty($item['location']['lat']) && !empty($item['location']['lng'])) {
-                            $the_marker = [
-                            'image_style' => 'ratio_16_9',
-                            'item' => [
-                                'title' => $item['title'],
-                                'description' => $item['description'],
-                                'img' => $item['img']
-                            ]
-                        ];
+                    if(!empty($every_items['items'])){
+                        foreach ($every_items['items'] as $item) {
+                            if (!empty($item['location']['lat']) && !empty($item['location']['lng'])) {
+                                wd($item, 'item');
+                                $the_marker = [
+                                'image_style' => 'ratio_16_9',
+                                'item' => [
+                                    'title' => $item['title'],
+                                    'description' => $item['description'],
+                                    'img' => $item['img'],
+                                    'link' => $item['link']
+                                ]
+                            ];
 
-                            $filters[$key]['markers'][] = [
-                            'map_position' => [
-                                'lat' => $item['location']['lat'],
-                                'lng' => $item['location']['lng']
-                            ],
-                            'compiled_marker' => $layout['default_marker'],
-                            'marker_thumb_html' => Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker)
-                        ];
+                                $filters[$key]['markers'][] = [
+                                'map_position' => [
+                                    'lat' => $item['location']['lat'],
+                                    'lng' => $item['location']['lng']
+                                ],
+                                'compiled_marker' => $layout['default_marker'],
+                                'marker_thumb_html' => Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker)
+                            ];
+                            }
                         }
                     }
                     return $filters[$key];
