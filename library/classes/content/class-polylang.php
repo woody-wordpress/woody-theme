@@ -86,5 +86,6 @@ class WoodyTheme_Polylang
         __('résultat', 'woody-theme');
         __('Aucun résultat', 'woody-theme');
         __('Menu', 'woody-theme');
+        __('Merci de choisir une date', 'woody-theme');
     }
 }

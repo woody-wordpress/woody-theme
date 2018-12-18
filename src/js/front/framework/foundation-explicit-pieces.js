@@ -94,8 +94,8 @@ Foundation.plugin(Tabs, 'Tabs');
 // import { Toggler } from 'foundation-sites/js/foundation.toggler';
 // Foundation.plugin(Toggler, 'Toggler');
 
-// import { Tooltip } from 'foundation-sites/js/foundation.tooltip';
-// Foundation.plugin(Tooltip, 'Tooltip');
+import { Tooltip } from 'foundation-sites/js/foundation.tooltip';
+Foundation.plugin(Tooltip, 'Tooltip');
 
 // import { ResponsiveAccordionTabs } from 'foundation-sites/js/foundation.responsiveAccordionTabs';
 // Foundation.plugin(ResponsiveAccordionTabs, 'ResponsiveAccordionTabs');
