@@ -883,9 +883,9 @@ function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = ''
     $value = [];
     if (!empty($item->get_field($field))) {
         $value = $item->get_field($field);
-    } elseif (!empty($fallback_item) && is_array($fallback_item)) {
+    } elseif (!empty($fallback_item) && is_array($fallback_item) && !empty($fallback_item[$fallback_field])) {
         $value = $fallback_item[$fallback_field];
-    } elseif (!empty($fallback_item) && !empty($fallback_item->get_field($fallback_field))) {
+    } elseif (!empty($fallback_item) && is_object($fallback_item) && !empty($fallback_item->get_field($fallback_field))) {
         $value = $fallback_item->get_field($fallback_field);
     } elseif (!empty($lastfallback_item) && !empty($lastfallback_item->get_field($lastfallback_field))) {
         $value = $lastfallback_item->get_field($lastfallback_field);
