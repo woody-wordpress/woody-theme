@@ -65,7 +65,7 @@ class WoodyTheme_Robots
         }
 
         // Added custom filter
-        apply_filters('woody_robots_txt', $output);
+        apply_filters('woody_robots_txt', $output, $public);
 
         return $output;
     }
