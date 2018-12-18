@@ -49,7 +49,7 @@ class WoodyTheme_Robots
         }
 
         // Added custom filter
-        apply_filters('woody_robots_txt', $output, $public);
+        $output = apply_filters('woody_robots_txt', $output, $public);
 
         // Implode
         $output = implode("\n", $output);
