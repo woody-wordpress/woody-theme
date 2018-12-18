@@ -344,15 +344,15 @@ screen and (max-width:736px) and (orientation:landscape) {
 
 
 // Woody theme Overrides
-
-body{
+body {
     .cc-revoke {
-        font-size: rem-calc(12);
+        font-size: .9em;
+        font-weight: bold;
         justify-content: flex-end;
 
         &.cc-bottom {
             background-color: $primary-color !important;
-            color:set-color($primary-color);
+            color: set-color($primary-color);
             border-radius: 0;
             left: 0;
             width: 100%;
@@ -370,10 +370,12 @@ body{
     }
 }
 
-body{
+body {
     transition: transform .6s .1s ease-in-out;
-    &.fullScrolled{
+
+    &.fullScrolled {
         transform: translateY(-50px);
+
         .cc-revoke {
             &.cc-bottom {
                 +div[aria-label='cookieconsent'] {
