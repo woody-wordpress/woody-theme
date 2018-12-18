@@ -85,5 +85,6 @@ class WoodyTheme_Polylang
         __('Fermer', 'woody-theme');
         __('résultat', 'woody-theme');
         __('Aucun résultat', 'woody-theme');
+        __('Menu', 'woody-theme');
     }
 }
