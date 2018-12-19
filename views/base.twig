@@ -14,6 +14,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','{{ gtm }}');</script>
 <!-- End Google Tag Manager -->
+{% else %}
+<!-- Google Tag Manager (fallback)-->
+<script>window.dataLayer = []</script>;
+<!-- End Google Tag Manager (fallback) -->
 {% endif %}
 
 <link rel='shortcut icon' type='image/x-icon' href="{{ icons.favicon }}"> <!-- Favicon -->
@@ -36,6 +40,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- WP Styles -->
 {{ block('styles') }}
 <!-- /WP Styles -->
+
 </head>
 <body class="{{body_class}}">
     {% if gtm|default %}
@@ -47,6 +52,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <div class="main-wrapper flex-container flex-dir-column large-flex-dir-column-reverse">
         <div class="site-content">
+
             <!-- Theme Content -->
             {{ block('content') }}
             <!-- /Theme Content -->
@@ -58,7 +64,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         <!-- Theme Header -->
         {% include 'parts/header.twig' %}
-        <!-- /Theme Header -->
+
+    <!-- /Theme Header -->
     </div>
 
     <!-- Twig Inline Scripts tags -->
