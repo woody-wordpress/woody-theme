@@ -17,7 +17,9 @@ class WoodyTheme_Polylang
     {
         add_filter('pll_is_cache_active', [$this, 'isCacheActive']);
         add_action('after_setup_theme', [$this, 'loadThemeTextdomain']);
-        //add_filter('option_page_on_front', [$this, 'pageOnFront'], 10, 2);
+        add_filter('option_page_on_front', [$this, 'pageOnFront'], 10, 2);
+        add_filter('woody_pll_days', [$this, 'woodyPllDays'], 10);
+        add_filter('woody_pll_months', [$this, 'woodyPllMonths'], 10);
     }
 
     public function isCacheActive()
@@ -28,19 +30,50 @@ class WoodyTheme_Polylang
     /**
      * Translate frontpage
      */
-    // public function pageOnFront($value, $option)
-    // {
-    //     if (pll_current_language() != pll_default_language()) {
-    //         $t_value = pll_get_post($value);
-    //         return (!empty($t_value)) ? $t_value : $value;
-    //     } else {
-    //         return $value;
-    //     }
-    // }
+    public function pageOnFront($value, $option)
+    {
+        if (pll_current_language() != pll_default_language()) {
+            $t_value = pll_get_post($value);
+            return (!empty($t_value)) ? $t_value : $value;
+        } else {
+            return $value;
+        }
+    }
 
     public function loadThemeTextdomain()
     {
         load_theme_textdomain('woody-theme', get_template_directory() . '/languages');
+    }
+
+    public function woodyPllDays()
+    {
+        return [
+            1 => __('Lundi', 'woody-theme'),
+            2 => __('Mardi', 'woody-theme'),
+            3 => __('Mercredi', 'woody-theme'),
+            4 => __('Jeudi', 'woody-theme'),
+            5 => __('Vendredi', 'woody-theme'),
+            6 => __('Samedi', 'woody-theme'),
+            7 => __('Dimanche', 'woody-theme'),
+        ];
+    }
+
+    public function woodyPllMonths()
+    {
+        return [
+            1 => __("Janvier", 'woody-theme'),
+            2 => __("Février", 'woody-theme'),
+            3 => __("Mars", 'woody-theme'),
+            4 => __("Avril", 'woody-theme'),
+            5 => __("Mai", 'woody-theme'),
+            6 => __("Juin", 'woody-theme'),
+            7 => __("Juillet", 'woody-theme'),
+            8 => __("Août", 'woody-theme'),
+            9 => __("Septembre", 'woody-theme'),
+            10 => __("Octobre", 'woody-theme'),
+            11 => __("Novembre", 'woody-theme'),
+            12 => __("Décembre", 'woody-theme'),
+        ];
     }
 
     /**
@@ -54,6 +87,27 @@ class WoodyTheme_Polylang
         // Yoast
         __("Page non trouvée %%sep%% %%sitename%%", 'woody-theme');
         __("Erreur 404 : Page non trouvée", 'woody-theme');
+
+        // Date
+        __("Lundi", 'woody-theme');
+        __("Mardi", 'woody-theme');
+        __("Mercredi", 'woody-theme');
+        __("Jeudi", 'woody-theme');
+        __("Vendredi", 'woody-theme');
+        __("Samedi", 'woody-theme');
+        __("Dimanche", 'woody-theme');
+        __("Janvier", 'woody-theme');
+        __("Février", 'woody-theme');
+        __("Mars", 'woody-theme');
+        __("Avril", 'woody-theme');
+        __("Mai", 'woody-theme');
+        __("Juin", 'woody-theme');
+        __("Juillet", 'woody-theme');
+        __("Août", 'woody-theme');
+        __("Septembre", 'woody-theme');
+        __("Octobre", 'woody-theme');
+        __("Novembre", 'woody-theme');
+        __("Décembre", 'woody-theme');
 
         // Woody blocs
         __("M'y rendre", 'woody-theme');
@@ -91,6 +145,5 @@ class WoodyTheme_Polylang
         __('Nouvelle Aquitaine', 'woody-theme');
         __('Dordogne', 'woody-theme');
         __('Comment venir ?', 'woody-theme');
-
     }
 }
