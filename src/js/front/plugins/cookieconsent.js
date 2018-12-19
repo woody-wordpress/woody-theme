@@ -33,12 +33,12 @@ window.cookieconsent.initialise({
         if (type == 'opt-in' && didConsent) {
             // Enable cookies
             console.log('Enable cookies');
-            dataLayer.push({ 'cookie_consent': 'true' });
+            dataLayer.push({ 'event': 'cookies_enable' });
         }
         if (type == 'opt-out' && !didConsent) {
             // Disable cookies
             console.log('Disable cookies');
-            dataLayer.push({ 'cookie_consent': 'false' });
+            dataLayer.push({ 'event': 'cookies_disable' });
         }
     },
     onStatusChange: function(status, chosenBefore) {
@@ -46,11 +46,11 @@ window.cookieconsent.initialise({
         if (didConsent) {
             // Enable cookies
             console.log('Enable cookies');
-            dataLayer.push({ 'cookie_consent': 'true' });
+            dataLayer.push({ 'event': 'cookies_enable' });
         } else {
             // Disable cookies
             console.log('Disable cookies');
-            dataLayer.push({ 'cookie_consent': 'false' });
+            dataLayer.push({ 'event': 'cookies_disable' });
         }
     },
     onRevokeChoice: function() {
@@ -59,12 +59,12 @@ window.cookieconsent.initialise({
         if (type == 'opt-in' && didConsent) {
             // Enable cookies
             console.log('Disable cookies');
-            dataLayer.push({ 'cookie_consent': 'false' });
+            dataLayer.push({ 'event': 'cookies_disable' });
         }
         if (type == 'opt-out' && !didConsent) {
             // Disable cookies
             console.log('Enable cookies');
-            dataLayer.push({ 'cookie_consent': 'true' });
+            dataLayer.push({ 'event': 'cookies_enable' });
         }
     },
     "type": "opt-out",

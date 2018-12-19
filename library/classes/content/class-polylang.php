@@ -87,5 +87,10 @@ class WoodyTheme_Polylang
         __('Aucun résultat', 'woody-theme');
         __('Menu', 'woody-theme');
         __('Merci de choisir une date', 'woody-theme');
+        __('France', 'woody-theme');
+        __('Nouvelle Aquitaine', 'woody-theme');
+        __('Dordogne', 'woody-theme');
+        __('Comment venir ?', 'woody-theme');
+
     }
 }

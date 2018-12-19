@@ -112,7 +112,7 @@ class WoodyTheme_Enqueue_Assets
                 break;
             case 'preprod':
                 $jsModeSuffix = 'debug';
-                $apirender_base_uri = 'https://api.tourism-system.rc-preprod.com/render';
+                $apirender_base_uri = 'https://api.tourism-system.com/render';
                 break;
             default:
                 $jsModeSuffix = 'min';
