@@ -246,7 +246,12 @@ class WoodyTheme_ACF
             'sw_03' => 'blocks-novascotia-tpl_01'
         ];
 
-        $return = $teasers + $heroes + $sections + $lists_and_focuses + $galleries + $cta + $socialwalls;
+        $booking = [
+            'book_01' => 'blocks-booking-tpl_01',
+            'book_02' => 'blocks-booking-tpl_02',
+        ];
+
+        $return = $teasers + $heroes + $sections + $lists_and_focuses + $galleries + $cta + $socialwalls + $booking;
 
         return $return;
     }
