@@ -30,7 +30,12 @@ class WoodyTheme_Shortcodes
         $return = '';
 
         if (!empty($atts['ville'])) {
-            $vars = apply_filters('wp_woody_weather', $atts['ville']);
+            if (!empty($atts['jours'])) {
+                $vars = apply_filters('wp_woody_weather', ['token' => $atts['ville'], 'nb_days' => $atts['jours']]);
+            } else {
+                $vars = apply_filters('wp_woody_weather', ['token' => $atts['ville']]);
+            }
+
             $return = Timber::compile($this->twigPaths['woody_widgets-weather-tpl_01'], $vars);
         }
 
