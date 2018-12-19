@@ -6,8 +6,6 @@
  * @since WoodyTheme 1.0.0
  */
 
-use voku\helper\HtmlMin;
-
 class WoodyTheme_Cleanup_Minify
 {
     public function __construct()
