@@ -18,7 +18,6 @@ class WoodyTheme_Cleanup_Minify
     protected function registerHooks()
     {
         $minify_html_active = get_option('minify_html_active');
-        $minify_html_active = 'no';
         if (!(defined('WP_CLI') && WP_CLI) && $minify_html_active != 'no' && (!defined('DOING_AJAX') || !DOING_AJAX)) {
             add_action('init', [$this, 'minifyHtml'], 1);
         }
@@ -31,8 +30,11 @@ class WoodyTheme_Cleanup_Minify
 
     public function minifyHtmlOutput($buffer)
     {
+        // Supprime les commentaires HTML
         $buffer = preg_replace('/<!--(.|\s)*?-->/', '', $buffer);
-        $buffer = trim(preg_replace('/>\s+</', '><', $buffer));
+
+        // Supprime les espaces entre les balises html
+        //$buffer = trim(preg_replace('/>\s+</', '><', $buffer));
         return $buffer;
     }
 }
