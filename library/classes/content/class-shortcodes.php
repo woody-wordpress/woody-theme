@@ -29,8 +29,8 @@ class WoodyTheme_Shortcodes
     {
         $return = '';
 
-        if (!empty($atts['token'])) {
-            $vars = apply_filters('wp_woody_weather', $atts['token']);
+        if (!empty($atts['ville'])) {
+            $vars = apply_filters('wp_woody_weather', $atts['ville']);
             $return = Timber::compile($this->twigPaths['woody_widgets-weather-tpl_01'], $vars);
         }
 
