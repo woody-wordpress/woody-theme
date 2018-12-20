@@ -189,49 +189,54 @@
 
 // On ajoute des icones dans les tabs de contenu / En-tête / Mise en page
 // et on revoit le style des tabs
-.acf-fields>.acf-tab-wrap .acf-tab-group {
-    border-bottom: none !important;
-    padding-bottom: 10px;
-    &:not(.acf-hl){
-        display: flex;
+.acf-fields>.acf-tab-wrap{
+    &.-top{
+        .acf-tab-group{
+            display: flex;
+        }
     }
 
-    li {
-        margin-right: 0;
-        flex-grow: 1;
-        transition: .3s;
+    .acf-tab-group {
+        border-bottom: none !important;
+        padding-bottom: 10px;
 
-        a {
-            background-color: #23282d !important;
-            transition: .3s !important;
-            border: none !important;
-            font-weight: 500;
-            text-align: center;
-            color: #fff !important;
+        li {
+            margin-right: 0;
+            flex-grow: 1;
+            transition: .3s;
 
-            &:hover {
-                background-color: darken(#23282d, 10%) !important;
-            }
-
-            &:before {
-                display: inline-block;
-                padding-right: 7px;
-                font-family: 'dashicons';
-                font-weight: normal;
-                font-style: normal;
-                font-size: 16px;
-                transform: translateY(2px);
-            }
-        }
-
-        &.active {
             a {
-                padding-bottom: 5px !important;
-                background-color: #0073aa !important;
+                background-color: #23282d !important;
+                transition: .3s !important;
+                border: none !important;
+                font-weight: 500;
+                text-align: center;
                 color: #fff !important;
 
+                &:hover {
+                    background-color: darken(#23282d, 10%) !important;
+                }
+
                 &:before {
-                    color: #fff;
+                    display: inline-block;
+                    padding-right: 7px;
+                    font-family: 'dashicons';
+                    font-weight: normal;
+                    font-style: normal;
+                    font-size: 16px;
+                    transform: translateY(2px);
+                }
+            }
+
+            &.active {
+                a {
+                    padding-bottom: 5px !important;
+                    background-color: #0073aa !important;
+                    color: #fff !important;
+
+                    &:before {
+                        color: #fff;
+                    }
                 }
             }
         }
