@@ -117,6 +117,43 @@
                     ]
                 }
             ]
+        },
+        {
+            "key": "field_5c1b790f1233f",
+            "label": "Météo",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5c1b78e31233e",
+            "label": "Page météo",
+            "name": "weather_page_url",
+            "type": "page_link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "allow_archives": 1,
+            "multiple": 0
         }
     ],
     "location": [
@@ -136,5 +173,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1544792415
+    "modified": 1545304370
 }

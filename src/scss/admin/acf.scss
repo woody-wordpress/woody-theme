@@ -192,7 +192,9 @@
 .acf-fields>.acf-tab-wrap .acf-tab-group {
     border-bottom: none !important;
     padding-bottom: 10px;
-    display: flex;
+    &:not(.acf-hl){
+        display: flex;
+    }
 
     li {
         margin-right: 0;
