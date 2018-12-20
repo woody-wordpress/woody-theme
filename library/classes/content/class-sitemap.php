@@ -18,14 +18,17 @@ class WoodyTheme_SiteMap
         add_action('init', [$this, 'customRewriteRule'], 10, 0);
         add_action('after_setup_theme', [$this, 'reduceQueryLoad'], 99);
         add_action('template_redirect', [$this, 'getSitemap'], 1);
+        add_filter('query_vars', [$this, 'queryVars']);
+    }
+
+    public function queryVars($qvars)
+    {
+        $qvars[] = 'sitemap';
+        return $qvars;
     }
 
     public function customRewriteRule()
     {
-        global $wp;
-        $wp->add_query_var('sitemap');
-        $wp->add_query_var('page');
-
         add_rewrite_rule('sitemap\.xml$', 'index.php?sitemap=index', 'top');
         add_rewrite_rule('sitemap-([0-9]+)?\.xml$', 'index.php?sitemap=list&page=$matches[1]', 'top');
     }

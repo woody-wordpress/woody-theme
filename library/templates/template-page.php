@@ -283,7 +283,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
         // build query in validated array
         $query = filter_input_array($checkMethod, $checkAutoSelect, $add_non_existing = false);
-        $query_GQV = filter_var_array(['listpage' => get_query_var('listpage', 1)], $checkQueryVars);
+        $query_GQV = filter_input_array(INPUT_GET, $checkQueryVars, $add_non_existing = false);
+
         $query = array_merge((array)$query, $query_GQV);
         foreach ($query as $key => $param) {
             if (!$param) {
