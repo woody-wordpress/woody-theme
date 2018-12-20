@@ -676,6 +676,7 @@ function formatGeomapData($layout, $twigPaths)
  */
 function getCustomPreview($item)
 {
+
     $data = [];
     $data = [
         'title' => (!empty($item['title'])) ? $item['title'] : '',
@@ -683,12 +684,19 @@ function getCustomPreview($item)
         'subtitle' => (!empty($item['subtitle'])) ? $item['subtitle'] : '',
         'icon_type' => (!empty($item['icon_type'])) ? $item['icon_type'] : '',
         'woody_icon' => (!empty($item['woody_icon'])) ? $item['woody_icon'] : '',
+        'icon_img' => (!empty($item['icon_img']['url'])) ? [
+            'sizes' => [
+                'thumbnail' => $item['icon_img']['sizes']['thumbnail']
+            ],
+            'alt' =>  $item['icon_img']['alt'],
+
+        ] : '',
         'description' => (!empty($item['description'])) ? $item['description'] : '',
         'link' => [
             'url' => (!empty($item['link']['url'])) ? $item['link']['url'] : '',
             'title' => (!empty($item['link']['title'])) ? $item['link']['title'] : '',
             'target' => (!empty($item['link']['target'])) ? $item['link']['target'] : '',
-        ]
+        ],
     ];
 
     // On récupère le choix de média afin d'envoyer une image OU une vidéo
