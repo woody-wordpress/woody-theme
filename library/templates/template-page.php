@@ -267,7 +267,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $checkMethod = !empty($_POST) ? INPUT_POST : INPUT_GET;
         $checkQueryVars = [
             // page number (12 items by page)
-            'page'   => [
+            'listpage'   => [
                 'filter' => FILTER_VALIDATE_INT,
                 'flags'  => [FILTER_REQUIRE_SCALAR, FILTER_NULL_ON_FAILURE],
                 'options'   => ['min_range' => 1]
@@ -283,7 +283,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
         // build query in validated array
         $query = filter_input_array($checkMethod, $checkAutoSelect, $add_non_existing = false);
-        $query_GQV = filter_var_array(['page' => get_query_var('page', 1)], $checkQueryVars);
+        $query_GQV = filter_var_array(['listpage' => get_query_var('listpage', 1)], $checkQueryVars);
         $query = array_merge((array)$query, $query_GQV);
         foreach ($query as $key => $param) {
             if (!$param) {
