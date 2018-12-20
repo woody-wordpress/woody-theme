@@ -16,6 +16,15 @@ function getComponentItem($layout, $context)
         case 'content_list':
             $return = formatFullContentList($layout, $context['post'], $context['woody_components']);
         break;
+        case 'weather':
+            $vars['token'] = $layout['weather_account'];
+            $vars['nb_days'] = $layout['weather_count_days'];
+            $the_weather = apply_filters('wp_woody_weather', $vars);
+            $the_weather['bg_color'] = (!empty($layout['weather_bg_params']['background_color'])) ? $layout['weather_bg_params']['background_color']: '';
+            $the_weather['bg_img'] = $layout['weather_bg_img'];
+
+            $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_weather);
+        break;
         default:
             if ($layout['acf_fc_layout'] == 'playlist_bloc') {
                 $playlist_conf_id = $layout['playlist_conf_id'];
@@ -56,6 +65,13 @@ function getComponentItem($layout, $context)
                         }
                     }
                 }
+            }
+
+            if($layout['acf_fc_layout'] == 'weather'){
+                $vars['token'] = $layout['weather_account'];
+                $vars['nb_days'] = $layout['weather_count_days'];
+                $layout['weather'] = apply_filters('wp_woody_weather', $vars);
+                wd($layout, 'weather layout');
             }
 
             $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);

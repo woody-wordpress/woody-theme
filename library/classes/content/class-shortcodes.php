@@ -23,22 +23,6 @@ class WoodyTheme_Shortcodes
     }
 
     /** ***********************
-     * METEO
-     *********************** */
-    public function weatherShortCode($atts)
-    {
-        $return = '';
-
-        if (!empty($atts['ville'])) {
-            $atts['jours'] = (!empty($atts['jours'])) ? $atts['jours'] : null;
-            $vars = apply_filters('wp_woody_weather', ['token' => $atts['ville'], 'nb_days' => $atts['jours']]);
-            $return = Timber::compile($this->twigPaths['woody_widgets-weather-tpl_01'], $vars);
-        }
-
-        return $return;
-    }
-
-    /** ***********************
      * RECHERCHE
      *********************** */
     public function searchShortCode($atts)
