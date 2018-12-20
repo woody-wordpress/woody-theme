@@ -1,5 +1,5 @@
 <div class="woody-component-headnavs">
-    {% if lang_switcher|default %}
+    {% if lang_switcher|default or es_search_block|default  %}
         <ul class="tools list-unstyled flex-container align-middle show-for-xlarge">
             {% if es_search_block|default %}
                 <li>{{ es_search_block }}</li>

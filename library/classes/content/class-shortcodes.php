@@ -28,74 +28,11 @@ class WoodyTheme_Shortcodes
     public function weatherShortCode($atts)
     {
         $return = '';
-        $vars = $this->getWeather($atts);
 
-        if (!empty($atts['fond'])) {
-            $vars['bg_color'] = $atts['fond'];
-        }
-
-        $return = Timber::compile($this->twigPaths['woody_widgets-weather-tpl_01'], $vars);
-        return $return;
-    }
-
-    private function getWeather($atts)
-    {
-        $return = [];
-
-        // $atts diuspoanibles : fond, images, localite
-
-        $today = date('l d M', strtotime('now'));
-        for ($i=0; $i < 4 ; $i++) {
-            $return['days'][] = [
-                'date' => date('l d M', strtotime('+ ' . $i . ' days'))
-            ];
-        }
-
-        if (!empty($atts['images'])) {
-            $imgs = [
-            WP_DIST_URL . '/img/plugins/weather/stormy.jpg',
-            WP_DIST_URL . '/img/plugins/weather/snowy.jpg',
-            WP_DIST_URL . '/img/plugins/weather/rainy.jpg',
-            WP_DIST_URL . '/img/plugins/weather/cloudy.jpg'
-        ];
-        }
-
-        // Test icones
-        $icons = ['climacon-storm', 'climacon-cloud-snow', 'climacon-cloud-rain', 'climacon-cloud'];
-
-        foreach ($return['days'] as $day_key => $day) {
-            $return['days'][$day_key]['summary'] = [
-            'sky' => 'nuageux',
-            'icon' => $icons[$day_key],
-            'img' => (!empty($imgs)) ? $imgs[$day_key] : '',
-            'average_temp' => '13',
-            'min_temp' => '12',
-            'max_temp' => '13',
-            'wind' => '18',
-            'humidity' => '97'
-        ];
-            $return['days'][$day_key]['details'] = [
-            'midnight' => [
-                'sky' => 'pluie',
-                'icon' => 'climacon-cloud-rain',
-                'temp' => '11'
-            ],
-            'morning' => [
-                'sky' => 'nuageux',
-                'icon' => 'climacon-cloud',
-                'temp' => '12'
-            ],
-            'afternoon' => [
-                'sky' => 'nuageux',
-                'icon' => 'climacon-cloud',
-                'temp' => '13'
-            ],
-            'evening' => [
-                'sky' => 'nuageux',
-                'icon' => 'climacon-cloud',
-                'temp' => '11'
-            ]
-        ];
+        if (!empty($atts['ville'])) {
+            $atts['jours'] = (!empty($atts['jours'])) ? $atts['jours'] : null;
+            $vars = apply_filters('wp_woody_weather', ['token' => $atts['ville'], 'nb_days' => $atts['jours']]);
+            $return = Timber::compile($this->twigPaths['woody_widgets-weather-tpl_01'], $vars);
         }
 
         return $return;
