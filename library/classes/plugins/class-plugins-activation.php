@@ -73,7 +73,7 @@ class WoodyTheme_Plugins_Activation
 
             case 'prod':
                 // Enable
-                $this->activate_plugins[] = 'vcaching/vcaching.php';
+                $this->deactivate_plugins[] = 'vcaching/vcaching.php';
 
                 // Disable
                 $this->deactivate_plugins[] = 'query-monitor/query-monitor.php';
