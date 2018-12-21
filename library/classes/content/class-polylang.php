@@ -166,5 +166,6 @@ class WoodyTheme_Polylang
         __('Nouvelle Aquitaine', 'woody-theme');
         __('Dordogne', 'woody-theme');
         __('Comment venir ?', 'woody-theme');
+        __('Voici des pages qui pourraient vous intéresser', 'woody-theme');
     }
 }
