@@ -50,7 +50,6 @@ class WoodyTheme_ACF
         add_filter('acf/location/rule_match/page_type_and_children', [$this, 'woodyAcfPageTypeMatch'], 10, 3);
 
         add_filter('acf/load_field/name=weather_account', [$this, 'weatherAccountAcfLoadField'], 10, 3);
-
     }
 
     /**
@@ -532,7 +531,8 @@ class WoodyTheme_ACF
         return $field;
     }
 
-    public function weatherAccountAcfLoadField($field){
+    public function weatherAccountAcfLoadField($field)
+    {
         $field['choices'] = apply_filters('wp_woody_weather_accounts', $field['choices']);
         return $field;
     }

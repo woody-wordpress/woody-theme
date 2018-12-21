@@ -67,7 +67,7 @@ function getComponentItem($layout, $context)
                 }
             }
 
-            if($layout['acf_fc_layout'] == 'weather'){
+            if ($layout['acf_fc_layout'] == 'weather') {
                 $vars['token'] = $layout['weather_account'];
                 $vars['nb_days'] = $layout['weather_count_days'];
                 $layout['weather'] = apply_filters('wp_woody_weather', $vars);
@@ -507,9 +507,9 @@ function formatFullContentList($layout, $current_post, $twigPaths)
         $the_filtered_items['display_button'] = (!empty($layout['the_list_elements']['list_el_req_fields']['display_button'])) ? $layout['the_list_elements']['list_el_req_fields']['display_button'] : '';
 
         $the_list['the_grid'] =  Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_filtered_items);
-        if(!empty($the_filtered_items['wp_query']) && !empty($the_filtered_items['wp_query']->found_posts)){
+        if (!empty($the_filtered_items['wp_query']) && !empty($the_filtered_items['wp_query']->found_posts)) {
             $the_list['items_count'] = $the_filtered_items['wp_query']->found_posts;
-            if($the_list['items_count'] > 1){
+            if ($the_list['items_count'] > 1) {
                 $the_list['items_count_type'] = 'plural';
             } else {
                 $the_list['items_count_type'] = 'singular';
@@ -518,15 +518,15 @@ function formatFullContentList($layout, $current_post, $twigPaths)
             $the_list['items_count_type'] = 'empty';
         }
 
-        if(empty($the_filtered_items['max_num_pages'])){
+        if (empty($the_filtered_items['max_num_pages'])) {
             $the_filtered_items['max_num_pages'] = 1;
         }
         $max_num_pages = $the_filtered_items['max_num_pages'] ;
     } else {
         $the_list['the_grid'] =  Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_items);
-        if(!empty($the_items['wp_query']) && !empty($the_items['wp_query']->found_posts)){
+        if (!empty($the_items['wp_query']) && !empty($the_items['wp_query']->found_posts)) {
             $the_list['items_count'] = $the_items['wp_query']->found_posts;
-            if($the_list['items_count'] > 1){
+            if ($the_list['items_count'] > 1) {
                 $the_list['items_count_type'] = 'plural';
             } else {
                 $the_list['items_count_type'] = 'singular';
@@ -534,7 +534,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
         } else {
             $the_list['items_count_type'] = 'empty';
         }
-        if(empty($the_items['max_num_pages'])){
+        if (empty($the_items['max_num_pages'])) {
             $the_items['max_num_pages'] = 1;
         }
         $max_num_pages = $the_items['max_num_pages'] ;
@@ -553,7 +553,6 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     }
 
     if (!empty($layout['the_list_pager']) && $layout['the_list_pager']['list_pager_type'] != 'none') {
-
         $items_by_page = (!empty($layout['the_list_elements']['list_el_req_fields']['focused_count'])) ? $layout['the_list_elements']['list_el_req_fields']['focused_count'] : 16 ;
         $the_list['pager'] = formatListPager($layout['the_list_pager'], $max_num_pages, $the_list['uniqid']);
         $the_list['pager_position'] = $layout['the_list_pager']['list_pager_position'];
@@ -570,7 +569,7 @@ function creatListMapFilter($current_post, $layout, $paginate, $filters, $twigPa
             if (is_numeric($key)) {
                 if ($filter['list_filter_type'] == 'map') {
                     $every_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields'], $paginate, $layout['uniqid'], true);
-                    if(!empty($every_items['items'])){
+                    if (!empty($every_items['items'])) {
                         foreach ($every_items['items'] as $item) {
                             if (!empty($item['location']['lat']) && !empty($item['location']['lng'])) {
                                 $the_marker = [
@@ -675,7 +674,6 @@ function formatGeomapData($layout, $twigPaths)
  */
 function getCustomPreview($item)
 {
-
     $data = [];
     $data = [
         'title' => (!empty($item['title'])) ? $item['title'] : '',
