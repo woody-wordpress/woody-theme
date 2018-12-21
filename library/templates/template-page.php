@@ -63,11 +63,27 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
     protected function page404Context()
     {
+        global $wp;
+        $segments = explode('/', $wp->request);
+        $last_segment = end($segments);
+        $query = str_replace('-', ' ', $last_segment);
+        $response = apply_filters('wp_woody_pages_search', ['query' => $query, 'size' => 4]);
+
+        if (!empty($response['posts'])) {
+            foreach ($response['posts'] as $post_id) {
+                $post_id = explode('_', $post_id);
+                $post_id = end($post_id);
+                $post = Timber::get_post($post_id);
+                $suggestions[] = getPagePreview(['display_elements' => ['description'], 'display_button' => true], $post);
+            }
+        }
+
         $this->context['content'] = [
             'title' => __("Oups !", 'woody-theme'),
             'subtitle' => '404 - ' . __("Page non trouvée", 'woody-theme'),
             'text' => __("La page que vous recherchez a peut-être été supprimée ou est temporairement indisponible.", 'woody-theme'),
             'btn' => __("Aller à la page d'accueil", 'woody-theme'),
+            'suggestions' => $suggestions
         ];
     }
 

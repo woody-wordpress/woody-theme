@@ -8,15 +8,30 @@
                 {{ website_logo|default('Website logo') }}
             </a>
         </div>
-
-        <div class="page-section">
-            <div style="margin: 40px 0; width: 100%; text-align: center;">
-                <h1>{{ content.title }}</h1>
-                <h2>{{ content.subtitle }}</h2>
-                <p>{{ content.text }}</p>
-                {# TODO: URL de la page d'accueil à modifier en fonction de la langue #}
-                <p><a class="btn btn-primary" href="/">{{ content.btn }}</a></p>
+        <div class="page-section text-center">
+            <h1 class="msg404">{{ content.title }}</h1>
+            <h2 class="msg404">{{ content.subtitle }}</h2>
+            <p>{{ content.text }}</p>
+            {# TODO: URL de la page d'accueil à modifier en fonction de la langue #}
+            {% if content.suggestions|default %}
+            <div class="suggestions marg-top-lg padd-top-md padd-bottom-md bg-lightgray">
+                <div class="grid-container">
+                    <h3 class="marg-bottom-lg">{{ __('Voici des pages qui pourraient vous intéresser', 'woody-theme') }}</h3>
+                    <div class="grid-x grid-padding-x medium-up-2 xlarge-up-4">
+                        {% for post in content.suggestions %}
+                            <div class="cell">
+                                {% include "cards/basic_card/tpl_01/tpl.twig" with {
+                                    'item' : post,
+                                    'image_style' : 'ratio_2_1',
+                                    'page_type' : item.page_type
+                                } %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
+            {% endif %}
+            <a class="button marg-top-md marg-bottom-md" href="/">{{ content.btn }}</a>
         </div>
     </div>
 </main>
