@@ -145,7 +145,7 @@ abstract class WoodyTheme_TemplateAbstract
 
         // Get polylang languages
         $languages = pll_the_languages(array(
-            'display_names_as'       => 'slug',
+            'display_names_as'       => 'name',
             'hide_if_no_translation' => 0,
             'raw'                    => true
         ));
@@ -154,9 +154,12 @@ abstract class WoodyTheme_TemplateAbstract
             foreach ($languages as $language) {
                 if (!empty($language['current_lang'])) {
                     $data['current_lang'] = $language['slug'];
+                    $data['langs']['_current']['url'] = $language['url'] . $output_params;
+                    $data['langs']['_current']['name'] = $language['name'];
+                    $data['langs']['_current']['no_translation'] = $language['no_translation'];
                 } else {
-                    // $data['langs'][$language['slug']]['id'] = $language['id'];
                     $data['langs'][$language['slug']]['url'] = $language['url'] . $output_params;
+                    $data['langs'][$language['slug']]['name'] = $language['name'];
                     $data['langs'][$language['slug']]['no_translation'] = $language['no_translation'];
                 }
             }

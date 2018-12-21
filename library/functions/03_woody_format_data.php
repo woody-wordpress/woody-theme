@@ -71,7 +71,6 @@ function getComponentItem($layout, $context)
                 $vars['token'] = $layout['weather_account'];
                 $vars['nb_days'] = $layout['weather_count_days'];
                 $layout['weather'] = apply_filters('wp_woody_weather', $vars);
-                wd($layout, 'weather layout');
             }
 
             $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
