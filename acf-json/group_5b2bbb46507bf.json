@@ -1,7 +1,8 @@
 {
     "key": "group_5b2bbb46507bf",
     "title": "En-tête de page",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5b2bc0e256db0",
             "label": "Contenu",
             "name": "",
@@ -179,11 +180,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b44bfc2e2e21",
-                    "operator": "==",
-                    "value": "1"
-                }]
+                [
+                    {
+                        "field": "field_5b44bfc2e2e21",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "50",
@@ -211,7 +214,8 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
+                [
+                    {
                         "field": "field_5b44b9b274494",
                         "operator": "==",
                         "value": "img"
@@ -247,7 +251,8 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
+                [
+                    {
                         "field": "field_5b44bfc2e2e21",
                         "operator": "==",
                         "value": "1"
@@ -275,7 +280,8 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
+                [
+                    {
                         "field": "field_5b44b9b274494",
                         "operator": "==",
                         "value": "widget"
@@ -306,7 +312,8 @@
             "instructions": "Vous pouvez choisir un zoom entre \"5\" et \"20\" (5 étant très éloigné \/ 20 étant très proche)",
             "required": 0,
             "conditional_logic": [
-                [{
+                [
+                    {
                         "field": "field_5b44b9b274494",
                         "operator": "==",
                         "value": "map"
@@ -368,21 +375,23 @@
             "hide_collapse": 1,
             "collapse_all_repeater": 0,
             "btn-icon-only": 0,
-            "sub_fields": [{
-                "key": "field_5b2bbe1388b36",
-                "label": "Bouton",
-                "name": "button",
-                "type": "link",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "return_format": "array"
-            }]
+            "sub_fields": [
+                {
+                    "key": "field_5b2bbe1388b36",
+                    "label": "Bouton",
+                    "name": "button",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array"
+                }
+            ]
         },
         {
             "key": "field_5b2bc10f56db2",
@@ -401,6 +410,23 @@
             "endpoint": 0
         },
         {
+            "key": "field_5c1ce3c9fe5df",
+            "label": "Template",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 1,
+            "multi_expand": 1,
+            "endpoint": 0
+        },
+        {
             "key": "field_5b2bc0f256db1",
             "label": "Template",
             "name": "page_teaser_woody_tpl",
@@ -410,20 +436,16 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-label",
                 "id": ""
             },
-            "choices": {
-                "blocks-page_teaser-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/page_teaser\/tpl_03\/thumbnail.png?version=1.9.0\" alt=\"blocks-page_teaser-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">En tête de page - Template 3<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">En tête de page - Template 3<\/h4>Affiche les infos indispensables d'une page : titre + desc + social shares + ajout aux favoris + image\/video ou widget à droite<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-page_teaser-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/page_teaser\/tpl_02\/thumbnail.png?version=1.9.0\" alt=\"blocks-page_teaser-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">En tête de page - Template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">En tête de page - Template 2<\/h4>Affiche les infos indispensables d'une page alignées au centre : titre + desc + social shares + ajout aux favoris<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-page_teaser-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/page_teaser\/tpl_01\/thumbnail.png?version=1.9.0\" alt=\"blocks-page_teaser-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">En tête de page - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">En tête de page - Template 1<\/h4>Affiche les infos indispensables d'une page alignées à gauche : titre + desc + social shares + ajout aux favoris<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-            },
+            "choices": {},
             "allow_null": 0,
             "other_choice": 0,
-            "save_other_choice": 0,
             "default_value": "",
             "layout": "vertical",
-            "return_format": "value"
+            "return_format": "value",
+            "save_other_choice": 0
         },
         {
             "key": "field_5b681e0f93118",
@@ -439,7 +461,7 @@
                 "id": ""
             },
             "open": 0,
-            "multi_expand": 0,
+            "multi_expand": 1,
             "endpoint": 0
         },
         {
@@ -489,7 +511,8 @@
         }
     ],
     "location": [
-        [{
+        [
+            {
                 "param": "post_type",
                 "operator": "==",
                 "value": "page"
@@ -509,5 +532,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Les infos principales de la page + la possibilité d'ajouter les liens de partage et d'ajout aux favoris",
-    "modified": 1540890900
+    "modified": 1545397238
 }

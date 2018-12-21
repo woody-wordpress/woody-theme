@@ -54,6 +54,23 @@
             "endpoint": 0
         },
         {
+            "key": "field_5c1ce35a071e8",
+            "label": "Template",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 1,
+            "multi_expand": 1,
+            "endpoint": 0
+        },
+        {
             "key": "field_5b0e8fcf3447b",
             "label": "Template",
             "name": "woody_tpl",
@@ -67,7 +84,6 @@
                 "id": ""
             },
             "choices": {
-                "blocks-custom_text-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/custom_text\/tpl_01\/thumbnail.png?version=1.7.6\" alt=\"blocks-custom_text-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Texte<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Texte<\/h4>Affiche une en-tête et le contenu de l'éditeur visuel<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -90,7 +106,7 @@
                 "id": ""
             },
             "open": 0,
-            "multi_expand": 0,
+            "multi_expand": 1,
             "endpoint": 0
         },
         {
@@ -128,7 +144,7 @@
                 "id": ""
             },
             "open": 0,
-            "multi_expand": 0,
+            "multi_expand": 1,
             "endpoint": 0
         },
         {
@@ -170,5 +186,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Editeur wysiwyg \/ code html",
-    "modified": 1539852808
+    "modified": 1545397118
 }
