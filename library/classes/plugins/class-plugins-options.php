@@ -472,7 +472,7 @@ class WoodyTheme_Plugins_Options
         if ((WP_SITE_KEY == 'crt-bretagne' || WP_SITE_KEY == 'broceliande') && WP_ENV == 'prod') {
             update_option('varnish_caching_ips', '10.75.10.13:6081', '', 'yes');
         } else {
-            update_option('varnish_caching_ips', (WP_ENV == 'prod') ? 'wpv1.rc.prod' : '127.0.0.1:80', '', 'yes');
+            update_option('varnish_caching_ips', (WP_ENV == 'prod') ? 'wpv1.rc.prod:80' : '127.0.0.1:80', '', 'yes');
         }
         update_option('varnish_caching_purge_key', 'l6ka6sb3hff9fzhx4h2qa38iqgyedznou5hawcj4rgfxlvx9m69zyqtz78yfsmws', '', 'yes');
         update_option('varnish_caching_cookie', 'y0ecy4qrkcw5rkfdyxyuf9dsoi62omz5fnpkdou8er5xcfeg7hvkqskyn7ps961j', '', 'yes');
