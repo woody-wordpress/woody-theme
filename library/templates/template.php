@@ -192,7 +192,6 @@ abstract class WoodyTheme_TemplateAbstract
         $template = $this->context['woody_components']['woody_widgets-lang_switcher-tpl_01'];
         $this->context['lang_switcher'] = Timber::compile($template, $data);
         $this->context['lang_switcher_mobile'] = Timber::compile($template, $data);
-
     }
 
     private function addEsSearchBlock()
@@ -227,6 +226,5 @@ abstract class WoodyTheme_TemplateAbstract
         $template = $this->context['woody_components']['woody_widgets-es_search_block-tpl_01'];
         $this->context['es_search_block'] = Timber::compile($template, $data);
         $this->context['es_search_block_mobile'] = Timber::compile($template, $data);
-
     }
 }

@@ -87,7 +87,7 @@ class WoodyTheme_Template_Sitemap
             $languages = pll_current_language();
         }
 
-        $query = new WP_Query([
+        $query = new \WP_Query([
             'post_type' => ['page', 'touristic_sheet'],
             'orderby' => 'menu_order',
             'order'   => 'DESC',

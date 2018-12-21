@@ -99,7 +99,7 @@ class WoodyTheme_ACF_Counter
                 }
 
                 // It wasn't there, so regenerate the data and save the transient
-                $focused_posts = new WP_Query($the_query);
+                $focused_posts = new \WP_Query($the_query);
                 $return = $focused_posts->post_count;
                 set_transient($transient_key, $return, 2*60);
             }
