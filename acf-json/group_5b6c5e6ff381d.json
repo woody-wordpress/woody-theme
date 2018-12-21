@@ -421,6 +421,23 @@
             "endpoint": 0
         },
         {
+            "key": "field_5c1ce41be7e07",
+            "label": "Template",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 1,
+            "multi_expand": 1,
+            "endpoint": 0
+        },
+        {
             "key": "field_5b6d616a9fe7f",
             "label": "Template",
             "name": "tripinfos_woody_tpl",
@@ -430,13 +447,10 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-label",
                 "id": ""
             },
-            "choices": {
-                "blocks-trip_infos-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.crt-bretagne.wp.rc-dev.com\/app\/dist\/crt-bretagne\/img\/woody-library\/views\/blocks\/trip_infos\/tpl_02\/thumbnail.png\" alt=\"blocks-trip_infos-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Infos séjour - Template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Infos séjour - Template 2<\/h4>Affiche le prix et la durée d'un séjour - Centrés l'un sur l'autre<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-trip_infos-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.crt-bretagne.wp.rc-dev.com\/app\/dist\/crt-bretagne\/img\/woody-library\/views\/blocks\/trip_infos\/tpl_01\/thumbnail.png\" alt=\"blocks-trip_infos-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Infos séjour - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Infos séjour - Template 1<\/h4>Affiche le prix et la durée d'un séjour - Centrés l'un sur l'autre<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-            },
+            "choices": {},
             "allow_null": 0,
             "other_choice": 0,
             "default_value": "",
@@ -458,7 +472,7 @@
                 "id": ""
             },
             "open": 0,
-            "multi_expand": 0,
+            "multi_expand": 1,
             "endpoint": 0
         },
         {
@@ -504,5 +518,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Affiche le prix et la duré d'un séjour",
-    "modified": 1537457766
+    "modified": 1545397306
 }

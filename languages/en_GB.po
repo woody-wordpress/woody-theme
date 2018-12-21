@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.4.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2018-12-21T11:38:50+01:00\n"
-"PO-Revision-Date: 2018-12-21 11:39+0100\n"
+"POT-Creation-Date: 2018-12-21T13:34:19+01:00\n"
+"PO-Revision-Date: 2018-12-21 13:35+0100\n"
 "Last-Translator: POIROUX Léo <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -272,18 +272,18 @@ msgid "Comment venir ?"
 msgstr "How to get here?"
 
 #: library/classes/content/class-polylang.php:169
-msgid "Voici des pages qui pourraient vous intéresser"
-msgstr "Here are some pages that might interest you"
+msgid "La page que vous recherchez est peut-être ici ?"
+msgstr "Maybe the page you are looking for is here ?"
 
-#: library/templates/template-page.php:88
+#: library/templates/template-page.php:82
 msgid "Oups !"
 msgstr "Oops!"
 
-#: library/templates/template-page.php:89
+#: library/templates/template-page.php:83
 msgid "Page non trouvée"
 msgstr "Page not found"
 
-#: library/templates/template-page.php:90
+#: library/templates/template-page.php:84
 msgid ""
 "La page que vous recherchez a peut-être été supprimée ou est temporairement "
 "indisponible."
@@ -291,6 +291,9 @@ msgstr ""
 "The page you are looking for might have been removed had its name changed or "
 "is temporarily unavailable."
 
-#: library/templates/template-page.php:91
+#: library/templates/template-page.php:85
 msgid "Aller à la page d'accueil"
 msgstr "Go to homepage"
+
+#~ msgid "Voici des pages qui pourraient vous intéresser"
+#~ msgstr "Here are some pages that might interest you"
