@@ -12,7 +12,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "hide-label",
+                "class": "hide-label collapsing-rows",
                 "id": ""
             },
             "collapsed": "field_5b0d1dc8907e7",
@@ -20,9 +20,6 @@
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter une section",
-            "hide_collapse": 0,
-            "collapse_all_repeater": 1,
-            "btn-icon-only": 0,
             "sub_fields": [
                 {
                     "key": "field_5b0d1dc8907e7",
@@ -69,7 +66,7 @@
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
-                        "class": "hide-label",
+                        "class": "hide-label collapsing-rows",
                         "id": ""
                     },
                     "layouts": {
@@ -1000,5 +997,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1545397404
+    "modified": 1546589696
 }

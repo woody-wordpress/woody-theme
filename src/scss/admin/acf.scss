@@ -568,3 +568,46 @@
 .acf-tooltip > ul > li > a[data-layout="slides_group"]{
     display:none;
 }
+
+.acf-field.collapsing-rows{
+    padding-top: 48px !important;
+    .woodyRowsCollapse{
+        position: absolute;
+        right:12px;
+        top:12px;
+        background-color: rgba(#000, .03);
+        border-radius:50px;
+        color: #373c42;
+        border:none;
+        padding:0 0 0 15px;
+        display: inline-flex;
+        align-items: center;
+        font-size: 10px;
+        font-weight: 500;
+        cursor:pointer;
+        transition: background-color .3s;
+        .dashicons{
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            color: #23282d;
+            margin-left: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .3s;
+            &:before{
+                transform: translateX(-1px);
+            }
+        }
+        &:hover,
+        &focus{
+            outline: none;
+            background-color: rgba(#000, .07);
+            .dashicons{
+                background-color: #0073aa;
+                color: #fff;
+            }
+        }
+    }
+}
