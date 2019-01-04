@@ -189,7 +189,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     $pl_confId = get_field('field_5b338ff331b17', $pl['pl_post_id']);
                     if (!empty($pl_confId)) {
                         $pl_lang = pll_get_post_language($pl['pl_post_id']);
-                        $pl_params = apply_filters('wp_woody_hawwwai_playlist_render', $pl_confId, $pl_lang, array(), 'json');
+                        $pl_params = apply_filters('woody_hawwwai_playlist_render', $pl_confId, $pl_lang, array(), 'json');
                         $facets = (!empty($pl_params['filters'])) ? $pl_params['filters'] : '';
                         if (!empty($facets)) {
                             foreach ($facets as $facet) {
@@ -309,7 +309,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         }
 
         // Get from Apirender
-        $this->context['playlist_tourism'] = apply_filters('wp_woody_hawwwai_playlist_render', $playlistConfId, pll_current_language(), $query);
+        $this->context['playlist_tourism'] = apply_filters('woody_hawwwai_playlist_render', $playlistConfId, pll_current_language(), $query);
 
         // save confId
         if (!empty($playlistConfId) && is_array($this->context['playlist_tourism'])) {

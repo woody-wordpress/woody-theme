@@ -327,7 +327,7 @@ function getAutoFocusSheetData($layout)
 {
     $items = [];
     $confId = $layout['playlist_conf_id'];
-    $playlist = apply_filters('wp_woody_hawwwai_playlist_render', $confId, 'fr', array(), 'json');
+    $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, 'fr', array(), 'json');
     if (!empty($playlist['items'])) {
         foreach ($playlist['items'] as $key => $item) {
             $items['items'][] = getTouristicSheetPreview($layout, $item['sheetId']);
@@ -723,7 +723,7 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
     $data = [];
     $lang = pll_current_language();
 
-    $sheet_data = apply_filters('wp_woody_hawwwai_sheet_render', $sheet_id, $lang, array(), 'json', 'item');
+    $sheet_data = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $lang, array(), 'json', 'item');
     if (!empty($sheet_data['items'])) {
         foreach ($sheet_data['items'] as $key => $item) {
             $data = [
