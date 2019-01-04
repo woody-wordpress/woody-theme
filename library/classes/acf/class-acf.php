@@ -52,7 +52,8 @@ class WoodyTheme_ACF
         add_filter('acf/load_field/name=weather_account', [$this, 'weatherAccountAcfLoadField'], 10, 3);
 
         // TODO : récuperer variable station de l'ERP
-        $stations = ['hautemaurienne', 'champsaur-valgaudemar', 'superot'];
+        $stations = ['superot'];
+        // $stations = ['hautemaurienne', 'champsaur-valgaudemar'];
 
         if(!(in_array(WP_SITE_KEY, $stations))) {
             add_filter('acf/load_field/name=section_content', [$this, 'sectionContentAcfLoadField'], 10, 3);
