@@ -18,7 +18,7 @@ class WoodyTheme_Varnish
         add_filter('vcaching_purge_urls', [$this, 'vcachingPurgeUrls'], 10, 1);
     }
 
-    public function vcachingPurgeUrls($purge_urls = [], $postId)
+    public function vcachingPurgeUrls($purge_urls = [])
     {
         foreach ($purge_urls as $key => $url) {
             if (strpos($url, '/author/') !== false || strpos($url, '/feed/') !== false) {
