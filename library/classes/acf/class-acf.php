@@ -50,6 +50,14 @@ class WoodyTheme_ACF
         add_filter('acf/location/rule_match/page_type_and_children', [$this, 'woodyAcfPageTypeMatch'], 10, 3);
 
         add_filter('acf/load_field/name=weather_account', [$this, 'weatherAccountAcfLoadField'], 10, 3);
+
+        // TODO : récuperer variable station de l'ERP
+        $stations = ['superot'];
+        // $stations = ['hautemaurienne', 'champsaur-valgaudemar'];
+
+        if(!(in_array(WP_SITE_KEY, $stations))) {
+            add_filter('acf/load_field/name=section_content', [$this, 'sectionContentAcfLoadField'], 10, 3);
+        }
     }
 
     /**
@@ -535,6 +543,14 @@ class WoodyTheme_ACF
     public function weatherAccountAcfLoadField($field)
     {
         $field['choices'] = apply_filters('wp_woody_weather_accounts', $field['choices']);
+        return $field;
+    }
+
+    public function sectionContentAcfLoadField($field)
+    {
+        // info neige
+        unset($field['layouts']['layout_5c2cde6f6db28']);
+
         return $field;
     }
 

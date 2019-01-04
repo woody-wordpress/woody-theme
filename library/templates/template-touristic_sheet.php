@@ -51,7 +51,7 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
             $this->context['apiLogin'] = $credentials['public_login'];
             $this->context['apiPassword'] = $credentials['public_password'];
         } else {
-            print_r('No API wp_woody_hawwwai_sheet_render set');
+            print_r('No API woody_hawwwai_sheet_render set');
             exit;
         }
 
@@ -64,7 +64,7 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
         //     $params['season'] = $season;
         // }
 
-        $this->context['sheet_tourism'] = apply_filters('wp_woody_hawwwai_sheet_render', $sheet_id, $sheet_lang, $params);
+        $this->context['sheet_tourism'] = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $sheet_lang, $params);
 
         // Set METAS
 

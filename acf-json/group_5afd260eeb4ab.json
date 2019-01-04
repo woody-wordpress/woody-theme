@@ -20,6 +20,9 @@
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter une section",
+            "hide_collapse": 0,
+            "collapse_all_repeater": 1,
+            "btn-icon-only": 0,
             "sub_fields": [
                 {
                     "key": "field_5b0d1dc8907e7",
@@ -627,6 +630,37 @@
                             ],
                             "min": "",
                             "max": ""
+                        },
+                        "layout_5c2cde6f6db28": {
+                            "key": "layout_5c2cde6f6db28",
+                            "name": "snow_info",
+                            "label": "Info neige",
+                            "display": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_5c2cde926db29",
+                                    "label": "Info neige",
+                                    "name": "snow_info",
+                                    "type": "clone",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "clone": [
+                                        "group_5c2cdd1f23b46"
+                                    ],
+                                    "display": "seamless",
+                                    "layout": "block",
+                                    "prefix_label": 0,
+                                    "prefix_name": 0
+                                }
+                            ],
+                            "min": "",
+                            "max": ""
                         }
                     },
                     "button_label": "Ajouter un bloc",
@@ -997,5 +1031,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1546589696
+    "modified": 1546444489
 }

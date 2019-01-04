@@ -30,7 +30,7 @@ class WoodyTheme_Shortcodes
         $query = filter_input(INPUT_GET, 'query', FILTER_SANITIZE_STRING);
 
         // Search inside pages
-        $pages_response = apply_filters('wp_woody_pages_search', ['query' => $query]);
+        $pages_response = apply_filters('woody_pages_search', ['query' => $query]);
 
         $result = [];
         $result['query'] = $query;
@@ -52,7 +52,7 @@ class WoodyTheme_Shortcodes
         }
 
         // Search inside sheets
-        $sheets_response = apply_filters('wp_woody_hawwwai_sheets_search', ['query' => $query]);
+        $sheets_response = apply_filters('woody_hawwwai_sheets_search', ['query' => $query]);
 
         $result['posts']['touristic_sheets'] = [];
         if (!empty($sheets_response['sheets'])) {
