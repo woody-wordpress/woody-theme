@@ -199,16 +199,19 @@ abstract class WoodyTheme_TemplateAbstract
     {
         $data = [];
 
-        $data['search_url'] = get_field('es_search_page_url', 'option');
-        if (empty($data['search_url'])) {
+        $search_post_id = get_field('es_search_page_url', 'option');
+
+        if (empty($search_post_id)) {
             return;
         }
+
+        $data['search_url'] = get_permalink(pll_get_post($search_post_id));
 
         $suggest = get_field('es_search_block_suggests', 'option');
         if (!empty($suggest) && !empty($suggest['suggest_pages'])) {
             $data['suggest']['title'] = (!empty($suggest['suggest_title'])) ? $suggest['suggest_title'] : '';
             foreach ($suggest['suggest_pages'] as $page) {
-                $post = Timber::get_post($page['suggest_page']);
+                $post = Timber::get_post(pll_get_post($page['suggest_page']));
                 $data['suggest']['pages'][] = getPagePreview('', $post);
             }
         }

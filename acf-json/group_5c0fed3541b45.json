@@ -22,8 +22,8 @@
             "key": "field_5c0fed703ca3e",
             "label": "Page de recherche",
             "name": "es_search_page_url",
-            "type": "page_link",
-            "instructions": "",
+            "type": "post_object",
+            "instructions": "Si la page est traduite, les traductions seront automatiquement utilisées pour les langues correspondantes",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -36,15 +36,16 @@
             ],
             "taxonomy": "",
             "allow_null": 0,
-            "allow_archives": 0,
-            "multiple": 0
+            "multiple": 0,
+            "return_format": "id",
+            "ui": 1
         },
         {
             "key": "field_5c10c01f62d6b",
             "label": "Suggestions de recherche",
             "name": "es_search_block_suggests",
             "type": "group",
-            "instructions": "Ces suggestions seront affichées sous le formulaire de recherche, dans le bloc commun à toutes les pages",
+            "instructions": "Ces suggestions seront affichées sous le formulaire de recherche, dans le bloc commun à toutes les pages\r\nSi les pages sont traduites, les traductions seront automatiquement utilisées pour les langues correspondantes",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -139,7 +140,7 @@
             "label": "Page météo",
             "name": "weather_page_url",
             "type": "page_link",
-            "instructions": "",
+            "instructions": "Si la page est traduite, les traductions seront automatiquement utilisées pour les langues correspondantes",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -173,5 +174,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1545304370
+    "modified": 1546851206
 }
