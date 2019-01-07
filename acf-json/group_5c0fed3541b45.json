@@ -139,7 +139,7 @@
             "key": "field_5c1b78e31233e",
             "label": "Page météo",
             "name": "weather_page_url",
-            "type": "page_link",
+            "type": "post_object",
             "instructions": "Si la page est traduite, les traductions seront automatiquement utilisées pour les langues correspondantes",
             "required": 0,
             "conditional_logic": 0,
@@ -153,8 +153,9 @@
             ],
             "taxonomy": "",
             "allow_null": 0,
-            "allow_archives": 1,
-            "multiple": 0
+            "multiple": 0,
+            "return_format": "id",
+            "ui": 1
         }
     ],
     "location": [
@@ -174,5 +175,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1546851206
+    "modified": 1546851350
 }
