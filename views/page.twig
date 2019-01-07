@@ -18,9 +18,20 @@
         </header>
         {% endblock %}
 
-        {% block home_slider %}{% endblock %}
+        {% block home_slider %}
+            {% if home_slider | default %}
+                <div class="home-slider">
+                    {{ home_slider }}
+                    {% if bookblock|default %}
+                        <div class="bookblock-wrapper">
+                            {{ bookblock }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endblock %}
 
-        {% if bookblock|default %}
+        {% if bookblock|default and not home_slider %}
             <div class="bookblock-wrapper">
                 {{ bookblock }}
             </div>
