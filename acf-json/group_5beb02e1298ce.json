@@ -47,11 +47,11 @@
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
-                        "class": "",
+                        "class": "hide-label",
                         "id": ""
                     },
                     "default_value": "",
-                    "placeholder": "Titre visible lorsque la section est refermée (uniquement pour le backoffice)",
+                    "placeholder": "Titre visible lorsque la pub est refermée (uniquement pour le backoffice)",
                     "prepend": "",
                     "append": "",
                     "maxlength": ""
@@ -237,7 +237,9 @@
                 "class": "",
                 "id": ""
             },
-            "choices": [],
+            "choices": {
+                "blocks-claims-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.sarlat.wp.rc-dev.com\/app\/dist\/sarlat\/img\/woody-library\/views\/blocks\/claims\/tpl_01\/thumbnail.png?version=2.6.10\" alt=\"blocks-claims-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Publicité - template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Publicité - template 1<\/h4>Bloc de publicité => Basic card image carré<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+            },
             "allow_null": 0,
             "other_choice": 0,
             "default_value": "",
@@ -300,6 +302,6 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": 1,
-    "description": "",
-    "modified": 1542130113
+    "description": "Répéteur pour créer des publicités, affichées aléatoirement sur des pages liées",
+    "modified": 1546955902
 }

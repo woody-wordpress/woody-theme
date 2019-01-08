@@ -49,6 +49,11 @@
         </div>
         {% endfor %}
 
+        {% if claims_block|default %}
+            <div class="claims-blocks-wrapper">
+                {{ claims_block }}
+            </div>
+        {% endif %}
 
     </div>
 </main>

@@ -76,6 +76,9 @@ abstract class WoodyTheme_TemplateAbstract
         // Add addEsSearchBlock
         $this->addEsSearchBlock();
 
+        // Add claim bloc if some is linked to the current page
+        $this->addClaimsBlocks();
+
         // Set a global dist dir
         $this->context['dist_dir'] = WP_DIST_DIR;
     }
@@ -184,8 +187,8 @@ abstract class WoodyTheme_TemplateAbstract
                 }
             }
         }
-        
-        if (count($data['langs']) == 1 ) {
+
+        if (empty($data['langs'])) {
             return;
         }
 
@@ -230,5 +233,29 @@ abstract class WoodyTheme_TemplateAbstract
         $template = $this->context['woody_components']['woody_widgets-es_search_block-tpl_01'];
         $this->context['es_search_block'] = Timber::compile($template, $data);
         $this->context['es_search_block_mobile'] = Timber::compile($template, $data);
+    }
+
+    private function addClaimsBlocks(){
+        $data = [];
+        $template = '';
+
+        // WP Query to get every claims linked to the page =>  limit to 1 randomly
+        $query_args = [
+            'post_type' => 'woody_claims',
+            'post_status' => 'publish',
+            'orderby' => 'rand',
+        ];
+
+        $results = new WP_Query( $query_args );
+        if(empty($results->post_count)){
+            return;
+        }
+
+        $template = get_field('claim_woody_tpl', $results->post->ID);
+        $data = get_field('claim_background_parameters', $results->post->ID);
+        $data['items'] = get_field('claim_slides', $results->post->ID);
+        // wd($data, 'Data');
+
+        $this->context['claims_block'] = Timber::compile($this->context['woody_components'][$template], $data);
     }
 }

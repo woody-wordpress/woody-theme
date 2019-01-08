@@ -386,25 +386,6 @@
             ]
         },
         {
-            "key": "field_5b6d7edd22621",
-            "label": "Tracé GPS",
-            "name": "trace_gps",
-            "type": "file",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "array",
-            "library": "all",
-            "min_size": "",
-            "max_size": "",
-            "mime_types": "kml, kmz, gpx, json"
-        },
-        {
             "key": "field_5b6d61489fe7e",
             "label": "Mise en page",
             "name": "",
@@ -450,7 +431,10 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "choices": {},
+            "choices": {
+                "blocks-trip_infos-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.sarlat.wp.rc-dev.com\/app\/dist\/sarlat\/img\/woody-library\/views\/blocks\/trip_infos\/tpl_02\/thumbnail.png?version=2.6.10\" alt=\"blocks-trip_infos-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Infos séjour - Template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Infos séjour - Template 2<\/h4>Affiche le prix et la durée d'un séjour - Centrés l'un sur l'autre<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-trip_infos-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.sarlat.wp.rc-dev.com\/app\/dist\/sarlat\/img\/woody-library\/views\/blocks\/trip_infos\/tpl_01\/thumbnail.png?version=2.6.10\" alt=\"blocks-trip_infos-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Infos séjour - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Infos séjour - Template 1<\/h4>Affiche le prix et la durée d'un séjour - Centrés l'un sur l'autre<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+            },
             "allow_null": 0,
             "other_choice": 0,
             "default_value": "",
@@ -518,5 +502,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Affiche le prix et la duré d'un séjour",
-    "modified": 1545397306
+    "modified": 1546955702
 }
