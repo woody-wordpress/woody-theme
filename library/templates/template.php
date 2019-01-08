@@ -187,8 +187,8 @@ abstract class WoodyTheme_TemplateAbstract
                 }
             }
         }
-
-        if (empty($data['langs'])) {
+        
+        if (count($data['langs']) == 1 ) {
             return;
         }
 

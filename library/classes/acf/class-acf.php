@@ -55,7 +55,7 @@ class WoodyTheme_ACF
         $stations = ['superot'];
         // $stations = ['hautemaurienne', 'champsaur-valgaudemar'];
 
-        if(!(in_array(WP_SITE_KEY, $stations))) {
+        if (!(in_array(WP_SITE_KEY, $stations))) {
             add_filter('acf/load_field/name=section_content', [$this, 'sectionContentAcfLoadField'], 10, 3);
         }
     }
@@ -542,7 +542,7 @@ class WoodyTheme_ACF
 
     public function weatherAccountAcfLoadField($field)
     {
-        $field['choices'] = apply_filters('wp_woody_weather_accounts', $field['choices']);
+        $field['choices'] = apply_filters('woody_weather_accounts', $field['choices']);
         return $field;
     }
 
