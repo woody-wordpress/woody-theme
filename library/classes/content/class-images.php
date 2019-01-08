@@ -221,27 +221,33 @@ class WoodyTheme_Images
         $attachment_type = get_post_type($attachment_id);
         if ($attachment_type == 'attachment') {
 
-            // Get metadatas (crop sizes)
-            $attachment_metadata = wp_get_attachment_metadata($attachment_id);
-
-            // Get ACF Fields (Author, Lat, Lng)
-            $fields = get_fields($attachment_id);
-
-            // Save metadata to all languages
+            // Only if current edit post is default (FR)
             $default_language = pll_default_language();
             $current_lang = pll_get_post_language($attachment_id);
             if ($current_lang == $default_language) {
+
+                // Get metadatas (crop sizes)
+                $attachment_metadata = wp_get_attachment_metadata($attachment_id);
+
+                // Get ACF Fields (Author, Lat, Lng)
+                $fields = get_fields($attachment_id);
+
                 $languages = pll_languages_list();
                 foreach ($languages as $lang) {
                     if ($lang == $default_language) {
                         continue;
                     }
-                    // Replace attachment_metadata by FR metadatas
+
+                    // Replace attachment_metadata by default (FR) metadatas
                     $t_attachment_id = pll_get_post($attachment_id, $lang);
                     if (!empty($t_attachment_id)) {
+
                         // Update ACF Fields (Author, Lat, Lng)
                         if (!empty($fields)) {
                             foreach ($fields as $selector => $value) {
+                                if ($selector == 'media_linked_page') {
+                                    continue;
+                                }
                                 update_field($selector, $value, $t_attachment_id);
                             }
                         }
