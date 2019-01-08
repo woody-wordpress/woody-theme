@@ -67,7 +67,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $segments = explode('/', $wp->request);
         $last_segment = end($segments);
         $query = str_replace('-', ' ', $last_segment);
-        $response = apply_filters('wp_woody_pages_search', ['query' => $query, 'size' => 4]);
+        $response = apply_filters('woody_pages_search', ['query' => $query, 'size' => 4]);
 
         if (!empty($response['posts'])) {
             foreach ($response['posts'] as $post_id) {

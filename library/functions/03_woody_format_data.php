@@ -19,7 +19,7 @@ function getComponentItem($layout, $context)
         case 'weather':
             $vars['token'] = $layout['weather_account'];
             $vars['nb_days'] = $layout['weather_count_days'];
-            $the_weather = apply_filters('wp_woody_weather', $vars);
+            $the_weather = apply_filters('woody_weather', $vars);
             $the_weather['bg_color'] = (!empty($layout['weather_bg_params']['background_color'])) ? $layout['weather_bg_params']['background_color']: '';
             $the_weather['bg_img'] = $layout['weather_bg_img'];
 
@@ -73,7 +73,7 @@ function getComponentItem($layout, $context)
             if ($layout['acf_fc_layout'] == 'weather') {
                 $vars['token'] = $layout['weather_account'];
                 $vars['nb_days'] = $layout['weather_count_days'];
-                $layout['weather'] = apply_filters('wp_woody_weather', $vars);
+                $layout['weather'] = apply_filters('woody_weather', $vars);
             }
 
             $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
@@ -1134,7 +1134,8 @@ function formatVisualEffectData($effects)
  * @return   return - Twig compilé
  *
  */
-function formatSnowInfoData($layout, $twigPaths) {
+function formatSnowInfoData($layout, $twigPaths)
+{
     $vars = [];
 
     // TODO : - recupérer le flux - injecter le noms des differentes stations dans $layout[snow_station]
@@ -1220,7 +1221,7 @@ function formatSnowInfoData($layout, $twigPaths) {
 
     // Links
     $snow_links = $layout['content']['snow_cta']['links'];
-    if(!empty($snow_links)) {
+    if (!empty($snow_links)) {
         foreach ($snow_links as $key => $link) {
             $vars['content']['links'][$key] = $link;
         }
