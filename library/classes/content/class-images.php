@@ -20,7 +20,7 @@ class WoodyTheme_Images
     {
         // Actions
         add_action('add_attachment', [$this, 'addDefaultMediaType']);
-        add_action('acf/save_post', [$this, 'updateAttachment']);
+        add_action('edit_attachment', [$this, 'editAttachment']);
 
         // Filters
         add_filter('intermediate_image_sizes_advanced', [$this, 'removeAutoThumbs'], 10, 2);
@@ -216,10 +216,17 @@ class WoodyTheme_Images
     /* Sync attachment data     */
     /* ------------------------ */
 
-    public function updateAttachment($attachment_id)
+    public function editAttachment($attachment_id)
     {
         $attachment_type = get_post_type($attachment_id);
         if ($attachment_type == 'attachment') {
+
+            // Only if current edit post is default (FR)
+            $default_language = pll_default_language();
+            $current_lang = pll_get_post_language($attachment_id);
+            if ($current_lang != $default_language) {
+                $attachment_id = pll_get_post($attachment_id, $default_language);
+            }
 
             // Get metadatas (crop sizes)
             $attachment_metadata = wp_get_attachment_metadata($attachment_id);
@@ -227,27 +234,27 @@ class WoodyTheme_Images
             // Get ACF Fields (Author, Lat, Lng)
             $fields = get_fields($attachment_id);
 
-            // Save metadata to all languages
-            $default_language = pll_default_language();
-            $current_lang = pll_get_post_language($attachment_id);
-            if ($current_lang == $default_language) {
-                $languages = pll_languages_list();
-                foreach ($languages as $lang) {
-                    if ($lang == $default_language) {
-                        continue;
-                    }
-                    // Replace attachment_metadata by FR metadatas
-                    $t_attachment_id = pll_get_post($attachment_id, $lang);
-                    if (!empty($t_attachment_id)) {
-                        // Update ACF Fields (Author, Lat, Lng)
-                        if (!empty($fields)) {
-                            foreach ($fields as $selector => $value) {
-                                update_field($selector, $value, $t_attachment_id);
-                            }
-                        }
+            $languages = pll_languages_list();
+            foreach ($languages as $lang) {
+                if ($lang == $default_language) {
+                    continue;
+                }
 
-                        wp_update_attachment_metadata($t_attachment_id, $attachment_metadata);
+                // Replace attachment_metadata by default (FR) metadatas
+                $t_attachment_id = pll_get_post($attachment_id, $lang);
+                if (!empty($t_attachment_id)) {
+
+                        // Update ACF Fields (Author, Lat, Lng)
+                    if (!empty($fields)) {
+                        foreach ($fields as $selector => $value) {
+                            if ($selector == 'media_linked_page') {
+                                continue;
+                            }
+                            update_field($selector, $value, $t_attachment_id);
+                        }
                     }
+
+                    wp_update_attachment_metadata($t_attachment_id, $attachment_metadata);
                 }
             }
         }
