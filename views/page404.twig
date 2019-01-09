@@ -4,7 +4,7 @@
 <main id="main-content" class="content-type-page {{ page_type|default }}">
     <div class="content-wrapper {{ page_terms|default('no-terms') }}">
         <div class="mobile-header hide-for-xlarge title-bar">
-            <a class="brand-logo" href="/">
+            <a class="brand-logo" href="{{ site.url }}">
                 {{ website_logo|default('Website logo') }}
             </a>
         </div>
@@ -31,7 +31,7 @@
                 </div>
             </div>
             {% endif %}
-            <a class="button marg-top-md marg-bottom-md" href="/">{{ content.btn }}</a>
+            <a class="button marg-top-md marg-bottom-md" href="{{ site.url }}">{{ content.btn }}</a>
         </div>
     </div>
 </main>
