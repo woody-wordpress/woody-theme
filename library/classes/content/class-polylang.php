@@ -5,7 +5,7 @@
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
-
+use Woody\Utils\Output;
 
 class WoodyTheme_Polylang
 {
@@ -24,11 +24,24 @@ class WoodyTheme_Polylang
         add_filter('woody_pll_days', [$this, 'woodyPllDays'], 10);
         add_filter('woody_pll_months', [$this, 'woodyPllMonths'], 10);
         add_filter('woody_pll_get_posts', [$this, 'woodyPllGetPosts'], 10, 1);
+        add_filter('pll_check_canonical_url', [$this, 'pllCheckCanonicalUrl'], 10, 2);
     }
 
     public function isCacheActive()
     {
         return true;
+    }
+
+    public function pllCheckCanonicalUrl($redirect_url, $language)
+    {
+        $polylang_options = get_option('polylang');
+        if (!$polylang_options['redirect_lang']) {
+            Output::log('no redirect ' . $redirect_url);
+            return false;
+        } else {
+            Output::log('continue redirect ' . $redirect_url);
+            return $redirect_url;
+        }
     }
 
     // define the pll_copy_taxonomies callback
