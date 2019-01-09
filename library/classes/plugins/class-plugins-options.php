@@ -252,7 +252,7 @@ class WoodyTheme_Plugins_Options
         $polylang = [
             'browser' => 0,
             'rewrite' => 1,
-            'hide_default' => 1,
+            'hide_default' => 0,
             'redirect_lang' => 0,
             'media_support' => 1,
             'uninstall' => 0,
