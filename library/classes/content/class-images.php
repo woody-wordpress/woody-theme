@@ -20,8 +20,7 @@ class WoodyTheme_Images
     {
         // Actions
         add_action('add_attachment', [$this, 'addDefaultMediaType']);
-        add_action('acf/save_post', [$this, 'editAttachment']);
-        //add_action('edit_attachment', [$this, 'editAttachment']);
+        add_action('edit_attachment', [$this, 'editAttachment']);
 
         // Filters
         add_filter('intermediate_image_sizes_advanced', [$this, 'removeAutoThumbs'], 10, 2);

@@ -235,7 +235,8 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['es_search_block_mobile'] = Timber::compile($template, $data);
     }
 
-    private function addClaimsBlocks(){
+    private function addClaimsBlocks()
+    {
         $data = [];
         $template = '';
 
@@ -246,8 +247,8 @@ abstract class WoodyTheme_TemplateAbstract
             'orderby' => 'rand',
         ];
 
-        $results = new WP_Query( $query_args );
-        if(empty($results->post_count)){
+        $results = new WP_Query($query_args);
+        if (empty($results->post_count)) {
             return;
         }
 
