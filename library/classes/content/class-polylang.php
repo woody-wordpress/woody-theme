@@ -182,5 +182,6 @@ class WoodyTheme_Polylang
         __('Dordogne', 'woody-theme');
         __('Comment venir ?', 'woody-theme');
         __('La page que vous recherchez est peut-être ici ?', 'woody-theme');
+        __('Lire la suite', 'woody-theme');
     }
 }

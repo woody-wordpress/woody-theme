@@ -877,6 +877,9 @@ function getPagePreview($item_wrapper, $item)
 
     if (!empty($item_wrapper['display_button'])) {
         $data['link']['link_label'] = getFieldAndFallBack($item, 'focus_button_title', $item);
+        if(empty($data['link']['link_label'])){
+            $data['link']['link_label'] = __('Lire la suite', 'woody-theme');
+        }
     }
 
     $data['location'] = [];
@@ -904,7 +907,6 @@ function getPagePreview($item_wrapper, $item)
  **/
 function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = '', $lastfallback_item = '', $lastfallback_field = '')
 {
-    $value = [];
     if (!empty($item->get_field($field))) {
         $value = $item->get_field($field);
     } elseif (!empty($fallback_item) && is_array($fallback_item) && !empty($fallback_item[$fallback_field])) {

@@ -1,7 +1,8 @@
 {
     "key": "group_5b0d380ce3492",
     "title": "Affichage: mises en avant",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5b169fab55db0",
             "label": "Image",
             "name": "focus_img",
@@ -136,7 +137,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "Lire la suite",
+            "default_value": "",
             "placeholder": "",
             "prepend": "",
             "append": "",
@@ -144,11 +145,13 @@
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "page"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "side",
@@ -158,5 +161,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Infos affichées en sidebar et utilisées pour les remontées de contenu",
-    "modified": 1537798214
+    "modified": 1547044261
 }
