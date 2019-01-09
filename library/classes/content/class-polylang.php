@@ -6,7 +6,6 @@
  * @since WoodyTheme 1.0.0
  */
 
-use Woody\Utils\Output;
 
 class WoodyTheme_Polylang
 {
