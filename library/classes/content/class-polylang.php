@@ -43,10 +43,10 @@ class WoodyTheme_Polylang
     {
         $path = parse_url($redirect_url, PHP_URL_PATH);
         if (empty($path) || $path == '/') {
-            Output::log('no redirect : ' . $redirect_url);
+            //Output::log('no redirect : ' . $redirect_url);
             return false;
         } else {
-            Output::log('continue redirect : ' . $redirect_url);
+            //Output::log('continue redirect : ' . $redirect_url);
             return $redirect_url;
         }
     }
