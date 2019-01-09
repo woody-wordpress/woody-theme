@@ -255,7 +255,6 @@ abstract class WoodyTheme_TemplateAbstract
         $template = get_field('claim_woody_tpl', $results->post->ID);
         $data = get_field('claim_background_parameters', $results->post->ID);
         $data['items'] = get_field('claim_slides', $results->post->ID);
-        // wd($data, 'Data');
 
         $this->context['claims_block'] = Timber::compile($this->context['woody_components'][$template], $data);
     }

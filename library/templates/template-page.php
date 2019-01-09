@@ -301,8 +301,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $query = filter_input_array($checkMethod, $checkAutoSelect, $add_non_existing = false);
         $query_GQV = filter_input_array(INPUT_GET, $checkQueryVars, $add_non_existing = false);
 
-        // wd($query_GQV);
-
         $query = array_merge((array)$query, (array)$query_GQV);
         foreach ($query as $key => $param) {
             if (!$param) {

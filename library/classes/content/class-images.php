@@ -20,7 +20,9 @@ class WoodyTheme_Images
     {
         // Actions
         add_action('add_attachment', [$this, 'addDefaultMediaType']);
-        add_action('edit_attachment', [$this, 'editAttachment']);
+        add_action('acf/save_post', [$this, 'saveAttachment']);
+        add_action('save_attachment', [$this, 'saveAttachment']);
+        add_action('delete_attachment', [$this, 'deleteAttachment']);
 
         // Filters
         add_filter('intermediate_image_sizes_advanced', [$this, 'removeAutoThumbs'], 10, 2);
@@ -112,15 +114,7 @@ class WoodyTheme_Images
 
     public function addDefaultMediaType($post_id)
     {
-        wp_set_object_terms($post_id, 'Média ajouté manuellement', 'attachment_types', true);
-
-        $terms = wp_get_post_terms($post_id, 'attachment_types');
-        foreach ($terms as $term) {
-            if ($term->slug == 'instagram') {
-                wp_remove_object_terms($post_id, 'Média ajouté manuellement', 'attachment_types');
-                break;
-            }
-        }
+        wp_set_object_terms($post_id, 'Média ajouté manuellement', 'attachment_types', false);
     }
 
     // Remove default image sizes here.
@@ -216,45 +210,143 @@ class WoodyTheme_Images
     /* Sync attachment data     */
     /* ------------------------ */
 
-    public function editAttachment($attachment_id)
+    public function deleteAttachment($attachment_id)
     {
-        $attachment_type = get_post_type($attachment_id);
-        if ($attachment_type == 'attachment') {
+        $default_language = pll_default_language();
+        $current_lang = pll_get_post_language($attachment_id);
+        if ($current_lang != $default_language) {
+            // Main attachment
+            $attachment_id = pll_get_post($attachment_id, $default_language);
+        }
+
+        // Bug: génère une 500
+        // if (!empty($attachment_id)) {
+        //     // Delete all duplicate images
+        //     $translations = apply_filters('woody_pll_get_posts', $attachment_id);
+        //     if (!empty($translations)) {
+        //         wd($translations, 'delete translations');
+        //         foreach ($translations as $lang => $t_attachment_id) {
+        //             if ($t_attachment_id != $attachment_id) {
+        //                 wp_delete_attachment($t_attachment_id, true);
+        //             }
+        //         }
+        //         delete_transient('woody_pll_post_translations_' . $attachment_id);
+        //     }
+        // }
+
+        delete_transient('woody_pll_post_translations_' . $attachment_id);
+    }
+
+    public function saveAttachment($attachment_id)
+    {
+        $attachment = get_post($attachment_id);
+        if ($attachment->post_type == 'attachment') {
 
             // Only if current edit post is default (FR)
+            $languages = pll_languages_list();
             $default_language = pll_default_language();
             $current_lang = pll_get_post_language($attachment_id);
-            if ($current_lang != $default_language) {
-                $attachment_id = pll_get_post($attachment_id, $default_language);
-            }
 
-            // Get metadatas (crop sizes)
-            $attachment_metadata = wp_get_attachment_metadata($attachment_id);
+            if ($current_lang == $default_language) {
 
-            // Get ACF Fields (Author, Lat, Lng)
-            $fields = get_fields($attachment_id);
+                // Get metadatas (crop sizes)
+                $attachment_metadata = wp_get_attachment_metadata($attachment_id);
 
-            $languages = pll_languages_list();
-            foreach ($languages as $lang) {
-                if ($lang == $default_language) {
-                    continue;
-                }
+                // Get _wp_attached_file
+                $attachment_wp_attached_file = get_post_meta($attachment_id, '_wp_attached_file');
+                $attachment_wp_attached_file = (is_array($attachment_wp_attached_file)) ? current($attachment_wp_attached_file) : $attachment_wp_attached_file;
 
-                // Replace attachment_metadata by default (FR) metadatas
-                $t_attachment_id = pll_get_post($attachment_id, $lang);
-                if (!empty($t_attachment_id)) {
+                // Get _wp_attachment_image_alt
+                $attachment_wp_attachment_image_alt = get_post_meta($attachment_id, '_wp_attachment_image_alt');
+                $attachment_wp_attachment_image_alt = (is_array($attachment_wp_attachment_image_alt)) ? current($attachment_wp_attachment_image_alt) : $attachment_wp_attachment_image_alt;
 
-                        // Update ACF Fields (Author, Lat, Lng)
-                    if (!empty($fields)) {
-                        foreach ($fields as $selector => $value) {
-                            if ($selector == 'media_linked_page') {
-                                continue;
-                            }
-                            update_field($selector, $value, $t_attachment_id);
+                // Get ACF Fields (Author, Lat, Lng)
+                $fields = get_fields($attachment_id);
+
+                foreach ($languages as $lang) {
+                    if ($lang == $default_language) {
+                        continue;
+                    }
+
+                    $t_attachment_id = pll_get_post($attachment_id, $lang);
+                    if (empty($t_attachment_id)) {
+                        global $wpdb;
+                        $wpdb->insert('wp_posts', [
+                            'post_author' => $attachment->post_author,
+                            'post_date' => $attachment->post_date,
+                            'post_date_gmt' => $attachment->post_mime_type,
+                            'post_content' => $attachment->post_content,
+                            'post_title' => $attachment->post_title,
+                            'post_excerpt' => $attachment->post_excerpt,
+                            'post_status' => $attachment->post_status,
+                            'comment_status' => $attachment->comment_status,
+                            'ping_status' => $attachment->ping_status,
+                            'post_password' => $attachment->post_password,
+                            'post_name' => $attachment->post_name,
+                            'to_ping' => $attachment->to_ping,
+                            'pinged' => $attachment->pinged,
+                            'post_modified' => $attachment->post_modified,
+                            'post_modified_gmt' => $attachment->post_modified_gmt,
+                            'post_content_filtered' => $attachment->post_content_filtered,
+                            'post_parent' => $attachment->post_parent,
+                            'guid' => $attachment->guid,
+                            'menu_order' => $attachment->menu_order,
+                            'post_type' => $attachment->post_type,
+                            'post_mime_type' => $attachment->post_mime_type,
+                            'comment_count' => $attachment->comment_count,
+                        ]);
+
+                        // Get translated ID
+                        $t_attachment_id = $wpdb->insert_id;
+                        if (!empty($t_attachment_id)) {
+
+                            // Set the image Alt-Text
+                            update_post_meta($t_attachment_id, '_wp_attachment_image_alt', $attachment_wp_attachment_image_alt);
+                            update_attached_file($t_attachment_id, $attachment_wp_attached_file);
+
+                            // Save attachment language
+                            pll_set_post_language($t_attachment_id, $lang);
+
+                            // Link translations
+                            $translations = apply_filters('woody_pll_get_posts', $attachment_id);
+                            $translations[$lang] = $t_attachment_id;
+                            pll_save_post_translations($translations);
+                            set_transient('woody_pll_post_translations_' . $attachment_id, $translations, 300);
                         }
                     }
 
-                    wp_update_attachment_metadata($t_attachment_id, $attachment_metadata);
+                    // Sync Meta and fields
+                    $this->syncAttachmentMetadata($attachment_metadata, $fields, $t_attachment_id);
+                }
+            } else {
+                $t_attachment_id = $attachment_id;
+                $attachment_id = pll_get_post($t_attachment_id, $default_language);
+
+                // Get metadatas (crop sizes)
+                $attachment_metadata = wp_get_attachment_metadata($attachment_id);
+
+                // Get ACF Fields (Author, Lat, Lng)
+                $fields = get_fields($attachment_id);
+
+                // Sync Meta and fields
+                $this->syncAttachmentMetadata($attachment_metadata, $fields, $t_attachment_id);
+            }
+        }
+    }
+
+    private function syncAttachmentMetadata($attachment_metadata, $fields = [], $t_attachment_id = null)
+    {
+        if (!empty($t_attachment_id)) {
+            // Updated metadatas (crop sizes)
+            wp_update_attachment_metadata($t_attachment_id, $attachment_metadata);
+
+            // Update ACF Fields (Author, Lat, Lng)
+            if (!empty($fields)) {
+                foreach ($fields as $selector => $value) {
+                    if ($selector == 'media_linked_page') {
+                        continue;
+                    }
+                    update_field($selector, $value, $t_attachment_id);
                 }
             }
         }
