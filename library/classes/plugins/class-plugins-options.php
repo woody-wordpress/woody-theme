@@ -252,7 +252,6 @@ class WoodyTheme_Plugins_Options
         $polylang = [
             'browser' => 0,
             'rewrite' => 1,
-            'hide_default' => 0,
             'redirect_lang' => 0,
             'media_support' => 1,
             'uninstall' => 0,
@@ -276,6 +275,7 @@ class WoodyTheme_Plugins_Options
         // En dev on travaille toujours en prefix
         if (WP_ENV == 'dev') {
             $polylang['force_lang'] = 0;
+            $polylang['hide_default'] = 1;
         }
 
         $this->updateOption('polylang', $polylang);
