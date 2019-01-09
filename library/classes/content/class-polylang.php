@@ -20,11 +20,11 @@ class WoodyTheme_Polylang
 
         add_filter('pll_is_cache_active', [$this, 'isCacheActive']);
         add_filter('pll_copy_taxonomies', [$this, 'copyAttachmentTypes'], 10, 2);
+        add_filter('pll_check_canonical_url', [$this, 'pllCheckCanonicalUrl'], 10, 2);
 
         add_filter('woody_pll_days', [$this, 'woodyPllDays'], 10);
         add_filter('woody_pll_months', [$this, 'woodyPllMonths'], 10);
         add_filter('woody_pll_get_posts', [$this, 'woodyPllGetPosts'], 10, 1);
-        add_filter('pll_check_canonical_url', [$this, 'pllCheckCanonicalUrl'], 10, 2);
     }
 
     public function isCacheActive()
