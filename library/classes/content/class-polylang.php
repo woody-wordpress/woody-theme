@@ -32,14 +32,21 @@ class WoodyTheme_Polylang
         return true;
     }
 
+    /**
+     * Hook pour supprimer la redirection intempestive des domaines en langue étrangère vers FR
+     *
+     * @param [type] $redirect_url
+     * @param [type] $language
+     * @return void
+     */
     public function pllCheckCanonicalUrl($redirect_url, $language)
     {
-        $polylang_options = get_option('polylang');
-        if (!$polylang_options['redirect_lang']) {
-            Output::log('no redirect ' . $redirect_url);
+        $path = parse_url($redirect_url, PHP_URL_PATH);
+        if (empty($path) || $path == '/') {
+            Output::log('no redirect : ' . $redirect_url);
             return false;
         } else {
-            Output::log('continue redirect ' . $redirect_url);
+            Output::log('continue redirect : ' . $redirect_url);
             return $redirect_url;
         }
     }
