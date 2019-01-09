@@ -47,7 +47,16 @@ class WoodyTheme_Plugins_Options
         update_option('thumbnail_crop', true, '', 'yes');
         update_option('acm_server_settings', ['server_enable' => true], '', 'yes');
         update_option('permalink_structure', '/%postname%/', '', 'yes');
-        update_option('permalink-manager-permastructs', ['post_types' => ['touristic_sheet' => '']], '', 'yes');
+
+        // Cleaning Permalink Manager Pro
+        delete_option('permalink-manager-permastructs');
+        delete_option('permalink-manager');
+        delete_option('permalink-manager-uris');
+        delete_option('external_updates-permalink-manager-pro');
+        delete_option('permalink-manager-redirects');
+        delete_option('permalink-manager-external-redirects');
+        delete_option('permalink-manager-uris_backup');
+        delete_option('permalink-manager-redirects_backup');
 
         // Force Disable indexation
         if (WP_ENV != 'prod') {
