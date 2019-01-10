@@ -12,6 +12,16 @@ $('.claims-blocks-wrapper').each(function() {
             $this.append(item);
             var swiper_options = $this.find('.claims-swiper').data('options');
             var claimSwiper = new Swiper('.claims-swiper', swiper_options);
+            $('.woody-component-claims-block').each(function() {
+                var $this = $(this),
+                    closeClaim = $this.find('.claim-close-button');
+                console.log(closeClaim);
+                // TODO: set cookie on click
+                closeClaim.click(function() {
+                    console.log($this);
+                    $this.remove();
+                });
+            });
         },
         error: function(data) {
             console.error('claim', data);
