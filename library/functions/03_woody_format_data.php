@@ -877,7 +877,7 @@ function getPagePreview($item_wrapper, $item)
 
     if (!empty($item_wrapper['display_button'])) {
         $data['link']['link_label'] = getFieldAndFallBack($item, 'focus_button_title', $item);
-        if(empty($data['link']['link_label'])){
+        if (empty($data['link']['link_label'])) {
             $data['link']['link_label'] = __('Lire la suite', 'woody-theme');
         }
     }
@@ -1091,7 +1091,7 @@ function getAttachmentMoreData($attachment_id)
 
     if (!empty($attachment_data['is_instagram'])) {
         $img_all_data = get_post_meta($attachment_id);
-        $img_all_metadata = (!empty($img_all_data['_wp_attachment_metadata'][0])) ? unserialize($img_all_data['_wp_attachment_metadata'][0]) : '';
+        $img_all_metadata = (!empty($img_all_data['_wp_attachment_metadata'][0])) ? maybe_unserialize($img_all_data['_wp_attachment_metadata'][0]) : '';
         $instagram_metadata = (!empty($img_all_metadata['woody-instagram'])) ? $img_all_metadata['woody-instagram'] : '';
         $attachment_data['instagram_metadata'] = $instagram_metadata;
     }

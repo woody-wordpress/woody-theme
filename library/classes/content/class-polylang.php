@@ -5,6 +5,7 @@
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
+use Woody\Utils\Output;
 
 class WoodyTheme_Polylang
 {
@@ -15,19 +16,39 @@ class WoodyTheme_Polylang
 
     protected function registerHooks()
     {
-        add_filter('pll_is_cache_active', [$this, 'isCacheActive']);
         add_action('after_setup_theme', [$this, 'loadThemeTextdomain']);
-        //add_filter('option_page_on_front', [$this, 'pageOnFront'], 10, 2);
+
+        add_filter('pll_is_cache_active', [$this, 'isCacheActive']);
+        add_filter('pll_copy_taxonomies', [$this, 'copyAttachmentTypes'], 10, 2);
+        add_filter('pll_check_canonical_url', [$this, 'pllCheckCanonicalUrl'], 10, 2);
+
         add_filter('woody_pll_days', [$this, 'woodyPllDays'], 10);
         add_filter('woody_pll_months', [$this, 'woodyPllMonths'], 10);
         add_filter('woody_pll_get_posts', [$this, 'woodyPllGetPosts'], 10, 1);
-
-        add_filter('pll_copy_taxonomies', [$this, 'copyAttachmentTypes'], 10, 2);
     }
 
     public function isCacheActive()
     {
         return true;
+    }
+
+    /**
+     * Hook pour supprimer la redirection intempestive des domaines en langue étrangère vers FR
+     *
+     * @param [type] $redirect_url
+     * @param [type] $language
+     * @return void
+     */
+    public function pllCheckCanonicalUrl($redirect_url, $language)
+    {
+        $path = parse_url($redirect_url, PHP_URL_PATH);
+        if (empty($path) || $path == '/') {
+            //Output::log('no redirect : ' . $redirect_url);
+            return false;
+        } else {
+            //Output::log('continue redirect : ' . $redirect_url);
+            return $redirect_url;
+        }
     }
 
     // define the pll_copy_taxonomies callback
@@ -42,19 +63,6 @@ class WoodyTheme_Polylang
         $taxonomies = array_merge($custom_taxs, $taxonomies);
         return $taxonomies;
     }
-
-    /**
-     * Translate frontpage
-     */
-    // public function pageOnFront($value, $option)
-    // {
-    //     if (pll_current_language() != pll_default_language()) {
-    //         $t_value = pll_get_post($value);
-    //         return (!empty($t_value)) ? $t_value : $value;
-    //     } else {
-    //         return $value;
-    //     }
-    // }
 
     public function loadThemeTextdomain()
     {

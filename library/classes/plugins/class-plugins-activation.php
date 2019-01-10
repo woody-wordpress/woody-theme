@@ -45,12 +45,7 @@ class WoodyTheme_Plugins_Activation
             'publish-view/publish-view.php',
         ];
 
-        $this->deactivate_plugins = [
-            'velvet-blues-update-urls/velvet-blues-update-urls.php',
-            'wp-optimize/wp-optimize.php',
-            'duracelltomi-google-tag-manager/duracelltomi-google-tag-manager-for-wordpress.php',
-            'permalink-manager-pro/permalink-manager.php'
-        ];
+        $this->deactivate_plugins = [];
 
         switch (WP_ENV) {
             case 'dev':

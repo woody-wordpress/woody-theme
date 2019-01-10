@@ -38,7 +38,6 @@ class WoodyTheme_Enqueue_Assets
 
     protected function registerHooks()
     {
-        add_action('wp_default_scripts', [$this, 'removeJqueryMigrate']);
         add_action('wp_enqueue_scripts', [$this, 'enqueueLibraries']);
         add_action('wp_enqueue_scripts', [$this, 'enqueueAssets']);
         add_action('admin_enqueue_scripts', [$this, 'enqueueAdminAssets']);
@@ -50,43 +49,23 @@ class WoodyTheme_Enqueue_Assets
         // hack for googlemap script enqueuing
         add_filter('clean_url', [$this, 'so_handle_038'], 99, 3);
 
-        // if (!function_exists('is_plugin_active')) {
-        //     require_once(ABSPATH . '/wp-admin/includes/plugin.php');
-        // }
-
         //plugin deferred labJS is activated
-        // if (is_plugin_active('wp-deferred-javascripts/wp-deferred-javascripts.php')) {
-        add_action('wdjs_deferred_script_wait', array($this, 'labjsAfterMyScript'), 10, 2);
-        // } else {
-        //     wp_add_inline_script('jquery', $this->globalScriptString, 'after') . ';';
-        //     wp_add_inline_script('ng_scripts', "function(){angular.bootstrap(document, ['drupalAngularApp']);}", 'after') . ';';
-        // }
+        add_action('wdjs_deferred_script_wait', [$this, 'labjsAfterMyScript'], 10, 2);
     }
 
     // print inline scripts after specified scripts (labJS only)
     public function labjsAfterMyScript($wait, $handle)
     {
         // after jQuery => add globalScript
-        if ('jquery' === $handle) {
+        if ('jsdelivr_jquery' === $handle) {
             $wait = $this->globalScriptString;
         }
         // after ngScripts => bootstrap angular app
-        elseif ('ng_scripts' === $handle) {
+        elseif ('hawwwai_ng_scripts' === $handle) {
             $wait = "function(){angular.bootstrap(document, ['drupalAngularApp']);}";
         }
 
         return $wait;
-    }
-
-    public function removeJqueryMigrate($scripts)
-    {
-        if (WP_ENV != 'dev' && isset($scripts->registered['jquery'])) {
-            $script = $scripts->registered['jquery'];
-
-            if ($script->deps) {
-                $script->deps = array_diff($script->deps, array('jquery-migrate'));
-            }
-        }
     }
 
     public function enqueueLibraries()
@@ -96,6 +75,7 @@ class WoodyTheme_Enqueue_Assets
 
         // Deregister the jquery version bundled with WordPress & define another
         wp_deregister_script('jquery');
+        wp_deregister_script('jquery-migrate');
         $jQuery_version = '3.3.1';
         if ($this->isTouristicPlaylist || $this->isTouristicSheet) {
             $jQuery_version = '2.1.4';
@@ -122,7 +102,7 @@ class WoodyTheme_Enqueue_Assets
 
         // dependencies for raccourci map js
         $js_dependencies_rcmap = [
-            'jquery', 'leaflet',
+            'jsdelivr_jquery', 'jsdelivr_leaflet',
         ];
 
         // get map keys
@@ -131,7 +111,7 @@ class WoodyTheme_Enqueue_Assets
             $mapKeys['ver'] = $this->wThemeVersion;
         }
         if (isset($map_keys['otmKey'])) {
-            $js_dependencies_rcmap[] = 'tangram';
+            $js_dependencies_rcmap[] = 'touristicmaps_tangram';
         }
         if (isset($map_keys['gmKey'])) {
             $js_dependencies_rcmap[] = 'gg_maps';
@@ -139,92 +119,96 @@ class WoodyTheme_Enqueue_Assets
 
         // SHEET: need to load tangram always for now (bug in vendor angular)
         if ($this->isTouristicSheet) {
-            if (!in_array('tangram', $js_dependencies_rcmap)) {
-                array_push($js_dependencies_rcmap, 'tangram');
+            if (!in_array('touristicmaps_tangram', $js_dependencies_rcmap)) {
+                array_push($js_dependencies_rcmap, 'touristicmaps_tangram');
             }
         }
 
         // CDN hosted jQuery placed in the header, as some plugins require that jQuery is loaded in the header.
-        wp_enqueue_script('jquery', 'https://cdn.jsdelivr.net/npm/jquery@'. $jQuery_version .'/dist/jquery.min.js', array(), '', true);
-        wp_enqueue_script('lazysizes', 'https://cdn.jsdelivr.net/npm/lazysizes@4.1.2/lazysizes.min.js', array(), '', true);
+        wp_enqueue_script('jsdelivr_jquery', 'https://cdn.jsdelivr.net/npm/jquery@'. $jQuery_version .'/dist/jquery.min.js', [], '', true);
+        wp_enqueue_script('jsdelivr_lazysizes', 'https://cdn.jsdelivr.net/npm/lazysizes@4.1.2/lazysizes.min.js', [], '', true);
+
+        if (WP_ENV == 'dev') {
+            wp_enqueue_script('jsdelivr_jquery-migrate', 'https://cdn.jsdelivr.net/npm/jquery-migrate@3.0.1/dist/jquery-migrate.min.js', ['jsdelivr_jquery'], '', true);
+        }
 
         // Dependencies of main.js
-        wp_enqueue_script('cookieconsent', 'https://cdn.jsdelivr.net/npm/cookieconsent@3.1.0/build/cookieconsent.min.js', array(), '', true);
-        wp_enqueue_script('swiper', 'https://cdn.jsdelivr.net/npm/swiper@4.4.1/dist/js/swiper.min.js', array(), '', true);
-        wp_enqueue_script('webfontloader', 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js', array(), '', true);
-        wp_enqueue_script('lightgallery', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/dist/js/lightgallery.min.js', array('jquery'), '', true);
-        wp_enqueue_script('lg-pager', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-pager.min.js', array('lightgallery'), '', true);
-        wp_enqueue_script('lg-thumbnail', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-thumbnail.min.js', array('lightgallery'), '', true);
-        wp_enqueue_script('lg-video', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-video.min.js', array('lightgallery'), '', true);
-        wp_enqueue_script('lg-zoom', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-zoom.min.js', array('lightgallery'), '', true);
-        wp_enqueue_script('lg-fullscreen', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-fullscreen.min.js', array('lightgallery'), '', true);
-        wp_enqueue_script('nouislider', 'https://cdn.jsdelivr.net/npm/nouislider@10.1.0/distribute/nouislider.min.js', array('jquery'), '', true);
-        wp_enqueue_script('moment', 'https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js', array(), '', true);
+        wp_enqueue_script('jsdelivr_cookieconsent', 'https://cdn.jsdelivr.net/npm/cookieconsent@3.1.0/build/cookieconsent.min.js', [], '', true);
+        wp_enqueue_script('jsdelivr_swiper', 'https://cdn.jsdelivr.net/npm/swiper@4.4.1/dist/js/swiper.min.js', [], '', true);
+        wp_enqueue_script('jsdelivr_webfontloader', 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js', [], '', true);
+        wp_enqueue_script('jsdelivr_lightgallery', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/dist/js/lightgallery.min.js', ['jsdelivr_jquery'], '', true);
+        wp_enqueue_script('jsdelivr_lg-pager', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-pager.min.js', ['jsdelivr_lightgallery'], '', true);
+        wp_enqueue_script('jsdelivr_lg-thumbnail', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-thumbnail.min.js', ['jsdelivr_lightgallery'], '', true);
+        wp_enqueue_script('jsdelivr_lg-video', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-video.min.js', ['jsdelivr_lightgallery'], '', true);
+        wp_enqueue_script('jsdelivr_lg-zoom', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-zoom.min.js', ['jsdelivr_lightgallery'], '', true);
+        wp_enqueue_script('jsdelivr_lg-fullscreen', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-fullscreen.min.js', ['jsdelivr_lightgallery'], '', true);
+        wp_enqueue_script('jsdelivr_nouislider', 'https://cdn.jsdelivr.net/npm/nouislider@10.1.0/distribute/nouislider.min.js', ['jsdelivr_jquery'], '', true);
+        wp_enqueue_script('jsdelivr_moment', 'https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js', [], '', true);
 
         // Touristic maps libraries
-        wp_enqueue_script('leaflet', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet-src.min.js', array(), '', true);
+        wp_enqueue_script('jsdelivr_leaflet', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet-src.min.js', [], '', true);
         if (isset($map_keys['otmKey']) || $this->isTouristicSheet) {
             // need to load tangram always in TOURISTIC SHEET for now (bug in vendor angular) ↓
-            wp_enqueue_script('tangram', 'https://tiles.touristicmaps.com/libs/tangram.min.js', array(), $this->wThemeVersion, true);
+            wp_enqueue_script('touristicmaps_tangram', 'https://tiles.touristicmaps.com/libs/tangram.min.js', [], $this->wThemeVersion, true);
         }
 
         if (isset($map_keys['gmKey'])) {
-            wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?key='. $map_keys['gmKey'] .'&v=3.33&libraries=geometry,places', array(), '', true);
+            wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?key='. $map_keys['gmKey'] .'&v=3.33&libraries=geometry,places', [], '', true);
         } elseif ($this->isTouristicSheet) { // absolutely needed in angular
-            wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?v=3.33&libraries=geometry,places', array(), '', true);
+            wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?v=3.33&libraries=geometry,places', [], '', true);
         }
-        wp_enqueue_script('universal-map', $apirender_base_uri.'/assets/scripts/raccourci/universal-map.'. $jsModeSuffix .'.js', $js_dependencies_rcmap, $this->wThemeVersion, true);
+        wp_enqueue_script('hawwwai_universal_map', $apirender_base_uri.'/assets/scripts/raccourci/universal-map.'. $jsModeSuffix .'.js', $js_dependencies_rcmap, $this->wThemeVersion, true);
 
         // Playlist libraries
         if ($this->isTouristicPlaylist) {
             // CSS_Libraries (todo replace when possible)
-            wp_enqueue_style('rc_font_css', 'https://api.tourism-system.com/static/assets/fonts/raccourci-font.css', array(), '');
-            wp_enqueue_style('leaflet_css', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.min.css', array(), '');
-            wp_enqueue_style('bootstrap_css', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css', array(), '');
-            wp_enqueue_style('nouislider_css', 'https://cdn.jsdelivr.net/npm/nouislider@10.1.0/distribute/nouislider.min.css', array(), '');
-            wp_enqueue_style('chosen_css', 'https://cdn.jsdelivr.net/npm/chosen-js@1.8.2/chosen.min.css', array(), '');
-            wp_enqueue_style('picker_css', 'https://cdn.jsdelivr.net/npm/bootstrap-daterangepicker@2.1.27/daterangepicker.min.css', array(), '');
+            wp_enqueue_style('hawwwai_font_css', 'https://api.tourism-system.com/static/assets/fonts/raccourci-font.css', [], '');
+            wp_enqueue_style('jsdelivr_leaflet_css', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.min.css', [], '');
+            wp_enqueue_style('jsdelivr_bootstrap_css', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css', [], '');
+            wp_enqueue_style('jsdelivr_nouislider_css', 'https://cdn.jsdelivr.net/npm/nouislider@10.1.0/distribute/nouislider.min.css', [], '');
+            wp_enqueue_style('jsdelivr_chosen_css', 'https://cdn.jsdelivr.net/npm/chosen-js@1.8.2/chosen.min.css', [], '');
+            wp_enqueue_style('jsdelivr_picker_css', 'https://cdn.jsdelivr.net/npm/bootstrap-daterangepicker@2.1.27/daterangepicker.min.css', [], '');
 
             // JS Libraries
-            wp_enqueue_script('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js', array(), '', true);
-            wp_enqueue_script('match8', 'https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js', array('jquery'), '', true);
-            wp_enqueue_script('wnumb', 'https://cdn.jsdelivr.net/npm/wnumb@1.0.4/wNumb.min.js', array('jquery'), '', true);
-            wp_enqueue_script('chosen', 'https://cdn.jsdelivr.net/npm/chosen-js@1.8.2/chosen.jquery.min.js', array('jquery'), '', true);
-            wp_enqueue_script('picker', 'https://cdn.jsdelivr.net/npm/bootstrap-daterangepicker@2.1.27/daterangepicker.min.js', array('bootstrap'), '', true);
-            wp_enqueue_script('twigjs', 'https://cdn.jsdelivr.net/npm/twig@0.8.9/twig.min.js', array(), '', true);
-            wp_enqueue_script('uuid', 'https://cdn.jsdelivr.net/npm/node-uuid@1.4.8/uuid.min.js', array(), '', true);
-            wp_enqueue_script('lodash', 'https://cdn.jsdelivr.net/npm/lodash@3.8.0/index.min.js', array(), '', true);
-            wp_enqueue_script('arrive', 'https://cdn.jsdelivr.net/npm/arrive@2.4.1/src/arrive.min.js', array('jquery'), '', true);
-            wp_enqueue_script('sheet_item', $apirender_base_uri.'/assets/scripts/raccourci/sheet_item.min.js', array('jquery'), $this->wThemeVersion, true);
+            wp_enqueue_script('jsdelivr_bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js', [], '', true);
+            wp_enqueue_script('jsdelivr_match8', 'https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js', ['jsdelivr_jquery'], '', true);
+            wp_enqueue_script('jsdelivr_wnumb', 'https://cdn.jsdelivr.net/npm/wnumb@1.0.4/wNumb.min.js', ['jsdelivr_jquery'], '', true);
+            wp_enqueue_script('jsdelivr_chosen', 'https://cdn.jsdelivr.net/npm/chosen-js@1.8.2/chosen.jquery.min.js', ['jsdelivr_jquery'], '', true);
+            wp_enqueue_script('jsdelivr_picker', 'https://cdn.jsdelivr.net/npm/bootstrap-daterangepicker@2.1.27/daterangepicker.min.js', ['jsdelivr_bootstrap'], '', true);
+            wp_enqueue_script('jsdelivr_twigjs', 'https://cdn.jsdelivr.net/npm/twig@0.8.9/twig.min.js', [], '', true);
+            wp_enqueue_script('jsdelivr_uuid', 'https://cdn.jsdelivr.net/npm/node-uuid@1.4.8/uuid.min.js', [], '', true);
+            wp_enqueue_script('jsdelivr_lodash', 'https://cdn.jsdelivr.net/npm/lodash@3.8.0/index.min.js', [], '', true);
+            wp_enqueue_script('jsdelivr_arrive', 'https://cdn.jsdelivr.net/npm/arrive@2.4.1/src/arrive.min.js', ['jsdelivr_jquery'], '', true);
+            wp_enqueue_script('hawwwai_sheet_item', $apirender_base_uri.'/assets/scripts/raccourci/sheet_item.min.js', ['jsdelivr_jquery'], $this->wThemeVersion, true);
 
-            $js_dependencies__playlist = ['bootstrap','match8','nouislider','wnumb','chosen','moment','picker','twigjs','lodash','arrive','sheet_item'];
-            wp_enqueue_script('playlist', $apirender_base_uri.'/assets/scripts/raccourci/playlist.'. $jsModeSuffix .'.js', $js_dependencies__playlist, $this->wThemeVersion, true);
+            $js_dependencies__playlist = ['jsdelivr_bootstrap','jsdelivr_match8','jsdelivr_nouislider','jsdelivr_wnumb','jsdelivr_chosen','jsdelivr_moment','jsdelivr_picker','jsdelivr_twigjs','jsdelivr_uuid','jsdelivr_lodash','jsdelivr_arrive','hawwwai_sheet_item'];
+            wp_enqueue_script('hawwwai_playlist', $apirender_base_uri.'/assets/scripts/raccourci/playlist.'. $jsModeSuffix .'.js', $js_dependencies__playlist, $this->wThemeVersion, true);
             $playlist_map_query = !empty($map_keys) ? '?'.http_build_query($map_keys) : '';
-            wp_enqueue_script('playlist_map', $apirender_base_uri.'/assets/scripts/raccourci/playlist-map.leaflet.'. $jsModeSuffix .'.js'.$playlist_map_query, array_merge($js_dependencies_rcmap, array('playlist')), '', true);
+            wp_enqueue_script('hawwwai_playlist_map', $apirender_base_uri.'/assets/scripts/raccourci/playlist-map.leaflet.'. $jsModeSuffix .'.js'.$playlist_map_query, array_merge($js_dependencies_rcmap, ['hawwwai_playlist']), $this->wThemeVersion, true);
         }
 
         // Sheet libraries
         elseif ($this->isTouristicSheet) {
             // CSS Libraries (todo replace when possible)
-            wp_enqueue_style('rc_font_css', 'https://api.tourism-system.com/static/assets/fonts/raccourci-font.css', array(), '');
-            wp_enqueue_style('leaflet_css', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.min.css', array(), '');
-            wp_enqueue_style('slick_css', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css', array(), '');
-            wp_enqueue_style('fresco_css', 'https://api.tourism-system.com/render/assets/styles/lib/fresco.css', array(), '');
-            wp_enqueue_style('bootstrap_css', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css', array(), '');
+            wp_enqueue_style('hawwwai_font_css', 'https://api.tourism-system.com/static/assets/fonts/raccourci-font.css', [], '');
+            wp_enqueue_style('hawwwai_fresco_css', 'https://api.tourism-system.com/render/assets/styles/lib/fresco.css', [], '');
+            wp_enqueue_style('jsdelivr_leaflet_css', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.min.css', [], '');
+            wp_enqueue_style('jsdelivr_slick_css', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css', [], '');
+            wp_enqueue_style('jsdelivr_bootstrap_css', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css', [], '');
 
             // JS Libraries
-            wp_enqueue_script('ng_vendor', $apirender_base_uri.'/assets/scripts/vendor.js', array(), $this->wThemeVersion, true);
-            wp_enqueue_script('jsapi', 'https://www.google.com/jsapi', array(), '', true);
-            wp_enqueue_script('lodash', 'https://cdn.jsdelivr.net/npm/lodash@3.8.0/index.min.js"', array(), '', true);
-            wp_enqueue_script('ng_libs', $apirender_base_uri.'/assets/scripts/misclibs.js', array(), $this->wThemeVersion, true);
-            wp_enqueue_script('ng_app', $apirender_base_uri.'/assets/app.js', array(), $this->wThemeVersion, true);
-            wp_enqueue_script('ng_scripts', $apirender_base_uri.'/assets/scripts/scripts.js', array(), $this->wThemeVersion, true);
+            wp_enqueue_script('jsapi', 'https://www.google.com/jsapi', [], '', true);
+            wp_enqueue_script('jsdelivr_lodash', 'https://cdn.jsdelivr.net/npm/lodash@3.8.0/index.min.js"', [], '', true);
+            wp_enqueue_script('jsdelivr_slick', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', ['jsdelivr_jquery'], '', true);
+            wp_enqueue_script('jsdelivr_match8', 'https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js', ['jsdelivr_jquery'], '', true);
 
-            wp_enqueue_script('slick', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', array('jquery'), '', true);
-            wp_enqueue_script('match8', 'https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js', array('jquery'), '', true);
-            wp_enqueue_script('sheet_item', $apirender_base_uri.'/assets/scripts/raccourci/sheet_item.'. $jsModeSuffix .'.js', array('match8'), $this->wThemeVersion, true);
-            wp_enqueue_script('itinerary', $apirender_base_uri.'/assets/scripts/raccourci/itinerary.'. $jsModeSuffix .'.js', array('jquery','ng_scripts'), $this->wThemeVersion, true);
-            wp_enqueue_script('fresco', $apirender_base_uri.'/assets/scripts/lib/fresco.js', array('jquery'), $this->wThemeVersion, true);
+            wp_enqueue_script('hawwwai_ng_vendor', $apirender_base_uri.'/assets/scripts/vendor.js', [], $this->wThemeVersion, true);
+            wp_enqueue_script('hawwwai_ng_libs', $apirender_base_uri.'/assets/scripts/misclibs.js', [], $this->wThemeVersion, true);
+            wp_enqueue_script('hawwwai_ng_app', $apirender_base_uri.'/assets/app.js', [], $this->wThemeVersion, true);
+            wp_enqueue_script('hawwwai_ng_scripts', $apirender_base_uri.'/assets/scripts/scripts.js', [], $this->wThemeVersion, true);
+            wp_enqueue_script('hawwwai_sheet_item', $apirender_base_uri.'/assets/scripts/raccourci/sheet_item.'. $jsModeSuffix .'.js', ['jsdelivr_match8'], $this->wThemeVersion, true);
+            wp_enqueue_script('hawwwai_itinerary', $apirender_base_uri.'/assets/scripts/raccourci/itinerary.'. $jsModeSuffix .'.js', ['jsdelivr_jquery','hawwwai_ng_scripts'], $this->wThemeVersion, true);
+            wp_enqueue_script('hawwwai_fresco', $apirender_base_uri.'/assets/scripts/lib/fresco.js', ['jsdelivr_jquery'], $this->wThemeVersion, true);
         }
 
         // Add the comment-reply library on pages where it is necessary
@@ -240,23 +224,23 @@ class WoodyTheme_Enqueue_Assets
 
         // Enqueue the main Scripts
         $dependencies = [
-            'jquery',
-            'swiper',
-            'cookieconsent',
-            'lightgallery',
-            'lg-pager',
-            'lg-thumbnail',
-            'lg-video',
-            'lg-zoom',
-            'lg-fullscreen'
+            'jsdelivr_jquery',
+            'jsdelivr_swiper',
+            'jsdelivr_cookieconsent',
+            'jsdelivr_lightgallery',
+            'jsdelivr_lg-pager',
+            'jsdelivr_lg-thumbnail',
+            'jsdelivr_lg-video',
+            'jsdelivr_lg-zoom',
+            'jsdelivr_lg-fullscreen'
         ];
         wp_enqueue_script('main-javascripts', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('js/main.js'), $dependencies, '', true);
 
         // Enqueue the main Stylesheet.
         if ($this->isTouristicSheet || $this->isTouristicPlaylist) {
-            wp_enqueue_style('main-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/tourism.css'), array(), '', 'all');
+            wp_enqueue_style('main-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/tourism.css'), [], '', 'all');
         } else {
-            wp_enqueue_style('main-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/main.css'), array(), '', 'all');
+            wp_enqueue_style('main-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/main.css'), [], '', 'all');
         }
     }
 
@@ -265,7 +249,7 @@ class WoodyTheme_Enqueue_Assets
         // Define $this->isTouristicPlaylist, $this->isTouristicSheet et $this->wThemeVersion
         $this->setGlobalVars();
 
-        wp_enqueue_script('lazysizes', 'https://cdn.jsdelivr.net/npm/lazysizes@4.1.2/lazysizes.min.js', array(), '', true);
+        wp_enqueue_script('jsdelivr_lazysizes', 'https://cdn.jsdelivr.net/npm/lazysizes@4.1.2/lazysizes.min.js', [], '', true);
 
         // Enqueue the main Scripts
         $dependencies = ['jquery'];
@@ -275,7 +259,7 @@ class WoodyTheme_Enqueue_Assets
         wp_add_inline_script('admin-javascripts', 'var siteConfig = ' . json_encode($this->siteConfig) . ';', 'before');
 
         // Enqueue the main Stylesheet.
-        wp_enqueue_style('admin-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/admin.css'), array(), $this->wThemeVersion, 'all');
+        wp_enqueue_style('admin-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/admin.css'), [], $this->wThemeVersion, 'all');
     }
 
     private function assetPath($filename)
