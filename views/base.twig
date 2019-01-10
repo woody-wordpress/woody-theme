@@ -30,7 +30,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="icon" sizes="128x128" href="{{ icons.128 }}"> <!-- Chrome -->
 
 <!-- WP Metas-->
-{{ block('metas') }}
+{% block metas %}{% endblock %}
 <!-- /WP Metas-->
 
 <!-- WP Header-->
@@ -38,7 +38,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- /WP Header-->
 
 <!-- WP Styles -->
-{{ block('styles') }}
+{% block styles %}{% endblock %}
 <!-- /WP Styles -->
 
 </head>
@@ -54,7 +54,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div class="site-content">
 
             <!-- Theme Content -->
-            {{ block('content') }}
+            {% block content %}{% endblock %}
             <!-- /Theme Content -->
 
             <!-- Theme Footer -->
@@ -69,7 +69,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
 
     <!-- Twig Inline Scripts tags -->
-    {{ block('inline_scripts') }}
+    {% block inline_scripts %}{% endblock %}
     <!-- /Twig Inline Scripts tags -->
 
     <!-- WP Footer-->
