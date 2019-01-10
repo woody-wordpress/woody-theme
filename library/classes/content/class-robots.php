@@ -32,9 +32,6 @@ class WoodyTheme_Robots
                 'Disallow: /*.inc$',
                 'Disallow: /*?*p=',
                 'Disallow: /*?*autoselect_id=',
-                'Disallow: /app/plugins/',
-                'Disallow: /app/mu-plugins/',
-                'Disallow: /app/themes/',
             ];
 
             // Add Sitemap
