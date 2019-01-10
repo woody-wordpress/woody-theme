@@ -180,19 +180,19 @@ $('#post').each(function() {
     acf.addAction('append_field/key=field_5b27890c84ed3', getAutoFocusQuery);
 
     // Collapse all section or layouts
-    $('#acf-group_5afd260eeb4ab .acf-field.collapsing-rows').each(function(){
+    $('#acf-group_5afd260eeb4ab .acf-field.collapsing-rows').each(function() {
         var $this = $(this);
-        if($this.hasClass('acf-field-5afd2c6916ecb')){
+        if ($this.hasClass('acf-field-5afd2c6916ecb')) {
             var rowsType = 'les sections';
             var theRows = '> .acf-repeater > .acf-table > .ui-sortable .acf-row';
-        } else if($this.hasClass('acf-field-5b043f0525968')){
+        } else if ($this.hasClass('acf-field-5b043f0525968')) {
             var rowsType = 'les blocs';
             var theRows = '> .acf-flexible-content > .values .layout';
         }
 
         $this.prepend('<span class="woodyRowsCollapse"><span class="text">Fermer ' + rowsType + '</span><span class="dashicons dashicons-arrow-up' + '"></span></span>');
 
-        $('.woodyRowsCollapse').click(function(){
+        $('.woodyRowsCollapse').click(function() {
             console.log($(this).siblings('.acf-input').find(theRows));
             $(this).siblings('.acf-input').find(theRows).addClass('-collapsed');
         })
