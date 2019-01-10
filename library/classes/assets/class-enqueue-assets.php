@@ -38,7 +38,6 @@ class WoodyTheme_Enqueue_Assets
 
     protected function registerHooks()
     {
-        //add_action('wp_default_scripts', [$this, 'removeJqueryMigrate']);
         add_action('wp_enqueue_scripts', [$this, 'enqueueLibraries']);
         add_action('wp_enqueue_scripts', [$this, 'enqueueAssets']);
         add_action('admin_enqueue_scripts', [$this, 'enqueueAdminAssets']);
@@ -68,17 +67,6 @@ class WoodyTheme_Enqueue_Assets
 
         return $wait;
     }
-
-    // public function removeJqueryMigrate($scripts)
-    // {
-    //     if (WP_ENV != 'dev' && isset($scripts->registered['jsdelivr_jquery'])) {
-    //         $script = $scripts->registered['jsdelivr_jquery'];
-
-    //         if ($script->deps) {
-    //             $script->deps = array_diff($script->deps, array('jquery-migrate'));
-    //         }
-    //     }
-    // }
 
     public function enqueueLibraries()
     {
@@ -196,28 +184,28 @@ class WoodyTheme_Enqueue_Assets
             $js_dependencies__playlist = ['jsdelivr_bootstrap','jsdelivr_match8','jsdelivr_nouislider','jsdelivr_wnumb','jsdelivr_chosen','jsdelivr_moment','jsdelivr_picker','jsdelivr_twigjs','jsdelivr_uuid','jsdelivr_lodash','jsdelivr_arrive','hawwwai_sheet_item'];
             wp_enqueue_script('hawwwai_playlist', $apirender_base_uri.'/assets/scripts/raccourci/playlist.'. $jsModeSuffix .'.js', $js_dependencies__playlist, $this->wThemeVersion, true);
             $playlist_map_query = !empty($map_keys) ? '?'.http_build_query($map_keys) : '';
-            wp_enqueue_script('hawwwai_playlist_map', $apirender_base_uri.'/assets/scripts/raccourci/playlist-map.leaflet.'. $jsModeSuffix .'.js'.$playlist_map_query, array_merge($js_dependencies_rcmap, ['hawwwai_playlist']), '', true);
+            wp_enqueue_script('hawwwai_playlist_map', $apirender_base_uri.'/assets/scripts/raccourci/playlist-map.leaflet.'. $jsModeSuffix .'.js'.$playlist_map_query, array_merge($js_dependencies_rcmap, ['hawwwai_playlist']), $this->wThemeVersion, true);
         }
 
         // Sheet libraries
         elseif ($this->isTouristicSheet) {
             // CSS Libraries (todo replace when possible)
             wp_enqueue_style('hawwwai_font_css', 'https://api.tourism-system.com/static/assets/fonts/raccourci-font.css', [], '');
+            wp_enqueue_style('hawwwai_fresco_css', 'https://api.tourism-system.com/render/assets/styles/lib/fresco.css', [], '');
             wp_enqueue_style('jsdelivr_leaflet_css', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.min.css', [], '');
             wp_enqueue_style('jsdelivr_slick_css', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css', [], '');
             wp_enqueue_style('jsdelivr_bootstrap_css', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css', [], '');
-            wp_enqueue_style('hawwwai_fresco_css', 'https://api.tourism-system.com/render/assets/styles/lib/fresco.css', [], '');
 
             // JS Libraries
             wp_enqueue_script('jsapi', 'https://www.google.com/jsapi', [], '', true);
             wp_enqueue_script('jsdelivr_lodash', 'https://cdn.jsdelivr.net/npm/lodash@3.8.0/index.min.js"', [], '', true);
+            wp_enqueue_script('jsdelivr_slick', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', ['jsdelivr_jquery'], '', true);
+            wp_enqueue_script('jsdelivr_match8', 'https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js', ['jsdelivr_jquery'], '', true);
+
             wp_enqueue_script('hawwwai_ng_vendor', $apirender_base_uri.'/assets/scripts/vendor.js', [], $this->wThemeVersion, true);
             wp_enqueue_script('hawwwai_ng_libs', $apirender_base_uri.'/assets/scripts/misclibs.js', [], $this->wThemeVersion, true);
             wp_enqueue_script('hawwwai_ng_app', $apirender_base_uri.'/assets/app.js', [], $this->wThemeVersion, true);
             wp_enqueue_script('hawwwai_ng_scripts', $apirender_base_uri.'/assets/scripts/scripts.js', [], $this->wThemeVersion, true);
-
-            wp_enqueue_script('jsdelivr_slick', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', ['jsdelivr_jquery'], '', true);
-            wp_enqueue_script('jsdelivr_match8', 'https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js', ['jsdelivr_jquery'], '', true);
             wp_enqueue_script('hawwwai_sheet_item', $apirender_base_uri.'/assets/scripts/raccourci/sheet_item.'. $jsModeSuffix .'.js', ['jsdelivr_match8'], $this->wThemeVersion, true);
             wp_enqueue_script('hawwwai_itinerary', $apirender_base_uri.'/assets/scripts/raccourci/itinerary.'. $jsModeSuffix .'.js', ['jsdelivr_jquery','hawwwai_ng_scripts'], $this->wThemeVersion, true);
             wp_enqueue_script('hawwwai_fresco', $apirender_base_uri.'/assets/scripts/lib/fresco.js', ['jsdelivr_jquery'], $this->wThemeVersion, true);
