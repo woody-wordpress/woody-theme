@@ -104,7 +104,7 @@ class WoodyTheme_Claims
                 }
                 foreach ($linked_pages as $linked_page) {
                     if (is_array($ancestors)) {
-                        if ($linked_page['claim_linked_page_hierarchy'] && in_array($linked_page['claim_linked_post_ID'], $ancestors)) {
+                        if ($linked_page['claim_linked_page_hierarchy'] && in_array($linked_page['claim_linked_post_id'], $ancestors)) {
                             $return[] = Timber::compile($woody_components[$template], $data);
                         }
                     } elseif ($ancestors === $post_ID) {
