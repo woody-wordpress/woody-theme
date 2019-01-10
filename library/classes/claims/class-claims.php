@@ -73,7 +73,6 @@ class WoodyTheme_Claims
             return;
         }
 
-        // $post_ID = url_to_postid($url);
         add_filter('posts_where', [$this, 'postsWhereClaimLinkedPostId']);
 
         $results = get_transient('woody_claims');
