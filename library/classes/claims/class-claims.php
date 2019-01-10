@@ -15,7 +15,8 @@ class WoodyTheme_Claims
 
     protected function registerHooks()
     {
-        add_action('init', array($this, 'registerClaims'), 10);
+        add_action('init', [$this, 'registerClaims']);
+        add_action('save_post', [$this, 'resetWoodyClaimsTransient'], 10, 3);
         add_action('rest_api_init', function () {
             register_rest_route('woody', 'claims-blocks', array(
                 'methods' => 'POST',
@@ -60,49 +61,71 @@ class WoodyTheme_Claims
 
     public function addClaimsBlocks(\WP_REST_Request $request)
     {
-        $data = [];
-        $template = '';
-        $post_id = '';
+        $return = [];
+        $post_ID = '';
         $url = $request->get_body();
         if (!empty($url)) {
-            $post_id = url_to_postid($url);
+            $post_ID = url_to_postid($url);
+            $ancestors = getPostAncestors($post_ID, false);
         }
 
-        if (!is_numeric($post_id)) {
+        if (!is_numeric($post_ID)) {
             return;
         }
 
-        // $post_id = url_to_postid($url);
+        // $post_ID = url_to_postid($url);
         add_filter('posts_where', [$this, 'postsWhereClaimLinkedPostId']);
-        // WP Query to get every claims linked to the page
-        $query_args = [
-            'post_type' => 'woody_claims',
-            'post_status' => 'publish',
-            'orderby' => 'rand',
-            'meta_key' => 'claim_linked_pages_$_claim_linked_post_id',
-            'meta_value'	=> $post_id,
-            'meta_compare' => '='
-        ];
 
-        $results = new WP_Query($query_args);
-        if (empty($results->post_count)) {
-            return;
+        $results = get_transient('woody_claims');
+
+        if (empty($results)) {
+            $query_args = [
+                'post_type' => 'woody_claims',
+                'post_status' => 'publish',
+                'orderby' => 'rand',
+                'meta_key' => 'claim_linked_pages_$_claim_linked_post_ID',
+                'meta_value'	=> $post_ID,
+                'meta_compare' => '='
+            ];
+
+            $results = new WP_Query($query_args);
+            set_transient('woody_claims', $results);
         }
 
-
-        $template = get_field('claim_woody_tpl', $results->post->ID);
-        $data = get_field('claim_background_parameters', $results->post->ID);
-        $data['items'] = get_field('claim_slides', $results->post->ID);
-        $woody_components = getWoodyTwigPaths();
-        $return = Timber::compile($woody_components[$template], $data);
+        if (!empty($results->posts)) {
+            $woody_components = getWoodyTwigPaths();
+            foreach ($results->posts as $post) {
+                $template = get_field('claim_woody_tpl', $post->ID);
+                $data = get_field('claim_background_parameters', $post->ID);
+                $data['items'] = get_field('claim_slides', $post->ID);
+                if (empty($template || empty($data))) {
+                    continue;
+                }
+                $linked_pages = get_field('claim_linked_pages', $post->ID);
+                if (empty($linked_pages)) {
+                    return;
+                }
+                foreach ($linked_pages as $linked_page) {
+                    if (is_array($ancestors)) {
+                        if ($linked_page['claim_linked_page_hierarchy'] && in_array($linked_page['claim_linked_post_ID'], $ancestors)) {
+                            $return[] = Timber::compile($woody_components[$template], $data);
+                        }
+                    } elseif ($ancestors === $post_ID) {
+                        $return[] = Timber::compile($woody_components[$template], $data);
+                    } else {
+                        return;
+                    }
+                }
+            }
+        }
 
         return $return;
     }
 
-    public function postsWhereClaimLinkedPostId($where)
+    public function resetWoodyClaimsTransient($post_ID, $post, $update)
     {
-        $where = str_replace("meta_key = 'claim_linked_pages_$", "meta_key LIKE 'claim_linked_pages_%", $where);
-
-        return $where;
+        if ($post->post_type === 'woody_claims') {
+            delete_transient('woody_claims');
+        }
     }
 }

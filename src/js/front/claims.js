@@ -8,7 +8,8 @@ $('.claims-blocks-wrapper').each(function() {
         url: '/wp-json/woody/claims-blocks',
         data: url,
         success: function(data) {
-            $this.append(data);
+            var item = data[Math.floor(Math.random() * data.length)];
+            $this.append(item);
             var swiper_options = $this.find('.claims-swiper').data('options');
             var claimSwiper = new Swiper('.claims-swiper', swiper_options);
         },
