@@ -76,9 +76,6 @@ abstract class WoodyTheme_TemplateAbstract
         // Add addEsSearchBlock
         $this->addEsSearchBlock();
 
-        // Add claim bloc if some is linked to the current page
-        $this->addClaimsBlocks();
-
         // Set a global dist dir
         $this->context['dist_dir'] = WP_DIST_DIR;
     }
@@ -233,41 +230,5 @@ abstract class WoodyTheme_TemplateAbstract
         $template = $this->context['woody_components']['woody_widgets-es_search_block-tpl_01'];
         $this->context['es_search_block'] = Timber::compile($template, $data);
         $this->context['es_search_block_mobile'] = Timber::compile($template, $data);
-    }
-
-    private function addClaimsBlocks()
-    {
-        $data = [];
-        $template = '';
-
-        add_filter('posts_where', [$this, 'postsWhereClaimLinkedPostId']);
-        // WP Query to get every claims linked to the page
-        $query_args = [
-            'post_type' => 'woody_claims',
-            'post_status' => 'publish',
-            'orderby' => 'rand',
-            'meta_key' => 'claim_linked_pages_$_claim_linked_post_id',
-            'meta_value'	=> 5258,
-            'meta_compare' => '='
-        ];
-
-        $results = new WP_Query($query_args);
-        if (empty($results->post_count)) {
-            return;
-        }
-
-
-        $template = get_field('claim_woody_tpl', $results->post->ID);
-        $data = get_field('claim_background_parameters', $results->post->ID);
-        $data['items'] = get_field('claim_slides', $results->post->ID);
-
-        $this->context['claims_block'] = Timber::compile($this->context['woody_components'][$template], $data);
-    }
-
-    public function postsWhereClaimLinkedPostId($where)
-    {
-        $where = str_replace("meta_key = 'claim_linked_pages_$", "meta_key LIKE 'claim_linked_pages_%", $where);
-
-        return $where;
     }
 }

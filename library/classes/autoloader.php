@@ -43,6 +43,9 @@ new WoodyTheme_Yoast();
 new WoodyTheme_Varnish();
 // new WoodyTheme_Videos();
 
+// Claims
+new WoodyTheme_Claims();
+
 // Timber
 new WoodyTheme_Twig_Filters();
 
