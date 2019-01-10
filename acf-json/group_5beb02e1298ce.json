@@ -209,6 +209,25 @@
             ]
         },
         {
+            "key": "field_5c372c1bd72f8",
+            "label": "Liste des ID's liés",
+            "name": "claim_linked_ids",
+            "type": "text",
+            "instructions": "à masquer\r\nchamp rempli automatiquement par les pages liées",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_5beb052a9393b",
             "label": "Mise en page",
             "name": "",
@@ -303,5 +322,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Répéteur pour créer des publicités, affichées aléatoirement sur des pages liées",
-    "modified": 1546955902
+    "modified": 1547119819
 }
