@@ -3,14 +3,12 @@
     "type": "wordpress-theme",
     "description": "",
     "license": "proprietary",
-    "authors": [
-        {
-            "name": "Raccourci Agency",
-            "email": "contact@raccourci.fr"
-        }
-    ],
+    "authors": [{
+        "name": "Raccourci Agency",
+        "email": "contact@raccourci.fr"
+    }],
     "require": {
-        "php": ">=5.6",
+        "php": ">=7.0",
         "composer/installers": "^1.4"
     },
     "config": {
