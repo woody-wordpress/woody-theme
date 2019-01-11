@@ -20,7 +20,8 @@ class WoodyTheme_Polylang
 
         add_filter('pll_is_cache_active', [$this, 'isCacheActive']);
         add_filter('pll_copy_taxonomies', [$this, 'copyAttachmentTypes'], 10, 2);
-        add_filter('pll_check_canonical_url', [$this, 'pllCheckCanonicalUrl'], 10, 2);
+        //add_filter('pll_check_canonical_url', [$this, 'pllCheckCanonicalUrl'], 10, 2);
+        add_filter('wpssoc_user_redirect_url', [$this, 'wpssocUserRedirectUrl'], 10, 1);
 
         add_filter('woody_pll_days', [$this, 'woodyPllDays'], 10);
         add_filter('woody_pll_months', [$this, 'woodyPllMonths'], 10);
@@ -32,6 +33,19 @@ class WoodyTheme_Polylang
         return true;
     }
 
+    public function wpssocUserRedirectUrl($user_redirect_set)
+    {
+        if (strpos($user_redirect_set, 'wp-admin') !== false) {
+            if (strpos($user_redirect_set, '?') !== false) {
+                $user_redirect_set .= '&lang=' . pll_current_language();
+            } else {
+                $user_redirect_set .= '?lang=' . pll_current_language();
+            }
+        }
+
+        return $user_redirect_set;
+    }
+
     /**
      * Hook pour supprimer la redirection intempestive des domaines en langue étrangère vers FR
      *
@@ -39,17 +53,17 @@ class WoodyTheme_Polylang
      * @param [type] $language
      * @return void
      */
-    public function pllCheckCanonicalUrl($redirect_url, $language)
-    {
-        $path = parse_url($redirect_url, PHP_URL_PATH);
-        if (empty($path) || $path == '/') {
-            //Output::log('no redirect : ' . $redirect_url);
-            return false;
-        } else {
-            //Output::log('continue redirect : ' . $redirect_url);
-            return $redirect_url;
-        }
-    }
+    // public function pllCheckCanonicalUrl($redirect_url, $language)
+    // {
+    //     $path = parse_url($redirect_url, PHP_URL_PATH);
+    //     if (empty($path) || $path == '/') {
+    //         //Output::log('no redirect : ' . $redirect_url);
+    //         return false;
+    //     } else {
+    //         //Output::log('continue redirect : ' . $redirect_url);
+    //         return $redirect_url;
+    //     }
+    // }
 
     // define the pll_copy_taxonomies callback
     public function copyAttachmentTypes($taxonomies, $sync)
