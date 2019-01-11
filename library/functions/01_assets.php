@@ -252,29 +252,18 @@ function getPrimaryTerm($taxonomy, $post_id, $fields = [])
  *
  * Nom : getPostAncestors
  * Auteur : Thomas Navarro
- * Return : Retourne le html d'une mise en avant de contenu
+ * Return : Retourne le parent racine d'un post
  * @param    postID INT : id d'une page enfant
- * @param    lastAncestor BOOLEAN :retourne le parent le plus haut
  * @return   return - INT/ARRAY : l'id d'un parent ou le tableau de tous les parents de postID
  *
  */
-function getPostAncestors($postID)
+function getPostRootAncestor($postID, $root_level = 1)
 {
-    $post = get_post($postID);
-    $ancestors = get_post_ancestors($post->ID);
-    if (!$post->post_parent) {
-        return false;
-    } else {
-        return $ancestors;
-    }
-}
-
-function getPostRootAncestor($postID)
-{
-    $ancestors = getPostAncestors($postID);
+    $return = 0;
+    $ancestors = get_post_ancestors($postID);
     if (!empty($ancestors)) {
         // Get last ancestors
-        $root=count($ancestors)-1;
+        $root=count($ancestors)- $root_level;
         $return = $ancestors[$root];
     }
 

@@ -73,7 +73,7 @@ class WoodyTheme_Claims
 
         // On récupère l'ID de la page courante + ID des tous ses parents
         $post_ID = url_to_postid($url);
-        $ancestors = getPostAncestors($post_ID);
+        $ancestors = get_post_ancestors($post_ID);
 
         // Si le post ID n'es pas numérique => return
         if (!is_numeric($post_ID)) {

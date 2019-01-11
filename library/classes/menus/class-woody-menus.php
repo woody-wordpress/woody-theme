@@ -28,11 +28,11 @@ class WoodyTheme_Menus
     * @return return - Un tableau
     *
     */
-    public static function getMainMenu($limit = 6, $depth_1_ids = array())
+    public static function getMainMenu($limit = 6, $depth_1_ids = array(), $root_level = 1)
     {
         $return = [];
         if (!empty($depth_1_ids)) {
-            $return = self::getMenuLinks($depth_1_ids, 0, $limit);
+            $return = self::getMenuLinks($depth_1_ids, 0, $limit, $root_level);
         } else {
             $return = self::getMenuLinks(null, 0, $limit);
         }
@@ -118,7 +118,7 @@ class WoodyTheme_Menus
     * @return return - Un tableau
     *
     */
-    public static function getMenuLinks($posts = [], $post_parent = 0, $limit = -1)
+    public static function getMenuLinks($posts = [], $post_parent = 0, $limit = -1, $root_level = 1)
     {
         $return = [];
         // TODO: empty($post) is usefull if depth_1 links are based on WoodyPage pages's weight +> to remove
@@ -134,7 +134,8 @@ class WoodyTheme_Menus
             $posts = get_posts($args);
         }
 
-        $root_ancestor = getPostRootAncestor(get_the_ID());
+        $current_id = get_the_ID();
+        $root_ancestor = getPostRootAncestor($current_id, $root_level);
 
         if (!empty($posts) && is_array($posts)) {
             foreach ($posts as $post_key => $post) {
@@ -155,7 +156,7 @@ class WoodyTheme_Menus
                 $return[$post_key]['the_fields']['pretitle'] = (!empty(get_field('in_menu_pretitle', $post->ID))) ? get_field('in_menu_pretitle', $post->ID) : '';
                 $return[$post_key]['the_fields']['subtitle'] = (!empty(get_field('in_menu_subtitle', $post->ID))) ? get_field('in_menu_subtitle', $post->ID) : '';
                 $return[$post_key]['img'] = (!empty(get_field('in_menu_img', $post->ID))) ? get_field('in_menu_img', $post->ID) : get_field('field_5b0e5ddfd4b1b', $post->ID);
-                $return[$post_key]['is_active'] = ($post->ID === $root_ancestor) ? true : false;
+                $return[$post_key]['is_active'] = ($post->ID === $root_ancestor) ? true : ($post->ID === $current_id) ? true : false;
             }
 
             return $return;
