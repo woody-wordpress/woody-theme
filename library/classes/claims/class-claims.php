@@ -63,26 +63,31 @@ class WoodyTheme_Claims
     {
         $return = [];
         $post_ID = '';
+        // L'url courante passée en data dans l'appel ajax
         $url = $request->get_body();
-        if (!empty($url)) {
-            $post_ID = url_to_postid($url);
-            $ancestors = getPostAncestors($post_ID, false);
+
+        // Pas d'url, pas de retour !
+        if (empty($url)) {
+            return false;
         }
 
+        // On récupère l'ID de la page courante + ID des tous ses parents
+        $post_ID = url_to_postid($url);
+        $ancestors = getPostAncestors($post_ID, false);
+
+        // Si le post ID n'es pas numérique => return
         if (!is_numeric($post_ID)) {
             return;
         }
 
+        // On récupère les résulats dans un transient. Si transient inexistant on le créé
         $results = get_transient('woody_claims');
-
         if (empty($results)) {
+            // On récupère tous les blocs de pub publiés
             $query_args = [
                 'post_type' => 'woody_claims',
                 'post_status' => 'publish',
-                'orderby' => 'rand',
-                'meta_key' => 'claim_linked_pages_$_claim_linked_post_ID',
-                'meta_value'	=> $post_ID,
-                'meta_compare' => '='
+                'orderby' => 'rand'
             ];
 
             $results = new WP_Query($query_args);
@@ -92,25 +97,35 @@ class WoodyTheme_Claims
         if (!empty($results->posts)) {
             $woody_components = getWoodyTwigPaths();
             foreach ($results->posts as $post) {
+                // On récupère la valeur des champs du bloc pub
                 $template = get_field('claim_woody_tpl', $post->ID);
                 $data = get_field('claim_background_parameters', $post->ID);
+                $data['block_ID'] =  $post->ID;
                 $data['items'] = get_field('claim_slides', $post->ID);
+                $linked_pages = get_field('claim_linked_pages', $post->ID);
+
+                // S'il n'y a pas de pub dans le bloc, on passe au suivant
                 if (empty($template || empty($data))) {
                     continue;
                 }
-                $linked_pages = get_field('claim_linked_pages', $post->ID);
-                if (empty($linked_pages)) {
-                    return;
-                }
+
                 foreach ($linked_pages as $linked_page) {
-                    if (is_array($ancestors)) {
+                    // Si le bloc n'est lié à aucune page, on passe au suivant
+                    if (empty($linked_page['claim_linked_post_id'])) {
+                        continue;
+                    }
+
+
+                    if (($linked_page['claim_linked_post_id'] === $post_ID)) {
+                        // Si un bloc de pub est lié à la page courante => on ajoute l'html du bloc au return
+                        $return[] = Timber::compile($woody_components[$template], $data);
+                    } elseif (!empty($ancestors)) {  // Sinon, la page courante a des parents
+                        // Si un bloc de pub est lié à un des parents avec "Afficher sur tous ses enfants" actif => on ajoute l'html du bloc au return
                         if ($linked_page['claim_linked_page_hierarchy'] && in_array($linked_page['claim_linked_post_id'], $ancestors)) {
                             $return[] = Timber::compile($woody_components[$template], $data);
                         }
-                    } elseif ($ancestors === $post_ID) {
-                        $return[] = Timber::compile($woody_components[$template], $data);
-                    } else {
-                        return;
+                    } else { // Sinon, on passe au lien suivant
+                        continue;
                     }
                 }
             }

@@ -258,24 +258,25 @@ function getPrimaryTerm($taxonomy, $post_id, $fields = [])
  * @return   return - INT/ARRAY : l'id d'un parent ou le tableau de tous les parents de postID
  *
  */
-// TODO: Voir avec Thomas comment refaire cette fonction sans retourner le postID courant pour plus de cohérence
 function getPostAncestors($postID, $lastAncestor = true)
 {
     $post = get_post($postID);
-
-    if (!$post->post_parent) {
-        return $postID;
-    }
-
-    // Get all parents
     $ancestors=get_post_ancestors($post->ID);
-    if (!$lastAncestor) {
-        return $ancestors;
+
+    if ($lastAncestor) {
+        if (!$post->post_parent) {
+            return false;
+        } else {
+            // Get last ancestors
+            $root=count($ancestors)-1;
+            $parent = $ancestors[$root];
+
+            return $parent;
+        }
+    } else {
+        // Get all parents
+        if (!$lastAncestor) {
+            return $ancestors;
+        }
     }
-
-    // Get last ancestors
-    $root=count($ancestors)-1;
-    $parent = $ancestors[$root];
-
-    return $parent;
 }
