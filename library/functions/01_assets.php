@@ -258,25 +258,25 @@ function getPrimaryTerm($taxonomy, $post_id, $fields = [])
  * @return   return - INT/ARRAY : l'id d'un parent ou le tableau de tous les parents de postID
  *
  */
-function getPostAncestors($postID, $lastAncestor = true) {
+function getPostAncestors($postID)
+{
     $post = get_post($postID);
+    $ancestors = get_post_ancestors($post->ID);
+    if (!$post->post_parent) {
+        return false;
+    } else {
+        return $ancestors;
+    }
+}
 
-    if ($post->post_parent)	{
-
-        // Get all parents
-        $ancestors=get_post_ancestors($post->ID);
-
-        if (!$lastAncestor) {
-            return $ancestors;
-        }
-
+function getPostRootAncestor($postID)
+{
+    $ancestors = getPostAncestors($postID);
+    if (!empty($ancestors)) {
         // Get last ancestors
         $root=count($ancestors)-1;
-        $parent = $ancestors[$root];
-
-    } else {
-        $parent = $post->ID;
+        $return = $ancestors[$root];
     }
 
-    return $parent;
+    return $return;
 }

@@ -19,22 +19,22 @@
         {% endblock %}
 
         {% block home_slider %}
-            {% if home_slider | default %}
-                <div class="home-slider">
-                    {{ home_slider }}
-                    {% if bookblock|default %}
-                        <div class="bookblock-wrapper">
-                            {{ bookblock }}
-                        </div>
-                    {% endif %}
-                </div>
-            {% endif %}
-        {% endblock %}
-
-        {% if bookblock|default and not home_slider %}
+        {% if home_slider | default %}
+        <div class="home-slider">
+            {{ home_slider }}
+            {% if bookblock|default %}
             <div class="bookblock-wrapper">
                 {{ bookblock }}
             </div>
+            {% endif %}
+        </div>
+        {% endif %}
+        {% endblock %}
+
+        {% if bookblock|default and not home_slider %}
+        <div class="bookblock-wrapper">
+            {{ bookblock }}
+        </div>
         {% endif %}
 
         {% if playlist_tourism.content|default %}
@@ -49,16 +49,19 @@
         </div>
         {% endfor %}
 
-        {% if claims_block|default %}
-            <div class="claims-blocks-wrapper">
-                {{ claims_block }}
-            </div>
-        {% endif %}
+        {# {% if claims_block|default %}
+        <div class="claims-blocks-wrapper">
+            {{ claims_block }}
+        </div>
+        {% endif %} #}
+        <div class="claims-blocks-wrapper"></div>
 
     </div>
 </main>
 {% endblock %}
 
 {% block metas %}
-<script>var siteConfig = {{ site_config }};</script>
+<script>
+    var siteConfig = {{ site_config }};
+</script>
 {% endblock %}

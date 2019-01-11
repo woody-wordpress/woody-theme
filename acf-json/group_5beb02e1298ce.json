@@ -209,25 +209,6 @@
             ]
         },
         {
-            "key": "field_5c372c1bd72f8",
-            "label": "Liste des ID's liés",
-            "name": "claim_linked_ids",
-            "type": "text",
-            "instructions": "à masquer\r\nchamp rempli automatiquement par les pages liées",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
             "key": "field_5beb052a9393b",
             "label": "Mise en page",
             "name": "",
@@ -257,7 +238,7 @@
                 "id": ""
             },
             "choices": {
-                "blocks-claims-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.sarlat.wp.rc-dev.com\/app\/dist\/sarlat\/img\/woody-library\/views\/blocks\/claims\/tpl_01\/thumbnail.png?version=2.6.10\" alt=\"blocks-claims-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Publicité - template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Publicité - template 1<\/h4>Bloc de publicité => Basic card image carré<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+                "blocks-claims-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.sarlat.wp.rc-dev.com\/app\/dist\/sarlat\/img\/woody-library\/views\/blocks\/claims\/tpl_01\/thumbnail.png?version=2.7.0\" alt=\"blocks-claims-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Publicité - template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Publicité - template 1<\/h4>Bloc de publicité => Basic card image carré<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -322,5 +303,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Répéteur pour créer des publicités, affichées aléatoirement sur des pages liées",
-    "modified": 1547119819
+    "modified": 1547128093
 }

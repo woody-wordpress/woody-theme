@@ -134,6 +134,8 @@ class WoodyTheme_Menus
             $posts = get_posts($args);
         }
 
+        $root_ancestor = getPostRootAncestor(get_the_ID());
+
         if (!empty($posts) && is_array($posts)) {
             foreach ($posts as $post_key => $post) {
                 if (is_int($post)) {
@@ -153,6 +155,7 @@ class WoodyTheme_Menus
                 $return[$post_key]['the_fields']['pretitle'] = (!empty(get_field('in_menu_pretitle', $post->ID))) ? get_field('in_menu_pretitle', $post->ID) : '';
                 $return[$post_key]['the_fields']['subtitle'] = (!empty(get_field('in_menu_subtitle', $post->ID))) ? get_field('in_menu_subtitle', $post->ID) : '';
                 $return[$post_key]['img'] = (!empty(get_field('in_menu_img', $post->ID))) ? get_field('in_menu_img', $post->ID) : get_field('field_5b0e5ddfd4b1b', $post->ID);
+                $return[$post_key]['is_active'] = ($post->ID === $root_ancestor) ? true : false;
             }
 
             return $return;
