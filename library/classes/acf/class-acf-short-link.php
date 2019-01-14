@@ -30,7 +30,7 @@ class WoodyTheme_ACF_ShorLink
         $transient_key = 'woody_shortLink_' . $post_id;
         if (false === ($shortLinkData = get_transient($transient_key))) {
             $page_type_object = get_the_terms($post_id, 'page_type');
-            $shortLinkData['page_type'] = $page_type_object[0]->slug;
+            $shortLinkData['page_type'] = !empty($page_type_object[0]) ? $page_type_object[0]->slug : '';
             $shortLinkData['conf_id'] = get_field('field_5b338ff331b17', $post_id);
             set_transient($transient_key, $shortLinkData, 2*60);
         }

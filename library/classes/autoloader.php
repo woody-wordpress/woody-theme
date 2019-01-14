@@ -26,6 +26,9 @@ new WoodyTheme_Cleanup_OptionsTable();
 // Dashboard
 new WoodyTheme_Dashboard();
 
+// Langs
+new WoodyTheme_Polylang();
+
 // Assets
 new WoodyTheme_Enqueue_Assets();
 
@@ -36,7 +39,6 @@ new WoodyTheme_Taxonomy();
 new WoodyTheme_Images();
 new WoodyTheme_Tinymce();
 new WoodyTheme_Links();
-new WoodyTheme_Polylang();
 new WoodyTheme_SiteMap();
 new WoodyTheme_Robots();
 new WoodyTheme_Yoast();

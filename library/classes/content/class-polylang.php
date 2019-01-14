@@ -26,6 +26,8 @@ class WoodyTheme_Polylang
         add_filter('woody_pll_days', [$this, 'woodyPllDays'], 10);
         add_filter('woody_pll_months', [$this, 'woodyPllMonths'], 10);
         add_filter('woody_pll_get_posts', [$this, 'woodyPllGetPosts'], 10, 1);
+
+        add_filter('woody_theme_siteconfig', [$this, 'siteConfigAddLangs'], 12, 1);
     }
 
     public function isCacheActive()
@@ -44,6 +46,12 @@ class WoodyTheme_Polylang
         }
 
         return $user_redirect_set;
+    }
+
+    public function siteConfigAddLangs($siteConfig)
+    {
+        $siteConfig['languages'] = pll_languages_list();
+        return $siteConfig;
     }
 
     /**
