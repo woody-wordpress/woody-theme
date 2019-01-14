@@ -128,9 +128,9 @@ class WoodyTheme_Enqueue_Assets
         wp_enqueue_script('jquery', 'https://cdn.jsdelivr.net/npm/jquery@'. $jQuery_version .'/dist/jquery.min.js', [], '', true);
         wp_enqueue_script('jsdelivr_lazysizes', 'https://cdn.jsdelivr.net/npm/lazysizes@4.1.2/lazysizes.min.js', [], '', true);
 
-        if (WP_ENV == 'dev') {
-            wp_enqueue_script('jsdelivr_jquery-migrate', 'https://cdn.jsdelivr.net/npm/jquery-migrate@3.0.1/dist/jquery-migrate.min.js', ['jquery'], '', true);
-        }
+        // if (WP_ENV == 'dev') {
+        //     wp_enqueue_script('jsdelivr_jquery-migrate', 'https://cdn.jsdelivr.net/npm/jquery-migrate@3.0.1/dist/jquery-migrate.min.js', ['jquery'], '', true);
+        // }
 
         // Dependencies of main.js
         wp_enqueue_script('jsdelivr_cookieconsent', 'https://cdn.jsdelivr.net/npm/cookieconsent@3.1.0/build/cookieconsent.min.js', [], '', true);
