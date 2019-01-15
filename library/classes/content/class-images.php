@@ -291,18 +291,20 @@ class WoodyTheme_Images
                             $translations[$lang] = $t_attachment_id;
                             pll_save_post_translations($translations);
                             apply_filters('woody_pll_set_posts', $attachment_id, $translations);
+
+                            // Sync Meta and fields
+                            $this->syncAttachmentMetadata($attachment_id, $t_attachment_id);
                         }
                     }
-
-                    // Sync Meta and fields
-                    $this->syncAttachmentMetadata($attachment_id, $t_attachment_id);
                 }
             } else {
                 $t_attachment_id = $attachment_id;
                 $attachment_id = pll_get_post($t_attachment_id, PLL_DEFAULT_LANG);
 
                 // Sync Meta and fields
-                $this->syncAttachmentMetadata($attachment_id, $t_attachment_id);
+                if (!empty($attachment_id)) {
+                    $this->syncAttachmentMetadata($attachment_id, $t_attachment_id);
+                }
             }
         }
     }
