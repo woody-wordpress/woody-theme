@@ -108,24 +108,26 @@ class WoodyTheme_Claims
                 if (empty($template || empty($data))) {
                     continue;
                 }
-
-                foreach ($linked_pages as $linked_page) {
-                    // Si le bloc n'est lié à aucune page, on passe au suivant
-                    if (empty($linked_page['claim_linked_post_id'])) {
-                        continue;
-                    }
-
-
-                    if (($linked_page['claim_linked_post_id'] === $post_ID)) {
-                        // Si un bloc de pub est lié à la page courante => on ajoute l'html du bloc au return
-                        $return[] = Timber::compile($woody_components[$template], $data);
-                    } elseif (!empty($ancestors)) {  // Sinon, la page courante a des parents
-                        // Si un bloc de pub est lié à un des parents avec "Afficher sur tous ses enfants" actif => on ajoute l'html du bloc au return
-                        if ($linked_page['claim_linked_page_hierarchy'] && in_array($linked_page['claim_linked_post_id'], $ancestors)) {
-                            $return[] = Timber::compile($woody_components[$template], $data);
+                if (empty($linked_pages)) {
+                    $return[] = Timber::compile($woody_components[$template], $data);
+                } else {
+                    foreach ($linked_pages as $linked_page) {
+                        // Si le bloc n'est lié à aucune page, on passe au suivant
+                        if (empty($linked_page['claim_linked_post_id'])) {
+                            continue;
                         }
-                    } else { // Sinon, on passe au lien suivant
-                        continue;
+
+                        if (($linked_page['claim_linked_post_id'] === $post_ID)) {
+                            // Si un bloc de pub est lié à la page courante => on ajoute l'html du bloc au return
+                            $return[] = Timber::compile($woody_components[$template], $data);
+                        } elseif (!empty($ancestors)) {  // Sinon, si la page courante a des parents
+                            // Si un bloc de pub est lié à un des parents avec "Afficher sur tous ses enfants" actif => on ajoute l'html du bloc au return
+                            if ($linked_page['claim_linked_page_hierarchy'] && in_array($linked_page['claim_linked_post_id'], $ancestors)) {
+                                $return[] = Timber::compile($woody_components[$template], $data);
+                            }
+                        } else { // Sinon, on passe au lien suivant
+                            continue;
+                        }
                     }
                 }
             }
