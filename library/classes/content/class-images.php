@@ -22,7 +22,7 @@ class WoodyTheme_Images
         add_action('add_attachment', [$this, 'addAttachment'], 50);
         add_action('acf/save_post', [$this, 'saveAttachment'], 50);
         add_action('save_attachment', [$this, 'saveAttachment'], 50);
-        //add_action('delete_attachment', [$this, 'deleteAttachment'], 50);
+        add_action('delete_attachment', [$this, 'deleteAttachment'], 50);
 
         // Filters
         add_filter('intermediate_image_sizes_advanced', [$this, 'removeAutoThumbs'], 10, 2);
@@ -216,31 +216,12 @@ class WoodyTheme_Images
         }
     }
 
-    // public function deleteAttachment($attachment_id)
-    // {
-    //     if (wp_attachment_is_image($attachment_id)) {
-    //         $attachment = get_post($attachment_id);
-
-    //         $query_result = new \WP_Query([
-    //             'lang' => '', // request all languages
-    //             'posts_per_page' => -1,
-    //             'post_status' => 'any',
-    //             'post_type' => 'attachment',
-    //             'guid' => $attachment->guid
-    //         ]);
-
-    //         if (!empty($query_result->posts)) {
-    //             //remove_action('delete_attachment', [$this, 'deleteAttachment'], 50);
-    //             foreach ($query_result->posts as $key => $post) {
-    //                 wd($post->ID, '$post->ID');
-    //                 //wp_delete_attachment($post->ID, true);
-    //             }
-    //             //add_action('delete_attachment', [$this, 'deleteAttachment'], 50);
-    //         }
-
-    //         wp_reset_query();
-    //     }
-    // }
+    public function deleteAttachment($attachment_id)
+    {
+        if (wp_attachment_is_image($attachment_id)) {
+            delete_transient('woody_pll_post_translations_' . $attachment_id);
+        }
+    }
 
     public function saveAttachment($attachment_id)
     {
