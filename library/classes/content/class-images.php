@@ -291,10 +291,12 @@ class WoodyTheme_Images
                             $translations[$lang] = $t_attachment_id;
                             pll_save_post_translations($translations);
                             apply_filters('woody_pll_set_posts', $attachment_id, $translations);
-
-                            // Sync Meta and fields
-                            $this->syncAttachmentMetadata($attachment_id, $t_attachment_id);
                         }
+                    }
+
+                    // Sync Meta and fields
+                    if (!empty($t_attachment_id)) {
+                        $this->syncAttachmentMetadata($attachment_id, $t_attachment_id);
                     }
                 }
             } else {
