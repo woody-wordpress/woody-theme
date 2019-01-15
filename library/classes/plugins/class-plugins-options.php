@@ -277,7 +277,7 @@ class WoodyTheme_Plugins_Options
                 'seasons',
             ],
             'media' => [
-                'duplicate' => 1,
+                'duplicate' => 0,
             ],
         ];
 

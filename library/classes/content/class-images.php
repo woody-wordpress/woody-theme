@@ -19,10 +19,10 @@ class WoodyTheme_Images
     protected function registerHooks()
     {
         // Actions
-        add_action('add_attachment', [$this, 'addDefaultMediaType']);
-        add_action('acf/save_post', [$this, 'saveAttachment']);
-        add_action('save_attachment', [$this, 'saveAttachment']);
-        add_action('delete_attachment', [$this, 'deleteAttachment']);
+        add_action('add_attachment', [$this, 'addAttachment'], 50);
+        add_action('acf/save_post', [$this, 'saveAttachment'], 50);
+        add_action('save_attachment', [$this, 'saveAttachment'], 50);
+        //add_action('delete_attachment', [$this, 'deleteAttachment'], 50);
 
         // Filters
         add_filter('intermediate_image_sizes_advanced', [$this, 'removeAutoThumbs'], 10, 2);
@@ -110,11 +110,6 @@ class WoodyTheme_Images
         add_image_size('ratio_free_medium', 640);
         add_image_size('ratio_free_large', 1200);
         add_image_size('ratio_free', 1920);
-    }
-
-    public function addDefaultMediaType($post_id)
-    {
-        wp_set_object_terms($post_id, 'Média ajouté manuellement', 'attachment_types', false);
     }
 
     // Remove default image sizes here.
@@ -210,47 +205,53 @@ class WoodyTheme_Images
     /* Sync attachment data     */
     /* ------------------------ */
 
-    public function deleteAttachment($attachment_id)
+    public function addAttachment($attachment_id)
     {
-        $default_language = pll_default_language();
-        $current_lang = pll_get_post_language($attachment_id);
-        if ($current_lang != $default_language) {
-            // Main attachment
-            $attachment_id = pll_get_post($attachment_id, $default_language);
+        // Added attachment_types
+        wp_set_object_terms($attachment_id, 'Média ajouté manuellement', 'attachment_types', false);
+
+        // Duplicate all medias
+        if (pll_get_post_language($attachment_id) == PLL_DEFAULT_LANG) {
+            $this->saveAttachment($attachment_id);
         }
-
-        // Bug: génère une 500
-        // if (!empty($attachment_id)) {
-        //     // Delete all duplicate images
-        //     $translations = apply_filters('woody_pll_get_posts', $attachment_id);
-        //     if (!empty($translations)) {
-        //         wd($translations, 'delete translations');
-        //         foreach ($translations as $lang => $t_attachment_id) {
-        //             if ($t_attachment_id != $attachment_id) {
-        //                 wp_delete_attachment($t_attachment_id, true);
-        //             }
-        //         }
-        //         delete_transient('woody_pll_post_translations_' . $attachment_id);
-        //     }
-        // }
-
-        delete_transient('woody_pll_post_translations_' . $attachment_id);
     }
+
+    // public function deleteAttachment($attachment_id)
+    // {
+    //     if (wp_attachment_is_image($attachment_id)) {
+    //         $attachment = get_post($attachment_id);
+
+    //         $query_result = new \WP_Query([
+    //             'lang' => '', // request all languages
+    //             'posts_per_page' => -1,
+    //             'post_status' => 'any',
+    //             'post_type' => 'attachment',
+    //             'guid' => $attachment->guid
+    //         ]);
+
+    //         if (!empty($query_result->posts)) {
+    //             //remove_action('delete_attachment', [$this, 'deleteAttachment'], 50);
+    //             foreach ($query_result->posts as $key => $post) {
+    //                 wd($post->ID, '$post->ID');
+    //                 //wp_delete_attachment($post->ID, true);
+    //             }
+    //             //add_action('delete_attachment', [$this, 'deleteAttachment'], 50);
+    //         }
+
+    //         wp_reset_query();
+    //     }
+    // }
 
     public function saveAttachment($attachment_id)
     {
-        $attachment = get_post($attachment_id);
-        if ($attachment->post_type == 'attachment') {
+        if (wp_attachment_is_image($attachment_id)) {
+            $attachment = get_post($attachment_id);
 
             // Only if current edit post is default (FR)
             $languages = pll_languages_list();
-            $default_language = pll_default_language();
             $current_lang = pll_get_post_language($attachment_id);
 
-            if ($current_lang == $default_language) {
-
-                // Get metadatas (crop sizes)
-                $attachment_metadata = wp_get_attachment_metadata($attachment_id);
+            if ($current_lang == PLL_DEFAULT_LANG) {
 
                 // Get _wp_attached_file
                 $attachment_wp_attached_file = get_post_meta($attachment_id, '_wp_attached_file');
@@ -260,11 +261,8 @@ class WoodyTheme_Images
                 $attachment_wp_attachment_image_alt = get_post_meta($attachment_id, '_wp_attachment_image_alt');
                 $attachment_wp_attachment_image_alt = (is_array($attachment_wp_attachment_image_alt)) ? current($attachment_wp_attachment_image_alt) : $attachment_wp_attachment_image_alt;
 
-                // Get ACF Fields (Author, Lat, Lng)
-                $fields = get_fields($attachment_id);
-
                 foreach ($languages as $lang) {
-                    if ($lang == $default_language) {
+                    if ($lang == PLL_DEFAULT_LANG) {
                         continue;
                     }
 
@@ -311,34 +309,37 @@ class WoodyTheme_Images
                             $translations = apply_filters('woody_pll_get_posts', $attachment_id);
                             $translations[$lang] = $t_attachment_id;
                             pll_save_post_translations($translations);
-                            set_transient('woody_pll_post_translations_' . $attachment_id, $translations, 300);
+                            apply_filters('woody_pll_set_posts', $attachment_id, $translations);
                         }
                     }
 
                     // Sync Meta and fields
-                    $this->syncAttachmentMetadata($attachment_metadata, $fields, $t_attachment_id);
+                    $this->syncAttachmentMetadata($attachment_id, $t_attachment_id);
                 }
             } else {
                 $t_attachment_id = $attachment_id;
-                $attachment_id = pll_get_post($t_attachment_id, $default_language);
-
-                // Get metadatas (crop sizes)
-                $attachment_metadata = wp_get_attachment_metadata($attachment_id);
-
-                // Get ACF Fields (Author, Lat, Lng)
-                $fields = get_fields($attachment_id);
+                $attachment_id = pll_get_post($t_attachment_id, PLL_DEFAULT_LANG);
 
                 // Sync Meta and fields
-                $this->syncAttachmentMetadata($attachment_metadata, $fields, $t_attachment_id);
+                $this->syncAttachmentMetadata($attachment_id, $t_attachment_id);
             }
         }
     }
 
-    private function syncAttachmentMetadata($attachment_metadata, $fields = [], $t_attachment_id = null)
+    private function syncAttachmentMetadata($attachment_id = null, $t_attachment_id = null)
     {
-        if (!empty($t_attachment_id)) {
+        if (!empty($t_attachment_id) && !empty($attachment_id)) {
+
+            // Get metadatas (crop sizes)
+            $attachment_metadata = wp_get_attachment_metadata($attachment_id);
+
             // Updated metadatas (crop sizes)
-            wp_update_attachment_metadata($t_attachment_id, $attachment_metadata);
+            if (!empty($attachment_metadata)) {
+                wp_update_attachment_metadata($t_attachment_id, $attachment_metadata);
+            }
+
+            // Get ACF Fields (Author, Lat, Lng)
+            $fields = get_fields($attachment_id);
 
             // Update ACF Fields (Author, Lat, Lng)
             if (!empty($fields)) {
@@ -347,6 +348,33 @@ class WoodyTheme_Images
                         continue;
                     }
                     update_field($selector, $value, $t_attachment_id);
+                }
+            }
+
+            // Sync attachment taxonomies
+            $tags = [];
+            $sync_taxonomies = ['attachment_types', 'attachment_hashtags', 'attachment_categories'];
+            foreach ($sync_taxonomies as $taxonomy) {
+                $terms = wp_get_post_terms($attachment_id, $taxonomy);
+                $tags[$taxonomy] = [];
+                if (!empty($terms)) {
+                    foreach ($terms as $term) {
+                        $tags[$taxonomy][] = $term->name;
+                    }
+
+                    // Si la photo a le tag Instagram, elle n'a que celui-là;
+                    if (in_array('Instagram', $tags[$taxonomy])) {
+                        $tags[$taxonomy] = ['Instagram'];
+                    }
+
+                    wp_set_post_terms($attachment_id, $tags[$taxonomy], $taxonomy, false);
+                }
+            }
+
+            // Synchro Terms
+            if (!empty($tags)) {
+                foreach ($tags as $taxonomy => $keywords) {
+                    wp_set_post_terms($t_attachment_id, $keywords, $taxonomy, false);
                 }
             }
         }
@@ -475,12 +503,12 @@ class WoodyTheme_Images
                         wp_update_attachment_metadata($attachment_id, $attachment_metadata);
 
                         // Save metadata to all languages
-                        $default_language = pll_default_language();
+
                         $current_lang = pll_get_post_language($attachment_id);
-                        if ($current_lang == $default_language) {
+                        if ($current_lang == PLL_DEFAULT_LANG) {
                             $languages = pll_languages_list();
                             foreach ($languages as $lang) {
-                                if ($lang == $default_language) {
+                                if ($lang == PLL_DEFAULT_LANG) {
                                     continue;
                                 }
 

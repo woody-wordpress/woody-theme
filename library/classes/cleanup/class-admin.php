@@ -128,7 +128,7 @@ class WoodyTheme_Cleanup_Admin
     {
         if (function_exists('acf_add_options_page')) {
             $lang = pll_current_language();
-            $default_lang = pll_default_language();
+
             // Page principale
             acf_add_options_page(array(
                 'page_title'    => 'Personnalisation des menus',
@@ -140,7 +140,7 @@ class WoodyTheme_Cleanup_Admin
                 'redirect'      => true
             ));
 
-            if (function_exists('acf_add_options_sub_page') &&  $lang === $default_lang) {
+            if (function_exists('acf_add_options_sub_page') && $lang == PLL_DEFAULT_LANG) {
                 // Première sous-page
                 acf_add_options_sub_page(array(
                 'page_title'    => 'Menu principal',

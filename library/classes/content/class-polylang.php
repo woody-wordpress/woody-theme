@@ -20,12 +20,12 @@ class WoodyTheme_Polylang
 
         add_filter('pll_is_cache_active', [$this, 'isCacheActive']);
         add_filter('pll_copy_taxonomies', [$this, 'copyAttachmentTypes'], 10, 2);
-        //add_filter('pll_check_canonical_url', [$this, 'pllCheckCanonicalUrl'], 10, 2);
         add_filter('wpssoc_user_redirect_url', [$this, 'wpssocUserRedirectUrl'], 10, 1);
 
         add_filter('woody_pll_days', [$this, 'woodyPllDays'], 10);
         add_filter('woody_pll_months', [$this, 'woodyPllMonths'], 10);
         add_filter('woody_pll_get_posts', [$this, 'woodyPllGetPosts'], 10, 1);
+        add_filter('woody_pll_set_posts', [$this, 'woodyPllSetPosts'], 10, 2);
 
         add_filter('woody_theme_siteconfig', [$this, 'siteConfigAddLangs'], 12, 1);
     }
@@ -54,25 +54,6 @@ class WoodyTheme_Polylang
         return $siteConfig;
     }
 
-    /**
-     * Hook pour supprimer la redirection intempestive des domaines en langue étrangère vers FR
-     *
-     * @param [type] $redirect_url
-     * @param [type] $language
-     * @return void
-     */
-    // public function pllCheckCanonicalUrl($redirect_url, $language)
-    // {
-    //     $path = parse_url($redirect_url, PHP_URL_PATH);
-    //     if (empty($path) || $path == '/') {
-    //         //Output::log('no redirect : ' . $redirect_url);
-    //         return false;
-    //     } else {
-    //         //Output::log('continue redirect : ' . $redirect_url);
-    //         return $redirect_url;
-    //     }
-    // }
-
     // define the pll_copy_taxonomies callback
     public function copyAttachmentTypes($taxonomies, $sync)
     {
@@ -93,22 +74,42 @@ class WoodyTheme_Polylang
 
     public function woodyPllGetPosts($post_id)
     {
-        $return = get_transient('woody_pll_post_translations_' . $post_id);
-        if (empty($return)) {
-            $default_language = pll_default_language();
-            $languages = pll_languages_list();
-
-            // Set default language
-            $return[$default_language] = $post_id;
-
-            // Set Link languages
-            foreach ($languages as $lang) {
-                if ($lang != $default_language) {
-                    $return[$lang] = pll_get_post($post_id, $lang);
-                }
-            }
+        // Get default language
+        $current_lang = pll_get_post_language($post_id);
+        if ($current_lang != PLL_DEFAULT_LANG) {
+            $post_id = pll_get_post($post_id, PLL_DEFAULT_LANG);
         }
-        return $return;
+
+        if (!empty($post_id)) {
+            $translations = get_transient('woody_pll_post_translations_' . $post_id);
+
+            if (empty($translations)) {
+                $languages = pll_languages_list();
+
+                // Set default language
+                $translations[PLL_DEFAULT_LANG] = $post_id;
+
+                // Set Link languages
+                foreach ($languages as $lang) {
+                    if ($lang != PLL_DEFAULT_LANG) {
+                        $t_post_id = pll_get_post($post_id, $lang);
+                        if (!empty($t_post_id)) {
+                            $translations[$lang] = $t_post_id;
+                        }
+                    }
+                }
+
+                // Save transient
+                apply_filters('woody_pll_set_posts', $post_id, $translations);
+            }
+
+            return $translations;
+        }
+    }
+
+    public function woodyPllSetPosts($post_id, $translations)
+    {
+        set_transient('woody_pll_post_translations_' . $post_id, $translations, 300);
     }
 
     public function woodyPllDays()
