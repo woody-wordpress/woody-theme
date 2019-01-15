@@ -234,6 +234,9 @@ class WoodyTheme_Images
 
             if ($current_lang == PLL_DEFAULT_LANG) {
 
+                // Get translations
+                $translations = apply_filters('woody_pll_get_posts', $attachment_id);
+
                 // Get _wp_attached_file
                 $attachment_wp_attached_file = get_post_meta($attachment_id, '_wp_attached_file');
                 $attachment_wp_attached_file = (is_array($attachment_wp_attached_file)) ? current($attachment_wp_attached_file) : $attachment_wp_attached_file;
@@ -282,23 +285,30 @@ class WoodyTheme_Images
                             // Set the image Alt-Text
                             update_post_meta($t_attachment_id, '_wp_attachment_image_alt', $attachment_wp_attachment_image_alt);
                             update_attached_file($t_attachment_id, $attachment_wp_attached_file);
-
-                            // Save attachment language
-                            pll_set_post_language($t_attachment_id, $lang);
-
-                            // Link translations
-                            $translations = apply_filters('woody_pll_get_posts', $attachment_id);
-                            $translations[$lang] = $t_attachment_id;
-                            pll_save_post_translations($translations);
-                            apply_filters('woody_pll_set_posts', $attachment_id, $translations);
                         }
                     }
 
                     // Sync Meta and fields
                     if (!empty($t_attachment_id)) {
+                        // Save attachment language
+                        pll_set_post_language($t_attachment_id, $lang);
+
+                        // Link translations
+                        $translations[$lang] = $t_attachment_id;
+
+                        // Update metas
                         $this->syncAttachmentMetadata($attachment_id, $t_attachment_id);
                     }
                 }
+
+                // Il faut supprimer le tag de traduction avant de le recrer sinon cela créé un bug pour les attachment
+                $terms = wp_get_object_terms($attachment_id, 'post_translations');
+                foreach (wp_list_pluck($terms, 'term_id') as $term_id) {
+                    wp_delete_term($term_id, 'post_translations');
+                }
+
+                pll_save_post_translations($translations);
+                apply_filters('woody_pll_set_posts', $attachment_id, $translations);
             } else {
                 $t_attachment_id = $attachment_id;
                 $attachment_id = pll_get_post($t_attachment_id, PLL_DEFAULT_LANG);
