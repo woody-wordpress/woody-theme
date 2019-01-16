@@ -205,7 +205,7 @@ $('#acf-group_5bd0227a1bda3').each(function() {
 
         $.ajax({
             type: 'POST',
-            url: '/wp-json/woody/short-link',
+            url: '/wp-json/woody/short-link/',
             data: post_id,
             success: function(data) {
                 if (data.length !== 0) {
