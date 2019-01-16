@@ -19,7 +19,7 @@ class WoodyTheme_Claims
         add_action('save_post', [$this, 'resetWoodyClaimsTransient'], 10, 3);
         add_action('rest_api_init', function () {
             register_rest_route('woody', 'claims-blocks', array(
-                'methods' => 'POST',
+                'methods' => 'GET',
                 'callback' => [$this, 'addClaimsBlocks']
             ));
         });
@@ -59,12 +59,13 @@ class WoodyTheme_Claims
         }
     }
 
-    public function addClaimsBlocks(\WP_REST_Request $request)
+    public function addClaimsBlocks()
     {
         $return = [];
         $post_ID = '';
-        // L'url courante passée en data dans l'appel ajax
-        $url = $request->get_body();
+
+        // L'url courante passée en param dans l'appel ajax
+        $url = htmlentities(stripslashes($_GET['url']));
 
         // Pas d'url, pas de retour !
         if (empty($url)) {

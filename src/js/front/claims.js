@@ -11,9 +11,8 @@ $('.claims-blocks-wrapper').each(function() {
     }
 
     $.ajax({
-        type: 'POST',
-        url: '/wp-json/woody/claims-blocks',
-        data: url,
+        type: 'GET',
+        url: '/wp-json/woody/claims-blocks?url=' + url,
         success: function(items) {
             for (var item_i = 0; item_i < items.length; item_i++) {
                 for (var i = 0; i < the_cookie.length; i++) {

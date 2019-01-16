@@ -54,7 +54,11 @@
             {{ claims_block }}
         </div>
         {% endif %} #}
-        <div class="claims-blocks-wrapper"></div>
+
+        {#  TODO: se baser sur une variable ERP #}
+        {% if site_key == 'sarlat' %}
+            <div class="claims-blocks-wrapper"></div>
+        {% endif %}
 
     </div>
 </main>

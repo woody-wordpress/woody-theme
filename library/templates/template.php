@@ -50,6 +50,7 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context = Timber::get_context();
         $this->context['title'] = wp_title(null, false);
         $this->context['current_url'] = get_permalink();
+        $this->context['site_key'] = WP_SITE_KEY;
 
         // Get current Post
         $this->context['post'] = new TimberPost();
