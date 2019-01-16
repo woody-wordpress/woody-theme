@@ -37,11 +37,13 @@ class WoodyTheme_Polylang
 
     public function wpssocUserRedirectUrl($user_redirect_set)
     {
-        if (strpos($user_redirect_set, 'wp-admin') !== false) {
-            if (strpos($user_redirect_set, '?') !== false) {
-                $user_redirect_set .= '&lang=' . pll_current_language();
-            } else {
-                $user_redirect_set .= '?lang=' . pll_current_language();
+        if (function_exists('pll_current_language')) {
+            if (strpos($user_redirect_set, 'wp-admin') !== false) {
+                if (strpos($user_redirect_set, '?') !== false) {
+                    $user_redirect_set .= '&lang=' . pll_current_language();
+                } else {
+                    $user_redirect_set .= '?lang=' . pll_current_language();
+                }
             }
         }
 
@@ -50,7 +52,9 @@ class WoodyTheme_Polylang
 
     public function siteConfigAddLangs($siteConfig)
     {
-        $siteConfig['languages'] = pll_languages_list();
+        if (function_exists('pll_languages_list')) {
+            $siteConfig['languages'] = pll_languages_list();
+        }
         return $siteConfig;
     }
 
@@ -75,35 +79,37 @@ class WoodyTheme_Polylang
     public function woodyPllGetPosts($post_id)
     {
         // Get default language
-        $current_lang = pll_get_post_language($post_id);
-        if ($current_lang != PLL_DEFAULT_LANG) {
-            $post_id = pll_get_post($post_id, PLL_DEFAULT_LANG);
-        }
-
-        if (!empty($post_id)) {
-            $translations = get_transient('woody_pll_post_translations_' . $post_id);
-
-            if (empty($translations)) {
-                $languages = pll_languages_list();
-
-                // Set default language
-                $translations[PLL_DEFAULT_LANG] = $post_id;
-
-                // Set Link languages
-                foreach ($languages as $lang) {
-                    if ($lang != PLL_DEFAULT_LANG) {
-                        $t_post_id = pll_get_post($post_id, $lang);
-                        if (!empty($t_post_id)) {
-                            $translations[$lang] = $t_post_id;
-                        }
-                    }
-                }
-
-                // Save transient
-                apply_filters('woody_pll_set_posts', $post_id, $translations);
+        if (function_exists('pll_get_post_language')) {
+            $current_lang = pll_get_post_language($post_id);
+            if ($current_lang != PLL_DEFAULT_LANG) {
+                $post_id = pll_get_post($post_id, PLL_DEFAULT_LANG);
             }
 
-            return $translations;
+            if (!empty($post_id)) {
+                $translations = get_transient('woody_pll_post_translations_' . $post_id);
+
+                if (empty($translations)) {
+                    $languages = pll_languages_list();
+
+                    // Set default language
+                    $translations[PLL_DEFAULT_LANG] = $post_id;
+
+                    // Set Link languages
+                    foreach ($languages as $lang) {
+                        if ($lang != PLL_DEFAULT_LANG) {
+                            $t_post_id = pll_get_post($post_id, $lang);
+                            if (!empty($t_post_id)) {
+                                $translations[$lang] = $t_post_id;
+                            }
+                        }
+                    }
+
+                    // Save transient
+                    apply_filters('woody_pll_set_posts', $post_id, $translations);
+                }
+
+                return $translations;
+            }
         }
     }
 
