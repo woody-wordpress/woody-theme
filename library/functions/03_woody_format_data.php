@@ -1150,7 +1150,10 @@ function formatSnowInfoData($layout, $twigPaths)
         ],
         'content' => [
             'webcams' => [
-                // TODO
+                'type' => (!empty($layout['content']['webcams_medias']['webcams_type'])) ? $layout['content']['webcams_medias']['webcams_type'] : '',
+                'img' => $layout['content']['webcams_medias']['webcams_type'] == 'img' ? $layout['content']['webcams_medias']['webcams_img'] : '',
+                'iframe' => $layout['content']['webcams_medias']['webcams_type'] == 'iframe' ? $layout['content']['webcams_medias']['webcams_iframe'] : '',
+
             ],
             'weathers' => [
                 'icon' => 'cloud-sun', // nom systeme climacon

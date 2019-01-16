@@ -126,6 +126,115 @@
                     "save_custom": 0
                 },
                 {
+                    "key": "field_5c3f2839894e1",
+                    "label": "Média",
+                    "name": "webcams_medias",
+                    "type": "group",
+                    "instructions": "Choisissez votre média pour la webcam",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5c2ce2e5229bb",
+                                "operator": "==",
+                                "value": "webcams"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5c3f28a8894e3",
+                            "label": "Type de média",
+                            "name": "webcams_type",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "iframe": "Iframe",
+                                "img": "Image"
+                            },
+                            "default_value": [],
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 1,
+                            "ajax": 1,
+                            "return_format": "value",
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_5c3f28e8894e4",
+                            "label": "Iframe",
+                            "name": "webcams_iframe",
+                            "type": "textarea",
+                            "instructions": "Insérez votre iframe ici",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_5c3f28a8894e3",
+                                        "operator": "==",
+                                        "value": "iframe"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": "",
+                            "new_lines": ""
+                        },
+                        {
+                            "key": "field_5c3f291f894e5",
+                            "label": "Image",
+                            "name": "webcams_img",
+                            "type": "image",
+                            "instructions": "Insérez votre image ici",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_5c3f28a8894e3",
+                                        "operator": "==",
+                                        "value": "img"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "url",
+                            "preview_size": "thumbnail",
+                            "library": "all",
+                            "min_width": "",
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": "jpg, png, gif"
+                        }
+                    ]
+                },
+                {
                     "key": "field_5c2e3fb2d884b",
                     "label": "Lien webcams",
                     "name": "webcams_link",
@@ -313,7 +422,7 @@
                 "id": ""
             },
             "choices": {
-                "blocks-snow_infos-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/snow_infos\/tpl_01\/thumbnail.png?version=2.6.10\" alt=\"blocks-snow_infos-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Infos neige - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Infos neige - Template 1<\/h4>Affiche le bloc info neige pour les stations de ski - Webcams \/ Météo \/ Pistes<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+                "blocks-snow_infos-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.champsaur-valgaudemar.wp.rc-dev.com\/app\/dist\/champsaur-valgaudemar\/img\/woody-library\/views\/blocks\/snow_infos\/tpl_01\/thumbnail.png?version=2.7.0\" alt=\"blocks-snow_infos-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Infos neige - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Infos neige - Template 1<\/h4>Affiche le bloc info neige pour les stations de ski - Webcams \/ Météo \/ Pistes<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -378,5 +487,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Bloc info neige - metéo (spécifique aux stations de ski)",
-    "modified": 1546591768
+    "modified": 1547643367
 }
