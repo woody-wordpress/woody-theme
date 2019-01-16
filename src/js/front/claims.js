@@ -12,7 +12,7 @@ $('.claims-blocks-wrapper').each(function() {
 
     $.ajax({
         type: 'POST',
-        url: '/wp-json/woody/claims-blocks',
+        url: '/wp-json/woody/claims-blocks/',
         data: url,
         success: function(items) {
             for (var item_i = 0; item_i < items.length; item_i++) {
