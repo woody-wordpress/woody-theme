@@ -269,3 +269,24 @@ function getPostRootAncestor($postID, $root_level = 1)
 
     return $return;
 }
+
+function getAttachmentMoreData($attachment_id)
+{
+    $attachment_data = [];
+
+    $attachment_data['author'] = get_field('field_5b5585503c855', $attachment_id);
+    $attachment_data['lat'] = get_field('field_5b55a88e70cbf', $attachment_id);
+    $attachment_data['lng'] = get_field('field_5b55a89e70cc0', $attachment_id);
+    $attachment_data['is_instagram'] = isWoodyInstagram($attachment_id);
+    $attachment_data['linked_page'] = get_field('field_5c0553157e6d0', $attachment_id);
+
+    if (!empty($attachment_data['is_instagram'])) {
+        $img_all_data = get_post_meta($attachment_id);
+        wd($img_all_data['woody-instagram']);
+        $img_all_metadata = (!empty($img_all_data['_wp_attachment_metadata'][0])) ? maybe_unserialize($img_all_data['_wp_attachment_metadata'][0]) : '';
+        $instagram_metadata = (!empty($img_all_metadata['woody-instagram'])) ? $img_all_metadata['woody-instagram'] : '';
+        $attachment_data['instagram_metadata'] = $instagram_metadata;
+    }
+
+    return $attachment_data;
+}
