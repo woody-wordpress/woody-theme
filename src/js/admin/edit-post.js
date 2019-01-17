@@ -193,7 +193,6 @@ $('#post').each(function() {
         $this.prepend('<span class="woodyRowsCollapse"><span class="text">Fermer ' + rowsType + '</span><span class="dashicons dashicons-arrow-up' + '"></span></span>');
 
         $('.woodyRowsCollapse').click(function() {
-            console.log($(this).siblings('.acf-input').find(theRows));
             $(this).siblings('.acf-input').find(theRows).addClass('-collapsed');
         })
     });

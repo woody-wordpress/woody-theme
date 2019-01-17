@@ -4,81 +4,84 @@ function getComponentItem($layout, $context)
 {
     $return = '';
     $layout['default_marker'] = $context['default_marker'];
+    // Traitements spécifique en fonction du type de layout
     switch ($layout['acf_fc_layout']) {
         case 'manual_focus':
         case 'auto_focus':
         case 'auto_focus_sheets':
             $return = formatFocusesData($layout, $context['post'], $context['woody_components']);
-        break;
+            break;
         case 'geo_map':
             $return = formatGeomapData($layout, $context['woody_components']);
-        break;
+            break;
         case 'content_list':
             $return = formatFullContentList($layout, $context['post'], $context['woody_components']);
-        break;
+            break;
+
+        case 'snow_info':
+            $return = formatSnowInfoData($layout, $context['woody_components']);
+            break;
         case 'weather':
             $vars['token'] = $layout['weather_account'];
             $vars['nb_days'] = $layout['weather_count_days'];
             $the_weather = apply_filters('woody_weather', $vars);
             $the_weather['bg_color'] = (!empty($layout['weather_bg_params']['background_color'])) ? $layout['weather_bg_params']['background_color']: '';
             $the_weather['bg_img'] = $layout['weather_bg_img'];
-
             $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_weather);
-        break;
-        case 'snow_info':
-            $return = formatSnowInfoData($layout, $context['woody_components']);
-        break;
-        default:
-            if ($layout['acf_fc_layout'] == 'playlist_bloc') {
-                $playlist_conf_id = $layout['playlist_conf_id'];
+            break;
+        case 'call_to_action':
+            // TODO: Case à enlever lorsque les "Anciens champs" seront supprimés du backoffice (utile pour les anciens liens de CTA uniquement)
+            $layout['modal_id'] = uniqid($layout['acf_fc_layout'] . '_');
+            $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            break;
+        case 'gallery':
+            // Ajout des données Instagram + champs personnaliés dans le contexte des images
+            if (!empty($layout['gallery_items'])) {
+                foreach ($layout['gallery_items'] as $key => $media_item) {
+                    $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
+                }
             }
-            if ($layout['acf_fc_layout'] == 'call_to_action' || $layout['acf_fc_layout'] == 'links' || $layout['acf_fc_layout'] == 'gallery') {
-                $layout['modal_id'] = $layout['acf_fc_layout'] . '_' . uniqid();
-            }
-            if ($layout['acf_fc_layout'] == 'tabs_group') {
-                $layout['tabs'] = nestedGridsComponents($layout['tabs'], 'tab_woody_tpl', 'tabs', $context);
-            }
-            if ($layout['acf_fc_layout'] == 'slides_group') {
-                $layout['slides'] = nestedGridsComponents($layout['slides'], 'slide_woody_tpl', 'slides', $context);
-            }
-            if ($layout['acf_fc_layout'] == 'gallery') {
+            $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            break;
+        case 'links':
+            $layout['woody_tpl'] = 'blocks-links-tpl_01';
+            $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            break;
+        case 'tabs_group':
+            $layout['tabs'] = nestedGridsComponents($layout['tabs'], 'tab_woody_tpl', 'tabs', $context);
+            $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            break;
+        case 'slides_group':
+            $layout['slides'] = nestedGridsComponents($layout['slides'], 'slide_woody_tpl', 'slides', $context);
+            $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            break;
+        case 'socialwall':
+            $layout['gallery_items'] = [];
+            if ($layout['socialwall_type'] == 'manual') {
+                foreach ($layout['socialwall_manual'] as $key => $media_item) {
+                    // On ajoute une entrée "gallery_items" pour être compatible avec le tpl woody
+                    $layout['gallery_items'][] = $media_item;
+                    $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
+                }
+            } elseif ($layout['socialwall_type'] == 'auto') {
+                // On récupère les images en fonction des termes sélectionnés
+                $layout['gallery_items'] = (!empty($layout['socialwall_auto'])) ? getAttachmentsByTerms('attachment_hashtags', $layout['socialwall_auto']) : '';
                 if (!empty($layout['gallery_items'])) {
                     foreach ($layout['gallery_items'] as $key => $media_item) {
                         $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
                     }
                 }
             }
-            if ($layout['acf_fc_layout'] == 'links') {
-                $layout['woody_tpl'] = 'blocks-links-tpl_01';
-            }
-            if ($layout['acf_fc_layout'] == 'socialwall') {
-                $layout['gallery_items'] = [];
-                if ($layout['socialwall_type'] == 'manual') {
-                    foreach ($layout['socialwall_manual'] as $key => $media_item) {
-                        // On ajoute une entrée "gallery_items" pour être compatible avec le tpl woody
-                        $layout['gallery_items'][] = $media_item;
-                        $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
-                    }
-                } elseif ($layout['socialwall_type'] == 'auto') {
-                    // On récupère les images en fonction des termes sélectionnés
-                    $layout['gallery_items'] = (!empty($layout['socialwall_auto'])) ? getAttachmentsByTerms('attachment_hashtags', $layout['socialwall_auto']) : '';
-                    if (!empty($layout['gallery_items'])) {
-                        foreach ($layout['gallery_items'] as $key => $media_item) {
-                            $layout['gallery_items'][$key]['attachment_more_data'] = getAttachmentMoreData($media_item['ID']);
-                        }
-                    }
-                }
-            }
-
-            if ($layout['acf_fc_layout'] == 'weather') {
-                $vars['token'] = $layout['weather_account'];
-                $vars['nb_days'] = $layout['weather_count_days'];
-                $layout['weather'] = apply_filters('woody_weather', $vars);
-            }
-
+            $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            break;
+            // TODO: Ce layout n'existe plus => à confirmer + suppression
+            // case 'playlist_bloc':
+            //     $playlist_conf_id = $layout['playlist_conf_id'];
+            //     $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            //     break;
+        default:
             $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
     }
-
     return $return;
 }
 
@@ -1042,61 +1045,6 @@ function nestedGridsComponents($scope, $gridTplField, $uniqIid_prefix = '', $con
     }
 
     return $scope;
-}
-
-/**
- *
- * Nom : isWoodyInstagram
- * Auteur : Benoit Bouchaud
- * Return : Booleen
- * @param    taxonomy - Le slug du vocabulaire dans lequel on recherche
- * @param    media_item - Le media (WP post)
- * @return   is_instagram - Booléen
- *
- */
-function isWoodyInstagram($media_item, $is_instagram = false)
-{
-    $media_types = [];
-
-    if (is_array($media_item)) {
-        $the_id = $media_item['ID'];
-    } elseif (is_numeric($media_item)) {
-        $the_id = $media_item;
-    }
-
-    $media_terms = get_the_terms($the_id, 'attachment_types');
-
-    if (!empty($media_terms)) {
-        foreach ($media_terms as $key => $media_term) {
-            $media_types[] = $media_term->slug;
-        }
-
-        if (in_array('instagram', $media_types)) {
-            $is_instagram = true;
-        }
-    }
-
-    return $is_instagram;
-}
-
-function getAttachmentMoreData($attachment_id)
-{
-    $attachment_data = [];
-
-    $attachment_data['author'] = get_field('field_5b5585503c855', $attachment_id);
-    $attachment_data['lat'] = get_field('field_5b55a88e70cbf', $attachment_id);
-    $attachment_data['lng'] = get_field('field_5b55a89e70cc0', $attachment_id);
-    $attachment_data['is_instagram'] = isWoodyInstagram($attachment_id);
-    $attachment_data['linked_page'] = get_field('field_5c0553157e6d0', $attachment_id);
-
-    if (!empty($attachment_data['is_instagram'])) {
-        $img_all_data = get_post_meta($attachment_id);
-        $img_all_metadata = (!empty($img_all_data['_wp_attachment_metadata'][0])) ? maybe_unserialize($img_all_data['_wp_attachment_metadata'][0]) : '';
-        $instagram_metadata = (!empty($img_all_metadata['woody-instagram'])) ? $img_all_metadata['woody-instagram'] : '';
-        $attachment_data['instagram_metadata'] = $instagram_metadata;
-    }
-
-    return $attachment_data;
 }
 
 function formatVisualEffectData($effects)
