@@ -1047,41 +1047,6 @@ function nestedGridsComponents($scope, $gridTplField, $uniqIid_prefix = '', $con
     return $scope;
 }
 
-/**
- *
- * Nom : isWoodyInstagram
- * Auteur : Benoit Bouchaud
- * Return : Booleen
- * @param    taxonomy - Le slug du vocabulaire dans lequel on recherche
- * @param    media_item - Le media (WP post)
- * @return   is_instagram - Booléen
- *
- */
-function isWoodyInstagram($media_item, $is_instagram = false)
-{
-    $media_types = [];
-
-    if (is_array($media_item)) {
-        $the_id = $media_item['ID'];
-    } elseif (is_numeric($media_item)) {
-        $the_id = $media_item;
-    }
-
-    $media_terms = get_the_terms($the_id, 'attachment_types');
-
-    if (!empty($media_terms)) {
-        foreach ($media_terms as $key => $media_term) {
-            $media_types[] = $media_term->slug;
-        }
-
-        if (in_array('instagram', $media_types)) {
-            $is_instagram = true;
-        }
-    }
-
-    return $is_instagram;
-}
-
 function formatVisualEffectData($effects)
 {
     $return = '';
