@@ -15,6 +15,11 @@
 {% endblock %} #}
 <main class="content-type-page">
     <div class="content-wrapper">
+        <div class="mobile-header hide-for-xlarge title-bar">
+            <a class="brand-logo" href="{{ site.url }}">
+                {{ website_logo|default('Website logo') }}
+            </a>
+        </div>
         {% if sheet_tourism.content|default %}
         <div class="page-sheet-wrapper">
             {{ sheet_tourism.content }}
