@@ -60,6 +60,9 @@ new WoodyTheme_Shortcodes();
 // Roles
 new WoodyTheme_Roles();
 
+// Inclusions
+new WoodyTheme_Inclusions();
+
 // Execute hook_update like Drupal if theme version change
 add_action('init', 'woodyThemeCheckThemeVersion', 1);
 function woodyThemeCheckThemeVersion()
