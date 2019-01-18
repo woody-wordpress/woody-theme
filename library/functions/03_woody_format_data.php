@@ -1113,17 +1113,20 @@ function formatSnowInfoData($layout, $twigPaths)
             ],
             'slopes' => [
                 0 => [
-                    'color' => 'green',
+                    'type' => 'V',
+                    'color' => '#2BC86F', // Green
                     'open' => '1',
                     'total' => '2',
                 ],
                 1 => [
-                    'color' => 'blue',
+                    'type' => 'B',
+                    'color' => '#029BD8', // Blue
                     'open' => '3',
                     'total' => '4',
                 ],
                 2 => [
-                    'color' => 'red',
+                    'type' => 'R',
+                    'color' => '#EB4F4A', // Red
                     'open' => '5',
                     'total' => '5',
                 ],
@@ -1143,7 +1146,7 @@ function formatSnowInfoData($layout, $twigPaths)
             ],
             'global' => [ // init global
                 'slopes' => [
-                    'color' => 'blue',
+                    'color' => '#00B6D6',
                     'open' => '1',
                     'total' => '2'
                 ],
