@@ -202,34 +202,37 @@ abstract class WoodyTheme_TemplateAbstract
 
         $search_post_id = get_field('es_search_page_url', 'option');
 
-        if (empty($search_post_id)) {
-            return;
-        }
+        if (!empty($search_post_id)) {
+            $data['search_url'] = get_permalink(pll_get_post($search_post_id));
 
-        $data['search_url'] = get_permalink(pll_get_post($search_post_id));
-
-        $suggest = get_field('es_search_block_suggests', 'option');
-        if (!empty($suggest) && !empty($suggest['suggest_pages'])) {
-            $data['suggest']['title'] = (!empty($suggest['suggest_title'])) ? $suggest['suggest_title'] : '';
-            foreach ($suggest['suggest_pages'] as $page) {
-                $post = Timber::get_post(pll_get_post($page['suggest_page']));
-                $data['suggest']['pages'][] = getPagePreview('', $post);
-            }
-        }
-
-        if (class_exists('SubWoodyTheme_esSearch')) {
-            $SubWoodyTheme_esSearch = new SubWoodyTheme_esSearch($this->context['woody_components']);
-            if (method_exists($SubWoodyTheme_esSearch, 'esSearchBlockCustomization')) {
-                $esSearchBlockCustomization = $SubWoodyTheme_esSearch->esSearchBlockCustomization();
-                if (!empty($esSearchBlockCustomization['template'])) {
-                    $template = $languages_customization['template'];
+            $suggest = get_field('es_search_block_suggests', 'option');
+            if (!empty($suggest) && !empty($suggest['suggest_pages'])) {
+                $data['suggest']['title'] = (!empty($suggest['suggest_title'])) ? $suggest['suggest_title'] : '';
+                foreach ($suggest['suggest_pages'] as $page) {
+                    $t_page = pll_get_post($page['suggest_page']);
+                    if (!empty($t_page)) {
+                        $post = Timber::get_post($t_page);
+                        if (!empty($post)) {
+                            $data['suggest']['pages'][] = getPagePreview('', $post);
+                        }
+                    }
                 }
             }
-        }
 
-        // Set a default template
-        $template = $this->context['woody_components']['woody_widgets-es_search_block-tpl_01'];
-        $this->context['es_search_block'] = Timber::compile($template, $data);
-        $this->context['es_search_block_mobile'] = Timber::compile($template, $data);
+            if (class_exists('SubWoodyTheme_esSearch')) {
+                $SubWoodyTheme_esSearch = new SubWoodyTheme_esSearch($this->context['woody_components']);
+                if (method_exists($SubWoodyTheme_esSearch, 'esSearchBlockCustomization')) {
+                    $esSearchBlockCustomization = $SubWoodyTheme_esSearch->esSearchBlockCustomization();
+                    if (!empty($esSearchBlockCustomization['template'])) {
+                        $template = $languages_customization['template'];
+                    }
+                }
+            }
+
+            // Set a default template
+            $template = $this->context['woody_components']['woody_widgets-es_search_block-tpl_01'];
+            $this->context['es_search_block'] = Timber::compile($template, $data);
+            $this->context['es_search_block_mobile'] = Timber::compile($template, $data);
+        }
     }
 }
