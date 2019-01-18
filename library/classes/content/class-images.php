@@ -240,7 +240,7 @@ class WoodyTheme_Images
                     $t_attachment_id = pll_get_post($attachment_id, $lang);
                     if (empty($t_attachment_id)) {
                         // Duplicate media with Polylang Method
-                        $t_attachment_id = \PLL()->filters_media->create_media_translation($attachment_id, $lang);
+                        $t_attachment_id = PLL()->posts->create_media_translation($attachment_id, $lang);
                     }
 
                     // Sync Meta and fields
