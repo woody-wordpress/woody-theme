@@ -64,7 +64,8 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
         //     $params['season'] = $season;
         // }
 
-        $this->context['sheet_tourism'] = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $sheet_lang, $params);
+        // $this->context['sheet_tourism'] = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $sheet_lang, $params);
+        $this->context['sheet_tourism'] = '';
 
 
         // Set METAS
