@@ -34,7 +34,7 @@ class WoodyTheme_Plugins_Options
         update_option('time_format', 'G\hi', '', 'yes');
         update_option('wp_php_console', ['password' => 'root', 'register' => true, 'short' => true, 'stack' => true], '', 'yes');
         update_option('rocket_lazyload_options', ['images' => true, 'iframes' => true, 'youtube' => true], '', 'yes');
-        update_option('minify_html_active', (WP_ENV == 'dev') ? 'no' : 'yes', '', 'yes');
+        update_option('minify_html_active', (WP_ENV == 'dev' || WP_ENV == 'preprod') ? 'no' : 'yes', '', 'yes');
         update_option('minify_javascript', 'yes', '', 'yes');
         update_option('minify_html_comments', 'yes', '', 'yes');
         update_option('minify_html_xhtml', 'no', '', 'yes');
