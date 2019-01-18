@@ -66,7 +66,6 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
 
         $this->context['sheet_tourism'] = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $sheet_lang, $params);
 
-
         // Set METAS
 
         $this->context['metas'] = [];
