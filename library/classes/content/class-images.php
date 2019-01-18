@@ -226,25 +226,12 @@ class WoodyTheme_Images
     public function saveAttachment($attachment_id)
     {
         if (wp_attachment_is_image($attachment_id)) {
-            $attachment = get_post($attachment_id);
 
             // Only if current edit post is default (FR)
             $languages = pll_languages_list();
             $current_lang = pll_get_post_language($attachment_id);
 
             if ($current_lang == PLL_DEFAULT_LANG) {
-
-                // Get translations
-                $translations = apply_filters('woody_pll_get_posts', $attachment_id);
-
-                // Get _wp_attached_file
-                $attachment_wp_attached_file = get_post_meta($attachment_id, '_wp_attached_file');
-                $attachment_wp_attached_file = (is_array($attachment_wp_attached_file)) ? current($attachment_wp_attached_file) : $attachment_wp_attached_file;
-
-                // Get _wp_attachment_image_alt
-                $attachment_wp_attachment_image_alt = get_post_meta($attachment_id, '_wp_attachment_image_alt');
-                $attachment_wp_attachment_image_alt = (is_array($attachment_wp_attachment_image_alt)) ? current($attachment_wp_attachment_image_alt) : $attachment_wp_attachment_image_alt;
-
                 foreach ($languages as $lang) {
                     if ($lang == PLL_DEFAULT_LANG) {
                         continue;
@@ -252,63 +239,15 @@ class WoodyTheme_Images
 
                     $t_attachment_id = pll_get_post($attachment_id, $lang);
                     if (empty($t_attachment_id)) {
-                        global $wpdb;
-                        $wpdb->insert('wp_posts', [
-                            'post_author' => $attachment->post_author,
-                            'post_date' => $attachment->post_date,
-                            'post_date_gmt' => $attachment->post_mime_type,
-                            'post_content' => $attachment->post_content,
-                            'post_title' => $attachment->post_title,
-                            'post_excerpt' => $attachment->post_excerpt,
-                            'post_status' => $attachment->post_status,
-                            'comment_status' => $attachment->comment_status,
-                            'ping_status' => $attachment->ping_status,
-                            'post_password' => $attachment->post_password,
-                            'post_name' => $attachment->post_name,
-                            'to_ping' => $attachment->to_ping,
-                            'pinged' => $attachment->pinged,
-                            'post_modified' => $attachment->post_modified,
-                            'post_modified_gmt' => $attachment->post_modified_gmt,
-                            'post_content_filtered' => $attachment->post_content_filtered,
-                            'post_parent' => $attachment->post_parent,
-                            'guid' => $attachment->guid,
-                            'menu_order' => $attachment->menu_order,
-                            'post_type' => $attachment->post_type,
-                            'post_mime_type' => $attachment->post_mime_type,
-                            'comment_count' => $attachment->comment_count,
-                        ]);
-
-                        // Get translated ID
-                        $t_attachment_id = $wpdb->insert_id;
-                        if (!empty($t_attachment_id)) {
-
-                            // Set the image Alt-Text
-                            update_post_meta($t_attachment_id, '_wp_attachment_image_alt', $attachment_wp_attachment_image_alt);
-                            update_attached_file($t_attachment_id, $attachment_wp_attached_file);
-                        }
+                        // Duplicate media with Polylang Method
+                        $t_attachment_id = PLL()->posts->create_media_translation($attachment_id, $lang);
                     }
 
                     // Sync Meta and fields
                     if (!empty($t_attachment_id)) {
-                        // Save attachment language
-                        pll_set_post_language($t_attachment_id, $lang);
-
-                        // Link translations
-                        $translations[$lang] = $t_attachment_id;
-
-                        // Update metas
                         $this->syncAttachmentMetadata($attachment_id, $t_attachment_id);
                     }
                 }
-
-                // Il faut supprimer le tag de traduction avant de le recrer sinon cela créé un bug pour les attachment
-                $terms = wp_get_object_terms($attachment_id, 'post_translations');
-                foreach (wp_list_pluck($terms, 'term_id') as $term_id) {
-                    wp_delete_term($term_id, 'post_translations');
-                }
-
-                pll_save_post_translations($translations);
-                apply_filters('woody_pll_set_posts', $attachment_id, $translations);
             } else {
                 $t_attachment_id = $attachment_id;
                 $attachment_id = pll_get_post($t_attachment_id, PLL_DEFAULT_LANG);

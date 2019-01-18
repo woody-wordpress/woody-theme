@@ -97,7 +97,7 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
                 continue;
             }
 
-            // TODO: Remove when english version online
+            // TODO: Check rels of every langs and remove non english rel
             if (WP_SITE_KEY == 'crt-bretagne' && !empty($meta['#attributes']['rel']) && $meta['#attributes']['rel'] == 'alternate') {
                 continue;
             }
@@ -110,15 +110,6 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
             $tag .= ' />';
             $this->context['metas'][] = $tag;
         }
-
-        /*********************************************
-         * Compilation de l'en tête de page
-         *********************************************/
-        // $page_teaser = [];
-
-        // $page_teaser['classes'] = 'bg-black';
-        // $page_teaser['breadcrumb'] = yoast_breadcrumb('<div class="breadcrumb-wrapper padd-top-sm padd-bottom-sm">', '</div>', false);
-        // $this->context['page_teaser'] = Timber::compile($this->context['woody_components']['blocks-page_teaser-tpl_01'], $page_teaser);
     }
 
     public function filterTouristicSheetWpseoTitle($title)

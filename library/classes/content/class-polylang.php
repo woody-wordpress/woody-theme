@@ -5,7 +5,6 @@
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
-use Woody\Utils\Output;
 
 class WoodyTheme_Polylang
 {
@@ -17,6 +16,7 @@ class WoodyTheme_Polylang
     protected function registerHooks()
     {
         add_action('after_setup_theme', [$this, 'loadThemeTextdomain']);
+        add_action('wp_loaded', [$this, 'wpLoaded'], 30);
 
         add_filter('pll_is_cache_active', [$this, 'isCacheActive']);
         add_filter('pll_copy_taxonomies', [$this, 'copyAttachmentTypes'], 10, 2);
@@ -33,6 +33,17 @@ class WoodyTheme_Polylang
     public function isCacheActive()
     {
         return true;
+    }
+
+    /**
+     * Fonction qui corrige un conflit de Polylang avec Enhanced Media Library lorsque l'on a plus de 2 langues
+     * Sans ce fix, les traductions des images ne sont plus liées entre elles
+     */
+    public function wpLoaded()
+    {
+        global $wp_taxonomies;
+        $wp_taxonomies['language']->update_count_callback = '';
+        $wp_taxonomies['post_translations']->update_count_callback = '_update_generic_term_count';
     }
 
     public function wpssocUserRedirectUrl($user_redirect_set)
