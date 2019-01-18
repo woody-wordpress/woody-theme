@@ -64,6 +64,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     protected function page404Context()
     {
         global $wp;
+        $suggestions = [];
         $segments = explode('/', $wp->request);
         $last_segment = end($segments);
         $query = str_replace('-', ' ', $last_segment);
