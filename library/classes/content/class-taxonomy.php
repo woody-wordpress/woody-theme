@@ -57,7 +57,7 @@ class WoodyTheme_Taxonomy
                 ],
                 'hierarchical' => true,
                 'show_ui' => true,
-                'show_in_menu' => false,
+                'show_in_menu' => true,
                 'capabilities' => [
                     'manage_terms' => 'Configurer les types de publications',
                     'edit_terms' => 'Editer les types de publications',
