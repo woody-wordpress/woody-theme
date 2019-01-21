@@ -323,8 +323,8 @@ class WoodyTheme_Enqueue_Assets
             'window.DrupalAngularConfig' => 'window.DrupalAngularConfig || {}',
             // fill DrupalAngularConfig (some properties may already exists)
             'window.DrupalAngularConfig.apiAccount' => 'window.DrupalAngularConfig.apiAccount || {}',
-            'window.DrupalAngularConfig.apiAccount.login' => (!empty($this->siteConfig['login'])) ? json_encode($this->siteConfig['login']) : '',
-            'window.DrupalAngularConfig.apiAccount.password' => (!empty($this->siteConfig['password'])) ? json_encode($this->siteConfig['password']) : '',
+            'window.DrupalAngularConfig.apiAccount.login' => (!empty($this->siteConfig['login'])) ? json_encode($this->siteConfig['login']) : '{}',
+            'window.DrupalAngularConfig.apiAccount.password' => (!empty($this->siteConfig['password'])) ? json_encode($this->siteConfig['password']) : '{}',
             // inject mapKeys in DrupalAngularAppConfig
             'window.DrupalAngularConfig.mapProviderKeys' => (!empty($this->mapKeys)) ? json_encode($this->mapKeys) : '{}',
         ];
