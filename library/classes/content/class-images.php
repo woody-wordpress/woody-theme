@@ -7,6 +7,7 @@
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
+use Woody\Utils\Output;
 
 class WoodyTheme_Images
 {
@@ -207,6 +208,8 @@ class WoodyTheme_Images
 
     public function addAttachment($attachment_id)
     {
+        //Output::debug(['addAttachment' => $attachment_id]);
+
         // Added attachment_types
         wp_set_object_terms($attachment_id, 'Média ajouté manuellement', 'attachment_types', false);
 
@@ -226,6 +229,7 @@ class WoodyTheme_Images
     public function saveAttachment($attachment_id)
     {
         if (wp_attachment_is_image($attachment_id)) {
+            //Output::debug(['saveAttachment' => $attachment_id]);
 
             // Only if current edit post is default (FR)
             $languages = pll_languages_list();
@@ -241,6 +245,7 @@ class WoodyTheme_Images
                     if (empty($t_attachment_id)) {
                         // Duplicate media with Polylang Method
                         $t_attachment_id = PLL()->posts->create_media_translation($attachment_id, $lang);
+                        //Output::debug(['create_media_translation' => $t_attachment_id]);
                     }
 
                     // Sync Meta and fields
@@ -263,6 +268,7 @@ class WoodyTheme_Images
     private function syncAttachmentMetadata($attachment_id = null, $t_attachment_id = null)
     {
         if (!empty($t_attachment_id) && !empty($attachment_id)) {
+            //Output::debug(['syncAttachmentMetadata' => [$attachment_id, $t_attachment_id]]);
 
             // Get metadatas (crop sizes)
             $attachment_metadata = wp_get_attachment_metadata($attachment_id);
