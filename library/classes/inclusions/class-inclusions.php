@@ -28,11 +28,17 @@ class WoodyTheme_Inclusions
     public function getIncs($query)
     {
         $inc = get_query_var('inc');
+        // rcd($inc, true);
         if (!empty($inc)) {
-            // rcd(get_template_directory() . '/library/classes/inclusions/templates/' . $inc . '.php', true);
-            add_filter('template_include', function () {
-                return get_template_directory() . '/library/classes/inclusions/templates/' . $inc . '.php';
-            });
+            if ($inc == 'inc_header') {
+                add_filter('template_include', function () {
+                    return get_template_directory() . '/library/templates/inc_header.php';
+                });
+            } elseif ($inc == 'inc_footer') {
+                add_filter('template_include', function () {
+                    return get_template_directory() . '/library/templates/inc_footer.php';
+                });
+            }
         }
     }
 }
