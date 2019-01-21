@@ -24,8 +24,6 @@ class WoodyTheme_Polylang
 
         add_filter('woody_pll_days', [$this, 'woodyPllDays'], 10);
         add_filter('woody_pll_months', [$this, 'woodyPllMonths'], 10);
-        add_filter('woody_pll_get_posts', [$this, 'woodyPllGetPosts'], 10, 1);
-        add_filter('woody_pll_set_posts', [$this, 'woodyPllSetPosts'], 10, 2);
 
         add_filter('woody_theme_siteconfig', [$this, 'siteConfigAddLangs'], 12, 1);
     }
@@ -85,48 +83,6 @@ class WoodyTheme_Polylang
     public function loadThemeTextdomain()
     {
         load_theme_textdomain('woody-theme', get_template_directory() . '/languages');
-    }
-
-    public function woodyPllGetPosts($post_id)
-    {
-        // Get default language
-        if (function_exists('pll_get_post_language')) {
-            $current_lang = pll_get_post_language($post_id);
-            if ($current_lang != PLL_DEFAULT_LANG) {
-                $post_id = pll_get_post($post_id, PLL_DEFAULT_LANG);
-            }
-
-            if (!empty($post_id)) {
-                $translations = get_transient('woody_pll_post_translations_' . $post_id);
-
-                if (empty($translations)) {
-                    $languages = pll_languages_list();
-
-                    // Set default language
-                    $translations[PLL_DEFAULT_LANG] = $post_id;
-
-                    // Set Link languages
-                    foreach ($languages as $lang) {
-                        if ($lang != PLL_DEFAULT_LANG) {
-                            $t_post_id = pll_get_post($post_id, $lang);
-                            if (!empty($t_post_id)) {
-                                $translations[$lang] = $t_post_id;
-                            }
-                        }
-                    }
-
-                    // Save transient
-                    apply_filters('woody_pll_set_posts', $post_id, $translations);
-                }
-
-                return $translations;
-            }
-        }
-    }
-
-    public function woodyPllSetPosts($post_id, $translations)
-    {
-        set_transient('woody_pll_post_translations_' . $post_id, $translations, 300);
     }
 
     public function woodyPllDays()
