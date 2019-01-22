@@ -112,9 +112,18 @@ function getWoodyIcons()
 
     //TODO: Récupérer une variable globale en fonction du set d'icones choisis dans le thème pour remplacer '/src/icons/icons_set_01'
     $core_icons = woodyIconsFolder(get_template_directory() . '/src/icons/icons_set_01');
+
+    // TODO : récuperer variable station de l'ERP
+    $stations = ['superot', 'champsaur-valgaudemar'];
+    $station_icons= array();
+
+    if ((in_array(WP_SITE_KEY, $stations))) {
+        $station_icons = woodyIconsFolder(get_template_directory() . '/src/icons/icons_set_stations');
+    }
+
     $site_icons = woodyIconsFolder(get_stylesheet_directory() . '/src/icons');
 
-    $return = array_merge($core_icons, $site_icons);
+    $return = array_merge($core_icons, $site_icons, $station_icons);
 
     return $return;
 }
