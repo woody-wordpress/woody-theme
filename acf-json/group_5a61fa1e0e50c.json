@@ -32,6 +32,13 @@
                 "operator": "==",
                 "value": "page"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "woody_model"
+            }
         ]
     ],
     "menu_order": -100,
@@ -42,5 +49,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Sélection du type de contenu basé sur la taxonomie \"page_type\"",
-    "modified": 1540831098
+    "modified": 1548196535
 }
