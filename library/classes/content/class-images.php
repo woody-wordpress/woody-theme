@@ -443,7 +443,6 @@ class WoodyTheme_Images
                         wp_update_attachment_metadata($attachment_id, $attachment_metadata);
 
                         // Save metadata to all languages
-
                         $current_lang = pll_get_post_language($attachment_id);
                         if ($current_lang == PLL_DEFAULT_LANG) {
                             $languages = pll_languages_list();
