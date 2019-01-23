@@ -21,9 +21,9 @@ class WoodyTheme_Images
     {
         // Actions
         add_action('add_attachment', [$this, 'addAttachment'], 50);
-        add_action('acf/save_post', [$this, 'saveAttachment'], 50);
+        add_filter('attachment_fields_to_save', [$this, 'attachmentFieldsToSave'], 12, 2); // Priority 12 ater polylang
         add_action('save_attachment', [$this, 'saveAttachment'], 50);
-        add_action('delete_attachment', [$this, 'deleteAttachment'], 50);
+        add_action('delete_attachment', [$this, 'deleteAttachment'], 1);
 
         // Filters
         add_filter('intermediate_image_sizes_advanced', [$this, 'removeAutoThumbs'], 10, 2);
@@ -208,28 +208,43 @@ class WoodyTheme_Images
 
     public function addAttachment($attachment_id)
     {
-        //Output::debug(['addAttachment' => $attachment_id]);
-
-        // Added attachment_types
-        wp_set_object_terms($attachment_id, 'Média ajouté manuellement', 'attachment_types', false);
-
-        // Duplicate all medias
         if (pll_get_post_language($attachment_id) == PLL_DEFAULT_LANG) {
+            // Added attachment_types
+            wp_set_object_terms($attachment_id, 'Média ajouté manuellement', 'attachment_types', false);
+
+            // Duplicate all medias
             $this->saveAttachment($attachment_id);
         }
     }
 
     public function deleteAttachment($attachment_id)
     {
-        if (wp_attachment_is_image($attachment_id)) {
-            delete_transient('woody_pll_post_translations_' . $attachment_id);
+        $deleted_attachement = get_transient('woody_deleted_attachement', []);
+        if (wp_attachment_is_image($attachment_id) && !in_array($attachment_id, $deleted_attachement)) {
+            $translations = pll_get_post_translations($attachment_id);
+            $deleted_attachement = array_merge($deleted_attachement, array_values($translations));
+            set_transient('woody_deleted_attachement', $deleted_attachement);
+
+            foreach ($translations as $t_attachment_id) {
+                if ($t_attachment_id != $attachment_id) {
+                    wp_delete_attachment($t_attachment_id);
+                }
+            }
         }
+    }
+
+    public function attachmentFieldsToSave($post, $attachment)
+    {
+        if (!empty($post['ID'])) {
+            $this->saveAttachment($post['ID']);
+        }
+
+        return $post;
     }
 
     public function saveAttachment($attachment_id)
     {
         if (wp_attachment_is_image($attachment_id)) {
-            //Output::debug(['saveAttachment' => $attachment_id]);
 
             // Only if current edit post is default (FR)
             $languages = pll_languages_list();
@@ -244,8 +259,7 @@ class WoodyTheme_Images
                     $t_attachment_id = pll_get_post($attachment_id, $lang);
                     if (empty($t_attachment_id)) {
                         // Duplicate media with Polylang Method
-                        $t_attachment_id = PLL()->posts->create_media_translation($attachment_id, $lang);
-                        //Output::debug(['create_media_translation' => $t_attachment_id]);
+                        $t_attachment_id = apply_filters('woody_pll_create_media_translation', $attachment_id, $lang);
                     }
 
                     // Sync Meta and fields
@@ -268,7 +282,6 @@ class WoodyTheme_Images
     private function syncAttachmentMetadata($attachment_id = null, $t_attachment_id = null)
     {
         if (!empty($t_attachment_id) && !empty($attachment_id)) {
-            //Output::debug(['syncAttachmentMetadata' => [$attachment_id, $t_attachment_id]]);
 
             // Get metadatas (crop sizes)
             $attachment_metadata = wp_get_attachment_metadata($attachment_id);
@@ -328,83 +341,88 @@ class WoodyTheme_Images
     public function generateAttachmentMetadata($metadata, $attachment_id)
     {
         if (wp_attachment_is_image($attachment_id)) {
+            $attachment_metadata = wp_get_attachment_metadata($attachment_id);
 
-            // Get current post
-            $post = get_post($attachment_id);
-
-            // Create an array with the image meta (Title, Caption, Description) to be updated
-            // Note:  comment out the Excerpt/Caption or Content/Description lines if not needed
-            $my_image_meta = [];
-            $my_image_meta['ID'] = $attachment_id; // Specify the image (ID) to be updated
-
-            if (empty($metadata['image_meta']['title'])) {
-                $new_title = ucwords(strtolower(preg_replace('%\s*[-_\s]+\s*%', ' ', $post->post_title)));
-                $my_image_meta['post_title'] = $new_title;
+            if (!empty($attachment_metadata)) {
+                $metadata = $attachment_metadata;
             } else {
-                $new_title = $metadata['image_meta']['title'];
-            }
+                // Get current post
+                $post = get_post($attachment_id);
 
-            if (empty($post->post_excerpt)) {
-                $new_description = $new_title;
-                $my_image_meta['post_excerpt'] = $new_description;
-            } else {
-                $new_description = $post->post_excerpt;
-            }
+                // Create an array with the image meta (Title, Caption, Description) to be updated
+                // Note:  comment out the Excerpt/Caption or Content/Description lines if not needed
+                $my_image_meta = [];
+                $my_image_meta['ID'] = $attachment_id; // Specify the image (ID) to be updated
 
-            if (empty($post->post_content)) {
-                $my_image_meta['post_content'] = $new_description;
-            }
-
-            // Set the image Alt-Text
-            update_post_meta($attachment_id, '_wp_attachment_image_alt', $new_description);
-
-            // Set the image meta (e.g. Title, Excerpt, Content)
-            wp_update_post($my_image_meta);
-
-            // Set ACF Fields (Credit)
-            if (!empty($metadata['image_meta']['credit'])) {
-                update_field('media_author', $metadata['image_meta']['credit'], $attachment_id);
-            }
-
-            if (!empty($metadata['image_meta']['latitude'])) {
-                update_field('media_lat', $metadata['image_meta']['latitude'], $attachment_id);
-            }
-
-            if (!empty($metadata['image_meta']['longitude'])) {
-                update_field('media_lng', $metadata['image_meta']['longitude'], $attachment_id);
-            }
-
-            // Crop API
-            global $_wp_additional_image_sizes;
-
-            // Added default sizes
-            $_wp_additional_image_sizes['thumbnail'] = ['height' => 150, 'width' => 150, 'crop' => true];
-            $_wp_additional_image_sizes['medium'] = ['height' => 300, 'width' => 300, 'crop' => true];
-            $_wp_additional_image_sizes['large'] = ['height' => 1024, 'width' => 1024, 'crop' => true];
-
-            // Get Mime-Type
-            $mime_type = mime_content_type(WP_UPLOAD_DIR . '/' . $metadata['file']);
-
-            foreach ($_wp_additional_image_sizes as $ratio => $size) {
-                if (empty($metadata['sizes'][$ratio])) {
-                    $metadata['sizes'][$ratio] = [
-                        'file' => '../../../../../wp-json/woody/crop/' . $attachment_id . '/' . $ratio,
-                        'height' => $size['height'],
-                        'width' => $size['width'],
-                        'mime-type' => $mime_type,
-                    ];
+                if (empty($metadata['image_meta']['title'])) {
+                    $new_title = ucwords(strtolower(preg_replace('%\s*[-_\s]+\s*%', ' ', $post->post_title)));
+                    $my_image_meta['post_title'] = $new_title;
+                } else {
+                    $new_title = $metadata['image_meta']['title'];
                 }
-            }
 
-            // Added full size
-            $filename = explode('/', $metadata['file']);
-            $filename = end($filename);
-            $metadata['sizes']['full'] = [
-                'file' => $filename,
-                'height' => $metadata['height'],
-                'width' => $metadata['width'],
-                'mime-type' => $mime_type
-            ];
+                if (empty($post->post_excerpt)) {
+                    $new_description = $new_title;
+                    $my_image_meta['post_excerpt'] = $new_description;
+                } else {
+                    $new_description = $post->post_excerpt;
+                }
+
+                if (empty($post->post_content)) {
+                    $my_image_meta['post_content'] = $new_description;
+                }
+
+                // Set the image Alt-Text
+                update_post_meta($attachment_id, '_wp_attachment_image_alt', $new_description);
+
+                // Set the image meta (e.g. Title, Excerpt, Content)
+                wp_update_post($my_image_meta);
+
+                // Set ACF Fields (Credit)
+                if (!empty($metadata['image_meta']['credit'])) {
+                    update_field('media_author', $metadata['image_meta']['credit'], $attachment_id);
+                }
+
+                if (!empty($metadata['image_meta']['latitude'])) {
+                    update_field('media_lat', $metadata['image_meta']['latitude'], $attachment_id);
+                }
+
+                if (!empty($metadata['image_meta']['longitude'])) {
+                    update_field('media_lng', $metadata['image_meta']['longitude'], $attachment_id);
+                }
+
+                // Crop API
+                global $_wp_additional_image_sizes;
+
+                // Added default sizes
+                $_wp_additional_image_sizes['thumbnail'] = ['height' => 150, 'width' => 150, 'crop' => true];
+                $_wp_additional_image_sizes['medium'] = ['height' => 300, 'width' => 300, 'crop' => true];
+                $_wp_additional_image_sizes['large'] = ['height' => 1024, 'width' => 1024, 'crop' => true];
+
+                // Get Mime-Type
+                $mime_type = mime_content_type(WP_UPLOAD_DIR . '/' . $metadata['file']);
+
+                foreach ($_wp_additional_image_sizes as $ratio => $size) {
+                    if (empty($metadata['sizes'][$ratio])) {
+                        $metadata['sizes'][$ratio] = [
+                            'file' => '../../../../../wp-json/woody/crop/' . $attachment_id . '/' . $ratio,
+                            'height' => $size['height'],
+                            'width' => $size['width'],
+                            'mime-type' => $mime_type,
+                        ];
+                    }
+                }
+
+                // Added full size
+                $filename = explode('/', $metadata['file']);
+                $filename = end($filename);
+                $metadata['sizes']['full'] = [
+                    'file' => $filename,
+                    'height' => $metadata['height'],
+                    'width' => $metadata['width'],
+                    'mime-type' => $mime_type
+                ];
+            }
         }
 
         return $metadata;
@@ -445,18 +463,7 @@ class WoodyTheme_Images
                         // Save metadata to all languages
                         $current_lang = pll_get_post_language($attachment_id);
                         if ($current_lang == PLL_DEFAULT_LANG) {
-                            $languages = pll_languages_list();
-                            foreach ($languages as $lang) {
-                                if ($lang == PLL_DEFAULT_LANG) {
-                                    continue;
-                                }
-
-                                // Replace attachment_metadata by FR metadatas
-                                $t_attachment_id = pll_get_post($attachment_id, $lang);
-                                if (!empty($t_attachment_id)) {
-                                    wp_update_attachment_metadata($t_attachment_id, $attachment_metadata);
-                                }
-                            }
+                            do_action('save_attachment', $attachment_id);
                         }
                     }
                 }
