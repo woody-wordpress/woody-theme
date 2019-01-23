@@ -129,19 +129,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
             $this->context['page_teaser'] = Timber::compile($this->context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
         }
-    }
-
-    protected function commonContext()
-    {
-        $this->context['page_terms'] = implode(' ', getPageTerms($this->context['post']->ID));
-        $this->context['default_marker'] = file_get_contents($this->context['dist_dir'] . '/img/default-marker.svg');
-
-        /*********************************************
-         * Check type de publication
-         *********************************************/
-        if ($this->context['page_type'] === 'playlist_tourism') {
-            $this->playlistContext();
-        }
 
         /*********************************************
         * Compilation du visuel et accroche
@@ -166,6 +153,19 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             $page_hero['title'] = (!empty($page_hero['title'])) ? str_replace('-', '&#8209', $page_hero['title']) : '';
 
             $this->context['page_hero'] = Timber::compile($this->context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
+        }
+    }
+
+    protected function commonContext()
+    {
+        $this->context['page_terms'] = implode(' ', getPageTerms($this->context['post']->ID));
+        $this->context['default_marker'] = file_get_contents($this->context['dist_dir'] . '/img/default-marker.svg');
+
+        /*********************************************
+         * Check type de publication
+         *********************************************/
+        if ($this->context['page_type'] === 'playlist_tourism') {
+            $this->playlistContext();
         }
 
         /*********************************************
