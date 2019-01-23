@@ -6,7 +6,7 @@ import './global-admin';
 
 // Woody Plugin
 import 'Hawwwai/Resources/Assets/js/acf-hawwwai'
-import 'Process/Resources/Assets/js/model'
+// import 'Process/Resources/Assets/js/model'
 
 // Disabled
 //import './save-post';
