@@ -439,7 +439,12 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "choices": {},
+            "choices": {
+                "blocks-page_teaser-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.broceliande.wp.rc-dev.com\/app\/dist\/broceliande\/img\/woody-library\/views\/blocks\/page_teaser\/tpl_01\/thumbnail.png?version=2.7.0\" alt=\"blocks-page_teaser-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">En tête de page - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">En tête de page - Template 1<\/h4>Affiche les infos indispensables d'une page alignées à gauche : titre + desc + social shares + ajout aux favoris<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-page_teaser-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.broceliande.wp.rc-dev.com\/app\/dist\/broceliande\/img\/woody-library\/views\/blocks\/page_teaser\/tpl_02\/thumbnail.png?version=2.7.0\" alt=\"blocks-page_teaser-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">En tête de page - Template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">En tête de page - Template 2<\/h4>Affiche les infos indispensables d'une page alignées au centre : titre + desc + social shares + ajout aux favoris<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-page_teaser-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.broceliande.wp.rc-dev.com\/app\/dist\/broceliande\/img\/woody-library\/views\/blocks\/page_teaser\/tpl_03\/thumbnail.png?version=2.7.0\" alt=\"blocks-page_teaser-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">En tête de page - Template 3<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">En tête de page - Template 3<\/h4>Affiche les infos indispensables d'une page : titre + desc + social shares + ajout aux favoris + image\/video ou widget à droite (7 colones - 5 colonnes)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-page_teaser-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.broceliande.wp.rc-dev.com\/app\/dist\/broceliande\/img\/woody-library\/views\/blocks\/page_teaser\/tpl_04\/thumbnail.png?version=2.7.0\" alt=\"blocks-page_teaser-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">En tête de page - Template 4<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">En tête de page - Template 4<\/h4>Affiche les infos indispensables d'une page : titre + desc + social shares + ajout aux favoris + image\/video ou widget à droite (8 colones - 4 colonnes)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+            },
             "allow_null": 0,
             "other_choice": 0,
             "default_value": "",
@@ -522,6 +527,18 @@
                 "operator": "!=",
                 "value": "front_page"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "woody_model"
+            },
+            {
+                "param": "page_type_and_children",
+                "operator": "!=",
+                "value": "front_page"
+            }
         ]
     ],
     "menu_order": 10,
@@ -532,5 +549,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Les infos principales de la page + la possibilité d'ajouter les liens de partage et d'ajout aux favoris",
-    "modified": 1545397238
+    "modified": 1548196222
 }
