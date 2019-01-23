@@ -63,9 +63,9 @@ class WoodyTheme_Dashboard
         $vars = [
             'class' => 'tutoriel-woody',
             'cover' => get_template_directory_uri() . '/library/classes/dashboard/assets/cover-tutoriel-woody.jpg',
-            'title' => 'Tutoriel - Woody Websites',
+            'title' => 'Tutoriel 2.0 - Woody Websites',
             'description' => 'Conseils et astuces sur la prise en main de votre site réalisé avec Woody Website',
-            'button_link' => get_template_directory_uri() . '/library/classes/dashboard/assets/Tutoriel Woody Websites (by Raccourci Agency).pdf',
+            'button_link' => get_template_directory_uri() . '/library/classes/dashboard/assets/Tutoriel_Woody_Websites_by_Raccourci_Agency_2.0.pdf',
             'button_icon' => 'download',
             'button_text' => 'Télécharger le PDF',
         ];
