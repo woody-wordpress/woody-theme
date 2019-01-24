@@ -1200,14 +1200,14 @@ function formatSnowInfoData($layout, $twigPaths)
     $vars['heading'] = getFocusBlockTitles($layout);
 
     // Display
-    $vars['display']['webcams'] = in_array('webcams', $layout['content']['snow_display_elements']);
-    $vars['display']['weathers'] = in_array('weathers', $layout['content']['snow_display_elements']);
-    $vars['display']['slopes'] = in_array('slopes', $layout['content']['snow_display_elements']);
-    $vars['display']['nordic'] = in_array('nordic', $layout['content']['snow_display_elements']);
-    $vars['display']['flash_info'] = in_array('flash_info', $layout['content']['snow_display_elements']);
-    $vars['display_slopes']['global'] = in_array('slopes_global', $layout['content']['snow_slopes_display']);
-    $vars['display_slopes']['by_level'] = in_array('slopes_by_level', $layout['content']['snow_slopes_display']);
-    $vars['display_slopes']['ski_lifts'] = in_array('ski_lifts', $layout['content']['snow_slopes_display']);
+    $vars['display']['webcams'] = (is_array($layout['content']['snow_display_elements']) && in_array('webcams', $layout['content']['snow_display_elements']));
+    $vars['display']['weathers'] = (is_array($layout['content']['snow_display_elements']) && in_array('weathers', $layout['content']['snow_display_elements']));
+    $vars['display']['slopes'] = (is_array($layout['content']['snow_display_elements']) && in_array('slopes', $layout['content']['snow_display_elements']));
+    $vars['display']['nordic'] = (is_array($layout['content']['snow_display_elements']) && in_array('nordic', $layout['content']['snow_display_elements']));
+    $vars['display']['flash_info'] = (is_array($layout['content']['snow_display_elements']) && in_array('flash_info', $layout['content']['snow_display_elements']));
+    $vars['display_slopes']['global'] = (is_array($layout['content']['snow_slopes_display']) && in_array('slopes_global', $layout['content']['snow_slopes_display']));
+    $vars['display_slopes']['by_level'] = (is_array($layout['content']['snow_slopes_display']) && in_array('slopes_by_level', $layout['content']['snow_slopes_display']));
+    $vars['display_slopes']['ski_lifts'] = (is_array($layout['content']['snow_slopes_display']) && in_array('ski_lifts', $layout['content']['snow_slopes_display']));
 
     $return = Timber::compile($twigPaths[$layout['woody_tpl']], $vars);
 
