@@ -20,6 +20,9 @@ class WoodyTheme_Polylang
 
         add_filter('pll_is_cache_active', [$this, 'isCacheActive']);
         add_filter('pll_copy_taxonomies', [$this, 'copyAttachmentTypes'], 10, 2);
+        // add_filter('pll_predefined_flags', [$this, 'pllPredefinedFlags'], 10, 2);
+        // add_filter('pll_flag', [$this, 'pllFlag'], 10, 2);
+
         add_filter('wpssoc_user_redirect_url', [$this, 'wpssocUserRedirectUrl'], 10, 1);
 
         add_filter('woody_pll_days', [$this, 'woodyPllDays'], 10);
@@ -78,6 +81,29 @@ class WoodyTheme_Polylang
 
         $taxonomies = array_merge($custom_taxs, $taxonomies);
         return $taxonomies;
+    }
+
+    public function pllFlag($flag, $code)
+    {
+        switch ($code) {
+            case 'fr_hiver':
+                $flag['url']    = "/app/themes/woody-theme/src/img/flags/fr_hiver.png";
+                $flag['width']  = 16;
+                $flag['height'] = 11;
+                break;
+        }
+
+        return $flag;
+    }
+
+    public function pllPredefinedFlags($flags)
+    {
+        $flags['fr_ete'] = __('Français (Eté)', 'polylang');
+        $flags['fr_hiver'] = __('Français (Hiver)', 'polylang');
+        $flags['en_summer'] = __('English (Summer)', 'polylang');
+        $flags['en_winter'] = __('English (Winter)', 'polylang');
+
+        return $flags;
     }
 
     // --------------------------------
