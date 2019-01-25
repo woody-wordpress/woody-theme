@@ -16,153 +16,23 @@ class WoodyTheme_Polylang
     protected function registerHooks()
     {
         add_action('after_setup_theme', [$this, 'loadThemeTextdomain']);
-        add_action('wp_loaded', [$this, 'wpLoaded'], 30);
-
-        add_filter('pll_is_cache_active', [$this, 'isCacheActive']);
-        add_filter('pll_copy_taxonomies', [$this, 'copyAttachmentTypes'], 10, 2);
-        // add_filter('pll_predefined_flags', [$this, 'pllPredefinedFlags'], 10, 2);
-        // add_filter('pll_flag', [$this, 'pllFlag'], 10, 2);
-
-        add_filter('wpssoc_user_redirect_url', [$this, 'wpssocUserRedirectUrl'], 10, 1);
 
         add_filter('woody_pll_days', [$this, 'woodyPllDays'], 10);
         add_filter('woody_pll_months', [$this, 'woodyPllMonths'], 10);
-        add_filter('woody_pll_create_media_translation', [$this, 'woodyPllCreateMediaTranslation'], 10, 2);
         add_filter('woody_theme_siteconfig', [$this, 'siteConfigAddLangs'], 12, 1);
-    }
-
-    public function isCacheActive()
-    {
-        return true;
-    }
-
-    /**
-     * Fonction qui corrige un conflit de Polylang avec Enhanced Media Library lorsque l'on a plus de 2 langues
-     * Sans ce fix, les traductions des images ne sont plus liées entre elles
-     */
-    public function wpLoaded()
-    {
-        global $wp_taxonomies;
-        $wp_taxonomies['language']->update_count_callback = '';
-        $wp_taxonomies['post_translations']->update_count_callback = '_update_generic_term_count';
-    }
-
-    public function wpssocUserRedirectUrl($user_redirect_set)
-    {
-        if (function_exists('pll_current_language')) {
-            if (strpos($user_redirect_set, 'wp-admin') !== false) {
-                if (strpos($user_redirect_set, '?') !== false) {
-                    $user_redirect_set .= '&lang=' . pll_current_language();
-                } else {
-                    $user_redirect_set .= '?lang=' . pll_current_language();
-                }
-            }
-        }
-
-        return $user_redirect_set;
-    }
-
-    public function siteConfigAddLangs($siteConfig)
-    {
-        if (function_exists('pll_languages_list')) {
-            $siteConfig['languages'] = pll_languages_list();
-        }
-        return $siteConfig;
-    }
-
-    // define the pll_copy_taxonomies callback
-    public function copyAttachmentTypes($taxonomies, $sync)
-    {
-        $custom_taxs = [
-            'attachment_types' => 'attachment_types',
-            'attachment_hashtags' => 'attachment_hashtags',
-            'attachment_categories' => 'attachment_categories',
-        ];
-
-        $taxonomies = array_merge($custom_taxs, $taxonomies);
-        return $taxonomies;
-    }
-
-    public function pllFlag($flag, $code)
-    {
-        switch ($code) {
-            case 'fr_hiver':
-                $flag['url']    = "/app/themes/woody-theme/src/img/flags/fr_hiver.png";
-                $flag['width']  = 16;
-                $flag['height'] = 11;
-                break;
-        }
-
-        return $flag;
-    }
-
-    public function pllPredefinedFlags($flags)
-    {
-        $flags['fr_ete'] = __('Français (Eté)', 'polylang');
-        $flags['fr_hiver'] = __('Français (Hiver)', 'polylang');
-        $flags['en_summer'] = __('English (Summer)', 'polylang');
-        $flags['en_winter'] = __('English (Winter)', 'polylang');
-
-        return $flags;
-    }
-
-    // --------------------------------
-    // Copy of native Polylang function
-    // PLL()->posts->create_media_translation($attachment_id, $lang);
-    // --------------------------------
-    public function woodyPllCreateMediaTranslation($post_id, $lang)
-    {
-        if (empty($post_id)) {
-            return $post_id;
-        }
-
-        $post = get_post($post_id);
-
-        if (empty($post)) {
-            return $post;
-        }
-
-        // Create a new attachment ( translate attachment parent if exists )
-        add_filter('pll_enable_duplicate_media', '__return_false', 99); // Avoid a conflict with automatic duplicate at upload
-        $post->ID = null; // Will force the creation
-        $post->post_parent = ($post->post_parent && $tr_parent = pll_get_post($post->post_parent, $lang)) ? $tr_parent : 0;
-        $post->tax_input = array( 'language' => array( $lang ) ); // Assigns the language
-        $tr_id = wp_insert_attachment($post);
-        remove_filter('pll_enable_duplicate_media', '__return_false', 99); // Restore automatic duplicate at upload
-
-        // Copy metadata, attached file and alternative text
-        foreach (array( '_wp_attachment_metadata', '_wp_attached_file', '_wp_attachment_image_alt' ) as $key) {
-            if ($meta = get_post_meta($post_id, $key, true)) {
-                add_post_meta($tr_id, $key, $meta);
-            }
-        }
-
-        pll_set_post_language($tr_id, $lang);
-
-        $translations = pll_get_post_translations($post_id);
-        if (! $translations && $src_lang = pll_get_post($post_id)) {
-            $translations[ $src_lang->slug ] = $post_id;
-        }
-
-        $translations[ $lang ] = $tr_id;
-        pll_save_post_translations($translations);
-
-        /**
-         * Fires after a media translation is created
-         *
-         * @since 1.6.4
-         *
-         * @param int    $post_id post id of the source media
-         * @param int    $tr_id   post id of the new media translation
-         * @param string $slug    language code of the new translation
-         */
-        do_action('pll_translate_media', $post_id, $tr_id, $lang);
-        return $tr_id;
     }
 
     public function loadThemeTextdomain()
     {
         load_theme_textdomain('woody-theme', get_template_directory() . '/languages');
+    }
+
+    public function siteConfigAddLangs($siteConfig)
+    {
+        if (function_exists('pll_languages_list')) {
+            $siteConfig['languages'] = apply_filters('woody_pll_languages_list', null);
+        }
+        return $siteConfig;
     }
 
     public function woodyPllDays()

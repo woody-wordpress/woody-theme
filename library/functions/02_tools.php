@@ -391,14 +391,14 @@ function rc_xmlToArray($xml, $options = array())
 
 
 /**
- * [rc_clean_season Retourne une langue nettoyée des saisons]
- * @param  string  $lang     [Langue à nettoyer]
+ * [rc_cleanLang Retourne un code langue (2 chars) depuis le code de la langue locale] (*fr_FR* -> *fr*)
  * @return string  $lang     [Langue netoyée]
  */
-function rc_clean_season($lang)
+function rc_cleanLang()
 {
-    foreach (array('winter', 'hiver', 'summer', 'ete', 'rentals') as $removed_word) {
-        $lang = str_replace('-' . $removed_word, '', $lang);
-    }
-    return $lang;
+    $locale = pll_current_language('locale');
+    $cleanLang = explode('_', $locale);
+    $cleanLang = $cleanLang[0];
+
+    return $cleanLang;
 }

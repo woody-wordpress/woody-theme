@@ -143,11 +143,11 @@ class WoodyTheme_Cleanup_Admin
             if (function_exists('acf_add_options_sub_page') && $lang == PLL_DEFAULT_LANG) {
                 // Première sous-page
                 acf_add_options_sub_page(array(
-                'page_title'    => 'Menu principal',
-                'menu_title'    => 'Menu principal',
-                'parent_slug'   => 'custom-menus',
-                'capability'    => 'edit_pages',
-            ));
+                    'page_title'    => 'Menu principal',
+                    'menu_title'    => 'Menu principal',
+                    'parent_slug'   => 'custom-menus',
+                    'capability'    => 'edit_pages',
+                ));
             }
         }
     }
