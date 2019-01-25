@@ -16,6 +16,7 @@ class WoodyTheme_Links
     protected function registerHooks()
     {
         add_filter('wp_link_query_args', [$this, 'customLinksSearch']);
+        add_filter('wp_link_query', [$this, 'customLinksResults'], 10, 2);
     }
 
     public function customLinksSearch($query)
@@ -34,5 +35,19 @@ class WoodyTheme_Links
         }
 
         return $query;
+    }
+
+    public function customLinksResults($results, $query)
+    {
+        foreach ($results as $result_key => $result) {
+            $parent_id = getPostRootAncestor($result['ID']);
+            if (!empty($parent_id)) {
+                $parent = get_post($parent_id);
+                $sufix = '<small style="color:#cfcfcf; font-style:italic">( Enfant de ' . $parent->post_title . ')</small>';
+                $results[$result_key]['title'] = $results[$result_key]['title'] . ' - ' . $sufix;
+            }
+        }
+
+        return $results;
     }
 }
