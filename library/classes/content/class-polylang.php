@@ -20,8 +20,8 @@ class WoodyTheme_Polylang
 
         add_filter('pll_is_cache_active', [$this, 'isCacheActive']);
         add_filter('pll_copy_taxonomies', [$this, 'copyAttachmentTypes'], 10, 2);
-        // add_filter('pll_predefined_flags', [$this, 'pllPredefinedFlags'], 10, 2);
-        // add_filter('pll_flag', [$this, 'pllFlag'], 10, 2);
+        add_filter('pll_predefined_flags', [$this, 'pllPredefinedFlags'], 11, 2);
+        add_filter('pll_flag', [$this, 'pllFlag'], 11, 2);
 
         add_filter('wpssoc_user_redirect_url', [$this, 'wpssocUserRedirectUrl'], 10, 1);
 
@@ -85,12 +85,25 @@ class WoodyTheme_Polylang
 
     public function pllFlag($flag, $code)
     {
-        switch ($code) {
-            case 'fr_hiver':
-                $flag['url']    = "/app/themes/woody-theme/src/img/flags/fr_hiver.png";
-                $flag['width']  = 16;
-                $flag['height'] = 11;
-                break;
+        $seasons = [
+            'ad'   => 'fr_hiver',
+            'ae'   => 'fr_ete',
+            'af'   => 'en_hiver',
+            'ag'   => 'en_ete',
+            'ai'   => 'de_hiver',
+            'al'   => 'de_ete',
+            'am'   => 'it_hiver',
+            'an'   => 'it_ete',
+            'ao'   => 'nl_hiver',
+            'ar'   => 'nl_ete',
+            'arab' => 'es_hiver',
+            'as'   => 'es_ete',
+            'at'   => 'pt_hiver',
+            'au'   => 'pt_ete',
+        ];
+
+        if (array_key_exists($code, $seasons)) {
+            $flag['url'] = WP_CONTENT_URL . '/themes/woody-theme/src/img/flags/' . $seasons[$code] . '.png';
         }
 
         return $flag;
@@ -98,10 +111,20 @@ class WoodyTheme_Polylang
 
     public function pllPredefinedFlags($flags)
     {
-        $flags['fr_ete'] = __('Français (Eté)', 'polylang');
-        $flags['fr_hiver'] = __('Français (Hiver)', 'polylang');
-        $flags['en_summer'] = __('English (Summer)', 'polylang');
-        $flags['en_winter'] = __('English (Winter)', 'polylang');
+        $flags['ad']   = __('Français (Hiver)', 'polylang');
+        $flags['ae']   = __('Français (Eté)', 'polylang');
+        $flags['af']   = __('Anglais (Hiver)', 'polylang');
+        $flags['ag']   = __('Anglais (Eté)', 'polylang');
+        $flags['ai']   = __('Allemand (Hiver)', 'polylang');
+        $flags['al']   = __('Allemand (Eté)', 'polylang');
+        $flags['am']   = __('Italien (Hiver)', 'polylang');
+        $flags['an']   = __('Italien (Eté)', 'polylang');
+        $flags['ao']   = __('Néerlandais (Hiver)', 'polylang');
+        $flags['ar']   = __('Néerlandais (Eté)', 'polylang');
+        $flags['arab'] = __('Espagnol (Hiver)', 'polylang');
+        $flags['as']   = __('Espagnol (Eté)', 'polylang');
+        $flags['at']   = __('Portugais (Hiver)', 'polylang');
+        $flags['au']   = __('Portugais (Eté)', 'polylang');
 
         return $flags;
     }
