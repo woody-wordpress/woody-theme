@@ -1,5 +1,8 @@
 <?php
 
+// Define PLL_DEFAULT_LANG
+define('PLL_DEFAULT_LANG', function_exists('pll_default_language') ? pll_default_language() : 'fr');
+
 // Commands
 new WoodyTheme_Commands();
 
