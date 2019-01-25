@@ -38,7 +38,6 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
         $sheet_id = $this->context['post']->touristic_sheet_id;
         $sheet_lang = $this->context['post']->touristic_sheet_lang;
         // $season = null;
-        $sheet_lang = rc_clean_season($sheet_lang);
 
         $this->context['lang'] = $sheet_lang;
         $this->context['fetcherType'] = 'website_'.WP_ENV;
