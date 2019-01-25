@@ -50,6 +50,8 @@ class WoodyTheme_ACF
         add_filter('acf/location/rule_match/page_type_and_children', [$this, 'woodyAcfPageTypeMatch'], 10, 3);
 
         add_filter('acf/load_field/name=weather_account', [$this, 'weatherAccountAcfLoadField'], 10, 3);
+
+        add_filter('acf/fields/post_object/result', [$this, 'postObjectAcfResults'], 10, 4);
     }
 
     /**
@@ -576,5 +578,16 @@ class WoodyTheme_ACF
     {
         delete_transient('woody_page_taxonomies_choices');
         delete_transient('woody_terms_choices');
+    }
+
+    public function postObjectAcfResults($title, $post, $field, $post_id)
+    {
+        $parent_id = getPostRootAncestor($post->ID);
+        if (!empty($parent_id)) {
+            $parent = get_post($parent_id);
+            $sufix = '<small style="color:#cfcfcf; font-style:italic">( Enfant de ' . $parent->post_title . ')</small>';
+            $title = $title . ' - ' . $sufix;
+        }
+        return $title;
     }
 }
