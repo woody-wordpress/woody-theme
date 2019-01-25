@@ -30,7 +30,7 @@ class WoodyTheme_Polylang
     public function siteConfigAddLangs($siteConfig)
     {
         if (function_exists('pll_languages_list')) {
-            $siteConfig['languages'] = pll_languages_list();
+            $siteConfig['languages'] = apply_filters('woody_pll_languages_list', null);
         }
         return $siteConfig;
     }
