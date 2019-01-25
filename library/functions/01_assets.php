@@ -263,7 +263,7 @@ function getPrimaryTerm($taxonomy, $post_id, $fields = [])
  * Auteur : Thomas Navarro
  * Return : Retourne le parent racine d'un post
  * @param    postID INT : id d'une page enfant
- * @return   return - INT/ARRAY : l'id d'un parent ou le tableau de tous les parents de postID
+ * @return   return - INT : l'id d'un parent
  *
  */
 function getPostRootAncestor($postID, $root_level = 1)
@@ -272,7 +272,7 @@ function getPostRootAncestor($postID, $root_level = 1)
     $ancestors = get_post_ancestors($postID);
     if (!empty($ancestors)) {
         // Get last ancestors
-        $root=count($ancestors)- $root_level;
+        $root = count($ancestors) - $root_level;
         $return = $ancestors[$root];
     }
 
