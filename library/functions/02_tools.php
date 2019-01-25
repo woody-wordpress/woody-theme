@@ -388,17 +388,3 @@ function rc_xmlToArray($xml, $options = array())
       $xml->getName() => $propertiesArray
   );
 }
-
-
-/**
- * [rc_cleanLang Retourne un code langue (2 chars) depuis le code de la langue locale] (*fr_FR* -> *fr*)
- * @return string  $lang     [Langue netoyée]
- */
-function rc_cleanLang()
-{
-    $locale = pll_current_language('locale');
-    $cleanLang = explode('_', $locale);
-    $cleanLang = $cleanLang[0];
-
-    return $cleanLang;
-}

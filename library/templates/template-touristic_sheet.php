@@ -36,8 +36,7 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
         $this->context['body_class'] .= ' apirender apirender-wordpress';
 
         $sheet_id = $this->context['post']->touristic_sheet_id;
-        $sheet_lang = $this->context['post']->touristic_sheet_lang;
-        // $season = null;
+        $sheet_lang = add_filter('woody_pll_get_post_language', $this->context['post']->ID);
 
         $this->context['lang'] = $sheet_lang;
         $this->context['fetcherType'] = 'website_'.WP_ENV;

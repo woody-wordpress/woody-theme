@@ -36,7 +36,7 @@ class WoodyTheme_ApirenderBridge
 
     private function getCurrentLang()
     {
-        $active_lang = 'fr';
+        $active_lang = PLL_DEFAULT_LANG;
 
         // Polylang
         if (function_exists('pll_current_language')) {

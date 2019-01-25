@@ -310,7 +310,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         }
 
         // Get from Apirender
-        $this->context['playlist_tourism'] = apply_filters('woody_hawwwai_playlist_render', $playlistConfId, rc_cleanLang(), $query);
+        $this->context['playlist_tourism'] = apply_filters('woody_hawwwai_playlist_render', $playlistConfId, pll_current_language(), $query);
 
         // save confId
         if (!empty($playlistConfId) && is_array($this->context['playlist_tourism'])) {
