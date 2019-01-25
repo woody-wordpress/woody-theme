@@ -18,9 +18,9 @@ function getComponentItem($layout, $context)
             $return = formatFullContentList($layout, $context['post'], $context['woody_components']);
             break;
 
-        case 'snow_info':
-            $return = formatSnowInfoData($layout, $context['woody_components']);
-            break;
+        // case 'snow_info':
+        //     $return = formatSnowInfoData($layout, $context['woody_components']);
+        //     break;
         case 'weather':
             $vars['token'] = $layout['weather_account'];
             $vars['nb_days'] = $layout['weather_count_days'];
@@ -1070,146 +1070,6 @@ function formatVisualEffectData($effects)
     if (!empty($return['transform'])) {
         $return['transform'] = implode('_', $return['transform']);
     }
-
-    return $return;
-}
-
-/**
- *
- * Nom : formatSnowInfoData
- * Auteur : Thomas Navarro
- * Return : Retourne le html du bloc infoneige
- * @param    layout Le wrapper du champ
- * @param    twigPaths les chemins des templates woody
- * @return   return - Twig compilé
- *
- */
-function formatSnowInfoData($layout, $twigPaths)
-{
-    $vars = [];
-
-    // TODO : - recupérer le flux - injecter le noms des differentes stations dans $layout[snow_station]
-    // EXEMPLE DE DONNEES
-    $vars = [
-        'buttons' => [
-            'webcams' => (!empty($layout['content']['webcams_link'])) ? $layout['content']['webcams_link'] : '',
-            'weathers' => (!empty($layout['content']['weathers_link'])) ? $layout['content']['weathers_link'] : '',
-            'slopes' => (!empty($layout['content']['slopes_link'])) ? $layout['content']['slopes_link'] : '',
-        ],
-        'content' => [
-            'webcams' => [
-                'type' => (!empty($layout['content']['webcams_medias']['webcams_type'])) ? $layout['content']['webcams_medias']['webcams_type'] : '',
-                'img' => $layout['content']['webcams_medias']['webcams_type'] == 'img' ? $layout['content']['webcams_medias']['webcams_img'] : '',
-                'iframe' => $layout['content']['webcams_medias']['webcams_type'] == 'iframe' ? $layout['content']['webcams_medias']['webcams_iframe'] : '',
-
-            ],
-            'weathers' => [
-                'icon' => 'cloud-sun', // nom systeme climacon
-                'temp' => '16',
-                'snow_depth' => [
-                    'min' => '5',
-                    'max' => '16'
-                ],
-            ],
-            'slopes' => [
-                0 => [
-                    'type' => 'V',
-                    'color' => '#2BC86F', // Green
-                    'open' => '1',
-                    'total' => '2',
-                ],
-                1 => [
-                    'type' => 'B',
-                    'color' => '#029BD8', // Blue
-                    'open' => '3',
-                    'total' => '4',
-                ],
-                2 => [
-                    'type' => 'R',
-                    'color' => '#EB4F4A', // Red
-                    'open' => '5',
-                    'total' => '5',
-                ],
-                // ...
-            ],
-            'ski_lifts' => [
-                0 => [
-                    'type' => '', // téléski, funiculaire, tire-fesse ...
-                    'open' => '14',
-                    'total' => '20'
-                ],
-                1 => [
-                    'type' => '',
-                    'open' => '2',
-                    'total' => '16'
-                ]
-            ],
-            'global' => [ // init global
-                'slopes' => [
-                    'color' => '#00B6D6',
-                    'open' => '1',
-                    'total' => '2'
-                ],
-                'ski_lifts' => [
-                    'open' => '1',
-                    'total' => '2'
-                ]
-            ],
-            'nordic' => [
-                0 => [
-                    'type' => 'randonnée', // raquette, ski de fond, randonnée ...
-                    'sum' => '75', // distance pistes ouvertes (km)
-                    'distance' => '100', // distance totale des pistes
-                ],
-                1 => [
-                    'type' => 'raquette',
-                    'sum' => '30',
-                    'distance' => '40',
-                ]
-                // ...
-            ],
-            'flash_info' => [
-                'icon' => '021-info', // wicon
-                'text' => 'Aenean placerat. In vulputate urna eu arcu. Aliquam erat volutpat. Suspendisse potenti. Morbi mattis felis at nunc. Duis viverra diam non justo. In nisl. Nullam sit amet magna in magna gravida vehicula. Mauris tincidunt sem sed arcu. Nunc posuere. Nullam lectus justo,'
-            ]
-        ]
-    ];
-
-    // Links
-    $snow_links = $layout['content']['snow_cta']['links'];
-    if (!empty($snow_links)) {
-        foreach ($snow_links as $key => $link) {
-            $vars['content']['links'][$key] = $link;
-        }
-    }
-
-    // Global
-    foreach ($vars['content']['slopes'] as $value) {
-        $vars['content']['global']['slopes']['open'] += $value['open'];
-        $vars['content']['global']['slopes']['total'] += $value['total'];
-    }
-    foreach ($vars['content']['ski_lifts'] as $value) {
-        $vars['content']['global']['ski_lifts']['open'] += $value['open'];
-        $vars['content']['global']['ski_lifts']['total'] += $value['total'];
-    }
-
-    // Options
-    $vars['options'] = getDisplayOptions($layout);
-
-    // Titles
-    $vars['heading'] = getFocusBlockTitles($layout);
-
-    // Display
-    $vars['display']['webcams'] = (is_array($layout['content']['snow_display_elements']) && in_array('webcams', $layout['content']['snow_display_elements']));
-    $vars['display']['weathers'] = (is_array($layout['content']['snow_display_elements']) && in_array('weathers', $layout['content']['snow_display_elements']));
-    $vars['display']['slopes'] = (is_array($layout['content']['snow_display_elements']) && in_array('slopes', $layout['content']['snow_display_elements']));
-    $vars['display']['nordic'] = (is_array($layout['content']['snow_display_elements']) && in_array('nordic', $layout['content']['snow_display_elements']));
-    $vars['display']['flash_info'] = (is_array($layout['content']['snow_display_elements']) && in_array('flash_info', $layout['content']['snow_display_elements']));
-    $vars['display_slopes']['global'] = (is_array($layout['content']['snow_slopes_display']) && in_array('slopes_global', $layout['content']['snow_slopes_display']));
-    $vars['display_slopes']['by_level'] = (is_array($layout['content']['snow_slopes_display']) && in_array('slopes_by_level', $layout['content']['snow_slopes_display']));
-    $vars['display_slopes']['ski_lifts'] = (is_array($layout['content']['snow_slopes_display']) && in_array('ski_lifts', $layout['content']['snow_slopes_display']));
-
-    $return = Timber::compile($twigPaths[$layout['woody_tpl']], $vars);
 
     return $return;
 }
