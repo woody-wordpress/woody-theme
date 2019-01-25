@@ -112,8 +112,8 @@ abstract class WoodyTheme_TemplateAbstract
         if (!empty($credentials['public_login']) && !empty($credentials['public_password'])) {
             $this->context['site_config']['login'] = $credentials['public_login'];
             $this->context['site_config']['password'] = $credentials['public_password'];
-            $this->context['site_config'] = json_encode($this->context['site_config']);
         }
+        $this->context['site_config'] = json_encode($this->context['site_config']);
     }
 
     private function addIcons()
