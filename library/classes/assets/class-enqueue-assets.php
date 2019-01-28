@@ -301,9 +301,10 @@ class WoodyTheme_Enqueue_Assets
         $siteConfig = [];
         $siteConfig['site_key'] = WP_SITE_KEY;
         $credentials = get_option('woody_credentials');
-        if (!empty($credentials['public_login']) && !empty($credentials['public_password'])) {
-            $siteConfig['login'] = $credentials['public_login'];
-            $siteConfig['password'] = $credentials['public_password'];
+        //TODO: public login
+        if (!empty($credentials['login']) && !empty($credentials['password'])) {
+            $siteConfig['login'] = $credentials['login'];
+            $siteConfig['password'] = $credentials['password'];
         }
         $siteConfig['mapProviderKeys'] = $this->mapKeys;
 
