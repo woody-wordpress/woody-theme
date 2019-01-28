@@ -65,9 +65,6 @@ abstract class WoodyTheme_TemplateAbstract
         // GTM
         $this->addGTM();
 
-        // Added SiteConfig
-        $this->addSiteConfig();
-
         // Added Icons
         $this->addIcons();
 
@@ -101,19 +98,6 @@ abstract class WoodyTheme_TemplateAbstract
     private function addGTM()
     {
         $this->context['gtm'] = RC_GTM;
-    }
-
-    private function addSiteConfig()
-    {
-        // Site Config
-        $this->context['site_config'] = [];
-        $this->context['site_config']['site_key'] = WP_SITE_KEY;
-        $credentials = get_option('woody_credentials');
-        if (!empty($credentials['public_login']) && !empty($credentials['public_password'])) {
-            $this->context['site_config']['login'] = $credentials['public_login'];
-            $this->context['site_config']['password'] = $credentials['public_password'];
-        }
-        $this->context['site_config'] = json_encode($this->context['site_config']);
     }
 
     private function addIcons()

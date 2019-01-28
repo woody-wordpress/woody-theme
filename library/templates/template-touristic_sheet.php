@@ -36,22 +36,12 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
         $this->context['body_class'] .= ' apirender apirender-wordpress';
 
         $sheet_id = $this->context['post']->touristic_sheet_id;
-        $sheet_lang = add_filter('woody_pll_get_post_language', $this->context['post']->ID);
+        $sheet_lang = apply_filters('woody_pll_get_post_language', $this->context['post']->ID);
 
         $this->context['lang'] = $sheet_lang;
         $this->context['fetcherType'] = 'website_'.WP_ENV;
         $this->context['destinationName'] = null;
         $this->context['playlistId'] = null;
-
-        // Get API auth data
-        $credentials = get_option('woody_credentials');
-        if (!empty($credentials)) {
-            $this->context['apiLogin'] = $credentials['public_login'];
-            $this->context['apiPassword'] = $credentials['public_password'];
-        } else {
-            print_r('No API woody_hawwwai_sheet_render set');
-            exit;
-        }
 
         /** ************************
          * Appel apirender pour récupérer le DOM de la fiche

@@ -6,12 +6,6 @@
     {% endfor %}
 {% endblock %}
 
-{% block inline_scripts %}
-    <script>
-        var siteConfig = {{ site_config }};
-    </script>
-{% endblock %}
-
 {% block content %}
 <main id="main-content" class="content-type-page {{ page_type|default }}">
     <div class="content-wrapper {{ page_terms|default('no-terms') }}">
