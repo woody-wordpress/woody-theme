@@ -4,7 +4,13 @@
     {% for meta in metas %}
         {{ meta }}
     {% endfor %}
-{% endblock metas %}
+{% endblock %}
+
+{% block inline_scripts %}
+    <script>
+        var siteConfig = {{ site_config }};
+    </script>
+{% endblock %}
 
 {% block content %}
 <main id="main-content" class="content-type-page {{ page_type|default }}">
@@ -68,10 +74,4 @@
 
     </div>
 </main>
-{% endblock %}
-
-{% block metas %}
-<script>
-    var siteConfig = {{ site_config }};
-</script>
 {% endblock %}
