@@ -186,7 +186,7 @@ class WoodyTheme_Images
 
         // IPTC
         $size = getimagesize($file, $info);
-        if (isset($info['APP13'])) {
+        if (!empty($info['APP13'])) {
             $iptc = iptcparse($info['APP13']);
 
             // Places
