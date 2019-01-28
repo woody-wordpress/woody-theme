@@ -166,6 +166,11 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
          *********************************************/
         if ($this->context['page_type'] === 'playlist_tourism') {
             $this->playlistContext();
+
+            $autoselect_id = filter_input(INPUT_GET, 'autoselect_id', FILTER_VALIDATE_INT);
+            if (!empty($autoselect_id)) {
+                $this->context['metas'][] = '<meta name="robots" content="noindex, follow" />';
+            }
         }
 
         /*********************************************

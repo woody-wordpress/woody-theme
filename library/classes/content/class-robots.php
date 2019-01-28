@@ -31,7 +31,6 @@ class WoodyTheme_Robots
                 'Disallow: /*.twig$',
                 'Disallow: /*.inc$',
                 'Disallow: /*?*p=',
-                'Disallow: /*?*autoselect_id=',
             ];
 
             // Add Sitemap
