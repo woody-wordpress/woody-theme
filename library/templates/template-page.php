@@ -52,13 +52,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
     protected function frontpageContext()
     {
-        /*********************************************
-         * Compilation du Diaporama en page d'accueil
-         *********************************************/
-        $home_slider = getAcfGroupFields('group_5bb325e8b6b43');
-        if (!empty($home_slider['landswpr_slides'])) {
-            $this->context['home_slider'] = Timber::compile($this->context['woody_components'][$home_slider['landswpr_woody_tpl']], $home_slider);
-        }
     }
 
     protected function page404Context()
@@ -92,6 +85,14 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     {
         $social_shares = getActiveShares();
         $this->context['social_shares'] = Timber::compile($this->context['woody_components']['blocks-shares-tpl_01'], $social_shares);
+
+        /******************************************************************************
+         * Compilation du Diaporama pour les pages de type "accueil" (!= frontpage)
+         ******************************************************************************/
+        $home_slider = getAcfGroupFields('group_5bb325e8b6b43');
+        if (!empty($home_slider['landswpr_slides'])) {
+            $this->context['home_slider'] = Timber::compile($this->context['woody_components'][$home_slider['landswpr_woody_tpl']], $home_slider);
+        }
 
         /*********************************************
          * Compilation du bloc prix
