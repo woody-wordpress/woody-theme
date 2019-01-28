@@ -165,6 +165,7 @@ class WoodyTheme_Images
 
     public function readImageMetadata($meta, $file, $sourceImageType, $iptc)
     {
+        // EXIF
         if (is_callable('exif_read_data') && in_array($sourceImageType, apply_filters('wp_read_image_metadata_types', array( IMAGETYPE_JPEG, IMAGETYPE_TIFF_II, IMAGETYPE_TIFF_MM )))) {
             $exif = @exif_read_data($file);
 
@@ -180,6 +181,25 @@ class WoodyTheme_Images
                 $lng_min = $this->calc($exif['GPSLongitude'][1]);
                 $lng_sec = $this->calc($exif['GPSLongitude'][2]);
                 $meta['longitude'] = $this->dmsToDecimal($lng_deg, $lng_min, $lng_sec, $exif['GPSLongitudeRef']);
+            }
+        }
+
+        // IPTC
+        $size = getimagesize($file, $info);
+        if (isset($info['APP13'])) {
+            $iptc = iptcparse($info['APP13']);
+
+            // Places
+            if (empty($meta['city']) && !empty($iptc['2#090'])) {
+                $meta['city'] = ucfirst(strtolower(current($iptc['2#090'])));
+            }
+
+            if (empty($meta['state']) && !empty($iptc['2#095'])) {
+                $meta['state'] = ucfirst(strtolower(current($iptc['2#095'])));
+            }
+
+            if (empty($meta['country']) && !empty($iptc['2#101'])) {
+                $meta['country'] = ucfirst(strtolower(current($iptc['2#101'])));
             }
         }
 
@@ -219,8 +239,10 @@ class WoodyTheme_Images
 
     public function deleteAttachment($attachment_id)
     {
+        remove_action('delete_attachment', [$this, 'deleteAttachment']);
+
         $deleted_attachement = get_transient('woody_deleted_attachement', []);
-        if (wp_attachment_is_image($attachment_id) && !in_array($attachment_id, $deleted_attachement)) {
+        if (wp_attachment_is_image($attachment_id) && is_array($deleted_attachement) && !in_array($attachment_id, $deleted_attachement)) {
             $translations = pll_get_post_translations($attachment_id);
             $deleted_attachement = array_merge($deleted_attachement, array_values($translations));
             set_transient('woody_deleted_attachement', $deleted_attachement);
@@ -389,6 +411,37 @@ class WoodyTheme_Images
 
                 if (!empty($metadata['image_meta']['longitude'])) {
                     update_field('media_lng', $metadata['image_meta']['longitude'], $attachment_id);
+                }
+
+                // Import tags
+                if (!empty($metadata['image_meta']['city']) || !empty($metadata['image_meta']['state']) || !empty($metadata['image_meta']['country'])) {
+                    $terms_places = get_terms('places', ['hide_empty' => false]);
+                    foreach ($terms_places as $term_places) {
+                        if (!empty($metadata['image_meta']['city']) && sanitize_title($metadata['image_meta']['city']) == $term_places->slug) {
+                            wp_set_object_terms($attachment_id, $term_places->slug, 'places', true);
+                        } elseif (!empty($metadata['image_meta']['state']) && sanitize_title($metadata['image_meta']['state']) == $term_places->slug) {
+                            wp_set_object_terms($attachment_id, $term_places->slug, 'places', true);
+                        } elseif (!empty($metadata['image_meta']['country']) && sanitize_title($metadata['image_meta']['country']) == $term_places->slug) {
+                            wp_set_object_terms($attachment_id, $term_places->slug, 'places', true);
+                        } elseif (!empty($metadata['image_meta']['keywords'])) {
+                            foreach ($metadata['image_meta']['keywords'] as $keyword) {
+                                if (sanitize_title($keyword) == $term_places->slug) {
+                                    wp_set_object_terms($attachment_id, $term_places->slug, 'places', true);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (!empty($metadata['image_meta']['keywords'])) {
+                    $terms_attachment_categories = get_terms('attachment_categories', ['hide_empty' => false]);
+                    foreach ($terms_attachment_categories as $term_attachment_categories) {
+                        foreach ($metadata['image_meta']['keywords'] as $keyword) {
+                            if (sanitize_title($keyword) == $term_attachment_categories->slug) {
+                                wp_set_object_terms($attachment_id, $term_attachment_categories->slug, 'attachment_categories', true);
+                            }
+                        }
+                    }
                 }
 
                 // Crop API

@@ -294,8 +294,6 @@ function getAttachmentMoreData($attachment_id)
             $instagram_metadata = (!empty($img_all_metadata['woody-instagram'])) ? $img_all_metadata['woody-instagram'] : '';
             $attachment_data['instagram_metadata'] = getInstagramMetadata($attachment_id);
 
-            // wd($attachment_data['instagram_metadata'], 'Instagram metadata');
-
             $attachment_data['author'] = (!empty($attachment_data['instagram_metadata']['user']['username'])) ? $attachment_data['instagram_metadata']['user']['username'] : 'no user ?';
             $attachment_data['lat'] = (!empty($attachment_data['instagram_metadata']['location']['latitude'])) ? $attachment_data['instagram_metadata']['location']['latitude'] : '';
             $attachment_data['lng'] = (!empty($attachment_data['instagram_metadata']['location']['longitude'])) ? $attachment_data['instagram_metadata']['location']['longitude'] : '';
@@ -317,7 +315,6 @@ function getInstagramMetadata($attachment_id)
     $img_all_data = get_post_meta($attachment_id);
 
     $img_all_metadata = (!empty($img_all_data['_wp_attachment_metadata'][0])) ? maybe_unserialize($img_all_data['_wp_attachment_metadata'][0]) : '';
-    // wd($img_all_metadata, 'img_all_metadata');
     $instagram_metadata = (!empty($img_all_metadata['woody-instagram'])) ? $img_all_metadata['woody-instagram'] : '';
     $return = $instagram_metadata;
 
