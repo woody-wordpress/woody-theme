@@ -1,9 +1,9 @@
 {% extends "base.twig" %}
 
 {% block metas %}
-    {% for meta in metas %}
-        {{ meta }}
-    {% endfor %}
+{% for meta in metas %}
+{{ meta }}
+{% endfor %}
 {% endblock metas %}
 
 {% block content %}
@@ -18,7 +18,7 @@
             <h1 class="msg404">{{ content.title }}</h1>
             <h2 class="msg404">{{ content.subtitle }}</h2>
             <p>{{ content.text }}</p>
-            {# TODO: URL de la page d'accueil à modifier en fonction de la langue #}
+
             {% if content.suggestions|default %}
             <div class="suggestions marg-top-lg padd-top-md padd-bottom-md bg-lightgray">
                 <div class="grid-container">
