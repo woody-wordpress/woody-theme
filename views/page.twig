@@ -1,5 +1,11 @@
 {% extends "base.twig" %}
 
+{% block metas %}
+    {% for meta in metas %}
+        {{ meta }}
+    {% endfor %}
+{% endblock metas %}
+
 {% block content %}
 <main id="main-content" class="content-type-page {{ page_type|default }}">
     <div class="content-wrapper {{ page_terms|default('no-terms') }}">
