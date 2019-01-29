@@ -41,20 +41,10 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     {
         $this->commonContext();
 
-        if (!empty(is_front_page())) {
-            $this->frontpageContext();
-        } elseif (!empty(is_404())) {
+        if (!empty(is_404())) {
             $this->page404Context();
         } else {
             $this->pageContext();
-        }
-    }
-
-    protected function frontpageContext()
-    {
-        $home_slider = getAcfGroupFields('group_5bb325e8b6b43');
-        if (!empty($home_slider['landswpr_slides'])) {
-            $this->context['home_slider'] = Timber::compile($this->context['woody_components'][$home_slider['landswpr_woody_tpl']], $home_slider);
         }
     }
 
