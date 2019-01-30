@@ -74,16 +74,56 @@ function getComponentItem($layout, $context)
             }
             $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
-            // TODO: Ce layout n'existe plus => à confirmer + suppression
-            // case 'playlist_bloc':
-            //     $playlist_conf_id = $layout['playlist_conf_id'];
-            //     $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
-            //     break;
+        case 'semantic_view':
+                $layout['items'] = getSemanticViewData($layout);
+                $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            break;
         default:
             $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
     }
     return $return;
 }
+
+function getSemanticViewData($layout)
+{
+    $return = [];
+
+    if ($layout['semantic_view_type'] == 'sisters') {
+        $parent_id = wp_get_post_parent_id($layout['post']['ID']);
+    } else {
+        $parent_id = $layout['post']['ID'];
+    }
+
+    $args = [
+        'post_type' => 'page',
+        'post_parent' => $parent_id,
+        'post__not_in' => [$layout['post']['ID']]
+    ];
+
+    $query_result = new WP_query($args);
+
+    if (!empty($query_result->posts)) {
+        foreach ($query_result->posts as $key => $post) {
+            $data = [];
+            $post = Timber::get_post($post->ID);
+            $data = getPagePreview($layout, $post);
+            if (!empty($data['description'])) {
+                preg_match_all("/\[[^\]]*\]/", $data['description'], $matches);
+                if (!empty($matches[0])) {
+                    foreach ($matches[0] as $match) {
+                        $str = str_replace(['[', ']'], '', $match);
+                        $link = '<a href="' . get_permalink(pll_get_post($post->ID)) . '">' . $str . '</a>';
+                        $data['description'] = str_replace($match, $link, $data['description']);
+                    }
+                }
+            }
+            $return[$key] = $data;
+        }
+    }
+
+    return $return;
+}
+
 
 /**
  *
@@ -364,6 +404,12 @@ function formatFocusesData($layout, $current_post, $twigPaths)
         $the_items = getAutoFocus_data($current_post, $layout);
     } elseif ($layout['acf_fc_layout'] == 'auto_focus_sheets' && !empty($layout['playlist_conf_id'])) {
         $the_items = getAutoFocusSheetData($layout);
+    }
+
+    foreach ($the_items['items'] as $item_key => $item) {
+        if (!empty($item['description'])) {
+            $the_items['items'][$item_key]['description'] = str_replace(['[', ']'], '', $item['description']);
+        }
     }
 
     $the_items['no_padding'] = (!empty($layout['focus_no_padding'])) ? $layout['focus_no_padding'] : '';
