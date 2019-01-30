@@ -41,17 +41,11 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     {
         $this->commonContext();
 
-        if (!empty(is_front_page())) {
-            $this->frontpageContext();
-        } elseif (!empty(is_404())) {
+        if (!empty(is_404())) {
             $this->page404Context();
         } else {
             $this->pageContext();
         }
-    }
-
-    protected function frontpageContext()
-    {
     }
 
     protected function page404Context()
