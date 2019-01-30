@@ -19,28 +19,6 @@
             "endpoint": 0
         },
         {
-            "key": "field_5c51a6650e365",
-            "label": "Types de publications",
-            "name": "semantic_view_page_types",
-            "type": "taxonomy",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "taxonomy": "page_type",
-            "field_type": "checkbox",
-            "add_term": 1,
-            "save_terms": 0,
-            "load_terms": 0,
-            "return_format": "id",
-            "multiple": 0,
-            "allow_null": 0
-        },
-        {
             "key": "field_5c4f301a6dfa7",
             "label": "Hierarchie",
             "name": "semantic_view_type",
@@ -65,6 +43,28 @@
             "save_other_choice": 0
         },
         {
+            "key": "field_5c51a6650e365",
+            "label": "Types de publications",
+            "name": "semantic_view_page_types",
+            "type": "taxonomy",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "page_type",
+            "field_type": "checkbox",
+            "add_term": 1,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "multiple": 0,
+            "allow_null": 0
+        },
+        {
             "key": "field_5c4f309d6dfa8",
             "label": "Affichage",
             "name": "display_elements",
@@ -73,7 +73,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -172,5 +172,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1548855174
+    "modified": 1548855726
 }

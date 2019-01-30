@@ -259,6 +259,8 @@ class WoodyTheme_ACF
         $semantic_view = [
             'semview_01' => 'blocks-semantic_view-tpl_01',
             'semview_02' => 'blocks-semantic_view-tpl_02',
+            'semview_03' => 'blocks-semantic_view-tpl_03',
+            'semview_04' => 'blocks-semantic_view-tpl_04',
         ];
 
         $return = $teasers + $heroes + $sections + $lists_and_focuses + $galleries + $cta + $socialwalls + $booking + $semantic_view;
