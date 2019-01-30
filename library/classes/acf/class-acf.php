@@ -256,7 +256,12 @@ class WoodyTheme_ACF
             'book_02' => 'blocks-booking-tpl_02',
         ];
 
-        $return = $teasers + $heroes + $sections + $lists_and_focuses + $galleries + $cta + $socialwalls + $booking;
+        $semantic_view = [
+            'semview_01' => 'blocks-semantic_view-tpl_01',
+            'semview_02' => 'blocks-semantic_view-tpl_02',
+        ];
+
+        $return = $teasers + $heroes + $sections + $lists_and_focuses + $galleries + $cta + $socialwalls + $booking + $semantic_view;
 
         return $return;
     }

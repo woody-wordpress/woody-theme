@@ -83,9 +83,12 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         /******************************************************************************
          * Compilation du Diaporama pour les pages de type "accueil" (!= frontpage)
          ******************************************************************************/
-        $home_slider = getAcfGroupFields('group_5bb325e8b6b43');
-        if (!empty($home_slider['landswpr_slides'])) {
-            $this->context['home_slider'] = Timber::compile($this->context['woody_components'][$home_slider['landswpr_woody_tpl']], $home_slider);
+        $page_type = wp_get_post_terms(get_the_id(), 'page_type');
+        if ($page_type[0]->slug == 'front_page') {
+            $home_slider = getAcfGroupFields('group_5bb325e8b6b43');
+            if (!empty($home_slider['landswpr_slides'])) {
+                $this->context['home_slider'] = Timber::compile($this->context['woody_components'][$home_slider['landswpr_woody_tpl']], $home_slider);
+            }
         }
 
         /*********************************************

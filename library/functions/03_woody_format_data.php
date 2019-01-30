@@ -94,13 +94,28 @@ function getSemanticViewData($layout)
         $parent_id = $layout['post']['ID'];
     }
 
-    $args = [
+    if (!empty($layout['semantic_view_page_types'])) {
+        $tax_query = [
+            'relation' => 'AND',
+            'page_type' => array(
+                'taxonomy' => 'page_type',
+                'terms' => $layout['semantic_view_page_types'],
+                'field' => 'term_id',
+                'operator' => 'IN'
+            ),
+        ];
+    }
+
+    $the_query = [
         'post_type' => 'page',
         'post_parent' => $parent_id,
         'post__not_in' => [$layout['post']['ID']]
     ];
 
-    $query_result = new WP_query($args);
+    $the_query['tax_query'] = (!empty($tax_query)) ? $tax_query : '' ;
+
+
+    $query_result = new WP_query($the_query);
 
     if (!empty($query_result->posts)) {
         foreach ($query_result->posts as $key => $post) {
