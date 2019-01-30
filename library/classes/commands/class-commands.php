@@ -80,7 +80,8 @@ class WoodyTheme_Commands
                         Output::error(['wp_varnish_purge' => $noticeMessage]);
                     }
                 } else {
-                    Output::success(sprintf('wp_varnish_purge %s => %s (%s)', $purgeme, $host, $lang));
+                    //Output::success(sprintf('wp_varnish_purge %s => %s (%s)', $purgeme, $host, $lang));
+                    Output::success(sprintf('wp_varnish_purge : %s (%s)', WP_SCHEME . '://' . $host, $lang));
                 }
             }
         }
