@@ -471,7 +471,7 @@ class WoodyTheme_Roles
                 'contributor' => false,
                 'translator' => false,
             ],
-            'woody_process_checker404' => [
+            'woody_process_checker' => [
                 'administrator' => true,
                 'editor' => true,
                 'contributor' => false,
