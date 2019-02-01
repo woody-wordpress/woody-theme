@@ -38,8 +38,9 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
         $sheet_id = $this->context['post']->touristic_sheet_id;
         $sheet_lang = apply_filters('woody_pll_get_post_language', $this->context['post']->ID);
 
-        // FIX : les fiches sur haute maurienne ne s'affiche pas sinon
-        if (WP_SITE_KEY == 'hautemaurienne') {
+        // FIX : les fiches sur les sites avec saisons ne s'affiche pas sinon
+        $seasons = ['hautemaurienne', 'champsaur-valgaudemar'];
+        if (is_array(WP_SITE_KEY ,$seasons)) {
             $sheet_lang = pll_current_language();
         }
 
