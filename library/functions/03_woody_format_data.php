@@ -816,6 +816,13 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
                 if (in_array('sheet_town', $layout['display_elements'])) {
                     $data['sheet_town'] = (!empty($item['town'])) ? $item['town'] : '';
                 }
+                if (in_array('sheet_town', $layout['display_elements'])) {
+                    $data['sheet_town'] = (!empty($item['town'])) ? $item['town'] : '';
+                }
+                if (in_array('price', $layout['display_elements'])) {
+                    $data['the_price']['price'] = (!empty($item['tariffs']['price'])) ? $item['tariffs']['price'] : '';
+                    $date['the_price']['prefix_price'] = (!empty($item['tariffs']['labels'])) ? true : false;
+                }
             }
 
             $data['location'] = [];
@@ -847,7 +854,6 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
             }
         }
     }
-
     return $data;
 }
 

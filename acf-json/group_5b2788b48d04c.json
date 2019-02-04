@@ -53,7 +53,7 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {},
+            "choices": [],
             "default_value": [],
             "allow_null": 0,
             "multiple": 1,
@@ -187,11 +187,14 @@
             "choices": {
                 "icon": "Icône",
                 "pretitle": "Surtitre",
-                "price": "Prix <small>(séjour uniquement)<\/small>",
+                "price": "Prix <small>(fiche & séjour)<\/small>",
                 "subtitle": "Sous-titre",
                 "description": "Description",
                 "duration": "Durée <small>(séjour uniquement)<\/small>",
-                "length": "Distance <small>(séjour uniquement)<\/small>"
+                "length": "Distance <small>(séjour uniquement)<\/small>",
+                "_themes": "Thématique principal(e)<\/small>",
+                "_places": "Lieu principal(e)<\/small>",
+                "_seasons": "Saison principal(e)<\/small>"
             },
             "allow_custom": 0,
             "default_value": [
@@ -371,5 +374,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1545396611
+    "modified": 1549299453
 }
