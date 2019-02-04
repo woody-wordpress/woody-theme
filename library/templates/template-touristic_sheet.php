@@ -36,29 +36,22 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
         $this->context['body_class'] .= ' apirender apirender-wordpress';
 
         $sheet_id = $this->context['post']->touristic_sheet_id;
-        $sheet_lang = apply_filters('woody_pll_get_post_language', $this->context['post']->ID);
+        $sheet_lang = pll_get_post_language($this->context['post']->ID);
+        $sheet_code_lang = apply_filters('woody_pll_get_post_language', $this->context['post']->ID);
 
-        // FIX : les fiches sur les sites avec saisons ne s'affiche pas sinon
-        $seasons = ['hautemaurienne', 'champsaur-valgaudemar'];
-        if (is_array(WP_SITE_KEY ,$seasons)) {
-            $sheet_lang = pll_current_language();
+        $this->context['lang'] = $sheet_code_lang;
+        if ($sheet_lang != $sheet_code_lang) {
+            $this->context['season'] = $sheet_lang;
         }
-
-        $this->context['lang'] = $sheet_lang;
-        $this->context['fetcherType'] = 'website_'.WP_ENV;
-        $this->context['destinationName'] = null;
-        $this->context['playlistId'] = null;
 
         /** ************************
          * Appel apirender pour récupérer le DOM de la fiche
          ************************ **/
-        $params = [];
-        // Set season param if required
-        // if (!is_null($season)) {
-        //     $params['season'] = $season;
-        // }
+        $this->context['fetcherType'] = 'website_'.WP_ENV;
+        $this->context['destinationName'] = null;
+        $this->context['playlistId'] = null;
 
-        $this->context['sheet_tourism'] = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $sheet_lang, $params);
+        $this->context['sheet_tourism'] = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $sheet_lang, $params = []);
 
         // Set METAS
         $this->context['metas'] = [];
