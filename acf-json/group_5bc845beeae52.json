@@ -52,6 +52,8 @@
                             "choices": {
                                 "trnslt-top": "Décalage vers le haut",
                                 "trnslt-bottom": "Décalage vers le bas",
+                                "trnslt-left": "Décalage vers la gauche",
+                                "trnslt-right": "Décalage vers la droite",
                                 "rotate-left": "Rotation anti-horaire",
                                 "rotate-right": "Rotation horaire"
                             },
@@ -83,6 +85,20 @@
                                         "field": "field_5bc9a8e8c37bd",
                                         "operator": "==",
                                         "value": "trnslt-bottom"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "field": "field_5bc9a8e8c37bd",
+                                        "operator": "==",
+                                        "value": "trnslt-left"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "field": "field_5bc9a8e8c37bd",
+                                        "operator": "==",
+                                        "value": "trnslt-right"
                                     }
                                 ]
                             ],
@@ -174,5 +190,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Permet d'ajouter des effets de type décalage, rotation, paralax",
-    "modified": 1539943051
+    "modified": 1549299200
 }
