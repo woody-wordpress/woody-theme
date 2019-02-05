@@ -88,8 +88,8 @@ class WoodyTheme_Template_Sitemap
 
             // Si la langue n'est pas active on n'ajoute pas les pages au sitemap
             $woody_lang_enable = get_option('woody_lang_enable', []);
-            foreach ($languages as $key => $lang) {
-                if (!in_array($lang, $woody_lang_enable)) {
+            foreach ($languages as $key => $slug) {
+                if (!in_array($slug, $woody_lang_enable)) {
                     unset($languages[$key]);
                 }
             }
