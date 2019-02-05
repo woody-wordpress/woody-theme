@@ -52,7 +52,7 @@
                 "class": "",
                 "id": ""
             },
-            "choices": [],
+            "choices": {},
             "default_value": [],
             "allow_null": 0,
             "multiple": 1,
@@ -185,7 +185,7 @@
             "choices": {
                 "icon": "Icône",
                 "pretitle": "Surtitre",
-                "price": "Prix <small>(fiche & séjour)<\/small>",
+                "price": "Prix <small>(séjour uniquement)<\/small>",
                 "subtitle": "Sous-titre",
                 "description": "Description",
                 "duration": "Durée <small>(séjour uniquement)<\/small>",
@@ -405,6 +405,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-
-    "modified": 1549299453
+    "modified": 1549360103
 }
