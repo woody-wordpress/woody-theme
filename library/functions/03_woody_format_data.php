@@ -821,7 +821,7 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
                 }
                 if (in_array('price', $layout['display_elements'])) {
                     $data['the_price']['price'] = (!empty($item['tariffs']['price'])) ? $item['tariffs']['price'] : '';
-                    $date['the_price']['prefix_price'] = (!empty($item['tariffs']['labels'])) ? true : false;
+                    $data['the_price']['prefix_price'] = (!empty($item['tariffs']['label'])) ? $item['tariffs']['label'] : '';
                 }
             }
 
