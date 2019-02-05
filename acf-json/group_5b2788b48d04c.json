@@ -1,8 +1,7 @@
 {
     "key": "group_5b2788b48d04c",
     "title": "Mise en avant de pages (sélection automatique)",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b2788cc84ed1",
             "label": "Contenu",
             "name": "",
@@ -94,8 +93,7 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
+                [{
                         "field": "field_5b27899284ed4",
                         "operator": "!=",
                         "value": "touristic_sheet"
@@ -192,9 +190,6 @@
                 "description": "Description",
                 "duration": "Durée <small>(séjour uniquement)<\/small>",
                 "length": "Distance <small>(séjour uniquement)<\/small>",
-                "_themes": "Thématique principal(e)<\/small>",
-                "_places": "Lieu principal(e)<\/small>",
-                "_seasons": "Saison principal(e)<\/small>"
             },
             "allow_custom": 0,
             "default_value": [
@@ -355,16 +350,52 @@
             "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
+        },
+        {
+            "key": "field_5c5867df29ad1",
+            "label": "Effets visuels",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
+            "key": "field_5c5867f529ad2",
+            "label": "Effets visuels",
+            "name": "visual_effects",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5bc845beeae52"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -374,5 +405,6 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
+
     "modified": 1549299453
 }

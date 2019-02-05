@@ -83,8 +83,8 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
                 continue;
             }
 
-            // TODO: Check rels of every langs and remove non english rel
-            if (WP_SITE_KEY == 'crt-bretagne' && !empty($meta['#attributes']['rel']) && $meta['#attributes']['rel'] == 'alternate') {
+            $woody_lang_enable = get_option('woody_lang_enable', []);
+            if (!empty($meta['#attributes']['hreflang']) && !in_array($meta['#attributes']['hreflang'], $woody_lang_enable)) {
                 continue;
             }
 

@@ -433,6 +433,8 @@ function formatFocusesData($layout, $current_post, $twigPaths)
 
     $the_items['default_marker'] = $layout['default_marker'];
 
+    $the_items['visual_effects'] = (!empty($layout['visual_effects'])) ? $layout['visual_effects'] : '';
+
     $return = Timber::compile($twigPaths[$layout['woody_tpl']], $the_items);
 
     return $return;
@@ -1125,8 +1127,15 @@ function formatVisualEffectData($effects)
                         switch ($transform['transform_type']) {
                             case 'trnslt-top':
                             case 'trnslt-bottom':
+                            case 'trnslt-left':
+                            case 'trnslt-right':
                                 $return['transform'][] = $transform['transform_type'] . '-' . $transform['transform_trnslt_value'];
                             break;
+                            case 'rotate-left':
+                            case 'rotate-right':
+                            $return['transform'][] = $transform['transform_type'] . '-' . $transform['transform_rotate_value'];
+                            break;
+
                         }
                     }
                 break;

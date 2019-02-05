@@ -249,7 +249,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                         ];
                         $layout['uniqid'] = 'section_' . $section_id . '_' . 'section_content_' . $layout_id;
                         $layout['visual_effects'] = (!empty($layout['visual_effects'])) ? formatVisualEffectData($layout['visual_effects']) : '';
-
                         $components['items'][] = getComponentItem($layout, $this->context);
                     }
 
