@@ -185,11 +185,11 @@
             "choices": {
                 "icon": "Icône",
                 "pretitle": "Surtitre",
-                "price": "Prix <small>(séjour uniquement)<\/small>",
+                "price": "Prix <small>(fiche et séjour uniquement)<\/small>",
                 "subtitle": "Sous-titre",
                 "description": "Description",
                 "duration": "Durée <small>(séjour uniquement)<\/small>",
-                "length": "Distance <small>(séjour uniquement)<\/small>",
+                "length": "Distance <small>(séjour uniquement)<\/small>"
             },
             "allow_custom": 0,
             "default_value": [
