@@ -79,12 +79,20 @@ class WoodyTheme_Template_Sitemap
     private function getPosts()
     {
         $polylang = get_option('polylang');
-        if ($polylang['force_lang'] == 1) {
-            // Si le site est alias, on fusionne toutes les pages dans le même sitemap
-            $languages = pll_languages_list();
-        } else {
+        if ($polylang['force_lang'] == 3 && !empty($polylang['domains'])) {
             // Si le site est en multi domaines, on cree un sitemap par langue
             $languages = pll_current_language();
+        } else {
+            // Si le site est alias, on fusionne toutes les pages dans le même sitemap
+            $languages = pll_languages_list();
+
+            // Si la langue n'est pas active on n'ajoute pas les pages au sitemap
+            $woody_lang_enable = get_option('woody_lang_enable', []);
+            foreach ($languages as $key => $lang) {
+                if (!in_array($lang, $woody_lang_enable)) {
+                    unset($languages[$key]);
+                }
+            }
         }
 
         $query = new \WP_Query([
