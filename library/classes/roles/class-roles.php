@@ -495,6 +495,12 @@ class WoodyTheme_Roles
                 'contributor' => false,
                 'translator' => false,
             ],
+            'woody_process_checklist' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
             'woody_hawwwai_reports' => [
                 'administrator' => true,
                 'editor' => true,
