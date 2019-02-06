@@ -15,7 +15,7 @@ class WoodyTheme_SiteMap
 
     protected function registerHooks()
     {
-        add_action('init', [$this, 'customRewriteRule'], 10, 0);
+        add_action('init', [$this, 'customRewriteRule']);
         add_action('after_setup_theme', [$this, 'reduceQueryLoad'], 99);
         add_action('template_redirect', [$this, 'getSitemap'], 1);
         add_filter('query_vars', [$this, 'queryVars']);
