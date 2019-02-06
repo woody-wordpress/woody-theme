@@ -420,22 +420,23 @@ function formatFocusesData($layout, $current_post, $twigPaths)
     } elseif ($layout['acf_fc_layout'] == 'auto_focus_sheets' && !empty($layout['playlist_conf_id'])) {
         $the_items = getAutoFocusSheetData($layout);
     }
-
-    foreach ($the_items['items'] as $item_key => $item) {
-        if (!empty($item['description'])) {
-            $the_items['items'][$item_key]['description'] = str_replace(['[', ']'], '', $item['description']);
+    if (!empty($the_items)) {
+        foreach ($the_items['items'] as $item_key => $item) {
+            if (!empty($item['description'])) {
+                $the_items['items'][$item_key]['description'] = str_replace(['[', ']'], '', $item['description']);
+            }
         }
+
+        $the_items['no_padding'] = (!empty($layout['focus_no_padding'])) ? $layout['focus_no_padding'] : '';
+        $the_items['block_titles'] = getFocusBlockTitles($layout);
+        $the_items['display_button'] = (!empty($layout['display_button'])) ? $layout['display_button'] : '';
+
+        $the_items['default_marker'] = $layout['default_marker'];
+
+        $the_items['visual_effects'] = (!empty($layout['visual_effects'])) ? $layout['visual_effects'] : '';
+
+        $return = Timber::compile($twigPaths[$layout['woody_tpl']], $the_items);
     }
-
-    $the_items['no_padding'] = (!empty($layout['focus_no_padding'])) ? $layout['focus_no_padding'] : '';
-    $the_items['block_titles'] = getFocusBlockTitles($layout);
-    $the_items['display_button'] = (!empty($layout['display_button'])) ? $layout['display_button'] : '';
-
-    $the_items['default_marker'] = $layout['default_marker'];
-
-    $the_items['visual_effects'] = (!empty($layout['visual_effects'])) ? $layout['visual_effects'] : '';
-
-    $return = Timber::compile($twigPaths[$layout['woody_tpl']], $the_items);
 
     return $return;
 }
