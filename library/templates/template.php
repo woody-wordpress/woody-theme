@@ -119,22 +119,28 @@ abstract class WoodyTheme_TemplateAbstract
     {
         // Get polylang languages
         $languages = apply_filters('woody_pll_the_seasons', null);
-        $data = $this->createSwitcher($languages);
-        // Set a default template
-        $template = $this->context['woody_components']['woody_widgets-season_switcher-tpl_01'];
-        $this->context['season_switcher'] = Timber::compile($template, $data);
-        $this->context['season_switcher_mobile'] = Timber::compile($template, $data);
+        if (!empty($languages)) {
+            $data = $this->createSwitcher($languages);
+
+            // Set a default template
+            $template = $this->context['woody_components']['woody_widgets-season_switcher-tpl_01'];
+            $this->context['season_switcher'] = Timber::compile($template, $data);
+            $this->context['season_switcher_mobile'] = Timber::compile($template, $data);
+        }
     }
 
     private function addLanguageSwitcher()
     {
         // Get polylang languages
         $languages = apply_filters('woody_pll_the_languages', null);
-        $data = $this->createSwitcher($languages);
-        // Set a default template
-        $template = $this->context['woody_components']['woody_widgets-lang_switcher-tpl_01'];
-        $this->context['lang_switcher'] = Timber::compile($template, $data);
-        $this->context['lang_switcher_mobile'] = Timber::compile($template, $data);
+        if (!empty($languages)) {
+            $data = $this->createSwitcher($languages);
+
+            // Set a default template
+            $template = $this->context['woody_components']['woody_widgets-lang_switcher-tpl_01'];
+            $this->context['lang_switcher'] = Timber::compile($template, $data);
+            $this->context['lang_switcher_mobile'] = Timber::compile($template, $data);
+        }
     }
 
     private function createSwitcher($languages)
@@ -155,13 +161,13 @@ abstract class WoodyTheme_TemplateAbstract
                     $data['current_lang'] = $language['slug'];
                     $data['langs'][$language['slug']]['url'] = $language['url'] . $output_params;
                     $data['langs'][$language['slug']]['name'] = $language['name'];
-                    $data['langs'][$language['slug']]['locale'] = substr($language['locale'],0, 2);
+                    $data['langs'][$language['slug']]['locale'] = substr($language['locale'], 0, 2);
                     $data['langs'][$language['slug']]['no_translation'] = $language['no_translation'];
                     $data['langs'][$language['slug']]['is_current'] = true;
                 } else {
                     $data['langs'][$language['slug']]['url'] = $language['url'] . $output_params;
                     $data['langs'][$language['slug']]['name'] = $language['name'];
-                    $data['langs'][$language['slug']]['locale'] = substr($language['locale'],0, 2);
+                    $data['langs'][$language['slug']]['locale'] = substr($language['locale'], 0, 2);
                     $data['langs'][$language['slug']]['no_translation'] = $language['no_translation'];
                 }
             }
@@ -180,6 +186,7 @@ abstract class WoodyTheme_TemplateAbstract
                     foreach ($languages_customization['external_langs'] as $lang_key => $language) {
                         $data['langs'][$lang_key]['url'] = $language['url'];
                         $data['langs'][$lang_key]['name'] = $language['name'];
+                        $data['langs'][$lang_key]['locale'] = (!empty($language['locale'])) ? substr($language['locale'], 0, 2) : $lang_key;
                         $data['langs'][$lang_key]['target'] = '_blank';
                     }
                 }
