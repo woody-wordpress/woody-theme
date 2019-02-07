@@ -108,7 +108,7 @@ class WoodyTheme_Enqueue_Assets
         // get map keys
         $map_keys = $this->mapKeys;
         if (!empty($map_keys)) {
-            $mapKeys['ver'] = $this->wThemeVersion;
+            $map_keys['v'] = $this->wThemeVersion;
         }
         if (isset($map_keys['otmKey'])) {
             $js_dependencies_rcmap[] = 'touristicmaps_tangram';
@@ -151,7 +151,7 @@ class WoodyTheme_Enqueue_Assets
         wp_enqueue_script('jsdelivr_leaflet', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet-src.min.js', [], '', true);
         if (isset($map_keys['otmKey']) || $this->isTouristicSheet) {
             // need to load tangram always in TOURISTIC SHEET for now (bug in vendor angular) ↓
-            wp_enqueue_script('touristicmaps_tangram', 'https://tiles.touristicmaps.com/libs/tangram.min.js', [], $this->wThemeVersion, true);
+            wp_enqueue_script('touristicmaps_tangram', 'https://tiles.touristicmaps.com/libs/tangram.min.js?v='.$this->wThemeVersion, [], '', true);
         }
 
         if (isset($map_keys['gmKey'])) {
@@ -159,7 +159,7 @@ class WoodyTheme_Enqueue_Assets
         } elseif ($this->isTouristicSheet) { // absolutely needed in angular
             wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?v=3.33&libraries=geometry,places', [], '', true);
         }
-        wp_enqueue_script('hawwwai_universal_map', $apirender_base_uri.'/assets/scripts/raccourci/universal-map.'. $jsModeSuffix .'.js', $js_dependencies_rcmap, $this->wThemeVersion, true);
+        wp_enqueue_script('hawwwai_universal_map', $apirender_base_uri.'/assets/scripts/raccourci/universal-map.'. $jsModeSuffix .'.js?v='.$this->wThemeVersion, $js_dependencies_rcmap, '', true);
 
         // Playlist libraries
         if ($this->isTouristicPlaylist) {
@@ -181,10 +181,10 @@ class WoodyTheme_Enqueue_Assets
             wp_enqueue_script('jsdelivr_uuid', 'https://cdn.jsdelivr.net/npm/node-uuid@1.4.8/uuid.min.js', [], '', true);
             wp_enqueue_script('jsdelivr_lodash', 'https://cdn.jsdelivr.net/npm/lodash@3.8.0/index.min.js', [], '', true);
             wp_enqueue_script('jsdelivr_arrive', 'https://cdn.jsdelivr.net/npm/arrive@2.4.1/src/arrive.min.js', ['jquery'], '', true);
-            wp_enqueue_script('hawwwai_sheet_item', $apirender_base_uri.'/assets/scripts/raccourci/sheet_item.min.js', ['jquery'], $this->wThemeVersion, true);
+            wp_enqueue_script('hawwwai_sheet_item', $apirender_base_uri.'/assets/scripts/raccourci/sheet_item.min.js?v='.$this->wThemeVersion, ['jquery'], '', true);
 
             $js_dependencies__playlist = ['jsdelivr_bootstrap','jsdelivr_match8','jsdelivr_nouislider','jsdelivr_wnumb','jsdelivr_chosen','jsdelivr_moment','jsdelivr_picker','jsdelivr_twigjs','jsdelivr_uuid','jsdelivr_lodash','jsdelivr_arrive','hawwwai_sheet_item'];
-            wp_enqueue_script('hawwwai_playlist', $apirender_base_uri.'/assets/scripts/raccourci/playlist.'. $jsModeSuffix .'.js', $js_dependencies__playlist, $this->wThemeVersion, true);
+            wp_enqueue_script('hawwwai_playlist', $apirender_base_uri.'/assets/scripts/raccourci/playlist.'. $jsModeSuffix .'.js?v='.$this->wThemeVersion, $js_dependencies__playlist, '', true);
             $playlist_map_query = !empty($map_keys) ? '?'.http_build_query($map_keys) : '';
             wp_enqueue_script('hawwwai_playlist_map', $apirender_base_uri.'/assets/scripts/raccourci/playlist-map.leaflet.'. $jsModeSuffix .'.js'.$playlist_map_query, array_merge($js_dependencies_rcmap, ['hawwwai_playlist']), $this->wThemeVersion, true);
         }
@@ -204,13 +204,13 @@ class WoodyTheme_Enqueue_Assets
             wp_enqueue_script('jsdelivr_slick', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', ['jquery'], '', true);
             wp_enqueue_script('jsdelivr_match8', 'https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js', ['jquery'], '', true);
 
-            wp_enqueue_script('hawwwai_ng_vendor', $apirender_base_uri.'/assets/scripts/vendor.js', [], $this->wThemeVersion, true);
-            wp_enqueue_script('hawwwai_ng_libs', $apirender_base_uri.'/assets/scripts/misclibs.js', [], $this->wThemeVersion, true);
-            wp_enqueue_script('hawwwai_ng_app', $apirender_base_uri.'/assets/app.js', [], $this->wThemeVersion, true);
-            wp_enqueue_script('hawwwai_ng_scripts', $apirender_base_uri.'/assets/scripts/scripts.js', [], $this->wThemeVersion, true);
-            wp_enqueue_script('hawwwai_sheet_item', $apirender_base_uri.'/assets/scripts/raccourci/sheet_item.'. $jsModeSuffix .'.js', ['jsdelivr_match8'], $this->wThemeVersion, true);
-            wp_enqueue_script('hawwwai_itinerary', $apirender_base_uri.'/assets/scripts/raccourci/itinerary.'. $jsModeSuffix .'.js', ['jquery','hawwwai_ng_scripts'], $this->wThemeVersion, true);
-            wp_enqueue_script('hawwwai_fresco', $apirender_base_uri.'/assets/scripts/lib/fresco.js', ['jquery'], $this->wThemeVersion, true);
+            wp_enqueue_script('hawwwai_ng_vendor', $apirender_base_uri.'/assets/scripts/vendor.js?v='.$this->wThemeVersion, [], '', true);
+            wp_enqueue_script('hawwwai_ng_libs', $apirender_base_uri.'/assets/scripts/misclibs.js?v='.$this->wThemeVersion, [], '', true);
+            wp_enqueue_script('hawwwai_ng_app', $apirender_base_uri.'/assets/app.js?v='.$this->wThemeVersion, [], '', true);
+            wp_enqueue_script('hawwwai_ng_scripts', $apirender_base_uri.'/assets/scripts/scripts.js?v='.$this->wThemeVersion, [], '', true);
+            wp_enqueue_script('hawwwai_sheet_item', $apirender_base_uri.'/assets/scripts/raccourci/sheet_item.'. $jsModeSuffix .'.js?v='.$this->wThemeVersion, ['jsdelivr_match8'], '', true);
+            wp_enqueue_script('hawwwai_itinerary', $apirender_base_uri.'/assets/scripts/raccourci/itinerary.'. $jsModeSuffix .'.js?v='.$this->wThemeVersion, ['jquery','hawwwai_ng_scripts'], '', true);
+            wp_enqueue_script('hawwwai_fresco', $apirender_base_uri.'/assets/scripts/lib/fresco.js?v='.$this->wThemeVersion, ['jquery'], '', true);
         }
 
         // Add the comment-reply library on pages where it is necessary
