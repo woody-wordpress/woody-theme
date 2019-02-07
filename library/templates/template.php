@@ -71,6 +71,9 @@ abstract class WoodyTheme_TemplateAbstract
         // Add langSwitcher
         $this->addLanguageSwitcher();
 
+        // Add langSwitcher
+        $this->addSeasonSwitcher();
+
         // Add addEsSearchBlock
         $this->addEsSearchBlock();
 
@@ -112,13 +115,33 @@ abstract class WoodyTheme_TemplateAbstract
         }
     }
 
+    private function addSeasonSwitcher()
+    {
+        // Get polylang languages
+        $languages = apply_filters('woody_pll_the_seasons', null);
+        $data = $this->createSwitcher($languages);
+
+        // Set a default template
+        $template = $this->context['woody_components']['woody_widgets-lang_switcher-tpl_01'];
+        $this->context['season_switcher'] = Timber::compile($template, $data);
+        $this->context['season_switcher_mobile'] = Timber::compile($template, $data);
+    }
+
     private function addLanguageSwitcher()
     {
-        $data = [];
+        // Get polylang languages
+        $languages = apply_filters('woody_pll_the_languages', null);
+        $data = $this->createSwitcher($languages);
 
-        if (!function_exists('pll_the_languages')) {
-            return;
-        }
+        // Set a default template
+        $template = $this->context['woody_components']['woody_widgets-lang_switcher-tpl_01'];
+        $this->context['lang_switcher'] = Timber::compile($template, $data);
+        $this->context['lang_switcher_mobile'] = Timber::compile($template, $data);
+    }
+
+    private function createSwitcher($languages)
+    {
+        $data = [];
 
         // Save the $_GET
         $autoselect_id = !empty($_GET['autoselect_id']) ? 'autoselect_id='.$_GET['autoselect_id'] : '';
@@ -127,13 +150,6 @@ abstract class WoodyTheme_TemplateAbstract
         $output_params .= !empty($page) ? $page.'&' : '';
         $output_params = substr($output_params, 0, -1);
         $output_params = !empty($output_params) ? '?'.$output_params : '';
-
-        // Get polylang languages
-        $languages = pll_the_languages(array(
-            'display_names_as'       => 'name',
-            'hide_if_no_translation' => 0,
-            'raw'                    => true
-        ));
 
         if (!empty($languages)) {
             foreach ($languages as $language) {
@@ -174,10 +190,7 @@ abstract class WoodyTheme_TemplateAbstract
             return;
         }
 
-        // Set a default template
-        $template = $this->context['woody_components']['woody_widgets-lang_switcher-tpl_01'];
-        $this->context['lang_switcher'] = Timber::compile($template, $data);
-        $this->context['lang_switcher_mobile'] = Timber::compile($template, $data);
+        return $data;
     }
 
     private function addEsSearchBlock()
