@@ -1,13 +1,16 @@
 <div class="woody-component-headnavs">
-    {% if lang_switcher|default or es_search_block|default  %}
-        <ul class="tools list-unstyled flex-container align-middle show-for-xlarge">
-            {% if es_search_block|default %}
-                <li>{{ es_search_block }}</li>
-            {% endif %}
-            {% if lang_switcher|default %}
-                <li>{{ lang_switcher }}</li>
-            {% endif %}
-        </ul>
+    {% if season_switcher|default %}
+        {{ season_switcher }}
+    {% endif %}
+    {% if lang_switcher|default or es_search_block|default %}
+    <ul class="tools list-unstyled flex-container align-middle show-for-xlarge">
+        {% if es_search_block|default %}
+        <li>{{ es_search_block }}</li>
+        {% endif %}
+        {% if lang_switcher|default %}
+        <li>{{ lang_switcher }}</li>
+        {% endif %}
+    </ul>
     {% endif %}
 
     {{ page_parts.top_header|default }}
@@ -17,10 +20,10 @@
     {{ page_parts.mobile_menu|default }}
     <ul class="tools list-unstyled flex-container align-middle hide-for-xlarge">
         {% if es_search_block_mobile|default %}
-            <li>{{ es_search_block_mobile }}</li>
+        <li>{{ es_search_block_mobile }}</li>
         {% endif %}
         {% if lang_switcher_mobile|default %}
-            <li>{{ lang_switcher_mobile }}</li>
+        <li>{{ lang_switcher_mobile }}</li>
         {% endif %}
     </ul>
 </div>
