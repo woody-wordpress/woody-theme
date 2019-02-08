@@ -134,7 +134,6 @@ abstract class WoodyTheme_TemplateAbstract
     {
         // Get polylang languages
         $languages = apply_filters('woody_pll_the_languages', null);
-        wd($languages);
         if (!empty($languages) and count($languages) != 1)  {
             $data = $this->createSwitcher($languages);
 
