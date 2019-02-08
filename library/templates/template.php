@@ -158,15 +158,15 @@ abstract class WoodyTheme_TemplateAbstract
         if (!empty($languages)) {
             foreach ($languages as $language) {
                 if (!empty($language['current_lang'])) {
-                    $data['current_lang'] = $language['slug'];
+                    $data['current_lang'] = substr($language['locale'], 0, 2);
                     $data['langs'][$language['slug']]['url'] = $language['url'] . $output_params;
-                    $data['langs'][$language['slug']]['name'] = $language['name'];
+                    $data['langs'][$language['slug']]['name'] = strpos($language['name'], '(') ? substr($language['name'],0, strpos($language['name'], '(')) : $language['name'];
                     $data['langs'][$language['slug']]['locale'] = substr($language['locale'], 0, 2);
                     $data['langs'][$language['slug']]['no_translation'] = $language['no_translation'];
                     $data['langs'][$language['slug']]['is_current'] = true;
                 } else {
                     $data['langs'][$language['slug']]['url'] = $language['url'] . $output_params;
-                    $data['langs'][$language['slug']]['name'] = $language['name'];
+                    $data['langs'][$language['slug']]['name'] = strpos($language['name'], '(') ? substr($language['name'],0, strpos($language['name'], '(')) : $language['name'];
                     $data['langs'][$language['slug']]['locale'] = substr($language['locale'], 0, 2);
                     $data['langs'][$language['slug']]['no_translation'] = $language['no_translation'];
                 }
