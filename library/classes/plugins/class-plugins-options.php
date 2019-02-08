@@ -292,7 +292,7 @@ class WoodyTheme_Plugins_Options
 
         // Redirections
         global $wpdb;
-        $rows = $wpdb->get_results("SELECT id FROM {$wpdb->prefix}redirection_groups WHERE name = 'Modified Posts'");
+        $rows = $wpdb->get_results("SELECT id FROM {$wpdb->prefix}redirection_groups WHERE name LIKE '%Articles modifiés%' OR name LIKE '%Modified Posts%' LIMIT 1");
         $monitor_post = (!empty($rows[0]->id)) ? $rows[0]->id : 1;
 
         $redirection_options = [
