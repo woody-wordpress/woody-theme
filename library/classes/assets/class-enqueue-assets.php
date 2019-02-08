@@ -224,6 +224,15 @@ class WoodyTheme_Enqueue_Assets
         // Define $this->isTouristicPlaylist, $this->isTouristicSheet et $this->wThemeVersion
         $this->setGlobalVars();
 
+        // Nouvelle méthode pour appeler les fonts en synchrone voir ligne 342
+        $webfonts = apply_filters('woody_theme_global_script_string', []);
+        $webfonts = json_decode($webfonts['window.WebFontConfig'], true);
+        if (!empty($webfonts['google']) && !empty($webfonts['google']['families'])) {
+            foreach ($webfonts['google']['families'] as $webfont) {
+                wp_enqueue_style('google-font-' . sanitize_title($webfont), 'https://fonts.googleapis.com/css?family=' . $webfont, [], '', 'all');
+            }
+        }
+
         // Enqueue the main Scripts
         $dependencies = [
             'jquery',
@@ -330,7 +339,8 @@ class WoodyTheme_Enqueue_Assets
             'window.DrupalAngularConfig.mapProviderKeys' => (!empty($this->mapKeys)) ? json_encode($this->mapKeys) : '{}',
         ];
 
-        $globalScriptString = apply_filters('woody_theme_global_script_string', $globalScriptString);
+        // Ancienne méthode pour appeler les fonts en asynchrone voir ligne 227
+        //$globalScriptString = apply_filters('woody_theme_global_script_string', $globalScriptString);
 
         // Create inline script
         $return = "function(){";
