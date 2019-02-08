@@ -79,7 +79,6 @@ class WoodyTheme_ACF
     public function clearOptionsTransient()
     {
         $screen = get_current_screen();
-        Output::log($screen->id, 'save_menu');
         if (strpos($screen->id, 'acf-options') !== false) {
             delete_transient('woody_acf_options');
         }
