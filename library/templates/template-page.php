@@ -109,6 +109,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
          *********************************************/
         $page_teaser = [];
         $page_teaser = getAcfGroupFields('group_5b2bbb46507bf');
+        wd($page_teaser);
         if (!empty($page_teaser)) {
             $page_teaser['page_teaser_title'] = (!empty($page_teaser['page_teaser_display_title'])) ? str_replace('-', '&#8209', $this->context['post']->post_title) : '';
             $page_teaser['the_classes'] = [];
