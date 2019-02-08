@@ -6,6 +6,7 @@
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
+use Woody\Utils\Output;
 
 class WoodyTheme_ACF
 {
@@ -26,6 +27,9 @@ class WoodyTheme_ACF
         add_action('create_term', [$this,'cleanTermsChoicesTransient']);
         add_action('edit_term', [$this,'cleanTermsChoicesTransient']);
         add_action('delete_term', [$this,'cleanTermsChoicesTransient']);
+
+        add_action('acf/save_post', [$this, 'clearOptionsTransient'], 20);
+
         add_filter('acf/settings/load_json', [$this,'acfJsonLoad']);
         add_filter('acf/load_field/type=radio', [$this, 'woodyTplAcfLoadField']);
         add_filter('acf/load_field/type=select', [$this, 'woodyIconLoadField']);
@@ -70,6 +74,15 @@ class WoodyTheme_ACF
     {
         $paths[] = get_template_directory() . '/acf-json';
         return $paths;
+    }
+
+    public function clearOptionsTransient()
+    {
+        $screen = get_current_screen();
+        Output::log($screen->id, 'save_menu');
+        if (strpos($screen->id, 'acf-options') !== false) {
+            delete_transient('woody_acf_options');
+        }
     }
 
     /**
@@ -579,6 +592,7 @@ class WoodyTheme_ACF
         delete_transient('woody_page_taxonomies_choices');
         delete_transient('woody_terms_choices');
         delete_transient('woody_website_pages_taxonomies');
+        delete_transient('woody_acf_options');
     }
 
     public function cleanTermsChoicesTransient()
