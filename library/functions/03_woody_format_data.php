@@ -896,7 +896,7 @@ function getFocusBlockTitles($layout)
 function getPagePreview($item_wrapper, $item)
 {
     $data = [];
-
+    
     $data['page_type'] = getTermsSlugs($item->ID, 'page_type', true);
     $data['post_id'] = $item->ID;
 
@@ -914,7 +914,8 @@ function getPagePreview($item_wrapper, $item)
             $data['subtitle'] = getFieldAndFallback($item, 'focus_subtitle', get_field('page_heading_heading', $item->id), 'subtitle', $item, 'field_5b87f23b57a1e');
         }
         if (in_array('icon', $item_wrapper['display_elements'])) {
-            $data['icon'] = getFieldAndFallback($item, 'focus_icon', '');
+            
+            $data['icon'] = getFieldAndFallback($item, 'focus_woody_icon', '');
         }
         if (in_array('description', $item_wrapper['display_elements'])) {
             $data['description'] = getFieldAndFallback($item, 'focus_description', $item, 'field_5b2bbbfaec6b2');
