@@ -913,9 +913,9 @@ function getPagePreview($item_wrapper, $item)
         if (in_array('subtitle', $item_wrapper['display_elements'])) {
             $data['subtitle'] = getFieldAndFallback($item, 'focus_subtitle', get_field('page_heading_heading', $item->id), 'subtitle', $item, 'field_5b87f23b57a1e');
         }
-        if (in_array('icon', $item_wrapper['display_elements'])) {
-            
-            $data['icon'] = getFieldAndFallback($item, 'focus_woody_icon', '');
+        if (in_array('icon', $item_wrapper['display_elements'])) {  
+            $data['woody_icon'] = getFieldAndFallback($item, 'focus_woody_icon',$item, 'field_5b11394d9a268');
+            $data['icon_type'] = $item->icon_type;
         }
         if (in_array('description', $item_wrapper['display_elements'])) {
             $data['description'] = getFieldAndFallback($item, 'focus_description', $item, 'field_5b2bbbfaec6b2');
@@ -992,7 +992,6 @@ function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = ''
     } else {
         $value = '';
     }
-
     return $value;
 }
 
