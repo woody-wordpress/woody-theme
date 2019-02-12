@@ -90,20 +90,24 @@ class WoodyTheme_Menus
     {
         $return = [];
 
-        // $return = get_transient('woody_acf_options', []);
-        // if (empty($return)) {
-        $return = get_fields('options');
-        //     set_transient('woody_acf_options', $return);
-        // }
+        $lang = pll_current_language();
+        $options = get_transient('woody_acf_options', []);
+        if (empty($options[$lang])) {
+            $options[$lang] = get_fields('options');
+            set_transient('woody_acf_options', $options);
+        }
 
-        if (!empty($return) && is_array($return)) {
-            foreach ($return as $key => $value) {
-                if (strpos($key, 'submenu_') === false) {
-                    unset($return[$key]);
-                }
+        if (!empty($options[$lang])) {
+            $return = $options[$lang];
+            if (!empty($return) && is_array($return)) {
+                foreach ($return as $key => $value) {
+                    if (strpos($key, 'submenu_') === false) {
+                        unset($return[$key]);
+                    }
 
-                if (str_replace('submenu_', '', $key) != $post_id) {
-                    unset($return[$key]);
+                    if (str_replace('submenu_', '', $key) != $post_id) {
+                        unset($return[$key]);
+                    }
                 }
             }
         }
