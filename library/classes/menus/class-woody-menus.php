@@ -90,7 +90,7 @@ class WoodyTheme_Menus
     {
         $return = [];
 
-        $return = get_transient('woody_acf_options', []);
+        //$return = get_transient('woody_acf_options', []);
         if (empty($return)) {
             $return = get_fields('options');
             set_transient('woody_acf_options', $return);
