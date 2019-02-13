@@ -620,7 +620,21 @@
                                         "wicon-001-facebook-messenger": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-001-facebook-messenger\"><\/span><span>Facebook messenger<\/span><\/div>",
                                         "wicon-044-enveloppe": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-044-enveloppe\"><\/span><span>Enveloppe<\/span><\/div>",
                                         "wicon-045-haut": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-045-haut\"><\/span><span>Haut<\/span><\/div>",
-                                        "wicon-016-bulle": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-016-bulle\"><\/span><span>Bulle<\/span><\/div>"
+                                        "wicon-016-bulle": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-016-bulle\"><\/span><span>Bulle<\/span><\/div>",
+                                        "wicon-011-station-snowboard": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-011-station-snowboard\"><\/span><span>Station snowboard<\/span><\/div>",
+                                        "wicon-005-station-luge": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-005-station-luge\"><\/span><span>Station luge<\/span><\/div>",
+                                        "wicon-003-station-flocon": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-003-station-flocon\"><\/span><span>Station flocon<\/span><\/div>",
+                                        "wicon-002-station-biathlon": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-002-station-biathlon\"><\/span><span>Station biathlon<\/span><\/div>",
+                                        "wicon-010-station-ski-de-fond": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-010-station-ski-de-fond\"><\/span><span>Station ski de fond<\/span><\/div>",
+                                        "wicon-006-station-montagne": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-006-station-montagne\"><\/span><span>Station montagne<\/span><\/div>",
+                                        "wicon-007-station-raquettes": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-007-station-raquettes\"><\/span><span>Station raquettes<\/span><\/div>",
+                                        "wicon-012-station-snowshoes": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-012-station-snowshoes\"><\/span><span>Station snowshoes<\/span><\/div>",
+                                        "wicon-009-station-ski-alpin": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-009-station-ski-alpin\"><\/span><span>Station ski alpin<\/span><\/div>",
+                                        "wicon-001-station-tire-fesse": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-001-station-tire-fesse\"><\/span><span>Station tire fesse<\/span><\/div>",
+                                        "wicon-004-station-forfait": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-004-station-forfait\"><\/span><span>Station forfait<\/span><\/div>",
+                                        "wicon-000-station-teleski": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-000-station-teleski\"><\/span><span>Station teleski<\/span><\/div>",
+                                        "wicon-013-station-soleil": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-013-station-soleil\"><\/span><span>Station soleil<\/span><\/div>",
+                                        "wicon-008-station-ski": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-008-station-ski\"><\/span><span>Station ski<\/span><\/div>"
                                     },
                                     "default_value": [],
                                     "allow_null": 0,
@@ -786,10 +800,10 @@
                 "id": ""
             },
             "choices": {
-                "blocks-page_teaser-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.pyreneesbearnaises.wp.rc-dev.com\/app\/dist\/pyreneesbearnaises\/img\/woody-library\/views\/blocks\/page_teaser\/tpl_01\/thumbnail.png?version=2.8.3\" alt=\"blocks-page_teaser-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">En tête de page - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">En tête de page - Template 1<\/h4>Affiche les infos indispensables d'une page alignées à gauche : titre + desc + social shares + ajout aux favoris<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-page_teaser-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.pyreneesbearnaises.wp.rc-dev.com\/app\/dist\/pyreneesbearnaises\/img\/woody-library\/views\/blocks\/page_teaser\/tpl_02\/thumbnail.png?version=2.8.3\" alt=\"blocks-page_teaser-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">En tête de page - Template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">En tête de page - Template 2<\/h4>Affiche les infos indispensables d'une page alignées au centre : titre + desc + social shares + ajout aux favoris<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-page_teaser-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.pyreneesbearnaises.wp.rc-dev.com\/app\/dist\/pyreneesbearnaises\/img\/woody-library\/views\/blocks\/page_teaser\/tpl_03\/thumbnail.png?version=2.8.3\" alt=\"blocks-page_teaser-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">En tête de page - Template 3<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">En tête de page - Template 3<\/h4>Affiche les infos indispensables d'une page : titre + desc + social shares + ajout aux favoris + image\/video ou widget à droite (7 colones - 5 colonnes)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-page_teaser-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.pyreneesbearnaises.wp.rc-dev.com\/app\/dist\/pyreneesbearnaises\/img\/woody-library\/views\/blocks\/page_teaser\/tpl_04\/thumbnail.png?version=2.8.3\" alt=\"blocks-page_teaser-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">En tête de page - Template 4<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">En tête de page - Template 4<\/h4>Affiche les infos indispensables d'une page : titre + desc + social shares + ajout aux favoris + image\/video ou widget à droite (8 colones - 4 colonnes)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+                "blocks-page_teaser-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/page_teaser\/tpl_01\/thumbnail.png?version=2.8.4\" alt=\"blocks-page_teaser-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">En tête de page - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">En tête de page - Template 1<\/h4>Affiche les infos indispensables d'une page alignées à gauche : titre + desc + social shares + ajout aux favoris<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-page_teaser-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/page_teaser\/tpl_02\/thumbnail.png?version=2.8.4\" alt=\"blocks-page_teaser-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">En tête de page - Template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">En tête de page - Template 2<\/h4>Affiche les infos indispensables d'une page alignées au centre : titre + desc + social shares + ajout aux favoris<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-page_teaser-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/page_teaser\/tpl_03\/thumbnail.png?version=2.8.4\" alt=\"blocks-page_teaser-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">En tête de page - Template 3<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">En tête de page - Template 3<\/h4>Affiche les infos indispensables d'une page : titre + desc + social shares + ajout aux favoris + image\/video ou widget à droite (7 colones - 5 colonnes)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-page_teaser-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/page_teaser\/tpl_04\/thumbnail.png?version=2.8.4\" alt=\"blocks-page_teaser-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">En tête de page - Template 4<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">En tête de page - Template 4<\/h4>Affiche les infos indispensables d'une page : titre + desc + social shares + ajout aux favoris + image\/video ou widget à droite (8 colones - 4 colonnes)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -872,6 +886,11 @@
                 "param": "page_type_and_children",
                 "operator": "!=",
                 "value": "front_page"
+            },
+            {
+                "param": "page_type_and_children",
+                "operator": "!=",
+                "value": "mirror_page"
             }
         ],
         [
@@ -884,6 +903,11 @@
                 "param": "page_type_and_children",
                 "operator": "!=",
                 "value": "front_page"
+            },
+            {
+                "param": "page_type_and_children",
+                "operator": "!=",
+                "value": "mirror_page"
             }
         ]
     ],
@@ -895,5 +919,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Les infos principales de la page + la possibilité d'ajouter les liens de partage et d'ajout aux favoris",
-    "modified": 1549885414
+    "modified": 1550077423
 }
