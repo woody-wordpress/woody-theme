@@ -1,0 +1,51 @@
+{
+    "key": "group_5c6432b3c0c45",
+    "title": "Page miroir",
+    "fields": [
+        {
+            "key": "field_5c64332aa66a5",
+            "label": "Quelle est la page \"référence\" de cette page miroir ?",
+            "name": "mirror_page_reference",
+            "type": "post_object",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "id",
+            "ui": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            },
+            {
+                "param": "page_type_and_children",
+                "operator": "==",
+                "value": "mirror_page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1550070792
+}
