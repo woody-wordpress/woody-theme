@@ -1044,7 +1044,7 @@
             },
             {
                 "param": "page_type_and_children",
-                "operator": "==",
+                "operator": "!=",
                 "value": "mirror_page"
             }
         ],
@@ -1069,5 +1069,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1550072613
+    "modified": 1550077824
 }
