@@ -1,8 +1,7 @@
 {
     "key": "group_5c1b551e599ef",
     "title": "Météo",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5c1b5523c9cfd",
             "label": "Contenu",
             "name": "",
@@ -31,10 +30,7 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "sarlat-la-caneda": "Sarlat-la-Canéda",
-                "la-rochelle": "La Rochelle"
-            },
+            "choices": {},
             "default_value": [],
             "allow_null": 0,
             "multiple": 0,
@@ -162,13 +158,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
