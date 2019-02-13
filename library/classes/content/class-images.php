@@ -31,6 +31,7 @@ class WoodyTheme_Images
         add_filter('wp_read_image_metadata', [$this, 'readImageMetadata'], 10, 4);
         add_filter('wp_generate_attachment_metadata', [$this, 'generateAttachmentMetadata'], 10, 2);
         add_filter('wp_handle_upload_prefilter', [$this, 'maxUploadSize']);
+        add_filter('upload_mimes', [$this, 'uploadMimes'], 10, 1);
 
         // API Crop
         add_action('rest_api_init', function () {
@@ -46,6 +47,14 @@ class WoodyTheme_Images
         //       'callback' => [$this, 'cropImageAPIDebug']
         //     ));
         // });
+    }
+
+    public function uploadMimes($mime_types)
+    {
+        $mime_types['gpx'] = 'application/xml';
+        $mime_types['kml'] = 'application/xml';
+        $mime_types['kmz'] = 'application/xml';
+        return $mime_types;
     }
 
     public function addImageSizes()
