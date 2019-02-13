@@ -214,10 +214,10 @@
                 "id": ""
             },
             "choices": {
-                "blocks-hero-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.broceliande.wp.rc-dev.com\/app\/dist\/broceliande\/img\/woody-library\/views\/blocks\/hero\/tpl_01\/thumbnail.png?version=2.7.0\" alt=\"blocks-hero-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Hero - Paysage A<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Hero - Paysage A<\/h4>Visuel (3:1) et accroche (Icône, Sur-titre, Titre, sous-titre, description) + image ou vidéo de fond + video complémentaire<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-hero-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.broceliande.wp.rc-dev.com\/app\/dist\/broceliande\/img\/woody-library\/views\/blocks\/hero\/tpl_02\/thumbnail.png?version=2.7.0\" alt=\"blocks-hero-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Hero - Pano B<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Hero - Pano B<\/h4>Visuel (4:1) et accroche (Icône, Sur-titre, Titre, sous-titre, description) + image ou vidéo de fond + video complémentaire<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-hero-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.broceliande.wp.rc-dev.com\/app\/dist\/broceliande\/img\/woody-library\/views\/blocks\/hero\/tpl_03\/thumbnail.png?version=2.7.0\" alt=\"blocks-hero-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Hero - Pano A<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Hero - Pano A<\/h4>Visuel (8:1) et accroche (Icône, Sur-titre, Titre, sous-titre, description) + image ou vidéo de fond + video complémentaire<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-hero-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.broceliande.wp.rc-dev.com\/app\/dist\/broceliande\/img\/woody-library\/views\/blocks\/hero\/tpl_04\/thumbnail.png?version=2.7.0\" alt=\"blocks-hero-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Hero - SplitCard<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Hero - SplitCard<\/h4>Accroche (Icône, Sur-titre, Titre, sous-titre, description) + image de fond + Visuel (16:9) à droite ou video<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+                "blocks-hero-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/hero\/tpl_01\/thumbnail.png?version=2.8.4\" alt=\"blocks-hero-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Hero - Paysage A<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Hero - Paysage A<\/h4>Visuel (3:1) et accroche (Icône, Sur-titre, Titre, sous-titre, description) + image ou vidéo de fond + video complémentaire<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-hero-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/hero\/tpl_02\/thumbnail.png?version=2.8.4\" alt=\"blocks-hero-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Hero - Pano B<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Hero - Pano B<\/h4>Visuel (4:1) et accroche (Icône, Sur-titre, Titre, sous-titre, description) + image ou vidéo de fond + video complémentaire<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-hero-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/hero\/tpl_03\/thumbnail.png?version=2.8.4\" alt=\"blocks-hero-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Hero - Pano A<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Hero - Pano A<\/h4>Visuel (8:1) et accroche (Icône, Sur-titre, Titre, sous-titre, description) + image ou vidéo de fond + video complémentaire<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-hero-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/hero\/tpl_04\/thumbnail.png?version=2.8.4\" alt=\"blocks-hero-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Hero - SplitCard<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Hero - SplitCard<\/h4>Accroche (Icône, Sur-titre, Titre, sous-titre, description) + image de fond + Visuel (16:9) à droite ou video<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -262,6 +262,11 @@
                 "param": "page_type_and_children",
                 "operator": "!=",
                 "value": "front_page"
+            },
+            {
+                "param": "page_type_and_children",
+                "operator": "!=",
+                "value": "mirror_page"
             }
         ],
         [
@@ -274,6 +279,11 @@
                 "param": "page_type_and_children",
                 "operator": "!=",
                 "value": "front_page"
+            },
+            {
+                "param": "page_type_and_children",
+                "operator": "!=",
+                "value": "mirror_page"
             }
         ]
     ],
@@ -285,5 +295,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Le bloc en haut de page contenant un média et des textes d'accroche",
-    "modified": 1548196279
+    "modified": 1550077523
 }
