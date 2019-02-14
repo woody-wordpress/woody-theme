@@ -11,9 +11,12 @@ use Symfony\Component\Finder\Finder;
  * @return   page_teaser_fields - Un tableau de données
  *
  */
-function getAcfGroupFields($group_id)
+function getAcfGroupFields($group_id, $post = null)
 {
-    $post = get_post();
+    if (is_null($post)) {
+        $post = get_post();
+    }
+
     if (!empty($post)) {
         $post_id = $post->ID;
         $the_fields = array();
