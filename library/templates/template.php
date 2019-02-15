@@ -55,6 +55,7 @@ abstract class WoodyTheme_TemplateAbstract
         // Get current Post
         $this->context['post'] = new TimberPost();
         $this->context['page_type'] = getTermsSlugs($this->context['post']->ID, 'page_type', true);
+        $this->context['body_class'] = $this->context['body_class'] . ' woodypage-' . $this->context['page_type'];
 
         // Define Woody Components
         $this->addWoodyComponents();
@@ -134,7 +135,7 @@ abstract class WoodyTheme_TemplateAbstract
     {
         // Get polylang languages
         $languages = apply_filters('woody_pll_the_languages', null);
-        if (!empty($languages) and count($languages) != 1)  {
+        if (!empty($languages) and count($languages) != 1) {
             $data = $this->createSwitcher($languages);
 
             // Set a default template
@@ -161,13 +162,13 @@ abstract class WoodyTheme_TemplateAbstract
                 if (!empty($language['current_lang'])) {
                     $data['current_lang'] = substr($language['locale'], 0, 2);
                     $data['langs'][$language['slug']]['url'] = $language['url'] . $output_params;
-                    $data['langs'][$language['slug']]['name'] = strpos($language['name'], '(') ? substr($language['name'],0, strpos($language['name'], '(')) : $language['name'];
+                    $data['langs'][$language['slug']]['name'] = strpos($language['name'], '(') ? substr($language['name'], 0, strpos($language['name'], '(')) : $language['name'];
                     $data['langs'][$language['slug']]['locale'] = substr($language['locale'], 0, 2);
                     $data['langs'][$language['slug']]['no_translation'] = $language['no_translation'];
                     $data['langs'][$language['slug']]['is_current'] = true;
                 } else {
                     $data['langs'][$language['slug']]['url'] = $language['url'] . $output_params;
-                    $data['langs'][$language['slug']]['name'] = strpos($language['name'], '(') ? substr($language['name'],0, strpos($language['name'], '(')) : $language['name'];
+                    $data['langs'][$language['slug']]['name'] = strpos($language['name'], '(') ? substr($language['name'], 0, strpos($language['name'], '(')) : $language['name'];
                     $data['langs'][$language['slug']]['locale'] = substr($language['locale'], 0, 2);
                     $data['langs'][$language['slug']]['no_translation'] = $language['no_translation'];
                 }
