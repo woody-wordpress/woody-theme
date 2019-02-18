@@ -37,6 +37,13 @@ class WoodyTheme_Taxonomy
 
     public function registerTaxonomy()
     {
+        $user = wp_get_current_user();
+        if (in_array('administrator', $user->roles)) {
+            $is_administrator = true;
+        } else {
+            $is_administrator = false;
+        }
+
         // On créé la taxonomie "Type de publication"
         register_taxonomy(
             'page_type',
@@ -57,8 +64,8 @@ class WoodyTheme_Taxonomy
                     'popular_items' => 'Types de publications les plus utilisées'
                 ],
                 'hierarchical' => true,
-                'show_ui' => false,
-                'show_in_menu' => false,
+                'show_ui' => $is_administrator,
+                'show_in_menu' => $is_administrator,
                 'capabilities' => [
                     'manage_terms' => 'Configurer les types de publications',
                     'edit_terms' => 'Editer les types de publications',
