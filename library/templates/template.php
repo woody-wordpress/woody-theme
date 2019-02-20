@@ -55,7 +55,9 @@ abstract class WoodyTheme_TemplateAbstract
         // Get current Post
         $this->context['post'] = new TimberPost();
         $this->context['page_type'] = getTermsSlugs($this->context['post']->ID, 'page_type', true);
-        $this->context['body_class'] = $this->context['body_class'] . ' woodypage-' . $this->context['page_type'];
+        if (!empty($this->context['page_type'])) {
+            $this->context['body_class'] = $this->context['body_class'] . ' woodypage-' . $this->context['page_type'];
+        }
 
         // Define Woody Components
         $this->addWoodyComponents();
