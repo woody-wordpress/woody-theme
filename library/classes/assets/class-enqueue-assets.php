@@ -249,9 +249,13 @@ class WoodyTheme_Enqueue_Assets
 
         // Enqueue the main Stylesheet.
         if ($this->isTouristicSheet || $this->isTouristicPlaylist) {
-            wp_enqueue_style('main-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/tourism.css'), [], '', 'all');
+            $tourism_css = apply_filters('woody_theme_stylesheets', 'tourism');
+            $tourism_css = (!empty($tourism_css)) ? $tourism_css : 'tourism';
+            wp_enqueue_style('main-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/' . $tourism_css . '.css'), [], '', 'all');
         } else {
-            wp_enqueue_style('main-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/main.css'), [], '', 'all');
+            $main_css = apply_filters('woody_theme_stylesheets', 'main');
+            $main_css = (!empty($main_css)) ? $main_css : 'main';
+            wp_enqueue_style('main-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/' . $main_css . '.css'), [], '', 'all');
         }
     }
 
