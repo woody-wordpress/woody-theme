@@ -2,13 +2,46 @@ import $ from 'jquery';
 
 $('#post').each(function() {
 
+    // Alert change langue
+    $('#select-post-language').each(function() {
+        var $this = $(this);
+        var $select = $this.find('#post_lang_choice');
+
+        // Added disabled on select
+        $select.attr('disabled', 'disabled');
+
+        // Added lock button
+        $this.append('<div class="button button-lock button-primary"><span class="dashicons dashicons-lock"></span></div>');
+        var $lock = $this.find('.button-lock');
+        var $lock_icon = $lock.find('.dashicons');
+
+        // Popin confirm change lang
+        $lock.click(function() {
+            if ($lock.hasClass('button-primary')) {
+                var confirm = window.confirm("Êtes-vous sûr de vouloir changer la langue de cette page ?");
+                if (confirm == true) {
+                    $select.removeAttr('disabled');
+                    $lock.removeClass('button-primary');
+                    $lock_icon.addClass('dashicons-unlock').removeClass('dashicons-lock');
+                }
+            } else {
+                $select.attr('disabled', 'disabled');
+                $lock.addClass('button-primary');
+                $lock_icon.removeClass('dashicons-unlock').addClass('dashicons-lock');
+            }
+        });
+    });
+
     // Show on scroll
     var $preview_button = $('#minor-publishing-actions .preview.button');
+    var $save_button = $('#publishing-action');
     $(window).scroll(function() {
         if ($(window).scrollTop() < 800) {
             $preview_button.removeClass('sticky');
+            $save_button.removeClass('sticky');
         } else {
             $preview_button.addClass('sticky');
+            $save_button.addClass('sticky');
         }
     });
 
