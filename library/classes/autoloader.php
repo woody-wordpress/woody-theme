@@ -3,6 +3,20 @@
 // Define PLL_DEFAULT_LANG
 define('PLL_DEFAULT_LANG', function_exists('pll_default_language') ? pll_default_language() : 'fr');
 
+// Define PLL_DEFAULT_LOCALE
+if (function_exists('pll_languages_list')) {
+    $languages = pll_languages_list(['fields' => '']);
+    $default_locale = 'fr_FR';
+    foreach ($languages as $language) {
+        if ($language->slug == PLL_DEFAULT_LANG) {
+            $default_locale = $language->locale;
+            break;
+        }
+    }
+    define('PLL_DEFAULT_LOCALE', $default_locale);
+}
+
+
 // Commands
 new WoodyTheme_Commands();
 
