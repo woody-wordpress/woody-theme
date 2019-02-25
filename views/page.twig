@@ -7,6 +7,11 @@
 {% endblock metas %}
 
 {% block content %}
+
+{% if is_frontpage %}
+    <h1 class="frontpage-htitle">{{ site.title|default }}</h1>
+{% endif %}
+
 <main id="main-content" class="content-type-page {{ page_type|default }}">
     <div class="content-wrapper {{ page_terms|default('no-terms') }}">
         <div class="mobile-header hide-for-xlarge title-bar">

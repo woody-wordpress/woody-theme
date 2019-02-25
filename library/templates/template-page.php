@@ -96,6 +96,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
     protected function pageContext()
     {
+        $this->context['is_frontpage'] = is_front_page();
+
         $social_shares = getActiveShares();
         $this->context['social_shares'] = Timber::compile($this->context['woody_components']['blocks-shares-tpl_01'], $social_shares);
 
