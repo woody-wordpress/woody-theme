@@ -118,9 +118,15 @@ $('#post').each(function() {
     // **
     // Update tpl-choice-wrapper classes for autofocus layout
     // **
-    var getAutoFocusData_AJAX = null;
+    var getAutoFocusData_AJAX = {};
     var getAutoFocusData = function($parent) {
         var query_params = {};
+
+        var block_id = $parent.attr('id');
+        if (typeof block_id == 'undefined') {
+            block_id = "autofocusID_" + Math.random().toString(16).slice(2);
+            $parent.attr('id', block_id);
+        }
 
         // Append Message
         var $message_wrapper = $parent.find('.acf-tab-wrap');
@@ -155,11 +161,11 @@ $('#post').each(function() {
         });
 
         // Ajax
-        if (getAutoFocusData_AJAX !== null) {
-            getAutoFocusData_AJAX.abort();
+        if (typeof getAutoFocusData_AJAX[block_id] !== 'undefined') {
+            getAutoFocusData_AJAX[block_id].abort();
         }
 
-        getAutoFocusData_AJAX = $.ajax({
+        getAutoFocusData_AJAX[block_id] = $.ajax({
             type: 'POST',
             dataType: 'json',
             url: ajaxurl,
@@ -168,6 +174,8 @@ $('#post').each(function() {
                 params: query_params
             },
             success: function(data) {
+                delete getAutoFocusData_AJAX[block_id];
+
                 fitChoiceAction($parent, data);
 
                 if (data === 0) {
@@ -182,10 +190,9 @@ $('#post').each(function() {
                         .find('.alert').hide().end();
                 }
             },
-            error: function(data) {
-                console.error('woody_autofocus_count', data);
-            },
+            error: function() {},
         });
+
     }
 
     var getAutoFocusQuery = function(field) {
