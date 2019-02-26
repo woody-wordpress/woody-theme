@@ -345,29 +345,6 @@
             ]
         },
         {
-            "key": "field_5bbe19ea18045",
-            "label": "Taille d'image",
-            "name": "landswpr_img_style",
-            "type": "button_group",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "ratio_16_9": "Paysage 1920x1080",
-                "ratio_2_1": "Paysage 1920x960",
-                "ratio_4_1": "Panoramique 1920x480"
-            },
-            "allow_null": 0,
-            "default_value": "ratio_2_1",
-            "layout": "horizontal",
-            "return_format": "value"
-        },
-        {
             "key": "field_5bb3261577f38",
             "label": "Mise en page",
             "name": "",
@@ -398,9 +375,9 @@
             },
             "layout": "vertical",
             "choices": {
-                "swipers-landing_swipers-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.crt-bretagne.wp.rc-dev.com\/app\/dist\/crt-bretagne\/img\/woody-library\/views\/swipers\/landing_swipers\/tpl_03\/thumbnail.png?version=2.5.9\" alt=\"swipers-landing_swipers-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Landing Swiper (Pagination avec Titres)<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Landing Swiper (Pagination avec Titres)<\/h4>Swiper items with parallax effect<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "swipers-landing_swipers-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.crt-bretagne.wp.rc-dev.com\/app\/dist\/crt-bretagne\/img\/woody-library\/views\/swipers\/landing_swipers\/tpl_02\/thumbnail.png?version=2.5.9\" alt=\"swipers-landing_swipers-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Landing Swiper (Custom pagination)<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Landing Swiper (Custom pagination)<\/h4>Swiper items<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "swipers-landing_swipers-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.crt-bretagne.wp.rc-dev.com\/app\/dist\/crt-bretagne\/img\/woody-library\/views\/swipers\/landing_swipers\/tpl_01\/thumbnail.png?version=2.5.9\" alt=\"swipers-landing_swipers-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">LandSwiper<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">LandSwiper<\/h4>Swiper items<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+                "swipers-landing_swipers-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.champsaur-valgaudemar.wp.rc-dev.com\/app\/dist\/champsaur-valgaudemar\/img\/woody-library\/views\/swipers\/landing_swipers\/tpl_03\/thumbnail.png?version=2.8.5\" alt=\"swipers-landing_swipers-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Landing Swiper (Pagination avec Titres)<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Landing Swiper (Pagination avec Titres)<\/h4>Swiper items with parallax effect<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "swipers-landing_swipers-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.champsaur-valgaudemar.wp.rc-dev.com\/app\/dist\/champsaur-valgaudemar\/img\/woody-library\/views\/swipers\/landing_swipers\/tpl_02\/thumbnail.png?version=2.8.5\" alt=\"swipers-landing_swipers-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Landing Swiper (Custom pagination)<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Landing Swiper (Custom pagination)<\/h4>Swiper items<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "swipers-landing_swipers-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.champsaur-valgaudemar.wp.rc-dev.com\/app\/dist\/champsaur-valgaudemar\/img\/woody-library\/views\/swipers\/landing_swipers\/tpl_01\/thumbnail.png?version=2.8.5\" alt=\"swipers-landing_swipers-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">LandSwiper<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">LandSwiper<\/h4>Swiper items<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
             },
             "default_value": "",
             "other_choice": 0,
@@ -431,5 +408,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Diaporama de slides (image ou video) en page d'accueil",
-    "modified": 1544625409
+    "modified": 1551197324
 }

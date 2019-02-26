@@ -125,53 +125,56 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             $trip_infos = [];
         }
 
-        /*********************************************
-         * Compilation de l'en tête de page
-         *********************************************/
-        $page_teaser = [];
-        $page_teaser = getAcfGroupFields('group_5b2bbb46507bf', $this->post);
-        if ($page_type[0]->slug != 'front_page' and !empty($page_teaser)) {
-            $page_teaser['page_teaser_title'] = (!empty($page_teaser['page_teaser_display_title'])) ? str_replace('-', '&#8209', $this->post_title) : '';
-            $page_teaser['the_classes'] = [];
-            $page_teaser['the_classes'][] = (!empty($page_teaser['background_img_opacity'])) ? $page_teaser['background_img_opacity'] : '';
-            $page_teaser['the_classes'][] = (!empty($page_teaser['background_color'])) ? $page_teaser['background_color'] : '';
-            $page_teaser['the_classes'][] = (!empty($page_teaser['border_color'])) ? $page_teaser['border_color'] : '';
-            $page_teaser['the_classes'][] =  (!empty($page_teaser['teaser_margin_bottom'])) ? $page_teaser['teaser_margin_bottom'] : '';
-            $page_teaser['the_classes'][] = (!empty($page_teaser['background_img'])) ? 'isRel' : '';
-            $page_teaser['classes'] = (!empty($page_teaser['the_classes'])) ? implode(' ', $page_teaser['the_classes']) : '';
-            $page_teaser['breadcrumb'] = yoast_breadcrumb('<div class="breadcrumb-wrapper padd-all-sm">', '</div>', false);
-            $page_teaser['trip_infos'] = (!empty($this->context['trip_infos'])) ? $this->context['trip_infos'] : '';
-            $page_teaser['social_shares'] = (!empty($this->context['social_shares'])) ? $this->context['social_shares'] : '';
-            if (!empty($page_teaser['page_teaser_media_type']) && $page_teaser['page_teaser_media_type'] == 'map') {
-                $page_teaser['post_coordinates'] = (!empty(getAcfGroupFields('group_5b3635da6529e', $this->post))) ? getAcfGroupFields('group_5b3635da6529e', $this->post) : '';
-            }
-
-            $this->context['page_teaser'] = Timber::compile($this->context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
-        }
-
-        /*********************************************
-        * Compilation du visuel et accroche
-        *********************************************/
-        $page_hero = [];
-        $page_hero = getAcfGroupFields('group_5b052bbee40a4', $this->post);
-        if (!empty($page_hero['page_heading_media_type']) && ($page_hero['page_heading_media_type'] == 'movie' && !empty($page_hero['page_heading_movie']) || ($page_hero['page_heading_media_type'] == 'img' && !empty($page_hero['page_heading_img'])))) {
-            if (empty($page_teaser['page_teaser_display_title'])) {
-                $page_hero['title_as_h1'] = true;
-            }
-
-            $page_hero['page_heading_img']['attachment_more_data'] = (!empty($page_hero['page_heading_img'])) ? getAttachmentMoreData($page_hero['page_heading_img']['ID']) : '';
-            if (!empty($page_hero['page_heading_social_movie'])) {
-                preg_match_all('@src="([^"]+)"@', $page_hero['page_heading_social_movie'], $result);
-                $iframe_url = $result[1][0];
-                if (strpos($iframe_url, 'youtube') != false) {
-                    $yt_params_url = $iframe_url . '?&autoplay=0&rel=0';
-                    $page_hero['page_heading_social_movie'] = str_replace($iframe_url, $yt_params_url, $page_hero['page_heading_social_movie']);
+        if ($page_type[0]->slug != 'front_page') {
+            /*********************************************
+             * Compilation de l'en tête de page pour les pages qui ne sont pas de type "accueil"
+             *********************************************/
+            $page_teaser = [];
+            $page_teaser = getAcfGroupFields('group_5b2bbb46507bf', $this->post);
+            if ($page_type[0]->slug != 'front_page' and !empty($page_teaser)) {
+                $page_teaser['page_teaser_title'] = (!empty($page_teaser['page_teaser_display_title'])) ? str_replace('-', '&#8209', $this->post_title) : '';
+                $page_teaser['the_classes'] = [];
+                $page_teaser['the_classes'][] = (!empty($page_teaser['background_img_opacity'])) ? $page_teaser['background_img_opacity'] : '';
+                $page_teaser['the_classes'][] = (!empty($page_teaser['background_color'])) ? $page_teaser['background_color'] : '';
+                $page_teaser['the_classes'][] = (!empty($page_teaser['border_color'])) ? $page_teaser['border_color'] : '';
+                $page_teaser['the_classes'][] =  (!empty($page_teaser['teaser_margin_bottom'])) ? $page_teaser['teaser_margin_bottom'] : '';
+                $page_teaser['the_classes'][] = (!empty($page_teaser['background_img'])) ? 'isRel' : '';
+                $page_teaser['classes'] = (!empty($page_teaser['the_classes'])) ? implode(' ', $page_teaser['the_classes']) : '';
+                $page_teaser['breadcrumb'] = yoast_breadcrumb('<div class="breadcrumb-wrapper padd-all-sm">', '</div>', false);
+                $page_teaser['trip_infos'] = (!empty($this->context['trip_infos'])) ? $this->context['trip_infos'] : '';
+                $page_teaser['social_shares'] = (!empty($this->context['social_shares'])) ? $this->context['social_shares'] : '';
+                if (!empty($page_teaser['page_teaser_media_type']) && $page_teaser['page_teaser_media_type'] == 'map') {
+                    $page_teaser['post_coordinates'] = (!empty(getAcfGroupFields('group_5b3635da6529e', $this->post))) ? getAcfGroupFields('group_5b3635da6529e', $this->post) : '';
                 }
+
+                $this->context['page_teaser'] = Timber::compile($this->context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
             }
 
-            $page_hero['title'] = (!empty($page_hero['title'])) ? str_replace('-', '&#8209', $page_hero['title']) : '';
+            /*********************************************
+            * Compilation du visuel et accroche pour les pages qui ne sont pas de type "accueil"
+            *********************************************/
 
-            $this->context['page_hero'] = Timber::compile($this->context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
+            $page_hero = [];
+            $page_hero = getAcfGroupFields('group_5b052bbee40a4', $this->post);
+            if (!empty($page_hero['page_heading_media_type']) && ($page_hero['page_heading_media_type'] == 'movie' && !empty($page_hero['page_heading_movie']) || ($page_hero['page_heading_media_type'] == 'img' && !empty($page_hero['page_heading_img'])))) {
+                if (empty($page_teaser['page_teaser_display_title'])) {
+                    $page_hero['title_as_h1'] = true;
+                }
+
+                $page_hero['page_heading_img']['attachment_more_data'] = (!empty($page_hero['page_heading_img'])) ? getAttachmentMoreData($page_hero['page_heading_img']['ID']) : '';
+                if (!empty($page_hero['page_heading_social_movie'])) {
+                    preg_match_all('@src="([^"]+)"@', $page_hero['page_heading_social_movie'], $result);
+                    $iframe_url = $result[1][0];
+                    if (strpos($iframe_url, 'youtube') != false) {
+                        $yt_params_url = $iframe_url . '?&autoplay=0&rel=0';
+                        $page_hero['page_heading_social_movie'] = str_replace($iframe_url, $yt_params_url, $page_hero['page_heading_social_movie']);
+                    }
+                }
+
+                $page_hero['title'] = (!empty($page_hero['title'])) ? str_replace('-', '&#8209', $page_hero['title']) : '';
+
+                $this->context['page_hero'] = Timber::compile($this->context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
+            }
         }
     }
 
