@@ -200,6 +200,7 @@ class WoodyTheme_Enqueue_Assets
 
             // JS Libraries
             wp_enqueue_script('jsapi', 'https://www.google.com/jsapi', [], '', true);
+            wp_enqueue_script('google_recaptcha', 'https://www.google.com/recaptcha/api.js', [], '', true);
             wp_enqueue_script('jsdelivr_lodash', 'https://cdn.jsdelivr.net/npm/lodash@3.8.0/index.min.js"', [], '', true);
             wp_enqueue_script('jsdelivr_slick', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', ['jquery'], '', true);
             wp_enqueue_script('jsdelivr_match8', 'https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js', ['jquery'], '', true);
