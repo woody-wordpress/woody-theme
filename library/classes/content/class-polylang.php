@@ -29,7 +29,7 @@ class WoodyTheme_Polylang
 
     public function siteConfigAddLangs($siteConfig)
     {
-        $siteConfig['languages'] = apply_filters('woody_pll_languages_list', null);
+        $siteConfig['languages'] = apply_filters('woody_pll_the_locales', null);
 
         return $siteConfig;
     }
