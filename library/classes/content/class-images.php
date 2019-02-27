@@ -496,6 +496,7 @@ class WoodyTheme_Images
 
     public function cropImageAPI(WP_REST_Request $request)
     {
+        // TODO: A supprimer en Polylang 2.6
         // Bugfix pour faire fonctionner les hooks de Polylang
         if (!isset(PLL()->posts)) {
             $polylang = PLL();
