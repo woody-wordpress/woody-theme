@@ -64,12 +64,12 @@ $('#post').each(function() {
             if ($lock.hasClass('button-primary')) {
                 var confirm = window.confirm("Êtes-vous sûr de vouloir changer la langue de cette page ?");
                 if (confirm == true) {
-                    $select.removeAttr('disabled');
+                    $select.removeClass('notAllowed');
                     $lock.removeClass('button-primary');
                     $lock_icon.addClass('dashicons-unlock').removeClass('dashicons-lock');
                 }
             } else {
-                $select.attr('disabled', 'disabled');
+                $select.addClass('notAllowed');
                 $lock.addClass('button-primary');
                 $lock_icon.removeClass('dashicons-unlock').addClass('dashicons-lock');
             }

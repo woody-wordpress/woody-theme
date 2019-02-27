@@ -26,6 +26,13 @@
     }
 }
 
+input.notAllowed,
+select.notAllowed,
+textarea.notAllowed {
+    pointer-events: none;
+    opacity: .4;
+}
+
 #minor-publishing-actions {
     #save-action input {
         margin-bottom: 20px;
