@@ -96,7 +96,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
     protected function pageContext()
     {
-        $this->context['is_frontpage'] = is_front_page();
+        $this->context['is_frontpage'] = false;
 
         $social_shares = getActiveShares();
         $this->context['social_shares'] = Timber::compile($this->context['woody_components']['blocks-shares-tpl_01'], $social_shares);
@@ -106,6 +106,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
          ******************************************************************************/
         $page_type = wp_get_post_terms($this->post_id, 'page_type');
         if ($page_type[0]->slug == 'front_page') {
+            $this->context['is_frontpage'] = true;
             $home_slider = getAcfGroupFields('group_5bb325e8b6b43', $this->post);
             if (!empty($home_slider['landswpr_slides'])) {
                 $this->context['home_slider'] = Timber::compile($this->context['woody_components'][$home_slider['landswpr_woody_tpl']], $home_slider);
