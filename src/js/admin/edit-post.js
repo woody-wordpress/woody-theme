@@ -51,8 +51,8 @@ $('#post').each(function() {
         var $this = $(this);
         var $select = $this.find('#post_lang_choice');
 
-        // Added disabled on select
-        $select.attr('disabled', 'disabled');
+        // Added notAllowed on select
+        $select.addClass('notAllowed');
 
         // Added lock button
         $this.append('<div class="button button-lock button-primary"><span class="dashicons dashicons-lock"></span></div>');
