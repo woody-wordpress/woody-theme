@@ -2,6 +2,50 @@ import $ from 'jquery';
 
 $('#post').each(function() {
 
+    // Added button "Retirer le tag principal"
+    $('#taxonomy-themes, #taxonomy-places, #taxonomy-seasons').each(function() {
+        var $this = $(this);
+        var name = $this.attr('id').replace('taxonomy-', '');
+
+        $this.append('<input class="button" id="primary-term-' + name + '-enable" style="text-align:center;" value="Retirer le tag principal">');
+
+        var $input = $('#yoast-wpseo-primary-' + name);
+        var $button = $this.find('#primary-term-' + name + '-enable');
+
+        var bindMakePrimaryTerm = function() {
+            $this.find('.wpseo-make-primary-term').click(function() {
+                $button.show();
+            });
+        }
+
+        var removePrimaryTerm = function() {
+            $this.find('.wpseo-primary-term').removeClass('wpseo-primary-term').addClass('wpseo-non-primary-term');
+            $input.attr('value', '');
+        }
+
+        if ($input.val() == '') {
+            $button.hide();
+        } else {
+            $button.show();
+        }
+
+        $input.change(function() {
+            if ($(this).val() == '') {
+                $button.hide();
+            } else {
+                $button.show();
+            }
+        });
+
+        $button.click(function() {
+            $(this).hide();
+            removePrimaryTerm();
+        });
+
+        // On attend que Yoast soit chargé
+        setTimeout(() => { bindMakePrimaryTerm(); }, 1500);
+    });
+
     // Alert change langue
     $('#select-post-language').each(function() {
         var $this = $(this);
