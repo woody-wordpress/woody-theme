@@ -295,37 +295,6 @@
                     "min": "",
                     "max": ""
                 },
-                "layout_5b912db259c36": {
-                    "key": "layout_5b912db259c36",
-                    "name": "files",
-                    "label": "Fichiers à télécharger",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_5b912dbd59c37",
-                            "label": "Fichiers à télécharger",
-                            "name": "files",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "clone": [
-                                "group_5b042b2f42591"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
-                },
                 "layout_5b912df559c38": {
                     "key": "layout_5b912df559c38",
                     "name": "call_to_action",
@@ -347,6 +316,37 @@
                             },
                             "clone": [
                                 "group_5b461a3831284"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_5c77e7ae6cbd2": {
+                    "key": "layout_5c77e7ae6cbd2",
+                    "name": "geo_map",
+                    "label": "Carte géographique",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5c77e7bd6cbd3",
+                            "label": "Carte",
+                            "name": "geo_map",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b043b2171504"
                             ],
                             "display": "seamless",
                             "layout": "block",
@@ -380,5 +380,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Ce champ est un allégé de groupe section utilisé dans les groupes d'onglets et de slides",
-    "modified": 1543308924
+    "modified": 1551363903
 }
