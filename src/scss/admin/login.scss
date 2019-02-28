@@ -1,4 +1,11 @@
 body.login {
+    h1 a {
+        background-image: url('../img/wp-admin/loader_woody.png');
+        background-size: 100px;
+        height: 110px;
+        width: 100px;
+    }
+
     form {
         padding: 30px;
 
