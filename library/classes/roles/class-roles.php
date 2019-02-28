@@ -501,7 +501,7 @@ class WoodyTheme_Roles
                 'contributor' => false,
                 'translator' => false,
             ],
-            'woody_hawwwai_reports' => [
+            'woody_hawwwai' => [
                 'administrator' => true,
                 'editor' => true,
                 'contributor' => false,
