@@ -169,11 +169,13 @@ abstract class WoodyTheme_TemplateAbstract
                     $data['langs'][$language['slug']]['locale'] = substr($language['locale'], 0, 2);
                     $data['langs'][$language['slug']]['no_translation'] = $language['no_translation'];
                     $data['langs'][$language['slug']]['is_current'] = true;
+                    $data['langs'][$language['slug']]['season'] = !empty($language['season']) ? $language['season'] : '';
                 } else {
                     $data['langs'][$language['slug']]['url'] = $language['url'] . $output_params;
                     $data['langs'][$language['slug']]['name'] = strpos($language['name'], '(') ? substr($language['name'], 0, strpos($language['name'], '(')) : $language['name'];
                     $data['langs'][$language['slug']]['locale'] = substr($language['locale'], 0, 2);
                     $data['langs'][$language['slug']]['no_translation'] = $language['no_translation'];
+                    $data['langs'][$language['slug']]['season'] = !empty($language['season']) ? $language['season'] : '';
                 }
             }
         }
