@@ -56,6 +56,7 @@ class WoodyTheme_ACF
         add_filter('acf/load_field/name=weather_account', [$this, 'weatherAccountAcfLoadField'], 10, 3);
 
         add_filter('acf/fields/post_object/result', [$this, 'postObjectAcfResults'], 10, 4);
+        add_filter('acf/fields/page_link/result', [$this, 'postObjectAcfResults'], 10, 4);
     }
 
     /**
