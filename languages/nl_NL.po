@@ -1,0 +1,299 @@
+# Copyright (C) 2019 Raccourci Agency
+# This file is distributed under the .
+msgid ""
+msgstr ""
+"Project-Id-Version: Woody (Thème parent) 2.6.10\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2019-01-09T15:39:17+01:00\n"
+"PO-Revision-Date: 2019-03-05 15:53+0100\n"
+"X-Generator: Poedit 2.2\n"
+"X-Domain: woody-theme\n"
+"Last-Translator: POIROUX Léo <leo@raccourci.fr>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nl\n"
+
+#. Theme Name of the theme
+msgid "Woody (Thème parent)"
+msgstr ""
+
+#. Description of the theme
+msgid "Theme parent des thèmes de Raccourci Agency"
+msgstr ""
+
+#. Author of the theme
+msgid "Raccourci Agency"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:87
+#: library/classes/content/class-polylang.php:128
+msgid "Lundi"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:88
+#: library/classes/content/class-polylang.php:129
+msgid "Mardi"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:89
+#: library/classes/content/class-polylang.php:130
+msgid "Mercredi"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:90
+#: library/classes/content/class-polylang.php:131
+msgid "Jeudi"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:91
+#: library/classes/content/class-polylang.php:132
+msgid "Vendredi"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:92
+#: library/classes/content/class-polylang.php:133
+msgid "Samedi"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:93
+#: library/classes/content/class-polylang.php:134
+msgid "Dimanche"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:100
+#: library/classes/content/class-polylang.php:135
+msgid "Janvier"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:101
+#: library/classes/content/class-polylang.php:136
+msgid "Février"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:102
+#: library/classes/content/class-polylang.php:137
+msgid "Mars"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:103
+#: library/classes/content/class-polylang.php:138
+msgid "Avril"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:104
+#: library/classes/content/class-polylang.php:139
+msgid "Mai"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:105
+#: library/classes/content/class-polylang.php:140
+msgid "Juin"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:106
+#: library/classes/content/class-polylang.php:141
+msgid "Juillet"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:107
+#: library/classes/content/class-polylang.php:142
+msgid "Août"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:108
+#: library/classes/content/class-polylang.php:143
+msgid "Septembre"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:109
+#: library/classes/content/class-polylang.php:144
+msgid "Octobre"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:110
+#: library/classes/content/class-polylang.php:145
+msgid "Novembre"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:111
+#: library/classes/content/class-polylang.php:146
+msgid "Décembre"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:124
+msgid "Page non trouvée %%sep%% %%sitename%%"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:125
+msgid "Erreur 404 : Page non trouvée"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:149
+msgid "M'y rendre"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:150
+msgid "Ajouter à mes favoris"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:151
+msgid "Voir l'itinéraire"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:152
+msgid "Voir la vidéo"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:153
+msgid "Affiner ma recherche"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:154
+msgid "Voir les résultats sur la carte"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:155
+msgid "résultats"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:156
+msgid "Voir la carte"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:157
+msgid "Partager sur Facebook"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:158
+msgid "Partager sur Twitter"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:159
+msgid "Partager sur Google+"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:160
+msgid "Partager sur Instagram"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:161
+msgid "Partager sur Pinterest"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:162
+msgid "Partager par email"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:163
+msgid "Accès au menu principal"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:164
+msgid "Que recherchez-vous ?"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:165
+msgid "Rechercher"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:166
+msgid "Réinitialiser"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:167
+msgid "Choisissez vos dates"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:168
+msgid "adulte(s)"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:169
+msgid "enfant(s)"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:170
+msgid "jours"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:171
+msgid "Pages"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:172
+msgid "Offre touristique"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:173
+msgid "Désolé, aucun contenu touristique ne correspond à votre recherche"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:174
+msgid "Désolé, aucune page ne correspond à votre recherche"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:175
+msgid "Fermer"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:176
+msgid "résultat"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:177
+msgid "Aucun résultat"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:178
+msgid "Menu"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:179
+msgid "Merci de choisir une date"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:180
+msgid "France"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:181
+msgid "Nouvelle Aquitaine"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:182
+msgid "Dordogne"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:183
+msgid "Comment venir ?"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:184
+msgid "La page que vous recherchez est peut-être ici ?"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:185
+#: library/functions/03_woody_format_data.php:881
+msgid "Lire la suite"
+msgstr ""
+
+#: library/templates/template-page.php:82
+msgid "Oups !"
+msgstr ""
+
+#: library/templates/template-page.php:83
+msgid "Page non trouvée"
+msgstr ""
+
+#: library/templates/template-page.php:84
+msgid ""
+"La page que vous recherchez a peut-être été supprimée ou est temporairement "
+"indisponible."
+msgstr ""
+
+#: library/templates/template-page.php:85
+msgid "Aller à la page d'accueil"
+msgstr ""
