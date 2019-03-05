@@ -9,7 +9,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2019-01-09T15:39:17+01:00\n"
-"PO-Revision-Date: 2019-03-05 15:53+0100\n"
+"PO-Revision-Date: 2019-03-05 16:15+0100\n"
 "X-Generator: Poedit 2.2\n"
 "X-Domain: woody-theme\n"
 "Last-Translator: POIROUX Léo <leo@raccourci.fr>\n"
@@ -31,97 +31,97 @@ msgstr ""
 #: library/classes/content/class-polylang.php:87
 #: library/classes/content/class-polylang.php:128
 msgid "Lundi"
-msgstr ""
+msgstr "Lunes"
 
 #: library/classes/content/class-polylang.php:88
 #: library/classes/content/class-polylang.php:129
 msgid "Mardi"
-msgstr ""
+msgstr "Martes"
 
 #: library/classes/content/class-polylang.php:89
 #: library/classes/content/class-polylang.php:130
 msgid "Mercredi"
-msgstr ""
+msgstr "Miércoles"
 
 #: library/classes/content/class-polylang.php:90
 #: library/classes/content/class-polylang.php:131
 msgid "Jeudi"
-msgstr ""
+msgstr "Jueves"
 
 #: library/classes/content/class-polylang.php:91
 #: library/classes/content/class-polylang.php:132
 msgid "Vendredi"
-msgstr ""
+msgstr "Viernes"
 
 #: library/classes/content/class-polylang.php:92
 #: library/classes/content/class-polylang.php:133
 msgid "Samedi"
-msgstr ""
+msgstr "Sábado"
 
 #: library/classes/content/class-polylang.php:93
 #: library/classes/content/class-polylang.php:134
 msgid "Dimanche"
-msgstr ""
+msgstr "Domingo"
 
 #: library/classes/content/class-polylang.php:100
 #: library/classes/content/class-polylang.php:135
 msgid "Janvier"
-msgstr ""
+msgstr "Enero"
 
 #: library/classes/content/class-polylang.php:101
 #: library/classes/content/class-polylang.php:136
 msgid "Février"
-msgstr ""
+msgstr "Febrero"
 
 #: library/classes/content/class-polylang.php:102
 #: library/classes/content/class-polylang.php:137
 msgid "Mars"
-msgstr ""
+msgstr "Marzo"
 
 #: library/classes/content/class-polylang.php:103
 #: library/classes/content/class-polylang.php:138
 msgid "Avril"
-msgstr ""
+msgstr "Abril"
 
 #: library/classes/content/class-polylang.php:104
 #: library/classes/content/class-polylang.php:139
 msgid "Mai"
-msgstr ""
+msgstr "Mayo"
 
 #: library/classes/content/class-polylang.php:105
 #: library/classes/content/class-polylang.php:140
 msgid "Juin"
-msgstr ""
+msgstr "Junio"
 
 #: library/classes/content/class-polylang.php:106
 #: library/classes/content/class-polylang.php:141
 msgid "Juillet"
-msgstr ""
+msgstr "Julio"
 
 #: library/classes/content/class-polylang.php:107
 #: library/classes/content/class-polylang.php:142
 msgid "Août"
-msgstr ""
+msgstr "Agosto"
 
 #: library/classes/content/class-polylang.php:108
 #: library/classes/content/class-polylang.php:143
 msgid "Septembre"
-msgstr ""
+msgstr "Septiembre"
 
 #: library/classes/content/class-polylang.php:109
 #: library/classes/content/class-polylang.php:144
 msgid "Octobre"
-msgstr ""
+msgstr "Octubre"
 
 #: library/classes/content/class-polylang.php:110
 #: library/classes/content/class-polylang.php:145
 msgid "Novembre"
-msgstr ""
+msgstr "Noviembre"
 
 #: library/classes/content/class-polylang.php:111
 #: library/classes/content/class-polylang.php:146
 msgid "Décembre"
-msgstr ""
+msgstr "Diciembre"
 
 #: library/classes/content/class-polylang.php:124
 msgid "Page non trouvée %%sep%% %%sitename%%"
