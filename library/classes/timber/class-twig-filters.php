@@ -155,43 +155,17 @@ class WoodyTheme_Twig_Filters
 
     public function createdFrom($date, $timezone = 'Europe/Paris')
     {
-        $m = new \Moment\Moment($date);
-        return $m->fromNow();
+        if (function_exists('pll_current_language')) {
+            $locale = pll_current_language('locale');
+        } else {
+            $locale = 'fr_FR';
+        }
 
-        // $return = '';
-        // $now = new \DateTime(); //start time
-        // $publish = new \DateTime($date, new \DateTimeZone($timezone)); //end time
+        // https://github.com/fightbulc/moment.php
+        \Moment\Moment::setLocale($locale);
+        $m = new \Moment\Moment(substr($date, 0, 19));
+        $m->setTimezone($timezone);
 
-        // $interval = $now->diff($publish);
-
-        // wd($interval);
-
-        // if ($interval->i < 1) {
-        //     $return .= $interval->s . ' secondes';
-        // } elseif ($interval->h < 1) {
-        //     $return .= $interval->i . ' minutes';
-        // } elseif ($interval->d < 1) {
-        //     $return .= $interval->h . ' heures';
-        // } elseif ($interval->m < 1) {
-        //     $return .= $interval->d . ' jours';
-        // } elseif ($interval->m >= 1 && $interval->y < 1) {
-        //     if ($interval->d == 0) {
-        //         $return .= $interval->m . ' mois';
-        //     } else {
-        //         $return .= $interval->m . ' mois et ' . $interval->d . ' jours';
-        //     }
-        // } elseif ($interval->y > 1) {
-        //     if ($interval->m == 0) {
-        //         $return .= $interval->y . ' ans';
-        //     } else {
-        //         $return .= $interval->y . ' ans et ' . $interval->m . ' mois';
-        //     }
-        // }
-
-        // if (!empty($return)) {
-        //     $return = __('Publiée il y a', 'woody-theme') . ' ' . $return;
-        // }
-
-        return $return;
+        return $m->fromNow()->getRelative();
     }
 }
