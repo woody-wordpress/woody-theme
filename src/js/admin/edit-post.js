@@ -282,39 +282,44 @@ $('#post').each(function() {
     });
 });
 
-$('#acf-group_5bd0227a1bda3').each(function() {
-    var getShortLinkData = function(field) {
-        var post_id = field.val();
+// $('#acf-group_5bd0227a1bda3, #acf-group_5b33890e6fa0b .acf-field-5c7e8bf42b9af').each(function() {
+var getShortLinkData = function(field) {
+    var post_id = field.val();
 
-        $.ajax({
-            type: 'POST',
-            url: '/wp-json/woody/short-link/',
-            data: post_id,
-            success: function(data) {
-                if (data.length !== 0) {
-                    if (data['page_type'] == 'playlist_tourism' && data['conf_id'] !== "") {
-                        filter_field.$el.removeClass('acf-hidden').css('display', 'block');
-                        window.hawwwai = {};
-                        window.hawwwai.short_link_conf_id = data['conf_id'];
-                    } else {
-                        filter_field.hide();
-                    }
+    $.ajax({
+        type: 'POST',
+        url: '/wp-json/woody/short-link/',
+        data: post_id,
+        success: function(data) {
+            console.log(data);
+            if (data.length !== 0) {
+                if (data['page_type'] == 'playlist_tourism' && data['conf_id'] !== "") {
+                    filter_field.$el.removeClass('acf-hidden').css('display', 'block');
+                    window.hawwwai = {};
+                    window.hawwwai.short_link_conf_id = data['conf_id'];
+                } else {
+                    filter_field.hide();
                 }
-                return data;
-            },
-            error: function(data) {
-                console.error('short-link', data);
-            },
-        });
-    }
-
-    window.filter_field = acf.getField('field_5bd023a8daa52');
-    filter_field.hide();
-    var short_link_url_field = acf.getField('field_5bd022eddaa51');
-    short_link_url_field.on('change', function() {
-        $('#acf-field_5bd060e1dde02').attr('value', '');
-        getShortLinkData(short_link_url_field);
+            }
+            return data;
+        },
+        error: function(data) {
+            console.error('short-link', data);
+        },
     });
 
-    acf.addAction('ready_field/key=field_5bd022eddaa51', getShortLinkData);
-});
+    window.filter_field = acf.getField('field_5bd023a8daa52');
+
+    filter_field.hide();
+
+    field.on('change', function() {
+        $('#acf-field_5bd060e1dde02').attr('value', '');
+        getShortLinkData(field);
+    });
+
+}
+
+acf.addAction('ready_field/key=field_5bd022eddaa51', getShortLinkData);
+// acf.addAction('load_field/key=field_5bd022eddaa51', getShortLinkData);
+acf.addAction('append_field/key=field_5bd022eddaa51', getShortLinkData);
+// });
