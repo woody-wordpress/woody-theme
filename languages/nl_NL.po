@@ -9,7 +9,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2019-01-09T15:39:17+01:00\n"
-"PO-Revision-Date: 2019-03-05 15:53+0100\n"
+"PO-Revision-Date: 2019-03-05 16:56+0100\n"
 "X-Generator: Poedit 2.2\n"
 "X-Domain: woody-theme\n"
 "Last-Translator: POIROUX Léo <leo@raccourci.fr>\n"
@@ -18,282 +18,284 @@ msgstr ""
 
 #. Theme Name of the theme
 msgid "Woody (Thème parent)"
-msgstr ""
+msgstr "Woody (parent theme)"
 
 #. Description of the theme
 msgid "Theme parent des thèmes de Raccourci Agency"
-msgstr ""
+msgstr "Parent theme van de themes van Raccourci Agency"
 
 #. Author of the theme
 msgid "Raccourci Agency"
-msgstr ""
+msgstr "Raccourci Agency"
 
 #: library/classes/content/class-polylang.php:87
 #: library/classes/content/class-polylang.php:128
 msgid "Lundi"
-msgstr ""
+msgstr "Maandag"
 
 #: library/classes/content/class-polylang.php:88
 #: library/classes/content/class-polylang.php:129
 msgid "Mardi"
-msgstr ""
+msgstr "Dinsdag"
 
 #: library/classes/content/class-polylang.php:89
 #: library/classes/content/class-polylang.php:130
 msgid "Mercredi"
-msgstr ""
+msgstr "Woensdag"
 
 #: library/classes/content/class-polylang.php:90
 #: library/classes/content/class-polylang.php:131
 msgid "Jeudi"
-msgstr ""
+msgstr "Donderdag"
 
 #: library/classes/content/class-polylang.php:91
 #: library/classes/content/class-polylang.php:132
 msgid "Vendredi"
-msgstr ""
+msgstr "Vrijdag"
 
 #: library/classes/content/class-polylang.php:92
 #: library/classes/content/class-polylang.php:133
 msgid "Samedi"
-msgstr ""
+msgstr "Zaterdag"
 
 #: library/classes/content/class-polylang.php:93
 #: library/classes/content/class-polylang.php:134
 msgid "Dimanche"
-msgstr ""
+msgstr "Zondag"
 
 #: library/classes/content/class-polylang.php:100
 #: library/classes/content/class-polylang.php:135
 msgid "Janvier"
-msgstr ""
+msgstr "Januari"
 
 #: library/classes/content/class-polylang.php:101
 #: library/classes/content/class-polylang.php:136
 msgid "Février"
-msgstr ""
+msgstr "Februari"
 
 #: library/classes/content/class-polylang.php:102
 #: library/classes/content/class-polylang.php:137
 msgid "Mars"
-msgstr ""
+msgstr "Maart"
 
 #: library/classes/content/class-polylang.php:103
 #: library/classes/content/class-polylang.php:138
 msgid "Avril"
-msgstr ""
+msgstr "April"
 
 #: library/classes/content/class-polylang.php:104
 #: library/classes/content/class-polylang.php:139
 msgid "Mai"
-msgstr ""
+msgstr "Mei"
 
 #: library/classes/content/class-polylang.php:105
 #: library/classes/content/class-polylang.php:140
 msgid "Juin"
-msgstr ""
+msgstr "Juni"
 
 #: library/classes/content/class-polylang.php:106
 #: library/classes/content/class-polylang.php:141
 msgid "Juillet"
-msgstr ""
+msgstr "Juli"
 
 #: library/classes/content/class-polylang.php:107
 #: library/classes/content/class-polylang.php:142
 msgid "Août"
-msgstr ""
+msgstr "Augustus"
 
 #: library/classes/content/class-polylang.php:108
 #: library/classes/content/class-polylang.php:143
 msgid "Septembre"
-msgstr ""
+msgstr "September"
 
 #: library/classes/content/class-polylang.php:109
 #: library/classes/content/class-polylang.php:144
 msgid "Octobre"
-msgstr ""
+msgstr "Oktober"
 
 #: library/classes/content/class-polylang.php:110
 #: library/classes/content/class-polylang.php:145
 msgid "Novembre"
-msgstr ""
+msgstr "November"
 
 #: library/classes/content/class-polylang.php:111
 #: library/classes/content/class-polylang.php:146
 msgid "Décembre"
-msgstr ""
+msgstr "December"
 
 #: library/classes/content/class-polylang.php:124
 msgid "Page non trouvée %%sep%% %%sitename%%"
-msgstr ""
+msgstr "Pagina niet gevonden %%sep%% %%sitename%%"
 
 #: library/classes/content/class-polylang.php:125
 msgid "Erreur 404 : Page non trouvée"
-msgstr ""
+msgstr "Error 404: Pagina niet gevonden"
 
 #: library/classes/content/class-polylang.php:149
 msgid "M'y rendre"
-msgstr ""
+msgstr "Routebeschrijving"
 
 #: library/classes/content/class-polylang.php:150
 msgid "Ajouter à mes favoris"
-msgstr ""
+msgstr "Toevoegen aan mijn favorieten"
 
 #: library/classes/content/class-polylang.php:151
 msgid "Voir l'itinéraire"
-msgstr ""
+msgstr "Bekijk de routebeschrijving"
 
 #: library/classes/content/class-polylang.php:152
 msgid "Voir la vidéo"
-msgstr ""
+msgstr "Bekijk de video"
 
 #: library/classes/content/class-polylang.php:153
 msgid "Affiner ma recherche"
-msgstr ""
+msgstr "Mijn zoekopdracht verfijnen"
 
 #: library/classes/content/class-polylang.php:154
 msgid "Voir les résultats sur la carte"
-msgstr ""
+msgstr "Bekijk de resultaten op de kaart"
 
 #: library/classes/content/class-polylang.php:155
 msgid "résultats"
-msgstr ""
+msgstr "resultaten"
 
 #: library/classes/content/class-polylang.php:156
 msgid "Voir la carte"
-msgstr ""
+msgstr "Bekijk de kaart"
 
 #: library/classes/content/class-polylang.php:157
 msgid "Partager sur Facebook"
-msgstr ""
+msgstr "Delen op Facebook"
 
 #: library/classes/content/class-polylang.php:158
 msgid "Partager sur Twitter"
-msgstr ""
+msgstr "Delen op Twitter"
 
 #: library/classes/content/class-polylang.php:159
 msgid "Partager sur Google+"
-msgstr ""
+msgstr "Delen op Google+"
 
 #: library/classes/content/class-polylang.php:160
 msgid "Partager sur Instagram"
-msgstr ""
+msgstr "Delen op Instagram"
 
 #: library/classes/content/class-polylang.php:161
 msgid "Partager sur Pinterest"
-msgstr ""
+msgstr "Delen op Pinterest"
 
 #: library/classes/content/class-polylang.php:162
 msgid "Partager par email"
-msgstr ""
+msgstr "Delen par e-mail"
 
 #: library/classes/content/class-polylang.php:163
 msgid "Accès au menu principal"
-msgstr ""
+msgstr "Toegang tot het hoofdmenu"
 
 #: library/classes/content/class-polylang.php:164
 msgid "Que recherchez-vous ?"
-msgstr ""
+msgstr "Wat zoekt u?"
 
 #: library/classes/content/class-polylang.php:165
 msgid "Rechercher"
-msgstr ""
+msgstr "Zoeken"
 
 #: library/classes/content/class-polylang.php:166
 msgid "Réinitialiser"
-msgstr ""
+msgstr "Resetten"
 
 #: library/classes/content/class-polylang.php:167
 msgid "Choisissez vos dates"
-msgstr ""
+msgstr "Kies uw reisdatum"
 
 #: library/classes/content/class-polylang.php:168
 msgid "adulte(s)"
-msgstr ""
+msgstr "volwassene(n)"
 
 #: library/classes/content/class-polylang.php:169
 msgid "enfant(s)"
-msgstr ""
+msgstr "kind(eren)"
 
 #: library/classes/content/class-polylang.php:170
 msgid "jours"
-msgstr ""
+msgstr "dagen"
 
 #: library/classes/content/class-polylang.php:171
 msgid "Pages"
-msgstr ""
+msgstr "Paginas"
 
 #: library/classes/content/class-polylang.php:172
 msgid "Offre touristique"
-msgstr ""
+msgstr "Toeristisch aanbod"
 
 #: library/classes/content/class-polylang.php:173
 msgid "Désolé, aucun contenu touristique ne correspond à votre recherche"
-msgstr ""
+msgstr "Sorry, geen toeristische inhoud komt overeen met uw zoekopdracht"
 
 #: library/classes/content/class-polylang.php:174
 msgid "Désolé, aucune page ne correspond à votre recherche"
-msgstr ""
+msgstr "Sorry, geen parina's komen overeen met uw zoekopdracht"
 
 #: library/classes/content/class-polylang.php:175
 msgid "Fermer"
-msgstr ""
+msgstr "Sluiten"
 
 #: library/classes/content/class-polylang.php:176
 msgid "résultat"
-msgstr ""
+msgstr "resultaat"
 
 #: library/classes/content/class-polylang.php:177
 msgid "Aucun résultat"
-msgstr ""
+msgstr "Geen resultaten gevonden"
 
 #: library/classes/content/class-polylang.php:178
 msgid "Menu"
-msgstr ""
+msgstr "Menu"
 
 #: library/classes/content/class-polylang.php:179
 msgid "Merci de choisir une date"
-msgstr ""
+msgstr "Kies een datum"
 
 #: library/classes/content/class-polylang.php:180
 msgid "France"
-msgstr ""
+msgstr "Frankrijk"
 
 #: library/classes/content/class-polylang.php:181
 msgid "Nouvelle Aquitaine"
-msgstr ""
+msgstr "Nouvelle-Aquitaine"
 
 #: library/classes/content/class-polylang.php:182
 msgid "Dordogne"
-msgstr ""
+msgstr "Dordogne"
 
 #: library/classes/content/class-polylang.php:183
 msgid "Comment venir ?"
-msgstr ""
+msgstr "Hoe kom je hier?"
 
 #: library/classes/content/class-polylang.php:184
 msgid "La page que vous recherchez est peut-être ici ?"
-msgstr ""
+msgstr "Misschien is de pagina due u zoekt hier?"
 
 #: library/classes/content/class-polylang.php:185
 #: library/functions/03_woody_format_data.php:881
 msgid "Lire la suite"
-msgstr ""
+msgstr "Lees meer over"
 
 #: library/templates/template-page.php:82
 msgid "Oups !"
-msgstr ""
+msgstr "Oeps!"
 
 #: library/templates/template-page.php:83
 msgid "Page non trouvée"
-msgstr ""
+msgstr "Pagina niet gevonden"
 
 #: library/templates/template-page.php:84
 msgid ""
 "La page que vous recherchez a peut-être été supprimée ou est temporairement "
 "indisponible."
 msgstr ""
+"De pagina die u zoekt, is misschien verwijderd of is tijdelijk niet "
+"beschikbaar."
 
 #: library/templates/template-page.php:85
 msgid "Aller à la page d'accueil"
-msgstr ""
+msgstr "Ga naar de startpagina"
