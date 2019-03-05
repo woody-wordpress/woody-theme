@@ -148,43 +148,49 @@ class WoodyTheme_Twig_Filters
         return rcd($text);
     }
 
-    public function wd($text)
+    public function wd($text, $label = '')
     {
-        return wd($text);
+        return wd($text, $label);
     }
 
-    public function createdFrom($text)
+    public function createdFrom($date, $timezone = 'Europe/Paris')
     {
-        $return = pll__('Publiée il y a ');
+        $m = new \Moment\Moment($date);
+        return $m->fromNow();
 
-        $now = date('Y-m-d H:i:s');
-        $created = date('Y-m-d H:i:s', $text);
+        // $return = '';
+        // $now = new \DateTime(); //start time
+        // $publish = new \DateTime($date, new \DateTimeZone($timezone)); //end time
 
-        $datetime1 = new DateTime(date('Y-m-d H:i:s'));//start time
-        $datetime2 = new DateTime(date('Y-m-d H:i:s', $text));//end time
-        $interval = $datetime1->diff($datetime2);
+        // $interval = $now->diff($publish);
 
-        if ($interval->i < 1) {
-            $return .= $interval->s . ' secondes';
-        } elseif ($interval->h < 1) {
-            $return .= $interval->i . ' minutes';
-        } elseif ($interval->d < 1) {
-            $return .= $interval->h . ' heures';
-        } elseif ($interval->m < 1) {
-            $return .= $interval->d . ' jours';
-        } elseif ($interval->m >= 1 && $interval->y < 1) {
-            if ($interval->d == 0) {
-                $return .= $interval->m . ' mois';
-            } else {
-                $return .= $interval->m . ' mois et ' . $interval->d . ' jours';
-            }
-        } elseif ($interval->y > 1) {
-            if ($interval->m == 0) {
-                $return .= $interval->y . ' ans';
-            } else {
-                $return .= $interval->y . ' ans et ' . $interval->m . ' mois';
-            }
-        }
+        // wd($interval);
+
+        // if ($interval->i < 1) {
+        //     $return .= $interval->s . ' secondes';
+        // } elseif ($interval->h < 1) {
+        //     $return .= $interval->i . ' minutes';
+        // } elseif ($interval->d < 1) {
+        //     $return .= $interval->h . ' heures';
+        // } elseif ($interval->m < 1) {
+        //     $return .= $interval->d . ' jours';
+        // } elseif ($interval->m >= 1 && $interval->y < 1) {
+        //     if ($interval->d == 0) {
+        //         $return .= $interval->m . ' mois';
+        //     } else {
+        //         $return .= $interval->m . ' mois et ' . $interval->d . ' jours';
+        //     }
+        // } elseif ($interval->y > 1) {
+        //     if ($interval->m == 0) {
+        //         $return .= $interval->y . ' ans';
+        //     } else {
+        //         $return .= $interval->y . ' ans et ' . $interval->m . ' mois';
+        //     }
+        // }
+
+        // if (!empty($return)) {
+        //     $return = __('Publiée il y a', 'woody-theme') . ' ' . $return;
+        // }
 
         return $return;
     }
