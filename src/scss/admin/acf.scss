@@ -189,9 +189,9 @@
 
 // On ajoute des icones dans les tabs de contenu / En-tête / Mise en page
 // et on revoit le style des tabs
-.acf-fields>.acf-tab-wrap{
-    &.-top{
-        .acf-tab-group{
+.acf-fields>.acf-tab-wrap {
+    &.-top {
+        .acf-tab-group {
             display: flex;
         }
     }
@@ -427,7 +427,7 @@
 }
 
 // Configurer ma playlist
-.acf-field-5b33902f31b18 {
+.acf-field-5b33902f31b18:not(.acf-hidden) {
     text-align: center !important;
     display: block !important;
 
@@ -520,6 +520,7 @@
 // On masque les tabs et le choix d'affichage sur le champ "Playlist" lorsque l'on est sur une page de type "Playlist"
 
 #acf-group_5b33890e6fa0b {
+
     .acf-field-5bfeaaf039785,
     .acf-tab-wrap {
         display: none;
@@ -527,6 +528,8 @@
 }
 
 // Bouton préfilter la playlist (liens rapides)
+.acf-field-5c7f99013d21d,
+.acf-field-5c7e764fb183b,
 .acf-field-5bd023a8daa52 {
     .acf-input {
         background: #0073aa;
@@ -566,28 +569,30 @@
     }
 }
 
-.acf-tooltip > ul > li > a[data-layout="slides_group"]{
-    display:none;
+.acf-tooltip>ul>li>a[data-layout="slides_group"] {
+    display: none;
 }
 
-.acf-field.collapsing-rows{
+.acf-field.collapsing-rows {
     padding-top: 48px !important;
-    .woodyRowsCollapse{
+
+    .woodyRowsCollapse {
         position: absolute;
-        right:12px;
-        top:12px;
+        right: 12px;
+        top: 12px;
         background-color: rgba(#000, .03);
-        border-radius:50px;
+        border-radius: 50px;
         color: #373c42;
-        border:none;
-        padding:0 0 0 15px;
+        border: none;
+        padding: 0 0 0 15px;
         display: inline-flex;
         align-items: center;
         font-size: 10px;
         font-weight: 500;
-        cursor:pointer;
+        cursor: pointer;
         transition: background-color .3s;
-        .dashicons{
+
+        .dashicons {
             width: 22px;
             height: 22px;
             border-radius: 50%;
@@ -597,18 +602,32 @@
             align-items: center;
             justify-content: center;
             transition: all .3s;
-            &:before{
+
+            &:before {
                 transform: translateX(-1px);
             }
         }
+
         &:hover,
-        &focus{
+        &focus {
             outline: none;
             background-color: rgba(#000, .07);
-            .dashicons{
+
+            .dashicons {
                 background-color: #0073aa;
                 color: #fff;
             }
         }
+    }
+}
+
+// Masquage des champs de précochage de playlist dans une section => Mise en avant de fiches auto
+.acf-field-5afd2c6916ecb {
+
+    .acf-field-5c7e5bd174a2f,
+    .acf-field-5c7faaa8c8c7a,
+    .acf-field-5c7e59967f790 {
+        display: none !important;
+        pointer-events: none !important;
     }
 }
