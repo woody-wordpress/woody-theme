@@ -22,7 +22,7 @@ function getComponentItem($layout, $context)
         //     $return = formatSnowInfoData($layout, $context['woody_components']);
         //     break;
         case 'weather':
-            $vars['token'] = $layout['weather_account'];
+            $vars['account'] = $layout['weather_account'];
             $vars['nb_days'] = $layout['weather_count_days'];
             $the_weather = apply_filters('woody_weather', $vars);
             $the_weather['bg_color'] = (!empty($layout['weather_bg_params']['background_color'])) ? $layout['weather_bg_params']['background_color']: '';
@@ -810,19 +810,19 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
                 ]
             ];
 
-            if(!empty($item['deals'])){
+            if (!empty($item['deals'])) {
                 $data['title'] = $item['deals']['list'][0]['nom'][$lang] ;
             }
             if (is_array($layout['display_elements'])) {
                 if (in_array('sheet_type', $layout['display_elements'])) {
                     $data['sheet_type'] = (!empty($item['type'])) ? $item['type'] : '';
-                    if(!empty($item['deals'])){
+                    if (!empty($item['deals'])) {
                         $data['sheet_type'] = $item['title'];
                     }
                 }
                 if (in_array('description', $layout['display_elements'])) {
                     $data['description'] = (!empty($item['desc'])) ? $item['desc'] : '';
-                    if(!empty($item['deals']['list'][0]['description'][$lang])){
+                    if (!empty($item['deals']['list'][0]['description'][$lang])) {
                         $data['description'] = $item['deals']['list'][0]['description'][$lang] ;
                     }
                 }
