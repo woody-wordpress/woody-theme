@@ -9,7 +9,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2019-01-09T15:39:17+01:00\n"
-"PO-Revision-Date: 2019-03-05 16:08+0100\n"
+"PO-Revision-Date: 2019-03-06 09:01+0100\n"
 "X-Generator: Poedit 2.2\n"
 "X-Domain: woody-theme\n"
 "Last-Translator: POIROUX Léo <leo@raccourci.fr>\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #. Author of the theme
 msgid "Raccourci Agency"
-msgstr ""
+msgstr "Raccourci Agency"
 
 #: library/classes/content/class-polylang.php:87
 #: library/classes/content/class-polylang.php:128
@@ -61,7 +61,7 @@ msgstr "Sabato"
 #: library/classes/content/class-polylang.php:93
 #: library/classes/content/class-polylang.php:134
 msgid "Dimanche"
-msgstr "Domenicale"
+msgstr "Domenica"
 
 #: library/classes/content/class-polylang.php:100
 #: library/classes/content/class-polylang.php:135
@@ -76,7 +76,7 @@ msgstr "Febbraio"
 #: library/classes/content/class-polylang.php:102
 #: library/classes/content/class-polylang.php:137
 msgid "Mars"
-msgstr "Marte"
+msgstr "Marzo"
 
 #: library/classes/content/class-polylang.php:103
 #: library/classes/content/class-polylang.php:138
@@ -149,11 +149,11 @@ msgstr "Guarda il video"
 
 #: library/classes/content/class-polylang.php:153
 msgid "Affiner ma recherche"
-msgstr "Affina la mia ricerca"
+msgstr "Perfeziona la ricerca"
 
 #: library/classes/content/class-polylang.php:154
 msgid "Voir les résultats sur la carte"
-msgstr "Vedere i risultati sulla mappa"
+msgstr "Vedi i risultati sulla mappa"
 
 #: library/classes/content/class-polylang.php:155
 msgid "résultats"
@@ -161,7 +161,7 @@ msgstr "risultati"
 
 #: library/classes/content/class-polylang.php:156
 msgid "Voir la carte"
-msgstr "Vedere la mappa"
+msgstr "Vedi la mappa"
 
 #: library/classes/content/class-polylang.php:157
 msgid "Partager sur Facebook"
@@ -185,11 +185,11 @@ msgstr "Condividi su Pinterest"
 
 #: library/classes/content/class-polylang.php:162
 msgid "Partager par email"
-msgstr "Condividi per e-mail"
+msgstr "Condividi via e-mail"
 
 #: library/classes/content/class-polylang.php:163
 msgid "Accès au menu principal"
-msgstr "Accesso al menu principale"
+msgstr "Accedi al menu principale"
 
 #: library/classes/content/class-polylang.php:164
 msgid "Que recherchez-vous ?"
@@ -197,11 +197,11 @@ msgstr "Cosa stai cercando?"
 
 #: library/classes/content/class-polylang.php:165
 msgid "Rechercher"
-msgstr "Inquirenti"
+msgstr "Ricerca"
 
 #: library/classes/content/class-polylang.php:166
 msgid "Réinitialiser"
-msgstr "Reset"
+msgstr "Azzera"
 
 #: library/classes/content/class-polylang.php:167
 msgid "Choisissez vos dates"
@@ -209,15 +209,15 @@ msgstr "Scegli le tue date"
 
 #: library/classes/content/class-polylang.php:168
 msgid "adulte(s)"
-msgstr "adulta(i)"
+msgstr "adulto/i"
 
 #: library/classes/content/class-polylang.php:169
 msgid "enfant(s)"
-msgstr "bambino(i)"
+msgstr "bambino/i"
 
 #: library/classes/content/class-polylang.php:170
 msgid "jours"
-msgstr "giornate"
+msgstr "giorni"
 
 #: library/classes/content/class-polylang.php:171
 msgid "Pages"
@@ -237,11 +237,11 @@ msgstr "Spiacente, nessuna pagina corrisponde alla tua ricerca"
 
 #: library/classes/content/class-polylang.php:175
 msgid "Fermer"
-msgstr "Chiudere"
+msgstr "Chiudi"
 
 #: library/classes/content/class-polylang.php:176
 msgid "résultat"
-msgstr "risultare"
+msgstr "risultato"
 
 #: library/classes/content/class-polylang.php:177
 msgid "Aucun résultat"
@@ -249,23 +249,23 @@ msgstr "Nessun risultato trovato"
 
 #: library/classes/content/class-polylang.php:178
 msgid "Menu"
-msgstr "Menù"
+msgstr "Menu"
 
 #: library/classes/content/class-polylang.php:179
 msgid "Merci de choisir une date"
-msgstr "Scegliere una data"
+msgstr "Scegli una data"
 
 #: library/classes/content/class-polylang.php:180
 msgid "France"
-msgstr ""
+msgstr "Francia"
 
 #: library/classes/content/class-polylang.php:181
 msgid "Nouvelle Aquitaine"
-msgstr ""
+msgstr "Nouvelle Aquitaine"
 
 #: library/classes/content/class-polylang.php:182
 msgid "Dordogne"
-msgstr ""
+msgstr "Dordogna"
 
 #: library/classes/content/class-polylang.php:183
 msgid "Comment venir ?"
@@ -278,11 +278,11 @@ msgstr "Forse la pagina che stai cercando è qui?"
 #: library/classes/content/class-polylang.php:185
 #: library/functions/03_woody_format_data.php:881
 msgid "Lire la suite"
-msgstr "Per saperne di più"
+msgstr "Leggi tutto"
 
 #: library/templates/template-page.php:82
 msgid "Oups !"
-msgstr "Oups!"
+msgstr "Oh!"
 
 #: library/templates/template-page.php:83
 msgid "Page non trouvée"
@@ -293,8 +293,8 @@ msgid ""
 "La page que vous recherchez a peut-être été supprimée ou est temporairement "
 "indisponible."
 msgstr ""
-"La pagina che stai cercando potrebbe essere stata cancellata o "
-"temporaneamente non disponibile."
+"La pagina che stai cercando potrebbe essere stata cancellata o essere "
+"temporaneamente indisponibile."
 
 #: library/templates/template-page.php:85
 msgid "Aller à la page d'accueil"
