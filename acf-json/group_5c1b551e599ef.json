@@ -41,7 +41,7 @@
         },
         {
             "key": "field_5c1b5560c9cff",
-            "label": "Nombre de jours à afficher",
+            "label": "Nombre maximum de jours à afficher",
             "name": "weather_count_days",
             "type": "number",
             "instructions": "",
