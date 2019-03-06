@@ -9,7 +9,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2019-01-09T15:39:17+01:00\n"
-"PO-Revision-Date: 2019-03-05 16:15+0100\n"
+"PO-Revision-Date: 2019-03-06 10:56+0100\n"
 "X-Generator: Poedit 2.2\n"
 "X-Domain: woody-theme\n"
 "Last-Translator: POIROUX Léo <leo@raccourci.fr>\n"
@@ -125,175 +125,178 @@ msgstr "Diciembre"
 
 #: library/classes/content/class-polylang.php:124
 msgid "Page non trouvée %%sep%% %%sitename%%"
-msgstr ""
+msgstr "Página no encontrada %%sep%% %%sitename%%"
 
 #: library/classes/content/class-polylang.php:125
 msgid "Erreur 404 : Page non trouvée"
-msgstr ""
+msgstr "Error 404: Página no encontrada"
 
 #: library/classes/content/class-polylang.php:149
 msgid "M'y rendre"
-msgstr ""
+msgstr "Ir"
 
 #: library/classes/content/class-polylang.php:150
 msgid "Ajouter à mes favoris"
-msgstr ""
+msgstr "Añadir a mis favoritos"
 
 #: library/classes/content/class-polylang.php:151
 msgid "Voir l'itinéraire"
-msgstr ""
+msgstr "Ver itinerario"
 
 #: library/classes/content/class-polylang.php:152
 msgid "Voir la vidéo"
-msgstr ""
+msgstr "Ver el vídeo"
 
 #: library/classes/content/class-polylang.php:153
 msgid "Affiner ma recherche"
-msgstr ""
+msgstr "Afinar la búsqueda"
 
 #: library/classes/content/class-polylang.php:154
 msgid "Voir les résultats sur la carte"
-msgstr ""
+msgstr "Ver los resultados en el mapa"
 
 #: library/classes/content/class-polylang.php:155
 msgid "résultats"
-msgstr ""
+msgstr "resultados"
 
 #: library/classes/content/class-polylang.php:156
 msgid "Voir la carte"
-msgstr ""
+msgstr "Ver el mapa"
 
 #: library/classes/content/class-polylang.php:157
 msgid "Partager sur Facebook"
-msgstr ""
+msgstr "Compartir en Facebook"
 
 #: library/classes/content/class-polylang.php:158
 msgid "Partager sur Twitter"
-msgstr ""
+msgstr "Compartir en Twitter"
 
 #: library/classes/content/class-polylang.php:159
 msgid "Partager sur Google+"
-msgstr ""
+msgstr "Compartir en Google+"
 
 #: library/classes/content/class-polylang.php:160
 msgid "Partager sur Instagram"
-msgstr ""
+msgstr "Compartir en Instagram"
 
 #: library/classes/content/class-polylang.php:161
 msgid "Partager sur Pinterest"
-msgstr ""
+msgstr "Compartir en Pinterest"
 
 #: library/classes/content/class-polylang.php:162
 msgid "Partager par email"
-msgstr ""
+msgstr "Compartir por e-mail"
 
 #: library/classes/content/class-polylang.php:163
 msgid "Accès au menu principal"
-msgstr ""
+msgstr "Acceso al menú principal"
 
 #: library/classes/content/class-polylang.php:164
 msgid "Que recherchez-vous ?"
-msgstr ""
+msgstr "¿Qué estás buscando?"
 
 #: library/classes/content/class-polylang.php:165
 msgid "Rechercher"
-msgstr ""
+msgstr "Buscar"
 
 #: library/classes/content/class-polylang.php:166
 msgid "Réinitialiser"
-msgstr ""
+msgstr "Reiniciar"
 
 #: library/classes/content/class-polylang.php:167
 msgid "Choisissez vos dates"
-msgstr ""
+msgstr "Elige tus fechas"
 
 #: library/classes/content/class-polylang.php:168
 msgid "adulte(s)"
-msgstr ""
+msgstr "adulto(s)"
 
 #: library/classes/content/class-polylang.php:169
 msgid "enfant(s)"
-msgstr ""
+msgstr "niño(s)"
 
 #: library/classes/content/class-polylang.php:170
 msgid "jours"
-msgstr ""
+msgstr "días"
 
 #: library/classes/content/class-polylang.php:171
 msgid "Pages"
-msgstr ""
+msgstr "Páginas"
 
 #: library/classes/content/class-polylang.php:172
 msgid "Offre touristique"
-msgstr ""
+msgstr "Oferta turística"
 
 #: library/classes/content/class-polylang.php:173
 msgid "Désolé, aucun contenu touristique ne correspond à votre recherche"
 msgstr ""
+"Lo sentimos, ningún contenido turístico coincide con los criterios de "
+"búsqueda"
 
 #: library/classes/content/class-polylang.php:174
 msgid "Désolé, aucune page ne correspond à votre recherche"
-msgstr ""
+msgstr "Lo sentimos, ninguna página coincide con los criterios de búsqueda"
 
 #: library/classes/content/class-polylang.php:175
 msgid "Fermer"
-msgstr ""
+msgstr "Cerrar"
 
 #: library/classes/content/class-polylang.php:176
 msgid "résultat"
-msgstr ""
+msgstr "resultado"
 
 #: library/classes/content/class-polylang.php:177
 msgid "Aucun résultat"
-msgstr ""
+msgstr "Ningún resultado"
 
 #: library/classes/content/class-polylang.php:178
 msgid "Menu"
-msgstr ""
+msgstr "Menú"
 
 #: library/classes/content/class-polylang.php:179
 msgid "Merci de choisir une date"
-msgstr ""
+msgstr "Por favor, elige una fecha"
 
 #: library/classes/content/class-polylang.php:180
 msgid "France"
-msgstr ""
+msgstr "Francia"
 
 #: library/classes/content/class-polylang.php:181
 msgid "Nouvelle Aquitaine"
-msgstr ""
+msgstr "Nueva Aquitania"
 
 #: library/classes/content/class-polylang.php:182
 msgid "Dordogne"
-msgstr ""
+msgstr "Dordoña"
 
 #: library/classes/content/class-polylang.php:183
 msgid "Comment venir ?"
-msgstr ""
+msgstr "Cómo llegar ?"
 
 #: library/classes/content/class-polylang.php:184
 msgid "La page que vous recherchez est peut-être ici ?"
-msgstr ""
+msgstr "¿La página que buscas puede que esté aquí?"
 
 #: library/classes/content/class-polylang.php:185
 #: library/functions/03_woody_format_data.php:881
 msgid "Lire la suite"
-msgstr ""
+msgstr "Seguir leyendo"
 
 #: library/templates/template-page.php:82
 msgid "Oups !"
-msgstr ""
+msgstr "¡Vaya!"
 
 #: library/templates/template-page.php:83
 msgid "Page non trouvée"
-msgstr ""
+msgstr "Página no encontrada"
 
 #: library/templates/template-page.php:84
 msgid ""
 "La page que vous recherchez a peut-être été supprimée ou est temporairement "
 "indisponible."
 msgstr ""
+"La página que buscas ha sido eliminada o está temporalmente indisponible."
 
 #: library/templates/template-page.php:85
 msgid "Aller à la page d'accueil"
-msgstr ""
+msgstr "Ir a la página de inicio"
