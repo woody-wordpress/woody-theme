@@ -805,9 +805,11 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
                     'title' => (!empty($item['img']['title'])) ? $item['img']['title'] : ''
                 ],
                 'link' =>[
-                    'url' => (!empty($item['link'])) ? $item['link'] : ''
+                    'url' => (!empty($item['link'])) ? $item['link'] : '',
+                    'target' => $item['targetBlank'] ? '_blank' : '',
                 ]
             ];
+
             if(!empty($item['deals'])){
                 $data['title'] = $item['deals']['list'][0]['nom'][$lang] ;
             }
@@ -904,7 +906,7 @@ function getFocusBlockTitles($layout)
 function getPagePreview($item_wrapper, $item)
 {
     $data = [];
-    
+
     $data['page_type'] = getTermsSlugs($item->ID, 'page_type', true);
     $data['post_id'] = $item->ID;
 
@@ -921,8 +923,8 @@ function getPagePreview($item_wrapper, $item)
         if (in_array('subtitle', $item_wrapper['display_elements'])) {
             $data['subtitle'] = getFieldAndFallback($item, 'focus_subtitle', get_field('page_heading_heading', $item->id), 'subtitle', $item, 'field_5b87f23b57a1e');
         }
-        if (in_array('icon', $item_wrapper['display_elements'])) {  
-            $data['woody_icon'] = $item->focus_woody_icon;   
+        if (in_array('icon', $item_wrapper['display_elements'])) {
+            $data['woody_icon'] = $item->focus_woody_icon;
             $data['icon_type'] =(!empty($item->icon_type)) ? $item->icon_type : 'picto';
         }
         if (in_array('description', $item_wrapper['display_elements'])) {
