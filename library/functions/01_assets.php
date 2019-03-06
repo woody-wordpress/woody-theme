@@ -285,43 +285,25 @@ function getPostRootAncestor($postID, $root_level = 1)
 function getAttachmentMoreData($attachment_id)
 {
     $attachment_data = [];
-
     $attachment_data['is_instagram'] = isWoodyInstagram($attachment_id);
+
+    if ($attachment_data['is_instagram']) {
+        $attachment_data['instagram_metadata'] = getInstagramMetadata($attachment_id);
+    }
+
     $attachment_data['linked_page'] = get_field('field_5c0553157e6d0', $attachment_id);
-
-
-    switch ($attachment_data['is_instagram']) {
-        case true:
-            $img_all_data = get_post_meta($attachment_id);
-            $img_all_metadata = (!empty($img_all_data['_wp_attachment_metadata'][0])) ? maybe_unserialize($img_all_data['_wp_attachment_metadata'][0]) : '';
-            $instagram_metadata = (!empty($img_all_metadata['woody-instagram'])) ? $img_all_metadata['woody-instagram'] : '';
-            $attachment_data['instagram_metadata'] = getInstagramMetadata($attachment_id);
-
-            $attachment_data['author'] = (!empty($attachment_data['instagram_metadata']['user']['username'])) ? $attachment_data['instagram_metadata']['user']['username'] : 'no user ?';
-            $attachment_data['lat'] = (!empty($attachment_data['instagram_metadata']['location']['latitude'])) ? $attachment_data['instagram_metadata']['location']['latitude'] : '';
-            $attachment_data['lng'] = (!empty($attachment_data['instagram_metadata']['location']['longitude'])) ? $attachment_data['instagram_metadata']['location']['longitude'] : '';
-            break;
-        default:
-            $attachment_data['author'] = get_field('field_5b5585503c855', $attachment_id);
-            $attachment_data['lat'] = get_field('field_5b55a88e70cbf', $attachment_id);
-            $attachment_data['lng'] = get_field('field_5b55a89e70cc0', $attachment_id);
-            break;
-        }
+    $attachment_data['author'] = get_field('field_5b5585503c855', $attachment_id);
+    $attachment_data['lat'] = get_field('field_5b55a88e70cbf', $attachment_id);
+    $attachment_data['lng'] = get_field('field_5b55a89e70cc0', $attachment_id);
 
     return $attachment_data;
 }
 
 function getInstagramMetadata($attachment_id)
 {
-    $return = [];
-
     $img_all_data = get_post_meta($attachment_id);
-
     $img_all_metadata = (!empty($img_all_data['_wp_attachment_metadata'][0])) ? maybe_unserialize($img_all_data['_wp_attachment_metadata'][0]) : '';
-    $instagram_metadata = (!empty($img_all_metadata['woody-instagram'])) ? $img_all_metadata['woody-instagram'] : '';
-    $return = $instagram_metadata;
-
-    return $return;
+    return (!empty($img_all_metadata['woody-instagram'])) ? $img_all_metadata['woody-instagram'] : '';
 }
 
 /**
@@ -334,27 +316,16 @@ function getInstagramMetadata($attachment_id)
  * @return   is_instagram - Booléen
  *
  */
-function isWoodyInstagram($media_item, $is_instagram = false)
+function isWoodyInstagram($attachment_id)
 {
-    $media_types = [];
-
-    if (is_array($media_item)) {
-        $the_id = $media_item['ID'];
-    } elseif (is_numeric($media_item)) {
-        $the_id = $media_item;
-    }
-
-    $media_terms = get_the_terms($the_id, 'attachment_types');
-
-    if (!empty($media_terms)) {
-        foreach ($media_terms as $key => $media_term) {
-            $media_types[] = $media_term->slug;
-        }
-
-        if (in_array('instagram', $media_types)) {
-            $is_instagram = true;
+    $attachment_types = get_the_terms($attachment_id, 'attachment_types');
+    if (!empty($attachment_types)) {
+        foreach ($attachment_types as $attachment_type) {
+            if ($attachment_type->slug == 'instagram') {
+                return true;
+            }
         }
     }
 
-    return $is_instagram;
+    return false;
 }
