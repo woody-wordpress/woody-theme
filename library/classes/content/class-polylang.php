@@ -105,7 +105,9 @@ class WoodyTheme_Polylang
         __("Voir la vidéo", 'woody-theme');
         __("Affiner ma recherche", 'woody-theme');
         __("Voir les résultats sur la carte", 'woody-theme');
+        __('résultat', 'woody-theme');
         __("résultats", 'woody-theme');
+        __('Aucun résultat', 'woody-theme');
         __("Voir la carte", 'woody-theme');
         __("Partager sur Facebook", 'woody-theme');
         __("Partager sur Twitter", 'woody-theme');
@@ -126,15 +128,29 @@ class WoodyTheme_Polylang
         __("Désolé, aucun contenu touristique ne correspond à votre recherche", 'woody-theme');
         __("Désolé, aucune page ne correspond à votre recherche", 'woody-theme');
         __('Fermer', 'woody-theme');
-        __('résultat', 'woody-theme');
-        __('Aucun résultat', 'woody-theme');
         __('Menu', 'woody-theme');
         __('Merci de choisir une date', 'woody-theme');
-        __('France', 'woody-theme');
-        __('Nouvelle Aquitaine', 'woody-theme');
-        __('Dordogne', 'woody-theme');
         __('Comment venir ?', 'woody-theme');
         __('La page que vous recherchez est peut-être ici ?', 'woody-theme');
         __('Lire la suite', 'woody-theme');
+
+        // Weather
+        __('Bas', 'woody-theme');
+        __('Haut', 'woody-theme');
+        __('Vent', 'woody-theme');
+        __('Humidité', 'woody-theme');
+        __('ISO 0°', 'woody-theme');
+        __('Limite Pluie/Neige', 'woody-theme');
+        __('Ensoleillé', 'woody-theme');
+        __('Pluie', 'woody-theme');
+        __('Neige', 'woody-theme');
+        __('Grésil', 'woody-theme');
+        __('Venteux', 'woody-theme');
+        __('Brouillard', 'woody-theme');
+        __('Nuageux', 'woody-theme');
+        __('Éclaircies', 'woody-theme');
+        __('Grêle', 'woody-theme');
+        __('Tempête', 'woody-theme');
+        __('Verglas', 'woody-theme');
     }
 }
