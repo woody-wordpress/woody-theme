@@ -303,9 +303,23 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $this->context['body_class'] .= ' apirender apirender-playlist apirender-wordpress';
 
         /** ************************
-         * Appel apirender pour récupérer le DOM de la playlist
+         * Vérification pré-cochage
          ************************ **/
-        $playlistConfId = get_field('field_5b338ff331b17');
+        $playlist_type = get_field('field_5c7e59967f790');
+        $autoselect_id = '';
+        $existing_playlist = get_field('field_5c7e8bf42b9af');
+
+        if ($playlist_type == 'autoselect' && !empty($existing_playlist['existing_playlist_autoselect_url']) && !empty($existing_playlist['existing_playlist_autoselect_id'])) {
+            $post_id = url_to_postid($existing_playlist['existing_playlist_autoselect_url']);
+            $playlistConfId = get_field('field_5b338ff331b17', $post_id);
+            $autoselect_id = $existing_playlist['existing_playlist_autoselect_id'];
+        } else {
+            $autoselect_field = get_field('field_5c7e5bd174a2f');
+            if (!empty($autoselect_field['new_playlist_autoselect_id'])) {
+                $autoselect_id = $autoselect_field['new_playlist_autoselect_id'];
+            }
+            $playlistConfId = get_field('field_5b338ff331b17');
+        }
 
         // allowed parameters for Wordpress playlists need to be added here
         $checkMethod = !empty($_POST) ? INPUT_POST : INPUT_GET;
@@ -334,6 +348,11 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             if (!$param) {
                 unset($query[$key]);
             }
+        }
+
+        // Si un identifiant de précochage est présent, on le passe à l'apirender
+        if (!empty($autoselect_id)) {
+            $query['autoselect_id'] = $autoselect_id;
         }
 
         // Get from Apirender

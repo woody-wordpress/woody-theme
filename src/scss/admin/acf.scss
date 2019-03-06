@@ -620,3 +620,14 @@
         }
     }
 }
+
+// Masquage des champs de précochage de playlist dans une section => Mise en avant de fiches auto
+.acf-field-5afd2c6916ecb {
+
+    .acf-field-5c7e5bd174a2f,
+    .acf-field-5c7faaa8c8c7a,
+    .acf-field-5c7e59967f790 {
+        display: none !important;
+        pointer-events: none !important;
+    }
+}
