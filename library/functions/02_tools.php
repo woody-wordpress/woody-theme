@@ -123,7 +123,7 @@ function rc_getVideoThumbnail($url, $type = '', $width = 427, $height = 240)
         // Get Thumbs by API
         if (!empty($image) && strpos($image, 'http') !== false) {
             $hash = str_replace(array("+", "/"), array("-", "_"), base64_encode($image));
-            $thumbnail = 'https://api.tourism-system.com/resize/crop/' . $width . '/' . $height . '/80/' . $hash . '/image.jpg';
+            $thumbnail = 'https://api.tourism-system.com/resize/crop/' . $width . '/' . $height . '/75/' . $hash . '/image.jpg';
         }
     }
 
@@ -221,7 +221,7 @@ function rc_getImageResizedFromApi($width, $height, $image_path)
 {
     if (!empty($image_path) && strpos($image_path, 'http') !== false && strpos($image_path, 'rc-dev') == false) {
         $hash_path = str_replace(array("+", "/"), array("-", "_"), base64_encode($image_path));
-        $image_croped_path = 'https://api.tourism-system.com/resize/crop/' . $width . '/' . $height . '/80/' . $hash_path . '/image.jpg';
+        $image_croped_path = 'https://api.tourism-system.com/resize/crop/' . $width . '/' . $height . '/75/' . $hash_path . '/image.jpg';
     } else {
         $image_croped_path = $image_path;
     }
