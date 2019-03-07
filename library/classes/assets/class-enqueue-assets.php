@@ -258,6 +258,10 @@ class WoodyTheme_Enqueue_Assets
             $main_css = (!empty($main_css)) ? $main_css : 'main';
             wp_enqueue_style('main-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/' . $main_css . '.css'), [], '', 'all');
         }
+
+        $print_css = apply_filters('woody_theme_stylesheets', 'print');
+        $print_css = (!empty($print_css)) ? $print_css : 'print';
+        wp_enqueue_style('print-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/' . $print_css . '.css'), [], '', 'print');
     }
 
     public function enqueueAdminAssets()

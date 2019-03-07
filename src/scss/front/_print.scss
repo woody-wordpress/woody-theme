@@ -1,0 +1,75 @@
+body {
+    padding-top: 20px !important;
+}
+
+body .cc-revoke.cc-bottom,
+.scrollDown,
+.woody_subfooter,
+.responsive-top-header,
+.claims-blocks-wrapper,
+.woody-component-headnavs,
+.woody-component-mobilenavs,
+.woody-component-button,
+.woody-component-focus,
+.woody-component-gallery,
+.woody-component-socialwall,
+.woody-component-hero .hero-bg,
+.sharing-links,
+.tourism-detail-hero-slider,
+.home-slider {
+    display: none;
+}
+
+.section-texts {
+
+    >span,
+    h2 {
+        display: block !important;
+        text-align: center !important;
+    }
+}
+
+.woody-component-hero {
+    height: auto !important;
+
+    >.grid-container {
+        padding: 0 !important;
+        position: static !important;
+        transform: none !important;
+    }
+}
+
+.page-section .section {
+    padding: 10px !important;
+}
+
+.woody-component-teaser .grid-x>.cell,
+.section-layout-wrapper>.grid-x>.cell {
+    width: 100% !important;
+}
+
+// Fiche SIT
+.single-touristic_sheet {
+
+    .sidebar-issue-report,
+    .sidebar-contact-form-section {
+        display: none !important;
+    }
+
+    .panel-title-responsive {
+        text-align: left !important;
+    }
+
+    .panel-title-responsive_text {
+        font-size: 32px;
+    }
+
+    .tourism-detail-sidebar-list>li {
+        height: auto !important;
+    }
+}
+
+// Paylist
+.apirender #responsive-layout-switcher {
+    display: none !important;
+}
