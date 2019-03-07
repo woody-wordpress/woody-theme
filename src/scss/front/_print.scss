@@ -1,6 +1,64 @@
 body {
-    padding-top: 20px !important;
+    width: auto !important;
+    margin: auto !important;
+    font-family: serif;
+    font-size: 12pt;
+    background-color: #fff !important;
+    color: #000 !important;
 }
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+blockquote,
+ul,
+ol {
+    color: #000 !important;
+    margin: auto !important;
+}
+
+.print {
+    display: block;
+    /* affichage des éléments de classe print */
+}
+
+p,
+blockquote {
+    orphans: 3;
+    /* pas de ligne seule en bas */
+    widows: 3;
+    /* pas de ligne seule en haut */
+}
+
+blockquote,
+ul,
+ol {
+    page-break-inside: avoid;
+    /* pas de coupure dans ces élements */
+}
+
+h1,
+h2,
+h3,
+caption {
+    page-break-after: avoid;
+    /* pas de saut après ces éléments */
+}
+
+a {
+    color: #000 !important;
+    text-decoration: underline !important;
+}
+
+a[href]:after {
+    content: " ("attr(href) ")";
+    /* affichage des URL des liens */
+}
+
 
 body .cc-revoke.cc-bottom,
 .scrollDown,
@@ -17,6 +75,8 @@ body .cc-revoke.cc-bottom,
 .sharing-links,
 .tourism-detail-hero-slider,
 .woody_list_grid,
+.mobile-header,
+.reveal,
 .home-slider {
     display: none;
 }
@@ -41,36 +101,34 @@ body .cc-revoke.cc-bottom,
 }
 
 .page-section .section {
-    padding: 10px !important;
+    padding: 0;
 }
 
-.woody-component-teaser .grid-x>.cell,
-.section-layout-wrapper>.grid-x>.cell {
-    width: 100% !important;
-}
+// .woody-component-teaser .grid-x>.cell,
+// .section-layout-wrapper>.grid-x>.cell {
+//     width: 100% !important;
+// }
 
-// Fiche SIT
-.single-touristic_sheet {
+// Tourisme
+.api-render-container {
 
+    .pl-paint-overlay,
+    .tourism-detail-hero-slider,
+    .sheet-navbar-checkpoint,
     .sidebar-issue-report,
+    #gallery,
     .sidebar-contact-form-section {
         display: none !important;
     }
 
-    .panel-title-responsive {
-        text-align: left !important;
+    .tourism-detail-sidebar-list,
+    #description {
+        li {
+            list-style: none;
+        }
     }
 
-    .panel-title-responsive_text {
-        font-size: 32px;
+    #responsive-layout-switcher {
+        display: none !important;
     }
-
-    .tourism-detail-sidebar-list>li {
-        height: auto !important;
-    }
-}
-
-// Paylist
-.apirender #responsive-layout-switcher {
-    display: none !important;
 }
