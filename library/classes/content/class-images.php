@@ -539,7 +539,7 @@ class WoodyTheme_Images
 
                 $image_url = wp_get_attachment_image_url($attachment_id, $ratio_name);
             } else {
-                $image_url = 'https://api.tourism-system.com/resize/force_clip/' . $size['width'] . '/' . $size['height'] . '/70/aHR0cHM6Ly9hcGkudG91cmlzbS1zeXN0ZW0uY29tL3N0YXRpYy9hc3NldHMvaW1hZ2VzL3Jlc2l6ZXIvaW1nXzQwNC5qcGc=/404.jpg';
+                $image_url = 'https://api.tourism-system.com/resize/clip/' . $size['width'] . '/' . $size['height'] . '/70/aHR0cHM6Ly9hcGkudG91cmlzbS1zeXN0ZW0uY29tL3N0YXRpYy9hc3NldHMvaW1hZ2VzL3Jlc2l6ZXIvaW1nXzQwNC5qcGc=/404.jpg';
             }
         }
 
