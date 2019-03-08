@@ -496,13 +496,6 @@ class WoodyTheme_Images
 
     public function cropImageAPI(WP_REST_Request $request)
     {
-        // TODO: A supprimer en Polylang 2.6
-        // Bugfix pour faire fonctionner les hooks de Polylang
-        if (!isset(PLL()->posts)) {
-            $polylang = PLL();
-            $polylang->posts = new \PLL_CRUD_Posts($polylang);
-        }
-
         /**
         * Exemple : http://www.superot.wp.rc-dev.com/wp-json/woody/crop/382/ratio_square
         */
