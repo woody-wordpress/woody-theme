@@ -305,16 +305,17 @@ function rc_is($val, $keys = array(), $default = null)
  */
 function rc_xmlToArray($xml, $options = array())
 {
+    $xml = new SimpleXMLElement($xml);
     $defaults = array(
-      'namespaceSeparator' => ':',//you may want this to be something other than a colon
-      'attributePrefix' => '@',   //to distinguish between attributes and nodes with the same name
-      'alwaysArray' => array(),   //array of xml tag names which should always become arrays
-      'autoArray' => true,        //only create arrays for tags which appear more than once
-      'textContent' => '$',       //key used for the text content of elements
-      'autoText' => true,         //skip textContent key if node has no attributes or child nodes
-      'keySearch' => false,       //optional search and replace on tag and attribute names
-      'keyReplace' => false       //replace values for above search values (as passed to str_replace())
-  );
+        'namespaceSeparator' => ':',//you may want this to be something other than a colon
+        'attributePrefix' => '@',   //to distinguish between attributes and nodes with the same name
+        'alwaysArray' => array(),   //array of xml tag names which should always become arrays
+        'autoArray' => true,        //only create arrays for tags which appear more than once
+        'textContent' => '$',       //key used for the text content of elements
+        'autoText' => true,         //skip textContent key if node has no attributes or child nodes
+        'keySearch' => false,       //optional search and replace on tag and attribute names
+        'keyReplace' => false       //replace values for above search values (as passed to str_replace())
+    );
     $options = array_merge($defaults, $options);
     $namespaces = $xml->getDocNamespaces();
     $namespaces[''] = null; //add base (empty) namespace
@@ -380,11 +381,10 @@ function rc_xmlToArray($xml, $options = array())
     }
 
     //stick it all together
-    $propertiesArray = !$options['autoText'] || $attributesArray || $tagsArray || ($plainText === '')
-          ? array_merge($attributesArray, $tagsArray, $textContentArray) : $plainText;
+    $propertiesArray = !$options['autoText'] || $attributesArray || $tagsArray || ($plainText === '') ? array_merge($attributesArray, $tagsArray, $textContentArray) : $plainText;
 
     //return node as array
     return array(
-      $xml->getName() => $propertiesArray
-  );
+        $xml->getName() => $propertiesArray
+    );
 }
