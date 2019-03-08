@@ -151,22 +151,39 @@ class WoodyTheme_Menus
                     $post =  get_post($post);
                 }
                 if (!is_object($post)) {
-                    continue;
+                    if (is_array($post) && !empty($post['url'])){
+                        $postid = url_to_postid($post['url']);
+                        if (!empty($postid)){
+                            $post = get_post($postid);
+                        }else{
+                            $return[$post_key] = [
+                                'the_id' => 'external',
+                                'the_url' => $post['url'],
+                                'the_target' => '_blank',
+                                'the_fields' => [
+                                    'title' => (!empty($post['title'])) ? $post['title'] : '' ,
+                                ]
+                            ];
+                        }
+                    }else{
+                        continue;
+                    }
                 }
-                $return[$post_key] = [
-                    'the_id' => $post->ID,
-                    'the_url' => get_permalink($post->ID),
-                ];
+                if (is_object($post)){
+                    $return[$post_key] = [
+                        'the_id' => $post->ID,
+                        'the_url' => get_permalink($post->ID),
+                    ];
 
-                $return[$post_key]['the_fields']['title'] = (!empty(get_field('in_menu_title', $post->ID))) ? get_field('in_menu_title', $post->ID) : $post->post_title;
-                $return[$post_key]['the_fields']['woody_icon'] = (!empty(get_field('in_menu_woody_icon', $post->ID))) ? get_field('in_menu_woody_icon', $post->ID) : '';
-                $return[$post_key]['the_fields']['icon_type'] = 'picto';
-                $return[$post_key]['the_fields']['pretitle'] = (!empty(get_field('in_menu_pretitle', $post->ID))) ? get_field('in_menu_pretitle', $post->ID) : '';
-                $return[$post_key]['the_fields']['subtitle'] = (!empty(get_field('in_menu_subtitle', $post->ID))) ? get_field('in_menu_subtitle', $post->ID) : '';
-                $return[$post_key]['img'] = (!empty(get_field('in_menu_img', $post->ID))) ? get_field('in_menu_img', $post->ID) : get_field('field_5b0e5ddfd4b1b', $post->ID);
-                $return[$post_key]['is_active'] = ($post->ID === $root_ancestor) ? true : ($post->ID === $current_id) ? true : false;
+                    $return[$post_key]['the_fields']['title'] = (!empty(get_field('in_menu_title', $post->ID))) ? get_field('in_menu_title', $post->ID) : $post->post_title;
+                    $return[$post_key]['the_fields']['woody_icon'] = (!empty(get_field('in_menu_woody_icon', $post->ID))) ? get_field('in_menu_woody_icon', $post->ID) : '';
+                    $return[$post_key]['the_fields']['icon_type'] = 'picto';
+                    $return[$post_key]['the_fields']['pretitle'] = (!empty(get_field('in_menu_pretitle', $post->ID))) ? get_field('in_menu_pretitle', $post->ID) : '';
+                    $return[$post_key]['the_fields']['subtitle'] = (!empty(get_field('in_menu_subtitle', $post->ID))) ? get_field('in_menu_subtitle', $post->ID) : '';
+                    $return[$post_key]['img'] = (!empty(get_field('in_menu_img', $post->ID))) ? get_field('in_menu_img', $post->ID) : get_field('field_5b0e5ddfd4b1b', $post->ID);
+                    $return[$post_key]['is_active'] = ($post->ID === $root_ancestor) ? true : ($post->ID === $current_id) ? true : false;
+                }
             }
-
             return $return;
         }
     }
