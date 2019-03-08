@@ -798,17 +798,19 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
         foreach ($sheet_data['items'] as $key => $item) {
             $data = [
                 'title' => (!empty($item['title'])) ? $item['title'] : '',
-                'img' => [
-                    'resizer' => true,
-                    'url' => (!empty($item['img']['url'])) ? $item['img']['url']['manual'] : '',
-                    'alt' => (!empty($item['img']['alt'])) ? $item['img']['alt'] : '',
-                    'title' => (!empty($item['img']['title'])) ? $item['img']['title'] : ''
-                ],
                 'link' =>[
                     'url' => (!empty($item['link'])) ? $item['link'] : '',
                     'target' => $item['targetBlank'] ? '_blank' : '',
                 ]
             ];
+            if (!empty($layout['display_img'])) {
+                $data['img'] = [
+                    'resizer' => true,
+                    'url' => (!empty($item['img']['url'])) ? $item['img']['url']['manual'] : '',
+                    'alt' => (!empty($item['img']['alt'])) ? $item['img']['alt'] : '',
+                    'title' => (!empty($item['img']['title'])) ? $item['img']['title'] : ''
+                ];
+            }
 
             if (!empty($item['deals'])) {
                 $data['title'] = $item['deals']['list'][0]['nom'][$lang] ;
@@ -958,7 +960,6 @@ function getPagePreview($item_wrapper, $item)
 
     $data['the_peoples'] = $item->get_field('field_5b6d54a10381f');
 
-
     if (!empty($item_wrapper['display_button'])) {
         $data['link']['link_label'] = getFieldAndFallBack($item, 'focus_button_title', $item);
         if (empty($data['link']['link_label'])) {
@@ -966,10 +967,13 @@ function getPagePreview($item_wrapper, $item)
         }
     }
 
+    if (!empty($item_wrapper['display_img'])) {
+        $data['img'] = getFieldAndFallback($item, 'focus_img', $item, 'field_5b0e5ddfd4b1b');
+    }
+
     $data['location'] = [];
     $data['location']['lat'] = (!empty($item->get_field('post_latitude'))) ? $item->get_field('post_latitude') : '';
     $data['location']['lng'] = (!empty($item->get_field('post_longitude'))) ? $item->get_field('post_longitude') : '';
-    $data['img'] = getFieldAndFallback($item, 'focus_img', $item, 'field_5b0e5ddfd4b1b');
     $data['img']['attachment_more_data'] = (!empty($data['img'])) ? getAttachmentMoreData($data['img']['ID']) : '';
     $data['link']['url'] = $item->get_path();
 

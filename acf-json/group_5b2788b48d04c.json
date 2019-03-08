@@ -201,6 +201,25 @@
             "save_custom": 0
         },
         {
+            "key": "field_5c814940fba28",
+            "label": "Afficher l'image",
+            "name": "display_img",
+            "type": "true_false",
+            "instructions": "<small>Attention, les mises en avant avec le texte sur l'image ne fonctionnent pas si l'image est masquée<\/small>",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_5b88eae6c0adc",
             "label": "Afficher les boutons \"Lire la suite\"",
             "name": "display_button",
@@ -209,7 +228,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -405,5 +424,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1549360103
+    "modified": 1551977005
 }

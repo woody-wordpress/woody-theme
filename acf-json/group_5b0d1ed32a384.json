@@ -380,25 +380,6 @@
             ]
         },
         {
-            "key": "field_5b88ec7438927",
-            "label": "Afficher les boutons \"Lire la suite\"",
-            "name": "display_button",
-            "type": "true_false",
-            "instructions": "<small>ne s'applique qu'aux contenus existants<\/small>",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 1,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
             "key": "field_5b88fcbee7c5c",
             "label": "Affichage",
             "name": "display_elements",
@@ -429,12 +410,51 @@
             },
             "allow_custom": 0,
             "default_value": [
-                "description"
+                "description",
+                "img"
             ],
             "layout": "horizontal",
             "toggle": 0,
             "return_format": "value",
             "save_custom": 0
+        },
+        {
+            "key": "field_5c8219ed426d8",
+            "label": "Afficher l'image",
+            "name": "display_img",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5b88ec7438927",
+            "label": "Afficher les boutons \"Lire la suite\"",
+            "name": "display_button",
+            "type": "true_false",
+            "instructions": "<small>ne s'applique qu'aux contenus existants<\/small>",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         {
             "key": "field_5b87f3e3bc5cf",
@@ -617,6 +637,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-
-    "modified": 1549299313
+    "modified": 1552030872
 }
