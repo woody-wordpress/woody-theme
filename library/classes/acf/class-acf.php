@@ -57,6 +57,8 @@ class WoodyTheme_ACF
 
         add_filter('acf/fields/post_object/result', [$this, 'postObjectAcfResults'], 10, 4);
         add_filter('acf/fields/page_link/result', [$this, 'postObjectAcfResults'], 10, 4);
+
+        add_filter('acf/load_value/type=gallery', [$this, 'pllGalleryLoadField'], 10, 3);
     }
 
     /**
@@ -83,6 +85,16 @@ class WoodyTheme_ACF
         if (strpos($screen->id, 'acf-options') !== false) {
             delete_transient('woody_acf_options');
         }
+    }
+
+    public function pllGalleryLoadField($value, $post_id, $field)
+    {
+        if (!empty($value)) {
+            foreach ($value as $id_key => $id) {
+                $value[$id_key] = pll_get_post($id);
+            }
+        }
+        return $value;
     }
 
     /**
