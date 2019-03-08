@@ -9,9 +9,6 @@
 class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 {
     protected $twig_tpl = '';
-    // protected $post = null;
-    // protected $post_id = null;
-    // protected $post_title = null;
 
     public function __construct()
     {
@@ -349,11 +346,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
         // Return template
         if (empty($this->context['playlist_tourism']['content'])) {
-            if (is_admin()) {
-                $this->context['playlist_tourism']['content'] = '<center style="margin: 80px 0">Playlist non configurée</center>';
-            } else {
-                $this->context['playlist_tourism']['content'] = '';
-            }
+            $this->context['playlist_tourism']['content'] = '<center style="margin: 80px 0">Playlist non configurée</center>';
         }
     }
 
@@ -365,7 +358,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $headers = [];
         $headers['xkey'] = [];
         if (!empty($this->context['playlist_tourism']['modified'])) {
-            $headers['Last-Modified'] =  gmdate('D, d M Y H:i:s', strtotime($this->context['playlist_tourism']['modified'])) . ' GMT';
+            $headers['Last-Modified'] = gmdate('D, d M Y H:i:s', strtotime($this->context['playlist_tourism']['modified'])) . ' GMT';
         }
         if (!empty($this->context['playlist_tourism']['playlistId'])) {
             $headers['xkey'][] = 'ts-idplaylist-' . $this->context['playlist_tourism']['playlistId'];
