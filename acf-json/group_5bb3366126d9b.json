@@ -37,8 +37,8 @@
                 "field_5b27a25103e43",
                 "field_5b27a67203e48",
                 "field_5b2917f0ff061",
-                "field_5b88eae6c0adc",
-                "field_5c814940fba28"
+                "field_5c814940fba28",
+                "field_5b88eae6c0adc"
             ],
             "display": "seamless",
             "layout": "block",
@@ -233,5 +233,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1552042804
+    "modified": 1552043769
 }
