@@ -1,17 +1,17 @@
 <?php
 /**
- * Toolbox
- *
- * @package WoodyTheme
- * @since WoodyTheme 1.0.0
- */
+* Toolbox
+*
+* @package WoodyTheme
+* @since WoodyTheme 1.0.0
+*/
 
 /**
- * [rc_getVideoID Récupérer l'id de vidéo]
- * @param  string $url  [Url de la vidéo]
- * @param  string $type [Type de la vidéo]
- * @return string       [Retourne l'id]
- */
+* [rc_getVideoID Récupérer l'id de vidéo]
+* @param  string $url  [Url de la vidéo]
+* @param  string $type [Type de la vidéo]
+* @return string       [Retourne l'id]
+*/
 function rc_getVideoID($url, $type = '')
 {
     // If Type == 0 or 1 or 2
@@ -26,8 +26,8 @@ function rc_getVideoID($url, $type = '')
     if (strpos($url, 'http') !== false) {
         $url = parse_url($url);
         switch ($type) {
-          // Youtube
-          case 'youtube':
+            // Youtube
+            case 'youtube':
             if ($url['host'] == 'youtu.be') {
                 $id = str_replace('/', '', $url['path']);
             } elseif (strpos($url['path'], 'embed') !== false) {
@@ -42,8 +42,8 @@ function rc_getVideoID($url, $type = '')
                 }
             }
             break;
-          // Vimeo
-          case 'vimeo':
+            // Vimeo
+            case 'vimeo':
             if (!empty($url['path'])) {
                 $path = explode('/', $url['path']);
                 if (!empty($path[1])) {
@@ -51,8 +51,8 @@ function rc_getVideoID($url, $type = '')
                 }
             }
             break;
-          // Dailymotion : ne fonctionne pas avec fresco.js
-          case 'dailymotion':
+            // Dailymotion : ne fonctionne pas avec fresco.js
+            case 'dailymotion':
             if (!empty($url['path'])) {
                 $path = explode('/', $url['path']);
                 if (!empty(end($path))) {
@@ -61,7 +61,7 @@ function rc_getVideoID($url, $type = '')
                 }
             }
             break;
-          default:
+            default:
             break;
         }
     }
@@ -70,13 +70,13 @@ function rc_getVideoID($url, $type = '')
 }
 
 /**
- * [rc_getVideoThumbnail Récupérer la miniature d'une vidéo]
- * @param  string  $url    [Url de la video]
- * @param  string  $type   [Type de la vidéo]
- * @param  integer $width  [Largeur de la vidéo]
- * @param  integer $height [Hauteur de la vidéo]
- * @return string          [Retourne l'url de la miniature]
- */
+* [rc_getVideoThumbnail Récupérer la miniature d'une vidéo]
+* @param  string  $url    [Url de la video]
+* @param  string  $type   [Type de la vidéo]
+* @param  integer $width  [Largeur de la vidéo]
+* @param  integer $height [Hauteur de la vidéo]
+* @return string          [Retourne l'url de la miniature]
+*/
 function rc_getVideoThumbnail($url, $type = '', $width = 427, $height = 240)
 {
     // If Type == 0 or 1 or 2
@@ -91,27 +91,27 @@ function rc_getVideoThumbnail($url, $type = '', $width = 427, $height = 240)
     $id = rc_getVideoID($url, $type);
     if (!empty($id)) {
         switch ($type) {
-          // Youtube
-          case 'youtube':
+            // Youtube
+            case 'youtube':
             $image = 'https://img.youtube.com/vi/'. $id .'/hqdefault.jpg';
             break;
-          // Vimeo
-          case 'vimeo':
+            // Vimeo
+            case 'vimeo':
             $curl = rc_curl("https://vimeo.com/api/v2/video/". $id .".php");
             if (!empty($curl)) {
                 $image = unserialize($curl);
                 $image = $image[0]['thumbnail_large'];
             }
             break;
-          // Dailymotion : ne fonctionne pas avec fresco.js
-          case 'dailymotion':
+            // Dailymotion : ne fonctionne pas avec fresco.js
+            case 'dailymotion':
             $curl = rc_curl("https://api.dailymotion.com/video/". $id ."?fields=thumbnail_large_url");
             if (!empty($curl)) {
                 $image = json_decode($curl);
                 $image = $image->thumbnail_large_url;
             }
             break;
-          default:
+            default:
             break;
         }
 
@@ -131,12 +131,12 @@ function rc_getVideoThumbnail($url, $type = '', $width = 427, $height = 240)
 }
 
 /**
- * [rc_getVideoIframe Récupérer l'iframe' d'une vidéo]
- * @param  string  $url      [Url de la vidéo]
- * @param  string  $type     [Type de la vidéo]
- * @param  boolean $autoplay [Ajoute l'autoplay si vrai]
- * @return string            [Retourne l'url source de l'iframe]
- */
+* [rc_getVideoIframe Récupérer l'iframe' d'une vidéo]
+* @param  string  $url      [Url de la vidéo]
+* @param  string  $type     [Type de la vidéo]
+* @param  boolean $autoplay [Ajoute l'autoplay si vrai]
+* @return string            [Retourne l'url source de l'iframe]
+*/
 function rc_getVideoIframe($url, $type = '', $autoplay = false)
 {
     $embed_url = '';
@@ -153,30 +153,30 @@ function rc_getVideoIframe($url, $type = '', $autoplay = false)
         $id = rc_getVideoID($url, $type);
         if (!empty($id)) {
             switch ($type) {
-            // Youtube
-            case 'youtube':
-              $embed_url = '//www.youtube.com/embed/'. $id .'?rel=0';
-              if ($autoplay) {
-                  $embed_url .= '&autoplay=1&showinfo=0&modestbranding=1';
-              }
-              break;
-            // Vimeo
-            case 'vimeo':
-              $embed_url = '//player.vimeo.com/video/' . $id;
-              if ($autoplay) {
-                  $embed_url .= '?autoplay=1';
-              }
-              break;
-            // Dailymotion : ne fonctionne pas avec fresco.js
-            case 'dailymotion':
-              $embed_url = '//www.dailymotion.com/embed/video/' . $id;
-              if ($autoplay) {
-                  $embed_url .= '?autoPlay=1';
-              }
-              break;
-            default:
-              break;
-          }
+                // Youtube
+                case 'youtube':
+                $embed_url = '//www.youtube.com/embed/'. $id .'?rel=0';
+                if ($autoplay) {
+                    $embed_url .= '&autoplay=1&showinfo=0&modestbranding=1';
+                }
+                break;
+                // Vimeo
+                case 'vimeo':
+                $embed_url = '//player.vimeo.com/video/' . $id;
+                if ($autoplay) {
+                    $embed_url .= '?autoplay=1';
+                }
+                break;
+                // Dailymotion : ne fonctionne pas avec fresco.js
+                case 'dailymotion':
+                $embed_url = '//www.dailymotion.com/embed/video/' . $id;
+                if ($autoplay) {
+                    $embed_url .= '?autoPlay=1';
+                }
+                break;
+                default:
+                break;
+            }
         }
     }
 
@@ -199,11 +199,11 @@ function rc_getVideoType($url)
 }
 
 /**
- * [rc_getImageResizedFromApi  Redimensionner une image via l'API]
- * @param  array  $image_style [Nom du style d'image]
- * @param  string $image_path  [Url de l'image]
- * @return string              [Url de l'image redimensionnée]
- */
+* [rc_getImageResizedFromApi  Redimensionner une image via l'API]
+* @param  array  $image_style [Nom du style d'image]
+* @param  string $image_path  [Url de l'image]
+* @return string              [Url de l'image redimensionnée]
+*/
 function rc_getImageStyleByApi($image_style, $image_path)
 {
     $image_style_infos = rc_getImageStyle($image_style);
@@ -212,11 +212,11 @@ function rc_getImageStyleByApi($image_style, $image_path)
 }
 
 /**
- * [rc_getImageResizedFromApi description]
- * @param  [type] $image_style [description]
- * @param  [type] $image       [description]
- * @return [type]              [description]
- */
+* [rc_getImageResizedFromApi description]
+* @param  [type] $image_style [description]
+* @param  [type] $image       [description]
+* @return [type]              [description]
+*/
 function rc_getImageResizedFromApi($width, $height, $image_path)
 {
     if (!empty($image_path) && strpos($image_path, 'http') !== false && strpos($image_path, 'rc-dev') == false) {
@@ -231,10 +231,10 @@ function rc_getImageResizedFromApi($width, $height, $image_path)
 
 
 /**
- * [rc_curl description]
- * @param  [type] $url [description]
- * @return [type]      [description]
- */
+* [rc_curl description]
+* @param  [type] $url [description]
+* @return [type]      [description]
+*/
 function rc_curl($url)
 {
     $ch = curl_init();
@@ -258,11 +258,11 @@ function rc_curl($url)
 }
 
 /**
- * [rc_getAlias Transforme du texte en alias]
- * @param  string $str     [Chaine de caractere à transformer]
- * @param  string $charset [Charset]
- * @return string          [Alias de la chaine d'origine]
- */
+* [rc_getAlias Transforme du texte en alias]
+* @param  string $str     [Chaine de caractere à transformer]
+* @param  string $charset [Charset]
+* @return string          [Alias de la chaine d'origine]
+*/
 function rc_getAlias($str, $charset='utf-8')
 {
     $str = htmlentities($str, ENT_NOQUOTES, $charset);
@@ -277,12 +277,12 @@ function rc_getAlias($str, $charset='utf-8')
 }
 
 /**
- * [rc_is Check if every $key isset in an array]
- * @param  [type] $val     [description]
- * @param  array  $keys    [description]
- * @param  [type] $default [description]
- * @return array          [description]
- */
+* [rc_is Check if every $key isset in an array]
+* @param  [type] $val     [description]
+* @param  array  $keys    [description]
+* @param  [type] $default [description]
+* @return array          [description]
+*/
 function rc_is($val, $keys = array(), $default = null)
 {
     foreach ($keys as $key) {
@@ -297,94 +297,62 @@ function rc_is($val, $keys = array(), $default = null)
 }
 
 /**
- * rc_xmlToArray
- *
- * @param [type] $xml
- * @param array $options
- * @return void
- */
-function rc_xmlToArray($xml, $options = array())
+* rc_xmlToArray
+*
+* @param [type] $xmlstr
+* @return void
+*/
+
+function rc_xmlToArray($xmlstr)
 {
-    $xml = new SimpleXMLElement($xml);
-    $defaults = array(
-        'namespaceSeparator' => ':',//you may want this to be something other than a colon
-        'attributePrefix' => '@',   //to distinguish between attributes and nodes with the same name
-        'alwaysArray' => array(),   //array of xml tag names which should always become arrays
-        'autoArray' => true,        //only create arrays for tags which appear more than once
-        'textContent' => '$',       //key used for the text content of elements
-        'autoText' => true,         //skip textContent key if node has no attributes or child nodes
-        'keySearch' => false,       //optional search and replace on tag and attribute names
-        'keyReplace' => false       //replace values for above search values (as passed to str_replace())
-    );
-    $options = array_merge($defaults, $options);
-    $namespaces = $xml->getDocNamespaces();
-    $namespaces[''] = null; //add base (empty) namespace
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlstr);
+    $root = $doc->documentElement;
+    $output = rc_domnodeToArray($root);
+    $output['@root'] = $root->tagName;
+    return $output;
+}
 
-    //get attributes from all namespaces
-    $attributesArray = array();
-    foreach ($namespaces as $prefix => $namespace) {
-        foreach ($xml->attributes($namespace) as $attributeName => $attribute) {
-            //replace characters in attribute name
-            if ($options['keySearch']) {
-                $attributeName =
-                  str_replace($options['keySearch'], $options['keyReplace'], $attributeName);
-            }
-            $attributeKey = $options['attributePrefix']
-                  . ($prefix ? $prefix . $options['namespaceSeparator'] : '')
-                  . $attributeName;
-            $attributesArray[$attributeKey] = (string)$attribute;
-        }
-    }
-
-    //get child nodes from all namespaces
-    $tagsArray = array();
-    foreach ($namespaces as $prefix => $namespace) {
-        foreach ($xml->children($namespace) as $childXml) {
-            //recurse into child nodes
-            $childArray = rc_xmlToArray($childXml, $options);
-            list($childTagName, $childProperties) = each($childArray);
-
-            //replace characters in tag name
-            if ($options['keySearch']) {
-                $childTagName =
-                  str_replace($options['keySearch'], $options['keyReplace'], $childTagName);
-            }
-            //add namespace prefix, if any
-            if ($prefix) {
-                $childTagName = $prefix . $options['namespaceSeparator'] . $childTagName;
-            }
-
-            if (!isset($tagsArray[$childTagName])) {
-                //only entry with this key
-                //test if tags of this type should always be arrays, no matter the element count
-                $tagsArray[$childTagName] =
-                      in_array($childTagName, $options['alwaysArray']) || !$options['autoArray']
-                      ? array($childProperties) : $childProperties;
-            } elseif (
-              is_array($tagsArray[$childTagName]) && array_keys($tagsArray[$childTagName])
-              === range(0, count($tagsArray[$childTagName]) - 1)
-          ) {
-                //key already exists and is integer indexed array
-                $tagsArray[$childTagName][] = $childProperties;
-            } else {
-                //key exists so convert to integer indexed array with previous value in position 0
-                $tagsArray[$childTagName] = array($tagsArray[$childTagName], $childProperties);
+function rc_domnodeToArray($node)
+{
+    $output = array();
+    switch ($node->nodeType) {
+        case XML_CDATA_SECTION_NODE:
+        case XML_TEXT_NODE:
+        $output = trim($node->textContent);
+        break;
+        case XML_ELEMENT_NODE:
+        for ($i=0, $m=$node->childNodes->length; $i<$m; $i++) {
+            $child = $node->childNodes->item($i);
+            $v = rc_domnodeToArray($child);
+            if (isset($child->tagName)) {
+                $t = $child->tagName;
+                if (!isset($output[$t])) {
+                    $output[$t] = array();
+                }
+                $output[$t][] = $v;
+            } elseif ($v || $v === '0') {
+                $output = (string) $v;
             }
         }
+        if ($node->attributes->length && !is_array($output)) { //Has attributes but isn't an array
+            $output = array('@content'=>$output); //Change output into an array.
+        }
+        if (is_array($output)) {
+            if ($node->attributes->length) {
+                $a = array();
+                foreach ($node->attributes as $attrName => $attrNode) {
+                    $a[$attrName] = (string) $attrNode->value;
+                }
+                $output['@attributes'] = $a;
+            }
+            foreach ($output as $t => $v) {
+                if (is_array($v) && count($v)==1 && $t!='@attributes') {
+                    $output[$t] = $v[0];
+                }
+            }
+        }
+        break;
     }
-
-    //get text content of node
-    $textContentArray = array();
-    $plainText = trim((string)$xml);
-    if ($plainText !== '') {
-        $textContentArray[$options['textContent']] = $plainText;
-    }
-
-    //stick it all together
-    $propertiesArray = !$options['autoText'] || $attributesArray || $tagsArray || ($plainText === '') ? array_merge($attributesArray, $tagsArray, $textContentArray) : $plainText;
-
-    //return node as array
-    return array(
-        $xml->getName() => $propertiesArray
-    );
+    return $output;
 }
