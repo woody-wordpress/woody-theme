@@ -124,3 +124,14 @@ textarea.notAllowed {
         }
     }
 }
+
+#post,
+.media-modal-content {
+
+    // On désactive le changement de langue des nl'édition des médias dans la galerie
+    .media_lang_choice {
+        opacity: .5;
+        pointer-events: none;
+    }
+
+}
