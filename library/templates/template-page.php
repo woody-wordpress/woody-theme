@@ -9,9 +9,9 @@
 class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 {
     protected $twig_tpl = '';
-    protected $post = null;
-    protected $post_id = null;
-    protected $post_title = null;
+    // protected $post = null;
+    // protected $post_id = null;
+    // protected $post_title = null;
 
     public function __construct()
     {
@@ -45,23 +45,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         if (!empty(is_404())) {
             $this->page404Context();
         } else {
-            /******************************************************************************
-             * Sommes nous dans le cas d'une page miroir ?
-             ******************************************************************************/
-            $mirror_page = getAcfGroupFields('group_5c6432b3c0c45');
-            if (!empty($mirror_page['mirror_page_reference'])) {
-                $this->post_id = $mirror_page['mirror_page_reference'];
-                $this->post = get_post($this->post_id);
-                $this->post_title = get_the_title();
-                $this->context['metas'][] = sprintf('<link rel="canonical" href="%s" />', get_permalink($this->post_id));
-            } else {
-                $this->post = get_post();
-                $this->post_title = $this->post->post_title;
-                $this->post_id = $this->post->ID;
-            }
-
-            $this->timberpost = Timber::get_post($this->post_id);
-
             $this->commonContext();
             $this->pageContext();
         }
@@ -104,10 +87,10 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         /******************************************************************************
          * Compilation du Diaporama pour les pages de type "accueil" (!= frontpage)
          ******************************************************************************/
-        $page_type = wp_get_post_terms($this->post_id, 'page_type');
+        $page_type = wp_get_post_terms($this->context['post_id'], 'page_type');
         if ($page_type[0]->slug == 'front_page') {
             $this->context['is_frontpage'] = true;
-            $home_slider = getAcfGroupFields('group_5bb325e8b6b43', $this->post);
+            $home_slider = getAcfGroupFields('group_5bb325e8b6b43', $this->context['post']);
             if (!empty($home_slider['landswpr_slides'])) {
                 $this->context['home_slider'] = Timber::compile($this->context['woody_components'][$home_slider['landswpr_woody_tpl']], $home_slider);
             }
@@ -116,7 +99,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         /*********************************************
          * Compilation du bloc prix
          *********************************************/
-        $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d', $this->post);
+        $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d', $this->context['post']);
         if (!empty($trip_infos['the_duration']['count_days']) || !empty($trip_infos['the_length']['length']) || !empty($trip_infos['the_price']['price'])) {
             //TODO: Gérer le fichier gps pour affichage s/ carte
             $trip_infos['the_duration']['count_days'] = ($trip_infos['the_duration']['count_days']) ? humanDays($trip_infos['the_duration']['count_days']) : '';
@@ -131,9 +114,9 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
              * Compilation de l'en tête de page pour les pages qui ne sont pas de type "accueil"
              *********************************************/
             $page_teaser = [];
-            $page_teaser = getAcfGroupFields('group_5b2bbb46507bf', $this->post);
+            $page_teaser = getAcfGroupFields('group_5b2bbb46507bf', $this->context['post']);
             if ($page_type[0]->slug != 'front_page' and !empty($page_teaser)) {
-                $page_teaser['page_teaser_title'] = (!empty($page_teaser['page_teaser_display_title'])) ? str_replace('-', '&#8209', $this->post_title) : '';
+                $page_teaser['page_teaser_title'] = (!empty($page_teaser['page_teaser_display_title'])) ? str_replace('-', '&#8209', $this->context['post_title']) : '';
                 $page_teaser['the_classes'] = [];
                 $page_teaser['the_classes'][] = (!empty($page_teaser['background_img_opacity'])) ? $page_teaser['background_img_opacity'] : '';
                 $page_teaser['the_classes'][] = (!empty($page_teaser['background_color'])) ? $page_teaser['background_color'] : '';
@@ -145,7 +128,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $page_teaser['trip_infos'] = (!empty($this->context['trip_infos'])) ? $this->context['trip_infos'] : '';
                 $page_teaser['social_shares'] = (!empty($this->context['social_shares'])) ? $this->context['social_shares'] : '';
                 if (!empty($page_teaser['page_teaser_media_type']) && $page_teaser['page_teaser_media_type'] == 'map') {
-                    $page_teaser['post_coordinates'] = (!empty(getAcfGroupFields('group_5b3635da6529e', $this->post))) ? getAcfGroupFields('group_5b3635da6529e', $this->post) : '';
+                    $page_teaser['post_coordinates'] = (!empty(getAcfGroupFields('group_5b3635da6529e', $this->context['post']))) ? getAcfGroupFields('group_5b3635da6529e', $this->context['post']) : '';
                 }
 
                 $this->context['page_teaser'] = Timber::compile($this->context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
@@ -156,7 +139,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             *********************************************/
 
             $page_hero = [];
-            $page_hero = getAcfGroupFields('group_5b052bbee40a4', $this->post);
+            $page_hero = getAcfGroupFields('group_5b052bbee40a4', $this->context['post']);
             if (!empty($page_hero['page_heading_media_type']) && ($page_hero['page_heading_media_type'] == 'movie' && !empty($page_hero['page_heading_movie']) || ($page_hero['page_heading_media_type'] == 'img' && !empty($page_hero['page_heading_img'])))) {
                 if (empty($page_teaser['page_teaser_display_title'])) {
                     $page_hero['title_as_h1'] = true;
@@ -181,7 +164,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
     protected function commonContext()
     {
-        $this->context['page_terms'] = implode(' ', getPageTerms($this->post_id));
+        $this->context['page_terms'] = implode(' ', getPageTerms($this->context['post_id']));
         $this->context['default_marker'] = file_get_contents($this->context['dist_dir'] . '/img/default-marker.svg');
 
         /*********************************************
@@ -200,7 +183,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         * Compilation du bloc de réservation
         *********************************************/
         $bookblock = [];
-        $bookblock = getAcfGroupFields('group_5c0e4121ee3ed', $this->post);
+        $bookblock = getAcfGroupFields('group_5c0e4121ee3ed', $this->context['post']);
 
         if (!empty($bookblock['bookblock_playlists'][0]['pl_post_id'])) {
             $bookblock['the_classes'] = [];
@@ -248,7 +231,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         * Compilation des sections
         *********************************************/
         $this->context['sections'] = [];
-        $sections = $this->timberpost->get_field('section');
+        $sections = $this->context['timberpost']->get_field('section');
 
         if (!empty($sections)) {
             foreach ($sections as $section_id => $section) {
@@ -268,8 +251,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 if (!empty($section['section_content'])) {
                     foreach ($section['section_content'] as $layout_id => $layout) {
                         $layout['post'] = [
-                            'ID' => $this->post_id,
-                            'title' => $this->post_title,
+                            'ID' => $this->context['post_id'],
+                            'title' => $this->context['post_title'],
                             'page_type' => $this->context['page_type']
                         ];
                         $layout['uniqid'] = 'section_' . $section_id . '_' . 'section_content_' . $layout_id;
@@ -305,20 +288,20 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         /** ************************
          * Vérification pré-cochage
          ************************ **/
-        $playlist_type = get_field('field_5c7e59967f790');
+        $playlist_type = get_field('field_5c7e59967f790', $this->context['post_id']);
         $autoselect_id = '';
-        $existing_playlist = get_field('field_5c7e8bf42b9af');
+        $existing_playlist = get_field('field_5c7e8bf42b9af', $this->context['post_id']);
 
         if ($playlist_type == 'autoselect' && !empty($existing_playlist['existing_playlist_autoselect_url']) && !empty($existing_playlist['existing_playlist_autoselect_id'])) {
             $post_id = url_to_postid($existing_playlist['existing_playlist_autoselect_url']);
             $playlistConfId = get_field('field_5b338ff331b17', $post_id);
             $autoselect_id = $existing_playlist['existing_playlist_autoselect_id'];
         } else {
-            $autoselect_field = get_field('field_5c7e5bd174a2f');
+            $autoselect_field = get_field('field_5c7e5bd174a2f', $this->context['post_id']);
             if (!empty($autoselect_field['new_playlist_autoselect_id'])) {
                 $autoselect_id = $autoselect_field['new_playlist_autoselect_id'];
             }
-            $playlistConfId = get_field('field_5b338ff331b17');
+            $playlistConfId = get_field('field_5b338ff331b17', $this->context['post_id']);
         }
 
         // allowed parameters for Wordpress playlists need to be added here

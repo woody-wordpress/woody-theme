@@ -52,9 +52,23 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['current_url'] = get_permalink();
         $this->context['site_key'] = WP_SITE_KEY;
 
-        // Get current Post
-        $this->context['post'] = new TimberPost();
-        $this->context['page_type'] = getTermsSlugs($this->context['post']->ID, 'page_type', true);
+        /******************************************************************************
+         * Sommes nous dans le cas d'une page miroir ?
+         ******************************************************************************/
+        $mirror_page = getAcfGroupFields('group_5c6432b3c0c45');
+        if (!empty($mirror_page['mirror_page_reference'])) {
+            $this->context['post_id'] = $mirror_page['mirror_page_reference'];
+            $this->context['post'] = get_post($this->context['post_id']);
+            $this->context['post_title'] = get_the_title();
+            $this->context['metas'][] = sprintf('<link rel="canonical" href="%s" />', get_permalink($this->context['post_id']));
+        } else {
+            $this->context['post'] = get_post();
+            $this->context['post_title'] = $this->context['post']->post_title;
+            $this->context['post_id'] = $this->context['post']->ID;
+        }
+
+        $this->context['timberpost'] = Timber::get_post($this->context['post_id']);
+        $this->context['page_type'] = getTermsSlugs($this->context['post_id'], 'page_type', true);
         if (!empty($this->context['page_type'])) {
             $this->context['body_class'] = $this->context['body_class'] . ' woodypage-' . $this->context['page_type'];
         }
