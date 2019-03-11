@@ -792,6 +792,14 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
 {
     $data = [];
     $lang = pll_current_language();
+    $languages = apply_filters('woody_pll_the_languages', 'auto');
+    //for season
+    foreach($languages as $language){
+        $code_lang=$lang;
+        if ($language['current_lang']){
+            $code_lang=substr($language['locale'],0,2);
+        }
+    }
 
     $sheet_data = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $lang, array(), 'json', 'item');
     if (!empty($sheet_data['items'])) {
@@ -813,7 +821,7 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
             }
 
             if (!empty($item['deals'])) {
-                $data['title'] = $item['deals']['list'][0]['nom'][$lang] ;
+                $data['title'] = $item['deals']['list'][0]['nom'][$code_lang] ;
             }
             if (is_array($layout['display_elements'])) {
                 if (in_array('sheet_type', $layout['display_elements'])) {
