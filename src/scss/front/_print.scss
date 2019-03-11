@@ -184,16 +184,20 @@ ins {
 
 .swiper-slide {
     width: 30% !important;
-    margin: 15px !important;
-    padding: 10px !important;
-    background: #f5f5f5 !important;
+    padding: 15px !important;
 }
-
 
 a.mediaCard:after {
     content: "";
 }
 
+.imageObject {
+    margin: 20px 0 !important;
+}
+
+.imageObject span {
+    display: block !important;
+}
 
 // Tourisme
 .api-render-container {
