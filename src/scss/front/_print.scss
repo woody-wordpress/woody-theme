@@ -186,9 +186,12 @@ ins {
     padding: 8px 0 !important;
 }
 
+a.mediaCard {
+    text-align: center;
+}
+
 a.mediaCard:after {
     content: "";
-    text-align: center;
 }
 
 .imageObject {
