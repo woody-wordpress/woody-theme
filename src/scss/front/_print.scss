@@ -6,6 +6,7 @@ body {
     background: #fff !important;
     color: #000;
     padding: 0 !important;
+    margin: 0 !important;
 }
 
 h1 {
@@ -115,26 +116,6 @@ a:after {
     font-family: 'Courier New', Courier, monospace;
 }
 
-/**
- * Making intergated videos disappear, and removing the iframes' whitespace to zero.
- */
-iframe,
-ins {
-    display: none;
-    width: 0 !important;
-    height: 0 !important;
-    overflow: hidden !important;
-    line-height: 0pt !important;
-    white-space: nowrap;
-}
-
-.embed-youtube,
-.embed-responsive {
-    position: absolute;
-    height: 0;
-    overflow: hidden;
-}
-
 /* Adding custom messages before and after the content */
 // body:after {
 //     content: "\ All Rights Reserved. (c) 2019 ";
@@ -151,6 +132,9 @@ ins {
 //     text-align: center !important;
 // }
 
+iframe,
+ins,
+embed,
 .site-footer-container,
 .cc-revoke.cc-bottom,
 .scrollDown,
@@ -159,10 +143,6 @@ ins {
 .claims-blocks-wrapper,
 .woody-component-headnavs,
 .woody-component-mobilenavs,
-// .woody-component-focus,
-// .woody-component-gallery,
-// .woody-component-socialwall,
-.woody-component-hero,
 .breadcrumb-wrapper,
 .sharing-links,
 .tourism-detail-hero-slider,
@@ -170,13 +150,38 @@ ins {
 .woody-component-focus .imageObject,
 .woody_list_grid,
 .mobile-header,
-.reveal,
+.embed-youtube,
+.embed-responsive,
+.hero-bg,
 .lg,
 .card-button,
 .home-slider {
     display: none !important;
 }
 
+/* Hero */
+.woody-component-hero {
+    height: auto !important;
+    margin-bottom: 20px !important;
+}
+
+.hero-titles {
+    text-align: center !important;
+    padding: 20px !important;
+    margin-bottom: 20px !important;
+    border-bottom: 1px solid #000 !important;
+}
+
+.hero-titles span {
+    display: block !important;
+}
+
+.hero-titles .hero-title {
+    font-size: 30pt !important;
+    color: #1968B5 !important;
+}
+
+/* Swiper */
 .swiper-wrapper {
     transform: none !important;
 }
@@ -186,8 +191,9 @@ ins {
     padding: 8px 0 !important;
 }
 
+/* Images */
 a.mediaCard {
-    text-align: center;
+    text-align: center !important;
 }
 
 a.mediaCard:after {
@@ -202,7 +208,7 @@ a.mediaCard:after {
     display: block !important;
     font-size: 11px !important;
     font-weight: normal !important;
-    color: #000;
+    color: #000 !important;
 }
 
 // Tourisme
@@ -220,7 +226,7 @@ a.mediaCard:after {
     .tourism-detail-sidebar-list,
     #description {
         li {
-            list-style: none;
+            list-style: none !important;
         }
     }
 
