@@ -135,6 +135,7 @@ a:after {
 iframe,
 ins,
 embed,
+button,
 .reveal,
 .reveal-overlay,
 .site-footer-container,
@@ -150,12 +151,13 @@ embed,
 .tourism-detail-hero-slider,
 .direction-map-wrapper,
 .woody-component-focus .imageObject,
-.woody_list_grid,
 .mobile-header,
 .embed-youtube,
 .embed-responsive,
 .hero-bg,
 .lg,
+.the_filter,
+.the_pager,
 .card-button,
 .home-slider {
     display: none !important;
@@ -211,6 +213,15 @@ a.mediaCard:after {
     font-size: 11px !important;
     font-weight: normal !important;
     color: #000 !important;
+}
+
+/* Card */
+.card {
+    margin-bottom: 20px !important;
+}
+
+.card-section {
+    height: auto !important;
 }
 
 // Tourisme
