@@ -1,76 +1,68 @@
 {% extends "base.twig" %}
-
 {% block metas %}
-{% for meta in metas %}
-{{ meta }}
-{% endfor %}
+    {% for meta in metas %}
+        {{ meta }}
+    {% endfor %}
 {% endblock metas %}
-
 {% block content %}
-
-{% if is_frontpage %}
-    <h1 class="frontpage-htitle">{{ site.title|default }}</h1>
-{% endif %}
-
-<main id="main-content" class="content-type-page {{ page_type|default }}">
-    <div class="content-wrapper {{ page_terms|default('no-terms') }}">
-        <div class="mobile-header hide-for-xlarge title-bar">
-            <a class="brand-logo" href="{{ site.url }}">
-                {{ website_logo|default('Website logo') }}
-            </a>
-        </div>
-
-        {{ page_hero|default }}
-
-        {# {% include 'parts/shares.twig' %} #}
-        {% block page_teaser %}
-        <header id="the-page-teaser" class="page-teaser">
-            {{ page_teaser }}
-        </header>
-        {% endblock %}
-
-        {% block home_slider %}
-        {% if home_slider | default %}
-        <div class="home-slider">
-            {{ home_slider }}
-            {% if bookblock|default %}
-            <div class="bookblock-wrapper">
-                {{ bookblock }}
+    {% if is_frontpage %}
+        <h1 class="frontpage-htitle">
+            {{ site.title|default }}</h1>
+    {% endif %}
+    <main class="content-type-page {{ page_type|default }}" id="main-content">
+        <div class="content-wrapper {{ page_terms|default('no-terms') }}">
+            <div class="mobile-header hide-for-xlarge title-bar">
+                <a class="brand-logo" href="{{ site.url }}">
+                    {{ website_logo|default('Website logo') }}
+                </a>
             </div>
+            {{ page_hero|default }}
+            {# {% include 'parts/shares.twig' %} #}
+            {% block page_teaser %}
+                <header class="page-teaser" id="the-page-teaser">
+                    {{ page_teaser }}
+                </header>
+            {% endblock %}
+            {% block home_slider %}
+                {% if home_slider | default %}
+                    <div class="home-slider">
+                        {{ home_slider }}
+                        {% if bookblock|default or page_parts.custom_bookblock|default %}
+                            <div class="bookblock-wrapper">
+                                {% if bookblock|default %}
+                                    {{ bookblock }}
+                                    {% elseif page_parts.custom_bookblock|default %}
+                                    {{ page_parts.custom_bookblock }}
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endblock %}
+            {% if bookblock|default and not home_slider %}
+                <div class="bookblock-wrapper">
+                    {{ bookblock }}
+                </div>
+            {% endif %}
+            {% if playlist_tourism.content|default %}
+                <div class="page-playlist-wrapper">
+                    {{ playlist_tourism.content }}
+                </div>
+            {% endif %}
+            {% for key, section in the_sections %}
+                <div class="page-section page-section-{{ key }}">
+                    {{ section }}
+                </div>
+            {% endfor %}
+            {# {% if claims_block|default %}
+                                                                                <div class="claims-blocks-wrapper">
+                                                                                    {{ claims_block }}
+                                                                                </div>
+                                                                                {% endif %} #}
+            {#  TODO: se baser sur une variable ERP #}
+            {% if site_key == 'sarlat' %}
+                <div class="claims-blocks-wrapper"></div>
             {% endif %}
         </div>
-        {% endif %}
-        {% endblock %}
-
-        {% if bookblock|default and not home_slider %}
-        <div class="bookblock-wrapper">
-            {{ bookblock }}
-        </div>
-        {% endif %}
-
-        {% if playlist_tourism.content|default %}
-        <div class="page-playlist-wrapper">
-            {{ playlist_tourism.content }}
-        </div>
-        {% endif %}
-
-        {% for key, section in the_sections %}
-        <div class="page-section page-section-{{ key }}">
-            {{ section }}
-        </div>
-        {% endfor %}
-
-        {# {% if claims_block|default %}
-        <div class="claims-blocks-wrapper">
-            {{ claims_block }}
-        </div>
-        {% endif %} #}
-
-        {#  TODO: se baser sur une variable ERP #}
-        {% if site_key == 'sarlat' %}
-            <div class="claims-blocks-wrapper"></div>
-        {% endif %}
-
-    </div>
-</main>
+    </main>
 {% endblock %}
