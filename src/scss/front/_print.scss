@@ -167,9 +167,11 @@ ins {
 .sharing-links,
 .tourism-detail-hero-slider,
 .direction-map-wrapper,
+.woody-component-focus .imageObject,
 .woody_list_grid,
 .mobile-header,
 .reveal,
+.lg,
 .card-button,
 .home-slider {
     display: none !important;
@@ -177,18 +179,16 @@ ins {
 
 .swiper-wrapper {
     transform: none !important;
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: space-between !important;
 }
 
 .swiper-slide {
-    width: 30% !important;
-    padding: 15px !important;
+    width: 100% !important;
+    padding: 8px 0 !important;
 }
 
 a.mediaCard:after {
     content: "";
+    text-align: center;
 }
 
 .imageObject {
@@ -197,6 +197,9 @@ a.mediaCard:after {
 
 .imageObject span {
     display: block !important;
+    font-size: 11px !important;
+    font-weight: normal !important;
+    color: #000;
 }
 
 // Tourisme
