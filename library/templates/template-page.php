@@ -50,18 +50,26 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     protected function page404Context()
     {
         global $wp;
-        $suggestions = [];
         $segments = explode('/', $wp->request);
         $last_segment = end($segments);
         $query = str_replace('-', ' ', $last_segment);
-        $response = apply_filters('woody_pages_search', ['query' => $query, 'size' => 4]);
 
-        if (!empty($response['posts'])) {
-            foreach ($response['posts'] as $post_id) {
-                $post_id = explode('_', $post_id);
-                $post_id = end($post_id);
-                $post = Timber::get_post($post_id);
-                $suggestions[] = getPagePreview(['display_elements' => ['description'], 'display_button' => true], $post);
+        $suggestions = get_transient('woody_404_suggestions_' . md5($query));
+
+        if (empty($suggestions)) {
+            $suggestions = [];
+            $response = apply_filters('woody_pages_search', ['query' => $query, 'size' => 4]);
+            if (!empty($response['posts'])) {
+                foreach ($response['posts'] as $post_id) {
+                    $post_id = explode('_', $post_id);
+                    $post_id = end($post_id);
+                    $post = Timber::get_post($post_id);
+                    $suggestions[] = getPagePreview(['display_elements' => ['description'], 'display_button' => true], $post);
+                }
+            }
+
+            if (!empty($suggestions)) {
+                set_transient('woody_404_suggestions_' . md5($query), $suggestions, 1209600); // Keep 2 weeks
             }
         }
 
