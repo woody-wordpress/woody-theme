@@ -5,6 +5,7 @@
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
+use Woody\Utils\Output;
 
 class WoodyTheme_Helpers
 {
@@ -26,6 +27,7 @@ class WoodyTheme_Helpers
     {
         $current_lang = pll_current_language();
         $posts = get_transient('woody_get_permalink', []);
+        Output::debug($posts);
 
         if (empty($posts[$post_id][$current_lang])) {
             $posts[$post_id][$current_lang] = get_permalink($post_id);
