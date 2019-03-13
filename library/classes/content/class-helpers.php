@@ -17,6 +17,7 @@ class WoodyTheme_Helpers
     protected function registerHooks()
     {
         add_filter('woody_get_permalink', [$this, 'woodyGetPermalink'], 10);
+
         add_action('pll_save_post', [$this, 'savePost'], 10, 3);
         add_action('delete_post', [$this, 'deletePost'], 10);
         add_action('woody_theme_update', [$this,'cleanTransient']);
