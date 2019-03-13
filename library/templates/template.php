@@ -153,7 +153,13 @@ abstract class WoodyTheme_TemplateAbstract
             $data = $this->createSwitcher($languages);
 
             // Set a default template
-            $template = $this->context['woody_components']['woody_widgets-season_switcher-tpl_01'];
+            $tpl_switcher = apply_filters('season_switcher_tpl', null);
+            if (empty($tpl_switcher)) {
+                $tpl_switcher = 'woody_widgets-season_switcher-tpl_01';
+            }
+
+            $template = $this->context['woody_components'][$tpl_switcher];
+
             $this->context['season_switcher'] = Timber::compile($template, $data);
             $this->context['season_switcher_mobile'] = Timber::compile($template, $data);
         }
