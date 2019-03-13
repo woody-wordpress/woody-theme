@@ -24,15 +24,14 @@ class WoodyTheme_Helpers
     {
         $return = [];
         $current_lang = pll_current_language();
+
         $posts = get_transient('woody_get_permalink', []);
         if (empty($posts[$post_id][$current_lang])) {
             $posts[$post_id][$current_lang] = get_permalink($post_id);
             set_transient('woody_get_permalink', $posts);
-
-            $return = $posts[$post_id][$current_lang];
         }
 
-        return $return;
+        return $posts[$post_id][$current_lang];
     }
 
     // --------------------------------
