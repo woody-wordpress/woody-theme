@@ -256,7 +256,7 @@ abstract class WoodyTheme_TemplateAbstract
                     if (!empty($t_page)) {
                         $post = Timber::get_post($t_page);
                         if (!empty($post)) {
-                            $data['suggest']['pages'][] = getPagePreview('', $post);
+                            $data['suggest']['pages'][] = getPagePreview(['display_img' => true], $post);
                         }
                     }
                 }
