@@ -297,10 +297,11 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $autoselect_id = '';
         $existing_playlist = get_field('field_5c7e8bf42b9af', $this->context['post_id']);
 
-        if ($playlist_type == 'autoselect' && !empty($existing_playlist['existing_playlist_autoselect_url']) && !empty($existing_playlist['existing_playlist_autoselect_id'])) {
+
+        if ($playlist_type == 'autoselect' && !empty($existing_playlist['existing_playlist_autoselect_url']) && !empty($existing_playlist['playlist_autoselect_id'])) {
             $post_id = url_to_postid($existing_playlist['existing_playlist_autoselect_url']);
             $playlistConfId = get_field('field_5b338ff331b17', $post_id);
-            $autoselect_id = $existing_playlist['existing_playlist_autoselect_id'];
+            $autoselect_id = $existing_playlist['playlist_autoselect_id'];
         } else {
             $autoselect_field = get_field('field_5c7e5bd174a2f', $this->context['post_id']);
             if (!empty($autoselect_field['new_playlist_autoselect_id'])) {
