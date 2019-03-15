@@ -42,7 +42,7 @@ class WoodyTheme_Shortcodes
                 $post_id = explode('_', $post_id);
                 $post_id = end($post_id);
                 $post = Timber::get_post($post_id);
-                $result['posts']['pages'][] = getPagePreview(['display_elements' => ['description'], 'display_button' => true], $post);
+                $result['posts']['pages'][] = getPagePreview(['display_elements' => ['description'], 'display_button' => true, 'display_img' => true], $post);
             }
         }
 
