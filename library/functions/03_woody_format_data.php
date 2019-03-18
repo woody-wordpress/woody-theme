@@ -794,10 +794,10 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
     $lang = pll_current_language();
     $languages = apply_filters('woody_pll_the_languages', 'auto');
     //for season
-    foreach($languages as $language){
+    foreach ($languages as $language) {
         $code_lang=$lang;
-        if ($language['current_lang']){
-            $code_lang=substr($language['locale'],0,2);
+        if ($language['current_lang']) {
+            $code_lang=substr($language['locale'], 0, 2);
         }
     }
 

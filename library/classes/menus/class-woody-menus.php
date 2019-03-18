@@ -151,11 +151,11 @@ class WoodyTheme_Menus
                     $post =  get_post($post);
                 }
                 if (!is_object($post)) {
-                    if (is_array($post) && !empty($post['url'])){
+                    if (is_array($post) && !empty($post['url'])) {
                         $postid = url_to_postid($post['url']);
-                        if (!empty($postid)){
+                        if (!empty($postid)) {
                             $post = get_post($postid);
-                        }else{
+                        } else {
                             $return[$post_key] = [
                                 'the_id' => 'external',
                                 'the_url' => $post['url'],
@@ -165,11 +165,11 @@ class WoodyTheme_Menus
                                 ]
                             ];
                         }
-                    }else{
+                    } else {
                         continue;
                     }
                 }
-                if (is_object($post)){
+                if (is_object($post)) {
                     $return[$post_key] = [
                         'the_id' => $post->ID,
                         'the_url' => get_permalink($post->ID),
