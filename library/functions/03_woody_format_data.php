@@ -926,7 +926,7 @@ function getPagePreview($item_wrapper, $item)
         $data['title'] = $item->get_title();
     }
 
-    if (!empty($item_wrapper) && is_array($item_wrapper['display_elements'])) {
+    if (!empty($item_wrapper) && !empty($item_wrapper['display_elements']) && is_array($item_wrapper['display_elements'])) {
         if (in_array('pretitle', $item_wrapper['display_elements'])) {
             $data['pretitle'] = getFieldAndFallback($item, 'focus_pretitle', get_field('page_heading_heading', $item->id), 'pretitle', $item, 'field_5b87f20257a1d');
         }
