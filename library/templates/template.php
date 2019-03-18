@@ -267,7 +267,7 @@ abstract class WoodyTheme_TemplateAbstract
                 if (method_exists($SubWoodyTheme_esSearch, 'esSearchBlockCustomization')) {
                     $esSearchBlockCustomization = $SubWoodyTheme_esSearch->esSearchBlockCustomization();
                     if (!empty($esSearchBlockCustomization['template'])) {
-                        $template = $languages_customization['template'];
+                        $template = $esSearchBlockCustomization['template'];
                     }
                 }
             }

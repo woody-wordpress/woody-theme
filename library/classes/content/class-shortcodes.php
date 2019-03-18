@@ -57,7 +57,7 @@ class WoodyTheme_Shortcodes
         $result['posts']['touristic_sheets'] = [];
         if (!empty($sheets_response['sheets'])) {
             foreach ($sheets_response['sheets'] as $sheet) {
-                $result['posts']['touristic_sheets'][] = getTouristicSheetPreview(['display_elements' => ['description', 'sheet_town', 'sheet_type']], $sheet['data']['idFiche']);
+                $result['posts']['touristic_sheets'][] = getTouristicSheetPreview(['display_elements' => ['description', 'sheet_town', 'sheet_type'], 'display_img' => true], $sheet['data']['idFiche']);
             }
         }
 
