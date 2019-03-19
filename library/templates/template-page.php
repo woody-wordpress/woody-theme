@@ -255,11 +255,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
                 if (!empty($section['section_content'])) {
                     foreach ($section['section_content'] as $layout_id => $layout) {
-                        $layout['post'] = [
-                            'ID' => $this->context['post_id'],
-                            'title' => $this->context['post_title'],
-                            'page_type' => $this->context['page_type']
-                        ];
                         $layout['uniqid'] = 'section_' . $section_id . '_' . 'section_content_' . $layout_id;
                         $layout['visual_effects'] = (!empty($layout['visual_effects'])) ? formatVisualEffectData($layout['visual_effects']) : '';
                         $components['items'][] = getComponentItem($layout, $this->context);

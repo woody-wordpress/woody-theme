@@ -18,6 +18,8 @@ abstract class WoodyTheme_TemplateAbstract
 
     public function __construct()
     {
+        add_filter('timber_compile_data', [$this, 'timberCompileData']);
+
         $this->registerHooks();
         $this->initContext();
         $this->setTwigTpl();
@@ -36,6 +38,16 @@ abstract class WoodyTheme_TemplateAbstract
                 }
             }
         }
+    }
+
+    public function timberCompileData($data)
+    {
+        $data['globals']['post'] = $this->context['post'];
+        $data['globals']['post_title'] = $this->context['post_title'];
+        $data['globals']['post_id'] = $this->context['post_id'];
+        $data['globals']['page_type'] = $this->context['page_type'];
+
+        return $data;
     }
 
     public function render()
