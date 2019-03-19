@@ -68,6 +68,7 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['timberpost'] = false;
         $this->context['post'] = false;
         $this->context['post_id'] = false;
+        $this->context['post_title'] = false;
         $this->context['page_type'] = false;
 
         /******************************************************************************
@@ -101,6 +102,9 @@ abstract class WoodyTheme_TemplateAbstract
 
         // Define SubWoodyTheme_TemplateParts
         $this->addHeaderFooter();
+
+        // GlobalsVars
+        $this->addGlobalsVars();
 
         // GTM
         $this->addGTM();
@@ -136,6 +140,16 @@ abstract class WoodyTheme_TemplateAbstract
             }
             $this->context['page_parts'] = $SubWoodyTheme_TemplateParts->getParts();
         }
+    }
+
+    private function addGlobalsVars()
+    {
+        $globals = [
+            'post_id' => $this->context['post_id'],
+            'post_title' => $this->context['post_title'],
+            'page_type' => $this->context['page_type'],
+        ];
+        $this->context['globals'] = json_encode($globals);
     }
 
     private function addGTM()
