@@ -25,19 +25,42 @@
                     <h3 class="marg-bottom-lg">{{ __('La page que vous recherchez est peut-être ici ?', 'woody-theme') }}</h3>
                     <div class="grid-x grid-padding-x medium-up-2 xlarge-up-4">
                         {% for post in content.suggestions %}
-                            <div class="cell">
-                                {% include "cards/basic_card/tpl_01/tpl.twig" with {
-                                    'item' : post,
-                                    'image_style' : 'ratio_2_1',
-                                    'page_type' : item.page_type
-                                } %}
-                            </div>
+                        <div class="cell">
+                            {% include "cards/basic_card/tpl_01/tpl.twig" with {
+                            'item' : post,
+                            'image_style' : 'ratio_2_1',
+                            'page_type' : item.page_type
+                            } %}
+                        </div>
                         {% endfor %}
                     </div>
                 </div>
             </div>
             {% endif %}
-            <a class="button marg-top-md marg-bottom-md" href="{{ site.url }}">{{ content.btn }}</a>
+
+            {% if content.custom_links|default %}
+            {% if content.suggestions|default %}
+            <div class="custom_links  padd-bottom-md bg-lightgray">
+            {% else %}
+            <div class="custom_links marg-top-lg padd-top-md padd-bottom-md bg-lightgray">
+            {% endif %}
+                <div class="grid-container">
+                    <h3 class="marg-bottom-lg">{{ content.title_custom }}</h3>
+                    <ul class="menu align-center align-middle">
+                        {% for link in content.custom_links %}
+                        <li> <a class="button" target="{{ link.target | default('_self') }}" href="{{ link.url }}">{{ link.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+                {% if content.btn %}
+                <a class="button marg-top-md marg-bottom-md" href="{{ site.url }}">{{ content.btn }}</a>
+                {% endif %}
+
+            {% else %}
+                <a class="button marg-top-md marg-bottom-md" href="{{ site.url }}">{{ __("Aller à la page d\'accueil", "woody-theme") }}</a>
+            {% endif %}
+
         </div>
     </div>
 </main>
