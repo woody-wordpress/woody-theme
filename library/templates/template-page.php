@@ -71,30 +71,19 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             if (!empty($suggestions)) {
                 set_transient('woody_404_suggestions_' . md5($query), $suggestions, 1209600); // Keep 2 weeks
             }
-;        }
+       }
 
-        $this->context['content'] = [
-            'title' => __("Oups !", 'woody-theme'),
-            'subtitle' => '404 - ' . __("Page non trouvée", 'woody-theme'),
+
+        $vars = [
+            'title' =>  __("Oups !", 'woody-theme'),
+            'subtitle' =>  '404 - ' . __("Page non trouvée", 'woody-theme'),
             'text' => __("La page que vous recherchez a peut-être été supprimée ou est temporairement indisponible.", 'woody-theme'),
             'suggestions' => $suggestions,
         ];
 
+        $custom = apply_filters('woody_404_custom', $vars);
 
-        /******************************************************************************
-         * Rajouter des customs Links
-         ******************************************************************************/
-        $custom_links = apply_filters('woody_404_custom_links', null);
-        if (!empty($custom_links)){
-            foreach ($custom_links['custom'] as $key => $link) {
-                $this->context['content']['custom_links'][$key]['title']=$link['title'];
-                $this->context['content']['custom_links'][$key]['url']=$link['url'];
-                $this->context['content']['custom_links'][$key]['target']= !empty($link['target']) ? $link['target'] : '' ;
-                $this->context['content']['custom_links'][$key]['img']= !empty($link['img']) ? $link['img'] : '' ;
-            }
-            $this->context['content']['btn']= !empty($custom_links['home']) ? $custom_links['home'] : '';
-            $this->context['content']['title_custom']= !empty($custom_links['title']) ? $custom_links['title'] : '';
-        }
+        $this->context['content'] = $custom;
     }
 
     protected function pageContext()
