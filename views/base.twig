@@ -21,7 +21,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager (fallback) -->
 {% endif %}
 
-<link rel='shortcut icon' type='image/x-icon' href="{{ icons.favicon }}"> <!-- Favicon -->
+{# <link rel='shortcut icon' type='image/x-icon' href="{{ icons.favicon }}"> <!-- Favicon --> #}
 <link rel="shortcut icon" type="image/png" href="{{ icons.64 }}"> <!-- Favicon -->
 <link rel="apple-touch-icon" href="{{ icons.120 }}"> <!-- iPhone -->
 <link rel="apple-touch-icon" sizes="180x180" href="{{ icons.180 }}"> <!-- iPhone retina -->
@@ -41,6 +41,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- WP Styles -->
 {% block styles %}{% endblock %}
 <!-- /WP Styles -->
+
+<!-- WP Global Vars -->
+<script>var globals = {{ globals }};</script>
+<!-- /WP Global Vars -->
 
 </head>
 <body class="{{body_class}}">

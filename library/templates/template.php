@@ -18,6 +18,8 @@ abstract class WoodyTheme_TemplateAbstract
 
     public function __construct()
     {
+        add_filter('timber_compile_data', [$this, 'timberCompileData']);
+
         $this->registerHooks();
         $this->initContext();
         $this->setTwigTpl();
@@ -38,6 +40,16 @@ abstract class WoodyTheme_TemplateAbstract
         }
     }
 
+    public function timberCompileData($data)
+    {
+        $data['globals']['post'] = $this->context['post'];
+        $data['globals']['post_title'] = $this->context['post_title'];
+        $data['globals']['post_id'] = $this->context['post_id'];
+        $data['globals']['page_type'] = $this->context['page_type'];
+
+        return $data;
+    }
+
     public function render()
     {
         if (!empty($this->twig_tpl) && !empty($this->context)) {
@@ -56,6 +68,7 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['timberpost'] = false;
         $this->context['post'] = false;
         $this->context['post_id'] = false;
+        $this->context['post_title'] = false;
         $this->context['page_type'] = false;
 
         /******************************************************************************
@@ -89,6 +102,9 @@ abstract class WoodyTheme_TemplateAbstract
 
         // Define SubWoodyTheme_TemplateParts
         $this->addHeaderFooter();
+
+        // GlobalsVars
+        $this->addGlobalsVars();
 
         // GTM
         $this->addGTM();
@@ -124,6 +140,16 @@ abstract class WoodyTheme_TemplateAbstract
             }
             $this->context['page_parts'] = $SubWoodyTheme_TemplateParts->getParts();
         }
+    }
+
+    private function addGlobalsVars()
+    {
+        $globals = [
+            'post_id' => $this->context['post_id'],
+            'post_title' => $this->context['post_title'],
+            'page_type' => $this->context['page_type'],
+        ];
+        $this->context['globals'] = json_encode($globals);
     }
 
     private function addGTM()

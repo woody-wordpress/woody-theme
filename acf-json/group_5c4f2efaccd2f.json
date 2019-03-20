@@ -1,8 +1,7 @@
 {
     "key": "group_5c4f2efaccd2f",
     "title": "Cocon sémantique",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5c4f2f676dfa5",
             "label": "Contenu",
             "name": "",
@@ -96,7 +95,7 @@
         },
         {
             "key": "field_5c8f7f01b9d25",
-            "label": "Afficher l'image",
+            "label": "Afficher les images",
             "name": "display_img",
             "type": "true_false",
             "instructions": "",
@@ -161,12 +160,7 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "blocks-semantic_view-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/semantic_view\/tpl_01\/thumbnail.png?version=2.8.9\" alt=\"blocks-semantic_view-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Cocon sémantique - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Cocon sémantique - Template 1<\/h4>Blocs de texte avec alternance de l'image à gauche ou à droite (image 3:4)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-semantic_view-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/semantic_view\/tpl_02\/thumbnail.png?version=2.8.9\" alt=\"blocks-semantic_view-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Cocon sémantique - Template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Cocon sémantique - Template 2<\/h4>Blocs de texte avec alternance de l'image à gauche ou à droite (image 4:3)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-semantic_view-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/semantic_view\/tpl_03\/thumbnail.png?version=2.8.9\" alt=\"blocks-semantic_view-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Cocon sémantique - Template 3<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Cocon sémantique - Template 3<\/h4>Blocs de texte avec image 2:1 au dessus du texte centré<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-semantic_view-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/semantic_view\/tpl_04\/thumbnail.png?version=2.8.9\" alt=\"blocks-semantic_view-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Cocon sémantique - Template 4<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Cocon sémantique - Template 4<\/h4>Blocs de texte avec image 2:1 au dessus du texte aligné à gauche<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-            },
+            "choices": {},
             "allow_null": 0,
             "other_choice": 0,
             "default_value": "",
@@ -176,13 +170,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -192,5 +184,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1552908081
+    "modified": 1553068747
 }
