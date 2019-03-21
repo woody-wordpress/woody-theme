@@ -433,7 +433,7 @@ function formatFocusesData($layout, $current_post, $twigPaths)
 
         $the_items['default_marker'] = $layout['default_marker'];
 
-        $the_items['visual_effects'] = (!empty($layout['visual_effects'])) ? $layout['visual_effects'] : '';
+        $the_items['visual_effects'] = (!empty($layout['visual_effects'])) ? formatVisualEffectData($layout['visual_effects']) : '';
 
         $return = Timber::compile($twigPaths[$layout['woody_tpl']], $the_items);
     }
