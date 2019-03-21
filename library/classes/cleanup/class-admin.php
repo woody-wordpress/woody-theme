@@ -33,8 +33,11 @@ class WoodyTheme_Cleanup_Admin
             }
 
             add_action('pre_get_posts', [$this, 'custom_pre_get_posts']);
+
+            // add_action('admin_bar_menu', [$this, 'cleanupAdminBarMenu'], 99);
         }
     }
+
 
     /**
      * Benoit Bouchaud
@@ -67,6 +70,13 @@ class WoodyTheme_Cleanup_Admin
         $wp_admin_bar->remove_menu('wp-logo');
         $wp_admin_bar->remove_menu('customize');
         $wp_admin_bar->remove_menu('comments');
+        $wp_admin_bar->remove_node('new-post');
+        $wp_admin_bar->remove_node('new-touristic_sheet');
+
+        $post_type = get_post_type(get_the_ID());
+        if ($post_type == 'touristic_sheet') {
+            $wp_admin_bar->remove_node('edit');
+        }
     }
 
     /**
