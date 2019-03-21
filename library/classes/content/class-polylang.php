@@ -133,6 +133,8 @@ class WoodyTheme_Polylang
         __('Comment venir ?', 'woody-theme');
         __('La page que vous recherchez est peut-être ici ?', 'woody-theme');
         __('Lire la suite', 'woody-theme');
+        __('Que voulez-vous réserver ?', 'woody-theme');
+        __('Choisissez vos dates de réservation', 'woody-theme');
 
         // Weather
         __('Bas', 'woody-theme');

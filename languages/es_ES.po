@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.6.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2019-03-06T16:43:28+01:00\n"
-"PO-Revision-Date: 2019-03-06 17:16+0100\n"
+"POT-Creation-Date: 2019-03-21T11:44:10+01:00\n"
+"PO-Revision-Date: 2019-03-21 11:50+0100\n"
 "Last-Translator: POIROUX Léo <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.1\n"
 "X-Domain: woody-theme\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -266,96 +266,103 @@ msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "¿La página que buscas puede que esté aquí?"
 
 #: library/classes/content/class-polylang.php:135
-#: library/functions/03_woody_format_data.php:963
+#: library/functions/03_woody_format_data.php:974
 msgid "Lire la suite"
 msgstr "Seguir leyendo"
 
-#: library/classes/content/class-polylang.php:138
+#: library/classes/content/class-polylang.php:136
+msgid "Que voulez-vous réserver ?"
+msgstr "¿Qué quieres reservar?"
+
+#: library/classes/content/class-polylang.php:137
+msgid "Choisissez vos dates de réservation"
+msgstr "Elige tus fechas"
+
+#: library/classes/content/class-polylang.php:140
 msgid "Bas"
 msgstr "Abajo"
 
-#: library/classes/content/class-polylang.php:139
+#: library/classes/content/class-polylang.php:141
 msgid "Haut"
 msgstr "Arriba"
 
-#: library/classes/content/class-polylang.php:140
+#: library/classes/content/class-polylang.php:142
 msgid "Vent"
 msgstr "Viento"
 
-#: library/classes/content/class-polylang.php:141
+#: library/classes/content/class-polylang.php:143
 msgid "Humidité"
 msgstr "Humedad"
 
-#: library/classes/content/class-polylang.php:142
+#: library/classes/content/class-polylang.php:144
 msgid "ISO 0°"
 msgstr "ISO 0°"
 
-#: library/classes/content/class-polylang.php:143
+#: library/classes/content/class-polylang.php:145
 msgid "Limite Pluie/Neige"
 msgstr "Límite Lluvia/Nieve"
 
-#: library/classes/content/class-polylang.php:144
+#: library/classes/content/class-polylang.php:146
 msgid "Ensoleillé"
 msgstr "Soleado"
 
-#: library/classes/content/class-polylang.php:145
+#: library/classes/content/class-polylang.php:147
 msgid "Pluie"
 msgstr "Precipitaciones"
 
-#: library/classes/content/class-polylang.php:146
+#: library/classes/content/class-polylang.php:148
 msgid "Neige"
 msgstr "Nieve"
 
-#: library/classes/content/class-polylang.php:147
+#: library/classes/content/class-polylang.php:149
 msgid "Grésil"
 msgstr "Cellisca"
 
-#: library/classes/content/class-polylang.php:148
+#: library/classes/content/class-polylang.php:150
 msgid "Venteux"
 msgstr "Ventoso"
 
-#: library/classes/content/class-polylang.php:149
+#: library/classes/content/class-polylang.php:151
 msgid "Brouillard"
 msgstr "Niebla"
 
-#: library/classes/content/class-polylang.php:150
+#: library/classes/content/class-polylang.php:152
 msgid "Nuageux"
 msgstr "Nublado"
 
-#: library/classes/content/class-polylang.php:151
+#: library/classes/content/class-polylang.php:153
 msgid "Éclaircies"
 msgstr "Parcialmente nublado"
 
-#: library/classes/content/class-polylang.php:152
+#: library/classes/content/class-polylang.php:154
 msgid "Grêle"
 msgstr "Salve"
 
-#: library/classes/content/class-polylang.php:153
+#: library/classes/content/class-polylang.php:155
 msgid "Tempête"
 msgstr "Tormenta"
 
-#: library/classes/content/class-polylang.php:154
+#: library/classes/content/class-polylang.php:156
 msgid "Verglas"
 msgstr "Hielo en el camino"
 
-#: library/templates/template-page.php:89
+#: library/templates/template-page.php:78
 msgid "Oups !"
 msgstr "¡Vaya!"
 
-#: library/templates/template-page.php:90
+#: library/templates/template-page.php:79
 msgid "Page non trouvée"
 msgstr "Página no encontrada"
 
-#: library/templates/template-page.php:91
+#: library/templates/template-page.php:80
 msgid ""
 "La page que vous recherchez a peut-être été supprimée ou est temporairement "
 "indisponible."
 msgstr ""
 "La página que buscas ha sido eliminada o está temporalmente indisponible."
 
-#: library/templates/template-page.php:92
-msgid "Aller à la page d'accueil"
-msgstr "Ir a la página de inicio"
+#~ msgid "Aller à la page d'accueil"
+#~ msgstr "Ir a la página de inicio"
 
 #~ msgid "France"
 #~ msgstr "Francia"

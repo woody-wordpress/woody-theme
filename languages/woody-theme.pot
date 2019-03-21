@@ -2,14 +2,14 @@
 # This file is distributed under the .
 msgid ""
 msgstr ""
-"Project-Id-Version: Woody (Thème parent) 2.8.7\n"
+"Project-Id-Version: Woody (Thème parent) 2.8.9\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-03-06T16:43:28+01:00\n"
+"POT-Creation-Date: 2019-03-21T11:44:10+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.1.0\n"
 "X-Domain: woody-theme\n"
@@ -262,90 +262,94 @@ msgid "La page que vous recherchez est peut-être ici ?"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:135
-#: library/functions/03_woody_format_data.php:963
+#: library/functions/03_woody_format_data.php:974
 msgid "Lire la suite"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:138
-msgid "Bas"
+#: library/classes/content/class-polylang.php:136
+msgid "Que voulez-vous réserver ?"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:139
-msgid "Haut"
+#: library/classes/content/class-polylang.php:137
+msgid "Choisissez vos dates de réservation"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:140
-msgid "Vent"
+msgid "Bas"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:141
-msgid "Humidité"
+msgid "Haut"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:142
-msgid "ISO 0°"
+msgid "Vent"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:143
-msgid "Limite Pluie/Neige"
+msgid "Humidité"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:144
-msgid "Ensoleillé"
+msgid "ISO 0°"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:145
-msgid "Pluie"
+msgid "Limite Pluie/Neige"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:146
-msgid "Neige"
+msgid "Ensoleillé"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:147
-msgid "Grésil"
+msgid "Pluie"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:148
-msgid "Venteux"
+msgid "Neige"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:149
-msgid "Brouillard"
+msgid "Grésil"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:150
-msgid "Nuageux"
+msgid "Venteux"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:151
-msgid "Éclaircies"
+msgid "Brouillard"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:152
-msgid "Grêle"
+msgid "Nuageux"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:153
-msgid "Tempête"
+msgid "Éclaircies"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:154
+msgid "Grêle"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:155
+msgid "Tempête"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:156
 msgid "Verglas"
 msgstr ""
 
-#: library/templates/template-page.php:89
+#: library/templates/template-page.php:78
 msgid "Oups !"
 msgstr ""
 
-#: library/templates/template-page.php:90
+#: library/templates/template-page.php:79
 msgid "Page non trouvée"
 msgstr ""
 
-#: library/templates/template-page.php:91
+#: library/templates/template-page.php:80
 msgid "La page que vous recherchez a peut-être été supprimée ou est temporairement indisponible."
-msgstr ""
-
-#: library/templates/template-page.php:92
-msgid "Aller à la page d'accueil"
 msgstr ""
