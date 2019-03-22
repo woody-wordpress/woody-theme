@@ -1172,3 +1172,13 @@ function formatVisualEffectData($effects)
 
     return $return;
 }
+
+function getSectionBannerFiles($filename)
+{
+    if (file_exists(get_stylesheet_directory() . '/views/section_banner/section_' . $filename)) {
+        $file = file_get_contents(get_stylesheet_directory() . '/views/section_banner/section_' . $filename . '.twig');
+    } else {
+        $file = file_get_contents(get_template_directory() . '/views/section_banner/section_' . $filename . '.twig');
+    }
+    return $file;
+}

@@ -71,7 +71,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             if (!empty($suggestions)) {
                 set_transient('woody_404_suggestions_' . md5($query), $suggestions, 1209600); // Keep 2 weeks
             }
-       }
+        }
 
 
         $vars = [
@@ -279,6 +279,11 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     'layout' => $the_layout,
                     'display' => $display,
                 ];
+                if (!empty($section['section_banner'])) {
+                    foreach ($section['section_banner'] as $banner) {
+                        $the_section[$banner] = getSectionBannerFiles($banner);
+                    }
+                }
 
                 $this->context['the_sections'][] = Timber::compile($this->context['woody_components']['section-section_full-tpl_01'], $the_section);
             }
