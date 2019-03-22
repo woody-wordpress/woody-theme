@@ -31,7 +31,7 @@
                             <div class="bookblock-wrapper">
                                 {% if bookblock|default %}
                                     {{ bookblock }}
-                                    {% elseif page_parts.custom_bookblock|default %}
+                                {% elseif page_parts.custom_bookblock|default %}
                                     {{ page_parts.custom_bookblock }}
                                 {% endif %}
                             </div>
@@ -50,15 +50,15 @@
                 </div>
             {% endif %}
             {% for key, section in the_sections %}
-                <div class="page-section page-section-{{ key }}">
+                <div class="page-section page-section-{{ key }}" id="pageSection-{{ key }}">
                     {{ section }}
                 </div>
             {% endfor %}
             {# {% if claims_block|default %}
-                                                                                <div class="claims-blocks-wrapper">
-                                                                                    {{ claims_block }}
-                                                                                </div>
-                                                                                {% endif %} #}
+                                                                                                        <div class="claims-blocks-wrapper">
+                                                                                                            {{ claims_block }}
+                                                                                                        </div>
+                                                                                                        {% endif %} #}
             {#  TODO: se baser sur une variable ERP #}
             {% if site_key == 'sarlat' %}
                 <div class="claims-blocks-wrapper"></div>
