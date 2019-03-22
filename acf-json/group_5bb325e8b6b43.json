@@ -375,15 +375,48 @@
             },
             "layout": "vertical",
             "choices": {
-                "swipers-landing_swipers-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.champsaur-valgaudemar.wp.rc-dev.com\/app\/dist\/champsaur-valgaudemar\/img\/woody-library\/views\/swipers\/landing_swipers\/tpl_03\/thumbnail.png?version=2.8.5\" alt=\"swipers-landing_swipers-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Landing Swiper (Pagination avec Titres)<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Landing Swiper (Pagination avec Titres)<\/h4>Swiper items with parallax effect<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "swipers-landing_swipers-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.champsaur-valgaudemar.wp.rc-dev.com\/app\/dist\/champsaur-valgaudemar\/img\/woody-library\/views\/swipers\/landing_swipers\/tpl_02\/thumbnail.png?version=2.8.5\" alt=\"swipers-landing_swipers-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Landing Swiper (Custom pagination)<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Landing Swiper (Custom pagination)<\/h4>Swiper items<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "swipers-landing_swipers-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.champsaur-valgaudemar.wp.rc-dev.com\/app\/dist\/champsaur-valgaudemar\/img\/woody-library\/views\/swipers\/landing_swipers\/tpl_01\/thumbnail.png?version=2.8.5\" alt=\"swipers-landing_swipers-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">LandSwiper<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">LandSwiper<\/h4>Swiper items<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-            },
+             },
             "default_value": "",
             "other_choice": 0,
             "save_other_choice": 0,
             "allow_null": 0,
             "return_format": "value"
+        },
+        {
+            "key": "field_5c94bf88922fe",
+            "label": "Options avancées",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 1,
+            "endpoint": 0
+        },
+        {
+            "key": "field_5c94bfe0922ff",
+            "label": "Lien vers le contenu",
+            "name": "landswpr_scroll_down",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Ajoute une flèche cliquable qui amène au début du contenu.",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
@@ -408,5 +441,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Diaporama de slides (image ou video) en page d'accueil",
-    "modified": 1551197324
+    "modified": 1553263061
 }
