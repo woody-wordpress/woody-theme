@@ -154,5 +154,9 @@ class WoodyTheme_Polylang
         __('Grêle', 'woody-theme');
         __('Tempête', 'woody-theme');
         __('Verglas', 'woody-theme');
+
+        __('Matin', 'woody-theme');
+        __('Après-midi','woody-theme');
+        __('Soirée','woody-theme');
     }
 }
