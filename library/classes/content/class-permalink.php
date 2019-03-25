@@ -41,7 +41,7 @@ class WoodyTheme_Permalink
     public function redirect404()
     {
         global $wp_query, $wp, $wpdb;
-        if ($wp_query->is_404) {
+        if ($wp_query->is_404 && !empty($wp->request)) {
             $segments = explode('/', $wp->request);
             $last_segment = end($segments);
             $query_result = new \WP_Query([
@@ -58,19 +58,24 @@ class WoodyTheme_Permalink
                 $post = current($query_result->posts);
                 $permalink = get_permalink($post->ID);
 
-                $wpdb->insert($wpdb->prefix.'redirection_items', [
-                    'url' => '/' . $wp->request,
-                    'group_id' => get_option('woody_auto_redirect'),
-                    'last_access' => gmdate('Y-m-d H:i:s'),
-                    'action_type' => 'url',
-                    'action_code' => '301',
-                    'action_data' => parse_url($permalink, PHP_URL_PATH),
-                    'match_type'  => 'url',
-                ]);
+                if (!empty($permalink)) {
+                    $parse_permalink = parse_url($permalink, PHP_URL_PATH);
+                    if (!empty($parse_permalink)) {
+                        $wpdb->insert($wpdb->prefix.'redirection_items', [
+                            'url' => '/' . $wp->request,
+                            'group_id' => get_option('woody_auto_redirect'),
+                            'last_access' => gmdate('Y-m-d H:i:s'),
+                            'action_type' => 'url',
+                            'action_code' => '301',
+                            'action_data' => $parse_permalink,
+                            'match_type'  => 'url',
+                        ]);
 
-                header('X-Redirect-Agent: woody');
-                wp_redirect($permalink);
-                exit();
+                        header('X-Redirect-Agent: woody');
+                        wp_redirect($permalink);
+                        exit();
+                    }
+                }
             }
         }
     }
