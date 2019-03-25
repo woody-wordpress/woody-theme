@@ -30,7 +30,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     {
         if (!empty(is_front_page())) {
             $this->twig_tpl = 'front.twig';
-        } elseif (!empty(is_404())) {
+        } elseif (is_404()) {
             $this->twig_tpl = 'page404.twig';
         } else {
             $this->twig_tpl = 'page.twig';
@@ -39,7 +39,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
     protected function extendContext()
     {
-        if (!empty(is_404())) {
+        if (is_404()) {
             $this->page404Context();
         } else {
             $this->commonContext();

@@ -19,7 +19,6 @@ if (function_exists('pll_languages_list')) {
 
 // Commands & Helpers
 new WoodyTheme_Commands();
-new WoodyTheme_Helpers();
 
 // Plugins
 new WoodyTheme_Plugins_Activation();
@@ -51,6 +50,7 @@ new WoodyTheme_Polylang();
 new WoodyTheme_Enqueue_Assets();
 
 // Content
+new WoodyTheme_Permalink();
 new WoodyTheme_Cron();
 new WoodyTheme_Post_Type();
 new WoodyTheme_Taxonomy();
