@@ -291,8 +291,21 @@ class WoodyTheme_Plugins_Options
 
         // Redirections
         global $wpdb;
-        $rows = $wpdb->get_results("SELECT id FROM {$wpdb->prefix}redirection_groups WHERE name LIKE '%Articles modifiés%' OR name LIKE '%Modified Posts%' LIMIT 1");
-        $monitor_post = (!empty($rows[0]->id)) ? $rows[0]->id : 1;
+        $rows = $wpdb->get_results("SELECT id, name FROM {$wpdb->prefix}redirection_groups");
+        $monitor_post = 1;
+        $auto_redirect = false;
+        foreach ($rows as $row) {
+            if (strpos($row->name, 'Articles modifiés') !== false || strpos($row->name, 'Modified Posts') !== false) {
+                $monitor_post = $row->id;
+            } elseif (strpos($row->name, 'Automatiques') !== false) {
+                $auto_redirect = true;
+            }
+        }
+
+        if (!$auto_redirect) {
+            $wpdb->insert($wpdb->prefix.'redirection_groups', ['name' => 'Automatiques', 'module_id' => 1]);
+            $this->updateOption('woody_auto_redirect', $wpdb->insert_id);
+        }
 
         $redirection_options = [
             'support' => false,
