@@ -60,7 +60,7 @@ class WoodyTheme_Permalink
 
                 if (!empty($permalink)) {
                     $parse_permalink = parse_url($permalink, PHP_URL_PATH);
-                    if (!empty($parse_permalink)) {
+                    if (!empty($parse_permalink) && $parse_permalink != '/') {
                         $wpdb->insert($wpdb->prefix.'redirection_items', [
                             'url' => '/' . $wp->request,
                             'group_id' => get_option('woody_auto_redirect'),
