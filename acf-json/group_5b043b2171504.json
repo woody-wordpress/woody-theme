@@ -22,11 +22,11 @@
             "label": "Zoomer la carte automatiquement",
             "name": "map_zoom_auto",
             "type": "true_false",
-            "instructions": "En activant cette fonctionnalité la carte se zoomera automatiquement en fonction des marqueurs",
+            "instructions": "Zoom automatique en fonction des marqueurs",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "33",
+                "width": "35",
                 "class": "",
                 "id": ""
             },
@@ -41,7 +41,7 @@
             "label": "Zoom de la carte",
             "name": "map_zoom",
             "type": "number",
-            "instructions": "Vous pouvez choisir un zoom entre \"5\" et \"20\" (5 étant très éloigné \/ 20 étant très proche)",
+            "instructions": "Entre \"5\" et \"20\" (5 = éloigné \/ 20 = proche)",
             "required": 0,
             "conditional_logic": [
                 [{
@@ -51,7 +51,7 @@
                 }]
             ],
             "wrapper": {
-                "width": "33",
+                "width": "35",
                 "class": "",
                 "id": ""
             },
@@ -72,7 +72,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "34",
+                "width": "30",
                 "class": "",
                 "id": ""
             },
@@ -85,6 +85,42 @@
             "default_value": "md",
             "layout": "horizontal",
             "return_format": "value"
+        },
+        {
+            "key": "field_5c989085888ee",
+            "label": "Paramètres Touristic Maps",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "40",
+                "class": "hide-label",
+                "id": ""
+            },
+            "message": "Paramètres Touristic Maps",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_5c9891e2c9133",
+            "label": "Identifiant de conf Touristic Maps",
+            "name": "tmaps_confid",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         },
         {
             "key": "field_5b043b28ab46a",
@@ -175,9 +211,7 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "blocks-geo_map-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/geo_map\/tpl_01\/thumbnail.png?version=1.9.1\" alt=\"blocks-geo_map-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Carte géographique<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Carte géographique<\/h4>Marqueurs personnalisés affichés sur une carte<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-            },
+            "choices": {},
             "allow_null": 0,
             "other_choice": 0,
             "default_value": "",
@@ -201,5 +235,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Affiche une carte avec des marqueurs multiples",
-    "modified": 1540917400
+    "modified": 1553512463
 }

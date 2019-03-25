@@ -528,10 +528,11 @@
     }
 }
 
-// Bouton préfilter la playlist (liens rapides)
+// Boutons préfilter la playlist (liens rapides) + paramètres TM
 .acf-field-5c7f99013d21d,
 .acf-field-5c7e764fb183b,
-.acf-field-5bd023a8daa52 {
+.acf-field-5bd023a8daa52,
+.acf-field-5c989085888ee {
     .acf-input {
         background: #0073aa;
         color: #fff;
@@ -549,8 +550,21 @@
             font-family: dashicons;
             font-weight: 400;
             -webkit-font-smoothing: antialiased;
-            content: '\f108';
         }
+    }
+}
+
+.acf-field-5c7f99013d21d,
+.acf-field-5c7e764fb183b,
+.acf-field-5bd023a8daa52 {
+    .acf-input:before {
+        content: '\f108';
+    }
+}
+
+.acf-field-5c989085888ee {
+    .acf-input:before {
+        content: '\f230';
     }
 }
 
