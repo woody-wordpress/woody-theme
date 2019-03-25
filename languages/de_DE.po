@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.6.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2019-03-21T11:44:10+01:00\n"
-"PO-Revision-Date: 2019-03-21 11:51+0100\n"
+"POT-Creation-Date: 2019-03-25T17:49:20+01:00\n"
+"PO-Revision-Date: 2019-03-25 17:56+0100\n"
 "Last-Translator: POIROUX Léo <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -27,6 +27,27 @@ msgstr "Übergeordnetes Theme  von den Themes von Raccourci Agency"
 #. Author of the theme
 msgid "Raccourci Agency"
 msgstr "Raccourci Agency"
+
+#: library/functions/03_woody_format_data.php:974
+#: library/classes/content/class-polylang.php:135
+msgid "Lire la suite"
+msgstr "Mehr erfahren"
+
+#: library/templates/template-page.php:78
+msgid "Oups !"
+msgstr "Ups!"
+
+#: library/templates/template-page.php:79
+msgid "Page non trouvée"
+msgstr "Seite nicht gefunden"
+
+#: library/templates/template-page.php:80
+msgid ""
+"La page que vous recherchez a peut-être été supprimée ou est temporairement "
+"indisponible."
+msgstr ""
+"Die gesuchte Seite wurde möglicherweise gelöscht oder ist vorübergehend "
+"nicht verfügbar."
 
 #: library/classes/content/class-polylang.php:40
 #: library/classes/content/class-polylang.php:81
@@ -263,11 +284,6 @@ msgstr "Wie kommt man hierher?"
 msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "Die Seite die Sie suchen ist vielleicht hier?"
 
-#: library/classes/content/class-polylang.php:135
-#: library/functions/03_woody_format_data.php:974
-msgid "Lire la suite"
-msgstr "Mehr erfahren"
-
 #: library/classes/content/class-polylang.php:136
 msgid "Que voulez-vous réserver ?"
 msgstr "Was möchtest du buchen?"
@@ -344,21 +360,17 @@ msgstr "Storm"
 msgid "Verglas"
 msgstr "Eis auf der Straße"
 
-#: library/templates/template-page.php:78
-msgid "Oups !"
-msgstr "Ups!"
+#: library/classes/content/class-polylang.php:158
+msgid "Matin"
+msgstr "Morgens"
 
-#: library/templates/template-page.php:79
-msgid "Page non trouvée"
-msgstr "Seite nicht gefunden"
+#: library/classes/content/class-polylang.php:159
+msgid "Après-midi"
+msgstr "Nachmittag"
 
-#: library/templates/template-page.php:80
-msgid ""
-"La page que vous recherchez a peut-être été supprimée ou est temporairement "
-"indisponible."
-msgstr ""
-"Die gesuchte Seite wurde möglicherweise gelöscht oder ist vorübergehend "
-"nicht verfügbar."
+#: library/classes/content/class-polylang.php:160
+msgid "Soirée"
+msgstr "Abends"
 
 #~ msgid "Aller à la page d'accueil"
 #~ msgstr "Zur Startseite gehen"

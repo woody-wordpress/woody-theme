@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.6.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2019-03-21T11:44:10+01:00\n"
-"PO-Revision-Date: 2019-03-21 11:50+0100\n"
+"POT-Creation-Date: 2019-03-25T17:49:20+01:00\n"
+"PO-Revision-Date: 2019-03-25 17:58+0100\n"
 "Last-Translator: POIROUX Léo <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -27,6 +27,26 @@ msgstr ""
 #. Author of the theme
 msgid "Raccourci Agency"
 msgstr ""
+
+#: library/functions/03_woody_format_data.php:974
+#: library/classes/content/class-polylang.php:135
+msgid "Lire la suite"
+msgstr "Seguir leyendo"
+
+#: library/templates/template-page.php:78
+msgid "Oups !"
+msgstr "¡Vaya!"
+
+#: library/templates/template-page.php:79
+msgid "Page non trouvée"
+msgstr "Página no encontrada"
+
+#: library/templates/template-page.php:80
+msgid ""
+"La page que vous recherchez a peut-être été supprimée ou est temporairement "
+"indisponible."
+msgstr ""
+"La página que buscas ha sido eliminada o está temporalmente indisponible."
 
 #: library/classes/content/class-polylang.php:40
 #: library/classes/content/class-polylang.php:81
@@ -265,11 +285,6 @@ msgstr "Cómo llegar ?"
 msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "¿La página que buscas puede que esté aquí?"
 
-#: library/classes/content/class-polylang.php:135
-#: library/functions/03_woody_format_data.php:974
-msgid "Lire la suite"
-msgstr "Seguir leyendo"
-
 #: library/classes/content/class-polylang.php:136
 msgid "Que voulez-vous réserver ?"
 msgstr "¿Qué quieres reservar?"
@@ -346,20 +361,17 @@ msgstr "Tormenta"
 msgid "Verglas"
 msgstr "Hielo en el camino"
 
-#: library/templates/template-page.php:78
-msgid "Oups !"
-msgstr "¡Vaya!"
+#: library/classes/content/class-polylang.php:158
+msgid "Matin"
+msgstr "Mañana"
 
-#: library/templates/template-page.php:79
-msgid "Page non trouvée"
-msgstr "Página no encontrada"
+#: library/classes/content/class-polylang.php:159
+msgid "Après-midi"
+msgstr "Tarde"
 
-#: library/templates/template-page.php:80
-msgid ""
-"La page que vous recherchez a peut-être été supprimée ou est temporairement "
-"indisponible."
-msgstr ""
-"La página que buscas ha sido eliminada o está temporalmente indisponible."
+#: library/classes/content/class-polylang.php:160
+msgid "Soirée"
+msgstr "Noche"
 
 #~ msgid "Aller à la page d'accueil"
 #~ msgstr "Ir a la página de inicio"
