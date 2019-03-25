@@ -1,13 +1,12 @@
 <?php
 /**
- * Helpers
+ * Permalink
  *
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
-use Woody\Utils\Output;
 
-class WoodyTheme_Helpers
+class WoodyTheme_Permalink
 {
     public function __construct()
     {
@@ -22,6 +21,8 @@ class WoodyTheme_Helpers
         add_action('delete_post', [$this, 'deletePost'], 10);
         add_action('woody_theme_update', [$this,'cleanTransient']);
         add_action('woody_subtheme_update', [$this,'cleanTransient']);
+
+        add_action('template_redirect', [$this,'redirect404'], 0);
     }
 
     public function woodyGetPermalink($post_id)
@@ -35,6 +36,30 @@ class WoodyTheme_Helpers
         }
 
         return $posts[$post_id][$current_lang];
+    }
+
+    public function redirect404()
+    {
+        global $wp_query, $wp;
+        if ($wp_query->is_404) {
+            $segments = explode('/', $wp->request);
+            $last_segment = end($segments);
+            $query_result = new \WP_Query([
+                'lang' => pll_current_language(),
+                'posts_per_page' => 1,
+                'post_status' => ['publish', 'draft', 'trash'],
+                'orderby' => 'ID',
+                'order' => 'ASC',
+                'name' => $last_segment,
+                'post_type' => 'page'
+            ]);
+
+            if (!empty($query_result->posts)) {
+                $post = current($query_result->posts);
+                wp_redirect(get_permalink($post->ID));
+                exit();
+            }
+        }
     }
 
     // --------------------------------
