@@ -18,58 +18,46 @@ if (userLang.includes('fr-') || userLang == 'fr') {
     var policy = "Cookie Policy";
 }
 
+// Enable cookies
+var enableCookies = function() {
+    console.log('Enable cookies');
+    window.dataLayer.push({ 'event': 'cookies_enable' });
+}
+
+// Disable cookies
+var disableCookies = function() {
+    console.log('Disable cookies');
+    window.dataLayer.push({ 'event': 'cookies_disable' });
+}
+
+if (document.cookie.indexOf('cookieconsent_status') == -1) {
+    console.log('Starting');
+    enableCookies();
+}
+
 window.cookieconsent.initialise({
-    "palette": {
-        "popup": {
-            "background": "#333"
-        },
-        "button": {
-            "background": style.getPropertyValue('--primary-color')
-        }
-    },
     onInitialise: function(status) {
-        var type = this.options.type;
-        var didConsent = this.hasConsented();
-        if (type == 'opt-in' && didConsent) {
-            // Enable cookies
-            console.log('Enable cookies');
-            dataLayer.push({ 'event': 'cookies_enable' });
-        }
-        if (type == 'opt-out' && !didConsent) {
-            // Disable cookies
-            console.log('Disable cookies');
-            dataLayer.push({ 'event': 'cookies_disable' });
+        var hasConsent = this.hasConsented();
+        if (!hasConsent) {
+            disableCookies();
         }
     },
     onStatusChange: function(status, chosenBefore) {
-        var didConsent = this.hasConsented();
-        if (didConsent) {
-            // Enable cookies
-            console.log('Enable cookies');
-            dataLayer.push({ 'event': 'cookies_enable' });
+        var hasConsent = this.hasConsented();
+        if (hasConsent) {
+            enableCookies();
         } else {
-            // Disable cookies
-            console.log('Disable cookies');
-            dataLayer.push({ 'event': 'cookies_disable' });
+            disableCookies();
         }
     },
-    onRevokeChoice: function() {
-        var type = this.options.type;
-        var didConsent = this.hasConsented();
-        if (type == 'opt-in' && didConsent) {
-            // Enable cookies
-            console.log('Disable cookies');
-            dataLayer.push({ 'event': 'cookies_disable' });
-        }
-        if (type == 'opt-out' && !didConsent) {
-            // Disable cookies
-            console.log('Enable cookies');
-            dataLayer.push({ 'event': 'cookies_enable' });
-        }
-    },
-    "type": "opt-out",
+    // onRevokeChoice: function() {
+    //     disableCookies();
+    // },
+    // "dismissOnScroll": true,
+    "dismissOnTimeout": 20000,
+    // "dismissOnWindowClick": true,
     "theme": "edgeless",
-    "dismissOnScroll": true,
+    "type": "opt-out",
     "content": {
         "message": message,
         "dismiss": dismiss,
@@ -78,5 +66,13 @@ window.cookieconsent.initialise({
         "link": link,
         "href": "https://www.cnil.fr/fr/site-web-cookies-et-autres-traceurs",
         "policy": policy
+    },
+    "palette": {
+        "popup": {
+            "background": "#333"
+        },
+        "button": {
+            "background": style.getPropertyValue('--primary-color')
+        }
     }
 })
