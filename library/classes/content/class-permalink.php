@@ -44,15 +44,37 @@ class WoodyTheme_Permalink
         if ($wp_query->is_404 && !empty($wp->request)) {
             $segments = explode('/', $wp->request);
             $last_segment = end($segments);
-            $query_result = new \WP_Query([
-                'lang' => pll_current_language(),
-                'posts_per_page' => 1,
-                'post_status' => ['publish', 'draft', 'trash'],
-                'orderby' => 'ID',
-                'order' => 'ASC',
-                'name' => $last_segment,
-                'post_type' => 'page'
-            ]);
+
+            // Test if is sheet
+            preg_match('/-([a-z]{2})-([0-9]{5,})$/', $last_segment, $sheet_id);
+            if (!empty($sheet_id) && !empty($sheet_id[2])) {
+                $query_result = new \WP_Query([
+                    'lang' => pll_current_language(), // query all polylang languages
+                    'post_status' => ['publish'],
+                    'posts_per_page' => 1,
+                    'orderby' => 'ID',
+                    'order' => 'ASC',
+                    'post_type'   => 'touristic_sheet',
+                    'meta_query'  => [
+                        'relation' => 'AND',
+                        [
+                            'key'     => 'touristic_sheet_id',
+                            'value'   => $sheet_id[2],
+                            'compare' => 'IN',
+                        ]
+                    ],
+                ]);
+            } else {
+                $query_result = new \WP_Query([
+                    'lang' => pll_current_language(),
+                    'posts_per_page' => 1,
+                    'post_status' => ['publish'],
+                    'orderby' => 'ID',
+                    'order' => 'ASC',
+                    'name' => $last_segment,
+                    'post_type' => 'page'
+                ]);
+            }
 
             if (!empty($query_result->posts)) {
                 $post = current($query_result->posts);
