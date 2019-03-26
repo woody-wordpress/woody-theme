@@ -9,6 +9,34 @@ if (userLang.includes('fr-') || userLang == 'fr') {
     var deny = "Je ne veux pas de cookies";
     var link = "En savoir plus";
     var policy = "Règles sur les cookies";
+} else if (userLang.includes('de-') || userLang == 'de') {
+    var message = "Diese Website aktiviert standardmäßig Cookies zur Zielgruppenmessung und für anonyme Funktionen.";
+    var dismiss = "Okay, ich verstehe!";
+    var allow = "Ich akzeptiere cookies";
+    var deny = "Ich will keine cookies";
+    var link = "Mehr erfahren";
+    var policy = "Richtlinien für Cookies";
+} else if (userLang.includes('nl-') || userLang == 'nl') {
+    var message = "Deze website activeert standaard cookies voor publieksmeting en anonieme functies.";
+    var dismiss = "Oké, ik begrijp het!";
+    var allow = "Ik accepteer cookies";
+    var deny = "Ik wil geen cookies";
+    var link = "Meer informatie";
+    var policy = "Cookiebeleid";
+} else if (userLang.includes('es-') || userLang == 'es') {
+    var message = "Este sitio web activa las cookies de forma predeterminada para la medición de la audiencia y las funciones anónimas.";
+    var dismiss = "¡Bien, lo entiendo!";
+    var allow = "Ik accepteer cookies";
+    var deny = "No quiero galletas";
+    var link = "Conozca más";
+    var policy = "Política sobre Cookies";
+} else if (userLang.includes('it-') || userLang == 'it') {
+    var message = "Questo sito web attiva di default i cookie per la misurazione dell'audience e le funzioni anonime.";
+    var dismiss = "Ok, ho capito!";
+    var allow = "Accetto i cookie";
+    var deny = "Non voglio i biscotti";
+    var link = "Per saperne di più";
+    var policy = "Politica sui cookie";
 } else {
     var message = "This website activates cookies by default for audience measurement and anonymous features.";
     var dismiss = "Got it!";
