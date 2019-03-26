@@ -117,7 +117,7 @@ function getWoodyIcons()
     $core_icons = woodyIconsFolder(get_template_directory() . '/src/icons/icons_set_01');
 
     // TODO : récuperer variable station de l'ERP
-    $stations = ['superot', 'champsaur-valgaudemar'];
+    $stations = ['superot', 'champsaur-valgaudemar', 'hautemaurienne'];
     $station_icons= array();
 
     if ((in_array(WP_SITE_KEY, $stations))) {
