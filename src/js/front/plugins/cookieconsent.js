@@ -1,36 +1,34 @@
 var style = getComputedStyle(document.body);
-var userLang = navigator.language || navigator.userLanguage;
-console.log("The Navigator language is: " + userLang);
 
-if (userLang.includes('fr-') || userLang == 'fr') {
+if (window.siteConfig.current_lang == 'fr') {
     var message = "Ce site web active par défaut des cookies de mesure d'audience et pour des fonctionnalités anonymes.";
     var dismiss = "OK je comprends !";
     var allow = "J'accepte les cookies";
     var deny = "Je ne veux pas de cookies";
     var link = "En savoir plus";
     var policy = "Règles sur les cookies";
-} else if (userLang.includes('de-') || userLang == 'de') {
+} else if (window.siteConfig.current_lang == 'de') {
     var message = "Diese Website aktiviert standardmäßig Cookies zur Zielgruppenmessung und für anonyme Funktionen.";
     var dismiss = "Okay, ich verstehe!";
     var allow = "Ich akzeptiere cookies";
     var deny = "Ich will keine cookies";
     var link = "Mehr erfahren";
     var policy = "Richtlinien für Cookies";
-} else if (userLang.includes('nl-') || userLang == 'nl') {
+} else if (window.siteConfig.current_lang == 'nl') {
     var message = "Deze website activeert standaard cookies voor publieksmeting en anonieme functies.";
     var dismiss = "Oké, ik begrijp het!";
     var allow = "Ik accepteer cookies";
     var deny = "Ik wil geen cookies";
     var link = "Meer informatie";
     var policy = "Cookiebeleid";
-} else if (userLang.includes('es-') || userLang == 'es') {
+} else if (window.siteConfig.current_lang == 'es') {
     var message = "Este sitio web activa las cookies de forma predeterminada para la medición de la audiencia y las funciones anónimas.";
     var dismiss = "¡Bien, lo entiendo!";
     var allow = "Ik accepteer cookies";
     var deny = "No quiero galletas";
     var link = "Conozca más";
     var policy = "Política sobre Cookies";
-} else if (userLang.includes('it-') || userLang == 'it') {
+} else if (window.siteConfig.current_lang == 'it') {
     var message = "Questo sito web attiva di default i cookie per la misurazione dell'audience e le funzioni anonime.";
     var dismiss = "Ok, ho capito!";
     var allow = "Accetto i cookie";
