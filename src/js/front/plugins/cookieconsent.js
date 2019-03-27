@@ -50,24 +50,28 @@ if (userLang.includes('fr-') || userLang == 'fr') {
 var enableAnalytics = function() {
     console.log('Enable Analytics');
     window.dataLayer.push({ 'event': 'analytics_enable' });
+    window.dataLayer.push({ 'event': 'analytics_enable_' + window.siteConfig.current_lang });
 }
 
 // Disable analytics
 var disableAnalytics = function() {
     console.log('Disable Analytics');
     window.dataLayer.push({ 'event': 'analytics_disable' });
+    window.dataLayer.push({ 'event': 'analytics_disable_' + window.siteConfig.current_lang });
 }
 
 // Enable cookies
 var enableCookies = function() {
     console.log('Enable Cookies');
     window.dataLayer.push({ 'event': 'cookies_enable' });
+    window.dataLayer.push({ 'event': 'cookies_enable_' + window.siteConfig.current_lang });
 }
 
 // Disable cookies
 var disableCookies = function() {
     console.log('Disable Cookies');
     window.dataLayer.push({ 'event': 'cookies_disable' });
+    window.dataLayer.push({ 'event': 'cookies_disable_' + window.siteConfig.current_lang });
 }
 
 if (document.cookie.indexOf('cookieconsent_status') == -1) {

@@ -29,6 +29,7 @@ class WoodyTheme_Polylang
 
     public function siteConfigAddLangs($siteConfig)
     {
+        $siteConfig['current_lang'] = pll_current_language();
         $siteConfig['languages'] = apply_filters('woody_pll_the_locales', null);
 
         return $siteConfig;
@@ -156,7 +157,7 @@ class WoodyTheme_Polylang
         __('Verglas', 'woody-theme');
 
         __('Matin', 'woody-theme');
-        __('Après-midi','woody-theme');
-        __('Soirée','woody-theme');
+        __('Après-midi', 'woody-theme');
+        __('Soirée', 'woody-theme');
     }
 }
