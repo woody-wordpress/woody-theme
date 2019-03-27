@@ -77,9 +77,12 @@ if (document.cookie.indexOf('cookieconsent_status') == -1) {
 window.cookieconsent.initialise({
     onInitialise: function(status) {
         var hasConsent = this.hasConsented();
-        if (!hasConsent) {
-            disableCookies();
+        if (hasConsent) {
+            enableAnalytics();
+            enableCookies();
+        } else {
             disableAnalytics();
+            disableCookies();
         }
     },
     onStatusChange: function(status, chosenBefore) {
