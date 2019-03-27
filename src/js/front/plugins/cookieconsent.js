@@ -46,21 +46,32 @@ if (userLang.includes('fr-') || userLang == 'fr') {
     var policy = "Cookie Policy";
 }
 
+// Enable analytics
+var enableAnalytics = function() {
+    console.log('Enable Analytics');
+    window.dataLayer.push({ 'event': 'analytics_enable' });
+}
+
+// Disable analytics
+var disableAnalytics = function() {
+    console.log('Disable Analytics');
+    window.dataLayer.push({ 'event': 'analytics_disable' });
+}
+
 // Enable cookies
 var enableCookies = function() {
-    console.log('Enable cookies');
+    console.log('Enable Cookies');
     window.dataLayer.push({ 'event': 'cookies_enable' });
 }
 
 // Disable cookies
 var disableCookies = function() {
-    console.log('Disable cookies');
+    console.log('Disable Cookies');
     window.dataLayer.push({ 'event': 'cookies_disable' });
 }
 
 if (document.cookie.indexOf('cookieconsent_status') == -1) {
-    console.log('Starting');
-    enableCookies();
+    enableAnalytics();
 }
 
 window.cookieconsent.initialise({
@@ -68,22 +79,22 @@ window.cookieconsent.initialise({
         var hasConsent = this.hasConsented();
         if (!hasConsent) {
             disableCookies();
+            disableAnalytics();
         }
     },
     onStatusChange: function(status, chosenBefore) {
         var hasConsent = this.hasConsented();
         if (hasConsent) {
+            enableAnalytics();
             enableCookies();
         } else {
+            disableAnalytics();
             disableCookies();
         }
     },
-    // onRevokeChoice: function() {
-    //     disableCookies();
-    // },
-    // "dismissOnScroll": true,
-    "dismissOnTimeout": 20000,
-    // "dismissOnWindowClick": true,
+    onRevokeChoice: function() {
+        disableCookies();
+    },
     "theme": "edgeless",
     "type": "opt-out",
     "content": {
