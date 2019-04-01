@@ -647,3 +647,22 @@
         pointer-events: none !important;
     }
 }
+
+// On masque les anciens champs du backoffice et on règles la tailles des onglets impactés
+#acf-group_5b2bbb46507bf {
+    .acf-tab-group {
+        li:nth-of-type(2) {
+            display: none !important;
+        }
+    }
+}
+
+.acf-field-5b043f0525968 {
+    .layout[data-layout="call_to_action"] {
+        .acf-tab-group {
+            li:nth-of-type(2) {
+                display: none !important;
+            }
+        }
+    }
+}
