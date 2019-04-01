@@ -163,6 +163,27 @@ button,
     display: none !important;
 }
 
+/* Playlist Tourisme */
+#api_filter,
+#responsive-layout-switcher,
+#playlist-map-wrapper,
+#pagination,
+.main-tourism-wrapper .playlist-infos-banner {
+    display: none !important;
+}
+
+#playlist-context {
+    width: 100% !important;
+}
+
+#item_sheet_list .item_sheet {
+    margin-bottom: 30px;
+}
+
+#item_sheet_list .item_sheet .infos {
+    height: auto !important;
+}
+
 /* Hero */
 .woody-component-hero {
     height: auto !important;

@@ -46,7 +46,7 @@ class WoodyTheme_Permalink
             $last_segment = end($segments);
 
             // Test if is sheet
-            preg_match('/-([a-z]{2})-([0-9]{5,})$/', $last_segment, $sheet_id);
+            preg_match('/-([a-z_]{2,})-([0-9]{5,})$/', $last_segment, $sheet_id);
             if (!empty($sheet_id) && !empty($sheet_id[2])) {
                 $query_result = new \WP_Query([
                     'lang' => pll_current_language(), // query all polylang languages
@@ -83,8 +83,17 @@ class WoodyTheme_Permalink
                 if (!empty($permalink)) {
                     $parse_permalink = parse_url($permalink, PHP_URL_PATH);
                     if (!empty($parse_permalink) && $parse_permalink != '/') {
+                        if (substr($wp->request, -1) == '/') {
+                            $url = '/' . $wp->request;
+                            $match_url = '/' . substr($wp->request, 0, -1);
+                        } else {
+                            $url = '/' . $wp->request . '/';
+                            $match_url = '/' . $wp->request;
+                        }
+
                         $wpdb->insert($wpdb->prefix.'redirection_items', [
-                            'url' => '/' . $wp->request,
+                            'url' => $url,
+                            'match_url' => $match_url,
                             'group_id' => get_option('woody_auto_redirect'),
                             'last_access' => gmdate('Y-m-d H:i:s'),
                             'action_type' => 'url',

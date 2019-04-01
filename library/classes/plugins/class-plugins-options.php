@@ -326,7 +326,11 @@ class WoodyTheme_Plugins_Options
             'ip_logging' => 0,
             'last_group_id' => $monitor_post,
             'rest_api' => 0,
-            'https' => false
+            'https' => false,
+            'flag_query' => 'exact',
+            'flag_case' => true,
+            'flag_trailing' => true,
+            'flag_regex' => false,
         ];
         $this->updateOption('redirection_options', $redirection_options);
 
