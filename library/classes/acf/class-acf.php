@@ -380,7 +380,7 @@ class WoodyTheme_ACF
             set_transient('woody_website_pages_taxonomies', $taxonomies);
         }
         foreach ($taxonomies as $key => $taxonomy) {
-            $field['choices']['_' . $taxonomy->name] = (!empty($taxonomy->labels->singular_name)) ? $taxonomy->labels->singular_name . ' principal(e)</small>' : $taxonmy->label .' <small>Tag principal</small>';
+            $field['choices']['_' . $taxonomy->name] = (!empty($taxonomy->labels->singular_name)) ? $taxonomy->labels->singular_name . ' principal(e)</small>' : $taxonomy->label .' <small>Tag principal</small>';
         }
         return $field;
     }
