@@ -62,7 +62,7 @@ class WoodyTheme_Cleanup_Admin
 
     /**
      * Benoit Bouchaud
-     * On masque certaines entrées de menu pour les non administrateurs
+     * On masque certaines entrées de menu dans la barre d'administration
      */
     public function customAdminBarMenu()
     {
@@ -77,6 +77,12 @@ class WoodyTheme_Cleanup_Admin
         if ($post_type == 'touristic_sheet') {
             $wp_admin_bar->remove_node('edit');
         }
+
+        // Modification du lien de l'entrée "Créer"
+        $new_content_node = $wp_admin_bar->get_node('new-content');
+        $new_content_node->href = pll_home_url() . 'wp/wp-admin/post-new.php?post_type=page';
+        $wp_admin_bar->remove_menu('new-content');
+        $wp_admin_bar->add_menu($new_content_node);
     }
 
     /**
