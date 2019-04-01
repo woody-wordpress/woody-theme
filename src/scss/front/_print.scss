@@ -184,6 +184,16 @@ button,
     height: auto !important;
 }
 
+/* Sheet Tourisme */
+.api-render-sheet #availabilities,
+.api-render-sheet #map-container,
+.api-render-sheet #gallery,
+.api-render-sheet .sidebar-contact-form-section,
+.api-render-sheet .sidebar-map-container,
+.api-render-sheet .sheet-navbar-checkpoint {
+    display: none !important;
+}
+
 /* Hero */
 .woody-component-hero {
     height: auto !important;
