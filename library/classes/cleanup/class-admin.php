@@ -153,7 +153,8 @@ class WoodyTheme_Cleanup_Admin
                 'capability'    => 'edit_pages',
                 'icon_url'      => 'dashicons-menu',
                 'position'      => 30,
-                'redirect'      => true
+                'redirect'      => true,
+                'autoload'      => true,
             ));
 
             if (function_exists('acf_add_options_sub_page') && $lang == PLL_DEFAULT_LANG) {
@@ -163,6 +164,7 @@ class WoodyTheme_Cleanup_Admin
                     'menu_title'    => 'Menu principal',
                     'parent_slug'   => 'custom-menus',
                     'capability'    => 'edit_pages',
+                    'autoload'      => true,
                 ));
             }
         }
@@ -179,6 +181,7 @@ class WoodyTheme_Cleanup_Admin
                 'capability'    => 'edit_pages',
                 'icon_url'      => 'dashicons-admin-generic',
                 'position'      => 40,
+                'autoload'      => true,
             ));
         }
     }
