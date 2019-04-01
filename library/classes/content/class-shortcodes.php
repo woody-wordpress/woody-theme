@@ -20,6 +20,7 @@ class WoodyTheme_Shortcodes
     {
         add_shortcode('woody_meteo', [$this,'weatherShortCode']);
         add_shortcode('woody_recherche', [$this, 'searchShortCode']);
+        add_shortcode('woody_anchor', [$this, 'anchorShortcode']);
     }
 
     /** ***********************
@@ -67,5 +68,21 @@ class WoodyTheme_Shortcodes
         }
 
         return Timber::compile($this->twigPaths['woody_widgets-es_search-tpl_01'], $result);
+    }
+
+    public function anchorShortcode($atts)
+    {
+        $atts = shortcode_atts(
+            array(
+                'id' => 'woody_anchor',
+            ),
+            $atts,
+            'woody_anchor'
+        );
+        $output = sprintf(
+            '<span class="woody_anchor" id="%s"></span>',
+            esc_attr($atts['id'])
+        );
+        return $output;
     }
 }

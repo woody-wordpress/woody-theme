@@ -8,14 +8,16 @@ class WoodyTheme_Tinymce
 
     protected function registerHooks()
     {
-        add_filter('mce_buttons_2', array($this, 'tinymceAddStyleSelect'));
+        add_filter('mce_buttons_2', array($this, 'tinymceAddButtons'));
+        add_filter('mce_external_plugins', array($this, 'woodyAnchorButtonLoadJs' ));
         add_filter('tiny_mce_before_init', array($this, 'tinymceRegisterStyleSelect'));
         // add_action('init', array($this, 'tinymceAddStylesheet'));
     }
 
     // Callback function to insert 'styleselect' into the $buttons array
-    public function tinymceAddStyleSelect($buttons)
+    public function tinymceAddButtons($buttons)
     {
+        array_unshift($buttons, 'woody_anchor');
         array_unshift($buttons, 'styleselect');
         return $buttons;
     }
@@ -53,6 +55,12 @@ class WoodyTheme_Tinymce
     );
         $init_array['style_formats'] = json_encode($style_formats);
         return $init_array;
+    }
+
+    public function woodyAnchorButtonLoadJs($plugins)
+    {
+        $plugins['woody_anchor'] = get_template_directory_uri() . '/src/js/admin/plugins/woody_anchor.js';
+        return $plugins;
     }
 
     // public function tinymceAddStylesheet()
