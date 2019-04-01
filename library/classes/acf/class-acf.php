@@ -424,6 +424,18 @@ class WoodyTheme_ACF
         delete_transient('woody_terms_choices');
         delete_transient('woody_website_pages_taxonomies');
         delete_transient('woody_acf_options');
+
+        // Warm Options ACF
+        if (function_exists('pll_languages_list')) {
+            $options = [];
+            $languages = pll_languages_list();
+            foreach ($languages as $lang) {
+                if (empty($options[$lang])) {
+                    $options[$lang] = get_fields('options');
+                }
+            }
+            set_transient('woody_acf_options', $options);
+        }
     }
 
     public function cleanTermsChoicesTransient()
