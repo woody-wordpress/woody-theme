@@ -90,9 +90,12 @@ class WoodyTheme_Menus
     {
         $return = [];
 
-        // woody_acf_options is warm on deploy
         $lang = pll_current_language();
         $options = get_transient('woody_acf_options', []);
+        if (empty($options[$lang])) {
+            $options[$lang] = get_fields('options');
+            set_transient('woody_acf_options', $options);
+        }
 
         if (!empty($options[$lang])) {
             $return = $options[$lang];
