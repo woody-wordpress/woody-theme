@@ -413,9 +413,6 @@ class WoodyTheme_ACF
         delete_transient('woody_page_taxonomies_choices');
         delete_transient('woody_terms_choices');
         delete_transient('woody_website_pages_taxonomies');
-
-        // TODO: supprimer cette ligne après le 5/04/2019
-        delete_transient('woody_acf_options');
     }
 
     public function cleanTermsChoicesTransient()
