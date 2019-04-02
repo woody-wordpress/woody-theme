@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.6.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2019-03-25T17:49:20+01:00\n"
-"PO-Revision-Date: 2019-03-25 18:02+0100\n"
+"POT-Creation-Date: 2019-04-02T10:23:06+02:00\n"
+"PO-Revision-Date: 2019-04-02 10:37+0200\n"
 "Last-Translator: POIROUX Léo <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2\n"
 "X-Domain: woody-theme\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -28,10 +28,335 @@ msgstr "Parent theme van de themes van Raccourci Agency"
 msgid "Raccourci Agency"
 msgstr "Raccourci Agency"
 
-#: library/functions/03_woody_format_data.php:974
+#: library/classes/content/class-polylang.php:41
+#: library/classes/content/class-polylang.php:82
+msgid "Lundi"
+msgstr "Maandag"
+
+#: library/classes/content/class-polylang.php:42
+#: library/classes/content/class-polylang.php:83
+msgid "Mardi"
+msgstr "Dinsdag"
+
+#: library/classes/content/class-polylang.php:43
+#: library/classes/content/class-polylang.php:84
+msgid "Mercredi"
+msgstr "Woensdag"
+
+#: library/classes/content/class-polylang.php:44
+#: library/classes/content/class-polylang.php:85
+msgid "Jeudi"
+msgstr "Donderdag"
+
+#: library/classes/content/class-polylang.php:45
+#: library/classes/content/class-polylang.php:86
+msgid "Vendredi"
+msgstr "Vrijdag"
+
+#: library/classes/content/class-polylang.php:46
+#: library/classes/content/class-polylang.php:87
+msgid "Samedi"
+msgstr "Zaterdag"
+
+#: library/classes/content/class-polylang.php:47
+#: library/classes/content/class-polylang.php:88
+msgid "Dimanche"
+msgstr "Zondag"
+
+#: library/classes/content/class-polylang.php:54
+#: library/classes/content/class-polylang.php:89
+msgid "Janvier"
+msgstr "Januari"
+
+#: library/classes/content/class-polylang.php:55
+#: library/classes/content/class-polylang.php:90
+msgid "Février"
+msgstr "Februari"
+
+#: library/classes/content/class-polylang.php:56
+#: library/classes/content/class-polylang.php:91
+msgid "Mars"
+msgstr "Maart"
+
+#: library/classes/content/class-polylang.php:57
+#: library/classes/content/class-polylang.php:92
+msgid "Avril"
+msgstr "April"
+
+#: library/classes/content/class-polylang.php:58
+#: library/classes/content/class-polylang.php:93
+msgid "Mai"
+msgstr "Mei"
+
+#: library/classes/content/class-polylang.php:59
+#: library/classes/content/class-polylang.php:94
+msgid "Juin"
+msgstr "Juni"
+
+#: library/classes/content/class-polylang.php:60
+#: library/classes/content/class-polylang.php:95
+msgid "Juillet"
+msgstr "Juli"
+
+#: library/classes/content/class-polylang.php:61
+#: library/classes/content/class-polylang.php:96
+msgid "Août"
+msgstr "Augustus"
+
+#: library/classes/content/class-polylang.php:62
+#: library/classes/content/class-polylang.php:97
+msgid "Septembre"
+msgstr "September"
+
+#: library/classes/content/class-polylang.php:63
+#: library/classes/content/class-polylang.php:98
+msgid "Octobre"
+msgstr "Oktober"
+
+#: library/classes/content/class-polylang.php:64
+#: library/classes/content/class-polylang.php:99
+msgid "Novembre"
+msgstr "November"
+
+#: library/classes/content/class-polylang.php:65
+#: library/classes/content/class-polylang.php:100
+msgid "Décembre"
+msgstr "December"
+
+#: library/classes/content/class-polylang.php:78
+msgid "Page non trouvée %%sep%% %%sitename%%"
+msgstr "Pagina niet gevonden %%sep%% %%sitename%%"
+
+#: library/classes/content/class-polylang.php:79
+msgid "Erreur 404 : Page non trouvée"
+msgstr "Error 404: Pagina niet gevonden"
+
+#: library/classes/content/class-polylang.php:103
+msgid "M'y rendre"
+msgstr "Routebeschrijving"
+
+#: library/classes/content/class-polylang.php:104
+msgid "Ajouter à mes favoris"
+msgstr "Toevoegen aan mijn favorieten"
+
+#: library/classes/content/class-polylang.php:105
+msgid "Voir l'itinéraire"
+msgstr "Bekijk de routebeschrijving"
+
+#: library/classes/content/class-polylang.php:106
+msgid "Voir la vidéo"
+msgstr "Bekijk de video"
+
+#: library/classes/content/class-polylang.php:107
+msgid "Affiner ma recherche"
+msgstr "Mijn zoekopdracht verfijnen"
+
+#: library/classes/content/class-polylang.php:108
+msgid "Voir les résultats sur la carte"
+msgstr "Bekijk de resultaten op de kaart"
+
+#: library/classes/content/class-polylang.php:109
+msgid "résultat"
+msgstr "resultaat"
+
+#: library/classes/content/class-polylang.php:110
+msgid "résultats"
+msgstr "resultaten"
+
+#: library/classes/content/class-polylang.php:111
+msgid "Aucun résultat"
+msgstr "Geen resultaten gevonden"
+
+#: library/classes/content/class-polylang.php:112
+msgid "Voir la carte"
+msgstr "Bekijk de kaart"
+
+#: library/classes/content/class-polylang.php:113
+msgid "Partager sur Facebook"
+msgstr "Delen op Facebook"
+
+#: library/classes/content/class-polylang.php:114
+msgid "Partager sur Twitter"
+msgstr "Delen op Twitter"
+
+#: library/classes/content/class-polylang.php:115
+msgid "Partager sur Google+"
+msgstr "Delen op Google+"
+
+#: library/classes/content/class-polylang.php:116
+msgid "Partager sur Instagram"
+msgstr "Delen op Instagram"
+
+#: library/classes/content/class-polylang.php:117
+msgid "Partager sur Pinterest"
+msgstr "Delen op Pinterest"
+
+#: library/classes/content/class-polylang.php:118
+msgid "Partager par email"
+msgstr "Delen par e-mail"
+
+#: library/classes/content/class-polylang.php:119
+msgid "Accès au menu principal"
+msgstr "Toegang tot het hoofdmenu"
+
+#: library/classes/content/class-polylang.php:120
+msgid "Que recherchez-vous ?"
+msgstr "Wat zoekt u?"
+
+#: library/classes/content/class-polylang.php:121
+msgid "Rechercher"
+msgstr "Zoeken"
+
+#: library/classes/content/class-polylang.php:122
+msgid "Réinitialiser"
+msgstr "Resetten"
+
+#: library/classes/content/class-polylang.php:123
+msgid "Choisissez vos dates"
+msgstr "Kies uw reisdatum"
+
+#: library/classes/content/class-polylang.php:124
+msgid "adulte(s)"
+msgstr "volwassene(n)"
+
+#: library/classes/content/class-polylang.php:125
+msgid "enfant(s)"
+msgstr "kind(eren)"
+
+#: library/classes/content/class-polylang.php:126
+msgid "jours"
+msgstr "dagen"
+
+#: library/classes/content/class-polylang.php:127
+msgid "Pages"
+msgstr "Paginas"
+
+#: library/classes/content/class-polylang.php:128
+msgid "Offre touristique"
+msgstr "Toeristisch aanbod"
+
+#: library/classes/content/class-polylang.php:129
+msgid "Désolé, aucun contenu touristique ne correspond à votre recherche"
+msgstr "Sorry, geen toeristische inhoud komt overeen met uw zoekopdracht"
+
+#: library/classes/content/class-polylang.php:130
+msgid "Désolé, aucune page ne correspond à votre recherche"
+msgstr "Sorry, geen parina's komen overeen met uw zoekopdracht"
+
+#: library/classes/content/class-polylang.php:131
+msgid "Fermer"
+msgstr "Sluiten"
+
+#: library/classes/content/class-polylang.php:132
+msgid "Menu"
+msgstr "Menu"
+
+#: library/classes/content/class-polylang.php:133
+msgid "Merci de choisir une date"
+msgstr "Kies een datum"
+
+#: library/classes/content/class-polylang.php:134
+msgid "Comment venir ?"
+msgstr "Hoe kom je hier?"
+
 #: library/classes/content/class-polylang.php:135
+msgid "La page que vous recherchez est peut-être ici ?"
+msgstr "Misschien is de pagina due u zoekt hier?"
+
+#: library/classes/content/class-polylang.php:136
+#: library/functions/03_woody_format_data.php:979
 msgid "Lire la suite"
 msgstr "Lees meer over"
+
+#: library/classes/content/class-polylang.php:137
+msgid "Que voulez-vous réserver ?"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:138
+#, fuzzy
+#| msgid "Choisissez vos dates"
+msgid "Choisissez vos dates de réservation"
+msgstr "Kies uw reisdatum"
+
+#: library/classes/content/class-polylang.php:141
+msgid "Bas"
+msgstr "Bodem"
+
+#: library/classes/content/class-polylang.php:142
+msgid "Haut"
+msgstr "Top"
+
+#: library/classes/content/class-polylang.php:143
+msgid "Vent"
+msgstr "Wind"
+
+#: library/classes/content/class-polylang.php:144
+msgid "Humidité"
+msgstr "Vochtigheid"
+
+#: library/classes/content/class-polylang.php:145
+msgid "ISO 0°"
+msgstr "ISO 0°"
+
+#: library/classes/content/class-polylang.php:146
+msgid "Limite Pluie/Neige"
+msgstr "Grens Regen/Sneeuw"
+
+#: library/classes/content/class-polylang.php:147
+msgid "Ensoleillé"
+msgstr "Zonnig"
+
+#: library/classes/content/class-polylang.php:148
+msgid "Pluie"
+msgstr "Regen"
+
+#: library/classes/content/class-polylang.php:149
+msgid "Neige"
+msgstr "Sneeuw"
+
+#: library/classes/content/class-polylang.php:150
+msgid "Grésil"
+msgstr "Ijzel"
+
+#: library/classes/content/class-polylang.php:151
+msgid "Venteux"
+msgstr "Winderig"
+
+#: library/classes/content/class-polylang.php:152
+msgid "Brouillard"
+msgstr "Mist"
+
+#: library/classes/content/class-polylang.php:153
+msgid "Nuageux"
+msgstr "Bewolkt"
+
+#: library/classes/content/class-polylang.php:154
+msgid "Éclaircies"
+msgstr "Gedeeltelijk Bewolkt"
+
+#: library/classes/content/class-polylang.php:155
+msgid "Grêle"
+msgstr "Hagel"
+
+#: library/classes/content/class-polylang.php:156
+msgid "Tempête"
+msgstr "Storm"
+
+#: library/classes/content/class-polylang.php:157
+msgid "Verglas"
+msgstr "Ljs op de weg"
+
+#: library/classes/content/class-polylang.php:159
+msgid "Matin"
+msgstr "Ochtend"
+
+#: library/classes/content/class-polylang.php:160
+msgid "Après-midi"
+msgstr "Namiddag"
+
+#: library/classes/content/class-polylang.php:161
+msgid "Soirée"
+msgstr "Avond"
 
 #: library/templates/template-page.php:78
 msgid "Oups !"
@@ -49,330 +374,9 @@ msgstr ""
 "De pagina die u zoekt, is misschien verwijderd of is tijdelijk niet "
 "beschikbaar."
 
-#: library/classes/content/class-polylang.php:40
-#: library/classes/content/class-polylang.php:81
-msgid "Lundi"
-msgstr "Maandag"
-
-#: library/classes/content/class-polylang.php:41
-#: library/classes/content/class-polylang.php:82
-msgid "Mardi"
-msgstr "Dinsdag"
-
-#: library/classes/content/class-polylang.php:42
-#: library/classes/content/class-polylang.php:83
-msgid "Mercredi"
-msgstr "Woensdag"
-
-#: library/classes/content/class-polylang.php:43
-#: library/classes/content/class-polylang.php:84
-msgid "Jeudi"
-msgstr "Donderdag"
-
-#: library/classes/content/class-polylang.php:44
-#: library/classes/content/class-polylang.php:85
-msgid "Vendredi"
-msgstr "Vrijdag"
-
-#: library/classes/content/class-polylang.php:45
-#: library/classes/content/class-polylang.php:86
-msgid "Samedi"
-msgstr "Zaterdag"
-
-#: library/classes/content/class-polylang.php:46
-#: library/classes/content/class-polylang.php:87
-msgid "Dimanche"
-msgstr "Zondag"
-
-#: library/classes/content/class-polylang.php:53
-#: library/classes/content/class-polylang.php:88
-msgid "Janvier"
-msgstr "Januari"
-
-#: library/classes/content/class-polylang.php:54
-#: library/classes/content/class-polylang.php:89
-msgid "Février"
-msgstr "Februari"
-
-#: library/classes/content/class-polylang.php:55
-#: library/classes/content/class-polylang.php:90
-msgid "Mars"
-msgstr "Maart"
-
-#: library/classes/content/class-polylang.php:56
-#: library/classes/content/class-polylang.php:91
-msgid "Avril"
-msgstr "April"
-
-#: library/classes/content/class-polylang.php:57
-#: library/classes/content/class-polylang.php:92
-msgid "Mai"
-msgstr "Mei"
-
-#: library/classes/content/class-polylang.php:58
-#: library/classes/content/class-polylang.php:93
-msgid "Juin"
-msgstr "Juni"
-
-#: library/classes/content/class-polylang.php:59
-#: library/classes/content/class-polylang.php:94
-msgid "Juillet"
-msgstr "Juli"
-
-#: library/classes/content/class-polylang.php:60
-#: library/classes/content/class-polylang.php:95
-msgid "Août"
-msgstr "Augustus"
-
-#: library/classes/content/class-polylang.php:61
-#: library/classes/content/class-polylang.php:96
-msgid "Septembre"
-msgstr "September"
-
-#: library/classes/content/class-polylang.php:62
-#: library/classes/content/class-polylang.php:97
-msgid "Octobre"
-msgstr "Oktober"
-
-#: library/classes/content/class-polylang.php:63
-#: library/classes/content/class-polylang.php:98
-msgid "Novembre"
-msgstr "November"
-
-#: library/classes/content/class-polylang.php:64
-#: library/classes/content/class-polylang.php:99
-msgid "Décembre"
-msgstr "December"
-
-#: library/classes/content/class-polylang.php:77
-msgid "Page non trouvée %%sep%% %%sitename%%"
-msgstr "Pagina niet gevonden %%sep%% %%sitename%%"
-
-#: library/classes/content/class-polylang.php:78
-msgid "Erreur 404 : Page non trouvée"
-msgstr "Error 404: Pagina niet gevonden"
-
-#: library/classes/content/class-polylang.php:102
-msgid "M'y rendre"
-msgstr "Routebeschrijving"
-
-#: library/classes/content/class-polylang.php:103
-msgid "Ajouter à mes favoris"
-msgstr "Toevoegen aan mijn favorieten"
-
-#: library/classes/content/class-polylang.php:104
-msgid "Voir l'itinéraire"
-msgstr "Bekijk de routebeschrijving"
-
-#: library/classes/content/class-polylang.php:105
-msgid "Voir la vidéo"
-msgstr "Bekijk de video"
-
-#: library/classes/content/class-polylang.php:106
-msgid "Affiner ma recherche"
-msgstr "Mijn zoekopdracht verfijnen"
-
-#: library/classes/content/class-polylang.php:107
-msgid "Voir les résultats sur la carte"
-msgstr "Bekijk de resultaten op de kaart"
-
-#: library/classes/content/class-polylang.php:108
-msgid "résultat"
-msgstr "resultaat"
-
-#: library/classes/content/class-polylang.php:109
-msgid "résultats"
-msgstr "resultaten"
-
-#: library/classes/content/class-polylang.php:110
-msgid "Aucun résultat"
-msgstr "Geen resultaten gevonden"
-
-#: library/classes/content/class-polylang.php:111
-msgid "Voir la carte"
-msgstr "Bekijk de kaart"
-
-#: library/classes/content/class-polylang.php:112
-msgid "Partager sur Facebook"
-msgstr "Delen op Facebook"
-
-#: library/classes/content/class-polylang.php:113
-msgid "Partager sur Twitter"
-msgstr "Delen op Twitter"
-
-#: library/classes/content/class-polylang.php:114
-msgid "Partager sur Google+"
-msgstr "Delen op Google+"
-
-#: library/classes/content/class-polylang.php:115
-msgid "Partager sur Instagram"
-msgstr "Delen op Instagram"
-
-#: library/classes/content/class-polylang.php:116
-msgid "Partager sur Pinterest"
-msgstr "Delen op Pinterest"
-
-#: library/classes/content/class-polylang.php:117
-msgid "Partager par email"
-msgstr "Delen par e-mail"
-
-#: library/classes/content/class-polylang.php:118
-msgid "Accès au menu principal"
-msgstr "Toegang tot het hoofdmenu"
-
-#: library/classes/content/class-polylang.php:119
-msgid "Que recherchez-vous ?"
-msgstr "Wat zoekt u?"
-
-#: library/classes/content/class-polylang.php:120
-msgid "Rechercher"
-msgstr "Zoeken"
-
-#: library/classes/content/class-polylang.php:121
-msgid "Réinitialiser"
-msgstr "Resetten"
-
-#: library/classes/content/class-polylang.php:122
-msgid "Choisissez vos dates"
-msgstr "Kies uw reisdatum"
-
-#: library/classes/content/class-polylang.php:123
-msgid "adulte(s)"
-msgstr "volwassene(n)"
-
-#: library/classes/content/class-polylang.php:124
-msgid "enfant(s)"
-msgstr "kind(eren)"
-
-#: library/classes/content/class-polylang.php:125
-msgid "jours"
-msgstr "dagen"
-
-#: library/classes/content/class-polylang.php:126
-msgid "Pages"
-msgstr "Paginas"
-
-#: library/classes/content/class-polylang.php:127
-msgid "Offre touristique"
-msgstr "Toeristisch aanbod"
-
-#: library/classes/content/class-polylang.php:128
-msgid "Désolé, aucun contenu touristique ne correspond à votre recherche"
-msgstr "Sorry, geen toeristische inhoud komt overeen met uw zoekopdracht"
-
-#: library/classes/content/class-polylang.php:129
-msgid "Désolé, aucune page ne correspond à votre recherche"
-msgstr "Sorry, geen parina's komen overeen met uw zoekopdracht"
-
-#: library/classes/content/class-polylang.php:130
-msgid "Fermer"
-msgstr "Sluiten"
-
-#: library/classes/content/class-polylang.php:131
-msgid "Menu"
-msgstr "Menu"
-
-#: library/classes/content/class-polylang.php:132
-msgid "Merci de choisir une date"
-msgstr "Kies een datum"
-
-#: library/classes/content/class-polylang.php:133
-msgid "Comment venir ?"
-msgstr "Hoe kom je hier?"
-
-#: library/classes/content/class-polylang.php:134
-msgid "La page que vous recherchez est peut-être ici ?"
-msgstr "Misschien is de pagina due u zoekt hier?"
-
-#: library/classes/content/class-polylang.php:136
-msgid "Que voulez-vous réserver ?"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:137
-#, fuzzy
-#| msgid "Choisissez vos dates"
-msgid "Choisissez vos dates de réservation"
-msgstr "Kies uw reisdatum"
-
-#: library/classes/content/class-polylang.php:140
-msgid "Bas"
-msgstr "Bodem"
-
-#: library/classes/content/class-polylang.php:141
-msgid "Haut"
-msgstr "Top"
-
-#: library/classes/content/class-polylang.php:142
-msgid "Vent"
-msgstr "Wind"
-
-#: library/classes/content/class-polylang.php:143
-msgid "Humidité"
-msgstr "Vochtigheid"
-
-#: library/classes/content/class-polylang.php:144
-msgid "ISO 0°"
-msgstr "ISO 0°"
-
-#: library/classes/content/class-polylang.php:145
-msgid "Limite Pluie/Neige"
-msgstr "Grens Regen/Sneeuw"
-
-#: library/classes/content/class-polylang.php:146
-msgid "Ensoleillé"
-msgstr "Zonnig"
-
-#: library/classes/content/class-polylang.php:147
-msgid "Pluie"
-msgstr "Regen"
-
-#: library/classes/content/class-polylang.php:148
-msgid "Neige"
-msgstr "Sneeuw"
-
-#: library/classes/content/class-polylang.php:149
-msgid "Grésil"
-msgstr "Ijzel"
-
-#: library/classes/content/class-polylang.php:150
-msgid "Venteux"
-msgstr "Winderig"
-
-#: library/classes/content/class-polylang.php:151
-msgid "Brouillard"
-msgstr "Mist"
-
-#: library/classes/content/class-polylang.php:152
-msgid "Nuageux"
-msgstr "Bewolkt"
-
-#: library/classes/content/class-polylang.php:153
-msgid "Éclaircies"
-msgstr "Gedeeltelijk Bewolkt"
-
-#: library/classes/content/class-polylang.php:154
-msgid "Grêle"
-msgstr "Hagel"
-
-#: library/classes/content/class-polylang.php:155
-msgid "Tempête"
-msgstr "Storm"
-
-#: library/classes/content/class-polylang.php:156
-msgid "Verglas"
-msgstr "Ljs op de weg"
-
-#: library/classes/content/class-polylang.php:158
-msgid "Matin"
-msgstr "Ochtend"
-
-#: library/classes/content/class-polylang.php:159
-msgid "Après-midi"
-msgstr "Namiddag"
-
-#: library/classes/content/class-polylang.php:160
-msgid "Soirée"
-msgstr "Avond"
+#: library/templates/template.php:279
+msgid "Nos suggestions"
+msgstr "Onze suggesties"
 
 #~ msgid "Aller à la page d'accueil"
 #~ msgstr "Ga naar de startpagina"

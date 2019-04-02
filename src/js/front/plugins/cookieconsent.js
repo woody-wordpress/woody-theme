@@ -8,10 +8,10 @@ if (window.siteConfig.current_lang == 'fr') {
     var link = "En savoir plus";
     var policy = "Règles sur les cookies";
 } else if (window.siteConfig.current_lang == 'de') {
-    var message = "Diese Website aktiviert standardmäßig Cookies zur Zielgruppenmessung und für anonyme Funktionen.";
+    var message = "Diese Website nutzt für ihre Funktion und Analyse anoynm Cookies.";
     var dismiss = "Okay, ich verstehe!";
-    var allow = "Ich akzeptiere cookies";
-    var deny = "Ich will keine cookies";
+    var allow = "Cookies akzeptieren";
+    var deny = "Keine Cookies";
     var link = "Mehr erfahren";
     var policy = "Richtlinien für Cookies";
 } else if (window.siteConfig.current_lang == 'nl') {
@@ -22,11 +22,11 @@ if (window.siteConfig.current_lang == 'fr') {
     var link = "Meer informatie";
     var policy = "Cookiebeleid";
 } else if (window.siteConfig.current_lang == 'es') {
-    var message = "Este sitio web activa las cookies de forma predeterminada para la medición de la audiencia y las funciones anónimas.";
+    var message = "Esta página web activa las cookies de forma predeterminada para la medición de la audiencia y las funciones anónimas.";
     var dismiss = "¡Bien, lo entiendo!";
-    var allow = "Ik accepteer cookies";
-    var deny = "No quiero galletas";
-    var link = "Conozca más";
+    var allow = "Acepto cookies";
+    var deny = "No acepto cookies";
+    var link = "Más información";
     var policy = "Política sobre Cookies";
 } else if (window.siteConfig.current_lang == 'it') {
     var message = "Questo sito web attiva di default i cookie per la misurazione dell'audience e le funzioni anonime.";

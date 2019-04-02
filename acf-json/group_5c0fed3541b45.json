@@ -56,25 +56,6 @@
             "layout": "block",
             "sub_fields": [
                 {
-                    "key": "field_5c10c04862d6c",
-                    "label": "Titre",
-                    "name": "suggest_title",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "Exemple : Nos suggestions",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
                     "key": "field_5c10c08f62d6d",
                     "label": "Pages suggérées",
                     "name": "suggest_pages",

@@ -276,7 +276,7 @@ abstract class WoodyTheme_TemplateAbstract
 
             $suggest = get_field('es_search_block_suggests', 'option');
             if (!empty($suggest) && !empty($suggest['suggest_pages'])) {
-                $data['suggest']['title'] = (!empty($suggest['suggest_title'])) ? $suggest['suggest_title'] : '';
+                $data['suggest']['title'] = __('Nos suggestions', 'woody-theme');
                 foreach ($suggest['suggest_pages'] as $page) {
                     $t_page = pll_get_post($page['suggest_page']);
                     if (!empty($t_page)) {
