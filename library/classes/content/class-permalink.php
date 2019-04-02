@@ -30,7 +30,7 @@ class WoodyTheme_Permalink
         $current_lang = pll_current_language();
         $posts = get_transient('woody_get_permalink', []);
 
-        if (empty($posts[$post_id]) && empty($posts[$post_id][$current_lang])) {
+        if (empty($posts[$post_id]) || empty($posts[$post_id][$current_lang])) {
             $posts[$post_id][$current_lang] = get_permalink($post_id);
             set_transient('woody_get_permalink', $posts);
         }
