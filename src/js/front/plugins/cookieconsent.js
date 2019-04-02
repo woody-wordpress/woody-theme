@@ -29,12 +29,12 @@ if (window.siteConfig.current_lang == 'fr') {
     var link = "Más información";
     var policy = "Política sobre Cookies";
 } else if (window.siteConfig.current_lang == 'it') {
-    var message = "Questo sito web attiva di default i cookie per la misurazione dell'audience e le funzioni anonime.";
+    var message = "Questo sito web attiva di default i cookies per la misurazione dell'audience e le funzioni anonime.";
     var dismiss = "Ok, ho capito!";
-    var allow = "Accetto i cookie";
-    var deny = "Non voglio i biscotti";
+    var allow = "Accetto i cookies";
+    var deny = "Non voglio i cookies";
     var link = "Per saperne di più";
-    var policy = "Politica sui cookie";
+    var policy = "Politica sui cookies";
 } else {
     var message = "This website activates cookies by default for audience measurement and anonymous features.";
     var dismiss = "Got it!";
