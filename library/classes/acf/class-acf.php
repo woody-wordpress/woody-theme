@@ -416,6 +416,7 @@ class WoodyTheme_ACF
 
     public function cleanTransient()
     {
+        // Delete Transient
         delete_transient('woody_terms_page_type');
         delete_transient('woody_tpls_order');
         delete_transient('woody_components');
@@ -424,6 +425,9 @@ class WoodyTheme_ACF
         delete_transient('woody_terms_choices');
         delete_transient('woody_website_pages_taxonomies');
         delete_transient('woody_menus_cache');
+
+        // Warm Transient
+        getWoodyTwigPaths();
     }
 
     public function cleanTermsChoicesTransient()
