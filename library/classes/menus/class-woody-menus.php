@@ -86,32 +86,12 @@ class WoodyTheme_Menus
         return $return;
     }
 
-    public static function getTheRightOption($post_id)
+    public static function getTheRightOption($post_id = null)
     {
         $return = [];
-
-        $lang = pll_current_language();
-        $options = get_transient('woody_acf_options', []);
-        if (empty($options[$lang])) {
-            $options[$lang] = get_fields('options');
-            set_transient('woody_acf_options', $options);
+        if (!empty($post_id) && is_numeric($post_id)) {
+            $return['submenu_' . $post_id] = get_field('submenu_' . $post_id, 'options');
         }
-
-        if (!empty($options[$lang])) {
-            $return = $options[$lang];
-            if (!empty($return) && is_array($return)) {
-                foreach ($return as $key => $value) {
-                    if (strpos($key, 'submenu_') === false) {
-                        unset($return[$key]);
-                    }
-
-                    if (str_replace('submenu_', '', $key) != $post_id) {
-                        unset($return[$key]);
-                    }
-                }
-            }
-        }
-
         return $return;
     }
 
