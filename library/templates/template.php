@@ -53,6 +53,7 @@ abstract class WoodyTheme_TemplateAbstract
     public function render()
     {
         if (!empty($this->twig_tpl) && !empty($this->context)) {
+            $this->context = apply_filters('woody_theme_context', $this->context);
             Timber::render($this->twig_tpl, $this->context);
         }
     }
