@@ -30,17 +30,33 @@ class WoodyTheme_Menus
     */
     public static function getMainMenu($limit = 6, $depth_1_ids = array(), $root_level = 1)
     {
-        $return = [];
-        if (!empty($depth_1_ids)) {
-            $return = self::getMenuLinks($depth_1_ids, 0, $limit, $root_level);
-        } else {
-            $return = self::getMenuLinks(null, 0, $limit);
+        $current_lang = 'fr';
+        if (function_exists('pll_current_language')) {
+            $current_lang = pll_current_language();
         }
 
-        if (!empty($return) && is_array($return)) {
-            foreach ($return as $key => $value) {
-                $return[$key]['submenu'] = self::getSubmenus($value['the_id']);
+        $menu_cache_key = $current_lang . '_' . md5(serialize($depth_1_ids));
+        $woody_menus_cache = get_transient('woody_menus_cache', []);
+
+        if (!empty($woody_menus_cache[$menu_cache_key])) {
+            $return = $woody_menus_cache[$menu_cache_key];
+        } else {
+            $return = [];
+            if (!empty($depth_1_ids)) {
+                $return = self::getMenuLinks($depth_1_ids, 0, $limit, $root_level);
+            } else {
+                $return = self::getMenuLinks(null, 0, $limit);
             }
+
+            if (!empty($return) && is_array($return)) {
+                foreach ($return as $key => $value) {
+                    $return[$key]['submenu'] = self::getSubmenus($value['the_id']);
+                }
+            }
+
+            // Save transient cache
+            $woody_menus_cache[$menu_cache_key] = $return;
+            set_transient('woody_menus_cache', $woody_menus_cache);
         }
 
         return $return;

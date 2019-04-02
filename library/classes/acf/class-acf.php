@@ -28,6 +28,8 @@ class WoodyTheme_ACF
         add_action('edit_term', [$this,'cleanTermsChoicesTransient']);
         add_action('delete_term', [$this,'cleanTermsChoicesTransient']);
 
+        add_action('acf/save_post', [$this, 'clearOptionsTransient'], 20);
+
         add_filter('acf/settings/load_json', [$this,'acfJsonLoad']);
         add_filter('acf/load_field/type=radio', [$this, 'woodyTplAcfLoadField']);
         add_filter('acf/load_field/type=select', [$this, 'woodyIconLoadField']);
@@ -75,6 +77,14 @@ class WoodyTheme_ACF
     {
         $paths[] = get_template_directory() . '/acf-json';
         return $paths;
+    }
+
+    public function clearOptionsTransient()
+    {
+        $screen = get_current_screen();
+        if (strpos($screen->id, 'acf-options') !== false) {
+            delete_transient('woody_menus_cache');
+        }
     }
 
     public function pllGalleryLoadField($value, $post_id, $field)
@@ -394,14 +404,14 @@ class WoodyTheme_ACF
 
     private function getCurrentLang()
     {
-        $active_lang = 'fr';
+        $current_lang = 'fr';
 
         // Polylang
         if (function_exists('pll_current_language')) {
-            $active_lang = pll_current_language();
+            $current_lang = pll_current_language();
         }
 
-        return $active_lang;
+        return $current_lang;
     }
 
     public function cleanTransient()
@@ -413,6 +423,7 @@ class WoodyTheme_ACF
         delete_transient('woody_page_taxonomies_choices');
         delete_transient('woody_terms_choices');
         delete_transient('woody_website_pages_taxonomies');
+        delete_transient('woody_menus_cache');
     }
 
     public function cleanTermsChoicesTransient()
