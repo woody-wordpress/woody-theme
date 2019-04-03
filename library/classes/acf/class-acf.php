@@ -66,7 +66,7 @@ class WoodyTheme_ACF
 
     public function woodyGetFieldOption($field_name)
     {
-        $woody_get_field_option = get_transient('woody_get_field_option', []);
+        $woody_get_field_option = get_transient('woody_get_field_option');
         if (empty($woody_get_field_option[$field_name])) {
             $woody_get_field_option[$field_name] = get_field($field_name, 'option');
             set_transient('woody_get_field_option', $woody_get_field_option);
