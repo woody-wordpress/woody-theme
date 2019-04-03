@@ -73,7 +73,7 @@ class WoodyTheme_Commands
                 $response = wp_remote_request($purgeme, array('method' => 'PURGE', 'headers' => $headers, "sslverify" => false));
                 if ($response instanceof WP_Error) {
                     foreach ($response->errors as $error => $errors) {
-                        $noticeMessage .= 'Error ' . $error . ' : ';
+                        $noticeMessage = 'Error ' . $error . ' : ';
                         foreach ($errors as $error => $description) {
                             $noticeMessage .= ' - ' . $description;
                         }
