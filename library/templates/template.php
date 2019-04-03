@@ -270,12 +270,12 @@ abstract class WoodyTheme_TemplateAbstract
     {
         $data = [];
 
-        $search_post_id = get_field('es_search_page_url', 'option');
+        $search_post_id = apply_filters('woody_get_field_option', 'es_search_page_url');
 
         if (!empty($search_post_id)) {
             $data['search_url'] = get_permalink(pll_get_post($search_post_id));
 
-            $suggest = get_field('es_search_block_suggests', 'option');
+            $suggest = apply_filters('woody_get_field_option', 'es_search_block_suggests');
             if (!empty($suggest) && !empty($suggest['suggest_pages'])) {
                 $data['suggest']['title'] = __('Nos suggestions', 'woody-theme');
                 foreach ($suggest['suggest_pages'] as $page) {

@@ -106,7 +106,7 @@ class WoodyTheme_Menus
     {
         $return = [];
         if (!empty($post_id) && is_numeric($post_id)) {
-            $return['submenu_' . $post_id] = get_field('submenu_' . $post_id, 'options');
+            $return['submenu_' . $post_id] = apply_filters('woody_get_field_option', 'submenu_' . $post_id);
         }
         return $return;
     }
