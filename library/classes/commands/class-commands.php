@@ -44,7 +44,8 @@ class WoodyTheme_Commands
 
     private function clear_timber_cache()
     {
-        \WP_Filesystem_Direct::delete(WP_TIMBER_DIR, true);
+        global $wp_filesystem;
+        $wp_filesystem->rmdir(WP_TIMBER_DIR, true);
         Output::success('clear_timber_cache');
     }
 
