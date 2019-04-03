@@ -19,20 +19,11 @@ class WoodyTheme_Polylang
 
         add_filter('woody_pll_days', [$this, 'woodyPllDays'], 10);
         add_filter('woody_pll_months', [$this, 'woodyPllMonths'], 10);
-        add_filter('woody_theme_siteconfig', [$this, 'siteConfigAddLangs'], 12, 1);
     }
 
     public function loadThemeTextdomain()
     {
         load_theme_textdomain('woody-theme', get_template_directory() . '/languages');
-    }
-
-    public function siteConfigAddLangs($siteConfig)
-    {
-        $siteConfig['current_lang'] = pll_current_language();
-        $siteConfig['languages'] = apply_filters('woody_pll_the_locales', null);
-
-        return $siteConfig;
     }
 
     public function woodyPllDays()

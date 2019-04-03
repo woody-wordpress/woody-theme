@@ -8,7 +8,6 @@
 
 class WoodyTheme_Enqueue_Assets
 {
-    protected $mapKeys;
     protected $siteConfig;
     protected $globalScriptString;
     protected $isTouristicPlaylist;
@@ -17,7 +16,6 @@ class WoodyTheme_Enqueue_Assets
 
     public function __construct()
     {
-        $this->mapKeys = getMapKeys(); // defined in functions touristic_maps
         $this->siteConfig = $this->setSiteConfig();
         $this->globalScriptString = $this->setGlobalScriptString();
 
@@ -106,7 +104,7 @@ class WoodyTheme_Enqueue_Assets
         ];
 
         // get map keys
-        $map_keys = $this->mapKeys;
+        $map_keys = $this->siteConfig['mapProviderKeys'];
         if (!empty($map_keys)) {
             $map_keys['v'] = $this->wThemeVersion;
         }
@@ -314,25 +312,7 @@ class WoodyTheme_Enqueue_Assets
     protected function setSiteConfig()
     {
         // Added global vars
-        $siteConfig = [];
-        $siteConfig['site_key'] = WP_SITE_KEY;
-        $credentials = get_option('woody_credentials');
-
-        if (is_admin()) {
-            if (!empty($credentials['login']) && !empty($credentials['password'])) {
-                $siteConfig['login'] = $credentials['login'];
-                $siteConfig['password'] = $credentials['password'];
-            }
-        } else {
-            if (!empty($credentials['public_login']) && !empty($credentials['public_password'])) {
-                $siteConfig['login'] = $credentials['public_login'];
-                $siteConfig['password'] = $credentials['public_password'];
-            }
-        }
-        $siteConfig['mapProviderKeys'] = $this->mapKeys;
-
-        // Add hook to overide siteconfig
-        $siteConfig = apply_filters('woody_theme_siteconfig', $siteConfig);
+        $siteConfig = apply_filters('woody_theme_siteconfig', []);
         return $siteConfig;
     }
 
@@ -350,7 +330,7 @@ class WoodyTheme_Enqueue_Assets
             'window.DrupalAngularConfig.apiAccount.login' => (!empty($this->siteConfig['login'])) ? json_encode($this->siteConfig['login']) : '{}',
             'window.DrupalAngularConfig.apiAccount.password' => (!empty($this->siteConfig['password'])) ? json_encode($this->siteConfig['password']) : '{}',
             // inject mapKeys in DrupalAngularAppConfig
-            'window.DrupalAngularConfig.mapProviderKeys' => (!empty($this->mapKeys)) ? json_encode($this->mapKeys) : '{}',
+            'window.DrupalAngularConfig.mapProviderKeys' => (!empty($this->siteConfig['mapProviderKeys'])) ? json_encode($this->siteConfig['mapProviderKeys']) : '{}',
         ];
 
         // Ancienne méthode pour appeler les fonts en asynchrone voir ligne 227
