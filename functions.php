@@ -35,11 +35,9 @@ require_once(__DIR__ . '/library/classes/autoloader.php');
  * Change Timber's cache folder.
  * We want to use wp-content/cache/timber
  */
-function timberCacheLocation()
-{
-    return WP_CONTENT_DIR . '/cache/timber';
-}
-add_filter('timber/cache/location', 'timberCacheLocation');
+add_filter('timber/cache/location', function () {
+    return WP_TIMBER_DIR;
+});
 
 if (class_exists('Timber', false)) {
     Timber::$locations = array('views', Woody::getTemplatesDirname());

@@ -35,8 +35,17 @@ class WoodyTheme_Commands
         wp_cache_delete('alloptions', 'options');
         Output::success('wp_cache_delete alloptions');
 
+        // Clear Timber Cache
+        $this->clear_timber_cache();
+
         // (Not all cache back ends listen to 'flush')
         $this->purge_varnish();
+    }
+
+    private function clear_timber_cache()
+    {
+        \WP_Filesystem_Direct::delete(WP_TIMBER_DIR, true);
+        Output::success('clear_timber_cache');
     }
 
     private function purge_varnish()
