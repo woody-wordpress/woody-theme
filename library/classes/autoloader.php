@@ -43,11 +43,11 @@ new WoodyTheme_Cleanup_OptionsTable();
 // Dashboard
 new WoodyTheme_Dashboard();
 
-// Langs
-new WoodyTheme_Polylang();
-
 // Assets
 new WoodyTheme_Enqueue_Assets();
+
+// Langs
+new WoodyTheme_Polylang();
 
 // Content
 new WoodyTheme_Permalink();
