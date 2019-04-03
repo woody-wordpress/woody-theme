@@ -5,6 +5,8 @@
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Woody\Utils\Output;
 
 class WoodyTheme_Commands
@@ -44,9 +46,9 @@ class WoodyTheme_Commands
 
     private function clear_timber_cache()
     {
-        global $wp_filesystem;
-        $wp_filesystem->rmdir(WP_TIMBER_DIR, true);
-        Output::success('clear_timber_cache');
+        $fileSystem = new Filesystem();
+        $fileSystem->remove(WP_TIMBER_DIR);
+        Output::success('woody_clear_timber_cache');
     }
 
     private function purge_varnish()
