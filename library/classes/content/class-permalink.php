@@ -34,7 +34,7 @@ class WoodyTheme_Permalink
         if (!empty($posts[$post_id]) && !empty($posts[$post_id][$current_lang])) {
             $return = $posts[$post_id][$current_lang];
         } else {
-            $return = get_permalink($post_id) ?: get_permalink(get_the_id());
+            $return = get_permalink($post_id) ?: get_permalink();
             $posts[$post_id][$current_lang] = $return;
             set_transient('woody_get_permalink', $posts);
         }

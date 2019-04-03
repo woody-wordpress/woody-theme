@@ -29,9 +29,10 @@ class WoodyTheme_Shortcodes
     public function searchShortCode($atts)
     {
         $query = filter_input(INPUT_GET, 'query', FILTER_SANITIZE_STRING);
+        $tags = filter_input(INPUT_GET, 'tags', FILTER_SANITIZE_STRING);
 
         // Search inside pages
-        $pages_response = apply_filters('woody_pages_search', ['query' => $query]);
+        $pages_response = apply_filters('woody_pages_search', ['query' => $query, 'tags' => $tags]);
 
         $result = [];
         $result['query'] = $query;
@@ -67,7 +68,15 @@ class WoodyTheme_Shortcodes
             $result['total']['touristic_sheets'] = $sheets_response['total'];
         }
 
-        return Timber::compile($this->twigPaths['woody_widgets-es_search-tpl_01'], $result);
+        // Set a default template
+        $tplSearch = apply_filters('es_search_tpl', null);
+        if (empty($tplSearch)) {
+            $tplSearch = 'woody_widgets-es_search-tpl_01';
+        }
+
+        $template = $this->twigPaths[$tplSearch];
+
+        return Timber::compile($template, $result);
     }
 
     public function anchorShortcode($atts)
