@@ -1,34 +1,34 @@
 var style = getComputedStyle(document.body);
 
-if (window.siteConfig.current_lang == 'fr') {
+if (window.siteConfig.current_lang.indexOf('fr') != -1) {
     var message = "Ce site web active par défaut des cookies de mesure d'audience et pour des fonctionnalités anonymes.";
     var dismiss = "OK je comprends !";
     var allow = "J'accepte les cookies";
     var deny = "Je ne veux pas de cookies";
     var link = "En savoir plus";
     var policy = "Règles sur les cookies";
-} else if (window.siteConfig.current_lang == 'de') {
+} else if (window.siteConfig.current_lang.indexOf('de') != -1) {
     var message = "Diese Website nutzt für ihre Funktion und Analyse anoynm Cookies.";
     var dismiss = "Okay, ich verstehe!";
     var allow = "Cookies akzeptieren";
     var deny = "Keine Cookies";
     var link = "Mehr erfahren";
     var policy = "Richtlinien für Cookies";
-} else if (window.siteConfig.current_lang == 'nl') {
+} else if (window.siteConfig.current_lang.indexOf('nl') != -1) {
     var message = "Deze website activeert standaard cookies voor publieksmeting en anonieme functies.";
     var dismiss = "Oké, ik begrijp het!";
     var allow = "Ik accepteer cookies";
     var deny = "Ik wil geen cookies";
     var link = "Meer informatie";
     var policy = "Cookiebeleid";
-} else if (window.siteConfig.current_lang == 'es') {
+} else if (window.siteConfig.current_lang.indexOf('es') != -1) {
     var message = "Esta página web activa las cookies de forma predeterminada para la medición de la audiencia y las funciones anónimas.";
     var dismiss = "¡Bien, lo entiendo!";
     var allow = "Acepto cookies";
     var deny = "No acepto cookies";
     var link = "Más información";
     var policy = "Política sobre Cookies";
-} else if (window.siteConfig.current_lang == 'it') {
+} else if (window.siteConfig.current_lang.indexOf('it') != -1) {
     var message = "Questo sito web attiva di default i cookies per la misurazione dell'audience e le funzioni anonime.";
     var dismiss = "Ok, ho capito!";
     var allow = "Accetto i cookies";
