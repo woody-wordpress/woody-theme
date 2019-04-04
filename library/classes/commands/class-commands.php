@@ -18,10 +18,10 @@ class WoodyTheme_Commands
 
     protected function registerHooks()
     {
-        \WP_CLI::add_command('woody', [$this, 'flush']);
-        \WP_CLI::add_command('woody', [$this, 'flush_cache']);
-        \WP_CLI::add_command('woody', [$this, 'flush_timber']);
-        \WP_CLI::add_command('woody', [$this, 'flush_varnish']);
+        \WP_CLI::add_command('woody_flush', [$this, 'flush']);
+        \WP_CLI::add_command('woody_flush_cache', [$this, 'flush_cache']);
+        \WP_CLI::add_command('woody_flush_timber', [$this, 'flush_timber']);
+        \WP_CLI::add_command('woody_flush_varnish', [$this, 'flush_varnish']);
     }
 
     public function flush($args)
