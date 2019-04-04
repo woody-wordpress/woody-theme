@@ -28,7 +28,7 @@ class WoodyTheme_Commands
     {
         $this->flush_cache();
         $this->flush_timber();
-        //$this->flush_varnish();
+        $this->flush_varnish();
     }
 
     public function flush_cache()
