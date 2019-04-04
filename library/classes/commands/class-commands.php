@@ -6,6 +6,8 @@
  * @since WoodyTheme 1.0.0
  */
 use Timber\Integrations\Command;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Woody\Utils\Output;
 
 class WoodyTheme_Commands
@@ -50,12 +52,19 @@ class WoodyTheme_Commands
     public function flush_timber()
     {
         if (WP_ENV != 'dev') {
-            exec('chmod -R 777 ' . WP_TIMBER_DIR);
-            $cleared = Command::clear_cache('twig');
-            if ($cleared) {
-                Output::success("twig_clear_cache");
-            } else {
-                Output::error("twig_clear_cache");
+            try {
+                $filesystem = new Filesystem();
+                $filesystem->chmod(WP_TIMBER_DIR, 0775, 0000, true);
+
+                // Clear Twig Cache
+                $cleared = Command::clear_cache('twig');
+                if ($cleared) {
+                    Output::success("twig_clear_cache");
+                } else {
+                    Output::error("twig_clear_cache");
+                }
+            } catch (IOExceptionInterface $exception) {
+                Output::error("Une erreur est survenue au moment de changer les droits de " . $exception->getPath());
             }
         }
     }
