@@ -19,9 +19,19 @@ class WoodyTheme_Commands
     protected function registerHooks()
     {
         \WP_CLI::add_command('woody', [$this, 'flush']);
+        \WP_CLI::add_command('woody', [$this, 'flush_cache']);
+        \WP_CLI::add_command('woody', [$this, 'flush_timber']);
+        \WP_CLI::add_command('woody', [$this, 'flush_varnish']);
     }
 
     public function flush($args)
+    {
+        $this->flush_cache();
+        $this->flush_timber();
+        //$this->flush_varnish();
+    }
+
+    public function flush_cache()
     {
         do_action('woody_subtheme_update');
         Output::success('woody_subtheme_update');
@@ -36,22 +46,16 @@ class WoodyTheme_Commands
         // (Not all cache back ends listen to 'flush')
         wp_cache_delete('alloptions', 'options');
         Output::success('wp_cache_delete alloptions');
-
-        // Clear Timber Cache
-        //$this->clear_timber_cache();
-
-        // (Not all cache back ends listen to 'flush')
-        $this->purge_varnish();
     }
 
-    private function clear_timber_cache()
+    private function flush_timber()
     {
-        $fileSystem = new Filesystem();
-        $fileSystem->remove(WP_TIMBER_DIR);
-        Output::success('woody_clear_timber_cache');
+        // $fileSystem = new Filesystem();
+        // $fileSystem->remove(WP_TIMBER_DIR);
+        // Output::success('woody_clear_timber_cache');
     }
 
-    private function purge_varnish()
+    private function flush_varnish()
     {
         // Options
         $vcaching_prefix = 'varnish_caching_';
