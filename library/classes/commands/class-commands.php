@@ -54,7 +54,9 @@ class WoodyTheme_Commands
         if (WP_ENV != 'dev') {
             try {
                 $filesystem = new Filesystem();
-                $filesystem->chmod(WP_TIMBER_DIR, 0775, 0000, true);
+                if (!$filesystem->exists(WP_TIMBER_DIR)) {
+                    $filesystem->mkdir(WP_TIMBER_DIR, 0775);
+                }
 
                 // Clear Twig Cache
                 $cleared = Command::clear_cache('twig');
@@ -64,7 +66,7 @@ class WoodyTheme_Commands
                     Output::error("twig_clear_cache");
                 }
             } catch (IOExceptionInterface $exception) {
-                Output::error("Une erreur est survenue au moment de changer les droits de " . $exception->getPath());
+                Output::error("Une erreur est survenue au moment de la création de " . $exception->getPath());
             }
         }
     }
