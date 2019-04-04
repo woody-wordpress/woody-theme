@@ -5,8 +5,7 @@
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Timber\Integrations\Command;
 use Woody\Utils\Output;
 
 class WoodyTheme_Commands
@@ -50,9 +49,14 @@ class WoodyTheme_Commands
 
     public function flush_timber()
     {
-        // $fileSystem = new Filesystem();
-        // $fileSystem->remove(WP_TIMBER_DIR);
-        // Output::success('woody_clear_timber_cache');
+        if (WP_ENV != 'dev') {
+            $cleared = Command::clear_cache('twig');
+            if ($cleared) {
+                Output::success("twig_clear_cache");
+            } else {
+                Output::error("twig_clear_cache");
+            }
+        }
     }
 
     public function flush_varnish()
