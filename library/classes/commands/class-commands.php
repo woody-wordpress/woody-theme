@@ -5,7 +5,7 @@
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
-use Timber\Integrations\Command;
+//use Timber\Integrations\Command;
 use Woody\Utils\Output;
 
 class WoodyTheme_Commands
@@ -19,14 +19,14 @@ class WoodyTheme_Commands
     {
         \WP_CLI::add_command('woody_flush', [$this, 'flush']);
         \WP_CLI::add_command('woody_flush_cache', [$this, 'flush_cache']);
-        \WP_CLI::add_command('woody_flush_timber', [$this, 'flush_timber']);
+        // \WP_CLI::add_command('woody_flush_timber', [$this, 'flush_timber']);
         \WP_CLI::add_command('woody_flush_varnish', [$this, 'flush_varnish']);
     }
 
     public function flush($args)
     {
         $this->flush_cache();
-        $this->flush_timber();
+        //$this->flush_timber();
         $this->flush_varnish();
     }
 
@@ -47,17 +47,17 @@ class WoodyTheme_Commands
         Output::success('wp_cache_delete alloptions');
     }
 
-    public function flush_timber()
-    {
-        if (WP_ENV != 'dev') {
-            $cleared = Command::clear_cache('twig');
-            if ($cleared) {
-                Output::success("twig_clear_cache");
-            } else {
-                Output::error("twig_clear_cache");
-            }
-        }
-    }
+    // public function flush_timber()
+    // {
+    //     if (WP_ENV != 'dev') {
+    //         $cleared = Command::clear_cache('twig');
+    //         if ($cleared) {
+    //             Output::success("twig_clear_cache");
+    //         } else {
+    //             Output::error("twig_clear_cache");
+    //         }
+    //     }
+    // }
 
     public function flush_varnish()
     {
