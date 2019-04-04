@@ -48,14 +48,14 @@ class WoodyTheme_Commands
         Output::success('wp_cache_delete alloptions');
     }
 
-    private function flush_timber()
+    public function flush_timber()
     {
         // $fileSystem = new Filesystem();
         // $fileSystem->remove(WP_TIMBER_DIR);
         // Output::success('woody_clear_timber_cache');
     }
 
-    private function flush_varnish()
+    public function flush_varnish()
     {
         // Options
         $vcaching_prefix = 'varnish_caching_';
