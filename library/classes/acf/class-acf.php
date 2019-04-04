@@ -59,6 +59,19 @@ class WoodyTheme_ACF
         add_filter('acf/fields/page_link/result', [$this, 'postObjectAcfResults'], 10, 4);
 
         add_filter('acf/load_value/type=gallery', [$this, 'pllGalleryLoadField'], 10, 3);
+
+        // Custom Filter
+        add_filter('woody_get_field_option', [$this, 'woodyGetFieldOption'], 10, 3);
+    }
+
+    public function woodyGetFieldOption($field_name)
+    {
+        $woody_get_field_option = get_transient('woody_get_field_option');
+        if (empty($woody_get_field_option[$field_name])) {
+            $woody_get_field_option[$field_name] = get_field($field_name, 'options');
+            set_transient('woody_get_field_option', $woody_get_field_option);
+        }
+        return $woody_get_field_option[$field_name];
     }
 
     /**
@@ -84,6 +97,7 @@ class WoodyTheme_ACF
         $screen = get_current_screen();
         if (strpos($screen->id, 'acf-options') !== false) {
             delete_transient('woody_menus_cache');
+            delete_transient('woody_get_field_option');
         }
     }
 
@@ -425,6 +439,7 @@ class WoodyTheme_ACF
         delete_transient('woody_terms_choices');
         delete_transient('woody_website_pages_taxonomies');
         delete_transient('woody_menus_cache');
+        delete_transient('woody_get_field_option');
 
         // Warm Transient
         getWoodyTwigPaths();

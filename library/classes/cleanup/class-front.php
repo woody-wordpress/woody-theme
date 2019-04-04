@@ -25,6 +25,8 @@ class WoodyTheme_Cleanup_Front
         add_action('wp_head', array($this, 'removeRecentCommentsStyle'), 1);
         // Remove inline width attribute from figure tag
         add_filter('img_caption_shortcode', array($this, 'removeFigureInlineStyle'), 10, 3);
+        // Disable XMLRPC
+        add_filter('xmlrpc_enabled', '__return_false');
     }
 
     public function cleanupHead()

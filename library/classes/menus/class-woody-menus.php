@@ -36,7 +36,7 @@ class WoodyTheme_Menus
         }
 
         $menu_cache_key = $current_lang . '_' . md5(serialize($depth_1_ids));
-        $woody_menus_cache = get_transient('woody_menus_cache', []);
+        $woody_menus_cache = get_transient('woody_menus_cache');
 
         if (!empty($woody_menus_cache[$menu_cache_key])) {
             $return = $woody_menus_cache[$menu_cache_key];
@@ -106,7 +106,7 @@ class WoodyTheme_Menus
     {
         $return = [];
         if (!empty($post_id) && is_numeric($post_id)) {
-            $return['submenu_' . $post_id] = get_field('submenu_' . $post_id, 'options');
+            $return['submenu_' . $post_id] = apply_filters('woody_get_field_option', 'submenu_' . $post_id);
         }
         return $return;
     }

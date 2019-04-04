@@ -250,7 +250,7 @@ class WoodyTheme_Images
     {
         remove_action('delete_attachment', [$this, 'deleteAttachment']);
 
-        $deleted_attachement = get_transient('woody_deleted_attachement', []);
+        $deleted_attachement = get_transient('woody_deleted_attachement');
         if (wp_attachment_is_image($attachment_id) && is_array($deleted_attachement) && !in_array($attachment_id, $deleted_attachement)) {
             $translations = pll_get_post_translations($attachment_id);
             $deleted_attachement = array_merge($deleted_attachement, array_values($translations));

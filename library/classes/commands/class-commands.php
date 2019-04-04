@@ -5,6 +5,8 @@
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Woody\Utils\Output;
 
 class WoodyTheme_Commands
@@ -35,8 +37,18 @@ class WoodyTheme_Commands
         wp_cache_delete('alloptions', 'options');
         Output::success('wp_cache_delete alloptions');
 
+        // Clear Timber Cache
+        //$this->clear_timber_cache();
+
         // (Not all cache back ends listen to 'flush')
         $this->purge_varnish();
+    }
+
+    private function clear_timber_cache()
+    {
+        $fileSystem = new Filesystem();
+        $fileSystem->remove(WP_TIMBER_DIR);
+        Output::success('woody_clear_timber_cache');
     }
 
     private function purge_varnish()
@@ -73,7 +85,7 @@ class WoodyTheme_Commands
                 $response = wp_remote_request($purgeme, array('method' => 'PURGE', 'headers' => $headers, "sslverify" => false));
                 if ($response instanceof WP_Error) {
                     foreach ($response->errors as $error => $errors) {
-                        $noticeMessage .= 'Error ' . $error . ' : ';
+                        $noticeMessage = 'Error ' . $error . ' : ';
                         foreach ($errors as $error => $description) {
                             $noticeMessage .= ' - ' . $description;
                         }
