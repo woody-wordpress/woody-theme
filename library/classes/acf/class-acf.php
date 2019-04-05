@@ -650,7 +650,13 @@ class WoodyTheme_ACF
             'semview_04' => 'blocks-semantic_view-tpl_04',
         ];
 
-        $return = $teasers + $heroes + $sections + $lists_and_focuses + $galleries + $cta + $socialwalls + $booking + $semantic_view;
+        $features = [
+            'feature_01' => 'blocks-feature-tpl_01',
+            'feature_02' => 'blocks-feature-tpl_02',
+            'feature_03' => 'blocks-feature-tpl_03',
+        ];
+
+        $return = $teasers + $heroes + $sections + $lists_and_focuses + $galleries + $cta + $socialwalls + $booking + $semantic_view + $features;
 
         return $return;
     }
