@@ -387,11 +387,13 @@ function getManualFocus_data($layout)
 function getAutoFocusSheetData($layout)
 {
     $items = [];
-    $confId = $layout['playlist_conf_id'];
-    $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), array(), 'json');
-    if (!empty($playlist['items'])) {
-        foreach ($playlist['items'] as $key => $item) {
-            $items['items'][] = getTouristicSheetPreview($layout, $item['sheetId']);
+    if (!empty($layout['playlist_conf_id'])) {
+        $confId = $layout['playlist_conf_id'];
+        $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), array(), 'json');
+        if (!empty($playlist['items'])) {
+            foreach ($playlist['items'] as $key => $item) {
+                $items['items'][] = getTouristicSheetPreview($layout, $item['sheetId']);
+            }
         }
     }
 
