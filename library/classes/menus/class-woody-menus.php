@@ -166,6 +166,15 @@ class WoodyTheme_Menus
                     }
                 }
                 if (is_object($post)) {
+                    // On vérifie si la page est de type mirroir
+                    $page_type = get_the_terms($post->ID, 'page_type');
+                    if ($page_type[0]->slug == 'mirror_page') {
+                        $mirror = get_field('mirror_page_reference', $post->ID);
+                        if (!empty(get_post($mirror))) {
+                            $post = get_post($mirror);
+                        }
+                    }
+
                     $return[$post_key] = [
                         'the_id' => $post->ID,
                         'the_url' => get_permalink($post->ID),
@@ -183,7 +192,6 @@ class WoodyTheme_Menus
             return $return;
         }
     }
-
 
     /**
      *
