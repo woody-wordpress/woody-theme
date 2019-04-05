@@ -5,6 +5,9 @@
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
+use Timber\Integrations\Command;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Woody\Utils\Output;
 
 class WoodyTheme_Commands
@@ -16,10 +19,20 @@ class WoodyTheme_Commands
 
     protected function registerHooks()
     {
-        \WP_CLI::add_command('woody', [$this, 'flush']);
+        \WP_CLI::add_command('woody_flush', [$this, 'flush']);
+        \WP_CLI::add_command('woody_flush_cache', [$this, 'flush_cache']);
+        \WP_CLI::add_command('woody_flush_timber', [$this, 'flush_timber']);
+        \WP_CLI::add_command('woody_flush_varnish', [$this, 'flush_varnish']);
     }
 
     public function flush($args)
+    {
+        $this->flush_cache();
+        $this->flush_timber();
+        $this->flush_varnish();
+    }
+
+    public function flush_cache()
     {
         do_action('woody_subtheme_update');
         Output::success('woody_subtheme_update');
@@ -34,12 +47,31 @@ class WoodyTheme_Commands
         // (Not all cache back ends listen to 'flush')
         wp_cache_delete('alloptions', 'options');
         Output::success('wp_cache_delete alloptions');
-
-        // (Not all cache back ends listen to 'flush')
-        $this->purge_varnish();
     }
 
-    private function purge_varnish()
+    public function flush_timber()
+    {
+        if (WP_ENV != 'dev') {
+            try {
+                $filesystem = new Filesystem();
+                if (!$filesystem->exists(WP_TIMBER_DIR)) {
+                    $filesystem->mkdir(WP_TIMBER_DIR, 0775);
+                }
+
+                // Clear Twig Cache
+                $cleared = Command::clear_cache('twig');
+                if ($cleared) {
+                    Output::success("twig_clear_cache");
+                } else {
+                    Output::error("twig_clear_cache");
+                }
+            } catch (IOExceptionInterface $exception) {
+                Output::error("Une erreur est survenue au moment de la création de " . $exception->getPath());
+            }
+        }
+    }
+
+    public function flush_varnish()
     {
         // Options
         $vcaching_prefix = 'varnish_caching_';

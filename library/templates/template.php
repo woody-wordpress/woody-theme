@@ -72,6 +72,8 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['post_title'] = false;
         $this->context['page_type'] = false;
 
+        $this->context['enabled_woody_options'] = RC_OPTIONS;
+
         /******************************************************************************
          * Sommes nous dans le cas d'une page miroir ?
          ******************************************************************************/

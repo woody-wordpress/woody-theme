@@ -60,6 +60,8 @@ class WoodyTheme_ACF
 
         add_filter('acf/load_value/type=gallery', [$this, 'pllGalleryLoadField'], 10, 3);
 
+        add_filter('acf/load_field/name=section_content', [$this, 'sectionContentLoadField']);
+
         // Custom Filter
         add_filter('woody_get_field_option', [$this, 'woodyGetFieldOption'], 10, 3);
     }
@@ -405,6 +407,15 @@ class WoodyTheme_ACF
         return $field;
     }
 
+    public function sectionContentLoadField($field)
+    {
+        if (!in_array('weather', RC_OPTIONS)) {
+            // On retire l'option bloc météo si le plugin n'est pas activé
+            unset($field['layouts']['layout_5c1b579ac3a87']);
+        }
+        return $field;
+    }
+
     public function getPageTypeTerms()
     {
         $page_types = get_transient('woody_terms_page_type');
@@ -639,7 +650,13 @@ class WoodyTheme_ACF
             'semview_04' => 'blocks-semantic_view-tpl_04',
         ];
 
-        $return = $teasers + $heroes + $sections + $lists_and_focuses + $galleries + $cta + $socialwalls + $booking + $semantic_view;
+        $features = [
+            'feature_01' => 'blocks-feature-tpl_01',
+            'feature_02' => 'blocks-feature-tpl_02',
+            'feature_03' => 'blocks-feature-tpl_03',
+        ];
+
+        $return = $teasers + $heroes + $sections + $lists_and_focuses + $galleries + $cta + $socialwalls + $booking + $semantic_view + $features;
 
         return $return;
     }

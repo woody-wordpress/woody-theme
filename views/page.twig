@@ -54,13 +54,7 @@
                     {{ section }}
                 </div>
             {% endfor %}
-            {# {% if claims_block|default %}
-                                                                                                        <div class="claims-blocks-wrapper">
-                                                                                                            {{ claims_block }}
-                                                                                                        </div>
-                                                                                                        {% endif %} #}
-            {#  TODO: se baser sur une variable ERP #}
-            {% if site_key == 'sarlat' %}
+            {% if 'claims' in enabled_woody_options %}
                 <div class="claims-blocks-wrapper"></div>
             {% endif %}
         </div>
