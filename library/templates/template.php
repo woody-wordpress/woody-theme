@@ -188,9 +188,10 @@ abstract class WoodyTheme_TemplateAbstract
             }
 
             $template = $this->context['woody_components'][$tpl_switcher];
+            $compile_switcher = Timber::compile($template, $data);
 
-            $this->context['season_switcher'] = Timber::compile($template, $data);
-            $this->context['season_switcher_mobile'] = Timber::compile($template, $data);
+            $this->context['season_switcher'] = $compile_switcher;
+            $this->context['season_switcher_mobile'] = $compile_switcher;
         }
     }
 
@@ -204,8 +205,10 @@ abstract class WoodyTheme_TemplateAbstract
 
             // Set a default template
             $template = $this->context['woody_components']['woody_widgets-lang_switcher-tpl_01'];
-            $this->context['lang_switcher'] = Timber::compile($template, $data);
-            $this->context['lang_switcher_mobile'] = Timber::compile($template, $data);
+            $compile_lang = Timber::compile($template, $data);
+
+            $this->context['lang_switcher'] = $compile_lang;
+            $this->context['lang_switcher_mobile'] = $compile_lang;
         }
     }
 
@@ -306,8 +309,10 @@ abstract class WoodyTheme_TemplateAbstract
             $data['tags'] = $tplSearchBlock['tags'] ?: '';
             $template = $tplSearchBlock['template'] ?: $this->context['woody_components']['woody_widgets-es_search_block-tpl_01'];
 
-            $this->context['es_search_block'] = Timber::compile($template, $data);
-            $this->context['es_search_block_mobile'] = Timber::compile($template, $data);
+            $compile_search = Timber::compile($template, $data);
+
+            $this->context['es_search_block'] = $compile_search;
+            $this->context['es_search_block_mobile'] = $compile_search;
         }
     }
 }
