@@ -60,6 +60,8 @@ class WoodyTheme_ACF
 
         add_filter('acf/load_value/type=gallery', [$this, 'pllGalleryLoadField'], 10, 3);
 
+        add_filter('acf/load_field/name=section_content', [$this, 'sectionContentLoadField']);
+
         // Custom Filter
         add_filter('woody_get_field_option', [$this, 'woodyGetFieldOption'], 10, 3);
     }
@@ -402,6 +404,15 @@ class WoodyTheme_ACF
     public function weatherAccountAcfLoadField($field)
     {
         $field['choices'] = apply_filters('woody_weather_accounts', $field['choices']);
+        return $field;
+    }
+
+    public function sectionContentLoadField($field)
+    {
+        if (!in_array('weather', RC_OPTIONS)) {
+            // On retire l'option bloc météo si le plugin n'est pas activé
+            unset($field['layouts']['layout_5c1b579ac3a87']);
+        }
         return $field;
     }
 
