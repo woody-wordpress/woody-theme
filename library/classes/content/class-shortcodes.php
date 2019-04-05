@@ -31,11 +31,15 @@ class WoodyTheme_Shortcodes
         $query = filter_input(INPUT_GET, 'query', FILTER_SANITIZE_STRING);
         $tags = filter_input(INPUT_GET, 'tags', FILTER_SANITIZE_STRING);
 
+        // Explode tags
+        $tags = $tags ? explode(':', $tags) : '';
+
         // Search inside pages
         $pages_response = apply_filters('woody_pages_search', ['query' => $query, 'tags' => $tags]);
 
         $result = [];
         $result['query'] = $query;
+        $result['tags'] = $tags;
         $result['display_button'] = true;
 
         $result['posts']['pages'] = [];
@@ -70,11 +74,8 @@ class WoodyTheme_Shortcodes
 
         // Set a default template
         $tplSearch = apply_filters('es_search_tpl', null);
-        if (empty($tplSearch)) {
-            $tplSearch = 'woody_widgets-es_search-tpl_01';
-        }
-
-        $template = $this->twigPaths[$tplSearch];
+        $result['tags'] = $tplSearch['tags'] ?: $result['tags'];
+        $template = $tplSearch['template'] ?: $this->twigPaths['woody_widgets-es_search-tpl_01'];
 
         return Timber::compile($template, $result);
     }

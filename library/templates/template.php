@@ -300,7 +300,10 @@ abstract class WoodyTheme_TemplateAbstract
             }
 
             // Set a default template
-            $template = $this->context['woody_components']['woody_widgets-es_search_block-tpl_01'];
+            $tplSearchBlock = apply_filters('es_search_block_tpl', null);
+            $data['tags'] = $tplSearchBlock['tags'] ?: '';
+            $template = $tplSearchBlock['template'] ?: $this->context['woody_components']['woody_widgets-es_search_block-tpl_01'];
+
             $this->context['es_search_block'] = Timber::compile($template, $data);
             $this->context['es_search_block_mobile'] = Timber::compile($template, $data);
         }
