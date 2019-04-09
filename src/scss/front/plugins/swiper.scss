@@ -1,4 +1,7 @@
-@import "node_modules/swiper/src/swiper";
+@import "swiper/src/swiper";
+@import "swiper/src/components/navigation/navigation";
+@import "swiper/src/components/pagination/pagination";
+@import "swiper/src/components/lazy/lazy";
 
 .swiper-container {
     width: 100%;
