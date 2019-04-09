@@ -95,16 +95,23 @@ class WoodyTheme_Permalink
                             $match_url = '/' . $wp->request;
                         }
 
-                        $wpdb->insert($wpdb->prefix.'redirection_items', [
-                            'url' => $url,
-                            'match_url' => $match_url,
-                            'group_id' => get_option('woody_auto_redirect'),
-                            'last_access' => gmdate('Y-m-d H:i:s'),
-                            'action_type' => 'url',
-                            'action_code' => '301',
-                            'action_data' => $parse_permalink,
-                            'match_type'  => 'url',
-                        ]);
+                        if ($url != $parse_permalink) {
+                            $params = [
+                                'url' => $url,
+                                'match_url' => $match_url,
+                                'group_id' => (int) get_option('woody_auto_redirect'),
+                                'action_type' => 'url',
+                                'action_code' => 301,
+                                'action_data' => [
+                                    'url' => $parse_permalink
+                                ],
+                                'match_type'  => 'url',
+                                'regex'  => 0,
+                            ];
+
+                            include WP_PLUGINS_DIR . '/redirection/models/group.php';
+                            Red_Item::create($params);
+                        }
 
                         header('X-Redirect-Agent: woody');
                         wp_redirect($permalink);
