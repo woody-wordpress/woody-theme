@@ -1150,7 +1150,7 @@ function formatVisualEffectData($effects)
 {
     $return = '';
     foreach ($effects as $effect_key => $effect) {
-        if (!empty($effect)) {
+        if (!empty($effect) && is_array($effect)) {
             switch ($effect_key) {
                 case 'transform':
                     foreach ($effect as $transform) {
