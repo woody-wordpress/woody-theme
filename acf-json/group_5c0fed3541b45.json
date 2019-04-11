@@ -137,6 +137,41 @@
             "multiple": 0,
             "return_format": "id",
             "ui": 1
+        },
+        {
+            "key": "field_5caf5a408173d",
+            "label": "Fiches SIT",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5caf5e7b8173e",
+            "label": "Bouton \"Lire la suite\"",
+            "name": "sheet_button_title",
+            "type": "text",
+            "instructions": "Intitulé du bouton \"Lire la suite\" sur les mise en avants de fiches SIT",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "Lire la suite",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         }
     ],
     "location": [
@@ -156,5 +191,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1546851350
+    "modified": 1554997270
 }
