@@ -855,6 +855,10 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
                 }
             }
 
+            if (!empty($layout['display_button'])) {
+                $data['link']['link_label'] = __('Lire la suite', 'woody-theme');
+            }
+
             $data['location'] = [];
             $data['location']['lat'] = (!empty($item['gps'])) ? $item['gps']['latitude'] : '';
             $data['location']['lng'] = (!empty($item['gps'])) ? $item['gps']['longitude'] : '';
