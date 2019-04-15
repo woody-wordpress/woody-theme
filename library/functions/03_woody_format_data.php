@@ -367,9 +367,12 @@ function getManualFocus_data($layout)
             } elseif ($item['content_selection']->post_type == 'touristic_sheet') {
                 $post_preview = getTouristicSheetPreview($layout, $item['content_selection']->custom['touristic_sheet_id']);
             }
-
             $the_items['items'][$key] = (!empty($post_preview)) ?  $post_preview : '';
         }
+    }
+
+    if($layout['focused_sort'] == 'random'){
+        shuffle($the_items['items']);  
     }
 
     return $the_items;
