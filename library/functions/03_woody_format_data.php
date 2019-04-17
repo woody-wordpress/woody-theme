@@ -8,7 +8,7 @@ function getComponentItem($layout, $context)
     switch ($layout['acf_fc_layout']) {
         case 'manual_focus':
         case 'auto_focus':
-        case 'auto_focus_sheets':
+        case 'auto_focus_sheets':  
             $return = formatFocusesData($layout, $context['post'], $context['woody_components']);
             break;
         case 'geo_map':
@@ -350,7 +350,6 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
 function getManualFocus_data($layout)
 {
     $the_items = [];
-
     foreach ($layout['content_selection'] as $key => $item_wrapper) {
         // La donnée de la vignette est saisie en backoffice
         if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
@@ -756,9 +755,9 @@ function getCustomPreview($item)
 {
     $data = [];
     $data = [
-        'title' => (!empty($item['title'])) ? $item['title'] : '',
-        'pretitle' => (!empty($item['pretitle'])) ? $item['pretitle'] : '',
-        'subtitle' => (!empty($item['subtitle'])) ? $item['subtitle'] : '',
+        'title' => (!empty($item['title'])) ? getTransformedPattern($item['title']) : '',
+        'pretitle' => (!empty($item['pretitle'])) ? getTransformedPattern($item['pretitle']) : '',
+        'subtitle' => (!empty($item['subtitle'])) ? getTransformedPattern($item['subtitle']) : '',
         'icon_type' => (!empty($item['icon_type'])) ? $item['icon_type'] : '',
         'woody_icon' => (!empty($item['woody_icon'])) ? $item['woody_icon'] : '',
         'icon_img' => (!empty($item['icon_img']['url'])) ? [
@@ -768,7 +767,7 @@ function getCustomPreview($item)
             'alt' =>  $item['icon_img']['alt'],
 
         ] : '',
-        'description' => (!empty($item['description'])) ? $item['description'] : '',
+        'description' => (!empty($item['description'])) ? getTransformedPattern($item['description']) : '',
         'link' => [
             'url' => (!empty($item['link']['url'])) ? $item['link']['url'] : '',
             'title' => (!empty($item['link']['title'])) ? $item['link']['title'] : '',
@@ -783,7 +782,6 @@ function getCustomPreview($item)
     } elseif ($item['media_type'] == 'movie' && !empty($item['movie'])) {
         $data['movie'] = $item['movie'];
     }
-
     return $data;
 }
 
@@ -815,7 +813,7 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
     if (!empty($sheet_data['items'])) {
         foreach ($sheet_data['items'] as $key => $item) {
             $data = [
-                'title' => (!empty($item['title'])) ? $item['title'] : '',
+                'title' => (!empty($item['title'])) ? getTransformedPattern($item['title']) : '',
                 'link' =>[
                     'url' => (!empty($item['link'])) ? $item['link'] : '',
                     'target' => $item['targetBlank'] ? '_blank' : '',
@@ -841,7 +839,7 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
                     }
                 }
                 if (in_array('description', $layout['display_elements'])) {
-                    $data['description'] = (!empty($item['desc'])) ? $item['desc'] : '';
+                    $data['description'] = (!empty($item['desc'])) ? getTransformedPattern($item['desc']) : '';
                     if (!empty($item['deals']['list'][0]['description'][$lang])) {
                         $data['description'] = $item['deals']['list'][0]['description'][$lang] ;
                     }
@@ -941,24 +939,24 @@ function getPagePreview($item_wrapper, $item)
     $data['post_id'] = $item->ID;
 
     if (!empty($item->get_field('focus_title'))) {
-        $data['title'] = $item->get_field('focus_title');
+        $data['title'] = getTransformedPattern($item->get_field('focus_title'), $item);
     } elseif (!empty($item->get_title())) {
-        $data['title'] = $item->get_title();
+        $data['title'] = getTransformedPattern($item->get_title(), $item);
     }
 
     if (!empty($item_wrapper) && !empty($item_wrapper['display_elements']) && is_array($item_wrapper['display_elements'])) {
         if (in_array('pretitle', $item_wrapper['display_elements'])) {
-            $data['pretitle'] = getFieldAndFallback($item, 'focus_pretitle', get_field('page_heading_heading', $item->id), 'pretitle', $item, 'field_5b87f20257a1d');
+            $data['pretitle'] = getTransformedPattern(getFieldAndFallback($item, 'focus_pretitle', get_field('page_heading_heading', $item->id), 'pretitle', $item, 'field_5b87f20257a1d'), $item);
         }
         if (in_array('subtitle', $item_wrapper['display_elements'])) {
-            $data['subtitle'] = getFieldAndFallback($item, 'focus_subtitle', get_field('page_heading_heading', $item->id), 'subtitle', $item, 'field_5b87f23b57a1e');
+            $data['subtitle'] = getTransformedPattern(getFieldAndFallback($item, 'focus_subtitle', get_field('page_heading_heading', $item->id), 'subtitle', $item, 'field_5b87f23b57a1e'), $item);
         }
         if (in_array('icon', $item_wrapper['display_elements'])) {
             $data['woody_icon'] = $item->focus_woody_icon;
             $data['icon_type'] =(!empty($item->icon_type)) ? $item->icon_type : 'picto';
         }
         if (in_array('description', $item_wrapper['display_elements'])) {
-            $data['description'] = getFieldAndFallback($item, 'focus_description', $item, 'field_5b2bbbfaec6b2');
+            $data['description'] = getTransformedPattern(getFieldAndFallback($item, 'focus_description', $item, 'field_5b2bbbfaec6b2'), $item);
         }
         if (in_array('price', $item_wrapper['display_elements'])) {
             $data['the_price'] = $item->get_field('field_5b6c670eb54f2');
@@ -1201,4 +1199,52 @@ function getSectionBannerFiles($filename)
         $file = file_get_contents(get_template_directory() . '/views/section_banner/section_' . $filename . '.twig');
     }
     return $file;
+}
+
+function getTransformedPattern($str, $item=null){
+    $return = '';
+
+    if($item!=null){
+        if(!empty($item->get_field('playlist_conf_id'))){
+
+            $confId = $item->get_field('playlist_conf_id');
+            $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), array(), 'json');
+
+            if(!empty($playlist)){
+                $nbResults = $playlist['playlist']['total'];
+                //on pourrait récupérer le type, le traduire dans la langue actuelle
+                //et ainsi gérer s'il y a un ou plusieurs objets de ce type
+                // (gérer si on met un 's' ou non)
+                //$type = $playlist['playlist']['type'];
+
+                $pattern= "/%nombre%/";
+                preg_match($pattern, $str, $matches);
+                if(!empty($matches)){
+                    foreach($matches as $match){
+                        $new_str = str_replace(['%nombre%'], $nbResults, $match);
+                        $return = preg_replace($pattern, $new_str, $str);
+                        
+                    }
+                }else{
+                    $return = $str;
+                }
+            }
+        }else{
+            $return = $str;
+        }
+
+    }else{
+        // Ne concerne pas de playlists 
+        $pattern= "/(%[a-zA-Z]+%)/";
+        preg_match($pattern, $str, $matches);
+        if(!empty($matches)){
+            foreach($matches as $match){
+                $new_str = str_replace(['%'], '', $match);
+                $return = preg_replace($pattern, $new_str, $str);
+            }
+        }else{
+            $return = $str;
+        }
+    }
+    return $return;
 }

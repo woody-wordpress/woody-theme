@@ -166,6 +166,11 @@ class WoodyTheme_Menus
                     }
                 }
                 if (is_object($post)) {
+                    $return[$post_key] = [
+                        'the_id' => $post->ID,
+                        'the_url' => get_permalink($post->ID),
+                    ];
+
                     // On vérifie si la page est de type mirroir
                     $page_type = get_the_terms($post->ID, 'page_type');
                     if ($page_type[0]->slug == 'mirror_page') {
@@ -175,10 +180,6 @@ class WoodyTheme_Menus
                         }
                     }
 
-                    $return[$post_key] = [
-                        'the_id' => $post->ID,
-                        'the_url' => get_permalink($post->ID),
-                    ];
 
                     $return[$post_key]['the_fields']['title'] = (!empty(get_field('in_menu_title', $post->ID))) ? get_field('in_menu_title', $post->ID) : $post->post_title;
                     $return[$post_key]['the_fields']['woody_icon'] = (!empty(get_field('in_menu_woody_icon', $post->ID))) ? get_field('in_menu_woody_icon', $post->ID) : '';
