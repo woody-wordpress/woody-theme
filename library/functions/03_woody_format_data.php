@@ -1226,6 +1226,7 @@ function getTransformedPattern($str, $item=null){
                         
                     }
                 }else{
+                    wd($str);
                     $return = $str;
                 }
             }
