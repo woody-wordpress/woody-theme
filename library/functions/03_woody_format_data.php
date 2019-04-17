@@ -1201,6 +1201,16 @@ function getSectionBannerFiles($filename)
     return $file;
 }
 
+/**
+ *
+ * Nom : getTransformedPattern
+ * Auteur : Jérémy Legendre
+ * Return : Retourne la string avec le pattern modifié (devenu le count de la playlist)
+ * @param    item - Le scope (un objet post)
+ * @param    str  - La phrase (titre, surtitre, sous-titre, description)
+ * @return   return - La phrase modifiée
+ *
+ **/
 function getTransformedPattern($str, $item=null){
     $return = '';
 
@@ -1226,7 +1236,6 @@ function getTransformedPattern($str, $item=null){
                         
                     }
                 }else{
-                    wd($str);
                     $return = $str;
                 }
             }
