@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.6.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2019-04-08T10:47:18+02:00\n"
-"PO-Revision-Date: 2019-04-08 10:49+0200\n"
+"POT-Creation-Date: 2019-04-17T18:16:08+02:00\n"
+"PO-Revision-Date: 2019-04-17 18:18+0100\n"
 "Last-Translator: POIROUX Léo <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 1.6.10\n"
 "X-Domain: woody-theme\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -26,16 +26,13 @@ msgstr ""
 
 #. Author of the theme
 msgid "Raccourci Agency"
-msgstr ""
+msgstr "Raccourci Agency"
 
-#: library/functions/03_woody_format_data.php:981
+#: library/functions/03_woody_format_data.php:862
+#: library/functions/03_woody_format_data.php:992
 #: library/classes/content/class-polylang.php:127
 msgid "Lire la suite"
 msgstr "Seguir leyendo"
-
-#: library/templates/template.php:285
-msgid "Nos suggestions"
-msgstr "Nuestras sugerencias"
 
 #: library/templates/template-page.php:78
 msgid "Oups !"
@@ -51,6 +48,10 @@ msgid ""
 "indisponible."
 msgstr ""
 "La página que buscas ha sido eliminada o está temporalmente indisponible."
+
+#: library/templates/template.php:285
+msgid "Nos suggestions"
+msgstr "Nuestras sugerencias"
 
 #: library/classes/content/class-polylang.php:32
 #: library/classes/content/class-polylang.php:73
@@ -297,155 +298,159 @@ msgstr "¿Qué quieres reservar?"
 msgid "Choisissez vos dates de réservation"
 msgstr "Elige tus fechas"
 
-#: library/classes/content/class-polylang.php:132
+#: library/classes/content/class-polylang.php:130
+msgid "Changer de saison"
+msgstr "Cambio de estación"
+
+#: library/classes/content/class-polylang.php:133
 msgid "Bas"
 msgstr "Abajo"
 
-#: library/classes/content/class-polylang.php:133
+#: library/classes/content/class-polylang.php:134
 msgid "Haut"
 msgstr "Arriba"
 
-#: library/classes/content/class-polylang.php:134
+#: library/classes/content/class-polylang.php:135
 msgid "Vent"
 msgstr "Viento"
 
-#: library/classes/content/class-polylang.php:135
+#: library/classes/content/class-polylang.php:136
 msgid "Température de la mer"
 msgstr "Temperatura del mar"
 
-#: library/classes/content/class-polylang.php:136
+#: library/classes/content/class-polylang.php:137
 msgid "Humidité"
 msgstr "Humedad"
 
-#: library/classes/content/class-polylang.php:137
+#: library/classes/content/class-polylang.php:138
 msgid "ISO 0°"
 msgstr "ISO 0°"
 
-#: library/classes/content/class-polylang.php:138
+#: library/classes/content/class-polylang.php:139
 msgid "Limite Pluie/Neige"
 msgstr "Límite Lluvia/Nieve"
 
-#: library/classes/content/class-polylang.php:139
+#: library/classes/content/class-polylang.php:140
 msgid "Ensoleillé"
 msgstr "Soleado"
 
-#: library/classes/content/class-polylang.php:140
+#: library/classes/content/class-polylang.php:141
 msgid "Pluie"
 msgstr "Precipitaciones"
 
-#: library/classes/content/class-polylang.php:141
+#: library/classes/content/class-polylang.php:142
 msgid "Neige"
 msgstr "Nieve"
 
-#: library/classes/content/class-polylang.php:142
+#: library/classes/content/class-polylang.php:143
 msgid "Grésil"
 msgstr "Cellisca"
 
-#: library/classes/content/class-polylang.php:143
+#: library/classes/content/class-polylang.php:144
 msgid "Venteux"
 msgstr "Ventoso"
 
-#: library/classes/content/class-polylang.php:144
+#: library/classes/content/class-polylang.php:145
 msgid "Brouillard"
 msgstr "Niebla"
 
-#: library/classes/content/class-polylang.php:145
+#: library/classes/content/class-polylang.php:146
 msgid "Nuageux"
 msgstr "Nublado"
 
-#: library/classes/content/class-polylang.php:146
+#: library/classes/content/class-polylang.php:147
 msgid "Éclaircies"
 msgstr "Parcialmente nublado"
 
-#: library/classes/content/class-polylang.php:147
+#: library/classes/content/class-polylang.php:148
 msgid "Grêle"
 msgstr "Salve"
 
-#: library/classes/content/class-polylang.php:148
+#: library/classes/content/class-polylang.php:149
 msgid "Tempête"
 msgstr "Tormenta"
 
-#: library/classes/content/class-polylang.php:149
+#: library/classes/content/class-polylang.php:150
 msgid "Verglas"
 msgstr "Hielo en el camino"
 
-#: library/classes/content/class-polylang.php:152
+#: library/classes/content/class-polylang.php:153
 msgid "Nord Nord-Est"
 msgstr "Norte Noreste"
 
-#: library/classes/content/class-polylang.php:153
+#: library/classes/content/class-polylang.php:154
 msgid "Nord-Est"
 msgstr "Noreste"
 
-#: library/classes/content/class-polylang.php:154
+#: library/classes/content/class-polylang.php:155
 msgid "Est Nord-Est"
 msgstr "Este Noreste"
 
-#: library/classes/content/class-polylang.php:155
+#: library/classes/content/class-polylang.php:156
 msgid "Est"
 msgstr "Este"
 
-#: library/classes/content/class-polylang.php:156
+#: library/classes/content/class-polylang.php:157
 msgid "Est Sud-Est"
 msgstr "Este Sudeste"
 
-#: library/classes/content/class-polylang.php:157
+#: library/classes/content/class-polylang.php:158
 msgid "Sud-Est"
 msgstr "Sudeste"
 
-#: library/classes/content/class-polylang.php:158
+#: library/classes/content/class-polylang.php:159
 msgid "Sud Sud-Est"
 msgstr "Sur Sudeste"
 
-#: library/classes/content/class-polylang.php:159
+#: library/classes/content/class-polylang.php:160
 msgid "Sud"
 msgstr "Sur"
 
-#: library/classes/content/class-polylang.php:160
+#: library/classes/content/class-polylang.php:161
 msgid "Sud Sud-Ouest"
 msgstr "Sur Sudoeste"
 
-#: library/classes/content/class-polylang.php:161
+#: library/classes/content/class-polylang.php:162
 msgid "Sud-Ouest"
 msgstr "Sudoeste"
 
-#: library/classes/content/class-polylang.php:162
+#: library/classes/content/class-polylang.php:163
 msgid "Ouest Sud-Ouest"
 msgstr "Oeste Sudoeste"
 
-#: library/classes/content/class-polylang.php:163
+#: library/classes/content/class-polylang.php:164
 msgid "Ouest"
 msgstr "Oeste"
 
-#: library/classes/content/class-polylang.php:164
+#: library/classes/content/class-polylang.php:165
 msgid "Ouest Nord-Ouest"
 msgstr "Oeste Noroeste"
 
-#: library/classes/content/class-polylang.php:165
+#: library/classes/content/class-polylang.php:166
 msgid "Nord-Ouest"
 msgstr "Noroeste"
 
-#: library/classes/content/class-polylang.php:166
+#: library/classes/content/class-polylang.php:167
 msgid "Nord Nord-Ouest"
 msgstr "Norte Noroeste"
 
-#: library/classes/content/class-polylang.php:167
+#: library/classes/content/class-polylang.php:168
 msgid "Nord"
 msgstr "Norte"
 
-#: library/classes/content/class-polylang.php:170
+#: library/classes/content/class-polylang.php:171
 msgid "Matin"
 msgstr "Mañana"
 
-#: library/classes/content/class-polylang.php:171
+#: library/classes/content/class-polylang.php:172
 msgid "Après-midi"
 msgstr "Tarde"
 
-#: library/classes/content/class-polylang.php:172
+#: library/classes/content/class-polylang.php:173
 msgid "Soirée"
 msgstr "Noche"
 
-#: library/classes/content/class-polylang.php:173
+#: library/classes/content/class-polylang.php:174
 msgid "Nuit"
 msgstr "Noche"
 

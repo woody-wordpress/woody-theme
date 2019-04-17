@@ -127,6 +127,7 @@ class WoodyTheme_Polylang
         __('Lire la suite', 'woody-theme');
         __('Que voulez-vous réserver ?', 'woody-theme');
         __('Choisissez vos dates de réservation', 'woody-theme');
+        __('Changer de saison', 'woody-theme');
 
         // Weather
         __('Bas', 'woody-theme');
@@ -150,21 +151,21 @@ class WoodyTheme_Polylang
 
         //Azimut (weather)
         __('Nord Nord-Est', 'woody-theme');
-        __('Nord-Est','woody-theme');
-        __('Est Nord-Est','woody-theme');
-        __('Est','woody-theme');
-        __('Est Sud-Est','woody-theme');
-        __('Sud-Est','woody-theme');
-        __('Sud Sud-Est','woody-theme');
-        __('Sud','woody-theme');
-        __('Sud Sud-Ouest','woody-theme');
-        __('Sud-Ouest','woody-theme');
-        __('Ouest Sud-Ouest','woody-theme');
-        __('Ouest','woody-theme');
-        __('Ouest Nord-Ouest','woody-theme');
-        __('Nord-Ouest','woody-theme');
-        __('Nord Nord-Ouest','woody-theme');
-        __('Nord','woody-theme');
+        __('Nord-Est', 'woody-theme');
+        __('Est Nord-Est', 'woody-theme');
+        __('Est', 'woody-theme');
+        __('Est Sud-Est', 'woody-theme');
+        __('Sud-Est', 'woody-theme');
+        __('Sud Sud-Est', 'woody-theme');
+        __('Sud', 'woody-theme');
+        __('Sud Sud-Ouest', 'woody-theme');
+        __('Sud-Ouest', 'woody-theme');
+        __('Ouest Sud-Ouest', 'woody-theme');
+        __('Ouest', 'woody-theme');
+        __('Ouest Nord-Ouest', 'woody-theme');
+        __('Nord-Ouest', 'woody-theme');
+        __('Nord Nord-Ouest', 'woody-theme');
+        __('Nord', 'woody-theme');
 
         //Part of the day (weather)
         __('Matin', 'woody-theme');
