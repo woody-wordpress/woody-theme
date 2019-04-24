@@ -142,6 +142,10 @@ class WoodyTheme_Cleanup_Admin
 
     public function customMenusPage()
     {
+        
+        $methodExist = class_exists('SubWoodyTheme_Admin') ? method_exists('SubWoodyTheme_Admin', 'addMenuMainPages') : false ; 
+        
+
         if (function_exists('acf_add_options_page')) {
             $lang = pll_current_language();
 
@@ -156,7 +160,7 @@ class WoodyTheme_Cleanup_Admin
                 'redirect'      => true,
             ));
 
-            if (function_exists('acf_add_options_sub_page') && $lang == PLL_DEFAULT_LANG) {
+            if (function_exists('acf_add_options_sub_page') && $lang == PLL_DEFAULT_LANG && !$methodExist) {
                 // Première sous-page
                 acf_add_options_sub_page(array(
                     'page_title'    => 'Menu principal',
