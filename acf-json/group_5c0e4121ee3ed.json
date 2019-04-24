@@ -51,7 +51,7 @@
                 "id": ""
             },
             "collapsed": "field_5c0e43382905e",
-            "min": 1,
+            "min": 0,
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter une playlist",
@@ -163,7 +163,15 @@
                         "wicon-001-facebook-messenger": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-001-facebook-messenger\"><\/span><span>Facebook messenger<\/span><\/div>",
                         "wicon-044-enveloppe": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-044-enveloppe\"><\/span><span>Enveloppe<\/span><\/div>",
                         "wicon-045-haut": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-045-haut\"><\/span><span>Haut<\/span><\/div>",
-                        "wicon-016-bulle": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-016-bulle\"><\/span><span>Bulle<\/span><\/div>"
+                        "wicon-016-bulle": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-016-bulle\"><\/span><span>Bulle<\/span><\/div>",
+                        "wicon-055-vtt": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-055-vtt\"><\/span><span>Vtt<\/span><\/div>",
+                        "wicon-053-loupe-par-defaut": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-053-loupe-par-defaut\"><\/span><span>Loupe par defaut<\/span><\/div>",
+                        "wicon-057-walk": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-057-walk\"><\/span><span>Walk<\/span><\/div>",
+                        "wicon-056-horse": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-056-horse\"><\/span><span>Horse<\/span><\/div>",
+                        "wicon-053-tripadvisor": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-053-tripadvisor\"><\/span><span>Tripadvisor<\/span><\/div>",
+                        "wicon-054-bike": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-054-bike\"><\/span><span>Bike<\/span><\/div>",
+                        "wicon--00-sun": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--00-sun\"><\/span><span>Sun<\/span><\/div>",
+                        "wicon--01-waves": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--01-waves\"><\/span><span>Waves<\/span><\/div>"
                     },
                     "default_value": [],
                     "allow_null": 0,
@@ -205,7 +213,8 @@
                 "id": ""
             },
             "choices": {
-                "blocks-booking-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/booking\/tpl_01\/thumbnail.png?version=2.5.3\" alt=\"blocks-booking-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Bloc de réservation - template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Bloc de réservation - template 1<\/h4>Select + champs de facettes chaudes<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+                "blocks-booking-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.cotelandesnature.wp.rc-dev.com\/app\/dist\/cotelandesnature\/img\/woody-library\/views\/blocks\/booking\/tpl_01\/thumbnail.png?version=2.9.1\" alt=\"blocks-booking-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Bloc de réservation - template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Bloc de réservation - template 1<\/h4>Select + champs de facettes chaudes<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-booking-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.cotelandesnature.wp.rc-dev.com\/app\/dist\/cotelandesnature\/img\/woody-library\/views\/blocks\/booking\/tpl_02\/thumbnail.png?version=2.9.1\" alt=\"blocks-booking-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Bloc de réservation - template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Bloc de réservation - template 2<\/h4>Tabulations avec icônes + champs de facettes chaudes<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -275,5 +284,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1544450745
+    "modified": 1556116663
 }
