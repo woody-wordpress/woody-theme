@@ -8,7 +8,7 @@ function getComponentItem($layout, $context)
     switch ($layout['acf_fc_layout']) {
         case 'manual_focus':
         case 'auto_focus':
-        case 'auto_focus_sheets':  
+        case 'auto_focus_sheets':
             $return = formatFocusesData($layout, $context['post'], $context['woody_components']);
             break;
         case 'geo_map':
@@ -371,7 +371,7 @@ function getManualFocus_data($layout)
     }
 
     if($layout['focused_sort'] == 'random'){
-        shuffle($the_items['items']);  
+        shuffle($the_items['items']);
     }
 
     return $the_items;
@@ -1233,7 +1233,7 @@ function getTransformedPattern($str, $item=null){
                     foreach($matches as $match){
                         $new_str = str_replace(['%nombre%'], $nbResults, $match);
                         $return = preg_replace($pattern, $new_str, $str);
-                        
+
                     }
                 }else{
                     $return = $str;
@@ -1244,7 +1244,7 @@ function getTransformedPattern($str, $item=null){
         }
 
     }else{
-        // Ne concerne pas de playlists 
+        // Ne concerne pas de playlists
         $pattern= "/(%[a-zA-Z]+%)/";
         preg_match($pattern, $str, $matches);
         if(!empty($matches)){
@@ -1258,3 +1258,40 @@ function getTransformedPattern($str, $item=null){
     }
     return $return;
 }
+
+/**
+ *
+ * Nom : getTransformedPattern
+ * Auteur : Jérémy Legendre
+ * Return : Retourne la string avec le pattern modifié (devenu le count de la playlist)
+ * @param    item - Le scope (un objet post)
+ * @param    str  - La phrase (titre, surtitre, sous-titre, description)
+ * @return   return - La phrase modifiée
+ *
+ **/
+
+add_filter( 'the_password_form','custom_password_form' );
+function custom_password_form() {
+    global $post;
+    $vars = [
+        'protected_form' => [
+            'titre' => __('Connectez-vous !'),
+            'label' =>  'pwbox-'.( empty( $post->ID ) ? rand() : $post->ID ),
+            'intro' => __('Cette page est protégée par un mot de passe. </br>Pour accéder à cette page, veuillez saisir un mot de passe :'),
+            'placeholder' => __('Votre mot de passe'),
+            'action' => esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ),
+            'submit_value' => esc_attr__( "Entrer" ),
+        ]
+    ];
+
+    $passwordProtectedPageURL = $post->guid;
+    $wrongPassword = ' ';
+    wd($post);
+    $_COOKIE[ 'motdepasse' . COOKIEHASH]= $post->post_password;
+    if( ! isset ( $_COOKIE[ 'wp-postpass_' . COOKIEHASH ] )){
+        $vars['protected_form']['error_msg'] = __('Accés refusé. Mot de passe incorrect');
+    }
+
+    return Timber::compile('blocks\protected_post\tpl_01\tpl.twig',$vars);
+}
+
