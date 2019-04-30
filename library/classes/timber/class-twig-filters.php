@@ -26,6 +26,7 @@ class WoodyTheme_Twig_Filters
         $twig->addFilter(new Twig_SimpleFilter('ellipsis', [$this, 'ellipsis']));
         $twig->addFilter(new Twig_SimpleFilter('random_number', [$this, 'random_number']));
         $twig->addFilter(new Twig_SimpleFilter('createdFrom', [$this, 'createdFrom']));
+        $twig->addFilter(new Twig_SimpleFilter('getPermalink', [$this, 'getPermalink']));
 
         // debug
         $twig->addFilter(new Twig_SimpleFilter('dump', [$this, 'dump']));
@@ -167,5 +168,10 @@ class WoodyTheme_Twig_Filters
         $m->setTimezone($timezone);
 
         return $m->fromNow()->getRelative();
+    }
+
+    public function getPermalink($post_id)
+    {
+        return apply_filters('woody_get_permalink', $post_id);
     }
 }
