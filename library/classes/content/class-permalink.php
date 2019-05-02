@@ -19,10 +19,10 @@ class WoodyTheme_Permalink
 
         add_action('pll_save_post', [$this, 'savePost'], 10, 3);
         add_action('delete_post', [$this, 'deletePost'], 10);
-        add_action('woody_theme_update', [$this,'cleanTransient']);
-        add_action('woody_subtheme_update', [$this,'cleanTransient']);
+        add_action('woody_theme_update', [$this, 'cleanTransient']);
+        add_action('woody_subtheme_update', [$this, 'cleanTransient']);
 
-        add_action('template_redirect', [$this,'redirect404'], 999);
+        //add_action('template_redirect', [$this,'redirect404'], 999);
     }
 
     public function woodyGetPermalink($post_id)
@@ -99,7 +99,7 @@ class WoodyTheme_Permalink
                             $params = [
                                 'url' => $url,
                                 'match_url' => $match_url,
-                                'group_id' => (int) get_option('woody_auto_redirect'),
+                                'group_id' => (int)get_option('woody_auto_redirect'),
                                 'action_type' => 'url',
                                 'action_code' => 301,
                                 'action_data' => [
