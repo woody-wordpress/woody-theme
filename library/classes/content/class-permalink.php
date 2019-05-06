@@ -47,6 +47,9 @@ class WoodyTheme_Permalink
     {
         global $wp_query, $wp;
         if ($wp_query->is_404 && !empty($wp->request)) {
+            $post_exist = url_to_postid($wp->request);
+            $post_exist_slash = url_to_postid('/' . $wp->request);
+
             $segments = explode('/', $wp->request);
             $last_segment = end($segments);
 
@@ -86,6 +89,8 @@ class WoodyTheme_Permalink
                 $permalink = get_permalink($post->ID);
 
                 Output::debug([
+                    'post_exist' => $post_exist,
+                    'post_exist_slash' => $post_exist_slash,
                     'pll_current_language' => pll_current_language(),
                     'request' => $wp->request,
                     'segments' => $segments,
