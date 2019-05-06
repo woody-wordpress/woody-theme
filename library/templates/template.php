@@ -48,8 +48,6 @@ abstract class WoodyTheme_TemplateAbstract
         $data['globals']['page_type'] = $this->context['page_type'];
         $data['globals']['woody_options_pages'] = $this->getWoodyOptionsPagesValues();
 
-        wd($data['globals'], 'globals');
-
         return $data;
     }
 
