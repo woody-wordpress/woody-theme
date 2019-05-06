@@ -46,8 +46,21 @@ abstract class WoodyTheme_TemplateAbstract
         $data['globals']['post_title'] = $this->context['post_title'];
         $data['globals']['post_id'] = $this->context['post_id'];
         $data['globals']['page_type'] = $this->context['page_type'];
+        $data['globals']['woody_options_pages'] = $this->getWoodyOptionsPagesValues();
+
+        wd($data['globals'], 'globals');
 
         return $data;
+    }
+
+    public function getWoodyOptionsPagesValues()
+    {
+        $return = [];
+
+        $return['search_url'] = get_field('es_search_page_url', 'options');
+        $return['weather_url'] = get_field('weather_page_url', 'options');
+
+        return $return;
     }
 
     public function render()
