@@ -5,6 +5,7 @@
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
+use Woody\Utils\Output;
 
 class WoodyTheme_Permalink
 {
@@ -83,6 +84,16 @@ class WoodyTheme_Permalink
             if (!empty($query_result->posts)) {
                 $post = current($query_result->posts);
                 $permalink = get_permalink($post->ID);
+
+                Output::debug([
+                    'pll_current_language' => pll_current_language(),
+                    'request' => $wp->request,
+                    'segments' => $segments,
+                    'last_segment' => $last_segment,
+                    'permalink' => $permalink,
+                    'posts' => $query_result->posts
+                ]);
+                $permalink = '';
 
                 if (!empty($permalink)) {
                     $parse_permalink = parse_url($permalink, PHP_URL_PATH);
