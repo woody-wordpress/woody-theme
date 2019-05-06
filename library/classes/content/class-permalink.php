@@ -101,7 +101,7 @@ class WoodyTheme_Permalink
                                 'match_url' => $match_url,
                                 'group_id' => (int)get_option('woody_auto_redirect'),
                                 'action_type' => 'url',
-                                'action_code' => 302,
+                                'action_code' => 301,
                                 'action_data' => [
                                     'url' => $parse_permalink
                                 ],
