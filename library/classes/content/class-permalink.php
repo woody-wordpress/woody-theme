@@ -22,7 +22,7 @@ class WoodyTheme_Permalink
         add_action('woody_theme_update', [$this, 'cleanTransient']);
         add_action('woody_subtheme_update', [$this, 'cleanTransient']);
 
-        //add_action('template_redirect', [$this,'redirect404'], 999);
+        add_action('template_redirect', [$this, 'redirect404'], 999);
     }
 
     public function woodyGetPermalink($post_id)
@@ -44,7 +44,7 @@ class WoodyTheme_Permalink
 
     public function redirect404()
     {
-        global $wp_query, $wp, $wpdb;
+        global $wp_query, $wp;
         if ($wp_query->is_404 && !empty($wp->request)) {
             $segments = explode('/', $wp->request);
             $last_segment = end($segments);
@@ -95,13 +95,13 @@ class WoodyTheme_Permalink
                             $match_url = '/' . $wp->request;
                         }
 
-                        if ($url != $parse_permalink) {
+                        if ($url != $parse_permalink && $match_url != $parse_permalink) {
                             $params = [
                                 'url' => $url,
                                 'match_url' => $match_url,
                                 'group_id' => (int)get_option('woody_auto_redirect'),
                                 'action_type' => 'url',
-                                'action_code' => 301,
+                                'action_code' => 302,
                                 'action_data' => [
                                     'url' => $parse_permalink
                                 ],
