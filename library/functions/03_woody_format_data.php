@@ -1259,38 +1259,3 @@ function getTransformedPattern($str, $item=null){
     return $return;
 }
 
-/**
- *
- * Nom : custom_password_form
- * Auteur : Antoine Josset
- * Return : Change le formulaire de protection de pages wordpress
- *
- **/
-
-add_filter( 'the_password_form','custom_password_form' );
-function custom_password_form() {
-    global $post;
-    $vars = [
-        'protected_form' => [
-            'titre' => __('Connectez-vous !'),
-            'label' =>  'pwbox-'.( empty( $post->ID ) ? rand() : $post->ID ),
-            'intro' => __('Cette page est protégée par un mot de passe. </br>Pour accéder à cette page, veuillez saisir un mot de passe :'),
-            'placeholder' => __('Votre mot de passe'),
-            'action' => esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ),
-            'submit_value' => esc_attr__( "Entrer" ),
-        ]
-    ];
-
-    // $pswd=wp_hash_password($post->post_password);
-    // $pswd2=$post->post_password;
-    // $cookie_pswd= wp_unslash($_COOKIE[ 'wp-postpass_' . COOKIEHASH ]);
-
-    // wd(wp_check_password($pswd2,$pswd));
-
-    // if( isset ( $_COOKIE[ 'wp-postpass_' . COOKIEHASH ] ) && $cookie_pswd != $pswd ){
-    //     $vars['protected_form']['error_msg'] = __('Accés refusé. Mot de passe incorrect');
-    // }
-
-    return Timber::compile('blocks\protected_post\tpl_01\tpl.twig',$vars);
-}
-
