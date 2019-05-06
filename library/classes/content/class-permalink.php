@@ -125,6 +125,13 @@ class WoodyTheme_Permalink
                 }
             }
 
+            Output::debug([
+                'request' => $wp->request,
+                'pll_current_language' => pll_current_language(),
+                'post_id' => $post_id,
+                'permalink' => $permalink,
+            ]);
+
             // Redirect if $permalink exist
             if (!empty($permalink)) {
                 header('X-Redirect-Agent: woody');
