@@ -46,8 +46,19 @@ abstract class WoodyTheme_TemplateAbstract
         $data['globals']['post_title'] = $this->context['post_title'];
         $data['globals']['post_id'] = $this->context['post_id'];
         $data['globals']['page_type'] = $this->context['page_type'];
+        $data['globals']['woody_options_pages'] = $this->getWoodyOptionsPagesValues();
 
         return $data;
+    }
+
+    public function getWoodyOptionsPagesValues()
+    {
+        $return = [];
+
+        $return['search_url'] = get_field('es_search_page_url', 'options');
+        $return['weather_url'] = get_field('weather_page_url', 'options');
+
+        return $return;
     }
 
     public function render()
@@ -259,6 +270,13 @@ abstract class WoodyTheme_TemplateAbstract
                         $data['langs'][$lang_key]['name'] = $language['name'];
                         $data['langs'][$lang_key]['locale'] = (!empty($language['locale'])) ? substr($language['locale'], 0, 2) : $lang_key;
                         $data['langs'][$lang_key]['target'] = '_blank';
+                    }
+                }
+                if (!is_user_logged_in() and !empty($languages_customization['hide_langs'])) {
+                    foreach ($data['langs'] as $lang_key => $language) {
+                        if (in_array($language['locale'], $languages_customization['hide_langs'])) {
+                            unset($data['langs'][$lang_key]);
+                        }
                     }
                 }
             }

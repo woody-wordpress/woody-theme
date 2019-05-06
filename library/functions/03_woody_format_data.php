@@ -1261,12 +1261,9 @@ function getTransformedPattern($str, $item=null){
 
 /**
  *
- * Nom : getTransformedPattern
- * Auteur : Jérémy Legendre
- * Return : Retourne la string avec le pattern modifié (devenu le count de la playlist)
- * @param    item - Le scope (un objet post)
- * @param    str  - La phrase (titre, surtitre, sous-titre, description)
- * @return   return - La phrase modifiée
+ * Nom : custom_password_form
+ * Auteur : Antoine Josset
+ * Return : Change le formulaire de protection de pages wordpress
  *
  **/
 
@@ -1284,13 +1281,15 @@ function custom_password_form() {
         ]
     ];
 
-    $passwordProtectedPageURL = $post->guid;
-    $wrongPassword = ' ';
-    wd($post);
-    $_COOKIE[ 'motdepasse' . COOKIEHASH]= $post->post_password;
-    if( ! isset ( $_COOKIE[ 'wp-postpass_' . COOKIEHASH ] )){
-        $vars['protected_form']['error_msg'] = __('Accés refusé. Mot de passe incorrect');
-    }
+    // $pswd=wp_hash_password($post->post_password);
+    // $pswd2=$post->post_password;
+    // $cookie_pswd= wp_unslash($_COOKIE[ 'wp-postpass_' . COOKIEHASH ]);
+
+    // wd(wp_check_password($pswd2,$pswd));
+
+    // if( isset ( $_COOKIE[ 'wp-postpass_' . COOKIEHASH ] ) && $cookie_pswd != $pswd ){
+    //     $vars['protected_form']['error_msg'] = __('Accés refusé. Mot de passe incorrect');
+    // }
 
     return Timber::compile('blocks\protected_post\tpl_01\tpl.twig',$vars);
 }
