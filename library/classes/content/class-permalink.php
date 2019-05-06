@@ -5,7 +5,6 @@
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
-use Woody\Utils\Output;
 
 class WoodyTheme_Permalink
 {
@@ -124,13 +123,6 @@ class WoodyTheme_Permalink
                     }
                 }
             }
-
-            Output::debug([
-                'request' => $wp->request,
-                'pll_current_language' => pll_current_language(),
-                'post_id' => $post_id,
-                'permalink' => $permalink,
-            ]);
 
             // Redirect if $permalink exist
             if (!empty($permalink)) {
