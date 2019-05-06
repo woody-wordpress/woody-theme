@@ -109,6 +109,7 @@ class WoodyTheme_Polylang
         __("Partager par email", 'woody-theme');
         __("Accès au menu principal", 'woody-theme');
         __("Que recherchez-vous ?", "woody-theme");
+        __('Vous cherchez quelque chose ?', 'woody-theme');
         __("Rechercher", 'woody-theme');
         __("Réinitialiser", 'woody-theme');
         __("Choisissez vos dates", 'woody-theme');

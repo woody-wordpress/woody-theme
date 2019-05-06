@@ -475,6 +475,13 @@ class WoodyTheme_ACF
 
     public function sortWoodyTpls()
     {
+        $swipers = [
+            'swiper_01' => 'swipers-landing_swipers-tpl_01',
+            'swiper_02' => 'swipers-landing_swipers-tpl_02',
+            'swiper_03' => 'swipers-landing_swipers-tpl_03',
+            'swiper_04' => 'swipers-landing_swipers-tpl_04'
+        ];
+
         $heroes = [
             'hero_01' => 'blocks-hero-tpl_01',
             'hero_02' => 'blocks-hero-tpl_02',
@@ -656,7 +663,7 @@ class WoodyTheme_ACF
             'feature_03' => 'blocks-feature-tpl_03',
         ];
 
-        $return = $teasers + $heroes + $sections + $lists_and_focuses + $galleries + $cta + $socialwalls + $booking + $semantic_view + $features;
+        $return = $teasers + $heroes + $sections + $lists_and_focuses + $galleries + $cta + $socialwalls + $booking + $semantic_view + $features + $swipers;
 
         return $return;
     }
