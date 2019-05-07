@@ -71,6 +71,23 @@
             "endpoint": 0
         },
         {
+            "key": "field_5cd02984e7aea",
+            "label": "Template",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
             "key": "field_5b0ec2d50a8d2",
             "label": "Template",
             "name": "woody_tpl",
@@ -90,6 +107,44 @@
             "layout": "vertical",
             "return_format": "value",
             "save_other_choice": 0
+        },
+        {
+            "key": "field_5cd02958e7ae9",
+            "label": "Options avancées",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
+            "key": "field_5cd02998e7aeb",
+            "label": "Paramètres de fond",
+            "name": "parametres_de_fond",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5b043c93d609a"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
         }
     ],
     "location": [
@@ -109,5 +164,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Clone du bloc en-tête (peut-être utilisé pour les \"points forts\" ou les \"on aime\"",
-    "modified": 1546946580
+    "modified": 1557146070
 }
