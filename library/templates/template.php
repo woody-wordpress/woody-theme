@@ -272,6 +272,13 @@ abstract class WoodyTheme_TemplateAbstract
                         $data['langs'][$lang_key]['target'] = '_blank';
                     }
                 }
+                if (!is_user_logged_in() and !empty($languages_customization['hide_langs'])) {
+                    foreach ($data['langs'] as $lang_key => $language) {
+                        if (in_array($language['locale'], $languages_customization['hide_langs'])) {
+                            unset($data['langs'][$lang_key]);
+                        }
+                    }
+                }
             }
         }
 

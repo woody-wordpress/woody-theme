@@ -1259,39 +1259,3 @@ function getTransformedPattern($str, $item=null){
     return $return;
 }
 
-/**
- *
- * Nom : getTransformedPattern
- * Auteur : Jérémy Legendre
- * Return : Retourne la string avec le pattern modifié (devenu le count de la playlist)
- * @param    item - Le scope (un objet post)
- * @param    str  - La phrase (titre, surtitre, sous-titre, description)
- * @return   return - La phrase modifiée
- *
- **/
-
-add_filter( 'the_password_form','custom_password_form' );
-function custom_password_form() {
-    global $post;
-    $vars = [
-        'protected_form' => [
-            'titre' => __('Connectez-vous !'),
-            'label' =>  'pwbox-'.( empty( $post->ID ) ? rand() : $post->ID ),
-            'intro' => __('Cette page est protégée par un mot de passe. </br>Pour accéder à cette page, veuillez saisir un mot de passe :'),
-            'placeholder' => __('Votre mot de passe'),
-            'action' => esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ),
-            'submit_value' => esc_attr__( "Entrer" ),
-        ]
-    ];
-
-    $passwordProtectedPageURL = $post->guid;
-    $wrongPassword = ' ';
-    wd($post);
-    $_COOKIE[ 'motdepasse' . COOKIEHASH]= $post->post_password;
-    if( ! isset ( $_COOKIE[ 'wp-postpass_' . COOKIEHASH ] )){
-        $vars['protected_form']['error_msg'] = __('Accés refusé. Mot de passe incorrect');
-    }
-
-    return Timber::compile('blocks\protected_post\tpl_01\tpl.twig',$vars);
-}
-

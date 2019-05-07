@@ -46,78 +46,89 @@ class WoodyTheme_Permalink
     {
         global $wp_query, $wp;
         if ($wp_query->is_404 && !empty($wp->request)) {
-            $segments = explode('/', $wp->request);
-            $last_segment = end($segments);
 
-            // Test if is sheet
-            preg_match('/-([a-z_]{2,})-([0-9]{5,})$/', $last_segment, $sheet_id);
-            if (!empty($sheet_id) && !empty($sheet_id[2])) {
-                $query_result = new \WP_Query([
-                    'lang' => pll_current_language(), // query all polylang languages
-                    'post_status' => ['publish'],
-                    'posts_per_page' => 1,
-                    'orderby' => 'ID',
-                    'order' => 'ASC',
-                    'post_type'   => 'touristic_sheet',
-                    'meta_query'  => [
-                        'relation' => 'AND',
-                        [
-                            'key'     => 'touristic_sheet_id',
-                            'value'   => $sheet_id[2],
-                            'compare' => 'IN',
-                        ]
-                    ],
-                ]);
+            $permalink = null;
+            $post_id = url_to_postid($wp->request);
+            if (!empty($post_id)) {
+                $permalink = get_permalink($post_id);
             } else {
-                $query_result = new \WP_Query([
-                    'lang' => pll_current_language(),
-                    'posts_per_page' => 1,
-                    'post_status' => ['publish'],
-                    'orderby' => 'ID',
-                    'order' => 'ASC',
-                    'name' => $last_segment,
-                    'post_type' => 'page'
-                ]);
-            }
 
-            if (!empty($query_result->posts)) {
-                $post = current($query_result->posts);
-                $permalink = get_permalink($post->ID);
+                $segments = explode('/', $wp->request);
+                $last_segment = end($segments);
 
-                if (!empty($permalink)) {
-                    $parse_permalink = parse_url($permalink, PHP_URL_PATH);
-                    if (!empty($parse_permalink) && $parse_permalink != '/') {
-                        if (substr($wp->request, -1) == '/') {
-                            $url = '/' . $wp->request;
-                            $match_url = '/' . substr($wp->request, 0, -1);
-                        } else {
-                            $url = '/' . $wp->request . '/';
-                            $match_url = '/' . $wp->request;
+                // Test if is sheet
+                preg_match('/-([a-z_]{2,})-([0-9]{5,})$/', $last_segment, $sheet_id);
+                if (!empty($sheet_id) && !empty($sheet_id[2])) {
+                    $query_result = new \WP_Query([
+                        'lang' => pll_current_language(), // query all polylang languages
+                        'post_status' => ['publish'],
+                        'posts_per_page' => 1,
+                        'orderby' => 'ID',
+                        'order' => 'ASC',
+                        'post_type'   => 'touristic_sheet',
+                        'meta_query'  => [
+                            'relation' => 'AND',
+                            [
+                                'key'     => 'touristic_sheet_id',
+                                'value'   => $sheet_id[2],
+                                'compare' => 'IN',
+                            ]
+                        ],
+                    ]);
+                } else {
+                    $query_result = new \WP_Query([
+                        'lang' => pll_current_language(),
+                        'posts_per_page' => 1,
+                        'post_status' => ['publish'],
+                        'orderby' => 'ID',
+                        'order' => 'ASC',
+                        'name' => $last_segment,
+                        'post_type' => 'page'
+                    ]);
+                }
+
+                if (!empty($query_result->posts)) {
+                    $post = current($query_result->posts);
+                    $permalink = get_permalink($post->ID);
+
+                    if (!empty($permalink)) {
+                        $parse_permalink = parse_url($permalink, PHP_URL_PATH);
+                        if (!empty($parse_permalink) && $parse_permalink != '/') {
+                            if (substr($wp->request, -1) == '/') {
+                                $url = '/' . $wp->request;
+                                $match_url = '/' . substr($wp->request, 0, -1);
+                            } else {
+                                $url = '/' . $wp->request . '/';
+                                $match_url = '/' . $wp->request;
+                            }
+
+                            if ($url != $parse_permalink && $match_url != $parse_permalink) {
+                                $params = [
+                                    'url' => $url,
+                                    'match_url' => $match_url,
+                                    'group_id' => (int)get_option('woody_auto_redirect'),
+                                    'action_type' => 'url',
+                                    'action_code' => 301,
+                                    'action_data' => [
+                                        'url' => $parse_permalink
+                                    ],
+                                    'match_type'  => 'url',
+                                    'regex'  => 0,
+                                ];
+
+                                include WP_PLUGINS_DIR . '/redirection/models/group.php';
+                                Red_Item::create($params);
+                            }
                         }
-
-                        if ($url != $parse_permalink && $match_url != $parse_permalink) {
-                            $params = [
-                                'url' => $url,
-                                'match_url' => $match_url,
-                                'group_id' => (int)get_option('woody_auto_redirect'),
-                                'action_type' => 'url',
-                                'action_code' => 301,
-                                'action_data' => [
-                                    'url' => $parse_permalink
-                                ],
-                                'match_type'  => 'url',
-                                'regex'  => 0,
-                            ];
-
-                            include WP_PLUGINS_DIR . '/redirection/models/group.php';
-                            Red_Item::create($params);
-                        }
-
-                        header('X-Redirect-Agent: woody');
-                        wp_redirect($permalink);
-                        exit();
                     }
                 }
+            }
+
+            // Redirect if $permalink exist
+            if (!empty($permalink)) {
+                header('X-Redirect-Agent: woody');
+                wp_redirect($permalink);
+                exit();
             }
         }
     }
