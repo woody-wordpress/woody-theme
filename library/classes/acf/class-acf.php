@@ -19,18 +19,18 @@ class WoodyTheme_ACF
 
     protected function registerHooks()
     {
-        add_action('woody_theme_update', [$this,'cleanTransient']);
-        add_action('woody_subtheme_update', [$this,'cleanTransient']);
+        add_action('woody_theme_update', [$this, 'cleanTransient']);
+        add_action('woody_subtheme_update', [$this, 'cleanTransient']);
         if (WP_ENV == 'dev') {
-            add_filter('woody_acf_save_paths', [$this,'acfJsonSave']);
+            add_filter('woody_acf_save_paths', [$this, 'acfJsonSave']);
         }
-        add_action('create_term', [$this,'cleanTermsChoicesTransient']);
-        add_action('edit_term', [$this,'cleanTermsChoicesTransient']);
-        add_action('delete_term', [$this,'cleanTermsChoicesTransient']);
+        add_action('create_term', [$this, 'cleanTermsChoicesTransient']);
+        add_action('edit_term', [$this, 'cleanTermsChoicesTransient']);
+        add_action('delete_term', [$this, 'cleanTermsChoicesTransient']);
 
         add_action('acf/save_post', [$this, 'clearOptionsTransient'], 20);
 
-        add_filter('acf/settings/load_json', [$this,'acfJsonLoad']);
+        add_filter('acf/settings/load_json', [$this, 'acfJsonLoad']);
         add_filter('acf/load_field/type=radio', [$this, 'woodyTplAcfLoadField']);
         add_filter('acf/load_field/type=select', [$this, 'woodyIconLoadField']);
 
@@ -118,11 +118,7 @@ class WoodyTheme_ACF
      */
     public function acfGoogleMapKey($api)
     {
-        $keys = [
-            'AIzaSyAIWyOS5ifngsd2S35IKbgEXXgiSAnEjsw',
-            'AIzaSyBMx446Q--mQj9mzuZhb7BGVDxac6NfFYc',
-            'AIzaSyB8Fozhi1FKU8oWYJROw8_FgOCbn3wdrhs',
-        ];
+        $keys = WOODY_GOOGLE_MAPS_API_KEY;
         $rand_keys = array_rand($keys, 1);
         $api['key'] = $keys[$rand_keys];
         return $api;
@@ -146,16 +142,15 @@ class WoodyTheme_ACF
             switch ($field['key']) {
                 case 'field_5afd2c9616ecd': // Cas des sections
                     $components = Woody::getTemplatesByAcfGroup($woodyComponents, $field['key']);
-                break;
+                    break;
                 default:
-                if (is_numeric($field['parent'])) {
-                    // From 08/31/18, return of $field['parent'] is the acf post id instead of the key
-                    $parent_field_as_post = get_post($field['parent']);
-                    $components = Woody::getTemplatesByAcfGroup($woodyComponents, $parent_field_as_post->post_name);
-                } else {
-                    $components = Woody::getTemplatesByAcfGroup($woodyComponents, $field['parent']);
-                }
-
+                    if (is_numeric($field['parent'])) {
+                        // From 08/31/18, return of $field['parent'] is the acf post id instead of the key
+                        $parent_field_as_post = get_post($field['parent']);
+                        $components = Woody::getTemplatesByAcfGroup($woodyComponents, $parent_field_as_post->post_name);
+                    } else {
+                        $components = Woody::getTemplatesByAcfGroup($woodyComponents, $field['parent']);
+                    }
             }
 
             if (!empty($components)) {
@@ -303,9 +298,9 @@ class WoodyTheme_ACF
     }
 
     /**
-    * Benoit Bouchaud
-    * On remplit le select "icones" avec les woody-icons disponibles
-    */
+     * Benoit Bouchaud
+     * On remplit le select "icones" avec les woody-icons disponibles
+     */
     public function woodyIconLoadField($field)
     {
         if (strpos($field['name'], 'woody_icon') !== false) {
@@ -396,7 +391,7 @@ class WoodyTheme_ACF
             set_transient('woody_website_pages_taxonomies', $taxonomies);
         }
         foreach ($taxonomies as $key => $taxonomy) {
-            $field['choices']['_' . $taxonomy->name] = (!empty($taxonomy->labels->singular_name)) ? $taxonomy->labels->singular_name . ' principal(e)</small>' : $taxonomy->label .' <small>Tag principal</small>';
+            $field['choices']['_' . $taxonomy->name] = (!empty($taxonomy->labels->singular_name)) ? $taxonomy->labels->singular_name . ' principal(e)</small>' : $taxonomy->label . ' <small>Tag principal</small>';
         }
         return $field;
     }

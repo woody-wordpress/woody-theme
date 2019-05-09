@@ -46,13 +46,11 @@ class WoodyTheme_Permalink
     {
         global $wp_query, $wp;
         if ($wp_query->is_404 && !empty($wp->request)) {
-
             $permalink = null;
             $post_id = url_to_postid($wp->request);
             if (!empty($post_id)) {
                 $permalink = get_permalink($post_id);
             } else {
-
                 $segments = explode('/', $wp->request);
                 $last_segment = end($segments);
 

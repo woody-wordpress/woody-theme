@@ -142,8 +142,7 @@ class WoodyTheme_Cleanup_Admin
 
     public function customMenusPage()
     {
-        
-        $methodExist = class_exists('SubWoodyTheme_Admin') ? method_exists('SubWoodyTheme_Admin', 'addMenuMainPages') : false ; 
+        $methodExist = class_exists('SubWoodyTheme_Admin') ? method_exists('SubWoodyTheme_Admin', 'addMenuMainPages') : false ;
         
 
         if (function_exists('acf_add_options_page')) {

@@ -370,7 +370,7 @@ function getManualFocus_data($layout)
         }
     }
 
-    if($layout['focused_sort'] == 'random'){
+    if ($layout['focused_sort'] == 'random') {
         shuffle($the_items['items']);
     }
 
@@ -1211,16 +1211,16 @@ function getSectionBannerFiles($filename)
  * @return   return - La phrase modifiée
  *
  **/
-function getTransformedPattern($str, $item=null){
+function getTransformedPattern($str, $item=null)
+{
     $return = '';
 
-    if($item!=null){
-        if(!empty($item->get_field('playlist_conf_id'))){
-
+    if ($item!=null) {
+        if (!empty($item->get_field('playlist_conf_id'))) {
             $confId = $item->get_field('playlist_conf_id');
             $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), array(), 'json');
 
-            if(!empty($playlist)){
+            if (!empty($playlist)) {
                 $nbResults = $playlist['playlist']['total'];
                 //on pourrait récupérer le type, le traduire dans la langue actuelle
                 //et ainsi gérer s'il y a un ou plusieurs objets de ce type
@@ -1229,33 +1229,30 @@ function getTransformedPattern($str, $item=null){
 
                 $pattern= "/%nombre%/";
                 preg_match($pattern, $str, $matches);
-                if(!empty($matches)){
-                    foreach($matches as $match){
+                if (!empty($matches)) {
+                    foreach ($matches as $match) {
                         $new_str = str_replace(['%nombre%'], $nbResults, $match);
                         $return = preg_replace($pattern, $new_str, $str);
-
                     }
-                }else{
+                } else {
                     $return = $str;
                 }
             }
-        }else{
+        } else {
             $return = $str;
         }
-
-    }else{
+    } else {
         // Ne concerne pas de playlists
         $pattern= "/(%[a-zA-Z]+%)/";
         preg_match($pattern, $str, $matches);
-        if(!empty($matches)){
-            foreach($matches as $match){
+        if (!empty($matches)) {
+            foreach ($matches as $match) {
                 $new_str = str_replace(['%'], '', $match);
                 $return = preg_replace($pattern, $new_str, $str);
             }
-        }else{
+        } else {
             $return = $str;
         }
     }
     return $return;
 }
-
