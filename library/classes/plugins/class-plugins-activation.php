@@ -47,8 +47,7 @@ class WoodyTheme_Plugins_Activation
 
         $this->deactivate_plugins = [];
 
-        if(defined('WOODY_PRO') && WOODY_PRO === false)
-        {
+        if (defined('WOODY_PRO') && WOODY_PRO === false) {
             $this->deactivate_plugins[] = 'woody-plugin/woody.php';
             $this->deactivate_plugins[] = 'single-sign-on-client/wposso.php';
         }

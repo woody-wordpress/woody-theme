@@ -42,9 +42,9 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         if (is_404()) {
             $this->page404Context();
         } else {
-            if(post_password_required($this->context['post'])){
+            if (post_password_required($this->context['post'])) {
                 echo get_the_password_form($this->context['post']);
-            }else{
+            } else {
                 $this->commonContext();
                 $this->pageContext();
             }
@@ -91,7 +91,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     }
 
     protected function pageContext()
-    {   
+    {
         $this->context['is_frontpage'] = false;
 
         $social_shares = getActiveShares();

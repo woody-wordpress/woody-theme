@@ -28,7 +28,7 @@ class WoodyTheme_Plugins_Options
     public function defineOptions()
     {
         // Plugins Settings
-        update_option('timezone_string', 'Europe/Paris', '', 'yes');
+        update_option('timezone_string', WOODY_TIMEZONE, '', 'yes');
         update_option('WPLANG', 'fr_FR', '', 'yes');
         update_option('date_format', 'j F Y', '', 'yes');
         update_option('time_format', 'G\hi', '', 'yes');
@@ -178,7 +178,7 @@ class WoodyTheme_Plugins_Options
         $this->updateOption('wpuxss_eml_taxonomies', $wpuxss_eml_taxonomies);
 
         // ACF Key
-        $acf_pro_license = ['key' => 'b3JkZXJfaWQ9MTIyNTQwfHR5cGU9ZGV2ZWxvcGVyfGRhdGU9MjAxOC0wMS0xNSAwOTozMToyMw==', 'url' => home_url()];
+        $acf_pro_license = ['key' => WOODY_ACF_PRO_KEY, 'url' => home_url()];
         $acf_pro_license = base64_encode(maybe_serialize($acf_pro_license));
         $this->updateOption('acf_pro_license', $acf_pro_license);
 
@@ -188,9 +188,9 @@ class WoodyTheme_Plugins_Options
 
         // SSO
         $wposso_options = [
-            'client_id' => '3_582geteg4eckcwcscwo4kwwgcowk8cgo00cccksc0w040s8s4c',
-            'client_secret' => '4qm2ajhrj1mo4oc8sgc0s484c8kkg4g4oo8o8sswkk0gc8wscw',
-            'server_url' => 'https://connect.studio.raccourci.fr',
+            'client_id' => WOODY_SSO_CLIENT_ID,
+            'client_secret' => WOODY_SSO_CLIENT_SECRET,
+            'server_url' => WOODY_SSO_SECRET_URL,
             'redirect_to_dashboard' => 1,
         ];
         $this->updateOption('wposso_options', $wposso_options);
@@ -198,7 +198,7 @@ class WoodyTheme_Plugins_Options
         // Enhanced Media Library
         $wpuxss_eml_lib_options = [
             'force_filters' => false,
-            'filters_to_show' => ['types','dates','taxonomies'],
+            'filters_to_show' => ['types', 'dates', 'taxonomies'],
             'show_count' => 0,
             'include_children' => true,
             'media_orderby' => 'date',
@@ -303,7 +303,7 @@ class WoodyTheme_Plugins_Options
         }
 
         if (!$auto_redirect) {
-            $wpdb->insert($wpdb->prefix.'redirection_groups', ['name' => 'Automatiques', 'module_id' => 1]);
+            $wpdb->insert($wpdb->prefix . 'redirection_groups', ['name' => 'Automatiques', 'module_id' => 1]);
             $this->updateOption('woody_auto_redirect', $wpdb->insert_id);
         }
 
@@ -492,17 +492,13 @@ class WoodyTheme_Plugins_Options
         update_option('duplicate_post_title_suffix', '(contenu dupliqué)', '', 'yes');
 
         // Varnish
-        update_option('varnish_caching_enable', (WP_ENV == 'dev') ? false : true, '', 'yes');
-        update_option('varnish_caching_ttl', (WP_ENV == 'dev') ? 600 : 86400, '', 'yes');
-        update_option('varnish_caching_homepage_ttl', (WP_ENV == 'dev') ? 600 : 86400, '', 'yes');
-        if ((WP_SITE_KEY == 'crt-bretagne' || WP_SITE_KEY == 'broceliande') && WP_ENV == 'prod') {
-            update_option('varnish_caching_ips', '10.75.10.13:6081', '', 'yes');
-        } else {
-            update_option('varnish_caching_ips', (WP_ENV == 'prod') ? 'wpv1.rc.prod:80' : '127.0.0.1:80', '', 'yes');
-        }
-        update_option('varnish_caching_purge_key', 'l6ka6sb3hff9fzhx4h2qa38iqgyedznou5hawcj4rgfxlvx9m69zyqtz78yfsmws', '', 'yes');
-        update_option('varnish_caching_cookie', 'y0ecy4qrkcw5rkfdyxyuf9dsoi62omz5fnpkdou8er5xcfeg7hvkqskyn7ps961j', '', 'yes');
-        update_option('varnish_caching_debug', (WP_ENV == 'prod') ? false : true, '', 'yes');
+        update_option('varnish_caching_enable', WOODY_VARNISH_CACHING_ENABLE, '', 'yes');
+        update_option('varnish_caching_debug', WOODY_VARNISH_CACHING_DEBUG, '', 'yes');
+        update_option('varnish_caching_ttl', WOODY_VARNISH_CACHING_TTL, '', 'yes');
+        update_option('varnish_caching_homepage_ttl', WOODY_VARNISH_CACHING_HOMEPAGE_TTL, '', 'yes');
+        update_option('varnish_caching_ips', WOODY_VARNISH_CACHING_IPS, '', 'yes');
+        update_option('varnish_caching_purge_key', WOODY_VARNISH_CACHING_PURGE_KEY, '', 'yes');
+        update_option('varnish_caching_cookie', WOODY_VARNISH_CACHING_COOKIE, '', 'yes');
         update_option('varnish_caching_dynamic_host', true, '', 'yes');
         update_option('varnish_caching_hosts', '', '', 'yes');
         update_option('varnish_caching_override', '', '', 'yes');

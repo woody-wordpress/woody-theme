@@ -83,7 +83,7 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['post_title'] = false;
         $this->context['page_type'] = false;
 
-        $this->context['enabled_woody_options'] = RC_OPTIONS;
+        $this->context['enabled_woody_options'] = WOODY_OPTIONS;
 
         /******************************************************************************
          * Sommes nous dans le cas d'une page miroir ?
@@ -168,7 +168,7 @@ abstract class WoodyTheme_TemplateAbstract
 
     private function addGTM()
     {
-        $this->context['gtm'] = RC_GTM;
+        $this->context['gtm'] = WOODY_GTM;
     }
 
     private function addIcons()
@@ -228,12 +228,12 @@ abstract class WoodyTheme_TemplateAbstract
         $data = [];
 
         // Save the $_GET
-        $autoselect_id = !empty($_GET['autoselect_id']) ? 'autoselect_id='.$_GET['autoselect_id'] : '';
-        $page = !empty($_GET['page']) ? 'page='.$_GET['page'] : '';
-        $output_params = !empty($autoselect_id) ? $autoselect_id.'&' : '';
-        $output_params .= !empty($page) ? $page.'&' : '';
+        $autoselect_id = !empty($_GET['autoselect_id']) ? 'autoselect_id=' . $_GET['autoselect_id'] : '';
+        $page = !empty($_GET['page']) ? 'page=' . $_GET['page'] : '';
+        $output_params = !empty($autoselect_id) ? $autoselect_id . '&' : '';
+        $output_params .= !empty($page) ? $page . '&' : '';
         $output_params = substr($output_params, 0, -1);
-        $output_params = !empty($output_params) ? '?'.$output_params : '';
+        $output_params = !empty($output_params) ? '?' . $output_params : '';
 
         if (!empty($languages)) {
             foreach ($languages as $language) {
