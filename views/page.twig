@@ -17,7 +17,9 @@
                 </a>
             </div>
             {{ page_hero|default }}
-            {# {% include 'parts/shares.twig' %} #}
+
+            {{ page_parts.after_hero|default }}
+
             {% block page_teaser %}
                 <header class="page-teaser" id="the-page-teaser">
                     {{ page_teaser }}
