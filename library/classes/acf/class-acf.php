@@ -409,7 +409,7 @@ class WoodyTheme_ACF
 
     public function sectionContentLoadField($field)
     {
-        if (!in_array('weather', RC_OPTIONS)) {
+        if (!in_array('weather', WOODY_OPTIONS)) {
             // On retire l'option bloc météo si le plugin n'est pas activé
             unset($field['layouts']['layout_5c1b579ac3a87']);
         }
