@@ -119,9 +119,11 @@ class WoodyTheme_ACF
     public function acfGoogleMapKey($api)
     {
         $keys = WOODY_GOOGLE_MAPS_API_KEY;
-        $rand_keys = array_rand($keys, 1);
-        $api['key'] = $keys[$rand_keys];
-        return $api;
+        if (is_array($keys) && !empty($keys)) {
+            $rand_keys = array_rand($keys, 1);
+            $api['key'] = $keys[$rand_keys];
+            return $api;
+        }
     }
 
     /**
