@@ -1,5 +1,4 @@
 (function() {
-    console.log('anchor js');
     tinymce.create('tinymce.plugins.woody_anchor', {
         init: function(editor, url) {
             editor.addButton('woody_anchor', {
