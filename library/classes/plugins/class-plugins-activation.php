@@ -36,7 +36,8 @@ class WoodyTheme_Plugins_Activation
             'enhanced-media-library/enhanced-media-library.php',
             'members/members.php',
             'woody-plugin/woody.php',
-            'single-sign-on-client/wposso.php',
+            // 'single-sign-on-client/wposso.php',
+            'woody-sso/woody-sso.php',
             'ssl-insecure-content-fixer/ssl-insecure-content-fixer.php',
             'mce-table-buttons/mce_table_buttons.php',
             'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
@@ -50,7 +51,8 @@ class WoodyTheme_Plugins_Activation
         if(defined('WOODY_PRO') && WOODY_PRO === false)
         {
             $this->deactivate_plugins[] = 'woody-plugin/woody.php';
-            $this->deactivate_plugins[] = 'single-sign-on-client/wposso.php';
+            $this->deactivate_plugins[] = 'woody-sso/woody-sso.php';
+            // $this->deactivate_plugins[] = 'single-sign-on-client/wposso.php';
         }
 
         switch (WP_ENV) {
