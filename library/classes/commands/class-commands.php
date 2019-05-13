@@ -74,6 +74,12 @@ class WoodyTheme_Commands
     public function flush_varnish()
     {
         // Options
+        $varnish_caching_enable = get_option('varnish_caching_enable');
+        if (!$varnish_caching_enable) {
+            Output::warning('Plugin Varnish non activé');
+            return;
+        }
+
         $vcaching_prefix = 'varnish_caching_';
         $vcaching_useSsl = get_option($vcaching_prefix . 'ssl');
         $vcaching_purgeKey = ($purgeKey = trim(get_option($vcaching_prefix . 'purge_key'))) ? $purgeKey : null;
