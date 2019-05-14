@@ -16,18 +16,19 @@ class WoodyTheme_Menus
     protected function registerHooks()
     {
         add_theme_support('menus');
+        add_action('save_post', [$this, 'savePost'], 10, 3);
     }
 
     /**
-    *
-    * Nom : getMainMenu
-    * Auteur : Benoit Bouchaud
-    * Return : Retourne les liens du menu principal avec les champs utiles de la page associée
-    * @param submenu_depth - Tableau des profondeurs max pour chaque sous menu
-    * @param limit - Le nombre maximum d'éléments à remonter
-    * @return return - Un tableau
-    *
-    */
+     *
+     * Nom : getMainMenu
+     * Auteur : Benoit Bouchaud
+     * Return : Retourne les liens du menu principal avec les champs utiles de la page associée
+     * @param submenu_depth - Tableau des profondeurs max pour chaque sous menu
+     * @param limit - Le nombre maximum d'éléments à remonter
+     * @return return - Un tableau
+     *
+     */
     public static function getMainMenu($limit = 6, $depth_1_ids = array(), $root_level = 1)
     {
         $current_lang = 'fr';
@@ -112,16 +113,16 @@ class WoodyTheme_Menus
     }
 
     /**
-    *
-    * Nom : getMenuLinks
-    * Auteur : Benoit Bouchaud
-    * Return : Récupère les champs utiles au menu de tous les post enfants du $post_parent
-    * @param posts - Un tableau de posts (optionnel)
-    * @param post_parent - L'id du post parent
-    * @param limit - Le nombre maximum de posts à remonter
-    * @return return - Un tableau
-    *
-    */
+     *
+     * Nom : getMenuLinks
+     * Auteur : Benoit Bouchaud
+     * Return : Récupère les champs utiles au menu de tous les post enfants du $post_parent
+     * @param posts - Un tableau de posts (optionnel)
+     * @param post_parent - L'id du post parent
+     * @param limit - Le nombre maximum de posts à remonter
+     * @return return - Un tableau
+     *
+     */
     public static function getMenuLinks($posts = [], $post_parent = 0, $limit = -1, $root_level = 1)
     {
         $return = [];
@@ -157,7 +158,7 @@ class WoodyTheme_Menus
                                 'the_url' => $post['url'],
                                 'the_target' => '_blank',
                                 'the_fields' => [
-                                    'title' => (!empty($post['title'])) ? $post['title'] : '' ,
+                                    'title' => (!empty($post['title'])) ? $post['title'] : '',
                                 ]
                             ];
                         }
@@ -251,5 +252,10 @@ class WoodyTheme_Menus
         }
 
         return $return;
+    }
+
+    public function savePost()
+    {
+        delete_transient('woody_menus_cache');
     }
 }
