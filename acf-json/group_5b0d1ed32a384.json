@@ -442,6 +442,7 @@
                 "sheet_town": "Ville <small>(fiche uniquement)<\/small>",
                 "sheet_rating": "Note <small>(fiche uniquement)<\/small>",
                 "sheet_itinerary": "Itinéraire <small>(fiche uniquement)<\/small>",
+                "bookable": "Réservable <small>(fiche uniquement)<\/small>",
                 "_themes": "Thématique principal(e)<\/small>",
                 "_places": "Lieu principal(e)<\/small>",
                 "_seasons": "Saison principal(e)<\/small>"
