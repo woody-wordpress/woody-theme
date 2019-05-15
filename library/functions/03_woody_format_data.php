@@ -817,7 +817,8 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
                 'link' =>[
                     'url' => (!empty($item['link'])) ? $item['link'] : '',
                     'target' => $item['targetBlank'] ? '_blank' : '',
-                ]
+                ],
+                'booking' => (!empty($item['booking']['link'])) ? $item['booking'] : '',
             ];
             if (!empty($layout['display_img'])) {
                 $data['img'] = [
