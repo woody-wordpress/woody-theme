@@ -129,6 +129,7 @@ class WoodyTheme_Polylang
         __('Que voulez-vous réserver ?', 'woody-theme');
         __('Choisissez vos dates de réservation', 'woody-theme');
         __('Changer de saison', 'woody-theme');
+        __('Réservable', 'woody-theme');
 
         // Weather
         __('Bas', 'woody-theme');
