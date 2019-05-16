@@ -18,14 +18,14 @@ function getComponentItem($layout, $context)
             $return = formatFullContentList($layout, $context['post'], $context['woody_components']);
             break;
 
-        // case 'snow_info':
-        //     $return = formatSnowInfoData($layout, $context['woody_components']);
-        //     break;
+            // case 'snow_info':
+            //     $return = formatSnowInfoData($layout, $context['woody_components']);
+            //     break;
         case 'weather':
             $vars['account'] = $layout['weather_account'];
             $vars['nb_days'] = $layout['weather_count_days'];
             $the_weather = apply_filters('woody_weather', $vars);
-            $the_weather['bg_color'] = (!empty($layout['weather_bg_params']['background_color'])) ? $layout['weather_bg_params']['background_color']: '';
+            $the_weather['bg_color'] = (!empty($layout['weather_bg_params']['background_color'])) ? $layout['weather_bg_params']['background_color'] : '';
             $the_weather['bg_img'] = $layout['weather_bg_img'];
             $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_weather);
             break;
@@ -75,8 +75,8 @@ function getComponentItem($layout, $context)
             $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
         case 'semantic_view':
-                $layout['items'] = getSemanticViewData($layout);
-                $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            $layout['items'] = getSemanticViewData($layout);
+            $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
         default:
             $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
@@ -112,7 +112,7 @@ function getSemanticViewData($layout)
         'post__not_in' => [$layout['post']['ID']]
     ];
 
-    $the_query['tax_query'] = (!empty($tax_query)) ? $tax_query : '' ;
+    $the_query['tax_query'] = (!empty($tax_query)) ? $tax_query : '';
 
 
     $query_result = new WP_query($the_query);
@@ -220,29 +220,29 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
                 // On ajoute des paramètres de meta_query à la query
             } elseif (strpos($filter_key, 'filter_trip_price') !== false) {
                 $the_meta_query[] = [
-                    'key'		=> 'the_price_price',
-                    'value'		=> $filter['min'],
+                    'key'        => 'the_price_price',
+                    'value'        => $filter['min'],
                     'type'      => 'NUMERIC',
-                    'compare'	=> '>='
+                    'compare'    => '>='
                 ];
                 $the_meta_query[] = [
-                        'key'		=> 'the_price_price',
-                        'value'		=> $filter['max'],
-                        'type'      => 'NUMERIC',
-                        'compare'	=> '<='
+                    'key'        => 'the_price_price',
+                    'value'        => $filter['max'],
+                    'type'      => 'NUMERIC',
+                    'compare'    => '<='
                 ];
             } elseif (strpos($filter_key, 'filter_trip_duration') !== false) {
                 $the_meta_query[] = [
-                    'key'		=> 'the_duration_count_days',
-                    'value'		=> $filter['min'],
+                    'key'        => 'the_duration_count_days',
+                    'value'        => $filter['min'],
                     'type'      => 'NUMERIC',
-                    'compare'	=> '>='
+                    'compare'    => '>='
                 ];
                 $the_meta_query[] = [
-                        'key'		=> 'the_duration_count_days',
-                        'value'		=> $filter['max'],
-                        'type'      => 'NUMERIC',
-                        'compare'	=> '<='
+                    'key'        => 'the_duration_count_days',
+                    'value'        => $filter['max'],
+                    'type'      => 'NUMERIC',
+                    'compare'    => '<='
                 ];
             }
         }
@@ -277,7 +277,7 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
     // NB : si aucun choix n'a été fait, on remonte automatiquement tous les contenus de type page
     $the_query = [
         'post_type' => 'page',
-        'posts_per_page' =>  (!empty($query_form['focused_count'])) ? $query_form['focused_count'] : 16,
+        'posts_per_page' => (!empty($query_form['focused_count'])) ? $query_form['focused_count'] : 16,
         'post_status' => 'publish',
         'post__not_in' => array($the_post->ID),
         'order' => $order,
@@ -295,7 +295,7 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
         $the_query['paged'] = (!empty($the_page)) ? $the_page : 1;
     }
 
-    $the_query['tax_query'] = (!empty($tax_query)) ? $tax_query : '' ;
+    $the_query['tax_query'] = (!empty($tax_query)) ? $tax_query : '';
 
     // Si Hiérarchie = Enfants directs de la page
     // On passe le post ID dans le paramètre post_parent de la query
@@ -600,7 +600,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
         if (empty($the_filtered_items['max_num_pages'])) {
             $the_filtered_items['max_num_pages'] = 1;
         }
-        $max_num_pages = $the_filtered_items['max_num_pages'] ;
+        $max_num_pages = $the_filtered_items['max_num_pages'];
     } else {
         $the_list['the_grid'] =  Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_items);
         if (!empty($the_items['wp_query']) && !empty($the_items['wp_query']->found_posts)) {
@@ -616,7 +616,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
         if (empty($the_items['max_num_pages'])) {
             $the_items['max_num_pages'] = 1;
         }
-        $max_num_pages = $the_items['max_num_pages'] ;
+        $max_num_pages = $the_items['max_num_pages'];
     }
 
     $the_list['filters']['the_map'] = creatListMapFilter($current_post, $layout, $paginate, $the_list['filters'], $twigPaths);
@@ -632,7 +632,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     }
 
     if (!empty($layout['the_list_pager']) && $layout['the_list_pager']['list_pager_type'] != 'none') {
-        $items_by_page = (!empty($layout['the_list_elements']['list_el_req_fields']['focused_count'])) ? $layout['the_list_elements']['list_el_req_fields']['focused_count'] : 16 ;
+        $items_by_page = (!empty($layout['the_list_elements']['list_el_req_fields']['focused_count'])) ? $layout['the_list_elements']['list_el_req_fields']['focused_count'] : 16;
         $the_list['pager'] = formatListPager($layout['the_list_pager'], $max_num_pages, $the_list['uniqid']);
         $the_list['pager_position'] = $layout['the_list_pager']['list_pager_position'];
     }
@@ -652,23 +652,23 @@ function creatListMapFilter($current_post, $layout, $paginate, $filters, $twigPa
                         foreach ($every_items['items'] as $item) {
                             if (!empty($item['location']['lat']) && !empty($item['location']['lng'])) {
                                 $the_marker = [
-                                'image_style' => 'ratio_16_9',
-                                'item' => [
-                                    'title' => $item['title'],
-                                    'description' => $item['description'],
-                                    'img' => $item['img'],
-                                    'link' => $item['link']
-                                ]
-                            ];
+                                    'image_style' => 'ratio_16_9',
+                                    'item' => [
+                                        'title' => $item['title'],
+                                        'description' => $item['description'],
+                                        'img' => $item['img'],
+                                        'link' => $item['link']
+                                    ]
+                                ];
 
                                 $filters[$key]['markers'][] = [
-                                'map_position' => [
-                                    'lat' => $item['location']['lat'],
-                                    'lng' => $item['location']['lng']
-                                ],
-                                'compiled_marker' => $layout['default_marker'],
-                                'marker_thumb_html' => Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker)
-                            ];
+                                    'map_position' => [
+                                        'lat' => $item['location']['lat'],
+                                        'lng' => $item['location']['lng']
+                                    ],
+                                    'compiled_marker' => $layout['default_marker'],
+                                    'marker_thumb_html' => Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker)
+                                ];
                             }
                         }
                     }
@@ -803,9 +803,9 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
     $languages = apply_filters('woody_pll_the_languages', 'auto');
     //for season
     foreach ($languages as $language) {
-        $code_lang=$lang;
+        $code_lang = $lang;
         if ($language['current_lang']) {
-            $code_lang=substr($language['locale'], 0, 2);
+            $code_lang = substr($language['locale'], 0, 2);
         }
     }
 
@@ -814,7 +814,7 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
         foreach ($sheet_data['items'] as $key => $item) {
             $data = [
                 'title' => (!empty($item['title'])) ? getTransformedPattern($item['title']) : '',
-                'link' =>[
+                'link' => [
                     'url' => (!empty($item['link'])) ? $item['link'] : '',
                     'target' => $item['targetBlank'] ? '_blank' : '',
                 ],
@@ -829,7 +829,7 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
             }
 
             if (!empty($item['deals'])) {
-                $data['title'] = $item['deals']['list'][0]['nom'][$code_lang] ;
+                $data['title'] = $item['deals']['list'][0]['nom'][$code_lang];
             }
             if (is_array($layout['display_elements'])) {
                 if (in_array('sheet_type', $layout['display_elements'])) {
@@ -841,7 +841,7 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
                 if (in_array('description', $layout['display_elements'])) {
                     $data['description'] = (!empty($item['desc'])) ? getTransformedPattern($item['desc']) : '';
                     if (!empty($item['deals']['list'][0]['description'][$lang])) {
-                        $data['description'] = $item['deals']['list'][0]['description'][$lang] ;
+                        $data['description'] = $item['deals']['list'][0]['description'][$lang];
                     }
                 }
                 if (in_array('sheet_town', $layout['display_elements'])) {
@@ -864,16 +864,13 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
                 }
             }
 
-
-
-
             $data['location'] = [];
             $data['location']['lat'] = (!empty($item['gps'])) ? $item['gps']['latitude'] : '';
             $data['location']['lng'] = (!empty($item['gps'])) ? $item['gps']['longitude'] : '';
 
             if ($item['bordereau'] === 'HOT' or $item['bordereau'] == 'HPA') {
                 $rating = [];
-                for ($i=0; $i <= $item['ratings'][0]['value']; $i++) {
+                for ($i = 0; $i <= $item['ratings'][0]['value']; $i++) {
                     $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
                 }
                 if (is_array($layout['display_elements'])) {
@@ -954,7 +951,7 @@ function getPagePreview($item_wrapper, $item)
         }
         if (in_array('icon', $item_wrapper['display_elements'])) {
             $data['woody_icon'] = $item->focus_woody_icon;
-            $data['icon_type'] =(!empty($item->icon_type)) ? $item->icon_type : 'picto';
+            $data['icon_type'] = (!empty($item->icon_type)) ? $item->icon_type : 'picto';
         }
         if (in_array('description', $item_wrapper['display_elements'])) {
             $data['description'] = getTransformedPattern(getFieldAndFallback($item, 'focus_description', $item, 'field_5b2bbbfaec6b2'), $item);
@@ -1049,7 +1046,7 @@ function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = ''
 function getDisplayOptions($scope)
 {
     $display = [];
-    $classes_array=[];
+    $classes_array = [];
 
     $display['gridContainer'] = (empty($scope['display_fullwidth'])) ? 'grid-container' : '';
     $display['background_img'] = (!empty($scope['background_img'])) ? $scope['background_img'] : '';
@@ -1172,15 +1169,14 @@ function formatVisualEffectData($effects)
                             case 'trnslt-left':
                             case 'trnslt-right':
                                 $return['transform'][] = $transform['transform_type'] . '-' . $transform['transform_trnslt_value'];
-                            break;
+                                break;
                             case 'rotate-left':
                             case 'rotate-right':
-                            $return['transform'][] = $transform['transform_type'] . '-' . $transform['transform_rotate_value'];
-                            break;
-
+                                $return['transform'][] = $transform['transform_type'] . '-' . $transform['transform_rotate_value'];
+                                break;
                         }
                     }
-                break;
+                    break;
             }
         }
     }
@@ -1212,11 +1208,11 @@ function getSectionBannerFiles($filename)
  * @return   return - La phrase modifiée
  *
  **/
-function getTransformedPattern($str, $item=null)
+function getTransformedPattern($str, $item = null)
 {
     $return = '';
 
-    if ($item!=null) {
+    if ($item != null) {
         if (!empty($item->get_field('playlist_conf_id'))) {
             $confId = $item->get_field('playlist_conf_id');
             $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), array(), 'json');
@@ -1228,7 +1224,7 @@ function getTransformedPattern($str, $item=null)
                 // (gérer si on met un 's' ou non)
                 //$type = $playlist['playlist']['type'];
 
-                $pattern= "/%nombre%/";
+                $pattern = "/%nombre%/";
                 preg_match($pattern, $str, $matches);
                 if (!empty($matches)) {
                     foreach ($matches as $match) {
@@ -1244,7 +1240,7 @@ function getTransformedPattern($str, $item=null)
         }
     } else {
         // Ne concerne pas de playlists
-        $pattern= "/(%[a-zA-Z]+%)/";
+        $pattern = "/(%[a-zA-Z]+%)/";
         preg_match($pattern, $str, $matches);
         if (!empty($matches)) {
             foreach ($matches as $match) {
