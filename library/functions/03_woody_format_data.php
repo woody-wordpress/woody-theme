@@ -817,7 +817,7 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
                 'link' => [
                     'url' => (!empty($item['link'])) ? $item['link'] : '',
                     'target' => $item['targetBlank'] ? '_blank' : '',
-                ]
+                ],
             ];
             if (!empty($layout['display_img'])) {
                 $data['img'] = [
@@ -847,12 +847,13 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
                 if (in_array('sheet_town', $layout['display_elements'])) {
                     $data['sheet_town'] = (!empty($item['town'])) ? $item['town'] : '';
                 }
-                if (in_array('sheet_town', $layout['display_elements'])) {
-                    $data['sheet_town'] = (!empty($item['town'])) ? $item['town'] : '';
-                }
+
                 if (in_array('price', $layout['display_elements'])) {
                     $data['the_price']['price'] = (!empty($item['tariffs']['price'])) ? $item['tariffs']['price'] : '';
                     $data['the_price']['prefix_price'] = (!empty($item['tariffs']['label'])) ? $item['tariffs']['label'] : '';
+                }
+                if(in_array('bookable', $layout['display_elements'])){
+                    $data['booking'] = (!empty($item['booking']['link'])) ? $item['booking'] : '';
                 }
             }
 
