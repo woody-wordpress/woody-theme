@@ -159,7 +159,8 @@ button,
 .the_filter,
 .the_pager,
 .card-button,
-.home-slider {
+.home-slider,
+.fullcenterbox {
     display: none !important;
 }
 
@@ -168,6 +169,7 @@ button,
 #responsive-layout-switcher,
 #playlist-map-wrapper,
 #pagination,
+.item-wrapper .item-chain,
 .main-tourism-wrapper .playlist-infos-banner {
     display: none !important;
 }
@@ -182,6 +184,41 @@ button,
 
 #item_sheet_list .item_sheet .infos {
     height: auto !important;
+}
+
+#item_sheet_list{
+    justify-content: center;
+    align-items: center;
+}
+
+#item_sheet_list .item-wrapper {
+    display: table-cell;
+    float: left;
+    page-break-inside: avoid;
+    article{
+        border: 1px solid grey;
+        border-radius: 2px;
+        box-shadow: 10px 10px 5px rgba(44, 43, 43, 0.76);
+        width: 300px;
+        height: 420px;
+        margin: 5px;
+    }
+    a{
+        img{
+            width: 95%;
+            padding:5px 0 0 0;
+            margin: auto;
+        }
+        section{
+            .infos-wrapper{
+                h3{
+                    margin:0px;
+                }
+                padding:0 10px 0 10px;
+            }
+            text-overflow: ellipsis;
+        }
+    }
 }
 
 /* Sheet Tourisme */
