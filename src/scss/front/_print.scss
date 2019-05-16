@@ -148,7 +148,6 @@ button,
 .woody-component-mobilenavs,
 .breadcrumb-wrapper,
 .sharing-links,
-.tourism-detail-hero-slider,
 .direction-map-wrapper,
 .woody-component-focus .imageObject,
 .mobile-header,
@@ -224,16 +223,6 @@ button,
     }
 }
 
-/* Sheet Tourisme */
-.api-render-sheet #availabilities,
-.api-render-sheet #map-container,
-.api-render-sheet #gallery,
-.api-render-sheet .sidebar-contact-form-section,
-.api-render-sheet .sidebar-map-container,
-.api-render-sheet .sheet-navbar-checkpoint {
-    display: none !important;
-}
-
 /* Hero */
 .woody-component-hero {
     height: auto !important;
@@ -295,14 +284,40 @@ a.mediaCard:after {
     height: auto !important;
 }
 
+
+/* Sheet Tourisme */
+.api-render-sheet #availabilities,
+.api-render-sheet #map-container,
+.api-render-sheet #gallery,
+.api-render-sheet .sidebar-contact-form-section,
+.api-render-sheet .sidebar-map-container,
+.api-render-sheet .sheet-navbar-checkpoint {
+    display: none !important;
+}
+
 // Tourisme
 .api-render-container {
 
+    #mobile-main-menu,
+    .header-chains,
+    .sheet-nav,
+    .sheet-nav-actions,
     .pl-paint-overlay,
-    .tourism-detail-hero-slider,
+    .panel-header kaarousel-next,
+    .panel-header kaarousel-prev,
     .sheet-navbar-checkpoint,
+    .sheet-tab-nav,
     .sidebar-issue-report,
-    #gallery,
+    .spoken-languages,
+    .tourism-labels,
+    #download,
+    .audio-element,
+    #booking,
+    #tariffs,
+    aside .hidden-xs,
+    aside .sidebar-contact-websites,
+    aside .tourism-detail-sharing,
+    .sidebar-contact-phones .reveal-button,
     .sidebar-contact-form-section {
         display: none !important;
     }
@@ -316,5 +331,30 @@ a.mediaCard:after {
 
     #responsive-layout-switcher {
         display: none !important;
+    }
+
+    .panel-header {
+        img{
+            height: 250px;
+            float: right;
+        }
+        .photo-label{
+            display:none;
+        }
+    }
+    aside{
+        .panel-title-responsive{
+            text-align: center;
+        }
+        margin:0px;
+        padding:0px;
+        .list-group-item, .panel-default{
+            border:none;
+        }
+        position: absolute;
+        //top: 150px;
+        // when list will finally be removed
+        top: 420px;
+        width: 35%;
     }
 }
