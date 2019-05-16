@@ -219,6 +219,9 @@ button,
             text-overflow: ellipsis;
         }
     }
+    a:after{
+        content: none;
+    }
 }
 
 /* Sheet Tourisme */
