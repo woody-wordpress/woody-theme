@@ -1,8 +1,16 @@
 #scroll_to_top {
-    @include breakpoint(small medium){
+    @include breakpoint(small down){
         display: none !important;
     }
-    display: none;
+    transition: opacity 0.5s;
+    opacity: 0;
+
+    @if $scroll-to-top {
+        display: block
+    }
+    @else{
+        display: none ;
+    }
     position: fixed;
     bottom: 15px;
     left: 15px;
