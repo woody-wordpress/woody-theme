@@ -303,9 +303,12 @@ a.mediaCard:after {
     .sheet-nav,
     .sheet-nav-actions,
     .pl-paint-overlay,
+    .sheet-navbar-checkpoint,
+    .sheet-fab,
     .panel-header kaarousel-next,
     .panel-header kaarousel-prev,
-    .sheet-navbar-checkpoint,
+    street-view canvas,
+    .kaarousel-item-media-iframe,
     .sheet-tab-nav,
     .sidebar-issue-report,
     .spoken-languages,
@@ -318,7 +321,10 @@ a.mediaCard:after {
     aside .sidebar-contact-websites,
     aside .tourism-detail-sharing,
     .sidebar-contact-phones .reveal-button,
-    .sidebar-contact-form-section {
+    .sidebar-contact-form-section,
+    #groups,
+    #arrangements
+    {
         display: none !important;
     }
 
@@ -342,19 +348,123 @@ a.mediaCard:after {
             display:none;
         }
     }
-    aside{
-        .panel-title-responsive{
-            text-align: center;
-        }
+
+    .establishment-description{
+        width:100%;
+    }
+    .establishment-description::before{
+        content: "DESCRIPTION \A";
+    }
+    .tariff-tab-wrapper::before{
+        content: "TARIFS \A";
+    }
+
+    .tariff-tab-wrapper::before,
+    .establishment-description::before{
+        white-space: pre;
+        color: #1968B5 !important;
+        font: bold;
+        font-size: 1em;
+        font-weight: bold;
+    }
+
+    .tourism-detail-description,
+    .list-group-item,
+    .panel-default{
+        border:none;
         margin:0px;
         padding:0px;
-        .list-group-item, .panel-default{
-            border:none;
+    }
+
+    .header-text h2{
+        margin : 0 0 20px 12px;
+    }
+    .header-title{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0px;
+        span, sup{
+            margin: 5px;
+            padding: 5px;
         }
+    }
+
+    main{
+        .list-group{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .list-group-item{
+            width: 45%;
+            dl{
+                display: flex;
+                flex-direction: column;
+                justify-content: left;
+                align-items: left;
+                dt .pl-heading{
+                    color: #1968B5 !important;
+                    font-size: 1em;
+                    text-transform: uppercase;
+                }
+            }
+        }
+        .list-group-item:nth-child(even){
+            margin-left: 20px;
+            padding-left: 20px;
+            border-left: 1px solid rgb(73, 73, 73);
+        }
+
+        #description .list-group-item:first-child{
+            width: 100%;
+            dl{
+                display: unset;
+                flex: unset;
+            }
+            margin-bottom: 20px;
+        }
+        #description .list-group-item:nth-child(even){
+            margin-left: 0px;
+            padding-left: 0px;
+            border-left: none;
+        }
+        #description .list-group-item:nth-child(2n+3){
+            margin-left: 20px;
+            padding-left: 20px;
+            border-left: 1px solid rgb(73, 73, 73);
+        }
+        section:first-of-type{
+            margin-top: 30px;
+        }
+        section{
+            page-break-inside: avoid;
+            margin: 10px 0 10px 0 !important;
+
+            .tariff-tab-wrapper .sheet-tab-panes{
+                display: flex;
+                flex-direction: column;
+            }
+        }
+        .panel-title-responsive{
+            display: none !important;
+        }
+    }
+
+    aside{
         position: absolute;
-        //top: 150px;
-        // when list will finally be removed
-        top: 420px;
+        top: 150px;
         width: 35%;
+        margin:0px;
+        padding:0px;
+
+        .phone-link:after{
+            content: none;
+        }
+
+        .panel-title-responsive{
+            display: none;
+        }
     }
 }
