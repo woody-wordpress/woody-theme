@@ -829,21 +829,26 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
                     'title' => (!empty($item['img']['title'])) ? $item['img']['title'] : ''
                 ];
             }
-
-            if (!empty($item['deals'])) {
-                $data['title'] = $item['deals']['list'][0]['nom'][$code_lang];
+            if (!empty($layout['deal_mode'])) {
+                if (!empty($item['deals'])) {
+                    $data['title'] = $item['deals']['list'][0]['nom'][$code_lang];
+                }
             }
             if (is_array($layout['display_elements'])) {
                 if (in_array('sheet_type', $layout['display_elements'])) {
                     $data['sheet_type'] = (!empty($item['type'])) ? $item['type'] : '';
-                    if (!empty($item['deals'])) {
-                        $data['sheet_type'] = $item['title'];
+                    if (!empty($layout['deal_mode'])) {
+                        if (!empty($item['deals'])) {
+                            $data['sheet_type'] = $item['title'];
+                        }
                     }
                 }
                 if (in_array('description', $layout['display_elements'])) {
                     $data['description'] = (!empty($item['desc'])) ? getTransformedPattern($item['desc']) : '';
-                    if (!empty($item['deals']['list'][0]['description'][$lang])) {
-                        $data['description'] = $item['deals']['list'][0]['description'][$lang];
+                    if (!empty($layout['deal_mode'])) {
+                        if (!empty($item['deals']['list'][0]['description'][$lang])) {
+                            $data['description'] = $item['deals']['list'][0]['description'][$lang];
+                        }
                     }
                 }
                 if (in_array('sheet_town', $layout['display_elements'])) {

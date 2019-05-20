@@ -299,6 +299,7 @@ a.mediaCard:after {
 .api-render-container {
 
     #mobile-main-menu,
+    .sidebar-hashtag,
     .header-chains,
     .sheet-nav,
     .sheet-nav-actions,
@@ -307,11 +308,10 @@ a.mediaCard:after {
     .sheet-fab,
     .panel-header kaarousel-next,
     .panel-header kaarousel-prev,
-    street-view canvas,
+    street-view,
     .kaarousel-item-media-iframe,
     .sheet-tab-nav,
     .sidebar-issue-report,
-    .spoken-languages,
     .tourism-labels,
     #download,
     .audio-element,
@@ -411,11 +411,11 @@ a.mediaCard:after {
                 }
             }
         }
-        .list-group-item:nth-child(even){
-            margin-left: 20px;
-            padding-left: 20px;
-            border-left: 1px solid rgb(73, 73, 73);
-        }
+        // .list-group-item:nth-child(even){
+        //     margin-left: 20px;
+        //     padding-left: 20px;
+        //     // border-left: 1px solid rgb(73, 73, 73);
+        // }
 
         #description .list-group-item:first-child{
             width: 100%;
@@ -430,11 +430,11 @@ a.mediaCard:after {
             padding-left: 0px;
             border-left: none;
         }
-        #description .list-group-item:nth-child(2n+3){
-            margin-left: 20px;
-            padding-left: 20px;
-            border-left: 1px solid rgb(73, 73, 73);
-        }
+        // #description .list-group-item:nth-child(2n+3){
+        //     margin-left: 20px;
+        //     padding-left: 20px;
+        //     // border-left: 1px solid rgb(73, 73, 73);
+        // }
         section:first-of-type{
             margin-top: 30px;
         }
@@ -445,16 +445,29 @@ a.mediaCard:after {
             .tariff-tab-wrapper .sheet-tab-panes{
                 display: flex;
                 flex-direction: column;
+                ul{
+                    min-height: 25px !important;
+                }
             }
         }
         .panel-title-responsive{
             display: none !important;
         }
+
+        .spoken-languages{
+            ul{
+                display:flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                li{
+                    margin:5px;
+                }
+            }
+        }
     }
 
     aside{
         position: absolute;
-        top: 150px;
         width: 35%;
         margin:0px;
         padding:0px;
@@ -465,6 +478,15 @@ a.mediaCard:after {
 
         .panel-title-responsive{
             display: none;
+        }
+    }
+
+    .kaarousel-container{
+        position: relative;
+        float:right;
+        width: 65%;
+        a:after{
+            content: none;
         }
     }
 }
