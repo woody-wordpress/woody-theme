@@ -187,13 +187,13 @@ class WoodyTheme_Plugins_Options
         $this->updateOption('wpseo_titles', $wpseo_titles);
 
         // SSO
-        $woody_sso_options = [
+        $wposso_options = [
             'client_id' => WOODY_SSO_CLIENT_ID,
             'client_secret' => WOODY_SSO_CLIENT_SECRET,
             'server_url' => WOODY_SSO_SECRET_URL,
             'redirect_to_dashboard' => 1,
         ];
-        $this->updateOption('woody_sso_options', $woody_sso_options);
+        $this->updateOption('wposso_options', $wposso_options);
 
         // Enhanced Media Library
         $wpuxss_eml_lib_options = [

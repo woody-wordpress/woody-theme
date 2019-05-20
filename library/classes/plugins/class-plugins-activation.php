@@ -24,7 +24,6 @@ class WoodyTheme_Plugins_Activation
 
     public function activatePlugins()
     {
-        $this->deactivate_plugins = [];
         $this->activate_plugins = [
             'advanced-custom-fields-pro/acf.php',
             'timber-library/timber.php',
@@ -36,15 +35,23 @@ class WoodyTheme_Plugins_Activation
             'yoimages/yoimages.php',
             'enhanced-media-library/enhanced-media-library.php',
             'members/members.php',
+            'woody-plugin/woody.php',
+            // 'woody-sso/woody-sso.php',
+            'single-sign-on-client/wposso.php',
             'ssl-insecure-content-fixer/ssl-insecure-content-fixer.php',
             'mce-table-buttons/mce_table_buttons.php',
             'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
             'duplicate-post/duplicate-post.php',
             'polylang-pro/polylang.php',
             'publish-view/publish-view.php',
-            'woody-plugin/woody.php',
-            'woody-sso/woody-sso.php',
         ];
+
+        $this->deactivate_plugins = [];
+
+        if (defined('WOODY_PRO') && WOODY_PRO === false) {
+            $this->deactivate_plugins[] = 'woody-plugin/woody.php';
+            // $this->deactivate_plugins[] = 'woody-sso/woody-sso.php';
+        }
 
         switch (WP_ENV) {
             case 'dev':
@@ -77,7 +84,7 @@ class WoodyTheme_Plugins_Activation
 
         require_once(ABSPATH . 'wp-admin/includes/plugin.php');
         foreach ($this->activate_plugins as $plugin) {
-            if (!is_plugin_active($plugin) && file_exists(WP_PLUGINS_DIR . '/' . $plugin)) {
+            if (!is_plugin_active($plugin)) {
                 $result = activate_plugin($plugin);
 
                 if (!is_wp_error($result)) {
