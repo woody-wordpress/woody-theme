@@ -428,16 +428,22 @@ class WoodyTheme_ACF
 
     public function listAllPageTerms($field)
     {
-        $taxonomies = get_taxonomies();
         $terms = [];
+        $hero_terms = [];
+        $taxonomies = get_taxonomies();
+
         foreach ($taxonomies as $taxonomy) {
             if ($taxonomy == 'places' || $taxonomy == 'seasons' || $taxonomy == 'themes') {
-                $terms = array_merge($terms, get_the_terms(get_the_id(), $taxonomy));
+                if (is_array(get_the_terms(get_the_id(), $taxonomy))) {
+                    $terms = array_merge($terms, get_the_terms(get_the_id(), $taxonomy));
+                }
             }
         }
 
-        foreach ($terms as $term) {
-            $hero_terms[] = $term->name;
+        if (!empty($terms)) {
+            foreach ($terms as $term) {
+                $hero_terms[] = $term->name;
+            }
         }
 
         $field['choices'] = $hero_terms;
