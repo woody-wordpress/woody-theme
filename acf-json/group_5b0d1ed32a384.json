@@ -791,5 +791,9 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
+<<<<<<< HEAD
     "modified": 1558423064
+=======
+    "modified": 1558362486
+>>>>>>> 35711adb7d6ee74cd15bf7e23db09c104bc7912f
 }

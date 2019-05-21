@@ -16,8 +16,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     }
 
     protected function registerHooks()
-    {
-    }
+    { }
 
     protected function getHeaders()
     {
@@ -134,7 +133,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $page_teaser['the_classes'][] = (!empty($page_teaser['background_img_opacity'])) ? $page_teaser['background_img_opacity'] : '';
                 $page_teaser['the_classes'][] = (!empty($page_teaser['background_color'])) ? $page_teaser['background_color'] : '';
                 $page_teaser['the_classes'][] = (!empty($page_teaser['border_color'])) ? $page_teaser['border_color'] : '';
-                $page_teaser['the_classes'][] =  (!empty($page_teaser['teaser_margin_bottom'])) ? $page_teaser['teaser_margin_bottom'] : '';
+                $page_teaser['the_classes'][] = (!empty($page_teaser['teaser_margin_bottom'])) ? $page_teaser['teaser_margin_bottom'] : '';
                 $page_teaser['the_classes'][] = (!empty($page_teaser['background_img'])) ? 'isRel' : '';
                 $page_teaser['classes'] = (!empty($page_teaser['the_classes'])) ? implode(' ', $page_teaser['the_classes']) : '';
                 $page_teaser['breadcrumb'] = yoast_breadcrumb('<div class="breadcrumb-wrapper padd-all-sm">', '</div>', false);
@@ -148,8 +147,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             }
 
             /*********************************************
-            * Compilation du visuel et accroche pour les pages qui ne sont pas de type "accueil"
-            *********************************************/
+             * Compilation du visuel et accroche pour les pages qui ne sont pas de type "accueil"
+             *********************************************/
 
             $page_hero = [];
             $page_hero = getAcfGroupFields('group_5b052bbee40a4', $this->context['post']);
@@ -193,8 +192,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         }
 
         /*********************************************
-        * Compilation du bloc de réservation
-        *********************************************/
+         * Compilation du bloc de réservation
+         *********************************************/
         $bookblock = [];
         $bookblock = getAcfGroupFields('group_5c0e4121ee3ed', $this->context['post']);
 
@@ -241,8 +240,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
 
         /*********************************************
-        * Compilation des sections
-        *********************************************/
+         * Compilation des sections
+         *********************************************/
         $this->context['sections'] = [];
         $sections = $this->context['timberpost']->get_field('section');
 

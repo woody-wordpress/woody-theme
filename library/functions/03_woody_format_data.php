@@ -354,7 +354,7 @@ function getManualFocus_data($layout)
         // La donnée de la vignette est saisie en backoffice
         if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
             $the_items['items'][$key] = getCustomPreview($item_wrapper['custom_content']);
-        // La donnée de la vignette correspond à un post sélectionné
+            // La donnée de la vignette correspond à un post sélectionné
         } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
             $item = $item_wrapper['existing_content'];
             $status = $item['content_selection']->post_status;
@@ -471,6 +471,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     $the_list['has_map'] = false;
     $paginate = ($layout['the_list_pager']['list_pager_type'] == 'basic_pager') ? true : false;
     $the_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields'], $paginate, $layout['uniqid']);
+    $the_items['no_padding'] = (!empty($layout['the_list_elements']['list_no_padding'])) ? $layout['the_list_elements']['list_no_padding'] : '';
     $the_items['display_button'] = (!empty($layout['the_list_elements']['list_el_req_fields']['display_button'])) ? $layout['the_list_elements']['list_el_req_fields']['display_button'] : '';
     $the_list['filters'] = (!empty($layout['the_list_filters']['list_filters'])) ? $layout['the_list_filters']['list_filters'] : '';
     if (!empty($the_list['filters'])) {
@@ -557,7 +558,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                     $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_price' . $filter_index]['min'] = $param;
                     // if ($the_list['filters'][$filter_index]['list_filter_type'] == 'price') {
                     $the_list['filters'][$filter_index]['minmax']['default_min'] = round($param);
-                // }
+                    // }
                 } else {
                     $filter_index = str_replace('_max', '', $filter_index);
 
@@ -583,6 +584,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
             }
         }
         $the_filtered_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields'], $paginate, $layout['uniqid']);
+        $the_filtered_items['no_padding'] = (!empty($layout['the_list_elements']['list_no_padding'])) ? $layout['the_list_elements']['list_no_padding'] : '';
         $the_filtered_items['display_button'] = (!empty($layout['the_list_elements']['list_el_req_fields']['display_button'])) ? $layout['the_list_elements']['list_el_req_fields']['display_button'] : '';
 
         $the_list['the_grid'] =  Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_filtered_items);
@@ -827,7 +829,10 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
                     'title' => (!empty($item['img']['title'])) ? $item['img']['title'] : ''
                 ];
             }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 35711adb7d6ee74cd15bf7e23db09c104bc7912f
             if (!empty($layout['deal_mode'])) {
                 if (!empty($item['deals'])) {
                     $data['title'] = $item['deals']['list'][0]['nom'][$code_lang];
@@ -858,7 +863,7 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
                     $data['the_price']['price'] = (!empty($item['tariffs']['price'])) ? $item['tariffs']['price'] : '';
                     $data['the_price']['prefix_price'] = (!empty($item['tariffs']['label'])) ? $item['tariffs']['label'] : '';
                 }
-                if(in_array('bookable', $layout['display_elements'])){
+                if (in_array('bookable', $layout['display_elements'])) {
                     $data['booking'] = (!empty($item['booking']['link'])) ? $item['booking'] : '';
                 }
             }
