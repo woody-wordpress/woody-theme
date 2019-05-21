@@ -62,6 +62,8 @@ class WoodyTheme_ACF
 
         add_filter('acf/load_field/name=section_content', [$this, 'sectionContentLoadField']);
 
+        add_filter('acf/load_field/name=page_heading_tags', [$this, 'listAllPageTerms'], 10, 3);
+
         // Custom Filter
         add_filter('woody_get_field_option', [$this, 'woodyGetFieldOption'], 10, 3);
     }
@@ -422,6 +424,25 @@ class WoodyTheme_ACF
         }
 
         return $page_types;
+    }
+
+    public function listAllPageTerms($field)
+    {
+        $taxonomies = get_taxonomies();
+        $terms = [];
+        foreach ($taxonomies as $taxonomy) {
+            if ($taxonomy == 'places' || $taxonomy == 'seasons' || $taxonomy == 'themes') {
+                $terms = array_merge($terms, get_the_terms(get_the_id(), $taxonomy));
+            }
+        }
+
+        foreach ($terms as $term) {
+            $hero_terms[] = $term->name;
+        }
+
+        $field['choices'] = $hero_terms;
+
+        return $field;
     }
 
     private function getCurrentLang()
