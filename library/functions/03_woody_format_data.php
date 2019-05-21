@@ -829,10 +829,6 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
                     'title' => (!empty($item['img']['title'])) ? $item['img']['title'] : ''
                 ];
             }
-<<<<<<< HEAD
-
-=======
->>>>>>> 35711adb7d6ee74cd15bf7e23db09c104bc7912f
             if (!empty($layout['deal_mode'])) {
                 if (!empty($item['deals'])) {
                     $data['title'] = $item['deals']['list'][0]['nom'][$code_lang];
