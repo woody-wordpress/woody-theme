@@ -435,8 +435,8 @@ function formatFocusesData($layout, $current_post, $twigPaths)
         $the_items['block_titles'] = getFocusBlockTitles($layout);
         $the_items['display_button'] = (!empty($layout['display_button'])) ? $layout['display_button'] : '';
         $the_items['default_marker'] = $layout['default_marker'];
+        $the_items['visual_effects'] = $layout['visual_effects'];
 
-        $the_items['visual_effects'] = (!empty($layout['visual_effects'])) ? formatVisualEffectData($layout['visual_effects']) : '';
 
         if (!empty($layout['focus_map_params'])) {
             if (!empty($layout['focus_map_params']['tmaps_confid'])) {
