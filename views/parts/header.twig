@@ -2,15 +2,29 @@
     {% if season_switcher|default %}
         {{ season_switcher }}
     {% endif %}
-    {% if lang_switcher|default or es_search_block|default %}
-    <ul class="tools list-unstyled flex-container align-middle show-for-xlarge">
-        {% if es_search_block|default %}
-        <li>{{ es_search_block }}</li>
-        {% endif %}
-        {% if lang_switcher|default %}
-        <li>{{ lang_switcher }}</li>
-        {% endif %}
-    </ul>
+    {% if lang_switcher|default or es_search_block|default or subtheme_more_tools %}
+        <ul class="tools list-unstyled flex-container align-middle show-for-xlarge">
+            {% if subtheme_more_tools %}
+                {% for tool in subtheme_more_tools %}
+                    <li>
+                        <a class="no-ext {{ tool_classes|default }}" href="{{ tool.url|default }}" target="{{ tool.target|default('_self') }}" title="{{ tool.title|default }}">
+                            {% if tool.icon %}
+                                <span class="wicon {{ tool.icon }}"></span>
+                            {% endif %}
+                            {% if tool.title and tool.display_title %}
+                                <span>{{ tool.title }}</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                {% endfor %}
+            {% endif %}
+            {% if es_search_block|default %}
+                <li>{{ es_search_block }}</li>
+            {% endif %}
+            {% if lang_switcher|default %}
+                <li>{{ lang_switcher }}</li>
+            {% endif %}
+        </ul>
     {% endif %}
 
     {{ page_parts.top_header|default }}
@@ -20,10 +34,10 @@
     {{ page_parts.mobile_menu|default }}
     <ul class="tools list-unstyled flex-container align-middle hide-for-xlarge">
         {% if es_search_block_mobile|default %}
-        <li>{{ es_search_block_mobile }}</li>
+            <li>{{ es_search_block_mobile }}</li>
         {% endif %}
         {% if lang_switcher_mobile|default %}
-        <li>{{ lang_switcher_mobile }}</li>
+            <li>{{ lang_switcher_mobile }}</li>
         {% endif %}
     </ul>
 </div>
