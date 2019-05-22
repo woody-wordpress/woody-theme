@@ -33,7 +33,7 @@
                     "collapsed": "",
                     "min": 0,
                     "max": 1,
-                    "layout": "block",
+                    "layout": "table",
                     "button_label": "Ajouter une transformation",
                     "sub_fields": [
                         {
@@ -190,5 +190,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Permet d'ajouter des effets de type décalage, rotation, paralax",
-    "modified": 1549299200
+    "modified": 1558519806
 }
