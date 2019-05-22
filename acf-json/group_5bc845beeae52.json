@@ -30,7 +30,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "collapsed": "field_5bc9a8e8c37bd",
+                    "collapsed": "",
                     "min": 0,
                     "max": 1,
                     "layout": "table",
@@ -190,5 +190,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Permet d'ajouter des effets de type décalage, rotation, paralax",
-    "modified": 1558527804
+    "modified": 1558528093
 }
