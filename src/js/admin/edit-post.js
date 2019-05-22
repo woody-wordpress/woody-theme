@@ -297,17 +297,20 @@ $( '#post' ).each( function ()
         var $this = $( this );
         if ( $this.hasClass( 'acf-field-5afd2c6916ecb' ) ) {
             var rowsType = 'les sections';
-            var theRows = '> .acf-field-5afd2c6916ecb > .acf-input > .acf-repeater > .acf-table > .ui-sortable .acf-row';
         } else if ( $this.hasClass( 'acf-field-5b043f0525968' ) ) {
             var rowsType = 'les blocs';
-            var theRows = '> .acf-flexible-content > .values .layout';
         }
 
         $this.prepend( '<span class="woodyRowsCollapse"><span class="text">Fermer ' + rowsType + '</span><span class="dashicons dashicons-arrow-up' + '"></span></span>' );
 
         $( '.woodyRowsCollapse' ).click( function ()
         {
-            $( this ).siblings( '.acf-input' ).find( theRows ).addClass( '-collapsed' );
+            if ( $this.hasClass( 'acf-field-5afd2c6916ecb' ) ) {
+                $( '.acf-field-5afd2c6916ecb > .acf-input > .acf-repeater > .acf-table > .ui-sortable > .acf-row' ).addClass( '-collapsed' );
+                $( this ).siblings( '.acf-input' ).find( '.acf-field-5b043f0525968 .acf-input > .acf-flexible-content > .values .layout' ).addClass( '-collapsed' );
+            } else {
+                $( this ).siblings( '.acf-input' ).find( '> .acf-flexible-content > .values .layout' ).addClass( '-collapsed' );
+            }
         } )
     } );
 } );
