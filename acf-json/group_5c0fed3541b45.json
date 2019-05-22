@@ -35,7 +35,7 @@
                 "page"
             ],
             "taxonomy": "",
-            "allow_null": 0,
+            "allow_null": 1,
             "multiple": 0,
             "return_format": "id",
             "ui": 1
@@ -91,7 +91,7 @@
                                 "page"
                             ],
                             "taxonomy": "",
-                            "allow_null": 0,
+                            "allow_null": 1,
                             "multiple": 0,
                             "return_format": "id",
                             "ui": 1
@@ -133,7 +133,7 @@
                 "page"
             ],
             "taxonomy": "",
-            "allow_null": 0,
+            "allow_null": 1,
             "multiple": 0,
             "return_format": "id",
             "ui": 1
@@ -191,5 +191,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1554997270
+    "modified": 1558534352
 }
