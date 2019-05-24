@@ -54,6 +54,7 @@ class WoodyTheme_Images
         $mime_types['gpx'] = 'application/xml';
         $mime_types['kml'] = 'application/xml';
         $mime_types['kmz'] = 'application/xml';
+        $mime_types['svg'] = 'image/svg+xml';
         return $mime_types;
     }
 
