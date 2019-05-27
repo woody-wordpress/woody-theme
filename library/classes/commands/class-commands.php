@@ -61,13 +61,15 @@ class WoodyTheme_Commands
                 // Clear Twig Cache
                 $cleared = Command::clear_cache('twig');
                 if ($cleared) {
-                    Output::success("twig_clear_cache");
+                    Output::error("twig_clear_cache");
                 } else {
                     Output::error("twig_clear_cache");
                 }
             } catch (IOExceptionInterface $exception) {
                 Output::error("Une erreur est survenue au moment de la création de " . $exception->getPath());
             }
+        } else {
+            Output::warning("Twig cache désactivé en DEV");
         }
     }
 
