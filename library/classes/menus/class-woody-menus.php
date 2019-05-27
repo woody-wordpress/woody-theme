@@ -31,7 +31,7 @@ class WoodyTheme_Menus
      */
     public static function getMainMenu($limit = 6, $depth_1_ids = array(), $root_level = 1)
     {
-        $current_lang = 'fr';
+        $current_lang = PLL_DEFAULT_LANG;
         if (function_exists('pll_current_language')) {
             $current_lang = pll_current_language();
         }

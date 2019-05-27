@@ -453,7 +453,7 @@ class WoodyTheme_ACF
 
     private function getCurrentLang()
     {
-        $current_lang = 'fr';
+        $current_lang = PLL_DEFAULT_LANG;
 
         // Polylang
         if (function_exists('pll_current_language')) {
