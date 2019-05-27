@@ -61,7 +61,7 @@ class WoodyTheme_Commands
                 // Clear Twig Cache
                 $cleared = Command::clear_cache('twig');
                 if ($cleared) {
-                    Output::error("twig_clear_cache");
+                    Output::success("twig_clear_cache");
                 } else {
                     Output::error("twig_clear_cache");
                 }
