@@ -16,8 +16,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     }
 
     protected function registerHooks()
-    {
-    }
+    { }
 
     protected function getHeaders()
     {
@@ -101,7 +100,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
          * Compilation du Diaporama pour les pages de type "accueil" (!= frontpage)
          ******************************************************************************/
         $page_type = wp_get_post_terms($this->context['post_id'], 'page_type');
-        if ($page_type[0]->slug == 'front_page') {
+        if (!empty($page_type[0]) && $page_type[0]->slug == 'front_page') {
             $this->context['is_frontpage'] = true;
             $home_slider = getAcfGroupFields('group_5bb325e8b6b43', $this->context['post']);
             if (!empty($home_slider['landswpr_slides'])) {
@@ -122,7 +121,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             $trip_infos = [];
         }
 
-        if ($page_type[0]->slug != 'front_page') {
+        if (!empty($page_type[0]) && $page_type[0]->slug != 'front_page') {
             /*********************************************
              * Compilation de l'en tête de page pour les pages qui ne sont pas de type "accueil"
              *********************************************/
@@ -244,52 +243,54 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
          * Compilation des sections
          *********************************************/
         $this->context['sections'] = [];
-        $sections = $this->context['timberpost']->get_field('section');
+        if (!empty($this->context['timberpost'])) {
+            $sections = $this->context['timberpost']->get_field('section');
 
-        if (!empty($sections)) {
-            foreach ($sections as $section_id => $section) {
-                $the_header = '';
-                $the_layout = '';
+            if (!empty($sections)) {
+                foreach ($sections as $section_id => $section) {
+                    $the_header = '';
+                    $the_layout = '';
 
-                if (!empty($section['icon']) || !empty($section['pretitle']) || !empty($section['title']) || !empty($section['subtitle']) || !empty($section['description'])) {
-                    $the_header = Timber::compile($this->context['woody_components']['section-section_header-tpl_01'], $section);
-                }
-
-                // Pour chaque bloc d'une section, on compile les données dans un template Woody
-                // Puis on les compile dans le template de grille Woody selectionné
-                $components = [];
-                $components['no_padding'] = $section['scope_no_padding'];
-                $components['alignment'] = (!empty($section['section_alignment'])) ? $section['section_alignment'] : '';
-
-                if (!empty($section['section_content'])) {
-                    foreach ($section['section_content'] as $layout_id => $layout) {
-                        $layout['uniqid'] = 'section_' . $section_id . '_' . 'section_content_' . $layout_id;
-                        $layout['visual_effects'] = (!empty($layout['visual_effects'])) ? formatVisualEffectData($layout['visual_effects']) : '';
-                        $components['items'][] = getComponentItem($layout, $this->context);
+                    if (!empty($section['icon']) || !empty($section['pretitle']) || !empty($section['title']) || !empty($section['subtitle']) || !empty($section['description'])) {
+                        $the_header = Timber::compile($this->context['woody_components']['section-section_header-tpl_01'], $section);
                     }
 
-                    if (!empty($section['section_woody_tpl'])) {
-                        $the_layout = Timber::compile($this->context['woody_components'][$section['section_woody_tpl']], $components);
+                    // Pour chaque bloc d'une section, on compile les données dans un template Woody
+                    // Puis on les compile dans le template de grille Woody selectionné
+                    $components = [];
+                    $components['no_padding'] = $section['scope_no_padding'];
+                    $components['alignment'] = (!empty($section['section_alignment'])) ? $section['section_alignment'] : '';
+
+                    if (!empty($section['section_content'])) {
+                        foreach ($section['section_content'] as $layout_id => $layout) {
+                            $layout['uniqid'] = 'section_' . $section_id . '_' . 'section_content_' . $layout_id;
+                            $layout['visual_effects'] = (!empty($layout['visual_effects'])) ? formatVisualEffectData($layout['visual_effects']) : '';
+                            $components['items'][] = getComponentItem($layout, $this->context);
+                        }
+
+                        if (!empty($section['section_woody_tpl'])) {
+                            $the_layout = Timber::compile($this->context['woody_components'][$section['section_woody_tpl']], $components);
+                        }
                     }
-                }
 
-                // On récupère les données d'affichage personnalisables
-                $display = getDisplayOptions($section);
+                    // On récupère les données d'affichage personnalisables
+                    $display = getDisplayOptions($section);
 
-                // On ajoute les 3 parties compilées d'une section + ses paramètres d'affichage
-                // puis on compile le tout dans le template de section Woody
-                $the_section = [
-                    'header' => $the_header,
-                    'layout' => $the_layout,
-                    'display' => $display,
-                ];
-                if (!empty($section['section_banner'])) {
-                    foreach ($section['section_banner'] as $banner) {
-                        $the_section[$banner] = getSectionBannerFiles($banner);
+                    // On ajoute les 3 parties compilées d'une section + ses paramètres d'affichage
+                    // puis on compile le tout dans le template de section Woody
+                    $the_section = [
+                        'header' => $the_header,
+                        'layout' => $the_layout,
+                        'display' => $display,
+                    ];
+                    if (!empty($section['section_banner'])) {
+                        foreach ($section['section_banner'] as $banner) {
+                            $the_section[$banner] = getSectionBannerFiles($banner);
+                        }
                     }
-                }
 
-                $this->context['the_sections'][] = Timber::compile($this->context['woody_components']['section-section_full-tpl_01'], $the_section);
+                    $this->context['the_sections'][] = Timber::compile($this->context['woody_components']['section-section_full-tpl_01'], $the_section);
+                }
             }
         }
     }
