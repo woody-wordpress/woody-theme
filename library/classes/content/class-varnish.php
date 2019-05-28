@@ -16,7 +16,7 @@ class WoodyTheme_Varnish
     protected function registerHooks()
     {
         add_filter('vcaching_purge_urls', [$this, 'vcachingPurgeUrls'], 10, 1);
-        add_action('save_post', array($this, 'save_protected_post' ), 1, 2);
+        add_action('save_post', array($this, 'save_protected_post'), 1, 2);
     }
 
     public function vcachingPurgeUrls($purge_urls = [])
@@ -33,15 +33,8 @@ class WoodyTheme_Varnish
     // Met le max-age des pages protégées à 0.
     public function save_protected_post($post_id, $post)
     {
-        // wd(post_password_required($post->context['post']),'C\'est une page protégée');
         if (post_password_required($post->context['post'])) {
-            add_post_meta( $post_id, 'varnish_caching_ttl' , 0 );
-            $ttl = get_post_meta($postId, 'varnish_caching_ttl', true);
-            wd($ttl);
-            // $ttl=0;
-            // Header('X-VC-TTL: ' . intval($ttl), true);
-            // wd(Header());
-            // Header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+            update_post_meta($post_id, 'varnish_caching_ttl', 0);
         }
     }
 }

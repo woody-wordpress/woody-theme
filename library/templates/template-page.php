@@ -16,7 +16,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     }
 
     protected function registerHooks()
-    { }
+    {
+    }
 
     protected function getHeaders()
     {
