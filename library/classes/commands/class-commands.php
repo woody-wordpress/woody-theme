@@ -68,6 +68,8 @@ class WoodyTheme_Commands
             } catch (IOExceptionInterface $exception) {
                 Output::error("Une erreur est survenue au moment de la création de " . $exception->getPath());
             }
+        } else {
+            Output::warning("Twig cache désactivé en DEV");
         }
     }
 

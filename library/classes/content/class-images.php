@@ -36,8 +36,8 @@ class WoodyTheme_Images
         // API Crop
         add_action('rest_api_init', function () {
             register_rest_route('woody', '/crop/(?P<attachment_id>[0-9]{1,10})/(?P<ratio>\S+)', array(
-              'methods' => 'GET',
-              'callback' => [$this, 'cropImageAPI']
+                'methods' => 'GET',
+                'callback' => [$this, 'cropImageAPI']
             ));
         });
 
@@ -175,7 +175,7 @@ class WoodyTheme_Images
     public function readImageMetadata($meta, $file, $sourceImageType, $iptc)
     {
         // EXIF
-        if (is_callable('exif_read_data') && in_array($sourceImageType, apply_filters('wp_read_image_metadata_types', array( IMAGETYPE_JPEG, IMAGETYPE_TIFF_II, IMAGETYPE_TIFF_MM )))) {
+        if (is_callable('exif_read_data') && in_array($sourceImageType, apply_filters('wp_read_image_metadata_types', array(IMAGETYPE_JPEG, IMAGETYPE_TIFF_II, IMAGETYPE_TIFF_MM)))) {
             $exif = @exif_read_data($file);
 
             if (!empty($exif['GPSLatitude']) && !empty($exif['GPSLatitudeRef'])) {
@@ -251,6 +251,10 @@ class WoodyTheme_Images
         remove_action('delete_attachment', [$this, 'deleteAttachment']);
 
         $deleted_attachement = get_transient('woody_deleted_attachement');
+        if (empty($deleted_attachement)) {
+            $deleted_attachement = [];
+        }
+
         if (wp_attachment_is_image($attachment_id) && is_array($deleted_attachement) && !in_array($attachment_id, $deleted_attachement)) {
             $translations = pll_get_post_translations($attachment_id);
             $deleted_attachement = array_merge($deleted_attachement, array_values($translations));
@@ -497,8 +501,8 @@ class WoodyTheme_Images
     public function cropImageAPI(WP_REST_Request $request)
     {
         /**
-        * Exemple : http://www.superot.wp.rc-dev.com/wp-json/woody/crop/382/ratio_square
-        */
+         * Exemple : http://www.superot.wp.rc-dev.com/wp-json/woody/crop/382/ratio_square
+         */
         global $_wp_additional_image_sizes;
 
         $params = $request->get_params();
@@ -572,7 +576,7 @@ class WoodyTheme_Images
         // get the size of the image
         list($width_orig, $height_orig) = getimagesize($img_path);
         if (!empty($width_orig) && !empty($height_orig)) {
-            $ratio_orig = (float) $height_orig / $width_orig;
+            $ratio_orig = (float)$height_orig / $width_orig;
 
             // Ratio Free
             if ($size['height'] == 0) {
@@ -587,7 +591,7 @@ class WoodyTheme_Images
             }
 
             // Get ratio diff
-            $ratio_expect = (float) $size['height'] / $size['width'];
+            $ratio_expect = (float)$size['height'] / $size['width'];
             $ratio_diff = $ratio_orig - $ratio_expect;
 
             // Calcul du crop size
@@ -595,11 +599,11 @@ class WoodyTheme_Images
                 $req_width = $width_orig;
                 $req_height = round($width_orig * $ratio_expect);
                 $req_x = 0;
-                $req_y = round(($height_orig - $req_height)/2);
+                $req_y = round(($height_orig - $req_height) / 2);
             } elseif ($ratio_diff < 0) {
                 $req_width = round($height_orig / $ratio_expect);
                 $req_height = $height_orig;
-                $req_x = round(($width_orig - $req_width)/2);
+                $req_x = round(($width_orig - $req_width) / 2);
                 $req_y = 0;
             } elseif ($ratio_diff == 0) {
                 $req_width = $width_orig;
