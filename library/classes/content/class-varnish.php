@@ -34,7 +34,7 @@ class WoodyTheme_Varnish
     public function override_ttl()
     {
         $post = get_post();
-        if (post_password_required($post->context['post'])) {
+        if (post_password_required($post)) {
             Header('X-VC-TTL: 0', true);
         }
     }
