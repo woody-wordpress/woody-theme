@@ -136,10 +136,11 @@ class WoodyTheme_Enqueue_Assets
 
         $current_lang = apply_filters('woody_pll_current_language', null);
         if (in_array($current_lang, ['fr', 'es', 'nl', 'it', 'de', 'ru', 'ja', 'pt'])) {
-            wp_enqueue_script('jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/' . $current_lang . '.js', [], '', true);
-            wp_enqueue_script('jsdelivr_flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/flatpickr.min.js', ['jsdelivr_flatpickr_l10n'], '', true);
+            wp_enqueue_script('jsdelivr_flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/flatpickr.min.js', [], '', true);
+            wp_enqueue_script('jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/' . $current_lang . '.js', ['jsdelivr_flatpickr'], '', true);
         } else {
             wp_enqueue_script('jsdelivr_flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/flatpickr.min.js', [], '', true);
+            wp_enqueue_script('jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/default.js', ['jsdelivr_flatpickr'], '', true);
         }
 
         //wp_enqueue_script('jsdelivr_webfontloader', 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js', [], '', true);
@@ -244,6 +245,7 @@ class WoodyTheme_Enqueue_Assets
         $dependencies = [
             'jquery',
             'jsdelivr_flatpickr',
+            'jsdelivr_flatpickr_l10n',
             'jsdelivr_swiper',
             'jsdelivr_cookieconsent',
             'jsdelivr_lightgallery',
