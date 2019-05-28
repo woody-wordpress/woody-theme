@@ -35,6 +35,8 @@ class WoodyTheme_Varnish
     {
         if (post_password_required($post->context['post'])) {
             update_post_meta($post_id, 'varnish_caching_ttl', 0);
+        } else {
+            delete_post_meta($post_id, 'varnish_caching_ttl');
         }
     }
 }
