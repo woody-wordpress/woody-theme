@@ -37,7 +37,8 @@ class WoodyTheme_Menus
         }
 
         $menu_cache_key = $current_lang . '_' . md5(serialize($depth_1_ids));
-        $woody_menus_cache = get_transient('woody_menus_cache');
+        // $woody_menus_cache = get_transient('woody_menus_cache');
+        $woody_menus_cache = '';
 
         if (!empty($woody_menus_cache[$menu_cache_key])) {
             $return = $woody_menus_cache[$menu_cache_key];
@@ -139,9 +140,6 @@ class WoodyTheme_Menus
             $posts = get_posts($args);
         }
 
-        $current_id = get_the_ID();
-        $root_ancestor = getPostRootAncestor($current_id, $root_level);
-
         if (!empty($posts) && is_array($posts)) {
             foreach ($posts as $post_key => $post) {
                 if (is_int($post)) {
@@ -188,7 +186,6 @@ class WoodyTheme_Menus
                     $return[$post_key]['the_fields']['pretitle'] = (!empty(get_field('in_menu_pretitle', $post->ID))) ? get_field('in_menu_pretitle', $post->ID) : '';
                     $return[$post_key]['the_fields']['subtitle'] = (!empty(get_field('in_menu_subtitle', $post->ID))) ? get_field('in_menu_subtitle', $post->ID) : '';
                     $return[$post_key]['img'] = (!empty(get_field('in_menu_img', $post->ID))) ? get_field('in_menu_img', $post->ID) : get_field('field_5b0e5ddfd4b1b', $post->ID);
-                    $return[$post_key]['is_active'] = ($post->ID === $root_ancestor) ? true : ($post->ID === $current_id) ? true : false;
                 }
             }
             return $return;

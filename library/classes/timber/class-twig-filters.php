@@ -26,7 +26,9 @@ class WoodyTheme_Twig_Filters
         $twig->addFilter(new Twig_SimpleFilter('ellipsis', [$this, 'ellipsis']));
         $twig->addFilter(new Twig_SimpleFilter('random_number', [$this, 'random_number']));
         $twig->addFilter(new Twig_SimpleFilter('createdFrom', [$this, 'createdFrom']));
+
         $twig->addFilter(new Twig_SimpleFilter('getPermalink', [$this, 'getPermalink']));
+        $twig->addFilter(new Twig_SimpleFilter('theRootAncestor', [$this, 'theRootAncestor']));
 
         // debug
         $twig->addFilter(new Twig_SimpleFilter('dump', [$this, 'dump']));
@@ -173,5 +175,11 @@ class WoodyTheme_Twig_Filters
     public function getPermalink($post_id)
     {
         return apply_filters('woody_get_permalink', $post_id);
+    }
+
+    public function theRootAncestor($post_id) {
+
+        $root_id = getPostRootAncestor($post_id) ? getPostRootAncestor($post_id) : get_the_id();
+        return $root_id;
     }
 }
