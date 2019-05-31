@@ -149,6 +149,9 @@ abstract class WoodyTheme_TemplateAbstract
         // Define SubWoodyTheme_TemplateParts
         if (class_exists('SubWoodyTheme_TemplateParts')) {
             $SubWoodyTheme_TemplateParts = new SubWoodyTheme_TemplateParts($this->context['woody_components']);
+            if (!empty($SubWoodyTheme_TemplateParts->mobile_logo)) {
+                $this->context['mobile_logo'] = $SubWoodyTheme_TemplateParts->mobile_logo;
+            }
             if (!empty($SubWoodyTheme_TemplateParts->website_logo)) {
                 $this->context['website_logo'] = $SubWoodyTheme_TemplateParts->website_logo;
             }

@@ -9,11 +9,12 @@
         <h1 class="frontpage-htitle">
             {{ site.title|default }}</h1>
     {% endif %}
+    {{ _context|wd }}
     <main class="content-type-page {{ page_type|default }}" id="main-content">
         <div class="content-wrapper {{ page_terms|default('no-terms') }}">
             <div class="mobile-header hide-for-xlarge title-bar">
                 <a class="brand-logo" href="{{ site.url }}">
-                    {{ website_logo|default('Website logo') }}
+                    {{ mobile_logo|default(website_logo) }}
                 </a>
             </div>
             {{ page_hero|default }}
