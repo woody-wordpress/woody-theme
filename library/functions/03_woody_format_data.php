@@ -1220,26 +1220,17 @@ function getTransformedPattern($str, $item = null)
     $return = '';
 
     if ($item != null) {
-        if (!empty($item->get_field('playlist_conf_id'))) {
+        $pattern = "/%nombre%/";
+        preg_match($pattern, $str, $matches);
+        if(!empty($matches)){
             $confId = $item->get_field('playlist_conf_id');
             $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), array(), 'json');
 
-            if (!empty($playlist)) {
+            if(!empty($playlist)){
                 $nbResults = $playlist['playlist']['total'];
-                //on pourrait récupérer le type, le traduire dans la langue actuelle
-                //et ainsi gérer s'il y a un ou plusieurs objets de ce type
-                // (gérer si on met un 's' ou non)
-                //$type = $playlist['playlist']['type'];
-
-                $pattern = "/%nombre%/";
-                preg_match($pattern, $str, $matches);
-                if (!empty($matches)) {
-                    foreach ($matches as $match) {
-                        $new_str = str_replace(['%nombre%'], $nbResults, $match);
-                        $return = preg_replace($pattern, $new_str, $str);
-                    }
-                } else {
-                    $return = $str;
+                foreach($matches as $match){
+                    $new_str = str_replace(['%nombre%'], $nbResults, $match);
+                    $return = preg_replace($pattern, $new_str, $str);
                 }
             }
         } else {
