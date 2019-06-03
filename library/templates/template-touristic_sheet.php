@@ -47,54 +47,55 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
         /** ************************
          * Appel apirender pour récupérer le DOM de la fiche
          ************************ **/
-        $this->context['fetcherType'] = 'website_'.WP_ENV;
+        $this->context['fetcherType'] = 'website_' . WP_ENV;
         $this->context['destinationName'] = null;
         $this->context['playlistId'] = null;
-
-        $this->context['sheet_tourism'] = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $sheet_lang, $params = []);
+        $this->context['sheet_tourism'] = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $sheet_lang, []);
 
         // Set METAS
-        $this->context['metas'] = [];
-        foreach ($this->context['sheet_tourism']['metas'] as $key_meta => $meta) {
-            // Remove doubled metas (apirender & wordpress)
-            if (!empty($meta['#attributes']['property']) &&
-                ($meta['#attributes']['property'] == 'og:type'
-                || $meta['#attributes']['property'] == 'og:url'
-                || $meta['#attributes']['property'] == 'og:title')
-            ) {
-                continue;
-            }
+        if (!empty($this->context['sheet_tourism'])) {
+            $this->context['metas'] = [];
+            foreach ($this->context['sheet_tourism']['metas'] as $key_meta => $meta) {
+                // Remove doubled metas (apirender & wordpress)
+                if (
+                    !empty($meta['#attributes']['property']) && ($meta['#attributes']['property'] == 'og:type'
+                        || $meta['#attributes']['property'] == 'og:url'
+                        || $meta['#attributes']['property'] == 'og:title')
+                ) {
+                    continue;
+                }
 
-            if (!empty($meta['#attributes']['name']) &&
-                ($meta['#attributes']['name'] == 'twitter:card'
-                || $meta['#attributes']['name'] == 'twitter:title')
-            ) {
-                continue;
-            }
+                if (
+                    !empty($meta['#attributes']['name']) && ($meta['#attributes']['name'] == 'twitter:card'
+                        || $meta['#attributes']['name'] == 'twitter:title')
+                ) {
+                    continue;
+                }
 
-            if (!empty($meta['#attributes']['name']) &&
-                ($meta['#attributes']['name'] == 'twitter:card'
-                || $meta['#attributes']['name'] == 'twitter:title')
-            ) {
-                continue;
-            }
+                if (
+                    !empty($meta['#attributes']['name']) && ($meta['#attributes']['name'] == 'twitter:card'
+                        || $meta['#attributes']['name'] == 'twitter:title')
+                ) {
+                    continue;
+                }
 
-            if (!empty($meta['#attributes']['rel']) && $meta['#attributes']['rel'] == 'canonical') {
-                continue;
-            }
+                if (!empty($meta['#attributes']['rel']) && $meta['#attributes']['rel'] == 'canonical') {
+                    continue;
+                }
 
-            $woody_lang_enable = get_option('woody_lang_enable', []);
-            if (!empty($meta['#attributes']['hreflang']) && !in_array($meta['#attributes']['hreflang'], $woody_lang_enable)) {
-                continue;
-            }
+                $woody_lang_enable = get_option('woody_lang_enable', []);
+                if (!empty($meta['#attributes']['hreflang']) && !in_array($meta['#attributes']['hreflang'], $woody_lang_enable)) {
+                    continue;
+                }
 
-            // Extract tags
-            $tag = '<'.$meta['#tag'];
-            foreach ($meta['#attributes'] as $key_attr => $attribute) {
-                $tag .= ' '.$key_attr.'="'.$attribute.'"';
+                // Extract tags
+                $tag = '<' . $meta['#tag'];
+                foreach ($meta['#attributes'] as $key_attr => $attribute) {
+                    $tag .= ' ' . $key_attr . '="' . $attribute . '"';
+                }
+                $tag .= ' />';
+                $this->context['metas'][] = $tag;
             }
-            $tag .= ' />';
-            $this->context['metas'][] = $tag;
         }
     }
 
