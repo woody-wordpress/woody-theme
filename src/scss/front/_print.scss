@@ -1,7 +1,7 @@
 /* Set font to 16px/13pt, set background to white and font to black.*/
 /* This saves ink */
 body {
-    font: 11pt Georgia, "Times New Roman", Times, serif;
+    font: 11pt Arial, Helvetica, sans-serif;
     line-height: 1.3;
     background: #fff !important;
     color: #000;
@@ -22,41 +22,6 @@ h6 {
     font-size: 12pt;
     margin-top: 25px;
     margin-bottom: 10px;
-}
-
-/* Defining all page breaks */
-a {
-    page-break-inside: avoid
-}
-
-blockquote {
-    page-break-inside: avoid;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    page-break-after: avoid;
-    page-break-inside: avoid
-}
-
-img {
-    page-break-inside: avoid;
-    page-break-after: avoid;
-}
-
-table,
-pre {
-    page-break-inside: avoid
-}
-
-ul,
-ol,
-dl {
-    page-break-before: avoid
 }
 
 /* Defining all page breaks */
@@ -159,7 +124,11 @@ button,
 .the_pager,
 .card-button,
 .home-slider,
-.fullcenterbox {
+.fullcenterbox,
+.ui-datepicker,
+.ui-widget,
+.cc-window,
+.cc-banner{
     display: none !important;
 }
 
@@ -194,24 +163,32 @@ button,
     display: table-cell;
     float: left;
     page-break-inside: avoid;
+    overflow: hidden;
     article{
-        border: 1px solid grey;
+        // border: 1px solid grey;
         border-radius: 2px;
         box-shadow: 10px 10px 5px rgba(44, 43, 43, 0.76);
-        width: 300px;
-        height: 420px;
+        width: 175px;
+        height: 300px;
         margin: 5px;
     }
     a{
         img{
             width: 95%;
+            max-height: 130px;
             padding:5px 0 0 0;
             margin: auto;
         }
+
+        .top-left-corner, .top-right-corner{
+            display: none;
+        }
+
         section{
             .infos-wrapper{
                 h3{
-                    margin:0px;
+                    font-size: 17px;
+                    margin:5px 0 0 0;
                 }
                 padding:0 10px 0 10px;
             }
@@ -323,16 +300,22 @@ a.mediaCard:after {
     .sidebar-contact-phones .reveal-button,
     .sidebar-contact-form-section,
     #groups,
-    #arrangements
+    #arrangements,
+    .linked-sheets,
+    main .panel-title-responsive,
+    .flatpickr-calendar,
+    #reviews,
+    #reviews-iframe,
+    .panel-header .photo-label,
+    main .page-section,
+    .kaarousel-container .kaarousel-item:nth-of-type(n+2)
     {
         display: none !important;
     }
 
-    .tourism-detail-sidebar-list,
-    #description {
-        li {
-            list-style: none !important;
-        }
+    .tourism-detail-sidebar-list li,
+    .list-group li {
+        list-style: none !important;
     }
 
     #responsive-layout-switcher {
@@ -341,11 +324,9 @@ a.mediaCard:after {
 
     .panel-header {
         img{
-            height: 250px;
-            float: right;
-        }
-        .photo-label{
-            display:none;
+            max-height: 300px;
+            float: left;
+            padding-left: 15px;
         }
     }
 
@@ -390,11 +371,11 @@ a.mediaCard:after {
     }
 
     main{
-        .list-group{
+        width: 70%;
+        .list-group, .spoken-languages ul{
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            justify-content: space-between;
         }
 
         .list-group-item{
@@ -409,13 +390,11 @@ a.mediaCard:after {
                     font-size: 1em;
                     text-transform: uppercase;
                 }
+                .plo-list-bare, .plo-nav{
+                    padding: 0;
+                }
             }
         }
-        // .list-group-item:nth-child(even){
-        //     margin-left: 20px;
-        //     padding-left: 20px;
-        //     // border-left: 1px solid rgb(73, 73, 73);
-        // }
 
         #description .list-group-item:first-child{
             width: 100%;
@@ -425,19 +404,7 @@ a.mediaCard:after {
             }
             margin-bottom: 20px;
         }
-        #description .list-group-item:nth-child(even){
-            margin-left: 0px;
-            padding-left: 0px;
-            border-left: none;
-        }
-        // #description .list-group-item:nth-child(2n+3){
-        //     margin-left: 20px;
-        //     padding-left: 20px;
-        //     // border-left: 1px solid rgb(73, 73, 73);
-        // }
-        section:first-of-type{
-            margin-top: 30px;
-        }
+
         section{
             page-break-inside: avoid;
             margin: 10px 0 10px 0 !important;
@@ -450,25 +417,14 @@ a.mediaCard:after {
                 }
             }
         }
-        .panel-title-responsive{
-            display: none !important;
-        }
 
-        .spoken-languages{
-            ul{
-                display:flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-                li{
-                    margin:5px;
-                }
-            }
+        .spoken-languages ul li{
+            margin:5px;
         }
     }
 
     aside{
-        position: absolute;
-        width: 35%;
+        width: 25%;
         margin:0px;
         padding:0px;
 
@@ -484,9 +440,15 @@ a.mediaCard:after {
     .kaarousel-container{
         position: relative;
         float:right;
-        width: 65%;
+        width: 100%;
         a:after{
             content: none;
+        }
+        .kaarousel-slide{
+            display: unset !important;
+        }
+        .kaarousel-wrapper{
+            width: 100%;
         }
     }
 }
