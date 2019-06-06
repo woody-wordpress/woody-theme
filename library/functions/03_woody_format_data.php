@@ -450,6 +450,24 @@ function formatFocusesData($layout, $current_post, $twigPaths)
     return $return;
 }
 
+ function getItems( $current_post, $layout, $paginate){
+    $the_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields'], $paginate, $layout['uniqid']);
+    $the_items['no_padding'] = (!empty($layout['the_list_elements']['list_no_padding'])) ? $layout['the_list_elements']['list_no_padding'] : '';
+    $the_items['display_button'] = (!empty($layout['the_list_elements']['list_el_req_fields']['display_button'])) ? $layout['the_list_elements']['list_el_req_fields']['display_button'] : '';
+
+    return $the_items;
+}
+
+function updateListFilterTax($the_list, $filter_index, $param){
+    foreach ($the_list['filters'][$filter_index]['list_filter_custom_terms'] as $filter_term_key => $filter_term) {
+        if ($filter_term['value'] == $param) {
+            $the_list['filters'][$filter_index]['list_filter_custom_terms'][$filter_term_key]['checked'] = true;
+        }
+    }
+
+    return $the_list;
+}
+
 /**
  *
  * Nom : formatFullContentList
@@ -470,9 +488,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     $the_list['uniqid'] = $layout['uniqid'];
     $the_list['has_map'] = false;
     $paginate = ($layout['the_list_pager']['list_pager_type'] == 'basic_pager') ? true : false;
-    $the_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields'], $paginate, $layout['uniqid']);
-    $the_items['no_padding'] = (!empty($layout['the_list_elements']['list_no_padding'])) ? $layout['the_list_elements']['list_no_padding'] : '';
-    $the_items['display_button'] = (!empty($layout['the_list_elements']['list_el_req_fields']['display_button'])) ? $layout['the_list_elements']['list_el_req_fields']['display_button'] : '';
+    $the_items = getItems($current_post, $layout, $paginate);
     $the_list['filters'] = (!empty($layout['the_list_filters']['list_filters'])) ? $layout['the_list_filters']['list_filters'] : '';
     if (!empty($the_list['filters'])) {
         foreach ($the_list['filters'] as $key => $filter) {
@@ -521,7 +537,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
         if (array_key_exists('reset', $params)) {
             $params = [];
         };
-        $the_filtered_items = [
+        $the_items = [
             'empty' => 'Désolé, aucun contenu ne correspond à votre recherche'
         ];
         foreach ($params as $param_key => $param) {
@@ -534,18 +550,10 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                 // Update filter value on load
                 if ($the_list['filters'][$filter_index]['list_filter_type'] == 'taxonomy' || $the_list['filters'][$filter_index]['list_filter_type'] == 'custom_terms') {
                     if (!is_array($param)) {
-                        foreach ($the_list['filters'][$filter_index]['list_filter_custom_terms'] as $filter_term_key => $filter_term) {
-                            if ($filter_term['value'] == $param) {
-                                $the_list['filters'][$filter_index]['list_filter_custom_terms'][$filter_term_key]['checked'] = true;
-                            }
-                        }
+                        $the_list = updateListFilterTax($the_list, $filter_index, $param);
                     } else {
                         foreach ($param as $term_key => $term) {
-                            foreach ($the_list['filters'][$filter_index]['list_filter_custom_terms'] as $filter_term_key => $filter_term) {
-                                if ($filter_term['value'] == $term) {
-                                    $the_list['filters'][$filter_index]['list_filter_custom_terms'][$filter_term_key]['checked'] = true;
-                                }
-                            }
+                            $the_list = updateListFilterTax($the_list, $filter_index, $term);
                         }
                     }
                 }
@@ -583,43 +591,23 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                 }
             }
         }
-        $the_filtered_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields'], $paginate, $layout['uniqid']);
-        $the_filtered_items['no_padding'] = (!empty($layout['the_list_elements']['list_no_padding'])) ? $layout['the_list_elements']['list_no_padding'] : '';
-        $the_filtered_items['display_button'] = (!empty($layout['the_list_elements']['list_el_req_fields']['display_button'])) ? $layout['the_list_elements']['list_el_req_fields']['display_button'] : '';
-
-        $the_list['the_grid'] =  Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_filtered_items);
-        if (!empty($the_filtered_items['wp_query']) && !empty($the_filtered_items['wp_query']->found_posts)) {
-            $the_list['items_count'] = $the_filtered_items['wp_query']->found_posts;
-            if ($the_list['items_count'] > 1) {
-                $the_list['items_count_type'] = 'plural';
-            } else {
-                $the_list['items_count_type'] = 'singular';
-            }
-        } else {
-            $the_list['items_count_type'] = 'empty';
-        }
-
-        if (empty($the_filtered_items['max_num_pages'])) {
-            $the_filtered_items['max_num_pages'] = 1;
-        }
-        $max_num_pages = $the_filtered_items['max_num_pages'];
-    } else {
-        $the_list['the_grid'] =  Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_items);
-        if (!empty($the_items['wp_query']) && !empty($the_items['wp_query']->found_posts)) {
-            $the_list['items_count'] = $the_items['wp_query']->found_posts;
-            if ($the_list['items_count'] > 1) {
-                $the_list['items_count_type'] = 'plural';
-            } else {
-                $the_list['items_count_type'] = 'singular';
-            }
-        } else {
-            $the_list['items_count_type'] = 'empty';
-        }
-        if (empty($the_items['max_num_pages'])) {
-            $the_items['max_num_pages'] = 1;
-        }
-        $max_num_pages = $the_items['max_num_pages'];
+        $the_items = getItems($current_post, $layout, $paginate);
     }
+    $the_list['the_grid'] =  Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_items);
+    if (!empty($the_items['wp_query']) && !empty($the_items['wp_query']->found_posts)) {
+        $the_list['items_count'] = $the_items['wp_query']->found_posts;
+        if ($the_list['items_count'] > 1) {
+            $the_list['items_count_type'] = 'plural';
+        } else {
+            $the_list['items_count_type'] = 'singular';
+        }
+    } else {
+        $the_list['items_count_type'] = 'empty';
+    }
+    if (empty($the_items['max_num_pages'])) {
+        $the_items['max_num_pages'] = 1;
+    }
+    $max_num_pages = $the_items['max_num_pages'];
 
     $the_list['filters']['the_map'] = creatListMapFilter($current_post, $layout, $paginate, $the_list['filters'], $twigPaths);
     if (!empty($the_list['filters']['the_map'])) {
