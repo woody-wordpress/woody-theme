@@ -779,9 +779,9 @@ function getCustomPreview($item)
  *
  * Nom : getTouristicSheetPreview
  * Auteur : Benoit Bouchaud
- * Return : Retourne les données d'une preview basée sur des champs custom
+ * Return : Retourne les données d'une preview basée sur des fiches SIT
  * @param    layout Le wrapper du champ de mise en avant
- * @param    sheet_id - Un tableau de données
+ * @param    sheet_id - id
  * @return   data - Un tableau de données
  *
  */
