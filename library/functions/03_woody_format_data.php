@@ -354,7 +354,7 @@ function getManualFocus_data($layout)
         // La donnée de la vignette est saisie en backoffice
         if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
             $the_items['items'][$key] = getCustomPreview($item_wrapper['custom_content']);
-        // La donnée de la vignette correspond à un post sélectionné
+            // La donnée de la vignette correspond à un post sélectionné
         } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
             $item = $item_wrapper['existing_content'];
             $status = $item['content_selection']->post_status;
@@ -450,7 +450,8 @@ function formatFocusesData($layout, $current_post, $twigPaths)
     return $return;
 }
 
- function getItems( $current_post, $layout, $paginate){
+function getItems($current_post, $layout, $paginate)
+{
     $the_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields'], $paginate, $layout['uniqid']);
     $the_items['no_padding'] = (!empty($layout['the_list_elements']['list_no_padding'])) ? $layout['the_list_elements']['list_no_padding'] : '';
     $the_items['display_button'] = (!empty($layout['the_list_elements']['list_el_req_fields']['display_button'])) ? $layout['the_list_elements']['list_el_req_fields']['display_button'] : '';
@@ -458,7 +459,8 @@ function formatFocusesData($layout, $current_post, $twigPaths)
     return $the_items;
 }
 
-function updateListFilterTax($the_list, $filter_index, $param){
+function updateListFilterTax($the_list, $filter_index, $param)
+{
     foreach ($the_list['filters'][$filter_index]['list_filter_custom_terms'] as $filter_term_key => $filter_term) {
         if ($filter_term['value'] == $param) {
             $the_list['filters'][$filter_index]['list_filter_custom_terms'][$filter_term_key]['checked'] = true;
@@ -566,7 +568,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                     $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_price' . $filter_index]['min'] = $param;
                     // if ($the_list['filters'][$filter_index]['list_filter_type'] == 'price') {
                     $the_list['filters'][$filter_index]['minmax']['default_min'] = round($param);
-                // }
+                    // }
                 } else {
                     $filter_index = str_replace('_max', '', $filter_index);
 
@@ -701,8 +703,8 @@ function formatGeomapData($layout, $twigPaths)
     // Calcul center of map
     $sum_lat = $sum_lng = 0;
     foreach ($layout['markers'] as $key => $marker) {
-        $sum_lat += $marker['map_position']['lat'];
-        $sum_lng += $marker['map_position']['lng'];
+        if (!empty($marker['map_position']['lat'])) $sum_lat += $marker['map_position']['lat'];
+        if (!empty($marker['map_position']['lng'])) $sum_lng += $marker['map_position']['lng'];
     }
     $layout['default_lat'] = $sum_lat / count($layout['markers']);
     $layout['default_lng'] = $sum_lng / count($layout['markers']);
@@ -1123,7 +1125,7 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
  * @return   scope - Un DOM Html
  *
  */
-function nestedGridsComponents($scope, $gridTplField, $uniqIid_prefix = '', $context)
+function nestedGridsComponents($scope = [], $gridTplField, $uniqIid_prefix = '', $context)
 {
     $woodyTwigsPaths = getWoodyTwigPaths();
     foreach ($scope as $grid_key => $grid) {
@@ -1210,13 +1212,13 @@ function getTransformedPattern($str, $item = null)
     if ($item != null) {
         $pattern = "/%nombre%/";
         preg_match($pattern, $str, $matches);
-        if(!empty($matches)){
+        if (!empty($matches)) {
             $confId = $item->get_field('playlist_conf_id');
             $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), array(), 'json');
 
-            if(!empty($playlist)){
+            if (!empty($playlist)) {
                 $nbResults = $playlist['playlist']['total'];
-                foreach($matches as $match){
+                foreach ($matches as $match) {
                     $new_str = str_replace(['%nombre%'], $nbResults, $match);
                     $return = preg_replace($pattern, $new_str, $str);
                 }
