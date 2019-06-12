@@ -963,14 +963,11 @@ function getPagePreview($item_wrapper, $item)
             $data['the_length'] = $item->get_field('field_5b95423386e8f');
         }
 
-        if (in_array('_themes', $item_wrapper['display_elements'])) {
-            $data['terms']['theme'] = getPrimaryTerm('themes', $item->ID, array('name', 'slug', 'term_id'));
-        }
-        if (in_array('_places', $item_wrapper['display_elements'])) {
-            $data['terms']['place'] = getPrimaryTerm('places', $item->ID, array('name', 'slug', 'term_id'));
-        }
-        if (in_array('_seasons', $item_wrapper['display_elements'])) {
-            $data['terms']['season'] = getPrimaryTerm('seasons', $item->ID, array('name', 'slug', 'term_id'));
+        foreach ($item_wrapper['display_elements'] as $display) {
+            if (strpos($display, '_') === 0) {
+                $tax = ltrim($display, '_');
+                $data['terms'][$tax] = getPrimaryTerm($tax, $item->ID, array('name', 'slug', 'term_id'));
+            }
         }
 
         // TODO: Ajouter une option d'affichage Nombre de Personnes dans l'ACF
