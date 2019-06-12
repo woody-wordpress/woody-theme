@@ -603,17 +603,18 @@ class WoodyTheme_ACF
             'lists_and_focuses_57' => 'blocks-focus-tpl_601',
             'lists_and_focuses_58' => 'blocks-focus-tpl_602',
             'lists_and_focuses_59' => 'blocks-focus-tpl_603',
-            'lists_and_focuses_60' => 'blocks-focus-tpl_701',
-            'lists_and_focuses_61' => 'blocks-focus-tpl_1001',
-            'lists_and_focuses_62' => 'blocks-focus_map-tpl_01',
-            'lists_and_focuses_63' => 'blocks-focus_map-tpl_02',
-            'lists_and_focuses_64' => 'lists-list_full-tpl_101',
-            'lists_and_focuses_65' => 'lists-list_full-tpl_102',
-            'lists_and_focuses_66' => 'lists-list_full-tpl_105',
-            'lists_and_focuses_67' => 'lists-list_full-tpl_103',
-            'lists_and_focuses_68' => 'lists-list_full-tpl_104',
-            'lists_and_focuses_69' => 'lists-list_full-tpl_201',
-            'lists_and_focuses_70' => 'lists-list_full-tpl_301'
+            'lists_and_focuses_60' => 'blocks-focus-tpl_604',
+            'lists_and_focuses_61' => 'blocks-focus-tpl_701',
+            'lists_and_focuses_62' => 'blocks-focus-tpl_1001',
+            'lists_and_focuses_63' => 'blocks-focus_map-tpl_01',
+            'lists_and_focuses_64' => 'blocks-focus_map-tpl_02',
+            'lists_and_focuses_65' => 'lists-list_full-tpl_101',
+            'lists_and_focuses_66' => 'lists-list_full-tpl_102',
+            'lists_and_focuses_67' => 'lists-list_full-tpl_105',
+            'lists_and_focuses_68' => 'lists-list_full-tpl_103',
+            'lists_and_focuses_69' => 'lists-list_full-tpl_104',
+            'lists_and_focuses_70' => 'lists-list_full-tpl_201',
+            'lists_and_focuses_71' => 'lists-list_full-tpl_301'
         ];
 
         $galleries = [
