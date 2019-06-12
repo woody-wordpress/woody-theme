@@ -969,11 +969,6 @@ function getPagePreview($item_wrapper, $item)
                 $data['terms'][$tax] = getPrimaryTerm($tax, $item->ID, array('name', 'slug', 'term_id'));
             }
         }
-
-        // TODO: Ajouter une option d'affichage Nombre de Personnes dans l'ACF
-        // if (in_array('peoples', $item_wrapper['display_elements'])) {
-        //     $data['the_peoples'] = $item->get_field('field_5b6d54a10381f');
-        // }
     }
 
     $data['the_peoples'] = $item->get_field('field_5b6d54a10381f');
