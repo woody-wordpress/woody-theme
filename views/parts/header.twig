@@ -2,6 +2,7 @@
     {% if season_switcher|default %}
         {{ season_switcher }}
     {% endif %}
+
     {% if lang_switcher|default or es_search_block|default or subtheme_more_tools %}
         <ul class="tools list-unstyled flex-container align-middle show-for-xlarge">
             {% if subtheme_more_tools %}
@@ -18,6 +19,9 @@
                     </li>
                 {% endfor %}
             {% endif %}
+            {% if favorites_block|default %}
+                <li>{{ favorites_block }}</li>
+            {% endif %}
             {% if es_search_block|default %}
                 <li>{{ es_search_block }}</li>
             {% endif %}
@@ -33,6 +37,9 @@
 <div class="woody-component-mobilenavs">
     {{ page_parts.mobile_menu|default }}
     <ul class="tools list-unstyled flex-container align-middle hide-for-xlarge">
+        {% if favorites_block_mobile|default %}
+            <li>{{ favorites_block_mobile }}</li>
+        {% endif %}
         {% if es_search_block_mobile|default %}
             <li>{{ es_search_block_mobile }}</li>
         {% endif %}

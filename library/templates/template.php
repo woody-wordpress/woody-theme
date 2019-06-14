@@ -55,6 +55,7 @@ abstract class WoodyTheme_TemplateAbstract
     {
         $return = [];
 
+        $return['favorites_url'] = get_field('favorites_page_url', 'options');
         $return['search_url'] = get_field('es_search_page_url', 'options');
         $return['weather_url'] = get_field('weather_page_url', 'options');
 
@@ -134,6 +135,11 @@ abstract class WoodyTheme_TemplateAbstract
 
         // Add addEsSearchBlock
         $this->addEsSearchBlock();
+
+        // Add addFavoritesBlock
+        if (in_array('favorites', $this->context['enabled_woody_options'])) {
+            $this->addFavoritesBlock();
+        }
 
         // Set a global dist dir
         $this->context['dist_dir'] = WP_DIST_DIR;
@@ -294,11 +300,9 @@ abstract class WoodyTheme_TemplateAbstract
 
     private function addEsSearchBlock()
     {
-        $data = [];
-
         $search_post_id = apply_filters('woody_get_field_option', 'es_search_page_url');
-
         if (!empty($search_post_id)) {
+            $data = [];
             $data['search_url'] = get_permalink(pll_get_post($search_post_id));
 
             $suggest = apply_filters('woody_get_field_option', 'es_search_block_suggests');
@@ -326,14 +330,32 @@ abstract class WoodyTheme_TemplateAbstract
             }
 
             // Set a default template
-            $tplSearchBlock = apply_filters('es_search_block_tpl', null);
-            $data['tags'] = $tplSearchBlock['tags'] ?: '';
-            $template = $tplSearchBlock['template'] ?: $this->context['woody_components']['woody_widgets-es_search_block-tpl_01'];
+            $tpl = apply_filters('es_search_block_tpl', null);
+            $data['tags'] = $tpl['tags'] ?: '';
+            $template = $tpl['template'] ?: $this->context['woody_components']['woody_widgets-es_search_block-tpl_01'];
 
-            $compile_search = Timber::compile($template, $data);
+            $timber_compile = Timber::compile($template, $data);
 
-            $this->context['es_search_block'] = $compile_search;
-            $this->context['es_search_block_mobile'] = $compile_search;
+            $this->context['es_search_block'] = $timber_compile;
+            $this->context['es_search_block_mobile'] = $timber_compile;
+        }
+    }
+
+    private function addFavoritesBlock()
+    {
+        $favorites_post_id = apply_filters('woody_get_field_option', 'favorites_page_url');
+        if (!empty($favorites_post_id)) {
+            $data = [];
+            $data['favorites_page_url'] = get_permalink(pll_get_post($favorites_post_id));
+
+            // Set a default template
+            $tpl = apply_filters('favorites_block', null);
+            $template = $tpl['template'] ?: $this->context['woody_components']['woody_widgets-favorites_block-tpl_01'];
+
+            $timber_compile = Timber::compile($template, $data);
+
+            $this->context['favorites_block'] = $timber_compile;
+            $this->context['favorites_block_mobile'] = $timber_compile;
         }
     }
 }
