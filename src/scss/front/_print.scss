@@ -128,7 +128,7 @@ button,
 .ui-datepicker,
 .ui-widget,
 .cc-window,
-.cc-banner{
+.cc-banner {
     display: none !important;
 }
 
@@ -154,7 +154,7 @@ button,
     height: auto !important;
 }
 
-#item_sheet_list{
+#item_sheet_list {
     justify-content: center;
     align-items: center;
 }
@@ -164,7 +164,8 @@ button,
     float: left;
     page-break-inside: avoid;
     overflow: hidden;
-    article{
+
+    article {
         // border: 1px solid grey;
         border-radius: 2px;
         box-shadow: 10px 10px 5px rgba(44, 43, 43, 0.76);
@@ -172,30 +173,35 @@ button,
         height: 300px;
         margin: 5px;
     }
-    a{
-        img{
+
+    a {
+        img {
             width: 95%;
             max-height: 130px;
-            padding:5px 0 0 0;
+            padding: 5px 0 0 0;
             margin: auto;
         }
 
-        .top-left-corner, .top-right-corner{
+        .top-left-corner,
+        .top-right-corner {
             display: none;
         }
 
-        section{
-            .infos-wrapper{
-                h3{
+        section {
+            .infos-wrapper {
+                h3 {
                     font-size: 17px;
-                    margin:5px 0 0 0;
+                    margin: 5px 0 0 0;
                 }
+
                 padding:0 10px 0 10px;
             }
+
             text-overflow: ellipsis;
         }
     }
-    a:after{
+
+    a:after {
         content: none;
     }
 }
@@ -308,8 +314,7 @@ a.mediaCard:after {
     #reviews-iframe,
     .panel-header .photo-label,
     main .page-section,
-    .kaarousel-container .kaarousel-item:nth-of-type(n+2)
-    {
+    .kaarousel-container .kaarousel-item:nth-of-type(n+2) {
         display: none !important;
     }
 
@@ -323,25 +328,27 @@ a.mediaCard:after {
     }
 
     .panel-header {
-        img{
+        img {
             max-height: 300px;
             float: left;
             padding-left: 15px;
         }
     }
 
-    .establishment-description{
-        width:100%;
+    .establishment-description {
+        width: 100%;
     }
-    .establishment-description::before{
+
+    .establishment-description::before {
         content: "DESCRIPTION \A";
     }
-    .tariff-tab-wrapper::before{
+
+    .tariff-tab-wrapper::before {
         content: "TARIFS \A";
     }
 
     .tariff-tab-wrapper::before,
-    .establishment-description::before{
+    .establishment-description::before {
         white-space: pre;
         color: #1968B5 !important;
         font: bold;
@@ -351,103 +358,118 @@ a.mediaCard:after {
 
     .tourism-detail-description,
     .list-group-item,
-    .panel-default{
-        border:none;
-        margin:0px;
-        padding:0px;
+    .panel-default {
+        border: none;
+        margin: 0px;
+        padding: 0px;
     }
 
-    .header-text h2{
-        margin : 0 0 20px 12px;
+    .header-text h2 {
+        margin: 0 0 20px 12px;
     }
-    .header-title{
+
+    .header-title {
         display: flex;
         flex-direction: column;
         margin-bottom: 0px;
-        span, sup{
+
+        span,
+        sup {
             margin: 5px;
             padding: 5px;
         }
     }
 
-    main{
+    main {
         width: 70%;
-        .list-group, .spoken-languages ul{
+
+        .list-group,
+        .spoken-languages ul {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
         }
 
-        .list-group-item{
+        .list-group-item {
             width: 45%;
-            dl{
+
+            dl {
                 display: flex;
                 flex-direction: column;
                 justify-content: left;
                 align-items: left;
-                dt .pl-heading{
+
+                dt .pl-heading {
                     color: #1968B5 !important;
                     font-size: 1em;
                     text-transform: uppercase;
                 }
-                .plo-list-bare, .plo-nav{
+
+                .plo-list-bare,
+                .plo-nav {
                     padding: 0;
                 }
             }
         }
 
-        #description .list-group-item:first-child{
+        #description .list-group-item:first-child {
             width: 100%;
-            dl{
+
+            dl {
                 display: unset;
                 flex: unset;
             }
+
             margin-bottom: 20px;
         }
 
-        section{
+        section {
             page-break-inside: avoid;
             margin: 10px 0 10px 0 !important;
 
-            .tariff-tab-wrapper .sheet-tab-panes{
+            .tariff-tab-wrapper .sheet-tab-panes {
                 display: flex;
                 flex-direction: column;
-                ul{
+
+                ul {
                     min-height: 25px !important;
                 }
             }
         }
 
-        .spoken-languages ul li{
-            margin:5px;
+        .spoken-languages ul li {
+            margin: 5px;
         }
     }
 
-    aside{
+    aside {
         width: 25%;
-        margin:0px;
-        padding:0px;
+        margin: 0px;
+        padding: 0px;
 
-        .phone-link:after{
+        .phone-link:after {
             content: none;
         }
 
-        .panel-title-responsive{
+        .panel-title-responsive {
             display: none;
         }
     }
 
-    .kaarousel-container{
+    .kaarousel-container {
         position: relative;
-        float:right;
+        float: right;
         width: 100%;
-        a:after{
+
+        a:after {
             content: none;
         }
-        .kaarousel-slide{
+
+        .kaarousel-slide {
             display: unset !important;
         }
-        .kaarousel-wrapper{
+
+        .kaarousel-wrapper {
             width: 100%;
         }
     }
