@@ -269,18 +269,23 @@ abstract class WoodyTheme_TemplateAbstract
             $SubWoodyTheme_Languages = new SubWoodyTheme_Languages($this->context['woody_components']);
             if (method_exists($SubWoodyTheme_Languages, 'languagesCustomization')) {
                 $languages_customization = $SubWoodyTheme_Languages->languagesCustomization();
-                if (!empty($languages_customization['template'])) {
-                    $template = $languages_customization['template'];
-                }
+                // if (!empty($languages_customization['template'])) {
+                //     $template = $languages_customization['template'];
+                // }
                 $data['flags'] = (!empty($languages_customization['flags'])) ? $languages_customization['flags'] : false;
                 if (!empty($languages_customization['external_langs'])) {
                     foreach ($languages_customization['external_langs'] as $lang_key => $language) {
-                        $data['langs'][$lang_key]['url'] = $language['url'];
-                        $data['langs'][$lang_key]['name'] = $language['name'];
-                        $data['langs'][$lang_key]['locale'] = (!empty($language['locale'])) ? substr($language['locale'], 0, 2) : $lang_key;
-                        $data['langs'][$lang_key]['target'] = '_blank';
+                        if (!empty($data['langs'][$lang_key])) {
+                            $data['langs'][$lang_key]['url'] = $language['url'];
+                            $data['langs'][$lang_key]['name'] = $language['name'];
+                            $data['langs'][$lang_key]['locale'] = (!empty($language['locale'])) ? substr($language['locale'], 0, 2) : $lang_key;
+                            $data['langs'][$lang_key]['target'] = '_blank';
+                        } else if (!is_user_logged_in()) {
+                            unset($data['langs'][$lang_key]);
+                        }
                     }
                 }
+
                 if (!is_user_logged_in() and !empty($languages_customization['hide_langs'])) {
                     foreach ($data['langs'] as $lang_key => $language) {
                         if (in_array($language['locale'], $languages_customization['hide_langs'])) {
