@@ -353,7 +353,7 @@ function getManualFocus_data($layout)
     foreach ($layout['content_selection'] as $key => $item_wrapper) {
         // La donnée de la vignette est saisie en backoffice
         if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
-            $the_items['items'][$key] = getCustomPreview($item_wrapper['custom_content']);
+            $the_items['items'][$key] = getCustomPreview($item_wrapper['custom_content'], $layout);
             // La donnée de la vignette correspond à un post sélectionné
         } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
             $item = $item_wrapper['existing_content'];
@@ -743,7 +743,7 @@ function formatGeomapData($layout, $twigPaths)
  * @return   data - Un tableau de données
  *
  */
-function getCustomPreview($item)
+function getCustomPreview($item, $item_wrapper = null)
 {
     $data = [];
     $data = [
@@ -766,6 +766,12 @@ function getCustomPreview($item)
             'target' => (!empty($item['link']['target'])) ? $item['link']['target'] : '',
         ],
     ];
+
+
+    // On affiche le bouton si "Afficher le bouton" est coché
+    if (!empty($item_wrapper) && !empty($item_wrapper['display_button'])) {
+        $data['display_button'] = true;
+    }
 
     // On récupère le choix de média afin d'envoyer une image OU une vidéo
     if ($item['media_type'] == 'img' && !empty($item['img'])) {
