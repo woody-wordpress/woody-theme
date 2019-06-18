@@ -1215,10 +1215,14 @@ function getTransformedPattern($str, $item = null)
             $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), array(), 'json');
 
             if (!empty($playlist)) {
-                $nbResults = $playlist['playlist']['total'];
-                foreach ($matches as $match) {
-                    $new_str = str_replace(['%nombre%'], $nbResults, $match);
-                    $return = preg_replace($pattern, $new_str, $str);
+                $nbResults = !empty($playlist['playlist']['total']) ? $playlist['playlist']['total'] : false ;
+                if(!$nbResults){
+                    $return = $str;
+                }else{
+                    foreach ($matches as $match) {
+                        $new_str = str_replace(['%nombre%'], $nbResults, $match);
+                        $return = preg_replace($pattern, $new_str, $str);
+                    }
                 }
             }
         } else {
