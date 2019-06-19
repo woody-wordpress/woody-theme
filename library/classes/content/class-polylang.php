@@ -178,5 +178,6 @@ class WoodyTheme_Polylang
         //Actions
         __('Ajouter', 'woody-theme');
         __('Supprimer', 'woody-theme');
+        __('Cette liste est vide actuellement. Naviguez et ajoutez des pages !', 'woody-theme');
     }
 }
