@@ -760,12 +760,23 @@ function getCustomPreview($item, $item_wrapper = null)
 
         ] : '',
         'description' => (!empty($item['description'])) ? getTransformedPattern($item['description']) : '',
-        'link' => [
-            'url' => (!empty($item['link']['url'])) ? $item['link']['url'] : '',
-            'title' => (!empty($item['link']['title'])) ? $item['link']['title'] : '',
-            'target' => (!empty($item['link']['target'])) ? $item['link']['target'] : '',
-        ],
     ];
+
+    if ($item['action_type'] == 'file' && !empty($item['file']['url'])) {
+        $data['link'] = [
+            'url' => (!empty($item['file']['url'])) ? $item['file']['url'] : '',
+            'title' => __('Télécharger', 'woody-theme'),
+            'target' => '_blank',
+        ];
+    } elseif ($item['action_type'] == 'link' && !empty($item['link']['url'])) {
+        $data = [
+            'link' => [
+                'url' => (!empty($item['link']['url'])) ? $item['link']['url'] : '',
+                'title' => (!empty($item['link']['title'])) ? $item['link']['title'] : '',
+                'target' => (!empty($item['link']['target'])) ? $item['link']['target'] : '',
+            ],
+        ];
+    }
 
 
     // On affiche le bouton si "Afficher le bouton" est coché
@@ -1215,10 +1226,10 @@ function getTransformedPattern($str, $item = null)
             $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), array(), 'json');
 
             if (!empty($playlist)) {
-                $nbResults = !empty($playlist['playlist']['total']) ? $playlist['playlist']['total'] : false ;
-                if(!$nbResults){
+                $nbResults = !empty($playlist['playlist']['total']) ? $playlist['playlist']['total'] : false;
+                if (!$nbResults) {
                     $return = $str;
-                }else{
+                } else {
                     foreach ($matches as $match) {
                         $new_str = str_replace(['%nombre%'], $nbResults, $match);
                         $return = preg_replace($pattern, $new_str, $str);
