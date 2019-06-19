@@ -171,6 +171,7 @@ abstract class WoodyTheme_TemplateAbstract
             'post_id' => $this->context['post_id'],
             'post_title' => $this->context['post_title'],
             'page_type' => $this->context['page_type'],
+            'woody_options_pages' => $this->getWoodyOptionsPagesValues()
         ];
         $this->context['globals'] = json_encode($globals);
     }
