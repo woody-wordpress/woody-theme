@@ -155,6 +155,7 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
     $the_items = [];
     $tax_query = [];
 
+
     // Création du paramètre tax_query pour la wp_query
     // Référence : https://codex.wordpress.org/Class_Reference/WP_Query
     if (!empty($query_form['focused_content_type'])) {
@@ -324,6 +325,16 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
     // On transforme la donnée des posts récupérés pour coller aux templates de blocs Woody
     if (!empty($query_result->posts)) {
         foreach ($query_result->posts as $key => $post) {
+
+            // On vérifie si la page est de type miroir
+            $page_type = get_the_terms($post->ID, 'page_type');
+            if ($page_type[0]->slug == 'mirror_page') {
+                $mirror = get_field('mirror_page_reference', $post->ID);
+                if (!empty(get_post($mirror))) {
+                    $post = get_post($mirror);
+                }
+            }
+
             $data = [];
             $post = Timber::get_post($post->ID);
             $data = getPagePreview($query_form, $post);
@@ -354,7 +365,7 @@ function getManualFocus_data($layout)
         // La donnée de la vignette est saisie en backoffice
         if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
             $the_items['items'][$key] = getCustomPreview($item_wrapper['custom_content'], $layout);
-            // La donnée de la vignette correspond à un post sélectionné
+        // La donnée de la vignette correspond à un post sélectionné
         } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
             $item = $item_wrapper['existing_content'];
             $status = $item['content_selection']->post_status;
@@ -568,7 +579,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                     $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_price' . $filter_index]['min'] = $param;
                     // if ($the_list['filters'][$filter_index]['list_filter_type'] == 'price') {
                     $the_list['filters'][$filter_index]['minmax']['default_min'] = round($param);
-                    // }
+                // }
                 } else {
                     $filter_index = str_replace('_max', '', $filter_index);
 
@@ -703,8 +714,12 @@ function formatGeomapData($layout, $twigPaths)
     // Calcul center of map
     $sum_lat = $sum_lng = 0;
     foreach ($layout['markers'] as $key => $marker) {
-        if (!empty($marker['map_position']['lat'])) $sum_lat += $marker['map_position']['lat'];
-        if (!empty($marker['map_position']['lng'])) $sum_lng += $marker['map_position']['lng'];
+        if (!empty($marker['map_position']['lat'])) {
+            $sum_lat += $marker['map_position']['lat'];
+        }
+        if (!empty($marker['map_position']['lng'])) {
+            $sum_lng += $marker['map_position']['lng'];
+        }
     }
     $layout['default_lat'] = $sum_lat / count($layout['markers']);
     $layout['default_lng'] = $sum_lng / count($layout['markers']);
