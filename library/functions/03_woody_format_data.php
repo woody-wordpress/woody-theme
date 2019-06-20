@@ -365,7 +365,7 @@ function getManualFocus_data($layout)
         // La donnée de la vignette est saisie en backoffice
         if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
             $the_items['items'][$key] = getCustomPreview($item_wrapper['custom_content'], $layout);
-        // La donnée de la vignette correspond à un post sélectionné
+            // La donnée de la vignette correspond à un post sélectionné
         } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
             $item = $item_wrapper['existing_content'];
             $status = $item['content_selection']->post_status;
@@ -579,7 +579,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                     $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_price' . $filter_index]['min'] = $param;
                     // if ($the_list['filters'][$filter_index]['list_filter_type'] == 'price') {
                     $the_list['filters'][$filter_index]['minmax']['default_min'] = round($param);
-                // }
+                    // }
                 } else {
                     $filter_index = str_replace('_max', '', $filter_index);
 
@@ -784,12 +784,10 @@ function getCustomPreview($item, $item_wrapper = null)
             'target' => '_blank',
         ];
     } elseif ($item['action_type'] == 'link' && !empty($item['link']['url'])) {
-        $data = [
-            'link' => [
-                'url' => (!empty($item['link']['url'])) ? $item['link']['url'] : '',
-                'title' => (!empty($item['link']['title'])) ? $item['link']['title'] : '',
-                'target' => (!empty($item['link']['target'])) ? $item['link']['target'] : '',
-            ],
+        $data['link'] = [
+            'url' => (!empty($item['link']['url'])) ? $item['link']['url'] : '',
+            'title' => (!empty($item['link']['title'])) ? $item['link']['title'] : '',
+            'target' => (!empty($item['link']['target'])) ? $item['link']['target'] : '',
         ];
     }
 
