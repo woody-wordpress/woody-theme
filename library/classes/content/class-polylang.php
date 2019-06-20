@@ -92,7 +92,6 @@ class WoodyTheme_Polylang
 
         // Woody blocs
         __("M'y rendre", 'woody-theme');
-        __("Ajouter à mes favoris", 'woody-theme');
         __("Voir l'itinéraire", 'woody-theme');
         __("Voir la vidéo", 'woody-theme');
         __("Affiner ma recherche", 'woody-theme');
@@ -175,5 +174,10 @@ class WoodyTheme_Polylang
         __('Après-midi', 'woody-theme');
         __('Soirée', 'woody-theme');
         __('Nuit', 'woody-theme');
+
+        //Actions
+        __('Ajouter', 'woody-theme');
+        __('Supprimer', 'woody-theme');
+        __('Cette liste est vide actuellement. Naviguez et ajoutez des pages !', 'woody-theme');
     }
 }
