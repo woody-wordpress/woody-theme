@@ -783,7 +783,7 @@ function getCustomPreview($item, $item_wrapper = null)
             'title' => __('Télécharger', 'woody-theme'),
             'target' => '_blank',
         ];
-    } elseif ($item['action_type'] == 'link' && !empty($item['link']['url'])) {
+    } else {
         $data['link'] = [
             'url' => (!empty($item['link']['url'])) ? $item['link']['url'] : '',
             'title' => (!empty($item['link']['title'])) ? $item['link']['title'] : '',
