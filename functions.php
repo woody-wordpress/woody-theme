@@ -40,6 +40,6 @@ add_filter('timber/cache/location', function () {
 });
 
 if (class_exists('Timber', false)) {
-    Timber::$locations = array('views', Woody::getTemplatesDirname());
+    Timber::$locations = array('views', WoodyLibrary::getTemplatesDirname());
     Timber::$cache = (WP_ENV == 'dev') ? false : true;
 }
