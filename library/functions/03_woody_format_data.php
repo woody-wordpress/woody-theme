@@ -922,6 +922,7 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
             }
         }
     }
+    $data['sheet_id'] = $sheet_id;
     return $data;
 }
 
