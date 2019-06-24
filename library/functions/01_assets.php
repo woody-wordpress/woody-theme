@@ -39,7 +39,7 @@ function getAcfGroupFields($group_id, $post = null)
     }
 }
 
- /**
+/**
  *
  * Nom : getTermsSlugs
  * Auteur : Benoit Bouchaud
@@ -69,7 +69,7 @@ function getTermsSlugs($postId, $taxonomy, $implode = false)
     return $return;
 }
 
- /**
+/**
  *
  * Nom : humanDays
  * Auteur : Benoit Bouchaud
@@ -101,7 +101,7 @@ function humanDays($number)
     return $return;
 }
 
- /**
+/**
  *
  * Nom : getWoodyIcons
  * Auteur : Benoit Bouchaud
@@ -118,7 +118,7 @@ function getWoodyIcons()
 
     // TODO : récuperer variable station de l'ERP
     $stations = ['superot', 'champsaur-valgaudemar', 'hautemaurienne'];
-    $station_icons= array();
+    $station_icons = array();
 
     if ((in_array(WP_SITE_KEY, $stations))) {
         $station_icons = woodyIconsFolder(get_template_directory() . '/src/icons/icons_set_stations');
@@ -155,7 +155,7 @@ function woodyIconsFolder($folder)
     return $return;
 }
 
- /**
+/**
  *
  * Nom : getWoodyTwigPaths
  * Auteur : Benoit Bouchaud
@@ -168,11 +168,11 @@ function getWoodyTwigPaths()
     $woodyTwigsPaths = [];
     $woodyComponents = get_transient('woody_components');
     if (empty($woodyComponents)) {
-        $woodyComponents = Woody::getComponents();
+        $woodyComponents = WoodyLibrary::getComponents();
         set_transient('woody_components', $woodyComponents);
     }
 
-    $woodyTwigsPaths = Woody::getTwigsPaths($woodyComponents);
+    $woodyTwigsPaths = WoodyLibrary::getTwigsPaths($woodyComponents);
 
     return $woodyTwigsPaths;
 }
