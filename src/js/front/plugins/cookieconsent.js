@@ -35,13 +35,20 @@ if (window.siteConfig.current_lang.indexOf('fr') != -1) {
     var deny = "Non voglio i cookies";
     var link = "Per saperne di più";
     var policy = "Politica sui cookies";
+} else if (window.siteConfig.current_lang.indexOf('ja') != -1) {
+    var message = "このWebサイトは、デフォルトでオーディエンス測定および匿名機能のためにCookieをアクティブにします。";
+    var dismiss = "わかりました";
+    var allow = "クッキーを受け入れる";
+    var deny = "クッキーを受け入れない";
+    var link = "もっと知りたい";
+    var policy = "クッキーポリシー";
 } else {
     var message = "This website activates cookies by default for audience measurement and anonymous features.";
     var dismiss = "Got it!";
     var allow = "Allow cookies";
     var deny = "Decline";
     var link = "Learn more";
-    var policy = "Cookie Policy";
+    var policy = "Cookies Policy";
 }
 
 // Enable analytics
