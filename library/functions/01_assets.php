@@ -168,11 +168,11 @@ function getWoodyTwigPaths()
     $woodyTwigsPaths = [];
     $woodyComponents = get_transient('woody_components');
     if (empty($woodyComponents)) {
-        $woodyComponents = Woody::getComponents();
+        $woodyComponents = WoodyLibrary::getComponents();
         set_transient('woody_components', $woodyComponents);
     }
 
-    $woodyTwigsPaths = Woody::getTwigsPaths($woodyComponents);
+    $woodyTwigsPaths = WoodyLibrary::getTwigsPaths($woodyComponents);
 
     return $woodyTwigsPaths;
 }
