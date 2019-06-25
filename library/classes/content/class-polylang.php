@@ -68,6 +68,7 @@ class WoodyTheme_Polylang
         // Yoast
         __("Page non trouvée %%sep%% %%sitename%%", 'woody-theme');
         __("Erreur 404 : Page non trouvée", 'woody-theme');
+        __("Aller à la page d\'accueil", "woody-theme");
 
         // Date
         __("Lundi", 'woody-theme');
