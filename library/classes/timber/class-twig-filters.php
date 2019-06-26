@@ -29,6 +29,8 @@ class WoodyTheme_Twig_Filters
 
         $twig->addFilter(new Twig_SimpleFilter('getPermalink', [$this, 'getPermalink']));
         $twig->addFilter(new Twig_SimpleFilter('theRootAncestor', [$this, 'theRootAncestor']));
+        $twig->addFilter(new Twig_SimpleFilter('pluralizeUnit', [$this, 'pluralizeUnit']));
+
 
         // debug
         $twig->addFilter(new Twig_SimpleFilter('dump', [$this, 'dump']));
@@ -129,7 +131,7 @@ class WoodyTheme_Twig_Filters
         $truncate .= $ending;
         if ($considerHtml) {
             foreach ($openTags as $tag) {
-                $truncate .= '</'.$tag.'>';
+                $truncate .= '</' . $tag . '>';
             }
         }
         return $truncate;
@@ -177,9 +179,19 @@ class WoodyTheme_Twig_Filters
         return apply_filters('woody_get_permalink', $post_id);
     }
 
-    public function theRootAncestor($post_id) {
+    public function theRootAncestor($post_id)
+    {
 
         $root_id = getPostRootAncestor($post_id) ? getPostRootAncestor($post_id) : get_the_id();
         return $root_id;
+    }
+
+
+    function pluralizeUnit($amount, $singular_unit, $plural_unit)
+    {
+        if ((int)$amount === 1) {
+            return $amount . ' ' . $singular_unit;
+        }
+        return $amount . ' ' . $plural_unit;
     }
 }
