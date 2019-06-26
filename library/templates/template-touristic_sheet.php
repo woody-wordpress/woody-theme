@@ -54,7 +54,6 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
 
         // Set METAS
         if (!empty($this->context['sheet_tourism'])) {
-            $this->context['metas'] = [];
             foreach ($this->context['sheet_tourism']['metas'] as $key_meta => $meta) {
                 // Remove doubled metas (apirender & wordpress)
                 if (

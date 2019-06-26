@@ -17,6 +17,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
     protected function registerHooks()
     {
+        //add_filter('wpseo_canonical', [$this, 'wpSeoCanonical'], 10, 1);
     }
 
     protected function getHeaders()
@@ -185,11 +186,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
          *********************************************/
         if ($this->context['page_type'] === 'playlist_tourism') {
             $this->playlistContext();
-
-            $autoselect_id = filter_input(INPUT_GET, 'autoselect_id', FILTER_VALIDATE_INT);
-            if (!empty($autoselect_id)) {
-                $this->context['metas'][] = '<meta name="robots" content="noindex, follow" />';
-            }
         }
 
         /*********************************************
@@ -300,6 +296,12 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     {
         $this->context['body_class'] .= ' apirender apirender-playlist apirender-wordpress';
 
+        // No Index if autoselect_id
+        $autoselect_id = filter_input(INPUT_GET, 'autoselect_id', FILTER_VALIDATE_INT);
+        if (!empty($autoselect_id)) {
+            $this->context['metas'][] = '<meta name="robots" content="noindex, follow" />';
+        }
+
         /** ************************
          * Vérification pré-cochage
          ************************ **/
@@ -390,4 +392,17 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         }
         return $headers;
     }
+
+    /***************************
+     * Overide Canonical
+     *****************************/
+    // public function wpSeoCanonical($url)
+    // {
+    //     $listpage = filter_input(INPUT_GET, 'listpage', FILTER_VALIDATE_INT);
+    //     if ($this->context['page_type'] === 'playlist_tourism' && !empty($listpage) && is_numeric($listpage)) {
+    //         $url .= '?listpage=' . $listpage;
+    //     }
+
+    //     return $url;
+    // }
 }
