@@ -91,6 +91,17 @@ class WoodyTheme_Polylang
         __("Novembre", 'woody-theme');
         __("Décembre", 'woody-theme');
 
+        // Trip infos
+        __('A partir de', 'woody-theme');
+        __('heure', 'woody-theme');
+        __('heures', 'woody-theme');
+        __('minute', 'woody-theme');
+        __('minutes', 'woody-theme');
+        __('min', 'woody-theme');
+        __('max', 'woody-theme');
+        __('pers.', 'woody-theme');
+        __('Demander un devis', 'woody-theme');
+
         // Woody blocs
         __("M'y rendre", 'woody-theme');
         __("Voir l'itinéraire", 'woody-theme');
