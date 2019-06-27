@@ -1210,7 +1210,7 @@ function formatVisualEffectData($effects)
 
 function getSectionBannerFiles($filename)
 {
-    if (file_exists(get_stylesheet_directory() . '/views/section_banner/section_' . $filename)) {
+    if (file_exists(get_stylesheet_directory() . '/views/section_banner/section_' . $filename . '.twig')) {
         $file = file_get_contents(get_stylesheet_directory() . '/views/section_banner/section_' . $filename . '.twig');
     } else {
         $file = file_get_contents(get_template_directory() . '/views/section_banner/section_' . $filename . '.twig');

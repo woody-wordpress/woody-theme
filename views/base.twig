@@ -1,31 +1,31 @@
 <!DOCTYPE html>
+{% spaceless %}
 <html class="no-js" {{site.language_attributes}}>
 <head>
-{% spaceless %}
 {# <title>{{ title }}</title> #}
 <meta charset="{{site.charset}}">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
 {% if gtm|default %}
-<!-- GTM -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','{{ gtm }}');</script>
-<!-- /GTM -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','{{ gtm }}');</script>
 {% else %}
-<!-- GTM (fallback)-->
 <script>window.dataLayer = []</script>
-<!-- /GTM (fallback) -->
 {% endif %}
 
-<!-- WP Metas-->
+{# WP Metas #}
 {% block metas %}{% endblock %}
-<!-- /WP Metas-->
+{# /WP Metas #}
 
-<!-- WP Header-->
+{# WP Header #}
 {{ wp_head }}
-<!-- /WP Header-->
+{# /WP Header #}
 
-<!-- WP Favicons -->
+{# WP Favicons #}
 {# <link rel='shortcut icon' type='image/x-icon' href="{{ icons.favicon }}"> #}
 <link rel="shortcut icon" type="image/png" href="{{ icons.64 }}"> {# Favicon #}
 <link rel="apple-touch-icon" href="{{ icons.120 }}"> {# iPhone #}
@@ -34,48 +34,48 @@
 <link rel="apple-touch-icon" sizes="167x167" href="{{ icons.167 }}"> {# iPad retina #}
 <link rel="icon" sizes="192x192" href="{{ icons.192 }}"> {# Chrome #}
 <link rel="icon" sizes="128x128" href="{{ icons.128 }}"> {# Chrome #}
-<!-- /WP Favicons -->
+{# /WP Favicons #}
 
-<!-- WP Styles -->
+{# WP Styles #}
 {% block styles %}{% endblock %}
-<!-- /WP Styles -->
+{# /WP Styles #}
 
-<!-- WP Global Vars -->
+{# WP Global Vars #}
 <script>var globals = {{ globals }};</script>
-<!-- /WP Global Vars -->
+{# /WP Global Vars #}
 {% endspaceless %}
 </head>
 <body class="{{body_class}}">
     {% if gtm|default %}
-    <!-- GTM (noscript) -->
+    {# GTM (noscript) #}
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ gtm }}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- /GTM (noscript) -->
+    {# /GTM (noscript) #}
     {% endif %}
 
     <div class="main-wrapper flex-container flex-dir-column large-flex-dir-column-reverse">
         <div class="site-content">
 
-            <!-- Theme Content -->
+            {# Theme Content #}
             {% block content %}{% endblock %}
-            <!-- /Theme Content -->
+            {# /Theme Content #}
 
-            <!-- Theme Footer -->
+            {# Theme Footer #}
             {% include 'parts/footer.twig' %}
-            <!-- /Theme Footer -->
+            {# /Theme Footer #}
         </div>
 
-        <!-- Theme Header -->
+        {# Theme Header #}
         {% include 'parts/header.twig' %}
-        <!-- /Theme Header -->
+        {# /Theme Header #}
 
     </div>
 
-    <!-- Twig Inline Scripts tags -->
+    {# Twig Inline Scripts tags #}
     {% block inline_scripts %}{% endblock %}
-    <!-- /Twig Inline Scripts tags -->
+    {# /Twig Inline Scripts tags #}
 
-    <!-- WP Footer-->
+    {# WP Footer #}
     {{ wp_footer }}
-    <!-- /WP Footer-->
+    {# /WP Footer #}
 </body>
 </html>
