@@ -9,6 +9,7 @@ function getComponentItem($layout, $context)
         case 'manual_focus':
         case 'auto_focus':
         case 'auto_focus_sheets':
+        case 'focus_trip_components':
             $return = formatFocusesData($layout, $context['post'], $context['woody_components']);
             break;
         case 'geo_map':
@@ -362,6 +363,10 @@ function getManualFocus_data($layout)
 {
     $the_items = [];
     foreach ($layout['content_selection'] as $key => $item_wrapper) {
+
+        $item_wrapper['content_selection_type'] = $layout['acf_fc_layout']== 'focus_trip_components' ? 'existing_content': $item_wrapper['content_selection_type'] ;
+        $item_wrapper['existing_content']['content_selection'] = !empty($item_wrapper['existing_content']['trip_component']) ? $item_wrapper['existing_content']['trip_component']: $item_wrapper['existing_content']['content_selection'];
+
         // La donnée de la vignette est saisie en backoffice
         if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
             $the_items['items'][$key] = getCustomPreview($item_wrapper['custom_content'], $layout);
@@ -428,7 +433,7 @@ function formatFocusesData($layout, $current_post, $twigPaths)
 {
     $return = '';
     $the_items = [];
-    if ($layout['acf_fc_layout'] == 'manual_focus') {
+    if ($layout['acf_fc_layout'] == 'manual_focus' || $layout['acf_fc_layout'] == 'focus_trip_components') {
         $the_items = getManualFocus_data($layout);
     } elseif ($layout['acf_fc_layout'] == 'auto_focus') {
         $the_items = getAutoFocus_data($current_post, $layout);
