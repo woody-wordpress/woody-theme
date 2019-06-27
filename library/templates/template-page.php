@@ -17,7 +17,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
     protected function registerHooks()
     {
-        //add_filter('wpseo_canonical', [$this, 'wpSeoCanonical'], 10, 1);
+        add_filter('wpseo_canonical', [$this, 'wpSeoCanonical'], 10, 1);
     }
 
     protected function getHeaders()
@@ -396,13 +396,13 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     /***************************
      * Overide Canonical
      *****************************/
-    // public function wpSeoCanonical($url)
-    // {
-    //     $listpage = filter_input(INPUT_GET, 'listpage', FILTER_VALIDATE_INT);
-    //     if ($this->context['page_type'] === 'playlist_tourism' && !empty($listpage) && is_numeric($listpage)) {
-    //         $url .= '?listpage=' . $listpage;
-    //     }
+    public function wpSeoCanonical($url)
+    {
+        $listpage = filter_input(INPUT_GET, 'listpage', FILTER_VALIDATE_INT);
+        if ($this->context['page_type'] === 'playlist_tourism' && !empty($listpage) && is_numeric($listpage)) {
+            $url .= '?listpage=' . $listpage;
+        }
 
-    //     return $url;
-    // }
+        return $url;
+    }
 }
