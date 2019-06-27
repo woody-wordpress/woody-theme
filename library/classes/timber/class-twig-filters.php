@@ -29,6 +29,7 @@ class WoodyTheme_Twig_Filters
 
         $twig->addFilter(new Twig_SimpleFilter('getPermalink', [$this, 'getPermalink']));
         $twig->addFilter(new Twig_SimpleFilter('theRootAncestor', [$this, 'theRootAncestor']));
+        $twig->addFilter(new Twig_SimpleFilter('pluralizeUnit', [$this, 'pluralizeUnit']));
 
         // debug
         $twig->addFilter(new Twig_SimpleFilter('dump', [$this, 'dump']));
