@@ -17,6 +17,7 @@ class WoodyTheme_Links
     {
         add_filter('wp_link_query_args', [$this, 'customLinksSearch']);
         add_filter('wp_link_query', [$this, 'customLinksResults'], 10, 2);
+        add_filter('page_attributes_dropdown_pages_args', [$this, 'pageAttributesDropdownPagesArgs'], 1, 1);
     }
 
     public function customLinksSearch($query)
@@ -49,5 +50,12 @@ class WoodyTheme_Links
         }
 
         return $results;
+    }
+
+    public function pageAttributesDropdownPagesArgs($dropdown_args)
+    {
+        // Filtre permettant d'enregistrer une page ayant pour parent une page "brouillon"
+        $dropdown_args['post_status'] = array('publish', 'draft');
+        return $dropdown_args;
     }
 }
