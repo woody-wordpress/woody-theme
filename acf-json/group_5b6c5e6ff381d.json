@@ -71,17 +71,46 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "25",
+                        "width": "15",
                         "class": "",
                         "id": ""
                     },
                     "default_value": "",
                     "placeholder": "",
                     "prepend": "",
-                    "append": "€",
+                    "append": "",
                     "min": "",
                     "max": "",
                     "step": ""
+                },
+                {
+                    "key": "field_5d161f9d62a94",
+                    "label": "Devise",
+                    "name": "currency",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "15",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "euro": "€",
+                        "us_dollar": "$ <small><i>(USD)<\/i><\/small>",
+                        "au_dollar": "$ <small><i>(AUD)<\/i><\/small>",
+                        "pound": "£"
+                    },
+                    "default_value": [
+                        "euro"
+                    ],
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 1,
+                    "ajax": 0,
+                    "return_format": "array",
+                    "placeholder": ""
                 },
                 {
                     "key": "field_5b6d48b82d0ac",
@@ -107,7 +136,7 @@
                         ]
                     ],
                     "wrapper": {
-                        "width": "25",
+                        "width": "20",
                         "class": "",
                         "id": ""
                     },
@@ -540,10 +569,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "choices": {
-                "blocks-trip_infos-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/trip_infos\/tpl_02\/thumbnail.png?version=2.9.1\" alt=\"blocks-trip_infos-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Infos séjour - Template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Infos séjour - Template 2<\/h4>Affiche le prix et la durée d'un séjour - Centrés l'un sur l'autre<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-trip_infos-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/trip_infos\/tpl_01\/thumbnail.png?version=2.9.1\" alt=\"blocks-trip_infos-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Infos séjour - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Infos séjour - Template 1<\/h4>Affiche le prix et la durée d'un séjour - Centrés l'un sur l'autre<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-            },
+            "choices": {},
             "allow_null": 0,
             "other_choice": 0,
             "default_value": "",
@@ -611,5 +637,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Affiche le prix et la duré d'un séjour",
-    "modified": 1561534163
+    "modified": 1561732286
 }
