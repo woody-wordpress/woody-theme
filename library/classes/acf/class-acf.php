@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ACF sync field
  *
@@ -6,6 +7,7 @@
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
+
 use Woody\Utils\Output;
 
 class WoodyTheme_ACF
@@ -145,6 +147,9 @@ class WoodyTheme_ACF
 
             switch ($field['key']) {
                 case 'field_5afd2c9616ecd': // Cas des sections
+                    $components = WoodyLibrary::getTemplatesByAcfGroup($woodyComponents, $field['key']);
+                    break;
+                case 'field_5d16118093cc1': // Cas des mises en avant de composants de séjours
                     $components = WoodyLibrary::getTemplatesByAcfGroup($woodyComponents, $field['key']);
                     break;
                 default:
