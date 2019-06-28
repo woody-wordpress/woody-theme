@@ -6,6 +6,8 @@
  * @since WoodyTheme 1.0.0
  */
 
+use Woody\Modules\GroupQuotation\GroupQuotation;
+
 class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 {
     protected $twig_tpl = '';
@@ -117,56 +119,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             //TODO: Gérer le fichier gps pour affichage s/ carte
             $trip_infos['the_duration']['count_days'] = ($trip_infos['the_duration']['count_days']) ? humanDays($trip_infos['the_duration']['count_days']) : '';
             if($trip_infos['the_price']['price_type'] == 'component_based'){
-
-                $data = get_post_meta($this->context['post']->ID);
-                $pattern = "/existing_content_trip_component$/";
-                $post_ids = [];
-                foreach ($data as $meta_key => $meta_values) {
-                    foreach ($meta_values as $meta_value) {
-                        if (preg_match($pattern, $meta_key) && is_numeric($meta_value)) {
-                            if (!in_array($meta_value, $post_ids)) {
-                                array_push($post_ids, $meta_value);
-                            }
-                        }
-                    }
-                }
-
-                $price_types = [];
-                $prices = [];
-                $total = 0;
-                foreach($post_ids as $post_id){
-                    $type = get_post_meta($post_id, 'the_price_price_type')[0];
-                    if(!in_array($type, $price_types)){
-                        $price_types[] = $type;
-                    }
-
-                    $prices[$post_id]['price'] = get_post_meta($post_id, 'the_price_price')[0];
-                    $prices[$post_id]['evolving_price'] = get_post_meta($post_id, 'the_price_evolving_new_price');
-
-                    $total = !empty($prices[$post_id]['evolving_price']) ? $total + $prices[$post_id]['evolving_price'][0] : $total + $prices[$post_id]['price'];
-                }
-
-                if(sizeOf(array_unique($price_types)) > 1){
-                    // Check if all are single
-                    $pattern = "/single/";
-                    $result = preg_grep($pattern, $price_types, PREG_GREP_INVERT);
-                    if(empty($result)){
-                        $trip_infos['the_price']['price'] = $total;
-                    }else{
-                        // Check if all are package
-                        $pattern = "/package/";
-                        $result = preg_grep($pattern, $price_types, PREG_GREP_INVERT);
-                        if(empty($result)){
-                            // Pas de précision
-                        }else{
-                            // Sur devis
-                            $trip_infos['the_price']['price'] = get_post_meta($this->context['post']->ID, 'group_price_price');
-                        }
-                    }
-                }else{
-                    $trip_infos['the_price']['price'] = $total;
-                }
-
+                $trip_infos = GroupQuotation::calculTripPrice($trip_infos, $this->context['post']->ID);
             }else{
                 $trip_infos['the_price']['price'] = (!empty($trip_infos['the_price']['price'])) ? str_replace('.', ',', $trip_infos['the_price']['price']) : '';
             }
