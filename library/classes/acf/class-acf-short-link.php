@@ -1,5 +1,4 @@
 <?php
-
 /**
  * ACF Short Link
  *
@@ -33,7 +32,7 @@ class WoodyTheme_ACF_ShorLink
             $page_type_object = get_the_terms($post_id, 'page_type');
             $shortLinkData['page_type'] = !empty($page_type_object[0]) ? $page_type_object[0]->slug : '';
             $shortLinkData['conf_id'] = get_field('field_5b338ff331b17', $post_id);
-            set_transient($transient_key, $shortLinkData, 2 * 60);
+            set_transient($transient_key, $shortLinkData, 2*60);
         }
 
         return $shortLinkData;
@@ -50,7 +49,6 @@ class WoodyTheme_ACF_ShorLink
 
         $autoselect_id = get_field('playlist_autoselection_id', $post_id);
         $linked_url = get_field('short_link_page_url', $post_id);
-
         if (is_numeric($linked_url)) {
             $linked_id = $linked_url;
             $linked_url = get_permalink($linked_id);
@@ -60,12 +58,7 @@ class WoodyTheme_ACF_ShorLink
 
         $linked_post_type = get_the_terms($linked_id, 'page_type');
         if ($linked_post_type[0]->slug == 'playlist_tourism' && !empty($autoselect_id)) {
-            $playlist_map_display = get_field('playlist_map_display', $post_id);
-            if (!empty($playlist_map_display)) {
-                $short_link_final_url = $linked_url . '?autoselect_id=' . $autoselect_id . '#map';
-            } else {
-                $short_link_final_url = $linked_url . '?autoselect_id=' . $autoselect_id;
-            }
+            $short_link_final_url = $linked_url . '?autoselect_id=' . $autoselect_id;
         } else {
             $short_link_final_url = $linked_url;
         }
