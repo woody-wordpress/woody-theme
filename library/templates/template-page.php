@@ -108,6 +108,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             if (!empty($home_slider['landswpr_slides'])) {
                 $this->context['home_slider'] = Timber::compile($this->context['woody_components'][$home_slider['landswpr_woody_tpl']], $home_slider);
             }
+
+            $this->context['after_landswpr'] = $this->context['page_parts']['after_landswpr'];
         }
 
         /*********************************************

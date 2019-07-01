@@ -27,7 +27,7 @@
             {% endblock %}
 
             {% block home_slider %}
-                {% if home_slider | default %}
+                {% if home_slider|default %}
                     <div class="home-slider">
                         {{ home_slider }}
                         {% if bookblock|default or page_parts.custom_bookblock|default %}
@@ -43,7 +43,13 @@
                 {% endif %}
             {% endblock %}
 
-            {% block after_landswpr %}{% endblock %}
+            {% block after_landswpr %}
+                {% if after_landswpr|default %}
+                    <div class="after-landswpr">
+                        {{ after_landswpr }}
+                    </div>
+                {% endif %}
+            {% endblock %}
 
             {% if bookblock|default and not home_slider %}
                 <div class="bookblock-wrapper">
