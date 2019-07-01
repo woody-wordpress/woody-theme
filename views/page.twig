@@ -25,6 +25,7 @@
                     {{ page_teaser }}
                 </header>
             {% endblock %}
+
             {% block home_slider %}
                 {% if home_slider | default %}
                     <div class="home-slider">
@@ -41,16 +42,15 @@
                     </div>
                 {% endif %}
             {% endblock %}
-            {% if page_parts.after_landswpr|default %}
-            <div class="after-landswpr">
-                {{ page_parts.after_landswpr }}
-            </div>
-            {% endif %}
+
+            {% block after_landswpr %}{% endblock %}
+
             {% if bookblock|default and not home_slider %}
                 <div class="bookblock-wrapper">
                     {{ bookblock }}
                 </div>
             {% endif %}
+
             {% if playlist_tourism.content|default %}
                 <div class="page-playlist-wrapper">
                     {{ playlist_tourism.content }}
