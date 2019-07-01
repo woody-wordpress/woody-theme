@@ -365,7 +365,9 @@ function getManualFocus_data($layout)
     foreach ($layout['content_selection'] as $key => $item_wrapper) {
 
         $item_wrapper['content_selection_type'] = $layout['acf_fc_layout'] == 'focus_trip_components' ? 'existing_content': $item_wrapper['content_selection_type'] ;
-        $item_wrapper['existing_content']['content_selection'] = !empty($item_wrapper['trip_component']) ? $item_wrapper['trip_component']: $item_wrapper['existing_content']['content_selection'];
+        if(!empty($item_wrapper['existing_content']['trip_component'])){
+            $item_wrapper['existing_content']['content_selection'] = $item_wrapper['existing_content']['trip_component'];
+        }
 
         // La donnée de la vignette est saisie en backoffice
         if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
