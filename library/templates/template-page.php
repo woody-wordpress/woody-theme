@@ -119,7 +119,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             //TODO: Gérer le fichier gps pour affichage s/ carte
             $trip_infos['the_duration']['count_days'] = ($trip_infos['the_duration']['count_days']) ? humanDays($trip_infos['the_duration']['count_days']) : '';
             if($trip_infos['the_price']['price_type'] == 'component_based'){
-                $trip_infos = GroupQuotation::calculTripPrice($trip_infos, $this->context['post']->ID);
+                $trip_infos = GroupQuotation::calculTripPrice($trip_infos);
             }else{
                 $trip_infos['the_price']['price'] = (!empty($trip_infos['the_price']['price'])) ? str_replace('.', ',', $trip_infos['the_price']['price']) : '';
             }
