@@ -1,6 +1,6 @@
 {
     "key": "group_5bd0227a1bda3",
-    "title": "Choisir une page",
+    "title": "Lien rapide",
     "fields": [
         {
             "key": "field_5bd022eddaa51",
@@ -58,7 +58,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "70",
                 "class": "",
                 "id": ""
             },
@@ -69,6 +69,25 @@
             "min": "",
             "max": "",
             "step": ""
+        },
+        {
+            "key": "field_5d19c01bcd7b8",
+            "label": "Affichage carte par défaut",
+            "name": "playlist_map_display",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         {
             "key": "field_5bd02b27fb995",
@@ -122,5 +141,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Permet de choisir une page pour créer un lien rapide",
-    "modified": 1540384025
+    "modified": 1561970094
 }
