@@ -453,6 +453,17 @@ function formatFocusesData($layout, $current_post, $twigPaths)
             if (!empty($layout['focus_map_params']['tmaps_confid'])) {
                 $the_items['map_params']['tmaps_confid'] = $layout['focus_map_params']['tmaps_confid'];
             }
+            if(!empty($layout['focus_map_params']['map_height'])){
+                $the_items['map_params']['map_height'] = $layout['focus_map_params']['map_height'];
+            }
+            if(!empty($layout['focus_map_params']['map_zoom_auto'])){
+                $the_items['map_params']['map_zoom_auto'] = $layout['focus_map_params']['map_zoom_auto'];
+            }
+            if(!empty($layout['focus_map_params']['map_zoom'])){
+                if(empty($the_items['map_params']['map_zoom_auto']) || $the_items['map_params']['map_zoom_auto'] === false){
+                    $the_items['map_params']['map_zoom'] = $layout['focus_map_params']['map_zoom'];
+                }
+            }
         }
 
         $return = Timber::compile($twigPaths[$layout['woody_tpl']], $the_items);
