@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Polylang
  *
@@ -104,6 +105,8 @@ class WoodyTheme_Polylang
         __('Demander un devis', 'woody-theme');
         __('jour', 'woody-theme');
         __('jours', 'woody-theme');
+        __('personne', 'woody-theme');
+        __('personnes', 'woody-theme');
 
         // Woody blocs
         __("M'y rendre", 'woody-theme');
