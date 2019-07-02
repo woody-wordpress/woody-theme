@@ -115,12 +115,13 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
          * Compilation du bloc prix
          *********************************************/
         $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d', $this->context['post']);
+        $groupQuotation = new GroupQuotation;
         if (!empty($trip_infos['the_duration']['count_days']) || !empty($trip_infos['the_length']['length']) || !empty($trip_infos['the_price']['price'])) {
             //TODO: Gérer le fichier gps pour affichage s/ carte
             $trip_infos['the_duration']['count_days'] = ($trip_infos['the_duration']['count_days']) ? humanDays($trip_infos['the_duration']['count_days']) : '';
-            if($trip_infos['the_price']['price_type'] == 'component_based'){
-                $trip_infos = GroupQuotation::calculTripPrice($trip_infos);
-            }else{
+            if ($trip_infos['the_price']['price_type'] == 'component_based') {
+                $trip_infos = $groupQuotation->calculTripPrice($trip_infos);
+            } else {
                 $trip_infos['the_price']['price'] = (!empty($trip_infos['the_price']['price'])) ? str_replace('.', ',', $trip_infos['the_price']['price']) : '';
             }
             $this->context['trip_infos'] = Timber::compile($this->context['woody_components'][$trip_infos['tripinfos_woody_tpl']], $trip_infos);
