@@ -121,9 +121,13 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             $groupQuotation = new GroupQuotation;
             // On vérifie si le prix est calculé sur un ensemble de composant et on le définit le cas échéant
             if (!empty($trip_infos['the_price']['price_type']) && $trip_infos['the_price']['price_type'] == 'component_based') {
+                $price_fields = $trip_infos['the_price'];
+                // apply_filters('woody_get_price_from_components', $price_fields);
                 $trip_infos['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price']);
             }
             if (!empty($trip_infos['the_duration']['duration_unit']) && $trip_infos['the_duration']['duration_unit'] == 'component_based') {
+                $duration_fields = $trip_infos['the_duration'];
+                // apply_filters('woody_get_duration_from_components', $duration_fields);
                 $trip_infos['the_duration'] = $groupQuotation->calculTripDuration($trip_infos['the_duration']);
             }
         }
