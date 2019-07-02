@@ -107,6 +107,7 @@ class WoodyTheme_Polylang
         __('jours', 'woody-theme');
         __('personne', 'woody-theme');
         __('personnes', 'woody-theme');
+        //TODO: Récupérer les chaînes à traudire dans groupQuotation.php (plugin) et dans le tpl de devis (library)
 
         // Woody blocs
         __("M'y rendre", 'woody-theme');
