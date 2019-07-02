@@ -364,9 +364,10 @@ function getManualFocus_data($layout)
     $the_items = [];
     foreach ($layout['content_selection'] as $key => $item_wrapper) {
 
-        $item_wrapper['content_selection_type'] = $layout['acf_fc_layout'] == 'focus_trip_components' ? 'existing_content': $item_wrapper['content_selection_type'] ;
-        if(!empty($item_wrapper['existing_content']['trip_component'])){
+        $item_wrapper['content_selection_type'] = $layout['acf_fc_layout'] == 'focus_trip_components' ? 'existing_content' : $item_wrapper['content_selection_type'];
+        if (!empty($item_wrapper['existing_content']['trip_component'])) {
             $item_wrapper['existing_content']['content_selection'] = $item_wrapper['existing_content']['trip_component'];
+            $clickable = (!empty($item_wrapper['existing_content']['clickable_component'])) ? true : false;
         }
 
         // La donnée de la vignette est saisie en backoffice
@@ -380,7 +381,7 @@ function getManualFocus_data($layout)
                 continue;
             }
             if ($item['content_selection']->post_type == 'page') {
-                $post_preview = getPagePreview($layout, $item['content_selection']);
+                $post_preview = getPagePreview($layout, $item['content_selection'], $clickable);
             } elseif ($item['content_selection']->post_type == 'touristic_sheet') {
                 $post_preview = getTouristicSheetPreview($layout, $item['content_selection']->custom['touristic_sheet_id']);
             }
@@ -964,7 +965,7 @@ function getFocusBlockTitles($layout)
  * @return   data - Un tableau de données
  *
  */
-function getPagePreview($item_wrapper, $item)
+function getPagePreview($item_wrapper, $item, $clickable = true)
 {
     $data = [];
 
@@ -1011,7 +1012,7 @@ function getPagePreview($item_wrapper, $item)
 
     $data['the_peoples'] = $item->get_field('field_5b6d54a10381f');
 
-    if (!empty($item_wrapper['display_button'])) {
+    if ($clickable && !empty($item_wrapper['display_button'])) {
         $data['link']['link_label'] = getFieldAndFallBack($item, 'focus_button_title', $item);
         if (empty($data['link']['link_label'])) {
             $data['link']['link_label'] = __('Lire la suite', 'woody-theme');
@@ -1026,7 +1027,9 @@ function getPagePreview($item_wrapper, $item)
     $data['location']['lat'] = (!empty($item->get_field('post_latitude'))) ? $item->get_field('post_latitude') : '';
     $data['location']['lng'] = (!empty($item->get_field('post_longitude'))) ? $item->get_field('post_longitude') : '';
     $data['img']['attachment_more_data'] = (!empty($data['img'])) ? getAttachmentMoreData($data['img']['ID']) : '';
-    $data['link']['url'] = $item->get_path();
+    if ($clickable) {
+        $data['link']['url'] = $item->get_path();
+    }
 
     // $post_type = get_post_terms($item->ID, 'page_type');
 

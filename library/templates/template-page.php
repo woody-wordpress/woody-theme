@@ -123,14 +123,10 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             if (!empty($trip_infos['the_price']['price_type']) && $trip_infos['the_price']['price_type'] == 'component_based') {
                 $trip_infos['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price']);
             }
-            if (!empty($trip_infos['the_duration']['duration_type']) && $trip_infos['the_duration']['duration_type'] == 'component_based') {
-                $trip_infos['the_price'] = $groupQuotation->calculTripDuration($trip_infos['the_duration']);
+            if (!empty($trip_infos['the_duration']['duration_unit']) && $trip_infos['the_duration']['duration_unit'] == 'component_based') {
+                $trip_infos['the_duration'] = $groupQuotation->calculTripDuration($trip_infos['the_duration']);
             }
         }
-
-
-        wd($trip_infos['the_duration']);
-
 
         if (!empty($trip_infos['the_duration']['count_days']) || !empty($trip_infos['the_length']['length']) || !empty($trip_infos['the_price']['price'])) {
             //TODO: Gérer le fichier gps pour affichage s/ carte
