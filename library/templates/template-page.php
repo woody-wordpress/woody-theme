@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template
  *
@@ -18,8 +19,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     }
 
     protected function registerHooks()
-    {
-    }
+    { }
 
     protected function getHeaders()
     {
@@ -115,15 +115,27 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
          * Compilation du bloc prix
          *********************************************/
         $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d', $this->context['post']);
-        $groupQuotation = new GroupQuotation;
+
+        // Si le module groupe est activé
+        if (in_array('groups', $this->context['enabled_woody_options'])) {
+            $groupQuotation = new GroupQuotation;
+            // On vérifie si le prix est calculé sur un ensemble de composant et on le définit le cas échéant
+            if (!empty($trip_infos['the_price']['price_type']) && $trip_infos['the_price']['price_type'] == 'component_based') {
+                $trip_infos['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price']);
+            }
+            if (!empty($trip_infos['the_duration']['duration_type']) && $trip_infos['the_duration']['duration_type'] == 'component_based') {
+                $trip_infos['the_price'] = $groupQuotation->calculTripDuration($trip_infos['the_duration']);
+            }
+        }
+
+
+        wd($trip_infos['the_duration']);
+
+
         if (!empty($trip_infos['the_duration']['count_days']) || !empty($trip_infos['the_length']['length']) || !empty($trip_infos['the_price']['price'])) {
             //TODO: Gérer le fichier gps pour affichage s/ carte
             $trip_infos['the_duration']['count_days'] = ($trip_infos['the_duration']['count_days']) ? humanDays($trip_infos['the_duration']['count_days']) : '';
-            if ($trip_infos['the_price']['price_type'] == 'component_based') {
-                $trip_infos = $groupQuotation->calculTripPrice($trip_infos);
-            } else {
-                $trip_infos['the_price']['price'] = (!empty($trip_infos['the_price']['price'])) ? str_replace('.', ',', $trip_infos['the_price']['price']) : '';
-            }
+            $trip_infos['the_price']['price'] = (!empty($trip_infos['the_price']['price'])) ? str_replace('.', ',', $trip_infos['the_price']['price']) : '';
             $this->context['trip_infos'] = Timber::compile($this->context['woody_components'][$trip_infos['tripinfos_woody_tpl']], $trip_infos);
         } else {
             $trip_infos = [];
@@ -349,7 +361,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $query = filter_input_array($checkMethod, $checkAutoSelect, $add_non_existing = false);
         $query_GQV = filter_input_array(INPUT_GET, $checkQueryVars, $add_non_existing = false);
 
-        $query = array_merge((array)$query, (array)$query_GQV);
+        $query = array_merge((array) $query, (array) $query_GQV);
         foreach ($query as $key => $param) {
             if (!$param) {
                 unset($query[$key]);
