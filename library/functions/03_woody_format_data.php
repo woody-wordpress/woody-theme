@@ -1024,6 +1024,10 @@ function getPagePreview($item_wrapper, $item)
 
     if (!empty($item_wrapper['display_img'])) {
         $data['img'] = getFieldAndFallback($item, 'focus_img', $item, 'field_5b0e5ddfd4b1b');
+        if(empty($data['img'])){
+            $video = getFieldAndFallback($item, 'field_5b0e5df0d4b1c', $item);
+            $data['img'] = !empty($video) ? $video['movie_poster_file'] : '';
+        }
     }
 
     $data['location'] = [];
