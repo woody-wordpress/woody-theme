@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Twig filters
  *
@@ -189,8 +190,8 @@ class WoodyTheme_Twig_Filters
 
     function pluralizeUnit($amount, $singular_unit, $plural_unit)
     {
-        if ((int)$amount === 1) {
-            return $amount . ' ' . $singular_unit;
+        if ((int) $amount === 1 && empty($plural_unit)) {
+            return $amount . '<span class="unit"> ' . $singular_unit . '</span>';
         }
         return $amount . ' ' . $plural_unit;
     }
