@@ -74,7 +74,7 @@ class WoodyTheme_Enqueue_Assets
         // Deregister the jquery version bundled with WordPress & define another
         wp_deregister_script('jquery');
         wp_deregister_script('jquery-migrate');
-        $jQuery_version = '3.3.1';
+        $jQuery_version = '3.4.1';
         if ($this->isTouristicPlaylist || $this->isTouristicSheet) {
             $jQuery_version = '2.1.4';
         }

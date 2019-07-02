@@ -46,6 +46,7 @@ abstract class WoodyTheme_TemplateAbstract
         $data['globals']['post_title'] = $this->context['post_title'];
         $data['globals']['post_id'] = $this->context['post_id'];
         $data['globals']['page_type'] = $this->context['page_type'];
+        $data['globals']['sheet_id'] = $this->context['sheet_id'];
         $data['globals']['woody_options_pages'] = $this->getWoodyOptionsPagesValues();
 
         return $data;
@@ -82,7 +83,9 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['post'] = false;
         $this->context['post_id'] = false;
         $this->context['post_title'] = false;
+        $this->context['sheet_id'] = false;
         $this->context['page_type'] = false;
+        $this->context['metas'] = [];
 
         $this->context['enabled_woody_options'] = WOODY_OPTIONS;
 
@@ -100,6 +103,9 @@ abstract class WoodyTheme_TemplateAbstract
             if (!empty($this->context['post'])) {
                 $this->context['post_title'] = $this->context['post']->post_title;
                 $this->context['post_id'] = $this->context['post']->ID;
+                if (!empty($this->context['post_id'])) {
+                    $this->context['sheet_id'] = get_post_type($this->context['post_id']) === 'touristic_sheet' ? get_post_meta($this->context['post_id'], 'touristic_sheet_id')[0] : false;
+                }
             }
         }
 
@@ -171,6 +177,8 @@ abstract class WoodyTheme_TemplateAbstract
             'post_id' => $this->context['post_id'],
             'post_title' => $this->context['post_title'],
             'page_type' => $this->context['page_type'],
+            'sheet_id'  => $this->context['sheet_id'],
+            'woody_options_pages' => $this->getWoodyOptionsPagesValues()
         ];
         $this->context['globals'] = json_encode($globals);
     }

@@ -1,3 +1,11 @@
 {% extends "page.twig" %}
 
 {% block page_teaser %}{% endblock %}
+
+{% block after_landswpr %}
+    {% if page_parts.after_landswpr|default %}
+        <div class="after-landswpr">
+            {{ page_parts.after_landswpr }}
+        </div>
+    {% endif %}
+{% endblock %}

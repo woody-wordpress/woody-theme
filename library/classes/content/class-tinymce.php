@@ -11,6 +11,7 @@ class WoodyTheme_Tinymce
         add_filter('mce_buttons_2', array($this, 'tinymceAddButtons'));
         add_filter('mce_external_plugins', array($this, 'woodyAnchorButtonLoadJs' ));
         add_filter('tiny_mce_before_init', array($this, 'tinymceRegisterStyleSelect'));
+        add_filter( 'mce_buttons',  array($this,'remove_button_from_tinymce'));
         // add_action('init', array($this, 'tinymceAddStylesheet'));
     }
 
@@ -61,6 +62,18 @@ class WoodyTheme_Tinymce
     {
         $plugins['woody_anchor'] = get_template_directory_uri() . '/src/js/admin/plugins/woody_anchor.js';
         return $plugins;
+    }
+
+    public function remove_button_from_tinymce( $buttons ) {
+        $remove_buttons = array(
+            'wp_more', // read more link
+        );
+        foreach ( $buttons as $button_key => $button_value ) {
+            if ( in_array( $button_value, $remove_buttons ) ) {
+                 unset( $buttons[$button_key] );
+            }
+        }
+        return $buttons;
     }
 
     // public function tinymceAddStylesheet()

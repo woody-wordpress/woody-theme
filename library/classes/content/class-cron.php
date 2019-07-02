@@ -22,5 +22,29 @@ class WoodyTheme_Cron
                 die();
             }
         });
+
+        add_filter('cron_schedules', [$this, 'cronSchedules']);
+    }
+
+    public function cronSchedules($schedules)
+    {
+        // Adds once weekly to the existing schedules.
+        $schedules['weekly'] = [
+            'interval' => 604800,
+            'display' => __('Once Weekly')
+        ];
+
+        // Adds once monthly to the existing schedules.
+        $schedules['monthly'] = [
+            'interval' => 2592000,
+            'display' => __('Once Monthly')
+        ];
+
+        $schedules['always'] = [
+            'interval' => 1,
+            'display' => __('Always')
+        ];
+
+        return $schedules;
     }
 }

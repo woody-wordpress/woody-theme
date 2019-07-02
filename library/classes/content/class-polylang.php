@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Polylang
  *
@@ -68,6 +69,7 @@ class WoodyTheme_Polylang
         // Yoast
         __("Page non trouvée %%sep%% %%sitename%%", 'woody-theme');
         __("Erreur 404 : Page non trouvée", 'woody-theme');
+        __("Aller à la page d\'accueil", "woody-theme");
 
         // Date
         __("Lundi", 'woody-theme');
@@ -90,9 +92,24 @@ class WoodyTheme_Polylang
         __("Novembre", 'woody-theme');
         __("Décembre", 'woody-theme');
 
+        // Trip infos
+        __('A partir de', 'woody-theme');
+        __('à partir de', 'woody-theme');
+        __('heure', 'woody-theme');
+        __('heures', 'woody-theme');
+        __('minute', 'woody-theme');
+        __('minutes', 'woody-theme');
+        __('min', 'woody-theme');
+        __('max', 'woody-theme');
+        __('pers.', 'woody-theme');
+        __('Demander un devis', 'woody-theme');
+        __('jour', 'woody-theme');
+        __('jours', 'woody-theme');
+        __('personne', 'woody-theme');
+        __('personnes', 'woody-theme');
+
         // Woody blocs
         __("M'y rendre", 'woody-theme');
-        __("Ajouter à mes favoris", 'woody-theme');
         __("Voir l'itinéraire", 'woody-theme');
         __("Voir la vidéo", 'woody-theme');
         __("Affiner ma recherche", 'woody-theme');
@@ -130,6 +147,7 @@ class WoodyTheme_Polylang
         __('Choisissez vos dates de réservation', 'woody-theme');
         __('Changer de saison', 'woody-theme');
         __('Réservable', 'woody-theme');
+        __('Télécharger', 'woody-theme');
 
         // Weather
         __('Bas', 'woody-theme');
@@ -174,5 +192,10 @@ class WoodyTheme_Polylang
         __('Après-midi', 'woody-theme');
         __('Soirée', 'woody-theme');
         __('Nuit', 'woody-theme');
+
+        //Actions
+        __('Ajouter', 'woody-theme');
+        __('Supprimer', 'woody-theme');
+        __('Cette liste est vide actuellement. Naviguez et ajoutez des pages !', 'woody-theme');
     }
 }

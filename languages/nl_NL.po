@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.6.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2019-05-06T14:05:34+02:00\n"
-"PO-Revision-Date: 2019-05-06 14:09+0200\n"
-"Last-Translator: POIROUX Léo <leo@raccourci.fr>\n"
+"POT-Creation-Date: 2019-06-25T10:30:23+02:00\n"
+"PO-Revision-Date: 2019-06-25 10:34+0200\n"
+"Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.3\n"
 "X-Domain: woody-theme\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -29,97 +29,97 @@ msgid "Raccourci Agency"
 msgstr "Raccourci Agency"
 
 #: library/classes/content/class-polylang.php:32
-#: library/classes/content/class-polylang.php:73
+#: library/classes/content/class-polylang.php:74
 msgid "Lundi"
 msgstr "Maandag"
 
 #: library/classes/content/class-polylang.php:33
-#: library/classes/content/class-polylang.php:74
+#: library/classes/content/class-polylang.php:75
 msgid "Mardi"
 msgstr "Dinsdag"
 
 #: library/classes/content/class-polylang.php:34
-#: library/classes/content/class-polylang.php:75
+#: library/classes/content/class-polylang.php:76
 msgid "Mercredi"
 msgstr "Woensdag"
 
 #: library/classes/content/class-polylang.php:35
-#: library/classes/content/class-polylang.php:76
+#: library/classes/content/class-polylang.php:77
 msgid "Jeudi"
 msgstr "Donderdag"
 
 #: library/classes/content/class-polylang.php:36
-#: library/classes/content/class-polylang.php:77
+#: library/classes/content/class-polylang.php:78
 msgid "Vendredi"
 msgstr "Vrijdag"
 
 #: library/classes/content/class-polylang.php:37
-#: library/classes/content/class-polylang.php:78
+#: library/classes/content/class-polylang.php:79
 msgid "Samedi"
 msgstr "Zaterdag"
 
 #: library/classes/content/class-polylang.php:38
-#: library/classes/content/class-polylang.php:79
+#: library/classes/content/class-polylang.php:80
 msgid "Dimanche"
 msgstr "Zondag"
 
 #: library/classes/content/class-polylang.php:45
-#: library/classes/content/class-polylang.php:80
+#: library/classes/content/class-polylang.php:81
 msgid "Janvier"
 msgstr "Januari"
 
 #: library/classes/content/class-polylang.php:46
-#: library/classes/content/class-polylang.php:81
+#: library/classes/content/class-polylang.php:82
 msgid "Février"
 msgstr "Februari"
 
 #: library/classes/content/class-polylang.php:47
-#: library/classes/content/class-polylang.php:82
+#: library/classes/content/class-polylang.php:83
 msgid "Mars"
 msgstr "Maart"
 
 #: library/classes/content/class-polylang.php:48
-#: library/classes/content/class-polylang.php:83
+#: library/classes/content/class-polylang.php:84
 msgid "Avril"
 msgstr "April"
 
 #: library/classes/content/class-polylang.php:49
-#: library/classes/content/class-polylang.php:84
+#: library/classes/content/class-polylang.php:85
 msgid "Mai"
 msgstr "Mei"
 
 #: library/classes/content/class-polylang.php:50
-#: library/classes/content/class-polylang.php:85
+#: library/classes/content/class-polylang.php:86
 msgid "Juin"
 msgstr "Juni"
 
 #: library/classes/content/class-polylang.php:51
-#: library/classes/content/class-polylang.php:86
+#: library/classes/content/class-polylang.php:87
 msgid "Juillet"
 msgstr "Juli"
 
 #: library/classes/content/class-polylang.php:52
-#: library/classes/content/class-polylang.php:87
+#: library/classes/content/class-polylang.php:88
 msgid "Août"
 msgstr "Augustus"
 
 #: library/classes/content/class-polylang.php:53
-#: library/classes/content/class-polylang.php:88
+#: library/classes/content/class-polylang.php:89
 msgid "Septembre"
 msgstr "September"
 
 #: library/classes/content/class-polylang.php:54
-#: library/classes/content/class-polylang.php:89
+#: library/classes/content/class-polylang.php:90
 msgid "Octobre"
 msgstr "Oktober"
 
 #: library/classes/content/class-polylang.php:55
-#: library/classes/content/class-polylang.php:90
+#: library/classes/content/class-polylang.php:91
 msgid "Novembre"
 msgstr "November"
 
 #: library/classes/content/class-polylang.php:56
-#: library/classes/content/class-polylang.php:91
+#: library/classes/content/class-polylang.php:92
 msgid "Décembre"
 msgstr "December"
 
@@ -131,13 +131,13 @@ msgstr "Pagina niet gevonden %%sep%% %%sitename%%"
 msgid "Erreur 404 : Page non trouvée"
 msgstr "Error 404: Pagina niet gevonden"
 
-#: library/classes/content/class-polylang.php:94
-msgid "M'y rendre"
-msgstr "Routebeschrijving"
+#: library/classes/content/class-polylang.php:71
+msgid "Aller à la page d\\'accueil"
+msgstr "Ga naar de startpagina"
 
 #: library/classes/content/class-polylang.php:95
-msgid "Ajouter à mes favoris"
-msgstr "Toevoegen aan mijn favorieten"
+msgid "M'y rendre"
+msgstr "Routebeschrijving"
 
 #: library/classes/content/class-polylang.php:96
 msgid "Voir l'itinéraire"
@@ -268,14 +268,14 @@ msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "Misschien is de pagina due u zoekt hier?"
 
 #: library/classes/content/class-polylang.php:128
-#: library/functions/03_woody_format_data.php:862
-#: library/functions/03_woody_format_data.php:992
+#: library/functions/03_woody_format_data.php:890
+#: library/functions/03_woody_format_data.php:1010
 msgid "Lire la suite"
 msgstr "Lees meer over"
 
 #: library/classes/content/class-polylang.php:129
 msgid "Que voulez-vous réserver ?"
-msgstr ""
+msgstr "Wat wilt u reserveren?"
 
 #: library/classes/content/class-polylang.php:130
 msgid "Choisissez vos dates de réservation"
@@ -285,157 +285,178 @@ msgstr "Kies uw boekingsdata"
 msgid "Changer de saison"
 msgstr "Verandering van seizoen"
 
-#: library/classes/content/class-polylang.php:134
+#: library/classes/content/class-polylang.php:132
+msgid "Réservable"
+msgstr "Reserveerbaar"
+
+#: library/classes/content/class-polylang.php:133
+#: library/functions/03_woody_format_data.php:783
+msgid "Télécharger"
+msgstr "Downloaden"
+
+#: library/classes/content/class-polylang.php:136
 msgid "Bas"
 msgstr "Bodem"
 
-#: library/classes/content/class-polylang.php:135
+#: library/classes/content/class-polylang.php:137
 msgid "Haut"
 msgstr "Top"
 
-#: library/classes/content/class-polylang.php:136
+#: library/classes/content/class-polylang.php:138
 msgid "Vent"
 msgstr "Wind"
 
-#: library/classes/content/class-polylang.php:137
+#: library/classes/content/class-polylang.php:139
 msgid "Température de la mer"
 msgstr "Temperatuur van de zee"
 
-#: library/classes/content/class-polylang.php:138
+#: library/classes/content/class-polylang.php:140
 msgid "Humidité"
 msgstr "Vochtigheid"
 
-#: library/classes/content/class-polylang.php:139
+#: library/classes/content/class-polylang.php:141
 msgid "ISO 0°"
 msgstr "ISO 0°"
 
-#: library/classes/content/class-polylang.php:140
+#: library/classes/content/class-polylang.php:142
 msgid "Limite Pluie/Neige"
 msgstr "Grens Regen/Sneeuw"
 
-#: library/classes/content/class-polylang.php:141
+#: library/classes/content/class-polylang.php:143
 msgid "Ensoleillé"
 msgstr "Zonnig"
 
-#: library/classes/content/class-polylang.php:142
+#: library/classes/content/class-polylang.php:144
 msgid "Pluie"
 msgstr "Regen"
 
-#: library/classes/content/class-polylang.php:143
+#: library/classes/content/class-polylang.php:145
 msgid "Neige"
 msgstr "Sneeuw"
 
-#: library/classes/content/class-polylang.php:144
+#: library/classes/content/class-polylang.php:146
 msgid "Grésil"
 msgstr "Ijzel"
 
-#: library/classes/content/class-polylang.php:145
+#: library/classes/content/class-polylang.php:147
 msgid "Venteux"
 msgstr "Winderig"
 
-#: library/classes/content/class-polylang.php:146
+#: library/classes/content/class-polylang.php:148
 msgid "Brouillard"
 msgstr "Mist"
 
-#: library/classes/content/class-polylang.php:147
+#: library/classes/content/class-polylang.php:149
 msgid "Nuageux"
 msgstr "Bewolkt"
 
-#: library/classes/content/class-polylang.php:148
+#: library/classes/content/class-polylang.php:150
 msgid "Éclaircies"
 msgstr "Gedeeltelijk Bewolkt"
 
-#: library/classes/content/class-polylang.php:149
+#: library/classes/content/class-polylang.php:151
 msgid "Grêle"
 msgstr "Hagel"
 
-#: library/classes/content/class-polylang.php:150
+#: library/classes/content/class-polylang.php:152
 msgid "Tempête"
 msgstr "Storm"
 
-#: library/classes/content/class-polylang.php:151
+#: library/classes/content/class-polylang.php:153
 msgid "Verglas"
 msgstr "Ljs op de weg"
 
-#: library/classes/content/class-polylang.php:154
+#: library/classes/content/class-polylang.php:156
 msgid "Nord Nord-Est"
 msgstr "Noord Noordoosten"
 
-#: library/classes/content/class-polylang.php:155
+#: library/classes/content/class-polylang.php:157
 msgid "Nord-Est"
 msgstr "Noordoosten"
 
-#: library/classes/content/class-polylang.php:156
+#: library/classes/content/class-polylang.php:158
 msgid "Est Nord-Est"
 msgstr "Oost Noordoosten"
 
-#: library/classes/content/class-polylang.php:157
+#: library/classes/content/class-polylang.php:159
 msgid "Est"
 msgstr "Oost"
 
-#: library/classes/content/class-polylang.php:158
+#: library/classes/content/class-polylang.php:160
 msgid "Est Sud-Est"
 msgstr "Oost Zuidoosten"
 
-#: library/classes/content/class-polylang.php:159
+#: library/classes/content/class-polylang.php:161
 msgid "Sud-Est"
 msgstr "Zuidoosten"
 
-#: library/classes/content/class-polylang.php:160
+#: library/classes/content/class-polylang.php:162
 msgid "Sud Sud-Est"
 msgstr "Zuid Zuidoosten"
 
-#: library/classes/content/class-polylang.php:161
+#: library/classes/content/class-polylang.php:163
 msgid "Sud"
 msgstr "Zuid"
 
-#: library/classes/content/class-polylang.php:162
+#: library/classes/content/class-polylang.php:164
 msgid "Sud Sud-Ouest"
 msgstr "Zuid Zuidwesten"
 
-#: library/classes/content/class-polylang.php:163
+#: library/classes/content/class-polylang.php:165
 msgid "Sud-Ouest"
 msgstr "Zuidwesten"
 
-#: library/classes/content/class-polylang.php:164
+#: library/classes/content/class-polylang.php:166
 msgid "Ouest Sud-Ouest"
 msgstr "West Zuidwesten"
 
-#: library/classes/content/class-polylang.php:165
+#: library/classes/content/class-polylang.php:167
 msgid "Ouest"
 msgstr "West"
 
-#: library/classes/content/class-polylang.php:166
+#: library/classes/content/class-polylang.php:168
 msgid "Ouest Nord-Ouest"
 msgstr "West Noordwest"
 
-#: library/classes/content/class-polylang.php:167
+#: library/classes/content/class-polylang.php:169
 msgid "Nord-Ouest"
 msgstr "Noordwest"
 
-#: library/classes/content/class-polylang.php:168
+#: library/classes/content/class-polylang.php:170
 msgid "Nord Nord-Ouest"
 msgstr "Noord Noordwest"
 
-#: library/classes/content/class-polylang.php:169
+#: library/classes/content/class-polylang.php:171
 msgid "Nord"
 msgstr "Noord"
 
-#: library/classes/content/class-polylang.php:172
+#: library/classes/content/class-polylang.php:174
 msgid "Matin"
 msgstr "Ochtend"
 
-#: library/classes/content/class-polylang.php:173
+#: library/classes/content/class-polylang.php:175
 msgid "Après-midi"
 msgstr "Namiddag"
 
-#: library/classes/content/class-polylang.php:174
+#: library/classes/content/class-polylang.php:176
 msgid "Soirée"
 msgstr "Avond"
 
-#: library/classes/content/class-polylang.php:175
+#: library/classes/content/class-polylang.php:177
 msgid "Nuit"
 msgstr "Nacht"
+
+#: library/classes/content/class-polylang.php:180
+msgid "Ajouter"
+msgstr "Toevoegen"
+
+#: library/classes/content/class-polylang.php:181
+msgid "Supprimer"
+msgstr "Verwijderen"
+
+#: library/classes/content/class-polylang.php:182
+msgid "Cette liste est vide actuellement. Naviguez et ajoutez des pages !"
+msgstr "Deze lijst is nu leeg. Bladeren en pagina’s toevoegen!"
 
 #: library/templates/template-page.php:82
 msgid "Oups !"
@@ -453,12 +474,12 @@ msgstr ""
 "De pagina die u zoekt, is misschien verwijderd of is tijdelijk niet "
 "beschikbaar."
 
-#: library/templates/template.php:296
+#: library/templates/template.php:322
 msgid "Nos suggestions"
 msgstr "Onze suggesties"
 
-#~ msgid "Aller à la page d'accueil"
-#~ msgstr "Ga naar de startpagina"
+#~ msgid "Ajouter à mes favoris"
+#~ msgstr "Toevoegen aan mijn favorieten"
 
 #~ msgid "France"
 #~ msgstr "Frankrijk"

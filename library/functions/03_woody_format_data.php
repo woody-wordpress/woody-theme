@@ -155,6 +155,7 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
     $the_items = [];
     $tax_query = [];
 
+
     // Création du paramètre tax_query pour la wp_query
     // Référence : https://codex.wordpress.org/Class_Reference/WP_Query
     if (!empty($query_form['focused_content_type'])) {
@@ -324,6 +325,16 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
     // On transforme la donnée des posts récupérés pour coller aux templates de blocs Woody
     if (!empty($query_result->posts)) {
         foreach ($query_result->posts as $key => $post) {
+
+            // On vérifie si la page est de type miroir
+            $page_type = get_the_terms($post->ID, 'page_type');
+            if ($page_type[0]->slug == 'mirror_page') {
+                $mirror = get_field('mirror_page_reference', $post->ID);
+                if (!empty(get_post($mirror))) {
+                    $post = get_post($mirror);
+                }
+            }
+
             $data = [];
             $post = Timber::get_post($post->ID);
             $data = getPagePreview($query_form, $post);
@@ -441,6 +452,17 @@ function formatFocusesData($layout, $current_post, $twigPaths)
         if (!empty($layout['focus_map_params'])) {
             if (!empty($layout['focus_map_params']['tmaps_confid'])) {
                 $the_items['map_params']['tmaps_confid'] = $layout['focus_map_params']['tmaps_confid'];
+            }
+            if(!empty($layout['focus_map_params']['map_height'])){
+                $the_items['map_params']['map_height'] = $layout['focus_map_params']['map_height'];
+            }
+            if(!empty($layout['focus_map_params']['map_zoom_auto'])){
+                $the_items['map_params']['map_zoom_auto'] = $layout['focus_map_params']['map_zoom_auto'];
+            }
+            if(!empty($layout['focus_map_params']['map_zoom'])){
+                if(empty($the_items['map_params']['map_zoom_auto']) || $the_items['map_params']['map_zoom_auto'] === false){
+                    $the_items['map_params']['map_zoom'] = $layout['focus_map_params']['map_zoom'];
+                }
             }
         }
 
@@ -703,8 +725,12 @@ function formatGeomapData($layout, $twigPaths)
     // Calcul center of map
     $sum_lat = $sum_lng = 0;
     foreach ($layout['markers'] as $key => $marker) {
-        if (!empty($marker['map_position']['lat'])) $sum_lat += $marker['map_position']['lat'];
-        if (!empty($marker['map_position']['lng'])) $sum_lng += $marker['map_position']['lng'];
+        if (!empty($marker['map_position']['lat'])) {
+            $sum_lat += $marker['map_position']['lat'];
+        }
+        if (!empty($marker['map_position']['lng'])) {
+            $sum_lng += $marker['map_position']['lng'];
+        }
     }
     $layout['default_lat'] = $sum_lat / count($layout['markers']);
     $layout['default_lng'] = $sum_lng / count($layout['markers']);
@@ -760,12 +786,21 @@ function getCustomPreview($item, $item_wrapper = null)
 
         ] : '',
         'description' => (!empty($item['description'])) ? getTransformedPattern($item['description']) : '',
-        'link' => [
+    ];
+
+    if ($item['action_type'] == 'file' && !empty($item['file']['url'])) {
+        $data['link'] = [
+            'url' => (!empty($item['file']['url'])) ? $item['file']['url'] : '',
+            'title' => __('Télécharger', 'woody-theme'),
+            'target' => '_blank',
+        ];
+    } else {
+        $data['link'] = [
             'url' => (!empty($item['link']['url'])) ? $item['link']['url'] : '',
             'title' => (!empty($item['link']['title'])) ? $item['link']['title'] : '',
             'target' => (!empty($item['link']['target'])) ? $item['link']['target'] : '',
-        ],
-    ];
+        ];
+    }
 
 
     // On affiche le bouton si "Afficher le bouton" est coché
@@ -896,6 +931,7 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
             }
         }
     }
+    $data['sheet_id'] = $sheet_id;
     return $data;
 }
 
@@ -988,6 +1024,10 @@ function getPagePreview($item_wrapper, $item)
 
     if (!empty($item_wrapper['display_img'])) {
         $data['img'] = getFieldAndFallback($item, 'focus_img', $item, 'field_5b0e5ddfd4b1b');
+        if(empty($data['img'])){
+            $video = getFieldAndFallback($item, 'field_5b0e5df0d4b1c', $item);
+            $data['img'] = !empty($video) ? $video['movie_poster_file'] : '';
+        }
     }
 
     $data['location'] = [];
@@ -1185,7 +1225,7 @@ function formatVisualEffectData($effects)
 
 function getSectionBannerFiles($filename)
 {
-    if (file_exists(get_stylesheet_directory() . '/views/section_banner/section_' . $filename)) {
+    if (file_exists(get_stylesheet_directory() . '/views/section_banner/section_' . $filename . '.twig')) {
         $file = file_get_contents(get_stylesheet_directory() . '/views/section_banner/section_' . $filename . '.twig');
     } else {
         $file = file_get_contents(get_template_directory() . '/views/section_banner/section_' . $filename . '.twig');
@@ -1215,10 +1255,14 @@ function getTransformedPattern($str, $item = null)
             $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), array(), 'json');
 
             if (!empty($playlist)) {
-                $nbResults = $playlist['playlist']['total'];
-                foreach ($matches as $match) {
-                    $new_str = str_replace(['%nombre%'], $nbResults, $match);
-                    $return = preg_replace($pattern, $new_str, $str);
+                $nbResults = !empty($playlist['playlist']['total']) ? $playlist['playlist']['total'] : false;
+                if (!$nbResults) {
+                    $return = $str;
+                } else {
+                    foreach ($matches as $match) {
+                        $new_str = str_replace(['%nombre%'], $nbResults, $match);
+                        $return = preg_replace($pattern, $new_str, $str);
+                    }
                 }
             }
         } else {
