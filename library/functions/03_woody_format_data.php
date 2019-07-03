@@ -755,6 +755,11 @@ function formatGeomapData($layout, $twigPaths)
             $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker);
         }
     }
+    if(!empty($layout['routes'])){
+        for ($i = 0 ; $i < sizeOf($layout['routes']) ; $i++) {
+            $layout['routes'][$i]['route_file'] = file_get_contents(get_attached_file($layout['routes'][$i]['route_file']['ID']));
+        }
+    }
 
     $return = Timber::compile($twigPaths[$layout['woody_tpl']], $layout);
     return $return;
