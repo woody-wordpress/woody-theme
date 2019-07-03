@@ -431,13 +431,16 @@ class WoodyTheme_ACF
         $terms = [];
         $hero_terms = [];
         $taxonomies = get_taxonomies();
+        $withIcon = get_field('page_heading_term_icon');
 
 
         foreach ($taxonomies as $taxonomy) {
             if ($taxonomy == 'places' || $taxonomy == 'seasons' || $taxonomy == 'themes') {
                 if (is_array(get_the_terms(get_the_id(), $taxonomy))) {
                     $terms = array_merge($terms, get_the_terms(get_the_id(), $taxonomy));
-                    $terms = apply_filters('woody_taxonomies_with_icons', $terms);
+                    if ($withIcon) {
+                        $terms = apply_filters('woody_taxonomies_with_icons', $terms);
+                    }
                 }
             }
         }
