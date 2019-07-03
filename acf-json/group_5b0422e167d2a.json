@@ -193,14 +193,23 @@
                 "wicon-004-station-forfait": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-004-station-forfait\"><\/span><span>Station forfait<\/span><\/div>",
                 "wicon-000-station-teleski": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-000-station-teleski\"><\/span><span>Station teleski<\/span><\/div>",
                 "wicon-013-station-soleil": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-013-station-soleil\"><\/span><span>Station soleil<\/span><\/div>",
-                "wicon-008-station-ski": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-008-station-ski\"><\/span><span>Station ski<\/span><\/div>"
+                "wicon-008-station-ski": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-008-station-ski\"><\/span><span>Station ski<\/span><\/div>",
+                "wicon-059-favoris-moins": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-059-favoris-moins\"><\/span><span>Favoris moins<\/span><\/div>",
+                "wicon-058-favoris-plus": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-058-favoris-plus\"><\/span><span>Favoris plus<\/span><\/div>",
+                "wicon-061-corbeille": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-061-corbeille\"><\/span><span>Corbeille<\/span><\/div>",
+                "wicon-060-favoris": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-060-favoris\"><\/span><span>Favoris<\/span><\/div>",
+                "wicon--00-gourmand": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--00-gourmand\"><\/span><span>Gourmand<\/span><\/div>",
+                "wicon--02-histoire": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--02-histoire\"><\/span><span>Histoire<\/span><\/div>",
+                "wicon--03-en-couple": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--03-en-couple\"><\/span><span>En couple<\/span><\/div>",
+                "wicon--01-famille": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--01-famille\"><\/span><span>Famille<\/span><\/div>",
+                "wicon--04-nature": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--04-nature\"><\/span><span>Nature<\/span><\/div>"
             },
             "default_value": [],
             "allow_null": 1,
             "multiple": 0,
-            "ui": 1,
-            "ajax": 1,
+            "ui": 0,
             "return_format": "value",
+            "ajax": 0,
             "placeholder": ""
         },
         {
@@ -407,5 +416,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Une icône et un champ lien utilisés en clone dans d'autres groupes",
-    "modified": 1551449262
+    "modified": 1561725997
 }
