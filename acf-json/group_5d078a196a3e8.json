@@ -19,7 +19,7 @@
             "library": "all",
             "min_size": "",
             "max_size": "",
-            "mime_types": "kml,gpx,json"
+            "mime_types": "kml,gpx,json,geojson"
         },
         {
             "key": "field_5d078b9ec3b73",
@@ -98,5 +98,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1561456892
+    "modified": 1562081542
 }
