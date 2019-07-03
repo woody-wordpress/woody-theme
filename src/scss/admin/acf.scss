@@ -666,3 +666,14 @@
         }
     }
 }
+
+// Cache les icônes des thématiques du Hero dans le back-office
+.acf-field-5ce3b93aa6252 {
+    .acf-checkbox-list {
+        input[type="checkbox"] {
+            ~span[class^="wicon-"] {
+                display: none;
+            }
+        }
+    }
+}

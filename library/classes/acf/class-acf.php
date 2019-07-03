@@ -432,17 +432,20 @@ class WoodyTheme_ACF
         $hero_terms = [];
         $taxonomies = get_taxonomies();
 
+
         foreach ($taxonomies as $taxonomy) {
             if ($taxonomy == 'places' || $taxonomy == 'seasons' || $taxonomy == 'themes') {
                 if (is_array(get_the_terms(get_the_id(), $taxonomy))) {
                     $terms = array_merge($terms, get_the_terms(get_the_id(), $taxonomy));
+                    $terms = apply_filters('woody_taxonomies_with_icons', $terms);
                 }
             }
         }
 
         if (!empty($terms)) {
             foreach ($terms as $term) {
-                $hero_terms[] = $term->name;
+                $withIcon = !empty($term->term_icon) ? '<span class="' . $term->term_icon . '"></span>' : '';
+                $hero_terms[$term->term_id] = $withIcon . '<span class="label">' . $term->name . '</span>';
             }
         }
 

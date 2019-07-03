@@ -262,7 +262,7 @@ function getPrimaryTerm($taxonomy, $post_id, $fields = [])
 
 /**
  *
- * Nom : getPostAncestors
+ * Nom : getPostRootAncestor
  * Auteur : Thomas Navarro
  * Return : Retourne le parent racine d'un post
  * @param    postID INT : id d'une page enfant
