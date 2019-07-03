@@ -757,7 +757,14 @@ function formatGeomapData($layout, $twigPaths)
     }
     if(!empty($layout['routes'])){
         for ($i = 0 ; $i < sizeOf($layout['routes']) ; $i++) {
-            $layout['routes'][$i]['route_file'] = file_get_contents(get_attached_file($layout['routes'][$i]['route_file']['ID']));
+            $filename = get_attached_file($layout['routes'][$i]['route_file']['ID']);
+            $filetype = wp_check_filetype($filename);
+
+            if($filetype['ext'] == 'json' || $filetype['ext'] == 'geojson'){
+                $layout['routes'][$i]['route_file'] = file_get_contents($filename);
+            }else{
+                // TODO: convert GPX/KML/KMX to geoJSON
+            }
         }
     }
 
