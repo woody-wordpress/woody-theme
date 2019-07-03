@@ -55,30 +55,6 @@
             "step": "0.1",
             "prepend": "",
             "append": ""
-        },
-        {
-            "key": "field_5d079be6b24ba",
-            "label": "Propriétés du trait",
-            "name": "stroke_properties",
-            "type": "radio",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "solid": "Continu",
-                "dashed": "Pointillé"
-            },
-            "allow_null": 0,
-            "other_choice": 0,
-            "default_value": "",
-            "layout": "vertical",
-            "return_format": "value",
-            "save_other_choice": 0
         }
     ],
     "location": [
