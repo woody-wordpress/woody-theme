@@ -362,6 +362,7 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
 function getManualFocus_data($layout)
 {
     $the_items = [];
+    $clickable = true;
     foreach ($layout['content_selection'] as $key => $item_wrapper) {
 
         $item_wrapper['content_selection_type'] = $layout['acf_fc_layout'] == 'focus_trip_components' ? 'existing_content' : $item_wrapper['content_selection_type'];
