@@ -1,10 +1,13 @@
 <?php
+
 /**
  * Template
  *
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
+
+use Woody\Modules\GroupQuotation\GroupQuotation;
 
 class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 {
@@ -116,6 +119,23 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
          * Compilation du bloc prix
          *********************************************/
         $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d', $this->context['post']);
+
+        // Si le module groupe est activé
+        if (in_array('groups', $this->context['enabled_woody_options'])) {
+            $groupQuotation = new GroupQuotation;
+            // On vérifie si le prix est calculé sur un ensemble de composant et on le définit le cas échéant
+            if (!empty($trip_infos['the_price']['price_type']) && $trip_infos['the_price']['price_type'] == 'component_based') {
+                $price_fields = $trip_infos['the_price'];
+                // apply_filters('woody_get_price_from_components', $price_fields);
+                $trip_infos['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price']);
+            }
+            if (!empty($trip_infos['the_duration']['duration_unit']) && $trip_infos['the_duration']['duration_unit'] == 'component_based') {
+                $duration_fields = $trip_infos['the_duration'];
+                // apply_filters('woody_get_duration_from_components', $duration_fields);
+                $trip_infos['the_duration'] = $groupQuotation->calculTripDuration($trip_infos['the_duration']);
+            }
+        }
+
         if (!empty($trip_infos['the_duration']['count_days']) || !empty($trip_infos['the_length']['length']) || !empty($trip_infos['the_price']['price'])) {
             //TODO: Gérer le fichier gps pour affichage s/ carte
             $trip_infos['the_duration']['count_days'] = ($trip_infos['the_duration']['count_days']) ? humanDays($trip_infos['the_duration']['count_days']) : '';
@@ -346,7 +366,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $query = filter_input_array($checkMethod, $checkAutoSelect, $add_non_existing = false);
         $query_GQV = filter_input_array(INPUT_GET, $checkQueryVars, $add_non_existing = false);
 
-        $query = array_merge((array)$query, (array)$query_GQV);
+        $query = array_merge((array) $query, (array) $query_GQV);
         foreach ($query as $key => $param) {
             if (!$param) {
                 unset($query[$key]);
