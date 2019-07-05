@@ -127,3 +127,11 @@ window.cookieconsent.initialise({
         }
     }
 })
+
+$('.cc-window .cc-compliance .deny').click(function() {
+    ga('send', 'event', 'Cookies', 'Refusés');
+});
+
+$('.cc-window .cc-compliance .allow').click(function() {
+    ga('send', 'event', 'Cookies', 'Acceptés');
+});
