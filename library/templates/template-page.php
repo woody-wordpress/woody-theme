@@ -32,11 +32,29 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     {
         if (!empty(is_front_page())) {
             $this->twig_tpl = 'front.twig';
+        } elseif ( $this->isQuotation() ) {
+            $this->twig_tpl = 'quotation.twig';
         } elseif (is_404()) {
             $this->twig_tpl = 'page404.twig';
         } else {
             $this->twig_tpl = 'page.twig';
         }
+    }
+
+    /**
+     * Check if current page is Quotation page
+     * @return return (boolean)
+     */
+    protected function isQuotation()
+    {
+        $return = false;
+
+        $uri  = filter_input(INPUT_SERVER, 'REQUEST_URI');
+
+        $pos = strpos($uri, '/demander_un_devis');
+        $return = is_numeric($pos) ? true : false ;
+
+        return $return;
     }
 
     protected function extendContext()
