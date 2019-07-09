@@ -198,5 +198,8 @@ class WoodyTheme_Polylang
         __('Ajouter', 'woody-theme');
         __('Supprimer', 'woody-theme');
         __('Cette liste est vide actuellement. Naviguez et ajoutez des pages !', 'woody-theme');
+
+        // Favorites
+        __('Ajouter à mes favoris', 'woody-theme');
     }
 }
