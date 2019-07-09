@@ -1,7 +1,8 @@
 {
     "key": "group_5c0fed3541b45",
     "title": "Paramètres Woody",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5c10c11662d6f",
             "label": "Recherche globale",
             "name": "",
@@ -53,29 +54,12 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
-                "key": "field_5c10c08f62d6d",
-                "label": "Pages suggérées",
-                "name": "suggest_pages",
-                "type": "repeater",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "collapsed": "",
-                "min": 0,
-                "max": 4,
-                "layout": "block",
-                "button_label": "Ajouter une suggestion",
-                "sub_fields": [{
-                    "key": "field_5c10c0a162d6e",
-                    "label": "Page",
-                    "name": "suggest_page",
-                    "type": "post_object",
+            "sub_fields": [
+                {
+                    "key": "field_5c10c08f62d6d",
+                    "label": "Pages suggérées",
+                    "name": "suggest_pages",
+                    "type": "repeater",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -84,16 +68,37 @@
                         "class": "",
                         "id": ""
                     },
-                    "post_type": [
-                        "page"
-                    ],
-                    "taxonomy": "",
-                    "allow_null": 1,
-                    "multiple": 0,
-                    "return_format": "id",
-                    "ui": 1
-                }]
-            }]
+                    "collapsed": "",
+                    "min": 0,
+                    "max": 4,
+                    "layout": "block",
+                    "button_label": "Ajouter une suggestion",
+                    "sub_fields": [
+                        {
+                            "key": "field_5c10c0a162d6e",
+                            "label": "Page",
+                            "name": "suggest_page",
+                            "type": "post_object",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "post_type": [
+                                "page"
+                            ],
+                            "taxonomy": "",
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "return_format": "id",
+                            "ui": 1
+                        }
+                    ]
+                }
+            ]
         },
         {
             "key": "field_5d039af8a226f",
@@ -135,31 +140,29 @@
         },
         {
             "key": "field_5d040af7a976f",
-            "label": "Page de demande de devis",
+            "label": "CHAMPS LIÉ AU PLUGIN",
             "name": "",
-            "type": "tab",
-            "instructions": "",
+            "type": "text",
+            "instructions": "NE PAS SUPPRIMER",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
-            },
-            "placement": "left",
-            "endpoint": 0
+            }
         },
         {
             "key": "field_5d782ae8a2346",
-            "label": "Page de demande de devis",
-            "name": "quotation_page_url",
-            "type": "post_object",
-            "instructions": "Si la page est traduite, les traductions seront automatiquement utilisées pour les langues correspondantes",
+            "label": "CHAMPS LIÉ AU PLUGIN",
+            "name": "",
+            "type": "text",
+            "instructions": "NE PAS SUPPRIMER",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hidden",
                 "id": ""
             },
             "post_type": [
@@ -170,6 +173,20 @@
             "multiple": 0,
             "return_format": "id",
             "ui": 1
+        },
+        {
+            "key": "field_5d245378f64c8",
+            "label": "CHAMPS LIÉ AU PLUGIN",
+            "name": "",
+            "type": "text",
+            "instructions": "NE PAS SUPPRIMER",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hidden",
+                "id": ""
+            }
         },
         {
             "key": "field_5c1b790f1233f",
@@ -246,11 +263,13 @@
         }
     ],
     "location": [
-        [{
-            "param": "options_page",
-            "operator": "==",
-            "value": "woody-settings"
-        }]
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "woody-settings"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -260,5 +279,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1558534352
+    "modified": 1562662647
 }
