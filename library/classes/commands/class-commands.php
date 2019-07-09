@@ -1,10 +1,12 @@
 <?php
+
 /**
  * Commands
  *
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
+
 use Timber\Integrations\Command;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
@@ -47,6 +49,9 @@ class WoodyTheme_Commands
         // (Not all cache back ends listen to 'flush')
         wp_cache_delete('alloptions', 'options');
         Output::success('wp_cache_delete alloptions');
+
+        do_action('woody_cache_warm');
+        Output::success('woody_cache_warm');
     }
 
     public function flush_timber()
