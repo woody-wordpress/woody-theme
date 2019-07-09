@@ -276,7 +276,11 @@ function getPostRootAncestor($postID, $root_level = 1)
     if (!empty($ancestors)) {
         // Get last ancestors
         $root = count($ancestors) - $root_level;
-        $return = $ancestors[$root];
+        if ($root < 0) {
+            return;
+        } else {
+            $return = $ancestors[$root];
+        }
     }
 
     return $return;
