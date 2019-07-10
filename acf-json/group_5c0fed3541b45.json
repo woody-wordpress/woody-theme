@@ -139,56 +139,6 @@
             "ui": 1
         },
         {
-            "key": "field_5d040af7a976f",
-            "label": "CHAMPS LIÉ AU PLUGIN",
-            "name": "",
-            "type": "text",
-            "instructions": "NE PAS SUPPRIMER",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            }
-        },
-        {
-            "key": "field_5d782ae8a2346",
-            "label": "CHAMPS LIÉ AU PLUGIN",
-            "name": "",
-            "type": "text",
-            "instructions": "NE PAS SUPPRIMER",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "hidden",
-                "id": ""
-            },
-            "post_type": [
-                "page"
-            ],
-            "taxonomy": "",
-            "allow_null": 1,
-            "multiple": 0,
-            "return_format": "id",
-            "ui": 1
-        },
-        {
-            "key": "field_5d245378f64c8",
-            "label": "CHAMPS LIÉ AU PLUGIN",
-            "name": "",
-            "type": "text",
-            "instructions": "NE PAS SUPPRIMER",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "hidden",
-                "id": ""
-            }
-        },
-        {
             "key": "field_5c1b790f1233f",
             "label": "Météo",
             "name": "",
