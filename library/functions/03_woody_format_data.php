@@ -18,10 +18,6 @@ function getComponentItem($layout, $context)
         case 'content_list':
             $return = formatFullContentList($layout, $context['post'], $context['woody_components']);
             break;
-
-            // case 'snow_info':
-            //     $return = formatSnowInfoData($layout, $context['woody_components']);
-            //     break;
         case 'weather':
             $vars['account'] = $layout['weather_account'];
             $vars['nb_days'] = $layout['weather_count_days'];

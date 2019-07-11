@@ -53,6 +53,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $this->pageContext();
             }
         }
+
     }
 
     protected function page404Context()
@@ -192,7 +193,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 }
 
                 $page_hero['title'] = (!empty($page_hero['title'])) ? str_replace('-', '&#8209', $page_hero['title']) : '';
-
                 $this->context['page_hero'] = Timber::compile($this->context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
             }
         }
