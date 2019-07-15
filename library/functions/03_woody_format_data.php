@@ -458,14 +458,14 @@ function formatFocusesData($layout, $current_post, $twigPaths)
             if (!empty($layout['focus_map_params']['tmaps_confid'])) {
                 $the_items['map_params']['tmaps_confid'] = $layout['focus_map_params']['tmaps_confid'];
             }
-            if(!empty($layout['focus_map_params']['map_height'])){
+            if (!empty($layout['focus_map_params']['map_height'])) {
                 $the_items['map_params']['map_height'] = $layout['focus_map_params']['map_height'];
             }
-            if(!empty($layout['focus_map_params']['map_zoom_auto'])){
+            if (!empty($layout['focus_map_params']['map_zoom_auto'])) {
                 $the_items['map_params']['map_zoom_auto'] = $layout['focus_map_params']['map_zoom_auto'];
             }
-            if(!empty($layout['focus_map_params']['map_zoom'])){
-                if(empty($the_items['map_params']['map_zoom_auto']) || $the_items['map_params']['map_zoom_auto'] === false){
+            if (!empty($layout['focus_map_params']['map_zoom'])) {
+                if (empty($the_items['map_params']['map_zoom_auto']) || $the_items['map_params']['map_zoom_auto'] === false) {
                     $the_items['map_params']['map_zoom'] = $layout['focus_map_params']['map_zoom'];
                 }
             }
@@ -980,10 +980,10 @@ function getPagePreview($item_wrapper, $item, $clickable = true)
     $data['page_type'] = getTermsSlugs($item->ID, 'page_type', true);
     $data['post_id'] = $item->ID;
 
-    if (!empty($item->get_field('focus_title'))) {
-        $data['title'] = getTransformedPattern($item->get_field('focus_title'), $item);
-    } elseif (!empty($item->get_title())) {
-        $data['title'] = getTransformedPattern($item->get_title(), $item);
+    if (!empty(get_field('focus_title', $item->ID))) {
+        $data['title'] = getTransformedPattern(get_field('focus_title', $item->ID), $item);
+    } elseif (!empty(get_the_title($item->ID))) {
+        $data['title'] = getTransformedPattern(get_the_title($item->ID), $item);
     }
 
     if (!empty($item_wrapper) && !empty($item_wrapper['display_elements']) && is_array($item_wrapper['display_elements'])) {
@@ -1018,7 +1018,7 @@ function getPagePreview($item_wrapper, $item, $clickable = true)
         }
     }
 
-    $data['the_peoples'] = $item->get_field('field_5b6d54a10381f');
+    $data['the_peoples'] = get_field('field_5b6d54a10381f', $item->ID);
 
     if ($clickable && !empty($item_wrapper['display_button'])) {
         $data['link']['link_label'] = getFieldAndFallBack($item, 'focus_button_title', $item);
@@ -1029,18 +1029,18 @@ function getPagePreview($item_wrapper, $item, $clickable = true)
 
     if (!empty($item_wrapper['display_img'])) {
         $data['img'] = getFieldAndFallback($item, 'focus_img', $item, 'field_5b0e5ddfd4b1b');
-        if(empty($data['img'])){
+        if (empty($data['img'])) {
             $video = getFieldAndFallback($item, 'field_5b0e5df0d4b1c', $item);
             $data['img'] = !empty($video) ? $video['movie_poster_file'] : '';
         }
     }
 
     $data['location'] = [];
-    $data['location']['lat'] = (!empty($item->get_field('post_latitude'))) ? $item->get_field('post_latitude') : '';
-    $data['location']['lng'] = (!empty($item->get_field('post_longitude'))) ? $item->get_field('post_longitude') : '';
+    $data['location']['lat'] = (!empty(get_field('post_latitude', $item->ID))) ? get_field('post_latitude', $item->ID) : '';
+    $data['location']['lng'] = (!empty(get_field('post_longitude', $item->ID))) ? get_field('post_longitude', $item->ID) : '';
     $data['img']['attachment_more_data'] = (!empty($data['img'])) ? getAttachmentMoreData($data['img']['ID']) : '';
     if ($clickable) {
-        $data['link']['url'] = $item->get_path();
+        $data['link']['url'] = get_permalink($item->ID);
     }
 
     // $post_type = get_post_terms($item->ID, 'page_type');
@@ -1061,14 +1061,14 @@ function getPagePreview($item_wrapper, $item, $clickable = true)
  **/
 function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = '', $lastfallback_item = '', $lastfallback_field = '')
 {
-    if (!empty($item->get_field($field))) {
-        $value = $item->get_field($field);
+    if (!empty(get_field($field, $item->ID))) {
+        $value = get_field($field, $item->ID);
     } elseif (!empty($fallback_item) && is_array($fallback_item) && !empty($fallback_item[$fallback_field])) {
         $value = $fallback_item[$fallback_field];
-    } elseif (!empty($fallback_item) && is_object($fallback_item) && !empty($fallback_item->get_field($fallback_field))) {
-        $value = $fallback_item->get_field($fallback_field);
-    } elseif (!empty($lastfallback_item) && !empty($lastfallback_item->get_field($lastfallback_field))) {
-        $value = $lastfallback_item->get_field($lastfallback_field);
+    } elseif (!empty($fallback_item) && is_object($fallback_item) && !empty(get_field($fallback_field, $fallback_item->ID))) {
+        $value = get_field($fallback_field, $fallback_item->ID);
+    } elseif (!empty($lastfallback_item) && !empty(get_field($lastfallback_field, $lastfallback_item->ID))) {
+        $value = get_field($lastfallback_field, $lastfallback_item->ID);
     } else {
         $value = '';
     }
