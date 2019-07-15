@@ -988,10 +988,10 @@ function getPagePreview($item_wrapper, $item, $clickable = true)
 
     if (!empty($item_wrapper) && !empty($item_wrapper['display_elements']) && is_array($item_wrapper['display_elements'])) {
         if (in_array('pretitle', $item_wrapper['display_elements'])) {
-            $data['pretitle'] = getTransformedPattern(getFieldAndFallback($item, 'focus_pretitle', get_field('page_heading_heading', $item->id), 'pretitle', $item, 'field_5b87f20257a1d'), $item);
+            $data['pretitle'] = getTransformedPattern(getFieldAndFallback($item, 'focus_pretitle', get_field('page_heading_heading', $item->ID), 'pretitle', $item, 'field_5b87f20257a1d'), $item);
         }
         if (in_array('subtitle', $item_wrapper['display_elements'])) {
-            $data['subtitle'] = getTransformedPattern(getFieldAndFallback($item, 'focus_subtitle', get_field('page_heading_heading', $item->id), 'subtitle', $item, 'field_5b87f23b57a1e'), $item);
+            $data['subtitle'] = getTransformedPattern(getFieldAndFallback($item, 'focus_subtitle', get_field('page_heading_heading', $item->ID), 'subtitle', $item, 'field_5b87f23b57a1e'), $item);
         }
         if (in_array('icon', $item_wrapper['display_elements'])) {
             $data['woody_icon'] = $item->get_field('focus_woody_icon');
