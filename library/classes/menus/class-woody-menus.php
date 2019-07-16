@@ -225,7 +225,12 @@ class WoodyTheme_Menus
                         if (!empty($submenu['display']['parts'][$i]['links_tpl'])) {
                             $link_display = $submenu['display']['parts'][$i]['links_tpl'];
                             if ($getChildren) {
-                                $sublinks = get_children($link['the_id']);
+                                $args = [
+                                    'post_parent' => $link['the_id'],
+                                    'post_type'   => 'page',
+                                    'post_status' => 'publish'
+                                ];
+                                $sublinks = get_children($args);
                                 $link['sublinks'] = !empty($sublinks) ? self::getMenuLinks($sublinks) : [];
                             }
                             $part['links'][$link_key] = Timber::compile($twig_paths[$link_display], $link);
