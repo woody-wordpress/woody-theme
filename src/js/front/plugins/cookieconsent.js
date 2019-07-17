@@ -128,10 +128,10 @@ window.cookieconsent.initialise({
     }
 })
 
-$('.cc-window .cc-compliance .deny').click(function() {
+$('.cc-window .cc-compliance .cc-deny').click(function() {
     ga('send', 'event', 'Cookies', 'Refusés');
 });
 
-$('.cc-window .cc-compliance .allow').click(function() {
+$('.cc-window .cc-compliance .cc-allow').click(function() {
     ga('send', 'event', 'Cookies', 'Acceptés');
 });
