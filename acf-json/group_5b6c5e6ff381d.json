@@ -126,7 +126,29 @@
                                 "operator": "==",
                                 "value": "evolving_single"
                             }
-                        ],
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "pers.",
+                    "min": "",
+                    "max": "",
+                    "step": ""
+                },
+                {
+                    "key": "field_5d26e3c820681",
+                    "label": "Jusqu'à (nombre de personnes)",
+                    "name": "price_fixed_until",
+                    "type": "number",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
                         [
                             {
                                 "field": "field_5b6d47c62d0ab",
@@ -162,7 +184,29 @@
                                 "operator": "==",
                                 "value": "evolving_single"
                             }
-                        ],
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "€",
+                    "min": "",
+                    "max": "",
+                    "step": ""
+                },
+                {
+                    "key": "field_5d26e43120682",
+                    "label": "Prix supplémentaire",
+                    "name": "additional_price",
+                    "type": "number",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
                         [
                             {
                                 "field": "field_5b6d47c62d0ab",
@@ -179,7 +223,6 @@
                     "default_value": "",
                     "placeholder": "",
                     "prepend": "",
-                    "append": "€",
                     "min": "",
                     "max": "",
                     "step": ""
@@ -637,5 +680,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Affiche le prix et la duré d'un séjour",
-    "modified": 1561732286
+    "modified": 1562830008
 }
