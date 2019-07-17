@@ -761,7 +761,19 @@ function formatGeomapData($layout, $twigPaths)
             $filetype = wp_check_filetype($filename);
 
             if($filetype['ext'] == 'json' || $filetype['ext'] == 'geojson'){
-                $layout['routes'][$i]['route_file'] = file_get_contents($filename);
+                $json = file_get_contents($filename);
+                $layout['routes'][$i]['route_file'] = json_decode($json, true);
+
+                foreach($layout['routes'] as $route_key => $route)
+                {
+                    $layout['routes'][$route_key] = $route['route_file'] ;
+                    // foreach( $layout['routes'][$route_key]['features'] as $key => $feature){
+                    //     $layout['routes'][$route_key]['features'][$key]['properties']['fill'] = $route['route_color'];
+                    //     $layout['routes'][$route_key]['features'][$key]['properties']['stroke'] = $route['route_color'];
+                    //     $layout['routes'][$route_key]['features'][$key]['properties']['stroke-width'] = $route['stroke_thickness'];
+                    // }
+                    $layout['routes'][$route_key] = json_encode($layout['routes'][$route_key]) ;
+                }
             }else{
                 // TODO: convert GPX/KML/KMX to geoJSON
             }

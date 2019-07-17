@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_5d078b4bc3b72",
-            "label": "Fichier (GPX\/KML\/GeoJSON)",
+            "label": "Fichier (GeoJSON)",
             "name": "route_file",
             "type": "file",
             "instructions": "",
@@ -19,42 +19,7 @@
             "library": "all",
             "min_size": "",
             "max_size": "",
-            "mime_types": "kml,gpx,json,geojson"
-        },
-        {
-            "key": "field_5d078b9ec3b73",
-            "label": "Couleur du trait",
-            "name": "route_color",
-            "type": "color_picker",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "#FF0000"
-        },
-        {
-            "key": "field_5d078cc9c3b74",
-            "label": "Taille du trait",
-            "name": "stroke_thickness",
-            "type": "range",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "min": "0.5",
-            "max": 5,
-            "step": "0.1",
-            "prepend": "",
-            "append": ""
+            "mime_types": "json,geojson"
         }
     ],
     "location": [
