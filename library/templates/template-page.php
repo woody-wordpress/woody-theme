@@ -32,29 +32,11 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     {
         if (!empty(is_front_page())) {
             $this->twig_tpl = 'front.twig';
-        } elseif ( $this->isQuotation() ) {
-            $this->twig_tpl = 'quotation.twig';
         } elseif (is_404()) {
             $this->twig_tpl = 'page404.twig';
         } else {
             $this->twig_tpl = 'page.twig';
         }
-    }
-
-    /**
-     * Check if current page is Quotation page
-     * @return return (boolean)
-     */
-    protected function isQuotation()
-    {
-        $return = false;
-
-        $uri  = filter_input(INPUT_SERVER, 'REQUEST_URI');
-
-        $pos = strpos($uri, '/demander_un_devis');
-        $return = is_numeric($pos) ? true : false ;
-
-        return $return;
     }
 
     protected function extendContext()
@@ -142,6 +124,10 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $price_fields = $trip_infos['the_price'];
                 // apply_filters('woody_get_price_from_components', $price_fields);
                 $trip_infos['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price']);
+                if ($trip_infos['the_price']['activate_quotation'] == true) {
+                    $quotation_id = get_option("options_quotation_page_url");
+                    $trip_infos['quotation_link']['link_label'] = get_permalink($quotation_id)."?sejour=".$this->context['post_id'];
+                }
             }
             if (!empty($trip_infos['the_duration']['duration_unit']) && $trip_infos['the_duration']['duration_unit'] == 'component_based') {
                 $duration_fields = $trip_infos['the_duration'];
