@@ -129,9 +129,9 @@ window.cookieconsent.initialise({
 })
 
 $('.cc-window .cc-compliance .cc-deny').click(function() {
-    ga('send', 'event', 'Cookies', 'Refusés');
+    ga('rc.send', 'event', 'Cookies', 'Refusés');
 });
 
 $('.cc-window .cc-compliance .cc-allow').click(function() {
-    ga('send', 'event', 'Cookies', 'Acceptés');
+    ga('rc.send', 'event', 'Cookies', 'Acceptés');
 });
