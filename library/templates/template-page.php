@@ -129,6 +129,10 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $price_fields = $trip_infos['the_price'];
                 // apply_filters('woody_get_price_from_components', $price_fields);
                 $trip_infos['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price']);
+                if ($trip_infos['the_price']['activate_quotation'] == true) {
+                    $quotation_id = get_option("options_quotation_page_url");
+                    $trip_infos['quotation_link']['link_label'] = get_permalink($quotation_id)."?sejour=".$this->context['post_id'];
+                }
             }
             if (!empty($trip_infos['the_duration']['duration_unit']) && $trip_infos['the_duration']['duration_unit'] == 'component_based') {
                 $duration_fields = $trip_infos['the_duration'];
