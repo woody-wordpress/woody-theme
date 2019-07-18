@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Polylang
  *
@@ -93,6 +94,7 @@ class WoodyTheme_Polylang
 
         // Trip infos
         __('A partir de', 'woody-theme');
+        __('à partir de', 'woody-theme');
         __('heure', 'woody-theme');
         __('heures', 'woody-theme');
         __('minute', 'woody-theme');
@@ -101,6 +103,11 @@ class WoodyTheme_Polylang
         __('max', 'woody-theme');
         __('pers.', 'woody-theme');
         __('Demander un devis', 'woody-theme');
+        __('jour', 'woody-theme');
+        __('jours', 'woody-theme');
+        __('personne', 'woody-theme');
+        __('personnes', 'woody-theme');
+        //TODO: Récupérer les chaînes à traudire dans groupQuotation.php (plugin) et dans le tpl de devis (library)
 
         // Woody blocs
         __("M'y rendre", 'woody-theme');
@@ -191,5 +198,8 @@ class WoodyTheme_Polylang
         __('Ajouter', 'woody-theme');
         __('Supprimer', 'woody-theme');
         __('Cette liste est vide actuellement. Naviguez et ajoutez des pages !', 'woody-theme');
+
+        // Favorites
+        __('Ajouter à mes favoris', 'woody-theme');
     }
 }

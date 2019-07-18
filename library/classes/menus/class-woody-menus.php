@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Menus
  *
@@ -172,7 +173,7 @@ class WoodyTheme_Menus
 
                     // On vérifie si la page est de type mirroir
                     $page_type = get_the_terms($post->ID, 'page_type');
-                    if ($page_type[0]->slug == 'mirror_page') {
+                    if (!empty($page_type) && $page_type[0]->slug == 'mirror_page') {
                         $mirror = get_field('mirror_page_reference', $post->ID);
                         if (!empty(get_post($mirror))) {
                             $post = get_post($mirror);
@@ -202,7 +203,7 @@ class WoodyTheme_Menus
      * @return return - html
      *
      */
-    public static function getCompiledSubmenu($menu_link, $menu_display)
+    public static function getCompiledSubmenu($menu_link, $menu_display, $getChildren = false)
     {
         $return = '';
         $twig_paths = getWoodyTwigPaths();
@@ -210,6 +211,7 @@ class WoodyTheme_Menus
             $the_submenu = [];
             $the_submenu['is_list'] = true;
             $the_submenu['no_padding'] = (!empty($menu_display[$menu_link['the_id']]['no_padding'])) ? $menu_display[$menu_link['the_id']]['no_padding'] : 0;
+            $the_submenu['menu_part_title'] = (!empty($menu_display[$menu_link['the_id']]['menu_part_title'])) ? $menu_display[$menu_link['the_id']]['menu_part_title'] : '';
             $the_submenu['alignment'] = (!empty($menu_display[$menu_link['the_id']]['alignment'])) ? $menu_display[$menu_link['the_id']]['alignment'] : 'align-top';
             $submenu['display'] = $menu_display[$menu_link['the_id']];
             $i = 0;
@@ -222,7 +224,15 @@ class WoodyTheme_Menus
                     foreach ($part['links'] as $link_key => $link) {
                         if (!empty($submenu['display']['parts'][$i]['links_tpl'])) {
                             $link_display = $submenu['display']['parts'][$i]['links_tpl'];
-
+                            if ($getChildren) {
+                                $args = [
+                                    'post_parent' => $link['the_id'],
+                                    'post_type'   => 'page',
+                                    'post_status' => 'publish'
+                                ];
+                                $sublinks = get_children($args);
+                                $link['sublinks'] = !empty($sublinks) ? self::getMenuLinks($sublinks) : [];
+                            }
                             $part['links'][$link_key] = Timber::compile($twig_paths[$link_display], $link);
                         }
                     }

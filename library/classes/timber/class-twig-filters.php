@@ -32,7 +32,6 @@ class WoodyTheme_Twig_Filters
         $twig->addFilter(new Twig_SimpleFilter('theRootAncestor', [$this, 'theRootAncestor']));
         $twig->addFilter(new Twig_SimpleFilter('pluralizeUnit', [$this, 'pluralizeUnit']));
 
-
         // debug
         $twig->addFilter(new Twig_SimpleFilter('dump', [$this, 'dump']));
         $twig->addFilter(new Twig_SimpleFilter('rcd', [$this, 'rcd']));
@@ -186,7 +185,6 @@ class WoodyTheme_Twig_Filters
         $root_id = getPostRootAncestor($post_id) ? getPostRootAncestor($post_id) : get_the_id();
         return $root_id;
     }
-
 
     function pluralizeUnit($amount, $singular_unit, $plural_unit = false)
     {

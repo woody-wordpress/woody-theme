@@ -19,7 +19,9 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     }
 
     protected function registerHooks()
-    { }
+    {
+        add_filter('wpseo_canonical', [$this, 'wpSeoCanonical'], 10, 1);
+    }
 
     protected function getHeaders()
     {
@@ -51,6 +53,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $this->pageContext();
             }
         }
+
     }
 
     protected function page404Context()
@@ -109,6 +112,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             if (!empty($home_slider['landswpr_slides'])) {
                 $this->context['home_slider'] = Timber::compile($this->context['woody_components'][$home_slider['landswpr_woody_tpl']], $home_slider);
             }
+
+            $this->context['after_landswpr'] = !empty($this->context['page_parts']['after_landswpr']) ? $this->context['page_parts']['after_landswpr'] : '';
         }
 
         /*********************************************
@@ -192,7 +197,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 }
 
                 $page_hero['title'] = (!empty($page_hero['title'])) ? str_replace('-', '&#8209', $page_hero['title']) : '';
-
                 $this->context['page_hero'] = Timber::compile($this->context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
             }
         }
@@ -208,11 +212,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
          *********************************************/
         if ($this->context['page_type'] === 'playlist_tourism') {
             $this->playlistContext();
-
-            $autoselect_id = filter_input(INPUT_GET, 'autoselect_id', FILTER_VALIDATE_INT);
-            if (!empty($autoselect_id)) {
-                $this->context['metas'][] = '<meta name="robots" content="noindex, follow" />';
-            }
         }
 
         /*********************************************
@@ -323,6 +322,12 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     {
         $this->context['body_class'] .= ' apirender apirender-playlist apirender-wordpress';
 
+        // No Index if autoselect_id
+        $autoselect_id = filter_input(INPUT_GET, 'autoselect_id', FILTER_VALIDATE_INT);
+        if (!empty($autoselect_id)) {
+            $this->context['metas'][] = '<meta name="robots" content="noindex, follow" />';
+        }
+
         /** ************************
          * Vérification pré-cochage
          ************************ **/
@@ -412,5 +417,18 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             $headers['x-apirender-url'] = $this->context['playlist_tourism']['apirender_uri'];
         }
         return $headers;
+    }
+
+    /***************************
+     * Overide Canonical
+     *****************************/
+    public function wpSeoCanonical($url)
+    {
+        $listpage = filter_input(INPUT_GET, 'listpage', FILTER_VALIDATE_INT);
+        if ($this->context['page_type'] === 'playlist_tourism' && !empty($listpage) && is_numeric($listpage)) {
+            $url .= '?listpage=' . $listpage;
+        }
+
+        return $url;
     }
 }

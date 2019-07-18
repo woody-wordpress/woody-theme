@@ -116,7 +116,7 @@ function getWoodyIcons()
     //TODO: Récupérer une variable globale en fonction du set d'icones choisis dans le thème pour remplacer '/src/icons/icons_set_01'
     $core_icons = woodyIconsFolder(get_template_directory() . '/src/icons/icons_set_01');
 
-    // TODO : récuperer variable station de l'ERP
+    // TODO: récuperer variable station de l'ERP
     $stations = ['superot', 'champsaur-valgaudemar', 'hautemaurienne'];
     $station_icons = array();
 
@@ -262,7 +262,7 @@ function getPrimaryTerm($taxonomy, $post_id, $fields = [])
 
 /**
  *
- * Nom : getPostAncestors
+ * Nom : getPostRootAncestor
  * Auteur : Thomas Navarro
  * Return : Retourne le parent racine d'un post
  * @param    postID INT : id d'une page enfant
@@ -276,7 +276,11 @@ function getPostRootAncestor($postID, $root_level = 1)
     if (!empty($ancestors)) {
         // Get last ancestors
         $root = count($ancestors) - $root_level;
-        $return = $ancestors[$root];
+        if ($root < 0) {
+            return;
+        } else {
+            $return = $ancestors[$root];
+        }
     }
 
     return $return;
