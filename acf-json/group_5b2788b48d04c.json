@@ -1,8 +1,7 @@
 {
     "key": "group_5b2788b48d04c",
     "title": "Mise en avant de pages (sélection automatique)",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b2788cc84ed1",
             "label": "Contenu",
             "name": "",
@@ -53,20 +52,7 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "128": "Saisons - Automne",
-                "129": "Saisons - Hiver",
-                "127": "Saisons - Printemps",
-                "126": "Saisons - Été",
-                "22": "Thématiques - Couples",
-                "21": "Thématiques - Famille",
-                "138": "Thématiques - Thème A",
-                "140": "Thématiques - Thème B",
-                "142": "Thématiques - Thème C",
-                "146": "Thématiques - Thème D",
-                "23": "Thématiques - avec enfants",
-                "289": "Thématiques - chiens"
-            },
+            "choices": {},
             "default_value": [],
             "allow_null": 0,
             "multiple": 1,
@@ -107,8 +93,7 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
+                [{
                         "field": "field_5b27899284ed4",
                         "operator": "!=",
                         "value": "touristic_sheet"
@@ -383,8 +368,7 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [
-                {
+            "sub_fields": [{
                     "key": "field_5d1b28b9e0865",
                     "label": "Zoomer la carte automatiquement",
                     "name": "focus_map_zoom_auto",
@@ -567,13 +551,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
