@@ -764,13 +764,14 @@ function formatGeomapData($layout, $twigPaths)
                 $json = file_get_contents($filename);
                 $route['route_file'] = $json;
 
-                $layout['routes'][$key] = $route['route_file'] ;
+                $layout['routes'][$key] = json_decode($route['route_file'], true) ;
+                foreach( $layout['routes'][$key]['features'] as $f_key => $feature){
+                    $layout['routes'][$key]['features'][$f_key]['properties']['fill'] = $route['route_color'];
+                    $layout['routes'][$key]['features'][$f_key]['properties']['stroke'] = $route['route_color'];
+                    $layout['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = $route['stroke_thickness'];
+                }
 
-                // foreach( $layout['routes'][$key]['features'] as $f_key => $feature){
-                //     $layout['routes'][$key]['features'][$f_key]['properties']['fill'] = $route['route_color'];
-                //     $layout['routes'][$key]['features'][$f_key]['properties']['stroke'] = $route['route_color'];
-                //     $layout['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = $route['stroke_thickness'];
-                // }
+                $layout['routes'][$key] = json_encode($layout['routes'][$key]);
             }
         }
     }
