@@ -32,7 +32,7 @@ class WoodyTheme_Images
         add_filter('wp_generate_attachment_metadata', [$this, 'generateAttachmentMetadata'], 10, 2);
         add_filter('wp_handle_upload_prefilter', [$this, 'maxUploadSize']);
         add_filter('upload_mimes', [$this, 'uploadMimes'], 10, 1);
-        // add_filter('wp_handle_upload_prefilter', [$this, 'convertToGeoJSON'], 100, 1);
+        // add_filter('wp_handle_upload', [$this, 'convertFileToGeoJSON'], 100, 1);
 
         // API Crop
         add_action('rest_api_init', function () {
@@ -153,16 +153,39 @@ class WoodyTheme_Images
         return $file;
     }
 
-    // /**
-    //  * Check if file has .kml, .gpx extension to convert it into .geoJSON file
-    //  */
-    // public function convertToGeoJSON($file)
-    // {
-    //     if (strpos($file['name'], '.gpx') || strpos($file['name'], '.kml')) {
-    //         // TODO: convert file
-    //         $file_content = file_get_contents($file['tmp_name']);
-    //     }
-    // }
+    /**
+     * Convert a kml or a gpx to GeoJSON
+     * @author : Jérémy Legendre
+     * @param   file
+     * @return  return      file content converted to geoJSON
+     */
+    public function convertFileToGeoJSON($file)
+    {
+        if( strpos($file['file'], 'gpx' ) || strpos($file['file'], 'kml' ) ) {
+            $url = "http://ogre.adc4gis.com/convert";
+            $curl = curl_init();
+
+            $params = [
+                'upload' => $file['url'],
+                'skipFailures' => true
+            ];
+
+            $params_string = http_build_query($params);
+            $opts = [
+                CURLOPT_URL => $url,
+                CURLOPT_POST => true,
+                CURLOPT_POSTFIELDS => $params_string,
+                CURLOPT_TIMEOUT => 1000,
+                CURLOPT_CONNECTTIMEOUT => 1000
+            ];
+            curl_setopt_array($curl, $opts);
+
+            $response = curl_exec($curl);
+            curl_close($curl);
+        }
+
+        return $file;
+    }
 
     // Register the new image sizes for use in the add media modal in wp-admin
     // This is the place where you can set readable names for images size

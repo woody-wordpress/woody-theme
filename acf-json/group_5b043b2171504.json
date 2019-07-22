@@ -188,7 +188,7 @@
         },
         {
             "key": "field_5d078d7f5ea3b",
-            "label": "Itinéraires",
+            "label": "Zones",
             "name": "routes",
             "type": "repeater",
             "instructions": "",
@@ -203,11 +203,11 @@
             "min": 0,
             "max": 0,
             "layout": "row",
-            "button_label": "Ajouter un tracé",
+            "button_label": "Ajouter une zone",
             "sub_fields": [
                 {
                     "key": "field_5d078da95ea3c",
-                    "label": "Ajouter des itinéraires",
+                    "label": "Ajouter une zone",
                     "name": "add_route",
                     "type": "clone",
                     "instructions": "",
