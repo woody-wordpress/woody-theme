@@ -240,7 +240,7 @@ class WoodyTheme_Menus
 
                 if (!empty($submenu['display']['parts'][$i]['part_tpl'])) {
                     $part_display = $submenu['display']['parts'][$i]['part_tpl'];
-                    $the_part['items'] = $part['links'];
+                    $the_part['items'] = (!empty($part['links'])) ? $part['links'] : [];
                     $the_part['menu_part_title'] = (!empty($part['part_title'])) ? $part['part_title'] : '';
                     $menu_link['submenu'][$key] = Timber::compile($twig_paths[$part_display], $the_part);
                 } elseif (!empty($submenu['display']['parts'][$i]['custom_function'])) {
