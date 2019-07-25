@@ -69,7 +69,6 @@ class WoodyTheme_Polylang
         // Yoast
         __("Page non trouvée %%sep%% %%sitename%%", 'woody-theme');
         __("Erreur 404 : Page non trouvée", 'woody-theme');
-        __("Aller à la page d\'accueil", "woody-theme");
 
         // Date
         __("Lundi", 'woody-theme');
@@ -93,7 +92,7 @@ class WoodyTheme_Polylang
         __("Décembre", 'woody-theme');
 
         // Trip infos
-        __('A partir de', 'woody-theme');
+        __('À partir de', 'woody-theme');
         __('à partir de', 'woody-theme');
         __('heure', 'woody-theme');
         __('heures', 'woody-theme');
@@ -158,6 +157,8 @@ class WoodyTheme_Polylang
         __('Changer de saison', 'woody-theme');
         __('Réservable', 'woody-theme');
         __('Télécharger', 'woody-theme');
+        __("Aller à la page d'accueil", "woody-theme");
+        __("Retour à la page d'accueil", 'woody-theme');
 
         // Weather
         __('Bas', 'woody-theme');
