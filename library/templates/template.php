@@ -134,25 +134,25 @@ abstract class WoodyTheme_TemplateAbstract
         $tools_blocks = [];
 
         // Add langSwitcher
-        $tools_blocks['langSwitcher'] = $this->addLanguageSwitcher();
-        $this->context['lang_switcher'] = apply_filters('lang_switcher', $tools_blocks['langSwitcher']);
-        $this->context['lang_switcher_mobile'] = apply_filters('lang_switcher_mobile', $tools_blocks['langSwitcher']);
+        $tools_blocks['lang_switcher'] = $this->addLanguageSwitcher();
+        $this->context['lang_switcher'] = apply_filters('lang_switcher', $tools_blocks['lang_switcher']);
+        $this->context['lang_switcher_mobile'] = apply_filters('lang_switcher_mobile', $tools_blocks['lang_switcher']);
 
         // Add langSwitcher
-        $tools_blocks['seasonSwitcher'] = $this->addSeasonSwitcher();
-        $this->context['season_switcher'] = apply_filters('season_switcher', $tools_blocks['seasonSwitcher']);
-        $this->context['season_switcher_mobile'] = apply_filters('season_switcher_mobile', $tools_blocks['seasonSwitcher']);
+        $tools_blocks['season_switcher'] = $this->addSeasonSwitcher();
+        $this->context['season_switcher'] = apply_filters('season_switcher', $tools_blocks['season_switcher']);
+        $this->context['season_switcher_mobile'] = apply_filters('season_switcher_mobile', $tools_blocks['season_switcher']);
 
         // Add addEsSearchBlock
-        $tools_blocks['esSearchBlock'] = $this->addEsSearchBlock();
-        $this->context['es_search_block'] = apply_filters('es_search_block', $tools_blocks['esSearchBlock']);
-        $this->context['es_search_block_mobile'] = apply_filters('es_search_block_mobile', $tools_blocks['esSearchBlock']);
+        $tools_blocks['es_search_block'] = $this->addEsSearchBlock();
+        $this->context['es_search_block'] = apply_filters('es_search_block', $tools_blocks['es_search_block']);
+        $this->context['es_search_block_mobile'] = apply_filters('es_search_block_mobile', $tools_blocks['es_search_block']);
 
         // Add addFavoritesBlock
         if (in_array('favorites', $this->context['enabled_woody_options'])) {
-            $tools_blocks['favoritesBlock'] = $this->addFavoritesBlock();
-            $this->context['favorites_block'] = apply_filters('favorites_block', $tools_blocks['favoritesBlock']);
-            $this->context['favorites_block_mobile'] = apply_filters('favorites_block_mobile', $tools_blocks['favoritesBlock']);
+            $tools_blocks['favorites_block'] = $this->addFavoritesBlock();
+            $this->context['favorites_block'] = apply_filters('favorites_block', $tools_blocks['favorites_block']);
+            $this->context['favorites_block_mobile'] = apply_filters('favorites_block_mobile', $tools_blocks['favorites_block']);
         }
 
         // Define SubWoodyTheme_TemplateParts
