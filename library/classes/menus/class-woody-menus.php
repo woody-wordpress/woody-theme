@@ -207,7 +207,7 @@ class WoodyTheme_Menus
     {
         $return = '';
         $twig_paths = getWoodyTwigPaths();
-        if (!empty($menu_link['submenu'])) {
+        if (!empty($menu_link['submenu']) && !empty($menu_display[$menu_link['the_id']])) {
             $the_submenu = [];
             $the_submenu['is_list'] = true;
             $the_submenu['no_padding'] = (!empty($menu_display[$menu_link['the_id']]['no_padding'])) ? $menu_display[$menu_link['the_id']]['no_padding'] : 0;
