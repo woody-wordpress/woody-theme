@@ -207,11 +207,12 @@ class WoodyTheme_Menus
     {
         $return = '';
         $twig_paths = getWoodyTwigPaths();
-        if (!empty($menu_link['submenu'])) {
+        if (!empty($menu_link['submenu']) && !empty($menu_display[$menu_link['the_id']])) {
             $the_submenu = [];
             $the_submenu['is_list'] = true;
             $the_submenu['no_padding'] = (!empty($menu_display[$menu_link['the_id']]['no_padding'])) ? $menu_display[$menu_link['the_id']]['no_padding'] : 0;
-            $the_submenu['menu_part_title'] = (!empty($menu_display[$menu_link['the_id']]['menu_part_title'])) ? $menu_display[$menu_link['the_id']]['menu_part_title'] : '';
+            $the_submenu['menu_part_title'] = (!empty($menu_display[$menu_link['the_id']]['menu_part_title'])) ? $menu_display[$menu_link['the_id']]['menu_part_title'] : null;
+            $the_submenu['menu_part_title_link'] = (!empty($menu_display[$menu_link['the_id']]['menu_part_title_link'])) ? $menu_display[$menu_link['the_id']]['menu_part_title_link'] : null;
             $the_submenu['alignment'] = (!empty($menu_display[$menu_link['the_id']]['alignment'])) ? $menu_display[$menu_link['the_id']]['alignment'] : 'align-top';
             $submenu['display'] = $menu_display[$menu_link['the_id']];
             $i = 0;
