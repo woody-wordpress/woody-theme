@@ -109,6 +109,15 @@ class WoodyTheme_Polylang
         __('personnes', 'woody-theme');
         //TODO: Récupérer les chaînes à traudire dans groupQuotation.php (plugin) et dans le tpl de devis (library)
 
+        // Availabilities calendar
+        __('Attention, vous n\'avez pas saisi d\'identifiant de playlist en paramètre du shortcode.
+            Pour rappel, le shortcode s\'utilise par exemple de cette manière', 'woody_theme');
+        __('Année', 'woody_theme');
+        __('Établissement', 'woody_theme');
+        __('Établissement disponible', 'woody_theme');
+        __('Établissement indisponible', 'woody_theme');
+        __('Aucunes informations concernant cet établissement pour l\'année en cours', 'woody_theme');
+
         // Woody blocs
         __("M'y rendre", 'woody-theme');
         __("Voir l'itinéraire", 'woody-theme');
