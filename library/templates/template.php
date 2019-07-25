@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template
  *
@@ -121,9 +122,6 @@ abstract class WoodyTheme_TemplateAbstract
         // Define Woody Components
         $this->addWoodyComponents();
 
-        // Define SubWoodyTheme_TemplateParts
-        $this->addHeaderFooter();
-
         // GlobalsVars
         $this->addGlobalsVars();
 
@@ -146,6 +144,9 @@ abstract class WoodyTheme_TemplateAbstract
         if (in_array('favorites', $this->context['enabled_woody_options'])) {
             $this->addFavoritesBlock();
         }
+
+        // Define SubWoodyTheme_TemplateParts
+        $this->addHeaderFooter();
 
         // Set a global dist dir
         $this->context['dist_dir'] = WP_DIST_DIR;
@@ -210,16 +211,14 @@ abstract class WoodyTheme_TemplateAbstract
             $data = $this->createSwitcher($languages);
 
             // Set a default template
-            $tpl_switcher = apply_filters('season_switcher_tpl', null);
-            if (empty($tpl_switcher)) {
-                $tpl_switcher = 'woody_widgets-season_switcher-tpl_01';
-            }
+            $tpl = apply_filters('season_switcher_tpl', null);
+            $template = $tpl['template'] ?: $this->context['woody_components']['woody_widgets-season_switcher-tpl_01'];
 
-            $template = $this->context['woody_components'][$tpl_switcher];
-            $compile_switcher = Timber::compile($template, $data);
+            $timber_compile = Timber::compile($template, $data);
+            $timber_compile = apply_filters('lang_switcher', $timber_compile);
 
-            $this->context['season_switcher'] = $compile_switcher;
-            $this->context['season_switcher_mobile'] = $compile_switcher;
+            $this->context['season_switcher'] = $timber_compile;
+            $this->context['season_switcher_mobile'] = $timber_compile;
         }
     }
 
@@ -232,11 +231,14 @@ abstract class WoodyTheme_TemplateAbstract
             $data = $this->createSwitcher($languages);
 
             // Set a default template
-            $template = $this->context['woody_components']['woody_widgets-lang_switcher-tpl_01'];
-            $compile_lang = Timber::compile($template, $data);
+            $tpl = apply_filters('lang_switcher_tpl', null);
+            $template = $tpl['template'] ?: $this->context['woody_components']['woody_widgets-lang_switcher-tpl_01'];
 
-            $this->context['lang_switcher'] = $compile_lang;
-            $this->context['lang_switcher_mobile'] = $compile_lang;
+            $timber_compile = Timber::compile($template, $data);
+            $timber_compile = apply_filters('lang_switcher', $timber_compile);
+
+            $this->context['lang_switcher'] = $timber_compile;
+            $this->context['lang_switcher_mobile'] = $timber_compile;
         }
     }
 
@@ -348,6 +350,7 @@ abstract class WoodyTheme_TemplateAbstract
             $template = $tpl['template'] ?: $this->context['woody_components']['woody_widgets-es_search_block-tpl_01'];
 
             $timber_compile = Timber::compile($template, $data);
+            $timber_compile = apply_filters('es_search_block', $timber_compile);
 
             $this->context['es_search_block'] = $timber_compile;
             $this->context['es_search_block_mobile'] = $timber_compile;
@@ -362,10 +365,11 @@ abstract class WoodyTheme_TemplateAbstract
             $data['favorites_page_url'] = get_permalink(pll_get_post($favorites_post_id));
 
             // Set a default template
-            $tpl = apply_filters('favorites_block', null);
+            $tpl = apply_filters('favorites_block_tpl', null);
             $template = $tpl['template'] ?: $this->context['woody_components']['woody_widgets-favorites_block-tpl_01'];
 
             $timber_compile = Timber::compile($template, $data);
+            $timber_compile = apply_filters('favorites_block', $timber_compile);
 
             $this->context['favorites_block'] = $timber_compile;
             $this->context['favorites_block_mobile'] = $timber_compile;
