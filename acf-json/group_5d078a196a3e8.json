@@ -19,7 +19,26 @@
             "library": "all",
             "min_size": "",
             "max_size": "",
-            "mime_types": "json,geojson,kml,gpx"
+            "mime_types": "geojson,json"
+        },
+        {
+            "key": "field_5d3ecaf5454d6",
+            "label": "Paramètres avancés",
+            "name": "parameters",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "35",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "Oui",
+            "ui_off_text": "Non"
         },
         {
             "key": "field_5d078b9ec3b73",
@@ -28,7 +47,15 @@
             "type": "color_picker",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5d3ecaf5454d6",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -43,7 +70,15 @@
             "type": "range",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5d3ecaf5454d6",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -74,5 +109,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1562081542
+    "modified": 1564403293
 }
