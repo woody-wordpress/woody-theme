@@ -57,15 +57,38 @@
                 ]
             ],
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
             "default_value": "#FF0000"
         },
         {
+            "key": "field_5d3ef1b101f7c",
+            "label": "Couleur de remplissage",
+            "name": "fill_color",
+            "type": "color_picker",
+            "instructions": "S'applique uniquement si le GeoJson forme une zone fermée.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5d3ecaf5454d6",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": ""
+        },
+        {
             "key": "field_5d078cc9c3b74",
-            "label": "Taille du trait",
+            "label": "Épaisseur du trait",
             "name": "stroke_thickness",
             "type": "range",
             "instructions": "",
@@ -109,5 +132,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1564403293
+    "modified": 1564406557
 }

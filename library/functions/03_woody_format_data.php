@@ -769,7 +769,7 @@ function formatGeomapData($layout, $twigPaths)
                     $layout['routes'][$key]['features'][$f_key]['route'] = true;
 
                     if ( $route['parameters'] === true ) {
-                        $layout['routes'][$key]['features'][$f_key]['properties']['fill'] = $route['route_color'];
+                        $layout['routes'][$key]['features'][$f_key]['properties']['fill'] = $route['fill_color'];
                         $layout['routes'][$key]['features'][$f_key]['properties']['stroke'] = $route['route_color'];
                         $layout['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = $route['stroke_thickness'];
                     } else {
