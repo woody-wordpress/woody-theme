@@ -768,13 +768,18 @@ function formatGeomapData($layout, $twigPaths)
                 foreach( $layout['routes'][$key]['features'] as $f_key => $feature){
                     $layout['routes'][$key]['features'][$f_key]['route'] = true;
 
-                    if( $route['parameters'] === true ) {
+                    if ( $route['parameters'] === true ) {
                         $layout['routes'][$key]['features'][$f_key]['properties']['fill'] = $route['route_color'];
                         $layout['routes'][$key]['features'][$f_key]['properties']['stroke'] = $route['route_color'];
                         $layout['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = $route['stroke_thickness'];
-                    }else{
-                        $layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] = 2;
-                        $layout['routes'][$key]['features'][$f_key]['properties']['fill'] = $layout['routes'][$key]['features'][$f_key]['properties']['stroke'];
+                    } else {
+                        $fill_opacity = $layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity'];
+                        $layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] = $fill_opacity == 0 ? 2 : $fill_opacity;
+
+                        if (!isset($layout['routes'][$key]['features'][$f_key]['properties']['fill'] )) {
+                            $stroke = $layout['routes'][$key]['features'][$f_key]['properties']['stroke'];
+                            $layout['routes'][$key]['features'][$f_key]['properties']['fill'] = $stroke;
+                        }
                     }
                 }
 
