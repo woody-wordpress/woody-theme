@@ -26,7 +26,7 @@
             "label": "Paramètres avancés",
             "name": "parameters",
             "type": "true_false",
-            "instructions": "",
+            "instructions": "Changer la couleur et l'épaisseur du trait.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -132,5 +132,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1564406557
+    "modified": 1564408130
 }
