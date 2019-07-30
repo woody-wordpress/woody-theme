@@ -772,15 +772,19 @@ function formatGeomapData($layout, $twigPaths)
                         $layout['routes'][$key]['features'][$f_key]['properties']['fill'] = $route['fill_color'];
                         $layout['routes'][$key]['features'][$f_key]['properties']['stroke'] = $route['route_color'];
                         $layout['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = $route['stroke_thickness'];
-                    } else {
-                        $fill_opacity = $layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity'];
-                        $layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] = $fill_opacity == 0 ? 2 : $fill_opacity;
-
-                        if (!isset($layout['routes'][$key]['features'][$f_key]['properties']['fill'] )) {
-                            $stroke = $layout['routes'][$key]['features'][$f_key]['properties']['stroke'];
-                            $layout['routes'][$key]['features'][$f_key]['properties']['fill'] = $stroke;
-                        }
                     }
+                    $fill_opacity = isset($layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity']) ? $layout['routes'][$key]['features'][$f_key]['properties'] : 0;
+                    $layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] = $fill_opacity === 0 ? 0.5 : $fill_opacity;
+
+                    // if($feature['geometry']['type'] == "Point"){
+                    //     if (empty($feature['properties'])) {
+                    //         $feature['properties']["marker-color"] = "#ff0000";
+                    //         $feature['properties']["marker-size"] = "medium";
+                    //         $feature['properties']["marker-symbol"] = "";
+
+                    //         $layout['routes'][$key]['features'][$f_key] = $feature;
+                    //     }
+                    // }
                 }
 
                 $layout['routes'][$key] = json_encode($layout['routes'][$key]);
