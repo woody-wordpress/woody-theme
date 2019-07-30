@@ -222,7 +222,7 @@ abstract class WoodyTheme_TemplateAbstract
 
             // Set a default template
             $tpl = apply_filters('season_switcher_tpl', null);
-            $template = $tpl['template'] ?: $this->context['woody_components']['woody_widgets-season_switcher-tpl_01'];
+            $template = $tpl['template'] ? $this->context['woody_components'][$tpl['template']] : $this->context['woody_components']['woody_widgets-season_switcher-tpl_01'];
 
             return Timber::compile($template, $data);
         }
@@ -238,7 +238,7 @@ abstract class WoodyTheme_TemplateAbstract
 
             // Set a default template
             $tpl = apply_filters('lang_switcher_tpl', null);
-            $template = $tpl['template'] ?: $this->context['woody_components']['woody_widgets-lang_switcher-tpl_01'];
+            $template = $tpl['template'] ? $this->context['woody_components'][$tpl['template']] : $this->context['woody_components']['woody_widgets-lang_switcher-tpl_01'];
 
             return Timber::compile($template, $data);
         }
@@ -292,7 +292,7 @@ abstract class WoodyTheme_TemplateAbstract
                             $data['langs'][$lang_key]['name'] = $language['name'];
                             $data['langs'][$lang_key]['locale'] = (!empty($language['locale'])) ? substr($language['locale'], 0, 2) : $lang_key;
                             $data['langs'][$lang_key]['target'] = '_blank';
-                        } else if (!is_user_logged_in()) {
+                        } elseif (!is_user_logged_in()) {
                             unset($data['langs'][$lang_key]);
                         }
                     }
