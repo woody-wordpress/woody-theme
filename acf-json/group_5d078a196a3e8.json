@@ -1,0 +1,136 @@
+{
+    "key": "group_5d078a196a3e8",
+    "title": "Tracé carte géographique",
+    "fields": [
+        {
+            "key": "field_5d078b4bc3b72",
+            "label": "Fichier (GeoJSON)",
+            "name": "route_file",
+            "type": "file",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": "geojson,json"
+        },
+        {
+            "key": "field_5d3ecaf5454d6",
+            "label": "Paramètres avancés",
+            "name": "parameters",
+            "type": "true_false",
+            "instructions": "Changer la couleur et l'épaisseur du trait.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "35",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "Oui",
+            "ui_off_text": "Non"
+        },
+        {
+            "key": "field_5d078b9ec3b73",
+            "label": "Couleur du trait",
+            "name": "route_color",
+            "type": "color_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5d3ecaf5454d6",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "#FF0000"
+        },
+        {
+            "key": "field_5d3ef1b101f7c",
+            "label": "Couleur de remplissage",
+            "name": "fill_color",
+            "type": "color_picker",
+            "instructions": "S'applique uniquement si le GeoJson forme une zone fermée.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5d3ecaf5454d6",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": ""
+        },
+        {
+            "key": "field_5d078cc9c3b74",
+            "label": "Épaisseur du trait",
+            "name": "stroke_thickness",
+            "type": "range",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5d3ecaf5454d6",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "min": "0.5",
+            "max": 5,
+            "step": "0.1",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1564408130
+}

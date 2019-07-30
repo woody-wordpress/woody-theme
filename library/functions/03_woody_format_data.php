@@ -760,6 +760,43 @@ function formatGeomapData($layout, $twigPaths)
             $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker);
         }
     }
+    if(!empty($layout['routes'])){
+        foreach( $layout['routes'] as $key => $route ){
+            $filename = get_attached_file($route['route_file']['ID']);
+            $filetype = wp_check_filetype($filename);
+
+            if( $filetype['ext'] == 'json' || $filetype['ext'] == 'geojson' ) {
+                $json = file_get_contents($filename);
+                $route['route_file'] = $json;
+
+                $layout['routes'][$key] = json_decode($route['route_file'], true) ;
+                foreach( $layout['routes'][$key]['features'] as $f_key => $feature){
+                    $layout['routes'][$key]['features'][$f_key]['route'] = true;
+
+                    if ( $route['parameters'] === true ) {
+                        $layout['routes'][$key]['features'][$f_key]['properties']['fill'] = $route['fill_color'];
+                        $layout['routes'][$key]['features'][$f_key]['properties']['stroke'] = $route['route_color'];
+                        $layout['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = $route['stroke_thickness'];
+                    }
+                    $fill_opacity = isset($layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity']) ? $layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] : 0;
+                    $layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] = $fill_opacity == 0 ? 0.5 : $fill_opacity;
+
+
+                    // if($feature['geometry']['type'] == "Point"){
+                    //     if (empty($feature['properties'])) {
+                    //         $feature['properties']["marker-color"] = "#ff0000";
+                    //         $feature['properties']["marker-size"] = "medium";
+                    //         $feature['properties']["marker-symbol"] = "";
+
+                    //         $layout['routes'][$key]['features'][$f_key] = $feature;
+                    //     }
+                    // }
+                }
+
+                $layout['routes'][$key] = json_encode($layout['routes'][$key]);
+            }
+        }
+    }
 
     $return = Timber::compile($twigPaths[$layout['woody_tpl']], $layout);
     return $return;

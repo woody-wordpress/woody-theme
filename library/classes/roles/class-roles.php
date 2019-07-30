@@ -551,6 +551,12 @@ class WoodyTheme_Roles
                 'contributor' => false,
                 'translator' => false,
             ],
+            'woody_process_convert_to_geojson' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+                'translator' => true,
+            ],
 
             // Taxonomies
             'Configurer les thématiques' => [
