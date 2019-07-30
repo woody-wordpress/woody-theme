@@ -1,8 +1,7 @@
 {
     "key": "group_5b2bbb46507bf",
     "title": "En-tête de page",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b2bc0e256db0",
             "label": "Contenu",
             "name": "",
@@ -183,13 +182,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5c614d83a4e9b",
-                        "operator": "!=",
-                        "value": "1"
-                    }
-                ]
+                [{
+                    "field": "field_5c614d83a4e9b",
+                    "operator": "!=",
+                    "value": "1"
+                }]
             ],
             "wrapper": {
                 "width": "50",
@@ -210,13 +207,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b44bfc2e2e21",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
+                [{
+                    "field": "field_5b44bfc2e2e21",
+                    "operator": "==",
+                    "value": "1"
+                }]
             ],
             "wrapper": {
                 "width": "50",
@@ -244,8 +239,7 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
+                [{
                         "field": "field_5b44b9b274494",
                         "operator": "==",
                         "value": "img"
@@ -281,8 +275,7 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
+                [{
                         "field": "field_5b44bfc2e2e21",
                         "operator": "==",
                         "value": "1"
@@ -310,8 +303,7 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
+                [{
                         "field": "field_5b44b9b274494",
                         "operator": "==",
                         "value": "widget"
@@ -342,8 +334,7 @@
             "instructions": "Vous pouvez choisir un zoom entre \"5\" et \"20\" (5 étant très éloigné \/ 20 étant très proche)",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
+                [{
                         "field": "field_5b44b9b274494",
                         "operator": "==",
                         "value": "map"
@@ -376,13 +367,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b44bfc2e2e21",
-                        "operator": "!=",
-                        "value": "1"
-                    }
-                ]
+                [{
+                    "field": "field_5b44bfc2e2e21",
+                    "operator": "!=",
+                    "value": "1"
+                }]
             ],
             "wrapper": {
                 "width": "",
@@ -403,8 +392,7 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
+                [{
                         "field": "field_5c614d83a4e9b",
                         "operator": "==",
                         "value": "1"
@@ -422,8 +410,7 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [
-                {
+            "sub_fields": [{
                     "key": "field_5c614ee5a4e9f",
                     "label": "Prénom \/ Titre",
                     "name": "profile_title",
@@ -499,8 +486,7 @@
                         "id": ""
                     },
                     "layout": "block",
-                    "sub_fields": [
-                        {
+                    "sub_fields": [{
                             "key": "field_5c614fdaa4ea2",
                             "label": "Titre",
                             "name": "profile_favs_title",
@@ -561,8 +547,7 @@
                             "max": 4,
                             "layout": "block",
                             "button_label": "",
-                            "sub_fields": [
-                                {
+                            "sub_fields": [{
                                     "key": "field_5c61508ca4ea5",
                                     "label": "Icône",
                                     "name": "profile_fav_woody_icon",
@@ -570,13 +555,11 @@
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": [
-                                        [
-                                            {
-                                                "field": "field_5c614ff7a4ea3",
-                                                "operator": "==",
-                                                "value": "icons"
-                                            }
-                                        ]
+                                        [{
+                                            "field": "field_5c614ff7a4ea3",
+                                            "operator": "==",
+                                            "value": "icons"
+                                        }]
                                     ],
                                     "wrapper": {
                                         "width": "",
@@ -600,13 +583,11 @@
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": [
-                                        [
-                                            {
-                                                "field": "field_5c614ff7a4ea3",
-                                                "operator": "==",
-                                                "value": "textes"
-                                            }
-                                        ]
+                                        [{
+                                            "field": "field_5c614ff7a4ea3",
+                                            "operator": "==",
+                                            "value": "textes"
+                                        }]
                                     ],
                                     "wrapper": {
                                         "width": "",
@@ -683,23 +664,21 @@
             "hide_collapse": 1,
             "collapse_all_repeater": 0,
             "btn-icon-only": 0,
-            "sub_fields": [
-                {
-                    "key": "field_5b2bbe1388b36",
-                    "label": "Bouton",
-                    "name": "button",
-                    "type": "link",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "return_format": "array"
-                }
-            ]
+            "sub_fields": [{
+                "key": "field_5b2bbe1388b36",
+                "label": "Bouton",
+                "name": "button",
+                "type": "link",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "array"
+            }]
         },
         {
             "key": "field_5b2bc10f56db2",
@@ -812,6 +791,7 @@
                 "id": ""
             },
             "choices": {
+                "padd-bottom-none": "Aucune",
                 "padd-bottom-sm": "Petite",
                 "padd-bottom-md": "Moyenne",
                 "padd-bottom-lg": "Grande",
@@ -824,8 +804,7 @@
         }
     ],
     "location": [
-        [
-            {
+        [{
                 "param": "post_type",
                 "operator": "==",
                 "value": "page"
@@ -841,8 +820,7 @@
                 "value": "mirror_page"
             }
         ],
-        [
-            {
+        [{
                 "param": "post_type",
                 "operator": "==",
                 "value": "woody_model"
