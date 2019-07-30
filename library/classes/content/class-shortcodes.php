@@ -35,7 +35,7 @@ class WoodyTheme_Shortcodes
         $tags = $tags ? explode(':', $tags) : '';
 
         // Search inside pages
-        $pages_response = apply_filters('woody_pages_search', ['query' => $query, 'tags' => $tags]);
+        $pages_response = apply_filters('woody_pages_search', ['query' => $query, 'size' => 30, 'tags' => $tags]);
 
         $result = [];
         $result['query'] = $query;
@@ -58,7 +58,7 @@ class WoodyTheme_Shortcodes
         }
 
         // Search inside sheets
-        $sheets_response = apply_filters('woody_hawwwai_sheets_search', ['query' => $query]);
+        $sheets_response = apply_filters('woody_hawwwai_sheets_search', ['query' => $query, 'size' => 6]);
 
         $result['posts']['touristic_sheets'] = [];
         if (!empty($sheets_response['sheets'])) {
