@@ -773,8 +773,9 @@ function formatGeomapData($layout, $twigPaths)
                         $layout['routes'][$key]['features'][$f_key]['properties']['stroke'] = $route['route_color'];
                         $layout['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = $route['stroke_thickness'];
                     }
-                    $fill_opacity = isset($layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity']) ? $layout['routes'][$key]['features'][$f_key]['properties'] : 0;
-                    $layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] = $fill_opacity === 0 ? 0.5 : $fill_opacity;
+                    $fill_opacity = isset($layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity']) ? $layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] : 0;
+                    $layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] = $fill_opacity == 0 ? 0.5 : $fill_opacity;
+
 
                     // if($feature['geometry']['type'] == "Point"){
                     //     if (empty($feature['properties'])) {
