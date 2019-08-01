@@ -390,10 +390,15 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             $this->context['playlist_tourism']['confId'] = $playlistConfId;
         }
 
-
         // Return template
         if (empty($this->context['playlist_tourism']['content'])) {
             $this->context['playlist_tourism']['content'] = '<center style="margin: 80px 0">Playlist non configurée</center>';
+        }
+
+        // handle api error
+        if (isset($this->context['playlist_tourism']['status'])) {
+            $code = intval($this->context['playlist_tourism']['status']);
+            status_header($code);
         }
     }
 
