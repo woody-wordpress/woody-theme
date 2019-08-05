@@ -1,0 +1,76 @@
+{
+    "key": "group_5d47d0f8b5a53",
+    "title": "Lier une page (Préparation \/ Sur Place)",
+    "fields": [
+        {
+            "key": "field_5d47d14bdf764",
+            "label": "Choix du type de la page",
+            "name": "choice_prepare_on_the_spot",
+            "type": "radio",
+            "instructions": "Ce choix doit être déterminé en fonction du contenu de la page ( si le contenu est appropriée à la préparation d'un séjour ou si il est plutôt utile à un client directement sur place ).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "prepare": "Préparer mon séjour",
+                "spot": "Sur Place"
+            },
+            "allow_null": 1,
+            "other_choice": 0,
+            "default_value": "",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_5d47d332df765",
+            "label": "Page liée",
+            "name": "linked_alternative_page",
+            "type": "page_link",
+            "instructions": "Choisir la page correspondante à celle-ci ( Si vous avez choisi page de préparation au dessus, définir une page liée qui sera de type \"Sur place\", et inversement )",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5d47d14bdf764",
+                        "operator": "!=empty"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": "",
+            "allow_null": 1,
+            "allow_archives": 0,
+            "multiple": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 5,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Bloc permettant de définir le sous-type de la page et de la lier à une autre.",
+    "modified": 1564990908
+}
