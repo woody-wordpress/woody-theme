@@ -12,7 +12,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "50",
-                "class": "",
+                "class": "prepare-onspot",
                 "id": ""
             },
             "choices": {
@@ -30,7 +30,7 @@
             "key": "field_5d47d332df765",
             "label": "Page liée",
             "name": "linked_alternative_page",
-            "type": "page_link",
+            "type": "select",
             "instructions": "Choisir la page correspondante à celle-ci ( Si vous avez choisi page de préparation au dessus, définir une page liée qui sera de type \"Sur place\", et inversement )",
             "required": 0,
             "conditional_logic": [
@@ -46,13 +46,14 @@
                 "class": "",
                 "id": ""
             },
-            "post_type": [
-                "page"
-            ],
-            "taxonomy": "",
+            "choices": [],
+            "default_value": [],
             "allow_null": 1,
-            "allow_archives": 0,
-            "multiple": 0
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
         }
     ],
     "location": [
@@ -72,5 +73,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Bloc permettant de définir le sous-type de la page et de la lier à une autre.",
-    "modified": 1564990908
+    "modified": 1564995911
 }
