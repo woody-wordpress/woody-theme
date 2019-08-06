@@ -44,6 +44,12 @@ class WoodyTheme_ACF_LinkedPages
                 'title' => get_the_title($selected),
                 'selected' => true
             ];
+        }else{
+            $return[] = [
+                'id' => '',
+                'title' => 'Choisir une page',
+                'selected' => true
+            ];
         }
 
         if (!empty($value)) {
@@ -70,9 +76,17 @@ class WoodyTheme_ACF_LinkedPages
                         ),
                     ),
                     array(
-                        'key' => 'linked_alternative_page',
-                        'compare' => 'NOT EXISTS',
-                        'value' => ''
+                        'relation' => 'OR',
+                        array(
+                            'key' => 'linked_alternative_page',
+                            'compare' => 'NOT EXISTS',
+                            'value' => ''
+                        ),
+                        array(
+                            'key' => 'linked_alternative_page',
+                            'compare' => '=',
+                            'value' => ''
+                        )
                     )
                 ),
                 'post__not_in' => array(
@@ -108,24 +122,37 @@ class WoodyTheme_ACF_LinkedPages
         }
     }
 
+    /**
+     * On save post hook, link pages between them (update post meta of the two concerned pages)
+     * @param   post_id current post id
+     */
     public function setLinkBetweenPages($post_id)
     {
-        // TODO: if linked post has been changed, should remove link to the older page that was linked to it
-
-        if ( wp_is_post_revision( $post_id ) ) {
+        if (wp_is_post_revision($post_id)) {
             return;
         }
 
         $page_version = !empty(get_post_meta($post_id, 'choice_prepare_on_the_spot')) ? get_post_meta($post_id, 'choice_prepare_on_the_spot')[0] : '' ;
         $linked_post = !empty(get_post_meta($post_id, 'linked_alternative_page')) ? get_post_meta($post_id, 'linked_alternative_page')[0] : '' ;
 
-        if( !empty( $page_version ) && !empty( $linked_post )) {
+        if (!empty($page_version) && !empty($linked_post)) {
             // Set other page meta only if linked post is of opposite type of current post
             $opposite_version = !empty(get_post_meta($linked_post, 'choice_prepare_on_the_spot')) ? get_post_meta($linked_post, 'choice_prepare_on_the_spot')[0] : '' ;
 
-            if( $opposite_version == $page_version ){
+            if ($opposite_version == $page_version) {
                 update_post_meta($post_id, 'linked_alternative_page', '');
-            }else {
+            } else {
+
+                $post_revisions = wp_get_post_revisions($post_id);
+
+                if (!empty($post_revisions)) {
+                    $post_revision = end($post_revisions);
+                    $revision_id = $post_revision->ID;
+                    $revision_linked_post = !empty(get_post_meta($revision_id, 'linked_alternative_page')) ? get_post_meta($revision_id, 'linked_alternative_page')[0] : '' ;
+
+                    update_post_meta($revision_linked_post, 'linked_alternative_page', '');
+                }
+
                 $opposite = $page_version == "spot" ? "prepare" : "spot";
                 update_post_meta($linked_post, 'choice_prepare_on_the_spot', $opposite);
                 update_post_meta($linked_post, 'linked_alternative_page', $post_id);
