@@ -146,11 +146,11 @@ class WoodyTheme_ACF_LinkedPages
                 $post_revisions = wp_get_post_revisions($post_id);
 
                 if (!empty($post_revisions)) {
-                    $post_revision = end($post_revisions);
-                    $revision_id = $post_revision->ID;
-                    $revision_linked_post = !empty(get_post_meta($revision_id, 'linked_alternative_page')) ? get_post_meta($revision_id, 'linked_alternative_page')[0] : '' ;
-
-                    update_post_meta($revision_linked_post, 'linked_alternative_page', '');
+                    foreach($post_revisions as $post_revision){
+                        $revision_id = $post_revision->ID;
+                        $revision_linked_post = !empty(get_post_meta($revision_id, 'linked_alternative_page')) ? get_post_meta($revision_id, 'linked_alternative_page')[0] : '' ;
+                        update_post_meta($revision_linked_post, 'linked_alternative_page', '');
+                    }
                 }
 
                 $opposite = $page_version == "spot" ? "prepare" : "spot";
