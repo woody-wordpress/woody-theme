@@ -119,6 +119,9 @@ abstract class WoodyTheme_TemplateAbstract
             $this->context['body_class'] = $this->context['body_class'] . ' woodypage-' . $this->context['page_type'];
         }
 
+        // Add generator (Pour julien check ERP)
+        $this->context['metas'][] = sprintf('<meta name="generator" content="Raccourci Agency WP">');
+
         // Define Woody Components
         $this->addWoodyComponents();
 
