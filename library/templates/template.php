@@ -120,7 +120,7 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         // Add generator (Pour julien check ERP)
-        $this->context['metas'][] = sprintf('<meta name="generator" content="Raccourci Agency WP">');
+        $this->context['metas'][] = sprintf('<meta name="generator" content="Raccourci Agency - WP">');
 
         // Define Woody Components
         $this->addWoodyComponents();
