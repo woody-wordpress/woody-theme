@@ -439,6 +439,46 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     $paginate = ($layout['the_list_pager']['list_pager_type'] == 'basic_pager') ? true : false;
     $the_items = getItems($current_post, $layout, $paginate);
 
+    // Handle POST DATA ( AJAX from filter-list.js ) Case : Research or Changing page.
+    $post_data = filter_input_array(INPUT_POST);
+    if($post_data){
+        if(!isset($post_data['reset'])){
+            foreach($the_items['items'] as $key => $item) {
+                $hasterm = false;
+                $pass_price_filter = false;
+                $pass_duration_filter = false;
+
+                // Check if item can pass through filters
+                foreach($post_data as $data_key => $data_values){
+                    if(strpos($data_key, 'taxonomy_terms')){
+                        foreach($post_data[$data_key] as $term_id){
+                            $term = get_term($term_id);
+                            $hasterm = has_term($term_id, $term->taxonomy, $item['post_id']) ? true : $hasterm ;
+                        }
+                    }else if(strpos($data_key, 'trip_price')){
+                        $minmax = $this->getMinMax($post_data, $data_key);
+
+                        $trip_price = get_post_meta($item['post_id'], 'the_price_price');
+                        $pass_price_filter = $trip_price <= $minmax['max'] && $trip_price >= $minmax['min'] ? true : false ;
+                    }else if(strpos($data_key, 'trip_duration')){
+                        $minmax = $this->getMinMax($post_data, $data_key);
+
+                        $trip_duration = get_post_meta($item['post_id'], 'the_price_price');
+                        $pass_duration_filter = $trip_duration <= $minmax['max'] && $trip_duration >= $minmax['min'] ? true : false ;
+                    }
+                }
+                // TODO: check if isset key
+                // TODO: update default values for filters ( set to check | change min and max values )
+
+
+                // Remove item from list because can't pass through filters
+                if(!$pass_price_filter || !$hasterm || !$pass_duration_filter ){
+                    array_splice($the_items['items'], $key, 1);
+                }
+            }
+        }
+    }
+
     // Handle filters :
     if(!empty($the_list['filters'])) {
         // TAXONOMY | DURATION | PRICE | CUSTOM TERM
@@ -517,6 +557,43 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     $return = Timber::compile($twigPaths[$layout['the_list_filters']['listfilter_woody_tpl']], $the_list);
     return $return;
 }
+
+function getItems($current_post, $layout, $paginate)
+{
+    $the_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields'], $paginate, $layout['uniqid']);
+    $the_items['no_padding'] = (!empty($layout['the_list_elements']['list_no_padding'])) ? $layout['the_list_elements']['list_no_padding'] : '';
+    $the_items['display_button'] = (!empty($layout['the_list_elements']['list_el_req_fields']['display_button'])) ? $layout['the_list_elements']['list_el_req_fields']['display_button'] : '';
+
+    return $the_items;
+}
+
+function updateListFilterTax($the_list, $filter_index, $param)
+{
+    foreach ($the_list['filters'][$filter_index]['list_filter_custom_terms'] as $filter_term_key => $filter_term) {
+        if ($filter_term['value'] == $param) {
+            $the_list['filters'][$filter_index]['list_filter_custom_terms'][$filter_term_key]['checked'] = true;
+        }
+    }
+
+    return $the_list;
+}
+
+function getMinMax($post_data, $data_key) {
+    $minmax = [
+        'min' => 0,
+        'max' => 9999
+    ];
+    if(strpos($data_key, 'max')){
+        $minmax['max'] = $post_data[$data_key];
+        $minmax['min'] = $post_data[str_replace('max', 'min', $data_key)];
+    }else{
+        $minmax['min'] = $post_data[$data_key];
+        $minmax['max'] = $post_data[str_replace('min', 'max', $data_key)];
+    }
+
+    return $minmax;
+}
+
 
 function creatListMapFilter($current_post, $layout, $paginate, $filters, $twigPaths)
 {
