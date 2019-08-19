@@ -360,7 +360,6 @@ function getManualFocus_data($layout)
     $the_items = [];
     $clickable = true;
     foreach ($layout['content_selection'] as $key => $item_wrapper) {
-
         $item_wrapper['content_selection_type'] = $layout['acf_fc_layout'] == 'focus_trip_components' ? 'existing_content' : $item_wrapper['content_selection_type'];
         if (!empty($item_wrapper['existing_content']['trip_component'])) {
             $item_wrapper['existing_content']['content_selection'] = $item_wrapper['existing_content']['trip_component'];
@@ -370,7 +369,7 @@ function getManualFocus_data($layout)
         // La donnée de la vignette est saisie en backoffice
         if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
             $the_items['items'][$key] = getCustomPreview($item_wrapper['custom_content'], $layout);
-            // La donnée de la vignette correspond à un post sélectionné
+        // La donnée de la vignette correspond à un post sélectionné
         } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
             $item = $item_wrapper['existing_content'];
             $status = $item['content_selection']->post_status;
@@ -439,56 +438,15 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     $paginate = ($layout['the_list_pager']['list_pager_type'] == 'basic_pager') ? true : false;
     $the_items = getItems($current_post, $layout, $paginate);
 
-    // Handle POST DATA ( AJAX from filter-list.js ) Case : Research or Changing page.
-    $post_data = filter_input_array(INPUT_POST);
-    if($post_data){
-        if(!isset($post_data['reset'])){
-            foreach($the_items['items'] as $key => $item) {
-                $hasterm = false;
-                $pass_price_filter = false;
-                $pass_duration_filter = false;
-
-                // Check if item can pass through filters
-                foreach($post_data as $data_key => $data_values){
-                    if(strpos($data_key, 'taxonomy_terms')){
-                        foreach($post_data[$data_key] as $term_id){
-                            $term = get_term($term_id);
-                            $hasterm = has_term($term_id, $term->taxonomy, $item['post_id']) ? true : $hasterm ;
-                        }
-                    }else if(strpos($data_key, 'trip_price')){
-                        $minmax = $this->getMinMax($post_data, $data_key);
-
-                        $trip_price = get_post_meta($item['post_id'], 'the_price_price');
-                        $pass_price_filter = $trip_price <= $minmax['max'] && $trip_price >= $minmax['min'] ? true : false ;
-                    }else if(strpos($data_key, 'trip_duration')){
-                        $minmax = $this->getMinMax($post_data, $data_key);
-
-                        $trip_duration = get_post_meta($item['post_id'], 'the_price_price');
-                        $pass_duration_filter = $trip_duration <= $minmax['max'] && $trip_duration >= $minmax['min'] ? true : false ;
-                    }
-                }
-                // TODO: check if isset key
-                // TODO: update default values for filters ( set to check | change min and max values )
-
-
-                // Remove item from list because can't pass through filters
-                if(!$pass_price_filter || !$hasterm || !$pass_duration_filter ){
-                    array_splice($the_items['items'], $key, 1);
-                }
-            }
-        }
-    }
-
     // Handle filters :
-    if(!empty($the_list['filters'])) {
+    if (!empty($the_list['filters'])) {
         // TAXONOMY | DURATION | PRICE | CUSTOM TERM
-        foreach($the_list['filters'] as $key => $filter)
-        {
-            switch($filter['list_filter_type']){
+        foreach ($the_list['filters'] as $key => $filter) {
+            switch ($filter['list_filter_type']) {
                 case 'taxonomy':
                     $taxonomy = $filter['list_filter_taxonomy'];
                     $terms = get_terms($taxonomy, ['hide_empty' => false]);
-                    foreach($terms as $term_key => $term){
+                    foreach ($terms as $term_key => $term) {
                         $the_list['filters'][$key]['list_filter_custom_terms'][] = [
                             'value' => $term->term_id,
                             'label' => $term->name
@@ -523,6 +481,91 @@ function formatFullContentList($layout, $current_post, $twigPaths)
         $the_list['filters']['display']['classes'] = implode(' ', $the_list['filters']['display']['classes']);
     }
 
+    // Handle POST DATA ( AJAX from filter-list.js ) Case : Research or Changing page.
+    $post_data = filter_input_array(INPUT_POST);
+    if ($post_data) {
+        if (!empty($post_data) && $post_data['reset'] != 1) {
+            // check if isset key
+            $keys = array_keys($post_data);
+            $found_tax = false;
+            $found_price = false;
+            $found_duration = false;
+            foreach ($keys as $array_key) {
+                if (strpos($array_key, 'taxonomy_terms') !== false) {
+                    $found_tax = true ;
+                } elseif (strpos($array_key, 'trip_price') !== false) {
+                    $found_price = true ;
+                } elseif (strpos($array_key, 'trip_duration') !== false) {
+                    $found_duration = true ;
+                }
+            }
+
+            foreach ($the_items['items'] as $key => $item) {
+                $hasterm = false;
+                $pass_price_filter = false;
+                $pass_duration_filter = false;
+
+                // Check if item can pass through filters
+                foreach ($post_data as $data_key => $data_values) {
+                    if (strpos($data_key, 'taxonomy_terms') !== false) {
+                        foreach ($post_data[$data_key] as $term_id) {
+                            $term = get_term($term_id);
+                            $hasterm = has_term($term_id, $term->taxonomy, $item['post_id']) ? true : $hasterm ;
+                        }
+
+                        // Update layout values
+                        $filter_index = str_replace('taxonomy_terms_', '', $data_key);
+                        $andor = $layout['the_list_filters']['list_filters'][$filter_index]['list_filter_andor'];
+                        $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_' . $data_key]['andor'] = $andor;
+                        $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_' . $data_key]['terms'] = $data_values;
+
+                        // Update filter value on load
+                        if ($the_list['filters'][$filter_index]['list_filter_type'] == 'taxonomy' || $the_list['filters'][$filter_index]['list_filter_type'] == 'custom_terms') {
+                            if (!is_array($data_values)) {
+                                $the_list = updateListFilterTax($the_list, $filter_index, $data_values);
+                            } else {
+                                foreach ($data_values as $term_key => $term) {
+                                    $the_list = updateListFilterTax($the_list, $filter_index, $term);
+                                }
+                            }
+                        }
+                    } elseif (strpos($data_key, 'trip_price') !== false) {
+                        $filter_index = str_replace('trip_price_', '', $data_key);
+                        $minmax = getMinMax($post_data, $data_key);
+
+                        // Update value
+                        $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_price' . $filter_index]['min'] = $minmax['min'];
+                        $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_price' . $filter_index]['max'] = $minmax['max'];
+                        $the_list['filters'][$filter_index]['minmax']['default_min'] = round($minmax['min']);
+                        $the_list['filters'][$filter_index]['minmax']['default_max'] = round($minmax['max']);
+
+                        $trip_price = get_post_meta($item['post_id'], 'the_price_price')[0];
+                        $pass_price_filter = $trip_price <= $minmax['max'] && $trip_price >= $minmax['min'] ? true : false ;
+                    } elseif (strpos($data_key, 'trip_duration') !== false) {
+                        $filter_index = str_replace('trip_duration_', '', $data_key);
+                        $minmax = getMinMax($post_data, $data_key);
+
+                        // Update value
+                        $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_duration' . $filter_index]['min'] = $minmax['min'];
+                        $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_duration' . $filter_index]['max'] = $minmax['max'];
+                        $the_list['filters'][$filter_index]['minmax']['default_min'] = $minmax['min'];
+                        $the_list['filters'][$filter_index]['minmax']['default_max'] = $minmax['max'];
+
+                        $trip_duration = get_post_meta($item['post_id'], 'the_duration_count_days')[0];
+                        $pass_duration_filter = $trip_duration <= $minmax['max'] && $trip_duration >= $minmax['min'] ? true : false ;
+                    }
+                }
+
+                // Remove item from list because can't pass through filters
+                if ((!$pass_price_filter && $found_price)  || (!$hasterm && $found_tax) || (!$pass_duration_filter && $found_duration)) {
+                    array_splice($the_items['items'], $key, 1);
+                }
+            }
+        }
+    }
+    // Html Grid based on items
+    $the_list['the_grid'] = Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_items);
+
     if (!empty($the_items['items']) && !empty($the_items['wp_query']->found_posts)) {
         $the_list['items_count'] = sizeof($the_items['items']);
         $the_list['items_count_type'] = $the_list['items_count'] > 1 ? 'plural' : 'singular' ;
@@ -546,13 +589,9 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     }
 
     if (!empty($layout['the_list_pager']) && $layout['the_list_pager']['list_pager_type'] != 'none') {
-        $items_by_page = (!empty($layout['the_list_elements']['list_el_req_fields']['focused_count'])) ? $layout['the_list_elements']['list_el_req_fields']['focused_count'] : 16;
         $the_list['pager'] = formatListPager($layout['the_list_pager'], $max_num_pages, $the_list['uniqid']);
         $the_list['pager_position'] = $layout['the_list_pager']['list_pager_position'];
     }
-
-    // Html Grid based on items
-    $the_list['the_grid'] = Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_items);
 
     $return = Timber::compile($twigPaths[$layout['the_list_filters']['listfilter_woody_tpl']], $the_list);
     return $return;
@@ -578,15 +617,16 @@ function updateListFilterTax($the_list, $filter_index, $param)
     return $the_list;
 }
 
-function getMinMax($post_data, $data_key) {
+function getMinMax($post_data, $data_key)
+{
     $minmax = [
         'min' => 0,
         'max' => 9999
     ];
-    if(strpos($data_key, 'max')){
+    if (strpos($data_key, 'max')) {
         $minmax['max'] = $post_data[$data_key];
         $minmax['min'] = $post_data[str_replace('max', 'min', $data_key)];
-    }else{
+    } else {
         $minmax['min'] = $post_data[$data_key];
         $minmax['max'] = $post_data[str_replace('min', 'max', $data_key)];
     }
@@ -695,20 +735,20 @@ function formatGeomapData($layout, $twigPaths)
             $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker);
         }
     }
-    if(!empty($layout['routes'])){
-        foreach( $layout['routes'] as $key => $route ){
+    if (!empty($layout['routes'])) {
+        foreach ($layout['routes'] as $key => $route) {
             $filename = get_attached_file($route['route_file']['ID']);
             $filetype = wp_check_filetype($filename);
 
-            if( $filetype['ext'] == 'json' || $filetype['ext'] == 'geojson' ) {
+            if ($filetype['ext'] == 'json' || $filetype['ext'] == 'geojson') {
                 $json = file_get_contents($filename);
                 $route['route_file'] = $json;
 
                 $layout['routes'][$key] = json_decode($route['route_file'], true) ;
-                foreach( $layout['routes'][$key]['features'] as $f_key => $feature){
+                foreach ($layout['routes'][$key]['features'] as $f_key => $feature) {
                     $layout['routes'][$key]['features'][$f_key]['route'] = true;
 
-                    if ( $route['parameters'] === true ) {
+                    if ($route['parameters'] === true) {
                         $layout['routes'][$key]['features'][$f_key]['properties']['fill'] = $route['fill_color'];
                         $layout['routes'][$key]['features'][$f_key]['properties']['stroke'] = $route['route_color'];
                         $layout['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = $route['stroke_thickness'];
