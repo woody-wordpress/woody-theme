@@ -428,6 +428,91 @@ function getAutoFocusSheetData($layout)
  * @return   items - Un tableau de données
  *
  */
+function formatFocusesData($layout, $current_post, $twigPaths)
+{
+    $return = '';
+    $the_items = [];
+    if ($layout['acf_fc_layout'] == 'manual_focus' || $layout['acf_fc_layout'] == 'focus_trip_components') {
+        $the_items = getManualFocus_data($layout);
+    } elseif ($layout['acf_fc_layout'] == 'auto_focus') {
+        $the_items = getAutoFocus_data($current_post, $layout);
+    } elseif ($layout['acf_fc_layout'] == 'auto_focus_sheets' && !empty($layout['playlist_conf_id'])) {
+        $the_items = getAutoFocusSheetData($layout);
+    }
+    if (!empty($the_items)) {
+        foreach ($the_items['items'] as $item_key => $item) {
+            if (!empty($item['description'])) {
+                $the_items['items'][$item_key]['description'] = str_replace(['[', ']'], '', $item['description']);
+            }
+        }
+
+        $the_items['no_padding'] = (!empty($layout['focus_no_padding'])) ? $layout['focus_no_padding'] : '';
+        $the_items['block_titles'] = getFocusBlockTitles($layout);
+        $the_items['display_button'] = (!empty($layout['display_button'])) ? $layout['display_button'] : '';
+        $the_items['default_marker'] = $layout['default_marker'];
+        $the_items['visual_effects'] = $layout['visual_effects'];
+
+
+        if (!empty($layout['focus_map_params'])) {
+            if (!empty($layout['focus_map_params']['tmaps_confid'])) {
+                $the_items['map_params']['tmaps_confid'] = $layout['focus_map_params']['tmaps_confid'];
+            }
+            if (!empty($layout['focus_map_params']['map_height'])) {
+                $the_items['map_params']['map_height'] = $layout['focus_map_params']['map_height'];
+            }
+            if (!empty($layout['focus_map_params']['map_zoom_auto'])) {
+                $the_items['map_params']['map_zoom_auto'] = $layout['focus_map_params']['map_zoom_auto'];
+            }
+            if (!empty($layout['focus_map_params']['map_zoom'])) {
+                if (empty($the_items['map_params']['map_zoom_auto']) || $the_items['map_params']['map_zoom_auto'] === false) {
+                    $the_items['map_params']['map_zoom'] = $layout['focus_map_params']['map_zoom'];
+                }
+            }
+        }
+
+        $return = Timber::compile($twigPaths[$layout['woody_tpl']], $the_items);
+    }
+
+    return $return;
+}
+
+function getItems($current_post, $layout, $paginate)
+{
+    $the_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields'], $paginate, $layout['uniqid']);
+    $the_items['no_padding'] = (!empty($layout['the_list_elements']['list_no_padding'])) ? $layout['the_list_elements']['list_no_padding'] : '';
+    $the_items['display_button'] = (!empty($layout['the_list_elements']['list_el_req_fields']['display_button'])) ? $layout['the_list_elements']['list_el_req_fields']['display_button'] : '';
+
+    return $the_items;
+}
+
+function updateListFilterTax($the_list, $filter_index, $param)
+{
+    foreach ($the_list['filters'][$filter_index]['list_filter_custom_terms'] as $filter_term_key => $filter_term) {
+        if ($filter_term['value'] == $param) {
+            $the_list['filters'][$filter_index]['list_filter_custom_terms'][$filter_term_key]['checked'] = true;
+        }
+    }
+
+    return $the_list;
+}
+
+function getMinMax($post_data, $data_key)
+{
+    $minmax = [
+        'min' => 0,
+        'max' => 9999
+    ];
+    if (strpos($data_key, 'max')) {
+        $minmax['max'] = $post_data[$data_key];
+        $minmax['min'] = $post_data[str_replace('max', 'min', $data_key)];
+    } else {
+        $minmax['min'] = $post_data[$data_key];
+        $minmax['max'] = $post_data[str_replace('min', 'max', $data_key)];
+    }
+
+    return $minmax;
+}
+
 function formatFullContentList($layout, $current_post, $twigPaths)
 {
     $the_list = [];
@@ -534,10 +619,12 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                         $minmax = getMinMax($post_data, $data_key);
 
                         // Update value
+                        $index_min = str_replace('_min', '', $filter_index);
+                        $the_list['filters'][$index_min]['minmax']['default_min'] = round($minmax['min']);
                         $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_price' . $filter_index]['min'] = $minmax['min'];
+                        $index_max = str_replace('_max', '', $filter_index);
+                        $the_list['filters'][$index_max]['minmax']['default_max'] = round($minmax['max']);
                         $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_price' . $filter_index]['max'] = $minmax['max'];
-                        $the_list['filters'][$filter_index]['minmax']['default_min'] = round($minmax['min']);
-                        $the_list['filters'][$filter_index]['minmax']['default_max'] = round($minmax['max']);
 
                         $trip_price = get_post_meta($item['post_id'], 'the_price_price')[0];
                         $pass_price_filter = $trip_price <= $minmax['max'] && $trip_price >= $minmax['min'] ? true : false ;
@@ -546,10 +633,12 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                         $minmax = getMinMax($post_data, $data_key);
 
                         // Update value
+                        $index_min = str_replace('_min', '', $filter_index);
+                        $the_list['filters'][$index_min]['minmax']['default_min'] = $minmax['min'];
                         $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_duration' . $filter_index]['min'] = $minmax['min'];
+                        $index_max = str_replace('_max', '', $filter_index);
+                        $the_list['filters'][$index_max]['minmax']['default_max'] = $minmax['max'];
                         $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_duration' . $filter_index]['max'] = $minmax['max'];
-                        $the_list['filters'][$filter_index]['minmax']['default_min'] = $minmax['min'];
-                        $the_list['filters'][$filter_index]['minmax']['default_max'] = $minmax['max'];
 
                         $trip_duration = get_post_meta($item['post_id'], 'the_duration_count_days')[0];
                         $pass_duration_filter = $trip_duration <= $minmax['max'] && $trip_duration >= $minmax['min'] ? true : false ;
@@ -557,8 +646,8 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                 }
 
                 // Remove item from list because can't pass through filters
-                if ((!$pass_price_filter && $found_price)  || (!$hasterm && $found_tax) || (!$pass_duration_filter && $found_duration)) {
-                    array_splice($the_items['items'], $key, 1);
+                if ( (!$pass_price_filter && $found_price)  || ($hasterm == false && $found_tax == true) || (!$pass_duration_filter && $found_duration) ) {
+                    unset($the_items['items'][$key]);
                 }
             }
         }
@@ -596,44 +685,6 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     $return = Timber::compile($twigPaths[$layout['the_list_filters']['listfilter_woody_tpl']], $the_list);
     return $return;
 }
-
-function getItems($current_post, $layout, $paginate)
-{
-    $the_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields'], $paginate, $layout['uniqid']);
-    $the_items['no_padding'] = (!empty($layout['the_list_elements']['list_no_padding'])) ? $layout['the_list_elements']['list_no_padding'] : '';
-    $the_items['display_button'] = (!empty($layout['the_list_elements']['list_el_req_fields']['display_button'])) ? $layout['the_list_elements']['list_el_req_fields']['display_button'] : '';
-
-    return $the_items;
-}
-
-function updateListFilterTax($the_list, $filter_index, $param)
-{
-    foreach ($the_list['filters'][$filter_index]['list_filter_custom_terms'] as $filter_term_key => $filter_term) {
-        if ($filter_term['value'] == $param) {
-            $the_list['filters'][$filter_index]['list_filter_custom_terms'][$filter_term_key]['checked'] = true;
-        }
-    }
-
-    return $the_list;
-}
-
-function getMinMax($post_data, $data_key)
-{
-    $minmax = [
-        'min' => 0,
-        'max' => 9999
-    ];
-    if (strpos($data_key, 'max')) {
-        $minmax['max'] = $post_data[$data_key];
-        $minmax['min'] = $post_data[str_replace('max', 'min', $data_key)];
-    } else {
-        $minmax['min'] = $post_data[$data_key];
-        $minmax['max'] = $post_data[str_replace('min', 'max', $data_key)];
-    }
-
-    return $minmax;
-}
-
 
 function creatListMapFilter($current_post, $layout, $paginate, $filters, $twigPaths)
 {
