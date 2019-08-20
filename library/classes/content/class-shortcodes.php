@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shortscodes
  *
@@ -18,7 +19,7 @@ class WoodyTheme_Shortcodes
 
     protected function registerHooks()
     {
-        add_shortcode('woody_meteo', [$this,'weatherShortCode']);
+        add_shortcode('woody_meteo', [$this, 'weatherShortCode']);
         add_shortcode('woody_recherche', [$this, 'searchShortCode']);
         add_shortcode('woody_anchor', [$this, 'anchorShortcode']);
     }
@@ -48,7 +49,7 @@ class WoodyTheme_Shortcodes
                 $post_id = explode('_', $post_id);
                 $post_id = end($post_id);
                 $post = Timber::get_post($post_id);
-                if($post->id != null){
+                if ($post->id != null) {
                     $result['posts']['pages'][] = getPagePreview(['display_elements' => ['description'], 'display_button' => true, 'display_img' => true], $post);
                 }
             }
@@ -94,52 +95,52 @@ class WoodyTheme_Shortcodes
         $env = WP_ENV;
         $lang = pll_current_language();
 
-            $img = '';
-            if(!empty($sheet['data']['multimedia'])) {
+        $img = '';
+        if (!empty($sheet['data']['multimedia'])) {
 
-                $hash_path = str_replace(array("+", "/"), array("-", "_"), base64_encode($sheet['data']['multimedia'][0]['URL']));
+            $hash_path = str_replace(array("+", "/"), array("-", "_"), base64_encode($sheet['data']['multimedia'][0]['URL']));
 
-                $img = [
-                    'url' => [
-                        'manual' =>'https://api.tourism-system.com/resize/crop/%width%/%height%/60/' . $hash_path . '/image.jpg',
-                    ],
-                    'alt' => '',
-                    'title' => ''
-                ];
-            }else{
-                $img = [
-                    'url' => [
-                        'manual' => 'https://api.tourism-system.com/static/assets/images/resizer/img_404.jpg'
-                    ],
-                    'alt' => '',
-                    'title' => ''
-                ];
-            }
+            $img = [
+                'url' => [
+                    'manual' => 'https://api.tourism-system.com/resize/crop/%width%/%height%/60/' . $hash_path . '/image.jpg',
+                ],
+                'alt' => '',
+                'title' => ''
+            ];
+        } else {
+            $img = [
+                'url' => [
+                    'manual' => 'https://api.tourism-system.com/static/assets/images/resizer/img_404.jpg'
+                ],
+                'alt' => '',
+                'title' => ''
+            ];
+        }
 
-            $link = '';
-            if(!empty($sheet['metadata']['canonicals_v2'])){
-                foreach($sheet['metadata']['canonicals_v2'] as $canonical){
-                    if(!empty($canonical["website_".$env])){
-                        $link = $canonical["website_".$env][$lang];
-                    }
+        $link = '';
+        if (!empty($sheet['metadata']['canonicals_v2'])) {
+            foreach ($sheet['metadata']['canonicals_v2'] as $canonical) {
+                if (!empty($canonical["website_" . $env])) {
+                    $link = $canonical["website_" . $env][$lang];
                 }
             }
+        }
 
-            $sheet_data = [
-                'items' => [
-                    [
-                        'title' => $sheet['metadata']['name'],
-                        'link'  => $link,
-                        'targetBlank' => true,
-                        'img' => $img,
-                        'type' => '',
-                        'desc' => $sheet['data']['dublinCore']['description'][$lang],
-                        'town' => $sheet['data']['contacts'][0]['addresses'][0]['commune'],
-                        'bordereau' => $sheet['data']['bordereau'],
-                        'ratings' => null,
-                    ]
+        $sheet_data = [
+            'items' => [
+                [
+                    'title' => $sheet['metadata']['name'],
+                    'link'  => $link,
+                    'targetBlank' => true,
+                    'img' => $img,
+                    'type' => '',
+                    'desc' => $sheet['data']['dublinCore']['description'][$lang],
+                    'town' => $sheet['data']['contacts'][0]['addresses'][0]['commune'],
+                    'bordereau' => $sheet['data']['bordereau'],
+                    'ratings' => null,
                 ]
-            ];
+            ]
+        ];
 
         return $sheet_data;
     }
