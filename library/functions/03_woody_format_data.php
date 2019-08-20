@@ -566,16 +566,13 @@ function formatFullContentList($layout, $current_post, $twigPaths)
         $the_list['filters']['display']['classes'] = implode(' ', $the_list['filters']['display']['classes']);
     }
 
-    // Need : get post data on next button -> Find a way to store data only if it has been charged, then remove it
-
     // Handle POST DATA ( AJAX from filter-list.js )
     $post_data = filter_input_array(INPUT_POST);
     $params = filter_input_array(INPUT_GET);
     if ($params) {
-        foreach($params as $key => $param) {
-            if( false !== strpos($key, 'section_') ) {
+        foreach ($params as $key => $param) {
+            if (false !== strpos($key, 'section_')) {
                 $reset = $post_data['reset'];
-                wd($reset);
                 $post_data = get_transient('list_content_param') ? get_transient('list_content_param') : $post_data ;
                 $post_data['reset'] = $reset ;
             }
@@ -662,11 +659,11 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                 }
 
                 // Remove item from list because can't pass through filters
-                if ( (!$pass_price_filter && $found_price)  || ($hasterm == false && $found_tax == true) || (!$pass_duration_filter && $found_duration) ) {
+                if ((!$pass_price_filter && $found_price)  || ($hasterm == false && $found_tax == true) || (!$pass_duration_filter && $found_duration)) {
                     unset($the_items['items'][$key]);
                 }
             }
-        }else{
+        } else {
             $post_data = [];
             delete_transient('list_content_param');
         }
@@ -679,6 +676,9 @@ function formatFullContentList($layout, $current_post, $twigPaths)
         $the_list['items_count_type'] = $the_list['items_count'] > 1 ? 'plural' : 'singular' ;
     } else {
         $the_list['items_count_type'] = 'empty';
+        $the_items = [
+            'empty' => 'Désolé, aucun contenu ne correspond à votre recherche'
+        ];
     }
 
     $the_items['max_num_pages'] = empty($the_items['max_num_pages']) ? 1 : $the_items['max_num_pages'] ;
