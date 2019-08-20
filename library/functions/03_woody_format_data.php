@@ -566,10 +566,26 @@ function formatFullContentList($layout, $current_post, $twigPaths)
         $the_list['filters']['display']['classes'] = implode(' ', $the_list['filters']['display']['classes']);
     }
 
-    // Handle POST DATA ( AJAX from filter-list.js ) Case : Research or Changing page.
+    // Need : get post data on next button -> Find a way to store data only if it has been charged, then remove it
+
+    // Handle POST DATA ( AJAX from filter-list.js )
     $post_data = filter_input_array(INPUT_POST);
+    $params = filter_input_array(INPUT_GET);
+    if ($params) {
+        foreach($params as $key => $param) {
+            if( false !== strpos($key, 'section_') ) {
+                $reset = $post_data['reset'];
+                wd($reset);
+                $post_data = get_transient('list_content_param') ? get_transient('list_content_param') : $post_data ;
+                $post_data['reset'] = $reset ;
+            }
+        }
+    }
+
     if ($post_data) {
         if (!empty($post_data) && $post_data['reset'] != 1) {
+            set_transient('list_content_param', $post_data, 60*15);
+
             // check if isset key
             $keys = array_keys($post_data);
             $found_tax = false;
@@ -650,6 +666,9 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                     unset($the_items['items'][$key]);
                 }
             }
+        }else{
+            $post_data = [];
+            delete_transient('list_content_param');
         }
     }
     // Html Grid based on items
