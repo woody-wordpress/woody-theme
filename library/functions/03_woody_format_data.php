@@ -570,10 +570,11 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     $post_data = filter_input_array(INPUT_POST);
     $params = filter_input_array(INPUT_GET);
     if ($params) {
+        $needle = str_replace('section_content_', '', $layout['uniqid']);
         foreach ($params as $key => $param) {
-            if (false !== strpos($key, 'section_')) {
+            if (false !== strpos($key, $needle)) {
                 $reset = $post_data['reset'];
-                $post_data = get_transient('list_content_param') ? get_transient('list_content_param') : $post_data ;
+                $post_data = get_transient('list_content_param_'.$key) ? get_transient('list_content_param_'.$key) : $post_data ;
                 $post_data['reset'] = $reset ;
             }
         }
@@ -581,7 +582,8 @@ function formatFullContentList($layout, $current_post, $twigPaths)
 
     if ($post_data) {
         if (!empty($post_data) && $post_data['reset'] != 1) {
-            set_transient('list_content_param', $post_data, 60*15);
+            $transient_label = 'list_content_param_' . str_replace('section_content_', '', $layout['uniqid']);
+            set_transient($transient_label, $post_data, 60*15);
 
             // check if isset key
             $keys = array_keys($post_data);
@@ -665,7 +667,8 @@ function formatFullContentList($layout, $current_post, $twigPaths)
             }
         } else {
             $post_data = [];
-            delete_transient('list_content_param');
+            $transient_label = 'list_content_param_' . str_replace('section_content_', '', $layout['uniqid']);
+            delete_transient($transient_label);
         }
     }
     // Html Grid based on items
