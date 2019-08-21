@@ -568,14 +568,18 @@ function formatFullContentList($layout, $current_post, $twigPaths)
 
     // Handle POST DATA ( AJAX from filter-list.js )
     $post_data = filter_input_array(INPUT_POST);
-    $params = filter_input_array(INPUT_GET);
-    if ($params) {
-        $needle = str_replace('section_content_', '', $layout['uniqid']);
-        $reset = $post_data['reset'];
-        $post_data = get_transient('list_content_param_'.$needle) ? get_transient('list_content_param_'.$needle) : $post_data ;
-        $post_data['reset'] = $reset ;
+
+    // Check if filters aren't already set
+    $needle = str_replace('section_content_', '', $layout['uniqid']);
+    $reset = $post_data['reset'];
+    $section_reset = isset($post_data['section_reset']) ? $post_data['section_reset'] : false ;
+    $post_data = get_transient('list_content_param_'.$needle) ? get_transient('list_content_param_'.$needle) : $post_data ;
+    $post_data['reset'] = $reset ;
+    if($section_reset){
+        $post_data['section_reset'] = $section_reset;
     }
 
+    // TODO: simplify this part
     if ($post_data) {
         if (!empty($post_data) && $post_data['reset'] != 1 && isset($post_data['uniqid']) && $post_data['uniqid'] == $layout['uniqid']) {
             $transient_label = 'list_content_param_' . str_replace('section_content_', '', $layout['uniqid']);
@@ -661,10 +665,12 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                     unset($the_items['items'][$key]);
                 }
             }
-        } else {
-            $post_data = [];
+        } else if ( $post_data['reset'] == 1 && $post_data['section_reset'] == $post_data['uniqid'] ) {
             $transient_label = 'list_content_param_' . str_replace('section_content_', '', $layout['uniqid']);
             delete_transient($transient_label);
+            $post_data = [];
+        } else {
+            $post_data = [];
         }
     }
     // Html Grid based on items
