@@ -519,6 +519,7 @@
 
 // On masque les tabs et le choix d'affichage sur le champ "Playlist" lorsque l'on est sur une page de type "Playlist"
 #acf-group_5b33890e6fa0b {
+
     .acf-field-5d11c991b82fe,
     .acf-field-5ce2aea593cd7,
     .acf-field-5c821f9df381d,
@@ -657,11 +658,27 @@
     }
 }
 
+
 .acf-field-5b043f0525968 {
     .layout[data-layout="call_to_action"] {
         .acf-tab-group {
             li:nth-of-type(2) {
                 display: none !important;
+            }
+        }
+    }
+}
+
+.acf-field-5bb3297e77f43 {
+    display: none !important;
+}
+
+// Cache les icônes des thématiques du Hero dans le back-office
+.acf-field-5ce3b93aa6252 {
+    .acf-checkbox-list {
+        input[type="checkbox"] {
+            ~span[class^="wicon-"] {
+                display: none;
             }
         }
     }

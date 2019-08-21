@@ -1,0 +1,46 @@
+{
+    "key": "group_5d161209038a4",
+    "title": "Icône Thématique",
+    "fields": [
+        {
+            "key": "field_5d16129d7d93a",
+            "label": "Icône associé",
+            "name": "woody_icon",
+            "type": "select",
+            "instructions": "Assignez une icône à un terme, il sera utilisé un peu partout sur votre site.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {},
+            "default_value": [],
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 1,
+            "ajax": 1,
+            "return_format": "value",
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "themes"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Champs icône pour les thématiques",
+    "modified": 1561731941
+}

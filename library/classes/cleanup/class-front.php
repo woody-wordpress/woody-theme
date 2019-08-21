@@ -89,12 +89,12 @@ class WoodyTheme_Cleanup_Front
             'class'   => '',
         ), $attr, 'caption');
 
-        $atts['width'] = (int) $atts['width'];
+        $atts['width'] = (int)$atts['width'];
         if ($atts['width'] < 1 || empty($atts['caption'])) {
             return $content;
         }
 
-        if (! empty($atts['id'])) {
+        if (!empty($atts['id'])) {
             $atts['id'] = 'id="' . esc_attr($atts['id']) . '" ';
         }
 
@@ -102,7 +102,7 @@ class WoodyTheme_Cleanup_Front
 
         if (current_theme_supports('html5', 'caption')) {
             return '<figure ' . $atts['id'] . ' class="' . esc_attr($class) . '">'
-            . do_shortcode($content) . '<figcaption class="wp-caption-text">' . $atts['caption'] . '</figcaption></figure>';
+                . do_shortcode($content) . '<figcaption class="wp-caption-text">' . $atts['caption'] . '</figcaption></figure>';
         }
     }
 }

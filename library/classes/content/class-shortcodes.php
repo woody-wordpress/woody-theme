@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Shortscodes
  *
@@ -18,7 +19,7 @@ class WoodyTheme_Shortcodes
 
     protected function registerHooks()
     {
-        add_shortcode('woody_meteo', [$this,'weatherShortCode']);
+        add_shortcode('woody_meteo', [$this, 'weatherShortCode']);
         add_shortcode('woody_recherche', [$this, 'searchShortCode']);
         add_shortcode('woody_anchor', [$this, 'anchorShortcode']);
     }
@@ -35,7 +36,7 @@ class WoodyTheme_Shortcodes
         $tags = $tags ? explode(':', $tags) : '';
 
         // Search inside pages
-        $pages_response = apply_filters('woody_pages_search', ['query' => $query, 'tags' => $tags]);
+        $pages_response = apply_filters('woody_pages_search', ['query' => $query, 'size' => 30, 'tags' => $tags]);
 
         $result = [];
         $result['query'] = $query;
@@ -48,7 +49,9 @@ class WoodyTheme_Shortcodes
                 $post_id = explode('_', $post_id);
                 $post_id = end($post_id);
                 $post = Timber::get_post($post_id);
-                $result['posts']['pages'][] = getPagePreview(['display_elements' => ['description'], 'display_button' => true, 'display_img' => true], $post);
+                if ($post->id != null) {
+                    $result['posts']['pages'][] = getPagePreview(['display_elements' => ['description'], 'display_button' => true, 'display_img' => true], $post);
+                }
             }
         }
 
@@ -58,12 +61,13 @@ class WoodyTheme_Shortcodes
         }
 
         // Search inside sheets
-        $sheets_response = apply_filters('woody_hawwwai_sheets_search', ['query' => $query]);
+        $sheets_response = apply_filters('woody_hawwwai_sheets_search', ['query' => $query, 'size' => 6]);
 
         $result['posts']['touristic_sheets'] = [];
         if (!empty($sheets_response['sheets'])) {
             foreach ($sheets_response['sheets'] as $sheet) {
-                $result['posts']['touristic_sheets'][] = getTouristicSheetPreview(['display_elements' => ['description', 'sheet_town', 'sheet_type'], 'display_img' => true], $sheet['data']['idFiche']);
+                $sheet_data = $this->formatSheetData($sheet);
+                $result['posts']['touristic_sheets'][] = getTouristicSheetPreview(['display_elements' => ['sheet_town', 'sheet_type'], 'display_img' => true], $sheet['data']['idFiche'], $sheet_data);
             }
         }
 
@@ -78,6 +82,67 @@ class WoodyTheme_Shortcodes
         $template = $tplSearch['template'] ?: $this->twigPaths['woody_widgets-es_search-tpl_01'];
 
         return Timber::compile($template, $result);
+    }
+
+    /**
+     * Function that format data to use it in getTouristicSheetPreview function
+     * @param   sheet       sheet data and metadata
+     * @return  sheet_data  array containing necessary data
+     */
+    private function formatSheetData($sheet)
+    {
+
+        $env = WP_ENV;
+        $lang = pll_current_language();
+
+        $img = '';
+        if (!empty($sheet['data']['multimedia'])) {
+
+            $hash_path = str_replace(array("+", "/"), array("-", "_"), base64_encode($sheet['data']['multimedia'][0]['URL']));
+
+            $img = [
+                'url' => [
+                    'manual' => 'https://api.tourism-system.com/resize/crop/%width%/%height%/60/' . $hash_path . '/image.jpg',
+                ],
+                'alt' => '',
+                'title' => ''
+            ];
+        } else {
+            $img = [
+                'url' => [
+                    'manual' => 'https://api.tourism-system.com/static/assets/images/resizer/img_404.jpg'
+                ],
+                'alt' => '',
+                'title' => ''
+            ];
+        }
+
+        $link = '';
+        if (!empty($sheet['metadata']['canonicals_v2'])) {
+            foreach ($sheet['metadata']['canonicals_v2'] as $canonical) {
+                if (!empty($canonical["website_" . $env])) {
+                    $link = $canonical["website_" . $env][$lang];
+                }
+            }
+        }
+
+        $sheet_data = [
+            'items' => [
+                [
+                    'title' => $sheet['metadata']['name'],
+                    'link'  => $link,
+                    'targetBlank' => true,
+                    'img' => $img,
+                    'type' => '',
+                    'desc' => $sheet['data']['dublinCore']['description'][$lang],
+                    'town' => $sheet['data']['contacts'][0]['addresses'][0]['commune'],
+                    'bordereau' => $sheet['data']['bordereau'],
+                    'ratings' => null,
+                ]
+            ]
+        ];
+
+        return $sheet_data;
     }
 
     public function anchorShortcode($atts)

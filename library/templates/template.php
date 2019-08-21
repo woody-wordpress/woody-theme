@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template
  *
@@ -85,6 +86,7 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['post_title'] = false;
         $this->context['sheet_id'] = false;
         $this->context['page_type'] = false;
+        $this->context['metas'] = [];
 
         $this->context['enabled_woody_options'] = WOODY_OPTIONS;
 
@@ -102,8 +104,8 @@ abstract class WoodyTheme_TemplateAbstract
             if (!empty($this->context['post'])) {
                 $this->context['post_title'] = $this->context['post']->post_title;
                 $this->context['post_id'] = $this->context['post']->ID;
-                if(!empty($this->context['post_id'])){
-                    $this->context['sheet_id'] = get_post_type($this->context['post_id']) === 'touristic_sheet' ? get_post_meta($this->context['post_id'], 'touristic_sheet_id')[0] : false ;
+                if (!empty($this->context['post_id'])) {
+                    $this->context['sheet_id'] = get_post_type($this->context['post_id']) === 'touristic_sheet' ? get_post_meta($this->context['post_id'], 'touristic_sheet_id')[0] : false;
                 }
             }
         }
@@ -117,11 +119,11 @@ abstract class WoodyTheme_TemplateAbstract
             $this->context['body_class'] = $this->context['body_class'] . ' woodypage-' . $this->context['page_type'];
         }
 
+        // Add generator (Pour julien check ERP)
+        $this->context['metas'][] = sprintf('<meta name="generator" content="Raccourci Agency - WP">');
+
         // Define Woody Components
         $this->addWoodyComponents();
-
-        // Define SubWoodyTheme_TemplateParts
-        $this->addHeaderFooter();
 
         // GlobalsVars
         $this->addGlobalsVars();
@@ -132,19 +134,32 @@ abstract class WoodyTheme_TemplateAbstract
         // Added Icons
         $this->addIcons();
 
-        // Add langSwitcher
-        $this->addLanguageSwitcher();
+        $tools_blocks = [];
 
         // Add langSwitcher
-        $this->addSeasonSwitcher();
+        $tools_blocks['lang_switcher'] = $this->addLanguageSwitcher();
+        $this->context['lang_switcher'] = apply_filters('lang_switcher', $tools_blocks['lang_switcher']);
+        $this->context['lang_switcher_mobile'] = apply_filters('lang_switcher_mobile', $tools_blocks['lang_switcher']);
+
+        // Add langSwitcher
+        $tools_blocks['season_switcher'] = $this->addSeasonSwitcher();
+        $this->context['season_switcher'] = apply_filters('season_switcher', $tools_blocks['season_switcher']);
+        $this->context['season_switcher_mobile'] = apply_filters('season_switcher_mobile', $tools_blocks['season_switcher']);
 
         // Add addEsSearchBlock
-        $this->addEsSearchBlock();
+        $tools_blocks['es_search_block'] = $this->addEsSearchBlock();
+        $this->context['es_search_block'] = apply_filters('es_search_block', $tools_blocks['es_search_block']);
+        $this->context['es_search_block_mobile'] = apply_filters('es_search_block_mobile', $tools_blocks['es_search_block']);
 
         // Add addFavoritesBlock
         if (in_array('favorites', $this->context['enabled_woody_options'])) {
-            $this->addFavoritesBlock();
+            $tools_blocks['favorites_block'] = $this->addFavoritesBlock();
+            $this->context['favorites_block'] = apply_filters('favorites_block', $tools_blocks['favorites_block']);
+            $this->context['favorites_block_mobile'] = apply_filters('favorites_block_mobile', $tools_blocks['favorites_block']);
         }
+
+        // Define SubWoodyTheme_TemplateParts
+        $this->addHeaderFooter($tools_blocks);
 
         // Set a global dist dir
         $this->context['dist_dir'] = WP_DIST_DIR;
@@ -155,11 +170,11 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['woody_components'] = getWoodyTwigPaths();
     }
 
-    private function addHeaderFooter()
+    private function addHeaderFooter($tools_blocks = [])
     {
         // Define SubWoodyTheme_TemplateParts
         if (class_exists('SubWoodyTheme_TemplateParts')) {
-            $SubWoodyTheme_TemplateParts = new SubWoodyTheme_TemplateParts($this->context['woody_components']);
+            $SubWoodyTheme_TemplateParts = new SubWoodyTheme_TemplateParts($this->context['woody_components'], $tools_blocks);
             if (!empty($SubWoodyTheme_TemplateParts->mobile_logo)) {
                 $this->context['mobile_logo'] = $SubWoodyTheme_TemplateParts->mobile_logo;
             }
@@ -209,16 +224,10 @@ abstract class WoodyTheme_TemplateAbstract
             $data = $this->createSwitcher($languages);
 
             // Set a default template
-            $tpl_switcher = apply_filters('season_switcher_tpl', null);
-            if (empty($tpl_switcher)) {
-                $tpl_switcher = 'woody_widgets-season_switcher-tpl_01';
-            }
+            $tpl = apply_filters('season_switcher_tpl', null);
+            $template = $tpl['template'] ? $this->context['woody_components'][$tpl['template']] : $this->context['woody_components']['woody_widgets-season_switcher-tpl_01'];
 
-            $template = $this->context['woody_components'][$tpl_switcher];
-            $compile_switcher = Timber::compile($template, $data);
-
-            $this->context['season_switcher'] = $compile_switcher;
-            $this->context['season_switcher_mobile'] = $compile_switcher;
+            return Timber::compile($template, $data);
         }
     }
 
@@ -231,11 +240,10 @@ abstract class WoodyTheme_TemplateAbstract
             $data = $this->createSwitcher($languages);
 
             // Set a default template
-            $template = $this->context['woody_components']['woody_widgets-lang_switcher-tpl_01'];
-            $compile_lang = Timber::compile($template, $data);
+            $tpl = apply_filters('lang_switcher_tpl', null);
+            $template = $tpl['template'] ? $this->context['woody_components'][$tpl['template']] : $this->context['woody_components']['woody_widgets-lang_switcher-tpl_01'];
 
-            $this->context['lang_switcher'] = $compile_lang;
-            $this->context['lang_switcher_mobile'] = $compile_lang;
+            return Timber::compile($template, $data);
         }
     }
 
@@ -287,7 +295,7 @@ abstract class WoodyTheme_TemplateAbstract
                             $data['langs'][$lang_key]['name'] = $language['name'];
                             $data['langs'][$lang_key]['locale'] = (!empty($language['locale'])) ? substr($language['locale'], 0, 2) : $lang_key;
                             $data['langs'][$lang_key]['target'] = '_blank';
-                        } else if (!is_user_logged_in()) {
+                        } elseif (!is_user_logged_in()) {
                             unset($data['langs'][$lang_key]);
                         }
                     }
@@ -346,10 +354,7 @@ abstract class WoodyTheme_TemplateAbstract
             $data['tags'] = $tpl['tags'] ?: '';
             $template = $tpl['template'] ?: $this->context['woody_components']['woody_widgets-es_search_block-tpl_01'];
 
-            $timber_compile = Timber::compile($template, $data);
-
-            $this->context['es_search_block'] = $timber_compile;
-            $this->context['es_search_block_mobile'] = $timber_compile;
+            return Timber::compile($template, $data);
         }
     }
 
@@ -361,13 +366,10 @@ abstract class WoodyTheme_TemplateAbstract
             $data['favorites_page_url'] = get_permalink(pll_get_post($favorites_post_id));
 
             // Set a default template
-            $tpl = apply_filters('favorites_block', null);
+            $tpl = apply_filters('favorites_block_tpl', null);
             $template = $tpl['template'] ?: $this->context['woody_components']['woody_widgets-favorites_block-tpl_01'];
 
-            $timber_compile = Timber::compile($template, $data);
-
-            $this->context['favorites_block'] = $timber_compile;
-            $this->context['favorites_block_mobile'] = $timber_compile;
+            return Timber::compile($template, $data);
         }
     }
 }

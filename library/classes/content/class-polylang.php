@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Polylang
  *
@@ -68,7 +69,6 @@ class WoodyTheme_Polylang
         // Yoast
         __("Page non trouvée %%sep%% %%sitename%%", 'woody-theme');
         __("Erreur 404 : Page non trouvée", 'woody-theme');
-        __("Aller à la page d\'accueil", "woody-theme");
 
         // Date
         __("Lundi", 'woody-theme');
@@ -90,6 +90,32 @@ class WoodyTheme_Polylang
         __("Octobre", 'woody-theme');
         __("Novembre", 'woody-theme');
         __("Décembre", 'woody-theme');
+
+        // Trip infos
+        __('À partir de', 'woody-theme');
+        __('à partir de', 'woody-theme');
+        __('heure', 'woody-theme');
+        __('heures', 'woody-theme');
+        __('minute', 'woody-theme');
+        __('minutes', 'woody-theme');
+        __('min', 'woody-theme');
+        __('max', 'woody-theme');
+        __('pers.', 'woody-theme');
+        __('Demander un devis', 'woody-theme');
+        __('jour', 'woody-theme');
+        __('jours', 'woody-theme');
+        __('personne', 'woody-theme');
+        __('personnes', 'woody-theme');
+        //TODO: Récupérer les chaînes à traudire dans groupQuotation.php (plugin) et dans le tpl de devis (library)
+
+        // Availabilities calendar
+        __('Attention, vous n\'avez pas saisi d\'identifiant de playlist en paramètre du shortcode.
+            Pour rappel, le shortcode s\'utilise par exemple de cette manière', 'woody_theme');
+        __('Année', 'woody_theme');
+        __('Établissement', 'woody_theme');
+        __('Établissement disponible', 'woody_theme');
+        __('Établissement indisponible', 'woody_theme');
+        __('Aucunes informations concernant cet établissement pour l\'année en cours', 'woody_theme');
 
         // Woody blocs
         __("M'y rendre", 'woody-theme');
@@ -131,6 +157,8 @@ class WoodyTheme_Polylang
         __('Changer de saison', 'woody-theme');
         __('Réservable', 'woody-theme');
         __('Télécharger', 'woody-theme');
+        __("Aller à la page d'accueil", "woody-theme");
+        __("Retour à la page d'accueil", 'woody-theme');
 
         // Weather
         __('Bas', 'woody-theme');
@@ -180,5 +208,8 @@ class WoodyTheme_Polylang
         __('Ajouter', 'woody-theme');
         __('Supprimer', 'woody-theme');
         __('Cette liste est vide actuellement. Naviguez et ajoutez des pages !', 'woody-theme');
+
+        // Favorites
+        __('Ajouter à mes favoris', 'woody-theme');
     }
 }

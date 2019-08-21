@@ -1,10 +1,13 @@
 <?php
+
 /**
  * Template
  *
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
+
+use Woody\Modules\GroupQuotation\GroupQuotation;
 
 class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 {
@@ -17,6 +20,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
     protected function registerHooks()
     {
+        add_filter('wpseo_canonical', [$this, 'wpSeoCanonical'], 10, 1);
     }
 
     protected function getHeaders()
@@ -49,6 +53,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $this->pageContext();
             }
         }
+
     }
 
     protected function page404Context()
@@ -107,12 +112,35 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             if (!empty($home_slider['landswpr_slides'])) {
                 $this->context['home_slider'] = Timber::compile($this->context['woody_components'][$home_slider['landswpr_woody_tpl']], $home_slider);
             }
+
+            $this->context['after_landswpr'] = !empty($this->context['page_parts']['after_landswpr']) ? $this->context['page_parts']['after_landswpr'] : '';
         }
 
         /*********************************************
          * Compilation du bloc prix
          *********************************************/
         $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d', $this->context['post']);
+
+        // Si le module groupe est activé
+        if (in_array('groups', $this->context['enabled_woody_options'])) {
+            $groupQuotation = new GroupQuotation;
+            // On vérifie si le prix est calculé sur un ensemble de composant et on le définit le cas échéant
+            if (!empty($trip_infos['the_price']['price_type']) && $trip_infos['the_price']['price_type'] == 'component_based') {
+                $price_fields = $trip_infos['the_price'];
+                // apply_filters('woody_get_price_from_components', $price_fields);
+                $trip_infos['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price']);
+                if ($trip_infos['the_price']['activate_quotation'] == true) {
+                    $quotation_id = get_option("options_quotation_page_url");
+                    $trip_infos['quotation_link']['link_label'] = get_permalink($quotation_id)."?sejour=".$this->context['post_id'];
+                }
+            }
+            if (!empty($trip_infos['the_duration']['duration_unit']) && $trip_infos['the_duration']['duration_unit'] == 'component_based') {
+                $duration_fields = $trip_infos['the_duration'];
+                // apply_filters('woody_get_duration_from_components', $duration_fields);
+                $trip_infos['the_duration'] = $groupQuotation->calculTripDuration($trip_infos['the_duration']);
+            }
+        }
+
         if (!empty($trip_infos['the_duration']['count_days']) || !empty($trip_infos['the_length']['length']) || !empty($trip_infos['the_price']['price'])) {
             //TODO: Gérer le fichier gps pour affichage s/ carte
             $trip_infos['the_duration']['count_days'] = ($trip_infos['the_duration']['count_days']) ? humanDays($trip_infos['the_duration']['count_days']) : '';
@@ -169,7 +197,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 }
 
                 $page_hero['title'] = (!empty($page_hero['title'])) ? str_replace('-', '&#8209', $page_hero['title']) : '';
-
                 $this->context['page_hero'] = Timber::compile($this->context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
             }
         }
@@ -185,11 +212,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
          *********************************************/
         if ($this->context['page_type'] === 'playlist_tourism') {
             $this->playlistContext();
-
-            $autoselect_id = filter_input(INPUT_GET, 'autoselect_id', FILTER_VALIDATE_INT);
-            if (!empty($autoselect_id)) {
-                $this->context['metas'][] = '<meta name="robots" content="noindex, follow" />';
-            }
         }
 
         /*********************************************
@@ -300,6 +322,12 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     {
         $this->context['body_class'] .= ' apirender apirender-playlist apirender-wordpress';
 
+        // No Index if autoselect_id
+        $autoselect_id = filter_input(INPUT_GET, 'autoselect_id', FILTER_VALIDATE_INT);
+        if (!empty($autoselect_id)) {
+            $this->context['metas'][] = '<meta name="robots" content="noindex, follow" />';
+        }
+
         /** ************************
          * Vérification pré-cochage
          ************************ **/
@@ -342,7 +370,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $query = filter_input_array($checkMethod, $checkAutoSelect, $add_non_existing = false);
         $query_GQV = filter_input_array(INPUT_GET, $checkQueryVars, $add_non_existing = false);
 
-        $query = array_merge((array)$query, (array)$query_GQV);
+        $query = array_merge((array) $query, (array) $query_GQV);
         foreach ($query as $key => $param) {
             if (!$param) {
                 unset($query[$key]);
@@ -362,10 +390,15 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             $this->context['playlist_tourism']['confId'] = $playlistConfId;
         }
 
-
         // Return template
         if (empty($this->context['playlist_tourism']['content'])) {
             $this->context['playlist_tourism']['content'] = '<center style="margin: 80px 0">Playlist non configurée</center>';
+        }
+
+        // handle api error
+        if (isset($this->context['playlist_tourism']['status'])) {
+            $code = intval($this->context['playlist_tourism']['status']);
+            status_header($code);
         }
     }
 
@@ -389,5 +422,18 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             $headers['x-apirender-url'] = $this->context['playlist_tourism']['apirender_uri'];
         }
         return $headers;
+    }
+
+    /***************************
+     * Overide Canonical
+     *****************************/
+    public function wpSeoCanonical($url)
+    {
+        $listpage = filter_input(INPUT_GET, 'listpage', FILTER_VALIDATE_INT);
+        if ($this->context['page_type'] === 'playlist_tourism' && !empty($listpage) && is_numeric($listpage)) {
+            $url .= '?listpage=' . $listpage;
+        }
+
+        return $url;
     }
 }

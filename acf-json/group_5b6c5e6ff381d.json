@@ -71,17 +71,46 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "25",
+                        "width": "15",
                         "class": "",
                         "id": ""
                     },
                     "default_value": "",
                     "placeholder": "",
                     "prepend": "",
-                    "append": "€",
+                    "append": "",
                     "min": "",
                     "max": "",
                     "step": ""
+                },
+                {
+                    "key": "field_5d161f9d62a94",
+                    "label": "Devise",
+                    "name": "currency",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "15",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "euro": "€",
+                        "us_dollar": "$ <small><i>(USD)<\/i><\/small>",
+                        "au_dollar": "$ <small><i>(AUD)<\/i><\/small>",
+                        "pound": "£"
+                    },
+                    "default_value": [
+                        "euro"
+                    ],
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 1,
+                    "ajax": 0,
+                    "return_format": "array",
+                    "placeholder": ""
                 },
                 {
                     "key": "field_5b6d48b82d0ac",
@@ -97,7 +126,29 @@
                                 "operator": "==",
                                 "value": "evolving_single"
                             }
-                        ],
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "pers.",
+                    "min": "",
+                    "max": "",
+                    "step": ""
+                },
+                {
+                    "key": "field_5d26e3c820681",
+                    "label": "Jusqu'à (nombre de personnes)",
+                    "name": "price_fixed_until",
+                    "type": "number",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
                         [
                             {
                                 "field": "field_5b6d47c62d0ab",
@@ -107,7 +158,7 @@
                         ]
                     ],
                     "wrapper": {
-                        "width": "25",
+                        "width": "20",
                         "class": "",
                         "id": ""
                     },
@@ -133,7 +184,29 @@
                                 "operator": "==",
                                 "value": "evolving_single"
                             }
-                        ],
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "€",
+                    "min": "",
+                    "max": "",
+                    "step": ""
+                },
+                {
+                    "key": "field_5d26e43120682",
+                    "label": "Prix supplémentaire",
+                    "name": "additional_price",
+                    "type": "number",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
                         [
                             {
                                 "field": "field_5b6d47c62d0ab",
@@ -150,7 +223,6 @@
                     "default_value": "",
                     "placeholder": "",
                     "prepend": "",
-                    "append": "€",
                     "min": "",
                     "max": "",
                     "step": ""
@@ -184,6 +256,176 @@
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                }
+            ]
+        },
+        {
+            "key": "field_5b6c5e7cb54ee",
+            "label": "Durée",
+            "name": "the_duration",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_5b6c66b2b54f0",
+                    "label": "Accroche",
+                    "name": "prefix_days",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "Ex : Suggestion à réaliser en",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5d131da457834",
+                    "label": "Unité de durée",
+                    "name": "duration_unit",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "days": "jours",
+                        "hours": "heures",
+                        "minutes": "minutes"
+                    },
+                    "default_value": [
+                        "days"
+                    ],
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 0,
+                    "return_format": "value",
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_5b6c6248b54ef",
+                    "label": "Nombre de jours",
+                    "name": "count_days",
+                    "type": "number",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5d131da457834",
+                                "operator": "==",
+                                "value": "days"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "34",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "jour(s)",
+                    "min": "",
+                    "max": "",
+                    "step": ""
+                },
+                {
+                    "key": "field_5d131e2d57835",
+                    "label": "Nombres d'heures",
+                    "name": "count_hours",
+                    "type": "number",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5d131da457834",
+                                "operator": "==",
+                                "value": "hours"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "34",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "heure(s)",
+                    "min": "",
+                    "max": "",
+                    "step": ""
+                },
+                {
+                    "key": "field_5d131e8457836",
+                    "label": "Nombre de minutes",
+                    "name": "count_minutes",
+                    "type": "number",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5d131da457834",
+                                "operator": "==",
+                                "value": "minutes"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "34",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "minutes",
+                    "min": "",
+                    "max": "",
+                    "step": ""
+                },
+                {
+                    "key": "field_5b6c66c3b54f1",
+                    "label": "Précision",
+                    "name": "suffix_days",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33",
                         "class": "",
                         "id": ""
                     },
@@ -239,82 +481,6 @@
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                }
-            ]
-        },
-        {
-            "key": "field_5b6c5e7cb54ee",
-            "label": "Durée",
-            "name": "the_duration",
-            "type": "group",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "layout": "block",
-            "sub_fields": [
-                {
-                    "key": "field_5b6c66b2b54f0",
-                    "label": "Accroche",
-                    "name": "prefix_days",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "33",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "Ex : Suggestion à réaliser en",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_5b6c6248b54ef",
-                    "label": "Nombre de jours",
-                    "name": "count_days",
-                    "type": "number",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "34",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "jours",
-                    "min": "",
-                    "max": "",
-                    "step": ""
-                },
-                {
-                    "key": "field_5b6c66c3b54f1",
-                    "label": "Précision",
-                    "name": "suffix_days",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "33",
                         "class": "",
                         "id": ""
                     },
@@ -446,10 +612,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "choices": {
-                "blocks-trip_infos-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.tarnetgaronne.wp.rc-dev.com\/app\/dist\/tarnetgaronne\/img\/woody-library\/views\/blocks\/trip_infos\/tpl_01\/thumbnail.png?version=2.9.1\" alt=\"blocks-trip_infos-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Infos séjour - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Infos séjour - Template 1<\/h4>Affiche le prix et la durée d'un séjour - Centrés l'un sur l'autre<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-trip_infos-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.tarnetgaronne.wp.rc-dev.com\/app\/dist\/tarnetgaronne\/img\/woody-library\/views\/blocks\/trip_infos\/tpl_02\/thumbnail.png?version=2.9.1\" alt=\"blocks-trip_infos-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Infos séjour - Template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Infos séjour - Template 2<\/h4>Affiche le prix et la durée d'un séjour - Centrés l'un sur l'autre<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-            },
+            "choices": {},
             "allow_null": 0,
             "other_choice": 0,
             "default_value": "",
@@ -517,5 +680,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Affiche le prix et la duré d'un séjour",
-    "modified": 1557138464
+    "modified": 1562830008
 }

@@ -9,6 +9,7 @@ function getComponentItem($layout, $context)
         case 'manual_focus':
         case 'auto_focus':
         case 'auto_focus_sheets':
+        case 'focus_trip_components':
             $return = formatFocusesData($layout, $context['post'], $context['woody_components']);
             break;
         case 'geo_map':
@@ -17,10 +18,6 @@ function getComponentItem($layout, $context)
         case 'content_list':
             $return = formatFullContentList($layout, $context['post'], $context['woody_components']);
             break;
-
-            // case 'snow_info':
-            //     $return = formatSnowInfoData($layout, $context['woody_components']);
-            //     break;
         case 'weather':
             $vars['account'] = $layout['weather_account'];
             $vars['nb_days'] = $layout['weather_count_days'];
@@ -361,7 +358,15 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
 function getManualFocus_data($layout)
 {
     $the_items = [];
+    $clickable = true;
     foreach ($layout['content_selection'] as $key => $item_wrapper) {
+
+        $item_wrapper['content_selection_type'] = $layout['acf_fc_layout'] == 'focus_trip_components' ? 'existing_content' : $item_wrapper['content_selection_type'];
+        if (!empty($item_wrapper['existing_content']['trip_component'])) {
+            $item_wrapper['existing_content']['content_selection'] = $item_wrapper['existing_content']['trip_component'];
+            $clickable = (!empty($item_wrapper['existing_content']['clickable_component'])) ? true : false;
+        }
+
         // La donnée de la vignette est saisie en backoffice
         if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
             $the_items['items'][$key] = getCustomPreview($item_wrapper['custom_content'], $layout);
@@ -373,7 +378,7 @@ function getManualFocus_data($layout)
                 continue;
             }
             if ($item['content_selection']->post_type == 'page') {
-                $post_preview = getPagePreview($layout, $item['content_selection']);
+                $post_preview = getPagePreview($layout, $item['content_selection'], $clickable);
             } elseif ($item['content_selection']->post_type == 'touristic_sheet') {
                 $post_preview = getTouristicSheetPreview($layout, $item['content_selection']->custom['touristic_sheet_id']);
             }
@@ -428,7 +433,7 @@ function formatFocusesData($layout, $current_post, $twigPaths)
 {
     $return = '';
     $the_items = [];
-    if ($layout['acf_fc_layout'] == 'manual_focus') {
+    if ($layout['acf_fc_layout'] == 'manual_focus' || $layout['acf_fc_layout'] == 'focus_trip_components') {
         $the_items = getManualFocus_data($layout);
     } elseif ($layout['acf_fc_layout'] == 'auto_focus') {
         $the_items = getAutoFocus_data($current_post, $layout);
@@ -452,6 +457,17 @@ function formatFocusesData($layout, $current_post, $twigPaths)
         if (!empty($layout['focus_map_params'])) {
             if (!empty($layout['focus_map_params']['tmaps_confid'])) {
                 $the_items['map_params']['tmaps_confid'] = $layout['focus_map_params']['tmaps_confid'];
+            }
+            if (!empty($layout['focus_map_params']['map_height'])) {
+                $the_items['map_params']['map_height'] = $layout['focus_map_params']['map_height'];
+            }
+            if (!empty($layout['focus_map_params']['map_zoom_auto'])) {
+                $the_items['map_params']['map_zoom_auto'] = $layout['focus_map_params']['map_zoom_auto'];
+            }
+            if (!empty($layout['focus_map_params']['map_zoom'])) {
+                if (empty($the_items['map_params']['map_zoom_auto']) || $the_items['map_params']['map_zoom_auto'] === false) {
+                    $the_items['map_params']['map_zoom'] = $layout['focus_map_params']['map_zoom'];
+                }
             }
         }
 
@@ -744,6 +760,43 @@ function formatGeomapData($layout, $twigPaths)
             $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker);
         }
     }
+    if(!empty($layout['routes'])){
+        foreach( $layout['routes'] as $key => $route ){
+            $filename = get_attached_file($route['route_file']['ID']);
+            $filetype = wp_check_filetype($filename);
+
+            if( $filetype['ext'] == 'json' || $filetype['ext'] == 'geojson' ) {
+                $json = file_get_contents($filename);
+                $route['route_file'] = $json;
+
+                $layout['routes'][$key] = json_decode($route['route_file'], true) ;
+                foreach( $layout['routes'][$key]['features'] as $f_key => $feature){
+                    $layout['routes'][$key]['features'][$f_key]['route'] = true;
+
+                    if ( $route['parameters'] === true ) {
+                        $layout['routes'][$key]['features'][$f_key]['properties']['fill'] = $route['fill_color'];
+                        $layout['routes'][$key]['features'][$f_key]['properties']['stroke'] = $route['route_color'];
+                        $layout['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = $route['stroke_thickness'];
+                    }
+                    $fill_opacity = isset($layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity']) ? $layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] : 0;
+                    $layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] = $fill_opacity == 0 ? 0.5 : $fill_opacity;
+
+
+                    // if($feature['geometry']['type'] == "Point"){
+                    //     if (empty($feature['properties'])) {
+                    //         $feature['properties']["marker-color"] = "#ff0000";
+                    //         $feature['properties']["marker-size"] = "medium";
+                    //         $feature['properties']["marker-symbol"] = "";
+
+                    //         $layout['routes'][$key]['features'][$f_key] = $feature;
+                    //     }
+                    // }
+                }
+
+                $layout['routes'][$key] = json_encode($layout['routes'][$key]);
+            }
+        }
+    }
 
     $return = Timber::compile($twigPaths[$layout['woody_tpl']], $layout);
     return $return;
@@ -818,7 +871,7 @@ function getCustomPreview($item, $item_wrapper = null)
  *
  */
 
-function getTouristicSheetPreview($layout = null, $sheet_id)
+function getTouristicSheetPreview($layout = null, $sheet_id, $sheet_data = null)
 {
     $data = [];
     $lang = pll_current_language();
@@ -831,7 +884,7 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
         }
     }
 
-    $sheet_data = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $lang, array(), 'json', 'item');
+    $sheet_data = $sheet_data == null ? apply_filters('woody_hawwwai_sheet_render', $sheet_id, $lang, array(), 'json', 'item') : $sheet_data;
     if (!empty($sheet_data['items'])) {
         foreach ($sheet_data['items'] as $key => $item) {
             $data = [
@@ -957,25 +1010,25 @@ function getFocusBlockTitles($layout)
  * @return   data - Un tableau de données
  *
  */
-function getPagePreview($item_wrapper, $item)
+function getPagePreview($item_wrapper, $item, $clickable = true)
 {
     $data = [];
 
     $data['page_type'] = getTermsSlugs($item->ID, 'page_type', true);
     $data['post_id'] = $item->ID;
 
-    if (!empty($item->get_field('focus_title'))) {
-        $data['title'] = getTransformedPattern($item->get_field('focus_title'), $item);
-    } elseif (!empty($item->get_title())) {
-        $data['title'] = getTransformedPattern($item->get_title(), $item);
+    if (!empty(get_field('focus_title', $item->ID))) {
+        $data['title'] = getTransformedPattern(get_field('focus_title', $item->ID), $item);
+    } elseif (!empty(get_the_title($item->ID))) {
+        $data['title'] = getTransformedPattern(get_the_title($item->ID), $item);
     }
 
     if (!empty($item_wrapper) && !empty($item_wrapper['display_elements']) && is_array($item_wrapper['display_elements'])) {
         if (in_array('pretitle', $item_wrapper['display_elements'])) {
-            $data['pretitle'] = getTransformedPattern(getFieldAndFallback($item, 'focus_pretitle', get_field('page_heading_heading', $item->id), 'pretitle', $item, 'field_5b87f20257a1d'), $item);
+            $data['pretitle'] = getTransformedPattern(getFieldAndFallback($item, 'focus_pretitle', get_field('page_heading_heading', $item->ID), 'pretitle', $item, 'field_5b87f20257a1d'), $item);
         }
         if (in_array('subtitle', $item_wrapper['display_elements'])) {
-            $data['subtitle'] = getTransformedPattern(getFieldAndFallback($item, 'focus_subtitle', get_field('page_heading_heading', $item->id), 'subtitle', $item, 'field_5b87f23b57a1e'), $item);
+            $data['subtitle'] = getTransformedPattern(getFieldAndFallback($item, 'focus_subtitle', get_field('page_heading_heading', $item->ID), 'subtitle', $item, 'field_5b87f23b57a1e'), $item);
         }
         if (in_array('icon', $item_wrapper['display_elements'])) {
             $data['woody_icon'] = $item->get_field('focus_woody_icon');
@@ -1002,9 +1055,9 @@ function getPagePreview($item_wrapper, $item)
         }
     }
 
-    $data['the_peoples'] = $item->get_field('field_5b6d54a10381f');
+    $data['the_peoples'] = get_field('field_5b6d54a10381f', $item->ID);
 
-    if (!empty($item_wrapper['display_button'])) {
+    if ($clickable && !empty($item_wrapper['display_button'])) {
         $data['link']['link_label'] = getFieldAndFallBack($item, 'focus_button_title', $item);
         if (empty($data['link']['link_label'])) {
             $data['link']['link_label'] = __('Lire la suite', 'woody-theme');
@@ -1013,13 +1066,19 @@ function getPagePreview($item_wrapper, $item)
 
     if (!empty($item_wrapper['display_img'])) {
         $data['img'] = getFieldAndFallback($item, 'focus_img', $item, 'field_5b0e5ddfd4b1b');
+        if (empty($data['img'])) {
+            $video = getFieldAndFallback($item, 'field_5b0e5df0d4b1c', $item);
+            $data['img'] = !empty($video) ? $video['movie_poster_file'] : '';
+        }
     }
 
     $data['location'] = [];
-    $data['location']['lat'] = (!empty($item->get_field('post_latitude'))) ? $item->get_field('post_latitude') : '';
-    $data['location']['lng'] = (!empty($item->get_field('post_longitude'))) ? $item->get_field('post_longitude') : '';
+    $data['location']['lat'] = (!empty(get_field('post_latitude', $item->ID))) ? get_field('post_latitude', $item->ID) : '';
+    $data['location']['lng'] = (!empty(get_field('post_longitude', $item->ID))) ? get_field('post_longitude', $item->ID) : '';
     $data['img']['attachment_more_data'] = (!empty($data['img'])) ? getAttachmentMoreData($data['img']['ID']) : '';
-    $data['link']['url'] = $item->get_path();
+    if ($clickable) {
+        $data['link']['url'] = get_permalink($item->ID);
+    }
 
     // $post_type = get_post_terms($item->ID, 'page_type');
 
@@ -1039,14 +1098,14 @@ function getPagePreview($item_wrapper, $item)
  **/
 function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = '', $lastfallback_item = '', $lastfallback_field = '')
 {
-    if (!empty($item->get_field($field))) {
-        $value = $item->get_field($field);
+    if (!empty(get_field($field, $item->ID))) {
+        $value = get_field($field, $item->ID);
     } elseif (!empty($fallback_item) && is_array($fallback_item) && !empty($fallback_item[$fallback_field])) {
         $value = $fallback_item[$fallback_field];
-    } elseif (!empty($fallback_item) && is_object($fallback_item) && !empty($fallback_item->get_field($fallback_field))) {
-        $value = $fallback_item->get_field($fallback_field);
-    } elseif (!empty($lastfallback_item) && !empty($lastfallback_item->get_field($lastfallback_field))) {
-        $value = $lastfallback_item->get_field($lastfallback_field);
+    } elseif (!empty($fallback_item) && is_object($fallback_item) && !empty(get_field($fallback_field, $fallback_item->ID))) {
+        $value = get_field($fallback_field, $fallback_item->ID);
+    } elseif (!empty($lastfallback_item) && !empty(get_field($lastfallback_field, $lastfallback_item->ID))) {
+        $value = get_field($lastfallback_field, $lastfallback_item->ID);
     } else {
         $value = '';
     }
@@ -1210,7 +1269,7 @@ function formatVisualEffectData($effects)
 
 function getSectionBannerFiles($filename)
 {
-    if (file_exists(get_stylesheet_directory() . '/views/section_banner/section_' . $filename)) {
+    if (file_exists(get_stylesheet_directory() . '/views/section_banner/section_' . $filename . '.twig')) {
         $file = file_get_contents(get_stylesheet_directory() . '/views/section_banner/section_' . $filename . '.twig');
     } else {
         $file = file_get_contents(get_template_directory() . '/views/section_banner/section_' . $filename . '.twig');

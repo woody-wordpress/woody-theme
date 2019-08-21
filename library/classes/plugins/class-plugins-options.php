@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Default options of plugins
  *
@@ -43,7 +44,6 @@ class WoodyTheme_Plugins_Options
         update_option('minify_html_scheme', 'no', '', 'yes');
         update_option('minify_html_utf8', 'no', '', 'yes');
         update_option('upload_path', WP_UPLOAD_DIR, '', 'yes');
-        update_option('upload_url_path', WP_UPLOAD_URL, '', 'yes');
         update_option('uploads_use_yearmonth_folders', true, '', 'yes');
         update_option('thumbnail_crop', true, '', 'yes');
         update_option('acm_server_settings', ['server_enable' => true], '', 'yes');
@@ -58,6 +58,11 @@ class WoodyTheme_Plugins_Options
         delete_option('permalink-manager-external-redirects');
         delete_option('permalink-manager-uris_backup');
         delete_option('permalink-manager-redirects_backup');
+
+        // Force Disable indexation
+        if (WP_ENV != 'dev' || (WP_ENV == 'dev' && empty(get_option('upload_url_path')))) {
+            update_option('upload_url_path', WP_UPLOAD_URL, '', 'yes');
+        }
 
         // Force Disable indexation
         if (WP_ENV != 'prod') {
