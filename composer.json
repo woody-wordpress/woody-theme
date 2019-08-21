@@ -1,17 +1,21 @@
 {
-    "name": "rc/woody-theme",
+    "name": "woody-wordpress/woody-theme",
     "type": "wordpress-theme",
-    "description": "",
-    "license": "proprietary",
+    "description": "Parent theme of Woody Wordpresss Builder",
+    "license": "GPL-2.0",
     "authors": [{
-        "name": "Raccourci Agency",
-        "email": "contact@raccourci.fr"
-    }],
+            "name": "Léo POIROUX",
+            "email": "leo@raccourci.fr"
+        },
+        {
+            "name": "Benoit BOUCHAUD",
+            "email": "benoit.bouchaud@raccourci.fr"
+        }
+    ],
     "require": {
-        "php": ">=7.0",
-        "composer/installers": "^1.4"
+        "php": ">=7.0"
     },
     "config": {
-        "secure-http": false
+        "optimize-autoloader": true
     }
 }
