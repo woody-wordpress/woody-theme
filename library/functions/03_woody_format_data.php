@@ -571,17 +571,13 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     $params = filter_input_array(INPUT_GET);
     if ($params) {
         $needle = str_replace('section_content_', '', $layout['uniqid']);
-        foreach ($params as $key => $param) {
-            if (false !== strpos($key, $needle)) {
-                $reset = $post_data['reset'];
-                $post_data = get_transient('list_content_param_'.$key) ? get_transient('list_content_param_'.$key) : $post_data ;
-                $post_data['reset'] = $reset ;
-            }
-        }
+        $reset = $post_data['reset'];
+        $post_data = get_transient('list_content_param_'.$needle) ? get_transient('list_content_param_'.$needle) : $post_data ;
+        $post_data['reset'] = $reset ;
     }
 
     if ($post_data) {
-        if (!empty($post_data) && $post_data['reset'] != 1) {
+        if (!empty($post_data) && $post_data['reset'] != 1 && isset($post_data['uniqid']) && $post_data['uniqid'] == $layout['uniqid']) {
             $transient_label = 'list_content_param_' . str_replace('section_content_', '', $layout['uniqid']);
             set_transient($transient_label, $post_data, 60*15);
 
