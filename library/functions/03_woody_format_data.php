@@ -871,7 +871,7 @@ function getCustomPreview($item, $item_wrapper = null)
  *
  */
 
-function getTouristicSheetPreview($layout = null, $sheet_id)
+function getTouristicSheetPreview($layout = null, $sheet_id, $sheet_data = null)
 {
     $data = [];
     $lang = pll_current_language();
@@ -884,7 +884,7 @@ function getTouristicSheetPreview($layout = null, $sheet_id)
         }
     }
 
-    $sheet_data = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $lang, array(), 'json', 'item');
+    $sheet_data = $sheet_data == null ? apply_filters('woody_hawwwai_sheet_render', $sheet_id, $lang, array(), 'json', 'item') : $sheet_data;
     if (!empty($sheet_data['items'])) {
         foreach ($sheet_data['items'] as $key => $item) {
             $data = [
