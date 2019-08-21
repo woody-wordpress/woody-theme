@@ -571,11 +571,11 @@ function formatFullContentList($layout, $current_post, $twigPaths)
 
     // Check if filters aren't already set
     $needle = str_replace('section_content_', '', $layout['uniqid']);
-    $reset = $post_data['reset'];
+    $reset = isset($post_data['reset']) ? $post_data['reset'] : false ;
     $section_reset = isset($post_data['section_reset']) ? $post_data['section_reset'] : false ;
-    $post_data = get_transient('list_content_param_'.$needle) ? get_transient('list_content_param_'.$needle) : $post_data ;
+    $post_data = get_transient('list_content_param_'.$needle) && $reset === false ? get_transient('list_content_param_'.$needle) : $post_data ;
     $post_data['reset'] = $reset ;
-    if($section_reset){
+    if ($section_reset) {
         $post_data['section_reset'] = $section_reset;
     }
 
@@ -665,7 +665,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                     unset($the_items['items'][$key]);
                 }
             }
-        } else if ( $post_data['reset'] == 1 && $post_data['section_reset'] == $post_data['uniqid'] ) {
+        } elseif ($post_data['reset'] == 1 && $post_data['section_reset'] == $post_data['uniqid']) {
             $transient_label = 'list_content_param_' . str_replace('section_content_', '', $layout['uniqid']);
             delete_transient($transient_label);
             $post_data = [];
@@ -685,7 +685,6 @@ function formatFullContentList($layout, $current_post, $twigPaths)
             'empty' => 'Désolé, aucun contenu ne correspond à votre recherche'
         ];
     }
-
     $the_items['max_num_pages'] = empty($the_items['max_num_pages']) ? 1 : $the_items['max_num_pages'] ;
     $max_num_pages = $the_items['max_num_pages'];
 
