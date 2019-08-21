@@ -569,7 +569,9 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     // Handle POST DATA ( AJAX from filter-list.js )
     $post_data = filter_input_array(INPUT_POST);
 
-    // Check if filters aren't already set
+    // If Click reset, need to know which section must be reset to default (default filters)
+    // If changing page, need to get data to keep filters.
+    // If click research, need to update data anf filters.
     $needle = str_replace('section_content_', '', $layout['uniqid']);
     $reset = isset($post_data['reset']) ? $post_data['reset'] : false ;
     $section_reset = isset($post_data['section_reset']) ? $post_data['section_reset'] : false ;
@@ -579,40 +581,15 @@ function formatFullContentList($layout, $current_post, $twigPaths)
         $post_data['section_reset'] = $section_reset;
     }
 
-    // TODO: simplify this part
     if ($post_data) {
         if (!empty($post_data) && $post_data['reset'] != 1 && isset($post_data['uniqid']) && $post_data['uniqid'] == $layout['uniqid']) {
             $transient_label = 'list_content_param_' . str_replace('section_content_', '', $layout['uniqid']);
             set_transient($transient_label, $post_data, 60*15);
 
-            // check if isset key
-            $keys = array_keys($post_data);
-            $found_tax = false;
-            $found_price = false;
-            $found_duration = false;
-            foreach ($keys as $array_key) {
-                if (strpos($array_key, 'taxonomy_terms') !== false) {
-                    $found_tax = true ;
-                } elseif (strpos($array_key, 'trip_price') !== false) {
-                    $found_price = true ;
-                } elseif (strpos($array_key, 'trip_duration') !== false) {
-                    $found_duration = true ;
-                }
-            }
-
             foreach ($the_items['items'] as $key => $item) {
-                $hasterm = false;
-                $pass_price_filter = false;
-                $pass_duration_filter = false;
-
                 // Check if item can pass through filters
                 foreach ($post_data as $data_key => $data_values) {
                     if (strpos($data_key, 'taxonomy_terms') !== false) {
-                        foreach ($post_data[$data_key] as $term_id) {
-                            $term = get_term($term_id);
-                            $hasterm = has_term($term_id, $term->taxonomy, $item['post_id']) ? true : $hasterm ;
-                        }
-
                         // Update layout values
                         $filter_index = str_replace('taxonomy_terms_', '', $data_key);
                         $andor = $layout['the_list_filters']['list_filters'][$filter_index]['list_filter_andor'];
@@ -640,9 +617,6 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                         $index_max = str_replace('_max', '', $filter_index);
                         $the_list['filters'][$index_max]['minmax']['default_max'] = round($minmax['max']);
                         $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_price' . $filter_index]['max'] = $minmax['max'];
-
-                        $trip_price = get_post_meta($item['post_id'], 'the_price_price')[0];
-                        $pass_price_filter = $trip_price <= $minmax['max'] && $trip_price >= $minmax['min'] ? true : false ;
                     } elseif (strpos($data_key, 'trip_duration') !== false) {
                         $filter_index = str_replace('trip_duration_', '', $data_key);
                         $minmax = getMinMax($post_data, $data_key);
@@ -654,15 +628,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                         $index_max = str_replace('_max', '', $filter_index);
                         $the_list['filters'][$index_max]['minmax']['default_max'] = $minmax['max'];
                         $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_duration' . $filter_index]['max'] = $minmax['max'];
-
-                        $trip_duration = get_post_meta($item['post_id'], 'the_duration_count_days')[0];
-                        $pass_duration_filter = $trip_duration <= $minmax['max'] && $trip_duration >= $minmax['min'] ? true : false ;
                     }
-                }
-
-                // Remove item from list because can't pass through filters
-                if ((!$pass_price_filter && $found_price)  || ($hasterm == false && $found_tax == true) || (!$pass_duration_filter && $found_duration)) {
-                    unset($the_items['items'][$key]);
                 }
             }
         } elseif ($post_data['reset'] == 1 && $post_data['section_reset'] == $post_data['uniqid']) {
@@ -672,6 +638,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
         } else {
             $post_data = [];
         }
+        $the_items = getItems($current_post, $layout, $paginate);
     }
     // Html Grid based on items
     $the_list['the_grid'] = Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_items);
