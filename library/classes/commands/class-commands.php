@@ -25,6 +25,9 @@ class WoodyTheme_Commands
         \WP_CLI::add_command('woody_flush_cache', [$this, 'flush_cache']);
         \WP_CLI::add_command('woody_flush_timber', [$this, 'flush_timber']);
         \WP_CLI::add_command('woody_flush_varnish', [$this, 'flush_varnish']);
+
+        add_action('woody_flush_cache', [$this, 'flush_cache']);
+        add_action('woody_flush_varnish', [$this, 'flush_varnish']);
     }
 
     public function flush($args)
