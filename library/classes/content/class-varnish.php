@@ -40,23 +40,25 @@ class WoodyTheme_Varnish
             $woody_varnish_caching_ttl = 0;
         } elseif (!empty($post)) {
             $sections = get_field('section', $post->ID);
-            foreach ($sections as $section) {
-                foreach ($section['section_content'] as $section_content) {
-                    if ($section_content['acf_fc_layout'] == 'tabs_group') {
-                        foreach ($section_content['tabs'] as $tab) {
-                            foreach ($tab['light_section_content'] as $light_section_content) {
-                                $ttl = $this->getTLLbyField($light_section_content);
-                                if (!empty($ttl)) {
-                                    $woody_varnish_caching_ttl = $ttl;
-                                    break 4;
+            if (is_array($sections)) {
+                foreach ($sections as $section) {
+                    foreach ($section['section_content'] as $section_content) {
+                        if ($section_content['acf_fc_layout'] == 'tabs_group') {
+                            foreach ($section_content['tabs'] as $tab) {
+                                foreach ($tab['light_section_content'] as $light_section_content) {
+                                    $ttl = $this->getTLLbyField($light_section_content);
+                                    if (!empty($ttl)) {
+                                        $woody_varnish_caching_ttl = $ttl;
+                                        break 4;
+                                    }
                                 }
                             }
-                        }
-                    } else {
-                        $ttl = $this->getTLLbyField($section_content);
-                        if (!empty($ttl)) {
-                            $woody_varnish_caching_ttl = $ttl;
-                            break 2;
+                        } else {
+                            $ttl = $this->getTLLbyField($section_content);
+                            if (!empty($ttl)) {
+                                $woody_varnish_caching_ttl = $ttl;
+                                break 2;
+                            }
                         }
                     }
                 }
