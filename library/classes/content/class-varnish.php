@@ -16,9 +16,7 @@ class WoodyTheme_Varnish
     protected function registerHooks()
     {
         add_filter('vcaching_purge_urls', [$this, 'vcachingPurgeUrls'], 10, 1);
-        // if (WP_ENV != 'dev') {
-            add_action('wp_enqueue_scripts', [$this, 'overrideTTL'], 1000);
-        // }
+        add_action('template_redirect', [$this, 'overrideTTL'], 1000);
     }
 
     public function vcachingPurgeUrls($purge_urls = [])
@@ -37,47 +35,34 @@ class WoodyTheme_Varnish
     {
         $post = get_post();
         if (!empty($post) && post_password_required($post)) {
-            Header('X-VC-TTL: 0', true);
-        } else if(!empty($post)) {
+            header('X-VC-TTL: 0');
+        } elseif (!empty($post)) {
             $focus_content_exists = false;
             $weather_content_exists = false;
-            $field = get_field('section', $post->ID)[0];
 
-            // Essaie de trouver des solutions via de simple get field
-            // Ou alors une requête sur la meta avec une query spécifique (need LIKE statement)
-
-            foreach($field['section_content'] as $sub_section) {
-                switch ($sub_section['acf_fc_layout']) {
-                    case 'manual_focus' :
-                    case 'auto_focus'   :
-                    case 'auto_focus_sheet':
+            $sections = get_field('section', $post->ID);
+            foreach ($sections as $section) {
+                foreach ($section['section_content'] as $section_content) {
+                    if (in_array($section_content['acf_fc_layout'], ['auto_focus', 'auto_focus_sheet'])) {
                         $focus_content_exists = true;
                         break;
-                    case 'weather'      :
+                    } elseif ($section_content['acf_fc_layout'] == 'weather') {
                         $weather_content_exists = true;
                         break;
+                    }
+                }
+
+                if ($focus_content_exists || $weather_content_exists) {
+                    break;
                 }
             }
 
-            // for($i = 0 ; ($i < sizeof($field['section_content'])) && !($focus_content_exists && $weather_content_exists); $i++){
-            //     switch ($field['section_content'][$i]['acf_fc_layout']){
-            //         case 'manual_focus' :
-            //         case 'auto_focus'   :
-            //         case 'auto_focus_sheet':
-            //             $focus_content_exists = true;
-            //             break;
-            //         case 'weather'      :
-            //             $weather_content_exists = true;
-            //             break;
-            //     }
-            // }
-
-            if ( $focus_content_exists ) {
-                Header('X-VC-TTL : 7200', true);
-            } else if ( $weather_content_exists ) {
-                Header('X-VC-TTL : 14400', true);
+            if ($focus_content_exists) {
+                header('X-VC-TTL: ' . WOODY_VARNISH_CACHING_FOCUSPAGE_TTL);
+            } elseif ($weather_content_exists) {
+                header('X-VC-TTL: ' . WOODY_VARNISH_CACHING_WEATHERPAGE_TTL);
             } else {
-                Header('X-VC-TTL : 31622400');
+                header('X-VC-TTL: ' . WOODY_VARNISH_CACHING_TTL);
             }
         }
     }
