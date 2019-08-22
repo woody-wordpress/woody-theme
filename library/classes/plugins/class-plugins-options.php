@@ -500,7 +500,7 @@ class WoodyTheme_Plugins_Options
         update_option('varnish_caching_enable', WOODY_VARNISH_CACHING_ENABLE, '', 'yes');
         update_option('varnish_caching_debug', WOODY_VARNISH_CACHING_DEBUG, '', 'yes');
         update_option('varnish_caching_ttl', WOODY_VARNISH_CACHING_TTL, '', 'yes');
-        update_option('varnish_caching_homepage_ttl', WOODY_VARNISH_CACHING_HOMEPAGE_TTL, '', 'yes');
+        update_option('varnish_caching_homepage_ttl', WOODY_VARNISH_CACHING_TTL, '', 'yes');
         update_option('varnish_caching_ips', WOODY_VARNISH_CACHING_IPS, '', 'yes');
         update_option('varnish_caching_purge_key', WOODY_VARNISH_CACHING_PURGE_KEY, '', 'yes');
         update_option('varnish_caching_cookie', WOODY_VARNISH_CACHING_COOKIE, '', 'yes');

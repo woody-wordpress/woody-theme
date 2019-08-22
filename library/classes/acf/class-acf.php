@@ -104,6 +104,9 @@ class WoodyTheme_ACF
         if (strpos($screen->id, 'acf-options') !== false) {
             delete_transient('woody_menus_cache');
             delete_transient('woody_get_field_option');
+
+            // Purge all varnish cache on save menu
+            do_action('woody_flush_varnish');
         }
     }
 
