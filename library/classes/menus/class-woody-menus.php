@@ -38,6 +38,7 @@ class WoodyTheme_Menus
         }
 
         $menu_cache_key = $current_lang . '_' . md5(serialize($depth_1_ids));
+        // TODO: comprendre pourquoi cette ligne est désactivée
         // $woody_menus_cache = get_transient('woody_menus_cache');
         $woody_menus_cache = '';
 

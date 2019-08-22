@@ -33,37 +33,47 @@ class WoodyTheme_Varnish
     // Met le max-age des pages protégées à 0.
     public function overrideTTL()
     {
+        $woody_varnish_caching_ttl = WOODY_VARNISH_CACHING_TTL;
+
         $post = get_post();
         if (!empty($post) && post_password_required($post)) {
-            header('X-VC-TTL: 0');
+            $woody_varnish_caching_ttl = 0;
         } elseif (!empty($post)) {
-            $focus_content_exists = false;
-            $weather_content_exists = false;
-
             $sections = get_field('section', $post->ID);
             foreach ($sections as $section) {
                 foreach ($section['section_content'] as $section_content) {
-                    if (in_array($section_content['acf_fc_layout'], ['auto_focus', 'auto_focus_sheet'])) {
-                        $focus_content_exists = true;
-                        break;
-                    } elseif ($section_content['acf_fc_layout'] == 'weather') {
-                        $weather_content_exists = true;
-                        break;
+                    if ($section_content['acf_fc_layout'] == 'tabs_group') {
+                        foreach ($section_content['tabs'] as $tab) {
+                            foreach ($tab['light_section_content'] as $light_section_content) {
+                                $ttl = $this->getTLLbyField($light_section_content);
+                                if (!empty($ttl)) {
+                                    $woody_varnish_caching_ttl = $ttl;
+                                    break 4;
+                                }
+                            }
+                        }
+                    } else {
+                        $ttl = $this->getTLLbyField($section_content);
+                        if (!empty($ttl)) {
+                            $woody_varnish_caching_ttl = $ttl;
+                            break 2;
+                        }
                     }
                 }
-
-                if ($focus_content_exists || $weather_content_exists) {
-                    break;
-                }
             }
+        }
 
-            if ($focus_content_exists) {
-                header('X-VC-TTL: ' . WOODY_VARNISH_CACHING_FOCUSPAGE_TTL);
-            } elseif ($weather_content_exists) {
-                header('X-VC-TTL: ' . WOODY_VARNISH_CACHING_WEATHERPAGE_TTL);
-            } else {
-                header('X-VC-TTL: ' . WOODY_VARNISH_CACHING_TTL);
-            }
+        header('X-VC-TTL: ' . $woody_varnish_caching_ttl);
+    }
+
+    private function getTLLbyField($section_content)
+    {
+        if ($section_content['acf_fc_layout'] == 'auto_focus_sheets') {
+            return WOODY_VARNISH_CACHING_FOCUSSHEET_TTL;
+        } elseif ($section_content['acf_fc_layout'] == 'auto_focus' && $section_content['focused_sort'] == 'random') {
+            return WOODY_VARNISH_CACHING_FOCUSRANDOM_TTL;
+        } elseif ($section_content['acf_fc_layout'] == 'weather') {
+            return WOODY_VARNISH_CACHING_WEATHERPAGE_TTL;
         }
     }
 }
