@@ -579,7 +579,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     if ($section_reset) {
         $post_data['section_reset'] = $section_reset;
     }
-    if(null == $post_data){
+    if (null == $post_data) {
         $post_data = setDataFromGetParameters($layout['uniqid']);
     }
     $post_data['reset'] = $reset ;
@@ -678,7 +678,7 @@ function creatListMapFilter($current_post, $layout, $paginate, $filters, $twigPa
     if (!empty($filters)) {
         foreach ($filters as $key => $filter) {
             if (is_numeric($key)) {
-                if ($filter['list_filter_type'] == 'map') {
+                if (isset($filter['list_filter_type']) && $filter['list_filter_type'] == 'map') {
                     $every_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields'], $paginate, $layout['uniqid'], true);
                     if (!empty($every_items['items'])) {
                         foreach ($every_items['items'] as $item) {
@@ -747,12 +747,12 @@ function setDataFromGetParameters($uniqid)
     $return = [];
 
     $params = filter_input_array(INPUT_GET);
-    if(!empty($params)){
+    if (!empty($params)) {
         foreach ($params as $param_key => $param) {
             if ($param_key == $uniqid) {
                 $return['uniqid'] = $uniqid;
-                foreach($param as $key => $values){
-                    switch($key){
+                foreach ($param as $key => $values) {
+                    switch ($key) {
                         case 'price':
                             $return['trip_price_1_min'] = $values['min'];
                             $return['trip_price_1_max'] = $values['max'];
@@ -784,23 +784,23 @@ function getUrlParametersForContentList($post_data)
     $post_data['section_reset'] = isset($post_data['section_reset']) ? $post_data['section_reset'] : false ;
 
     foreach ($post_data['filters'] as $f_key => $filter) {
-        if($f_key != $post_data['section_reset']){
+        if ($f_key != $post_data['section_reset']) {
             parse_str($filter, $values);
 
             $return[$values['uniqid']] = [];
-            foreach($values as $key => $value){
-                if(strpos($key, 'taxonomy_terms') !== false){
+            foreach ($values as $key => $value) {
+                if (strpos($key, 'taxonomy_terms') !== false) {
                     $return[$values['uniqid']]['terms'] = $value;
-                }else if(strpos($key, 'trip_price') !== false){
-                    if(strpos($key, 'min') !== false){
+                } elseif (strpos($key, 'trip_price') !== false) {
+                    if (strpos($key, 'min') !== false) {
                         $return[$values['uniqid']]['price']['min'] = $value;
-                    }else{
+                    } else {
                         $return[$values['uniqid']]['price']['max'] = $value;
                     }
-                }else if(strpos($key, 'trip_duration') !== false){
-                    if(strpos($key, 'min') !== false){
+                } elseif (strpos($key, 'trip_duration') !== false) {
+                    if (strpos($key, 'min') !== false) {
                         $return[$values['uniqid']]['duration']['min'] = $value;
-                    }else{
+                    } else {
                         $return[$values['uniqid']]['duration']['max'] = $value;
                     }
                 }
@@ -809,7 +809,7 @@ function getUrlParametersForContentList($post_data)
     }
 
     foreach ($return as $key => $filter) {
-        foreach($filter as $v_key => $value){
+        foreach ($filter as $v_key => $value) {
             if (empty($value)) {
                 unset($return[$key][$v_key]);
             }
