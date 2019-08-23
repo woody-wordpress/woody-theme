@@ -569,6 +569,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
 
     // Handle POST DATA ( AJAX from filter-list.js )
     $post_data = filter_input_array(INPUT_POST);
+    $url_parameters['filters'] = isset($post_data['filters']) ? getUrlParametersForContentList($post_data) : false ;
 
     // If Click reset, need to know which section must be reset to default (default filters)
     // If changing page, need to get data to keep filters.
@@ -631,11 +632,6 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                 }
             }
             // URL GET parameters based on filters
-            $url_parameters['filters'][$post_data['uniqid']] = getUrlParametersForContentList($the_list, $post_data);
-        } elseif ($post_data['reset'] == 1 && $post_data['section_reset'] == $post_data['uniqid']) {
-            $transient_label = 'list_content_param_' . str_replace('section_content_', '', $layout['uniqid']);
-            delete_transient($transient_label);
-            $post_data = [];
         } else {
             $post_data = [];
         }
@@ -766,7 +762,7 @@ function setDataFromGetParameters($uniqid)
                             $return['trip_duration_1_max'] = $values['max'];
                         break;
                         case 'terms':
-                            $return['taxonomy_terms_0'][] = $values;
+                            $return['taxonomy_terms_0'] = $values;
                         break;
                     }
                 }
@@ -779,46 +775,44 @@ function setDataFromGetParameters($uniqid)
 
 /**
  * Format url parameters to send filters infos to other pages.
- * @param the_list  list of filters
  * @param post_data data send by AJAX call (values of filter form)
  * @return return   (array)
  */
-function getUrlParametersForContentList($the_list, $post_data)
+function getUrlParametersForContentList($post_data)
 {
-    $return =  array(
-        'price' => array(),
-        'duration' => array(),
-        'terms' => array()
-    );
+    $return = [];
+    $post_data['section_reset'] = isset($post_data['section_reset']) ? $post_data['section_reset'] : false ;
 
-    foreach ($the_list['filters'] as $filter) {
-        if (isset($filter['list_filter_type'])) {
-            switch ($filter['list_filter_type']) {
-                case 'taxonomy':
-                case 'custom_terms':
-                    foreach ($filter['list_filter_custom_terms'] as $term) {
-                        if (array_key_exists('checked', $term)) {
-                            $return['terms'][] = $term['value'];
-                        }
+    foreach ($post_data['filters'] as $f_key => $filter) {
+        if($f_key != $post_data['section_reset']){
+            parse_str($filter, $values);
+
+            $return[$values['uniqid']] = [];
+            foreach($values as $key => $value){
+                if(strpos($key, 'taxonomy_terms') !== false){
+                    $return[$values['uniqid']]['terms'] = $value;
+                }else if(strpos($key, 'trip_price') !== false){
+                    if(strpos($key, 'min') !== false){
+                        $return[$values['uniqid']]['price']['min'] = $value;
+                    }else{
+                        $return[$values['uniqid']]['price']['max'] = $value;
                     }
-                break;
-
-                case 'price':
-                $return['price']['min'] = $filter['minmax']['default_min'];
-                $return['price']['max'] = $filter['minmax']['default_max'];
-                break;
-
-                case 'duration':
-                $return['duration']['min'] = $filter['minmax']['default_min'];
-                $return['duration']['max'] = $filter['minmax']['default_max'];
-                break;
+                }else if(strpos($key, 'trip_duration') !== false){
+                    if(strpos($key, 'min') !== false){
+                        $return[$values['uniqid']]['duration']['min'] = $value;
+                    }else{
+                        $return[$values['uniqid']]['duration']['max'] = $value;
+                    }
+                }
             }
         }
     }
 
-    foreach ($return as $key => $value) {
-        if (empty($value)) {
-            unset($return[$key]);
+    foreach ($return as $key => $filter) {
+        foreach($filter as $v_key => $value){
+            if (empty($value)) {
+                unset($return[$key][$v_key]);
+            }
         }
     }
 
