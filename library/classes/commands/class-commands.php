@@ -28,6 +28,7 @@ class WoodyTheme_Commands
 
         add_action('woody_flush_cache', [$this, 'flush_cache']);
         add_action('woody_flush_varnish', [$this, 'flush_varnish']);
+        add_action('woody_theme_update', [$this, 'woodyThemeUpdate']);
     }
 
     public function flush($args)
@@ -133,5 +134,10 @@ class WoodyTheme_Commands
                 }
             }
         }
+    }
+
+    public function woodyThemeUpdate()
+    {
+        update_option('woody_theme_version', wp_get_theme(get_template())->get('Version'), true);
     }
 }

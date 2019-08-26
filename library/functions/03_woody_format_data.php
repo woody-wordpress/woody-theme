@@ -360,7 +360,6 @@ function getManualFocus_data($layout)
     $the_items = [];
     $clickable = true;
     foreach ($layout['content_selection'] as $key => $item_wrapper) {
-
         $item_wrapper['content_selection_type'] = $layout['acf_fc_layout'] == 'focus_trip_components' ? 'existing_content' : $item_wrapper['content_selection_type'];
         if (!empty($item_wrapper['existing_content']['trip_component'])) {
             $item_wrapper['existing_content']['content_selection'] = $item_wrapper['existing_content']['trip_component'];
@@ -370,7 +369,7 @@ function getManualFocus_data($layout)
         // La donnée de la vignette est saisie en backoffice
         if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
             $the_items['items'][$key] = getCustomPreview($item_wrapper['custom_content'], $layout);
-            // La donnée de la vignette correspond à un post sélectionné
+        // La donnée de la vignette correspond à un post sélectionné
         } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
             $item = $item_wrapper['existing_content'];
             $status = $item['content_selection']->post_status;
@@ -497,57 +496,66 @@ function updateListFilterTax($the_list, $filter_index, $param)
     return $the_list;
 }
 
-/**
- *
- * Nom : formatFullContentList
- * Auteur : Benoit Bouchaud
- * Return : Retourne le html d'une mise en avant de contenu
- * @param    layout Le wrapper du champ
- * @param    current_post le post courant (pour la hierarchie)
- * @param    twigPaths les chemins des templates woody
- * @return   return - Twig compilé
- *
- */
+function getMinMax($post_data, $data_key)
+{
+    $minmax = [
+        'min' => 0,
+        'max' => 9999
+    ];
+    if (strpos($data_key, 'max')) {
+        $minmax['max'] = $post_data[$data_key];
+        $minmax['min'] = $post_data[str_replace('max', 'min', $data_key)];
+    } else {
+        $minmax['min'] = $post_data[$data_key];
+        $minmax['max'] = $post_data[str_replace('min', 'max', $data_key)];
+    }
+
+    return $minmax;
+}
 
 function formatFullContentList($layout, $current_post, $twigPaths)
 {
-    $return = '';
     $the_list = [];
     $the_list['permalink'] = get_permalink($current_post->ID);
     $the_list['uniqid'] = $layout['uniqid'];
     $the_list['has_map'] = false;
+    $the_list['filters'] = !empty($layout['the_list_filters']) && !empty($layout['the_list_filters']['list_filters']) ? $layout['the_list_filters']['list_filters'] : '';
     $paginate = ($layout['the_list_pager']['list_pager_type'] == 'basic_pager') ? true : false;
+    $url_parameters['filters'] = false;
     $the_items = getItems($current_post, $layout, $paginate);
-    $the_list['filters'] = (!empty($layout['the_list_filters']['list_filters'])) ? $layout['the_list_filters']['list_filters'] : '';
+
+    // Handle filters :
     if (!empty($the_list['filters'])) {
+        // TAXONOMY | DURATION | PRICE | CUSTOM TERM
         foreach ($the_list['filters'] as $key => $filter) {
-            if ($filter['list_filter_type'] == 'custom_terms') {
-                if (!empty($filter['list_filter_custom_terms'])) {
-                    foreach ($filter['list_filter_custom_terms'] as $form_term_key => $form_term) {
-                        $term = get_term($form_term['value']);
-                        $the_list['filters'][$key]['list_filter_custom_terms'][$form_term_key] = [
+            switch ($filter['list_filter_type']) {
+                case 'taxonomy':
+                    $taxonomy = $filter['list_filter_taxonomy'];
+                    $terms = get_terms($taxonomy, ['hide_empty' => false]);
+                    foreach ($terms as $term_key => $term) {
+                        $the_list['filters'][$key]['list_filter_custom_terms'][] = [
                             'value' => $term->term_id,
                             'label' => $term->name
                         ];
                     }
-                }
-            } elseif ($filter['list_filter_type'] == 'taxonomy') {
-                $terms = get_terms($filter['list_filter_taxonomy'], array(
-                    'hide_empty' => false,
-                ));
+                break;
 
-                foreach ($terms as $focused_term_key => $term) {
-                    $the_list['filters'][$key]['list_filter_custom_terms'][] = [
+                case 'custom_terms':
+                foreach ($filter['list_filter_custom_terms'] as $term_key => $term) {
+                    $term = get_term($term['value']);
+                    $the_list['filters'][$key]['list_filter_custom_terms'][$term_key] = [
                         'value' => $term->term_id,
                         'label' => $term->name
                     ];
                 }
-            } elseif ($filter['list_filter_type'] == 'price') {
-                $the_list['filters'][$key]['minmax']['max'] = getMinMaxWoodyFieldValues($the_items['wp_query']->query_vars, 'the_price_price');
-                $the_list['filters'][$key]['minmax']['min'] = getMinMaxWoodyFieldValues($the_items['wp_query']->query_vars, 'the_price_price', 'min');
-            } elseif ($filter['list_filter_type'] == 'duration') {
-                $the_list['filters'][$key]['minmax']['max'] = getMinMaxWoodyFieldValues($the_items['wp_query']->query_vars, 'the_duration_count_days');
-                $the_list['filters'][$key]['minmax']['min'] = getMinMaxWoodyFieldValues($the_items['wp_query']->query_vars, 'the_duration_count_days', 'min');
+                break;
+
+                case 'price':
+                case 'duration':
+                $field = $filter['list_filter_type'] == 'price' ? 'the_price_price' : 'the_duration_count_days';
+                $the_list['filters'][$key]['minmax']['max'] = getMinMaxWoodyFieldValues($the_items['wp_query']->query_vars, $field);
+                $the_list['filters'][$key]['minmax']['min'] = getMinMaxWoodyFieldValues($the_items['wp_query']->query_vars, $field, 'min');
+                break;
             }
         }
         $the_list['filters']['button'] = (!empty($layout['the_list_filters']['filter_button'])) ? $layout['the_list_filters']['filter_button'] : '';
@@ -559,83 +567,89 @@ function formatFullContentList($layout, $current_post, $twigPaths)
         $the_list['filters']['display']['classes'] = implode(' ', $the_list['filters']['display']['classes']);
     }
 
-    $params = filter_input_array(INPUT_POST);
+    // Handle POST DATA ( AJAX from filter-list.js )
+    $post_data = filter_input_array(INPUT_POST);
+    $url_parameters['filters'] = isset($post_data['filters']) ? getUrlParametersForContentList($post_data) : false ;
 
-    // Traitement des données du post
-    if (!empty($params) && $layout['uniqid'] === $params['uniqid']) {
-        if (array_key_exists('reset', $params)) {
-            $params = [];
-        };
-        $the_items = [
-            'empty' => 'Désolé, aucun contenu ne correspond à votre recherche'
-        ];
-        foreach ($params as $param_key => $param) {
-            if (strpos($param_key, 'taxonomy_terms') !== false && !empty($param)) {
-                $filter_index = str_replace('taxonomy_terms_', '', $param_key);
-                $andor = $layout['the_list_filters']['list_filters'][$filter_index]['list_filter_andor'];
-                $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_' . $param_key]['andor'] = $andor;
-                $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_' . $param_key]['terms'] = $param;
+    // If Click reset, need to know which section must be reset to default (default filters)
+    // If changing page, need to get data to keep filters.
+    // If click research, need to update data anf filters.
+    $reset = isset($post_data['reset']) ? $post_data['reset'] : false ;
+    $section_reset = isset($post_data['section_reset']) ? $post_data['section_reset'] : false ;
+    if ($section_reset) {
+        $post_data['section_reset'] = $section_reset;
+    }
+    if (null == $post_data) {
+        $post_data = setDataFromGetParameters($layout['uniqid']);
+    }
+    $post_data['reset'] = $reset ;
 
-                // Update filter value on load
-                if ($the_list['filters'][$filter_index]['list_filter_type'] == 'taxonomy' || $the_list['filters'][$filter_index]['list_filter_type'] == 'custom_terms') {
-                    if (!is_array($param)) {
-                        $the_list = updateListFilterTax($the_list, $filter_index, $param);
-                    } else {
-                        foreach ($param as $term_key => $term) {
-                            $the_list = updateListFilterTax($the_list, $filter_index, $term);
+    if ($post_data) {
+        if (!empty($post_data) && $post_data['reset'] != 1 && isset($post_data['uniqid']) && $post_data['uniqid'] == $layout['uniqid']) {
+            foreach ($the_items['items'] as $key => $item) {
+                // Check if item can pass through filters
+                foreach ($post_data as $data_key => $data_values) {
+                    if (strpos($data_key, 'taxonomy_terms') !== false) {
+                        // Update layout values
+                        $filter_index = str_replace('taxonomy_terms_', '', $data_key);
+                        $andor = $layout['the_list_filters']['list_filters'][$filter_index]['list_filter_andor'];
+                        $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_' . $data_key]['andor'] = $andor;
+                        $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_' . $data_key]['terms'] = $data_values;
+
+                        // Update filter value on load
+                        if ($the_list['filters'][$filter_index]['list_filter_type'] == 'taxonomy' || $the_list['filters'][$filter_index]['list_filter_type'] == 'custom_terms') {
+                            if (!is_array($data_values)) {
+                                $the_list = updateListFilterTax($the_list, $filter_index, $data_values);
+                            } else {
+                                foreach ($data_values as $term_key => $term) {
+                                    $the_list = updateListFilterTax($the_list, $filter_index, $term);
+                                }
+                            }
                         }
+                    } elseif (strpos($data_key, 'trip_price') !== false) {
+                        $filter_index = str_replace('trip_price_', '', $data_key);
+                        $minmax = getMinMax($post_data, $data_key);
+
+                        // Update value
+                        $index_min = str_replace('_min', '', $filter_index);
+                        $the_list['filters'][$index_min]['minmax']['default_min'] = round($minmax['min']);
+                        $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_price' . $filter_index]['min'] = $minmax['min'];
+                        $index_max = str_replace('_max', '', $filter_index);
+                        $the_list['filters'][$index_max]['minmax']['default_max'] = round($minmax['max']);
+                        $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_price' . $filter_index]['max'] = $minmax['max'];
+                    } elseif (strpos($data_key, 'trip_duration') !== false) {
+                        $filter_index = str_replace('trip_duration_', '', $data_key);
+                        $minmax = getMinMax($post_data, $data_key);
+
+                        // Update value
+                        $index_min = str_replace('_min', '', $filter_index);
+                        $the_list['filters'][$index_min]['minmax']['default_min'] = $minmax['min'];
+                        $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_duration' . $filter_index]['min'] = $minmax['min'];
+                        $index_max = str_replace('_max', '', $filter_index);
+                        $the_list['filters'][$index_max]['minmax']['default_max'] = $minmax['max'];
+                        $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_duration' . $filter_index]['max'] = $minmax['max'];
                     }
                 }
-            } elseif (strpos($param_key, 'trip_price') !== false && !empty($param)) {
-                $filter_index = str_replace('trip_price_', '', $param_key);
-                if (strpos($filter_index, '_min') !== false) {
-                    $filter_index = str_replace('_min', '', $filter_index);
-
-                    // Update filter value on load
-                    $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_price' . $filter_index]['min'] = $param;
-                    // if ($the_list['filters'][$filter_index]['list_filter_type'] == 'price') {
-                    $the_list['filters'][$filter_index]['minmax']['default_min'] = round($param);
-                    // }
-                } else {
-                    $filter_index = str_replace('_max', '', $filter_index);
-
-                    // Update filter value on load
-                    $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_price' . $filter_index]['max'] = $param;
-                    $the_list['filters'][$filter_index]['minmax']['default_max'] = round($param);
-                }
-            } elseif (strpos($param_key, 'trip_duration') !== false && !empty($param)) {
-                $filter_index = str_replace('trip_duration_', '', $param_key);
-                if (strpos($filter_index, '_min') !== false) {
-                    $filter_index = str_replace('_min', '', $filter_index);
-
-                    // Update filter value on load
-                    $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_duration' . $filter_index]['min'] = $param;
-                    $the_list['filters'][$filter_index]['minmax']['default_min'] = $param;
-                } else {
-                    $filter_index = str_replace('_max', '', $filter_index);
-
-                    // Update filter value on load
-                    $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_duration' . $filter_index]['max'] = $param;
-                    $the_list['filters'][$filter_index]['minmax']['default_max'] = $param;
-                }
             }
+            // URL GET parameters based on filters
+        } else {
+            $post_data = [];
         }
         $the_items = getItems($current_post, $layout, $paginate);
     }
-    $the_list['the_grid'] =  Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_items);
-    if (!empty($the_items['wp_query']) && !empty($the_items['wp_query']->found_posts)) {
-        $the_list['items_count'] = $the_items['wp_query']->found_posts;
-        if ($the_list['items_count'] > 1) {
-            $the_list['items_count_type'] = 'plural';
-        } else {
-            $the_list['items_count_type'] = 'singular';
-        }
+    // Html Grid based on items
+    $the_list['the_grid'] = Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_items);
+
+    if (!empty($the_items['items']) && !empty($the_items['wp_query']->found_posts)) {
+        $the_list['items_count'] = sizeof($the_items['items']);
+        $the_list['items_count_type'] = $the_list['items_count'] > 1 ? 'plural' : 'singular' ;
     } else {
         $the_list['items_count_type'] = 'empty';
+        $the_items = [
+            'empty' => 'Désolé, aucun contenu ne correspond à votre recherche'
+        ];
     }
-    if (empty($the_items['max_num_pages'])) {
-        $the_items['max_num_pages'] = 1;
-    }
+    $the_items['max_num_pages'] = empty($the_items['max_num_pages']) ? 1 : $the_items['max_num_pages'] ;
     $max_num_pages = $the_items['max_num_pages'];
 
     $the_list['filters']['the_map'] = creatListMapFilter($current_post, $layout, $paginate, $the_list['filters'], $twigPaths);
@@ -651,12 +665,11 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     }
 
     if (!empty($layout['the_list_pager']) && $layout['the_list_pager']['list_pager_type'] != 'none') {
-        $items_by_page = (!empty($layout['the_list_elements']['list_el_req_fields']['focused_count'])) ? $layout['the_list_elements']['list_el_req_fields']['focused_count'] : 16;
-        $the_list['pager'] = formatListPager($layout['the_list_pager'], $max_num_pages, $the_list['uniqid']);
+        $the_list['pager'] = formatListPager($layout['the_list_pager'], $max_num_pages, $the_list['uniqid'], $url_parameters['filters']);
         $the_list['pager_position'] = $layout['the_list_pager']['list_pager_position'];
     }
 
-    $return =  Timber::compile($twigPaths[$layout['the_list_filters']['listfilter_woody_tpl']], $the_list);
+    $return = Timber::compile($twigPaths[$layout['the_list_filters']['listfilter_woody_tpl']], $the_list);
     return $return;
 }
 
@@ -665,7 +678,7 @@ function creatListMapFilter($current_post, $layout, $paginate, $filters, $twigPa
     if (!empty($filters)) {
         foreach ($filters as $key => $filter) {
             if (is_numeric($key)) {
-                if ($filter['list_filter_type'] == 'map') {
+                if (isset($filter['list_filter_type']) && $filter['list_filter_type'] == 'map') {
                     $every_items = getAutoFocus_data($current_post, $layout['the_list_elements']['list_el_req_fields'], $paginate, $layout['uniqid'], true);
                     if (!empty($every_items['items'])) {
                         foreach ($every_items['items'] as $item) {
@@ -698,7 +711,13 @@ function creatListMapFilter($current_post, $layout, $paginate, $filters, $twigPa
     }
 }
 
-function formatListPager($pager_params, $max_num_pages, $uniqid)
+/**
+ * Create pagination if needed
+ * @param   max_num_pages
+ * @param   uniqid          section id of list content
+ * @return  return          pagination html elements
+ */
+function formatListPager($pager_params, $max_num_pages, $uniqid, $filters = false)
 {
     $return = [];
     $explode_uniqid = explode('_', $uniqid);
@@ -710,10 +729,93 @@ function formatListPager($pager_params, $max_num_pages, $uniqid)
         'format' => '?' . $the_page_name . '=%#%#' . $uniqid,
         'current' => $get_the_page,
         'mid_size' => 3,
-        'type' => 'list'
+        'type' => 'list',
+        'add_args' => $filters
     ];
 
     $return = paginate_links($pager_args);
+    return $return;
+}
+
+/**
+ * Set data from parameters GET to keep filters when changing page
+ * @param   uniqid  form data
+ * @return  return  form data updated based on $_GET parameters
+ */
+function setDataFromGetParameters($uniqid)
+{
+    $return = [];
+
+    $params = filter_input_array(INPUT_GET);
+    if (!empty($params)) {
+        foreach ($params as $param_key => $param) {
+            if ($param_key == $uniqid) {
+                $return['uniqid'] = $uniqid;
+                foreach ($param as $key => $values) {
+                    switch ($key) {
+                        case 'price':
+                            $return['trip_price_1_min'] = $values['min'];
+                            $return['trip_price_1_max'] = $values['max'];
+                        break;
+                        case 'duration':
+                            $return['trip_duration_1_max'] = $values['max'];
+                            $return['trip_duration_1_max'] = $values['max'];
+                        break;
+                        case 'terms':
+                            $return['taxonomy_terms_0'] = $values;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    return $return;
+}
+
+/**
+ * Format url parameters to send filters infos to other pages.
+ * @param post_data data send by AJAX call (values of filter form)
+ * @return return   (array)
+ */
+function getUrlParametersForContentList($post_data)
+{
+    $return = [];
+    $post_data['section_reset'] = isset($post_data['section_reset']) ? $post_data['section_reset'] : false ;
+
+    foreach ($post_data['filters'] as $f_key => $filter) {
+        if ($f_key != $post_data['section_reset']) {
+            parse_str($filter, $values);
+
+            $return[$values['uniqid']] = [];
+            foreach ($values as $key => $value) {
+                if (strpos($key, 'taxonomy_terms') !== false) {
+                    $return[$values['uniqid']]['terms'] = $value;
+                } elseif (strpos($key, 'trip_price') !== false) {
+                    if (strpos($key, 'min') !== false) {
+                        $return[$values['uniqid']]['price']['min'] = $value;
+                    } else {
+                        $return[$values['uniqid']]['price']['max'] = $value;
+                    }
+                } elseif (strpos($key, 'trip_duration') !== false) {
+                    if (strpos($key, 'min') !== false) {
+                        $return[$values['uniqid']]['duration']['min'] = $value;
+                    } else {
+                        $return[$values['uniqid']]['duration']['max'] = $value;
+                    }
+                }
+            }
+        }
+    }
+
+    foreach ($return as $key => $filter) {
+        foreach ($filter as $v_key => $value) {
+            if (empty($value)) {
+                unset($return[$key][$v_key]);
+            }
+        }
+    }
+
     return $return;
 }
 
@@ -760,20 +862,20 @@ function formatGeomapData($layout, $twigPaths)
             $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker);
         }
     }
-    if(!empty($layout['routes'])){
-        foreach( $layout['routes'] as $key => $route ){
+    if (!empty($layout['routes'])) {
+        foreach ($layout['routes'] as $key => $route) {
             $filename = get_attached_file($route['route_file']['ID']);
             $filetype = wp_check_filetype($filename);
 
-            if( $filetype['ext'] == 'json' || $filetype['ext'] == 'geojson' ) {
+            if ($filetype['ext'] == 'json' || $filetype['ext'] == 'geojson') {
                 $json = file_get_contents($filename);
                 $route['route_file'] = $json;
 
                 $layout['routes'][$key] = json_decode($route['route_file'], true) ;
-                foreach( $layout['routes'][$key]['features'] as $f_key => $feature){
+                foreach ($layout['routes'][$key]['features'] as $f_key => $feature) {
                     $layout['routes'][$key]['features'][$f_key]['route'] = true;
 
-                    if ( $route['parameters'] === true ) {
+                    if ($route['parameters'] === true) {
                         $layout['routes'][$key]['features'][$f_key]['properties']['fill'] = $route['fill_color'];
                         $layout['routes'][$key]['features'][$f_key]['properties']['stroke'] = $route['route_color'];
                         $layout['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = $route['stroke_thickness'];

@@ -535,8 +535,8 @@ class WoodyTheme_Roles
             ],
             'woody_process_model' => [
                 'administrator' => true,
-                'editor' => false,
-                'contributor' => false,
+                'editor' => true,
+                'contributor' => true,
                 'translator' => false,
             ],
             'woody_process_checklist' => [
