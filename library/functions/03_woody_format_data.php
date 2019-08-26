@@ -641,7 +641,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     $the_list['the_grid'] = Timber::compile($twigPaths[$layout['the_list_elements']['listgrid_woody_tpl']], $the_items);
 
     if (!empty($the_items['items']) && !empty($the_items['wp_query']->found_posts)) {
-        $the_list['items_count'] = sizeof($the_items['items']);
+        $the_list['items_count'] = $the_items['wp_query']->found_posts;
         $the_list['items_count_type'] = $the_list['items_count'] > 1 ? 'plural' : 'singular' ;
     } else {
         $the_list['items_count_type'] = 'empty';
