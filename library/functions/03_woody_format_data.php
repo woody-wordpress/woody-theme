@@ -504,7 +504,7 @@ function getMinMax($post_data, $data_key)
     ];
     if (strpos($data_key, 'max')) {
         $minmax['max'] = $post_data[$data_key];
-        $minmax['min'] = isset($post_data[str_replace('max', 'min', $data_key)]) ? $post_data[str_replace('max', 'min', $data_key)] : 0 ;
+        $minmax['min'] = !empty($post_data[str_replace('max', 'min', $data_key)]) ? $post_data[str_replace('max', 'min', $data_key)] : 0 ;
     } else {
         $minmax['min'] = $post_data[$data_key];
         $minmax['max'] = isset($post_data[str_replace('min', 'max', $data_key)]) ? $post_data[str_replace('min', 'max', $data_key)] : '' ;
