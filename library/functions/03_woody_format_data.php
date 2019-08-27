@@ -500,14 +500,14 @@ function getMinMax($post_data, $data_key)
 {
     $minmax = [
         'min' => 0,
-        'max' => 9999
+        'max' => ''
     ];
     if (strpos($data_key, 'max')) {
         $minmax['max'] = $post_data[$data_key];
-        $minmax['min'] = $post_data[str_replace('max', 'min', $data_key)];
+        $minmax['min'] = isset($post_data[str_replace('max', 'min', $data_key)]) ? $post_data[str_replace('max', 'min', $data_key)] : 0 ;
     } else {
         $minmax['min'] = $post_data[$data_key];
-        $minmax['max'] = $post_data[str_replace('min', 'max', $data_key)];
+        $minmax['max'] = isset($post_data[str_replace('min', 'max', $data_key)]) ? $post_data[str_replace('min', 'max', $data_key)] : '' ;
     }
 
     return $minmax;
@@ -580,7 +580,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
         $post_data['section_reset'] = $section_reset;
     }
     if (null == $post_data) {
-        $post_data = setDataFromGetParameters($layout['uniqid']);
+        $post_data = setDataFromGetParameters($layout);
     }
     $post_data['reset'] = $reset ;
 
@@ -609,24 +609,24 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                     } elseif (strpos($data_key, 'trip_price') !== false) {
                         $filter_index = str_replace('trip_price_', '', $data_key);
                         $minmax = getMinMax($post_data, $data_key);
+                        $replacement = strpos($filter_index, '_min') !== false ? '_min' : '_max' ;
 
                         // Update value
-                        $index_min = str_replace('_min', '', $filter_index);
-                        $the_list['filters'][$index_min]['minmax']['default_min'] = round($minmax['min']);
+                        $filter_index = str_replace($replacement, '', $filter_index);
+                        $the_list['filters'][$filter_index]['minmax']['default_min'] = round($minmax['min']);
                         $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_price' . $filter_index]['min'] = $minmax['min'];
-                        $index_max = str_replace('_max', '', $filter_index);
-                        $the_list['filters'][$index_max]['minmax']['default_max'] = round($minmax['max']);
+                        $the_list['filters'][$filter_index]['minmax']['default_max'] = round($minmax['max']);
                         $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_price' . $filter_index]['max'] = $minmax['max'];
                     } elseif (strpos($data_key, 'trip_duration') !== false) {
                         $filter_index = str_replace('trip_duration_', '', $data_key);
                         $minmax = getMinMax($post_data, $data_key);
+                        $replacement = strpos($filter_index, '_min') !== false ? '_min' : '_max' ;
 
                         // Update value
-                        $index_min = str_replace('_min', '', $filter_index);
-                        $the_list['filters'][$index_min]['minmax']['default_min'] = $minmax['min'];
+                        $filter_index = str_replace($replacement, '', $filter_index);
+                        $the_list['filters'][$filter_index]['minmax']['default_min'] = $minmax['min'];
                         $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_duration' . $filter_index]['min'] = $minmax['min'];
-                        $index_max = str_replace('_max', '', $filter_index);
-                        $the_list['filters'][$index_max]['minmax']['default_max'] = $minmax['max'];
+                        $the_list['filters'][$filter_index]['minmax']['default_max'] = $minmax['max'];
                         $layout['the_list_elements']['list_el_req_fields']['filters_apply']['filter_trip_duration' . $filter_index]['max'] = $minmax['max'];
                     }
                 }
@@ -742,9 +742,23 @@ function formatListPager($pager_params, $max_num_pages, $uniqid, $filters = fals
  * @param   uniqid  form data
  * @return  return  form data updated based on $_GET parameters
  */
-function setDataFromGetParameters($uniqid)
+function setDataFromGetParameters($layout)
 {
     $return = [];
+    $uniqid = $layout['uniqid'];
+    $tax_index = 0;
+    $price_index = 0;
+    $duration_index = 0;
+
+    foreach($layout['the_list_filters']['list_filters'] as $index => $filter) {
+        if($filter['list_filter_type'] == "taxonomy" ) {
+            $tax_index = $index;
+        } else if($filter['list_filter_type'] == "price") {
+            $price_index = $index;
+        } else if($filter['list_filter_type'] == "duration") {
+            $duration_index = $index;
+        }
+    }
 
     $params = filter_input_array(INPUT_GET);
     if (!empty($params)) {
@@ -754,15 +768,15 @@ function setDataFromGetParameters($uniqid)
                 foreach ($param as $key => $values) {
                     switch ($key) {
                         case 'price':
-                            $return['trip_price_1_min'] = $values['min'];
-                            $return['trip_price_1_max'] = $values['max'];
+                            $return['trip_price_'. $price_index .'_min'] = (float)$values['min'];
+                            $return['trip_price_'. $price_index .'_max'] = (float)$values['max'];
                         break;
                         case 'duration':
-                            $return['trip_duration_1_max'] = $values['max'];
-                            $return['trip_duration_1_max'] = $values['max'];
+                            $return['trip_duration_'. $duration_index .'_min'] = (float)$values['min'];
+                            $return['trip_duration_'. $duration_index .'_max'] = (float)$values['max'];
                         break;
                         case 'terms':
-                            $return['taxonomy_terms_0'] = $values;
+                            $return['taxonomy_terms_'.$tax_index] = $values;
                         break;
                     }
                 }
