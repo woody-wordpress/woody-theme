@@ -45,6 +45,11 @@ class WoodyTheme_Cron
             'display' => __('Always')
         ];
 
+        $schedules['twicehourly'] = [
+            'interval' => 1800,
+            'display' => __('Twice Hourly')
+        ];
+
         return $schedules;
     }
 }
