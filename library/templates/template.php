@@ -93,8 +93,18 @@ abstract class WoodyTheme_TemplateAbstract
         /******************************************************************************
          * Sommes nous dans le cas d'une page miroir ?
          ******************************************************************************/
+
+        $terms = get_the_terms($this->context['post_id'], 'page_type');
+        $is_mirror_page = false;
+        foreach ($terms as $term) {
+            if ($term->slug == 'mirror_page') {
+                $is_mirror_page = true ;
+                break 1;
+            }
+        }
+
         $mirror_page = getAcfGroupFields('group_5c6432b3c0c45');
-        if (!empty($mirror_page['mirror_page_reference'])) {
+        if ($is_mirror_page === true && !empty($mirror_page['mirror_page_reference'])) {
             $this->context['post_id'] = $mirror_page['mirror_page_reference'];
             $this->context['post'] = get_post($this->context['post_id']);
             $this->context['post_title'] = get_the_title();
