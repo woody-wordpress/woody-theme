@@ -7,11 +7,16 @@
         $.each(this.attributes, function() {
             if (this.specified) {
                 console.log(this.name, this.value);
-                if (this.name != 'data-obf') {
+                if (this.name != 'data-obf' && this.name != 'data-target') {
                     attrs += this.name + '="' + this.value + '" ';
+                }
+
+                if (this.name == 'data-target') {
+                    attrs += 'target="' + this.value + '" ';
                 }
             }
         });
+
         $this.replaceWith('<a href="' + href + '" ' + attrs + '>' + $this[0].innerHTML + '</a>');
     });
 
