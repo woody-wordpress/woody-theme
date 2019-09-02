@@ -20,6 +20,7 @@ abstract class WoodyTheme_TemplateAbstract
     public function __construct()
     {
         add_filter('timber_compile_data', [$this, 'timberCompileData']);
+        add_filter('wpseo_json_ld_search_url', [$this, 'setYoastSearchUrl']);
 
         $this->registerHooks();
         $this->initContext();
@@ -366,6 +367,15 @@ abstract class WoodyTheme_TemplateAbstract
 
             return Timber::compile($template, $data);
         }
+    }
+
+    public function setYoastSearchUrl($var)
+    {
+        $search_post_id = apply_filters('woody_get_field_option', 'es_search_page_url');
+        if (!empty($search_post_id)) {
+            $var = get_permalink(pll_get_post($search_post_id));
+        }
+        return $var;
     }
 
     private function addFavoritesBlock()
