@@ -142,6 +142,15 @@ class WoodyTheme_Twig_Filters
         return uniqid();
     }
 
+    public function base64Encode($text)
+    {
+        if (empty($text)) {
+            return;
+        }
+        $encoded = base64_encode($text);
+        return $encoded;
+    }
+
     // Debug
     public function dump($text)
     {
