@@ -32,6 +32,8 @@ class WoodyTheme_Twig_Filters
         $twig->addFilter(new Twig_SimpleFilter('theRootAncestor', [$this, 'theRootAncestor']));
         $twig->addFilter(new Twig_SimpleFilter('pluralizeUnit', [$this, 'pluralizeUnit']));
 
+        $twig->addFilter(new Twig_SimpleFilter('base64Encode', [$this, 'base64Encode']));
+
         // debug
         $twig->addFilter(new Twig_SimpleFilter('dump', [$this, 'dump']));
         $twig->addFilter(new Twig_SimpleFilter('rcd', [$this, 'rcd']));
