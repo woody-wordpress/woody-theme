@@ -52,7 +52,7 @@ class WoodyTheme_Shortcodes
                 if ($post->id != null) {
                     switch ($post->post_type) {
                         case 'touristic_sheet':
-                            $result['posts']['pages'][] = getTouristicSheetPreview(['display_elements' => ['sheet_town', 'sheet_type', 'description', 'bookable'], 'display_button' => true, 'display_img' => true], $post->ID);
+                            $result['posts']['pages'][] = getTouristicSheetPreview(['display_elements' => ['sheet_town', 'sheet_type', 'description', 'bookable'], 'display_button' => true, 'display_img' => true], $post);
                             break;
                         default:
                             $result['posts']['pages'][] = getPagePreview(['display_elements' => ['description'], 'display_button' => true, 'display_img' => true], $post);
