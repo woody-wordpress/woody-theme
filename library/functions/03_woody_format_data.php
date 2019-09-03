@@ -369,7 +369,7 @@ function getManualFocus_data($layout)
         // La donnée de la vignette est saisie en backoffice
         if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
             $the_items['items'][$key] = getCustomPreview($item_wrapper['custom_content'], $layout);
-            // La donnée de la vignette correspond à un post sélectionné
+        // La donnée de la vignette correspond à un post sélectionné
         } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
             $item = $item_wrapper['existing_content'];
             $status = $item['content_selection']->post_status;
@@ -521,7 +521,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     $the_list['permalink'] = get_permalink($current_post->ID);
     $the_list['uniqid'] = $layout['uniqid'];
     $the_list['has_map'] = false;
-    $the_list['filters'] = !empty($layout['the_list_filters']) && !empty($layout['the_list_filters']['list_filters']) ? $layout['the_list_filters']['list_filters'] : '';
+    $the_list['filters'] = !empty($layout['the_list_filters']) && !empty($layout['the_list_filters']['list_filters']) ? $layout['the_list_filters']['list_filters'] : [];
     $paginate = ($layout['the_list_pager']['list_pager_type'] == 'basic_pager') ? true : false;
     $url_parameters['filters'] = false;
     $the_items = getItems($current_post, $layout, $paginate);
@@ -752,13 +752,15 @@ function setDataFromGetParameters($layout)
     $price_index = 0;
     $duration_index = 0;
 
-    foreach ($layout['the_list_filters']['list_filters'] as $index => $filter) {
-        if ($filter['list_filter_type'] == "taxonomy") {
-            $tax_index = $index;
-        } elseif ($filter['list_filter_type'] == "price") {
-            $price_index = $index;
-        } elseif ($filter['list_filter_type'] == "duration") {
-            $duration_index = $index;
+    if (!empty($layout['the_list_filters']) && !empty($layout['the_list_filters']['list_filters']) && is_array($layout['the_list_filters']['list_filters'])) {
+        foreach ($layout['the_list_filters']['list_filters'] as $index => $filter) {
+            if ($filter['list_filter_type'] == "taxonomy") {
+                $tax_index = $index;
+            } elseif ($filter['list_filter_type'] == "price") {
+                $price_index = $index;
+            } elseif ($filter['list_filter_type'] == "duration") {
+                $duration_index = $index;
+            }
         }
     }
 
@@ -1391,7 +1393,7 @@ function nestedGridsComponents($scope = [], $gridTplField, $uniqIid_prefix = '',
 
 function formatVisualEffectData($effects)
 {
-    $return = '';
+    $return = [];
     foreach ($effects as $effect_key => $effect) {
         if (!empty($effect) && is_array($effect)) {
             switch ($effect_key) {
