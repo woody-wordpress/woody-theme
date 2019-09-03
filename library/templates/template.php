@@ -97,10 +97,12 @@ abstract class WoodyTheme_TemplateAbstract
 
         $terms = get_the_terms($this->context['post_id'], 'page_type');
         $is_mirror_page = false;
-        foreach ($terms as $term) {
-            if ($term->slug == 'mirror_page') {
-                $is_mirror_page = true;
-                break 1;
+        if (!empty($terms) && is_array($terms)) {
+            foreach ($terms as $term) {
+                if ($term->slug == 'mirror_page') {
+                    $is_mirror_page = true;
+                    break 1;
+                }
             }
         }
 
