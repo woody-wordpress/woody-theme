@@ -379,7 +379,7 @@ function getManualFocus_data($layout)
             if ($item['content_selection']->post_type == 'page') {
                 $post_preview = getPagePreview($layout, $item['content_selection'], $clickable);
             } elseif ($item['content_selection']->post_type == 'touristic_sheet') {
-                $post_preview = getTouristicSheetPreview($layout, $item['content_selection']->ID);
+                $post_preview = getTouristicSheetPreview($layout, $item['content_selection']);
             }
             $the_items['items'][$key] = (!empty($post_preview)) ?  $post_preview : '';
         }
@@ -406,10 +406,12 @@ function getAutoFocusSheetData($layout)
     $items = [];
     if (!empty($layout['playlist_conf_id'])) {
         $confId = $layout['playlist_conf_id'];
+        $lang = pll_current_language();
         $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), array(), 'json');
         if (!empty($playlist['items'])) {
             foreach ($playlist['items'] as $key => $item) {
-                $items['items'][] = getTouristicSheetPreview($layout, $item['sheetId']);
+                $wpSheetNode = apply_filters('woody_hawwwai_get_post_by_sheet_id', $item['sheetId'], $lang, ['publish']);
+                $items['items'][] = getTouristicSheetPreview($layout, $wpSheetNode->getPost());
             }
         }
     }
@@ -900,7 +902,7 @@ function formatGeomapData($layout, $twigPaths)
         }
     }
 
-    if(!empty($layout['markers'])){
+    if (!empty($layout['markers'])) {
         // Set boolean to fitBounds
         $layout['map_zoom_auto'] = ($layout['map_zoom_auto']) ? 'true' : 'false';
 
@@ -1012,7 +1014,7 @@ function getCustomPreview($item, $item_wrapper = null)
  *
  */
 
-function getTouristicSheetPreview($layout = null, $post_id)
+function getTouristicSheetPreview($layout = null, $post)
 {
     $data = [];
     $lang = pll_current_language();
@@ -1026,102 +1028,107 @@ function getTouristicSheetPreview($layout = null, $post_id)
     }
 
     // $sheet_data = $sheet_data == null ? apply_filters('woody_hawwwai_sheet_render', $sheet_id, $lang, array(), 'json', 'item') : $sheet_data;
-    if (empty($post_id)) {
+    if (empty($post)) {
         return;
     }
 
-    $raw_item = get_field('touristic_raw_item', $post_id);
+    $raw_item = get_field('touristic_raw_item', $post->ID);
     if (!empty($raw_item)) {
         $item = json_decode(base64_decode($raw_item), true);
-
-        // foreach ($sheet_data['items'] as $key => $item) {
-        $data = [
-            'title' => (!empty($item['title'])) ? getTransformedPattern($item['title']) : '',
-            'link' => [
-                'url' => (!empty($item['link'])) ? $item['link'] : '',
-                'target' => $item['targetBlank'] ? '_blank' : '',
-            ],
-        ];
-        if (!empty($layout['display_img'])) {
-            $data['img'] = [
-                'resizer' => true,
-                'url' => (!empty($item['img']['url'])) ? $item['img']['url']['manual'] : '',
-                'alt' => (!empty($item['img']['alt'])) ? $item['img']['alt'] : '',
-                'title' => (!empty($item['img']['title'])) ? $item['img']['title'] : ''
-            ];
-        }
-        if (!empty($layout['deal_mode'])) {
-            if (!empty($item['deals'])) {
-                $data['title'] = $item['deals']['list'][0]['nom'][$code_lang];
-            }
-        }
-        if (is_array($layout['display_elements'])) {
-            if (in_array('sheet_type', $layout['display_elements'])) {
-                $data['sheet_type'] = (!empty($item['type'])) ? $item['type'] : '';
-                if (!empty($layout['deal_mode'])) {
-                    if (!empty($item['deals'])) {
-                        $data['sheet_type'] = $item['title'];
-                    }
-                }
-            }
-            if (in_array('description', $layout['display_elements'])) {
-                $data['description'] = (!empty($item['desc'])) ? getTransformedPattern($item['desc']) : '';
-                if (!empty($layout['deal_mode'])) {
-                    if (!empty($item['deals']['list'][0]['description'][$lang])) {
-                        $data['description'] = $item['deals']['list'][0]['description'][$lang];
-                    }
-                }
-            }
-            if (in_array('sheet_town', $layout['display_elements'])) {
-                $data['sheet_town'] = (!empty($item['town'])) ? $item['town'] : '';
-            }
-
-            if (in_array('price', $layout['display_elements'])) {
-                $data['the_price']['price'] = (!empty($item['tariffs']['price'])) ? $item['tariffs']['price'] : '';
-                $data['the_price']['prefix_price'] = (!empty($item['tariffs']['label'])) ? $item['tariffs']['label'] : '';
-            }
-            if (in_array('bookable', $layout['display_elements'])) {
-                $data['booking'] = (!empty($item['booking']['link'])) ? $item['booking'] : '';
-            }
-        }
-
-        if (!empty($layout['display_button'])) {
-            $data['link']['link_label'] = get_field('sheet_button_title', 'options');
-            if (empty($data['link']['link_label'])) {
-                $data['link']['link_label'] = __('Lire la suite', 'woody-theme');
-            }
-        }
-
-        $data['location'] = [];
-        $data['location']['lat'] = (!empty($item['gps'])) ? $item['gps']['latitude'] : '';
-        $data['location']['lng'] = (!empty($item['gps'])) ? $item['gps']['longitude'] : '';
-
-        if ($item['bordereau'] === 'HOT' or $item['bordereau'] == 'HPA') {
-            $rating = [];
-            for ($i = 0; $i <= $item['ratings'][0]['value']; $i++) {
-                $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
-            }
-            if (is_array($layout['display_elements'])) {
-                if (in_array('sheet_rating', $layout['display_elements'])) {
-                    $data['sheet_rating'] = implode('', $rating);
-                }
-            }
-        }
-
-        if (!empty($item['dates'])) {
-            $data['date'] = $item['dates'][0];
-        }
-        $data['date'] = (!empty($item['dates'])) ? $item['dates'][0] : '';
-
-        if (is_array($layout['display_elements'])) {
-            if (in_array('sheet_itinerary', $layout['display_elements'])) {
-                $data['sheet_itinerary']['locomotions'] = (!empty($item['locomotions'])) ? $item['locomotions'] : '';
-                $data['sheet_itinerary']['length'] = (!empty($item['itineraryLength'])) ? $item['itineraryLength']['value'] . $item['itineraryLength']['unit'] : '';
-            }
-        }
-        // }
+    } else {
+        $sheet_id = get_field('touristic_sheet_id', $post->ID);
+        $items = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $lang, array(), 'json', 'item');
+        $item = current($items['items']);
     }
-    $data['sheet_id'] = get_field('touristic_sheet_id', $post_id);
+
+    // foreach ($sheet_data['items'] as $key => $item) {
+    $data = [
+        'title' => (!empty($item['title'])) ? getTransformedPattern($item['title']) : '',
+        'link' => [
+            'url' => (!empty($item['link'])) ? $item['link'] : '',
+            'target' => $item['targetBlank'] ? '_blank' : '',
+        ],
+    ];
+    if (!empty($layout['display_img'])) {
+        $data['img'] = [
+            'resizer' => true,
+            'url' => (!empty($item['img']['url'])) ? $item['img']['url']['manual'] : '',
+            'alt' => (!empty($item['img']['alt'])) ? $item['img']['alt'] : '',
+            'title' => (!empty($item['img']['title'])) ? $item['img']['title'] : ''
+        ];
+    }
+    if (!empty($layout['deal_mode'])) {
+        if (!empty($item['deals'])) {
+            $data['title'] = $item['deals']['list'][0]['nom'][$code_lang];
+        }
+    }
+    if (is_array($layout['display_elements'])) {
+        if (in_array('sheet_type', $layout['display_elements'])) {
+            $data['sheet_type'] = (!empty($item['type'])) ? $item['type'] : '';
+            if (!empty($layout['deal_mode'])) {
+                if (!empty($item['deals'])) {
+                    $data['sheet_type'] = $item['title'];
+                }
+            }
+        }
+        if (in_array('description', $layout['display_elements'])) {
+            $data['description'] = (!empty($item['desc'])) ? getTransformedPattern($item['desc']) : '';
+            if (!empty($layout['deal_mode'])) {
+                if (!empty($item['deals']['list'][0]['description'][$lang])) {
+                    $data['description'] = $item['deals']['list'][0]['description'][$lang];
+                }
+            }
+        }
+        if (in_array('sheet_town', $layout['display_elements'])) {
+            $data['sheet_town'] = (!empty($item['town'])) ? $item['town'] : '';
+        }
+
+        if (in_array('price', $layout['display_elements'])) {
+            $data['the_price']['price'] = (!empty($item['tariffs']['price'])) ? $item['tariffs']['price'] : '';
+            $data['the_price']['prefix_price'] = (!empty($item['tariffs']['label'])) ? $item['tariffs']['label'] : '';
+        }
+        if (in_array('bookable', $layout['display_elements'])) {
+            $data['booking'] = (!empty($item['booking']['link'])) ? $item['booking'] : '';
+        }
+    }
+
+    if (!empty($layout['display_button'])) {
+        $data['link']['link_label'] = get_field('sheet_button_title', 'options');
+        if (empty($data['link']['link_label'])) {
+            $data['link']['link_label'] = __('Lire la suite', 'woody-theme');
+        }
+    }
+
+    $data['location'] = [];
+    $data['location']['lat'] = (!empty($item['gps'])) ? $item['gps']['latitude'] : '';
+    $data['location']['lng'] = (!empty($item['gps'])) ? $item['gps']['longitude'] : '';
+
+    if ($item['bordereau'] === 'HOT' or $item['bordereau'] == 'HPA') {
+        $rating = [];
+        for ($i = 0; $i <= $item['ratings'][0]['value']; $i++) {
+            $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
+        }
+        if (is_array($layout['display_elements'])) {
+            if (in_array('sheet_rating', $layout['display_elements'])) {
+                $data['sheet_rating'] = implode('', $rating);
+            }
+        }
+    }
+
+    if (!empty($item['dates'])) {
+        $data['date'] = $item['dates'][0];
+    }
+    $data['date'] = (!empty($item['dates'])) ? $item['dates'][0] : '';
+
+    if (is_array($layout['display_elements'])) {
+        if (in_array('sheet_itinerary', $layout['display_elements'])) {
+            $data['sheet_itinerary']['locomotions'] = (!empty($item['locomotions'])) ? $item['locomotions'] : '';
+            $data['sheet_itinerary']['length'] = (!empty($item['itineraryLength'])) ? $item['itineraryLength']['value'] . $item['itineraryLength']['unit'] : '';
+        }
+    }
+
+    $data['sheet_id'] = get_field('touristic_sheet_id', $post->ID);
+
     return $data;
 }
 
