@@ -53,7 +53,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $this->pageContext();
             }
         }
-
     }
 
     protected function page404Context()
@@ -131,7 +130,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $trip_infos['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price']);
                 if ($trip_infos['the_price']['activate_quotation'] == true) {
                     $quotation_id = get_option("options_quotation_page_url");
-                    $trip_infos['quotation_link']['link_label'] = get_permalink($quotation_id)."?sejour=".$this->context['post_id'];
+                    $trip_infos['quotation_link']['link_label'] = get_permalink($quotation_id) . "?sejour=" . $this->context['post_id'];
                 }
             }
             if (!empty($trip_infos['the_duration']['duration_unit']) && $trip_infos['the_duration']['duration_unit'] == 'component_based') {
@@ -206,6 +205,16 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     {
         $this->context['page_terms'] = implode(' ', getPageTerms($this->context['post_id']));
         $this->context['default_marker'] = file_get_contents($this->context['dist_dir'] . '/img/default-marker.svg');
+        $this->context['hide_page_zones'] = get_field('hide_page_zones');
+
+        if (is_array($this->context['hide_page_zones'])) {
+            if (in_array('header', $this->context['hide_page_zones'])) {
+                $this->context['body_class'] = $this->context['body_class'] . ' no-page-header';
+            }
+            if (in_array('footer', $this->context['hide_page_zones'])) {
+                $this->context['body_class'] = $this->context['body_class'] . ' no-page-footer';
+            }
+        }
 
         /*********************************************
          * Check type de publication

@@ -32,6 +32,8 @@ class WoodyTheme_Twig_Filters
         $twig->addFilter(new Twig_SimpleFilter('theRootAncestor', [$this, 'theRootAncestor']));
         $twig->addFilter(new Twig_SimpleFilter('pluralizeUnit', [$this, 'pluralizeUnit']));
 
+        $twig->addFilter(new Twig_SimpleFilter('base64Encode', [$this, 'base64Encode']));
+
         // debug
         $twig->addFilter(new Twig_SimpleFilter('dump', [$this, 'dump']));
         $twig->addFilter(new Twig_SimpleFilter('rcd', [$this, 'rcd']));
@@ -140,6 +142,15 @@ class WoodyTheme_Twig_Filters
     public function random_number($text)
     {
         return uniqid();
+    }
+
+    public function base64Encode($text)
+    {
+        if (empty($text)) {
+            return;
+        }
+        $encoded = base64_encode($text);
+        return $encoded;
     }
 
     // Debug
