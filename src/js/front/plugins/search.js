@@ -41,6 +41,7 @@ $('.woody-component-esSearch').each(function() {
                 window.history.pushState({ query: $input.val() }, null, currentUrl + '?query=' + $input.val());
                 $label.removeClass('hide');
                 $loader.addClass('hide');
+                $('html, body').animate({ scrollTop: 0 }, 100, 'linear');
             },
             error: function() {
                 console.error('search failed');
