@@ -99,7 +99,7 @@ abstract class WoodyTheme_TemplateAbstract
         $is_mirror_page = false;
         foreach ($terms as $term) {
             if ($term->slug == 'mirror_page') {
-                $is_mirror_page = true ;
+                $is_mirror_page = true;
                 break 1;
             }
         }
@@ -254,6 +254,9 @@ abstract class WoodyTheme_TemplateAbstract
             $tpl = apply_filters('lang_switcher_tpl', null);
             $template = $tpl['template'] ? $this->context['woody_components'][$tpl['template']] : $this->context['woody_components']['woody_widgets-lang_switcher-tpl_01'];
 
+            // Allow data override
+            $data = apply_filters('lang_switcher_data', $data);
+
             return Timber::compile($template, $data);
         }
     }
@@ -365,6 +368,9 @@ abstract class WoodyTheme_TemplateAbstract
             $data['tags'] = $tpl['tags'] ?: '';
             $template = $tpl['template'] ?: $this->context['woody_components']['woody_widgets-es_search_block-tpl_01'];
 
+            // Allow data override
+            $data = apply_filters('es_search_block_data', $data);
+
             return Timber::compile($template, $data);
         }
     }
@@ -388,6 +394,9 @@ abstract class WoodyTheme_TemplateAbstract
             // Set a default template
             $tpl = apply_filters('favorites_block_tpl', null);
             $template = $tpl['template'] ?: $this->context['woody_components']['woody_widgets-favorites_block-tpl_01'];
+
+            // Allow data override
+            $data = apply_filters('favorites_block_data', $data);
 
             return Timber::compile($template, $data);
         }
