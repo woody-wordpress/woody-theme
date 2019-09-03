@@ -50,7 +50,15 @@ class WoodyTheme_Shortcodes
                 $post_id = end($post_id);
                 $post = Timber::get_post($post_id);
                 if ($post->id != null) {
-                    $result['posts']['pages'][] = getPagePreview(['display_elements' => ['description'], 'display_button' => true, 'display_img' => true], $post);
+                    switch ($post->post_type) {
+                        case 'touristic_sheet':
+                            $result['posts']['pages'][] = getTouristicSheetPreview(['display_elements' => ['sheet_town', 'sheet_type', 'description', 'bookable'], 'display_button' => true, 'display_img' => true], $post->ID);
+                            break;
+                        default:
+                            $result['posts']['pages'][] = getPagePreview(['display_elements' => ['description'], 'display_button' => true, 'display_img' => true], $post);
+                            break;
+                    }
+                    // $result['posts']['pages'][] = getPagePreview(['display_elements' => ['description'], 'display_button' => true, 'display_img' => true], $post);
                 }
             }
         }
@@ -61,20 +69,20 @@ class WoodyTheme_Shortcodes
         }
 
         // Search inside sheets
-        $sheets_response = apply_filters('woody_hawwwai_sheets_search', ['query' => $query, 'size' => 6]);
+        // $sheets_response = apply_filters('woody_hawwwai_sheets_search', ['query' => $query, 'size' => 6]);
 
-        $result['posts']['touristic_sheets'] = [];
-        if (!empty($sheets_response['sheets'])) {
-            foreach ($sheets_response['sheets'] as $sheet) {
-                $sheet_data = $this->formatSheetData($sheet);
-                $result['posts']['touristic_sheets'][] = getTouristicSheetPreview(['display_elements' => ['sheet_town', 'sheet_type'], 'display_img' => true], $sheet['data']['idFiche'], $sheet_data);
-            }
-        }
+        // $result['posts']['touristic_sheets'] = [];
+        // if (!empty($sheets_response['sheets'])) {
+        //     foreach ($sheets_response['sheets'] as $sheet) {
+        //         $sheet_data = $this->formatSheetData($sheet);
+        //         $result['posts']['touristic_sheets'][] = getTouristicSheetPreview(['display_elements' => ['sheet_town', 'sheet_type'], 'display_img' => true], $sheet['data']['idFiche'], $sheet_data);
+        //     }
+        // }
 
-        $result['total']['touristic_sheets'] = 0;
-        if (!empty($sheets_response['total'])) {
-            $result['total']['touristic_sheets'] = $sheets_response['total'];
-        }
+        // $result['total']['touristic_sheets'] = 0;
+        // if (!empty($sheets_response['total'])) {
+        //     $result['total']['touristic_sheets'] = $sheets_response['total'];
+        // }
 
         // Set a default template
         $tplSearch = apply_filters('es_search_tpl', null);
