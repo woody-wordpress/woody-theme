@@ -753,9 +753,9 @@ function setDataFromGetParameters($layout)
     foreach ($layout['the_list_filters']['list_filters'] as $index => $filter) {
         if ($filter['list_filter_type'] == "taxonomy") {
             $tax_index = $index;
-        } else if ($filter['list_filter_type'] == "price") {
+        } elseif ($filter['list_filter_type'] == "price") {
             $price_index = $index;
-        } else if ($filter['list_filter_type'] == "duration") {
+        } elseif ($filter['list_filter_type'] == "duration") {
             $duration_index = $index;
         }
     }
@@ -836,50 +836,20 @@ function getUrlParametersForContentList($post_data)
 function formatGeomapData($layout, $twigPaths)
 {
     $return = '';
-    if (empty($layout['markers'])) {
+    if (empty($layout['markers']) && empty($layout['routes'])) {
         return;
     }
 
-    // Set boolean to fitBounds
-    $layout['map_zoom_auto'] = ($layout['map_zoom_auto']) ? 'true' : 'false';
-
-    // Calcul center of map
-    $sum_lat = $sum_lng = 0;
-    foreach ($layout['markers'] as $key => $marker) {
-        if (!empty($marker['map_position']['lat'])) {
-            $sum_lat += $marker['map_position']['lat'];
-        }
-        if (!empty($marker['map_position']['lng'])) {
-            $sum_lng += $marker['map_position']['lng'];
-        }
-    }
-    $layout['default_lat'] = $sum_lat / count($layout['markers']);
-    $layout['default_lng'] = $sum_lng / count($layout['markers']);
-
-    // Get markers
-    foreach ($layout['markers'] as $key => $marker) {
-        $the_marker = [];
-        $marker['default_marker'] = $layout['default_marker'];
-        if (empty($marker['title']) && empty($marker['description']) && empty($marker['img']) && !empty($marker['link']['url'])) {
-            $layout['markers'][$key]['marker_as_link'] = true;
-        }
-        $layout['markers'][$key]['compiled_marker']  = Timber::compile('/_objects/markerObject.twig', $marker);
-
-        if (!empty($marker['title']) || !empty($marker['description']) || !empty($marker['img'])) {
-            $the_marker['item']['title'] = (!empty($marker['title'])) ? $marker['title'] : '';
-            $the_marker['item']['description'] = (!empty($marker['description'])) ? $marker['description'] : '';
-            if (!empty($marker['img'])) {
-                $the_marker['image_style'] = 'ratio_16_9';
-                $the_marker['item']['img'] = $marker['img'];
-            }
-            $the_marker['item']['link'] = (!empty($marker['link'])) ? $marker['link'] : '';
-            $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker);
-        }
-    }
     if (!empty($layout['routes'])) {
         foreach ($layout['routes'] as $key => $route) {
             $filename = get_attached_file($route['route_file']['ID']);
             $filetype = wp_check_filetype($filename);
+
+            // Parameters :
+            $fill_color = $route['fill_color'];
+            $route_color = $route['route_color'];
+            $stroke_thickness = $route['stroke_thickness'];
+            $parameters = $route['parameters'];
 
             if ($filetype['ext'] == 'json' || $filetype['ext'] == 'geojson') {
                 $json = file_get_contents($filename);
@@ -889,27 +859,82 @@ function formatGeomapData($layout, $twigPaths)
                 foreach ($layout['routes'][$key]['features'] as $f_key => $feature) {
                     $layout['routes'][$key]['features'][$f_key]['route'] = true;
 
-                    if ($route['parameters'] === true) {
-                        $layout['routes'][$key]['features'][$f_key]['properties']['fill'] = $route['fill_color'];
-                        $layout['routes'][$key]['features'][$f_key]['properties']['stroke'] = $route['route_color'];
-                        $layout['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = $route['stroke_thickness'];
+                    if ($parameters === true) {
+                        $layout['routes'][$key]['features'][$f_key]['properties']['fill'] = $fill_color;
+                        $layout['routes'][$key]['features'][$f_key]['properties']['stroke'] = $route_color;
+                        $layout['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = $stroke_thickness;
                     }
                     $fill_opacity = isset($layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity']) ? $layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] : 0;
                     $layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] = $fill_opacity == 0 ? 0.5 : $fill_opacity;
 
+                    // Route Fields aren't supposed to have markers.
+                    if ($feature['geometry']['type'] == "Point") {
+                        // TODO: choose if geojson files can be used to add markers to the map
+                        // Code below add marker to Map
+                        // $lng = !empty($feature['geometry']['coordinates'][0]) ? (string)$feature['geometry']['coordinates'][0] : "0" ;
+                        // $lat = !empty($feature['geometry']['coordinates'][1]) ? (string)$feature['geometry']['coordinates'][1] : "0" ;
+                        // $marker = [
+                        //     'bo_marker_title' => '',
+                        //     'description' => '',
+                        //     'img' => false,
+                        //     'link' => '',
+                        //     'map_position' => [
+                        //         'address' => $feature['properties']['name'],
+                        //         'lat' => $lat,
+                        //         'lng' => $lng
+                        //     ],
+                        //     'marker_color' => 'primary',
+                        //     'marker_style' => 'pin',
+                        //     'marker_woody_icon' => '',
+                        //     'title' => ''
+                        // ];
+                        // $layout['markers'][] = $marker;
 
-                    // if($feature['geometry']['type'] == "Point"){
-                    //     if (empty($feature['properties'])) {
-                    //         $feature['properties']["marker-color"] = "#ff0000";
-                    //         $feature['properties']["marker-size"] = "medium";
-                    //         $feature['properties']["marker-symbol"] = "";
-
-                    //         $layout['routes'][$key]['features'][$f_key] = $feature;
-                    //     }
-                    // }
+                        // Remove markers from map
+                        unset($layout['routes'][$key]['features'][$f_key]);
+                    }
                 }
 
                 $layout['routes'][$key] = json_encode($layout['routes'][$key]);
+            }
+        }
+    }
+
+    if(!empty($layout['markers'])){
+        // Set boolean to fitBounds
+        $layout['map_zoom_auto'] = ($layout['map_zoom_auto']) ? 'true' : 'false';
+
+        // Calcul center of map
+        $sum_lat = $sum_lng = 0;
+        foreach ($layout['markers'] as $key => $marker) {
+            if (!empty($marker['map_position']['lat'])) {
+                $sum_lat += $marker['map_position']['lat'];
+            }
+            if (!empty($marker['map_position']['lng'])) {
+                $sum_lng += $marker['map_position']['lng'];
+            }
+        }
+        $layout['default_lat'] = $sum_lat / count($layout['markers']);
+        $layout['default_lng'] = $sum_lng / count($layout['markers']);
+
+        // Get markers
+        foreach ($layout['markers'] as $key => $marker) {
+            $the_marker = [];
+            $marker['default_marker'] = $layout['default_marker'];
+            if (empty($marker['title']) && empty($marker['description']) && empty($marker['img']) && !empty($marker['link']['url'])) {
+                $layout['markers'][$key]['marker_as_link'] = true;
+            }
+            $layout['markers'][$key]['compiled_marker']  = Timber::compile('/_objects/markerObject.twig', $marker);
+
+            if (!empty($marker['title']) || !empty($marker['description']) || !empty($marker['img'])) {
+                $the_marker['item']['title'] = (!empty($marker['title'])) ? $marker['title'] : '';
+                $the_marker['item']['description'] = (!empty($marker['description'])) ? $marker['description'] : '';
+                if (!empty($marker['img'])) {
+                    $the_marker['image_style'] = 'ratio_16_9';
+                    $the_marker['item']['img'] = $marker['img'];
+                }
+                $the_marker['item']['link'] = (!empty($marker['link'])) ? $marker['link'] : '';
+                $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker);
             }
         }
     }

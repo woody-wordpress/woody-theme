@@ -18,6 +18,7 @@ class WoodyTheme_Yoast
         //add_action('wpseo_register_extra_replacements', [$this, 'registerCustomYoastVariables']);
         add_action('wpseo_add_opengraph_additional_images', [$this, 'wpseoAddOpengraphAdditionalImages'], 10, 1);
         add_filter('wpseo_opengraph_image', [$this, 'wpseoOpengraphImage'], 10, 1);
+        add_filter('wpseo_metadesc', [$this, 'wpseoMetaDesc'], 10, 1);
     }
 
     public function wpseoAddOpengraphAdditionalImages($object)
@@ -44,6 +45,16 @@ class WoodyTheme_Yoast
             $attachment = get_field('field_5b0e5ddfd4b1b', $post->ID);
             return $attachment['sizes']['ratio_16_9_large'];
         }
+    }
+
+    /**
+     * Remove HTML tags in string.
+     * @param   string meta description as string
+     * @return  string formatted
+     */
+    public function wpseoMetaDesc($string)
+    {
+        return strip_tags($string);
     }
 
     // // define the action for register yoast_variable replacments
