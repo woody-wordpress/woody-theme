@@ -254,7 +254,7 @@ abstract class WoodyTheme_TemplateAbstract
             $template = $tpl['template'] ? $this->context['woody_components'][$tpl['template']] : $this->context['woody_components']['woody_widgets-lang_switcher-tpl_01'];
 
             // Allow data override
-            $data = apply_filters('langSwitcherData', $data);
+            $data = apply_filters('lang_switcher_data', $data);
 
             return Timber::compile($template, $data);
         }
@@ -368,7 +368,7 @@ abstract class WoodyTheme_TemplateAbstract
             $template = $tpl['template'] ?: $this->context['woody_components']['woody_widgets-es_search_block-tpl_01'];
 
             // Allow data override
-            $data = apply_filters('esSearchBlockData', $data);
+            $data = apply_filters('es_search_block_data', $data);
 
             return Timber::compile($template, $data);
         }
@@ -386,7 +386,7 @@ abstract class WoodyTheme_TemplateAbstract
             $template = $tpl['template'] ?: $this->context['woody_components']['woody_widgets-favorites_block-tpl_01'];
 
             // Allow data override
-            $data = apply_filters('favoritesBlockData', $data);
+            $data = apply_filters('favorites_block_data', $data);
 
             return Timber::compile($template, $data);
         }
