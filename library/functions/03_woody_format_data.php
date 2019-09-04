@@ -1285,6 +1285,7 @@ function getDisplayOptions($scope)
 
     $display['gridContainer'] = (empty($scope['display_fullwidth'])) ? 'grid-container' : '';
     $display['background_img'] = (!empty($scope['background_img'])) ? $scope['background_img'] : '';
+    $display['parallax'] = (!empty($scope['parallax'])) ? $scope['parallax'] : '';
     $classes_array[] = (!empty($display['background_img'])) ? 'isRel' : '';
     $classes_array[] = (!empty($scope['background_color'])) ? $scope['background_color'] : '';
     $classes_array[] = (!empty($scope['border_color'])) ? $scope['border_color'] : '';
