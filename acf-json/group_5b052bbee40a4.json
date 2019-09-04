@@ -1,8 +1,7 @@
 {
     "key": "group_5b052bbee40a4",
     "title": "Visuel et accroche",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b052d9aea19c",
             "label": "Contenu",
             "name": "",
@@ -71,13 +70,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b0e5cc3d4b1a",
-                        "operator": "==",
-                        "value": "img"
-                    }
-                ]
+                [{
+                    "field": "field_5b0e5cc3d4b1a",
+                    "operator": "==",
+                    "value": "img"
+                }]
             ],
             "wrapper": {
                 "width": "70",
@@ -103,13 +100,11 @@
             "instructions": "Cette vidéo doit être courte, muette et peu mouvementée",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b0e5cc3d4b1a",
-                        "operator": "==",
-                        "value": "movie"
-                    }
-                ]
+                [{
+                    "field": "field_5b0e5cc3d4b1a",
+                    "operator": "==",
+                    "value": "movie"
+                }]
             ],
             "wrapper": {
                 "width": "70",
@@ -117,29 +112,27 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [
-                {
-                    "key": "field_5b16b2f2aa625",
-                    "label": "Fichiers vidéos",
-                    "name": "movie_files",
-                    "type": "clone",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "clone": [
-                        "group_5b16b09337a33"
-                    ],
-                    "display": "seamless",
-                    "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0
-                }
-            ]
+            "sub_fields": [{
+                "key": "field_5b16b2f2aa625",
+                "label": "Fichiers vidéos",
+                "name": "movie_files",
+                "type": "clone",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "clone": [
+                    "group_5b16b09337a33"
+                ],
+                "display": "seamless",
+                "layout": "block",
+                "prefix_label": 0,
+                "prefix_name": 0
+            }]
         },
         {
             "key": "field_5b44b7fedb880",
@@ -168,13 +161,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b44b7fedb880",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
+                [{
+                    "field": "field_5b44b7fedb880",
+                    "operator": "==",
+                    "value": "1"
+                }]
             ],
             "wrapper": {
                 "width": "",
@@ -270,12 +261,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "choices": {
-                "blocks-hero-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.crt-bretagne.wp.rc-dev.com\/app\/dist\/crt-bretagne\/img\/woody-library\/views\/blocks\/hero\/tpl_01\/thumbnail.png?version=1.4.3\" alt=\"blocks-hero-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Hero - Paysage A<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Hero - Paysage A<\/h4>Visuel (3:1) et accroche (Icône, Sur-titre, Titre, sous-titre, description) + image ou vidéo de fond + video complémentaire<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-hero-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.crt-bretagne.wp.rc-dev.com\/app\/dist\/crt-bretagne\/img\/woody-library\/views\/blocks\/hero\/tpl_02\/thumbnail.png?version=1.4.3\" alt=\"blocks-hero-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Hero - Pano B<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Hero - Pano B<\/h4>Visuel (4:1) et accroche (Icône, Sur-titre, Titre, sous-titre, description) + image ou vidéo de fond + video complémentaire<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-hero-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.crt-bretagne.wp.rc-dev.com\/app\/dist\/crt-bretagne\/img\/woody-library\/views\/blocks\/hero\/tpl_03\/thumbnail.png?version=1.4.3\" alt=\"blocks-hero-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Hero - Pano A<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Hero - Pano A<\/h4>Visuel (8:1) et accroche (Icône, Sur-titre, Titre, sous-titre, description) + image ou vidéo de fond + video complémentaire<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-hero-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.crt-bretagne.wp.rc-dev.com\/app\/dist\/crt-bretagne\/img\/woody-library\/views\/blocks\/hero\/tpl_04\/thumbnail.png?version=1.4.3\" alt=\"blocks-hero-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Hero - SplitCard<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Hero - SplitCard<\/h4>Accroche (Icône, Sur-titre, Titre, sous-titre, description) + image de fond + Visuel (16:9) à droite ou video<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-            },
+            "choices": {},
             "allow_null": 0,
             "other_choice": 0,
             "save_other_choice": 0,
@@ -309,7 +295,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "40",
                 "class": "",
                 "id": ""
             },
@@ -333,7 +319,32 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5d6fc41fe59e9",
+            "label": "Estomper l'image au scroll",
+            "name": "blur",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [{
+                    "field": "field_5d6f6ed5e7906",
+                    "operator": "==",
+                    "value": "1"
+                }]
+            ],
+            "wrapper": {
+                "width": "30",
                 "class": "",
                 "id": ""
             },
@@ -345,8 +356,7 @@
         }
     ],
     "location": [
-        [
-            {
+        [{
                 "param": "post_type",
                 "operator": "==",
                 "value": "page"
@@ -362,8 +372,7 @@
                 "value": "mirror_page"
             }
         ],
-        [
-            {
+        [{
                 "param": "post_type",
                 "operator": "==",
                 "value": "woody_model"
@@ -388,5 +397,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Le bloc en haut de page contenant un média et des textes d'accroche",
-    "modified": 1567584395
+    "modified": 1567605861
 }
