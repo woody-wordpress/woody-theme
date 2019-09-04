@@ -369,7 +369,7 @@ function getManualFocus_data($layout)
         // La donnée de la vignette est saisie en backoffice
         if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
             $the_items['items'][$key] = getCustomPreview($item_wrapper['custom_content'], $layout);
-        // La donnée de la vignette correspond à un post sélectionné
+            // La donnée de la vignette correspond à un post sélectionné
         } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
             $item = $item_wrapper['existing_content'];
             $status = $item['content_selection']->post_status;
@@ -1043,11 +1043,10 @@ function getTouristicSheetPreview($layout = null, $post)
         $item = current($items['items']);
     }
 
-    // foreach ($sheet_data['items'] as $key => $item) {
     $data = [
         'title' => (!empty($item['title'])) ? getTransformedPattern($item['title']) : '',
         'link' => [
-            'url' => (!empty($item['link'])) ? $item['link'] : '',
+            'url' => apply_filters('woody_get_permalink', $post->ID),
             'target' => $item['targetBlank'] ? '_blank' : '',
         ],
     ];
