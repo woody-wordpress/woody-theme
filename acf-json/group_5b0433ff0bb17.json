@@ -1,24 +1,6 @@
 {
     "key": "group_5b0433ff0bb17",
     "title": "FAQ",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Elément de contenu (Titre + Accordéon)",
-    "modified": 1536232424,
     "fields": [
         {
             "key": "field_5b05170c5fa21",
@@ -33,12 +15,12 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
             "key": "field_5b0433ff4eb18",
-            "label": "Titre",
+            "label": "Titre de bloc",
             "name": "title",
             "type": "text",
             "instructions": "",
@@ -68,18 +50,32 @@
                 "class": "",
                 "id": ""
             },
-            "collapsed": "",
+            "collapsed": "field_5d71091be6efa",
             "min": 1,
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter une section à l'accordéon",
-            "hide_collapse": 1,
-            "collapse_all_repeater": 1,
-            "btn-icon-only": 0,
             "sub_fields": [
                 {
+                    "key": "field_5d71091be6efa",
+                    "label": "Section d'accordéon",
+                    "name": "",
+                    "type": "message",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "new_lines": "wpautop",
+                    "esc_html": 0
+                },
+                {
                     "key": "field_5b0434294eb1a",
-                    "label": "Section de l'accordéon",
+                    "label": "Contenu de section de l'accordéon",
                     "name": "accordion_section",
                     "type": "clone",
                     "instructions": "",
@@ -113,7 +109,7 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -130,7 +126,7 @@
                 "id": ""
             },
             "choices": {
-                "blocks-accordion-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/blocks\/accordion\/tpl_01\/thumbnail.png\" alt=\"blocks-accordion-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">FAQ - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">FAQ - Template 1<\/h4>Titres avec textes associés dépliables<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+                "blocks-accordion-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/accordion\/tpl_01\/thumbnail.png?version=2.9.1\" alt=\"blocks-accordion-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">FAQ - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">FAQ - Template 1<\/h4>Titres avec textes associés dépliables<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -139,5 +135,23 @@
             "layout": "vertical",
             "return_format": "value"
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Elément de contenu (Titre + Accordéon)",
+    "modified": 1567689330
 }

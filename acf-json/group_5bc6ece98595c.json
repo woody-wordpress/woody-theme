@@ -15,7 +15,7 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -52,7 +52,7 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -89,7 +89,7 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -131,5 +131,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Rassemblement des elements, filtres et templates des listes de contenu",
-    "modified": 1540887131
+    "modified": 1567690113
 }

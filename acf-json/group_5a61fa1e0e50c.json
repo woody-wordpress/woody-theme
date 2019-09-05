@@ -7,16 +7,16 @@
             "label": "Type de publication",
             "name": "content_type",
             "type": "taxonomy",
-            "instructions": "Choisissez le type de publication que vous souhaitez créer",
+            "instructions": "",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
-                "class": "hide-label",
+                "width": "30",
+                "class": "",
                 "id": ""
             },
             "taxonomy": "page_type",
-            "field_type": "radio",
+            "field_type": "select",
             "allow_null": 0,
             "add_term": 0,
             "save_terms": 1,
@@ -43,11 +43,11 @@
     ],
     "menu_order": -100,
     "position": "acf_after_title",
-    "style": "default",
+    "style": "seamless",
     "label_placement": "top",
     "instruction_placement": "field",
     "hide_on_screen": "",
     "active": 1,
     "description": "Sélection du type de contenu basé sur la taxonomie \"page_type\"",
-    "modified": 1548196535
+    "modified": 1567685610
 }
