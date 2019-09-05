@@ -1,23 +1,8 @@
 {
     "key": "group_5b471f2922b04",
     "title": "Onglets",
-    "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "",
-    "modified": 1536232426,
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5b471f334efed",
             "label": "Contenu",
             "name": "",
@@ -54,7 +39,8 @@
             "hide_collapse": 0,
             "collapse_all_repeater": 0,
             "btn-icon-only": 0,
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5b472edae3000",
                     "label": "Titre pour l'administration",
                     "name": "tab_bo_title",
@@ -125,7 +111,11 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {},
+            "choices": {
+                "blocks-tabs-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/tabs\/tpl_03\/thumbnail.png?version=2.9.1\" alt=\"blocks-tabs-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Onglets - Template 3<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Onglets - Template 3<\/h4>Grilles de blocs au choix dans des onglets (barre d'onglets au dessus)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-tabs-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/tabs\/tpl_02\/thumbnail.png?version=2.9.1\" alt=\"blocks-tabs-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Onglets - Template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Onglets - Template 2<\/h4>Grilles de blocs au choix dans des onglets (barre d'onglets au dessus)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-tabs-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/tabs\/tpl_01\/thumbnail.png?version=2.9.1\" alt=\"blocks-tabs-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Onglets - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Onglets - Template 1<\/h4>Grilles de blocs au choix dans des onglets (barre d'onglets au dessus)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+            },
             "allow_null": 0,
             "other_choice": 0,
             "save_other_choice": 0,
@@ -133,5 +123,23 @@
             "layout": "vertical",
             "return_format": "value"
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1567692966
 }

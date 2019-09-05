@@ -234,298 +234,6 @@
             "maxlength": ""
         },
         {
-            "key": "field_5b461b36131b9",
-            "label": "Mise en page",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "left",
-            "endpoint": 0
-        },
-        {
-            "key": "field_5c1cdecc9963f",
-            "label": "Template",
-            "name": "",
-            "type": "accordion",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "open": 1,
-            "multi_expand": 1,
-            "endpoint": 0
-        },
-        {
-            "key": "field_5b461b19131b8",
-            "label": "Template",
-            "name": "woody_tpl",
-            "type": "radio",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "hide-label",
-                "id": ""
-            },
-            "choices": {
-                "blocks-call_to_action-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_01\/thumbnail.png?version=2.9.1\" alt=\"blocks-call_to_action-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 1<\/h4>Affiche un bloc avec texte et\/ou lien ou fichier à télécharger à droite + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-call_to_action-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_02\/thumbnail.png?version=2.9.1\" alt=\"blocks-call_to_action-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 2<\/h4>Affiche un bloc avec texte aligné à gauche et\/ou lien ou fichier à télécharger en dessous + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-call_to_action-tpl_05": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_05\/thumbnail.png?version=2.9.1\" alt=\"blocks-call_to_action-tpl_05\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 5<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 5<\/h4>Affiche un bloc avec texte et\/ou lien ou fichier à télécharger en dessous + icone en haut à gauche + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-call_to_action-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_03\/thumbnail.png?version=2.9.1\" alt=\"blocks-call_to_action-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 3<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 3<\/h4>Affiche un bloc avec texte centré et\/ou lien ou fichier à télécharger en dessous + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-call_to_action-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_04\/thumbnail.png?version=2.9.1\" alt=\"blocks-call_to_action-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 4<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 4<\/h4>Affiche un bloc avec texte centré (icone sur fond de couleur rond) et\/ou lien ou fichier à télécharger en dessous + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-            },
-            "allow_null": 0,
-            "other_choice": 0,
-            "default_value": "",
-            "layout": "vertical",
-            "return_format": "value",
-            "save_other_choice": 0
-        },
-        {
-            "key": "field_5b681e66b1056",
-            "label": "Options avancées",
-            "name": "",
-            "type": "accordion",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "open": 0,
-            "multi_expand": 1,
-            "endpoint": 0
-        },
-        {
-            "key": "field_5b461b46131ba",
-            "label": "Personnalisation du fond",
-            "name": "bg_params",
-            "type": "clone",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "hide-label",
-                "id": ""
-            },
-            "clone": [
-                "group_5b043c93d609a"
-            ],
-            "display": "seamless",
-            "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0,
-            "sub_fields": [
-                {
-                    "ID": 0,
-                    "key": "field_5b461b46131ba_field_5b043ca4a6fe3",
-                    "label": "Couleur de fond",
-                    "name": "background_color",
-                    "prefix": "acf[field_5b461b46131ba]",
-                    "type": "button_group",
-                    "value": null,
-                    "menu_order": 0,
-                    "instructions": "",
-                    "required": 0,
-                    "id": "",
-                    "class": "",
-                    "conditional_logic": 0,
-                    "parent": "group_5b461a3831284",
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "_name": "background_color",
-                    "_prepare": 0,
-                    "_valid": 1,
-                    "choices": {
-                        "bg-primary": "Couleur principale",
-                        "bg-secondary": "Couleur secondaire",
-                        "bg-black": "Noir",
-                        "bg-darkgray": "Gris foncé",
-                        "bg-lightgray": "Gris clair"
-                    },
-                    "allow_null": 1,
-                    "default_value": "",
-                    "layout": "horizontal",
-                    "return_format": "value",
-                    "_clone": "field_5b461b46131ba",
-                    "__key": "field_5b043ca4a6fe3",
-                    "__name": "background_color",
-                    "__label": "Couleur de fond"
-                },
-                {
-                    "ID": 0,
-                    "key": "field_5b461b46131ba_field_5b978a13feaa6",
-                    "label": "Bordure",
-                    "name": "border_color",
-                    "prefix": "acf[field_5b461b46131ba]",
-                    "type": "button_group",
-                    "value": null,
-                    "menu_order": 1,
-                    "instructions": "",
-                    "required": 0,
-                    "id": "",
-                    "class": "",
-                    "conditional_logic": 0,
-                    "parent": "group_5b461a3831284",
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "_name": "border_color",
-                    "_prepare": 0,
-                    "_valid": 1,
-                    "choices": {
-                        "border-primary": "Couleur principale",
-                        "border-secondary": "Couleur secondaire",
-                        "border-black": "Noir",
-                        "border-darkgray": "Gris foncé",
-                        "border-lightgray": "Gris clair"
-                    },
-                    "allow_null": 1,
-                    "default_value": "",
-                    "layout": "horizontal",
-                    "return_format": "value",
-                    "_clone": "field_5b461b46131ba",
-                    "__key": "field_5b978a13feaa6",
-                    "__name": "border_color",
-                    "__label": "Bordure"
-                },
-                {
-                    "ID": 0,
-                    "key": "field_5b461b46131ba_field_5b043d94a6fe4",
-                    "label": "Image de fond",
-                    "name": "background_img",
-                    "prefix": "acf[field_5b461b46131ba]",
-                    "type": "image",
-                    "value": null,
-                    "menu_order": 2,
-                    "instructions": "",
-                    "required": 0,
-                    "id": "",
-                    "class": "",
-                    "conditional_logic": 0,
-                    "parent": "group_5b461a3831284",
-                    "wrapper": {
-                        "width": "50",
-                        "class": "",
-                        "id": ""
-                    },
-                    "_name": "background_img",
-                    "_prepare": 0,
-                    "_valid": 1,
-                    "return_format": "array",
-                    "preview_size": "thumbnail",
-                    "library": "all",
-                    "min_width": 640,
-                    "min_height": "",
-                    "min_size": "",
-                    "max_width": "",
-                    "max_height": "",
-                    "max_size": "",
-                    "mime_types": "jpeg, jpg, png, gif",
-                    "_clone": "field_5b461b46131ba",
-                    "__key": "field_5b043d94a6fe4",
-                    "__name": "background_img",
-                    "__label": "Image de fond"
-                },
-                {
-                    "ID": 0,
-                    "key": "field_5b461b46131ba_field_5b043dbea6fe5",
-                    "label": "Opacité de l'image de fond",
-                    "name": "background_img_opacity",
-                    "prefix": "acf[field_5b461b46131ba]",
-                    "type": "button_group",
-                    "value": null,
-                    "menu_order": 3,
-                    "instructions": "",
-                    "required": 0,
-                    "id": "",
-                    "class": "",
-                    "conditional_logic": 0,
-                    "parent": "group_5b461a3831284",
-                    "wrapper": {
-                        "width": "50",
-                        "class": "",
-                        "id": ""
-                    },
-                    "_name": "background_img_opacity",
-                    "_prepare": 0,
-                    "_valid": 1,
-                    "choices": {
-                        "bgimg-op75": "75%",
-                        "bgimg-op50": "50%",
-                        "bgimg-op25": "25%",
-                        "bgimg-op10": "10%"
-                    },
-                    "allow_null": 1,
-                    "default_value": "",
-                    "layout": "horizontal",
-                    "return_format": "value",
-                    "_clone": "field_5b461b46131ba",
-                    "__key": "field_5b043dbea6fe5",
-                    "__name": "background_img_opacity",
-                    "__label": "Opacité de l'image de fond"
-                }
-            ]
-        },
-        {
-            "key": "field_5bc848bdf3c00",
-            "label": "Effets visuels",
-            "name": "",
-            "type": "accordion",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "open": 0,
-            "multi_expand": 1,
-            "endpoint": 0
-        },
-        {
-            "key": "field_5bc848daf3c01",
-            "label": "Effets visuel",
-            "name": "the_visual_effects",
-            "type": "clone",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "clone": [
-                "group_5bc845beeae52"
-            ],
-            "display": "seamless",
-            "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0
-        },
-        {
             "key": "field_5bd80f5b96cd4",
             "label": "ANCIENS CHAMPS",
             "name": "",
@@ -1125,6 +833,298 @@
                     "delay": 0
                 }
             ]
+        },
+        {
+            "key": "field_5b461b36131b9",
+            "label": "Mise en page",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5c1cdecc9963f",
+            "label": "Template",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 1,
+            "multi_expand": 1,
+            "endpoint": 0
+        },
+        {
+            "key": "field_5b461b19131b8",
+            "label": "Template",
+            "name": "woody_tpl",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label",
+                "id": ""
+            },
+            "choices": {
+                "blocks-call_to_action-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_01\/thumbnail.png?version=2.9.1\" alt=\"blocks-call_to_action-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 1<\/h4>Affiche un bloc avec texte et\/ou lien ou fichier à télécharger à droite + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-call_to_action-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_02\/thumbnail.png?version=2.9.1\" alt=\"blocks-call_to_action-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 2<\/h4>Affiche un bloc avec texte aligné à gauche et\/ou lien ou fichier à télécharger en dessous + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-call_to_action-tpl_05": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_05\/thumbnail.png?version=2.9.1\" alt=\"blocks-call_to_action-tpl_05\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 5<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 5<\/h4>Affiche un bloc avec texte et\/ou lien ou fichier à télécharger en dessous + icone en haut à gauche + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-call_to_action-tpl_03": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_03\/thumbnail.png?version=2.9.1\" alt=\"blocks-call_to_action-tpl_03\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 3<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 3<\/h4>Affiche un bloc avec texte centré et\/ou lien ou fichier à télécharger en dessous + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
+                "blocks-call_to_action-tpl_04": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/call_to_action\/tpl_04\/thumbnail.png?version=2.9.1\" alt=\"blocks-call_to_action-tpl_04\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Appel à l'action - Template 4<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Appel à l'action - Template 4<\/h4>Affiche un bloc avec texte centré (icone sur fond de couleur rond) et\/ou lien ou fichier à télécharger en dessous + couleur et image de fond possible<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_5b681e66b1056",
+            "label": "Options avancées",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 1,
+            "endpoint": 0
+        },
+        {
+            "key": "field_5b461b46131ba",
+            "label": "Personnalisation du fond",
+            "name": "bg_params",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label",
+                "id": ""
+            },
+            "clone": [
+                "group_5b043c93d609a"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0,
+            "sub_fields": [
+                {
+                    "ID": 0,
+                    "key": "field_5b461b46131ba_field_5b043ca4a6fe3",
+                    "label": "Couleur de fond",
+                    "name": "background_color",
+                    "prefix": "acf[field_5b461b46131ba]",
+                    "type": "button_group",
+                    "value": null,
+                    "menu_order": 0,
+                    "instructions": "",
+                    "required": 0,
+                    "id": "",
+                    "class": "",
+                    "conditional_logic": 0,
+                    "parent": "group_5b461a3831284",
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "_name": "background_color",
+                    "_prepare": 0,
+                    "_valid": 1,
+                    "choices": {
+                        "bg-primary": "Couleur principale",
+                        "bg-secondary": "Couleur secondaire",
+                        "bg-black": "Noir",
+                        "bg-darkgray": "Gris foncé",
+                        "bg-lightgray": "Gris clair"
+                    },
+                    "allow_null": 1,
+                    "default_value": "",
+                    "layout": "horizontal",
+                    "return_format": "value",
+                    "_clone": "field_5b461b46131ba",
+                    "__key": "field_5b043ca4a6fe3",
+                    "__name": "background_color",
+                    "__label": "Couleur de fond"
+                },
+                {
+                    "ID": 0,
+                    "key": "field_5b461b46131ba_field_5b978a13feaa6",
+                    "label": "Bordure",
+                    "name": "border_color",
+                    "prefix": "acf[field_5b461b46131ba]",
+                    "type": "button_group",
+                    "value": null,
+                    "menu_order": 1,
+                    "instructions": "",
+                    "required": 0,
+                    "id": "",
+                    "class": "",
+                    "conditional_logic": 0,
+                    "parent": "group_5b461a3831284",
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "_name": "border_color",
+                    "_prepare": 0,
+                    "_valid": 1,
+                    "choices": {
+                        "border-primary": "Couleur principale",
+                        "border-secondary": "Couleur secondaire",
+                        "border-black": "Noir",
+                        "border-darkgray": "Gris foncé",
+                        "border-lightgray": "Gris clair"
+                    },
+                    "allow_null": 1,
+                    "default_value": "",
+                    "layout": "horizontal",
+                    "return_format": "value",
+                    "_clone": "field_5b461b46131ba",
+                    "__key": "field_5b978a13feaa6",
+                    "__name": "border_color",
+                    "__label": "Bordure"
+                },
+                {
+                    "ID": 0,
+                    "key": "field_5b461b46131ba_field_5b043d94a6fe4",
+                    "label": "Image de fond",
+                    "name": "background_img",
+                    "prefix": "acf[field_5b461b46131ba]",
+                    "type": "image",
+                    "value": null,
+                    "menu_order": 2,
+                    "instructions": "",
+                    "required": 0,
+                    "id": "",
+                    "class": "",
+                    "conditional_logic": 0,
+                    "parent": "group_5b461a3831284",
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "_name": "background_img",
+                    "_prepare": 0,
+                    "_valid": 1,
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "min_width": 640,
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "jpeg, jpg, png, gif",
+                    "_clone": "field_5b461b46131ba",
+                    "__key": "field_5b043d94a6fe4",
+                    "__name": "background_img",
+                    "__label": "Image de fond"
+                },
+                {
+                    "ID": 0,
+                    "key": "field_5b461b46131ba_field_5b043dbea6fe5",
+                    "label": "Opacité de l'image de fond",
+                    "name": "background_img_opacity",
+                    "prefix": "acf[field_5b461b46131ba]",
+                    "type": "button_group",
+                    "value": null,
+                    "menu_order": 3,
+                    "instructions": "",
+                    "required": 0,
+                    "id": "",
+                    "class": "",
+                    "conditional_logic": 0,
+                    "parent": "group_5b461a3831284",
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "_name": "background_img_opacity",
+                    "_prepare": 0,
+                    "_valid": 1,
+                    "choices": {
+                        "bgimg-op75": "75%",
+                        "bgimg-op50": "50%",
+                        "bgimg-op25": "25%",
+                        "bgimg-op10": "10%"
+                    },
+                    "allow_null": 1,
+                    "default_value": "",
+                    "layout": "horizontal",
+                    "return_format": "value",
+                    "_clone": "field_5b461b46131ba",
+                    "__key": "field_5b043dbea6fe5",
+                    "__name": "background_img_opacity",
+                    "__label": "Opacité de l'image de fond"
+                }
+            ]
+        },
+        {
+            "key": "field_5bc848bdf3c00",
+            "label": "Effets visuels",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 1,
+            "endpoint": 0
+        },
+        {
+            "key": "field_5bc848daf3c01",
+            "label": "Effets visuel",
+            "name": "the_visual_effects",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5bc845beeae52"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
         }
     ],
     "location": [
@@ -1144,5 +1144,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Un bloc d'appel à laction avec texte et lien\/fichier + couleur de fond possible",
-    "modified": 1567686863
+    "modified": 1567696580
 }

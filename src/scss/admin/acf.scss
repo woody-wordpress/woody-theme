@@ -190,15 +190,9 @@
 // On ajoute des icones dans les tabs de contenu / En-tête / Mise en page
 // et on revoit le style des tabs
 .acf-fields>.acf-tab-wrap {
-    &.-top {
-        .acf-tab-group {
-            display: flex;
-        }
-    }
-
     .acf-tab-group {
         border-bottom: none !important;
-        padding-bottom: 10px;
+        padding: 0;
 
         li {
             margin-right: 0;
@@ -206,42 +200,76 @@
             transition: .3s;
 
             a {
-                background-color: #23282d !important;
-                transition: .3s !important;
-                border: none !important;
+                transition: all .3s !important;
                 font-weight: 500;
-                text-align: center;
-                color: #fff !important;
-                padding: 5px;
-
-                &:hover {
-                    background-color: darken(#23282d, 10%) !important;
-                }
-
-                &:before {
-                    display: inline-block;
-                    padding-right: 7px;
-                    font-family: 'dashicons';
-                    font-weight: normal;
-                    font-style: normal;
-                    font-size: 16px;
-                    transform: translateY(2px);
-                }
+                text-transform: uppercase;
             }
+        }
+    }
 
-            &.active {
+    &.-top {
+        .acf-tab-group {
+            display: flex;
+
+            li {
                 a {
-                    padding-bottom: 5px !important;
-                    background-color: #0073aa !important;
+                    padding: 10px !important;
+                    background-color: #23282d !important;
                     color: #fff !important;
+                    text-align: center;
+                    border: none !important;
 
-                    &:before {
-                        color: #fff;
+                    &:hover {
+                        background-color: darken(#23282d, 10%) !important;
+                    }
+                }
+
+                &.active {
+                    a {
+                        background-color: #0073aa !important;
+                        color: #fff !important;
                     }
                 }
             }
         }
     }
+
+    &.-left {
+        .acf-tab-group {
+            li {
+                a {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    font-weight: 700;
+                    color: lighten(#23282d, 20%);
+                    padding: 15px;
+
+                    &:after {
+                        display: block;
+                        content: '\f344';
+                        font-family: 'dashicons';
+                        margin-left: 10px;
+                        line-height: 1em;
+                        transform: scaleX(0);
+                    }
+                }
+
+                &.active {
+                    a {
+                        background-color: #0073aa !important;
+                        color: white !important;
+
+                        &:after {
+                            transform: scaleX(1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
 }
 
 // On ajoute une ombre aux layouts ouverts pour les mettre en avant
@@ -483,6 +511,7 @@
     justify-content: flex-end;
     margin: 0;
     padding: 5px 10px;
+    background-color: white;
 
     .count {
         position: relative;
@@ -587,8 +616,12 @@
     }
 }
 
-.acf-tooltip>ul>li>a[data-layout="slides_group"] {
-    display: none;
+.acf-tooltip>ul>li {
+
+    >a[data-layout="files"],
+    >a[data-layout="slides_group"] {
+        display: none;
+    }
 }
 
 .acf-field.collapsing-rows {
@@ -662,6 +695,14 @@
 
 .acf-field-5b043f0525968 {
     .layout[data-layout="call_to_action"] {
+        .acf-tab-group {
+            li:nth-of-type(2) {
+                display: none !important;
+            }
+        }
+    }
+
+    .layout[data-layout="gallery"] {
         .acf-tab-group {
             li:nth-of-type(3) {
                 display: none !important;
