@@ -268,8 +268,15 @@
             }
         }
     }
+}
 
+.acf-accordion-title {
+    text-transform: uppercase;
+    transition: color .3s;
 
+    &:hover {
+        color: #00a0d2;
+    }
 }
 
 // On ajoute une ombre aux layouts ouverts pour les mettre en avant
