@@ -83,13 +83,11 @@ class WoodyTheme_Shortcodes
      */
     private function formatSheetData($sheet)
     {
-
         $env = WP_ENV;
         $lang = pll_current_language();
 
         $img = '';
         if (!empty($sheet['data']['multimedia'])) {
-
             $hash_path = str_replace(array("+", "/"), array("-", "_"), base64_encode($sheet['data']['multimedia'][0]['URL']));
 
             $img = [
