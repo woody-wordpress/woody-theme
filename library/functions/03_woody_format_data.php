@@ -411,6 +411,10 @@ function getAutoFocusSheetData($layout)
         if (!empty($playlist['items'])) {
             foreach ($playlist['items'] as $key => $item) {
                 $wpSheetNode = apply_filters('woody_hawwwai_get_post_by_sheet_id', $item['sheetId'], $lang, ['publish']);
+                //TODO: $wpSheetNode->getPost() retourne parfois un tableau. Dans ce cas, on récupère le 1ier objet à l'interieur - voir plugin
+                if (is_array($wpSheetNode)) {
+                    $wpSheetNode = current($wpSheetNode);
+                }
                 $items['items'][] = getTouristicSheetPreview($layout, $wpSheetNode->getPost());
             }
         }
