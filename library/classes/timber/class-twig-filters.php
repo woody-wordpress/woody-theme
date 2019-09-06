@@ -192,12 +192,11 @@ class WoodyTheme_Twig_Filters
 
     public function theRootAncestor($post_id)
     {
-
         $root_id = getPostRootAncestor($post_id) ? getPostRootAncestor($post_id) : get_the_id();
         return $root_id;
     }
 
-    function pluralizeUnit($amount, $singular_unit, $plural_unit = false)
+    public function pluralizeUnit($amount, $singular_unit, $plural_unit = false)
     {
         if ((int) $amount === 1 || empty($plural_unit)) {
             return $amount . '<span class="unit"> ' . $singular_unit . '</span>';

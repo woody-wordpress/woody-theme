@@ -1044,7 +1044,9 @@ function getTouristicSheetPreview($layout = null, $post)
     } else {
         $sheet_id = get_field('touristic_sheet_id', $post->ID);
         $items = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $lang, array(), 'json', 'item');
-        $item = current($items['items']);
+        if (!empty($items['items']) && is_array($items['items'])) {
+            $item = current($items['items']);
+        }
     }
 
     $data = [

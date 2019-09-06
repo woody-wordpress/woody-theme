@@ -31,13 +31,7 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "darksky_superot_larochelle": "La Rochelle (DarkSky.net)",
-                "darksky_testHawwwai": "Saint-Paul (Réunion) (DarkSky.net)",
-                "darksky_hawwwai1521712944": "Gap (DarkSky.net)",
-                "darksky_hawwwai1521735342": "Paris (DarkSky.net)",
-                "meteofrancemountain_superot_val_cenis": "Val Cenis (Météo France Montagne)"
-            },
+            "choices": {},
             "default_value": [],
             "allow_null": 0,
             "multiple": 0,
@@ -96,9 +90,7 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "blocks-weather-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/weather\/tpl_01\/thumbnail.png?version=2.9.1\" alt=\"blocks-weather-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Blocs météo sur 4 colonnes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Blocs météo sur 4 colonnes<\/h4>...<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-            },
+            "choices": {},
             "allow_null": 0,
             "other_choice": 0,
             "default_value": "",

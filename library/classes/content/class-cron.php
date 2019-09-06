@@ -50,6 +50,11 @@ class WoodyTheme_Cron
             'display' => __('Twice Hourly')
         ];
 
+        $schedules['everyquarter'] = [
+            'interval' => 900,
+            'dislpay' => __('Every Quarter of an Hour')
+        ];
+
         return $schedules;
     }
 }
