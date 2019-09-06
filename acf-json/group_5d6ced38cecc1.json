@@ -17,7 +17,8 @@
             },
             "choices": {
                 "header": "Header",
-                "footer": "Footer"
+                "footer": "Footer",
+                "breadcrumb": "Fil d'ariane"
             },
             "allow_custom": 0,
             "default_value": [],

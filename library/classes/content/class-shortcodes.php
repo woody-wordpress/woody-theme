@@ -49,7 +49,7 @@ class WoodyTheme_Shortcodes
                 $post_id = explode('_', $post_id);
                 $post_id = end($post_id);
                 $post = Timber::get_post($post_id);
-                if ($post->id != null) {
+                if ($post->id != null && $post->status === 'publish') {
                     switch ($post->post_type) {
                         case 'touristic_sheet':
                             $result['posts']['pages'][] = getTouristicSheetPreview(['display_elements' => ['sheet_town', 'sheet_type', 'description', 'bookable'], 'display_img' => true], $post);
@@ -83,13 +83,11 @@ class WoodyTheme_Shortcodes
      */
     private function formatSheetData($sheet)
     {
-
         $env = WP_ENV;
         $lang = pll_current_language();
 
         $img = '';
         if (!empty($sheet['data']['multimedia'])) {
-
             $hash_path = str_replace(array("+", "/"), array("-", "_"), base64_encode($sheet['data']['multimedia'][0]['URL']));
 
             $img = [
