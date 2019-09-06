@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template
  *
@@ -18,8 +19,7 @@ class WoodyTheme_Template_Sitemap
     }
 
     protected function registerHooks()
-    {
-    }
+    { }
 
     public function render()
     {
@@ -46,7 +46,7 @@ class WoodyTheme_Template_Sitemap
                 $query = $this->getPosts();
                 if (!empty($query)) {
                     $this->twig_tpl = 'sitemap/sitemapindex.xml.twig';
-                    for ($i=1; $i <= $query->max_num_pages; $i++) {
+                    for ($i = 1; $i <= $query->max_num_pages; $i++) {
                         $this->context['sitemaps'][] = [
                             'loc' => 'sitemap-' . $i . '.xml',
                             'lastmod' => date('c', time()),

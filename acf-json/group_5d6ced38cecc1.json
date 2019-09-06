@@ -17,7 +17,8 @@
             },
             "choices": {
                 "header": "Header",
-                "footer": "Footer"
+                "footer": "Footer",
+                "breadcrumb": "Fil d'ariane"
             },
             "allow_custom": 0,
             "default_value": [],
@@ -44,5 +45,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1567420628
+    "modified": 1567752793
 }

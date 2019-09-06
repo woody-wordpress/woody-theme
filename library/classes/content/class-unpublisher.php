@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Taxonomy
  *
@@ -78,7 +79,6 @@ class WoodyTheme_Unpublisher
 
         foreach ($pages as $page) {
             if (is_object($page) && !empty(get_post_meta($page->ID, '_wUnpublisher_date', true))) {
-
                 $unpublish_date_meta = get_post_meta($page->ID, '_wUnpublisher_date', true);
 
                 $timezone = (!empty(get_option('timezone_string'))) ? get_option('timezone_string') : 'Europe/Paris';
