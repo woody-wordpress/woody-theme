@@ -34,6 +34,22 @@
     padding: 10px;
 }
 
+// Bouton add file / img
+.acf-image-uploader,
+.acf-file-uploader,
+.acf-link {
+    .button {
+        background-color: lighten(#23282d, 25%);
+        color: #fff;
+        transition: background-color;
+
+        &:hover {
+            background-color: lighten(#23282d, 15%);
+            color: #fff;
+        }
+    }
+}
+
 //Styles pour le selecteur de templates Woody => override style des radios par défaut
 .acf-field-radio[data-name*="woody_tpl"] {
     input[type="radio"] {

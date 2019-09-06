@@ -1,3 +1,27 @@
+.wp-core-ui .button {
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    text-shadow: none;
+    height: auto;
+    padding: 5px 10px;
+
+    &.button-large {
+        height: auto;
+        padding: 5px 10px;
+    }
+
+    &.edit-slug {
+        margin-left: 5px;
+        background: #fff;
+
+        &:hover {
+            color: #0085ba
+        }
+    }
+}
+
+
 #pageparentdiv {
 
     p:nth-of-type(2),
@@ -26,9 +50,6 @@ textarea.notAllowed {
         padding: 0 12px 2px;
         margin-bottom: 20px;
         background: #0085ba;
-        border: none;
-        box-shadow: none;
-        border-radius: 0;
         color: #fff;
         text-decoration: none;
         transition: background-color .3s;
@@ -42,9 +63,7 @@ textarea.notAllowed {
 #major-publishing-actions {
     .button {
         border: 1px solid #cccccc;
-        border-radius: 0;
         background: #f7f7f7;
-        box-shadow: none;
         color: #555;
         text-decoration: none;
         text-shadow: none;
@@ -71,14 +90,17 @@ textarea.notAllowed {
 
 #minor-publishing-actions .preview.button.sticky {
     height: auto;
-    bottom: 100px;
-    box-shadow: 0 0 12px rgba(0, 0, 0, .15);
+    bottom: -90px;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, .1);
+    animation: previewSlideIn .4s ease-out forwards;
 
 }
 
 #publishing-action.sticky {
-    bottom: 40px;
+    bottom: -150px;
     box-shadow: 0 10px 12px rgba(0, 0, 0, .15);
+    animation: submitSlideIn .4s ease-out forwards;
+
 
     .spinner {
         position: absolute;
@@ -109,8 +131,14 @@ textarea.notAllowed {
     }
 }
 
+#pv_publish {
+    height: 100% !important;
+}
+
 #select-post-language {
     .button-lock {
+        padding: 2px 7px;
+
         .dashicons {
             line-height: 26px;
         }
@@ -168,5 +196,25 @@ textarea.notAllowed {
             content: '\f323';
 
         }
+    }
+}
+
+@keyframes submitSlideIn {
+    0% {
+        bottom: -150px;
+    }
+
+    100% {
+        bottom: 40px;
+    }
+}
+
+@keyframes previewSlideIn {
+    0% {
+        bottom: -90px;
+    }
+
+    100% {
+        bottom: 100px;
     }
 }
