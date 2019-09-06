@@ -89,8 +89,8 @@ $('#post').each(function() {
         }
     });
 
-    // On ferme certaines metaboxes ACF => Visuel et accroche, En-tête, boxes en sidebar (sauf publier)
-    $('#acf-group_5b052bbee40a4, #acf-group_5b2bbb46507bf, #revisionsdiv, #wpseo_meta, #side-sortables .postbox:not(#submitdiv)').addClass('closed');
+    // On ferme certaines metaboxes ACF => Visuel et accroche, En-tête, Bloc de résa, diaporama, révisions, Yoast, boxes en sidebar (sauf publier)
+    $('#acf-group_5b052bbee40a4, #acf-group_5b2bbb46507bf, #acf-group_5c0e4121ee3ed, #acf-group_5bb325e8b6b43, #revisionsdiv, #wpseo_meta, #side-sortables .postbox:not(#submitdiv)').addClass('closed');
 
     // Action sur les focus
     // var toggleChoiceAction = function($bigparent) {
