@@ -1,3 +1,39 @@
+// Type de publication
+.acf-field-5a61fa38b704f {
+    display: flex;
+    align-items: center;
+
+    .acf-label {
+        margin-right: 20px !important;
+        margin-bottom: 0 !important;
+    }
+
+    .acf-input {
+        flex-grow: 1;
+        max-width: 350px;
+    }
+
+    .select2-container--default .select2-selection--single {
+        border: none;
+        padding: 5px;
+        height: auto;
+        border-radius: 0;
+
+        .select2-selection__arrow {
+            height: 100%;
+            top: 0;
+            right: 8px;
+        }
+    }
+}
+
+.select2-dropdown {
+    box-shadow: 0 6px 10px rgba(0, 0, 0, .1);
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 10px;
+}
+
 //Styles pour le selecteur de templates Woody => override style des radios par défaut
 .acf-field-radio[data-name*="woody_tpl"] {
     input[type="radio"] {
@@ -302,6 +338,7 @@
 .acf-flexible-content {
     .layout {
         transition: box-shadow .3s;
+        border: none !important;
     }
 
     .layout:not(.-collapsed) {
