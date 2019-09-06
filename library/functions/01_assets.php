@@ -238,7 +238,7 @@ function getPageTerms($post_id)
 
 function getPrimaryTerm($taxonomy, $post_id, $fields = [])
 {
-    $return = '';
+    $return = null;
     // $field values can be : count, description, filter, name, perent, slug, taxonomy, term_group, term_id, term_taxonomy_id
     if (class_exists('WPSEO_Primary_Term')) {
         $wpseo_primary_term = new WPSEO_Primary_Term($taxonomy, $post_id);
@@ -248,13 +248,12 @@ function getPrimaryTerm($taxonomy, $post_id, $fields = [])
             if (empty($fields)) {
                 $return = $primary_term;
             } else {
+                $return = [];
                 foreach ($fields as $field) {
                     $return[$field] = $primary_term->$field;
                 }
             }
         }
-    } else {
-        return false;
     }
 
     return $return;

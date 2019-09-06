@@ -1,8 +1,7 @@
 {
     "key": "group_5b052bbee40a4",
     "title": "Visuel et accroche",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b052d9aea19c",
             "label": "Contenu",
             "name": "",
@@ -71,13 +70,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b0e5cc3d4b1a",
-                        "operator": "==",
-                        "value": "img"
-                    }
-                ]
+                [{
+                    "field": "field_5b0e5cc3d4b1a",
+                    "operator": "==",
+                    "value": "img"
+                }]
             ],
             "wrapper": {
                 "width": "70",
@@ -103,13 +100,11 @@
             "instructions": "Cette vidéo doit être courte, muette et peu mouvementée",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b0e5cc3d4b1a",
-                        "operator": "==",
-                        "value": "movie"
-                    }
-                ]
+                [{
+                    "field": "field_5b0e5cc3d4b1a",
+                    "operator": "==",
+                    "value": "movie"
+                }]
             ],
             "wrapper": {
                 "width": "70",
@@ -117,29 +112,27 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [
-                {
-                    "key": "field_5b16b2f2aa625",
-                    "label": "Fichiers vidéos",
-                    "name": "movie_files",
-                    "type": "clone",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "clone": [
-                        "group_5b16b09337a33"
-                    ],
-                    "display": "seamless",
-                    "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0
-                }
-            ]
+            "sub_fields": [{
+                "key": "field_5b16b2f2aa625",
+                "label": "Fichiers vidéos",
+                "name": "movie_files",
+                "type": "clone",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "clone": [
+                    "group_5b16b09337a33"
+                ],
+                "display": "seamless",
+                "layout": "block",
+                "prefix_label": 0,
+                "prefix_name": 0
+            }]
         },
         {
             "key": "field_5b44b7fedb880",
@@ -168,13 +161,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b44b7fedb880",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
+                [{
+                    "field": "field_5b44b7fedb880",
+                    "operator": "==",
+                    "value": "1"
+                }]
             ],
             "wrapper": {
                 "width": "",
@@ -207,22 +198,22 @@
         },
         {
             "key": "field_5d1b721b0789b",
-            "label": "Afficher l'icône associée - WOODY PLUGIN",
+            "label": "Afficher l'icône associée",
             "name": "page_heading_term_icon",
-            "type": "text",
-            "instructions": "",
+            "type": "true_false",
+            "instructions": "Affiche l'icône qui est liée au terme si celui-ci est coché",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "hidden",
+                "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "default_value": 0,
+            "ui": 1,
+            "message": "",
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         {
             "key": "field_5b052da8ea19d",
@@ -238,6 +229,23 @@
                 "id": ""
             },
             "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5d6f6e78e7905",
+            "label": "Template",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
             "endpoint": 0
         },
         {
@@ -262,6 +270,23 @@
             "return_format": "value"
         },
         {
+            "key": "field_5d6f6e63e7904",
+            "label": "Effets visuels",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
             "key": "field_5b0e5ef78f6be",
             "label": "Opacité du média",
             "name": "page_heading_background_img_opacity",
@@ -270,7 +295,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "40",
                 "class": "",
                 "id": ""
             },
@@ -284,11 +309,54 @@
             "default_value": "",
             "layout": "horizontal",
             "return_format": "value"
+        },
+        {
+            "key": "field_5d6f6ed5e7906",
+            "label": "Parallaxe",
+            "name": "parallax",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5d6fc41fe59e9",
+            "label": "Estomper l'image au scroll",
+            "name": "blur",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [{
+                    "field": "field_5d6f6ed5e7906",
+                    "operator": "==",
+                    "value": "1"
+                }]
+            ],
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
-        [
-            {
+        [{
                 "param": "post_type",
                 "operator": "==",
                 "value": "page"
@@ -304,8 +372,7 @@
                 "value": "mirror_page"
             }
         ],
-        [
-            {
+        [{
                 "param": "post_type",
                 "operator": "==",
                 "value": "woody_model"
@@ -330,5 +397,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Le bloc en haut de page contenant un média et des textes d'accroche",
-    "modified": 1562166606
+    "modified": 1567605861
 }

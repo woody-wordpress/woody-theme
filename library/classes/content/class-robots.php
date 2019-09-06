@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Robots
  *
@@ -31,6 +32,7 @@ class WoodyTheme_Robots
                 'Disallow: /*.twig$',
                 'Disallow: /*.inc$',
                 'Disallow: /*?*p=',
+                'Disallow: /*obf.js',
             ];
 
             // Add Sitemap

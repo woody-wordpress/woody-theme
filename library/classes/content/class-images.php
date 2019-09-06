@@ -161,7 +161,7 @@ class WoodyTheme_Images
      */
     public function convertFileToGeoJSON($file)
     {
-        if( strpos($file['file'], 'gpx' ) || strpos($file['file'], 'kml' ) ) {
+        if (strpos($file['file'], 'gpx') || strpos($file['file'], 'kml')) {
             $url = "http://ogre.adc4gis.com/convert";
             $curl = curl_init();
 

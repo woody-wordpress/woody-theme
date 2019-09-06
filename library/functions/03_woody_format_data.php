@@ -379,7 +379,7 @@ function getManualFocus_data($layout)
             if ($item['content_selection']->post_type == 'page') {
                 $post_preview = getPagePreview($layout, $item['content_selection'], $clickable);
             } elseif ($item['content_selection']->post_type == 'touristic_sheet') {
-                $post_preview = getTouristicSheetPreview($layout, $item['content_selection']->custom['touristic_sheet_id']);
+                $post_preview = getTouristicSheetPreview($layout, $item['content_selection']);
             }
             $the_items['items'][$key] = (!empty($post_preview)) ?  $post_preview : '';
         }
@@ -406,10 +406,16 @@ function getAutoFocusSheetData($layout)
     $items = [];
     if (!empty($layout['playlist_conf_id'])) {
         $confId = $layout['playlist_conf_id'];
+        $lang = pll_current_language();
         $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), array(), 'json');
         if (!empty($playlist['items'])) {
             foreach ($playlist['items'] as $key => $item) {
-                $items['items'][] = getTouristicSheetPreview($layout, $item['sheetId']);
+                $wpSheetNode = apply_filters('woody_hawwwai_get_post_by_sheet_id', $item['sheetId'], $lang, ['publish']);
+                //TODO: $wpSheetNode->getPost() retourne parfois un tableau. Dans ce cas, on récupère le 1ier objet à l'interieur - voir plugin
+                if (is_array($wpSheetNode)) {
+                    $wpSheetNode = current($wpSheetNode);
+                }
+                $items['items'][] = getTouristicSheetPreview($layout, $wpSheetNode->getPost());
             }
         }
     }
@@ -504,10 +510,10 @@ function getMinMax($post_data, $data_key)
     ];
     if (strpos($data_key, 'max')) {
         $minmax['max'] = $post_data[$data_key];
-        $minmax['min'] = !empty($post_data[str_replace('max', 'min', $data_key)]) ? $post_data[str_replace('max', 'min', $data_key)] : 0 ;
+        $minmax['min'] = !empty($post_data[str_replace('max', 'min', $data_key)]) ? $post_data[str_replace('max', 'min', $data_key)] : 0;
     } else {
         $minmax['min'] = $post_data[$data_key];
-        $minmax['max'] = isset($post_data[str_replace('min', 'max', $data_key)]) ? $post_data[str_replace('min', 'max', $data_key)] : '' ;
+        $minmax['max'] = isset($post_data[str_replace('min', 'max', $data_key)]) ? $post_data[str_replace('min', 'max', $data_key)] : '';
     }
 
     return $minmax;
@@ -519,7 +525,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     $the_list['permalink'] = get_permalink($current_post->ID);
     $the_list['uniqid'] = $layout['uniqid'];
     $the_list['has_map'] = false;
-    $the_list['filters'] = !empty($layout['the_list_filters']) && !empty($layout['the_list_filters']['list_filters']) ? $layout['the_list_filters']['list_filters'] : '';
+    $the_list['filters'] = !empty($layout['the_list_filters']) && !empty($layout['the_list_filters']['list_filters']) ? $layout['the_list_filters']['list_filters'] : [];
     $paginate = ($layout['the_list_pager']['list_pager_type'] == 'basic_pager') ? true : false;
     $url_parameters['filters'] = false;
     $the_items = getItems($current_post, $layout, $paginate);
@@ -538,24 +544,24 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                             'label' => $term->name
                         ];
                     }
-                break;
+                    break;
 
                 case 'custom_terms':
-                foreach ($filter['list_filter_custom_terms'] as $term_key => $term) {
-                    $term = get_term($term['value']);
-                    $the_list['filters'][$key]['list_filter_custom_terms'][$term_key] = [
-                        'value' => $term->term_id,
-                        'label' => $term->name
-                    ];
-                }
-                break;
+                    foreach ($filter['list_filter_custom_terms'] as $term_key => $term) {
+                        $term = get_term($term['value']);
+                        $the_list['filters'][$key]['list_filter_custom_terms'][$term_key] = [
+                            'value' => $term->term_id,
+                            'label' => $term->name
+                        ];
+                    }
+                    break;
 
                 case 'price':
                 case 'duration':
-                $field = $filter['list_filter_type'] == 'price' ? 'the_price_price' : 'the_duration_count_days';
-                $the_list['filters'][$key]['minmax']['max'] = getMinMaxWoodyFieldValues($the_items['wp_query']->query_vars, $field);
-                $the_list['filters'][$key]['minmax']['min'] = getMinMaxWoodyFieldValues($the_items['wp_query']->query_vars, $field, 'min');
-                break;
+                    $field = $filter['list_filter_type'] == 'price' ? 'the_price_price' : 'the_duration_count_days';
+                    $the_list['filters'][$key]['minmax']['max'] = getMinMaxWoodyFieldValues($the_items['wp_query']->query_vars, $field);
+                    $the_list['filters'][$key]['minmax']['min'] = getMinMaxWoodyFieldValues($the_items['wp_query']->query_vars, $field, 'min');
+                    break;
             }
         }
         $the_list['filters']['button'] = (!empty($layout['the_list_filters']['filter_button'])) ? $layout['the_list_filters']['filter_button'] : '';
@@ -569,20 +575,20 @@ function formatFullContentList($layout, $current_post, $twigPaths)
 
     // Handle POST DATA ( AJAX from filter-list.js )
     $post_data = filter_input_array(INPUT_POST);
-    $url_parameters['filters'] = isset($post_data['filters']) ? getUrlParametersForContentList($post_data) : false ;
+    $url_parameters['filters'] = isset($post_data['filters']) ? getUrlParametersForContentList($post_data) : false;
 
     // If Click reset, need to know which section must be reset to default (default filters)
     // If changing page, need to get data to keep filters.
     // If click research, need to update data anf filters.
-    $reset = isset($post_data['reset']) ? $post_data['reset'] : false ;
-    $section_reset = isset($post_data['section_reset']) ? $post_data['section_reset'] : false ;
+    $reset = isset($post_data['reset']) ? $post_data['reset'] : false;
+    $section_reset = isset($post_data['section_reset']) ? $post_data['section_reset'] : false;
     if ($section_reset) {
         $post_data['section_reset'] = $section_reset;
     }
     if (null == $post_data) {
         $post_data = setDataFromGetParameters($layout);
     }
-    $post_data['reset'] = $reset ;
+    $post_data['reset'] = $reset;
 
     if ($post_data) {
         if (!empty($post_data) && $post_data['reset'] != 1 && isset($post_data['uniqid']) && $post_data['uniqid'] == $layout['uniqid']) {
@@ -609,7 +615,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                     } elseif (strpos($data_key, 'trip_price') !== false) {
                         $filter_index = str_replace('trip_price_', '', $data_key);
                         $minmax = getMinMax($post_data, $data_key);
-                        $replacement = strpos($filter_index, '_min') !== false ? '_min' : '_max' ;
+                        $replacement = strpos($filter_index, '_min') !== false ? '_min' : '_max';
 
                         // Update value
                         $filter_index = str_replace($replacement, '', $filter_index);
@@ -620,7 +626,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
                     } elseif (strpos($data_key, 'trip_duration') !== false) {
                         $filter_index = str_replace('trip_duration_', '', $data_key);
                         $minmax = getMinMax($post_data, $data_key);
-                        $replacement = strpos($filter_index, '_min') !== false ? '_min' : '_max' ;
+                        $replacement = strpos($filter_index, '_min') !== false ? '_min' : '_max';
 
                         // Update value
                         $filter_index = str_replace($replacement, '', $filter_index);
@@ -642,14 +648,14 @@ function formatFullContentList($layout, $current_post, $twigPaths)
 
     if (!empty($the_items['items']) && !empty($the_items['wp_query']->found_posts)) {
         $the_list['items_count'] = $the_items['wp_query']->found_posts;
-        $the_list['items_count_type'] = $the_list['items_count'] > 1 ? 'plural' : 'singular' ;
+        $the_list['items_count_type'] = $the_list['items_count'] > 1 ? 'plural' : 'singular';
     } else {
         $the_list['items_count_type'] = 'empty';
         $the_items = [
             'empty' => 'Désolé, aucun contenu ne correspond à votre recherche'
         ];
     }
-    $the_items['max_num_pages'] = empty($the_items['max_num_pages']) ? 1 : $the_items['max_num_pages'] ;
+    $the_items['max_num_pages'] = empty($the_items['max_num_pages']) ? 1 : $the_items['max_num_pages'];
     $max_num_pages = $the_items['max_num_pages'];
 
     $the_list['filters']['the_map'] = creatListMapFilter($current_post, $layout, $paginate, $the_list['filters'], $twigPaths);
@@ -750,13 +756,15 @@ function setDataFromGetParameters($layout)
     $price_index = 0;
     $duration_index = 0;
 
-    foreach($layout['the_list_filters']['list_filters'] as $index => $filter) {
-        if($filter['list_filter_type'] == "taxonomy" ) {
-            $tax_index = $index;
-        } else if($filter['list_filter_type'] == "price") {
-            $price_index = $index;
-        } else if($filter['list_filter_type'] == "duration") {
-            $duration_index = $index;
+    if (!empty($layout['the_list_filters']) && !empty($layout['the_list_filters']['list_filters']) && is_array($layout['the_list_filters']['list_filters'])) {
+        foreach ($layout['the_list_filters']['list_filters'] as $index => $filter) {
+            if ($filter['list_filter_type'] == "taxonomy") {
+                $tax_index = $index;
+            } elseif ($filter['list_filter_type'] == "price") {
+                $price_index = $index;
+            } elseif ($filter['list_filter_type'] == "duration") {
+                $duration_index = $index;
+            }
         }
     }
 
@@ -768,16 +776,16 @@ function setDataFromGetParameters($layout)
                 foreach ($param as $key => $values) {
                     switch ($key) {
                         case 'price':
-                            $return['trip_price_'. $price_index .'_min'] = (float)$values['min'];
-                            $return['trip_price_'. $price_index .'_max'] = (float)$values['max'];
-                        break;
+                            $return['trip_price_' . $price_index . '_min'] = (float) $values['min'];
+                            $return['trip_price_' . $price_index . '_max'] = (float) $values['max'];
+                            break;
                         case 'duration':
-                            $return['trip_duration_'. $duration_index .'_min'] = (float)$values['min'];
-                            $return['trip_duration_'. $duration_index .'_max'] = (float)$values['max'];
-                        break;
+                            $return['trip_duration_' . $duration_index . '_min'] = (float) $values['min'];
+                            $return['trip_duration_' . $duration_index . '_max'] = (float) $values['max'];
+                            break;
                         case 'terms':
-                            $return['taxonomy_terms_'.$tax_index] = $values;
-                        break;
+                            $return['taxonomy_terms_' . $tax_index] = $values;
+                            break;
                     }
                 }
             }
@@ -795,7 +803,7 @@ function setDataFromGetParameters($layout)
 function getUrlParametersForContentList($post_data)
 {
     $return = [];
-    $post_data['section_reset'] = isset($post_data['section_reset']) ? $post_data['section_reset'] : false ;
+    $post_data['section_reset'] = isset($post_data['section_reset']) ? $post_data['section_reset'] : false;
 
     foreach ($post_data['filters'] as $f_key => $filter) {
         if ($f_key != $post_data['section_reset']) {
@@ -836,80 +844,105 @@ function getUrlParametersForContentList($post_data)
 function formatGeomapData($layout, $twigPaths)
 {
     $return = '';
-    if (empty($layout['markers'])) {
+    if (empty($layout['markers']) && empty($layout['routes'])) {
         return;
     }
 
-    // Set boolean to fitBounds
-    $layout['map_zoom_auto'] = ($layout['map_zoom_auto']) ? 'true' : 'false';
-
-    // Calcul center of map
-    $sum_lat = $sum_lng = 0;
-    foreach ($layout['markers'] as $key => $marker) {
-        if (!empty($marker['map_position']['lat'])) {
-            $sum_lat += $marker['map_position']['lat'];
-        }
-        if (!empty($marker['map_position']['lng'])) {
-            $sum_lng += $marker['map_position']['lng'];
-        }
-    }
-    $layout['default_lat'] = $sum_lat / count($layout['markers']);
-    $layout['default_lng'] = $sum_lng / count($layout['markers']);
-
-    // Get markers
-    foreach ($layout['markers'] as $key => $marker) {
-        $the_marker = [];
-        $marker['default_marker'] = $layout['default_marker'];
-        if (empty($marker['title']) && empty($marker['description']) && empty($marker['img']) && !empty($marker['link']['url'])) {
-            $layout['markers'][$key]['marker_as_link'] = true;
-        }
-        $layout['markers'][$key]['compiled_marker']  = Timber::compile('/_objects/markerObject.twig', $marker);
-
-        if (!empty($marker['title']) || !empty($marker['description']) || !empty($marker['img'])) {
-            $the_marker['item']['title'] = (!empty($marker['title'])) ? $marker['title'] : '';
-            $the_marker['item']['description'] = (!empty($marker['description'])) ? $marker['description'] : '';
-            if (!empty($marker['img'])) {
-                $the_marker['image_style'] = 'ratio_16_9';
-                $the_marker['item']['img'] = $marker['img'];
-            }
-            $the_marker['item']['link'] = (!empty($marker['link'])) ? $marker['link'] : '';
-            $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker);
-        }
-    }
     if (!empty($layout['routes'])) {
         foreach ($layout['routes'] as $key => $route) {
             $filename = get_attached_file($route['route_file']['ID']);
             $filetype = wp_check_filetype($filename);
 
+            // Parameters :
+            $fill_color = $route['fill_color'];
+            $route_color = $route['route_color'];
+            $stroke_thickness = $route['stroke_thickness'];
+            $parameters = $route['parameters'];
+
             if ($filetype['ext'] == 'json' || $filetype['ext'] == 'geojson') {
                 $json = file_get_contents($filename);
                 $route['route_file'] = $json;
 
-                $layout['routes'][$key] = json_decode($route['route_file'], true) ;
+                $layout['routes'][$key] = json_decode($route['route_file'], true);
                 foreach ($layout['routes'][$key]['features'] as $f_key => $feature) {
                     $layout['routes'][$key]['features'][$f_key]['route'] = true;
 
-                    if ($route['parameters'] === true) {
-                        $layout['routes'][$key]['features'][$f_key]['properties']['fill'] = $route['fill_color'];
-                        $layout['routes'][$key]['features'][$f_key]['properties']['stroke'] = $route['route_color'];
-                        $layout['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = $route['stroke_thickness'];
+                    if ($parameters === true) {
+                        $layout['routes'][$key]['features'][$f_key]['properties']['fill'] = $fill_color;
+                        $layout['routes'][$key]['features'][$f_key]['properties']['stroke'] = $route_color;
+                        $layout['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = $stroke_thickness;
                     }
                     $fill_opacity = isset($layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity']) ? $layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] : 0;
                     $layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] = $fill_opacity == 0 ? 0.5 : $fill_opacity;
 
+                    // Route Fields aren't supposed to have markers.
+                    if ($feature['geometry']['type'] == "Point") {
+                        // TODO: choose if geojson files can be used to add markers to the map
+                        // Code below add marker to Map
+                        // $lng = !empty($feature['geometry']['coordinates'][0]) ? (string)$feature['geometry']['coordinates'][0] : "0" ;
+                        // $lat = !empty($feature['geometry']['coordinates'][1]) ? (string)$feature['geometry']['coordinates'][1] : "0" ;
+                        // $marker = [
+                        //     'bo_marker_title' => '',
+                        //     'description' => '',
+                        //     'img' => false,
+                        //     'link' => '',
+                        //     'map_position' => [
+                        //         'address' => $feature['properties']['name'],
+                        //         'lat' => $lat,
+                        //         'lng' => $lng
+                        //     ],
+                        //     'marker_color' => 'primary',
+                        //     'marker_style' => 'pin',
+                        //     'marker_woody_icon' => '',
+                        //     'title' => ''
+                        // ];
+                        // $layout['markers'][] = $marker;
 
-                    // if($feature['geometry']['type'] == "Point"){
-                    //     if (empty($feature['properties'])) {
-                    //         $feature['properties']["marker-color"] = "#ff0000";
-                    //         $feature['properties']["marker-size"] = "medium";
-                    //         $feature['properties']["marker-symbol"] = "";
-
-                    //         $layout['routes'][$key]['features'][$f_key] = $feature;
-                    //     }
-                    // }
+                        // Remove markers from map
+                        unset($layout['routes'][$key]['features'][$f_key]);
+                    }
                 }
 
                 $layout['routes'][$key] = json_encode($layout['routes'][$key]);
+            }
+        }
+    }
+
+    if (!empty($layout['markers'])) {
+        // Set boolean to fitBounds
+        $layout['map_zoom_auto'] = ($layout['map_zoom_auto']) ? 'true' : 'false';
+
+        // Calcul center of map
+        $sum_lat = $sum_lng = 0;
+        foreach ($layout['markers'] as $key => $marker) {
+            if (!empty($marker['map_position']['lat'])) {
+                $sum_lat += $marker['map_position']['lat'];
+            }
+            if (!empty($marker['map_position']['lng'])) {
+                $sum_lng += $marker['map_position']['lng'];
+            }
+        }
+        $layout['default_lat'] = $sum_lat / count($layout['markers']);
+        $layout['default_lng'] = $sum_lng / count($layout['markers']);
+
+        // Get markers
+        foreach ($layout['markers'] as $key => $marker) {
+            $the_marker = [];
+            $marker['default_marker'] = $layout['default_marker'];
+            if (empty($marker['title']) && empty($marker['description']) && empty($marker['img']) && !empty($marker['link']['url'])) {
+                $layout['markers'][$key]['marker_as_link'] = true;
+            }
+            $layout['markers'][$key]['compiled_marker']  = Timber::compile('/_objects/markerObject.twig', $marker);
+
+            if (!empty($marker['title']) || !empty($marker['description']) || !empty($marker['img'])) {
+                $the_marker['item']['title'] = (!empty($marker['title'])) ? $marker['title'] : '';
+                $the_marker['item']['description'] = (!empty($marker['description'])) ? $marker['description'] : '';
+                if (!empty($marker['img'])) {
+                    $the_marker['image_style'] = 'ratio_16_9';
+                    $the_marker['item']['img'] = $marker['img'];
+                }
+                $the_marker['item']['link'] = (!empty($marker['link'])) ? $marker['link'] : '';
+                $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker);
             }
         }
     }
@@ -987,7 +1020,7 @@ function getCustomPreview($item, $item_wrapper = null)
  *
  */
 
-function getTouristicSheetPreview($layout = null, $sheet_id, $sheet_data = null)
+function getTouristicSheetPreview($layout = null, $post)
 {
     $data = [];
     $lang = pll_current_language();
@@ -1000,96 +1033,107 @@ function getTouristicSheetPreview($layout = null, $sheet_id, $sheet_data = null)
         }
     }
 
-    $sheet_data = $sheet_data == null ? apply_filters('woody_hawwwai_sheet_render', $sheet_id, $lang, array(), 'json', 'item') : $sheet_data;
-    if (!empty($sheet_data['items'])) {
-        foreach ($sheet_data['items'] as $key => $item) {
-            $data = [
-                'title' => (!empty($item['title'])) ? getTransformedPattern($item['title']) : '',
-                'link' => [
-                    'url' => (!empty($item['link'])) ? $item['link'] : '',
-                    'target' => $item['targetBlank'] ? '_blank' : '',
-                ],
-            ];
-            if (!empty($layout['display_img'])) {
-                $data['img'] = [
-                    'resizer' => true,
-                    'url' => (!empty($item['img']['url'])) ? $item['img']['url']['manual'] : '',
-                    'alt' => (!empty($item['img']['alt'])) ? $item['img']['alt'] : '',
-                    'title' => (!empty($item['img']['title'])) ? $item['img']['title'] : ''
-                ];
-            }
+    // $sheet_data = $sheet_data == null ? apply_filters('woody_hawwwai_sheet_render', $sheet_id, $lang, array(), 'json', 'item') : $sheet_data;
+    if (empty($post)) {
+        return;
+    }
+
+    $raw_item = get_field('touristic_raw_item', $post->ID);
+    if (!empty($raw_item)) {
+        $item = json_decode(base64_decode($raw_item), true);
+    } else {
+        $sheet_id = get_field('touristic_sheet_id', $post->ID);
+        $items = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $lang, array(), 'json', 'item');
+        $item = current($items['items']);
+    }
+
+    $data = [
+        'title' => (!empty($item['title'])) ? getTransformedPattern($item['title']) : '',
+        'link' => [
+            'url' => apply_filters('woody_get_permalink', $post->ID),
+            'target' => $item['targetBlank'] ? '_blank' : '',
+        ],
+    ];
+    if (!empty($layout['display_img'])) {
+        $data['img'] = [
+            'resizer' => true,
+            'url' => (!empty($item['img']['url'])) ? $item['img']['url']['manual'] : '',
+            'alt' => (!empty($item['img']['alt'])) ? $item['img']['alt'] : '',
+            'title' => (!empty($item['img']['title'])) ? $item['img']['title'] : ''
+        ];
+    }
+    if (!empty($layout['deal_mode'])) {
+        if (!empty($item['deals'])) {
+            $data['title'] = $item['deals']['list'][0]['nom'][$code_lang];
+        }
+    }
+    if (is_array($layout['display_elements'])) {
+        if (in_array('sheet_type', $layout['display_elements'])) {
+            $data['sheet_type'] = (!empty($item['type'])) ? $item['type'] : '';
             if (!empty($layout['deal_mode'])) {
                 if (!empty($item['deals'])) {
-                    $data['title'] = $item['deals']['list'][0]['nom'][$code_lang];
-                }
-            }
-            if (is_array($layout['display_elements'])) {
-                if (in_array('sheet_type', $layout['display_elements'])) {
-                    $data['sheet_type'] = (!empty($item['type'])) ? $item['type'] : '';
-                    if (!empty($layout['deal_mode'])) {
-                        if (!empty($item['deals'])) {
-                            $data['sheet_type'] = $item['title'];
-                        }
-                    }
-                }
-                if (in_array('description', $layout['display_elements'])) {
-                    $data['description'] = (!empty($item['desc'])) ? getTransformedPattern($item['desc']) : '';
-                    if (!empty($layout['deal_mode'])) {
-                        if (!empty($item['deals']['list'][0]['description'][$lang])) {
-                            $data['description'] = $item['deals']['list'][0]['description'][$lang];
-                        }
-                    }
-                }
-                if (in_array('sheet_town', $layout['display_elements'])) {
-                    $data['sheet_town'] = (!empty($item['town'])) ? $item['town'] : '';
-                }
-
-                if (in_array('price', $layout['display_elements'])) {
-                    $data['the_price']['price'] = (!empty($item['tariffs']['price'])) ? $item['tariffs']['price'] : '';
-                    $data['the_price']['prefix_price'] = (!empty($item['tariffs']['label'])) ? $item['tariffs']['label'] : '';
-                }
-                if (in_array('bookable', $layout['display_elements'])) {
-                    $data['booking'] = (!empty($item['booking']['link'])) ? $item['booking'] : '';
-                }
-            }
-
-            if (!empty($layout['display_button'])) {
-                $data['link']['link_label'] = get_field('sheet_button_title', 'options');
-                if (empty($data['link']['link_label'])) {
-                    $data['link']['link_label'] = __('Lire la suite', 'woody-theme');
-                }
-            }
-
-            $data['location'] = [];
-            $data['location']['lat'] = (!empty($item['gps'])) ? $item['gps']['latitude'] : '';
-            $data['location']['lng'] = (!empty($item['gps'])) ? $item['gps']['longitude'] : '';
-
-            if ($item['bordereau'] === 'HOT' or $item['bordereau'] == 'HPA') {
-                $rating = [];
-                for ($i = 0; $i <= $item['ratings'][0]['value']; $i++) {
-                    $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
-                }
-                if (is_array($layout['display_elements'])) {
-                    if (in_array('sheet_rating', $layout['display_elements'])) {
-                        $data['sheet_rating'] = implode('', $rating);
-                    }
-                }
-            }
-
-            if (!empty($item['dates'])) {
-                $data['date'] = $item['dates'][0];
-            }
-            $data['date'] = (!empty($item['dates'])) ? $item['dates'][0] : '';
-
-            if (is_array($layout['display_elements'])) {
-                if (in_array('sheet_itinerary', $layout['display_elements'])) {
-                    $data['sheet_itinerary']['locomotions'] = (!empty($item['locomotions'])) ? $item['locomotions'] : '';
-                    $data['sheet_itinerary']['length'] = (!empty($item['itineraryLength'])) ? $item['itineraryLength']['value'] . $item['itineraryLength']['unit'] : '';
+                    $data['sheet_type'] = $item['title'];
                 }
             }
         }
+        if (in_array('description', $layout['display_elements'])) {
+            $data['description'] = (!empty($item['desc'])) ? getTransformedPattern($item['desc']) : '';
+            if (!empty($layout['deal_mode'])) {
+                if (!empty($item['deals']['list'][0]['description'][$lang])) {
+                    $data['description'] = $item['deals']['list'][0]['description'][$lang];
+                }
+            }
+        }
+        if (in_array('sheet_town', $layout['display_elements'])) {
+            $data['sheet_town'] = (!empty($item['town'])) ? $item['town'] : '';
+        }
+
+        if (in_array('price', $layout['display_elements'])) {
+            $data['the_price']['price'] = (!empty($item['tariffs']['price'])) ? $item['tariffs']['price'] : '';
+            $data['the_price']['prefix_price'] = (!empty($item['tariffs']['label'])) ? $item['tariffs']['label'] : '';
+        }
+        if (in_array('bookable', $layout['display_elements'])) {
+            $data['booking'] = (!empty($item['booking']['link'])) ? $item['booking'] : '';
+        }
     }
-    $data['sheet_id'] = $sheet_id;
+
+    if (!empty($layout['display_button'])) {
+        $data['link']['link_label'] = get_field('sheet_button_title', 'options');
+        if (empty($data['link']['link_label'])) {
+            $data['link']['link_label'] = __('Lire la suite', 'woody-theme');
+        }
+    }
+
+    $data['location'] = [];
+    $data['location']['lat'] = (!empty($item['gps'])) ? $item['gps']['latitude'] : '';
+    $data['location']['lng'] = (!empty($item['gps'])) ? $item['gps']['longitude'] : '';
+
+    if ($item['bordereau'] === 'HOT' or $item['bordereau'] == 'HPA') {
+        $rating = [];
+        for ($i = 0; $i <= $item['ratings'][0]['value']; $i++) {
+            $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
+        }
+        if (is_array($layout['display_elements'])) {
+            if (in_array('sheet_rating', $layout['display_elements'])) {
+                $data['sheet_rating'] = implode('', $rating);
+            }
+        }
+    }
+
+    if (!empty($item['dates'])) {
+        $data['date'] = $item['dates'][0];
+    }
+    $data['date'] = (!empty($item['dates'])) ? $item['dates'][0] : '';
+
+    if (is_array($layout['display_elements'])) {
+        if (in_array('sheet_itinerary', $layout['display_elements'])) {
+            $data['sheet_itinerary']['locomotions'] = (!empty($item['locomotions'])) ? $item['locomotions'] : '';
+            $data['sheet_itinerary']['length'] = (!empty($item['itineraryLength'])) ? $item['itineraryLength']['value'] . $item['itineraryLength']['unit'] : '';
+        }
+    }
+
+    $data['sheet_id'] = get_field('touristic_sheet_id', $post->ID);
+
     return $data;
 }
 
@@ -1245,6 +1289,7 @@ function getDisplayOptions($scope)
 
     $display['gridContainer'] = (empty($scope['display_fullwidth'])) ? 'grid-container' : '';
     $display['background_img'] = (!empty($scope['background_img'])) ? $scope['background_img'] : '';
+    $display['parallax'] = (!empty($scope['parallax'])) ? $scope['parallax'] : '';
     $classes_array[] = (!empty($display['background_img'])) ? 'isRel' : '';
     $classes_array[] = (!empty($scope['background_color'])) ? $scope['background_color'] : '';
     $classes_array[] = (!empty($scope['border_color'])) ? $scope['border_color'] : '';
@@ -1352,7 +1397,7 @@ function nestedGridsComponents($scope = [], $gridTplField, $uniqIid_prefix = '',
 
 function formatVisualEffectData($effects)
 {
-    $return = '';
+    $return = [];
     foreach ($effects as $effect_key => $effect) {
         if (!empty($effect) && is_array($effect)) {
             switch ($effect_key) {
