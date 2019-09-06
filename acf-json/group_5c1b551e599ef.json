@@ -1,7 +1,8 @@
 {
     "key": "group_5c1b551e599ef",
     "title": "Météo",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5c1b5523c9cfd",
             "label": "Contenu",
             "name": "",
@@ -14,7 +15,7 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -73,7 +74,7 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -89,9 +90,7 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "blocks-weather-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.sarlat.wp.rc-dev.com\/app\/dist\/sarlat\/img\/woody-library\/views\/blocks\/weather\/tpl_01\/thumbnail.png?version=2.6.9\" alt=\"blocks-weather-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Blocs météo sur 4 colonnes<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Blocs météo sur 4 colonnes<\/h4>...<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-            },
+            "choices": {},
             "allow_null": 0,
             "other_choice": 0,
             "default_value": "",
@@ -158,11 +157,13 @@
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -172,5 +173,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1545299716
+    "modified": 1567690252
 }

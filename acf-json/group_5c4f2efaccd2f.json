@@ -1,7 +1,8 @@
 {
     "key": "group_5c4f2efaccd2f",
     "title": "Cocon sémantique",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5c4f2f676dfa5",
             "label": "Contenu",
             "name": "",
@@ -14,7 +15,7 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -144,7 +145,7 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -170,11 +171,13 @@
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -184,5 +187,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1553068747
+    "modified": 1567688678
 }

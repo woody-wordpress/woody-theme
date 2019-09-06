@@ -1,8 +1,7 @@
 {
     "key": "group_5b0422e167d2a",
     "title": "Bouton \/ Lien",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5bd80bae735cb",
             "label": "Type d'action",
             "name": "button_type",
@@ -38,13 +37,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5bd80bae735cb",
-                        "operator": "==",
-                        "value": "link"
-                    }
-                ]
+                [{
+                    "field": "field_5bd80bae735cb",
+                    "operator": "==",
+                    "value": "link"
+                }]
             ],
             "wrapper": {
                 "width": "",
@@ -61,13 +58,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5bd80bae735cb",
-                        "operator": "==",
-                        "value": "file"
-                    }
-                ]
+                [{
+                    "field": "field_5bd80bae735cb",
+                    "operator": "==",
+                    "value": "file"
+                }]
             ],
             "wrapper": {
                 "width": "",
@@ -88,13 +83,11 @@
             "instructions": "Collez ici le code de votre widget",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5bd80bae735cb",
-                        "operator": "==",
-                        "value": "code"
-                    }
-                ]
+                [{
+                    "field": "field_5bd80bae735cb",
+                    "operator": "==",
+                    "value": "code"
+                }]
             ],
             "wrapper": {
                 "width": "",
@@ -116,7 +109,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "25",
+                "width": "51",
                 "class": "",
                 "id": ""
             },
@@ -137,16 +130,14 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5bd80bae735cb",
-                        "operator": "!=",
-                        "value": "link"
-                    }
-                ]
+                [{
+                    "field": "field_5bd80bae735cb",
+                    "operator": "!=",
+                    "value": "link"
+                }]
             ],
             "wrapper": {
-                "width": "30",
+                "width": "49",
                 "class": "",
                 "id": ""
             },
@@ -157,15 +148,37 @@
             "maxlength": ""
         },
         {
+            "key": "field_5c79387a6526b",
+            "label": "Type",
+            "name": "button_style",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "primary": "Principal",
+                "secondary": "Secondaire"
+            },
+            "allow_null": 0,
+            "default_value": "primary",
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        {
             "key": "field_5bd80c65735cf",
-            "label": "Taille du bouton",
+            "label": "Taille",
             "name": "button_size",
             "type": "select",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "20",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -185,28 +198,6 @@
             "placeholder": ""
         },
         {
-            "key": "field_5c79387a6526b",
-            "label": "Type de bouton",
-            "name": "button_style",
-            "type": "button_group",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "25",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "primary": "Principal",
-                "secondary": "Secondaire"
-            },
-            "allow_null": 0,
-            "default_value": "primary",
-            "layout": "horizontal",
-            "return_format": "value"
-        },
-        {
             "key": "field_5bd80c3e735ce",
             "label": "Ouvrir dans une pop-in",
             "name": "add_modal",
@@ -214,16 +205,14 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5bd80bae735cb",
-                        "operator": "==",
-                        "value": "link"
-                    }
-                ]
+                [{
+                    "field": "field_5bd80bae735cb",
+                    "operator": "==",
+                    "value": "link"
+                }]
             ],
             "wrapper": {
-                "width": "30",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -242,7 +231,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -260,13 +249,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5c7939486526d",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
+                [{
+                    "field": "field_5c7939486526d",
+                    "operator": "==",
+                    "value": "1"
+                }]
             ],
             "wrapper": {
                 "width": "70",
@@ -292,13 +279,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5c7939486526d",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
+                [{
+                    "field": "field_5c7939486526d",
+                    "operator": "==",
+                    "value": "1"
+                }]
             ],
             "wrapper": {
                 "width": "30",
@@ -317,13 +302,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -333,5 +316,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Une icône et un champ lien utilisés en clone dans d'autres groupes",
-    "modified": 1561725997
+    "modified": 1567779697
 }
