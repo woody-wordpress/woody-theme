@@ -15,7 +15,7 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -118,7 +118,7 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -155,7 +155,7 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -271,5 +271,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Une galerie, automatique ou manuelle avec des choix de grilles très spécifiques",
-    "modified": 1545397051
+    "modified": 1567691107
 }

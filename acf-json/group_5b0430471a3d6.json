@@ -1,24 +1,6 @@
 {
     "key": "group_5b0430471a3d6",
     "title": "Vidéo",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Elément de contenu (Vidéo embed)",
-    "modified": 1536232428,
     "fields": [
         {
             "key": "field_5b0ec0eda1e20",
@@ -33,7 +15,7 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -65,7 +47,7 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -82,7 +64,7 @@
                 "id": ""
             },
             "choices": {
-                "blocks-movie-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive\" src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/themes\/superot\/dist\/img\/woody-library\/views\/blocks\/movie\/tpl_01\/thumbnail.png\" alt=\"blocks-movie-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Vidéo<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Vidéo<\/h4>Affiche une vidéo (youtube, vimeo, dailymotion, ...)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+                "blocks-movie-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/movie\/tpl_01\/thumbnail.png?version=2.9.1\" alt=\"blocks-movie-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Vidéo<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Vidéo<\/h4>Affiche une vidéo (youtube, vimeo, dailymotion, ...)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -91,5 +73,23 @@
             "layout": "vertical",
             "return_format": "value"
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Elément de contenu (Vidéo embed)",
+    "modified": 1567691360
 }

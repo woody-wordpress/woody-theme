@@ -15,7 +15,7 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -27,7 +27,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "35",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -54,7 +54,7 @@
                 ]
             ],
             "wrapper": {
-                "width": "35",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -75,7 +75,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "30",
+                "width": "",
                 "class": "",
                 "id": ""
             },
@@ -98,7 +98,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "40",
+                "width": "60",
                 "class": "hide-label",
                 "id": ""
             },
@@ -108,14 +108,14 @@
         },
         {
             "key": "field_5c9891e2c9133",
-            "label": "Identifiant de conf Touristic Maps",
+            "label": "Id conf TouristicMaps",
             "name": "tmaps_confid",
             "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "30",
+                "width": "40",
                 "class": "",
                 "id": ""
             },
@@ -241,7 +241,7 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -285,5 +285,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Affiche une carte avec des marqueurs multiples",
-    "modified": 1560780423
+    "modified": 1567688598
 }

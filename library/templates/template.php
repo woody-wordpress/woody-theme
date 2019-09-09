@@ -19,6 +19,13 @@ abstract class WoodyTheme_TemplateAbstract
 
     public function __construct()
     {
+        if (!class_exists('Timber')) {
+            header('HTTP/1.1 503 Service Temporarily Unavailable');
+            header('Status: 503 Service Temporarily Unavailable');
+            header('Retry-After: 5');
+            exit();
+        }
+
         add_filter('timber_compile_data', [$this, 'timberCompileData']);
         add_filter('wpseo_json_ld_search_url', [$this, 'setYoastSearchUrl']);
 

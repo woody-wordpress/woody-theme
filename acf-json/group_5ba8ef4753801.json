@@ -1,6 +1,6 @@
 {
     "key": "group_5ba8ef4753801",
-    "title": "Affichage: menu",
+    "title": "Personnaliser : menu",
     "fields": [
         {
             "key": "field_5ba8ef5bce474",
@@ -39,9 +39,7 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-
-            },
+            "choices": {},
             "default_value": [],
             "allow_null": 1,
             "multiple": 0,
@@ -125,5 +123,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Surcharges des pages pour affichage des titres, images, icones dans les menus",
-    "modified": 1540886517
+    "modified": 1567685681
 }
