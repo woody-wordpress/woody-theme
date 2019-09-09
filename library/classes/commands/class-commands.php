@@ -165,7 +165,6 @@ class WoodyTheme_Commands
             return true;
         }
 
-        Output::log(' - rmdir : ' . $dir);
         return rmdir($dir);
     }
 }
