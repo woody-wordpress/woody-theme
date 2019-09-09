@@ -7,7 +7,6 @@
  * @since WoodyTheme 1.0.0
  */
 
-use Timber\Integrations\Command;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Woody\Utils\Output;
@@ -68,7 +67,8 @@ class WoodyTheme_Commands
                 }
 
                 // Clear Twig Cache
-                $cleared = Command::clear_cache('twig');
+                $cleared = $this->rmdir(WP_TIMBER_DIR);
+
                 if ($cleared) {
                     Output::success("twig_clear_cache");
                 } else {
@@ -139,5 +139,33 @@ class WoodyTheme_Commands
     public function woodyThemeUpdate()
     {
         update_option('woody_theme_version', wp_get_theme(get_template())->get('Version'), true);
+    }
+
+    private function rmdir($dir, $inside_only = true)
+    {
+        if (!file_exists($dir)) {
+            return true;
+        }
+
+        if (!is_dir($dir)) {
+            return unlink($dir);
+        }
+
+        foreach (scandir($dir) as $item) {
+            if ($item == '.' || $item == '..') {
+                continue;
+            }
+
+            if (!$this->rmdir($dir . DIRECTORY_SEPARATOR . $item, false)) {
+                return false;
+            }
+        }
+
+        if ($inside_only) {
+            return true;
+        }
+
+        Output::log(' - rmdir : ' . $dir);
+        return rmdir($dir);
     }
 }
