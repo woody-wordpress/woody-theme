@@ -1,0 +1,13 @@
+<div class="protected-post align-center ">
+    <h2>{{protected_form.titre}}</h2>
+    <form class="protected-post-form" action="{{protected_form.action}}" method="post">
+        {{ protected_form.intro }}
+        <div class="protected-form">
+            <input class="post-password" name="post_password" id="{{ label }}" type="password" placeholder="{{protected_form.placeholder}}"/>
+            <input type="submit" name="Submit" class="button submit-button" value="{{protected_form.submit_value}}" />
+        </div>
+    </form>
+    {% if protected_form.error_msg %}
+        <p class="error_msg">{{ protected_form.error_msg }}</p>
+    {% endif %}
+</div>
