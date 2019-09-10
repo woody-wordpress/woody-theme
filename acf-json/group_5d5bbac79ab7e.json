@@ -83,64 +83,6 @@
             ]
         },
         {
-            "key": "field_5d5bbac7a12ed",
-            "label": "En-tête et pied de bloc",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "left",
-            "endpoint": 0
-        },
-        {
-            "key": "field_5d5bbac7a137f",
-            "label": "En-tête",
-            "name": "heading",
-            "type": "clone",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "clone": [
-                "group_5b041c24d0dd7"
-            ],
-            "display": "seamless",
-            "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0
-        },
-        {
-            "key": "field_5d5bbac7a1411",
-            "label": "Bouton(s)",
-            "name": "interactive_gallery_buttons",
-            "type": "clone",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "clone": [
-                "group_5b043614df4a6"
-            ],
-            "display": "group",
-            "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0
-        },
-        {
             "key": "field_5d5bbac7a15c7",
             "label": "Mise en page",
             "name": "",
@@ -326,5 +268,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Liste de photos)",
-    "modified": 1567699005
+    "modified": 1568102255
 }
