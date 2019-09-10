@@ -13,7 +13,11 @@
         }
     ],
     "require": {
-        "php": ">=7.0"
+        "php": "^7.3",
+        "woody-wordpress/woody-cli": "^1.5.0",
+        "woody-wordpress/woody-sso": "^1.6.0",
+        "woody-wordpress/woody-crop": "^1.1.0",
+        "woody-wordpress/woody-acf-sync": "^1.3.0"
     },
     "config": {
         "optimize-autoloader": true
