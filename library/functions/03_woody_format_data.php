@@ -369,17 +369,23 @@ function getManualFocus_data($layout)
         // La donnée de la vignette est saisie en backoffice
         if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
             $the_items['items'][$key] = getCustomPreview($item_wrapper['custom_content'], $layout);
-            // La donnée de la vignette correspond à un post sélectionné
+        // La donnée de la vignette correspond à un post sélectionné
         } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
             $item = $item_wrapper['existing_content'];
             $status = $item['content_selection']->post_status;
             if ($status !== 'publish') {
                 continue;
             }
-            if ($item['content_selection']->post_type == 'page') {
+            switch ($item['content_selection']->post_type) {
+                case 'page':
                 $post_preview = getPagePreview($layout, $item['content_selection'], $clickable);
-            } elseif ($item['content_selection']->post_type == 'touristic_sheet') {
+                break;
+                case 'touristic_sheet':
                 $post_preview = getTouristicSheetPreview($layout, $item['content_selection']);
+                break;
+                case 'woody_topic':
+                $post_preview = getTopicPreview($layout, $item['content_selection']);
+                break;
             }
             $the_items['items'][$key] = (!empty($post_preview)) ?  $post_preview : '';
         }
@@ -1245,6 +1251,42 @@ function getPagePreview($item_wrapper, $item, $clickable = true)
     }
 
     // $post_type = get_post_terms($item->ID, 'page_type');
+
+    return $data;
+}
+
+/**
+ * @author Jérémy Legendre
+ * @param   item_wrapper
+ * @param   item
+ * @return  data Array of data
+ */
+function getTopicPreview($item_wrapper, $item)
+{
+    $data = [];
+    $data['post_id'] = $item->ID;
+    $data['title'] = !empty($item->post_title) ? $item->post_title : '' ;
+
+    if (!empty($item->woody_topic_img)) {
+        $img = [
+            'url' => 'https://api.tourism-system.com/resize/crop/%width%/%height%/70/' . base64_encode($item->woody_topic_img) . '/image.jpg',
+            'resizer' => true
+        ];
+        $data['img'] = $img;
+    }
+
+    if (!empty($item->woody_topic_desc)) {
+        $data['description'] = $item->woody_topic_desc;
+    }
+
+    if (!empty($item_wrapper['display_button'])) {
+        $data['link']['link_label'] = getFieldAndFallBack($item, 'focus_button_title', $item);
+        if (empty($data['link']['link_label'])) {
+            $data['link']['link_label'] = __('Lire la suite', 'woody-theme');
+        }
+    }
+
+    $data['link']['url'] = !empty($item->woody_topic_url) ? $item->woody_topic_url : '';
 
     return $data;
 }
