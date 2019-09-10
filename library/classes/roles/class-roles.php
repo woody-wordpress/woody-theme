@@ -88,17 +88,14 @@ class WoodyTheme_Roles
             ]
         ];
 
-        // $pswd=wp_hash_password($post->post_password);
-        // $pswd2=$post->post_password;
-        // $cookie_pswd= wp_unslash($_COOKIE[ 'wp-postpass_' . COOKIEHASH ]);
+        $pswd=wp_hash_password($post->post_password);
+        $cookie_pswd= wp_unslash($_COOKIE[ 'wp-postpass_' . COOKIEHASH ]);
 
-        // wd(wp_check_password($pswd2,$pswd));
+        if( isset ( $_COOKIE[ 'wp-postpass_' . COOKIEHASH ] ) && $cookie_pswd != $pswd ){
+            $vars['protected_form']['error_msg'] = __('Accés refusé. Mot de passe incorrect');
+        }
 
-        // if( isset ( $_COOKIE[ 'wp-postpass_' . COOKIEHASH ] ) && $cookie_pswd != $pswd ){
-        //     $vars['protected_form']['error_msg'] = __('Accés refusé. Mot de passe incorrect');
-        // }
-
-        return Timber::compile('blocks\protected_post\tpl_01\tpl.twig', $vars);
+        return Timber::compile('parts\protected_post.twig', $vars);
     }
 
 

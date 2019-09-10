@@ -265,7 +265,9 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                                     $bookblock['bookblock_playlists'][$pl_key]['filters']['display_options'] = (!empty($facet['display_options'])) ? $facet['display_options'] : '';
                                     if (!empty($facet['display_options']['persons']['values'])) {
                                         foreach ($facet['display_options']['persons']['values'] as $person) {
-                                            $bookblock['bookblock_playlists'][$pl_key]['filters'][$person['field']] = $person['display'];
+                                            if (!empty($person['field'])) {
+                                                $bookblock['bookblock_playlists'][$pl_key]['filters'][$person['field']] = $person['display'];
+                                            }
                                         }
                                     }
                                     break;
