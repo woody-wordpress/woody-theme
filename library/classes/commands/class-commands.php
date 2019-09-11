@@ -16,33 +16,45 @@ class WoodyTheme_Commands
     public function __construct()
     {
         $this->registerHooks();
+        $this->registerCommands();
     }
 
     protected function registerHooks()
     {
+        add_action('woody_flush_varnish', [$this, 'flush_varnish']);
+    }
+
+    protected function registerCommands()
+    {
         \WP_CLI::add_command('woody_flush', [$this, 'flush']);
-        \WP_CLI::add_command('woody_flush_cache', [$this, 'flush_cache']);
-        \WP_CLI::add_command('woody_flush_timber', [$this, 'flush_timber']);
+        \WP_CLI::add_command('woody_flush_core', [$this, 'flush_core']);
+        \WP_CLI::add_command('woody_flush_site', [$this, 'flush_site']);
+        \WP_CLI::add_command('woody_flush_twig', [$this, 'flush_twig']);
         \WP_CLI::add_command('woody_flush_varnish', [$this, 'flush_varnish']);
         \WP_CLI::add_command('woody_cache_warm', [$this, 'cache_warm']);
-
-        add_action('woody_flush_cache', [$this, 'flush_cache']);
-        add_action('woody_flush_varnish', [$this, 'flush_varnish']);
-        add_action('woody_theme_update', [$this, 'woodyThemeUpdate']);
     }
 
     public function flush($args)
     {
+        $this->flush_site();
+        $this->flush_core();
         $this->flush_cache();
         $this->cache_warm();
-        $this->flush_timber();
+        $this->flush_twig();
         $this->flush_varnish();
     }
 
-    public function flush_cache()
+    public function flush_site()
     {
         do_action('woody_subtheme_update');
         Output::success('woody_subtheme_update');
+    }
+
+    public function flush_core()
+    {
+        $theme_version = wp_get_theme(get_template())->get('Version');
+        update_option('woody_theme_version', $theme_version, true);
+        Output::success('woody_theme_version ' . $theme_version);
 
         do_action('woody_theme_update');
         Output::success('woody_theme_update');
@@ -62,7 +74,7 @@ class WoodyTheme_Commands
         Output::success('woody_cache_warm');
     }
 
-    public function flush_timber()
+    public function flush_twig()
     {
         if (WP_ENV != 'dev') {
             try {
@@ -75,9 +87,9 @@ class WoodyTheme_Commands
                 $cleared = $this->rmdir(WP_TIMBER_DIR);
 
                 if ($cleared) {
-                    Output::success("woody_flush_timber");
+                    Output::success("woody_flush_twig");
                 } else {
-                    Output::error("woody_flush_timber");
+                    Output::error("woody_flush_twig");
                 }
             } catch (IOExceptionInterface $exception) {
                 Output::error("Une erreur est survenue au moment de la création de " . $exception->getPath());
@@ -138,11 +150,6 @@ class WoodyTheme_Commands
                 }
             }
         }
-    }
-
-    public function woodyThemeUpdate()
-    {
-        update_option('woody_theme_version', wp_get_theme(get_template())->get('Version'), true);
     }
 
     private function rmdir($dir, $inside_only = true)

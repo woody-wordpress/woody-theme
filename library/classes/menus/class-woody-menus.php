@@ -266,6 +266,6 @@ class WoodyTheme_Menus
 
     public function savePost()
     {
-        delete_transient('woody_menus_cache');
+        // delete_transient('woody_menus_cache');
     }
 }
