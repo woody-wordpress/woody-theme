@@ -24,6 +24,7 @@ class WoodyTheme_Commands
         \WP_CLI::add_command('woody_flush_cache', [$this, 'flush_cache']);
         \WP_CLI::add_command('woody_flush_timber', [$this, 'flush_timber']);
         \WP_CLI::add_command('woody_flush_varnish', [$this, 'flush_varnish']);
+        \WP_CLI::add_command('woody_cache_warm', [$this, 'cache_warm']);
 
         add_action('woody_flush_cache', [$this, 'flush_cache']);
         add_action('woody_flush_varnish', [$this, 'flush_varnish']);
@@ -33,6 +34,7 @@ class WoodyTheme_Commands
     public function flush($args)
     {
         $this->flush_cache();
+        $this->cache_warm();
         $this->flush_timber();
         $this->flush_varnish();
     }
@@ -47,12 +49,15 @@ class WoodyTheme_Commands
 
         // Clear the cache to prevent an update_option() from saving a stale db_version to the cache
         wp_cache_flush();
-        Output::success('wp_cache_flush');
+        Output::success('woody_flush_cache');
 
         // (Not all cache back ends listen to 'flush')
         wp_cache_delete('alloptions', 'options');
         Output::success('wp_cache_delete alloptions');
+    }
 
+    public function cache_warm()
+    {
         do_action('woody_cache_warm');
         Output::success('woody_cache_warm');
     }
@@ -70,9 +75,9 @@ class WoodyTheme_Commands
                 $cleared = $this->rmdir(WP_TIMBER_DIR);
 
                 if ($cleared) {
-                    Output::success("twig_clear_cache");
+                    Output::success("woody_flush_timber");
                 } else {
-                    Output::error("twig_clear_cache");
+                    Output::error("woody_flush_timber");
                 }
             } catch (IOExceptionInterface $exception) {
                 Output::error("Une erreur est survenue au moment de la création de " . $exception->getPath());
@@ -126,11 +131,10 @@ class WoodyTheme_Commands
                         foreach ($errors as $error => $description) {
                             $noticeMessage .= ' - ' . $description;
                         }
-                        Output::error(['wp_varnish_purge' => $noticeMessage]);
+                        Output::error(['woody_flush_varnish' => $noticeMessage]);
                     }
                 } else {
-                    //Output::success(sprintf('wp_varnish_purge %s => %s (%s)', $purgeme, $host, $lang));
-                    Output::success(sprintf('wp_varnish_purge : %s (%s)', WP_SCHEME . '://' . $host, $lang));
+                    Output::success(sprintf('woody_flush_varnish : %s (%s)', WP_SCHEME . '://' . $host, $lang));
                 }
             }
         }
