@@ -22,7 +22,6 @@ class WoodyTheme_ACF
     protected function registerHooks()
     {
         add_action('woody_theme_update', [$this, 'cleanTransient']);
-        add_action('woody_subtheme_update', [$this, 'cleanTransient']);
         if (WP_ENV == 'dev') {
             add_filter('woody_acf_save_paths', [$this, 'acfJsonSave']);
         }
@@ -102,7 +101,7 @@ class WoodyTheme_ACF
     {
         $screen = get_current_screen();
         if (strpos($screen->id, 'acf-options') !== false) {
-            delete_transient('woody_menus_cache');
+            // delete_transient('woody_menus_cache');
             delete_transient('woody_get_field_option');
 
             // Purge all varnish cache on save menu
@@ -487,7 +486,7 @@ class WoodyTheme_ACF
         delete_transient('woody_page_taxonomies_choices');
         delete_transient('woody_terms_choices');
         delete_transient('woody_website_pages_taxonomies');
-        delete_transient('woody_menus_cache');
+        // delete_transient('woody_menus_cache');
         delete_transient('woody_get_field_option');
 
         // Warm Transient
