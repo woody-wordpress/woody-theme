@@ -289,7 +289,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         if (!empty($this->context['timberpost'])) {
             $sections = $this->context['timberpost']->get_field('section');
 
-            if (!empty($sections)) {
+            if (!empty($sections) && is_array($sections)) {
                 foreach ($sections as $section_id => $section) {
                     $the_header = '';
                     $the_layout = '';
