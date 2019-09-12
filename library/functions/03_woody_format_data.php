@@ -463,6 +463,12 @@ function getAutoFocusTopicsData($layout)
             )
         )
     ];
+
+    if($layout['focused_sort'] == 'title'){
+        $args['orderby'] = 'title';
+        $args['order'] = 'ASC';
+    }
+
     $result = new \WP_Query($args);
 
     if(!empty($result->posts)){
@@ -470,6 +476,16 @@ function getAutoFocusTopicsData($layout)
             $item = Timber::get_post($post->ID);
             $items['items'][] = getTopicPreview($layout, $item);
         }
+    }
+
+    if ($layout['focused_sort'] == 'random') {
+        shuffle($items['items']);
+    } elseif ($layout['focused_sort'] == 'date') {
+        $date = [];
+        foreach($items['items'] as $key => $item){
+            $date[$key] = $item['date'];
+        }
+        array_multisort($date, SORT_DESC, $items['items']);
     }
 
     return $items;
@@ -1330,6 +1346,10 @@ function getTopicPreview($item_wrapper, $item)
         if (empty($data['link']['link_label'])) {
             $data['link']['link_label'] = __('Lire la suite', 'woody-theme');
         }
+    }
+
+    if(!empty($item->woody_topic_publication)){
+        $data['date'] = (int) $item->woody_topic_publication ;
     }
 
     $data['link']['url'] = !empty($item->woody_topic_url) ? $item->woody_topic_url : '';
