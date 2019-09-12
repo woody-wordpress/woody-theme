@@ -10,6 +10,7 @@ function getComponentItem($layout, $context)
         case 'auto_focus':
         case 'auto_focus_sheets':
         case 'focus_trip_components':
+        case 'auto_focus_topics':
             $return = formatFocusesData($layout, $context['post'], $context['woody_components']);
             break;
         case 'geo_map':
@@ -432,6 +433,49 @@ function getAutoFocusSheetData($layout)
 }
 
 /**
+ * @author: Jérémy Legendre
+ */
+function getAutoFocusTopicsData($layout)
+{
+    $items = [];
+
+    $feeds = [];
+    foreach($layout['topic_newspaper'] as $term_id){
+        $term = get_term($term_id, 'topic_newspaper');
+        $feeds[] = $term->name;
+    }
+    $time = !empty($layout['publish_date']) ? strtotime($layout['publish_date']) : 0 ;
+    $args = [
+        'posts_per_page' => -1,
+        'post_status' => 'publish',
+        'post_type' => 'woody_topic',
+        'meta_query' => array(
+            'relation' => 'AND',
+            array(
+                'key' => 'woody_topic_feed',
+                'value' => $feeds,
+                'compare' => 'IN'
+            ),
+            array(
+                'key' => 'woody_topic_publication',
+                'value' => $time,
+                'compare' => '>'
+            )
+        )
+    ];
+    $result = new \WP_Query($args);
+
+    if(!empty($result->posts)){
+        foreach($result->posts as $post){
+            $item = Timber::get_post($post->ID);
+            $items['items'][] = getTopicPreview($layout, $item);
+        }
+    }
+
+    return $items;
+}
+
+/**
  *
  * Nom : formatFocusesData
  * Auteur : Benoit Bouchaud
@@ -452,6 +496,8 @@ function formatFocusesData($layout, $current_post, $twigPaths)
         $the_items = getAutoFocus_data($current_post, $layout);
     } elseif ($layout['acf_fc_layout'] == 'auto_focus_sheets' && !empty($layout['playlist_conf_id'])) {
         $the_items = getAutoFocusSheetData($layout);
+    } elseif ($layout['acf_fc_layout'] == 'auto_focus_topics') {
+        $the_items = getAutoFocusTopicsData($layout);
     }
     if (!empty($the_items)) {
         foreach ($the_items['items'] as $item_key => $item) {
