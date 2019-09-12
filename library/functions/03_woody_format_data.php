@@ -434,6 +434,9 @@ function getAutoFocusSheetData($layout)
 
 /**
  * @author: Jérémy Legendre
+ * Retourne un tableau de données relatives au Topics
+ * @param layout
+ * @return items
  */
 function getAutoFocusTopicsData($layout)
 {
@@ -1321,7 +1324,7 @@ function getPagePreview($item_wrapper, $item, $clickable = true)
  * @author Jérémy Legendre
  * @param   item_wrapper
  * @param   item
- * @return  data Array of data
+ * @return  data
  */
 function getTopicPreview($item_wrapper, $item)
 {
