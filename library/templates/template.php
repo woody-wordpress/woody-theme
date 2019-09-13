@@ -157,9 +157,11 @@ abstract class WoodyTheme_TemplateAbstract
         $tools_blocks = [];
 
         // Add langSwitcher
-        $tools_blocks['lang_switcher'] = $this->addLanguageSwitcher();
-        $this->context['lang_switcher'] = apply_filters('lang_switcher', $tools_blocks['lang_switcher']);
-        $this->context['lang_switcher_mobile'] = apply_filters('lang_switcher_mobile', $tools_blocks['lang_switcher']);
+        $tools_blocks['lang_switcher_button'] = $this->addLanguageSwitcherButton();
+        $this->context['lang_switcher_button'] = apply_filters('lang_switcher', $tools_blocks['lang_switcher_button']);
+        $this->context['lang_switcher_button_mobile'] = apply_filters('lang_switcher', $tools_blocks['lang_switcher_button']);
+
+        $this->context['lang_switcher_reveal'] = $this->addLanguageSwitcherReveal();
 
         // Add langSwitcher
         $tools_blocks['season_switcher'] = $this->addSeasonSwitcher();
@@ -167,9 +169,11 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['season_switcher_mobile'] = apply_filters('season_switcher_mobile', $tools_blocks['season_switcher']);
 
         // Add addEsSearchBlock
-        $tools_blocks['es_search_block'] = $this->addEsSearchBlock();
-        $this->context['es_search_block'] = apply_filters('es_search_block', $tools_blocks['es_search_block']);
-        $this->context['es_search_block_mobile'] = apply_filters('es_search_block_mobile', $tools_blocks['es_search_block']);
+        $tools_blocks['es_search_button'] = $this->addEsSearchButton();
+        $this->context['es_search_button'] = apply_filters('es_search_block', $tools_blocks['es_search_button']);
+        $this->context['es_search_button_mobile'] = apply_filters('es_search_block', $tools_blocks['es_search_button']);
+
+        $this->context['es_search_reveal'] = $this->addEsSearchReveal();
 
         // Add addFavoritesBlock
         if (in_array('favorites', $this->context['enabled_woody_options'])) {
@@ -245,13 +249,33 @@ abstract class WoodyTheme_TemplateAbstract
 
             // Set a default template
             $tpl = apply_filters('season_switcher_tpl', null);
-            $template = $tpl['template'] ? $this->context['woody_components'][$tpl['template']] : $this->context['woody_components']['woody_widgets-season_switcher-tpl_01'];
+            $template = has_filter('season_switcher_tpl') ? $this->context['woody_components'][$tpl['template']] : $this->context['woody_components']['woody_widgets-season_switcher-tpl_01'];
 
-            return Timber::compile($template, $data);
+            $return = Timber::compile($template, $data);
+            return $return;
         }
     }
 
-    private function addLanguageSwitcher()
+    private function addLanguageSwitcherButton()
+    {
+        $languages = apply_filters('woody_pll_the_languages', 'auto');
+
+        if (!empty($languages) && count($languages) != 1) {
+            $data = $this->createSwitcher($languages);
+
+            // Set a default template
+            $tpl = apply_filters('lang_switcher_button', null);
+            $template = has_filter('lang_switcher_button') ? $this->context['woody_components'][$tpl['template']] : $this->context['woody_components']['woody_widgets-lang_switcher-tpl_01'];
+
+            // Allow data override
+            $data = apply_filters('lang_switcher_data', $data);
+
+            $return = Timber::compile($template, $data);
+            return $return;
+        }
+    }
+
+    private function addLanguageSwitcherReveal()
     {
         // Get polylang languages
         $languages = apply_filters('woody_pll_the_languages', 'auto');
@@ -260,13 +284,14 @@ abstract class WoodyTheme_TemplateAbstract
             $data = $this->createSwitcher($languages);
 
             // Set a default template
-            $tpl = apply_filters('lang_switcher_tpl', null);
-            $template = $tpl['template'] ? $this->context['woody_components'][$tpl['template']] : $this->context['woody_components']['woody_widgets-lang_switcher-tpl_01'];
+            $tpl = apply_filters('lang_switcher_reveal', null);
+            $template = has_filter('lang_switcher_reveal') ? $this->context['woody_components'][$tpl['template']] : $this->context['woody_components']['reveals-lang_switcher-tpl_01'];
 
             // Allow data override
             $data = apply_filters('lang_switcher_data', $data);
 
-            return Timber::compile($template, $data);
+            $return = Timber::compile($template, $data);
+            return $return;
         }
     }
 
@@ -341,9 +366,24 @@ abstract class WoodyTheme_TemplateAbstract
         return $data;
     }
 
-    private function addEsSearchBlock()
+    private function addEsSearchButton()
     {
         $search_post_id = apply_filters('woody_get_field_option', 'es_search_page_url');
+
+        if (!empty($search_post_id)) {
+
+            // Set a default template
+            $tpl = apply_filters('es_search_button', null);
+            $template = has_filter('es_search_button') ? $tpl['template'] : $this->context['woody_components']['woody_widgets-es_search_block-tpl_01'];
+
+            return Timber::compile($template, []);
+        }
+    }
+
+    private function addEsSearchReveal()
+    {
+        $search_post_id = apply_filters('woody_get_field_option', 'es_search_page_url');
+
         if (!empty($search_post_id)) {
             $data = [];
             $data['search_url'] = get_permalink(pll_get_post($search_post_id));
@@ -373,14 +413,15 @@ abstract class WoodyTheme_TemplateAbstract
             }
 
             // Set a default template
-            $tpl = apply_filters('es_search_block_tpl', null);
-            $data['tags'] = $tpl['tags'] ?: '';
-            $template = $tpl['template'] ?: $this->context['woody_components']['woody_widgets-es_search_block-tpl_01'];
+            $tpl = apply_filters('es_search_reveal', null);
+            $template = has_filter('es_search_reveal') ? $tpl['template'] : $this->context['woody_components']['reveals-es_search_block-tpl_01'];
 
             // Allow data override
+            $data['tags'] = !empty($tpl['tags']) ? $tpl['tags'] : '';
             $data = apply_filters('es_search_block_data', $data);
 
-            return Timber::compile($template, $data);
+            $return = Timber::compile($template, $data);
+            return $return;
         }
     }
 
