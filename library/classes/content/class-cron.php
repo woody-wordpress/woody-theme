@@ -52,7 +52,7 @@ class WoodyTheme_Cron
 
         $schedules['everyquarter'] = [
             'interval' => 900,
-            'display' => __('Every Quarter')
+            'display' => __('Every Quarter of an Hour')
         ];
 
         return $schedules;
