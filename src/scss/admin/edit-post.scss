@@ -199,6 +199,36 @@ textarea.notAllowed {
     }
 }
 
+// Primary term toggle styles
+.categorydiv {
+    .categorychecklist {
+        >li {
+            position: relative;
+        }
+    }
+
+    .primary-toggle {
+        cursor: pointer;
+        color: #0085ba;
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        &.hide {
+            display: none;
+        }
+
+        &.unset-primary-term {
+            color: #555;
+        }
+    }
+
+    .is-primary-term {
+        font-weight: bold;
+    }
+}
+
+
 @keyframes submitSlideIn {
     0% {
         bottom: -150px;

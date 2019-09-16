@@ -65,6 +65,8 @@ class WoodyTheme_ACF
 
         add_filter('acf/load_field/name=page_heading_tags', [$this, 'listAllPageTerms'], 10, 3);
 
+        add_filter('acf/load_field/name=tags_primary', [$this, 'addPrimaryTagsFields'], 10, 3);
+
         // Custom Filter
         add_filter('woody_get_field_option', [$this, 'woodyGetFieldOption'], 10, 3);
     }
@@ -107,6 +109,14 @@ class WoodyTheme_ACF
             // Purge all varnish cache on save menu
             do_action('woody_flush_varnish');
         }
+    }
+
+    public function addPrimaryTagsFields($field)
+    {
+        wd($field);
+        // Get all site taxonomies // Unset
+
+        return $field;
     }
 
     public function pllGalleryLoadField($value, $post_id, $field)
