@@ -213,10 +213,8 @@ function getMinMaxWoodyFieldValues($query_vars = array(), $field, $minormax = 'm
     return $return;
 }
 
-function getPageTerms($post_id)
+function getPageTaxonomies()
 {
-    $return = [];
-
     $taxonomies = get_transient('woody_website_pages_taxonomies');
     if (empty($taxonomies)) {
         $taxonomies = get_object_taxonomies('page', 'objects');
@@ -225,6 +223,15 @@ function getPageTerms($post_id)
         unset($taxonomies['post_translations']);
         set_transient('woody_website_pages_taxonomies', $taxonomies);
     }
+
+    return $taxonomies;
+}
+
+function getPageTerms($post_id)
+{
+    $return = [];
+
+    $taxonomies = getPageTaxonomies();
 
     foreach ($taxonomies as $taxonomy) {
         $terms = wp_get_post_terms($post_id, $taxonomy->name);
@@ -239,11 +246,10 @@ function getPageTerms($post_id)
 function getPrimaryTerm($taxonomy, $post_id, $fields = [])
 {
     $return = null;
-    // $field values can be : count, description, filter, name, perent, slug, taxonomy, term_group, term_id, term_taxonomy_id
-    if (class_exists('WPSEO_Primary_Term')) {
-        $wpseo_primary_term = new WPSEO_Primary_Term($taxonomy, $post_id);
-        $primary_id = $wpseo_primary_term->get_primary_term();
-        $primary_term = get_term($primary_id);
+
+    $fieldPrimaryTax = get_field('field_5d7bada38eedf', $post_id);
+    if (!empty($fieldPrimaryTax['primary_' . $taxonomy])) {
+        $primary_term = get_term($fieldPrimaryTax['primary_' . $taxonomy]);
         if (!is_wp_error($primary_term) && !empty($primary_term)) {
             if (empty($fields)) {
                 $return = $primary_term;

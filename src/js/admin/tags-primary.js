@@ -3,6 +3,7 @@ import $ from 'jquery';
 $('#post').each(function() {
     var $this = $(this);
     var $taxonomiesBoxes = $this.find('#side-sortables .postbox .inside > .categorydiv:not(#taxonomy-page_type) div[id$="-all"] ');
+    var $primaryTagsFields = $this.find('.acf-field-group.acf-field-5d7bada38eedf');
 
     // Au clic sur chacun des tags
     // On affiche/masque les boutons d'action
@@ -25,9 +26,13 @@ $('#post').each(function() {
 
         $('.unset-primary-term').click(function() {
             $(this).siblings('.selectit').removeClass('is-primary-term');
-
             $(this).addClass('hide');
             $(this).siblings('.set-primary-term').removeClass('hide');
+
+            // On supprime la valeur du champ "taxonomie principale" concerné
+            var targetTaxonomy = $(this).parents('.categorydiv').attr('id').replace('taxonomy-', 'primary_');
+            var targetField = $primaryTagsFields.find('.acf-field[data-name="' + targetTaxonomy + '"] input[type="text"]');
+            targetField.val('');
         });
 
         $('.set-primary-term').click(function() {
@@ -43,12 +48,17 @@ $('#post').each(function() {
             $currentPrimary.removeClass('is-primary-term');
 
             $(this).siblings('.selectit').addClass('is-primary-term');
+
+            // On met à jour la valeur du champ "taxonomie principale" concerné
+            var targetTaxonomy = $(this).parents('.categorydiv').attr('id').replace('taxonomy-', 'primary_');
+            var targetField = $primaryTagsFields.find('.acf-field[data-name="' + targetTaxonomy + '"] input[type="text"]');
+            targetField.val($(this).data('term-id'));
         });
     }
 
     var addSetUnsetPrimaryButtons = function($el) {
         $el.parent('.selectit').parent('li').append('<span class="primary-toggle set-primary-term hide" data-term-id="' + $el.val() + '"><small>Rendre principal<small></span>');
-        $el.parent('.selectit').parent('li').append('<span class="primary-toggle unset-primary-term hide" data-term-id="' + $el.val() + '"><small>Retirer le tag principal<small></span>');
+        $el.parent('.selectit').parent('li').append('<span class="primary-toggle unset-primary-term hide" data-term-id="' + $el.val() + '"><small>Principal<small></span>');
     }
 
     // Pour chacune des metaboxes de taxonomie, on créé les boutons d'action

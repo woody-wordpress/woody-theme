@@ -113,8 +113,45 @@ class WoodyTheme_ACF
 
     public function addPrimaryTagsFields($field)
     {
-        wd($field);
-        // Get all site taxonomies // Unset
+        // Empty subfields in case of acf-json commit with overrides
+        $field['sub_fields'] = [];
+
+        // Get all site taxonomies
+        $taxonomies = getPageTaxonomies();
+
+        // Foreach taxonomy, create a subfield
+        if (is_array($taxonomies) && !empty($taxonomies)) {
+            foreach ($taxonomies as $taxonomy) {
+                $field['sub_fields'][] = [
+                    'ID' => 0,
+                    'append' => '',
+                    'class' => '',
+                    'conditional_logic' => 0,
+                    'default_value' => '',
+                    'id' => '',
+                    'instructions' => '',
+                    'key' => $taxonomy->name . '_field_tag_primary',
+                    'label' => $taxonomy->label,
+                    'maxlength' => '',
+                    'menu_order' => 0,
+                    'name' => $taxonomy->name . '_primary',
+                    'parent' => "field_5d7bada38eedf",
+                    'placeholder' => 'primary_' . $taxonomy->name,
+                    'prefix' => 'acf',
+                    'prepend' => '',
+                    'required' => 0,
+                    'type' => 'text',
+                    'wrapper' => [
+                        'width' => '',
+                        'class' => '',
+                        'id' => ''
+                    ],
+                    '_name' => 'primary_' . $taxonomy->name,
+                    '_prepare' => 0,
+                    '_valid' => 1
+                ];
+            }
+        }
 
         return $field;
     }
