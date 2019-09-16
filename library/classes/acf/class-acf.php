@@ -100,7 +100,7 @@ class WoodyTheme_ACF
     public function clearOptionsTransient()
     {
         $screen = get_current_screen();
-        if (strpos($screen->id, 'acf-options') !== false) {
+        if (!empty($screen->id) && strpos($screen->id, 'acf-options') !== false) {
             // delete_transient('woody_menus_cache');
             delete_transient('woody_get_field_option');
 
