@@ -241,10 +241,12 @@ class WoodyTheme_Enqueue_Assets
 
         // Nouvelle méthode pour appeler les fonts en synchrone voir ligne 342
         $webfonts = apply_filters('woody_theme_global_script_string', []);
-        $webfonts = json_decode($webfonts['window.WebFontConfig'], true);
-        if (!empty($webfonts['google']) && !empty($webfonts['google']['families'])) {
-            foreach ($webfonts['google']['families'] as $webfont) {
-                wp_enqueue_style('google-font-' . sanitize_title($webfont), 'https://fonts.googleapis.com/css?family=' . $webfont, [], '', 'all');
+        if (!empty($webfonts['window.WebFontConfig'])) {
+            $webfonts = json_decode($webfonts['window.WebFontConfig'], true);
+            if (!empty($webfonts['google']) && !empty($webfonts['google']['families'])) {
+                foreach ($webfonts['google']['families'] as $webfont) {
+                    wp_enqueue_style('google-font-' . sanitize_title($webfont), 'https://fonts.googleapis.com/css?family=' . $webfont, [], '', 'all');
+                }
             }
         }
 
