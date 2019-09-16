@@ -290,8 +290,10 @@ abstract class WoodyTheme_TemplateAbstract
             // Allow data override
             $data = apply_filters('lang_switcher_data', $data);
 
-            $return = Timber::compile($template, $data);
-            return $return;
+            $compile = Timber::compile($template, $data);
+            $compile = apply_filters('lang_switcher_compile', null);
+
+            return $compile;
         }
     }
 
@@ -420,8 +422,10 @@ abstract class WoodyTheme_TemplateAbstract
             $data['tags'] = !empty($tpl['tags']) ? $tpl['tags'] : '';
             $data = apply_filters('es_search_block_data', $data);
 
-            $return = Timber::compile($template, $data);
-            return $return;
+            $compile = Timber::compile($template, $data);
+            $compile = apply_filters('es_search_compile', null);
+
+            return $compile;
         }
     }
 
