@@ -199,11 +199,15 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
                 $tax_query[$filter_key]['relation'] = $filter['andor'];
                 if (!is_array($filter['terms'])) {
                     $term = get_term($filter['terms']);
-                    $filter_tax[$filter_key][$term->taxonomy][] = $filter['terms'];
+                    if (empty($term) && is_object($term)) {
+                        $filter_tax[$filter_key][$term->taxonomy][] = $filter['terms'];
+                    }
                 } else {
                     foreach ($filter['terms'] as $focused_term) {
                         $term = get_term($focused_term);
-                        $filter_tax[$filter_key][$term->taxonomy][] = $focused_term;
+                        if (empty($term) && is_object($term)) {
+                            $filter_tax[$filter_key][$term->taxonomy][] = $focused_term;
+                        }
                     }
                 }
 
