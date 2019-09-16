@@ -291,7 +291,7 @@ abstract class WoodyTheme_TemplateAbstract
             $data = apply_filters('lang_switcher_data', $data);
 
             $compile = Timber::compile($template, $data);
-            $compile = apply_filters('lang_switcher_compile', null);
+            $compile = apply_filters('lang_switcher_compile', $compile);
 
             return $compile;
         }
@@ -423,7 +423,7 @@ abstract class WoodyTheme_TemplateAbstract
             $data = apply_filters('es_search_block_data', $data);
 
             $compile = Timber::compile($template, $data);
-            $compile = apply_filters('es_search_compile', null);
+            $compile = apply_filters('es_search_compile', $compile);
 
             return $compile;
         }
