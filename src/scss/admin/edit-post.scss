@@ -228,6 +228,11 @@ textarea.notAllowed {
     }
 }
 
+// Hide primary terms metabox cause we populate fields automatically
+#acf-group_5d7bad8e78214 {
+    display: none !important;
+}
+
 
 @keyframes submitSlideIn {
     0% {
