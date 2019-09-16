@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-09-16T17:22:04+02:00\n"
+"POT-Creation-Date: 2019-09-16T17:30:12+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.3.0\n"
 "X-Domain: woody-theme\n"
@@ -486,6 +486,7 @@ msgid "Nord"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:202
+#: library/classes/content/class-polylang.php:219
 msgid "Matin"
 msgstr ""
 
@@ -515,6 +516,34 @@ msgstr ""
 
 #: library/classes/content/class-polylang.php:213
 msgid "Ajouter à mes favoris"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:216
+msgid "Dates"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:217
+msgid "Basse mer"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:218
+msgid "Haute mer"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:220
+msgid "Soir"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:221
+msgid "Heure"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:222
+msgid "Coef"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:223
+msgid "Retrouvez prochainement les horaires de marées pour ce mois !"
 msgstr ""
 
 #: library/templates/template-page.php:90

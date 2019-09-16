@@ -213,13 +213,13 @@ class WoodyTheme_Polylang
         __('Ajouter à mes favoris', 'woody-theme');
 
          // Tides
-         __('Dates', 'woody_theme');
-         __('Basse mer', 'woody_theme');
-         __('Haute mer', 'woody_theme');
-         __('Matin', 'woody_theme');
-         __('Soir', 'woody_theme');
-         __('Heure', 'woody_theme');
-         __('Coef', 'woody_theme');
-         __('Retrouvez prochainement les horaires de marées pour ce mois !', 'woody_theme');
+         __('Dates', 'woody-theme');
+         __('Basse mer', 'woody-theme');
+         __('Haute mer', 'woody-theme');
+         __('Matin', 'woody-theme');
+         __('Soir', 'woody-theme');
+         __('Heure', 'woody-theme');
+         __('Coef', 'woody-theme');
+         __('Retrouvez prochainement les horaires de marées pour ce mois !', 'woody-theme');
     }
 }
