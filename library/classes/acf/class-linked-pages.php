@@ -19,146 +19,85 @@ class WoodyTheme_ACF_LinkedPages
 
     protected function registerHooks()
     {
-        add_action('wp_ajax_woody_get_available_link_page', [$this, 'getAvailablePages']);
+
+        add_action('init', [$this, 'registerTaxonomy'] );
+        add_action('woody_theme_update', [$this, 'setPostTaxonomyTerm']);
+        add_action('acf/load_field/key=field_5d7f57f2b21f7', [$this, 'getAvailablePages'], 10, 1);
         add_action('save_post', [$this, 'setLinkBetweenPages'], 100, 1);
     }
 
-    /**
-     * Get all pages that could match the current.
-     * If current is a preparation version, it returns on the spot pages and vice versa.
-     *
-     * AJAX Call
-     * @return return array containing post IDs and title to create options in the select field
-     */
-    public function getAvailablePages()
+    public function registerTaxonomy()
     {
-        $return = [];
-        $value = filter_input(INPUT_POST, 'params', FILTER_SANITIZE_STRING);
-        $post_id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
-        $selected = !empty(get_post_meta($post_id, 'linked_alternative_page')) ? get_post_meta($post_id, 'linked_alternative_page')[0] : '';
+        register_taxonomy(
+            'prepare_onspot',
+            'page',
+            array(
+                'label' => 'Type préparation / sur place',
+                'labels' => [],
+                'hierarchical' => false,
+                'show_ui' => false,
+                'show_in_menu' => false
+            )
+        );
 
-        if (!empty($selected)) {
-            // Add and set to selected the already chosen value
-            $return[] = [
-                'id' => intval($selected),
-                'title' => get_the_title($selected),
-                'selected' => true
-            ];
-        }else{
-            $return[] = [
-                'id' => '',
-                'title' => 'Choisir une page',
-                'selected' => true
-            ];
-        }
-
-        if (!empty($value)) {
-            $args = array(
-                'post_status' => array(
-                    'draft',
-                    'publish'
-                ),
-                'posts_per_page' => -1,
-                'post_type' => 'page',
-                'meta_query' => array(
-                    'relation' => 'AND',
-                    array(
-                        'relation' => 'OR',
-                        array(
-                            'key' => 'choice_prepare_on_the_spot',
-                            'value' => $value,
-                            'compare' => '!='
-                        ),
-                        array(
-                            'key' => 'choice_prepare_on_the_spot',
-                            'compare' => 'NOT EXISTS',
-                            'value' => ''
-                        ),
-                    ),
-                    array(
-                        'relation' => 'OR',
-                        array(
-                            'key' => 'linked_alternative_page',
-                            'compare' => 'NOT EXISTS',
-                            'value' => ''
-                        ),
-                        array(
-                            'key' => 'linked_alternative_page',
-                            'compare' => '=',
-                            'value' => ''
-                        )
-                    )
-                ),
-                'post__not_in' => array(
-                    $post_id
-                )
-            );
-
-            $query_result = new \WP_Query($args);
-
-            if (!empty($query_result->posts)) {
-                foreach ($query_result->posts as $post) {
-                    $title = !empty($post->post_title) ? $post->post_title : 'Sans titre';
-
-                    $return[] = [
-                        'id'=> $post->ID,
-                        'title'=> $title,
-                        'selected'=> false
-                    ];
-                }
-            }
-        }
-
-        $this->JsonResponse($return);
+        wp_insert_term('prepare', 'prepare_onspot', array('slug' => 'prepare'));
+        wp_insert_term('spot', 'prepare_onspot', array('slug' => 'prepare'));
     }
 
-    private function JsonResponse($response)
+    public function setPostTaxonomyTerm()
     {
-        if (!is_null($response)) {
-            wp_send_json($response);
-        } else {
-            header("HTTP/1.0 400 Bad Request");
-            die();
+        $args = array(
+            'post_type' => 'page',
+            'post_status' => array(
+                'publish',
+                'draft'
+            ),
+            'posts_per_page' => -1
+        );
+
+        $result = new \WP_Query($args);
+
+        foreach($result->posts as $post){
+            $type = get_field('field_5d47d14bdf764', $post->ID) ? 'prepare' : 'spot' ;
+            $term = get_term_by('slug', $type, 'prepare_onspot');
+            wp_set_post_terms( $post->ID, $term->slug, 'prepare_onspot' );
         }
     }
 
-    /**
-     * On save post hook, link pages between them (update post meta of the two concerned pages)
-     * @param   post_id current post id
-     */
+    public function getAvailablePages($field)
+    {
+        $type = get_field('field_5d47d14bdf764') ? 'spot' : 'prepare' ;
+        $field['taxonomy'] = ["prepare_onspot:".$type];
+
+        return $field;
+    }
+
     public function setLinkBetweenPages($post_id)
     {
-        if (wp_is_post_revision($post_id)) {
-            return;
-        }
+        $type = get_field('field_5d47d14bdf764', $post_id) ;
+        $type_value = $type ? 'prepare' : 'spot';
+        $term = get_term_by('slug', $type_value, 'prepare_onspot');
+        wp_set_post_terms( $post_id, $term->term_id, 'prepare_onspot' );
 
-        $page_version = !empty(get_post_meta($post_id, 'choice_prepare_on_the_spot')) ? get_post_meta($post_id, 'choice_prepare_on_the_spot')[0] : '' ;
-        $linked_post = !empty(get_post_meta($post_id, 'linked_alternative_page')) ? get_post_meta($post_id, 'linked_alternative_page')[0] : '' ;
-
-        if (!empty($page_version) && !empty($linked_post)) {
-            // Set other page meta only if linked post is of opposite type of current post
-            $opposite_version = !empty(get_post_meta($linked_post, 'choice_prepare_on_the_spot')) ? get_post_meta($linked_post, 'choice_prepare_on_the_spot')[0] : '' ;
-
-            if ($opposite_version == $page_version) {
-                update_post_meta($post_id, 'linked_alternative_page', '');
-            } else {
-
-                $post_revisions = wp_get_post_revisions($post_id);
-
-                if (!empty($post_revisions)) {
-                    foreach($post_revisions as $post_revision){
-                        $revision_id = $post_revision->ID;
-                        $revision_linked_post = !empty(get_post_meta($revision_id, 'linked_alternative_page')) ? get_post_meta($revision_id, 'linked_alternative_page')[0] : '' ;
-                        update_post_meta($revision_linked_post, 'linked_alternative_page', '');
-                    }
-                }
-
-                $opposite = $page_version == "spot" ? "prepare" : "spot";
-                update_post_meta($linked_post, 'choice_prepare_on_the_spot', $opposite);
-                update_post_meta($linked_post, 'linked_alternative_page', $post_id);
-                update_post_meta($linked_post, '_linked_alternative_page', 'field_5d47d332df765');
-
+        if(!wp_is_post_revision( $post_id )){
+            $opposite = false;
+            if(!empty($type)){
+                // set linked page opposite (if current is preparation post, other must be on spot page )
+                $opposite = $type == true ? false : true ;
             }
+
+            $linked_post = get_field('field_5d7f57f2b21f7', $post_id);
+            $linked_post_related = $linked_post ? get_field('field_5d7f57f2b21f7', $linked_post->ID) : false ;
+            if($linked_post && !$linked_post_related ){
+                update_field('field_5d47d14bdf764', $opposite, $linked_post->ID);
+                update_field('field_5d7f57f2b21f7', get_post($post_id), $linked_post->ID);
+
+                $type_value = $opposite ? 'prepare' : 'spot';
+                $term = get_term_by('slug', $type_value, 'prepare_onspot');
+                wp_set_post_terms( $linked_post->ID, $term, 'prepare_onspot' );
+            }
+        }else{
+
         }
     }
 }
