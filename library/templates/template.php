@@ -293,7 +293,6 @@ abstract class WoodyTheme_TemplateAbstract
             $compile = Timber::compile($template, $data);
             $compile = apply_filters('lang_switcher_compile', $compile);
 
-            wd($compile);
             return $compile;
         }
     }
