@@ -87,32 +87,47 @@ function getSemanticViewData($layout)
     $post_id = get_the_ID();
     $front_id = get_option('page_on_front');
 
-    if ($layout['semantic_view_type'] == 'sisters') {
-        $parent_id = wp_get_post_parent_id($post_id);
-    } else {
-        $parent_id = $post_id;
-    }
-
-    if (!empty($layout['semantic_view_page_types'])) {
-        $tax_query = [
-            'relation' => 'AND',
-            'page_type' => array(
-                'taxonomy' => 'page_type',
-                'terms' => $layout['semantic_view_page_types'],
-                'field' => 'term_id',
-                'operator' => 'IN'
-            ),
+    if ($layout['semantic_view_type'] == 'manual' && !empty($layout['semantic_view_include'])) {
+        $the_query = [
+            'post_type' => 'page',
         ];
+        foreach ($layout['semantic_view_include'] as $included_id) {
+            $the_query['post__in'][] = $included_id;
+        }
+    } else {
+
+        if ($layout['semantic_view_type'] == 'sisters') {
+            $parent_id = wp_get_post_parent_id($post_id);
+        } else {
+            $parent_id = $post_id;
+        }
+
+        if (!empty($layout['semantic_view_page_types'])) {
+            $tax_query = [
+                'relation' => 'AND',
+                'page_type' => array(
+                    'taxonomy' => 'page_type',
+                    'terms' => $layout['semantic_view_page_types'],
+                    'field' => 'term_id',
+                    'operator' => 'IN'
+                ),
+            ];
+        }
+
+        $the_query = [
+            'post_type' => 'page',
+            'post_parent' => $parent_id,
+            'post__not_in' => [$post_id, $front_id],
+            'tax_query' => (!empty($tax_query)) ? $tax_query : ''
+        ];
+
+        // Si des pages ont été ajoutées dans le champ "Pages à exclure"
+        if (!empty($layout['semantic_view_exclude'])) {
+            foreach ($layout['semantic_view_exclude'] as $excluded_id) {
+                $the_query['post__not_in'][] = $excluded_id;
+            }
+        }
     }
-
-    $the_query = [
-        'post_type' => 'page',
-        'post_parent' => $parent_id,
-        'post__not_in' => [$parent_id, $post_id, $front_id]
-    ];
-
-    $the_query['tax_query'] = (!empty($tax_query)) ? $tax_query : '';
-
 
     $query_result = new WP_query($the_query);
 
