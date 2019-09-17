@@ -211,5 +211,15 @@ class WoodyTheme_Polylang
 
         // Favorites
         __('Ajouter à mes favoris', 'woody-theme');
+
+         // Tides
+         __('Dates', 'woody-theme');
+         __('Basse mer', 'woody-theme');
+         __('Haute mer', 'woody-theme');
+         __('Matin', 'woody-theme');
+         __('Soir', 'woody-theme');
+         __('Heure', 'woody-theme');
+         __('Coef', 'woody-theme');
+         __('Retrouvez prochainement les horaires de marées pour ce mois !', 'woody-theme');
     }
 }
