@@ -589,6 +589,7 @@ class WoodyTheme_ACF
                 'blocks-focus-tpl_310',
                 'blocks-focus-tpl_301',
                 'blocks-focus-tpl_304',
+                'blocks-focus-tpl_316',
                 'blocks-focus-tpl_308',
                 'blocks-focus-tpl_306',
                 'blocks-focus-tpl_313',
