@@ -14,7 +14,7 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -52,7 +52,19 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {},
+            "choices": {
+                "128": "Saisons - Automne",
+                "129": "Saisons - Hiver",
+                "127": "Saisons - Printemps",
+                "126": "Saisons - Été",
+                "22": "Thématiques - Couples",
+                "21": "Thématiques - Famille",
+                "138": "Thématiques - Thème A",
+                "140": "Thématiques - Thème B",
+                "142": "Thématiques - Thème C",
+                "146": "Thématiques - Thème D",
+                "23": "Thématiques - avec enfants"
+            },
             "default_value": [],
             "allow_null": 0,
             "multiple": 1,
@@ -254,7 +266,7 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -296,7 +308,7 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -565,5 +577,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1562062297
+    "modified": 1567690380
 }

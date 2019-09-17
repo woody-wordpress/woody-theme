@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Admin Theme Cleanup
  *
@@ -26,6 +27,10 @@ class WoodyTheme_Cleanup_Admin
             add_action('wp_dashboard_setup', [$this, 'removeDashboardWidgets']);
             add_filter('tiny_mce_before_init', [$this, 'tiny_mce_remove_unused_formats']);
 
+            add_filter('get_user_option_meta-box-order_page', [$this, 'sideMetaboxOrder']);
+            add_action('admin_menu', [$this, 'removeAttributeMetaBox']);
+
+
             $user = wp_get_current_user();
             if (!in_array('administrator', $user->roles)) {
                 add_action('admin_head', [$this, 'removeScreenOptions']);
@@ -38,6 +43,27 @@ class WoodyTheme_Cleanup_Admin
         }
     }
 
+    public function removeAttributeMetaBox()
+    {
+        remove_meta_box('pageparentdiv', 'page', 'side');
+    }
+
+
+    function sideMetaboxOrder($order)
+    {
+        add_meta_box('pageparentdiv', __('Déplacer la page'), 'page_attributes_meta_box', 'page', 'side');
+        $box_order = array(
+            'side' => join(
+                ",",
+                array(
+                    'submitdiv',
+                    'woody-unpublisher',
+                    'ml_box',
+                )
+            ),
+        );
+        return $box_order;
+    }
 
     /**
      * Benoit Bouchaud
@@ -110,10 +136,10 @@ class WoodyTheme_Cleanup_Admin
 
         // Personnaliser
         global $submenu;
-        if (isset($submenu[ 'themes.php' ])) {
-            foreach ($submenu[ 'themes.php' ] as $index => $menu_item) {
+        if (isset($submenu['themes.php'])) {
+            foreach ($submenu['themes.php'] as $index => $menu_item) {
                 if (in_array('customize', $menu_item)) {
-                    unset($submenu[ 'themes.php' ][ $index ]);
+                    unset($submenu['themes.php'][$index]);
                 }
             }
         }
@@ -142,8 +168,8 @@ class WoodyTheme_Cleanup_Admin
 
     public function customMenusPage()
     {
-        $methodExist = class_exists('SubWoodyTheme_Admin') ? method_exists('SubWoodyTheme_Admin', 'addMenuMainPages') : false ;
-        
+        $methodExist = class_exists('SubWoodyTheme_Admin') ? method_exists('SubWoodyTheme_Admin', 'addMenuMainPages') : false;
+
 
         if (function_exists('acf_add_options_page')) {
             $lang = pll_current_language();

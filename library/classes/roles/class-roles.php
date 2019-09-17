@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Roles
  *
@@ -23,7 +24,7 @@ class WoodyTheme_Roles
         add_filter('redirection_role', function ($role) {
             return 'manage_redirection';
         });
-        add_filter('the_password_form', [$this,'custom_password_form']);
+        add_filter('the_password_form', [$this, 'custom_password_form']);
     }
 
     /**
@@ -80,7 +81,7 @@ class WoodyTheme_Roles
         $vars = [
             'protected_form' => [
                 'titre' => __('Connectez-vous !'),
-                'label' =>  'pwbox-'.(empty($post->ID) ? rand() : $post->ID),
+                'label' =>  'pwbox-' . (empty($post->ID) ? rand() : $post->ID),
                 'intro' => __('Cette page est protégée par un mot de passe. </br>Pour accéder à cette page, veuillez saisir un mot de passe :'),
                 'placeholder' => __('Votre mot de passe'),
                 'action' => esc_url(site_url('wp-login.php?action=postpass', 'login_post')),
@@ -88,17 +89,15 @@ class WoodyTheme_Roles
             ]
         ];
 
-        // $pswd=wp_hash_password($post->post_password);
-        // $pswd2=$post->post_password;
-        // $cookie_pswd= wp_unslash($_COOKIE[ 'wp-postpass_' . COOKIEHASH ]);
+        $pswd = wp_hash_password($post->post_password);
+        if (!empty($_COOKIE['wp-postpass_' . COOKIEHASH])) {
+            $cookie_pswd = wp_unslash($_COOKIE['wp-postpass_' . COOKIEHASH]);
+            if ($cookie_pswd != $pswd) {
+                $vars['protected_form']['error_msg'] = __('Accés refusé. Mot de passe incorrect');
+            }
+        }
 
-        // wd(wp_check_password($pswd2,$pswd));
-
-        // if( isset ( $_COOKIE[ 'wp-postpass_' . COOKIEHASH ] ) && $cookie_pswd != $pswd ){
-        //     $vars['protected_form']['error_msg'] = __('Accés refusé. Mot de passe incorrect');
-        // }
-
-        return Timber::compile('blocks\protected_post\tpl_01\tpl.twig', $vars);
+        return Timber::compile('parts\protected_post.twig', $vars);
     }
 
 

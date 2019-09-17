@@ -15,7 +15,7 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -67,7 +67,7 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -164,5 +164,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Clone du bloc en-tête (peut-être utilisé pour les \"points forts\" ou les \"on aime\"",
-    "modified": 1557146070
+    "modified": 1567686930
 }

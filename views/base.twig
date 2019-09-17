@@ -59,18 +59,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             {# /Theme Content #}
 
             {# Theme Footer #}
+            {% if 'footer' not in hide_page_zones %}
             {% include 'parts/footer.twig' %}
+            {% endif %}
             {# /Theme Footer #}
         </div>
 
         {# Theme Header #}
+        {% if 'header' not in hide_page_zones %}
         {% include 'parts/header.twig' %}
+        {% endif %}
         {# /Theme Header #}
     </div>
 
     {# Twig Inline Scripts tags #}
     {% block inline_scripts %}{% endblock %}
     {# /Twig Inline Scripts tags #}
+
+    {# Reveal #}
+    {% include 'parts/reveal.twig' %}
+    {# /Reveal #}
 
     {# WP Footer #}
     {{ wp_footer }}

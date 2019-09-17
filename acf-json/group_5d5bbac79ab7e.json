@@ -1,9 +1,9 @@
 {
-    "key": "group_5b042f5ad9ecc",
-    "title": "Texte libre",
+    "key": "group_5d5bbac79ab7e",
+    "title": "Galerie de photos interactive",
     "fields": [
         {
-            "key": "field_5b044711dcad5",
+            "key": "field_5d5bbac7a11c2",
             "label": "Contenu",
             "name": "",
             "type": "tab",
@@ -19,26 +19,71 @@
             "endpoint": 0
         },
         {
-            "key": "field_5b042f9591390",
-            "label": "Texte \/ Code html",
-            "name": "text",
-            "type": "wysiwyg",
+            "key": "field_5d710ea761436",
+            "label": "image + texte",
+            "name": "interactive_gallery_items",
+            "type": "repeater",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-label",
                 "id": ""
             },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 1
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "block",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_5d5bbaea1e7fe",
+                    "label": "Texte mis en avant",
+                    "name": "interactive_gallery_text",
+                    "type": "wysiwyg",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "60",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 1,
+                    "delay": 0
+                },
+                {
+                    "key": "field_5d5bbac7a125a",
+                    "label": "Photo de la galerie",
+                    "name": "interactive_gallery_photo",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "40",
+                        "class": "hide-label",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": ""
+                }
+            ]
         },
         {
-            "key": "field_5b0e8fb53447a",
+            "key": "field_5d5bbac7a15c7",
             "label": "Mise en page",
             "name": "",
             "type": "tab",
@@ -54,7 +99,7 @@
             "endpoint": 0
         },
         {
-            "key": "field_5c1ce35a071e8",
+            "key": "field_5d5bbac7a1658",
             "label": "Template",
             "name": "",
             "type": "accordion",
@@ -71,7 +116,7 @@
             "endpoint": 0
         },
         {
-            "key": "field_5b0e8fcf3447b",
+            "key": "field_5d5bbac7a16f3",
             "label": "Template",
             "name": "woody_tpl",
             "type": "radio",
@@ -83,18 +128,16 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "choices": {
-                "blocks-custom_text-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.superot.wp.rc-dev.com\/app\/dist\/superot\/img\/woody-library\/views\/blocks\/custom_text\/tpl_01\/thumbnail.png?version=2.9.1\" alt=\"blocks-custom_text-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Texte<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Texte<\/h4>Affiche l'éditeur visuel<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-            },
+            "choices": {},
             "allow_null": 0,
             "other_choice": 0,
             "save_other_choice": 0,
-            "default_value": "",
+            "default_value": 0,
             "layout": "vertical",
             "return_format": "value"
         },
         {
-            "key": "field_5b8f9c899c97c",
+            "key": "field_5d5bbac7a178e",
             "label": "Options avancées",
             "name": "",
             "type": "accordion",
@@ -111,9 +154,47 @@
             "endpoint": 0
         },
         {
-            "key": "field_5b8f9cbb9c97d",
-            "label": "Paramètres du fond",
-            "name": "custom_text_bg_params",
+            "key": "field_5d5bbac7a1820",
+            "label": "Retirer les marges autour des photos",
+            "name": "interactive_gallery_no_padding",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5d5fd23fb6c31",
+            "label": "Afficher le bloc texte",
+            "name": "interactive_gallery_open",
+            "type": "true_false",
+            "instructions": "Si activé, le bloc de texte sera ouvert au chargement de la page.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5d5bbac7a18b1",
+            "label": "Paramètres de fond",
+            "name": "interactive_gallery_bg_params",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -132,7 +213,7 @@
             "prefix_name": 0
         },
         {
-            "key": "field_5bc849d96f84e",
+            "key": "field_5d5bbac7a1942",
             "label": "Effets visuels",
             "name": "",
             "type": "accordion",
@@ -149,9 +230,9 @@
             "endpoint": 0
         },
         {
-            "key": "field_5bc849eb6f84f",
+            "key": "field_5d5bbac7a19d3",
             "label": "Effets visuels",
-            "name": "the_visuel_effects",
+            "name": "the_visual_effects",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -186,6 +267,6 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": 1,
-    "description": "Elément de contenu (Editeur wysiwyg \/ code html",
-    "modified": 1567691233
+    "description": "Elément de contenu (Liste de photos)",
+    "modified": 1568102255
 }

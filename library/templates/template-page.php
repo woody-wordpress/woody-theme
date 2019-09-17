@@ -53,7 +53,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $this->pageContext();
             }
         }
-
     }
 
     protected function page404Context()
@@ -73,7 +72,11 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     $post_id = explode('_', $post_id);
                     $post_id = end($post_id);
                     $post = Timber::get_post($post_id);
-                    $suggestions[] = getPagePreview(['display_elements' => ['description'], 'display_button' => true, 'display_img' => true], $post);
+                    if ($post->post_type == 'touristic_sheet') {
+                        $suggestions[] = getTouristicSheetPreview(['display_elements' => ['sheet_town', 'sheet_type', 'description', 'bookable'], 'display_img' => true], $post);
+                    } else {
+                        $suggestions[] = getPagePreview(['display_elements' => ['description'], 'display_button' => true, 'display_img' => true], $post);
+                    }
                 }
             }
 
@@ -131,7 +134,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $trip_infos['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price']);
                 if ($trip_infos['the_price']['activate_quotation'] == true) {
                     $quotation_id = get_option("options_quotation_page_url");
-                    $trip_infos['quotation_link']['link_label'] = get_permalink($quotation_id)."?sejour=".$this->context['post_id'];
+                    $trip_infos['quotation_link']['link_label'] = get_permalink($quotation_id) . "?sejour=" . $this->context['post_id'];
                 }
             }
             if (!empty($trip_infos['the_duration']['duration_unit']) && $trip_infos['the_duration']['duration_unit'] == 'component_based') {
@@ -172,6 +175,11 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     $page_teaser['post_coordinates'] = (!empty(getAcfGroupFields('group_5b3635da6529e', $this->context['post']))) ? getAcfGroupFields('group_5b3635da6529e', $this->context['post']) : '';
                 }
 
+                // Unset breadcrumb if checked in hide page zones options
+                if (!empty($this->context['hide_page_zones']) && in_array('breadcrumb', $this->context['hide_page_zones'])) {
+                    unset($page_teaser['breadcrumb']);
+                }
+
                 $this->context['page_teaser'] = Timber::compile($this->context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
             }
 
@@ -206,6 +214,16 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     {
         $this->context['page_terms'] = implode(' ', getPageTerms($this->context['post_id']));
         $this->context['default_marker'] = file_get_contents($this->context['dist_dir'] . '/img/default-marker.svg');
+        $this->context['hide_page_zones'] = get_field('hide_page_zones');
+
+        if (is_array($this->context['hide_page_zones'])) {
+            if (in_array('header', $this->context['hide_page_zones'])) {
+                $this->context['body_class'] = $this->context['body_class'] . ' no-page-header';
+            }
+            if (in_array('footer', $this->context['hide_page_zones'])) {
+                $this->context['body_class'] = $this->context['body_class'] . ' no-page-footer';
+            }
+        }
 
         /*********************************************
          * Check type de publication
@@ -247,7 +265,9 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                                     $bookblock['bookblock_playlists'][$pl_key]['filters']['display_options'] = (!empty($facet['display_options'])) ? $facet['display_options'] : '';
                                     if (!empty($facet['display_options']['persons']['values'])) {
                                         foreach ($facet['display_options']['persons']['values'] as $person) {
-                                            $bookblock['bookblock_playlists'][$pl_key]['filters'][$person['field']] = $person['display'];
+                                            if (!empty($person['field'])) {
+                                                $bookblock['bookblock_playlists'][$pl_key]['filters'][$person['field']] = $person['display'];
+                                            }
                                         }
                                     }
                                     break;
@@ -269,7 +289,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         if (!empty($this->context['timberpost'])) {
             $sections = $this->context['timberpost']->get_field('section');
 
-            if (!empty($sections)) {
+            if (!empty($sections) && is_array($sections)) {
                 foreach ($sections as $section_id => $section) {
                     $the_header = '';
                     $the_layout = '';

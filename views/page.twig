@@ -12,9 +12,9 @@
     <main class="content-type-page {{ page_type|default }}" id="main-content">
         <div class="content-wrapper {{ page_terms|default('no-terms') }}">
             <div class="mobile-header hide-for-xlarge title-bar">
-                <a class="brand-logo" href="{{ site.url }}">
+                <span class="brand-logo obf" data-obf="{{ site.url|base64Encode }}">
                     {{ mobile_logo|default(website_logo) }}
-                </a>
+                </span>
             </div>
             {{ page_hero|default }}
 

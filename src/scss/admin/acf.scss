@@ -1,3 +1,55 @@
+// Type de publication
+.acf-field-5a61fa38b704f {
+    display: flex;
+    align-items: center;
+
+    .acf-label {
+        margin-right: 20px !important;
+        margin-bottom: 0 !important;
+    }
+
+    .acf-input {
+        flex-grow: 1;
+        max-width: 350px;
+    }
+
+    .select2-container--default .select2-selection--single {
+        border: none;
+        padding: 5px;
+        height: auto;
+        border-radius: 0;
+
+        .select2-selection__arrow {
+            height: 100%;
+            top: 0;
+            right: 8px;
+        }
+    }
+}
+
+.select2-dropdown {
+    box-shadow: 0 6px 10px rgba(0, 0, 0, .1);
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 10px;
+}
+
+// Bouton add file / img
+.acf-image-uploader,
+.acf-file-uploader,
+.acf-link {
+    .button {
+        background-color: lighten(#23282d, 25%);
+        color: #fff;
+        transition: background-color;
+
+        &:hover {
+            background-color: lighten(#23282d, 15%);
+            color: #fff;
+        }
+    }
+}
+
 //Styles pour le selecteur de templates Woody => override style des radios par défaut
 .acf-field-radio[data-name*="woody_tpl"] {
     input[type="radio"] {
@@ -190,15 +242,9 @@
 // On ajoute des icones dans les tabs de contenu / En-tête / Mise en page
 // et on revoit le style des tabs
 .acf-fields>.acf-tab-wrap {
-    &.-top {
-        .acf-tab-group {
-            display: flex;
-        }
-    }
-
     .acf-tab-group {
         border-bottom: none !important;
-        padding-bottom: 10px;
+        padding: 0;
 
         li {
             margin-right: 0;
@@ -206,40 +252,82 @@
             transition: .3s;
 
             a {
-                background-color: #23282d !important;
-                transition: .3s !important;
-                border: none !important;
+                transition: all .3s !important;
                 font-weight: 500;
-                text-align: center;
-                color: #fff !important;
-
-                &:hover {
-                    background-color: darken(#23282d, 10%) !important;
-                }
-
-                &:before {
-                    display: inline-block;
-                    padding-right: 7px;
-                    font-family: 'dashicons';
-                    font-weight: normal;
-                    font-style: normal;
-                    font-size: 16px;
-                    transform: translateY(2px);
-                }
+                text-transform: uppercase;
             }
+        }
+    }
 
-            &.active {
+    &.-top {
+        .acf-tab-group {
+            display: flex;
+
+            li {
                 a {
-                    padding-bottom: 5px !important;
-                    background-color: #0073aa !important;
+                    padding: 10px !important;
+                    background-color: #23282d !important;
                     color: #fff !important;
+                    text-align: center;
+                    border: none !important;
 
-                    &:before {
-                        color: #fff;
+                    &:hover {
+                        background-color: darken(#23282d, 10%) !important;
+                    }
+                }
+
+                &.active {
+                    a {
+                        background-color: #0073aa !important;
+                        color: #fff !important;
                     }
                 }
             }
         }
+    }
+
+    &.-left {
+        .acf-tab-group {
+            li {
+                a {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    font-weight: 700;
+                    color: lighten(#23282d, 20%);
+                    padding: 15px;
+
+                    &:after {
+                        display: block;
+                        content: '\f344';
+                        font-family: 'dashicons';
+                        margin-left: 10px;
+                        line-height: 1em;
+                        transform: scaleX(0);
+                    }
+                }
+
+                &.active {
+                    a {
+                        background-color: #0073aa !important;
+                        color: white !important;
+
+                        &:after {
+                            transform: scaleX(1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.acf-accordion-title {
+    text-transform: uppercase;
+    transition: color .3s;
+
+    &:hover {
+        color: #00a0d2;
     }
 }
 
@@ -266,6 +354,7 @@
 .acf-flexible-content {
     .layout {
         transition: box-shadow .3s;
+        border: none !important;
     }
 
     .layout:not(.-collapsed) {
@@ -482,6 +571,7 @@
     justify-content: flex-end;
     margin: 0;
     padding: 5px 10px;
+    background-color: white;
 
     .count {
         position: relative;
@@ -586,8 +676,12 @@
     }
 }
 
-.acf-tooltip>ul>li>a[data-layout="slides_group"] {
-    display: none;
+.acf-tooltip>ul>li {
+
+    >a[data-layout="files"],
+    >a[data-layout="slides_group"] {
+        display: none;
+    }
 }
 
 .acf-field.collapsing-rows {
@@ -663,6 +757,14 @@
     .layout[data-layout="call_to_action"] {
         .acf-tab-group {
             li:nth-of-type(2) {
+                display: none !important;
+            }
+        }
+    }
+
+    .layout[data-layout="gallery"] {
+        .acf-tab-group {
+            li:nth-of-type(3) {
                 display: none !important;
             }
         }

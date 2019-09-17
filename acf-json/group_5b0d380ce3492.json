@@ -1,6 +1,6 @@
 {
     "key": "group_5b0d380ce3492",
-    "title": "Affichage: mises en avant",
+    "title": "Personnaliser : mise en avant",
     "fields": [
         {
             "key": "field_5b169fab55db0",
@@ -161,5 +161,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Infos affichées en sidebar et utilisées pour les remontées de contenu",
-    "modified": 1547044261
+    "modified": 1567685736
 }

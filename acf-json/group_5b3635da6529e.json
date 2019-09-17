@@ -50,7 +50,7 @@
             }
         ]
     ],
-    "menu_order": 0,
+    "menu_order": 40,
     "position": "side",
     "style": "default",
     "label_placement": "top",
@@ -58,5 +58,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Groupe latitude \/ longitude pour géolocaliser les pages",
-    "modified": 1540886772
+    "modified": 1567762238
 }

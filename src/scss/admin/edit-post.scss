@@ -1,22 +1,27 @@
-// #post-body-content {
-//     // Afin de ne pas avoir à remonter tout en haut du post pour l'enregistrer :)
-//     max-height: 100vh;
-//     overflow-y: scroll;
+.wp-core-ui .button {
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    text-shadow: none;
+    height: auto;
+    padding: 5px 10px;
 
-//     &:after {
-//         display: block;
-//         content: '';
-//         width: 100%;
-//         height: 40px;
-//         position: sticky;
-//         z-index: 1;
-//         bottom: 0;
-//         left: 0;
-//         background-image: linear-gradient(to bottom, transparent, #f1f1f1);
-//     }
-// }
+    &.button-large {
+        height: auto;
+        padding: 5px 10px;
+    }
 
-//TODO: retirer ces lignes quand on aura unset la metabox
+    &.edit-slug {
+        margin-left: 5px;
+        background: #fff;
+
+        &:hover {
+            color: #0085ba
+        }
+    }
+}
+
+
 #pageparentdiv {
 
     p:nth-of-type(2),
@@ -45,48 +50,57 @@ textarea.notAllowed {
         padding: 0 12px 2px;
         margin-bottom: 20px;
         background: #0085ba;
-        border-color: #0073aa #006799 #006799;
-        box-shadow: 0 1px 0 #006799;
         color: #fff;
         text-decoration: none;
-        text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799;
+        transition: background-color .3s;
 
-        &.sticky {
-            position: fixed;
-            bottom: 0px;
-            left: 0;
-            margin: 0;
-            border-radius: 0;
-            border-color: #0085ba;
-            box-shadow: -10px 10px 30px #333;
-            width: 50%;
-            z-index: 999;
+        &:hover {
+            background: darken(#0085ba, 7%);
         }
     }
 }
 
 #major-publishing-actions {
     .button {
-        border-color: #cccccc;
+        border: 1px solid #cccccc;
         background: #f7f7f7;
-        box-shadow: 0 1px 0 #cccccc;
         color: #555;
         text-decoration: none;
         text-shadow: none;
+        transition: background-color .3s;
+
+        &:hover {
+            background: darken(#f7f7f7, 7%);
+        }
     }
 }
 
+#publishing-action,
+#minor-publishing-actions .preview.button {
+    &.sticky {
+        position: fixed;
+        border: 20px solid #fff;
+        right: 20px;
+        width: 270px;
+        z-index: 999;
+        margin: 0;
+        box-sizing: border-box;
+    }
+}
+
+#minor-publishing-actions .preview.button.sticky {
+    height: auto;
+    bottom: -90px;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, .1);
+    animation: previewSlideIn .4s ease-out forwards;
+
+}
+
 #publishing-action.sticky {
-    position: fixed;
-    bottom: 0px;
-    right: 0;
-    margin: 0;
-    border-radius: 0;
-    border: 0;
-    box-shadow: 0;
-    width: 50%;
-    z-index: 999;
-    box-shadow: 10px 10px 30px #333;
+    bottom: -150px;
+    box-shadow: 0 10px 12px rgba(0, 0, 0, .15);
+    animation: submitSlideIn .4s ease-out forwards;
+
 
     .spinner {
         position: absolute;
@@ -117,8 +131,14 @@ textarea.notAllowed {
     }
 }
 
+#pv_publish {
+    height: 100% !important;
+}
+
 #select-post-language {
     .button-lock {
+        padding: 2px 7px;
+
         .dashicons {
             line-height: 26px;
         }
@@ -134,4 +154,67 @@ textarea.notAllowed {
         pointer-events: none;
     }
 
+}
+
+.post-type-page #wpbody-content {
+    .page-title-action {
+        display: none;
+    }
+}
+
+.postbox {
+    box-shadow: none;
+    border: none;
+}
+
+#side-sortables {
+    .postbox {
+        .ui-sortable-handle {
+            color: lighten(#23282d, 25%);
+            transition: color .3s;
+
+            &:hover {
+                color: #0085ba;
+            }
+        }
+    }
+}
+
+// Taxonomies
+#page_typediv,
+#themesdiv,
+#placesdiv,
+#seasonsdiv {
+    .ui-sortable-handle {
+        display: flex;
+        color: lighten(#23282d, 25%);
+
+        &:before {
+            display: block;
+            font-family: 'dashicons';
+            margin-right: 8px;
+            content: '\f323';
+
+        }
+    }
+}
+
+@keyframes submitSlideIn {
+    0% {
+        bottom: -150px;
+    }
+
+    100% {
+        bottom: 40px;
+    }
+}
+
+@keyframes previewSlideIn {
+    0% {
+        bottom: -90px;
+    }
+
+    100% {
+        bottom: 100px;
+    }
 }

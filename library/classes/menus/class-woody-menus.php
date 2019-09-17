@@ -40,7 +40,7 @@ class WoodyTheme_Menus
         $menu_cache_key = $current_lang . '_' . md5(serialize($depth_1_ids));
         // TODO: comprendre pourquoi cette ligne est désactivée
         // $woody_menus_cache = get_transient('woody_menus_cache');
-        $woody_menus_cache = '';
+        $woody_menus_cache = [];
 
         if (!empty($woody_menus_cache[$menu_cache_key])) {
             $return = $woody_menus_cache[$menu_cache_key];
@@ -59,8 +59,9 @@ class WoodyTheme_Menus
             }
 
             // Save transient cache
-            $woody_menus_cache[$menu_cache_key] = $return;
-            set_transient('woody_menus_cache', $woody_menus_cache);
+            // TODO: comprendre pourquoi cette ligne est désactivée
+            // $woody_menus_cache[$menu_cache_key] = $return;
+            // set_transient('woody_menus_cache', $woody_menus_cache);
         }
 
         return $return;
@@ -265,6 +266,6 @@ class WoodyTheme_Menus
 
     public function savePost()
     {
-        delete_transient('woody_menus_cache');
+        // delete_transient('woody_menus_cache');
     }
 }

@@ -1,9 +1,8 @@
 {
     "key": "group_5b0d1ed32a384",
-    "title": "Mise en avant(sélection manuelle)",
-    "fields": [
-        {
-            "key": "field_5b0d1ecc7c825",
+    "title": "Mise en avant (sélection manuelle)",
+    "fields": [{
+            "key": "field_5d72757527c99",
             "label": "Contenu",
             "name": "",
             "type": "tab",
@@ -15,7 +14,7 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -39,8 +38,7 @@
             "hide_collapse": 0,
             "collapse_all_repeater": 1,
             "btn-icon-only": 0,
-            "sub_fields": [
-                {
+            "sub_fields": [{
                     "key": "field_5b22415792db0",
                     "label": "Titre administration",
                     "name": "bo_selection_title",
@@ -91,13 +89,11 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [
-                            {
-                                "field": "field_5b0d2800bb187",
-                                "operator": "==",
-                                "value": "custom_content"
-                            }
-                        ]
+                        [{
+                            "field": "field_5b0d2800bb187",
+                            "operator": "==",
+                            "value": "custom_content"
+                        }]
                     ],
                     "wrapper": {
                         "width": "",
@@ -105,8 +101,7 @@
                         "id": ""
                     },
                     "layout": "block",
-                    "sub_fields": [
-                        {
+                    "sub_fields": [{
                             "key": "field_5b0d28dabb18a",
                             "label": "En-tête",
                             "name": "heading",
@@ -162,13 +157,11 @@
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": [
-                                [
-                                    {
-                                        "field": "field_5d0a3c8834254",
-                                        "operator": "==",
-                                        "value": "link"
-                                    }
-                                ]
+                                [{
+                                    "field": "field_5d0a3c8834254",
+                                    "operator": "==",
+                                    "value": "link"
+                                }]
                             ],
                             "wrapper": {
                                 "width": "50",
@@ -185,13 +178,11 @@
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": [
-                                [
-                                    {
-                                        "field": "field_5d0a3c8834254",
-                                        "operator": "==",
-                                        "value": "file"
-                                    }
-                                ]
+                                [{
+                                    "field": "field_5d0a3c8834254",
+                                    "operator": "==",
+                                    "value": "file"
+                                }]
                             ],
                             "wrapper": {
                                 "width": "50",
@@ -236,13 +227,11 @@
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": [
-                                [
-                                    {
-                                        "field": "field_5b0d28f9bb18b",
-                                        "operator": "==",
-                                        "value": "img"
-                                    }
-                                ]
+                                [{
+                                    "field": "field_5b0d28f9bb18b",
+                                    "operator": "==",
+                                    "value": "img"
+                                }]
                             ],
                             "wrapper": {
                                 "width": "70",
@@ -268,13 +257,11 @@
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": [
-                                [
-                                    {
-                                        "field": "field_5b0d28f9bb18b",
-                                        "operator": "==",
-                                        "value": "movie"
-                                    }
-                                ]
+                                [{
+                                    "field": "field_5b0d28f9bb18b",
+                                    "operator": "==",
+                                    "value": "movie"
+                                }]
                             ],
                             "wrapper": {
                                 "width": "70",
@@ -282,8 +269,7 @@
                                 "id": ""
                             },
                             "layout": "block",
-                            "sub_fields": [
-                                {
+                            "sub_fields": [{
                                     "key": "field_5b16b2b2d0f42",
                                     "label": "Fichiers vidéos",
                                     "name": "movie_field",
@@ -413,13 +399,11 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [
-                            {
-                                "field": "field_5b0d2800bb187",
-                                "operator": "==",
-                                "value": "existing_content"
-                            }
-                        ]
+                        [{
+                            "field": "field_5b0d2800bb187",
+                            "operator": "==",
+                            "value": "existing_content"
+                        }]
                     ],
                     "wrapper": {
                         "width": "",
@@ -427,31 +411,29 @@
                         "id": ""
                     },
                     "layout": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_5b0d38ed1cdfb",
-                            "label": "Choix de la page",
-                            "name": "content_selection",
-                            "type": "post_object",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "post_type": [
-                                "page",
-                                "touristic_sheet"
-                            ],
-                            "taxonomy": "",
-                            "allow_null": 0,
-                            "multiple": 0,
-                            "return_format": "object",
-                            "ui": 1
-                        }
-                    ]
+                    "sub_fields": [{
+                        "key": "field_5b0d38ed1cdfb",
+                        "label": "Choix de la page",
+                        "name": "content_selection",
+                        "type": "post_object",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "post_type": [
+                            "page",
+                            "touristic_sheet"
+                        ],
+                        "taxonomy": "",
+                        "allow_null": 0,
+                        "multiple": 0,
+                        "return_format": "object",
+                        "ui": 1
+                    }]
                 }
             ]
         },
@@ -589,7 +571,7 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -606,7 +588,12 @@
                 "id": ""
             },
             "clone": [
-                "field_5b87f315b2034"
+                "field_5b041d61adb72",
+                "field_5b041c6aadb71",
+                "field_5b041d79adb73",
+                "field_5b59bbd0e094c",
+                "field_5b72f56b6f4aa",
+                "field_5b59bc12e094d"
             ],
             "display": "seamless",
             "layout": "block",
@@ -626,7 +613,7 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -781,13 +768,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -797,5 +782,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1560952317
+    "modified": 1567782282
 }

@@ -32,6 +32,8 @@ class WoodyTheme_Twig_Filters
         $twig->addFilter(new Twig_SimpleFilter('theRootAncestor', [$this, 'theRootAncestor']));
         $twig->addFilter(new Twig_SimpleFilter('pluralizeUnit', [$this, 'pluralizeUnit']));
 
+        $twig->addFilter(new Twig_SimpleFilter('base64Encode', [$this, 'base64Encode']));
+
         // debug
         $twig->addFilter(new Twig_SimpleFilter('dump', [$this, 'dump']));
         $twig->addFilter(new Twig_SimpleFilter('rcd', [$this, 'rcd']));
@@ -142,6 +144,15 @@ class WoodyTheme_Twig_Filters
         return uniqid();
     }
 
+    public function base64Encode($text)
+    {
+        if (empty($text)) {
+            return;
+        }
+        $encoded = base64_encode($text);
+        return $encoded;
+    }
+
     // Debug
     public function dump($text)
     {
@@ -181,12 +192,11 @@ class WoodyTheme_Twig_Filters
 
     public function theRootAncestor($post_id)
     {
-
         $root_id = getPostRootAncestor($post_id) ? getPostRootAncestor($post_id) : get_the_id();
         return $root_id;
     }
 
-    function pluralizeUnit($amount, $singular_unit, $plural_unit = false)
+    public function pluralizeUnit($amount, $singular_unit, $plural_unit = false)
     {
         if ((int) $amount === 1 || empty($plural_unit)) {
             return $amount . '<span class="unit"> ' . $singular_unit . '</span>';
