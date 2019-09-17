@@ -1241,8 +1241,10 @@ function getPagePreview($item_wrapper, $item, $clickable = true)
     }
 
     $data['location'] = [];
-    $data['location']['lat'] = (!empty(get_field('post_latitude', $item->ID))) ? get_field('post_latitude', $item->ID) : '';
-    $data['location']['lng'] = (!empty(get_field('post_longitude', $item->ID))) ? get_field('post_longitude', $item->ID) : '';
+    $lat = get_field('post_latitude', $item->ID);
+    $lng = get_field('post_longitude', $item->ID);
+    $data['location']['lat'] = (!empty($lat)) ? str_replace(',', '.', $lat) : '';
+    $data['location']['lng'] = (!empty($lng)) ? str_replace(',', '.', $lng) : '';
     $data['img']['attachment_more_data'] = (!empty($data['img'])) ? getAttachmentMoreData($data['img']['ID']) : '';
     if ($clickable) {
         $data['link']['url'] = get_permalink($item->ID);
