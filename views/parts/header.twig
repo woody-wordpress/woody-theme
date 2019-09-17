@@ -3,7 +3,7 @@
         {{ season_switcher }}
     {% endif %}
 
-    {% if lang_switcher_button|default or es_search_button|default or subtheme_more_tools %}
+    {% if lang_switcher_button|default or es_search_button|default or subtheme_more_tools or preparespot_switcher|default %}
         <ul class="tools list-unstyled flex-container align-middle show-for-xlarge">
             {% if subtheme_more_tools %}
                 {% for tool in subtheme_more_tools %}
@@ -27,6 +27,9 @@
             {% endif %}
             {% if lang_switcher_button|default %}
                 <li>{{ lang_switcher_button }}</li>
+            {% endif %}
+            {% if preparespot_switcher|default %}
+                <li> {{ preparespot_switcher }} </li>
             {% endif %}
         </ul>
     {% endif %}
