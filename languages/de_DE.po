@@ -5,26 +5,22 @@ msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.6.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
 "POT-Creation-Date: 2019-09-16T17:30:12+02:00\n"
-"PO-Revision-Date: 2019-09-16 17:52+0200\n"
+"PO-Revision-Date: 2019-09-17 16:52+0200\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.2.1\n"
 "X-Domain: woody-theme\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Theme Name of the theme
-#, fuzzy
-#| msgid "Woody (Thème parent)"
 msgid "Woody (Parent theme)"
 msgstr "Woody (übergeordnetes Theme)"
 
 #. Description of the theme
-#, fuzzy
-#| msgid "Theme parent des thèmes de Raccourci Agency"
 msgid "Parent theme of the Raccourci Agency themes"
 msgstr "Übergeordnetes Theme  von den Themes von Raccourci Agency"
 
@@ -541,8 +537,6 @@ msgid "Soir"
 msgstr "Abend"
 
 #: library/classes/content/class-polylang.php:221
-#, fuzzy
-#| msgid "heure"
 msgid "Heure"
 msgstr "Stunde"
 
@@ -552,7 +546,7 @@ msgstr "Koeff"
 
 #: library/classes/content/class-polylang.php:223
 msgid "Retrouvez prochainement les horaires de marées pour ce mois !"
-msgstr "Finden Sie bald die Gezeitenpläne für diesen Monat ! "
+msgstr "Finden Sie bald die Gezeitenpläne für diesen Monat !"
 
 #: library/templates/template-page.php:90
 msgid "Oups !"
