@@ -1,8 +1,7 @@
 {
     "key": "group_5c4f2efaccd2f",
     "title": "Cocon sémantique",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5c4f2f676dfa5",
             "label": "Contenu",
             "name": "",
@@ -19,13 +18,74 @@
             "endpoint": 0
         },
         {
+            "key": "field_5d80fa64e4fa4",
+            "label": "Type de cocon",
+            "name": "semantic_view_type",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "auto": "Automatique",
+                "manual": "Manuel"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "Automatique",
+            "layout": "horizontal",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_5d80fb26e4fa5",
+            "label": "Pages à inclure",
+            "name": "semantic_view_include",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [{
+                    "field": "field_5d80fa64e4fa4",
+                    "operator": "==",
+                    "value": "manual"
+                }]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "id"
+        },
+        {
             "key": "field_5c4f301a6dfa7",
             "label": "Hierarchie",
             "name": "semantic_view_type",
             "type": "radio",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [{
+                    "field": "field_5d80fa64e4fa4",
+                    "operator": "==",
+                    "value": "auto"
+                }]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -49,9 +109,15 @@
             "type": "taxonomy",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [{
+                    "field": "field_5d80fa64e4fa4",
+                    "operator": "==",
+                    "value": "auto"
+                }]
+            ],
             "wrapper": {
-                "width": "50",
+                "width": "",
                 "class": "",
                 "id": ""
             },
@@ -63,6 +129,37 @@
             "return_format": "id",
             "multiple": 0,
             "allow_null": 0
+        },
+        {
+            "key": "field_5d80d29609563",
+            "label": "Exclure des pages",
+            "name": "semantic_view_exclude",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [{
+                    "field": "field_5d80fa64e4fa4",
+                    "operator": "==",
+                    "value": "auto"
+                }]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "id"
         },
         {
             "key": "field_5c4f309d6dfa8",
@@ -103,7 +200,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -122,7 +219,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -171,13 +268,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -187,5 +282,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1567688678
+    "modified": 1568735461
 }
