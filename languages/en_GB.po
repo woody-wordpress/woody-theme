@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.4.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2019-07-25T17:50:25+02:00\n"
-"PO-Revision-Date: 2019-07-25 17:57+0200\n"
+"POT-Creation-Date: 2019-09-16T17:30:12+02:00\n"
+"PO-Revision-Date: 2019-09-17 16:53+0200\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Theme Name of the theme
-msgid "Woody (Thème parent)"
-msgstr "Woody (Thème parent)"
+msgid "Woody (Parent theme)"
+msgstr "Woody (Parent theme)"
 
 #. Description of the theme
-msgid "Theme parent des thèmes de Raccourci Agency"
-msgstr "Theme parent des thèmes de Raccourci Agency"
+msgid "Parent theme of the Raccourci Agency themes"
+msgstr "Parent theme of the Raccourci Agency themes"
 
 #. Author of the theme
 msgid "Raccourci Agency"
@@ -317,8 +317,8 @@ msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "Maybe the page you are looking for is here ?"
 
 #: library/classes/content/class-polylang.php:154
-#: library/functions/03_woody_format_data.php:906
-#: library/functions/03_woody_format_data.php:1026
+#: library/functions/03_woody_format_data.php:1107
+#: library/functions/03_woody_format_data.php:1227
 msgid "Lire la suite"
 msgstr "Read more"
 
@@ -339,7 +339,7 @@ msgid "Réservable"
 msgstr "Bookable"
 
 #: library/classes/content/class-polylang.php:159
-#: library/functions/03_woody_format_data.php:799
+#: library/functions/03_woody_format_data.php:987
 msgid "Télécharger"
 msgstr "Download"
 
@@ -488,6 +488,7 @@ msgid "Nord"
 msgstr "North"
 
 #: library/classes/content/class-polylang.php:202
+#: library/classes/content/class-polylang.php:219
 msgid "Matin"
 msgstr "Morning"
 
@@ -519,15 +520,43 @@ msgstr "This list is empty now. Browse and add pages!"
 msgid "Ajouter à mes favoris"
 msgstr "Add to my favorites"
 
-#: library/templates/template-page.php:87
+#: library/classes/content/class-polylang.php:216
+msgid "Dates"
+msgstr "Dates"
+
+#: library/classes/content/class-polylang.php:217
+msgid "Basse mer"
+msgstr "Low water"
+
+#: library/classes/content/class-polylang.php:218
+msgid "Haute mer"
+msgstr "High water"
+
+#: library/classes/content/class-polylang.php:220
+msgid "Soir"
+msgstr "Evening"
+
+#: library/classes/content/class-polylang.php:221
+msgid "Heure"
+msgstr "Hour"
+
+#: library/classes/content/class-polylang.php:222
+msgid "Coef"
+msgstr "Coef"
+
+#: library/classes/content/class-polylang.php:223
+msgid "Retrouvez prochainement les horaires de marées pour ce mois !"
+msgstr "Find soon the tide schedules for this month !"
+
+#: library/templates/template-page.php:90
 msgid "Oups !"
 msgstr "Oops!"
 
-#: library/templates/template-page.php:88
+#: library/templates/template-page.php:91
 msgid "Page non trouvée"
 msgstr "Page not found"
 
-#: library/templates/template-page.php:89
+#: library/templates/template-page.php:92
 msgid ""
 "La page que vous recherchez a peut-être été supprimée ou est temporairement "
 "indisponible."
@@ -535,7 +564,7 @@ msgstr ""
 "The page you are looking for might have been removed had its name changed or "
 "is temporarily unavailable."
 
-#: library/templates/template.php:323
+#: library/templates/template.php:353
 msgid "Nos suggestions"
 msgstr "Our suggestions"
 
