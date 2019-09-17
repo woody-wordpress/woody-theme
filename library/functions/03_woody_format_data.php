@@ -84,11 +84,13 @@ function getComponentItem($layout, $context)
 function getSemanticViewData($layout)
 {
     $return = [];
+    $post_id = get_the_ID();
+    $front_id = get_option('page_on_front');
 
     if ($layout['semantic_view_type'] == 'sisters') {
-        $parent_id = wp_get_post_parent_id($layout['post']['ID']);
+        $parent_id = wp_get_post_parent_id($post_id);
     } else {
-        $parent_id = $layout['post']['ID'];
+        $parent_id = $post_id;
     }
 
     if (!empty($layout['semantic_view_page_types'])) {
@@ -106,7 +108,7 @@ function getSemanticViewData($layout)
     $the_query = [
         'post_type' => 'page',
         'post_parent' => $parent_id,
-        'post__not_in' => [$layout['post']['ID']]
+        'post__not_in' => [$parent_id, $post_id, $front_id]
     ];
 
     $the_query['tax_query'] = (!empty($tax_query)) ? $tax_query : '';
