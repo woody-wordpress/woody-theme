@@ -275,6 +275,7 @@ class WoodyTheme_Plugins_Options
             'post_types' => [
                 'touristic_sheet',
                 'short_link',
+                'woody_topic'
             ],
             'taxonomies' => [
                 'themes',

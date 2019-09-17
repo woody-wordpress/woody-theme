@@ -10,6 +10,7 @@ function getComponentItem($layout, $context)
         case 'auto_focus':
         case 'auto_focus_sheets':
         case 'focus_trip_components':
+        case 'auto_focus_topics':
             $return = formatFocusesData($layout, $context['post'], $context['woody_components']);
             break;
         case 'geo_map':
@@ -373,17 +374,23 @@ function getManualFocus_data($layout)
         // La donnée de la vignette est saisie en backoffice
         if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
             $the_items['items'][$key] = getCustomPreview($item_wrapper['custom_content'], $layout);
-            // La donnée de la vignette correspond à un post sélectionné
+        // La donnée de la vignette correspond à un post sélectionné
         } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
             $item = $item_wrapper['existing_content'];
             $status = $item['content_selection']->post_status;
             if ($status !== 'publish') {
                 continue;
             }
-            if ($item['content_selection']->post_type == 'page') {
+            switch ($item['content_selection']->post_type) {
+                case 'page':
                 $post_preview = getPagePreview($layout, $item['content_selection'], $clickable);
-            } elseif ($item['content_selection']->post_type == 'touristic_sheet') {
+                break;
+                case 'touristic_sheet':
                 $post_preview = getTouristicSheetPreview($layout, $item['content_selection']);
+                break;
+                case 'woody_topic':
+                $post_preview = getTopicPreview($layout, $item['content_selection']);
+                break;
             }
             $the_items['items'][$key] = (!empty($post_preview)) ?  $post_preview : '';
         }
@@ -430,6 +437,68 @@ function getAutoFocusSheetData($layout)
 }
 
 /**
+ * @author: Jérémy Legendre
+ * Retourne un tableau de données relatives au Topics
+ * @param layout
+ * @return items
+ */
+function getAutoFocusTopicsData($layout)
+{
+    $items = [];
+
+    $feeds = [];
+    foreach($layout['topic_newspaper'] as $term_id){
+        $term = get_term($term_id, 'topic_newspaper');
+        $feeds[] = $term->name;
+    }
+    $time = !empty($layout['publish_date']) ? strtotime($layout['publish_date']) : 0 ;
+    $args = [
+        'posts_per_page' => -1,
+        'post_status' => 'publish',
+        'post_type' => 'woody_topic',
+        'meta_query' => array(
+            'relation' => 'AND',
+            array(
+                'key' => 'woody_topic_feed',
+                'value' => $feeds,
+                'compare' => 'IN'
+            ),
+            array(
+                'key' => 'woody_topic_publication',
+                'value' => $time,
+                'compare' => '>'
+            )
+        )
+    ];
+
+    if($layout['focused_sort'] == 'title'){
+        $args['orderby'] = 'title';
+        $args['order'] = 'ASC';
+    }
+
+    $result = new \WP_Query($args);
+
+    if(!empty($result->posts)){
+        foreach($result->posts as $post){
+            $item = Timber::get_post($post->ID);
+            $items['items'][] = getTopicPreview($layout, $item);
+        }
+    }
+
+    if ($layout['focused_sort'] == 'random') {
+        shuffle($items['items']);
+    } elseif ($layout['focused_sort'] == 'date') {
+        $date = [];
+        foreach($items['items'] as $key => $item){
+            $date[$key] = $item['date'];
+        }
+        array_multisort($date, SORT_DESC, $items['items']);
+    }
+
+    return $items;
+}
+
+/**
  *
  * Nom : formatFocusesData
  * Auteur : Benoit Bouchaud
@@ -450,6 +519,8 @@ function formatFocusesData($layout, $current_post, $twigPaths)
         $the_items = getAutoFocus_data($current_post, $layout);
     } elseif ($layout['acf_fc_layout'] == 'auto_focus_sheets' && !empty($layout['playlist_conf_id'])) {
         $the_items = getAutoFocusSheetData($layout);
+    } elseif ($layout['acf_fc_layout'] == 'auto_focus_topics') {
+        $the_items = getAutoFocusTopicsData($layout);
     }
     if (!empty($the_items)) {
         foreach ($the_items['items'] as $item_key => $item) {
@@ -1251,6 +1322,46 @@ function getPagePreview($item_wrapper, $item, $clickable = true)
     }
 
     // $post_type = get_post_terms($item->ID, 'page_type');
+
+    return $data;
+}
+
+/**
+ * @author Jérémy Legendre
+ * @param   item_wrapper
+ * @param   item
+ * @return  data
+ */
+function getTopicPreview($item_wrapper, $item)
+{
+    $data = [];
+    $data['post_id'] = $item->ID;
+    $data['title'] = !empty($item->post_title) ? $item->post_title : '' ;
+
+    if (!empty($item->woody_topic_img)) {
+        $img = [
+            'url' => 'https://api.tourism-system.com/resize/crop/%width%/%height%/70/' . base64_encode($item->woody_topic_img) . '/image.jpg',
+            'resizer' => true
+        ];
+        $data['img'] = $img;
+    }
+
+    if (!empty($item->woody_topic_desc)) {
+        $data['description'] = $item->woody_topic_desc;
+    }
+
+    if (!empty($item_wrapper['display_button'])) {
+        $data['link']['link_label'] = getFieldAndFallBack($item, 'focus_button_title', $item);
+        if (empty($data['link']['link_label'])) {
+            $data['link']['link_label'] = __('Lire la suite', 'woody-theme');
+        }
+    }
+
+    if(!empty($item->woody_topic_publication)){
+        $data['date'] = (int) $item->woody_topic_publication ;
+    }
+
+    $data['link']['url'] = !empty($item->woody_topic_url) ? $item->woody_topic_url : '';
 
     return $data;
 }
