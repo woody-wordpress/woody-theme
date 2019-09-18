@@ -79,7 +79,9 @@ class WoodyTheme_ACF_LinkedPages
     public function removeLinkBetweenPages($post_id, $post_after, $post_before)
     {
         $old_linked_post = get_field('field_5d7f57f2b21f7', $post_before);
-        update_field('field_5d7f57f2b21f7', '', $old_linked_post->ID);
+        if($old_linked_post){
+            update_field('field_5d7f57f2b21f7', '', $old_linked_post->ID);
+        }
     }
 
     public function setLinkBetweenPages($post_id)
@@ -97,8 +99,14 @@ class WoodyTheme_ACF_LinkedPages
             }
 
             $linked_post = get_field('field_5d7f57f2b21f7', $post_id);
-            $linked_post_related = $linked_post ? get_field('field_5d7f57f2b21f7', $linked_post->ID) : false ;
-            if ($linked_post && !$linked_post_related) {
+            if ($linked_post) {
+                // Page that we  want to connect with current could already be related.
+                // Remove the link with this other page
+                $linked_post_related = get_field('field_5d7f57f2b21f7', $linked_post->ID) ;
+                if (!empty($linked_post_related)) {
+                    update_field('field_5d7f57f2b21f7', '', $linked_post_related->ID);
+                }
+
                 update_field('field_5d47d14bdf764', $opposite, $linked_post->ID);
                 update_field('field_5d7f57f2b21f7', get_post($post_id), $linked_post->ID);
 
