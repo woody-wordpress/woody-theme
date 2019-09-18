@@ -1150,7 +1150,7 @@ function getTouristicSheetPreview($layout = null, $post)
         'title' => (!empty($item['title'])) ? getTransformedPattern($item['title']) : '',
         'link' => [
             'url' => apply_filters('woody_get_permalink', $post->ID),
-            'target' => $item['targetBlank'] ? '_blank' : '',
+            'target' => (!empty($item['targetBlank'])) ? '_blank' : '',
         ],
     ];
     if (!empty($layout['display_img'])) {
@@ -1207,14 +1207,16 @@ function getTouristicSheetPreview($layout = null, $post)
     $data['location']['lat'] = (!empty($item['gps'])) ? $item['gps']['latitude'] : '';
     $data['location']['lng'] = (!empty($item['gps'])) ? $item['gps']['longitude'] : '';
 
-    if ($item['bordereau'] === 'HOT' or $item['bordereau'] == 'HPA') {
-        $rating = [];
-        for ($i = 0; $i <= $item['ratings'][0]['value']; $i++) {
-            $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
-        }
-        if (is_array($layout['display_elements'])) {
-            if (in_array('sheet_rating', $layout['display_elements'])) {
-                $data['sheet_rating'] = implode('', $rating);
+    if (!empty($item['bordereau'])) {
+        if ($item['bordereau'] === 'HOT' or $item['bordereau'] == 'HPA') {
+            $rating = [];
+            for ($i = 0; $i <= $item['ratings'][0]['value']; $i++) {
+                $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
+            }
+            if (is_array($layout['display_elements'])) {
+                if (in_array('sheet_rating', $layout['display_elements'])) {
+                    $data['sheet_rating'] = implode('', $rating);
+                }
             }
         }
     }
