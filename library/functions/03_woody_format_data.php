@@ -217,6 +217,7 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
                 $tax_query[$filter_key]['relation'] = $filter['andor'];
                 if (!is_array($filter['terms'])) {
                     $term = get_term($filter['terms']);
+                    //TODO: if !empty && object ???
                     if (empty($term) && is_object($term)) {
                         $filter_tax[$filter_key][$term->taxonomy][] = $filter['terms'];
                     }
@@ -229,14 +230,17 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
                     }
                 }
 
-                foreach ($filter_tax[$filter_key] as $taxo => $terms) {
-                    $tax_query[$filter_key][] = array(
-                        'taxonomy' => $taxo,
-                        'terms' => $terms,
-                        'field' => 'term_id',
-                        'operator' => 'IN'
-                    );
+                if (!empty($filter_tax[$filter_key])) {
+                    foreach ($filter_tax[$filter_key] as $taxo => $terms) {
+                        $tax_query[$filter_key][] = array(
+                            'taxonomy' => $taxo,
+                            'terms' => $terms,
+                            'field' => 'term_id',
+                            'operator' => 'IN'
+                        );
+                    }
                 }
+
                 // On ajoute des paramètres de meta_query à la query
             } elseif (strpos($filter_key, 'filter_trip_price') !== false) {
                 $the_meta_query[] = [
@@ -391,7 +395,7 @@ function getManualFocus_data($layout)
         // La donnée de la vignette est saisie en backoffice
         if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
             $the_items['items'][$key] = getCustomPreview($item_wrapper['custom_content'], $layout);
-        // La donnée de la vignette correspond à un post sélectionné
+            // La donnée de la vignette correspond à un post sélectionné
         } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
             $item = $item_wrapper['existing_content'];
             $status = $item['content_selection']->post_status;
@@ -400,14 +404,14 @@ function getManualFocus_data($layout)
             }
             switch ($item['content_selection']->post_type) {
                 case 'page':
-                $post_preview = getPagePreview($layout, $item['content_selection'], $clickable);
-                break;
+                    $post_preview = getPagePreview($layout, $item['content_selection'], $clickable);
+                    break;
                 case 'touristic_sheet':
-                $post_preview = getTouristicSheetPreview($layout, $item['content_selection']);
-                break;
+                    $post_preview = getTouristicSheetPreview($layout, $item['content_selection']);
+                    break;
                 case 'woody_topic':
-                $post_preview = getTopicPreview($layout, $item['content_selection']);
-                break;
+                    $post_preview = getTopicPreview($layout, $item['content_selection']);
+                    break;
             }
             $the_items['items'][$key] = (!empty($post_preview)) ?  $post_preview : '';
         }
@@ -464,11 +468,11 @@ function getAutoFocusTopicsData($layout)
     $items = [];
 
     $feeds = [];
-    foreach($layout['topic_newspaper'] as $term_id){
+    foreach ($layout['topic_newspaper'] as $term_id) {
         $term = get_term($term_id, 'topic_newspaper');
         $feeds[] = $term->name;
     }
-    $time = !empty($layout['publish_date']) ? strtotime($layout['publish_date']) : 0 ;
+    $time = !empty($layout['publish_date']) ? strtotime($layout['publish_date']) : 0;
     $args = [
         'posts_per_page' => -1,
         'post_status' => 'publish',
@@ -488,15 +492,15 @@ function getAutoFocusTopicsData($layout)
         )
     ];
 
-    if($layout['focused_sort'] == 'title'){
+    if ($layout['focused_sort'] == 'title') {
         $args['orderby'] = 'title';
         $args['order'] = 'ASC';
     }
 
     $result = new \WP_Query($args);
 
-    if(!empty($result->posts)){
-        foreach($result->posts as $post){
+    if (!empty($result->posts)) {
+        foreach ($result->posts as $post) {
             $item = Timber::get_post($post->ID);
             $items['items'][] = getTopicPreview($layout, $item);
         }
@@ -506,7 +510,7 @@ function getAutoFocusTopicsData($layout)
         shuffle($items['items']);
     } elseif ($layout['focused_sort'] == 'date') {
         $date = [];
-        foreach($items['items'] as $key => $item){
+        foreach ($items['items'] as $key => $item) {
             $date[$key] = $item['date'];
         }
         array_multisort($date, SORT_DESC, $items['items']);
@@ -1353,7 +1357,7 @@ function getTopicPreview($item_wrapper, $item)
 {
     $data = [];
     $data['post_id'] = $item->ID;
-    $data['title'] = !empty($item->post_title) ? $item->post_title : '' ;
+    $data['title'] = !empty($item->post_title) ? $item->post_title : '';
 
     if (!empty($item->woody_topic_img)) {
         $img = [
@@ -1374,8 +1378,8 @@ function getTopicPreview($item_wrapper, $item)
         }
     }
 
-    if(!empty($item->woody_topic_publication)){
-        $data['date'] = (int) $item->woody_topic_publication ;
+    if (!empty($item->woody_topic_publication)) {
+        $data['date'] = (int) $item->woody_topic_publication;
     }
 
     $data['link']['url'] = !empty($item->woody_topic_url) ? $item->woody_topic_url : '';
