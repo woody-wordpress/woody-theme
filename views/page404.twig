@@ -5,7 +5,6 @@
 {{ meta }}
 {% endfor %}
 {% endblock metas %}
-
 {% block content %}
 <main id="main-content" class="content-type-page {{ page_type|default }}">
     <div class="content-wrapper {{ page_terms|default('no-terms') }}">
@@ -58,7 +57,8 @@
                 {% endif %}
 
             {% else %}
-                <a class="button marg-top-md marg-bottom-md" href="{{ site.url }}">{{ __("Aller à la page d'accueil", "woody-theme") }}</a>
+                <a class="button primary marg-top-md marg-bottom-md" href="{{ site.url }}">{{ __("Aller à la page d'accueil", "woody-theme") }}</a>
+                <a class="button secondary marg-top-md marg-bottom-md" href="{{ content.search }}">{{ __("Faire une recherche", "woody-theme") }}</a>
             {% endif %}
 
         </div>

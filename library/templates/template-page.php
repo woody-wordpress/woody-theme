@@ -91,6 +91,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             'subtitle' =>  '404 - ' . __("Page non trouvée", 'woody-theme'),
             'text' => __("La page que vous recherchez a peut-être été supprimée ou est temporairement indisponible.", 'woody-theme'),
             'suggestions' => $suggestions,
+            'search' => get_permalink(get_field('es_search_page_url', 'options'))
         ];
 
         $custom = apply_filters('woody_404_custom', $vars);
