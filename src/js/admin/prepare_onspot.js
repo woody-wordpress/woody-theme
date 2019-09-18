@@ -12,11 +12,6 @@ $('#acf-field_5d47d14bdf764').on('change', function() {
             action: 'set_post_term',
             params: data,
             post_id: post_id
-        },
-        success: function ( data )
-        {
-
-        },
-        error: function () { },
+        }
     });
 });

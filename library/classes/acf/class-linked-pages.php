@@ -24,7 +24,9 @@ class WoodyTheme_ACF_LinkedPages
         add_action('acf/load_field/key=field_5d7f57f2b21f7', [$this, 'getAvailablePages'], 10, 1);
         add_action('post_updated', [$this, 'removeLinkBetweenPages'], 10, 3);
         add_action('save_post', [$this, 'setLinkBetweenPages'], 100, 1);
+
         add_action('wp_ajax_set_post_term', [$this, 'setPostTerms']);
+        add_action('wp_ajax_redirect_prepare_onspot', [$this, 'redirectToLinkedPage']);
     }
 
     public function registerTaxonomy()
@@ -77,7 +79,7 @@ class WoodyTheme_ACF_LinkedPages
     public function removeLinkBetweenPages($post_id, $post_after, $post_before)
     {
         $old_linked_post = get_field('field_5d7f57f2b21f7', $post_before);
-        update_field('field_5d7f57f2b21f7' , '', $old_linked_post->ID);
+        update_field('field_5d7f57f2b21f7', '', $old_linked_post->ID);
     }
 
     public function setLinkBetweenPages($post_id)
@@ -116,5 +118,19 @@ class WoodyTheme_ACF_LinkedPages
         $update = update_field('field_5d47d14bdf764', $value, $post_id);
 
         wp_send_json($update);
+    }
+
+    public function redirectToLinkedPage()
+    {
+        $switcher = filter_input(INPUT_POST, 'params', FILTER_VALIDATE_BOOLEAN);
+        $post_id = filter_input(INPUT_POST, 'post_id');
+        $field = get_field('field_5d47d14bdf764', $post_id);
+
+        if ($field !== $switcher) {
+            $linked_post = get_field('field_5d7f57f2b21f7', $post_id);
+            $permalink = get_permalink($linked_post);
+            wp_send_json($permalink);
+        }
+        exit;
     }
 }
