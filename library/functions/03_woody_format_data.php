@@ -1120,6 +1120,10 @@ function getCustomPreview($item, $item_wrapper = null)
 
 function getTouristicSheetPreview($layout = null, $post)
 {
+    if (!is_object($post) || empty($post)) {
+        return;
+    }
+
     $data = [];
     $lang = pll_current_language();
     $languages = apply_filters('woody_pll_the_languages', 'auto');
@@ -1129,11 +1133,6 @@ function getTouristicSheetPreview($layout = null, $post)
         if ($language['current_lang']) {
             $code_lang = substr($language['locale'], 0, 2);
         }
-    }
-
-    // $sheet_data = $sheet_data == null ? apply_filters('woody_hawwwai_sheet_render', $sheet_id, $lang, array(), 'json', 'item') : $sheet_data;
-    if (empty($post)) {
-        return;
     }
 
     $raw_item = get_field('touristic_raw_item', $post->ID);
