@@ -91,6 +91,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             'subtitle' =>  '404 - ' . __("Page non trouvée", 'woody-theme'),
             'text' => __("La page que vous recherchez a peut-être été supprimée ou est temporairement indisponible.", 'woody-theme'),
             'suggestions' => $suggestions,
+            'search' => get_permalink(get_field('es_search_page_url', 'options'))
         ];
 
         $custom = apply_filters('woody_404_custom', $vars);
@@ -197,7 +198,9 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $page_hero['page_heading_img']['attachment_more_data'] = (!empty($page_hero['page_heading_img'])) ? getAttachmentMoreData($page_hero['page_heading_img']['ID']) : '';
                 if (!empty($page_hero['page_heading_add_social_movie']) && !empty($page_hero['page_heading_social_movie'])) {
                     preg_match_all('@src="([^"]+)"@', $page_hero['page_heading_social_movie'], $result);
-                    $iframe_url = $result[1][0];
+                    if (!empty($result[1]) && !empty($result[1][0])) {
+                        $iframe_url = $result[1][0];
+                    }
                     if (strpos($iframe_url, 'youtube') != false) {
                         $yt_params_url = $iframe_url . '?&autoplay=0&rel=0';
                         $page_hero['page_heading_social_movie'] = str_replace($iframe_url, $yt_params_url, $page_hero['page_heading_social_movie']);

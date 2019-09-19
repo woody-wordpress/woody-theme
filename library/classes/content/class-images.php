@@ -7,6 +7,7 @@
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
+
 use Woody\Utils\Output;
 
 class WoodyTheme_Images
@@ -465,7 +466,7 @@ class WoodyTheme_Images
                 }
 
                 // Import tags
-                if (!empty($metadata['image_meta']['city']) || !empty($metadata['image_meta']['state']) || !empty($metadata['image_meta']['country'])) {
+                if (!empty($metadata['image_meta']['city']) || !empty($metadata['image_meta']['state']) || !empty($metadata['image_meta']['country']) || !empty($metadata['image_meta']['keywords'])) {
                     $terms_places = get_terms('places', ['hide_empty' => false]);
                     foreach ($terms_places as $term_places) {
                         if (!empty($metadata['image_meta']['city']) && sanitize_title($metadata['image_meta']['city']) == $term_places->slug) {
@@ -490,6 +491,24 @@ class WoodyTheme_Images
                         foreach ($metadata['image_meta']['keywords'] as $keyword) {
                             if (sanitize_title($keyword) == $term_attachment_categories->slug) {
                                 wp_set_object_terms($attachment_id, $term_attachment_categories->slug, 'attachment_categories', true);
+                            }
+                        }
+                    }
+
+                    $terms_themes = get_terms('themes', ['hide_empty' => false]);
+                    foreach ($terms_themes as $term_themes) {
+                        foreach ($metadata['image_meta']['keywords'] as $keyword) {
+                            if (sanitize_title($keyword) == $term_themes->slug) {
+                                wp_set_object_terms($attachment_id, $term_themes->slug, 'themes', true);
+                            }
+                        }
+                    }
+
+                    $terms_seasons = get_terms('seasons', ['hide_empty' => false]);
+                    foreach ($terms_seasons as $term_seasons) {
+                        foreach ($metadata['image_meta']['keywords'] as $keyword) {
+                            if (sanitize_title($keyword) == $term_seasons->slug) {
+                                wp_set_object_terms($attachment_id, $term_seasons->slug, 'seasons', true);
                             }
                         }
                     }
@@ -614,7 +633,7 @@ class WoodyTheme_Images
         // get the size of the image
         list($width_orig, $height_orig) = getimagesize($img_path);
         if (!empty($width_orig) && !empty($height_orig)) {
-            $ratio_orig = (float)$height_orig / $width_orig;
+            $ratio_orig = (float) $height_orig / $width_orig;
 
             // Ratio Free
             if ($size['height'] == 0) {
@@ -629,7 +648,7 @@ class WoodyTheme_Images
             }
 
             // Get ratio diff
-            $ratio_expect = (float)$size['height'] / $size['width'];
+            $ratio_expect = (float) $size['height'] / $size['width'];
             $ratio_diff = $ratio_orig - $ratio_expect;
 
             // Calcul du crop size
