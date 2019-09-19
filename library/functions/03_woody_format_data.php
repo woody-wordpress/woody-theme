@@ -195,7 +195,9 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
         $tax_query['custom_tax']['relation'] = (!empty($query_form['focused_taxonomy_terms_andor'])) ? $query_form['focused_taxonomy_terms_andor'] : 'OR';
         foreach ($query_form['focused_taxonomy_terms'] as $focused_term_key => $focused_term) {
             $term = get_term($focused_term);
-            $custom_tax[$term->taxonomy][] = $focused_term;
+            if (!empty($term) && is_object($term)) {
+                $custom_tax[$term->taxonomy][] = $focused_term;
+            }
         }
         foreach ($custom_tax as $taxo => $terms) {
             $tax_query['custom_tax'][] = array(
@@ -217,14 +219,13 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
                 $tax_query[$filter_key]['relation'] = $filter['andor'];
                 if (!is_array($filter['terms'])) {
                     $term = get_term($filter['terms']);
-                    //TODO: if !empty && object ???
-                    if (empty($term) && is_object($term)) {
+                    if (!empty($term) && is_object($term)) {
                         $filter_tax[$filter_key][$term->taxonomy][] = $filter['terms'];
                     }
                 } else {
                     foreach ($filter['terms'] as $focused_term) {
                         $term = get_term($focused_term);
-                        if (empty($term) && is_object($term)) {
+                        if (!empty($term) && is_object($term)) {
                             $filter_tax[$filter_key][$term->taxonomy][] = $focused_term;
                         }
                     }
