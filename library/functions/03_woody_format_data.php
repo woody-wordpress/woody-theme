@@ -329,7 +329,7 @@ function getAutoFocus_data($the_post, $query_form, $paginate = false, $uniqid = 
 
             // On vérifie si la page est de type miroir
             $page_type = get_the_terms($post->ID, 'page_type');
-            if ($page_type[0]->slug == 'mirror_page') {
+            if (!empty($page_type[0]) && $page_type[0]->slug == 'mirror_page') {
                 $mirror = get_field('mirror_page_reference', $post->ID);
                 if (!empty(get_post($mirror))) {
                     $post = get_post($mirror);
@@ -373,7 +373,7 @@ function getManualFocus_data($layout)
         // La donnée de la vignette est saisie en backoffice
         if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
             $the_items['items'][$key] = getCustomPreview($item_wrapper['custom_content'], $layout);
-            // La donnée de la vignette correspond à un post sélectionné
+        // La donnée de la vignette correspond à un post sélectionné
         } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
             $item = $item_wrapper['existing_content'];
             $status = $item['content_selection']->post_status;

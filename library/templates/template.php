@@ -461,7 +461,9 @@ abstract class WoodyTheme_TemplateAbstract
     private function addPrepareSpotSwitcher()
     {
         $data = [];
-        $data['switch'] = get_field('field_5d47d14bdf764', $this->context['post']->ID) ;
+        if (!empty($this->context['post'])) {
+            $data['switch'] = get_field('field_5d47d14bdf764', $this->context['post']->ID) ;
+        }
         $template = $this->context['woody_components']['woody_widgets-prepare_onspot_switcher-tpl_01'];
         return Timber::compile($template, $data);
     }
