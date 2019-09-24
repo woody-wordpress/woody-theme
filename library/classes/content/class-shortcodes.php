@@ -36,7 +36,7 @@ class WoodyTheme_Shortcodes
         $tags = $tags ? explode(':', $tags) : '';
 
         // Search inside pages
-        $pages_response = apply_filters('woody_pages_search', ['query' => $query, 'size' => 30, 'tags' => $tags]);
+        $pages_response = apply_filters('woody_pages_search', ['query' => $query, 'size' => 30, 'tags_or' => $tags]);
 
         $result = [];
         $result['query'] = $query;
