@@ -2,14 +2,14 @@
 # This file is distributed under the .
 msgid ""
 msgstr ""
-"Project-Id-Version: Woody (Parent theme) 1.7.1\n"
+"Project-Id-Version: Woody (Parent theme) 1.7.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-09-16T17:30:12+02:00\n"
+"POT-Creation-Date: 2019-09-24T15:02:17+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.3.0\n"
 "X-Domain: woody-theme\n"
@@ -179,6 +179,7 @@ msgid "jours"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:107
+#: library/classes/content/class-polylang.php:250
 msgid "personne"
 msgstr ""
 
@@ -315,8 +316,9 @@ msgid "La page que vous recherchez est peut-être ici ?"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:154
-#: library/functions/03_woody_format_data.php:1107
-#: library/functions/03_woody_format_data.php:1227
+#: library/functions/03_woody_format_data.php:1203
+#: library/functions/03_woody_format_data.php:1325
+#: library/functions/03_woody_format_data.php:1379
 msgid "Lire la suite"
 msgstr ""
 
@@ -337,7 +339,7 @@ msgid "Réservable"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:159
-#: library/functions/03_woody_format_data.php:987
+#: library/functions/03_woody_format_data.php:1084
 msgid "Télécharger"
 msgstr ""
 
@@ -546,6 +548,98 @@ msgstr ""
 msgid "Retrouvez prochainement les horaires de marées pour ce mois !"
 msgstr ""
 
+#: library/classes/content/class-polylang.php:226
+msgid "Pour faire une demande de devis, veuillez choisir un séjour."
+msgstr ""
+
+#: library/classes/content/class-polylang.php:227
+msgid "Il semblerait qu'il n'y ait pas ou plus de séjours proposant une demande de devis disponibles sur le site"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:228
+msgid "Séjours et activités"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:229
+msgid "Retour à l'offre"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:230
+msgid "Récapitulatif"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:231
+msgid "30 secondes"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:232
+msgid "Informations"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:233
+msgid "Coordonnées"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:234
+msgid "Mon devis"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:235
+msgid "Votre séjour/journée"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:236
+msgid "Comprenant"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:237
+msgid "Gratuit"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:238
+msgid "Nombre de personnes"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:240
+msgid "* Champs obligatoires"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:241
+msgid "Nom/Prénom"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:242
+msgid "Raison sociale"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:243
+msgid "Email"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:244
+msgid "Téléphone"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:245
+msgid "Votre commentaire"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:246
+msgid "Valider ma demande de devis"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:247
+msgid "Mon panier"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:248
+msgid "TOTAL "
+msgstr ""
+
+#: library/classes/content/class-polylang.php:249
+msgid "Base de"
+msgstr ""
+
 #: library/templates/template-page.php:90
 msgid "Oups !"
 msgstr ""
@@ -558,6 +652,6 @@ msgstr ""
 msgid "La page que vous recherchez a peut-être été supprimée ou est temporairement indisponible."
 msgstr ""
 
-#: library/templates/template.php:353
+#: library/templates/template.php:395
 msgid "Nos suggestions"
 msgstr ""

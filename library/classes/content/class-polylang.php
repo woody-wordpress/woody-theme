@@ -212,14 +212,41 @@ class WoodyTheme_Polylang
         // Favorites
         __('Ajouter à mes favoris', 'woody-theme');
 
-         // Tides
-         __('Dates', 'woody-theme');
-         __('Basse mer', 'woody-theme');
-         __('Haute mer', 'woody-theme');
-         __('Matin', 'woody-theme');
-         __('Soir', 'woody-theme');
-         __('Heure', 'woody-theme');
-         __('Coef', 'woody-theme');
-         __('Retrouvez prochainement les horaires de marées pour ce mois !', 'woody-theme');
+        // Tides
+        __('Dates', 'woody-theme');
+        __('Basse mer', 'woody-theme');
+        __('Haute mer', 'woody-theme');
+        __('Matin', 'woody-theme');
+        __('Soir', 'woody-theme');
+        __('Heure', 'woody-theme');
+        __('Coef', 'woody-theme');
+        __('Retrouvez prochainement les horaires de marées pour ce mois !', 'woody-theme');
+
+        // Group quotation
+        __('Pour faire une demande de devis, veuillez choisir un séjour.', 'woody-theme');
+        __("Il semblerait qu'il n'y ait pas ou plus de séjours proposant une demande de devis disponibles sur le site", "woody-theme");
+        __("Séjours et activités", "woody-theme");
+        __('Retour à l\'offre', 'woody-theme');
+        __('Récapitulatif', 'woody-theme');
+        __('30 secondes', 'woody-theme');
+        __('Informations', 'woody-theme');
+        __('Coordonnées', 'woody-theme');
+        __("Mon devis", "woody-theme");
+        __("Votre séjour/journée", "woody-theme");
+        __('Comprenant', 'woody-theme');
+        __('Gratuit', 'woody-theme');
+        __('Nombre de personnes', 'woody-theme');
+        __("Language de la/des visite(s)");
+        __("* Champs obligatoires", "woody-theme");
+        __("Nom/Prénom", "woody-theme");
+        __("Raison sociale", "woody-theme");
+        __("Email", "woody-theme");
+        __("Téléphone", "woody-theme");
+        __("Votre commentaire", "woody-theme");
+        __("Valider ma demande de devis", "woody-theme");
+        __("Mon panier", "woody-theme");
+        __("TOTAL ", "woody-theme");
+        __("Base de", "woody-theme");
+        __("personne", "woody-theme");
     }
 }

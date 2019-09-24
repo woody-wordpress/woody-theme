@@ -4,27 +4,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.6.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2019-09-16T17:30:12+02:00\n"
-"PO-Revision-Date: 2019-09-17 16:49+0200\n"
+"POT-Creation-Date: 2019-09-24T15:02:17+02:00\n"
+"PO-Revision-Date: 2019-09-24 15:22+0200\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.3\n"
 "X-Domain: woody-theme\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Theme Name of the theme
-#, fuzzy
-#| msgid "Woody (Thème parent)"
 msgid "Woody (Parent theme)"
 msgstr "Woody (Thème parent)"
 
 #. Description of the theme
-#, fuzzy
-#| msgid "Theme parent des thèmes de Raccourci Agency"
 msgid "Parent theme of the Raccourci Agency themes"
 msgstr "Theme parent des thèmes de Raccourci Agency"
 
@@ -185,6 +181,7 @@ msgid "jours"
 msgstr "días"
 
 #: library/classes/content/class-polylang.php:107
+#: library/classes/content/class-polylang.php:250
 msgid "personne"
 msgstr "persona"
 
@@ -323,8 +320,9 @@ msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "¿La página que buscas puede que esté aquí?"
 
 #: library/classes/content/class-polylang.php:154
-#: library/functions/03_woody_format_data.php:1107
-#: library/functions/03_woody_format_data.php:1227
+#: library/functions/03_woody_format_data.php:1203
+#: library/functions/03_woody_format_data.php:1325
+#: library/functions/03_woody_format_data.php:1379
 msgid "Lire la suite"
 msgstr "Seguir leyendo"
 
@@ -345,7 +343,7 @@ msgid "Réservable"
 msgstr "Reservable"
 
 #: library/classes/content/class-polylang.php:159
-#: library/functions/03_woody_format_data.php:987
+#: library/functions/03_woody_format_data.php:1084
 msgid "Télécharger"
 msgstr "Descargar"
 
@@ -554,6 +552,102 @@ msgstr "Coef"
 msgid "Retrouvez prochainement les horaires de marées pour ce mois !"
 msgstr "Encuentre pronto los horarios de marea para este mes!"
 
+#: library/classes/content/class-polylang.php:226
+msgid "Pour faire une demande de devis, veuillez choisir un séjour."
+msgstr "Para solicitar un presupuesto, por favor, elija una estancia."
+
+#: library/classes/content/class-polylang.php:227
+msgid ""
+"Il semblerait qu'il n'y ait pas ou plus de séjours proposant une demande de "
+"devis disponibles sur le site"
+msgstr ""
+"Parece que no hay ninguna o ninguna estancia que ofrezca una solicitud de "
+"presupuesto disponible en el sitio"
+
+#: library/classes/content/class-polylang.php:228
+msgid "Séjours et activités"
+msgstr "Estancias y actividades"
+
+#: library/classes/content/class-polylang.php:229
+msgid "Retour à l'offre"
+msgstr "Volver a la oferta"
+
+#: library/classes/content/class-polylang.php:230
+msgid "Récapitulatif"
+msgstr "Resumen"
+
+#: library/classes/content/class-polylang.php:231
+msgid "30 secondes"
+msgstr "30 segundos"
+
+#: library/classes/content/class-polylang.php:232
+msgid "Informations"
+msgstr "Informaciónes"
+
+#: library/classes/content/class-polylang.php:233
+msgid "Coordonnées"
+msgstr "Información de contacto"
+
+#: library/classes/content/class-polylang.php:234
+msgid "Mon devis"
+msgstr "Mi cita"
+
+#: library/classes/content/class-polylang.php:235
+msgid "Votre séjour/journée"
+msgstr "Su estancia/día"
+
+#: library/classes/content/class-polylang.php:236
+msgid "Comprenant"
+msgstr "Incluyendo"
+
+#: library/classes/content/class-polylang.php:237
+msgid "Gratuit"
+msgstr "Gratuito"
+
+#: library/classes/content/class-polylang.php:238
+msgid "Nombre de personnes"
+msgstr "Número de personas"
+
+#: library/classes/content/class-polylang.php:240
+msgid "* Champs obligatoires"
+msgstr "Los campos marcados con * son obligatorios"
+
+#: library/classes/content/class-polylang.php:241
+msgid "Nom/Prénom"
+msgstr "Nombre/Nombre"
+
+#: library/classes/content/class-polylang.php:242
+msgid "Raison sociale"
+msgstr "Nombre de la empresa"
+
+#: library/classes/content/class-polylang.php:243
+msgid "Email"
+msgstr "Email"
+
+#: library/classes/content/class-polylang.php:244
+msgid "Téléphone"
+msgstr "Número de teléfono"
+
+#: library/classes/content/class-polylang.php:245
+msgid "Votre commentaire"
+msgstr "Su comentario"
+
+#: library/classes/content/class-polylang.php:246
+msgid "Valider ma demande de devis"
+msgstr "Validar mi solicitud de presupuesto"
+
+#: library/classes/content/class-polylang.php:247
+msgid "Mon panier"
+msgstr "Mi cesta"
+
+#: library/classes/content/class-polylang.php:248
+msgid "TOTAL "
+msgstr "TOTAL "
+
+#: library/classes/content/class-polylang.php:249
+msgid "Base de"
+msgstr "Base de la"
+
 #: library/templates/template-page.php:90
 msgid "Oups !"
 msgstr "¡Vaya!"
@@ -569,7 +663,7 @@ msgid ""
 msgstr ""
 "La página que buscas ha sido eliminada o está temporalmente indisponible."
 
-#: library/templates/template.php:353
+#: library/templates/template.php:395
 msgid "Nos suggestions"
 msgstr "Nuestras sugerencias"
 
@@ -578,6 +672,3 @@ msgstr "Nuestras sugerencias"
 
 #~ msgid "Nouvelle Aquitaine"
 #~ msgstr "Nueva Aquitania"
-
-#~ msgid "Dordogne"
-#~ msgstr "Dordoña"
