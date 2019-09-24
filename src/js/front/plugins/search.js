@@ -15,6 +15,9 @@ $('.woody-component-esSearch').each(function() {
 
     function getCheckedTags() {
 
+        // Reset query with new value
+        query = 'query=' + $input.val();
+
         // Get every .search-tag:checked to add to the query
         var $activeTags = $this.find(('.search-tags-container .search-tag:checked'));
         if ($activeTags.length) {
@@ -70,8 +73,8 @@ $('.woody-component-esSearch').each(function() {
                 $loader.addClass('hide');
                 $('html, body').animate({ scrollTop: 0 }, 100, 'linear');
             },
-            error: function() {
-                console.error('search aborted');
+            error: function(error) {
+                console.error('search aborted cause of : ' + error);
             },
         });
     }
@@ -99,7 +102,7 @@ $('.woody-component-esSearch').each(function() {
     $input.keyup(debounce(function() {
         getCheckedTags();
         ajax_search();
-    }, 300));
+    }, 1000));
 
     $tags.click(debounce(function() {
         getCheckedTags();
