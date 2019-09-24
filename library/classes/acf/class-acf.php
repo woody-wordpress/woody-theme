@@ -415,6 +415,14 @@ class WoodyTheme_ACF
 
     public function sectionContentLoadField($field)
     {
+        if (!in_array('topics', WOODY_OPTIONS)) {
+            // On retire le bloc de mise en avant de topic si le plugin n'est pas activé
+            unset($field['layouts']['layout_5d7912723303c']);
+        }
+        if (!in_array('groups', WOODY_OPTIONS)) {
+            // On retire le bloc de mise en avant de composant de séjour si le plugin n'est pas activé
+            unset($field['layouts']['5d148175d0510']);
+        }
         if (!in_array('weather', WOODY_OPTIONS)) {
             // On retire l'option bloc météo si le plugin n'est pas activé
             unset($field['layouts']['layout_5c1b579ac3a87']);
