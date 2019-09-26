@@ -76,6 +76,10 @@ function getComponentItem($layout, $context)
             $layout['items'] = getSemanticViewData($layout);
             $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
+        case 'audio_player':
+            $layout['woody_tpl'] = 'blocks-audio-tpl_01';
+            $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            break;
         default:
             $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
     }
