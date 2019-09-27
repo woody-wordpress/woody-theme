@@ -1,8 +1,7 @@
 {
     "key": "group_5d5bbac79ab7e",
     "title": "Galerie de photos interactive",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5d5bbac7a11c2",
             "label": "Contenu",
             "name": "",
@@ -20,7 +19,7 @@
         },
         {
             "key": "field_5d710ea761436",
-            "label": "image + texte",
+            "label": "Contenu de la galerie",
             "name": "interactive_gallery_items",
             "type": "repeater",
             "instructions": "",
@@ -36,10 +35,9 @@
             "max": 0,
             "layout": "block",
             "button_label": "",
-            "sub_fields": [
-                {
+            "sub_fields": [{
                     "key": "field_5d5bbaea1e7fe",
-                    "label": "Texte mis en avant",
+                    "label": "Texte",
                     "name": "interactive_gallery_text",
                     "type": "wysiwyg",
                     "instructions": "",
@@ -58,7 +56,7 @@
                 },
                 {
                     "key": "field_5d5bbac7a125a",
-                    "label": "Photo de la galerie",
+                    "label": "Photo",
                     "name": "interactive_gallery_photo",
                     "type": "image",
                     "instructions": "",
@@ -79,6 +77,27 @@
                     "max_height": "",
                     "max_size": "",
                     "mime_types": ""
+                },
+                {
+                    "key": "field_5d8c73da2db3e",
+                    "label": "Player audio",
+                    "name": "interactive_gallery_audio_player",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_5d8c62865c326"
+                    ],
+                    "display": "group",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
                 }
             ]
         },
@@ -252,13 +271,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -268,5 +285,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Liste de photos)",
-    "modified": 1568102255
+    "modified": 1569486177
 }

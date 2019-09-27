@@ -187,6 +187,35 @@
                         "min": "",
                         "max": ""
                     },
+                    "layout_5d8c6998da3d4": {
+                        "key": "layout_5d8c6998da3d4",
+                        "name": "audio_player",
+                        "label": "Player audio",
+                        "display": "block",
+                        "sub_fields": [{
+                            "key": "field_5d8c69abda3d5",
+                            "label": "Player audio",
+                            "name": "audio_player",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5d8c62865c326"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
+                        "min": "",
+                        "max": ""
+                    },
                     "5b0d21eb9d80a": {
                         "key": "5b0d21eb9d80a",
                         "name": "manual_focus",
@@ -1075,5 +1104,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1569333481
+    "modified": 1569483619
 }
