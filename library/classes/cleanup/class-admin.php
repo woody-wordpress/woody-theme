@@ -17,7 +17,6 @@ class WoodyTheme_Cleanup_Admin
     protected function registerHooks()
     {
         if (is_user_logged_in()) {
-            add_filter('wpseo_metabox_prio', [$this, 'yoastMoveMetaBoxBottom']);
             add_action('init', [$this, 'removePagesEditor']);
             add_action('admin_menu', [$this, 'removeAdminMenu']);
             add_action('admin_menu', [$this, 'customMenusPage']);
@@ -143,15 +142,6 @@ class WoodyTheme_Cleanup_Admin
                 }
             }
         }
-    }
-
-    /**
-     * Benoit Bouchaud
-     * On déplace la metabox Yoast en bas de page
-     */
-    public function yoastMoveMetaBoxBottom()
-    {
-        return 'low';
     }
 
     /**
