@@ -517,7 +517,7 @@ class WoodyTheme_Roles
             'woody_process_field_check' => [
                 'administrator' => true,
                 'editor' => false,
-                'contributor' => false,
+                'contributor' => true,
                 'translator' => false,
             ],
             'woody_process_medias_sync' => [
