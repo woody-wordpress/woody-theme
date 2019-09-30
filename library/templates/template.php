@@ -58,6 +58,7 @@ abstract class WoodyTheme_TemplateAbstract
         $data['globals']['sheet_id'] = $this->context['sheet_id'];
         $data['globals']['woody_options_pages'] = $this->getWoodyOptionsPagesValues();
 
+        // wd(WOODY_OPTIONS);
         return $data;
     }
 
@@ -68,6 +69,7 @@ abstract class WoodyTheme_TemplateAbstract
         $return['favorites_url'] = get_field('favorites_page_url', 'options');
         $return['search_url'] = get_field('es_search_page_url', 'options');
         $return['weather_url'] = get_field('weather_page_url', 'options');
+        $return['disqus_instance_url'] = get_field('disqus_instance_url', 'options');
 
         return $return;
     }

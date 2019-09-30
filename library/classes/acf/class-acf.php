@@ -83,11 +83,14 @@ class WoodyTheme_ACF
 
     public function loadDisqusField($field)
     {
-        if (!in_array()) {
-            unset($field);
-        } else {
-            return $field;
-        }
+        //TODO: Décommenter les lignes lorsque l'ERP nous enverra l'option Disqus
+        // if (!in_array('disqus', WOODY_OPTIONS)) {
+        //     unset($field);
+        // } else {
+        //     return $field;
+        // }
+
+        return $field;
     }
 
     /**
@@ -438,6 +441,12 @@ class WoodyTheme_ACF
             // On retire l'option bloc météo si le plugin n'est pas activé
             unset($field['layouts']['layout_5c1b579ac3a87']);
         }
+        //TODO: Décommenter lorsqu'on recevra l'option disqus depuis l'ERP
+        // if (!in_array('disqus', WOODY_OPTIONS)) {
+        //     // On retire l'option bloc commentaires si le plugin n'est pas activé
+        //     unset($field['layouts']['layout_']);
+        // }
+
         return $field;
     }
 
