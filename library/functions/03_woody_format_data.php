@@ -422,7 +422,7 @@ function getManualFocus_data($layout)
         }
     }
 
-    if ($layout['focused_sort'] == 'random') {
+    if (!empty($the_items['items']) && is_array($the_items['items']) && $layout['focused_sort'] == 'random') {
         shuffle($the_items['items']);
     }
 
