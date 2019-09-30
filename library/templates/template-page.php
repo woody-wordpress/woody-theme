@@ -194,10 +194,11 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     preg_match_all('@src="([^"]+)"@', $page_hero['page_heading_social_movie'], $result);
                     if (!empty($result[1]) && !empty($result[1][0])) {
                         $iframe_url = $result[1][0];
-                    }
-                    if (strpos($iframe_url, 'youtube') != false) {
-                        $yt_params_url = $iframe_url . '?&autoplay=0&rel=0';
-                        $page_hero['page_heading_social_movie'] = str_replace($iframe_url, $yt_params_url, $page_hero['page_heading_social_movie']);
+
+                        if (strpos($iframe_url, 'youtube') != false) {
+                            $yt_params_url = $iframe_url . '?&autoplay=0&rel=0';
+                            $page_hero['page_heading_social_movie'] = str_replace($iframe_url, $yt_params_url, $page_hero['page_heading_social_movie']);
+                        }
                     }
                 }
 
