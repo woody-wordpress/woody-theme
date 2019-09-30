@@ -5,6 +5,8 @@ $('body.themes-php').each(function() {
 });
 
 // Bugfix  Enhanced media buttons
-window.wp.media.view.l10n.cancelSelection = window.wp.media.view.l10n.cancel;
-window.wp.media.view.l10n.trashSelected = window.wp.media.view.l10n.trash;
-window.wp.media.view.l10n.deleteSelected = window.wp.media.view.l10n.deletePermanently;
+if (typeof window.wp.media != 'undefined') {
+    window.wp.media.view.l10n.cancelSelection = window.wp.media.view.l10n.cancel;
+    window.wp.media.view.l10n.trashSelected = window.wp.media.view.l10n.trash;
+    window.wp.media.view.l10n.deleteSelected = window.wp.media.view.l10n.deletePermanently;
+}
