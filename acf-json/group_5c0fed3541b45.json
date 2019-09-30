@@ -210,6 +210,38 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "field_5d91c4559736e",
+            "label": "Disqus",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5d91c4689736f",
+            "label": "Url de l'instance Disqus",
+            "name": "disqus_instance_url",
+            "type": "url",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "https:\/\/example.disqus.com"
         }
     ],
     "location": [
@@ -229,5 +261,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1562662647
+    "modified": 1569834956
 }

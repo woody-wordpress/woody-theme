@@ -65,6 +65,8 @@ class WoodyTheme_ACF
 
         add_filter('acf/load_field/name=page_heading_tags', [$this, 'listAllPageTerms'], 10, 3);
 
+        add_filter('acf/load_field/key=field_5d91c4559736e', [$this, 'loadDisqusField'], 10, 3);
+
         // Custom Filter
         add_filter('woody_get_field_option', [$this, 'woodyGetFieldOption'], 10, 3);
     }
@@ -77,6 +79,15 @@ class WoodyTheme_ACF
             set_transient('woody_get_field_option', $woody_get_field_option);
         }
         return $woody_get_field_option[$field_name];
+    }
+
+    public function loadDisqusField($field)
+    {
+        if (!in_array()) {
+            unset($field);
+        } else {
+            return $field;
+        }
     }
 
     /**
