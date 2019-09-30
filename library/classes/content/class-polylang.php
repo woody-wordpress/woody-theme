@@ -248,5 +248,8 @@ class WoodyTheme_Polylang
         __("TOTAL ", "woody-theme");
         __("Base de", "woody-theme");
         __("personne", "woody-theme");
+
+        // Divers
+        __('Publié le', 'woody-theme');
     }
 }
