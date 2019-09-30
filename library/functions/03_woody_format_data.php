@@ -539,6 +539,7 @@ function formatFocusesData($layout, $current_post, $twigPaths)
 {
     $return = '';
     $the_items = [];
+
     if ($layout['acf_fc_layout'] == 'manual_focus' || $layout['acf_fc_layout'] == 'focus_trip_components') {
         $the_items = getManualFocus_data($layout);
     } elseif ($layout['acf_fc_layout'] == 'auto_focus') {
@@ -548,7 +549,8 @@ function formatFocusesData($layout, $current_post, $twigPaths)
     } elseif ($layout['acf_fc_layout'] == 'auto_focus_topics') {
         $the_items = getAutoFocusTopicsData($layout);
     }
-    if (!empty($the_items)) {
+
+    if (!empty($the_items) && !empty($the_items['items']) && is_array($the_items['items'])) {
         foreach ($the_items['items'] as $item_key => $item) {
             if (!empty($item['description'])) {
                 $the_items['items'][$item_key]['description'] = str_replace(['[', ']'], '', $item['description']);
