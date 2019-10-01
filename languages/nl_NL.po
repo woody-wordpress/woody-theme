@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.6.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2019-09-24T15:02:17+02:00\n"
-"PO-Revision-Date: 2019-09-24 15:39+0200\n"
+"POT-Creation-Date: 2019-10-01T10:58:53+02:00\n"
+"PO-Revision-Date: 2019-10-01 11:06+0200\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-Domain: woody-theme\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -318,9 +318,9 @@ msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "Misschien is de pagina due u zoekt hier?"
 
 #: library/classes/content/class-polylang.php:154
-#: library/functions/03_woody_format_data.php:1203
-#: library/functions/03_woody_format_data.php:1325
-#: library/functions/03_woody_format_data.php:1379
+#: library/functions/03_woody_format_data.php:1213
+#: library/functions/03_woody_format_data.php:1335
+#: library/functions/03_woody_format_data.php:1389
 msgid "Lire la suite"
 msgstr "Lees meer over"
 
@@ -341,7 +341,7 @@ msgid "Réservable"
 msgstr "Reserveerbaar"
 
 #: library/classes/content/class-polylang.php:159
-#: library/functions/03_woody_format_data.php:1084
+#: library/functions/03_woody_format_data.php:1094
 msgid "Télécharger"
 msgstr "Downloaden"
 
@@ -560,7 +560,7 @@ msgid ""
 "devis disponibles sur le site"
 msgstr ""
 "Het lijkt erop dat er geen of geen verblijven meer zijn die een offerte-"
-"aanvraag op de site beschikbaar stellen."
+"aanvraag op de site beschikbaar stellen"
 
 #: library/classes/content/class-polylang.php:228
 msgid "Séjours et activités"
@@ -620,7 +620,7 @@ msgstr "Bedrijfsnaam"
 
 #: library/classes/content/class-polylang.php:243
 msgid "Email"
-msgstr "glazuur"
+msgstr "Email"
 
 #: library/classes/content/class-polylang.php:244
 msgid "Téléphone"
@@ -646,6 +646,26 @@ msgstr "TOTAAL "
 msgid "Base de"
 msgstr "Basis"
 
+#: library/classes/content/class-polylang.php:253
+msgid "Publié le"
+msgstr "Gepubliceerd op"
+
+#: library/classes/content/class-polylang.php:256
+msgid "Merci d'activer le javascript pour afficher"
+msgstr "Schakel javascript in om het volgende weer te geven"
+
+#: library/classes/content/class-polylang.php:257
+msgid "le bloc de commentaires Disqus"
+msgstr "het commentaarblok voor Disqus"
+
+#: library/classes/content/class-polylang.php:258
+msgid ""
+"Une erreur est survenue lors de l'affichage des commentaires. Merci de "
+"contacter votre administrateur"
+msgstr ""
+"Er is een fout opgetreden bij het weergeven van opmerkingen. Neem contact "
+"op met uw beheerder"
+
 #: library/templates/template-page.php:90
 msgid "Oups !"
 msgstr "Oeps!"
@@ -662,7 +682,7 @@ msgstr ""
 "De pagina die u zoekt, is misschien verwijderd of is tijdelijk niet "
 "beschikbaar."
 
-#: library/templates/template.php:395
+#: library/templates/template.php:396
 msgid "Nos suggestions"
 msgstr "Onze suggesties"
 

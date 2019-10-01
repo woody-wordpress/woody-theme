@@ -2,14 +2,14 @@
 # This file is distributed under the .
 msgid ""
 msgstr ""
-"Project-Id-Version: Woody (Parent theme) 1.7.10\n"
+"Project-Id-Version: Woody (Parent theme) 1.8.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-09-24T15:02:17+02:00\n"
+"POT-Creation-Date: 2019-10-01T10:58:53+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.3.0\n"
 "X-Domain: woody-theme\n"
@@ -316,9 +316,9 @@ msgid "La page que vous recherchez est peut-être ici ?"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:154
-#: library/functions/03_woody_format_data.php:1203
-#: library/functions/03_woody_format_data.php:1325
-#: library/functions/03_woody_format_data.php:1379
+#: library/functions/03_woody_format_data.php:1213
+#: library/functions/03_woody_format_data.php:1335
+#: library/functions/03_woody_format_data.php:1389
 msgid "Lire la suite"
 msgstr ""
 
@@ -339,7 +339,7 @@ msgid "Réservable"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:159
-#: library/functions/03_woody_format_data.php:1084
+#: library/functions/03_woody_format_data.php:1094
 msgid "Télécharger"
 msgstr ""
 
@@ -640,6 +640,22 @@ msgstr ""
 msgid "Base de"
 msgstr ""
 
+#: library/classes/content/class-polylang.php:253
+msgid "Publié le"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:256
+msgid "Merci d'activer le javascript pour afficher"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:257
+msgid "le bloc de commentaires Disqus"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:258
+msgid "Une erreur est survenue lors de l'affichage des commentaires. Merci de contacter votre administrateur"
+msgstr ""
+
 #: library/templates/template-page.php:90
 msgid "Oups !"
 msgstr ""
@@ -652,6 +668,6 @@ msgstr ""
 msgid "La page que vous recherchez a peut-être été supprimée ou est temporairement indisponible."
 msgstr ""
 
-#: library/templates/template.php:395
+#: library/templates/template.php:396
 msgid "Nos suggestions"
 msgstr ""
