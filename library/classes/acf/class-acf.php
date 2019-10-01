@@ -65,6 +65,8 @@ class WoodyTheme_ACF
 
         add_filter('acf/load_field/name=page_heading_tags', [$this, 'listAllPageTerms'], 10, 3);
 
+        add_filter('acf/load_field/key=field_5d91c4559736e', [$this, 'loadDisqusField'], 10, 3);
+
         // Custom Filter
         add_filter('woody_get_field_option', [$this, 'woodyGetFieldOption'], 10, 3);
     }
@@ -427,7 +429,24 @@ class WoodyTheme_ACF
             // On retire l'option bloc météo si le plugin n'est pas activé
             unset($field['layouts']['layout_5c1b579ac3a87']);
         }
+        if (!in_array('disqus', WOODY_OPTIONS)) {
+            // On retire l'option bloc commentaires si le plugin n'est pas activé
+            unset($field['layouts']['layout_5d91d7a234ca6']);
+        }
+
         return $field;
+    }
+
+    /**
+     * Suppression du champ de paramètres Disqus si le plugin n'est pas activé
+     */
+    public function loadDisqusField($field)
+    {
+        if (!in_array('disqus', WOODY_OPTIONS)) {
+            unset($field);
+        } else {
+            return $field;
+        }
     }
 
     public function getPageTypeTerms()

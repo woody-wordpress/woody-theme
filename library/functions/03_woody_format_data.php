@@ -80,6 +80,10 @@ function getComponentItem($layout, $context)
             $layout['woody_tpl'] = 'blocks-audio-tpl_01';
             $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
+        case 'disqus_block':
+            $layout['woody_tpl'] = 'blocks-disqus-tpl_01';
+            $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            break;
         default:
             $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
     }

@@ -170,6 +170,10 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     $page_teaser['post_coordinates'] = (!empty(getAcfGroupFields('group_5b3635da6529e', $this->context['post']))) ? getAcfGroupFields('group_5b3635da6529e', $this->context['post']) : '';
                 }
 
+                if (!empty($page_teaser['page_teaser_display_created'])) {
+                    $page_teaser['created'] = get_the_date();
+                }
+
                 // Unset breadcrumb if checked in hide page zones options
                 if (!empty($this->context['hide_page_zones']) && in_array('breadcrumb', $this->context['hide_page_zones'])) {
                     unset($page_teaser['breadcrumb']);

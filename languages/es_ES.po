@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.6.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2019-09-24T15:02:17+02:00\n"
-"PO-Revision-Date: 2019-09-24 15:22+0200\n"
+"POT-Creation-Date: 2019-10-01T10:58:53+02:00\n"
+"PO-Revision-Date: 2019-10-01 11:04+0200\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-Domain: woody-theme\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -320,9 +320,9 @@ msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "¿La página que buscas puede que esté aquí?"
 
 #: library/classes/content/class-polylang.php:154
-#: library/functions/03_woody_format_data.php:1203
-#: library/functions/03_woody_format_data.php:1325
-#: library/functions/03_woody_format_data.php:1379
+#: library/functions/03_woody_format_data.php:1213
+#: library/functions/03_woody_format_data.php:1335
+#: library/functions/03_woody_format_data.php:1389
 msgid "Lire la suite"
 msgstr "Seguir leyendo"
 
@@ -343,7 +343,7 @@ msgid "Réservable"
 msgstr "Reservable"
 
 #: library/classes/content/class-polylang.php:159
-#: library/functions/03_woody_format_data.php:1084
+#: library/functions/03_woody_format_data.php:1094
 msgid "Télécharger"
 msgstr "Descargar"
 
@@ -648,6 +648,26 @@ msgstr "TOTAL "
 msgid "Base de"
 msgstr "Base de la"
 
+#: library/classes/content/class-polylang.php:253
+msgid "Publié le"
+msgstr "Publicado el"
+
+#: library/classes/content/class-polylang.php:256
+msgid "Merci d'activer le javascript pour afficher"
+msgstr "Por favor, habilite javascript para mostrar"
+
+#: library/classes/content/class-polylang.php:257
+msgid "le bloc de commentaires Disqus"
+msgstr "el bloque de comentarios Disqus"
+
+#: library/classes/content/class-polylang.php:258
+msgid ""
+"Une erreur est survenue lors de l'affichage des commentaires. Merci de "
+"contacter votre administrateur"
+msgstr ""
+"Se ha producido un error al visualizar comentarios. Póngase en contacto con "
+"su administrador"
+
 #: library/templates/template-page.php:90
 msgid "Oups !"
 msgstr "¡Vaya!"
@@ -663,7 +683,7 @@ msgid ""
 msgstr ""
 "La página que buscas ha sido eliminada o está temporalmente indisponible."
 
-#: library/templates/template.php:395
+#: library/templates/template.php:396
 msgid "Nos suggestions"
 msgstr "Nuestras sugerencias"
 
