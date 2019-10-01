@@ -170,6 +170,10 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     $page_teaser['post_coordinates'] = (!empty(getAcfGroupFields('group_5b3635da6529e', $this->context['post']))) ? getAcfGroupFields('group_5b3635da6529e', $this->context['post']) : '';
                 }
 
+                if (!empty($page_teaser['page_teaser_display_created'])) {
+                    $page_teaser['created'] = get_the_date();
+                }
+
                 // Unset breadcrumb if checked in hide page zones options
                 if (!empty($this->context['hide_page_zones']) && in_array('breadcrumb', $this->context['hide_page_zones'])) {
                     unset($page_teaser['breadcrumb']);
@@ -194,10 +198,11 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     preg_match_all('@src="([^"]+)"@', $page_hero['page_heading_social_movie'], $result);
                     if (!empty($result[1]) && !empty($result[1][0])) {
                         $iframe_url = $result[1][0];
-                    }
-                    if (strpos($iframe_url, 'youtube') != false) {
-                        $yt_params_url = $iframe_url . '?&autoplay=0&rel=0';
-                        $page_hero['page_heading_social_movie'] = str_replace($iframe_url, $yt_params_url, $page_hero['page_heading_social_movie']);
+
+                        if (strpos($iframe_url, 'youtube') != false) {
+                            $yt_params_url = $iframe_url . '?&autoplay=0&rel=0';
+                            $page_hero['page_heading_social_movie'] = str_replace($iframe_url, $yt_params_url, $page_hero['page_heading_social_movie']);
+                        }
                     }
                 }
 
