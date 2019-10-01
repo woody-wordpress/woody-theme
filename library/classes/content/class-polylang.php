@@ -251,5 +251,10 @@ class WoodyTheme_Polylang
 
         // Divers
         __('Publié le', 'woody-theme');
+
+        // Disqus
+        __('Merci d\'activer le javascript pour afficher', 'woody-theme');
+        __('le bloc de commentaires Disqus', 'woody-theme');
+        __('Une erreur est survenue lors de l\'affichage des commentaires. Merci de contacter votre administrateur', 'woody-theme');
     }
 }
