@@ -58,7 +58,6 @@ abstract class WoodyTheme_TemplateAbstract
         $data['globals']['sheet_id'] = $this->context['sheet_id'];
         $data['globals']['woody_options_pages'] = $this->getWoodyOptionsPagesValues();
 
-        // wd(WOODY_OPTIONS);
         return $data;
     }
 

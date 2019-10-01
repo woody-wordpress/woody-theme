@@ -248,5 +248,13 @@ class WoodyTheme_Polylang
         __("TOTAL ", "woody-theme");
         __("Base de", "woody-theme");
         __("personne", "woody-theme");
+
+        // Divers
+        __('Publié le', 'woody-theme');
+
+        // Disqus
+        __('Merci d\'activer le javascript pour afficher', 'woody-theme');
+        __('le bloc de commentaires Disqus', 'woody-theme');
+        __('Une erreur est survenue lors de l\'affichage des commentaires. Merci de contacter votre administrateur', 'woody-theme');
     }
 }
