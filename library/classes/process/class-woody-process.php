@@ -3,6 +3,7 @@
 namespace WoodyProcess\Process;
 
 use WoodyProcess\Tools\WoodyTheme_WoodyProcessTools;
+use WoodyProcess\Tools\WoodyTheme_WoodyCompilers;
 
 /**
  * Dispatch Woody data processing
@@ -15,12 +16,13 @@ use WoodyProcess\Tools\WoodyTheme_WoodyProcessTools;
 
 class WoodyTheme_WoodyProcess
 {
-
     protected $tools;
+    protected $compilers;
 
     protected function __construct()
     {
         $this->tools = new WoodyTheme_WoodyProcessTools;
+        $this->compilers = new WoodyTheme_WoodyCompilers;
     }
     /**
      *
@@ -43,13 +45,13 @@ class WoodyTheme_WoodyProcess
             case 'auto_focus_sheets':
             case 'focus_trip_components':
             case 'auto_focus_topics':
-                $return = formatFocusesData($layout, $context['post'], $context['woody_components']);
+                $return = $this->compilers->formatFocusesData($layout, $context['post'], $context['woody_components']);
                 break;
             case 'geo_map':
-                $return = formatGeomapData($layout, $context['woody_components']);
+                $return = $this->compilers->formatGeomapData($layout, $context['woody_components']);
                 break;
             case 'content_list':
-                $return = formatFullContentList($layout, $context['post'], $context['woody_components']);
+                $return = $this->compilers->formatFullContentList($layout, $context['post'], $context['woody_components']);
                 break;
             case 'weather':
                 $vars['account'] = $layout['weather_account'];
@@ -133,7 +135,7 @@ class WoodyTheme_WoodyProcess
      * @return   scope - Un DOM Html
      *
      */
-    function processWoodySubLayouts($wrapper = [], $gridTplField, $uniqIid_prefix = '', $context)
+    public function processWoodySubLayouts($wrapper = [], $gridTplField, $uniqIid_prefix = '', $context)
     {
         $woodyTwigsPaths = getWoodyTwigPaths();
         foreach ($wrapper as $grid_key => $grid) {
