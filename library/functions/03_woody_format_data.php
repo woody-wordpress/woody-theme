@@ -611,6 +611,8 @@ function updateListFilterTax($the_list, $filter_index, $param)
     return $the_list;
 }
 
+// Pause café
+
 function getMinMax($post_data, $data_key)
 {
     $minmax = [
@@ -780,7 +782,7 @@ function formatFullContentList($layout, $current_post, $twigPaths)
     }
 
     if (!empty($layout['the_list_pager']) && $layout['the_list_pager']['list_pager_type'] != 'none') {
-        $the_list['pager'] = formatListPager($layout['the_list_pager'], $max_num_pages, $the_list['uniqid'], $url_parameters['filters']);
+        $the_list['pager'] = formatListPager($max_num_pages, $the_list['uniqid'], $url_parameters['filters']);
         $the_list['pager_position'] = $layout['the_list_pager']['list_pager_position'];
     }
 
@@ -986,28 +988,6 @@ function formatGeomapData($layout, $twigPaths)
 
                     // Route Fields aren't supposed to have markers.
                     if ($feature['geometry']['type'] == "Point") {
-                        // TODO: choose if geojson files can be used to add markers to the map
-                        // Code below add marker to Map
-                        // $lng = !empty($feature['geometry']['coordinates'][0]) ? (string)$feature['geometry']['coordinates'][0] : "0" ;
-                        // $lat = !empty($feature['geometry']['coordinates'][1]) ? (string)$feature['geometry']['coordinates'][1] : "0" ;
-                        // $marker = [
-                        //     'bo_marker_title' => '',
-                        //     'description' => '',
-                        //     'img' => false,
-                        //     'link' => '',
-                        //     'map_position' => [
-                        //         'address' => $feature['properties']['name'],
-                        //         'lat' => $lat,
-                        //         'lng' => $lng
-                        //     ],
-                        //     'marker_color' => 'primary',
-                        //     'marker_style' => 'pin',
-                        //     'marker_woody_icon' => '',
-                        //     'title' => ''
-                        // ];
-                        // $layout['markers'][] = $marker;
-
-                        // Remove markers from map
                         unset($layout['routes'][$key]['features'][$f_key]);
                     }
                 }
@@ -1522,13 +1502,13 @@ function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array(
  * @return   scope - Un DOM Html
  *
  */
-function nestedGridsComponents($scope = [], $gridTplField, $uniqIid_prefix = '', $context)
+function nestedGridsComponents($wrapper = [], $gridTplField, $uniqIid_prefix = '', $context)
 {
     $woodyTwigsPaths = getWoodyTwigPaths();
-    foreach ($scope as $grid_key => $grid) {
+    foreach ($wrapper as $grid_key => $grid) {
         $grid_content = [];
         if (!empty($uniqIid_prefix) && is_numeric($grid_key)) {
-            $scope[$grid_key]['el_id'] = $uniqIid_prefix . '-' . uniqid();
+            $wrapper[$grid_key]['el_id'] = $uniqIid_prefix . '-' . uniqid();
         }
 
         // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
@@ -1538,15 +1518,15 @@ function nestedGridsComponents($scope = [], $gridTplField, $uniqIid_prefix = '',
             }
 
             // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
-            $scope[$grid_key]['light_section_content'] = Timber::compile($woodyTwigsPaths[$grid[$gridTplField]], $grid_content);
+            $wrapper[$grid_key]['light_section_content'] = Timber::compile($woodyTwigsPaths[$grid[$gridTplField]], $grid_content);
         }
     }
 
     if (!empty($uniqIid_prefix)) {
-        $scope['group_id'] = $uniqIid_prefix . '-' . uniqid();
+        $wrapper['group_id'] = $uniqIid_prefix . '-' . uniqid();
     }
 
-    return $scope;
+    return $wrapper;
 }
 
 function formatVisualEffectData($effects)

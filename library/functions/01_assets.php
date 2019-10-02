@@ -190,29 +190,6 @@ function getWoodyTwigPaths()
  *
  */
 
-function getMinMaxWoodyFieldValues($query_vars = array(), $field, $minormax = 'max')
-{
-    $return = 0;
-
-    if (empty($query_vars) || empty($field)) {
-        return;
-    }
-    $query_vars['meta_key'] = $field;
-    $query_vars['posts_per_page'] = 1;
-    $query_vars['paged'] = false;
-    $query_vars['orderby'] = 'meta_value_num';
-    $query_vars['order'] = ($minormax == 'max') ? 'DESC' : 'ASC';
-
-    $query_result = new WP_Query($query_vars);
-
-    if (!empty($query_result->posts)) {
-        $return = get_field($field, $query_result->posts[0]->ID);
-        $return = (empty($return)) ? 1 : $return;
-    }
-
-    return $return;
-}
-
 function getPageTerms($post_id)
 {
     $return = [];
@@ -283,30 +260,6 @@ function getPostRootAncestor($postID, $root_level = 1)
     }
 
     return $return;
-}
-
-function getAttachmentMoreData($attachment_id)
-{
-    $attachment_data = [];
-    $attachment_data['is_instagram'] = isWoodyInstagram($attachment_id);
-
-    if ($attachment_data['is_instagram']) {
-        $attachment_data['instagram_metadata'] = getInstagramMetadata($attachment_id);
-    }
-
-    $attachment_data['linked_page'] = get_field('field_5c0553157e6d0', $attachment_id);
-    $attachment_data['author'] = get_field('field_5b5585503c855', $attachment_id);
-    $attachment_data['lat'] = get_field('field_5b55a88e70cbf', $attachment_id);
-    $attachment_data['lng'] = get_field('field_5b55a89e70cc0', $attachment_id);
-
-    return $attachment_data;
-}
-
-function getInstagramMetadata($attachment_id)
-{
-    $img_all_data = get_post_meta($attachment_id);
-    $img_all_metadata = (!empty($img_all_data['_wp_attachment_metadata'][0])) ? maybe_unserialize($img_all_data['_wp_attachment_metadata'][0]) : '';
-    return (!empty($img_all_metadata['woody-instagram'])) ? $img_all_metadata['woody-instagram'] : '';
 }
 
 /**
