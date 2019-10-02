@@ -54,8 +54,8 @@ class WoodyTheme_WoodyGetters
                 }
 
                 $data = [];
-                $post = Timber::get_post($post->ID);
-                $data = getPagePreview($query_form, $post);
+                $post = \Timber::get_post($post->ID);
+                $data = $this->getPagePreview($query_form, $post);
 
                 // $data['link']['title'] = (!empty($query_form['links_label'])) ? $query_form['links_label'] : '';
                 $the_items['items'][$key] = $data;
@@ -141,7 +141,7 @@ class WoodyTheme_WoodyGetters
                         if (is_array($wpSheetNode)) {
                             $wpSheetNode = current($wpSheetNode);
                         }
-                        $items['items'][] = getTouristicSheetPreview($wrapper, $wpSheetNode->getPost());
+                        $items['items'][] = $this->getTouristicSheetPreview($wrapper, $wpSheetNode->getPost());
                     }
                 }
             }
@@ -397,7 +397,7 @@ class WoodyTheme_WoodyGetters
         }
 
         $data = [
-            'title' => (!empty($item['title'])) ? replacePattern($item['title']) : '',
+            'title' => (!empty($item['title'])) ? $this->tools->replacePattern($item['title']) : '',
             'link' => [
                 'url' => apply_filters('woody_get_permalink', $post->ID),
                 'target' => (!empty($item['targetBlank'])) ? '_blank' : '',

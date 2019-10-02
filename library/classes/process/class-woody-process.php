@@ -52,7 +52,7 @@ class WoodyTheme_WoodyProcess
                 $return = $this->compilers->formatGeomapData($layout, $context['woody_components']);
                 break;
             case 'content_list':
-                $return = $this->compilers->formatFullContentList($layout, $context['post'], $context['woody_components']);
+                // $return = $this->compilers->formatFullContentList($layout, $context['post'], $context['woody_components']);
                 break;
             case 'weather':
                 $vars['account'] = $layout['weather_account'];
@@ -175,7 +175,7 @@ class WoodyTheme_WoodyProcess
      */
     public function processWoodyQuery($the_post, $query_form, $paginate = false, $uniqid = 0, $ignore_maxnum = false)
     {
-        $query_result = new stdClass();
+        $query_result = new \stdClass();
         $tax_query = [];
 
 
@@ -352,7 +352,7 @@ class WoodyTheme_WoodyProcess
         }
 
         // On créé la wp_query avec les paramètres définis
-        $query_result = new WP_Query($the_query);
+        $query_result = new \WP_Query($the_query);
 
         return $query_result;
     }
