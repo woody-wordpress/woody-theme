@@ -1,5 +1,6 @@
 <?php
 
+namespace WoodyProcess\Compilers;
 use WoodyProcess\Getters\WoodyTheme_WoodyGetters;
 use WoodyProcess\Tools\WoodyTheme_WoodyProcessTools;
 
@@ -18,7 +19,7 @@ class WoodyTheme_WoodyCompilers
     protected $tools;
     protected $getter;
 
-    protected function __construct()
+    public function __construct()
     {
         $this->tools = new WoodyTheme_WoodyProcessTools;
         $this->getter = new WoodyTheme_WoodyGetters;
@@ -80,7 +81,7 @@ class WoodyTheme_WoodyCompilers
                 }
             }
 
-            $return = Timber::compile($twigPaths[$layout['woody_tpl']], $the_items);
+            $return = \Timber::compile($twigPaths[$layout['woody_tpl']], $the_items);
         }
 
         return $return;
@@ -187,7 +188,7 @@ class WoodyTheme_WoodyCompilers
                 if (empty($marker['title']) && empty($marker['description']) && empty($marker['img']) && !empty($marker['link']['url'])) {
                     $layout['markers'][$key]['marker_as_link'] = true;
                 }
-                $layout['markers'][$key]['compiled_marker']  = Timber::compile('/_objects/markerObject.twig', $marker);
+                $layout['markers'][$key]['compiled_marker']  = \Timber::compile('/_objects/markerObject.twig', $marker);
 
                 if (!empty($marker['title']) || !empty($marker['description']) || !empty($marker['img'])) {
                     $the_marker['item']['title'] = (!empty($marker['title'])) ? $marker['title'] : '';
@@ -197,12 +198,12 @@ class WoodyTheme_WoodyCompilers
                         $the_marker['item']['img'] = $marker['img'];
                     }
                     $the_marker['item']['link'] = (!empty($marker['link'])) ? $marker['link'] : '';
-                    $layout['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker);
+                    $layout['markers'][$key]['marker_thumb_html']  = \Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker);
                 }
             }
         }
 
-        $return = Timber::compile($twigPaths[$layout['woody_tpl']], $layout);
+        $return = \Timber::compile($twigPaths[$layout['woody_tpl']], $layout);
         return $return;
     }
 }

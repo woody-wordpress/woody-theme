@@ -9,6 +9,7 @@
 
 use Woody\Modules\GroupQuotation\GroupQuotation;
 use WoodyProcess\Tools\WoodyTheme_WoodyProcessTools;
+use WoodyProcess\Process\WoodyTheme_WoodyProcess;
 
 class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 {
@@ -18,9 +19,9 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
     public function __construct()
     {
-        parent::__construct();
         $this->tools = new WoodyTheme_WoodyProcessTools;
         $this->process = new WoodyTheme_WoodyProcess;
+        parent::__construct();
     }
 
     protected function registerHooks()

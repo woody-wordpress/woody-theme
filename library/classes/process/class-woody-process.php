@@ -3,7 +3,7 @@
 namespace WoodyProcess\Process;
 
 use WoodyProcess\Tools\WoodyTheme_WoodyProcessTools;
-use WoodyProcess\Tools\WoodyTheme_WoodyCompilers;
+use WoodyProcess\Compilers\WoodyTheme_WoodyCompilers;
 
 /**
  * Dispatch Woody data processing
@@ -19,11 +19,12 @@ class WoodyTheme_WoodyProcess
     protected $tools;
     protected $compilers;
 
-    protected function __construct()
+    public function __construct()
     {
         $this->tools = new WoodyTheme_WoodyProcessTools;
         $this->compilers = new WoodyTheme_WoodyCompilers;
     }
+
     /**
      *
      * Nom : processWoodyLayouts
@@ -59,12 +60,12 @@ class WoodyTheme_WoodyProcess
                 $the_weather = apply_filters('woody_weather', $vars);
                 $the_weather['bg_color'] = (!empty($layout['weather_bg_params']['background_color'])) ? $layout['weather_bg_params']['background_color'] : '';
                 $the_weather['bg_img'] = $layout['weather_bg_img'];
-                $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_weather);
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_weather);
                 break;
             case 'call_to_action':
                 // TODO: Case à enlever lorsque les "Anciens champs" seront supprimés du backoffice (utile pour les anciens liens de CTA uniquement)
                 $layout['modal_id'] = uniqid($layout['acf_fc_layout'] . '_');
-                $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             case 'gallery':
                 // Ajout des données Instagram + champs personnaliés dans le contexte des images
@@ -73,19 +74,19 @@ class WoodyTheme_WoodyProcess
                         $layout['gallery_items'][$key]['attachment_more_data'] = $this->tools->getAttachmentMoreData($media_item['ID']);
                     }
                 }
-                $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             case 'links':
                 $layout['woody_tpl'] = 'blocks-links-tpl_01';
-                $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             case 'tabs_group':
                 $layout['tabs'] = $this->processWoodySubLayouts($layout['tabs'], 'tab_woody_tpl', 'tabs', $context);
-                $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             case 'slides_group':
                 $layout['slides'] = $this->processWoodySubLayouts($layout['slides'], 'slide_woody_tpl', 'slides', $context);
-                $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             case 'socialwall':
                 $layout['gallery_items'] = [];
@@ -104,22 +105,22 @@ class WoodyTheme_WoodyProcess
                         }
                     }
                 }
-                $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             case 'semantic_view':
                 $layout['items'] = getSemanticViewData($layout);
-                $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             case 'audio_player':
                 $layout['woody_tpl'] = 'blocks-audio-tpl_01';
-                $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             case 'disqus_block':
                 $layout['woody_tpl'] = 'blocks-disqus-tpl_01';
-                $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             default:
-                $return = Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
         }
         return $return;
     }
@@ -151,7 +152,7 @@ class WoodyTheme_WoodyProcess
                 }
 
                 // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
-                $wrapper[$grid_key]['light_section_content'] = Timber::compile($woodyTwigsPaths[$grid[$gridTplField]], $grid_content);
+                $wrapper[$grid_key]['light_section_content'] = \Timber::compile($woodyTwigsPaths[$grid[$gridTplField]], $grid_content);
             }
         }
 

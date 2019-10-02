@@ -20,7 +20,7 @@ class WoodyTheme_WoodyGetters
 
     protected $tools;
 
-    private function __construct()
+    public function __construct()
     {
         $this->tools = new WoodyTheme_WoodyProcessTools;
     }
@@ -97,13 +97,13 @@ class WoodyTheme_WoodyGetters
                 }
                 switch ($item['content_selection']->post_type) {
                     case 'page':
-                        $post_preview = getPagePreview($layout, $item['content_selection'], $clickable);
+                        $post_preview = $this->getPagePreview($layout, $item['content_selection'], $clickable);
                         break;
                     case 'touristic_sheet':
-                        $post_preview = getTouristicSheetPreview($layout, $item['content_selection']);
+                        $post_preview = $this->getTouristicSheetPreview($layout, $item['content_selection']);
                         break;
                     case 'woody_topic':
-                        $post_preview = getTopicPreview($layout, $item['content_selection']);
+                        $post_preview = $this->getTopicPreview($layout, $item['content_selection']);
                         break;
                 }
                 $the_items['items'][$key] = (!empty($post_preview)) ?  $post_preview : '';
@@ -223,7 +223,7 @@ class WoodyTheme_WoodyGetters
      * @return   data - Un tableau de données
      *
      */
-    function getPagePreview($item_wrapper, $item, $clickable = true)
+    public function getPagePreview($item_wrapper, $item, $clickable = true)
     {
         $data = [];
 

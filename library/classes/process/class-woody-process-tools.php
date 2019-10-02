@@ -55,7 +55,7 @@ class WoodyTheme_WoodyProcessTools
         $query_vars['orderby'] = 'meta_value_num';
         $query_vars['order'] = ($minormax == 'max') ? 'DESC' : 'ASC';
 
-        $query_result = new WP_Query($query_vars);
+        $query_result = new \WP_Query($query_vars);
 
         if (!empty($query_result->posts)) {
             $return = get_field($field, $query_result->posts[0]->ID);
@@ -192,7 +192,7 @@ class WoodyTheme_WoodyProcessTools
             )
         ];
 
-        $attachments = new WP_Query($get_attachments);
+        $attachments = new \WP_Query($get_attachments);
         $acf_attachements = [];
         foreach ($attachments->posts as $key => $attachment) {
             // On transforme chacune des images en objet image ACF pour être compatible avec le tpl Woody
