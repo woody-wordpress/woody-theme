@@ -34,11 +34,11 @@ class WoodyTheme_WoodyGetters
      * @return   the_items - Tableau de contenus compilés + infos complémentaires
      *
      */
-    public function getAutoFocusData($current_post, $query_form)
+    public function getAutoFocusData($current_post, $wrapper, $paginate = false, $uniqid = 0, $ingore_maxnum = false)
     {
 
         $process = new WoodyTheme_WoodyProcess;
-        $query_result = $process->processWoodyQuery($current_post, $query_form);
+        $query_result = $process->processWoodyQuery($current_post, $wrapper, $paginate, $uniqid, $ingore_maxnum);
 
         // On transforme la donnée des posts récupérés pour coller aux templates de blocs Woody
         if (!empty($query_result->posts)) {
@@ -55,14 +55,16 @@ class WoodyTheme_WoodyGetters
 
                 $data = [];
                 $post = \Timber::get_post($post->ID);
-                $data = $this->getPagePreview($query_form, $post);
+                $data = $this->getPagePreview($wrapper, $post);
 
-                // $data['link']['title'] = (!empty($query_form['links_label'])) ? $query_form['links_label'] : '';
+                // $data['link']['title'] = (!empty($wrapper['links_label'])) ? $wrapper['links_label'] : '';
                 $the_items['items'][$key] = $data;
             }
             $the_items['max_num_pages'] = $query_result->max_num_pages;
             $the_items['wp_query'] = $query_result;
         }
+
+        return $the_items;
     }
 
     /**
@@ -526,5 +528,10 @@ class WoodyTheme_WoodyGetters
         $data['link']['url'] = !empty($item->woody_topic_url) ? $item->woody_topic_url : '';
 
         return $data;
+    }
+
+    public function getListUrlParams()
+    {
+        // Ici on doit traiter les paramètres d'url et le envoyer à  $compiler->formatListContent
     }
 }

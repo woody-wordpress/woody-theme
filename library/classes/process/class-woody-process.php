@@ -52,6 +52,7 @@ class WoodyTheme_WoodyProcess
                 $return = $this->compilers->formatGeomapData($layout, $context['woody_components']);
                 break;
             case 'content_list':
+                $return = $this->compilers->formatListContent($layout, $context['post'], $context['woody_components']);
                 // $return = $this->compilers->formatFullContentList($layout, $context['post'], $context['woody_components']);
                 break;
             case 'weather':
@@ -108,8 +109,7 @@ class WoodyTheme_WoodyProcess
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             case 'semantic_view':
-                $layout['items'] = getSemanticViewData($layout);
-                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                $return = $this->compilers->formatSemanticViewData($layout, $context['woody_components']);
                 break;
             case 'audio_player':
                 $layout['woody_tpl'] = 'blocks-audio-tpl_01';

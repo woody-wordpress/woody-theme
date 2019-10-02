@@ -1,6 +1,7 @@
 <?php
 
 namespace WoodyProcess\Compilers;
+
 use WoodyProcess\Getters\WoodyTheme_WoodyGetters;
 use WoodyProcess\Tools\WoodyTheme_WoodyProcessTools;
 
@@ -84,32 +85,6 @@ class WoodyTheme_WoodyCompilers
             $return = \Timber::compile($twigPaths[$layout['woody_tpl']], $the_items);
         }
 
-        return $return;
-    }
-
-    /**
-     * Create pagination if needed
-     * @param   max_num_pages
-     * @param   uniqid          section id of list content
-     * @return  return          pagination html elements
-     */
-    public function formatListPager($max_num_pages, $uniqid, $filters = false)
-    {
-        $return = [];
-        $explode_uniqid = explode('_', $uniqid);
-        $the_page_name = 'section_' . $explode_uniqid[1] . '_' . $explode_uniqid[4];
-        $get_the_page = (!empty($_GET[$the_page_name])) ? htmlentities(stripslashes($_GET[$the_page_name])) : 1;
-
-        $pager_args = [
-            'total' => $max_num_pages,
-            'format' => '?' . $the_page_name . '=%#%#' . $uniqid,
-            'current' => $get_the_page,
-            'mid_size' => 3,
-            'type' => 'list',
-            'add_args' => $filters
-        ];
-
-        $return = paginate_links($pager_args);
         return $return;
     }
 
@@ -204,6 +179,147 @@ class WoodyTheme_WoodyCompilers
         }
 
         $return = \Timber::compile($twigPaths[$layout['woody_tpl']], $layout);
+        return $return;
+    }
+
+    function formatSemanticViewData($layout, $twigPaths)
+    {
+        $return = '';
+        $the_items = [];
+        $post_id = get_the_ID();
+        $front_id = get_option('page_on_front');
+
+        if ($layout['semantic_view_type'] == 'manual' && !empty($layout['semantic_view_include'])) {
+            $the_query = [
+                'post_type' => 'page',
+            ];
+            foreach ($layout['semantic_view_include'] as $included_id) {
+                $the_query['post__in'][] = $included_id;
+            }
+        } else {
+
+            if ($layout['semantic_view_type'] == 'sisters') {
+                $parent_id = wp_get_post_parent_id($post_id);
+            } else {
+                $parent_id = $post_id;
+            }
+
+            if (!empty($layout['semantic_view_page_types'])) {
+                $tax_query = [
+                    'relation' => 'AND',
+                    'page_type' => array(
+                        'taxonomy' => 'page_type',
+                        'terms' => $layout['semantic_view_page_types'],
+                        'field' => 'term_id',
+                        'operator' => 'IN'
+                    ),
+                ];
+            }
+
+            $the_query = [
+                'post_type' => 'page',
+                'post_parent' => $parent_id,
+                'post__not_in' => [$post_id, $front_id],
+                'tax_query' => (!empty($tax_query)) ? $tax_query : ''
+            ];
+
+            // Si des pages ont été ajoutées dans le champ "Pages à exclure"
+            if (!empty($layout['semantic_view_exclude'])) {
+                foreach ($layout['semantic_view_exclude'] as $excluded_id) {
+                    $the_query['post__not_in'][] = $excluded_id;
+                }
+            }
+        }
+
+        $query_result = new WP_query($the_query);
+
+        if (!empty($query_result->posts)) {
+            foreach ($query_result->posts as $key => $post) {
+                $data = [];
+                $post = Timber::get_post($post->ID);
+                $data = getPagePreview($layout, $post);
+                if (!empty($data['description'])) {
+                    preg_match_all("/\[[^\]]*\]/", $data['description'], $matches);
+                    if (!empty($matches[0])) {
+                        foreach ($matches[0] as $match) {
+                            $str = str_replace(['[', ']'], '', $match);
+                            $link = '<a href="' . get_permalink(pll_get_post($post->ID)) . '">' . $str . '</a>';
+                            $data['description'] = str_replace($match, $link, $data['description']);
+                        }
+                    }
+                }
+                $the_items[$key] = $data;
+            }
+        }
+
+        $return = \Timber::compile($twigPaths[$layout['woody_tpl']], $the_items);
+
+        return $return;
+    }
+
+    public function formatListContent($wrapper, $current_post, $twigPaths)
+    {
+        $return = '';
+        // On récupère la pagination pour passer un paramètre à la query
+        $paginate = ($wrapper['the_list_pager']['list_pager_type'] == 'basic_pager') ? true : false;
+
+        if (empty($XXXXXX)) {
+            $list_el_wrapper = $wrapper['the_list_elements']['list_el_req_fields'];
+            $filters = false;
+        } else {
+            // $filters = à definir;
+            // $list_el_wrapper = à definir
+        }
+
+        // On récupère les résultats du formulaire du bakcoffice, sans prendre en compte la pagination
+        $the_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid'], true);
+
+        // On compile la grille des éléments
+        $the_list['the_grid'] = \Timber::compile($twigPaths[$wrapper['the_list_elements']['listgrid_woody_tpl']], $the_items);
+
+        // Récupère la donnée des filtres de base
+        $the_list_filters = $this->getListFilters();
+
+        // Récupère les filtres compilés
+        $the_list_pager = $this->formatListPager($list_el_wrapper['focused_count'], $wrapper['uniqid'], $filters);
+
+        wd($the_list_pager);
+
+        //Temp
+        $return = $the_list['the_grid'];
+        return $return;
+    }
+
+    public function formatListFilters()
+    {
+        $return = '';
+
+        return $return;
+    }
+
+    /**
+     * Create pagination if needed
+     * @param   max_num_pages
+     * @param   uniqid          section id of list content
+     * @return  return          pagination html elements
+     */
+    public function formatListPager($max_num_pages, $uniqid, $filters = false)
+    {
+        $return = [];
+        $explode_uniqid = explode('_', $uniqid);
+        $the_page_name = 'section_' . $explode_uniqid[1] . '_' . $explode_uniqid[4];
+        $get_the_page = (!empty($_GET[$the_page_name])) ? htmlentities(stripslashes($_GET[$the_page_name])) : 1;
+
+        $pager_args = [
+            'total' => $max_num_pages,
+            'format' => '?' . $the_page_name . '=%#%#' . $uniqid,
+            'current' => $get_the_page,
+            'mid_size' => 3,
+            'type' => 'list',
+            'add_args' => $filters
+        ];
+
+        $return = paginate_links($pager_args);
         return $return;
     }
 }
