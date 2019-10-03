@@ -217,70 +217,39 @@ class WoodyTheme_WoodyProcess
             }
         }
 
-        // Si l'on trouve des filtres dans le formulaire
-        if (!empty($query_form['filters_apply'])) {
-            foreach ($query_form['filters_apply'] as $filter_key => $filter) {
-
-                // On ajoute des paramètres de taxonomies à la query
-                if (strpos($filter_key, 'taxonomy_terms') !== false) {
-                    $tax_query[$filter_key] = [];
-                    $tax_query[$filter_key]['relation'] = $filter['andor'];
-                    if (!is_array($filter['terms'])) {
-                        $term = get_term($filter['terms']);
-                        if (!empty($term) && is_object($term)) {
-                            $filter_tax[$filter_key][$term->taxonomy][] = $filter['terms'];
-                        }
-                    } else {
-                        foreach ($filter['terms'] as $focused_term) {
-                            $term = get_term($focused_term);
-                            if (!empty($term) && is_object($term)) {
-                                $filter_tax[$filter_key][$term->taxonomy][] = $focused_term;
-                            }
-                        }
-                    }
-
-                    if (!empty($filter_tax[$filter_key])) {
-                        foreach ($filter_tax[$filter_key] as $taxo => $terms) {
-                            $tax_query[$filter_key][] = array(
-                                'taxonomy' => $taxo,
-                                'terms' => $terms,
-                                'field' => 'term_id',
-                                'operator' => 'IN'
-                            );
-                        }
-                    }
-
-                    // On ajoute des paramètres de meta_query à la query
-                } elseif (strpos($filter_key, 'filter_trip_price') !== false) {
-                    $the_meta_query[] = [
-                        'key'        => 'the_price_price',
-                        'value'        => $filter['min'],
-                        'type'      => 'NUMERIC',
-                        'compare'    => '>='
-                    ];
-                    $the_meta_query[] = [
-                        'key'        => 'the_price_price',
-                        'value'        => $filter['max'],
-                        'type'      => 'NUMERIC',
-                        'compare'    => '<='
-                    ];
-                } elseif (strpos($filter_key, 'filter_trip_duration') !== false) {
-                    $the_meta_query[] = [
-                        'key'        => 'the_duration_count_days',
-                        'value'        => $filter['min'],
-                        'type'      => 'NUMERIC',
-                        'compare'    => '>='
-                    ];
-                    $the_meta_query[] = [
-                        'key'        => 'the_duration_count_days',
-                        'value'        => $filter['max'],
-                        'type'      => 'NUMERIC',
-                        'compare'    => '<='
-                    ];
-                }
-            }
+        // On retourne les contenus dont le pirx et compris entre 2 valeurs
+        if (!empty($query_form['focused_trip_price'])) {
+            $the_meta_query[] = [
+                'key'        => 'the_price_price',
+                'value'        => $query_form['focused_trip_price']['min'],
+                'type'      => 'NUMERIC',
+                'compare'    => '>='
+            ];
+            $the_meta_query[] = [
+                'key'        => 'the_price_price',
+                'value'        => $query_form['focused_trip_price']['max'],
+                'type'      => 'NUMERIC',
+                'compare'    => '<='
+            ];
         }
 
+        // On retourne les contenus dont la durée et comprise entre 2 valeurs
+        if (!empty($query_form['focused_trip_duration'])) {
+            $the_meta_query[] = [
+                'key'        => 'the_duration_count_days',
+                'value'        => $query_form['focused_trip_duration']['min'],
+                'type'      => 'NUMERIC',
+                'compare'    => '>='
+            ];
+            $the_meta_query[] = [
+                'key'        => 'the_duration_count_days',
+                'value'        => $query_form['focused_trip_duration']['max'],
+                'type'      => 'NUMERIC',
+                'compare'    => '<='
+            ];
+        }
+
+        // On trie les contenus en fonction d'un ordre donné
         switch ($query_form['focused_sort']) {
             case 'random':
                 $orderby = 'rand';
@@ -301,6 +270,7 @@ class WoodyTheme_WoodyProcess
             default:
         }
 
+        // On enregistre le tri aléatoire pour la journée en cours (pagination)
         if ($orderby == 'rand' && $paginate == true) {
             $seed = date("dmY");
             $orderby = 'RAND(' . $seed . ')';
@@ -317,17 +287,20 @@ class WoodyTheme_WoodyProcess
             'orderby' => $orderby,
         ];
 
+        // Retourne tous les posts correspondant à la query
         if ($ignore_maxnum === true) {
             $the_query['posts_per_page'] = -1;
         }
 
+        // On définit le pattern pour les urls de pagination
         if ($paginate == true) {
             $explode_uniqid = explode('_', $uniqid);
             $the_page_name = 'section_' . $explode_uniqid[1] . '_' . $explode_uniqid[4];
-            $the_page = (!empty($_GET[$the_page_name])) ? htmlentities(stripslashes($_GET[$the_page_name])) : '';
-            $the_query['paged'] = (!empty($the_page)) ? $the_page : 1;
+            $the_page_offset = (!empty($_GET[$the_page_name])) ? htmlentities(stripslashes($_GET[$the_page_name])) : '';
+            $the_query['paged'] = (!empty($the_page_offset)) ? $the_page_offset : 1;
         }
 
+        // On ajoute la tax_query
         $the_query['tax_query'] = (!empty($tax_query)) ? $tax_query : '';
 
         // Si Hiérarchie = Enfants directs de la page

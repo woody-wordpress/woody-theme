@@ -30,25 +30,25 @@ class WoodyTheme_WoodyCompilers
      * Nom : formatFocusesData
      * Auteur : Benoit Bouchaud
      * Return : Retourne le html d'une mise en avant de contenu
-     * @param    layout Le wrapper du champ de mise en avant
+     * @param    wrapper Le wrapper du champ de mise en avant
      * @param    current_post le post courant (pour les autofocus hierarchiques)
      * @param    twigPaths les chemins des templates woody
      * @return   items - Un tableau de données
      *
      */
-    public function formatFocusesData($layout, $current_post, $twigPaths)
+    public function formatFocusesData($wrapper, $current_post, $twigPaths)
     {
         $return = '';
         $the_items = [];
 
-        if ($layout['acf_fc_layout'] == 'manual_focus' || $layout['acf_fc_layout'] == 'focus_trip_components') {
-            $the_items = $this->getter->getManualFocusData($layout);
-        } elseif ($layout['acf_fc_layout'] == 'auto_focus') {
-            $the_items = $this->getter->getAutoFocusData($current_post, $layout);
-        } elseif ($layout['acf_fc_layout'] == 'auto_focus_sheets' && !empty($layout['playlist_conf_id'])) {
-            $the_items = $this->getter->getAutoFocusSheetData($layout);
-        } elseif ($layout['acf_fc_layout'] == 'auto_focus_topics') {
-            $the_items = $this->getter->getAutoFocusTopicsData($layout);
+        if ($wrapper['acf_fc_layout'] == 'manual_focus' || $wrapper['acf_fc_layout'] == 'focus_trip_components') {
+            $the_items = $this->getter->getManualFocusData($wrapper);
+        } elseif ($wrapper['acf_fc_layout'] == 'auto_focus') {
+            $the_items = $this->getter->getAutoFocusData($current_post, $wrapper);
+        } elseif ($wrapper['acf_fc_layout'] == 'auto_focus_sheets' && !empty($wrapper['playlist_conf_id'])) {
+            $the_items = $this->getter->getAutoFocusSheetData($wrapper);
+        } elseif ($wrapper['acf_fc_layout'] == 'auto_focus_topics') {
+            $the_items = $this->getter->getAutoFocusTopicsData($wrapper);
         }
 
         if (!empty($the_items) && !empty($the_items['items']) && is_array($the_items['items'])) {
@@ -58,31 +58,31 @@ class WoodyTheme_WoodyCompilers
                 }
             }
 
-            $the_items['no_padding'] = (!empty($layout['focus_no_padding'])) ? $layout['focus_no_padding'] : '';
-            $the_items['block_titles'] = $this->tools->getFocusBlockTitles($layout);
-            $the_items['display_button'] = (!empty($layout['display_button'])) ? $layout['display_button'] : '';
-            $the_items['default_marker'] = $layout['default_marker'];
-            $the_items['visual_effects'] = $layout['visual_effects'];
+            $the_items['no_padding'] = (!empty($wrapper['focus_no_padding'])) ? $wrapper['focus_no_padding'] : '';
+            $the_items['block_titles'] = $this->tools->getFocusBlockTitles($wrapper);
+            $the_items['display_button'] = (!empty($wrapper['display_button'])) ? $wrapper['display_button'] : '';
+            $the_items['default_marker'] = $wrapper['default_marker'];
+            $the_items['visual_effects'] = $wrapper['visual_effects'];
 
 
-            if (!empty($layout['focus_map_params'])) {
-                if (!empty($layout['focus_map_params']['tmaps_confid'])) {
-                    $the_items['map_params']['tmaps_confid'] = $layout['focus_map_params']['tmaps_confid'];
+            if (!empty($wrapper['focus_map_params'])) {
+                if (!empty($wrapper['focus_map_params']['tmaps_confid'])) {
+                    $the_items['map_params']['tmaps_confid'] = $wrapper['focus_map_params']['tmaps_confid'];
                 }
-                if (!empty($layout['focus_map_params']['map_height'])) {
-                    $the_items['map_params']['map_height'] = $layout['focus_map_params']['map_height'];
+                if (!empty($wrapper['focus_map_params']['map_height'])) {
+                    $the_items['map_params']['map_height'] = $wrapper['focus_map_params']['map_height'];
                 }
-                if (!empty($layout['focus_map_params']['map_zoom_auto'])) {
-                    $the_items['map_params']['map_zoom_auto'] = $layout['focus_map_params']['map_zoom_auto'];
+                if (!empty($wrapper['focus_map_params']['map_zoom_auto'])) {
+                    $the_items['map_params']['map_zoom_auto'] = $wrapper['focus_map_params']['map_zoom_auto'];
                 }
-                if (!empty($layout['focus_map_params']['map_zoom'])) {
+                if (!empty($wrapper['focus_map_params']['map_zoom'])) {
                     if (empty($the_items['map_params']['map_zoom_auto']) || $the_items['map_params']['map_zoom_auto'] === false) {
-                        $the_items['map_params']['map_zoom'] = $layout['focus_map_params']['map_zoom'];
+                        $the_items['map_params']['map_zoom'] = $wrapper['focus_map_params']['map_zoom'];
                     }
                 }
             }
 
-            $return = \Timber::compile($twigPaths[$layout['woody_tpl']], $the_items);
+            $return = \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items);
         }
 
         return $return;
@@ -94,15 +94,15 @@ class WoodyTheme_WoodyCompilers
      * @param   twigPaths - Liste des templates woody sous forme de tableau
      * @return  return - Code html
      */
-    public function formatGeomapData($layout, $twigPaths)
+    public function formatGeomapData($wrapper, $twigPaths)
     {
         $return = '';
-        if (empty($layout['markers']) && empty($layout['routes'])) {
+        if (empty($wrapper['markers']) && empty($wrapper['routes'])) {
             return;
         }
 
-        if (!empty($layout['routes'])) {
-            foreach ($layout['routes'] as $key => $route) {
+        if (!empty($wrapper['routes'])) {
+            foreach ($wrapper['routes'] as $key => $route) {
                 $filename = get_attached_file($route['route_file']['ID']);
                 $filetype = wp_check_filetype($filename);
 
@@ -116,36 +116,36 @@ class WoodyTheme_WoodyCompilers
                     $json = file_get_contents($filename);
                     $route['route_file'] = $json;
 
-                    $layout['routes'][$key] = json_decode($route['route_file'], true);
-                    foreach ($layout['routes'][$key]['features'] as $f_key => $feature) {
-                        $layout['routes'][$key]['features'][$f_key]['route'] = true;
+                    $wrapper['routes'][$key] = json_decode($route['route_file'], true);
+                    foreach ($wrapper['routes'][$key]['features'] as $f_key => $feature) {
+                        $wrapper['routes'][$key]['features'][$f_key]['route'] = true;
 
                         if ($parameters === true) {
-                            $layout['routes'][$key]['features'][$f_key]['properties']['fill'] = $fill_color;
-                            $layout['routes'][$key]['features'][$f_key]['properties']['stroke'] = $route_color;
-                            $layout['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = $stroke_thickness;
+                            $wrapper['routes'][$key]['features'][$f_key]['properties']['fill'] = $fill_color;
+                            $wrapper['routes'][$key]['features'][$f_key]['properties']['stroke'] = $route_color;
+                            $wrapper['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = $stroke_thickness;
                         }
-                        $fill_opacity = isset($layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity']) ? $layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] : 0;
-                        $layout['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] = $fill_opacity == 0 ? 0.5 : $fill_opacity;
+                        $fill_opacity = isset($wrapper['routes'][$key]['features'][$f_key]['properties']['fill-opacity']) ? $wrapper['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] : 0;
+                        $wrapper['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] = $fill_opacity == 0 ? 0.5 : $fill_opacity;
 
                         // Route Fields aren't supposed to have markers.
                         if ($feature['geometry']['type'] == "Point") {
-                            unset($layout['routes'][$key]['features'][$f_key]);
+                            unset($wrapper['routes'][$key]['features'][$f_key]);
                         }
                     }
 
-                    $layout['routes'][$key] = json_encode($layout['routes'][$key]);
+                    $wrapper['routes'][$key] = json_encode($wrapper['routes'][$key]);
                 }
             }
         }
 
-        if (!empty($layout['markers'])) {
+        if (!empty($wrapper['markers'])) {
             // Set boolean to fitBounds
-            $layout['map_zoom_auto'] = ($layout['map_zoom_auto']) ? 'true' : 'false';
+            $wrapper['map_zoom_auto'] = ($wrapper['map_zoom_auto']) ? 'true' : 'false';
 
             // Calcul center of map
             $sum_lat = $sum_lng = 0;
-            foreach ($layout['markers'] as $key => $marker) {
+            foreach ($wrapper['markers'] as $key => $marker) {
                 if (!empty($marker['map_position']['lat'])) {
                     $sum_lat += $marker['map_position']['lat'];
                 }
@@ -153,17 +153,17 @@ class WoodyTheme_WoodyCompilers
                     $sum_lng += $marker['map_position']['lng'];
                 }
             }
-            $layout['default_lat'] = $sum_lat / count($layout['markers']);
-            $layout['default_lng'] = $sum_lng / count($layout['markers']);
+            $wrapper['default_lat'] = $sum_lat / count($wrapper['markers']);
+            $wrapper['default_lng'] = $sum_lng / count($wrapper['markers']);
 
             // Get markers
-            foreach ($layout['markers'] as $key => $marker) {
+            foreach ($wrapper['markers'] as $key => $marker) {
                 $the_marker = [];
-                $marker['default_marker'] = $layout['default_marker'];
+                $marker['default_marker'] = $wrapper['default_marker'];
                 if (empty($marker['title']) && empty($marker['description']) && empty($marker['img']) && !empty($marker['link']['url'])) {
-                    $layout['markers'][$key]['marker_as_link'] = true;
+                    $wrapper['markers'][$key]['marker_as_link'] = true;
                 }
-                $layout['markers'][$key]['compiled_marker']  = \Timber::compile('/_objects/markerObject.twig', $marker);
+                $wrapper['markers'][$key]['compiled_marker']  = \Timber::compile('/_objects/markerObject.twig', $marker);
 
                 if (!empty($marker['title']) || !empty($marker['description']) || !empty($marker['img'])) {
                     $the_marker['item']['title'] = (!empty($marker['title'])) ? $marker['title'] : '';
@@ -173,43 +173,43 @@ class WoodyTheme_WoodyCompilers
                         $the_marker['item']['img'] = $marker['img'];
                     }
                     $the_marker['item']['link'] = (!empty($marker['link'])) ? $marker['link'] : '';
-                    $layout['markers'][$key]['marker_thumb_html']  = \Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker);
+                    $wrapper['markers'][$key]['marker_thumb_html']  = \Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker);
                 }
             }
         }
 
-        $return = \Timber::compile($twigPaths[$layout['woody_tpl']], $layout);
+        $return = \Timber::compile($twigPaths[$wrapper['woody_tpl']], $wrapper);
         return $return;
     }
 
-    function formatSemanticViewData($layout, $twigPaths)
+    function formatSemanticViewData($wrapper, $twigPaths)
     {
         $return = '';
         $the_items = [];
         $post_id = get_the_ID();
         $front_id = get_option('page_on_front');
 
-        if ($layout['semantic_view_type'] == 'manual' && !empty($layout['semantic_view_include'])) {
+        if ($wrapper['semantic_view_type'] == 'manual' && !empty($wrapper['semantic_view_include'])) {
             $the_query = [
                 'post_type' => 'page',
             ];
-            foreach ($layout['semantic_view_include'] as $included_id) {
+            foreach ($wrapper['semantic_view_include'] as $included_id) {
                 $the_query['post__in'][] = $included_id;
             }
         } else {
 
-            if ($layout['semantic_view_type'] == 'sisters') {
+            if ($wrapper['semantic_view_type'] == 'sisters') {
                 $parent_id = wp_get_post_parent_id($post_id);
             } else {
                 $parent_id = $post_id;
             }
 
-            if (!empty($layout['semantic_view_page_types'])) {
+            if (!empty($wrapper['semantic_view_page_types'])) {
                 $tax_query = [
                     'relation' => 'AND',
                     'page_type' => array(
                         'taxonomy' => 'page_type',
-                        'terms' => $layout['semantic_view_page_types'],
+                        'terms' => $wrapper['semantic_view_page_types'],
                         'field' => 'term_id',
                         'operator' => 'IN'
                     ),
@@ -224,8 +224,8 @@ class WoodyTheme_WoodyCompilers
             ];
 
             // Si des pages ont été ajoutées dans le champ "Pages à exclure"
-            if (!empty($layout['semantic_view_exclude'])) {
-                foreach ($layout['semantic_view_exclude'] as $excluded_id) {
+            if (!empty($wrapper['semantic_view_exclude'])) {
+                foreach ($wrapper['semantic_view_exclude'] as $excluded_id) {
                     $the_query['post__not_in'][] = $excluded_id;
                 }
             }
@@ -237,7 +237,7 @@ class WoodyTheme_WoodyCompilers
             foreach ($query_result->posts as $key => $post) {
                 $data = [];
                 $post = Timber::get_post($post->ID);
-                $data = getPagePreview($layout, $post);
+                $data = getPagePreview($wrapper, $post);
                 if (!empty($data['description'])) {
                     preg_match_all("/\[[^\]]*\]/", $data['description'], $matches);
                     if (!empty($matches[0])) {
@@ -252,7 +252,7 @@ class WoodyTheme_WoodyCompilers
             }
         }
 
-        $return = \Timber::compile($twigPaths[$layout['woody_tpl']], $the_items);
+        $return = \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items);
 
         return $return;
     }
@@ -260,40 +260,70 @@ class WoodyTheme_WoodyCompilers
     public function formatListContent($wrapper, $current_post, $twigPaths)
     {
         $return = '';
+
+        // On définit des variables de base
+        $the_list['permalink'] = get_permalink($current_post->ID);
+        $the_list['uniqid'] = $wrapper['uniqid'];
+        $the_list['has_map'] = false;
+
         // On récupère la pagination pour passer un paramètre à la query
         $paginate = ($wrapper['the_list_pager']['list_pager_type'] == 'basic_pager') ? true : false;
 
-        if (empty($XXXXXX)) {
-            $list_el_wrapper = $wrapper['the_list_elements']['list_el_req_fields'];
-            $filters = false;
-        } else {
-            // $filters = à definir;
-            // $list_el_wrapper = à definir
+        // On récupère les champs du formulaire de requete du backoffice
+        $list_el_wrapper = $wrapper['the_list_elements']['list_el_req_fields'];
+
+        // On récupère et on applique les valeurs des filtres si existantes
+        $form_result = (!empty(filter_input_array(INPUT_GET))) ? filter_input_array(INPUT_GET) : [];
+        if (!empty($form_result)) {
+            foreach ($form_result as $result_key => $input_value) {
+                if (strpos($result_key, 'taxonomy_terms') !== false) {
+                    if (is_array($list_el_wrapper['focused_taxonomy_terms'])) {
+                        $list_el_wrapper['focused_taxonomy_terms'] = array_unique(array_merge($list_el_wrapper['focused_taxonomy_terms'], $input_value));
+                    } else {
+                        $list_el_wrapper['focused_taxonomy_terms'] = $input_value;
+                    }
+                } elseif (strpos($result_key, 'trip_duration') !== false) {
+                    if (strpos($result_key, 'max') !== false) {
+                        $list_el_wrapper['focused_trip_duration']['max'] = $input_value;
+                    } else {
+                        $list_el_wrapper['focused_trip_duration']['min'] = $input_value;
+                    }
+                } elseif (strpos($result_key, 'trip_price') !== false) {
+                    if (strpos($result_key, 'max') !== false) {
+                        $list_el_wrapper['focused_trip_price']['max'] = $input_value;
+                    } else {
+                        $list_el_wrapper['focused_trip_price']['min'] = $input_value;
+                    }
+                }
+            }
         }
 
-        // On récupère les résultats du formulaire du bakcoffice, sans prendre en compte la pagination
-        $the_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid'], true);
+        // On récupère les résultats du formulaire du bakcoffice, sans prendre en compte le nombre d'éléments max
+        $the_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid']);
 
         // On compile la grille des éléments
         $the_list['the_grid'] = \Timber::compile($twigPaths[$wrapper['the_list_elements']['listgrid_woody_tpl']], $the_items);
 
+        // On récupère le nombre de résultats
+        $the_list = $this->tools->countFocusResults($the_items, $the_list);
+
         // Récupère la donnée des filtres de base
-        $the_list_filters = $this->getListFilters();
+        if (!empty($wrapper['the_list_filters'])) {
+            $the_list['filters'] = $this->getter->getListFilters($wrapper['the_list_filters'], $the_items);
 
-        // Récupère les filtres compilés
-        $the_list_pager = $this->formatListPager($list_el_wrapper['focused_count'], $wrapper['uniqid'], $filters);
+            // Si on a trouvé un filtre de carte, on remplit le tableau the_map
+            if (isset($the_list['filters']['the_map'])) {
+                $map_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid'], true);
 
-        wd($the_list_pager);
+                $the_list['filters']['the_map'] = $this->formatListMapFilter($map_items, $wrapper['default_marker'], $twigPaths);
+                $the_list['has_map'] = true;
+            }
+        }
 
-        //Temp
-        $return = $the_list['the_grid'];
-        return $return;
-    }
+        // Récupère la pagination compilés
+        $the_list['pager'] = $this->formatListPager($the_items['max_num_pages'], $wrapper['uniqid']);
 
-    public function formatListFilters()
-    {
-        $return = '';
-
+        $return = \Timber::compile($twigPaths[$wrapper['the_list_filters']['listfilter_woody_tpl']], $the_list);
         return $return;
     }
 
@@ -303,7 +333,7 @@ class WoodyTheme_WoodyCompilers
      * @param   uniqid          section id of list content
      * @return  return          pagination html elements
      */
-    public function formatListPager($max_num_pages, $uniqid, $filters = false)
+    public function formatListPager($max_num_pages, $uniqid)
     {
         $return = [];
         $explode_uniqid = explode('_', $uniqid);
@@ -315,11 +345,49 @@ class WoodyTheme_WoodyCompilers
             'format' => '?' . $the_page_name . '=%#%#' . $uniqid,
             'current' => $get_the_page,
             'mid_size' => 3,
-            'type' => 'list',
-            'add_args' => $filters
+            'type' => 'list'
         ];
 
+        // wd($pager_args);
+
         $return = paginate_links($pager_args);
+        return $return;
+    }
+
+    /**
+     * Create map filter if needed
+     * @param   max_num_pages
+     * @param   uniqid          section id of list content
+     * @return  return          pagination html elements
+     */
+    public function formatListMapFilter($items, $marker, $twigPaths)
+    {
+        $return = [];
+
+        if (!empty($items)) {
+            foreach ($items['items'] as $item) {
+                if (!empty($item['location']['lat']) && !empty($item['location']['lng'])) {
+                    $the_marker = [
+                        'image_style' => 'ratio_16_9',
+                        'item' => [
+                            'title' => $item['title'],
+                            'description' => $item['description'],
+                            'img' => $item['img'],
+                            'link' => $item['link']
+                        ]
+                    ];
+
+                    $return['markers'][] = [
+                        'map_position' => [
+                            'lat' => $item['location']['lat'],
+                            'lng' => $item['location']['lng']
+                        ],
+                        'compiled_marker' => $marker,
+                        'marker_thumb_html' => \Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker)
+                    ];
+                }
+            }
+        }
         return $return;
     }
 }

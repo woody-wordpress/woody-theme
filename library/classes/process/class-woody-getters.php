@@ -365,14 +365,14 @@ class WoodyTheme_WoodyGetters
      * Auteur : Benoit Bouchaud
      * Return : Retourne les données d'une preview basée sur des fiches SIT
      * @param    wrapper - Données du layout acf sous forme de tableau
-     * @param    post - objet post wp
+     * @param    item - objet post wp
      * @return   data - Un tableau de données
      *
      */
 
-    function getTouristicSheetPreview($wrapper = null, $post)
+    function getTouristicSheetPreview($wrapper = null, $item)
     {
-        if (!is_object($post) || empty($post)) {
+        if (!is_object($item) || empty($item)) {
             return;
         }
 
@@ -387,11 +387,11 @@ class WoodyTheme_WoodyGetters
             }
         }
 
-        $raw_item = get_field('touristic_raw_item', $post->ID);
+        $raw_item = get_field('touristic_raw_item', $item->ID);
         if (!empty($raw_item)) {
             $item = json_decode(base64_decode($raw_item), true);
         } else {
-            $sheet_id = get_field('touristic_sheet_id', $post->ID);
+            $sheet_id = get_field('touristic_sheet_id', $item->ID);
             $items = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $lang, array(), 'json', 'item');
             if (!empty($items['items']) && is_array($items['items'])) {
                 $item = current($items['items']);
@@ -401,7 +401,7 @@ class WoodyTheme_WoodyGetters
         $data = [
             'title' => (!empty($item['title'])) ? $this->tools->replacePattern($item['title']) : '',
             'link' => [
-                'url' => apply_filters('woody_get_permalink', $post->ID),
+                'url' => apply_filters('woody_get_permalink', $item->ID),
                 'target' => (!empty($item['targetBlank'])) ? '_blank' : '',
             ],
         ];
@@ -485,7 +485,7 @@ class WoodyTheme_WoodyGetters
             }
         }
 
-        $data['sheet_id'] = get_field('touristic_sheet_id', $post->ID);
+        $data['sheet_id'] = get_field('touristic_sheet_id', $item->ID);
 
         return $data;
     }
@@ -530,8 +530,60 @@ class WoodyTheme_WoodyGetters
         return $data;
     }
 
-    public function getListUrlParams()
+    public function getListFilters($filter_wrapper, $list_items)
     {
-        // Ici on doit traiter les paramètres d'url et le envoyer à  $compiler->formatListContent
+        $return = [];
+        if (!empty($filter_wrapper)) {
+            // TAXONOMY | DURATION | PRICE | CUSTOM TERM
+            foreach ($filter_wrapper['list_filters'] as $key => $filter) {
+                switch ($filter['list_filter_type']) {
+                    case 'taxonomy':
+                        $return[$key] = ['filter_type' => 'custom_terms'];
+
+                        $taxonomy = $filter['list_filter_taxonomy'];
+                        $terms = get_terms($taxonomy, ['hide_empty' => false]);
+                        foreach ($terms as $term_key => $term) {
+                            $return[$key]['list_filter_custom_terms'][] = [
+                                'value' => $term->term_id,
+                                'label' => $term->name
+                            ];
+                        }
+                        break;
+
+                    case 'custom_terms':
+                        $return[$key] = ['filter_type' => 'custom_terms'];
+                        foreach ($filter['list_filter_custom_terms'] as $term_key => $term) {
+                            $term = get_term($term['value']);
+                            $return[$key]['list_filter_custom_terms'][$term_key] = [
+                                'value' => $term->term_id,
+                                'label' => $term->name
+                            ];
+                        }
+                        break;
+
+                    case 'map':
+                        $return['the_map'] = [];
+                        break;
+
+                    case 'price':
+                    case 'duration':
+                        $return[$key]['filter_type'] = $filter['list_filter_type'];
+                        $field = $filter['list_filter_type'] == 'price' ? 'the_price_price' : 'the_duration_count_days';
+                        $return[$key]['minmax']['max'] = $this->tools->getMinMaxWoodyFieldValues($list_items['wp_query']->query_vars, $field);
+                        $return[$key]['minmax']['min'] = $this->tools->getMinMaxWoodyFieldValues($list_items['wp_query']->query_vars, $field, 'min');
+                        break;
+                }
+                $return[$key]['filter_name'] = $filter['list_filter_name'];
+            }
+            $return['button'] = (!empty($filter_wrapper['filter_button'])) ? $filter_wrapper['filter_button'] : '';
+            $return['reset'] = (!empty($filter_wrapper['reset_button'])) ? $filter_wrapper['reset_button'] : '';
+            $return['display']['background_img'] = (!empty($filter_wrapper['background_img'])) ? $filter_wrapper['background_img'] : '';
+            $return['display']['classes'][] = (!empty($filter_wrapper['background_color'])) ? $filter_wrapper['background_color'] : '';
+            $return['display']['classes'][] = (!empty($filter_wrapper['background_img_opacity'])) ? $filter_wrapper['background_img_opacity'] : '';
+            $return['display']['classes'][] = (!empty($filter_wrapper['border_color'])) ? $filter_wrapper['border_color'] : '';
+            $return['display']['classes'] = implode(' ', $return['display']['classes']);
+        }
+
+        return $return;
     }
 }

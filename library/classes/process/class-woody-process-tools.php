@@ -337,4 +337,16 @@ class WoodyTheme_WoodyProcessTools
         $img_all_metadata = (!empty($img_all_data['_wp_attachment_metadata'][0])) ? maybe_unserialize($img_all_data['_wp_attachment_metadata'][0]) : '';
         return (!empty($img_all_metadata['woody-instagram'])) ? $img_all_metadata['woody-instagram'] : '';
     }
+
+    public function countFocusResults($items, $return)
+    {
+        if (!empty($items['items']) && !empty($items['wp_query']->found_posts)) {
+            $return['items_count'] = $items['wp_query']->found_posts;
+            $return['items_count_type'] = $return['items_count'] > 1 ? 'plural' : 'singular';
+        } else {
+            $return['items_count_type'] = 'empty';
+        }
+
+        return $return;
+    }
 }
