@@ -140,11 +140,15 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         }
 
         // If price equals 0, replace elements to display Free
-        if(isset($trip_infos['the_price']['price']) && $trip_infos['the_price']['price'] === 0 ) {
+        if(isset($trip_infos['the_price']['price']) && $trip_infos['the_price']['price'] == 0 ) {
             $trip_infos['the_price']['price'] = __("Gratuit", "woody-theme");
             $trip_infos['the_price']['prefix_price'] = "";
             $trip_infos['the_price']['suffix_price'] = "";
             $trip_infos['the_price']['currency'] = "none";
+        }
+        // If empty people min and people max, unset people
+        if(empty($trip_infos['the_peoples']['peoples_min']) && empty($trip_infos['the_peoples']['peoples_max'])){
+            unset($trip_infos['the_peoples']);
         }
 
         if (!empty($trip_infos['the_duration']['count_days']) || !empty($trip_infos['the_length']['length']) || !empty($trip_infos['the_price']['price'])) {
