@@ -548,6 +548,7 @@ class WoodyTheme_WoodyGetters
                                 'label' => $term->name
                             ];
                         }
+                        $return[$key]['filter_name'] = $filter['list_filter_name'];
                         break;
 
                     case 'custom_terms':
@@ -559,10 +560,12 @@ class WoodyTheme_WoodyGetters
                                 'label' => $term->name
                             ];
                         }
+                        $return[$key]['filter_name'] = $filter['list_filter_name'];
                         break;
 
                     case 'map':
                         $return['the_map'] = [];
+                        unset($filter_wrapper['list_filters'][$key]);
                         break;
 
                     case 'price':
@@ -571,9 +574,9 @@ class WoodyTheme_WoodyGetters
                         $field = $filter['list_filter_type'] == 'price' ? 'the_price_price' : 'the_duration_count_days';
                         $return[$key]['minmax']['max'] = $this->tools->getMinMaxWoodyFieldValues($list_items['wp_query']->query_vars, $field);
                         $return[$key]['minmax']['min'] = $this->tools->getMinMaxWoodyFieldValues($list_items['wp_query']->query_vars, $field, 'min');
+                        $return[$key]['filter_name'] = $filter['list_filter_name'];
                         break;
                 }
-                $return[$key]['filter_name'] = $filter['list_filter_name'];
             }
             $return['button'] = (!empty($filter_wrapper['filter_button'])) ? $filter_wrapper['filter_button'] : '';
             $return['reset'] = (!empty($filter_wrapper['reset_button'])) ? $filter_wrapper['reset_button'] : '';
@@ -583,7 +586,6 @@ class WoodyTheme_WoodyGetters
             $return['display']['classes'][] = (!empty($filter_wrapper['border_color'])) ? $filter_wrapper['border_color'] : '';
             $return['display']['classes'] = implode(' ', $return['display']['classes']);
         }
-
         return $return;
     }
 }
