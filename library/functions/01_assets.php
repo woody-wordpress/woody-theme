@@ -177,19 +177,6 @@ function getWoodyTwigPaths()
     return $woodyTwigsPaths;
 }
 
-
-/**
- *
- * Nom : getMinMaxWoodyFieldValues
- * Auteur : Benoit Bouchaud
- * Return : Retourne le html d'une mise en avant de contenu
- * @param    query_vars Les champs de tris pour rechercher les champ dans une selection de posts
- * @param    field le champ dans lequel on cherche
- * @param    minormax Sting => 'min' ou 'max' (Default max)
- * @return   return - Un nombre
- *
- */
-
 function getPageTerms($post_id)
 {
     $return = [];
