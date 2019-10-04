@@ -266,9 +266,12 @@ class WoodyTheme_WoodyCompilers
         $the_list['uniqid'] = $wrapper['uniqid'];
         $the_list['has_map'] = false;
 
-        // On récupère la pagination pour passer un paramètre à la query
+        // On récupère la pagination et sa position pour passer un paramètre à la query
         $paginate = ($wrapper['the_list_pager']['list_pager_type'] == 'basic_pager') ? true : false;
 
+        if ($paginate) {
+            $the_list['pager_position'] = $wrapper['the_list_pager']['list_pager_position'];
+        }
         // On récupère les champs du formulaire de requete du backoffice
         $list_el_wrapper = $wrapper['the_list_elements']['list_el_req_fields'];
 
@@ -347,8 +350,6 @@ class WoodyTheme_WoodyCompilers
             'mid_size' => 3,
             'type' => 'list'
         ];
-
-        // wd($pager_args);
 
         $return = paginate_links($pager_args);
         return $return;
