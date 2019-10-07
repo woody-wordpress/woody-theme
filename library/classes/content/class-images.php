@@ -688,7 +688,6 @@ class WoodyTheme_Images
             // Set filename
             $cropped_image_filename = $img_path_parts['filename'] . '-' . $size['width'] . 'x' . $size['height'] . '.' . $img_path_parts['extension'];
             $cropped_image_path = $img_path_parts['dirname'] . '/' . $cropped_image_filename;
-
             if (file_exists($cropped_image_path)) {
                 if ($force) {
                     // Remove image before recreate
@@ -699,74 +698,89 @@ class WoodyTheme_Images
                 }
             }
 
+            // Set webp filename
             $cropped_webp_path = $cropped_image_path . '.webp';
-
             if (file_exists($cropped_webp_path) && $force) {
                 // Remove image before recreate
                 unlink($cropped_webp_path);
             }
 
-            $img = imagecreatefromstring(file_get_contents($img_path));
-            imagecolortransparent($img, imagecolorallocatealpha($img, 0, 0, 0, 127));
-            imagealphablending($img, true);
-            imagesavealpha($img, true);
-            if ($img === false) {
-                die("imagecreatefromstring failed");
+            // Crop
+            $img_editor = wp_get_image_editor($img_path);
+            if (!is_wp_error($img_editor)) {
+                $img_editor->crop($req_x, $req_y, $req_width, $req_height, $size['width'], $size['height'], false);
+                $img_editor->set_quality(75);
+                $img_editor->save($cropped_image_path);
+
+                // Get Image cropped data
+                if (file_exists($cropped_image_path)) {
+                    $img_cropped_parts = pathinfo($cropped_image_path);
+                    return $img_cropped_parts['basename'];
+                }
             }
+            unset($img_editor);
 
-            $cropped_img = imagecreatetruecolor($size['width'], $size['height']);
-            imagecolortransparent($cropped_img, imagecolorallocatealpha($cropped_img, 0, 0, 0, 127));
-            imagealphablending($cropped_img, false);
-            imagesavealpha($cropped_img, true);
-            if ($cropped_img === false) {
-                die("imagecreatetruecolor failed");
-            }
+            // $img = imagecreatefromstring(file_get_contents($img_path));
+            // imagecolortransparent($img, imagecolorallocatealpha($img, 0, 0, 0, 127));
+            // imagealphablending($img, true);
+            // imagesavealpha($img, true);
+            // if ($img === false) {
+            //     die("imagecreatefromstring failed");
+            // }
 
-            $img = imagecrop($img, ['x' => $req_x, 'y' => $req_y, 'width' => $req_width, 'height' => $req_height]);
-            imagecopyresampled($cropped_img, $img, 0, 0, 0, 0, $size['width'], $size['height'], $req_width, $req_height);
+            // $cropped_img = imagecreatetruecolor($size['width'], $size['height']);
+            // imagecolortransparent($cropped_img, imagecolorallocatealpha($cropped_img, 0, 0, 0, 127));
+            // imagealphablending($cropped_img, false);
+            // imagesavealpha($cropped_img, true);
+            // if ($cropped_img === false) {
+            //     die("imagecreatetruecolor failed");
+            // }
 
-            switch ($image_type) {
-                case IMAGETYPE_JPEG:
-                    // Create a webp version
-                    imagewebp($cropped_img, $cropped_webp_path, 75);
+            // $img = imagecrop($img, ['x' => $req_x, 'y' => $req_y, 'width' => $req_width, 'height' => $req_height]);
+            // imagecopyresampled($cropped_img, $img, 0, 0, 0, 0, $size['width'], $size['height'], $req_width, $req_height);
 
-                    // Export JPEG progressive with no EXIF data
-                    imageinterlace($cropped_img, true);
-                    imagejpeg($cropped_img, $cropped_image_path, 75);
-                    break;
+            // switch ($image_type) {
+            //     case IMAGETYPE_JPEG:
+            //         // Create a webp version
+            //         imagewebp($cropped_img, $cropped_webp_path, 75);
 
-                case IMAGETYPE_GIF:
-                    // Active transparency
-                    imagealphablending($cropped_img, false);
-                    imagesavealpha($cropped_img, true);
+            //         // Export JPEG progressive with no EXIF data
+            //         imageinterlace($cropped_img, true);
+            //         imagejpeg($cropped_img, $cropped_image_path, 75);
+            //         break;
 
-                    // Export GIF progressive with no EXIF data
-                    imageinterlace($cropped_img, true);
-                    imagegif($cropped_img, $cropped_image_path);
-                    break;
+            //     case IMAGETYPE_GIF:
+            //         // Active transparency
+            //         imagealphablending($cropped_img, false);
+            //         imagesavealpha($cropped_img, true);
 
-                case IMAGETYPE_PNG:
-                    // Active transparency
-                    // imagealphablending($cropped_img, false);
-                    // imagesavealpha($cropped_img, true);
+            //         // Export GIF progressive with no EXIF data
+            //         imageinterlace($cropped_img, true);
+            //         imagegif($cropped_img, $cropped_image_path);
+            //         break;
 
-                    // Create a webp version
-                    //imagewebp($cropped_img, $cropped_webp_path, 75);
+            //     case IMAGETYPE_PNG:
+            //         // Active transparency
+            //         // imagealphablending($cropped_img, false);
+            //         // imagesavealpha($cropped_img, true);
 
-                    // Export PNG progressive with no EXIF data
-                    imagepng($cropped_img, $cropped_image_path, 3);
-                    break;
-            }
+            //         // Create a webp version
+            //         //imagewebp($cropped_img, $cropped_webp_path, 75);
 
-            // Free memory
-            imagedestroy($img);
-            imagedestroy($cropped_img);
+            //         // Export PNG progressive with no EXIF data
+            //         imagepng($cropped_img, $cropped_image_path, 3);
+            //         break;
+            // }
 
-            // Get Image cropped data
-            if (file_exists($cropped_image_path)) {
-                $img_cropped_parts = pathinfo($cropped_image_path);
-                return $img_cropped_parts['basename'];
-            }
+            // // Free memory
+            // imagedestroy($img);
+            // imagedestroy($cropped_img);
+
+            // // Get Image cropped data
+            // if (file_exists($cropped_image_path)) {
+            //     $img_cropped_parts = pathinfo($cropped_image_path);
+            //     return $img_cropped_parts['basename'];
+            // }
 
             // // Crop
             // $img_editor = wp_get_image_editor($img_path);
