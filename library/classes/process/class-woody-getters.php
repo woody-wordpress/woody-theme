@@ -37,6 +37,7 @@ class WoodyTheme_WoodyGetters
     public function getAutoFocusData($current_post, $wrapper, $paginate = false, $uniqid = 0, $ingore_maxnum = false)
     {
 
+        $the_items = [];
         $process = new WoodyTheme_WoodyProcess;
         $query_result = $process->processWoodyQuery($current_post, $wrapper, $paginate, $uniqid, $ingore_maxnum);
 

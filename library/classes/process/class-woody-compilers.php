@@ -301,8 +301,11 @@ class WoodyTheme_WoodyCompilers
             }
         }
 
-        // On récupère les résultats du formulaire du bakcoffice, sans prendre en compte le nombre d'éléments max
+        // On récupère les résultats du formulaire du bakcoffice.
         $the_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid']);
+        if (empty($the_items)) {
+            $the_items['empty'] = __('Désolé, aucun contenu ne correspond à votre recherche', 'woody-theme');
+        }
 
         // On compile la grille des éléments
         $the_list['the_grid'] = \Timber::compile($twigPaths[$wrapper['the_list_elements']['listgrid_woody_tpl']], $the_items);
@@ -324,7 +327,9 @@ class WoodyTheme_WoodyCompilers
         }
 
         // Récupère la pagination compilés
-        $the_list['pager'] = $this->formatListPager($the_items['max_num_pages'], $wrapper['uniqid']);
+        if (!empty($the_items['max_num_pages'])) {
+            $the_list['pager'] = $this->formatListPager($the_items['max_num_pages'], $wrapper['uniqid']);
+        }
 
         $return = \Timber::compile($twigPaths[$wrapper['the_list_filters']['listfilter_woody_tpl']], $the_list);
         return $return;

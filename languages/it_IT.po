@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.6.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
 "POT-Creation-Date: 2019-10-01T10:58:53+02:00\n"
-"PO-Revision-Date: 2019-10-01 11:05+0200\n"
+"PO-Revision-Date: 2019-10-07 09:49+0200\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -291,7 +291,7 @@ msgstr "Offerta turistica"
 
 #: library/classes/content/class-polylang.php:147
 msgid "Désolé, aucun contenu touristique ne correspond à votre recherche"
-msgstr "Spiacente, nessun contenuto turistico corrisponde alla tua ricerca"
+msgstr "Spiacente, nessun contenuto corrisponde alla tua ricerca"
 
 #: library/classes/content/class-polylang.php:148
 msgid "Désolé, aucune page ne correspond à votre recherche"
