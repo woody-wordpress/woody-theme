@@ -201,7 +201,12 @@ class WoodyTheme_WoodyProcess
             // On récupère la relation choisie (ET/OU) entre les termes
             // et on génère un tableau de term_id pour chaque taxonomie
             $tax_query['custom_tax']['relation'] = (!empty($query_form['focused_taxonomy_terms_andor'])) ? $query_form['focused_taxonomy_terms_andor'] : 'OR';
-            foreach ($query_form['focused_taxonomy_terms'] as $focused_term_key => $focused_term) {
+
+            // Si la valeur n'est pas un tableau (== int), on pousse cette valeur dans un tableau
+            if (is_numeric($query_form['focused_taxonomy_terms'])) {
+                $query_form['focused_taxonomy_terms'] = [$query_form['focused_taxonomy_terms']];
+            }
+            foreach ($query_form['focused_taxonomy_terms'] as $focused_term) {
                 $term = get_term($focused_term);
                 if (!empty($term) && is_object($term)) {
                     $custom_tax[$term->taxonomy][] = $focused_term;
@@ -219,34 +224,42 @@ class WoodyTheme_WoodyProcess
 
         // On retourne les contenus dont le pirx et compris entre 2 valeurs
         if (!empty($query_form['focused_trip_price'])) {
-            $the_meta_query[] = [
-                'key'        => 'the_price_price',
-                'value'        => $query_form['focused_trip_price']['min'],
-                'type'      => 'NUMERIC',
-                'compare'    => '>='
-            ];
-            $the_meta_query[] = [
-                'key'        => 'the_price_price',
-                'value'        => $query_form['focused_trip_price']['max'],
-                'type'      => 'NUMERIC',
-                'compare'    => '<='
-            ];
+            if (!empty($query_form['focused_trip_price']['min'])) {
+                $the_meta_query[] = [
+                    'key'        => 'the_price_price',
+                    'value'        => $query_form['focused_trip_price']['min'],
+                    'type'      => 'NUMERIC',
+                    'compare'    => '>='
+                ];
+            }
+            if (!empty($query_form['focused_trip_price']['max'])) {
+                $the_meta_query[] = [
+                    'key'        => 'the_price_price',
+                    'value'        => $query_form['focused_trip_price']['max'],
+                    'type'      => 'NUMERIC',
+                    'compare'    => '<='
+                ];
+            }
         }
 
         // On retourne les contenus dont la durée et comprise entre 2 valeurs
         if (!empty($query_form['focused_trip_duration'])) {
-            $the_meta_query[] = [
-                'key'        => 'the_duration_count_days',
-                'value'        => $query_form['focused_trip_duration']['min'],
-                'type'      => 'NUMERIC',
-                'compare'    => '>='
-            ];
-            $the_meta_query[] = [
-                'key'        => 'the_duration_count_days',
-                'value'        => $query_form['focused_trip_duration']['max'],
-                'type'      => 'NUMERIC',
-                'compare'    => '<='
-            ];
+            if (!empty($query_form['focused_trip_duration']['min'])) {
+                $the_meta_query[] = [
+                    'key'        => 'the_duration_count_days',
+                    'value'        => $query_form['focused_trip_duration']['min'],
+                    'type'      => 'NUMERIC',
+                    'compare'    => '>='
+                ];
+            }
+            if (!empty($query_form['focused_trip_duration']['max'])) {
+                $the_meta_query[] = [
+                    'key'        => 'the_duration_count_days',
+                    'value'        => $query_form['focused_trip_duration']['max'],
+                    'type'      => 'NUMERIC',
+                    'compare'    => '<='
+                ];
+            }
         }
 
         // On trie les contenus en fonction d'un ordre donné
