@@ -531,9 +531,17 @@ class WoodyTheme_WoodyGetters
         return $data;
     }
 
-    public function getListFilters($filter_wrapper, $list_items)
+    public function getListFilters($filter_wrapper, $active_filters, $default_items)
     {
         $return = [];
+
+        // On transforme $active_filters['focused_taxonomy_terms'] en tableau
+        if (empty($active_filters['focused_taxonomy_terms'])) {
+            $active_filters['focused_taxonomy_terms'] = [];
+        } elseif (is_numeric($active_filters['focused_taxonomy_terms'])) {
+            $active_filters['focused_taxonomy_terms'] = [$active_filters['focused_taxonomy_terms']];
+        }
+
         if (!empty($filter_wrapper)) {
             // TAXONOMY | DURATION | PRICE | CUSTOM TERM
             foreach ($filter_wrapper['list_filters'] as $key => $filter) {
@@ -546,7 +554,8 @@ class WoodyTheme_WoodyGetters
                         foreach ($terms as $term_key => $term) {
                             $return[$key]['list_filter_custom_terms'][] = [
                                 'value' => $term->term_id,
-                                'label' => $term->name
+                                'label' => $term->name,
+                                'checked' => (in_array($term->term_id, $active_filters['focused_taxonomy_terms'])) ? true : false
                             ];
                         }
                         $return[$key]['filter_name'] = $filter['list_filter_name'];
@@ -558,7 +567,8 @@ class WoodyTheme_WoodyGetters
                             $term = get_term($term['value']);
                             $return[$key]['list_filter_custom_terms'][$term_key] = [
                                 'value' => $term->term_id,
-                                'label' => $term->name
+                                'label' => $term->name,
+                                'checked' => (in_array($term->term_id, $active_filters['focused_taxonomy_terms'])) ? true : false
                             ];
                         }
                         $return[$key]['filter_name'] = $filter['list_filter_name'];
@@ -573,8 +583,16 @@ class WoodyTheme_WoodyGetters
                     case 'duration':
                         $return[$key]['filter_type'] = $filter['list_filter_type'];
                         $field = $filter['list_filter_type'] == 'price' ? 'the_price_price' : 'the_duration_count_days';
-                        $return[$key]['minmax']['max'] = $this->tools->getMinMaxWoodyFieldValues($list_items['wp_query']->query_vars, $field);
-                        $return[$key]['minmax']['min'] = $this->tools->getMinMaxWoodyFieldValues($list_items['wp_query']->query_vars, $field, 'min');
+
+                        // On récupère les valeurs min et max des champs prix et durée parmi tous les posts choisis en backoffice
+                        $return[$key]['minmax']['max'] = $this->tools->getMinMaxWoodyFieldValues($default_items['wp_query']->query_vars, $field);
+                        $return[$key]['minmax']['min'] = $this->tools->getMinMaxWoodyFieldValues($default_items['wp_query']->query_vars, $field, 'min');
+
+                        // Si le prix ou la durée ont été filtrés, on place les curseurs des sliders
+                        if (!empty($active_filters['focused_trip_' . $filter['list_filter_type']])) {
+                            $return[$key]['minmax']['default_max'] = (!empty($active_filters['focused_trip_' . $filter['list_filter_type']]['max'])) ? $active_filters['focused_trip_' . $filter['list_filter_type']]['max'] : false;
+                            $return[$key]['minmax']['default_min'] = (!empty($active_filters['focused_trip_' . $filter['list_filter_type']]['min'])) ? $active_filters['focused_trip_' . $filter['list_filter_type']]['min'] : false;
+                        }
                         $return[$key]['filter_name'] = $filter['list_filter_name'];
                         break;
                 }

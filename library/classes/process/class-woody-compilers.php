@@ -24,7 +24,14 @@ class WoodyTheme_WoodyCompilers
     {
         $this->tools = new WoodyTheme_WoodyProcessTools;
         $this->getter = new WoodyTheme_WoodyGetters;
+        $this->registerHooks();
     }
+
+    public function registerHooks()
+    {
+        add_action('save_post', [$this, 'cleanListFiltersTransients']);
+    }
+
     /**
      *
      * Nom : formatFocusesData
@@ -275,23 +282,40 @@ class WoodyTheme_WoodyCompilers
         // On récupère les champs du formulaire de requete du backoffice
         $list_el_wrapper = $wrapper['the_list_elements']['list_el_req_fields'];
 
+        // On récupère les items par défaut et on les stocke dans un transient pour les passer aux filtres
+        $transient_name = 'list_filters__post_' . $current_post->ID . '_' . $wrapper['uniqid'];
+        $default_items = get_transient($transient_name);
+        if (empty($default_items)) {
+            $default_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid']);
+            set_transient($transient_name, $default_items);
+
+            // On crée/update l'option qui liste les transients pour pouvoir les supprimer lors d'un save_post
+            $transient_list = get_option('list_filters_cache');
+            if (empty($transient_list)) {
+                add_option('list_filters_cache', [$transient_name]);
+            } else {
+                $transient_list[] = $transient_name;
+                update_option('list_filters_cache', $transient_list);
+            }
+        }
+
         // On récupère et on applique les valeurs des filtres si existantes
         $form_result = (!empty(filter_input_array(INPUT_GET))) ? filter_input_array(INPUT_GET) : [];
         if (!empty($form_result)) {
             foreach ($form_result as $result_key => $input_value) {
-                if (strpos($result_key, 'taxonomy_terms') !== false) {
+                if (strpos($result_key, $the_list['uniqid']) !== false && strpos($result_key, 'taxonomy_terms') !== false) {
                     if (is_array($list_el_wrapper['focused_taxonomy_terms'])) {
                         $list_el_wrapper['focused_taxonomy_terms'] = array_unique(array_merge($list_el_wrapper['focused_taxonomy_terms'], $input_value));
                     } else {
                         $list_el_wrapper['focused_taxonomy_terms'] = $input_value;
                     }
-                } elseif (strpos($result_key, 'trip_duration') !== false) {
+                } elseif (strpos($result_key, $the_list['uniqid']) !== false && strpos($result_key, 'trip_duration') !== false) {
                     if (strpos($result_key, 'max') !== false) {
                         $list_el_wrapper['focused_trip_duration']['max'] = $input_value;
                     } else {
                         $list_el_wrapper['focused_trip_duration']['min'] = $input_value;
                     }
-                } elseif (strpos($result_key, 'trip_price') !== false) {
+                } elseif (strpos($result_key, $the_list['uniqid']) !== false && strpos($result_key, 'trip_price') !== false) {
                     if (strpos($result_key, 'max') !== false) {
                         $list_el_wrapper['focused_trip_price']['max'] = $input_value;
                     } else {
@@ -299,6 +323,9 @@ class WoodyTheme_WoodyCompilers
                     }
                 }
             }
+            $the_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid']);
+        } else {
+            $the_items = $default_items;
         }
 
         // On récupère les résultats du formulaire du bakcoffice.
@@ -315,7 +342,7 @@ class WoodyTheme_WoodyCompilers
 
         // Récupère la donnée des filtres de base
         if (!empty($wrapper['the_list_filters'])) {
-            $the_list['filters'] = $this->getter->getListFilters($wrapper['the_list_filters'], $the_items);
+            $the_list['filters'] = $this->getter->getListFilters($wrapper['the_list_filters'], $list_el_wrapper, $default_items);
 
             // Si on a trouvé un filtre de carte, on remplit le tableau the_map
             if (isset($the_list['filters']['the_map'])) {
@@ -333,6 +360,17 @@ class WoodyTheme_WoodyCompilers
 
         $return = \Timber::compile($twigPaths[$wrapper['the_list_filters']['listfilter_woody_tpl']], $the_list);
         return $return;
+    }
+
+    public function cleanListFiltersTransients()
+    {
+        $transient_list = get_option('list_filters_cache');
+        if (!empty($transient_list)) {
+            foreach ($transient_list as $transient) {
+                delete_transient($transient);
+            }
+        }
+        delete_option('list_filters_cache');
     }
 
     /**
