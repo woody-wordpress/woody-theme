@@ -308,7 +308,7 @@ class WoodyTheme_WoodyProcess
         // On définit le pattern pour les urls de pagination
         if ($paginate == true) {
             $explode_uniqid = explode('_', $uniqid);
-            $the_page_name = 'section_' . $explode_uniqid[1] . '_' . $explode_uniqid[4];
+            $the_page_name = 'section_' . $explode_uniqid[1] . '_' . $explode_uniqid[3];
             $the_page_offset = (!empty($_GET[$the_page_name])) ? htmlentities(stripslashes($_GET[$the_page_name])) : '';
             $the_query['paged'] = (!empty($the_page_offset)) ? $the_page_offset : 1;
         }

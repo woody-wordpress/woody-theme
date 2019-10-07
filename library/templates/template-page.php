@@ -315,7 +315,9 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
                     if (!empty($section['section_content'])) {
                         foreach ($section['section_content'] as $layout_id => $layout) {
-                            $layout['uniqid'] = 'section_' . $section_id . '_' . 'section_content_' . $layout_id;
+                            // On définit un uniqid court à utiliser dans les filtres de listes en paramètre GET
+                            // Uniqid long : section . $section_id . '_section_content' . $layout_id
+                            $layout['uniqid'] = 's_' . $section_id . '_sc_' . $layout_id;
                             $layout['visual_effects'] = (!empty($layout['visual_effects'])) ? $this->tools->formatVisualEffectData($layout['visual_effects']) : '';
                             $components['items'][] = $this->process->processWoodyLayouts($layout, $this->context);
                         }

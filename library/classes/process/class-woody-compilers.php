@@ -303,19 +303,19 @@ class WoodyTheme_WoodyCompilers
         $form_result = (!empty(filter_input_array(INPUT_GET))) ? filter_input_array(INPUT_GET) : [];
         if (!empty($form_result)) {
             foreach ($form_result as $result_key => $input_value) {
-                if (strpos($result_key, $the_list['uniqid']) !== false && strpos($result_key, 'taxonomy_terms') !== false) {
+                if (strpos($result_key, $the_list['uniqid']) !== false && strpos($result_key, 'tt') !== false) { // Taxonomy Terms
                     if (is_array($list_el_wrapper['focused_taxonomy_terms'])) {
                         $list_el_wrapper['focused_taxonomy_terms'] = array_unique(array_merge($list_el_wrapper['focused_taxonomy_terms'], $input_value));
                     } else {
                         $list_el_wrapper['focused_taxonomy_terms'] = $input_value;
                     }
-                } elseif (strpos($result_key, $the_list['uniqid']) !== false && strpos($result_key, 'trip_duration') !== false) {
+                } elseif (strpos($result_key, $the_list['uniqid']) !== false && strpos($result_key, 'td') !== false) { // Trip Duration
                     if (strpos($result_key, 'max') !== false) {
                         $list_el_wrapper['focused_trip_duration']['max'] = $input_value;
                     } else {
                         $list_el_wrapper['focused_trip_duration']['min'] = $input_value;
                     }
-                } elseif (strpos($result_key, $the_list['uniqid']) !== false && strpos($result_key, 'trip_price') !== false) {
+                } elseif (strpos($result_key, $the_list['uniqid']) !== false && strpos($result_key, 'tp') !== false) { // Trip Price
                     if (strpos($result_key, 'max') !== false) {
                         $list_el_wrapper['focused_trip_price']['max'] = $input_value;
                     } else {
@@ -383,12 +383,12 @@ class WoodyTheme_WoodyCompilers
     {
         $return = [];
         $explode_uniqid = explode('_', $uniqid);
-        $the_page_name = 'section_' . $explode_uniqid[1] . '_' . $explode_uniqid[4];
+        $the_page_name = 'section_' . $explode_uniqid[1] . '_' . $explode_uniqid[3];
         $get_the_page = (!empty($_GET[$the_page_name])) ? htmlentities(stripslashes($_GET[$the_page_name])) : 1;
 
         $pager_args = [
             'total' => $max_num_pages,
-            'format' => '?' . $the_page_name . '=%#%#' . $uniqid,
+            'format' => '?' . $the_page_name . '=%#%',
             'current' => $get_the_page,
             'mid_size' => 3,
             'type' => 'list'
