@@ -43,12 +43,12 @@ class WoodyTheme_Images
             ));
         });
 
-        // add_action('rest_api_init', function () {
-        //     register_rest_route('woody', '/crop_debug', array(
-        //       'methods' => 'GET',
-        //       'callback' => [$this, 'cropImageAPIDebug']
-        //     ));
-        // });
+        add_action('rest_api_init', function () {
+            register_rest_route('woody', '/crop_debug/(?P<attachment_id>[0-9]{1,10})', array(
+                'methods' => 'GET',
+                'callback' => [$this, 'cropImageAPIDebug']
+            ));
+        });
     }
 
     public function uploadMimes($mime_types)
@@ -565,7 +565,12 @@ class WoodyTheme_Images
         $params = $request->get_params();
         $ratio_name = $params['ratio'];
         $attachment_id = $params['attachment_id'];
-        $image_url = '';
+
+        $force = false;
+        if (strpos($ratio_name, '_force') !== false) {
+            $ratio_name = str_replace('_force', '', $ratio_name);
+            $force = true;
+        }
 
         // Added default sizes
         $_wp_additional_image_sizes['thumbnail'] = ['height' => 150, 'width' => 150, 'crop' => true];
@@ -574,26 +579,31 @@ class WoodyTheme_Images
 
         if (!empty($_wp_additional_image_sizes[$ratio_name])) {
             $size = $_wp_additional_image_sizes[$ratio_name];
-            $attachment_metadata = maybe_unserialize(wp_get_attachment_metadata($attachment_id));
-            $img_path = WP_UPLOAD_DIR . '/' . $attachment_metadata['file'];
-            if (file_exists($img_path) && exif_imagetype($img_path)) {
-                if (empty($attachment_metadata['sizes'][$ratio_name]) || strpos($attachment_metadata['sizes'][$ratio_name]['file'], 'wp-json') !== false) {
-                    $image_crop = $this->cropImage($img_path, $size);
-                    if (!empty($image_crop)) {
-                        $attachment_metadata['sizes'][$ratio_name]['file'] = $image_crop;
-                        wp_update_attachment_metadata($attachment_id, $attachment_metadata);
 
-                        // Save metadata to all languages
-                        $current_lang = pll_get_post_language($attachment_id);
-                        if ($current_lang == PLL_DEFAULT_LANG) {
-                            do_action('save_attachment', $attachment_id);
+            // Default 404
+            $image_url = 'https://api.tourism-system.com/resize/clip/' . $size['width'] . '/' . $size['height'] . '/70/aHR0cHM6Ly9hcGkudG91cmlzbS1zeXN0ZW0uY29tL3N0YXRpYy9hc3NldHMvaW1hZ2VzL3Jlc2l6ZXIvaW1nXzQwNC5qcGc=/404.jpg';
+
+            // Get metadata
+            $attachment_metadata = maybe_unserialize(wp_get_attachment_metadata($attachment_id));
+            if (!empty($attachment_metadata['file'])) {
+                $img_path = WP_UPLOAD_DIR . '/' . $attachment_metadata['file'];
+                if (file_exists($img_path) && exif_imagetype($img_path)) {
+                    if ($force || empty($attachment_metadata['sizes'][$ratio_name]) || strpos($attachment_metadata['sizes'][$ratio_name]['file'], 'wp-json') !== false) {
+                        $image_crop = $this->cropImage($img_path, $size, $force);
+                        if (!empty($image_crop)) {
+                            $attachment_metadata['sizes'][$ratio_name]['file'] = $image_crop;
+                            wp_update_attachment_metadata($attachment_id, $attachment_metadata);
+
+                            // Save metadata to all languages
+                            $current_lang = pll_get_post_language($attachment_id);
+                            if ($current_lang == PLL_DEFAULT_LANG) {
+                                do_action('save_attachment', $attachment_id);
+                            }
                         }
                     }
-                }
 
-                $image_url = wp_get_attachment_image_url($attachment_id, $ratio_name);
-            } else {
-                $image_url = 'https://api.tourism-system.com/resize/clip/' . $size['width'] . '/' . $size['height'] . '/70/aHR0cHM6Ly9hcGkudG91cmlzbS1zeXN0ZW0uY29tL3N0YXRpYy9hc3NldHMvaW1hZ2VzL3Jlc2l6ZXIvaW1nXzQwNC5qcGc=/404.jpg';
+                    $image_url = wp_get_attachment_image_url($attachment_id, $ratio_name);
+                }
             }
         }
 
@@ -605,33 +615,39 @@ class WoodyTheme_Images
         exit;
     }
 
-    // public function cropImageAPIDebug()
-    // {
-    //     global $_wp_additional_image_sizes;
+    public function cropImageAPIDebug(WP_REST_Request $request)
+    {
+        global $_wp_additional_image_sizes;
 
-    //     header('Content-type: text/html');
-    //     foreach ($_wp_additional_image_sizes as $ratio => $size) {
-    //         if (strpos($ratio, 'small') !== false) {
-    //             continue;
-    //         }
-    //         if (strpos($ratio, 'medium') !== false) {
-    //             continue;
-    //         }
-    //         if (strpos($ratio, 'large') !== false) {
-    //             continue;
-    //         }
-    //         print '<h2>' . $ratio . '</h2>';
-    //         print '<p><img style="max-width:50%" src="/wp-json/woody/crop/440/' . $ratio . '" title="' . $ratio . '" alt="' . $ratio . '"></p>';
-    //     }
-    // }
+        $params = $request->get_params();
+        $attachment_id = $params['attachment_id'];
 
-    private function cropImage($img_path, $size, $debug = false)
+        header('Content-type: text/html');
+        foreach ($_wp_additional_image_sizes as $ratio => $size) {
+            if (!empty($ratio)) {
+                if (strpos($ratio, 'small') !== false) {
+                    continue;
+                }
+                if (strpos($ratio, 'medium') !== false) {
+                    continue;
+                }
+                if (strpos($ratio, 'large') !== false) {
+                    continue;
+                }
+                print '<h2>' . $ratio . '</h2>';
+                print '<p><img style="max-width:50%" src="/wp-json/woody/crop/' . $attachment_id . '/' . $ratio . '_force" title="' . $ratio . '" alt="' . $ratio . '"></p>';
+            }
+            break;
+        }
+    }
+
+    private function cropImage($img_path, $size, $force = false)
     {
         // Get infos from original image
         $img_path_parts = pathinfo($img_path);
 
         // get the size of the image
-        list($width_orig, $height_orig) = getimagesize($img_path);
+        list($width_orig, $height_orig, $image_type) = getimagesize($img_path);
         if (!empty($width_orig) && !empty($height_orig)) {
             $ratio_orig = (float) $height_orig / $width_orig;
 
@@ -673,27 +689,99 @@ class WoodyTheme_Images
             $cropped_image_filename = $img_path_parts['filename'] . '-' . $size['width'] . 'x' . $size['height'] . '.' . $img_path_parts['extension'];
             $cropped_image_path = $img_path_parts['dirname'] . '/' . $cropped_image_filename;
 
-            // Remove image before recreate
             if (file_exists($cropped_image_path)) {
-                //unlink($cropped_image_path);
-                $img_cropped_parts = pathinfo($cropped_image_path);
-                return $img_cropped_parts['basename'];
-            }
-
-            // Crop
-            $img_editor = wp_get_image_editor($img_path);
-            if (!is_wp_error($img_editor)) {
-                $img_editor->crop($req_x, $req_y, $req_width, $req_height, $size['width'], $size['height'], false);
-                $img_editor->set_quality(75);
-                $img_editor->save($cropped_image_path);
-
-                // Get Image cropped data
-                if (file_exists($cropped_image_path)) {
+                if ($force) {
+                    // Remove image before recreate
+                    unlink($cropped_image_path);
+                } else {
                     $img_cropped_parts = pathinfo($cropped_image_path);
                     return $img_cropped_parts['basename'];
                 }
             }
-            unset($img_editor);
+
+            $cropped_webp_path = $cropped_image_path . '.webp';
+
+            if (file_exists($cropped_webp_path) && $force) {
+                // Remove image before recreate
+                unlink($cropped_webp_path);
+            }
+
+            $img = imagecreatefromstring(file_get_contents($img_path));
+            imagecolortransparent($img, imagecolorallocatealpha($img, 0, 0, 0, 127));
+            imagealphablending($img, true);
+            imagesavealpha($img, true);
+            if ($img === false) {
+                die("imagecreatefromstring failed");
+            }
+
+            $cropped_img = imagecreatetruecolor($size['width'], $size['height']);
+            imagecolortransparent($cropped_img, imagecolorallocatealpha($cropped_img, 0, 0, 0, 127));
+            imagealphablending($cropped_img, false);
+            imagesavealpha($cropped_img, true);
+            if ($cropped_img === false) {
+                die("imagecreatetruecolor failed");
+            }
+
+            $img = imagecrop($img, ['x' => $req_x, 'y' => $req_y, 'width' => $req_width, 'height' => $req_height]);
+            imagecopyresampled($cropped_img, $img, 0, 0, 0, 0, $size['width'], $size['height'], $req_width, $req_height);
+
+            switch ($image_type) {
+                case IMAGETYPE_JPEG:
+                    // Create a webp version
+                    imagewebp($cropped_img, $cropped_webp_path, 75);
+
+                    // Export JPEG progressive with no EXIF data
+                    imageinterlace($cropped_img, true);
+                    imagejpeg($cropped_img, $cropped_image_path, 75);
+                    break;
+
+                case IMAGETYPE_GIF:
+                    // Active transparency
+                    imagealphablending($cropped_img, false);
+                    imagesavealpha($cropped_img, true);
+
+                    // Export GIF progressive with no EXIF data
+                    imageinterlace($cropped_img, true);
+                    imagegif($cropped_img, $cropped_image_path);
+                    break;
+
+                case IMAGETYPE_PNG:
+                    // Active transparency
+                    // imagealphablending($cropped_img, false);
+                    // imagesavealpha($cropped_img, true);
+
+                    // Create a webp version
+                    //imagewebp($cropped_img, $cropped_webp_path, 75);
+
+                    // Export PNG progressive with no EXIF data
+                    imagepng($cropped_img, $cropped_image_path, 3);
+                    break;
+            }
+
+            // Free memory
+            imagedestroy($img);
+            imagedestroy($cropped_img);
+
+            // Get Image cropped data
+            if (file_exists($cropped_image_path)) {
+                $img_cropped_parts = pathinfo($cropped_image_path);
+                return $img_cropped_parts['basename'];
+            }
+
+            // // Crop
+            // $img_editor = wp_get_image_editor($img_path);
+            // if (!is_wp_error($img_editor)) {
+            //     $img_editor->crop($req_x, $req_y, $req_width, $req_height, $size['width'], $size['height'], false);
+            //     $img_editor->set_quality(75);
+            //     $img_editor->save($cropped_image_path);
+
+            //     // Get Image cropped data
+            //     if (file_exists($cropped_image_path)) {
+            //         $img_cropped_parts = pathinfo($cropped_image_path);
+            //         return $img_cropped_parts['basename'];
+            //     }
+            // }
+            // unset($img_editor);
         }
     }
 }
