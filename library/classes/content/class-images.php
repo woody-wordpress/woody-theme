@@ -27,6 +27,7 @@ class WoodyTheme_Images
         add_action('delete_attachment', [$this, 'deleteAttachment'], 1);
 
         // Filters
+        add_filter('wp_image_editors', [$this, 'wpImageEditors']);
         add_filter('intermediate_image_sizes_advanced', [$this, 'removeAutoThumbs'], 10, 2);
         add_filter('image_size_names_choose', [$this, 'imageSizeNamesChoose'], 10, 1);
         add_filter('wp_read_image_metadata', [$this, 'readImageMetadata'], 10, 4);
@@ -49,6 +50,11 @@ class WoodyTheme_Images
                 'callback' => [$this, 'cropImageAPIDebug']
             ));
         });
+    }
+
+    public function wpImageEditors()
+    {
+        return ['WP_Image_Editor_GD'];
     }
 
     public function uploadMimes($mime_types)
@@ -637,8 +643,8 @@ class WoodyTheme_Images
                 print '<h2>' . $ratio . '</h2>';
                 print '<p><img style="max-width:50%" src="/wp-json/woody/crop/' . $attachment_id . '/' . $ratio . '_force" title="' . $ratio . '" alt="' . $ratio . '"></p>';
             }
-            break;
         }
+        exit();
     }
 
     private function cropImage($img_path, $size, $force = false)
