@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-10-01T12:32:51+02:00\n"
+"POT-Creation-Date: 2019-10-08T09:29:27+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.3.0\n"
 "X-Domain: woody-theme\n"
@@ -342,9 +342,9 @@ msgid "La page que vous recherchez est peut-être ici ?"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:154
-#: library/functions/03_woody_format_data.php:1213
-#: library/functions/03_woody_format_data.php:1335
-#: library/functions/03_woody_format_data.php:1389
+#: library/classes/process/class-woody-getters.php:279
+#: library/classes/process/class-woody-getters.php:455
+#: library/classes/process/class-woody-getters.php:521
 msgid "Lire la suite"
 msgstr ""
 
@@ -365,7 +365,7 @@ msgid "Réservable"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:159
-#: library/functions/03_woody_format_data.php:1094
+#: library/classes/process/class-woody-getters.php:336
 msgid "Télécharger"
 msgstr ""
 
@@ -619,6 +619,7 @@ msgid "Comprenant"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:237
+#: library/templates/template-page.php:150
 msgid "Gratuit"
 msgstr ""
 
@@ -670,27 +671,32 @@ msgstr ""
 msgid "Publié le"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:256
-msgid "Merci d'activer le javascript pour afficher"
+#: library/classes/content/class-polylang.php:254
+#: library/classes/process/class-woody-compilers.php:334
+msgid "Désolé, aucun contenu ne correspond à votre recherche"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:257
-msgid "le bloc de commentaires Disqus"
+msgid "Merci d'activer le javascript pour afficher"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:258
+msgid "le bloc de commentaires Disqus"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:259
 msgid "Une erreur est survenue lors de l'affichage des commentaires. Merci de contacter votre administrateur"
 msgstr ""
 
-#: library/templates/template-page.php:90
+#: library/templates/template-page.php:96
 msgid "Oups !"
 msgstr ""
 
-#: library/templates/template-page.php:91
+#: library/templates/template-page.php:97
 msgid "Page non trouvée"
 msgstr ""
 
-#: library/templates/template-page.php:92
+#: library/templates/template-page.php:98
 msgid "La page que vous recherchez a peut-être été supprimée ou est temporairement indisponible."
 msgstr ""
 

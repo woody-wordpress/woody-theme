@@ -251,6 +251,7 @@ class WoodyTheme_Polylang
 
         // Divers
         __('Publié le', 'woody-theme');
+        __('Désolé, aucun contenu ne correspond à votre recherche', 'woody-theme');
 
         // Disqus
         __('Merci d\'activer le javascript pour afficher', 'woody-theme');
