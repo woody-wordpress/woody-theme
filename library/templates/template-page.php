@@ -145,6 +145,18 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             }
         }
 
+        // If price equals 0, replace elements to display Free
+        if(isset($trip_infos['the_price']['price']) && $trip_infos['the_price']['price'] == 0 ) {
+            $trip_infos['the_price']['price'] = __("Gratuit", "woody-theme");
+            $trip_infos['the_price']['prefix_price'] = "";
+            $trip_infos['the_price']['suffix_price'] = "";
+            $trip_infos['the_price']['currency'] = "none";
+        }
+        // If empty people min and people max, unset people
+        if(empty($trip_infos['the_peoples']['peoples_min']) && empty($trip_infos['the_peoples']['peoples_max'])){
+            unset($trip_infos['the_peoples']);
+        }
+
         if (!empty($trip_infos['the_duration']['count_days']) || !empty($trip_infos['the_length']['length']) || !empty($trip_infos['the_price']['price'])) {
             //TODO: Gérer le fichier gps pour affichage s/ carte
             $trip_infos['the_duration']['count_days'] = ($trip_infos['the_duration']['count_days']) ? humanDays($trip_infos['the_duration']['count_days']) : '';
@@ -199,8 +211,10 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     $page_hero['title_as_h1'] = true;
                 }
 
-                $page_hero['page_heading_img']['attachment_more_data'] = (!empty($page_hero['page_heading_img'])) ? $this->tools->getAttachmentMoreData($page_hero['page_heading_img']['ID']) : [];
-                if (!empty($page_hero['page_heading_add_social_movie']) && !empty($page_hero['page_heading_social_movie'])) {
+                if (!empty($page_hero['page_heading_img'])){
+                    $page_hero['page_heading_img']['attachment_more_data'] = (!empty($page_hero['page_heading_img']['ID'])) ? getAttachmentMoreData($page_hero['page_heading_img']['ID']) : [];
+                }
+                    if (!empty($page_hero['page_heading_add_social_movie']) && !empty($page_hero['page_heading_social_movie'])) {
                     preg_match_all('@src="([^"]+)"@', $page_hero['page_heading_social_movie'], $result);
                     if (!empty($result[1]) && !empty($result[1][0])) {
                         $iframe_url = $result[1][0];
