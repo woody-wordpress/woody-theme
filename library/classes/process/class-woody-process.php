@@ -305,11 +305,9 @@ class WoodyTheme_WoodyProcess
             $the_query['posts_per_page'] = -1;
         }
 
-        // On définit le pattern pour les urls de pagination
+        // On récupère l'offset de la page
         if ($paginate == true) {
-            $explode_uniqid = explode('_', $uniqid);
-            $the_page_name = 'section_' . $explode_uniqid[1] . '_' . $explode_uniqid[3];
-            $the_page_offset = (!empty($_GET[$the_page_name])) ? htmlentities(stripslashes($_GET[$the_page_name])) : '';
+            $the_page_offset = (!empty($_GET[$uniqid])) ? htmlentities(stripslashes($_GET[$uniqid])) : '';
             $the_query['paged'] = (!empty($the_page_offset)) ? $the_page_offset : 1;
         }
 

@@ -382,14 +382,12 @@ class WoodyTheme_WoodyCompilers
     public function formatListPager($max_num_pages, $uniqid)
     {
         $return = [];
-        $explode_uniqid = explode('_', $uniqid);
-        $the_page_name = 'section_' . $explode_uniqid[1] . '_' . $explode_uniqid[3];
-        $get_the_page = (!empty($_GET[$the_page_name])) ? htmlentities(stripslashes($_GET[$the_page_name])) : 1;
+        $page_offset = (!empty($_GET[$uniqid])) ? htmlentities(stripslashes($_GET[$uniqid])) : 1;
 
         $pager_args = [
             'total' => $max_num_pages,
-            'format' => '?' . $the_page_name . '=%#%',
-            'current' => $get_the_page,
+            'format' => '?' . $uniqid . '=%#%',
+            'current' => $page_offset,
             'mid_size' => 3,
             'type' => 'list'
         ];
