@@ -305,6 +305,10 @@ class WoodyTheme_WoodyCompilers
             foreach ($form_result as $result_key => $input_value) {
                 if (strpos($result_key, $the_list['uniqid']) !== false && strpos($result_key, 'tt') !== false) { // Taxonomy Terms
                     if (is_array($list_el_wrapper['focused_taxonomy_terms'])) {
+                        // Si on recoit un identifiant unique, on le pousse dans un tableau
+                        if (!is_array($input_value)) {
+                            $input_value = [$input_value];
+                        }
                         $list_el_wrapper['focused_taxonomy_terms'] = array_unique(array_merge($list_el_wrapper['focused_taxonomy_terms'], $input_value));
                     } else {
                         $list_el_wrapper['focused_taxonomy_terms'] = $input_value;
