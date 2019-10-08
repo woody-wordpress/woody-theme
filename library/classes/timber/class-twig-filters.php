@@ -39,6 +39,7 @@ class WoodyTheme_Twig_Filters
         $twig->addFilter(new Twig_SimpleFilter('rcd', [$this, 'rcd']));
         $twig->addFilter(new Twig_SimpleFilter('wd', [$this, 'wd']));
 
+
         return $twig;
     }
 

@@ -7,6 +7,8 @@
  * @since WoodyTheme 1.0.0
  */
 
+use WoodyProcess\Tools\WoodyTheme_WoodyProcessTools;
+
 class WoodyTheme_Yoast
 {
     public function __construct()
@@ -62,7 +64,8 @@ class WoodyTheme_Yoast
 
     public function wpseoTransformPattern($string)
     {
-        $string = getTransformedPattern($string, Timber::get_post());
+        $tools = new WoodyTheme_WoodyProcessTools;
+        $string = $tools->replacePattern($string, Timber::get_post());
         return $string;
     }
 

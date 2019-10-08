@@ -556,6 +556,12 @@ class WoodyTheme_Roles
                 'contributor' => true,
                 'translator' => true,
             ],
+            'woody_process_csv_edit' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => true,
+                'translator' => false,
+            ],
 
             // Taxonomies
             'Configurer les thématiques' => [

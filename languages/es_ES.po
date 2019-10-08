@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.6.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2019-10-01T10:58:53+02:00\n"
-"PO-Revision-Date: 2019-10-01 11:04+0200\n"
+"POT-Creation-Date: 2019-10-08T09:29:27+02:00\n"
+"PO-Revision-Date: 2019-10-08 09:30+0200\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -189,6 +189,33 @@ msgstr "persona"
 msgid "personnes"
 msgstr "personas"
 
+#: library/classes/content/class-polylang.php:112
+msgid ""
+"Attention, vous n'avez pas saisi d'identifiant de playlist en paramètre du "
+"shortcode.\n"
+"            Pour rappel, le shortcode s'utilise par exemple de cette manière"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:114
+msgid "Année"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:115
+msgid "Établissement"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:116
+msgid "Établissement disponible"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:117
+msgid "Établissement indisponible"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:118
+msgid "Aucunes informations concernant cet établissement pour l'année en cours"
+msgstr ""
+
 #: library/classes/content/class-polylang.php:121
 msgid "M'y rendre"
 msgstr "Cómo llegar"
@@ -320,9 +347,9 @@ msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "¿La página que buscas puede que esté aquí?"
 
 #: library/classes/content/class-polylang.php:154
-#: library/functions/03_woody_format_data.php:1213
-#: library/functions/03_woody_format_data.php:1335
-#: library/functions/03_woody_format_data.php:1389
+#: library/classes/process/class-woody-getters.php:279
+#: library/classes/process/class-woody-getters.php:455
+#: library/classes/process/class-woody-getters.php:521
 msgid "Lire la suite"
 msgstr "Seguir leyendo"
 
@@ -343,7 +370,7 @@ msgid "Réservable"
 msgstr "Reservable"
 
 #: library/classes/content/class-polylang.php:159
-#: library/functions/03_woody_format_data.php:1094
+#: library/classes/process/class-woody-getters.php:336
 msgid "Télécharger"
 msgstr "Descargar"
 
@@ -601,6 +628,7 @@ msgid "Comprenant"
 msgstr "Incluyendo"
 
 #: library/classes/content/class-polylang.php:237
+#: library/templates/template-page.php:150
 msgid "Gratuit"
 msgstr "Gratuito"
 
@@ -652,15 +680,20 @@ msgstr "Base de la"
 msgid "Publié le"
 msgstr "Publicado el"
 
-#: library/classes/content/class-polylang.php:256
+#: library/classes/content/class-polylang.php:254
+#: library/classes/process/class-woody-compilers.php:334
+msgid "Désolé, aucun contenu ne correspond à votre recherche"
+msgstr "Lo sentimos, no hay contenido que coincida con su búsqueda"
+
+#: library/classes/content/class-polylang.php:257
 msgid "Merci d'activer le javascript pour afficher"
 msgstr "Por favor, habilite javascript para mostrar"
 
-#: library/classes/content/class-polylang.php:257
+#: library/classes/content/class-polylang.php:258
 msgid "le bloc de commentaires Disqus"
 msgstr "el bloque de comentarios Disqus"
 
-#: library/classes/content/class-polylang.php:258
+#: library/classes/content/class-polylang.php:259
 msgid ""
 "Une erreur est survenue lors de l'affichage des commentaires. Merci de "
 "contacter votre administrateur"
@@ -668,15 +701,15 @@ msgstr ""
 "Se ha producido un error al visualizar comentarios. Póngase en contacto con "
 "su administrador"
 
-#: library/templates/template-page.php:90
+#: library/templates/template-page.php:96
 msgid "Oups !"
 msgstr "¡Vaya!"
 
-#: library/templates/template-page.php:91
+#: library/templates/template-page.php:97
 msgid "Page non trouvée"
 msgstr "Página no encontrada"
 
-#: library/templates/template-page.php:92
+#: library/templates/template-page.php:98
 msgid ""
 "La page que vous recherchez a peut-être été supprimée ou est temporairement "
 "indisponible."
