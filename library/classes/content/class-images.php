@@ -576,7 +576,7 @@ class WoodyTheme_Images
             $size = $_wp_additional_image_sizes[$ratio_name];
             $attachment_metadata = maybe_unserialize(wp_get_attachment_metadata($attachment_id));
             $img_path = WP_UPLOAD_DIR . '/' . $attachment_metadata['file'];
-            if (file_exists($img_path)) {
+            if (file_exists($img_path) && exif_imagetype($img_path)) {
                 if (empty($attachment_metadata['sizes'][$ratio_name]) || strpos($attachment_metadata['sizes'][$ratio_name]['file'], 'wp-json') !== false) {
                     $image_crop = $this->cropImage($img_path, $size);
                     if (!empty($image_crop)) {
