@@ -79,3 +79,9 @@ new WoodyTheme_Roles();
 
 // Inclusions
 new WoodyTheme_Inclusions();
+
+// Data Processing
+new WoodyProcess\Tools\WoodyTheme_WoodyProcessTools();
+new WoodyProcess\Getters\WoodyTheme_WoodyGetters();
+new WoodyProcess\Compilers\WoodyTheme_WoodyCompilers();
+new WoodyProcess\Process\WoodyTheme_WoodyProcess();

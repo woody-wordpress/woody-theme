@@ -517,7 +517,7 @@ class WoodyTheme_Roles
             'woody_process_field_check' => [
                 'administrator' => true,
                 'editor' => false,
-                'contributor' => false,
+                'contributor' => true,
                 'translator' => false,
             ],
             'woody_process_medias_sync' => [
@@ -555,6 +555,12 @@ class WoodyTheme_Roles
                 'editor' => true,
                 'contributor' => true,
                 'translator' => true,
+            ],
+            'woody_process_csv_edit' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => true,
+                'translator' => false,
             ],
 
             // Taxonomies

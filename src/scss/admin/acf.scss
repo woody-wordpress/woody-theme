@@ -89,6 +89,29 @@
     }
 }
 
+// Surcharge de la largeurs des miniatures dans les blocs de sections et les groupes d'onlgets
+.acf-field-5b043f0525968 {
+    .acf-field-radio[data-name*="woody_tpl"] {
+        li {
+            @media all and (max-width: 1399px) {
+                width: calc(100% / 3);
+            }
+        }
+    }
+
+    .acf-repeater {
+        .acf-field-radio[data-name*="woody_tpl"] {
+            li {
+                width: calc(100% / 3);
+
+                @media all and (max-width: 1399px) {
+                    width: 50%;
+                }
+            }
+        }
+    }
+}
+
 // On applique du style aux descritpions et titres des templates dans les champs woody_tpl
 .tpl-choice-wrapper {
     position: relative;
@@ -359,6 +382,26 @@
 
     .layout:not(.-collapsed) {
         box-shadow: 0 2px 35px 5px #d5d5d5;
+    }
+}
+
+// On retire les paddings des repeater
+@media all and (max-width:1399px) {
+
+    // On réduit certaines marge pour donner la place aux champs
+    .acf-fields>.acf-field {
+        &.acf-field-repeater {
+            padding: 0;
+        }
+
+        &.acf-field-flexible-content {
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+    }
+
+    .acf-table>tbody>tr>td {
+        padding: 2px;
     }
 }
 

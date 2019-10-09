@@ -8,13 +8,19 @@
  */
 
 use Woody\Modules\GroupQuotation\GroupQuotation;
+use WoodyProcess\Tools\WoodyTheme_WoodyProcessTools;
+use WoodyProcess\Process\WoodyTheme_WoodyProcess;
 
 class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 {
     protected $twig_tpl = '';
+    protected $tools;
+    protected $process;
 
     public function __construct()
     {
+        $this->tools = new WoodyTheme_WoodyProcessTools;
+        $this->process = new WoodyTheme_WoodyProcess;
         parent::__construct();
     }
 
@@ -91,6 +97,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             'subtitle' =>  '404 - ' . __("Page non trouvée", 'woody-theme'),
             'text' => __("La page que vous recherchez a peut-être été supprimée ou est temporairement indisponible.", 'woody-theme'),
             'suggestions' => $suggestions,
+            'search' => get_permalink(get_field('es_search_page_url', 'options'))
         ];
 
         $custom = apply_filters('woody_404_custom', $vars);
@@ -128,20 +135,26 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         if (in_array('groups', $this->context['enabled_woody_options'])) {
             $groupQuotation = new GroupQuotation;
             // On vérifie si le prix est calculé sur un ensemble de composant et on le définit le cas échéant
-            if (!empty($trip_infos['the_price']['price_type']) && $trip_infos['the_price']['price_type'] == 'component_based') {
-                $price_fields = $trip_infos['the_price'];
-                // apply_filters('woody_get_price_from_components', $price_fields);
+            if (!empty($trip_infos['the_price']['activate_quotation'])) {
                 $trip_infos['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price']);
-                if ($trip_infos['the_price']['activate_quotation'] == true) {
-                    $quotation_id = get_option("options_quotation_page_url");
-                    $trip_infos['quotation_link']['link_label'] = get_permalink($quotation_id) . "?sejour=" . $this->context['post_id'];
-                }
+                $quotation_id = get_option("options_quotation_page_url");
+                $trip_infos['quotation_link']['link_label'] = get_permalink($quotation_id) . "?sejour=" . $this->context['post_id'];
             }
             if (!empty($trip_infos['the_duration']['duration_unit']) && $trip_infos['the_duration']['duration_unit'] == 'component_based') {
-                $duration_fields = $trip_infos['the_duration'];
-                // apply_filters('woody_get_duration_from_components', $duration_fields);
                 $trip_infos['the_duration'] = $groupQuotation->calculTripDuration($trip_infos['the_duration']);
             }
+        }
+
+        // If price equals 0, replace elements to display Free
+        if (isset($trip_infos['the_price']['price']) && $trip_infos['the_price']['price'] == 0) {
+            $trip_infos['the_price']['price'] = __("Gratuit", "woody-theme");
+            $trip_infos['the_price']['prefix_price'] = "";
+            $trip_infos['the_price']['suffix_price'] = "";
+            $trip_infos['the_price']['currency'] = "none";
+        }
+        // If empty people min and people max, unset people
+        if (empty($trip_infos['the_peoples']['peoples_min']) && empty($trip_infos['the_peoples']['peoples_max'])) {
+            unset($trip_infos['the_peoples']);
         }
 
         if (!empty($trip_infos['the_duration']['count_days']) || !empty($trip_infos['the_length']['length']) || !empty($trip_infos['the_price']['price'])) {
@@ -175,6 +188,10 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     $page_teaser['post_coordinates'] = (!empty(getAcfGroupFields('group_5b3635da6529e', $this->context['post']))) ? getAcfGroupFields('group_5b3635da6529e', $this->context['post']) : '';
                 }
 
+                if (!empty($page_teaser['page_teaser_display_created'])) {
+                    $page_teaser['created'] = get_the_date();
+                }
+
                 // Unset breadcrumb if checked in hide page zones options
                 if (!empty($this->context['hide_page_zones']) && in_array('breadcrumb', $this->context['hide_page_zones'])) {
                     unset($page_teaser['breadcrumb']);
@@ -194,13 +211,18 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     $page_hero['title_as_h1'] = true;
                 }
 
-                $page_hero['page_heading_img']['attachment_more_data'] = (!empty($page_hero['page_heading_img'])) ? getAttachmentMoreData($page_hero['page_heading_img']['ID']) : '';
+                if (!empty($page_hero['page_heading_img'])) {
+                    $page_hero['page_heading_img']['attachment_more_data'] = (!empty($page_hero['page_heading_img']['ID'])) ? $this->tools->getAttachmentMoreData($page_hero['page_heading_img']['ID']) : [];
+                }
                 if (!empty($page_hero['page_heading_add_social_movie']) && !empty($page_hero['page_heading_social_movie'])) {
                     preg_match_all('@src="([^"]+)"@', $page_hero['page_heading_social_movie'], $result);
-                    $iframe_url = $result[1][0];
-                    if (strpos($iframe_url, 'youtube') != false) {
-                        $yt_params_url = $iframe_url . '?&autoplay=0&rel=0';
-                        $page_hero['page_heading_social_movie'] = str_replace($iframe_url, $yt_params_url, $page_hero['page_heading_social_movie']);
+                    if (!empty($result[1]) && !empty($result[1][0])) {
+                        $iframe_url = $result[1][0];
+
+                        if (strpos($iframe_url, 'youtube') != false) {
+                            $yt_params_url = $iframe_url . '?&autoplay=0&rel=0';
+                            $page_hero['page_heading_social_movie'] = str_replace($iframe_url, $yt_params_url, $page_hero['page_heading_social_movie']);
+                        }
                     }
                 }
 
@@ -290,6 +312,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             $sections = $this->context['timberpost']->get_field('section');
 
             if (!empty($sections) && is_array($sections)) {
+
                 foreach ($sections as $section_id => $section) {
                     $the_header = '';
                     $the_layout = '';
@@ -306,9 +329,11 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
                     if (!empty($section['section_content'])) {
                         foreach ($section['section_content'] as $layout_id => $layout) {
-                            $layout['uniqid'] = 'section_' . $section_id . '_' . 'section_content_' . $layout_id;
-                            $layout['visual_effects'] = (!empty($layout['visual_effects'])) ? formatVisualEffectData($layout['visual_effects']) : '';
-                            $components['items'][] = getComponentItem($layout, $this->context);
+                            // On définit un uniqid court à utiliser dans les filtres de listes en paramètre GET
+                            // Uniqid long : section . $section_id . '_section_content' . $layout_id
+                            $layout['uniqid'] = 's' . $section_id . 'sc' . $layout_id;
+                            $layout['visual_effects'] = (!empty($layout['visual_effects'])) ? $this->tools->formatVisualEffectData($layout['visual_effects']) : '';
+                            $components['items'][] = $this->process->processWoodyLayouts($layout, $this->context);
                         }
 
                         if (!empty($section['section_woody_tpl'])) {
@@ -317,7 +342,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     }
 
                     // On récupère les données d'affichage personnalisables
-                    $display = getDisplayOptions($section);
+                    $display = $this->tools->getDisplayOptions($section);
 
                     // On ajoute les 3 parties compilées d'une section + ses paramètres d'affichage
                     // puis on compile le tout dans le template de section Woody
@@ -328,7 +353,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     ];
                     if (!empty($section['section_banner'])) {
                         foreach ($section['section_banner'] as $banner) {
-                            $the_section[$banner] = getSectionBannerFiles($banner);
+                            $the_section[$banner] = $this->tools->getSectionBannerFiles($banner);
                         }
                     }
 

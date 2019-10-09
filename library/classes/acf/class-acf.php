@@ -65,6 +65,8 @@ class WoodyTheme_ACF
 
         add_filter('acf/load_field/name=page_heading_tags', [$this, 'listAllPageTerms'], 10, 3);
 
+        add_filter('acf/load_field/key=field_5d91c4559736e', [$this, 'loadDisqusField'], 10, 3);
+
         // Custom Filter
         add_filter('woody_get_field_option', [$this, 'woodyGetFieldOption'], 10, 3);
     }
@@ -415,11 +417,36 @@ class WoodyTheme_ACF
 
     public function sectionContentLoadField($field)
     {
+        if (!in_array('topics', WOODY_OPTIONS)) {
+            // On retire le bloc de mise en avant de topic si le plugin n'est pas activé
+            unset($field['layouts']['layout_5d7912723303c']);
+        }
+        if (!in_array('groups', WOODY_OPTIONS)) {
+            // On retire le bloc de mise en avant de composant de séjour si le plugin n'est pas activé
+            unset($field['layouts']['5d148175d0510']);
+        }
         if (!in_array('weather', WOODY_OPTIONS)) {
             // On retire l'option bloc météo si le plugin n'est pas activé
             unset($field['layouts']['layout_5c1b579ac3a87']);
         }
+        if (!in_array('disqus', WOODY_OPTIONS)) {
+            // On retire l'option bloc commentaires si le plugin n'est pas activé
+            unset($field['layouts']['layout_5d91d7a234ca6']);
+        }
+
         return $field;
+    }
+
+    /**
+     * Suppression du champ de paramètres Disqus si le plugin n'est pas activé
+     */
+    public function loadDisqusField($field)
+    {
+        if (!in_array('disqus', WOODY_OPTIONS)) {
+            unset($field);
+        } else {
+            return $field;
+        }
     }
 
     public function getPageTypeTerms()
@@ -589,6 +616,7 @@ class WoodyTheme_ACF
                 'blocks-focus-tpl_310',
                 'blocks-focus-tpl_301',
                 'blocks-focus-tpl_304',
+                'blocks-focus-tpl_316',
                 'blocks-focus-tpl_308',
                 'blocks-focus-tpl_306',
                 'blocks-focus-tpl_313',
@@ -596,11 +624,12 @@ class WoodyTheme_ACF
                 'blocks-focus-tpl_303',
                 'blocks-focus-tpl_307',
                 'blocks-focus-tpl_311',
+                'blocks-focus-tpl_314',
                 'blocks-focus-tpl_302',
                 'blocks-focus-tpl_305',
                 'blocks-focus-tpl_315',
+                'blocks-focus-tpl_317',
                 'blocks-focus-tpl_312',
-                'blocks-focus-tpl_314',
                 'lists-list_grids-tpl_307',
                 'lists-list_grids-tpl_302',
                 'lists-list_grids-tpl_309',

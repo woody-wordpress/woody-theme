@@ -110,12 +110,12 @@ class WoodyTheme_Polylang
 
         // Availabilities calendar
         __('Attention, vous n\'avez pas saisi d\'identifiant de playlist en paramètre du shortcode.
-            Pour rappel, le shortcode s\'utilise par exemple de cette manière', 'woody_theme');
-        __('Année', 'woody_theme');
-        __('Établissement', 'woody_theme');
-        __('Établissement disponible', 'woody_theme');
-        __('Établissement indisponible', 'woody_theme');
-        __('Aucunes informations concernant cet établissement pour l\'année en cours', 'woody_theme');
+            Pour rappel, le shortcode s\'utilise par exemple de cette manière', 'woody-theme');
+        __('Année', 'woody-theme');
+        __('Établissement', 'woody-theme');
+        __('Établissement disponible', 'woody-theme');
+        __('Établissement indisponible', 'woody-theme');
+        __('Aucunes informations concernant cet établissement pour l\'année en cours', 'woody-theme');
 
         // Woody blocs
         __("M'y rendre", 'woody-theme');
@@ -211,5 +211,51 @@ class WoodyTheme_Polylang
 
         // Favorites
         __('Ajouter à mes favoris', 'woody-theme');
+
+        // Tides
+        __('Dates', 'woody-theme');
+        __('Basse mer', 'woody-theme');
+        __('Haute mer', 'woody-theme');
+        __('Matin', 'woody-theme');
+        __('Soir', 'woody-theme');
+        __('Heure', 'woody-theme');
+        __('Coef', 'woody-theme');
+        __('Retrouvez prochainement les horaires de marées pour ce mois !', 'woody-theme');
+
+        // Group quotation
+        __('Pour faire une demande de devis, veuillez choisir un séjour.', 'woody-theme');
+        __("Il semblerait qu'il n'y ait pas ou plus de séjours proposant une demande de devis disponibles sur le site", "woody-theme");
+        __("Séjours et activités", "woody-theme");
+        __('Retour à l\'offre', 'woody-theme');
+        __('Récapitulatif', 'woody-theme');
+        __('30 secondes', 'woody-theme');
+        __('Informations', 'woody-theme');
+        __('Coordonnées', 'woody-theme');
+        __("Mon devis", "woody-theme");
+        __("Votre séjour/journée", "woody-theme");
+        __('Comprenant', 'woody-theme');
+        __('Gratuit', 'woody-theme');
+        __('Nombre de personnes', 'woody-theme');
+        __("Language de la/des visite(s)");
+        __("* Champs obligatoires", "woody-theme");
+        __("Nom/Prénom", "woody-theme");
+        __("Raison sociale", "woody-theme");
+        __("Email", "woody-theme");
+        __("Téléphone", "woody-theme");
+        __("Votre commentaire", "woody-theme");
+        __("Valider ma demande de devis", "woody-theme");
+        __("Mon panier", "woody-theme");
+        __("TOTAL ", "woody-theme");
+        __("Base de", "woody-theme");
+        __("personne", "woody-theme");
+
+        // Divers
+        __('Publié le', 'woody-theme');
+        __('Désolé, aucun contenu ne correspond à votre recherche', 'woody-theme');
+
+        // Disqus
+        __('Merci d\'activer le javascript pour afficher', 'woody-theme');
+        __('le bloc de commentaires Disqus', 'woody-theme');
+        __('Une erreur est survenue lors de l\'affichage des commentaires. Merci de contacter votre administrateur', 'woody-theme');
     }
 }

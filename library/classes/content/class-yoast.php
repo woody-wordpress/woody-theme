@@ -1,10 +1,13 @@
 <?php
+
 /**
  * Yoast
  *
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
+
+use WoodyProcess\Tools\WoodyTheme_WoodyProcessTools;
 
 class WoodyTheme_Yoast
 {
@@ -19,6 +22,8 @@ class WoodyTheme_Yoast
         add_action('wpseo_add_opengraph_additional_images', [$this, 'wpseoAddOpengraphAdditionalImages'], 10, 1);
         add_filter('wpseo_opengraph_image', [$this, 'wpseoOpengraphImage'], 10, 1);
         add_filter('wpseo_metadesc', [$this, 'wpseoMetaDesc'], 10, 1);
+        add_filter('wpseo_metadesc', [$this, 'wpseoTransformPattern'], 10, 1);
+        add_filter('wpseo_title', [$this, 'wpseoTransformPattern'], 10, 1);
     }
 
     public function wpseoAddOpengraphAdditionalImages($object)
@@ -55,6 +60,13 @@ class WoodyTheme_Yoast
     public function wpseoMetaDesc($string)
     {
         return strip_tags($string);
+    }
+
+    public function wpseoTransformPattern($string)
+    {
+        $tools = new WoodyTheme_WoodyProcessTools;
+        $string = $tools->replacePattern($string, Timber::get_post());
+        return $string;
     }
 
     // // define the action for register yoast_variable replacments

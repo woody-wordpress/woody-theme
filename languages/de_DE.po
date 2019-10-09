@@ -4,24 +4,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.6.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2019-07-25T17:50:25+02:00\n"
-"PO-Revision-Date: 2019-07-25 17:54+0200\n"
+"POT-Creation-Date: 2019-10-08T09:29:27+02:00\n"
+"PO-Revision-Date: 2019-10-08 09:29+0200\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-Domain: woody-theme\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Theme Name of the theme
-msgid "Woody (Thème parent)"
+msgid "Woody (Parent theme)"
 msgstr "Woody (übergeordnetes Theme)"
 
 #. Description of the theme
-msgid "Theme parent des thèmes de Raccourci Agency"
+msgid "Parent theme of the Raccourci Agency themes"
 msgstr "Übergeordnetes Theme  von den Themes von Raccourci Agency"
 
 #. Author of the theme
@@ -181,12 +181,40 @@ msgid "jours"
 msgstr "Tagen"
 
 #: library/classes/content/class-polylang.php:107
+#: library/classes/content/class-polylang.php:250
 msgid "personne"
 msgstr "Person"
 
 #: library/classes/content/class-polylang.php:108
 msgid "personnes"
 msgstr "Personen"
+
+#: library/classes/content/class-polylang.php:112
+msgid ""
+"Attention, vous n'avez pas saisi d'identifiant de playlist en paramètre du "
+"shortcode.\n"
+"            Pour rappel, le shortcode s'utilise par exemple de cette manière"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:114
+msgid "Année"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:115
+msgid "Établissement"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:116
+msgid "Établissement disponible"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:117
+msgid "Établissement indisponible"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:118
+msgid "Aucunes informations concernant cet établissement pour l'année en cours"
+msgstr ""
 
 #: library/classes/content/class-polylang.php:121
 msgid "M'y rendre"
@@ -317,8 +345,9 @@ msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "Die Seite die Sie suchen ist vielleicht hier?"
 
 #: library/classes/content/class-polylang.php:154
-#: library/functions/03_woody_format_data.php:906
-#: library/functions/03_woody_format_data.php:1026
+#: library/classes/process/class-woody-getters.php:279
+#: library/classes/process/class-woody-getters.php:455
+#: library/classes/process/class-woody-getters.php:521
 msgid "Lire la suite"
 msgstr "Mehr erfahren"
 
@@ -339,7 +368,7 @@ msgid "Réservable"
 msgstr "Buchbar"
 
 #: library/classes/content/class-polylang.php:159
-#: library/functions/03_woody_format_data.php:799
+#: library/classes/process/class-woody-getters.php:336
 msgid "Télécharger"
 msgstr "Herunterladen"
 
@@ -488,6 +517,7 @@ msgid "Nord"
 msgstr "Nord"
 
 #: library/classes/content/class-polylang.php:202
+#: library/classes/content/class-polylang.php:219
 msgid "Matin"
 msgstr "Morgens"
 
@@ -519,15 +549,165 @@ msgstr "Diese Liste ist jetzt leer. Seiten durchsuchen und hinzufügen!"
 msgid "Ajouter à mes favoris"
 msgstr "Zu meinen Favoriten hinzufügen"
 
-#: library/templates/template-page.php:87
+#: library/classes/content/class-polylang.php:216
+msgid "Dates"
+msgstr "Datum"
+
+#: library/classes/content/class-polylang.php:217
+msgid "Basse mer"
+msgstr "Niedrigwasser"
+
+#: library/classes/content/class-polylang.php:218
+msgid "Haute mer"
+msgstr "Hochwasser"
+
+#: library/classes/content/class-polylang.php:220
+msgid "Soir"
+msgstr "Abend"
+
+#: library/classes/content/class-polylang.php:221
+msgid "Heure"
+msgstr "Stunde"
+
+#: library/classes/content/class-polylang.php:222
+msgid "Coef"
+msgstr "Koeff"
+
+#: library/classes/content/class-polylang.php:223
+msgid "Retrouvez prochainement les horaires de marées pour ce mois !"
+msgstr "Finden Sie bald die Gezeitenpläne für diesen Monat !"
+
+#: library/classes/content/class-polylang.php:226
+msgid "Pour faire une demande de devis, veuillez choisir un séjour."
+msgstr "Um ein Angebot anzufordern, wählen Sie bitte einen Aufenthalt aus."
+
+#: library/classes/content/class-polylang.php:227
+msgid ""
+"Il semblerait qu'il n'y ait pas ou plus de séjours proposant une demande de "
+"devis disponibles sur le site"
+msgstr ""
+"Es scheint, dass es keine oder keine Aufenthalte mehr gibt, die eine Anfrage "
+"nach Angeboten auf der Website anbieten"
+
+#: library/classes/content/class-polylang.php:228
+msgid "Séjours et activités"
+msgstr "Aufenthalte und Aktivitäten"
+
+#: library/classes/content/class-polylang.php:229
+msgid "Retour à l'offre"
+msgstr "Zurück zum Angebot"
+
+#: library/classes/content/class-polylang.php:230
+msgid "Récapitulatif"
+msgstr "Zusammenfassung"
+
+#: library/classes/content/class-polylang.php:231
+msgid "30 secondes"
+msgstr "30 Sekunden"
+
+#: library/classes/content/class-polylang.php:232
+msgid "Informations"
+msgstr "Informationen"
+
+#: library/classes/content/class-polylang.php:233
+msgid "Coordonnées"
+msgstr "Kontaktdaten"
+
+#: library/classes/content/class-polylang.php:234
+msgid "Mon devis"
+msgstr "Mein Angebot"
+
+#: library/classes/content/class-polylang.php:235
+msgid "Votre séjour/journée"
+msgstr "Ihr Aufenthalt / Tag"
+
+#: library/classes/content/class-polylang.php:236
+msgid "Comprenant"
+msgstr "Einschließlich"
+
+#: library/classes/content/class-polylang.php:237
+#: library/templates/template-page.php:150
+msgid "Gratuit"
+msgstr "Kostenlos"
+
+#: library/classes/content/class-polylang.php:238
+msgid "Nombre de personnes"
+msgstr "Anzahl der Personen"
+
+#: library/classes/content/class-polylang.php:240
+msgid "* Champs obligatoires"
+msgstr "Die mit * markierten Felder müssen ausgefüllt werden"
+
+#: library/classes/content/class-polylang.php:241
+msgid "Nom/Prénom"
+msgstr "Name/Vorname"
+
+#: library/classes/content/class-polylang.php:242
+msgid "Raison sociale"
+msgstr "Firmenname"
+
+#: library/classes/content/class-polylang.php:243
+msgid "Email"
+msgstr "E-Mail"
+
+#: library/classes/content/class-polylang.php:244
+msgid "Téléphone"
+msgstr "Telefon-Nummer"
+
+#: library/classes/content/class-polylang.php:245
+msgid "Votre commentaire"
+msgstr "Dein Kommentar"
+
+#: library/classes/content/class-polylang.php:246
+msgid "Valider ma demande de devis"
+msgstr "Meine Anfrage nach einem Angebot bestätigen"
+
+#: library/classes/content/class-polylang.php:247
+msgid "Mon panier"
+msgstr "Mein Warenkorb"
+
+#: library/classes/content/class-polylang.php:248
+msgid "TOTAL "
+msgstr "GESAMT "
+
+#: library/classes/content/class-polylang.php:249
+msgid "Base de"
+msgstr "Basis von"
+
+#: library/classes/content/class-polylang.php:253
+msgid "Publié le"
+msgstr "Veröffentlicht am"
+
+#: library/classes/content/class-polylang.php:254
+#: library/classes/process/class-woody-compilers.php:334
+msgid "Désolé, aucun contenu ne correspond à votre recherche"
+msgstr "Es tut uns leid, kein Inhalt entspricht Ihrer Suche"
+
+#: library/classes/content/class-polylang.php:257
+msgid "Merci d'activer le javascript pour afficher"
+msgstr "Bitte aktivieren Sie Javascript, um die Anzeige zu ermöglichen"
+
+#: library/classes/content/class-polylang.php:258
+msgid "le bloc de commentaires Disqus"
+msgstr "der Disqus Kommentarblock"
+
+#: library/classes/content/class-polylang.php:259
+msgid ""
+"Une erreur est survenue lors de l'affichage des commentaires. Merci de "
+"contacter votre administrateur"
+msgstr ""
+"Bei der Anzeige von Kommentaren ist ein Fehler aufgetreten. Bitte wenden Sie "
+"sich an Ihren Administrator"
+
+#: library/templates/template-page.php:96
 msgid "Oups !"
 msgstr "Ups!"
 
-#: library/templates/template-page.php:88
+#: library/templates/template-page.php:97
 msgid "Page non trouvée"
 msgstr "Seite nicht gefunden"
 
-#: library/templates/template-page.php:89
+#: library/templates/template-page.php:98
 msgid ""
 "La page que vous recherchez a peut-être été supprimée ou est temporairement "
 "indisponible."
@@ -535,7 +715,7 @@ msgstr ""
 "Die gesuchte Seite wurde möglicherweise gelöscht oder ist vorübergehend "
 "nicht verfügbar."
 
-#: library/templates/template.php:323
+#: library/templates/template.php:396
 msgid "Nos suggestions"
 msgstr "Unsere Vorschläge"
 
@@ -544,6 +724,3 @@ msgstr "Unsere Vorschläge"
 
 #~ msgid "Nouvelle Aquitaine"
 #~ msgstr "Neu-Aquitanien"
-
-#~ msgid "Dordogne"
-#~ msgstr "Dordogne"
