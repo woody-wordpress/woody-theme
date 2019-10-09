@@ -323,7 +323,7 @@ class WoodyTheme_WoodyProcess
 
         // On enregistre le tri aléatoire pour la journée en cours (pagination)
         if ($orderby == 'rand' && $paginate == true) {
-            $seed = date("dmY");
+            $seed = (!empty($query_form['seed'])) ? $query_form['seed'] : date("dmY");
             $orderby = 'RAND(' . $seed . ')';
         }
 

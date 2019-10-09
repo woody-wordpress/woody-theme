@@ -282,11 +282,13 @@ class WoodyTheme_WoodyCompilers
         // On récupère les champs du formulaire de requete du backoffice
         $list_el_wrapper = $wrapper['the_list_elements']['list_el_req_fields'];
 
+        // On ajoute une variable à passer à la pagination (surchargée par les paramètres GET la cas échéant)
+        $list_el_wrapper['seed'] = date('dmY');
         // On récupère les items par défaut et on les stocke dans un transient pour les passer aux filtres
         $transient_name = 'list_filters__post_' . $current_post->ID . '_' . $wrapper['uniqid'];
         $default_items = get_transient($transient_name);
         if (empty($default_items)) {
-            $default_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid']);
+            $default_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid'], true);
             set_transient($transient_name, $default_items);
 
             // On crée/update l'option qui liste les transients pour pouvoir les supprimer lors d'un save_post
@@ -299,12 +301,23 @@ class WoodyTheme_WoodyCompilers
             }
         }
 
+        // On récupère les ids des posts non filtrés pour les passer au paramètre post__in de la query
+        $default_items_ids = [];
+        if (!empty($default_items) && !empty($default_items['items'])) {
+            foreach ($default_items['items'] as $item) {
+                $default_items_ids[] = $item['post_id'];
+            }
+        }
+
         // On récupère et on applique les valeurs des filtres si existantes
         $form_result = (!empty(filter_input_array(INPUT_GET))) ? filter_input_array(INPUT_GET) : [];
-        if (!empty($form_result)) {
+        if (!empty($form_result['uniqid'])) {
 
             // On supprimte ce qui est inutile pour les filtres car on a déjà une liste de posts correspondant à la requete du backoffice
             unset($list_el_wrapper['focused_taxonomy_terms']);
+
+            // On surcharge le seed avec celui reçu dans les paramètres GET pour maitriser le random des listes
+            $list_el_wrapper['seed'] = (!empty($form_result['seed'])) ? $form_result['seed'] : null;
 
             foreach ($form_result as $result_key => $input_value) {
                 if (strpos($result_key, $the_list['uniqid']) !== false && strpos($result_key, 'tt') !== false) { // Taxonomy Terms
@@ -327,17 +340,9 @@ class WoodyTheme_WoodyCompilers
                 }
             }
 
-            // On récupère les ids des posts non filtrés pour les passer au paramètre post__in de la query
-            $default_items_ids = [];
-            if (!empty($default_items) && !empty($default_items['items'])) {
-                foreach ($default_items['items'] as $key => $item) {
-                    $default_items_ids[] = $item['post_id'];
-                }
-            }
-
             $the_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid'], false, $default_items_ids, $wrapper['the_list_filters']);
         } else {
-            $the_items = $default_items;
+            $the_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid'], false);
         }
 
         // On affiche un message s'il n'y aucun résultat
@@ -356,16 +361,16 @@ class WoodyTheme_WoodyCompilers
             $the_list['filters'] = $this->getter->getListFilters($wrapper['the_list_filters'], $list_el_wrapper, $default_items);
             // Si on a trouvé un filtre de carte, on remplit le tableau the_map
             if (isset($the_list['filters']['the_map'])) {
-                $map_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid'], true);
+                $map_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid'], true, $default_items_ids, $wrapper['the_list_filters']);
 
                 $the_list['filters']['the_map'] = $this->formatListMapFilter($map_items, $wrapper['default_marker'], $twigPaths);
                 $the_list['has_map'] = true;
             }
         }
 
-        // Récupère la pagination compilés
+        // Récupère la pagination compilée
         if (!empty($the_items['max_num_pages'])) {
-            $the_list['pager'] = $this->formatListPager($the_items['max_num_pages'], $wrapper['uniqid']);
+            $the_list['pager'] = $this->formatListPager($the_items['max_num_pages'], $wrapper['uniqid'], $list_el_wrapper['seed']);
         }
 
         $return = \Timber::compile($twigPaths[$wrapper['the_list_filters']['listfilter_woody_tpl']], $the_list);
@@ -389,14 +394,14 @@ class WoodyTheme_WoodyCompilers
      * @param   uniqid          section id of list content
      * @return  return          pagination html elements
      */
-    public function formatListPager($max_num_pages, $uniqid)
+    public function formatListPager($max_num_pages, $uniqid, $seed)
     {
         $return = [];
         $page_offset = (!empty($_GET[$uniqid])) ? htmlentities(stripslashes($_GET[$uniqid])) : 1;
 
         $pager_args = [
             'total' => $max_num_pages,
-            'format' => '?' . $uniqid . '=%#%',
+            'format' => '?' . $uniqid . '=%#%&seed=' . $seed,
             'current' => $page_offset,
             'mid_size' => 3,
             'type' => 'list'
