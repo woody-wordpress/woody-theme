@@ -79,7 +79,7 @@ class WoodyTheme_ACF_LinkedPages
     public function removeLinkBetweenPages($post_id, $post_after, $post_before)
     {
         $old_linked_post = get_field('field_5d7f57f2b21f7', $post_before);
-        if($old_linked_post){
+        if ($old_linked_post) {
             update_field('field_5d7f57f2b21f7', '', $old_linked_post->ID);
         }
     }
@@ -92,11 +92,8 @@ class WoodyTheme_ACF_LinkedPages
         wp_set_post_terms($post_id, $term->slug, 'prepare_onspot');
 
         if (!wp_is_post_revision($post_id)) {
-            $opposite = false;
-            if (!empty($type)) {
-                // set linked page opposite (if current is preparation post, other must be on spot page )
-                $opposite = $type == true ? false : true ;
-            }
+            // set linked page opposite (if current is preparation post, other must be on spot page )
+            $opposite = $type === false ? true : false;
 
             $linked_post = get_field('field_5d7f57f2b21f7', $post_id);
             if ($linked_post) {
