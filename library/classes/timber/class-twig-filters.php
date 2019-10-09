@@ -33,6 +33,7 @@ class WoodyTheme_Twig_Filters
         $twig->addFilter(new Twig_SimpleFilter('pluralizeUnit', [$this, 'pluralizeUnit']));
 
         $twig->addFilter(new Twig_SimpleFilter('base64Encode', [$this, 'base64Encode']));
+        $twig->addFilter(new Twig_SimpleFilter('seed', [$this, 'seed']));
 
         // debug
         $twig->addFilter(new Twig_SimpleFilter('dump', [$this, 'dump']));
@@ -204,5 +205,12 @@ class WoodyTheme_Twig_Filters
         }
 
         return $amount . ' ' . $plural_unit;
+    }
+
+    public function seed($text)
+    {
+        $seed = date("dmY");
+
+        return $seed;
     }
 }
