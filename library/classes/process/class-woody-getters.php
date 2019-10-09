@@ -17,7 +17,6 @@ use WoodyProcess\Tools\WoodyTheme_WoodyProcessTools;
 
 class WoodyTheme_WoodyGetters
 {
-
     protected $tools;
 
     public function __construct()
@@ -36,7 +35,6 @@ class WoodyTheme_WoodyGetters
      */
     public function getAutoFocusData($current_post, $wrapper, $paginate = false, $uniqid = 0, $ingore_maxnum = false)
     {
-
         $the_items = [];
         $process = new WoodyTheme_WoodyProcess;
         $query_result = $process->processWoodyQuery($current_post, $wrapper, $paginate, $uniqid, $ingore_maxnum);
@@ -91,7 +89,7 @@ class WoodyTheme_WoodyGetters
             // La donnée de la vignette est saisie en backoffice
             if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
                 $the_items['items'][$key] = $this->getCustomPreview($item_wrapper['custom_content'], $wrapper);
-                // La donnée de la vignette correspond à un post sélectionné
+            // La donnée de la vignette correspond à un post sélectionné
             } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
                 $item = $item_wrapper['existing_content'];
                 $status = $item['content_selection']->post_status;
@@ -371,7 +369,7 @@ class WoodyTheme_WoodyGetters
      *
      */
 
-    function getTouristicSheetPreview($wrapper = null, $item)
+    public function getTouristicSheetPreview($wrapper = null, $item)
     {
         if (!is_object($item) || empty($item)) {
             return;
@@ -429,7 +427,7 @@ class WoodyTheme_WoodyGetters
                 }
             }
             if (in_array('description', $wrapper['display_elements'])) {
-                $data['description'] = (!empty($sheet['desc'])) ? replacePattern($sheet['desc']) : '';
+                $data['description'] = (!empty($sheet['desc'])) ? $this->tools->replacePattern($sheet['desc']) : '';
                 if (!empty($wrapper['deal_mode'])) {
                     if (!empty($sheet['deals']['list'][0]['description'][$lang])) {
                         $data['description'] = $sheet['deals']['list'][0]['description'][$lang];
@@ -497,7 +495,7 @@ class WoodyTheme_WoodyGetters
      * @param   item - Objet post wp
      * @return  data - Un tableau de données
      */
-    function getTopicPreview($wrapper, $item)
+    public function getTopicPreview($wrapper, $item)
     {
         $data = [];
         $data['post_id'] = $item->ID;
