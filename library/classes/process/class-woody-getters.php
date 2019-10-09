@@ -34,12 +34,12 @@ class WoodyTheme_WoodyGetters
      * @return   the_items - Tableau de contenus compilés + infos complémentaires
      *
      */
-    public function getAutoFocusData($current_post, $wrapper, $paginate = false, $uniqid = 0, $ingore_maxnum = false)
+    public function getAutoFocusData($current_post, $wrapper, $paginate = false, $uniqid = 0, $ingore_maxnum = false, $posts_in = null, $filters = null)
     {
 
         $the_items = [];
         $process = new WoodyTheme_WoodyProcess;
-        $query_result = $process->processWoodyQuery($current_post, $wrapper, $paginate, $uniqid, $ingore_maxnum);
+        $query_result = $process->processWoodyQuery($current_post, $wrapper, $paginate, $uniqid, $ingore_maxnum, $posts_in, $filters);
 
         // On transforme la donnée des posts récupérés pour coller aux templates de blocs Woody
         if (!empty($query_result->posts)) {
@@ -161,7 +161,6 @@ class WoodyTheme_WoodyGetters
      */
     public function getAutoFocusTopicsData($wrapper)
     {
-        //TODO: call processWoodyQuery
         $items = [];
 
         $feeds = [];
@@ -429,7 +428,7 @@ class WoodyTheme_WoodyGetters
                 }
             }
             if (in_array('description', $wrapper['display_elements'])) {
-                $data['description'] = (!empty($sheet['desc'])) ? replacePattern($sheet['desc']) : '';
+                $data['description'] = (!empty($sheet['desc'])) ? $this->tools->replacePattern($sheet['desc']) : '';
                 if (!empty($wrapper['deal_mode'])) {
                     if (!empty($sheet['deals']['list'][0]['description'][$lang])) {
                         $data['description'] = $sheet['deals']['list'][0]['description'][$lang];
@@ -534,7 +533,6 @@ class WoodyTheme_WoodyGetters
     public function getListFilters($filter_wrapper, $active_filters, $default_items)
     {
         $return = [];
-
         // On transforme $active_filters['focused_taxonomy_terms'] en tableau
         if (empty($active_filters['focused_taxonomy_terms'])) {
             $active_filters['focused_taxonomy_terms'] = [];
@@ -555,8 +553,18 @@ class WoodyTheme_WoodyGetters
                             $return[$key]['list_filter_custom_terms'][] = [
                                 'value' => $term->term_id,
                                 'label' => $term->name,
-                                'checked' => (in_array($term->term_id, $active_filters['focused_taxonomy_terms'])) ? true : false
                             ];
+
+                            if (!empty($active_filters['filtered_taxonomy_terms']) && is_array($active_filters['filtered_taxonomy_terms'])) {
+
+                                foreach ($active_filters['filtered_taxonomy_terms'] as $filtered_terms) {
+                                    // Si on reçoit le paramètre en tant qu'identifiant (select/radio) => on le pousse dans un tableau
+                                    $filtered_terms = (!is_array($filtered_terms)) ? [$filtered_terms] : $filtered_terms;
+                                    if (in_array($term->term_id, $filtered_terms)) {
+                                        $return[$key]['list_filter_custom_terms'][$term_key]['checked'] = true;
+                                    }
+                                }
+                            }
                         }
                         $return[$key]['filter_name'] = $filter['list_filter_name'];
                         break;
@@ -568,8 +576,18 @@ class WoodyTheme_WoodyGetters
                             $return[$key]['list_filter_custom_terms'][$term_key] = [
                                 'value' => $term->term_id,
                                 'label' => $term->name,
-                                'checked' => (in_array($term->term_id, $active_filters['focused_taxonomy_terms'])) ? true : false
                             ];
+
+                            if (!empty($active_filters['filtered_taxonomy_terms']) && is_array($active_filters['filtered_taxonomy_terms'])) {
+
+                                foreach ($active_filters['filtered_taxonomy_terms'] as $filtered_terms) {
+                                    // Si on reçoit le paramètre en tant qu'identifiant (select/radio) => on le pousse dans un tableau
+                                    $filtered_terms = (!is_array($filtered_terms)) ? [$filtered_terms] : $filtered_terms;
+                                    if (in_array($term->term_id, $filtered_terms)) {
+                                        $return[$key]['list_filter_custom_terms'][$term_key]['checked'] = true;
+                                    }
+                                }
+                            }
                         }
                         $return[$key]['filter_name'] = $filter['list_filter_name'];
                         break;
