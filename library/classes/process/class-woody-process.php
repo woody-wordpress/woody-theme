@@ -173,7 +173,7 @@ class WoodyTheme_WoodyProcess
      * @return   query_result - Un objet
      *
      */
-    public function processWoodyQuery($the_post, $query_form, $paginate = false, $uniqid = 0, $ignore_maxnum = false)
+    public function processWoodyQuery($the_post, $query_form, $paginate = false, $uniqid = 0, $ignore_maxnum = false, $posts_in, $filters)
     {
         $query_result = new \stdClass();
         $tax_query = [];
@@ -206,23 +206,61 @@ class WoodyTheme_WoodyProcess
             if (is_numeric($query_form['focused_taxonomy_terms'])) {
                 $query_form['focused_taxonomy_terms'] = [$query_form['focused_taxonomy_terms']];
             }
+
+            // Pour chaque entrée du tableau focus_taxonomy_terms
             foreach ($query_form['focused_taxonomy_terms'] as $focused_term) {
+                // Si l'entrée est un post id (Aucun filtre n'a été utilisé en front)
                 $term = get_term($focused_term);
                 if (!empty($term) && is_object($term)) {
                     $custom_tax[$term->taxonomy][] = $focused_term;
                 }
+
+                foreach ($custom_tax as $taxo => $terms) {
+                    foreach ($terms as $term) {
+                        $tax_query['custom_tax'][] = array(
+                            'taxonomy' => $taxo,
+                            'terms' => [$term],
+                            'field' => 'term_id',
+                            'operator' => 'IN'
+                        );
+                    }
+                }
             }
-            foreach ($custom_tax as $taxo => $terms) {
-                $tax_query['custom_tax'][] = array(
-                    'taxonomy' => $taxo,
-                    'terms' => $terms,
-                    'field' => 'term_id',
-                    'operator' => 'IN'
-                );
+        } elseif (!empty($query_form['filtered_taxonomy_terms'])) { // Si des filtres de taxonomie ont été utilisés en front
+
+            // On applique le comportement entre TOUS les filtres
+            $tax_query['custom_tax']['relation'] = 'AND';
+
+            // Pour chaque séléction de filtre envoyée, on créé une custom_tax
+            foreach ($query_form['filtered_taxonomy_terms'] as $filter_key => $term_filter) {
+
+                // On récupère l'index du filtre dans la clé du param GET
+                $exploded_key = explode('_', $filter_key);
+                $index = $exploded_key[2];
+
+                $tax_query['custom_tax'][$index] = [];
+
+                // On récupère la relation AND/OR choisie dans le backoffice
+                $tax_query['custom_tax'][$index] = [
+                    'relation' => (!empty($filters['list_filters'][$index]['list_filter_andor'])) ? $filters['list_filters'][$index]['list_filter_andor'] : 'OR'
+                ];
+
+                // Si on reçoit le paramètre en tant qu'identifiant (select/radio) => on le pousse dans un tableau
+                $term_filter = (!is_array($term_filter)) ? [$term_filter] : $term_filter;
+
+                foreach ($term_filter as $term) {
+                    $the_wp_term = get_term($term);
+                    $tax_query['custom_tax'][$index][] = array(
+                        'taxonomy' => $the_wp_term->taxonomy,
+                        'terms' => [$term],
+                        'field' => 'term_id',
+                        'operator' => 'IN'
+                    );
+                }
             }
         }
 
-        // On retourne les contenus dont le pirx et compris entre 2 valeurs
+        // On retourne les contenus dont le prix et compris entre 2 valeurs
         if (!empty($query_form['focused_trip_price'])) {
             if (!empty($query_form['focused_trip_price']['min'])) {
                 $the_meta_query[] = [
@@ -293,12 +331,18 @@ class WoodyTheme_WoodyProcess
         // NB : si aucun choix n'a été fait, on remonte automatiquement tous les contenus de type page
         $the_query = [
             'post_type' => 'page',
-            'posts_per_page' => (!empty($query_form['focused_count'])) ? $query_form['focused_count'] : 16,
+            'posts_per_page' => (!empty($query_form['focused_count'])) ? $query_form['focused_count'] : 999,
             'post_status' => 'publish',
             'post__not_in' => array($the_post->ID),
             'order' => $order,
             'orderby' => $orderby,
         ];
+
+        // wd($posts_in, 'posts_in query');
+
+        if (!empty($posts_in)) {
+            $the_query['post__in'] = $posts_in;
+        }
 
         // Retourne tous les posts correspondant à la query
         if ($ignore_maxnum === true) {
@@ -337,7 +381,6 @@ class WoodyTheme_WoodyProcess
 
         // On créé la wp_query avec les paramètres définis
         $query_result = new \WP_Query($the_query);
-
         return $query_result;
     }
 }

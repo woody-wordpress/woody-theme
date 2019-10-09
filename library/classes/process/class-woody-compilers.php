@@ -302,16 +302,15 @@ class WoodyTheme_WoodyCompilers
         // On récupère et on applique les valeurs des filtres si existantes
         $form_result = (!empty(filter_input_array(INPUT_GET))) ? filter_input_array(INPUT_GET) : [];
         if (!empty($form_result)) {
+
+            // On supprimte ce qui est inutile pour les filtres car on a déjà une liste de posts correspondant à la requete du backoffice
+            unset($list_el_wrapper['focused_taxonomy_terms']);
+
             foreach ($form_result as $result_key => $input_value) {
                 if (strpos($result_key, $the_list['uniqid']) !== false && strpos($result_key, 'tt') !== false) { // Taxonomy Terms
-                    if (is_array($list_el_wrapper['focused_taxonomy_terms'])) {
-                        // Si on recoit un identifiant unique, on le pousse dans un tableau
-                        if (!is_array($input_value)) {
-                            $input_value = [$input_value];
-                        }
-                        $list_el_wrapper['focused_taxonomy_terms'] = array_unique(array_merge($list_el_wrapper['focused_taxonomy_terms'], $input_value));
-                    } else {
-                        $list_el_wrapper['focused_taxonomy_terms'] = $input_value;
+                    $input_value = (!is_array($input_value)) ? [$input_value] : $input_value;
+                    foreach ($input_value as $single_value) {
+                        $list_el_wrapper['filtered_taxonomy_terms'][$result_key][] = $single_value;
                     }
                 } elseif (strpos($result_key, $the_list['uniqid']) !== false && strpos($result_key, 'td') !== false) { // Trip Duration
                     if (strpos($result_key, 'max') !== false) {
@@ -327,13 +326,21 @@ class WoodyTheme_WoodyCompilers
                     }
                 }
             }
-            $the_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid']);
+
+            // On récupère les ids des posts non filtrés pour les passer au paramètre post__in de la query
+            $default_items_ids = [];
+            if (!empty($default_items) && !empty($default_items['items'])) {
+                foreach ($default_items['items'] as $key => $item) {
+                    $default_items_ids[] = $item['post_id'];
+                }
+            }
+
+            $the_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid'], false, $default_items_ids, $wrapper['the_list_filters']);
         } else {
             $the_items = $default_items;
         }
 
-        // On récupère les résultats du formulaire du bakcoffice.
-        $the_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid']);
+        // On affiche un message s'il n'y aucun résultat
         if (empty($the_items)) {
             $the_items['empty'] = __('Désolé, aucun contenu ne correspond à votre recherche', 'woody-theme');
         }
@@ -347,7 +354,6 @@ class WoodyTheme_WoodyCompilers
         // Récupère la donnée des filtres de base
         if (!empty($wrapper['the_list_filters'])) {
             $the_list['filters'] = $this->getter->getListFilters($wrapper['the_list_filters'], $list_el_wrapper, $default_items);
-
             // Si on a trouvé un filtre de carte, on remplit le tableau the_map
             if (isset($the_list['filters']['the_map'])) {
                 $map_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid'], true);
