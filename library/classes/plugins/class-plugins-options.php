@@ -217,6 +217,7 @@ class WoodyTheme_Plugins_Options
 
         // YoImages settings
         $yoimg_crop_settings['cropping_is_active'] = true;
+        $yoimg_crop_settings['webp_is_active'] = WOODY_IMAGE_WEBP_ENABLE;
         $yoimg_crop_settings['retina_cropping_is_active'] = false;
         $yoimg_crop_settings['sameratio_cropping_is_active'] = true;
         $yoimg_crop_settings['crop_qualities'] = array(75);
