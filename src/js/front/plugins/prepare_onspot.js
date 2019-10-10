@@ -8,29 +8,6 @@ $(document).ready(function() {
     }
 });
 
-$('.tools .prepare_onspot_switcher input').on('click', function() {
-    var switcher = $(this).prop('checked');
-
-    $.ajax({
-        type: 'POST',
-        dataType: 'json',
-        url: frontendajax.ajaxurl,
-        data: {
-            action: 'redirect_prepare_onspot',
-            params: switcher,
-            post_id: globals.post_id
-        },
-        success: function(url) {
-            window.location.replace(url);
-        }
-    });
-});
-
-var dest_coord = {
-    latitude: 51.507351,
-    longitude: -0.127758
-};
-
 // var opt = {
 //     timeout: 5000,
 //     maximumAge: 0
@@ -53,6 +30,11 @@ var dest_coord = {
 // }
 
 // navigator.geolocation.getCurrentPosition(success, error, opt);
+
+var dest_coord = {
+    latitude: 51.507351,
+    longitude: -0.127758
+};
 
 var coord = {
     latitude: 51.619722,
@@ -92,3 +74,49 @@ function calculDistance(coord, dest_coord) {
     var c = 2 * Math.atan(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
 }
+
+/**
+ * Redirect function
+ * @param param (boolean) prepare || onspot
+ */
+var redirectPrepareOnspot = function(param){
+    $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: frontendajax.ajaxurl,
+        data: {
+            action: 'redirect_prepare_onspot',
+            params: param,
+            post_id: globals.post_id
+        },
+        success: function(url) {
+            setCookie('prepare_onspot', param);
+            window.location.replace(url);
+        }
+    });
+}
+
+/////////////////////////////////////////////////////////////////////////
+// Set cookie to stay on prepare or spot
+/////////////////////////////////////////////////////////////////////////
+
+if (!getCookie('prepare_onspot')) {
+    setCookie('prepare_onspot', $(this).prop('checked'));
+} else {
+    var cookie = getCookie(prepare_onspot);
+    var switcher = $('.tools .prepare_onspot_switcher input').prop('checked');
+
+    if( cookie != switcher ){
+        redirectPrepareOnspot(cookie);
+    }
+}
+
+////////////////////////////////////////////////////////////////////////
+// Click on switcher
+////////////////////////////////////////////////////////////////////////
+
+$('.tools .prepare_onspot_switcher input').on('click', function() {
+    var switcher = $(this).prop('checked');
+    redirectPrepareOnspot(switcher);
+});
+
