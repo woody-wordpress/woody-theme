@@ -81,35 +81,37 @@ class WoodyTheme_WoodyGetters
     {
         $the_items = [];
         $clickable = true;
-        foreach ($wrapper['content_selection'] as $key => $item_wrapper) {
-            $item_wrapper['content_selection_type'] = $wrapper['acf_fc_layout'] == 'focus_trip_components' ? 'existing_content' : $item_wrapper['content_selection_type'];
-            if (!empty($item_wrapper['existing_content']['trip_component'])) {
-                $item_wrapper['existing_content']['content_selection'] = $item_wrapper['existing_content']['trip_component'];
-                $clickable = (!empty($item_wrapper['existing_content']['clickable_component'])) ? true : false;
-            }
+        if(!empty($wrapper['content_selection'])){
+            foreach ($wrapper['content_selection'] as $key => $item_wrapper) {
+                $item_wrapper['content_selection_type'] = $wrapper['acf_fc_layout'] == 'focus_trip_components' ? 'existing_content' : $item_wrapper['content_selection_type'];
+                if (!empty($item_wrapper['existing_content']['trip_component'])) {
+                    $item_wrapper['existing_content']['content_selection'] = $item_wrapper['existing_content']['trip_component'];
+                    $clickable = (!empty($item_wrapper['existing_content']['clickable_component'])) ? true : false;
+                }
 
-            // La donnée de la vignette est saisie en backoffice
-            if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
-                $the_items['items'][$key] = $this->getCustomPreview($item_wrapper['custom_content'], $wrapper);
-                // La donnée de la vignette correspond à un post sélectionné
-            } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
-                $item = $item_wrapper['existing_content'];
-                $status = $item['content_selection']->post_status;
-                if ($status !== 'publish') {
-                    continue;
+                // La donnée de la vignette est saisie en backoffice
+                if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
+                    $the_items['items'][$key] = $this->getCustomPreview($item_wrapper['custom_content'], $wrapper);
+                    // La donnée de la vignette correspond à un post sélectionné
+                } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
+                    $item = $item_wrapper['existing_content'];
+                    $status = $item['content_selection']->post_status;
+                    if ($status !== 'publish') {
+                        continue;
+                    }
+                    switch ($item['content_selection']->post_type) {
+                        case 'page':
+                            $post_preview = $this->getPagePreview($wrapper, $item['content_selection'], $clickable);
+                            break;
+                        case 'touristic_sheet':
+                            $post_preview = $this->getTouristicSheetPreview($wrapper, $item['content_selection']);
+                            break;
+                        case 'woody_topic':
+                            $post_preview = $this->getTopicPreview($wrapper, $item['content_selection']);
+                            break;
+                    }
+                    $the_items['items'][$key] = (!empty($post_preview)) ?  $post_preview : '';
                 }
-                switch ($item['content_selection']->post_type) {
-                    case 'page':
-                        $post_preview = $this->getPagePreview($wrapper, $item['content_selection'], $clickable);
-                        break;
-                    case 'touristic_sheet':
-                        $post_preview = $this->getTouristicSheetPreview($wrapper, $item['content_selection']);
-                        break;
-                    case 'woody_topic':
-                        $post_preview = $this->getTopicPreview($wrapper, $item['content_selection']);
-                        break;
-                }
-                $the_items['items'][$key] = (!empty($post_preview)) ?  $post_preview : '';
             }
         }
 
