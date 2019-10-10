@@ -255,7 +255,7 @@ class WoodyTheme_WoodyCompilers
                         }
                     }
                 }
-                $the_items[$key] = $data;
+                $the_items['items'][$key] = $data;
             }
         }
 
