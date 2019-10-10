@@ -1,10 +1,11 @@
 import $ from 'jquery';
 
 $(document).ready(function() {
-    if (!getCookie('firstvisit')) {
+    if (!Cookies.get('firstvisit')) {
         // Show pop up ...
         // $('.first_visit').show();
-        setCookie('firstvisit', true);
+        alert('first visit');
+        Cookies.set('firstvisit', true, {expires: 5});
     }
 });
 
@@ -90,8 +91,11 @@ var redirectPrepareOnspot = function(param){
             post_id: globals.post_id
         },
         success: function(url) {
-            setCookie('prepare_onspot', param);
-            window.location.replace(url);
+            Cookies.set('prepare_onspot', param);
+            // If pages exists, redirect, otherwise don't
+            if(url){
+                window.location.replace(url);
+            }
         }
     });
 }
@@ -100,10 +104,10 @@ var redirectPrepareOnspot = function(param){
 // Set cookie to stay on prepare or spot
 /////////////////////////////////////////////////////////////////////////
 
-if (!getCookie('prepare_onspot')) {
-    setCookie('prepare_onspot', $(this).prop('checked'));
+if (!Cookies.get('prepare_onspot')) {
+    Cookies.set('prepare_onspot', $('.tools .prepare_onspot_switcher input').prop('checked'));
 } else {
-    var cookie = getCookie(prepare_onspot);
+    var cookie = Cookies.get('prepare_onspot');
     var switcher = $('.tools .prepare_onspot_switcher input').prop('checked');
 
     if( cookie != switcher ){
