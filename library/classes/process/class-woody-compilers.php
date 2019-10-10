@@ -238,12 +238,12 @@ class WoodyTheme_WoodyCompilers
             }
         }
 
-        $query_result = new WP_query($the_query);
+        $query_result = new \WP_query($the_query);
 
         if (!empty($query_result->posts)) {
             foreach ($query_result->posts as $key => $post) {
                 $data = [];
-                $post = Timber::get_post($post->ID);
+                $post = \Timber::get_post($post->ID);
                 $data = getPagePreview($wrapper, $post);
                 if (!empty($data['description'])) {
                     preg_match_all("/\[[^\]]*\]/", $data['description'], $matches);
