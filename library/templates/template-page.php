@@ -129,41 +129,49 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         /*********************************************
          * Compilation du bloc prix
          *********************************************/
-        $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d', $this->context['post']);
+        $trip_types = [
+            'trip',
+            'activity_component',
+            'visit_component',
+            'accommodation_component',
+            'restoration_component',
+        ];
+        if(in_array($this->context['page_type'], $trip_types) ){
+            $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d', $this->context['post']);
 
-        // Si le module groupe est activé
-        if (in_array('groups', $this->context['enabled_woody_options'])) {
-            $groupQuotation = new GroupQuotation;
-            // On vérifie si le prix est calculé sur un ensemble de composant et on le définit le cas échéant
-            if (!empty($trip_infos['the_price']['activate_quotation'])) {
-                $trip_infos['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price']);
-                $quotation_id = get_option("options_quotation_page_url");
-                $trip_infos['quotation_link']['link_label'] = get_permalink($quotation_id) . "?sejour=" . $this->context['post_id'];
+            // Si le module groupe est activé
+            if (in_array('groups', $this->context['enabled_woody_options'])) {
+                $groupQuotation = new GroupQuotation;
+                // On vérifie si le prix est calculé sur un ensemble de composant et on le définit le cas échéant
+                if (!empty($trip_infos['the_price']['activate_quotation'])) {
+                    $trip_infos['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price']);
+                    $quotation_id = get_option("options_quotation_page_url");
+                    $trip_infos['quotation_link']['link_label'] = get_permalink($quotation_id) . "?sejour=" . $this->context['post_id'];
+                }
+                if (!empty($trip_infos['the_duration']['duration_unit']) && $trip_infos['the_duration']['duration_unit'] == 'component_based') {
+                    $trip_infos['the_duration'] = $groupQuotation->calculTripDuration($trip_infos['the_duration']);
+                }
             }
-            if (!empty($trip_infos['the_duration']['duration_unit']) && $trip_infos['the_duration']['duration_unit'] == 'component_based') {
-                $trip_infos['the_duration'] = $groupQuotation->calculTripDuration($trip_infos['the_duration']);
+            // If price equals 0, replace elements to display Free
+            if (isset($trip_infos['the_price']['price']) && $trip_infos['the_price']['price'] === "0") {
+                $trip_infos['the_price']['price'] = __("Gratuit", "woody-theme");
+                $trip_infos['the_price']['prefix_price'] = "";
+                $trip_infos['the_price']['suffix_price'] = "";
+                $trip_infos['the_price']['currency'] = "none";
             }
-        }
+            // If empty people min and people max, unset people
+            if (empty($trip_infos['the_peoples']['peoples_min']) && empty($trip_infos['the_peoples']['peoples_max'])) {
+                unset($trip_infos['the_peoples']);
+            }
 
-        // If price equals 0, replace elements to display Free
-        if (isset($trip_infos['the_price']['price']) && $trip_infos['the_price']['price'] == 0) {
-            $trip_infos['the_price']['price'] = __("Gratuit", "woody-theme");
-            $trip_infos['the_price']['prefix_price'] = "";
-            $trip_infos['the_price']['suffix_price'] = "";
-            $trip_infos['the_price']['currency'] = "none";
-        }
-        // If empty people min and people max, unset people
-        if (empty($trip_infos['the_peoples']['peoples_min']) && empty($trip_infos['the_peoples']['peoples_max'])) {
-            unset($trip_infos['the_peoples']);
-        }
-
-        if (!empty($trip_infos['the_duration']['count_days']) || !empty($trip_infos['the_length']['length']) || !empty($trip_infos['the_price']['price'])) {
-            //TODO: Gérer le fichier gps pour affichage s/ carte
-            $trip_infos['the_duration']['count_days'] = ($trip_infos['the_duration']['count_days']) ? humanDays($trip_infos['the_duration']['count_days']) : '';
-            $trip_infos['the_price']['price'] = (!empty($trip_infos['the_price']['price'])) ? str_replace('.', ',', $trip_infos['the_price']['price']) : '';
-            $this->context['trip_infos'] = Timber::compile($this->context['woody_components'][$trip_infos['tripinfos_woody_tpl']], $trip_infos);
-        } else {
-            $trip_infos = [];
+            if (!empty($trip_infos['the_duration']['count_days']) || !empty($trip_infos['the_length']['length']) || !empty($trip_infos['the_price']['price'])) {
+                //TODO: Gérer le fichier gps pour affichage s/ carte
+                $trip_infos['the_duration']['count_days'] = ($trip_infos['the_duration']['count_days']) ? humanDays($trip_infos['the_duration']['count_days']) : '';
+                $trip_infos['the_price']['price'] = (!empty($trip_infos['the_price']['price'])) ? str_replace('.', ',', $trip_infos['the_price']['price']) : '';
+                $this->context['trip_infos'] = Timber::compile($this->context['woody_components'][$trip_infos['tripinfos_woody_tpl']], $trip_infos);
+            } else {
+                $trip_infos = [];
+            }
         }
 
         if (!empty($page_type[0]) && $page_type[0]->slug != 'front_page') {
@@ -312,7 +320,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             $sections = $this->context['timberpost']->get_field('section');
 
             if (!empty($sections) && is_array($sections)) {
-
                 foreach ($sections as $section_id => $section) {
                     $the_header = '';
                     $the_layout = '';
