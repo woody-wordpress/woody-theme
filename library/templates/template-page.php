@@ -132,13 +132,13 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $trip_types = ['trip'];
 
         $trip_term = get_term_by('slug', 'trip', 'page_type');
-        $trip_children = get_terms('page_type', ['child_of' => $trip_term->term_id, 'hide_empty' => false, 'hierarchical' => true] );
+        $trip_children = get_terms('page_type', ['child_of' => $trip_term->term_id, 'hide_empty' => false, 'hierarchical' => true]);
 
-        if(!is_wp_error( $trip_children ) && !empty($trip_children)){
-            foreach($trip_children as $child){
+        if (!is_wp_error($trip_children) && !empty($trip_children)) {
+            foreach ($trip_children as $child) {
                 $trip_types[] = $child->slug;
             }
-        }else{
+        } else {
             $trip_types = [
                 'trip',
                 'activity_component',
@@ -146,10 +146,9 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 'accommodation_component',
                 'restoration_component',
             ];
-
         }
 
-        if(in_array($this->context['page_type'], $trip_types) ){
+        if (in_array($this->context['page_type'], $trip_types)) {
             $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d', $this->context['post']);
 
             // Si le module groupe est activé
