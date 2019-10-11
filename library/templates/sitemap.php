@@ -121,7 +121,7 @@ class WoodyTheme_Template_Sitemap
                 'field_5b0e5ddfd4b1b', // Visuel et Accroche
                 'field_5b44ba5c74495', // En-tête
                 'field_5b169fab55db0', // Personnalise : mise en avant
-                'field_5ba8ef5bce474', // Personnalise : mise en avant
+                'field_5ba8ef5bce474', // Personnalise : menu
             ];
 
             foreach ($fields as $field) {
@@ -191,8 +191,6 @@ class WoodyTheme_Template_Sitemap
                                     }
                                     break;
                             }
-
-                            //wd($section_content);
                         }
                     }
                 }
