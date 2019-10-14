@@ -102,7 +102,7 @@ class WoodyTheme_Template_Sitemap
             'orderby' => 'menu_order',
             'order'   => 'DESC',
             'lang' => $languages,
-            'posts_per_page' => 200,
+            'posts_per_page' => 50,
             'paged' => (get_query_var('page')) ? get_query_var('page') : 1
         ]);
 

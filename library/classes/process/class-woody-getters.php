@@ -81,7 +81,7 @@ class WoodyTheme_WoodyGetters
     {
         $the_items = [];
         $clickable = true;
-        if(!empty($wrapper['content_selection'])){
+        if (!empty($wrapper['content_selection'])) {
             foreach ($wrapper['content_selection'] as $key => $item_wrapper) {
                 $item_wrapper['content_selection_type'] = $wrapper['acf_fc_layout'] == 'focus_trip_components' ? 'existing_content' : $item_wrapper['content_selection_type'];
                 if (!empty($item_wrapper['existing_content']['trip_component'])) {
@@ -542,7 +542,7 @@ class WoodyTheme_WoodyGetters
             $active_filters['focused_taxonomy_terms'] = [$active_filters['focused_taxonomy_terms']];
         }
 
-        if (!empty($filter_wrapper)) {
+        if (!empty($filter_wrapper) && !empty($filter_wrapper['list_filters'])) {
             // TAXONOMY | DURATION | PRICE | CUSTOM TERM
             foreach ($filter_wrapper['list_filters'] as $key => $filter) {
                 switch ($filter['list_filter_type']) {
