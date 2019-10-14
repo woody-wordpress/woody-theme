@@ -101,7 +101,7 @@ class WoodyTheme_SiteMap
             $sitemap = [];
             $query_max = $this->getPosts($lang);
             if (!empty($query_max)) {
-                Output::log(sprintf('Sitemap generate (%s pages)', $query_max->max_num_pages));
+                Output::log(sprintf('Sitemap generate %s (%s pages)', strtoupper($lang), $query_max->max_num_pages));
                 for ($i = 1; $i <= $query_max->max_num_pages; $i++) {
                     $query = $this->getPosts($lang, $i);
                     if (!empty($query->posts)) {
