@@ -101,7 +101,7 @@ class WoodyTheme_SiteMap
             $sitemap = [];
             $query_max = $this->getPosts($lang);
             if (!empty($query_max)) {
-                Output::log(sprintf('Sitemap generate (%s pages)', $query_max->max_num_pages));
+                Output::log(sprintf('Sitemap generate %s (%s pages)', strtoupper($lang), $query_max->max_num_pages));
                 for ($i = 1; $i <= $query_max->max_num_pages; $i++) {
                     $query = $this->getPosts($lang, $i);
                     if (!empty($query->posts)) {
@@ -240,10 +240,22 @@ class WoodyTheme_SiteMap
     {
         if (!empty($img) && !empty($img['url'])) {
             $images[$img['url']] = [
-                'loc' => $img['url'],
-                'title' => $img['title'],
-                'caption' => trim($img['alt'] . ' ' . $img['caption'] . ' ' . $img['description'])
+                'loc' => trim($img['url']),
+                'title' => $this->cleanXMLWords($img['title']),
+                'caption' => $this->cleanXMLWords($img['alt'] . ' ' . $img['caption'] . ' ' . $img['description'])
             ];
         }
+    }
+
+    private function cleanXMLWords($str)
+    {
+        $str = html_entity_decode($str);
+        $str = str_replace(['<', '>', '&', '"', "'"], ' ', $str);
+        $str = trim($str);
+        $str = explode(' ', $str);
+        $str = array_unique($str);
+        $str = implode(' ', $str);
+
+        return $str;
     }
 }
