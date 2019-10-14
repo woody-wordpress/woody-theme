@@ -23,7 +23,9 @@ class WoodyTheme_SiteMap
         add_action('template_redirect', [$this, 'getSitemap'], 1);
         add_filter('query_vars', [$this, 'queryVars']);
 
-        \WP_CLI::add_command('woody:sitemap', [$this, 'generateSitemap']);
+        add_action('woody_sitemap', [$this, 'woodySitemap']);
+        add_action('wp', [$this, 'scheduleSitemap']);
+        \WP_CLI::add_command('woody:sitemap', [$this, 'woodySitemap']);
     }
 
     public function queryVars($qvars)
@@ -70,65 +72,72 @@ class WoodyTheme_SiteMap
     }
 
     /**
+     * Schedule options table cleanup daily.
+     */
+    public function scheduleSitemap()
+    {
+        if (!wp_next_scheduled('woody_sitemap')) {
+            wp_schedule_event(time(), 'daily', 'woody_sitemap');
+        }
+    }
+
+    /**
      * generateSitemap with WP CLI or Cron
      */
-    public function generateSitemap()
+    public function woodySitemap()
     {
-        $sitemap = [];
-        $query_max = $this->getPosts();
-        if (!empty($query_max)) {
-            Output::log(sprintf('Sitemap generate (%s pages)', $query_max->max_num_pages));
-            for ($i = 1; $i <= $query_max->max_num_pages; $i++) {
-                $query = $this->getPosts($i);
-                if (!empty($query->posts)) {
-                    foreach ($query->posts as $post) {
-                        $sitemap['urls'][] = [
-                            'loc' => get_permalink($post),
-                            'lastmod' => get_the_modified_date('c', $post),
-                            'images' => $this->getImagesFromPost($post)
-                        ];
+        // Si le site est alias, on fusionne toutes les pages dans le même sitemap
+        $languages = pll_languages_list();
+
+        // Si la langue n'est pas active on n'ajoute pas les pages au sitemap
+        $woody_lang_enable = get_option('woody_lang_enable', []);
+        foreach ($languages as $key => $slug) {
+            if (!in_array($slug, $woody_lang_enable)) {
+                unset($languages[$key]);
+            }
+        }
+
+        foreach ($languages as $lang) {
+            $sitemap = [];
+            $query_max = $this->getPosts($lang);
+            if (!empty($query_max)) {
+                Output::log(sprintf('Sitemap generate (%s pages)', $query_max->max_num_pages));
+                for ($i = 1; $i <= $query_max->max_num_pages; $i++) {
+                    $query = $this->getPosts($lang, $i);
+                    if (!empty($query->posts)) {
+                        foreach ($query->posts as $post) {
+                            $sitemap[] = [
+                                'loc' => get_permalink($post),
+                                'lastmod' => get_the_modified_date('c', $post),
+                                'images' => $this->getImagesFromPost($post)
+                            ];
+                        }
                     }
                 }
             }
+
+            // Chunk sitemap
+            $nb_urls_per_page = 1000;
+            if (count($sitemap) <= $nb_urls_per_page) {
+                $sitemap = [$sitemap];
+            } else {
+                $sitemap = array_chunk($sitemap, $nb_urls_per_page);
+            }
+
+            set_transient('woody_sitemap_' . $lang, $sitemap);
+
+            /* Restore original Post Data */
+            wp_reset_postdata();
         }
-
-        // Chunk sitemap
-        if (count($sitemap) <= 1000) {
-            $sitemap = [$sitemap];
-        } else {
-            $sitemap = array_chunk($sitemap, 1000);
-        }
-
-        set_transient('woody_sitemap', $sitemap);
-
-        /* Restore original Post Data */
-        wp_reset_postdata();
     }
 
-    private function getPosts($paged = 1, $posts_per_page = 30)
+    private function getPosts($lang = PLL_DEFAULT_LANG, $paged = 1, $posts_per_page = 30)
     {
-        $polylang = get_option('polylang');
-        if ($polylang['force_lang'] == 3 && !empty($polylang['domains'])) {
-            // Si le site est en multi domaines, on cree un sitemap par langue
-            $languages = pll_current_language();
-        } else {
-            // Si le site est alias, on fusionne toutes les pages dans le même sitemap
-            $languages = pll_languages_list();
-
-            // Si la langue n'est pas active on n'ajoute pas les pages au sitemap
-            $woody_lang_enable = get_option('woody_lang_enable', []);
-            foreach ($languages as $key => $slug) {
-                if (!in_array($slug, $woody_lang_enable)) {
-                    unset($languages[$key]);
-                }
-            }
-        }
-
         $query = new \WP_Query([
             'post_type' => ['page', 'touristic_sheet'],
             'orderby' => 'menu_order',
             'order'   => 'DESC',
-            'lang' => $languages,
+            'lang' => $lang,
             'posts_per_page' => $posts_per_page,
             'paged' => $paged
         ]);
