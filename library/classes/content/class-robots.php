@@ -33,6 +33,9 @@ class WoodyTheme_Robots
                 'Disallow: /*.inc$',
                 'Disallow: /*?*p=',
                 'Disallow: /*obf.js',
+                'Disallow: /*__hstc=*',
+                'Disallow: /*__hssc=*',
+                'Disallow: /*__hspf=*'
             ];
 
             // Add Sitemap
