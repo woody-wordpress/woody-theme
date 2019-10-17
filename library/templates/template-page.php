@@ -129,7 +129,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         /*********************************************
          * Compilation du bloc prix
          *********************************************/
-        
+
         $trip_types = ['trip'];
         $trip_term = get_term_by('slug', 'trip', 'page_type');
         $trip_children = get_terms('page_type', ['child_of' => $trip_term->term_id, 'hide_empty' => false, 'hierarchical' => true]);
@@ -174,6 +174,19 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             // If empty people min and people max, unset people
             if (empty($trip_infos['the_peoples']['peoples_min']) && empty($trip_infos['the_peoples']['peoples_max'])) {
                 unset($trip_infos['the_peoples']);
+            }
+
+            // Convert minutes to hours if > 60
+            if ($trip_infos['the_duration']['duration_unit']==='minutes'){
+                $minutes_num = intval($trip_infos['the_duration']['count_minutes']);
+                if($minutes_num>=60){
+                    $trip_infos['the_duration']['duration_unit']='hours';
+                    $convertedTime = $this->tools->minuteConvert($minutes_num);
+                    $trip_infos['the_duration']['count_hours']=(!empty($convertedTime['hours'])) ? $convertedTime['hours'] : '';
+                    $trip_infos['the_duration']['count_minutes']=(!empty($convertedTime['minutes'])) ? $convertedTime['minutes'] : '';
+                }
+            }else if ($trip_infos['the_duration']['duration_unit']==='hours'){
+                $trip_infos['the_duration']['count_minutes']='';
             }
 
             if (!empty($trip_infos['the_duration']['count_days']) || !empty($trip_infos['the_length']['length']) || !empty($trip_infos['the_price']['price'])) {
@@ -500,4 +513,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
         return $url;
     }
+
 }
+
+
