@@ -510,10 +510,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         if ($this->context['page_type'] === 'playlist_tourism' && !empty($listpage) && is_numeric($listpage)) {
             $url .= '?listpage=' . $listpage;
         }
-
         return $url;
     }
-
 }
-
-
