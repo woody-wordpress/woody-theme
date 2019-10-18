@@ -280,4 +280,51 @@ $('#post').each(function() {
             }
         })
     });
+
+    $('.acf-field-5a61fa38b704f #acf-field_5a61fa38b704f').change(function() {
+        var term_id = $(this).val();
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: ajaxurl,
+            data: {
+                action: 'get_models_for_type',
+                term_id: term_id
+            },
+            success: function(response) {
+                // Add Button
+                if (response.length > 0) {
+                    if (response.length == 1) {
+                        $('.acf-field-5a61fa38b704f')
+                            .append('<a href="#" id="apply-model-link" class="button button-primary"><span alt="f135" class="dashicons dashicons-align-right"></span> Appliquer le modèle ' + response[response.length - 1] + '</a>');
+
+                        $('.acf-field-5a61fa38b704f #apply-model-link').click(function() {
+                            $.ajax({
+                                type: 'GET',
+                                dataType: 'json',
+                                url: '/wp-json/woody/current-post-update?current_id=' + $('#post_ID').val() + '&model_id=' + response[0].ID,
+                                success: function(data) {
+                                    window.location.reload();
+                                },
+                                error: function(error) {
+                                    console.error('post-with-meta', error);
+                                },
+                            });
+                        });
+                    } else {
+                        $('.acf-field-5a61fa38b704f')
+                            .append('<a href="#" id="apply-model-link" class="button button-primary"><span alt="f135" class="dashicons dashicons-align-right"></span> Appliquer le modèle ' + response[response.length - 1] + '</a>');
+                        // OPen pop-in
+                        $('.acf-field-5a61fa38b704f #apply-model-link').click(function() {});
+                    }
+                } else {
+                    $('.acf-field-5a61fa38b704f #apply-model-link').remove();
+                }
+            },
+            error: function(error) {
+                console.error(error);
+            }
+        });
+    });
 });

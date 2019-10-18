@@ -129,7 +129,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         /*********************************************
          * Compilation du bloc prix
          *********************************************/
-        
+
         $trip_types = ['trip'];
         $trip_term = get_term_by('slug', 'trip', 'page_type');
         $trip_children = get_terms('page_type', ['child_of' => $trip_term->term_id, 'hide_empty' => false, 'hierarchical' => true]);

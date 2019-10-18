@@ -199,6 +199,13 @@ textarea.notAllowed {
     }
 }
 
+#apply-model-link {
+    margin-left: 5px;
+    .dashicons{
+        line-height: unset;
+    }
+}
+
 @keyframes submitSlideIn {
     0% {
         bottom: -150px;
