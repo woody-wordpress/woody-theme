@@ -281,8 +281,27 @@ $('#post').each(function() {
         })
     });
 
-    $('.acf-field-5a61fa38b704f #acf-field_5a61fa38b704f').change(function() {
-        var term_id = $(this).val();
+    var updateCurrentPostMeta = function(model_id) {
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: '/wp-json/woody/current-post-update?current_id=' + $('#post_ID').val() + '&model_id=' + model_id,
+            success: function(data) {
+                window.location.reload();
+            },
+            error: function(error) {
+                console.error('post-with-meta', error);
+                $('body').addClass('windowReady');
+            },
+        });
+    };
+
+    var addApplyModelButton = function() {
+        var term_id = Number($(this).val());
+
+        if (term_id == 0) {
+            term_id = $('#acf-field_5a61fa38b704f option').val();
+        }
 
         $.ajax({
             type: 'POST',
@@ -307,18 +326,7 @@ $('#post').each(function() {
                         // APPLY MODEL BUTTON EVENT
                         $('.acf-field-5a61fa38b704f #apply-model-link').click(function() {
                             $('body').removeClass('windowReady');
-                            $.ajax({
-                                type: 'GET',
-                                dataType: 'json',
-                                url: '/wp-json/woody/current-post-update?current_id=' + $('#post_ID').val() + '&model_id=' + response.posts[0].ID,
-                                success: function(data) {
-                                    window.location.reload();
-                                },
-                                error: function(error) {
-                                    console.error('post-with-meta', error);
-                                    $('body').addClass('windowReady');
-                                },
-                            });
+                            updateCurrentPostMeta(response.posts[0].ID);
                         });
                     } else {
                         // CASE MULTIPLE MODELS FOR ONE PAGE TYPE, OPEN POPUP
@@ -350,20 +358,9 @@ $('#post').each(function() {
 
                                     if (model_id != "undefined" && model_id != null) {
                                         $('body').removeClass('windowReady');
-                                        $.ajax({
-                                            type: 'GET',
-                                            dataType: 'json',
-                                            url: '/wp-json/woody/current-post-update?current_id=' + $('#post_ID').val() + '&model_id=' + model_id,
-                                            success: function(data) {
-                                                window.location.reload();
-                                            },
-                                            error: function(error) {
-                                                console.error('post-with-meta', error);
-                                                $('#apply-model-popup').hide();
-                                                $('#apply-model-popup ul li').remove();
-                                                $('body').addClass('windowReady');
-                                            },
-                                        });
+                                        updateCurrentPostMeta(model_id);
+                                        $('#apply-model-popup').hide();
+                                        $('#apply-model-popup ul li').remove();
                                     }
                                 });
                             } else {
@@ -380,5 +377,8 @@ $('#post').each(function() {
                 console.error(error);
             }
         });
-    });
+    }
+
+    $('.acf-field-5a61fa38b704f #acf-field_5a61fa38b704f').ready(addApplyModelButton);
+    $('.acf-field-5a61fa38b704f #acf-field_5a61fa38b704f').change(addApplyModelButton);
 });

@@ -266,30 +266,32 @@ class WoodyTheme_Taxonomy
         ];
 
         $term_id = filter_input(INPUT_POST, 'term_id', FILTER_VALIDATE_INT);
-        $term = get_term($term_id);
-        $args = [
-            'post_type' => 'woody_model',
-            'post_status' => array(
-                'publish',
-                'draft'
-            ),
-            'posts_per_page' => -1,
-            'meta_key' => 'model_linked_post_type',
-            'meta_value' => $term_id,
-            'meta_compare' => '='
-        ];
+        if(!empty($term_id)){
+            $term = get_term($term_id);
+            $args = [
+                'post_type' => 'woody_model',
+                'post_status' => array(
+                    'publish',
+                    'draft'
+                ),
+                'posts_per_page' => -1,
+                'meta_key' => 'model_linked_post_type',
+                'meta_value' => $term_id,
+                'meta_compare' => '='
+            ];
 
-        $query_result = new WP_Query($args);
+            $query_result = new WP_Query($args);
 
-        if (!empty($query_result->found_posts)) {
-            foreach ($query_result->posts as $post) {
-                $posts['posts'][] = [
-                    'ID' => $post->ID,
-                    'link' => get_permalink($post),
-                    'title' => $post->post_title
-                ];
+            if (!empty($query_result->found_posts)) {
+                foreach ($query_result->posts as $post) {
+                    $posts['posts'][] = [
+                        'ID' => $post->ID,
+                        'link' => get_permalink($post),
+                        'title' => $post->post_title
+                    ];
+                }
+                $posts['term'] = $term->name;
             }
-            $posts['term'] = $term->name;
         }
 
         wp_send_json($posts);
