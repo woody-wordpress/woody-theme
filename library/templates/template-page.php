@@ -182,8 +182,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 if($minutes_num>=60){
                     $trip_infos['the_duration']['duration_unit']='hours';
                     $convertedTime = $this->tools->minuteConvert($minutes_num);
-                    $trip_infos['the_duration']['count_hours']=(!empty($convertedTime['hours'])) ? $convertedTime['hours'] : '';
-                    $trip_infos['the_duration']['count_minutes']=(!empty($convertedTime['minutes'])) ? $convertedTime['minutes'] : '';
+                    $trip_infos['the_duration']['count_hours']=(!empty($convertedTime['hours'])) ? strval($convertedTime['hours']) : '';
+                    $trip_infos['the_duration']['count_minutes']=(!empty($convertedTime['minutes'])) ? strval($convertedTime['minutes']) : '';
                 }
             }else if ($trip_infos['the_duration']['duration_unit']==='hours'){
                 $trip_infos['the_duration']['count_minutes']='';
