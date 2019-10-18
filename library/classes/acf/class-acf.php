@@ -434,6 +434,12 @@ class WoodyTheme_ACF
             unset($field['layouts']['layout_5d91d7a234ca6']);
         }
 
+        // TODO: Décommenter les lignes lorsque l'option sera envopyée par l'ERP
+        // if (!in_array('infolive', WOODY_OPTIONS)) {
+        //     // On retire l'option bloc infolive si le plugin n'est pas activé
+        //     unset($field['layouts']['layout_5da96d831f117']);
+        // }
+
         return $field;
     }
 
@@ -466,7 +472,6 @@ class WoodyTheme_ACF
         $hero_terms = [];
         $taxonomies = get_taxonomies();
         $displayIcon = get_field('page_heading_term_icon'); // With plugin
-
 
         foreach ($taxonomies as $taxonomy) {
             if ($taxonomy == 'places' || $taxonomy == 'seasons' || $taxonomy == 'themes') {
