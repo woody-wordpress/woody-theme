@@ -693,14 +693,14 @@
                             "min": "",
                             "max": ""
                         },
-                        "layout_5da96d831f117": {
-                            "key": "layout_5da96d831f117",
+                        "layout_5da9bdc17563e": {
+                            "key": "layout_5da9bdc17563e",
                             "name": "infolive",
                             "label": "Infolive",
                             "display": "block",
                             "sub_fields": [
                                 {
-                                    "key": "field_5da96d8d1f118",
+                                    "key": "field_5da9c6d42c6d9",
                                     "label": "Infolive",
                                     "name": "infolive",
                                     "type": "clone",
@@ -712,7 +712,9 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "clone": "",
+                                    "clone": [
+                                        "group_5da9c68913ae0"
+                                    ],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -1210,5 +1212,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1571384755
+    "modified": 1571407594
 }
