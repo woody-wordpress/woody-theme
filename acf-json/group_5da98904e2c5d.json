@@ -12,15 +12,32 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-label collapsing-rows",
                 "id": ""
             },
-            "collapsed": "",
+            "collapsed": "field_5da9d3ef3c912",
             "min": 0,
             "max": 0,
             "layout": "block",
             "button_label": "Configurer une station",
             "sub_fields": [
+                {
+                    "key": "field_5da9d3ef3c912",
+                    "label": "Test",
+                    "name": "",
+                    "type": "message",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "TEST",
+                    "new_lines": "wpautop",
+                    "esc_html": 0
+                },
                 {
                     "key": "field_5da9a9f4876e5",
                     "label": "",
@@ -62,5 +79,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "HIVER",
-    "modified": 1571404889
+    "modified": 1571410966
 }
