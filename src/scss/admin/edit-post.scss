@@ -219,8 +219,9 @@ textarea.notAllowed {
     form ul li {
         display: flex;
         justify-content: space-between;
-        margin: 10px 0;
+        align-items: center;
         list-style-type: none;
+        margin: 10px 0;
         a {
             text-decoration: none;
         }
