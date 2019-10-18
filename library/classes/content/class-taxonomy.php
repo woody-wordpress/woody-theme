@@ -260,7 +260,10 @@ class WoodyTheme_Taxonomy
 
     public function getModelsForTerm()
     {
-        $posts = [];
+        $posts = [
+            'posts' => array(),
+            'term' => array()
+        ];
 
         $term_id = filter_input(INPUT_POST, 'term_id', FILTER_VALIDATE_INT);
         $term = get_term($term_id);
@@ -280,13 +283,13 @@ class WoodyTheme_Taxonomy
 
         if (!empty($query_result->found_posts)) {
             foreach ($query_result->posts as $post) {
-                $posts[] = [
+                $posts['posts'][] = [
                     'ID' => $post->ID,
                     'link' => get_permalink($post),
-                    'Title' => $post->post_title
+                    'title' => $post->post_title
                 ];
             }
-            $posts[] = $term->name;
+            $posts['term'] = $term->name;
         }
 
         wp_send_json($posts);

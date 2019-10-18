@@ -206,6 +206,39 @@ textarea.notAllowed {
     }
 }
 
+.apply-model-list{
+    z-index: 10000;
+    min-width: 800px;
+    background: white;
+    position: fixed;
+    left: 50%;
+    top: 40%;
+    margin-left: -400px;
+    padding: 20px;
+    border: 1px solid darken(white, 20% );
+    form ul li {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
+        list-style-type: none;
+        a {
+            text-decoration: none;
+        }
+    }
+
+    .actions{
+        display: flex;
+        #apply-model-popup-button{
+            margin-left: auto;
+        }
+
+        #abort-apply-model{
+            margin-left: 10px;
+            border: 1px solid #cccccc;
+        }
+    }
+}
+
 @keyframes submitSlideIn {
     0% {
         bottom: -150px;
