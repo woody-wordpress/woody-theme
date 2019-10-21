@@ -106,7 +106,6 @@ class WoodyTheme_Polylang
         __('jours', 'woody-theme');
         __('personne', 'woody-theme');
         __('personnes', 'woody-theme');
-        //TODO: Récupérer les chaînes à traudire dans groupQuotation.php (plugin) et dans le tpl de devis (library)
 
         // Availabilities calendar
         __('Attention, vous n\'avez pas saisi d\'identifiant de playlist en paramètre du shortcode.
@@ -115,7 +114,7 @@ class WoodyTheme_Polylang
         __('Établissement', 'woody-theme');
         __('Établissement disponible', 'woody-theme');
         __('Établissement indisponible', 'woody-theme');
-        __('Aucunes informations concernant cet établissement pour l\'année en cours', 'woody-theme');
+        __('Aucune information concernant cet établissement pour l\'année en cours', 'woody-theme');
 
         // Woody blocs
         __("M'y rendre", 'woody-theme');
@@ -139,9 +138,15 @@ class WoodyTheme_Polylang
         __("Rechercher", 'woody-theme');
         __("Réinitialiser", 'woody-theme');
         __("Choisissez vos dates", 'woody-theme');
+        __('Date d\'arrivée', 'woody-theme');
+        __('Durée du séjour', 'woody-theme');
         __("adulte(s)", 'woody-theme');
         __("enfant(s)", 'woody-theme');
+        __("jour", 'woody-theme');
         __("jours", 'woody-theme');
+        __("semaine", 'woody-theme');
+        __("semaines", 'woody-theme');
+        __("mois", 'woody-theme');
         __("Pages", 'woody-theme');
         __("Offre touristique", 'woody-theme');
         __("Désolé, aucun contenu touristique ne correspond à votre recherche", 'woody-theme');
