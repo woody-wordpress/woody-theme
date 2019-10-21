@@ -70,14 +70,21 @@ class WoodyTheme_Template_Sitemap
                         'lastmod' => date('c', time()),
                     ];
                 }
+
+                if (empty($this->context['sitemaps'])) {
+                    status_header(404);
+                    exit();
+                }
                 break;
             case 'list':
                 $paged = (get_query_var('page')) ? get_query_var('page') - 1 : 0;
                 $this->twig_tpl = 'sitemap/sitemap.xml.twig';
                 if (!empty($sitemap[$paged])) {
                     $this->context['urls'] = $sitemap[$paged];
+                } else {
+                    status_header(404);
+                    exit();
                 }
-
                 break;
             case 'xsl':
                 $this->twig_tpl = 'sitemap/sitemap.xsl.twig';
