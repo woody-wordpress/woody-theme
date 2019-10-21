@@ -193,8 +193,10 @@ function getPageTerms($post_id)
 
     foreach ($taxonomies as $taxonomy) {
         $terms = wp_get_post_terms($post_id, $taxonomy->name);
-        foreach ($terms as $term) {
-            $return[] = 'term-' . $term->slug;
+        if (!is_wp_error($terms)) {
+            foreach ($terms as $term) {
+                $return[] = 'term-' . $term->slug;
+            }
         }
     }
 

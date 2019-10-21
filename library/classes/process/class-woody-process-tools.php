@@ -102,17 +102,28 @@ class WoodyTheme_WoodyProcessTools
      **/
     function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = '', $lastfallback_item = '', $lastfallback_field = '')
     {
-        if (!empty(get_field($field, $item->ID))) {
+        $value = null;
+
+        if (!empty($item) && is_object($item)) {
             $value = get_field($field, $item->ID);
-        } elseif (!empty($fallback_item) && is_array($fallback_item) && !empty($fallback_item[$fallback_field])) {
-            $value = $fallback_item[$fallback_field];
-        } elseif (!empty($fallback_item) && is_object($fallback_item) && !empty(get_field($fallback_field, $fallback_item->ID))) {
-            $value = get_field($fallback_field, $fallback_item->ID);
-        } elseif (!empty($lastfallback_item) && !empty(get_field($lastfallback_field, $lastfallback_item->ID))) {
-            $value = get_field($lastfallback_field, $lastfallback_item->ID);
-        } else {
-            $value = '';
         }
+
+        if (empty($value) && !empty($fallback_item) && !empty($fallback_field)) {
+            if (is_array($fallback_item) && !empty($fallback_item[$fallback_field])) {
+                $value = $fallback_item[$fallback_field];
+            } else if (is_object($fallback_item) && !empty($fallback_item->ID)) {
+                $value = get_field($fallback_field, $fallback_item->ID);
+            }
+        }
+
+        if (empty($value) && !empty($lastfallback_item) && !empty($lastfallback_field)) {
+            if (is_array($lastfallback_item) && !empty($lastfallback_item[$lastfallback_field])) {
+                $value = $lastfallback_item[$lastfallback_field];
+            } else if (is_object($lastfallback_item) && !empty($lastfallback_item->ID)) {
+                $value = get_field($lastfallback_field, $lastfallback_item->ID);
+            }
+        }
+
         return $value;
     }
 
