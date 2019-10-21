@@ -129,7 +129,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         /*********************************************
          * Compilation du bloc prix
          *********************************************/
-        
+
         $trip_types = ['trip'];
         $trip_term = get_term_by('slug', 'trip', 'page_type');
         $trip_children = get_terms('page_type', ['child_of' => $trip_term->term_id, 'hide_empty' => false, 'hierarchical' => true]);
@@ -294,6 +294,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 foreach ($bookblock['bookblock_playlists'] as $pl_key => $pl) {
                     $bookblock['bookblock_playlists'][$pl_key]['permalink'] = get_permalink($pl['pl_post_id']);
                     $pl_confId = get_field('field_5b338ff331b17', $pl['pl_post_id']);
+                    $bookblock['bookblock_playlists'][$pl_key]['pl_conf_id'] = $pl_confId;
                     if (!empty($pl_confId)) {
                         $pl_lang = pll_get_post_language($pl['pl_post_id']);
                         $pl_params = apply_filters('woody_hawwwai_playlist_render', $pl_confId, $pl_lang, array(), 'json');
@@ -302,9 +303,17 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                             foreach ($facets as $facet) {
                                 if ($facet['type'] === 'daterangeWithAvailabilities') {
                                     $bookblock['bookblock_playlists'][$pl_key]['filters']['id'] = $facet['id'];
-                                    $bookblock['bookblock_playlists'][$pl_key]['filters']['daterange'] = true;
                                     $bookblock['bookblock_playlists'][$pl_key]['filters']['translations'] = (!empty($facet['TR'])) ? $facet['TR'] : '';
                                     $bookblock['bookblock_playlists'][$pl_key]['filters']['display_options'] = (!empty($facet['display_options'])) ? $facet['display_options'] : '';
+                                    if (!empty($facet['display_options']['booking_range']['values'])) {
+                                        $range_values = $facet['display_options']['booking_range']['values'];
+                                        if ($range_values[0]['mode'] == 3 && !empty($range_values[0]['customValue'])) {
+                                            $bookblock['bookblock_playlists'][$pl_key]['filters']['singledate'] = true;
+                                            $bookblock['bookblock_playlists'][$pl_key]['filters']['periods'] = $range_values[0]['customValue'];
+                                        } else {
+                                            $bookblock['bookblock_playlists'][$pl_key]['filters']['daterange'] = true;
+                                        }
+                                    }
                                     if (!empty($facet['display_options']['persons']['values'])) {
                                         foreach ($facet['display_options']['persons']['values'] as $person) {
                                             if (!empty($person['field'])) {
