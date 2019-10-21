@@ -81,18 +81,21 @@ $(document).ready(function() {
                 dest_coord.longitude = parseFloat(response.lon);
 
                 if (isInArea(coord, dest_coord)) {
-                    var prepare_onspot_popup = '<div class="prepare_onspot_popup"><p>Il semblerait que vous soyez sur place ! Souhaitez-vous être redirigé vers un contenu plus approprié ?</p></div>';
-                    $('body').append(prepare_onspot_popup);
-                    $('.prepare_onspot_popup').append('<div class="actions"><a class="button secondary close" href="#">Refuser</a><a class="button primary-button" href="#">Accepter</a></div>');
+                    var switcher = $('.tools .prepare_onspot_switcher input').prop('checked');
+                    if(switcher != false){
+                        var prepare_onspot_popup = '<div class="prepare_onspot_popup"><p>Il semblerait que vous soyez sur place ! Souhaitez-vous être redirigé vers un contenu plus approprié ?</p></div>';
+                        $('body').append(prepare_onspot_popup);
+                        $('.prepare_onspot_popup').append('<div class="actions"><a class="button secondary close" href="#">Refuser</a><a class="button primary-button" href="#">Accepter</a></div>');
 
-                    $('.prepare_onspot_popup .primary-button').click(function(){
-                        $('.tools .prepare_onspot_switcher input').trigger('click');
-                        $('.prepare_onspot_popup').remove();
-                    });
+                        $('.prepare_onspot_popup .primary-button').click(function() {
+                            $('.tools .prepare_onspot_switcher input').trigger('click');
+                            $('.prepare_onspot_popup').remove();
+                        });
 
-                    $('.prepare_onspot_popup .close').click(function() {
-                        $('.prepare_onspot_popup').remove();
-                    });
+                        $('.prepare_onspot_popup .close').click(function() {
+                            $('.prepare_onspot_popup').remove();
+                        });
+                    }
                 }
             }
         });
@@ -156,4 +159,3 @@ $(document).ready(function() {
         }
     }
 });
-
