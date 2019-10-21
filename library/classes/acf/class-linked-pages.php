@@ -27,6 +27,7 @@ class WoodyTheme_ACF_LinkedPages
 
         add_action('wp_ajax_set_post_term', [$this, 'setPostTerms']);
         add_action('wp_ajax_redirect_prepare_onspot', [$this, 'redirectToLinkedPage']);
+        add_action('wp_ajax_get_opposite', [$this, 'getOpposite']);
         add_action('wp_ajax_get_destination_coord', [$this, 'getDestinationCoordinates']);
     }
 
@@ -164,6 +165,21 @@ class WoodyTheme_ACF_LinkedPages
             $permalink = get_permalink($linked_post);
             wp_send_json($permalink);
         }
+        exit;
+    }
+
+    /**
+     * Return if page have an opposite page
+     * AJAX Call
+     */
+    public function getOpposite(){
+        $return = false;
+
+        $post_id = filter_input(INPUT_POST, 'post_id');
+        $linked_post = get_field('field_5d7f57f2b21f7', $post_id);
+        $return = !empty($linked_post) ? true : $return ;
+
+        wp_send_json($return);
         exit;
     }
 

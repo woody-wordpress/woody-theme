@@ -51,7 +51,7 @@ $(document).ready(function() {
     });
 
     ////////////////////////////////////////////////////////////////////////
-    // FIRST VISIT ON WEBSITE
+    // First visit on website event
     ////////////////////////////////////////////////////////////////////////
 
     if (!Cookies.get('firstvisit')) {
@@ -62,68 +62,82 @@ $(document).ready(function() {
             longitude: 0,
         };
 
-        // TODO: use google function for that
-        var coord = {
-            latitude: 51.619722,
-            longitude: 0.079651,
-            accuracy: 100
-        };
+        // Check if we are on "prepare page", if not, useless to continue
+        var switcher = $('.tools .prepare_onspot_switcher input').prop('checked');
+        if (switcher != false) {
 
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            url: frontendajax.ajaxurl,
-            data: {
-                action: 'get_destination_coord',
-            },
-            success: function(response) {
-                dest_coord.latitude = parseFloat(response.lat);
-                dest_coord.longitude = parseFloat(response.lon);
+            // Check if opposite page exists
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: frontendajax.ajaxurl,
+                data: {
+                    action: 'get_opposite',
+                    post_id: globals.post_id
+                },
+                success: function(opposite_exists) {
+                    if (opposite_exists) {
 
-                if (isInArea(coord, dest_coord)) {
-                    var switcher = $('.tools .prepare_onspot_switcher input').prop('checked');
-                    if(switcher != false){
-                        var prepare_onspot_popup = '<div class="prepare_onspot_popup"><p>Il semblerait que vous soyez sur place ! Souhaitez-vous être redirigé vers un contenu plus approprié ?</p></div>';
-                        $('body').append(prepare_onspot_popup);
-                        $('.prepare_onspot_popup').append('<div class="actions"><a class="button secondary close" href="#">Refuser</a><a class="button primary-button" href="#">Accepter</a></div>');
+                        // Get OT coordinates
+                        $.ajax({
+                            type: 'POST',
+                            dataType: 'json',
+                            url: frontendajax.ajaxurl,
+                            data: {
+                                action: 'get_destination_coord',
+                            },
+                            success: function(response) {
+                                dest_coord.latitude = parseFloat(response.lat);
+                                dest_coord.longitude = parseFloat(response.lon);
 
-                        $('.prepare_onspot_popup .primary-button').click(function() {
-                            $('.tools .prepare_onspot_switcher input').trigger('click');
-                            $('.prepare_onspot_popup').remove();
-                        });
+                                // Get current user position
+                                var opt = {
+                                    timeout: 5000,
+                                    maximumAge: 0
+                                };
 
-                        $('.prepare_onspot_popup .close').click(function() {
-                            $('.prepare_onspot_popup').remove();
+                                function success(pos) {
+                                    var coord = {
+                                        latitude: pos.coords.latitude,
+                                        longitude: pos.coords.longitude,
+                                        accuracy: pos.coords.accuracy
+                                    };
+
+                                    // Check if user is near OT's position
+                                    // If true, give he opportunity to go on spot pages
+                                    if (isInArea(coord, dest_coord)) {
+                                        var prepare_onspot_popup = '<div class="prepare_onspot_popup"><p>Il semblerait que vous soyez sur place ! Souhaitez-vous être redirigé vers un contenu plus approprié ?</p></div>';
+                                        $('body').append(prepare_onspot_popup);
+                                        $('.prepare_onspot_popup').append('<div class="actions"><a class="button secondary close" href="#">Refuser</a><a class="button primary-button" href="#">Accepter</a></div>');
+
+                                        $('.prepare_onspot_popup .primary-button').click(function() {
+                                            $('.tools .prepare_onspot_switcher input').trigger('click');
+                                            $('.prepare_onspot_popup').remove();
+                                        });
+
+                                        $('.prepare_onspot_popup .close').click(function() {
+                                            $('.prepare_onspot_popup').remove();
+                                        });
+                                    }
+                                }
+
+                                function error(err) {
+                                    console.warn(`ERREUR (${err.code}): ${err.message}`);
+                                }
+
+                                navigator.geolocation.getCurrentPosition(success, error, opt);
+                            },
+                            error: function(error){
+                                console.error('get_destination_coord AJAX : ' + error);
+                            }
                         });
                     }
+                },
+                error: function(error){
+                    console.error('get_opposite AJAX : ' + error);
                 }
-            }
-        });
-
-        // var opt = {
-        //     timeout: 5000,
-        //     maximumAge: 0
-        // };
-
-        // function success(pos) {
-        //    var crd = pos.coords;
-
-        //     console.log('Position actuelle :');
-        //     console.log('Latitude : ' + crd.latitude);
-        //     console.log('Longitude : ' + crd.longitude);
-        //     console.log('Précision : ' + crd.accuracy + ' mètres.');
-
-        //     if (isInArea(crd, dest_coord)) {
-        //            Show pop up ...
-        //            $('.first_visit').show();
-        //     }
-        // }
-
-        // function error(err) {
-        //     console.warn(`ERREUR (${err.code}): ${err.message}`);
-        // }
-
-        // navigator.geolocation.getCurrentPosition(success, error, opt);
+            });
+        }
 
         function isInArea(coord, dest_coord) {
             var is_inside = false;
