@@ -331,7 +331,7 @@ class WoodyTheme_WoodyProcess
         // NB : si aucun choix n'a été fait, on remonte automatiquement tous les contenus de type page
         $the_query = [
             'post_type' => 'page',
-            'posts_per_page' => (!empty($query_form['focused_count'])) ? $query_form['focused_count'] : 999,
+            'posts_per_page' => (!empty($query_form['focused_count'])) ? $query_form['focused_count'] : 12,
             'post_status' => 'publish',
             'post__not_in' => array($the_post->ID),
             'order' => $order,
