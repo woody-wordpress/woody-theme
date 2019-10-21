@@ -124,7 +124,7 @@ class WoodyTheme_SiteMap
                 $sitemap = array_chunk($sitemap, $nb_urls_per_page);
             }
 
-            add_option('woody_sitemap_' . $lang, $sitemap);
+            add_option('woody_sitemap_' . $lang, $sitemap, 'no');
 
             /* Restore original Post Data */
             wp_reset_postdata();
