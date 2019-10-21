@@ -46,14 +46,14 @@ class WoodyTheme_Template_Sitemap
         $sitemap = [];
         $polylang = get_option('polylang');
         if ($polylang['force_lang'] == 3 && !empty($polylang['domains'])) {
-            $sitemap_lang = get_transient('woody_sitemap_' . pll_current_language());
+            $sitemap_lang = get_option('woody_sitemap_' . pll_current_language());
             if (!empty($sitemap_lang)) {
                 $sitemap = $sitemap_lang;
             }
         } else {
             $languages = pll_languages_list();
             foreach ($languages as $lang) {
-                $sitemap_lang = get_transient('woody_sitemap_' . $lang);
+                $sitemap_lang = get_option('woody_sitemap_' . $lang);
                 if (!empty($sitemap_lang)) {
                     $sitemap = array_merge($sitemap, $sitemap_lang);
                 }
