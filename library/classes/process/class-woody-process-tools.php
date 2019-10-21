@@ -349,19 +349,4 @@ class WoodyTheme_WoodyProcessTools
 
         return $return;
     }
-
-    /***************************
-     * Minutes to Hours converter
-     *****************************/
-    public function minuteConvert($num)
-    {
-        $hours = ($num/60);
-        $rhours = floor($hours);
-        $minutes = ($hours - $rhours)*60;
-        $rminutes = round($minutes);
-        $convertedTime=[];
-        $convertedTime['hours'] = $rhours;
-        $convertedTime['minutes'] = $rminutes;
-        return $convertedTime;
-    }
 }
