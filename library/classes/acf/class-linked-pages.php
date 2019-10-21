@@ -172,7 +172,8 @@ class WoodyTheme_ACF_LinkedPages
      * Return if page have an opposite page
      * AJAX Call
      */
-    public function getOpposite(){
+    public function getOpposite()
+    {
         $return = false;
 
         $post_id = filter_input(INPUT_POST, 'post_id');

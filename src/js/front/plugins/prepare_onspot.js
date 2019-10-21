@@ -90,6 +90,7 @@ $(document).ready(function() {
                                 dest_coord.latitude = parseFloat(response.lat);
                                 dest_coord.longitude = parseFloat(response.lon);
 
+                                // TODO: check if get current pos works on preprod
                                 // Get current user position
                                 var opt = {
                                     timeout: 5000,
@@ -127,13 +128,13 @@ $(document).ready(function() {
 
                                 navigator.geolocation.getCurrentPosition(success, error, opt);
                             },
-                            error: function(error){
+                            error: function(error) {
                                 console.error('get_destination_coord AJAX : ' + error);
                             }
                         });
                     }
                 },
-                error: function(error){
+                error: function(error) {
                     console.error('get_opposite AJAX : ' + error);
                 }
             });
