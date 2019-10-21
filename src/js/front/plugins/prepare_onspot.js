@@ -1,11 +1,65 @@
 import $ from 'jquery';
 
 $(document).ready(function() {
+
+    /**
+     * Redirect function
+     * @param param (boolean) prepare || onspot
+     */
+    var redirectPrepareOnspot = function(param) {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: frontendajax.ajaxurl,
+            data: {
+                action: 'redirect_prepare_onspot',
+                params: param,
+                post_id: globals.post_id
+            },
+            success: function(url) {
+                Cookies.set('prepare_onspot', param);
+                // If pages exists, redirect, otherwise don't
+                if (url) {
+                    window.location.replace(url);
+                }
+            }
+        });
+    }
+
+    /////////////////////////////////////////////////////////////////////////
+    // Set cookie to stay on prepare or spot
+    /////////////////////////////////////////////////////////////////////////
+
+    if (!Cookies.get('prepare_onspot')) {
+        Cookies.set('prepare_onspot', $('.tools .prepare_onspot_switcher input').prop('checked'));
+    } else {
+        var cookie = Cookies.get('prepare_onspot');
+        var switcher = $('.tools .prepare_onspot_switcher input').prop('checked');
+
+        if (cookie != switcher) {
+            redirectPrepareOnspot(cookie);
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // Click on switcher
+    ////////////////////////////////////////////////////////////////////////
+
+    $('.tools .prepare_onspot_switcher input').on('click', function() {
+        var switcher = $(this).prop('checked');
+        redirectPrepareOnspot(switcher);
+    });
+
+    ////////////////////////////////////////////////////////////////////////
+    // FIRST VISIT ON WEBSITE
+    ////////////////////////////////////////////////////////////////////////
+
     if (!Cookies.get('firstvisit')) {
 
+        Cookies.set('firstvisit', true, { expires: 5 });
         var dest_coord = {
-            latitude:0,
-            longitude:0,
+            latitude: 0,
+            longitude: 0,
         };
 
         // TODO: use google function for that
@@ -24,12 +78,21 @@ $(document).ready(function() {
             },
             success: function(response) {
                 dest_coord.latitude = parseFloat(response.lat);
-                dest_coord.longitude =  parseFloat(response.lon);
+                dest_coord.longitude = parseFloat(response.lon);
 
                 if (isInArea(coord, dest_coord)) {
-                    //    Show pop up ...
-                    console.log('is inside');
-                    alert('show pop up !');
+                    var prepare_onspot_popup = '<div class="prepare_onspot_popup"><p>Il semblerait que vous soyez sur place ! Souhaitez-vous être redirigé vers un contenu plus approprié ?</p></div>';
+                    $('body').append(prepare_onspot_popup);
+                    $('.prepare_onspot_popup').append('<div class="actions"><a class="button secondary close" href="#">Refuser</a><a class="button primary-button" href="#">Accepter</a></div>');
+
+                    $('.prepare_onspot_popup .primary-button').click(function(){
+                        $('.tools .prepare_onspot_switcher input').trigger('click');
+                        $('.prepare_onspot_popup').remove();
+                    });
+
+                    $('.prepare_onspot_popup .close').click(function() {
+                        $('.prepare_onspot_popup').remove();
+                    });
                 }
             }
         });
@@ -91,56 +154,6 @@ $(document).ready(function() {
             var c = 2 * Math.atan(Math.sqrt(a), Math.sqrt(1 - a));
             return R * c;
         }
-
-        Cookies.set('firstvisit', true, {expires: 5});
     }
-});
-
-/**
- * Redirect function
- * @param param (boolean) prepare || onspot
- */
-var redirectPrepareOnspot = function(param){
-    $.ajax({
-        type: 'POST',
-        dataType: 'json',
-        url: frontendajax.ajaxurl,
-        data: {
-            action: 'redirect_prepare_onspot',
-            params: param,
-            post_id: globals.post_id
-        },
-        success: function(url) {
-            Cookies.set('prepare_onspot', param);
-            // If pages exists, redirect, otherwise don't
-            if(url){
-                window.location.replace(url);
-            }
-        }
-    });
-}
-
-/////////////////////////////////////////////////////////////////////////
-// Set cookie to stay on prepare or spot
-/////////////////////////////////////////////////////////////////////////
-
-if (!Cookies.get('prepare_onspot')) {
-    Cookies.set('prepare_onspot', $('.tools .prepare_onspot_switcher input').prop('checked'));
-} else {
-    var cookie = Cookies.get('prepare_onspot');
-    var switcher = $('.tools .prepare_onspot_switcher input').prop('checked');
-
-    if( cookie != switcher ){
-        redirectPrepareOnspot(cookie);
-    }
-}
-
-////////////////////////////////////////////////////////////////////////
-// Click on switcher
-////////////////////////////////////////////////////////////////////////
-
-$('.tools .prepare_onspot_switcher input').on('click', function() {
-    var switcher = $(this).prop('checked');
-    redirectPrepareOnspot(switcher);
 });
 
