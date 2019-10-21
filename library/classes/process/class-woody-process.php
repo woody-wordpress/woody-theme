@@ -64,7 +64,10 @@ class WoodyTheme_WoodyProcess
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_weather);
                 break;
             case 'infolive':
-                $the_infolive = apply_filters('woody_infolive', null);
+                $vars['resort'] = $layout['infolive_block_select_resort'];
+                $vars['display_custom'] = $layout['infolive_block_switch_display'];
+                $vars['display'] = $layout['infolive_block_display'];
+                $the_infolive = apply_filters('woody_infolive', $vars);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_infolive);
             break;
             case 'call_to_action':
