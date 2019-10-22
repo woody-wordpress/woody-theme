@@ -176,6 +176,19 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 unset($trip_infos['the_peoples']);
             }
 
+            // Convert minutes to hours if > 60
+            if ($trip_infos['the_duration']['duration_unit']==='minutes'){
+                $minutes_num = intval($trip_infos['the_duration']['count_minutes']);
+                if($minutes_num>=60){
+                    $trip_infos['the_duration']['duration_unit']='hours';
+                    $convertedTime = minuteConvert($minutes_num);
+                    $trip_infos['the_duration']['count_hours']=(!empty($convertedTime['hours'])) ? strval($convertedTime['hours']) : '';
+                    $trip_infos['the_duration']['count_minutes']=(!empty($convertedTime['minutes'])) ? strval($convertedTime['minutes']) : '';
+                }
+            }else if ($trip_infos['the_duration']['duration_unit']==='hours'){
+                $trip_infos['the_duration']['count_minutes']='';
+            }
+
             if (!empty($trip_infos['the_duration']['count_days']) || !empty($trip_infos['the_length']['length']) || !empty($trip_infos['the_price']['price'])) {
                 //TODO: Gérer le fichier gps pour affichage s/ carte
                 $trip_infos['the_duration']['count_days'] = ($trip_infos['the_duration']['count_days']) ? humanDays($trip_infos['the_duration']['count_days']) : '';
@@ -506,7 +519,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         if ($this->context['page_type'] === 'playlist_tourism' && !empty($listpage) && is_numeric($listpage)) {
             $url .= '?listpage=' . $listpage;
         }
-
         return $url;
     }
 }
