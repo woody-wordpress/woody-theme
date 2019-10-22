@@ -275,3 +275,14 @@ function isWoodyInstagram($attachment_id)
 
     return false;
 }
+
+
+/***************************
+ * Minutes to Hours converter
+ *****************************/
+function minuteConvert($num)
+{
+    $convertedTime['hours'] = floor($num/60);
+    $convertedTime['minutes'] = round((($num/60) - $convertedTime['hours'])*60);
+    return $convertedTime;
+}
