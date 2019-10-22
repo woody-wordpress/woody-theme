@@ -232,6 +232,9 @@ class WoodyTheme_Twig_Filters
             case 'month':
                 $text = __('mois', 'woody-theme');
                 break;
+            case 'months':
+                $text = __('mois', 'woody-theme');
+                break;
         }
 
         return $text;
