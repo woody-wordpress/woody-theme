@@ -434,7 +434,7 @@ abstract class WoodyTheme_TemplateAbstract
     {
         $search_post_id = apply_filters('woody_get_field_option', 'es_search_page_url');
         if (!empty($search_post_id)) {
-            $var = get_permalink(pll_get_post($search_post_id));
+            $var = get_permalink(pll_get_post($search_post_id)) . '?query={search_term_string}';
         }
         return $var;
     }
