@@ -274,7 +274,7 @@ class WoodyTheme_WoodyGetters
 
         $data['the_peoples'] = get_field('field_5b6d54a10381f', $item->ID);
 
-        if ($clickable && !empty($wrapper['display_button'])) {
+        if ($clickable) {
             $data['link']['link_label'] = $this->tools->getFieldAndFallBack($item, 'focus_button_title', $item);
             if (empty($data['link']['link_label'])) {
                 $data['link']['link_label'] = __('Lire la suite', 'woody-theme');

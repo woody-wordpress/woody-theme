@@ -67,7 +67,8 @@ class WoodyTheme_WoodyCompilers
 
             $the_items['no_padding'] = (!empty($wrapper['focus_no_padding'])) ? $wrapper['focus_no_padding'] : '';
             $the_items['block_titles'] = $this->tools->getFocusBlockTitles($wrapper);
-            $the_items['display_button'] = (!empty($wrapper['display_button'])) ? $wrapper['display_button'] : '';
+            $the_items['display_button'] = (!empty($wrapper['display_button'])) ? $wrapper['display_button'] : false;
+            $the_items['display_img'] = (!empty($wrapper['display_img'])) ? $wrapper['display_img'] : false;
             $the_items['default_marker'] = $wrapper['default_marker'];
             $the_items['visual_effects'] = $wrapper['visual_effects'];
 
