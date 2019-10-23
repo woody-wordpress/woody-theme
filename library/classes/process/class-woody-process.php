@@ -119,6 +119,10 @@ class WoodyTheme_WoodyProcess
                 $layout['woody_tpl'] = 'blocks-disqus-tpl_01';
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
+            case 'eye_candy_img':
+                $layout['woody_tpl'] = 'blocks-eye_candy_img-tpl_01';
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                break;
             default:
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
         }

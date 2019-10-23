@@ -4,7 +4,7 @@
     "fields": [{
         "key": "field_5db057eedb436",
         "label": "Image\/Logo",
-        "name": "logotype_img",
+        "name": "eye_candy_img_img",
         "type": "image",
         "instructions": "",
         "required": 0,
@@ -15,7 +15,7 @@
             "id": ""
         },
         "return_format": "array",
-        "preview_size": "ratio_free_medium",
+        "preview_size": "ratio_free_small",
         "library": "all",
         "min_width": "",
         "min_height": "",
