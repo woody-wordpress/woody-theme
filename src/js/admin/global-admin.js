@@ -13,45 +13,47 @@ if (typeof window.wp.media != 'undefined') {
 
 if ($('.media-frame-toolbar').length == 0) {
     setTimeout(function() {
-        $('<button type="button" class="button media-button button-primary edit-attachments-tag">Appliquer un tag</button>').insertAfter('.media-toolbar .media-toolbar-secondary .button-primary');
+        if ($('.media-frame-toolbar').length == 0) {
+            $('<button type="button" class="button media-button button-primary edit-attachments-tag">Appliquer un tag</button>').insertAfter('.media-toolbar .media-toolbar-secondary .button-primary');
 
-        // Show popup
-        var popup = '<div class="add-medias-tag hidden"><ul class="themes">Thématiques</ul><ul class="places">Lieux</ul><ul class="seasons">Saisons</ul><button class="button button-primary apply">Appliquer un tag</button><button class=" button close">Annuler</button></div>';
-        $('#wpbody-content').append(popup);
+            // Show popup
+            var popup = '<div class="add-medias-tag hidden"><ul class="themes">Thématiques</ul><ul class="places">Lieux</ul><ul class="seasons">Saisons</ul><button class="button button-primary apply">Appliquer un tag</button><button class=" button close">Annuler</button></div>';
+            $('#wpbody-content').append(popup);
 
-        $('.add-medias-tag .close').click(function(){
-            $('.add-medias-tag').addClass('hidden');
-        });
+            $('.add-medias-tag .close').click(function() {
+                $('.add-medias-tag').addClass('hidden');
+            });
 
-        $('.add-medias-tag .apply').click(function(){
-            console.log($('.add-medias-tag input:checked'));
-        });
+            $('.add-medias-tag .apply').click(function() {
+                console.log($('.add-medias-tag input:checked'));
+            });
 
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            url: ajaxurl,
-            data: {
-                action: 'get_all_tags',
-            },
-            success: function(data) {
-                data.themes.forEach(function(element) {
-                    $('.add-medias-tag .themes').append('<li> <input type="checkbox" value="' + element.id + '"> ' + element.name + '</li>');
-                });
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: ajaxurl,
+                data: {
+                    action: 'get_all_tags',
+                },
+                success: function(data) {
+                    data.themes.forEach(function(element) {
+                        $('.add-medias-tag .themes').append('<li> <input type="checkbox" value="' + element.id + '"> ' + element.name + '</li>');
+                    });
 
-                data.places.forEach(function(element) {
-                    $('.add-medias-tag .places').append('<li> <input type="checkbox" value="' + element.id + '">' + element.name + '</li>');
-                });
+                    data.places.forEach(function(element) {
+                        $('.add-medias-tag .places').append('<li> <input type="checkbox" value="' + element.id + '">' + element.name + '</li>');
+                    });
 
-                data.seasons.forEach(function(element) {
-                    $('.add-medias-tag .seasons').append('<li> <input type="checkbox" value="' + element.id + '">' + element.name + '</li>');
-                });
-            }
-        });
+                    data.seasons.forEach(function(element) {
+                        $('.add-medias-tag .seasons').append('<li> <input type="checkbox" value="' + element.id + '">' + element.name + '</li>');
+                    });
+                }
+            });
 
-        $('.edit-attachments-tag').click(function() {
-            // display form
-            $('.add-medias-tag').removeClass('hidden');
-        });
+            $('.edit-attachments-tag').click(function() {
+                // display form
+                $('.add-medias-tag').removeClass('hidden');
+            });
+        }
     }, 3000);
 }
