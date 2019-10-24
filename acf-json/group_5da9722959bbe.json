@@ -33,7 +33,8 @@
                 "id": ""
             },
             "choices": {
-                "les-sept-laux": "Les 7 Laux"
+                "les-sept-laux": "Les 7 Laux <small style=\"color:#cfcfcf; font-style:italic\">(alpine area)<\/small>",
+                "toto": "Toto <small style=\"color:#cfcfcf; font-style:italic\">(nordic area)<\/small>"
             },
             "default_value": [],
             "allow_null": 0,
@@ -451,7 +452,8 @@
                                         "wicon-007-station-raquettes": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-007-station-raquettes\"><\/span><span>Station raquettes<\/span><\/div>",
                                         "wicon-008-station-ski": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-008-station-ski\"><\/span><span>Station ski<\/span><\/div>",
                                         "wicon-004-station-forfait": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-004-station-forfait\"><\/span><span>Station forfait<\/span><\/div>",
-                                        "wicon-012-station-snowshoes": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-012-station-snowshoes\"><\/span><span>Station snowshoes<\/span><\/div>"
+                                        "wicon-012-station-snowshoes": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-012-station-snowshoes\"><\/span><span>Station snowshoes<\/span><\/div>",
+                                        "wicon-014-station-webcam": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-014-station-webcam\"><\/span><span>Station webcam<\/span><\/div>"
                                     },
                                     "default_value": [],
                                     "allow_null": 0,
@@ -721,7 +723,8 @@
                                     },
                                     "choices": {
                                         "global": "Nombre de pistes ouvertes <strong>total<\/strong>",
-                                        "detail": "Nombre de pistes ouvertes <strong>par niveau (vertes, bleues, rouges ...)<\/strong>"
+                                        "detail": "Nombre de pistes ouvertes <strong>par niveau (vertes, bleues, rouges ...)<\/strong>",
+                                        "detail_type": "Nombre de pistes ouvertes <strong>par type (raquette, ski de fond ...)<\/strong>"
                                     },
                                     "allow_custom": 0,
                                     "default_value": [],
@@ -962,5 +965,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur des paramètres de l'infolive",
-    "modified": 1571402107
+    "modified": 1571931468
 }
