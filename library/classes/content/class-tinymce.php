@@ -55,7 +55,12 @@ class WoodyTheme_Tinymce
                 'classes' => 'mega-title'
             )
         );
+
         $init_array['style_formats'] = json_encode($style_formats);
+
+        // Allow wbesites to customize their own tinymce
+        $init_array = apply_filters('customTinymce', $init_array);
+
         return $init_array;
     }
 
