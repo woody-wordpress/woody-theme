@@ -34,7 +34,8 @@
             },
             "choices": {
                 "les-sept-laux": "Les 7 Laux <small style=\"color:#cfcfcf; font-style:italic\">(alpine area)<\/small>",
-                "toto": "Toto <small style=\"color:#cfcfcf; font-style:italic\">(nordic area)<\/small>"
+                "toto": "Test flux Nordique <small style=\"color:#cfcfcf; font-style:italic\">(nordic area)<\/small>",
+                "nom-station": "Test flux Alpin <small style=\"color:#cfcfcf; font-style:italic\">(alpine area)<\/small>"
             },
             "default_value": [],
             "allow_null": 0,
@@ -723,8 +724,7 @@
                                     },
                                     "choices": {
                                         "global": "Nombre de pistes ouvertes <strong>total<\/strong>",
-                                        "detail": "Nombre de pistes ouvertes <strong>par niveau (vertes, bleues, rouges ...)<\/strong>",
-                                        "detail_type": "Nombre de pistes ouvertes <strong>par type (raquette, ski de fond ...)<\/strong>"
+                                        "detail": "Nombre de pistes ouvertes <strong>en Km<\/strong>"
                                     },
                                     "allow_custom": 0,
                                     "default_value": [],
@@ -965,5 +965,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur des paramètres de l'infolive",
-    "modified": 1571931468
+    "modified": 1571995888
 }
