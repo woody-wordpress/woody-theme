@@ -437,7 +437,7 @@ class WoodyTheme_ACF
         // TODO: Décommenter les lignes lorsque l'option sera envopyée par l'ERP
         // if (!in_array('infolive', WOODY_OPTIONS)) {
         //     // On retire l'option bloc infolive si le plugin n'est pas activé
-        //     unset($field['layouts']['layout_5da96d831f117']);
+        //     unset($field['layouts']['layout_5da9bdc17563e']);
         // }
 
         return $field;
