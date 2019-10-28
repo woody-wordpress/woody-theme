@@ -10,4 +10,14 @@ body.themes-php .themes.single-theme .theme-actions {
     width: 50%;
     margin-left: 15%;
     margin-top: 15%;
+    border: 1px solid grey;
+    box-shadow: 5px 5px 5px rgba(0,0,0, 0.5);
+
+    .choices{
+        display: flex;
+        justify-content: space-between;
+        ul {
+            margin-top: 0;
+        }
+    }
 }

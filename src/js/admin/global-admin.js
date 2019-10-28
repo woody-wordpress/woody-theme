@@ -28,7 +28,7 @@ if ($('#wp-media-grid')) {
             });
 
             // Show popup
-            var popup = '<div class="add-medias-tag hidden"><ul class="themes">Thématiques</ul><ul class="places">Lieux</ul><ul class="seasons">Saisons</ul><button class="button button-primary apply">Appliquer un tag</button><button class=" button close">Annuler</button></div>';
+            var popup = '<div class="add-medias-tag hidden"><div class="choices"><ul class="themes"><p>Thématiques</p></ul><ul class="places"><p>Lieux</p></ul><ul class="seasons"><p>Saisons</p></ul></div><button class="button button-primary apply">Appliquer un tag</button><button class=" button close">Annuler</button></div>';
             $('#wpbody-content').append(popup);
             $('.add-medias-tag .close').click(function() {
                 $('.add-medias-tag').addClass('hidden');
