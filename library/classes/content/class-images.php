@@ -152,7 +152,6 @@ class WoodyTheme_Images
     public function getAllTags()
     {
         $tags = [];
-
         $taxonomies = ['themes', 'places', 'seasons'];
 
         foreach ($taxonomies as $taxonomy) {
