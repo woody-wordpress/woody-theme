@@ -15,7 +15,17 @@ if ($('#wp-media-grid')) {
     if ($('.media-frame-toolbar').length == 0) {
         setTimeout(function() {
             $('<button type="button" class="button media-button button-primary edit-attachments-tag hidden">Appliquer un tag</button>').insertAfter('.media-toolbar .media-toolbar-secondary .button-primary');
-            $('.edit-attachments-tag')
+
+            $('.media-frame-content .attachments li').on('click', function() {
+                if ($('.media-toolbar-secondary .button.media-button.button-large').hasClass('hidden')) {
+                    $('.edit-attachments-tag').addClass('hidden');
+                } else {
+                    $('.edit-attachments-tag').removeClass('hidden');
+                }
+            });
+            $('.media-toolbar-secondary .button.media-button.button-large').click(function() {
+                $('.edit-attachments-tag').addClass('hidden');
+            });
 
             // Show popup
             var popup = '<div class="add-medias-tag hidden"><ul class="themes">Thématiques</ul><ul class="places">Lieux</ul><ul class="seasons">Saisons</ul><button class="button button-primary apply">Appliquer un tag</button><button class=" button close">Annuler</button></div>';
