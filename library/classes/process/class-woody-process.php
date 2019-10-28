@@ -342,8 +342,6 @@ class WoodyTheme_WoodyProcess
             'orderby' => $orderby,
         ];
 
-        // wd($posts_in, 'posts_in query');
-
         if (!empty($posts_in)) {
             $the_query['post__in'] = $posts_in;
         }
