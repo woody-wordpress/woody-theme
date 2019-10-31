@@ -433,12 +433,10 @@ class WoodyTheme_ACF
             // On retire l'option bloc commentaires si le plugin n'est pas activé
             unset($field['layouts']['layout_5d91d7a234ca6']);
         }
-
-        // TODO: Décommenter les lignes lorsque l'option sera envopyée par l'ERP
-        // if (!in_array('infolive', WOODY_OPTIONS)) {
-        //     // On retire l'option bloc infolive si le plugin n'est pas activé
-        //     unset($field['layouts']['layout_5da9bdc17563e']);
-        // }
+        if (!in_array('neige', WOODY_OPTIONS)) {
+            // On retire l'option bloc infolive si le plugin n'est pas activé
+            unset($field['layouts']['layout_5da9bdc17563e']);
+        }
 
         return $field;
     }
