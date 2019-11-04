@@ -325,7 +325,7 @@ $('#post').each(function() {
 
                         // APPLY MODEL BUTTON EVENT
                         $('.acf-field-5a61fa38b704f #apply-model-link').click(function() {
-                            if (window.confirm('Souhaitez vous vraiment appliquer le modèle sur cette page ?')) {
+                            if (window.confirm('Souhaitez vous vraiment appliquer le modèle sur cette page ?  Tout le contenu déjà saisi sera remplacé par celui du modèle')) {
                                 $('body').removeClass('windowReady');
                                 updateCurrentPostMeta(response.posts[0].ID);
                             }
