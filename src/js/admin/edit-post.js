@@ -325,8 +325,10 @@ $('#post').each(function() {
 
                         // APPLY MODEL BUTTON EVENT
                         $('.acf-field-5a61fa38b704f #apply-model-link').click(function() {
-                            $('body').removeClass('windowReady');
-                            updateCurrentPostMeta(response.posts[0].ID);
+                            if (window.confirm('Souhaitez vous vraiment appliquer le modèle sur cette page ?')) {
+                                $('body').removeClass('windowReady');
+                                updateCurrentPostMeta(response.posts[0].ID);
+                            }
                         });
                     } else {
                         // CASE MULTIPLE MODELS FOR ONE PAGE TYPE, OPEN POPUP
@@ -342,7 +344,7 @@ $('#post').each(function() {
 
                                 // ADD ROW IN POPUP
                                 response.posts.forEach(function(element) {
-                                    $('#apply-model-popup form ul').append('<li><input type="radio" name="model" value="' + element.ID + '">' + element.title + '<a class="clickable view btn" target="_blank" href="' + element.link + '"><span class="clickable dashicons dashicons-visibility"></span></a></li>');
+                                    $('#apply-model-popup form ul').append('<li><div><input type="radio" name="model" value="' + element.ID + '">' + element.title + '</div><a class="clickable view btn" target="_blank" href="' + element.link + '"><span class="clickable dashicons dashicons-visibility"></span></a></li>');
                                 });
                                 $('#apply-model-popup .actions').append('<a href="#" id="apply-model-popup-button" class="button button-primary">Appliquer</a>');
                                 $('#apply-model-popup .actions').append('<a href="#" id="abort-apply-model" class="button">Annuler</a>');
@@ -365,7 +367,7 @@ $('#post').each(function() {
                                 });
                             } else {
                                 response.posts.forEach(function(element) {
-                                    $('#apply-model-popup form ul').append('<li><input type="radio" name="model" value="' + element.ID + '">' + element.title + '<a class="clickable view btn" target="_blank" href="' + element.link + '"><span class="dashicons dashicons-visibility"></span></a></li>');
+                                    $('#apply-model-popup form ul').append('<li><div><input type="radio" name="model" value="' + element.ID + '">' + element.title + '</div><a class="clickable view btn" target="_blank" href="' + element.link + '"><span class="dashicons dashicons-visibility"></span></a></li>');
                                 });
                                 $('#apply-model-popup').show();
                             }
