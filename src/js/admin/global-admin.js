@@ -33,22 +33,17 @@ $(document).one('click', '.attachments .attachment', function() {
     });
 
     $('.add-medias-tag .apply').click(function() {
-        var selected = $('.media-frame-content .attachments li.selected');
-        selected.each(function() {
-            var selected_el = $(this);
-            $.when(selected_el.trigger('click')).then(function() {
-                $('.add-medias-tag input:checked').each(function() {
-                    var term_id = $(this).val();
-                    var tax = $(this).closest('ul').attr('class');
-                    $('.add-medias-tag').addClass('hidden');
-                    if ($('.term-list #' + tax + '-' + term_id + ' .selectit').find('input').last().prop('checked') == false) {
-                        $('.term-list #' + tax + '-' + term_id + ' .selectit').trigger('click');
-                    }
-                });
-            });
-        });
 
-        $('.attachments li.selected').removeClass('selected');
+        var attach_ids = [];
+        var term_ids = [];
+        $('.media-frame-content .attachments li.selected').each(function() {
+            attach_ids.push($(this).data('id'));
+        });
+        $('.add-medias-tag input:checked').each(function() {
+            term_ids.push($(this).val());
+        });
+        // TODO: AJAX Call
+
     });
 
     $.ajax({
