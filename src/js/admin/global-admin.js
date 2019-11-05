@@ -12,7 +12,7 @@ if (typeof window.wp.media != 'undefined' && typeof window.wp.media.view.l10n !=
 }
 
 $(document).one('click', '.attachments .attachment', function() {
-    $('<button type="button" class="button media-button button-primary edit-attachments-tag">Appliquer un tag</button>').insertAfter('.media-toolbar .media-toolbar-secondary .button-primary');
+    $('<button type="button" class="button media-button button-primary edit-attachments-tag">Ajouter des tags</button>').insertAfter('.media-toolbar .media-toolbar-secondary .button-primary');
 
     $('.media-frame-content .attachments li').on('click', function() {
         if ($('.media-toolbar-secondary .button.media-button.button-large').hasClass('hidden')) {
@@ -26,7 +26,7 @@ $(document).one('click', '.attachments .attachment', function() {
     });
 
     // Show popup
-    var popup = '<div class="add-medias-tag hidden"><div class="choices"><ul class="themes"><p>Thématiques</p></ul><ul class="places"><p>Lieux</p></ul><ul class="seasons"><p>Saisons</p></ul></div><div class="actions"><button class="button button-primary apply">Appliquer un tag</button><button class=" button close">Annuler</button></div></div>';
+    var popup = '<div class="add-medias-tag hidden"><div class="choices"><ul class="themes"><p>Thématiques</p></ul><ul class="places"><p>Lieux</p></ul><ul class="seasons"><p>Saisons</p></ul></div><div class="actions"><button class="button button-primary apply">Valider</button><button class=" button close">Annuler</button></div></div>';
     $('#wpbody-content').append(popup);
     $('.add-medias-tag .close').click(function() {
         $('.add-medias-tag').addClass('hidden');
