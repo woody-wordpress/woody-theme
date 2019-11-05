@@ -36,14 +36,15 @@ $(document).one('click', '.attachments .attachment', function() {
         var selected = $('.media-frame-content .attachments li.selected');
         selected.each(function() {
             var selected_el = $(this);
-            selected_el.trigger('click');
-            $('.add-medias-tag input:checked').each(function() {
-                var term_id = $(this).val();
-                var tax = $(this).closest('ul').attr('class');
-                $('.add-medias-tag').addClass('hidden');
-                if ($('.term-list #' + tax + '-' + term_id + ' .selectit').find('input').last().prop('checked') == false) {
-                    $('.term-list #' + tax + '-' + term_id + ' .selectit').trigger('click');
-                }
+            $.when(selected_el.trigger('click')).then(function() {
+                $('.add-medias-tag input:checked').each(function() {
+                    var term_id = $(this).val();
+                    var tax = $(this).closest('ul').attr('class');
+                    $('.add-medias-tag').addClass('hidden');
+                    if ($('.term-list #' + tax + '-' + term_id + ' .selectit').find('input').last().prop('checked') == false) {
+                        $('.term-list #' + tax + '-' + term_id + ' .selectit').trigger('click');
+                    }
+                });
             });
         });
 
