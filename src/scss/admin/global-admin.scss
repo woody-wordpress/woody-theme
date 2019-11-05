@@ -1,3 +1,32 @@
 body.themes-php .themes.single-theme .theme-actions {
     display: none;
 }
+
+.add-medias-tag {
+    z-index: 1000;
+    padding: 20px;
+    background: white;
+    position: fixed;
+    margin-left: 25%;
+    margin-top: 15%;
+    border: 1px solid #ddd;
+    box-shadow: 5px 5px 5px rgba(0,0,0, 0.5);
+
+    .choices,
+    .actions {
+        display: flex;
+    }
+
+    .choices{
+        ul {
+            margin-top: 0;
+            li{
+                margin-right: 100px;
+            }
+        }
+    }
+
+    .actions{
+        justify-content: flex-end;
+    }
+}

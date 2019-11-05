@@ -25,6 +25,7 @@ class WoodyTheme_Images
         add_filter('attachment_fields_to_save', [$this, 'attachmentFieldsToSave'], 12, 2); // Priority 12 ater polylang
         add_action('save_attachment', [$this, 'saveAttachment'], 50);
         add_action('delete_attachment', [$this, 'deleteAttachment'], 1);
+        add_action('wp_ajax_get_all_tags', [$this, 'getAllTags']);
 
         // Filters
         add_filter('wp_image_editors', [$this, 'wpImageEditors']);
@@ -145,39 +146,31 @@ class WoodyTheme_Images
         return $file;
     }
 
-    // /**
-    //  * Convert a kml or a gpx to GeoJSON
-    //  * @author : Jérémy Legendre
-    //  * @param   file
-    //  * @return  return      file content converted to geoJSON
-    //  */
-    // public function convertFileToGeoJSON($file)
-    // {
-    //     if (strpos($file['file'], 'gpx') || strpos($file['file'], 'kml')) {
-    //         $url = "http://ogre.adc4gis.com/convert";
-    //         $curl = curl_init();
+    /**
+     * Get all tags to create form
+     */
+    public function getAllTags()
+    {
+        $tags = [];
+        $taxonomies = ['themes', 'places', 'seasons'];
 
-    //         $params = [
-    //             'upload' => $file['url'],
-    //             'skipFailures' => true
-    //         ];
+        foreach ($taxonomies as $taxonomy) {
+            $terms = get_terms(array(
+                'taxonomy' => $taxonomy,
+                'hide_empty' => false
+            ));
+            foreach ($terms as $term) {
+                if (!is_wp_error($term)) {
+                    $tags[$taxonomy][] = [
+                        'id' => $term->term_id,
+                        'name' => $term->name
+                    ];
+                }
+            }
+        }
 
-    //         $params_string = http_build_query($params);
-    //         $opts = [
-    //             CURLOPT_URL => $url,
-    //             CURLOPT_POST => true,
-    //             CURLOPT_POSTFIELDS => $params_string,
-    //             CURLOPT_TIMEOUT => 1000,
-    //             CURLOPT_CONNECTTIMEOUT => 1000
-    //         ];
-    //         curl_setopt_array($curl, $opts);
-
-    //         $response = curl_exec($curl);
-    //         curl_close($curl);
-    //     }
-
-    //     return $file;
-    // }
+        wp_send_json($tags);
+    }
 
     // Register the new image sizes for use in the add media modal in wp-admin
     // This is the place where you can set readable names for images size
