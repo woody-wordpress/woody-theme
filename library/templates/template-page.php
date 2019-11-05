@@ -158,7 +158,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 if (!empty($trip_infos['the_price']['activate_quotation'])) {
                     $trip_infos['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price']);
                     $quotation_id = get_option("options_quotation_page_url");
-                    $quotation_id = pll_get_post($quotation_id) !== false ? pll_get_post($quotation_id) : $quotation_id ;
+                    $quotation_id = pll_get_post($quotation_id) !== false ? pll_get_post($quotation_id) : $quotation_id;
                     $trip_infos['quotation_link']['link_label'] = get_permalink($quotation_id) . "?sejour=" . $this->context['post_id'];
                 }
                 if (!empty($trip_infos['the_duration']['duration_unit']) && $trip_infos['the_duration']['duration_unit'] == 'component_based') {
@@ -178,16 +178,16 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             }
 
             // Convert minutes to hours if > 60
-            if ($trip_infos['the_duration']['duration_unit']==='minutes'){
+            if ($trip_infos['the_duration']['duration_unit'] === 'minutes') {
                 $minutes_num = intval($trip_infos['the_duration']['count_minutes']);
-                if($minutes_num>=60){
-                    $trip_infos['the_duration']['duration_unit']='hours';
+                if ($minutes_num >= 60) {
+                    $trip_infos['the_duration']['duration_unit'] = 'hours';
                     $convertedTime = minuteConvert($minutes_num);
-                    $trip_infos['the_duration']['count_hours']=(!empty($convertedTime['hours'])) ? strval($convertedTime['hours']) : '';
-                    $trip_infos['the_duration']['count_minutes']=(!empty($convertedTime['minutes'])) ? strval($convertedTime['minutes']) : '';
+                    $trip_infos['the_duration']['count_hours'] = (!empty($convertedTime['hours'])) ? strval($convertedTime['hours']) : '';
+                    $trip_infos['the_duration']['count_minutes'] = (!empty($convertedTime['minutes'])) ? strval($convertedTime['minutes']) : '';
                 }
-            }else if ($trip_infos['the_duration']['duration_unit']==='hours'){
-                $trip_infos['the_duration']['count_minutes']='';
+            } else if ($trip_infos['the_duration']['duration_unit'] === 'hours') {
+                $trip_infos['the_duration']['count_minutes'] = '';
             }
 
             if (!empty($trip_infos['the_duration']['count_days']) || !empty($trip_infos['the_length']['length']) || !empty($trip_infos['the_price']['price'])) {
@@ -248,6 +248,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 if (!empty($page_hero['page_heading_img'])) {
                     $page_hero['page_heading_img']['attachment_more_data'] = (!empty($page_hero['page_heading_img']['ID'])) ? $this->tools->getAttachmentMoreData($page_hero['page_heading_img']['ID']) : [];
                 }
+
                 if (!empty($page_hero['page_heading_add_social_movie']) && !empty($page_hero['page_heading_social_movie'])) {
                     preg_match_all('@src="([^"]+)"@', $page_hero['page_heading_social_movie'], $result);
                     if (!empty($result[1]) && !empty($result[1][0])) {
