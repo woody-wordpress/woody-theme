@@ -201,12 +201,13 @@ textarea.notAllowed {
 
 #apply-model-link {
     margin-left: 15px;
-    .dashicons{
+
+    .dashicons {
         line-height: unset;
     }
 }
 
-.apply-model-list{
+.apply-model-list {
     z-index: 10000;
     min-width: 800px;
     background: white;
@@ -215,27 +216,87 @@ textarea.notAllowed {
     top: 40%;
     margin-left: -400px;
     padding: 20px;
-    border: 1px solid darken(white, 20% );
+    border: 1px solid darken(white, 20%);
+
     form ul li {
         display: flex;
         justify-content: space-between;
         align-items: center;
         list-style-type: none;
         margin: 10px 0;
+
         a {
             text-decoration: none;
         }
     }
 
-    .actions{
+    .actions {
         display: flex;
-        #apply-model-popup-button{
+
+        #apply-model-popup-button {
             margin-left: auto;
         }
 
-        #abort-apply-model{
+        #abort-apply-model {
             margin-left: 10px;
             border: 1px solid #cccccc;
+        }
+    }
+}
+
+// Unpublish metabox
+#woody-unpublisher {
+    .input-wrapper {
+        position: relative;
+        margin-bottom: 10px;
+    }
+
+    .flatpickr-input {
+        background: transparent;
+        box-shadow: none;
+        padding: 10px 0;
+        width: 100%;
+        color: #006799;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        font-size: 16px;
+
+        &::-webkit-input-placeholder {
+            color: #006799;
+        }
+
+        &:-moz-placeholder {
+            color: #006799;
+        }
+
+        &::-moz-placeholder {
+            color: #006799;
+        }
+
+        &:-ms-input-placeholder {
+            color: #006799;
+        }
+    }
+
+    .unpublisher-reset-date {
+        width: 18px;
+        height: 18px;
+        background-color: #f1f1f1;
+        font-weight: bold;
+        border-radius: 50%;
+        position: absolute;
+        right: 5px;
+        top: calc(50% - 9px);
+        transition: all .3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #006799;
+            color: #fff;
         }
     }
 }
