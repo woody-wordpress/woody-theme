@@ -43,10 +43,7 @@ $(document).one('click', '.attachments .attachment', function() {
             term_ids.push($(this).val());
         });
 
-        console.log(attach_ids, "attach_ids");
-        console.log(term_ids, "term_ids");
-
-        // TODO: AJAX Call
+        $('body').removeClass('windowReady');
         $.ajax({
             type: 'POST',
             dataType: 'json',
@@ -63,6 +60,7 @@ $(document).one('click', '.attachments .attachment', function() {
             },
             error: function(err) {
                 console.error(err);
+                // $('body').addClass('windowReady');
             }
         });
     });
