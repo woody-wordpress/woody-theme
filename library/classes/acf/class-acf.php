@@ -457,10 +457,6 @@ class WoodyTheme_ACF
             // On retire l'option bloc commentaires si le plugin n'est pas activé
             unset($field['layouts']['layout_5d91d7a234ca6']);
         }
-        if (!in_array('ski_resort', WOODY_OPTIONS)) {
-            // On retire l'option bloc infolive si le plugin n'est pas activé
-            unset($field['layouts']['layout_5da9bdc17563e']);
-        }
 
         return $field;
     }
