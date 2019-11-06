@@ -60,7 +60,7 @@ $(document).one('click', '.attachments .attachment', function() {
             },
             error: function(err) {
                 console.error(err);
-                // $('body').addClass('windowReady');
+                $('body').addClass('windowReady');
             }
         });
     });
