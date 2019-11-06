@@ -45,9 +45,9 @@ class WoodyTheme_Images
 
     public function uploadMimes($mime_types)
     {
-        $mime_types['gpx'] = 'application/xml';
-        $mime_types['kml'] = 'application/xml';
-        $mime_types['kmz'] = 'application/xml';
+        $mime_types['gpx'] = 'text/xml';
+        $mime_types['kml'] = 'text/xml';
+        $mime_types['kmz'] = 'text/xml';
         $mime_types['json'] = 'text/plain';
         $mime_types['geojson'] = 'text/plain';
 
