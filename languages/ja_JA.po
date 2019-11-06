@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 3.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2019-10-08T09:29:27+02:00\n"
-"PO-Revision-Date: 2019-10-08 09:31+0200\n"
+"POT-Creation-Date: 2019-11-06T09:03:55+01:00\n"
+"PO-Revision-Date: 2019-11-06 09:33+0100\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: ja_JP\n"
@@ -18,11 +18,11 @@ msgstr ""
 
 #. Theme Name of the theme
 msgid "Woody (Parent theme)"
-msgstr "Woody (Thème parent)"
+msgstr "Woody（親テーマ）"
 
 #. Description of the theme
 msgid "Parent theme of the Raccourci Agency themes"
-msgstr "Theme parent des thèmes de Raccourci Agency"
+msgstr "Raccourci Agencyテーマの親テーマ"
 
 #. Author of the theme
 msgid "Raccourci Agency"
@@ -195,26 +195,29 @@ msgid ""
 "shortcode.\n"
 "            Pour rappel, le shortcode s'utilise par exemple de cette manière"
 msgstr ""
+"警告、ショートコードのパラメーターとしてプレイリストIDを入力しませんでし"
+"た。\n"
+"             念のため、ショートコードは、たとえばこの方法で使用されます"
 
 #: library/classes/content/class-polylang.php:114
 msgid "Année"
-msgstr ""
+msgstr "年"
 
 #: library/classes/content/class-polylang.php:115
 msgid "Établissement"
-msgstr ""
+msgstr "設立"
 
 #: library/classes/content/class-polylang.php:116
 msgid "Établissement disponible"
-msgstr ""
+msgstr "利用可能な機関"
 
 #: library/classes/content/class-polylang.php:117
 msgid "Établissement indisponible"
-msgstr ""
+msgstr "施設は利用できません"
 
 #: library/classes/content/class-polylang.php:118
 msgid "Aucunes informations concernant cet établissement pour l'année en cours"
-msgstr ""
+msgstr "今年度のこの設立に関する情報はありません"
 
 #: library/classes/content/class-polylang.php:121
 msgid "M'y rendre"
@@ -345,9 +348,9 @@ msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "あなたが探しているページはここにあるかもしれません"
 
 #: library/classes/content/class-polylang.php:154
-#: library/classes/process/class-woody-getters.php:279
-#: library/classes/process/class-woody-getters.php:455
-#: library/classes/process/class-woody-getters.php:521
+#: library/classes/process/class-woody-getters.php:280
+#: library/classes/process/class-woody-getters.php:456
+#: library/classes/process/class-woody-getters.php:522
 msgid "Lire la suite"
 msgstr "続きを読む"
 
@@ -368,7 +371,7 @@ msgid "Réservable"
 msgstr "予約可能"
 
 #: library/classes/content/class-polylang.php:159
-#: library/classes/process/class-woody-getters.php:336
+#: library/classes/process/class-woody-getters.php:337
 msgid "Télécharger"
 msgstr "ダウンロード"
 
@@ -624,7 +627,7 @@ msgid "Comprenant"
 msgstr "備え"
 
 #: library/classes/content/class-polylang.php:237
-#: library/templates/template-page.php:150
+#: library/templates/template-page.php:169
 msgid "Gratuit"
 msgstr "自由な"
 
@@ -666,7 +669,7 @@ msgstr "私のカート"
 
 #: library/classes/content/class-polylang.php:248
 msgid "TOTAL "
-msgstr "トータル"
+msgstr "トータル "
 
 #: library/classes/content/class-polylang.php:249
 msgid "Base de"
@@ -674,26 +677,66 @@ msgstr "のベース"
 
 #: library/classes/content/class-polylang.php:253
 msgid "Publié le"
-msgstr ""
+msgstr "に投稿"
 
 #: library/classes/content/class-polylang.php:254
-#: library/classes/process/class-woody-compilers.php:334
+#: library/classes/process/class-woody-compilers.php:350
 msgid "Désolé, aucun contenu ne correspond à votre recherche"
 msgstr "申し訳ありませんが、検索に一致するページはありません"
 
 #: library/classes/content/class-polylang.php:257
 msgid "Merci d'activer le javascript pour afficher"
-msgstr ""
+msgstr "表示するにはJavaScriptを有効にしてください"
 
 #: library/classes/content/class-polylang.php:258
 msgid "le bloc de commentaires Disqus"
-msgstr ""
+msgstr "Disqusコメントブロック"
 
 #: library/classes/content/class-polylang.php:259
 msgid ""
 "Une erreur est survenue lors de l'affichage des commentaires. Merci de "
 "contacter votre administrateur"
-msgstr ""
+msgstr "コメントの表示中にエラーが発生しました。 管理者に連絡してください"
+
+#: library/classes/content/class-polylang.php:262
+msgid "Remontées mécaniques"
+msgstr "スキーリフト"
+
+#: library/classes/content/class-polylang.php:263
+msgid "Pistes"
+msgstr "トレイル"
+
+#: library/classes/content/class-polylang.php:264
+msgid "Domaine Alpin"
+msgstr "アルパインドメイン"
+
+#: library/classes/content/class-polylang.php:265
+msgid "Domaine Nordique"
+msgstr "北欧ドメイン"
+
+#: library/classes/content/class-polylang.php:266
+msgid "Détails"
+msgstr "細部"
+
+#: library/classes/content/class-polylang.php:267
+msgid "Météo"
+msgstr "天気"
+
+#: library/classes/content/class-polylang.php:268
+msgid "Voir le bulletin météo"
+msgstr "天気予報を見る"
+
+#: library/classes/content/class-polylang.php:269
+msgid "Bulletin complet"
+msgstr "速報"
+
+#: library/classes/content/class-polylang.php:270
+msgid "Webcams"
+msgstr "カム"
+
+#: library/classes/content/class-polylang.php:271
+msgid "Voir les webcams"
+msgstr "ウェブカメラを見る"
 
 #: library/templates/template-page.php:96
 msgid "Oups !"

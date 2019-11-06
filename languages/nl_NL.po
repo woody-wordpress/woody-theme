@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.6.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2019-10-08T09:29:27+02:00\n"
-"PO-Revision-Date: 2019-10-08 09:31+0200\n"
+"POT-Creation-Date: 2019-11-06T09:03:55+01:00\n"
+"PO-Revision-Date: 2019-11-06 09:35+0100\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -195,26 +195,29 @@ msgid ""
 "shortcode.\n"
 "            Pour rappel, le shortcode s'utilise par exemple de cette manière"
 msgstr ""
+"Let op, je hebt geen afspeellijst-ID ingevoerd in de shortcode parameter.\n"
+"            Ter herinnering, de shortcode wordt op deze manier gebruikt, "
+"bijvoorbeeld"
 
 #: library/classes/content/class-polylang.php:114
 msgid "Année"
-msgstr ""
+msgstr "Jaar"
 
 #: library/classes/content/class-polylang.php:115
 msgid "Établissement"
-msgstr ""
+msgstr "Oprichting"
 
 #: library/classes/content/class-polylang.php:116
 msgid "Établissement disponible"
-msgstr ""
+msgstr "Beschikbare faciliteit"
 
 #: library/classes/content/class-polylang.php:117
 msgid "Établissement indisponible"
-msgstr ""
+msgstr "Oprichting niet beschikbaar"
 
 #: library/classes/content/class-polylang.php:118
 msgid "Aucunes informations concernant cet établissement pour l'année en cours"
-msgstr ""
+msgstr "Geen informatie over deze vestiging voor het lopende jaar."
 
 #: library/classes/content/class-polylang.php:121
 msgid "M'y rendre"
@@ -345,9 +348,9 @@ msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "Misschien is de pagina due u zoekt hier?"
 
 #: library/classes/content/class-polylang.php:154
-#: library/classes/process/class-woody-getters.php:279
-#: library/classes/process/class-woody-getters.php:455
-#: library/classes/process/class-woody-getters.php:521
+#: library/classes/process/class-woody-getters.php:280
+#: library/classes/process/class-woody-getters.php:456
+#: library/classes/process/class-woody-getters.php:522
 msgid "Lire la suite"
 msgstr "Lees meer over"
 
@@ -368,7 +371,7 @@ msgid "Réservable"
 msgstr "Reserveerbaar"
 
 #: library/classes/content/class-polylang.php:159
-#: library/classes/process/class-woody-getters.php:336
+#: library/classes/process/class-woody-getters.php:337
 msgid "Télécharger"
 msgstr "Downloaden"
 
@@ -626,7 +629,7 @@ msgid "Comprenant"
 msgstr "Inclusief"
 
 #: library/classes/content/class-polylang.php:237
-#: library/templates/template-page.php:150
+#: library/templates/template-page.php:169
 msgid "Gratuit"
 msgstr "Gratis"
 
@@ -679,7 +682,7 @@ msgid "Publié le"
 msgstr "Gepubliceerd op"
 
 #: library/classes/content/class-polylang.php:254
-#: library/classes/process/class-woody-compilers.php:334
+#: library/classes/process/class-woody-compilers.php:350
 msgid "Désolé, aucun contenu ne correspond à votre recherche"
 msgstr "Sorry, geen enkele inhoud komt overeen met uw zoekopdracht"
 
@@ -698,6 +701,46 @@ msgid ""
 msgstr ""
 "Er is een fout opgetreden bij het weergeven van opmerkingen. Neem contact op "
 "met uw beheerder"
+
+#: library/classes/content/class-polylang.php:262
+msgid "Remontées mécaniques"
+msgstr "Skiliften"
+
+#: library/classes/content/class-polylang.php:263
+msgid "Pistes"
+msgstr "Sporen"
+
+#: library/classes/content/class-polylang.php:264
+msgid "Domaine Alpin"
+msgstr "Alpendomein"
+
+#: library/classes/content/class-polylang.php:265
+msgid "Domaine Nordique"
+msgstr "Noordse Domein"
+
+#: library/classes/content/class-polylang.php:266
+msgid "Détails"
+msgstr "Details"
+
+#: library/classes/content/class-polylang.php:267
+msgid "Météo"
+msgstr "Weersverwachting"
+
+#: library/classes/content/class-polylang.php:268
+msgid "Voir le bulletin météo"
+msgstr "Zie het weerbericht"
+
+#: library/classes/content/class-polylang.php:269
+msgid "Bulletin complet"
+msgstr "Volledig bulletin"
+
+#: library/classes/content/class-polylang.php:270
+msgid "Webcams"
+msgstr "Webcams"
+
+#: library/classes/content/class-polylang.php:271
+msgid "Voir les webcams"
+msgstr "Zie de webcams"
 
 #: library/templates/template-page.php:96
 msgid "Oups !"

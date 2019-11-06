@@ -2,14 +2,14 @@
 # This file is distributed under the .
 msgid ""
 msgstr ""
-"Project-Id-Version: Woody (Parent theme) 1.9.0\n"
+"Project-Id-Version: Woody (Parent theme) 1.12.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-10-08T09:29:27+02:00\n"
+"POT-Creation-Date: 2019-11-06T09:03:55+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.3.0\n"
 "X-Domain: woody-theme\n"
@@ -342,9 +342,9 @@ msgid "La page que vous recherchez est peut-être ici ?"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:154
-#: library/classes/process/class-woody-getters.php:279
-#: library/classes/process/class-woody-getters.php:455
-#: library/classes/process/class-woody-getters.php:521
+#: library/classes/process/class-woody-getters.php:280
+#: library/classes/process/class-woody-getters.php:456
+#: library/classes/process/class-woody-getters.php:522
 msgid "Lire la suite"
 msgstr ""
 
@@ -365,7 +365,7 @@ msgid "Réservable"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:159
-#: library/classes/process/class-woody-getters.php:336
+#: library/classes/process/class-woody-getters.php:337
 msgid "Télécharger"
 msgstr ""
 
@@ -619,7 +619,7 @@ msgid "Comprenant"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:237
-#: library/templates/template-page.php:150
+#: library/templates/template-page.php:169
 msgid "Gratuit"
 msgstr ""
 
@@ -672,7 +672,7 @@ msgid "Publié le"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:254
-#: library/classes/process/class-woody-compilers.php:334
+#: library/classes/process/class-woody-compilers.php:350
 msgid "Désolé, aucun contenu ne correspond à votre recherche"
 msgstr ""
 
@@ -686,6 +686,46 @@ msgstr ""
 
 #: library/classes/content/class-polylang.php:259
 msgid "Une erreur est survenue lors de l'affichage des commentaires. Merci de contacter votre administrateur"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:262
+msgid "Remontées mécaniques"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:263
+msgid "Pistes"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:264
+msgid "Domaine Alpin"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:265
+msgid "Domaine Nordique"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:266
+msgid "Détails"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:267
+msgid "Météo"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:268
+msgid "Voir le bulletin météo"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:269
+msgid "Bulletin complet"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:270
+msgid "Webcams"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:271
+msgid "Voir les webcams"
 msgstr ""
 
 #: library/templates/template-page.php:96

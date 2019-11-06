@@ -651,35 +651,6 @@
                         "min": "",
                         "max": ""
                     },
-                    "layout_5da9bdc17563e": {
-                        "key": "layout_5da9bdc17563e",
-                        "name": "infolive",
-                        "label": "Infolive",
-                        "display": "block",
-                        "sub_fields": [{
-                            "key": "field_5da9c6d42c6d9",
-                            "label": "Infolive",
-                            "name": "infolive",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "clone": [
-                                "group_5da9c68913ae0"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }],
-                        "min": "",
-                        "max": ""
-                    },
                     "layout_5c4f319f1902e": {
                         "key": "layout_5c4f319f1902e",
                         "name": "semantic_view",

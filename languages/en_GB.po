@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.4.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2019-10-08T09:29:27+02:00\n"
-"PO-Revision-Date: 2019-10-08 09:30+0200\n"
+"POT-Creation-Date: 2019-11-06T09:03:55+01:00\n"
+"PO-Revision-Date: 2019-11-06 09:12+0100\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -195,26 +195,29 @@ msgid ""
 "shortcode.\n"
 "            Pour rappel, le shortcode s'utilise par exemple de cette manière"
 msgstr ""
+"Be careful, you did not enter a playlist identifier in the shortcode "
+"parameter. \n"
+"            As a reminder, the shortcode is used in this way, for example"
 
 #: library/classes/content/class-polylang.php:114
 msgid "Année"
-msgstr ""
+msgstr "Year"
 
 #: library/classes/content/class-polylang.php:115
 msgid "Établissement"
-msgstr ""
+msgstr "Establishment"
 
 #: library/classes/content/class-polylang.php:116
 msgid "Établissement disponible"
-msgstr ""
+msgstr "Establishment available"
 
 #: library/classes/content/class-polylang.php:117
 msgid "Établissement indisponible"
-msgstr ""
+msgstr "Establishment unavailable"
 
 #: library/classes/content/class-polylang.php:118
 msgid "Aucunes informations concernant cet établissement pour l'année en cours"
-msgstr ""
+msgstr "No information concerning this establishment for the current year"
 
 #: library/classes/content/class-polylang.php:121
 msgid "M'y rendre"
@@ -345,9 +348,9 @@ msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "Maybe the page you are looking for is here ?"
 
 #: library/classes/content/class-polylang.php:154
-#: library/classes/process/class-woody-getters.php:279
-#: library/classes/process/class-woody-getters.php:455
-#: library/classes/process/class-woody-getters.php:521
+#: library/classes/process/class-woody-getters.php:280
+#: library/classes/process/class-woody-getters.php:456
+#: library/classes/process/class-woody-getters.php:522
 msgid "Lire la suite"
 msgstr "Read more"
 
@@ -368,7 +371,7 @@ msgid "Réservable"
 msgstr "Bookable"
 
 #: library/classes/content/class-polylang.php:159
-#: library/classes/process/class-woody-getters.php:336
+#: library/classes/process/class-woody-getters.php:337
 msgid "Télécharger"
 msgstr "Download"
 
@@ -626,7 +629,7 @@ msgid "Comprenant"
 msgstr "Including"
 
 #: library/classes/content/class-polylang.php:237
-#: library/templates/template-page.php:150
+#: library/templates/template-page.php:169
 msgid "Gratuit"
 msgstr "Free"
 
@@ -679,7 +682,7 @@ msgid "Publié le"
 msgstr "Published on"
 
 #: library/classes/content/class-polylang.php:254
-#: library/classes/process/class-woody-compilers.php:334
+#: library/classes/process/class-woody-compilers.php:350
 msgid "Désolé, aucun contenu ne correspond à votre recherche"
 msgstr "Sorry, no content matches your search"
 
@@ -697,6 +700,46 @@ msgid ""
 "contacter votre administrateur"
 msgstr ""
 "An error occurred when displaying comments. Please contact your administrator"
+
+#: library/classes/content/class-polylang.php:262
+msgid "Remontées mécaniques"
+msgstr "Ski lifts"
+
+#: library/classes/content/class-polylang.php:263
+msgid "Pistes"
+msgstr "Slopes"
+
+#: library/classes/content/class-polylang.php:264
+msgid "Domaine Alpin"
+msgstr "Alpine Area"
+
+#: library/classes/content/class-polylang.php:265
+msgid "Domaine Nordique"
+msgstr "Nordic Area"
+
+#: library/classes/content/class-polylang.php:266
+msgid "Détails"
+msgstr "Details"
+
+#: library/classes/content/class-polylang.php:267
+msgid "Météo"
+msgstr "Weather"
+
+#: library/classes/content/class-polylang.php:268
+msgid "Voir le bulletin météo"
+msgstr "See the weather report"
+
+#: library/classes/content/class-polylang.php:269
+msgid "Bulletin complet"
+msgstr "Full bulletin"
+
+#: library/classes/content/class-polylang.php:270
+msgid "Webcams"
+msgstr "Webcams"
+
+#: library/classes/content/class-polylang.php:271
+msgid "Voir les webcams"
+msgstr "See the webcams"
 
 #: library/templates/template-page.php:96
 msgid "Oups !"
