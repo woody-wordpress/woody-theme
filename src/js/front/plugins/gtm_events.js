@@ -34,3 +34,25 @@ $.ajax({
         console.error(err);
     }
 });
+
+if ($('.sharing-links').length) {
+    $('.sharing-links .sharing-button__link').each(function() {
+        $(this).click(function() {
+            var socialshare = 'facebook';
+
+            if ($(this).hasClass('twitter')) {
+                socialshare = 'twitter';
+            } else if ($(this).hasClass('pinterest')) {
+                socialshare = 'pinterest';
+            } else if ($(this).hasClass('email')) {
+                socialshare = 'email';
+            }
+
+            window.dataLayer.push({
+                event: 'Clic social',
+                socialShare: socialshare,
+                provider: globals.post_title
+            });
+        });
+    });
+}
