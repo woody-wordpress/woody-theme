@@ -26,6 +26,7 @@ class WoodyTheme_Images
         add_action('save_attachment', [$this, 'saveAttachment'], 50);
         add_action('delete_attachment', [$this, 'deleteAttachment'], 1);
         add_action('wp_ajax_get_all_tags', [$this, 'getAllTags']);
+        add_action('wp_ajax_set_attachments_terms', [$this, 'setAttachmentsTerms']);
 
         // Filters
         add_filter('wp_image_editors', [$this, 'wpImageEditors']);
@@ -170,6 +171,30 @@ class WoodyTheme_Images
         }
 
         wp_send_json($tags);
+    }
+
+    /**
+     * Add terms to attachment post
+     */
+    public function setAttachmentsTerms()
+    {
+        $attach_ids = filter_input(INPUT_POST, 'attach_ids', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
+        $term_ids = filter_input(INPUT_POST, 'term_ids', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
+
+        if (!empty($attach_ids) && !empty($term_ids)) {
+            foreach ($attach_ids as $attach_id) {
+                foreach ($term_ids as $term_id) {
+                    $term = get_term($term_id);
+
+                    if (!is_wp_error($term)) {
+                        wp_set_post_terms($attach_id, $term->term_id , $term->taxonomy, true);
+                    }
+                }
+            }
+            wp_send_json(true);
+        } else {
+            wp_send_json(false);
+        }
     }
 
     // Register the new image sizes for use in the add media modal in wp-admin

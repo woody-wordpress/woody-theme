@@ -42,8 +42,29 @@ $(document).one('click', '.attachments .attachment', function() {
         $('.add-medias-tag input:checked').each(function() {
             term_ids.push($(this).val());
         });
-        // TODO: AJAX Call
 
+        console.log(attach_ids, "attach_ids");
+        console.log(term_ids, "term_ids");
+
+        // TODO: AJAX Call
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: ajaxurl,
+            data: {
+                action: 'set_attachments_terms',
+                attach_ids: attach_ids,
+                term_ids: term_ids
+            },
+            success: function(response) {
+                if(response){
+                    location.reload();
+                }
+            },
+            error: function(err) {
+                console.error(err);
+            }
+        });
     });
 
     $.ajax({
