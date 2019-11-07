@@ -14,13 +14,12 @@ $('#acf-group_5afd260eeb4ab .acf-field[data-name="section"] .acf-table tbody')
                     var rowPosY = row.offset().top;
                     var maxHeight = row.innerHeight();
 
-                    if (blockPosY < rowPosY || blockPosY > rowPosY + maxHeight) {
+                    if (blockPosY < rowPosY + 25 || blockPosY + 35  > rowPosY + maxHeight) {
                         // Outside
-                        // TODO: create div to insert block
+                        block.css('z-index', '10000');
                     } else {
                         // Inside
-                        // TODO: remove div to drop block
-
+                        block.css('z-index', 'unset');
                     }
                 },
                 stop: function() {
@@ -28,9 +27,10 @@ $('#acf-group_5afd260eeb4ab .acf-field[data-name="section"] .acf-table tbody')
                     var rowPosY = row.offset().top;
                     var maxHeight = row.innerHeight();
 
-                    if (blockPosY < rowPosY || blockPosY > rowPosY + maxHeight) {
-                        // Outsid
-                        // TODO: Append block inside selected section
+                    if (blockPosY < rowPosY + 35 || blockPosY + 35 > rowPosY + maxHeight) {
+                        // Outside
+                        updateSection(block, blockPosY);
+
                     } else {
                         // Inside
                     }
@@ -38,3 +38,25 @@ $('#acf-group_5afd260eeb4ab .acf-field[data-name="section"] .acf-table tbody')
             });
         });
     });
+
+var updateSection = function(block, blockPosY){
+    $('#acf-group_5afd260eeb4ab .acf-field[data-name="section"] .acf-table tbody')
+        .first()
+        .children('.acf-row:not(.acf-clone)')
+        .each(function() {
+            var row = $(this);
+            var rowPosY = row.offset().top;
+            var maxHeight = row.innerHeight();
+
+
+            if (blockPosY > rowPosY && blockPosY < (rowPosY + maxHeight)) {
+                var clone = block;
+                clone.removeAttr('style');
+
+
+                block.remove();
+                row.find('.values').append(clone);
+
+            }
+    });
+}
