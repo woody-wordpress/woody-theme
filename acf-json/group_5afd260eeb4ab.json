@@ -43,7 +43,7 @@
             },
             {
                 "key": "field_5afd2fd8953bd",
-                "label": "Contenu de section",
+                "label": "Liste des blocs",
                 "name": "",
                 "type": "tab",
                 "instructions": "",
@@ -753,7 +753,7 @@
             },
             {
                 "key": "field_5afd2faf953bc",
-                "label": "Mise en page de section",
+                "label": "Disposition des blocs",
                 "name": "",
                 "type": "tab",
                 "instructions": "",

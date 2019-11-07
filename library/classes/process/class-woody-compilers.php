@@ -370,7 +370,7 @@ class WoodyTheme_WoodyCompilers
         }
 
         // Récupère la pagination compilée
-        if (!empty($the_items['max_num_pages'])) {
+        if ($paginate && !empty($the_items['max_num_pages'])) {
             $the_list['pager'] = $this->formatListPager($the_items['max_num_pages'], $wrapper['uniqid'], $list_el_wrapper['seed']);
         }
 

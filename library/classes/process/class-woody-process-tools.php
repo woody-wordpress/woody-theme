@@ -325,28 +325,32 @@ class WoodyTheme_WoodyProcessTools
         return $return;
     }
 
-    public function getAttachmentMoreData($attachment_id)
+    public function getAttachmentMoreData($attachment_id = null)
     {
         $attachment_data = [];
-        $attachment_data['is_instagram'] = isWoodyInstagram($attachment_id);
+        if (!empty($attachment_id) && is_int($attachment_id)) {
+            $attachment_data['is_instagram'] = isWoodyInstagram($attachment_id);
 
-        if ($attachment_data['is_instagram']) {
-            $attachment_data['instagram_metadata'] = $this->getInstagramMetadata($attachment_id);
+            if ($attachment_data['is_instagram']) {
+                $attachment_data['instagram_metadata'] = $this->getInstagramMetadata($attachment_id);
+            }
+
+            $attachment_data['linked_page'] = get_field('field_5c0553157e6d0', $attachment_id);
+            $attachment_data['author'] = get_field('field_5b5585503c855', $attachment_id);
+            $attachment_data['lat'] = get_field('field_5b55a88e70cbf', $attachment_id);
+            $attachment_data['lng'] = get_field('field_5b55a89e70cc0', $attachment_id);
         }
-
-        $attachment_data['linked_page'] = get_field('field_5c0553157e6d0', $attachment_id);
-        $attachment_data['author'] = get_field('field_5b5585503c855', $attachment_id);
-        $attachment_data['lat'] = get_field('field_5b55a88e70cbf', $attachment_id);
-        $attachment_data['lng'] = get_field('field_5b55a89e70cc0', $attachment_id);
 
         return $attachment_data;
     }
 
-    private function getInstagramMetadata($attachment_id)
+    private function getInstagramMetadata($attachment_id = null)
     {
-        $img_all_data = get_post_meta($attachment_id);
-        $img_all_metadata = (!empty($img_all_data['_wp_attachment_metadata'][0])) ? maybe_unserialize($img_all_data['_wp_attachment_metadata'][0]) : '';
-        return (!empty($img_all_metadata['woody-instagram'])) ? $img_all_metadata['woody-instagram'] : '';
+        if (!empty($attachment_id) && is_int($attachment_id)) {
+            $img_all_data = get_post_meta($attachment_id);
+            $img_all_metadata = (!empty($img_all_data['_wp_attachment_metadata'][0])) ? maybe_unserialize($img_all_data['_wp_attachment_metadata'][0]) : '';
+            return (!empty($img_all_metadata['woody-instagram'])) ? $img_all_metadata['woody-instagram'] : '';
+        }
     }
 
     public function countFocusResults($items, $return)
