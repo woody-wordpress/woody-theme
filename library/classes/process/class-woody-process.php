@@ -215,7 +215,7 @@ class WoodyTheme_WoodyProcess
             foreach ($query_form['focused_taxonomy_terms'] as $focused_term) {
                 // Si l'entrée est un post id (Aucun filtre n'a été utilisé en front)
                 $term = get_term($focused_term);
-                if (!empty($term) && is_object($term)) {
+                if (!empty($term) && !is_wp_term($term) && is_object($term)) {
                     $custom_tax[$term->taxonomy][] = $focused_term;
                 }
 
