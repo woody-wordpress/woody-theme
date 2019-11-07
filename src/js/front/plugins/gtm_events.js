@@ -56,3 +56,12 @@ if ($('.sharing-links').length) {
         });
     });
 }
+
+
+$('.woody-component-claims-block .claim-content .claim-link .button').each(function(){
+    $(this).click(function() {
+        window.dataLayer.push({
+            event: 'Clic claim button',
+        });
+    });
+});
