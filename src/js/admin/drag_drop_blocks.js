@@ -50,13 +50,19 @@ var updateSection = function(block, blockPosY){
 
 
             if (blockPosY > rowPosY && blockPosY < (rowPosY + maxHeight)) {
+                var row_id = row.data('id');
+                var layout_id = row.find('.values .layout').length;
                 var clone = block;
-                clone.removeAttr('style');
-
+                clone.removeAttr('style')
+                    .attr('data-id', layout_id)
+                    .find('input')
+                    .first()
+                    .attr('name', 'acf[field_5afd2c6916ecb][' + row_id + '][field_5b043f0525968]['+layout_id+'][acf_fc_layout]');
+                clone.find('.acf-fc-layout-handle span').text(layout_id+1);
 
                 block.remove();
-                row.find('.values').append(clone);
-
+                row.find('.values')
+                    .append(clone);
             }
     });
 }
