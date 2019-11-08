@@ -9,10 +9,12 @@ $('#acf-group_5afd260eeb4ab .acf-field[data-name="section"] .acf-table tbody')
             var block = $(this);
 
             var controls = block.find('.acf-fc-layout-controls');
-            controls.prepend('<a class="acf-icon small light" href="#" data-name="drag-layout">drag</a>');
+            controls.prepend('<a class="acf-icon small light dashicons dashicons-move" href="#" data-name="drag-layout"></a>');
 
             block.find('a[data-name="drag-layout"]').click(function() {
                 var clone = block;
+
+                block.addClass('dragging-layout');
 
                 // Make block draggable
                 block.draggable({
@@ -23,10 +25,8 @@ $('#acf-group_5afd260eeb4ab .acf-field[data-name="section"] .acf-table tbody')
 
                         if (blockPosY < rowPosY + 25 || blockPosY + 35 > rowPosY + maxHeight) {
                             // Outside
-                            block.css('z-index', '10000');
                         } else {
                             // Inside
-                            block.css('z-index', 'unset');
                         }
                     },
                     stop: function() {
@@ -62,6 +62,7 @@ var updateSection = function(block, blockPosY, original_row, clone) {
                     var row_id = row.data('id');
                     var layout_id = row.find('.values .layout').length;
                     clone.removeAttr('style')
+                        .removeClass('dragging-layout')
                         .attr('data-id', layout_id)
                         .find('input')
                         .first()
@@ -82,23 +83,13 @@ var updateSection = function(block, blockPosY, original_row, clone) {
                     row.find('.values')
                         .append(clone);
 
-                    if(row.find('.no-value-message').css("display") != "none"){
+                    if (row.find('.no-value-message').css("display") != "none") {
                         row.find('.no-value-message').css("display", 'none');
                     }
 
-
-                    // var layout_type = clone.find('input').first().val();
-                    // $.when(row.find('.acf-actions .acf-button[data-name="add-layout"]').trigger('click')).then(function(){
-                    //     $.when($('.acf-tooltip.acf-fc-popup a[data-layout="'+ layout_type +'"]').trigger('click')).then(function(){
-                    //         // Get created layout Replace content
-                    //         var new_block = row.find('.acf-field-5b043f0525968 .values .layout').last();
-                    //         new_block.find('.acf-fields').first().replaceWith(clone.find('.acf-fields').first());
-                    //     });
-
-                    //     if (original_row.find('.values .layout').length < 1) {
-                    //         original_row.find('.no-value-message').css("display", 'block');
-                    //     }
-                    // });
+                    if (original_row.find('.values .layout').length < 1) {
+                        original_row.find('.no-value-message').css("display", 'block');
+                    }
                 }
             }
         });
