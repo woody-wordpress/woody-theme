@@ -166,7 +166,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 }
             }
             // If price equals 0, replace elements to display Free
-            if (isset($trip_infos['the_price']['price']) && $trip_infos['the_price']['price'] === "0") {
+            if (isset($trip_infos['the_price']['price']) && $trip_infos['the_price']['price'] == 0) {
                 $trip_infos['the_price']['price'] = __("Gratuit", "woody-theme");
                 $trip_infos['the_price']['prefix_price'] = "";
                 $trip_infos['the_price']['suffix_price'] = "";
@@ -186,7 +186,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     $trip_infos['the_duration']['count_hours'] = (!empty($convertedTime['hours'])) ? strval($convertedTime['hours']) : '';
                     $trip_infos['the_duration']['count_minutes'] = (!empty($convertedTime['minutes'])) ? strval($convertedTime['minutes']) : '';
                 }
-            } else if ($trip_infos['the_duration']['duration_unit'] === 'hours') {
+            } elseif ($trip_infos['the_duration']['duration_unit'] === 'hours') {
                 $trip_infos['the_duration']['count_minutes'] = '';
             }
 
