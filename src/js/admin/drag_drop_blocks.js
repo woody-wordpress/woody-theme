@@ -74,7 +74,7 @@ var updateSection = function(block, blockPosY, original_row, clone) {
                             var replacement = 'acf[field_5afd2c6916ecb][' + row_id + '][field_5b043f0525968][' + layout_id + ']';
                             var new_attr = attr.replace(regex, replacement);
 
-                            $(this).attr('name', attr);
+                            $(this).attr('name', new_attr);
                         }
                     });
 
