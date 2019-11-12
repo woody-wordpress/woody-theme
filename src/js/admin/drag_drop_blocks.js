@@ -66,38 +66,62 @@ var updateSection = function(block, blockPosY, original_row, clone) {
                     var row_id = row.data('id');
                     block.remove();
 
+                    var layout_id = row.find('.acf-flexible-content').first().children('.values').children('.layout').last().data('id');
+
                     // Trigger add row add block;
                     var block_type = clone.attr('data-layout');
-                    $.when(row.find('.acf-actions .acf-button[data-name="add-layout"]').trigger('click')).then(function(){
-                        $.when($('.acf-tooltip.acf-fc-popup a[data-layout="'+ block_type +'"]').trigger('click')).then(function(){
-                            // Change acf
-                            var new_block = row.find('.acf-flexible-content').first().children('.values').children('.layout').last();
-                            var layout_id = new_block.attr('data-id');
-
-                            clone.find('*').each(function() {
-                                var attr = $(this).attr('name');
-                                if (typeof attr !== typeof undefined && attr !== false) {
-                                    var regex = /acf\[field_5afd2c6916ecb\]\[[0-9]+\]\[field_5b043f0525968\]\[[0-9]+\]/;
-                                    var replacement = 'acf[field_5afd2c6916ecb][' + row_id + '][field_5b043f0525968][' + layout_id + ']';
-                                    var new_attr = attr.replace(regex, replacement);
-                                    $(this).attr('name', new_attr);
-                                }
-
-                                var forattr = $(this).attr('for');
-                                if (typeof forattr !== typeof undefined && forattr !== false) {
-                                    var regex2 = /field_5afd2c6916ecb-[0-9]+-field_5b043f0525968/;
-                                    var replacement2 = 'field_5afd2c6916ecb-' + row_id + '-field_5b043f0525968';
-                                    new_attr = forattr.replace(regex2, replacement2);
-                                    $(this).attr('for', new_attr);
-                                }
-                            });
-
+                    $.when(row.find('.acf-actions .acf-button[data-name="add-layout"]').trigger('click')).then(function() {
+                        $.when($('.acf-tooltip.acf-fc-popup a[data-layout="' + block_type + '"]').trigger('click')).then(function() {
                             var fields = clone.find('.acf-fields .acf-field');
                             var index = 0;
 
-                            new_block.find(' .acf-fields .acf-field').each(function(){
+                            var new_block = row.find('.acf-flexible-content').first().children('.values').children('.layout').last();
+                            new_block.find('.acf-fields .acf-field').each(function() {
                                 $(this).replaceWith(fields[index]);
                                 index++;
+                            });
+
+                            var layoutNameFields = new_block.find('[name^="acf[field_5afd2c6916ecb]"]');
+                            layoutNameFields.each(function() {
+                                var name = layoutNameFields.attr('name');
+                                var regex = /acf\[field_5afd2c6916ecb\]\[[0-9]+\]\[field_5b043f0525968\]\[\w+\]/;
+                                if (name.match(regex)) {
+                                    var replacement = 'acf[field_5afd2c6916ecb][' + row_id + '][field_5b043f0525968][' + layout_id + ']';
+                                    var new_name = name.replace(regex, replacement);
+
+                                    $(this).attr('name', new_name);
+                                } else {
+                                    console.log(name, 'name unmatch');
+                                }
+                            });
+
+                            var layoutForFields = new_block.find('[for^="acf-field_5afd2c6916ecb-"]');
+                            layoutForFields.each(function() {
+                                var forattr = layoutForFields.attr('for');
+                                var regex = /acf-field_5afd2c6916ecb-[0-9]+-field_5b043f0525968-\w+-/;
+                                if (forattr.match(regex)) {
+                                    var replacement = 'acf-field_5afd2c6916ecb-' + row_id + '-field_5b043f0525968-' + layout_id + '-';
+                                    var new_for = forattr.replace(regex, replacement);
+
+                                    $(this).attr('for', new_for);
+                                } else {
+                                    console.log(forattr, 'for unmatch');
+                                }
+                            });
+
+                            var layoutIdFields = new_block.find('[id^="acf-field_5afd2c6916ecb-"]');
+                            layoutIdFields.each(function() {
+                                var id = layoutIdFields.attr('id');
+                                var regex = /acf-field_5afd2c6916ecb-[0-9]+-field_5b043f0525968-\w+-/;
+
+                                if (id.match(regex)) {
+                                    var replacement = 'acf-field_5afd2c6916ecb-' + row_id + '-field_5b043f0525968-' + layout_id + '-';
+                                    var new_id = id.replace(regex, replacement);
+
+                                    $(this).attr('id', new_id);
+                                } else {
+                                    console.log(id, 'id unmatch');
+                                }
                             });
 
                             if (original_row.find('.values .layout').length < 1) {
