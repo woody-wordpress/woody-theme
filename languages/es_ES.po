@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.6.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2019-10-21T15:21:27+02:00\n"
-"PO-Revision-Date: 2019-10-21 15:26+0200\n"
+"POT-Creation-Date: 2019-11-06T09:03:55+01:00\n"
+"PO-Revision-Date: 2019-11-06 09:22+0100\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -198,6 +198,10 @@ msgid ""
 "shortcode.\n"
 "            Pour rappel, le shortcode s'utilise par exemple de cette manière"
 msgstr ""
+"Tenga cuidado, no ha introducido un identificador de lista de reproducción "
+"en el parámetro de acceso directo.\n"
+"            Como recordatorio, el código abreviado se utiliza de esta "
+"manera, por ejemplo"
 
 #: library/classes/content/class-polylang.php:113
 msgid "Année"
@@ -372,7 +376,7 @@ msgstr "Cómo llegar ?"
 msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "¿La página que buscas puede que esté aquí?"
 
-#: library/classes/content/class-polylang.php:159
+#: library/classes/content/class-polylang.php:154
 #: library/classes/process/class-woody-getters.php:280
 #: library/classes/process/class-woody-getters.php:456
 #: library/classes/process/class-woody-getters.php:522
@@ -395,7 +399,7 @@ msgstr "Cambio de estación"
 msgid "Réservable"
 msgstr "Reservable"
 
-#: library/classes/content/class-polylang.php:164
+#: library/classes/content/class-polylang.php:159
 #: library/classes/process/class-woody-getters.php:337
 msgid "Télécharger"
 msgstr "Descargar"
@@ -653,7 +657,7 @@ msgstr "Su estancia/día"
 msgid "Comprenant"
 msgstr "Incluyendo"
 
-#: library/classes/content/class-polylang.php:242
+#: library/classes/content/class-polylang.php:237
 #: library/templates/template-page.php:169
 msgid "Gratuit"
 msgstr "Gratuito"
@@ -706,7 +710,7 @@ msgstr "Base de la"
 msgid "Publié le"
 msgstr "Publicado el"
 
-#: library/classes/content/class-polylang.php:259
+#: library/classes/content/class-polylang.php:254
 #: library/classes/process/class-woody-compilers.php:350
 msgid "Désolé, aucun contenu ne correspond à votre recherche"
 msgstr "Lo sentimos, no hay contenido que coincida con su búsqueda"
@@ -726,6 +730,46 @@ msgid ""
 msgstr ""
 "Se ha producido un error al visualizar comentarios. Póngase en contacto con "
 "su administrador"
+
+#: library/classes/content/class-polylang.php:262
+msgid "Remontées mécaniques"
+msgstr "Elevadores de esquí"
+
+#: library/classes/content/class-polylang.php:263
+msgid "Pistes"
+msgstr "Pistas"
+
+#: library/classes/content/class-polylang.php:264
+msgid "Domaine Alpin"
+msgstr "Dominio Alpino"
+
+#: library/classes/content/class-polylang.php:265
+msgid "Domaine Nordique"
+msgstr "Dominio nórdico"
+
+#: library/classes/content/class-polylang.php:266
+msgid "Détails"
+msgstr "Detalles"
+
+#: library/classes/content/class-polylang.php:267
+msgid "Météo"
+msgstr "Pronóstico del tiempo"
+
+#: library/classes/content/class-polylang.php:268
+msgid "Voir le bulletin météo"
+msgstr "Ver el parte meteorológico"
+
+#: library/classes/content/class-polylang.php:269
+msgid "Bulletin complet"
+msgstr "Boletín completo"
+
+#: library/classes/content/class-polylang.php:270
+msgid "Webcams"
+msgstr "Cámaras web"
+
+#: library/classes/content/class-polylang.php:271
+msgid "Voir les webcams"
+msgstr "Ver las cámaras web"
 
 #: library/templates/template-page.php:96
 msgid "Oups !"

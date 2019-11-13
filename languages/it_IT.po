@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.6.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2019-10-21T15:21:27+02:00\n"
-"PO-Revision-Date: 2019-10-21 15:27+0200\n"
+"POT-Creation-Date: 2019-11-06T09:03:55+01:00\n"
+"PO-Revision-Date: 2019-11-06 09:26+0100\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -370,7 +370,7 @@ msgstr "Come arrivare qui?"
 msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "Forse la pagina che stai cercando è qui?"
 
-#: library/classes/content/class-polylang.php:159
+#: library/classes/content/class-polylang.php:154
 #: library/classes/process/class-woody-getters.php:280
 #: library/classes/process/class-woody-getters.php:456
 #: library/classes/process/class-woody-getters.php:522
@@ -393,7 +393,7 @@ msgstr "Cambio di stagione"
 msgid "Réservable"
 msgstr "Riservabile"
 
-#: library/classes/content/class-polylang.php:164
+#: library/classes/content/class-polylang.php:159
 #: library/classes/process/class-woody-getters.php:337
 msgid "Télécharger"
 msgstr "Scaricare"
@@ -651,7 +651,7 @@ msgstr "Il tuo soggiorno/giorno"
 msgid "Comprenant"
 msgstr "Incluso"
 
-#: library/classes/content/class-polylang.php:242
+#: library/classes/content/class-polylang.php:237
 #: library/templates/template-page.php:169
 msgid "Gratuit"
 msgstr "Gratuito"
@@ -704,26 +704,66 @@ msgstr "Base di"
 msgid "Publié le"
 msgstr "Pubblicato su"
 
-#: library/classes/content/class-polylang.php:259
+#: library/classes/content/class-polylang.php:254
 #: library/classes/process/class-woody-compilers.php:350
 msgid "Désolé, aucun contenu ne correspond à votre recherche"
-msgstr "Spiacente, nessuna pagina corrisponde alla tua ricerca"
+msgstr "Spiacente, nessun contenuto corrisponde alla tua ricerca"
 
-#: library/classes/content/class-polylang.php:262
+#: library/classes/content/class-polylang.php:257
 msgid "Merci d'activer le javascript pour afficher"
 msgstr "Si prega di abilitare javascript per visualizzare"
 
-#: library/classes/content/class-polylang.php:263
+#: library/classes/content/class-polylang.php:258
 msgid "le bloc de commentaires Disqus"
 msgstr "il blocco dei commenti Disqus"
 
-#: library/classes/content/class-polylang.php:264
+#: library/classes/content/class-polylang.php:259
 msgid ""
 "Une erreur est survenue lors de l'affichage des commentaires. Merci de "
 "contacter votre administrateur"
 msgstr ""
 "Si è verificato un errore durante la visualizzazione dei commenti. Contatta "
 "il tuo amministratore"
+
+#: library/classes/content/class-polylang.php:262
+msgid "Remontées mécaniques"
+msgstr "Impianti di risalita"
+
+#: library/classes/content/class-polylang.php:263
+msgid "Pistes"
+msgstr "Tracce"
+
+#: library/classes/content/class-polylang.php:264
+msgid "Domaine Alpin"
+msgstr "Dominio alpino"
+
+#: library/classes/content/class-polylang.php:265
+msgid "Domaine Nordique"
+msgstr "Dominio nordico"
+
+#: library/classes/content/class-polylang.php:266
+msgid "Détails"
+msgstr "Dettagli"
+
+#: library/classes/content/class-polylang.php:267
+msgid "Météo"
+msgstr "Previsioni del tempo"
+
+#: library/classes/content/class-polylang.php:268
+msgid "Voir le bulletin météo"
+msgstr "Guarda il bollettino meteo"
+
+#: library/classes/content/class-polylang.php:269
+msgid "Bulletin complet"
+msgstr "Bollettino completo"
+
+#: library/classes/content/class-polylang.php:270
+msgid "Webcams"
+msgstr "Webcam"
+
+#: library/classes/content/class-polylang.php:271
+msgid "Voir les webcams"
+msgstr "Guarda le webcam"
 
 #: library/templates/template-page.php:96
 msgid "Oups !"

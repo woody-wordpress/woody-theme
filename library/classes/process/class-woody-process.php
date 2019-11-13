@@ -63,6 +63,13 @@ class WoodyTheme_WoodyProcess
                 $the_weather['bg_img'] = $layout['weather_bg_img'];
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_weather);
                 break;
+            case 'infolive':
+                $vars['resort'] = $layout['infolive_block_select_resort'];
+                $vars['display_custom'] = $layout['infolive_block_switch_display'];
+                $vars['display'] = $layout['infolive_block_display'];
+                $the_infolive = apply_filters('woody_infolive', $vars);
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_infolive);
+            break;
             case 'call_to_action':
                 // TODO: Case à enlever lorsque les "Anciens champs" seront supprimés du backoffice (utile pour les anciens liens de CTA uniquement)
                 $layout['modal_id'] = uniqid($layout['acf_fc_layout'] . '_');
@@ -215,7 +222,7 @@ class WoodyTheme_WoodyProcess
             foreach ($query_form['focused_taxonomy_terms'] as $focused_term) {
                 // Si l'entrée est un post id (Aucun filtre n'a été utilisé en front)
                 $term = get_term($focused_term);
-                if (!empty($term) && is_object($term)) {
+                if (!empty($term) && !is_wp_term($term) && is_object($term)) {
                     $custom_tax[$term->taxonomy][] = $focused_term;
                 }
 
