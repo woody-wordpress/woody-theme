@@ -15,9 +15,7 @@ var clickDragButton = function(block, row) {
 
             if (blockPosY < rowPosY + 25 || blockPosY + 35 > rowPosY + maxHeight) {
                 // Outside
-                showDroppablePosition(block, blockPosY, row);
-            } else {
-                // Inside
+                showDroppablePosition(blockPosY, row);
             }
         },
         stop: function() {
@@ -32,9 +30,8 @@ var clickDragButton = function(block, row) {
 
             } else {
                 // Inside : remove draggable actions
-                $('.dragging-layout').removeClass('dragging-layout');
+                $('.dragging-layout').removeClass('dragging-layout ui-draggable ui-draggable-handle');
                 block.removeAttr('style');
-                row.find('.droppable-position').remove();
             }
         }
     });
@@ -58,12 +55,11 @@ $('#acf-group_5afd260eeb4ab .acf-field[data-name="section"] .acf-table tbody')
     });
 
 var updateSection = function(block, blockPosY, original_row, clone) {
-    $('#acf-group_5afd260eeb4ab .acf-field[data-name="section"] .acf-table tbody')
-        .first()
-        .children('.acf-row:not(.acf-clone)')
-        .each(function() {
+    var rows = $('#acf-group_5afd260eeb4ab .acf-field[data-name="section"] .acf-table tbody').first().children('.acf-row:not(.acf-clone)');
+    var rows_length = rows.length;
+    var index = 0;
+    rows.each(function() {
             var row = $(this);
-
             if (row != original_row) {
                 var rowPosY = row.offset().top;
                 var maxHeight = row.innerHeight();
@@ -132,12 +128,17 @@ var updateSection = function(block, blockPosY, original_row, clone) {
                             }
                         });
                     });
+                } else if (index == rows_length - 1 ) {
+                    // If last element and block is not dropped anywhere, then replace block at his place
+                    $('.dragging-layout').removeClass('dragging-layout ui-draggable ui-draggable-handle');
+                    block.removeAttr('style');
                 }
             }
+            index++;
         });
 }
 
-var showDroppablePosition = function(block, blockPosY, original_row) {
+var showDroppablePosition = function(blockPosY, original_row) {
     $('#acf-group_5afd260eeb4ab .acf-field[data-name="section"] .acf-table tbody')
         .first()
         .children('.acf-row:not(.acf-clone)')
