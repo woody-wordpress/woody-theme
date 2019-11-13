@@ -59,83 +59,79 @@ var updateSection = function(block, blockPosY, original_row, clone) {
     var rows_length = rows.length;
     var index = 0;
     rows.each(function() {
-            var row = $(this);
-            if (row != original_row) {
-                var rowPosY = row.offset().top;
-                var maxHeight = row.innerHeight();
+        var row = $(this);
+        if (row != original_row) {
+            var rowPosY = row.offset().top;
+            var maxHeight = row.innerHeight();
 
-                if (blockPosY > rowPosY && blockPosY < (rowPosY + maxHeight)) {
-                    block.remove();
-                    row.find('.droppable-position').remove();
+            if (blockPosY > rowPosY && blockPosY < (rowPosY + maxHeight)) {
+                block.remove();
+                row.find('.droppable-position').remove();
 
-                    var row_id = row.data('id');
-                    var layout_id = row.find('.acf-flexible-content').first().children('.values').children('.layout').last().data('id') + 1;
+                var row_id = row.data('id');
+                var layout_id = row.find('.acf-flexible-content').first().children('.values').children('.layout').last().data('id') + 1;
 
-                    // Trigger add row add block;
-                    var block_type = clone.attr('data-layout');
-                    $.when(row.find('.acf-actions .acf-button[data-name="add-layout"]').trigger('click')).then(function() {
-                        $.when($('.acf-tooltip.acf-fc-popup a[data-layout="' + block_type + '"]').trigger('click')).then(function() {
-                            // Replace field values
-                            var fields = clone.find('.acf-fields .acf-field');
-                            var index = 0;
-                            var new_block = row.find('.acf-flexible-content').first().children('.values').children('.layout').last();
-                            new_block.find('.acf-fields .acf-field').each(function() {
-                                $(this).replaceWith(fields[index]);
-                                index++;
-                            });
+                // Trigger add row add block;
+                var block_type = clone.attr('data-layout');
+                $.when(row.find('.acf-actions .acf-button[data-name="add-layout"]').trigger('click')).then(function() {
+                    $.when($('.acf-tooltip.acf-fc-popup a[data-layout="' + block_type + '"]').trigger('click')).then(function() {
+                        // Replace field values
+                        var fields = clone.find('.acf-fields');
+                        var new_block = row.find('.acf-flexible-content').first().children('.values').children('.layout').last();
+                        new_block.find('.acf-fields').replaceWith(fields);
 
-                            // Update block indexes
-                            var updated_block = row.find('.acf-flexible-content').first().children('.values').children('.layout').last();
-                            updated_block.find('[for]').each(function() {
-                                var old = $(this).attr('for');
-                                var regex = /acf-field_5afd2c6916ecb-[0-9]+-field_5b043f0525968-[A-Za-z0-9]+/;
-                                if (old.match(regex)) {
-                                    var new_for = old.replace(regex, 'acf-field_5afd2c6916ecb-' + row_id + '-field_5b043f0525968-' + layout_id);
-                                    $(this).attr('for', new_for);
-                                }
-                            });
-
-                            updated_block.find('[id]').each(function() {
-                                var old = $(this).attr('id');
-                                var regex = /acf-field_5afd2c6916ecb-[0-9]+-field_5b043f0525968-[A-Za-z0-9]+/;
-                                if (old.match(regex)) {
-                                    var new_id = old.replace(regex, 'acf-field_5afd2c6916ecb-' + row_id + '-field_5b043f0525968-' + layout_id);
-                                    $(this).attr('id', new_id);
-                                }
-                            });
-
-                            updated_block.find('[name]').each(function() {
-                                var old_data_name = $(this).attr('name');
-                                var regex = /acf\[field_5afd2c6916ecb\]\[[0-9]+\]\[field_5b043f0525968\]\[[A-Za-z0-9]+\]/;
-                                if (old_data_name.match(regex)) {
-                                    var new_name = old_data_name.replace(regex, 'acf[field_5afd2c6916ecb][' + row_id + '][field_5b043f0525968][' + layout_id + ']');
-                                    $(this).attr('name', new_name);
-                                }
-                            });
-
-                            updated_block.data('id', layout_id);
-
-                            // Re-add dragging control
-                            var controls = updated_block.find('.acf-fc-layout-controls');
-                            controls.prepend('<a class="acf-icon small light dashicons dashicons-move" href="#" data-name="drag-layout"></a>');
-
-                            updated_block.find('a[data-name="drag-layout"]').click(function() {
-                                clickDragButton(updated_block, row);
-                            });
-
-                            if (original_row.find('.values .layout').length < 1) {
-                                original_row.find('.no-value-message').css("display", 'block');
+                        // Update block indexes
+                        var updated_block = row.find('.acf-flexible-content').first().children('.values').children('.layout').last();
+                        updated_block.find('[for]').each(function() {
+                            var old = $(this).attr('for');
+                            var regex = /acf-field_5afd2c6916ecb-[0-9]+-field_5b043f0525968-[A-Za-z0-9]+/;
+                            if (old.match(regex)) {
+                                var new_for = old.replace(regex, 'acf-field_5afd2c6916ecb-' + row_id + '-field_5b043f0525968-' + layout_id);
+                                $(this).attr('for', new_for);
                             }
                         });
+
+                        updated_block.find('[id]').each(function() {
+                            var old = $(this).attr('id');
+                            var regex = /acf-field_5afd2c6916ecb-[0-9]+-field_5b043f0525968-[A-Za-z0-9]+/;
+                            if (old.match(regex)) {
+                                var new_id = old.replace(regex, 'acf-field_5afd2c6916ecb-' + row_id + '-field_5b043f0525968-' + layout_id);
+                                $(this).attr('id', new_id);
+                            }
+                        });
+
+                        updated_block.find('[name]').each(function() {
+                            var old_data_name = $(this).attr('name');
+                            var regex = /acf\[field_5afd2c6916ecb\]\[[0-9]+\]\[field_5b043f0525968\]\[[A-Za-z0-9]+\]/;
+                            if (old_data_name.match(regex)) {
+                                var new_name = old_data_name.replace(regex, 'acf[field_5afd2c6916ecb][' + row_id + '][field_5b043f0525968][' + layout_id + ']');
+                                $(this).attr('name', new_name);
+                            }
+                        });
+
+                        updated_block.data('id', layout_id);
+
+                        // Re-add dragging control
+                        var controls = updated_block.find('.acf-fc-layout-controls');
+                        controls.prepend('<a class="acf-icon small light dashicons dashicons-move" href="#" data-name="drag-layout"></a>');
+
+                        updated_block.find('a[data-name="drag-layout"]').click(function() {
+                            clickDragButton(updated_block, row);
+                        });
+
+                        if (original_row.find('.values .layout').length < 1) {
+                            original_row.find('.no-value-message').css("display", 'block');
+                        }
                     });
-                } else if (index == rows_length - 1 ) {
-                    // If last element and block is not dropped anywhere, then replace block at his place
-                    $('.dragging-layout').removeClass('dragging-layout ui-draggable ui-draggable-handle');
-                    block.removeAttr('style');
-                }
+                });
+            } else if (index == rows_length - 1) {
+                // If last element and block is not dropped anywhere, then replace block at his place
+                $('.dragging-layout').removeClass('dragging-layout ui-draggable ui-draggable-handle');
+                block.removeAttr('style');
             }
-            index++;
-        });
+        }
+        index++;
+    });
 }
 
 var showDroppablePosition = function(blockPosY, original_row) {
