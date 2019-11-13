@@ -69,6 +69,8 @@ class WoodyTheme_ACF
 
         // Custom Filter
         add_filter('woody_get_field_option', [$this, 'woodyGetFieldOption'], 10, 3);
+        add_filter('woody_get_field_object', [$this, 'woodyGetFieldObject'], 10, 3);
+        add_filter('woody_get_fields_by_group', [$this, 'woodyGetFieldsByGroup'], 10, 3);
     }
 
     public function woodyGetFieldOption($field_name)
@@ -79,6 +81,28 @@ class WoodyTheme_ACF
             set_transient('woody_get_field_option', $woody_get_field_option);
         }
         return $woody_get_field_option[$field_name];
+    }
+
+    // Identique à woodyGetFieldsOption mais avec la fonction get_field_object
+    public function woodyGetFieldsObject($field_name)
+    {
+        $woody_get_field_object = get_transient('woody_get_field_object');
+        if (empty($woody_get_field_object[$field_name])) {
+            $woody_get_field_object[$field_name] = get_field_object($field_name);
+            set_transient('woody_get_field_object', $woody_get_field_object);
+        }
+        return $woody_get_field_object[$field_name];
+    }
+
+    // Retourne un tableau des champs du groupe donné
+    public function woodyGetFieldsByGroup($group_name)
+    {
+        $woody_get_fields_by_group = get_transient('woody_get_fields_by_group');
+        if (empty($woody_get_fields_by_group[$group_name])) {
+            $woody_get_fields_by_group[$group_name] = acf_get_fields($group_name);
+            set_transient('woody_get_fields_by_group', $woody_get_fields_by_group);
+        }
+        return $woody_get_fields_by_group[$group_name];
     }
 
     /**
@@ -433,6 +457,10 @@ class WoodyTheme_ACF
             // On retire l'option bloc commentaires si le plugin n'est pas activé
             unset($field['layouts']['layout_5d91d7a234ca6']);
         }
+        if (!in_array('ski_resort', WOODY_OPTIONS)) {
+            // On retire l'option bloc infolive si le plugin n'est pas activé (par sécurité)
+            unset($field['layouts']['layout_infolive']);
+        }
 
         return $field;
     }
@@ -466,7 +494,6 @@ class WoodyTheme_ACF
         $hero_terms = [];
         $taxonomies = get_taxonomies();
         $displayIcon = get_field('page_heading_term_icon'); // With plugin
-
 
         foreach ($taxonomies as $taxonomy) {
             if ($taxonomy == 'places' || $taxonomy == 'seasons' || $taxonomy == 'themes') {

@@ -262,5 +262,19 @@ class WoodyTheme_Polylang
         __('Merci d\'activer le javascript pour afficher', 'woody-theme');
         __('le bloc de commentaires Disqus', 'woody-theme');
         __('Une erreur est survenue lors de l\'affichage des commentaires. Merci de contacter votre administrateur', 'woody-theme');
+
+        // Infolive
+        __('Remontées mécaniques', 'woody-theme');
+        __('Pistes', 'woody-theme');
+        __('Domaine Alpin', 'woody-theme');
+        __('Domaine Nordique', 'woody-theme');
+        __('Détails', 'woody-theme');
+        __('Météo', 'woody-theme');
+        __('Voir le bulletin météo', 'woody-theme');
+        __('Bulletin complet', 'woody-theme');
+        __('Webcams', 'woody-theme');
+        __('Voir les webcams', 'woody-theme');
+        __('Flux erroné !', 'woody-theme');
+        __('Module Infoneige non configuré !', 'woody-theme');
     }
 }
