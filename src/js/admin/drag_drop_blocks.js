@@ -95,7 +95,7 @@ var updateSection = function(block, blockPosY, original_row, clone) {
                         var updated_block = row.find('.acf-flexible-content').first().children('.values').children('.layout').last();
                         updated_block.find('*[for^="acf"]').each(function() {
                             var old = $(this).attr('for');
-                            var regex = /acf-field_5afd2c6916ecb-[0-9]+-field_5b043f0525968-[A-Za-z0-9]+/;
+                            var regex = /acf-field_5afd2c6916ecb-[0-9]+-field_5b043f0525968-[0-9]+/;
                             if (old.match(regex)) {
                                 var new_for = old.replace(regex, 'acf-field_5afd2c6916ecb-' + row_id + '-field_5b043f0525968-' + layout_id);
                                 $(this).attr('for', new_for);
@@ -104,7 +104,7 @@ var updateSection = function(block, blockPosY, original_row, clone) {
 
                         updated_block.find('*[id^="acf"]').each(function() {
                             var old = $(this).attr('id');
-                            var regex = /acf-field_5afd2c6916ecb-[0-9]+-field_5b043f0525968-[A-Za-z0-9]+/;
+                            var regex = /acf-field_5afd2c6916ecb-[0-9]+-field_5b043f0525968-[0-9]+/;
                             if (old.match(regex)) {
                                 var new_id = old.replace(regex, 'acf-field_5afd2c6916ecb-' + row_id + '-field_5b043f0525968-' + layout_id);
                                 $(this).attr('id', new_id);
@@ -113,7 +113,7 @@ var updateSection = function(block, blockPosY, original_row, clone) {
 
                         updated_block.find('*[name^="acf"]').each(function() {
                             var old_data_name = $(this).attr('name');
-                            var regex = /acf\[field_5afd2c6916ecb\]\[[0-9]+\]\[field_5b043f0525968\]\[[A-Za-z0-9]+\]/;
+                            var regex = /acf\[field_5afd2c6916ecb\]\[[0-9]+\]\[field_5b043f0525968\]\[[0-9]+\]/;
                             if (old_data_name.match(regex)) {
                                 var new_name = old_data_name.replace(regex, 'acf[field_5afd2c6916ecb][' + row_id + '][field_5b043f0525968][' + layout_id + ']');
                                 $(this).attr('name', new_name);
@@ -143,6 +143,14 @@ var updateSection = function(block, blockPosY, original_row, clone) {
         }
         index++;
     });
+
+    original_row.find('.acf-flexible-content').first().children('.values').children('.layout').each(function(i) {
+        var block = $(this);
+        if (block.data('id') != i) {
+            block.attr('data-id', i);
+            block.find('.acf-fc-layout-order').text(i + 1);
+        }
+    });
 }
 
 var showDroppablePosition = function(blockPosY, original_row) {
@@ -166,4 +174,4 @@ var showDroppablePosition = function(blockPosY, original_row) {
                 }
             }
         });
-    }
+}
