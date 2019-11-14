@@ -8,6 +8,9 @@ var clickDragButton = function(block, row) {
     // Make block draggable
     block.draggable({
         disabled: false,
+        start: function() {
+            row.find('.acf-flexible-content').first().children('.values').append('<div class="initial-block-pos"></div>');
+        },
         drag: function(e, ui) {
             var blockPosY = block.offset().top;
             var rowPosY = row.offset().top;
@@ -23,6 +26,7 @@ var clickDragButton = function(block, row) {
             var rowPosY = row.offset().top;
             var maxHeight = row.innerHeight();
 
+            $('.initial-block-pos').remove();
             // Remove droppable div
             if (blockPosY < rowPosY + 35 || blockPosY + 35 > rowPosY + maxHeight) {
                 // Outside
@@ -76,13 +80,20 @@ var updateSection = function(block, blockPosY, original_row, clone) {
                 $.when(row.find('.acf-actions .acf-button[data-name="add-layout"]').trigger('click')).then(function() {
                     $.when($('.acf-tooltip.acf-fc-popup a[data-layout="' + block_type + '"]').trigger('click')).then(function() {
                         // Replace field values
-                        var fields = clone.find('.acf-fields');
+
+                        var fields = clone.find('.acf-fields .acf-field');
                         var new_block = row.find('.acf-flexible-content').first().children('.values').children('.layout').last();
-                        new_block.find('.acf-fields').replaceWith(fields);
+                        new_block.find('.acf-fields .acf-field').remove();
+                        var new_fields = new_block.find('.acf-fields');
+
+                        fields.each(function() {
+                            var field = $(this);
+                            new_fields.append(field);
+                        });
 
                         // Update block indexes
                         var updated_block = row.find('.acf-flexible-content').first().children('.values').children('.layout').last();
-                        updated_block.find('[for]').each(function() {
+                        updated_block.find('*[for^="acf"]').each(function() {
                             var old = $(this).attr('for');
                             var regex = /acf-field_5afd2c6916ecb-[0-9]+-field_5b043f0525968-[A-Za-z0-9]+/;
                             if (old.match(regex)) {
@@ -91,7 +102,7 @@ var updateSection = function(block, blockPosY, original_row, clone) {
                             }
                         });
 
-                        updated_block.find('[id]').each(function() {
+                        updated_block.find('*[id^="acf"]').each(function() {
                             var old = $(this).attr('id');
                             var regex = /acf-field_5afd2c6916ecb-[0-9]+-field_5b043f0525968-[A-Za-z0-9]+/;
                             if (old.match(regex)) {
@@ -100,7 +111,7 @@ var updateSection = function(block, blockPosY, original_row, clone) {
                             }
                         });
 
-                        updated_block.find('[name]').each(function() {
+                        updated_block.find('*[name^="acf"]').each(function() {
                             var old_data_name = $(this).attr('name');
                             var regex = /acf\[field_5afd2c6916ecb\]\[[0-9]+\]\[field_5b043f0525968\]\[[A-Za-z0-9]+\]/;
                             if (old_data_name.match(regex)) {
@@ -155,4 +166,4 @@ var showDroppablePosition = function(blockPosY, original_row) {
                 }
             }
         });
-}
+    }
