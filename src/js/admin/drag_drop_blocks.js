@@ -9,7 +9,7 @@ var clickDragButton = function(block, row) {
     block.draggable({
         disabled: false,
         start: function() {
-            row.find('.acf-flexible-content').first().children('.values').append('<div class="initial-block-pos"></div>');
+            $('<div class="initial-block-pos"></div>').insertAfter(block);
         },
         drag: function(e, ui) {
             var blockPosY = block.offset().top;
