@@ -269,7 +269,11 @@ class WoodyTheme_SiteMap
         $sitemap = [];
 
         // On récupère tous les posts de type page dans un tableau hiérarchisé et on compile le template
-        $sitemap['posts'] = $this->getPostsByHierarchy(0, pll_current_language());
+        $sitemap['posts'] = get_transient('sitemap_posts');
+        if (empty($sitemap['posts'])) {
+            $sitemap['posts'] = $this->getPostsByHierarchy(0, pll_current_language());
+            set_transient('sitemap_posts', $sitemap['posts']);
+        }
         $return = \Timber::compile('woody_widgets/sitemap/tpl_01/tpl.twig', $sitemap);
 
         return $return;
