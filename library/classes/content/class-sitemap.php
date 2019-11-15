@@ -26,6 +26,9 @@ class WoodyTheme_SiteMap
         add_action('woody_sitemap', [$this, 'woodySitemap']);
         add_action('wp', [$this, 'scheduleSitemap']);
         \WP_CLI::add_command('woody:sitemap', [$this, 'woodySitemap']);
+
+        // Adding a shortcode to display sitemap for humans
+        add_shortcode('woody_sitemap', [$this, 'sitemapShortcode']);
     }
 
     public function queryVars($qvars)
@@ -257,5 +260,60 @@ class WoodyTheme_SiteMap
         $str = implode(' ', $str);
 
         return $str;
+    }
+
+    public function sitemapShortcode($atts)
+    {
+
+        $return = '';
+        $sitemap = [];
+
+        // On récupère tous les posts de type page dans un tableau hiérarchisé et on compile le template
+        $sitemap['posts'] = get_transient('sitemap_posts');
+        if (empty($sitemap['posts'])) {
+            $sitemap['posts'] = $this->getPostsByHierarchy(0, pll_current_language());
+            set_transient('sitemap_posts', $sitemap['posts']);
+        }
+        $return = \Timber::compile('woody_widgets/sitemap/tpl_01/tpl.twig', $sitemap);
+
+        return $return;
+    }
+
+    private function getPostsByHierarchy($post_parent_id, $lang)
+    {
+        $return = [];
+
+        // On récupère tous les posts enfant de $post_parent_id
+        $args = array(
+            'post_status' => array(
+                'publish'
+            ),
+            'post_parent' => $post_parent_id,
+            'posts_per_page' => -1,
+            'post_type' => 'page',
+            'lang' => $lang,
+            'order' => 'ASC',
+            'orderby' => 'menu_order',
+        );
+
+        $query_result = new \WP_Query($args);
+
+        // S'il y a des posts, on les ajoutes à $return
+        if (!empty($query_result->posts)) {
+
+            foreach ($query_result->posts as $post) {
+                $return[$post->ID] = [
+                    'url' => get_permalink($post->ID),
+                    'title' => get_the_title($post->ID),
+                    'parent' => wp_get_post_parent_id($post->ID),
+                    'metadata' => get_post_meta($post->ID)
+                ];
+
+                // On réitère le processus tant que les posts trouvés ont des enfants
+                $return[$post->ID]['children'] = $this->getPostsByHierarchy($post->ID, $lang);
+            }
+        }
+
+        return $return;
     }
 }
