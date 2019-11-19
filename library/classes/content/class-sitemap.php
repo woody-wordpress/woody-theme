@@ -29,7 +29,7 @@ class WoodyTheme_SiteMap
         \WP_CLI::add_command('woody:sitemap', [$this, 'woodySitemap']);
 
         // Adding a shortcode to display sitemap for humans
-        add_shortcode('woody_sitemap', [$this, 'sitemapShortcode']);
+        // add_shortcode('woody_sitemap', [$this, 'sitemapShortcode']);
     }
 
     public function queryVars($qvars)
