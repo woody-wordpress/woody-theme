@@ -24,6 +24,7 @@ class WoodyTheme_SiteMap
         add_filter('query_vars', [$this, 'queryVars']);
 
         add_action('woody_sitemap', [$this, 'woodySitemap']);
+        add_action('woody_sitemap', [$this, 'getPostsByHierarchy']);
         add_action('wp', [$this, 'scheduleSitemap']);
         \WP_CLI::add_command('woody:sitemap', [$this, 'woodySitemap']);
 
@@ -264,57 +265,52 @@ class WoodyTheme_SiteMap
 
     public function sitemapShortcode($atts)
     {
-
         $return = '';
-        $sitemap = [];
-
-        $lang = pll_current_language();
-
-        // On récupère tous les posts de type page dans un tableau hiérarchisé et on compile le template
-        $sitemap['posts'] = get_transient('sitemap_posts_' . $lang);
-        if (empty($sitemap['posts'])) {
-            $sitemap['posts'] = $this->getPostsByHierarchy(0, pll_current_language());
-            set_transient('sitemap_posts_' . $lang, $sitemap['posts']);
-        }
+        $sitemap['posts'] = $this->getPostsByHierarchy(0, pll_current_language());
         $return = \Timber::compile('woody_widgets/sitemap/tpl_01/tpl.twig', $sitemap);
 
         return $return;
     }
 
+
     private function getPostsByHierarchy($post_parent_id, $lang)
     {
-        $return = [];
+        $return = get_transient('sitemap_posts_' . $lang);
 
-        // On récupère tous les posts enfant de $post_parent_id
-        $args = array(
-            'post_status' => array(
-                'publish'
-            ),
-            'post_parent' => $post_parent_id,
-            'posts_per_page' => -1,
-            'post_type' => 'page',
-            'lang' => $lang,
-            'order' => 'ASC',
-            'orderby' => 'menu_order',
-        );
+        if (empty($return)) {
+            // On récupère tous les posts enfant de $post_parent_id
+            $args = array(
+                'post_status' => array(
+                    'publish'
+                ),
+                'post_parent' => $post_parent_id,
+                'posts_per_page' => -1,
+                'post_type' => 'page',
+                'lang' => $lang,
+                'order' => 'ASC',
+                'orderby' => 'menu_order',
+            );
 
-        $query_result = new \WP_Query($args);
+            $query_result = new \WP_Query($args);
 
-        // S'il y a des posts, on les ajoutes à $return
-        if (!empty($query_result->posts)) {
+            // S'il y a des posts, on les ajoutes à $return
+            if (!empty($query_result->posts)) {
 
-            foreach ($query_result->posts as $post) {
-                $return[$post->ID] = [
-                    'url' => get_permalink($post->ID),
-                    'title' => get_the_title($post->ID),
-                    'parent' => wp_get_post_parent_id($post->ID),
-                    'metadata' => get_post_meta($post->ID)
-                ];
+                foreach ($query_result->posts as $post) {
+                    $return[$post->ID] = [
+                        'url' => get_permalink($post->ID),
+                        'title' => get_the_title($post->ID),
+                        'parent' => wp_get_post_parent_id($post->ID)
+                    ];
 
-                // On réitère le processus tant que les posts trouvés ont des enfants
-                $return[$post->ID]['children'] = $this->getPostsByHierarchy($post->ID, $lang);
+                    // On réitère le processus tant que les posts trouvés ont des enfants
+                    $return[$post->ID]['children'] = $this->getPostsByHierarchy($post->ID, $lang);
+                }
             }
+
+            set_transient('sitemap_posts_' . $lang, $return);
         }
+
 
         return $return;
     }
