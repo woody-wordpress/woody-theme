@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.6.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2019-11-06T09:03:55+01:00\n"
-"PO-Revision-Date: 2019-11-06 09:35+0100\n"
+"POT-Creation-Date: 2019-11-18T17:54:05+01:00\n"
+"PO-Revision-Date: 2019-11-18 17:58+0100\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.2.3\n"
 "X-Domain: woody-theme\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -173,13 +173,13 @@ msgstr "Vraag een offerte aan"
 
 #: library/classes/content/class-polylang.php:105
 #: library/classes/content/class-polylang.php:145
-#: library/classes/timber/class-twig-filters.php:223
+#: library/classes/timber/class-twig-filters.php:221
 msgid "jour"
 msgstr "dag"
 
 #: library/classes/content/class-polylang.php:106
 #: library/classes/content/class-polylang.php:146
-#: library/classes/timber/class-twig-filters.php:226
+#: library/classes/timber/class-twig-filters.php:224
 msgid "jours"
 msgstr "dagen"
 
@@ -323,17 +323,18 @@ msgid "enfant(s)"
 msgstr "kind(eren)"
 
 #: library/classes/content/class-polylang.php:147
-#: library/classes/timber/class-twig-filters.php:229
+#: library/classes/timber/class-twig-filters.php:227
 msgid "semaine"
 msgstr "week"
 
 #: library/classes/content/class-polylang.php:148
-#: library/classes/timber/class-twig-filters.php:232
+#: library/classes/timber/class-twig-filters.php:230
 msgid "semaines"
 msgstr "weken"
 
 #: library/classes/content/class-polylang.php:149
-#: library/classes/timber/class-twig-filters.php:235
+#: library/classes/timber/class-twig-filters.php:233
+#: library/classes/timber/class-twig-filters.php:236
 msgid "mois"
 msgstr "maanden"
 
@@ -373,7 +374,7 @@ msgstr "Hoe kom je hier?"
 msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "Misschien is de pagina due u zoekt hier?"
 
-#: library/classes/content/class-polylang.php:154
+#: library/classes/content/class-polylang.php:159
 #: library/classes/process/class-woody-getters.php:280
 #: library/classes/process/class-woody-getters.php:456
 #: library/classes/process/class-woody-getters.php:522
@@ -396,7 +397,7 @@ msgstr "Verandering van seizoen"
 msgid "Réservable"
 msgstr "Reserveerbaar"
 
-#: library/classes/content/class-polylang.php:159
+#: library/classes/content/class-polylang.php:164
 #: library/classes/process/class-woody-getters.php:337
 msgid "Télécharger"
 msgstr "Downloaden"
@@ -654,8 +655,8 @@ msgstr "Uw verblijf/dag"
 msgid "Comprenant"
 msgstr "Inclusief"
 
-#: library/classes/content/class-polylang.php:237
-#: library/templates/template-page.php:169
+#: library/classes/content/class-polylang.php:242
+#: library/templates/template-page.php:170
 msgid "Gratuit"
 msgstr "Gratis"
 
@@ -707,20 +708,24 @@ msgstr "Basis"
 msgid "Publié le"
 msgstr "Gepubliceerd op"
 
-#: library/classes/content/class-polylang.php:254
-#: library/classes/process/class-woody-compilers.php:350
+#: library/classes/content/class-polylang.php:259
+#: library/classes/process/class-woody-compilers.php:351
 msgid "Désolé, aucun contenu ne correspond à votre recherche"
 msgstr "Sorry, geen enkele inhoud komt overeen met uw zoekopdracht"
 
-#: library/classes/content/class-polylang.php:262
+#: library/classes/content/class-polylang.php:260
+msgid "Lire aussi"
+msgstr "Lees ook"
+
+#: library/classes/content/class-polylang.php:263
 msgid "Merci d'activer le javascript pour afficher"
 msgstr "Schakel javascript in om het volgende weer te geven"
 
-#: library/classes/content/class-polylang.php:263
+#: library/classes/content/class-polylang.php:264
 msgid "le bloc de commentaires Disqus"
 msgstr "het commentaarblok voor Disqus"
 
-#: library/classes/content/class-polylang.php:264
+#: library/classes/content/class-polylang.php:265
 msgid ""
 "Une erreur est survenue lors de l'affichage des commentaires. Merci de "
 "contacter votre administrateur"
@@ -728,45 +733,53 @@ msgstr ""
 "Er is een fout opgetreden bij het weergeven van opmerkingen. Neem contact op "
 "met uw beheerder"
 
-#: library/classes/content/class-polylang.php:262
+#: library/classes/content/class-polylang.php:268
 msgid "Remontées mécaniques"
 msgstr "Skiliften"
 
-#: library/classes/content/class-polylang.php:263
+#: library/classes/content/class-polylang.php:269
 msgid "Pistes"
 msgstr "Sporen"
 
-#: library/classes/content/class-polylang.php:264
+#: library/classes/content/class-polylang.php:270
 msgid "Domaine Alpin"
 msgstr "Alpendomein"
 
-#: library/classes/content/class-polylang.php:265
+#: library/classes/content/class-polylang.php:271
 msgid "Domaine Nordique"
 msgstr "Noordse Domein"
 
-#: library/classes/content/class-polylang.php:266
+#: library/classes/content/class-polylang.php:272
 msgid "Détails"
 msgstr "Details"
 
-#: library/classes/content/class-polylang.php:267
+#: library/classes/content/class-polylang.php:273
 msgid "Météo"
 msgstr "Weersverwachting"
 
-#: library/classes/content/class-polylang.php:268
+#: library/classes/content/class-polylang.php:274
 msgid "Voir le bulletin météo"
 msgstr "Zie het weerbericht"
 
-#: library/classes/content/class-polylang.php:269
+#: library/classes/content/class-polylang.php:275
 msgid "Bulletin complet"
 msgstr "Volledig bulletin"
 
-#: library/classes/content/class-polylang.php:270
+#: library/classes/content/class-polylang.php:276
 msgid "Webcams"
 msgstr "Webcams"
 
-#: library/classes/content/class-polylang.php:271
+#: library/classes/content/class-polylang.php:277
 msgid "Voir les webcams"
 msgstr "Zie de webcams"
+
+#: library/classes/content/class-polylang.php:278
+msgid "Flux erroné !"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:279
+msgid "Module Infoneige non configuré !"
+msgstr ""
 
 #: library/templates/template-page.php:96
 msgid "Oups !"

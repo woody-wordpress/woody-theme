@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.6.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2019-11-06T09:03:55+01:00\n"
-"PO-Revision-Date: 2019-11-06 09:26+0100\n"
+"POT-Creation-Date: 2019-11-18T17:54:05+01:00\n"
+"PO-Revision-Date: 2019-11-18 17:57+0100\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.2.3\n"
 "X-Domain: woody-theme\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -173,13 +173,13 @@ msgstr "Richiedi un preventivo"
 
 #: library/classes/content/class-polylang.php:105
 #: library/classes/content/class-polylang.php:145
-#: library/classes/timber/class-twig-filters.php:223
+#: library/classes/timber/class-twig-filters.php:221
 msgid "jour"
 msgstr "giorno"
 
 #: library/classes/content/class-polylang.php:106
 #: library/classes/content/class-polylang.php:146
-#: library/classes/timber/class-twig-filters.php:226
+#: library/classes/timber/class-twig-filters.php:224
 msgid "jours"
 msgstr "giorni"
 
@@ -320,17 +320,18 @@ msgid "enfant(s)"
 msgstr "bambino/i"
 
 #: library/classes/content/class-polylang.php:147
-#: library/classes/timber/class-twig-filters.php:229
+#: library/classes/timber/class-twig-filters.php:227
 msgid "semaine"
 msgstr "settimana"
 
 #: library/classes/content/class-polylang.php:148
-#: library/classes/timber/class-twig-filters.php:232
+#: library/classes/timber/class-twig-filters.php:230
 msgid "semaines"
 msgstr "settimane"
 
 #: library/classes/content/class-polylang.php:149
-#: library/classes/timber/class-twig-filters.php:235
+#: library/classes/timber/class-twig-filters.php:233
+#: library/classes/timber/class-twig-filters.php:236
 msgid "mois"
 msgstr "mese"
 
@@ -370,7 +371,7 @@ msgstr "Come arrivare qui?"
 msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "Forse la pagina che stai cercando è qui?"
 
-#: library/classes/content/class-polylang.php:154
+#: library/classes/content/class-polylang.php:159
 #: library/classes/process/class-woody-getters.php:280
 #: library/classes/process/class-woody-getters.php:456
 #: library/classes/process/class-woody-getters.php:522
@@ -393,7 +394,7 @@ msgstr "Cambio di stagione"
 msgid "Réservable"
 msgstr "Riservabile"
 
-#: library/classes/content/class-polylang.php:159
+#: library/classes/content/class-polylang.php:164
 #: library/classes/process/class-woody-getters.php:337
 msgid "Télécharger"
 msgstr "Scaricare"
@@ -651,8 +652,8 @@ msgstr "Il tuo soggiorno/giorno"
 msgid "Comprenant"
 msgstr "Incluso"
 
-#: library/classes/content/class-polylang.php:237
-#: library/templates/template-page.php:169
+#: library/classes/content/class-polylang.php:242
+#: library/templates/template-page.php:170
 msgid "Gratuit"
 msgstr "Gratuito"
 
@@ -704,20 +705,24 @@ msgstr "Base di"
 msgid "Publié le"
 msgstr "Pubblicato su"
 
-#: library/classes/content/class-polylang.php:254
-#: library/classes/process/class-woody-compilers.php:350
+#: library/classes/content/class-polylang.php:259
+#: library/classes/process/class-woody-compilers.php:351
 msgid "Désolé, aucun contenu ne correspond à votre recherche"
 msgstr "Spiacente, nessun contenuto corrisponde alla tua ricerca"
 
-#: library/classes/content/class-polylang.php:257
+#: library/classes/content/class-polylang.php:260
+msgid "Lire aussi"
+msgstr "Leggi anche"
+
+#: library/classes/content/class-polylang.php:263
 msgid "Merci d'activer le javascript pour afficher"
 msgstr "Si prega di abilitare javascript per visualizzare"
 
-#: library/classes/content/class-polylang.php:258
+#: library/classes/content/class-polylang.php:264
 msgid "le bloc de commentaires Disqus"
 msgstr "il blocco dei commenti Disqus"
 
-#: library/classes/content/class-polylang.php:259
+#: library/classes/content/class-polylang.php:265
 msgid ""
 "Une erreur est survenue lors de l'affichage des commentaires. Merci de "
 "contacter votre administrateur"
@@ -725,45 +730,53 @@ msgstr ""
 "Si è verificato un errore durante la visualizzazione dei commenti. Contatta "
 "il tuo amministratore"
 
-#: library/classes/content/class-polylang.php:262
+#: library/classes/content/class-polylang.php:268
 msgid "Remontées mécaniques"
 msgstr "Impianti di risalita"
 
-#: library/classes/content/class-polylang.php:263
+#: library/classes/content/class-polylang.php:269
 msgid "Pistes"
 msgstr "Tracce"
 
-#: library/classes/content/class-polylang.php:264
+#: library/classes/content/class-polylang.php:270
 msgid "Domaine Alpin"
 msgstr "Dominio alpino"
 
-#: library/classes/content/class-polylang.php:265
+#: library/classes/content/class-polylang.php:271
 msgid "Domaine Nordique"
 msgstr "Dominio nordico"
 
-#: library/classes/content/class-polylang.php:266
+#: library/classes/content/class-polylang.php:272
 msgid "Détails"
 msgstr "Dettagli"
 
-#: library/classes/content/class-polylang.php:267
+#: library/classes/content/class-polylang.php:273
 msgid "Météo"
 msgstr "Previsioni del tempo"
 
-#: library/classes/content/class-polylang.php:268
+#: library/classes/content/class-polylang.php:274
 msgid "Voir le bulletin météo"
 msgstr "Guarda il bollettino meteo"
 
-#: library/classes/content/class-polylang.php:269
+#: library/classes/content/class-polylang.php:275
 msgid "Bulletin complet"
 msgstr "Bollettino completo"
 
-#: library/classes/content/class-polylang.php:270
+#: library/classes/content/class-polylang.php:276
 msgid "Webcams"
 msgstr "Webcam"
 
-#: library/classes/content/class-polylang.php:271
+#: library/classes/content/class-polylang.php:277
 msgid "Voir les webcams"
 msgstr "Guarda le webcam"
+
+#: library/classes/content/class-polylang.php:278
+msgid "Flux erroné !"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:279
+msgid "Module Infoneige non configuré !"
+msgstr ""
 
 #: library/templates/template-page.php:96
 msgid "Oups !"
