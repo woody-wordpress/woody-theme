@@ -168,7 +168,7 @@
             },
             "default_value": "",
             "tabs": "visual",
-            "toolbar": "basic",
+            "toolbar": "full",
             "media_upload": 0,
             "delay": 0
         },
