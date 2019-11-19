@@ -31,6 +31,8 @@ class WoodyTheme_ACF
 
         add_action('acf/save_post', [$this, 'clearOptionsTransient'], 20);
 
+        add_filter('acf/update_value', [$this, 'cleanWoodyGetFields'], 10, 3);
+
         add_filter('acf/settings/load_json', [$this, 'acfJsonLoad']);
         add_filter('acf/load_field/type=radio', [$this, 'woodyTplAcfLoadField']);
         add_filter('acf/load_field/type=select', [$this, 'woodyIconLoadField']);
@@ -554,6 +556,20 @@ class WoodyTheme_ACF
         return $current_lang;
     }
 
+    public function cleanWoodyGetFields($value, $post_id, $field)
+    {
+        $woody_get_fields = get_transient('woody_get_fields');
+
+        $old = $woody_get_fields[$post_id][$field['name']];
+
+        if ($old != $value) {
+            $woody_get_fields[$post_id][$field['name']] = $value;
+            set_transient('woody_get_fields', $woody_get_fields);
+        }
+
+        return $woody_get_fields[$post_id][$field['name']];
+    }
+
     public function cleanTransient()
     {
         // Delete Transient
@@ -569,7 +585,7 @@ class WoodyTheme_ACF
         delete_transient('woody_get_field_object');
         delete_transient('woody_get_fields_by_group');
         delete_transient('woody_get_post');
-        delete_transient('woody_get_fields');
+        // delete_transient('woody_get_fields');
 
         // Warm Transient
         getWoodyTwigPaths();
