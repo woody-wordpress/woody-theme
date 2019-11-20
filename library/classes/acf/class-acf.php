@@ -31,7 +31,6 @@ class WoodyTheme_ACF
 
         add_action('acf/save_post', [$this, 'clearOptionsTransient'], 20);
 
-        add_filter('acf/update_value', [$this, 'cleanWoodyGetFields'], 10, 3);
 
         add_filter('acf/settings/load_json', [$this, 'acfJsonLoad']);
         add_filter('acf/load_field/type=radio', [$this, 'woodyTplAcfLoadField']);
@@ -72,9 +71,11 @@ class WoodyTheme_ACF
         // Custom Filter
         add_filter('woody_get_field_option', [$this, 'woodyGetFieldOption'], 10, 3);
         add_filter('woody_get_field_object', [$this, 'woodyGetFieldObject'], 10, 3);
-        add_filter('woody_get_fields_by_group', [$this, 'woodyGetFieldsByGroup'], 10, 3);
-        add_filter('woody_get_post', [$this, 'woodyGetPost'], 10, 3);
-        add_filter('woody_get_fields', [$this, 'woodyGetFields'], 10, 3);
+        add_filter('woody_get_fields_by_group', [$this, 'woodyGetFieldsByGroup'], 10);
+        add_filter('woody_get_post', [$this, 'woodyGetPost'], 10);
+        add_filter('woody_get_fields', [$this, 'woodyGetFields'], 10);
+
+        add_filter('acf/update_value', [$this, 'updateWoodyGetFields'], 10, 3);
     }
 
     public function woodyGetFieldOption($field_name)
@@ -129,6 +130,20 @@ class WoodyTheme_ACF
             set_transient('woody_get_fields', $woody_get_fields);
         }
         return $woody_get_fields[$post_id];
+    }
+
+    // Met a jours les valeurs de champs
+    public function updateWoodyGetFields($value, $post_id, $field)
+    {
+        $woody_get_fields = get_transient('woody_get_fields');
+        $old = $woody_get_fields[$post_id][$field['name']];
+
+        if ($old != $value) {
+            $woody_get_fields[$post_id][$field['name']] = $value;
+            set_transient('woody_get_fields', $woody_get_fields);
+        }
+
+        return $value;
     }
 
     /**
@@ -554,20 +569,6 @@ class WoodyTheme_ACF
         }
 
         return $current_lang;
-    }
-
-    public function cleanWoodyGetFields($value, $post_id, $field)
-    {
-        $woody_get_fields = get_transient('woody_get_fields');
-
-        $old = $woody_get_fields[$post_id][$field['name']];
-
-        if ($old != $value) {
-            $woody_get_fields[$post_id][$field['name']] = $value;
-            set_transient('woody_get_fields', $woody_get_fields);
-        }
-
-        return $woody_get_fields[$post_id][$field['name']];
     }
 
     public function cleanTransient()
