@@ -135,7 +135,7 @@ class WoodyTheme_ACF
     // Met a jours les valeurs de champs
     public function updateWoodyGetFields($value, $post_id, $field)
     {
-        $woody_get_fields = get_transient('woody_get_fields');
+        $woody_get_fields = $this->woodyGetFields($post_id);
         $old = $woody_get_fields[$post_id][$field['name']];
 
         if ($old != $value) {
