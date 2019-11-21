@@ -62,6 +62,14 @@
                     {{ playlist_tourism.content }}
                 </div>
             {% endif %}
+
+            {% if tourtrip_infos|default %}
+                <div class="tourtrip-infos-wrapper">
+                    {{ tourtrip_infos }}
+                </div>
+            {% endif %}
+
+
             {% for key, section in the_sections %}
                 <div class="page-section page-section-{{ key }}" id="pageSection-{{ key }}">
                     {{ section }}
