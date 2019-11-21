@@ -353,7 +353,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
          *********************************************/
         $this->context['sections'] = [];
         if (!empty($this->context['timberpost'])) {
-            $sections = $this->context['timberpost']->get_field('section');
+            $sections = get_field('section', $this->context['timberpost']->ID);
 
             if (!empty($sections) && is_array($sections)) {
                 foreach ($sections as $section_id => $section) {

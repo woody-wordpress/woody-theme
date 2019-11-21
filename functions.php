@@ -17,30 +17,21 @@ use Symfony\Component\Finder\Finder;
 // Theme Support
 add_theme_support('html5');
 
+// Globals
+define('WOODY_THEME_DIR', __DIR__);
+define('WOODY_SUBTHEME_DIR', get_stylesheet_directory());
+
 // Load functions
 $finder = new Finder();
-$finder->files()->in(__DIR__ . '/library/functions')->name('*.php')->sortByName();
+$finder->files()->in(WOODY_THEME_DIR . '/library/functions')->name('*.php')->sortByName();
 foreach ($finder as $file) {
     require_once($file->getPathname());
 }
 
 // Load classes
 $finder = new Finder();
-$finder->files()->in(__DIR__ . '/library/classes/*')->name('*.php')->notName('autoloader.php');
+$finder->files()->in(WOODY_THEME_DIR . '/library/classes/*')->name('*.php')->notName('autoloader.php');
 foreach ($finder as $file) {
     require_once($file->getPathname());
 }
-require_once(__DIR__ . '/library/classes/autoloader.php');
-
-/**
- * Change Timber's cache folder.
- * We want to use wp-content/cache/timber
- */
-add_filter('timber/cache/location', function () {
-    return WP_TIMBER_DIR;
-});
-
-if (class_exists('Timber', false)) {
-    Timber::$locations = apply_filters('timber_locations', array('views', WoodyLibrary::getTemplatesDirname()));
-    Timber::$cache = (file_exists(WP_CACHE_DIR . '/deploy.lock') || WP_ENV == 'dev') ? false : true;
-}
+require_once(WOODY_THEME_DIR . '/library/classes/autoloader.php');
