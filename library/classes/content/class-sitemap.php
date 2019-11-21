@@ -273,7 +273,7 @@ class WoodyTheme_SiteMap
             $sitemap['posts'] = $this->getPostsByHierarchy(0, $lang);
             set_transient('sitemap_posts_' . $lang, $sitemap['posts']);
         }
-        $return = \Timber::compile('woody_widgets/sitemap/tpl_01/tpl.twig', $sitemap);
+        $return = Timber::compile('woody_widgets/sitemap/tpl_01/tpl.twig', $sitemap);
 
         return $return;
     }

@@ -55,7 +55,7 @@ class WoodyTheme_WoodyGetters
                 }
 
                 $data = [];
-                $post = \Timber::get_post($post->ID);
+                $post = Timber::get_post($post->ID);
                 $data = $this->getPagePreview($wrapper, $post);
 
                 // $data['link']['title'] = (!empty($wrapper['links_label'])) ? $wrapper['links_label'] : '';
