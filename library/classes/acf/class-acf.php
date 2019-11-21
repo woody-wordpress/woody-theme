@@ -176,7 +176,6 @@ class WoodyTheme_ACF
             switch ($field['key']) {
                 case 'field_5afd2c9616ecd': // Cas des sections
                 case 'field_5d16118093cc1': // Cas des mises en avant de composants de séjours
-                case 'field_5dd563227f5e3': // Cas des étapes de circuit
                     $components = WoodyLibrary::getTemplatesByAcfGroup($woodyComponents, $field['key']);
                     $components = WoodyLibrary::getTemplatesByAcfGroup($woodyComponents, $field['key']);
                     break;
