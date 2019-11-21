@@ -136,7 +136,7 @@ class WoodyTheme_ACF
     public function updateWoodyGetFields($value, $post_id, $field)
     {
         $woody_get_fields = $this->woodyGetFields($post_id);
-        $old = $woody_get_fields[$post_id][$field['name']];
+        $old = !empty($woody_get_fields[$post_id][$field['name']]) ? $woody_get_fields[$post_id][$field['name']] : '';
 
         if ($old != $value) {
             $woody_get_fields[$post_id][$field['name']] = $value;
