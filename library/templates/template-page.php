@@ -265,7 +265,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $this->context['page_hero'] = Timber::compile($this->context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
             }
 
-            apply_filters('woody_page_context', $this->context);
+            $this->context = apply_filters('woody_page_context', $this->context);
         }
     }
 
