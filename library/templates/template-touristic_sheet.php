@@ -95,6 +95,8 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
                 $tag .= ' />';
                 $this->context['metas'][] = $tag;
             }
+        } else {
+            status_header('410');
         }
     }
 
