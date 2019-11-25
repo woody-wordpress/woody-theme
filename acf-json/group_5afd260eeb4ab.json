@@ -622,35 +622,6 @@
                         "min": "",
                         "max": ""
                     },
-                    "layout_5c1b579ac3a87": {
-                        "key": "layout_5c1b579ac3a87",
-                        "name": "weather",
-                        "label": "Météo",
-                        "display": "block",
-                        "sub_fields": [{
-                            "key": "field_5c1b57a6c3a88",
-                            "label": "Météo",
-                            "name": "meteo",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "clone": [
-                                "group_5c1b551e599ef"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }],
-                        "min": "",
-                        "max": ""
-                    },
                     "layout_5c4f319f1902e": {
                         "key": "layout_5c4f319f1902e",
                         "name": "semantic_view",
@@ -1123,7 +1094,12 @@
                 "operator": "!=",
                 "value": "mirror_page"
             }
-        ]
+        ],
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "tourtrip_step"
+        }]
     ],
     "menu_order": 15,
     "position": "acf_after_title",
@@ -1133,5 +1109,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1571838537
+    "modified": 1574323606
 }
