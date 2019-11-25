@@ -1,21 +1,7 @@
 import $ from 'jquery';
 
 window.dataLayer = window.dataLayer || [];
-
-$.ajax({
-    type: 'POST',
-    dataType: 'json',
-    url: frontendajax.ajaxurl,
-    data: {
-        action: 'get_current_lang'
-    },
-    success: function(response) {
-        window.dataLayer.push({ langue: response });
-    },
-    error: function(err) {
-        console.error(err);
-    }
-});
+window.dataLayer.push({ langue: $('html').attr('lang') });
 
 $.ajax({
     type: 'POST',

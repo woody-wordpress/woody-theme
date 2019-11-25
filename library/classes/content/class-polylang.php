@@ -17,7 +17,6 @@ class WoodyTheme_Polylang
     protected function registerHooks()
     {
         add_action('after_setup_theme', [$this, 'loadThemeTextdomain']);
-        add_action('wp_ajax_get_current_lang', [$this, 'getCurrentLang']);
 
         add_filter('woody_pll_days', [$this, 'woodyPllDays'], 10);
         add_filter('woody_pll_months', [$this, 'woodyPllMonths'], 10);
@@ -263,14 +262,5 @@ class WoodyTheme_Polylang
         __('Merci d\'activer le javascript pour afficher', 'woody-theme');
         __('le bloc de commentaires Disqus', 'woody-theme');
         __('Une erreur est survenue lors de l\'affichage des commentaires. Merci de contacter votre administrateur', 'woody-theme');
-    }
-
-    public function getCurrentLang()
-    {
-        $lang = !empty(pll_current_language('locale')) ?  pll_current_language('locale') : 'fr';
-
-        wd($lang);
-
-        wp_send_json($lang);
     }
 }
