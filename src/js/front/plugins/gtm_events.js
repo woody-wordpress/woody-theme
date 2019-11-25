@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
 window.dataLayer = window.dataLayer || [];
-window.dataLayer.push({ langue: $('html').attr('lang') });
+window.dataLayer.push({ langue: window.siteConfig.current_lang });
 
 $.ajax({
     type: 'POST',
