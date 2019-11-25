@@ -49,5 +49,8 @@ $('.woody-component-claims-block .claim-content .claim-link .button').each(funct
         window.dataLayer.push({
             event: 'Clic claim button',
         });
+        if (typeof ga !== 'undefined' && ga != null) {
+            ga('rc.send', 'event', 'claim', 'CLIC_CLAIM_BUTTON', 'Clic claim button', undefined);
+        }
     });
 });
