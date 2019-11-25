@@ -29,7 +29,7 @@ acf.add_action('sortstop', function ($el) {
             var field_name 		= 	$(this).attr('name');
             field_name          =   field_name.match(/\[([a-zA-Z0-9_-]+\])/g); // split name attribute
             field_name[1]       =   '[' + column_num + ']'; // set the new row name
-            var new_name        =   'acf' + field_name.join('');
+            var new_name        =   $(this).parent().hasClass('acf-gallery-attachment') ? 'acf' + field_name.join('') + '[]' : 'acf' + field_name.join('') ;
             $(this).attr('name', new_name);
         });
 
@@ -45,7 +45,7 @@ acf.add_action('sortstop', function ($el) {
                 field_name          =   field_name.match(/\[([a-zA-Z0-9_-]+\])/g); // split name attribute
                 var tempIndex       =   parseInt(field_name[3].match(/([0-9]+)/g)); // hacky code
                 field_name[3]       =   field_name[3].replace(tempIndex, index); // set the new index
-                var new_name        =   'acf' + field_name.join('');
+                var new_name        =   $(this).parent().hasClass('acf-gallery-attachment') ? 'acf' + field_name.join('') + '[]' : 'acf' + field_name.join('') ;
                 $(this).attr('name', new_name);
             });
 
