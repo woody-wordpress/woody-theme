@@ -441,7 +441,7 @@ class WoodyTheme_WoodyProcess
                     }
                 }
 
-                $return = \Timber::compile($context['woody_components']['section-section_full-tpl_01'], $the_section);
+                $return[] = \Timber::compile($context['woody_components']['section-section_full-tpl_01'], $the_section);
             }
         }
 

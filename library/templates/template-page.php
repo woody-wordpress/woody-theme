@@ -356,7 +356,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $this->context['sections'] = [];
         if (!empty($this->context['timberpost'])) {
             $sections = $this->context['timberpost']->get_field('section');
-            $this->context['the_sections'][] = $this->process->processWoodySections($sections, $this->context);
+            $this->context['the_sections'] = $this->process->processWoodySections($sections, $this->context);
         }
     }
 
