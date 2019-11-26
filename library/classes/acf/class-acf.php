@@ -110,24 +110,13 @@ class WoodyTheme_ACF
         return $woody_get_fields_by_group[$group_name];
     }
 
-    // Retourne les données d'un post donné
-    public function woodyGetPost($post_id)
-    {
-        $woody_get_post = get_transient('woody_get_post');
-        if (empty($woody_get_post[$post_id])) {
-            $woody_get_post[$post_id] = get_post($post_id);
-            set_transient('woody_get_post', $woody_get_post);
-        }
-        return $woody_get_post[$post_id];
-    }
-
     // Retourne les valeurs de champs d'un post donné
     public function woodyGetFields($post_id)
     {
-        $woody_get_fields = get_transient('woody_get_fields');
+        $woody_get_fields = get_transient('woody_get_fields_' . $post_id);
         if (empty($woody_get_fields[$post_id])) {
             $woody_get_fields[$post_id] = get_fields($post_id);
-            set_transient('woody_get_fields', $woody_get_fields);
+            set_transient('woody_get_fields_' . $post_id, $woody_get_fields);
         }
         return $woody_get_fields[$post_id];
     }
@@ -140,7 +129,7 @@ class WoodyTheme_ACF
 
         if ($old != $value) {
             $woody_get_fields[$post_id][$field['name']] = $value;
-            set_transient('woody_get_fields', $woody_get_fields);
+            set_transient('woody_get_fields' . $post_id, $woody_get_fields);
         }
 
         return $value;
