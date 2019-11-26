@@ -1085,17 +1085,6 @@
             }
         ],
         [{
-                "param": "post_type",
-                "operator": "==",
-                "value": "woody_model"
-            },
-            {
-                "param": "page_type_and_children",
-                "operator": "!=",
-                "value": "mirror_page"
-            }
-        ],
-        [{
             "param": "post_type",
             "operator": "==",
             "value": "tourtrip_step"
