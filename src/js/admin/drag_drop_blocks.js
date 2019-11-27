@@ -5,7 +5,6 @@ var setSortableEmptyValues = function() {
         $(this).addClass('droppable-area');
         $(this).closest('.acf-flexible-content').removeClass('-empty');
     });
-
 };
 
 var unsetSortableEmptyValues = function() {
@@ -21,14 +20,17 @@ var unsetSortableEmptyValues = function() {
     });
 };
 
-acf.add_action('ready', function($el) {
-    $('.values').on('click mousedown', function() {
-        setSortableEmptyValues();
-    });
+acf.add_action('append_field/key=field_5b0d1dc8907e7', function() {
+    makeSortable();
+});
 
-    $('.values').on('click mouseup', function() {
-        unsetSortableEmptyValues();
-    });
+acf.add_action('ready_field/key=field_5b0d1dc8907e7', function() {
+    makeSortable();
+});
+
+function makeSortable() {
+    $('.values').on('click mousedown', setSortableEmptyValues);
+    $('.values').on('click mouseup', unsetSortableEmptyValues);
 
     $(".values").sortable({
         connectWith: ".values",
@@ -46,7 +48,7 @@ acf.add_action('ready', function($el) {
             });
         }
     });
-});
+}
 
 acf.add_action('sortstop', function($el) {
     unsetSortableEmptyValues();
