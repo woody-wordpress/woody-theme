@@ -1,9 +1,11 @@
 import $ from 'jquery';
 
 var setSortableEmptyValues = function() {
-    $('.acf-flexible-content.-empty .values').each(function() {
-        $(this).addClass('droppable-area');
-        $(this).closest('.acf-flexible-content').removeClass('-empty');
+    $(this).on('mousemove', function(){
+        $('.acf-flexible-content.-empty .values').each(function() {
+            $(this).addClass('droppable-area');
+            $(this).closest('.acf-flexible-content').removeClass('-empty');
+        });
     });
 };
 
@@ -13,6 +15,7 @@ var unsetSortableEmptyValues = function() {
     });
 
     $('.values').each(function() {
+        $(this).off('mousemove');
         var value = $(this);
         if (value.children().length < 1) {
             value.closest('.acf-flexible-content').addClass('-empty');

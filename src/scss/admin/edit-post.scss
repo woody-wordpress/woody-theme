@@ -241,9 +241,10 @@ textarea.notAllowed {
 }
 
 .droppable-area {
-    padding: 18px 0;
-    background: rgba(70,180,80, 0.4);
-    border: 1px dashed rgb(70,180,80);
+    border: #ccc dashed 2px;
+    height: 56px;
+    margin-top: -60px;
+    background: rgba($color: #fff, $alpha: 0);
 }
 
 @keyframes submitSlideIn {
