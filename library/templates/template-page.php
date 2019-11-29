@@ -130,8 +130,11 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
          * Compilation du bloc prix
          *********************************************/
 
-        $trip_types = ['trip'];
+        $trip_types = [];
         $trip_term = get_term_by('slug', 'trip', 'page_type');
+        if (!empty($trip_term)) {
+            $trip_types[] = $trip_term->slug;
+        }
         $trip_children = get_terms('page_type', ['child_of' => $trip_term->term_id, 'hide_empty' => false, 'hierarchical' => true]);
 
         if (!is_wp_error($trip_children) && !empty($trip_children)) {
@@ -147,6 +150,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 'restoration_component',
             ];
         }
+
+        $trip_types = apply_filters('woody_trip_types', $trip_types);
 
         if (in_array($this->context['page_type'], $trip_types)) {
             $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d', $this->context['post']);
@@ -230,6 +235,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 if (!empty($this->context['hide_page_zones']) && in_array('breadcrumb', $this->context['hide_page_zones'])) {
                     unset($page_teaser['breadcrumb']);
                 }
+
+                $page_teaser = apply_filters('woody_custom_page_teaser', $page_teaser, $this->context);
 
                 $this->context['page_teaser'] = Timber::compile($this->context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
             }
