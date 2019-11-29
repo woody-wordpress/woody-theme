@@ -106,6 +106,9 @@ class WoodyTheme_Polylang
         __('jours', 'woody-theme');
         __('personne', 'woody-theme');
         __('personnes', 'woody-theme');
+        __('Départ', 'woody-theme');
+        __('Arrivée', 'woody-theme');
+        __('Etape', 'woody-theme');
 
         // Availabilities calendar
         __('Attention, vous n\'avez pas saisi d\'identifiant de playlist en paramètre du shortcode.
