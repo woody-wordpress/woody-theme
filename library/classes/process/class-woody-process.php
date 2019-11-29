@@ -392,4 +392,59 @@ class WoodyTheme_WoodyProcess
         $query_result = new \WP_Query($the_query);
         return $query_result;
     }
+
+    public function processWoodySections($sections, $context)
+    {
+        $return = [];
+        if (!empty($sections) && is_array($sections)) {
+            foreach ($sections as $section_id => $section) {
+                $the_header = '';
+                $the_layout = '';
+
+                if (!empty($section['icon']) || !empty($section['pretitle']) || !empty($section['title']) || !empty($section['subtitle']) || !empty($section['description'])) {
+                    $the_header = \Timber::compile($context['woody_components']['section-section_header-tpl_01'], $section);
+                }
+
+                // Pour chaque bloc d'une section, on compile les données dans un template Woody
+                // Puis on les compile dans le template de grille Woody selectionné
+                $components = [];
+                $components['no_padding'] = $section['scope_no_padding'];
+                $components['alignment'] = (!empty($section['section_alignment'])) ? $section['section_alignment'] : '';
+
+                if (!empty($section['section_content'])) {
+                    foreach ($section['section_content'] as $layout_id => $layout) {
+                        // On définit un uniqid court à utiliser dans les filtres de listes en paramètre GET
+                        // Uniqid long : section . $section_id . '_section_content' . $layout_id
+                        $layout['uniqid'] = 's' . $section_id . 'sc' . $layout_id;
+                        $layout['visual_effects'] = (!empty($layout['visual_effects'])) ? $this->tools->formatVisualEffectData($layout['visual_effects']) : '';
+                        $components['items'][] = $this->processWoodyLayouts($layout, $context);
+                    }
+
+                    if (!empty($section['section_woody_tpl'])) {
+                        $the_layout = \Timber::compile($context['woody_components'][$section['section_woody_tpl']], $components);
+                    }
+                }
+
+                // On récupère les données d'affichage personnalisables
+                $display = $this->tools->getDisplayOptions($section);
+
+                // On ajoute les 3 parties compilées d'une section + ses paramètres d'affichage
+                // puis on compile le tout dans le template de section Woody
+                $the_section = [
+                    'header' => $the_header,
+                    'layout' => $the_layout,
+                    'display' => $display,
+                ];
+                if (!empty($section['section_banner'])) {
+                    foreach ($section['section_banner'] as $banner) {
+                        $the_section[$banner] = $this->tools->getSectionBannerFiles($banner);
+                    }
+                }
+
+                $return[] = \Timber::compile($context['woody_components']['section-section_full-tpl_01'], $the_section);
+            }
+        }
+
+        return $return;
+    }
 }

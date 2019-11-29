@@ -130,8 +130,11 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
          * Compilation du bloc prix
          *********************************************/
 
-        $trip_types = ['trip'];
+        $trip_types = [];
         $trip_term = get_term_by('slug', 'trip', 'page_type');
+        if (!empty($trip_term)) {
+            $trip_types[] = $trip_term->slug;
+        }
         $trip_children = get_terms('page_type', ['child_of' => $trip_term->term_id, 'hide_empty' => false, 'hierarchical' => true]);
 
         if (!is_wp_error($trip_children) && !empty($trip_children)) {
@@ -147,6 +150,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 'restoration_component',
             ];
         }
+
+        $trip_types = apply_filters('woody_trip_types', $trip_types);
 
         if (in_array($this->context['page_type'], $trip_types)) {
             $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d', $this->context['post']);
@@ -231,6 +236,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     unset($page_teaser['breadcrumb']);
                 }
 
+                $page_teaser = apply_filters('woody_custom_page_teaser', $page_teaser, $this->context);
+
                 $this->context['page_teaser'] = Timber::compile($this->context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
             }
 
@@ -264,6 +271,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $page_hero['title'] = (!empty($page_hero['title'])) ? str_replace('-', '&#8209', $page_hero['title']) : '';
                 $this->context['page_hero'] = Timber::compile($this->context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
             }
+
+            $this->context = apply_filters('woody_page_context', $this->context);
         }
     }
 
@@ -353,56 +362,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
          *********************************************/
         $this->context['sections'] = [];
         if (!empty($this->context['timberpost'])) {
-            $sections = get_field('section', $this->context['timberpost']->ID);
-
-            if (!empty($sections) && is_array($sections)) {
-                foreach ($sections as $section_id => $section) {
-                    $the_header = '';
-                    $the_layout = '';
-
-                    if (!empty($section['icon']) || !empty($section['pretitle']) || !empty($section['title']) || !empty($section['subtitle']) || !empty($section['description'])) {
-                        $the_header = Timber::compile($this->context['woody_components']['section-section_header-tpl_01'], $section);
-                    }
-
-                    // Pour chaque bloc d'une section, on compile les données dans un template Woody
-                    // Puis on les compile dans le template de grille Woody selectionné
-                    $components = [];
-                    $components['no_padding'] = $section['scope_no_padding'];
-                    $components['alignment'] = (!empty($section['section_alignment'])) ? $section['section_alignment'] : '';
-
-                    if (!empty($section['section_content'])) {
-                        foreach ($section['section_content'] as $layout_id => $layout) {
-                            // On définit un uniqid court à utiliser dans les filtres de listes en paramètre GET
-                            // Uniqid long : section . $section_id . '_section_content' . $layout_id
-                            $layout['uniqid'] = 's' . $section_id . 'sc' . $layout_id;
-                            $layout['visual_effects'] = (!empty($layout['visual_effects'])) ? $this->tools->formatVisualEffectData($layout['visual_effects']) : '';
-                            $components['items'][] = $this->process->processWoodyLayouts($layout, $this->context);
-                        }
-
-                        if (!empty($section['section_woody_tpl'])) {
-                            $the_layout = Timber::compile($this->context['woody_components'][$section['section_woody_tpl']], $components);
-                        }
-                    }
-
-                    // On récupère les données d'affichage personnalisables
-                    $display = $this->tools->getDisplayOptions($section);
-
-                    // On ajoute les 3 parties compilées d'une section + ses paramètres d'affichage
-                    // puis on compile le tout dans le template de section Woody
-                    $the_section = [
-                        'header' => $the_header,
-                        'layout' => $the_layout,
-                        'display' => $display,
-                    ];
-                    if (!empty($section['section_banner'])) {
-                        foreach ($section['section_banner'] as $banner) {
-                            $the_section[$banner] = $this->tools->getSectionBannerFiles($banner);
-                        }
-                    }
-
-                    $this->context['the_sections'][] = Timber::compile($this->context['woody_components']['section-section_full-tpl_01'], $the_section);
-                }
-            }
+            $sections = $this->context['timberpost']->get_field('section');
+            $this->context['the_sections'] = $this->process->processWoodySections($sections, $this->context);
         }
     }
 
@@ -481,6 +442,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         // Return template
         if (empty($this->context['playlist_tourism']['content'])) {
             $this->context['playlist_tourism']['content'] = '<center style="margin: 80px 0">Playlist non configurée</center>';
+            status_header('410');
         }
 
         // handle api error
