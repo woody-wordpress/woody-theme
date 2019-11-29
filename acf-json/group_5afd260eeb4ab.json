@@ -622,6 +622,35 @@
                         "min": "",
                         "max": ""
                     },
+                    "layout_5c1b579ac3a87": {
+                        "key": "layout_5c1b579ac3a87",
+                        "name": "weather",
+                        "label": "Météo",
+                        "display": "block",
+                        "sub_fields": [{
+                            "key": "field_5c1b57a6c3a88",
+                            "label": "Météo",
+                            "name": "meteo",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5c1b551e599ef"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
+                        "min": "",
+                        "max": ""
+                    },
                     "layout_5c4f319f1902e": {
                         "key": "layout_5c4f319f1902e",
                         "name": "semantic_view",
