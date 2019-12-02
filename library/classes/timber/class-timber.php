@@ -49,6 +49,15 @@ if (!class_exists('Timber')) {
             }
         }
 
+        public static function ob_function($function, $args = array(null))
+        {
+            ob_start();
+            call_user_func_array($function, $args);
+            $data = ob_get_contents();
+            ob_end_clean();
+            return $data;
+        }
+
         public static function compile($tpl, $vars)
         {
             self::init();
@@ -64,24 +73,15 @@ if (!class_exists('Timber')) {
         public static function get_context()
         {
             if (empty(self::$context_cache)) {
-                // self::$context_cache['http_host'] = URLHelper::get_scheme().'://'.URLHelper::get_host();
-                // self::$context_cache['wp_title'] = Helper::get_wp_title();
+                self::$context_cache['http_host'] = home_url();
                 self::$context_cache['body_class'] = implode(' ', get_body_class());
-                // self::$context_cache['site'] = new Site();
-            // self::$context_cache['request'] = new Request();
-            // $user = new User();
-            // self::$context_cache['user'] = ($user->ID) ? $user : false;
-            // self::$context_cache['theme'] = self::$context_cache['site']->theme;
-            // self::$context_cache['posts'] = new PostQuery();
-            // self::$context_cache['http_host'] = '';
-            // self::$context_cache['wp_title'] = '';
-            // self::$context_cache['body_class'] = '';
-            // self::$context_cache['site'] = '';
-            // self::$context_cache['request'] = '';
-            // $user = [];
-            // self::$context_cache['user'] = ($user->ID) ? $user : false;
-            // self::$context_cache['theme'] = '';
-            // self::$context_cache['posts'] = '';
+                self::$context_cache['wp_head'] = self::ob_function('wp_head');
+                self::$context_cache['wp_footer'] = self::ob_function('wp_footer');
+                self::$context_cache['site'] = [
+                    'charset' => get_bloginfo('charset'),
+                    'language_attributes' => get_language_attributes(),
+                    'url' => home_url(),
+                ];
             }
             return self::$context_cache;
         }
