@@ -829,3 +829,22 @@
         }
     }
 }
+
+// Champ "Page liée" dans le détail des images
+.acf-field-5c0553157e6d0 {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+
+    .acf-label {
+        margin-right: 10px;
+        margin-bottom: 0;
+        line-height: 1em;
+    }
+}
+
+.acf-link {
+    .media-frame a.button {
+        color: #fff;
+    }
+}
