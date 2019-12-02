@@ -1,15 +1,15 @@
 .wp-core-ui .button {
-    border-radius: 0;
-    box-shadow: none;
-    border: none;
-    text-shadow: none;
-    height: auto;
+    // border-radius: 0;
+    // box-shadow: none;
+    // border: none;
+    // text-shadow: none;
+    // height: auto;
     padding: 5px 10px;
 
-    &.button-large {
-        height: auto;
-        padding: 5px 10px;
-    }
+    // &.button-large {
+    //     height: auto;
+    //     padding: 5px 10px;
+    // }
 
     &.edit-slug {
         margin-left: 5px;
@@ -201,12 +201,13 @@ textarea.notAllowed {
 
 #apply-model-link {
     margin-left: 15px;
-    .dashicons{
+
+    .dashicons {
         line-height: unset;
     }
 }
 
-.apply-model-list{
+.apply-model-list {
     z-index: 10000;
     min-width: 800px;
     background: white;
@@ -215,25 +216,28 @@ textarea.notAllowed {
     top: 40%;
     margin-left: -400px;
     padding: 20px;
-    border: 1px solid darken(white, 20% );
+    border: 1px solid darken(white, 20%);
+
     form ul li {
         display: flex;
         justify-content: space-between;
         align-items: center;
         list-style-type: none;
         margin: 10px 0;
+
         a {
             text-decoration: none;
         }
     }
 
-    .actions{
+    .actions {
         display: flex;
-        #apply-model-popup-button{
+
+        #apply-model-popup-button {
             margin-left: auto;
         }
 
-        #abort-apply-model{
+        #abort-apply-model {
             margin-left: 10px;
             border: 1px solid #cccccc;
         }
