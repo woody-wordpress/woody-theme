@@ -69,13 +69,24 @@ class WoodyTheme_ACF
         add_filter('acf/load_field/key=field_5d91c4559736e', [$this, 'loadDisqusField'], 10, 3);
 
         // Custom Filter
+        add_filter('woody_get_field', [$this, 'woodyGetField'], 10, 3);
         add_filter('woody_get_field_option', [$this, 'woodyGetFieldOption'], 10, 3);
         add_filter('woody_get_field_object', [$this, 'woodyGetFieldObject'], 10, 3);
         add_filter('woody_get_fields_by_group', [$this, 'woodyGetFieldsByGroup'], 10);
-        add_filter('woody_get_post', [$this, 'woodyGetPost'], 10);
         add_filter('woody_get_fields', [$this, 'woodyGetFields'], 10);
 
         add_filter('acf/update_value', [$this, 'updateWoodyGetFields'], 10, 3);
+    }
+
+    // Récupère un champ pour l'identifiant donné
+    public function woodyGetField($field_name)
+    {
+        $woody_get_field = get_transient('woody_get_field');
+        if (empty($woody_get_field[$field_name])) {
+            $woody_get_field[$field_name] = acf_get_field($field_name);
+            set_transient('woody_get_field', $woody_get_field);
+        }
+        return $woody_get_field[$field_name];
     }
 
     public function woodyGetFieldOption($field_name)
