@@ -35,7 +35,7 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
         // override Body Classes
         $this->context['body_class'] .= ' apirender apirender-wordpress';
 
-        $sheet_id = $this->context['timberpost']->touristic_sheet_id;
+        $sheet_id = get_field('touristic_sheet_id', $this->context['post_id']);
         $sheet_lang = pll_get_post_language($this->context['post_id']);
         $sheet_code_lang = apply_filters('woody_pll_get_post_language', $this->context['post_id']);
 
@@ -127,9 +127,11 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
         // if (!empty($this->context['sheet_tourism']['playlistId'])) {
         //     $headers['x-ts-idplaylist'] = $this->context['sheet_tourism']['playlistId'];
         // }
-        if (!empty($this->context['timberpost']->touristic_sheet_id)) {
-            $headers['x-ts-idfiche'] = $this->context['timberpost']->touristic_sheet_id;
+        $sheet_id = get_field('touristic_sheet_id', $this->context['post_id']);
+        if (!empty($sheet_id)) {
+            $headers['x-ts-idfiche'] = $sheet_id;
         }
+        
         if (!empty($this->context['sheet_tourism']['apirender_uri'])) {
             $headers['x-apirender-url'] = $this->context['sheet_tourism']['apirender_uri'];
         }

@@ -89,7 +89,6 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['site_key'] = WP_SITE_KEY;
 
         // Default values
-        $this->context['timberpost'] = false;
         $this->context['post'] = false;
         $this->context['post_id'] = false;
         $this->context['post_title'] = false;
@@ -132,8 +131,6 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         if (!empty($this->context['post'])) {
-            // TODO: remove timberpost
-            $this->context['timberpost'] = Timber::get_post($this->context['post_id']);
             $this->context['page_type'] = getTermsSlugs($this->context['post_id'], 'page_type', true);
         }
 
@@ -398,7 +395,7 @@ abstract class WoodyTheme_TemplateAbstract
                 foreach ($suggest['suggest_pages'] as $page) {
                     $t_page = pll_get_post($page['suggest_page']);
                     if (!empty($t_page)) {
-                        $post = Timber::get_post($t_page);
+                        $post = get_post($t_page);
                         if (!empty($post)) {
                             $data['suggest']['pages'][] = getPagePreview(['display_img' => true], $post);
                         }

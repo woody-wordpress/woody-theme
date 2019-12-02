@@ -48,7 +48,7 @@ class WoodyTheme_Shortcodes
             foreach ($pages_response['posts'] as $post_id) {
                 $post_id = explode('_', $post_id);
                 $post_id = end($post_id);
-                $post = Timber::get_post($post_id);
+                $post = get_post($post_id);
                 if ($post->id != null && $post->status === 'publish') {
                     switch ($post->post_type) {
                         case 'touristic_sheet':

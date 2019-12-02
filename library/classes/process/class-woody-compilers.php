@@ -16,7 +16,6 @@ use WoodyProcess\Tools\WoodyTheme_WoodyProcessTools;
 
 class WoodyTheme_WoodyCompilers
 {
-
     protected $tools;
     protected $getter;
 
@@ -190,7 +189,7 @@ class WoodyTheme_WoodyCompilers
         return $return;
     }
 
-    function formatSemanticViewData($wrapper, $twigPaths)
+    public function formatSemanticViewData($wrapper, $twigPaths)
     {
         $return = '';
         $the_items = [];
@@ -205,7 +204,6 @@ class WoodyTheme_WoodyCompilers
                 $the_query['post__in'][] = $included_id;
             }
         } else {
-
             if ($wrapper['semantic_view_type'] == 'sisters') {
                 $parent_id = wp_get_post_parent_id($post_id);
             } else {
@@ -244,7 +242,6 @@ class WoodyTheme_WoodyCompilers
         if (!empty($query_result->posts)) {
             foreach ($query_result->posts as $key => $post) {
                 $data = [];
-                $post = Timber::get_post($post->ID);
                 $data = getPagePreview($wrapper, $post);
                 if (!empty($data['description'])) {
                     preg_match_all("/\[[^\]]*\]/", $data['description'], $matches);

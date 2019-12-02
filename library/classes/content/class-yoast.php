@@ -65,7 +65,7 @@ class WoodyTheme_Yoast
     public function wpseoTransformPattern($string)
     {
         $tools = new WoodyTheme_WoodyProcessTools;
-        $string = $tools->replacePattern($string, Timber::get_post());
+        $string = $tools->replacePattern($string, get_post());
         return $string;
     }
 
