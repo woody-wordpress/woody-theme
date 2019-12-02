@@ -90,7 +90,7 @@ class WoodyTheme_WoodyCompilers
                 }
             }
 
-            $return = Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items);
+            $return = \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items);
         }
 
         return $return;
@@ -171,7 +171,7 @@ class WoodyTheme_WoodyCompilers
                 if (empty($marker['title']) && empty($marker['description']) && empty($marker['img']) && !empty($marker['link']['url'])) {
                     $wrapper['markers'][$key]['marker_as_link'] = true;
                 }
-                $wrapper['markers'][$key]['compiled_marker']  = Timber::compile('/_objects/markerObject.twig', $marker);
+                $wrapper['markers'][$key]['compiled_marker']  = \Timber::compile('/_objects/markerObject.twig', $marker);
 
                 if (!empty($marker['title']) || !empty($marker['description']) || !empty($marker['img'])) {
                     $the_marker['item']['title'] = (!empty($marker['title'])) ? $marker['title'] : '';
@@ -181,12 +181,12 @@ class WoodyTheme_WoodyCompilers
                         $the_marker['item']['img'] = $marker['img'];
                     }
                     $the_marker['item']['link'] = (!empty($marker['link'])) ? $marker['link'] : '';
-                    $wrapper['markers'][$key]['marker_thumb_html']  = Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker);
+                    $wrapper['markers'][$key]['marker_thumb_html']  = \Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker);
                 }
             }
         }
 
-        $return = Timber::compile($twigPaths[$wrapper['woody_tpl']], $wrapper);
+        $return = \Timber::compile($twigPaths[$wrapper['woody_tpl']], $wrapper);
         return $return;
     }
 
@@ -260,7 +260,7 @@ class WoodyTheme_WoodyCompilers
             }
         }
 
-        $return = Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items);
+        $return = \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items);
 
         return $return;
     }
@@ -352,7 +352,7 @@ class WoodyTheme_WoodyCompilers
         }
 
         // On compile la grille des éléments
-        $the_list['the_grid'] = Timber::compile($twigPaths[$wrapper['the_list_elements']['listgrid_woody_tpl']], $the_items);
+        $the_list['the_grid'] = \Timber::compile($twigPaths[$wrapper['the_list_elements']['listgrid_woody_tpl']], $the_items);
 
         // On récupère le nombre de résultats
         $the_list = $this->tools->countFocusResults($the_items, $the_list);
@@ -374,7 +374,7 @@ class WoodyTheme_WoodyCompilers
             $the_list['pager'] = $this->formatListPager($the_items['max_num_pages'], $wrapper['uniqid'], $list_el_wrapper['seed']);
         }
 
-        $return = Timber::compile($twigPaths[$wrapper['the_list_filters']['listfilter_woody_tpl']], $the_list);
+        $return = \Timber::compile($twigPaths[$wrapper['the_list_filters']['listfilter_woody_tpl']], $the_list);
         return $return;
     }
 
@@ -441,7 +441,7 @@ class WoodyTheme_WoodyCompilers
                             'lng' => $item['location']['lng']
                         ],
                         'compiled_marker' => $marker,
-                        'marker_thumb_html' => Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker)
+                        'marker_thumb_html' => \Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker)
                     ];
                 }
             }

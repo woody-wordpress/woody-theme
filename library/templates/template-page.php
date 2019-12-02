@@ -110,7 +110,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $this->context['is_frontpage'] = false;
 
         $social_shares = getActiveShares();
-        $this->context['social_shares'] = Timber::compile($this->context['woody_components']['blocks-shares-tpl_01'], $social_shares);
+        $this->context['social_shares'] = \Timber::compile($this->context['woody_components']['blocks-shares-tpl_01'], $social_shares);
 
         /******************************************************************************
          * Compilation du Diaporama pour les pages de type "accueil" (!= frontpage)
@@ -120,7 +120,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             $this->context['is_frontpage'] = true;
             $home_slider = getAcfGroupFields('group_5bb325e8b6b43', $this->context['post']);
             if (!empty($home_slider['landswpr_slides'])) {
-                $this->context['home_slider'] = Timber::compile($this->context['woody_components'][$home_slider['landswpr_woody_tpl']], $home_slider);
+                $this->context['home_slider'] = \Timber::compile($this->context['woody_components'][$home_slider['landswpr_woody_tpl']], $home_slider);
             }
 
             $this->context['after_landswpr'] = !empty($this->context['page_parts']['after_landswpr']) ? $this->context['page_parts']['after_landswpr'] : '';
@@ -199,7 +199,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 //TODO: Gérer le fichier gps pour affichage s/ carte
                 $trip_infos['the_duration']['count_days'] = ($trip_infos['the_duration']['count_days']) ? humanDays($trip_infos['the_duration']['count_days']) : '';
                 $trip_infos['the_price']['price'] = (!empty($trip_infos['the_price']['price'])) ? str_replace('.', ',', $trip_infos['the_price']['price']) : '';
-                $this->context['trip_infos'] = Timber::compile($this->context['woody_components'][$trip_infos['tripinfos_woody_tpl']], $trip_infos);
+                $this->context['trip_infos'] = \Timber::compile($this->context['woody_components'][$trip_infos['tripinfos_woody_tpl']], $trip_infos);
             } else {
                 $trip_infos = [];
             }
@@ -238,7 +238,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
                 $page_teaser = apply_filters('woody_custom_page_teaser', $page_teaser, $this->context);
 
-                $this->context['page_teaser'] = Timber::compile($this->context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
+                $this->context['page_teaser'] = \Timber::compile($this->context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
             }
 
             /*********************************************
@@ -269,7 +269,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 }
 
                 $page_hero['title'] = (!empty($page_hero['title'])) ? str_replace('-', '&#8209', $page_hero['title']) : '';
-                $this->context['page_hero'] = Timber::compile($this->context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
+                $this->context['page_hero'] = \Timber::compile($this->context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
             }
 
             $this->context = apply_filters('woody_page_context', $this->context);
@@ -353,7 +353,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 }
             }
 
-            $this->context['bookblock'] = Timber::compile($this->context['woody_components'][$bookblock['bookblock_woody_tpl']], $bookblock);
+            $this->context['bookblock'] = \Timber::compile($this->context['woody_components'][$bookblock['bookblock_woody_tpl']], $bookblock);
         }
 
 

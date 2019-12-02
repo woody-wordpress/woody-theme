@@ -73,7 +73,7 @@ class WoodyTheme_Shortcodes
         $result['tags'] = $tplSearch['tags'] ?: $result['tags'];
         $template = $tplSearch['template'] ?: $this->twigPaths['woody_widgets-es_search-tpl_01'];
 
-        return Timber::compile($template, $result);
+        return \Timber::compile($template, $result);
     }
 
     /**

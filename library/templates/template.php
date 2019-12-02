@@ -77,7 +77,7 @@ abstract class WoodyTheme_TemplateAbstract
     {
         if (!empty($this->twig_tpl) && !empty($this->context)) {
             $this->context = apply_filters('woody_theme_context', $this->context);
-            Timber::render($this->twig_tpl, $this->context);
+            \Timber::render($this->twig_tpl, $this->context);
         }
     }
 
@@ -252,7 +252,7 @@ abstract class WoodyTheme_TemplateAbstract
             $tpl = apply_filters('season_switcher_tpl', null);
             $template = has_filter('season_switcher_tpl') ? $this->context['woody_components'][$tpl['template']] : $this->context['woody_components']['woody_widgets-season_switcher-tpl_01'];
 
-            $return = Timber::compile($template, $data);
+            $return = \Timber::compile($template, $data);
             return $return;
         }
     }
@@ -271,7 +271,7 @@ abstract class WoodyTheme_TemplateAbstract
             // Allow data override
             $data = apply_filters('lang_switcher_data', $data);
 
-            $return = Timber::compile($template, $data);
+            $return = \Timber::compile($template, $data);
             return $return;
         }
     }
@@ -291,7 +291,7 @@ abstract class WoodyTheme_TemplateAbstract
             // Allow data override
             $data = apply_filters('lang_switcher_data', $data);
 
-            $compile = Timber::compile($template, $data);
+            $compile = \Timber::compile($template, $data);
             $compile = apply_filters('lang_switcher_compile', $compile);
 
             return $compile;
@@ -379,7 +379,7 @@ abstract class WoodyTheme_TemplateAbstract
             $tpl = apply_filters('es_search_button', null);
             $template = has_filter('es_search_button') ? $tpl['template'] : $this->context['woody_components']['woody_widgets-es_search_block-tpl_01'];
 
-            return Timber::compile($template, []);
+            return \Timber::compile($template, []);
         }
     }
 
@@ -423,7 +423,7 @@ abstract class WoodyTheme_TemplateAbstract
             $data['tags'] = !empty($tpl['tags']) ? $tpl['tags'] : '';
             $data = apply_filters('es_search_block_data', $data);
 
-            $compile = Timber::compile($template, $data);
+            $compile = \Timber::compile($template, $data);
             $compile = apply_filters('es_search_compile', $compile);
 
             return $compile;
@@ -453,7 +453,7 @@ abstract class WoodyTheme_TemplateAbstract
             // Allow data override
             $data = apply_filters('favorites_block_data', $data);
 
-            return Timber::compile($template, $data);
+            return \Timber::compile($template, $data);
         }
     }
 }
