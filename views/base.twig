@@ -1,5 +1,5 @@
 <!doctype html>
-{# {% spaceless %} #}
+{% spaceless %}
 <html class="no-js" {{site.language_attributes}}>
 <head>
 {# <title>{{ title }}</title> #}
@@ -22,9 +22,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 {# /WP Metas #}
 
 {# WP Header #}
-<!-- wp_head -->
 {{ wp_head }}
-<!-- /wp_head -->
 {# /WP Header #}
 
 {# WP Favicons #}
@@ -39,15 +37,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 {# /WP Favicons #}
 
 {# WP Styles #}
-<!-- styles -->
 {% block styles %}{% endblock %}
-<!-- \styles -->
 {# /WP Styles #}
 
 {# WP Global Vars #}
 <script>var globals = {{ globals }};</script>
 {# /WP Global Vars #}
-{# {% endspaceless %} #}
+{% endspaceless %}
 </head>
 <body class="{{body_class}}">
     {% if gtm|default %}
@@ -77,9 +73,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
 
     {# Twig Inline Scripts tags #}
-    <!-- inline_scripts -->
     {% block inline_scripts %}{% endblock %}
-    <!-- /inline_scripts -->
     {# /Twig Inline Scripts tags #}
 
     {# Reveal #}
@@ -87,9 +81,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {# /Reveal #}
 
     {# WP Footer #}
-    <!-- wp_footer -->
     {{ wp_footer }}
-    <!-- /wp_footer -->
     {# /WP Footer #}
 </body>
 </html>

@@ -79,8 +79,13 @@ if (!class_exists('Timber')) {
                 self::$context_cache['wp_footer'] = self::ob_function('wp_footer');
                 self::$context_cache['site'] = [
                     'charset' => get_bloginfo('charset'),
+                    'pingback' => get_bloginfo('pingback_url'),
+                    'language' => get_bloginfo('language'),
                     'language_attributes' => get_language_attributes(),
                     'url' => home_url(),
+                    'title' => get_bloginfo('name'),
+                    'name' => get_bloginfo('name'),
+                    'description' => get_bloginfo('description'),
                 ];
             }
             return self::$context_cache;
