@@ -7,7 +7,7 @@
  * @since WoodyTheme 1.0.0
  */
 
-class WoodyTheme_Twig_Filters
+class WoodyTheme_Timber_Filters
 {
     public function __construct()
     {

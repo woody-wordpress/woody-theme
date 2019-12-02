@@ -65,7 +65,7 @@ new WoodyTheme_Unpublisher();
 // new WoodyTheme_Videos();
 
 // Timber
-new WoodyTheme_Twig_Filters();
+new WoodyTheme_Timber_Filters();
 
 // Menu
 new WoodyTheme_Menus();
