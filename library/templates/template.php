@@ -132,6 +132,7 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         if (!empty($this->context['post'])) {
+            // TODO: remove timberpost
             $this->context['timberpost'] = Timber::get_post($this->context['post_id']);
             $this->context['page_type'] = getTermsSlugs($this->context['post_id'], 'page_type', true);
         }

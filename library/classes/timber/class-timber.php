@@ -42,24 +42,9 @@ if (!class_exists('Timber')) {
                 // Instance
                 self::$twig = new \Twig\Environment($twig_loader, $twig_options);
 
+                // Functions & Filters
+                self::$twig = apply_filters('timber/twig', self::$twig);
 
-                // Functions
-                $function = new \Twig\TwigFunction('__', '__');
-                self::$twig->addFunction($function);
-
-                // Filters
-                $filter = new \Twig\TwigFilter('theRootAncestor', function () {
-                }, $options = []);
-                self::$twig->addFilter($filter);
-                $filter = new \Twig\TwigFilter('base64Encode', function () {
-                }, $options = []);
-                self::$twig->addFilter($filter);
-                $filter = new \Twig\TwigFilter('pluralizeUnit', function () {
-                }, $options = []);
-                self::$twig->addFilter($filter);
-                $filter = new \Twig\TwigFilter('ellipsis', function () {
-                }, $options = []);
-                self::$twig->addFilter($filter);
                 define('TIMBER_LOADED', true);
             }
         }

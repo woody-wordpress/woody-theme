@@ -21,28 +21,71 @@ class WoodyTheme_Timber_Filters
 
     public function addToTwig($twig)
     {
-        //$twig->addExtension(new Twig_Extension_StringLoader());
+        // Functions Native WP
+        $twig->addFunction(new Twig_SimpleFunction('bloginfo', 'bloginfo'));
+        $twig->addFunction(new Twig_SimpleFunction('__', '__'));
+        $twig->addFunction(new Twig_SimpleFunction('translate', 'translate'));
+        $twig->addFunction(new Twig_SimpleFunction('_e', '_e'));
+        $twig->addFunction(new Twig_SimpleFunction('_n', '_n'));
+        $twig->addFunction(new Twig_SimpleFunction('_x', '_x'));
+        $twig->addFunction(new Twig_SimpleFunction('_ex', '_ex'));
+        $twig->addFunction(new Twig_SimpleFunction('_nx', '_nx'));
+        $twig->addFunction(new Twig_SimpleFunction('_n_noop', '_n_noop'));
+        $twig->addFunction(new Twig_SimpleFunction('_nx_noop', '_nx_noop'));
+        $twig->addFunction(new Twig_SimpleFunction('translate_nooped_plural', 'translate_nooped_plural'));
+        $twig->addFunction(new Twig_SimpleFunction('shortcode', 'do_shortcode'));
+
+        // Filters Native WP
+        $twig->addFilter(new Twig_SimpleFilter('stripshortcodes', 'strip_shortcodes'));
+        $twig->addFilter(new Twig_SimpleFilter('array', [$this, 'to_array']));
+        $twig->addFilter(new Twig_SimpleFilter('excerpt', 'wp_trim_words'));
+        $twig->addFilter(new Twig_SimpleFilter('function', [$this, 'exec_function']));
+        $twig->addFilter(new Twig_SimpleFilter('sanitize', 'sanitize_title'));
+        $twig->addFilter(new Twig_SimpleFilter('shortcodes', 'do_shortcode'));
+        $twig->addFilter(new Twig_SimpleFilter('apply_filters', function () {
+            $args = func_get_args();
+            $tag = current(array_splice($args, 1, 1));
+            return apply_filters_ref_array($tag, $args);
+        }));
+
+        // Filters Custom Woody
         $twig->addFilter(new Twig_SimpleFilter('phone_click', [$this, 'phoneClick']));
         $twig->addFilter(new Twig_SimpleFilter('humanize_filesize', [$this, 'humanizeFilesize']));
         $twig->addFilter(new Twig_SimpleFilter('ellipsis', [$this, 'ellipsis']));
         $twig->addFilter(new Twig_SimpleFilter('random_number', [$this, 'random_number']));
         $twig->addFilter(new Twig_SimpleFilter('createdFrom', [$this, 'createdFrom']));
-
         $twig->addFilter(new Twig_SimpleFilter('getPermalink', [$this, 'getPermalink']));
         $twig->addFilter(new Twig_SimpleFilter('theRootAncestor', [$this, 'theRootAncestor']));
         $twig->addFilter(new Twig_SimpleFilter('pluralizeUnit', [$this, 'pluralizeUnit']));
-
         $twig->addFilter(new Twig_SimpleFilter('base64Encode', [$this, 'base64Encode']));
         $twig->addFilter(new Twig_SimpleFilter('seed', [$this, 'seed']));
         $twig->addFilter(new Twig_SimpleFilter('translate', [$this, 'translate']));
 
-        // debug
+        // Debug Woody
         $twig->addFilter(new Twig_SimpleFilter('dump', [$this, 'dump']));
         $twig->addFilter(new Twig_SimpleFilter('rcd', [$this, 'rcd']));
         $twig->addFilter(new Twig_SimpleFilter('wd', [$this, 'wd']));
 
-
         return $twig;
+    }
+
+    public function to_array($arr)
+    {
+        if (is_array($arr)) {
+            return $arr;
+        }
+        $arr = array($arr);
+        return $arr;
+    }
+
+    public function exec_function($function_name)
+    {
+        $args = func_get_args();
+        array_shift($args);
+        if (is_string($function_name)) {
+            $function_name = trim($function_name);
+        }
+        return call_user_func_array($function_name, ($args));
     }
 
     public function phoneClick($text)
