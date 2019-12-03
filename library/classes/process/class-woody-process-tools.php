@@ -75,7 +75,7 @@ class WoodyTheme_WoodyProcessTools
      *
      */
 
-    function getFocusBlockTitles($wrapper)
+    public function getFocusBlockTitles($wrapper)
     {
         $data = [];
 
@@ -100,7 +100,7 @@ class WoodyTheme_WoodyProcessTools
      * @return   data - Un tableau de données
      *
      **/
-    function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = '', $lastfallback_item = '', $lastfallback_field = '')
+    public function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = '', $lastfallback_item = '', $lastfallback_field = '')
     {
         $value = null;
 
@@ -111,7 +111,7 @@ class WoodyTheme_WoodyProcessTools
         if (empty($value) && !empty($fallback_item) && !empty($fallback_field)) {
             if (is_array($fallback_item) && !empty($fallback_item[$fallback_field])) {
                 $value = $fallback_item[$fallback_field];
-            } else if (is_object($fallback_item) && !empty($fallback_item->ID)) {
+            } elseif (is_object($fallback_item) && !empty($fallback_item->ID)) {
                 $value = get_field($fallback_field, $fallback_item->ID);
             }
         }
@@ -119,7 +119,7 @@ class WoodyTheme_WoodyProcessTools
         if (empty($value) && !empty($lastfallback_item) && !empty($lastfallback_field)) {
             if (is_array($lastfallback_item) && !empty($lastfallback_item[$lastfallback_field])) {
                 $value = $lastfallback_item[$lastfallback_field];
-            } else if (is_object($lastfallback_item) && !empty($lastfallback_item->ID)) {
+            } elseif (is_object($lastfallback_item) && !empty($lastfallback_item->ID)) {
                 $value = get_field($lastfallback_field, $lastfallback_item->ID);
             }
         }
@@ -137,7 +137,7 @@ class WoodyTheme_WoodyProcessTools
      *
      */
 
-    function getDisplayOptions($wrapper)
+    public function getDisplayOptions($wrapper)
     {
         $display = [];
         $classes_array = [];
@@ -173,7 +173,7 @@ class WoodyTheme_WoodyProcessTools
      * @return   attachements - Un tableau d'objets images au format "ACF"
      *
      */
-    function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array())
+    public function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array())
     {
 
         // On définit certains arguments par défaut pour la requête
@@ -222,7 +222,7 @@ class WoodyTheme_WoodyProcessTools
      * @return   return - Un tableau
      *
      */
-    function formatVisualEffectData($effects)
+    public function formatVisualEffectData($effects)
     {
         $return = [];
         foreach ($effects as $effect_key => $effect) {
@@ -264,7 +264,7 @@ class WoodyTheme_WoodyProcessTools
      * @return   file - Une url
      *
      */
-    function getSectionBannerFiles($filename)
+    public function getSectionBannerFiles($filename)
     {
         if (file_exists(get_stylesheet_directory() . '/views/section_banner/section_' . $filename . '.twig')) {
             $file = file_get_contents(get_stylesheet_directory() . '/views/section_banner/section_' . $filename . '.twig');
@@ -279,20 +279,20 @@ class WoodyTheme_WoodyProcessTools
      * Nom : replacePattern
      * Auteur : Jérémy Legendre
      * Return : Retourne la string avec le pattern modifié (devenu le count de la playlist)
-     * @param    item - Le scope (un objet post)
+     * @param    post - Le scope (un objet post)
      * @param    str  - La phrase (titre, surtitre, sous-titre, description)
      * @return   return - La phrase modifiée
      *
      **/
-    function replacePattern($str, $item = null)
+    public function replacePattern($str, $post = null)
     {
         $return = '';
 
-        if ($item != null) {
+        if ($post != null) {
             $pattern = "/%nombre%/";
             preg_match($pattern, $str, $matches);
             if (!empty($matches)) {
-                $confId = $item->get_field('playlist_conf_id');
+                $confId = $post->get_field('playlist_conf_id');
                 $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), array(), 'json');
 
                 if (!empty($playlist)) {
