@@ -1,6 +1,32 @@
 import $ from 'jquery';
 
 $(document).ready(function() {
+
+    /**
+     * Remove switcher if there is no opposite page
+     * @param param (boolean) prepare || onspot
+     */
+    var removeSwitcher = function() {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: frontendajax.ajaxurl,
+            data: {
+                action: 'get_opposite',
+                post_id: globals.post_id
+            },
+            success: function(response) {
+                if (response !== false) {
+                    $('.prepare_onspot_wrapper').css('display', 'flex');
+                }
+            },
+            error: function(err){
+                console.error(err);
+            }
+        });
+    }
+    removeSwitcher();
+
     if ($('#wpadminbar').length < 1) {
         /**
          * Redirect function
