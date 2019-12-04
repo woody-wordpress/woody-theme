@@ -3,10 +3,10 @@ import $ from 'jquery';
 $(document).ready(function() {
 
     /**
-     * Remove switcher if there is no opposite page
+     * Display switcher if there is no opposite page
      * @param param (boolean) prepare || onspot
      */
-    var removeSwitcher = function() {
+    var displaySwitcher = function() {
         $.ajax({
             type: 'POST',
             dataType: 'json',
@@ -25,7 +25,7 @@ $(document).ready(function() {
             }
         });
     }
-    removeSwitcher();
+    displaySwitcher();
 
     if ($('#wpadminbar').length < 1) {
         /**
