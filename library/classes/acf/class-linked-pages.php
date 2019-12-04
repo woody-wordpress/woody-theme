@@ -25,14 +25,16 @@ class WoodyTheme_ACF_LinkedPages
         add_action('post_updated', [$this, 'removeLinkBetweenPages'], 10, 3);
         add_action('save_post', [$this, 'setLinkBetweenPages'], 100, 1);
 
-        add_action('wp_ajax_nopriv_set_post_term', [$this, 'setPostTerms']);
-        add_action('wp_ajax_set_post_term', [$this, 'setPostTerms']);
-        add_action('wp_ajax_nopriv_redirect_prepare_onspot', [$this, 'redirectToLinkedPage']);
-        add_action('wp_ajax_redirect_prepare_onspot', [$this, 'redirectToLinkedPage']);
-        add_action('wp_ajax_nopriv_get_opposite', [$this, 'getOpposite']);
-        add_action('wp_ajax_get_opposite', [$this, 'getOpposite']);
-        add_action('wp_ajax_nopriv_get_destination_coord', [$this, 'getDestinationCoordinates']);
-        add_action('wp_ajax_get_destination_coord', [$this, 'getDestinationCoordinates']);
+        if (!empty(get_option('options_activate_prepare_onspot')) && get_option('options_activate_prepare_onspot')) {
+            add_action('wp_ajax_nopriv_set_post_term', [$this, 'setPostTerms']);
+            add_action('wp_ajax_set_post_term', [$this, 'setPostTerms']);
+            add_action('wp_ajax_nopriv_redirect_prepare_onspot', [$this, 'redirectToLinkedPage']);
+            add_action('wp_ajax_redirect_prepare_onspot', [$this, 'redirectToLinkedPage']);
+            add_action('wp_ajax_nopriv_get_opposite', [$this, 'getOpposite']);
+            add_action('wp_ajax_get_opposite', [$this, 'getOpposite']);
+            add_action('wp_ajax_nopriv_get_destination_coord', [$this, 'getDestinationCoordinates']);
+            add_action('wp_ajax_get_destination_coord', [$this, 'getDestinationCoordinates']);
+        }
     }
 
     public function registerTaxonomy()
