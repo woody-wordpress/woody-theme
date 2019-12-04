@@ -87,46 +87,39 @@ $(document).ready(function() {
                                 action: 'get_destination_coord',
                             },
                             success: function(response) {
-                                dest_coord.latitude = parseFloat(response.lat);
-                                dest_coord.longitude = parseFloat(response.lon);
+                                if (response.lat.length > 0 && response.lon.length > 0) {
+                                    dest_coord.latitude = parseFloat(response.lat);
+                                    dest_coord.longitude = parseFloat(response.lon);
 
-                                // TODO: check if get current pos works on preprod
-                                // Get current user position
-                                var opt = {
-                                    timeout: 5000,
-                                    maximumAge: 0
-                                };
-
-                                function success(pos) {
-                                    var coord = {
-                                        latitude: pos.coords.latitude,
-                                        longitude: pos.coords.longitude,
-                                        accuracy: pos.coords.accuracy
+                                    // TODO: check if get current pos works on preprod
+                                    // Get current user position
+                                    var opt = {
+                                        timeout: 5000,
+                                        maximumAge: 0
                                     };
 
-                                    // Check if user is near OT's position
-                                    // If true, give he opportunity to go on spot pages
-                                    if (isInArea(coord, dest_coord)) {
-                                        var prepare_onspot_popup = '<div class="prepare_onspot_popup"><p>Il semblerait que vous soyez sur place ! Souhaitez-vous être redirigé vers un contenu plus approprié ?</p></div>';
-                                        $('body').append(prepare_onspot_popup);
-                                        $('.prepare_onspot_popup').append('<div class="actions"><a class="button secondary close" href="#">Refuser</a><a class="button primary-button" href="#">Accepter</a></div>');
+                                    function success(pos) {
+                                        var coord = {
+                                            latitude: pos.coords.latitude,
+                                            longitude: pos.coords.longitude,
+                                            accuracy: pos.coords.accuracy
+                                        };
 
-                                        $('.prepare_onspot_popup .primary-button').click(function() {
+                                        // Check if user is near OT's position
+                                        // If true, give he opportunity to go on spot pages
+                                        if (isInArea(coord, dest_coord)) {
                                             $('.tools .prepare_onspot_switcher input').trigger('click');
-                                            $('.prepare_onspot_popup').remove();
-                                        });
-
-                                        $('.prepare_onspot_popup .close').click(function() {
-                                            $('.prepare_onspot_popup').remove();
-                                        });
+                                        }
                                     }
-                                }
 
-                                function error(err) {
-                                    console.warn(`ERREUR (${err.code}): ${err.message}`);
-                                }
+                                    function error(err) {
+                                        console.warn(`ERREUR (${err.code}): ${err.message}`);
+                                    }
 
-                                navigator.geolocation.getCurrentPosition(success, error, opt);
+                                    navigator.geolocation.getCurrentPosition(success, error, opt);
+                                } else {
+                                    console.warn('Empty latitude and longitude vars');
+                                }
                             },
                             error: function(error) {
                                 console.error('get_destination_coord AJAX : ' + error);
@@ -143,7 +136,7 @@ $(document).ready(function() {
         function isInArea(coord, dest_coord) {
             var is_inside = false;
 
-            var radius = 30;
+            var radius = 25;
             var distance = calculDistance(coord, dest_coord);
 
             if (distance <= radius) {

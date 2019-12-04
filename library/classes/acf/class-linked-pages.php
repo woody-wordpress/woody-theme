@@ -191,12 +191,8 @@ class WoodyTheme_ACF_LinkedPages
     public function getDestinationCoordinates()
     {
         $coord = [];
-        // TODO: get woody global vars...
-        // $coord['lat'] = WOODY_DESTINATION_LATITUDE;
-        // $coord['lon'] = WOODY_DESTINATION_LONGITUDE;
-
-        $coord['lat'] = 51.507351;
-        $coord['lon'] = -0.127758;
+        $coord['lat'] = WOODY_LATITUDE;
+        $coord['lon'] = WOODY_LONGITUDE;
 
         wp_send_json($coord);
     }
