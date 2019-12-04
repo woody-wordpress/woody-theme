@@ -212,10 +212,10 @@
             "maxlength": ""
         },
         {
-            "key": "field_5d91c4559736e",
-            "label": "Disqus",
+            "key": "5051",
+            "label": "",
             "name": "",
-            "type": "tab",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -224,8 +224,11 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "left",
-            "endpoint": 0
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_5d91c4689736f",
@@ -242,6 +245,41 @@
             },
             "default_value": "",
             "placeholder": "https:\/\/example.disqus.com"
+        },
+        {
+            "key": "field_5de77b638d85f",
+            "label": "Préparer \/ Sur Place",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5de77b808d860",
+            "label": "Activer le système \"préparer son séjour \/ sur place\"",
+            "name": "activate_prepare_onspot",
+            "type": "true_false",
+            "instructions": "Ce système vous permet de lier deux pages entre elles. Une devrait correspondre à du contenu relatif à la préparation du séjour, l'autre devrait être plus approprié pour les visiteurs sur place qui veulent en savoir plus sur l'endroit où ils se trouvent.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
@@ -261,5 +299,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1569834956
+    "modified": 1575451919
 }

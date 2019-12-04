@@ -56,8 +56,8 @@
             }
         ]
     ],
-    "menu_order": 5,
-    "position": "acf_after_title",
+    "menu_order": 25,
+    "position": "side",
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",

@@ -183,8 +183,11 @@ abstract class WoodyTheme_TemplateAbstract
             $this->context['favorites_block_mobile'] = apply_filters('favorites_block_mobile', $tools_blocks['favorites_block']);
         }
 
-        $tools_blocks['preparespot_switcher'] = $this->addPrepareSpotSwitcher();
-        $this->context['preparespot_switcher'] = apply_filters('preparespot_switcher', $tools_blocks['preparespot_switcher']);
+        if (!empty(get_option('options_activate_prepare_onspot')) && get_option('options_activate_prepare_onspot')) {
+            $tools_blocks['preparespot_switcher'] = $this->addPrepareSpotSwitcher();
+            $this->context['preparespot_switcher'] = apply_filters('preparespot_switcher', $tools_blocks['preparespot_switcher']);
+        }
+
         // Define SubWoodyTheme_TemplateParts
         $this->addHeaderFooter($tools_blocks);
 
