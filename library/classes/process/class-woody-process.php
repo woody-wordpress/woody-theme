@@ -323,6 +323,8 @@ class WoodyTheme_WoodyProcess
                 $order = 'ASC';
                 break;
             default:
+                $orderby = 'rand';
+                $order = 'ASC';
         }
 
         // On enregistre le tri aléatoire pour la journée en cours (pagination)
