@@ -98,6 +98,7 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['metas'] = [];
 
         $this->context['enabled_woody_options'] = WOODY_OPTIONS;
+        $this->context['woody_access_staging'] = WOODY_ACCESS_STAGING;
 
         /******************************************************************************
          * Sommes nous dans le cas d'une page miroir ?
@@ -138,6 +139,10 @@ abstract class WoodyTheme_TemplateAbstract
 
         if (!empty($this->context['page_type'])) {
             $this->context['body_class'] = $this->context['body_class'] . ' woodypage-' . $this->context['page_type'];
+        }
+
+        if (!empty($this->context['woody_access_staging'])) {
+            $this->context['body_class'] = $this->context['body_class'] . ' woody_staging';
         }
 
         // Add generator (Pour julien check ERP)

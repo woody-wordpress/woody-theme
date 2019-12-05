@@ -1,0 +1,67 @@
+body.woody_staging {
+
+    &:after {
+        display: block;
+        content: '';
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        border: 3px solid yellow;
+        z-index: 10000;
+        // animation: frameDisapear .6s 8s forwards;
+    }
+
+    .staging-banner {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: yellow;
+        border-radius: 6px 6px 0 0;
+        z-index: 10000;
+        animation: labelDisapear .3s 8s forwards;
+    }
+
+    .staging-label {
+        font-size: 11px;
+        line-height: 1em;
+        text-transform: uppercase;
+    }
+
+    &.admin-bar:after {
+        top: 32px;
+        height: calc(100vh - 32px);
+    }
+}
+
+@keyframes frameDisapear {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.1);
+        opacity: 0;
+    }
+}
+
+@keyframes labelDisapear {
+    0% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(100%);
+        opacity: 0;
+    }
+}
