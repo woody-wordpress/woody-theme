@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
 var setSortableEmptyValues = function() {
-    $(this).on('mousemove', function(){
+    $(this).on('mousemove', function() {
         $('.acf-flexible-content.-empty .values').each(function() {
             $(this).addClass('droppable-area');
             $(this).closest('.acf-flexible-content').removeClass('-empty');
@@ -35,8 +35,8 @@ function makeSortable() {
     $('.values').on('click mousedown', setSortableEmptyValues);
     $('.values').on('click mouseup', unsetSortableEmptyValues);
 
-    $(".values").sortable({
-        connectWith: ".values",
+    $(".acf-flexible-content > .values").sortable({
+        connectWith: ".acf-flexible-content > .values",
         dropOnEmpty: true,
         tolerance: "pointer",
         cursor: "move",
@@ -56,71 +56,41 @@ function makeSortable() {
 acf.add_action('sortstop', function($el) {
     unsetSortableEmptyValues();
 
-    // check if the dropped element is within a repeater field
-    if ($($el).parents('.acf-input > .acf-repeater').length) {
+    if ($el.find('input[name$="[acf_fc_layout]"]').first().length > 0) {
+        var repeater_id = $el.find('input[name$="[acf_fc_layout]"]').attr('name').match(/\[([a-zA-Z0-9_-]+\])/g)[1][1];
 
-        // get column_num from closest acf-row
-        var column_num = $($el).closest('.acf-row').attr('data-id');
+        // check if the dropped element is within a repeater field
+        if ($($el).parents('.acf-input > .acf-repeater').length) {
 
-        // loop all (input) fields within dropped element and change / fix name
-        $($el).find('[name^="acf[field_"]').each(function() {
-            var field_name = $(this).attr('name');
-            field_name = field_name.match(/\[([a-zA-Z0-9_-]+\])/g); // split name attribute
-            field_name[1] = '[' + column_num + ']'; // set the new row name
-            var new_name = $(this).parent().hasClass('acf-gallery-attachment') ? 'acf' + field_name.join('') + '[]' : 'acf' + field_name.join('');
-            $(this).attr('name', new_name);
-        });
+            // get column_num from closest acf-row
+            var row_index = $($el).closest('.acf-row').attr('data-id');
+            var parent_row = $($el).closest('.acf-row');
 
-        $($el).find('[id^="acf-field_"]').each(function() {
-            var field_id = $(this).attr('id');
-            field_id = field_id.match(/-([a-zA-Z0-9_]+)/g); // split name attribute
-            field_id[1] = '-' + column_num ; // set the new row name
-            var new_id = 'acf' + field_id.join('');
-            $(this).attr('id', new_id);
-        });
+            if (repeater_id != row_index) {
+                var layout_index = 0;
 
-        $($el).find('[for^="acf-field_"]').each(function() {
-            var field_for = $(this).attr('for');
-            field_for = field_for.match(/-([a-zA-Z0-9_]+)/g); // split name attribute
-            field_for[1] = '-' + column_num ; // set the new row name
-            var new_for = 'acf' + field_for.join('');
-            $(this).attr('for', new_for);
-        });
+                parent_row.find('.values .layout').each(function() {
+                    $(this).find('[name^="acf[field_"]').each(function() {
+                        var field_name = $(this).attr('name');
+                        field_name = field_name.match(/\[([a-zA-Z0-9_-]+\])/g); // split name attribute
+                        field_name[1] = '[' + row_index + ']'; // set the new row name
+                        field_name[3] = '[' + layout_index + ']'; // set the new row name
+                        var new_name = $(this).parent().hasClass('acf-gallery-attachment') ? 'acf' + field_name.join('') + '[]' : 'acf' + field_name.join('');
+                        $(this).attr('name', new_name);
+                    });
 
-        // get closest flexible-content-field and loop all layouts within this flexible-content-field
-        $($el).closest('.acf-field.acf-field-flexible-content').find('.acf-input > .acf-flexible-content > .values > .layout').each(function(index) {
+                    $(this).find('label.selected input').each(function(){
+                        $(this).trigger('click');
+                    });
 
-            // update order number
-            $(this).find('.acf-fc-layout-order:first').html(index + 1);
+                    layout_index++;
 
-            // loop all (input) fields within dropped element and change / fix name
-            $(this).find('[name^="acf[field_"]').each(function() {
-                var field_name = $(this).attr('name');
-                field_name = field_name.match(/\[([a-zA-Z0-9_-]+\])/g); // split name attribute
-                var tempIndex = parseInt(field_name[3].match(/([0-9]+)/g)); // hacky code
-                field_name[3] = field_name[3].replace(tempIndex, index); // set the new index
-                var new_name = $(this).parent().hasClass('acf-gallery-attachment') ? 'acf' + field_name.join('') + '[]' : 'acf' + field_name.join('');
-                $(this).attr('name', new_name);
-            });
-
-            $(this).find('[id^="acf-field_"]').each(function() {
-                var field_id = $(this).attr('id');
-                field_id = field_id.match(/-([a-zA-Z0-9_]+)/g); // split name attribute
-                field_id[3] = '-' + index; // set the new index
-                var new_id = 'acf' + field_id.join('');
-                $(this).attr('id', new_id);
-            });
-
-            $(this).find('[for^="acf-field_"]').each(function() {
-                var field_for = $(this).attr('for');
-                field_for = field_for.match(/-([a-zA-Z0-9_]+)/g); // split name attribute
-                field_for[3] = '-' + index; // set the new index
-                var new_for = 'acf' + field_for.join('');
-                $(this).attr('for', new_for);
-            });
-
-            // click already selected buttons to trigger conditional logics
-            $(this).find('.acf-button-group label.selected').trigger('click');
-        });
+                    // console.log($(this).find('.acf-fc-layout-handle .acf-fc-layout-order'));
+                    $(this).find('.acf-fc-layout-handle .acf-fc-layout-order').text(layout_index);
+                });
+            } else {
+                // Do nothing
+            }
+        }
     }
 });
