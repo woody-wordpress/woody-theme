@@ -71,6 +71,22 @@ acf.add_action('sortstop', function($el) {
             $(this).attr('name', new_name);
         });
 
+        $($el).find('[id^="acf-field_"]').each(function() {
+            var field_id = $(this).attr('id');
+            field_id = field_id.match(/-([a-zA-Z0-9_]+)/g); // split name attribute
+            field_id[1] = '-' + column_num ; // set the new row name
+            var new_id = 'acf' + field_id.join('');
+            $(this).attr('id', new_id);
+        });
+
+        $($el).find('[for^="acf-field_"]').each(function() {
+            var field_for = $(this).attr('for');
+            field_for = field_for.match(/-([a-zA-Z0-9_]+)/g); // split name attribute
+            field_for[1] = '-' + column_num ; // set the new row name
+            var new_for = 'acf' + field_for.join('');
+            $(this).attr('for', new_for);
+        });
+
         // get closest flexible-content-field and loop all layouts within this flexible-content-field
         $($el).closest('.acf-field.acf-field-flexible-content').find('.acf-input > .acf-flexible-content > .values > .layout').each(function(index) {
 
@@ -85,6 +101,22 @@ acf.add_action('sortstop', function($el) {
                 field_name[3] = field_name[3].replace(tempIndex, index); // set the new index
                 var new_name = $(this).parent().hasClass('acf-gallery-attachment') ? 'acf' + field_name.join('') + '[]' : 'acf' + field_name.join('');
                 $(this).attr('name', new_name);
+            });
+
+            $(this).find('[id^="acf-field_"]').each(function() {
+                var field_id = $(this).attr('id');
+                field_id = field_id.match(/-([a-zA-Z0-9_]+)/g); // split name attribute
+                field_id[3] = '-' + index; // set the new index
+                var new_id = 'acf' + field_id.join('');
+                $(this).attr('id', new_id);
+            });
+
+            $(this).find('[for^="acf-field_"]').each(function() {
+                var field_for = $(this).attr('for');
+                field_for = field_for.match(/-([a-zA-Z0-9_]+)/g); // split name attribute
+                field_for[3] = '-' + index; // set the new index
+                var new_for = 'acf' + field_for.join('');
+                $(this).attr('for', new_for);
             });
 
             // click already selected buttons to trigger conditional logics
