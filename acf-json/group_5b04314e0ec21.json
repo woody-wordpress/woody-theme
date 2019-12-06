@@ -1,8 +1,7 @@
 {
     "key": "group_5b04314e0ec21",
     "title": "Galerie de photos",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b04475f63df2",
             "label": "Contenu",
             "name": "",
@@ -100,37 +99,6 @@
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0
-        },
-        {
-            "key": "field_5bd815883c13e",
-            "label": "ANCIENS CHAMPS",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "left",
-            "endpoint": 0
-        },
-        {
-            "key": "field_5b4c615a5b6f0",
-            "label": "Bouton \/ Lien",
-            "name": "gallery_link",
-            "type": "link",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "array"
         },
         {
             "key": "field_5b04476c63df3",
@@ -324,13 +292,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",

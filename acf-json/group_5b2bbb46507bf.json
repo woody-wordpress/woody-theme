@@ -647,59 +647,6 @@
             ]
         },
         {
-            "key": "field_5bd8142f8e07a",
-            "label": "ANCIENS CHAMPS",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
-            "key": "field_5b2bbdff88b35",
-            "label": "Boutons",
-            "name": "page_teaser_buttons",
-            "type": "repeater",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "collapsed": "field_5b2bbe1388b36",
-            "min": 0,
-            "max": 0,
-            "layout": "table",
-            "button_label": "Ajouter un bouton",
-            "hide_collapse": 1,
-            "collapse_all_repeater": 0,
-            "btn-icon-only": 0,
-            "sub_fields": [{
-                "key": "field_5b2bbe1388b36",
-                "label": "Bouton",
-                "name": "button",
-                "type": "link",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "return_format": "array"
-            }]
-        },
-        {
             "key": "field_5b2bc10f56db2",
             "label": "Mise en page",
             "name": "",
