@@ -35,19 +35,24 @@ function makeSortable() {
     $('.values').on('click mousedown', setSortableEmptyValues);
     $('.values').on('click mouseup', unsetSortableEmptyValues);
 
-    $(".acf-flexible-content > .values").sortable({
-        connectWith: ".acf-flexible-content > .values",
-        dropOnEmpty: true,
-        tolerance: "pointer",
-        cursor: "move",
-        start: function(event, ui) {
-            acf.do_action('sortstart', ui.item, ui.placeholder);
-        },
-        stop: function(event, ui) {
-            acf.do_action('sortstop', ui.item, ui.placeholder);
-            $(this).find('.mce-tinymce').each(function() {
-                tinyMCE.execCommand('mceRemoveControl', true, $(this).attr('id'));
-                tinyMCE.execCommand('mceAddControl', true, $(this).attr('id'));
+    $(".acf-flexible-content > .values").each(function(){
+        var $this = $(this);
+        if($this.closest('.acf-field-repeater').attr('data-name') == 'section'){
+            $this.sortable({
+                connectWith: ".acf-flexible-content > .values",
+                dropOnEmpty: true,
+                tolerance: "pointer",
+                cursor: "move",
+                start: function(event, ui) {
+                    acf.do_action('sortstart', ui.item, ui.placeholder);
+                },
+                stop: function(event, ui) {
+                    acf.do_action('sortstop', ui.item, ui.placeholder);
+                    $(this).find('.mce-tinymce').each(function() {
+                        tinyMCE.execCommand('mceRemoveControl', true, $(this).attr('id'));
+                        tinyMCE.execCommand('mceAddControl', true, $(this).attr('id'));
+                    });
+                }
             });
         }
     });
@@ -70,23 +75,26 @@ acf.add_action('sortstop', function($el) {
                 var layout_index = 0;
 
                 parent_row.find('.values .layout').each(function() {
-                    $(this).find('[name^="acf[field_"]').each(function() {
-                        var field_name = $(this).attr('name');
-                        field_name = field_name.match(/\[([a-zA-Z0-9_-]+\])/g); // split name attribute
-                        field_name[1] = '[' + row_index + ']'; // set the new row name
-                        field_name[3] = '[' + layout_index + ']'; // set the new row name
-                        var new_name = $(this).parent().hasClass('acf-gallery-attachment') ? 'acf' + field_name.join('') + '[]' : 'acf' + field_name.join('');
-                        $(this).attr('name', new_name);
-                    });
 
-                    $(this).find('label.selected input').each(function(){
-                        $(this).trigger('click');
-                    });
+                    if($(this).closest('.acf-field-repeater').attr('data-name') == 'section'){
+                        $(this).find('[name^="acf[field_"]').each(function() {
+                            var field_name = $(this).attr('name');
+                            field_name = field_name.match(/\[([a-zA-Z0-9_-]+\])/g); // split name attribute
+                            field_name[1] = '[' + row_index + ']'; // set the new row name
+                            field_name[3] = '[' + layout_index + ']'; // set the new row name
+                            var new_name = $(this).parent().hasClass('acf-gallery-attachment') ? 'acf' + field_name.join('') + '[]' : 'acf' + field_name.join('');
+                            $(this).attr('name', new_name);
+                        });
 
-                    layout_index++;
+                        $(this).find('label.selected input').each(function(){
+                            $(this).trigger('click');
+                        });
 
-                    // console.log($(this).find('.acf-fc-layout-handle .acf-fc-layout-order'));
-                    $(this).find('.acf-fc-layout-handle .acf-fc-layout-order').text(layout_index);
+                        layout_index++;
+
+                        // console.log($(this).find('.acf-fc-layout-handle .acf-fc-layout-order'));
+                        $(this).find('.acf-fc-layout-handle .acf-fc-layout-order').text(layout_index);
+                    }
                 });
             } else {
                 // Do nothing
