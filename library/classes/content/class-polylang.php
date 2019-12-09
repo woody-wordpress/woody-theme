@@ -106,16 +106,18 @@ class WoodyTheme_Polylang
         __('jours', 'woody-theme');
         __('personne', 'woody-theme');
         __('personnes', 'woody-theme');
-        //TODO: Récupérer les chaînes à traudire dans groupQuotation.php (plugin) et dans le tpl de devis (library)
+        __('Départ', 'woody-theme');
+        __('Arrivée', 'woody-theme');
+        __('Etape', 'woody-theme');
 
         // Availabilities calendar
         __('Attention, vous n\'avez pas saisi d\'identifiant de playlist en paramètre du shortcode.
-            Pour rappel, le shortcode s\'utilise par exemple de cette manière', 'woody_theme');
-        __('Année', 'woody_theme');
-        __('Établissement', 'woody_theme');
-        __('Établissement disponible', 'woody_theme');
-        __('Établissement indisponible', 'woody_theme');
-        __('Aucunes informations concernant cet établissement pour l\'année en cours', 'woody_theme');
+            Pour rappel, le shortcode s\'utilise par exemple de cette manière', 'woody-theme');
+        __('Année', 'woody-theme');
+        __('Établissement', 'woody-theme');
+        __('Établissement disponible', 'woody-theme');
+        __('Établissement indisponible', 'woody-theme');
+        __('Aucune information concernant cet établissement pour l\'année en cours', 'woody-theme');
 
         // Woody blocs
         __("M'y rendre", 'woody-theme');
@@ -139,9 +141,15 @@ class WoodyTheme_Polylang
         __("Rechercher", 'woody-theme');
         __("Réinitialiser", 'woody-theme');
         __("Choisissez vos dates", 'woody-theme');
+        __('Date d\'arrivée', 'woody-theme');
+        __('Durée du séjour', 'woody-theme');
         __("adulte(s)", 'woody-theme');
         __("enfant(s)", 'woody-theme');
+        __("jour", 'woody-theme');
         __("jours", 'woody-theme');
+        __("semaine", 'woody-theme');
+        __("semaines", 'woody-theme');
+        __("mois", 'woody-theme');
         __("Pages", 'woody-theme');
         __("Offre touristique", 'woody-theme');
         __("Désolé, aucun contenu touristique ne correspond à votre recherche", 'woody-theme');
@@ -211,5 +219,66 @@ class WoodyTheme_Polylang
 
         // Favorites
         __('Ajouter à mes favoris', 'woody-theme');
+
+        // Tides
+        __('Dates', 'woody-theme');
+        __('Basse mer', 'woody-theme');
+        __('Haute mer', 'woody-theme');
+        __('Matin', 'woody-theme');
+        __('Soir', 'woody-theme');
+        __('Heure', 'woody-theme');
+        __('Coef', 'woody-theme');
+        __('Retrouvez prochainement les horaires de marées pour ce mois !', 'woody-theme');
+
+        // Group quotation
+        __('Pour faire une demande de devis, veuillez choisir un séjour.', 'woody-theme');
+        __("Il semblerait qu'il n'y ait pas ou plus de séjours proposant une demande de devis disponibles sur le site", "woody-theme");
+        __("Séjours et activités", "woody-theme");
+        __('Retour à l\'offre', 'woody-theme');
+        __('Récapitulatif', 'woody-theme');
+        __('30 secondes', 'woody-theme');
+        __('Informations', 'woody-theme');
+        __('Coordonnées', 'woody-theme');
+        __("Mon devis", "woody-theme");
+        __("Votre séjour/journée", "woody-theme");
+        __('Comprenant', 'woody-theme');
+        __('Gratuit', 'woody-theme');
+        __('Nombre de personnes', 'woody-theme');
+        __("Language de la/des visite(s)");
+        __("* Champs obligatoires", "woody-theme");
+        __("Nom/Prénom", "woody-theme");
+        __("Raison sociale", "woody-theme");
+        __("Email", "woody-theme");
+        __("Téléphone", "woody-theme");
+        __("Votre commentaire", "woody-theme");
+        __("Valider ma demande de devis", "woody-theme");
+        __("Mon panier", "woody-theme");
+        __("TOTAL ", "woody-theme");
+        __("Base de", "woody-theme");
+        __("personne", "woody-theme");
+
+        // Divers
+        __('Publié le', 'woody-theme');
+        __('Désolé, aucun contenu ne correspond à votre recherche', 'woody-theme');
+        __('Lire aussi', 'woody-theme');
+
+        // Disqus
+        __('Merci d\'activer le javascript pour afficher', 'woody-theme');
+        __('le bloc de commentaires Disqus', 'woody-theme');
+        __('Une erreur est survenue lors de l\'affichage des commentaires. Merci de contacter votre administrateur', 'woody-theme');
+
+        // Infolive
+        __('Remontées mécaniques', 'woody-theme');
+        __('Pistes', 'woody-theme');
+        __('Domaine Alpin', 'woody-theme');
+        __('Domaine Nordique', 'woody-theme');
+        __('Détails', 'woody-theme');
+        __('Météo', 'woody-theme');
+        __('Voir le bulletin météo', 'woody-theme');
+        __('Bulletin complet', 'woody-theme');
+        __('Webcams', 'woody-theme');
+        __('Voir les webcams', 'woody-theme');
+        __('Flux erroné !', 'woody-theme');
+        __('Module Infoneige non configuré !', 'woody-theme');
     }
 }

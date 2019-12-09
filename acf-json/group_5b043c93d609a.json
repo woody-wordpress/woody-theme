@@ -1,8 +1,7 @@
 {
     "key": "group_5b043c93d609a",
     "title": "Background parameters",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b043ca4a6fe3",
             "label": "Couleur de fond",
             "name": "background_color",
@@ -20,7 +19,8 @@
                 "bg-secondary": "Secondaire",
                 "bg-black": "Noir",
                 "bg-darkgray": "Gris foncé",
-                "bg-lightgray": "Gris clair"
+                "bg-lightgray": "Gris clair",
+                "bg-white": "Blanc"
             },
             "allow_null": 1,
             "default_value": "",
@@ -41,11 +41,12 @@
                 "id": ""
             },
             "choices": {
-                "border-primary": "Couleur principale",
-                "border-secondary": "Couleur secondaire",
+                "border-primary": "Principale",
+                "border-secondary": "Secondaire",
                 "border-black": "Noir",
                 "border-darkgray": "Gris foncé",
-                "border-lightgray": "Gris clair"
+                "border-lightgray": "Gris clair",
+                "border-white": "Blanc"
             },
             "allow_null": 1,
             "default_value": "",
@@ -102,13 +103,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",

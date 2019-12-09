@@ -155,6 +155,7 @@ class WoodyTheme_Enqueue_Assets
         wp_enqueue_script('jsdelivr_moment', 'https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js', [], '', true);
         wp_enqueue_script('jsdelivr_jscookie', 'https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js', [], '', true);
         wp_enqueue_script('jsdelivr_rellax', 'https://cdn.jsdelivr.net/npm/rellax@1.10.0/rellax.min.js', [], '', true);
+        wp_enqueue_script('jsdelivr_plyr', 'https://cdn.jsdelivr.net/npm/plyr@3.5.6/dist/plyr.min.js', [], '', true);
 
         // Touristic maps libraries
         wp_enqueue_script('jsdelivr_leaflet', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet-src.min.js', [], '', true);
@@ -241,10 +242,12 @@ class WoodyTheme_Enqueue_Assets
 
         // Nouvelle méthode pour appeler les fonts en synchrone voir ligne 342
         $webfonts = apply_filters('woody_theme_global_script_string', []);
-        $webfonts = json_decode($webfonts['window.WebFontConfig'], true);
-        if (!empty($webfonts['google']) && !empty($webfonts['google']['families'])) {
-            foreach ($webfonts['google']['families'] as $webfont) {
-                wp_enqueue_style('google-font-' . sanitize_title($webfont), 'https://fonts.googleapis.com/css?family=' . $webfont, [], '', 'all');
+        if (!empty($webfonts['window.WebFontConfig'])) {
+            $webfonts = json_decode($webfonts['window.WebFontConfig'], true);
+            if (!empty($webfonts['google']) && !empty($webfonts['google']['families'])) {
+                foreach ($webfonts['google']['families'] as $webfont) {
+                    wp_enqueue_style('google-font-' . sanitize_title($webfont), 'https://fonts.googleapis.com/css?family=' . $webfont, [], '', 'all');
+                }
             }
         }
 
@@ -260,7 +263,8 @@ class WoodyTheme_Enqueue_Assets
             'jsdelivr_lg-thumbnail',
             'jsdelivr_lg-video',
             'jsdelivr_lg-zoom',
-            'jsdelivr_lg-fullscreen'
+            'jsdelivr_lg-fullscreen',
+            'wp-i18n'
         ];
         wp_enqueue_script('main-javascripts', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('js/main.js'), $dependencies, '', true);
 

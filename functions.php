@@ -42,5 +42,5 @@ add_filter('timber/cache/location', function () {
 
 if (class_exists('Timber', false)) {
     Timber::$locations = apply_filters('timber_locations', array('views', WoodyLibrary::getTemplatesDirname()));
-    Timber::$cache = (WP_ENV == 'dev') ? false : true;
+    Timber::$cache = (file_exists(WP_CACHE_DIR . '/deploy.lock') || WP_ENV == 'dev') ? false : true;
 }

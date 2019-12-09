@@ -33,11 +33,14 @@ class WoodyTheme_Twig_Filters
         $twig->addFilter(new Twig_SimpleFilter('pluralizeUnit', [$this, 'pluralizeUnit']));
 
         $twig->addFilter(new Twig_SimpleFilter('base64Encode', [$this, 'base64Encode']));
+        $twig->addFilter(new Twig_SimpleFilter('seed', [$this, 'seed']));
+        $twig->addFilter(new Twig_SimpleFilter('translate', [$this, 'translate']));
 
         // debug
         $twig->addFilter(new Twig_SimpleFilter('dump', [$this, 'dump']));
         $twig->addFilter(new Twig_SimpleFilter('rcd', [$this, 'rcd']));
         $twig->addFilter(new Twig_SimpleFilter('wd', [$this, 'wd']));
+
 
         return $twig;
     }
@@ -199,9 +202,41 @@ class WoodyTheme_Twig_Filters
     public function pluralizeUnit($amount, $singular_unit, $plural_unit = false)
     {
         if ((int) $amount === 1 || empty($plural_unit)) {
-            return $amount . '<span class="unit"> ' . $singular_unit . '</span>';
+            return $amount . ' ' . $singular_unit;
+        }
+        return $amount . ' ' . $plural_unit;
+    }
+
+    public function seed($text)
+    {
+        $seed = date("dmY");
+
+        return $seed;
+    }
+
+    public function translate($text)
+    {
+        switch ($text) {
+            case 'day':
+                $text = __('jour', 'woody-theme');
+                break;
+            case 'days':
+                $text = __('jours', 'woody-theme');
+                break;
+            case 'week':
+                $text = __('semaine', 'woody-theme');
+                break;
+            case 'weeks':
+                $text = __('semaines', 'woody-theme');
+                break;
+            case 'month':
+                $text = __('mois', 'woody-theme');
+                break;
+            case 'months':
+                $text = __('mois', 'woody-theme');
+                break;
         }
 
-        return $amount . ' ' . $plural_unit;
+        return $text;
     }
 }

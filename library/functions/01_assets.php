@@ -116,8 +116,9 @@ function getWoodyIcons()
     //TODO: Récupérer une variable globale en fonction du set d'icones choisis dans le thème pour remplacer '/src/icons/icons_set_01'
     $core_icons = woodyIconsFolder(get_template_directory() . '/src/icons/icons_set_01');
 
-    // TODO: récuperer variable station de l'ERP
-    $stations = ['superot', 'champsaur-valgaudemar', 'hautemaurienne'];
+    $stations = ['superot'];
+    $stations = apply_filters('woody_icons_stations', $stations);
+
     $station_icons = array();
 
     if ((in_array(WP_SITE_KEY, $stations))) {
@@ -127,6 +128,8 @@ function getWoodyIcons()
     $site_icons = woodyIconsFolder(get_stylesheet_directory() . '/src/icons');
 
     $return = array_merge($core_icons, $site_icons, $station_icons);
+
+    apply_filters('woody_add_more_icons', $return);
 
     return $return;
 }
@@ -177,42 +180,6 @@ function getWoodyTwigPaths()
     return $woodyTwigsPaths;
 }
 
-
-/**
- *
- * Nom : getMinMaxWoodyFieldValues
- * Auteur : Benoit Bouchaud
- * Return : Retourne le html d'une mise en avant de contenu
- * @param    query_vars Les champs de tris pour rechercher les champ dans une selection de posts
- * @param    field le champ dans lequel on cherche
- * @param    minormax Sting => 'min' ou 'max' (Default max)
- * @return   return - Un nombre
- *
- */
-
-function getMinMaxWoodyFieldValues($query_vars = array(), $field, $minormax = 'max')
-{
-    $return = 0;
-
-    if (empty($query_vars) || empty($field)) {
-        return;
-    }
-    $query_vars['meta_key'] = $field;
-    $query_vars['posts_per_page'] = 1;
-    $query_vars['paged'] = false;
-    $query_vars['orderby'] = 'meta_value_num';
-    $query_vars['order'] = ($minormax == 'max') ? 'DESC' : 'ASC';
-
-    $query_result = new WP_Query($query_vars);
-
-    if (!empty($query_result->posts)) {
-        $return = get_field($field, $query_result->posts[0]->ID);
-        $return = (empty($return)) ? 1 : $return;
-    }
-
-    return $return;
-}
-
 function getPageTaxonomies()
 {
     $taxonomies = get_transient('woody_website_pages_taxonomies');
@@ -235,8 +202,10 @@ function getPageTerms($post_id)
 
     foreach ($taxonomies as $taxonomy) {
         $terms = wp_get_post_terms($post_id, $taxonomy->name);
-        foreach ($terms as $term) {
-            $return[] = 'term-' . $term->slug;
+        if (!is_wp_error($terms)) {
+            foreach ($terms as $term) {
+                $return[] = 'term-' . $term->slug;
+            }
         }
     }
 
@@ -291,30 +260,6 @@ function getPostRootAncestor($postID, $root_level = 1)
     return $return;
 }
 
-function getAttachmentMoreData($attachment_id)
-{
-    $attachment_data = [];
-    $attachment_data['is_instagram'] = isWoodyInstagram($attachment_id);
-
-    if ($attachment_data['is_instagram']) {
-        $attachment_data['instagram_metadata'] = getInstagramMetadata($attachment_id);
-    }
-
-    $attachment_data['linked_page'] = get_field('field_5c0553157e6d0', $attachment_id);
-    $attachment_data['author'] = get_field('field_5b5585503c855', $attachment_id);
-    $attachment_data['lat'] = get_field('field_5b55a88e70cbf', $attachment_id);
-    $attachment_data['lng'] = get_field('field_5b55a89e70cc0', $attachment_id);
-
-    return $attachment_data;
-}
-
-function getInstagramMetadata($attachment_id)
-{
-    $img_all_data = get_post_meta($attachment_id);
-    $img_all_metadata = (!empty($img_all_data['_wp_attachment_metadata'][0])) ? maybe_unserialize($img_all_data['_wp_attachment_metadata'][0]) : '';
-    return (!empty($img_all_metadata['woody-instagram'])) ? $img_all_metadata['woody-instagram'] : '';
-}
-
 /**
  *
  * Nom : isWoodyInstagram
@@ -337,4 +282,15 @@ function isWoodyInstagram($attachment_id)
     }
 
     return false;
+}
+
+
+/***************************
+ * Minutes to Hours converter
+ *****************************/
+function minuteConvert($num)
+{
+    $convertedTime['hours'] = floor($num / 60);
+    $convertedTime['minutes'] = round((($num / 60) - $convertedTime['hours']) * 60);
+    return $convertedTime;
 }

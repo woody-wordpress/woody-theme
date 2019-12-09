@@ -66,9 +66,12 @@ class WoodyTheme_ACF
         add_filter('acf/load_field/name=page_heading_tags', [$this, 'listAllPageTerms'], 10, 3);
 
         add_filter('acf/load_field/name=tags_primary', [$this, 'addPrimaryTagsFields'], 10, 3);
+        add_filter('acf/load_field/key=field_5d91c4559736e', [$this, 'loadDisqusField'], 10, 3);
 
         // Custom Filter
         add_filter('woody_get_field_option', [$this, 'woodyGetFieldOption'], 10, 3);
+        add_filter('woody_get_field_object', [$this, 'woodyGetFieldObject'], 10, 3);
+        add_filter('woody_get_fields_by_group', [$this, 'woodyGetFieldsByGroup'], 10, 3);
     }
 
     public function woodyGetFieldOption($field_name)
@@ -79,6 +82,28 @@ class WoodyTheme_ACF
             set_transient('woody_get_field_option', $woody_get_field_option);
         }
         return $woody_get_field_option[$field_name];
+    }
+
+    // Identique à woodyGetFieldsOption mais avec la fonction get_field_object
+    public function woodyGetFieldsObject($field_name)
+    {
+        $woody_get_field_object = get_transient('woody_get_field_object');
+        if (empty($woody_get_field_object[$field_name])) {
+            $woody_get_field_object[$field_name] = get_field_object($field_name);
+            set_transient('woody_get_field_object', $woody_get_field_object);
+        }
+        return $woody_get_field_object[$field_name];
+    }
+
+    // Retourne un tableau des champs du groupe donné
+    public function woodyGetFieldsByGroup($group_name)
+    {
+        $woody_get_fields_by_group = get_transient('woody_get_fields_by_group');
+        if (empty($woody_get_fields_by_group[$group_name])) {
+            $woody_get_fields_by_group[$group_name] = acf_get_fields($group_name);
+            set_transient('woody_get_fields_by_group', $woody_get_fields_by_group);
+        }
+        return $woody_get_fields_by_group[$group_name];
     }
 
     /**
@@ -102,7 +127,7 @@ class WoodyTheme_ACF
     public function clearOptionsTransient()
     {
         $screen = get_current_screen();
-        if (strpos($screen->id, 'acf-options') !== false) {
+        if (!empty($screen->id) && strpos($screen->id, 'acf-options') !== false) {
             // delete_transient('woody_menus_cache');
             delete_transient('woody_get_field_option');
 
@@ -196,9 +221,8 @@ class WoodyTheme_ACF
 
             switch ($field['key']) {
                 case 'field_5afd2c9616ecd': // Cas des sections
-                    $components = WoodyLibrary::getTemplatesByAcfGroup($woodyComponents, $field['key']);
-                    break;
                 case 'field_5d16118093cc1': // Cas des mises en avant de composants de séjours
+                    $components = WoodyLibrary::getTemplatesByAcfGroup($woodyComponents, $field['key']);
                     $components = WoodyLibrary::getTemplatesByAcfGroup($woodyComponents, $field['key']);
                     break;
                 default:
@@ -462,11 +486,40 @@ class WoodyTheme_ACF
 
     public function sectionContentLoadField($field)
     {
+        if (!in_array('topics', WOODY_OPTIONS)) {
+            // On retire le bloc de mise en avant de topic si le plugin n'est pas activé
+            unset($field['layouts']['layout_5d7912723303c']);
+        }
+        if (!in_array('groups', WOODY_OPTIONS)) {
+            // On retire le bloc de mise en avant de composant de séjour si le plugin n'est pas activé
+            unset($field['layouts']['5d148175d0510']);
+        }
         if (!in_array('weather', WOODY_OPTIONS)) {
             // On retire l'option bloc météo si le plugin n'est pas activé
             unset($field['layouts']['layout_5c1b579ac3a87']);
         }
+        if (!in_array('disqus', WOODY_OPTIONS)) {
+            // On retire l'option bloc commentaires si le plugin n'est pas activé
+            unset($field['layouts']['layout_5d91d7a234ca6']);
+        }
+        if (!in_array('ski_resort', WOODY_OPTIONS)) {
+            // On retire l'option bloc infolive si le plugin n'est pas activé (par sécurité)
+            unset($field['layouts']['layout_infolive']);
+        }
+
         return $field;
+    }
+
+    /**
+     * Suppression du champ de paramètres Disqus si le plugin n'est pas activé
+     */
+    public function loadDisqusField($field)
+    {
+        if (!in_array('disqus', WOODY_OPTIONS)) {
+            unset($field);
+        } else {
+            return $field;
+        }
     }
 
     public function getPageTypeTerms()
@@ -486,7 +539,6 @@ class WoodyTheme_ACF
         $hero_terms = [];
         $taxonomies = get_taxonomies();
         $displayIcon = get_field('page_heading_term_icon'); // With plugin
-
 
         foreach ($taxonomies as $taxonomy) {
             if ($taxonomy == 'places' || $taxonomy == 'seasons' || $taxonomy == 'themes') {
@@ -632,10 +684,12 @@ class WoodyTheme_ACF
                 'lists-list_grids-tpl_204',
                 'lists-list_grids-tpl_201',
                 'lists-list_grids-tpl_205',
+                'blocks-focus-tpl_202',
                 'blocks-focus-tpl_201',
                 'blocks-focus-tpl_310',
                 'blocks-focus-tpl_301',
                 'blocks-focus-tpl_304',
+                'blocks-focus-tpl_316',
                 'blocks-focus-tpl_308',
                 'blocks-focus-tpl_306',
                 'blocks-focus-tpl_313',
@@ -643,11 +697,12 @@ class WoodyTheme_ACF
                 'blocks-focus-tpl_303',
                 'blocks-focus-tpl_307',
                 'blocks-focus-tpl_311',
+                'blocks-focus-tpl_314',
                 'blocks-focus-tpl_302',
                 'blocks-focus-tpl_305',
                 'blocks-focus-tpl_315',
+                'blocks-focus-tpl_317',
                 'blocks-focus-tpl_312',
-                'blocks-focus-tpl_314',
                 'lists-list_grids-tpl_307',
                 'lists-list_grids-tpl_302',
                 'lists-list_grids-tpl_309',
@@ -660,6 +715,7 @@ class WoodyTheme_ACF
                 'lists-list_grids-tpl_310',
                 'blocks-focus-tpl_401',
                 'blocks-focus-tpl_402',
+                'blocks-focus-tpl_407',
                 'blocks-focus-tpl_403',
                 'blocks-focus-tpl_406',
                 'blocks-focus-tpl_404',
@@ -667,6 +723,8 @@ class WoodyTheme_ACF
                 'blocks-focus-tpl_501',
                 'blocks-focus-tpl_502',
                 'blocks-focus-tpl_503',
+                'blocks-focus-tpl_504',
+                'blocks-focus-tpl_505',
                 'blocks-focus-tpl_601',
                 'blocks-focus-tpl_602',
                 'blocks-focus-tpl_603',

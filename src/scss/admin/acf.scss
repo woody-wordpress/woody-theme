@@ -89,6 +89,29 @@
     }
 }
 
+// Surcharge de la largeurs des miniatures dans les blocs de sections et les groupes d'onlgets
+.acf-field-5b043f0525968 {
+    .acf-field-radio[data-name*="woody_tpl"] {
+        li {
+            @media all and (max-width: 1399px) {
+                width: calc(100% / 3);
+            }
+        }
+    }
+
+    .acf-repeater {
+        .acf-field-radio[data-name*="woody_tpl"] {
+            li {
+                width: calc(100% / 3);
+
+                @media all and (max-width: 1399px) {
+                    width: 50%;
+                }
+            }
+        }
+    }
+}
+
 // On applique du style aux descritpions et titres des templates dans les champs woody_tpl
 .tpl-choice-wrapper {
     position: relative;
@@ -362,6 +385,26 @@
     }
 }
 
+// On retire les paddings des repeater
+@media all and (max-width:1399px) {
+
+    // On réduit certaines marge pour donner la place aux champs
+    .acf-fields>.acf-field {
+        &.acf-field-repeater {
+            padding: 0;
+        }
+
+        &.acf-field-flexible-content {
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+    }
+
+    .acf-table>tbody>tr>td {
+        padding: 2px;
+    }
+}
+
 // On modifie le style du bouton "Expand/Collapse all"
 .acf-field.acf-field-flexible-content,
 .acf-field.acf-field-repeater {
@@ -497,7 +540,8 @@
 .acf-field-5bbcac7027b56,
 .acf-field-5bd81b41a3040,
 .acf-field-5bc6e6b0bd875,
-.acf-field-5beb046c93939 {
+.acf-field-5beb046c93939,
+.acf-field-5dad73a7f4ccb {
     input[type=text] {
         font-size: 1.4em !important;
         font-weight: bold;
@@ -783,5 +827,24 @@
                 display: none;
             }
         }
+    }
+}
+
+// Champ "Page liée" dans le détail des images
+.acf-field-5c0553157e6d0 {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+
+    .acf-label {
+        margin-right: 10px;
+        margin-bottom: 0;
+        line-height: 1em;
+    }
+}
+
+.acf-link {
+    .media-frame a.button {
+        color: #fff;
     }
 }

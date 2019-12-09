@@ -29,6 +29,7 @@ class WoodyTheme_Cleanup_Admin
             add_filter('get_user_option_meta-box-order_page', [$this, 'sideMetaboxOrder']);
             add_action('admin_menu', [$this, 'removeAttributeMetaBox']);
 
+            add_filter('gettext_with_context', [$this, 'wpTranslationsOverrides'], 10, 4);
 
             $user = wp_get_current_user();
             if (!in_array('administrator', $user->roles)) {
@@ -219,7 +220,6 @@ class WoodyTheme_Cleanup_Admin
     public function removeDashboardWidgets()
     {
         // global $wp_meta_boxes;
-        // wd($wp_meta_boxes);
         remove_action('welcome_panel', 'wp_welcome_panel');
         remove_meta_box('dashboard_right_now', 'dashboard', 'normal');
         remove_meta_box('dashboard_activity', 'dashboard', 'normal');
@@ -236,5 +236,17 @@ class WoodyTheme_Cleanup_Admin
     {
         $init['block_formats'] = 'Paragraph=p;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;';
         return $init;
+    }
+
+    /**
+     * Benoit Bouchaud
+     * On surcharge la traduction ACF "Texte" pour l'onglet code de l'éditeur WYSIWYG
+     */
+    public function wpTranslationsOverrides($translated, $original, $context, $domain)
+    {
+        if ($domain == 'acf' && $context == 'Name for the Text editor tab (formerly HTML)') {
+            $translated = 'Code HTML';
+        }
+        return $translated;
     }
 }

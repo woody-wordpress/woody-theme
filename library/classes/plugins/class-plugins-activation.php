@@ -77,6 +77,10 @@ class WoodyTheme_Plugins_Activation
                 break;
         }
 
+        // Override plugins activations
+        $this->activate_plugins = apply_filters('woody_activate_plugins', $this->activate_plugins);
+        $this->deactivate_plugins = apply_filters('woody_deactivate_plugins', $this->deactivate_plugins);
+
         require_once(ABSPATH . 'wp-admin/includes/plugin.php');
         foreach ($this->activate_plugins as $plugin) {
             if (!is_plugin_active($plugin) && file_exists(WP_PLUGINS_DIR . '/' . $plugin)) {

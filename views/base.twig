@@ -70,11 +70,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         {% include 'parts/header.twig' %}
         {% endif %}
         {# /Theme Header #}
+
+        {% if woody_access_staging %}
+            <div class="staging-banner">
+                <span class="staging-label">Préproduction</span>
+            </div>
+        {% endif %}
     </div>
 
     {# Twig Inline Scripts tags #}
     {% block inline_scripts %}{% endblock %}
     {# /Twig Inline Scripts tags #}
+
+    {# Reveal #}
+    {% include 'parts/reveal.twig' %}
+    {# /Reveal #}
 
     {# WP Footer #}
     {{ wp_footer }}
