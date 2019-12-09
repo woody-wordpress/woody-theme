@@ -65,6 +65,9 @@ class WoodyTheme_Varnish
                                     }
                                 }
                             } else {
+                                if ($section_content['acf_fc_layout'] == 'auto_focus') {
+                                    $section_content['focused_sort'] = $section_content['field_5b27a7859ddeb_field_5b27a67203e48'];
+                                }
                                 $ttl = $this->getTLLbyField($section_content);
                                 if (!empty($ttl)) {
                                     $woody_varnish_caching_ttl = $ttl;
