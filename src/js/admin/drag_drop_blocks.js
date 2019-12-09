@@ -46,6 +46,10 @@ function makeSortable() {
                 start: function(event, ui) {
                     acf.do_action('sortstart', ui.item, ui.placeholder);
                 },
+                sort: function(event, ui) {
+                    $('.layout.ui-sortable-placeholder').css('visibility', 'visible');
+                    $('.layout.ui-sortable-placeholder').css('background-color', 'rgba(17, 255, 107, 0.2)');
+                },
                 stop: function(event, ui) {
                     acf.do_action('sortstop', ui.item, ui.placeholder);
                     $(this).find('.mce-tinymce').each(function() {
