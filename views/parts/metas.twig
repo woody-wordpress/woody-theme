@@ -1,0 +1,4 @@
+{{ metas|wd('twig metas') }}
+{% for meta in metas if meta is iterable %}
+    <{{ meta.tag }}{% for attrKey, attr in meta.attributes %} {{ attrKey }}="{{ attr }}"{% endfor %}/>
+{% endfor %}

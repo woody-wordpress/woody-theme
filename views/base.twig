@@ -1,11 +1,9 @@
 <!doctype html>
-{% spaceless %}
+{# {% spaceless %} #}
 <html class="no-js" {{site.language_attributes}}>
 <head>
-{# <title>{{ title }}</title> #}
-<meta charset="{{site.charset}}">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>{{ title }}</title>
 
 {% if gtm|default %}
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -18,7 +16,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 {% endif %}
 
 {# WP Metas #}
-{% block metas %}{% endblock %}
+    {% include 'parts/metas.twig' %}
 {# /WP Metas #}
 
 {# WP Header #}
@@ -43,7 +41,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 {# WP Global Vars #}
 <script>var globals = {{ globals }};</script>
 {# /WP Global Vars #}
-{% endspaceless %}
+{# {% endspaceless %} #}
 </head>
 <body class="{{body_class}}">
     {% if gtm|default %}

@@ -19,6 +19,7 @@ abstract class WoodyTheme_TemplateAbstract
 
     public function __construct()
     {
+
         if (!class_exists('Timber')) {
             header('HTTP/1.1 503 Service Temporarily Unavailable');
             header('Status: 503 Service Temporarily Unavailable');
@@ -84,7 +85,7 @@ abstract class WoodyTheme_TemplateAbstract
     private function initContext()
     {
         $this->context = Timber::get_context();
-        $this->context['title'] = wp_title(null, false);
+        // $this->context['title'] = wp_title(null, false);
         $this->context['current_url'] = get_permalink();
         $this->context['site_key'] = WP_SITE_KEY;
 
@@ -99,6 +100,11 @@ abstract class WoodyTheme_TemplateAbstract
 
         $this->context['enabled_woody_options'] = WOODY_OPTIONS;
         $this->context['woody_access_staging'] = WOODY_ACCESS_STAGING;
+
+        // SEO Context
+        $this->context['metas'] = $this->setMetadata();
+        //TODO: créer une méthode pour transformer les tokens + fallback
+        $this->context['title'] = get_field('field_5d7f7dea20bb1');
 
         /******************************************************************************
          * Sommes nous dans le cas d'une page miroir ?
@@ -193,6 +199,251 @@ abstract class WoodyTheme_TemplateAbstract
 
         // Set a global dist dir
         $this->context['dist_dir'] = WP_DIST_DIR;
+    }
+
+    private function setMetadata()
+    {
+        $return = [];
+
+        // ******************************* //
+        // Définition des metas statiques
+        // ******************************* //
+        $return = [
+            'description' => [
+                'tag' => 'meta',
+                'attributes' => [
+                    'charset' => $this->context['site']->charset,
+                ]
+            ],
+            'http-equiv' => [
+                'tag' => 'meta',
+                'attributes' => [
+                    'http-equiv' => 'X-UA-Compatible',
+                    'content' => 'IE=edge'
+                ]
+            ],
+            'viewport' => [
+                'tag' => 'meta',
+                'attributes' => [
+                    'name' => 'viewport',
+                    'content' => 'width=device-width,initial-scale=1'
+                ]
+            ],
+            'robots' => [
+                'tag' => 'meta',
+                'attributes' => [
+                    'name' => 'robots',
+                    'content' => 'max-snippet:-1, max-image-preview:large, max-video-preview:-1'
+                ]
+            ],
+            'og_type' => [
+                'tag' => 'meta',
+                'attributes' => [
+                    'property' => 'og:type',
+                    'content' => 'article'
+                ]
+            ],
+            'og_url' => [
+                'tag' => 'meta',
+                'attributes' => [
+                    'property' => 'og:url',
+                    'content' => $this->context['current_url']
+                ]
+            ],
+            'twitter_card' => [
+                'tag' => 'meta',
+                'attributes' => [
+                    'property' => 'twitter:card',
+                    'content' => 'summary_large_image'
+                ]
+            ],
+        ];
+
+        // ******************************* //
+        // On ajoute les metas og:image et twitter:image (image de mise en avant ou image du visuel et accroche)
+        // ******************************* //
+        $image = get_field('focus_img');
+        if (empty($image)) {
+            $image = get_field('field_5b0e5ddfd4b1b');
+        }
+
+        if (!empty($image)) {
+            $return['og_image'] = [
+                'tag' => 'meta',
+                'attributes' => [
+                    'property' => 'og:image',
+                    'content' => $image['sizes']['ratio_2_1']
+                ]
+            ];
+            $return['og_image'] = [
+                'tag' => 'meta',
+                'attributes' => [
+                    'property' => 'og:image:secure_url',
+                    'content' => $image['sizes']['ratio_2_1']
+                ]
+            ];
+            $return['twitter_image'] = [
+                'tag' => 'meta',
+                'attributes' => [
+                    'property' => 'twitter:image',
+                    'content' => $image['sizes']['ratio_2_1']
+                ]
+            ];
+        }
+
+        // ******************************* //
+        // On ajoute la meta og:site_name
+        // ******************************* //
+        if (!empty($this->context['site']->name)) {
+            $return['og_sitename'] = [
+                'tag' => 'meta',
+                'attributes' => [
+                    'property' => 'og:site_name',
+                    'content' => !(empty($this->context['site']->name)) ? $this->context['site']->name : ''
+                ]
+            ];
+        }
+
+        // ******************************* //
+        // On ajoute les meta de localisation og:locale et og:locale:alternate pour chacune des langues du site
+        // ******************************* //
+        if (!empty(pll_current_language())) {
+            $return[] = [
+                'tag' => 'meta',
+                'attributes' => [
+                    'property' => 'og:locale',
+                    'content' => pll_current_language('locale')
+                ]
+            ];
+        };
+
+        if (!empty(pll_languages_list())) {
+            foreach (pll_languages_list(['fields' => 'locale']) as $locale) {
+                if ($locale == pll_current_language('locale')) {
+                    continue;
+                }
+                $return[] = [
+                    'tag' => 'meta',
+                    'attributes' => [
+                        'property' => 'og:locale:alternate',
+                        'content' => $locale
+                    ]
+                ];
+            }
+        }
+
+        // ******************************* //
+        // On récupère les informations saisies dans Woody SEO
+        // ******************************* //
+        $woody_seo_data = getAcfGroupFields('group_5d7f7cd5615c0');
+
+        if (!empty($woody_seo_data)) {
+            foreach ($woody_seo_data as $data_key => $data) {
+                if (is_string($data)) {
+                    $woody_seo_data[$data_key] = trim($data);
+                }
+
+                switch ($data_key) {
+                    case 'woodyseo_meta_description':
+                        $return[] = [
+                            'tag' => 'meta',
+                            'attributes' => [
+                                'name' => 'description',
+                                'content' => $data
+                            ]
+                        ];
+                        break;
+                    case 'woodyseo_fb_title':
+                        $return[] = [
+                            'tag' => 'meta',
+                            'attributes' => [
+                                'property' => 'og:title',
+                                'content' => $data
+                            ]
+                        ];
+                        break;
+                    case 'woodyseo_fb_description':
+                        $return[] = [
+                            'tag' => 'meta',
+                            'attributes' => [
+                                'property' => 'og:description',
+                                'content' => $data
+                            ]
+                        ];
+                        break;
+                    case 'woodyseo_fb_image':
+                        $return['og_image'] = [
+                            'tag' => 'meta',
+                            'attributes' => [
+                                'property' => 'og:image',
+                                'content' => $data['sizes']['ratio_2_1']
+                            ]
+                        ];
+                        break;
+                    case 'woodyseo_twitter_title':
+                        $return[] = [
+                            'tag' => 'meta',
+                            'attributes' => [
+                                'property' => 'twitter:title',
+                                'content' => $data
+                            ]
+                        ];
+                        break;
+                    case 'woodyseo_twitter_description':
+                        $return[] = [
+                            'tag' => 'meta',
+                            'attributes' => [
+                                'property' => 'twitter:description',
+                                'content' => $data
+                            ]
+                        ];
+                        break;
+                    case 'woodyseo_twitter_image':
+                        $return['twitter_image'] = [
+                            'tag' => 'meta',
+                            'attributes' => [
+                                'property' => 'twitter:image',
+                                'content' => $data['sizes']['ratio_2_1']
+                            ]
+                        ];
+                        break;
+                }
+            }
+
+            if (!empty($woody_seo_data['woodyseo_fb_image'])) {
+                $return['og_image'] = [
+                    'tag' => 'meta',
+                    'attributes' => [
+                        'property' => 'og:image',
+                        'content' => $woody_seo_data['woodyseo_fb_image']['sizes']['ratio_2_1']
+                    ]
+                ];
+            }
+
+            if (!empty($woody_seo_data['woodyseo_twitter_image'])) {
+                $return['og_image'] = [
+                    'tag' => 'meta',
+                    'attributes' => [
+                        'property' => 'og:image',
+                        'content' => $woody_seo_data['woodyseo_twitter_image']['sizes']['ratio_2_1']
+                    ]
+                ];
+            }
+
+            if (empty($woody_seo_data['woodyseo_index'])) {
+                $return['robots']['attributes']['content'] = $return['robots']['attributes']['content'] . ', noindex';
+            }
+
+            if (empty($woody_seo_data['woodyseo_follow'])) {
+                $return['robots']['attributes']['content'] = $return['robots']['attributes']['content'] . ', nofollow';
+            }
+        }
+
+        // ******************************* //
+        // On permet la surcharge des metadata
+        // ******************************* //
+        $return = apply_filters('woody_override_seo_meta', $return);
+        return $return;
     }
 
     private function addWoodyComponents()
