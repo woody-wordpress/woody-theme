@@ -103,8 +103,7 @@ abstract class WoodyTheme_TemplateAbstract
 
         // SEO Context
         $this->context['metas'] = $this->setMetadata();
-        //TODO: créer une méthode pour transformer les tokens + fallback
-        $this->context['title'] = get_field('field_5d7f7dea20bb1');
+        $this->context['title'] = $this->untokenize(get_field('field_5d7f7dea20bb1'));
 
         /******************************************************************************
          * Sommes nous dans le cas d'une page miroir ?
@@ -349,7 +348,7 @@ abstract class WoodyTheme_TemplateAbstract
                             'tag' => 'meta',
                             'attributes' => [
                                 'name' => 'description',
-                                'content' => $data
+                                'content' => $this->untokenize($data)
                             ]
                         ];
                         break;
@@ -358,7 +357,7 @@ abstract class WoodyTheme_TemplateAbstract
                             'tag' => 'meta',
                             'attributes' => [
                                 'property' => 'og:title',
-                                'content' => $data
+                                'content' => $this->untokenize($data)
                             ]
                         ];
                         break;
@@ -367,7 +366,7 @@ abstract class WoodyTheme_TemplateAbstract
                             'tag' => 'meta',
                             'attributes' => [
                                 'property' => 'og:description',
-                                'content' => $data
+                                'content' => $this->untokenize($data)
                             ]
                         ];
                         break;
@@ -385,7 +384,7 @@ abstract class WoodyTheme_TemplateAbstract
                             'tag' => 'meta',
                             'attributes' => [
                                 'property' => 'twitter:title',
-                                'content' => $data
+                                'content' => $this->untokenize($data)
                             ]
                         ];
                         break;
@@ -394,7 +393,7 @@ abstract class WoodyTheme_TemplateAbstract
                             'tag' => 'meta',
                             'attributes' => [
                                 'property' => 'twitter:description',
-                                'content' => $data
+                                'content' => $this->untokenize($data)
                             ]
                         ];
                         break;
@@ -439,11 +438,41 @@ abstract class WoodyTheme_TemplateAbstract
             }
         }
 
-        // ******************************* //
         // On permet la surcharge des metadata
-        // ******************************* //
         $return = apply_filters('woody_override_seo_meta', $return);
         return $return;
+    }
+
+    private function untokenize($token)
+    {
+        // On définit les correspondances des tokens
+        $patterns = [
+            '%site_name%' => $this->context['site']->name,
+            '%post_title%' => get_the_title(),
+            '%hero_title%' => get_field('field_5b041d61adb72'),
+            '%hero_desc%' => get_field('field_5b041dbfadb74'),
+            '%teaser_desc%' => get_field('field_5b2bbbfaec6b2'),
+            '%focus_title%' => get_field('field_5b0d380e04203'),
+            '%focus_desc%' => get_field('field_5b0d382404204')
+        ];
+
+        // On remplace les token par les valeurs des champs correspondants
+        if (!empty($token)) {
+            foreach ($patterns as $pattern_key => $pattern) {
+                $token = str_replace($pattern_key, $pattern, $token);
+            }
+        }
+
+        // On retire les balises html (pour les descriptions essentiellement)
+        $token = str_replace('&nbsp; ', '', $token);
+        $token = trim(strip_tags($token));
+
+        // On limite la chaine à +/- 150 caractères sans couper de mot
+        if (strlen($token) > 170) {
+            $token = substr($token, 0, strpos($token, ' ', 150));
+        }
+
+        return $token;
     }
 
     private function addWoodyComponents()

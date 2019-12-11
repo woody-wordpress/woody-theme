@@ -5,6 +5,7 @@ import './nav-menus-ui';
 import './global-admin';
 import './tags-primary';
 import './drag_drop_blocks';
+import './woody-seo.js';
 
 // Woody Plugin
 import 'Hawwwai/Resources/Assets/js/acf-hawwwai'

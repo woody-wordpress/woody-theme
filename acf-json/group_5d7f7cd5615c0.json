@@ -3,6 +3,25 @@
     "title": "Woody SEO",
     "fields": [
         {
+            "key": "field_5df0a11078fe9",
+            "label": "Editer les métadonnées",
+            "name": "woody_seo_edit",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_5d7f7ce020bae",
             "label": "Metadonnées",
             "name": "",
@@ -25,10 +44,18 @@
             "type": "text",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5df0a11078fe9",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "tokenize",
                 "id": ""
             },
             "default_value": "",
@@ -44,10 +71,18 @@
             "type": "text",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5df0a11078fe9",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "tokenize",
                 "id": ""
             },
             "default_value": "",
@@ -98,10 +133,18 @@
             "type": "text",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5df0a11078fe9",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "tokenize",
                 "id": ""
             },
             "default_value": "",
@@ -117,10 +160,18 @@
             "type": "text",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5df0a11078fe9",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "tokenize",
                 "id": ""
             },
             "default_value": "",
@@ -136,7 +187,15 @@
             "type": "image",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5df0a11078fe9",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -195,10 +254,18 @@
             "type": "text",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5df0a11078fe9",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "tokenize",
                 "id": ""
             },
             "default_value": "",
@@ -214,10 +281,18 @@
             "type": "text",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5df0a11078fe9",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "tokenize",
                 "id": ""
             },
             "default_value": "",
@@ -233,7 +308,15 @@
             "type": "image",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5df0a11078fe9",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -341,5 +424,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1575911258
+    "modified": 1576051331
 }
