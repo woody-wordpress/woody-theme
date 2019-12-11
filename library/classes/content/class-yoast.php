@@ -24,7 +24,23 @@ class WoodyTheme_Yoast
         add_filter('wpseo_metadesc', [$this, 'wpseoMetaDesc'], 10, 1);
         add_filter('wpseo_metadesc', [$this, 'wpseoTransformPattern'], 10, 1);
         add_filter('wpseo_title', [$this, 'wpseoTransformPattern'], 10, 1);
+
+        // New filters for Woody SEO
+        add_filter('acf/load_value/key=field_5d7f7e7720bb3', [$this, 'searchPreview'], 10, 3);
     }
+
+
+    /* ******************************** */
+    /* Fonctions Woody SEO              */
+    /* ******************************** */
+
+    public function searchPreview($value, $post_id, $field)
+    {
+        wd($value, 'field_5d7f7e7720bb3');
+        return $value;
+    }
+
+    /* ******************************** */
 
     public function wpseoAddOpengraphAdditionalImages($object)
     {

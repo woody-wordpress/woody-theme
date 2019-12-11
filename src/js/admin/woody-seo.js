@@ -7,8 +7,6 @@ $('#acf-group_5d7f7cd5615c0').each(function() {
 
     function toKenize() {
 
-        console.log(toKenized);
-
         if (toKenized == false) {
             var $tokenize = $group.find('.tokenize');
 
@@ -144,6 +142,7 @@ $('#acf-group_5d7f7cd5615c0').each(function() {
         }
     }
 
+    // Lancement de la fonction de création des tokens lorsque le champ "Meta titre" est affiché
     acf.addAction('show_field/key=field_5d7f7dea20bb1', toKenize);
 
 });
