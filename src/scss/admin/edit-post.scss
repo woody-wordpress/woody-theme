@@ -244,6 +244,12 @@ textarea.notAllowed {
     }
 }
 
+.droppable-area {
+    height: 36px;
+    visibility: visible;
+    background: rgba(17, 255, 108, 0.479);
+}
+
 @keyframes submitSlideIn {
     0% {
         bottom: -150px;

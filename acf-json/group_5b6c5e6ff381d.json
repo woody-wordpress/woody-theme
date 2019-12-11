@@ -534,6 +534,27 @@
             ]
         },
         {
+            "key": "field_5def991296e76",
+            "label": "Supplément dimanche et jours fériés",
+            "name": "specialdays_price",
+            "type": "number",
+            "instructions": "Attention ! Remplir cette option remplacera les prix fixés dans les paramètres de séjours.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": "",
+            "max": "",
+            "step": ""
+        },
+        {
             "key": "field_5cd00bf944c19",
             "label": "Bouton",
             "name": "the_button",

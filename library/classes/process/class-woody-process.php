@@ -70,11 +70,6 @@ class WoodyTheme_WoodyProcess
                 $the_infolive = apply_filters('woody_infolive', $vars);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_infolive);
                 break;
-            case 'call_to_action':
-                // TODO: Case à enlever lorsque les "Anciens champs" seront supprimés du backoffice (utile pour les anciens liens de CTA uniquement)
-                $layout['modal_id'] = uniqid($layout['acf_fc_layout'] . '_');
-                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
-                break;
             case 'gallery':
                 // Ajout des données Instagram + champs personnaliés dans le contexte des images
                 if (!empty($layout['gallery_items'])) {
@@ -330,6 +325,8 @@ class WoodyTheme_WoodyProcess
                 $order = 'ASC';
                 break;
             default:
+                $orderby = 'rand';
+                $order = 'ASC';
         }
 
         // On enregistre le tri aléatoire pour la journée en cours (pagination)
