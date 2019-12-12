@@ -36,7 +36,14 @@ class WoodyTheme_Images
         add_filter('wp_generate_attachment_metadata', [$this, 'generateAttachmentMetadata'], 10, 2);
         add_filter('wp_handle_upload_prefilter', [$this, 'maxUploadSize']);
         add_filter('upload_mimes', [$this, 'uploadMimes'], 10, 1);
+        add_filter('big_image_size_threshold', [$this, 'bigImageSizeThreshold'], 10, 4);
         // add_filter('wp_handle_upload', [$this, 'convertFileToGeoJSON'], 100, 1);
+    }
+
+    public function bigImageSizeThreshold()
+    {
+        // Désactive la duplication  de photo (filename-scaled.jpg) depuis WP 5.3
+        return false;
     }
 
     public function wpImageEditors()
