@@ -85,4 +85,20 @@
     .tokens-toggle {
         margin-top: 10px;
     }
+
+    .woodyseo-preview {
+
+        .mce-statusbar,
+        .mce-top-part {
+            display: none;
+        }
+
+        .mce-edit-area {
+            pointer-events: none;
+        }
+
+        .wp-editor-container {
+            border-radius: 6px;
+        }
+    }
 }

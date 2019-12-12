@@ -95,20 +95,20 @@
             "key": "field_5d7f7e7720bb3",
             "label": "Aperçu dans les moteurs de recherche",
             "name": "woodyseo_page_preview",
-            "type": "textarea",
+            "type": "wysiwyg",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "woodyseo-preview",
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
-            "maxlength": "",
-            "rows": "",
-            "new_lines": ""
+            "tabs": "visual",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
         },
         {
             "key": "field_5d7f7e9320bb4",
@@ -216,20 +216,20 @@
             "key": "field_5d7f821420bb6",
             "label": "Aperçu dans Facebook",
             "name": "woodyseo_fb_preview",
-            "type": "textarea",
+            "type": "wysiwyg",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "woodyseo-preview",
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
-            "maxlength": "",
-            "rows": "",
-            "new_lines": ""
+            "tabs": "visual",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
         },
         {
             "key": "field_5d7f81e020bb5",
@@ -337,20 +337,20 @@
             "key": "field_5d7f836120bbb",
             "label": "Aperçu dans Twitter",
             "name": "woodyseo_twitter_preview",
-            "type": "textarea",
+            "type": "wysiwyg",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "woodyseo-preview",
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
-            "maxlength": "",
-            "rows": "",
-            "new_lines": ""
+            "tabs": "visual",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
         },
         {
             "key": "field_5d7f7dd820bb0",
@@ -424,5 +424,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1576051331
+    "modified": 1576158296
 }

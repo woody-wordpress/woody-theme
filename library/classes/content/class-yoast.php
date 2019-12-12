@@ -27,6 +27,7 @@ class WoodyTheme_Yoast
 
         // New filters for Woody SEO
         add_filter('acf/load_value/key=field_5d7f7e7720bb3', [$this, 'searchPreview'], 10, 3);
+        // add_action('acf/render_field/type=textarea', [$this, 'searchPreview']);
     }
 
 
@@ -36,7 +37,7 @@ class WoodyTheme_Yoast
 
     public function searchPreview($value, $post_id, $field)
     {
-        wd($value, 'field_5d7f7e7720bb3');
+        $value = file_get_contents(get_template_directory() . '/library/templates/woody_seo/browser_preview.php');
         return $value;
     }
 
