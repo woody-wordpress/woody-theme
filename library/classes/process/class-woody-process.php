@@ -56,6 +56,7 @@ class WoodyTheme_WoodyProcess
                 // $return = $this->compilers->formatFullContentList($layout, $context['post'], $context['woody_components']);
                 break;
             case 'weather':
+                // TODO: le case Weather doit être ajouté via le filtre woody_custom_layout depuis le plugin
                 $vars['account'] = $layout['weather_account'];
                 $vars['nb_days'] = $layout['weather_count_days'];
                 $the_weather = apply_filters('woody_weather', $vars);
@@ -64,6 +65,7 @@ class WoodyTheme_WoodyProcess
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_weather);
                 break;
             case 'infolive':
+                // TODO: le case Infolive doit être ajouté via le filtre woody_custom_layout depuis le plugin
                 $vars['resort'] = $layout['infolive_block_select_resort'];
                 $vars['display_custom'] = $layout['infolive_block_switch_display'];
                 $vars['display'] = $layout['infolive_block_display'];
@@ -118,6 +120,7 @@ class WoodyTheme_WoodyProcess
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             case 'disqus_block':
+                // TODO: le case Disqus block doit être ajouté via le filtre woody_custom_layout depuis le plugin
                 $layout['woody_tpl'] = 'blocks-disqus-tpl_01';
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
@@ -126,6 +129,7 @@ class WoodyTheme_WoodyProcess
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             default:
+                $layout = apply_filters('woody_custom_layout', $layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
         }
         return $return;
