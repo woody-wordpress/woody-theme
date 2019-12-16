@@ -89,8 +89,10 @@ class WoodyTheme_Varnish
             return WOODY_VARNISH_CACHING_FOCUSSHEET_TTL;
         } elseif ($section_content['acf_fc_layout'] == 'auto_focus' && $section_content['focused_sort'] == 'random') {
             return WOODY_VARNISH_CACHING_FOCUSRANDOM_TTL;
-        } elseif ($section_content['acf_fc_layout'] == 'weather' || $section_content['acf_fc_layout'] == 'infolive') {
+        } elseif ($section_content['acf_fc_layout'] == 'weather') {
             return WOODY_VARNISH_CACHING_WEATHERPAGE_TTL;
+        } elseif ($section_content['acf_fc_layout'] == 'infolive') {
+            return WOODY_VARNISH_CACHING_LIVEPAGE_TTL;
         }
     }
 }
