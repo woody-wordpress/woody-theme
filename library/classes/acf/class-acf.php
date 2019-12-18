@@ -73,12 +73,9 @@ class WoodyTheme_ACF
         add_filter('woody_get_field_option', [$this, 'woodyGetFieldOption'], 10, 3);
         add_filter('woody_get_field_object', [$this, 'woodyGetFieldObject'], 10, 3);
         add_filter('woody_get_fields_by_group', [$this, 'woodyGetFieldsByGroup'], 10);
-        add_filter('woody_get_fields', [$this, 'woodyGetFields'], 10);
-
-        add_filter('acf/update_value', [$this, 'updateWoodyGetFields'], 10, 3);
     }
 
-    // Récupère un champ pour l'identifiant donné (name, key ou ID)
+    // Récupère un champ pour l'identifiant donné (name, key)
     public function woodyAcfGetField($field_name)
     {
         $woody_acf_get_field = get_transient('woody_acf_get_field');
@@ -99,7 +96,7 @@ class WoodyTheme_ACF
         return $woody_get_field_option[$field_name];
     }
 
-    // Identique à woodyGetFieldsOption mais avec la fonction get_field_object
+    // Retourne un tableau contenant toutes les données de champ pour un $field_name donné
     public function woodyGetFieldsObject($field_name)
     {
         $woody_get_field_object = get_transient('woody_get_field_object');
@@ -119,31 +116,6 @@ class WoodyTheme_ACF
             set_transient('woody_get_fields_by_group', $woody_get_fields_by_group);
         }
         return $woody_get_fields_by_group[$group_name];
-    }
-
-    // Retourne les valeurs de champs d'un post donné
-    public function woodyGetFields($post_id)
-    {
-        $woody_get_fields = get_transient('woody_get_fields_' . $post_id);
-        if (empty($woody_get_fields[$post_id])) {
-            $woody_get_fields[$post_id] = get_fields($post_id);
-            set_transient('woody_get_fields_' . $post_id, $woody_get_fields);
-        }
-        return $woody_get_fields[$post_id];
-    }
-
-    // Met a jours les valeurs de champs
-    public function updateWoodyGetFields($value, $post_id, $field)
-    {
-        $woody_get_fields = $this->woodyGetFields($post_id);
-        $old = !empty($woody_get_fields[$post_id][$field['name']]) ? $woody_get_fields[$post_id][$field['name']] : '';
-
-        if ($old != $value) {
-            $woody_get_fields[$post_id][$field['name']] = $value;
-            set_transient('woody_get_fields' . $post_id, $woody_get_fields);
-        }
-
-        return $value;
     }
 
     /**
