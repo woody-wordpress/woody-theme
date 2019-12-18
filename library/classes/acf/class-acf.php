@@ -557,8 +557,7 @@ class WoodyTheme_ACF
         delete_transient('woody_get_field_option');
         delete_transient('woody_get_field_object');
         delete_transient('woody_get_fields_by_group');
-        delete_transient('woody_get_post');
-        // delete_transient('woody_get_fields');
+        delete_transient('woody_acf_get_field');
 
         // Warm Transient
         getWoodyTwigPaths();
