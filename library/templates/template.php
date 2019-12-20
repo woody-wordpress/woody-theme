@@ -165,7 +165,7 @@ abstract class WoodyTheme_TemplateAbstract
         // Add langSwitcher
         $tools_blocks['lang_switcher_button'] = $this->addLanguageSwitcherButton();
         $this->context['lang_switcher_button'] = apply_filters('lang_switcher', $tools_blocks['lang_switcher_button']);
-        $this->context['lang_switcher_button_mobile'] = apply_filters('lang_switcher', $tools_blocks['lang_switcher_button']);
+        $this->context['lang_switcher_button_mobile'] = apply_filters('lang_switcher_mobile', $tools_blocks['lang_switcher_button']);
 
         $this->context['lang_switcher_reveal'] = $this->addLanguageSwitcherReveal();
 
@@ -177,7 +177,7 @@ abstract class WoodyTheme_TemplateAbstract
         // Add addEsSearchBlock
         $tools_blocks['es_search_button'] = $this->addEsSearchButton();
         $this->context['es_search_button'] = apply_filters('es_search_block', $tools_blocks['es_search_button']);
-        $this->context['es_search_button_mobile'] = apply_filters('es_search_block', $tools_blocks['es_search_button']);
+        $this->context['es_search_button_mobile'] = apply_filters('es_search_block_mobile', $tools_blocks['es_search_button']);
 
         $this->context['es_search_reveal'] = $this->addEsSearchReveal();
 
