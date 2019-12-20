@@ -113,7 +113,6 @@
             },
             "choices": {
                
-                "blocks-tabs-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.le-collet.wp.rc-dev.com\/app\/dist\/le-collet\/img\/woody-library\/views\/blocks\/tabs\/tpl_02\/thumbnail.png?version=1.17.3\" alt=\"blocks-tabs-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Template 02<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Template 02<\/h4>Grilles de blocs au choix dans des onglets (barre d'onglets au dessus)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
             },
             "allow_null": 0,
             "other_choice": 0,
