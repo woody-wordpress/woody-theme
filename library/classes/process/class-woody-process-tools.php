@@ -226,26 +226,32 @@ class WoodyTheme_WoodyProcessTools
     {
         $return = [];
         foreach ($effects as $effect_key => $effect) {
-            if (!empty($effect) && is_array($effect)) {
-                switch ($effect_key) {
-                    case 'transform':
-                        foreach ($effect as $transform) {
-                            switch ($transform['transform_type']) {
-                                case 'trnslt-top':
-                                case 'trnslt-bottom':
-                                case 'trnslt-left':
-                                case 'trnslt-right':
-                                    $return['transform'][] = $transform['transform_type'] . '-' . $transform['transform_trnslt_value'];
-                                    break;
-                                case 'rotate-left':
-                                case 'rotate-right':
-                                    $return['transform'][] = $transform['transform_type'] . '-' . $transform['transform_rotate_value'];
-                                    break;
+            if (!empty($effect)) {
+                if (is_array($effect)) {
+                    switch ($effect_key) {
+                        case 'transform':
+                            foreach ($effect as $transform) {
+                                switch ($transform['transform_type']) {
+                                    case 'trnslt-top':
+                                    case 'trnslt-bottom':
+                                    case 'trnslt-left':
+                                    case 'trnslt-right':
+                                        $return['transform'][] = $transform['transform_type'] . '-' . $transform['transform_trnslt_value'];
+                                        break;
+                                    case 'rotate-left':
+                                    case 'rotate-right':
+                                        $return['transform'][] = $transform['transform_type'] . '-' . $transform['transform_rotate_value'];
+                                        break;
+                                }
                             }
-                        }
-                        break;
+                            break;
+                    }
+
+                } elseif($effect_key == 'deep') {
+                    $return['deep'] = 'deep-'.$effect;
                 }
             }
+
         }
 
         if (!empty($return['transform'])) {
