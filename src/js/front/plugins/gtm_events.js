@@ -22,35 +22,35 @@ $.ajax({
 });
 
 if ($('.sharing-links').length) {
-    $('.sharing-links .sharing-button__link').each(function() {
-        $(this).click(function() {
-            var socialshare = 'facebook';
+    $('.sharing-links .sharing-button__link').click(function() {
+        var socialshare = 'facebook';
 
-            if ($(this).hasClass('twitter')) {
-                socialshare = 'twitter';
-            } else if ($(this).hasClass('pinterest')) {
-                socialshare = 'pinterest';
-            } else if ($(this).hasClass('email')) {
-                socialshare = 'email';
+        if ($(this).hasClass('twitter')) {
+            socialshare = 'twitter';
+        } else if ($(this).hasClass('pinterest')) {
+            socialshare = 'pinterest';
+        } else if ($(this).hasClass('email')) {
+            socialshare = 'email';
+        }
+
+        var obj = {
+            eventCategory: 'Pages',
+            eventAction: 'Clic bouton réseaux sociaux',
+            eventLabel: socialshare,
+            eventValue: '',
+            page: {
+                name: globals.post_title
             }
-
-            window.dataLayer.push({
-                event: 'Clic social',
-                socialShare: socialshare,
-                provider: globals.post_title
-            });
-        });
+        };
+        window.dataLayer.push(obj);
     });
 }
 
-
-$('.woody-component-claims-block .claim-content .claim-link .button').each(function(){
-    $(this).click(function() {
-        window.dataLayer.push({
-            event: 'Clic claim button',
-        });
-        if (typeof ga !== 'undefined' && ga != null) {
-            ga('rc.send', 'event', 'claim', 'CLIC_CLAIM_BUTTON', 'Clic claim button', undefined);
-        }
+$('.woody-component-claims-block .claim-content .claim-link .button').click(function() {
+    window.dataLayer.push({
+        event: 'Clic claim button',
     });
+    if (typeof ga !== 'undefined' && ga != null) {
+        ga('rc.send', 'event', 'claim', 'CLIC_CLAIM_BUTTON', 'Clic claim button', undefined);
+    }
 });
