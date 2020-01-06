@@ -5,36 +5,48 @@ window.dataLayer = window.dataLayer || [];
 var obj = {
     eventCategory: 'Pages',
     eventAction: 'Page vue',
-    eventLabel: globals.post_title + '|' + globals.post_id,
+    eventLabel: 'PAGE|' + globals.post_title + '|' + globals.post_id,
     eventValue: '',
-    page: {
-        name: globals.post_title,
-        langue: window.siteConfig.current_lang,
-        lieu: ''
-    }
+    event: 'page_view',
+    page: {}
+},
+page = {
+    name: globals.post_title,
+    id_page: globals.post_id,
+    langue: window.siteConfig.current_lang,
+    type: '',
+    lieu: ''
 };
 
 var getPlace = function() {
-    $.ajax({
-        type: 'POST',
-        dataType: 'json',
-        url: frontendajax.ajaxurl,
-        data: {
-            action: 'get_current_place',
-            post_id: globals.post_id
-        },
-        success: function(response) {
-            if (response.length > 0) {
-                obj.lieu =  response[0];
+    if (typeof frontendajax != "undefined" && frontendajax != null) {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: frontendajax.ajaxurl,
+            data: {
+                action: 'get_current_place',
+                post_id: globals.post_id
+            },
+            success: function(response) {
+                if (response.length > 0) {
+                    page.lieu =  response[0];
+                }
+            },
+            error: function(err) {
+                console.error(err);
             }
-        },
-        error: function(err) {
-            console.error(err);
-        }
-    });
+        });
+    }
+}
+
+var getType = function() {
+    page.type = $('body').attr('class').match(/woodypage-[a-z_\-]+/gi)[0].substr(10);
 }
 
 $.when(getPlace()).then( function() {
+    getType();
+    obj.page = page;
     window.dataLayer.push(obj);
 });
 
@@ -55,9 +67,8 @@ if ($('.sharing-links').length) {
             eventAction: 'Clic bouton réseaux sociaux',
             eventLabel: socialshare,
             eventValue: '',
-            page: {
-                name: globals.post_title
-            }
+            event: 'page_social_network',
+            page: page
         };
         window.dataLayer.push(obj);
     });
