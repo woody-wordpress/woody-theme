@@ -25,6 +25,8 @@ class WoodyTheme_Images
         add_filter('attachment_fields_to_save', [$this, 'attachmentFieldsToSave'], 12, 2); // Priority 12 ater polylang
         add_action('save_attachment', [$this, 'saveAttachment'], 50);
         add_action('delete_attachment', [$this, 'deleteAttachment'], 1);
+        add_action('wp_ajax_get_all_tags', [$this, 'getAllTags']);
+        add_action('wp_ajax_set_attachments_terms', [$this, 'setAttachmentsTerms']);
 
         // Filters
         add_filter('wp_image_editors', [$this, 'wpImageEditors']);
@@ -34,7 +36,14 @@ class WoodyTheme_Images
         add_filter('wp_generate_attachment_metadata', [$this, 'generateAttachmentMetadata'], 10, 2);
         add_filter('wp_handle_upload_prefilter', [$this, 'maxUploadSize']);
         add_filter('upload_mimes', [$this, 'uploadMimes'], 10, 1);
+        add_filter('big_image_size_threshold', [$this, 'bigImageSizeThreshold'], 10, 4);
         // add_filter('wp_handle_upload', [$this, 'convertFileToGeoJSON'], 100, 1);
+    }
+
+    public function bigImageSizeThreshold()
+    {
+        // Désactive la duplication  de photo (filename-scaled.jpg) depuis WP 5.3
+        return false;
     }
 
     public function wpImageEditors()
@@ -44,9 +53,9 @@ class WoodyTheme_Images
 
     public function uploadMimes($mime_types)
     {
-        $mime_types['gpx'] = 'application/xml';
-        $mime_types['kml'] = 'application/xml';
-        $mime_types['kmz'] = 'application/xml';
+        $mime_types['gpx'] = 'text/xml';
+        $mime_types['kml'] = 'text/xml';
+        $mime_types['kmz'] = 'text/xml';
         $mime_types['json'] = 'text/plain';
         $mime_types['geojson'] = 'text/plain';
 
@@ -145,39 +154,55 @@ class WoodyTheme_Images
         return $file;
     }
 
-    // /**
-    //  * Convert a kml or a gpx to GeoJSON
-    //  * @author : Jérémy Legendre
-    //  * @param   file
-    //  * @return  return      file content converted to geoJSON
-    //  */
-    // public function convertFileToGeoJSON($file)
-    // {
-    //     if (strpos($file['file'], 'gpx') || strpos($file['file'], 'kml')) {
-    //         $url = "http://ogre.adc4gis.com/convert";
-    //         $curl = curl_init();
+    /**
+     * Get all tags to create form
+     */
+    public function getAllTags()
+    {
+        $tags = [];
+        $taxonomies = ['themes', 'places', 'seasons'];
 
-    //         $params = [
-    //             'upload' => $file['url'],
-    //             'skipFailures' => true
-    //         ];
+        foreach ($taxonomies as $taxonomy) {
+            $terms = get_terms(array(
+                'taxonomy' => $taxonomy,
+                'hide_empty' => false
+            ));
+            foreach ($terms as $term) {
+                if (!is_wp_error($term)) {
+                    $tags[$taxonomy][] = [
+                        'id' => $term->term_id,
+                        'name' => $term->name
+                    ];
+                }
+            }
+        }
 
-    //         $params_string = http_build_query($params);
-    //         $opts = [
-    //             CURLOPT_URL => $url,
-    //             CURLOPT_POST => true,
-    //             CURLOPT_POSTFIELDS => $params_string,
-    //             CURLOPT_TIMEOUT => 1000,
-    //             CURLOPT_CONNECTTIMEOUT => 1000
-    //         ];
-    //         curl_setopt_array($curl, $opts);
+        wp_send_json($tags);
+    }
 
-    //         $response = curl_exec($curl);
-    //         curl_close($curl);
-    //     }
+    /**
+     * Add terms to attachment post
+     */
+    public function setAttachmentsTerms()
+    {
+        $attach_ids = filter_input(INPUT_POST, 'attach_ids', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
+        $term_ids = filter_input(INPUT_POST, 'term_ids', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
 
-    //     return $file;
-    // }
+        if (!empty($attach_ids) && !empty($term_ids)) {
+            foreach ($attach_ids as $attach_id) {
+                foreach ($term_ids as $term_id) {
+                    $term = get_term($term_id);
+
+                    if (!is_wp_error($term)) {
+                        wp_set_post_terms($attach_id, $term->term_id, $term->taxonomy, true);
+                    }
+                }
+            }
+            wp_send_json(true);
+        } else {
+            wp_send_json(false);
+        }
+    }
 
     // Register the new image sizes for use in the add media modal in wp-admin
     // This is the place where you can set readable names for images size
@@ -407,11 +432,9 @@ class WoodyTheme_Images
     public function generateAttachmentMetadata($metadata, $attachment_id)
     {
         if (wp_attachment_is_image($attachment_id)) {
-            $attachment_metadata = wp_get_attachment_metadata($attachment_id);
 
-            if (!empty($attachment_metadata)) {
-                $metadata = $attachment_metadata;
-            } else {
+            if (empty($metadata['sizes'])) {
+
                 // Get current post
                 $post = get_post($attachment_id);
 

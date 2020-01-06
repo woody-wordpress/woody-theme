@@ -98,6 +98,7 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['metas'] = [];
 
         $this->context['enabled_woody_options'] = WOODY_OPTIONS;
+        $this->context['woody_access_staging'] = WOODY_ACCESS_STAGING;
 
         /******************************************************************************
          * Sommes nous dans le cas d'une page miroir ?
@@ -140,6 +141,10 @@ abstract class WoodyTheme_TemplateAbstract
             $this->context['body_class'] = $this->context['body_class'] . ' woodypage-' . $this->context['page_type'];
         }
 
+        if (!empty($this->context['woody_access_staging'])) {
+            $this->context['body_class'] = $this->context['body_class'] . ' woody_staging';
+        }
+
         // Add generator (Pour julien check ERP)
         $this->context['metas'][] = sprintf('<meta name="generator" content="Raccourci Agency - WP">');
 
@@ -160,7 +165,7 @@ abstract class WoodyTheme_TemplateAbstract
         // Add langSwitcher
         $tools_blocks['lang_switcher_button'] = $this->addLanguageSwitcherButton();
         $this->context['lang_switcher_button'] = apply_filters('lang_switcher', $tools_blocks['lang_switcher_button']);
-        $this->context['lang_switcher_button_mobile'] = apply_filters('lang_switcher', $tools_blocks['lang_switcher_button']);
+        $this->context['lang_switcher_button_mobile'] = apply_filters('lang_switcher_mobile', $tools_blocks['lang_switcher_button']);
 
         $this->context['lang_switcher_reveal'] = $this->addLanguageSwitcherReveal();
 
@@ -172,7 +177,7 @@ abstract class WoodyTheme_TemplateAbstract
         // Add addEsSearchBlock
         $tools_blocks['es_search_button'] = $this->addEsSearchButton();
         $this->context['es_search_button'] = apply_filters('es_search_block', $tools_blocks['es_search_button']);
-        $this->context['es_search_button_mobile'] = apply_filters('es_search_block', $tools_blocks['es_search_button']);
+        $this->context['es_search_button_mobile'] = apply_filters('es_search_block_mobile', $tools_blocks['es_search_button']);
 
         $this->context['es_search_reveal'] = $this->addEsSearchReveal();
 
@@ -439,7 +444,7 @@ abstract class WoodyTheme_TemplateAbstract
     {
         $search_post_id = apply_filters('woody_get_field_option', 'es_search_page_url');
         if (!empty($search_post_id)) {
-            $var = get_permalink(pll_get_post($search_post_id));
+            $var = get_permalink(pll_get_post($search_post_id)) . '?query={search_term_string}';
         }
         return $var;
     }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Varnish
  *
@@ -43,13 +44,17 @@ class WoodyTheme_Varnish
             $sections = get_field('section', $post->ID, false);
             if (is_array($sections)) {
                 foreach ($sections as $section) {
-                    if (!empty($section['section_content']) && is_array($section['section_content'])) {
-                        foreach ($section['section_content'] as $section_content) {
+                    // field_5b043f0525968 == section_content
+                    if (!empty($section['field_5b043f0525968']) && is_array($section['field_5b043f0525968'])) {
+                        foreach ($section['field_5b043f0525968'] as $section_content) {
                             if ($section_content['acf_fc_layout'] == 'tabs_group') {
-                                if (!empty($section_content['tabs']) && is_array($section_content['tabs'])) {
-                                    foreach ($section_content['tabs'] as $tab) {
-                                        if (!empty($tab['light_section_content']) && is_array($tab['light_section_content'])) {
-                                            foreach ($tab['light_section_content'] as $light_section_content) {
+                                // field_5b4722e2c1c13_field_5b471f474efee == tabs
+                                if (!empty($section_content['field_5b4722e2c1c13_field_5b471f474efee']) && is_array($section_content['field_5b4722e2c1c13_field_5b471f474efee'])) {
+                                    foreach ($section_content['field_5b4722e2c1c13_field_5b471f474efee'] as $tab) {
+                                        // field_5b4728182f9b0_field_5b4727a878098_field_5b91294459c24 == light_section_content
+                                        if (!empty($tab['field_5b4728182f9b0_field_5b4727a878098_field_5b91294459c24']) && is_array($tab['field_5b4728182f9b0_field_5b4727a878098_field_5b91294459c24'])) {
+                                            foreach ($tab['field_5b4728182f9b0_field_5b4727a878098_field_5b91294459c24'] as $light_section_content) {
+                                                $light_section_content['focused_sort'] = (!empty($light_section_content['field_5b912bde59c2b_field_5b27a67203e48'])) ? $light_section_content['field_5b912bde59c2b_field_5b27a67203e48'] : '';
                                                 $ttl = $this->getTLLbyField($light_section_content);
                                                 if (!empty($ttl)) {
                                                     $woody_varnish_caching_ttl = $ttl;
@@ -60,6 +65,9 @@ class WoodyTheme_Varnish
                                     }
                                 }
                             } else {
+                                if ($section_content['acf_fc_layout'] == 'auto_focus' && !(empty($section_content['field_5b27a7859ddeb_field_5b27a67203e48']))) {
+                                    $section_content['focused_sort'] = $section_content['field_5b27a7859ddeb_field_5b27a67203e48'];
+                                }
                                 $ttl = $this->getTLLbyField($section_content);
                                 if (!empty($ttl)) {
                                     $woody_varnish_caching_ttl = $ttl;
@@ -83,6 +91,8 @@ class WoodyTheme_Varnish
             return WOODY_VARNISH_CACHING_FOCUSRANDOM_TTL;
         } elseif ($section_content['acf_fc_layout'] == 'weather') {
             return WOODY_VARNISH_CACHING_WEATHERPAGE_TTL;
+        } elseif ($section_content['acf_fc_layout'] == 'infolive') {
+            return WOODY_VARNISH_CACHING_LIVEPAGE_TTL;
         }
     }
 }

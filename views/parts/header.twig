@@ -37,6 +37,13 @@
     {{ page_parts.top_header|default }}
     {{ page_parts.main_menu|default }}
 </div>
+
+{% if page_parts.sticky_bar %}
+	<div class="woody-component-stickybar">
+		{{ page_parts.sticky_bar }}
+	</div>
+{% endif %}
+
 <div class="woody-component-mobilenavs">
     {{ page_parts.mobile_menu|default }}
     <ul class="tools list-unstyled flex-container align-middle hide-for-xlarge">

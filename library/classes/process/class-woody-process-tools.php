@@ -75,7 +75,7 @@ class WoodyTheme_WoodyProcessTools
      *
      */
 
-    function getFocusBlockTitles($wrapper)
+    public function getFocusBlockTitles($wrapper)
     {
         $data = [];
 
@@ -100,19 +100,30 @@ class WoodyTheme_WoodyProcessTools
      * @return   data - Un tableau de données
      *
      **/
-    function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = '', $lastfallback_item = '', $lastfallback_field = '')
+    public function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = '', $lastfallback_item = '', $lastfallback_field = '')
     {
-        if (!empty(get_field($field, $item->ID))) {
+        $value = null;
+
+        if (!empty($item) && is_object($item)) {
             $value = get_field($field, $item->ID);
-        } elseif (!empty($fallback_item) && is_array($fallback_item) && !empty($fallback_item[$fallback_field])) {
-            $value = $fallback_item[$fallback_field];
-        } elseif (!empty($fallback_item) && is_object($fallback_item) && !empty(get_field($fallback_field, $fallback_item->ID))) {
-            $value = get_field($fallback_field, $fallback_item->ID);
-        } elseif (!empty($lastfallback_item) && !empty(get_field($lastfallback_field, $lastfallback_item->ID))) {
-            $value = get_field($lastfallback_field, $lastfallback_item->ID);
-        } else {
-            $value = '';
         }
+
+        if (empty($value) && !empty($fallback_item) && !empty($fallback_field)) {
+            if (is_array($fallback_item) && !empty($fallback_item[$fallback_field])) {
+                $value = $fallback_item[$fallback_field];
+            } elseif (is_object($fallback_item) && !empty($fallback_item->ID)) {
+                $value = get_field($fallback_field, $fallback_item->ID);
+            }
+        }
+
+        if (empty($value) && !empty($lastfallback_item) && !empty($lastfallback_field)) {
+            if (is_array($lastfallback_item) && !empty($lastfallback_item[$lastfallback_field])) {
+                $value = $lastfallback_item[$lastfallback_field];
+            } elseif (is_object($lastfallback_item) && !empty($lastfallback_item->ID)) {
+                $value = get_field($lastfallback_field, $lastfallback_item->ID);
+            }
+        }
+
         return $value;
     }
 
@@ -126,7 +137,7 @@ class WoodyTheme_WoodyProcessTools
      *
      */
 
-    function getDisplayOptions($wrapper)
+    public function getDisplayOptions($wrapper)
     {
         $display = [];
         $classes_array = [];
@@ -162,7 +173,7 @@ class WoodyTheme_WoodyProcessTools
      * @return   attachements - Un tableau d'objets images au format "ACF"
      *
      */
-    function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array())
+    public function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array())
     {
 
         // On définit certains arguments par défaut pour la requête
@@ -211,30 +222,36 @@ class WoodyTheme_WoodyProcessTools
      * @return   return - Un tableau
      *
      */
-    function formatVisualEffectData($effects)
+    public function formatVisualEffectData($effects)
     {
         $return = [];
         foreach ($effects as $effect_key => $effect) {
-            if (!empty($effect) && is_array($effect)) {
-                switch ($effect_key) {
-                    case 'transform':
-                        foreach ($effect as $transform) {
-                            switch ($transform['transform_type']) {
-                                case 'trnslt-top':
-                                case 'trnslt-bottom':
-                                case 'trnslt-left':
-                                case 'trnslt-right':
-                                    $return['transform'][] = $transform['transform_type'] . '-' . $transform['transform_trnslt_value'];
-                                    break;
-                                case 'rotate-left':
-                                case 'rotate-right':
-                                    $return['transform'][] = $transform['transform_type'] . '-' . $transform['transform_rotate_value'];
-                                    break;
+            if (!empty($effect)) {
+                if (is_array($effect)) {
+                    switch ($effect_key) {
+                        case 'transform':
+                            foreach ($effect as $transform) {
+                                switch ($transform['transform_type']) {
+                                    case 'trnslt-top':
+                                    case 'trnslt-bottom':
+                                    case 'trnslt-left':
+                                    case 'trnslt-right':
+                                        $return['transform'][] = $transform['transform_type'] . '-' . $transform['transform_trnslt_value'];
+                                        break;
+                                    case 'rotate-left':
+                                    case 'rotate-right':
+                                        $return['transform'][] = $transform['transform_type'] . '-' . $transform['transform_rotate_value'];
+                                        break;
+                                }
                             }
-                        }
-                        break;
+                            break;
+                    }
+
+                } elseif($effect_key == 'deep') {
+                    $return['deep'] = 'deep-'.$effect;
                 }
             }
+
         }
 
         if (!empty($return['transform'])) {
@@ -253,7 +270,7 @@ class WoodyTheme_WoodyProcessTools
      * @return   file - Une url
      *
      */
-    function getSectionBannerFiles($filename)
+    public function getSectionBannerFiles($filename)
     {
         if (file_exists(get_stylesheet_directory() . '/views/section_banner/section_' . $filename . '.twig')) {
             $file = file_get_contents(get_stylesheet_directory() . '/views/section_banner/section_' . $filename . '.twig');
@@ -268,20 +285,20 @@ class WoodyTheme_WoodyProcessTools
      * Nom : replacePattern
      * Auteur : Jérémy Legendre
      * Return : Retourne la string avec le pattern modifié (devenu le count de la playlist)
-     * @param    item - Le scope (un objet post)
+     * @param    post - Le scope (un objet post)
      * @param    str  - La phrase (titre, surtitre, sous-titre, description)
      * @return   return - La phrase modifiée
      *
      **/
-    function replacePattern($str, $item = null)
+    public function replacePattern($str, $post = null)
     {
         $return = '';
 
-        if ($item != null) {
+        if ($post != null) {
             $pattern = "/%nombre%/";
             preg_match($pattern, $str, $matches);
             if (!empty($matches)) {
-                $confId = $item->get_field('playlist_conf_id');
+                $confId = $post->get_field('playlist_conf_id');
                 $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), array(), 'json');
 
                 if (!empty($playlist)) {
@@ -314,28 +331,32 @@ class WoodyTheme_WoodyProcessTools
         return $return;
     }
 
-    public function getAttachmentMoreData($attachment_id)
+    public function getAttachmentMoreData($attachment_id = null)
     {
         $attachment_data = [];
-        $attachment_data['is_instagram'] = isWoodyInstagram($attachment_id);
+        if (!empty($attachment_id) && is_int($attachment_id)) {
+            $attachment_data['is_instagram'] = isWoodyInstagram($attachment_id);
 
-        if ($attachment_data['is_instagram']) {
-            $attachment_data['instagram_metadata'] = $this->getInstagramMetadata($attachment_id);
+            if ($attachment_data['is_instagram']) {
+                $attachment_data['instagram_metadata'] = $this->getInstagramMetadata($attachment_id);
+            }
+
+            $attachment_data['linked_page'] = get_field('field_5c0553157e6d0', $attachment_id);
+            $attachment_data['author'] = get_field('field_5b5585503c855', $attachment_id);
+            $attachment_data['lat'] = get_field('field_5b55a88e70cbf', $attachment_id);
+            $attachment_data['lng'] = get_field('field_5b55a89e70cc0', $attachment_id);
         }
-
-        $attachment_data['linked_page'] = get_field('field_5c0553157e6d0', $attachment_id);
-        $attachment_data['author'] = get_field('field_5b5585503c855', $attachment_id);
-        $attachment_data['lat'] = get_field('field_5b55a88e70cbf', $attachment_id);
-        $attachment_data['lng'] = get_field('field_5b55a89e70cc0', $attachment_id);
 
         return $attachment_data;
     }
 
-    private function getInstagramMetadata($attachment_id)
+    private function getInstagramMetadata($attachment_id = null)
     {
-        $img_all_data = get_post_meta($attachment_id);
-        $img_all_metadata = (!empty($img_all_data['_wp_attachment_metadata'][0])) ? maybe_unserialize($img_all_data['_wp_attachment_metadata'][0]) : '';
-        return (!empty($img_all_metadata['woody-instagram'])) ? $img_all_metadata['woody-instagram'] : '';
+        if (!empty($attachment_id) && is_int($attachment_id)) {
+            $img_all_data = get_post_meta($attachment_id);
+            $img_all_metadata = (!empty($img_all_data['_wp_attachment_metadata'][0])) ? maybe_unserialize($img_all_data['_wp_attachment_metadata'][0]) : '';
+            return (!empty($img_all_metadata['woody-instagram'])) ? $img_all_metadata['woody-instagram'] : '';
+        }
     }
 
     public function countFocusResults($items, $return)

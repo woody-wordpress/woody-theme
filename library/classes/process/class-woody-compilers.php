@@ -16,7 +16,6 @@ use WoodyProcess\Tools\WoodyTheme_WoodyProcessTools;
 
 class WoodyTheme_WoodyCompilers
 {
-
     protected $tools;
     protected $getter;
 
@@ -67,7 +66,8 @@ class WoodyTheme_WoodyCompilers
 
             $the_items['no_padding'] = (!empty($wrapper['focus_no_padding'])) ? $wrapper['focus_no_padding'] : '';
             $the_items['block_titles'] = $this->tools->getFocusBlockTitles($wrapper);
-            $the_items['display_button'] = (!empty($wrapper['display_button'])) ? $wrapper['display_button'] : '';
+            $the_items['display_button'] = (!empty($wrapper['display_button'])) ? $wrapper['display_button'] : false;
+            $the_items['display_img'] = (!empty($wrapper['display_img'])) ? $wrapper['display_img'] : false;
             $the_items['default_marker'] = $wrapper['default_marker'];
             $the_items['visual_effects'] = $wrapper['visual_effects'];
 
@@ -89,7 +89,7 @@ class WoodyTheme_WoodyCompilers
                 }
             }
 
-            $return = \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items);
+            $return = !empty($wrapper['woody_tpl']) ? \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items) : \Timber::compile($twigPaths['blocks-focus-tpl_103'], $the_items) ;
         }
 
         return $return;
@@ -189,7 +189,7 @@ class WoodyTheme_WoodyCompilers
         return $return;
     }
 
-    function formatSemanticViewData($wrapper, $twigPaths)
+    public function formatSemanticViewData($wrapper, $twigPaths)
     {
         $return = '';
         $the_items = [];
@@ -204,7 +204,6 @@ class WoodyTheme_WoodyCompilers
                 $the_query['post__in'][] = $included_id;
             }
         } else {
-
             if ($wrapper['semantic_view_type'] == 'sisters') {
                 $parent_id = wp_get_post_parent_id($post_id);
             } else {
@@ -290,15 +289,15 @@ class WoodyTheme_WoodyCompilers
         if (empty($default_items)) {
             $default_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid'], true);
             set_transient($transient_name, $default_items);
+        }
 
-            // On crée/update l'option qui liste les transients pour pouvoir les supprimer lors d'un save_post
-            $transient_list = get_option('list_filters_cache');
-            if (empty($transient_list)) {
-                add_option('list_filters_cache', [$transient_name]);
-            } else {
-                $transient_list[] = $transient_name;
-                update_option('list_filters_cache', $transient_list);
-            }
+        // On crée/update l'option qui liste les transients pour pouvoir les supprimer lors d'un save_post
+        $transient_list = get_option('list_filters_cache');
+        if (empty($transient_list)) {
+            add_option('list_filters_cache', [$transient_name]);
+        } elseif (!array_key_exists($transient_name, $transient_list)) {
+            $transient_list[] = $transient_name;
+            update_option('list_filters_cache', $transient_list);
         }
 
         // On récupère les ids des posts non filtrés pour les passer au paramètre post__in de la query
@@ -369,7 +368,7 @@ class WoodyTheme_WoodyCompilers
         }
 
         // Récupère la pagination compilée
-        if (!empty($the_items['max_num_pages'])) {
+        if ($paginate && !empty($the_items['max_num_pages'])) {
             $the_list['pager'] = $this->formatListPager($the_items['max_num_pages'], $wrapper['uniqid'], $list_el_wrapper['seed']);
         }
 

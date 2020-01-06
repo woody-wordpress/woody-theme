@@ -129,6 +129,8 @@ function getWoodyIcons()
 
     $return = array_merge($core_icons, $site_icons, $station_icons);
 
+    apply_filters('woody_add_more_icons', $return);
+
     return $return;
 }
 
@@ -193,8 +195,10 @@ function getPageTerms($post_id)
 
     foreach ($taxonomies as $taxonomy) {
         $terms = wp_get_post_terms($post_id, $taxonomy->name);
-        foreach ($terms as $term) {
-            $return[] = 'term-' . $term->slug;
+        if (!is_wp_error($terms)) {
+            foreach ($terms as $term) {
+                $return[] = 'term-' . $term->slug;
+            }
         }
     }
 
@@ -272,4 +276,15 @@ function isWoodyInstagram($attachment_id)
     }
 
     return false;
+}
+
+
+/***************************
+ * Minutes to Hours converter
+ *****************************/
+function minuteConvert($num)
+{
+    $convertedTime['hours'] = floor($num / 60);
+    $convertedTime['minutes'] = round((($num / 60) - $convertedTime['hours']) * 60);
+    return $convertedTime;
 }

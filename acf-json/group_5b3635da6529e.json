@@ -48,6 +48,13 @@
                 "operator": "==",
                 "value": "page"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "tourtrip_step"
+            }
         ]
     ],
     "menu_order": 40,
@@ -57,6 +64,6 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": 1,
-    "description": "Groupe latitude \/ longitude pour géolocaliser les pages",
-    "modified": 1567762238
+    "description": "Groupe latitude \/ longitude pour géolocaliser les pages et les étapes de circuit",
+    "modified": 1574332362
 }

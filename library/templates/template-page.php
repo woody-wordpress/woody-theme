@@ -129,9 +129,12 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         /*********************************************
          * Compilation du bloc prix
          *********************************************/
-        
-        $trip_types = ['trip'];
+
+        $trip_types = [];
         $trip_term = get_term_by('slug', 'trip', 'page_type');
+        if (!empty($trip_term)) {
+            $trip_types[] = $trip_term->slug;
+        }
         $trip_children = get_terms('page_type', ['child_of' => $trip_term->term_id, 'hide_empty' => false, 'hierarchical' => true]);
 
         if (!is_wp_error($trip_children) && !empty($trip_children)) {
@@ -148,6 +151,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             ];
         }
 
+        $trip_types = apply_filters('woody_trip_types', $trip_types);
+
         if (in_array($this->context['page_type'], $trip_types)) {
             $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d', $this->context['post']);
 
@@ -158,6 +163,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 if (!empty($trip_infos['the_price']['activate_quotation'])) {
                     $trip_infos['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price']);
                     $quotation_id = get_option("options_quotation_page_url");
+                    $quotation_id = pll_get_post($quotation_id) !== false ? pll_get_post($quotation_id) : $quotation_id;
                     $trip_infos['quotation_link']['link_label'] = get_permalink($quotation_id) . "?sejour=" . $this->context['post_id'];
                 }
                 if (!empty($trip_infos['the_duration']['duration_unit']) && $trip_infos['the_duration']['duration_unit'] == 'component_based') {
@@ -165,7 +171,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 }
             }
             // If price equals 0, replace elements to display Free
-            if (isset($trip_infos['the_price']['price']) && $trip_infos['the_price']['price'] === "0") {
+            if (isset($trip_infos['the_price']['price']) && $trip_infos['the_price']['price'] == 0) {
                 $trip_infos['the_price']['price'] = __("Gratuit", "woody-theme");
                 $trip_infos['the_price']['prefix_price'] = "";
                 $trip_infos['the_price']['suffix_price'] = "";
@@ -174,6 +180,19 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             // If empty people min and people max, unset people
             if (empty($trip_infos['the_peoples']['peoples_min']) && empty($trip_infos['the_peoples']['peoples_max'])) {
                 unset($trip_infos['the_peoples']);
+            }
+
+            // Convert minutes to hours if > 60
+            if ($trip_infos['the_duration']['duration_unit'] === 'minutes') {
+                $minutes_num = intval($trip_infos['the_duration']['count_minutes']);
+                if ($minutes_num >= 60) {
+                    $trip_infos['the_duration']['duration_unit'] = 'hours';
+                    $convertedTime = minuteConvert($minutes_num);
+                    $trip_infos['the_duration']['count_hours'] = (!empty($convertedTime['hours'])) ? strval($convertedTime['hours']) : '';
+                    $trip_infos['the_duration']['count_minutes'] = (!empty($convertedTime['minutes'])) ? strval($convertedTime['minutes']) : '';
+                }
+            } elseif ($trip_infos['the_duration']['duration_unit'] === 'hours') {
+                $trip_infos['the_duration']['count_minutes'] = '';
             }
 
             if (!empty($trip_infos['the_duration']['count_days']) || !empty($trip_infos['the_length']['length']) || !empty($trip_infos['the_price']['price'])) {
@@ -217,6 +236,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     unset($page_teaser['breadcrumb']);
                 }
 
+                $page_teaser = apply_filters('woody_custom_page_teaser', $page_teaser, $this->context);
+
                 $this->context['page_teaser'] = Timber::compile($this->context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
             }
 
@@ -234,6 +255,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 if (!empty($page_hero['page_heading_img'])) {
                     $page_hero['page_heading_img']['attachment_more_data'] = (!empty($page_hero['page_heading_img']['ID'])) ? $this->tools->getAttachmentMoreData($page_hero['page_heading_img']['ID']) : [];
                 }
+
                 if (!empty($page_hero['page_heading_add_social_movie']) && !empty($page_hero['page_heading_social_movie'])) {
                     preg_match_all('@src="([^"]+)"@', $page_hero['page_heading_social_movie'], $result);
                     if (!empty($result[1]) && !empty($result[1][0])) {
@@ -249,6 +271,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $page_hero['title'] = (!empty($page_hero['title'])) ? str_replace('-', '&#8209', $page_hero['title']) : '';
                 $this->context['page_hero'] = Timber::compile($this->context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
             }
+
+            $this->context = apply_filters('woody_page_context', $this->context);
         }
     }
 
@@ -294,6 +318,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 foreach ($bookblock['bookblock_playlists'] as $pl_key => $pl) {
                     $bookblock['bookblock_playlists'][$pl_key]['permalink'] = get_permalink($pl['pl_post_id']);
                     $pl_confId = get_field('field_5b338ff331b17', $pl['pl_post_id']);
+                    $bookblock['bookblock_playlists'][$pl_key]['pl_conf_id'] = $pl_confId;
                     if (!empty($pl_confId)) {
                         $pl_lang = pll_get_post_language($pl['pl_post_id']);
                         $pl_params = apply_filters('woody_hawwwai_playlist_render', $pl_confId, $pl_lang, array(), 'json');
@@ -302,9 +327,17 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                             foreach ($facets as $facet) {
                                 if ($facet['type'] === 'daterangeWithAvailabilities') {
                                     $bookblock['bookblock_playlists'][$pl_key]['filters']['id'] = $facet['id'];
-                                    $bookblock['bookblock_playlists'][$pl_key]['filters']['daterange'] = true;
                                     $bookblock['bookblock_playlists'][$pl_key]['filters']['translations'] = (!empty($facet['TR'])) ? $facet['TR'] : '';
                                     $bookblock['bookblock_playlists'][$pl_key]['filters']['display_options'] = (!empty($facet['display_options'])) ? $facet['display_options'] : '';
+                                    if (!empty($facet['display_options']['booking_range']['values'])) {
+                                        $range_values = $facet['display_options']['booking_range']['values'];
+                                        if ($range_values[0]['mode'] == 3 && !empty($range_values[0]['customValue'])) {
+                                            $bookblock['bookblock_playlists'][$pl_key]['filters']['singledate'] = true;
+                                            $bookblock['bookblock_playlists'][$pl_key]['filters']['periods'] = $range_values[0]['customValue'];
+                                        } else {
+                                            $bookblock['bookblock_playlists'][$pl_key]['filters']['daterange'] = true;
+                                        }
+                                    }
                                     if (!empty($facet['display_options']['persons']['values'])) {
                                         foreach ($facet['display_options']['persons']['values'] as $person) {
                                             if (!empty($person['field'])) {
@@ -330,55 +363,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $this->context['sections'] = [];
         if (!empty($this->context['timberpost'])) {
             $sections = $this->context['timberpost']->get_field('section');
-
-            if (!empty($sections) && is_array($sections)) {
-                foreach ($sections as $section_id => $section) {
-                    $the_header = '';
-                    $the_layout = '';
-
-                    if (!empty($section['icon']) || !empty($section['pretitle']) || !empty($section['title']) || !empty($section['subtitle']) || !empty($section['description'])) {
-                        $the_header = Timber::compile($this->context['woody_components']['section-section_header-tpl_01'], $section);
-                    }
-
-                    // Pour chaque bloc d'une section, on compile les données dans un template Woody
-                    // Puis on les compile dans le template de grille Woody selectionné
-                    $components = [];
-                    $components['no_padding'] = $section['scope_no_padding'];
-                    $components['alignment'] = (!empty($section['section_alignment'])) ? $section['section_alignment'] : '';
-
-                    if (!empty($section['section_content'])) {
-                        foreach ($section['section_content'] as $layout_id => $layout) {
-                            // On définit un uniqid court à utiliser dans les filtres de listes en paramètre GET
-                            // Uniqid long : section . $section_id . '_section_content' . $layout_id
-                            $layout['uniqid'] = 's' . $section_id . 'sc' . $layout_id;
-                            $layout['visual_effects'] = (!empty($layout['visual_effects'])) ? $this->tools->formatVisualEffectData($layout['visual_effects']) : '';
-                            $components['items'][] = $this->process->processWoodyLayouts($layout, $this->context);
-                        }
-
-                        if (!empty($section['section_woody_tpl'])) {
-                            $the_layout = Timber::compile($this->context['woody_components'][$section['section_woody_tpl']], $components);
-                        }
-                    }
-
-                    // On récupère les données d'affichage personnalisables
-                    $display = $this->tools->getDisplayOptions($section);
-
-                    // On ajoute les 3 parties compilées d'une section + ses paramètres d'affichage
-                    // puis on compile le tout dans le template de section Woody
-                    $the_section = [
-                        'header' => $the_header,
-                        'layout' => $the_layout,
-                        'display' => $display,
-                    ];
-                    if (!empty($section['section_banner'])) {
-                        foreach ($section['section_banner'] as $banner) {
-                            $the_section[$banner] = $this->tools->getSectionBannerFiles($banner);
-                        }
-                    }
-
-                    $this->context['the_sections'][] = Timber::compile($this->context['woody_components']['section-section_full-tpl_01'], $the_section);
-                }
-            }
+            $this->context['the_sections'] = $this->process->processWoodySections($sections, $this->context);
         }
     }
 
@@ -457,6 +442,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         // Return template
         if (empty($this->context['playlist_tourism']['content'])) {
             $this->context['playlist_tourism']['content'] = '<center style="margin: 80px 0">Playlist non configurée</center>';
+            status_header('410');
         }
 
         // handle api error
@@ -497,7 +483,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         if ($this->context['page_type'] === 'playlist_tourism' && !empty($listpage) && is_numeric($listpage)) {
             $url .= '?listpage=' . $listpage;
         }
-
         return $url;
     }
 }

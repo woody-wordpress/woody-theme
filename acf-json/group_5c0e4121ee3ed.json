@@ -212,6 +212,18 @@
                 "operator": "==",
                 "value": "front_page"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "woody_model"
+            },
+            {
+                "param": "page_type_and_children",
+                "operator": "==",
+                "value": "front_page"
+            }
         ]
     ],
     "menu_order": -19,
