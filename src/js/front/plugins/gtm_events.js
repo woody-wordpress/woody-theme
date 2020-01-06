@@ -3,9 +3,9 @@ import $ from 'jquery';
 window.dataLayer = window.dataLayer || [];
 
 var obj = {
-    eventCategory: 'Pages',
+    eventCategory: 'PAGE|' + globals.post_title + '|' + globals.post_id,
     eventAction: 'Page vue',
-    eventLabel: 'PAGE|' + globals.post_title + '|' + globals.post_id,
+    eventLabel: globals.post_id,
     eventValue: '',
     event: 'page_view',
     page: {}
@@ -40,12 +40,12 @@ var getPlace = function() {
     }
 }
 
-var getType = function() {
-    page.type = $('body').attr('class').match(/woodypage-[a-z_\-]+/gi)[0].substr(10);
+var setType = function() {
+    page.type = $('body').attr('class').match(/woodypage-[a-z_\-]+/gi) != null ? $('body').attr('class').match(/woodypage-[a-z_\-]+/gi)[0].substr(10) : '';
 }
 
 $.when(getPlace()).then( function() {
-    getType();
+    setType();
     obj.page = page;
     window.dataLayer.push(obj);
 });
