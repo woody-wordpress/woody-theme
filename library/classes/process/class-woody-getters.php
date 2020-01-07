@@ -161,11 +161,13 @@ class WoodyTheme_WoodyGetters
      */
     public function getAutoFocusTopicsData($wrapper)
     {
-        $items = [];
+        $items = [
+            'items' => []
+        ];
 
         $feeds = [];
-        foreach ($wrapper['topic_newspaper'] as $term_id) {
-            $term = get_term($term_id, 'topic_newspaper');
+        foreach ($wrapper['topic_source'] as $term_id) {
+            $term = get_term($term_id, 'topic_source');
             $feeds[] = $term->name;
         }
         $time = !empty($wrapper['publish_date']) ? strtotime($wrapper['publish_date']) : 0;
@@ -504,12 +506,19 @@ class WoodyTheme_WoodyGetters
         $data['post_id'] = $item->ID;
         $data['title'] = !empty($item->post_title) ? $item->post_title : '';
 
-        if (!empty($item->woody_topic_img)) {
+        if (!empty($item->woody_topic_img) && !$item->woody_topic_attachment) {
             $img = [
                 'url' => 'https://api.tourism-system.com/resize/crop/%width%/%height%/70/' . base64_encode($item->woody_topic_img) . '/image.jpg',
                 'resizer' => true
             ];
             $data['img'] = $img;
+        } elseif (!empty($item->woody_topic_attachment)) {
+            $url = !empty(wp_get_attachment_image_src($item->woody_topic_attachment)) ? wp_get_attachment_image_src($item->woody_topic_attachment)[0] : '';
+
+            $data['img'] = [
+                'url' => $url,
+                'resizer' => true
+            ];
         }
 
         if (!empty($item->woody_topic_desc)) {
