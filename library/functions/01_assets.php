@@ -11,7 +11,7 @@ use Symfony\Component\Finder\Finder;
  * @return   page_teaser_fields - Un tableau de données
  *
  */
-function getAcfGroupFields($group_id, $post = null)
+function getAcfGroupFields($group_id, $post = null, $display_empty = false)
 {
     if (is_null($post)) {
         $post = get_post();
@@ -29,7 +29,9 @@ function getAcfGroupFields($group_id, $post = null)
                     $field_value = get_field($field['name'], $post_id);
                 }
 
-                if ($field_value && !empty($field_value)) {
+                if ($display_empty) {
+                    $the_fields[$field['name']] = $field_value;
+                } elseif ($field_value && !empty($field_value)) {
                     $the_fields[$field['name']] = $field_value;
                 }
             }
@@ -284,6 +286,46 @@ function isWoodyInstagram($attachment_id)
     return false;
 }
 
+/**
+ *
+ * Nom : getPostRootAncestor
+ * Auteur : Benoit Bouchaud
+ * Return : Retourne une chaîne de caractères trandsformée
+ * @param    $token - STR : la chaîne à transformer
+ * @return   return - STR : la chaîne transfomée
+ *
+ */
+function woody_untokenize($token)
+{
+    // On définit les correspondances des tokens
+    $patterns = [
+            '%site_name%' => get_bloginfo('name'),
+            '%post_title%' => get_the_title(),
+            '%hero_title%' => get_field('field_5b041d61adb72'),
+            '%hero_desc%' => get_field('field_5b041dbfadb74'),
+            '%teaser_desc%' => get_field('field_5b2bbbfaec6b2'),
+            '%focus_title%' => get_field('field_5b0d380e04203'),
+            '%focus_desc%' => get_field('field_5b0d382404204')
+        ];
+
+    // On remplace les token par les valeurs des champs correspondants
+    if (!empty($token)) {
+        foreach ($patterns as $pattern_key => $pattern) {
+            $token = str_replace($pattern_key, $pattern, $token);
+        }
+    }
+
+    // On retire les balises html (pour les descriptions essentiellement)
+    $token = str_replace('&nbsp; ', '', $token);
+    $token = trim(strip_tags($token));
+
+    // On limite la chaine à +/- 150 caractères sans couper de mot
+    if (strlen($token) > 170) {
+        $token = substr($token, 0, strpos($token, ' ', 150));
+    }
+
+    return $token;
+}
 
 /***************************
  * Minutes to Hours converter

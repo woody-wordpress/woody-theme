@@ -1,6 +1,10 @@
 // Groupe Woody SEO
 #acf-group_5d7f7cd5615c0 {
 
+    // ********************* //
+    // Tokens styles
+    // ********************* //
+
     .tokenize {
         >.acf-input {
             display: none;
@@ -86,19 +90,5 @@
         margin-top: 10px;
     }
 
-    .woodyseo-preview {
 
-        .mce-statusbar,
-        .mce-top-part {
-            display: none;
-        }
-
-        .mce-edit-area {
-            pointer-events: none;
-        }
-
-        .wp-editor-container {
-            border-radius: 6px;
-        }
-    }
 }

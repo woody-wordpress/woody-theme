@@ -19,7 +19,6 @@ abstract class WoodyTheme_TemplateAbstract
 
     public function __construct()
     {
-
         if (!class_exists('Timber')) {
             header('HTTP/1.1 503 Service Temporarily Unavailable');
             header('Status: 503 Service Temporarily Unavailable');
@@ -103,7 +102,7 @@ abstract class WoodyTheme_TemplateAbstract
 
         // SEO Context
         $this->context['metas'] = $this->setMetadata();
-        $this->context['title'] = $this->untokenize(get_field('field_5d7f7dea20bb1'));
+        $this->context['title'] = woody_untokenize(get_field('field_5d7f7dea20bb1'));
 
         /******************************************************************************
          * Sommes nous dans le cas d'une page miroir ?
@@ -334,7 +333,7 @@ abstract class WoodyTheme_TemplateAbstract
         // ******************************* //
         // On récupère les informations saisies dans Woody SEO
         // ******************************* //
-        $woody_seo_data = getAcfGroupFields('group_5d7f7cd5615c0');
+        $woody_seo_data = getAcfGroupFields('group_5d7f7cd5615c0', null, true);
 
         if (!empty($woody_seo_data)) {
             foreach ($woody_seo_data as $data_key => $data) {
@@ -342,91 +341,97 @@ abstract class WoodyTheme_TemplateAbstract
                     $woody_seo_data[$data_key] = trim($data);
                 }
 
+
                 switch ($data_key) {
                     case 'woodyseo_meta_description':
                         $return[] = [
                             'tag' => 'meta',
                             'attributes' => [
                                 'name' => 'description',
-                                'content' => $this->untokenize($data)
+                                'content' => woody_untokenize($data)
                             ]
                         ];
                         break;
                     case 'woodyseo_fb_title':
-                        $return[] = [
+
+                        $return['fb_title'] = [
                             'tag' => 'meta',
-                            'attributes' => [
-                                'property' => 'og:title',
-                                'content' => $this->untokenize($data)
-                            ]
+                                'attributes' => [
+                                    'property' => 'og:title',
+                                ]
                         ];
+
+                        if (!empty($data)) {
+                            $return['fb_title']['attributes']['content'] = woody_untokenize($data);
+                        } else {
+                            $return['fb_title']['attributes']['content'] = woody_untokenize(get_field('woodyseo_meta_title'));
+                        }
                         break;
                     case 'woodyseo_fb_description':
-                        $return[] = [
-                            'tag' => 'meta',
-                            'attributes' => [
-                                'property' => 'og:description',
-                                'content' => $this->untokenize($data)
-                            ]
-                        ];
+                            $return['fb_description'] = [
+                                'tag' => 'meta',
+                                'attributes' => [
+                                    'property' => 'og:description',
+                                ]
+                            ];
+
+                            if (!empty($data)) {
+                                $return['fb_description']['attributes']['content'] = woody_untokenize($data);
+                            } else {
+                                $return['fb_description']['attributes']['content'] = woody_untokenize(get_field('woodyseo_meta_description'));
+                            }
                         break;
                     case 'woodyseo_fb_image':
-                        $return['og_image'] = [
-                            'tag' => 'meta',
-                            'attributes' => [
-                                'property' => 'og:image',
-                                'content' => $data['sizes']['ratio_2_1']
-                            ]
-                        ];
+                        if (!empty($data) && !empty($data['sizes'])) {
+                            $return['og_image'] = [
+                                'tag' => 'meta',
+                                'attributes' => [
+                                    'property' => 'og:image',
+                                    'content' => $data['sizes']['ratio_2_1']
+                                ]
+                            ];
+                        }
                         break;
                     case 'woodyseo_twitter_title':
-                        $return[] = [
+                        $return['twitter_title'] = [
                             'tag' => 'meta',
                             'attributes' => [
                                 'property' => 'twitter:title',
-                                'content' => $this->untokenize($data)
                             ]
                         ];
+
+                        if (!empty($data)) {
+                            $return['twitter_title']['attributes']['content'] = woody_untokenize($data);
+                        } else {
+                            $return['twitter_title']['attributes']['content'] = woody_untokenize(get_field('woodyseo_meta_title'));
+                        }
                         break;
                     case 'woodyseo_twitter_description':
-                        $return[] = [
+                        $return['twitter_description'] = [
                             'tag' => 'meta',
                             'attributes' => [
                                 'property' => 'twitter:description',
-                                'content' => $this->untokenize($data)
                             ]
                         ];
+
+                        if (!empty($data)) {
+                            $return['twitter_description']['attributes']['content'] = woody_untokenize($data);
+                        } else {
+                            $return['twitter_description']['attributes']['content'] = woody_untokenize(get_field('woodyseo_meta_description'));
+                        }
                         break;
                     case 'woodyseo_twitter_image':
-                        $return['twitter_image'] = [
-                            'tag' => 'meta',
-                            'attributes' => [
-                                'property' => 'twitter:image',
-                                'content' => $data['sizes']['ratio_2_1']
-                            ]
-                        ];
+                        if (!empty($data) && !empty($data['sizes'])) {
+                            $return['twitter_image'] = [
+                                'tag' => 'meta',
+                                'attributes' => [
+                                    'property' => 'twitter:image',
+                                    'content' => $data['sizes']['ratio_2_1']
+                                ]
+                            ];
+                        }
                         break;
                 }
-            }
-
-            if (!empty($woody_seo_data['woodyseo_fb_image'])) {
-                $return['og_image'] = [
-                    'tag' => 'meta',
-                    'attributes' => [
-                        'property' => 'og:image',
-                        'content' => $woody_seo_data['woodyseo_fb_image']['sizes']['ratio_2_1']
-                    ]
-                ];
-            }
-
-            if (!empty($woody_seo_data['woodyseo_twitter_image'])) {
-                $return['og_image'] = [
-                    'tag' => 'meta',
-                    'attributes' => [
-                        'property' => 'og:image',
-                        'content' => $woody_seo_data['woodyseo_twitter_image']['sizes']['ratio_2_1']
-                    ]
-                ];
             }
 
             if (empty($woody_seo_data['woodyseo_index'])) {
@@ -441,38 +446,6 @@ abstract class WoodyTheme_TemplateAbstract
         // On permet la surcharge des metadata
         $return = apply_filters('woody_override_seo_meta', $return);
         return $return;
-    }
-
-    private function untokenize($token)
-    {
-        // On définit les correspondances des tokens
-        $patterns = [
-            '%site_name%' => $this->context['site']->name,
-            '%post_title%' => get_the_title(),
-            '%hero_title%' => get_field('field_5b041d61adb72'),
-            '%hero_desc%' => get_field('field_5b041dbfadb74'),
-            '%teaser_desc%' => get_field('field_5b2bbbfaec6b2'),
-            '%focus_title%' => get_field('field_5b0d380e04203'),
-            '%focus_desc%' => get_field('field_5b0d382404204')
-        ];
-
-        // On remplace les token par les valeurs des champs correspondants
-        if (!empty($token)) {
-            foreach ($patterns as $pattern_key => $pattern) {
-                $token = str_replace($pattern_key, $pattern, $token);
-            }
-        }
-
-        // On retire les balises html (pour les descriptions essentiellement)
-        $token = str_replace('&nbsp; ', '', $token);
-        $token = trim(strip_tags($token));
-
-        // On limite la chaine à +/- 150 caractères sans couper de mot
-        if (strlen($token) > 170) {
-            $token = substr($token, 0, strpos($token, ' ', 150));
-        }
-
-        return $token;
     }
 
     private function addWoodyComponents()

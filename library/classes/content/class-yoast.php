@@ -26,8 +26,8 @@ class WoodyTheme_Yoast
         add_filter('wpseo_title', [$this, 'wpseoTransformPattern'], 10, 1);
 
         // New filters for Woody SEO
-        add_filter('acf/load_value/key=field_5d7f7e7720bb3', [$this, 'searchPreview'], 10, 3);
-        // add_action('acf/render_field/type=textarea', [$this, 'searchPreview']);
+        add_filter('acf/load_field/name=woodyseo_meta_title', [$this, 'defaultMetaData'], 10, 3);
+        add_filter('acf/load_field/name=woodyseo_meta_description', [$this, 'defaultMetaData'], 10, 3);
     }
 
 
@@ -35,10 +35,13 @@ class WoodyTheme_Yoast
     /* Fonctions Woody SEO              */
     /* ******************************** */
 
-    public function searchPreview($value, $post_id, $field)
+    // On remplit la donnée par défaut dans les champs d'édition des métadonnées
+    public function defaultMetaData($field)
     {
-        $value = file_get_contents(get_template_directory() . '/library/templates/woody_seo/browser_preview.php');
-        return $value;
+        if (empty($field['value'])) {
+            $field['value'] = $field['default_value'];
+        }
+        return $field;
     }
 
     /* ******************************** */
