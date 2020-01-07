@@ -207,50 +207,57 @@ abstract class WoodyTheme_TemplateAbstract
         // Définition des metas statiques
         // ******************************* //
         $return = [
-            'description' => [
-                'tag' => 'meta',
-                'attributes' => [
+            'canonical' => [
+                '#tag' => 'link',
+                '#attributes' => [
+                    'rel' => 'canonical',
+                    'href' => apply_filters('woody_get_permalink', get_the_ID())
+                ]
+            ],
+            'charset' => [
+                '#tag' => 'meta',
+                '#attributes' => [
                     'charset' => $this->context['site']->charset,
                 ]
             ],
             'http-equiv' => [
-                'tag' => 'meta',
-                'attributes' => [
+                '#tag' => 'meta',
+                '#attributes' => [
                     'http-equiv' => 'X-UA-Compatible',
                     'content' => 'IE=edge'
                 ]
             ],
             'viewport' => [
-                'tag' => 'meta',
-                'attributes' => [
+                '#tag' => 'meta',
+                '#attributes' => [
                     'name' => 'viewport',
                     'content' => 'width=device-width,initial-scale=1'
                 ]
             ],
             'robots' => [
-                'tag' => 'meta',
-                'attributes' => [
+                '#tag' => 'meta',
+                '#attributes' => [
                     'name' => 'robots',
                     'content' => 'max-snippet:-1, max-image-preview:large, max-video-preview:-1'
                 ]
             ],
-            'og_type' => [
-                'tag' => 'meta',
-                'attributes' => [
+            'og:type' => [
+                '#tag' => 'meta',
+                '#attributes' => [
                     'property' => 'og:type',
                     'content' => 'article'
                 ]
             ],
-            'og_url' => [
-                'tag' => 'meta',
-                'attributes' => [
+            'og:url' => [
+                '#tag' => 'meta',
+                '#attributes' => [
                     'property' => 'og:url',
                     'content' => $this->context['current_url']
                 ]
             ],
-            'twitter_card' => [
-                'tag' => 'meta',
-                'attributes' => [
+            'twitter:card' => [
+                '#tag' => 'meta',
+                '#attributes' => [
                     'property' => 'twitter:card',
                     'content' => 'summary_large_image'
                 ]
@@ -266,23 +273,16 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         if (!empty($image)) {
-            $return['og_image'] = [
-                'tag' => 'meta',
-                'attributes' => [
+            $return['og:image'] = [
+                '#tag' => 'meta',
+                '#attributes' => [
                     'property' => 'og:image',
                     'content' => $image['sizes']['ratio_2_1']
                 ]
             ];
-            $return['og_image'] = [
-                'tag' => 'meta',
-                'attributes' => [
-                    'property' => 'og:image:secure_url',
-                    'content' => $image['sizes']['ratio_2_1']
-                ]
-            ];
-            $return['twitter_image'] = [
-                'tag' => 'meta',
-                'attributes' => [
+            $return['twitter:image'] = [
+                '#tag' => 'meta',
+                '#attributes' => [
                     'property' => 'twitter:image',
                     'content' => $image['sizes']['ratio_2_1']
                 ]
@@ -293,9 +293,9 @@ abstract class WoodyTheme_TemplateAbstract
         // On ajoute la meta og:site_name
         // ******************************* //
         if (!empty($this->context['site']->name)) {
-            $return['og_sitename'] = [
-                'tag' => 'meta',
-                'attributes' => [
+            $return['og:site_name'] = [
+                '#tag' => 'meta',
+                '#attributes' => [
                     'property' => 'og:site_name',
                     'content' => !(empty($this->context['site']->name)) ? $this->context['site']->name : ''
                 ]
@@ -306,9 +306,9 @@ abstract class WoodyTheme_TemplateAbstract
         // On ajoute les meta de localisation og:locale et og:locale:alternate pour chacune des langues du site
         // ******************************* //
         if (!empty(pll_current_language())) {
-            $return[] = [
-                'tag' => 'meta',
-                'attributes' => [
+            $return['og:locale'] = [
+                '#tag' => 'meta',
+                '#attributes' => [
                     'property' => 'og:locale',
                     'content' => pll_current_language('locale')
                 ]
@@ -320,9 +320,9 @@ abstract class WoodyTheme_TemplateAbstract
                 if ($locale == pll_current_language('locale')) {
                     continue;
                 }
-                $return[] = [
-                    'tag' => 'meta',
-                    'attributes' => [
+                $return['og:locale:alternate_' . $locale] = [
+                    '#tag' => 'meta',
+                    '#attributes' => [
                         'property' => 'og:locale:alternate',
                         'content' => $locale
                     ]
@@ -344,9 +344,9 @@ abstract class WoodyTheme_TemplateAbstract
 
                 switch ($data_key) {
                     case 'woodyseo_meta_description':
-                        $return[] = [
-                            'tag' => 'meta',
-                            'attributes' => [
+                        $return['description'] = [
+                            '#tag' => 'meta',
+                            '#attributes' => [
                                 'name' => 'description',
                                 'content' => woody_untokenize($data)
                             ]
@@ -354,38 +354,38 @@ abstract class WoodyTheme_TemplateAbstract
                         break;
                     case 'woodyseo_fb_title':
 
-                        $return['fb_title'] = [
-                            'tag' => 'meta',
-                                'attributes' => [
+                        $return['og:title'] = [
+                            '#tag' => 'meta',
+                                '#attributes' => [
                                     'property' => 'og:title',
                                 ]
                         ];
 
                         if (!empty($data)) {
-                            $return['fb_title']['attributes']['content'] = woody_untokenize($data);
+                            $return['og:title']['#attributes']['content'] = woody_untokenize($data);
                         } else {
-                            $return['fb_title']['attributes']['content'] = woody_untokenize(get_field('woodyseo_meta_title'));
+                            $return['og:title']['#attributes']['content'] = woody_untokenize(get_field('woodyseo_meta_title'));
                         }
                         break;
                     case 'woodyseo_fb_description':
-                            $return['fb_description'] = [
-                                'tag' => 'meta',
-                                'attributes' => [
+                            $return['og:description'] = [
+                                '#tag' => 'meta',
+                                '#attributes' => [
                                     'property' => 'og:description',
                                 ]
                             ];
 
                             if (!empty($data)) {
-                                $return['fb_description']['attributes']['content'] = woody_untokenize($data);
+                                $return['og:description']['#attributes']['content'] = woody_untokenize($data);
                             } else {
-                                $return['fb_description']['attributes']['content'] = woody_untokenize(get_field('woodyseo_meta_description'));
+                                $return['og:description']['#attributes']['content'] = woody_untokenize(get_field('woodyseo_meta_description'));
                             }
                         break;
                     case 'woodyseo_fb_image':
                         if (!empty($data) && !empty($data['sizes'])) {
-                            $return['og_image'] = [
-                                'tag' => 'meta',
-                                'attributes' => [
+                            $return['og:image'] = [
+                                '#tag' => 'meta',
+                                '#attributes' => [
                                     'property' => 'og:image',
                                     'content' => $data['sizes']['ratio_2_1']
                                 ]
@@ -393,38 +393,38 @@ abstract class WoodyTheme_TemplateAbstract
                         }
                         break;
                     case 'woodyseo_twitter_title':
-                        $return['twitter_title'] = [
-                            'tag' => 'meta',
-                            'attributes' => [
+                        $return['twitter:title'] = [
+                            '#tag' => 'meta',
+                            '#attributes' => [
                                 'property' => 'twitter:title',
                             ]
                         ];
 
                         if (!empty($data)) {
-                            $return['twitter_title']['attributes']['content'] = woody_untokenize($data);
+                            $return['twitter:title']['#attributes']['content'] = woody_untokenize($data);
                         } else {
-                            $return['twitter_title']['attributes']['content'] = woody_untokenize(get_field('woodyseo_meta_title'));
+                            $return['twitter:title']['#attributes']['content'] = woody_untokenize(get_field('woodyseo_meta_title'));
                         }
                         break;
                     case 'woodyseo_twitter_description':
-                        $return['twitter_description'] = [
-                            'tag' => 'meta',
-                            'attributes' => [
+                        $return['twitter:description'] = [
+                            '#tag' => 'meta',
+                            '#attributes' => [
                                 'property' => 'twitter:description',
                             ]
                         ];
 
                         if (!empty($data)) {
-                            $return['twitter_description']['attributes']['content'] = woody_untokenize($data);
+                            $return['twitter:description']['#attributes']['content'] = woody_untokenize($data);
                         } else {
-                            $return['twitter_description']['attributes']['content'] = woody_untokenize(get_field('woodyseo_meta_description'));
+                            $return['twitter:description']['#attributes']['content'] = woody_untokenize(get_field('woodyseo_meta_description'));
                         }
                         break;
                     case 'woodyseo_twitter_image':
                         if (!empty($data) && !empty($data['sizes'])) {
-                            $return['twitter_image'] = [
-                                'tag' => 'meta',
-                                'attributes' => [
+                            $return['twitter:image'] = [
+                                '#tag' => 'meta',
+                                '#attributes' => [
                                     'property' => 'twitter:image',
                                     'content' => $data['sizes']['ratio_2_1']
                                 ]
@@ -434,12 +434,12 @@ abstract class WoodyTheme_TemplateAbstract
                 }
             }
 
-            if (empty($woody_seo_data['woodyseo_index'])) {
-                $return['robots']['attributes']['content'] = $return['robots']['attributes']['content'] . ', noindex';
+            if ($woody_seo_data['woodyseo_index'] === false) {
+                $return['robots']['#attributes']['content'] = $return['robots']['#attributes']['content'] . ', noindex';
             }
 
-            if (empty($woody_seo_data['woodyseo_follow'])) {
-                $return['robots']['attributes']['content'] = $return['robots']['attributes']['content'] . ', nofollow';
+            if ($woody_seo_data['woodyseo_follow'] === false) {
+                $return['robots']['#attributes']['content'] = $return['robots']['#attributes']['content'] . ', nofollow';
             }
         }
 

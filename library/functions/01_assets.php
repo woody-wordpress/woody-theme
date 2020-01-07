@@ -317,7 +317,7 @@ function woody_untokenize($token)
 
     // On retire les balises html (pour les descriptions essentiellement)
     $token = str_replace('&nbsp; ', '', $token);
-    $token = trim(strip_tags($token));
+    $token = trim(html_entity_decode(strip_tags($token)));
 
     // On limite la chaine à +/- 150 caractères sans couper de mot
     if (strlen($token) > 170) {
