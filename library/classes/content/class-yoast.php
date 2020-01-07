@@ -18,30 +18,31 @@ class WoodyTheme_Yoast
 
     protected function registerHooks()
     {
-        //add_action('wpseo_register_extra_replacements', [$this, 'registerCustomYoastVariables']);
         add_action('wpseo_add_opengraph_additional_images', [$this, 'wpseoAddOpengraphAdditionalImages'], 10, 1);
-        // add_filter('wpseo_opengraph_image', [$this, 'wpseoOpengraphImage'], 10, 1);
-        // add_filter('wpseo_metadesc', [$this, 'wpseoMetaDesc'], 10, 1);
-        add_filter('wpseo_metadesc', [$this, 'wpseoTransformPattern'], 10, 1);
+        add_filter('woody_seo_override_meta', [$this, 'wpseoTransformPattern'], 10, 1);
         add_filter('wpseo_title', [$this, 'wpseoTransformPattern'], 10, 1);
-
-        // New filters for Woody SEO
-        add_filter('acf/load_field/name=woodyseo_meta_title', [$this, 'defaultMetaData'], 10, 3);
-        add_filter('acf/load_field/name=woodyseo_meta_description', [$this, 'defaultMetaData'], 10, 3);
     }
 
 
     /* ******************************** */
     /* Fonctions Woody SEO              */
     /* ******************************** */
+  
+    /**
+     * Remove HTML tags in string.
+     * @param   string meta description as string
+     * @return  string formatted
+     */
+    // public function wpseoMetaDesc($string)
+    // {
+    //     return strip_tags($string);
+    // }
 
-    // On remplit la donnée par défaut dans les champs d'édition des métadonnées
-    public function defaultMetaData($field)
+    public function wpseoTransformPattern($string)
     {
-        if (empty($field['value'])) {
-            $field['value'] = $field['default_value'];
-        }
-        return $field;
+        $tools = new WoodyTheme_WoodyProcessTools;
+        $string = $tools->replacePattern($string, Timber::get_post());
+        return $string;
     }
 
     /* ******************************** */
@@ -72,22 +73,7 @@ class WoodyTheme_Yoast
     //     }
     // }
 
-    /**
-     * Remove HTML tags in string.
-     * @param   string meta description as string
-     * @return  string formatted
-     */
-    // public function wpseoMetaDesc($string)
-    // {
-    //     return strip_tags($string);
-    // }
-
-    public function wpseoTransformPattern($string)
-    {
-        $tools = new WoodyTheme_WoodyProcessTools;
-        $string = $tools->replacePattern($string, Timber::get_post());
-        return $string;
-    }
+  
 
     // // define the action for register yoast_variable replacments
     // public function registerCustomYoastVariables()

@@ -102,8 +102,8 @@ abstract class WoodyTheme_TemplateAbstract
 
         // SEO Context
         $this->context['metas'] = $this->setMetadata();
-        $this->context['title'] = woody_untokenize(get_field('field_5d7f7dea20bb1'));
-
+        $this->context['title'] = (!empty(get_field('field_5d7f7dea20bb1'))) ? woody_untokenize(get_field('woodyseo_meta_title')) : get_the_title() . ' | ' . $this->context['site']->name;
+        $this->context['title'] = apply_filters('woody_seo_override_meta', $this->context['title']);
         /******************************************************************************
          * Sommes nous dans le cas d'une page miroir ?
          ******************************************************************************/
@@ -339,8 +339,8 @@ abstract class WoodyTheme_TemplateAbstract
             foreach ($woody_seo_data as $data_key => $data) {
                 if (is_string($data)) {
                     $woody_seo_data[$data_key] = trim($data);
+                    $data = apply_filters('woody_seo_override_meta', $data);
                 }
-
 
                 switch ($data_key) {
                     case 'woodyseo_meta_description':
@@ -351,6 +351,13 @@ abstract class WoodyTheme_TemplateAbstract
                                 'content' => woody_untokenize($data)
                             ]
                         ];
+
+                        if (!empty($data)) {
+                            $return['description']['#attributes']['content'] = woody_untokenize($data);
+                        } else {
+                            $return['description']['#attributes']['content'] = strip_tags(get_field('page_teaser_desc'));
+                        }
+
                         break;
                     case 'woodyseo_fb_title':
 
@@ -364,7 +371,7 @@ abstract class WoodyTheme_TemplateAbstract
                         if (!empty($data)) {
                             $return['og:title']['#attributes']['content'] = woody_untokenize($data);
                         } else {
-                            $return['og:title']['#attributes']['content'] = woody_untokenize(get_field('woodyseo_meta_title'));
+                            $return['og:title']['#attributes']['content'] = get_the_title() . ' | ' . $this->context['site']->name;
                         }
                         break;
                     case 'woodyseo_fb_description':
@@ -378,7 +385,7 @@ abstract class WoodyTheme_TemplateAbstract
                             if (!empty($data)) {
                                 $return['og:description']['#attributes']['content'] = woody_untokenize($data);
                             } else {
-                                $return['og:description']['#attributes']['content'] = woody_untokenize(get_field('woodyseo_meta_description'));
+                                $return['og:description']['#attributes']['content'] = strip_tags(get_field('page_teaser_desc'));
                             }
                         break;
                     case 'woodyseo_fb_image':
@@ -403,7 +410,7 @@ abstract class WoodyTheme_TemplateAbstract
                         if (!empty($data)) {
                             $return['twitter:title']['#attributes']['content'] = woody_untokenize($data);
                         } else {
-                            $return['twitter:title']['#attributes']['content'] = woody_untokenize(get_field('woodyseo_meta_title'));
+                            $return['twitter:title']['#attributes']['content'] = get_the_title() . ' | ' . $this->context['site']->name;
                         }
                         break;
                     case 'woodyseo_twitter_description':
@@ -417,7 +424,7 @@ abstract class WoodyTheme_TemplateAbstract
                         if (!empty($data)) {
                             $return['twitter:description']['#attributes']['content'] = woody_untokenize($data);
                         } else {
-                            $return['twitter:description']['#attributes']['content'] = woody_untokenize(get_field('woodyseo_meta_description'));
+                            $return['twitter:description']['#attributes']['content'] = strip_tags(get_field('page_teaser_desc'));
                         }
                         break;
                     case 'woodyseo_twitter_image':
