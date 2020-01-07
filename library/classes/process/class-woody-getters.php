@@ -197,7 +197,7 @@ class WoodyTheme_WoodyGetters
 
         if (!empty($result->posts)) {
             foreach ($result->posts as $post) {
-                $item = Timber::get_post($post->ID);
+                $item = \Timber::get_post($post->ID);
                 $items['items'][] = $this->getTopicPreview($wrapper, $item);
             }
         }
