@@ -26,7 +26,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
     protected function registerHooks()
     {
-        add_filter('wpseo_canonical', [$this, 'wpSeoCanonical'], 10, 1);
+        add_filter('woody_seo_edit_metas_array', [$this, 'woodySeoCanonical'], 10, 1);
     }
 
     protected function getHeaders()
@@ -519,12 +519,13 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     /***************************
      * Overide Canonical
      *****************************/
-    public function wpSeoCanonical($url)
+    public function woodySeoCanonical($metas)
     {
         $listpage = filter_input(INPUT_GET, 'listpage', FILTER_VALIDATE_INT);
-        if ($this->context['page_type'] === 'playlist_tourism' && !empty($listpage) && is_numeric($listpage)) {
-            $url .= '?listpage=' . $listpage;
+        $post_type = get_the_terms(get_the_ID(), 'page_type');
+        if ($post_type[0]->slug === 'playlist_tourism' && !empty($listpage) && is_numeric($listpage) && !empty($metas['canonical']) && !empty($metas['canonical']['#attributes']) && !empty($metas['canonical']['#attributes']['href'])) {
+            $metas['canonical']['#attributes']['href'] = $metas['canonical']['#attributes']['href'] . '?listpage=' . $listpage;
         }
-        return $url;
+        return $metas;
     }
 }

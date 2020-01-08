@@ -1,0 +1,34 @@
+<script type='application/ld+json' class='woody-schema-graph'>
+{
+    "@context":"https://schema.org",
+    "@graph":
+    [
+        {
+            "@type":"WebSite",
+            "@id":"{{ site.home_url }}/#website",
+            "url":"{{ site.home_url }}",
+            "name":"{{ site.name }}",
+            "description":"{{ site.description }}",
+            "potentialAction":
+            {
+                "@type":"SearchAction",
+                "target":"{{ woody_options_pages.search_url|getPermalink }}?query={search_term_string}",
+                "query-input":"required name=search_term_string"
+            }
+        },
+        {
+            "@type":"WebPage",
+            "@id":"{{ site.home_url }}/#webpage",
+            "url":"{{ site.home_url }}",
+            "inLanguage":"{{ site.language }}",
+            "name":"{{ title }}",
+            "isPartOf":{
+                "@id":"{{ site.home_url }}/#website"
+            },
+            "datePublished":"{{ post.post_date }}",
+            "dateModified":"{{ post.post_modified }}",
+            "description":"{{ description }}"
+        }
+    ]
+}
+</script>

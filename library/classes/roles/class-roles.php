@@ -702,26 +702,6 @@ class WoodyTheme_Roles
                 'translator' => false,
             ],
 
-            // Yoast
-            'wpseo_bulk_edit' => [
-                'administrator' => true,
-                'editor' => false,
-                'contributor' => false,
-                'translator' => false,
-            ],
-            'wpseo_edit_advanced_metadata' => [
-                'administrator' => true,
-                'editor' => false,
-                'contributor' => false,
-                'translator' => false,
-            ],
-            'wpseo_manage_options' => [
-                'administrator' => true,
-                'editor' => false,
-                'contributor' => false,
-                'translator' => false,
-            ],
-
             // Duplicate
             'copy_posts' => [
                 'administrator' => true,

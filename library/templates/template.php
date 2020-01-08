@@ -27,7 +27,6 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         add_filter('timber_compile_data', [$this, 'timberCompileData']);
-        add_filter('wpseo_json_ld_search_url', [$this, 'setYoastSearchUrl']);
 
         $this->registerHooks();
         $this->initContext();
@@ -84,7 +83,6 @@ abstract class WoodyTheme_TemplateAbstract
     private function initContext()
     {
         $this->context = Timber::get_context();
-        // $this->context['title'] = wp_title(null, false);
         $this->context['current_url'] = get_permalink();
         $this->context['site_key'] = WP_SITE_KEY;
 
@@ -101,9 +99,14 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['woody_access_staging'] = WOODY_ACCESS_STAGING;
 
         // SEO Context
-        $this->context['metas'] = $this->setMetadata();
         $this->context['title'] = (!empty(get_field('field_5d7f7dea20bb1'))) ? woody_untokenize(get_field('woodyseo_meta_title')) : get_the_title() . ' | ' . $this->context['site']->name;
-        $this->context['title'] = apply_filters('woody_seo_override_meta', $this->context['title']);
+        $this->context['title'] = apply_filters('woody_seo_edit_meta_string', $this->context['title']);
+        $this->context['metas'] = $this->setMetadata();
+
+        // Woody options pages
+        $this->context['woody_options_pages'] = $this->getWoodyOptionsPagesValues();
+
+
         /******************************************************************************
          * Sommes nous dans le cas d'une page miroir ?
          ******************************************************************************/
@@ -124,7 +127,6 @@ abstract class WoodyTheme_TemplateAbstract
             $this->context['post_id'] = $mirror_page['mirror_page_reference'];
             $this->context['post'] = get_post($this->context['post_id']);
             $this->context['post_title'] = get_the_title();
-            $this->context['metas'][] = sprintf('<link rel="canonical" href="%s" />', get_permalink($this->context['post_id']));
         } else {
             $this->context['post'] = get_post();
             if (!empty($this->context['post'])) {
@@ -148,9 +150,6 @@ abstract class WoodyTheme_TemplateAbstract
         if (!empty($this->context['woody_access_staging'])) {
             $this->context['body_class'] = $this->context['body_class'] . ' woody_staging';
         }
-
-        // Add generator (Pour julien check ERP)
-        $this->context['metas'][] = sprintf('<meta name="generator" content="Raccourci Agency - WP">');
 
         // Define Woody Components
         $this->addWoodyComponents();
@@ -211,7 +210,7 @@ abstract class WoodyTheme_TemplateAbstract
                 '#tag' => 'link',
                 '#attributes' => [
                     'rel' => 'canonical',
-                    'href' => apply_filters('woody_get_permalink', get_the_ID())
+                    'href' => apply_filters('woody_get_permalink', $this->context['post_id'])
                 ]
             ],
             'charset' => [
@@ -225,6 +224,13 @@ abstract class WoodyTheme_TemplateAbstract
                 '#attributes' => [
                     'http-equiv' => 'X-UA-Compatible',
                     'content' => 'IE=edge'
+                ]
+            ],
+            'generator' => [ // Add generator (Pour julien check ERP)
+                '#tag' => 'meta',
+                '#attributes' => [
+                    'name' => 'generator',
+                    'content' => 'Raccourci Agency - WP'
                 ]
             ],
             'viewport' => [
@@ -339,7 +345,7 @@ abstract class WoodyTheme_TemplateAbstract
             foreach ($woody_seo_data as $data_key => $data) {
                 if (is_string($data)) {
                     $woody_seo_data[$data_key] = trim($data);
-                    $data = apply_filters('woody_seo_override_meta', $data);
+                    $data = apply_filters('woody_seo_edit_meta_string', $data);
                 }
 
                 switch ($data_key) {
@@ -450,8 +456,11 @@ abstract class WoodyTheme_TemplateAbstract
             }
         }
 
+        // On ajoute la meta desc à la racine du contexte pour y accéder rapidement
+        $this->context['description'] = $return['description']['#attributes']['content'];
+
         // On permet la surcharge des metadata
-        $return = apply_filters('woody_override_seo_meta', $return);
+        $return = apply_filters('woody_seo_edit_metas_array', $return);
         return $return;
     }
 
@@ -693,15 +702,6 @@ abstract class WoodyTheme_TemplateAbstract
 
             return $compile;
         }
-    }
-
-    public function setYoastSearchUrl($var)
-    {
-        $search_post_id = apply_filters('woody_get_field_option', 'es_search_page_url');
-        if (!empty($search_post_id)) {
-            $var = get_permalink(pll_get_post($search_post_id)) . '?query={search_term_string}';
-        }
-        return $var;
     }
 
     private function addFavoritesBlock()

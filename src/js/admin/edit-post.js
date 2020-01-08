@@ -2,50 +2,6 @@ import $ from 'jquery';
 
 $('#post').each(function() {
 
-    // Added button "Retirer le tag principal"
-    $('#taxonomy-themes, #taxonomy-places, #taxonomy-seasons').each(function() {
-        var $this = $(this);
-        var name = $this.attr('id').replace('taxonomy-', '');
-
-        $this.append('<input class="button" id="primary-term-' + name + '-enable" style="text-align:center;" value="Retirer le tag principal">');
-
-        var $input = $('#yoast-wpseo-primary-' + name);
-        var $button = $this.find('#primary-term-' + name + '-enable');
-
-        var bindMakePrimaryTerm = function() {
-            $this.find('.wpseo-make-primary-term').click(function() {
-                $button.show();
-            });
-        }
-
-        var removePrimaryTerm = function() {
-            $this.find('.wpseo-primary-term').removeClass('wpseo-primary-term').addClass('wpseo-non-primary-term');
-            $input.attr('value', '');
-        }
-
-        if ($input.val() == '') {
-            $button.hide();
-        } else {
-            $button.show();
-        }
-
-        $input.change(function() {
-            if ($(this).val() == '') {
-                $button.hide();
-            } else {
-                $button.show();
-            }
-        });
-
-        $button.click(function() {
-            $(this).hide();
-            removePrimaryTerm();
-        });
-
-        // On attend que Yoast soit chargé
-        setTimeout(() => { bindMakePrimaryTerm(); }, 1500);
-    });
-
     // Alert change langue
     $('#select-post-language').each(function() {
         var $this = $(this);
@@ -89,53 +45,8 @@ $('#post').each(function() {
         }
     });
 
-    // On ferme certaines metaboxes ACF => Visuel et accroche, En-tête, Bloc de résa, diaporama, révisions, Yoast, boxes en sidebar (sauf publier)
-    $('#acf-group_5b052bbee40a4, #acf-group_5b2bbb46507bf, #acf-group_5c0e4121ee3ed, #acf-group_5bb325e8b6b43, #revisionsdiv, #wpseo_meta, #side-sortables .postbox:not(#submitdiv)').addClass('closed');
-
-    // Action sur les focus
-    // var toggleChoiceAction = function($bigparent) {
-    //     $bigparent.find('.tpl-choice-wrapper').each(function() {
-    //         var $this = $(this);
-
-    //         // On toggle la description de chaque template dans les champs woody_tpl
-    //         $this.find('.toggle-desc').click(function(e) {
-    //             e.stopPropagation();
-    //             $this.find('.tpl-desc').toggleClass('hidden');
-    //             $this.find('.desc-backdrop').toggleClass('hidden');
-    //         });
-
-    //         $this.find('.close-desc').click(function() {
-    //             $this.find('.tpl-desc').addClass('hidden');
-    //             $this.find('.desc-backdrop').addClass('hidden');
-    //         });
-
-    //         $this.find('.desc-backdrop').click(function() {
-    //             $this.find('.tpl-desc').addClass('hidden');
-    //             $(this).addClass('hidden');
-    //         });
-    //     });
-    // }
-
-    // Action sur les focus
-    // var fitChoiceAction = function($bigparent, count) {
-
-    //     $bigparent.find('.tpl-choice-wrapper').each(function() {
-    //         var $this = $(this);
-
-    //         var fittedfor = $this.data('fittedfor');
-    //         var acceptsmax = $this.data('acceptsmax');
-    //         if (fittedfor == 'all') fittedfor = 0;
-
-    //         // On affiche un état en fonction du nombre d'élément
-    //         if (count >= fittedfor && count <= acceptsmax) {
-    //             $this.removeClass('notfit');
-    //             $this.addClass('fit');
-    //         } else {
-    //             $this.removeClass('fit');
-    //             $this.addClass('notfit');
-    //         }
-    //     });
-    // }
+    // On ferme certaines metaboxes ACF => Visuel et accroche, En-tête, Bloc de résa, diaporama, révisions, boxes en sidebar (sauf publier)
+    $('#acf-group_5b052bbee40a4, #acf-group_5b2bbb46507bf, #acf-group_5c0e4121ee3ed, #acf-group_5bb325e8b6b43, #revisionsdiv, #side-sortables .postbox:not(#submitdiv)').addClass('closed');
 
     var countElements = function(field) {
         var $parent = field.parent().$el;

@@ -17,7 +17,6 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
 
     protected function registerHooks()
     {
-        add_filter('wpseo_title', [$this, 'filterTouristicSheetWpseoTitle']);
     }
 
     protected function getHeaders()
@@ -51,7 +50,7 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
         $this->context['destinationName'] = null;
         $this->context['playlistId'] = null;
         $this->context['sheet_tourism'] = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $sheet_lang, []);
-        $this->context['title'] = $this->filterTouristicSheetWpseoTitle($this->context['title']);
+        $this->context['title'] = $this->filterTouristicSheetWoodySeoTitle($this->context['title']);
 
         // Complete METAS
         if (!empty($this->context['sheet_tourism'])) {
@@ -94,7 +93,7 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
         }
     }
 
-    public function filterTouristicSheetWpseoTitle($title)
+    public function filterTouristicSheetWoodySeoTitle($title)
     {
         // Si title commence par une langue en 2 caractère
         if (substr($title, 3, 1) == '-') {

@@ -49,7 +49,7 @@ class WoodyTheme_Cleanup_Admin
     }
 
 
-    function sideMetaboxOrder($order)
+    public function sideMetaboxOrder($order)
     {
         add_meta_box('pageparentdiv', __('Déplacer la page'), 'page_attributes_meta_box', 'page', 'side');
         $box_order = array(
@@ -225,7 +225,6 @@ class WoodyTheme_Cleanup_Admin
         remove_meta_box('dashboard_activity', 'dashboard', 'normal');
         remove_meta_box('dashboard_primary', 'dashboard', 'side');
         remove_meta_box('dashboard_quick_press', 'dashboard', 'side');
-        remove_meta_box('wpseo-dashboard-overview', 'dashboard', 'side');
     }
 
     /**
