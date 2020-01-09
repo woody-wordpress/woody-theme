@@ -102,6 +102,7 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['title'] = (!empty(get_field('field_5d7f7dea20bb1'))) ? woody_untokenize(get_field('woodyseo_meta_title')) : get_the_title() . ' | ' . $this->context['site']->name;
         $this->context['title'] = apply_filters('woody_seo_edit_meta_string', $this->context['title']);
         $this->context['metas'] = $this->setMetadata();
+        $this->context['custom_meta'] = get_field('woody_custom_meta', 'options');
 
         // Woody options pages
         $this->context['woody_options_pages'] = $this->getWoodyOptionsPagesValues();
