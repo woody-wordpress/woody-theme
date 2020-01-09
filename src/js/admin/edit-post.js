@@ -32,7 +32,7 @@ $('#post').each(function() {
         });
     });
 
-    // Show on scroll
+    // Boutons d'actions en backoffice au scroll
     var $preview_button = $('#minor-publishing-actions .preview.button');
     var $save_button = $('#publishing-action');
     $(window).scroll(function() {
@@ -153,7 +153,6 @@ $('#post').each(function() {
 
         $parent.each(function() {
             var $this = $(this);
-            // toggleChoiceAction($bigparent);
 
             getAutoFocusData($this);
 

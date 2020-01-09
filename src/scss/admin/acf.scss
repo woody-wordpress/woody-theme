@@ -788,32 +788,32 @@
 }
 
 // On masque les anciens champs du backoffice et on règles la tailles des onglets impactés
-#acf-group_5b2bbb46507bf {
-    .acf-tab-group {
-        li:nth-of-type(2) {
-            display: none !important;
-        }
-    }
-}
+// #acf-group_5b2bbb46507bf {
+//     .acf-tab-group {
+//         li:nth-of-type(2) {
+//             display: none !important;
+//         }
+//     }
+// }
 
 
-.acf-field-5b043f0525968 {
-    .layout[data-layout="call_to_action"] {
-        .acf-tab-group {
-            li:nth-of-type(2) {
-                display: none !important;
-            }
-        }
-    }
+// .acf-field-5b043f0525968 {
+//     .layout[data-layout="call_to_action"] {
+//         .acf-tab-group {
+//             li:nth-of-type(2) {
+//                 display: none !important;
+//             }
+//         }
+//     }
 
-    .layout[data-layout="gallery"] {
-        .acf-tab-group {
-            li:nth-of-type(3) {
-                display: none !important;
-            }
-        }
-    }
-}
+//     .layout[data-layout="gallery"] {
+//         .acf-tab-group {
+//             li:nth-of-type(3) {
+//                 display: none !important;
+//             }
+//         }
+//     }
+// }
 
 .acf-field-5bb3297e77f43 {
     display: none !important;

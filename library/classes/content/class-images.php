@@ -36,7 +36,14 @@ class WoodyTheme_Images
         add_filter('wp_generate_attachment_metadata', [$this, 'generateAttachmentMetadata'], 10, 2);
         add_filter('wp_handle_upload_prefilter', [$this, 'maxUploadSize']);
         add_filter('upload_mimes', [$this, 'uploadMimes'], 10, 1);
+        add_filter('big_image_size_threshold', [$this, 'bigImageSizeThreshold'], 10, 4);
         // add_filter('wp_handle_upload', [$this, 'convertFileToGeoJSON'], 100, 1);
+    }
+
+    public function bigImageSizeThreshold()
+    {
+        // Désactive la duplication  de photo (filename-scaled.jpg) depuis WP 5.3
+        return false;
     }
 
     public function wpImageEditors()
@@ -187,7 +194,7 @@ class WoodyTheme_Images
                     $term = get_term($term_id);
 
                     if (!is_wp_error($term)) {
-                        wp_set_post_terms($attach_id, $term->term_id , $term->taxonomy, true);
+                        wp_set_post_terms($attach_id, $term->term_id, $term->taxonomy, true);
                     }
                 }
             }
@@ -425,11 +432,9 @@ class WoodyTheme_Images
     public function generateAttachmentMetadata($metadata, $attachment_id)
     {
         if (wp_attachment_is_image($attachment_id)) {
-            $attachment_metadata = wp_get_attachment_metadata($attachment_id);
 
-            if (!empty($attachment_metadata)) {
-                $metadata = $attachment_metadata;
-            } else {
+            if (empty($metadata['sizes'])) {
+
                 // Get current post
                 $post = get_post($attachment_id);
 

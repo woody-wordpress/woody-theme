@@ -54,7 +54,7 @@ class WoodyTheme_Varnish
                                         // field_5b4728182f9b0_field_5b4727a878098_field_5b91294459c24 == light_section_content
                                         if (!empty($tab['field_5b4728182f9b0_field_5b4727a878098_field_5b91294459c24']) && is_array($tab['field_5b4728182f9b0_field_5b4727a878098_field_5b91294459c24'])) {
                                             foreach ($tab['field_5b4728182f9b0_field_5b4727a878098_field_5b91294459c24'] as $light_section_content) {
-                                                $light_section_content['focused_sort'] = $light_section_content['field_5b912bde59c2b_field_5b27a67203e48'];
+                                                $light_section_content['focused_sort'] = (!empty($light_section_content['field_5b912bde59c2b_field_5b27a67203e48'])) ? $light_section_content['field_5b912bde59c2b_field_5b27a67203e48'] : '';
                                                 $ttl = $this->getTLLbyField($light_section_content);
                                                 if (!empty($ttl)) {
                                                     $woody_varnish_caching_ttl = $ttl;
@@ -65,7 +65,7 @@ class WoodyTheme_Varnish
                                     }
                                 }
                             } else {
-                                if ($section_content['acf_fc_layout'] == 'auto_focus') {
+                                if ($section_content['acf_fc_layout'] == 'auto_focus' && !(empty($section_content['field_5b27a7859ddeb_field_5b27a67203e48']))) {
                                     $section_content['focused_sort'] = $section_content['field_5b27a7859ddeb_field_5b27a67203e48'];
                                 }
                                 $ttl = $this->getTLLbyField($section_content);
@@ -89,8 +89,10 @@ class WoodyTheme_Varnish
             return WOODY_VARNISH_CACHING_FOCUSSHEET_TTL;
         } elseif ($section_content['acf_fc_layout'] == 'auto_focus' && $section_content['focused_sort'] == 'random') {
             return WOODY_VARNISH_CACHING_FOCUSRANDOM_TTL;
-        } elseif ($section_content['acf_fc_layout'] == 'weather' || $section_content['acf_fc_layout'] == 'infolive') {
+        } elseif ($section_content['acf_fc_layout'] == 'weather') {
             return WOODY_VARNISH_CACHING_WEATHERPAGE_TTL;
+        } elseif ($section_content['acf_fc_layout'] == 'infolive') {
+            return WOODY_VARNISH_CACHING_LIVEPAGE_TTL;
         }
     }
 }
