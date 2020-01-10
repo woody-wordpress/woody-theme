@@ -101,7 +101,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         ];
 
         $custom = apply_filters('woody_404_custom', $vars);
-
+        $this->context['title'] = __("Erreur 404 : Page non trouvée", 'woody-theme') . ' | ' . get_bloginfo('name');
         $this->context['content'] = $custom;
     }
 
@@ -523,7 +523,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     {
         $listpage = filter_input(INPUT_GET, 'listpage', FILTER_VALIDATE_INT);
         $post_type = get_the_terms(get_the_ID(), 'page_type');
-        if ($post_type[0]->slug === 'playlist_tourism' && !empty($listpage) && is_numeric($listpage) && !empty($metas['canonical']) && !empty($metas['canonical']['#attributes']) && !empty($metas['canonical']['#attributes']['href'])) {
+        if (!empty($post_type) && $post_type[0]->slug === 'playlist_tourism' && !empty($listpage) && is_numeric($listpage) && !empty($metas['canonical']) && !empty($metas['canonical']['#attributes']) && !empty($metas['canonical']['#attributes']['href'])) {
             $metas['canonical']['#attributes']['href'] = $metas['canonical']['#attributes']['href'] . '?listpage=' . $listpage;
         }
         return $metas;

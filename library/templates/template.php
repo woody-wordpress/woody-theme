@@ -458,7 +458,9 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         // On ajoute la meta desc à la racine du contexte pour y accéder rapidement
-        $this->context['description'] = $return['description']['#attributes']['content'];
+        if (!empty($return['description'])) {
+            $this->context['description'] = $return['description']['#attributes']['content'];
+        }
 
         // On permet la surcharge des metadata
         $return = apply_filters('woody_seo_edit_metas_array', $return);
