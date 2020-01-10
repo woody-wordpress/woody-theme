@@ -166,8 +166,8 @@ class WoodyTheme_WoodyGetters
         ];
 
         $feeds = [];
-        foreach ($wrapper['topic_source'] as $term_id) {
-            $term = get_term($term_id, 'topic_source');
+        foreach ($wrapper['topic_category'] as $term_id) {
+            $term = get_term($term_id, 'topic_category');
             $feeds[] = $term->name;
         }
         $time = !empty($wrapper['publish_date']) ? strtotime($wrapper['publish_date']) : 0;
@@ -178,7 +178,7 @@ class WoodyTheme_WoodyGetters
             'meta_query' => array(
                 'relation' => 'AND',
                 array(
-                    'key' => 'woody_topic_feed',
+                    'key' => 'woody_topic_category',
                     'value' => $feeds,
                     'compare' => 'IN'
                 ),
