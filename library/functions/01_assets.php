@@ -129,6 +129,8 @@ function getWoodyIcons()
 
     $return = array_merge($core_icons, $site_icons, $station_icons);
 
+    apply_filters('woody_add_more_icons', $return);
+
     return $return;
 }
 
@@ -282,7 +284,7 @@ function isWoodyInstagram($attachment_id)
  *****************************/
 function minuteConvert($num)
 {
-    $convertedTime['hours'] = floor($num/60);
-    $convertedTime['minutes'] = round((($num/60) - $convertedTime['hours'])*60);
+    $convertedTime['hours'] = floor($num / 60);
+    $convertedTime['minutes'] = round((($num / 60) - $convertedTime['hours']) * 60);
     return $convertedTime;
 }

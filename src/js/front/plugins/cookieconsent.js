@@ -2,7 +2,7 @@ var style = getComputedStyle(document.body);
 window.enableAnalyticsEvent = false;
 window.enableCookiesEvent = false;
 
-if (window.siteConfig.current_lang.indexOf('fr') != -1) {
+if (window.siteConfig.current_lang.indexOf('fr') != -1 || window.siteConfig.current_lang.indexOf('br') != -1) {
     var message =
         "Ce site web active par défaut des cookies de mesure d'audience et pour des fonctionnalités anonymes.";
     var dismiss = 'OK je comprends !';

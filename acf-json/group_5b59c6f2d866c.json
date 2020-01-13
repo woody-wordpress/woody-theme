@@ -1,8 +1,7 @@
 {
     "key": "group_5b59c6f2d866c",
     "title": "Slide",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b59c6ff44164",
             "label": "Contenu",
             "name": "",
@@ -96,13 +95,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",

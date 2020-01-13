@@ -540,7 +540,8 @@
 .acf-field-5bbcac7027b56,
 .acf-field-5bd81b41a3040,
 .acf-field-5bc6e6b0bd875,
-.acf-field-5beb046c93939 {
+.acf-field-5beb046c93939,
+.acf-field-5dad73a7f4ccb {
     input[type=text] {
         font-size: 1.4em !important;
         font-weight: bold;
@@ -787,32 +788,32 @@
 }
 
 // On masque les anciens champs du backoffice et on règles la tailles des onglets impactés
-#acf-group_5b2bbb46507bf {
-    .acf-tab-group {
-        li:nth-of-type(2) {
-            display: none !important;
-        }
-    }
-}
+// #acf-group_5b2bbb46507bf {
+//     .acf-tab-group {
+//         li:nth-of-type(2) {
+//             display: none !important;
+//         }
+//     }
+// }
 
 
-.acf-field-5b043f0525968 {
-    .layout[data-layout="call_to_action"] {
-        .acf-tab-group {
-            li:nth-of-type(2) {
-                display: none !important;
-            }
-        }
-    }
+// .acf-field-5b043f0525968 {
+//     .layout[data-layout="call_to_action"] {
+//         .acf-tab-group {
+//             li:nth-of-type(2) {
+//                 display: none !important;
+//             }
+//         }
+//     }
 
-    .layout[data-layout="gallery"] {
-        .acf-tab-group {
-            li:nth-of-type(3) {
-                display: none !important;
-            }
-        }
-    }
-}
+//     .layout[data-layout="gallery"] {
+//         .acf-tab-group {
+//             li:nth-of-type(3) {
+//                 display: none !important;
+//             }
+//         }
+//     }
+// }
 
 .acf-field-5bb3297e77f43 {
     display: none !important;
@@ -826,5 +827,24 @@
                 display: none;
             }
         }
+    }
+}
+
+// Champ "Page liée" dans le détail des images
+.acf-field-5c0553157e6d0 {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+
+    .acf-label {
+        margin-right: 10px;
+        margin-bottom: 0;
+        line-height: 1em;
+    }
+}
+
+.acf-link {
+    .media-frame a.button {
+        color: #fff;
     }
 }

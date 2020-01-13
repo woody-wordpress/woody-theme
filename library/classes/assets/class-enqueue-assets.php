@@ -263,7 +263,8 @@ class WoodyTheme_Enqueue_Assets
             'jsdelivr_lg-thumbnail',
             'jsdelivr_lg-video',
             'jsdelivr_lg-zoom',
-            'jsdelivr_lg-fullscreen'
+            'jsdelivr_lg-fullscreen',
+            'wp-i18n'
         ];
         wp_enqueue_script('main-javascripts', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('js/main.js'), $dependencies, '', true);
 

@@ -1,15 +1,15 @@
 .wp-core-ui .button {
-    border-radius: 0;
-    box-shadow: none;
-    border: none;
-    text-shadow: none;
-    height: auto;
+    // border-radius: 0;
+    // box-shadow: none;
+    // border: none;
+    // text-shadow: none;
+    // height: auto;
     padding: 5px 10px;
 
-    &.button-large {
-        height: auto;
-        padding: 5px 10px;
-    }
+    // &.button-large {
+    //     height: auto;
+    //     padding: 5px 10px;
+    // }
 
     &.edit-slug {
         margin-left: 5px;
@@ -299,6 +299,12 @@ textarea.notAllowed {
             color: #fff;
         }
     }
+}
+
+.droppable-area {
+    height: 36px;
+    visibility: visible;
+    background: rgba(17, 255, 108, 0.479);
 }
 
 @keyframes submitSlideIn {
