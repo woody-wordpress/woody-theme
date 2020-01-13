@@ -43,7 +43,7 @@ class WoodyTheme_Unpublisher
 
         // echo '<label for="wUnpublisher_date">Date de dépublication : </label>';
         echo '<div class="input-wrapper">';
-        echo '<input placeholder="Choisir une une date" id="wUnpublisher_date" name="wUnpublisher_date" value="' . $wUnpublisher_date_value . '"/>';
+        echo '<input placeholder="Choisir une date" id="wUnpublisher_date" name="wUnpublisher_date" value="' . $wUnpublisher_date_value . '"/>';
         echo '<small class="unpublisher-reset-date">x</small>';
         echo '</div>';
         echo '<div><small><i>À compter de la date choisie (+/- 1h), le contenu passe en brouillon</div></small></i>';
