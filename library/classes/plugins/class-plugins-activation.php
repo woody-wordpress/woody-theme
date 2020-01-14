@@ -25,10 +25,12 @@ class WoodyTheme_Plugins_Activation
 
     public function activatePlugins()
     {
-        $this->deactivate_plugins = [];
+        $this->deactivate_plugins = [
+            'timber-library/timber.php',
+        ];
+        
         $this->activate_plugins = [
             'advanced-custom-fields-pro/acf.php',
-            'timber-library/timber.php',
             'bea-sanitize-filename/bea-sanitize-filename.php',
             'wp-deferred-javascripts/wp-deferred-javascripts.php',
             'advanced-cron-manager/advanced-cron-manager.php',

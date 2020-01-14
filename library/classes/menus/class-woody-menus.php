@@ -236,7 +236,7 @@ class WoodyTheme_Menus
                                 $sublinks = get_children($args);
                                 $link['sublinks'] = !empty($sublinks) ? self::getMenuLinks($sublinks) : [];
                             }
-                            $part['links'][$link_key] = Timber::compile($twig_paths[$link_display], $link);
+                            $part['links'][$link_key] = \Timber::compile($twig_paths[$link_display], $link);
                         }
                     }
                 }
@@ -245,7 +245,7 @@ class WoodyTheme_Menus
                     $part_display = $submenu['display']['parts'][$i]['part_tpl'];
                     $the_part['items'] = (!empty($part['links'])) ? $part['links'] : [];
                     $the_part['menu_part_title'] = (!empty($part['part_title'])) ? $part['part_title'] : '';
-                    $menu_link['submenu'][$key] = Timber::compile($twig_paths[$part_display], $the_part);
+                    $menu_link['submenu'][$key] = \Timber::compile($twig_paths[$part_display], $the_part);
                 } elseif (!empty($submenu['display']['parts'][$i]['custom_function'])) {
                     $menu_link['submenu'][$key] = $submenu['display']['parts'][$i]['custom_function'];
                 } else {
@@ -258,7 +258,7 @@ class WoodyTheme_Menus
                 $i++;
             }
 
-            $return = Timber::compile($twig_paths[$submenu['display']['grid_tpl']], $the_submenu);
+            $return = \Timber::compile($twig_paths[$submenu['display']['grid_tpl']], $the_submenu);
         }
 
         return $return;

@@ -97,7 +97,7 @@ class WoodyTheme_Roles
             }
         }
 
-        return Timber::compile('parts\protected_post.twig', $vars);
+        return \Timber::compile('parts\protected_post.twig', $vars);
     }
 
 
