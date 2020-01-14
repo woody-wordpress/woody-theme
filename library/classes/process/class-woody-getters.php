@@ -81,6 +81,8 @@ class WoodyTheme_WoodyGetters
         $clickable = true;
         if (!empty($wrapper['content_selection'])) {
             foreach ($wrapper['content_selection'] as $key => $item_wrapper) {
+
+                // Sommes-nous dans le cas d'une mise en avant de composants de séjours ?
                 $item_wrapper['content_selection_type'] = $wrapper['acf_fc_layout'] == 'focus_trip_components' ? 'existing_content' : $item_wrapper['content_selection_type'];
                 if (!empty($item_wrapper['existing_content']['trip_component'])) {
                     $item_wrapper['existing_content']['content_selection'] = $item_wrapper['existing_content']['trip_component'];
@@ -197,7 +199,7 @@ class WoodyTheme_WoodyGetters
 
         if (!empty($result->posts)) {
             foreach ($result->posts as $post) {
-                $item = Timber::get_post($post->ID);
+                $item = \Timber::get_post($post->ID);
                 $items['items'][] = $this->getTopicPreview($wrapper, $item);
             }
         }
@@ -329,6 +331,7 @@ class WoodyTheme_WoodyGetters
 
             ] : '',
             'description' => (!empty($item['description'])) ? $this->tools->replacePattern($item['description']) : '',
+            'ellipsis' => 999
         ];
 
         if ($item['action_type'] == 'file' && !empty($item['file']['url'])) {

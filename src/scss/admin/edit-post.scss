@@ -244,6 +244,63 @@ textarea.notAllowed {
     }
 }
 
+// Unpublish metabox
+#woody-unpublisher {
+    .input-wrapper {
+        position: relative;
+        margin-bottom: 10px;
+    }
+
+    .flatpickr-input {
+        background: transparent;
+        box-shadow: none;
+        padding: 10px 0;
+        width: 100%;
+        color: #006799;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        font-size: 16px;
+
+        &::-webkit-input-placeholder {
+            color: #006799;
+        }
+
+        &:-moz-placeholder {
+            color: #006799;
+        }
+
+        &::-moz-placeholder {
+            color: #006799;
+        }
+
+        &:-ms-input-placeholder {
+            color: #006799;
+        }
+    }
+
+    .unpublisher-reset-date {
+        width: 18px;
+        height: 18px;
+        background-color: #f1f1f1;
+        font-weight: bold;
+        border-radius: 50%;
+        position: absolute;
+        right: 5px;
+        top: calc(50% - 9px);
+        transition: all .3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #006799;
+            color: #fff;
+        }
+    }
+}
+
 .droppable-area {
     height: 36px;
     visibility: visible;
