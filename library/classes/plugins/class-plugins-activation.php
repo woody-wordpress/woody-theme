@@ -27,6 +27,8 @@ class WoodyTheme_Plugins_Activation
     {
         $this->deactivate_plugins = [
             'timber-library/timber.php',
+            'wordpress-seo/wp-seo.php',
+            'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php'
         ];
         
         $this->activate_plugins = [
