@@ -42,7 +42,7 @@ class WoodyTheme_WoodyGetters
         // On transforme la donnée des posts récupérés pour coller aux templates de blocs Woody
         if (!empty($query_result->posts)) {
             foreach ($query_result->posts as $key => $post) {
-
+                
                 // On vérifie si la page est de type miroir
                 $page_type = get_the_terms($post->ID, 'page_type');
                 if ($page_type[0]->slug == 'mirror_page') {
@@ -53,7 +53,6 @@ class WoodyTheme_WoodyGetters
                 }
 
                 $data = [];
-                $post = \Timber::get_post($post->ID);
                 $data = $this->getPagePreview($wrapper, $post);
 
                 // $data['link']['title'] = (!empty($wrapper['links_label'])) ? $wrapper['links_label'] : '';
