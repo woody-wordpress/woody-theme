@@ -42,7 +42,7 @@ class WoodyTheme_WoodyGetters
         // On transforme la donnée des posts récupérés pour coller aux templates de blocs Woody
         if (!empty($query_result->posts)) {
             foreach ($query_result->posts as $key => $post) {
-                
+
                 // On vérifie si la page est de type miroir
                 $page_type = get_the_terms($post->ID, 'page_type');
                 if ($page_type[0]->slug == 'mirror_page') {
@@ -245,20 +245,20 @@ class WoodyTheme_WoodyGetters
                 $data['subtitle'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($item, 'focus_subtitle', get_field('page_heading_heading', $item->ID), 'subtitle', $item, 'field_5b87f23b57a1e'), $item);
             }
             if (in_array('icon', $wrapper['display_elements'])) {
-                $data['woody_icon'] = $item->get_field('focus_woody_icon');
+                $data['woody_icon'] = get_field('focus_woody_icon', $item->ID);
                 $data['icon_type'] = 'picto';
             }
             if (in_array('description', $wrapper['display_elements'])) {
                 $data['description'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($item, 'focus_description', $item, 'field_5b2bbbfaec6b2'), $item);
             }
             if (in_array('price', $wrapper['display_elements'])) {
-                $data['the_price'] = $item->get_field('field_5b6c670eb54f2');
+                $data['the_price'] = get_field('field_5b6c670eb54f2', $item->ID);
             }
             if (in_array('duration', $wrapper['display_elements'])) {
-                $data['the_duration'] = $item->get_field('field_5b6c5e7cb54ee');
+                $data['the_duration'] = get_field('field_5b6c5e7cb54ee', $item->ID);
             }
             if (in_array('length', $wrapper['display_elements'])) {
-                $data['the_length'] = $item->get_field('field_5b95423386e8f');
+                $data['the_length'] = get_field('field_5b95423386e8f', $item->ID);
             }
 
             foreach ($wrapper['display_elements'] as $display) {

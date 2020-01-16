@@ -83,12 +83,12 @@ abstract class WoodyTheme_TemplateAbstract
     private function initContext()
     {
         $this->context = Timber::get_context();
+        $this->context['post_id'] = get_the_ID();
         $this->context['current_url'] = get_permalink();
         $this->context['site_key'] = WP_SITE_KEY;
 
         // Default values
         $this->context['post'] = false;
-        $this->context['post_id'] = false;
         $this->context['post_title'] = false;
         $this->context['sheet_id'] = false;
         $this->context['page_type'] = false;
@@ -98,7 +98,7 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['woody_access_staging'] = WOODY_ACCESS_STAGING;
 
         // SEO Context
-        $this->context['title'] = (!empty(get_field('field_5d7f7dea20bb1'))) ? woody_untokenize(get_field('woodyseo_meta_title')) : get_the_title() . ' | ' . $this->context['site']->name;
+        $this->context['title'] = (!empty(get_field('field_5d7f7dea20bb1'))) ? woody_untokenize(get_field('woodyseo_meta_title')) : get_the_title() . ' | ' . $this->context['site']['name'];
         $this->context['title'] = apply_filters('woody_seo_edit_meta_string', $this->context['title']);
         $this->context['metas'] = $this->setMetadata();
         $this->context['custom_meta'] = get_field('woody_custom_meta', 'options');
@@ -204,6 +204,7 @@ abstract class WoodyTheme_TemplateAbstract
         // ******************************* //
         // Définition des metas statiques
         // ******************************* //
+
         $return = [
             'canonical' => [
                 '#tag' => 'link',
@@ -215,7 +216,7 @@ abstract class WoodyTheme_TemplateAbstract
             'charset' => [
                 '#tag' => 'meta',
                 '#attributes' => [
-                    'charset' => $this->context['site']->charset,
+                    'charset' => $this->context['site']['charset'],
                 ]
             ],
             'http-equiv' => [
@@ -297,12 +298,12 @@ abstract class WoodyTheme_TemplateAbstract
         // ******************************* //
         // On ajoute la meta og:site_name
         // ******************************* //
-        if (!empty($this->context['site']->name)) {
+        if (!empty($this->context['site']['name'])) {
             $return['og:site_name'] = [
                 '#tag' => 'meta',
                 '#attributes' => [
                     'property' => 'og:site_name',
-                    'content' => !(empty($this->context['site']->name)) ? $this->context['site']->name : ''
+                    'content' => !(empty($this->context['site']['name'])) ? $this->context['site']['name'] : ''
                 ]
             ];
         }
@@ -376,7 +377,7 @@ abstract class WoodyTheme_TemplateAbstract
                         if (!empty($data)) {
                             $return['og:title']['#attributes']['content'] = woody_untokenize($data);
                         } else {
-                            $return['og:title']['#attributes']['content'] = get_the_title() . ' | ' . $this->context['site']->name;
+                            $return['og:title']['#attributes']['content'] = get_the_title() . ' | ' . $this->context['site']['name'];
                         }
                         break;
                     case 'woodyseo_fb_description':
@@ -415,7 +416,7 @@ abstract class WoodyTheme_TemplateAbstract
                         if (!empty($data)) {
                             $return['twitter:title']['#attributes']['content'] = woody_untokenize($data);
                         } else {
-                            $return['twitter:title']['#attributes']['content'] = get_the_title() . ' | ' . $this->context['site']->name;
+                            $return['twitter:title']['#attributes']['content'] = get_the_title() . ' | ' . $this->context['site']['name'];
                         }
                         break;
                     case 'woodyseo_twitter_description':
