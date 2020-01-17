@@ -1,24 +1,8 @@
 import $ from 'jquery';
 
-window.dataLayer = window.dataLayer || [];
-
-var obj = {
-    eventCategory: 'PAGE|' + globals.post_title + '|' + globals.post_id,
-    eventAction: 'Page vue',
-    eventLabel: globals.post_id,
-    eventValue: '',
-    event: 'page_view',
-    page: {}
-},
-page = {
-    name: globals.post_title,
-    id_page: globals.post_id,
-    langue: window.siteConfig.current_lang,
-    type: '',
-    lieu: ''
-};
-
 var getPlace = function() {
+    page.type = $('body').attr('class').match(/woodypage-[a-z_\-]+/gi) != null ? $('body').attr('class').match(/woodypage-[a-z_\-]+/gi)[0].substr(10) : '';
+
     if (typeof frontendajax != "undefined" && frontendajax != null) {
         $.ajax({
             type: 'POST',
@@ -40,14 +24,26 @@ var getPlace = function() {
     }
 }
 
-var setType = function() {
-    page.type = $('body').attr('class').match(/woodypage-[a-z_\-]+/gi) != null ? $('body').attr('class').match(/woodypage-[a-z_\-]+/gi)[0].substr(10) : '';
-}
+window.dataLayer = window.dataLayer || [];
+var eventCategory = 'PAGE|' + globals.post_title.trim() + '|' + globals.post_id,
+eventPrefix = 'woody_',
+page = {
+    name: globals.post_title,
+    id_page: globals.post_id,
+    langue: window.siteConfig.current_lang,
+    type: '',
+    lieu: ''
+};
 
 $.when(getPlace()).then( function() {
-    setType();
-    obj.page = page;
-    window.dataLayer.push(obj);
+    window.dataLayer.push({
+        eventCategory: eventCategory,
+        eventAction: 'Page vue',
+        eventLabel: globals.post_id,
+        eventValue: '',
+        event: eventPrefix +'page_view',
+        page: page
+    });
 });
 
 if ($('.sharing-links').length) {
@@ -62,32 +58,25 @@ if ($('.sharing-links').length) {
             socialshare = 'email';
         }
 
-        var obj = {
-            eventCategory: 'Pages',
+        window.dataLayer.push({
+            eventCategory: eventCategory,
             eventAction: 'Clic bouton réseaux sociaux',
             eventLabel: socialshare,
             eventValue: '',
-            event: 'page_social_network',
+            event: eventPrefix +'click_social_network',
             page: page
-        };
-        window.dataLayer.push(obj);
+        });
     });
 }
 
 $('.woody-component-claims-block .claim-content .claim-link .button').click(function() {
-    // TODO: voir comment réecrire l'event GTM concernant les blocs de pub
-    // var obj = {
-    //     eventCategory: 'Pages',
-    //     eventAction: 'Clic sur bloc de publicité',
-    //     eventLabel: 'Clic claim button',
-    //     eventValue: '',
-    //     page: {
-    //         name: globals.post_title
-    //     }
-    // };
-
     window.dataLayer.push({
-        event: 'Clic claim button',
+        eventCategory: eventCategory,
+        eventAction: 'Clic sur bloc de publicité',
+        eventLabel: $(this).closest('.claim-link').find('a').first().attr('href'),
+        eventValue: '',
+        event: eventPrefix +'click_claim',
+        page: page
     });
     if (typeof ga !== 'undefined' && ga != null) {
         ga('rc.send', 'event', 'claim', 'CLIC_CLAIM_BUTTON', 'Clic claim button', undefined);
