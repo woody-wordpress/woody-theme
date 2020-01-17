@@ -39,7 +39,7 @@ $.when(getPlace()).then( function() {
     window.dataLayer.push({
         eventCategory: eventCategory,
         eventAction: 'Page vue',
-        eventLabel: globals.post_id,
+        eventLabel: globals.post_title.trim() + '|' + globals.post_id,
         eventValue: '',
         event: eventPrefix +'page_view',
         page: page
