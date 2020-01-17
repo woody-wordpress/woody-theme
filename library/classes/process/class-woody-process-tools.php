@@ -246,12 +246,10 @@ class WoodyTheme_WoodyProcessTools
                             }
                             break;
                     }
-
-                } elseif($effect_key == 'deep') {
+                } elseif ($effect_key == 'deep') {
                     $return['deep'] = 'deep-'.$effect;
                 }
             }
-
         }
 
         if (!empty($return['transform'])) {
@@ -298,7 +296,7 @@ class WoodyTheme_WoodyProcessTools
             $pattern = "/%nombre%/";
             preg_match($pattern, $str, $matches);
             if (!empty($matches)) {
-                $confId = $post->get_field('playlist_conf_id');
+                $confId = get_field('playlist_conf_id', $post->ID);
                 if (!empty($confId)) {
                     $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), array(), 'json');
                     if (!empty($playlist)) {
