@@ -274,35 +274,6 @@
                         "min": "",
                         "max": ""
                     },
-                    "layout_5bc4870e9b087": {
-                        "key": "layout_5bc4870e9b087",
-                        "name": "auto_focus_sheets",
-                        "label": "Mise en avant de fiches SIT (sélection automatique)",
-                        "display": "block",
-                        "sub_fields": [{
-                            "key": "field_5bc487449b089",
-                            "label": "Sélection",
-                            "name": "content_selection",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "clone": [
-                                "group_5b33890e6fa0b"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }],
-                        "min": "",
-                        "max": ""
-                    },
                     "layout_5bc6eeaf0b4f3": {
                         "key": "layout_5bc6eeaf0b4f3",
                         "name": "content_list",
