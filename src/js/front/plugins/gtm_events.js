@@ -60,10 +60,24 @@ if ($('.sharing-links').length) {
 
         window.dataLayer.push({
             eventCategory: eventCategory,
-            eventAction: 'Clic bouton réseaux sociaux',
+            eventAction: 'Clic bouton partager réseaux sociaux',
             eventLabel: socialshare,
             eventValue: '',
             event: eventPrefix +'click_social_network',
+            page: page
+        });
+    });
+}
+
+if ($('.menu-social').length) {
+    $('.menu-social [data-network]').click(function(){
+
+        window.dataLayer.push({
+            eventCategory: eventCategory,
+            eventAction: 'Clic bouton follow réseaux sociaux',
+            eventLabel: $(this).attr('data-network'),
+            eventValue: '',
+            event: eventPrefix +'click_follow_network',
             page: page
         });
     });
@@ -78,6 +92,7 @@ $('.woody-component-claims-block .claim-content .claim-link .button').click(func
         event: eventPrefix +'click_claim',
         page: page
     });
+
     if (typeof ga !== 'undefined' && ga != null) {
         ga('rc.send', 'event', 'claim', 'CLIC_CLAIM_BUTTON', 'Clic claim button', undefined);
     }
