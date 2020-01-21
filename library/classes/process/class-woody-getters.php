@@ -80,6 +80,8 @@ class WoodyTheme_WoodyGetters
         $clickable = true;
         if (!empty($wrapper['content_selection'])) {
             foreach ($wrapper['content_selection'] as $key => $item_wrapper) {
+
+                // Sommes-nous dans le cas d'une mise en avant de composants de séjours ?
                 $item_wrapper['content_selection_type'] = $wrapper['acf_fc_layout'] == 'focus_trip_components' ? 'existing_content' : $item_wrapper['content_selection_type'];
                 if (!empty($item_wrapper['existing_content']['trip_component'])) {
                     $item_wrapper['existing_content']['content_selection'] = $item_wrapper['existing_content']['trip_component'];
@@ -160,11 +162,13 @@ class WoodyTheme_WoodyGetters
      */
     public function getAutoFocusTopicsData($wrapper)
     {
-        $items = [];
+        $items = [
+            'items' => []
+        ];
 
         $feeds = [];
-        foreach ($wrapper['topic_newspaper'] as $term_id) {
-            $term = get_term($term_id, 'topic_newspaper');
+        foreach ($wrapper['topic_category'] as $term_id) {
+            $term = get_term($term_id, 'topic_category');
             $feeds[] = $term->name;
         }
         $time = !empty($wrapper['publish_date']) ? strtotime($wrapper['publish_date']) : 0;
@@ -175,7 +179,7 @@ class WoodyTheme_WoodyGetters
             'meta_query' => array(
                 'relation' => 'AND',
                 array(
-                    'key' => 'woody_topic_feed',
+                    'key' => 'woody_topic_category',
                     'value' => $feeds,
                     'compare' => 'IN'
                 ),
@@ -328,6 +332,7 @@ class WoodyTheme_WoodyGetters
 
             ] : '',
             'description' => (!empty($item['description'])) ? $this->tools->replacePattern($item['description']) : '',
+            'ellipsis' => 999
         ];
 
         if ($item['action_type'] == 'file' && !empty($item['file']['url'])) {
@@ -503,12 +508,19 @@ class WoodyTheme_WoodyGetters
         $data['post_id'] = $item->ID;
         $data['title'] = !empty($item->post_title) ? $item->post_title : '';
 
-        if (!empty($item->woody_topic_img)) {
+        if (!empty($item->woody_topic_img) && !$item->woody_topic_attachment) {
             $img = [
                 'url' => 'https://api.tourism-system.com/resize/crop/%width%/%height%/70/' . base64_encode($item->woody_topic_img) . '/image.jpg',
                 'resizer' => true
             ];
             $data['img'] = $img;
+        } elseif (!empty($item->woody_topic_attachment)) {
+            $url = !empty(wp_get_attachment_image_src($item->woody_topic_attachment)) ? wp_get_attachment_image_src($item->woody_topic_attachment)[0] : '';
+
+            $data['img'] = [
+                'url' => $url,
+                'resizer' => true
+            ];
         }
 
         if (!empty($item->woody_topic_desc)) {
