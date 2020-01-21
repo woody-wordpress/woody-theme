@@ -106,6 +106,9 @@ class WoodyTheme_Polylang
         __('jours', 'woody-theme');
         __('personne', 'woody-theme');
         __('personnes', 'woody-theme');
+        __('Départ', 'woody-theme');
+        __('Arrivée', 'woody-theme');
+        __('Etape', 'woody-theme');
 
         // Availabilities calendar
         __('Attention, vous n\'avez pas saisi d\'identifiant de playlist en paramètre du shortcode.
@@ -257,10 +260,25 @@ class WoodyTheme_Polylang
         // Divers
         __('Publié le', 'woody-theme');
         __('Désolé, aucun contenu ne correspond à votre recherche', 'woody-theme');
+        __('Lire aussi', 'woody-theme');
 
         // Disqus
         __('Merci d\'activer le javascript pour afficher', 'woody-theme');
         __('le bloc de commentaires Disqus', 'woody-theme');
         __('Une erreur est survenue lors de l\'affichage des commentaires. Merci de contacter votre administrateur', 'woody-theme');
+
+        // Infolive
+        __('Remontées mécaniques', 'woody-theme');
+        __('Pistes', 'woody-theme');
+        __('Domaine Alpin', 'woody-theme');
+        __('Domaine Nordique', 'woody-theme');
+        __('Détails', 'woody-theme');
+        __('Météo', 'woody-theme');
+        __('Voir le bulletin météo', 'woody-theme');
+        __('Bulletin complet', 'woody-theme');
+        __('Webcams', 'woody-theme');
+        __('Voir les webcams', 'woody-theme');
+        __('Flux erroné !', 'woody-theme');
+        __('Module Infoneige non configuré !', 'woody-theme');
     }
 }

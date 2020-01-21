@@ -12,7 +12,7 @@ if (typeof window.wp.media != 'undefined' && typeof window.wp.media.view.l10n !=
 }
 
 $(document).one('click', '.attachments .attachment', function() {
-    $('<button type="button" class="button media-button button-primary edit-attachments-tag">Appliquer un tag</button>').insertAfter('.media-toolbar .media-toolbar-secondary .button-primary');
+    $('<button type="button" class="button media-button button-primary edit-attachments-tag">Ajouter des tags</button>').insertAfter('.media-toolbar .media-toolbar-secondary .button-primary');
 
     $('.media-frame-content .attachments li').on('click', function() {
         if ($('.media-toolbar-secondary .button.media-button.button-large').hasClass('hidden')) {
@@ -26,28 +26,43 @@ $(document).one('click', '.attachments .attachment', function() {
     });
 
     // Show popup
-    var popup = '<div class="add-medias-tag hidden"><div class="choices"><ul class="themes"><p>Thématiques</p></ul><ul class="places"><p>Lieux</p></ul><ul class="seasons"><p>Saisons</p></ul></div><div class="actions"><button class="button button-primary apply">Appliquer un tag</button><button class=" button close">Annuler</button></div></div>';
+    var popup = '<div class="add-medias-tag hidden"><div class="choices"><ul class="themes"><p>Thématiques</p></ul><ul class="places"><p>Lieux</p></ul><ul class="seasons"><p>Saisons</p></ul></div><div class="actions"><button class="button button-primary apply">Valider</button><button class=" button close">Annuler</button></div></div>';
     $('#wpbody-content').append(popup);
     $('.add-medias-tag .close').click(function() {
         $('.add-medias-tag').addClass('hidden');
     });
 
     $('.add-medias-tag .apply').click(function() {
-        var selected = $('.media-frame-content .attachments li.selected');
-        selected.each(function() {
-            var selected_el = $(this);
-            selected_el.trigger('click');
-            $('.add-medias-tag input:checked').each(function() {
-                var term_id = $(this).val();
-                var tax = $(this).closest('ul').attr('class');
-                $('.add-medias-tag').addClass('hidden');
-                if ($('.term-list #' + tax + '-' + term_id + ' .selectit').find('input').last().prop('checked') == false) {
-                    $('.term-list #' + tax + '-' + term_id + ' .selectit').trigger('click');
-                }
-            });
+
+        var attach_ids = [];
+        var term_ids = [];
+        $('.media-frame-content .attachments li.selected').each(function() {
+            attach_ids.push($(this).data('id'));
+        });
+        $('.add-medias-tag input:checked').each(function() {
+            term_ids.push($(this).val());
         });
 
-        $('.attachments li.selected').removeClass('selected');
+        $('body').removeClass('windowReady');
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: ajaxurl,
+            data: {
+                action: 'set_attachments_terms',
+                attach_ids: attach_ids,
+                term_ids: term_ids
+            },
+            success: function(response) {
+                if(response){
+                    location.reload();
+                }
+            },
+            error: function(err) {
+                console.error(err);
+                $('body').addClass('windowReady');
+            }
+        });
     });
 
     $.ajax({

@@ -17,7 +17,6 @@ use WoodyProcess\Tools\WoodyTheme_WoodyProcessTools;
 
 class WoodyTheme_WoodyGetters
 {
-
     protected $tools;
 
     public function __construct()
@@ -36,7 +35,6 @@ class WoodyTheme_WoodyGetters
      */
     public function getAutoFocusData($current_post, $wrapper, $paginate = false, $uniqid = 0, $ingore_maxnum = false, $posts_in = null, $filters = null)
     {
-
         $the_items = [];
         $process = new WoodyTheme_WoodyProcess;
         $query_result = $process->processWoodyQuery($current_post, $wrapper, $paginate, $uniqid, $ingore_maxnum, $posts_in, $filters);
@@ -83,6 +81,8 @@ class WoodyTheme_WoodyGetters
         $clickable = true;
         if (!empty($wrapper['content_selection'])) {
             foreach ($wrapper['content_selection'] as $key => $item_wrapper) {
+
+                // Sommes-nous dans le cas d'une mise en avant de composants de séjours ?
                 $item_wrapper['content_selection_type'] = $wrapper['acf_fc_layout'] == 'focus_trip_components' ? 'existing_content' : $item_wrapper['content_selection_type'];
                 if (!empty($item_wrapper['existing_content']['trip_component'])) {
                     $item_wrapper['existing_content']['content_selection'] = $item_wrapper['existing_content']['trip_component'];
@@ -92,7 +92,7 @@ class WoodyTheme_WoodyGetters
                 // La donnée de la vignette est saisie en backoffice
                 if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
                     $the_items['items'][$key] = $this->getCustomPreview($item_wrapper['custom_content'], $wrapper);
-                    // La donnée de la vignette correspond à un post sélectionné
+                // La donnée de la vignette correspond à un post sélectionné
                 } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
                     $item = $item_wrapper['existing_content'];
                     $status = $item['content_selection']->post_status;
@@ -110,7 +110,7 @@ class WoodyTheme_WoodyGetters
                             $post_preview = $this->getTopicPreview($wrapper, $item['content_selection']);
                             break;
                     }
-                    $the_items['items'][$key] = (!empty($post_preview)) ?  $post_preview : '';
+                    $the_items['items'][$key] = (!empty($post_preview)) ?  $post_preview : [];
                 }
             }
         }
@@ -199,7 +199,7 @@ class WoodyTheme_WoodyGetters
 
         if (!empty($result->posts)) {
             foreach ($result->posts as $post) {
-                $item = Timber::get_post($post->ID);
+                $item = \Timber::get_post($post->ID);
                 $items['items'][] = $this->getTopicPreview($wrapper, $item);
             }
         }
@@ -299,6 +299,8 @@ class WoodyTheme_WoodyGetters
             $data['link']['url'] = get_permalink($item->ID);
         }
 
+        $data = apply_filters('woody_custom_pagePreview', $data, $wrapper);
+
         return $data;
     }
 
@@ -329,6 +331,7 @@ class WoodyTheme_WoodyGetters
 
             ] : '',
             'description' => (!empty($item['description'])) ? $this->tools->replacePattern($item['description']) : '',
+            'ellipsis' => 999
         ];
 
         if ($item['action_type'] == 'file' && !empty($item['file']['url'])) {
@@ -372,7 +375,7 @@ class WoodyTheme_WoodyGetters
      *
      */
 
-    function getTouristicSheetPreview($wrapper = null, $item)
+    public function getTouristicSheetPreview($wrapper = null, $item)
     {
         if (!is_object($item) || empty($item)) {
             return;
@@ -498,7 +501,7 @@ class WoodyTheme_WoodyGetters
      * @param   item - Objet post wp
      * @return  data - Un tableau de données
      */
-    function getTopicPreview($wrapper, $item)
+    public function getTopicPreview($wrapper, $item)
     {
         $data = [];
         $data['post_id'] = $item->ID;
@@ -558,7 +561,6 @@ class WoodyTheme_WoodyGetters
                             ];
 
                             if (!empty($active_filters['filtered_taxonomy_terms']) && is_array($active_filters['filtered_taxonomy_terms'])) {
-
                                 foreach ($active_filters['filtered_taxonomy_terms'] as $filtered_terms) {
                                     // Si on reçoit le paramètre en tant qu'identifiant (select/radio) => on le pousse dans un tableau
                                     $filtered_terms = (!is_array($filtered_terms)) ? [$filtered_terms] : $filtered_terms;
@@ -581,7 +583,6 @@ class WoodyTheme_WoodyGetters
                             ];
 
                             if (!empty($active_filters['filtered_taxonomy_terms']) && is_array($active_filters['filtered_taxonomy_terms'])) {
-
                                 foreach ($active_filters['filtered_taxonomy_terms'] as $filtered_terms) {
                                     // Si on reçoit le paramètre en tant qu'identifiant (select/radio) => on le pousse dans un tableau
                                     $filtered_terms = (!is_array($filtered_terms)) ? [$filtered_terms] : $filtered_terms;

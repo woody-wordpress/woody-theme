@@ -43,7 +43,7 @@
             },
             {
                 "key": "field_5afd2fd8953bd",
-                "label": "Contenu de section",
+                "label": "Liste des blocs",
                 "name": "",
                 "type": "tab",
                 "instructions": "",
@@ -753,7 +753,7 @@
             },
             {
                 "key": "field_5afd2faf953bc",
-                "label": "Mise en page de section",
+                "label": "Disposition des blocs",
                 "name": "",
                 "type": "tab",
                 "instructions": "",
@@ -1123,7 +1123,12 @@
                 "operator": "!=",
                 "value": "mirror_page"
             }
-        ]
+        ],
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "tourtrip_step"
+        }]
     ],
     "menu_order": 15,
     "position": "acf_after_title",
@@ -1133,5 +1138,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1571838537
+    "modified": 1574323606
 }

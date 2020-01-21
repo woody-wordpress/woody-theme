@@ -1,8 +1,11 @@
 import $ from 'jquery';
+import flatpickr from "flatpickr";
+import { French } from "flatpickr/dist/l10n/fr.js"
 
 $('#post').each(function() {
 
-    // Added button "Retirer le tag principal"
+    // Bouton "Retirer le tag principal"
+    // TODO: Retirer cette fonction en même temps que Yoast
     $('#taxonomy-themes, #taxonomy-places, #taxonomy-seasons').each(function() {
         var $this = $(this);
         var name = $this.attr('id').replace('taxonomy-', '');
@@ -46,7 +49,7 @@ $('#post').each(function() {
         setTimeout(() => { bindMakePrimaryTerm(); }, 1500);
     });
 
-    // Alert change langue
+    // Sécurité sur le changement de langue => alerte indiquant que l'utilisateur va changer de langue
     $('#select-post-language').each(function() {
         var $this = $(this);
         var $select = $this.find('#post_lang_choice');
@@ -76,7 +79,7 @@ $('#post').each(function() {
         });
     });
 
-    // Show on scroll
+    // Boutons d'actions en backoffice au scroll
     var $preview_button = $('#minor-publishing-actions .preview.button');
     var $save_button = $('#publishing-action');
     $(window).scroll(function() {
@@ -91,70 +94,6 @@ $('#post').each(function() {
 
     // On ferme certaines metaboxes ACF => Visuel et accroche, En-tête, Bloc de résa, diaporama, révisions, Yoast, boxes en sidebar (sauf publier)
     $('#acf-group_5b052bbee40a4, #acf-group_5b2bbb46507bf, #acf-group_5c0e4121ee3ed, #acf-group_5bb325e8b6b43, #revisionsdiv, #wpseo_meta, #side-sortables .postbox:not(#submitdiv)').addClass('closed');
-
-    // Action sur les focus
-    // var toggleChoiceAction = function($bigparent) {
-    //     $bigparent.find('.tpl-choice-wrapper').each(function() {
-    //         var $this = $(this);
-
-    //         // On toggle la description de chaque template dans les champs woody_tpl
-    //         $this.find('.toggle-desc').click(function(e) {
-    //             e.stopPropagation();
-    //             $this.find('.tpl-desc').toggleClass('hidden');
-    //             $this.find('.desc-backdrop').toggleClass('hidden');
-    //         });
-
-    //         $this.find('.close-desc').click(function() {
-    //             $this.find('.tpl-desc').addClass('hidden');
-    //             $this.find('.desc-backdrop').addClass('hidden');
-    //         });
-
-    //         $this.find('.desc-backdrop').click(function() {
-    //             $this.find('.tpl-desc').addClass('hidden');
-    //             $(this).addClass('hidden');
-    //         });
-    //     });
-    // }
-
-    // Action sur les focus
-    // var fitChoiceAction = function($bigparent, count) {
-
-    //     $bigparent.find('.tpl-choice-wrapper').each(function() {
-    //         var $this = $(this);
-
-    //         var fittedfor = $this.data('fittedfor');
-    //         var acceptsmax = $this.data('acceptsmax');
-    //         if (fittedfor == 'all') fittedfor = 0;
-
-    //         // On affiche un état en fonction du nombre d'élément
-    //         if (count >= fittedfor && count <= acceptsmax) {
-    //             $this.removeClass('notfit');
-    //             $this.addClass('fit');
-    //         } else {
-    //             $this.removeClass('fit');
-    //             $this.addClass('notfit');
-    //         }
-    //     });
-    // }
-
-    var countElements = function(field) {
-        var $parent = field.parent().$el;
-        var $bigparent = field.parent().parent().$el;
-
-        // add class to this field
-        $parent.each(function() {
-            // toggleChoiceAction($bigparent);
-
-            setTimeout(() => {
-                var count = $(this).find('.acf-table .acf-row').length - 1;
-                // fitChoiceAction($bigparent, count);
-            }, 2000);
-        });
-    };
-
-    acf.addAction('ready_field/key=field_5b22415792db0', countElements);
-    acf.addAction('append_field/key=field_5b22415792db0', countElements);
-    acf.addAction('remove_field/key=field_5b22415792db0', countElements);
 
     // **
     // Update tpl-choice-wrapper classes for autofocus layout
@@ -242,7 +181,6 @@ $('#post').each(function() {
 
         $parent.each(function() {
             var $this = $(this);
-            // toggleChoiceAction($bigparent);
 
             getAutoFocusData($this);
 
@@ -383,4 +321,23 @@ $('#post').each(function() {
 
     $('.acf-field-5a61fa38b704f #acf-field_5a61fa38b704f').ready(addApplyModelButton);
     $('.acf-field-5a61fa38b704f #acf-field_5a61fa38b704f').change(addApplyModelButton);
+
+    // Add Flatpickr to Unpublish metabox
+    $('#woody-unpublisher').each(function() {
+
+        var unPublisher = flatpickr('#wUnpublisher_date', {
+            enableTime: true,
+            dateFormat: 'Y-m-dTH:i',
+            altInput: true,
+            altFormat: 'j F Y à H:i',
+            locale: French,
+            time_24hr: true,
+            minDate: 'today'
+        });
+
+        $('.unpublisher-reset-date').click(function() {
+            $(this).siblings('.flatpickr-input').val('');
+        });
+    })
+
 });

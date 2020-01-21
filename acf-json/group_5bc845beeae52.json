@@ -169,6 +169,34 @@
                             "placeholder": ""
                         }
                     ]
+                },
+                {
+                    "key": "field_5dfb89acd35f9",
+                    "label": "Position",
+                    "name": "deep",
+                    "type": "select",
+                    "instructions": "Position du bloc dans le cas d'un chevauchement entre plusieurs blocs",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "3": "Devant",
+                        "2": "Milieu",
+                        "1": "Derrière"
+                    },
+                    "default_value": [
+                        2
+                    ],
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 0,
+                    "return_format": "value",
+                    "ajax": 0,
+                    "placeholder": ""
                 }
             ]
         }
@@ -190,5 +218,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Permet d'ajouter des effets de type décalage, rotation, paralax",
-    "modified": 1567690528
+    "modified": 1576772770
 }

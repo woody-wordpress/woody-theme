@@ -89,13 +89,15 @@ class WoodyTheme_ACF_Counter
                     'posts_per_page' => (!empty($params['focused_count'])) ? intval(current($params['focused_count'])) : 16
                 ];
 
-                if (current($params['focused_hierarchy']) == 'child_of') {
-                    $the_query['post_parent'] = $params['current_post'];
-                } elseif (current($params['focused_hierarchy']) == 'brother_of') {
-                    // Si Hiérarchie = Enfants directs de la page
-                    // On passe le post ID dans le paramètre post_parent de la query
-                    $post_parent = wp_get_post_parent_id($params['current_post']);
-                    $the_query['post_parent'] = $post_parent;
+                if (!empty($params['focused_hierarchy'])) {
+                    if (current($params['focused_hierarchy']) == 'child_of') {
+                        $the_query['post_parent'] = $params['current_post'];
+                    } elseif (current($params['focused_hierarchy']) == 'brother_of') {
+                        // Si Hiérarchie = Enfants directs de la page
+                        // On passe le post ID dans le paramètre post_parent de la query
+                        $post_parent = wp_get_post_parent_id($params['current_post']);
+                        $the_query['post_parent'] = $post_parent;
+                    }
                 }
 
                 // It wasn't there, so regenerate the data and save the transient

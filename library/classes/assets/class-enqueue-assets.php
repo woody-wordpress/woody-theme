@@ -263,7 +263,8 @@ class WoodyTheme_Enqueue_Assets
             'jsdelivr_lg-thumbnail',
             'jsdelivr_lg-video',
             'jsdelivr_lg-zoom',
-            'jsdelivr_lg-fullscreen'
+            'jsdelivr_lg-fullscreen',
+            'wp-i18n'
         ];
         wp_enqueue_script('main-javascripts', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('js/main.js'), $dependencies, '', true);
 
@@ -291,6 +292,9 @@ class WoodyTheme_Enqueue_Assets
         // Enqueue the main Scripts
         $dependencies = ['jquery'];
         wp_enqueue_script('admin-javascripts', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('js/admin.js'), $dependencies, $this->wThemeVersion, true);
+
+        wp_enqueue_script('admin_jsdelivr_flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/flatpickr.min.js', [], '');
+        wp_enqueue_script('admin_jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/fr.js', ['admin_jsdelivr_flatpickr'], '', true);
 
         // Added global vars
         wp_add_inline_script('admin-javascripts', 'var siteConfig = ' . json_encode($this->siteConfig) . ';', 'before');
