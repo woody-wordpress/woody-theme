@@ -18,6 +18,7 @@ class WoodyTheme_Taxonomy
     protected function registerHooks()
     {
         add_action('wp_ajax_get_models_for_type', [$this, 'getModelsForTerm']);
+        add_action('wp_ajax_get_current_place', [$this, 'getCurrentPlace']);
         add_action('woody_theme_update', array($this, 'insertTerms'));
     }
 
@@ -266,7 +267,7 @@ class WoodyTheme_Taxonomy
         ];
 
         $term_id = filter_input(INPUT_POST, 'term_id', FILTER_VALIDATE_INT);
-        if(!empty($term_id)){
+        if (!empty($term_id)) {
             $term = get_term($term_id);
             $args = [
                 'post_type' => 'woody_model',
@@ -295,5 +296,29 @@ class WoodyTheme_Taxonomy
         }
 
         wp_send_json($posts);
+        exit;
+    }
+
+    /**
+     * Get current place associated to post
+     */
+    public function getCurrentPlace()
+    {
+        $place = [];
+        $post_id = filter_input(INPUT_POST, 'post_id', FILTER_SANITIZE_NUMBER_INT);
+        $terms = wp_get_post_terms($post_id, 'places');
+
+        if (!is_wp_error($terms)) {
+            foreach ($terms as $term) {
+                if(!empty($term->name)){
+                    $place[] = $term->name;
+                    wp_send_json($place);
+                    exit;
+                }
+            }
+        } else {
+            wp_send_json($place);
+            exit;
+        }
     }
 }

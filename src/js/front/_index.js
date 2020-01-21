@@ -3,6 +3,7 @@ import './framework/foundation-explicit-pieces';
 import './plugins/cookieconsent';
 import './plugins/scroll_to_top';
 import './plugins/search';
+import './plugins/gtm_events';
 
 // Woody Plugin
 import 'Claims/Resources/Assets/js/claims'
