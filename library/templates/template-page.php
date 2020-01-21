@@ -159,9 +159,10 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             // Si le module groupe est activé
             if (in_array('groups', $this->context['enabled_woody_options'])) {
                 $groupQuotation = new GroupQuotation;
+                $trip_infos['the_price'] = $trip_infos['the_price']['price_type'] == 'component_based' ? $groupQuotation->calculTripPrice($trip_infos['the_price']) : $trip_infos['the_price'] ;
+
                 // On vérifie si le prix est calculé sur un ensemble de composant et on le définit le cas échéant
                 if (!empty($trip_infos['the_price']['activate_quotation'])) {
-                    $trip_infos['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price']);
                     $quotation_id = get_option("options_quotation_page_url");
                     $quotation_id = pll_get_post($quotation_id) !== false ? pll_get_post($quotation_id) : $quotation_id;
                     $trip_infos['quotation_link']['link_label'] = get_permalink($quotation_id) . "?sejour=" . $this->context['post_id'];
