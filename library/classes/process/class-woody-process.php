@@ -445,9 +445,13 @@ class WoodyTheme_WoodyProcess
                     }
                 }
 
-                if (!empty($the_section['layout'])) {
+                // On récupère l'option "Masquer les sections vides"
+                $hide_empty_sections = get_field('hide_empty_sections', 'option');
+
+                // Si le contenu de la section est vide OU que l'option n'est pas cochée, on compile la section
+                if (!empty($the_section['layout']) || empty($hide_empty_sections)) {
                     $return[] = \Timber::compile($context['woody_components']['section-section_full-tpl_01'], $the_section);
-                } elseif (is_user_logged_in()) {
+                } elseif (is_user_logged_in()) { // Sinon, sinon on affiche un message à l'utilisateur connecté et rien à l'anonyme
                     $return[] = \Timber::compile('parts/empty_section.twig', $the_section);
                 }
             }
