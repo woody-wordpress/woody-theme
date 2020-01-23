@@ -421,7 +421,10 @@ class WoodyTheme_WoodyProcess
                         $components['items'][] = $this->processWoodyLayouts($layout, $context);
                     }
 
-                    if (!empty($section['section_woody_tpl'])) {
+                    // On retire les items retournés vides par processWoodyLayouts
+                    $components['items'] = array_filter($components['items']);
+
+                    if (!empty($section['section_woody_tpl']) && !empty($components['items'])) {
                         $the_layout = \Timber::compile($context['woody_components'][$section['section_woody_tpl']], $components);
                     }
                 }
@@ -442,7 +445,11 @@ class WoodyTheme_WoodyProcess
                     }
                 }
 
-                $return[] = \Timber::compile($context['woody_components']['section-section_full-tpl_01'], $the_section);
+                if (!empty($the_section['layout'])) {
+                    $return[] = \Timber::compile($context['woody_components']['section-section_full-tpl_01'], $the_section);
+                } elseif (is_user_logged_in()) {
+                    $return[] = \Timber::compile('parts/empty_section.twig', $the_section);
+                }
             }
         }
 
