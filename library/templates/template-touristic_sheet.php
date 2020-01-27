@@ -17,7 +17,6 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
 
     protected function registerHooks()
     {
-        add_filter('wpseo_title', [$this, 'filterTouristicSheetWpseoTitle']);
     }
 
     protected function getHeaders()
@@ -35,7 +34,7 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
         // override Body Classes
         $this->context['body_class'] .= ' apirender apirender-wordpress';
 
-        $sheet_id = $this->context['timberpost']->touristic_sheet_id;
+        $sheet_id = get_field('touristic_sheet_id', $this->context['post_id']);
         $sheet_lang = pll_get_post_language($this->context['post_id']);
         $sheet_code_lang = apply_filters('woody_pll_get_post_language', $this->context['post_id']);
 
@@ -51,62 +50,56 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
         $this->context['destinationName'] = null;
         $this->context['playlistId'] = null;
         $this->context['sheet_tourism'] = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $sheet_lang, []);
+        $this->context['title'] = $this->filterTouristicSheetWoodySeoTitle($this->context['title']);
 
-        // Set METAS
+        // Complete METAS
         if (!empty($this->context['sheet_tourism'])) {
-            foreach ($this->context['sheet_tourism']['metas'] as $key_meta => $meta) {
-                // Remove doubled metas (apirender & wordpress)
-                if (
-                    !empty($meta['#attributes']['property']) && ($meta['#attributes']['property'] == 'og:type'
-                        || $meta['#attributes']['property'] == 'og:url'
-                        || $meta['#attributes']['property'] == 'og:title')
-                ) {
-                    continue;
+            $api_metas =  $this->context['sheet_tourism']['metas'];
+
+            foreach ($api_metas as $meta_key => $meta) {
+                if (!empty($meta['#attributes']['property'])) {
+                    switch ($meta['#attributes']['property']) {
+                        case 'og:url':
+                                // On ignore les metas déjà définies et inutiles à surcharger
+                                break;
+                        case 'og:description':
+                            // On supprime l'entrée og:description car la meta name="description" définie plus bas contient property="og:description"
+                            unset($this->context['metas']['og:description']);
+                            break;
+                        default:
+                        $this->context['metas'][$meta['#attributes']['property']] = $api_metas[$meta_key];
+                            break;
+                    }
                 }
 
-                if (
-                    !empty($meta['#attributes']['name']) && ($meta['#attributes']['name'] == 'twitter:card'
-                        || $meta['#attributes']['name'] == 'twitter:title')
-                ) {
-                    continue;
-                }
-
-                if (
-                    !empty($meta['#attributes']['name']) && ($meta['#attributes']['name'] == 'twitter:card'
-                        || $meta['#attributes']['name'] == 'twitter:title')
-                ) {
-                    continue;
-                }
-
-                if (!empty($meta['#attributes']['rel']) && $meta['#attributes']['rel'] == 'canonical') {
-                    continue;
+                if (!empty($meta['#attributes']['name'])) {
+                    switch ($meta['#attributes']['name']) {
+                        case 'twitter:url':
+                             // On ignore les metas déjà définies et inutiles à surcharger
+                            break;
+                        default:
+                        $this->context['metas'][$meta['#attributes']['name']] = $api_metas[$meta_key];
+                            break;
+                    }
                 }
 
                 $woody_lang_enable = get_option('woody_lang_enable', []);
-                if (!empty($meta['#attributes']['hreflang']) && !in_array($meta['#attributes']['hreflang'], $woody_lang_enable)) {
-                    continue;
+                if (!empty($meta['#attributes']['hreflang']) && in_array($meta['#attributes']['hreflang'], $woody_lang_enable)) {
+                    $this->context['metas']['hreflang'] = $api_metas[$meta_key];
                 }
-
-                // Extract tags
-                $tag = '<' . $meta['#tag'];
-                foreach ($meta['#attributes'] as $key_attr => $attribute) {
-                    $tag .= ' ' . $key_attr . '="' . $attribute . '"';
-                }
-                $tag .= ' />';
-                $this->context['metas'][] = $tag;
             }
         } else {
             status_header('410');
         }
     }
 
-    public function filterTouristicSheetWpseoTitle($title)
+    public function filterTouristicSheetWoodySeoTitle($title)
     {
         // Si title commence par une langue en 2 caractère
         if (substr($title, 3, 1) == '-') {
-            $title = substr($title, 10);
+            $title = substr($title, 13);
         } else {
-            $title = substr($title, 6);
+            $title = substr($title, 8);
         }
 
         // Remove idFiche
@@ -127,9 +120,11 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
         // if (!empty($this->context['sheet_tourism']['playlistId'])) {
         //     $headers['x-ts-idplaylist'] = $this->context['sheet_tourism']['playlistId'];
         // }
-        if (!empty($this->context['timberpost']->touristic_sheet_id)) {
-            $headers['x-ts-idfiche'] = $this->context['timberpost']->touristic_sheet_id;
+        $sheet_id = get_field('touristic_sheet_id', $this->context['post_id']);
+        if (!empty($sheet_id)) {
+            $headers['x-ts-idfiche'] = $sheet_id;
         }
+        
         if (!empty($this->context['sheet_tourism']['apirender_uri'])) {
             $headers['x-apirender-url'] = $this->context['sheet_tourism']['apirender_uri'];
         }

@@ -66,8 +66,8 @@ class WoodyTheme_Polylang
      */
     private function twigExtractPot()
     {
-        // Yoast
-        __("Page non trouvée %%sep%% %%sitename%%", 'woody-theme');
+        // Woody SEO
+        __("Page non trouvée", 'woody-theme');
         __("Erreur 404 : Page non trouvée", 'woody-theme');
 
         // Date

@@ -11,4 +11,4 @@ $context = [
     'home_url' => home_url()
 ];
 $context = apply_filters('inc_header_override', $context);
-Timber::render('inclusions/inc_header.twig', $context);
+\Timber::render('inclusions/inc_header.twig', $context);

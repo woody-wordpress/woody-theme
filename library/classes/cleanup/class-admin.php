@@ -17,7 +17,6 @@ class WoodyTheme_Cleanup_Admin
     protected function registerHooks()
     {
         if (is_user_logged_in()) {
-            add_filter('wpseo_metabox_prio', [$this, 'yoastMoveMetaBoxBottom']);
             add_action('init', [$this, 'removePagesEditor']);
             add_action('admin_menu', [$this, 'removeAdminMenu']);
             add_action('admin_menu', [$this, 'customMenusPage']);
@@ -50,7 +49,7 @@ class WoodyTheme_Cleanup_Admin
     }
 
 
-    function sideMetaboxOrder($order)
+    public function sideMetaboxOrder($order)
     {
         add_meta_box('pageparentdiv', __('Déplacer la page'), 'page_attributes_meta_box', 'page', 'side');
         $box_order = array(
@@ -147,15 +146,6 @@ class WoodyTheme_Cleanup_Admin
     }
 
     /**
-     * Benoit Bouchaud
-     * On déplace la metabox Yoast en bas de page
-     */
-    public function yoastMoveMetaBoxBottom()
-    {
-        return 'low';
-    }
-
-    /**
      * Source https://junaidbhura.com/wordpress-admin-fix-fatal-error-allowed-memory-size-error/
      * Disable Posts' meta from being preloaded
      * This fixes memory problems in the WordPress Admin
@@ -235,7 +225,6 @@ class WoodyTheme_Cleanup_Admin
         remove_meta_box('dashboard_activity', 'dashboard', 'normal');
         remove_meta_box('dashboard_primary', 'dashboard', 'side');
         remove_meta_box('dashboard_quick_press', 'dashboard', 'side');
-        remove_meta_box('wpseo-dashboard-overview', 'dashboard', 'side');
     }
 
     /**

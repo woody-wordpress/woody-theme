@@ -19,7 +19,8 @@ class WoodyTheme_Template_Sitemap
     }
 
     protected function registerHooks()
-    { }
+    {
+    }
 
     public function render()
     {
@@ -33,7 +34,7 @@ class WoodyTheme_Template_Sitemap
                     header('Content-Type: text/xsl; charset=UTF-8');
                     break;
             }
-            Timber::render($this->twig_tpl, $this->context);
+            \Timber::render($this->twig_tpl, $this->context);
         }
     }
 

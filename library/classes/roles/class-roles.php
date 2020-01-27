@@ -97,7 +97,7 @@ class WoodyTheme_Roles
             }
         }
 
-        return Timber::compile('parts\protected_post.twig', $vars);
+        return \Timber::compile('parts\protected_post.twig', $vars);
     }
 
 
@@ -702,26 +702,6 @@ class WoodyTheme_Roles
                 'translator' => false,
             ],
             'Supprimer les types de publications' => [
-                'administrator' => true,
-                'editor' => false,
-                'contributor' => false,
-                'translator' => false,
-            ],
-
-            // Yoast
-            'wpseo_bulk_edit' => [
-                'administrator' => true,
-                'editor' => false,
-                'contributor' => false,
-                'translator' => false,
-            ],
-            'wpseo_edit_advanced_metadata' => [
-                'administrator' => true,
-                'editor' => false,
-                'contributor' => false,
-                'translator' => false,
-            ],
-            'wpseo_manage_options' => [
                 'administrator' => true,
                 'editor' => false,
                 'contributor' => false,

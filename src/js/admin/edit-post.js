@@ -4,52 +4,7 @@ import { French } from "flatpickr/dist/l10n/fr.js"
 
 $('#post').each(function() {
 
-    // Bouton "Retirer le tag principal"
-    // TODO: Retirer cette fonction en même temps que Yoast
-    $('#taxonomy-themes, #taxonomy-places, #taxonomy-seasons').each(function() {
-        var $this = $(this);
-        var name = $this.attr('id').replace('taxonomy-', '');
-
-        $this.append('<input class="button" id="primary-term-' + name + '-enable" style="text-align:center;" value="Retirer le tag principal">');
-
-        var $input = $('#yoast-wpseo-primary-' + name);
-        var $button = $this.find('#primary-term-' + name + '-enable');
-
-        var bindMakePrimaryTerm = function() {
-            $this.find('.wpseo-make-primary-term').click(function() {
-                $button.show();
-            });
-        }
-
-        var removePrimaryTerm = function() {
-            $this.find('.wpseo-primary-term').removeClass('wpseo-primary-term').addClass('wpseo-non-primary-term');
-            $input.attr('value', '');
-        }
-
-        if ($input.val() == '') {
-            $button.hide();
-        } else {
-            $button.show();
-        }
-
-        $input.change(function() {
-            if ($(this).val() == '') {
-                $button.hide();
-            } else {
-                $button.show();
-            }
-        });
-
-        $button.click(function() {
-            $(this).hide();
-            removePrimaryTerm();
-        });
-
-        // On attend que Yoast soit chargé
-        setTimeout(() => { bindMakePrimaryTerm(); }, 1500);
-    });
-
-    // Sécurité sur le changement de langue => alerte indiquant que l'utilisateur va changer de langue
+    // Alert change langue
     $('#select-post-language').each(function() {
         var $this = $(this);
         var $select = $this.find('#post_lang_choice');
@@ -92,8 +47,27 @@ $('#post').each(function() {
         }
     });
 
-    // On ferme certaines metaboxes ACF => Visuel et accroche, En-tête, Bloc de résa, diaporama, révisions, Yoast, boxes en sidebar (sauf publier)
-    $('#acf-group_5b052bbee40a4, #acf-group_5b2bbb46507bf, #acf-group_5c0e4121ee3ed, #acf-group_5bb325e8b6b43, #revisionsdiv, #wpseo_meta, #side-sortables .postbox:not(#submitdiv)').addClass('closed');
+    // On ferme certaines metaboxes ACF => Visuel et accroche, En-tête, Bloc de résa, diaporama, révisions, boxes en sidebar (sauf publier), WoodySeo
+    $('#acf-group_5b052bbee40a4, #acf-group_5b2bbb46507bf, #acf-group_5c0e4121ee3ed, #acf-group_5bb325e8b6b43, #revisionsdiv, #side-sortables .postbox:not(#submitdiv), #acf-group_5d7f7cd5615c0').addClass('closed');
+
+    var countElements = function(field) {
+        var $parent = field.parent().$el;
+        var $bigparent = field.parent().parent().$el;
+
+        // add class to this field
+        $parent.each(function() {
+            // toggleChoiceAction($bigparent);
+
+            setTimeout(() => {
+                var count = $(this).find('.acf-table .acf-row').length - 1;
+                // fitChoiceAction($bigparent, count);
+            }, 2000);
+        });
+    };
+
+    acf.addAction('ready_field/key=field_5b22415792db0', countElements);
+    acf.addAction('append_field/key=field_5b22415792db0', countElements);
+    acf.addAction('remove_field/key=field_5b22415792db0', countElements);
 
     // **
     // Update tpl-choice-wrapper classes for autofocus layout

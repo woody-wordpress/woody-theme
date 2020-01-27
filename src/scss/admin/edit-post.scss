@@ -199,6 +199,41 @@ textarea.notAllowed {
     }
 }
 
+// Primary term toggle styles
+.categorydiv {
+    .categorychecklist {
+        li {
+            position: relative;
+        }
+    }
+
+    .primary-toggle {
+        cursor: pointer;
+        color: #0085ba;
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        &.hide {
+            display: none;
+        }
+
+        &.unset-primary-term {
+            color: #555;
+        }
+    }
+
+    .is-primary-term {
+        font-weight: bold;
+    }
+}
+
+// Hide primary terms metabox cause we populate fields automatically
+#acf-group_5d7bad8e78214 {
+    display: none !important;
+}
+
+
 #apply-model-link {
     margin-left: 15px;
 

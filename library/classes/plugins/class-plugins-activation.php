@@ -25,20 +25,22 @@ class WoodyTheme_Plugins_Activation
 
     public function activatePlugins()
     {
-        $this->deactivate_plugins = [];
+        $this->deactivate_plugins = [
+            'timber-library/timber.php',
+            'wordpress-seo/wp-seo.php',
+            'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php'
+        ];
+        
         $this->activate_plugins = [
             'advanced-custom-fields-pro/acf.php',
-            'timber-library/timber.php',
             'bea-sanitize-filename/bea-sanitize-filename.php',
             'wp-deferred-javascripts/wp-deferred-javascripts.php',
             'advanced-cron-manager/advanced-cron-manager.php',
             'redirection/redirection.php',
-            'wordpress-seo/wp-seo.php',
             'enhanced-media-library/enhanced-media-library.php',
             'members/members.php',
             'ssl-insecure-content-fixer/ssl-insecure-content-fixer.php',
             'mce-table-buttons/mce_table_buttons.php',
-            'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
             'duplicate-post/duplicate-post.php',
             'polylang-pro/polylang.php',
             'publish-view/publish-view.php',

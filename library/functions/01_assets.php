@@ -11,7 +11,7 @@ use Symfony\Component\Finder\Finder;
  * @return   page_teaser_fields - Un tableau de données
  *
  */
-function getAcfGroupFields($group_id, $post = null)
+function getAcfGroupFields($group_id, $post = null, $display_empty = false)
 {
     if (is_null($post)) {
         $post = get_post();
@@ -29,7 +29,9 @@ function getAcfGroupFields($group_id, $post = null)
                     $field_value = get_field($field['name'], $post_id);
                 }
 
-                if ($field_value && !empty($field_value)) {
+                if ($display_empty) {
+                    $the_fields[$field['name']] = $field_value;
+                } elseif ($field_value && !empty($field_value)) {
                     $the_fields[$field['name']] = $field_value;
                 }
             }
@@ -180,10 +182,8 @@ function getWoodyTwigPaths()
     return $woodyTwigsPaths;
 }
 
-function getPageTerms($post_id)
+function getPageTaxonomies()
 {
-    $return = [];
-
     $taxonomies = get_transient('woody_website_pages_taxonomies');
     if (empty($taxonomies)) {
         $taxonomies = get_object_taxonomies('page', 'objects');
@@ -192,6 +192,15 @@ function getPageTerms($post_id)
         unset($taxonomies['post_translations']);
         set_transient('woody_website_pages_taxonomies', $taxonomies);
     }
+
+    return $taxonomies;
+}
+
+function getPageTerms($post_id)
+{
+    $return = [];
+
+    $taxonomies = getPageTaxonomies();
 
     foreach ($taxonomies as $taxonomy) {
         $terms = wp_get_post_terms($post_id, $taxonomy->name);
@@ -208,11 +217,10 @@ function getPageTerms($post_id)
 function getPrimaryTerm($taxonomy, $post_id, $fields = [])
 {
     $return = null;
-    // $field values can be : count, description, filter, name, perent, slug, taxonomy, term_group, term_id, term_taxonomy_id
-    if (class_exists('WPSEO_Primary_Term')) {
-        $wpseo_primary_term = new WPSEO_Primary_Term($taxonomy, $post_id);
-        $primary_id = $wpseo_primary_term->get_primary_term();
-        $primary_term = get_term($primary_id);
+
+    $fieldPrimaryTax = get_field('field_5d7bada38eedf', $post_id);
+    if (!empty($fieldPrimaryTax['primary_' . $taxonomy])) {
+        $primary_term = get_term($fieldPrimaryTax['primary_' . $taxonomy]);
         if (!is_wp_error($primary_term) && !empty($primary_term)) {
             if (empty($fields)) {
                 $return = $primary_term;
@@ -278,6 +286,46 @@ function isWoodyInstagram($attachment_id)
     return false;
 }
 
+/**
+ *
+ * Nom : getPostRootAncestor
+ * Auteur : Benoit Bouchaud
+ * Return : Retourne une chaîne de caractères trandsformée
+ * @param    $token - STR : la chaîne à transformer
+ * @return   return - STR : la chaîne transfomée
+ *
+ */
+function woody_untokenize($token)
+{
+    // On définit les correspondances des tokens
+    $patterns = [
+            '%site_name%' => get_bloginfo('name'),
+            '%post_title%' => get_the_title(),
+            '%hero_title%' => get_field('field_5b041d61adb72'),
+            '%hero_desc%' => get_field('field_5b041dbfadb74'),
+            '%teaser_desc%' => get_field('field_5b2bbbfaec6b2'),
+            '%focus_title%' => get_field('field_5b0d380e04203'),
+            '%focus_desc%' => get_field('field_5b0d382404204')
+        ];
+
+    // On remplace les token par les valeurs des champs correspondants
+    if (!empty($token)) {
+        foreach ($patterns as $pattern_key => $pattern) {
+            $token = str_replace($pattern_key, $pattern, $token);
+        }
+    }
+
+    // On retire les balises html (pour les descriptions essentiellement)
+    $token = str_replace('&nbsp; ', '', $token);
+    $token = trim(html_entity_decode(strip_tags($token)));
+
+    // On limite la chaine à +/- 150 caractères sans couper de mot
+    if (strlen($token) > 170) {
+        $token = substr($token, 0, strpos($token, ' ', 150));
+    }
+
+    return $token;
+}
 
 /***************************
  * Minutes to Hours converter
