@@ -80,4 +80,24 @@ $('#post').each(function() {
 
     primaryTermButtonsActions();
 
+    // Si un tag primaire est sélectionné, on l'affiche en tant que tel dans la metabox
+    var setPrimaryTerms = function(field) {
+        var $el = field.$el,
+            taxName = $el.data('name').replace('primary_', ''),
+            $postbox = $('#side-sortables').find('#' + taxName + 'div');
+
+        $postbox.find('.categorychecklist li').each(function() {
+            if ($(this).attr('id').replace(taxName + '-', '') == $el.find('.acf-input-wrap input').val()) {
+                $(this).find('.selectit').addClass('is-primary-term');
+                $(this).find('.set-primary-term').addClass('hide');
+                $(this).find('.unset-primary-term').removeClass('hide');
+            }
+        });
+    }
+
+    // Pour chaque champ de tag primaire, on récupère la valeur et on applique l'activation du terme principal
+    var $primaryTaxFields = $('.acf-field-5d7bada38eedf').find('.acf-field[data-name^="primary_"]');
+    $primaryTaxFields.each(function() {
+        acf.addAction('load_field/name=' + $(this).data('name'), setPrimaryTerms);
+    });
 });
