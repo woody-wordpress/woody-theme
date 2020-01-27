@@ -1,5 +1,5 @@
 <!doctype html>
-{# {% spaceless %} #}
+{% spaceless %}
 <html class="no-js" {{site.language_attributes}}>
 <head>
 
@@ -45,7 +45,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 {# WP Global Vars #}
 <script>var globals = {{ globals }};</script>
 {# /WP Global Vars #}
-{# {% endspaceless %} #}
+{% endspaceless %}
 </head>
 <body class="{{body_class}}">
     {% if gtm|default %}
