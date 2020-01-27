@@ -27,7 +27,6 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         add_filter('timber_compile_data', [$this, 'timberCompileData']);
-        add_filter('wpseo_json_ld_search_url', [$this, 'setYoastSearchUrl']);
 
         $this->registerHooks();
         $this->initContext();
@@ -77,21 +76,19 @@ abstract class WoodyTheme_TemplateAbstract
     {
         if (!empty($this->twig_tpl) && !empty($this->context)) {
             $this->context = apply_filters('woody_theme_context', $this->context);
-            Timber::render($this->twig_tpl, $this->context);
+            \Timber::render($this->twig_tpl, $this->context);
         }
     }
 
     private function initContext()
     {
         $this->context = Timber::get_context();
-        $this->context['title'] = wp_title(null, false);
+        $this->context['post_id'] = get_the_ID();
         $this->context['current_url'] = get_permalink();
         $this->context['site_key'] = WP_SITE_KEY;
 
         // Default values
-        $this->context['timberpost'] = false;
         $this->context['post'] = false;
-        $this->context['post_id'] = false;
         $this->context['post_title'] = false;
         $this->context['sheet_id'] = false;
         $this->context['page_type'] = false;
@@ -99,6 +96,16 @@ abstract class WoodyTheme_TemplateAbstract
 
         $this->context['enabled_woody_options'] = WOODY_OPTIONS;
         $this->context['woody_access_staging'] = WOODY_ACCESS_STAGING;
+
+        // SEO Context
+        $this->context['title'] = (!empty(get_field('field_5d7f7dea20bb1'))) ? woody_untokenize(get_field('woodyseo_meta_title')) : get_the_title() . ' | ' . $this->context['site']['name'];
+        $this->context['title'] = apply_filters('woody_seo_edit_meta_string', $this->context['title']);
+        $this->context['metas'] = $this->setMetadata();
+        $this->context['custom_meta'] = get_field('woody_custom_meta', 'options');
+
+        // Woody options pages
+        $this->context['woody_options_pages'] = $this->getWoodyOptionsPagesValues();
+
 
         /******************************************************************************
          * Sommes nous dans le cas d'une page miroir ?
@@ -120,7 +127,6 @@ abstract class WoodyTheme_TemplateAbstract
             $this->context['post_id'] = $mirror_page['mirror_page_reference'];
             $this->context['post'] = get_post($this->context['post_id']);
             $this->context['post_title'] = get_the_title();
-            $this->context['metas'][] = sprintf('<link rel="canonical" href="%s" />', get_permalink($this->context['post_id']));
         } else {
             $this->context['post'] = get_post();
             if (!empty($this->context['post'])) {
@@ -133,7 +139,6 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         if (!empty($this->context['post'])) {
-            $this->context['timberpost'] = Timber::get_post($this->context['post_id']);
             $this->context['page_type'] = getTermsSlugs($this->context['post_id'], 'page_type', true);
         }
 
@@ -144,9 +149,6 @@ abstract class WoodyTheme_TemplateAbstract
         if (!empty($this->context['woody_access_staging'])) {
             $this->context['body_class'] = $this->context['body_class'] . ' woody_staging';
         }
-
-        // Add generator (Pour julien check ERP)
-        $this->context['metas'][] = sprintf('<meta name="generator" content="Raccourci Agency - WP">');
 
         // Define Woody Components
         $this->addWoodyComponents();
@@ -193,6 +195,275 @@ abstract class WoodyTheme_TemplateAbstract
 
         // Set a global dist dir
         $this->context['dist_dir'] = WP_DIST_DIR;
+    }
+
+    private function setMetadata()
+    {
+        $return = [];
+
+        // ******************************* //
+        // Définition des metas statiques
+        // ******************************* //
+
+        $return = [
+            'canonical' => [
+                '#tag' => 'link',
+                '#attributes' => [
+                    'rel' => 'canonical',
+                    'href' => apply_filters('woody_get_permalink', $this->context['post_id'])
+                ]
+            ],
+            'charset' => [
+                '#tag' => 'meta',
+                '#attributes' => [
+                    'charset' => $this->context['site']['charset'],
+                ]
+            ],
+            'http-equiv' => [
+                '#tag' => 'meta',
+                '#attributes' => [
+                    'http-equiv' => 'X-UA-Compatible',
+                    'content' => 'IE=edge'
+                ]
+            ],
+            'generator' => [ // Add generator (Pour julien check ERP)
+                '#tag' => 'meta',
+                '#attributes' => [
+                    'name' => 'generator',
+                    'content' => 'Raccourci Agency - WP'
+                ]
+            ],
+            'viewport' => [
+                '#tag' => 'meta',
+                '#attributes' => [
+                    'name' => 'viewport',
+                    'content' => 'width=device-width,initial-scale=1'
+                ]
+            ],
+            'robots' => [
+                '#tag' => 'meta',
+                '#attributes' => [
+                    'name' => 'robots',
+                    'content' => 'max-snippet:-1, max-image-preview:large, max-video-preview:-1'
+                ]
+            ],
+            'og:type' => [
+                '#tag' => 'meta',
+                '#attributes' => [
+                    'property' => 'og:type',
+                    'content' => 'article'
+                ]
+            ],
+            'og:url' => [
+                '#tag' => 'meta',
+                '#attributes' => [
+                    'property' => 'og:url',
+                    'content' => $this->context['current_url']
+                ]
+            ],
+            'twitter:card' => [
+                '#tag' => 'meta',
+                '#attributes' => [
+                    'property' => 'twitter:card',
+                    'content' => 'summary_large_image'
+                ]
+            ],
+        ];
+
+        // ******************************* //
+        // On ajoute les metas og:image et twitter:image (image de mise en avant ou image du visuel et accroche)
+        // ******************************* //
+        $image = get_field('focus_img');
+        if (empty($image)) {
+            $image = get_field('field_5b0e5ddfd4b1b');
+        }
+
+        if (!empty($image)) {
+            $return['og:image'] = [
+                '#tag' => 'meta',
+                '#attributes' => [
+                    'property' => 'og:image',
+                    'content' => $image['sizes']['ratio_2_1']
+                ]
+            ];
+            $return['twitter:image'] = [
+                '#tag' => 'meta',
+                '#attributes' => [
+                    'property' => 'twitter:image',
+                    'content' => $image['sizes']['ratio_2_1']
+                ]
+            ];
+        }
+
+        // ******************************* //
+        // On ajoute la meta og:site_name
+        // ******************************* //
+        if (!empty($this->context['site']['name'])) {
+            $return['og:site_name'] = [
+                '#tag' => 'meta',
+                '#attributes' => [
+                    'property' => 'og:site_name',
+                    'content' => !(empty($this->context['site']['name'])) ? $this->context['site']['name'] : ''
+                ]
+            ];
+        }
+
+        // ******************************* //
+        // On ajoute les meta de localisation og:locale et og:locale:alternate pour chacune des langues du site
+        // ******************************* //
+        if (!empty(pll_current_language())) {
+            $return['og:locale'] = [
+                '#tag' => 'meta',
+                '#attributes' => [
+                    'property' => 'og:locale',
+                    'content' => pll_current_language('locale')
+                ]
+            ];
+        };
+
+        if (!empty(pll_languages_list())) {
+            foreach (pll_languages_list(['fields' => 'locale']) as $locale) {
+                if ($locale == pll_current_language('locale')) {
+                    continue;
+                }
+                $return['og:locale:alternate_' . $locale] = [
+                    '#tag' => 'meta',
+                    '#attributes' => [
+                        'property' => 'og:locale:alternate',
+                        'content' => $locale
+                    ]
+                ];
+            }
+        }
+
+        // ******************************* //
+        // On récupère les informations saisies dans Woody SEO
+        // ******************************* //
+        $woody_seo_data = getAcfGroupFields('group_5d7f7cd5615c0', null, true);
+
+        if (!empty($woody_seo_data)) {
+            foreach ($woody_seo_data as $data_key => $data) {
+                if (is_string($data)) {
+                    $woody_seo_data[$data_key] = trim($data);
+                    $data = apply_filters('woody_seo_edit_meta_string', $data);
+                }
+
+                switch ($data_key) {
+                    case 'woodyseo_meta_description':
+                        $return['description'] = [
+                            '#tag' => 'meta',
+                            '#attributes' => [
+                                'name' => 'description',
+                                'content' => woody_untokenize($data)
+                            ]
+                        ];
+
+                        if (!empty($data)) {
+                            $return['description']['#attributes']['content'] = woody_untokenize($data);
+                        } else {
+                            $return['description']['#attributes']['content'] = strip_tags(get_field('page_teaser_desc'));
+                        }
+
+                        break;
+                    case 'woodyseo_fb_title':
+
+                        $return['og:title'] = [
+                            '#tag' => 'meta',
+                                '#attributes' => [
+                                    'property' => 'og:title',
+                                ]
+                        ];
+
+                        if (!empty($data)) {
+                            $return['og:title']['#attributes']['content'] = woody_untokenize($data);
+                        } else {
+                            $return['og:title']['#attributes']['content'] = get_the_title() . ' | ' . $this->context['site']['name'];
+                        }
+                        break;
+                    case 'woodyseo_fb_description':
+                            $return['og:description'] = [
+                                '#tag' => 'meta',
+                                '#attributes' => [
+                                    'property' => 'og:description',
+                                ]
+                            ];
+
+                            if (!empty($data)) {
+                                $return['og:description']['#attributes']['content'] = woody_untokenize($data);
+                            } else {
+                                $return['og:description']['#attributes']['content'] = strip_tags(get_field('page_teaser_desc'));
+                            }
+                        break;
+                    case 'woodyseo_fb_image':
+                        if (!empty($data) && !empty($data['sizes'])) {
+                            $return['og:image'] = [
+                                '#tag' => 'meta',
+                                '#attributes' => [
+                                    'property' => 'og:image',
+                                    'content' => $data['sizes']['ratio_2_1']
+                                ]
+                            ];
+                        }
+                        break;
+                    case 'woodyseo_twitter_title':
+                        $return['twitter:title'] = [
+                            '#tag' => 'meta',
+                            '#attributes' => [
+                                'property' => 'twitter:title',
+                            ]
+                        ];
+
+                        if (!empty($data)) {
+                            $return['twitter:title']['#attributes']['content'] = woody_untokenize($data);
+                        } else {
+                            $return['twitter:title']['#attributes']['content'] = get_the_title() . ' | ' . $this->context['site']['name'];
+                        }
+                        break;
+                    case 'woodyseo_twitter_description':
+                        $return['twitter:description'] = [
+                            '#tag' => 'meta',
+                            '#attributes' => [
+                                'property' => 'twitter:description',
+                            ]
+                        ];
+
+                        if (!empty($data)) {
+                            $return['twitter:description']['#attributes']['content'] = woody_untokenize($data);
+                        } else {
+                            $return['twitter:description']['#attributes']['content'] = strip_tags(get_field('page_teaser_desc'));
+                        }
+                        break;
+                    case 'woodyseo_twitter_image':
+                        if (!empty($data) && !empty($data['sizes'])) {
+                            $return['twitter:image'] = [
+                                '#tag' => 'meta',
+                                '#attributes' => [
+                                    'property' => 'twitter:image',
+                                    'content' => $data['sizes']['ratio_2_1']
+                                ]
+                            ];
+                        }
+                        break;
+                }
+            }
+
+            if ($woody_seo_data['woodyseo_index'] === false) {
+                $return['robots']['#attributes']['content'] = $return['robots']['#attributes']['content'] . ', noindex';
+            }
+
+            if ($woody_seo_data['woodyseo_follow'] === false) {
+                $return['robots']['#attributes']['content'] = $return['robots']['#attributes']['content'] . ', nofollow';
+            }
+        }
+
+        // On ajoute la meta desc à la racine du contexte pour y accéder rapidement
+        if (!empty($return['description'])) {
+            $this->context['description'] = $return['description']['#attributes']['content'];
+        }
+
+        // On permet la surcharge des metadata
+        $return = apply_filters('woody_seo_edit_metas_array', $return);
+        return $return;
     }
 
     private function addWoodyComponents()
@@ -257,7 +528,7 @@ abstract class WoodyTheme_TemplateAbstract
             $tpl = apply_filters('season_switcher_tpl', null);
             $template = has_filter('season_switcher_tpl') ? $this->context['woody_components'][$tpl['template']] : $this->context['woody_components']['woody_widgets-season_switcher-tpl_01'];
 
-            $return = Timber::compile($template, $data);
+            $return = \Timber::compile($template, $data);
             return $return;
         }
     }
@@ -276,7 +547,7 @@ abstract class WoodyTheme_TemplateAbstract
             // Allow data override
             $data = apply_filters('lang_switcher_data', $data);
 
-            $return = Timber::compile($template, $data);
+            $return = \Timber::compile($template, $data);
             return $return;
         }
     }
@@ -296,7 +567,7 @@ abstract class WoodyTheme_TemplateAbstract
             // Allow data override
             $data = apply_filters('lang_switcher_data', $data);
 
-            $compile = Timber::compile($template, $data);
+            $compile = \Timber::compile($template, $data);
             $compile = apply_filters('lang_switcher_compile', $compile);
 
             return $compile;
@@ -384,7 +655,7 @@ abstract class WoodyTheme_TemplateAbstract
             $tpl = apply_filters('es_search_button', null);
             $template = has_filter('es_search_button') ? $tpl['template'] : $this->context['woody_components']['woody_widgets-es_search_block-tpl_01'];
 
-            return Timber::compile($template, []);
+            return \Timber::compile($template, []);
         }
     }
 
@@ -402,7 +673,7 @@ abstract class WoodyTheme_TemplateAbstract
                 foreach ($suggest['suggest_pages'] as $page) {
                     $t_page = pll_get_post($page['suggest_page']);
                     if (!empty($t_page)) {
-                        $post = Timber::get_post($t_page);
+                        $post = get_post($t_page);
                         if (!empty($post)) {
                             $data['suggest']['pages'][] = getPagePreview(['display_img' => true], $post);
                         }
@@ -428,20 +699,11 @@ abstract class WoodyTheme_TemplateAbstract
             $data['tags'] = !empty($tpl['tags']) ? $tpl['tags'] : '';
             $data = apply_filters('es_search_block_data', $data);
 
-            $compile = Timber::compile($template, $data);
+            $compile = \Timber::compile($template, $data);
             $compile = apply_filters('es_search_compile', $compile);
 
             return $compile;
         }
-    }
-
-    public function setYoastSearchUrl($var)
-    {
-        $search_post_id = apply_filters('woody_get_field_option', 'es_search_page_url');
-        if (!empty($search_post_id)) {
-            $var = get_permalink(pll_get_post($search_post_id)) . '?query={search_term_string}';
-        }
-        return $var;
     }
 
     private function addFavoritesBlock()
@@ -458,7 +720,7 @@ abstract class WoodyTheme_TemplateAbstract
             // Allow data override
             $data = apply_filters('favorites_block_data', $data);
 
-            return Timber::compile($template, $data);
+            return \Timber::compile($template, $data);
         }
     }
 }

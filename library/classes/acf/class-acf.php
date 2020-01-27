@@ -65,6 +65,7 @@ class WoodyTheme_ACF
 
         add_filter('acf/load_field/name=page_heading_tags', [$this, 'listAllPageTerms'], 10, 3);
 
+        add_filter('acf/load_field/name=tags_primary', [$this, 'addPrimaryTagsFields'], 10, 3);
         add_filter('acf/load_field/key=field_5d91c4559736e', [$this, 'loadDisqusField'], 10, 3);
 
         // Custom Filter
@@ -133,6 +134,51 @@ class WoodyTheme_ACF
             // Purge all varnish cache on save menu
             do_action('woody_flush_varnish');
         }
+    }
+
+    public function addPrimaryTagsFields($field)
+    {
+        // Empty subfields in case of acf-json commit with overrides
+        $field['sub_fields'] = [];
+
+        // Get all site taxonomies
+        $taxonomies = getPageTaxonomies();
+
+        // Foreach taxonomy, create a subfield
+        if (is_array($taxonomies) && !empty($taxonomies)) {
+            foreach ($taxonomies as $taxonomy) {
+                $field['sub_fields'][] = [
+                    'ID' => 0,
+                    'append' => '',
+                    'class' => '',
+                    'conditional_logic' => 0,
+                    'default_value' => '',
+                    'id' => '',
+                    'instructions' => '',
+                    'key' => $taxonomy->name . '_field_tag_primary',
+                    'label' => $taxonomy->label,
+                    'maxlength' => '',
+                    'menu_order' => 0,
+                    'name' => $taxonomy->name . '_primary',
+                    'parent' => "field_5d7bada38eedf",
+                    'placeholder' => 'primary_' . $taxonomy->name,
+                    'prefix' => 'acf',
+                    'prepend' => '',
+                    'required' => 0,
+                    'type' => 'text',
+                    'wrapper' => [
+                        'width' => '',
+                        'class' => '',
+                        'id' => ''
+                    ],
+                    '_name' => 'primary_' . $taxonomy->name,
+                    '_prepare' => 0,
+                    '_valid' => 1
+                ];
+            }
+        }
+
+        return $field;
     }
 
     public function pllGalleryLoadField($value, $post_id, $field)

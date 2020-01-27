@@ -1,11 +1,5 @@
 {% extends "base.twig" %}
 
-{% block metas %}
-    {% for meta in metas %}
-        {{ meta }}
-    {% endfor %}
-{% endblock metas %}
-
 {% block content %}
     {# TODO: Contextiualisation du breadcrumb selon la playlist source #}
     {# {% block page_teaser %}

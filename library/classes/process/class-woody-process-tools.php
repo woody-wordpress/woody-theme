@@ -246,12 +246,10 @@ class WoodyTheme_WoodyProcessTools
                             }
                             break;
                     }
-
-                } elseif($effect_key == 'deep') {
+                } elseif ($effect_key == 'deep') {
                     $return['deep'] = 'deep-'.$effect;
                 }
             }
-
         }
 
         if (!empty($return['transform'])) {
@@ -298,17 +296,18 @@ class WoodyTheme_WoodyProcessTools
             $pattern = "/%nombre%/";
             preg_match($pattern, $str, $matches);
             if (!empty($matches)) {
-                $confId = $post->get_field('playlist_conf_id');
-                $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), array(), 'json');
-
-                if (!empty($playlist)) {
-                    $nbResults = !empty($playlist['playlist']['total']) ? $playlist['playlist']['total'] : false;
-                    if (!$nbResults) {
-                        $return = $str;
-                    } else {
-                        foreach ($matches as $match) {
-                            $new_str = str_replace(['%nombre%'], $nbResults, $match);
-                            $return = preg_replace($pattern, $new_str, $str);
+                $confId = get_field('playlist_conf_id', $post->ID);
+                if (!empty($confId)) {
+                    $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), array(), 'json');
+                    if (!empty($playlist)) {
+                        $nbResults = !empty($playlist['playlist']['total']) ? $playlist['playlist']['total'] : false;
+                        if (!$nbResults) {
+                            $return = $str;
+                        } else {
+                            foreach ($matches as $match) {
+                                $new_str = str_replace(['%nombre%'], $nbResults, $match);
+                                $return = preg_replace($pattern, $new_str, $str);
+                            }
                         }
                     }
                 }
@@ -328,6 +327,7 @@ class WoodyTheme_WoodyProcessTools
                 $return = $str;
             }
         }
+
         return $return;
     }
 

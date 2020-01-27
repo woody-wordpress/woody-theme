@@ -38,6 +38,7 @@ new WoodyTheme_ACF_ShorLink();
 new WoodyTheme_Cleanup_Minify();
 new WoodyTheme_Cleanup_Admin();
 new WoodyTheme_Cleanup_Front();
+//TODO: A supprimer après le merge de la feature RemovingYoast
 new WoodyTheme_Cleanup_OptionsTable();
 
 // Dashboard
@@ -59,13 +60,13 @@ new WoodyTheme_Tinymce();
 new WoodyTheme_Links();
 new WoodyTheme_SiteMap();
 new WoodyTheme_Robots();
-new WoodyTheme_Yoast();
+new WoodyTheme_Seo();
 new WoodyTheme_Varnish();
 new WoodyTheme_Unpublisher();
 // new WoodyTheme_Videos();
 
 // Timber
-new WoodyTheme_Twig_Filters();
+new WoodyTheme_Timber_Filters();
 
 // Menu
 new WoodyTheme_Menus();

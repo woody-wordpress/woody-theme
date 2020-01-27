@@ -1,0 +1,43 @@
+{
+    "key": "group_5e16e3b48d2d6",
+    "title": "Personnaliser les métadonnées",
+    "fields": [
+        {
+            "key": "field_5e16e3c18c1c3",
+            "label": "Métadonnées du site",
+            "name": "woody_custom_meta",
+            "type": "textarea",
+            "instructions": "Ajouter les metadonnées personnalisées au format html",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "<meta name=\"Woody\" content=\"Made with ❤ by Raccourci Agency\"\/>",
+            "maxlength": "",
+            "rows": 6,
+            "new_lines": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "woodyseo_settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1578559206
+}

@@ -1,9 +1,4 @@
 {% extends "base.twig" %}
-{% block metas %}
-    {% for meta in metas %}
-        {{ meta }}
-    {% endfor %}
-{% endblock metas %}
 {% block content %}
     {% if is_frontpage %}
         <h1 class="frontpage-htitle">
