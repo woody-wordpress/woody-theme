@@ -458,6 +458,20 @@ abstract class WoodyTheme_TemplateAbstract
             if ($woody_seo_data['woodyseo_follow'] === false) {
                 $return['robots']['#attributes']['content'] = $return['robots']['#attributes']['content'] . ', nofollow';
             }
+
+            // On ajoute un balise noindex/nofollow sur toutes les pages des langues non activées
+            $lang_enable = get_option('woody_lang_enable');
+            if (!in_array(pll_current_language(), $lang_enable)) {
+                $robots_noindex = strpos($return['robots']['#attributes']['content'], 'noindex');
+                if (!$robots_noindex) {
+                    $return['robots']['#attributes']['content'] = $return['robots']['#attributes']['content'] . ', noindex';
+                }
+
+                $robots_nofollow = strpos($return['robots']['#attributes']['content'], 'nofollow');
+                if (!$robots_nofollow) {
+                    $return['robots']['#attributes']['content'] = $return['robots']['#attributes']['content'] . ', nofollow';
+                }
+            }
         }
 
         // On ajoute la meta desc à la racine du contexte pour y accéder rapidement
