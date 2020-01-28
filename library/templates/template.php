@@ -565,7 +565,7 @@ abstract class WoodyTheme_TemplateAbstract
             // Allow data override
             $data = apply_filters('lang_switcher_data', $data);
 
-            $return = \Timber::compile($template, $data);
+            $return = (!empty($data)) ? \Timber::compile($template, $data) : '';
             return $return;
         }
     }
@@ -657,7 +657,7 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         if (!empty($data['langs']) && count($data['langs']) == 1) {
-            return;
+            return[];
         }
 
         return $data;
