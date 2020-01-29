@@ -153,9 +153,6 @@ abstract class WoodyTheme_TemplateAbstract
         // Define Woody Components
         $this->addWoodyComponents();
 
-        // GlobalsVars
-        $this->addGlobalsVars();
-
         // GTM
         $this->addGTM();
 
@@ -504,17 +501,6 @@ abstract class WoodyTheme_TemplateAbstract
         }
     }
 
-    private function addGlobalsVars()
-    {
-        $globals = [
-            'post_id' => $this->context['post_id'],
-            'post_title' => $this->context['post_title'],
-            'page_type' => $this->context['page_type'],
-            'sheet_id'  => $this->context['sheet_id'],
-            'woody_options_pages' => $this->getWoodyOptionsPagesValues()
-        ];
-        $this->context['globals'] = json_encode($globals);
-    }
 
     private function addGTM()
     {

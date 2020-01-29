@@ -43,7 +43,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 {# /WP Styles #}
 
 {# WP Global Vars #}
-<script>var globals = {{ globals }};</script>
+<script>var globals = {{ globals_json|json_encode }}</script>
 {# /WP Global Vars #}
 {% endspaceless %}
 </head>
