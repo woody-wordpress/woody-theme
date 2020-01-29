@@ -1055,7 +1055,8 @@
                 "value": "mirror_page"
             }
         ],
-        [{
+        [
+            {
                 "param": "post_type",
                 "operator": "==",
                 "value": "woody_model"
@@ -1070,7 +1071,19 @@
             "param": "post_type",
             "operator": "==",
             "value": "tourtrip_step"
-        }]
+        }],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "woody_rdbk_leaflets"
+            },
+            {
+                "param": "post_taxonomy",
+                "operator": "==",
+                "value": "leaflet_type:rdbk_free_content"
+            }
+        ]
     ],
     "menu_order": 15,
     "position": "acf_after_title",
