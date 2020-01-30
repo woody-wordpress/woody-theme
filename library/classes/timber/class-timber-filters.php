@@ -39,7 +39,6 @@ class WoodyTheme_Timber_Filters
         $twig->addFilter(new Twig_SimpleFilter('stripshortcodes', 'strip_shortcodes'));
         $twig->addFilter(new Twig_SimpleFilter('array', [$this, 'to_array']));
         $twig->addFilter(new Twig_SimpleFilter('excerpt', 'wp_trim_words'));
-        $twig->addFilter(new Twig_SimpleFilter('function', [$this, 'exec_function']));
         $twig->addFilter(new Twig_SimpleFilter('sanitize', 'sanitize_title'));
         $twig->addFilter(new Twig_SimpleFilter('shortcodes', 'do_shortcode'));
         $twig->addFilter(new Twig_SimpleFilter('apply_filters', function () {
@@ -60,6 +59,7 @@ class WoodyTheme_Timber_Filters
         $twig->addFilter(new Twig_SimpleFilter('base64Encode', [$this, 'base64Encode']));
         $twig->addFilter(new Twig_SimpleFilter('seed', [$this, 'seed']));
         $twig->addFilter(new Twig_SimpleFilter('translate', [$this, 'translate']));
+        $twig->addFilter(new Twig_SimpleFilter('json_encode', [$this, 'jsonEncode']));
 
         // Debug Woody
         $twig->addFilter(new Twig_SimpleFilter('dump', [$this, 'dump']));
@@ -78,14 +78,11 @@ class WoodyTheme_Timber_Filters
         return $arr;
     }
 
-    public function exec_function($function_name)
+    public function jsonEncode($array)
     {
-        $args = func_get_args();
-        array_shift($args);
-        if (is_string($function_name)) {
-            $function_name = trim($function_name);
+        if (!empty($array) && is_array($array)) {
+            return json_encode($array);
         }
-        return call_user_func_array($function_name, ($args));
     }
 
     public function phoneClick($text)

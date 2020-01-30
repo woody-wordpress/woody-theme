@@ -284,6 +284,8 @@ class WoodyTheme_Plugins_Options
             ],
         ];
 
+        $polylang = apply_filters('woody_polylang_update_options', $polylang);
+
         // En dev on travaille toujours en prefix
         if (WP_ENV == 'dev') {
             $polylang['force_lang'] = 0;

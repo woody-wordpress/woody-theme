@@ -153,9 +153,6 @@ abstract class WoodyTheme_TemplateAbstract
         // Define Woody Components
         $this->addWoodyComponents();
 
-        // GlobalsVars
-        $this->addGlobalsVars();
-
         // GTM
         $this->addGTM();
 
@@ -458,6 +455,20 @@ abstract class WoodyTheme_TemplateAbstract
             if ($woody_seo_data['woodyseo_follow'] === false) {
                 $return['robots']['#attributes']['content'] = $return['robots']['#attributes']['content'] . ', nofollow';
             }
+
+            // On ajoute un balise noindex/nofollow sur toutes les pages des langues non activées
+            $lang_enable = get_option('woody_lang_enable');
+            if (!in_array(pll_current_language(), $lang_enable)) {
+                $robots_noindex = strpos($return['robots']['#attributes']['content'], 'noindex');
+                if (!$robots_noindex) {
+                    $return['robots']['#attributes']['content'] = $return['robots']['#attributes']['content'] . ', noindex';
+                }
+
+                $robots_nofollow = strpos($return['robots']['#attributes']['content'], 'nofollow');
+                if (!$robots_nofollow) {
+                    $return['robots']['#attributes']['content'] = $return['robots']['#attributes']['content'] . ', nofollow';
+                }
+            }
         }
 
         // On ajoute la meta desc à la racine du contexte pour y accéder rapidement
@@ -490,17 +501,6 @@ abstract class WoodyTheme_TemplateAbstract
         }
     }
 
-    private function addGlobalsVars()
-    {
-        $globals = [
-            'post_id' => $this->context['post_id'],
-            'post_title' => $this->context['post_title'],
-            'page_type' => $this->context['page_type'],
-            'sheet_id'  => $this->context['sheet_id'],
-            'woody_options_pages' => $this->getWoodyOptionsPagesValues()
-        ];
-        $this->context['globals'] = json_encode($globals);
-    }
 
     private function addGTM()
     {
@@ -551,7 +551,7 @@ abstract class WoodyTheme_TemplateAbstract
             // Allow data override
             $data = apply_filters('lang_switcher_data', $data);
 
-            $return = \Timber::compile($template, $data);
+            $return = (!empty($data)) ? \Timber::compile($template, $data) : '';
             return $return;
         }
     }
@@ -643,7 +643,7 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         if (!empty($data['langs']) && count($data['langs']) == 1) {
-            return;
+            return[];
         }
 
         return $data;

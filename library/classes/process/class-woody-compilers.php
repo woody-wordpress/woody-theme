@@ -110,38 +110,42 @@ class WoodyTheme_WoodyCompilers
 
         if (!empty($wrapper['routes'])) {
             foreach ($wrapper['routes'] as $key => $route) {
-                $filename = get_attached_file($route['route_file']['ID']);
-                $filetype = wp_check_filetype($filename);
+                if ($route['route_file']) {
+                    $filename = get_attached_file($route['route_file']['ID']);
+                    $filetype = wp_check_filetype($filename);
 
-                // Parameters :
-                $fill_color = $route['fill_color'];
-                $route_color = $route['route_color'];
-                $stroke_thickness = $route['stroke_thickness'];
-                $parameters = $route['parameters'];
+                    // Parameters :
+                    $fill_color = $route['fill_color'];
+                    $route_color = $route['route_color'];
+                    $stroke_thickness = $route['stroke_thickness'];
+                    $parameters = $route['parameters'];
 
-                if ($filetype['ext'] == 'json' || $filetype['ext'] == 'geojson') {
-                    $json = file_get_contents($filename);
-                    $route['route_file'] = $json;
+                    if ($filetype['ext'] == 'json' || $filetype['ext'] == 'geojson') {
+                        $json = file_get_contents($filename);
+                        $route['route_file'] = $json;
 
-                    $wrapper['routes'][$key] = json_decode($route['route_file'], true);
-                    foreach ($wrapper['routes'][$key]['features'] as $f_key => $feature) {
-                        $wrapper['routes'][$key]['features'][$f_key]['route'] = true;
+                        $wrapper['routes'][$key] = json_decode($route['route_file'], true);
+                        foreach ($wrapper['routes'][$key]['features'] as $f_key => $feature) {
+                            $wrapper['routes'][$key]['features'][$f_key]['route'] = true;
 
-                        if ($parameters === true) {
-                            $wrapper['routes'][$key]['features'][$f_key]['properties']['fill'] = $fill_color;
-                            $wrapper['routes'][$key]['features'][$f_key]['properties']['stroke'] = $route_color;
-                            $wrapper['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = $stroke_thickness;
+                            if ($parameters === true) {
+                                $wrapper['routes'][$key]['features'][$f_key]['properties']['fill'] = $fill_color;
+                                $wrapper['routes'][$key]['features'][$f_key]['properties']['stroke'] = $route_color;
+                                $wrapper['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = $stroke_thickness;
+                            }
+                            $fill_opacity = isset($wrapper['routes'][$key]['features'][$f_key]['properties']['fill-opacity']) ? $wrapper['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] : 0;
+                            $wrapper['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] = $fill_opacity == 0 ? 0.5 : $fill_opacity;
+
+                            // Route Fields aren't supposed to have markers.
+                            if ($feature['geometry']['type'] == "Point") {
+                                unset($wrapper['routes'][$key]['features'][$f_key]);
+                            }
                         }
-                        $fill_opacity = isset($wrapper['routes'][$key]['features'][$f_key]['properties']['fill-opacity']) ? $wrapper['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] : 0;
-                        $wrapper['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] = $fill_opacity == 0 ? 0.5 : $fill_opacity;
 
-                        // Route Fields aren't supposed to have markers.
-                        if ($feature['geometry']['type'] == "Point") {
-                            unset($wrapper['routes'][$key]['features'][$f_key]);
-                        }
+                        $wrapper['routes'][$key] = json_encode($wrapper['routes'][$key]);
                     }
-
-                    $wrapper['routes'][$key] = json_encode($wrapper['routes'][$key]);
+                } else {
+                    unset($wrapper['routes'][$key]);
                 }
             }
         }
