@@ -283,25 +283,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $breadcrumb = '';
         $current_post_id = $this->context['post']->ID;
 
-
-
-        // On ajoute la page courante
-        $data['items'][] = [
-            'title' => get_the_title($current_post_id),
-            'url' => apply_filters('woody_get_permalink', $current_post_id)
-        ];
-
-        // On ajoute toutes les pages parentes
-        $ancestors_ids = get_post_ancestors($current_post_id);
-        if (!empty($ancestors_ids) && is_array($ancestors_ids)) {
-            foreach ($ancestors_ids as $ancestor_id) {
-                $data['items'][] = [
-                    'title' => get_the_title($ancestor_id),
-                    'url' => apply_filters('woody_get_permalink', $ancestor_id)
-                ];
-            }
-        }
-
         // On ajoute la page d'accueil
         $front_id = get_option('page_on_front');
         if (!empty($front_id)) {
@@ -310,6 +291,27 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 'url' => apply_filters('woody_get_permalink', $front_id)
             ];
         }
+
+        // On ajoute toutes les pages parentes
+        $ancestors_ids = get_post_ancestors($current_post_id);
+        if (!empty($ancestors_ids) && is_array($ancestors_ids)) {
+            // On classe les parents du plus lointain au plus proche
+            array_reverse($ancestors_ids);
+            foreach ($ancestors_ids as $ancestor_id) {
+                $data['items'][] = [
+                    'title' => get_the_title($ancestor_id),
+                    'url' => apply_filters('woody_get_permalink', $ancestor_id)
+                ];
+            }
+        }
+
+        // On ajoute la page courante
+        $data['items'][] = [
+            'title' => get_the_title($current_post_id),
+            'url' => apply_filters('woody_get_permalink', $current_post_id)
+        ];
+
+        wd($data['items'], 'breadcrumb items');
 
         $tpl = apply_filters('breadcrumb_tpl', null);
         $template = $tpl['template'] ? $this->context['woody_components'][$tpl['template']] : $this->context['woody_components']['woody_widgets-breadcrumb-tpl_01'];
