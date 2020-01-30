@@ -408,7 +408,7 @@ abstract class WoodyTheme_TemplateAbstract
                         $return['twitter:title'] = [
                             '#tag' => 'meta',
                             '#attributes' => [
-                                'property' => 'twitter:title',
+                                'name' => 'twitter:title',
                             ]
                         ];
 
@@ -424,7 +424,7 @@ abstract class WoodyTheme_TemplateAbstract
                         $return['twitter:description'] = [
                             '#tag' => 'meta',
                             '#attributes' => [
-                                'property' => 'twitter:description',
+                                'name' => 'twitter:description',
                             ]
                         ];
 
@@ -439,7 +439,7 @@ abstract class WoodyTheme_TemplateAbstract
                             $return['twitter:image'] = [
                                 '#tag' => 'meta',
                                 '#attributes' => [
-                                    'property' => 'twitter:image',
+                                    'name' => 'twitter:image',
                                     'content' => $data['sizes']['ratio_2_1']
                                 ]
                             ];
@@ -458,7 +458,7 @@ abstract class WoodyTheme_TemplateAbstract
 
             // On ajoute un balise noindex/nofollow sur toutes les pages des langues non activées
             $lang_enable = get_option('woody_lang_enable');
-            if (!in_array(pll_current_language(), $lang_enable)) {
+            if (is_array($lang_enable) && !in_array(pll_current_language(), $lang_enable)) {
                 $robots_noindex = strpos($return['robots']['#attributes']['content'], 'noindex');
                 if (!$robots_noindex) {
                     $return['robots']['#attributes']['content'] = $return['robots']['#attributes']['content'] . ', noindex';
