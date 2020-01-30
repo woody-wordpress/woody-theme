@@ -248,7 +248,7 @@ abstract class WoodyTheme_TemplateAbstract
                 '#tag' => 'meta',
                 '#attributes' => [
                     'property' => 'og:type',
-                    'content' => 'article'
+                    'content' => 'website'
                 ]
             ],
             'og:url' => [
@@ -261,7 +261,7 @@ abstract class WoodyTheme_TemplateAbstract
             'twitter:card' => [
                 '#tag' => 'meta',
                 '#attributes' => [
-                    'property' => 'twitter:card',
+                    'name' => 'twitter:card',
                     'content' => 'summary_large_image'
                 ]
             ],
