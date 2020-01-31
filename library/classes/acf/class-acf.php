@@ -601,11 +601,21 @@ class WoodyTheme_ACF
     public function postObjectAcfResults($title, $post, $field, $post_id)
     {
         $parent_id = getPostRootAncestor($post->ID);
+        $post_lang = apply_filters('woody_pll_get_post_language', $post->ID);
+        $default_lang = apply_filters('woody_pll_default_lang', null);
+
+        if ($post_lang !== $default_lang) {
+            $translation = apply_filters('woody_default_lang_post_title', $post->ID);
+            if (!empty($translation)) {
+                $title = $title . '<small style="color:#cfcfcf; font-style:italic"> - ( ' . $default_lang . ': ' . $translation . ' )</small>';
+            }
+        }
+
         if (!empty($parent_id)) {
             $parent = get_post($parent_id);
-            $sufix = '<small style="color:#cfcfcf; font-style:italic">( Enfant de ' . $parent->post_title . ')</small>';
-            $title = $title . ' - ' . $sufix;
+            $title = $title . '<small style="color:#cfcfcf; font-style:italic"> - ( Enfant de ' . $parent->post_title . ' )</small>';
         }
+
         return $title;
     }
 
