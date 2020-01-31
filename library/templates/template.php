@@ -328,11 +328,14 @@ abstract class WoodyTheme_TemplateAbstract
 
             if (!empty($woody_lang_enable)) {
                 foreach ($woody_lang_enable as $lang) {
+                    $pll_lang = get_term_by('slug', $lang, 'language');
+                    $pll_lang_data = (!empty($pll_lang)) ? maybe_unserialize($pll_lang->description) : '';
+                    $pll_locale = (!empty($pll_lang_data)) ? $pll_lang_data['locale'] : '';
                     $return['og:locale:alternate_' . $lang] = [
                     '#tag' => 'meta',
                     '#attributes' => [
                         'property' => 'og:locale:alternate',
-                        'content' => $lang
+                        'content' => $pll_locale
                         ]
                     ];
                 }
