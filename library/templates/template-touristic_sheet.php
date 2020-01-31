@@ -55,10 +55,10 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
         // Complete METAS
         if (!empty($this->context['sheet_tourism'])) {
             $api_metas =  $this->context['sheet_tourism']['metas'];
-
             foreach ($api_metas as $meta_key => $meta) {
                 if (!empty($meta['#attributes']['property'])) {
                     switch ($meta['#attributes']['property']) {
+                        case 'og:type':
                         case 'og:url':
                                 // On ignore les metas déjà définies et inutiles à surcharger
                                 break;
@@ -82,10 +82,15 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
                             break;
                     }
                 }
+            }
 
-                $woody_lang_enable = get_option('woody_lang_enable', []);
-                if (!empty($meta['#attributes']['hreflang']) && in_array($meta['#attributes']['hreflang'], $woody_lang_enable)) {
-                    $this->context['metas']['hreflang'] = $api_metas[$meta_key];
+            $woody_hawwwai_lang_disable = get_option('woody_hawwwai_lang_disable');
+
+            if (is_array($woody_hawwwai_lang_disable) && !empty($this->context['metas'])) {
+                foreach ($this->context['metas'] as $meta_key => $meta) {
+                    if (!empty($meta['#attributes']['content']) && in_array($meta['#attributes']['content'], $woody_hawwwai_lang_disable)) {
+                        unset($this->context['metas'][$meta_key]);
+                    }
                 }
             }
         } else {
@@ -124,7 +129,7 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
         if (!empty($sheet_id)) {
             $headers['x-ts-idfiche'] = $sheet_id;
         }
-        
+
         if (!empty($this->context['sheet_tourism']['apirender_uri'])) {
             $headers['x-apirender-url'] = $this->context['sheet_tourism']['apirender_uri'];
         }

@@ -318,18 +318,24 @@ abstract class WoodyTheme_TemplateAbstract
             ];
         };
 
-        if (!empty(pll_languages_list())) {
-            foreach (pll_languages_list(['fields' => 'locale']) as $locale) {
-                if ($locale == pll_current_language('locale')) {
-                    continue;
-                }
-                $return['og:locale:alternate_' . $locale] = [
+        // On récupère les langues activées pour ajouter une balise og:alternate dans les metas
+        $woody_lang_enable = get_option('woody_lang_enable');
+        if (is_array($woody_lang_enable)) {
+            $current_lang = apply_filters('woody_pll_current_language', null);
+            if (($key = array_search($current_lang, $woody_lang_enable)) !== false) {
+                unset($woody_lang_enable[$key]);
+            }
+
+            if (!empty($woody_lang_enable)) {
+                foreach ($woody_lang_enable as $lang) {
+                    $return['og:locale:alternate_' . $lang] = [
                     '#tag' => 'meta',
                     '#attributes' => [
                         'property' => 'og:locale:alternate',
-                        'content' => $locale
-                    ]
-                ];
+                        'content' => $lang
+                        ]
+                    ];
+                }
             }
         }
 
