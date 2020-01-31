@@ -85,18 +85,23 @@ function humanDays($number)
 {
     $return = '';
 
+    $week = __('semaine', 'woody-theme');
+    $weeks = __('semaines', 'woody-theme');
+    $day = __('jour', 'woody-theme');
+    $days = __('jours', 'woody-theme');
+
     if ($number % 7 === 0) {
         $week_number = $number / 7;
         if ($week_number > 1) {
-            $return = $week_number . ' semaines';
+            $return = $week_number . ' ' . $weeks;
         } else {
-            $return = $week_number . ' semaine';
+            $return = $week_number . ' ' . $week;
         }
     } else {
         if ($number > 1) {
-            $return = $number . ' jours';
+            $return = $number . ' ' . $days;
         } else {
-            $return = $number . ' jour';
+            $return = $number . ' ' . $day;
         }
     }
 
