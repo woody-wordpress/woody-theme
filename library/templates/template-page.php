@@ -295,6 +295,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         // On ajoute toutes les pages parentes
         $ancestors_ids = get_post_ancestors($current_post_id);
         if (!empty($ancestors_ids) && is_array($ancestors_ids)) {
+            $ancestors_ids = array_reverse($ancestors_ids);
             foreach ($ancestors_ids as $ancestor_id) {
                 $data['items'][] = [
                     'title' => get_the_title($ancestor_id),
