@@ -99,11 +99,5 @@ if (!class_exists('Timber')) {
             }
             return self::$context_cache;
         }
-
-        public static function get_post()
-        {
-            global $post;
-            return $post;
-        }
     }
 }

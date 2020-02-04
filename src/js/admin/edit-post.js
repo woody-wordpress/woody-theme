@@ -193,19 +193,61 @@ $('#post').each(function() {
         })
     });
 
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+    };
+
     var updateCurrentPostMeta = function(model_id) {
-        $.ajax({
-            type: 'GET',
-            dataType: 'json',
-            url: '/wp-json/woody/current-post-update?current_id=' + $('#post_ID').val() + '&model_id=' + model_id,
-            success: function(data) {
-                window.location.reload();
-            },
-            error: function(error) {
-                console.error('post-with-meta', error);
-                $('body').addClass('windowReady');
-            },
-        });
+        let current_undefined = false;
+        var current_id = getUrlParameter('post');
+        if (typeof current_id == 'undefined') {
+            $('body').removeClass('windowReady');
+            $.ajax({
+                type: "POST",
+                url: window.location.origin + '/wp/wp-admin/post.php?post=' + $("#post_ID").val() + '&action=edit',
+                data: { save: 'save', post_id: $("#post_ID").val() },
+                error: function(error) {
+                    console.log('undefined-post', error);
+                }
+            });
+            current_id = $("#post_ID").val();
+            current_undefined = true;
+        }
+        var apply_model = window.confirm('Vous êtes sur le point de remplacer le contenu de votre page. Êtes-vous sur ?');
+        if (apply_model) {
+            $('body').removeClass('windowReady');
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: '/wp-json/woody/current-post-update?current_id=' + current_id + '&model_id=' + model_id,
+                success: function(data) {
+                    if (current_undefined) {
+                        $(window).off( 'beforeunload.edit-post' );
+                        window.location.replace(window.location.origin + '/wp/wp-admin/post.php?post=' + current_id + '&action=edit');
+                    } else {
+                        window.location.reload();
+                    }
+                },
+                error: function(error) {
+                    console.error('post-with-meta', error);
+                    $('body').addClass('windowReady');
+
+                },
+            });
+        } else {
+            $('body').addClass('windowReady');
+        }
     };
 
     var addApplyModelButton = function() {
@@ -271,8 +313,8 @@ $('#post').each(function() {
                                     var model_id = $('#apply-model-popup input:checked').val();
 
                                     if (model_id != "undefined" && model_id != null) {
-                                        $('body').removeClass('windowReady');
                                         updateCurrentPostMeta(model_id);
+
                                         $('#apply-model-popup').hide();
                                         $('#apply-model-popup ul li').remove();
                                     }
