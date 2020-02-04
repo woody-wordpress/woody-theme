@@ -474,3 +474,29 @@ a.mediaCard:after {
         }
     }
 }
+
+.availabilities-calendar {
+    .availabilities-header {
+        display: none !important;
+    }
+
+    td span a::after {
+        content: none !important;
+    }
+
+    .unavailable {
+        -webkit-print-color-adjust: exact;
+        background-color: lighten(rgba(255, 64, 64, 0.63), 20%) !important;
+    }
+
+    .available {
+        -webkit-print-color-adjust: exact;
+        background-color: lighten(rgba(4, 253, 4, 0.377), 20%) !important;
+    }
+
+    .closed {
+        -webkit-print-color-adjust: exact;
+        background-color: lighten(rgba(175, 174, 174, 0.753), 20%) !important;
+    }
+
+}
