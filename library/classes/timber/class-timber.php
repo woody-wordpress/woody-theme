@@ -67,9 +67,7 @@ if (!class_exists('Timber')) {
             if (!empty($vars['globals'])) {
                 $keys = ['options', 'post_title', 'post_id', 'page_type', 'sheet_id', 'woody_options_pages'];
                 foreach ($keys as $key) {
-                    if (!empty($key)) {
-                        $vars['globals_json'][$key] = $vars['globals'][$key];
-                    }
+                    $vars['globals_json'][$key] = $vars['globals'][$key];
                 }
             }
             return self::$twig->render($tpl, $vars);
