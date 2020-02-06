@@ -84,7 +84,6 @@ class WoodyTheme_WoodyProcess
             case 'interactive_gallery':
                 // Ajout des données Instagram + champs personnalisés dans le contexte des images
                 if (!empty($layout['interactive_gallery_items'])) {
-                    wd($layout['interactive_gallery_items']);
                     foreach ($layout['interactive_gallery_items'] as $key => $media_item) {
                         $layout['interactive_gallery_items'][$key]['interactive_gallery_photo']['attachment_more_data'] = $this->tools->getAttachmentMoreData($media_item['interactive_gallery_photo']['ID']);
                     }
