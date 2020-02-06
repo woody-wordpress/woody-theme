@@ -73,10 +73,19 @@ class WoodyTheme_WoodyProcess
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_infolive);
                 break;
             case 'gallery':
-                // Ajout des données Instagram + champs personnaliés dans le contexte des images
+                // Ajout des données Instagram + champs personnalisés dans le contexte des images
                 if (!empty($layout['gallery_items'])) {
                     foreach ($layout['gallery_items'] as $key => $media_item) {
                         $layout['gallery_items'][$key]['attachment_more_data'] = $this->tools->getAttachmentMoreData($media_item['ID']);
+                    }
+                }
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                break;
+            case 'interactive_gallery':
+                // Ajout des données Instagram + champs personnalisés dans le contexte des images
+                if (!empty($layout['interactive_gallery_items'])) {
+                    foreach ($layout['interactive_gallery_items'] as $key => $media_item) {
+                        $layout['interactive_gallery_items'][$key]['interactive_gallery_photo']['attachment_more_data'] = $this->tools->getAttachmentMoreData($media_item['interactive_gallery_photo']['ID']);
                     }
                 }
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
