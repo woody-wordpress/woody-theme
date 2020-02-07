@@ -501,8 +501,11 @@ a.mediaCard:after {
 
 }
 
-
 // Favoris
+.win-print {
+    display: none;
+}
+
 .favorites-section {
     a[href]:after {
         content: none !important;
