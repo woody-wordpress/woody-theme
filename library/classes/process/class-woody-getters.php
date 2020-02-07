@@ -451,6 +451,19 @@ class WoodyTheme_WoodyGetters
             if (in_array('bookable', $wrapper['display_elements'])) {
                 $data['booking'] = (!empty($sheet['booking']['link'])) ? $sheet['booking'] : '';
             }
+
+            if (in_array('address', $wrapper['display_elements'])) {
+                $data['address'] = (!empty($sheet['address'])) ? $sheet['address'] : '';
+            }
+
+            if (in_array('phone', $wrapper['display_elements'])) {
+                $data['phone'] = (!empty($sheet['phone'])) ? $sheet['phone'] : '';
+            }
+
+            if (in_array('website', $wrapper['display_elements'])) {
+                $data['website'] = (!empty($sheet['website'])) ? $sheet['website'] : '';
+            }
+            wd($sheet, 'fiche sit');
         }
 
         if (!empty($wrapper['display_button'])) {
