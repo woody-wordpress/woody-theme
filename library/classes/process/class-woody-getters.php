@@ -463,7 +463,6 @@ class WoodyTheme_WoodyGetters
             if (in_array('website', $wrapper['display_elements'])) {
                 $data['website'] = (!empty($sheet['website'])) ? $sheet['website'] : '';
             }
-            wd($sheet, 'fiche sit');
         }
 
         if (!empty($wrapper['display_button'])) {
