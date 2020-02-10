@@ -219,6 +219,7 @@ class WoodyTheme_Polylang
 
         // Favorites
         __('Ajouter à mes favoris', 'woody-theme');
+        __('Imprimer/Exporter mes favoris', 'woody-theme');
 
         // Tides
         __('Dates', 'woody-theme');

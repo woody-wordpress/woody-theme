@@ -500,3 +500,78 @@ a.mediaCard:after {
     }
 
 }
+
+// Favoris
+.win-print {
+    display: none;
+}
+
+.favorites-section {
+    a[href]:after {
+        content: none !important;
+    }
+
+    .card {
+
+        .card .card-link {
+            color: black;
+        }
+
+        &.splitCard .card-link>.grid-x,
+        &.basicCard .card-link {
+            display: flex;
+            align-items: flex-start;
+
+            .imageObject {
+                background-color: darken(white, 3%);
+
+                &-img {
+                    width: 200px;
+                    margin-right: 20px;
+                }
+            }
+
+            .imageObject-description,
+            .imageObject-caption {
+                display: none !important;
+            }
+
+            .card {
+
+                &-section {
+                    margin-top: 20px;
+                }
+
+                &-bookable {
+                    display: none;
+                }
+
+                &-title,
+                &-description,
+                &-address,
+                &-website,
+                &-town,
+                &-phone,
+                &-type {
+                    color: black;
+                }
+
+                &-description,
+                &-address,
+                &-website,
+                &-town {
+                    font-weight: normal;
+                }
+
+                &-phone {
+                    font-weight: bold;
+                }
+            }
+
+            .tripInfos-price {
+                color: black;
+                font-weight: normal;
+            }
+        }
+    }
+}
