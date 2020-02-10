@@ -64,6 +64,16 @@
                 </div>
             {% endif %}
 
+            {% block printable %}
+                {% if printable %}
+                <div class="grid-container isRel">
+                    <div class="win-print isAbs flex-container align-middle">
+                        <small>{{ __('Imprimer/Exporter mes favoris', 'woody-theme') }}</small>
+                        <span class="wicon wicon-040-imprimante"></span>
+                    </div>
+                </div>
+                {% endif %}
+            {% endblock %}
 
             {% for key, section in the_sections %}
                 <div class="page-section page-section-{{ key }}" id="pageSection-{{ key }}">
