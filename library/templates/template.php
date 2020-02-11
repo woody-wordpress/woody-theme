@@ -187,6 +187,9 @@ abstract class WoodyTheme_TemplateAbstract
             $this->context['favorites_block_mobile'] = apply_filters('favorites_block_mobile', $tools_blocks['favorites_block']);
         }
 
+        // Add more tools
+        $this->context['subtheme_more_tools'] = apply_filters('more_tools', []);
+
         // Define SubWoodyTheme_TemplateParts
         $this->addHeaderFooter($tools_blocks);
 
