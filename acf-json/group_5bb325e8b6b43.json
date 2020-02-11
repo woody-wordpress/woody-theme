@@ -1,8 +1,7 @@
 {
     "key": "group_5bb325e8b6b43",
     "title": "Diaporama",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5bb3260577f37",
             "label": "Contenu",
             "name": "",
@@ -36,8 +35,7 @@
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter un slide",
-            "sub_fields": [
-                {
+            "sub_fields": [{
                     "key": "field_5bbcac7027b56",
                     "label": "Titre d'administration",
                     "name": "bo_landswpr_title",
@@ -70,8 +68,7 @@
                         "id": ""
                     },
                     "layout": "block",
-                    "sub_fields": [
-                        {
+                    "sub_fields": [{
                             "key": "field_5bb326b977f3b",
                             "label": "Type de média",
                             "name": "landswpr_slide_media_type",
@@ -86,7 +83,8 @@
                             },
                             "choices": {
                                 "img": "Image",
-                                "movie": "Vidéo"
+                                "movie": "Vidéo",
+                                "embed": "Youtube"
                             },
                             "allow_null": 0,
                             "other_choice": 0,
@@ -103,13 +101,11 @@
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": [
-                                [
-                                    {
-                                        "field": "field_5bb326b977f3b",
-                                        "operator": "==",
-                                        "value": "img"
-                                    }
-                                ]
+                                [{
+                                    "field": "field_5bb326b977f3b",
+                                    "operator": "==",
+                                    "value": "img"
+                                }]
                             ],
                             "wrapper": {
                                 "width": "",
@@ -135,13 +131,11 @@
                             "instructions": "Une vidéo muette, courte et légère.\r\nSi votre vidéo comporte du son, il sera coupé afin de respecter les standards en vigueur et autoriser l'autoplay.",
                             "required": 0,
                             "conditional_logic": [
-                                [
-                                    {
-                                        "field": "field_5bb326b977f3b",
-                                        "operator": "==",
-                                        "value": "movie"
-                                    }
-                                ]
+                                [{
+                                    "field": "field_5bb326b977f3b",
+                                    "operator": "==",
+                                    "value": "movie"
+                                }]
                             ],
                             "wrapper": {
                                 "width": "",
@@ -149,8 +143,7 @@
                                 "id": ""
                             },
                             "layout": "block",
-                            "sub_fields": [
-                                {
+                            "sub_fields": [{
                                     "key": "field_5bb3283377f3e",
                                     "label": "Poster",
                                     "name": "movie_poster_file",
@@ -232,6 +225,28 @@
                                     "mime_types": "ogg, ogv"
                                 }
                             ]
+                        },
+                        {
+                            "key": "field_5e425fc24d874",
+                            "label": "Vidéo Youtube",
+                            "name": "landswpr_slide_embed",
+                            "type": "oembed",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [{
+                                    "field": "field_5bb326b977f3b",
+                                    "operator": "==",
+                                    "value": "embed"
+                                }]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "width": 1920,
+                            "height": 1080
                         },
                         {
                             "key": "field_5c111bf05e17f",
@@ -318,29 +333,27 @@
                     "max": 0,
                     "layout": "block",
                     "button_label": "Ajouter un bouton",
-                    "sub_fields": [
-                        {
-                            "key": "field_5bbcaab563652",
-                            "label": "Bouton(s)",
-                            "name": "landswpr_slide_link",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "hide-label",
-                                "id": ""
-                            },
-                            "clone": [
-                                "group_5b0422e167d2a"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }
-                    ]
+                    "sub_fields": [{
+                        "key": "field_5bbcaab563652",
+                        "label": "Bouton(s)",
+                        "name": "landswpr_slide_link",
+                        "type": "clone",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "hide-label",
+                            "id": ""
+                        },
+                        "clone": [
+                            "group_5b0422e167d2a"
+                        ],
+                        "display": "seamless",
+                        "layout": "block",
+                        "prefix_label": 0,
+                        "prefix_name": 0
+                    }]
                 }
             ]
         },
@@ -374,8 +387,7 @@
                 "id": ""
             },
             "layout": "vertical",
-            "choices": {
-             },
+            "choices": {},
             "default_value": "",
             "other_choice": 0,
             "save_other_choice": 0,
@@ -420,8 +432,7 @@
         }
     ],
     "location": [
-        [
-            {
+        [{
                 "param": "post_type",
                 "operator": "==",
                 "value": "page"
@@ -441,5 +452,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Diaporama de slides (image ou video) en page d'accueil",
-    "modified": 1553263061
+    "modified": 1581417138
 }

@@ -119,6 +119,16 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         if (!empty($page_type[0]) && $page_type[0]->slug == 'front_page') {
             $this->context['is_frontpage'] = true;
             $home_slider = getAcfGroupFields('group_5bb325e8b6b43', $this->context['post']);
+
+            $plyr_options = [
+                'muted' => true,
+                'autoplay' => true,
+                'controls' => ['volume', 'mute'],
+                'loop' => ['active' => true]
+            ];
+
+            $home_slider['plyr_options'] = json_encode($plyr_options);
+
             if (!empty($home_slider['landswpr_slides'])) {
                 $this->context['home_slider'] = \Timber::compile($this->context['woody_components'][$home_slider['landswpr_woody_tpl']], $home_slider);
             }
