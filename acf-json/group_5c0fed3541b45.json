@@ -2,11 +2,46 @@
     "key": "group_5c0fed3541b45",
     "title": "Paramètres Woody",
     "fields": [{
+            "key": "field_5e43ca87a2e3e",
+            "label": "Paramètres généraux",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
             "key": "field_5e296d4d4597d",
             "label": "Masquer les sections vide",
             "name": "hide_empty_sections",
             "type": "true_false",
             "instructions": "Si cette option est activée, les sections sans blocs, ou dont les blocs sont vides, ne seront plus affichées sur le site",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5e43cab9a2e3f",
+            "label": "Afficher la traduction en langue par défaut des titres de pages dans le backoffice",
+            "name": "display_default_lang_title",
+            "type": "true_false",
+            "instructions": "Si cette option est activée, le titre de page en langue par défaut sera affiché à la suite du titre traduit. \r\nS'applique sur la liste des pages et les mises en avant de contenu",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -226,7 +261,7 @@
             "maxlength": ""
         },
         {
-            "key": "field_5d91c4559736e",
+            "key": "field_5e43d209c3954",
             "label": "Disqus",
             "name": "",
             "type": "tab",
@@ -273,5 +308,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1579773484
+    "modified": 1581503057
 }
