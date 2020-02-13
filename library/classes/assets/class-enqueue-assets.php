@@ -28,6 +28,8 @@ class WoodyTheme_Enqueue_Assets
         // Get page type
         global $post;
         $pageType = (!empty($post) && !empty($post->ID)) ? getTermsSlugs($post->ID, 'page_type') : [];
+
+        $this->isRoadBookPlaylist = apply_filters('is_road_book_playlist', false, $post);
         $this->isTouristicPlaylist = in_array('playlist_tourism', $pageType);
         $this->isTouristicSheet = !empty($post) && $post->post_type === 'touristic_sheet';
 
@@ -76,7 +78,7 @@ class WoodyTheme_Enqueue_Assets
         wp_deregister_script('jquery');
         wp_deregister_script('jquery-migrate');
         $jQuery_version = '3.4.1';
-        if ($this->isTouristicPlaylist || $this->isTouristicSheet) {
+        if ($this->isTouristicPlaylist || $this->isTouristicSheet || $this->isRoadBookPlaylist) {
             $jQuery_version = '2.1.4';
         }
 
@@ -175,7 +177,7 @@ class WoodyTheme_Enqueue_Assets
         wp_enqueue_script('hawwwai_universal_map', $apirender_base_uri . '/assets/scripts/raccourci/universal-map.' . $jsModeSuffix . '.js?v=' . $this->wThemeVersion, $js_dependencies_rcmap, '', true);
 
         // Playlist libraries
-        if ($this->isTouristicPlaylist) {
+        if ($this->isTouristicPlaylist || $this->isRoadBookPlaylist) {
             // CSS_Libraries (todo replace when possible)
             wp_enqueue_style('hawwwai_font_css', 'https://api.tourism-system.com/static/assets/fonts/raccourci-font.css', [], '');
             wp_enqueue_style('jsdelivr_leaflet_css', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.min.css', [], '');
@@ -269,7 +271,7 @@ class WoodyTheme_Enqueue_Assets
         wp_enqueue_script('main-javascripts', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('js/main.js'), $dependencies, '', true);
 
         // Enqueue the main Stylesheet.
-        if ($this->isTouristicSheet || $this->isTouristicPlaylist) {
+        if ($this->isTouristicSheet || $this->isTouristicPlaylist || $this->isRoadBookPlaylist) {
             $tourism_css = apply_filters('woody_theme_stylesheets', 'tourism');
             $tourism_css = (!empty($tourism_css)) ? $tourism_css : 'tourism';
             wp_enqueue_style('main-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/' . $tourism_css . '.css'), [], '', 'screen');
