@@ -57,6 +57,7 @@ class WoodyTheme_ACF
         add_filter('acf/load_field/name=weather_account', [$this, 'weatherAccountAcfLoadField'], 10, 3);
 
         add_filter('acf/fields/post_object/result', [$this, 'postObjectAcfResults'], 10, 4);
+        add_filter('acf/fields/post_object/query', [$this, 'getPostObjectDefaultTranslation'], 10, 3);
         add_filter('acf/fields/page_link/result', [$this, 'postObjectAcfResults'], 10, 4);
 
         add_filter('acf/load_value/type=gallery', [$this, 'pllGalleryLoadField'], 10, 3);
@@ -621,6 +622,46 @@ class WoodyTheme_ACF
         }
 
         return $title;
+    }
+
+    public function getPostObjectDefaultTranslation($args, $field, $post_id)
+    {
+        // Si l'option d'affichage des traductions dans les mises en avant est activée
+        // On permet de rechercher les posts dans la langue par défaut
+        $display_default_lang_title = apply_filters('woody_get_field_option', 'display_default_lang_title');
+        if ($display_default_lang_title) {
+            $page_lang = apply_filters('woody_pll_get_post_language', $page->ID);
+            $default_lang = apply_filters('woody_pll_default_lang_code', null);
+            // Si l'on est pas sur langue par défaut du site
+            if ($page_lang !== $default_lang) {
+                $searched_ids = [];
+
+                // Si l'utilisateur fait une recherche
+                if (!empty($args['s'])) {
+                    // On lance une WP_query identique à ACF en forçant la langue => langue par défaut
+                    $default_lang_args['lang'] = pll_default_language();
+                    $new_args = array_merge($default_lang_args, $args);
+                    $new_args['post_type'] = 'page';
+                    $default_lang_query = new WP_Query($new_args);
+
+                    // Si on obtient des résultats dans la langue par défaut,
+                    // On récupère l'id de la traduction de ce contenu dans la langue courante
+                    if (!empty($default_lang_query->posts)) {
+                        foreach ($default_lang_query->posts as $post) {
+                            $translations[] = pll_get_post($post->ID);
+                        }
+                    }
+
+                    // On limite la recherche de posts aux id des traductions et on reset le paramètre de recherche
+                    if (!empty($translations)) {
+                        $args['post__in'] = $translations;
+                        $args['s'] = '';
+                    }
+                }
+            }
+        }
+
+        return $args;
     }
 
     private function sortWoodyTpls()
