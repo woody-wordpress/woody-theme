@@ -152,6 +152,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $trip_types[] = $child->slug;
             }
         } else {
+            //TODO: passer par le filtre Woody_trip_types dans le plugin groupes pour rajouter ces types de séjour
             $trip_types = [
                 'trip',
                 'activity_component',
@@ -182,7 +183,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 }
             }
             // If price equals 0, replace elements to display Free
-            if (isset($trip_infos['the_price']['price']) && $trip_infos['the_price']['price'] == 0) {
+            if (isset($trip_infos['the_price']['price']) && $trip_infos['the_price']['price'] === 0) {
                 $trip_infos['the_price']['price'] = __("Gratuit", "woody-theme");
                 $trip_infos['the_price']['prefix_price'] = "";
                 $trip_infos['the_price']['suffix_price'] = "";
