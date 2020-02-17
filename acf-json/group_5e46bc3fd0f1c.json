@@ -19,9 +19,195 @@
         },
         {
             "key": "field_5e46c38172deb",
-            "label": "TODO",
-            "name": "TODO",
-            "type": "text",
+            "label": "Témoignages",
+            "name": "testimonials",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label",
+                "id": ""
+            },
+            "collapsed": "field_5e4a5597e2017",
+            "min": 0,
+            "max": 0,
+            "layout": "block",
+            "button_label": "Ajouter un témoignage",
+            "sub_fields": [{
+                    "key": "field_5e4a5597e2017",
+                    "label": "Titre d'administration",
+                    "name": "bo_testimony_title",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "hide-label",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "Titre visible lorsque la section est refermée (uniquement pour le backoffice)",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5e4a56d4091d3",
+                    "label": "Type de profil",
+                    "name": "testimony_profile_type",
+                    "type": "radio",
+                    "instructions": "Choisissez entre un profil unique ou déjà existant. <br \/>\r\n<small>Si vous choisissez un profil déjà existant, sa photo et sa signature seront utilisés.<\/small>",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "unique": "Profil unique",
+                        "current": "Profil existant"
+                    },
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "default_value": "",
+                    "layout": "horizontal",
+                    "return_format": "value",
+                    "save_other_choice": 0
+                },
+                {
+                    "key": "field_5e4a5766091d4",
+                    "label": "Profil",
+                    "name": "testimony_profile",
+                    "type": "select",
+                    "instructions": "<em>Sélectionner le profil déjà existant<\/em>",
+                    "required": 0,
+                    "conditional_logic": [
+                        [{
+                            "field": "field_5e4a56d4091d3",
+                            "operator": "==",
+                            "value": "current"
+                        }]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "null": "Aucun profil existant"
+                    },
+                    "default_value": [],
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 1,
+                    "ajax": 1,
+                    "return_format": "value",
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_5e4a61f6dcf0f",
+                    "label": "Titre du témoignage",
+                    "name": "title",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "Avis de ...",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5e4a59ce290e8",
+                    "label": "Texte",
+                    "name": "text",
+                    "type": "wysiwyg",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "100",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "visual",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 1
+                },
+                {
+                    "key": "field_5e4a5a30290e9",
+                    "label": "Portrait \/ Photo",
+                    "name": "img",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [{
+                            "field": "field_5e4a56d4091d3",
+                            "operator": "==",
+                            "value": "unique"
+                        }]
+                    ],
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "min_width": 640,
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "jpg, jpeg, png, gif"
+                },
+                {
+                    "key": "field_5e4a5a6d290ea",
+                    "label": "Signature",
+                    "name": "signature",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [{
+                            "field": "field_5e4a56d4091d3",
+                            "operator": "==",
+                            "value": "unique"
+                        }]
+                    ],
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                }
+            ]
+        },
+        {
+            "key": "field_5e4a52ed15226",
+            "label": "Titre du bloc",
+            "name": "",
+            "type": "tab",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -30,11 +216,34 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5e4a52f715227",
+            "label": "Titre du bloc",
+            "name": "testimonials_block_title",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "field_5b041c6aadb71",
+                "field_5b041d61adb72",
+                "field_5b041d79adb73",
+                "field_5b59bbd0e094c",
+                "field_5b72f56b6f4aa",
+                "field_5b59bc12e094d"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
         },
         {
             "key": "field_5e46c24472de8",
@@ -65,7 +274,7 @@
                 "class": "",
                 "id": ""
             },
-            "open": 0,
+            "open": 1,
             "multi_expand": 0,
             "endpoint": 0
         },
@@ -184,5 +393,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Affichage de plusieurs témoignages)",
-    "modified": 1581696224
+    "modified": 1581951116
 }
