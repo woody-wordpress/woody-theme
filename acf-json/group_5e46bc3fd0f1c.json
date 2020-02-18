@@ -1,7 +1,8 @@
 {
     "key": "group_5e46bc3fd0f1c",
     "title": "Témoignages",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5e46c25672de9",
             "label": "Contenu",
             "name": "",
@@ -35,7 +36,8 @@
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter un témoignage",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5e4a5597e2017",
                     "label": "Titre d'administration",
                     "name": "bo_testimony_title",
@@ -56,44 +58,41 @@
                 },
                 {
                     "key": "field_5e4a56d4091d3",
-                    "label": "Type de profil",
+                    "label": "Choisir un profil existant",
                     "name": "testimony_profile_type",
-                    "type": "radio",
-                    "instructions": "Choisissez entre un profil unique ou déjà existant. <br \/>\r\n<small>Si vous choisissez un profil déjà existant, sa photo et sa signature seront utilisés.<\/small>",
+                    "type": "true_false",
+                    "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "20",
                         "class": "",
                         "id": ""
                     },
-                    "choices": {
-                        "unique": "Profil unique",
-                        "current": "Profil existant"
-                    },
-                    "allow_null": 0,
-                    "other_choice": 0,
-                    "default_value": "",
-                    "layout": "horizontal",
-                    "return_format": "value",
-                    "save_other_choice": 0
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
                 },
                 {
                     "key": "field_5e4a5766091d4",
-                    "label": "Profil",
+                    "label": "Sélectionner un profil",
                     "name": "testimony_profile",
                     "type": "select",
-                    "instructions": "<em>Sélectionner le profil déjà existant<\/em>",
+                    "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5e4a56d4091d3",
-                            "operator": "==",
-                            "value": "current"
-                        }]
+                        [
+                            {
+                                "field": "field_5e4a56d4091d3",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
                     ],
                     "wrapper": {
-                        "width": "",
+                        "width": "80",
                         "class": "",
                         "id": ""
                     },
@@ -109,6 +108,65 @@
                     "placeholder": ""
                 },
                 {
+                    "key": "field_5e4a5a30290e9",
+                    "label": "Portrait \/ Photo",
+                    "name": "img",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5e4a56d4091d3",
+                                "operator": "!=",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "min_width": 640,
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "jpg, jpeg, png, gif"
+                },
+                {
+                    "key": "field_5e4a5a6d290ea",
+                    "label": "Signature",
+                    "name": "signature",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5e4a56d4091d3",
+                                "operator": "!=",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "30",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
                     "key": "field_5e4a61f6dcf0f",
                     "label": "Titre du témoignage",
                     "name": "title",
@@ -117,7 +175,7 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "75",
                         "class": "",
                         "id": ""
                     },
@@ -145,61 +203,6 @@
                     "toolbar": "basic",
                     "media_upload": 0,
                     "delay": 1
-                },
-                {
-                    "key": "field_5e4a5a30290e9",
-                    "label": "Portrait \/ Photo",
-                    "name": "img",
-                    "type": "image",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": [
-                        [{
-                            "field": "field_5e4a56d4091d3",
-                            "operator": "==",
-                            "value": "unique"
-                        }]
-                    ],
-                    "wrapper": {
-                        "width": "50",
-                        "class": "",
-                        "id": ""
-                    },
-                    "return_format": "array",
-                    "preview_size": "thumbnail",
-                    "library": "all",
-                    "min_width": 640,
-                    "min_height": "",
-                    "min_size": "",
-                    "max_width": "",
-                    "max_height": "",
-                    "max_size": "",
-                    "mime_types": "jpg, jpeg, png, gif"
-                },
-                {
-                    "key": "field_5e4a5a6d290ea",
-                    "label": "Signature",
-                    "name": "signature",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": [
-                        [{
-                            "field": "field_5e4a56d4091d3",
-                            "operator": "==",
-                            "value": "unique"
-                        }]
-                    ],
-                    "wrapper": {
-                        "width": "50",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
                 }
             ]
         },
@@ -379,11 +382,13 @@
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -393,5 +398,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Affichage de plusieurs témoignages)",
-    "modified": 1581951116
+    "modified": 1582013712
 }
