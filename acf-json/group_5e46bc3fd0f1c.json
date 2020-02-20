@@ -51,61 +51,10 @@
                         "id": ""
                     },
                     "default_value": "",
-                    "placeholder": "Titre visible lorsque la section est refermée (uniquement pour le backoffice)",
+                    "placeholder": "Titre visible lorsque le témoignage est refermé (uniquement pour le backoffice)",
                     "prepend": "",
                     "append": "",
                     "maxlength": ""
-                },
-                {
-                    "key": "field_5e4a56d4091d3",
-                    "label": "Choisir un profil existant",
-                    "name": "testimony_profile_type",
-                    "type": "true_false",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "20",
-                        "class": "",
-                        "id": ""
-                    },
-                    "message": "",
-                    "default_value": 0,
-                    "ui": 1,
-                    "ui_on_text": "",
-                    "ui_off_text": ""
-                },
-                {
-                    "key": "field_5e4a5766091d4",
-                    "label": "Sélectionner un profil",
-                    "name": "testimony_profile",
-                    "type": "select",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_5e4a56d4091d3",
-                                "operator": "==",
-                                "value": "1"
-                            }
-                        ]
-                    ],
-                    "wrapper": {
-                        "width": "80",
-                        "class": "",
-                        "id": ""
-                    },
-                    "choices": {
-                        "null": "Aucun profil existant"
-                    },
-                    "default_value": [],
-                    "allow_null": 0,
-                    "multiple": 0,
-                    "ui": 1,
-                    "ajax": 1,
-                    "return_format": "value",
-                    "placeholder": ""
                 },
                 {
                     "key": "field_5e4a5a30290e9",
@@ -114,17 +63,9 @@
                     "type": "image",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_5e4a56d4091d3",
-                                "operator": "!=",
-                                "value": "1"
-                            }
-                        ]
-                    ],
+                    "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "60",
                         "class": "",
                         "id": ""
                     },
@@ -141,22 +82,14 @@
                 },
                 {
                     "key": "field_5e4a5a6d290ea",
-                    "label": "Signature",
+                    "label": "Signature \/ Auteur",
                     "name": "signature",
                     "type": "text",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_5e4a56d4091d3",
-                                "operator": "!=",
-                                "value": "1"
-                            }
-                        ]
-                    ],
+                    "conditional_logic": 0,
                     "wrapper": {
-                        "width": "30",
+                        "width": "40",
                         "class": "",
                         "id": ""
                     },
@@ -180,7 +113,7 @@
                         "id": ""
                     },
                     "default_value": "",
-                    "placeholder": "Avis de ...",
+                    "placeholder": "Avis 1, Avis 2, ...",
                     "prepend": "",
                     "append": "",
                     "maxlength": ""
@@ -294,9 +227,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "choices": {
-                "blocks-testimonials-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.lannion-tourisme.wp.rc-dev.com\/app\/dist\/lannion-tourisme\/img\/woody-library\/views\/blocks\/testimonials\/tpl_01\/thumbnail.png?version=1.18.19\" alt=\"blocks-testimonials-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Template 01<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Template 01<\/h4>{Nodesc :\/}<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-            },
+            "choices": [],
             "allow_null": 0,
             "other_choice": 0,
             "default_value": "",
@@ -323,7 +254,7 @@
         },
         {
             "key": "field_5e46c18672de5",
-            "label": "Paramètres du fond",
+            "label": "Paramètres de fond",
             "name": "testimonials_bg_params",
             "type": "clone",
             "instructions": "",
@@ -362,7 +293,7 @@
         {
             "key": "field_5e46c12f72de3",
             "label": "Effets visuels",
-            "name": "the_visuel_effects",
+            "name": "the_visual_effects",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -398,5 +329,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Affichage de plusieurs témoignages)",
-    "modified": 1582013712
+    "modified": 1582188528
 }
