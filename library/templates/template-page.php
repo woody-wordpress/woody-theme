@@ -248,6 +248,10 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     unset($page_teaser['breadcrumb']);
                 }
 
+                if (!empty($page_teaser['page_teaser_img'])) {
+                    $page_teaser['page_teaser_img']['attachment_more_data'] = (!empty($page_teaser['page_teaser_img']['ID'])) ? $this->tools->getAttachmentMoreData($page_teaser['page_teaser_img']['ID']) : [];
+                }
+
                 $page_teaser = apply_filters('woody_custom_page_teaser', $page_teaser, $this->context);
 
                 $this->context['page_teaser'] = \Timber::compile($this->context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
