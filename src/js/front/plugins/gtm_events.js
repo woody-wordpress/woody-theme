@@ -70,7 +70,7 @@ if ($('.sharing-links').length) {
 }
 
 if ($('.menu-social').length) {
-    $('.menu-social [data-network]').click(function(){
+    $('.menu-social').find('[data-network]').click(function(){
 
         window.dataLayer.push({
             eventCategory: eventCategory,
