@@ -67,6 +67,7 @@ abstract class WoodyTheme_TemplateAbstract
         $return['favorites_url'] = get_field('favorites_page_url', 'options');
         $return['search_url'] = get_field('es_search_page_url', 'options');
         $return['weather_url'] = get_field('weather_page_url', 'options');
+        $return['tides_url']= get_field('tides_page_url', 'options');
         $return['disqus_instance_url'] = get_field('disqus_instance_url', 'options');
 
         return $return;
