@@ -227,7 +227,7 @@ class WoodyTheme_WoodyCompilers
             }
 
             $orderby = !empty($wrapper['semantic_view_order']) ? $wrapper['semantic_view_order'] : 'menu_order' ;
-            wd($orderby);
+
             $the_query = [
                 'post_type' => 'page',
                 'post_parent' => $parent_id,
