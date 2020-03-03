@@ -4,6 +4,7 @@ import './plugins/cookieconsent';
 import './plugins/scroll_to_top';
 import './plugins/search';
 import './plugins/gtm_events';
+import './plugins/focus';
 
 // Woody Plugin
 import 'Claims/Resources/Assets/js/claims'

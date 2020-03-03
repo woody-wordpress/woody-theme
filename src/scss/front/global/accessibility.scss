@@ -27,3 +27,31 @@
     width: auto;
     z-index: 100000; // Above WP toolbar.
 }
+
+
+// Focus basic style
+$focus-shadow: 0 0 0 2px rgba(lighten($primary-color, 10%), .5) !default;
+
+.focus-keyboard {
+    border-color: inherit;
+    box-shadow: $focus-shadow;
+    outline: none;
+}
+
+.focus-mouse {
+    border-color: inherit;
+    box-shadow: inherit;
+    outline: none;
+}
+
+a,
+button,
+input,
+select,
+textarea {
+    transition: color .2s, box-shadow .2s;
+
+    &:focus:not(.focus-mouse) {
+        @extend .focus-keyboard;
+    }
+}
