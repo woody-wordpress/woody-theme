@@ -226,11 +226,14 @@ class WoodyTheme_WoodyCompilers
                 ];
             }
 
+            $orderby = !empty($wrapper['semantic_view_order']) ? $wrapper['semantic_view_order'] : 'menu_order' ;
+            wd($orderby);
             $the_query = [
                 'post_type' => 'page',
                 'post_parent' => $parent_id,
                 'post__not_in' => [$post_id, $front_id],
-                'tax_query' => (!empty($tax_query)) ? $tax_query : ''
+                'tax_query' => (!empty($tax_query)) ? $tax_query : '',
+                'orderby' => $orderby
             ];
 
             // Si des pages ont été ajoutées dans le champ "Pages à exclure"
