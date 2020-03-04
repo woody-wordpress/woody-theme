@@ -192,6 +192,30 @@
             "save_custom": 0
         },
         {
+            "key": "field_5b27b42203e49",
+            "label": "Ordre de tri",
+            "name": "semantic_view_order",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "menu_order": "Suivre l'ordre défini dans Woody Pages",
+                "rand": "Aléatoire"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
             "key": "field_5c8f7f01b9d25",
             "label": "Afficher les images",
             "name": "display_img",
