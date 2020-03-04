@@ -235,6 +235,13 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $page_teaser['breadcrumb'] = $this->createBreadcrumb();
                 $page_teaser['trip_infos'] = (!empty($this->context['trip_infos'])) ? $this->context['trip_infos'] : '';
                 $page_teaser['social_shares'] = (!empty($this->context['social_shares'])) ? $this->context['social_shares'] : '';
+
+                if (!empty($page_teaser['page_teaser_add_media'])) {
+                    unset($page_teaser['profile']);
+                } elseif(!empty($page_teaser['page_teaser_add_profile'])) {
+                    unset($page_teaser['page_teaser_img']);
+                }
+
                 if (!empty($page_teaser['page_teaser_media_type']) && $page_teaser['page_teaser_media_type'] == 'map') {
                     $page_teaser['post_coordinates'] = (!empty(getAcfGroupFields('group_5b3635da6529e', $this->context['post']))) ? getAcfGroupFields('group_5b3635da6529e', $this->context['post']) : '';
                 }

@@ -7,8 +7,8 @@
             "@type":"WebSite",
             "@id":"{{ http_host }}/#website",
             "url":"{{ http_host }}",
-            "name":"{{ site.name }}",
-            "description":"{{ site.description }}",
+            "name":"{{ site.name|trim }}",
+            "description":"{{ site.description|trim }}",
             "potentialAction":
             {
                 "@type":"SearchAction",
@@ -21,13 +21,13 @@
             "@id":"{{ http_host }}/#webpage",
             "url":"{{ http_host }}",
             "inLanguage":"{{ site.language }}",
-            "name":"{{ title }}",
+            "name":"{{ title|trim }}",
             "isPartOf":{
                 "@id":"{{ http_host }}/#website"
             },
             "datePublished":"{{ post.post_date }}",
             "dateModified":"{{ post.post_modified }}",
-            "description":"{{ description }}"
+            "description":"{{ description|trim }}"
         }
     ]
 }
