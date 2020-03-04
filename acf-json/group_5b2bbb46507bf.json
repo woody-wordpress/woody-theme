@@ -198,15 +198,9 @@
             "label": "Ajouter un média",
             "name": "page_teaser_add_media",
             "type": "true_false",
-            "instructions": "",
+            "instructions": "Ajouter un media empêche d'ajouter un profil",
             "required": 0,
-            "conditional_logic": [
-                [{
-                    "field": "field_5c614d83a4e9b",
-                    "operator": "!=",
-                    "value": "1"
-                }]
-            ],
+            "conditional_logic": [],
             "wrapper": {
                 "width": "50",
                 "class": "",
@@ -383,15 +377,9 @@
             "label": "Ajouter un profil \/ auteur",
             "name": "page_teaser_add_profile",
             "type": "true_false",
-            "instructions": "",
+            "instructions": "Ajouter un profil remplace le média ci-dessus",
             "required": 0,
-            "conditional_logic": [
-                [{
-                    "field": "field_5b44bfc2e2e21",
-                    "operator": "!=",
-                    "value": "1"
-                }]
-            ],
+            "conditional_logic": [],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -415,13 +403,7 @@
                         "field": "field_5c614d83a4e9b",
                         "operator": "==",
                         "value": "1"
-                    },
-                    {
-                        "field": "field_5b44bfc2e2e21",
-                        "operator": "!=",
-                        "value": "1"
-                    }
-                ]
+                }]
             ],
             "wrapper": {
                 "width": "",
