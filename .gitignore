@@ -1,3 +1,22 @@
+# Global
+.DS_Store
+._.*
+
+# Composer
+bin
+vendor/*
+!vendor/.gitkeep
+
+# Theme Foundation
+node_modules
+npm-debug.log
+dist
+config.yml
+*.sass-cache*
+*.log
+.idea/
+*.swp
+
+# Custom
 acf-json/group_5a95690688bc0.json
 woody-icons
-dist
