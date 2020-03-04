@@ -469,6 +469,12 @@ abstract class WoodyTheme_TemplateAbstract
                 $return['robots']['#attributes']['content'] = $return['robots']['#attributes']['content'] . ', nofollow';
             }
 
+            // No index no follow sur tous les modèles
+            if (get_post_type() == "woody_model") {
+                $return['robots']['#attributes']['content'] = strpos($return['robots']['#attributes']['content'], 'noindex') === false ? $return['robots']['#attributes']['content'] . ', noindex' : $return['robots']['#attributes']['content'];
+                $return['robots']['#attributes']['content'] = strpos($return['robots']['#attributes']['content'], 'nofollow') === false ? $return['robots']['#attributes']['content'] . ', nofollow' : $return['robots']['#attributes']['content'];
+            }
+
             // On ajoute un balise noindex/nofollow sur toutes les pages des langues non activées
             $lang_enable = get_option('woody_lang_enable');
             if (is_array($lang_enable) && !in_array(pll_current_language(), $lang_enable)) {
