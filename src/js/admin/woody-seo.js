@@ -49,7 +49,7 @@ $('#acf-group_5d7f7cd5615c0').each(function() {
                     $tokensDiv.find('span').each(function() {
                         if ($(this).hasClass('token-val')) {
                             currentText.push($(this).data('field'));
-                        } else {
+                        } else if ($(this).hasClass('editable')) {
                             currentText.push($(this).html());
                         }
                     });
