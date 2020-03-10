@@ -640,6 +640,23 @@
             "prefix_name": 0
         },
         {
+            "key": "field_5e67c1b2f200a",
+            "label": "FIN",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 1
+        },
+        {
             "key": "field_5b0d219d7c82e",
             "label": "Mise en page",
             "name": "",
@@ -821,5 +838,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1583857103
+    "modified": 1583858136
 }
