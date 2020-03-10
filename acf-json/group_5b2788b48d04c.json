@@ -52,19 +52,7 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "128": "Saisons - Automne",
-                "129": "Saisons - Hiver",
-                "127": "Saisons - Printemps",
-                "126": "Saisons - Été",
-                "22": "Thématiques - Couples",
-                "21": "Thématiques - Famille",
-                "138": "Thématiques - Thème A",
-                "140": "Thématiques - Thème B",
-                "142": "Thématiques - Thème C",
-                "146": "Thématiques - Thème D",
-                "23": "Thématiques - avec enfants"
-            },
+            "choices": {},
             "default_value": [],
             "allow_null": 0,
             "multiple": 1,
@@ -288,7 +276,46 @@
                 "field_5b041d79adb73",
                 "field_5b59bbd0e094c",
                 "field_5b72f56b6f4aa",
-                "field_5b59bc12e094d"
+                "field_5b59bc12e094d",
+                "field_5b041dbfadb74"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
+        },
+        {
+            "key": "field_5e67b9ce6a438",
+            "label": "Options avancées",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 1,
+            "endpoint": 0
+        },
+        {
+            "key": "field_5e67ba0e6a439",
+            "label": "Personnalisation du fond",
+            "name": "focus_block_title_bg_params",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5b043c93d609a"
             ],
             "display": "seamless",
             "layout": "block",
@@ -577,5 +604,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1567690380
+    "modified": 1583856225
 }
