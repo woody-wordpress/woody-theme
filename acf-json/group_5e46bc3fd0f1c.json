@@ -1,8 +1,7 @@
 {
     "key": "group_5e46bc3fd0f1c",
     "title": "Témoignages",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5e46c25672de9",
             "label": "Contenu",
             "name": "",
@@ -36,8 +35,7 @@
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter un témoignage",
-            "sub_fields": [
-                {
+            "sub_fields": [{
                     "key": "field_5e4a5597e2017",
                     "label": "Titre d'administration",
                     "name": "bo_testimony_title",
@@ -174,12 +172,68 @@
                 "field_5b041d79adb73",
                 "field_5b59bbd0e094c",
                 "field_5b72f56b6f4aa",
-                "field_5b59bc12e094d"
+                "field_5b59bc12e094d",
+                "field_5b041dbfadb74"
             ],
             "display": "seamless",
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0
+        },
+        {
+            "key": "field_5e67bedaef6b3",
+            "label": "Options avancées",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
+            "key": "field_5e67bebdef6b2",
+            "label": "Paramètres de fond",
+            "name": "testimonials_block_title_bg_params",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5b043c93d609a"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
+        },
+        {
+            "key": "field_5e67c29a05e53",
+            "label": "FIN",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 1
         },
         {
             "key": "field_5e46c24472de8",
@@ -227,7 +281,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "choices": [],
+            "choices": {},
             "allow_null": 0,
             "other_choice": 0,
             "default_value": "",
@@ -313,13 +367,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -329,5 +381,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Affichage de plusieurs témoignages)",
-    "modified": 1582188528
+    "modified": 1583858343
 }
