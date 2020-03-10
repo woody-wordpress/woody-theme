@@ -110,6 +110,9 @@ class WoodyTheme_Polylang
         __('Arrivée', 'woody-theme');
         __('Etape', 'woody-theme');
 
+        // Circuits
+        __('J', 'woody-theme');
+        
         // Availabilities calendar
         __('Attention, vous n\'avez pas saisi d\'identifiant de playlist en paramètre du shortcode.
             Pour rappel, le shortcode s\'utilise par exemple de cette manière', 'woody-theme');
