@@ -169,8 +169,15 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
             // Si le module groupe est activé
             if (in_array('groups', $this->context['enabled_woody_options'])) {
-                $groupQuotation = new GroupQuotation;
-                $trip_infos['the_price'] = $trip_infos['the_price']['price_type'] == 'component_based' ? $groupQuotation->calculTripPrice($trip_infos['the_price']) : $trip_infos['the_price'] ;
+                if ($trip_infos['the_price']['price_type'] == 'component_based') {
+                    $groupQuotation = new GroupQuotation;
+                    $trip_infos['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price']);
+                } elseif ($trip_infos['the_price']['price_type'] == 'no_tariff') {
+                    $trip_infos['the_price']['price'] = "Sans tarif";
+                    $trip_infos['the_price']['prefix_price'] = "";
+                    $trip_infos['the_price']['suffix_price'] = "";
+                    $trip_infos['the_price']['currency'] = "none";
+                }
 
                 // On vérifie si le prix est calculé sur un ensemble de composant et on le définit le cas échéant
                 if (!empty($trip_infos['the_price']['activate_quotation'])) {
@@ -238,7 +245,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
                 if (!empty($page_teaser['page_teaser_add_media'])) {
                     unset($page_teaser['profile']);
-                } elseif(!empty($page_teaser['page_teaser_add_profile'])) {
+                } elseif (!empty($page_teaser['page_teaser_add_profile'])) {
                     unset($page_teaser['page_teaser_img']);
                 }
 
