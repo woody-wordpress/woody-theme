@@ -2,89 +2,30 @@ var style = getComputedStyle(document.body);
 window.enableAnalyticsEvent = false;
 window.enableCookiesEvent = false;
 
-if (window.siteConfig.current_lang.indexOf('fr') != -1 || window.siteConfig.current_lang.indexOf('br') != -1) {
-    var message =
-        "Ce site web active par défaut des cookies de mesure d'audience et pour des fonctionnalités anonymes.";
-    var dismiss = 'OK je comprends !';
-    var allow = "J'accepte les cookies";
-    var deny = 'Je ne veux pas de cookies';
-    var link = 'En savoir plus';
-    var policy = 'Règles sur les cookies';
-} else if (window.siteConfig.current_lang.indexOf('de') != -1) {
-    var message =
-        'Diese Website nutzt für ihre Funktion und Analyse anoynm Cookies.';
-    var dismiss = 'Okay, ich verstehe!';
-    var allow = 'Cookies akzeptieren';
-    var deny = 'Keine Cookies';
-    var link = 'Mehr erfahren';
-    var policy = 'Richtlinien für Cookies';
-} else if (window.siteConfig.current_lang.indexOf('nl') != -1) {
-    var message =
-        'Deze website maakt gebruik van anonieme functionele en analytische cookies.';
-    var dismiss = 'Oké, ik begrijp het!';
-    var allow = 'Cookies accepteren';
-    var deny = 'Cookies weigeren';
-    var link = 'Meer informatie';
-    var policy = 'Cookiebeleid';
-} else if (window.siteConfig.current_lang.indexOf('es') != -1) {
-    var message =
-        'Esta página web activa las cookies de forma predeterminada para la medición de la audiencia y las funciones anónimas.';
-    var dismiss = '¡Bien, lo entiendo!';
-    var allow = 'Acepto cookies';
-    var deny = 'No acepto cookies';
-    var link = 'Más información';
-    var policy = 'Política sobre Cookies';
-} else if (window.siteConfig.current_lang.indexOf('it') != -1) {
-    var message =
-        "Questo sito web attiva di default i cookies per la misurazione dell'audience e le funzioni anonime.";
-    var dismiss = 'Ok, ho capito!';
-    var allow = 'Accetto i cookies';
-    var deny = 'Non voglio i cookies';
-    var link = 'Per saperne di più';
-    var policy = 'Politica sui cookies';
-} else if (window.siteConfig.current_lang.indexOf('ja') != -1) {
-    var message =
-        'このWebサイトは、デフォルトでオーディエンス測定および匿名機能のためにCookieをアクティブにします。';
-    var dismiss = 'わかりました';
-    var allow = 'クッキーを受け入れる';
-    var deny = 'クッキーを受け入れない';
-    var link = 'もっと知りたい';
-    var policy = 'クッキーポリシー';
-} else {
-    var message =
-        'This website activates cookies by default for audience measurement and anonymous features.';
-    var dismiss = 'Got it!';
-    var allow = 'Allow cookies';
-    var deny = 'Decline';
-    var link = 'Learn more';
-    var policy = 'Cookies Policy';
-}
-
-var getOptions = function(){
-
-    var options = {};
+var getCookieBanner = function() {
     $.ajax({
         method: 'GET',
         url: frontendajax.ajaxurl,
         dataType: 'json',
         data: {
-            action: 'get_cookie_options'
+            action: 'get_cookie_banner'
         },
         success: function(response) {
-            options = response;
-            // Object.keys(response).forEach(function (key) {
-
-            // });
+            // append response
+            $('body').prepend(response);
         },
         error: function(error) {
             console.warn('Unable to retrieve cookie options. An error has occured : ' + error);
         }
     });
-
-    return options;
 };
 
-var options = getOptions();
+var cookieconsent_status = Cookies.getJSON('cookieconsent_status');
+if (cookieconsent_status == undefined) {
+    getCookieBanner();
+
+    // After DOM Inserted, ON CLICK functions
+}
 
 // Enable analytics
 var enableAnalytics = function() {
@@ -130,51 +71,55 @@ var disableCookies = function() {
     });
 };
 
-if (document.cookie.indexOf('cookieconsent_status') == -1) {
-    enableAnalytics();
-}
+// if (document.cookie.indexOf('cookieconsent_status') == -1) {
+//     enableAnalytics();
+// }
 
-window.cookieconsent.initialise({
-    onInitialise: function(status) {
-        var hasConsent = this.hasConsented();
-        if (hasConsent) {
-            enableAnalytics();
-            enableCookies();
-        } else {
-            disableAnalytics();
-            disableCookies();
-        }
-    },
-    onStatusChange: function(status, chosenBefore) {
-        var hasConsent = this.hasConsented();
-        if (hasConsent && !window.sendPageView) {
-            enableAnalytics();
-            enableCookies();
-        } else {
-            disableAnalytics();
-            disableCookies();
-        }
-    },
-    onRevokeChoice: function() {
-        disableCookies();
-    },
-    theme: 'edgeless',
-    type: 'opt-out',
-    content: {
-        message: message,
-        dismiss: dismiss,
-        allow: allow,
-        deny: deny,
-        link: link,
-        href: 'https://www.cnil.fr/fr/site-web-cookies-et-autres-traceurs',
-        policy: policy
-    },
-    palette: {
-        popup: {
-            background: '#333'
-        },
-        button: {
-            background: style.getPropertyValue('--primary-color')
-        }
-    }
-});
+// window.cookieconsent.initialise({
+//     onInitialise: function(status) {
+//         var hasConsent = this.hasConsented();
+//         console.log('INITIALIZE COOKIECONSENT');
+//         if (hasConsent) {
+//             enableAnalytics();
+//             enableCookies();
+//         } else {
+//             disableAnalytics();
+//             disableCookies();
+//         }
+//     },
+//     onStatusChange: function(status, chosenBefore) {
+//         console.log('CHANGE COOKIECONSENT');
+
+//         var hasConsent = this.hasConsented();
+//         if (hasConsent && !window.sendPageView) {
+//             enableAnalytics();
+//             enableCookies();
+//         } else {
+//             disableAnalytics();
+//             disableCookies();
+//         }
+//     },
+//     onRevokeChoice: function() {
+//         console.log('REVOKE COOKIECONSENT');
+//         disableCookies();
+//     },
+//     theme: 'edgeless',
+//     type: 'opt-out',
+//     content: {
+//         message: message,
+//         dismiss: dismiss,
+//         allow: allow,
+//         deny: deny,
+//         link: link,
+//         href: 'https://www.cnil.fr/fr/site-web-cookies-et-autres-traceurs',
+//         policy: policy
+//     },
+//     palette: {
+//         popup: {
+//             background: '#333'
+//         },
+//         button: {
+//             background: style.getPropertyValue('--primary-color')
+//         }
+//     }
+// });
