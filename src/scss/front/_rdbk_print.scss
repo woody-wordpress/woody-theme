@@ -1,6 +1,7 @@
 .print-rdbk {
     font-size: 90%;
 
+    // Page header
     .page-header {
         text-align: center;
         text-transform: uppercase;
@@ -16,6 +17,7 @@
         }
     }
 
+    // Display sheets in tables
     .sheets-list {
         .item-infos {
             border-bottom: 1px solid #a0a0a0;
@@ -30,4 +32,72 @@
 
         }
     }
+
+    // Hide element non usable on print
+    .woody-component-movie,
+    .woody-component-testimonials,
+    .woody-component-feature,
+    .woody-component-links {
+        display: none;
+    }
+
+    // Hide useless hrefs
+
+    .accordion-title {
+        &[href]:after {
+            content: none !important;
+        }
+    }
+
+    // Galleries
+    .woodyGallery {
+        display: flex;
+
+        .cell {
+            width: 25%;
+            padding: 10px;
+        }
+    }
+
+    .woody-component-faq {
+        .faq-title {
+            font-weight: bold;
+            font-size: 20px;
+        }
+    }
+
+    // Texts Headings
+    .woody-component-custom-text {
+        h2 {
+            font-size: 24px;
+        }
+
+        h3 {
+            font-size: 20px;
+        }
+
+        h4 {
+            font-size: 18px;
+        }
+
+        h5 {
+            font-size: 16px;
+        }
+    }
+
+    [class$='-title'],
+    [class$='-subtitle'],
+    [class$='-title'] {
+        display: block;
+    }
+
+    .woody-component-geomap {
+        padding: 10px;
+        margin: 0;
+
+        .leaflet-marker-icon {
+            display: block;
+        }
+    }
+
 }
