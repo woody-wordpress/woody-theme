@@ -3,56 +3,63 @@ window.enableAnalyticsEvent = false;
 window.enableCookiesEvent = false;
 
 if (window.siteConfig.current_lang.indexOf('fr') != -1 || window.siteConfig.current_lang.indexOf('br') != -1) {
-    var message =
-        "Ce site web active par défaut des cookies de mesure d'audience et pour des fonctionnalités anonymes.";
+    var message = "Ce site web active par défaut des cookies de mesure d'audience et pour des fonctionnalités anonymes.";
     var dismiss = 'OK je comprends !';
     var allow = "J'accepte les cookies";
     var deny = 'Je ne veux pas de cookies';
     var link = 'En savoir plus';
     var policy = 'Règles sur les cookies';
 } else if (window.siteConfig.current_lang.indexOf('de') != -1) {
-    var message =
-        'Diese Website nutzt für ihre Funktion und Analyse anoynm Cookies.';
+    var message = 'Diese Website nutzt für ihre Funktion und Analyse anoynm Cookies.';
     var dismiss = 'Okay, ich verstehe!';
     var allow = 'Cookies akzeptieren';
     var deny = 'Keine Cookies';
     var link = 'Mehr erfahren';
     var policy = 'Richtlinien für Cookies';
 } else if (window.siteConfig.current_lang.indexOf('nl') != -1) {
-    var message =
-        'Deze website maakt gebruik van anonieme functionele en analytische cookies.';
+    var message = 'Deze website maakt gebruik van anonieme functionele en analytische cookies.';
     var dismiss = 'Oké, ik begrijp het!';
     var allow = 'Cookies accepteren';
     var deny = 'Cookies weigeren';
     var link = 'Meer informatie';
     var policy = 'Cookiebeleid';
 } else if (window.siteConfig.current_lang.indexOf('es') != -1) {
-    var message =
-        'Esta página web activa las cookies de forma predeterminada para la medición de la audiencia y las funciones anónimas.';
+    var message = 'Esta página web activa las cookies de forma predeterminada para la medición de la audiencia y las funciones anónimas.';
     var dismiss = '¡Bien, lo entiendo!';
     var allow = 'Acepto cookies';
     var deny = 'No acepto cookies';
     var link = 'Más información';
     var policy = 'Política sobre Cookies';
 } else if (window.siteConfig.current_lang.indexOf('it') != -1) {
-    var message =
-        "Questo sito web attiva di default i cookies per la misurazione dell'audience e le funzioni anonime.";
+    var message = "Questo sito web attiva di default i cookies per la misurazione dell'audience e le funzioni anonime.";
     var dismiss = 'Ok, ho capito!';
     var allow = 'Accetto i cookies';
     var deny = 'Non voglio i cookies';
     var link = 'Per saperne di più';
     var policy = 'Politica sui cookies';
 } else if (window.siteConfig.current_lang.indexOf('ja') != -1) {
-    var message =
-        'このWebサイトは、デフォルトでオーディエンス測定および匿名機能のためにCookieをアクティブにします。';
+    var message = 'このWebサイトは、デフォルトでオーディエンス測定および匿名機能のためにCookieをアクティブにします。';
     var dismiss = 'わかりました';
     var allow = 'クッキーを受け入れる';
     var deny = 'クッキーを受け入れない';
     var link = 'もっと知りたい';
     var policy = 'クッキーポリシー';
+} else if (window.siteConfig.current_lang.indexOf('zh') != -1) {
+    var message = '默认情况下，该网站会激活Cookie，以进行受众群体评估和匿名功能';
+    var dismiss = '得到它了';
+    var allow = '允许Cookie';
+    var deny = '下降';
+    var link = '学到更多';
+    var policy = 'Cookies政策';
+} else if (window.siteConfig.current_lang.indexOf('ru') != -1) {
+    var message = 'Этот веб-сайт по умолчанию активирует куки-файлы для измерения аудитории и анонимных функций.';
+    var dismiss = 'Я не принимаю активацию куки';
+    var allow = 'Я принимаю активацию куки';
+    var deny = 'Я не принимаю активацию куки';
+    var link = 'Узнайте больше';
+    var policy = 'COOKIE-файлы';
 } else {
-    var message =
-        'This website activates cookies by default for audience measurement and anonymous features.';
+    var message = 'This website activates cookies by default for audience measurement and anonymous features.';
     var dismiss = 'Got it!';
     var allow = 'Allow cookies';
     var deny = 'Decline';
