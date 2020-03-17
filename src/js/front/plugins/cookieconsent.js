@@ -60,6 +60,32 @@ if (window.siteConfig.current_lang.indexOf('fr') != -1 || window.siteConfig.curr
     var policy = 'Cookies Policy';
 }
 
+var getOptions = function(){
+
+    var options = {};
+    $.ajax({
+        method: 'GET',
+        url: frontendajax.ajaxurl,
+        dataType: 'json',
+        data: {
+            action: 'get_cookie_options'
+        },
+        success: function(response) {
+            options = response;
+            // Object.keys(response).forEach(function (key) {
+
+            // });
+        },
+        error: function(error) {
+            console.warn('Unable to retrieve cookie options. An error has occured : ' + error);
+        }
+    });
+
+    return options;
+};
+
+var options = getOptions();
+
 // Enable analytics
 var enableAnalytics = function() {
     console.log('Enable Analytics');

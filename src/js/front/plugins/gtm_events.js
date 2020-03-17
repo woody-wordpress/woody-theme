@@ -16,9 +16,6 @@ var getPlace = function() {
                 if (response.length > 0) {
                     page.lieu =  response[0];
                 }
-            },
-            error: function(err) {
-                console.error(err);
             }
         });
     }

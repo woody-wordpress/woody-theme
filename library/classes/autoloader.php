@@ -51,6 +51,7 @@ new WoodyTheme_Enqueue_Assets();
 new WoodyTheme_Polylang();
 
 // Content
+new WoodyTheme_Cookies();
 new WoodyTheme_Permalink();
 new WoodyTheme_Cron();
 new WoodyTheme_Post_Type();

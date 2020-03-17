@@ -135,6 +135,7 @@ class WoodyTheme_Enqueue_Assets
 
         // Dependencies of main.js
         wp_enqueue_script('jsdelivr_cookieconsent', 'https://cdn.jsdelivr.net/npm/cookieconsent@3.1.0/build/cookieconsent.min.js', [], '', true);
+        wp_localize_script('jsdelivr_cookieconsent', 'frontendajax', array('ajaxurl' => admin_url('admin-ajax.php')));
         wp_enqueue_script('jsdelivr_swiper', 'https://cdn.jsdelivr.net/npm/swiper@4.4.1/dist/js/swiper.min.js', [], '', true);
 
         $current_lang = apply_filters('woody_pll_current_language', null);
