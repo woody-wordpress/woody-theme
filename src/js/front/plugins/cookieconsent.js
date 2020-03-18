@@ -15,7 +15,7 @@ var getCookieBanner = function() {
             $('body').prepend(response);
         },
         error: function(error) {
-            console.warn('Unable to retrieve cookie options. An error has occured : ' + error);
+            console.warn('Unable to create cookie banner. An error has occured : ' + error);
         }
     });
 };
