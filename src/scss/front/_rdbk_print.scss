@@ -17,11 +17,14 @@
         }
     }
 
+    .section {
+        padding: 0;
+        margin: 0;
+    }
+
     // Display sheets in tables
     .sheets-list {
         .item-infos {
-            border-bottom: 1px solid #a0a0a0;
-
             td {
                 padding: 3px;
             }
@@ -35,69 +38,24 @@
 
     // Hide element non usable on print
     .woody-component-movie,
+    .woody-component-focus,
     .woody-component-testimonials,
-    .woody-component-feature,
+    .woody-component-geomap,
     .woody-component-links {
         display: none;
     }
 
-    // Hide useless hrefs
-
-    .accordion-title {
-        &[href]:after {
-            content: none !important;
-        }
+    .page-section {
+        width: 8.5in !important;
     }
 
-    // Galleries
-    .woodyGallery {
-        display: flex;
-
-        .cell {
-            width: 25%;
-            padding: 10px;
-        }
-    }
-
-    .woody-component-faq {
-        .faq-title {
-            font-weight: bold;
-            font-size: 20px;
-        }
-    }
-
-    // Texts Headings
-    .woody-component-custom-text {
-        h2 {
-            font-size: 24px;
+    .accordion {
+        .accordion-title:before {
+            display: none;
         }
 
-        h3 {
-            font-size: 20px;
-        }
-
-        h4 {
-            font-size: 18px;
-        }
-
-        h5 {
-            font-size: 16px;
-        }
-    }
-
-    [class$='-title'],
-    [class$='-subtitle'],
-    [class$='-title'] {
-        display: block;
-    }
-
-    .woody-component-geomap {
-        padding: 10px;
-        margin: 0;
-
-        .leaflet-marker-icon {
+        .accordion-content {
             display: block;
         }
     }
-
 }
