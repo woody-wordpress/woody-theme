@@ -6,24 +6,27 @@
 
     {# Accepter ou Refuser tous les cookies #}
     <div class="cc-compliance cc-highlight">
-        <a aria-label="allow cookies" role="button" tabindex="0" class="cc-btn cc-allow">{{allow}}</a>
         <a aria-label="deny cookies" role="button" tabindex="0" class="cc-btn cc-deny">{{deny}}</a>
+        <a aria-label="allow cookies" role="button" tabindex="0" class="cc-btn cc-allow">{{allow}}</a>
     </div>
 
-    {% for option in options  %}
-        <div class="cc-option">
-            <div class="switch tiny">
-              <input class="switch-input" id="tinySwitch" type="checkbox" name="{{option.label|lower}}">
-              <label class="switch-paddle" for="tinySwitch">
-                <span id="cookieoption:label" class="cc-message h3"> {{option.label}} </span>
-              </label>
+    {% if options %}
+        {% for option in options  %}
+            <div class="cc-option">
+                <div class="switch tiny">
+                  <input class="switch-input" id="tinySwitch" type="checkbox" name="{{option.label|lower}}">
+                  <label class="switch-paddle" for="tinySwitch">
+                    <span id="cookieoption:label" class="cc-message h3"> {{option.label}} </span>
+                  </label>
+                </div>
+                <span id="cookieoption:desc" class="cc-message"> {{option.description}}</span>
             </div>
-            <span id="cookieoption:desc" class="cc-message"> {{option.description}}</span>
-        </div>
-    {% endfor  %}
+        {% endfor  %}
 
-    {# Enregistrer la personnalisation #}
-    <div class="cc-compliance cc-highlight">
-        <a aria-label="personalize cookies" role="button" tabindex="0" class="cc-btn cc-personalize">{{personalize}}</a>
-    </div>
+        {# Enregistrer la personnalisation #}
+
+        <div class="cc-compliance cc-highlight">
+            <a aria-label="personalize cookies" role="button" tabindex="0" class="cc-btn cc-personalize">{{personalize}}</a>
+        </div>
+    {% endif %}
 </div>

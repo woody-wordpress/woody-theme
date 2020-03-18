@@ -23,21 +23,25 @@ class WoodyTheme_Cookies
     public function getCookieOptions()
     {
         $template = "parts/cookies.twig";
-        $infos = $this->getInfosByLang(pll_current_language());
+
+        $lang = !empty(pll_current_language()) ? pll_current_language() : "fr";
+        $infos = $this->getInfosByLang($lang);
 
         $data = [
-            'options'   => [],
-            "message"   => $infos['message'],
-            "dismiss"   => $infos['dismiss'],
-            "allow"     => $infos['allow'],
-            "deny"      => $infos['deny'],
-            "link"      => $infos['link'],
-            "href"      => $infos['href'],
-            "policy"    => $infos['policy']
+            "options"       => [],
+            "message"       => !empty($infos['message'])     ? $infos['message']     : "",
+            "dismiss"       => !empty($infos['dismiss'])     ? $infos['dismiss']     : "",
+            "allow"         => !empty($infos['allow'])       ? $infos['allow']       : "",
+            "deny"          => !empty($infos['deny'])        ? $infos['deny']        : "",
+            "link"          => !empty($infos['link'])        ? $infos['link']        : "",
+            "href"          => !empty($infos['href'])        ? $infos['href']        : "",
+            "policy"        => !empty($infos['policy'])      ? $infos['policy']      : "",
+            "personalize"   => !empty($infos['personalize']) ? $infos['personalize'] : ""
         ];
 
         $max = !empty(get_option("options_cookie_activate")) ? get_option("options_cookie_activate") : 0 ;
-        for ($i = 0 ; $i < $max ; $i++ ) {
+        for ($i = 0 ; $i < $max ; $i++) {
+            $data['options'][$i] = [];
             $data['options'][$i]['label'] = !empty(get_option('options_cookie_activate_'.$i.'_label')) ? get_option('options_cookie_activate_'.$i.'_label') : '';
             $data['options'][$i]['description'] = !empty(get_option('options_cookie_activate_'.$i.'_description')) ? get_option('options_cookie_activate_'.$i.'_description') : '';
         }
@@ -46,84 +50,85 @@ class WoodyTheme_Cookies
 
         if (!is_null($return)) {
             wp_send_json($return);
+            exit;
         } else {
             header("HTTP/1.0 400 Bad Request");
             die();
         }
-        exit;
     }
 
     private function getInfosByLang($lang)
     {
-        switch($lang)
-        {
+        $return = [];
+
+        switch ($lang) {
             case 'en':
-                $infos['message'] = "This website activates cookies by default for audience measurement and anonymous features.";
-                $infos['dismiss'] = 'Got it!';
-                $infos['allow'] = "Allow cookies";
-                $infos['personalize'] = 'Customize';
-                $infos['deny'] = 'Decline';
-                $infos['link'] = 'Learn more';
-                $infos['policy'] = 'Cookies Policy';
+                $return['message'] = "This website activates cookies by default for audience measurement and anonymous features.";
+                $return['dismiss'] = 'Got it!';
+                $return['allow'] = "Allow cookies";
+                $return['personalize'] = 'Customize';
+                $return['deny'] = 'Decline';
+                $return['link'] = 'Learn more';
+                $return['policy'] = 'Cookies Policy';
             break;
             case 'nl':
-                $infos['message'] = "Deze website maakt gebruik van anonieme functionele en analytische cookies.";
-                $infos['dismiss'] = 'Oké, ik begrijp het!';
-                $infos['allow'] = "Cookies accepteren";
-                $infos['personalize'] = 'Pas  aan';
-                $infos['deny'] = 'Cookies weigeren';
-                $infos['link'] = 'Meer informatie';
-                $infos['policy'] = 'Cookiebeleid';
+                $return['message'] = "Deze website maakt gebruik van anonieme functionele en analytische cookies.";
+                $return['dismiss'] = 'Oké, ik begrijp het!';
+                $return['allow'] = "Cookies accepteren";
+                $return['personalize'] = 'Pas  aan';
+                $return['deny'] = 'Cookies weigeren';
+                $return['link'] = 'Meer informatie';
+                $return['policy'] = 'Cookiebeleid';
             break;
             case 'de':
-                $infos['message'] = "Diese Website nutzt für ihre Funktion und Analyse anoynm Cookies.";
-                $infos['dismiss'] = 'Okay, ich verstehe!';
-                $infos['allow'] = "Cookies akzeptieren";
-                $infos['personalize'] = 'Anpassen';
-                $infos['deny'] = 'Keine Cookies';
-                $infos['link'] = 'Mehr erfahren';
-                $infos['policy'] = 'Richtlinien für Cookies';
+                $return['message'] = "Diese Website nutzt für ihre Funktion und Analyse anoynm Cookies.";
+                $return['dismiss'] = 'Okay, ich verstehe!';
+                $return['allow'] = "Cookies akzeptieren";
+                $return['personalize'] = 'Anpassen';
+                $return['deny'] = 'Keine Cookies';
+                $return['link'] = 'Mehr erfahren';
+                $return['policy'] = 'Richtlinien für Cookies';
             break;
             case 'es':
-                $infos['message'] = "Esta página web activa las cookies de forma predeterminada para la medición de la audiencia y las funciones anónimas.";
-                $infos['dismiss'] = '¡Bien, lo entiendo!';
-                $infos['allow'] = "Acepto cookies";
-                $infos['personalize'] = 'Personalizar';
-                $infos['deny'] = 'No acepto cookies';
-                $infos['link'] = 'Más información';
-                $infos['policy'] = 'Política sobre Cookies';
+                $return['message'] = "Esta página web activa las cookies de forma predeterminada para la medición de la audiencia y las funciones anónimas.";
+                $return['dismiss'] = '¡Bien, lo entiendo!';
+                $return['allow'] = "Acepto cookies";
+                $return['personalize'] = 'Personalizar';
+                $return['deny'] = 'No acepto cookies';
+                $return['link'] = 'Más información';
+                $return['policy'] = 'Política sobre Cookies';
             break;
             case 'it':
-                $infos['message'] = "Questo sito web attiva di default i cookies per la misurazione dell'audience e le funzioni anonime.";
-                $infos['dismiss'] = 'Ok, ho capito!';
-                $infos['allow'] = "Accetto i cookies";
-                $infos['personalize'] = 'Personalizzare';
-                $infos['deny'] = 'Non voglio i cookies';
-                $infos['link'] = 'Per saperne di più';
-                $infos['policy'] = 'Politica sui cookies';
+                $return['message'] = "Questo sito web attiva di default i cookies per la misurazione dell'audience e le funzioni anonime.";
+                $return['dismiss'] = 'Ok, ho capito!';
+                $return['allow'] = "Accetto i cookies";
+                $return['personalize'] = 'Personalizzare';
+                $return['deny'] = 'Non voglio i cookies';
+                $return['link'] = 'Per saperne di più';
+                $return['policy'] = 'Politica sui cookies';
             break;
             case 'ja':
-                $infos['message'] = "このWebサイトは、デフォルトでオーディエンス測定および匿名機能のためにCookieをアクティブにします。";
-                $infos['dismiss'] = 'わかりました';
-                $infos['allow'] = "クッキーを受け入れる";
-                $infos['personalize'] = 'カスタマイズする';
-                $infos['deny'] = 'クッキーを受け入れない';
-                $infos['link'] = 'もっと知りたい';
-                $infos['policy'] = 'クッキーポリシー';
+                $return['message'] = "このWebサイトは、デフォルトでオーディエンス測定および匿名機能のためにCookieをアクティブにします。";
+                $return['dismiss'] = 'わかりました';
+                $return['allow'] = "クッキーを受け入れる";
+                $return['personalize'] = 'カスタマイズする';
+                $return['deny'] = 'クッキーを受け入れない';
+                $return['link'] = 'もっと知りたい';
+                $return['policy'] = 'クッキーポリシー';
             break;
             case 'fr':
             default:
-                $infos['message'] = "Ce site web active par défaut des cookies de mesure d'audience et pour des fonctionnalités anonymes.";
-                $infos['dismiss'] = 'OK je comprends !';
-                $infos['allow'] = "J'accepte les cookies";
-                $infos['personalize'] = 'Personnaliser';
-                $infos['deny'] = 'Je ne veux pas de cookies';
-                $infos['link'] = 'En savoir plus';
-                $infos['policy'] = 'Règles sur les cookies';
+                $return['message'] = "Ce site web active par défaut des cookies de mesure d'audience et pour des fonctionnalités anonymes.";
+                $return['dismiss'] = 'OK je comprends !';
+                $return['allow'] = "J'accepte les cookies";
+                $return['personalize'] = 'Personnaliser';
+                $return['deny'] = 'Je ne veux pas de cookies';
+                $return['link'] = 'En savoir plus';
+                $return['policy'] = 'Règles sur les cookies';
             break;
         }
-        $infos['href'] = "https://www.cnil.fr/fr/site-web-cookies-et-autres-traceurs";
+        $return['href'] = "https://www.cnil.fr/fr/site-web-cookies-et-autres-traceurs";
 
-        return $infos;
+        return $return;
     }
 }
