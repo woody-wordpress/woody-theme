@@ -13,13 +13,16 @@
     {% if options %}
         {% for option in options  %}
             <div class="cc-option">
-                <div class="switch tiny">
-                  <input class="switch-input" id="tinySwitch" type="checkbox" name="{{option.label|lower}}">
-                  <label class="switch-paddle" for="tinySwitch">
-                    <span id="cookieoption:label" class="cc-message h3"> {{option.label}} </span>
-                  </label>
+                <div class="flex-container">
+                    <span id="cookieoption:label" class="cc-message"> {{option.label}} </span>
+                    <div class="switch tiny">
+                      <input class="switch-input" id="{{option.label|lower}}" type="checkbox" name="{{option.label|lower}}">
+                      <label class="switch-paddle" for="{{option.label|lower}}">
+                        <span id="cookieoption:label" class="cc-message"></span>
+                      </label>
+                    </div>
                 </div>
-                <span id="cookieoption:desc" class="cc-message"> {{option.description}}</span>
+                <p id="cookieoption:desc" class="cc-message"> {{option.description}}</p>
             </div>
         {% endfor  %}
 

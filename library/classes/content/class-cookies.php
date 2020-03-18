@@ -39,7 +39,7 @@ class WoodyTheme_Cookies
             "personalize"   => !empty($infos['personalize']) ? $infos['personalize'] : ""
         ];
 
-        $max = !empty(get_option("options_cookie_activate")) ? get_option("options_cookie_activate") : 0 ;
+        $max = !empty(get_option("options_cookie_activate")) && is_numeric(get_option("options_cookie_activate")) ? get_option("options_cookie_activate") : 0 ;
         for ($i = 0 ; $i < $max ; $i++) {
             $data['options'][$i] = [];
             $data['options'][$i]['label'] = !empty(get_option('options_cookie_activate_'.$i.'_label')) ? get_option('options_cookie_activate_'.$i.'_label') : '';
