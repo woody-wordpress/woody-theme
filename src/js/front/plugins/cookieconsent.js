@@ -3,21 +3,27 @@ window.enableAnalyticsEvent = false;
 window.enableCookiesEvent = false;
 
 var getCookieBanner = function() {
-    $.ajax({
-        method: 'GET',
-        url: frontendajax.ajaxurl,
-        dataType: 'json',
-        data: {
-            action: 'get_cookie_banner'
-        },
-        success: function(response) {
-            // append response
-            $('body').prepend(response);
-        },
-        error: function(error) {
-            console.warn('Unable to create cookie banner. An error has occured : ' + error);
-        }
-    });
+    if (typeof frontendajax != "undefined" && frontendajax != null) {
+        $.ajax({
+            method: 'GET',
+            url: frontendajax.ajaxurl,
+            dataType: 'json',
+            data: {
+                action: 'get_cookie_banner'
+            },
+            success: function(response) {
+                // append response
+                $('body').prepend(response);
+                // After DOM Inserted, ON CLICK functions
+                initialiseCookieEvents();
+            },
+            error: function(error) {
+                console.warn('Unable to create cookie banner. An error has occured : ' + error);
+            }
+        });
+    } else {
+        console.log("no ajaxurl");
+    }
 };
 
 
@@ -67,7 +73,6 @@ var disableCookies = function() {
 
 // On click events, set cookieconsent_status + enable or disable cookies
 var initialiseCookieEvents = function() {
-
     $('.cc-allow').on('click', function() {
         Cookies.set('cookieconsent_status', true);
         console.log('ALLOW COOKIECONSENT');
@@ -75,7 +80,7 @@ var initialiseCookieEvents = function() {
         enableCookies();
 
         // Hide window
-        $('.cc-window').hide();
+        $('.cc-window').css("display", "none");
     });
 
     $('.cc-deny').on('click', function(){
@@ -85,7 +90,7 @@ var initialiseCookieEvents = function() {
         disableCookies();
 
         // Hide window
-        $('.cc-window').hide();
+        $('.cc-window').css("display", "none");
     });
 
     $('.cc-personalize').on('click', function(){
@@ -108,16 +113,21 @@ var initialiseCookieEvents = function() {
             }
 
             // Hide window
-            $('.cc-window').hide();
+            $('.cc-window').css("display", "none");
         });
     });
 };
 
 var cookieconsent_status = Cookies.getJSON('cookieconsent_status');
-if (cookieconsent_status == undefined) {
+if (typeof cookieconsent_status == "undefined" || cookieconsent_status == null ) {
     getCookieBanner();
-
-    // After DOM Inserted, ON CLICK functions
-    initialiseCookieEvents();
+} else {
+    if(cookieconsent_status == false){
+        disableAnalytics();
+        disableCookies();
+    } else {
+        enableAnalytics();
+        enableCookies();
+    }
 }
 
