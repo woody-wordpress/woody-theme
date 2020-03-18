@@ -61,6 +61,7 @@ class WoodyTheme_Cookies
                 $infos['message'] = "This website activates cookies by default for audience measurement and anonymous features.";
                 $infos['dismiss'] = 'Got it!';
                 $infos['allow'] = "Allow cookies";
+                $infos['personalize'] = 'Customize';
                 $infos['deny'] = 'Decline';
                 $infos['link'] = 'Learn more';
                 $infos['policy'] = 'Cookies Policy';
@@ -69,6 +70,7 @@ class WoodyTheme_Cookies
                 $infos['message'] = "Deze website maakt gebruik van anonieme functionele en analytische cookies.";
                 $infos['dismiss'] = 'Oké, ik begrijp het!';
                 $infos['allow'] = "Cookies accepteren";
+                $infos['personalize'] = 'Pas  aan';
                 $infos['deny'] = 'Cookies weigeren';
                 $infos['link'] = 'Meer informatie';
                 $infos['policy'] = 'Cookiebeleid';
@@ -77,6 +79,7 @@ class WoodyTheme_Cookies
                 $infos['message'] = "Diese Website nutzt für ihre Funktion und Analyse anoynm Cookies.";
                 $infos['dismiss'] = 'Okay, ich verstehe!';
                 $infos['allow'] = "Cookies akzeptieren";
+                $infos['personalize'] = 'Anpassen';
                 $infos['deny'] = 'Keine Cookies';
                 $infos['link'] = 'Mehr erfahren';
                 $infos['policy'] = 'Richtlinien für Cookies';
@@ -85,6 +88,7 @@ class WoodyTheme_Cookies
                 $infos['message'] = "Esta página web activa las cookies de forma predeterminada para la medición de la audiencia y las funciones anónimas.";
                 $infos['dismiss'] = '¡Bien, lo entiendo!';
                 $infos['allow'] = "Acepto cookies";
+                $infos['personalize'] = 'Personalizar';
                 $infos['deny'] = 'No acepto cookies';
                 $infos['link'] = 'Más información';
                 $infos['policy'] = 'Política sobre Cookies';
@@ -93,6 +97,7 @@ class WoodyTheme_Cookies
                 $infos['message'] = "Questo sito web attiva di default i cookies per la misurazione dell'audience e le funzioni anonime.";
                 $infos['dismiss'] = 'Ok, ho capito!';
                 $infos['allow'] = "Accetto i cookies";
+                $infos['personalize'] = 'Personalizzare';
                 $infos['deny'] = 'Non voglio i cookies';
                 $infos['link'] = 'Per saperne di più';
                 $infos['policy'] = 'Politica sui cookies';
@@ -101,6 +106,7 @@ class WoodyTheme_Cookies
                 $infos['message'] = "このWebサイトは、デフォルトでオーディエンス測定および匿名機能のためにCookieをアクティブにします。";
                 $infos['dismiss'] = 'わかりました';
                 $infos['allow'] = "クッキーを受け入れる";
+                $infos['personalize'] = 'カスタマイズする';
                 $infos['deny'] = 'クッキーを受け入れない';
                 $infos['link'] = 'もっと知りたい';
                 $infos['policy'] = 'クッキーポリシー';
@@ -110,11 +116,13 @@ class WoodyTheme_Cookies
                 $infos['message'] = "Ce site web active par défaut des cookies de mesure d'audience et pour des fonctionnalités anonymes.";
                 $infos['dismiss'] = 'OK je comprends !';
                 $infos['allow'] = "J'accepte les cookies";
+                $infos['personalize'] = 'Personnaliser';
                 $infos['deny'] = 'Je ne veux pas de cookies';
                 $infos['link'] = 'En savoir plus';
                 $infos['policy'] = 'Règles sur les cookies';
             break;
         }
+        $infos['href'] = "https://www.cnil.fr/fr/site-web-cookies-et-autres-traceurs";
 
         return $infos;
     }

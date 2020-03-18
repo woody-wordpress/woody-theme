@@ -20,12 +20,6 @@ var getCookieBanner = function() {
     });
 };
 
-var cookieconsent_status = Cookies.getJSON('cookieconsent_status');
-if (cookieconsent_status == undefined) {
-    getCookieBanner();
-
-    // After DOM Inserted, ON CLICK functions
-}
 
 // Enable analytics
 var enableAnalytics = function() {
@@ -71,55 +65,59 @@ var disableCookies = function() {
     });
 };
 
-// if (document.cookie.indexOf('cookieconsent_status') == -1) {
-//     enableAnalytics();
-// }
+// On click events, set cookieconsent_status + enable or disable cookies
+var initialiseCookieEvents = function() {
 
-// window.cookieconsent.initialise({
-//     onInitialise: function(status) {
-//         var hasConsent = this.hasConsented();
-//         console.log('INITIALIZE COOKIECONSENT');
-//         if (hasConsent) {
-//             enableAnalytics();
-//             enableCookies();
-//         } else {
-//             disableAnalytics();
-//             disableCookies();
-//         }
-//     },
-//     onStatusChange: function(status, chosenBefore) {
-//         console.log('CHANGE COOKIECONSENT');
+    $('.cc-allow').on('click', function() {
+        Cookies.set('cookieconsent_status', true);
+        console.log('ALLOW COOKIECONSENT');
+        enableAnalytics();
+        enableCookies();
 
-//         var hasConsent = this.hasConsented();
-//         if (hasConsent && !window.sendPageView) {
-//             enableAnalytics();
-//             enableCookies();
-//         } else {
-//             disableAnalytics();
-//             disableCookies();
-//         }
-//     },
-//     onRevokeChoice: function() {
-//         console.log('REVOKE COOKIECONSENT');
-//         disableCookies();
-//     },
-//     theme: 'edgeless',
-//     type: 'opt-out',
-//     content: {
-//         message: message,
-//         dismiss: dismiss,
-//         allow: allow,
-//         deny: deny,
-//         link: link,
-//         href: 'https://www.cnil.fr/fr/site-web-cookies-et-autres-traceurs',
-//         policy: policy
-//     },
-//     palette: {
-//         popup: {
-//             background: '#333'
-//         },
-//         button: {
-//             background: style.getPropertyValue('--primary-color')
-//         }
-//     }
-// });
+        // Hide window
+        $('.cc-window').hide();
+    });
+
+    $('.cc-deny').on('click', function(){
+        Cookies.set('cookieconsent_status', false);
+        console.log('REVOKE COOKIECONSENT');
+        disableAnalytics();
+        disableCookies();
+
+        // Hide window
+        $('.cc-window').hide();
+    });
+
+    $('.cc-personalize').on('click', function(){
+        $('.cc-option').each(function() {
+            var input = $(this).find('.switch-input');
+            var name = input.attr('name');
+
+            console.log(input);
+            if (input.val() == true) {
+                // Enable
+                window.dataLayer.push({
+                    event: name + '_enable_' + window.siteConfig.current_lang
+                });
+
+            } else {
+                // Disable
+                window.dataLayer.push({
+                    event: name + '_disable_' + window.siteConfig.current_lang
+                });
+            }
+
+            // Hide window
+            $('.cc-window').hide();
+        });
+    });
+};
+
+var cookieconsent_status = Cookies.getJSON('cookieconsent_status');
+if (cookieconsent_status == undefined) {
+    getCookieBanner();
+
+    // After DOM Inserted, ON CLICK functions
+    initialiseCookieEvents();
+}
+
