@@ -26,7 +26,6 @@ var getCookieBanner = function() {
     }
 };
 
-
 // Enable analytics
 var enableAnalytics = function() {
     console.log('Enable Analytics');
@@ -83,7 +82,7 @@ var initialiseCookieEvents = function() {
         $('.cc-window').css("display", "none");
     });
 
-    $('.cc-deny').on('click', function(){
+    $('.cc-deny').on('click', function() {
         Cookies.set('cookieconsent_status', false);
         console.log('REVOKE COOKIECONSENT');
         disableAnalytics();
@@ -93,9 +92,9 @@ var initialiseCookieEvents = function() {
         $('.cc-window').css("display", "none");
     });
 
-    $('.cc-personalize').on('click', function(){
+    $('.cc-personalize').on('click', function() {
         Cookies.set('cookieconsent_status', true);
-        Cookies.set('cookies_options_enabled', {});
+        Cookies.set('cookies_options_enabled', {});
 
         $('.cc-option').each(function() {
             var cookie_options = Cookies.getJSON('cookies_options_enabled');
@@ -121,7 +120,7 @@ var initialiseCookieEvents = function() {
                 });
                 cookie_options[name] = false;
             }
-            Cookies.set('cookies_options_enabled', cookie_options);
+            Cookies.set('cookies_options_enabled', cookie_options);
         });
 
         // Hide window
@@ -130,10 +129,10 @@ var initialiseCookieEvents = function() {
 };
 
 var cookieconsent_status = Cookies.getJSON('cookieconsent_status');
-if (typeof cookieconsent_status == "undefined" || cookieconsent_status == null ) {
+if (typeof cookieconsent_status == "undefined" || cookieconsent_status == null) {
     getCookieBanner();
 } else {
-    if(cookieconsent_status == false){
+    if (cookieconsent_status == false) {
         disableAnalytics();
         disableCookies();
     } else {
@@ -141,7 +140,7 @@ if (typeof cookieconsent_status == "undefined" || cookieconsent_status == null )
         enableCookies();
         var cookie_options = Cookies.getJSON('cookies_options_enabled');
 
-        $.each(cookie_options, function(key, value){
+        $.each(cookie_options, function(key, value) {
             if (value == true) {
                 // Enable
                 window.dataLayer.push({
@@ -163,4 +162,3 @@ if (typeof cookieconsent_status == "undefined" || cookieconsent_status == null )
 
     }
 }
-
