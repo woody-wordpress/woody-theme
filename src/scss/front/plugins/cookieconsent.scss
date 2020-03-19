@@ -349,7 +349,7 @@ screen and (max-width:736px) and (orientation:landscape) {
 
         .switch,
         .cc-option-label {
-            margin: 1rem;
+            margin: 2rem;
         }
 
         align-items: center;
@@ -359,11 +359,7 @@ screen and (max-width:736px) and (orientation:landscape) {
 
     .cc-option-desc {
         padding: 0px;
-        margin-left: 2rem;
-    }
-
-    .cc-personalize {
-        margin-left: 50%;
+        margin-left: 3rem;
     }
 
     .cc-message {

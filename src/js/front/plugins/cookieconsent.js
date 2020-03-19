@@ -72,16 +72,6 @@ var disableCookies = function() {
 
 // On click events, set cookieconsent_status + enable or disable cookies
 var initialiseCookieEvents = function() {
-    $('.cc-allow').on('click', function() {
-        Cookies.set('cookieconsent_status', true);
-        console.log('ALLOW COOKIECONSENT');
-        enableAnalytics();
-        enableCookies();
-
-        // Hide window
-        $('.cc-window').css("display", "none");
-    });
-
     $('.cc-deny').on('click', function() {
         Cookies.set('cookieconsent_status', false);
         console.log('REVOKE COOKIECONSENT');
@@ -94,6 +84,7 @@ var initialiseCookieEvents = function() {
 
     $('.cc-personalize').on('click', function() {
         Cookies.set('cookieconsent_status', true);
+        console.log('ALLOW/PERSONALIZE COOKIECONSENT');
         Cookies.set('cookies_options_enabled', {});
 
         $('.cc-option').each(function() {
