@@ -127,7 +127,9 @@ class WoodyTheme_Cookies
                 $return['policy'] = 'Règles sur les cookies';
             break;
         }
-        $return['href'] = "https://www.cnil.fr/fr/site-web-cookies-et-autres-traceurs";
+
+        $return['link'] = !empty(get_option('options_cookie_link')) ? get_option('options_cookie_link') : $return['link'] ;
+        $return['href'] = !empty(get_option('options_cookie_link_label')) ? get_option('options_cookie_link_label') : "https://www.cnil.fr/fr/site-web-cookies-et-autres-traceurs" ;
 
         return $return;
     }

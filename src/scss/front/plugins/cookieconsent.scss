@@ -342,6 +342,54 @@ screen and (max-width:736px) and (orientation:landscape) {
     margin-left: 0
 }
 
+.cc-window.cc-banner.cc-bottom {
+
+    bottom: 15%;
+    left: 50%;
+    width: 80vw;
+    transform: translateX(-50%) translateY(-50%);
+    flex-direction: column;
+    // padding-top: 50px;
+    background-color: $white;
+    box-shadow: 0 12px 44px rgba($black, .1);
+
+    @include breakpoint(medium) {
+        width: 50vw;
+    }
+
+    .cc-message {
+        text-align: center;
+        color: $black;
+        padding: 30px;
+    }
+
+    .cc-link {
+        color: $primary-color;
+        padding: 30px
+    }
+
+    .cc-compliance {
+        width: 100%;
+
+        .cc-btn {
+            width: 50%;
+
+            &.cc-deny {
+                background-color: $light-gray;
+                color: $dark-gray;
+            }
+        }
+    }
+
+    .switch-paddle{
+        border-radius: 25px;
+        &:after{
+            border-radius: 25px;
+        }
+    }
+}
+
+
 .cc-option {
     width: 100%;
 
@@ -349,7 +397,7 @@ screen and (max-width:736px) and (orientation:landscape) {
 
         .switch,
         .cc-option-label {
-            margin: 2rem;
+            margin: 0.5rem 2rem;
         }
 
         align-items: center;
