@@ -22,13 +22,13 @@ class WoodyTheme_Cookies
 
     public function getCookieOptions()
     {
+        $return = [];
         $template = "parts/cookies.twig";
 
         $lang = !empty(pll_current_language()) ? pll_current_language() : "fr";
         $infos = $this->getInfosByLang($lang);
 
         $data = [
-            "options"       => [],
             "message"       => !empty($infos['message'])     ? $infos['message']     : "",
             "dismiss"       => !empty($infos['dismiss'])     ? $infos['dismiss']     : "",
             "allow"         => !empty($infos['allow'])       ? $infos['allow']       : "",
@@ -46,13 +46,17 @@ class WoodyTheme_Cookies
             $data['options'][$i]['description'] = !empty(get_option('options_cookie_activate_'.$i.'_description')) ? get_option('options_cookie_activate_'.$i.'_description') : '';
         }
 
-        $return = \Timber::compile($template, $data);
+        $return['banner'] = \Timber::compile($template, $data);
+
+        $template = "parts/cookie_parameters.twig";
+
+        $return['parameters'] = \Timber::compile($template, $data);
 
         if (!is_null($return)) {
             wp_send_json($return);
             exit;
         } else {
-            header("HTTP/1.0 400 Bad Request");
+            wp_send_json($return);
             die();
         }
     }

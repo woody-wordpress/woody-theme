@@ -341,79 +341,43 @@ screen and (max-width:736px) and (orientation:landscape) {
 .cc-floating.cc-theme-edgeless .cc-btn+.cc-btn {
     margin-left: 0
 }
+.cc-options{
+    display: "none";
+    z-index: 100;
 
-.cc-window.cc-banner.cc-bottom {
-
-    bottom: 15%;
-    left: 50%;
-    width: 80vw;
-    transform: translateX(-50%) translateY(-50%);
-    flex-direction: column;
-    // padding-top: 50px;
-    background-color: $white;
-    box-shadow: 0 12px 44px rgba($black, .1);
-
-    @include breakpoint(medium) {
-        width: 50vw;
-    }
-
-    .cc-message {
-        text-align: center;
-        color: $black;
-        padding: 30px;
-    }
-
-    .cc-link {
-        color: $primary-color;
-        padding: 30px
-    }
-
-    .cc-compliance {
+    .cc-option {
         width: 100%;
 
-        .cc-btn {
-            width: 50%;
+        .flex-container {
 
-            &.cc-deny {
-                background-color: $light-gray;
-                color: $dark-gray;
+            .switch,
+            .cc-option-label {
+                margin: 0rem 2rem;
+            }
+
+            align-items: center;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .cc-option-desc {
+            padding: 0px;
+            margin: 1rem 3rem;
+        }
+
+        .cc-message {
+            text-align: left !important;
+        }
+
+        .switch-paddle{
+            border-radius: 25px;
+            &:after{
+                border-radius: 25px;
             }
         }
     }
-
-    .switch-paddle{
-        border-radius: 25px;
-        &:after{
-            border-radius: 25px;
-        }
-    }
 }
 
-
-.cc-option {
-    width: 100%;
-
-    .flex-container {
-
-        .switch,
-        .cc-option-label {
-            margin: 0.5rem 2rem;
-        }
-
-        align-items: center;
-        width: 100%;
-        justify-content: space-between;
-    }
-
-    .cc-option-desc {
-        padding: 0px;
-        margin-left: 3rem;
-    }
-
-    .cc-message {
-        text-align: left !important;
-    }
-}
 
 // ********************** //
 // Woody theme Overrides //

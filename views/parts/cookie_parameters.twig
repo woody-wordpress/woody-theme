@@ -1,0 +1,21 @@
+{% if options %}
+    <div class="cc-options">
+    {% for option in options  %}
+        <div class="cc-option">
+            <div class="flex-container">
+                <span class="cc-option-label h4"> {{option.label}} </span>
+                <div class="switch tiny">
+                  <input class="switch-input" id="{{option.label|lower}}" type="checkbox" name="{{option.label|lower}}" checked>
+                  <label class="switch-paddle" for="{{option.label|lower}}">
+                    <span id="cookieoption:label"></span>
+                  </label>
+                </div>
+            </div>
+            <p id="cookieoption:desc" class="cc-option-desc"> {{option.description}}</p>
+        </div>
+    {% endfor  %}
+        <div class="cc-compliance cc-highlight">
+            <a aria-label="personalize cookies" role="button" tabindex="0" class="cc-btn cc-personalize">{{"Enregistrer ma séléction"}}</a>
+        </div>
+    </div>
+{% endif %}
