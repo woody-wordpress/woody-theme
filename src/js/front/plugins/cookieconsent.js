@@ -94,27 +94,38 @@ var initialiseCookieEvents = function() {
     });
 
     $('.cc-personalize').on('click', function(){
+        Cookies.set('cookieconsent_status', true);
+        Cookies.set('cookies_options_enabled', {});
+
         $('.cc-option').each(function() {
+            var cookie_options = Cookies.getJSON('cookies_options_enabled');
             var input = $(this).find('.switch-input');
             var name = input.attr('name');
 
-            console.log(input);
-            if (input.val() == true) {
+            if (input.prop("checked") == true) {
                 // Enable
+                window.dataLayer.push({
+                    event: name + '_enable'
+                });
                 window.dataLayer.push({
                     event: name + '_enable_' + window.siteConfig.current_lang
                 });
-
+                cookie_options[name] = true;
             } else {
                 // Disable
                 window.dataLayer.push({
+                    event: name + '_disable'
+                });
+                window.dataLayer.push({
                     event: name + '_disable_' + window.siteConfig.current_lang
                 });
+                cookie_options[name] = false;
             }
-
-            // Hide window
-            $('.cc-window').css("display", "none");
+            Cookies.set('cookies_options_enabled', cookie_options);
         });
+
+        // Hide window
+        $('.cc-window').css("display", "none");
     });
 };
 
@@ -128,6 +139,28 @@ if (typeof cookieconsent_status == "undefined" || cookieconsent_status == null )
     } else {
         enableAnalytics();
         enableCookies();
+        var cookie_options = Cookies.getJSON('cookies_options_enabled');
+
+        $.each(cookie_options, function(key, value){
+            if (value == true) {
+                // Enable
+                window.dataLayer.push({
+                    event: key + '_enable'
+                });
+                window.dataLayer.push({
+                    event: key + '_enable_' + window.siteConfig.current_lang
+                });
+            } else {
+                // Disable
+                window.dataLayer.push({
+                    event: key + '_disable'
+                });
+                window.dataLayer.push({
+                    event: key + '_disable_' + window.siteConfig.current_lang
+                });
+            }
+        });
+
     }
 }
 

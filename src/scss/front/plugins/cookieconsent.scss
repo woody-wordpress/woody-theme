@@ -342,6 +342,34 @@ screen and (max-width:736px) and (orientation:landscape) {
     margin-left: 0
 }
 
+.cc-option {
+    width: 100%;
+
+    .flex-container {
+        .switch,
+        .cc-option-label {
+            margin: 1rem;
+        }
+
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .cc-option-desc {
+        padding: 0px;
+        margin-left: 2rem;
+    }
+
+    .cc-personalize {
+        margin-left: 50%;
+    }
+
+    .cc-message {
+        text-align: left !important;
+    }
+}
+
 // ********************** //
 // Woody theme Overrides //
 // ******************** //
