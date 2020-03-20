@@ -140,12 +140,18 @@ class WoodyTheme_WoodyGetters
             if (!empty($playlist['items'])) {
                 foreach ($playlist['items'] as $key => $item) {
                     $wpSheetNode = apply_filters('woody_hawwwai_get_post_by_sheet_id', $item['sheetId'], $lang, ['publish']);
-                    //TODO: $wpSheetNode->getPost() retourne parfois un tableau. Dans ce cas, on récupère le 1ier objet à l'interieur - voir plugin
                     if (!empty($wpSheetNode)) {
                         if (is_array($wpSheetNode)) {
                             $wpSheetNode = current($wpSheetNode);
                         }
-                        $items['items'][] = $this->getTouristicSheetPreview($wrapper, $wpSheetNode->getPost());
+
+                        if ($wrapper['deal_mode'] && !empty($item["deals"])) {
+                            foreach ($item["deals"]['list'] as $index => $deal) {
+                                $items['items'][] = $this->getTouristicSheetPreview($wrapper, $wpSheetNode->getPost(), $index);
+                            }
+                        }else{
+                            $items['items'][] = $this->getTouristicSheetPreview($wrapper, $wpSheetNode->getPost());
+                        }
                     }
                 }
             }
@@ -375,7 +381,7 @@ class WoodyTheme_WoodyGetters
      *
      */
 
-    public function getTouristicSheetPreview($wrapper = null, $item)
+    public function getTouristicSheetPreview($wrapper = null, $item, $deal_index = 0)
     {
         if (!is_object($item) || empty($item)) {
             return;
@@ -420,7 +426,7 @@ class WoodyTheme_WoodyGetters
         }
         if (!empty($wrapper['deal_mode'])) {
             if (!empty($sheet['deals'])) {
-                $data['title'] = $sheet['deals']['list'][0]['nom'][$code_lang];
+                $data['title'] = $sheet['deals']['list'][$deal_index]['nom'][$code_lang];
             }
         }
         if (is_array($wrapper['display_elements'])) {
@@ -435,8 +441,8 @@ class WoodyTheme_WoodyGetters
             if (in_array('description', $wrapper['display_elements'])) {
                 $data['description'] = (!empty($sheet['desc'])) ? $this->tools->replacePattern($sheet['desc']) : '';
                 if (!empty($wrapper['deal_mode'])) {
-                    if (!empty($sheet['deals']['list'][0]['description'][$lang])) {
-                        $data['description'] = $sheet['deals']['list'][0]['description'][$lang];
+                    if (!empty($sheet['deals']['list'][$deal_index]['description'][$lang])) {
+                        $data['description'] = $sheet['deals']['list'][$deal_index]['description'][$lang];
                     }
                 }
             }

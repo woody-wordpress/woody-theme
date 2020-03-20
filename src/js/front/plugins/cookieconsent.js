@@ -28,6 +28,7 @@ var getCookieBanner = function() {
     }
 };
 
+
 // Enable analytics
 var enableAnalytics = function() {
     console.log('Enable Analytics');
