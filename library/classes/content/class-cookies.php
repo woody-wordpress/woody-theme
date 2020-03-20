@@ -120,6 +120,24 @@ class WoodyTheme_Cookies
                 $return['link'] = 'もっと知りたい';
                 $return['policy'] = 'クッキーポリシー';
             break;
+            case 'ru':
+                $return['message'] = "Этот веб-сайт по умолчанию активирует куки-файлы для измерения аудитории и анонимных функций.";
+                $return['dismiss'] = 'Я не принимаю активацию куки';
+                $return['allow'] = "Я принимаю активацию куки";
+                $return['personalize'] = 'настроить';
+                $return['deny'] = 'Я не принимаю активацию куки';
+                $return['link'] = 'Узнайте больше';
+                $return['policy'] = 'COOKIE-файлы';
+            break;
+            case 'zh':
+                $return['message'] = "默认情况下，该网站会激活Cookie，以进行受众群体评估和匿名功能";
+                $return['dismiss'] = '得到它了';
+                $return['allow'] = "允许Cookie";
+                $return['personalize'] = '配置';
+                $return['deny'] = '下降';
+                $return['link'] = '学到更多';
+                $return['policy'] = 'Cookies政策';
+            break;
             case 'fr':
             default:
                 $return['message'] = "Ce site web active par défaut des cookies de mesure d'audience et pour des fonctionnalités anonymes.";
