@@ -1,5 +1,5 @@
 {% if options %}
-    <div class="cc-options">
+    <div class="cc-window cc-options">
     {% for option in options  %}
         <div class="cc-option">
             <div class="flex-container">
@@ -15,7 +15,8 @@
         </div>
     {% endfor  %}
         <div class="cc-compliance cc-highlight">
-            <a aria-label="personalize cookies" role="button" tabindex="0" class="cc-btn cc-personalize">{{"Enregistrer ma séléction"}}</a>
+            <a aria-label="abort cookies" role="button" tabindex="0" class="cc-btn cc-abort">{{"Annuler"}}</a>
+            <a aria-label="register cookies" role="button" tabindex="0" class="cc-btn cc-register">{{"Enregistrer ma séléction"}}</a>
         </div>
     </div>
 {% endif %}

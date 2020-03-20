@@ -13,8 +13,8 @@ var getCookieBanner = function() {
             },
             success: function(response) {
                 // append response
-                console.log(response);
                 $('body').prepend(response.banner);
+                $('body').prepend(response.parameters);
                 // After DOM Inserted, ON CLICK functions
                 initialiseCookieEvents();
             },
@@ -96,44 +96,50 @@ var initialiseCookieEvents = function() {
 
     $('.cc-personalize').on('click', function() {
         // TODO: open new window at center
+        $('.cc-options').css('display', 'block');
+        $('.cc-banner').css('display', 'none');
     });
 
+    $('.cc-register').on('click', function(){
+        Cookies.set('cookieconsent_status', true);
+        console.log('PERSONALIZE COOKIECONSENT');
+        Cookies.set('cookies_options_enabled', {});
 
-      // Cookies.set('cookieconsent_status', true);
-        // console.log('PERSONALIZE COOKIECONSENT');
-        // Cookies.set('cookies_options_enabled', {});
+        $('.cc-option').each(function() {
+            var cookie_options = Cookies.getJSON('cookies_options_enabled');
+            var input = $(this).find('.switch-input');
+            var name = input.attr('name');
 
-        // $('.cc-option').each(function() {
-        //     var cookie_options = Cookies.getJSON('cookies_options_enabled');
-        //     var input = $(this).find('.switch-input');
-        //     var name = input.attr('name');
+            if (input.prop("checked") == true) {
+                // Enable
+                window.dataLayer.push({
+                    event: name + '_enable'
+                });
+                window.dataLayer.push({
+                    event: name + '_enable_' + window.siteConfig.current_lang
+                });
+                cookie_options[name] = true;
+            } else {
+                // Disable
+                window.dataLayer.push({
+                    event: name + '_disable'
+                });
+                window.dataLayer.push({
+                    event: name + '_disable_' + window.siteConfig.current_lang
+                });
+                cookie_options[name] = false;
+            }
+            Cookies.set('cookies_options_enabled', cookie_options);
+        });
 
-        //     if (input.prop("checked") == true) {
-        //         // Enable
-        //         window.dataLayer.push({
-        //             event: name + '_enable'
-        //         });
-        //         window.dataLayer.push({
-        //             event: name + '_enable_' + window.siteConfig.current_lang
-        //         });
-        //         cookie_options[name] = true;
-        //     } else {
-        //         // Disable
-        //         window.dataLayer.push({
-        //             event: name + '_disable'
-        //         });
-        //         window.dataLayer.push({
-        //             event: name + '_disable_' + window.siteConfig.current_lang
-        //         });
-        //         cookie_options[name] = false;
-        //     }
-        //     Cookies.set('cookies_options_enabled', cookie_options);
-        // });
+        // Hide window
+        $('.cc-window').css("display", "none");
+    });
 
-        // // Hide window
-        // $('.cc-window').css("display", "none");
-
-
+    $('.cc-abort').on('click', function(){
+        $('.cc-options').css('display', 'none');
+        $('.cc-banner').css('display', 'flex');
+    });
 };
 
 var cookieconsent_status = Cookies.getJSON('cookieconsent_status');
