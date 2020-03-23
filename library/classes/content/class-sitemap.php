@@ -110,11 +110,14 @@ class WoodyTheme_SiteMap
                     $query = $this->getPosts($lang, $i);
                     if (!empty($query->posts)) {
                         foreach ($query->posts as $post) {
-                            $sitemap[] = [
-                                'loc' => get_permalink($post),
-                                'lastmod' => get_the_modified_date('c', $post),
-                                'images' => $this->getImagesFromPost($post)
-                            ];
+                            $index = get_post_meta($post->ID, 'woodyseo_index', true);
+                            if ($index == true) {
+                                $sitemap[] = [
+                                    'loc' => get_permalink($post),
+                                    'lastmod' => get_the_modified_date('c', $post),
+                                    'images' => $this->getImagesFromPost($post),
+                                ];
+                            }
                         }
                     }
                 }
