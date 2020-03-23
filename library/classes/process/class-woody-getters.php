@@ -337,7 +337,11 @@ class WoodyTheme_WoodyGetters
 
             ] : '',
             'description' => (!empty($item['description'])) ? $this->tools->replacePattern($item['description']) : '',
-            'ellipsis' => 999
+            'ellipsis' => 999,
+            'location' => [
+                'lat' => !empty($item['latitude']) ? $item['latitude'] : '',
+                'long' => !empty($item['longitude']) ? $item['longitude'] : ''
+            ]
         ];
 
         if ($item['action_type'] == 'file' && !empty($item['file']['url'])) {

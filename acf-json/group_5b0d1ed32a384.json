@@ -388,6 +388,44 @@
                                     "__label": "Vidéo OGG \/ OGV"
                                 }
                             ]
+                        },
+                        {
+                            "key": "field_5e74e1d31bea2",
+                            "label": "Latitude",
+                            "name": "latitude",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_5e74e2101bea3",
+                            "label": "Longitude",
+                            "name": "longitude",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
                         }
                     ]
                 },
