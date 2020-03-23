@@ -7,6 +7,8 @@
  * @since WoodyTheme 1.15.0
  */
 
+use WoodyLibrary\Library\WoodyLibrary\WoodyLibrary;
+
 if (!class_exists('Timber')) {
     class Timber
     {
@@ -31,8 +33,9 @@ if (!class_exists('Timber')) {
             }
 
             if (class_exists('\WP') && !defined('TIMBER_LOADED')) {
+                $woodyLibrary = new WoodyLibrary();
                 // Init Twig Instance
-                $twig_dirs = apply_filters('timber_locations', array(WOODY_THEME_DIR . '/views', WOODY_SUBTHEME_DIR . '/views', WoodyLibrary::getTemplatesDirname()));
+                $twig_dirs = apply_filters('timber_locations', array(WOODY_THEME_DIR . '/views', WOODY_SUBTHEME_DIR . '/views', $woodyLibrary->getTemplatesDirname()));
                 $twig_loader = new \Twig\Loader\FilesystemLoader($twig_dirs);
                 $twig_options = ['autoescape' => false];
                 if (!file_exists(WP_CACHE_DIR . '/deploy.lock') && WP_ENV != 'dev') {

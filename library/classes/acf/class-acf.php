@@ -9,6 +9,7 @@
  */
 
 use Woody\Utils\Output;
+use WoodyLibrary\Library\WoodyLibrary\WoodyLibrary;
 
 class WoodyTheme_ACF
 {
@@ -211,28 +212,30 @@ class WoodyTheme_ACF
      */
     public function woodyTplAcfLoadField($field)
     {
+        $woodyLibrary = new WoodyLibrary();
+
         if (strpos($field['name'], 'woody_tpl') !== false) {
             $field['choices'] = [];
 
             $woodyComponents = get_transient('woody_components');
             if (empty($woodyComponents)) {
-                $woodyComponents = WoodyLibrary::getComponents();
+                $woodyComponents = $woodyLibrary->getComponents();
                 set_transient('woody_components', $woodyComponents);
             }
 
             switch ($field['key']) {
                 case 'field_5afd2c9616ecd': // Cas des sections
                 case 'field_5d16118093cc1': // Cas des mises en avant de composants de séjours
-                    $components = WoodyLibrary::getTemplatesByAcfGroup($woodyComponents, $field['key']);
-                    $components = WoodyLibrary::getTemplatesByAcfGroup($woodyComponents, $field['key']);
+                    $components = $woodyLibrary->getTemplatesByAcfGroup($woodyComponents, $field['key']);
+                    $components = $woodyLibrary->getTemplatesByAcfGroup($woodyComponents, $field['key']);
                     break;
                 default:
                     if (is_numeric($field['parent'])) {
                         // From 08/31/18, return of $field['parent'] is the acf post id instead of the key
                         $parent_field_as_post = get_post($field['parent']);
-                        $components = WoodyLibrary::getTemplatesByAcfGroup($woodyComponents, $parent_field_as_post->post_name);
+                        $components = $woodyLibrary->getTemplatesByAcfGroup($woodyComponents, $parent_field_as_post->post_name);
                     } else {
-                        $components = WoodyLibrary::getTemplatesByAcfGroup($woodyComponents, $field['parent']);
+                        $components = $woodyLibrary->getTemplatesByAcfGroup($woodyComponents, $field['parent']);
                     }
             }
 
