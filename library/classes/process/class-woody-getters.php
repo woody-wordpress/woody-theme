@@ -149,7 +149,7 @@ class WoodyTheme_WoodyGetters
                             foreach ($item["deals"]['list'] as $index => $deal) {
                                 $items['items'][] = $this->getTouristicSheetPreview($wrapper, $wpSheetNode->getPost(), $index);
                             }
-                        }else{
+                        } else {
                             $items['items'][] = $this->getTouristicSheetPreview($wrapper, $wpSheetNode->getPost());
                         }
                     }
@@ -339,8 +339,8 @@ class WoodyTheme_WoodyGetters
             'description' => (!empty($item['description'])) ? $this->tools->replacePattern($item['description']) : '',
             'ellipsis' => 999,
             'location' => [
-                'lat' => !empty($item['latitude']) ? $item['latitude'] : '',
-                'long' => !empty($item['longitude']) ? $item['longitude'] : ''
+                'lat' => !empty($item['latitude']) ? str_replace(',', '.', $item['latitude']) : '',
+                'lng' => !empty($item['longitude']) ? str_replace(',', '.', $item['longitude']) : ''
             ]
         ];
 
