@@ -1,7 +1,7 @@
 <?php
 
 use Symfony\Component\Finder\Finder;
-use WoodyLibrary\Library\WoodyLibrary;
+use WoodyLibrary\Library\WoodyLibrary\WoodyLibrary;
 
 /**
  *
@@ -176,15 +176,15 @@ function woodyIconsFolder($folder)
  */
 function getWoodyTwigPaths()
 {
+    $woodyLibrary = new WoodyLibrary();
     $woodyTwigsPaths = [];
     $woodyComponents = get_transient('woody_components');
     if (empty($woodyComponents)) {
-        $woodyLibrary = new WoodyLibrary();
-        $woodyComponents = $woodyLibrary::getComponents();
+        $woodyComponents = $woodyLibrary->getComponents();
         set_transient('woody_components', $woodyComponents);
     }
 
-    $woodyTwigsPaths = $woodyLibrary::getTwigsPaths($woodyComponents);
+    $woodyTwigsPaths = $woodyLibrary->getTwigsPaths($woodyComponents);
 
     return $woodyTwigsPaths;
 }
