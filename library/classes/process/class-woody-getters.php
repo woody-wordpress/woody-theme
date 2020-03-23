@@ -496,10 +496,18 @@ class WoodyTheme_WoodyGetters
             }
         }
 
-        // TODO:Parcourir tout le tableau de dates et afficher la 1ère date non passée
+        // Parcourir tout le tableau de dates et afficher la 1ère date non passée
         if (!empty($sheet['dates'])) {
-            $data['date'] = $sheet['dates'][0];
+            $today = time();
+            foreach($sheet['dates'] as $date) {
+                $enddate= strtotime($date['end']['endDate']);
+                if ($today < $enddate) {
+                    $data['date'] = $date;
+                    break 1 ;
+                }
+            }
         }
+
         // $data['date'] = (!empty($sheet['dates'])) ? $sheet['dates'][0] : '';
 
         if (is_array($wrapper['display_elements'])) {
