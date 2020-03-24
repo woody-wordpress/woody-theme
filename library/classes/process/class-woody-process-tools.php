@@ -85,6 +85,7 @@ class WoodyTheme_WoodyProcessTools
         $data['icon_type'] = (!empty($wrapper['icon_type'])) ? $wrapper['icon_type'] : '';
         $data['icon_img'] = (!empty($wrapper['icon_img'])) ? $wrapper['icon_img'] : '';
         $data['woody_icon'] = (!empty($wrapper['woody_icon'])) ? $wrapper['woody_icon'] : '';
+        $data['description'] = (!empty($wrapper['description'])) ? $wrapper['description'] : '';
 
         return $data;
     }
@@ -156,7 +157,7 @@ class WoodyTheme_WoodyProcessTools
         $display['section_divider'] = (!empty($wrapper['section_divider'])) ? $wrapper['section_divider'] : '';
 
         // On transforme le tableau en une chaine de caractères
-        $display['classes'] = implode(' ', $classes_array);
+        $display['classes'] = trim(implode(' ', $classes_array));
 
         return $display;
     }

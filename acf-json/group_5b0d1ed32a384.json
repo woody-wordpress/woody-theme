@@ -615,7 +615,7 @@
         {
             "key": "field_5b87f406bc5d0",
             "label": "Titre du bloc",
-            "name": "teaser_block_title",
+            "name": "focus_block_title",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -631,12 +631,68 @@
                 "field_5b041d79adb73",
                 "field_5b59bbd0e094c",
                 "field_5b72f56b6f4aa",
-                "field_5b59bc12e094d"
+                "field_5b59bc12e094d",
+                "field_5b041dbfadb74"
             ],
             "display": "seamless",
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0
+        },
+        {
+            "key": "field_5e67bdc4e5d54",
+            "label": "Options avancées",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 1,
+            "endpoint": 0
+        },
+        {
+            "key": "field_5e67bda2e5d53",
+            "label": "Personnalisation du fond",
+            "name": "focus_block_title_bg_params",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5b043c93d609a"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
+        },
+        {
+            "key": "field_5e67c1b2f200a",
+            "label": "FIN",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 1
         },
         {
             "key": "field_5b0d219d7c82e",
@@ -820,5 +876,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1567782282
+    "modified": 1583858136
 }
