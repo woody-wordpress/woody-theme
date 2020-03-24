@@ -77,6 +77,9 @@ class WoodyTheme_WoodyProcess
                 if (!empty($layout['gallery_items'])) {
                     foreach ($layout['gallery_items'] as $key => $media_item) {
                         $layout['gallery_items'][$key]['attachment_more_data'] = $this->tools->getAttachmentMoreData($media_item['ID']);
+                        if (isset($context['print_rdbk']) && !empty($context['print_rdbk'])) {
+                            $layout['gallery_items'][$key]['lazy'] = 'disabled';
+                        }
                     }
                 }
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);

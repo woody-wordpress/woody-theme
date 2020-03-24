@@ -112,7 +112,7 @@ class WoodyTheme_Polylang
 
         // Circuits
         __('J', 'woody-theme');
-        
+
         // Availabilities calendar
         __('Attention, vous n\'avez pas saisi d\'identifiant de playlist en paramètre du shortcode.
             Pour rappel, le shortcode s\'utilise par exemple de cette manière', 'woody-theme');
@@ -287,5 +287,6 @@ class WoodyTheme_Polylang
 
         // Roadbook
         __('Mon carnet de voyage', 'woody-theme');
+        __('Indispensables', 'woody-theme');
     }
 }
