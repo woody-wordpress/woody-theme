@@ -137,14 +137,18 @@ class WoodyTheme_SiteMap
 
     private function getPosts($lang = PLL_DEFAULT_LANG, $paged = 1, $posts_per_page = 30)
     {
-        $query = new \WP_Query([
+        $args = [
             'post_type' => ['page', 'touristic_sheet'],
             'orderby' => 'menu_order',
             'order'   => 'DESC',
             'lang' => $lang,
             'posts_per_page' => $posts_per_page,
             'paged' => $paged
-        ]);
+        ];
+
+        $args = apply_filters('woody_custom_sitemap_args', $args);
+
+        $query = new \WP_Query($args);
 
         if ($query->have_posts()) {
             return $query;
@@ -156,7 +160,6 @@ class WoodyTheme_SiteMap
         $images = [];
 
         if ($post->post_type == 'page') {
-
             $fields = [
                 'field_5b0e5ddfd4b1b', // Visuel et Accroche
                 'field_5b44ba5c74495', // En-tête
@@ -309,7 +312,6 @@ class WoodyTheme_SiteMap
 
         // S'il y a des posts, on les ajoutes à $return
         if (!empty($query_result->posts)) {
-
             foreach ($query_result->posts as $post) {
                 $return[$post->ID] = [
                     'url' => get_permalink($post->ID),
