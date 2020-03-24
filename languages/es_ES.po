@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.6.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2020-03-10T11:52:59+01:00\n"
-"PO-Revision-Date: 2020-03-10 11:58+0100\n"
+"POT-Creation-Date: 2020-03-24T09:30:02+01:00\n"
+"PO-Revision-Date: 2020-03-24 09:32+0100\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -176,14 +176,14 @@ msgstr "Solicitar un presupuesto"
 #: library/classes/content/class-polylang.php:105
 #: library/classes/content/class-polylang.php:151
 #: library/classes/timber/class-timber-filters.php:261
-#: library/functions/01_assets.php:90
+#: library/functions/01_assets.php:91
 msgid "jour"
 msgstr "día"
 
 #: library/classes/content/class-polylang.php:106
 #: library/classes/content/class-polylang.php:152
 #: library/classes/timber/class-timber-filters.php:264
-#: library/functions/01_assets.php:91
+#: library/functions/01_assets.php:92
 msgid "jours"
 msgstr "días"
 
@@ -345,13 +345,13 @@ msgstr "niño(s)"
 
 #: library/classes/content/class-polylang.php:153
 #: library/classes/timber/class-timber-filters.php:267
-#: library/functions/01_assets.php:88
+#: library/functions/01_assets.php:89
 msgid "semaine"
 msgstr "semana"
 
 #: library/classes/content/class-polylang.php:154
 #: library/classes/timber/class-timber-filters.php:270
-#: library/functions/01_assets.php:89
+#: library/functions/01_assets.php:90
 msgid "semaines"
 msgstr "semanas"
 
@@ -400,9 +400,9 @@ msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "¿La página que buscas puede que esté aquí?"
 
 #: library/classes/content/class-polylang.php:165
-#: library/classes/process/class-woody-getters.php:280
-#: library/classes/process/class-woody-getters.php:471
-#: library/classes/process/class-woody-getters.php:545
+#: library/classes/process/class-woody-getters.php:286
+#: library/classes/process/class-woody-getters.php:477
+#: library/classes/process/class-woody-getters.php:551
 msgid "Lire la suite"
 msgstr "Seguir leyendo"
 
@@ -423,7 +423,7 @@ msgid "Réservable"
 msgstr "Reservable"
 
 #: library/classes/content/class-polylang.php:170
-#: library/classes/process/class-woody-getters.php:340
+#: library/classes/process/class-woody-getters.php:346
 msgid "Télécharger"
 msgstr "Descargar"
 
@@ -685,7 +685,7 @@ msgid "Comprenant"
 msgstr "Incluyendo"
 
 #: library/classes/content/class-polylang.php:249
-#: library/templates/template-page.php:187
+#: library/templates/template-page.php:194
 msgid "Gratuit"
 msgstr "Gratuito"
 
@@ -812,7 +812,11 @@ msgstr ""
 
 #: library/classes/content/class-polylang.php:289
 msgid "Mon carnet de voyage"
-msgstr ""
+msgstr "Mi cuaderno de viaje"
+
+#: library/classes/content/class-polylang.php:290
+msgid "Indispensables"
+msgstr "Indispensable"
 
 #: library/templates/template-page.php:96
 msgid "Oups !"
