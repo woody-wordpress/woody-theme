@@ -90,7 +90,13 @@ class WoodyTheme_Menus
                             continue;
                         }
                         if (!is_array($field)) {
-                            $return[$group_key]['part_title'] = $field;
+                            if (is_object($field)) {
+                                $return[$group_key]['part_title'] = (!empty(get_field('in_menu_title', $field->ID))) ? get_field('in_menu_title', $field->ID) : $field->post_title;
+                                $return[$group_key]['part_title_link'] = apply_filters('woody_get_permalink', $field->ID);
+                            } else {
+                                $return[$group_key]['part_title'] = $field;
+                            }
+
                         } else {
                             foreach ($field as $field_data) {
                                 $parts[$group_key][] = $field_data['submenu_links_objects'];
@@ -243,8 +249,9 @@ class WoodyTheme_Menus
 
                 if (!empty($submenu['display']['parts'][$i]['part_tpl'])) {
                     $part_display = $submenu['display']['parts'][$i]['part_tpl'];
+                    $the_part['menu_part_title'] = !empty($part['part_title']) ? $part['part_title'] : '';
+                    $the_part['menu_part_title_link'] = !empty($part['part_title_link']) ? $part['part_title_link'] : '';
                     $the_part['items'] = (!empty($part['links'])) ? $part['links'] : [];
-                    $the_part['menu_part_title'] = (!empty($part['part_title'])) ? $part['part_title'] : '';
                     $menu_link['submenu'][$key] = \Timber::compile($twig_paths[$part_display], $the_part);
                 } elseif (!empty($submenu['display']['parts'][$i]['custom_function'])) {
                     $menu_link['submenu'][$key] = $submenu['display']['parts'][$i]['custom_function'];
