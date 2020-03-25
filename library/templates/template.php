@@ -188,6 +188,11 @@ abstract class WoodyTheme_TemplateAbstract
             $this->context['favorites_block_mobile'] = apply_filters('favorites_block_mobile', $tools_blocks['favorites_block']);
         }
 
+        if (in_array('insitu', $this->context['enabled_woody_options'])) {
+            $tools_blocks['preparespot_switcher'] = $this->addPrepareSpotSwitcher();
+            $this->context['preparespot_switcher'] = apply_filters('preparespot_switcher', $tools_blocks['preparespot_switcher']);
+        }
+
         // Add more tools
         $this->context['subtheme_more_tools'] = apply_filters('more_tools', []);
 
@@ -745,5 +750,15 @@ abstract class WoodyTheme_TemplateAbstract
 
             return \Timber::compile($template, $data);
         }
+    }
+
+    private function addPrepareSpotSwitcher()
+    {
+        $data = [];
+        if (!empty($this->context['post'])) {
+            $data['switch'] = get_field('field_5d47d14bdf764', $this->context['post']->ID) ;
+        }
+        $template = $this->context['woody_components']['woody_widgets-prepare_onspot_switcher-tpl_01'];
+        return Timber::compile($template, $data);
     }
 }
