@@ -230,12 +230,14 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
              *********************************************/
             $page_teaser = [];
             $page_teaser = getAcfGroupFields('group_5b2bbb46507bf', $this->context['post']);
+            $page_hero_tpl = substr(getAcfGroupFields('group_5b052bbee40a4', $this->context['post'])['heading_woody_tpl'], -6);
             if ($page_type[0]->slug != 'front_page' and !empty($page_teaser)) {
                 $page_teaser['page_teaser_title'] = (!empty($page_teaser['page_teaser_display_title'])) ? str_replace('-', '&#8209', $this->context['post_title']) : '';
                 $page_teaser['the_classes'] = [];
                 $page_teaser['the_classes'][] = (!empty($page_teaser['background_img_opacity'])) ? $page_teaser['background_img_opacity'] : '';
                 $page_teaser['the_classes'][] = (!empty($page_teaser['background_color'])) ? $page_teaser['background_color'] : '';
                 $page_teaser['the_classes'][] = (!empty($page_teaser['border_color'])) ? $page_teaser['border_color'] : '';
+                $page_teaser['the_classes'][] = (empty($page_teaser['background_color']) and $page_hero_tpl == 'tpl_05') ? 'bg-transparent' : '';
                 $page_teaser['the_classes'][] = (!empty($page_teaser['teaser_margin_bottom'])) ? $page_teaser['teaser_margin_bottom'] : '';
                 $page_teaser['the_classes'][] = (!empty($page_teaser['background_img'])) ? 'isRel' : '';
                 $page_teaser['classes'] = (!empty($page_teaser['the_classes'])) ? implode(' ', $page_teaser['the_classes']) : '';

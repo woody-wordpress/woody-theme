@@ -149,7 +149,7 @@ class WoodyTheme_WoodyGetters
                             foreach ($item["deals"]['list'] as $index => $deal) {
                                 $items['items'][] = $this->getTouristicSheetPreview($wrapper, $wpSheetNode->getPost(), $index);
                             }
-                        }else{
+                        } else {
                             $items['items'][] = $this->getTouristicSheetPreview($wrapper, $wpSheetNode->getPost());
                         }
                     }
@@ -337,7 +337,11 @@ class WoodyTheme_WoodyGetters
 
             ] : '',
             'description' => (!empty($item['description'])) ? $this->tools->replacePattern($item['description']) : '',
-            'ellipsis' => 999
+            'ellipsis' => 999,
+            'location' => [
+                'lat' => !empty($item['latitude']) ? str_replace(',', '.', $item['latitude']) : '',
+                'lng' => !empty($item['longitude']) ? str_replace(',', '.', $item['longitude']) : ''
+            ]
         ];
 
         if ($item['action_type'] == 'file' && !empty($item['file']['url'])) {
@@ -496,10 +500,18 @@ class WoodyTheme_WoodyGetters
             }
         }
 
-        // TODO:Parcourir tout le tableau de dates et afficher la 1ère date non passée
+        // Parcourir tout le tableau de dates et afficher la 1ère date non passée
         if (!empty($sheet['dates'])) {
-            $data['date'] = $sheet['dates'][0];
+            $today = time();
+            foreach($sheet['dates'] as $date) {
+                $enddate= strtotime($date['end']['endDate']);
+                if ($today < $enddate) {
+                    $data['date'] = $date;
+                    break 1 ;
+                }
+            }
         }
+
         // $data['date'] = (!empty($sheet['dates'])) ? $sheet['dates'][0] : '';
 
         if (is_array($wrapper['display_elements'])) {
