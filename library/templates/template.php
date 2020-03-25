@@ -756,7 +756,7 @@ abstract class WoodyTheme_TemplateAbstract
     {
         $data = [];
         if (!empty($this->context['post'])) {
-            $data['switch'] = get_field('field_5d47d14bdf764', $this->context['post']->ID) ;
+            $data['switch'] = get_field('field_5e7a17ad5c29a', $this->context['post']->ID) ;
         }
         $template = $this->context['woody_components']['woody_widgets-prepare_onspot_switcher-tpl_01'];
         return Timber::compile($template, $data);
