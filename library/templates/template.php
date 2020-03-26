@@ -26,6 +26,9 @@ abstract class WoodyTheme_TemplateAbstract
             exit();
         }
 
+        // Added Feature-Policy
+        header('Feature-Policy: autoplay *');
+
         add_filter('timber_compile_data', [$this, 'timberCompileData']);
 
         $this->registerHooks();
