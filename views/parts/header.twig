@@ -28,6 +28,9 @@
             {% if lang_switcher_button|default %}
                 <li>{{ lang_switcher_button }}</li>
             {% endif %}
+            {% if preparespot_switcher|default %}
+                <li> {{ preparespot_switcher }} </li>
+            {% endif %}
         </ul>
     {% endif %}
 
