@@ -219,7 +219,8 @@ class WoodyTheme_Images
             'ratio_10_16_medium' => __('Portrait B (1200x1920)'),
             'ratio_a4_medium' => __('Format A4'),
             'ratio_square' => __('Carré'),
-            'ratio_free' => __('Proportions libres')
+            'ratio_free' => __('Proportions libres'),
+            'medium' => __('Medium')
         );
     }
 
@@ -432,7 +433,6 @@ class WoodyTheme_Images
     public function generateAttachmentMetadata($metadata, $attachment_id)
     {
         if (wp_attachment_is_image($attachment_id)) {
-
             if (empty($metadata['sizes'])) {
 
                 // Get current post
