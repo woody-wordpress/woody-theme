@@ -26,6 +26,10 @@ abstract class WoodyTheme_TemplateAbstract
             exit();
         }
 
+        // Added Feature-Policy
+        header('Feature-Policy: autoplay *');
+        header('Feature-Policy: geolocation self');
+
         add_filter('timber_compile_data', [$this, 'timberCompileData']);
 
         $this->registerHooks();
