@@ -220,7 +220,7 @@ class WoodyTheme_Images
             'ratio_a4_medium' => __('Format A4'),
             'ratio_square' => __('Carré'),
             'ratio_free' => __('Proportions libres'),
-            'medium' => __('Medium')
+            'medium' => __('Moyenne')
         );
     }
 
