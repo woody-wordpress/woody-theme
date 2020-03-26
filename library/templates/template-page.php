@@ -370,6 +370,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             }
         }
 
+        $this->getParamsToNoIndex();
+
         /*********************************************
          * Check type de publication
          *********************************************/
@@ -446,15 +448,29 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         }
     }
 
+    protected function getParamsToNoIndex()
+    {
+        $get = $_GET;
+        $noindex = false;
+        if (!empty($get)) {
+            foreach ($get as $key => $value) {
+                if (strpos($key, 'section_') !== false || $key == 'listpage' || $key == 'autoselect_id') {
+                    $noindex = true;
+                }
+            }
+        }
+
+        if ($noindex == true) {
+            $robots_content = $this->context['metas']['robots']['#attributes']['content'];
+            if (strpos($robots_content, 'noindex') == false) {
+                $this->context['metas']['robots']['#attributes']['content'] = $robots_content . ' noindex';
+            }
+        }
+    }
+
     protected function playlistContext()
     {
         $this->context['body_class'] .= ' apirender apirender-playlist apirender-wordpress';
-
-        // No Index if autoselect_id
-        $autoselect_id = filter_input(INPUT_GET, 'autoselect_id', FILTER_VALIDATE_INT);
-        if (!empty($autoselect_id)) {
-            $this->context['metas'][] = '<meta name="robots" content="noindex, follow" />';
-        }
 
         /** ************************
          * Vérification pré-cochage
