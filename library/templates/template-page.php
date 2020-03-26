@@ -463,7 +463,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         if ($noindex == true) {
             $robots_content = $this->context['metas']['robots']['#attributes']['content'];
             if (strpos($robots_content, 'noindex') == false) {
-                $this->context['metas']['robots']['#attributes']['content'] = $robots_content . ' noindex';
+                $this->context['metas']['robots']['#attributes']['content'] = $robots_content . ', noindex';
             }
         }
     }
