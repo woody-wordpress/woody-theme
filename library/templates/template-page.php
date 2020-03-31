@@ -348,7 +348,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         ];
 
         $tpl = apply_filters('breadcrumb_tpl', null);
-        $template = $tpl['template'] ? $this->context['woody_components'][$tpl['template']] : $this->context['woody_components']['woody_widgets-breadcrumb-tpl_01'];
+        $template = (!empty($tpl['template']) && !empty($this->context['woody_components'][$tpl['template']])) ? $this->context['woody_components'][$tpl['template']] : $this->context['woody_components']['woody_widgets-breadcrumb-tpl_01'];
 
         $breadcrumb = Timber::compile($template, $data);
 
