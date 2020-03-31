@@ -221,7 +221,6 @@ class WoodyTheme_Enqueue_Assets
             wp_enqueue_script('jsdelivr_match8', 'https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js', ['jquery'], '', true);
             wp_enqueue_script('jsdelivr_highcharts', 'https://cdn.jsdelivr.net/npm/highcharts@6.2.0/highcharts.min.js', ['jquery'], '', true);
 
-
             wp_enqueue_script('hawwwai_ng_vendor', $apirender_base_uri . '/assets/scripts/vendor.js?v=' . $this->wThemeVersion, [], '', true);
             wp_enqueue_script('hawwwai_ng_libs', $apirender_base_uri . '/assets/scripts/misclibs.js?v=' . $this->wThemeVersion, [], '', true);
             wp_enqueue_script('hawwwai_ng_app', $apirender_base_uri . '/assets/app.js?v=' . $this->wThemeVersion, [], '', true);
@@ -268,20 +267,20 @@ class WoodyTheme_Enqueue_Assets
             'jsdelivr_lg-fullscreen',
             'wp-i18n'
         ];
-        wp_enqueue_script('main-javascripts', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('js/main.js'), $dependencies, '', true);
+        wp_enqueue_script('main-javascripts', $this->assetPath('js/main.js'), $dependencies, '', true);
 
         // Enqueue the main Stylesheet.
         if ($this->isTouristicSheet || $this->isTouristicPlaylist || $this->isRoadBookPlaylist) {
             $tourism_css = apply_filters('woody_theme_stylesheets', 'tourism');
             $tourism_css = (!empty($tourism_css)) ? $tourism_css : 'tourism';
-            wp_enqueue_style('main-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/' . $tourism_css . '.css'), [], '', 'screen');
+            wp_enqueue_style('main-stylesheet', $this->assetPath('css/' . $tourism_css . '.css'), [], '', 'screen');
         } else {
             $main_css = apply_filters('woody_theme_stylesheets', 'main');
             $main_css = (!empty($main_css)) ? $main_css : 'main';
-            wp_enqueue_style('main-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/' . $main_css . '.css'), [], '', 'screen');
+            wp_enqueue_style('main-stylesheet', $this->assetPath('css/' . $main_css . '.css'), [], '', 'screen');
         }
 
-        wp_enqueue_style('print-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/print.css'), [], '', 'print');
+        wp_enqueue_style('print-stylesheet', $this->assetPath('css/print.css'), [], '', 'print');
     }
 
     public function enqueueAdminAssets()
@@ -293,7 +292,7 @@ class WoodyTheme_Enqueue_Assets
 
         // Enqueue the main Scripts
         $dependencies = ['jquery'];
-        wp_enqueue_script('admin-javascripts', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('js/admin.js'), $dependencies, $this->wThemeVersion, true);
+        wp_enqueue_script('admin-javascripts', $this->assetPath('js/admin.js'), $dependencies, $this->wThemeVersion, true);
 
         wp_enqueue_script('admin_jsdelivr_flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/flatpickr.min.js', [], '');
         wp_enqueue_script('admin_jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/fr.js', ['admin_jsdelivr_flatpickr'], '', true);
@@ -302,13 +301,13 @@ class WoodyTheme_Enqueue_Assets
         wp_add_inline_script('admin-javascripts', 'var siteConfig = ' . json_encode($this->siteConfig) . ';', 'before');
 
         // Enqueue the main Stylesheet.
-        wp_enqueue_style('admin-stylesheet', WP_HOME . '/app/dist/' . WP_SITE_KEY . '/' . $this->assetPath('css/admin.css'), [], $this->wThemeVersion, 'all');
+        wp_enqueue_style('admin-stylesheet', $this->assetPath('css/admin.css'), [], $this->wThemeVersion, 'all');
     }
 
     private function assetPath($filename)
     {
         $manifest = [];
-        $manifest_path = WP_CONTENT_DIR . '/dist/' . WP_SITE_KEY . '/rev-manifest.json';
+        $manifest_path = WP_DIST_DIR . '/rev-manifest.json';
         if (file_exists($manifest_path)) {
             $manifest = json_decode(file_get_contents($manifest_path), true);
 
@@ -317,7 +316,7 @@ class WoodyTheme_Enqueue_Assets
             }
         }
 
-        return $filename;
+        return WP_DIST_URL . '/' . $filename;
     }
 
     public function so_handle_038($url, $original_url, $_context)
