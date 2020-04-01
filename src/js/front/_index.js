@@ -7,5 +7,6 @@ import './plugins/gtm_events';
 import './plugins/focus';
 
 // Woody Plugin
+//TODO : les js doivent être ajoutés séparement depuis les addon/plugin
 import 'Claims/Resources/Assets/js/claims'
 import 'Favorites/Resources/Assets/js/favorites'
