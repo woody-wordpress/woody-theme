@@ -173,10 +173,13 @@ class WoodyTheme_WoodyGetters
         ];
 
         $feeds = [];
-        foreach ($wrapper['topic_category'] as $term_id) {
-            $term = get_term($term_id, 'topic_category');
-            $feeds[] = $term->name;
+        if (!empty($wrapper['topic_category'])) {
+            foreach ($wrapper['topic_category'] as $term_id) {
+                $term = get_term($term_id, 'topic_category');
+                $feeds[] = $term->name;
+            }
         }
+
         $time = !empty($wrapper['publish_date']) ? strtotime($wrapper['publish_date']) : 0;
         $args = [
             'posts_per_page' => -1,
@@ -503,7 +506,7 @@ class WoodyTheme_WoodyGetters
         // Parcourir tout le tableau de dates et afficher la 1ère date non passée
         if (!empty($sheet['dates'])) {
             $today = time();
-            foreach($sheet['dates'] as $date) {
+            foreach ($sheet['dates'] as $date) {
                 $enddate= strtotime($date['end']['endDate']);
                 if ($today < $enddate) {
                     $data['date'] = $date;
@@ -557,18 +560,19 @@ class WoodyTheme_WoodyGetters
             $data['description'] = $item->woody_topic_desc;
         }
 
-        if (!empty($wrapper['display_button'])) {
-            $data['link']['link_label'] = $this->tools->getFieldAndFallBack($item, 'focus_button_title', $item);
-            if (empty($data['link']['link_label'])) {
-                $data['link']['link_label'] = __('Lire la suite', 'woody-theme');
-            }
-        }
-
         if (!empty($item->woody_topic_publication)) {
             $data['date'] = (int) $item->woody_topic_publication;
         }
 
-        $data['link']['url'] = !empty($item->woody_topic_url) ? $item->woody_topic_url : '';
+        if(!empty($item->woody_topic_url)){
+            $data['link'] = [
+                'url' => !empty($item->woody_topic_url) ? $item->woody_topic_url : '',
+                'title' => __('Découvrir', 'woody-theme'),
+                'link_label' => __('Découvrir', 'woody-theme'),
+                'target' => '_blank',
+            ];
+        }
+
 
         return $data;
     }
