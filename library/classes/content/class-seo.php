@@ -32,7 +32,7 @@ class WoodyTheme_Seo
     public function woodySeoTransformPattern($string)
     {
         $tools = new WoodyTheme_WoodyProcessTools;
-        $string = $tools->replacePattern($string, get_post());
+        $string = $tools->replacePattern($string, get_the_ID());
         return $string;
     }
 
@@ -82,7 +82,7 @@ class WoodyTheme_Seo
         }
 
         // On migre les tags primary
-       
+
         Output::h2('UPDATING PRIMARY TAGS');
         foreach ($posts as $post) {
             do_action('woody_async_add', 'woody_migrate_yoast_primary_tags', ['post' => $post, 'taxonomies' =>$taxonomies], 'post_' . $post->ID);

@@ -236,29 +236,32 @@ class WoodyTheme_WoodyGetters
     public function getPagePreview($wrapper, $item, $clickable = true)
     {
         $data = [];
+        if (!is_object($item)) {
+            return;
+        }
 
         $data['page_type'] = getTermsSlugs($item->ID, 'page_type', true);
         $data['post_id'] = $item->ID;
 
         if (!empty(get_field('focus_title', $item->ID))) {
-            $data['title'] = $this->tools->replacePattern(get_field('focus_title', $item->ID), $item);
+            $data['title'] = $this->tools->replacePattern(get_field('focus_title', $item->ID), $item->ID);
         } elseif (!empty(get_the_title($item->ID))) {
-            $data['title'] = $this->tools->replacePattern(get_the_title($item->ID), $item);
+            $data['title'] = $this->tools->replacePattern(get_the_title($item->ID), $item->ID);
         }
 
         if (!empty($wrapper) && !empty($wrapper['display_elements']) && is_array($wrapper['display_elements'])) {
             if (in_array('pretitle', $wrapper['display_elements'])) {
-                $data['pretitle'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($item, 'focus_pretitle', get_field('page_heading_heading', $item->ID), 'pretitle', $item, 'field_5b87f20257a1d'), $item);
+                $data['pretitle'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($item, 'focus_pretitle', get_field('page_heading_heading', $item->ID), 'pretitle', $item, 'field_5b87f20257a1d'), $item->ID);
             }
             if (in_array('subtitle', $wrapper['display_elements'])) {
-                $data['subtitle'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($item, 'focus_subtitle', get_field('page_heading_heading', $item->ID), 'subtitle', $item, 'field_5b87f23b57a1e'), $item);
+                $data['subtitle'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($item, 'focus_subtitle', get_field('page_heading_heading', $item->ID), 'subtitle', $item, 'field_5b87f23b57a1e'), $item->ID);
             }
             if (in_array('icon', $wrapper['display_elements'])) {
                 $data['woody_icon'] = get_field('focus_woody_icon', $item->ID);
                 $data['icon_type'] = 'picto';
             }
             if (in_array('description', $wrapper['display_elements'])) {
-                $data['description'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($item, 'focus_description', $item, 'field_5b2bbbfaec6b2'), $item);
+                $data['description'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($item, 'focus_description', $item, 'field_5b2bbbfaec6b2'), $item->ID);
             }
             if (in_array('price', $wrapper['display_elements'])) {
                 $data['the_price'] = get_field('field_5b6c670eb54f2', $item->ID);
@@ -281,7 +284,7 @@ class WoodyTheme_WoodyGetters
         $data['the_peoples'] = get_field('field_5b6d54a10381f', $item->ID);
 
         if ($clickable) {
-            $data['link']['link_label'] = $this->tools->getFieldAndFallBack($item, 'focus_button_title', $item);
+            $data['link']['link_label'] = $this->tools->replacePattern($this->tools->getFieldAndFallBack($item, 'focus_button_title', $item), $item->ID);
             if (empty($data['link']['link_label'])) {
                 $data['link']['link_label'] = __('Lire la suite', 'woody-theme');
             }
@@ -324,9 +327,9 @@ class WoodyTheme_WoodyGetters
     {
         $data = [];
         $data = [
-            'title' => (!empty($item['title'])) ? $this->tools->replacePattern($item['title']) : '',
-            'pretitle' => (!empty($item['pretitle'])) ? $this->tools->replacePattern($item['pretitle']) : '',
-            'subtitle' => (!empty($item['subtitle'])) ? $this->tools->replacePattern($item['subtitle']) : '',
+            'title' => (!empty($item['title'])) ? $item['title'] : '',
+            'pretitle' => (!empty($item['pretitle'])) ? $item['pretitle'] : '',
+            'subtitle' => (!empty($item['subtitle'])) ? $item['subtitle'] : '',
             'icon_type' => (!empty($item['icon_type'])) ? $item['icon_type'] : '',
             'woody_icon' => (!empty($item['woody_icon'])) ? $item['woody_icon'] : '',
             'icon_img' => (!empty($item['icon_img']['url'])) ? [
@@ -336,7 +339,7 @@ class WoodyTheme_WoodyGetters
                 'alt' =>  $item['icon_img']['alt'],
 
             ] : '',
-            'description' => (!empty($item['description'])) ? $this->tools->replacePattern($item['description']) : '',
+            'description' => (!empty($item['description'])) ? $item['description'] : '',
             'ellipsis' => 999,
             'location' => [
                 'lat' => !empty($item['latitude']) ? str_replace(',', '.', $item['latitude']) : '',
@@ -414,7 +417,7 @@ class WoodyTheme_WoodyGetters
         }
 
         $data = [
-            'title' => (!empty($sheet['title'])) ? $this->tools->replacePattern($sheet['title']) : '',
+            'title' => (!empty($sheet['title'])) ? $sheet['title'] : '',
             'link' => [
                 'url' => apply_filters('woody_get_permalink', $item->ID),
                 'target' => (!empty($sheet['targetBlank'])) ? '_blank' : '',
@@ -443,7 +446,7 @@ class WoodyTheme_WoodyGetters
                 }
             }
             if (in_array('description', $wrapper['display_elements'])) {
-                $data['description'] = (!empty($sheet['desc'])) ? $this->tools->replacePattern($sheet['desc']) : '';
+                $data['description'] = (!empty($sheet['desc'])) ? $sheet['desc'] : '';
                 if (!empty($wrapper['deal_mode'])) {
                     if (!empty($sheet['deals']['list'][$deal_index]['description'][$lang])) {
                         $data['description'] = $sheet['deals']['list'][$deal_index]['description'][$lang];
@@ -503,7 +506,7 @@ class WoodyTheme_WoodyGetters
         // Parcourir tout le tableau de dates et afficher la 1ère date non passée
         if (!empty($sheet['dates'])) {
             $today = time();
-            foreach($sheet['dates'] as $date) {
+            foreach ($sheet['dates'] as $date) {
                 $enddate= strtotime($date['end']['endDate']);
                 if ($today < $enddate) {
                     $data['date'] = $date;
