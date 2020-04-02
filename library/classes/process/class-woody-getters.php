@@ -573,6 +573,13 @@ class WoodyTheme_WoodyGetters
             ];
         }
 
+        $lat = get_field('topic_latitude', $item->ID);
+        $lng = get_field('topic_longitude', $item->ID);
+        if(!empty($lat) && !empty($lng)){
+            $data['location'] = [];
+            $data['location']['lat'] = (!empty($lat)) ? str_replace(',', '.', $lat) : '';
+            $data['location']['lng'] = (!empty($lng)) ? str_replace(',', '.', $lng) : '';
+        }
 
         return $data;
     }
