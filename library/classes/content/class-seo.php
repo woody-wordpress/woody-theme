@@ -8,7 +8,6 @@
  */
 
 use WoodyProcess\Tools\WoodyTheme_WoodyProcessTools;
-use Woody\Utils\Output;
 
 class WoodyTheme_Seo
 {
@@ -173,9 +172,6 @@ class WoodyTheme_Seo
                 'value' => (!empty($twitter_image)) ? $og_image : '',
                 'target' => 'woodyseo_twitter_image'
             ];
-
-        // On log l'ID et le titre du post
-        Output::log('Post ID ' . $post->ID . ' => ' . get_the_title($post->ID));
 
         // Servira pour le log final : post mis à jour ou non
         $post_updated = false;

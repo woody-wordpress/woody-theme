@@ -7,8 +7,6 @@
  * @since WoodyTheme 1.0.0
  */
 
-use Woody\Utils\Output;
-
 class WoodyTheme_SiteMap
 {
     public function __construct()
@@ -105,7 +103,6 @@ class WoodyTheme_SiteMap
             $sitemap = [];
             $query_max = $this->getPosts($lang);
             if (!empty($query_max)) {
-                Output::log(sprintf('Sitemap generate %s (%s pages)', strtoupper($lang), $query_max->max_num_pages));
                 for ($i = 1; $i <= $query_max->max_num_pages; $i++) {
                     $query = $this->getPosts($lang, $i);
                     if (!empty($query->posts)) {
