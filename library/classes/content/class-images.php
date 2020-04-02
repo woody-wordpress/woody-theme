@@ -8,8 +8,6 @@
  * @since WoodyTheme 1.0.0
  */
 
-use Woody\Utils\Output;
-
 class WoodyTheme_Images
 {
     public function __construct()
@@ -254,6 +252,11 @@ class WoodyTheme_Images
         if (!empty($info['APP13'])) {
             $iptc = iptcparse($info['APP13']);
 
+            // Titre
+            if ((empty($meta['title']) || $meta['title'] == $meta['caption']) && !empty($iptc['2#085'])) {
+                $meta['title'] = ucfirst(strtolower(current($iptc['2#085'])));
+            }
+
             // Places
             if (empty($meta['city']) && !empty($iptc['2#090'])) {
                 $meta['city'] = ucfirst(strtolower(current($iptc['2#090'])));
@@ -266,6 +269,12 @@ class WoodyTheme_Images
             if (empty($meta['country']) && !empty($iptc['2#101'])) {
                 $meta['country'] = ucfirst(strtolower(current($iptc['2#101'])));
             }
+        }
+
+        if (empty($meta['credit']) && !empty($meta['copyright'])) {
+            $meta['credit'] = $meta['copyright'];
+        } elseif (empty($meta['copyright']) && !empty($meta['credit'])) {
+            $meta['copyright'] = $meta['credit'];
         }
 
         return $meta;

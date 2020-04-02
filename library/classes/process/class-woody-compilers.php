@@ -266,7 +266,9 @@ class WoodyTheme_WoodyCompilers
             }
         }
 
-        $return = \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items);
+        if (!empty($the_items)) {
+            $return = \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items);
+        }
 
         return $return;
     }

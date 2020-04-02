@@ -289,47 +289,31 @@ class WoodyTheme_WoodyProcessTools
      * @return   return - La phrase modifiée
      *
      **/
-    public function replacePattern($str, $post = null)
+    public function replacePattern($string, $post_id)
     {
-        $return = '';
 
-        if ($post != null) {
-            $pattern = "/%nombre%/";
-            preg_match($pattern, $str, $matches);
-            if (!empty($matches)) {
-                $confId = get_field('playlist_conf_id', $post->ID);
-                if (!empty($confId)) {
-                    $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), array(), 'json');
-                    if (!empty($playlist)) {
-                        $nbResults = !empty($playlist['playlist']['total']) ? $playlist['playlist']['total'] : false;
-                        if (!$nbResults) {
-                            $return = $str;
-                        } else {
-                            foreach ($matches as $match) {
-                                $new_str = str_replace(['%nombre%'], $nbResults, $match);
-                                $return = preg_replace($pattern, $new_str, $str);
-                            }
-                        }
-                    }
-                }
-            } else {
-                $return = $str;
+        // Si la page n'est pas une playlist
+        $page_type = getTermsSlugs($post_id, 'page_type', true);
+        if ($page_type !== 'playlist_tourism') {
+            return $string;
+        }
+
+        if (!empty($post_id)) {
+            $confId = get_field('playlist_conf_id', $post_id);
+            if (!empty($confId)) {
+                $playlist_count = apply_filters('woody_hawwwai_playlist_count', $confId, pll_current_language(), array());
             }
-        } else {
-            // Ne concerne pas de playlists
-            $pattern = "/(%[a-zA-Z]+%)/";
-            preg_match($pattern, $str, $matches);
-            if (!empty($matches)) {
-                foreach ($matches as $match) {
-                    $new_str = str_replace(['%'], '', $match);
-                    $return = preg_replace($pattern, $new_str, $str);
+
+            $patterns = ['%nombre%', '%playlist_count%'];
+
+            foreach ($patterns as $pattern) {
+                if (strpos($string, $pattern) !== false) {
+                    $string = str_replace($pattern, $playlist_count, $string);
                 }
-            } else {
-                $return = $str;
             }
         }
 
-        return $return;
+        return $string;
     }
 
     public function getAttachmentMoreData($attachment_id = null)
