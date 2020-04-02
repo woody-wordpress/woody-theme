@@ -255,18 +255,18 @@ class WoodyTheme_Enqueue_Assets
         // Enqueue the main Scripts
         $dependencies = [
             'jquery',
+            'jsdelivr_cookieconsent',
             'jsdelivr_flatpickr',
             'jsdelivr_flatpickr_l10n',
-            'jsdelivr_swiper',
-            'jsdelivr_cookieconsent',
-            'jsdelivr_lightgallery',
+            'jsdelivr_lg-fullscreen',
             'jsdelivr_lg-pager',
             'jsdelivr_lg-thumbnail',
             'jsdelivr_lg-video',
             'jsdelivr_lg-zoom',
-            'jsdelivr_lg-fullscreen',
+            'jsdelivr_lightgallery',
+            'jsdelivr_plyr',
+            'jsdelivr_swiper',
             'wp-i18n',
-            'jsdelivr_plyr'
         ];
         wp_enqueue_script('main-javascripts', $this->assetPath('js/main.js'), $dependencies, '', true);
 
