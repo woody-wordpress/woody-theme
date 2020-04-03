@@ -270,7 +270,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
                 $page_teaser['page_teaser_pretitle'] = (!empty($page_teaser['page_teaser_pretitle'])) ? $this->tools->replacePattern($page_teaser['page_teaser_pretitle'], $this->context['post_id']) : '';
                 $page_teaser['page_teaser_subtitle'] = (!empty($page_teaser['page_teaser_subtitle'])) ? $this->tools->replacePattern($page_teaser['page_teaser_subtitle'], $this->context['post_id']) : '';
-                $page_teaser['page_teaser_desc'] = (!empty($page_teaser['page_teaser_desc'])) ? $this->tools->replacePattern($page_teaser['description'], $this->context['post_id']) : '';
+                $page_teaser['page_teaser_desc'] = (!empty($page_teaser['page_teaser_desc'])) ? $this->tools->replacePattern($page_teaser['page_teaser_desc'], $this->context['post_id']) : '';
 
                 $page_teaser = apply_filters('woody_custom_page_teaser', $page_teaser, $this->context);
 
