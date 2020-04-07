@@ -8,7 +8,6 @@
  */
 
 use WoodyProcess\Tools\WoodyTheme_WoodyProcessTools;
-use Woody\Utils\Output;
 
 class WoodyTheme_Seo
 {
@@ -32,7 +31,7 @@ class WoodyTheme_Seo
     public function woodySeoTransformPattern($string)
     {
         $tools = new WoodyTheme_WoodyProcessTools;
-        $string = $tools->replacePattern($string, get_post());
+        $string = $tools->replacePattern($string, get_the_ID());
         return $string;
     }
 
@@ -82,7 +81,7 @@ class WoodyTheme_Seo
         }
 
         // On migre les tags primary
-       
+
         Output::h2('UPDATING PRIMARY TAGS');
         foreach ($posts as $post) {
             do_action('woody_async_add', 'woody_migrate_yoast_primary_tags', ['post' => $post, 'taxonomies' =>$taxonomies], 'post_' . $post->ID);
@@ -173,9 +172,6 @@ class WoodyTheme_Seo
                 'value' => (!empty($twitter_image)) ? $og_image : '',
                 'target' => 'woodyseo_twitter_image'
             ];
-
-        // On log l'ID et le titre du post
-        Output::log('Post ID ' . $post->ID . ' => ' . get_the_title($post->ID));
 
         // Servira pour le log final : post mis à jour ou non
         $post_updated = false;

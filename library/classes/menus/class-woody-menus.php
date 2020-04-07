@@ -96,11 +96,22 @@ class WoodyTheme_Menus
                             } else {
                                 $return[$group_key]['part_title'] = $field;
                             }
-
                         } else {
-                            foreach ($field as $field_data) {
+                            foreach ($field as $field_data_key => $field_data) {
                                 $parts[$group_key][] = $field_data['submenu_links_objects'];
-                                $return[$group_key]['links'] = self::getMenuLinks($parts[$group_key]);
+                                if (!empty($field_data['submenu_sublinks'])) {
+                                    foreach ($field_data['submenu_sublinks'] as $sublink) {
+                                        $sublinks[$group_key][$field_data_key][] = $sublink['submenu_links_objects'];
+                                    }
+                                }
+                            }
+
+                            $return[$group_key]['links'] = self::getMenuLinks($parts[$group_key]);
+
+                            foreach ($return[$group_key]['links'] as $link_key => $link) {
+                                if (!empty($sublinks[$group_key][$link_key])) {
+                                    $return[$group_key]['links'][$link_key]['sublinks'] = self::getMenuLinks($sublinks[$group_key][$link_key]);
+                                }
                             }
                         }
                     }
@@ -235,10 +246,10 @@ class WoodyTheme_Menus
                             $link_display = $submenu['display']['parts'][$i]['links_tpl'];
                             if ($getChildren) {
                                 $args = [
-                                    'post_parent' => $link['the_id'],
-                                    'post_type'   => 'page',
-                                    'post_status' => 'publish'
-                                ];
+                                        'post_parent' => $link['the_id'],
+                                        'post_type'   => 'page',
+                                        'post_status' => 'publish'
+                                    ];
                                 $sublinks = get_children($args);
                                 $link['sublinks'] = !empty($sublinks) ? self::getMenuLinks($sublinks) : [];
                             }

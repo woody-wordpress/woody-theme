@@ -268,6 +268,10 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     $page_teaser['page_teaser_img']['attachment_more_data'] = (!empty($page_teaser['page_teaser_img']['ID'])) ? $this->tools->getAttachmentMoreData($page_teaser['page_teaser_img']['ID']) : [];
                 }
 
+                $page_teaser['page_teaser_pretitle'] = (!empty($page_teaser['page_teaser_pretitle'])) ? $this->tools->replacePattern($page_teaser['page_teaser_pretitle'], $this->context['post_id']) : '';
+                $page_teaser['page_teaser_subtitle'] = (!empty($page_teaser['page_teaser_subtitle'])) ? $this->tools->replacePattern($page_teaser['page_teaser_subtitle'], $this->context['post_id']) : '';
+                $page_teaser['page_teaser_desc'] = (!empty($page_teaser['page_teaser_desc'])) ? $this->tools->replacePattern($page_teaser['page_teaser_desc'], $this->context['post_id']) : '';
+
                 $page_teaser = apply_filters('woody_custom_page_teaser', $page_teaser, $this->context);
 
                 $this->context['page_teaser'] = \Timber::compile($this->context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
@@ -299,6 +303,11 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                         }
                     }
                 }
+
+                $page_hero['title'] = (!empty($page_hero['title'])) ? $this->tools->replacePattern($page_hero['title'], $this->context['post_id']) : '';
+                $page_hero['pretitle'] = (!empty($page_hero['pretitle'])) ? $this->tools->replacePattern($page_hero['pretitle'], $this->context['post_id']) : '';
+                $page_hero['subtitle'] = (!empty($page_hero['subtitle'])) ? $this->tools->replacePattern($page_hero['subtitle'], $this->context['post_id']) : '';
+                $page_hero['description'] = (!empty($page_hero['description'])) ? $this->tools->replacePattern($page_hero['description'], $this->context['post_id']) : '';
 
                 $page_hero['title'] = (!empty($page_hero['title'])) ? str_replace('-', '&#8209', $page_hero['title']) : '';
                 $this->context['page_hero'] = \Timber::compile($this->context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
@@ -348,7 +357,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         ];
 
         $tpl = apply_filters('breadcrumb_tpl', null);
-        $template = $tpl['template'] ? $this->context['woody_components'][$tpl['template']] : $this->context['woody_components']['woody_widgets-breadcrumb-tpl_01'];
+        $template = (!empty($tpl['template']) && !empty($this->context['woody_components'][$tpl['template']])) ? $this->context['woody_components'][$tpl['template']] : $this->context['woody_components']['woody_widgets-breadcrumb-tpl_01'];
 
         $breadcrumb = Timber::compile($template, $data);
 

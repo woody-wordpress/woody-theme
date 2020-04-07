@@ -7,8 +7,6 @@
  * @since WoodyTheme 1.0.0
  */
 
-use Woody\Utils\Output;
-
 class WoodyTheme_SiteMap
 {
     public function __construct()
@@ -105,16 +103,18 @@ class WoodyTheme_SiteMap
             $sitemap = [];
             $query_max = $this->getPosts($lang);
             if (!empty($query_max)) {
-                Output::log(sprintf('Sitemap generate %s (%s pages)', strtoupper($lang), $query_max->max_num_pages));
                 for ($i = 1; $i <= $query_max->max_num_pages; $i++) {
                     $query = $this->getPosts($lang, $i);
                     if (!empty($query->posts)) {
                         foreach ($query->posts as $post) {
-                            $sitemap[] = [
-                                'loc' => get_permalink($post),
-                                'lastmod' => get_the_modified_date('c', $post),
-                                'images' => $this->getImagesFromPost($post)
-                            ];
+                            $index = get_post_meta($post->ID, 'woodyseo_index', true);
+                            if ($index == true) {
+                                $sitemap[] = [
+                                    'loc' => get_permalink($post),
+                                    'lastmod' => get_the_modified_date('c', $post),
+                                    'images' => $this->getImagesFromPost($post),
+                                ];
+                            }
                         }
                     }
                 }
