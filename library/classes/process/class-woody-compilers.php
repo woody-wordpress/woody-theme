@@ -234,6 +234,7 @@ class WoodyTheme_WoodyCompilers
                 'post_parent'   => $parent_id,
                 'post__not_in'  => [$post_id, $front_id],
                 'tax_query'     => (!empty($tax_query)) ? $tax_query : '',
+                'posts_per_page' => -1,
                 'order'         => 'ASC',
                 'orderby'       => $orderby
             ];
