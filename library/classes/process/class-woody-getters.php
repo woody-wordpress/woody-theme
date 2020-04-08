@@ -180,6 +180,35 @@ class WoodyTheme_WoodyGetters
             }
         }
 
+        $tax_query = [];
+        $custom_tax = [];
+        if (!empty($wrapper['focused_taxonomy_terms'])) {
+
+            // On récupère la relation choisie (ET/OU) entre les termes
+            // et on génère un tableau de term_id pour chaque taxonomie
+            $tax_query['relation'] = (!empty($wrapper['focused_taxonomy_terms_andor'])) ? $wrapper['focused_taxonomy_terms_andor'] : 'OR';
+
+            // Pour chaque entrée du tableau focus_taxonomy_terms
+            foreach ($wrapper['focused_taxonomy_terms'] as $focused_term) {
+                // Si l'entrée est un post id (Aucun filtre n'a été utilisé en front)
+                $term = get_term($focused_term);
+                if (!empty($term) && !is_wp_error($term) && is_object($term)) {
+                    $custom_tax[$term->taxonomy][] = $focused_term;
+                }
+
+                foreach ($custom_tax as $taxo => $terms) {
+                    foreach ($terms as $term) {
+                        $tax_query[] = array(
+                            'taxonomy' => $taxo,
+                            'terms' => [$term],
+                            'field' => 'term_id',
+                            'operator' => 'IN'
+                        );
+                    }
+                }
+            }
+        }
+
         $time = !empty($wrapper['publish_date']) ? strtotime($wrapper['publish_date']) : 0;
         $args = [
             'posts_per_page' => -1,
@@ -197,7 +226,8 @@ class WoodyTheme_WoodyGetters
                     'value' => $time,
                     'compare' => '>'
                 )
-            )
+            ),
+            'tax_query' => !empty($tax_query) ? $tax_query : ''
         ];
 
         if ($wrapper['focused_sort'] == 'title') {
@@ -567,7 +597,7 @@ class WoodyTheme_WoodyGetters
             $data['date'] = (int) $item->woody_topic_publication;
         }
 
-        if(!empty($item->woody_topic_url)){
+        if (!empty($item->woody_topic_url)) {
             $data['link'] = [
                 'url' => !empty($item->woody_topic_url) ? $item->woody_topic_url : '',
                 'title' => __('Découvrir', 'woody-theme'),
@@ -576,6 +606,13 @@ class WoodyTheme_WoodyGetters
             ];
         }
 
+        $lat = get_field('topic_latitude', $item->ID);
+        $lng = get_field('topic_longitude', $item->ID);
+        if (!empty($lat) && !empty($lng)) {
+            $data['location'] = [];
+            $data['location']['lat'] = (!empty($lat)) ? str_replace(',', '.', $lat) : '';
+            $data['location']['lng'] = (!empty($lng)) ? str_replace(',', '.', $lng) : '';
+        }
 
         return $data;
     }

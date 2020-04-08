@@ -81,7 +81,7 @@ class WoodyTheme_Taxonomy
         // On créé la taxonomie "Thématiques"
         register_taxonomy(
             'themes',
-            ['page', 'attachment'],
+            ['page', 'attachment', 'woody_topic'],
             array(
                 'label' => 'Thématiques',
                 'labels' => [
@@ -112,7 +112,7 @@ class WoodyTheme_Taxonomy
         // On créé la taxonomie "Lieux"
         register_taxonomy(
             'places',
-            ['page', 'attachment'],
+            ['page', 'attachment', 'woody_topic'],
             array(
                 'label' => 'Lieux',
                 'labels' => [
@@ -143,7 +143,7 @@ class WoodyTheme_Taxonomy
         // On créé la taxonomie "Saisons"
         register_taxonomy(
             'seasons',
-            ['page', 'attachment'],
+            ['page', 'attachment', 'woody_topic'],
             array(
                 'label' => 'Saisons',
                 'labels' => [
@@ -311,7 +311,7 @@ class WoodyTheme_Taxonomy
 
         if (!is_wp_error($terms)) {
             foreach ($terms as $term) {
-                if(!empty($term->name)){
+                if (!empty($term->name)) {
                     $place[] = $term->name;
                     wp_send_json($place);
                     exit;
