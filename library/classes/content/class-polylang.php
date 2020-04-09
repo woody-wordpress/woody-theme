@@ -284,9 +284,5 @@ class WoodyTheme_Polylang
         __('Voir les webcams', 'woody-theme');
         __('Flux erroné !', 'woody-theme');
         __('Module Infoneige non configuré !', 'woody-theme');
-
-        // Roadbook
-        __('Mon carnet de voyage', 'woody-theme');
-        __('Indispensables', 'woody-theme');
     }
 }
