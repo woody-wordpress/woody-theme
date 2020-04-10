@@ -593,10 +593,6 @@ class WoodyTheme_WoodyGetters
             $data['description'] = strlen($item->woody_topic_desc) > 256 ? substr($item->woody_topic_desc, 0, 256) : $item->woody_topic_desc ;
         }
 
-        if (!empty($item->woody_topic_publication)) {
-            $data['date'] = (int) $item->woody_topic_publication;
-        }
-
         if (!empty($item->woody_topic_url)) {
             $data['link'] = [
                 'url' => !empty($item->woody_topic_url) ? $item->woody_topic_url : '',
