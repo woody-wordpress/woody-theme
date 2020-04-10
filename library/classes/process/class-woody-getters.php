@@ -590,7 +590,7 @@ class WoodyTheme_WoodyGetters
         }
 
         if (!empty($item->woody_topic_desc)) {
-            $data['description'] = $item->woody_topic_desc;
+            $data['description'] = strlen($item->woody_topic_desc) > 256 ? substr($item->woody_topic_desc, 0, 256) : $item->woody_topic_desc ;
         }
 
         if (!empty($item->woody_topic_publication)) {
