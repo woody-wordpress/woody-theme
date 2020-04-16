@@ -1,5 +1,8 @@
 <?php
 
+use Symfony\Component\Finder\Finder;
+use Woody\Utils\Output;
+
 class WoodyTheme_Tinymce
 {
     public function __construct()
@@ -11,14 +14,21 @@ class WoodyTheme_Tinymce
     {
         add_filter('mce_buttons_2', array($this, 'tinymceAddButtons'));
         add_filter('mce_external_plugins', array($this, 'woodyAnchorButtonLoadJs'));
+        add_filter('mce_external_plugins', array($this, 'woodyIconsButtonLoadJs'));
         add_filter('tiny_mce_before_init', array($this, 'tinymceRegisterStyleSelect'));
+        add_filter('tiny_mce_before_init', array($this, 'modifyValidMarkup'));
         add_filter('mce_buttons', array($this, 'remove_button_from_tinymce'));
         // add_action('init', array($this, 'tinymceAddStylesheet'));
+
+        add_action('wp_ajax_woody_icons_list', [$this, 'woodyIconsList']);
+        add_action('woody_theme_update', [$this, 'cleanTransient']);
+        add_action('woody_subtheme_update', [$this, 'cleanTransient']);
     }
 
     // Callback function to insert 'styleselect' into the $buttons array
     public function tinymceAddButtons($buttons)
     {
+        array_unshift($buttons, 'woody_icons');
         array_unshift($buttons, 'woody_anchor');
         array_unshift($buttons, 'styleselect');
         return $buttons;
@@ -68,6 +78,49 @@ class WoodyTheme_Tinymce
     {
         $plugins['woody_anchor'] = get_template_directory_uri() . '/src/js/admin/plugins/woody_anchor.js';
         return $plugins;
+    }
+
+    public function woodyIconsButtonLoadJs($plugins)
+    {
+        $plugins['woody_icons'] = get_template_directory_uri() . '/src/js/admin/plugins/woody_icons.js';
+        return $plugins;
+    }
+
+    public function woodyIconsList()
+    {
+        $core_icons = woodyIconsFolder(get_template_directory() . '/src/icons/icons_set_01');
+        $site_icons = woodyIconsFolder(get_stylesheet_directory() . '/src/icons');
+        $icons = array_merge($core_icons, $site_icons);
+
+        wp_send_json($icons);
+    }
+
+    private function findIcons($finder)
+    {
+        $icons = [];
+        foreach ($finder as $icon_file) {
+            $icons[] = str_replace('.svg', '', $icon_file->getRelativePathname());
+        }
+
+        return $icons;
+    }
+
+    public function cleanTransient()
+    {
+        delete_transient('woody_icons_list');
+    }
+
+    public function modifyValidMarkup($settings)
+    {
+        // Command separated string of extended elements
+        $ext = 'span[id|name|class|style]';
+        // Add to extended_valid_elements if it alreay exists
+        if (isset($settings['extended_valid_elements'])) {
+            $settings['extended_valid_elements'] .= ',' . $ext;
+        } else {
+            $settings['extended_valid_elements'] = $ext;
+        }
+        return $settings;
     }
 
     public function remove_button_from_tinymce($buttons)
