@@ -1,5 +1,35 @@
+// Override page margins
+@page {
+    margin: 5mm 5mm 5mm 5mm;
+}
+
+// Hide cookies and admin menu WP
+.cc-revoke,
+.cc-window,
+#wpadminbar {
+    display: none !important;
+}
+
+// Print content styles
 .print-rdbk {
     font-size: 90%;
+
+    .print-fixed {
+        position: fixed;
+        width: 200mm;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        z-index: 10000;
+    }
+
+    .print-header {
+        top: 0;
+    }
+
+    .print-footer {
+        bottom: 0;
+    }
 
     // Page header
     .page-header {
@@ -12,6 +42,11 @@
     }
 
     .page-section {
+        width: 198mm !important;
+        margin-left: auto;
+        margin-right: auto;
+
+
         &:not(:nth-of-type(1)) {
             page-break-before: always;
         }
@@ -43,10 +78,6 @@
     .woody-component-geomap,
     .woody-component-links {
         display: none;
-    }
-
-    .page-section {
-        width: 8.5in !important;
     }
 
     .accordion {
