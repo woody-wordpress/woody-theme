@@ -18,7 +18,7 @@ class WoodyTheme_Tinymce
         add_filter('tiny_mce_before_init', array($this, 'tinymceRegisterStyleSelect'));
         add_filter('tiny_mce_before_init', array($this, 'modifyValidMarkup'));
         add_filter('mce_buttons', array($this, 'remove_button_from_tinymce'));
-        // add_action('init', array($this, 'tinymceAddStylesheet'));
+        add_action('init', array($this, 'tinymceAddStylesheet'));
 
         add_action('wp_ajax_woody_icons_list', [$this, 'woodyIconsList']);
         add_action('woody_theme_update', [$this, 'cleanTransient']);
@@ -136,8 +136,10 @@ class WoodyTheme_Tinymce
         return $buttons;
     }
 
-    // public function tinymceAddStylesheet()
-    // {
-    //     add_editor_style('custom-editor-style.css');
-    // }
+    public function tinymceAddStylesheet()
+    {
+        // print_r(WP_DIST_URL . '/css/admin.css');
+        // exit;
+        add_editor_style(WP_DIST_URL . '/css/admin.css');
+    }
 }

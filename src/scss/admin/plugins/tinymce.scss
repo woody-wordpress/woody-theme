@@ -1,0 +1,12 @@
+.mce-content-body {
+
+    //Does'nt work
+    .wicon {
+        font-size: 40px;
+        user-select: text;
+
+        &:before {
+            user-select: text;
+        }
+    }
+}
