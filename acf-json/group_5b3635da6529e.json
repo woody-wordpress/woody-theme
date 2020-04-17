@@ -55,6 +55,13 @@
                 "operator": "==",
                 "value": "tourtrip_step"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "woody_topic"
+            }
         ]
     ],
     "menu_order": 40,
