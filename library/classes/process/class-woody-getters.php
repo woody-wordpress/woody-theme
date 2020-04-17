@@ -573,6 +573,8 @@ class WoodyTheme_WoodyGetters
         $data = [];
         $data['post_id'] = $item->ID;
         $data['title'] = !empty($item->post_title) ? $item->post_title : '';
+        $data['pretitle'] = !empty($item->woody_topic_blogname) ? $item->woody_topic_blogname : '';
+        // $data['subtitle'] = !empty($item->woody_topic_blogname) ? $item->woody_topic_blogname : '';
 
         if (!empty($item->woody_topic_img) && !$item->woody_topic_attachment) {
             $img = [
@@ -590,11 +592,7 @@ class WoodyTheme_WoodyGetters
         }
 
         if (!empty($item->woody_topic_desc)) {
-            $data['description'] = $item->woody_topic_desc;
-        }
-
-        if (!empty($item->woody_topic_publication)) {
-            $data['date'] = (int) $item->woody_topic_publication;
+            $data['description'] = strlen($item->woody_topic_desc) > 256 ? substr($item->woody_topic_desc, 0, 256) : $item->woody_topic_desc ;
         }
 
         if (!empty($item->woody_topic_url)) {
@@ -606,8 +604,8 @@ class WoodyTheme_WoodyGetters
             ];
         }
 
-        $lat = get_field('topic_latitude', $item->ID);
-        $lng = get_field('topic_longitude', $item->ID);
+        $lat = get_field('post_latitude', $item->ID);
+        $lng = get_field('post_longitude', $item->ID);
         if (!empty($lat) && !empty($lng)) {
             $data['location'] = [];
             $data['location']['lat'] = (!empty($lat)) ? str_replace(',', '.', $lat) : '';
