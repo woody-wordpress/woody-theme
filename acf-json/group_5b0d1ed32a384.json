@@ -464,7 +464,8 @@
                         },
                         "post_type": [
                             "page",
-                            "touristic_sheet"
+                            "touristic_sheet",
+                            "woody_topic"
                         ],
                         "taxonomy": "",
                         "allow_null": 0,
