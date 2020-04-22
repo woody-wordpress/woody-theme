@@ -1,7 +1,6 @@
 <?php
 
 use Symfony\Component\Finder\Finder;
-use Woody\Utils\Output;
 
 class WoodyTheme_Tinymce
 {
@@ -138,8 +137,6 @@ class WoodyTheme_Tinymce
 
     public function tinymceAddStylesheet()
     {
-        // print_r(WP_DIST_URL . '/css/admin.css');
-        // exit;
         add_editor_style(WP_DIST_URL . '/css/admin.css');
     }
 }
