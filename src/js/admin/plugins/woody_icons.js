@@ -16,7 +16,7 @@
             onsubmit: function(e) {
                 var selected_icon_class = $('.woody-icons-list').find('.selected').find('span').attr('class');
                 if (typeof selected_icon_class != 'undefined') {
-                    editor.insertContent('<span class="' + selected_icon_class + '" style="user-select:text;"></span><i style="display:none">woody_icon</i>');
+                    editor.insertContent('&nbsp;<span class="' + selected_icon_class + '">&nbsp;</span>&nbsp;');
                 }
             }
         });

@@ -1,12 +1,13 @@
 .mce-content-body {
 
-    //Does'nt work
     .wicon {
-        font-size: 40px;
-        user-select: text;
+        -webkit-user-select: text;
+        -moz-user-select: text;
 
         &:before {
-            user-select: text;
+            font-size: 40px;
+            -webkit-user-select: text;
+            -moz-user-select: text;
         }
     }
 }
