@@ -343,3 +343,66 @@ function minuteConvert($num)
     $convertedTime['minutes'] = round((($num / 60) - $convertedTime['hours']) * 60);
     return $convertedTime;
 }
+
+/**
+ *
+ * Nom : embedProviderThumbnail
+ * Auteur : Benoit Bouchaud
+ * Return : Retourne l'url d'une miniature de vidéo YT, DailyMotion ou Vimeo
+ * @param    $embed - STR : iframe oEmbed
+ * @return   return - STR : url de la miniature
+ *
+ */
+function embedProviderThumbnail($embed)
+{
+    $return = '';
+
+    // On récupère l'attribut src de l'iframe
+    preg_match('/src="(.+?)"/', $embed, $embed_matches);
+    $src = $embed_matches[1];
+
+    // On définit le provider
+    if (strpos($src, 'youtu') != false) { // Match youtube.com & youtu.be
+        $provider = 'youtube';
+    } elseif (strpos($src, 'dailymotion') != false) {
+        $provider = 'dailymotion';
+    } elseif (strpos($src, 'vimeo') != false) {
+        $provider = 'vimeo';
+    } else {
+        $provider = 'unknown';
+    }
+
+    // On définit l'url de la miniature en fonction du provider
+    switch ($provider) {
+        case 'unknown':
+            return;
+            break;
+        case 'youtube':
+            $regex = '/(?<=\/embed\/)(.*)(?=\?feature)/';
+            preg_match($regex, $src, $matches);
+            if (!empty($matches[0])) {
+                $return = 'https://img.youtube.com/vi/' . $matches[0] . '/maxresdefault.jpg';
+            }
+        break;
+        case 'dailymotion':
+            $regex = '/(?<=\/video\/)(.*)/';
+            preg_match($regex, $src, $matches);
+            if (!empty($matches[0])) {
+                $return = 'https://www.dailymotion.com/thumbnail/video/' . $matches[0];
+            }
+        break;
+        case 'vimeo':
+            $regex = '/(?<=\/video\/)(.*)(?=\?dnt)/';
+            preg_match($regex, $src, $matches);
+            if (!empty($matches[0])) {
+                $vimeo_data = unserialize(file_get_contents('http://vimeo.com/api/v2/video/'. $matches[0] .'.php'));
+                if (empty($vimeo_data)) {
+                    return;
+                }
+                $return = $vimeo_data[0]['thumbnail_large'];
+            }
+        break;
+    }
+
+    return $return;
+}

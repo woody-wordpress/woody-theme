@@ -1,0 +1,13 @@
+.mce-content-body {
+
+    .wicon {
+        -webkit-user-select: text;
+        -moz-user-select: text;
+
+        &:before {
+            font-size: 40px;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+        }
+    }
+}
