@@ -110,6 +110,11 @@ abstract class WoodyTheme_TemplateAbstract
         // Woody options pages
         $this->context['woody_options_pages'] = $this->getWoodyOptionsPagesValues();
 
+        // Check if woody-addon-cookies is enabled
+        if (class_exists('Woody\Addon\AddonCookies\AddonCookies')) {
+            $this->context['addon_cookies_enable'] = true;
+        }
+
 
         /******************************************************************************
          * Sommes nous dans le cas d'une page miroir ?
