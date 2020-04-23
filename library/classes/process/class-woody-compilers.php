@@ -55,6 +55,8 @@ class WoodyTheme_WoodyCompilers
             $the_items = $this->getter->getAutoFocusSheetData($wrapper);
         } elseif ($wrapper['acf_fc_layout'] == 'auto_focus_topics') {
             $the_items = $this->getter->getAutoFocusTopicsData($wrapper);
+        } elseif ($wrapper['acf_fc_layout'] == 'manual_focus_minisheet') {
+            wd($wrapper);
         }
 
         if (!empty($the_items) && !empty($the_items['items']) && is_array($the_items['items'])) {

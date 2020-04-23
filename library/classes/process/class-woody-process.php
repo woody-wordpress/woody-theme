@@ -41,6 +41,7 @@ class WoodyTheme_WoodyProcess
         $layout['default_marker'] = $context['default_marker'];
         // Traitements spécifique en fonction du type de layout
         switch ($layout['acf_fc_layout']) {
+            case 'manual_focus_minisheet':
             case 'manual_focus':
             case 'auto_focus':
             case 'auto_focus_sheets':
