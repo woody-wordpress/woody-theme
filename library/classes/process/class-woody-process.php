@@ -41,13 +41,15 @@ class WoodyTheme_WoodyProcess
         $layout['default_marker'] = $context['default_marker'];
         // Traitements spécifique en fonction du type de layout
         switch ($layout['acf_fc_layout']) {
-            case 'manual_focus_minisheet':
             case 'manual_focus':
             case 'auto_focus':
             case 'auto_focus_sheets':
-            case 'focus_trip_components':
             case 'auto_focus_topics':
+            case 'focus_trip_components':
                 $return = $this->compilers->formatFocusesData($layout, $context['post'], $context['woody_components']);
+                break;
+            case 'manual_focus_minisheet':
+                $return = $this->compilers->formatMinisheetData($layout, $context['woody_components']);
                 break;
             case 'geo_map':
                 $return = $this->compilers->formatGeomapData($layout, $context['woody_components']);

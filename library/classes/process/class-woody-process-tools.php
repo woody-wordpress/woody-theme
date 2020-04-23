@@ -355,4 +355,47 @@ class WoodyTheme_WoodyProcessTools
 
         return $return;
     }
+
+        /**
+     *
+     * Nom : getTouristicSheetData
+     * Auteur : Thomas Navarro
+     * Return : Retourne les données d'une fiche SIT
+     * @param    post - INT|WP_Post
+     * @return   data - array|false
+     *
+     */
+    public function getTouristicSheetData($post)
+    {
+        $post = get_post($post);
+        if (!$post && $post->post_type !== 'touristic_sheet') {
+            return false;
+        }
+
+        $sheet = [];
+        $raw_item = get_field('touristic_raw_item', $post->ID);
+
+        if (empty($raw_item)) {
+            $sheet = json_decode(base64_decode($raw_item), true);
+        } else {
+            $current_lang = pll_current_language();
+            $languages = apply_filters('woody_pll_the_languages', 'auto');
+
+            // Seasons
+            foreach ($languages as $language) {
+                if ($language['current_lang']) {
+                    $current_lang = substr($language['locale'], 0, 2);
+                }
+            }
+
+            $sheet_id = get_field('touristic_sheet_id', $post->ID);
+            $items = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $current_lang, array(), 'json', 'item');
+
+            if (!empty($items['items']) && is_array($items['items'])) {
+                $sheet = current($items['items']);
+            }
+        }
+
+        return $sheet;
+    }
 }

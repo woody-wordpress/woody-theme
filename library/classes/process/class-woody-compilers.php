@@ -55,8 +55,6 @@ class WoodyTheme_WoodyCompilers
             $the_items = $this->getter->getAutoFocusSheetData($wrapper);
         } elseif ($wrapper['acf_fc_layout'] == 'auto_focus_topics') {
             $the_items = $this->getter->getAutoFocusTopicsData($wrapper);
-        } elseif ($wrapper['acf_fc_layout'] == 'manual_focus_minisheet') {
-            wd($wrapper);
         }
 
         if (!empty($the_items) && !empty($the_items['items']) && is_array($the_items['items'])) {
@@ -92,18 +90,28 @@ class WoodyTheme_WoodyCompilers
                 }
             }
 
-            $return = !empty($wrapper['woody_tpl']) ? \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items) : \Timber::compile($twigPaths['blocks-focus-tpl_103'], $the_items) ;
+            $return = !empty($wrapper['woody_tpl']) ? \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items) : \Timber::compile($twigPaths['blocks-focus-tpl_104'], $the_items) ;
         }
 
         return $return;
     }
 
-    /**
-     * Create pagination if needed
-     * @param   layout - Tableau des données du champ acf
-     * @param   twigPaths - Liste des templates woody sous forme de tableau
-     * @return  return - Code html
-     */
+    public function formatMinisheetData($wrapper, $twigPaths)
+    {
+        // Sheet item
+        $data = $this->getter->getManualFocusMinisheetData($wrapper);
+
+        // Block titles
+        $data['block_titles'] = $this->tools->getFocusBlockTitles($wrapper);
+        $data['block_titles']['display_options'] = $this->tools->getDisplayOptions($wrapper);
+
+        // Display options
+        $data['display_options']['no_padding'] = (!empty($wrapper['sheet_no_padding'])) ? $wrapper['sheet_no_padding'] : '';
+
+        $return = \Timber::compile($twigPaths[$wrapper['woody_tpl']], $data);
+        return $return;
+    }
+
     public function formatGeomapData($wrapper, $twigPaths)
     {
         $return = '';
