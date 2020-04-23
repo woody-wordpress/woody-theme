@@ -134,7 +134,6 @@ class WoodyTheme_Enqueue_Assets
         // }
 
         // Dependencies of main.js
-        wp_enqueue_script('jsdelivr_cookieconsent', 'https://cdn.jsdelivr.net/npm/cookieconsent@3.1.0/build/cookieconsent.min.js', [], '', true);
 
         if (!$this->isTouristicSheet) {
             wp_enqueue_script('jsdelivr_swiper', 'https://cdn.jsdelivr.net/npm/swiper@4.4.1/dist/js/swiper.min.js', [], '', true);
@@ -158,7 +157,6 @@ class WoodyTheme_Enqueue_Assets
         wp_enqueue_script('jsdelivr_lg-fullscreen', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-fullscreen.min.js', ['jsdelivr_lightgallery'], '', true);
         wp_enqueue_script('jsdelivr_nouislider', 'https://cdn.jsdelivr.net/npm/nouislider@10.1.0/distribute/nouislider.min.js', ['jquery'], '', true);
         wp_enqueue_script('jsdelivr_moment', 'https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js', [], '', true);
-        wp_enqueue_script('jsdelivr_jscookie', 'https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js', [], '', true);
         wp_enqueue_script('jsdelivr_rellax', 'https://cdn.jsdelivr.net/npm/rellax@1.10.0/rellax.min.js', [], '', true);
         wp_enqueue_script('jsdelivr_plyr', 'https://cdn.jsdelivr.net/npm/plyr@3.5.6/dist/plyr.min.js', [], '', true);
 
@@ -258,7 +256,6 @@ class WoodyTheme_Enqueue_Assets
         // Enqueue the main Scripts
         $dependencies = [
             'jquery',
-            'jsdelivr_cookieconsent',
             'jsdelivr_flatpickr',
             'jsdelivr_flatpickr_l10n',
             'jsdelivr_lg-fullscreen',
