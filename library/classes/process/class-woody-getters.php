@@ -728,9 +728,8 @@ class WoodyTheme_WoodyGetters
         $data['link']['url'] = $sheet_url;
         $data['link']['target'] = !empty($sheet['targetBlank']) ? '_blank' : '';
 
-        // Display options
-        $display_options = $wrapper['sheet_display'];
-        if (in_array('img', $display_options) && !empty($sheet['allImgs'])) {
+        // Display Imgs
+        if ($wrapper['display_img'] && !empty($sheet['allImgs'])) {
             foreach ($sheet['allImgs'] as $key => $img) {
                 $data['imgs'][$key] = [
                     'resizer' => true,
@@ -741,44 +740,55 @@ class WoodyTheme_WoodyGetters
             }
         }
 
+        // Display options
+        $display_options = $wrapper['sheet_display'];
         if (in_array('detail', $display_options)) {
             // TODO : vérifier que la fiche propose des prestations
-            $data['anchors'][0]['url'] = $sheet_url . '#establishment-detail';
-            $data['anchors'][0]['title'] = __('Informations prestataire', 'woody-theme');
-            $data['anchors'][0]['icon'] = 'wicon-028-plus-02';
+            $data['anchors']['detail']['url'] = $sheet_url . '#establishment-detail';
+            $data['anchors']['detail']['title'] = __('Informations prestataire', 'woody-theme');
+            $data['anchors']['detail']['icon'] = 'wicon-028-plus-02';
         }
         if (in_array('openings', $display_options)) {
             // TODO : vérifier que la fiche a des horaires d'ouvertures
-            $data['anchors'][1]['url'] = $sheet_url . '#openings';
-            $data['anchors'][1]['title'] = __('Horaires', 'woody-theme');
-            $data['anchors'][1]['icon'] = 'wicon-015-horloge';
+            $data['anchors']['openings']['url'] = $sheet_url . '#openings';
+            $data['anchors']['openings']['title'] = __('Horaires', 'woody-theme');
+            $data['anchors']['openings']['icon'] = 'wicon-015-horloge';
         }
         if (in_array('map', $display_options)) {
             // TODO : vérifier que la fiche a une carte
-            $data['anchors'][2]['url'] = $sheet_url . '#map';
-            $data['anchors'][2]['title'] = __('Carte', 'woody-theme');
-            $data['anchors'][2]['icon'] = 'wicon-022-itineraire';
+            $data['anchors']['map']['url'] = $sheet_url . '#map';
+            $data['anchors']['map']['title'] = __('Carte', 'woody-theme');
+            $data['anchors']['map']['icon'] = 'wicon-022-itineraire';
         }
-        if (in_array('reviews', $display_options)) {
-            $data['anchors'][3]['url'] = $sheet_url . '#reviews';
-            $data['anchors'][3]['title'] = __('Avis', 'woody-theme');
-            $data['anchors'][3]['icon'] = 'wicon-012-smiley-bien';
+        if (in_array('reviews', $display_options) && !empty($sheet['reviews'])) {
+            $data['anchors']['reviews']['url'] = $sheet_url . '#reviews';
+            $data['anchors']['reviews']['title'] = __('Avis', 'woody-theme');
+            $data['anchors']['reviews']['icon'] = 'wicon-012-smiley-bien';
         }
         if (in_array('contact', $display_options)) {
-            $data['anchors'][4]['url'] = $sheet_url;
-            $data['anchors'][4]['title'] = __('Poser une question', 'woody-theme');
-            $data['anchors'][4]['icon'] = 'wicon-016-bulle';
+            $data['anchors']['contact']['url'] = $sheet_url;
+            $data['anchors']['contact']['title'] = __('Poser une question', 'woody-theme');
+            $data['anchors']['contact']['icon'] = 'wicon-016-bulle';
         }
 
-        while (count($data['imgs']) + count($data['anchors']) > 8) {
-            array_splice($data['imgs'], -1, 1);
+        // Shuffle anchors positions
+        if (!empty($data['anchors'])) {
+            $data['anchors'] = array_values($data['anchors']);
+            shuffle($data['anchors']);
+        }
+
+        //  Removes image if sum of anchors and images > 8
+        if (!empty($data['imgs']) && $data['anchors']) {
+            while (count($data['imgs']) + count($data['anchors']) > 8) {
+                array_splice($data['imgs'], -1, 1);
+            }
         }
 
         // TODO : Récupérer les infos de réservation de la fiche
-        if ($sheet['booking']['central']) {
+        if ($sheet['booking']) {
             $data['booking']['prefix'] = 'TODO';
             $data['booking']['price'] = 'TODO';
-            $data['booking']['url'] = 'TODO';
+            $data['booking']['link'] = 'TODO';
         }
 
         // Customize Sheet booking
@@ -790,7 +800,7 @@ class WoodyTheme_WoodyGetters
             }
         }
 
-        wd($data['anchors']);
+        wd($data);
         return $data;
     }
 }

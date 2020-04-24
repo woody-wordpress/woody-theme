@@ -106,7 +106,7 @@ class WoodyTheme_WoodyCompilers
         $data['block_titles']['display_options'] = $this->tools->getDisplayOptions($wrapper);
 
         // Display options
-        $data['display_options']['no_padding'] = (!empty($wrapper['sheet_no_padding'])) ? $wrapper['sheet_no_padding'] : '';
+        $data['display_options']['no_padding'] = (!empty($wrapper['sheet_no_padding'])) ? $wrapper['sheet_no_padding'] : 0;
 
         $return = \Timber::compile($twigPaths[$wrapper['woody_tpl']], $data);
         return $return;
