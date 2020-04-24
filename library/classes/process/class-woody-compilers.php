@@ -90,7 +90,7 @@ class WoodyTheme_WoodyCompilers
                 }
             }
 
-            $return = !empty($wrapper['woody_tpl']) ? \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items) : \Timber::compile($twigPaths['blocks-focus-tpl_104'], $the_items) ;
+            $return = !empty($wrapper['woody_tpl']) ? \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items) : \Timber::compile($twigPaths['blocks-focus-tpl_103'], $the_items) ;
         }
 
         return $return;
