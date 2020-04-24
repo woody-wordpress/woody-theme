@@ -128,10 +128,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "choices": {
-                "blocks-quote-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.woody-sandbox.wp.rc-dev.com\/app\/dist\/woody-sandbox\/img\/woody-library\/views\/blocks\/quote\/tpl_01\/thumbnail.png?version=1.20.8\" alt=\"blocks-quote-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Template 01 - Carré<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Template 01 - Carré<\/h4>Citation avec photo à gauche + texte et auteur à droite (auteur aligné à droite)<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-quote-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.woody-sandbox.wp.rc-dev.com\/app\/dist\/woody-sandbox\/img\/woody-library\/views\/blocks\/quote\/tpl_02\/thumbnail.png?version=1.20.8\" alt=\"blocks-quote-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Template 02 - Carré<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Template 02 - Carré<\/h4>Citation avec Texte + Photo + Auteur en colonne<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-            },
+            "choices": {},
             "allow_null": 0,
             "other_choice": 0,
             "save_other_choice": 0,
