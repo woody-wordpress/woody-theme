@@ -273,6 +273,7 @@ class WoodyTheme_WoodyGetters
             return;
         }
 
+
         $data['page_type'] = getTermsSlugs($item->ID, 'page_type', true);
         $data['post_id'] = $item->ID;
 
@@ -304,6 +305,16 @@ class WoodyTheme_WoodyGetters
             }
             if (in_array('length', $wrapper['display_elements'])) {
                 $data['the_length'] = get_field('field_5b95423386e8f', $item->ID);
+            }
+            if (in_array('linked_profil', ['display_elements'])) {
+                $fields_profil = [
+                    'name' => get_field('profil_name', $item->ID),
+                    'img' => get_field('profil_img', $item->ID)
+                ];
+
+                $data['profil']['img'] = $fields_profil['img'];
+                $data['profil']['img']['attachment_more_data'] = $this->tools->getAttachmentMoreData($fields_profil['img']['ID']);
+                $data['profil']['name'] = $fields_profil['name'];
             }
 
             foreach ($wrapper['display_elements'] as $display) {
