@@ -800,7 +800,6 @@ class WoodyTheme_WoodyGetters
             }
         }
 
-        wd($data);
         return $data;
     }
 }
