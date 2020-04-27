@@ -178,10 +178,10 @@
                 "pretitle": "Surtitre",
                 "subtitle": "Sous-titre",
                 "description": "Description",
+                "linked_profil": "Profil lié",
                 "_themes": "Thématique principal(e)<\/small>",
                 "_places": "Lieu principal(e)<\/small>",
-                "_seasons": "Saison principal(e)<\/small>",
-                "linked_profil": "Profil lié,"
+                "_seasons": "Saison principal(e)<\/small>"
             },
             "allow_custom": 0,
             "default_value": [

@@ -28,7 +28,7 @@
         },
         {
             "key": "field_5ea2f9dc7994d",
-            "label": "Prénom",
+            "label": "Nom du profil",
             "name": "profil_name",
             "type": "text",
             "instructions": "",
@@ -63,5 +63,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Profil lié à la page, la metabox s'affiche à droite en BO",
-    "modified": 1587739359
+    "modified": 1587975381
 }
