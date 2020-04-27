@@ -306,7 +306,7 @@ class WoodyTheme_WoodyGetters
             if (in_array('length', $wrapper['display_elements'])) {
                 $data['the_length'] = get_field('field_5b95423386e8f', $item->ID);
             }
-            if (in_array('linked_profil', ['display_elements'])) {
+            if (in_array('linked_profil', $wrapper['display_elements'])) {
                 $fields_profil = [
                     'name' => get_field('profil_name', $item->ID),
                     'img' => get_field('profil_img', $item->ID)
