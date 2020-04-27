@@ -32,6 +32,9 @@ class WoodyTheme_Links
             } elseif (strpos($query['s'], '#lien') !== false) {
                 $query['s'] = str_replace('#lien', '', $query['s']);
                 $query['post_type'] = array('short_link');
+            } elseif (strpos($query['s'], '#topic') !== false) {
+                $query['s'] = str_replace('#topic', '', $query['s']);
+                $query['post_type'] = array('woody_topic');
             }
         }
 
