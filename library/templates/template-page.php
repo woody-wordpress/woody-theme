@@ -119,7 +119,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         if (!empty($page_type[0]) && $page_type[0]->slug == 'front_page') {
             $this->context['is_frontpage'] = true;
             $home_slider = getAcfGroupFields('group_5bb325e8b6b43', $this->context['post']);
-
+            
             $plyr_options = [
                 'muted' => true,
                 'autoplay' => true,
@@ -130,6 +130,15 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             $home_slider['plyr_options'] = json_encode($plyr_options);
 
             if (!empty($home_slider['landswpr_slides'])) {
+                foreach ($home_slider['landswpr_slides'] as $slide_key => $slide) {
+                    // Si on est dans le cas d'une vidéo oEmbed, on récupère la plus grande miniature possible
+                    // Permet d'afficher un poster le temps du chargement de Plyr
+                    if (!empty($slide['landswpr_slide_media']) && $slide['landswpr_slide_media']['landswpr_slide_media_type'] == 'embed' && !empty($slide['landswpr_slide_media']['landswpr_slide_embed'])) {
+                        if (!empty(embedProviderThumbnail($slide['landswpr_slide_media']['landswpr_slide_embed']))) {
+                            $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_embed_thumbnail_url'] = embedProviderThumbnail($slide['landswpr_slide_media']['landswpr_slide_embed']);
+                        }
+                    }
+                }
                 $this->context['home_slider'] = \Timber::compile($this->context['woody_components'][$home_slider['landswpr_woody_tpl']], $home_slider);
             }
 
