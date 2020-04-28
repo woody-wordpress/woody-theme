@@ -1,8 +1,6 @@
 import $ from 'jquery';
 
 var getPlace = function() {
-    page.type = $('body').attr('class').match(/woodypage-[a-z_\-]+/gi) != null ? $('body').attr('class').match(/woodypage-[a-z_\-]+/gi)[0].substr(10) : '';
-
     if (typeof frontendajax != "undefined" && frontendajax != null) {
         $.ajax({
             type: 'POST',
