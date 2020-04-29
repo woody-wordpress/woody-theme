@@ -573,8 +573,7 @@ class WoodyTheme_WoodyGetters
         $data = [];
         $data['post_id'] = $item->ID;
         $data['title'] = !empty($item->post_title) ? $item->post_title : '';
-        $data['pretitle'] = !empty($item->woody_topic_blogname) ? $item->woody_topic_blogname : '';
-        // $data['subtitle'] = !empty($item->woody_topic_blogname) ? $item->woody_topic_blogname : '';
+        $data['subtitle'] = !empty($item->woody_topic_blogname) ? $item->woody_topic_blogname : '';
 
         if (!empty($item->woody_topic_img) && !$item->woody_topic_attachment) {
             $img = [
