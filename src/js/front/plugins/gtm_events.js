@@ -1,27 +1,5 @@
 import $ from 'jquery';
 
-var getPlace = function() {
-    if (typeof frontendajax != "undefined" && frontendajax != null) {
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            url: frontendajax.ajaxurl,
-            data: {
-                action: 'get_current_place',
-                post_id: globals.post_id
-            },
-            success: function(response) {
-                if (response.length > 0) {
-                    page.tags.places.push(response[0]);
-                }
-            },
-            error: function(err) {
-                console.error(err);
-            }
-        });
-    }
-}
-
 window.dataLayer = window.dataLayer || [];
 var eventCategory = 'PAGE|' + globals.post_title.trim() + '|' + globals.post_id,
 eventPrefix = 'woody_',
@@ -31,25 +9,19 @@ page = {
     lang: window.siteConfig.current_lang,
     season: window.siteConfig.current_season,
     page_type: globals.page_type,
-    tags: {
-        "places": [],
-        "themes": [],
-        "seasons": []
-    }
+    tags: globals.tags
 };
 
-$.when(getPlace()).then( function() {
-    window.dataLayer.push({
-        "event": eventPrefix +'page_view',
-        "data": {
-            "ga": {
-                "category": eventCategory,
-                "action": 'Page vue',
-                "label": globals.post_title.trim() + '|' + globals.post_id,
-            },
-            "page": page
-        }
-    });
+window.dataLayer.push({
+    "event": eventPrefix +'page_view',
+    "data": {
+        "ga": {
+            "category": eventCategory,
+            "action": 'Page vue',
+            "label": globals.post_title.trim() + '|' + globals.post_id,
+        },
+        "page": page
+    }
 });
 
 if ($('.sharing-links').length) {
