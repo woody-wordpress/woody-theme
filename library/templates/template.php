@@ -59,8 +59,27 @@ abstract class WoodyTheme_TemplateAbstract
         $data['globals']['page_type'] = $this->context['page_type'];
         $data['globals']['sheet_id'] = $this->context['sheet_id'];
         $data['globals']['woody_options_pages'] = $this->getWoodyOptionsPagesValues();
+        $data['globals']['tags'] = $this->getTags($data['globals']['post_id']);
 
         return $data;
+    }
+
+    public function getTags($post_id)
+    {
+        $return = [];
+        $taxonomies = ['places', 'seasons', 'themes'];
+
+        foreach ($taxonomies as $taxonomy) {
+            $return[$taxonomy] = [];
+            $terms = get_the_terms($post_id, $taxonomy);
+            if ($terms != false && !is_wp_error($terms)) {
+                foreach ($terms as $term) {
+                    $return[$taxonomy][] = $term->name;
+                }
+            }
+        }
+
+        return $return;
     }
 
     public function getWoodyOptionsPagesValues()

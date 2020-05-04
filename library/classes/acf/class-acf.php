@@ -874,6 +874,11 @@ class WoodyTheme_ACF
                 'blocks-feature-tpl_01',
                 'blocks-feature-tpl_02',
                 'blocks-feature-tpl_03',
+            ],
+            'quote' => [
+                'blocks-quote-tpl_02',
+                'blocks-quote-tpl_01',
+                'blocks-quote-tpl_03',
             ]
         ];
 
