@@ -273,7 +273,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     unset($page_teaser['breadcrumb']);
                 }
 
-                if (!empty($page_teaser['page_teaser_img'])) {
+                if (!empty($page_teaser['page_teaser_img']) && is_array($page_teaser['page_teaser_img'])) {
                     $page_teaser['page_teaser_img']['attachment_more_data'] = (!empty($page_teaser['page_teaser_img']['ID'])) ? $this->tools->getAttachmentMoreData($page_teaser['page_teaser_img']['ID']) : [];
                 }
 
