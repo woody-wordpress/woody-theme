@@ -119,7 +119,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         if (!empty($page_type[0]) && $page_type[0]->slug == 'front_page') {
             $this->context['is_frontpage'] = true;
             $home_slider = getAcfGroupFields('group_5bb325e8b6b43', $this->context['post']);
-            
+
             $plyr_options = [
                 'muted' => true,
                 'autoplay' => true,
