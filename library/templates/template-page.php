@@ -78,7 +78,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     $post_id = explode('_', $post_id);
                     $post_id = end($post_id);
                     $post = get_post($post_id);
-                    if ($post->post_type == 'touristic_sheet') {
+                    if (!empty($post->post_type) && $post->post_type == 'touristic_sheet') {
                         $suggestions[] = getTouristicSheetPreview(['display_elements' => ['sheet_town', 'sheet_type', 'description', 'bookable'], 'display_img' => true], $post);
                     } else {
                         $suggestions[] = getPagePreview(['display_elements' => ['description'], 'display_button' => true, 'display_img' => true], $post);
