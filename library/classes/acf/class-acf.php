@@ -185,7 +185,7 @@ class WoodyTheme_ACF
 
     public function pllGalleryLoadField($value, $post_id, $field)
     {
-        if (!empty($value)) {
+        if (!empty($value) && is_array($value)) {
             foreach ($value as $id_key => $id) {
                 $value[$id_key] = pll_get_post($id);
             }
@@ -199,7 +199,7 @@ class WoodyTheme_ACF
     public function acfGoogleMapKey($api)
     {
         $keys = (!empty(WOODY_ACF_GOOGLE_MAPS_KEY)) ? WOODY_ACF_GOOGLE_MAPS_KEY : WOODY_GOOGLE_MAPS_API_KEY;
-        if (is_array($keys) && !empty($keys)) {
+        if (!empty($keys) && is_array($keys)) {
             $rand_keys = array_rand($keys, 1);
             $api['key'] = $keys[$rand_keys];
             return $api;
@@ -374,7 +374,7 @@ class WoodyTheme_ACF
     public function termsLoadValue($value, $post_id, $field)
     {
         $lang = $this->getCurrentLang();
-        if (is_array($value) && function_exists('pll_get_term')) {
+        if (!empty($value) && is_array($value) && function_exists('pll_get_term')) {
             foreach ($value as $key => $term_id) {
                 $value[$key] = pll_get_term($term_id, $lang);
             }
