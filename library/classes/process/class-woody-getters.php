@@ -329,6 +329,9 @@ class WoodyTheme_WoodyGetters
                 $video = $this->tools->getFieldAndFallback($item, 'field_5b0e5df0d4b1c', $item);
                 $data['img'] = !empty($video) ? $video['movie_poster_file'] : '';
             }
+            if (!empty($data['img'])) {
+                $data['img']['attachment_more_data'] = $this->tools->getAttachmentMoreData($data['img']['ID']);
+            }
         }
 
         $data['location'] = [];
@@ -336,7 +339,7 @@ class WoodyTheme_WoodyGetters
         $lng = get_field('post_longitude', $item->ID);
         $data['location']['lat'] = (!empty($lat)) ? str_replace(',', '.', $lat) : '';
         $data['location']['lng'] = (!empty($lng)) ? str_replace(',', '.', $lng) : '';
-        $data['img']['attachment_more_data'] = (!empty($data['img'])) ? $this->tools->getAttachmentMoreData($data['img']['ID']) : '';
+
         if ($clickable) {
             $data['link']['url'] = get_permalink($item->ID);
         }
