@@ -211,7 +211,7 @@ class WoodyTheme_WoodyGetters
 
         $time = !empty($wrapper['publish_date']) ? strtotime($wrapper['publish_date']) : 0;
         $args = [
-            'posts_per_page' => -1,
+            'posts_per_page' => !empty($wrapper['focused_count']) ? intval(current($wrapper['focused_count'])) : 9,
             'post_status' => 'publish',
             'post_type' => 'woody_topic',
             'meta_query' => array(
