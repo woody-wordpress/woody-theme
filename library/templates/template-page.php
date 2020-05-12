@@ -378,7 +378,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $this->context['page_terms'] = implode(' ', getPageTerms($this->context['post_id']));
         $this->context['default_marker'] = file_get_contents($this->context['dist_dir'] . '/img/default-marker.svg');
         $this->context['hide_page_zones'] = get_field('hide_page_zones');
-        $this->context['is_pocketsite'] = apply_filters('is_pocketsite', false, $this->context['post_id']);
+        $this->context['is_pocketsite'] = !empty($this->context['mirror_id']) ? apply_filters('is_pocketsite', false, $this->context['mirror_id']) : apply_filters('is_pocketsite', false, $this->context['post_id']);
 
         if ($this->context['is_pocketsite']) {
             if (empty($this->context['hide_page_zones'])) {
