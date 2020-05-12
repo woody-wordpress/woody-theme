@@ -384,7 +384,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             if (empty($this->context['hide_page_zones'])) {
                 $this->context['hide_page_zones'] = ['header', 'footer', 'breadcrumb'];
             }
-            $this->context['pocketsite_menu'] = apply_filters('pocketsite_menu', '', $this->context['post_id']);
+            $id = !empty($this->context['mirror_id']) ? $this->context['mirror_id'] : $this->context['post_id'];
+            $this->context['pocketsite_menu'] = apply_filters('pocketsite_menu', '', $id);
         }
 
         if (is_array($this->context['hide_page_zones'])) {
