@@ -562,6 +562,8 @@ class WoodyTheme_WoodyGetters
 
         $data['sheet_id'] = get_field('touristic_sheet_id', $item->ID);
 
+        $data = apply_filters('woody_custom_sheetPreview', $data, $wrapper);
+
         return $data;
     }
 
