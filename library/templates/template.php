@@ -147,6 +147,7 @@ abstract class WoodyTheme_TemplateAbstract
 
         $mirror_page = getAcfGroupFields('group_5c6432b3c0c45');
         if ($is_mirror_page === true && !empty($mirror_page['mirror_page_reference'])) {
+            $this->context['mirror_id'] = get_the_ID();
             $this->context['post_id'] = $mirror_page['mirror_page_reference'];
             $this->context['post'] = get_post($this->context['post_id']);
             $this->context['post_title'] = get_the_title();

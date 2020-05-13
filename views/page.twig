@@ -5,6 +5,10 @@
             {{ site.title|default }}</h1>
     {% endif %}
     <main class="content-type-page {{ page_type|default }}" id="main-content">
+
+        {% if is_pocketsite %}
+            {{pocketsite_menu}}
+        {% endif %}
         <div class="content-wrapper {{ page_terms|default('no-terms') }}">
             <div class="mobile-header hide-for-xlarge title-bar">
                 <span class="brand-logo obf" data-obf="{{ site.url|base64Encode }}">
@@ -85,4 +89,8 @@
             {% endif %}
         </div>
     </main>
+    {% if is_pocketsite %}
+        </div>
+        </div>
+    {% endif %}
 {% endblock %}

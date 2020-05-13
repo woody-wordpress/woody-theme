@@ -96,6 +96,7 @@
                     },
                     "choices": {
                         "euro": "€",
+                        "xpf": "XPF",
                         "us_dollar": "$ <small><i>(USD)<\/i><\/small>",
                         "au_dollar": "$ <small><i>(AUD)<\/i><\/small>",
                         "pound": "£"
