@@ -633,7 +633,7 @@ class WoodyTheme_ACF
         // On permet de rechercher les posts dans la langue par défaut
         $display_default_lang_title = apply_filters('woody_get_field_option', 'display_default_lang_title');
         if ($display_default_lang_title) {
-            $page_lang = apply_filters('woody_pll_get_post_language', $page->ID);
+            $page_lang = apply_filters('woody_pll_get_post_language', $post_id);
             $default_lang = apply_filters('woody_pll_default_lang_code', null);
             // Si l'on est pas sur langue par défaut du site
             if ($page_lang !== $default_lang) {
