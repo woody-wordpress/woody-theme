@@ -86,6 +86,10 @@ class WoodyTheme_WoodyProcessTools
         $data['icon_img'] = (!empty($wrapper['icon_img'])) ? $wrapper['icon_img'] : '';
         $data['woody_icon'] = (!empty($wrapper['woody_icon'])) ? $wrapper['woody_icon'] : '';
         $data['description'] = (!empty($wrapper['description'])) ? $wrapper['description'] : '';
+        $data['fullwidth'] = (!empty($wrapper['focus_block_title_fullwidth'])) ? 'fullwidth' : false;
+        if (!empty($wrapper['focus_buttons']) && !empty($wrapper['focus_buttons']['links'])) {
+            $data['focus_buttons'] = $wrapper['focus_buttons'];
+        }
 
         return $data;
     }
