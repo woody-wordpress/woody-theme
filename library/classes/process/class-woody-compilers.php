@@ -96,12 +96,22 @@ class WoodyTheme_WoodyCompilers
         return $return;
     }
 
-    /**
-     * Create pagination if needed
-     * @param   layout - Tableau des données du champ acf
-     * @param   twigPaths - Liste des templates woody sous forme de tableau
-     * @return  return - Code html
-     */
+    public function formatMinisheetData($wrapper, $twigPaths)
+    {
+        // Sheet item
+        $data = $this->getter->getManualFocusMinisheetData($wrapper);
+
+        // Block titles
+        $data['block_titles'] = $this->tools->getFocusBlockTitles($wrapper);
+        $data['block_titles']['display_options'] = $this->tools->getDisplayOptions($wrapper);
+
+        // Display options
+        $data['display_options']['no_padding'] = (!empty($wrapper['sheet_no_padding'])) ? $wrapper['sheet_no_padding'] : 0;
+
+        $return = \Timber::compile($twigPaths[$wrapper['woody_tpl']], $data);
+        return $return;
+    }
+
     public function formatGeomapData($wrapper, $twigPaths)
     {
         $return = '';

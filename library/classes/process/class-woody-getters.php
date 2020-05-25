@@ -125,7 +125,7 @@ class WoodyTheme_WoodyGetters
      *
      * Nom : getAutoFocusSheetData
      * Auteur : Benoit Bouchaud
-     * Return : Retourne un tableau de données relatives aux foches SIT
+     * Return : Retourne un tableau de données relatives aux fiches SIT
      * @param    wrapper Données du layout acf sous forme de tableau
      * @return   items - Un tableau de données
      *
@@ -434,7 +434,6 @@ class WoodyTheme_WoodyGetters
      * @return   data - Un tableau de données
      *
      */
-
     public function getTouristicSheetPreview($wrapper = null, $item, $deal_index = 0)
     {
         if (!is_object($item) || empty($item)) {
@@ -442,26 +441,29 @@ class WoodyTheme_WoodyGetters
         }
 
         $data = [];
-        $lang = pll_current_language();
-        $languages = apply_filters('woody_pll_the_languages', 'auto');
-        //for season
-        foreach ($languages as $language) {
-            $code_lang = $lang;
-            if ($language['current_lang']) {
-                $code_lang = substr($language['locale'], 0, 2);
-            }
-        }
 
-        $raw_item = get_field('touristic_raw_item', $item->ID);
-        if (!empty($raw_item)) {
-            $sheet = json_decode(base64_decode($raw_item), true);
-        } else {
-            $sheet_id = get_field('touristic_sheet_id', $item->ID);
-            $items = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $lang, array(), 'json', 'item');
-            if (!empty($items['items']) && is_array($items['items'])) {
-                $sheet = current($items['items']);
-            }
-        }
+        $sheet = $this->tools->getTouristicSheetData($item);
+
+        // $lang = pll_current_language();
+        // $languages = apply_filters('woody_pll_the_languages', 'auto');
+        // //for season
+        // foreach ($languages as $language) {
+        //     $code_lang = $lang;
+        //     if ($language['current_lang']) {
+        //         $code_lang = substr($language['locale'], 0, 2);
+        //     }
+        // }
+
+        // $raw_item = get_field('touristic_raw_item', $item->ID);
+        // if (!empty($raw_item)) {
+        //     $sheet = json_decode(base64_decode($raw_item), true);
+        // } else {
+        //     $sheet_id = get_field('touristic_sheet_id', $item->ID);
+        //     $items = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $lang, array(), 'json', 'item');
+        //     if (!empty($items['items']) && is_array($items['items'])) {
+        //         $sheet = current($items['items']);
+        //     }
+        // }
 
         $data = [
             'title' => (!empty($sheet['title'])) ? $sheet['title'] : '',
@@ -483,7 +485,7 @@ class WoodyTheme_WoodyGetters
                 $data['title'] = $sheet['deals']['list'][$deal_index]['nom'][$code_lang];
             }
         }
-        if (is_array($wrapper['display_elements'])) {
+        if (!empty($wrapper['display_elements']) && is_array($wrapper['display_elements'])) {
             if (in_array('sheet_type', $wrapper['display_elements'])) {
                 $data['sheet_type'] = (!empty($sheet['type'])) ? $sheet['type'] : '';
                 if (!empty($wrapper['deal_mode'])) {
@@ -500,6 +502,12 @@ class WoodyTheme_WoodyGetters
                     }
                 }
             }
+
+            if (in_array('sheet_itinerary', $wrapper['display_elements'])) {
+                $data['sheet_itinerary']['locomotions'] = (!empty($sheet['locomotions'])) ? $sheet['locomotions'] : '';
+                $data['sheet_itinerary']['length'] = (!empty($sheet['itineraryLength'])) ? $sheet['itineraryLength']['value'] . $sheet['itineraryLength']['unit'] : '';
+            }
+
             if (in_array('sheet_town', $wrapper['display_elements'])) {
                 $data['sheet_town'] = (!empty($sheet['town'])) ? $sheet['town'] : '';
             }
@@ -532,10 +540,6 @@ class WoodyTheme_WoodyGetters
             }
         }
 
-        $data['location'] = [];
-        $data['location']['lat'] = (!empty($sheet['gps'])) ? $sheet['gps']['latitude'] : '';
-        $data['location']['lng'] = (!empty($sheet['gps'])) ? $sheet['gps']['longitude'] : '';
-
         if (!empty($sheet['bordereau'])) {
             if ($sheet['bordereau'] === 'HOT' or $sheet['bordereau'] == 'HPA') {
                 $rating = [];
@@ -550,6 +554,10 @@ class WoodyTheme_WoodyGetters
             }
         }
 
+        $data['location'] = [];
+        $data['location']['lat'] = (!empty($sheet['gps'])) ? $sheet['gps']['latitude'] : '';
+        $data['location']['lng'] = (!empty($sheet['gps'])) ? $sheet['gps']['longitude'] : '';
+
         // Parcourir tout le tableau de dates et afficher la 1ère date non passée
         if (!empty($sheet['dates'])) {
             $today = time();
@@ -559,15 +567,6 @@ class WoodyTheme_WoodyGetters
                     $data['date'] = $date;
                     break 1 ;
                 }
-            }
-        }
-
-        // $data['date'] = (!empty($sheet['dates'])) ? $sheet['dates'][0] : '';
-
-        if (is_array($wrapper['display_elements'])) {
-            if (in_array('sheet_itinerary', $wrapper['display_elements'])) {
-                $data['sheet_itinerary']['locomotions'] = (!empty($sheet['locomotions'])) ? $sheet['locomotions'] : '';
-                $data['sheet_itinerary']['length'] = (!empty($sheet['itineraryLength'])) ? $sheet['itineraryLength']['value'] . $sheet['itineraryLength']['unit'] : '';
             }
         }
 
@@ -722,5 +721,100 @@ class WoodyTheme_WoodyGetters
             $return['display']['classes'] = implode(' ', $return['display']['classes']);
         }
         return $return;
+    }
+
+    /**
+     *
+     * Nom : getManualFocusMiniSheetData
+     * Auteur : Thomas Navarro
+     * Return : Retourne un tableau de données compatible au format des mini-fiches
+     * @param    wrapper array - Tableau de données du layout ACF
+     * @return   data - array - Un tableau de données
+     *
+     */
+    public function getManualFocusMiniSheetData($wrapper)
+    {
+        $data = [];
+        $post = $wrapper['sheet_selection'];
+        $sheet = $this->tools->getTouristicSheetData($post);
+        $sheet_url = apply_filters('woody_get_permalink', $post->ID);
+
+        $data['title'] = !empty($sheet['title']) ? $sheet['title'] : '';
+        $data['link']['url'] = $sheet_url;
+        $data['link']['target'] = !empty($sheet['targetBlank']) ? '_blank' : '';
+
+        // Display Imgs
+        if ($wrapper['display_img'] && !empty($sheet['allImgs'])) {
+            foreach ($sheet['allImgs'] as $key => $img) {
+                $data['imgs'][$key] = [
+                    'resizer' => true,
+                    'url' => $img['manual'],
+                    'alt' => 'TODO',
+                    'title' => 'TODO'
+                ];
+            }
+        }
+
+        // Display options
+        $display_options = $wrapper['sheet_display'];
+        if (in_array('detail', $display_options)) {
+            // TODO : vérifier que la fiche propose des prestations
+            $data['anchors']['detail']['url'] = $sheet_url . '#establishment-detail';
+            $data['anchors']['detail']['title'] = __('Informations prestataire', 'woody-theme');
+            $data['anchors']['detail']['icon'] = 'wicon-028-plus-02';
+        }
+        if (in_array('openings', $display_options)) {
+            // TODO : vérifier que la fiche a des horaires d'ouvertures
+            $data['anchors']['openings']['url'] = $sheet_url . '#openings';
+            $data['anchors']['openings']['title'] = __('Horaires', 'woody-theme');
+            $data['anchors']['openings']['icon'] = 'wicon-015-horloge';
+        }
+        if (in_array('map', $display_options)) {
+            // TODO : vérifier que la fiche a une carte
+            $data['anchors']['map']['url'] = $sheet_url . '#map';
+            $data['anchors']['map']['title'] = __('Carte', 'woody-theme');
+            $data['anchors']['map']['icon'] = 'wicon-022-itineraire';
+        }
+        if (in_array('reviews', $display_options) && !empty($sheet['reviews'])) {
+            $data['anchors']['reviews']['url'] = $sheet_url . '#reviews';
+            $data['anchors']['reviews']['title'] = __('Avis', 'woody-theme');
+            $data['anchors']['reviews']['icon'] = 'wicon-012-smiley-bien';
+        }
+        if (in_array('contact', $display_options)) {
+            $data['anchors']['contact']['url'] = $sheet_url;
+            $data['anchors']['contact']['title'] = __('Poser une question', 'woody-theme');
+            $data['anchors']['contact']['icon'] = 'wicon-016-bulle';
+        }
+
+        // Shuffle anchors positions
+        if (!empty($data['anchors'])) {
+            $data['anchors'] = array_values($data['anchors']);
+            shuffle($data['anchors']);
+        }
+
+        //  Removes image if sum of anchors and images > 8
+        if (!empty($data['imgs']) && $data['anchors']) {
+            while (count($data['imgs']) + count($data['anchors']) > 8) {
+                array_splice($data['imgs'], -1, 1);
+            }
+        }
+
+        // TODO : Récupérer les infos de réservation de la fiche
+        if ($sheet['booking']) {
+            $data['booking']['prefix'] = 'TODO';
+            $data['booking']['price'] = 'TODO';
+            $data['booking']['link'] = 'TODO';
+        }
+
+        // Customize Sheet booking
+        if ($wrapper['customize_sheet_booking']) {
+            $booking_options = $wrapper['custom_sheet_booking'];
+
+            foreach ($booking_options as $option) {
+                $data['booking'][$option] = !empty($wrapper['custom_' . $option]) ? $wrapper['custom_' . $option] : '';
+            }
+        }
+
+        return $data;
     }
 }
