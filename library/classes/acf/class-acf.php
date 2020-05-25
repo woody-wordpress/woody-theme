@@ -633,7 +633,7 @@ class WoodyTheme_ACF
         // On permet de rechercher les posts dans la langue par défaut
         $display_default_lang_title = apply_filters('woody_get_field_option', 'display_default_lang_title');
         if ($display_default_lang_title) {
-            $page_lang = apply_filters('woody_pll_get_post_language', $page->ID);
+            $page_lang = apply_filters('woody_pll_get_post_language', $post_id);
             $default_lang = apply_filters('woody_pll_default_lang_code', null);
             // Si l'on est pas sur langue par défaut du site
             if ($page_lang !== $default_lang) {
@@ -729,6 +729,7 @@ class WoodyTheme_ACF
                 'blocks-focus-tpl_109',
                 'blocks-focus-tpl_119',
                 'blocks-focus-tpl_120',
+                'blocks-focus-tpl_123',
                 'blocks-focus-tpl_114',
                 'blocks-focus-tpl_116',
                 'blocks-focus-tpl_121',
@@ -791,11 +792,13 @@ class WoodyTheme_ACF
                 'blocks-focus-tpl_505',
                 'blocks-focus-tpl_506',
                 'blocks-focus-tpl_507',
+                'blocks-focus-tpl_508',
                 'blocks-focus-tpl_601',
                 'blocks-focus-tpl_602',
                 'blocks-focus-tpl_603',
                 'blocks-focus-tpl_604',
                 'blocks-focus-tpl_701',
+                'blocks-focus-tpl_801',
                 'blocks-focus-tpl_1001',
                 'blocks-focus-tpl_202',
                 'blocks-focus-tpl_318',

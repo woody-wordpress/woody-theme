@@ -526,6 +526,7 @@
                 "sheet_rating": "Note <small>(fiche uniquement)<\/small>",
                 "sheet_itinerary": "Itinéraire <small>(fiche uniquement)<\/small>",
                 "bookable": "Réservable <small>(fiche uniquement)<\/small>",
+                "linked_profil": "Profil lié",
                 "_themes": "Thématique principal(e)<\/small>",
                 "_places": "Lieu principal(e)<\/small>",
                 "_seasons": "Saison principal(e)<\/small>"
@@ -641,6 +642,27 @@
             "prefix_name": 0
         },
         {
+            "key": "field_5ec3fda03bfa6",
+            "label": "Bouton(s) supplémentaire(s)",
+            "name": "focus_buttons",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5b043614df4a6"
+            ],
+            "display": "group",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
+        },
+        {
             "key": "field_5e67bdc4e5d54",
             "label": "Options avancées",
             "name": "",
@@ -677,6 +699,25 @@
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0
+        },
+        {
+            "key": "field_5ec3b31349c98",
+            "label": "Afficher le titre en pleine largeur",
+            "name": "focus_block_title_fullwidth",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         {
             "key": "field_5e67c1b2f200a",
@@ -877,5 +918,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1583858136
+    "modified": 1589902860
 }
