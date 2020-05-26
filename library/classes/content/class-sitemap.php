@@ -108,7 +108,7 @@ class WoodyTheme_SiteMap
                     if (!empty($query->posts)) {
                         foreach ($query->posts as $post) {
                             $index = get_post_meta($post->ID, 'woodyseo_index', true);
-                            if ($index == true) {
+                            if ($index == true || ($post->post_type == 'touristic_sheet')) {
                                 $sitemap[] = [
                                     'loc' => get_permalink($post),
                                     'lastmod' => get_the_modified_date('c', $post),
