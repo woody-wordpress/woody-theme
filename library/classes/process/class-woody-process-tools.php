@@ -360,7 +360,7 @@ class WoodyTheme_WoodyProcessTools
         return $return;
     }
 
-        /**
+    /**
      *
      * Nom : getTouristicSheetData
      * Auteur : Thomas Navarro
@@ -369,7 +369,7 @@ class WoodyTheme_WoodyProcessTools
      * @return   data - array|false
      *
      */
-    public function getTouristicSheetData($post)
+    public function getTouristicSheetData($post, $current_lang)
     {
         $post = get_post($post);
         if (!$post && $post->post_type !== 'touristic_sheet') {
@@ -382,16 +382,6 @@ class WoodyTheme_WoodyProcessTools
         if (empty($raw_item)) {
             $sheet = json_decode(base64_decode($raw_item), true);
         } else {
-            $current_lang = pll_current_language();
-            $languages = apply_filters('woody_pll_the_languages', 'auto');
-
-            // Seasons
-            foreach ($languages as $language) {
-                if ($language['current_lang']) {
-                    $current_lang = substr($language['locale'], 0, 2);
-                }
-            }
-
             $sheet_id = get_field('touristic_sheet_id', $post->ID);
             $items = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $current_lang, array(), 'json', 'item');
 
