@@ -446,7 +446,7 @@ class WoodyTheme_WoodyGetters
         }
 
         $data = [];
-
+        $lang = pll_current_language();
         $sheet = $this->tools->getTouristicSheetData($item);
 
         $data = [
