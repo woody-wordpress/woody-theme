@@ -445,9 +445,18 @@ class WoodyTheme_WoodyGetters
             return;
         }
 
-        $data = [];
+        $current_lang = pll_current_language();
+        $languages = apply_filters('woody_pll_the_languages', 'auto');
 
-        $sheet = $this->tools->getTouristicSheetData($item);
+        // Seasons
+        foreach ($languages as $language) {
+            if ($language['current_lang']) {
+                $current_lang = substr($language['locale'], 0, 2);
+            }
+        }
+
+        $data = [];
+        $sheet = $this->tools->getTouristicSheetData($item, $current_lang);
 
         $data = [
             'title' => (!empty($sheet['title'])) ? $sheet['title'] : '',
@@ -466,7 +475,7 @@ class WoodyTheme_WoodyGetters
         }
         if (!empty($wrapper['deal_mode'])) {
             if (!empty($sheet['deals'])) {
-                $data['title'] = $sheet['deals']['list'][$deal_index]['nom'][$code_lang];
+                $data['title'] = $sheet['deals']['list'][$deal_index]['nom'][$current_lang];
             }
         }
         if (!empty($wrapper['display_elements']) && is_array($wrapper['display_elements'])) {
@@ -481,8 +490,8 @@ class WoodyTheme_WoodyGetters
             if (in_array('description', $wrapper['display_elements'])) {
                 $data['description'] = (!empty($sheet['desc'])) ? $sheet['desc'] : '';
                 if (!empty($wrapper['deal_mode'])) {
-                    if (!empty($sheet['deals']['list'][$deal_index]['description'][$lang])) {
-                        $data['description'] = $sheet['deals']['list'][$deal_index]['description'][$lang];
+                    if (!empty($sheet['deals']['list'][$deal_index]['description'][$current_lang])) {
+                        $data['description'] = $sheet['deals']['list'][$deal_index]['description'][$current_lang];
                     }
                 }
             }
@@ -720,7 +729,8 @@ class WoodyTheme_WoodyGetters
     {
         $data = [];
         $post = $wrapper['sheet_selection'];
-        $sheet = $this->tools->getTouristicSheetData($post);
+        $current_lang = pll_current_language();
+        $sheet = $this->tools->getTouristicSheetData($post, $current_lang);
         $sheet_url = apply_filters('woody_get_permalink', $post->ID);
 
         $data['title'] = !empty($sheet['title']) ? $sheet['title'] : '';
@@ -733,8 +743,8 @@ class WoodyTheme_WoodyGetters
                 $data['imgs'][$key] = [
                     'resizer' => true,
                     'url' => $img['manual'],
-                    'alt' => 'TODO',
-                    'title' => 'TODO'
+                    'alt' => '',
+                    'title' => ''
                 ];
             }
         }
