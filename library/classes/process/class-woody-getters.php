@@ -312,9 +312,14 @@ class WoodyTheme_WoodyGetters
                     'img' => get_field('profil_img', $item->ID)
                 ];
 
-                $data['profil']['img'] = $fields_profil['img'];
-                $data['profil']['img']['attachment_more_data'] = $this->tools->getAttachmentMoreData($fields_profil['img']['ID']);
-                $data['profil']['name'] = $fields_profil['name'];
+                if ($fields_profil['img']) {
+                    $data['profil']['img'] = $fields_profil['img'];
+                    $data['profil']['img']['attachment_more_data'] = $this->tools->getAttachmentMoreData($fields_profil['img']['ID']);
+                }
+
+                if ($fields_profil['name']) {
+                    $data['profil']['name'] = $fields_profil['name'];
+                }
             }
 
             foreach ($wrapper['display_elements'] as $display) {
@@ -443,27 +448,6 @@ class WoodyTheme_WoodyGetters
         $data = [];
 
         $sheet = $this->tools->getTouristicSheetData($item);
-
-        // $lang = pll_current_language();
-        // $languages = apply_filters('woody_pll_the_languages', 'auto');
-        // //for season
-        // foreach ($languages as $language) {
-        //     $code_lang = $lang;
-        //     if ($language['current_lang']) {
-        //         $code_lang = substr($language['locale'], 0, 2);
-        //     }
-        // }
-
-        // $raw_item = get_field('touristic_raw_item', $item->ID);
-        // if (!empty($raw_item)) {
-        //     $sheet = json_decode(base64_decode($raw_item), true);
-        // } else {
-        //     $sheet_id = get_field('touristic_sheet_id', $item->ID);
-        //     $items = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $lang, array(), 'json', 'item');
-        //     if (!empty($items['items']) && is_array($items['items'])) {
-        //         $sheet = current($items['items']);
-        //     }
-        // }
 
         $data = [
             'title' => (!empty($sheet['title'])) ? $sheet['title'] : '',
@@ -800,7 +784,7 @@ class WoodyTheme_WoodyGetters
         }
 
         // TODO : Récupérer les infos de réservation de la fiche
-        if ($sheet['booking']) {
+        if ($sheet['booking']['central']) {
             $data['booking']['prefix'] = 'TODO';
             $data['booking']['price'] = 'TODO';
             $data['booking']['link'] = 'TODO';
