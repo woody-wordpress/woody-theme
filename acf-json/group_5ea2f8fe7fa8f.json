@@ -1,8 +1,7 @@
 {
     "key": "group_5ea2f8fe7fa8f",
-    "title": "Personnaliser : profil lié",
-    "fields": [
-        {
+    "title": "Profil lié",
+    "fields": [{
             "key": "field_5ea2f9ae7994c",
             "label": "Photo",
             "name": "profil_img",
@@ -47,13 +46,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "page"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "page"
+        }]
     ],
     "menu_order": -1,
     "position": "side",

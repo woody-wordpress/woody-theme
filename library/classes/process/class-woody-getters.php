@@ -312,9 +312,14 @@ class WoodyTheme_WoodyGetters
                     'img' => get_field('profil_img', $item->ID)
                 ];
 
-                $data['profil']['img'] = $fields_profil['img'];
-                $data['profil']['img']['attachment_more_data'] = $this->tools->getAttachmentMoreData($fields_profil['img']['ID']);
-                $data['profil']['name'] = $fields_profil['name'];
+                if ($fields_profil['img']) {
+                    $data['profil']['img'] = $fields_profil['img'];
+                    $data['profil']['img']['attachment_more_data'] = $this->tools->getAttachmentMoreData($fields_profil['img']['ID']);
+                }
+
+                if ($fields_profil['name']) {
+                    $data['profil']['name'] = $fields_profil['name'];
+                }
             }
 
             foreach ($wrapper['display_elements'] as $display) {
