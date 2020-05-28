@@ -29,6 +29,12 @@ class WoodyTheme_Enqueue_Assets
         global $post;
         $pageType = (!empty($post) && !empty($post->ID)) ? getTermsSlugs($post->ID, 'page_type') : [];
 
+        // If page miroir, get page type of the referenced post
+        if (in_array("mirror_page", $pageType)) {
+            $mirror = get_field('mirror_page_reference', $post->ID);
+            $pageType = (!empty($mirror)) ? getTermsSlugs($mirror, 'page_type') : [];
+        }
+
         $this->isRoadBookPlaylist = apply_filters('is_road_book_playlist', false, $post);
         $this->isTouristicPlaylist = in_array('playlist_tourism', $pageType);
         $this->isTouristicSheet = !empty($post) && $post->post_type === 'touristic_sheet';
