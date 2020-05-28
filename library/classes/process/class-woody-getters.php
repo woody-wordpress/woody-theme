@@ -737,8 +737,15 @@ class WoodyTheme_WoodyGetters
         $data['link']['url'] = $sheet_url;
         $data['link']['target'] = !empty($sheet['targetBlank']) ? '_blank' : '';
 
+        // TODO : Récupérer les infos de réservation de la fiche
+        if ($sheet['booking']['central']) {
+            $data['booking']['prefix'] = 'TODO';
+            $data['booking']['price'] = 'TODO';
+            $data['booking']['link'] = 'TODO';
+        }
+
         // Display Imgs
-        if ($wrapper['display_img'] && !empty($sheet['allImgs'])) {
+        if (!empty($sheet['allImgs'])) {
             foreach ($sheet['allImgs'] as $key => $img) {
                 $data['imgs'][$key] = [
                     'resizer' => true,
@@ -750,35 +757,35 @@ class WoodyTheme_WoodyGetters
         }
 
         // Display options
-        $display_options = $wrapper['sheet_display'];
-        if (in_array('detail', $display_options)) {
-            // TODO : vérifier que la fiche propose des prestations
-            $data['anchors']['detail']['url'] = $sheet_url . '#establishment-detail';
-            $data['anchors']['detail']['title'] = __('Informations prestataire', 'woody-theme');
-            $data['anchors']['detail']['icon'] = 'wicon-028-plus-02';
-        }
-        if (in_array('openings', $display_options)) {
-            // TODO : vérifier que la fiche a des horaires d'ouvertures
-            $data['anchors']['openings']['url'] = $sheet_url . '#openings';
-            $data['anchors']['openings']['title'] = __('Horaires', 'woody-theme');
-            $data['anchors']['openings']['icon'] = 'wicon-015-horloge';
-        }
-        if (in_array('map', $display_options)) {
-            // TODO : vérifier que la fiche a une carte
-            $data['anchors']['map']['url'] = $sheet_url . '#map';
-            $data['anchors']['map']['title'] = __('Carte', 'woody-theme');
-            $data['anchors']['map']['icon'] = 'wicon-022-itineraire';
-        }
-        if (in_array('reviews', $display_options) && !empty($sheet['reviews'])) {
-            $data['anchors']['reviews']['url'] = $sheet_url . '#reviews';
-            $data['anchors']['reviews']['title'] = __('Avis', 'woody-theme');
-            $data['anchors']['reviews']['icon'] = 'wicon-012-smiley-bien';
-        }
-        if (in_array('contact', $display_options)) {
-            $data['anchors']['contact']['url'] = $sheet_url;
-            $data['anchors']['contact']['title'] = __('Poser une question', 'woody-theme');
-            $data['anchors']['contact']['icon'] = 'wicon-016-bulle';
-        }
+        $data['anchors'] = [
+            'detail' => [
+                'url' => $sheet_url . '#establishment-detail',
+                'title' => __('Informations prestataire', 'woody-theme'),
+                'icon' => 'wicon-028-plus-02'
+            ],
+            'openings' => [
+                'url' => $sheet_url . '#openings',
+                'title' => __('Horaires', 'woody-theme'),
+                'icon' => 'wicon-015-horloge'
+            ],
+            'map' => [
+                'url' => $sheet_url . '#map',
+                'title' => __('Carte', 'woody-theme'),
+                'icon' => 'wicon-022-itineraire'
+            ],
+            'reviews' => [
+                'url' => $sheet_url . '#reviews',
+                'title' => __('Avis', 'woody-theme'),
+                'icon' => 'wicon-012-smiley-bien'
+            ],
+            'contact' => [
+                'url' => $sheet_url,
+                'title' => __('Poser une question', 'woody-theme'),
+                'icon' => 'wicon-016-bulle'
+            ],
+        ];
+
+        $data = apply_filters('woody_custom_minisheet_data', $data, $wrapper);
 
         // Shuffle anchors positions
         if (!empty($data['anchors'])) {
@@ -790,22 +797,6 @@ class WoodyTheme_WoodyGetters
         if (!empty($data['imgs']) && $data['anchors']) {
             while (count($data['imgs']) + count($data['anchors']) > 8) {
                 array_splice($data['imgs'], -1, 1);
-            }
-        }
-
-        // TODO : Récupérer les infos de réservation de la fiche
-        if ($sheet['booking']['central']) {
-            $data['booking']['prefix'] = 'TODO';
-            $data['booking']['price'] = 'TODO';
-            $data['booking']['link'] = 'TODO';
-        }
-
-        // Customize Sheet booking
-        if ($wrapper['customize_sheet_booking']) {
-            $booking_options = $wrapper['custom_sheet_booking'];
-
-            foreach ($booking_options as $option) {
-                $data['booking'][$option] = !empty($wrapper['custom_' . $option]) ? $wrapper['custom_' . $option] : '';
             }
         }
 
