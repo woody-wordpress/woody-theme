@@ -63,6 +63,7 @@ new WoodyTheme_Robots();
 new WoodyTheme_Seo();
 new WoodyTheme_Varnish();
 new WoodyTheme_Unpublisher();
+new WoodyTheme_Profiles();
 // new WoodyTheme_Videos();
 
 // Timber
