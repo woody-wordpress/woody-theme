@@ -339,10 +339,10 @@
             "clone": [
                 "group_5b043c93d609a"
             ],
-            "display": "seamless",
+            "display": "group",
             "layout": "block",
             "prefix_label": 0,
-            "prefix_name": 0
+            "prefix_name": 1
         },
         {
             "key": "field_5ec3b156bb7c0",
@@ -590,6 +590,27 @@
             "endpoint": 0
         },
         {
+            "key": "field_5ecd2db9eef67",
+            "label": "Paramètres de fond",
+            "name": "focus_block_bg_params",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5b043c93d609a"
+            ],
+            "display": "group",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
             "key": "field_5b4c8e6c134f8",
             "label": "Retirer les marges autour des mises en avant",
             "name": "focus_no_padding",
@@ -662,5 +683,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1589900982
+    "modified": 1590507094
 }
