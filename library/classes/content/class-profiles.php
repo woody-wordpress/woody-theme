@@ -17,7 +17,7 @@ class WoodyTheme_Profiles
     protected function registerHooks()
     {
         add_action('init', array($this, 'registerPostType'));
-        add_action('woody_theme_update', array($this, 'registerTaxonomies'));
+        add_action('init', array($this, 'registerTaxonomies'));
         add_action('woody_theme_update', [$this, 'updatePllOption']);
     }
 
