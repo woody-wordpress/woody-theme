@@ -75,13 +75,13 @@ class WoodyTheme_Tinymce
 
     public function woodyAnchorButtonLoadJs($plugins)
     {
-        $plugins['woody_anchor'] = get_template_directory_uri() . '/src/js/admin/plugins/woody_anchor.js';
+        $plugins['woody_anchor'] = get_template_directory_uri() . '/src/js/admin/plugins/woody_anchor.min.js';
         return $plugins;
     }
 
     public function woodyIconsButtonLoadJs($plugins)
     {
-        $plugins['woody_icons'] = get_template_directory_uri() . '/src/js/admin/plugins/woody_icons.js';
+        $plugins['woody_icons'] = get_template_directory_uri() . '/src/js/admin/plugins/woody_icons.min.js';
         return $plugins;
     }
 
