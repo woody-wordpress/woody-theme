@@ -287,6 +287,16 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $page_teaser['page_teaser_subtitle'] = (!empty($page_teaser['page_teaser_subtitle'])) ? $this->tools->replacePattern($page_teaser['page_teaser_subtitle'], $this->context['post_id']) : '';
                 $page_teaser['page_teaser_desc'] = (!empty($page_teaser['page_teaser_desc'])) ? $this->tools->replacePattern($page_teaser['page_teaser_desc'], $this->context['post_id']) : '';
 
+                // Existing profile
+                if (!empty($page_teaser['page_teaser_add_profile']) && !empty($page_teaser['profile']['use_profile']) && !empty($page_teaser['profile']['profile_post'])) {
+                    $profile_id = $page_teaser['profile']['profile_post'];
+                    $page_teaser['profile'] = [
+                        'profile_title' => get_the_title($profile_id),
+                        'profile_picture' => get_field('profile_picture', $profile_id),
+                        'profile_description' => get_field('profile_description', $profile_id)
+                    ];
+                }
+
                 $page_teaser = apply_filters('woody_custom_page_teaser', $page_teaser, $this->context);
 
                 $this->context['page_teaser'] = \Timber::compile($this->context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
