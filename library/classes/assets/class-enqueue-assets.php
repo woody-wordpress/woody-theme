@@ -311,7 +311,7 @@ class WoodyTheme_Enqueue_Assets
 
         // Added global vars
         wp_add_inline_script('admin-javascripts', 'var siteConfig = ' . json_encode($this->siteConfig) . ';', 'before');
-        wp_add_inline_script('admin-javascripts', 'window.onload=function(){document.body.classList.add("windowReady")};', 'after');
+        wp_add_inline_script('admin-javascripts', 'document.addEventListener("DOMContentLoaded",()=>{document.body.classList.add("windowReady")});', 'after');
 
         // Enqueue the main Stylesheet.
         wp_enqueue_style('admin-stylesheet', $this->assetPath('css/admin.css'), [], $this->wThemeVersion, 'all');
