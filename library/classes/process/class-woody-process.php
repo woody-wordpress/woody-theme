@@ -471,10 +471,6 @@ class WoodyTheme_WoodyProcess
                     }
                 }
 
-                if (!empty($section['display_in_summary'])) {
-                    $the_section['anchor'] = 'section-' . $section_id;
-                }
-
                 // On récupère l'option "Masquer les sections vides"
                 $hide_empty_sections = get_field('hide_empty_sections', 'option');
 
