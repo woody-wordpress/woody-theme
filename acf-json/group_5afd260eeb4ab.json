@@ -1171,17 +1171,17 @@
         [{
             "param": "post_type",
             "operator": "==",
-            "value": "post"
+            "value": "tourtrip_step"
         }],
         [{
                 "param": "post_type",
                 "operator": "==",
-                "value": "post"
+                "value": "woody_rdbk_leaflets"
             },
             {
                 "param": "post_taxonomy",
                 "operator": "==",
-                "value": "category:uncategorized"
+                "value": "leaflet_type:rdbk_free_content"
             }
         ]
     ],
