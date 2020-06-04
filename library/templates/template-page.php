@@ -68,8 +68,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $last_segment = end($segments);
         $query = str_replace('-', ' ', $last_segment);
 
+        $suggestions = [];
         // $suggestions = get_transient('woody_404_suggestions_' . md5($query));
-
         // if (empty($suggestions)) {
         //     $suggestions = [];
         //     $response = apply_filters('woody_pages_search', ['query' => $query, 'size' => 4]);
@@ -95,7 +95,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             'title' =>  __("Oups !", 'woody-theme'),
             'subtitle' =>  '404 - ' . __("Page non trouvée", 'woody-theme'),
             'text' => __("La page que vous recherchez a peut-être été supprimée ou est temporairement indisponible.", 'woody-theme'),
-            'suggestions' => [],
+            'suggestions' => $suggestions,
             'search' => get_permalink(get_field('es_search_page_url', 'options'))
         ];
 
