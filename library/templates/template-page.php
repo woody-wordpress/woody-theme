@@ -68,35 +68,34 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $last_segment = end($segments);
         $query = str_replace('-', ' ', $last_segment);
 
-        $suggestions = get_transient('woody_404_suggestions_' . md5($query));
+        // $suggestions = get_transient('woody_404_suggestions_' . md5($query));
 
-        if (empty($suggestions)) {
-            $suggestions = [];
-            $response = apply_filters('woody_pages_search', ['query' => $query, 'size' => 4]);
-            if (!empty($response['posts'])) {
-                foreach ($response['posts'] as $post_id) {
-                    $post_id = explode('_', $post_id);
-                    $post_id = end($post_id);
-                    $post = get_post($post_id);
-                    if (!empty($post->post_type) && $post->post_type == 'touristic_sheet') {
-                        $suggestions[] = getTouristicSheetPreview(['display_elements' => ['sheet_town', 'sheet_type', 'description', 'bookable'], 'display_img' => true], $post);
-                    } else {
-                        $suggestions[] = getPagePreview(['display_elements' => ['description'], 'display_button' => true, 'display_img' => true], $post);
-                    }
-                }
-            }
+        // if (empty($suggestions)) {
+        //     $suggestions = [];
+        //     $response = apply_filters('woody_pages_search', ['query' => $query, 'size' => 4]);
+        //     if (!empty($response['posts'])) {
+        //         foreach ($response['posts'] as $post_id) {
+        //             $post_id = explode('_', $post_id);
+        //             $post_id = end($post_id);
+        //             $post = get_post($post_id);
+        //             if (!empty($post->post_type) && $post->post_type == 'touristic_sheet') {
+        //                 $suggestions[] = getTouristicSheetPreview(['display_elements' => ['sheet_town', 'sheet_type', 'description', 'bookable'], 'display_img' => true], $post);
+        //             } else {
+        //                 $suggestions[] = getPagePreview(['display_elements' => ['description'], 'display_button' => true, 'display_img' => true], $post);
+        //             }
+        //         }
+        //     }
 
-            if (!empty($suggestions)) {
-                set_transient('woody_404_suggestions_' . md5($query), $suggestions, 1209600); // Keep 2 weeks
-            }
-        }
-
+        //     if (!empty($suggestions)) {
+        //         set_transient('woody_404_suggestions_' . md5($query), $suggestions, 1209600); // Keep 2 weeks
+        //     }
+        // }
 
         $vars = [
             'title' =>  __("Oups !", 'woody-theme'),
             'subtitle' =>  '404 - ' . __("Page non trouvée", 'woody-theme'),
             'text' => __("La page que vous recherchez a peut-être été supprimée ou est temporairement indisponible.", 'woody-theme'),
-            'suggestions' => $suggestions,
+            'suggestions' => [],
             'search' => get_permalink(get_field('es_search_page_url', 'options'))
         ];
 
