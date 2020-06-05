@@ -832,22 +832,37 @@
                 "key": "field_5afd2c9616ecd",
                 "label": "Grille",
                 "name": "section_woody_tpl",
-                "type": "radio",
+                "type": "text",
                 "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "100",
+                    "width": "",
                     "class": "hide-label",
                     "id": ""
                 },
-                "choices": {},
-                "allow_null": 0,
-                "other_choice": 0,
-                "default_value": "grids_basic-grid_1_cols-tpl_01",
-                "layout": "vertical",
-                "return_format": "value",
-                "save_other_choice": 0
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "button_field_5afd2c9616ecd",
+                "label": "Choisir une mise en page",
+                "name": "",
+                "type": "message",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "hide-label woody-tpl-button field_5afd2c9616ecd",
+                    "id": ""
+                },
+                "message": "Choisir une mise en page",
+                "new_lines": "wpautop",
+                "esc_html": 0
             },
             {
                 "key": "field_5b68200fd0bbe",

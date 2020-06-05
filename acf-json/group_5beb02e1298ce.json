@@ -1,8 +1,7 @@
 {
     "key": "group_5beb02e1298ce",
     "title": "Bloc de publicité",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5beb051d9393a",
             "label": "Contenu",
             "name": "",
@@ -36,8 +35,7 @@
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter une publicité",
-            "sub_fields": [
-                {
+            "sub_fields": [{
                     "key": "field_5beb046c93939",
                     "label": "Titre pour l'administration",
                     "name": "bo_claim_title",
@@ -163,8 +161,7 @@
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter une page",
-            "sub_fields": [
-                {
+            "sub_fields": [{
                     "key": "field_5beb071f93941",
                     "label": "Page",
                     "name": "claim_linked_post_id",
@@ -228,24 +225,37 @@
             "key": "field_5beb05419393c",
             "label": "Template",
             "name": "claim_woody_tpl",
-            "type": "radio",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-label",
                 "id": ""
             },
-            "choices": {
-                "blocks-claims-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.sarlat.wp.rc-dev.com\/app\/dist\/sarlat\/img\/woody-library\/views\/blocks\/claims\/tpl_01\/thumbnail.png?version=2.7.0\" alt=\"blocks-claims-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Publicité - template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Publicité - template 1<\/h4>Bloc de publicité => Basic card image carré<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
-            },
-            "allow_null": 0,
-            "other_choice": 0,
             "default_value": "",
-            "layout": "vertical",
-            "return_format": "value",
-            "save_other_choice": 0
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "button_field_5beb05419393c",
+            "label": "Choisir une mise en page",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label woody-tpl-button group_5beb02e1298ce",
+                "id": ""
+            },
+            "message": "Choisir une mise en page",
+            "new_lines": "wpautop",
+            "esc_html": 0
         },
         {
             "key": "field_5beb05629393d",
@@ -287,13 +297,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "woody_claims"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "woody_claims"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",

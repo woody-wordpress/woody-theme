@@ -1,8 +1,7 @@
 {
     "key": "group_5b0433ff0bb17",
     "title": "FAQ",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b05170c5fa21",
             "label": "Contenu",
             "name": "",
@@ -55,8 +54,7 @@
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter une section à l'accordéon",
-            "sub_fields": [
-                {
+            "sub_fields": [{
                     "key": "field_5d71091be6efa",
                     "label": "Section d'accordéon",
                     "name": "",
@@ -116,7 +114,7 @@
             "key": "field_5b0437076f029",
             "label": "Template",
             "name": "woody_tpl",
-            "type": "radio",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -125,23 +123,36 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "choices": {},
-            "allow_null": 0,
-            "other_choice": 0,
-            "save_other_choice": 0,
             "default_value": "",
-            "layout": "vertical",
-            "return_format": "value"
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "button_field_5b0437076f029",
+            "label": "Choisir une mise en page",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label woody-tpl-button group_5b0433ff0bb17",
+                "id": ""
+            },
+            "message": "Choisir une mise en page",
+            "new_lines": "wpautop",
+            "esc_html": 0
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -151,5 +162,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Titre + Accordéon)",
-    "modified": 1567689330
+    "modified": 1591358845
 }

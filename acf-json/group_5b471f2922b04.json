@@ -1,8 +1,7 @@
 {
     "key": "group_5b471f2922b04",
     "title": "Onglets",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b471f334efed",
             "label": "Contenu",
             "name": "",
@@ -39,8 +38,7 @@
             "hide_collapse": 0,
             "collapse_all_repeater": 0,
             "btn-icon-only": 0,
-            "sub_fields": [
-                {
+            "sub_fields": [{
                     "key": "field_5b472edae3000",
                     "label": "Titre pour l'administration",
                     "name": "tab_bo_title",
@@ -102,22 +100,37 @@
             "key": "field_5b4722a022dd8",
             "label": "Template",
             "name": "woody_tpl",
-            "type": "radio",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-label",
                 "id": ""
             },
-            "choices": {},
-            "allow_null": 0,
-            "other_choice": 0,
-            "save_other_choice": 0,
             "default_value": "",
-            "layout": "vertical",
-            "return_format": "value"
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "button_field_5b4722a022dd8",
+            "label": "Choisir une mise en page",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label woody-tpl-button group_5b471f2922b04",
+                "id": ""
+            },
+            "message": "Choisir une mise en page",
+            "new_lines": "wpautop",
+            "esc_html": 0
         },
         {
             "key": "field_5dfb9917d3ca2",
@@ -197,13 +210,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
