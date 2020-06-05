@@ -272,7 +272,7 @@
             "key": "field_5e46c1e472de7",
             "label": "Template",
             "name": "woody_tpl",
-            "type": "radio",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -281,13 +281,11 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "choices": {},
-            "allow_null": 0,
-            "other_choice": 0,
             "default_value": "",
-            "layout": "vertical",
-            "return_format": "value",
-            "save_other_choice": 0
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         },
         {
             "key": "field_5e46c17572de4",

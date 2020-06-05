@@ -119,7 +119,7 @@
             "key": "field_5b042ef3910cb",
             "label": "Template",
             "name": "woody_tpl",
-            "type": "radio",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -128,13 +128,11 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "choices": {},
-            "allow_null": 0,
-            "other_choice": 0,
-            "save_other_choice": 0,
             "default_value": "",
-            "layout": "vertical",
-            "return_format": "value"
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         }
     ],
     "location": [
@@ -154,5 +152,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Portrait + Texte + Signature)",
-    "modified": 1587733738
+    "modified": 1591358665
 }

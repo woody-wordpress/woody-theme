@@ -74,7 +74,7 @@
             "key": "field_5ed7a74e0b0e6",
             "label": "Mises en page",
             "name": "woody_tpl",
-            "type": "radio",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -83,13 +83,11 @@
                 "class": "",
                 "id": ""
             },
-            "choices": [],
-            "allow_null": 0,
-            "other_choice": 0,
             "default_value": "",
-            "layout": "vertical",
-            "return_format": "value",
-            "save_other_choice": 0
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_5ed7abf3abaec",
@@ -166,5 +164,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1591193988
+    "modified": 1591358545
 }

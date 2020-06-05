@@ -139,7 +139,7 @@
             "key": "field_5b0431b627b86",
             "label": "Template",
             "name": "woody_tpl",
-            "type": "radio",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -148,13 +148,11 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "choices": {},
-            "allow_null": 0,
-            "other_choice": 0,
-            "save_other_choice": 0,
-            "default_value": 0,
-            "layout": "vertical",
-            "return_format": "value"
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_5b681f7dba008",
@@ -267,5 +265,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Liste de photos)",
-    "modified": 1581695929
+    "modified": 1591356955
 }

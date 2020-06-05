@@ -33,7 +33,7 @@ class WoodyTheme_ACF
         add_action('acf/save_post', [$this, 'clearOptionsTransient'], 20);
 
         add_filter('acf/settings/load_json', [$this, 'acfJsonLoad']);
-        add_filter('acf/load_field/type=radio', [$this, 'woodyTplAcfLoadField']);
+        // add_filter('acf/load_field/type=radio', [$this, 'woodyTplAcfLoadField']);
         add_filter('acf/load_field/type=select', [$this, 'woodyIconLoadField']);
 
         add_filter('acf/load_field/name=focused_taxonomy_terms', [$this, 'focusedTaxonomyTermsLoadField']);
@@ -210,88 +210,88 @@ class WoodyTheme_ACF
      * Benoit Bouchaud
      * On ajoute les templates Woody disponibles dans les option du champ radio woody_tpl
      */
-    public function woodyTplAcfLoadField($field)
-    {
-        $woodyLibrary = new WoodyLibrary();
+    // public function woodyTplAcfLoadField($field)
+    // {
+    //     $woodyLibrary = new WoodyLibrary();
 
-        if (strpos($field['name'], 'woody_tpl') !== false) {
-            $field['choices'] = [];
+    //     if (strpos($field['name'], 'woody_tpl') !== false) {
+    //         $field['choices'] = [];
 
-            $woodyComponents = get_transient('woody_components');
-            if (empty($woodyComponents)) {
-                $woodyComponents = $woodyLibrary->getComponents();
-                set_transient('woody_components', $woodyComponents);
-            }
+    //         $woodyComponents = get_transient('woody_components');
+    //         if (empty($woodyComponents)) {
+    //             $woodyComponents = $woodyLibrary->getComponents();
+    //             set_transient('woody_components', $woodyComponents);
+    //         }
 
-            switch ($field['key']) {
-                case 'field_5afd2c9616ecd': // Cas des sections
-                case 'field_5d16118093cc1': // Cas des mises en avant de composants de séjours
-                    $components = $woodyLibrary->getTemplatesByAcfGroup($woodyComponents, $field['key']);
-                    $components = $woodyLibrary->getTemplatesByAcfGroup($woodyComponents, $field['key']);
-                    break;
-                default:
-                    if (is_numeric($field['parent'])) {
-                        // From 08/31/18, return of $field['parent'] is the acf post id instead of the key
-                        $parent_field_as_post = get_post($field['parent']);
-                        $components = $woodyLibrary->getTemplatesByAcfGroup($woodyComponents, $parent_field_as_post->post_name);
-                    } else {
-                        $components = $woodyLibrary->getTemplatesByAcfGroup($woodyComponents, $field['parent']);
-                    }
-            }
+    //         switch ($field['key']) {
+    //             case 'field_5afd2c9616ecd': // Cas des sections
+    //             case 'field_5d16118093cc1': // Cas des mises en avant de composants de séjours
+    //                 $components = $woodyLibrary->getTemplatesByAcfGroup($woodyComponents, $field['key']);
+    //                 $components = $woodyLibrary->getTemplatesByAcfGroup($woodyComponents, $field['key']);
+    //                 break;
+    //             default:
+    //                 if (is_numeric($field['parent'])) {
+    //                     // From 08/31/18, return of $field['parent'] is the acf post id instead of the key
+    //                     $parent_field_as_post = get_post($field['parent']);
+    //                     $components = $woodyLibrary->getTemplatesByAcfGroup($woodyComponents, $parent_field_as_post->post_name);
+    //                 } else {
+    //                     $components = $woodyLibrary->getTemplatesByAcfGroup($woodyComponents, $field['parent']);
+    //                 }
+    //         }
 
-            if (!empty($components)) {
-                foreach ($components as $key => $component) {
-                    $tpl_name = (!empty($component['name'])) ? $component['name'] : '{Noname :/}';
-                    $tpl_desc = (!empty($component['description'])) ? $component['description'] : '{Nodesc :/}';
+    //         if (!empty($components)) {
+    //             foreach ($components as $key => $component) {
+    //                 $tpl_name = (!empty($component['name'])) ? $component['name'] : '{Noname :/}';
+    //                 $tpl_desc = (!empty($component['description'])) ? $component['description'] : '{Nodesc :/}';
 
-                    $fitted_for = (!empty($component['items_count'][0]['fitted_for'])) ? $component['items_count'][0]['fitted_for'] : '';
-                    $accepts_max = (!empty($component['items_count'][0]['accepts_max'])) ? $component['items_count'][0]['accepts_max'] : '';
-                    $count_data = [];
+    //                 $fitted_for = (!empty($component['items_count'][0]['fitted_for'])) ? $component['items_count'][0]['fitted_for'] : '';
+    //                 $accepts_max = (!empty($component['items_count'][0]['accepts_max'])) ? $component['items_count'][0]['accepts_max'] : '';
+    //                 $count_data = [];
 
-                    if (!empty($fitted_for)) {
-                        $count_data[] = 'data-fittedfor="' . $fitted_for . '"';
-                    }
+    //                 if (!empty($fitted_for)) {
+    //                     $count_data[] = 'data-fittedfor="' . $fitted_for . '"';
+    //                 }
 
-                    if (!empty($accepts_max)) {
-                        $count_data[] = 'data-acceptsmax="' . $accepts_max . '"';
-                    }
+    //                 if (!empty($accepts_max)) {
+    //                     $count_data[] = 'data-acceptsmax="' . $accepts_max . '"';
+    //                 }
 
-                    $count_data = implode(' ', $count_data);
+    //                 $count_data = implode(' ', $count_data);
 
-                    $field['choices'][$key] = '<div class="tpl-choice-wrapper" ' . $count_data . '>
-                    <img class="img-responsive lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="' . WP_HOME . '/app/dist/' . WP_SITE_KEY . '/img/woody-library/views/' . $component['thumbnails']['small'] . '?version=' . get_option('woody_theme_version') . '" alt="' . $key . '" width="150" height="150" />
-                    <h5 class="tpl-title">' . $tpl_name . '</h5>
-                    <div class="dashicons dashicons-info toggle-desc"></div>
-                    <div class="tpl-desc hidden"><h4 class="tpl-title">' . $tpl_name . '</h4>' . $tpl_desc . '<span class="dashicons dashicons-no close-desc"></span></div>
-                    <div class="desc-backdrop hidden"></div>
-                    </div>';
-                    if ($field['name'] == 'section_woody_tpl' || $field['name'] == 'tab_woody_tpl' || $field['name'] == 'slide_woody_tpl') {
-                        foreach ($field['choices'] as $name => $value) {
-                            if (strpos($name, 'basic-grid_1_cols-tpl_01') !== false) {
-                                $field['default_value'] = $name;
-                            }
-                        }
-                    }
-                }
+    //                 $field['choices'][$key] = '<div class="tpl-choice-wrapper" ' . $count_data . '>
+    //                 <img class="img-responsive lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="' . WP_HOME . '/app/dist/' . WP_SITE_KEY . '/img/woody-library/views/' . $component['thumbnails']['small'] . '?version=' . get_option('woody_theme_version') . '" alt="' . $key . '" width="150" height="150" />
+    //                 <h5 class="tpl-title">' . $tpl_name . '</h5>
+    //                 <div class="dashicons dashicons-info toggle-desc"></div>
+    //                 <div class="tpl-desc hidden"><h4 class="tpl-title">' . $tpl_name . '</h4>' . $tpl_desc . '<span class="dashicons dashicons-no close-desc"></span></div>
+    //                 <div class="desc-backdrop hidden"></div>
+    //                 </div>';
+    //                 if ($field['name'] == 'section_woody_tpl' || $field['name'] == 'tab_woody_tpl' || $field['name'] == 'slide_woody_tpl') {
+    //                     foreach ($field['choices'] as $name => $value) {
+    //                         if (strpos($name, 'basic-grid_1_cols-tpl_01') !== false) {
+    //                             $field['default_value'] = $name;
+    //                         }
+    //                     }
+    //                 }
+    //             }
 
-                $woody_tpls_order = get_transient('woody_tpls_order');
-                if (empty($woody_tpls_order)) {
-                    $woody_tpls_order = array_flip($this->sortWoodyTpls());
-                    set_transient('woody_tpls_order', $woody_tpls_order);
-                }
+    //             $woody_tpls_order = get_transient('woody_tpls_order');
+    //             if (empty($woody_tpls_order)) {
+    //                 $woody_tpls_order = array_flip($this->sortWoodyTpls());
+    //                 set_transient('woody_tpls_order', $woody_tpls_order);
+    //             }
 
-                foreach ($woody_tpls_order as $order_key => $value) {
-                    if (!array_key_exists($order_key, $field['choices'])) {
-                        unset($woody_tpls_order[$order_key]);
-                    }
-                }
+    //             foreach ($woody_tpls_order as $order_key => $value) {
+    //                 if (!array_key_exists($order_key, $field['choices'])) {
+    //                     unset($woody_tpls_order[$order_key]);
+    //                 }
+    //             }
 
-                $field['choices'] = array_merge($woody_tpls_order, $field['choices']);
-            }
-        }
+    //             $field['choices'] = array_merge($woody_tpls_order, $field['choices']);
+    //         }
+    //     }
 
-        return $field;
-    }
+    //     return $field;
+    // }
 
     /**
      * Benoit Bouchaud
@@ -730,12 +730,14 @@ class WoodyTheme_ACF
                 'blocks-focus-tpl_119',
                 'blocks-focus-tpl_120',
                 'blocks-focus-tpl_123',
+                'blocks-focus-tpl_124',
                 'blocks-focus-tpl_114',
                 'blocks-focus-tpl_116',
                 'blocks-focus-tpl_121',
                 'blocks-focus-tpl_111',
                 'blocks-focus-tpl_117',
                 'blocks-focus-tpl_118',
+                'blocks-focus-tpl_125',
                 'lists-list_grids-tpl_207',
                 'lists-list_grids-tpl_202',
                 'lists-list_grids-tpl_209',
@@ -829,6 +831,7 @@ class WoodyTheme_ACF
                 'blocks-media_gallery-tpl_108',
                 'blocks-media_gallery-tpl_106',
                 'blocks-media_gallery-tpl_109',
+                'blocks-media_gallery-tpl_111',
                 'blocks-media_gallery-tpl_202',
                 'blocks-media_gallery-tpl_203',
                 'blocks-media_gallery-tpl_204',

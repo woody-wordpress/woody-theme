@@ -1,8 +1,7 @@
 {
     "key": "group_5bc6079fe9b0a",
     "title": "Filtres de liste",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5bc607f02a89c",
             "label": "Contenu",
             "name": "",
@@ -36,8 +35,7 @@
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter un filtre",
-            "sub_fields": [
-                {
+            "sub_fields": [{
                     "key": "field_5bc85c363dc30",
                     "label": "Nom du filtre",
                     "name": "list_filter_name",
@@ -94,13 +92,11 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [
-                            {
-                                "field": "field_5bc607c62a89b",
-                                "operator": "==",
-                                "value": "taxonomy"
-                            }
-                        ]
+                        [{
+                            "field": "field_5bc607c62a89b",
+                            "operator": "==",
+                            "value": "taxonomy"
+                        }]
                     ],
                     "wrapper": {
                         "width": "",
@@ -131,13 +127,11 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [
-                            {
-                                "field": "field_5bc607c62a89b",
-                                "operator": "==",
-                                "value": "custom_terms"
-                            }
-                        ]
+                        [{
+                            "field": "field_5bc607c62a89b",
+                            "operator": "==",
+                            "value": "custom_terms"
+                        }]
                     ],
                     "wrapper": {
                         "width": "",
@@ -161,20 +155,16 @@
                     "instructions": "(Comportement lorsque l'utilisateur coche plusieurs tags)",
                     "required": 0,
                     "conditional_logic": [
-                        [
-                            {
-                                "field": "field_5bc607c62a89b",
-                                "operator": "==",
-                                "value": "taxonomy"
-                            }
-                        ],
-                        [
-                            {
-                                "field": "field_5bc607c62a89b",
-                                "operator": "==",
-                                "value": "custom_terms"
-                            }
-                        ]
+                        [{
+                            "field": "field_5bc607c62a89b",
+                            "operator": "==",
+                            "value": "taxonomy"
+                        }],
+                        [{
+                            "field": "field_5bc607c62a89b",
+                            "operator": "==",
+                            "value": "custom_terms"
+                        }]
                     ],
                     "wrapper": {
                         "width": "",
@@ -200,13 +190,11 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [
-                            {
-                                "field": "field_5bc607c62a89b",
-                                "operator": "==",
-                                "value": "map"
-                            }
-                        ]
+                        [{
+                            "field": "field_5bc607c62a89b",
+                            "operator": "==",
+                            "value": "map"
+                        }]
                     ],
                     "wrapper": {
                         "width": "",
@@ -214,8 +202,7 @@
                         "id": ""
                     },
                     "layout": "block",
-                    "sub_fields": [
-                        {
+                    "sub_fields": [{
                             "key": "field_5be167b1ca075",
                             "label": "Hauteur de la carte",
                             "name": "map_zoom",
@@ -296,27 +283,25 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [
-                {
-                    "key": "field_5bd871bd4bace",
-                    "label": "Texte",
-                    "name": "filter_button_text",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "50",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "Rechercher",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                }
-            ]
+            "sub_fields": [{
+                "key": "field_5bd871bd4bace",
+                "label": "Texte",
+                "name": "filter_button_text",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Rechercher",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            }]
         },
         {
             "key": "field_5c0935b0aba59",
@@ -374,7 +359,7 @@
             "key": "field_5bc6080d2a89e",
             "label": "Template",
             "name": "listfilter_woody_tpl",
-            "type": "radio",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -383,13 +368,11 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "choices": {},
-            "allow_null": 0,
-            "other_choice": 0,
             "default_value": "",
-            "layout": "vertical",
-            "return_format": "value",
-            "save_other_choice": 0
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         },
         {
             "key": "field_5bd871574bacb",
@@ -431,13 +414,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
