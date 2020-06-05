@@ -4,15 +4,22 @@ $('#post').each(function() {
     const accepted_post = ['page', 'claims', 'woody_rdbk_leaflets'];
 
     if (accepted_post.includes($('#post_type').val())) {
+        var button = '';
+        var field_key = '';
+
         $('#post-body-content').append('<div id="tpls_popin"><a href="#" class="close">Fermer</a> <a href="#" class="save">Enregistrer</a><ul></ul></div>');
+
         $('#tpls_popin .close').on('click', function() {
             $('#tpls_popin').removeClass('opened');
             $('#tpls_popin li').removeClass('hidden');
-            $('#tpls_popin li').removeClass('selected');
+            $('.tpl-choice-wrapper.selected').removeClass('selected');
         });
 
         $('#tpls_popin .save').on('click', function() {
-            var button = $(this);
+            console.log($('.tpl-choice-wrapper.selected').data('value'), 'selected_value');
+
+            button.parent().find('[data-key="'+ field_key +'"] input').val($('.tpl-choice-wrapper.selected').data('value'));
+            $('.tpl-choice-wrapper.selected').removeClass('selected')
             $('#tpls_popin').removeClass('opened');
         });
     }
@@ -33,10 +40,11 @@ $('#post').each(function() {
                     }
 
                     $('.woody-tpl-button').on('click', function() {
-                        var tpl_value = "";
-                        var button = $(this);
-                        var group = "";
+                        button = $(this);
+                        field_key = button.data('key').substr(7);
+                        var tpl_value = button.parent().find('[data-key="'+ field_key +'"] input').val();
 
+                        var group = "";
                         var classes = button.attr('class').split(' ');
                         $.each(classes, function(index, value) {
                             if(value.indexOf('group') == 0) {
@@ -46,11 +54,20 @@ $('#post').each(function() {
 
                         $('#tpls_popin li .tpl-choice-wrapper').each(function(){
                             if (!($(this).hasClass(group))) {
-                                $(this).addClass('hidden');
+                                $(this).parent('li').addClass('hidden');
+                            } else if($(this).data('value') == tpl_value) {
+                                $(this).addClass('selected');
                             }
                         })
 
                         $('#tpls_popin').addClass('opened');
+                    });
+
+                    $('#tpls_popin li').on('click', function(){
+                        var chosen = $(this).find('.tpl-choice-wrapper');
+                        $('.tpl-choice-wrapper.selected').removeClass('selected');
+                        chosen.addClass('selected');
+                        console.log(chosen, 'chosen_one');
                     });
                 },
                 error: function() {},

@@ -924,6 +924,7 @@ class WoodyTheme_ACF
             set_transient('woody_components', $woodyComponents);
         }
 
+        // TODO: mettre ça dans le transient
         foreach ($woodyComponents as $key => $component) {
             $groups = !empty($component['acf_groups']) ? implode(" ", $component['acf_groups']) : '';
             if (!empty($groups)) {
@@ -934,6 +935,7 @@ class WoodyTheme_ACF
             }
         }
 
+        ksort($return);
         wp_send_json($return);
         exit;
     }
