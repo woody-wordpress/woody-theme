@@ -1,20 +1,50 @@
-
 #tpls_popin {
     background-color: white;
+    box-sizing: border-box;
+    width: calc(100vw - 160px);
+    height: 100vh;
+    right: 0;
+    top: 0;
+    padding: 50px;
+    z-index: 10;
+    overflow: scroll;
+    box-shadow: 0 0 40px rgba(black, .15);
+    transform: translateX(100%);
+    transition: transform .5s ease-out;
 
-    ul{
+    ul {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
 
-        li{
-            max-width: 30%;
+        li {
+            width: 25%;
+            padding: 15px;
+            box-sizing: border-box;
         }
     }
 }
 
 #tpls_popin.opened {
-    z-index: 100;
-    position: absolute;
-    top: 50px;
+    position: fixed;
+    right: 0;
+    transform: translateX(0);
+
+    // On applique du style aux descritpions et titres des templates dans les champs woody_tpl
+    .tpl-choice-wrapper {
+        transition: transform .3s;
+
+        >img {
+            width: 100%;
+            height: auto;
+        }
+
+        .tpl-title {
+            padding: 10px;
+            text-align: center;
+            font-size: 15px;
+            color: lighten(black, 30%);
+            line-height: 1.2em;
+        }
+    }
 }
