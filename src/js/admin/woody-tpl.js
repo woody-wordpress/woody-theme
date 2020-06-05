@@ -16,8 +16,6 @@ $('#post').each(function() {
         });
 
         $('#tpls_popin .save').on('click', function() {
-            console.log($('.tpl-choice-wrapper.selected').data('value'), 'selected_value');
-
             button.parent().find('[data-key="'+ field_key +'"] input').val($('.tpl-choice-wrapper.selected').data('value'));
             $('.tpl-choice-wrapper.selected').removeClass('selected')
             $('#tpls_popin').removeClass('opened');
@@ -67,7 +65,6 @@ $('#post').each(function() {
                         var chosen = $(this).find('.tpl-choice-wrapper');
                         $('.tpl-choice-wrapper.selected').removeClass('selected');
                         chosen.addClass('selected');
-                        console.log(chosen, 'chosen_one');
                     });
                 },
                 error: function() {},
