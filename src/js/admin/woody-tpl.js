@@ -4,17 +4,21 @@ $('#post').each(function() {
     const accepted_post = ['page', 'claims', 'woody_rdbk_leaflets'];
 
     if (accepted_post.includes($('#post_type').val())) {
-        $('#post-body-content').append('<div id="tpls_popin" class="hidden"><a href="#" class="close"></a><a href="#" class="save"></a><ul></ul></div>');
+        $('#post-body-content').append('<div id="tpls_popin" class="hidden"><a href="#" class="close">Fermer</a> <a href="#" class="save">Enregistrer</a><ul></ul></div>');
         $('#tpls_popin .close').on('click', function() {
             $('#tpls_popin').addClass('hidden');
             $('#tpls_popin').removeClass('opened');
         });
 
+        $('#tpls_popin .save').on('click', function() {
+            $this = $(this);
+            $('#tpls_popin').addClass('hidden');
+            $('#tpls_popin').removeClass('opened');
+        });
     }
 
    $(document).ready( function() {
         // AJAX to get all woody_tpl
-
         $('#tpls_popin').each(function() {
             $.ajax({
                 type: 'POST',
@@ -28,15 +32,9 @@ $('#post').each(function() {
                         $('#tpls_popin ul').append('<li>' + value + '</li>');
                     }
 
-
-
                     $('.woody-tpl-button').on('click', function() {
-                        $this = $(this);
-
                         $('#tpls_popin').removeClass('hidden');
                         $('#tpls_popin').addClass('opened');
-
-
                     });
                 },
                 error: function() {},
