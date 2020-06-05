@@ -433,6 +433,23 @@
             "append": ""
         },
         {
+            "key": "button_field_5b27a51703e46",
+            "label": "Choisir une mise en page",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label woody-tpl-button group_5b2788b48d04c",
+                "id": ""
+            },
+            "message": "Choisir une mise en page",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
             "key": "field_5c9e23eef8ea5",
             "label": "Paramètres de carte",
             "name": "",

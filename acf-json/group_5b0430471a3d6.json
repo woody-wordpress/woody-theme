@@ -67,6 +67,23 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "button_field_5b0ec105a1e22",
+            "label": "Choisir une mise en page",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label woody-tpl-button group_5b0430471a3d6",
+                "id": ""
+            },
+            "message": "Choisir une mise en page",
+            "new_lines": "wpautop",
+            "esc_html": 0
         }
     ],
     "location": [

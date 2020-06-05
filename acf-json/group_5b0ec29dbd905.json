@@ -1,8 +1,7 @@
 {
     "key": "group_5b0ec29dbd905",
     "title": "Bloc de texte + icône",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b0ec2bc0a8d0",
             "label": "Contenu",
             "name": "",
@@ -107,6 +106,23 @@
             "maxlength": ""
         },
         {
+            "key": "button_field_5b0ec2d50a8d2f",
+            "label": "Choisir une mise en page",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label woody-tpl-button group_5b0ec29dbd905",
+                "id": ""
+            },
+            "message": "Choisir une mise en page",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
             "key": "field_5cd02958e7ae9",
             "label": "Options avancées",
             "name": "",
@@ -146,13 +162,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",

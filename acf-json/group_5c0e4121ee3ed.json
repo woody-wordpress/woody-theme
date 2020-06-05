@@ -155,8 +155,25 @@
             "maxlength": ""
         },
         {
+            "key": "button_field_5c0e416429057",
+            "label": "Choisir une mise en page",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label woody-tpl-button group_5c0e4121ee3ed",
+                "id": ""
+            },
+            "message": "Choisir une mise en page",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
             "key": "field_5c0e41a529058",
-            "label": "Paramètres avancés",
+            "label": "Options avancées",
             "name": "",
             "type": "accordion",
             "instructions": "",

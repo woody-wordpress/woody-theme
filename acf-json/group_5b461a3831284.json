@@ -201,6 +201,23 @@
             "maxlength": ""
         },
         {
+            "key": "button_field_5b461b19131b8",
+            "label": "Choisir une mise en page",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label woody-tpl-button group_5b461a3831284",
+                "id": ""
+            },
+            "message": "Choisir une mise en page",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
             "key": "field_5b681e66b1056",
             "label": "Options avancées",
             "name": "",

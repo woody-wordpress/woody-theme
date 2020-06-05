@@ -1,8 +1,7 @@
 {
     "key": "group_5ed7a3b9c0e0e",
     "title": "Bloc sommaire",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5ed7a71b0b0e4",
             "label": "Contenu",
             "name": "",
@@ -90,6 +89,23 @@
             "append": ""
         },
         {
+            "key": "button_field_5ed7a74e0b0e6",
+            "label": "Choisir une mise en page",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label woody-tpl-button group_5ed7a3b9c0e0e",
+                "id": ""
+            },
+            "message": "Choisir une mise en page",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
             "key": "field_5ed7abf3abaec",
             "label": "Options avancées",
             "name": "",
@@ -148,13 +164,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
