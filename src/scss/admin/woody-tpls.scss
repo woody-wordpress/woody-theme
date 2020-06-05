@@ -33,18 +33,31 @@
     // On applique du style aux descritpions et titres des templates dans les champs woody_tpl
     .tpl-choice-wrapper {
         transition: transform .3s;
+        cursor: pointer;
 
         >img {
             width: 100%;
             height: auto;
+            transition: transform .3s;
         }
 
         .tpl-title {
             padding: 10px;
+            margin: 0;
             text-align: center;
             font-size: 15px;
             color: lighten(black, 30%);
             line-height: 1.2em;
+        }
+
+        &:hover {
+            >img {
+                transform: scale(.95);
+            }
+
+            .tpl-title {
+                color: #0073aa;
+            }
         }
     }
 }
