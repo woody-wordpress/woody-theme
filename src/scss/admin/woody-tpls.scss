@@ -1,5 +1,7 @@
 
 #tpls_popin {
+    background-color: white;
+
     ul{
         display: flex;
         flex-wrap: wrap;
@@ -9,4 +11,10 @@
             max-width: 30%;
         }
     }
+}
+
+#tpls_popin.opened {
+    z-index: 100;
+    position: absolute;
+    top: 50px;
 }
