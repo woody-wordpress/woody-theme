@@ -4,7 +4,7 @@ $('#post').each(function() {
     const accepted_post = ['page', 'claims', 'woody_rdbk_leaflets'];
 
     if (accepted_post.includes($('#post_type').val())) {
-        $('#post-body-content').append('<div id="tpls_popin" class="hidden"><a href="#" class="close">Fermer</a> <a href="#" class="save">Enregistrer</a><ul></ul></div>');
+        $('#post-body-content').append('<div id="tpls_popin"><a href="#" class="close">Fermer</a> <a href="#" class="save">Enregistrer</a><ul></ul></div>');
         $('#tpls_popin .close').on('click', function() {
             $('#tpls_popin').removeClass('opened');
             $('#tpls_popin li').removeClass('hidden');
