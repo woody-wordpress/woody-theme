@@ -74,6 +74,8 @@ class WoodyTheme_ACF
         add_filter('woody_get_field_option', [$this, 'woodyGetFieldOption'], 10, 3);
         add_filter('woody_get_field_object', [$this, 'woodyGetFieldObject'], 10, 3);
         add_filter('woody_get_fields_by_group', [$this, 'woodyGetFieldsByGroup'], 10, 3);
+
+        add_action('wp_ajax_woody_tpls', [$this, 'woodyGetAllTemplates']);
     }
 
     public function woodyGetFieldOption($field_name)
@@ -906,5 +908,33 @@ class WoodyTheme_ACF
         }
 
         return $return;
+    }
+
+    /**
+     * WP_AJAX call to create popin with all templates
+     */
+    public function woodyGetAllTemplates()
+    {
+        $return = [];
+        $woodyLibrary = new WoodyLibrary();
+
+        $woodyComponents = get_transient('woody_components');
+        if (empty($woodyComponents)) {
+            $woodyComponents = $woodyLibrary->getComponents();
+            set_transient('woody_components', $woodyComponents);
+        }
+
+        foreach ($woodyComponents as $key => $component) {
+            $groups = !empty($component['acf_groups']) ? implode(" ", $component['acf_groups']) : '';
+            if (!empty($groups)) {
+                $return[$key] = '<div class="tpl-choice-wrapper '.$groups.'" data-value="'. $key .'" >
+                <img class="img-responsive lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="' . WP_HOME . '/app/dist/' . WP_SITE_KEY . '/img/woody-library/views/' . $component['thumbnails']['small'] . '?version=' . get_option('woody_theme_version') . '" alt="' . $key . '" width="150" height="150" />
+                <h5 class="tpl-title">' . $component['name'] . '</h5>
+                </div>';
+            }
+        }
+
+        wp_send_json($return);
+        exit;
     }
 }
