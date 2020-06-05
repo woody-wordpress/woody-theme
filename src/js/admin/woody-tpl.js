@@ -33,16 +33,22 @@ $('#post').each(function() {
                     }
 
                     $('.woody-tpl-button').on('click', function() {
+                        var tpl_value = "";
                         var button = $(this);
                         var group = "";
-                        $.each(button.attr("classList"), function(index, value) {
-                            if(value.indexOf('group', 0)) {
-                                console.log(value, "group");
+
+                        var classes = button.attr('class').split(' ');
+                        $.each(classes, function(index, value) {
+                            if(value.indexOf('group') == 0) {
                                 group = value;
                             }
                         });
 
-                        console.log(group, "final group");
+                        $('#tpls_popin li .tpl-choice-wrapper').each(function(){
+                            if (!($(this).hasClass(group))) {
+                                $(this).addClass('hidden');
+                            }
+                        })
 
                         $('#tpls_popin').addClass('opened');
                     });
