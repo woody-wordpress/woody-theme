@@ -6,13 +6,13 @@ $('#post').each(function() {
     if (accepted_post.includes($('#post_type').val())) {
         $('#post-body-content').append('<div id="tpls_popin" class="hidden"><a href="#" class="close">Fermer</a> <a href="#" class="save">Enregistrer</a><ul></ul></div>');
         $('#tpls_popin .close').on('click', function() {
-            $('#tpls_popin').addClass('hidden');
             $('#tpls_popin').removeClass('opened');
+            $('#tpls_popin li').removeClass('hidden');
+            $('#tpls_popin li').removeClass('selected');
         });
 
         $('#tpls_popin .save').on('click', function() {
-            $this = $(this);
-            $('#tpls_popin').addClass('hidden');
+            var button = $(this);
             $('#tpls_popin').removeClass('opened');
         });
     }
@@ -33,7 +33,17 @@ $('#post').each(function() {
                     }
 
                     $('.woody-tpl-button').on('click', function() {
-                        $('#tpls_popin').removeClass('hidden');
+                        var button = $(this);
+                        var group = "";
+                        $.each(button.attr("classList"), function(index, value) {
+                            if(value.indexOf('group', 0)) {
+                                console.log(value, "group");
+                                group = value;
+                            }
+                        });
+
+                        console.log(group, "final group");
+
                         $('#tpls_popin').addClass('opened');
                     });
                 },
