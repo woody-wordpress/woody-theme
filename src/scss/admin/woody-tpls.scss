@@ -134,3 +134,24 @@
 #tpls_popin.opened {
     transform: translateX(0);
 }
+
+.acf-field {
+    &[data-name$='woody_tpl'] {
+        width: 50%;
+        float: right;
+
+        .acf-input input {
+            cursor: not-allowed;
+            pointer-events: none;
+            opacity: .4;
+            height: 46px;
+        }
+    }
+
+    &.woody-tpl-button {
+        width: 50%;
+        float: left;
+        clear: none;
+        border-top: none !important;
+    }
+}
