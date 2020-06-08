@@ -39,11 +39,9 @@ $('#post').each(function() {
                         action: 'woody_tpls',
                     },
                     success: function(data) {
-                        for (let [key, value] of Object.entries(data)) {
-                            $('#tpls_popin ul').append('<li>' + value + '</li>');
-                        }
+                        $('#tpls_popin ul').append(data);
 
-                        $('#tpls_popin li').on('click', function(){
+                        $('#tpls_popin li').on('click', function() {
                             let tpl = $(this).find('.tpl-choice-wrapper');
                             $('.tpl-choice-wrapper.selected').removeClass('selected');
                             tpl.addClass('selected');

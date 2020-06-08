@@ -915,8 +915,8 @@ class WoodyTheme_ACF
      */
     public function woodyGetAllTemplates()
     {
-        $tplComponents = get_transient('woody_tpls_components');
-        if (empty($tplComponents)) {
+        $return = get_transient('woody_tpls_components');
+        if (empty($return)) {
             $tplComponents = [];
             $woodyLibrary = new WoodyLibrary();
             $woodyComponents = $woodyLibrary->getComponents();
@@ -958,10 +958,14 @@ class WoodyTheme_ACF
             }
 
             $tplComponents = array_merge($woody_tpls_order, $tplComponents);
-            set_transient('woody_tpls_components', $tplComponents);
+
+            foreach ($tplComponents as $key => $value) {
+                $return .= '<li>' . $value . '</li>' ;
+            }
+            set_transient('woody_tpls_components', $return);
         }
 
-        wp_send_json($tplComponents);
+        wp_send_json($return);
         exit;
     }
 }
