@@ -37,7 +37,7 @@ $('#post').each(function() {
                         $('#tpls_popin ul').append('<li>' + value + '</li>');
                     }
 
-                    $('.woody-tpl-button').on('click', function() {
+                    $(document).on('click', '.woody-tpl-button', function() {
                         button = $(this);
                         field_key = button.data('key').substr(7);
                         var tpl_value = button.parent().find('[data-key="'+ field_key +'"] input').val();

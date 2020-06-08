@@ -915,16 +915,31 @@ class WoodyTheme_ACF
      */
     public function woodyGetAllTemplates()
     {
-        $tplComponents = get_transient('woody_tpls_components');
+        // $tplComponents = get_transient('woody_tpls_components');
+        $tplComponents = '';
         if (empty($tplComponents)) {
             $tplComponents = [];
             $woodyLibrary = new WoodyLibrary();
             $woodyComponents = $woodyLibrary->getComponents();
 
             foreach ($woodyComponents as $key => $component) {
+                $fitted_for = (!empty($component['items_count'][0]['fitted_for'])) ? $component['items_count'][0]['fitted_for'] : '';
+                $accepts_max = (!empty($component['items_count'][0]['accepts_max'])) ? $component['items_count'][0]['accepts_max'] : '';
+                $count_data = [];
+
+                if (!empty($fitted_for)) {
+                    $count_data[] = 'data-fittedfor="' . $fitted_for . '"';
+                }
+
+                if (!empty($accepts_max)) {
+                    $count_data[] = 'data-acceptsmax="' . $accepts_max . '"';
+                }
+
+                $count_data = implode(' ', $count_data);
+
                 $groups = !empty($component['acf_groups']) ? implode(" ", $component['acf_groups']) : '';
                 if (!empty($groups)) {
-                    $tplComponents[$key] = '<div class="tpl-choice-wrapper '.$groups.'" data-value="'. $key .'" >
+                    $tplComponents[$key] = '<div class="tpl-choice-wrapper '. $count_data . ' ' . $groups.'" data-value="'. $key .'" >
                     <img class="img-responsive lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="' . WP_HOME . '/app/dist/' . WP_SITE_KEY . '/img/woody-library/views/' . $component['thumbnails']['small'] . '?version=' . get_option('woody_theme_version') . '" alt="' . $key . '" width="150" height="150" />
                     <h5 class="tpl-title">' . $component['name'] . '</h5>
                     </div>';
