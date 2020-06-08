@@ -123,7 +123,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "default_value": "",
+            "default_value": "blocks-accordion-tpl_01",
             "maxlength": "",
             "placeholder": "",
             "prepend": "",

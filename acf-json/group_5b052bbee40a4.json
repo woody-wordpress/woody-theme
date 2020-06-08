@@ -261,7 +261,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "default_value": "",
+            "default_value": "blocks-hero-tpl_01",
             "placeholder": "",
             "prepend": "",
             "append": "",

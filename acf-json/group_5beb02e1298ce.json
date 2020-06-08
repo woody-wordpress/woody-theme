@@ -234,7 +234,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "default_value": "",
+            "default_value": "blocks-claims-tpl_03",
             "placeholder": "",
             "prepend": "",
             "append": "",

@@ -127,7 +127,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "default_value": "",
+            "default_value": "blocks-quote-tpl_02",
             "placeholder": "",
             "prepend": "",
             "append": "",

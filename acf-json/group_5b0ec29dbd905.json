@@ -99,7 +99,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "default_value": "",
+            "default_value": "blocks-feature-tpl_01",
             "placeholder": "",
             "prepend": "",
             "append": "",

@@ -109,7 +109,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "default_value": "",
+            "default_value": "blocks-tabs-tpl_01",
             "placeholder": "",
             "prepend": "",
             "append": "",

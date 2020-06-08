@@ -386,7 +386,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "default_value": "",
+            "default_value": "swipers-landing_swipers-tpl_01",
             "placeholder": "",
             "prepend": "",
             "append": "",

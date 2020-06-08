@@ -194,7 +194,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "default_value": "",
+            "default_value": "blocks-call_to_action-tpl_01",
             "placeholder": "",
             "prepend": "",
             "append": "",

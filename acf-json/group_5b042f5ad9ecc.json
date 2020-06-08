@@ -82,7 +82,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "default_value": "",
+            "default_value": "blocks-custom_text-tpl_01",
             "placeholder": "",
             "prepend": "",
             "append": "",

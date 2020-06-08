@@ -739,7 +739,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "default_value": "",
+            "default_value": "blocks-page_teaser-tpl_01",
             "placeholder": "",
             "prepend": "",
             "append": "",
