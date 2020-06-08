@@ -915,28 +915,26 @@ class WoodyTheme_ACF
      */
     public function woodyGetAllTemplates()
     {
-        $return = [];
-        $woodyLibrary = new WoodyLibrary();
-
-        $woodyComponents = get_transient('woody_components');
-        if (empty($woodyComponents)) {
+        $tplComponents = get_transient('woody_tpls_components');
+        if (empty($tplComponents)) {
+            $tplComponents = [];
+            $woodyLibrary = new WoodyLibrary();
             $woodyComponents = $woodyLibrary->getComponents();
-            set_transient('woody_components', $woodyComponents);
-        }
 
-        // TODO: mettre ça dans le transient
-        foreach ($woodyComponents as $key => $component) {
-            $groups = !empty($component['acf_groups']) ? implode(" ", $component['acf_groups']) : '';
-            if (!empty($groups)) {
-                $return[$key] = '<div class="tpl-choice-wrapper '.$groups.'" data-value="'. $key .'" >
-                <img class="img-responsive lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="' . WP_HOME . '/app/dist/' . WP_SITE_KEY . '/img/woody-library/views/' . $component['thumbnails']['small'] . '?version=' . get_option('woody_theme_version') . '" alt="' . $key . '" width="150" height="150" />
-                <h5 class="tpl-title">' . $component['name'] . '</h5>
-                </div>';
+            foreach ($woodyComponents as $key => $component) {
+                $groups = !empty($component['acf_groups']) ? implode(" ", $component['acf_groups']) : '';
+                if (!empty($groups)) {
+                    $tplComponents[$key] = '<div class="tpl-choice-wrapper '.$groups.'" data-value="'. $key .'" >
+                    <img class="img-responsive lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="' . WP_HOME . '/app/dist/' . WP_SITE_KEY . '/img/woody-library/views/' . $component['thumbnails']['small'] . '?version=' . get_option('woody_theme_version') . '" alt="' . $key . '" width="150" height="150" />
+                    <h5 class="tpl-title">' . $component['name'] . '</h5>
+                    </div>';
+                }
             }
+
+            set_transient('woody_tpls_components', $tplComponents);
         }
 
-        ksort($return);
-        wp_send_json($return);
+        wp_send_json($tplComponents);
         exit;
     }
 }
