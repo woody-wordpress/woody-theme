@@ -82,7 +82,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
+            "default_value": "blocks-summary-tpl_01",
             "maxlength": "",
             "placeholder": "",
             "prepend": "",
