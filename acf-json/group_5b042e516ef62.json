@@ -115,6 +115,23 @@
             "endpoint": 0
         },
         {
+            "key": "field_5edded57ce378",
+            "label": "Template",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
             "key": "field_5b042ef3910cb",
             "label": "Template",
             "name": "woody_tpl",
@@ -136,6 +153,23 @@
             "return_format": "value"
         },
         {
+            "key": "field_5ed8abe6775c8",
+            "label": "Options avancées",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 1,
+            "endpoint": 0
+        },
+        {
             "key": "field_5ed8ab4b82622",
             "label": "Paramètres de fond",
             "name": "custom_text_bg_params",
@@ -155,23 +189,6 @@
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 1
-        },
-        {
-            "key": "field_5ed8abe6775c8",
-            "label": "Options avancées",
-            "name": "",
-            "type": "accordion",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "open": 0,
-            "multi_expand": 1,
-            "endpoint": 0
         }
     ],
     "location": [
@@ -189,5 +206,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Portrait + Texte + Signature)",
-    "modified": 1591262069
+    "modified": 1591602587
 }
