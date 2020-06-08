@@ -715,7 +715,7 @@ class WoodyTheme_Roles
             ],
             'Configurer les catégories d\'expression' => [
                 'administrator' => true,
-                'editor' => false,
+                'editor' => true,
                 'contributor' => false,
                 'translator' => false,
             ],
