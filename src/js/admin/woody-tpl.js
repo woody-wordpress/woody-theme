@@ -49,9 +49,14 @@ $('#post').each(function() {
                             let tpl_value = button.parent().find('[data-key="'+ field_key +'"] input').val();
                             let pattern = new RegExp("group_[a-z0-9]+");
                             let res = pattern.exec(button.attr('class'));
-                            let group = res[0] != undefined && res[0] != null ? res[0] : '';
+                            let group = res != 'undefined' && res != null ? res[0] : '';
 
-                            $('#tpls_popin li .tpl-choice-wrapper').each(function(){
+                            if (group == '') {
+                                pattern = new RegExp("field_[a-z0-9]+");
+                                res = pattern.exec(button.attr('class'));
+                                group = res != 'undefined' && res != null ? res[0] : '';
+                            }
+                            $('#tpls_popin li .tpl-choice-wrapper').each(function() {
                                 if (!($(this).hasClass(group))) {
                                     $(this).parent('li').addClass('hidden');
                                 } else if ($(this).data('value') == tpl_value) {
