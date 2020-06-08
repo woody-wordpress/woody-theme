@@ -28,32 +28,7 @@ $('#post').each(function() {
             $('#tpls_popin li').removeClass('hidden');
         });
 
-        $(document).ready( function() {
-            // AJAX to get all woody_tpl
-            $('#tpls_popin').each(function() {
-                $.ajax({
-                    type: 'POST',
-                    dataType: 'json',
-                    url: ajaxurl,
-                    data: {
-                        action: 'woody_tpls',
-                    },
-                    success: function(data) {
-                        $('#tpls_popin ul').append(data);
-
-                        $('#tpls_popin li').on('click', function() {
-                            let tpl = $(this).find('.tpl-choice-wrapper');
-                            $('.tpl-choice-wrapper.selected').removeClass('selected');
-                            tpl.addClass('selected');
-                        });
-                    },
-                    error: function() {},
-                });
-            });
-        });
-
-        $(document).on('click', '.woody-tpl-button', function() {
-            button = $(this);
+        var openTplChoices = function(button) {
             field_key = button.data('key').substr(7);
 
             let tpl_value = button.parent().find('[data-key="'+ field_key +'"] input').val();
@@ -75,6 +50,43 @@ $('#post').each(function() {
             })
 
             $('#tpls_popin').addClass('opened');
+        }
+
+        // AJAX to get all woody_tpl only the first time
+        $(document).one('click', '.woody-tpl-button', function() {
+            button = $(this);
+            $('#tpls_popin').addClass('ajax-load');
+            $('#tpls_popin').each(function() {
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: ajaxurl,
+                    data: {
+                        action: 'woody_tpls',
+                    },
+                    success: function(data) {
+                        $('#tpls_popin ul').append(data);
+                        $('#tpls_popin').removeClass('ajax-load');
+
+                        $('#tpls_popin li').on('click', function() {
+                            let tpl = $(this).find('.tpl-choice-wrapper');
+                            $('.tpl-choice-wrapper.selected').removeClass('selected');
+                            tpl.addClass('selected');
+                        });
+                    },
+                    error: function() {
+                        $('#tpls_popin').removeClass('ajax-load');
+                    },
+                });
+
+                openTplChoices(button);
+            });
+
+
+        });
+
+        $(document).on('click', '.woody-tpl-button', function() {
+            openTplChoices($(this));
         });
     }
 });
