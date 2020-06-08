@@ -722,13 +722,19 @@ class WoodyTheme_Roles
             'Editer les catégories d\'expression' => [
                 'administrator' => true,
                 'editor' => true,
-                'contributor' => false,
+                'contributor' => true,
                 'translator' => false,
             ],
             'Supprimer les catégories d\'expression' => [
                 'administrator' => true,
                 'editor' => true,
-                'contributor' => false,
+                'contributor' => true,
+                'translator' => false,
+            ],
+            'Assigner les catégories d\'expression' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
                 'translator' => false,
             ],
 
