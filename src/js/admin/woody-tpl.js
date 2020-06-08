@@ -9,8 +9,8 @@ $('#post').each(function() {
 
         $('#post-body-content').append(`<div id="tpls_popin">
             <div class="tpls_popin_actions">
-                <a href="#" class="close">Fermer</a>
-                <a href="#" class="save">Enregistrer</a>
+                <span class="close">Fermer</span>
+                <span class="save">Enregistrer</span>
             </div>
             <ul></ul>
         </div>`);
@@ -22,13 +22,13 @@ $('#post').each(function() {
         });
 
         $('#tpls_popin .save').on('click', function() {
-            button.parent().find('[data-key="'+ field_key +'"] input').val($('.tpl-choice-wrapper.selected').data('value'));
+            button.parent().find('[data-key="' + field_key + '"] input').val($('.tpl-choice-wrapper.selected').data('value'));
             $('.tpl-choice-wrapper.selected').removeClass('selected')
             $('#tpls_popin').removeClass('opened');
             $('#tpls_popin li').removeClass('hidden');
         });
 
-        $(document).ready( function() {
+        $(document).ready(function() {
             // AJAX to get all woody_tpl
             $('#tpls_popin').each(function() {
                 $.ajax({
@@ -56,7 +56,7 @@ $('#post').each(function() {
             button = $(this);
             field_key = button.data('key').substr(7);
 
-            let tpl_value = button.parent().find('[data-key="'+ field_key +'"] input').val();
+            let tpl_value = button.parent().find('[data-key="' + field_key + '"] input').val();
             let pattern = new RegExp("group_[a-z0-9]+");
             let res = pattern.exec(button.attr('class'));
             let group = res != 'undefined' && res != null ? res[0] : '';
