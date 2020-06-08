@@ -11,7 +11,7 @@ $('#post').each(function() {
             <div class="tpls_popin_actions">
                 <a href="#" class="close">Fermer</a>
                 <a href="#" class="save">Enregistrer</a>
-            <div>
+            </div>
             <ul></ul>
         </div>`);
 

@@ -938,7 +938,7 @@ class WoodyTheme_ACF
 
                 $groups = !empty($component['acf_groups']) ? implode(" ", $component['acf_groups']) : '';
                 if (!empty($groups)) {
-                    $tplComponents[$key] = '<div class="tpl-choice-wrapper '. $count_data . ' ' . $groups.'" data-value="'. $key .'" >
+                    $tplComponents[$key] = '<div class="tpl-choice-wrapper ' . $groups . '" '. $count_data . '  data-value="'. $key .'" >
                     <img class="img-responsive lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="' . WP_HOME . '/app/dist/' . WP_SITE_KEY . '/img/woody-library/views/' . $component['thumbnails']['small'] . '?version=' . get_option('woody_theme_version') . '" alt="' . $key . '" width="150" height="150" />
                     <h5 class="tpl-title">' . $component['name'] . '</h5>
                     </div>';
