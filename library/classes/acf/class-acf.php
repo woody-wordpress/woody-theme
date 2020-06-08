@@ -915,8 +915,7 @@ class WoodyTheme_ACF
      */
     public function woodyGetAllTemplates()
     {
-        // $tplComponents = get_transient('woody_tpls_components');
-        $tplComponents = '';
+        $tplComponents = get_transient('woody_tpls_components');
         if (empty($tplComponents)) {
             $tplComponents = [];
             $woodyLibrary = new WoodyLibrary();
@@ -946,6 +945,19 @@ class WoodyTheme_ACF
                 }
             }
 
+            $woody_tpls_order = get_transient('woody_tpls_order');
+            if (empty($woody_tpls_order)) {
+                $woody_tpls_order = array_flip($this->sortWoodyTpls());
+                set_transient('woody_tpls_order', $woody_tpls_order);
+            }
+
+            foreach ($woody_tpls_order as $order_key => $value) {
+                if (!array_key_exists($order_key, $tplComponents)) {
+                    unset($woody_tpls_order[$order_key]);
+                }
+            }
+
+            $tplComponents = array_merge($woody_tpls_order, $tplComponents);
             set_transient('woody_tpls_components', $tplComponents);
         }
 
