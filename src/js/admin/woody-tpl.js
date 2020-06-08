@@ -9,8 +9,8 @@ $('#post').each(function() {
 
         $('#post-body-content').append(`<div id="tpls_popin">
             <div class="tpls_popin_actions">
-                <a href="#" class="close">Fermer</a>
-                <a href="#" class="save">Enregistrer</a>
+                <span class="close">Fermer</span>
+                <span class="save">Enregistrer</span>
             </div>
             <ul></ul>
         </div>`);
@@ -22,7 +22,7 @@ $('#post').each(function() {
         });
 
         $('#tpls_popin .save').on('click', function() {
-            button.parent().find('[data-key="'+ field_key +'"] input').val($('.tpl-choice-wrapper.selected').data('value'));
+            button.parent().find('[data-key="' + field_key + '"] input').val($('.tpl-choice-wrapper.selected').data('value'));
             $('.tpl-choice-wrapper.selected').removeClass('selected')
             $('#tpls_popin').removeClass('opened');
             $('#tpls_popin li').removeClass('hidden');
@@ -56,6 +56,7 @@ $('#post').each(function() {
         $(document).one('click', '.woody-tpl-button', function() {
             button = $(this);
             $('#tpls_popin').addClass('ajax-load');
+
             $('#tpls_popin').each(function() {
                 $.ajax({
                     type: 'POST',
@@ -81,8 +82,6 @@ $('#post').each(function() {
 
                 openTplChoices(button);
             });
-
-
         });
 
         $(document).on('click', '.woody-tpl-button', function() {
