@@ -25,6 +25,7 @@ $('#post').each(function() {
             button.parent().find('[data-key="'+ field_key +'"] input').val($('.tpl-choice-wrapper.selected').data('value'));
             $('.tpl-choice-wrapper.selected').removeClass('selected')
             $('#tpls_popin').removeClass('opened');
+            $('#tpls_popin li').removeClass('hidden');
         });
 
         $(document).ready( function() {
