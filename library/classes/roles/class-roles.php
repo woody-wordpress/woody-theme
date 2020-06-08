@@ -722,13 +722,13 @@ class WoodyTheme_Roles
             'Editer les catégories d\'expression' => [
                 'administrator' => true,
                 'editor' => true,
-                'contributor' => false,
+                'contributor' => true,
                 'translator' => false,
             ],
             'Supprimer les catégories d\'expression' => [
                 'administrator' => true,
                 'editor' => true,
-                'contributor' => false,
+                'contributor' => true,
                 'translator' => false,
             ],
 
@@ -736,7 +736,7 @@ class WoodyTheme_Roles
             'copy_posts' => [
                 'administrator' => true,
                 'editor' => true,
-                'contributor' => false,
+                'contributor' => true,
                 'translator' => false,
             ],
 
