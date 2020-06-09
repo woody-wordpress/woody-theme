@@ -1,8 +1,7 @@
 {
     "key": "group_5c0e4121ee3ed",
     "title": "Bloc de réservation",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5c0e414b29055",
             "label": "Contenu",
             "name": "",
@@ -55,8 +54,7 @@
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter une playlist",
-            "sub_fields": [
-                {
+            "sub_fields": [{
                     "key": "field_5c0e43162905d",
                     "label": "Playlist",
                     "name": "pl_post_id",
@@ -141,29 +139,41 @@
             "key": "field_5c0e416429057",
             "label": "Template",
             "name": "bookblock_woody_tpl",
-            "type": "radio",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-label",
                 "id": ""
             },
-            "choices": {
-                "blocks-booking-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.cotelandesnature.wp.rc-dev.com\/app\/dist\/cotelandesnature\/img\/woody-library\/views\/blocks\/booking\/tpl_01\/thumbnail.png?version=2.9.1\" alt=\"blocks-booking-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Bloc de réservation - template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Bloc de réservation - template 1<\/h4>Select + champs de facettes chaudes<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>",
-                "blocks-booking-tpl_02": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.cotelandesnature.wp.rc-dev.com\/app\/dist\/cotelandesnature\/img\/woody-library\/views\/blocks\/booking\/tpl_02\/thumbnail.png?version=2.9.1\" alt=\"blocks-booking-tpl_02\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Bloc de réservation - template 2<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Bloc de réservation - template 2<\/h4>Tabulations avec icônes + champs de facettes chaudes<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+            "default_value": "blocks-booking-tpl_01",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "button_field_5c0e416429057",
+            "label": "Choisir une mise en page",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label woody-tpl-button group_5c0e4121ee3ed",
+                "id": ""
             },
-            "allow_null": 0,
-            "other_choice": 0,
-            "default_value": "",
-            "layout": "vertical",
-            "return_format": "value",
-            "save_other_choice": 0
+            "message": "Choisir une mise en page",
+            "new_lines": "wpautop",
+            "esc_html": 0
         },
         {
             "key": "field_5c0e41a529058",
-            "label": "Paramètres avancés",
+            "label": "Options avancées",
             "name": "",
             "type": "accordion",
             "instructions": "",
@@ -201,8 +211,7 @@
         }
     ],
     "location": [
-        [
-            {
+        [{
                 "param": "post_type",
                 "operator": "==",
                 "value": "page"
@@ -213,8 +222,7 @@
                 "value": "front_page"
             }
         ],
-        [
-            {
+        [{
                 "param": "post_type",
                 "operator": "==",
                 "value": "woody_model"

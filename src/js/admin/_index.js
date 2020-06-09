@@ -12,3 +12,4 @@ import './global-admin';
 import './nav-menus-ui';
 import './tags-primary';
 import './woody-seo.js';
+import './woody-tpl.js';
