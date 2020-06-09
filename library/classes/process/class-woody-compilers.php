@@ -472,4 +472,23 @@ class WoodyTheme_WoodyCompilers
         }
         return $return;
     }
+
+    public function formatSummaryItems($post_id)
+    {
+        $items = [];
+        $permalink = get_permalink($post_id);
+        $sections = get_field('section', $post_id);
+        if (!empty($sections) && is_array($sections)) {
+            foreach ($sections as $s_key => $section) {
+                if (!empty($section['display_in_summary'])) {
+                    $items[] = [
+                        'title' => (!empty($section['section_summary_title'])) ? $section['section_summary_title'] : 'Section ' . $s_key,
+                        'anchor' => $permalink . '#pageSection-' . $s_key
+                    ];
+                }
+            }
+        }
+
+        return $items;
+    }
 }

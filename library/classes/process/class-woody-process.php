@@ -85,6 +85,7 @@ class WoodyTheme_WoodyProcess
                         }
                     }
                 }
+                $layout['display'] = $this->tools->getDisplayOptions($layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             case 'interactive_gallery':
@@ -143,10 +144,17 @@ class WoodyTheme_WoodyProcess
                 $layout['woody_tpl'] = 'blocks-eye_candy_img-tpl_01';
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
+            case 'page_summary':
+                if (!empty($layout['summary_bg_params'])) {
+                    $layout['display'] = $this->tools->getDisplayOptions($layout['summary_bg_params']);
+                }
+                $layout['items'] = $this->compilers->formatSummaryItems(get_the_ID());
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            break;
             case 'free_text':
                 $layout['text'] = $this->tools->replacePattern($layout['text'], get_the_ID());
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
-                // no break
+            break;
             default:
                 $layout = apply_filters('woody_custom_layout', $layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);

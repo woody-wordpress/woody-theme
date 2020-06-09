@@ -679,11 +679,84 @@
                         }],
                         "min": "",
                         "max": ""
+                    },
+                    "layout_5ed7a7df6a190": {
+                        "key": "layout_5ed7a7df6a190",
+                        "name": "page_summary",
+                        "label": "Sommaire",
+                        "display": "block",
+                        "sub_fields": [{
+                            "key": "field_5ed7a7ea6a191",
+                            "label": "Sommaire",
+                            "name": "page_summary",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "hide-label",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5ed7a3b9c0e0e"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
+                        "min": "",
+                        "max": ""
                     }
                 },
                 "button_label": "Ajouter un bloc",
                 "min": "",
                 "max": ""
+            },
+            {
+                "key": "field_5ed7a10730085",
+                "label": "Afficher dans le sommaire",
+                "name": "display_in_summary",
+                "type": "true_false",
+                "instructions": "Affiche une ancre vers cette section si un bloc sommaire a été ajouté à la page",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "40",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5ed7a18630086",
+                "label": "Titre pour le sommaire",
+                "name": "section_summary_title",
+                "type": "text",
+                "instructions": "Titre court pour le bloc de sommaire",
+                "required": 0,
+                "conditional_logic": [
+                    [{
+                        "field": "field_5ed7a10730085",
+                        "operator": "==",
+                        "value": "1"
+                    }]
+                ],
+                "wrapper": {
+                    "width": "30",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
             },
             {
                 "key": "field_5b051c3b6717b",
@@ -1120,5 +1193,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1574323606
+    "modified": 1591191586
 }

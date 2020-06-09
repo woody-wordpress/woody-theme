@@ -26,28 +26,29 @@ class WoodyTheme_Plugins_Activation
     public function activatePlugins()
     {
         $this->deactivate_plugins = [
+            'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
             'timber-library/timber.php',
             'wordpress-seo/wp-seo.php',
-            'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php'
         ];
-        
+
         $this->activate_plugins = [
+            'advanced-cron-manager/advanced-cron-manager.php',
             'advanced-custom-fields-pro/acf.php',
             'bea-sanitize-filename/bea-sanitize-filename.php',
-            'wp-deferred-javascripts/wp-deferred-javascripts.php',
-            'advanced-cron-manager/advanced-cron-manager.php',
-            'redirection/redirection.php',
-            'enhanced-media-library/enhanced-media-library.php',
-            'members/members.php',
-            'ssl-insecure-content-fixer/ssl-insecure-content-fixer.php',
-            'mce-table-buttons/mce_table_buttons.php',
             'duplicate-post/duplicate-post.php',
+            'enhanced-media-library/enhanced-media-library.php',
+            'heartbeat-control/heartbeat-control.php',
+            'mce-table-buttons/mce_table_buttons.php',
+            'members/members.php',
             'polylang-pro/polylang.php',
             'publish-view/publish-view.php',
-            'woody-plugin/woody.php',
+            'redirection/redirection.php',
+            'ssl-insecure-content-fixer/ssl-insecure-content-fixer.php',
             'woody-acf-sync/woody-acf-sync.php',
             'woody-crop/woody-crop.php',
+            'woody-plugin/woody.php',
             'woody-sso/woody-sso.php',
+            'wp-deferred-javascripts/wp-deferred-javascripts.php',
         ];
 
         switch (WP_ENV) {
