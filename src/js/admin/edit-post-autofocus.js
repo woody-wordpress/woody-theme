@@ -2,26 +2,6 @@ import $ from 'jquery';
 
 $('#post').each(function () {
 
-    // TODO: A quoi sert cette fonction ???
-    var countElements = function (field) {
-        var $parent = field.parent().$el;
-        var $bigparent = field.parent().parent().$el;
-
-        // add class to this field
-        $parent.each(function () {
-            // toggleChoiceAction($bigparent);
-
-            setTimeout(() => {
-                var count = $(this).find('.acf-table .acf-row').length - 1;
-                // fitChoiceAction($bigparent, count);
-            }, 2000);
-        });
-    };
-
-    acf.addAction('ready_field/key=field_5b22415792db0', countElements);
-    acf.addAction('append_field/key=field_5b22415792db0', countElements);
-    acf.addAction('remove_field/key=field_5b22415792db0', countElements);
-
     // **
     // Update tpl-choice-wrapper classes for autofocus layout
     // **
@@ -83,8 +63,6 @@ $('#post').each(function () {
             success: function (data) {
                 delete getAutoFocusData_AJAX[block_id];
 
-                // fitChoiceAction($parent, data);
-
                 if (data === 0) {
                     $message
                         .find('.loading').hide().end()
@@ -103,7 +81,6 @@ $('#post').each(function () {
 
     var getAutoFocusQuery = function (field) {
         var $parent = field.$el.parent();
-        var $bigparent = field.parent().$el;
 
         $parent.each(function () {
             var $this = $(this);

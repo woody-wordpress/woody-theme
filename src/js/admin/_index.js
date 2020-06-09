@@ -1,12 +1,12 @@
 // Admin
 import './attachment';
 import './drag_drop_blocks';
-import './edit-post';
-import './edit-post-autofocus';
+// import './edit-post-autofocus';
 import './edit-post-change-lang';
 import './edit-post-close-acf';
-import './edit-post-model';
-import './edit-post-sticky-actions';
+// import './edit-post-model';
+import './edit-post-page-teaser-media';
+// import './edit-post-sticky-actions';
 import './edit-post-unpublisher';
 import './global-admin';
 import './nav-menus-ui';
