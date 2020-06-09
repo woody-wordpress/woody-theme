@@ -400,9 +400,9 @@
             "required": 0,
             "conditional_logic": [
                 [{
-                        "field": "field_5c614d83a4e9b",
-                        "operator": "==",
-                        "value": "1"
+                    "field": "field_5c614d83a4e9b",
+                    "operator": "==",
+                    "value": "1"
                 }]
             ],
             "wrapper": {
@@ -412,13 +412,66 @@
             },
             "layout": "block",
             "sub_fields": [{
+                    "key": "field_5ed7ff144e739",
+                    "label": "Utiliser un profil existant",
+                    "name": "use_profile",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_5ed7ff874e73a",
+                    "label": "Profil",
+                    "name": "profile_post",
+                    "type": "post_object",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [{
+                            "field": "field_5ed7ff144e739",
+                            "operator": "==",
+                            "value": "1"
+                        }]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": [
+                        "profile"
+                    ],
+                    "taxonomy": "",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "return_format": "id",
+                    "ui": 1
+                },
+                {
                     "key": "field_5c614ee5a4e9f",
                     "label": "Prénom \/ Titre",
                     "name": "profile_title",
                     "type": "text",
                     "instructions": "Exemple : Rencontrez * Prénom *",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [{
+                            "field": "field_5ed7ff144e739",
+                            "operator": "!=",
+                            "value": "1"
+                        }]
+                    ],
                     "wrapper": {
                         "width": "25",
                         "class": "",
@@ -437,7 +490,13 @@
                     "type": "image",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [{
+                            "field": "field_5ed7ff144e739",
+                            "operator": "!=",
+                            "value": "1"
+                        }]
+                    ],
                     "wrapper": {
                         "width": "25",
                         "class": "",
@@ -461,7 +520,13 @@
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [{
+                            "field": "field_5ed7ff144e739",
+                            "operator": "!=",
+                            "value": "1"
+                        }]
+                    ],
                     "wrapper": {
                         "width": "50",
                         "class": "",
@@ -788,5 +853,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Les infos principales de la page + la possibilité d'ajouter les liens de partage et d'ajout aux favoris",
-    "modified": 1569851984
+    "modified": 1591214022
 }
