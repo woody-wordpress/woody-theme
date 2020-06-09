@@ -17,14 +17,14 @@ $('#post').each(function() {
 
         $('#tpls_popin .close').on('click', function() {
             $('#tpls_popin').removeClass('opened');
-            $('#tpls_popin li').removeClass('hidden');
             $('.tpl-choice-wrapper.selected').removeClass('selected');
+            $('#tpls_popin li').removeClass('hidden');
         });
 
         $('#tpls_popin .save').on('click', function() {
             button.parent().find('[data-key="' + field_key + '"] input').val($('.tpl-choice-wrapper.selected').data('value'));
-            $('.tpl-choice-wrapper.selected').removeClass('selected')
             $('#tpls_popin').removeClass('opened');
+            $('.tpl-choice-wrapper.selected').removeClass('selected');
             $('#tpls_popin li').removeClass('hidden');
         });
 
@@ -41,6 +41,7 @@ $('#post').each(function() {
                 res = pattern.exec(button.attr('class'));
                 group = res != 'undefined' && res != null ? res[0] : '';
             }
+
             $('#tpls_popin li .tpl-choice-wrapper').each(function() {
                 if (!($(this).hasClass(group))) {
                     $(this).parent('li').addClass('hidden');
@@ -56,7 +57,6 @@ $('#post').each(function() {
         $(document).one('click', '.woody-tpl-button', function() {
             button = $(this);
             $('#tpls_popin').addClass('ajax-load');
-
             $('#tpls_popin').each(function() {
                 $.ajax({
                     type: 'POST',
@@ -74,17 +74,18 @@ $('#post').each(function() {
                             $('.tpl-choice-wrapper.selected').removeClass('selected');
                             tpl.addClass('selected');
                         });
+
+                        openTplChoices(button);
                     },
                     error: function() {
                         $('#tpls_popin').removeClass('ajax-load');
                     },
                 });
-
-                openTplChoices(button);
             });
         });
 
         $(document).on('click', '.woody-tpl-button', function() {
+            button = $(this);
             openTplChoices($(this));
         });
     }
