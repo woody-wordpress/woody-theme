@@ -85,6 +85,7 @@ class WoodyTheme_WoodyProcess
                         }
                     }
                 }
+                $layout['display'] = $this->tools->getDisplayOptions($layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             case 'interactive_gallery':
