@@ -1,8 +1,8 @@
-!(function($, window, document, undefined) {
+!(function ($, undefined) {
     var icons_list = '';
     var icons_loaded = false;
 
-    var editorWindowManager = function(editor) {
+    var editorWindowManager = function (editor) {
         tinymce.ScriptLoader.loadQueue();
         editor.windowManager.open({
             title: 'Ajouter un pictogramme',
@@ -13,7 +13,7 @@
                 name: 'woody-icons-container',
                 html: '<ul class="woody-icons-list" style="display:flex; flex-wrap:wrap; margin:0; height: 580px; overflow: scroll;">' + icons_list + '</ul>'
             }],
-            onsubmit: function(e) {
+            onsubmit: function (e) {
                 var selected_icon_class = $('.woody-icons-list').find('.selected').find('span').attr('class');
                 if (typeof selected_icon_class != 'undefined') {
                     editor.insertContent('&nbsp;<span class="' + selected_icon_class + '">&nbsp;</span>&nbsp;');
@@ -21,18 +21,18 @@
             }
         });
 
-        $('.woody-icon-list-el').click(function() {
+        $('.woody-icon-list-el').click(function () {
             $('.woody-icon-list-el.selected').removeClass('selected').css({ 'color': 'black', 'background-color': 'white' });
             $(this).addClass('selected').css({ 'color': 'white', 'background-color': '#0085ba' });
         });
     }
 
     tinymce.create('tinymce.plugins.woody_icons', {
-        init: function(editor, url) {
+        init: function (editor, url) {
             editor.addButton('woody_icons', {
                 image: url + '/star.svg',
                 title: 'Pictogrammes',
-                onclick: function() {
+                onclick: function () {
                     if (icons_loaded == false) {
                         // Appel ajax pour charger la liste des icones
                         $.ajax({
@@ -42,9 +42,9 @@
                             data: {
                                 action: 'woody_icons_list',
                             },
-                            success: function(response) {
+                            success: function (response) {
                                 const list = {};
-                                Object.keys(response).sort().forEach(function(key) {
+                                Object.keys(response).sort().forEach(function (key) {
                                     list[key] = response[key];
                                 });
 
@@ -55,7 +55,7 @@
 
                                 editorWindowManager(editor);
                             },
-                            error: function() {},
+                            error: function () { },
                         });
 
                     } else {
@@ -68,4 +68,4 @@
     });
     tinymce.PluginManager.add('woody_icons', tinymce.plugins.woody_icons);
 
-})(jQuery, window, document);
+})(jQuery);
