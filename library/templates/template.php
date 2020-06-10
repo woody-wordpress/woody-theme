@@ -60,6 +60,7 @@ abstract class WoodyTheme_TemplateAbstract
         $data['globals']['sheet_id'] = $this->context['sheet_id'];
         $data['globals']['woody_options_pages'] = $this->getWoodyOptionsPagesValues();
         $data['globals']['tags'] = $this->getTags($data['globals']['post_id']);
+        $data['globals']['lang'] = pll_current_language();
 
         return $data;
     }
