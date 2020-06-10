@@ -103,6 +103,7 @@ class WoodyTheme_Plugins_Options
             ],
         ];
         $this->updateOption('heartbeat_control_settings', $heartbeat_control_settings);
+        $this->updateOption('heartbeat_control_version', '2.0');
 
         // Media Library Taxonomy
         $wpuxss_eml_taxonomies = [
