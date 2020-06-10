@@ -32,7 +32,7 @@ class WoodyTheme_Robots
                 'Disallow: /*.twig$',
                 'Disallow: /*.inc$',
                 'Disallow: /*?*p=',
-                'Disallow: /*obf.js',
+                'Disallow: /*obf.min.js',
                 'Disallow: /*__hstc=*',
                 'Disallow: /*__hssc=*',
                 'Disallow: /*__hspf=*'
