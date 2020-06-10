@@ -61,7 +61,7 @@ abstract class WoodyTheme_TemplateAbstract
         $data['globals']['woody_options_pages'] = $this->getWoodyOptionsPagesValues();
         $data['globals']['tags'] = $this->getTags($data['globals']['post_id']);
         $data['globals']['current_lang'] = apply_filters('woody_pll_current_language', null);
-        $data['globals']['current_seaon'] = apply_filters('woody_pll_current_season', null);
+        $data['globals']['current_season'] = apply_filters('woody_pll_current_season', null);
         $data['globals']['languages'] = apply_filters('woody_pll_the_locales', null);
 
         return $data;
