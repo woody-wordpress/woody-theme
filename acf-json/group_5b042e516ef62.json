@@ -115,27 +115,10 @@
             "endpoint": 0
         },
         {
-            "key": "field_5edded57ce378",
-            "label": "Template",
-            "name": "",
-            "type": "accordion",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "open": 0,
-            "multi_expand": 0,
-            "endpoint": 0
-        },
-        {
             "key": "field_5b042ef3910cb",
             "label": "Template",
             "name": "woody_tpl",
-            "type": "radio",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -144,13 +127,28 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "choices": {},
-            "allow_null": 0,
-            "other_choice": 0,
-            "save_other_choice": 0,
-            "default_value": "",
-            "layout": "vertical",
-            "return_format": "value"
+            "default_value": "blocks-quote-tpl_02",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "button_field_5b042ef3910cb",
+            "label": "Choisir une mise en page",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label woody-tpl-button group_5b042e516ef62",
+                "id": ""
+            },
+            "message": "Choisir une mise en page",
+            "new_lines": "wpautop",
+            "esc_html": 0
         },
         {
             "key": "field_5ed8abe6775c8",
@@ -206,5 +204,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Elément de contenu (Portrait + Texte + Signature)",
-    "modified": 1591602587
+    "modified": 1591358665
 }
