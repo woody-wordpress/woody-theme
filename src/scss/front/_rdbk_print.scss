@@ -36,11 +36,14 @@
             top: 27mm;
             left: 0;
             max-width: 120mm;
-            padding-left: 7mm;
+            padding-left: 5mm;
 
             h2 {
                 line-height: 1.2em;
-                font-size: 26px;
+                font-size: 18px;
+                background: #efefef;
+                padding: 5px 10px;
+                border-radius: 5px;
             }
         }
     }
