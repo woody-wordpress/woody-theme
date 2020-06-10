@@ -29,6 +29,7 @@ class WoodyTheme_Plugins_Activation
             'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
             'timber-library/timber.php',
             'wordpress-seo/wp-seo.php',
+            'heartbeat-control/heartbeat-control.php',
         ];
 
         $this->activate_plugins = [
@@ -37,7 +38,6 @@ class WoodyTheme_Plugins_Activation
             'bea-sanitize-filename/bea-sanitize-filename.php',
             'duplicate-post/duplicate-post.php',
             'enhanced-media-library/enhanced-media-library.php',
-            'heartbeat-control/heartbeat-control.php',
             'mce-table-buttons/mce_table_buttons.php',
             'members/members.php',
             'polylang-pro/polylang.php',
