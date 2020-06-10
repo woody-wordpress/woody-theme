@@ -448,35 +448,6 @@
                         "min": "",
                         "max": ""
                     },
-                    "5b0444c446542": {
-                        "key": "5b0444c446542",
-                        "name": "files",
-                        "label": "! ANCIEN ! Fichiers à télécharger",
-                        "display": "block",
-                        "sub_fields": [{
-                            "key": "field_5b0444d346543",
-                            "label": "Fichiers à télécharger",
-                            "name": "files",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "clone": [
-                                "group_5b043853969a4"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }],
-                        "min": "",
-                        "max": ""
-                    },
                     "5b461c83b7c8c": {
                         "key": "5b461c83b7c8c",
                         "name": "call_to_action",
