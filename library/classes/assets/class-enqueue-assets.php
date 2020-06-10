@@ -49,6 +49,7 @@ class WoodyTheme_Enqueue_Assets
         add_action('wp_enqueue_scripts', [$this, 'enqueueAssets']);
         add_action('admin_enqueue_scripts', [$this, 'enqueueAdminAssets']);
         add_action('login_enqueue_scripts', [$this, 'enqueueAdminAssets']);
+        add_filter('heartbeat_settings', [$this, 'heartbeatSettings']);
 
         // Si vous utilisez HTML5, wdjs_use_html5 est un filtre qui enlève l’attribut type="text/javascript"
         add_filter('wdjs_use_html5', '__return_true');
@@ -79,6 +80,9 @@ class WoodyTheme_Enqueue_Assets
     {
         // Define $this->isTouristicPlaylist, $this->isTouristicSheet et $this->wThemeVersion
         $this->setGlobalVars();
+
+        // Remove heartbeat from front
+        wp_deregister_script('heartbeat');
 
         // Deregister the jquery version bundled with WordPress & define another
         wp_deregister_script('jquery');
@@ -315,6 +319,12 @@ class WoodyTheme_Enqueue_Assets
 
         // Enqueue the main Stylesheet.
         wp_enqueue_style('admin-stylesheet', $this->assetPath('css/admin.css'), [], $this->wThemeVersion, 'all');
+    }
+
+    public function heartbeatSettings()
+    {
+        $settings['interval'] = 120; // default 15
+        return $settings;
     }
 
     private function assetPath($filename)
