@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
 $('#post').each(function() {
-    const accepted_post = ['page', 'claims', 'woody_rdbk_leaflets'];
+    const accepted_post = ['page', 'claims', 'woody_rdbk_leaflets', 'woody_model'];
 
     if (accepted_post.includes($('#post_type').val())) {
         var button = '';
