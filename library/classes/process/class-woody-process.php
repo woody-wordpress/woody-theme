@@ -156,7 +156,11 @@ class WoodyTheme_WoodyProcess
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
             case 'quote':
-                $layout['display'] = $this->tools->getDisplayOptions($layout['custom_text_bg_params']);
+                $layout['display'] = $this->tools->getDisplayOptions($layout['quote_bg_params']);
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            break;
+            case 'feature':
+                $layout['display'] = $this->tools->getDisplayOptions($layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
             default:

@@ -170,7 +170,7 @@
         {
             "key": "field_5ed8ab4b82622",
             "label": "Paramètres de fond",
-            "name": "custom_text_bg_params",
+            "name": "quote_bg_params",
             "type": "clone",
             "instructions": "",
             "required": 0,

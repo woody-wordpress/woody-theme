@@ -159,6 +159,44 @@
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0
+        },
+        {
+            "key": "field_5ee23fa88eb69",
+            "label": "Effets visuels",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 1,
+            "endpoint": 0
+        },
+        {
+            "key": "field_5ee23fc08eb6a",
+            "label": "Transformation",
+            "name": "transform",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5bc845beeae52"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
         }
     ],
     "location": [
@@ -176,5 +214,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Clone du bloc en-tête (peut-être utilisé pour les \"points forts\" ou les \"on aime\"",
-    "modified": 1591358492
+    "modified": 1591885934
 }
