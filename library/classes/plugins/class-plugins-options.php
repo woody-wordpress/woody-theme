@@ -17,6 +17,7 @@ class WoodyTheme_Plugins_Options
 
     protected function registerHooks()
     {
+        add_action('woody_theme_update', [$this, 'deleteOptions'], 1);
         add_action('woody_theme_update', [$this, 'defineOptions'], 1);
         add_action('woody_theme_update', [$this, 'flushRewriteRules'], 10);
     }
@@ -24,6 +25,12 @@ class WoodyTheme_Plugins_Options
     public function flushRewriteRules()
     {
         flush_rewrite_rules();
+    }
+
+    public function deleteOptions()
+    {
+        delete_option('heartbeat_control_settings');
+        delete_option('heartbeat_control_version');
     }
 
     public function defineOptions()
@@ -81,28 +88,6 @@ class WoodyTheme_Plugins_Options
             ]
         ];
         $this->updateOption('ssl_insecure_content_fixer', $ssl_insecure_content_fixer);
-
-        $heartbeat_control_settings = [
-            'rules_dash' => [
-                [
-                    'heartbeat_control_behavior' => 'modify',
-                    'heartbeat_control_frequency' => '30',
-                ]
-            ],
-            'rules_front' => [
-                [
-                    'heartbeat_control_behavior' => 'disable',
-                    'heartbeat_control_frequency' => '99',
-                ]
-            ],
-            'rules_editor' => [
-                [
-                    'heartbeat_control_behavior' => 'modify',
-                    'heartbeat_control_frequency' => '120',
-                ]
-            ],
-        ];
-        $this->updateOption('heartbeat_control_settings', $heartbeat_control_settings);
 
         // Media Library Taxonomy
         $wpuxss_eml_taxonomies = [
