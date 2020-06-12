@@ -65,6 +65,8 @@ class WoodyTheme_Timber_Filters
         $twig->addFilter(new Twig_SimpleFilter('dump', [$this, 'dump']));
         $twig->addFilter(new Twig_SimpleFilter('rcd', [$this, 'rcd']));
         $twig->addFilter(new Twig_SimpleFilter('wd', [$this, 'wd']));
+        $twig->addFilter(new Twig_SimpleFilter('console_log', [$this, 'console_log']));
+
 
         return $twig;
     }
@@ -210,6 +212,11 @@ class WoodyTheme_Timber_Filters
     public function wd($text, $label = '')
     {
         return wd($text, $label);
+    }
+
+    public function console_log($text, $label = 'twig debug')
+    {
+        return console_log($text, $label);
     }
 
     public function createdFrom($date, $timezone = 'Europe/Paris')
