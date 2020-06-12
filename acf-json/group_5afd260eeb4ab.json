@@ -679,6 +679,35 @@
                         }],
                         "min": "",
                         "max": ""
+                    },
+                    "layout_5ee3851bbd5d4": {
+                        "key": "layout_5ee3851bbd5d4",
+                        "name": "story",
+                        "label": "Story",
+                        "display": "block",
+                        "sub_fields": [{
+                            "key": "field_5ee3853681bb0",
+                            "label": "Story",
+                            "name": "story",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "hide-label",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5ee381150e584"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
+                        "min": "",
+                        "max": ""
                     }
                 },
                 "button_label": "Ajouter un bloc",
