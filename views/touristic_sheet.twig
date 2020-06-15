@@ -18,9 +18,13 @@
                     {{ sheet_tourism.content }}
                 </div>
             {% endif %}
+            {% if 'claims' in enabled_woody_options %}
+                <div class="claims-blocks-wrapper"></div>
+            {% endif %}
         </div>
     </main>
 {% endblock content %}
+
 
 {% block styles %}
     <link href="https://api.tourism-system.com/render/assets/angular/styles/vendor.css" rel="stylesheet">
