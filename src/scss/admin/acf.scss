@@ -742,3 +742,9 @@
         background: darken(#23282d, 10%);
     }
 }
+
+
+// TODO: Remove this after responsive stuff done on stroies block
+.acf-fc-popup a[data-layout='story'] {
+    display: none;
+}
