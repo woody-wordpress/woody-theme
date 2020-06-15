@@ -49,6 +49,7 @@ class WoodyTheme_Enqueue_Assets
         add_action('wp_enqueue_scripts', [$this, 'enqueueAssets']);
         add_action('admin_enqueue_scripts', [$this, 'enqueueAdminAssets']);
         add_action('login_enqueue_scripts', [$this, 'enqueueAdminAssets']);
+        add_filter('heartbeat_settings', [$this, 'heartbeatSettings']);
 
         // Si vous utilisez HTML5, wdjs_use_html5 est un filtre qui enlève l’attribut type="text/javascript"
         add_filter('wdjs_use_html5', '__return_true');
@@ -79,6 +80,9 @@ class WoodyTheme_Enqueue_Assets
     {
         // Define $this->isTouristicPlaylist, $this->isTouristicSheet et $this->wThemeVersion
         $this->setGlobalVars();
+
+        // Remove heartbeat from front
+        wp_deregister_script('heartbeat');
 
         // Deregister the jquery version bundled with WordPress & define another
         wp_deregister_script('jquery');
@@ -176,7 +180,7 @@ class WoodyTheme_Enqueue_Assets
         }
 
         // Menus links obfuscation
-        wp_enqueue_script('obf', get_template_directory_uri() . '/src/js/static/obf.js', [], '', true);
+        wp_enqueue_script('obf', get_template_directory_uri() . '/src/js/static/obf.min.js', [], '', true);
 
         if (isset($map_keys['gmKey'])) {
             wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?key=' . $map_keys['gmKey'] . '&v=3.33&libraries=geometry,places', [], '', true);
@@ -306,15 +310,21 @@ class WoodyTheme_Enqueue_Assets
         // Enqueue the main Scripts
         $dependencies = ['jquery'];
         wp_enqueue_script('admin-javascripts', $this->assetPath('js/admin.js'), $dependencies, $this->wThemeVersion, true);
-
         wp_enqueue_script('admin_jsdelivr_flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/flatpickr.min.js', [], '');
         wp_enqueue_script('admin_jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/fr.js', ['admin_jsdelivr_flatpickr'], '', true);
 
         // Added global vars
         wp_add_inline_script('admin-javascripts', 'var siteConfig = ' . json_encode($this->siteConfig) . ';', 'before');
+        wp_add_inline_script('admin-javascripts', 'document.addEventListener("DOMContentLoaded",()=>{document.body.classList.add("windowReady")});', 'after');
 
         // Enqueue the main Stylesheet.
         wp_enqueue_style('admin-stylesheet', $this->assetPath('css/admin.css'), [], $this->wThemeVersion, 'all');
+    }
+
+    public function heartbeatSettings()
+    {
+        $settings['interval'] = 120; // default 15
+        return $settings;
     }
 
     private function assetPath($filename)

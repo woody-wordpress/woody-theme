@@ -1,7 +1,7 @@
 {
     "name": "woody-wordpress/woody-theme",
     "type": "wordpress-theme",
-    "version": "1.23.1",
+    "version": "1.24.9",
     "description": "Parent theme of Woody Wordpresss Builder",
     "license": "GPL-2.0",
     "authors": [{
@@ -11,6 +11,10 @@
         {
             "name": "Benoit BOUCHAUD",
             "email": "benoit.bouchaud@raccourci.fr"
+        },
+        {
+            "name": "Jérémy LEGENDRE",
+            "email": "jeremy.legendre@raccourci.fr"
         }
     ],
     "require": {
