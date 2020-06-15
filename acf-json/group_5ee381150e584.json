@@ -166,7 +166,7 @@
                 {
                     "key": "field_5ee38298a9a52",
                     "label": "Photo",
-                    "name": "story_author_picture",
+                    "name": "story_author_img",
                     "type": "image",
                     "instructions": "",
                     "required": 0,
@@ -476,5 +476,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1591971398
+    "modified": 1592207585
 }
