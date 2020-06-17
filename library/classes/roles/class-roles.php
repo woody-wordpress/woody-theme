@@ -737,6 +737,30 @@ class WoodyTheme_Roles
                 'contributor' => true,
                 'translator' => false,
             ],
+            'Configurer les catégories de profil' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'Editer les catégories de profil' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'Supprimer les catégories de profil' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'Assigner les catégories de profil' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => true,
+                'translator' => false,
+            ],
 
             // Duplicate
             'copy_posts' => [

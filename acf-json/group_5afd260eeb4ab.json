@@ -708,6 +708,35 @@
                         }],
                         "min": "",
                         "max": ""
+                    },
+                    "layout_5ee3851bbd5d4": {
+                        "key": "layout_5ee8e09cdda86",
+                        "name": "profile_focus",
+                        "label": "Mise en avant de profils",
+                        "display": "block",
+                        "sub_fields": [{
+                            "key": "field_5ee8e0bb5e7af",
+                            "label": "Story",
+                            "name": "story",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "hide-label",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5ee8db016740c"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
+                        "min": "",
+                        "max": ""
                     }
                 },
                 "button_label": "Ajouter un bloc",

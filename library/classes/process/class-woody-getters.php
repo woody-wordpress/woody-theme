@@ -802,4 +802,117 @@ class WoodyTheme_WoodyGetters
 
         return $data;
     }
+
+    public function getProfileFocusData($wrapper)
+    {
+        $data = [];
+        if ($wrapper['profile_auto_focus']) {
+            $args = [
+                'post_type' => ['profile'],
+                'post_status' => ['publish']
+            ];
+
+            if (!empty($wrapper['profile_focus_category'])) {
+                foreach ($wrapper['profile_focus_category'] as $term_id) {
+                    $terms_ids[] = $term_id;
+                }
+                $args['tax_query'] = [                     //(array) - use taxonomy parameters (available with Version 3.1).
+                    'relation' => 'OR',                      //(string) - Possible values are 'AND' or 'OR' and is the equivalent of running a JOIN for each taxonomy
+                    [
+                        'taxonomy' => 'profile_category',
+                        'field' => 'id',
+                        'terms' => $terms_ids,
+                        'operator' => 'IN'
+                    ]
+                ];
+            }
+
+            $the_query = new \WP_Query($args);
+            if (!empty($the_query->posts)) {
+                foreach ($the_query->posts as $post) {
+                    $data['items'][] = $this->getProfilePreview($wrapper, $post);
+                }
+            }
+        } elseif (!empty($wrapper['manual_profile_focus'])) {
+            foreach ($wrapper['manual_profile_focus'] as $manual_profile) {
+                $data['items'][] = $this->getProfilePreview($wrapper, $manual_profile['manual_profile']);
+            }
+        }
+
+        return $data;
+    }
+
+    public function getProfilePreview($wrapper, $post)
+    {
+        $data = [];
+
+        $data = [
+            'title' => $post->post_title,
+            'img' => get_field('profile_picture', $post->ID)
+        ];
+
+        if (!empty($wrapper['profile_focus_display'])) {
+            if (in_array('complement', $wrapper['profile_focus_display'])) {
+                $data['complement'] = get_field('profile_complement', $post->ID);
+            }
+            if (in_array('description', $wrapper['profile_focus_display'])) {
+                $data['description'] = get_field('profile_description', $post->ID);
+            }
+            if (in_array('address', $wrapper['profile_focus_display'])) {
+                $data['contacts']['address'] = get_field('profile_contacts_profile_address', $post->ID);
+            }
+            if (in_array('mail', $wrapper['profile_focus_display'])) {
+                $data['contacts']['mail'] = get_field('profile_contacts_profile_mail', $post->ID);
+            }
+            if (in_array('phone', $wrapper['profile_focus_display'])) {
+                $data['contacts']['phone'] = get_field('profile_contacts_profile_phone', $post->ID);
+            }
+            if (in_array('mobile', $wrapper['profile_focus_display'])) {
+                $data['contacts']['mobile'] = get_field('profile_contacts_profile_mobile', $post->ID);
+            }
+            if (in_array('linkedin', $wrapper['profile_focus_display'])) {
+                $data['socials']['linkedin'] = get_field('profile_contacts_profile_socials_profile_linkedin', $post->ID);
+            }
+            if (in_array('twitter', $wrapper['profile_focus_display'])) {
+                $data['socials']['twitter'] = get_field('profile_contacts_profile_socials_profile_twitter', $post->ID);
+            }
+        }
+
+        if (!empty($wrapper['profile_focus_expressions'])) {
+            $data['focus_expressions'] = $this->getProfileExpressions($post->ID, $wrapper['profile_focus_expressions']);
+        }
+
+        return $data;
+    }
+
+    private function getProfileExpressions($post_id, $focus_expressions)
+    {
+        $data = [];
+
+        $profile_expressions = get_field('profile_expressions', $post_id);
+
+        if (!empty($profile_expressions)) {
+            $formatted_expressions = $this->formatProfileExpressions($profile_expressions);
+            foreach ($focus_expressions as $expression_id) {
+                if (!empty($formatted_expressions[$expression_id])) {
+                    $data[] = $formatted_expressions[$expression_id];
+                }
+            }
+        }
+
+        return $data;
+    }
+
+    private function formatProfileExpressions($profile_expressions)
+    {
+        $data = [];
+        foreach ($profile_expressions as $expression) {
+            $data[$expression['profile_expression_category']->term_id] = [
+                'title' => $expression['profile_expression_category']->name,
+                'content' => (!empty($expression['profile_expression_content'])) ? $expression['profile_expression_content'] : ''
+            ];
+        }
+
+        return $data;
+    }
 }

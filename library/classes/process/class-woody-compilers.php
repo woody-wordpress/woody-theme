@@ -47,14 +47,25 @@ class WoodyTheme_WoodyCompilers
         $return = '';
         $the_items = [];
 
-        if ($wrapper['acf_fc_layout'] == 'manual_focus' || $wrapper['acf_fc_layout'] == 'focus_trip_components') {
-            $the_items = $this->getter->getManualFocusData($wrapper);
-        } elseif ($wrapper['acf_fc_layout'] == 'auto_focus') {
-            $the_items = $this->getter->getAutoFocusData($current_post, $wrapper);
-        } elseif ($wrapper['acf_fc_layout'] == 'auto_focus_sheets' && !empty($wrapper['playlist_conf_id'])) {
-            $the_items = $this->getter->getAutoFocusSheetData($wrapper);
-        } elseif ($wrapper['acf_fc_layout'] == 'auto_focus_topics') {
-            $the_items = $this->getter->getAutoFocusTopicsData($wrapper);
+        switch ($wrapper['acf_fc_layout']) {
+            case 'manual_focus':
+            case 'focus_trip_components':
+                $the_items = $this->getter->getManualFocusData($wrapper);
+            break;
+            case 'auto_focus':
+                $the_items = $this->getter->getAutoFocusData($current_post, $wrapper);
+            break;
+            case 'auto_focus_sheets':
+                if (!empty($wrapper['playlist_conf_id'])) {
+                    $the_items = $this->getter->getAutoFocusSheetData($wrapper);
+                }
+            break;
+            case 'auto_focus_topics':
+                $the_items = $this->getter->getAutoFocusTopicsData($wrapper);
+            break;
+            case 'profile_focus':
+                $the_items = $this->getter->getProfileFocusData($wrapper);
+            break;
         }
 
         if (!empty($the_items) && !empty($the_items['items']) && is_array($the_items['items'])) {
