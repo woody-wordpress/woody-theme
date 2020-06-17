@@ -506,35 +506,6 @@
                         "min": "",
                         "max": ""
                     },
-                    "layout_5b59cb00f9b2b": {
-                        "key": "layout_5b59cb00f9b2b",
-                        "name": "slides_group",
-                        "label": "Groupe de slides",
-                        "display": "block",
-                        "sub_fields": [{
-                            "key": "field_5b59cb12f9b2c",
-                            "label": "Slides",
-                            "name": "slides",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "clone": [
-                                "group_5b59c98dd0621"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }],
-                        "min": "",
-                        "max": ""
-                    },
                     "layout_5b5b33af38ad8": {
                         "key": "layout_5b5b33af38ad8",
                         "name": "socialwall",
