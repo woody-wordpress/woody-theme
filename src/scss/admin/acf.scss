@@ -751,13 +751,12 @@
 
 .acf-fc-popup {
     position: fixed;
-    top: 28px !important;
-    left: 165px !important;
-    backface-visibility: hidden;
-    width: calc(100vw - 510px);
-    height: calc(100vh - 60px) !important;
+    top: 24px !important;
+    left: 160px !important;
+    width: calc(100vw - 500px);
+    height: calc(100vh - 82px) !important;
     overflow: scroll;
-    padding: 10px !important;
+    padding: 40px 10px 10px !important;
     background-color: white;
 
     &:before {
@@ -771,13 +770,15 @@
         font-family: 'Dashicons';
         content: '\f335';
         position: absolute;
-        right: -15px;
+        right: 5px;
         top: 5px;
-        background-color: #23282d;
-        color: white;
+        border: solid 1px #23282d;
+        color: #23282d;
         width: 30px;
         height: 30px;
-
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 18px;
     }
 
     ul {
@@ -785,7 +786,7 @@
         flex-wrap: wrap;
 
         li {
-            width: calc(100% / 6);
+            width: calc(100% / 5);
 
             a {
                 height: 110px;
