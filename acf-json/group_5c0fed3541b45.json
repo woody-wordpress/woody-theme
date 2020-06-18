@@ -1,8 +1,7 @@
 {
     "key": "group_5c0fed3541b45",
     "title": "Paramètres Woody",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5e43ca87a2e3e",
             "label": "Paramètres généraux",
             "name": "",
@@ -108,12 +107,29 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [
-                {
-                    "key": "field_5c10c08f62d6d",
-                    "label": "Pages suggérées",
-                    "name": "suggest_pages",
-                    "type": "repeater",
+            "sub_fields": [{
+                "key": "field_5c10c08f62d6d",
+                "label": "Pages suggérées",
+                "name": "suggest_pages",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "collapsed": "",
+                "min": 0,
+                "max": 4,
+                "layout": "block",
+                "button_label": "Ajouter une suggestion",
+                "sub_fields": [{
+                    "key": "field_5c10c0a162d6e",
+                    "label": "Page",
+                    "name": "suggest_page",
+                    "type": "post_object",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -122,37 +138,16 @@
                         "class": "",
                         "id": ""
                     },
-                    "collapsed": "",
-                    "min": 0,
-                    "max": 4,
-                    "layout": "block",
-                    "button_label": "Ajouter une suggestion",
-                    "sub_fields": [
-                        {
-                            "key": "field_5c10c0a162d6e",
-                            "label": "Page",
-                            "name": "suggest_page",
-                            "type": "post_object",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "post_type": [
-                                "page"
-                            ],
-                            "taxonomy": "",
-                            "allow_null": 1,
-                            "multiple": 0,
-                            "return_format": "id",
-                            "ui": 1
-                        }
-                    ]
-                }
-            ]
+                    "post_type": [
+                        "page"
+                    ],
+                    "taxonomy": "",
+                    "allow_null": 1,
+                    "multiple": 0,
+                    "return_format": "id",
+                    "ui": 1
+                }]
+            }]
         },
         {
             "key": "field_5d039af8a226f",
@@ -191,6 +186,54 @@
             "multiple": 0,
             "return_format": "id",
             "ui": 1
+        },
+        {
+            "key": "field_5ee9c741e017c",
+            "label": "Liens de partage",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5ee9c784e017d",
+            "label": "Afficher \/ masquer les liens de partage",
+            "name": "active_shares",
+            "type": "checkbox",
+            "instructions": "Si cette option est désactivée, l'icône de partage ne sera plus affichée sur le site.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "facebook": "Facebook",
+                "twitter": "Twitter",
+                "pinterest": "Pinterest",
+                "mail": "Mail",
+                "whatsapp": "WhatsApp"
+            },
+            "allow_custom": 0,
+            "default_value": [
+                "facebook",
+                "twitter",
+                "pinterest",
+                "mail"
+            ],
+            "layout": "horizontal",
+            "toggle": 0,
+            "return_format": "value",
+            "save_custom": 0
         },
         {
             "key": "field_5c1b790f1233f",
@@ -337,13 +380,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "options_page",
-                "operator": "==",
-                "value": "woody-settings"
-            }
-        ]
+        [{
+            "param": "options_page",
+            "operator": "==",
+            "value": "woody-settings"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
