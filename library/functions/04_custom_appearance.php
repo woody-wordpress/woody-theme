@@ -15,6 +15,10 @@ function getActiveShares()
                               'sharing_link' => 'https://twitter.com/intent/tweet/?url',
                               'sharing_icon' => file_get_contents(get_template_directory() . $path_icons . 'twitter.svg')
                             ],
+                'whatsapp' => [ 'sharing_message' => __('Partager sur WhatsApp', 'woody-theme'),
+                                'sharing_link'=> 'whatsapp://send?text',
+                                'sharing_icon' => file_get_contents(get_template_directory() . $path_icons . 'whatsapp.svg')
+                            ],
                 'pinterest' => ['sharing_message' => __('Partager sur Pinterest', 'woody-theme'),
                                 'sharing_link' => 'https://pinterest.com/pin/create/button/?url',
                                 'sharing_icon' => file_get_contents(get_template_directory() . $path_icons . 'pinterest.svg')
@@ -22,11 +26,7 @@ function getActiveShares()
                 'mail' => [  'sharing_message' => __('Partager par e-mail', 'woody-theme'),
                              'sharing_link' => 'mailto:?body',
                              'sharing_icon' => file_get_contents(get_template_directory() . $path_icons . 'mail.svg')
-                        ],
-                'whatsapp' => [ 'sharing_message' => __('Partager sur WhatsApp', 'woody-theme'),
-                                'sharing_link'=> 'whatsapp://send?text',
-                                'sharing_icon' => file_get_contents(get_template_directory() . $path_icons . 'whatsapp.svg')
-                            ]
+                        ]
             ];
 
     foreach ($shares as $name => $share) {
