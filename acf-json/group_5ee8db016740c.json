@@ -1,0 +1,436 @@
+{
+    "key": "group_5ee8db016740c",
+    "title": "Mise en avant de profils",
+    "fields": [{
+            "key": "field_5ee8db1378440",
+            "label": "Contenu",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5ee8dbb578446",
+            "label": "Mise en avant automatique",
+            "name": "profile_auto_focus",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5ee8de82b7006",
+            "label": "Profils manuels",
+            "name": "manual_profile_focus",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [{
+                    "field": "field_5ee8dbb578446",
+                    "operator": "!=",
+                    "value": "1"
+                }]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "",
+            "sub_fields": [{
+                "key": "field_5ee8dea2b7007",
+                "label": "Profil",
+                "name": "manual_profile",
+                "type": "post_object",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [{
+                        "field": "field_5ee8dbb578446",
+                        "operator": "!=",
+                        "value": "1"
+                    }]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "post_type": [
+                    "profile"
+                ],
+                "taxonomy": "",
+                "allow_null": 0,
+                "multiple": 0,
+                "return_format": "object",
+                "ui": 1
+            }]
+        },
+        {
+            "key": "field_5ee8dc2978447",
+            "label": "Catégorie de profil",
+            "name": "profile_focus_category",
+            "type": "taxonomy",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [{
+                    "field": "field_5ee8dbb578446",
+                    "operator": "==",
+                    "value": "1"
+                }]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "profile_category",
+            "field_type": "checkbox",
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "multiple": 0,
+            "allow_null": 0
+        },
+        {
+            "key": "field_5ee8dd4f78449",
+            "label": "Afficher les champs",
+            "name": "profile_focus_display",
+            "type": "checkbox",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "complement": "Complément",
+                "description": "Description",
+                "address": "Adresse",
+                "mail": "Email",
+                "phone": "Téléphone fixe",
+                "mobile": "Téléphone mobile",
+                "linkedin": "LinkedIn",
+                "twitter": "Twitter"
+            },
+            "allow_custom": 0,
+            "default_value": [],
+            "layout": "vertical",
+            "toggle": 0,
+            "return_format": "value",
+            "save_custom": 0
+        },
+        {
+            "key": "field_5ee8dcf278448",
+            "label": "Afficher les expressions",
+            "name": "profile_focus_expressions",
+            "type": "taxonomy",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "expression_category",
+            "field_type": "checkbox",
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "multiple": 0,
+            "allow_null": 0
+        },
+        {
+            "key": "field_5eea072a9f62c",
+            "label": "Titre du bloc",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5eea073965d78",
+            "label": "Titre du bloc",
+            "name": "focus_block_title",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "field_5b041d61adb72",
+                "field_5b041c6aadb71",
+                "field_5b041d79adb73",
+                "field_5b59bbd0e094c",
+                "field_5b72f56b6f4aa",
+                "field_5b59bc12e094d",
+                "field_5b041dbfadb74"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
+        },
+        {
+            "key": "field_5eea0747a168e",
+            "label": "Bouton(s) supplémentaire(s)",
+            "name": "focus_buttons",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5b043614df4a6"
+            ],
+            "display": "group",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
+            "key": "field_5eea0753c348f",
+            "label": "Options avancées",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 1,
+            "endpoint": 0
+        },
+        {
+            "key": "field_5eea075f65269",
+            "label": "Personnalisation du fond",
+            "name": "focus_block_title_bg_params",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5b043c93d609a"
+            ],
+            "display": "group",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
+            "key": "field_5eea076b54c25",
+            "label": "Afficher le titre en pleine largeur",
+            "name": "focus_block_title_fullwidth",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5eea07748fa77",
+            "label": "FIN",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 1
+        },
+        {
+            "key": "field_5ee8db2078441",
+            "label": "Mise en page",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5ee8db5b78444",
+            "label": "Mises en page",
+            "name": "woody_tpl",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label",
+                "id": ""
+            },
+            "default_value": "blocks-focus_profile-tpl_01",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "button_field_5ee8db5b78444",
+            "label": "Choisir une mise en page",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label woody-tpl-button group_5ee8db016740c",
+                "id": ""
+            },
+            "message": "Choisir une mise en page",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_5ee8db4578443",
+            "label": "Options avancées",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 1,
+            "endpoint": 0
+        },
+        {
+            "key": "field_5ee9dc7ddbce7",
+            "label": "Retirer les marges autour des profils",
+            "name": "focus_no_padding",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5ee8db7a78445",
+            "label": "Paramètres de fond",
+            "name": "focus_bg_params",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5b043c93d609a"
+            ],
+            "display": "group",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
+        }
+    ],
+    "location": [
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1592384678
+}

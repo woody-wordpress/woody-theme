@@ -61,30 +61,21 @@ if (!class_exists('Timber')) {
             return $data;
         }
 
-        public static function compile($tpl, $vars)
+        public static function compile($tpl, $vars = [])
         {
             if (!empty($tpl)) {
                 self::init();
-                $vars = apply_filters('timber_compile_data', $vars);
-                $vars['globals_json'] = [];
-
-                if (!empty($vars['globals'])) {
-                    $keys = ['options', 'post_title', 'post_id', 'page_type', 'sheet_id', 'woody_options_pages', 'tags', 'current_lang', 'current_season'];
-                    foreach ($keys as $key) {
-                        if (!empty($vars['globals'][$key])) {
-                            $vars['globals_json'][$key] = $vars['globals'][$key];
-                        }
-                    }
-                }
-
                 return self::$twig->render($tpl, $vars);
             }
         }
 
-        public static function render($tpl, $vars)
+        public static function render($tpl, $vars = [])
         {
-            self::init();
-            echo self::compile($tpl, $vars);
+            if (!empty($tpl)) {
+                self::init();
+                $vars = self::get_globals($vars);
+                echo self::compile($tpl, $vars);
+            }
         }
 
         public static function get_context()
@@ -107,6 +98,23 @@ if (!class_exists('Timber')) {
             }
 
             return self::$context_cache;
+        }
+
+        private static function get_globals($vars)
+        {
+            $vars = apply_filters('timber_compile_data', $vars);
+            $vars['globals_json'] = [];
+
+            if (!empty($vars['globals'])) {
+                $keys = ['options', 'post_title', 'post_id', 'page_type', 'sheet_id', 'woody_options_pages', 'tags', 'current_lang', 'current_season'];
+                foreach ($keys as $key) {
+                    if (!empty($vars['globals'][$key])) {
+                        $vars['globals_json'][$key] = $vars['globals'][$key];
+                    }
+                }
+            }
+
+            return $vars;
         }
     }
 }

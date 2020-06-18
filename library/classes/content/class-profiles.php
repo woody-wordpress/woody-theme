@@ -75,11 +75,41 @@ class WoodyTheme_Profiles
                 'hierarchical' => false,
                 'show_ui' => true,
                 'show_in_menu' => true,
+                'meta_box_cb' => false,
                 'capabilities' => [
                     'manage_terms' => 'Configurer les catégories d\'expression',
                     'edit_terms' => 'Editer les catégories d\'expression',
                     'delete_terms' => 'Supprimer les catégories d\'expression',
                     'assign_terms' => 'Assigner les catégories d\'expression'
+                ]
+            )
+        );
+
+        register_taxonomy(
+            'profile_category',
+            'profile',
+            array(
+                'label' => 'Catégorie de profil',
+                'labels' => [
+                    'name' => 'Catégorie de profil',
+                    'singular_name' => 'Catégorie de profil',
+                    'menu_name' => 'Catégorie de profil',
+                    'all_items' => 'Toutes les catégories de profil',
+                    'edit_item' => 'Modifier les catégories de profil',
+                    'view_item' => 'Voir les catégories de profil',
+                    'update_item' => 'Mettre à jour les catégories de profil',
+                    'new_item_name' => 'Nouvelle catégorie de profil',
+                    'search_items' => 'Rechercher parmi les catégories de profil',
+                    'popular_items' => 'Catégories de profil les plus utilisés'
+                ],
+                'hierarchical' => true,
+                'show_ui' => true,
+                'show_in_menu' => true,
+                'capabilities' => [
+                    'manage_terms' => 'Configurer les catégories de profil',
+                    'edit_terms' => 'Editer les catégories de profil',
+                    'delete_terms' => 'Supprimer les catégories de profil',
+                    'assign_terms' => 'Assigner les catégories de profil'
                 ]
             )
         );

@@ -88,7 +88,7 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "40",
+                        "width": "30",
                         "class": "",
                         "id": ""
                     },
@@ -107,7 +107,7 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "40",
+                        "width": "30",
                         "class": "",
                         "id": ""
                     },
@@ -135,6 +135,74 @@
                     "prepend": "",
                     "append": "",
                     "maxlength": ""
+                },
+                {
+                    "key": "field_5ee8df399cec1",
+                    "label": "Mobile",
+                    "name": "profile_mobile",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5ee8df4a9cec2",
+                    "label": "Réseaux sociaux",
+                    "name": "profile_socials",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "table",
+                    "sub_fields": [
+                        {
+                            "key": "field_5ee8df5a9cec3",
+                            "label": "LinkedIn",
+                            "name": "profile_linkedin",
+                            "type": "url",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_5ee8df729cec4",
+                            "label": "Twitter",
+                            "name": "profile_twitter",
+                            "type": "url",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": ""
+                        }
+                    ]
                 }
             ]
         },
@@ -218,5 +286,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1590742487
+    "modified": 1592319972
 }
