@@ -74,7 +74,7 @@ if (!class_exists('Timber')) {
             if (!empty($tpl)) {
                 self::init();
                 $vars = self::get_globals($vars);
-                echo self::compile($tpl, $vars);
+                echo apply_filters('timber_render', self::compile($tpl, $vars));
             }
         }
 
