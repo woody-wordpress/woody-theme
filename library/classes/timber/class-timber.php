@@ -65,6 +65,7 @@ if (!class_exists('Timber')) {
         {
             if (!empty($tpl)) {
                 self::init();
+                $vars = apply_filters('timber_compile_data', $vars);
                 return self::$twig->render($tpl, $vars);
             }
         }
@@ -73,7 +74,8 @@ if (!class_exists('Timber')) {
         {
             if (!empty($tpl)) {
                 self::init();
-                $vars = self::get_globals($vars);
+                $vars = apply_filters('timber_compile_data', $vars);
+                $vars['globals_json'] = self::get_globals_json($vars);
                 echo apply_filters('timber_render', self::compile($tpl, $vars));
             }
         }
@@ -100,21 +102,20 @@ if (!class_exists('Timber')) {
             return self::$context_cache;
         }
 
-        private static function get_globals($vars)
+        private static function get_globals_json($vars)
         {
-            $vars = apply_filters('timber_compile_data', $vars);
-            $vars['globals_json'] = [];
+            $return = [];
 
             if (!empty($vars['globals'])) {
                 $keys = ['options', 'post_title', 'post_id', 'page_type', 'sheet_id', 'woody_options_pages', 'tags', 'current_lang', 'current_season'];
                 foreach ($keys as $key) {
                     if (!empty($vars['globals'][$key])) {
-                        $vars['globals_json'][$key] = $vars['globals'][$key];
+                        $return[$key] = $vars['globals'][$key];
                     }
                 }
             }
 
-            return $vars;
+            return $return;
         }
     }
 }
