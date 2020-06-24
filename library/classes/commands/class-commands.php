@@ -31,6 +31,7 @@ class WoodyTheme_Commands
         \WP_CLI::add_command('woody_flush_site', [$this, 'flush_site']);
         \WP_CLI::add_command('woody_flush_twig', [$this, 'flush_twig']);
         \WP_CLI::add_command('woody_flush_varnish', [$this, 'flush_varnish']);
+        \WP_CLI::add_command('woody_flush_cloudflare', [$this, 'flush_cloudflare']);
         \WP_CLI::add_command('woody_cache_warm', [$this, 'cache_warm']);
     }
 
@@ -42,6 +43,7 @@ class WoodyTheme_Commands
         $this->cache_warm();
         $this->flush_twig();
         $this->flush_varnish();
+        $this->flush_cloudflare();
     }
 
     public function flush_site()
@@ -150,6 +152,11 @@ class WoodyTheme_Commands
                 }
             }
         }
+    }
+
+    public function flush_cloudflare()
+    {
+        // TODO: https://api.cloudflare.com/#zone-purge-all-files
     }
 
     private function rmdir($dir, $inside_only = true)

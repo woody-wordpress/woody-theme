@@ -76,7 +76,7 @@ if (!class_exists('Timber')) {
                 self::init();
                 $vars = apply_filters('timber_compile_data', $vars);
                 $vars['globals_json'] = self::get_globals_json($vars);
-                echo self::compile($tpl, $vars);
+                echo apply_filters('timber_render', self::compile($tpl, $vars));
             }
         }
 
