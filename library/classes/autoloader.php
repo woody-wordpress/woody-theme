@@ -35,11 +35,10 @@ new WoodyTheme_ACF_Counter();
 new WoodyTheme_ACF_ShorLink();
 
 // Cleanup
-new WoodyTheme_Cleanup_Minify();
 new WoodyTheme_Cleanup_Admin();
 new WoodyTheme_Cleanup_Front();
-//TODO: A supprimer après le merge de la feature RemovingYoast
-new WoodyTheme_Cleanup_OptionsTable();
+new WoodyTheme_Cleanup_Minify();
+// new WoodyTheme_Cleanup_OptionsTable(); A supprimer après le merge de la feature RemovingYoast
 
 // Dashboard
 new WoodyTheme_Dashboard();
@@ -51,20 +50,21 @@ new WoodyTheme_Enqueue_Assets();
 new WoodyTheme_Polylang();
 
 // Content
-new WoodyTheme_Permalink();
+new WoodyTheme_CDN();
 new WoodyTheme_Cron();
-new WoodyTheme_Post_Type();
-new WoodyTheme_Taxonomy();
 new WoodyTheme_Images();
-new WoodyTheme_Tinymce();
 new WoodyTheme_Links();
-new WoodyTheme_SiteMap();
+new WoodyTheme_Permalink();
+new WoodyTheme_Post_Type();
+new WoodyTheme_Profiles();
 new WoodyTheme_Robots();
 new WoodyTheme_Seo();
-new WoodyTheme_Varnish();
+new WoodyTheme_SiteMap();
+new WoodyTheme_Taxonomy();
+new WoodyTheme_Tinymce();
 new WoodyTheme_Unpublisher();
-new WoodyTheme_Profiles();
-// new WoodyTheme_Videos();
+new WoodyTheme_Varnish();
+//new WoodyTheme_Videos();
 
 // Timber
 new WoodyTheme_Timber_Filters();
@@ -82,7 +82,7 @@ new WoodyTheme_Roles();
 new WoodyTheme_Inclusions();
 
 // Data Processing
-new WoodyProcess\Tools\WoodyTheme_WoodyProcessTools();
-new WoodyProcess\Getters\WoodyTheme_WoodyGetters();
 new WoodyProcess\Compilers\WoodyTheme_WoodyCompilers();
+new WoodyProcess\Getters\WoodyTheme_WoodyGetters();
 new WoodyProcess\Process\WoodyTheme_WoodyProcess();
+new WoodyProcess\Tools\WoodyTheme_WoodyProcessTools();
