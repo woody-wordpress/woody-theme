@@ -327,7 +327,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                         }
                     }
                 }
-
+                $page_hero['isfrontpage']= !empty(get_option('page_on_front')) && get_option('page_on_front') == pll_get_post($this->context['post_id']) ? true : false ;
                 $page_hero['title'] = (!empty($page_hero['title'])) ? $this->tools->replacePattern($page_hero['title'], $this->context['post_id']) : '';
                 $page_hero['pretitle'] = (!empty($page_hero['pretitle'])) ? $this->tools->replacePattern($page_hero['pretitle'], $this->context['post_id']) : '';
                 $page_hero['subtitle'] = (!empty($page_hero['subtitle'])) ? $this->tools->replacePattern($page_hero['subtitle'], $this->context['post_id']) : '';
