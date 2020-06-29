@@ -559,14 +559,7 @@ abstract class WoodyTheme_TemplateAbstract
 
     private function addIcons()
     {
-        // Icons
-        $icons = ['favicon', '16', '32', '64', '120', '128', '152', '167', '180', '192'];
-        foreach ($icons as $icon) {
-            $icon_ext = ($icon == 'favicon') ? $icon . '.ico' : 'favicon.' . $icon . 'w-' . $icon . 'h.png';
-            if (file_exists(WP_CONTENT_DIR . '/dist/' . WP_SITE_KEY . '/favicon/' . $icon_ext)) {
-                $this->context['icons'][$icon] = WP_HOME . '/app/dist/' . WP_SITE_KEY . '/favicon/' . $icon_ext;
-            }
-        }
+        $this->context['icons'] = apply_filters('woody_enqueue_favicons', null);
     }
 
     private function addSeasonSwitcher()
