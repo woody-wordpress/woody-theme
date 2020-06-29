@@ -138,7 +138,6 @@ class WoodyTheme_WoodyGetters
             $lang = pll_current_language();
             $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), array(), 'json');
             if (!empty($playlist['items'])) {
-                wd($playlist['items']);
                 foreach ($playlist['items'] as $key => $item) {
                     $wpSheetNode = apply_filters('woody_hawwwai_get_post_by_sheet_id', $item['sheetId'], $lang, ['publish']);
                     if (!empty($wpSheetNode)) {
