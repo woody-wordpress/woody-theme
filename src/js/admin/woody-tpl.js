@@ -38,12 +38,12 @@ $('#post').each(function() {
             field_key = button.data('key').substr(7);
 
             let tpl_value = button.parent().find('[data-key="'+ field_key +'"] input').val();
-            let pattern = new RegExp("group_[a-z0-9]+");
+            let pattern = new RegExp("group_[a-z0-9_]+");
             let res = pattern.exec(button.attr('class'));
             let group = res != 'undefined' && res != null ? res[0] : '';
 
             if (group == '') {
-                pattern = new RegExp("field_[a-z0-9]+");
+                pattern = new RegExp("field_[a-z0-9_]+");
                 res = pattern.exec(button.attr('class'));
                 group = res != 'undefined' && res != null ? res[0] : '';
             }
