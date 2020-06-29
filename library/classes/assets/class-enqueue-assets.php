@@ -50,6 +50,7 @@ class WoodyTheme_Enqueue_Assets
         add_action('admin_enqueue_scripts', [$this, 'enqueueAdminAssets']);
         add_action('login_enqueue_scripts', [$this, 'enqueueAdminAssets']);
         add_filter('heartbeat_settings', [$this, 'heartbeatSettings']);
+        add_filter('woody_enqueue_favicons', [$this, 'enqueueFavicons']);
 
         // Si vous utilisez HTML5, wdjs_use_html5 est un filtre qui enlève l’attribut type="text/javascript"
         add_filter('wdjs_use_html5', '__return_true');
@@ -327,9 +328,20 @@ class WoodyTheme_Enqueue_Assets
         return $settings;
     }
 
+    public function enqueueFavicons()
+    {
+        $return = [];
+        $favicon_name = apply_filters('woody_favicon_name', 'favicon');
+
+        foreach (['favicon', '16', '32', '64', '120', '128', '152', '167', '180', '192'] as $icon) {
+            $return[$icon] = $this->assetPath('favicon/' .$favicon_name . '/' . (($icon == 'favicon') ? $favicon_name . '.ico' : $favicon_name . '.' . $icon . 'w-' . $icon . 'h.png'));
+        }
+
+        return $return;
+    }
+
     private function assetPath($filename)
     {
-        $manifest = [];
         $manifest_path = WP_DIST_DIR . '/rev-manifest.json';
         if (file_exists($manifest_path)) {
             $manifest = json_decode(file_get_contents($manifest_path), true);
