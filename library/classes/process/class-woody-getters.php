@@ -145,9 +145,11 @@ class WoodyTheme_WoodyGetters
                             $wpSheetNode = current($wpSheetNode);
                         }
 
-                        if ($wrapper['deal_mode'] && !empty($item["deals"])) {
-                            foreach ($item["deals"]['list'] as $index => $deal) {
-                                $items['items'][] = $this->getTouristicSheetPreview($wrapper, $wpSheetNode->getPost(), $index);
+                        if ($wrapper['deal_mode']) {
+                            if(!empty($item["deals"])){
+                                foreach ($item["deals"]['list'] as $index => $deal) {
+                                    $items['items'][] = $this->getTouristicSheetPreview($wrapper, $wpSheetNode->getPost(), $index);
+                                }
                             }
                         } else {
                             $items['items'][] = $this->getTouristicSheetPreview($wrapper, $wpSheetNode->getPost());
