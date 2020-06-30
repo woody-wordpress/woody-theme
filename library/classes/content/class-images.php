@@ -27,6 +27,7 @@ class WoodyTheme_Images
         add_action('wp_ajax_set_attachments_terms', [$this, 'setAttachmentsTerms']);
 
         // Filters
+        add_filter('timber_render', [$this, 'timberRender'], 1);
         add_filter('wp_image_editors', [$this, 'wpImageEditors']);
         add_filter('intermediate_image_sizes_advanced', [$this, 'removeAutoThumbs'], 10, 2);
         add_filter('image_size_names_choose', [$this, 'imageSizeNamesChoose'], 10, 1);
@@ -200,6 +201,11 @@ class WoodyTheme_Images
         } else {
             wp_send_json(false);
         }
+    }
+
+    public function timberRender($render)
+    {
+        return preg_replace('/http(s?):\/\/([a-zA-Z0-9-_.]*)\/app\/uploads\/([^\/]*)\/([0-9]*)\/([0-9]*)\/..\/..\/..\/..\/..\/wp-json\/woody\/crop\/([0-9]*)\/ratio_([a-z0-9-_]*)/', 'http$1://$2/wp-json/woody/crop/$6/ratio_$7', $render);
     }
 
     // Register the new image sizes for use in the add media modal in wp-admin
