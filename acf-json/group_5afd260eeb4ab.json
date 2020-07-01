@@ -680,15 +680,15 @@
                         "min": "",
                         "max": ""
                     },
-                    "layout_5ee3851bbd5d4": {
+                    "layout_5ee8e09cdda86": {
                         "key": "layout_5ee8e09cdda86",
                         "name": "profile_focus",
                         "label": "Mise en avant de profils",
                         "display": "block",
                         "sub_fields": [{
                             "key": "field_5ee8e0bb5e7af",
-                            "label": "Story",
-                            "name": "story",
+                            "label": "Mise en avant de profils",
+                            "name": "profile_focus",
                             "type": "clone",
                             "instructions": "",
                             "required": 0,
