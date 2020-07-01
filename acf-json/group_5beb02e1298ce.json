@@ -104,7 +104,7 @@
                 {
                     "key": "field_5ef99bb25c407",
                     "label": "Visuel Mobile",
-                    "name": "claim_img_phone",
+                    "name": "claim_img_mobile",
                     "type": "image",
                     "instructions": "",
                     "required": 0,
@@ -340,5 +340,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Répéteur pour créer des publicités, affichées aléatoirement sur des pages liées",
-    "modified": 1593416928
+    "modified": 1593605300
 }
