@@ -49,8 +49,12 @@ new WoodyTheme_Enqueue_Assets();
 // Langs
 new WoodyTheme_Polylang();
 
+// CDN
+if (WP_ENV == 'prod' && in_array('cdn', WOODY_OPTIONS)) {
+    new WoodyTheme_CDN();
+}
+
 // Content
-new WoodyTheme_CDN();
 new WoodyTheme_Cron();
 new WoodyTheme_Images();
 new WoodyTheme_Links();
@@ -64,8 +68,8 @@ new WoodyTheme_Taxonomy();
 new WoodyTheme_Tinymce();
 new WoodyTheme_Unpublisher();
 new WoodyTheme_Varnish();
-//new WoodyTheme_Videos();
 new WoodyTheme_Shuffle();
+new WoodyTheme_Videos();
 
 // Timber
 new WoodyTheme_Timber_Filters();
