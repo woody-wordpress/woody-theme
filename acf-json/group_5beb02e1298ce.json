@@ -1,7 +1,8 @@
 {
     "key": "group_5beb02e1298ce",
     "title": "Bloc de publicité",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5beb051d9393a",
             "label": "Contenu",
             "name": "",
@@ -35,7 +36,8 @@
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter une publicité",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5beb046c93939",
                     "label": "Titre pour l'administration",
                     "name": "bo_claim_title",
@@ -84,7 +86,31 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "jpg, jpeg, svg, png, gif"
+                },
+                {
+                    "key": "field_5ef99bb25c407",
+                    "label": "Visuel Mobile",
+                    "name": "claim_img_mobile",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
                         "class": "",
                         "id": ""
                     },
@@ -161,7 +187,8 @@
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter une page",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5beb071f93941",
                     "label": "Page",
                     "name": "claim_linked_post_id",
@@ -297,11 +324,13 @@
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "woody_claims"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "woody_claims"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -311,5 +340,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Répéteur pour créer des publicités, affichées aléatoirement sur des pages liées",
-    "modified": 1547128093
+    "modified": 1593605300
 }

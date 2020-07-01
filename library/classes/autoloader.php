@@ -68,7 +68,8 @@ new WoodyTheme_Taxonomy();
 new WoodyTheme_Tinymce();
 new WoodyTheme_Unpublisher();
 new WoodyTheme_Varnish();
-//new WoodyTheme_Videos();
+new WoodyTheme_Shuffle();
+new WoodyTheme_Videos();
 
 // Timber
 new WoodyTheme_Timber_Filters();

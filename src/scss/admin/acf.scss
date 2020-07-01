@@ -863,6 +863,7 @@
                     }
                 }
 
+                &[data-layout='story'],
                 &[data-layout='quote'] {
                     &:before {
                         content: '\f205';

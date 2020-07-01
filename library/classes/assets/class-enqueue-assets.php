@@ -312,7 +312,7 @@ class WoodyTheme_Enqueue_Assets
         $dependencies = ['jquery'];
         wp_enqueue_script('admin-javascripts', $this->assetPath('js/admin.js'), $dependencies, $this->wThemeVersion, true);
         wp_enqueue_script('admin_jsdelivr_flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/flatpickr.min.js', [], '');
-        wp_enqueue_script('admin_jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/fr.js', ['admin_jsdelivr_flatpickr'], '', true);
+        wp_enqueue_script('admin_jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/fr.min.js', ['admin_jsdelivr_flatpickr'], '', true);
 
         // Added global vars
         wp_add_inline_script('admin-javascripts', 'var siteConfig = ' . json_encode($this->siteConfig) . ';', 'before');
