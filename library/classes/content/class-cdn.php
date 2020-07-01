@@ -16,13 +16,16 @@ class WoodyTheme_CDN
 
     protected function registerHooks()
     {
-        add_filter('wp_resource_hints', [$this, 'wpResourceHints']);
+        add_filter('wp_resource_hints', [$this, 'wpResourceHints'], 10, 2);
         add_filter('timber_render', [$this, 'timberRender'], 10);
     }
 
-    public function wpResourceHints($hints)
+    public function wpResourceHints($hints, $relation_type)
     {
-        $hints[] = 'woody.cloudly.space';
+        if ($relation_type == 'dns-prefetch') {
+            $hints[] = 'https://woody.cloudly.space';
+        }
+
         return $hints;
     }
 
