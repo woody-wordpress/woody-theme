@@ -3,9 +3,8 @@
 /**
  * Images
  *
- * @link https://www.advancedcustomfields.com/resources/acf-settings
  * @package WoodyTheme
- * @since WoodyTheme 1.0.0
+ * @since WoodyTheme 1.25.3
  *
  */
 
@@ -23,6 +22,6 @@ class WoodyTheme_Videos
 
     public function timberRender($render)
     {
-        return preg_replace('/<iframe ([^>]*) src="https:\/\/(www.youtube.com|youtube.com|youtu.be|vimeo.com|www.vimeo.com|www.dailymotion.com|dailymotion.com)/', '<iframe class="lazyload" $1 src="https://$2', $render);
+        return preg_replace('/<iframe ([^>]*) src="https:\/\/(www.youtube.com|youtube.com|youtu.be|vimeo.com|www.vimeo.com|www.dailymotion.com|dailymotion.com)/', '<iframe class="lazyload" $1 data-src="https://$2', $render);
     }
 }
