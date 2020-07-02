@@ -11,7 +11,9 @@ class WoodyTheme_CDN
 {
     public function __construct()
     {
-        $this->registerHooks();
+        if (WP_ENV == 'prod' && in_array('cdn', WOODY_OPTIONS) && !empty(WOODY_CLOUDFLARE_URL) && !empty(WOODY_CLOUDFLARE_ZONE) && !empty(WOODY_CLOUDFLARE_TOKEN)) {
+            $this->registerHooks();
+        }
     }
 
     protected function registerHooks()
@@ -23,7 +25,7 @@ class WoodyTheme_CDN
     public function wpResourceHints($hints, $relation_type)
     {
         if ($relation_type == 'dns-prefetch') {
-            $hints[] = 'https://woody.cloudly.space';
+            $hints[] = 'https://' . WOODY_CLOUDFLARE_URL;
         }
 
         return $hints;
@@ -31,9 +33,9 @@ class WoodyTheme_CDN
 
     public function timberRender($render)
     {
-        $render = preg_replace('/("|\')\/app\/(dist|themes|uploads|plugins)\/([^"\' ]*)/', '$1https://woody.cloudly.space/app/$2/$3', $render);
-        $render = preg_replace('/http(s?):\/\/([a-zA-Z0-9-_.]*)\/app\/(dist|themes|uploads|plugins)\/([^"\' ]*)/', 'https://woody.cloudly.space/app/$3/$4', $render);
-        $render = preg_replace('/http(s?):\/\/([a-zA-Z0-9-_.]*)\/wp\/wp-includes\/([^"\' ]*)/', 'https://woody.cloudly.space/wp/wp-includes/$3', $render);
+        $render = preg_replace('/("|\')\/app\/(dist|themes|uploads|plugins)\/([^"\' ]*)/', '$1https://' . WOODY_CLOUDFLARE_URL . '/app/$2/$3', $render);
+        $render = preg_replace('/http(s?):\/\/([a-zA-Z0-9-_.]*)\/app\/(dist|themes|uploads|plugins)\/([^"\' ]*)/', 'https://' . WOODY_CLOUDFLARE_URL . '/app/$3/$4', $render);
+        $render = preg_replace('/http(s?):\/\/([a-zA-Z0-9-_.]*)\/wp\/wp-includes\/([^"\' ]*)/', 'https://' . WOODY_CLOUDFLARE_URL . '/wp/wp-includes/$3', $render);
         return $render;
     }
 }
