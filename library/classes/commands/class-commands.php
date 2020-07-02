@@ -156,17 +156,20 @@ class WoodyTheme_Commands
 
     public function flush_cloudflare()
     {
-        if (WP_ENV == 'prod' && in_array('cdn', WOODY_OPTIONS) && !empty(WOODY_CLOUDFLARE_URL) && !empty(WOODY_CLOUDFLARE_ZONE) && !empty(WOODY_CLOUDFLARE_TOKEN)) {
-            $response = wp_remote_post('https://api.cloudflare.com/client/v4/zones/' . WOODY_CLOUDFLARE_ZONE . '/purge_cache', [
-                'headers' => ['Authorization' => 'Bearer ' . WOODY_CLOUDFLARE_TOKEN],
-                'body' => '{"purge_everything":true}'
-            ]);
+        if (WP_ENV != 'prod' || !in_array('cdn', WOODY_OPTIONS) || empty(WOODY_CLOUDFLARE_URL) || empty(WOODY_CLOUDFLARE_ZONE) || empty(WOODY_CLOUDFLARE_TOKEN)) {
+            \WP_CLI::warning('Plugin CDN CloudFlare non activé');
+            return;
+        }
 
-            if (is_wp_error($response)) {
-                \WP_CLI::warning(['woody_flush_varnish' => $response->get_error_message()]);
-            } else {
-                \WP_CLI::success(sprintf('woody_flush_cloudflare : %s', WOODY_CLOUDFLARE_URL));
-            }
+        $response = wp_remote_post('https://api.cloudflare.com/client/v4/zones/' . WOODY_CLOUDFLARE_ZONE . '/purge_cache', [
+            'headers' => ['Authorization' => 'Bearer ' . WOODY_CLOUDFLARE_TOKEN],
+            'body' => '{"purge_everything":true}'
+        ]);
+
+        if (is_wp_error($response)) {
+            \WP_CLI::warning(['woody_flush_varnish' => $response->get_error_message()]);
+        } else {
+            \WP_CLI::success(sprintf('woody_flush_cloudflare : %s', WOODY_CLOUDFLARE_URL));
         }
     }
 
