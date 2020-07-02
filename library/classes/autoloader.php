@@ -49,10 +49,8 @@ new WoodyTheme_Enqueue_Assets();
 // Langs
 new WoodyTheme_Polylang();
 
-// CDN
-if (WP_ENV == 'prod' && in_array('cdn', WOODY_OPTIONS)) {
-    new WoodyTheme_CDN();
-}
+// Clouflare CDN
+new WoodyTheme_CDN();
 
 // Content
 new WoodyTheme_Cron();

@@ -49,31 +49,31 @@ class WoodyTheme_Commands
     public function flush_site()
     {
         do_action('woody_subtheme_update');
-        Output::success('woody_subtheme_update');
+        \WP_CLI::success('woody_subtheme_update');
     }
 
     public function flush_core()
     {
         $theme_version = wp_get_theme(get_template())->get('Version');
         update_option('woody_theme_version', $theme_version, true);
-        Output::success('woody_theme_version ' . $theme_version);
+        \WP_CLI::success('woody_theme_version ' . $theme_version);
 
         do_action('woody_theme_update');
-        Output::success('woody_theme_update');
+        \WP_CLI::success('woody_theme_update');
 
         // Clear the cache to prevent an update_option() from saving a stale db_version to the cache
         wp_cache_flush();
-        Output::success('woody_flush_cache');
+        \WP_CLI::success('woody_flush_cache');
 
         // (Not all cache back ends listen to 'flush')
         wp_cache_delete('alloptions', 'options');
-        Output::success('wp_cache_delete alloptions');
+        \WP_CLI::success('wp_cache_delete alloptions');
     }
 
     public function cache_warm()
     {
         do_action('woody_cache_warm');
-        Output::success('woody_cache_warm');
+        \WP_CLI::success('woody_cache_warm');
     }
 
     public function flush_twig()
@@ -89,15 +89,15 @@ class WoodyTheme_Commands
                 $cleared = $this->rmdir(WP_TIMBER_DIR);
 
                 if ($cleared) {
-                    Output::success("woody_flush_twig");
+                    \WP_CLI::success("woody_flush_twig");
                 } else {
-                    Output::error("woody_flush_twig");
+                    \WP_CLI::warning("woody_flush_twig");
                 }
             } catch (IOExceptionInterface $exception) {
-                Output::error("Une erreur est survenue au moment de la création de " . $exception->getPath());
+                \WP_CLI::warning("Une erreur est survenue au moment de la création de " . $exception->getPath());
             }
         } else {
-            Output::warning("Twig cache désactivé en DEV");
+            \WP_CLI::warning("Twig cache désactivé en DEV");
         }
     }
 
@@ -106,7 +106,7 @@ class WoodyTheme_Commands
         // Options
         $varnish_caching_enable = get_option('varnish_caching_enable');
         if (!$varnish_caching_enable) {
-            Output::warning('Plugin Varnish non activé');
+            \WP_CLI::warning('Plugin Varnish non activé');
             return;
         }
 
@@ -145,10 +145,10 @@ class WoodyTheme_Commands
                         foreach ($errors as $error => $description) {
                             $noticeMessage .= ' - ' . $description;
                         }
-                        Output::error(['woody_flush_varnish' => $noticeMessage]);
+                        \WP_CLI::warning(['woody_flush_varnish' => $noticeMessage]);
                     }
                 } else {
-                    Output::success(sprintf('woody_flush_varnish : %s (%s)', WP_SCHEME . '://' . $host, $lang));
+                    \WP_CLI::success(sprintf('woody_flush_varnish : %s (%s)', WP_SCHEME . '://' . $host, $lang));
                 }
             }
         }
@@ -156,7 +156,21 @@ class WoodyTheme_Commands
 
     public function flush_cloudflare()
     {
-        // TODO: https://api.cloudflare.com/#zone-purge-all-files
+        if (WP_ENV != 'prod' || !in_array('cdn', WOODY_OPTIONS) || empty(WOODY_CLOUDFLARE_URL) || empty(WOODY_CLOUDFLARE_ZONE) || empty(WOODY_CLOUDFLARE_TOKEN)) {
+            \WP_CLI::warning('Plugin CDN CloudFlare non activé');
+            return;
+        }
+
+        $response = wp_remote_post('https://api.cloudflare.com/client/v4/zones/' . WOODY_CLOUDFLARE_ZONE . '/purge_cache', [
+            'headers' => ['Authorization' => 'Bearer ' . WOODY_CLOUDFLARE_TOKEN],
+            'body' => '{"purge_everything":true}'
+        ]);
+
+        if (is_wp_error($response)) {
+            \WP_CLI::warning(['woody_flush_varnish' => $response->get_error_message()]);
+        } else {
+            \WP_CLI::success(sprintf('woody_flush_cloudflare : %s', WOODY_CLOUDFLARE_URL));
+        }
     }
 
     private function rmdir($dir, $inside_only = true)
