@@ -1,8 +1,7 @@
 {
     "key": "group_5efca9579270c",
     "title": "Comportements mobiles",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5efca967d9625",
             "label": "Comportement des blocs",
             "name": "mobile_grid",
@@ -17,7 +16,7 @@
             },
             "choices": {
                 "default": "Par défaut",
-                "grid": "Epilement (blocs les uns sur les autres)",
+                "grid": "Empilement (blocs les uns sur les autres)",
                 "swiper": "Diaporama\/Slider"
             },
             "allow_null": 0,
@@ -48,13 +47,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
