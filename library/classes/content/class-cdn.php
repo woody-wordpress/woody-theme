@@ -11,7 +11,7 @@ class WoodyTheme_CDN
 {
     public function __construct()
     {
-        if (WP_ENV == 'prod' && in_array('cdn', WOODY_OPTIONS) && !empty(WOODY_CLOUDFLARE_URL) && !empty(WOODY_CLOUDFLARE_ZONE) && !empty(WOODY_CLOUDFLARE_TOKEN)) {
+        if (WOODY_CLOUDFLARE_ENABLE && !empty(WOODY_CLOUDFLARE_URL) && !empty(WOODY_CLOUDFLARE_ZONE) && !empty(WOODY_CLOUDFLARE_TOKEN)) {
             $this->registerHooks();
         }
     }
