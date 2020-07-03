@@ -36,6 +36,7 @@ class WoodyTheme_Plugins_Activation
             'advanced-cron-manager/advanced-cron-manager.php',
             'advanced-custom-fields-pro/acf.php',
             'bea-sanitize-filename/bea-sanitize-filename.php',
+            'disable-embeds/disable-embeds.php',
             'duplicate-post/duplicate-post.php',
             'enhanced-media-library/enhanced-media-library.php',
             'mce-table-buttons/mce_table_buttons.php',
