@@ -83,7 +83,7 @@ class WoodyTheme_WoodyCompilers
             $the_items['visual_effects'] = $wrapper['visual_effects'];
 
             // Responsive stuff
-            if (!empty($wrapper['mobile_beahviour'])) {
+            if (!empty($wrapper['mobile_behaviour'])) {
                 if ($wrapper['mobile_behaviour']['mobile_grid'] == 'grid') {
                     $the_items['swResp'] = false;
                 } elseif ($wrapper['mobile_behaviour']['mobile_grid'] == 'swiper') {
