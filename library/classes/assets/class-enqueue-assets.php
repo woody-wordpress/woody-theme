@@ -154,10 +154,10 @@ class WoodyTheme_Enqueue_Assets
         $current_lang = apply_filters('woody_pll_current_language', null);
         if (in_array($current_lang, ['fr', 'es', 'nl', 'it', 'de', 'ru', 'ja', 'pt'])) {
             wp_enqueue_script('jsdelivr_flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/flatpickr.min.js', [], '', true);
-            wp_enqueue_script('jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/' . $current_lang . '.js', ['jsdelivr_flatpickr'], '', true);
+            wp_enqueue_script('jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/' . $current_lang . '.min.js', ['jsdelivr_flatpickr'], '', true);
         } else {
             wp_enqueue_script('jsdelivr_flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/flatpickr.min.js', [], '', true);
-            wp_enqueue_script('jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/default.js', ['jsdelivr_flatpickr'], '', true);
+            wp_enqueue_script('jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/default.min.js', ['jsdelivr_flatpickr'], '', true);
         }
 
         //wp_enqueue_script('jsdelivr_webfontloader', 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js', [], '', true);
@@ -174,10 +174,14 @@ class WoodyTheme_Enqueue_Assets
         wp_enqueue_script('jsdelivr_plyr', 'https://cdn.jsdelivr.net/npm/plyr@3.5.6/dist/plyr.min.js', [], '', true);
 
         // Touristic maps libraries
-        wp_enqueue_script('jsdelivr_leaflet', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet-src.min.js', [], '', true);
+        wp_enqueue_script('jsdelivr_leaflet', 'https://tiles.touristicmaps.com/libs/leaflet.min.js', [], '', true);
         if (isset($map_keys['otmKey']) || $this->isTouristicSheet) {
             // need to load tangram always in TOURISTIC SHEET for now (bug in vendor angular) ↓
             wp_enqueue_script('touristicmaps_tangram', 'https://tiles.touristicmaps.com/libs/tangram.min.js?v=' . $this->wThemeVersion, [], '', true);
+            wp_enqueue_script('touristicmaps_clusters', 'https://tiles.touristicmaps.com/libs/markercluster.min.js?v=' . $this->wThemeVersion, [], '', true);
+            wp_enqueue_script('touristicmaps_geocoder', 'https://tiles.touristicmaps.com/libs/geocoder.min.js?v=' . $this->wThemeVersion, [], '', true);
+            wp_enqueue_script('touristicmaps_locate', 'https://tiles.touristicmaps.com/libs/locate.min.js?v=' . $this->wThemeVersion, [], '', true);
+            wp_enqueue_script('touristicmaps_fullscreen', 'https://tiles.touristicmaps.com/libs/fullscreen.min.js?v=' . $this->wThemeVersion, [], '', true);
         }
 
         // Menus links obfuscation
@@ -194,7 +198,7 @@ class WoodyTheme_Enqueue_Assets
         if ($this->isTouristicPlaylist || $this->isRoadBookPlaylist) {
             // CSS_Libraries (todo replace when possible)
             wp_enqueue_style('hawwwai_font_css', 'https://api.tourism-system.com/static/assets/fonts/raccourci-font.css', [], '');
-            wp_enqueue_style('jsdelivr_leaflet_css', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.min.css', [], '');
+            wp_enqueue_style('tm_leaflet_css', 'https://tiles.touristicmaps.com/libs/leaflet.css', [], '');
             wp_enqueue_style('jsdelivr_bootstrap_css', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css', [], '');
             wp_enqueue_style('jsdelivr_nouislider_css', 'https://cdn.jsdelivr.net/npm/nouislider@10.1.0/distribute/nouislider.min.css', [], '');
             wp_enqueue_style('jsdelivr_chosen_css', 'https://cdn.jsdelivr.net/npm/chosen-js@1.8.2/chosen.min.css', [], '');
@@ -215,7 +219,7 @@ class WoodyTheme_Enqueue_Assets
             $js_dependencies__playlist = ['jsdelivr_bootstrap', 'jsdelivr_match8', 'jsdelivr_nouislider', 'jsdelivr_wnumb', 'jsdelivr_chosen', 'jsdelivr_moment', 'jsdelivr_picker', 'jsdelivr_twigjs', 'jsdelivr_uuid', 'jsdelivr_lodash', 'jsdelivr_arrive', 'hawwwai_sheet_item'];
             wp_enqueue_script('hawwwai_playlist', $apirender_base_uri . '/assets/scripts/raccourci/playlist.' . $jsModeSuffix . '.js?v=' . $this->wThemeVersion, $js_dependencies__playlist, '', true);
             $playlist_map_query = !empty($map_keys) ? '?' . http_build_query($map_keys) : '';
-            wp_enqueue_script('hawwwai_playlist_map', $apirender_base_uri . '/assets/scripts/raccourci/playlist-map.leaflet.' . $jsModeSuffix . '.js' . $playlist_map_query, array_merge($js_dependencies_rcmap, ['hawwwai_playlist']), $this->wThemeVersion, true);
+            wp_enqueue_script('hawwwai_playlist_map', $apirender_base_uri . '/assets/scripts/raccourci/playlist-map.leafletV2.' . $jsModeSuffix . '.js' . $playlist_map_query, array_merge($js_dependencies_rcmap, ['hawwwai_playlist']), $this->wThemeVersion, true);
         }
 
         // Sheet libraries
@@ -223,7 +227,7 @@ class WoodyTheme_Enqueue_Assets
             // CSS Libraries (todo replace when possible)
             wp_enqueue_style('hawwwai_font_css', 'https://api.tourism-system.com/static/assets/fonts/raccourci-font.css', [], '');
             wp_enqueue_style('hawwwai_fresco_css', 'https://api.tourism-system.com/render/assets/styles/lib/fresco.css', [], '');
-            wp_enqueue_style('jsdelivr_leaflet_css', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.min.css', [], '');
+            wp_enqueue_style('tm_leaflet_css', 'https://tiles.touristicmaps.com/libs/leaflet.css', [], '');
             wp_enqueue_style('jsdelivr_slick_css', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css', [], '');
             wp_enqueue_style('jsdelivr_bootstrap_css', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css', [], '');
 
@@ -238,7 +242,7 @@ class WoodyTheme_Enqueue_Assets
             wp_enqueue_script('hawwwai_ng_vendor', $apirender_base_uri . '/assets/scripts/vendor.js?v=' . $this->wThemeVersion, [], '', true);
             wp_enqueue_script('hawwwai_ng_libs', $apirender_base_uri . '/assets/scripts/misclibs.js?v=' . $this->wThemeVersion, [], '', true);
             wp_enqueue_script('hawwwai_ng_app', $apirender_base_uri . '/assets/app.js?v=' . $this->wThemeVersion, [], '', true);
-            wp_enqueue_script('hawwwai_ng_scripts', $apirender_base_uri . '/assets/scripts/scripts.js?v=' . $this->wThemeVersion, [], '', true);
+            wp_enqueue_script('hawwwai_ng_scripts', $apirender_base_uri . '/assets/scripts/scriptsV2.js?v=' . $this->wThemeVersion, [], '', true);
             wp_enqueue_script('hawwwai_sheet_item', $apirender_base_uri . '/assets/scripts/raccourci/sheet_item.' . $jsModeSuffix . '.js?v=' . $this->wThemeVersion, ['jsdelivr_match8'], '', true);
             wp_enqueue_script('hawwwai_itinerary', $apirender_base_uri . '/assets/scripts/raccourci/itinerary.' . $jsModeSuffix . '.js?v=' . $this->wThemeVersion, ['jquery', 'hawwwai_ng_scripts'], '', true);
             wp_enqueue_script('hawwwai_fresco', $apirender_base_uri . '/assets/scripts/lib/fresco.js?v=' . $this->wThemeVersion, ['jquery'], '', true);
