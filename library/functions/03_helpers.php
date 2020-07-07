@@ -37,3 +37,9 @@ function getFocusBlockTitles($wrapper)
     $tools = new WoodyTheme_WoodyProcessTools;
     return $tools->getFocusBlockTitles($wrapper);
 }
+
+function getProfilePreview($wrapper, $post)
+{
+    $getter = new WoodyTheme_WoodyGetters;
+    return $getter->getProfilePreview($wrapper, $post);
+}

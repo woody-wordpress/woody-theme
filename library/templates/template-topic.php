@@ -52,8 +52,27 @@ class WoodyTheme_Template_Topic extends WoodyTheme_TemplateAbstract
             'weather_url'           => get_field('weather_page_url', 'options'),
             'disqus_instance_url'   => get_field('disqus_instance_url', 'options')
         ];
+        $data['globals']['tags'] = $this->getTags($data['globals']['post_id']);
 
         return $data;
+    }
+
+    public function getTags($post_id)
+    {
+        $return = [];
+        $taxonomies = ['places', 'seasons', 'themes'];
+
+        foreach ($taxonomies as $taxonomy) {
+            $return[$taxonomy] = [];
+            $terms = get_the_terms($post_id, $taxonomy);
+            if ($terms != false && !is_wp_error($terms)) {
+                foreach ($terms as $term) {
+                    $return[$taxonomy][] = $term->name;
+                }
+            }
+        }
+
+        return $return;
     }
 
     protected function extendContext()

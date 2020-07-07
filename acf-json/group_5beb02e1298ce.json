@@ -86,7 +86,31 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "jpg, jpeg, svg, png, gif"
+                },
+                {
+                    "key": "field_5ef99bb25c407",
+                    "label": "Visuel Mobile",
+                    "name": "claim_img_mobile",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
                         "class": "",
                         "id": ""
                     },
@@ -228,24 +252,37 @@
             "key": "field_5beb05419393c",
             "label": "Template",
             "name": "claim_woody_tpl",
-            "type": "radio",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-label",
                 "id": ""
             },
-            "choices": {
-                "blocks-claims-tpl_01": "<div class=\"tpl-choice-wrapper\" >\n                    <img class=\"img-responsive lazyload\" src=\"data:image\/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=\"http:\/\/www.sarlat.wp.rc-dev.com\/app\/dist\/sarlat\/img\/woody-library\/views\/blocks\/claims\/tpl_01\/thumbnail.png?version=2.7.0\" alt=\"blocks-claims-tpl_01\" width=\"150\" height=\"150\" \/>\n                    <h5 class=\"tpl-title\">Publicité - template 1<\/h5>\n                    <div class=\"dashicons dashicons-info toggle-desc\"><\/div>\n                    <div class=\"tpl-desc hidden\"><h4 class=\"tpl-title\">Publicité - template 1<\/h4>Bloc de publicité => Basic card image carré<span class=\"dashicons dashicons-no close-desc\"><\/span><\/div>\n                    <div class=\"desc-backdrop hidden\"><\/div>\n                    <\/div>"
+            "default_value": "blocks-claims-tpl_03",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "button_field_5beb05419393c",
+            "label": "Choisir une mise en page",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label woody-tpl-button group_5beb02e1298ce",
+                "id": ""
             },
-            "allow_null": 0,
-            "other_choice": 0,
-            "default_value": "",
-            "layout": "vertical",
-            "return_format": "value",
-            "save_other_choice": 0
+            "message": "Choisir une mise en page",
+            "new_lines": "wpautop",
+            "esc_html": 0
         },
         {
             "key": "field_5beb05629393d",
@@ -303,5 +340,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Répéteur pour créer des publicités, affichées aléatoirement sur des pages liées",
-    "modified": 1547128093
+    "modified": 1593605300
 }

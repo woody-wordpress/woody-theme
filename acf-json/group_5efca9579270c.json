@@ -1,0 +1,65 @@
+{
+    "key": "group_5efca9579270c",
+    "title": "Comportements mobiles",
+    "fields": [{
+            "key": "field_5efca967d9625",
+            "label": "Comportement des blocs",
+            "name": "mobile_grid",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "70",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "default": "Par défaut",
+                "grid": "Empilement (blocs les uns sur les autres)",
+                "swiper": "Diaporama\/Slider"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "default",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_5efcaa19d9627",
+            "label": "Masquer ce bloc en mobile",
+            "name": "hide_for_mobile",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        }
+    ],
+    "location": [
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1593617477
+}

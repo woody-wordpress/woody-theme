@@ -107,8 +107,12 @@ class WoodyTheme_SiteMap
                     $query = $this->getPosts($lang, $i);
                     if (!empty($query->posts)) {
                         foreach ($query->posts as $post) {
+                            // On récupère la meta woodyseo_index
                             $index = get_post_meta($post->ID, 'woodyseo_index', true);
-                            if ($index == true) {
+
+                            // Si la meta a explicitement été définie sur 0 on n'ajoute pas le post au sitemap
+                            // Les fiches SIT et pages dont la meta n'a pas été définie sont ajoutées au sitemap quand même
+                            if ($index !== '0') {
                                 $sitemap[] = [
                                     'loc' => get_permalink($post),
                                     'lastmod' => get_the_modified_date('c', $post),
@@ -128,7 +132,7 @@ class WoodyTheme_SiteMap
                 $sitemap = array_chunk($sitemap, $nb_urls_per_page);
             }
 
-            add_option('woody_sitemap_' . $lang, $sitemap, '', 'no');
+            update_option('woody_sitemap_' . $lang, $sitemap, 'no');
 
             /* Restore original Post Data */
             wp_reset_postdata();

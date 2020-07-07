@@ -125,7 +125,7 @@ class WoodyTheme_WoodyGetters
      *
      * Nom : getAutoFocusSheetData
      * Auteur : Benoit Bouchaud
-     * Return : Retourne un tableau de données relatives aux foches SIT
+     * Return : Retourne un tableau de données relatives aux fiches SIT
      * @param    wrapper Données du layout acf sous forme de tableau
      * @return   items - Un tableau de données
      *
@@ -145,9 +145,11 @@ class WoodyTheme_WoodyGetters
                             $wpSheetNode = current($wpSheetNode);
                         }
 
-                        if ($wrapper['deal_mode'] && !empty($item["deals"])) {
-                            foreach ($item["deals"]['list'] as $index => $deal) {
-                                $items['items'][] = $this->getTouristicSheetPreview($wrapper, $wpSheetNode->getPost(), $index);
+                        if ($wrapper['deal_mode']) {
+                            if(!empty($item["deals"])){
+                                foreach ($item["deals"]['list'] as $index => $deal) {
+                                    $items['items'][] = $this->getTouristicSheetPreview($wrapper, $wpSheetNode->getPost(), $index);
+                                }
                             }
                         } else {
                             $items['items'][] = $this->getTouristicSheetPreview($wrapper, $wpSheetNode->getPost());
@@ -211,7 +213,7 @@ class WoodyTheme_WoodyGetters
 
         $time = !empty($wrapper['publish_date']) ? strtotime($wrapper['publish_date']) : 0;
         $args = [
-            'posts_per_page' => -1,
+            'posts_per_page' => !empty($wrapper['focused_count']) ? intval($wrapper['focused_count']) : 9,
             'post_status' => 'publish',
             'post_type' => 'woody_topic',
             'meta_query' => array(
@@ -273,6 +275,7 @@ class WoodyTheme_WoodyGetters
             return;
         }
 
+
         $data['page_type'] = getTermsSlugs($item->ID, 'page_type', true);
         $data['post_id'] = $item->ID;
 
@@ -305,6 +308,21 @@ class WoodyTheme_WoodyGetters
             if (in_array('length', $wrapper['display_elements'])) {
                 $data['the_length'] = get_field('field_5b95423386e8f', $item->ID);
             }
+            if (in_array('linked_profil', $wrapper['display_elements'])) {
+                $fields_profil = [
+                    'name' => get_field('profil_name', $item->ID),
+                    'img' => get_field('profil_img', $item->ID)
+                ];
+
+                if ($fields_profil['img']) {
+                    $data['profil']['img'] = $fields_profil['img'];
+                    $data['profil']['img']['attachment_more_data'] = $this->tools->getAttachmentMoreData($fields_profil['img']['ID']);
+                }
+
+                if ($fields_profil['name']) {
+                    $data['profil']['name'] = $fields_profil['name'];
+                }
+            }
 
             foreach ($wrapper['display_elements'] as $display) {
                 if (strpos($display, '_') === 0) {
@@ -329,6 +347,9 @@ class WoodyTheme_WoodyGetters
                 $video = $this->tools->getFieldAndFallback($item, 'field_5b0e5df0d4b1c', $item);
                 $data['img'] = !empty($video) ? $video['movie_poster_file'] : '';
             }
+            if (!empty($data['img'])) {
+                $data['img']['attachment_more_data'] = $this->tools->getAttachmentMoreData($data['img']['ID']);
+            }
         }
 
         $data['location'] = [];
@@ -336,7 +357,7 @@ class WoodyTheme_WoodyGetters
         $lng = get_field('post_longitude', $item->ID);
         $data['location']['lat'] = (!empty($lat)) ? str_replace(',', '.', $lat) : '';
         $data['location']['lng'] = (!empty($lng)) ? str_replace(',', '.', $lng) : '';
-        $data['img']['attachment_more_data'] = (!empty($data['img'])) ? $this->tools->getAttachmentMoreData($data['img']['ID']) : '';
+
         if ($clickable) {
             $data['link']['url'] = get_permalink($item->ID);
         }
@@ -420,34 +441,24 @@ class WoodyTheme_WoodyGetters
      * @return   data - Un tableau de données
      *
      */
-
     public function getTouristicSheetPreview($wrapper = null, $item, $deal_index = 0)
     {
         if (!is_object($item) || empty($item)) {
             return;
         }
 
-        $data = [];
-        $lang = pll_current_language();
+        $current_lang = pll_current_language();
         $languages = apply_filters('woody_pll_the_languages', 'auto');
-        //for season
+
+        // Seasons
         foreach ($languages as $language) {
-            $code_lang = $lang;
             if ($language['current_lang']) {
-                $code_lang = substr($language['locale'], 0, 2);
+                $current_lang = substr($language['locale'], 0, 2);
             }
         }
 
-        $raw_item = get_field('touristic_raw_item', $item->ID);
-        if (!empty($raw_item)) {
-            $sheet = json_decode(base64_decode($raw_item), true);
-        } else {
-            $sheet_id = get_field('touristic_sheet_id', $item->ID);
-            $items = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $lang, array(), 'json', 'item');
-            if (!empty($items['items']) && is_array($items['items'])) {
-                $sheet = current($items['items']);
-            }
-        }
+        $data = [];
+        $sheet = $this->tools->getTouristicSheetData($item, $current_lang);
 
         $data = [
             'title' => (!empty($sheet['title'])) ? $sheet['title'] : '',
@@ -466,10 +477,10 @@ class WoodyTheme_WoodyGetters
         }
         if (!empty($wrapper['deal_mode'])) {
             if (!empty($sheet['deals'])) {
-                $data['title'] = $sheet['deals']['list'][$deal_index]['nom'][$code_lang];
+                $data['title'] = $sheet['deals']['list'][$deal_index]['nom'][$current_lang];
             }
         }
-        if (is_array($wrapper['display_elements'])) {
+        if (!empty($wrapper['display_elements']) && is_array($wrapper['display_elements'])) {
             if (in_array('sheet_type', $wrapper['display_elements'])) {
                 $data['sheet_type'] = (!empty($sheet['type'])) ? $sheet['type'] : '';
                 if (!empty($wrapper['deal_mode'])) {
@@ -481,11 +492,17 @@ class WoodyTheme_WoodyGetters
             if (in_array('description', $wrapper['display_elements'])) {
                 $data['description'] = (!empty($sheet['desc'])) ? $sheet['desc'] : '';
                 if (!empty($wrapper['deal_mode'])) {
-                    if (!empty($sheet['deals']['list'][$deal_index]['description'][$lang])) {
-                        $data['description'] = $sheet['deals']['list'][$deal_index]['description'][$lang];
+                    if (!empty($sheet['deals']['list'][$deal_index]['description'][$current_lang])) {
+                        $data['description'] = $sheet['deals']['list'][$deal_index]['description'][$current_lang];
                     }
                 }
             }
+
+            if (in_array('sheet_itinerary', $wrapper['display_elements'])) {
+                $data['sheet_itinerary']['locomotions'] = (!empty($sheet['locomotions'])) ? $sheet['locomotions'] : '';
+                $data['sheet_itinerary']['length'] = (!empty($sheet['itineraryLength'])) ? $sheet['itineraryLength']['value'] . $sheet['itineraryLength']['unit'] : '';
+            }
+
             if (in_array('sheet_town', $wrapper['display_elements'])) {
                 $data['sheet_town'] = (!empty($sheet['town'])) ? $sheet['town'] : '';
             }
@@ -518,10 +535,6 @@ class WoodyTheme_WoodyGetters
             }
         }
 
-        $data['location'] = [];
-        $data['location']['lat'] = (!empty($sheet['gps'])) ? $sheet['gps']['latitude'] : '';
-        $data['location']['lng'] = (!empty($sheet['gps'])) ? $sheet['gps']['longitude'] : '';
-
         if (!empty($sheet['bordereau'])) {
             if ($sheet['bordereau'] === 'HOT' or $sheet['bordereau'] == 'HPA') {
                 $rating = [];
@@ -536,6 +549,10 @@ class WoodyTheme_WoodyGetters
             }
         }
 
+        $data['location'] = [];
+        $data['location']['lat'] = (!empty($sheet['gps'])) ? $sheet['gps']['latitude'] : '';
+        $data['location']['lng'] = (!empty($sheet['gps'])) ? $sheet['gps']['longitude'] : '';
+
         // Parcourir tout le tableau de dates et afficher la 1ère date non passée
         if (!empty($sheet['dates'])) {
             $today = time();
@@ -548,16 +565,9 @@ class WoodyTheme_WoodyGetters
             }
         }
 
-        // $data['date'] = (!empty($sheet['dates'])) ? $sheet['dates'][0] : '';
-
-        if (is_array($wrapper['display_elements'])) {
-            if (in_array('sheet_itinerary', $wrapper['display_elements'])) {
-                $data['sheet_itinerary']['locomotions'] = (!empty($sheet['locomotions'])) ? $sheet['locomotions'] : '';
-                $data['sheet_itinerary']['length'] = (!empty($sheet['itineraryLength'])) ? $sheet['itineraryLength']['value'] . $sheet['itineraryLength']['unit'] : '';
-            }
-        }
-
         $data['sheet_id'] = get_field('touristic_sheet_id', $item->ID);
+
+        $data = apply_filters('woody_custom_sheetPreview', $data, $wrapper);
 
         return $data;
     }
@@ -573,8 +583,7 @@ class WoodyTheme_WoodyGetters
         $data = [];
         $data['post_id'] = $item->ID;
         $data['title'] = !empty($item->post_title) ? $item->post_title : '';
-        $data['pretitle'] = !empty($item->woody_topic_blogname) ? $item->woody_topic_blogname : '';
-        // $data['subtitle'] = !empty($item->woody_topic_blogname) ? $item->woody_topic_blogname : '';
+        $data['subtitle'] = !empty($item->woody_topic_blogname) ? $item->woody_topic_blogname : '';
 
         if (!empty($item->woody_topic_img) && !$item->woody_topic_attachment) {
             $img = [
@@ -707,5 +716,205 @@ class WoodyTheme_WoodyGetters
             $return['display']['classes'] = implode(' ', $return['display']['classes']);
         }
         return $return;
+    }
+
+    /**
+     *
+     * Nom : getManualFocusMiniSheetData
+     * Auteur : Thomas Navarro
+     * Return : Retourne un tableau de données compatible au format des mini-fiches
+     * @param    wrapper array - Tableau de données du layout ACF
+     * @return   data - array - Un tableau de données
+     *
+     */
+    public function getManualFocusMiniSheetData($wrapper)
+    {
+        $data = [];
+        $post = $wrapper['sheet_selection'];
+        $current_lang = pll_current_language();
+        $sheet = $this->tools->getTouristicSheetData($post, $current_lang);
+        $sheet_url = apply_filters('woody_get_permalink', $post->ID);
+
+        $data['title'] = !empty($sheet['title']) ? $sheet['title'] : '';
+        $data['link']['url'] = $sheet_url;
+        $data['link']['target'] = !empty($sheet['targetBlank']) ? '_blank' : '';
+
+        // TODO : Récupérer les infos de réservation de la fiche
+        if ($sheet['booking']['central']) {
+            $data['booking']['prefix'] = 'TODO';
+            $data['booking']['price'] = 'TODO';
+            $data['booking']['link'] = 'TODO';
+        }
+
+        // Display Imgs
+        if (!empty($sheet['allImgs'])) {
+            foreach ($sheet['allImgs'] as $key => $img) {
+                $data['imgs'][$key] = [
+                    'resizer' => true,
+                    'url' => $img['manual'],
+                    'alt' => '',
+                    'title' => ''
+                ];
+            }
+        }
+
+        // Display options
+        $data['anchors'] = [
+            'detail' => [
+                'url' => $sheet_url . '#establishment-detail',
+                'title' => __('Informations prestataire', 'woody-theme'),
+                'icon' => 'wicon-028-plus-02'
+            ],
+            'openings' => [
+                'url' => $sheet_url . '#openings',
+                'title' => __('Horaires', 'woody-theme'),
+                'icon' => 'wicon-015-horloge'
+            ],
+            'map' => [
+                'url' => $sheet_url . '#map',
+                'title' => __('Carte', 'woody-theme'),
+                'icon' => 'wicon-022-itineraire'
+            ],
+            'reviews' => [
+                'url' => $sheet_url . '#reviews',
+                'title' => __('Avis', 'woody-theme'),
+                'icon' => 'wicon-012-smiley-bien'
+            ],
+            'contact' => [
+                'url' => $sheet_url,
+                'title' => __('Poser une question', 'woody-theme'),
+                'icon' => 'wicon-016-bulle'
+            ],
+        ];
+
+        $data = apply_filters('woody_custom_minisheet_data', $data, $wrapper);
+
+        // Shuffle anchors positions
+        if (!empty($data['anchors'])) {
+            $data['anchors'] = array_values($data['anchors']);
+            shuffle($data['anchors']);
+        }
+
+        //  Removes image if sum of anchors and images > 8
+        if (!empty($data['imgs']) && $data['anchors']) {
+            while (count($data['imgs']) + count($data['anchors']) > 8) {
+                array_splice($data['imgs'], -1, 1);
+            }
+        }
+
+        return $data;
+    }
+
+    public function getProfileFocusData($wrapper)
+    {
+        $data = [];
+        if ($wrapper['profile_auto_focus']) {
+            $args = [
+                'post_type' => ['profile'],
+                'post_status' => ['publish']
+            ];
+
+            if (!empty($wrapper['profile_focus_category'])) {
+                foreach ($wrapper['profile_focus_category'] as $term_id) {
+                    $terms_ids[] = $term_id;
+                }
+                $args['tax_query'] = [                     //(array) - use taxonomy parameters (available with Version 3.1).
+                    'relation' => 'OR',                      //(string) - Possible values are 'AND' or 'OR' and is the equivalent of running a JOIN for each taxonomy
+                    [
+                        'taxonomy' => 'profile_category',
+                        'field' => 'id',
+                        'terms' => $terms_ids,
+                        'operator' => 'IN'
+                    ]
+                ];
+            }
+
+            $the_query = new \WP_Query($args);
+            if (!empty($the_query->posts)) {
+                foreach ($the_query->posts as $post) {
+                    $data['items'][] = $this->getProfilePreview($wrapper, $post);
+                }
+            }
+        } elseif (!empty($wrapper['manual_profile_focus'])) {
+            foreach ($wrapper['manual_profile_focus'] as $manual_profile) {
+                $data['items'][] = $this->getProfilePreview($wrapper, $manual_profile['manual_profile']);
+            }
+        }
+
+        return $data;
+    }
+
+    public function getProfilePreview($wrapper, $post)
+    {
+        $data = [];
+
+        $data = [
+            'title' => $post->post_title,
+            'img' => get_field('profile_picture', $post->ID)
+        ];
+
+        if (!empty($wrapper['profile_focus_display'])) {
+            if (in_array('complement', $wrapper['profile_focus_display'])) {
+                $data['complement'] = get_field('profile_complement', $post->ID);
+            }
+            if (in_array('description', $wrapper['profile_focus_display'])) {
+                $data['description'] = get_field('profile_description', $post->ID);
+            }
+            if (in_array('address', $wrapper['profile_focus_display'])) {
+                $data['contacts']['address'] = get_field('profile_contacts_profile_address', $post->ID);
+            }
+            if (in_array('mail', $wrapper['profile_focus_display'])) {
+                $data['contacts']['mail'] = get_field('profile_contacts_profile_mail', $post->ID);
+            }
+            if (in_array('phone', $wrapper['profile_focus_display'])) {
+                $data['contacts']['phone'] = get_field('profile_contacts_profile_phone', $post->ID);
+            }
+            if (in_array('mobile', $wrapper['profile_focus_display'])) {
+                $data['contacts']['mobile'] = get_field('profile_contacts_profile_mobile', $post->ID);
+            }
+            if (in_array('linkedin', $wrapper['profile_focus_display'])) {
+                $data['socials']['linkedin'] = get_field('profile_contacts_profile_socials_profile_linkedin', $post->ID);
+            }
+            if (in_array('twitter', $wrapper['profile_focus_display'])) {
+                $data['socials']['twitter'] = get_field('profile_contacts_profile_socials_profile_twitter', $post->ID);
+            }
+        }
+
+        if (!empty($wrapper['profile_focus_expressions'])) {
+            $data['focus_expressions'] = $this->getProfileExpressions($post->ID, $wrapper['profile_focus_expressions']);
+        }
+
+        return $data;
+    }
+
+    private function getProfileExpressions($post_id, $focus_expressions)
+    {
+        $data = [];
+
+        $profile_expressions = get_field('profile_expressions', $post_id);
+
+        if (!empty($profile_expressions)) {
+            $formatted_expressions = $this->formatProfileExpressions($profile_expressions);
+            foreach ($focus_expressions as $expression_id) {
+                if (!empty($formatted_expressions[$expression_id])) {
+                    $data[] = $formatted_expressions[$expression_id];
+                }
+            }
+        }
+
+        return $data;
+    }
+
+    private function formatProfileExpressions($profile_expressions)
+    {
+        $data = [];
+        foreach ($profile_expressions as $expression) {
+            $data[$expression['profile_expression_category']->term_id] = [
+                'title' => $expression['profile_expression_category']->name,
+                'content' => (!empty($expression['profile_expression_content'])) ? $expression['profile_expression_content'] : ''
+            ];
+        }
+
+        return $data;
     }
 }

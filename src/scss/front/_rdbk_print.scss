@@ -14,33 +14,41 @@
 .print-rdbk {
     font-size: 90%;
 
-    .print-fixed {
-        position: fixed;
-        width: 200mm;
-        left: 50%;
-        transform: translateX(-50%);
-        text-align: center;
-        z-index: 10000;
-    }
-
-    .print-header {
-        top: 0;
-    }
-
-    .print-footer {
-        bottom: 0;
-    }
-
     // Page header
     .page-header {
-        text-align: center;
         text-transform: uppercase;
         border-bottom: 1px solid #a0a0a0;
-        padding: 30px;
-        margin-bottom: 30px;
+        margin: 0 0 30px 0;
         page-break-after: avoid;
+        position: relative;
+        height: 50mm;
+
+        .rdbk-url {
+            position: absolute;
+            text-transform: lowercase;
+            left: 60mm;
+            top: 19.5mm;
+            font-size: 12px;
+        }
+
+        .title-wrapper {
+            position: absolute;
+            top: 27mm;
+            left: 0;
+            max-width: 120mm;
+            padding-left: 5mm;
+
+            h2 {
+                line-height: 1.2em;
+                font-size: 18px;
+                background: #efefef;
+                padding: 5px 10px;
+                border-radius: 5px;
+            }
+        }
     }
 
+    .rdbkPrintHeader,
     .page-section {
         width: 198mm !important;
         margin-left: auto;
@@ -89,4 +97,10 @@
             display: block;
         }
     }
+}
+
+.rdbkPrintHeader {
+    position: absolute;
+    top: 0;
+    left: 0;
 }

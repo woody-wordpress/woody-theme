@@ -47,14 +47,25 @@ class WoodyTheme_WoodyCompilers
         $return = '';
         $the_items = [];
 
-        if ($wrapper['acf_fc_layout'] == 'manual_focus' || $wrapper['acf_fc_layout'] == 'focus_trip_components') {
-            $the_items = $this->getter->getManualFocusData($wrapper);
-        } elseif ($wrapper['acf_fc_layout'] == 'auto_focus') {
-            $the_items = $this->getter->getAutoFocusData($current_post, $wrapper);
-        } elseif ($wrapper['acf_fc_layout'] == 'auto_focus_sheets' && !empty($wrapper['playlist_conf_id'])) {
-            $the_items = $this->getter->getAutoFocusSheetData($wrapper);
-        } elseif ($wrapper['acf_fc_layout'] == 'auto_focus_topics') {
-            $the_items = $this->getter->getAutoFocusTopicsData($wrapper);
+        switch ($wrapper['acf_fc_layout']) {
+            case 'manual_focus':
+            case 'focus_trip_components':
+                $the_items = $this->getter->getManualFocusData($wrapper);
+            break;
+            case 'auto_focus':
+                $the_items = $this->getter->getAutoFocusData($current_post, $wrapper);
+            break;
+            case 'auto_focus_sheets':
+                if (!empty($wrapper['playlist_conf_id'])) {
+                    $the_items = $this->getter->getAutoFocusSheetData($wrapper);
+                }
+            break;
+            case 'auto_focus_topics':
+                $the_items = $this->getter->getAutoFocusTopicsData($wrapper);
+            break;
+            case 'profile_focus':
+                $the_items = $this->getter->getProfileFocusData($wrapper);
+            break;
         }
 
         if (!empty($the_items) && !empty($the_items['items']) && is_array($the_items['items'])) {
@@ -66,12 +77,27 @@ class WoodyTheme_WoodyCompilers
 
             $the_items['no_padding'] = (!empty($wrapper['focus_no_padding'])) ? $wrapper['focus_no_padding'] : '';
             $the_items['block_titles'] = $this->tools->getFocusBlockTitles($wrapper);
-            $the_items['display_block_titles'] = $this->tools->getDisplayOptions($wrapper);
             $the_items['display_button'] = (!empty($wrapper['display_button'])) ? $wrapper['display_button'] : false;
             $the_items['display_img'] = (!empty($wrapper['display_img'])) ? $wrapper['display_img'] : false;
-            $the_items['default_marker'] = $wrapper['default_marker'];
+            $the_items['default_marker'] = (!empty($wrapper['default_marker'])) ? $wrapper['default_marker'] : '';
             $the_items['visual_effects'] = $wrapper['visual_effects'];
 
+            // Responsive stuff
+            if (!empty($wrapper['mobile_behaviour'])) {
+                if ($wrapper['mobile_behaviour']['mobile_grid'] == 'grid') {
+                    $the_items['swResp'] = false;
+                } elseif ($wrapper['mobile_behaviour']['mobile_grid'] == 'swiper') {
+                    $the_items['swResp'] = true;
+                }
+                $the_items['mobile_behaviour'] = $wrapper['mobile_behaviour'];
+            }
+
+            if (!empty($wrapper['focus_block_title_bg_params'])) {
+                $the_items['display_block_titles'] = $this->tools->getDisplayOptions($wrapper['focus_block_title_bg_params']);
+            }
+            if (!empty($wrapper['focus_block_bg_params'])) {
+                $the_items['display'] = $this->tools->getDisplayOptions($wrapper['focus_block_bg_params']);
+            }
 
             if (!empty($wrapper['focus_map_params'])) {
                 if (!empty($wrapper['focus_map_params']['tmaps_confid'])) {
@@ -96,12 +122,22 @@ class WoodyTheme_WoodyCompilers
         return $return;
     }
 
-    /**
-     * Create pagination if needed
-     * @param   layout - Tableau des données du champ acf
-     * @param   twigPaths - Liste des templates woody sous forme de tableau
-     * @return  return - Code html
-     */
+    public function formatMinisheetData($wrapper, $twigPaths)
+    {
+        // Sheet item
+        $data = $this->getter->getManualFocusMinisheetData($wrapper);
+
+        // Block titles
+        $data['block_titles'] = $this->tools->getFocusBlockTitles($wrapper);
+        $data['block_titles']['display_options'] = $this->tools->getDisplayOptions($wrapper);
+
+        // Display options
+        $data['display_options']['no_padding'] = (!empty($wrapper['sheet_no_padding'])) ? $wrapper['sheet_no_padding'] : 0;
+
+        $return = \Timber::compile($twigPaths[$wrapper['woody_tpl']], $data);
+        return $return;
+    }
+
     public function formatGeomapData($wrapper, $twigPaths)
     {
         $return = '';
@@ -456,5 +492,24 @@ class WoodyTheme_WoodyCompilers
             }
         }
         return $return;
+    }
+
+    public function formatSummaryItems($post_id)
+    {
+        $items = [];
+        $permalink = get_permalink($post_id);
+        $sections = get_field('section', $post_id);
+        if (!empty($sections) && is_array($sections)) {
+            foreach ($sections as $s_key => $section) {
+                if (!empty($section['display_in_summary'])) {
+                    $items[] = [
+                        'title' => (!empty($section['section_summary_title'])) ? $section['section_summary_title'] : 'Section ' . $s_key,
+                        'anchor' => $permalink . '#pageSection-' . $s_key
+                    ];
+                }
+            }
+        }
+
+        return $items;
     }
 }

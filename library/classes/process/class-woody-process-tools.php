@@ -86,6 +86,10 @@ class WoodyTheme_WoodyProcessTools
         $data['icon_img'] = (!empty($wrapper['icon_img'])) ? $wrapper['icon_img'] : '';
         $data['woody_icon'] = (!empty($wrapper['woody_icon'])) ? $wrapper['woody_icon'] : '';
         $data['description'] = (!empty($wrapper['description'])) ? $wrapper['description'] : '';
+        $data['fullwidth'] = (!empty($wrapper['focus_block_title_fullwidth'])) ? 'fullwidth' : false;
+        if (!empty($wrapper['focus_buttons']) && !empty($wrapper['focus_buttons']['links'])) {
+            $data['focus_buttons'] = $wrapper['focus_buttons'];
+        }
 
         return $data;
     }
@@ -354,5 +358,38 @@ class WoodyTheme_WoodyProcessTools
         }
 
         return $return;
+    }
+
+    /**
+     *
+     * Nom : getTouristicSheetData
+     * Auteur : Thomas Navarro
+     * Return : Retourne les données d'une fiche SIT
+     * @param    post - INT|WP_Post
+     * @return   data - array|false
+     *
+     */
+    public function getTouristicSheetData($post, $current_lang)
+    {
+        $post = get_post($post);
+        if (!$post && $post->post_type !== 'touristic_sheet') {
+            return false;
+        }
+
+        $sheet = [];
+        $raw_item = get_field('touristic_raw_item', $post->ID);
+
+        if (empty($raw_item)) {
+            $sheet = json_decode(base64_decode($raw_item), true);
+        } else {
+            $sheet_id = get_field('touristic_sheet_id', $post->ID);
+            $items = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $current_lang, array(), 'json', 'item');
+
+            if (!empty($items['items']) && is_array($items['items'])) {
+                $sheet = current($items['items']);
+            }
+        }
+
+        return $sheet;
     }
 }

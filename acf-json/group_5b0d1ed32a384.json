@@ -526,6 +526,7 @@
                 "sheet_rating": "Note <small>(fiche uniquement)<\/small>",
                 "sheet_itinerary": "Itinéraire <small>(fiche uniquement)<\/small>",
                 "bookable": "Réservable <small>(fiche uniquement)<\/small>",
+                "linked_profil": "Profil lié",
                 "_themes": "Thématique principal(e)<\/small>",
                 "_places": "Lieu principal(e)<\/small>",
                 "_seasons": "Saison principal(e)<\/small>"
@@ -641,6 +642,27 @@
             "prefix_name": 0
         },
         {
+            "key": "field_5ec3fda03bfa6",
+            "label": "Bouton(s) supplémentaire(s)",
+            "name": "focus_buttons",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5b043614df4a6"
+            ],
+            "display": "group",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
             "key": "field_5e67bdc4e5d54",
             "label": "Options avancées",
             "name": "",
@@ -673,10 +695,29 @@
             "clone": [
                 "group_5b043c93d609a"
             ],
-            "display": "seamless",
+            "display": "group",
             "layout": "block",
             "prefix_label": 0,
-            "prefix_name": 0
+            "prefix_name": 1
+        },
+        {
+            "key": "field_5ec3b31349c98",
+            "label": "Afficher le titre en pleine largeur",
+            "name": "focus_block_title_fullwidth",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         {
             "key": "field_5e67c1b2f200a",
@@ -732,7 +773,7 @@
             "key": "field_5b0d21aa7c82f",
             "label": "Template",
             "name": "woody_tpl",
-            "type": "radio",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -741,13 +782,28 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "choices": {},
-            "allow_null": 0,
-            "other_choice": 0,
-            "save_other_choice": 0,
-            "default_value": "",
-            "layout": "vertical",
-            "return_format": "value"
+            "default_value": "blocks-focus-tpl_103",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "button_field_5b0d21aa7c82f",
+            "label": "Choisir une mise en page",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label woody-tpl-button group_5b0d1ed32a384",
+                "id": ""
+            },
+            "message": "Choisir une mise en page",
+            "new_lines": "wpautop",
+            "esc_html": 0
         },
         {
             "key": "field_5c9e2515be493",
@@ -805,6 +861,27 @@
             "endpoint": 0
         },
         {
+            "key": "field_5ecd2e30d1c65",
+            "label": "Paramètres de fond",
+            "name": "focus_block_bg_params",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5b043c93d609a"
+            ],
+            "display": "group",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
             "key": "field_5b4c8f3733d98",
             "label": "Retirer les marges autour des mises en avant",
             "name": "focus_no_padding",
@@ -860,6 +937,60 @@
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0
+        },
+        {
+            "key": "field_5efcaba588da6",
+            "label": "FIN",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 1
+        },
+        {
+            "key": "field_5efcaafa5ea95",
+            "label": "Responsive",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5efcab155ea96",
+            "label": "Comportement mobile",
+            "name": "mobile_behaviour",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label",
+                "id": ""
+            },
+            "clone": [
+                "group_5efca9579270c"
+            ],
+            "display": "group",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
         }
     ],
     "location": [
@@ -877,5 +1008,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1583858136
+    "modified": 1591356159
 }

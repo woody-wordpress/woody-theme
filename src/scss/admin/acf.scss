@@ -113,121 +113,6 @@
     }
 }
 
-// On applique du style aux descritpions et titres des templates dans les champs woody_tpl
-.tpl-choice-wrapper {
-    position: relative;
-    padding: 6px;
-    border: 1px solid #0073aa; // box-shadow: 0 2px 0 #fff;
-    transition: transform .3s;
-
-    >img {
-        width: 100%;
-        height: auto;
-    }
-
-    .tpl-title {
-        margin: 10px auto 5px auto;
-        max-width: 90%;
-        line-height: 1.2em;
-    }
-
-    .toggle-desc {
-        transition: color .3s;
-
-        &:hover {
-            transform: scale(1.1);
-        }
-    }
-
-    .tpl-desc {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translateX(-50%) translateY(-50%);
-        background-color: #23282d;
-        color: #fff;
-        width: 320px;
-        max-height: 320px;
-        overflow-y: scroll;
-        box-shadow: 0 3px 24px rgba(0, 0, 0, .3);
-        padding: 20px;
-        z-index: 100000;
-        line-height: 1.2em;
-
-        .close-desc {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            transition: color .3s;
-
-            &:hover {
-                color: #006799;
-            }
-        }
-
-        .tpl-title {
-            margin-bottom: 1.67em;
-            margin-top: 0;
-        }
-    }
-
-    .desc-backdrop {
-        width: 100vw;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 9999;
-    }
-
-    &:before {
-        font-family: dashicons;
-        display: block;
-        position: absolute;
-        line-height: 1em;
-        top: -6px;
-        right: -6px;
-    }
-
-    &.fit {
-        &:before {
-            content: '\f147';
-            background-color: #0073aa;
-            color: #fff;
-            border-radius: 50%;
-            font-size: 14px;
-            padding: 3px 3px 2px 2px;
-            z-index: 1;
-        }
-
-        &:hover {
-            box-shadow: 0 5px 4px rgba(#000, .15);
-            transform: translateY(-2px);
-        }
-    }
-
-    &.notfit {
-        border: 1px dotted lighten(#000, 60%);
-
-        &:before {
-            content: '\f534';
-            color: red;
-            font-size: 20px;
-            z-index: 1;
-        }
-
-        >img {
-            opacity: .4;
-        }
-
-        .toggle-desc,
-        .tpl-title {
-            color: lighten(#000, 80%);
-        }
-
-    }
-}
-
 .selected .tpl-choice-wrapper {
 
     .tpl-title,
@@ -789,34 +674,6 @@
     }
 }
 
-// On masque les anciens champs du backoffice et on règles la tailles des onglets impactés
-// #acf-group_5b2bbb46507bf {
-//     .acf-tab-group {
-//         li:nth-of-type(2) {
-//             display: none !important;
-//         }
-//     }
-// }
-
-
-// .acf-field-5b043f0525968 {
-//     .layout[data-layout="call_to_action"] {
-//         .acf-tab-group {
-//             li:nth-of-type(2) {
-//                 display: none !important;
-//             }
-//         }
-//     }
-
-//     .layout[data-layout="gallery"] {
-//         .acf-tab-group {
-//             li:nth-of-type(3) {
-//                 display: none !important;
-//             }
-//         }
-//     }
-// }
-
 .acf-field-5bb3297e77f43 {
     display: none !important;
 }
@@ -848,5 +705,237 @@
 .acf-link {
     .media-frame a.button {
         color: #fff;
+    }
+}
+
+// Bouton choisir une mise en page
+.woody-tpl-button .acf-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 240px;
+    padding-left: 40px;
+    background: #23282d;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    transition: background .3s;
+
+    &:before {
+        font-family: dashicons;
+        display: block;
+        content: '\f538';
+        font-size: 24px;
+        margin-right: 10px;
+        font-weight: normal;
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: calc(100% - 10px);
+        background: lighten(#23282d, 10%);
+        padding: 5px 10px;
+    }
+
+    &:hover {
+        background: darken(#23282d, 10%);
+    }
+}
+
+
+// TODO: Remove this after responsive stuff done on stroies block
+.acf-fc-popup a[data-layout='story'] {
+    display: none;
+}
+
+.acf-fc-popup {
+    position: fixed;
+    top: 24px !important;
+    left: 160px !important;
+    width: calc(100vw - 500px);
+    height: calc(100vh - 82px) !important;
+    overflow: scroll;
+    padding: 40px 10px 10px !important;
+    background-color: white;
+
+    &:before {
+        display: none;
+    }
+
+    &:after {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Dashicons';
+        content: '\f335';
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        border: solid 1px #23282d;
+        color: #23282d;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    ul {
+        display: flex !important;
+        flex-wrap: wrap;
+
+        li {
+            width: calc(100% / 5);
+
+            a {
+                height: 110px;
+                background-color: #23282d;
+                border-radius: 6px;
+                margin: 10px;
+                font-weight: bold;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                font-size: 14px;
+                white-space: break-spaces;
+                text-align: center;
+                transition: transform .3s, background-color .3s;
+
+                &:hover {
+                    background-color: #007cba;
+                    transform: scale(.95);
+                }
+
+                &:before {
+                    display: block;
+                    font-family: 'Dashicons';
+                    font-size: 30px;
+                    margin-bottom: 20px;
+                }
+
+                &[data-layout='free_text'] {
+                    &:before {
+                        content: '\f206';
+                    }
+                }
+
+                &[data-layout='testimonials'] {
+                    &:before {
+                        content: '\f125';
+                    }
+                }
+
+                &[data-layout='interactive_gallery'],
+                &[data-layout='gallery'],
+                &[data-layout='eye_candy_img'] {
+                    &:before {
+                        content: '\f233';
+                    }
+                }
+
+                &[data-layout='movie'] {
+                    &:before {
+                        content: '\f236';
+                    }
+                }
+
+                &[data-layout='audio_player'] {
+                    &:before {
+                        content: '\f127';
+                    }
+                }
+
+                &[data-layout='content_list'],
+                &[data-layout='auto_focus_sheets'],
+                &[data-layout='semantic_view'],
+                &[data-layout='auto_focus'],
+                &[data-layout='manual_focus'] {
+                    &:before {
+                        content: '\f314';
+                    }
+                }
+
+                &[data-layout='manual_focus_minisheet'] {
+                    &:before {
+                        content: '\f181';
+                    }
+                }
+
+                &[data-layout='story'],
+                &[data-layout='quote'] {
+                    &:before {
+                        content: '\f205';
+                    }
+                }
+
+                &[data-layout='accordion'] {
+                    &:before {
+                        content: '\f156';
+                    }
+                }
+
+                &[data-layout='feature'] {
+                    &:before {
+                        content: '\f155';
+                    }
+                }
+
+                &[data-layout='links'] {
+                    &:before {
+                        content: '\f103';
+                    }
+                }
+
+                &[data-layout='call_to_action'] {
+                    &:before {
+                        content: '\f534';
+                    }
+                }
+
+                &[data-layout='tabs_group'] {
+                    &:before {
+                        content: '\f489';
+                    }
+                }
+
+                &[data-layout='socialwall'] {
+                    &:before {
+                        content: '\f12d';
+                    }
+                }
+
+                &[data-layout='geo_map'] {
+                    &:before {
+                        content: '\f230';
+                    }
+                }
+
+                &[data-layout='page_summary'] {
+                    &:before {
+                        content: '\f163';
+                    }
+                }
+
+                &[data-layout='profile_focus'] {
+                    &:before {
+                        content: '\f12e';
+                    }
+                }
+
+                &[data-layout='weather'] {
+                    &:before {
+                        content: '\f449';
+                    }
+                }
+
+                &[data-layout='claims'] {
+                    &:before {
+                        content: '\f488';
+                    }
+                }
+            }
+        }
     }
 }

@@ -85,9 +85,11 @@ class WoodyTheme_Varnish
 
     private function getTLLbyField($section_content)
     {
-        if ($section_content['acf_fc_layout'] == 'auto_focus_sheets') {
+        if ($section_content['acf_fc_layout'] == 'auto_focus_sheets' || $section_content['acf_fc_layout'] == 'manual_focus_minisheet') {
             return WOODY_VARNISH_CACHING_FOCUSSHEET_TTL;
         } elseif ($section_content['acf_fc_layout'] == 'auto_focus' && $section_content['focused_sort'] == 'random') {
+            return WOODY_VARNISH_CACHING_FOCUSRANDOM_TTL;
+        } elseif ($section_content['acf_fc_layout'] == 'auto_focus_topics' && $section_content['focused_sort'] == 'random') {
             return WOODY_VARNISH_CACHING_FOCUSRANDOM_TTL;
         } elseif ($section_content['acf_fc_layout'] == 'weather') {
             return WOODY_VARNISH_CACHING_WEATHERPAGE_TTL;

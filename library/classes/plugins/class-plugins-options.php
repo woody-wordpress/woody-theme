@@ -17,6 +17,7 @@ class WoodyTheme_Plugins_Options
 
     protected function registerHooks()
     {
+        add_action('woody_theme_update', [$this, 'deleteOptions'], 1);
         add_action('woody_theme_update', [$this, 'defineOptions'], 1);
         add_action('woody_theme_update', [$this, 'flushRewriteRules'], 10);
     }
@@ -24,6 +25,12 @@ class WoodyTheme_Plugins_Options
     public function flushRewriteRules()
     {
         flush_rewrite_rules();
+    }
+
+    public function deleteOptions()
+    {
+        delete_option('heartbeat_control_settings');
+        delete_option('heartbeat_control_version');
     }
 
     public function defineOptions()

@@ -59,8 +59,31 @@ abstract class WoodyTheme_TemplateAbstract
         $data['globals']['page_type'] = $this->context['page_type'];
         $data['globals']['sheet_id'] = $this->context['sheet_id'];
         $data['globals']['woody_options_pages'] = $this->getWoodyOptionsPagesValues();
+        $data['globals']['tags'] = $this->getTags($data['globals']['post_id']);
+        $data['globals']['current_lang'] = apply_filters('woody_pll_current_language', null);
+        $data['globals']['current_season'] = apply_filters('woody_pll_current_season', null);
+        $data['globals']['current_locale'] = pll_current_language();
+        $data['globals']['languages'] = apply_filters('woody_pll_the_locales', null);
 
         return $data;
+    }
+
+    public function getTags($post_id)
+    {
+        $return = [];
+        $taxonomies = ['places', 'seasons', 'themes'];
+
+        foreach ($taxonomies as $taxonomy) {
+            $return[$taxonomy] = [];
+            $terms = get_the_terms($post_id, $taxonomy);
+            if ($terms != false && !is_wp_error($terms)) {
+                foreach ($terms as $term) {
+                    $return[$taxonomy][] = $term->name;
+                }
+            }
+        }
+
+        return $return;
     }
 
     public function getWoodyOptionsPagesValues()
@@ -133,6 +156,7 @@ abstract class WoodyTheme_TemplateAbstract
 
         $mirror_page = getAcfGroupFields('group_5c6432b3c0c45');
         if ($is_mirror_page === true && !empty($mirror_page['mirror_page_reference'])) {
+            $this->context['mirror_id'] = get_the_ID();
             $this->context['post_id'] = $mirror_page['mirror_page_reference'];
             $this->context['post'] = get_post($this->context['post_id']);
             $this->context['post_title'] = get_the_title();
@@ -541,14 +565,7 @@ abstract class WoodyTheme_TemplateAbstract
 
     private function addIcons()
     {
-        // Icons
-        $icons = ['favicon', '16', '32', '64', '120', '128', '152', '167', '180', '192'];
-        foreach ($icons as $icon) {
-            $icon_ext = ($icon == 'favicon') ? $icon . '.ico' : 'favicon.' . $icon . 'w-' . $icon . 'h.png';
-            if (file_exists(WP_CONTENT_DIR . '/dist/' . WP_SITE_KEY . '/favicon/' . $icon_ext)) {
-                $this->context['icons'][$icon] = WP_HOME . '/app/dist/' . WP_SITE_KEY . '/favicon/' . $icon_ext;
-            }
-        }
+        $this->context['icons'] = apply_filters('woody_enqueue_favicons', null);
     }
 
     private function addSeasonSwitcher()
