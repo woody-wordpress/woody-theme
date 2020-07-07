@@ -25,6 +25,14 @@
                 </header>
             {% endblock %}
 
+            {% block after_page_teaser %}
+                {% if page_parts.after_page_teaser %}
+                    <div class="after_page_teaser">
+                        {{ page_parts.after_page_teaser }}
+                    </div>
+                {% endif %}
+            {% endblock %}
+
             {% block home_slider %}
                 {% if home_slider|default %}
                     <div class="home-slider">
