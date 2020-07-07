@@ -82,6 +82,16 @@ class WoodyTheme_WoodyCompilers
             $the_items['default_marker'] = (!empty($wrapper['default_marker'])) ? $wrapper['default_marker'] : '';
             $the_items['visual_effects'] = $wrapper['visual_effects'];
 
+            // Responsive stuff
+            if (!empty($wrapper['mobile_behaviour'])) {
+                if ($wrapper['mobile_behaviour']['mobile_grid'] == 'grid') {
+                    $the_items['swResp'] = false;
+                } elseif ($wrapper['mobile_behaviour']['mobile_grid'] == 'swiper') {
+                    $the_items['swResp'] = true;
+                }
+                $the_items['mobile_behaviour'] = $wrapper['mobile_behaviour'];
+            }
+
             if (!empty($wrapper['focus_block_title_bg_params'])) {
                 $the_items['display_block_titles'] = $this->tools->getDisplayOptions($wrapper['focus_block_title_bg_params']);
             }
