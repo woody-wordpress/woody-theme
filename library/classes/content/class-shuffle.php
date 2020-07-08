@@ -8,12 +8,15 @@
  */
 
 use WoodyProcess\Compilers\WoodyTheme_WoodyCompilers;
+use WoodyProcess\Tools\WoodyTheme_WoodyProcessTools;
 
 class WoodyTheme_Shuffle
 {
     public function __construct()
     {
         $this->compilers = new WoodyTheme_WoodyCompilers;
+        $this->tools = new WoodyTheme_WoodyProcessTools;
+
         $this->registerHooks();
     }
 
@@ -46,6 +49,10 @@ class WoodyTheme_Shuffle
                     }
 
                     $twig_paths = getWoodyTwigPaths();
+
+                    if (!empty($wrapper['visual_effects']['transform'])) {
+                        $wrapper['visual_effects'] = $this->tools->formatVisualEffectData($wrapper['visual_effects']);
+                    }
 
                     $return = $this->compilers->formatFocusesData($wrapper, $current_post, $twig_paths);
                 }
