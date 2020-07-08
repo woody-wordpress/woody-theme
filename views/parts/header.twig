@@ -8,14 +8,18 @@
             {% if subtheme_more_tools %}
                 {% for tool in subtheme_more_tools %}
                     <li>
-                        <a class="no-ext {{ tool.classes|default }}" href="{{ tool.url|default }}" target="{{ tool.target|default('_self') }}" title="{{ tool.title|default }}">
-                            {% if tool.icon %}
-                                <span class="wicon {{ tool.icon }}"></span>
-                            {% endif %}
-                            {% if tool.title and tool.display_title %}
-                                <span>{{ tool.title }}</span>
-                            {% endif %}
-                        </a>
+                        {% if tool.is_custom %}
+                            {{ tool.render }}
+                        {% else %}
+                            <a class="no-ext {{ tool.classes|default }}" href="{{ tool.url|default }}" target="{{ tool.target|default('_self') }}" title="{{ tool.title|default }}">
+                                {% if tool.icon %}
+                                    <span class="wicon {{ tool.icon }}"></span>
+                                {% endif %}
+                                {% if tool.title and tool.display_title %}
+                                    <span>{{ tool.title }}</span>
+                                {% endif %}
+                            </a>
+                        {% endif %}
                     </li>
                 {% endfor %}
             {% endif %}
