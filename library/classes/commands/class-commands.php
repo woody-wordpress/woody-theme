@@ -9,7 +9,6 @@
 
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
-use Woody\Utils\Output;
 
 class WoodyTheme_Commands
 {
@@ -106,7 +105,9 @@ class WoodyTheme_Commands
         // Options
         $varnish_caching_enable = get_option('varnish_caching_enable');
         if (!$varnish_caching_enable) {
-            \WP_CLI::warning('Plugin Varnish non activé');
+            if (defined('WP_CLI') && WP_CLI) {
+                \WP_CLI::warning('Plugin Varnish non activé');
+            }
             return;
         }
 
@@ -145,10 +146,14 @@ class WoodyTheme_Commands
                         foreach ($errors as $error => $description) {
                             $noticeMessage .= ' - ' . $description;
                         }
-                        \WP_CLI::warning(['woody_flush_varnish' => $noticeMessage]);
+                        if (defined('WP_CLI') && WP_CLI) {
+                            \WP_CLI::warning(['woody_flush_varnish' => $noticeMessage]);
+                        }
                     }
                 } else {
-                    \WP_CLI::success(sprintf('woody_flush_varnish : %s (%s)', WP_SCHEME . '://' . $host, $lang));
+                    if (defined('WP_CLI') && WP_CLI) {
+                        \WP_CLI::success(sprintf('woody_flush_varnish : %s (%s)', WP_SCHEME . '://' . $host, $lang));
+                    }
                 }
             }
         }
