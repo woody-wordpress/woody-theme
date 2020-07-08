@@ -8,7 +8,6 @@
  * @since WoodyTheme 1.0.0
  */
 
-use Woody\Utils\Output;
 use WoodyLibrary\Library\WoodyLibrary\WoodyLibrary;
 
 class WoodyTheme_ACF
