@@ -36,6 +36,7 @@ class WoodyTheme_Enqueue_Assets
         }
 
         $this->isRoadBookPlaylist = apply_filters('is_road_book_playlist', false, $post);
+        $this->isRoadBookSheet = apply_filters('is_road_book_sheet', false);
         $this->isTouristicPlaylist = in_array('playlist_tourism', $pageType);
         $this->isTouristicSheet = !empty($post) && $post->post_type === 'touristic_sheet';
 
@@ -89,7 +90,7 @@ class WoodyTheme_Enqueue_Assets
         wp_deregister_script('jquery');
         wp_deregister_script('jquery-migrate');
         $jQuery_version = '3.4.1';
-        if ($this->isTouristicPlaylist || $this->isTouristicSheet || $this->isRoadBookPlaylist) {
+        if ($this->isTouristicPlaylist || $this->isTouristicSheet || $this->isRoadBookPlaylist || $this->isRoadBookSheet) {
             $jQuery_version = '2.1.4';
         }
 
@@ -130,7 +131,7 @@ class WoodyTheme_Enqueue_Assets
         }
 
         // SHEET: need to load tangram always for now (bug in vendor angular)
-        if ($this->isTouristicSheet) {
+        if ($this->isTouristicSheet || $this->isRoadBookSheet) {
             if (!in_array('touristicmaps_tangram', $js_dependencies_rcmap)) {
                 array_push($js_dependencies_rcmap, 'touristicmaps_tangram');
             }
@@ -147,7 +148,7 @@ class WoodyTheme_Enqueue_Assets
         // Dependencies of main.js
         wp_enqueue_script('jsdelivr_cookieconsent', 'https://cdn.jsdelivr.net/npm/cookieconsent@3.1.0/build/cookieconsent.min.js', [], '', true);
 
-        if (!$this->isTouristicSheet) {
+        if (!$this->isTouristicSheet || $this->isRoadBookSheet) {
             wp_enqueue_script('jsdelivr_swiper', 'https://cdn.jsdelivr.net/npm/swiper@4.4.1/dist/js/swiper.min.js', [], '', true);
         }
 
@@ -175,7 +176,7 @@ class WoodyTheme_Enqueue_Assets
 
         // Touristic maps libraries
         wp_enqueue_script('jsdelivr_leaflet', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet-src.min.js', [], '', true);
-        if (isset($map_keys['otmKey']) || $this->isTouristicSheet) {
+        if (isset($map_keys['otmKey']) || $this->isTouristicSheet || $this->isRoadBookSheet) {
             // need to load tangram always in TOURISTIC SHEET for now (bug in vendor angular) ↓
             wp_enqueue_script('touristicmaps_tangram', 'https://tiles.touristicmaps.com/libs/tangram.min.js?v=' . $this->wThemeVersion, [], '', true);
         }
@@ -185,7 +186,7 @@ class WoodyTheme_Enqueue_Assets
 
         if (isset($map_keys['gmKey'])) {
             wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?key=' . $map_keys['gmKey'] . '&v=3.33&libraries=geometry,places', [], '', true);
-        } elseif ($this->isTouristicSheet) { // absolutely needed in angular
+        } elseif ($this->isTouristicSheet || $this->isRoadBookSheet) { // absolutely needed in angular
             wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?v=3.33&libraries=geometry,places', [], '', true);
         }
         wp_enqueue_script('hawwwai_universal_map', $apirender_base_uri . '/assets/scripts/raccourci/universal-map.' . $jsModeSuffix . '.js?v=' . $this->wThemeVersion, $js_dependencies_rcmap, '', true);
@@ -219,7 +220,7 @@ class WoodyTheme_Enqueue_Assets
         }
 
         // Sheet libraries
-        elseif ($this->isTouristicSheet) {
+        elseif ($this->isTouristicSheet || $this->isRoadBookSheet) {
             // CSS Libraries (todo replace when possible)
             wp_enqueue_style('hawwwai_font_css', 'https://api.tourism-system.com/static/assets/fonts/raccourci-font.css', [], '');
             wp_enqueue_style('hawwwai_fresco_css', 'https://api.tourism-system.com/render/assets/styles/lib/fresco.css', [], '');
@@ -282,13 +283,13 @@ class WoodyTheme_Enqueue_Assets
             'wp-i18n',
         ];
 
-        if (!$this->isTouristicSheet) {
+        if (!$this->isTouristicSheet || $this->isRoadBookSheet) {
             $dependencies[] = 'jsdelivr_swiper';
         }
         wp_enqueue_script('main-javascripts', $this->assetPath('js/main.js'), $dependencies, '', true);
 
         // Enqueue the main Stylesheet.
-        if ($this->isTouristicSheet || $this->isTouristicPlaylist || $this->isRoadBookPlaylist) {
+        if ($this->isTouristicSheet || $this->isRoadBookSheet || $this->isTouristicPlaylist || $this->isRoadBookPlaylist) {
             $tourism_css = apply_filters('woody_theme_stylesheets', 'tourism');
             $tourism_css = (!empty($tourism_css)) ? $tourism_css : 'tourism';
             wp_enqueue_style('main-stylesheet', $this->assetPath('css/' . $tourism_css . '.css'), [], '', 'screen');
