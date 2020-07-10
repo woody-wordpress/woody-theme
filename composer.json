@@ -1,10 +1,11 @@
 {
     "name": "woody-wordpress/woody-theme",
     "type": "wordpress-theme",
-    "version": "1.26.7",
+    "version": "1.27.0",
     "description": "Parent theme of Woody Wordpresss Builder",
     "license": "GPL-2.0",
-    "authors": [{
+    "authors": [
+        {
             "name": "Léo POIROUX",
             "email": "leo@raccourci.fr"
         },
@@ -18,11 +19,7 @@
         }
     ],
     "require": {
-        "php": "^7.3",
-        "woody-wordpress/woody-cli": "^1.9.3",
-        "woody-wordpress/woody-sso": "^1.6.6",
-        "woody-wordpress/woody-crop": "^1.2.6",
-        "woody-wordpress/woody-acf-sync": "^1.3.4"
+        "php": "^7.3"
     },
     "config": {
         "optimize-autoloader": true
