@@ -13,4 +13,20 @@
             margin: 0;
         }
     }
+
+    // TODO: Hack
+    #item_sheet_list {
+        // Mode vignette uniquement
+        .item-wrapper.col-lg-4.col-md-6.col-sm-6.col-xs-12 {
+            .item-itineraryLength {
+                bottom: inherit !important;
+                top: -61px !important;
+            }
+        }
+
+        .item-infos-locomotions {
+            padding: 15px 0;
+        }
+    }
 }
+
