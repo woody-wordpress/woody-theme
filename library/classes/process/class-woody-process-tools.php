@@ -303,15 +303,14 @@ class WoodyTheme_WoodyProcessTools
         }
 
         if (!empty($post_id)) {
-            $confId = get_field('playlist_conf_id', $post_id);
-            if (!empty($confId)) {
-                $playlist_count = apply_filters('woody_hawwwai_playlist_count', $confId, pll_current_language(), array());
-            }
-
             $patterns = ['%nombre%', '%playlist_count%'];
 
             foreach ($patterns as $pattern) {
                 if (strpos($string, $pattern) !== false) {
+                    $confId = get_field('playlist_conf_id', $post_id);
+                    if (!empty($confId)) {
+                        $playlist_count = apply_filters('woody_hawwwai_playlist_count', $confId, pll_current_language(), array());
+                    }
                     $string = str_replace($pattern, $playlist_count, $string);
                 }
             }
