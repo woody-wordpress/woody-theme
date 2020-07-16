@@ -174,15 +174,15 @@ class WoodyTheme_Enqueue_Assets
         wp_enqueue_script('jsdelivr_rellax', 'https://cdn.jsdelivr.net/npm/rellax@1.10.0/rellax.min.js', [], '', true);
         wp_enqueue_script('jsdelivr_plyr', 'https://cdn.jsdelivr.net/npm/plyr@3.5.6/dist/plyr.min.js', [], '', true);
 
+        // Menus links obfuscation
+        wp_enqueue_script('obf', get_template_directory_uri() . '/src/js/static/obf.min.js', [], '', true);
+
         // Touristic maps libraries
         wp_enqueue_script('jsdelivr_leaflet', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet-src.min.js', [], '', true);
         if (isset($map_keys['otmKey']) || $this->isTouristicSheet || $this->isRoadBookSheet) {
             // need to load tangram always in TOURISTIC SHEET for now (bug in vendor angular) ↓
             wp_enqueue_script('touristicmaps_tangram', 'https://tiles.touristicmaps.com/libs/tangram.min.js?v=' . $this->wThemeVersion, [], '', true);
         }
-
-        // Menus links obfuscation
-        wp_enqueue_script('obf', get_template_directory_uri() . '/src/js/static/obf.min.js', [], '', true);
 
         if (isset($map_keys['gmKey'])) {
             wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?key=' . $map_keys['gmKey'] . '&v=3.33&libraries=geometry,places', [], '', true);
