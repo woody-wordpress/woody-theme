@@ -161,7 +161,7 @@ class WoodyTheme_Commands
 
     public function flush_cloudflare()
     {
-        if (WP_ENV != 'prod' || !in_array('cdn', WOODY_OPTIONS) || empty(WOODY_CLOUDFLARE_URL) || empty(WOODY_CLOUDFLARE_ZONE) || empty(WOODY_CLOUDFLARE_TOKEN)) {
+        if (WP_ENV != 'prod' || empty(WOODY_CLOUDFLARE_URL) || empty(WOODY_CLOUDFLARE_ZONE) || empty(WOODY_CLOUDFLARE_TOKEN)) {
             \WP_CLI::warning('Plugin CDN CloudFlare non activé');
             return;
         }
