@@ -70,7 +70,7 @@ class WoodyTheme_ACF_ShorLink
             $short_link_final_url = $linked_url;
         }
 
-        wp_redirect($short_link_final_url);
+        wp_redirect($short_link_final_url, 301, 'Woody');
         exit;
     }
 }

@@ -124,7 +124,7 @@ class WoodyTheme_Permalink
 
             // Redirect if $permalink exist
             if (!empty($permalink)) {
-                wp_safe_redirect($permalink, 301, 'Woody');
+                wp_redirect($permalink, 301, 'Woody');
                 exit;
             }
         }
