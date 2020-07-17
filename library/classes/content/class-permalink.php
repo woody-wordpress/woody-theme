@@ -124,7 +124,6 @@ class WoodyTheme_Permalink
 
             // Redirect if $permalink exist
             if (!empty($permalink)) {
-                header('X-Redirect-By: Woody');
                 wp_safe_redirect($permalink, 301, 'Woody');
                 exit;
             }

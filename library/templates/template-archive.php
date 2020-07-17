@@ -33,7 +33,6 @@ class WoodyTheme_Template_Archive
 
         foreach ($disabled_contexts as $context) {
             if ($wp_query->$context == true) {
-                header('X-Redirect-By: Woody');
                 wp_safe_redirect($url, 301, 'Woody');
                 exit;
             }
