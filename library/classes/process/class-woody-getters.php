@@ -918,8 +918,16 @@ class WoodyTheme_WoodyGetters
                     $json = get_field('content', $query_result->post->ID);
                     $content = json_decode($json, true);
                     if (!empty($content['leaflets'])) {
-                        foreach ($content['leaflets'] as $leaflet) {
-                            $data['items'][] = $this->getPagePreview($wrapper, get_post($leaflet['id']));
+                        foreach ($content['leaflets'] as $key => $leaflet) {
+                            $item = $this->getPagePreview($wrapper, get_post($leaflet['id']));
+
+                            if (!empty($item['link'])) {
+                                $item['link']['url'] = '/r/' . $roadbook_id . '?leaflet=' . $key ;
+                            }
+                            if (!empty($item['img'])) {
+                                $item['img']['link'] = '/r/' . $roadbook_id . '?leaflet=' . $key ;
+                            }
+                            $data['items'][] = $item;
                         }
                     }
                 }
@@ -938,10 +946,20 @@ class WoodyTheme_WoodyGetters
         } elseif ($wrapper['focused_leaflets'] == "essentials") {
             $essential_leaflets = get_option('options_essential_leaflets');
             if (!empty($essential_leaflets)) {
+                $roadbook_id = get_query_var('roadbook');
+
                 for ($i = 0 ; $i < $essential_leaflets ; $i++) {
                     $post_id = get_option('options_essential_leaflets_'.$i.'_essential_leaflet');
                     $post_id = !empty(pll_get_post($post_id)) ? pll_get_post($post_id) : $post_id ;
-                    $data['items'][] = $this->getPagePreview($wrapper, get_post($post_id));
+
+                    $item = $this->getPagePreview($wrapper, get_post($post_id));
+                    if (!empty($item['link'])) {
+                        $item['link']['url'] = !empty($roadbook_id) ? '/r/' . $roadbook_id . '?essential=' . $i : $item['link']['url'] ;
+                    }
+                    if (!empty($item['img'])) {
+                        $item['img']['link'] = !empty($roadbook_id) ? '/r/' . $roadbook_id . '?essential=' . $i : $item['img']['link'] ;
+                    }
+                    $data['items'][] = $item;
                 }
             }
         }
