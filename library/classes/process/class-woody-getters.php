@@ -895,6 +895,62 @@ class WoodyTheme_WoodyGetters
         return $data;
     }
 
+    public function getRoadBookFocusData($wrapper)
+    {
+        $data = [];
+
+        if ($wrapper['focused_leaflets'] == "leaflets") {
+            $roadbook_id = get_query_var('roadbook');
+
+            if (!empty($roadbook_id)) {
+                // Get Post by roadbook_id
+                $args = [
+                            'post_type' => 'woody_roadbook',
+                            'posts_per_page' => 1,
+                            'post_status' => 'any',
+                            'meta_key' => 'roadbook_id',
+                            'meta_value' => strtoupper($roadbook_id),
+                            'meta_compare' => '='
+                        ];
+
+                $query_result = new \WP_Query($args);
+                if (!empty($query_result->post)) {
+                    $json = get_field('content', $query_result->post->ID);
+                    $content = json_decode($json, true);
+                    if (!empty($content['leaflets'])) {
+                        foreach ($content['leaflets'] as $leaflet) {
+                            $data['items'][] = $this->getPagePreview($wrapper, get_post($leaflet['id']));
+                        }
+                    }
+                }
+            } else {
+                $args = [
+                            'post_type' => 'woody_rdbk_leaflets',
+                            'posts_per_page' => 5,
+                            'post_status' => 'publish',
+                        ];
+                $query_result = new \WP_Query($args);
+
+                foreach ($query_result->posts as $post) {
+                    $data['items'][] = $this->getPagePreview($wrapper, $post);
+                }
+            }
+        } elseif ($wrapper['focused_leaflets'] == "essentials") {
+            $essential_leaflets = get_option('options_essential_leaflets');
+            if (!empty($essential_leaflets)) {
+                for ($i = 0 ; $i < $essential_leaflets ; $i++) {
+                    $post_id = get_option('options_essential_leaflets_'.$i.'_essential_leaflet');
+                    $post_id = !empty(pll_get_post($post_id)) ? pll_get_post($post_id) : $post_id ;
+                    $data['items'][] = $this->getPagePreview($wrapper, get_post($post_id));
+                }
+            }
+        }
+
+        return $data;
+    }
+
+
+
     private function getProfileExpressions($post_id, $focus_expressions)
     {
         $data = [];
