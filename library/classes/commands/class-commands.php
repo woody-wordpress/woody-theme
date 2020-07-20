@@ -77,7 +77,7 @@ class WoodyTheme_Commands
 
     public function flush_twig()
     {
-        if (WP_ENV != 'dev') {
+        if (WP_ENV != 'dev' && !WOODY_TWIG_CACHE_DISABLE) {
             try {
                 $filesystem = new Filesystem();
                 if (!$filesystem->exists(WP_TIMBER_DIR)) {
@@ -96,7 +96,7 @@ class WoodyTheme_Commands
                 \WP_CLI::warning("Une erreur est survenue au moment de la création de " . $exception->getPath());
             }
         } else {
-            \WP_CLI::warning("Twig cache désactivé en DEV");
+            \WP_CLI::warning("Twig cache désactivé");
         }
     }
 
