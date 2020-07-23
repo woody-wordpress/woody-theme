@@ -115,7 +115,7 @@ class WoodyTheme_Enqueue_Assets
 
         // dependencies for raccourci map js
         $js_dependencies_rcmap = [
-            'jquery', 'jsdelivr_leaflet',
+            'jquery', 'touristicmaps_leaflet',
         ];
 
         // get map keys
@@ -178,10 +178,17 @@ class WoodyTheme_Enqueue_Assets
         wp_enqueue_script('obf', get_template_directory_uri() . '/src/js/static/obf.min.js', [], '', true);
 
         // Touristic maps libraries
-        wp_enqueue_script('jsdelivr_leaflet', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet-src.min.js', [], '', true);
+        // wp_enqueue_script('jsdelivr_leaflet', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet-src.min.js', [], '', true);
+        wp_enqueue_script('touristicmaps_leaflet', 'https://tiles.touristicmaps.com/libs/leaflet.min.js?v=' . $this->wThemeVersion, [], '', true);
+        wp_enqueue_style('leaflet_css', 'https://tiles.touristicmaps.com/libs/leaflet.css', [], '');
+
         if (isset($map_keys['otmKey']) || $this->isTouristicSheet || $this->isRoadBookSheet) {
             // need to load tangram always in TOURISTIC SHEET for now (bug in vendor angular) ↓
             wp_enqueue_script('touristicmaps_tangram', 'https://tiles.touristicmaps.com/libs/tangram.min.js?v=' . $this->wThemeVersion, [], '', true);
+            wp_enqueue_script('touristicmaps_cluster', 'https://tiles.touristicmaps.com/libs/markercluster.min.js?v=' . $this->wThemeVersion, [], '', true);
+            wp_enqueue_script('touristicmaps_locate', 'https://tiles.touristicmaps.com/libs/locate.min.js?v=' . $this->wThemeVersion, [], '', true);
+            wp_enqueue_script('touristicmaps_geocoder', 'https://tiles.touristicmaps.com/libs/geocoder.min.js?v=' . $this->wThemeVersion, [], '', true);
+            wp_enqueue_script('touristicmaps_fullscreen', 'https://tiles.touristicmaps.com/libs/fullscreen.min.js?v=' . $this->wThemeVersion, [], '', true);
         }
 
         if (isset($map_keys['gmKey'])) {
@@ -189,13 +196,14 @@ class WoodyTheme_Enqueue_Assets
         } elseif ($this->isTouristicSheet || $this->isRoadBookSheet) { // absolutely needed in angular
             wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?v=3.33&libraries=geometry,places', [], '', true);
         }
-        wp_enqueue_script('hawwwai_universal_map', $apirender_base_uri . '/assets/scripts/raccourci/universal-map.' . $jsModeSuffix . '.js?v=' . $this->wThemeVersion, $js_dependencies_rcmap, '', true);
+
+        wp_enqueue_script('hawwwai_universal_map', $apirender_base_uri . '/assets/scripts/raccourci/universal-mapV2.' . $jsModeSuffix . '.js?v=' . $this->wThemeVersion, $js_dependencies_rcmap, '', true);
 
         // Playlist libraries
         if ($this->isTouristicPlaylist || $this->isRoadBookPlaylist) {
             // CSS_Libraries (todo replace when possible)
             wp_enqueue_style('hawwwai_font_css', 'https://api.tourism-system.com/static/assets/fonts/raccourci-font.css', [], '');
-            wp_enqueue_style('jsdelivr_leaflet_css', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.min.css', [], '');
+            // wp_enqueue_style('jsdelivr_leaflet_css', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.min.css', [], '');
             wp_enqueue_style('jsdelivr_bootstrap_css', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css', [], '');
             wp_enqueue_style('jsdelivr_nouislider_css', 'https://cdn.jsdelivr.net/npm/nouislider@10.1.0/distribute/nouislider.min.css', [], '');
             wp_enqueue_style('jsdelivr_chosen_css', 'https://cdn.jsdelivr.net/npm/chosen-js@1.8.2/chosen.min.css', [], '');
@@ -216,7 +224,7 @@ class WoodyTheme_Enqueue_Assets
             $js_dependencies__playlist = ['jsdelivr_bootstrap', 'jsdelivr_match8', 'jsdelivr_nouislider', 'jsdelivr_wnumb', 'jsdelivr_chosen', 'jsdelivr_moment', 'jsdelivr_picker', 'jsdelivr_twigjs', 'jsdelivr_uuid', 'jsdelivr_lodash', 'jsdelivr_arrive', 'hawwwai_sheet_item'];
             wp_enqueue_script('hawwwai_playlist', $apirender_base_uri . '/assets/scripts/raccourci/playlist.' . $jsModeSuffix . '.js?v=' . $this->wThemeVersion, $js_dependencies__playlist, '', true);
             $playlist_map_query = !empty($map_keys) ? '?' . http_build_query($map_keys) : '';
-            wp_enqueue_script('hawwwai_playlist_map', $apirender_base_uri . '/assets/scripts/raccourci/playlist-map.leaflet.' . $jsModeSuffix . '.js' . $playlist_map_query, array_merge($js_dependencies_rcmap, ['hawwwai_playlist']), $this->wThemeVersion, true);
+            wp_enqueue_script('hawwwai_playlist_map', $apirender_base_uri . '/assets/scripts/raccourci/playlist-map.leafletV2.' . $jsModeSuffix . '.js' . $playlist_map_query, array_merge($js_dependencies_rcmap, ['hawwwai_playlist']), $this->wThemeVersion, true);
         }
 
         // Sheet libraries
