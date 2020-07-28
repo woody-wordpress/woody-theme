@@ -247,7 +247,7 @@ class WoodyTheme_Enqueue_Assets
             wp_enqueue_script('hawwwai_ng_vendor', $apirender_base_uri . '/assets/scripts/vendor.js?v=' . $this->wThemeVersion, [], '', true);
             wp_enqueue_script('hawwwai_ng_libs', $apirender_base_uri . '/assets/scripts/misclibs.js?v=' . $this->wThemeVersion, [], '', true);
             wp_enqueue_script('hawwwai_ng_app', $apirender_base_uri . '/assets/app.js?v=' . $this->wThemeVersion, [], '', true);
-            wp_enqueue_script('hawwwai_ng_scripts', $apirender_base_uri . '/assets/scripts/scripts.js?v=' . $this->wThemeVersion, [], '', true);
+            wp_enqueue_script('hawwwai_ng_scripts', $apirender_base_uri . '/assets/scripts/scriptsV2.js?v=' . $this->wThemeVersion, [], '', true);
             wp_enqueue_script('hawwwai_sheet_item', $apirender_base_uri . '/assets/scripts/raccourci/sheet_item.' . $jsModeSuffix . '.js?v=' . $this->wThemeVersion, ['jsdelivr_match8'], '', true);
             wp_enqueue_script('hawwwai_itinerary', $apirender_base_uri . '/assets/scripts/raccourci/itinerary.' . $jsModeSuffix . '.js?v=' . $this->wThemeVersion, ['jquery', 'hawwwai_ng_scripts'], '', true);
             wp_enqueue_script('hawwwai_fresco', $apirender_base_uri . '/assets/scripts/lib/fresco.js?v=' . $this->wThemeVersion, ['jquery'], '', true);
