@@ -49,7 +49,7 @@ class WoodyTheme_Shortcodes
                 $post_id = explode('_', $post_id);
                 $post_id = end($post_id);
                 $post = get_post($post_id);
-                
+
                 if (is_object($post) && $post->ID != null && $post->post_status === 'publish') {
                     switch ($post->post_type) {
                         case 'touristic_sheet':
@@ -87,32 +87,22 @@ class WoodyTheme_Shortcodes
         $env = WP_ENV;
         $lang = pll_current_language();
 
-        $img = '';
-        if (!empty($sheet['data']['multimedia'])) {
-            $hash_path = str_replace(array("+", "/"), array("-", "_"), base64_encode($sheet['data']['multimedia'][0]['URL']));
-
-            $img = [
-                'url' => [
-                    'manual' => 'https://api.tourism-system.com/resize/crop/%width%/%height%/60/' . $hash_path . '/image.jpg',
-                ],
-                'alt' => '',
-                'title' => ''
-            ];
-        } else {
-            $img = [
-                'url' => [
-                    'manual' => 'https://api.tourism-system.com/static/assets/images/resizer/img_404.jpg'
-                ],
-                'alt' => '',
-                'title' => ''
-            ];
+        $image_url = '';
+        if (!empty($sheet['data']['multimedia']) && !empty($sheet['data']['multimedia'][0]) && !empty($sheet['data']['multimedia'][0]['URL'])) {
+            $image_url = $sheet['data']['multimedia'][0]['URL'];
         }
+
+        $img = [
+            'url' => ['manual' => rc_getImageResizedFromApi('%width%', '%height%', $image_url)],
+            'alt' => '',
+            'title' => ''
+        ];
 
         $link = '';
         if (!empty($sheet['metadata']['canonicals_v2'])) {
             foreach ($sheet['metadata']['canonicals_v2'] as $canonical) {
-                if (!empty($canonical["website_" . $env])) {
-                    $link = $canonical["website_" . $env][$lang];
+                if (!empty($canonical["website_" . WP_ENV])) {
+                    $link = $canonical["website_" . WP_ENV][$lang];
                 }
             }
         }
