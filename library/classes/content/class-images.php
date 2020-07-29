@@ -248,10 +248,10 @@ class WoodyTheme_Images
             $meta['credit']         = !empty($xmp_arr['Creator']) ? $xmp_arr['Creator'][0] : '';
             $meta['copyright']      = !empty($xmp_arr['Rights']) ? $xmp_arr['Rights'][0] : '';
             $meta['description']    = !empty($xmp_arr['Description']) ? $xmp_arr['Description'][0] : '';
-            $meta['author']         = !empty($xmp_arr['Creator']) ? $xmp_arr['Creator'][0] : '';
+            $meta['caption']        = $meta['description'];
             $meta['country']        = !empty($xmp_arr['Country']) ? $xmp_arr['Country'][0] : '';
-            $meta['latitude']       = !empty($xmp_arr['Location']) ? $xmp_arr['Location'][0]['Latitude'] : '';
-            $meta['longitude']       = !empty($xmp_arr['Location']) ? $xmp_arr['Location'][0]['Longitude'] : '';
+            $meta['state']          = !empty($xmp_arr['State']) ? $xmp_arr['State'][0] : '';
+            $meta['keywords']       = !empty($xmp_arr['Keywords']) ? $xmp_arr['Keywords'][0] : '';
         }
 
         // EXIF
