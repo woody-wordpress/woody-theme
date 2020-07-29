@@ -127,6 +127,13 @@ class WoodyTheme_Permalink
                 wp_redirect($permalink, 301, 'Woody');
                 exit;
             }
+        } elseif (is_singular()) {
+            global $post, $page;
+            $num_pages = substr_count($post->post_content, '<!--nextpage-->') + 1;
+            if ($page > $num_pages) {
+                wp_redirect(get_permalink($post->ID), 301, 'Woody');
+                exit;
+            }
         }
     }
 
