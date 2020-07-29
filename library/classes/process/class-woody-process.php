@@ -47,6 +47,7 @@ class WoodyTheme_WoodyProcess
             case 'auto_focus_topics':
             case 'focus_trip_components':
             case 'profile_focus':
+            case 'auto_focus_rdbk':
                 $return = $this->compilers->formatFocusesData($layout, $context['post'], $context['woody_components']);
                 break;
             case 'manual_focus_minisheet':
