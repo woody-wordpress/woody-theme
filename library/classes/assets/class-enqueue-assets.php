@@ -407,8 +407,10 @@ class WoodyTheme_Enqueue_Assets
                     }
 
                     $assets = json_decode(file_get_contents($manifest_path), true);
-                    foreach ($assets as $origin => $compile) {
-                        $assetPaths[$base_dir . '/' . $origin] = $base_dir . '/' . $compile;
+                    if (!empty($assets)) {
+                        foreach ($assets as $origin => $compile) {
+                            $assetPaths[$base_dir . '/' . $origin] = $base_dir . '/' . $compile;
+                        }
                     }
                 }
             }
