@@ -478,7 +478,7 @@ class WoodyTheme_WoodyGetters
         if (!empty($wrapper['display_img'])) {
             $data['img'] = [
                 'resizer' => true,
-                'url' => (!empty($sheet['img']['url'])) ? $sheet['img']['url']['manual'] : '',
+                'url' => (!empty($sheet['img']['url']) && !empty($sheet['img']['url']['manual'])) ? str_replace('api.tourism-system.com', 'api.cloudly.space', $sheet['img']['url']['manual']) : '',
                 'alt' => (!empty($sheet['img']['alt'])) ? $sheet['img']['alt'] : '',
                 'title' => (!empty($sheet['img']['title'])) ? $sheet['img']['title'] : ''
             ];
@@ -595,7 +595,7 @@ class WoodyTheme_WoodyGetters
 
         if (!empty($item->woody_topic_img) && !$item->woody_topic_attachment) {
             $img = [
-                'url' => 'https://api.tourism-system.com/resize/crop/%width%/%height%/70/' . base64_encode($item->woody_topic_img) . '/image.jpg',
+                'url' => rc_getImageResizedFromApi('%width%', '%height%', $item->woody_topic_img),
                 'resizer' => true
             ];
             $data['img'] = $img;
