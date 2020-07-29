@@ -48,6 +48,7 @@ class WoodyTheme_Enqueue_Assets
 
     protected function registerHooks()
     {
+        add_action('woody_theme_update', [$this, 'cleanTransient']);
         add_action('wp_enqueue_scripts', [$this, 'enqueueLibraries']);
         add_action('wp_enqueue_scripts', [$this, 'enqueueAssets']);
         add_action('admin_enqueue_scripts', [$this, 'enqueueAdminAssets']);
@@ -346,6 +347,12 @@ class WoodyTheme_Enqueue_Assets
         return $return;
     }
 
+    public function cleanTransient()
+    {
+        // Delete Transient
+        delete_transient('woody_asset_paths');
+    }
+
     private function assetPath($file_url)
     {
         if (!empty($this->assetPaths[$file_url])) {
@@ -380,27 +387,34 @@ class WoodyTheme_Enqueue_Assets
 
     protected function setAssetPaths()
     {
-        $assetPaths = [];
+        $assetPaths = get_transient('woody_asset_paths');
+        if (empty($assetPaths)) {
+            $assetPaths = [];
 
-        // Sources for Assets
-        $directories = [
-            WP_DIST_DIR,
-            'https://api.cloudly.space/static/assets/fonts',
-        ];
+            // Sources for Assets
+            $directories = [
+                WP_DIST_DIR,
+                'https://api.cloudly.space/static/assets/fonts',
+            ];
 
-        foreach ($directories as $dir) {
-            $manifest_path = $dir . '/rev-manifest.json';
-            if (strpos($dir, 'http') !== false || file_exists($manifest_path)) {
-                if (strpos($dir, 'http') !== false) {
-                    $base_dir = $dir;
-                } else {
-                    $base_dir = WP_DIST_URL;
+            foreach ($directories as $dir) {
+                $manifest_path = $dir . '/rev-manifest.json';
+                if (strpos($dir, 'http') !== false || file_exists($manifest_path)) {
+                    if (strpos($dir, 'http') !== false) {
+                        $base_dir = $dir;
+                    } else {
+                        $base_dir = WP_DIST_URL;
+                    }
+
+                    $assets = json_decode(file_get_contents($manifest_path), true);
+                    foreach ($assets as $origin => $compile) {
+                        $assetPaths[$base_dir . '/' . $origin] = $base_dir . '/' . $compile;
+                    }
                 }
+            }
 
-                $assets = json_decode(file_get_contents($manifest_path), true);
-                foreach ($assets as $origin => $compile) {
-                    $assetPaths[$base_dir . '/' . $origin] = $base_dir . '/' . $compile;
-                }
+            if (!empty($assetPaths)) {
+                set_transient('woody_asset_paths', $assetPaths);
             }
         }
 
