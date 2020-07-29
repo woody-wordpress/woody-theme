@@ -2,6 +2,7 @@
 
 namespace WoodyProcess\Getters;
 
+use Woody\Modules\GroupQuotation\GroupQuotation;
 use WoodyProcess\Process\WoodyTheme_WoodyProcess;
 use WoodyProcess\Tools\WoodyTheme_WoodyProcessTools;
 
@@ -146,7 +147,7 @@ class WoodyTheme_WoodyGetters
                         }
 
                         if ($wrapper['deal_mode']) {
-                            if(!empty($item["deals"])){
+                            if (!empty($item["deals"])) {
                                 foreach ($item["deals"]['list'] as $index => $deal) {
                                     $items['items'][] = $this->getTouristicSheetPreview($wrapper, $wpSheetNode->getPost(), $index);
                                 }
@@ -300,7 +301,14 @@ class WoodyTheme_WoodyGetters
                 $data['description'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($item, 'focus_description', $item, 'field_5b2bbbfaec6b2'), $item->ID);
             }
             if (in_array('price', $wrapper['display_elements'])) {
-                $data['the_price'] = get_field('field_5b6c670eb54f2', $item->ID);
+                $price_type = get_field('the_price_price_type', $item->ID);
+                if ($price_type == "component_based") {
+                    $groupQuotation = new GroupQuotation;
+                    $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d', $item);
+                    $data['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price'], $item);
+                } else {
+                    $data['the_price'] = get_field('field_5b6c670eb54f2', $item->ID);
+                }
             }
             if (in_array('duration', $wrapper['display_elements'])) {
                 $data['the_duration'] = get_field('field_5b6c5e7cb54ee', $item->ID);
@@ -470,7 +478,7 @@ class WoodyTheme_WoodyGetters
         if (!empty($wrapper['display_img'])) {
             $data['img'] = [
                 'resizer' => true,
-                'url' => (!empty($sheet['img']['url'])) ? $sheet['img']['url']['manual'] : '',
+                'url' => (!empty($sheet['img']['url']) && !empty($sheet['img']['url']['manual'])) ? str_replace('api.tourism-system.com', 'api.cloudly.space', $sheet['img']['url']['manual']) : '',
                 'alt' => (!empty($sheet['img']['alt'])) ? $sheet['img']['alt'] : '',
                 'title' => (!empty($sheet['img']['title'])) ? $sheet['img']['title'] : ''
             ];
@@ -587,7 +595,7 @@ class WoodyTheme_WoodyGetters
 
         if (!empty($item->woody_topic_img) && !$item->woody_topic_attachment) {
             $img = [
-                'url' => 'https://api.tourism-system.com/resize/crop/%width%/%height%/70/' . base64_encode($item->woody_topic_img) . '/image.jpg',
+                'url' => rc_getImageResizedFromApi('%width%', '%height%', $item->woody_topic_img),
                 'resizer' => true
             ];
             $data['img'] = $img;

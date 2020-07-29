@@ -57,6 +57,7 @@ class WoodyTheme_Timber_Filters
         $twig->addFilter(new Twig_SimpleFilter('theRootAncestor', [$this, 'theRootAncestor']));
         $twig->addFilter(new Twig_SimpleFilter('pluralizeUnit', [$this, 'pluralizeUnit']));
         $twig->addFilter(new Twig_SimpleFilter('base64Encode', [$this, 'base64Encode']));
+        $twig->addFilter(new Twig_SimpleFilter('base64_encode', [$this, 'base64Encode']));
         $twig->addFilter(new Twig_SimpleFilter('seed', [$this, 'seed']));
         $twig->addFilter(new Twig_SimpleFilter('translate', [$this, 'translate']));
         $twig->addFilter(new Twig_SimpleFilter('json_encode', [$this, 'jsonEncode']));

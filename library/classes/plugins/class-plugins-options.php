@@ -54,7 +54,7 @@ class WoodyTheme_Plugins_Options
         update_option('uploads_use_yearmonth_folders', true, '', 'yes');
         update_option('thumbnail_crop', true, '', 'yes');
         update_option('acm_server_settings', ['server_enable' => true], '', 'yes');
-        update_option('permalink_structure', '/%postname%/', '', 'yes');
+        update_option('permalink_structure', WOODY_PERMALINK_STRUCTURE, '', 'yes');
 
         // Cleaning Permalink Manager Pro
         delete_option('permalink-manager-permastructs');
@@ -72,7 +72,7 @@ class WoodyTheme_Plugins_Options
         }
 
         // Force Disable indexation
-        if (WP_ENV != 'prod') {
+        if (WP_ENV != 'prod' || WOODY_ACCESS_STAGING) {
             update_option('blog_public', 0, '', 'yes');
         } else {
             update_option('blog_public', 1, '', 'yes');

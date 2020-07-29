@@ -11,6 +11,7 @@ class WoodyTheme_Enqueue_Assets
 {
     protected $siteConfig;
     protected $globalScriptString;
+    protected $assetPaths;
     protected $isTouristicPlaylist;
     protected $isTouristicSheet;
     protected $wThemeVersion;
@@ -19,6 +20,7 @@ class WoodyTheme_Enqueue_Assets
     {
         $this->siteConfig = $this->setSiteConfig();
         $this->globalScriptString = $this->setGlobalScriptString();
+        $this->assetPaths = $this->setAssetPaths();
 
         $this->registerHooks();
     }
@@ -86,13 +88,12 @@ class WoodyTheme_Enqueue_Assets
         // Remove heartbeat from front
         wp_deregister_script('heartbeat');
 
+        // Remove Gutenberg CSS
+        wp_dequeue_style('wp-block-library');
+
         // Deregister the jquery version bundled with WordPress & define another
         wp_deregister_script('jquery');
         wp_deregister_script('jquery-migrate');
-        $jQuery_version = '3.4.1';
-        if ($this->isTouristicPlaylist || $this->isTouristicSheet || $this->isRoadBookPlaylist || $this->isRoadBookSheet) {
-            $jQuery_version = '2.1.4';
-        }
 
         // define apiurl according to WP_ENV
         switch (WP_ENV) {
@@ -138,83 +139,87 @@ class WoodyTheme_Enqueue_Assets
         }
 
         // CDN hosted jQuery placed in the header, as some plugins require that jQuery is loaded in the header.
-        wp_enqueue_script('jquery', 'https://cdn.jsdelivr.net/npm/jquery@' . $jQuery_version . '/dist/jquery.min.js', [], '', true);
-        wp_enqueue_script('jsdelivr_lazysizes', 'https://cdn.jsdelivr.net/npm/lazysizes@4.1.2/lazysizes.min.js', [], '', true);
+        $jQuery_version = '3.4.1';
+        if ($this->isTouristicPlaylist || $this->isTouristicSheet || $this->isRoadBookPlaylist || $this->isRoadBookSheet) {
+            $jQuery_version = '2.1.4';
+        }
+        wp_enqueue_script('jquery', 'https://cdn.jsdelivr.net/npm/jquery@' . $jQuery_version . '/dist/jquery.min.js', [], null);
+        wp_enqueue_script('jsdelivr_lazysizes', 'https://cdn.jsdelivr.net/npm/lazysizes@4.1.2/lazysizes.min.js', [], null);
 
         // if (WP_ENV == 'dev') {
-        //     wp_enqueue_script('jsdelivr_jquery-migrate', 'https://cdn.jsdelivr.net/npm/jquery-migrate@3.0.1/dist/jquery-migrate.min.js', ['jquery'], '', true);
+        //     wp_enqueue_script('jsdelivr_jquery-migrate', 'https://cdn.jsdelivr.net/npm/jquery-migrate@3.0.1/dist/jquery-migrate.min.js', ['jquery'], null);
         // }
 
         // Dependencies of main.js
-        wp_enqueue_script('jsdelivr_cookieconsent', 'https://cdn.jsdelivr.net/npm/cookieconsent@3.1.0/build/cookieconsent.min.js', [], '', true);
+        wp_enqueue_script('jsdelivr_cookieconsent', 'https://cdn.jsdelivr.net/npm/cookieconsent@3.1.0/build/cookieconsent.min.js', [], null);
 
         if (!$this->isTouristicSheet || $this->isRoadBookSheet) {
-            wp_enqueue_script('jsdelivr_swiper', 'https://cdn.jsdelivr.net/npm/swiper@4.4.1/dist/js/swiper.min.js', [], '', true);
+            wp_enqueue_script('jsdelivr_swiper', 'https://cdn.jsdelivr.net/npm/swiper@4.4.1/dist/js/swiper.min.js', [], null);
         }
 
         $current_lang = apply_filters('woody_pll_current_language', null);
         if (in_array($current_lang, ['fr', 'es', 'nl', 'it', 'de', 'ru', 'ja', 'pt'])) {
-            wp_enqueue_script('jsdelivr_flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/flatpickr.min.js', [], '', true);
-            wp_enqueue_script('jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/' . $current_lang . '.min.js', ['jsdelivr_flatpickr'], '', true);
+            wp_enqueue_script('jsdelivr_flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/flatpickr.min.js', [], null);
+            wp_enqueue_script('jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/' . $current_lang . '.min.js', ['jsdelivr_flatpickr'], null);
         } else {
-            wp_enqueue_script('jsdelivr_flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/flatpickr.min.js', [], '', true);
-            wp_enqueue_script('jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/default.min.js', ['jsdelivr_flatpickr'], '', true);
+            wp_enqueue_script('jsdelivr_flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/flatpickr.min.js', [], null);
+            wp_enqueue_script('jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/default.min.js', ['jsdelivr_flatpickr'], null);
         }
 
-        //wp_enqueue_script('jsdelivr_webfontloader', 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js', [], '', true);
-        wp_enqueue_script('jsdelivr_lightgallery', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/dist/js/lightgallery.min.js', ['jquery'], '', true);
-        wp_enqueue_script('jsdelivr_lg-pager', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-pager.min.js', ['jsdelivr_lightgallery'], '', true);
-        wp_enqueue_script('jsdelivr_lg-thumbnail', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-thumbnail.min.js', ['jsdelivr_lightgallery'], '', true);
-        wp_enqueue_script('jsdelivr_lg-video', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-video.min.js', ['jsdelivr_lightgallery'], '', true);
-        wp_enqueue_script('jsdelivr_lg-zoom', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-zoom.min.js', ['jsdelivr_lightgallery'], '', true);
-        wp_enqueue_script('jsdelivr_lg-fullscreen', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-fullscreen.min.js', ['jsdelivr_lightgallery'], '', true);
-        wp_enqueue_script('jsdelivr_nouislider', 'https://cdn.jsdelivr.net/npm/nouislider@10.1.0/distribute/nouislider.min.js', ['jquery'], '', true);
-        wp_enqueue_script('jsdelivr_moment', 'https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js', [], '', true);
-        wp_enqueue_script('jsdelivr_jscookie', 'https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js', [], '', true);
-        wp_enqueue_script('jsdelivr_rellax', 'https://cdn.jsdelivr.net/npm/rellax@1.10.0/rellax.min.js', [], '', true);
-        wp_enqueue_script('jsdelivr_plyr', 'https://cdn.jsdelivr.net/npm/plyr@3.5.6/dist/plyr.min.js', [], '', true);
-
-        // Touristic maps libraries
-        wp_enqueue_script('jsdelivr_leaflet', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet-src.min.js', [], '', true);
-        if (isset($map_keys['otmKey']) || $this->isTouristicSheet || $this->isRoadBookSheet) {
-            // need to load tangram always in TOURISTIC SHEET for now (bug in vendor angular) ↓
-            wp_enqueue_script('touristicmaps_tangram', 'https://tiles.touristicmaps.com/libs/tangram.min.js?v=' . $this->wThemeVersion, [], '', true);
-        }
+        //wp_enqueue_script('jsdelivr_webfontloader', 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js', [], null);
+        wp_enqueue_script('jsdelivr_lightgallery', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/dist/js/lightgallery.min.js', ['jquery'], null);
+        wp_enqueue_script('jsdelivr_lg-pager', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-pager.min.js', ['jsdelivr_lightgallery'], null);
+        wp_enqueue_script('jsdelivr_lg-thumbnail', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-thumbnail.min.js', ['jsdelivr_lightgallery'], null);
+        wp_enqueue_script('jsdelivr_lg-video', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-video.min.js', ['jsdelivr_lightgallery'], null);
+        wp_enqueue_script('jsdelivr_lg-zoom', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-zoom.min.js', ['jsdelivr_lightgallery'], null);
+        wp_enqueue_script('jsdelivr_lg-fullscreen', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-fullscreen.min.js', ['jsdelivr_lightgallery'], null);
+        wp_enqueue_script('jsdelivr_nouislider', 'https://cdn.jsdelivr.net/npm/nouislider@10.1.0/distribute/nouislider.min.js', ['jquery'], null);
+        wp_enqueue_script('jsdelivr_moment', 'https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js', [], null);
+        wp_enqueue_script('jsdelivr_jscookie', 'https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js', [], null);
+        wp_enqueue_script('jsdelivr_rellax', 'https://cdn.jsdelivr.net/npm/rellax@1.10.0/rellax.min.js', [], null);
+        wp_enqueue_script('jsdelivr_plyr', 'https://cdn.jsdelivr.net/npm/plyr@3.5.6/dist/plyr.min.js', [], null);
 
         // Menus links obfuscation
-        wp_enqueue_script('obf', get_template_directory_uri() . '/src/js/static/obf.min.js', [], '', true);
+        wp_enqueue_script('obf', get_template_directory_uri() . '/src/js/static/obf.min.js', [], null);
+
+        // Touristic maps libraries
+        wp_enqueue_script('jsdelivr_leaflet', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet-src.min.js', [], null);
+        if (isset($map_keys['otmKey']) || $this->isTouristicSheet || $this->isRoadBookSheet) {
+            // need to load tangram always in TOURISTIC SHEET for now (bug in vendor angular) ↓
+            wp_enqueue_script('touristicmaps_tangram', 'https://tiles.touristicmaps.com/libs/tangram.min.js?v=' . $this->wThemeVersion, [], null);
+        }
 
         if (isset($map_keys['gmKey'])) {
-            wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?key=' . $map_keys['gmKey'] . '&v=3.33&libraries=geometry,places', [], '', true);
+            wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?key=' . $map_keys['gmKey'] . '&v=3.33&libraries=geometry,places', [], null);
         } elseif ($this->isTouristicSheet || $this->isRoadBookSheet) { // absolutely needed in angular
-            wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?v=3.33&libraries=geometry,places', [], '', true);
+            wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?v=3.33&libraries=geometry,places', [], null);
         }
-        wp_enqueue_script('hawwwai_universal_map', $apirender_base_uri . '/assets/scripts/raccourci/universal-map.' . $jsModeSuffix . '.js?v=' . $this->wThemeVersion, $js_dependencies_rcmap, '', true);
+        wp_enqueue_script('hawwwai_universal_map', $apirender_base_uri . '/assets/scripts/raccourci/universal-map.' . $jsModeSuffix . '.js?v=' . $this->wThemeVersion, $js_dependencies_rcmap, null);
 
         // Playlist libraries
         if ($this->isTouristicPlaylist || $this->isRoadBookPlaylist) {
             // CSS_Libraries (todo replace when possible)
-            wp_enqueue_style('hawwwai_font_css', 'https://api.tourism-system.com/static/assets/fonts/raccourci-font.css', [], '');
-            wp_enqueue_style('jsdelivr_leaflet_css', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.min.css', [], '');
-            wp_enqueue_style('jsdelivr_bootstrap_css', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css', [], '');
-            wp_enqueue_style('jsdelivr_nouislider_css', 'https://cdn.jsdelivr.net/npm/nouislider@10.1.0/distribute/nouislider.min.css', [], '');
-            wp_enqueue_style('jsdelivr_chosen_css', 'https://cdn.jsdelivr.net/npm/chosen-js@1.8.2/chosen.min.css', [], '');
-            wp_enqueue_style('jsdelivr_picker_css', 'https://cdn.jsdelivr.net/npm/bootstrap-daterangepicker@2.1.27/daterangepicker.min.css', [], '');
+            wp_enqueue_style('hawwwai_font_css', $this->assetPath('https://api.cloudly.space/static/assets/fonts/raccourci-font.min.css'), [], null);
+            wp_enqueue_style('jsdelivr_leaflet_css', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.min.css', [], null);
+            wp_enqueue_style('jsdelivr_bootstrap_css', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css', [], null);
+            wp_enqueue_style('jsdelivr_nouislider_css', 'https://cdn.jsdelivr.net/npm/nouislider@10.1.0/distribute/nouislider.min.css', [], null);
+            wp_enqueue_style('jsdelivr_chosen_css', 'https://cdn.jsdelivr.net/npm/chosen-js@1.8.2/chosen.min.css', [], null);
+            wp_enqueue_style('jsdelivr_picker_css', 'https://cdn.jsdelivr.net/npm/bootstrap-daterangepicker@2.1.27/daterangepicker.min.css', [], null);
 
             // JS Libraries
-            wp_enqueue_script('jsdelivr_bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js', [], '', true);
-            wp_enqueue_script('jsdelivr_match8', 'https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js', ['jquery'], '', true);
-            wp_enqueue_script('jsdelivr_wnumb', 'https://cdn.jsdelivr.net/npm/wnumb@1.0.4/wNumb.min.js', ['jquery'], '', true);
-            wp_enqueue_script('jsdelivr_chosen', 'https://cdn.jsdelivr.net/npm/chosen-js@1.8.2/chosen.jquery.min.js', ['jquery'], '', true);
-            wp_enqueue_script('jsdelivr_picker', 'https://cdn.jsdelivr.net/npm/bootstrap-daterangepicker@2.1.27/daterangepicker.min.js', ['jsdelivr_bootstrap'], '', true);
-            wp_enqueue_script('jsdelivr_twigjs', 'https://cdn.jsdelivr.net/npm/twig@0.8.9/twig.min.js', [], '', true);
-            wp_enqueue_script('jsdelivr_uuid', 'https://cdn.jsdelivr.net/npm/node-uuid@1.4.8/uuid.min.js', [], '', true);
-            wp_enqueue_script('jsdelivr_lodash', 'https://cdn.jsdelivr.net/npm/lodash@3.8.0/index.min.js', [], '', true);
-            wp_enqueue_script('jsdelivr_arrive', 'https://cdn.jsdelivr.net/npm/arrive@2.4.1/src/arrive.min.js', ['jquery'], '', true);
-            wp_enqueue_script('hawwwai_sheet_item', $apirender_base_uri . '/assets/scripts/raccourci/sheet_item.min.js?v=' . $this->wThemeVersion, ['jquery'], '', true);
+            wp_enqueue_script('jsdelivr_bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js', [], null);
+            wp_enqueue_script('jsdelivr_match8', 'https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js', ['jquery'], null);
+            wp_enqueue_script('jsdelivr_wnumb', 'https://cdn.jsdelivr.net/npm/wnumb@1.0.4/wNumb.min.js', ['jquery'], null);
+            wp_enqueue_script('jsdelivr_chosen', 'https://cdn.jsdelivr.net/npm/chosen-js@1.8.2/chosen.jquery.min.js', ['jquery'], null);
+            wp_enqueue_script('jsdelivr_picker', 'https://cdn.jsdelivr.net/npm/bootstrap-daterangepicker@2.1.27/daterangepicker.min.js', ['jsdelivr_bootstrap'], null);
+            wp_enqueue_script('jsdelivr_twigjs', 'https://cdn.jsdelivr.net/npm/twig@0.8.9/twig.min.js', [], null);
+            wp_enqueue_script('jsdelivr_uuid', 'https://cdn.jsdelivr.net/npm/node-uuid@1.4.8/uuid.min.js', [], null);
+            wp_enqueue_script('jsdelivr_lodash', 'https://cdn.jsdelivr.net/npm/lodash@3.8.0/index.min.js', [], null);
+            wp_enqueue_script('jsdelivr_arrive', 'https://cdn.jsdelivr.net/npm/arrive@2.4.1/src/arrive.min.js', ['jquery'], null);
+            wp_enqueue_script('hawwwai_sheet_item', $apirender_base_uri . '/assets/scripts/raccourci/sheet_item.min.js?v=' . $this->wThemeVersion, ['jquery'], null);
 
             $js_dependencies__playlist = ['jsdelivr_bootstrap', 'jsdelivr_match8', 'jsdelivr_nouislider', 'jsdelivr_wnumb', 'jsdelivr_chosen', 'jsdelivr_moment', 'jsdelivr_picker', 'jsdelivr_twigjs', 'jsdelivr_uuid', 'jsdelivr_lodash', 'jsdelivr_arrive', 'hawwwai_sheet_item'];
-            wp_enqueue_script('hawwwai_playlist', $apirender_base_uri . '/assets/scripts/raccourci/playlist.' . $jsModeSuffix . '.js?v=' . $this->wThemeVersion, $js_dependencies__playlist, '', true);
+            wp_enqueue_script('hawwwai_playlist', $apirender_base_uri . '/assets/scripts/raccourci/playlist.' . $jsModeSuffix . '.js?v=' . $this->wThemeVersion, $js_dependencies__playlist, null);
             $playlist_map_query = !empty($map_keys) ? '?' . http_build_query($map_keys) : '';
             wp_enqueue_script('hawwwai_playlist_map', $apirender_base_uri . '/assets/scripts/raccourci/playlist-map.leaflet.' . $jsModeSuffix . '.js' . $playlist_map_query, array_merge($js_dependencies_rcmap, ['hawwwai_playlist']), $this->wThemeVersion, true);
         }
@@ -222,27 +227,27 @@ class WoodyTheme_Enqueue_Assets
         // Sheet libraries
         elseif ($this->isTouristicSheet || $this->isRoadBookSheet) {
             // CSS Libraries (todo replace when possible)
-            wp_enqueue_style('hawwwai_font_css', 'https://api.tourism-system.com/static/assets/fonts/raccourci-font.css', [], '');
-            wp_enqueue_style('hawwwai_fresco_css', 'https://api.tourism-system.com/render/assets/styles/lib/fresco.css', [], '');
-            wp_enqueue_style('jsdelivr_leaflet_css', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.min.css', [], '');
-            wp_enqueue_style('jsdelivr_slick_css', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css', [], '');
-            wp_enqueue_style('jsdelivr_bootstrap_css', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css', [], '');
+            wp_enqueue_style('hawwwai_font_css', $this->assetPath('https://api.cloudly.space/static/assets/fonts/raccourci-font.min.css'), [], null);
+            wp_enqueue_style('hawwwai_fresco_css', 'https://api.tourism-system.com/render/assets/styles/lib/fresco.css', [], null);
+            wp_enqueue_style('jsdelivr_leaflet_css', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.min.css', [], null);
+            wp_enqueue_style('jsdelivr_slick_css', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css', [], null);
+            wp_enqueue_style('jsdelivr_bootstrap_css', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css', [], null);
 
             // JS Libraries
-            wp_enqueue_script('jsapi', 'https://www.google.com/jsapi', [], '', true);
-            wp_enqueue_script('google_recaptcha', 'https://www.google.com/recaptcha/api.js', [], '', true);
-            wp_enqueue_script('jsdelivr_lodash', 'https://cdn.jsdelivr.net/npm/lodash@3.8.0/index.min.js"', [], '', true);
-            wp_enqueue_script('jsdelivr_slick', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', ['jquery'], '', true);
-            wp_enqueue_script('jsdelivr_match8', 'https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js', ['jquery'], '', true);
-            wp_enqueue_script('jsdelivr_highcharts', 'https://cdn.jsdelivr.net/npm/highcharts@6.2.0/highcharts.min.js', ['jquery'], '', true);
+            wp_enqueue_script('jsapi', 'https://www.google.com/jsapi', [], null);
+            wp_enqueue_script('google_recaptcha', 'https://www.google.com/recaptcha/api.js', [], null);
+            wp_enqueue_script('jsdelivr_lodash', 'https://cdn.jsdelivr.net/npm/lodash@3.8.0/index.min.js"', [], null);
+            wp_enqueue_script('jsdelivr_slick', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', ['jquery'], null);
+            wp_enqueue_script('jsdelivr_match8', 'https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js', ['jquery'], null);
+            wp_enqueue_script('jsdelivr_highcharts', 'https://cdn.jsdelivr.net/npm/highcharts@6.2.0/highcharts.min.js', ['jquery'], null);
 
-            wp_enqueue_script('hawwwai_ng_vendor', $apirender_base_uri . '/assets/scripts/vendor.js?v=' . $this->wThemeVersion, [], '', true);
-            wp_enqueue_script('hawwwai_ng_libs', $apirender_base_uri . '/assets/scripts/misclibs.js?v=' . $this->wThemeVersion, [], '', true);
-            wp_enqueue_script('hawwwai_ng_app', $apirender_base_uri . '/assets/app.js?v=' . $this->wThemeVersion, [], '', true);
-            wp_enqueue_script('hawwwai_ng_scripts', $apirender_base_uri . '/assets/scripts/scripts.js?v=' . $this->wThemeVersion, [], '', true);
-            wp_enqueue_script('hawwwai_sheet_item', $apirender_base_uri . '/assets/scripts/raccourci/sheet_item.' . $jsModeSuffix . '.js?v=' . $this->wThemeVersion, ['jsdelivr_match8'], '', true);
-            wp_enqueue_script('hawwwai_itinerary', $apirender_base_uri . '/assets/scripts/raccourci/itinerary.' . $jsModeSuffix . '.js?v=' . $this->wThemeVersion, ['jquery', 'hawwwai_ng_scripts'], '', true);
-            wp_enqueue_script('hawwwai_fresco', $apirender_base_uri . '/assets/scripts/lib/fresco.js?v=' . $this->wThemeVersion, ['jquery'], '', true);
+            wp_enqueue_script('hawwwai_ng_vendor', $apirender_base_uri . '/assets/scripts/vendor.js?v=' . $this->wThemeVersion, [], null);
+            wp_enqueue_script('hawwwai_ng_libs', $apirender_base_uri . '/assets/scripts/misclibs.js?v=' . $this->wThemeVersion, [], null);
+            wp_enqueue_script('hawwwai_ng_app', $apirender_base_uri . '/assets/app.js?v=' . $this->wThemeVersion, [], null);
+            wp_enqueue_script('hawwwai_ng_scripts', $apirender_base_uri . '/assets/scripts/scripts.js?v=' . $this->wThemeVersion, [], null);
+            wp_enqueue_script('hawwwai_sheet_item', $apirender_base_uri . '/assets/scripts/raccourci/sheet_item.' . $jsModeSuffix . '.js?v=' . $this->wThemeVersion, ['jsdelivr_match8'], null);
+            wp_enqueue_script('hawwwai_itinerary', $apirender_base_uri . '/assets/scripts/raccourci/itinerary.' . $jsModeSuffix . '.js?v=' . $this->wThemeVersion, ['jquery', 'hawwwai_ng_scripts'], null);
+            wp_enqueue_script('hawwwai_fresco', $apirender_base_uri . '/assets/scripts/lib/fresco.js?v=' . $this->wThemeVersion, ['jquery'], null);
         }
 
         // Add the comment-reply library on pages where it is necessary
@@ -262,7 +267,7 @@ class WoodyTheme_Enqueue_Assets
             $webfonts = json_decode($webfonts['window.WebFontConfig'], true);
             if (!empty($webfonts['google']) && !empty($webfonts['google']['families'])) {
                 foreach ($webfonts['google']['families'] as $webfont) {
-                    wp_enqueue_style('google-font-' . sanitize_title($webfont), 'https://fonts.googleapis.com/css?family=' . $webfont, [], '', 'all');
+                    wp_enqueue_style('google-font-' . sanitize_title($webfont), 'https://fonts.googleapis.com/css?family=' . $webfont, [], null);
                 }
             }
         }
@@ -286,20 +291,20 @@ class WoodyTheme_Enqueue_Assets
         if (!$this->isTouristicSheet || $this->isRoadBookSheet) {
             $dependencies[] = 'jsdelivr_swiper';
         }
-        wp_enqueue_script('main-javascripts', $this->assetPath('js/main.js'), $dependencies, '', true);
+        wp_enqueue_script('main-javascripts', $this->assetPath(WP_DIST_URL . '/js/main.js'), $dependencies, null);
 
         // Enqueue the main Stylesheet.
         if ($this->isTouristicSheet || $this->isRoadBookSheet || $this->isTouristicPlaylist || $this->isRoadBookPlaylist) {
             $tourism_css = apply_filters('woody_theme_stylesheets', 'tourism');
             $tourism_css = (!empty($tourism_css)) ? $tourism_css : 'tourism';
-            wp_enqueue_style('main-stylesheet', $this->assetPath('css/' . $tourism_css . '.css'), [], '', 'screen');
+            wp_enqueue_style('main-stylesheet', $this->assetPath(WP_DIST_URL . '/css/' . $tourism_css . '.css'), [], null, 'screen');
         } else {
             $main_css = apply_filters('woody_theme_stylesheets', 'main');
             $main_css = (!empty($main_css)) ? $main_css : 'main';
-            wp_enqueue_style('main-stylesheet', $this->assetPath('css/' . $main_css . '.css'), [], '', 'screen');
+            wp_enqueue_style('main-stylesheet', $this->assetPath(WP_DIST_URL . '/css/' . $main_css . '.css'), [], null, 'screen');
         }
 
-        wp_enqueue_style('print-stylesheet', $this->assetPath('css/print.css'), [], '', 'print');
+        wp_enqueue_style('print-stylesheet', $this->assetPath(WP_DIST_URL . '/css/print.css'), [], null, 'print');
     }
 
     public function enqueueAdminAssets()
@@ -307,20 +312,20 @@ class WoodyTheme_Enqueue_Assets
         // Define $this->isTouristicPlaylist, $this->isTouristicSheet et $this->wThemeVersion
         $this->setGlobalVars();
 
-        wp_enqueue_script('jsdelivr_lazysizes', 'https://cdn.jsdelivr.net/npm/lazysizes@4.1.2/lazysizes.min.js', [], '', true);
+        wp_enqueue_script('jsdelivr_lazysizes', 'https://cdn.jsdelivr.net/npm/lazysizes@4.1.2/lazysizes.min.js', [], null);
 
         // Enqueue the main Scripts
         $dependencies = ['jquery'];
-        wp_enqueue_script('admin-javascripts', $this->assetPath('js/admin.js'), $dependencies, $this->wThemeVersion, true);
-        wp_enqueue_script('admin_jsdelivr_flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/flatpickr.min.js', [], '');
-        wp_enqueue_script('admin_jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/fr.min.js', ['admin_jsdelivr_flatpickr'], '', true);
+        wp_enqueue_script('admin-javascripts', $this->assetPath(WP_DIST_URL . '/js/admin.js'), $dependencies, null);
+        wp_enqueue_script('admin_jsdelivr_flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/flatpickr.min.js', [], null);
+        wp_enqueue_script('admin_jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/fr.min.js', ['admin_jsdelivr_flatpickr'], null);
 
         // Added global vars
         wp_add_inline_script('admin-javascripts', 'var siteConfig = ' . json_encode($this->siteConfig) . ';', 'before');
         wp_add_inline_script('admin-javascripts', 'document.addEventListener("DOMContentLoaded",()=>{document.body.classList.add("windowReady")});', 'after');
 
         // Enqueue the main Stylesheet.
-        wp_enqueue_style('admin-stylesheet', $this->assetPath('css/admin.css'), [], $this->wThemeVersion, 'all');
+        wp_enqueue_style('admin-stylesheet', $this->assetPath(WP_DIST_URL . '/css/admin.css'), [], null);
     }
 
     public function heartbeatSettings()
@@ -335,24 +340,19 @@ class WoodyTheme_Enqueue_Assets
         $favicon_name = apply_filters('woody_favicon_name', 'favicon');
 
         foreach (['favicon', '16', '32', '64', '120', '128', '152', '167', '180', '192'] as $icon) {
-            $return[$icon] = $this->assetPath('favicon/' .$favicon_name . '/' . (($icon == 'favicon') ? $favicon_name . '.ico' : $favicon_name . '.' . $icon . 'w-' . $icon . 'h.png'));
+            $return[$icon] = $this->assetPath(WP_DIST_URL . '/favicon/' . $favicon_name . '/' . (($icon == 'favicon') ? $favicon_name . '.ico' : $favicon_name . '.' . $icon . 'w-' . $icon . 'h.png'));
         }
 
         return $return;
     }
 
-    private function assetPath($filename)
+    private function assetPath($file_url)
     {
-        $manifest_path = WP_DIST_DIR . '/rev-manifest.json';
-        if (file_exists($manifest_path)) {
-            $manifest = json_decode(file_get_contents($manifest_path), true);
-
-            if (!empty($manifest[$filename])) {
-                $filename = $manifest[$filename];
-            }
+        if (!empty($this->assetPaths[$file_url])) {
+            return $this->assetPaths[$file_url];
         }
 
-        return WP_DIST_URL . '/' . $filename;
+        return $file_url;
     }
 
     public function so_handle_038($url, $original_url, $_context)
@@ -376,6 +376,35 @@ class WoodyTheme_Enqueue_Assets
         // Added global vars
         $siteConfig = apply_filters('woody_theme_siteconfig', []);
         return $siteConfig;
+    }
+
+    protected function setAssetPaths()
+    {
+        $assetPaths = [];
+
+        // Sources for Assets
+        $directories = [
+            WP_DIST_DIR,
+            'https://api.cloudly.space/static/assets/fonts',
+        ];
+
+        foreach ($directories as $dir) {
+            $manifest_path = $dir . '/rev-manifest.json';
+            if (strpos($dir, 'http') !== false || file_exists($manifest_path)) {
+                if (strpos($dir, 'http') !== false) {
+                    $base_dir = $dir;
+                } else {
+                    $base_dir = WP_DIST_URL;
+                }
+
+                $assets = json_decode(file_get_contents($manifest_path), true);
+                foreach ($assets as $origin => $compile) {
+                    $assetPaths[$base_dir . '/' . $origin] = $base_dir . '/' . $compile;
+                }
+            }
+        }
+
+        return $assetPaths;
     }
 
     protected function setGlobalScriptString()

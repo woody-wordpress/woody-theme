@@ -86,15 +86,14 @@ class WoodyTheme_Unpublisher
 
                 $timezone = (!empty(get_option('timezone_string'))) ? get_option('timezone_string') : 'Europe/Paris';
                 $unpublish_date = new DateTime($unpublish_date_meta, new DateTimeZone($timezone));
-
                 $timestamp = $unpublish_date->getTimestamp();
-
                 if ($timestamp < time()) {
                     $updated_post = [
                         'ID' => $page->ID,
                         'post_status' => 'draft'
                     ];
                     wp_update_post($updated_post);
+                    update_post_meta($page->ID,'_wUnpublisher_date','');
                 }
             }
         }
