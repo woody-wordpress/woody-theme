@@ -310,16 +310,12 @@ class WoodyTheme_Enqueue_Assets
 
     public function enqueueAdminAssets()
     {
-        // Define $this->isTouristicPlaylist, $this->isTouristicSheet et $this->wThemeVersion
-        $this->setGlobalVars();
-
-        wp_enqueue_script('jsdelivr_lazysizes', 'https://cdn.jsdelivr.net/npm/lazysizes@4.1.2/lazysizes.min.js', [], null);
-
         // Enqueue the main Scripts
-        $dependencies = ['jquery'];
-        wp_enqueue_script('admin-javascripts', $this->assetPath(WP_DIST_URL . '/js/admin.js'), $dependencies, null);
-        wp_enqueue_script('admin_jsdelivr_flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/flatpickr.min.js', [], null);
-        wp_enqueue_script('admin_jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/fr.min.js', ['admin_jsdelivr_flatpickr'], null);
+        $dependencies = ['jquery', 'admin-jsdelivr-lazysizes', 'admin_jsdelivr_flatpickr', 'admin_jsdelivr_flatpickr_l10n'];
+        wp_enqueue_script('admin-jsdelivr-lazysizes', 'https://cdn.jsdelivr.net/npm/lazysizes@4.1.2/lazysizes.min.js', [], null, true);
+        wp_enqueue_script('admin-javascripts', $this->assetPath(WP_DIST_URL . '/js/admin.js'), $dependencies, null, true);
+        wp_enqueue_script('admin_jsdelivr_flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/flatpickr.min.js', [], null, true);
+        wp_enqueue_script('admin_jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/fr.min.js', ['admin_jsdelivr_flatpickr'], null, true);
 
         // Added global vars
         wp_add_inline_script('admin-javascripts', 'var siteConfig = ' . json_encode($this->siteConfig) . ';', 'before');
@@ -407,8 +403,10 @@ class WoodyTheme_Enqueue_Assets
                     }
 
                     $assets = json_decode(file_get_contents($manifest_path), true);
-                    foreach ($assets as $origin => $compile) {
-                        $assetPaths[$base_dir . '/' . $origin] = $base_dir . '/' . $compile;
+                    if (!empty($assets)) {
+                        foreach ($assets as $origin => $compile) {
+                            $assetPaths[$base_dir . '/' . $origin] = $base_dir . '/' . $compile;
+                        }
                     }
                 }
             }
