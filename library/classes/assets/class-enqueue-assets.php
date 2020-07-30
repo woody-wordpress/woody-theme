@@ -310,13 +310,10 @@ class WoodyTheme_Enqueue_Assets
 
     public function enqueueAdminAssets()
     {
-        // Define $this->isTouristicPlaylist, $this->isTouristicSheet et $this->wThemeVersion
-        $this->setGlobalVars();
-
         // Enqueue the main Scripts
         $dependencies = ['jquery', 'admin-jsdelivr-lazysizes', 'admin_jsdelivr_flatpickr', 'admin_jsdelivr_flatpickr_l10n'];
         wp_enqueue_script('admin-jsdelivr-lazysizes', 'https://cdn.jsdelivr.net/npm/lazysizes@4.1.2/lazysizes.min.js', [], null, true);
-        wp_enqueue_script('admin-javascripts', $this->assetPath(WP_DIST_URL . '/js/admin.js'), $dependencies, $this->wThemeVersion, true);
+        wp_enqueue_script('admin-javascripts', $this->assetPath(WP_DIST_URL . '/js/admin.js'), $dependencies, null, true);
         wp_enqueue_script('admin_jsdelivr_flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/flatpickr.min.js', [], null, true);
         wp_enqueue_script('admin_jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/fr.min.js', ['admin_jsdelivr_flatpickr'], null, true);
 
@@ -325,7 +322,7 @@ class WoodyTheme_Enqueue_Assets
         wp_add_inline_script('admin-javascripts', 'document.addEventListener("DOMContentLoaded",()=>{document.body.classList.add("windowReady")});', 'after');
 
         // Enqueue the main Stylesheet.
-        wp_enqueue_style('admin-stylesheet', $this->assetPath(WP_DIST_URL . '/css/admin.css'), [], $this->wThemeVersion);
+        wp_enqueue_style('admin-stylesheet', $this->assetPath(WP_DIST_URL . '/css/admin.css'), [], null);
     }
 
     public function heartbeatSettings()
