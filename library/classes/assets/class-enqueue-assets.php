@@ -384,7 +384,7 @@ class WoodyTheme_Enqueue_Assets
     protected function setAssetPaths()
     {
         $assetPaths = get_transient('woody_asset_paths');
-        if (empty($assetPaths)) {
+        if (empty($assetPaths) || WP_ENV == 'dev') {
             $assetPaths = [];
 
             // Sources for Assets
