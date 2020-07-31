@@ -292,6 +292,7 @@ class WoodyTheme_Enqueue_Assets
         if (!$this->isTouristicSheet || $this->isRoadBookSheet) {
             $dependencies[] = 'jsdelivr_swiper';
         }
+        $dependencies = apply_filters( 'woody_mainjs_dependencies', $dependencies );
         wp_enqueue_script('main-javascripts', $this->assetPath(WP_DIST_URL . '/js/main.js'), $dependencies, null);
 
         // Enqueue the main Stylesheet.
