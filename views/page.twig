@@ -88,9 +88,12 @@
             {% endblock %}
 
             {% for key, section in the_sections %}
-                <div class="page-section page-section-{{ key }}" id="pageSection-{{ key }}">
-                    {{ section }}
-                </div>
+                {% if section is empty %}
+                {% else %}
+                    <div class="page-section page-section-{{ key }}" id="pageSection-{{ key }}">
+                        {{ section }}
+                    </div>
+                {% endif %}
             {% endfor %}
             {% if 'claims' in enabled_woody_options %}
                 <div class="claims-blocks-wrapper"></div>
