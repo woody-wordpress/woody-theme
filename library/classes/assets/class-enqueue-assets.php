@@ -207,7 +207,7 @@ class WoodyTheme_Enqueue_Assets
         // Playlist libraries
         if ($this->isTouristicPlaylist || $this->isRoadBookPlaylist) {
             // CSS_Libraries (todo replace when possible)
-            wp_enqueue_style('hawwwai_font_css', 'https://api.tourism-system.com/static/assets/fonts/raccourci-font.css', [], null);
+            wp_enqueue_style('hawwwai_font_css', $this->assetPath('https://api.cloudly.space/static/assets/fonts/raccourci-font.min.css'), [], null);
             wp_enqueue_style('jsdelivr_bootstrap_css', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css', [], null);
             wp_enqueue_style('jsdelivr_nouislider_css', 'https://cdn.jsdelivr.net/npm/nouislider@10.1.0/distribute/nouislider.min.css', [], null);
             wp_enqueue_style('jsdelivr_chosen_css', 'https://cdn.jsdelivr.net/npm/chosen-js@1.8.2/chosen.min.css', [], null);
