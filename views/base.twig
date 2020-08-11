@@ -91,5 +91,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {# WP Footer #}
     {{ wp_footer }}
     {# /WP Footer #}
+
+    {% if is_user_logged_in == false %}
+    <script>
+        {% for cookie in cookies %}
+        document.cookie = '{{ cookie }}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        {% endfor %}
+    </script>
+    {% endif %}
 </body>
 </html>
