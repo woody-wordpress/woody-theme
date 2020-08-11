@@ -395,7 +395,7 @@ function embedProviderThumbnail($embed)
             $regex = '/(?<=\/video\/)(.*)(?=\?dnt)/';
             preg_match($regex, $src, $matches);
             if (!empty($matches[0])) {
-                $vimeo_data = unserialize(file_get_contents('http://vimeo.com/api/v2/video/'. $matches[0] .'.php'));
+                $vimeo_data = unserialize(file_get_contents('https://vimeo.com/api/v2/video/'. $matches[0] .'.php'));
                 if (empty($vimeo_data)) {
                     return;
                 }
