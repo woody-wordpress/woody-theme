@@ -18,6 +18,11 @@ class WoodyTheme_Varnish
     {
         add_filter('vcaching_purge_urls', [$this, 'vcachingPurgeUrls'], 10, 1);
         add_action('template_redirect', [$this, 'overrideTTL'], 1000);
+
+        // Force remove varnish cookie if logout
+        if (!is_user_logged_in() && !empty($_COOKIE[WOODY_VARNISH_CACHING_COOKIE])) {
+            setcookie(WOODY_VARNISH_CACHING_COOKIE, null, time()-3600*24*100, COOKIEPATH, COOKIE_DOMAIN, false, true);
+        }
     }
 
     public function vcachingPurgeUrls($purge_urls = [])
