@@ -7,7 +7,7 @@ $context = [
         'logo' => 'display: block; margin: 0 auto; height:100%',
     ],
     'logo_url' => (!empty(get_stylesheet_directory_uri() . '/logo.svg')) ? get_stylesheet_directory_uri() . '/logo.svg' : '',
-    'home_url' => pll_home_url()
+    'home_url' => home_url()
 ];
 $context = apply_filters('inc_footer_override', $context);
 \Timber::render('inclusions/inc_footer.twig', $context);
