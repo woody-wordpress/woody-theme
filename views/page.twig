@@ -11,7 +11,7 @@
         {% endif %}
         <div class="content-wrapper {{ page_terms|default('no-terms') }}">
             <div class="mobile-header hide-for-xlarge title-bar">
-                <span class="brand-logo obf" data-obf="{{ site.url|base64Encode }}">
+                <span class="brand-logo obf" data-obf="{{ home_url|base64Encode }}">
                     {{ mobile_logo|default(website_logo) }}
                 </span>
             </div>

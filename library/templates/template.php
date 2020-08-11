@@ -548,6 +548,7 @@ abstract class WoodyTheme_TemplateAbstract
             if (!empty($SubWoodyTheme_TemplateParts->website_logo)) {
                 $this->context['website_logo'] = $SubWoodyTheme_TemplateParts->website_logo;
             }
+            $this->context['home_url'] = home_url();
             $this->context['page_parts'] = $SubWoodyTheme_TemplateParts->getParts();
         }
     }

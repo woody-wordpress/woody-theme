@@ -140,7 +140,7 @@ class WoodyTheme_Enqueue_Assets
         }
 
         // CDN hosted jQuery placed in the header, as some plugins require that jQuery is loaded in the header.
-        $jQuery_version = '3.4.1';
+        $jQuery_version = '3.5.1';
         if ($this->isTouristicPlaylist || $this->isTouristicSheet || $this->isRoadBookPlaylist || $this->isRoadBookSheet) {
             $jQuery_version = '2.1.4';
         }
@@ -292,7 +292,7 @@ class WoodyTheme_Enqueue_Assets
         if (!$this->isTouristicSheet || $this->isRoadBookSheet) {
             $dependencies[] = 'jsdelivr_swiper';
         }
-        $dependencies = apply_filters( 'woody_mainjs_dependencies', $dependencies );
+        $dependencies = apply_filters('woody_mainjs_dependencies', $dependencies);
         wp_enqueue_script('main-javascripts', $this->assetPath(WP_DIST_URL . '/js/main.js'), $dependencies, null);
 
         // Enqueue the main Stylesheet.
