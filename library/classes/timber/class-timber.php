@@ -83,9 +83,6 @@ if (!class_exists('Timber')) {
         public static function get_context()
         {
             if (empty(self::$context_cache)) {
-                self::$context_cache['is_user_logged_in'] = is_user_logged_in();
-                self::$context_cache['cookies'] = [WOODY_VARNISH_CACHING_COOKIE];
-
                 self::$context_cache['http_host'] = home_url();
                 self::$context_cache['body_class'] = implode(' ', get_body_class());
                 self::$context_cache['wp_head'] = self::ob_function('wp_head');
