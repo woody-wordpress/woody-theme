@@ -84,13 +84,7 @@ if (!class_exists('Timber')) {
         {
             if (empty(self::$context_cache)) {
                 self::$context_cache['is_user_logged_in'] = is_user_logged_in();
-                self::$context_cache['cookies'] = [
-                    'woody_sso_expiration_token',
-                    'woody_sso_refresh_token',
-                    'woody_sso_access_token',
-                    'PHPSESSID',
-                    WOODY_VARNISH_CACHING_COOKIE,
-                ];
+                self::$context_cache['cookies'] = [WOODY_VARNISH_CACHING_COOKIE];
 
                 self::$context_cache['http_host'] = home_url();
                 self::$context_cache['body_class'] = implode(' ', get_body_class());
