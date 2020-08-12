@@ -75,17 +75,17 @@ class WoodyTheme_WoodyProcessTools
      *
      */
 
-    public function getFocusBlockTitles($wrapper)
+    public function getFocusBlockTitles($wrapper, $prefix = '')
     {
         $data = [];
 
-        $data['title'] = (!empty($wrapper['title'])) ? $wrapper['title'] : '';
-        $data['pretitle'] = (!empty($wrapper['pretitle'])) ? $wrapper['pretitle'] : '';
-        $data['subtitle'] = (!empty($wrapper['subtitle'])) ? $wrapper['subtitle'] : '';
-        $data['icon_type'] = (!empty($wrapper['icon_type'])) ? $wrapper['icon_type'] : '';
-        $data['icon_img'] = (!empty($wrapper['icon_img'])) ? $wrapper['icon_img'] : '';
-        $data['woody_icon'] = (!empty($wrapper['woody_icon'])) ? $wrapper['woody_icon'] : '';
-        $data['description'] = (!empty($wrapper['description'])) ? $wrapper['description'] : '';
+        $data['title'] = (!empty($wrapper[$prefix . 'title'])) ? $wrapper[$prefix . 'title'] : '';
+        $data['pretitle'] = (!empty($wrapper[$prefix . 'pretitle'])) ? $wrapper[$prefix . 'pretitle'] : '';
+        $data['subtitle'] = (!empty($wrapper[$prefix . 'subtitle'])) ? $wrapper[$prefix . 'subtitle'] : '';
+        $data['icon_type'] = (!empty($wrapper[$prefix . 'icon_type'])) ? $wrapper[$prefix . 'icon_type'] : '';
+        $data['icon_img'] = (!empty($wrapper[$prefix . 'icon_img'])) ? $wrapper[$prefix . 'icon_img'] : '';
+        $data['woody_icon'] = (!empty($wrapper[$prefix . 'woody_icon'])) ? $wrapper[$prefix . 'woody_icon'] : '';
+        $data['description'] = (!empty($wrapper[$prefix . 'description'])) ? $wrapper[$prefix . 'description'] : '';
         $data['fullwidth'] = (!empty($wrapper['focus_block_title_fullwidth'])) ? 'fullwidth' : false;
         if (!empty($wrapper['focus_buttons']) && !empty($wrapper['focus_buttons']['links'])) {
             $data['focus_buttons'] = $wrapper['focus_buttons'];

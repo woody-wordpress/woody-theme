@@ -78,8 +78,13 @@ class WoodyTheme_WoodyCompilers
                 }
             }
 
+            if ($wrapper['acf_fc_layout'] == 'auto_focus_sheets') {
+                $the_items['block_titles'] = $this->tools->getFocusBlockTitles($wrapper, 'focus_block_title_');
+            } else {
+                $the_items['block_titles'] = $this->tools->getFocusBlockTitles($wrapper);
+            }
+
             $the_items['no_padding'] = (!empty($wrapper['focus_no_padding'])) ? $wrapper['focus_no_padding'] : '';
-            $the_items['block_titles'] = $this->tools->getFocusBlockTitles($wrapper);
             $the_items['display_button'] = (!empty($wrapper['display_button'])) ? $wrapper['display_button'] : false;
             $the_items['display_img'] = (!empty($wrapper['display_img'])) ? $wrapper['display_img'] : false;
             $the_items['default_marker'] = (!empty($wrapper['default_marker'])) ? $wrapper['default_marker'] : '';
