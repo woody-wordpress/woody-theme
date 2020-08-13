@@ -378,7 +378,7 @@ class WoodyTheme_WoodyProcessTools
         $sheet = [];
         $raw_item = get_field('touristic_raw_item', $post->ID);
 
-        if (empty($raw_item)) {
+        if (!empty($raw_item)) {
             $sheet = json_decode(base64_decode($raw_item), true);
         } else {
             $sheet_id = get_field('touristic_sheet_id', $post->ID);
