@@ -444,7 +444,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     $bookblock['bookblock_playlists'][$pl_key]['pl_conf_id'] = $pl_confId;
                     if (!empty($pl_confId)) {
                         $pl_lang = pll_get_post_language($pl['pl_post_id']);
-                        $pl_params = apply_filters('woody_hawwwai_playlist_render', $pl_confId, $pl_lang, array(), 'json');
+                        $pl_params = apply_filters('woody_hawwwai_playlist_render', $pl_confId, $pl_lang, [], 'json');
                         $facets = (!empty($pl_params['filters'])) ? $pl_params['filters'] : '';
                         if (!empty($facets)) {
                             foreach ($facets as $facet) {

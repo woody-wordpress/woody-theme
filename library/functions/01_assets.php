@@ -20,7 +20,7 @@ function getAcfGroupFields($group_id, $post = null, $display_empty = false)
 
     if (!empty($post)) {
         $post_id = $post->ID;
-        $the_fields = array();
+        $the_fields = [];
         $fields = acf_get_fields($group_id);
 
         if (!empty($fields)) {
@@ -127,7 +127,7 @@ function getWoodyIcons()
     $stations = ['superot'];
     $stations = apply_filters('woody_icons_stations', $stations);
 
-    $station_icons = array();
+    $station_icons = [];
 
     if ((in_array(WP_SITE_KEY, $stations))) {
         $station_icons = woodyIconsFolder(get_template_directory() . '/src/icons/icons_set_stations');
