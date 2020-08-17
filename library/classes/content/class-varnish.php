@@ -89,7 +89,7 @@ class WoodyTheme_Varnish
                 }
             }
 
-            if (empty($woody_varnish_caching_ttl)) {
+            if ($woody_varnish_caching_ttl !== 0 && empty($woody_varnish_caching_ttl)) {
                 $woody_varnish_caching_ttl = WOODY_VARNISH_CACHING_TTL;
             }
 
