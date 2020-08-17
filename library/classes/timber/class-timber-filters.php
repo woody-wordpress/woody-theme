@@ -112,7 +112,7 @@ class WoodyTheme_Timber_Filters
                 return $text;
             }
             $totalLength = mb_strlen($ending);
-            $openTags = array();
+            $openTags = [];
             $truncate = '';
             preg_match_all('/(<\/?([\w+]+)[^>]*>)?([^<>]*)/', $text, $tags, PREG_SET_ORDER);
             foreach ($tags as $tag) {

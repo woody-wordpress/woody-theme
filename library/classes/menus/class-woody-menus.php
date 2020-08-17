@@ -30,7 +30,7 @@ class WoodyTheme_Menus
      * @return return - Un tableau
      *
      */
-    public static function getMainMenu($limit = 6, $depth_1_ids = array(), $root_level = 1)
+    public static function getMainMenu($limit = 6, $depth_1_ids = [], $root_level = 1)
     {
         $current_lang = PLL_DEFAULT_LANG;
         if (function_exists('pll_current_language')) {

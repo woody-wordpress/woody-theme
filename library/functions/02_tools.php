@@ -278,7 +278,7 @@ function rc_getAlias($str, $charset='utf-8')
 * @param  [type] $default [description]
 * @return array          [description]
 */
-function rc_is($val, $keys = array(), $default = null)
+function rc_is($val, $keys = [], $default = null)
 {
     foreach ($keys as $key) {
         if (empty($val[$key])) {
@@ -310,7 +310,7 @@ function rc_xmlToArray($xmlstr)
 
 function rc_domnodeToArray($node)
 {
-    $output = array();
+    $output = [];
     switch ($node->nodeType) {
         case XML_CDATA_SECTION_NODE:
         case XML_TEXT_NODE:
@@ -323,7 +323,7 @@ function rc_domnodeToArray($node)
             if (isset($child->tagName)) {
                 $t = $child->tagName;
                 if (!isset($output[$t])) {
-                    $output[$t] = array();
+                    $output[$t] = [];
                 }
                 $output[$t][] = $v;
             } elseif ($v || $v === '0') {
@@ -335,7 +335,7 @@ function rc_domnodeToArray($node)
         }
         if (is_array($output)) {
             if ($node->attributes->length) {
-                $a = array();
+                $a = [];
                 foreach ($node->attributes as $attrName => $attrNode) {
                     $a[$attrName] = (string) $attrNode->value;
                 }

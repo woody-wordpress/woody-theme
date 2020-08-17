@@ -13,7 +13,7 @@ if (!class_exists('Timber')) {
     class Timber
     {
         private static $twig = null;
-        private static $context_cache = array();
+        private static $context_cache = [];
 
         /**
          * Constructeur de la classe

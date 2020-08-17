@@ -382,10 +382,10 @@ class WoodyTheme_Plugins_Options
 
     private function updateOption($option_name, $settings, $autoload = 'yes')
     {
-        $option = get_option($option_name, array());
+        $option = get_option($option_name, []);
 
         if (empty($option)) {
-            $option = array();
+            $option = [];
         }
 
         if (is_array($settings)) {
