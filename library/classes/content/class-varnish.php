@@ -45,7 +45,9 @@ class WoodyTheme_Varnish
         } else {
             global $post;
             if (!empty($post)) {
-                if (post_password_required($post)) {
+                // Using $post->post_password instead of post_password_required() that return false when the password is correct
+                // So protected pages where cached with default TTL
+                if ($post->post_password) {
                     $woody_varnish_caching_ttl = 0;
                 } else {
                     // Force "no format" because otherwise generates a cache or shortcodes are not yet generated
