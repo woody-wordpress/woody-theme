@@ -415,7 +415,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "hide-label woody-tpl-button field_5ee3886e325f3",
+                "class": "hide-label woody-tpl-button group_5ee381150e584",
                 "id": ""
             },
             "message": "Choisir une mise en page",

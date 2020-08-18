@@ -436,7 +436,7 @@ class WoodyTheme_Enqueue_Assets
     protected function setGlobalScriptString()
     {
         $globalScriptString = [
-            'window.useLeafletLibrary' => true,
+            'window.useLeafletLibrary' => false,
             'window.apirenderlistEnabled' => true,
             // inject siteConfig
             'window.siteConfig' => json_encode($this->siteConfig),
@@ -449,6 +449,11 @@ class WoodyTheme_Enqueue_Assets
             // inject mapKeys in DrupalAngularAppConfig
             'window.DrupalAngularConfig.mapProviderKeys' => (!empty($this->siteConfig['mapProviderKeys'])) ? json_encode($this->siteConfig['mapProviderKeys']) : '{}',
         ];
+
+        $map_keys = $this->siteConfig['mapProviderKeys'];
+        if (isset($map_keys['otmKey']) || isset($map_keys['ignKey'])) {
+            $globalScriptString['window.useLeafletLibrary'] = true;
+        }
 
         // Ancienne méthode pour appeler les fonts en asynchrone voir ligne 227
         //$globalScriptString = apply_filters('woody_theme_global_script_string', $globalScriptString);
