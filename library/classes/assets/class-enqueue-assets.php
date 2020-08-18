@@ -230,7 +230,8 @@ class WoodyTheme_Enqueue_Assets
             $playlist_map_query = !empty($map_keys) ? '?' . http_build_query($map_keys) : '';
 
             if (isset($map_keys['gmKey']) && !isset($map_keys['otmKey']) && !isset($map_keys['ignKey'])) {
-                wp_enqueue_script('hawwwai_playlist_map', $apirender_base_uri . '/assets/scripts/raccourci/playlist-map.' . $jsModeSuffix . '.js' . $playlist_map_query, array_merge($js_dependencies_rcmap, ['hawwwai_playlist']), $this->wThemeVersion, true);
+                wp_enqueue_script('jsdelivr_rich_marker', 'https://cdn.jsdelivr.net/npm/rich-marker@0.0.1/index.min.js', array_merge($js_dependencies_rcmap, ['hawwwai_playlist']), $this->wThemeVersion, true);
+                wp_enqueue_script('hawwwai_playlist_map', $apirender_base_uri . '/assets/scripts/raccourci/playlist-map.' . $jsModeSuffix . '.js' . $playlist_map_query, array_merge($js_dependencies_rcmap, ['hawwwai_playlist', 'jsdelivr_rich_marker']), $this->wThemeVersion, true);
             } else {
                 wp_enqueue_script('hawwwai_playlist_map', $apirender_base_uri . '/assets/scripts/raccourci/playlist-map.leafletV2.' . $jsModeSuffix . '.js' . $playlist_map_query, array_merge($js_dependencies_rcmap, ['hawwwai_playlist']), $this->wThemeVersion, true);
             }
