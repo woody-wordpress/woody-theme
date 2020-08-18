@@ -196,8 +196,6 @@ class WoodyTheme_Enqueue_Assets
             wp_enqueue_script('touristicmaps_fullscreen', 'https://tiles.touristicmaps.com/libs/fullscreen.min.js', [], null);
         }
 
-        console_log($map_keys);
-
         if (isset($map_keys['gmKey'])) {
             wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?key=' . $map_keys['gmKey'] . '&v=3.33&libraries=geometry,places', [], null);
         } elseif ($this->isTouristicSheet || $this->isRoadBookSheet) { // absolutely needed in angular
