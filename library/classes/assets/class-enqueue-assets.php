@@ -436,7 +436,7 @@ class WoodyTheme_Enqueue_Assets
     protected function setGlobalScriptString()
     {
         $globalScriptString = [
-            'window.useLeafletLibrary' => false,
+            'window.useLeafletLibrary' => 0,
             'window.apirenderlistEnabled' => true,
             // inject siteConfig
             'window.siteConfig' => json_encode($this->siteConfig),
