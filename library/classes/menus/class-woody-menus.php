@@ -99,6 +99,7 @@ class WoodyTheme_Menus
                         } else {
                             foreach ($field as $field_data_key => $field_data) {
                                 $parts[$group_key][] = $field_data['submenu_links_objects'];
+
                                 if (!empty($field_data['submenu_sublinks'])) {
                                     foreach ($field_data['submenu_sublinks'] as $sublink) {
                                         $sublinks[$group_key][$field_data_key][] = $sublink['submenu_links_objects'];
@@ -192,6 +193,7 @@ class WoodyTheme_Menus
 
                     // On vérifie si la page est de type mirroir
                     $page_type = get_the_terms($post->ID, 'page_type');
+
                     if (!empty($page_type) && $page_type[0]->slug == 'mirror_page') {
                         $mirror = get_field('mirror_page_reference', $post->ID);
                         if (!empty(get_post($mirror))) {
@@ -206,6 +208,27 @@ class WoodyTheme_Menus
                     $return[$post_key]['the_fields']['pretitle'] = (!empty(get_field('in_menu_pretitle', $post->ID))) ? get_field('in_menu_pretitle', $post->ID) : '';
                     $return[$post_key]['the_fields']['subtitle'] = (!empty(get_field('in_menu_subtitle', $post->ID))) ? get_field('in_menu_subtitle', $post->ID) : '';
                     $return[$post_key]['img'] = (!empty(get_field('in_menu_img', $post->ID))) ? get_field('in_menu_img', $post->ID) : get_field('field_5b0e5ddfd4b1b', $post->ID);
+
+                    // Add sheet context
+                    if ($post->post_type == 'touristic_sheet') {
+                        // Replace sheet title
+                        $sheet=[];
+                        $raw_item = get_field('touristic_raw_item', $post->ID);
+                        if (!empty($raw_item)) {
+                            $sheet = json_decode(base64_decode($raw_item), true);
+                        } else {
+                            $current_lang = pll_current_language();
+                            $sheet_id = get_field('touristic_sheet_id', $post->ID);
+                            $items = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $current_lang, [], 'json', 'item');
+
+                            if (!empty($items['items']) && is_array($items['items'])) {
+                                $sheet = current($items['items']);
+                            }
+                        }
+
+                        $return[$post_key]['the_sheet_id'] = $sheet['sheetId'];
+                        $return[$post_key]['the_fields']['title'] = $sheet['title'];
+                    }
                 }
             }
             return $return;
