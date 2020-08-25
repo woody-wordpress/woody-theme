@@ -26,10 +26,10 @@ function getTouristicSheetPreview($wrapper = null, $item)
     return $getter->getTouristicSheetPreview($wrapper, $item);
 }
 
-function getAutoFocusSheetData($wrapper)
+function getAutoFocusSheetData($wrapper, $playlist_params = [])
 {
     $getter = new WoodyTheme_WoodyGetters;
-    return $getter->getAutoFocusSheetData($wrapper);
+    return $getter->getAutoFocusSheetData($wrapper, $playlist_params);
 }
 
 function getFocusBlockTitles($wrapper)
