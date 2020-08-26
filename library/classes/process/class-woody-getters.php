@@ -146,7 +146,7 @@ class WoodyTheme_WoodyGetters
                             $wpSheetNode = current($wpSheetNode);
                         }
 
-                        if ($wrapper['deal_mode']) {
+                        if (!empty($wrapper['deal_mode'])) {
                             if (!empty($item["deals"])) {
                                 foreach ($item["deals"]['list'] as $index => $deal) {
                                     $items['items'][] = $this->getTouristicSheetPreview($wrapper, $wpSheetNode->getPost(), $index);
@@ -549,7 +549,7 @@ class WoodyTheme_WoodyGetters
                 for ($i = 0; $i < $sheet['ratings'][0]['value']; $i++) {
                     $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
                 }
-                if (is_array($wrapper['display_elements'])) {
+                if (!empty($wrapper['display_elements']) && is_array($wrapper['display_elements'])) {
                     if (in_array('sheet_rating', $wrapper['display_elements'])) {
                         $data['sheet_rating'] = implode('', $rating);
                     }
