@@ -186,7 +186,7 @@ class WoodyTheme_WoodyCompilers
                                 unset($wrapper['routes'][$key]['features'][$f_key]);
                             }
                         }
-
+                        $wrapper['routes'][$key]['features'] = array_values($wrapper['routes'][$key]['features']);
                         $wrapper['routes'][$key] = json_encode($wrapper['routes'][$key]);
                     }
                 } else {
