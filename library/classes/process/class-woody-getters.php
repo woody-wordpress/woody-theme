@@ -595,7 +595,7 @@ class WoodyTheme_WoodyGetters
 
         if (!empty($item->woody_topic_img) && !$item->woody_topic_attachment) {
             $img = [
-                'url' => rc_getImageResizedFromApi('%width%', '%height%', $item->woody_topic_img),
+                'url' =>  $item->woody_topic_img,
                 'resizer' => true
             ];
             $data['img'] = $img;
