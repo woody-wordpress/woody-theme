@@ -66,9 +66,9 @@ class WoodyTheme_WoodyCompilers
             case 'profile_focus':
                 $the_items = $this->getter->getProfileFocusData($wrapper);
             break;
-            case 'auto_focus_rdbk':
-                $the_items = $this->getter->getRoadBookFocusData($wrapper);
-            break;
+            // case 'auto_focus_rdbk':
+            //     $the_items = $this->getter->getRoadBookFocusData($wrapper);
+            // break;
         }
 
         if (!empty($the_items) && !empty($the_items['items']) && is_array($the_items['items'])) {
@@ -186,7 +186,7 @@ class WoodyTheme_WoodyCompilers
                                 unset($wrapper['routes'][$key]['features'][$f_key]);
                             }
                         }
-
+                        $wrapper['routes'][$key]['features'] = array_values($wrapper['routes'][$key]['features']);
                         $wrapper['routes'][$key] = json_encode($wrapper['routes'][$key]);
                     }
                 } else {
