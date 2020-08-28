@@ -1,21 +1,25 @@
+// Fichier non appelé dans _index.js depuis le 28 août 2020 => Le drag and drop génère un bug au niveau des valeurs des cases à cocher dans les
+// flexible ACF (resset des valeurs).
+// Ne pas appeler ce fichier sans apporter la correction
+
 import $ from 'jquery';
 
-$('#post').each(function () {
-    var setSortableEmptyValues = function () {
-        $(this).on('mousemove', function () {
-            $('.acf-flexible-content.-empty .values').each(function () {
+$('#post').each(function() {
+    var setSortableEmptyValues = function() {
+        $(this).on('mousemove', function() {
+            $('.acf-flexible-content.-empty .values').each(function() {
                 $(this).addClass('droppable-area');
                 $(this).closest('.acf-flexible-content').removeClass('-empty');
             });
         });
     };
 
-    var unsetSortableEmptyValues = function () {
-        $('.droppable-area').each(function () {
+    var unsetSortableEmptyValues = function() {
+        $('.droppable-area').each(function() {
             $(this).removeClass('droppable-area');
         });
 
-        $('.values').each(function () {
+        $('.values').each(function() {
             $(this).off('mousemove');
             var value = $(this);
             if (value.children().length < 1) {
@@ -24,11 +28,11 @@ $('#post').each(function () {
         });
     };
 
-    var makeSortable = function () {
+    var makeSortable = function() {
         $('.values').on('click mousedown', setSortableEmptyValues);
         $('.values').on('click mouseup', unsetSortableEmptyValues);
 
-        $(".acf-flexible-content > .values").each(function () {
+        $(".acf-flexible-content > .values").each(function() {
             var $this = $(this);
             if ($this.closest('.acf-field-repeater').attr('data-name') == 'section') {
                 $this.sortable({
@@ -36,16 +40,16 @@ $('#post').each(function () {
                     dropOnEmpty: true,
                     tolerance: "pointer",
                     cursor: "move",
-                    start: function (event, ui) {
+                    start: function(event, ui) {
                         acf.do_action('sortstart', ui.item, ui.placeholder);
                     },
-                    sort: function (event, ui) {
+                    sort: function(event, ui) {
                         $('.layout.ui-sortable-placeholder').css('visibility', 'visible');
                         $('.layout.ui-sortable-placeholder').css('background-color', 'rgba(17, 255, 107, 0.2)');
                     },
-                    stop: function (event, ui) {
+                    stop: function(event, ui) {
                         acf.do_action('sortstop', ui.item, ui.placeholder);
-                        $(this).find('.mce-tinymce').each(function () {
+                        $(this).find('.mce-tinymce').each(function() {
                             tinyMCE.execCommand('mceRemoveControl', true, $(this).attr('id'));
                             tinyMCE.execCommand('mceAddControl', true, $(this).attr('id'));
                         });
@@ -55,15 +59,15 @@ $('#post').each(function () {
         });
     }
 
-    acf.add_action('append_field/key=field_5b0d1dc8907e7', function () {
+    acf.add_action('append_field/key=field_5b0d1dc8907e7', function() {
         makeSortable();
     });
 
-    acf.add_action('ready_field/key=field_5b0d1dc8907e7', function () {
+    acf.add_action('ready_field/key=field_5b0d1dc8907e7', function() {
         makeSortable();
     });
 
-    acf.add_action('sortstop', function ($el) {
+    acf.add_action('sortstop', function($el) {
         unsetSortableEmptyValues();
 
         if ($el.find('input[name$="[acf_fc_layout]"]').first().length > 0) {
@@ -79,10 +83,10 @@ $('#post').each(function () {
                 if (repeater_id != row_index) {
                     var layout_index = 0;
 
-                    parent_row.find('.values .layout').each(function () {
+                    parent_row.find('.values .layout').each(function() {
 
                         if ($(this).closest('.acf-field-repeater').attr('data-name') == 'section') {
-                            $(this).find('[name^="acf[field_"]').each(function () {
+                            $(this).find('[name^="acf[field_"]').each(function() {
                                 var field_name = $(this).attr('name');
                                 field_name = field_name.match(/\[([a-zA-Z0-9_-]+\])/g); // split name attribute
                                 field_name[1] = '[' + row_index + ']'; // set the new row name
@@ -91,7 +95,7 @@ $('#post').each(function () {
                                 $(this).attr('name', new_name);
                             });
 
-                            $(this).find('label.selected input').each(function () {
+                            $(this).find('label.selected input').each(function() {
                                 $(this).trigger('click');
                             });
 
