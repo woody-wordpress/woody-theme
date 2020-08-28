@@ -227,6 +227,9 @@ class WoodyTheme_Enqueue_Assets
             wp_enqueue_script('hawwwai_sheet_item', $apirender_base_uri . '/assets/scripts/raccourci/sheet_item.min.js', ['jquery'], null);
 
             $js_dependencies__playlist = ['jsdelivr_bootstrap', 'jsdelivr_match8', 'jsdelivr_nouislider', 'jsdelivr_wnumb', 'jsdelivr_chosen', 'jsdelivr_moment', 'jsdelivr_picker', 'jsdelivr_twigjs', 'jsdelivr_uuid', 'jsdelivr_lodash', 'jsdelivr_arrive', 'hawwwai_sheet_item'];
+            if ($this->isRoadBookPlaylist) {
+                $js_dependencies__playlist = apply_filters('js_dependencies__playlist', $js_dependencies__playlist);
+            }
             wp_enqueue_script('hawwwai_playlist', $apirender_base_uri . '/assets/scripts/raccourci/playlist.' . $jsModeSuffix . '.js', $js_dependencies__playlist, null);
             $playlist_map_query = !empty($map_keys) ? '?' . http_build_query($map_keys) : '';
 
