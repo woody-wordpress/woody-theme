@@ -1,6 +1,6 @@
 // Admin
 import './attachment';
-import './drag_drop_blocks';
+// import './drag_drop_blocks';
 // import './edit-post-autofocus';
 import './edit-post-change-lang';
 import './edit-post-close-acf';
