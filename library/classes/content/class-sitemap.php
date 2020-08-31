@@ -21,7 +21,7 @@ class WoodyTheme_SiteMap
         add_action('template_redirect', [$this, 'getSitemap'], 1);
         add_filter('query_vars', [$this, 'queryVars']);
 
-        add_filter('wp_sitemaps_enabled', '__return_false');
+        // add_filter('wp_sitemaps_enabled', '__return_false');
 
         add_action('woody_sitemap', [$this, 'woodySitemap']);
         add_action('woody_sitemap', [$this, 'woodyHumanSitemap']);
