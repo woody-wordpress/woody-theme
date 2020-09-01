@@ -40,6 +40,6 @@ class WoodyTheme_Plugins_Order
         }
 
         ksort($order_active_plugins);
-        update_option('active_plugins', $order_active_plugins);
+        update_option('active_plugins', $order_active_plugins, true);
     }
 }

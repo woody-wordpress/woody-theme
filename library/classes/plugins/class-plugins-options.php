@@ -36,25 +36,25 @@ class WoodyTheme_Plugins_Options
     public function defineOptions()
     {
         // Plugins Settings
-        update_option('timezone_string', WOODY_TIMEZONE, '', 'yes');
-        update_option('WPLANG', 'fr_FR', '', 'yes');
-        update_option('date_format', 'j F Y', '', 'yes');
-        update_option('time_format', 'G\hi', '', 'yes');
-        update_option('wp_php_console', ['password' => 'root', 'register' => true, 'short' => true, 'stack' => true], '', 'yes');
-        update_option('rocket_lazyload_options', ['images' => true, 'iframes' => true, 'youtube' => true], '', 'yes');
-        // update_option('minify_html_active', (WP_ENV == 'dev') ? 'no' : 'yes', '', 'yes');
-        update_option('minify_html_active', 'no');
-        update_option('minify_javascript', 'yes', '', 'yes');
-        update_option('minify_html_comments', 'yes', '', 'yes');
-        update_option('minify_html_xhtml', 'no', '', 'yes');
-        update_option('minify_html_relative', 'yes', '', 'yes');
-        update_option('minify_html_scheme', 'no', '', 'yes');
-        update_option('minify_html_utf8', 'no', '', 'yes');
-        update_option('upload_path', WP_UPLOAD_DIR, '', 'yes');
-        update_option('uploads_use_yearmonth_folders', true, '', 'yes');
-        update_option('thumbnail_crop', true, '', 'yes');
-        update_option('acm_server_settings', ['server_enable' => true], '', 'yes');
-        update_option('permalink_structure', WOODY_PERMALINK_STRUCTURE, '', 'yes');
+        update_option('timezone_string', WOODY_TIMEZONE, true);
+        update_option('WPLANG', 'fr_FR', true);
+        update_option('date_format', 'j F Y', true);
+        update_option('time_format', 'G\hi', true);
+        update_option('wp_php_console', ['password' => 'root', 'register' => true, 'short' => true, 'stack' => true], true);
+        update_option('rocket_lazyload_options', ['images' => true, 'iframes' => true, 'youtube' => true], true);
+        // update_option('minify_html_active', (WP_ENV == 'dev') ? 'no' : 'yes', true);
+        update_option('minify_html_active', 'no', true);
+        update_option('minify_javascript', 'yes', true);
+        update_option('minify_html_comments', 'yes', true);
+        update_option('minify_html_xhtml', 'no', true);
+        update_option('minify_html_relative', 'yes', true);
+        update_option('minify_html_scheme', 'no', true);
+        update_option('minify_html_utf8', 'no', true);
+        update_option('upload_path', WP_UPLOAD_DIR, true);
+        update_option('uploads_use_yearmonth_folders', true, true);
+        update_option('thumbnail_crop', true, true);
+        update_option('acm_server_settings', ['server_enable' => true], true);
+        update_option('permalink_structure', WOODY_PERMALINK_STRUCTURE, true);
 
         // Cleaning Permalink Manager Pro
         delete_option('permalink-manager-permastructs');
@@ -68,14 +68,14 @@ class WoodyTheme_Plugins_Options
 
         // Force Disable indexation
         if (WP_ENV != 'dev' || (WP_ENV == 'dev' && empty(get_option('upload_url_path')))) {
-            update_option('upload_url_path', WP_UPLOAD_URL, '', 'yes');
+            update_option('upload_url_path', WP_UPLOAD_URL, true);
         }
 
         // Force Disable indexation
         if (WP_ENV != 'prod' || WOODY_ACCESS_STAGING) {
-            update_option('blog_public', 0, '', 'yes');
+            update_option('blog_public', 0, true);
         } else {
-            update_option('blog_public', 1, '', 'yes');
+            update_option('blog_public', 1, true);
         }
 
         // SSL Insecure Content Fixer
@@ -361,26 +361,26 @@ class WoodyTheme_Plugins_Options
             'editor',
         ];
         $this->updateOption('duplicate_post_roles', $duplicate_post_roles);
-        update_option('duplicate_post_title_suffix', '(contenu dupliqué)', '', 'yes');
+        update_option('duplicate_post_title_suffix', '(contenu dupliqué)', true);
 
         // Varnish
-        update_option('varnish_caching_enable', WOODY_VARNISH_CACHING_ENABLE, '', 'yes');
-        update_option('varnish_caching_debug', WOODY_VARNISH_CACHING_DEBUG, '', 'yes');
-        update_option('varnish_caching_ttl', WOODY_VARNISH_CACHING_TTL, '', 'yes');
-        update_option('varnish_caching_homepage_ttl', WOODY_VARNISH_CACHING_TTL, '', 'yes');
-        update_option('varnish_caching_ips', WOODY_VARNISH_CACHING_IPS, '', 'yes');
-        update_option('varnish_caching_purge_key', WOODY_VARNISH_CACHING_PURGE_KEY, '', 'yes');
-        update_option('varnish_caching_cookie', WOODY_VARNISH_CACHING_COOKIE, '', 'yes');
-        update_option('varnish_caching_dynamic_host', true, '', 'yes');
-        update_option('varnish_caching_hosts', '', '', 'yes');
-        update_option('varnish_caching_override', '', '', 'yes');
-        update_option('varnish_caching_stats_json_file', '', '', 'yes');
-        update_option('varnish_caching_truncate_notice', '', '', 'yes');
-        update_option('varnish_caching_purge_menu_save', '', '', 'yes');
-        update_option('varnish_caching_ssl', '', '', 'yes');
+        update_option('varnish_caching_enable', WOODY_VARNISH_CACHING_ENABLE, true);
+        update_option('varnish_caching_debug', WOODY_VARNISH_CACHING_DEBUG, true);
+        update_option('varnish_caching_ttl', WOODY_VARNISH_CACHING_TTL, true);
+        update_option('varnish_caching_homepage_ttl', WOODY_VARNISH_CACHING_TTL, true);
+        update_option('varnish_caching_ips', WOODY_VARNISH_CACHING_IPS, true);
+        update_option('varnish_caching_purge_key', WOODY_VARNISH_CACHING_PURGE_KEY, true);
+        update_option('varnish_caching_cookie', WOODY_VARNISH_CACHING_COOKIE, true);
+        update_option('varnish_caching_dynamic_host', true, true);
+        update_option('varnish_caching_hosts', '', true);
+        update_option('varnish_caching_override', '', true);
+        update_option('varnish_caching_stats_json_file', '', true);
+        update_option('varnish_caching_truncate_notice', '', true);
+        update_option('varnish_caching_purge_menu_save', '', true);
+        update_option('varnish_caching_ssl', '', true);
     }
 
-    private function updateOption($option_name, $settings, $autoload = 'yes')
+    private function updateOption($option_name, $settings, $autoload = true)
     {
         $option = get_option($option_name, []);
 
