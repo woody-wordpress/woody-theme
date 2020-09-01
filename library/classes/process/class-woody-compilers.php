@@ -28,7 +28,7 @@ class WoodyTheme_WoodyCompilers
 
     public function registerHooks()
     {
-        add_action('save_post', [$this, 'cleanListFiltersTransients']);
+        add_action('save_post', [$this, 'savePost']);
     }
 
     /**
@@ -347,12 +347,12 @@ class WoodyTheme_WoodyCompilers
         }
 
         // On crée/update l'option qui liste les transients pour pouvoir les supprimer lors d'un save_post
-        $transient_list = get_option('list_filters_cache');
+        $transient_list = get_option('woody_list_filters_cache');
         if (empty($transient_list)) {
-            add_option('list_filters_cache', [$transient_name]);
+            update_option('woody_list_filters_cache', [$transient_name], false);
         } elseif (!array_key_exists($transient_name, $transient_list)) {
             $transient_list[] = $transient_name;
-            update_option('list_filters_cache', $transient_list);
+            update_option('woody_list_filters_cache', $transient_list, false);
         }
 
         // On récupère les ids des posts non filtrés pour les passer au paramètre post__in de la query
@@ -431,15 +431,15 @@ class WoodyTheme_WoodyCompilers
         return $return;
     }
 
-    public function cleanListFiltersTransients()
+    public function savePost()
     {
-        $transient_list = get_option('list_filters_cache');
+        $transient_list = get_option('woody_list_filters_cache');
         if (!empty($transient_list)) {
             foreach ($transient_list as $transient) {
                 delete_transient($transient);
             }
         }
-        delete_option('list_filters_cache');
+        delete_option('woody_list_filters_cache');
     }
 
     /**
