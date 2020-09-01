@@ -21,6 +21,8 @@ class WoodyTheme_SiteMap
         add_action('template_redirect', [$this, 'getSitemap'], 1);
         add_filter('query_vars', [$this, 'queryVars']);
 
+        // add_filter('wp_sitemaps_enabled', '__return_false');
+
         add_action('woody_sitemap', [$this, 'woodySitemap']);
         add_action('woody_sitemap', [$this, 'woodyHumanSitemap']);
         add_action('wp', [$this, 'scheduleSitemap']);
@@ -32,14 +34,14 @@ class WoodyTheme_SiteMap
 
     public function queryVars($qvars)
     {
-        $qvars[] = 'sitemap';
+        $qvars[] = 'woody-sitemap';
         return $qvars;
     }
 
     public function customRewriteRule()
     {
-        add_rewrite_rule('sitemap\.xml$', 'index.php?sitemap=index', 'top');
-        add_rewrite_rule('sitemap-([0-9]+)?\.xml$', 'index.php?sitemap=list&page=$matches[1]', 'top');
+        add_rewrite_rule('sitemap\.xml$', 'index.php?woody-sitemap=index', 'top');
+        add_rewrite_rule('sitemap-([0-9]+)?\.xml$', 'index.php?woody-sitemap=list&page=$matches[1]', 'top');
     }
 
     /**
@@ -65,7 +67,7 @@ class WoodyTheme_SiteMap
      */
     public function getSitemap($query)
     {
-        $sitemap = get_query_var('sitemap');
+        $sitemap = get_query_var('woody-sitemap');
         if (!empty($sitemap)) {
             add_filter('template_include', function () {
                 return get_template_directory() . '/sitemap.php';
