@@ -131,13 +131,13 @@ class WoodyTheme_WoodyGetters
      * @return   items - Un tableau de données
      *
      */
-    public function getAutoFocusSheetData($wrapper)
+    public function getAutoFocusSheetData($wrapper, $playlist_params = [])
     {
         $items = [];
         if (!empty($wrapper['playlist_conf_id'])) {
             $confId = $wrapper['playlist_conf_id'];
             $lang = pll_current_language();
-            $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), [], 'json');
+            $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), $playlist_params, 'json');
             if (!empty($playlist['items'])) {
                 foreach ($playlist['items'] as $key => $item) {
                     $wpSheetNode = apply_filters('woody_hawwwai_get_post_by_sheet_id', $item['sheetId'], $lang, ['publish']);
@@ -146,7 +146,7 @@ class WoodyTheme_WoodyGetters
                             $wpSheetNode = current($wpSheetNode);
                         }
 
-                        if ($wrapper['deal_mode']) {
+                        if (!empty($wrapper['deal_mode'])) {
                             if (!empty($item["deals"])) {
                                 foreach ($item["deals"]['list'] as $index => $deal) {
                                     $items['items'][] = $this->getTouristicSheetPreview($wrapper, $wpSheetNode->getPost(), $index);
@@ -549,7 +549,7 @@ class WoodyTheme_WoodyGetters
                 for ($i = 0; $i < $sheet['ratings'][0]['value']; $i++) {
                     $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
                 }
-                if (is_array($wrapper['display_elements'])) {
+                if (!empty($wrapper['display_elements']) && is_array($wrapper['display_elements'])) {
                     if (in_array('sheet_rating', $wrapper['display_elements'])) {
                         $data['sheet_rating'] = implode('', $rating);
                     }
@@ -595,7 +595,7 @@ class WoodyTheme_WoodyGetters
 
         if (!empty($item->woody_topic_img) && !$item->woody_topic_attachment) {
             $img = [
-                'url' => rc_getImageResizedFromApi('%width%', '%height%', $item->woody_topic_img),
+                'url' =>  $item->woody_topic_img,
                 'resizer' => true
             ];
             $data['img'] = $img;
@@ -894,80 +894,6 @@ class WoodyTheme_WoodyGetters
 
         return $data;
     }
-
-    public function getRoadBookFocusData($wrapper)
-    {
-        $data = [];
-
-        if ($wrapper['focused_leaflets'] == "leaflets") {
-            $roadbook_id = get_query_var('roadbook');
-
-            if (!empty($roadbook_id)) {
-                // Get Post by roadbook_id
-                $args = [
-                            'post_type' => 'woody_roadbook',
-                            'posts_per_page' => 1,
-                            'post_status' => 'any',
-                            'meta_key' => 'roadbook_id',
-                            'meta_value' => strtoupper($roadbook_id),
-                            'meta_compare' => '='
-                        ];
-
-                $query_result = new \WP_Query($args);
-                if (!empty($query_result->post)) {
-                    $json = get_field('content', $query_result->post->ID);
-                    $content = json_decode($json, true);
-                    if (!empty($content['leaflets'])) {
-                        foreach ($content['leaflets'] as $key => $leaflet) {
-                            $item = $this->getPagePreview($wrapper, get_post($leaflet['id']));
-
-                            if (!empty($item['link'])) {
-                                $item['link']['url'] = '/r/' . $roadbook_id . '?leaflet=' . $key ;
-                            }
-                            if (!empty($item['img'])) {
-                                $item['img']['link'] = '/r/' . $roadbook_id . '?leaflet=' . $key ;
-                            }
-                            $data['items'][] = $item;
-                        }
-                    }
-                }
-            } else {
-                $args = [
-                            'post_type' => 'woody_rdbk_leaflets',
-                            'posts_per_page' => 5,
-                            'post_status' => 'publish',
-                        ];
-                $query_result = new \WP_Query($args);
-
-                foreach ($query_result->posts as $post) {
-                    $data['items'][] = $this->getPagePreview($wrapper, $post);
-                }
-            }
-        } elseif ($wrapper['focused_leaflets'] == "essentials") {
-            $essential_leaflets = get_option('options_essential_leaflets');
-            if (!empty($essential_leaflets)) {
-                $roadbook_id = get_query_var('roadbook');
-
-                for ($i = 0 ; $i < $essential_leaflets ; $i++) {
-                    $post_id = get_option('options_essential_leaflets_'.$i.'_essential_leaflet');
-                    $post_id = !empty(pll_get_post($post_id)) ? pll_get_post($post_id) : $post_id ;
-
-                    $item = $this->getPagePreview($wrapper, get_post($post_id));
-                    if (!empty($item['link'])) {
-                        $item['link']['url'] = !empty($roadbook_id) ? '/r/' . $roadbook_id . '?essential=' . $i : $item['link']['url'] ;
-                    }
-                    if (!empty($item['img'])) {
-                        $item['img']['link'] = !empty($roadbook_id) ? '/r/' . $roadbook_id . '?essential=' . $i : $item['img']['link'] ;
-                    }
-                    $data['items'][] = $item;
-                }
-            }
-        }
-
-        return $data;
-    }
-
-
 
     private function getProfileExpressions($post_id, $focus_expressions)
     {

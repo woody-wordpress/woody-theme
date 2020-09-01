@@ -61,16 +61,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             {# /Theme Content #}
 
             {# Theme Footer #}
-            {% if 'footer' not in hide_page_zones %}
-            {% include 'parts/footer.twig' %}
-            {% endif %}
+            {% block page_footer %}
+                {% if 'footer' not in hide_page_zones %}
+                    {% include 'parts/footer.twig' %}
+                {% endif %}
+            {% endblock %}
             {# /Theme Footer #}
         </div>
 
         {# Theme Header #}
-        {% if 'header' not in hide_page_zones %}
-        {% include 'parts/header.twig' %}
-        {% endif %}
+        {% block page_header %}
+            {% if 'header' not in hide_page_zones %}
+                {% include 'parts/header.twig' %}
+            {% endif %}
+        {% endblock %}
         {# /Theme Header #}
 
         {% if woody_access_staging %}

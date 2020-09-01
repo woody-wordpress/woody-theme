@@ -117,7 +117,7 @@ class WoodyTheme_Enqueue_Assets
 
         // dependencies for raccourci map js
         $js_dependencies_rcmap = [
-            'jquery', 'jsdelivr_leaflet',
+            'jquery', 'touristicmaps_leaflet',
         ];
 
         // get map keys
@@ -184,24 +184,31 @@ class WoodyTheme_Enqueue_Assets
         wp_enqueue_script('obf', get_template_directory_uri() . '/src/js/static/obf.min.js', [], null);
 
         // Touristic maps libraries
-        wp_enqueue_script('jsdelivr_leaflet', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet-src.min.js', [], null);
-        if (isset($map_keys['otmKey']) || $this->isTouristicSheet || $this->isRoadBookSheet) {
-            // need to load tangram always in TOURISTIC SHEET for now (bug in vendor angular) ↓
-            wp_enqueue_script('touristicmaps_tangram', 'https://tiles.touristicmaps.com/libs/tangram.min.js?v=' . $this->wThemeVersion, [], null);
-        }
+        wp_enqueue_script('touristicmaps_leaflet', 'https://tiles.touristicmaps.com/libs/leaflet.min.js', [], null);
+        wp_enqueue_style('leaflet_css', 'https://tiles.touristicmaps.com/libs/leaflet.css', [], '');
+
+        //TODO: fix bug with Gmap and Universal Map
+        // if (isset($map_keys['otmKey']) || isset($map_keys['ignKey']) || $this->isTouristicSheet || $this->isRoadBookSheet) {
+        // need to load tangram always in TOURISTIC SHEET for now (bug in vendor angular) ↓
+        wp_enqueue_script('touristicmaps_tangram', 'https://tiles.touristicmaps.com/libs/tangram.min.js', [], null);
+        wp_enqueue_script('touristicmaps_cluster', 'https://tiles.touristicmaps.com/libs/markercluster.min.js', [], null);
+        wp_enqueue_script('touristicmaps_locate', 'https://tiles.touristicmaps.com/libs/locate.min.js', [], null);
+        wp_enqueue_script('touristicmaps_geocoder', 'https://tiles.touristicmaps.com/libs/geocoder.min.js', [], null);
+        wp_enqueue_script('touristicmaps_fullscreen', 'https://tiles.touristicmaps.com/libs/fullscreen.min.js', [], null);
+        // }
 
         if (isset($map_keys['gmKey'])) {
             wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?key=' . $map_keys['gmKey'] . '&v=3.33&libraries=geometry,places', [], null);
         } elseif ($this->isTouristicSheet || $this->isRoadBookSheet) { // absolutely needed in angular
             wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?v=3.33&libraries=geometry,places', [], null);
         }
-        wp_enqueue_script('hawwwai_universal_map', $apirender_base_uri . '/assets/scripts/raccourci/universal-map.' . $jsModeSuffix . '.js?v=' . $this->wThemeVersion, $js_dependencies_rcmap, null);
+
+        wp_enqueue_script('hawwwai_universal_map', $apirender_base_uri . '/assets/scripts/raccourci/universal-mapV2.' . $jsModeSuffix . '.js', $js_dependencies_rcmap, null);
 
         // Playlist libraries
         if ($this->isTouristicPlaylist || $this->isRoadBookPlaylist) {
             // CSS_Libraries (todo replace when possible)
             wp_enqueue_style('hawwwai_font_css', $this->assetPath('https://api.cloudly.space/static/assets/fonts/raccourci-font.min.css'), [], null);
-            wp_enqueue_style('jsdelivr_leaflet_css', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.min.css', [], null);
             wp_enqueue_style('jsdelivr_bootstrap_css', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css', [], null);
             wp_enqueue_style('jsdelivr_nouislider_css', 'https://cdn.jsdelivr.net/npm/nouislider@10.1.0/distribute/nouislider.min.css', [], null);
             wp_enqueue_style('jsdelivr_chosen_css', 'https://cdn.jsdelivr.net/npm/chosen-js@1.8.2/chosen.min.css', [], null);
@@ -217,12 +224,21 @@ class WoodyTheme_Enqueue_Assets
             wp_enqueue_script('jsdelivr_uuid', 'https://cdn.jsdelivr.net/npm/node-uuid@1.4.8/uuid.min.js', [], null);
             wp_enqueue_script('jsdelivr_lodash', 'https://cdn.jsdelivr.net/npm/lodash@3.8.0/index.min.js', [], null);
             wp_enqueue_script('jsdelivr_arrive', 'https://cdn.jsdelivr.net/npm/arrive@2.4.1/src/arrive.min.js', ['jquery'], null);
-            wp_enqueue_script('hawwwai_sheet_item', $apirender_base_uri . '/assets/scripts/raccourci/sheet_item.min.js?v=' . $this->wThemeVersion, ['jquery'], null);
+            wp_enqueue_script('hawwwai_sheet_item', $apirender_base_uri . '/assets/scripts/raccourci/sheet_item.min.js', ['jquery'], null);
 
             $js_dependencies__playlist = ['jsdelivr_bootstrap', 'jsdelivr_match8', 'jsdelivr_nouislider', 'jsdelivr_wnumb', 'jsdelivr_chosen', 'jsdelivr_moment', 'jsdelivr_picker', 'jsdelivr_twigjs', 'jsdelivr_uuid', 'jsdelivr_lodash', 'jsdelivr_arrive', 'hawwwai_sheet_item'];
-            wp_enqueue_script('hawwwai_playlist', $apirender_base_uri . '/assets/scripts/raccourci/playlist.' . $jsModeSuffix . '.js?v=' . $this->wThemeVersion, $js_dependencies__playlist, null);
+            if ($this->isRoadBookPlaylist) {
+                $js_dependencies__playlist = apply_filters('js_dependencies__playlist', $js_dependencies__playlist);
+            }
+            wp_enqueue_script('hawwwai_playlist', $apirender_base_uri . '/assets/scripts/raccourci/playlist.' . $jsModeSuffix . '.js', $js_dependencies__playlist, null);
             $playlist_map_query = !empty($map_keys) ? '?' . http_build_query($map_keys) : '';
-            wp_enqueue_script('hawwwai_playlist_map', $apirender_base_uri . '/assets/scripts/raccourci/playlist-map.leaflet.' . $jsModeSuffix . '.js' . $playlist_map_query, array_merge($js_dependencies_rcmap, ['hawwwai_playlist']), $this->wThemeVersion, true);
+
+            if (isset($map_keys['gmKey']) && !isset($map_keys['otmKey']) && !isset($map_keys['ignKey'])) {
+                wp_enqueue_script('jsdelivr_rich_marker', 'https://cdn.jsdelivr.net/npm/rich-marker@0.0.1/index.min.js', array_merge($js_dependencies_rcmap, ['hawwwai_playlist']), $this->wThemeVersion, true);
+                wp_enqueue_script('hawwwai_playlist_map', $apirender_base_uri . '/assets/scripts/raccourci/playlist-map.' . $jsModeSuffix . '.js' . $playlist_map_query, array_merge($js_dependencies_rcmap, ['hawwwai_playlist', 'jsdelivr_rich_marker']), $this->wThemeVersion, true);
+            } else {
+                wp_enqueue_script('hawwwai_playlist_map', $apirender_base_uri . '/assets/scripts/raccourci/playlist-map.leafletV2.' . $jsModeSuffix . '.js' . $playlist_map_query, array_merge($js_dependencies_rcmap, ['hawwwai_playlist']), $this->wThemeVersion, true);
+            }
         }
 
         // Sheet libraries
@@ -242,13 +258,13 @@ class WoodyTheme_Enqueue_Assets
             wp_enqueue_script('jsdelivr_match8', 'https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js', ['jquery'], null);
             wp_enqueue_script('jsdelivr_highcharts', 'https://cdn.jsdelivr.net/npm/highcharts@6.2.0/highcharts.min.js', ['jquery'], null);
 
-            wp_enqueue_script('hawwwai_ng_vendor', $apirender_base_uri . '/assets/scripts/vendor.js?v=' . $this->wThemeVersion, [], null);
-            wp_enqueue_script('hawwwai_ng_libs', $apirender_base_uri . '/assets/scripts/misclibs.js?v=' . $this->wThemeVersion, [], null);
-            wp_enqueue_script('hawwwai_ng_app', $apirender_base_uri . '/assets/app.js?v=' . $this->wThemeVersion, [], null);
-            wp_enqueue_script('hawwwai_ng_scripts', $apirender_base_uri . '/assets/scripts/scripts.js?v=' . $this->wThemeVersion, [], null);
-            wp_enqueue_script('hawwwai_sheet_item', $apirender_base_uri . '/assets/scripts/raccourci/sheet_item.' . $jsModeSuffix . '.js?v=' . $this->wThemeVersion, ['jsdelivr_match8'], null);
-            wp_enqueue_script('hawwwai_itinerary', $apirender_base_uri . '/assets/scripts/raccourci/itinerary.' . $jsModeSuffix . '.js?v=' . $this->wThemeVersion, ['jquery', 'hawwwai_ng_scripts'], null);
-            wp_enqueue_script('hawwwai_fresco', $apirender_base_uri . '/assets/scripts/lib/fresco.js?v=' . $this->wThemeVersion, ['jquery'], null);
+            wp_enqueue_script('hawwwai_ng_vendor', $apirender_base_uri . '/assets/scripts/vendor.js', [], null);
+            wp_enqueue_script('hawwwai_ng_libs', $apirender_base_uri . '/assets/scripts/misclibs.js', [], null);
+            wp_enqueue_script('hawwwai_ng_app', $apirender_base_uri . '/assets/app.js', [], null);
+            wp_enqueue_script('hawwwai_ng_scripts', $apirender_base_uri . '/assets/scripts/scriptsV2.js', [], null);
+            wp_enqueue_script('hawwwai_sheet_item', $apirender_base_uri . '/assets/scripts/raccourci/sheet_item.' . $jsModeSuffix . '.js', ['jsdelivr_match8'], null);
+            wp_enqueue_script('hawwwai_itinerary', $apirender_base_uri . '/assets/scripts/raccourci/itinerary.' . $jsModeSuffix . '.js', ['jquery', 'hawwwai_ng_scripts'], null);
+            wp_enqueue_script('hawwwai_fresco', $apirender_base_uri . '/assets/scripts/lib/fresco.js', ['jquery'], null);
         }
 
         // Add the comment-reply library on pages where it is necessary
@@ -423,7 +439,7 @@ class WoodyTheme_Enqueue_Assets
     protected function setGlobalScriptString()
     {
         $globalScriptString = [
-            'window.useLeafletLibrary' => true,
+            'window.useLeafletLibrary' => 0,
             'window.apirenderlistEnabled' => true,
             // inject siteConfig
             'window.siteConfig' => json_encode($this->siteConfig),
@@ -436,6 +452,11 @@ class WoodyTheme_Enqueue_Assets
             // inject mapKeys in DrupalAngularAppConfig
             'window.DrupalAngularConfig.mapProviderKeys' => (!empty($this->siteConfig['mapProviderKeys'])) ? json_encode($this->siteConfig['mapProviderKeys']) : '{}',
         ];
+
+        $map_keys = $this->siteConfig['mapProviderKeys'];
+        if (isset($map_keys['otmKey']) || isset($map_keys['ignKey'])) {
+            $globalScriptString['window.useLeafletLibrary'] = true;
+        }
 
         // Ancienne méthode pour appeler les fonts en asynchrone voir ligne 227
         //$globalScriptString = apply_filters('woody_theme_global_script_string', $globalScriptString);

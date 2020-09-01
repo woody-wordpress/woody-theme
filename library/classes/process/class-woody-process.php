@@ -38,7 +38,7 @@ class WoodyTheme_WoodyProcess
     public function processWoodyLayouts($layout, $context)
     {
         $return = '';
-        $layout['default_marker'] = $context['default_marker'];
+        $layout['default_marker'] = !empty($context['default_marker']) ? $context['default_marker'] : '';
         // Traitements spécifique en fonction du type de layout
         switch ($layout['acf_fc_layout']) {
             case 'manual_focus':
@@ -47,7 +47,6 @@ class WoodyTheme_WoodyProcess
             case 'auto_focus_topics':
             case 'focus_trip_components':
             case 'profile_focus':
-            case 'auto_focus_rdbk':
                 $return = $this->compilers->formatFocusesData($layout, $context['post'], $context['woody_components']);
                 break;
             case 'manual_focus_minisheet':
@@ -172,8 +171,16 @@ class WoodyTheme_WoodyProcess
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
             default:
-                $layout = apply_filters('woody_custom_layout', $layout);
-                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+
+                // On autorise le traitement des layouts depuis un code externe
+                $layout = apply_filters('woody_custom_layout', $layout, $context);
+
+                // On compile le $layout uniquement si ça n'a pas déjà été fait
+                if (is_array($layout)) {
+                    $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                } else {
+                    $return = $layout;
+                }
         }
         return $return;
     }

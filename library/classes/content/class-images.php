@@ -234,6 +234,26 @@ class WoodyTheme_Images
 
     public function readImageMetadata($meta, $file, $sourceImageType, $iptc)
     {
+        // XMP
+        $content        = file_get_contents($file);
+        $xmp_data_start = strpos($content, '<x:xmpmeta');
+        if ($xmp_data_start !== false) {
+            $xmp_data_end   = strpos($content, '</x:xmpmeta>');
+            $xmp_length     = $xmp_data_end - $xmp_data_start;
+            $xmp_data       = substr($content, $xmp_data_start, $xmp_length + 12);
+            $xmp_arr        = $this->getXMPArray($xmp_data);
+
+            $meta['title']          = !empty($xmp_arr['Title']) ? $xmp_arr['Title'][0] : '';
+            $meta['city']           = !empty($xmp_arr['City']) ? $xmp_arr['City'][0] : '';
+            $meta['credit']         = !empty($xmp_arr['Creator']) ? $xmp_arr['Creator'][0] : '';
+            $meta['copyright']      = !empty($xmp_arr['Rights']) ? $xmp_arr['Rights'][0] : '';
+            $meta['description']    = !empty($xmp_arr['Description']) ? $xmp_arr['Description'][0] : '';
+            $meta['caption']        = $meta['description'];
+            $meta['country']        = !empty($xmp_arr['Country']) ? $xmp_arr['Country'][0] : '';
+            $meta['state']          = !empty($xmp_arr['State']) ? $xmp_arr['State'][0] : '';
+            $meta['keywords']       = !empty($xmp_arr['Keywords']) ? $xmp_arr['Keywords'][0] : '';
+        }
+
         // EXIF
         if (is_callable('exif_read_data') && in_array($sourceImageType, apply_filters('wp_read_image_metadata_types', array(IMAGETYPE_JPEG, IMAGETYPE_TIFF_II, IMAGETYPE_TIFF_MM)))) {
             $exif = @exif_read_data($file);
@@ -284,6 +304,49 @@ class WoodyTheme_Images
         }
 
         return $meta;
+    }
+
+    private function getXMPArray($xmp_data)
+    {
+        $xmp_arr = array();
+        foreach (array(
+                'Creator Email' => '<Iptc4xmpCore:CreatorContactInfo[^>]+?CiEmailWork="([^"]*)"',
+                'Owner Name'    => '<rdf:Description[^>]+?aux:OwnerName="([^"]*)"',
+                'Creation Date' => '<rdf:Description[^>]+?xmp:CreateDate="([^"]*)"',
+                'Modification Date'     => '<rdf:Description[^>]+?xmp:ModifyDate="([^"]*)"',
+                'Label'         => '<rdf:Description[^>]+?xmp:Label="([^"]*)"',
+                'Credit'        => '<rdf:Description[^>]+?photoshop:Credit="([^"]*)"',
+                'Source'        => '<rdf:Description[^>]+?photoshop:Source="([^"]*)"',
+                'Headline'      => '<rdf:Description[^>]+?photoshop:Headline="([^"]*)"',
+                'City'          => '<rdf:Description[^>]+?photoshop:City="([^"]*)"',
+                'State'         => '<rdf:Description[^>]+?photoshop:State="([^"]*)"',
+                'Country'       => '<rdf:Description[^>]+?photoshop:Country="([^"]*)"',
+                'Country Code'  => '<rdf:Description[^>]+?Iptc4xmpCore:CountryCode="([^"]*)"',
+                'Location'      => '<rdf:Description[^>]+?Iptc4xmpCore:Location="([^"]*)"',
+                'Title'         => '<dc:title>\s*<rdf:Alt>\s*(.*?)\s*<\/rdf:Alt>\s*<\/dc:title>',
+                'Rights'         => '<dc:rights>\s*<rdf:Alt>\s*(.*?)\s*<\/rdf:Alt>\s*<\/dc:rights>',
+                'Description'   => '<dc:description>\s*<rdf:Alt>\s*(.*?)\s*<\/rdf:Alt>\s*<\/dc:description>',
+                'Creator'       => '<dc:creator>\s*<rdf:Seq>\s*(.*?)\s*<\/rdf:Seq>\s*<\/dc:creator>',
+                'Keywords'      => '<dc:subject>\s*<rdf:Bag>\s*(.*?)\s*<\/rdf:Bag>\s*<\/dc:subject>',
+                'Hierarchical Keywords' => '<lr:hierarchicalSubject>\s*<rdf:Bag>\s*(.*?)\s*<\/rdf:Bag>\s*<\/lr:hierarchicalSubject>'
+        ) as $key => $regex) {
+
+                // get a single text string
+            $xmp_arr[$key] = preg_match("/$regex/is", $xmp_data, $match) ? $match[1] : '';
+
+            // if string contains a list, then re-assign the variable as an array with the list elements
+            $xmp_arr[$key] = preg_match_all("/<rdf:li[^>]*>([^>]*)<\/rdf:li>/is", $xmp_arr[$key], $match) ? $match[1] : $xmp_arr[$key];
+
+            // hierarchical keywords need to be split into a third dimension
+            if (! empty($xmp_arr[$key]) && $key == 'Hierarchical Keywords') {
+                foreach ($xmp_arr[$key] as $li => $val) {
+                    $xmp_arr[$key][$li] = explode('|', $val);
+                }
+                unset($li, $val);
+            }
+        }
+
+        return $xmp_arr;
     }
 
     private function calc($val)
