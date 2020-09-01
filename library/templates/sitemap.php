@@ -40,8 +40,8 @@ class WoodyTheme_Template_Sitemap
 
     private function initContext()
     {
-        $this->mode = get_query_var('sitemap');
-        $this->context = Timber::get_context();
+        $this->mode = get_query_var('woody-sitemap');
+        $this->context = \Timber::get_context();
 
         // Get polylang config
         $sitemap = [];
