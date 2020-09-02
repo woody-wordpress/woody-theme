@@ -595,7 +595,7 @@ class WoodyTheme_WoodyGetters
 
         if (!empty($item->woody_topic_img) && !$item->woody_topic_attachment) {
             $img = [
-                'url' =>  'https://api.cloudly.space/resize/crop/%width%/%height%/75/' . base64_encode($item->woody_topic_img),
+                'url' =>  'https://api.cloudly.space/resize/crop/%width%/%height%/75/' . base64_encode($item->woody_topic_img) . '/image.png',
                 'resizer' => true
             ];
             $data['img'] = $img;
@@ -603,7 +603,7 @@ class WoodyTheme_WoodyGetters
             $url = !empty(wp_get_attachment_image_src($item->woody_topic_attachment)) ? wp_get_attachment_image_src($item->woody_topic_attachment)[0] : '';
 
             $data['img'] = [
-                'url' => 'https://api.cloudly.space/resize/crop/%width%/%height%/75/' . base64_encode($item->woody_topic_img),
+                'url' => $item->woody_topic_attachment,
                 'resizer' => true
             ];
         }
