@@ -588,22 +588,20 @@ class WoodyTheme_WoodyGetters
      */
     public function getTopicPreview($wrapper, $item)
     {
-        $data = [];
-        $data['post_id'] = $item->ID;
-        $data['title'] = !empty($item->post_title) ? $item->post_title : '';
-        $data['subtitle'] = !empty($item->woody_topic_blogname) ? $item->woody_topic_blogname : '';
+        $data = [
+            'post_id'   => $item->ID,
+            'title'     => !empty($item->post_title) ? $item->post_title : '',
+            'subtitle'  => !empty($item->woody_topic_blogname) ? $item->woody_topic_blogname : ''
+        ];
 
         if (!empty($item->woody_topic_img) && !$item->woody_topic_attachment) {
-            $img = [
-                'url' =>  'https://api.cloudly.space/resize/crop/%width%/%height%/75/' . base64_encode($item->woody_topic_img) . '/image.png',
+            $data['img'] = [
+                'url' =>  'https://api.cloudly.space/resize/crop/%width%/%height%/75/' .  str_replace(array("+", "/"), array("-", "_"), base64_encode($item->woody_topic_img)) . '/image.jpg',
                 'resizer' => true
             ];
-            $data['img'] = $img;
         } elseif (!empty($item->woody_topic_attachment)) {
-            $url = !empty(wp_get_attachment_image_src($item->woody_topic_attachment)) ? wp_get_attachment_image_src($item->woody_topic_attachment)[0] : '';
-
             $data['img'] = [
-                'url' => $item->woody_topic_attachment,
+                'url' => !empty(wp_get_attachment_image_src($item->woody_topic_attachment)) ? wp_get_attachment_image_src($item->woody_topic_attachment)[0] : '',
                 'resizer' => true
             ];
         }
