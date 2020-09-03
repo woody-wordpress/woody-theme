@@ -157,10 +157,18 @@ class WoodyTheme_Cleanup_Admin
         }
     }
 
+    /**
+     * customMenusPage
+     *
+     * @deprecated since version 1.28.35
+     * @see WoodyTheme_Admin_Menus
+     *
+     */
     public function customMenusPage()
     {
-        $methodExist = class_exists('SubWoodyTheme_Admin') ? method_exists('SubWoodyTheme_Admin', 'addMenuMainPages') : false;
-
+        // Permet d'être compatible pour tout les sites
+        $oldMethod = class_exists('SubWoodyTheme_Admin') ? method_exists('SubWoodyTheme_Admin', 'addMenuMainPages') : false;
+        $legacyMethod = class_exists('WoodyTheme_Admin_Menus') ? method_exists('WoodyTheme_Admin_Menus', 'addMenuMainPages') : false;
 
         if (function_exists('acf_add_options_page')) {
             $lang = pll_current_language();
@@ -176,7 +184,7 @@ class WoodyTheme_Cleanup_Admin
                 'redirect'      => true,
             ));
 
-            if (function_exists('acf_add_options_sub_page') && $lang == PLL_DEFAULT_LANG && !$methodExist) {
+            if (function_exists('acf_add_options_sub_page') && $lang == PLL_DEFAULT_LANG && !$oldMethod && !$legacyMethod) {
                 // Première sous-page
                 acf_add_options_sub_page(array(
                     'page_title'    => 'Menu principal',

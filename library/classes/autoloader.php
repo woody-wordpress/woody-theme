@@ -74,6 +74,7 @@ new WoodyTheme_Timber_Filters();
 
 // Menu
 new WoodyTheme_Menus();
+new WoodyTheme_Admin_Menus();
 
 // Shortcodes
 new WoodyTheme_Shortcodes();

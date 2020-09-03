@@ -5,10 +5,15 @@
  *
  * @package WoodyTheme
  * @since WoodyTheme 1.28.35
+ *
  */
 
 class WoodyTheme_Admin_Menus
 {
+    public $current_lang;
+    public $menu_post_ids;
+    public $pages_options;
+
     public function __construct()
     {
         $this->registerHooks();
@@ -17,169 +22,224 @@ class WoodyTheme_Admin_Menus
         $this->pages_options = $this->setPagesOptions();
     }
 
+    protected function registerHooks()
+    {
+        add_action('admin_menu', [$this, 'addMenuMainPages'], 11);
+        add_action('admin_menu', [$this, 'addMenusOptionsPages'], 11);
+
+        add_action('acf/init', [$this, 'addOptionsPagesFields'], 11);
+        add_action('acf/init', [$this, 'addSubmenuFieldGroups'], 11);
+    }
+
+
     /**
      *
-     * Nom : menuPostIds
-     * Auteur : Thomas Navarro
-     * Return : Retourne un tableau de post ID des entrées de menu
-     * @return   ids - array
+     * menuPostIds
+     * @author Thomas Navarro
+     * @return ids array | Retourne un tableau de post ID des entrées de menu
      *
      */
     public function menuPostIds()
     {
         $default = [];
-        $ids = apply_filters('woody/menus/menu_post_ids', $default);
+
+        // Permet de définir les liens du menu principal
+        $ids = apply_filters('woody/menus/set_menu_post_ids', $default);
 
         return $ids;
     }
 
     /**
      *
-     * Nom : setPagesOptions
-     * Auteur : Thomas Navarro
-     * Return : Retourne les paramètres de chaque page d'options crée
-     * @return   options - array
+     * acfJsonStore
+     * @author Thomas Navarro
+     * @return acf_json_store array | Répertorie tout les acf-json dispo pour la génération des pages d'options
+     *
+     */
+    public function acfJsonStore()
+    {
+        $acf_json_keys = [
+            'link' => [
+                'acf_key' => 'group_link',
+                'description' => 'Groupe de champs ACF comportant un lien'
+            ],
+            'link_icon' => [
+                'acf_key' => 'group_link_icon',
+                'description' => 'Groupe de champs ACF comportant un icône et un lien'
+            ],
+            'submenus_fields' => [
+                'acf_key' => 'group_fields_for_submenus',
+                'description' => 'Groupe de champs ACF comportant les champs dispo pour les sous-menus'
+            ],
+            'submenus' => [
+                'acf_key' => 'group_submenus',
+                'description' => 'Groupe de champs ACF pour générer les sous-menus'
+            ],
+        ];
+
+        // Permet d'ajouter un acf-json au store selon les besoins
+        $acf_json_store = apply_filters('woody/menus/acf_group_keys', $acf_json_keys);
+        return $acf_json_store;
+    }
+
+    /**
+     *
+     * setPagesOptions
+     * @author Thomas Navarro
+     * @return options array | Retourne les paramètres de chaque page d'options crée
      *
      */
     public function setPagesOptions()
     {
-        $default['main_menu_page'] = [
+        $acf_json_store = $this->acfJsonStore();
+
+        $options = [
             'main-menu' => [
                 'page_title'    => 'Administation du menu principal',
                 'menu_title'    => 'Menu principal',
                 'menu_slug'     => 'main-menu-' . $this->current_lang,
                 'parent_slug'   => 'custom-menus',
                 'capability'    => 'edit_pages',
-                'acf_group_key' => 'group_submenus'
-            ]
+                'acf_group_key' => $acf_json_store['submenus']['acf_key']
+            ],
+            'sub_pages' => [
+                'legal-menu' => [
+                    'page_title'    => 'Administration du menu infos légales',
+                    'menu_title'    => 'Menu infos légales',
+                    'menu_slug'     => 'legal-menu-' . $this->current_lang,
+                    'parent_slug'   => 'custom-menus',
+                    'capability'    => 'edit_pages',
+                    'acf_group_key' => $acf_json_store['link']['acf_key'],
+                ],
+                'pro-menu' => [
+                    'page_title'    => 'Administration du menu pro',
+                    'menu_title'    => 'Menu pro',
+                    'menu_slug'     => 'pro-menu-' . $this->current_lang,
+                    'parent_slug'   => 'custom-menus',
+                    'capability'    => 'edit_pages',
+                    'acf_group_key' => $acf_json_store['link']['acf_key'],
+                ],
+                'social-menu' => [
+                    'page_title'    => 'Administration des liens des réseaux sociaux',
+                    'menu_title'    => 'Réseaux sociaux',
+                    'menu_slug'     => 'social-menu-' . $this->current_lang,
+                    'parent_slug'   => 'custom-menus',
+                    'capability'    => 'edit_pages',
+                    'acf_group_key' => $acf_json_store['link_icon']['acf_key'],
+                ]
+            ],
+            'pages' => []
         ];
 
-        $default['options_pages'] = [];
-        $default['sub_pages'] = [
-            'topheader-menu' => [
-                'page_title'    => 'Administration du menu haut de page',
-                'menu_title'    => 'Menu Haut de page',
-                'menu_slug'     => 'topheader-menu-' . $this->current_lang,
-                'parent_slug'   => 'custom-menus',
-                'capability'    => 'edit_pages',
-                'acf_group_key' => 'group_link_icon',
-            ],
-            'legal-menu' => [
-                'page_title'    => 'Administration du menu infos légales',
-                'menu_title'    => 'Menu infos légales',
-                'menu_slug'     => 'legal-menu-' . $this->current_lang,
-                'parent_slug'   => 'custom-menus',
-                'capability'    => 'edit_pages',
-                'acf_group_key' => 'group_link',
-            ],
-            'pro-menu' => [
-                'page_title'    => 'Administration du menu pro',
-                'menu_title'    => 'Menu pro',
-                'menu_slug'     => 'pro-menu-' . $this->current_lang,
-                'parent_slug'   => 'custom-menus',
-                'capability'    => 'edit_pages',
-                'acf_group_key' => 'group_link',
-            ],
-            'social-menu' => [
-                'page_title'    => 'Administration des liens des réseaux sociaux',
-                'menu_title'    => 'Réseaux sociaux',
-                'menu_slug'     => 'social-menu-' . $this->current_lang,
-                'parent_slug'   => 'custom-menus',
-                'capability'    => 'edit_pages',
-                'acf_group_key' => 'group_link_icon',
-            ]
-        ];
+        // Permet d'ajouter une page d'option selon les besoins
+        $extended_pages = apply_filters('woody/menus/create_pages_options', $options['pages'], $acf_json_store);
+        $options['pages'] = $extended_pages;
 
-        $options = apply_filters('woody/menus/set_pages_options', $default);
+        // Permet d'ajouter une sous-page d'option selon les besoins
+        $extended_sub_pages = apply_filters('woody/menus/create_sub_pages_options', $options['sub_pages'], $acf_json_store);
+        $options['sub_pages'] = $extended_sub_pages;
 
         return $options;
     }
 
     /**
      *
-     * Nom : addMenuMainPages
-     * Auteur : Thomas Navarro
-     * Return : Ajoute la page d'option du menu principal
-     * @return   void
+     * addMenuMainPages
+     * @author Thomas Navarro
+     * @see WoodyTheme_Cleanup_Admin->customMenusPage()
+     * @return void | Ajoute la page d'option du menu principal
      *
      */
     public function addMenuMainPages()
     {
         if (function_exists('acf_add_options_sub_page')) {
-            acf_add_options_sub_page($this->options_pages['main_menu_page']['main-menu']);
+            acf_add_options_sub_page($this->pages_options['main-menu']);
         }
     }
 
     /**
      *
-     * Nom : addMenusOptionsPages
-     * Auteur : Thomas Navarro
-     * Return : Ajoute les pages d'options au menu WP
-     * @return   void
+     * addMenusOptionsPages
+     * @author Thomas Navarro
+     * @return void | Ajoute les pages d'options au menu WP
      *
      */
     public function addMenusOptionsPages()
     {
-        if (function_exists('acf_add_options_page') and !empty($this->options_pages['options_pages'])) {
-            foreach ($this->options_pages['options_pages'] as $key => $options_page) {
-                acf_add_options_page($options_page);
+        // Options page
+        if (function_exists('acf_add_options_page') and !empty($this->pages_options['pages'])) {
+            foreach ($this->pages_options['pages'] as $key => $page) {
+                acf_add_options_page($page);
             }
         }
 
-        if (function_exists('acf_add_options_sub_page') and !empty($this->options_pages['sub_pages'])) {
-            foreach ($this->options_pages['sub_pages'] as $key => $sub_page) {
+        // Options subpage
+        if (function_exists('acf_add_options_sub_page') and !empty($this->pages_options['sub_pages'])) {
+            foreach ($this->pages_options['sub_pages'] as $key => $sub_page) {
                 acf_add_options_sub_page($sub_page);
             }
         }
     }
 
+    /**
+     *
+     * addOptionsPagesFields
+     * @author Thomas Navarro
+     * @return void | Ajoute les champs au pages d'options en se basant sur un acf-json
+     *
+     */
     public function addOptionsPagesFields()
     {
-        foreach ($this->options_pages as $page) {
-            if (strpos($page['menu_slug'], 'main-menu') === false) {
-                if (!empty($page['acf_group_key'])) {
-                    $fields = acf_get_fields($page['acf_group_key']);
+        $pages_options = array_merge($this->pages_options['pages'], $this->pages_options['sub_pages']);
 
-                    $group = [
-                        'key' => 'group_' . $page['menu_slug'],
-                        'title' => $page['menu_title'],
-                        'location' => [
+        foreach ($pages_options as $page) {
+            if (!empty($page['acf_group_key'])) {
+                $fields = acf_get_fields($page['acf_group_key']);
+
+                $group = [
+                    'key' => 'group_' . $page['menu_slug'],
+                    'title' => $page['menu_title'],
+                    'location' => [
+                        [
                             [
-                                [
-                                    'param' => 'options_page',
-                                    'operator' => '==',
-                                    'value' => $page['menu_slug'],
-                                ],
+                                'param' => 'options_page',
+                                'operator' => '==',
+                                'value' => $page['menu_slug'],
                             ],
                         ],
-                    ];
+                    ],
+                ];
 
-                    //? Create a group field if it does not exist
-                    foreach ($fields as $key => $field) {
-                        if ($field['type'] == 'group') {
-                            $fields[$key]['key'] = 'field_' . $page['menu_slug'];
-                            $fields[$key]['name'] = $page['menu_slug'];
+                //? Create a group field if it does not exist
+                foreach ($fields as $key => $field) {
+                    if ($field['type'] == 'group') {
+                        $fields[$key]['key'] = 'field_' . $page['menu_slug'];
+                        $fields[$key]['name'] = $page['menu_slug'];
 
-                            $group['fields'] = $fields;
-                        } else {
-                            $group['fields'][$key]['key'] = 'field_' . $page['menu_slug'];
-                            $group['fields'][$key]['name'] = $page['menu_slug'];
-                            $group['fields'][$key]['type'] = 'group';
-                            $group['fields'][$key]['sub_fields'] = $fields;
-                        }
+                        $group['fields'] = $fields;
+                    } else {
+                        $group['fields'][$key]['key'] = 'field_' . $page['menu_slug'];
+                        $group['fields'][$key]['name'] = $page['menu_slug'];
+                        $group['fields'][$key]['type'] = 'group';
+                        $group['fields'][$key]['sub_fields'] = $fields;
                     }
-
-
-                    acf_add_local_field_group($group);
                 }
+
+                acf_add_local_field_group($group);
             }
         }
     }
 
+    /**
+     *
+     * addSubmenuFieldGroups
+     * @author Thomas Navarro
+     * @return void | Ajoute les champs au sous-menu en se basant sur un acf-json (group_submenus)
+     *
+     */
     public function addSubmenuFieldGroups()
     {
-        $page = $this->options_pages['main-menu'];
-
+        $page = $this->pages_options['main-menu'];
         $group = [
             'key' => 'group_' . $page['menu_slug'],
             'title' => $page['menu_title'],
@@ -203,18 +263,17 @@ class WoodyTheme_Admin_Menus
                 $group['fields'][] = [
                     'key' => 'tab_' . $key,
                     'label' => $label,
-                    'name' => '',
                     'type' => 'tab',
                     'placement' => 'left',
                     'endpoint' => 0
                 ];
                 $group['fields'][] = [
                     'key' => $key,
-                    'label' => '',
                     'name' => $name,
-                    'type' => 'group',
+                    'type' => 'group'
                 ];
             }
+
             if (!empty($page['acf_group_key'])) {
                 $submenu_fields = acf_get_fields($page['acf_group_key']);
 
