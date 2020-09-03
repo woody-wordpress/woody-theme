@@ -482,6 +482,11 @@ class WoodyTheme_WoodyProcess
                 // On récupère les données d'affichage personnalisables
                 $display = $this->tools->getDisplayOptions($section);
 
+                // On ajoute les class personnalisées de section dans la liste des class d'affichage
+                if (!empty($display['classes']) && !empty($section['section_class'])) {
+                    $display['classes'] .=  ' ' . $section['section_class'];
+                }
+
                 // On ajoute les 3 parties compilées d'une section + ses paramètres d'affichage
                 // puis on compile le tout dans le template de section Woody
                 $the_section = [
