@@ -18,7 +18,6 @@ class WoodyTheme_Admin_Menus
     {
         $this->registerHooks();
         $this->current_lang = pll_current_language();
-        $this->menu_post_ids = $this->menuPostIds();
         $this->pages_options = $this->setPagesOptions();
     }
 
@@ -29,8 +28,10 @@ class WoodyTheme_Admin_Menus
 
         add_action('acf/init', [$this, 'addOptionsPagesFields'], 11);
         add_action('acf/init', [$this, 'addSubmenuFieldGroups'], 11);
-    }
 
+        // TODO: Décommenter pour l'administration en back-office
+        // add_action('acf/init', [$this, 'addMenuFieldGroups'], 11);
+    }
 
     /**
      *
@@ -39,14 +40,19 @@ class WoodyTheme_Admin_Menus
      * @return ids array | Retourne un tableau de post ID des entrées de menu
      *
      */
-    public function menuPostIds()
+    public function setMenuPostIds($menu)
     {
-        $default = [];
+        // TODO: Décommenter pour l'administration en back-office
+        // Récupère les post_ids de la metabox `Structure` et génère les sous-menus en conséquence
+        // $menu_posts = apply_filters('woody_get_field_option', 'field_generate_' . $menu['menu_slug']);
 
-        // Permet de définir les liens du menu principal
-        $ids = apply_filters('woody/menus/set_menu_post_ids', $default);
+        // foreach ($menu_posts as $menu_post) {
+        //     $this->menu_post_ids[] = $menu_post['post']->ID;
+        // }
 
-        return $ids;
+        //TODO: Commenter pour l'administration en back-office
+        // Permet de définir les liens du menu principal dans son thème enfant
+        $this->menu_post_ids = apply_filters('woody/menus/set_menu_post_ids', []);
     }
 
     /**
@@ -232,17 +238,33 @@ class WoodyTheme_Admin_Menus
 
     /**
      *
-     * addSubmenuFieldGroups
+     * addMenuFieldGroups
      * @author Thomas Navarro
-     * @return void | Ajoute les champs au sous-menu en se basant sur un acf-json (group_submenus)
+     * @return void | Ajoute une metabox `Structure` permettant de paramètrer les entrées du menu principal
      *
      */
-    public function addSubmenuFieldGroups()
+    public function addMenuFieldGroups()
     {
         $page = $this->pages_options['main-menu'];
+
         $group = [
-            'key' => 'group_' . $page['menu_slug'],
-            'title' => $page['menu_title'],
+            'key' => 'group_generate_' . $page['menu_slug'],
+            'title' => 'Structure du menu',
+            'position' => 'side',
+            'fields' => [[
+                'key' => 'field_generate_' . $page['menu_slug'],
+                'name' => 'generate_' . $page['menu_slug'],
+                'type' => 'repeater',
+                'layout' => 'block',
+                'button_label' => 'Ajouter une page au menu',
+                'sub_fields' => [[
+                    'key' => 'field_menu_post',
+                    'name' => 'post',
+                    'type' => 'post_object',
+                    'return_format' => 'object',
+                    'ui' => 1,
+                ]]
+            ]],
             'location' => [
                 [
                     [
@@ -254,7 +276,46 @@ class WoodyTheme_Admin_Menus
             ],
         ];
 
+        acf_add_local_field_group($group);
+    }
+
+    /**
+     *
+     * addSubmenuFieldGroups
+     * @author Thomas Navarro
+     * @depends setMenuPostIds
+     * @return void | Ajoute les champs au sous-menu en se basant sur un acf-json (group_submenus)
+     *
+     */
+    public function addSubmenuFieldGroups()
+    {
+        $page = $this->pages_options['main-menu'];
+
+        $group = [
+            'key' => 'group_' . $page['menu_slug'],
+            'title' => 'Administration des sous-menus',
+            'location' => [
+                [
+                    [
+                        'param' => 'options_page',
+                        'operator' => '==',
+                        'value' => $page['menu_slug'],
+                    ],
+                ],
+            ],
+        ];
+
+        // TODO: Décommenter pour l'administration en back-office
+        $this->setMenuPostIds($page);
+
         if (!empty($this->menu_post_ids)) {
+            // Use index because `group_submenus.json` contains fields with tabs
+            $index = 1;
+
+            if (!empty($page['acf_group_key'])) {
+                $sub_fields = acf_get_fields($page['acf_group_key']);
+            }
+
             foreach ($this->menu_post_ids as $post_id) {
                 $key = 'field_submenu_' . $post_id;
                 $label = get_post($post_id)->post_title;
@@ -267,22 +328,20 @@ class WoodyTheme_Admin_Menus
                     'placement' => 'left',
                     'endpoint' => 0
                 ];
-                $group['fields'][] = [
+                $group['fields'][$index] = [
                     'key' => $key,
                     'name' => $name,
-                    'type' => 'group'
+                    'type' => 'group',
+                    'sub_fields' => $sub_fields[$index]['sub_fields']
                 ];
+                $index+= 2;
             }
-
-            if (!empty($page['acf_group_key'])) {
-                $submenu_fields = acf_get_fields($page['acf_group_key']);
-
-                foreach ($submenu_fields as $submenu_key => $submenu) {
-                    if (!empty($submenu['sub_fields'])) {
-                        $group['fields'][$submenu_key]['sub_fields'] = $submenu['sub_fields'];
-                    }
-                }
-            }
+        } else {
+            $group['fields'][] = [
+                'key' => 'field_submenu_warn',
+                'type' => 'message',
+                'message' => '<p style="color: rgba(0,0,0,.5); font-size:18px"><em>Aucune page n\'est renseignée…</em></p><p>Pour administrer vos sous-menus vous devez ajouter des pages dans l\'onglet <b>Structure</b> puis enregistrer</p>',
+            ];
         }
 
         acf_add_local_field_group($group);
