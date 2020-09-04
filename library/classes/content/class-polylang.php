@@ -154,6 +154,8 @@ class WoodyTheme_Polylang
         __("semaine", 'woody-theme');
         __("semaines", 'woody-theme');
         __("mois", 'woody-theme');
+        __("Sélection", 'woody-theme');
+        __("Page", 'woody-theme');
         __("Pages", 'woody-theme');
         __("Offre touristique", 'woody-theme');
         __("Désolé, aucun contenu touristique ne correspond à votre recherche", 'woody-theme');

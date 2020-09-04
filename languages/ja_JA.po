@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 3.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2020-08-14T16:34:32+02:00\n"
-"PO-Revision-Date: 2020-08-14 16:46+0200\n"
+"POT-Creation-Date: 2020-09-04T09:51:09+02:00\n"
+"PO-Revision-Date: 2020-09-04 09:55+0200\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: ja_JP\n"
@@ -188,7 +188,7 @@ msgid "jours"
 msgstr "日"
 
 #: library/classes/content/class-polylang.php:107
-#: library/classes/content/class-polylang.php:263
+#: library/classes/content/class-polylang.php:265
 msgid "personne"
 msgstr "人"
 
@@ -198,19 +198,19 @@ msgstr "人"
 
 #: library/classes/content/class-polylang.php:109
 msgid "Départ"
-msgstr ""
+msgstr "出発"
 
 #: library/classes/content/class-polylang.php:110
 msgid "Arrivée"
-msgstr ""
+msgstr "到着"
 
 #: library/classes/content/class-polylang.php:111
 msgid "Etape"
-msgstr ""
+msgstr "踏み台"
 
 #: library/classes/content/class-polylang.php:114
 msgid "J"
-msgstr ""
+msgstr "日"
 
 #: library/classes/content/class-polylang.php:117
 msgid ""
@@ -368,444 +368,454 @@ msgid "mois"
 msgstr "月"
 
 #: library/classes/content/class-polylang.php:157
+#: library/templates/template-page.php:569
+msgid "Sélection"
+msgstr "選り抜き"
+
+#: library/classes/content/class-polylang.php:158
+#: library/templates/template-page.php:573
+msgid "Page"
+msgstr "ページ"
+
+#: library/classes/content/class-polylang.php:159
 msgid "Pages"
 msgstr "ページ"
 
-#: library/classes/content/class-polylang.php:158
+#: library/classes/content/class-polylang.php:160
 msgid "Offre touristique"
 msgstr "観光オファー"
 
-#: library/classes/content/class-polylang.php:159
+#: library/classes/content/class-polylang.php:161
 msgid "Désolé, aucun contenu touristique ne correspond à votre recherche"
 msgstr "申し訳ありませんが、検索に一致する観光コンテンツはありません。"
 
-#: library/classes/content/class-polylang.php:160
+#: library/classes/content/class-polylang.php:162
 msgid "Désolé, aucune page ne correspond à votre recherche"
 msgstr "申し訳ありませんが、検索に一致するページはありません"
 
-#: library/classes/content/class-polylang.php:161
+#: library/classes/content/class-polylang.php:163
 msgid "Fermer"
 msgstr "閉じる"
 
-#: library/classes/content/class-polylang.php:162
+#: library/classes/content/class-polylang.php:164
 msgid "Menu"
 msgstr "メニュー"
 
-#: library/classes/content/class-polylang.php:163
+#: library/classes/content/class-polylang.php:165
 msgid "Merci de choisir une date"
 msgstr "日付を選んでください"
 
-#: library/classes/content/class-polylang.php:164
+#: library/classes/content/class-polylang.php:166
 msgid "Comment venir ?"
 msgstr "アクセス方法?"
 
-#: library/classes/content/class-polylang.php:165
+#: library/classes/content/class-polylang.php:167
 msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "あなたが探しているページはここにあるかもしれません"
 
-#: library/classes/content/class-polylang.php:166
+#: library/classes/content/class-polylang.php:168
 #: library/classes/process/class-woody-getters.php:348
 #: library/classes/process/class-woody-getters.php:542
 msgid "Lire la suite"
 msgstr "続きを読む"
 
-#: library/classes/content/class-polylang.php:167
+#: library/classes/content/class-polylang.php:169
 msgid "Que voulez-vous réserver ?"
 msgstr "何を予約しますか？"
 
-#: library/classes/content/class-polylang.php:168
+#: library/classes/content/class-polylang.php:170
 msgid "Choisissez vos dates de réservation"
 msgstr "予約日を選択してください"
 
-#: library/classes/content/class-polylang.php:169
+#: library/classes/content/class-polylang.php:171
 msgid "Changer de saison"
 msgstr "季節を変える"
 
-#: library/classes/content/class-polylang.php:170
+#: library/classes/content/class-polylang.php:172
 msgid "Réservable"
 msgstr "予約可能"
 
-#: library/classes/content/class-polylang.php:171
+#: library/classes/content/class-polylang.php:173
 #: library/classes/process/class-woody-getters.php:415
 msgid "Télécharger"
 msgstr "ダウンロード"
 
-#: library/classes/content/class-polylang.php:172
+#: library/classes/content/class-polylang.php:174
 msgid "Aller à la page d'accueil"
 msgstr "ホームページへ"
 
-#: library/classes/content/class-polylang.php:173
+#: library/classes/content/class-polylang.php:175
 msgid "Retour à la page d'accueil"
 msgstr "ホームページに戻る"
 
-#: library/classes/content/class-polylang.php:176
+#: library/classes/content/class-polylang.php:178
 msgid "Bas"
 msgstr "低いです"
 
-#: library/classes/content/class-polylang.php:177
+#: library/classes/content/class-polylang.php:179
 msgid "Haut"
 msgstr "トップ"
 
-#: library/classes/content/class-polylang.php:178
+#: library/classes/content/class-polylang.php:180
 msgid "Vent"
 msgstr "風"
 
-#: library/classes/content/class-polylang.php:179
+#: library/classes/content/class-polylang.php:181
 msgid "Température de la mer"
 msgstr "海水温"
 
-#: library/classes/content/class-polylang.php:180
+#: library/classes/content/class-polylang.php:182
 msgid "Humidité"
 msgstr "湿度"
 
-#: library/classes/content/class-polylang.php:181
+#: library/classes/content/class-polylang.php:183
 msgid "ISO 0°"
 msgstr "ISO 0°"
 
-#: library/classes/content/class-polylang.php:182
+#: library/classes/content/class-polylang.php:184
 msgid "Limite Pluie/Neige"
 msgstr "雨/雪限界"
 
-#: library/classes/content/class-polylang.php:183
+#: library/classes/content/class-polylang.php:185
 msgid "Ensoleillé"
 msgstr "晴れました"
 
-#: library/classes/content/class-polylang.php:184
+#: library/classes/content/class-polylang.php:186
 msgid "Pluie"
 msgstr "雨"
 
-#: library/classes/content/class-polylang.php:185
+#: library/classes/content/class-polylang.php:187
 msgid "Neige"
 msgstr "雪"
 
-#: library/classes/content/class-polylang.php:186
+#: library/classes/content/class-polylang.php:188
 msgid "Grésil"
 msgstr "グレシル"
 
-#: library/classes/content/class-polylang.php:187
+#: library/classes/content/class-polylang.php:189
 msgid "Venteux"
 msgstr "風の吹きます"
 
-#: library/classes/content/class-polylang.php:188
+#: library/classes/content/class-polylang.php:190
 msgid "Brouillard"
 msgstr "霧"
 
-#: library/classes/content/class-polylang.php:189
+#: library/classes/content/class-polylang.php:191
 msgid "Nuageux"
 msgstr "曇りました"
 
-#: library/classes/content/class-polylang.php:190
+#: library/classes/content/class-polylang.php:192
 msgid "Éclaircies"
 msgstr "曇りました"
 
-#: library/classes/content/class-polylang.php:191
+#: library/classes/content/class-polylang.php:193
 msgid "Grêle"
 msgstr "雹"
 
-#: library/classes/content/class-polylang.php:192
+#: library/classes/content/class-polylang.php:194
 msgid "Tempête"
 msgstr "嵐"
 
-#: library/classes/content/class-polylang.php:193
+#: library/classes/content/class-polylang.php:195
 msgid "Verglas"
 msgstr "アイス"
 
-#: library/classes/content/class-polylang.php:196
+#: library/classes/content/class-polylang.php:198
 msgid "Nord Nord-Est"
 msgstr "北北東"
 
-#: library/classes/content/class-polylang.php:197
+#: library/classes/content/class-polylang.php:199
 msgid "Nord-Est"
 msgstr "東北"
 
-#: library/classes/content/class-polylang.php:198
+#: library/classes/content/class-polylang.php:200
 msgid "Est Nord-Est"
 msgstr "東北東"
 
-#: library/classes/content/class-polylang.php:199
+#: library/classes/content/class-polylang.php:201
 msgid "Est"
 msgstr "東"
 
-#: library/classes/content/class-polylang.php:200
+#: library/classes/content/class-polylang.php:202
 msgid "Est Sud-Est"
 msgstr "東南東"
 
-#: library/classes/content/class-polylang.php:201
+#: library/classes/content/class-polylang.php:203
 msgid "Sud-Est"
 msgstr "南東"
 
-#: library/classes/content/class-polylang.php:202
+#: library/classes/content/class-polylang.php:204
 msgid "Sud Sud-Est"
 msgstr "南東"
 
-#: library/classes/content/class-polylang.php:203
+#: library/classes/content/class-polylang.php:205
 msgid "Sud"
 msgstr "南"
 
-#: library/classes/content/class-polylang.php:204
+#: library/classes/content/class-polylang.php:206
 msgid "Sud Sud-Ouest"
 msgstr "南南西"
 
-#: library/classes/content/class-polylang.php:205
+#: library/classes/content/class-polylang.php:207
 msgid "Sud-Ouest"
 msgstr "南西"
 
-#: library/classes/content/class-polylang.php:206
+#: library/classes/content/class-polylang.php:208
 msgid "Ouest Sud-Ouest"
 msgstr "西南西"
 
-#: library/classes/content/class-polylang.php:207
+#: library/classes/content/class-polylang.php:209
 msgid "Ouest"
 msgstr "西"
 
-#: library/classes/content/class-polylang.php:208
+#: library/classes/content/class-polylang.php:210
 msgid "Ouest Nord-Ouest"
 msgstr "西北西"
 
-#: library/classes/content/class-polylang.php:209
+#: library/classes/content/class-polylang.php:211
 msgid "Nord-Ouest"
 msgstr "北西"
 
-#: library/classes/content/class-polylang.php:210
+#: library/classes/content/class-polylang.php:212
 msgid "Nord Nord-Ouest"
 msgstr "北西"
 
-#: library/classes/content/class-polylang.php:211
+#: library/classes/content/class-polylang.php:213
 msgid "Nord"
 msgstr "北"
 
-#: library/classes/content/class-polylang.php:214
-#: library/classes/content/class-polylang.php:232
+#: library/classes/content/class-polylang.php:216
+#: library/classes/content/class-polylang.php:234
 msgid "Matin"
 msgstr "朝"
 
-#: library/classes/content/class-polylang.php:215
+#: library/classes/content/class-polylang.php:217
 msgid "Après-midi"
 msgstr "午後"
 
-#: library/classes/content/class-polylang.php:216
+#: library/classes/content/class-polylang.php:218
 msgid "Soirée"
 msgstr "夜"
 
-#: library/classes/content/class-polylang.php:217
+#: library/classes/content/class-polylang.php:219
 msgid "Nuit"
 msgstr "夜"
 
-#: library/classes/content/class-polylang.php:220
+#: library/classes/content/class-polylang.php:222
 msgid "Ajouter"
 msgstr "加えます"
 
-#: library/classes/content/class-polylang.php:221
+#: library/classes/content/class-polylang.php:223
 msgid "Supprimer"
 msgstr "取り除きます"
 
-#: library/classes/content/class-polylang.php:222
+#: library/classes/content/class-polylang.php:224
 msgid "Cette liste est vide actuellement. Naviguez et ajoutez des pages !"
 msgstr "このリストは現在空です。 ページを閲覧して追加する"
 
-#: library/classes/content/class-polylang.php:225
+#: library/classes/content/class-polylang.php:227
 msgid "Ajouter à mes favoris"
 msgstr "お気に入りに追加"
 
-#: library/classes/content/class-polylang.php:226
+#: library/classes/content/class-polylang.php:228
 msgid "Imprimer/Exporter mes favoris"
 msgstr "お気に入りの印刷/エクスポート"
 
-#: library/classes/content/class-polylang.php:229
+#: library/classes/content/class-polylang.php:231
 msgid "Dates"
 msgstr "日付"
 
-#: library/classes/content/class-polylang.php:230
+#: library/classes/content/class-polylang.php:232
 msgid "Basse mer"
 msgstr "低い海"
 
-#: library/classes/content/class-polylang.php:231
+#: library/classes/content/class-polylang.php:233
 msgid "Haute mer"
 msgstr "公海"
 
-#: library/classes/content/class-polylang.php:233
+#: library/classes/content/class-polylang.php:235
 msgid "Soir"
 msgstr "夜"
 
-#: library/classes/content/class-polylang.php:234
+#: library/classes/content/class-polylang.php:236
 msgid "Heure"
 msgstr "時間"
 
-#: library/classes/content/class-polylang.php:235
+#: library/classes/content/class-polylang.php:237
 msgid "Coef"
 msgstr "係数"
 
-#: library/classes/content/class-polylang.php:236
+#: library/classes/content/class-polylang.php:238
 msgid "Retrouvez prochainement les horaires de marées pour ce mois !"
 msgstr "今月のタイドタイムをすぐに見つけてください"
 
-#: library/classes/content/class-polylang.php:239
+#: library/classes/content/class-polylang.php:241
 msgid "Pour faire une demande de devis, veuillez choisir un séjour."
 msgstr "見積もりをリクエストするには、滞在を選択してください"
 
-#: library/classes/content/class-polylang.php:240
+#: library/classes/content/class-polylang.php:242
 msgid ""
 "Il semblerait qu'il n'y ait pas ou plus de séjours proposant une demande de "
 "devis disponibles sur le site"
 msgstr "サイトで利用可能な見積もりの​​リクエストを提供する旅行はないようです"
 
-#: library/classes/content/class-polylang.php:241
+#: library/classes/content/class-polylang.php:243
 msgid "Séjours et activités"
 msgstr "滞在とアクティビティ"
 
-#: library/classes/content/class-polylang.php:242
+#: library/classes/content/class-polylang.php:244
 msgid "Retour à l'offre"
 msgstr "提供に戻る"
 
-#: library/classes/content/class-polylang.php:243
+#: library/classes/content/class-polylang.php:245
 msgid "Récapitulatif"
 msgstr "概要"
 
-#: library/classes/content/class-polylang.php:244
+#: library/classes/content/class-polylang.php:246
 msgid "30 secondes"
 msgstr "30秒"
 
-#: library/classes/content/class-polylang.php:245
+#: library/classes/content/class-polylang.php:247
 msgid "Informations"
 msgstr "情報"
 
-#: library/classes/content/class-polylang.php:246
+#: library/classes/content/class-polylang.php:248
 msgid "Coordonnées"
 msgstr "接触"
 
-#: library/classes/content/class-polylang.php:247
+#: library/classes/content/class-polylang.php:249
 msgid "Mon devis"
 msgstr "私の引用"
 
-#: library/classes/content/class-polylang.php:248
+#: library/classes/content/class-polylang.php:250
 msgid "Votre séjour/journée"
 msgstr "あなたの滞在/日"
 
-#: library/classes/content/class-polylang.php:249
+#: library/classes/content/class-polylang.php:251
 msgid "Comprenant"
 msgstr "備え"
 
-#: library/classes/content/class-polylang.php:250
+#: library/classes/content/class-polylang.php:252
 #: library/templates/template-page.php:202
 msgid "Gratuit"
 msgstr "自由な"
 
-#: library/classes/content/class-polylang.php:251
+#: library/classes/content/class-polylang.php:253
 msgid "Nombre de personnes"
 msgstr "人数"
 
-#: library/classes/content/class-polylang.php:253
+#: library/classes/content/class-polylang.php:255
 msgid "* Champs obligatoires"
 msgstr "*必須フィールド"
 
-#: library/classes/content/class-polylang.php:254
+#: library/classes/content/class-polylang.php:256
 msgid "Nom/Prénom"
 msgstr "名/姓"
 
-#: library/classes/content/class-polylang.php:255
+#: library/classes/content/class-polylang.php:257
 msgid "Raison sociale"
 msgstr "会社名"
 
-#: library/classes/content/class-polylang.php:256
+#: library/classes/content/class-polylang.php:258
 msgid "Email"
 msgstr "電子メール"
 
-#: library/classes/content/class-polylang.php:257
+#: library/classes/content/class-polylang.php:259
 msgid "Téléphone"
 msgstr "電話"
 
-#: library/classes/content/class-polylang.php:258
+#: library/classes/content/class-polylang.php:260
 msgid "Votre commentaire"
 msgstr "あなたのコメント"
 
-#: library/classes/content/class-polylang.php:259
+#: library/classes/content/class-polylang.php:261
 msgid "Valider ma demande de devis"
 msgstr "見積もりリクエストを検証する"
 
-#: library/classes/content/class-polylang.php:260
+#: library/classes/content/class-polylang.php:262
 msgid "Mon panier"
 msgstr "私のカート"
 
-#: library/classes/content/class-polylang.php:261
+#: library/classes/content/class-polylang.php:263
 msgid "TOTAL "
 msgstr "トータル "
 
-#: library/classes/content/class-polylang.php:262
+#: library/classes/content/class-polylang.php:264
 msgid "Base de"
 msgstr "のベース"
 
-#: library/classes/content/class-polylang.php:266
+#: library/classes/content/class-polylang.php:268
 msgid "Publié le"
 msgstr "に投稿"
 
-#: library/classes/content/class-polylang.php:267
+#: library/classes/content/class-polylang.php:269
 #: library/classes/process/class-woody-compilers.php:404
 msgid "Désolé, aucun contenu ne correspond à votre recherche"
 msgstr "申し訳ありませんが、検索に一致するページはありません"
 
-#: library/classes/content/class-polylang.php:268
+#: library/classes/content/class-polylang.php:270
 msgid "Lire aussi"
 msgstr "続きを読む"
 
-#: library/classes/content/class-polylang.php:271
+#: library/classes/content/class-polylang.php:273
 msgid "Merci d'activer le javascript pour afficher"
 msgstr "表示するにはJavaScriptを有効にしてください"
 
-#: library/classes/content/class-polylang.php:272
+#: library/classes/content/class-polylang.php:274
 msgid "le bloc de commentaires Disqus"
 msgstr "Disqusコメントブロック"
 
-#: library/classes/content/class-polylang.php:273
+#: library/classes/content/class-polylang.php:275
 msgid ""
 "Une erreur est survenue lors de l'affichage des commentaires. Merci de "
 "contacter votre administrateur"
 msgstr "コメントの表示中にエラーが発生しました。 管理者に連絡してください"
 
-#: library/classes/content/class-polylang.php:276
+#: library/classes/content/class-polylang.php:278
 msgid "Remontées mécaniques"
 msgstr "スキーリフト"
 
-#: library/classes/content/class-polylang.php:277
+#: library/classes/content/class-polylang.php:279
 msgid "Pistes"
 msgstr "トレイル"
 
-#: library/classes/content/class-polylang.php:278
+#: library/classes/content/class-polylang.php:280
 msgid "Domaine Alpin"
 msgstr "アルパインドメイン"
 
-#: library/classes/content/class-polylang.php:279
+#: library/classes/content/class-polylang.php:281
 msgid "Domaine Nordique"
 msgstr "北欧ドメイン"
 
-#: library/classes/content/class-polylang.php:280
+#: library/classes/content/class-polylang.php:282
 msgid "Détails"
 msgstr "細部"
 
-#: library/classes/content/class-polylang.php:281
+#: library/classes/content/class-polylang.php:283
 msgid "Météo"
 msgstr "天気"
 
-#: library/classes/content/class-polylang.php:282
+#: library/classes/content/class-polylang.php:284
 msgid "Voir le bulletin météo"
 msgstr "天気予報を見る"
 
-#: library/classes/content/class-polylang.php:283
+#: library/classes/content/class-polylang.php:285
 msgid "Bulletin complet"
 msgstr "速報"
 
-#: library/classes/content/class-polylang.php:284
+#: library/classes/content/class-polylang.php:286
 msgid "Webcams"
 msgstr "カム"
 
-#: library/classes/content/class-polylang.php:285
+#: library/classes/content/class-polylang.php:287
 msgid "Voir les webcams"
 msgstr "ウェブカメラを見る"
 
-#: library/classes/content/class-polylang.php:286
+#: library/classes/content/class-polylang.php:288
 msgid "Flux erroné !"
 msgstr "餌を間違えた！"
 
-#: library/classes/content/class-polylang.php:287
+#: library/classes/content/class-polylang.php:289
 msgid "Module Infoneige non configuré !"
 msgstr "スノーモジュールが設定されていません。"
 
