@@ -763,7 +763,7 @@ abstract class WoodyTheme_TemplateAbstract
 
             // Set a default template
             $tpl = apply_filters('favorites_block_tpl', null);
-            $template = !empty($tpl['template']) ?: $this->context['woody_components']['woody_widgets-favorites_block-tpl_01'];
+            $template = !empty($tpl['template']) ? $tpl['template'] : $this->context['woody_components']['woody_widgets-favorites_block-tpl_01'];
 
             // Allow data override
             $data = apply_filters('favorites_block_data', $data);
