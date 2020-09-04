@@ -566,6 +566,11 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         // Si un identifiant de précochage est présent, on le passe à l'apirender
         if (!empty($autoselect_id)) {
             $query['autoselect_id'] = $autoselect_id;
+            $this->context['title'] .= sprintf(' | %s %s', __('Sélection', 'woody-theme'), $autoselect_id);
+        }
+
+        if (!empty($query['listpage']) && is_numeric($query['listpage'])) {
+            $this->context['title'] .= sprintf(' | %s %s', __('Page', 'woody-theme'), $query['listpage']);
         }
 
         // Get from Apirender
@@ -578,12 +583,9 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
         // Return template
         if (empty($this->context['playlist_tourism']['content'])) {
-            $this->context['playlist_tourism']['content'] = '<center style="margin: 80px 0">Playlist non configurée</center>';
+            $this->context['playlist_tourism']['content'] = '<center style="margin: 80px 0">Playlist vide</center>';
             status_header('410');
-        }
-
-        // handle api error
-        if (isset($this->context['playlist_tourism']['status'])) {
+        } elseif (isset($this->context['playlist_tourism']['status'])) {
             $code = intval($this->context['playlist_tourism']['status']);
             status_header($code);
         }
