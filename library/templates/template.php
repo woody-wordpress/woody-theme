@@ -124,8 +124,11 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['enabled_woody_options'] = WOODY_OPTIONS;
         $this->context['woody_access_staging'] = WOODY_ACCESS_STAGING;
 
+
+        $the_title = get_field('woodyseo_meta_title');
         // SEO Context
-        $this->context['title'] = (!empty(get_field('field_5d7f7dea20bb1'))) ? woody_untokenize(get_field('woodyseo_meta_title')) : get_the_title() . ' | ' . $this->context['site']['name'];
+
+        $this->context['title'] = (!empty($the_title)) ? woody_untokenize($the_title) : html_entity_decode(get_the_title()) . ' | ' . $this->context['site']['name'];
         $this->context['title'] = apply_filters('woody_seo_transform_pattern', $this->context['title']);
         $this->context['metas'] = $this->setMetadata();
         $this->context['custom_meta'] = get_field('woody_custom_meta', 'options');
