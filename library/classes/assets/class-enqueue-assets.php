@@ -185,7 +185,7 @@ class WoodyTheme_Enqueue_Assets
 
         // Touristic maps libraries
         wp_enqueue_script('touristicmaps_leaflet', 'https://tiles.touristicmaps.com/libs/leaflet.min.js', [], null);
-        wp_enqueue_style('leaflet_css', 'https://tiles.touristicmaps.com/libs/leaflet.css', [], '');
+        wp_enqueue_style('leaflet_css', 'https://tiles.touristicmaps.com/libs/tmaps.min.css', [], null);
 
         //TODO: fix bug with Gmap and Universal Map
         // if (isset($map_keys['otmKey']) || isset($map_keys['ignKey']) || $this->isTouristicSheet || $this->isRoadBookSheet) {
