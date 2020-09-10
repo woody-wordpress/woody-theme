@@ -520,4 +520,166 @@ class WoodyTheme_WoodyCompilers
 
         return $items;
     }
+
+    public function formatPageTeaser($context, $custom_post_id = null)
+    {
+        if (!empty($custom_post_id) && is_numeric($custom_post_id)) {
+            $context['post'] = get_post($custom_post_id);
+            $context['post_id'] = $custom_post_id;
+            $context['post_title'] = get_the_title($custom_post_id);
+        }
+
+        // On récupère les champs du groupe En-tête de page
+        $page_teaser = getAcfGroupFields('group_5b2bbb46507bf', $context['post']);
+
+        $page_teaser['the_classes'] = [];
+
+        // On récupère le tpl du visuel & accroche pour ajouter du contexte à l'en-tête si besoin
+        //TODO: Vérifier que le comportement est bon avec un fadingHero
+        $page_hero_tpl = substr(getAcfGroupFields('group_5b052bbee40a4', $context['post'])['heading_woody_tpl'], -6);
+        if ($page_hero_tpl == 'tpl_05' || $page_hero_tpl == 'tpl_06') {
+            $page_teaser['the_classes'][] = (empty($page_teaser['background_color'])) ? 'bg-transparent' : '';
+        }
+
+
+        $page_teaser['page_teaser_title'] = (!empty($page_teaser['page_teaser_display_title'])) ? str_replace('-', '&#8209', $context['post_title']) : '';
+
+        $page_teaser['the_classes'][] = (!empty($page_teaser['background_img_opacity'])) ? $page_teaser['background_img_opacity'] : '';
+        $page_teaser['the_classes'][] = (!empty($page_teaser['background_color'])) ? $page_teaser['background_color'] : '';
+        $page_teaser['the_classes'][] = (!empty($page_teaser['border_color'])) ? $page_teaser['border_color'] : '';
+        $page_teaser['the_classes'][] = (!empty($page_teaser['teaser_margin_bottom'])) ? $page_teaser['teaser_margin_bottom'] : '';
+        $page_teaser['the_classes'][] = (!empty($page_teaser['background_img'])) ? 'isRel' : '';
+        $page_teaser['classes'] = (!empty($page_teaser['the_classes'])) ? implode(' ', $page_teaser['the_classes']) : '';
+
+        $page_teaser['breadcrumb'] = $this->createBreadcrumb($context);
+        $page_teaser['trip_infos'] = (!empty($context['trip_infos'])) ? $context['trip_infos'] : '';
+        $page_teaser['social_shares'] = (!empty($context['social_shares'])) ? $context['social_shares'] : '';
+
+        if (!empty($page_teaser['page_teaser_add_media'])) {
+            unset($page_teaser['profile']);
+        } elseif (!empty($page_teaser['page_teaser_add_profile'])) {
+            unset($page_teaser['page_teaser_img']);
+        }
+
+        if (!empty($page_teaser['page_teaser_media_type']) && $page_teaser['page_teaser_media_type'] == 'map') {
+            $page_teaser['post_coordinates'] = (!empty(getAcfGroupFields('group_5b3635da6529e', $context['post']))) ? getAcfGroupFields('group_5b3635da6529e', $context['post']) : '';
+        }
+
+        if (!empty($page_teaser['page_teaser_display_created'])) {
+            $page_teaser['created'] = get_the_date();
+        }
+
+        // Unset breadcrumb if checked in hide page zones options
+        if (!empty($context['hide_page_zones']) && in_array('breadcrumb', $context['hide_page_zones'])) {
+            unset($page_teaser['breadcrumb']);
+        }
+
+        if (!empty($page_teaser['page_teaser_img']) && is_array($page_teaser['page_teaser_img'])) {
+            $page_teaser['page_teaser_img']['attachment_more_data'] = (!empty($page_teaser['page_teaser_img']['ID'])) ? $this->tools->getAttachmentMoreData($page_teaser['page_teaser_img']['ID']) : [];
+        }
+
+        $page_teaser['page_teaser_pretitle'] = (!empty($page_teaser['page_teaser_pretitle'])) ? $this->tools->replacePattern($page_teaser['page_teaser_pretitle'], $context['post_id']) : '';
+        $page_teaser['page_teaser_subtitle'] = (!empty($page_teaser['page_teaser_subtitle'])) ? $this->tools->replacePattern($page_teaser['page_teaser_subtitle'], $context['post_id']) : '';
+        $page_teaser['page_teaser_desc'] = (!empty($page_teaser['page_teaser_desc'])) ? $this->tools->replacePattern($page_teaser['page_teaser_desc'], $context['post_id']) : '';
+
+        // Existing profile
+        if (!empty($page_teaser['page_teaser_add_profile']) && !empty($page_teaser['profile']['use_profile']) && !empty($page_teaser['profile']['profile_post'])) {
+            $profile_id = $page_teaser['profile']['profile_post'];
+            $page_teaser['profile'] = [
+                        'profile_title' => get_the_title($profile_id),
+                        'profile_picture' => get_field('profile_picture', $profile_id),
+                        'profile_description' => get_field('profile_description', $profile_id)
+                    ];
+        }
+
+        $page_teaser = apply_filters('woody_custom_page_teaser', $page_teaser, $context);
+
+        return \Timber::compile($context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
+    }
+
+    public function formatPageHero($context, $custom_post_id = null)
+    {
+        if (!empty($custom_post_id) && is_numeric($custom_post_id)) {
+            $context['post'] = get_post($custom_post_id);
+            $context['post_id'] = $custom_post_id;
+        }
+
+        $page_hero = getAcfGroupFields('group_5b052bbee40a4', $context['post']);
+
+        if (!empty($page_hero['page_heading_media_type']) && ($page_hero['page_heading_media_type'] == 'movie' && !empty($page_hero['page_heading_movie']) || ($page_hero['page_heading_media_type'] == 'img' && !empty($page_hero['page_heading_img'])))) {
+            if (empty($page_teaser['page_teaser_display_title'])) {
+                $page_hero['title_as_h1'] = true;
+            }
+
+            if (!empty($page_hero['page_heading_img'])) {
+                $page_hero['page_heading_img']['attachment_more_data'] = (!empty($page_hero['page_heading_img']['ID'])) ? $this->tools->getAttachmentMoreData($page_hero['page_heading_img']['ID']) : [];
+            }
+
+            if (!empty($page_hero['page_heading_add_social_movie']) && !empty($page_hero['page_heading_social_movie'])) {
+                preg_match_all('@src="([^"]+)"@', $page_hero['page_heading_social_movie'], $result);
+                if (!empty($result[1]) && !empty($result[1][0])) {
+                    $iframe_url = $result[1][0];
+
+                    if (strpos($iframe_url, 'youtube') != false) {
+                        $yt_params_url = $iframe_url . '?&autoplay=0&rel=0';
+                        $page_hero['page_heading_social_movie'] = str_replace($iframe_url, $yt_params_url, $page_hero['page_heading_social_movie']);
+                    }
+                }
+            }
+            $page_hero['isfrontpage']= !empty(get_option('page_on_front')) && get_option('page_on_front') == pll_get_post($context['post_id']) ? true : false ;
+            $page_hero['title'] = (!empty($page_hero['title'])) ? $this->tools->replacePattern($page_hero['title'], $context['post_id']) : '';
+            $page_hero['pretitle'] = (!empty($page_hero['pretitle'])) ? $this->tools->replacePattern($page_hero['pretitle'], $context['post_id']) : '';
+            $page_hero['subtitle'] = (!empty($page_hero['subtitle'])) ? $this->tools->replacePattern($page_hero['subtitle'], $context['post_id']) : '';
+            $page_hero['description'] = (!empty($page_hero['description'])) ? $this->tools->replacePattern($page_hero['description'], $context['post_id']) : '';
+
+            $page_hero['title'] = (!empty($page_hero['title'])) ? str_replace('-', '&#8209', $page_hero['title']) : '';
+
+            $page_hero = apply_filters('woody_custom_page_hero', $page_hero, $context);
+
+            return \Timber::compile($context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
+        } else {
+            return '';
+        }
+    }
+
+    protected function createBreadcrumb($context)
+    {
+        $data = [];
+        $breadcrumb = '';
+        $current_post_id = $context['post']->ID;
+
+        // On ajoute la page d'accueil
+        $front_id = get_option('page_on_front');
+        if (!empty($front_id)) {
+            $data['items'][] = [
+                'title' => get_the_title($front_id),
+                'url' => apply_filters('woody_get_permalink', $front_id)
+            ];
+        }
+
+        // On ajoute toutes les pages parentes
+        $ancestors_ids = get_post_ancestors($current_post_id);
+        if (!empty($ancestors_ids) && is_array($ancestors_ids)) {
+            $ancestors_ids = array_reverse($ancestors_ids);
+            foreach ($ancestors_ids as $ancestor_id) {
+                $data['items'][] = [
+                    'title' => get_the_title($ancestor_id),
+                    'url' => apply_filters('woody_get_permalink', $ancestor_id)
+                ];
+            }
+        }
+
+        // On ajoute la page courante
+        $data['items'][] = [
+            'title' => get_the_title($current_post_id),
+            'url' => apply_filters('woody_get_permalink', $current_post_id)
+        ];
+
+        $tpl = apply_filters('breadcrumb_tpl', null);
+        $template = (!empty($tpl['template']) && !empty($context['woody_components'][$tpl['template']])) ? $context['woody_components'][$tpl['template']] : $context['woody_components']['woody_widgets-breadcrumb-tpl_01'];
+
+        $breadcrumb = \Timber::compile($template, $data);
+
+        return $breadcrumb;
+    }
 }

@@ -10,6 +10,7 @@
 use Woody\Modules\GroupQuotation\GroupQuotation;
 use WoodyProcess\Tools\WoodyTheme_WoodyProcessTools;
 use WoodyProcess\Process\WoodyTheme_WoodyProcess;
+use WoodyProcess\Compilers\WoodyTheme_WoodyCompilers;
 
 class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 {
@@ -21,6 +22,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     {
         $this->tools = new WoodyTheme_WoodyProcessTools;
         $this->process = new WoodyTheme_WoodyProcess;
+        $this->compilers = new WoodyTheme_WoodyCompilers;
         parent::__construct();
     }
 
@@ -232,112 +234,10 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             }
         }
 
+        // Compilation de l'en tête de page et du visuel et accroche pour les pages qui ne sont pas de type "accueil"
         if (!empty($page_type[0]) && $page_type[0]->slug != 'front_page') {
-            /*********************************************
-             * Compilation de l'en tête de page pour les pages qui ne sont pas de type "accueil"
-             *********************************************/
-            $page_teaser = [];
-            $page_teaser = getAcfGroupFields('group_5b2bbb46507bf', $this->context['post']);
-            $fading_hero = false;
-            $page_hero_tpl = substr(getAcfGroupFields('group_5b052bbee40a4', $this->context['post'])['heading_woody_tpl'], -6);
-
-            if ($page_hero_tpl == 'tpl_05' || $page_hero_tpl == 'tpl_06') {
-                $fading_hero = true;
-            }
-
-            if ($page_type[0]->slug != 'front_page' and !empty($page_teaser)) {
-                $page_teaser['page_teaser_title'] = (!empty($page_teaser['page_teaser_display_title'])) ? str_replace('-', '&#8209', $this->context['post_title']) : '';
-                $page_teaser['the_classes'] = [];
-                $page_teaser['the_classes'][] = (!empty($page_teaser['background_img_opacity'])) ? $page_teaser['background_img_opacity'] : '';
-                $page_teaser['the_classes'][] = (!empty($page_teaser['background_color'])) ? $page_teaser['background_color'] : '';
-                $page_teaser['the_classes'][] = (!empty($page_teaser['border_color'])) ? $page_teaser['border_color'] : '';
-                $page_teaser['the_classes'][] = (empty($page_teaser['background_color']) and $fading_hero) ? 'bg-transparent' : '';
-                $page_teaser['the_classes'][] = (!empty($page_teaser['teaser_margin_bottom'])) ? $page_teaser['teaser_margin_bottom'] : '';
-                $page_teaser['the_classes'][] = (!empty($page_teaser['background_img'])) ? 'isRel' : '';
-                $page_teaser['classes'] = (!empty($page_teaser['the_classes'])) ? implode(' ', $page_teaser['the_classes']) : '';
-                $page_teaser['breadcrumb'] = $this->createBreadcrumb();
-                $page_teaser['trip_infos'] = (!empty($this->context['trip_infos'])) ? $this->context['trip_infos'] : '';
-                $page_teaser['social_shares'] = (!empty($this->context['social_shares'])) ? $this->context['social_shares'] : '';
-
-                if (!empty($page_teaser['page_teaser_add_media'])) {
-                    unset($page_teaser['profile']);
-                } elseif (!empty($page_teaser['page_teaser_add_profile'])) {
-                    unset($page_teaser['page_teaser_img']);
-                }
-
-                if (!empty($page_teaser['page_teaser_media_type']) && $page_teaser['page_teaser_media_type'] == 'map') {
-                    $page_teaser['post_coordinates'] = (!empty(getAcfGroupFields('group_5b3635da6529e', $this->context['post']))) ? getAcfGroupFields('group_5b3635da6529e', $this->context['post']) : '';
-                }
-
-                if (!empty($page_teaser['page_teaser_display_created'])) {
-                    $page_teaser['created'] = get_the_date();
-                }
-
-                // Unset breadcrumb if checked in hide page zones options
-                if (!empty($this->context['hide_page_zones']) && in_array('breadcrumb', $this->context['hide_page_zones'])) {
-                    unset($page_teaser['breadcrumb']);
-                }
-
-                if (!empty($page_teaser['page_teaser_img']) && is_array($page_teaser['page_teaser_img'])) {
-                    $page_teaser['page_teaser_img']['attachment_more_data'] = (!empty($page_teaser['page_teaser_img']['ID'])) ? $this->tools->getAttachmentMoreData($page_teaser['page_teaser_img']['ID']) : [];
-                }
-
-                $page_teaser['page_teaser_pretitle'] = (!empty($page_teaser['page_teaser_pretitle'])) ? $this->tools->replacePattern($page_teaser['page_teaser_pretitle'], $this->context['post_id']) : '';
-                $page_teaser['page_teaser_subtitle'] = (!empty($page_teaser['page_teaser_subtitle'])) ? $this->tools->replacePattern($page_teaser['page_teaser_subtitle'], $this->context['post_id']) : '';
-                $page_teaser['page_teaser_desc'] = (!empty($page_teaser['page_teaser_desc'])) ? $this->tools->replacePattern($page_teaser['page_teaser_desc'], $this->context['post_id']) : '';
-
-                // Existing profile
-                if (!empty($page_teaser['page_teaser_add_profile']) && !empty($page_teaser['profile']['use_profile']) && !empty($page_teaser['profile']['profile_post'])) {
-                    $profile_id = $page_teaser['profile']['profile_post'];
-                    $page_teaser['profile'] = [
-                        'profile_title' => get_the_title($profile_id),
-                        'profile_picture' => get_field('profile_picture', $profile_id),
-                        'profile_description' => get_field('profile_description', $profile_id)
-                    ];
-                }
-
-                $page_teaser = apply_filters('woody_custom_page_teaser', $page_teaser, $this->context);
-
-                $this->context['page_teaser'] = \Timber::compile($this->context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
-            }
-
-            /*********************************************
-             * Compilation du visuel et accroche pour les pages qui ne sont pas de type "accueil"
-             *********************************************/
-
-            $page_hero = [];
-            $page_hero = getAcfGroupFields('group_5b052bbee40a4', $this->context['post']);
-            if (!empty($page_hero['page_heading_media_type']) && ($page_hero['page_heading_media_type'] == 'movie' && !empty($page_hero['page_heading_movie']) || ($page_hero['page_heading_media_type'] == 'img' && !empty($page_hero['page_heading_img'])))) {
-                if (empty($page_teaser['page_teaser_display_title'])) {
-                    $page_hero['title_as_h1'] = true;
-                }
-
-                if (!empty($page_hero['page_heading_img'])) {
-                    $page_hero['page_heading_img']['attachment_more_data'] = (!empty($page_hero['page_heading_img']['ID'])) ? $this->tools->getAttachmentMoreData($page_hero['page_heading_img']['ID']) : [];
-                }
-
-                if (!empty($page_hero['page_heading_add_social_movie']) && !empty($page_hero['page_heading_social_movie'])) {
-                    preg_match_all('@src="([^"]+)"@', $page_hero['page_heading_social_movie'], $result);
-                    if (!empty($result[1]) && !empty($result[1][0])) {
-                        $iframe_url = $result[1][0];
-
-                        if (strpos($iframe_url, 'youtube') != false) {
-                            $yt_params_url = $iframe_url . '?&autoplay=0&rel=0';
-                            $page_hero['page_heading_social_movie'] = str_replace($iframe_url, $yt_params_url, $page_hero['page_heading_social_movie']);
-                        }
-                    }
-                }
-                $page_hero['isfrontpage']= !empty(get_option('page_on_front')) && get_option('page_on_front') == pll_get_post($this->context['post_id']) ? true : false ;
-                $page_hero['title'] = (!empty($page_hero['title'])) ? $this->tools->replacePattern($page_hero['title'], $this->context['post_id']) : '';
-                $page_hero['pretitle'] = (!empty($page_hero['pretitle'])) ? $this->tools->replacePattern($page_hero['pretitle'], $this->context['post_id']) : '';
-                $page_hero['subtitle'] = (!empty($page_hero['subtitle'])) ? $this->tools->replacePattern($page_hero['subtitle'], $this->context['post_id']) : '';
-                $page_hero['description'] = (!empty($page_hero['description'])) ? $this->tools->replacePattern($page_hero['description'], $this->context['post_id']) : '';
-
-                $page_hero['title'] = (!empty($page_hero['title'])) ? str_replace('-', '&#8209', $page_hero['title']) : '';
-                $this->context['page_hero'] = \Timber::compile($this->context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
-            }
-
-            $this->context = apply_filters('woody_page_context', $this->context);
+            $this->context['page_teaser'] = $this->compilers->formatPageTeaser($this->context);
+            $this->context['page_hero'] = $this->compilers->formatPageHero($this->context);
         }
 
         // Si on est sur la page favoris, on ajoute un bouton pour l'impression
@@ -345,47 +245,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         if (!empty($is_fav) && $is_fav === $this->context['post_id']) {
             $this->context['printable'] = true;
         }
-    }
 
-    protected function createBreadcrumb()
-    {
-        $data = [];
-        $breadcrumb = '';
-        $current_post_id = $this->context['post']->ID;
-
-        // On ajoute la page d'accueil
-        $front_id = get_option('page_on_front');
-        if (!empty($front_id)) {
-            $data['items'][] = [
-                'title' => get_the_title($front_id),
-                'url' => apply_filters('woody_get_permalink', $front_id)
-            ];
-        }
-
-        // On ajoute toutes les pages parentes
-        $ancestors_ids = get_post_ancestors($current_post_id);
-        if (!empty($ancestors_ids) && is_array($ancestors_ids)) {
-            $ancestors_ids = array_reverse($ancestors_ids);
-            foreach ($ancestors_ids as $ancestor_id) {
-                $data['items'][] = [
-                    'title' => get_the_title($ancestor_id),
-                    'url' => apply_filters('woody_get_permalink', $ancestor_id)
-                ];
-            }
-        }
-
-        // On ajoute la page courante
-        $data['items'][] = [
-            'title' => get_the_title($current_post_id),
-            'url' => apply_filters('woody_get_permalink', $current_post_id)
-        ];
-
-        $tpl = apply_filters('breadcrumb_tpl', null);
-        $template = (!empty($tpl['template']) && !empty($this->context['woody_components'][$tpl['template']])) ? $this->context['woody_components'][$tpl['template']] : $this->context['woody_components']['woody_widgets-breadcrumb-tpl_01'];
-
-        $breadcrumb = Timber::compile($template, $data);
-
-        return $breadcrumb;
+        $this->context = apply_filters('woody_page_context', $this->context);
     }
 
     protected function commonContext()
