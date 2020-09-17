@@ -72,28 +72,32 @@ class WoodyTheme_Unpublisher
 
     public function getPostUnpublishedValue()
     {
-        $pages = get_pages([
-            'meta_key' => '_wUnpublisher_date'
-        ]);
+        $query_results = new \WP_Query(array(
+            'posts_per_page' => -1,
+            'post_type'     => 'page',
+            'post_status'   => 'publish',
+            'meta_query'    => array(
+                'relation' => 'AND',
+                array(
+                    'key' => "_wUnpublisher_date",
+                    'compare' => "EXISTS"
+                )
+            )
+        ));
 
-        if (empty($pages)) {
-            return;
-        }
-
-        foreach ($pages as $page) {
-            if (is_object($page) && !empty(get_post_meta($page->ID, '_wUnpublisher_date', true))) {
+        if (!empty($query_results->posts)) {
+            $timezone = (!empty(get_option('timezone_string'))) ? get_option('timezone_string') : 'Europe/Paris';
+            foreach ($query_results->posts as $page) {
                 $unpublish_date_meta = get_post_meta($page->ID, '_wUnpublisher_date', true);
 
-                $timezone = (!empty(get_option('timezone_string'))) ? get_option('timezone_string') : 'Europe/Paris';
                 $unpublish_date = new DateTime($unpublish_date_meta, new DateTimeZone($timezone));
                 $timestamp = $unpublish_date->getTimestamp();
                 if ($timestamp < time()) {
-                    $updated_post = [
+                    wp_update_post([
                         'ID' => $page->ID,
                         'post_status' => 'draft'
-                    ];
-                    wp_update_post($updated_post);
-                    update_post_meta($page->ID,'_wUnpublisher_date','');
+                    ]);
+                    update_post_meta($page->ID, '_wUnpublisher_date', '');
                 }
             }
         }
