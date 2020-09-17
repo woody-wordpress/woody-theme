@@ -185,7 +185,7 @@ msgstr "Tages"
 #: library/classes/timber/class-timber-filters.php:272
 #: library/functions/01_assets.php:92
 msgid "jours"
-msgstr "Tagen"
+msgstr "Tage"
 
 #: library/classes/content/class-polylang.php:107
 #: library/classes/content/class-polylang.php:265
