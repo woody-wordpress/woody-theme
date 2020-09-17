@@ -12,7 +12,7 @@ namespace Woody\Menus;
 
 class Admin_Menus
 {
-    public $current_lang;
+    private $current_lang;
     public $menu_post_ids;
     public $pages_options;
 
@@ -23,7 +23,7 @@ class Admin_Menus
         $this->pages_options = $this->setPagesOptions();
     }
 
-    protected function registerHooks()
+    public function registerHooks()
     {
         add_action('admin_menu', [$this, 'addMenuMainPages'], 11);
         add_action('admin_menu', [$this, 'addMenusOptionsPages'], 11);
@@ -245,6 +245,7 @@ class Admin_Menus
      * @return void | Ajoute une metabox `Structure` permettant de paramètrer les entrées du menu principal
      *
      */
+    // TODO: Décommenter pour l'administration en back-office
     // public function addMenuFieldGroups()
     // {
     //     $page = $this->pages_options['main-menu'];
@@ -310,7 +311,7 @@ class Admin_Menus
         $this->setMenuPostIds($page);
 
         if (!empty($this->menu_post_ids)) {
-            // Use index because `group_submenus.json` contains fields with tabs
+            // Utilisez l'index car `group_submenus.json` contient des champs avec des accordéon
             $index = 1;
 
             if (!empty($page['acf_group_key'])) {
