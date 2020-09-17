@@ -581,6 +581,38 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             $this->context['playlist_tourism']['confId'] = $playlistConfId;
         }
 
+        // Add next and prev rel link
+        if (!empty($this->context['playlist_tourism']['hasNextPage'])) {
+            $listpage = filter_input(INPUT_GET, 'listpage', FILTER_VALIDATE_INT);
+            if (!empty($listpage) && $listpage != 1) {
+                $prev = $listpage-1;
+                $next = $listpage+1;
+                $this->context['metas']['prev'] = [
+                    '#tag' => 'link',
+                    '#attributes' => [
+                        'href' => $this->context['current_url'] . '?listpage=' . $prev,
+                        'rel' => "prev"
+                    ]
+                ];
+
+                $this->context['metas']['next'] = [
+                    '#tag' => 'link',
+                    '#attributes' => [
+                        'href' => $this->context['current_url'] . '?listpage=' . $next,
+                        'rel' => "next"
+                    ]
+                ];
+            } else {
+                $this->context['metas']['next'] = [
+                    '#tag' => 'link',
+                    '#attributes' => [
+                        'href' => $this->context['current_url'] . '?listpage=' . 2,
+                        'rel' => "next"
+                    ]
+                ];
+            }
+        }
+
         // Return template
         if (empty($this->context['playlist_tourism']['content'])) {
             $this->context['playlist_tourism']['content'] = '<center style="margin: 80px 0">Playlist vide</center>';
