@@ -166,11 +166,7 @@ class WoodyTheme_Cleanup_Admin
      */
     public function customMenusPage()
     {
-        // Permet d'être compatible pour tout les sites
-        $oldMethod = class_exists('SubWoodyTheme_Admin') ? method_exists('SubWoodyTheme_Admin', 'addMenuMainPages') : false;
-        $legacyMethod = class_exists('WoodyTheme_Admin_Menus') ? method_exists('WoodyTheme_Admin_Menus', 'addMenuMainPages') : false;
-
-        if (function_exists('acf_add_options_page')) {
+        if (function_exists('acf_add_options_page') && function_exists('acf_add_options_sub_page')) {
             $lang = pll_current_language();
 
             // Page principale
@@ -184,7 +180,15 @@ class WoodyTheme_Cleanup_Admin
                 'redirect'      => true,
             ));
 
-            if (function_exists('acf_add_options_sub_page') && $lang == PLL_DEFAULT_LANG && !$oldMethod && !$legacyMethod) {
+
+            // Permet d'être compatible avec tout les sites (anciens et nouveaux)
+            $legacyMenus = class_exists('SubWoodyTheme_Admin') && method_exists('SubWoodyTheme_Admin', 'addMenuMainPages') ? false : true;
+
+            $legacyMenus = class_exists('Woody\Menus\Admin_Menus') && method_exists('Woody\Menus\Admin_Menus', 'addMenuMainPages') ? false: true;
+
+            // TODO : remplacer par une variable globale ? WOODY_GENERATE_MENU=true ??
+
+            if ($legacyMenus && $lang == PLL_DEFAULT_LANG) {
                 // Première sous-page
                 acf_add_options_sub_page(array(
                     'page_title'    => 'Menu principal',

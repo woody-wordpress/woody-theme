@@ -8,7 +8,9 @@
  *
  */
 
-class WoodyTheme_Admin_Menus
+namespace Woody\Menus;
+
+class Admin_Menus
 {
     public $current_lang;
     public $menu_post_ids;
@@ -216,7 +218,7 @@ class WoodyTheme_Admin_Menus
                     ],
                 ];
 
-                //? Create a group field if it does not exist
+                // Créer un groupe de champs s'il n'existe pas
                 foreach ($fields as $key => $field) {
                     if ($field['type'] == 'group') {
                         $fields[$key]['key'] = 'field_' . $page['menu_slug'];
@@ -243,41 +245,41 @@ class WoodyTheme_Admin_Menus
      * @return void | Ajoute une metabox `Structure` permettant de paramètrer les entrées du menu principal
      *
      */
-    public function addMenuFieldGroups()
-    {
-        $page = $this->pages_options['main-menu'];
+    // public function addMenuFieldGroups()
+    // {
+    //     $page = $this->pages_options['main-menu'];
 
-        $group = [
-            'key' => 'group_generate_' . $page['menu_slug'],
-            'title' => 'Structure du menu',
-            'position' => 'side',
-            'fields' => [[
-                'key' => 'field_generate_' . $page['menu_slug'],
-                'name' => 'generate_' . $page['menu_slug'],
-                'type' => 'repeater',
-                'layout' => 'block',
-                'button_label' => 'Ajouter une page au menu',
-                'sub_fields' => [[
-                    'key' => 'field_menu_post',
-                    'name' => 'post',
-                    'type' => 'post_object',
-                    'return_format' => 'object',
-                    'ui' => 1,
-                ]]
-            ]],
-            'location' => [
-                [
-                    [
-                        'param' => 'options_page',
-                        'operator' => '==',
-                        'value' => $page['menu_slug'],
-                    ],
-                ],
-            ],
-        ];
+    //     $group = [
+    //         'key' => 'group_generate_' . $page['menu_slug'],
+    //         'title' => 'Structure du menu',
+    //         'position' => 'side',
+    //         'fields' => [[
+    //             'key' => 'field_generate_' . $page['menu_slug'],
+    //             'name' => 'generate_' . $page['menu_slug'],
+    //             'type' => 'repeater',
+    //             'layout' => 'block',
+    //             'button_label' => 'Ajouter une page au menu',
+    //             'sub_fields' => [[
+    //                 'key' => 'field_menu_post',
+    //                 'name' => 'post',
+    //                 'type' => 'post_object',
+    //                 'return_format' => 'object',
+    //                 'ui' => 1,
+    //             ]]
+    //         ]],
+    //         'location' => [
+    //             [
+    //                 [
+    //                     'param' => 'options_page',
+    //                     'operator' => '==',
+    //                     'value' => $page['menu_slug'],
+    //                 ],
+    //             ],
+    //         ],
+    //     ];
 
-        acf_add_local_field_group($group);
-    }
+    //     acf_add_local_field_group($group);
+    // }
 
     /**
      *
@@ -305,7 +307,6 @@ class WoodyTheme_Admin_Menus
             ],
         ];
 
-        // TODO: Décommenter pour l'administration en back-office
         $this->setMenuPostIds($page);
 
         if (!empty($this->menu_post_ids)) {
