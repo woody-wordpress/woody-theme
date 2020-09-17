@@ -75,13 +75,14 @@ class WoodyTheme_Unpublisher
         global $wpdb;
 
         $today = date(DATE_ATOM);
-        $sql = "SELECT `wp_posts`.`ID`
-        FROM `wp_posts`, `wp_postmeta`
-        WHERE `wp_posts`.`ID` = `wp_postmeta`.`post_id`
-        AND `wp_postmeta`.`meta_key` = '_wUnpublisher_date'
-        AND `wp_postmeta`.`meta_value` < {$today}
-        AND `wp_postmeta`.`meta_value` != ''" ;
-        $results = $wpdb->get_results($sql);
+        $results = $wpdb->get_results(
+            "SELECT `wp_posts`.`ID`
+            FROM `wp_posts`, `wp_postmeta`
+            WHERE `wp_posts`.`ID` = `wp_postmeta`.`post_id`
+            AND `wp_postmeta`.`meta_key` = '_wUnpublisher_date'
+            AND `wp_postmeta`.`meta_value` < {$today}
+            AND `wp_postmeta`.`meta_value` != ''"
+        );
 
         if (!empty($results)) {
             foreach ($results as $result) {
