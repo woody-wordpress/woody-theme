@@ -180,13 +180,8 @@ class WoodyTheme_Cleanup_Admin
                 'redirect'      => true,
             ));
 
-
             // Permet d'être compatible avec tout les sites (anciens et nouveaux)
             $legacyMenus = class_exists('SubWoodyTheme_Admin') && method_exists('SubWoodyTheme_Admin', 'addMenuMainPages') ? false : true;
-
-            $legacyMenus = class_exists('Woody\Menus\Admin_Menus') && method_exists('Woody\Menus\Admin_Menus', 'addMenuMainPages') ? false: true;
-
-            // TODO : remplacer par une variable globale ? WOODY_GENERATE_MENU=true ??
 
             if ($legacyMenus && $lang == PLL_DEFAULT_LANG) {
                 // Première sous-page
