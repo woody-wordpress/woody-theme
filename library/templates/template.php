@@ -422,7 +422,7 @@ abstract class WoodyTheme_TemplateAbstract
                         if (!empty($data)) {
                             $return['og:title']['#attributes']['content'] = woody_untokenize($data);
                         } elseif (!empty(get_field('woodyseo_meta_title'))) {
-                            $return['og:title']['#attributes']['content'] = woody_untokenize(get_field('woodyseo_meta_title'));
+                            $return['og:title']['#attributes']['content'] = apply_filters('woody_seo_transform_pattern', woody_untokenize(get_field('woodyseo_meta_title')));
                         } else {
                             $return['og:title']['#attributes']['content'] = get_the_title() . ' | ' . $this->context['site']['name'];
                         }
@@ -463,7 +463,7 @@ abstract class WoodyTheme_TemplateAbstract
                         if (!empty($data)) {
                             $return['twitter:title']['#attributes']['content'] = woody_untokenize($data);
                         } elseif (!empty(get_field('woodyseo_meta_title'))) {
-                            $return['twitter:title']['#attributes']['content'] = woody_untokenize(get_field('woodyseo_meta_title'));
+                            $return['twitter:title']['#attributes']['content'] = apply_filters('woody_seo_transform_pattern', woody_untokenize(get_field('woodyseo_meta_title')));
                         } else {
                             $return['twitter:title']['#attributes']['content'] = get_the_title() . ' | ' . $this->context['site']['name'];
                         }
