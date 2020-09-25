@@ -61,6 +61,7 @@ class WoodyTheme_Timber_Filters
         $twig->addFilter(new Twig_SimpleFilter('seed', [$this, 'seed']));
         $twig->addFilter(new Twig_SimpleFilter('translate', [$this, 'translate']));
         $twig->addFilter(new Twig_SimpleFilter('json_encode', [$this, 'jsonEncode']));
+        $twig->addFilter(new Twig_SimpleFilter('zeroise', [$this, 'zeroise']));
 
         // Debug Woody
         $twig->addFilter(new Twig_SimpleFilter('dump', [$this, 'dump']));
@@ -86,6 +87,11 @@ class WoodyTheme_Timber_Filters
         if (!empty($array) && is_array($array)) {
             return json_encode($array);
         }
+    }
+
+    public function zeroise($value, $threshold)
+    {
+        return zeroise($value, $threshold);
     }
 
     public function phoneClick($text)
