@@ -2,14 +2,14 @@
 # This file is distributed under the .
 msgid ""
 msgstr ""
-"Project-Id-Version: Woody (Parent theme) 1.29.0\n"
+"Project-Id-Version: Woody (Parent theme) 1.30.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-09-04T09:51:09+02:00\n"
+"POT-Creation-Date: 2020-09-24T08:58:19+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: woody-theme\n"
@@ -362,12 +362,12 @@ msgid "mois"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:157
-#: library/templates/template-page.php:569
+#: library/templates/template-page.php:574
 msgid "Sélection"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:158
-#: library/templates/template-page.php:573
+#: library/templates/template-page.php:578
 msgid "Page"
 msgstr ""
 
@@ -688,7 +688,7 @@ msgid "Comprenant"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:252
-#: library/templates/template-page.php:202
+#: library/templates/template-page.php:207
 msgid "Gratuit"
 msgstr ""
 
@@ -809,28 +809,28 @@ msgstr ""
 msgid "Module Infoneige non configuré !"
 msgstr ""
 
-#: library/classes/process/class-woody-getters.php:618
-#: library/classes/process/class-woody-getters.php:619
+#: library/classes/process/class-woody-getters.php:616
+#: library/classes/process/class-woody-getters.php:617
 msgid "Découvrir"
 msgstr ""
 
-#: library/classes/process/class-woody-getters.php:773
+#: library/classes/process/class-woody-getters.php:771
 msgid "Informations prestataire"
 msgstr ""
 
-#: library/classes/process/class-woody-getters.php:778
+#: library/classes/process/class-woody-getters.php:776
 msgid "Horaires"
 msgstr ""
 
-#: library/classes/process/class-woody-getters.php:783
+#: library/classes/process/class-woody-getters.php:781
 msgid "Carte"
 msgstr ""
 
-#: library/classes/process/class-woody-getters.php:788
+#: library/classes/process/class-woody-getters.php:786
 msgid "Avis"
 msgstr ""
 
-#: library/classes/process/class-woody-getters.php:793
+#: library/classes/process/class-woody-getters.php:791
 msgid "Poser une question"
 msgstr ""
 
@@ -850,6 +850,6 @@ msgstr ""
 msgid "La page que vous recherchez a peut-être été supprimée ou est temporairement indisponible."
 msgstr ""
 
-#: library/templates/template.php:720
+#: library/templates/template.php:726
 msgid "Nos suggestions"
 msgstr ""
