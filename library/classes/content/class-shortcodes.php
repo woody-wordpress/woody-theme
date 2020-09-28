@@ -21,6 +21,7 @@ class WoodyTheme_Shortcodes
     {
         add_shortcode('woody_meteo', [$this, 'weatherShortCode']);
         add_shortcode('woody_recherche', [$this, 'searchShortCode']);
+        add_shortcode('woody_search_v2', [$this, 'searchShortCodeV2']);
         add_shortcode('woody_anchor', [$this, 'anchorShortcode']);
     }
 
@@ -75,6 +76,20 @@ class WoodyTheme_Shortcodes
         $template = $tplSearch['template'] ?: $this->twigPaths['woody_widgets-es_search-tpl_01'];
 
         return \Timber::compile($template, $result);
+    }
+
+    /**
+     * Recherche V2
+     */
+    public function searchShortCodeV2($atts)
+    {
+        // TODO: use Twig
+        // ! Add Logo param
+        // ! Add id param to connect js with loop button
+        // ? Add season param
+        $return = '<rc-woody-search sitekey=' . WP_SITE_KEY . ' lang=' . pll_current_language() . ' button="esSearch-button"></rc-woody-search>';
+
+        return $return;
     }
 
     /**
