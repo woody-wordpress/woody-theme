@@ -85,9 +85,16 @@ class WoodyTheme_Shortcodes
     {
         // TODO: use Twig
         // ! Add Logo param
-        // ! Add id param to connect js with loop button
         // ? Add season param
-        $return = '<rc-woody-search sitekey=' . WP_SITE_KEY . ' lang=' . pll_current_language() . ' button="esSearch-button"></rc-woody-search>';
+
+        $return = '<rc-woody-search
+        url="http://esdemo.rc.prod:8081/wordpress/preprod/search/"
+        logo="' . get_stylesheet_directory() . '/logo.svg"
+        sitekey=' . WP_SITE_KEY . '
+        lang=' . pll_current_language() . '
+        open-button="esSearch-button"
+        default-display="block"
+        ></rc-woody-search>';
 
         return $return;
     }
