@@ -1,10 +1,9 @@
 {
     "key": "group_submenus",
     "title": "[MENU] - Sous-menus",
-    "fields": [
-        {
-            "key": "field_5e39482478c23",
-            "label": "Découvrir",
+    "fields": [{
+            "key": "field_5f71af533334d",
+            "label": "Label 1",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -19,9 +18,9 @@
             "endpoint": 0
         },
         {
-            "key": "field_5e393cde70c78",
+            "key": "field_5f71af6f83e41",
             "label": "",
-            "name": "menu_discover",
+            "name": "menu_first",
             "type": "group",
             "instructions": "",
             "required": 0,
@@ -32,9 +31,8 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [
-                {
-                    "key": "field_5e393cde77373",
+            "sub_fields": [{
+                    "key": "field_5f71af8a9c238",
                     "label": "Partie 1 • <span style='font-weight: normal; text-transform: initial'>Vignettes<\/span>",
                     "name": "",
                     "type": "accordion",
@@ -51,7 +49,7 @@
                     "endpoint": 0
                 },
                 {
-                    "key": "field_5e393cde773b4",
+                    "key": "field_5f71af97e4f0b",
                     "label": "",
                     "name": "submenu_part_1",
                     "type": "group",
@@ -64,35 +62,33 @@
                         "id": ""
                     },
                     "layout": "row",
-                    "sub_fields": [
-                        {
-                            "key": "field_5f50c4d456b4f",
-                            "label": "",
-                            "name": "clone_submenu_links",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "clone": [
-                                "field_5e393cd09c034"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }
-                    ]
+                    "sub_fields": [{
+                        "key": "field_5f71afa411af1",
+                        "label": "",
+                        "name": "clone_submenu_links",
+                        "type": "clone",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "clone": [
+                            "field_5e393cd09c034"
+                        ],
+                        "display": "seamless",
+                        "layout": "block",
+                        "prefix_label": 0,
+                        "prefix_name": 0
+                    }]
                 }
             ]
         },
         {
-            "key": "field_5e393cde93c72",
-            "label": "À voir, à faire",
+            "key": "field_5f71b0081820e",
+            "label": "Label 2",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -107,9 +103,9 @@
             "endpoint": 0
         },
         {
-            "key": "field_5e39472064032",
+            "key": "field_5f71b02f2a16b",
             "label": "",
-            "name": "menu_toseetodo",
+            "name": "menu_second",
             "type": "group",
             "instructions": "",
             "required": 0,
@@ -120,9 +116,8 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [
-                {
-                    "key": "field_5efdf0a43ab91",
+            "sub_fields": [{
+                    "key": "field_5f71b040ae5a2",
                     "label": "Partie 1 • <span style='font-weight: normal; text-transform: initial'>Liste avec titre<\/span>",
                     "name": "",
                     "type": "accordion",
@@ -139,7 +134,7 @@
                     "endpoint": 0
                 },
                 {
-                    "key": "field_5efdf0c73ab94",
+                    "key": "field_5f71b05a9ecbd",
                     "label": "",
                     "name": "submenu_part_1",
                     "type": "group",
@@ -152,9 +147,8 @@
                         "id": ""
                     },
                     "layout": "row",
-                    "sub_fields": [
-                        {
-                            "key": "field_5f50c53756b50",
+                    "sub_fields": [{
+                            "key": "field_5f71b0734aa57",
                             "label": "",
                             "name": "clone_part_title",
                             "type": "clone",
@@ -175,7 +169,7 @@
                             "prefix_name": 0
                         },
                         {
-                            "key": "field_5f50c56c56b51",
+                            "key": "field_5f71b08095ca5",
                             "label": "",
                             "name": "clone_submenu_links",
                             "type": "clone",
@@ -200,8 +194,8 @@
             ]
         },
         {
-            "key": "field_5e3946f66402f",
-            "label": "Séjourner",
+            "key": "field_5f71b092681ef",
+            "label": "Label 3",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -216,9 +210,9 @@
             "endpoint": 0
         },
         {
-            "key": "field_5e39472764036",
+            "key": "field_5f71b09ec5900",
             "label": "",
-            "name": "menu_stay",
+            "name": "menu_third",
             "type": "group",
             "instructions": "",
             "required": 0,
@@ -229,9 +223,8 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [
-                {
-                    "key": "field_5efdf0a33ab90",
+            "sub_fields": [{
+                    "key": "field_5f71b0bd80c27",
                     "label": "Partie 1 • <span style='font-weight: normal; text-transform: initial'>Vignettes<\/span>",
                     "name": "",
                     "type": "accordion",
@@ -248,7 +241,7 @@
                     "endpoint": 0
                 },
                 {
-                    "key": "field_5efdf16e3ab9c",
+                    "key": "field_5f71b0b25b621",
                     "label": "",
                     "name": "submenu_part_1",
                     "type": "group",
@@ -261,35 +254,33 @@
                         "id": ""
                     },
                     "layout": "row",
-                    "sub_fields": [
-                        {
-                            "key": "field_5f50c59556b52",
-                            "label": "",
-                            "name": "clone_submenu_links",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "clone": [
-                                "field_5e393cd09c034"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }
-                    ]
+                    "sub_fields": [{
+                        "key": "field_5f71b0caecc41",
+                        "label": "",
+                        "name": "clone_submenu_links",
+                        "type": "clone",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "clone": [
+                            "field_5e393cd09c034"
+                        ],
+                        "display": "seamless",
+                        "layout": "block",
+                        "prefix_label": 0,
+                        "prefix_name": 0
+                    }]
                 }
             ]
         },
         {
-            "key": "field_5e39470164030",
-            "label": "Agenda",
+            "key": "field_5f71b0d8cf956",
+            "label": "Label 4",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -304,9 +295,9 @@
             "endpoint": 0
         },
         {
-            "key": "field_5e39472b6403a",
+            "key": "field_5f71b0e7e231c",
             "label": "",
-            "name": "menu_agenda",
+            "name": "menu_fourth",
             "type": "group",
             "instructions": "",
             "required": 0,
@@ -317,9 +308,8 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [
-                {
-                    "key": "field_5f50c66b56b55",
+            "sub_fields": [{
+                    "key": "field_5f71b106148c9",
                     "label": "Partie 1 • <span style='font-weight: normal; text-transform: initial'>Vignettes<\/span>",
                     "name": "",
                     "type": "accordion",
@@ -336,7 +326,7 @@
                     "endpoint": 0
                 },
                 {
-                    "key": "field_5f50c63d56b53",
+                    "key": "field_5f71b1162052e",
                     "label": "",
                     "name": "submenu_part_1",
                     "type": "group",
@@ -349,41 +339,37 @@
                         "id": ""
                     },
                     "layout": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_5f50c64c56b54",
-                            "label": "",
-                            "name": "clone_submenu_links",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "clone": [
-                                "field_5e393cd09c034"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }
-                    ]
+                    "sub_fields": [{
+                        "key": "field_5f71b1226da57",
+                        "label": "",
+                        "name": "clone_submenu_links",
+                        "type": "clone",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "clone": [
+                            "field_5e393cd09c034"
+                        ],
+                        "display": "seamless",
+                        "layout": "block",
+                        "prefix_label": 0,
+                        "prefix_name": 0
+                    }]
                 }
             ]
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
