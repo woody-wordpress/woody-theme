@@ -149,6 +149,16 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             $this->context['after_landswpr'] = !empty($this->context['page_parts']['after_landswpr']) ? $this->context['page_parts']['after_landswpr'] : '';
         }
 
+        $this->context['page_parts']['top_header'] .= '<rc-woody-search
+        url="http://esdemo.rc.prod:8081/wordpress/preprod/search/"
+        logo="' . get_stylesheet_directory() . '/logo.svg"
+        sitekey=' . WP_SITE_KEY . '
+        lang=' . pll_current_language() . '
+        open-button=".esSearch-button"
+        default-display="none"
+        ></rc-woody-search>';
+
+        console_log($this->context);
         /*********************************************
          * Compilation du bloc prix
          *********************************************/

@@ -92,7 +92,7 @@ class WoodyTheme_Shortcodes
         logo="' . get_stylesheet_directory() . '/logo.svg"
         sitekey=' . WP_SITE_KEY . '
         lang=' . pll_current_language() . '
-        open-button="esSearch-button"
+        open-button=".esSearch-button"
         default-display="block"
         ></rc-woody-search>';
 
