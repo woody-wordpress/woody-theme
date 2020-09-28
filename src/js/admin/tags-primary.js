@@ -1,6 +1,8 @@
 import $ from 'jquery';
 
 $('#post').each(function() {
+    console.log('toto', 'toto-x');
+
     var $this = $(this);
     var $taxonomiesBoxes = $this.find('#side-sortables .postbox .inside > .categorydiv:not(#taxonomy-page_type) div[id$="-all"] ');
     var $primaryTagsFields = $this.find('.acf-field-group.acf-field-5d7bada38eedf');
@@ -100,4 +102,21 @@ $('#post').each(function() {
     $primaryTaxFields.each(function() {
         acf.addAction('load_field/name=' + $(this).data('name'), setPrimaryTerms);
     });
+
+    // Vider le champ [taxonomy]_primary lorsqu'un tag principal est décoché
+
+    // $('.is-primary-term').each(function(){
+    //     $(this).find('input').on('click', function(){
+    //         console.log("click");
+    //         var checked = $(this).is(':checked');
+    //         console.log(checked);
+    //         if (!checked) {
+    //             var taxonomy = $(this).closest('.categorydiv').attr('id');
+    //             console.log(taxonomy, 'taxonomy');
+    //         }
+    //     });
+
+    // })
+
+    elements =
 });
