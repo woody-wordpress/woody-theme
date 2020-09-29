@@ -158,7 +158,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         default-display="none"
         ></rc-woody-search>';
 
-        console_log($this->context);
         /*********************************************
          * Compilation du bloc prix
          *********************************************/
