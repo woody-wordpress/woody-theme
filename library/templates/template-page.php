@@ -150,7 +150,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         }
 
         $this->context['page_parts']['top_header'] .= '<rc-woody-search
-        url="http://esdemo.rc.prod:8081/wordpress/preprod/search/"
+        url="https://webcomponents.cloudly.space/wordpress/preprod/search/"
         sitekey=' . WP_SITE_KEY . '
         lang=' . pll_current_language() . '
         open-button=".esSearch-button"
