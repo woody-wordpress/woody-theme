@@ -155,6 +155,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         lang=' . pll_current_language() . '
         open-button=".esSearch-button"
         default-display="none"
+        background="#71a294"
         ></rc-woody-search>';
 
         /*********************************************
