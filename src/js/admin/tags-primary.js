@@ -106,13 +106,19 @@ $('#post').each(function() {
 
 
     $(window).ready(function(){
-        elements = document.querySelectorAll('.is-primary-term');
+        var elements = document.querySelectorAll('.is-primary-term');
+        console.log(elements, 'elements');
 
-        for(let element in elements){
-            element.children[0].onclick = function(){
-                if(this.checked != "checked"){
-                    console.log('test');
-                }
+        for (let i = 0; i < elements.length; i++) {
+            let children = elements[i].children;
+            console.log(children, 'children');
+
+            if(children.length > 0){
+                children[0].onclick = function(){
+                    if(this.checked != "checked"){
+                        console.log('test');
+                    }
+                };
             }
         }
     });
