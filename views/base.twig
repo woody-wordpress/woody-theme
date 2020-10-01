@@ -48,6 +48,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 {% endspaceless %}
 </head>
 <body class="{{body_class}}">
+    {% if search_bar_V2 %}
+        {{ search_bar_V2 }}
+    {% endif %}
+
     {% if gtm|default %}
     {# GTM (noscript) #}
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ gtm }}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
