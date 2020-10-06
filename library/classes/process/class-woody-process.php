@@ -38,7 +38,7 @@ class WoodyTheme_WoodyProcess
     public function processWoodyLayouts($layout, $context)
     {
         $return = '';
-        $layout['default_marker'] = $context['default_marker'];
+        $layout['default_marker'] = !empty($context['default_marker']) ? $context['default_marker'] : '';
         // Traitements spécifique en fonction du type de layout
         switch ($layout['acf_fc_layout']) {
             case 'manual_focus':
@@ -113,10 +113,12 @@ class WoodyTheme_WoodyProcess
             case 'socialwall':
                 $layout['gallery_items'] = [];
                 if ($layout['socialwall_type'] == 'manual') {
-                    foreach ($layout['socialwall_manual'] as $key => $media_item) {
-                        // On ajoute une entrée "gallery_items" pour être compatible avec le tpl woody
-                        $layout['gallery_items'][] = $media_item;
-                        $layout['gallery_items'][$key]['attachment_more_data'] = $this->tools->getAttachmentMoreData($media_item['ID']);
+                    if (!empty($layout['socialwall_manual'])) {
+                        foreach ($layout['socialwall_manual'] as $key => $media_item) {
+                            // On ajoute une entrée "gallery_items" pour être compatible avec le tpl woody
+                            $layout['gallery_items'][] = $media_item;
+                            $layout['gallery_items'][$key]['attachment_more_data'] = $this->tools->getAttachmentMoreData($media_item['ID']);
+                        }
                     }
                 } elseif ($layout['socialwall_type'] == 'auto') {
                     // On récupère les images en fonction des termes sélectionnés
@@ -169,8 +171,16 @@ class WoodyTheme_WoodyProcess
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
             default:
-                $layout = apply_filters('woody_custom_layout', $layout);
-                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+
+                // On autorise le traitement des layouts depuis un code externe
+                $layout = apply_filters('woody_custom_layout', $layout, $context);
+
+                // On compile le $layout uniquement si ça n'a pas déjà été fait
+                if (is_array($layout)) {
+                    $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                } else {
+                    $return = $layout;
+                }
         }
         return $return;
     }
@@ -472,6 +482,11 @@ class WoodyTheme_WoodyProcess
                 // On récupère les données d'affichage personnalisables
                 $display = $this->tools->getDisplayOptions($section);
 
+                // On ajoute les class personnalisées de section dans la liste des class d'affichage
+                if (!empty($display['classes']) && !empty($section['section_class'])) {
+                    $display['classes'] .=  ' ' . $section['section_class'];
+                }
+
                 // On ajoute les 3 parties compilées d'une section + ses paramètres d'affichage
                 // puis on compile le tout dans le template de section Woody
                 $the_section = [
@@ -488,11 +503,26 @@ class WoodyTheme_WoodyProcess
                 // On récupère l'option "Masquer les sections vides"
                 $hide_empty_sections = get_field('hide_empty_sections', 'option');
 
-                // Si le contenu de la section est vide OU que l'option n'est pas cochée, on compile la section
-                if (!empty($the_section['layout']) || empty($hide_empty_sections)) {
+
+                if ($section['hide_section']) {
+                    $the_section['is_empty'] = true;
                     $return[] = \Timber::compile($context['woody_components']['section-section_full-tpl_01'], $the_section);
-                } elseif (is_user_logged_in()) { // Sinon, sinon on affiche un message à l'utilisateur connecté et rien à l'anonyme
-                    $return[] = \Timber::compile('parts/empty_section.twig', $the_section);
+                } else {
+                    if (!empty($the_section['layout'])) {
+                        $return[] = \Timber::compile($context['woody_components']['section-section_full-tpl_01'], $the_section);
+                    } else {
+                        if (!empty($hide_empty_sections)) {
+                            if (is_user_logged_in()) {
+                                // Si l'utilisateur est connecté, on compile le twig empty_section
+                                $return[] = \Timber::compile('parts/empty_section.twig', $the_section);
+                            } else {
+                                $the_section['is_empty'] = true;
+                                $return[] = \Timber::compile($context['woody_components']['section-section_full-tpl_01'], $the_section);
+                            }
+                        } else {
+                            $return[] = \Timber::compile($context['woody_components']['section-section_full-tpl_01'], $the_section);
+                        }
+                    }
                 }
             }
         }

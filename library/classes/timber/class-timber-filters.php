@@ -57,9 +57,11 @@ class WoodyTheme_Timber_Filters
         $twig->addFilter(new Twig_SimpleFilter('theRootAncestor', [$this, 'theRootAncestor']));
         $twig->addFilter(new Twig_SimpleFilter('pluralizeUnit', [$this, 'pluralizeUnit']));
         $twig->addFilter(new Twig_SimpleFilter('base64Encode', [$this, 'base64Encode']));
+        $twig->addFilter(new Twig_SimpleFilter('base64_encode', [$this, 'base64Encode']));
         $twig->addFilter(new Twig_SimpleFilter('seed', [$this, 'seed']));
         $twig->addFilter(new Twig_SimpleFilter('translate', [$this, 'translate']));
         $twig->addFilter(new Twig_SimpleFilter('json_encode', [$this, 'jsonEncode']));
+        $twig->addFilter(new Twig_SimpleFilter('zeroise', [$this, 'zeroise']));
 
         // Debug Woody
         $twig->addFilter(new Twig_SimpleFilter('dump', [$this, 'dump']));
@@ -87,6 +89,11 @@ class WoodyTheme_Timber_Filters
         }
     }
 
+    public function zeroise($value, $threshold)
+    {
+        return zeroise($value, $threshold);
+    }
+
     public function phoneClick($text)
     {
         return substr($text, 0, -2) . '<span class="hidden-number">▒▒</span>';
@@ -111,7 +118,7 @@ class WoodyTheme_Timber_Filters
                 return $text;
             }
             $totalLength = mb_strlen($ending);
-            $openTags = array();
+            $openTags = [];
             $truncate = '';
             preg_match_all('/(<\/?([\w+]+)[^>]*>)?([^<>]*)/', $text, $tags, PREG_SET_ORDER);
             foreach ($tags as $tag) {

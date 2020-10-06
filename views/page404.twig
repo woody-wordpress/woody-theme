@@ -4,9 +4,9 @@
 <main id="main-content" class="content-type-page {{ page_type|default }}">
     <div class="content-wrapper {{ page_terms|default('no-terms') }}">
         <div class="mobile-header hide-for-xlarge title-bar">
-            <a class="brand-logo" href="{{ site.url }}">
+            <div class="brand-logo obf" data-obf="{{ home_url|base64Encode }}">
                 {{ website_logo|default('Website logo') }}
-            </a>
+            </div>
         </div>
         <div class="page-section text-center">
             <h1 class="msg404">{{ content.title }}</h1>
@@ -48,12 +48,12 @@
                 </div>
             </div>
                 {% if content.btn %}
-                <a class="button marg-top-md marg-bottom-md" href="{{ site.url }}">{{ content.btn }}</a>
+                <div class="button marg-top-md marg-bottom-md obf" data-obf="{{ home_url|base64Encode }}">{{ content.btn }}</div>
                 {% endif %}
 
             {% else %}
-                <a class="button primary marg-top-md marg-bottom-md" href="{{ site.url }}">{{ __("Aller à la page d'accueil", "woody-theme") }}</a>
-                <a class="button secondary marg-top-md marg-bottom-md" href="{{ content.search }}">{{ __("Faire une recherche", "woody-theme") }}</a>
+                <div class="button primary marg-top-md marg-bottom-md obf" data-obf="{{ home_url|base64Encode }}">{{ __("Aller à la page d'accueil", "woody-theme") }}</div>
+                <div class="button secondary marg-top-md marg-bottom-md obf" data-obf="{{ content.search|base64Encode }}">{{ __("Faire une recherche", "woody-theme") }}</div>
             {% endif %}
 
         </div>

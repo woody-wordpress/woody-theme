@@ -124,9 +124,12 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['enabled_woody_options'] = WOODY_OPTIONS;
         $this->context['woody_access_staging'] = WOODY_ACCESS_STAGING;
 
+
+        $the_title = get_field('woodyseo_meta_title');
         // SEO Context
-        $this->context['title'] = (!empty(get_field('field_5d7f7dea20bb1'))) ? woody_untokenize(get_field('woodyseo_meta_title')) : get_the_title() . ' | ' . $this->context['site']['name'];
-        $this->context['title'] = apply_filters('woody_seo_edit_meta_string', $this->context['title']);
+
+        $this->context['title'] = (!empty($the_title)) ? woody_untokenize($the_title) : html_entity_decode(get_the_title()) . ' | ' . $this->context['site']['name'];
+        $this->context['title'] = apply_filters('woody_seo_transform_pattern', $this->context['title']);
         $this->context['metas'] = $this->setMetadata();
         $this->context['custom_meta'] = get_field('woody_custom_meta', 'options');
 
@@ -392,7 +395,7 @@ abstract class WoodyTheme_TemplateAbstract
             foreach ($woody_seo_data as $data_key => $data) {
                 if (is_string($data)) {
                     $woody_seo_data[$data_key] = trim($data);
-                    $data = apply_filters('woody_seo_edit_meta_string', $data);
+                    $data = apply_filters('woody_seo_transform_pattern', $data);
                 }
 
                 switch ($data_key) {
@@ -424,7 +427,7 @@ abstract class WoodyTheme_TemplateAbstract
                         if (!empty($data)) {
                             $return['og:title']['#attributes']['content'] = woody_untokenize($data);
                         } elseif (!empty(get_field('woodyseo_meta_title'))) {
-                            $return['og:title']['#attributes']['content'] = woody_untokenize(get_field('woodyseo_meta_title'));
+                            $return['og:title']['#attributes']['content'] = apply_filters('woody_seo_transform_pattern', woody_untokenize(get_field('woodyseo_meta_title')));
                         } else {
                             $return['og:title']['#attributes']['content'] = get_the_title() . ' | ' . $this->context['site']['name'];
                         }
@@ -465,7 +468,7 @@ abstract class WoodyTheme_TemplateAbstract
                         if (!empty($data)) {
                             $return['twitter:title']['#attributes']['content'] = woody_untokenize($data);
                         } elseif (!empty(get_field('woodyseo_meta_title'))) {
-                            $return['twitter:title']['#attributes']['content'] = woody_untokenize(get_field('woodyseo_meta_title'));
+                            $return['twitter:title']['#attributes']['content'] = apply_filters('woody_seo_transform_pattern', woody_untokenize(get_field('woodyseo_meta_title')));
                         } else {
                             $return['twitter:title']['#attributes']['content'] = get_the_title() . ' | ' . $this->context['site']['name'];
                         }
@@ -553,6 +556,10 @@ abstract class WoodyTheme_TemplateAbstract
             if (!empty($SubWoodyTheme_TemplateParts->website_logo)) {
                 $this->context['website_logo'] = $SubWoodyTheme_TemplateParts->website_logo;
             }
+
+            $pll_options = get_option('polylang');
+
+            $this->context['home_url'] = pll_home_url();
             $this->context['page_parts'] = $SubWoodyTheme_TemplateParts->getParts();
         }
     }
@@ -767,7 +774,7 @@ abstract class WoodyTheme_TemplateAbstract
 
             // Set a default template
             $tpl = apply_filters('favorites_block_tpl', null);
-            $template = $tpl['template'] ?: $this->context['woody_components']['woody_widgets-favorites_block-tpl_01'];
+            $template = !empty($tpl['template']) ? $tpl['template'] : $this->context['woody_components']['woody_widgets-favorites_block-tpl_01'];
 
             // Allow data override
             $data = apply_filters('favorites_block_data', $data);

@@ -165,6 +165,16 @@ textarea.notAllowed {
 .postbox {
     box-shadow: none;
     border: none;
+
+    [class^="handle-order"] {
+        display: none;
+    }
+
+    &-header {
+        .hndle {
+            flex-grow: inherit;
+        }
+    }
 }
 
 #side-sortables {
@@ -341,6 +351,7 @@ textarea.notAllowed {
     visibility: visible;
     background: rgba(17, 255, 108, 0.479);
 }
+
 
 @keyframes submitSlideIn {
     0% {

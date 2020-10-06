@@ -21,7 +21,6 @@ class WoodyTheme_Tinymce
 
         add_action('wp_ajax_woody_icons_list', [$this, 'woodyIconsList']);
         add_action('woody_theme_update', [$this, 'cleanTransient']);
-        add_action('woody_subtheme_update', [$this, 'cleanTransient']);
     }
 
     // Callback function to insert 'styleselect' into the $buttons array

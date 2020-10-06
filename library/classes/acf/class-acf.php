@@ -8,7 +8,6 @@
  * @since WoodyTheme 1.0.0
  */
 
-use Woody\Utils\Output;
 use WoodyLibrary\Library\WoodyLibrary\WoodyLibrary;
 
 class WoodyTheme_ACF
@@ -714,6 +713,7 @@ class WoodyTheme_ACF
                 'blocks-focus-tpl_506',
                 'blocks-focus-tpl_507',
                 'blocks-focus-tpl_508',
+                'blocks-focus-tpl_509',
                 'blocks-focus-tpl_601',
                 'blocks-focus-tpl_602',
                 'blocks-focus-tpl_605',

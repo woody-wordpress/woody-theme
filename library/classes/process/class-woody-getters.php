@@ -2,6 +2,7 @@
 
 namespace WoodyProcess\Getters;
 
+use Woody\Modules\GroupQuotation\GroupQuotation;
 use WoodyProcess\Process\WoodyTheme_WoodyProcess;
 use WoodyProcess\Tools\WoodyTheme_WoodyProcessTools;
 
@@ -130,13 +131,13 @@ class WoodyTheme_WoodyGetters
      * @return   items - Un tableau de données
      *
      */
-    public function getAutoFocusSheetData($wrapper)
+    public function getAutoFocusSheetData($wrapper, $playlist_params = [])
     {
         $items = [];
         if (!empty($wrapper['playlist_conf_id'])) {
             $confId = $wrapper['playlist_conf_id'];
             $lang = pll_current_language();
-            $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), array(), 'json');
+            $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), $playlist_params, 'json');
             if (!empty($playlist['items'])) {
                 foreach ($playlist['items'] as $key => $item) {
                     $wpSheetNode = apply_filters('woody_hawwwai_get_post_by_sheet_id', $item['sheetId'], $lang, ['publish']);
@@ -145,8 +146,8 @@ class WoodyTheme_WoodyGetters
                             $wpSheetNode = current($wpSheetNode);
                         }
 
-                        if ($wrapper['deal_mode']) {
-                            if(!empty($item["deals"])){
+                        if (!empty($wrapper['deal_mode'])) {
+                            if (!empty($item["deals"])) {
                                 foreach ($item["deals"]['list'] as $index => $deal) {
                                     $items['items'][] = $this->getTouristicSheetPreview($wrapper, $wpSheetNode->getPost(), $index);
                                 }
@@ -300,7 +301,14 @@ class WoodyTheme_WoodyGetters
                 $data['description'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($item, 'focus_description', $item, 'field_5b2bbbfaec6b2'), $item->ID);
             }
             if (in_array('price', $wrapper['display_elements'])) {
-                $data['the_price'] = get_field('field_5b6c670eb54f2', $item->ID);
+                $price_type = get_field('the_price_price_type', $item->ID);
+                if ($price_type == "component_based") {
+                    $groupQuotation = new GroupQuotation;
+                    $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d', $item);
+                    $data['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price'], $item);
+                } else {
+                    $data['the_price'] = get_field('field_5b6c670eb54f2', $item->ID);
+                }
             }
             if (in_array('duration', $wrapper['display_elements'])) {
                 $data['the_duration'] = get_field('field_5b6c5e7cb54ee', $item->ID);
@@ -470,7 +478,7 @@ class WoodyTheme_WoodyGetters
         if (!empty($wrapper['display_img'])) {
             $data['img'] = [
                 'resizer' => true,
-                'url' => (!empty($sheet['img']['url'])) ? $sheet['img']['url']['manual'] : '',
+                'url' => (!empty($sheet['img']['url']) && !empty($sheet['img']['url']['manual'])) ? str_replace('api.tourism-system.com', 'api.cloudly.space', $sheet['img']['url']['manual']) : '',
                 'alt' => (!empty($sheet['img']['alt'])) ? $sheet['img']['alt'] : '',
                 'title' => (!empty($sheet['img']['title'])) ? $sheet['img']['title'] : ''
             ];
@@ -538,10 +546,10 @@ class WoodyTheme_WoodyGetters
         if (!empty($sheet['bordereau'])) {
             if ($sheet['bordereau'] === 'HOT' or $sheet['bordereau'] == 'HPA') {
                 $rating = [];
-                for ($i = 0; $i <= $sheet['ratings'][0]['value']; $i++) {
+                for ($i = 0; $i < $sheet['ratings'][0]['value']; $i++) {
                     $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
                 }
-                if (is_array($wrapper['display_elements'])) {
+                if (!empty($wrapper['display_elements']) && is_array($wrapper['display_elements'])) {
                     if (in_array('sheet_rating', $wrapper['display_elements'])) {
                         $data['sheet_rating'] = implode('', $rating);
                     }
@@ -580,22 +588,20 @@ class WoodyTheme_WoodyGetters
      */
     public function getTopicPreview($wrapper, $item)
     {
-        $data = [];
-        $data['post_id'] = $item->ID;
-        $data['title'] = !empty($item->post_title) ? $item->post_title : '';
-        $data['subtitle'] = !empty($item->woody_topic_blogname) ? $item->woody_topic_blogname : '';
+        $data = [
+            'post_id'   => $item->ID,
+            'title'     => !empty($item->post_title) ? $item->post_title : '',
+            'subtitle'  => !empty($item->woody_topic_blogname) ? $item->woody_topic_blogname : ''
+        ];
 
         if (!empty($item->woody_topic_img) && !$item->woody_topic_attachment) {
-            $img = [
-                'url' => 'https://api.tourism-system.com/resize/crop/%width%/%height%/70/' . base64_encode($item->woody_topic_img) . '/image.jpg',
+            $data['img'] = [
+                'url' =>  'https://api.cloudly.space/resize/crop/%width%/%height%/75/' .  str_replace(array("+", "/"), array("-", "_"), base64_encode($item->woody_topic_img)) . '/image.jpg',
                 'resizer' => true
             ];
-            $data['img'] = $img;
         } elseif (!empty($item->woody_topic_attachment)) {
-            $url = !empty(wp_get_attachment_image_src($item->woody_topic_attachment)) ? wp_get_attachment_image_src($item->woody_topic_attachment)[0] : '';
-
             $data['img'] = [
-                'url' => $url,
+                'url' => !empty(wp_get_attachment_image_src($item->woody_topic_attachment)) ? wp_get_attachment_image_src($item->woody_topic_attachment)[0] : '',
                 'resizer' => true
             ];
         }

@@ -115,16 +115,7 @@ function rc_getVideoThumbnail($url, $type = '', $width = 427, $height = 240)
             break;
         }
 
-        // If not set 404
-        if (empty($image)) {
-            $image = 'https://api.tourism-system.com/static/assets/images/resizer/img_404.jpg';
-        }
-
-        // Get Thumbs by API
-        if (!empty($image) && strpos($image, 'http') !== false) {
-            $hash = str_replace(array("+", "/"), array("-", "_"), base64_encode($image));
-            $thumbnail = 'https://api.tourism-system.com/resize/crop/' . $width . '/' . $height . '/75/' . $hash . '/image.jpg';
-        }
+        $thumbnail = rc_getImageResizedFromApi($width, $height, $image);
     }
 
     return $thumbnail;
@@ -217,11 +208,15 @@ function rc_getImageStyleByApi($image_style, $image_path)
 * @param  [type] $image       [description]
 * @return [type]              [description]
 */
-function rc_getImageResizedFromApi($width, $height, $image_path)
+function rc_getImageResizedFromApi($width, $height, $image_path = null, $quality = '75')
 {
-    if (!empty($image_path) && strpos($image_path, 'http') !== false && strpos($image_path, 'rc-dev') == false) {
+    if (empty($image_path) || strpos($image_path, 'http') == false) {
+        $image_path = 'https://api.cloudly.space/static/assets/images/resizer/img_404.jpg';
+    }
+
+    if (strpos($image_path, 'rc-dev') == false) {
         $hash_path = str_replace(array("+", "/"), array("-", "_"), base64_encode($image_path));
-        $image_croped_path = 'https://api.tourism-system.com/resize/crop/' . $width . '/' . $height . '/75/' . $hash_path . '/image.jpg';
+        $image_croped_path = 'https://api.cloudly.space/resize/crop/' . $width . '/' . $height . '/' . $quality . '/' . $hash_path . '/image.jpg';
     } else {
         $image_croped_path = $image_path;
     }
@@ -283,7 +278,7 @@ function rc_getAlias($str, $charset='utf-8')
 * @param  [type] $default [description]
 * @return array          [description]
 */
-function rc_is($val, $keys = array(), $default = null)
+function rc_is($val, $keys = [], $default = null)
 {
     foreach ($keys as $key) {
         if (empty($val[$key])) {
@@ -315,7 +310,7 @@ function rc_xmlToArray($xmlstr)
 
 function rc_domnodeToArray($node)
 {
-    $output = array();
+    $output = [];
     switch ($node->nodeType) {
         case XML_CDATA_SECTION_NODE:
         case XML_TEXT_NODE:
@@ -328,7 +323,7 @@ function rc_domnodeToArray($node)
             if (isset($child->tagName)) {
                 $t = $child->tagName;
                 if (!isset($output[$t])) {
-                    $output[$t] = array();
+                    $output[$t] = [];
                 }
                 $output[$t][] = $v;
             } elseif ($v || $v === '0') {
@@ -340,7 +335,7 @@ function rc_domnodeToArray($node)
         }
         if (is_array($output)) {
             if ($node->attributes->length) {
-                $a = array();
+                $a = [];
                 foreach ($node->attributes as $attrName => $attrNode) {
                     $a[$attrName] = (string) $attrNode->value;
                 }

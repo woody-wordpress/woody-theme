@@ -75,8 +75,15 @@ class WoodyTheme_Plugins_Activation
                 // Enable
                 $this->activate_plugins[] = 'vcaching/vcaching.php';
 
+                if (WOODY_ACCESS_STAGING) {
+                    // Enable
+                    $this->activate_plugins[] = 'query-monitor/query-monitor.php';
+                } else {
+                    // Disable
+                    $this->deactivate_plugins[] = 'query-monitor/query-monitor.php';
+                }
+
                 // Disable
-                $this->deactivate_plugins[] = 'query-monitor/query-monitor.php';
                 $this->deactivate_plugins[] = 'wp-php-console/wp-php-console.php';
                 break;
         }

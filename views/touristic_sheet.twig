@@ -9,9 +9,9 @@
                                 {% endblock %} #}
         <main class="content-type-page"> <div class="content-wrapper">
             <div class="mobile-header hide-for-xlarge title-bar">
-                <a class="brand-logo" href="{{ site.url }}">
+                <div class="brand-logo obf" data-obf="{{ home_url|base64Encode }}">
                     {{ mobile_logo|default(website_logo) }}
-                </a>
+                </div>
             </div>
             {% if sheet_tourism.content|default %}
                 <div class="page-sheet-wrapper">

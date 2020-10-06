@@ -106,7 +106,7 @@ class WoodyTheme_Cleanup_Admin
 
         // Modification du lien de l'entrée "Créer"
         $new_content_node = $wp_admin_bar->get_node('new-content');
-        $new_content_node->href = pll_home_url() . 'wp/wp-admin/post-new.php?post_type=page';
+        $new_content_node->href = home_url() . 'wp/wp-admin/post-new.php?post_type=page';
         $wp_admin_bar->remove_menu('new-content');
         $wp_admin_bar->add_menu($new_content_node);
     }
@@ -157,12 +157,16 @@ class WoodyTheme_Cleanup_Admin
         }
     }
 
+    /**
+     * customMenusPage
+     *
+     * @deprecated since version 1.28.35
+     * @see WoodyTheme_Admin_Menus
+     *
+     */
     public function customMenusPage()
     {
-        $methodExist = class_exists('SubWoodyTheme_Admin') ? method_exists('SubWoodyTheme_Admin', 'addMenuMainPages') : false;
-
-
-        if (function_exists('acf_add_options_page')) {
+        if (function_exists('acf_add_options_page') && function_exists('acf_add_options_sub_page')) {
             $lang = pll_current_language();
 
             // Page principale
@@ -176,7 +180,10 @@ class WoodyTheme_Cleanup_Admin
                 'redirect'      => true,
             ));
 
-            if (function_exists('acf_add_options_sub_page') && $lang == PLL_DEFAULT_LANG && !$methodExist) {
+            // Permet d'être compatible avec tout les sites (anciens et nouveaux)
+            $legacyMenus = class_exists('SubWoodyTheme_Admin') && method_exists('SubWoodyTheme_Admin', 'addMenuMainPages') ? false : true;
+
+            if ($legacyMenus && $lang == PLL_DEFAULT_LANG) {
                 // Première sous-page
                 acf_add_options_sub_page(array(
                     'page_title'    => 'Menu principal',

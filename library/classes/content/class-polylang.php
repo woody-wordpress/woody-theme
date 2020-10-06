@@ -138,6 +138,7 @@ class WoodyTheme_Polylang
         __("Partager sur Instagram", 'woody-theme');
         __("Partager sur Pinterest", 'woody-theme');
         __("Partager par email", 'woody-theme');
+        __("Voir sur Instagram", 'woody-theme');
         __("Accès au menu principal", 'woody-theme');
         __("Que recherchez-vous ?", "woody-theme");
         __('Vous cherchez quelque chose ?', 'woody-theme');
@@ -153,6 +154,8 @@ class WoodyTheme_Polylang
         __("semaine", 'woody-theme');
         __("semaines", 'woody-theme');
         __("mois", 'woody-theme');
+        __("Sélection", 'woody-theme');
+        __("Page", 'woody-theme');
         __("Pages", 'woody-theme');
         __("Offre touristique", 'woody-theme');
         __("Désolé, aucun contenu touristique ne correspond à votre recherche", 'woody-theme');

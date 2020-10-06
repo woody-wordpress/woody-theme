@@ -22,7 +22,7 @@ class WoodyTheme_Seo
 
     protected function registerHooks()
     {
-        add_filter('woody_seo_edit_meta_string', [$this, 'woodySeoTransformPattern'], 10, 1);
+        add_filter('woody_seo_transform_pattern', [$this, 'woodySeoTransformPattern'], 10, 1);
         add_action('admin_menu', [$this, 'generateMenu'], 10);
         add_action('woody_migrate_yoast_post_meta', [$this, 'migrateYoastPostMeta'], 10, 1);
         add_action('woody_migrate_yoast_primary_tags', [$this, 'migrateYoastPrimaryTags'], 10, 2);

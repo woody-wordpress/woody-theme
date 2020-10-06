@@ -607,6 +607,14 @@
     }
 }
 
+
+// Type de publication
+#acf-group_5a61fa1e0e50c {
+    .postbox-header {
+        display: none;
+    }
+}
+
 .acf-tooltip>ul>li {
 
     >a[data-layout="files"],
@@ -741,12 +749,6 @@
     &:hover {
         background: darken(#23282d, 10%);
     }
-}
-
-
-// TODO: Remove this after responsive stuff done on stroies block
-.acf-fc-popup a[data-layout='story'] {
-    display: none;
 }
 
 .acf-fc-popup {

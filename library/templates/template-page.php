@@ -137,7 +137,12 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                             $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_embed_thumbnail_url'] = embedProviderThumbnail($slide['landswpr_slide_media']['landswpr_slide_embed']);
                         }
                     }
+
+                    if (!empty($slide['landswpr_slide_media']) && $slide['landswpr_slide_media']['landswpr_slide_media_type'] == 'img' && !empty($slide['landswpr_slide_media']['landswpr_slide_img'])) {
+                        $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img']['lazy'] = 'disabled';
+                    }
                 }
+
                 $this->context['home_slider'] = \Timber::compile($this->context['woody_components'][$home_slider['landswpr_woody_tpl']], $home_slider);
             }
 
@@ -444,7 +449,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     $bookblock['bookblock_playlists'][$pl_key]['pl_conf_id'] = $pl_confId;
                     if (!empty($pl_confId)) {
                         $pl_lang = pll_get_post_language($pl['pl_post_id']);
-                        $pl_params = apply_filters('woody_hawwwai_playlist_render', $pl_confId, $pl_lang, array(), 'json');
+                        $pl_params = apply_filters('woody_hawwwai_playlist_render', $pl_confId, $pl_lang, [], 'json');
                         $facets = (!empty($pl_params['filters'])) ? $pl_params['filters'] : '';
                         if (!empty($facets)) {
                             foreach ($facets as $facet) {
@@ -566,6 +571,11 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         // Si un identifiant de précochage est présent, on le passe à l'apirender
         if (!empty($autoselect_id)) {
             $query['autoselect_id'] = $autoselect_id;
+            $this->context['title'] .= sprintf(' | %s %s', __('Sélection', 'woody-theme'), $autoselect_id);
+        }
+
+        if (!empty($query['listpage']) && is_numeric($query['listpage'])) {
+            $this->context['title'] .= sprintf(' | %s %s', __('Page', 'woody-theme'), $query['listpage']);
         }
 
         // Get from Apirender
@@ -576,14 +586,43 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             $this->context['playlist_tourism']['confId'] = $playlistConfId;
         }
 
-        // Return template
-        if (empty($this->context['playlist_tourism']['content'])) {
-            $this->context['playlist_tourism']['content'] = '<center style="margin: 80px 0">Playlist non configurée</center>';
-            status_header('410');
+        // Add next and prev rel link
+        if (!empty($this->context['playlist_tourism']['hasNextPage'])) {
+            $listpage = filter_input(INPUT_GET, 'listpage', FILTER_VALIDATE_INT);
+            if (!empty($listpage) && $listpage != 1) {
+                $prev = $listpage-1;
+                $next = $listpage+1;
+                $this->context['metas']['prev'] = [
+                    '#tag' => 'link',
+                    '#attributes' => [
+                        'href' => $this->context['current_url'] . '?listpage=' . $prev,
+                        'rel' => "prev"
+                    ]
+                ];
+
+                $this->context['metas']['next'] = [
+                    '#tag' => 'link',
+                    '#attributes' => [
+                        'href' => $this->context['current_url'] . '?listpage=' . $next,
+                        'rel' => "next"
+                    ]
+                ];
+            } else {
+                $this->context['metas']['next'] = [
+                    '#tag' => 'link',
+                    '#attributes' => [
+                        'href' => $this->context['current_url'] . '?listpage=' . 2,
+                        'rel' => "next"
+                    ]
+                ];
+            }
         }
 
-        // handle api error
-        if (isset($this->context['playlist_tourism']['status'])) {
+        // Return template
+        if (empty($this->context['playlist_tourism']['content'])) {
+            $this->context['playlist_tourism']['content'] = '<center style="margin: 80px 0">Playlist vide</center>';
+            status_header('410');
+        } elseif (isset($this->context['playlist_tourism']['status'])) {
             $code = intval($this->context['playlist_tourism']['status']);
             status_header($code);
         }

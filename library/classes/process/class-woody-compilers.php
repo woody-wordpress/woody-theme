@@ -28,7 +28,7 @@ class WoodyTheme_WoodyCompilers
 
     public function registerHooks()
     {
-        add_action('save_post', [$this, 'cleanListFiltersTransients']);
+        add_action('save_post', [$this, 'savePost']);
     }
 
     /**
@@ -66,6 +66,9 @@ class WoodyTheme_WoodyCompilers
             case 'profile_focus':
                 $the_items = $this->getter->getProfileFocusData($wrapper);
             break;
+            // case 'auto_focus_rdbk':
+            //     $the_items = $this->getter->getRoadBookFocusData($wrapper);
+            // break;
         }
 
         if (!empty($the_items) && !empty($the_items['items']) && is_array($the_items['items'])) {
@@ -75,12 +78,18 @@ class WoodyTheme_WoodyCompilers
                 }
             }
 
+            if ($wrapper['acf_fc_layout'] == 'auto_focus_sheets') {
+                $the_items['block_titles'] = $this->tools->getFocusBlockTitles($wrapper, 'focus_block_title_');
+            } else {
+                $the_items['block_titles'] = $this->tools->getFocusBlockTitles($wrapper);
+            }
+
             $the_items['no_padding'] = (!empty($wrapper['focus_no_padding'])) ? $wrapper['focus_no_padding'] : '';
-            $the_items['block_titles'] = $this->tools->getFocusBlockTitles($wrapper);
             $the_items['display_button'] = (!empty($wrapper['display_button'])) ? $wrapper['display_button'] : false;
             $the_items['display_img'] = (!empty($wrapper['display_img'])) ? $wrapper['display_img'] : false;
             $the_items['default_marker'] = (!empty($wrapper['default_marker'])) ? $wrapper['default_marker'] : '';
             $the_items['visual_effects'] = $wrapper['visual_effects'];
+            $the_items['display_index'] = $wrapper['display_index'];
 
             // Responsive stuff
             if (!empty($wrapper['mobile_behaviour'])) {
@@ -178,7 +187,7 @@ class WoodyTheme_WoodyCompilers
                                 unset($wrapper['routes'][$key]['features'][$f_key]);
                             }
                         }
-
+                        $wrapper['routes'][$key]['features'] = array_values($wrapper['routes'][$key]['features']);
                         $wrapper['routes'][$key] = json_encode($wrapper['routes'][$key]);
                     }
                 } else {
@@ -339,12 +348,12 @@ class WoodyTheme_WoodyCompilers
         }
 
         // On crée/update l'option qui liste les transients pour pouvoir les supprimer lors d'un save_post
-        $transient_list = get_option('list_filters_cache');
+        $transient_list = get_option('woody_list_filters_cache');
         if (empty($transient_list)) {
-            add_option('list_filters_cache', [$transient_name]);
+            update_option('woody_list_filters_cache', [$transient_name], false);
         } elseif (!array_key_exists($transient_name, $transient_list)) {
             $transient_list[] = $transient_name;
-            update_option('list_filters_cache', $transient_list);
+            update_option('woody_list_filters_cache', $transient_list, false);
         }
 
         // On récupère les ids des posts non filtrés pour les passer au paramètre post__in de la query
@@ -423,15 +432,15 @@ class WoodyTheme_WoodyCompilers
         return $return;
     }
 
-    public function cleanListFiltersTransients()
+    public function savePost()
     {
-        $transient_list = get_option('list_filters_cache');
+        $transient_list = get_option('woody_list_filters_cache');
         if (!empty($transient_list)) {
             foreach ($transient_list as $transient) {
                 delete_transient($transient);
             }
         }
-        delete_option('list_filters_cache');
+        delete_option('woody_list_filters_cache');
     }
 
     /**
@@ -504,7 +513,8 @@ class WoodyTheme_WoodyCompilers
                 if (!empty($section['display_in_summary'])) {
                     $items[] = [
                         'title' => (!empty($section['section_summary_title'])) ? $section['section_summary_title'] : 'Section ' . $s_key,
-                        'anchor' => $permalink . '#pageSection-' . $s_key
+                        'anchor' => $permalink . '#pageSection-' . $s_key,
+                        'id' => '#pageSection-' . $s_key
                     ];
                 }
             }

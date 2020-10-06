@@ -715,6 +715,42 @@
                 "max": ""
             },
             {
+                "key": "field_5f19a1ef8e102",
+                "label": "Plus d'options",
+                "name": "",
+                "type": "accordion",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "open": 0,
+                "multi_expand": 1,
+                "endpoint": 0
+            },
+            {
+                "key": "field_5f19a154a4ee3",
+                "label": "Masquer la section",
+                "name": "hide_section",
+                "type": "true_false",
+                "instructions": "Permet de masquer temporairement une section (brouillon)",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "30",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
                 "key": "field_5ed7a10730085",
                 "label": "Afficher dans le sommaire",
                 "name": "display_in_summary",
@@ -738,7 +774,7 @@
                 "label": "Titre pour le sommaire",
                 "name": "section_summary_title",
                 "type": "text",
-                "instructions": "Titre court pour le bloc de sommaire",
+                "instructions": "",
                 "required": 0,
                 "conditional_logic": [
                     [{
@@ -748,7 +784,7 @@
                     }]
                 ],
                 "wrapper": {
-                    "width": "30",
+                    "width": "15",
                     "class": "",
                     "id": ""
                 },
@@ -757,6 +793,42 @@
                 "prepend": "",
                 "append": "",
                 "maxlength": ""
+            },
+            {
+                "key": "field_5f509ba3b8d5a",
+                "label": "Class css",
+                "name": "section_class",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "15",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5f19a252decfd",
+                "label": "FIN",
+                "name": "",
+                "type": "accordion",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "open": 0,
+                "multi_expand": 0,
+                "endpoint": 1
             },
             {
                 "key": "field_5b051c3b6717b",

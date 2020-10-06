@@ -10,11 +10,13 @@
             {{pocketsite_menu}}
         {% endif %}
         <div class="content-wrapper {{ page_terms|default('no-terms') }}">
-            <div class="mobile-header hide-for-xlarge title-bar">
-                <span class="brand-logo obf" data-obf="{{ site.url|base64Encode }}">
-                    {{ mobile_logo|default(website_logo) }}
-                </span>
-            </div>
+            {% block mobile_header %}
+                <div class="mobile-header hide-for-xlarge title-bar">
+                    <span class="brand-logo obf" data-obf="{{ home_url|base64Encode }}">
+                        {{ mobile_logo|default(website_logo) }}
+                    </span>
+                </div>
+            {% endblock %}
             {{ page_hero|default }}
 
             {{ page_parts.after_hero|default }}
@@ -86,11 +88,13 @@
                 </div>
                 {% endif %}
             {% endblock %}
-
             {% for key, section in the_sections %}
-                <div class="page-section page-section-{{ key }}" id="pageSection-{{ key }}">
-                    {{ section }}
-                </div>
+                {% if section is empty %}
+                {% else %}
+                    <div class="page-section page-section-{{ key }}" id="pageSection-{{ key }}">
+                        {{ section }}
+                    </div>
+                {% endif %}
             {% endfor %}
             {% if 'claims' in enabled_woody_options %}
                 <div class="claims-blocks-wrapper"></div>

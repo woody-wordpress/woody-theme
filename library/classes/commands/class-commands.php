@@ -9,7 +9,6 @@
 
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
-use Woody\Utils\Output;
 
 class WoodyTheme_Commands
 {
@@ -78,7 +77,7 @@ class WoodyTheme_Commands
 
     public function flush_twig()
     {
-        if (WP_ENV != 'dev') {
+        if (WP_ENV != 'dev' && !WOODY_TWIG_CACHE_DISABLE) {
             try {
                 $filesystem = new Filesystem();
                 if (!$filesystem->exists(WP_TIMBER_DIR)) {
@@ -97,7 +96,7 @@ class WoodyTheme_Commands
                 \WP_CLI::warning("Une erreur est survenue au moment de la création de " . $exception->getPath());
             }
         } else {
-            \WP_CLI::warning("Twig cache désactivé en DEV");
+            \WP_CLI::warning("Twig cache désactivé");
         }
     }
 
@@ -106,7 +105,9 @@ class WoodyTheme_Commands
         // Options
         $varnish_caching_enable = get_option('varnish_caching_enable');
         if (!$varnish_caching_enable) {
-            \WP_CLI::warning('Plugin Varnish non activé');
+            if (defined('WP_CLI') && WP_CLI) {
+                \WP_CLI::warning('Plugin Varnish non activé');
+            }
             return;
         }
 
@@ -145,10 +146,14 @@ class WoodyTheme_Commands
                         foreach ($errors as $error => $description) {
                             $noticeMessage .= ' - ' . $description;
                         }
-                        \WP_CLI::warning(['woody_flush_varnish' => $noticeMessage]);
+                        if (defined('WP_CLI') && WP_CLI) {
+                            \WP_CLI::warning(['woody_flush_varnish' => $noticeMessage]);
+                        }
                     }
                 } else {
-                    \WP_CLI::success(sprintf('woody_flush_varnish : %s (%s)', WP_SCHEME . '://' . $host, $lang));
+                    if (defined('WP_CLI') && WP_CLI) {
+                        \WP_CLI::success(sprintf('woody_flush_varnish : %s (%s)', WP_SCHEME . '://' . $host, $lang));
+                    }
                 }
             }
         }
@@ -156,7 +161,7 @@ class WoodyTheme_Commands
 
     public function flush_cloudflare()
     {
-        if (WP_ENV != 'prod' || !in_array('cdn', WOODY_OPTIONS) || empty(WOODY_CLOUDFLARE_URL) || empty(WOODY_CLOUDFLARE_ZONE) || empty(WOODY_CLOUDFLARE_TOKEN)) {
+        if (WP_ENV != 'prod' || empty(WOODY_CLOUDFLARE_URL) || empty(WOODY_CLOUDFLARE_ZONE) || empty(WOODY_CLOUDFLARE_TOKEN)) {
             \WP_CLI::warning('Plugin CDN CloudFlare non activé');
             return;
         }

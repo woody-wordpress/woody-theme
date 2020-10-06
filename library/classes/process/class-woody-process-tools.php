@@ -42,7 +42,7 @@ class WoodyTheme_WoodyProcessTools
     }
 
     // Permet de récuperer les valueur min et max d'un champ donné parmi tout le site
-    public function getMinMaxWoodyFieldValues($query_vars = array(), $field, $minormax = 'max')
+    public function getMinMaxWoodyFieldValues($query_vars = [], $field, $minormax = 'max')
     {
         $return = 0;
 
@@ -75,17 +75,17 @@ class WoodyTheme_WoodyProcessTools
      *
      */
 
-    public function getFocusBlockTitles($wrapper)
+    public function getFocusBlockTitles($wrapper, $prefix = '')
     {
         $data = [];
 
-        $data['title'] = (!empty($wrapper['title'])) ? $wrapper['title'] : '';
-        $data['pretitle'] = (!empty($wrapper['pretitle'])) ? $wrapper['pretitle'] : '';
-        $data['subtitle'] = (!empty($wrapper['subtitle'])) ? $wrapper['subtitle'] : '';
-        $data['icon_type'] = (!empty($wrapper['icon_type'])) ? $wrapper['icon_type'] : '';
-        $data['icon_img'] = (!empty($wrapper['icon_img'])) ? $wrapper['icon_img'] : '';
-        $data['woody_icon'] = (!empty($wrapper['woody_icon'])) ? $wrapper['woody_icon'] : '';
-        $data['description'] = (!empty($wrapper['description'])) ? $wrapper['description'] : '';
+        $data['title'] = (!empty($wrapper[$prefix . 'title'])) ? $wrapper[$prefix . 'title'] : '';
+        $data['pretitle'] = (!empty($wrapper[$prefix . 'pretitle'])) ? $wrapper[$prefix . 'pretitle'] : '';
+        $data['subtitle'] = (!empty($wrapper[$prefix . 'subtitle'])) ? $wrapper[$prefix . 'subtitle'] : '';
+        $data['icon_type'] = (!empty($wrapper[$prefix . 'icon_type'])) ? $wrapper[$prefix . 'icon_type'] : '';
+        $data['icon_img'] = (!empty($wrapper[$prefix . 'icon_img'])) ? $wrapper[$prefix . 'icon_img'] : '';
+        $data['woody_icon'] = (!empty($wrapper[$prefix . 'woody_icon'])) ? $wrapper[$prefix . 'woody_icon'] : '';
+        $data['description'] = (!empty($wrapper[$prefix . 'description'])) ? $wrapper[$prefix . 'description'] : '';
         $data['fullwidth'] = (!empty($wrapper['focus_block_title_fullwidth'])) ? 'fullwidth' : false;
         if (!empty($wrapper['focus_buttons']) && !empty($wrapper['focus_buttons']['links'])) {
             $data['focus_buttons'] = $wrapper['focus_buttons'];
@@ -178,37 +178,31 @@ class WoodyTheme_WoodyProcessTools
      * @return   attachements - Un tableau d'objets images au format "ACF"
      *
      */
-    public function getAttachmentsByTerms($taxonomy, $terms = array(), $query_args = array())
+    public function getAttachmentsByTerms($taxonomy, $terms = [], $query_args = [])
     {
-
-        // On définit certains arguments par défaut pour la requête
-        $default_args = [
-            'size' => -1,
-            'operator' => 'IN',
-            'relation' => 'OR',
-            'post_mime_type' => 'image' // Could be image/gif for gif only, video, video/mp4, application, application.pdf, ...
-        ];
-        $query_args = array_merge($default_args, $query_args);
-
         // On créé la requête
-        $get_attachments = [
-            'post_type'      => 'attachment',
+        $default_args = [
+            'order' => 'DESC',
+            'orderby' => 'date',
+            'post_type' => 'attachment',
             'post_status' => 'inherit',
-            'post_mime_type' => $query_args['post_mime_type'],
-            'posts_per_page' => $query_args['size'],
+            'post_mime_type' => 'image',
+            'posts_per_page' => 14,
             'nopaging' => true,
             'tax_query' => array(
                 array(
                     'taxonomy' => $taxonomy,
                     'terms' => $terms,
                     'field' => 'term_id',
-                    'relation' => $query_args['relation'],
-                    'operator' => $query_args['operator']
+                    'relation' => 'OR',
+                    'operator' => 'IN'
                 )
             )
         ];
 
-        $attachments = new \WP_Query($get_attachments);
+        $query_args = array_merge($default_args, $query_args);
+        $attachments = new \WP_Query($query_args);
+
         $acf_attachements = [];
         foreach ($attachments->posts as $key => $attachment) {
             // On transforme chacune des images en objet image ACF pour être compatible avec le tpl Woody
@@ -303,15 +297,14 @@ class WoodyTheme_WoodyProcessTools
         }
 
         if (!empty($post_id)) {
-            $confId = get_field('playlist_conf_id', $post_id);
-            if (!empty($confId)) {
-                $playlist_count = apply_filters('woody_hawwwai_playlist_count', $confId, pll_current_language(), array());
-            }
-
             $patterns = ['%nombre%', '%playlist_count%'];
 
             foreach ($patterns as $pattern) {
                 if (strpos($string, $pattern) !== false) {
+                    $confId = get_field('playlist_conf_id', $post_id);
+                    if (!empty($confId)) {
+                        $playlist_count = apply_filters('woody_hawwwai_playlist_count', $confId, pll_current_language(), []);
+                    }
                     $string = str_replace($pattern, $playlist_count, $string);
                 }
             }
@@ -379,11 +372,11 @@ class WoodyTheme_WoodyProcessTools
         $sheet = [];
         $raw_item = get_field('touristic_raw_item', $post->ID);
 
-        if (empty($raw_item)) {
+        if (!empty($raw_item)) {
             $sheet = json_decode(base64_decode($raw_item), true);
         } else {
             $sheet_id = get_field('touristic_sheet_id', $post->ID);
-            $items = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $current_lang, array(), 'json', 'item');
+            $items = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $current_lang, [], 'json', 'item');
 
             if (!empty($items['items']) && is_array($items['items'])) {
                 $sheet = current($items['items']);

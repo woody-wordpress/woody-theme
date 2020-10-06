@@ -263,8 +263,8 @@ class WoodyTheme_Taxonomy
     public function getModelsForTerm()
     {
         $posts = [
-            'posts' => array(),
-            'term' => array()
+            'posts' => [],
+            'term' => []
         ];
 
         $term_id = filter_input(INPUT_POST, 'term_id', FILTER_VALIDATE_INT);
