@@ -269,7 +269,7 @@
         {
             "key": "field_5d8f242f92761",
             "label": "Exclure de la recherche globale du site",
-            "name": "woodyseo_es",
+            "name": "woody_no_es",
             "type": "true_false",
             "instructions": "",
             "required": 0,
