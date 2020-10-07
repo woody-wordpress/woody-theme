@@ -62,6 +62,15 @@ $('#post').each(function() {
         $el.parent('.selectit').parent('li').append('<span class="primary-toggle unset-primary-term hide" data-term-id="' + $el.val() + '"><small>Principal<small></span>');
     }
 
+
+    var unsetPrimaryTerm = function(termCheckbox) {
+        let $term = termCheckbox.closest('li');
+        if ($term.find('.is-primary-term').length > 0) {
+            $term.find('.unset-primary-term').trigger('click');
+            $term.find('.set-primary-term').addClass('hide');
+        }
+    }
+
     // Pour chacune des metaboxes de taxonomie, on créé les boutons d'action
     $taxonomiesBoxes.each(function() {
         var $taxonomyBox = $(this);
@@ -74,22 +83,13 @@ $('#post').each(function() {
 
             $termCheckbox.click(function() {
                 displayTermPrimaryButton($termCheckbox, $taxonomyBox);
+                unsetPrimaryTerm($termCheckbox);
             });
         });
 
     });
 
     primaryTermButtonsActions();
-
-
-    var unsetPrimaryTerm = function(){
-        console.log('click unset');
-        var $this = $(this);
-        var $term = $(this).closest('li');
-        $term.find('.unset-primary-term').trigger('click');
-        $term.find('.set-primary-term').addClass('hide');
-        $this.unbind('click', unsetPrimaryTerm);
-    }
 
     // Si un tag primaire est sélectionné, on l'affiche en tant que tel dans la metabox
     var setPrimaryTerms = function(field) {
@@ -102,11 +102,6 @@ $('#post').each(function() {
                 $(this).find('.selectit').addClass('is-primary-term');
                 $(this).find('.set-primary-term').addClass('hide');
                 $(this).find('.unset-primary-term').removeClass('hide');
-
-                // Vider le champ [taxonomy]_primary lorsqu'un tag principal est décoché
-                $(this).find('input').click(function(){
-                    unsetPrimaryTerm();
-                });
             }
         });
     }
