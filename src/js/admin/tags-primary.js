@@ -81,6 +81,16 @@ $('#post').each(function() {
 
     primaryTermButtonsActions();
 
+
+    var unsetPrimaryTerm = function(){
+        console.log('click unset');
+        var $this = $(this);
+        var $term = $(this).closest('li');
+        $term.find('.unset-primary-term').trigger('click');
+        $term.find('.set-primary-term').addClass('hide');
+        $this.unbind('click', unsetPrimaryTerm);
+    }
+
     // Si un tag primaire est sélectionné, on l'affiche en tant que tel dans la metabox
     var setPrimaryTerms = function(field) {
         var $el = field.$el,
@@ -92,6 +102,11 @@ $('#post').each(function() {
                 $(this).find('.selectit').addClass('is-primary-term');
                 $(this).find('.set-primary-term').addClass('hide');
                 $(this).find('.unset-primary-term').removeClass('hide');
+
+                // Vider le champ [taxonomy]_primary lorsqu'un tag principal est décoché
+                $(this).find('input').click(function(){
+                    unsetPrimaryTerm();
+                });
             }
         });
     }
@@ -100,26 +115,5 @@ $('#post').each(function() {
     var $primaryTaxFields = $('.acf-field-5d7bada38eedf').find('.acf-field[data-name^="primary_"]');
     $primaryTaxFields.each(function() {
         acf.addAction('load_field/name=' + $(this).data('name'), setPrimaryTerms);
-    });
-
-    // Vider le champ [taxonomy]_primary lorsqu'un tag principal est décoché
-
-
-    $(window).ready(function(){
-        var elements = document.querySelectorAll('.is-primary-term');
-        console.log(elements, 'elements');
-
-        for (let i = 0; i < elements.length; i++) {
-            let children = elements[i].children;
-            console.log(children, 'children');
-
-            if(children.length > 0){
-                children[0].onclick = function(){
-                    if(this.checked != "checked"){
-                        console.log('test');
-                    }
-                };
-            }
-        }
     });
 });
