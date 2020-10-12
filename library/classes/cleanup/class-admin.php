@@ -40,6 +40,9 @@ class WoodyTheme_Cleanup_Admin
             add_action('pre_get_posts', [$this, 'custom_pre_get_posts']);
 
             // add_action('admin_bar_menu', [$this, 'cleanupAdminBarMenu'], 99);
+
+            add_filter('page_row_actions', [$this, 'removeRowActions'], 11, 1);
+            add_filter('bulk_actions-edit-short_link', [$this, 'removeBulkActions'], 11, 1);
         }
     }
 
@@ -157,12 +160,16 @@ class WoodyTheme_Cleanup_Admin
         }
     }
 
+    /**
+     * customMenusPage
+     *
+     * @deprecated since version 1.28.35
+     * @see WoodyTheme_Admin_Menus
+     *
+     */
     public function customMenusPage()
     {
-        $methodExist = class_exists('SubWoodyTheme_Admin') ? method_exists('SubWoodyTheme_Admin', 'addMenuMainPages') : false;
-
-
-        if (function_exists('acf_add_options_page')) {
+        if (function_exists('acf_add_options_page') && function_exists('acf_add_options_sub_page')) {
             $lang = pll_current_language();
 
             // Page principale
@@ -176,7 +183,10 @@ class WoodyTheme_Cleanup_Admin
                 'redirect'      => true,
             ));
 
-            if (function_exists('acf_add_options_sub_page') && $lang == PLL_DEFAULT_LANG && !$methodExist) {
+            // Permet d'être compatible avec tout les sites (anciens et nouveaux)
+            $legacyMenus = class_exists('SubWoodyTheme_Admin') && method_exists('SubWoodyTheme_Admin', 'addMenuMainPages') ? false : true;
+
+            if ($legacyMenus && $lang == PLL_DEFAULT_LANG) {
                 // Première sous-page
                 acf_add_options_sub_page(array(
                     'page_title'    => 'Menu principal',
@@ -247,5 +257,30 @@ class WoodyTheme_Cleanup_Admin
             $translated = 'Code HTML';
         }
         return $translated;
+    }
+
+    /**
+     * Franck Delaunay
+     * On retire des options selon le post_type
+     */
+    public function removeRowActions($actions)
+    {
+        if (get_post_type() == "short_link") {
+            unset($actions['clone']);
+            unset($actions['edit_as_new_draft']);
+        }
+
+        return $actions;
+    }
+
+    /**
+     * Franck Delaunay
+     * On retire des actions de masse du sélecteur
+     */
+    public function removeBulkActions($actions)
+    {
+        unset($actions['duplicate_post_clone']);
+
+        return $actions;
     }
 }

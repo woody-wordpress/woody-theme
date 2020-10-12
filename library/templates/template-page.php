@@ -139,7 +139,12 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                             $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_embed_thumbnail_url'] = embedProviderThumbnail($slide['landswpr_slide_media']['landswpr_slide_embed']);
                         }
                     }
+
+                    if (!empty($slide['landswpr_slide_media']) && $slide['landswpr_slide_media']['landswpr_slide_media_type'] == 'img' && !empty($slide['landswpr_slide_media']['landswpr_slide_img'])) {
+                        $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img']['lazy'] = 'disabled';
+                    }
                 }
+
                 $this->context['home_slider'] = \Timber::compile($this->context['woody_components'][$home_slider['landswpr_woody_tpl']], $home_slider);
             }
 
@@ -440,6 +445,38 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         // save confId
         if (!empty($playlistConfId) && is_array($this->context['playlist_tourism'])) {
             $this->context['playlist_tourism']['confId'] = $playlistConfId;
+        }
+
+        // Add next and prev rel link
+        if (!empty($this->context['playlist_tourism']['hasNextPage'])) {
+            $listpage = filter_input(INPUT_GET, 'listpage', FILTER_VALIDATE_INT);
+            if (!empty($listpage) && $listpage != 1) {
+                $prev = $listpage-1;
+                $next = $listpage+1;
+                $this->context['metas']['prev'] = [
+                    '#tag' => 'link',
+                    '#attributes' => [
+                        'href' => $this->context['current_url'] . '?listpage=' . $prev,
+                        'rel' => "prev"
+                    ]
+                ];
+
+                $this->context['metas']['next'] = [
+                    '#tag' => 'link',
+                    '#attributes' => [
+                        'href' => $this->context['current_url'] . '?listpage=' . $next,
+                        'rel' => "next"
+                    ]
+                ];
+            } else {
+                $this->context['metas']['next'] = [
+                    '#tag' => 'link',
+                    '#attributes' => [
+                        'href' => $this->context['current_url'] . '?listpage=' . 2,
+                        'rel' => "next"
+                    ]
+                ];
+            }
         }
 
         // Return template

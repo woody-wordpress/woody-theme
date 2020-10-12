@@ -422,7 +422,7 @@ abstract class WoodyTheme_TemplateAbstract
                         if (!empty($data)) {
                             $return['og:title']['#attributes']['content'] = woody_untokenize($data);
                         } elseif (!empty(get_field('woodyseo_meta_title'))) {
-                            $return['og:title']['#attributes']['content'] = woody_untokenize(get_field('woodyseo_meta_title'));
+                            $return['og:title']['#attributes']['content'] = apply_filters('woody_seo_transform_pattern', woody_untokenize(get_field('woodyseo_meta_title')));
                         } else {
                             $return['og:title']['#attributes']['content'] = get_the_title() . ' | ' . $this->context['site']['name'];
                         }
@@ -463,7 +463,7 @@ abstract class WoodyTheme_TemplateAbstract
                         if (!empty($data)) {
                             $return['twitter:title']['#attributes']['content'] = woody_untokenize($data);
                         } elseif (!empty(get_field('woodyseo_meta_title'))) {
-                            $return['twitter:title']['#attributes']['content'] = woody_untokenize(get_field('woodyseo_meta_title'));
+                            $return['twitter:title']['#attributes']['content'] = apply_filters('woody_seo_transform_pattern', woody_untokenize(get_field('woodyseo_meta_title')));
                         } else {
                             $return['twitter:title']['#attributes']['content'] = get_the_title() . ' | ' . $this->context['site']['name'];
                         }
@@ -551,7 +551,10 @@ abstract class WoodyTheme_TemplateAbstract
             if (!empty($SubWoodyTheme_TemplateParts->website_logo)) {
                 $this->context['website_logo'] = $SubWoodyTheme_TemplateParts->website_logo;
             }
-            $this->context['home_url'] = home_url();
+
+            $pll_options = get_option('polylang');
+
+            $this->context['home_url'] = pll_home_url();
             $this->context['page_parts'] = $SubWoodyTheme_TemplateParts->getParts();
         }
     }
