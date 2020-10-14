@@ -212,6 +212,48 @@ class WoodyTheme_WoodyProcessTools
         return $acf_attachements;
     }
 
+    public function getAttachmentsByMultipleTerms($term_ids, $andor = 'OR', $limit = 9)
+    {
+        $return = [];
+
+        $tax_query = [];
+        $custom_tax = [];
+        foreach ($term_ids as $term_id) {
+            $term = get_term($term_id);
+            if (!empty($term) && !is_wp_error($term) && is_object($term)) {
+                $custom_tax[$term->taxonomy][] = $term_id;
+            }
+        }
+
+        foreach ($custom_tax as $taxo => $terms) {
+            foreach ($terms as $term) {
+                $tax_query[] = array(
+                    'taxonomy' => $taxo,
+                    'terms' => [$term],
+                    'field' => 'term_id',
+                    'operator' => 'IN'
+                );
+            }
+        }
+
+
+        $query_results = new \WP_Query(array(
+            'posts_per_page'    => $limit,
+            'post_type'         => 'attachment',
+            'post_status'       => 'publish',
+            'tax_query'         => array(
+                'relation' =>  $andor,
+                $tax_query[0]
+            )
+        ));
+
+        foreach ($query_results->posts as $post) {
+            $return[] = acf_get_attachment($post);
+        }
+
+        return $return;
+    }
+
     /**
      *
      * Nom : formatVisualEffectData
