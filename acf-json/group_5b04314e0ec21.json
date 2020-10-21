@@ -18,22 +18,57 @@
             "endpoint": 0
         },
         {
+            "key": "field_5f869edef5d53",
+            "label": "Type de galerie",
+            "name": "gallery_type",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "manual": "Manuelle",
+                "auto": "Automatique"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "manual",
+            "layout": "vertical",
+            "return_format": "value",
+            "translations": "copy_once",
+            "save_other_choice": 0
+        },
+        {
             "key": "field_5b04314f27b84",
             "label": "Photos de la galerie",
             "name": "gallery_items",
             "type": "gallery",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5f869edef5d53",
+                        "operator": "==",
+                        "value": "manual"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "hide-label",
                 "id": ""
             },
-            "min": "",
-            "max": "",
+            "return_format": "array",
+            "preview_size": "medium",
             "insert": "append",
             "library": "all",
+            "min": "",
+            "max": "",
             "min_width": 640,
             "min_height": "",
             "min_size": "",
@@ -41,8 +76,101 @@
             "max_height": "",
             "max_size": "",
             "mime_types": "jpg, jpeg, png, gif",
-            "return_format": "array",
-            "preview_size": "medium"
+            "translations": "copy_once"
+        },
+        {
+            "key": "field_5f869fa8f5d54",
+            "label": "Tags",
+            "name": "gallery_tags",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5f869edef5d53",
+                        "operator": "==",
+                        "value": "auto"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "choices": [],
+            "default_value": [],
+            "allow_null": 0,
+            "multiple": 1,
+            "ui": 1,
+            "ajax": 0,
+            "return_format": "value",
+            "translations": "copy_once",
+            "placeholder": ""
+        },
+        {
+            "key": "field_5f86a0c3f5d55",
+            "label": "Si les images sont tagués avec :",
+            "name": "gallery_taxonomy_terms_andor",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5f869edef5d53",
+                        "operator": "==",
+                        "value": "auto"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "OR": "un des termes sélectionnés",
+                "AND": "tous les termes sélectionnés"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "OR",
+            "layout": "horizontal",
+            "return_format": "value",
+            "translations": "copy_once",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_5f86a177f5d56",
+            "label": "Nombre d'éléments",
+            "name": "gallery_count",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5f869edef5d53",
+                        "operator": "==",
+                        "value": "auto"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": "",
+            "max": "",
+            "step": "",
+            "translations": "copy_once"
         },
         {
             "key": "field_5b04475363df1",
