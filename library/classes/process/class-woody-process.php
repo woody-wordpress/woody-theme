@@ -78,6 +78,8 @@ class WoodyTheme_WoodyProcess
                 break;
             case 'gallery':
                 // Ajout des données Instagram + champs personnalisés dans le contexte des images
+                $layout['gallery_type'] = !empty($layout['gallery_type']) ? $layout['gallery_type'] : "manual";
+
                 switch ($layout['gallery_type']) {
                     case 'auto':
                         $layout['gallery_items'] = $this->tools->getAttachmentsByMultipleTerms($layout["gallery_tags"], $layout['gallery_taxonomy_terms_andor'], $layout['gallery_count']);
