@@ -46,6 +46,9 @@ class WoodyTheme_ACF
         add_filter('acf/load_field/name=list_filter_taxonomy', [$this, 'pageTaxonomiesLoadField']);
         add_filter('acf/load_value/name=list_filter_taxonomy', [$this, 'termsLoadValue'], 10, 3);
 
+        add_filter('acf/load_field/name=gallery_tags', [$this, 'focusedTaxonomyTermsLoadField']);
+        add_filter('acf/load_value/name=gallery_tags', [$this, 'termsLoadValue'], 10, 3);
+
         add_filter('acf/load_field/name=display_elements', [$this, 'displayElementLoadField'], 10, 3);
 
         add_filter('acf/fields/google_map/api', [$this, 'acfGoogleMapKey']);
