@@ -456,7 +456,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $this->context['metas']['prev'] = [
                     '#tag' => 'link',
                     '#attributes' => [
-                        'href' => $this->context['current_url'] . '?listpage=' . $prev,
+                        'href' => $prev != 1 ? $this->context['current_url'] . '?listpage=' . $prev : $this->context['current_url'],
                         'rel' => "prev"
                     ]
                 ];
