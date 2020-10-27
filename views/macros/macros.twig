@@ -12,14 +12,25 @@
 
 {# Lien #}
 {% macro link(item, class, with_title = true) %}
-    <a href="{{ item.link.url }}" target="{{ item.link.target|default('_self') }}" title="{{ item.link.title }}" class="{{ class }}">
-        {% if item.woody_icon %}
-            {{ _self.icon(item.woody_icon) }}
-        {% endif %}
-        {% if with_title %}
-            {{ _self.title(item.link.title) }}
-        {% endif %}
-    </a>
+    {% if item.link %}
+        <a href="{{ item.link.url }}" target="{{ item.link.target|default('_self') }}" title="{{ item.link.title }}" class="{{ class }}">
+            {% if item.woody_icon %}
+                {{ _self.icon(item.woody_icon) }}
+            {% endif %}
+            {% if with_title %}
+                {{ _self.title(item.link.title) }}
+            {% endif %}
+        </a>
+    {% else %}
+        <a href="{{ item.url }}" target="{{ item.target|default('_self') }}" title="{{ item.title }}" class="{{ class }}">
+            {% if item.woody_icon %}
+                {{ _self.icon(item.woody_icon) }}
+            {% endif %}
+            {% if with_title %}
+                {{ _self.title(item.title) }}
+            {% endif %}
+        </a>
+    {% endif %}    
 {% endmacro %}
 
 {# Menu #}
