@@ -1,0 +1,32 @@
+{# see https://twig.symfony.com/doc/1.x/tags/macro.html #}
+
+{# Titre #}
+{% macro title(name) %}
+    <span>{{ name }}</span>
+{% endmacro %}
+
+{# Icône #}
+{% macro icon(class) %}
+    <span class="wicon {{ class }}"></span>
+{% endmacro %}
+
+{# Lien #}
+{% macro link(item, class, with_title = true) %}
+    <a href="{{ item.link.url }}" target="{{ item.link.target|default('_self') }}" title="{{ item.link.title }}" class="{{ class }}">
+        {% if item.woody_icon %}
+            {{ _self.icon(item.woody_icon) }}
+        {% endif %}
+        {% if with_title %}
+            {{ _self.title(item.link.title) }}
+        {% endif %}
+    </a>
+{% endmacro %}
+
+{# Menu #}
+{% macro menu(menu_name, menu_class, link_class, with_title = true) %}
+    <ul class="menu {{ menu_class }}">
+        {% for item in menu_name.links %}
+            <li>{{ _self.link(item, link_class, with_title, tooltip) }}</li>
+        {% endfor %}
+    </ul>
+{% endmacro %}

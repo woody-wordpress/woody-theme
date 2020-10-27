@@ -334,7 +334,7 @@ class Admin_Menus
                     'key' => $key,
                     'name' => $name,
                     'type' => 'group',
-                    'sub_fields' => $sub_fields[$index]['sub_fields']
+                    'sub_fields' => (!empty($sub_fields[$index]['sub_fields'])) ? $sub_fields[$index]['sub_fields'] : ''
                 ];
                 $index+= 2;
             }
