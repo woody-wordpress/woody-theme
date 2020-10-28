@@ -550,11 +550,13 @@
     }
 }
 
+//TODO: Ajouter la classe "message-button" aux identifiants
 // Boutons préfilter la playlist (liens rapides) + paramètres TM
 .acf-field-5c7f99013d21d,
 .acf-field-5c7e764fb183b,
 .acf-field-5bd023a8daa52,
-.acf-field-5c989085888ee {
+.acf-field-5c989085888ee,
+.message-button {
     .acf-input {
         background: #0073aa;
         color: #fff;
@@ -584,7 +586,8 @@
     }
 }
 
-.acf-field-5c989085888ee {
+.acf-field-5c989085888ee,
+.acf-field-5f99867a5cbc6 {
     .acf-input:before {
         content: '\f230';
     }

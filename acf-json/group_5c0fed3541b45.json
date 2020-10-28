@@ -1,7 +1,8 @@
 {
     "key": "group_5c0fed3541b45",
     "title": "Paramètres Woody",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5e43ca87a2e3e",
             "label": "Paramètres généraux",
             "name": "",
@@ -107,29 +108,12 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
-                "key": "field_5c10c08f62d6d",
-                "label": "Pages suggérées",
-                "name": "suggest_pages",
-                "type": "repeater",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "collapsed": "",
-                "min": 0,
-                "max": 4,
-                "layout": "block",
-                "button_label": "Ajouter une suggestion",
-                "sub_fields": [{
-                    "key": "field_5c10c0a162d6e",
-                    "label": "Page",
-                    "name": "suggest_page",
-                    "type": "post_object",
+            "sub_fields": [
+                {
+                    "key": "field_5c10c08f62d6d",
+                    "label": "Pages suggérées",
+                    "name": "suggest_pages",
+                    "type": "repeater",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -138,16 +122,37 @@
                         "class": "",
                         "id": ""
                     },
-                    "post_type": [
-                        "page"
-                    ],
-                    "taxonomy": "",
-                    "allow_null": 1,
-                    "multiple": 0,
-                    "return_format": "id",
-                    "ui": 1
-                }]
-            }]
+                    "collapsed": "",
+                    "min": 0,
+                    "max": 4,
+                    "layout": "block",
+                    "button_label": "Ajouter une suggestion",
+                    "sub_fields": [
+                        {
+                            "key": "field_5c10c0a162d6e",
+                            "label": "Page",
+                            "name": "suggest_page",
+                            "type": "post_object",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "post_type": [
+                                "page"
+                            ],
+                            "taxonomy": "",
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "return_format": "id",
+                            "ui": 1
+                        }
+                    ]
+                }
+            ]
         },
         {
             "key": "field_5d039af8a226f",
@@ -377,14 +382,69 @@
             },
             "default_value": "",
             "placeholder": "https:\/\/example.disqus.com"
+        },
+        {
+            "key": "field_5f99864d5cbc5",
+            "label": "Touristic maps",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5f99867a5cbc6",
+            "label": "Paramètres Touristic Maps",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "60",
+                "class": "hide-label message-button",
+                "id": ""
+            },
+            "message": "Paramètres Touristic Maps",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_5f9988785cbc7",
+            "label": "Id conf TouristicMaps",
+            "name": "tmaps_confid",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "40",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "translations": "translate"
         }
     ],
     "location": [
-        [{
-            "param": "options_page",
-            "operator": "==",
-            "value": "woody-settings"
-        }]
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "woody-settings"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -394,5 +454,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1581688717
+    "modified": 1603897765
 }
