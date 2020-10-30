@@ -7,7 +7,7 @@
         <ul class="tools list-unstyled flex-container align-middle show-for-xlarge">
             {% if subtheme_more_tools %}
                 {% for tool in subtheme_more_tools %}
-                    <li>
+                    <li class="{{tool.list_class}}">
                         {% if tool.is_custom %}
                             {{ tool.render }}
                         {% else %}
@@ -53,7 +53,7 @@
     <ul class="tools list-unstyled flex-container align-middle hide-for-xlarge">
         {% if subtheme_more_tools %}
             {% for tool in subtheme_more_tools %}
-                <li>
+                <li class="{{tool.list_class}}">
                     <a class="no-ext {{ tool.classes|default }}" href="{{ tool.url|default }}" target="{{ tool.target|default('_self') }}" title="{{ tool.title|default }}" {{ tool.custom_attr|default }}>
                         {% if tool.icon %}
                             <span class="wicon {{ tool.icon }}"></span>
