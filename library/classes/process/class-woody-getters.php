@@ -357,6 +357,10 @@ class WoodyTheme_WoodyGetters
             }
             if (!empty($data['img'])) {
                 $data['img']['attachment_more_data'] = $this->tools->getAttachmentMoreData($data['img']['ID']);
+                if ($wrapper['display_slideshow']) {
+                    $slideshow = get_field('focus_secondary_img', $item->ID);
+                    $data['slideshow'] = (!empty($slideshow)) ? $slideshow : '';
+                }
             }
         }
 
