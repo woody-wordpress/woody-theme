@@ -56,6 +56,9 @@ class WoodyTheme_Plugins_Options
         update_option('acm_server_settings', ['server_enable' => true], true);
         update_option('permalink_structure', WOODY_PERMALINK_STRUCTURE, true);
 
+        // Members : Disable review notice
+        update_option('members_review_prompt_removed', true, true);
+
         // Cleaning Permalink Manager Pro
         delete_option('permalink-manager-permastructs');
         delete_option('permalink-manager');
