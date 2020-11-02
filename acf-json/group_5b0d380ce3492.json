@@ -1,8 +1,7 @@
 {
     "key": "group_5b0d380ce3492",
     "title": "Personnaliser : mise en avant",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b169fab55db0",
             "label": "Image",
             "name": "focus_img",
@@ -296,7 +295,7 @@
             "insert": "append",
             "library": "all",
             "min": "",
-            "max": 6,
+            "max": 4,
             "min_width": "",
             "min_height": "",
             "min_size": "",
@@ -307,20 +306,16 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "page"
-            }
-        ],
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "page"
+        }],
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "side",

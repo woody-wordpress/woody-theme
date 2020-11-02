@@ -371,7 +371,7 @@ class WoodyTheme_WoodyGetters
                             }
                         }
 
-                        $data['slideshow'] = $slideshow;
+                        $data['slideshow'] = $slideshow_srcs;
                     }
                 }
             }
