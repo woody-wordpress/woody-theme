@@ -17,7 +17,7 @@ class WoodyTheme_Menus
     protected function registerHooks()
     {
         add_theme_support('menus');
-        add_action('save_post', [$this, 'savePost'], 10, 3);
+        // add_action('save_post', [$this, 'savePost'], 10, 3);
     }
 
     /**

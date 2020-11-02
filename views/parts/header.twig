@@ -7,7 +7,7 @@
         <ul class="tools list-unstyled flex-container align-middle show-for-xlarge">
             {% if subtheme_more_tools %}
                 {% for tool in subtheme_more_tools %}
-                    {% if not tool.is_mobile %}                
+                    {% if not tool.is_mobile %}
                         <li {% if tool.list_class %}class="{{tool.list_class}}"{% endif %}>
                             {% if tool.is_custom %}
                                 {{ tool.render }}
@@ -55,11 +55,11 @@
     <ul class="tools list-unstyled flex-container align-middle hide-for-xlarge">
         {% if subtheme_more_tools %}
             {% for tool in subtheme_more_tools %}
-                {% if not tool.is_desktop %}                
+                {% if not tool.is_desktop %}
                     <li {% if tool.list_class %}class="{{tool.list_class}}"{% endif %}>
                         {% if tool.is_custom %}
                                 {{ tool.render }}
-                        {% else %}                        
+                        {% else %}
                             <a class="no-ext {{ tool.classes|default }}" href="{{ tool.url|default }}" target="{{ tool.target|default('_self') }}" title="{{ tool.title|default }}" {{ tool.custom_attr|default }}>
                                 {% if tool.icon %}
                                     <span class="wicon {{ tool.icon }}"></span>
