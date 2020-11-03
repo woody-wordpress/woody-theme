@@ -86,6 +86,53 @@
             "save_other_choice": 0
         },
         {
+            "key": "field_5fa02ec50d04e",
+            "label": "Affichage par géolocalistaion",
+            "name": "focused_by_gps",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5fa02f100d04f",
+            "label": "Distance maximale",
+            "name": "focused_by_geoloc_cutoff",
+            "type": "text",
+            "instructions": "Rayon autour de la page actuelle ( en km ).",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5fa02ec50d04e",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 10,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "translations": "translate"
+        },
+        {
             "key": "field_5b28d791038fa",
             "label": "Hiérarchie \/ Arborescence",
             "name": "focused_hierarchy",

@@ -253,6 +253,9 @@ class WoodyTheme_WoodyProcess
         $query_result = new \stdClass();
         $tax_query = [];
 
+        if (!empty($query_form['focused_by_gps'])) {
+            $nearby_posts = apply_filters('woody_es_search_geoloc', $the_post, $query_form['focused_by_geoloc_cutoff']);
+        }
 
         // Création du paramètre tax_query pour la wp_query
         // Référence : https://codex.wordpress.org/Class_Reference/WP_Query
