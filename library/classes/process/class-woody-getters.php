@@ -359,7 +359,7 @@ class WoodyTheme_WoodyGetters
                 $data['img']['attachment_more_data'] = $this->tools->getAttachmentMoreData($data['img']['ID']);
 
                 // On génère un tableau des urls de toutes les images complémentaires de mise en avant
-                if ($wrapper['display_slideshow']) {
+                if (!empty($wrapper['display_slideshow'])) {
                     $slideshow = get_field('focus_secondary_img', $item->ID);
 
                     if (!empty($slideshow)) {
