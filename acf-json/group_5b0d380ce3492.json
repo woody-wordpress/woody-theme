@@ -180,6 +180,11 @@
             "param": "post_type",
             "operator": "==",
             "value": "post"
+        }],
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "woody_rdbk_leaflets"
         }]
     ],
     "menu_order": 0,
