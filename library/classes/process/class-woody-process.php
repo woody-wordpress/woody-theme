@@ -254,7 +254,15 @@ class WoodyTheme_WoodyProcess
         $tax_query = [];
 
         if (!empty($query_form['focused_by_gps'])) {
-            $nearby_posts = apply_filters('woody_es_search_geoloc', $the_post, $query_form['focused_by_geoloc_cutoff']);
+            $nearby_posts = apply_filters('woody_es_search_geoloc', $the_post, $query_form['focused_by_geoloc_cutoff'], $query_form['focused_content_type']);
+
+            if (!empty($nearby_posts)) {
+                if (!empty($posts_in)) {
+                    $posts_in = array_intersect($nearby_posts, $posts_in);
+                } else {
+                    $posts_in = $nearby_posts;
+                }
+            }
         }
 
         // Création du paramètre tax_query pour la wp_query
