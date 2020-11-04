@@ -1,10 +1,11 @@
 {
     "name": "woody-wordpress/woody-theme",
     "type": "wordpress-theme",
-    "version": "1.31.10",
+    "version": "1.32.0",
     "description": "Parent theme of Woody Wordpresss Builder",
     "license": "GPL-2.0",
-    "authors": [{
+    "authors": [
+        {
             "name": "Léo POIROUX",
             "email": "leo@raccourci.fr"
         },
@@ -18,7 +19,10 @@
         }
     ],
     "require": {
-        "php": "^7.3"
+        "php": "^7.3",
+        "symfony/finder": "^5.1",
+        "symfony/filesystem": "^5.1",
+        "twig/twig": "^1.0"
     },
     "config": {
         "optimize-autoloader": true
