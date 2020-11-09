@@ -46,6 +46,9 @@ class WoodyTheme_ACF
         add_filter('acf/load_field/name=list_filter_taxonomy', [$this, 'pageTaxonomiesLoadField']);
         add_filter('acf/load_value/name=list_filter_taxonomy', [$this, 'termsLoadValue'], 10, 3);
 
+        add_filter('acf/load_field/name=gallery_tags', [$this, 'focusedTaxonomyTermsLoadField']);
+        add_filter('acf/load_value/name=gallery_tags', [$this, 'termsLoadValue'], 10, 3);
+
         add_filter('acf/load_field/name=display_elements', [$this, 'displayElementLoadField'], 10, 3);
 
         add_filter('acf/fields/google_map/api', [$this, 'acfGoogleMapKey']);
@@ -652,6 +655,9 @@ class WoodyTheme_ACF
                 'blocks-focus-tpl_118',
                 'blocks-focus-tpl_125',
                 'blocks-focus-tpl_126',
+                'blocks-focus-tpl_128',
+                'blocks-focus-tpl_129',
+                'blocks-focus-tpl_130',
                 'lists-list_grids-tpl_207',
                 'lists-list_grids-tpl_202',
                 'lists-list_grids-tpl_209',
@@ -684,6 +690,8 @@ class WoodyTheme_ACF
                 'blocks-focus-tpl_320',
                 'blocks-focus-tpl_321',
                 'blocks-focus-tpl_322',
+                'blocks-focus-tpl_319',
+                'blocks-focus-tpl_323',
                 'lists-list_grids-tpl_307',
                 'lists-list_grids-tpl_302',
                 'lists-list_grids-tpl_309',
@@ -702,6 +710,7 @@ class WoodyTheme_ACF
                 'blocks-focus-tpl_404',
                 'blocks-focus-tpl_405',
                 'blocks-focus-tpl_410',
+                'blocks-focus-tpl_412',
                 'blocks-focus-tpl_413',
                 'lists-list_grids-tpl_401',
                 'lists-list_grids-tpl_402',
@@ -722,6 +731,7 @@ class WoodyTheme_ACF
                 'blocks-focus-tpl_701',
                 'blocks-focus-tpl_801',
                 'blocks-focus-tpl_1001',
+                'blocks-focus-tpl_127',
                 'blocks-focus-tpl_202',
                 'blocks-focus-tpl_318',
                 'blocks-focus-tpl_408',

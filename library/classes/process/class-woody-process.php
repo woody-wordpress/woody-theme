@@ -78,14 +78,29 @@ class WoodyTheme_WoodyProcess
                 break;
             case 'gallery':
                 // Ajout des données Instagram + champs personnalisés dans le contexte des images
-                if (!empty($layout['gallery_items'])) {
-                    foreach ($layout['gallery_items'] as $key => $media_item) {
-                        $layout['gallery_items'][$key]['attachment_more_data'] = $this->tools->getAttachmentMoreData($media_item['ID']);
-                        if (isset($context['print_rdbk']) && !empty($context['print_rdbk'])) {
-                            $layout['gallery_items'][$key]['lazy'] = 'disabled';
+                $layout['gallery_type'] = !empty($layout['gallery_type']) ? $layout['gallery_type'] : "manual";
+
+                switch ($layout['gallery_type']) {
+                    case 'auto':
+                        $layout['gallery_items'] = $this->tools->getAttachmentsByMultipleTerms($layout["gallery_tags"], $layout['gallery_taxonomy_terms_andor'], $layout['gallery_count']);
+
+                        foreach ($layout['gallery_items'] as $key => $attachment) {
+                            $layout['gallery_items'][$key]['attachment_more_data'] = $this->tools->getAttachmentMoreData($layout['gallery_items'][$key]['ID']);
                         }
-                    }
+                    break;
+                    case 'manual':
+                    default:
+                        if (!empty($layout['gallery_items'])) {
+                            foreach ($layout['gallery_items'] as $key => $media_item) {
+                                $layout['gallery_items'][$key]['attachment_more_data'] = $this->tools->getAttachmentMoreData($media_item['ID']);
+                                if (isset($context['print_rdbk']) && !empty($context['print_rdbk'])) {
+                                    $layout['gallery_items'][$key]['lazy'] = 'disabled';
+                                }
+                            }
+                        }
+                    break;
                 }
+
                 $layout['display'] = $this->tools->getDisplayOptions($layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
@@ -93,6 +108,7 @@ class WoodyTheme_WoodyProcess
                 // Ajout des données Instagram + champs personnalisés dans le contexte des images
                 if (!empty($layout['interactive_gallery_items'])) {
                     foreach ($layout['interactive_gallery_items'] as $key => $media_item) {
+                        $layout['interactive_gallery_items'][$key]['img_mobile_url'] =  (!empty($layout['interactive_gallery_items'][$key]['interactive_gallery_photo']['sizes'])) ? $layout['interactive_gallery_items'][$key]['interactive_gallery_photo']['sizes']['ratio_4_3_medium'] : '';
                         $layout['interactive_gallery_items'][$key]['interactive_gallery_photo']['attachment_more_data'] = $this->tools->getAttachmentMoreData($media_item['interactive_gallery_photo']['ID']);
                     }
                 }

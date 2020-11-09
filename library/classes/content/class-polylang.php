@@ -102,8 +102,6 @@ class WoodyTheme_Polylang
         __('max', 'woody-theme');
         __('pers.', 'woody-theme');
         __('Demander un devis', 'woody-theme');
-        __('jour', 'woody-theme');
-        __('jours', 'woody-theme');
         __('personne', 'woody-theme');
         __('personnes', 'woody-theme');
         __('Départ', 'woody-theme');
