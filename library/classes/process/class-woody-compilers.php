@@ -111,6 +111,8 @@ class WoodyTheme_WoodyCompilers
             if (!empty($wrapper['focus_map_params'])) {
                 if (!empty($wrapper['focus_map_params']['tmaps_confid'])) {
                     $the_items['map_params']['tmaps_confid'] = $wrapper['focus_map_params']['tmaps_confid'];
+                } elseif (!empty(get_option('options_touristic_map_conf_id'))) {
+                    $the_items['map_params']['tmaps_confid'] = get_option('options_touristic_map_conf_id');
                 }
                 if (!empty($wrapper['focus_map_params']['map_height'])) {
                     $the_items['map_params']['map_height'] = $wrapper['focus_map_params']['map_height'];
