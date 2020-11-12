@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-$('#acf-group_5d7f7cd5615c0').each(function () {
+$('#acf-group_5d7f7cd5615c0').each(function() {
 
     var $group = $(this);
     var toKenized = false;
@@ -21,7 +21,7 @@ $('#acf-group_5d7f7cd5615c0').each(function () {
                 '|': 'Séparateur'
             };
 
-            $tokenize.each(function () {
+            $tokenize.each(function() {
                 var $this = $(this);
 
                 // On ajoute une div pour remplacer l'input masqué + liste des tokens disponibles
@@ -29,12 +29,12 @@ $('#acf-group_5d7f7cd5615c0').each(function () {
                     .append('<div class="tokens-toggle button">Ajouter une variable</div>')
                     .append('<ul class="tokens-list" style="display:none"></ul>');
 
-                $.each(tokens, function (key, token) {
+                $.each(tokens, function(key, token) {
                     $this.find('.tokens-list').append('<li class="token" data-field="' + key + '">' + token + '</li>');
                 });
 
-                // On toogle la liste de tokens
-                $this.find('.tokens-toggle').click(function () {
+                // On toggle la liste de tokens
+                $this.find('.tokens-toggle').click(function() {
                     $this.find('.tokens-list').toggle();
                 });
 
@@ -44,9 +44,9 @@ $('#acf-group_5d7f7cd5615c0').each(function () {
                 // Pousse la valeur de chacun des span de $tokensDiv dans la value de l'input masqué
                 function pushVal() {
                     var currentText = [];
-
+                    var sanitizedText = [];
                     // On pousse dans un tableau les valeurs de chacun des spans token-val
-                    $tokensDiv.find('span').each(function () {
+                    $tokensDiv.find('span').each(function() {
                         if ($(this).hasClass('token-val')) {
                             currentText.push($(this).data('field'));
                         } else if ($(this).hasClass('editable')) {
@@ -54,12 +54,20 @@ $('#acf-group_5d7f7cd5615c0').each(function () {
                         }
                     });
 
+                    // A good way to strip tags in js :)
+                    // See https://stackoverflow.com/questions/5002111/how-to-strip-html-tags-from-string-in-javascript
+                    currentText.forEach(function(item) {
+                        var div = document.createElement("div");
+                        div.innerHTML = item;
+                        sanitizedText.push(div.innerText);
+                    });
+
                     // On rassemble les clés en une chaine et on remplace les espaces multiples par un espace simple
-                    currentText = currentText.join(' ');
-                    currentText = currentText.replace(/ +(?= )/g, '');
+                    sanitizedText = sanitizedText.join(' ');
+                    sanitizedText = sanitizedText.replace(/ +(?= )/g, '');
 
                     // On pousse la chaine finale dans $input
-                    $input.val(currentText)
+                    $input.val(sanitizedText)
                 }
 
                 // Permet de rendre éditable chacun des <span class="editable">
@@ -67,7 +75,7 @@ $('#acf-group_5d7f7cd5615c0').each(function () {
                     var $editable = $tokensDiv.find('.editable');
 
                     $editable.attr('contentEditable', true);
-                    $editable.keypress(function (e) {
+                    $editable.keypress(function(e) {
                         // Si on clic sur la touche Enter => pas de saut de ligne et on pousse la nouvelle valeur dans $input
                         if (e.which == 13) {
                             e.preventDefault();
@@ -78,7 +86,7 @@ $('#acf-group_5d7f7cd5615c0').each(function () {
 
                 // Répertorie les token dans $tokensDiv et répertorie les actions de suppression d'un token
                 function removeToken() {
-                    $tokensDiv.find($('.token-val small')).click(function () {
+                    $tokensDiv.find($('.token-val small')).click(function() {
 
                         // Si le premier span après le token retiré est vide, on le supprime
                         if ($(this).parent().next().html() == '') {
@@ -88,7 +96,7 @@ $('#acf-group_5d7f7cd5615c0').each(function () {
                         $(this).parent().remove();
 
                         // Pour chaque span .editable, si le suivant est aussi .editable, on fusionne les 2 <span>
-                        $tokensDiv.find('.editable').each(function () {
+                        $tokensDiv.find('.editable').each(function() {
                             if ($(this).next().hasClass('editable')) {
                                 $(this).html($(this).html() + ' ' + $(this).next().html())
                                 $(this).next().remove();
@@ -125,7 +133,7 @@ $('#acf-group_5d7f7cd5615c0').each(function () {
                 removeToken();
 
                 // Au clic sur un token, on ajoute un span token dans $tokensDiv + un span editable et on pousse la valeur de $tokensDiv dans $input
-                $this.find('.token').click(function () {
+                $this.find('.token').click(function() {
                     $tokensDiv.append('<span class="token-val" data-field="' + $(this).data('field') + '">' + $(this).html() + '<small>x</small></span>')
                         .append('<span class="editable"></span>');
                     pushVal();
@@ -133,7 +141,7 @@ $('#acf-group_5d7f7cd5615c0').each(function () {
                     removeToken();
                 });
 
-                $tokensDiv.focusout(function () {
+                $tokensDiv.focusout(function() {
                     pushVal();
                 });
             });
