@@ -298,6 +298,7 @@ class WoodyTheme_Enqueue_Assets
             'jsdelivr_lg-zoom',
             'jsdelivr_lightgallery',
             'jsdelivr_plyr',
+            'jsdelivr_jscookie',
             'wp-i18n',
         ];
 
