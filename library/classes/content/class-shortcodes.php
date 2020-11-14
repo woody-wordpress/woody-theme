@@ -71,8 +71,8 @@ class WoodyTheme_Shortcodes
 
         // Set a default template
         $tplSearch = apply_filters('es_search_tpl', null);
-        $result['tags'] = $tplSearch['tags'] ?: $result['tags'];
-        $template = $tplSearch['template'] ?: $this->twigPaths['woody_widgets-es_search-tpl_01'];
+        $result['tags'] = !empty($tplSearch['tags']) ?: $result['tags'];
+        $template = !empty($tplSearch['template']) ?: $this->twigPaths['woody_widgets-es_search-tpl_01'];
 
         return \Timber::compile($template, $result);
     }
