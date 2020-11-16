@@ -55,6 +55,7 @@ class WoodyTheme_Images
         $mime_types['gpx'] = 'text/xml';
         $mime_types['kml'] = 'text/xml';
         $mime_types['kmz'] = 'text/xml';
+        $mime_types['xliff'] = 'text/xml';
         $mime_types['json'] = 'text/plain';
         $mime_types['geojson'] = 'text/plain';
 

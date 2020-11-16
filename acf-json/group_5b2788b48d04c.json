@@ -213,7 +213,26 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "35",
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5f9ae2fca8d76",
+            "label": "Diaporama d'images",
+            "name": "display_slideshow",
+            "type": "true_false",
+            "instructions": "<small>Uniquement pour les pages avec plusieurs images de mise en avant<\/small>",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -232,7 +251,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "35",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -251,7 +270,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "30",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -769,7 +788,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1593617400
+    "modified": 1603986357
 }

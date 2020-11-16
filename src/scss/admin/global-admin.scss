@@ -2,6 +2,14 @@ body.themes-php .themes.single-theme .theme-actions {
     display: none;
 }
 
+.update-nag {
+    display: none;
+}
+
+.role-administrator .update-nag {
+    display: block;
+}
+
 .add-medias-tag {
     z-index: 1000;
     background: white;

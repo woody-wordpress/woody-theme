@@ -357,6 +357,23 @@ class WoodyTheme_WoodyGetters
             }
             if (!empty($data['img'])) {
                 $data['img']['attachment_more_data'] = $this->tools->getAttachmentMoreData($data['img']['ID']);
+
+                // On génère un tableau des urls de toutes les images complémentaires de mise en avant
+                if (!empty($wrapper['display_slideshow'])) {
+                    $slideshow = get_field('focus_secondary_img', $item->ID);
+
+                    if (!empty($slideshow)) {
+                        foreach ($slideshow as $slide_key => $slide) {
+                            foreach ($slide['sizes'] as $size_key => $size) {
+                                if (strpos($size_key, 'height') === false and strpos($size_key, 'width') === false) {
+                                    $slideshow_srcs[$slide_key][$size_key] = $size;
+                                }
+                            }
+                        }
+
+                        $data['slideshow'] = $slideshow_srcs;
+                    }
+                }
             }
         }
 

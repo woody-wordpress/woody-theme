@@ -385,6 +385,11 @@
                 "param": "page_type_and_children",
                 "operator": "!=",
                 "value": "mirror_page"
+            },
+            {
+                "param": "page_type_and_children",
+                "operator": "!=",
+                "value": "custom_frontpage"
             }
         ],
         [{

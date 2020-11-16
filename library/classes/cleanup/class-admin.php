@@ -21,6 +21,7 @@ class WoodyTheme_Cleanup_Admin
             add_action('admin_menu', [$this, 'removeAdminMenu']);
             add_action('admin_menu', [$this, 'customMenusPage']);
             add_action('admin_menu', [$this, 'woodySettingsPage']);
+            add_filter('admin_body_class', [$this, 'adminBodyClass']);
 
             add_action('wp_before_admin_bar_render', [$this, 'customAdminBarMenu']);
             add_action('wp_dashboard_setup', [$this, 'removeDashboardWidgets']);
@@ -51,6 +52,20 @@ class WoodyTheme_Cleanup_Admin
         remove_meta_box('pageparentdiv', 'page', 'side');
     }
 
+    public function adminBodyClass($admin_body_classes)
+    {
+        // Added ENV to body classes
+        $admin_body_classes .= ' ' . WP_ENV;
+
+        // Added User roles to body classes
+        $user = wp_get_current_user(); // getting & setting the current user
+        $roles = (array) $user->roles; // obtaining the role
+        foreach ($roles as $role) {
+            $admin_body_classes .= ' role-' . $role;
+        }
+
+        return $admin_body_classes;
+    }
 
     public function sideMetaboxOrder($order)
     {

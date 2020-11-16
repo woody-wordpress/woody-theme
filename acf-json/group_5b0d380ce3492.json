@@ -1,8 +1,7 @@
 {
     "key": "group_5b0d380ce3492",
     "title": "Personnaliser : mise en avant",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b169fab55db0",
             "label": "Image",
             "name": "focus_img",
@@ -40,7 +39,7 @@
                 "id": ""
             },
             "choices": {},
-            "default_value": [],
+            "default_value": false,
             "allow_null": 1,
             "multiple": 0,
             "ui": 1,
@@ -142,23 +141,51 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "field_5f9ae40de5de5",
+            "label": "Images complémentaires",
+            "name": "focus_secondary_img",
+            "type": "gallery",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "insert": "append",
+            "library": "all",
+            "min": "",
+            "max": 4,
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "jpeg, jpg, gif, png"
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "page"
-            }
-        ],
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "woody_rdbk_leaflets"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "page"
+        }],
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }],
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "woody_rdbk_leaflets"
+        }]
     ],
     "menu_order": 0,
     "position": "side",
@@ -166,7 +193,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "Infos affichées en sidebar et utilisées pour les remontées de contenu",
-    "modified": 1567685736
+    "modified": 1603986620
 }
