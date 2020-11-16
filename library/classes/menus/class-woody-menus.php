@@ -98,7 +98,7 @@ class WoodyTheme_Menus
                             }
                         } else {
                             foreach ($field as $field_data_key => $field_data) {
-                                if ($groups_nested_sublinks) {
+                                if ($groups_nested_sublinks && !empty($field_data)) {
                                     foreach ($field_data as $data) {
                                         $parts[$group_key][] = $data['submenu_links_objects'];
                                     }
