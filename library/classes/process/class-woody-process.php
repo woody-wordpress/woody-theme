@@ -254,18 +254,6 @@ class WoodyTheme_WoodyProcess
         $query_result = new \stdClass();
         $tax_query = [];
 
-        if (!empty($query_form['focused_by_gps'])) {
-            $nearby_posts = apply_filters('woody_es_search_geoloc', $the_post, $query_form['focused_by_geoloc_cutoff'], $query_form['focused_content_type']);
-
-            if (!empty($nearby_posts)) {
-                if (!empty($posts_in)) {
-                    $posts_in = array_intersect($nearby_posts, $posts_in);
-                } else {
-                    $posts_in = $nearby_posts;
-                }
-            }
-        }
-
         // Création du paramètre tax_query pour la wp_query
         // Référence : https://codex.wordpress.org/Class_Reference/WP_Query
         if (!empty($query_form['focused_content_type'])) {
@@ -468,6 +456,10 @@ class WoodyTheme_WoodyProcess
 
         // On créé la wp_query avec les paramètres définis
         $query_result = new \WP_Query($the_query);
+
+        // Si on ordonne par geoloc, il faut trier les résultats reçus
+        $query_result->posts = apply_filters('woody_es_search_geoloc', $the_post, $query_result->posts);
+
         return $query_result;
     }
 
