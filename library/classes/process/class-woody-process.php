@@ -458,9 +458,14 @@ class WoodyTheme_WoodyProcess
         $query_result = new \WP_Query($the_query);
 
         // Si on ordonne par geoloc, il faut trier les résultats reçus
-        if ($query_form['focused_sort'] == "geoloc") {
+        if (!empty($query_form['focused_sort']) && $query_form['focused_sort'] == "geoloc") {
             $limit = $ignore_maxnum != true ? (!empty($query_form['focused_count']) ? $query_form['focused_count'] : 12) : -1 ;
-            $query_result->posts = apply_filters('woody_es_search_geoloc', $the_post, $query_result->posts, $limit);
+
+            if ($query_result->found_posts < 150) {
+                $query_result->posts = apply_filters('woody_es_search_geoloc', $the_post, $query_result->posts, $limit);
+            } else {
+                // TODO: display that there is too much posts
+            }
         }
 
         return $query_result;
