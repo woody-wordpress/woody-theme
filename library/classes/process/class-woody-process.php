@@ -420,7 +420,7 @@ class WoodyTheme_WoodyProcess
         }
 
         // Retourne tous les posts correspondant à la query
-        if ($ignore_maxnum === true) {
+        if ($query_form['focused_sort'] == "geoloc" || $ignore_maxnum === true) {
             $the_query['posts_per_page'] = -1;
         }
 
@@ -458,7 +458,10 @@ class WoodyTheme_WoodyProcess
         $query_result = new \WP_Query($the_query);
 
         // Si on ordonne par geoloc, il faut trier les résultats reçus
-        $query_result->posts = apply_filters('woody_es_search_geoloc', $the_post, $query_result->posts);
+        if ($query_form['focused_sort'] == "geoloc") {
+            $limit = $ignore_maxnum != true ? (!empty($query_form['focused_count']) ? $query_form['focused_count'] : 12) : -1 ;
+            $query_result->posts = apply_filters('woody_es_search_geoloc', $the_post, $query_result->posts, $limit);
+        }
 
         return $query_result;
     }
