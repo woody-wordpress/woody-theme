@@ -420,7 +420,7 @@ class WoodyTheme_WoodyProcess
         }
 
         // Retourne tous les posts correspondant à la query
-        if ($query_form['focused_sort'] == "geoloc" || $ignore_maxnum === true) {
+        if ($ignore_maxnum === true) {
             $the_query['posts_per_page'] = -1;
         }
 
@@ -454,19 +454,14 @@ class WoodyTheme_WoodyProcess
             $the_query['meta_query'] = array_merge($the_meta_query_relation, $the_meta_query);
         }
 
+        // On passe les arguments dans un filtre
+        $the_query = apply_filters('custom_process_woody_query_arguments', $the_query, $query_form);
+
         // On créé la wp_query avec les paramètres définis
         $query_result = new \WP_Query($the_query);
 
         // Si on ordonne par geoloc, il faut trier les résultats reçus
-        if (!empty($query_form['focused_sort']) && $query_form['focused_sort'] == "geoloc") {
-            $limit = $ignore_maxnum != true ? (!empty($query_form['focused_count']) ? $query_form['focused_count'] : 12) : -1 ;
-
-            if ($query_result->found_posts < 150) {
-                $query_result->posts = apply_filters('woody_es_search_geoloc', $the_post, $query_result->posts, $limit);
-            } else {
-                // TODO: display that there is too much posts
-            }
-        }
+        $query_result = apply_filters('custom_process_woody_query', $query_result, $query_form, $the_post);
 
         return $query_result;
     }
