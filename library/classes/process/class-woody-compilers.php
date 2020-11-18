@@ -111,6 +111,8 @@ class WoodyTheme_WoodyCompilers
             if (!empty($wrapper['focus_map_params'])) {
                 if (!empty($wrapper['focus_map_params']['tmaps_confid'])) {
                     $the_items['map_params']['tmaps_confid'] = $wrapper['focus_map_params']['tmaps_confid'];
+                } elseif (!empty(get_field('tmaps_confid', 'option'))) {
+                    $the_items['map_params']['tmaps_confid'] = get_field('tmaps_confid', 'option');
                 }
                 if (!empty($wrapper['focus_map_params']['map_height'])) {
                     $the_items['map_params']['map_height'] = $wrapper['focus_map_params']['map_height'];
@@ -551,6 +553,7 @@ class WoodyTheme_WoodyCompilers
         $page_teaser['the_classes'][] = (!empty($page_teaser['border_color'])) ? $page_teaser['border_color'] : '';
         $page_teaser['the_classes'][] = (!empty($page_teaser['teaser_margin_bottom'])) ? $page_teaser['teaser_margin_bottom'] : '';
         $page_teaser['the_classes'][] = (!empty($page_teaser['background_img'])) ? 'isRel' : '';
+        $page_teaser['the_classes'][] = (!empty($page_teaser['page_teaser_class'])) ? $page_teaser['page_teaser_class'] : '';
         $page_teaser['classes'] = (!empty($page_teaser['the_classes'])) ? implode(' ', $page_teaser['the_classes']) : '';
 
         $page_teaser['breadcrumb'] = $this->createBreadcrumb($context);

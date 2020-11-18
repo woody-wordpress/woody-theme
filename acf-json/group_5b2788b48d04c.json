@@ -580,48 +580,6 @@
                     "layout": "block",
                     "prefix_label": 0,
                     "prefix_name": 0
-                },
-                {
-                    "key": "field_5d1b2b6006044",
-                    "label": "Paramètres Touristic Maps",
-                    "name": "focus_tmaps_params",
-                    "type": "clone",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "clone": [
-                        "field_5c989085888ee"
-                    ],
-                    "display": "seamless",
-                    "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0
-                },
-                {
-                    "key": "field_5d1b2bc606045",
-                    "label": "Identifiant de conf Touristic Maps",
-                    "name": "focus_tmaps_confid",
-                    "type": "clone",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "clone": [
-                        "field_5c9891e2c9133"
-                    ],
-                    "display": "seamless",
-                    "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0
                 }
             ]
         },

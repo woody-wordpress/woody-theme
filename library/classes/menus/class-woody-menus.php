@@ -30,7 +30,7 @@ class WoodyTheme_Menus
      * @return return - Un tableau
      *
      */
-    public static function getMainMenu($limit = 6, $depth_1_ids = [], $root_level = 1)
+    public static function getMainMenu($limit = 6, $depth_1_ids = [], $root_level = 1, $groups_nested_sublinks = false)
     {
         $current_lang = PLL_DEFAULT_LANG;
         if (function_exists('pll_current_language')) {
@@ -54,7 +54,7 @@ class WoodyTheme_Menus
 
             if (!empty($return) && is_array($return)) {
                 foreach ($return as $key => $value) {
-                    $return[$key]['submenu'] = self::getSubmenus($value['the_id']);
+                    $return[$key]['submenu'] = self::getSubmenus($value['the_id'], $groups_nested_sublinks);
                 }
             }
 
@@ -67,7 +67,7 @@ class WoodyTheme_Menus
         return $return;
     }
 
-    public static function getSubmenus($post_id)
+    public static function getSubmenus($post_id, $groups_nested_sublinks = false)
     {
         $return = [];
         $fields_groups_wrapper = self::getTheRightOption($post_id);
@@ -98,7 +98,14 @@ class WoodyTheme_Menus
                             }
                         } else {
                             foreach ($field as $field_data_key => $field_data) {
-                                $parts[$group_key][] = $field_data['submenu_links_objects'];
+                                if ($groups_nested_sublinks && !empty($field_data)) {
+                                    foreach ($field_data as $data) {
+                                        $parts[$group_key][] = $data['submenu_links_objects'];
+                                    }
+                                } else {
+                                    $parts[$group_key][] = $field_data['submenu_links_objects'];
+                                }
+
                                 if (!empty($field_data['submenu_sublinks'])) {
                                     foreach ($field_data['submenu_sublinks'] as $sublink) {
                                         $sublinks[$group_key][$field_data_key][] = $sublink['submenu_links_objects'];

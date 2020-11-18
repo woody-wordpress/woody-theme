@@ -87,42 +87,6 @@
             "return_format": "value"
         },
         {
-            "key": "field_5c989085888ee",
-            "label": "Paramètres Touristic Maps",
-            "name": "",
-            "type": "message",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "60",
-                "class": "hide-label",
-                "id": ""
-            },
-            "message": "Paramètres Touristic Maps",
-            "new_lines": "wpautop",
-            "esc_html": 0
-        },
-        {
-            "key": "field_5c9891e2c9133",
-            "label": "Id conf TouristicMaps",
-            "name": "tmaps_confid",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "40",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
             "key": "field_5b043b28ab46a",
             "label": "Marqueurs",
             "name": "markers",

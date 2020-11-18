@@ -254,7 +254,6 @@ class WoodyTheme_WoodyProcess
         $query_result = new \stdClass();
         $tax_query = [];
 
-
         // Création du paramètre tax_query pour la wp_query
         // Référence : https://codex.wordpress.org/Class_Reference/WP_Query
         if (!empty($query_form['focused_content_type'])) {
@@ -455,8 +454,15 @@ class WoodyTheme_WoodyProcess
             $the_query['meta_query'] = array_merge($the_meta_query_relation, $the_meta_query);
         }
 
+        // On passe les arguments dans un filtre
+        $the_query = apply_filters('custom_process_woody_query_arguments', $the_query, $query_form);
+
         // On créé la wp_query avec les paramètres définis
         $query_result = new \WP_Query($the_query);
+
+        // Si on ordonne par geoloc, il faut trier les résultats reçus
+        $query_result = apply_filters('custom_process_woody_query', $query_result, $query_form, $the_post);
+
         return $query_result;
     }
 
