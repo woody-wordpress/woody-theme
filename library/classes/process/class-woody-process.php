@@ -272,10 +272,17 @@ class WoodyTheme_WoodyProcess
         // on créé tableau custom_tax à passer au paramètre tax_query
         $custom_tax = [];
         if (!empty($query_form['focused_taxonomy_terms'])) {
+            $operator = "IN";
 
             // On récupère la relation choisie (ET/OU) entre les termes
             // et on génère un tableau de term_id pour chaque taxonomie
-            $tax_query['custom_tax']['relation'] = (!empty($query_form['focused_taxonomy_terms_andor'])) ? $query_form['focused_taxonomy_terms_andor'] : 'OR';
+            // Si la valeur est NONE, on passe en relation AND et on change l'operator de IN en NOT IN (correspond a AUCUN DES TERMES)
+            if (!empty($query_form['focused_taxonomy_terms_andor']) && $query_form['focused_taxonomy_terms_andor'] == "NONE") {
+                $tax_query['custom_tax']['relation'] = "AND";
+                $operator = "NOT IN";
+            } else {
+                $tax_query['custom_tax']['relation'] = (!empty($query_form['focused_taxonomy_terms_andor'])) ? $query_form['focused_taxonomy_terms_andor'] : 'OR';
+            }
 
             // Si la valeur n'est pas un tableau (== int), on pousse cette valeur dans un tableau
             if (is_numeric($query_form['focused_taxonomy_terms'])) {
@@ -296,7 +303,7 @@ class WoodyTheme_WoodyProcess
                             'taxonomy' => $taxo,
                             'terms' => [$term],
                             'field' => 'term_id',
-                            'operator' => 'IN'
+                            'operator' => $operator
                         );
                     }
                 }
