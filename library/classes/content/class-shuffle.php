@@ -42,6 +42,16 @@ class WoodyTheme_Shuffle
             $section = get_field('section', $post_id);
             if (!empty($section[$section_index]) && !empty($section[$section_index]['section_content'][$block_index])) {
                 $wrapper = $section[$section_index]['section_content'][$block_index];
+
+                // get_field returns null foreach taxonomy terms, so we define them with get_post_meta
+                $wrapper['focused_taxonomy_terms'] = [];
+                $focused_terms = get_post_meta($post_id, 'section_'. $section_index .'_section_content_'. $block_index .'_focused_taxonomy_terms');
+                if (!empty($focused_terms) && !empty($focused_terms[0])) {
+                    foreach ($focused_terms[0] as $term_id) {
+                        $wrapper['focused_taxonomy_terms'][] = $term_id;
+                    }
+                }
+
                 if (!empty($wrapper)) {
                     $current_post = get_post($post_id);
                     if (!empty($length)) {

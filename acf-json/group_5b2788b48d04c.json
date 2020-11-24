@@ -76,7 +76,8 @@
             },
             "choices": {
                 "OR": "un des termes sélectionnés",
-                "AND": "tous les termes sélectionnés"
+                "AND": "tous les termes sélectionnés",
+                "NONE": "aucun des termes sélectionnés"
             },
             "allow_null": 0,
             "other_choice": 0,
