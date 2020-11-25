@@ -285,5 +285,25 @@ class WoodyTheme_Polylang
         __('Voir les webcams', 'woody-theme');
         __('Flux erroné !', 'woody-theme');
         __('Module Infoneige non configuré !', 'woody-theme');
+        __('Enneigement', 'woody-theme');
+        __('Hauteur', 'woody-theme');
+        __('Pistes ouvertes', 'woody-theme');
+        __('Risque d\'avalanche', 'woody-theme');
+        __('Limité', 'woody-theme');
+        __('Moyen', 'woody-theme');
+        __('Élevé', 'woody-theme');
+        __('Non spécifié', 'woody-theme');
+        __('Qualité de la neige', 'woody-theme');
+        __('Non spécicifé', 'woody-theme');
+        __('En live', 'woody-theme');
+        __('Toute l\'info live', 'woody-theme');
+        __('Altitude', 'woody-theme');
+        __('Fraîche', 'woody-theme');
+        __('Douce', 'woody-theme');
+        __('Dure', 'woody-theme');
+        __('Humide', 'woody-theme');
+        __('De printemps', 'woody-theme');
+        __('Matin', 'woody-theme');
+        __('Après-midi', 'woody-theme');
     }
 }
