@@ -294,7 +294,6 @@ class WoodyTheme_Polylang
         __('Élevé', 'woody-theme');
         __('Non spécifié', 'woody-theme');
         __('Qualité de la neige', 'woody-theme');
-        __('Non spécicifé', 'woody-theme');
         __('En live', 'woody-theme');
         __('Toute l\'info live', 'woody-theme');
         __('Altitude', 'woody-theme');
