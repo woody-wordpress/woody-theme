@@ -52,14 +52,6 @@ class WoodyTheme_Plugins_Activation
             'wp-deferred-javascripts/wp-deferred-javascripts.php',
         ];
 
-        if (defined('REDIS_HOST') && !empty(REDIS_HOST)) {
-            // Enable
-            $this->activate_plugins[] = 'redis-cache/redis-cache.php';
-        } else {
-            // Disable
-            $this->deactivate_plugins[] = 'redis-cache/redis-cache.php';
-        }
-
         switch (WP_ENV) {
             case 'dev':
                 // Enable
