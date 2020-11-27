@@ -90,6 +90,8 @@ class WoodyTheme_SiteMap
      */
     public function woodySitemap()
     {
+        global $wpdb;
+
         // Si le site est alias, on fusionne toutes les pages dans le même sitemap
         $languages = pll_languages_list();
 
@@ -101,8 +103,31 @@ class WoodyTheme_SiteMap
             }
         }
 
+        // On merge toutes les langues quand nous sommes sur un seul domaine
+        $polylang = get_option('polylang');
+        if ($polylang['force_lang'] == 3 && !empty($polylang['domains'])) {
+            $merge_sitemap_lang = false;
+        } else {
+            $merge_sitemap_lang = false;
+        }
+
+        // Get old sitemap chunks
+        $existing_options = [];
+        $results = $wpdb->get_results("SELECT option_name FROM {$wpdb->prefix}options WHERE option_name LIKE '%woody_sitemap%'");
+        foreach ($results as $val) {
+            $existing_options[$val->option_name] = $val->option_name;
+        }
+
+        $sitemap = [];
+        $nb_chunks = 0;
         foreach ($languages as $lang) {
-            $sitemap = [];
+            // Si on ne fusionne pas toutes les langues
+            if (!$merge_sitemap_lang) {
+                $sitemap = [];
+                $nb_chunks = 0;
+            }
+
+            // Get Posts
             $query_max = $this->getPosts($lang);
             if (!empty($query_max)) {
                 for ($i = 1; $i <= $query_max->max_num_pages; $i++) {
@@ -123,22 +148,52 @@ class WoodyTheme_SiteMap
                             }
                         }
                     }
+
+                    if (count($sitemap) >= 1000 || $i == $query_max->max_num_pages) {
+                        $option_name = sprintf('woody_sitemap_%s_chunk_%s', $merge_sitemap_lang ? 'all' : $lang, $nb_chunks);
+                        update_option($option_name, $sitemap, 'no');
+                        \WP_CLI::success('SAVE : ' . $option_name);
+                        if (!empty($existing_options[$option_name])) {
+                            unset($existing_options[$option_name]);
+                        }
+
+                        $sitemap = [];
+                        $nb_chunks++;
+                    }
                 }
             }
 
-            // Chunk sitemap
-            $nb_urls_per_page = 1000;
-            if (count($sitemap) <= $nb_urls_per_page) {
-                $sitemap = [$sitemap];
-            } else {
-                $sitemap = array_chunk($sitemap, $nb_urls_per_page);
+            // Save registry
+            if (!$merge_sitemap_lang) {
+                $option_name = sprintf('woody_sitemap_%s', $lang);
+                update_option($option_name, $nb_chunks, 'no');
+                \WP_CLI::success('SAVE : ' . $option_name);
+                if (!empty($existing_options[$option_name])) {
+                    unset($existing_options[$option_name]);
+                }
             }
-
-            update_option('woody_sitemap_' . $lang, $sitemap, 'no');
-
-            /* Restore original Post Data */
-            wp_reset_postdata();
         }
+
+        // Save registry
+        if ($merge_sitemap_lang) {
+            $option_name = sprintf('woody_sitemap_%s', 'all');
+            update_option($option_name, $nb_chunks, 'no');
+            \WP_CLI::success('SAVE : ' . $option_name);
+            if (!empty($existing_options[$option_name])) {
+                unset($existing_options[$option_name]);
+            }
+        }
+
+        // Cleanup
+        if (!empty($existing_options)) {
+            foreach ($existing_options as $option_name) {
+                delete_option($option_name);
+                \WP_CLI::success('DELETE : ' . $option_name);
+            }
+        }
+
+        /* Restore original Post Data */
+        wp_reset_postdata();
     }
 
     private function getPosts($lang = PLL_DEFAULT_LANG, $paged = 1, $posts_per_page = 30)
