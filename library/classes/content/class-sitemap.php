@@ -24,12 +24,17 @@ class WoodyTheme_SiteMap
         // add_filter('wp_sitemaps_enabled', '__return_false');
 
         add_action('woody_sitemap', [$this, 'woodySitemap']);
-        add_action('woody_sitemap', [$this, 'woodyHumanSitemap']);
         add_action('wp', [$this, 'scheduleSitemap']);
         \WP_CLI::add_command('woody:sitemap', [$this, 'woodySitemap']);
 
         // Adding a shortcode to display sitemap for humans
         add_shortcode('woody_sitemap', [$this, 'sitemapShortcode']);
+    }
+
+    public function woodySitemap()
+    {
+        $this->woodySitemapHuman();
+        $this->woodySitemapXML();
     }
 
     public function queryVars($qvars)
@@ -88,7 +93,7 @@ class WoodyTheme_SiteMap
     /**
      * generateSitemap with WP CLI or Cron
      */
-    public function woodySitemap()
+    public function woodySitemapXML()
     {
         global $wpdb;
 
@@ -330,25 +335,24 @@ class WoodyTheme_SiteMap
     public function sitemapShortcode($atts)
     {
         $return = '';
-        $lang = pll_current_language();
 
-        $sitemap['posts'] = get_transient('sitemap_posts_' . $lang);
-        if (empty($sitemap['posts'])) {
-            $sitemap['posts'] = $this->getPostsByHierarchy(0, $lang);
-            set_transient('sitemap_posts_' . $lang, $sitemap['posts']);
+        $lang = pll_current_language();
+        $sitemap['posts'] = get_option('woody_human_sitemap_' . $lang);
+        if (!empty($sitemap['posts'])) {
+            $return = \Timber::compile('woody_widgets/sitemap/tpl_01/tpl.twig', $sitemap);
         }
-        $return = \Timber::compile('woody_widgets/sitemap/tpl_01/tpl.twig', $sitemap);
 
         return $return;
     }
 
-    public function woodyHumanSitemap()
+    public function woodySitemapHuman()
     {
         $languages = pll_languages_list();
-
         foreach ($languages as $lang) {
             $sitemap = $this->getPostsByHierarchy(0, $lang);
-            set_transient('sitemap_posts_' . $lang, $sitemap);
+            $option_name = 'woody_human_sitemap_' . $lang;
+            update_option($option_name, $sitemap, 'no');
+            \WP_CLI::success('SAVE : ' . $option_name);
         }
     }
 
