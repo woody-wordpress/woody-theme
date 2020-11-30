@@ -47,25 +47,16 @@ class WoodyTheme_Template_Sitemap
         $sitemap = [];
         $polylang = get_option('polylang');
         if ($polylang['force_lang'] == 3 && !empty($polylang['domains'])) {
-            $sitemap_lang = get_option('woody_sitemap_' . pll_current_language());
-            if (!empty($sitemap_lang)) {
-                $sitemap = $sitemap_lang;
-            }
+            $sitemap_prefix = 'woody_sitemap_' . pll_current_language();
         } else {
-            $languages = pll_languages_list();
-            foreach ($languages as $lang) {
-                $sitemap_lang = get_option('woody_sitemap_' . $lang);
-                if (!empty($sitemap_lang)) {
-                    $sitemap = array_merge($sitemap, $sitemap_lang);
-                }
-            }
+            $sitemap_prefix = 'woody_sitemap_all';
         }
 
-        $nb_pages = count($sitemap);
         switch ($this->mode) {
             case 'index':
+                $sitemap_index = get_option($sitemap_prefix);
                 $this->twig_tpl = 'sitemap/sitemapindex.xml.twig';
-                for ($i = 1; $i <= $nb_pages; $i++) {
+                for ($i = 1; $i <= $sitemap_index; $i++) {
                     $this->context['sitemaps'][] = [
                         'loc' => 'sitemap-' . $i . '.xml',
                         'lastmod' => date('c', time()),
@@ -79,9 +70,10 @@ class WoodyTheme_Template_Sitemap
                 break;
             case 'list':
                 $paged = (get_query_var('page')) ? get_query_var('page') - 1 : 0;
+                $sitemap = get_option($sitemap_prefix . '_chunk_' . $paged);
                 $this->twig_tpl = 'sitemap/sitemap.xml.twig';
-                if (!empty($sitemap[$paged])) {
-                    $this->context['urls'] = $sitemap[$paged];
+                if (!empty($sitemap)) {
+                    $this->context['urls'] = $sitemap;
                 } else {
                     status_header(404);
                     exit();

@@ -71,6 +71,7 @@ class WoodyTheme_WoodyCompilers
             // break;
         }
 
+        $the_items['alert'] = apply_filters('add_admin_alert_message', '');
         if (!empty($the_items) && !empty($the_items['items']) && is_array($the_items['items'])) {
             foreach ($the_items['items'] as $item_key => $item) {
                 if (!empty($item['description'])) {
