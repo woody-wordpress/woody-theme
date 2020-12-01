@@ -172,7 +172,9 @@ class WoodyTheme_SiteMap
             if (!$merge_sitemap_lang) {
                 $option_name = sprintf('woody_sitemap_%s', $lang);
                 update_option($option_name, $nb_chunks, 'no');
-                \WP_CLI::success('SAVE : ' . $option_name);
+                if (defined('WP_CLI') && WP_CLI) {
+                    \WP_CLI::success('SAVE : ' . $option_name);
+                }
                 if (!empty($existing_options[$option_name])) {
                     unset($existing_options[$option_name]);
                 }
@@ -183,7 +185,9 @@ class WoodyTheme_SiteMap
         if ($merge_sitemap_lang) {
             $option_name = sprintf('woody_sitemap_%s', 'all');
             update_option($option_name, $nb_chunks, 'no');
-            \WP_CLI::success('SAVE : ' . $option_name);
+            if (defined('WP_CLI') && WP_CLI) {
+                \WP_CLI::success('SAVE : ' . $option_name);
+            }
             if (!empty($existing_options[$option_name])) {
                 unset($existing_options[$option_name]);
             }
@@ -193,7 +197,9 @@ class WoodyTheme_SiteMap
         if (!empty($existing_options)) {
             foreach ($existing_options as $option_name) {
                 delete_option($option_name);
-                \WP_CLI::success('DELETE : ' . $option_name);
+                if (defined('WP_CLI') && WP_CLI) {
+                    \WP_CLI::success('DELETE : ' . $option_name);
+                }
             }
         }
 
