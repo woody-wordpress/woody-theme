@@ -33,7 +33,7 @@ class WoodyTheme_Template_Archive
 
         foreach ($disabled_contexts as $context) {
             if ($wp_query->$context == true) {
-                wp_redirect($url, 301, 'Woody');
+                wp_redirect($url, 301, 'Woody Archive');
                 exit;
             }
         }
