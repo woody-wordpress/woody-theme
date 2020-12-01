@@ -222,7 +222,7 @@ class WoodyTheme_WoodyProcess
             }
 
             // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
-            if (!empty($grid['light_section_content'])) {
+            if (!empty($grid['light_section_content']) && is_array($grid['light_section_content'])) {
                 foreach ($grid['light_section_content'] as $layout) {
                     $grid_content['items'][] = $this->processWoodyLayouts($layout, $context);
                 }
