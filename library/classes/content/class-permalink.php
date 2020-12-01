@@ -123,15 +123,15 @@ class WoodyTheme_Permalink
             }
 
             // Redirect if $permalink exist
-            if (!empty($permalink)) {
-                wp_redirect($permalink, 301, 'Woody');
+            if (!empty($permalink) && parse_url($permalink, PHP_URL_PATH) != '/' . $wp->request) {
+                wp_redirect($permalink, 301, 'Woody Soft 404');
                 exit;
             }
         } elseif (is_singular()) {
             global $post, $page;
             $num_pages = substr_count($post->post_content, '<!--nextpage-->') + 1;
             if ($page > $num_pages) {
-                wp_redirect(get_permalink($post->ID), 301, 'Woody');
+                wp_redirect(get_permalink($post->ID), 301, 'Woody NexPage');
                 exit;
             }
         }
