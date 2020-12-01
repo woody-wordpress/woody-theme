@@ -157,7 +157,9 @@ class WoodyTheme_SiteMap
                     if (count($sitemap) >= 1000 || $i == $query_max->max_num_pages) {
                         $option_name = sprintf('woody_sitemap_%s_chunk_%s', $merge_sitemap_lang ? 'all' : $lang, $nb_chunks);
                         update_option($option_name, $sitemap, 'no');
-                        \WP_CLI::success('SAVE : ' . $option_name);
+                        if (defined('WP_CLI') && WP_CLI) {
+                            \WP_CLI::success('SAVE : ' . $option_name);
+                        }
                         if (!empty($existing_options[$option_name])) {
                             unset($existing_options[$option_name]);
                         }
@@ -358,7 +360,9 @@ class WoodyTheme_SiteMap
             $sitemap = $this->getPostsByHierarchy(0, $lang);
             $option_name = 'woody_human_sitemap_' . $lang;
             update_option($option_name, $sitemap, 'no');
-            \WP_CLI::success('SAVE : ' . $option_name);
+            if (defined('WP_CLI') && WP_CLI) {
+                \WP_CLI::success('SAVE : ' . $option_name);
+            }
         }
     }
 
