@@ -140,7 +140,9 @@ class WoodyTheme_SiteMap
                     if (!empty($query->posts)) {
                         foreach ($query->posts as $post) {
                             // On récupère la meta woodyseo_index
-                            $index = get_post_meta($post->ID, 'woodyseo_index', true);
+                            if (metadata_exists('post', $post->ID, 'woodyseo_index')) {
+                                $index = get_post_meta($post->ID, 'woodyseo_index', true);
+                            }
 
                             // Si la meta a explicitement été définie sur 0 on n'ajoute pas le post au sitemap
                             // Les fiches SIT et pages dont la meta n'a pas été définie sont ajoutées au sitemap quand même

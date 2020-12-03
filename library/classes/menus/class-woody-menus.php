@@ -206,8 +206,14 @@ class WoodyTheme_Menus
                         }
                     }
 
+                    // On retire le bordereau, la commune et l'id de fiche du titre des fiches SIT
+                    if ($post->post_type == 'touristic_sheet' && !empty(get_field('touristic_raw_item', $post->ID))) {
+                        $sheet = json_decode(base64_decode(get_field('touristic_raw_item', $post->ID)), true);
+                        $return[$post_key]['the_fields']['title'] = (!empty($sheet['title'])) ? $sheet['title'] : '';
+                    } else {
+                        $return[$post_key]['the_fields']['title'] = (!empty(get_field('in_menu_title', $post->ID))) ? get_field('in_menu_title', $post->ID) : $post->post_title;
+                    }
 
-                    $return[$post_key]['the_fields']['title'] = (!empty(get_field('in_menu_title', $post->ID))) ? get_field('in_menu_title', $post->ID) : $post->post_title;
                     $return[$post_key]['the_fields']['woody_icon'] = (!empty(get_field('in_menu_woody_icon', $post->ID))) ? get_field('in_menu_woody_icon', $post->ID) : '';
                     $return[$post_key]['the_fields']['icon_type'] = 'picto';
                     $return[$post_key]['the_fields']['pretitle'] = (!empty(get_field('in_menu_pretitle', $post->ID))) ? get_field('in_menu_pretitle', $post->ID) : '';
