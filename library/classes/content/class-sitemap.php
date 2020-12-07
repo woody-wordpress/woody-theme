@@ -33,7 +33,7 @@ class WoodyTheme_SiteMap
 
     public function woodySitemap()
     {
-        $this->woodySitemapHuman();
+        //$this->woodySitemapHuman();
         $this->woodySitemapXML();
     }
 
@@ -139,19 +139,23 @@ class WoodyTheme_SiteMap
                     $query = $this->getPosts($lang, $i);
                     if (!empty($query->posts)) {
                         foreach ($query->posts as $post) {
-                            // On récupère la meta woodyseo_index
-                            if (metadata_exists('post', $post->ID, 'woodyseo_index')) {
-                                $index = get_post_meta($post->ID, 'woodyseo_index', true);
-                            }
-
-                            // Si la meta a explicitement été définie sur 0 on n'ajoute pas le post au sitemap
-                            // Les fiches SIT et pages dont la meta n'a pas été définie sont ajoutées au sitemap quand même
-                            if ($index !== '0') {
+                            $woodyseo_index = $wpdb->get_row("SELECT meta_value FROM {$wpdb->prefix}postmeta WHERE post_id='{$post->ID}' AND meta_key='woodyseo_index'");
+                            if (is_null($woodyseo_index) || $woodyseo_index->meta_value == true) {
+                                // Si la meta a explicitement été définie sur 0 on n'ajoute pas le post au sitemap
+                                // Les fiches SIT et pages dont la meta n'a pas été définie sont ajoutées au sitemap quand même
                                 $sitemap[] = [
                                     'loc' => get_permalink($post),
                                     'lastmod' => get_the_modified_date('c', $post),
                                     'images' => $this->getImagesFromPost($post),
                                 ];
+                            } elseif ($woodyseo_index->meta_value != false) {
+                                $error_log = [
+                                    'error_log' => 'Allowed memory size - wp-cron.php',
+                                    'wp_site_key' => WP_SITE_KEY,
+                                    'post_id' => $post->ID,
+                                    'meta_value' => $val->meta_value,
+                                ];
+                                error_log(json_encode($error_log), 3, '/tmp/woody-debug.log');
                             }
                         }
                     }
@@ -215,6 +219,7 @@ class WoodyTheme_SiteMap
     {
         $args = [
             'post_type' => ['page', 'touristic_sheet'],
+            'post__in' => array(9778, 2280, 6220),
             'orderby' => 'menu_order',
             'order'   => 'DESC',
             'lang' => $lang,
