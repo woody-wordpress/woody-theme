@@ -384,7 +384,7 @@ class WoodyTheme_WoodyGetters
         $data['location']['lng'] = (!empty($lng)) ? str_replace(',', '.', $lng) : '';
 
         if ($clickable) {
-            $data['link']['url'] = get_permalink($item->ID);
+            $data['link']['url'] = apply_filters('woody_get_permalink', $item->ID);
         }
 
         $data = apply_filters('woody_custom_pagePreview', $data, $wrapper);

@@ -144,7 +144,7 @@ class WoodyTheme_SiteMap
                                 // Si la meta a explicitement été définie sur 0 on n'ajoute pas le post au sitemap
                                 // Les fiches SIT et pages dont la meta n'a pas été définie sont ajoutées au sitemap quand même
                                 $sitemap[] = [
-                                    'loc' => get_permalink($post),
+                                    'loc' => apply_filters('woody_get_permalink', $post->ID),
                                     'lastmod' => get_the_modified_date('c', $post),
                                     'images' => $this->getImagesFromPost($post),
                                 ];
@@ -396,7 +396,7 @@ class WoodyTheme_SiteMap
         if (!empty($query_result->posts)) {
             foreach ($query_result->posts as $post) {
                 $return[$post->ID] = [
-                    'url' => get_permalink($post->ID),
+                    'url' => apply_filters('woody_get_permalink', $post->ID),
                     'title' => get_the_title($post->ID),
                     'parent' => wp_get_post_parent_id($post->ID)
                 ];

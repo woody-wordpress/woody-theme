@@ -400,7 +400,7 @@ class WoodyTheme_Enqueue_Assets
 
     protected function setAssetPaths()
     {
-        $assetPaths = get_transient('woody_asset_paths');
+        $assetPaths = wp_cache_get('woody_asset_paths', 'woody');
         if (empty($assetPaths) || WP_ENV == 'dev') {
             $assetPaths = [];
 
@@ -429,7 +429,7 @@ class WoodyTheme_Enqueue_Assets
             }
 
             if (!empty($assetPaths)) {
-                set_transient('woody_asset_paths', $assetPaths);
+                wp_cache_set('woody_asset_paths', $assetPaths, 'woody');
             }
         }
 

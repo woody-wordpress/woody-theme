@@ -71,7 +71,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $query = str_replace('-', ' ', $last_segment);
 
         $suggestions = [];
-        // $suggestions = get_transient('woody_404_suggestions_' . md5($query));
+        // $suggestions = wp_cache_get('woody_404_suggestions_' . md5($query), 'woody');
         // if (empty($suggestions)) {
         //     $suggestions = [];
         //     $response = apply_filters('woody_pages_search', ['query' => $query, 'size' => 4]);
@@ -89,7 +89,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         //     }
 
         //     if (!empty($suggestions)) {
-        //         set_transient('woody_404_suggestions_' . md5($query), $suggestions, 1209600); // Keep 2 weeks
+        //         wp_cache_set('woody_404_suggestions_' . md5($query), $suggestions, 'woody'); // Keep 2 weeks
         //     }
         // }
 
@@ -98,7 +98,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             'subtitle' =>  '404 - ' . __("Page non trouvée", 'woody-theme'),
             'text' => __("La page que vous recherchez a peut-être été supprimée ou est temporairement indisponible.", 'woody-theme'),
             'suggestions' => $suggestions,
-            'search' => get_permalink(get_field('es_search_page_url', 'options'))
+            'search' => apply_filters('woody_get_permalink', get_field('es_search_page_url', 'options'))
         ];
 
         $custom = apply_filters('woody_404_custom', $vars);
