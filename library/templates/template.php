@@ -136,7 +136,6 @@ abstract class WoodyTheme_TemplateAbstract
         // Woody options pages
         $this->context['woody_options_pages'] = $this->getWoodyOptionsPagesValues();
 
-
         /******************************************************************************
          * Sommes nous dans le cas d'une page miroir ?
          ******************************************************************************/
@@ -222,7 +221,7 @@ abstract class WoodyTheme_TemplateAbstract
             $tools_blocks['preparespot_switcher'] = $this->addPrepareSpotSwitcher();
             $this->context['preparespot_switcher'] = apply_filters('preparespot_switcher', $tools_blocks['preparespot_switcher']);
         }
-        
+
         // Add more tools
         $this->context['subtheme_more_tools'] = apply_filters('more_tools', [], $tools_blocks);
 
