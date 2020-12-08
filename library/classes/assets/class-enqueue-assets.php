@@ -151,9 +151,6 @@ class WoodyTheme_Enqueue_Assets
         //     wp_enqueue_script('jsdelivr_jquery-migrate', 'https://cdn.jsdelivr.net/npm/jquery-migrate@3.0.1/dist/jquery-migrate.min.js', ['jquery'], null);
         // }
 
-        // Dependencies of main.js
-        wp_enqueue_script('jsdelivr_cookieconsent', 'https://cdn.jsdelivr.net/npm/cookieconsent@3.1.0/build/cookieconsent.min.js', [], null);
-
         if (!$this->isTouristicSheet || $this->isRoadBookSheet) {
             wp_enqueue_script('jsdelivr_swiper', 'https://cdn.jsdelivr.net/npm/swiper@4.4.1/dist/js/swiper.min.js', [], null);
         }
@@ -292,7 +289,6 @@ class WoodyTheme_Enqueue_Assets
         // Enqueue the main Scripts
         $dependencies = [
             'jquery',
-            'jsdelivr_cookieconsent',
             'jsdelivr_flatpickr',
             'jsdelivr_flatpickr_l10n',
             'jsdelivr_lg-fullscreen',
@@ -302,6 +298,7 @@ class WoodyTheme_Enqueue_Assets
             'jsdelivr_lg-zoom',
             'jsdelivr_lightgallery',
             'jsdelivr_plyr',
+            'jsdelivr_jscookie',
             'wp-i18n',
         ];
 
