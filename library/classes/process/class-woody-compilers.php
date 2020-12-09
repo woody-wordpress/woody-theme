@@ -613,7 +613,7 @@ class WoodyTheme_WoodyCompilers
         $page_hero = getAcfGroupFields('group_5b052bbee40a4', $context['post']);
 
         if (!empty($page_hero['page_heading_media_type']) && ($page_hero['page_heading_media_type'] == 'movie' && !empty($page_hero['page_heading_movie']) || ($page_hero['page_heading_media_type'] == 'img' && !empty($page_hero['page_heading_img'])))) {
-            if (empty($page_teaser['page_teaser_display_title'])) {
+            if (empty(get_field('page_teaser_display_title', $context['post_id']))) {
                 $page_hero['title_as_h1'] = true;
             }
 
