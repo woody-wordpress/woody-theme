@@ -113,7 +113,7 @@ class WoodyTheme_SiteMap
         if ($polylang['force_lang'] == 3 && !empty($polylang['domains'])) {
             $merge_sitemap_lang = false;
         } else {
-            $merge_sitemap_lang = false;
+            $merge_sitemap_lang = true;
         }
 
         // Get old sitemap chunks
@@ -219,7 +219,6 @@ class WoodyTheme_SiteMap
     {
         $args = [
             'post_type' => ['page', 'touristic_sheet'],
-            'post__in' => array(9778, 2280, 6220),
             'orderby' => 'menu_order',
             'order'   => 'DESC',
             'lang' => $lang,
