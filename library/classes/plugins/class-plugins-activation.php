@@ -20,10 +20,10 @@ class WoodyTheme_Plugins_Activation
 
     protected function registerHooks()
     {
-        add_action('woody_theme_update', [$this, 'activatePlugins'], 1);
+        add_action('woody_theme_update', [$this, 'woodyThemeUpdate'], 1);
     }
 
-    public function activatePlugins()
+    public function woodyThemeUpdate()
     {
         $this->deactivate_plugins = [
             'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',

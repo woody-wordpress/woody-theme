@@ -17,7 +17,6 @@ class WoodyTheme_Menus
     protected function registerHooks()
     {
         add_theme_support('menus');
-        // add_action('save_post', [$this, 'savePost'], 10, 3);
     }
 
     /**
@@ -286,10 +285,5 @@ class WoodyTheme_Menus
         }
 
         return $return;
-    }
-
-    public function savePost()
-    {
-        // delete_transient('woody_menus_cache');
     }
 }

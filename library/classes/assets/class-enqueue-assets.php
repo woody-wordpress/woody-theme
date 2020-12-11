@@ -48,7 +48,7 @@ class WoodyTheme_Enqueue_Assets
 
     protected function registerHooks()
     {
-        add_action('woody_theme_update', [$this, 'cleanTransient']);
+        add_action('woody_theme_update', [$this, 'woodyThemeUpdate']);
         add_action('wp_enqueue_scripts', [$this, 'enqueueLibraries']);
         add_action('wp_enqueue_scripts', [$this, 'enqueueAssets']);
         add_action('admin_enqueue_scripts', [$this, 'enqueueAdminAssets']);
@@ -360,10 +360,10 @@ class WoodyTheme_Enqueue_Assets
         return $return;
     }
 
-    public function cleanTransient()
+    public function woodyThemeUpdate()
     {
-        // Delete Transient
-        delete_transient('woody_asset_paths');
+        // Delete Cache
+        wp_cache_delete('woody_asset_paths', 'woody');
     }
 
     private function assetPath($file_url)

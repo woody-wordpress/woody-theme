@@ -342,7 +342,7 @@ class WoodyTheme_WoodyCompilers
 
         // On ajoute une variable à passer à la pagination (surchargée par les paramètres GET la cas échéant)
         $list_el_wrapper['seed'] = date('dmY');
-        // On récupère les items par défaut et on les stocke dans un transient pour les passer aux filtres
+        // On récupère les items par défaut et on les stocke dans un cache pour les passer aux filtres
         $cache_key = 'list_filters__post_' . $current_post->ID . '_' . $wrapper['uniqid'];
         $default_items = wp_cache_get($cache_key, 'woody');
         if (empty($default_items)) {
@@ -350,13 +350,13 @@ class WoodyTheme_WoodyCompilers
             wp_cache_set($cache_key, $default_items, 'woody');
         }
 
-        // On crée/update l'option qui liste les transients pour pouvoir les supprimer lors d'un save_post
-        $transient_list = get_option('woody_list_filters_cache');
-        if (empty($transient_list)) {
+        // On crée/update l'option qui liste les caches pour pouvoir les supprimer lors d'un save_post
+        $cache_list = get_option('woody_list_filters_cache');
+        if (empty($cache_list)) {
             update_option('woody_list_filters_cache', [$cache_key], false);
-        } elseif (!array_key_exists($cache_key, $transient_list)) {
-            $transient_list[] = $cache_key;
-            update_option('woody_list_filters_cache', $transient_list, false);
+        } elseif (!array_key_exists($cache_key, $cache_list)) {
+            $cache_list[] = $cache_key;
+            update_option('woody_list_filters_cache', $cache_list, false);
         }
 
         // On récupère les ids des posts non filtrés pour les passer au paramètre post__in de la query
@@ -437,13 +437,13 @@ class WoodyTheme_WoodyCompilers
 
     public function savePost()
     {
-        $transient_list = get_option('woody_list_filters_cache');
-        if (!empty($transient_list)) {
-            foreach ($transient_list as $transient) {
-                delete_transient($transient);
+        $cache_list = get_option('woody_list_filters_cache');
+        if (!empty($cache_list)) {
+            foreach ($cache_list as $cache_key) {
+                wp_cache_delete($cache_key, 'woody');
             }
+            delete_option('woody_list_filters_cache');
         }
-        delete_option('woody_list_filters_cache');
     }
 
     /**

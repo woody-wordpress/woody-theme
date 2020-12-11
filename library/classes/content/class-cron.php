@@ -16,7 +16,7 @@ class WoodyTheme_Cron
 
     protected function registerHooks()
     {
-        add_action('woody_theme_update', [$this, 'cleanCronList']);
+        add_action('woody_theme_update', [$this, 'woodyThemeUpdate']);
 
         // Cron force Disable HTTP
         add_action('init', function () {
@@ -61,7 +61,7 @@ class WoodyTheme_Cron
         return $schedules;
     }
 
-    public function cleanCronList()
+    public function woodyThemeUpdate()
     {
         // ErrorException Warning: Invalid argument supplied for foreach() on web/wp/wp-cron.php at line 122
         // Sometimes the cron contained "false" instead of an event

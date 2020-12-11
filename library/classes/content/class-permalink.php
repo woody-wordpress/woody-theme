@@ -141,7 +141,7 @@ class WoodyTheme_Permalink
     }
 
     // --------------------------------
-    // Clean Transient
+    // Clean Cache
     // --------------------------------
     public function savePost($post_id, $post, $update)
     {
