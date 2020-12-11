@@ -25,12 +25,7 @@ class WoodyTheme_Plugins_Activation
 
     public function woodyThemeUpdate()
     {
-        $this->deactivate_plugins = [
-            'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
-            'timber-library/timber.php',
-            'wordpress-seo/wp-seo.php',
-            'heartbeat-control/heartbeat-control.php',
-        ];
+        $this->deactivate_plugins = [];
 
         $this->activate_plugins = [
             'advanced-cron-manager/advanced-cron-manager.php',
