@@ -176,10 +176,10 @@ function woodyIconsFolder($folder)
  */
 function getWoodyTwigPaths()
 {
-    $woodyTwigsPaths = wp_cache_get('woody_components', 'woody');
+    $woodyTwigsPaths = wp_cache_get('woody_twig_paths', 'woody');
     if (empty($woodyTwigsPaths)) {
-        $woodyComponents = $this->getWoodyComponents();
         $woodyLibrary = new WoodyLibrary();
+        $woodyComponents = getWoodyComponents();
         $woodyTwigsPaths = $woodyLibrary->getTwigsPaths($woodyComponents);
         wp_cache_set('woody_twig_paths', $woodyTwigsPaths, 'woody');
     }
@@ -198,6 +198,7 @@ function getWoodyComponents()
 {
     $woodyComponents = wp_cache_get('woody_components', 'woody');
     if (empty($woodyComponents)) {
+        $woodyLibrary = new WoodyLibrary();
         $woodyComponents = $woodyLibrary->getComponents();
         wp_cache_set('woody_components', $woodyComponents, 'woody');
     }
