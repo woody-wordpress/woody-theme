@@ -16,10 +16,10 @@ class WoodyTheme_Plugins_Order
 
     protected function registerHooks()
     {
-        add_action('woody_theme_update', [$this, 'orderPlugins'], 1);
+        add_action('woody_theme_update', [$this, 'woodyThemeUpdate'], 1);
     }
 
-    public function orderPlugins()
+    public function woodyThemeUpdate()
     {
         // Liste des plugins forcer par poids
         // Tous les plugins dans cette liste ne doivent pas forcément être activés.

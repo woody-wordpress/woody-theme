@@ -17,7 +17,6 @@ class WoodyTheme_Menus
     protected function registerHooks()
     {
         add_theme_support('menus');
-        // add_action('save_post', [$this, 'savePost'], 10, 3);
     }
 
     /**
@@ -38,8 +37,6 @@ class WoodyTheme_Menus
         }
 
         $menu_cache_key = $current_lang . '_' . md5(serialize($depth_1_ids));
-        // TODO: comprendre pourquoi cette ligne est désactivée
-        // $woody_menus_cache = get_transient('woody_menus_cache');
         $woody_menus_cache = [];
 
         if (!empty($woody_menus_cache[$menu_cache_key])) {
@@ -57,11 +54,6 @@ class WoodyTheme_Menus
                     $return[$key]['submenu'] = self::getSubmenus($value['the_id'], $groups_nested_sublinks);
                 }
             }
-
-            // Save transient cache
-            // TODO: comprendre pourquoi cette ligne est désactivée
-            // $woody_menus_cache[$menu_cache_key] = $return;
-            // set_transient('woody_menus_cache', $woody_menus_cache);
         }
 
         return $return;
@@ -194,7 +186,7 @@ class WoodyTheme_Menus
                 if (is_object($post)) {
                     $return[$post_key] = [
                         'the_id' => $post->ID,
-                        'the_url' => get_permalink($post->ID),
+                        'the_url' => apply_filters('woody_get_permalink', $post->ID),
                     ];
 
                     // On vérifie si la page est de type mirroir
@@ -293,10 +285,5 @@ class WoodyTheme_Menus
         }
 
         return $return;
-    }
-
-    public function savePost()
-    {
-        // delete_transient('woody_menus_cache');
     }
 }

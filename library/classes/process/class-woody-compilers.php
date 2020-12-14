@@ -306,7 +306,7 @@ class WoodyTheme_WoodyCompilers
                     if (!empty($matches[0])) {
                         foreach ($matches[0] as $match) {
                             $str = str_replace(['[', ']'], '', $match);
-                            $link = '<a href="' . get_permalink(pll_get_post($post->ID)) . '">' . $str . '</a>';
+                            $link = '<a href="' . apply_filters('woody_get_permalink', pll_get_post($post->ID)) . '">' . $str . '</a>';
                             $data['description'] = str_replace($match, $link, $data['description']);
                         }
                     }
@@ -327,7 +327,7 @@ class WoodyTheme_WoodyCompilers
         $return = '';
 
         // On définit des variables de base
-        $the_list['permalink'] = get_permalink($current_post->ID);
+        $the_list['permalink'] = apply_filters('woody_get_permalink', $current_post->ID);
         $the_list['uniqid'] = $wrapper['uniqid'];
         $the_list['has_map'] = false;
 
@@ -342,21 +342,21 @@ class WoodyTheme_WoodyCompilers
 
         // On ajoute une variable à passer à la pagination (surchargée par les paramètres GET la cas échéant)
         $list_el_wrapper['seed'] = date('dmY');
-        // On récupère les items par défaut et on les stocke dans un transient pour les passer aux filtres
-        $transient_name = 'list_filters__post_' . $current_post->ID . '_' . $wrapper['uniqid'];
-        $default_items = get_transient($transient_name);
+        // On récupère les items par défaut et on les stocke dans un cache pour les passer aux filtres
+        $cache_key = 'list_filters__post_' . $current_post->ID . '_' . $wrapper['uniqid'];
+        $default_items = wp_cache_get($cache_key, 'woody');
         if (empty($default_items)) {
             $default_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid'], true);
-            set_transient($transient_name, $default_items);
+            wp_cache_set($cache_key, $default_items, 'woody');
         }
 
-        // On crée/update l'option qui liste les transients pour pouvoir les supprimer lors d'un save_post
-        $transient_list = get_option('woody_list_filters_cache');
-        if (empty($transient_list)) {
-            update_option('woody_list_filters_cache', [$transient_name], false);
-        } elseif (!array_key_exists($transient_name, $transient_list)) {
-            $transient_list[] = $transient_name;
-            update_option('woody_list_filters_cache', $transient_list, false);
+        // On crée/update l'option qui liste les caches pour pouvoir les supprimer lors d'un save_post
+        $cache_list = get_option('woody_list_filters_cache');
+        if (empty($cache_list)) {
+            update_option('woody_list_filters_cache', [$cache_key], false);
+        } elseif (!array_key_exists($cache_key, $cache_list)) {
+            $cache_list[] = $cache_key;
+            update_option('woody_list_filters_cache', $cache_list, false);
         }
 
         // On récupère les ids des posts non filtrés pour les passer au paramètre post__in de la query
@@ -437,13 +437,13 @@ class WoodyTheme_WoodyCompilers
 
     public function savePost()
     {
-        $transient_list = get_option('woody_list_filters_cache');
-        if (!empty($transient_list)) {
-            foreach ($transient_list as $transient) {
-                delete_transient($transient);
+        $cache_list = get_option('woody_list_filters_cache');
+        if (!empty($cache_list)) {
+            foreach ($cache_list as $cache_key) {
+                wp_cache_delete($cache_key, 'woody');
             }
+            delete_option('woody_list_filters_cache');
         }
-        delete_option('woody_list_filters_cache');
     }
 
     /**
@@ -509,7 +509,7 @@ class WoodyTheme_WoodyCompilers
     public function formatSummaryItems($post_id)
     {
         $items = [];
-        $permalink = get_permalink($post_id);
+        $permalink = apply_filters('woody_get_permalink', $post_id);
         $sections = get_field('section', $post_id);
         if (!empty($sections) && is_array($sections)) {
             foreach ($sections as $s_key => $section) {

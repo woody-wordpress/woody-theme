@@ -20,7 +20,6 @@ class WoodyTheme_Tinymce
         add_action('init', array($this, 'tinymceAddStylesheet'));
 
         add_action('wp_ajax_woody_icons_list', [$this, 'woodyIconsList']);
-        add_action('woody_theme_update', [$this, 'cleanTransient']);
     }
 
     // Callback function to insert 'styleselect' into the $buttons array
@@ -101,11 +100,6 @@ class WoodyTheme_Tinymce
         }
 
         return $icons;
-    }
-
-    public function cleanTransient()
-    {
-        delete_transient('woody_icons_list');
     }
 
     public function modifyValidMarkup($settings)

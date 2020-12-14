@@ -16,8 +16,8 @@ class WoodyTheme_Roles
 
     protected function registerHooks()
     {
-        add_action('woody_theme_update', [$this, 'addRoles']);
-        add_action('woody_theme_update', [$this, 'addCapabilities']);
+        add_action('woody_theme_update', [$this, 'addRoles'], 1);
+        add_action('woody_theme_update', [$this, 'addCapabilities'], 10);
         add_filter('auth_cookie_expiration', [$this, 'authCookieExpirationFilter'], 10, 3);
         add_action('members_register_cap_groups', [$this, 'registerMembersGroups']);
         add_action('members_register_caps', [$this, 'membersRegisterCaps']);
