@@ -145,7 +145,7 @@ function getWoodyIcons()
 function woodyIconsFolder($folder)
 {
     $return = [];
-    $icons_folder = get_transient('woody_icons_folder');
+    $icons_folder = wp_cache_get('woody_icons_folder', 'woody');
     if (empty($icons_folder) || !array_key_exists($folder, $icons_folder)) {
         $icons_finder = new Finder();
         $icons_finder->files()->name('*.svg')->in($folder);
@@ -158,7 +158,7 @@ function woodyIconsFolder($folder)
             $return[$icon_class] = $icon_human_name;
         }
         $icons_folder[$folder] = $return;
-        set_transient('woody_icons_folder', $icons_folder);
+        wp_cache_set('woody_icons_folder', $icons_folder, 'woody');
     } else {
         $return = $icons_folder[$folder];
     }
@@ -176,28 +176,44 @@ function woodyIconsFolder($folder)
  */
 function getWoodyTwigPaths()
 {
-    $woodyLibrary = new WoodyLibrary();
-    $woodyTwigsPaths = [];
-    $woodyComponents = get_transient('woody_components');
-    if (empty($woodyComponents)) {
-        $woodyComponents = $woodyLibrary->getComponents();
-        set_transient('woody_components', $woodyComponents);
+    $woodyTwigsPaths = wp_cache_get('woody_twig_paths', 'woody');
+    if (empty($woodyTwigsPaths)) {
+        $woodyLibrary = new WoodyLibrary();
+        $woodyComponents = getWoodyComponents();
+        $woodyTwigsPaths = $woodyLibrary->getTwigsPaths($woodyComponents);
+        wp_cache_set('woody_twig_paths', $woodyTwigsPaths, 'woody');
     }
-
-    $woodyTwigsPaths = $woodyLibrary->getTwigsPaths($woodyComponents);
-
     return $woodyTwigsPaths;
+}
+
+/**
+ *
+ * Nom : getWoodyComponents
+ * Auteur : Léo Poiroux
+ * Return : Un tableau
+ * @return   the_icons - La liste de tous les icones du site
+ *
+ */
+function getWoodyComponents()
+{
+    $woodyComponents = wp_cache_get('woody_components', 'woody');
+    if (empty($woodyComponents)) {
+        $woodyLibrary = new WoodyLibrary();
+        $woodyComponents = $woodyLibrary->getComponents();
+        wp_cache_set('woody_components', $woodyComponents, 'woody');
+    }
+    return $woodyComponents;
 }
 
 function getPageTaxonomies()
 {
-    $taxonomies = get_transient('woody_website_pages_taxonomies');
+    $taxonomies = wp_cache_get('woody_website_pages_taxonomies', 'woody');
     if (empty($taxonomies)) {
         $taxonomies = get_object_taxonomies('page', 'objects');
         unset($taxonomies['language']);
         unset($taxonomies['page_type']);
         unset($taxonomies['post_translations']);
-        set_transient('woody_website_pages_taxonomies', $taxonomies);
+        wp_cache_set('woody_website_pages_taxonomies', $taxonomies, 'woody');
     }
 
     return $taxonomies;
@@ -208,7 +224,6 @@ function getPageTerms($post_id)
     $return = [];
 
     $taxonomies = getPageTaxonomies();
-
     foreach ($taxonomies as $taxonomy) {
         $terms = wp_get_post_terms($post_id, $taxonomy->name);
         if (!is_wp_error($terms)) {

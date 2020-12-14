@@ -385,7 +385,7 @@ class WoodyTheme_Images
     {
         remove_action('delete_attachment', [$this, 'deleteAttachment']);
 
-        $deleted_attachement = get_transient('woody_deleted_attachement');
+        $deleted_attachement = wp_cache_get('woody_deleted_attachement', 'woody');
         if (empty($deleted_attachement)) {
             $deleted_attachement = [];
         }
@@ -394,7 +394,7 @@ class WoodyTheme_Images
             // Remove translations
             $translations = pll_get_post_translations($attachment_id);
             $deleted_attachement = array_merge($deleted_attachement, array_values($translations));
-            set_transient('woody_deleted_attachement', $deleted_attachement);
+            wp_cache_set('woody_deleted_attachement', $deleted_attachement, 'woody');
 
             foreach ($translations as $t_attachment_id) {
                 if ($t_attachment_id != $attachment_id) {
