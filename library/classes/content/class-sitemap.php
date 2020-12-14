@@ -148,14 +148,6 @@ class WoodyTheme_SiteMap
                                     'lastmod' => get_the_modified_date('c', $post),
                                     'images' => $this->getImagesFromPost($post),
                                 ];
-                            } elseif ($woodyseo_index->meta_value != false) {
-                                $error_log = [
-                                    'error_log' => 'Allowed memory size - wp-cron.php',
-                                    'wp_site_key' => WP_SITE_KEY,
-                                    'post_id' => $post->ID,
-                                    'meta_value' => $val->meta_value,
-                                ];
-                                error_log(json_encode($error_log), 3, '/tmp/woody-debug.log');
                             }
                         }
                     }
