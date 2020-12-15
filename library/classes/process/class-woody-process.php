@@ -466,11 +466,10 @@ class WoodyTheme_WoodyProcess
 
         // On créé la wp_query avec les paramètres définis
         $query_result = new \WP_Query($the_query);
-        
 
         // Si on ordonne par geoloc, il faut trier les résultats reçus
         $query_result = apply_filters('custom_process_woody_query', $query_result, $query_form, $the_post);
-        console_log($query_result,'query result');
+
         return $query_result;
     }
 
