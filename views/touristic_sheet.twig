@@ -7,12 +7,18 @@
                                             {{ page_teaser }}
                                         </header>
                                 {% endblock %} #}
-        <main class="content-type-page"> <div class="content-wrapper">
-            <div class="mobile-header hide-for-xlarge title-bar">
-                <div class="brand-logo obf" data-obf="{{ home_url|base64Encode }}">
-                    {{ mobile_logo|default(website_logo) }}
+    <main class="content-type-page">
+        <div class="content-wrapper">
+            {% if page_parts.mobile_header_custom %}
+                {{ page_parts.mobile_header_custom }}
+            {% else %}
+                <div class="mobile-header hide-for-xlarge title-bar">
+                    <div class="brand-logo obf" data-obf="{{ home_url|base64Encode }}">
+                        {{ mobile_logo|default(website_logo) }}
+                    </div>
                 </div>
-            </div>
+            {% endif %}
+
             {% if sheet_tourism.content|default %}
                 <div class="page-sheet-wrapper">
                     {{ sheet_tourism.content }}
