@@ -66,6 +66,7 @@ class WoodyTheme_Commands
 
         // (Not all cache back ends listen to 'flush')
         wp_cache_delete('alloptions', 'options');
+        wp_cache_delete('notoptions', 'options');
         \WP_CLI::success('wp_cache_delete alloptions');
     }
 
