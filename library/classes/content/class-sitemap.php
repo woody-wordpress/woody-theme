@@ -154,7 +154,7 @@ class WoodyTheme_SiteMap
             if (!empty($query_max)) {
                 for ($page = 1; $page <= $query_max->max_num_pages; $page++) {
                     $option_name = sprintf('woody_sitemap_%s_chunk_%s', $merge_sitemap_lang ? 'all' : $lang, $nb_chunks);
-                    do_action('woody_async_add', 'woody_sitemap_update_sitemap_form_posts', $lang, $page, $option_name);
+                    do_action('woody_async_add', 'woody_sitemap_update_sitemap_form_posts', ['lang' => $lang, 'page' => $page, 'option_name' => $option_name], $option_name);
 
                     if (!empty($this->existing_options[$option_name])) {
                         unset($this->existing_options[$option_name]);
@@ -193,12 +193,12 @@ class WoodyTheme_SiteMap
         wp_reset_postdata();
     }
 
-    public function updateSitemapFormPosts($lang, $page, $option_name)
+    public function updateSitemapFormPosts($args = [])
     {
         global $wpdb;
 
         $sitemap = [];
-        $query = $this->getPosts($lang, $page);
+        $query = $this->getPosts($args['lang'], $args['page']);
         if (!empty($query->posts)) {
             foreach ($query->posts as $post) {
                 $woodyseo_index = $wpdb->get_row("SELECT meta_value FROM {$wpdb->prefix}postmeta WHERE post_id='{$post->ID}' AND meta_key='woodyseo_index'");
@@ -215,9 +215,9 @@ class WoodyTheme_SiteMap
             }
         }
 
-        update_option($option_name, $sitemap, 'no');
+        update_option($args['option_name'], $sitemap, 'no');
         if (defined('WP_CLI') && WP_CLI) {
-            \WP_CLI::success('SAVE : ' . $option_name);
+            \WP_CLI::success('SAVE : ' . $args['option_name']);
         }
     }
 
@@ -371,7 +371,7 @@ class WoodyTheme_SiteMap
         $languages = pll_languages_list();
         foreach ($languages as $lang) {
             $option_name = 'woody_sitemap_shortcode_' . $lang;
-            do_action('woody_async_add', 'woody_sitemap_set_shortcode_by_lang', $lang, $option_name);
+            do_action('woody_async_add', 'woody_sitemap_set_shortcode_by_lang', ['lang' => $lang, 'option_name' => $option_name], $option_name);
 
             if (!empty($this->existing_options[$option_name])) {
                 unset($this->existing_options[$option_name]);
@@ -379,12 +379,12 @@ class WoodyTheme_SiteMap
         }
     }
 
-    public function setShortcodeByLang($lang = null, $option_name)
+    public function setShortcodeByLang($args = [])
     {
-        $sitemap = $this->getPostsByHierarchy(0, $lang);
-        update_option($option_name, $sitemap, 'no');
+        $sitemap = $this->getPostsByHierarchy(0, $args['lang']);
+        update_option($args['option_name'], $sitemap, 'no');
         if (defined('WP_CLI') && WP_CLI) {
-            \WP_CLI::success('SAVE : ' . $option_name);
+            \WP_CLI::success('SAVE : ' . $args['option_name']);
         }
     }
 
