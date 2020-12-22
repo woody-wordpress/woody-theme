@@ -38,6 +38,8 @@ class WoodyTheme_SiteMap
 
     public function woodySitemap()
     {
+        global $wpdb;
+
         // Get old sitemap chunks
         $this->existing_options = [];
         $results = $wpdb->get_results("SELECT option_name FROM {$wpdb->prefix}options WHERE option_name LIKE '%woody_sitemap%'");
