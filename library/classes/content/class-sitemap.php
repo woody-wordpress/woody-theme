@@ -20,21 +20,24 @@ class WoodyTheme_SiteMap
         add_action('after_setup_theme', [$this, 'reduceQueryLoad'], 99);
         add_action('template_redirect', [$this, 'getSitemap'], 1);
         add_filter('query_vars', [$this, 'queryVars']);
-
         // add_filter('wp_sitemaps_enabled', '__return_false');
-
-        add_action('woody_sitemap', [$this, 'woodySitemap']);
-        add_action('wp', [$this, 'scheduleSitemap']);
-        \WP_CLI::add_command('woody:sitemap', [$this, 'woodySitemap']);
 
         // Adding a shortcode to display sitemap for humans
         add_shortcode('woody_sitemap', [$this, 'sitemapShortcode']);
+
+        // Cron + CLI
+        add_action('wp', [$this, 'scheduleSitemap']);
+        add_action('woody_sitemap', [$this, 'woodySitemap']);
+        \WP_CLI::add_command('woody:sitemap', [$this, 'woodySitemap']);
+
+        add_action('woody_sitemap_set_shortcode_by_lang', [$this, 'setShortcodeByLang']);
+        add_action('woody_sitemap_update_sitemap_form_posts', [$this, 'updateSitemapFormPosts']);
     }
 
     public function woodySitemap()
     {
-        //$this->woodySitemapHuman();
-        $this->woodySitemapXML();
+        $this->asyncShortcode();
+        $this->asyncXML();
     }
 
     public function queryVars($qvars)
@@ -93,7 +96,7 @@ class WoodyTheme_SiteMap
     /**
      * generateSitemap with WP CLI or Cron
      */
-    public function woodySitemapXML()
+    public function asyncXML()
     {
         global $wpdb;
 
@@ -135,36 +138,15 @@ class WoodyTheme_SiteMap
             // Get Posts
             $query_max = $this->getPosts($lang);
             if (!empty($query_max)) {
-                for ($i = 1; $i <= $query_max->max_num_pages; $i++) {
-                    $query = $this->getPosts($lang, $i);
-                    if (!empty($query->posts)) {
-                        foreach ($query->posts as $post) {
-                            $woodyseo_index = $wpdb->get_row("SELECT meta_value FROM {$wpdb->prefix}postmeta WHERE post_id='{$post->ID}' AND meta_key='woodyseo_index'");
-                            if (is_null($woodyseo_index) || $woodyseo_index->meta_value == true) {
-                                // Si la meta a explicitement été définie sur 0 on n'ajoute pas le post au sitemap
-                                // Les fiches SIT et pages dont la meta n'a pas été définie sont ajoutées au sitemap quand même
-                                $sitemap[] = [
-                                    'loc' => apply_filters('woody_get_permalink', $post->ID),
-                                    'lastmod' => get_the_modified_date('c', $post),
-                                    'images' => $this->getImagesFromPost($post),
-                                ];
-                            }
-                        }
+                for ($page = 1; $page <= $query_max->max_num_pages; $page++) {
+                    $option_name = sprintf('woody_sitemap_%s_chunk_%s', $merge_sitemap_lang ? 'all' : $lang, $nb_chunks);
+                    do_action('woody_async_add', 'woody_sitemap_update_sitemap_form_posts', $lang, $page, $option_name);
+
+                    if (!empty($existing_options[$option_name])) {
+                        unset($existing_options[$option_name]);
                     }
 
-                    if (count($sitemap) >= 1000 || $i == $query_max->max_num_pages) {
-                        $option_name = sprintf('woody_sitemap_%s_chunk_%s', $merge_sitemap_lang ? 'all' : $lang, $nb_chunks);
-                        update_option($option_name, $sitemap, 'no');
-                        if (defined('WP_CLI') && WP_CLI) {
-                            \WP_CLI::success('SAVE : ' . $option_name);
-                        }
-                        if (!empty($existing_options[$option_name])) {
-                            unset($existing_options[$option_name]);
-                        }
-
-                        $sitemap = [];
-                        $nb_chunks++;
-                    }
+                    $nb_chunks++;
                 }
             }
 
@@ -207,7 +189,35 @@ class WoodyTheme_SiteMap
         wp_reset_postdata();
     }
 
-    private function getPosts($lang = PLL_DEFAULT_LANG, $paged = 1, $posts_per_page = 30)
+    private function updateSitemapFormPosts($lang, $page, $option_name)
+    {
+        global $wpdb;
+
+        $sitemap = [];
+        $query = $this->getPosts($lang, $page);
+        if (!empty($query->posts)) {
+            foreach ($query->posts as $post) {
+                $woodyseo_index = $wpdb->get_row("SELECT meta_value FROM {$wpdb->prefix}postmeta WHERE post_id='{$post->ID}' AND meta_key='woodyseo_index'");
+                if (is_null($woodyseo_index) || $woodyseo_index->meta_value == true) {
+                    // Si la meta a explicitement été définie sur 0 on n'ajoute pas le post au sitemap
+                    // Les fiches SIT et pages dont la meta n'a pas été définie sont ajoutées au sitemap quand même
+                    $sitemap[] = [
+                        'loc' => apply_filters('woody_get_permalink', $post->ID),
+                        'lastmod' => get_the_modified_date('c', $post),
+                        'images' => $this->getImagesFromPost($post),
+                    ];
+                }
+                $wpdb->flush();
+            }
+        }
+
+        update_option($option_name, $sitemap, 'no');
+        if (defined('WP_CLI') && WP_CLI) {
+            \WP_CLI::success('SAVE : ' . $option_name);
+        }
+    }
+
+    private function getPosts($lang = PLL_DEFAULT_LANG, $paged = 1, $posts_per_page = 1000)
     {
         $args = [
             'post_type' => ['page', 'touristic_sheet'],
@@ -221,7 +231,6 @@ class WoodyTheme_SiteMap
         $args = apply_filters('woody_custom_sitemap_args', $args);
 
         $query = new \WP_Query($args);
-
         if ($query->have_posts()) {
             return $query;
         }
@@ -338,12 +347,14 @@ class WoodyTheme_SiteMap
         return $str;
     }
 
+    // Shortcode
+
     public function sitemapShortcode($atts)
     {
         $return = '';
 
         $lang = pll_current_language();
-        $sitemap['posts'] = get_option('woody_human_sitemap_' . $lang);
+        $sitemap['posts'] = get_option('woody_sitemap_shortcode_' . $lang);
         if (!empty($sitemap['posts'])) {
             $return = \Timber::compile('woody_widgets/sitemap/tpl_01/tpl.twig', $sitemap);
         }
@@ -351,16 +362,21 @@ class WoodyTheme_SiteMap
         return $return;
     }
 
-    public function woodySitemapHuman()
+    private function asyncShortcode()
     {
         $languages = pll_languages_list();
         foreach ($languages as $lang) {
-            $sitemap = $this->getPostsByHierarchy(0, $lang);
-            $option_name = 'woody_human_sitemap_' . $lang;
-            update_option($option_name, $sitemap, 'no');
-            if (defined('WP_CLI') && WP_CLI) {
-                \WP_CLI::success('SAVE : ' . $option_name);
-            }
+            do_action('woody_async_add', 'woody_sitemap_set_shortcode_by_lang', $lang);
+        }
+    }
+
+    public function setShortcodeByLang($lang = null)
+    {
+        $sitemap = $this->getPostsByHierarchy(0, $lang);
+        $option_name = 'woody_sitemap_shortcode_' . $lang;
+        update_option($option_name, $sitemap, 'no');
+        if (defined('WP_CLI') && WP_CLI) {
+            \WP_CLI::success('SAVE : ' . $option_name);
         }
     }
 

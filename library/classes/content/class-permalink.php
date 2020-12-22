@@ -30,19 +30,13 @@ class WoodyTheme_Permalink
             $post_id = $post->ID;
         }
 
-        $permalinks = wp_cache_get(sprintf('woody_get_permalink_%s', $post_id), 'woody');
-        if (empty($permalinks)) {
-            $permalinks = [];
-        }
-
-        $current_lang = pll_current_language();
-        if (empty($permalinks[$current_lang])) {
+        $permalink = wp_cache_get(sprintf('woody_get_permalink_%s', $post_id), 'woody');
+        if (empty($permalink)) {
             $permalink = get_permalink($post_id);
-            $permalinks[$current_lang] = $permalink;
-            wp_cache_set(sprintf('woody_get_permalink_%s', $post_id), $permalinks, 'woody');
+            wp_cache_set(sprintf('woody_get_permalink_%s', $post_id), $permalink, 'woody');
         }
 
-        return $permalinks[$current_lang];
+        return $permalink;
     }
 
     public function redirect404()
