@@ -2,14 +2,14 @@
 # This file is distributed under the .
 msgid ""
 msgstr ""
-"Project-Id-Version: Woody (Parent theme) 1.32.2\n"
+"Project-Id-Version: Woody (Parent theme) 1.34.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-11-25T18:11:38+01:00\n"
+"POT-Creation-Date: 2020-12-23T15:01:44+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: woody-theme\n"
@@ -578,12 +578,12 @@ msgstr ""
 
 #: library/classes/content/class-polylang.php:214
 #: library/classes/content/class-polylang.php:232
-#: library/classes/content/class-polylang.php:306
+#: library/classes/content/class-polylang.php:305
 msgid "Matin"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:215
-#: library/classes/content/class-polylang.php:307
+#: library/classes/content/class-polylang.php:306
 msgid "Après-midi"
 msgstr ""
 
@@ -741,7 +741,7 @@ msgid "Publié le"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:267
-#: library/classes/process/class-woody-compilers.php:407
+#: library/classes/process/class-woody-compilers.php:408
 msgid "Désolé, aucun contenu ne correspond à votre recherche"
 msgstr ""
 
@@ -846,39 +846,51 @@ msgid "Qualité de la neige"
 msgstr ""
 
 #: library/classes/content/class-polylang.php:297
-msgid "Non spécicifé"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:298
 msgid "En live"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:299
+#: library/classes/content/class-polylang.php:298
 msgid "Toute l'info live"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:300
+#: library/classes/content/class-polylang.php:299
 msgid "Altitude"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:301
+#: library/classes/content/class-polylang.php:300
 msgid "Fraîche"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:302
+#: library/classes/content/class-polylang.php:301
 msgid "Douce"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:303
+#: library/classes/content/class-polylang.php:302
 msgid "Dure"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:304
+#: library/classes/content/class-polylang.php:303
 msgid "Humide"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:305
+#: library/classes/content/class-polylang.php:304
 msgid "De printemps"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:307
+msgid "Ouverte"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:308
+msgid "Fermée"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:309
+msgid "Prévision d'ouverture"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:310
+msgid "Liaison"
 msgstr ""
 
 #: library/classes/process/class-woody-getters.php:633
@@ -886,23 +898,23 @@ msgstr ""
 msgid "Découvrir"
 msgstr ""
 
-#: library/classes/process/class-woody-getters.php:788
+#: library/classes/process/class-woody-getters.php:789
 msgid "Informations prestataire"
 msgstr ""
 
-#: library/classes/process/class-woody-getters.php:793
+#: library/classes/process/class-woody-getters.php:794
 msgid "Horaires"
 msgstr ""
 
-#: library/classes/process/class-woody-getters.php:798
+#: library/classes/process/class-woody-getters.php:799
 msgid "Carte"
 msgstr ""
 
-#: library/classes/process/class-woody-getters.php:803
+#: library/classes/process/class-woody-getters.php:804
 msgid "Avis"
 msgstr ""
 
-#: library/classes/process/class-woody-getters.php:808
+#: library/classes/process/class-woody-getters.php:809
 msgid "Poser une question"
 msgstr ""
 
@@ -922,6 +934,6 @@ msgstr ""
 msgid "La page que vous recherchez a peut-être été supprimée ou est temporairement indisponible."
 msgstr ""
 
-#: library/templates/template.php:726
+#: library/templates/template.php:725
 msgid "Nos suggestions"
 msgstr ""
