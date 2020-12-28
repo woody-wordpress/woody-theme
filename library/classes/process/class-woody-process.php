@@ -73,6 +73,10 @@ class WoodyTheme_WoodyProcess
                 $vars['resort'] = $layout['infolive_block_select_resort'];
                 $vars['display_custom'] = $layout['infolive_block_switch_display'];
                 $vars['display'] = $layout['infolive_block_display'];
+                $vars['lists'] = $layout['infolive_list_display'];
+                $vars['lists_mode'] = $layout['infolive_list_display_mode'];
+                $vars['list_all'] = $layout['infolive_list_display_all_zones'];
+                $vars['list_selected_zones'] = $layout['infolive_list_select_zones'];
                 $the_infolive = apply_filters('woody_infolive', $vars);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_infolive);
                 break;

@@ -22,7 +22,9 @@ class WoodyTheme_SiteMap
         add_action('after_setup_theme', [$this, 'reduceQueryLoad'], 99);
         add_action('template_redirect', [$this, 'getSitemap'], 1);
         add_filter('query_vars', [$this, 'queryVars']);
-        // add_filter('wp_sitemaps_enabled', '__return_false');
+
+        // Disable native sitemap /wp-sitemap-posts-page-1.xml
+        add_filter('wp_sitemaps_enabled', '__return_false');
 
         // Adding a shortcode to display sitemap for humans
         add_shortcode('woody_sitemap', [$this, 'sitemapShortcode']);
