@@ -304,5 +304,9 @@ class WoodyTheme_Polylang
         __('De printemps', 'woody-theme');
         __('Matin', 'woody-theme');
         __('Après-midi', 'woody-theme');
+        __('Ouverte', 'woody-theme');
+        __('Fermée', 'woody-theme');
+        __('Prévision d\'ouverture', 'woody-theme');
+        __('Liaison', 'woody-theme');
     }
 }
