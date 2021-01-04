@@ -238,6 +238,10 @@ class WoodyTheme_WoodyCompilers
             }
         }
 
+        if (empty($wrapper['tmaps_confid']) && !empty(get_field('tmaps_confid', 'option'))) {
+            $wrapper['tmaps_confid'] = get_field('tmaps_confid', 'option');
+        }
+
         $return = \Timber::compile($twigPaths[$wrapper['woody_tpl']], $wrapper);
         return $return;
     }
