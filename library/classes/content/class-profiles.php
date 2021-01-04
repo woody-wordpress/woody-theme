@@ -125,9 +125,5 @@ class WoodyTheme_Profiles
             $pll_option['post_types'][] = 'profile';
             update_option('polylang', $pll_option);
         }
-
-        //TODO: function de nettoyage à supprimer quand on aura déployer tous nos sites
-        $pll_option['post_types'] = array_unique($pll_option['post_types']);
-        update_option('polylang', $pll_option);
     }
 }
