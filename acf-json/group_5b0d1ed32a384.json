@@ -139,9 +139,7 @@
                                 "link": "Lien",
                                 "file": "Fichier"
                             },
-                            "default_value": [
-                                "link"
-                            ],
+                            "default_value": "link",
                             "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
@@ -550,7 +548,26 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "33",
+                "width": "20",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5f9ae11459529",
+            "label": "Diaporama d'images",
+            "name": "display_slideshow",
+            "type": "true_false",
+            "instructions": "<small>Uniquement pour les pages avec plusieurs images de mise en avant<\/small>",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "20",
                 "class": "",
                 "id": ""
             },
@@ -569,7 +586,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "33",
+                "width": "20",
                 "class": "",
                 "id": ""
             },
@@ -588,7 +605,26 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "33",
+                "width": "20",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5f6c72b96b6d6",
+            "label": "Numéroter les résultats",
+            "name": "display_index",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "20",
                 "class": "",
                 "id": ""
             },
@@ -1006,7 +1042,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1591356159
+    "modified": 1603986147
 }

@@ -21,6 +21,7 @@ class WoodyTheme_Cleanup_Admin
             add_action('admin_menu', [$this, 'removeAdminMenu']);
             add_action('admin_menu', [$this, 'customMenusPage']);
             add_action('admin_menu', [$this, 'woodySettingsPage']);
+            add_filter('admin_body_class', [$this, 'adminBodyClass']);
 
             add_action('wp_before_admin_bar_render', [$this, 'customAdminBarMenu']);
             add_action('wp_dashboard_setup', [$this, 'removeDashboardWidgets']);
@@ -40,6 +41,9 @@ class WoodyTheme_Cleanup_Admin
             add_action('pre_get_posts', [$this, 'custom_pre_get_posts']);
 
             // add_action('admin_bar_menu', [$this, 'cleanupAdminBarMenu'], 99);
+
+            add_filter('page_row_actions', [$this, 'removeRowActions'], 11, 1);
+            add_filter('bulk_actions-edit-short_link', [$this, 'removeBulkActions'], 11, 1);
         }
     }
 
@@ -48,6 +52,20 @@ class WoodyTheme_Cleanup_Admin
         remove_meta_box('pageparentdiv', 'page', 'side');
     }
 
+    public function adminBodyClass($admin_body_classes)
+    {
+        // Added ENV to body classes
+        $admin_body_classes .= ' ' . WP_ENV;
+
+        // Added User roles to body classes
+        $user = wp_get_current_user(); // getting & setting the current user
+        $roles = (array) $user->roles; // obtaining the role
+        foreach ($roles as $role) {
+            $admin_body_classes .= ' role-' . $role;
+        }
+
+        return $admin_body_classes;
+    }
 
     public function sideMetaboxOrder($order)
     {
@@ -183,7 +201,7 @@ class WoodyTheme_Cleanup_Admin
             // Permet d'être compatible avec tout les sites (anciens et nouveaux)
             $legacyMenus = class_exists('SubWoodyTheme_Admin') && method_exists('SubWoodyTheme_Admin', 'addMenuMainPages') ? false : true;
 
-            if ($legacyMenus && $lang == PLL_DEFAULT_LANG) {
+            if ($legacyMenus && $lang == PLL_DEFAULT_LANG && empty(WOODY_GENERATE_MENU)) {
                 // Première sous-page
                 acf_add_options_sub_page(array(
                     'page_title'    => 'Menu principal',
@@ -254,5 +272,30 @@ class WoodyTheme_Cleanup_Admin
             $translated = 'Code HTML';
         }
         return $translated;
+    }
+
+    /**
+     * Franck Delaunay
+     * On retire des options selon le post_type
+     */
+    public function removeRowActions($actions)
+    {
+        if (get_post_type() == "short_link") {
+            unset($actions['clone']);
+            unset($actions['edit_as_new_draft']);
+        }
+
+        return $actions;
+    }
+
+    /**
+     * Franck Delaunay
+     * On retire des actions de masse du sélecteur
+     */
+    public function removeBulkActions($actions)
+    {
+        unset($actions['duplicate_post_clone']);
+
+        return $actions;
     }
 }

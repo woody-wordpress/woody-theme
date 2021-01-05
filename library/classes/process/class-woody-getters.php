@@ -357,6 +357,23 @@ class WoodyTheme_WoodyGetters
             }
             if (!empty($data['img'])) {
                 $data['img']['attachment_more_data'] = $this->tools->getAttachmentMoreData($data['img']['ID']);
+
+                // On génère un tableau des urls de toutes les images complémentaires de mise en avant
+                if (!empty($wrapper['display_slideshow'])) {
+                    $slideshow = get_field('focus_secondary_img', $item->ID);
+
+                    if (!empty($slideshow)) {
+                        foreach ($slideshow as $slide_key => $slide) {
+                            foreach ($slide['sizes'] as $size_key => $size) {
+                                if (strpos($size_key, 'height') === false and strpos($size_key, 'width') === false) {
+                                    $slideshow_srcs[$slide_key][$size_key] = $size;
+                                }
+                            }
+                        }
+
+                        $data['slideshow'] = $slideshow_srcs;
+                    }
+                }
             }
         }
 
@@ -367,7 +384,7 @@ class WoodyTheme_WoodyGetters
         $data['location']['lng'] = (!empty($lng)) ? str_replace(',', '.', $lng) : '';
 
         if ($clickable) {
-            $data['link']['url'] = get_permalink($item->ID);
+            $data['link']['url'] = apply_filters('woody_get_permalink', $item->ID);
         }
 
         $data = apply_filters('woody_custom_pagePreview', $data, $wrapper);
@@ -715,6 +732,7 @@ class WoodyTheme_WoodyGetters
             }
             $return['button'] = (!empty($filter_wrapper['filter_button'])) ? $filter_wrapper['filter_button'] : '';
             $return['reset'] = (!empty($filter_wrapper['reset_button'])) ? $filter_wrapper['reset_button'] : '';
+            $return['open_auto'] = (!empty($filter_wrapper['listfilter_open_auto'])) ? $filter_wrapper['listfilter_open_auto'] : '';
             $return['display']['background_img'] = (!empty($filter_wrapper['background_img'])) ? $filter_wrapper['background_img'] : '';
             $return['display']['classes'][] = (!empty($filter_wrapper['background_color'])) ? $filter_wrapper['background_color'] : '';
             $return['display']['classes'][] = (!empty($filter_wrapper['background_img_opacity'])) ? $filter_wrapper['background_img_opacity'] : '';

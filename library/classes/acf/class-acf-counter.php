@@ -24,8 +24,8 @@ class WoodyTheme_ACF_Counter
         $return = null;
         $params = $_POST['params'];
         if (is_array($params) && !empty($params['current_post'])) {
-            $transient_key = 'woody_afc_' . md5(serialize($params));
-            if (false === ($return = get_transient($transient_key))) {
+            $cache_key = 'woody_afc_' . md5(serialize($params));
+            if (false === ($return = wp_cache_get($cache_key, 'woody'))) {
                 $tax_query = [
                     'relation' => 'AND'
                 ];
@@ -100,10 +100,10 @@ class WoodyTheme_ACF_Counter
                     }
                 }
 
-                // It wasn't there, so regenerate the data and save the transient
+                // It wasn't there, so regenerate the data and save the cache
                 $focused_posts = new \WP_Query($the_query);
                 $return = $focused_posts->post_count;
-                set_transient($transient_key, $return, 2*60);
+                wp_cache_set($cache_key, $return, 'woody', 2*60);
             }
         }
 

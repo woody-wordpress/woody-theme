@@ -1,6 +1,7 @@
 import $ from 'jquery';
 
 $('#post').each(function() {
+
     var $this = $(this);
     var $taxonomiesBoxes = $this.find('#side-sortables .postbox .inside > .categorydiv:not(#taxonomy-page_type) div[id$="-all"] ');
     var $primaryTagsFields = $this.find('.acf-field-group.acf-field-5d7bada38eedf');
@@ -61,6 +62,15 @@ $('#post').each(function() {
         $el.parent('.selectit').parent('li').append('<span class="primary-toggle unset-primary-term hide" data-term-id="' + $el.val() + '"><small>Principal<small></span>');
     }
 
+
+    var unsetPrimaryTerm = function(termCheckbox) {
+        let $term = termCheckbox.closest('li');
+        if ($term.find('.is-primary-term').length > 0) {
+            $term.find('.unset-primary-term').trigger('click');
+            $term.find('.set-primary-term').addClass('hide');
+        }
+    }
+
     // Pour chacune des metaboxes de taxonomie, on créé les boutons d'action
     $taxonomiesBoxes.each(function() {
         var $taxonomyBox = $(this);
@@ -73,6 +83,7 @@ $('#post').each(function() {
 
             $termCheckbox.click(function() {
                 displayTermPrimaryButton($termCheckbox, $taxonomyBox);
+                unsetPrimaryTerm($termCheckbox);
             });
         });
 

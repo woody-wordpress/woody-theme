@@ -76,7 +76,8 @@
             },
             "choices": {
                 "OR": "un des termes sélectionnés",
-                "AND": "tous les termes sélectionnés"
+                "AND": "tous les termes sélectionnés",
+                "NONE": "aucun des termes sélectionnés"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -213,7 +214,26 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5f9ae2fca8d76",
+            "label": "Diaporama d'images",
+            "name": "display_slideshow",
+            "type": "true_false",
+            "instructions": "<small>Uniquement pour les pages avec plusieurs images de mise en avant<\/small>",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -232,12 +252,31 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
             "message": "",
             "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5f71aa91bccc7",
+            "label": "Numéroter les résultats",
+            "name": "display_index",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
             "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
@@ -542,48 +581,6 @@
                     "layout": "block",
                     "prefix_label": 0,
                     "prefix_name": 0
-                },
-                {
-                    "key": "field_5d1b2b6006044",
-                    "label": "Paramètres Touristic Maps",
-                    "name": "focus_tmaps_params",
-                    "type": "clone",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "clone": [
-                        "field_5c989085888ee"
-                    ],
-                    "display": "seamless",
-                    "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0
-                },
-                {
-                    "key": "field_5d1b2bc606045",
-                    "label": "Identifiant de conf Touristic Maps",
-                    "name": "focus_tmaps_confid",
-                    "type": "clone",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "clone": [
-                        "field_5c9891e2c9133"
-                    ],
-                    "display": "seamless",
-                    "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0
                 }
             ]
         },
@@ -750,7 +747,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1593617400
+    "modified": 1603986357
 }
