@@ -66,11 +66,7 @@ class WoodyTheme_WoodyCompilers
             case 'profile_focus':
                 $the_items = $this->getter->getProfileFocusData($wrapper);
             break;
-            // case 'auto_focus_rdbk':
-            //     $the_items = $this->getter->getRoadBookFocusData($wrapper);
-            // break;
         }
-
         $the_items['alert'] = apply_filters('add_admin_alert_message', '');
         if (!empty($the_items) && !empty($the_items['items']) && is_array($the_items['items'])) {
             foreach ($the_items['items'] as $item_key => $item) {
