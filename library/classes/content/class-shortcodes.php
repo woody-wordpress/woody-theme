@@ -21,7 +21,6 @@ class WoodyTheme_Shortcodes
     {
         add_shortcode('woody_meteo', [$this, 'weatherShortCode']);
         add_shortcode('woody_recherche', [$this, 'searchShortCode']);
-        add_shortcode('woody_search_v2', [$this, 'searchShortCodeV2']);
         add_shortcode('woody_anchor', [$this, 'anchorShortcode']);
     }
 
@@ -76,27 +75,6 @@ class WoodyTheme_Shortcodes
         $template = !empty($tplSearch['template']) ?: $this->twigPaths['woody_widgets-es_search-tpl_01'];
 
         return \Timber::compile($template, $result);
-    }
-
-    /**
-     * Recherche V2
-     */
-    public function searchShortCodeV2($atts)
-    {
-        // TODO: use Twig
-        // ! Add Logo param
-        // ? Add season param
-
-        $return = '<rc-woody-search
-        url="http://esdemo.rc.prod:8081/wordpress/preprod/search/"
-        logo="' . get_stylesheet_directory() . '/logo.svg"
-        sitekey=' . WP_SITE_KEY . '
-        lang=' . pll_current_language() . '
-        open-button=".esSearch-button"
-        default-display="block"
-        ></rc-woody-search>';
-
-        return $return;
     }
 
     /**
