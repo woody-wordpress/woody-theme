@@ -68,13 +68,14 @@ new WoodyTheme_Unpublisher();
 new WoodyTheme_Varnish();
 new WoodyTheme_Shuffle();
 new WoodyTheme_Videos();
+new WoodyTheme_Testimonials();
 
 // Timber
 new WoodyTheme_Timber_Filters();
 
 // Menu
 new WoodyTheme_Menus();
-if (defined('WOODY_GENERATE_MENU') && WOODY_GENERATE_MENU) {
+if (defined('WOODY_GENERATE_MENU')) {
     new Woody\Menus\Admin_Menus();
 }
 

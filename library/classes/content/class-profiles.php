@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Robots
+ * Profiles
  *
  * @package WoodyTheme
  * @since WoodyTheme 1.23.0

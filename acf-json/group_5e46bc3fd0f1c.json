@@ -55,13 +55,66 @@
                     "maxlength": ""
                 },
                 {
+                    "key": "field_5ed10c2571049",
+                    "label": "Utiliser un témoignage existant",
+                    "name": "testimony_auto",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 1,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_5ed10c3769b04",
+                    "label": "Témoignage",
+                    "name": "testimony_post_object",
+                    "type": "post_object",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [{
+                            "field": "field_5ed10c2571049",
+                            "operator": "==",
+                            "value": 1
+                        }]
+                    ],
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": [
+                        "testimony"
+                    ],
+                    "taxonomy": "",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "return_format": "id",
+                    "ui": 1
+                },
+                {
                     "key": "field_5e4a5a30290e9",
                     "label": "Portrait \/ Photo",
                     "name": "img",
                     "type": "image",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [{
+                            "field": "field_5ed10c2571049",
+                            "operator": "==",
+                            "value": 0
+                        }]
+                    ],
                     "wrapper": {
                         "width": "60",
                         "class": "",
@@ -85,7 +138,13 @@
                     "type": "text",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [{
+                            "field": "field_5ed10c2571049",
+                            "operator": "==",
+                            "value": 0
+                        }]
+                    ],
                     "wrapper": {
                         "width": "40",
                         "class": "",
@@ -104,7 +163,13 @@
                     "type": "text",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [{
+                            "field": "field_5ed10c2571049",
+                            "operator": "==",
+                            "value": 0
+                        }]
+                    ],
                     "wrapper": {
                         "width": "75",
                         "class": "",
@@ -123,7 +188,13 @@
                     "type": "wysiwyg",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [{
+                            "field": "field_5ed10c2571049",
+                            "operator": "==",
+                            "value": 0
+                        }]
+                    ],
                     "wrapper": {
                         "width": "100",
                         "class": "",

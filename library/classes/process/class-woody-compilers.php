@@ -691,4 +691,23 @@ class WoodyTheme_WoodyCompilers
 
         return $breadcrumb;
     }
+
+    public function formatTestimonials($layout)
+    {
+        if (!empty($layout['testimonials'])) {
+            foreach ($layout['testimonials'] as $testimony_key => $testimony) {
+                if (!empty($testimony['testimony_post_object']) && is_int($testimony['testimony_post_object'])) {
+                    $layout['testimonials'][$testimony_key]['text'] = get_field('testimony_text', $testimony['testimony_post_object']);
+                    $layout['testimonials'][$testimony_key]['title'] = get_the_title($testimony['testimony_post_object']);
+                    $profile = get_field('testimony_linked_profile', $testimony['testimony_post_object']);
+                    if (!empty($profile) && is_int($profile)) {
+                        $layout['testimonials'][$testimony_key]['signature'] = get_the_title($profile);
+                        $layout['testimonials'][$testimony_key]['img'] = get_field('profile_picture', $profile);
+                    }
+                }
+            }
+        }
+
+        return $layout;
+    }
 }

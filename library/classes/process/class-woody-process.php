@@ -191,6 +191,10 @@ class WoodyTheme_WoodyProcess
                 $layout['display'] = $this->tools->getDisplayOptions($layout['story_bg_params']);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
+            case 'testimonials':
+                $layout = $this->compilers->formatTestimonials($layout);
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            break;
             default:
 
                 // On autorise le traitement des layouts depuis un code externe
