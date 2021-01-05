@@ -234,6 +234,10 @@ class WoodyTheme_WoodyCompilers
             }
         }
 
+        if (empty($wrapper['tmaps_confid']) && !empty(get_field('tmaps_confid', 'option'))) {
+            $wrapper['tmaps_confid'] = get_field('tmaps_confid', 'option');
+        }
+
         $return = \Timber::compile($twigPaths[$wrapper['woody_tpl']], $wrapper);
         return $return;
     }
@@ -417,7 +421,7 @@ class WoodyTheme_WoodyCompilers
             if (isset($the_list['filters']['the_map'])) {
                 $map_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid'], true, $default_items_ids, $wrapper['the_list_filters']);
 
-                $the_list['filters']['the_map'] = $this->formatListMapFilter($map_items, $wrapper['default_marker'], $twigPaths);
+                $the_list['filters']['the_map']['markers'] = $this->formatListMapFilter($map_items, $wrapper['default_marker'], $twigPaths);
                 $the_list['has_map'] = true;
             }
         }
@@ -488,7 +492,7 @@ class WoodyTheme_WoodyCompilers
                         ]
                     ];
 
-                    $return['markers'][] = [
+                    $return[] = [
                         'map_position' => [
                             'lat' => $item['location']['lat'],
                             'lng' => $item['location']['lng']
