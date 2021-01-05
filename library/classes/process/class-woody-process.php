@@ -47,6 +47,7 @@ class WoodyTheme_WoodyProcess
             case 'auto_focus_topics':
             case 'focus_trip_components':
             case 'profile_focus':
+                // TODO: les cases auto_focus_topics + auto_focus_sheets + focus_trip_components doivent être ajoutés via le filtre woody_custom_layout depuis leurs addons respectifs
                 $return = $this->compilers->formatFocusesData($layout, $context['post'], $context['woody_components']);
                 break;
             case 'manual_focus_minisheet':
@@ -188,6 +189,10 @@ class WoodyTheme_WoodyProcess
             break;
             case 'story':
                 $layout['display'] = $this->tools->getDisplayOptions($layout['story_bg_params']);
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            break;
+            case 'testimonials':
+                $layout = $this->compilers->formatTestimonials($layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
             default:

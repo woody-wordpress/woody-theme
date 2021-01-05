@@ -66,11 +66,7 @@ class WoodyTheme_WoodyCompilers
             case 'profile_focus':
                 $the_items = $this->getter->getProfileFocusData($wrapper);
             break;
-            // case 'auto_focus_rdbk':
-            //     $the_items = $this->getter->getRoadBookFocusData($wrapper);
-            // break;
         }
-
         $the_items['alert'] = apply_filters('add_admin_alert_message', '');
         if (!empty($the_items) && !empty($the_items['items']) && is_array($the_items['items'])) {
             foreach ($the_items['items'] as $item_key => $item) {
@@ -236,6 +232,10 @@ class WoodyTheme_WoodyCompilers
                     $wrapper['markers'][$key]['marker_thumb_html']  = \Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker);
                 }
             }
+        }
+
+        if (empty($wrapper['tmaps_confid']) && !empty(get_field('tmaps_confid', 'option'))) {
+            $wrapper['tmaps_confid'] = get_field('tmaps_confid', 'option');
         }
 
         $return = \Timber::compile($twigPaths[$wrapper['woody_tpl']], $wrapper);
@@ -421,7 +421,7 @@ class WoodyTheme_WoodyCompilers
             if (isset($the_list['filters']['the_map'])) {
                 $map_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid'], true, $default_items_ids, $wrapper['the_list_filters']);
 
-                $the_list['filters']['the_map'] = $this->formatListMapFilter($map_items, $wrapper['default_marker'], $twigPaths);
+                $the_list['filters']['the_map']['markers'] = $this->formatListMapFilter($map_items, $wrapper['default_marker'], $twigPaths);
                 $the_list['has_map'] = true;
             }
         }
@@ -492,7 +492,7 @@ class WoodyTheme_WoodyCompilers
                         ]
                     ];
 
-                    $return['markers'][] = [
+                    $return[] = [
                         'map_position' => [
                             'lat' => $item['location']['lat'],
                             'lng' => $item['location']['lng']
@@ -694,5 +694,24 @@ class WoodyTheme_WoodyCompilers
         $breadcrumb = \Timber::compile($template, $data);
 
         return $breadcrumb;
+    }
+
+    public function formatTestimonials($layout)
+    {
+        if (!empty($layout['testimonials'])) {
+            foreach ($layout['testimonials'] as $testimony_key => $testimony) {
+                if (!empty($testimony['testimony_post_object']) && is_int($testimony['testimony_post_object'])) {
+                    $layout['testimonials'][$testimony_key]['text'] = get_field('testimony_text', $testimony['testimony_post_object']);
+                    $layout['testimonials'][$testimony_key]['title'] = get_the_title($testimony['testimony_post_object']);
+                    $profile = get_field('testimony_linked_profile', $testimony['testimony_post_object']);
+                    if (!empty($profile) && is_int($profile)) {
+                        $layout['testimonials'][$testimony_key]['signature'] = get_the_title($profile);
+                        $layout['testimonials'][$testimony_key]['img'] = get_field('profile_picture', $profile);
+                    }
+                }
+            }
+        }
+
+        return $layout;
     }
 }
