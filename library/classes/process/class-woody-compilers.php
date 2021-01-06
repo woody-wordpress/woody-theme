@@ -66,11 +66,8 @@ class WoodyTheme_WoodyCompilers
             case 'profile_focus':
                 $the_items = $this->getter->getProfileFocusData($wrapper);
             break;
-            // case 'auto_focus_rdbk':
-            //     $the_items = $this->getter->getRoadBookFocusData($wrapper);
-            // break;
         }
-
+        $the_items['alert'] = apply_filters('add_admin_alert_message', '');
         if (!empty($the_items) && !empty($the_items['items']) && is_array($the_items['items'])) {
             foreach ($the_items['items'] as $item_key => $item) {
                 if (!empty($item['description'])) {
@@ -237,6 +234,10 @@ class WoodyTheme_WoodyCompilers
             }
         }
 
+        if (empty($wrapper['tmaps_confid']) && !empty(get_field('tmaps_confid', 'option'))) {
+            $wrapper['tmaps_confid'] = get_field('tmaps_confid', 'option');
+        }
+
         $return = \Timber::compile($twigPaths[$wrapper['woody_tpl']], $wrapper);
         return $return;
     }
@@ -305,7 +306,7 @@ class WoodyTheme_WoodyCompilers
                     if (!empty($matches[0])) {
                         foreach ($matches[0] as $match) {
                             $str = str_replace(['[', ']'], '', $match);
-                            $link = '<a href="' . get_permalink(pll_get_post($post->ID)) . '">' . $str . '</a>';
+                            $link = '<a href="' . apply_filters('woody_get_permalink', pll_get_post($post->ID)) . '">' . $str . '</a>';
                             $data['description'] = str_replace($match, $link, $data['description']);
                         }
                     }
@@ -326,7 +327,7 @@ class WoodyTheme_WoodyCompilers
         $return = '';
 
         // On définit des variables de base
-        $the_list['permalink'] = get_permalink($current_post->ID);
+        $the_list['permalink'] = apply_filters('woody_get_permalink', $current_post->ID);
         $the_list['uniqid'] = $wrapper['uniqid'];
         $the_list['has_map'] = false;
 
@@ -341,21 +342,21 @@ class WoodyTheme_WoodyCompilers
 
         // On ajoute une variable à passer à la pagination (surchargée par les paramètres GET la cas échéant)
         $list_el_wrapper['seed'] = date('dmY');
-        // On récupère les items par défaut et on les stocke dans un transient pour les passer aux filtres
-        $transient_name = 'list_filters__post_' . $current_post->ID . '_' . $wrapper['uniqid'];
-        $default_items = get_transient($transient_name);
+        // On récupère les items par défaut et on les stocke dans un cache pour les passer aux filtres
+        $cache_key = 'list_filters__post_' . $current_post->ID . '_' . $wrapper['uniqid'];
+        $default_items = wp_cache_get($cache_key, 'woody');
         if (empty($default_items)) {
             $default_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid'], true);
-            set_transient($transient_name, $default_items);
+            wp_cache_set($cache_key, $default_items, 'woody');
         }
 
-        // On crée/update l'option qui liste les transients pour pouvoir les supprimer lors d'un save_post
-        $transient_list = get_option('woody_list_filters_cache');
-        if (empty($transient_list)) {
-            update_option('woody_list_filters_cache', [$transient_name], false);
-        } elseif (!array_key_exists($transient_name, $transient_list)) {
-            $transient_list[] = $transient_name;
-            update_option('woody_list_filters_cache', $transient_list, false);
+        // On crée/update l'option qui liste les caches pour pouvoir les supprimer lors d'un save_post
+        $cache_list = get_option('woody_list_filters_cache');
+        if (empty($cache_list)) {
+            update_option('woody_list_filters_cache', [$cache_key], false);
+        } elseif (!array_key_exists($cache_key, $cache_list)) {
+            $cache_list[] = $cache_key;
+            update_option('woody_list_filters_cache', $cache_list, false);
         }
 
         // On récupère les ids des posts non filtrés pour les passer au paramètre post__in de la query
@@ -420,7 +421,7 @@ class WoodyTheme_WoodyCompilers
             if (isset($the_list['filters']['the_map'])) {
                 $map_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid'], true, $default_items_ids, $wrapper['the_list_filters']);
 
-                $the_list['filters']['the_map'] = $this->formatListMapFilter($map_items, $wrapper['default_marker'], $twigPaths);
+                $the_list['filters']['the_map']['markers'] = $this->formatListMapFilter($map_items, $wrapper['default_marker'], $twigPaths);
                 $the_list['has_map'] = true;
             }
         }
@@ -436,13 +437,13 @@ class WoodyTheme_WoodyCompilers
 
     public function savePost()
     {
-        $transient_list = get_option('woody_list_filters_cache');
-        if (!empty($transient_list)) {
-            foreach ($transient_list as $transient) {
-                delete_transient($transient);
+        $cache_list = get_option('woody_list_filters_cache');
+        if (!empty($cache_list)) {
+            foreach ($cache_list as $cache_key) {
+                wp_cache_delete($cache_key, 'woody');
             }
+            delete_option('woody_list_filters_cache');
         }
-        delete_option('woody_list_filters_cache');
     }
 
     /**
@@ -491,7 +492,7 @@ class WoodyTheme_WoodyCompilers
                         ]
                     ];
 
-                    $return['markers'][] = [
+                    $return[] = [
                         'map_position' => [
                             'lat' => $item['location']['lat'],
                             'lng' => $item['location']['lng']
@@ -508,7 +509,7 @@ class WoodyTheme_WoodyCompilers
     public function formatSummaryItems($post_id)
     {
         $items = [];
-        $permalink = get_permalink($post_id);
+        $permalink = apply_filters('woody_get_permalink', $post_id);
         $sections = get_field('section', $post_id);
         if (!empty($sections) && is_array($sections)) {
             foreach ($sections as $s_key => $section) {
@@ -612,7 +613,7 @@ class WoodyTheme_WoodyCompilers
         $page_hero = getAcfGroupFields('group_5b052bbee40a4', $context['post']);
 
         if (!empty($page_hero['page_heading_media_type']) && ($page_hero['page_heading_media_type'] == 'movie' && !empty($page_hero['page_heading_movie']) || ($page_hero['page_heading_media_type'] == 'img' && !empty($page_hero['page_heading_img'])))) {
-            if (empty($page_teaser['page_teaser_display_title'])) {
+            if (empty(get_field('page_teaser_display_title', $context['post_id']))) {
                 $page_hero['title_as_h1'] = true;
             }
 
@@ -638,6 +639,13 @@ class WoodyTheme_WoodyCompilers
             $page_hero['description'] = (!empty($page_hero['description'])) ? $this->tools->replacePattern($page_hero['description'], $context['post_id']) : '';
 
             $page_hero['title'] = (!empty($page_hero['title'])) ? str_replace('-', '&#8209', $page_hero['title']) : '';
+
+            $page_hero['the_classes'] = [];
+            $page_hero['the_classes'][] = (!empty($page_hero['title'])) ? 'has-title' : '';
+            $page_hero['the_classes'][] = (!empty($page_hero['pretitle'])) ? 'has-pretitle' : '';
+            $page_hero['the_classes'][] = (!empty($page_hero['subtitle'])) ? 'has-subtitle' : '';
+            $page_hero['the_classes'][] = (!empty($page_hero['description'])) ? 'has-description' : '';
+            $page_hero['classes'] = (!empty($page_hero['the_classes'])) ? implode(' ', $page_hero['the_classes']) : '';
 
             $page_hero = apply_filters('woody_custom_page_hero', $page_hero, $context);
 
@@ -686,5 +694,24 @@ class WoodyTheme_WoodyCompilers
         $breadcrumb = \Timber::compile($template, $data);
 
         return $breadcrumb;
+    }
+
+    public function formatTestimonials($layout)
+    {
+        if (!empty($layout['testimonials'])) {
+            foreach ($layout['testimonials'] as $testimony_key => $testimony) {
+                if (!empty($testimony['testimony_post_object']) && is_int($testimony['testimony_post_object'])) {
+                    $layout['testimonials'][$testimony_key]['text'] = get_field('testimony_text', $testimony['testimony_post_object']);
+                    $layout['testimonials'][$testimony_key]['title'] = get_the_title($testimony['testimony_post_object']);
+                    $profile = get_field('testimony_linked_profile', $testimony['testimony_post_object']);
+                    if (!empty($profile) && is_int($profile)) {
+                        $layout['testimonials'][$testimony_key]['signature'] = get_the_title($profile);
+                        $layout['testimonials'][$testimony_key]['img'] = get_field('profile_picture', $profile);
+                    }
+                }
+            }
+        }
+
+        return $layout;
     }
 }

@@ -47,6 +47,7 @@ class WoodyTheme_WoodyProcess
             case 'auto_focus_topics':
             case 'focus_trip_components':
             case 'profile_focus':
+                // TODO: les cases auto_focus_topics + auto_focus_sheets + focus_trip_components doivent être ajoutés via le filtre woody_custom_layout depuis leurs addons respectifs
                 $return = $this->compilers->formatFocusesData($layout, $context['post'], $context['woody_components']);
                 break;
             case 'manual_focus_minisheet':
@@ -73,6 +74,10 @@ class WoodyTheme_WoodyProcess
                 $vars['resort'] = $layout['infolive_block_select_resort'];
                 $vars['display_custom'] = $layout['infolive_block_switch_display'];
                 $vars['display'] = $layout['infolive_block_display'];
+                $vars['lists'] = $layout['infolive_list_display'];
+                $vars['lists_mode'] = $layout['infolive_list_display_mode'];
+                $vars['list_all'] = $layout['infolive_list_display_all_zones'];
+                $vars['list_selected_zones'] = $layout['infolive_list_select_zones'];
                 $the_infolive = apply_filters('woody_infolive', $vars);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_infolive);
                 break;
@@ -186,6 +191,10 @@ class WoodyTheme_WoodyProcess
                 $layout['display'] = $this->tools->getDisplayOptions($layout['story_bg_params']);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
+            case 'testimonials':
+                $layout = $this->compilers->formatTestimonials($layout);
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            break;
             default:
 
                 // On autorise le traitement des layouts depuis un code externe
@@ -222,7 +231,7 @@ class WoodyTheme_WoodyProcess
             }
 
             // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
-            if (!empty($grid['light_section_content'])) {
+            if (!empty($grid['light_section_content']) && is_array($grid['light_section_content'])) {
                 foreach ($grid['light_section_content'] as $layout) {
                     $grid_content['items'][] = $this->processWoodyLayouts($layout, $context);
                 }

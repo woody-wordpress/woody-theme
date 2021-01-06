@@ -320,23 +320,26 @@ class Admin_Menus
 
             foreach ($this->menu_post_ids as $post_id) {
                 $key = 'field_submenu_' . $post_id;
-                $label = get_post($post_id)->post_title;
-                $name = 'submenu_' . $post_id;
+                $post = get_post($post_id);
+                if (!empty($post)) {
+                    $label = $post->post_title;
+                    $name = 'submenu_' . $post_id;
 
-                $group['fields'][] = [
-                    'key' => 'tab_' . $key,
-                    'label' => $label,
-                    'type' => 'tab',
-                    'placement' => 'left',
-                    'endpoint' => 0
-                ];
-                $group['fields'][$index] = [
-                    'key' => $key,
-                    'name' => $name,
-                    'type' => 'group',
-                    'sub_fields' => (!empty($sub_fields[$index]['sub_fields'])) ? $sub_fields[$index]['sub_fields'] : ''
-                ];
-                $index+= 2;
+                    $group['fields'][] = [
+                        'key' => 'tab_' . $key,
+                        'label' => $label,
+                        'type' => 'tab',
+                        'placement' => 'left',
+                        'endpoint' => 0
+                    ];
+                    $group['fields'][$index] = [
+                        'key' => $key,
+                        'name' => $name,
+                        'type' => 'group',
+                        'sub_fields' => (!empty($sub_fields[$index]['sub_fields'])) ? $sub_fields[$index]['sub_fields'] : ''
+                    ];
+                    $index+= 2;
+                }
             }
         } else {
             $group['fields'][] = [

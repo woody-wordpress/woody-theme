@@ -65,7 +65,15 @@ class WoodyTheme_Commands
         \WP_CLI::success('woody_flush_cache');
 
         // (Not all cache back ends listen to 'flush')
+        global $wpdb;
+        $results = $wpdb->get_results("SELECT option_name FROM {$wpdb->prefix}options WHERE option_name LIKE '%options_%'");
+        if (!empty($results)) {
+            foreach ($results as $val) {
+                wp_cache_delete($val->option_name, 'options');
+            }
+        }
         wp_cache_delete('alloptions', 'options');
+        wp_cache_delete('notoptions', 'options');
         \WP_CLI::success('wp_cache_delete alloptions');
     }
 

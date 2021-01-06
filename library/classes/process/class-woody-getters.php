@@ -384,7 +384,7 @@ class WoodyTheme_WoodyGetters
         $data['location']['lng'] = (!empty($lng)) ? str_replace(',', '.', $lng) : '';
 
         if ($clickable) {
-            $data['link']['url'] = get_permalink($item->ID);
+            $data['link']['url'] = apply_filters('woody_get_permalink', $item->ID);
         }
 
         $data = apply_filters('woody_custom_pagePreview', $data, $wrapper);
@@ -708,7 +708,11 @@ class WoodyTheme_WoodyGetters
                         break;
 
                     case 'map':
-                        $return['the_map'] = [];
+                        if (empty($filter['list_filter_map_params']['tmaps_confid']) && !empty(get_field('tmaps_confid', 'option'))) {
+                            $filter['list_filter_map_params']['tmaps_confid'] = get_field('tmaps_confid', 'option');
+                        }
+
+                        $return['the_map'] = $filter;
                         unset($filter_wrapper['list_filters'][$key]);
                         break;
 
@@ -732,6 +736,7 @@ class WoodyTheme_WoodyGetters
             }
             $return['button'] = (!empty($filter_wrapper['filter_button'])) ? $filter_wrapper['filter_button'] : '';
             $return['reset'] = (!empty($filter_wrapper['reset_button'])) ? $filter_wrapper['reset_button'] : '';
+            $return['open_auto'] = (!empty($filter_wrapper['listfilter_open_auto'])) ? $filter_wrapper['listfilter_open_auto'] : '';
             $return['display']['background_img'] = (!empty($filter_wrapper['background_img'])) ? $filter_wrapper['background_img'] : '';
             $return['display']['classes'][] = (!empty($filter_wrapper['background_color'])) ? $filter_wrapper['background_color'] : '';
             $return['display']['classes'][] = (!empty($filter_wrapper['background_img_opacity'])) ? $filter_wrapper['background_img_opacity'] : '';

@@ -136,7 +136,6 @@ abstract class WoodyTheme_TemplateAbstract
         // Woody options pages
         $this->context['woody_options_pages'] = $this->getWoodyOptionsPagesValues();
 
-
         /******************************************************************************
          * Sommes nous dans le cas d'une page miroir ?
          ******************************************************************************/
@@ -222,7 +221,7 @@ abstract class WoodyTheme_TemplateAbstract
             $tools_blocks['preparespot_switcher'] = $this->addPrepareSpotSwitcher();
             $this->context['preparespot_switcher'] = apply_filters('preparespot_switcher', $tools_blocks['preparespot_switcher']);
         }
-        
+
         // Add more tools
         $this->context['subtheme_more_tools'] = apply_filters('more_tools', [], $tools_blocks);
 
@@ -719,7 +718,7 @@ abstract class WoodyTheme_TemplateAbstract
 
         if (!empty($search_post_id)) {
             $data = [];
-            $data['search_url'] = get_permalink(pll_get_post($search_post_id));
+            $data['search_url'] = apply_filters('woody_get_permalink', pll_get_post($search_post_id));
 
             $suggest = apply_filters('woody_get_field_option', 'es_search_block_suggests');
             if (!empty($suggest) && !empty($suggest['suggest_pages'])) {
@@ -765,7 +764,7 @@ abstract class WoodyTheme_TemplateAbstract
         $favorites_post_id = apply_filters('woody_get_field_option', 'favorites_page_url');
         if (!empty($favorites_post_id)) {
             $data = [];
-            $data['favorites_page_url'] = get_permalink(pll_get_post($favorites_post_id));
+            $data['favorites_page_url'] = apply_filters('woody_get_permalink', pll_get_post($favorites_post_id));
 
             // Set a default template
             $tpl = apply_filters('favorites_block_tpl', null);

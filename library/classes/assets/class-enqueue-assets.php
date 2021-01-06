@@ -48,7 +48,7 @@ class WoodyTheme_Enqueue_Assets
 
     protected function registerHooks()
     {
-        add_action('woody_theme_update', [$this, 'cleanTransient']);
+        add_action('woody_theme_update', [$this, 'woodyThemeUpdate']);
         add_action('wp_enqueue_scripts', [$this, 'enqueueLibraries']);
         add_action('wp_enqueue_scripts', [$this, 'enqueueAssets']);
         add_action('admin_enqueue_scripts', [$this, 'enqueueAdminAssets']);
@@ -150,9 +150,6 @@ class WoodyTheme_Enqueue_Assets
         // if (WP_ENV == 'dev') {
         //     wp_enqueue_script('jsdelivr_jquery-migrate', 'https://cdn.jsdelivr.net/npm/jquery-migrate@3.0.1/dist/jquery-migrate.min.js', ['jquery'], null);
         // }
-
-        // Dependencies of main.js
-        wp_enqueue_script('jsdelivr_cookieconsent', 'https://cdn.jsdelivr.net/npm/cookieconsent@3.1.0/build/cookieconsent.min.js', [], null);
 
         if (!$this->isTouristicSheet || $this->isRoadBookSheet) {
             wp_enqueue_script('jsdelivr_swiper', 'https://cdn.jsdelivr.net/npm/swiper@4.4.1/dist/js/swiper.min.js', [], null);
@@ -292,7 +289,6 @@ class WoodyTheme_Enqueue_Assets
         // Enqueue the main Scripts
         $dependencies = [
             'jquery',
-            'jsdelivr_cookieconsent',
             'jsdelivr_flatpickr',
             'jsdelivr_flatpickr_l10n',
             'jsdelivr_lg-fullscreen',
@@ -302,6 +298,7 @@ class WoodyTheme_Enqueue_Assets
             'jsdelivr_lg-zoom',
             'jsdelivr_lightgallery',
             'jsdelivr_plyr',
+            'jsdelivr_jscookie',
             'wp-i18n',
         ];
 
@@ -360,10 +357,10 @@ class WoodyTheme_Enqueue_Assets
         return $return;
     }
 
-    public function cleanTransient()
+    public function woodyThemeUpdate()
     {
-        // Delete Transient
-        delete_transient('woody_asset_paths');
+        // Delete Cache
+        wp_cache_delete('woody_asset_paths', 'woody');
     }
 
     private function assetPath($file_url)
@@ -400,7 +397,7 @@ class WoodyTheme_Enqueue_Assets
 
     protected function setAssetPaths()
     {
-        $assetPaths = get_transient('woody_asset_paths');
+        $assetPaths = wp_cache_get('woody_asset_paths', 'woody');
         if (empty($assetPaths) || WP_ENV == 'dev') {
             $assetPaths = [];
 
@@ -429,7 +426,7 @@ class WoodyTheme_Enqueue_Assets
             }
 
             if (!empty($assetPaths)) {
-                set_transient('woody_asset_paths', $assetPaths);
+                wp_cache_set('woody_asset_paths', $assetPaths, 'woody');
             }
         }
 

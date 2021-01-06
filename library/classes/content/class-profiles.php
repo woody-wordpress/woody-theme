@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Robots
+ * Profiles
  *
  * @package WoodyTheme
  * @since WoodyTheme 1.23.0
@@ -18,7 +18,7 @@ class WoodyTheme_Profiles
     {
         add_action('init', array($this, 'registerPostType'), 10);
         add_action('init', array($this, 'registerTaxonomies'), 11);
-        add_action('woody_theme_update', [$this, 'updatePllOption']);
+        add_action('woody_theme_update', [$this, 'woodyThemeUpdate']);
     }
 
     public function registerPostType()
@@ -118,13 +118,12 @@ class WoodyTheme_Profiles
     /**
      * Ajout des profils aux posts types traduisibles
      */
-    public function updatePllOption()
+    public function woodyThemeUpdate()
     {
         $pll_option = get_option('polylang');
-        $pll_option['post_types'][] = 'profile';
-
-        $pll_option = update_option('polylang', $pll_option);
-
-        return $pll_option;
+        if (!in_array('profile', $pll_option['post_types'])) {
+            $pll_option['post_types'][] = 'profile';
+            update_option('polylang', $pll_option);
+        }
     }
 }

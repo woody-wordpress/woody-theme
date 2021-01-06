@@ -20,17 +20,12 @@ class WoodyTheme_Plugins_Activation
 
     protected function registerHooks()
     {
-        add_action('woody_theme_update', [$this, 'activatePlugins'], 1);
+        add_action('woody_theme_update', [$this, 'woodyThemeUpdate'], 1);
     }
 
-    public function activatePlugins()
+    public function woodyThemeUpdate()
     {
-        $this->deactivate_plugins = [
-            'acf-content-analysis-for-yoast-seo/yoast-acf-analysis.php',
-            'timber-library/timber.php',
-            'wordpress-seo/wp-seo.php',
-            'heartbeat-control/heartbeat-control.php',
-        ];
+        $this->deactivate_plugins = [];
 
         $this->activate_plugins = [
             'advanced-cron-manager/advanced-cron-manager.php',
@@ -51,14 +46,6 @@ class WoodyTheme_Plugins_Activation
             'woody-sso/woody-sso.php',
             'wp-deferred-javascripts/wp-deferred-javascripts.php',
         ];
-
-        if (defined('REDIS_HOST') && !empty(REDIS_HOST)) {
-            // Enable
-            $this->activate_plugins[] = 'redis-cache/redis-cache.php';
-        } else {
-            // Disable
-            $this->deactivate_plugins[] = 'redis-cache/redis-cache.php';
-        }
 
         switch (WP_ENV) {
             case 'dev':
