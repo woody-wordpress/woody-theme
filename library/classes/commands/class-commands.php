@@ -38,7 +38,6 @@ class WoodyTheme_Commands
     {
         $this->flush_site();
         $this->flush_core();
-        $this->flush_cache();
         $this->cache_warm();
         $this->flush_twig();
         $this->flush_varnish();
