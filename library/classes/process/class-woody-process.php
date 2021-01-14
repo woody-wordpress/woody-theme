@@ -525,12 +525,18 @@ class WoodyTheme_WoodyProcess
                     $display['classes'] .=  ' ' . $section['section_class'];
                 }
 
+                // On récupère le titre du sommaire et on le formate pour être un id
+                if (!empty($section['display_in_summary']) && (!empty($section['section_summary_title']))) {
+                    $summary_id = sanitize_title($section['section_summary_title']);
+                }
+
                 // On ajoute les 3 parties compilées d'une section + ses paramètres d'affichage
                 // puis on compile le tout dans le template de section Woody
                 $the_section = [
                     'header' => $the_header,
                     'layout' => $the_layout,
                     'display' => $display,
+                    'summary_id' => $summary_id,
                 ];
                 if (!empty($section['section_banner'])) {
                     foreach ($section['section_banner'] as $banner) {
