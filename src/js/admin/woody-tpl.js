@@ -65,7 +65,7 @@ $('#post').each(function() {
             $('#tpls_popin').addClass('ajax-load');
             $('#tpls_popin').each(function() {
                 $.ajax({
-                    type: 'POST',
+                    type: 'GET',
                     dataType: 'json',
                     url: ajaxurl,
                     data: {
