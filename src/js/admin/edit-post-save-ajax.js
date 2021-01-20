@@ -12,7 +12,7 @@ const savePost = (e, publish) => {
     document.querySelector('#save-action>.spinner');
   const originalPostStatus = document.querySelector('*[name="original_post_status"]').value;
   const postStatus = document.querySelector('*[name="post_status"]').value;
-  if (spinner) spinner.classList.add('is-active');
+  if (spinner) { spinner.classList.add('is-active'); spinner.style.display = 'inline-block'; }
 
   if ((publish && postStatus === 'draft' && originalPostStatus === 'draft') || postStatus !== originalPostStatus) return;
 
