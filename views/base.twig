@@ -48,6 +48,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 {% endspaceless %}
 </head>
 <body class="{{body_class}}">
+    {% if body_top %}
+        {% for html in body_top %}
+            {{ html }}
+        {% endfor %}
+    {% endif %}
 
     {% if gtm|default %}
     {# GTM (noscript) #}

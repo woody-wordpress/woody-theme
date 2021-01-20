@@ -21,15 +21,15 @@ class WoodyTheme_ACF
 
     protected function registerHooks()
     {
-        add_action('woody_theme_update', [$this, 'cleanTransient']);
+        add_action('woody_theme_update', [$this, 'woodyThemeUpdate']);
         if (WP_ENV == 'dev') {
             add_filter('woody_acf_save_paths', [$this, 'acfJsonSave']);
         }
-        add_action('create_term', [$this, 'cleanTermsChoicesTransient']);
-        add_action('edit_term', [$this, 'cleanTermsChoicesTransient']);
-        add_action('delete_term', [$this, 'cleanTermsChoicesTransient']);
+        add_action('create_term', [$this, 'cleanTermsChoicesCache']);
+        add_action('edit_term', [$this, 'cleanTermsChoicesCache']);
+        add_action('delete_term', [$this, 'cleanTermsChoicesCache']);
 
-        add_action('acf/save_post', [$this, 'clearOptionsTransient'], 20);
+        add_action('acf/save_post', [$this, 'clearVarnishCache'], 20);
 
         add_filter('acf/settings/load_json', [$this, 'acfJsonLoad']);
         add_filter('acf/load_field/type=select', [$this, 'woodyIconLoadField']);
@@ -79,36 +79,21 @@ class WoodyTheme_ACF
         add_action('wp_ajax_woody_tpls', [$this, 'woodyGetAllTemplates']);
     }
 
-    public function woodyGetFieldOption($field_name)
+    public function woodyGetFieldOption($field_name = null)
     {
-        $woody_get_field_option = get_transient('woody_get_field_option');
-        if (empty($woody_get_field_option[$field_name])) {
-            $woody_get_field_option[$field_name] = get_field($field_name, 'options');
-            set_transient('woody_get_field_option', $woody_get_field_option);
-        }
-        return $woody_get_field_option[$field_name];
+        return (!empty($field_name)) ? get_field($field_name, 'options') : null;
     }
 
     // Identique à woodyGetFieldsOption mais avec la fonction get_field_object
-    public function woodyGetFieldsObject($field_name)
+    public function woodyGetFieldsObject($field_name = null)
     {
-        $woody_get_field_object = get_transient('woody_get_field_object');
-        if (empty($woody_get_field_object[$field_name])) {
-            $woody_get_field_object[$field_name] = get_field_object($field_name);
-            set_transient('woody_get_field_object', $woody_get_field_object);
-        }
-        return $woody_get_field_object[$field_name];
+        return (!empty($field_name)) ? get_field_object($field_name) : null;
     }
 
     // Retourne un tableau des champs du groupe donné
-    public function woodyGetFieldsByGroup($group_name)
+    public function woodyGetFieldsByGroup($group_name = null)
     {
-        $woody_get_fields_by_group = get_transient('woody_get_fields_by_group');
-        if (empty($woody_get_fields_by_group[$group_name])) {
-            $woody_get_fields_by_group[$group_name] = acf_get_fields($group_name);
-            set_transient('woody_get_fields_by_group', $woody_get_fields_by_group);
-        }
-        return $woody_get_fields_by_group[$group_name];
+        return (!empty($group_name)) ? acf_get_fields($group_name) : null;
     }
 
     /**
@@ -129,13 +114,10 @@ class WoodyTheme_ACF
         return $paths;
     }
 
-    public function clearOptionsTransient()
+    public function clearVarnishCache()
     {
         $screen = get_current_screen();
         if (!empty($screen->id) && strpos($screen->id, 'acf-options') !== false) {
-            // delete_transient('woody_menus_cache');
-            delete_transient('woody_get_field_option');
-
             // Purge all varnish cache on save menu
             do_action('woody_flush_varnish');
         }
@@ -220,7 +202,7 @@ class WoodyTheme_ACF
         $terms = [];
 
         $lang = $this->getCurrentLang();
-        $choices = get_transient('woody_terms_choices');
+        $choices = wp_cache_get('woody_terms_choices', 'woody');
         if (empty($choices[$lang])) {
 
             // Get all site taxonomies and exclude those we don't want to use
@@ -258,7 +240,7 @@ class WoodyTheme_ACF
                 asort($choices[$lang]);
             }
 
-            set_transient('woody_terms_choices', $choices);
+            wp_cache_set('woody_terms_choices', $choices, 'woody');
         }
 
         $field['choices'] = (!empty($choices[$lang])) ? $choices[$lang] : [];
@@ -268,7 +250,7 @@ class WoodyTheme_ACF
     public function pageTaxonomiesLoadField($field)
     {
         $lang = $this->getCurrentLang();
-        $choices = get_transient('woody_page_taxonomies_choices');
+        $choices = wp_cache_get('woody_page_taxonomies_choices', 'woody');
         if (empty($choices[$lang])) {
             $taxonomies = get_object_taxonomies('page', 'objects');
 
@@ -276,7 +258,7 @@ class WoodyTheme_ACF
                 $choices[$lang][$taxonomy->name] = $taxonomy->label;
             }
 
-            set_transient('woody_page_taxonomies_choices', $choices);
+            wp_cache_set('woody_page_taxonomies_choices', $choices, 'woody');
         }
 
         $field['choices'] = (!empty($choices[$lang])) ? $choices[$lang] : [];
@@ -383,15 +365,8 @@ class WoodyTheme_ACF
         if ($field['key'] == 'field_5bfeaaf039785') {
             return $field;
         }
-        $taxonomies = get_transient('woody_website_pages_taxonomies');
-        if (empty($taxonomies)) {
-            $taxonomies = get_object_taxonomies('page', 'objects');
-            unset($taxonomies['language']);
-            unset($taxonomies['page_type']);
-            unset($taxonomies['post_translations']);
 
-            set_transient('woody_website_pages_taxonomies', $taxonomies);
-        }
+        $taxonomies = getPageTaxonomies();
         foreach ($taxonomies as $key => $taxonomy) {
             $field['choices']['_' . $taxonomy->name] = (!empty($taxonomy->labels->singular_name)) ? $taxonomy->labels->singular_name . ' principal(e)</small>' : $taxonomy->label . ' <small>Tag principal</small>';
         }
@@ -444,10 +419,10 @@ class WoodyTheme_ACF
 
     public function getPageTypeTerms()
     {
-        $page_types = get_transient('woody_terms_page_type');
+        $page_types = wp_cache_get('woody_terms_page_type', 'woody');
         if (false === $page_types) {
             $page_types = get_terms(array('taxonomy' => 'page_type', 'hide_empty' => false, 'hierarchical' => true));
-            set_transient('woody_terms_page_type', $page_types);
+            wp_cache_set('woody_terms_page_type', $page_types, 'woody');
         }
 
         return $page_types;
@@ -495,27 +470,27 @@ class WoodyTheme_ACF
         return $current_lang;
     }
 
-    public function cleanTransient()
+    public function woodyThemeUpdate()
     {
-        // Delete Transient
-        delete_transient('woody_terms_page_type');
-        delete_transient('woody_tpls_order');
-        delete_transient('woody_components');
-        delete_transient('woody_icons_folder');
-        delete_transient('woody_page_taxonomies_choices');
-        delete_transient('woody_terms_choices');
-        delete_transient('woody_website_pages_taxonomies');
-        // delete_transient('woody_menus_cache');
-        delete_transient('woody_get_field_option');
+        // Clean Cache
+        wp_cache_delete('woody_tpls_order', 'woody');
+        wp_cache_delete('woody_tpls_components', 'woody');
+        wp_cache_delete('woody_terms_page_type', 'woody');
+        wp_cache_delete('woody_website_pages_taxonomies', 'woody');
+        wp_cache_delete('woody_page_taxonomies_choices', 'woody');
+        wp_cache_delete('woody_terms_choices', 'woody');
+        wp_cache_delete('woody_twig_paths', 'woody');
+        wp_cache_delete('woody_components', 'woody');
+        wp_cache_delete('woody_icons_folder', 'woody');
 
-        // Warm Transient
+        // Warm Cache
         getWoodyTwigPaths();
     }
 
-    public function cleanTermsChoicesTransient()
+    public function cleanTermsChoicesCache()
     {
-        delete_transient('woody_page_taxonomies_choices');
-        delete_transient('woody_terms_choices');
+        wp_cache_delete('woody_page_taxonomies_choices', 'woody');
+        wp_cache_delete('woody_terms_choices', 'woody');
     }
 
     public function postObjectAcfResults($title, $post, $field, $post_id)
@@ -841,7 +816,7 @@ class WoodyTheme_ACF
      */
     public function woodyGetAllTemplates()
     {
-        $return = get_transient('woody_tpls_components');
+        $return = wp_cache_get('woody_tpls_components', 'woody');
         if (empty($return)) {
             $tplComponents = [];
             $woodyLibrary = new WoodyLibrary();
@@ -871,10 +846,10 @@ class WoodyTheme_ACF
                 }
             }
 
-            $woody_tpls_order = get_transient('woody_tpls_order');
+            $woody_tpls_order = wp_cache_get('woody_tpls_order', 'woody');
             if (empty($woody_tpls_order)) {
                 $woody_tpls_order = array_flip($this->sortWoodyTpls());
-                set_transient('woody_tpls_order', $woody_tpls_order);
+                wp_cache_set('woody_tpls_order', $woody_tpls_order, 'woody');
             }
 
             foreach ($woody_tpls_order as $order_key => $value) {
@@ -888,7 +863,7 @@ class WoodyTheme_ACF
             foreach ($tplComponents as $key => $value) {
                 $return .= '<li>' . $value . '</li>' ;
             }
-            set_transient('woody_tpls_components', $return);
+            wp_cache_set('woody_tpls_components', $return, 'woody');
         }
 
         wp_send_json($return);

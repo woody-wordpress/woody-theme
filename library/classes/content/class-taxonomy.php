@@ -20,22 +20,16 @@ class WoodyTheme_Taxonomy
     {
         add_action('wp_ajax_get_models_for_type', [$this, 'getModelsForTerm']);
         add_action('wp_ajax_get_current_place', [$this, 'getCurrentPlace']);
-        add_action('woody_theme_update', array($this, 'insertTerms'));
+        add_action('woody_theme_update', [$this, 'woodyThemeUpdate']);
     }
 
-    public function insertTerms()
+    public function woodyThemeUpdate()
     {
         // On inclut les termes génériques à la taxo
         wp_insert_term('Page d\'accueil', 'page_type', array('slug' => 'front_page'));
         wp_insert_term('Page de contenu', 'page_type', array('slug' => 'basic_page'));
         wp_insert_term('Page miroir', 'page_type', array('slug' => 'mirror_page'));
         wp_insert_term('Séjour', 'page_type', array('slug' => 'trip'));
-
-        // On inclut les termes génériques à la taxo
-        // wp_insert_term('Été', 'seasons', array('slug' => 'ete'));
-        // wp_insert_term('Printemps', 'seasons', array('slug' => 'printemps'));
-        // wp_insert_term('Automne', 'seasons', array('slug' => 'automne'));
-        // wp_insert_term('Hiver', 'seasons', array('slug' => 'hiver'));
     }
 
     public function registerTaxonomy()
@@ -288,7 +282,7 @@ class WoodyTheme_Taxonomy
                 foreach ($query_result->posts as $post) {
                     $posts['posts'][] = [
                         'ID' => $post->ID,
-                        'link' => get_permalink($post),
+                        'link' => apply_filters('woody_get_permalink', $post->ID),
                         'title' => $post->post_title
                     ];
                 }

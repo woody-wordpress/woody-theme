@@ -28,12 +28,12 @@ class WoodyTheme_ACF_ShorLink
     public function getShortLinkData(\WP_REST_Request $request)
     {
         $post_id = $request->get_body();
-        $transient_key = 'woody_shortLink_' . $post_id;
-        if (false === ($shortLinkData = get_transient($transient_key))) {
+        $cache_key = 'woody_shortLink_' . $post_id;
+        if (false === ($shortLinkData = wp_cache_get($cache_key, 'woody'))) {
             $page_type_object = get_the_terms($post_id, 'page_type');
             $shortLinkData['page_type'] = !empty($page_type_object[0]) ? $page_type_object[0]->slug : '';
             $shortLinkData['conf_id'] = get_field('field_5b338ff331b17', $post_id);
-            set_transient($transient_key, $shortLinkData, 2 * 60);
+            wp_cache_set($cache_key, $shortLinkData, 'woody', 2*60);
         }
 
         return $shortLinkData;
@@ -53,7 +53,7 @@ class WoodyTheme_ACF_ShorLink
 
         if (is_numeric($linked_url)) {
             $linked_id = $linked_url;
-            $linked_url = get_permalink($linked_id);
+            $linked_url = apply_filters('woody_get_permalink', $linked_id);
         } else {
             $linked_id = url_to_postid($linked_url);
         }
