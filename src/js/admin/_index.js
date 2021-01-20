@@ -14,3 +14,4 @@ import './tags-primary';
 import './woody-seo.js';
 import './woody-tpl.js';
 import './ajax-load-options';
+import './ajax-load-layouts';

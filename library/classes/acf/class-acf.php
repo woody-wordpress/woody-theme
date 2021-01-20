@@ -77,6 +77,9 @@ class WoodyTheme_ACF
         add_filter('woody_get_fields_by_group', [$this, 'woodyGetFieldsByGroup'], 10, 3);
 
         add_action('wp_ajax_woody_tpls', [$this, 'woodyGetAllTemplates']);
+
+        // Ajax Call
+        add_action('wp_ajax_generate_layout_acf_clone', [$this, 'generateLayoutAcfClone']);
     }
 
     public function woodyGetFieldOption($field_name = null)
@@ -868,5 +871,94 @@ class WoodyTheme_ACF
 
         wp_send_json($return);
         exit;
+    }
+
+    public function generateLayoutAcfClone()
+    {
+        $return = '';
+
+        $layout_name = filter_input(INPUT_GET, 'layout', FILTER_SANITIZE_STRING);
+        $post_id = filter_input(INPUT_GET, 'post_id', FILTER_VALIDATE_INT);
+        $field = apply_filters( 'acf/pre_render_fields', acf_get_field('field_5b043f0525968'), $post_id );
+
+        // Filter our false results.
+        $field = array_filter( $field );
+        // if( $fields ) {
+        //     foreach( $fields as $field ) {
+        //         // Load value if not already loaded.
+        //         if ( empty($field['value']) || $field['value'] === null ) {
+        //             $field['value'] = acf_get_value( $post_id, $field );
+        //         }
+        //     }
+        // }
+        $layout = [];
+
+        if (!empty($field) && is_array($field) ) {
+            foreach($field['layouts'] as $field_layout) {
+                if ( $field_layout['name'] == $layout_name ) {
+                    $layout = $field_layout;
+                    break;
+                }
+            }
+
+            wp_send_json($this->woodyRenderLayout($field, $layout, 'acfcloneindex', array()));
+            exit;
+        }
+    }
+
+    private function woodyRenderLayout($field, $layout, $i, $value)
+    {
+        if(!class_exists('acf_field_flexible_content')){
+            return;
+        }
+        $acf_flex_content = new \acf_field_flexible_content();
+
+        // vars
+        $order = 0;
+        $el = 'div';
+        $sub_fields = $layout['sub_fields'];
+        $id = ( $i === 'acfcloneindex' ) ? 'acfcloneindex' : "row-$i";
+        $prefix = $field['name'] . '[' . $id .  ']';
+
+        // div
+        $div = array(
+            'class'			=> 'layout',
+            'data-id'		=> $id,
+            'data-layout'	=> $layout['name']
+        );
+
+        // clone
+        if( is_numeric($i) ) {
+
+            $order = $i + 1;
+
+        } else {
+
+            $div['class'] .= ' acf-clone';
+
+        }
+
+        // display
+        if( $layout['display'] == 'table' ) {
+
+            $el = 'td';
+
+        }
+
+        // title
+        $title = $acf_flex_content->get_layout_title($field, $layout, $i, $value);
+
+        // remove row
+        reset_rows();
+
+        return '<div ' . acf_esc_attr($div) . '><input type="hidden" name="section_content[acfcloneindex][acf_fc_layout]" value="' . $layout['name'] . '"/>
+            <div class="acf-fc-layout-handle" title="' . __('Drag to reorder','woody-theme') . '" data-name="collapse-layout">'. $title . '</div>
+            <div class="acf-fc-layout-controls">
+                <a class="acf-icon -plus small light acf-js-tooltip" href="#" data-name="add-layout" title="'.  __("Add layout", "woody-theme") . '"></a>
+                <a class="acf-icon -duplicate small light acf-js-tooltip" href="#" data-name="duplicate-layout" title="'. __("Duplicate layout", "woody-theme") . '"></a>
+                <a class="acf-icon -minus small light acf-js-tooltip" href="#" data-name="remove-layout" title="'. __("Remove layout", "woody-theme") . '"></a>
+                <a class="acf-icon -collapse small -clear acf-js-tooltip" href="#" data-name="collapse-layout" title="'. __("Click to toggle", "woody-theme") . '"></a>
+            </div>
+        </div>';
     }
 }
