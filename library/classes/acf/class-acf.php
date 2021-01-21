@@ -884,23 +884,42 @@ class WoodyTheme_ACF
 
         $layout_name = filter_input(INPUT_GET, 'layout', FILTER_SANITIZE_STRING);
         $post_id = filter_input(INPUT_GET, 'post_id', FILTER_VALIDATE_INT);
-        $field = apply_filters( 'acf/pre_render_fields', acf_get_field('field_5b043f0525968'), $post_id );
+        $field_name = filter_input(INPUT_GET, 'name', FILTER_SANITIZE_STRING);
 
-        // Filter our false results.
-        $field = array_filter( $field );
-        $layout = [];
+        $transient_name = $layout_name . $field_name;
 
-        if (!empty($field) && is_array($field) ) {
-            foreach($field['layouts'] as $field_layout) {
-                if ( $field_layout['name'] == $layout_name ) {
-                    $layout = $field_layout;
-                    break;
+        if (!empty(get_transient($transient_name))) {
+            $return = get_transient($transient_name);
+        } else {
+            $field = apply_filters( 'acf/pre_render_fields', acf_get_field('field_5b043f0525968'), $post_id );
+            // Filter our false results.
+            $field = array_filter( $field );
+
+            if (!empty($field) && is_array($field) ) {
+                $field['name'] = $field_name;
+
+                $field_name = str_replace('][' , '-', $field_name);
+                $field_name = str_replace(']' , '-', $field_name);
+                $field_name = str_replace('[' , '-', $field_name);
+                if ($field_name[strlen($field_name)-1] == '-') {
+                    $field_name = substr_replace($field_name, '', strlen($field_name)-1);
                 }
-            }
 
-            wp_send_json($this->woodyRenderLayout($field, $layout, 'acfcloneindex', array()));
-            exit;
+                $field['id'] = $field_name;
+
+                // sort layouts into names
+                $layouts = array();
+                foreach( $field['layouts'] as $k => $layout ) {
+                    $layouts[ $layout['name'] ] = $layout;
+                }
+
+                $return = $this->woodyRenderLayout($field, $layouts[$layout_name], 'acfcloneindex', array());
+                set_transient($transient_name, $return);
+            }
         }
+
+        wp_send_json($return);
+        exit;
     }
 
     private function woodyRenderLayout($field, $layout, $i, $value)
@@ -914,32 +933,25 @@ class WoodyTheme_ACF
         $order = 0;
         $el = 'div';
         $sub_fields = $layout['sub_fields'];
-        $id = ( $i === 'acfcloneindex' ) ? 'acfcloneindex' : "row-$i";
-        $prefix = $field['name'] . '[' . $id .  ']';
+        $prefix = $field['name'] . '[acfcloneindex]';
 
         // div
         $div = array(
             'class'			=> 'layout',
-            'data-id'		=> $id,
+            'data-id'		=> 'acfcloneindex',
             'data-layout'	=> $layout['name']
         );
 
         // clone
         if( is_numeric($i) ) {
-
             $order = $i + 1;
-
         } else {
-
             $div['class'] .= ' acf-clone';
-
         }
 
         // display
-        if( $layout['display'] == 'table' ) {
-
+        if ( $layout['display'] == 'table' ) {
             $el = 'td';
-
         }
 
         // title
@@ -1146,7 +1158,7 @@ class WoodyTheme_ACF
         return $return;
     }
 
-    private function woodyAcfRenderFieldLabel($field)
+    private function woodyAcfRenderFieldLabel( $field )
     {
         $return = '';
 
