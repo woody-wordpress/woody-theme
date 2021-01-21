@@ -874,7 +874,7 @@ class WoodyTheme_ACF
     }
 
     /**
-     *
+     * TODO: generate transient on woody_theme_update
      * Generate acf clones only when needed
      *
      */
@@ -883,38 +883,31 @@ class WoodyTheme_ACF
         $return = '';
 
         $layout_name = filter_input(INPUT_GET, 'layout', FILTER_SANITIZE_STRING);
-        $post_id = filter_input(INPUT_GET, 'post_id', FILTER_VALIDATE_INT);
         $field_name = filter_input(INPUT_GET, 'name', FILTER_SANITIZE_STRING);
 
-        $transient_name = $layout_name . $field_name;
-
-        if (!empty(get_transient($transient_name))) {
-            $return = get_transient($transient_name);
+        // add post_type
+        $transient = get_transient('layout-' . $layout_name);
+        if ( !empty($transient) ) {
+            $return = $this->replaceInputFields($transient, $field_name);
         } else {
-            $field = apply_filters( 'acf/pre_render_fields', acf_get_field('field_5b043f0525968'), $post_id );
+            // field_5b043f0525968 == "section_content"
+            $field = acf_get_field('field_5b043f0525968');
+
             // Filter our false results.
             $field = array_filter( $field );
 
-            if (!empty($field) && is_array($field) ) {
-                $field['name'] = $field_name;
+            if ( !empty($field) && is_array($field) ) {
+                $field['name'] = "#rowindex-name#";
 
-                $field_name = str_replace('][' , '-', $field_name);
-                $field_name = str_replace(']' , '-', $field_name);
-                $field_name = str_replace('[' , '-', $field_name);
-                if ($field_name[strlen($field_name)-1] == '-') {
-                    $field_name = substr_replace($field_name, '', strlen($field_name)-1);
-                }
-
-                $field['id'] = $field_name;
-
-                // sort layouts into names
-                $layouts = array();
                 foreach( $field['layouts'] as $k => $layout ) {
-                    $layouts[ $layout['name'] ] = $layout;
+                    if ($layout['name'] == $layout_name) {
+                        $return = $this->woodyRenderLayout($field, $layout, 'acfcloneindex', array());
+                        set_transient('layout-' . $layout_name, $return);
+                        break;
+                    }
                 }
 
-                $return = $this->woodyRenderLayout($field, $layouts[$layout_name], 'acfcloneindex', array());
-                set_transient($transient_name, $return);
+                $return = $this->replaceInputFields($return, $field_name);
             }
         }
 
@@ -1201,6 +1194,23 @@ class WoodyTheme_ACF
         if ( $field['instructions'] ) {
             $return = '<p class="description">' . acf_esc_html($field['instructions']) . '</p>';
         }
+
+        return $return;
+    }
+
+    private function replaceInputFields($return, $field_name)
+    {
+        // ? Refactor that
+        $field_id = str_replace('][' , '-', $field_name);
+        $field_id = str_replace([']', '['] , '-', $field_id);
+        if ($field_id[strlen($field_id)-1] == '-') {
+            $field_id = substr_replace($field_id, '', strlen($field_id)-1);
+        }
+
+        // Replace les field_name, id et for
+        $return = str_replace('name="#rowindex-name#', 'name="' . $field_name, $return);
+        $return = str_replace('id="#rowindex-name#', 'id="' . $field_id, $return);
+        $return = str_replace('for="#rowindex-name#', 'for="' . $field_id, $return);
 
         return $return;
     }
