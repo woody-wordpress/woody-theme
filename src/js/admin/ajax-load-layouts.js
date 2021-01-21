@@ -1,5 +1,29 @@
 !(function ($, undefined) {
-    var addBlock = function ( args ) {
+    // This is dope
+    var addBlock = function ( field,  args ) {
+        var $el = acf.duplicate({
+            target: field.$clone( args.layout ),
+            append: field.proxy(function( $el, $el2 ){
+
+                // append
+                if( args.before ) {
+                    args.before.before( $el2 );
+                } else {
+                    field.$layoutsWrap().append( $el2 );
+                }
+
+                // enable
+                acf.enable( $el2, field.cid );
+
+                // render
+                field.render();
+            })
+        });
+
+        // trigger change for validation errors
+        field.$input().trigger('change');
+
+        return $el;
     };
     var name = "";
     var clone;
@@ -15,7 +39,7 @@
 
       for (const button of buttons) {
 
-        if (document.querySelectorAll('.clones > .' + button.dataset.layout).length <= 0) {
+        if (clone.find('div[data-layout="' + button.dataset.layout + '"]').length <= 0) {
 
             if (!button.getAttribute('hasListener')) {
 
@@ -39,16 +63,19 @@
                                 key: 'field_5b043f0525968'
                             });
                             let field;
-                            fields.forEach(element => {
-                                if (element.$el ==  clone.closest()){
 
+                            fields.forEach(element => {
+                                if (element.$el[0] == clone.closest('.acf-field-flexible-content')[0]) {
+                                    field = element;
                                 }
                             });
 
                             // Add Block
-                            addBlock({
+                            $el = addBlock(field, {
                                 layout: button.dataset.layout,
                             });
+
+                            console.log($el);
                         },
                         error: function(error) {
 
