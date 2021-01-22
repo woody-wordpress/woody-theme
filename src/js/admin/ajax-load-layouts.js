@@ -74,8 +74,6 @@
                             $el = addBlock(field, {
                                 layout: button.dataset.layout,
                             });
-
-                            console.log($el);
                         },
                         error: function(error) {
 

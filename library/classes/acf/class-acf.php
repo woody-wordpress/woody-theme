@@ -22,6 +22,8 @@ class WoodyTheme_ACF
     protected function registerHooks()
     {
         add_action('woody_theme_update', [$this, 'woodyThemeUpdate']);
+        add_action('woody_cache_warm', [$this, 'generateLayoutsTransients'], 100);
+
         if (WP_ENV == 'dev') {
             add_filter('woody_acf_save_paths', [$this, 'acfJsonSave']);
         }
@@ -873,11 +875,34 @@ class WoodyTheme_ACF
         exit;
     }
 
+    ////////////////////////////////////////////
+    //  Generate acf clones only when needed  //
+    ////////////////////////////////////////////
+
     /**
-     * TODO: generate transient on woody_theme_update
-     * Generate acf clones only when needed
-     *
+     * Set layouts transient on deploy
      */
+    public function generateLayoutsTransients()
+    {
+        // field_5b043f0525968 == "section_content"
+        $field = acf_get_field('field_5b043f0525968');
+
+        // Filter our false results.
+        $field = array_filter( $field );
+
+        if ( !empty($field) && is_array($field) ) {
+            $field['name'] = "#rowindex-name#";
+
+            foreach( $field['layouts'] as $k => $layout ) {
+                $data = $this->woodyRenderLayout($field, $layout, 'acfcloneindex', array());
+                set_transient('layout-' . $layout['name'], $data);
+            }
+        }
+    }
+
+     /**
+      * Ajax Call
+      */
     public function generateLayoutAcfClone()
     {
         $return = '';
@@ -936,11 +961,7 @@ class WoodyTheme_ACF
         );
 
         // clone
-        if( is_numeric($i) ) {
-            $order = $i + 1;
-        } else {
-            $div['class'] .= ' acf-clone';
-        }
+        $div['class'] .= ' acf-clone';
 
         // display
         if ( $layout['display'] == 'table' ) {
@@ -1164,6 +1185,17 @@ class WoodyTheme_ACF
         return $return;
     }
 
+    private function woodyAcfRenderFieldInstructions( $field )
+    {
+        $return = '';
+
+        if ( $field['instructions'] ) {
+            $return = '<p class="description">' . acf_esc_html($field['instructions']) . '</p>';
+        }
+
+        return $return;
+    }
+
     private function woodyAcfRenderField( $field )
     {
         $return = '';
@@ -1187,20 +1219,9 @@ class WoodyTheme_ACF
         return $return;
     }
 
-    private function woodyAcfRenderFieldInstructions( $field )
-    {
-        $return = '';
-
-        if ( $field['instructions'] ) {
-            $return = '<p class="description">' . acf_esc_html($field['instructions']) . '</p>';
-        }
-
-        return $return;
-    }
-
     private function replaceInputFields($return, $field_name)
     {
-        // ? Refactor that
+        // Refactor that
         $field_id = str_replace('][' , '-', $field_name);
         $field_id = str_replace([']', '['] , '-', $field_id);
         if ($field_id[strlen($field_id)-1] == '-') {
