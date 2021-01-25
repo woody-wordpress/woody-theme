@@ -924,6 +924,11 @@ class WoodyTheme_ACF
         if ( !empty($transient) ) {
             $return = $this->replaceInputFields($transient, $field_name);
         } else {
+            if (!class_exists('acf_field_flexible_content')) {
+                wp_send_json('class does not exists');
+            }
+            $acf_flex_content = new \acf_field_flexible_content();
+
             // field_5b043f0525968 == "section_content"
             $field = acf_get_field('field_5b043f0525968');
 
@@ -935,11 +940,6 @@ class WoodyTheme_ACF
 
                 foreach( $field['layouts'] as $k => $layout ) {
                     if ($layout['name'] == $layout_name) {
-                        if (!class_exists('acf_field_flexible_content')) {
-                            wp_send_json('class does not exists');
-                        }
-                        $acf_flex_content = new \acf_field_flexible_content();
-
                         ob_start();
                         $acf_flex_content->render_layout($field, $layout, 'acfcloneindex', array());
                         $return = ob_get_contents(); // Grab output
