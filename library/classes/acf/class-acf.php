@@ -884,6 +884,11 @@ class WoodyTheme_ACF
      */
     public function generateLayoutsTransients()
     {
+        if (!class_exists('acf_field_flexible_content')) {
+            exit;
+        }
+        $acf_flex_content = new \acf_field_flexible_content();
+
         // field_5b043f0525968 == "section_content"
         $field = acf_get_field('field_5b043f0525968');
 
@@ -894,7 +899,11 @@ class WoodyTheme_ACF
             $field['name'] = "#rowindex-name#";
 
             foreach( $field['layouts'] as $k => $layout ) {
-                $data = $this->woodyRenderLayout($field, $layout, 'acfcloneindex', array());
+                ob_start();
+                $acf_flex_content->render_layout($field, $layout, 'acfcloneindex', array());
+                $data = ob_get_contents(); // Grab output
+                ob_end_clean();
+
                 set_transient('layout-' . $layout['name'], $data);
             }
         }
@@ -911,7 +920,7 @@ class WoodyTheme_ACF
         $field_name = filter_input(INPUT_GET, 'name', FILTER_SANITIZE_STRING);
 
         // add post_type
-        $transient = get_transient('layout-' . $layout_name);
+        // $transient = get_transient('layout-' . $layout_name);
         if ( !empty($transient) ) {
             $return = $this->replaceInputFields($transient, $field_name);
         } else {
