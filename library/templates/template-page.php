@@ -376,6 +376,37 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         }
     }
 
+    // TODO : Move to addon-hawwwai with the playlist context
+    protected function customPermalinkPlaylistId($url)
+    {
+        $id = 0;
+
+        if (!empty($url)) {
+            $custom_permalink = str_replace(pll_home_url(), '', $url);
+            $query_result = new \WP_Query([
+                'lang' => pll_current_language(),
+                'post_type' => 'page',
+                'post_status' => 'publish',
+                'posts_per_page' => 1,
+                'meta_query'  => [
+                    'relation' => 'AND',
+                    [
+                        'key'     => 'custom_permalink',
+                        'value'   => $custom_permalink,
+                        'compare' => '=',
+                    ]
+                ]
+            ]);
+
+            if (empty($query_result->posts)) {
+                return $id;
+            }
+
+            $id = $query_result->posts[0]->ID;
+        }
+        return $id;
+    }
+
     protected function playlistContext()
     {
         $this->context['body_class'] .= ' apirender apirender-playlist apirender-wordpress';
@@ -390,6 +421,11 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
         if ($playlist_type == 'autoselect' && !empty($existing_playlist['existing_playlist_autoselect_url']) && !empty($existing_playlist['playlist_autoselect_id'])) {
             $post_id = url_to_postid($existing_playlist['existing_playlist_autoselect_url']);
+
+            if ($post_id == 0 && is_plugin_active('custom-permalinks/custom-permalinks.php')) {
+                $post_id = $this->customPermalinkPlaylistId($existing_playlist['existing_playlist_autoselect_url']);
+            }
+
             $playlistConfId = get_field('field_5b338ff331b17', $post_id);
             $autoselect_id = $existing_playlist['playlist_autoselect_id'];
         } else {
