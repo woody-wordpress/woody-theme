@@ -427,4 +427,81 @@ class WoodyTheme_WoodyProcessTools
 
         return $sheet;
     }
+
+    /**
+     * Name: getImageBrightness
+     * Author: Soheil Saheb-Jamii
+     * Source : https://stackoverflow.com/questions/21580154/can-php-detect-if-an-image-is-too-light
+     * @description : Returns a value to know if image is dark or bright
+     * @param {String} - url to the image
+     * @return {Int} - 0 = Black | 100 = White
+     */
+    function getBrightness($url) {
+        //Transform url into image object with imagecreatefromjpeg() or imagecreatefrompng()
+        $ext = pathinfo($url);
+        if ($ext['extension'] == 'jpg') {
+            $imgHandle = imagecreatefromjpeg($url);
+        } else if ($ext['extension'] == 'png') {
+            $imgHandle = imagecreatefrompng($url);
+        }
+        if (!empty($imgHandle)) {
+            $width = imagesx($imgHandle);
+            $height = imagesy($imgHandle);
+
+            $totalBrightness = 0;
+
+            for ($x = 0; $x < $width; $x++) {
+                for ($y = 0; $y < $height; $y++) {
+                    $rgb = imagecolorat($imgHandle, $x, $y);
+
+                    $red = ($rgb >> 16) & 0xFF;
+                    $green = ($rgb >> 8) & 0xFF;
+                    $blue = $rgb & 0xFF;
+
+                    $totalBrightness += (max($red, $green, $blue) + min($red, $green, $blue)) / 2;
+                }
+            }
+
+            imagedestroy($imgHandle);
+
+            return ($totalBrightness / ($width * $height)) / 2.55;
+        } else {
+            return false;
+        }
+    }
+    /**
+     * Name: getBrightnessClasses
+     * Author: Soheil Saheb-Jamii
+     * @description : Returns classes to know if image is dark or bright
+     * @param {String} - url to the image
+     * @return {Array} - brightness && value classes
+     */
+    function getBrightnessClasses($url) {
+        $val = self::getBrightness($url);
+        $classes = [];
+        if ($val) {
+            $classes['brightness'] = ($val > 50) ? 'image-is-light' : 'image-is-dark';
+            switch (true) {
+                case ($val < 20):
+                    $classes['value'] = 'image-brightness-10';
+                    break;
+                case ($val >= 20 && $val < 45):
+                    $classes['value'] = 'image-brightness-30';
+                    break;
+                case ($val >= 45 && $val < 55):
+                    $classes['value'] = 'image-brightness-50';
+                    break;
+                case ($val >= 55 && $val < 80):
+                    $classes['value'] = 'image-brightness-70';
+                    break;
+                case ($val > 80):
+                    $classes['value'] = 'image-brightness-90';
+                    break;
+                default:
+                    $classes['value'] = '';
+                    break;
+            }
+        }
+        return $classes;
+    }
 }

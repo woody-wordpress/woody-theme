@@ -618,6 +618,10 @@ class WoodyTheme_WoodyCompilers
             }
 
             if (!empty($page_hero['page_heading_img']) && is_array($page_hero['page_heading_img'])) {
+                //Check if image is dark or bright..
+                $brightness = $this->tools->getBrightnessClasses($page_hero['page_heading_img']['url']);
+                $page_hero['brightness_img'] = !empty($brightness['brightness']) ? $brightness['brightness'] : '';
+                $page_hero['brightness_value_img'] = !empty($brightness['value']) ? $brightness['value'] : '';
                 $page_hero['page_heading_img']['attachment_more_data'] = (!empty($page_hero['page_heading_img']['ID'])) ? $this->tools->getAttachmentMoreData($page_hero['page_heading_img']['ID']) : [];
             }
 
@@ -641,6 +645,8 @@ class WoodyTheme_WoodyCompilers
             $page_hero['title'] = (!empty($page_hero['title'])) ? str_replace('-', '&#8209', $page_hero['title']) : '';
 
             $page_hero['the_classes'] = [];
+            $page_hero['the_classes'][] = (!empty($page_hero['brightness_img'])) ? $page_hero['brightness_img'] : '';
+            $page_hero['the_classes'][] = (!empty($page_hero['brightness_value_img'])) ? $page_hero['brightness_value_img'] : '';
             $page_hero['the_classes'][] = (!empty($page_hero['title'])) ? 'has-title' : '';
             $page_hero['the_classes'][] = (!empty($page_hero['pretitle'])) ? 'has-pretitle' : '';
             $page_hero['the_classes'][] = (!empty($page_hero['subtitle'])) ? 'has-subtitle' : '';
