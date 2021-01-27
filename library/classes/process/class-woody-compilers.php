@@ -516,7 +516,7 @@ class WoodyTheme_WoodyCompilers
                 if (!empty($section['display_in_summary'])) {
                     $items[] = [
                         'title' => (!empty($section['section_summary_title'])) ? $section['section_summary_title'] : 'Section ' . $s_key,
-                        'anchor' => $permalink . '#summary-' . sanitize_title($section['section_summary_title']),
+                        'anchor' => (!empty($section['section_summary_title'])) ? $permalink . '#summary-' . sanitize_title($section['section_summary_title']) : $permalink . '#pageSection-' . $s_key,
                         'id' => '#pageSection-' . $s_key
                     ];
                 }
