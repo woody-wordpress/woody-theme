@@ -82,6 +82,12 @@ class WoodyTheme_ACF
 
         // Ajax Call
         add_action('wp_ajax_generate_layout_acf_clone', [$this, 'generateLayoutAcfClone']);
+        add_action('rest_api_init', function () {
+            register_rest_route('woody', 'acf-render-layout', array(
+                'methods' => 'GET',
+                'callback' => [$this, 'getRenderedLayout']
+            ));
+        });
     }
 
     public function woodyGetFieldOption($field_name = null)
@@ -943,289 +949,320 @@ class WoodyTheme_ACF
     }
 
 
-    private function woodyRenderLayout($field, $layout, $i, $value)
+    public function getRenderedLayout()
     {
         if (!class_exists('acf_field_flexible_content')) {
             return;
         }
         $acf_flex_content = new \acf_field_flexible_content();
 
-        // vars
-        $order = 0;
-        $el = 'div';
-        $sub_fields = $layout['sub_fields'];
-        $prefix = $field['name'] . '[acfcloneindex]';
+        $layout_name = filter_input(INPUT_GET, 'layout', FILTER_SANITIZE_STRING);
+        $key = filter_input(INPUT_GET, 'key', FILTER_SANITIZE_STRING);
 
-        // div
-        $div = array(
-            'class'			=> 'layout',
-            'data-id'		=> 'acfcloneindex',
-            'data-layout'	=> $layout['name']
-        );
+        // field_5b043f0525968 == "section_content"
+        $field = acf_get_field($key);
 
-        // clone
-        if( is_numeric($i) ) {
-            $order = $i + 1;
-        } else {
-            $div['class'] .= ' acf-clone';
-        }
+        // Filter our false results.
+        $field = array_filter( $field );
 
-        // display
-        if ( $layout['display'] == 'table' ) {
-            $el = 'td';
-        }
+        if (!empty($field) && !empty($layout_name)) {
+            foreach ($field['layouts'] as $layout) {
+                if ($layout['name'] == $layout_name) {
+                    $field['name'] = "#rowindex-name#";
 
-        // title
-        $title = $acf_flex_content->get_layout_title($field, $layout, $i, $value);
-
-        // remove row
-        reset_rows();
-
-        $return = '<div ' . acf_esc_attr($div) . '>' . acf_get_hidden_input (array( 'name' => $prefix.'[acf_fc_layout]', 'value' => $layout['name'] )) . '
-            <div class="acf-fc-layout-handle" title="' . __('Drag to reorder','woody-theme') . '" data-name="collapse-layout">'. $title . '</div>
-            <div class="acf-fc-layout-controls">
-                <a class="acf-icon -plus small light acf-js-tooltip" href="#" data-name="add-layout" title="'.  __("Add layout", "woody-theme") . '"></a>
-                <a class="acf-icon -duplicate small light acf-js-tooltip" href="#" data-name="duplicate-layout" title="'. __("Duplicate layout", "woody-theme") . '"></a>
-                <a class="acf-icon -minus small light acf-js-tooltip" href="#" data-name="remove-layout" title="'. __("Remove layout", "woody-theme") . '"></a>
-                <a class="acf-icon -collapse small -clear acf-js-tooltip" href="#" data-name="collapse-layout" title="'. __("Click to toggle", "woody-theme") . '"></a>
-            </div>';
-
-        if (!empty($sub_fields)) {
-            if ( $layout['display'] == 'table' ) {
-                $return .= '<table class="acf-table"><thead><tr>';
-                foreach ($sub_fields as $sub_field) {
-                    $sub_field = acf_prepare_field($sub_field);
-                    if( !$sub_field ) continue;
-
-                    $atts = array();
-                    $atts['class'] = 'acf-th';
-                    $atts['data-name'] = $sub_field['_name'];
-                    $atts['data-type'] = $sub_field['type'];
-                    $atts['data-key'] = $sub_field['key'];
-
-
-                    // Add custom width
-                    if( $sub_field['wrapper']['width'] ) {
-                        $atts['data-width'] = $sub_field['wrapper']['width'];
-                        $atts['style'] = 'width: ' . $sub_field['wrapper']['width'] . '%;';
-                    }
-
-                    $return .= '<th ' . acf_esc_attr( $atts ) . '> ' . acf_get_field_label( $sub_field );
-                    if ($sub_field['instructions']) {
-                        $return .= '<p class="description">' . $sub_field['instructions'] . '</p>';
-                    }
-                    $return .= '</th>';
+                    $acf_flex_content->render_layout($field, $layout, 'acfcloneindex', []);
+                    break;
                 }
-
-                $return .= '</tr></thead><tbody><tr class="acf-row">';
-            } else {
-                $return .= '<div class="acf-fields';
-                if ( $layout['display'] == 'row' ) {
-                    $return .= ' -left';
-                }
-                $return .= '">';
-            }
-
-            foreach ( $sub_fields as $sub_field ) {
-                // add value
-			    if( isset($value[ $sub_field['key'] ]) ) {
-			    	// this is a normal value
-			    	$sub_field['value'] = $value[ $sub_field['key'] ];
-			    } elseif( isset($sub_field['default_value']) ) {
-			    	// no value, but this sub field has a default value
-			    	$sub_field['value'] = $sub_field['default_value'];
-
-			    }
-			    // update prefix to allow for nested values
-			    $sub_field['prefix'] = $prefix;
-
-			    // render input
-			    $return .= $this->woodyAcfRenderFieldWrap( $sub_field, $el );
-            }
-
-            if ( $layout['display'] == 'table' ) {
-                $return .= '</tr></tbody></table>';
-            } else {
-                $return .= '</div>';
             }
         }
-
-        $return .= '</div>';
-
-        return $return;
     }
 
-    private function woodyAcfRenderFieldWrap ( $field, $element = 'div', $instruction = 'label' )
-    {
-        $return = '';
+    // private function woodyRenderLayout($field, $layout, $i, $value)
+    // {
+    //     if (!class_exists('acf_field_flexible_content')) {
+    //         return;
+    //     }
+    //     $acf_flex_content = new \acf_field_flexible_content();
 
-        	// Ensure field is complete (adds all settings).
-	    $field = acf_validate_field( $field );
+    //     // vars
+    //     $order = 0;
+    //     $el = 'div';
+    //     $sub_fields = $layout['sub_fields'];
+    //     $prefix = $field['name'] . '[acfcloneindex]';
 
-	    // Prepare field for input (modifies settings).
-	    $field = acf_prepare_field( $field );
+    //     // div
+    //     $div = array(
+    //         'class'			=> 'layout',
+    //         'data-id'		=> 'acfcloneindex',
+    //         'data-layout'	=> $layout['name']
+    //     );
 
-	    // Allow filters to cancel render.
-	    if( !$field ) {
-	    	return;
-	    }
+    //     // clone
+    //     if( is_numeric($i) ) {
+    //         $order = $i + 1;
+    //     } else {
+    //         $div['class'] .= ' acf-clone';
+    //     }
 
-	    // Determine wrapping element.
-	    $elements = array(
-	    	'div'	=> 'div',
-	    	'tr'	=> 'td',
-	    	'td'	=> 'div',
-	    	'ul'	=> 'li',
-	    	'ol'	=> 'li',
-	    	'dl'	=> 'dt',
-	    );
+    //     // display
+    //     if ( $layout['display'] == 'table' ) {
+    //         $el = 'td';
+    //     }
 
-	    if( isset($elements[$element]) ) {
-	    	$inner_element = $elements[$element];
-	    } else {
-	    	$element = $inner_element = 'div';
-	    }
+    //     // title
+    //     $title = $acf_flex_content->get_layout_title($field, $layout, $i, $value);
 
-	    // Generate wrapper attributes.
-	    $wrapper = array(
-	    	'id'		=> '',
-	    	'class'		=> 'acf-field',
-	    	'width'		=> '',
-	    	'style'		=> '',
-	    	'data-name'	=> $field['_name'],
-	    	'data-type'	=> $field['type'],
-	    	'data-key'	=> $field['key'],
-	    );
+    //     // remove row
+    //     reset_rows();
 
-	    // Add field type attributes.
-	    $wrapper['class'] .= " acf-field-{$field['type']}";
+    //     $return = '<div ' . acf_esc_attr($div) . '>' . acf_get_hidden_input (array( 'name' => $prefix.'[acf_fc_layout]', 'value' => $layout['name'] )) . '
+    //         <div class="acf-fc-layout-handle" title="' . __('Drag to reorder','woody-theme') . '" data-name="collapse-layout">'. $title . '</div>
+    //         <div class="acf-fc-layout-controls">
+    //             <a class="acf-icon -plus small light acf-js-tooltip" href="#" data-name="add-layout" title="'.  __("Add layout", "woody-theme") . '"></a>
+    //             <a class="acf-icon -duplicate small light acf-js-tooltip" href="#" data-name="duplicate-layout" title="'. __("Duplicate layout", "woody-theme") . '"></a>
+    //             <a class="acf-icon -minus small light acf-js-tooltip" href="#" data-name="remove-layout" title="'. __("Remove layout", "woody-theme") . '"></a>
+    //             <a class="acf-icon -collapse small -clear acf-js-tooltip" href="#" data-name="collapse-layout" title="'. __("Click to toggle", "woody-theme") . '"></a>
+    //         </div>';
 
-	    // add field key attributes
-	    if( $field['key'] ) {
-	    	$wrapper['class'] .= " acf-field-{$field['key']}";
-	    }
+    //     if (!empty($sub_fields)) {
+    //         if ( $layout['display'] == 'table' ) {
+    //             $return .= '<table class="acf-table"><thead><tr>';
+    //             foreach ($sub_fields as $sub_field) {
+    //                 $sub_field = acf_prepare_field($sub_field);
+    //                 if( !$sub_field ) continue;
 
-	    // Add required attributes.
-	    // Todo: Remove data-required
-	    if( $field['required'] ) {
-	    	$wrapper['class'] .= ' is-required';
-	    	$wrapper['data-required'] = 1;
-	    }
+    //                 $atts = array();
+    //                 $atts['class'] = 'acf-th';
+    //                 $atts['data-name'] = $sub_field['_name'];
+    //                 $atts['data-type'] = $sub_field['type'];
+    //                 $atts['data-key'] = $sub_field['key'];
 
-	    // Clean up class attribute.
-	    $wrapper['class'] = str_replace( '_', '-', $wrapper['class'] );
-	    $wrapper['class'] = str_replace( 'field-field-', 'field-', $wrapper['class'] );
 
-	    // Merge in field 'wrapper' setting without destroying class and style.
-	    if( $field['wrapper'] ) {
-	    	$wrapper = acf_merge_attributes( $wrapper, $field['wrapper'] );
-	    }
+    //                 // Add custom width
+    //                 if( $sub_field['wrapper']['width'] ) {
+    //                     $atts['data-width'] = $sub_field['wrapper']['width'];
+    //                     $atts['style'] = 'width: ' . $sub_field['wrapper']['width'] . '%;';
+    //                 }
 
-	    // Extract wrapper width and generate style.
-	    // Todo: Move from $wrapper out into $field.
-	    $width = acf_extract_var( $wrapper, 'width' );
-	    if( $width ) {
-	    	$width = acf_numval( $width );
-	    	if( $element !== 'tr' && $element !== 'td' ) {
-	    		$wrapper['data-width'] = $width;
-	    		$wrapper['style'] .= " width:{$width}%;";
-	    	}
-	    }
+    //                 $return .= '<th ' . acf_esc_attr( $atts ) . '> ' . acf_get_field_label( $sub_field );
+    //                 if ($sub_field['instructions']) {
+    //                     $return .= '<p class="description">' . $sub_field['instructions'] . '</p>';
+    //                 }
+    //                 $return .= '</th>';
+    //             }
 
-	    // Clean up all attributes.
-	    $wrapper = array_map( 'trim', $wrapper );
-	    $wrapper = array_filter( $wrapper );
+    //             $return .= '</tr></thead><tbody><tr class="acf-row">';
+    //         } else {
+    //             $return .= '<div class="acf-fields';
+    //             if ( $layout['display'] == 'row' ) {
+    //                 $return .= ' -left';
+    //             }
+    //             $return .= '">';
+    //         }
 
-	    /**
-	     * Filters the $wrapper array before rendering.
-	     *
-	     * @date	21/1/19
-	     * @since	5.7.10
-	     *
-	     * @param	array $wrapper The wrapper attributes array.
-	     * @param	array $field The field array.
-	     */
-	    $wrapper = apply_filters( 'acf/field_wrapper_attributes', $wrapper, $field );
+    //         foreach ( $sub_fields as $sub_field ) {
+    //             error_log($sub_field['name'] . ' => ' . $sub_field['key'] . PHP_EOL, 3, "/tmp/debug");
+    //             // add value
+	// 		    if( isset($value[ $sub_field['key'] ]) ) {
+	// 		    	// this is a normal value
+	// 		    	$sub_field['value'] = $value[ $sub_field['key'] ];
+	// 		    } elseif( isset($sub_field['default_value']) ) {
+	// 		    	// no value, but this sub field has a default value
+	// 		    	$sub_field['value'] = $sub_field['default_value'];
 
-	    // Append conditional logic attributes.
-	    if( !empty($field['conditional_logic']) ) {
-	    	$wrapper['data-conditions'] = $field['conditional_logic'];
-	    }
-	    if( !empty($field['conditions']) ) {
-	    	$wrapper['data-conditions'] = $field['conditions'];
-	    }
+	// 		    }
+	// 		    // update prefix to allow for nested values
+	// 		    $sub_field['prefix'] = $prefix;
 
-	    // Vars for render.
-	    $attributes_html = acf_esc_attr( $wrapper );
+	// 		    // render input
+	// 		    $return .= $this->woodyAcfRenderFieldWrap( $sub_field, $el );
+    //         }
 
-	    // Render HTML
-	    $return .= "<$element $attributes_html>" . "\n";
-		if( $element !== 'td' ) {
-			$return  .= "<$inner_element class=\"acf-label\">" . "\n";
-				$return .= $this->woodyAcfRenderFieldLabel($field);
-				if ( $instruction == 'label' ) {
-					$return .= $this->woodyAcfRenderFieldInstructions( $field );
-				}
-			$return .= "</$inner_element>" . "\n";
-		}
-		$return .= "<$inner_element class=\"acf-input\">" . "\n";
-            $return .= $this->woodyAcfRenderField( $field );
-			if ( $instruction == 'field' ) {
-				$return .= $this->woodyAcfRenderFieldInstructions( $field );
-			}
-		$return .= "</$inner_element>" . "\n";
-	    $return .= "</$element>" . "\n";
+    //         if ( $layout['display'] == 'table' ) {
+    //             $return .= '</tr></tbody></table>';
+    //         } else {
+    //             $return .= '</div>';
+    //         }
+    //     }
 
-        return $return;
-    }
+    //     $return .= '</div>';
 
-    private function woodyAcfRenderFieldLabel( $field )
-    {
-        $return = '';
+    //     return $return;
+    // }
 
-        $label = acf_get_field_label( $field );
+    // private function woodyAcfRenderFieldWrap ( $field, $element = 'div', $instruction = 'label' )
+    // {
+    //     $return = '';
 
-        if ( $label ) {
-            $return = '<label' . ($field['id'] ? ' for="' . esc_attr($field['id']) . '"' : '' ) . '>' . acf_esc_html($label) . '</label>';
-        }
+    //     	// Ensure field is complete (adds all settings).
+	//     $field = acf_validate_field( $field );
 
-        return $return;
-    }
+	//     // Prepare field for input (modifies settings).
+	//     $field = acf_prepare_field( $field );
 
-    private function woodyAcfRenderField( $field )
-    {
-        $return = '';
+	//     // Allow filters to cancel render.
+	//     if( !$field ) {
+	//     	return;
+	//     }
 
-	    // Ensure field is complete (adds all settings).
-	    $field = acf_validate_field( $field );
+	//     // Determine wrapping element.
+	//     $elements = array(
+	//     	'div'	=> 'div',
+	//     	'tr'	=> 'td',
+	//     	'td'	=> 'div',
+	//     	'ul'	=> 'li',
+	//     	'ol'	=> 'li',
+	//     	'dl'	=> 'dt',
+	//     );
 
-	    // Prepare field for input (modifies settings).
-	    $field = acf_prepare_field( $field );
+	//     if( isset($elements[$element]) ) {
+	//     	$inner_element = $elements[$element];
+	//     } else {
+	//     	$element = $inner_element = 'div';
+	//     }
 
-	    // Allow filters to cancel render.
-	    if ( !$field ) {
-	    	$return = '';
-	    } else {
-            ob_start(); //Start output buffer
-            ob_clean(); //Clean output buffer
-            do_action('acf/render_field', $field);
-            $return = ob_get_contents(); //Grab output
-            ob_end_clean();
-        }
+	//     // Generate wrapper attributes.
+	//     $wrapper = array(
+	//     	'id'		=> '',
+	//     	'class'		=> 'acf-field',
+	//     	'width'		=> '',
+	//     	'style'		=> '',
+	//     	'data-name'	=> $field['_name'],
+	//     	'data-type'	=> $field['type'],
+	//     	'data-key'	=> $field['key'],
+	//     );
 
-        return $return;
-    }
+	//     // Add field type attributes.
+	//     $wrapper['class'] .= " acf-field-{$field['type']}";
 
-    private function woodyAcfRenderFieldInstructions( $field )
-    {
-        $return = '';
+	//     // add field key attributes
+	//     if( $field['key'] ) {
+	//     	$wrapper['class'] .= " acf-field-{$field['key']}";
+	//     }
 
-        if ( $field['instructions'] ) {
-            $return = '<p class="description">' . acf_esc_html($field['instructions']) . '</p>';
-        }
+	//     // Add required attributes.
+	//     // Todo: Remove data-required
+	//     if( $field['required'] ) {
+	//     	$wrapper['class'] .= ' is-required';
+	//     	$wrapper['data-required'] = 1;
+	//     }
 
-        return $return;
-    }
+	//     // Clean up class attribute.
+	//     $wrapper['class'] = str_replace( '_', '-', $wrapper['class'] );
+	//     $wrapper['class'] = str_replace( 'field-field-', 'field-', $wrapper['class'] );
+
+	//     // Merge in field 'wrapper' setting without destroying class and style.
+	//     if( $field['wrapper'] ) {
+	//     	$wrapper = acf_merge_attributes( $wrapper, $field['wrapper'] );
+	//     }
+
+	//     // Extract wrapper width and generate style.
+	//     // Todo: Move from $wrapper out into $field.
+	//     $width = acf_extract_var( $wrapper, 'width' );
+	//     if( $width ) {
+	//     	$width = acf_numval( $width );
+	//     	if( $element !== 'tr' && $element !== 'td' ) {
+	//     		$wrapper['data-width'] = $width;
+	//     		$wrapper['style'] .= " width:{$width}%;";
+	//     	}
+	//     }
+
+	//     // Clean up all attributes.
+	//     $wrapper = array_map( 'trim', $wrapper );
+	//     $wrapper = array_filter( $wrapper );
+
+	//     /**
+	//      * Filters the $wrapper  array before rendering.
+	//      *
+	//      * @date	21/1/19
+	//      * @since	5.7.10
+	//      *
+	//      * @param	array $wrapper The wrapper attributes array.
+	//      * @param	array $field The field array.
+	//      */
+	//     $wrapper = apply_filters( 'acf/field_wrapper_attributes', $wrapper, $field );
+
+	//     // Append conditional logic attributes.
+	//     if( !empty($field['conditional_logic']) ) {
+	//     	$wrapper['data-conditions'] = $field['conditional_logic'];
+	//     }
+	//     if( !empty($field['conditions']) ) {
+	//     	$wrapper['data-conditions'] = $field['conditions'];
+	//     }
+
+	//     // Vars for render.
+	//     $attributes_html = acf_esc_attr( $wrapper );
+
+	//     // Render HTML
+	//     $return .= "<$element $attributes_html>" . "\n";
+	// 	if( $element !== 'td' ) {
+	// 		$return  .= "<$inner_element class=\"acf-label\">" . "\n";
+	// 			$return .= $this->woodyAcfRenderFieldLabel($field);
+	// 			if ( $instruction == 'label' ) {
+	// 				$return .= $this->woodyAcfRenderFieldInstructions( $field );
+	// 			}
+	// 		$return .= "</$inner_element>" . "\n";
+	// 	}
+	// 	$return .= "<$inner_element class=\"acf-input\">" . "\n";
+    //         $return .= $this->woodyAcfRenderField( $field );
+	// 		if ( $instruction == 'field' ) {
+	// 			$return .= $this->woodyAcfRenderFieldInstructions( $field );
+	// 		}
+	// 	$return .= "</$inner_element>" . "\n";
+	//     $return .= "</$element>" . "\n";
+
+    //     return $return;
+    // }
+
+    // private function woodyAcfRenderFieldLabel( $field )
+    // {
+    //     $return = '';
+
+    //     $label = acf_get_field_label( $field );
+
+    //     if ( $label ) {
+    //         $return = '<label' . ($field['id'] ? ' for="' . esc_attr($field['id']) . '"' : '' ) . '>' . acf_esc_html($label) . '</label>';
+    //     }
+
+    //     return $return;
+    // }
+
+    // private function woodyAcfRenderField( $field )
+    // {
+    //     $return = '';
+
+	//     // Ensure field is complete (adds all settings).
+	//     $field = acf_validate_field( $field );
+
+	//     // Prepare field for input (modifies settings).
+	//     $field = acf_prepare_field( $field );
+
+	//     // Allow filters to cancel render.
+	//     if ( !$field ) {
+	//     	$return = '';
+	//     } else {
+    //         error_log('render_field' . PHP_EOL, 3, '/tmp/debug');
+
+    //         ob_start(); //Start output buffer
+    //         ob_clean(); //Clean output buffer
+    //         do_action('acf/render_field', $field);
+    //         $return = ob_get_contents(); //Grab output
+    //         ob_end_clean();
+    //     }
+
+    //     return $return;
+    // }
+
+    // private function woodyAcfRenderFieldInstructions( $field )
+    // {
+    //     $return = '';
+
+    //     if ( $field['instructions'] ) {
+    //         $return = '<p class="description">' . acf_esc_html($field['instructions']) . '</p>';
+    //     }
+
+    //     return $return;
+    // }
 
     private function replaceInputFields($return, $field_name)
     {
