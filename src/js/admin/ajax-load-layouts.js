@@ -48,16 +48,16 @@
                   if (clone.find('div[data-layout="' + button.dataset.layout + '"]').length <= 0) {
 
                     $.ajax({
-                        url: ajaxurl,
+                        url: '/wp-json/woody/acf-render-layout?key=field_5b043f0525968&layout=' + button.dataset.layout,
                         type: 'GET',
-                        data: {
-                            action: 'generate_layout_acf_clone',
-                            layout: button.dataset.layout,
-                            name: name
-                        },
                         success: function(response) {
+                            let el = $( '<div></div>' );
+                            el.html(response);
+
+                            let content = el.find('[data-layout="' + button.dataset.layout + '"]');
+
                             // Add clone
-                            clone.append(response);
+                            clone.append(content[0]);
 
                             let fields = acf.getFields({
                                 key: 'field_5b043f0525968'
