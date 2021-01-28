@@ -219,9 +219,10 @@
             "choices": {
                 "facebook": "Facebook",
                 "twitter": "Twitter",
+                "linkedin": "LinkedIn",
+                "whatsapp": "WhatsApp",
                 "pinterest": "Pinterest",
-                "mail": "Mail",
-                "whatsapp": "WhatsApp"
+                "mail": "Mail"
             },
             "allow_custom": 0,
             "default_value": [
