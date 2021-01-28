@@ -26,12 +26,18 @@
         return $el;
     };
     var name = "";
+    var id= "";
     var clone;
 
     $(document).on('click', '.acf-button[data-name="add-layout"]', function() {
         addlayoutbutton = $(this);
         name = addlayoutbutton.closest('.acf-flexible-content').find('input[type="hidden"]').attr('name');
         clone = addlayoutbutton.closest('.acf-flexible-content').find('.clones');
+        id = name.replace(/\]\[/g, '-');
+        id = id.replace(/\]|\[/g, '-');
+        if (id.substr(id.length-1) == '-') {
+            id = id.substr(0, id.length-1);
+        }
     });
 
     document.addEventListener('click', () => {
@@ -39,31 +45,51 @@
 
       for (const button of buttons) {
 
-        if (clone.find('div[data-layout="' + button.dataset.layout + '"]').length <= 0) {
+        let layouts = clone.find('div[data-layout="' + button.dataset.layout + '"]');
+        let none = true;
+        layouts.each(function(){
+            if($(this).closest('[data-name="light_section_content"]').length == 0) {
+                none = false;
+            }
+        });
+
+        if (layouts.length <= 0 || none) {
 
             if (!button.getAttribute('hasListener')) {
 
               button.addEventListener('click', (e) => {
 
-                  if (clone.find('div[data-layout="' + button.dataset.layout + '"]').length <= 0) {
+                let layouts = clone.find('div[data-layout="' + button.dataset.layout + '"]');
+                let none = true;
+                layouts.each(function(){
+                    if($(this).closest('[data-name="light_section_content"]').length == 0) {
+                        none = false;
+                    }
+                });
+
+                if (layouts.length <= 0 || none) {
 
                     $.ajax({
-                        url: '/wp-json/woody/acf-render-layout?key=field_5b043f0525968&layout=' + button.dataset.layout,
+                        url: ajaxurl,
+                        data: {
+                            action: 'generate_layout_acf_clone',
+                            layout: button.dataset.layout,
+                            key: 'field_5b043f0525968'
+                        },
                         type: 'GET',
                         success: function(response) {
-                            let el = $( '<div></div>' );
-                            el.html(response);
-
-                            let content = el.find('[data-layout="' + button.dataset.layout + '"]');
+                            response = response.replace(/name="#rowindex-name#/g, 'name="' + name);
+                            response = response.replace(/for="#rowindex-name#/g, 'for="' + id);
+                            response = response.replace(/id="#rowindex-name#/g, 'id="' + id);
 
                             // Add clone
-                            clone.append(content[0]);
+                            clone.append(response);
+
 
                             let fields = acf.getFields({
                                 key: 'field_5b043f0525968'
                             });
                             let field;
-
                             fields.forEach(element => {
                                 if (element.$el[0] == clone.closest('.acf-field-flexible-content')[0]) {
                                     field = element;

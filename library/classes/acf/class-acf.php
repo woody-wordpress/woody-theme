@@ -81,13 +81,7 @@ class WoodyTheme_ACF
         add_action('wp_ajax_woody_tpls', [$this, 'woodyGetAllTemplates']);
 
         // Ajax Call
-        add_action('wp_ajax_generate_layout_acf_clone', [$this, 'generateLayoutAcfClone']);
-        add_action('rest_api_init', function () {
-            register_rest_route('woody', 'acf-render-layout', array(
-                'methods' => 'GET',
-                'callback' => [$this, 'getRenderedLayout']
-            ));
-        });
+        add_action('wp_ajax_generate_layout_acf_clone', [$this, 'getRenderedLayout']);
     }
 
     public function woodyGetFieldOption($field_name = null)
@@ -888,67 +882,85 @@ class WoodyTheme_ACF
     /**
      * Set layouts transient on deploy
      */
-    // public function generateLayoutsTransients()
-    // {
-    //     // field_5b043f0525968 == "section_content"
-    //     $field = acf_get_field('field_5b043f0525968');
+    public function generateLayoutsTransients()
+    {
+        $field = acf_get_field("field_5b043f0525968");
 
-    //     // Filter our false results.
-    //     $field = array_filter( $field );
+        $field['name'] = "#rowindex-name#";
+        $field['display_layouts'] = true;
 
-    //     if ( !empty($field) && is_array($field) ) {
-    //         $field['name'] = "#rowindex-name#";
+        ob_start();
+        do_action('acf/render_field', $field);
+        $html_str = ob_get_contents();
+        ob_end_clean();
 
-    //         foreach( $field['layouts'] as $k => $layout ) {
-    //             $data = $this->woodyRenderLayout($field, $layout, 'acfcloneindex', array());
+        $index = 1;
+        $keys = array_keys($field['layouts']);
+        foreach($field['layouts'] as $layout) {
+            $layout_start = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="' . $layout['name'] . '">');
 
-    //             set_transient('layout-' . $layout['name'], $data);
-    //         }
-    //     }
-    // }
+            if ($layout_start !== false) {
+                if (!empty($field['layouts'][$keys[$index]]) && !empty($field['layouts'][$keys[$index]]['name'])) {
+                    $layout_length = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="' . $field['layouts'][$keys[$index]]['name'] . '">') - $layout_start;
+                    $return = substr($html_str, $layout_start, $layout_length);
+                } else {
+                    // TODO: change that
+                    $return = substr($html_str, $layout_start);
+                }
 
+                set_transient('layout-' . $layout['name'], $return);
+            }
+
+            $index++;
+        }
+    }
 
     public function getRenderedLayout()
     {
-        $layout_name = filter_input(INPUT_GET, 'layout', FILTER_SANITIZE_STRING);
-        $key = filter_input(INPUT_GET, 'key', FILTER_SANITIZE_STRING);
         $return = '';
+        $key = filter_input(INPUT_GET, 'key', FILTER_SANITIZE_STRING);
+        $layout_name = filter_input(INPUT_GET, 'layout', FILTER_SANITIZE_STRING);
 
-        // field_5b043f0525968 == "section_content"
-        $field = acf_get_field($key);
+        $transient = get_transient('layout-' . $layout_name);
+        if (!empty($transient)) {
+            $return = $transient;
+        } else {
+            // field_5b043f0525968 == "section_content"
+            $field = acf_get_field($key);
 
-        if (!empty($field) && !empty($layout_name)) {
-            foreach ($field['layouts'] as $layout) {
+            $field['name'] = "#rowindex-name#";
+            $field['display_layouts'] = true;
+
+            ob_start();
+            do_action('acf/render_field', $field);
+            $html_str = ob_get_contents();
+            ob_end_clean();
+
+            $index = 1;
+            $keys = array_keys($field['layouts']);
+            foreach($field['layouts'] as $layout) {
                 if ($layout['name'] == $layout_name) {
-                    $field['name'] = "#rowindex-name#";
-                    $field['display_layouts'] = true;
+                    $layout_start = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="' . $layout['name'] . '">');
 
-                    ob_start();
-                    do_action('acf/render_field', $field);
-                    $return = ob_get_contents();
-                    ob_end_clean();
+                    if ($layout_start !== false) {
+                        if (!empty($field['layouts'][$keys[$index]]) && !empty($field['layouts'][$keys[$index]]['name'])) {
+                            $layout_length = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="' . $field['layouts'][$keys[$index]]['name'] . '">') - $layout_start;
+                            $return = substr($html_str, $layout_start, $layout_length);
+                        } else {
+                            // TODO:
+                            $return = substr($html_str, $layout_start);
+                        }
+
+                        set_transient('layout-' . $layout['name'], $return);
+                    }
+
+                    break;
                 }
+
+                $index++;
             }
         }
 
-        return $return;
-    }
-
-
-    private function replaceInputFields($return, $field_name)
-    {
-        // Refactor that
-        $field_id = str_replace('][' , '-', $field_name);
-        $field_id = str_replace([']', '['] , '-', $field_id);
-        if ($field_id[strlen($field_id)-1] == '-') {
-            $field_id = substr_replace($field_id, '', strlen($field_id)-1);
-        }
-
-        // Replace les field_name, id et for
-        $return = str_replace('name="#rowindex-name#', 'name="' . $field_name, $return);
-        $return = str_replace('id="#rowindex-name#', 'id="' . $field_id, $return);
-        $return = str_replace('for="#rowindex-name#', 'for="' . $field_id, $return);
-
-        return $return;
+        wp_send_json( $return );
     }
 }
