@@ -535,9 +535,12 @@ class WoodyTheme_WoodyProcess
                 $the_section = [
                     'header' => $the_header,
                     'layout' => $the_layout,
-                    'display' => $display,
-                    'summary_id' => $summary_id,
+                    'display' => $display
                 ];
+
+                if (!empty($summary_id)) {
+                    $the_section['summary_id'] = $summary_id;
+                }
                 if (!empty($section['section_banner'])) {
                     foreach ($section['section_banner'] as $banner) {
                         $the_section[$banner] = $this->tools->getSectionBannerFiles($banner);
