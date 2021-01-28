@@ -243,6 +243,10 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         if (!empty($page_type[0]) && $page_type[0]->slug != 'front_page') {
             $this->context['page_teaser'] = $this->compilers->formatPageTeaser($this->context);
             $this->context['page_hero'] = $this->compilers->formatPageHero($this->context);
+            // Add class "has-hero" to body if page hero is here
+            if (!empty($this->context['page_hero'])) {
+                $this->context['body_class'] = $this->context['body_class'] . ' has-hero';
+            }
         }
 
         // Si on est sur la page favoris, on ajoute un bouton pour l'impression
