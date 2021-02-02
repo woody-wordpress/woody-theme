@@ -80,8 +80,8 @@ class WoodyTheme_Unpublisher
             FROM `wp_posts`, `wp_postmeta`
             WHERE `wp_posts`.`ID` = `wp_postmeta`.`post_id`
             AND `wp_postmeta`.`meta_key` = '_wUnpublisher_date'
-            AND `wp_postmeta`.`meta_value` < '{$today}'
-            AND `wp_postmeta`.`meta_value` IS NOT NULL"
+            AND `wp_postmeta`.`meta_value` < {$today}
+            AND `wp_postmeta`.`meta_value` != ''"
         );
 
         if (!empty($results)) {
