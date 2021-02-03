@@ -7,11 +7,14 @@
  * @since WoodyTheme 1.0.0
  */
 
+ use Woody\Services\Providers\Wp;
+
 class WoodyTheme_Permalink
 {
     public function __construct()
     {
         $this->registerHooks();
+        $this->wpProvider = new Wp;
     }
 
     protected function registerHooks()
@@ -142,6 +145,22 @@ class WoodyTheme_Permalink
     public function savePost($post_id, $post, $update)
     {
         wp_cache_delete(sprintf('woody_get_permalink_%s', $post_id), 'woody');
+        $this->cacheDeleteChildrenPosts($post_id);
+    }
+
+    public function cacheDeleteChildrenPosts($post_id)
+    {
+        $has_children = $this->wpProvider->hasChildren($post_id);
+        if ($has_children) {
+            $children_pages = $this->wpProvider->getPages($post_id);
+            if (!empty($children_pages)) {
+                foreach ($children_pages as $children_page) {
+                    wp_cache_delete(sprintf('woody_get_permalink_%s', $children_page->ID), 'woody');
+                    // Recursively
+                    $this->cacheDeleteChildrenPosts($children_page->ID, $pre_post_update);
+                }
+            }
+        }
     }
 
     public function deletePost($post_id)
