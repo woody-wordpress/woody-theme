@@ -147,7 +147,6 @@ class WoodyTheme_Commands
                     $headers['X-VC-Purge-Key'] = $vcaching_purgeKey;
                 }
                 $response = wp_remote_request($purgeme, array('method' => 'PURGE', 'headers' => $headers, "sslverify" => false));
-                rcd($response, true);
                 if ($response instanceof WP_Error) {
                     foreach ($response->errors as $error => $errors) {
                         $noticeMessage = 'Error ' . $error . ' : ';
