@@ -9,6 +9,7 @@
  */
 
 use WoodyLibrary\Library\WoodyLibrary\WoodyLibrary;
+use Woody\Utils\Output;
 
 class WoodyTheme_ACF
 {
@@ -195,6 +196,7 @@ class WoodyTheme_ACF
      * Benoit Bouchaud
      * On ajoute tous les termes de taxonomie du site dans le sélecteur de termes de la mise en avant automatique
      */
+    //HERE
     public function focusedTaxonomyTermsLoadField($field)
     {
         // Reset field's choices + create $terms for future choices
@@ -228,10 +230,26 @@ class WoodyTheme_ACF
                 ));
 
                 foreach ($tax_terms as $term) {
+
                     if ($term->name == 'Uncategorized') {
                         continue;
                     }
-                    $choices[$lang][$term->term_id] = $taxonomy->label . ' - ' . $term->name;
+
+                    $display_parent_tag_name = apply_filters('woody_get_field_option', 'display_parent_tag_name');
+                    if ($display_parent_tag_name) {
+                        //Get the root ancestor of a term
+                        $parent_name="";
+                        $root_parent_term_id = end(get_ancestors($term->term_id, $taxonomy->name));
+                        if (!empty($root_parent_term_id)) {
+                            $root_parent_term = get_term($root_parent_term_id);
+                            //Add root parent name
+                            if (!empty($root_parent_term)) {
+                                $parent_name = '<small style="color:#cfcfcf; font-style:italic"> - ( Enfant de ' . $root_parent_term->name . ' )</small>' ;
+                            }
+                        }
+                    }
+
+                    $choices[$lang][$term->term_id] = $taxonomy->label . ' - ' . $term->name . $parent_name;
                 }
             }
 
