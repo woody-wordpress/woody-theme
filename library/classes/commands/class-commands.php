@@ -107,8 +107,12 @@ class WoodyTheme_Commands
         }
     }
 
-    public function flush_varnish($path = '/.*', $method = 'regex')
+    public function flush_varnish($path, $method)
     {
+        // Flush All site if no page defined
+        $path = (!empty($path)) ? $path : '/.*';
+        $method = (!empty($method)) ? $method : 'regex';
+
         // Options
         $varnish_caching_enable = get_option('varnish_caching_enable');
         if (!$varnish_caching_enable) {
