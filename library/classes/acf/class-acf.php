@@ -9,7 +9,6 @@
  */
 
 use WoodyLibrary\Library\WoodyLibrary\WoodyLibrary;
-use Woody\Utils\Output;
 
 class WoodyTheme_ACF
 {
@@ -196,7 +195,6 @@ class WoodyTheme_ACF
      * Benoit Bouchaud
      * On ajoute tous les termes de taxonomie du site dans le sélecteur de termes de la mise en avant automatique
      */
-    //HERE
     public function focusedTaxonomyTermsLoadField($field)
     {
         // Reset field's choices + create $terms for future choices
