@@ -228,10 +228,26 @@ class WoodyTheme_ACF
                 ));
 
                 foreach ($tax_terms as $term) {
+
                     if ($term->name == 'Uncategorized') {
                         continue;
                     }
-                    $choices[$lang][$term->term_id] = $taxonomy->label . ' - ' . $term->name;
+
+                    $display_parent_tag_name = get_field('display_parent_tag_name', 'options');
+                    $parent_name='';
+                    if ($display_parent_tag_name) {
+                        //Get the root ancestor of a term
+                        $root_parent_term_id = end(get_ancestors($term->term_id, $taxonomy->name));
+                        if (!empty($root_parent_term_id)) {
+                            $root_parent_term = get_term($root_parent_term_id);
+                            //Add root parent name
+                            if (!empty($root_parent_term)) {
+                                $parent_name = '<small style="color:#cfcfcf; font-style:italic"> - ( Enfant de ' . $root_parent_term->name . ' )</small>' ;
+                            }
+                        }
+                    }
+
+                    $choices[$lang][$term->term_id] = $taxonomy->label . ' - ' . $term->name . $parent_name;
                 }
             }
 
