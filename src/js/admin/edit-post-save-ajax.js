@@ -38,7 +38,7 @@ const savePost = (e, publish) => {
  */
 const createNotice = (type, message) => {
   let notice = document.createElement('div');
-  notice.classList.add('notice', 'is-dismissible');
+  notice.classList.add('custom-notice', 'is-fixed');
   notice.classList.add(type);
   notice.innerHTML = `
     <p>${message}</p>
@@ -49,6 +49,15 @@ const createNotice = (type, message) => {
   notice.querySelector('.notice-dismiss').addEventListener('click', () => {
     notice.parentNode.removeChild(notice);
   });
+  if (type !== 'notice-error') {
+    setTimeout(()=> {
+      notice.animate([
+        { transform: 'translateY(0)' },
+        { transform: 'translateY(-100%)' }
+      ], { duration: 300, iterations: 1, easing: 'ease' });
+      setTimeout(()=>{notice.remove();}, 300);
+    }, 10000);
+  }
   document.querySelector('.wp-header-end').after(notice);
 }
 
@@ -56,3 +65,5 @@ document.getElementById('publish').addEventListener('click', e => { savePost(e, 
 if (document.getElementById('save-post')) {
   document.getElementById('save-post').addEventListener('click', e => { savePost(e, false); });
 }
+
+window.onbeforeunload = null;
