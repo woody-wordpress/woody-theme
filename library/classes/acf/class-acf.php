@@ -233,7 +233,7 @@ class WoodyTheme_ACF
                         continue;
                     }
 
-                    $display_parent_tag_name = apply_filters('woody_get_field_option', 'display_parent_tag_name');
+                    $display_parent_tag_name = get_field('display_parent_tag_name', 'options');
                     if ($display_parent_tag_name) {
                         //Get the root ancestor of a term
                         $parent_name="";
