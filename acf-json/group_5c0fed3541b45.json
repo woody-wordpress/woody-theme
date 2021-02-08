@@ -58,7 +58,7 @@
         },
         {
             "key": "field_601c25291a109",
-            "label": "Afficher le parent des tags lors de la création de mise en avant automatique",
+            "label": "Afficher le tag parent dans les champs de type taxonomie",
             "name": "display_parent_tag_name",
             "type": "true_false",
             "instructions": "Si cette option est activée, le titre du parent sera affiché à la suite d'un tag sous la forme \"Enfant de [tag parent]\".",
