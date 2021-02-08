@@ -234,9 +234,9 @@ class WoodyTheme_ACF
                     }
 
                     $display_parent_tag_name = get_field('display_parent_tag_name', 'options');
+                    $parent_name='';
                     if ($display_parent_tag_name) {
                         //Get the root ancestor of a term
-                        $parent_name='';
                         $root_parent_term_id = end(get_ancestors($term->term_id, $taxonomy->name));
                         if (!empty($root_parent_term_id)) {
                             $root_parent_term = get_term($root_parent_term_id);
