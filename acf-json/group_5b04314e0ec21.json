@@ -1,8 +1,7 @@
 {
     "key": "group_5b04314e0ec21",
     "title": "Galerie de photos",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5b04475f63df2",
             "label": "Contenu",
             "name": "",
@@ -44,10 +43,10 @@
         },
         {
             "key": "field_602288fc72d23",
-            "label": "Autoriser en lightbox",
+            "label": "Photos cliquables",
             "name": "gallery_lightbox",
             "type": "true_false",
-            "instructions": "Permet d'activer ou de désactiver l'ouverture de l'image dans une galerie lightbox.",
+            "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -69,13 +68,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5f869edef5d53",
-                        "operator": "==",
-                        "value": "manual"
-                    }
-                ]
+                [{
+                    "field": "field_5f869edef5d53",
+                    "operator": "==",
+                    "value": "manual"
+                }]
             ],
             "wrapper": {
                 "width": "",
@@ -105,13 +102,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5f869edef5d53",
-                        "operator": "==",
-                        "value": "auto"
-                    }
-                ]
+                [{
+                    "field": "field_5f869edef5d53",
+                    "operator": "==",
+                    "value": "auto"
+                }]
             ],
             "wrapper": {
                 "width": "33",
@@ -177,13 +172,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5f869edef5d53",
-                        "operator": "==",
-                        "value": "auto"
-                    }
-                ]
+                [{
+                    "field": "field_5f869edef5d53",
+                    "operator": "==",
+                    "value": "auto"
+                }]
             ],
             "wrapper": {
                 "width": "33",
@@ -210,13 +203,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_5f869edef5d53",
-                        "operator": "==",
-                        "value": "auto"
-                    }
-                ]
+                [{
+                    "field": "field_5f869edef5d53",
+                    "operator": "==",
+                    "value": "auto"
+                }]
             ],
             "wrapper": {
                 "width": "33",
@@ -456,13 +447,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "post"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
