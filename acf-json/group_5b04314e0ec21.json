@@ -1,7 +1,8 @@
 {
     "key": "group_5b04314e0ec21",
     "title": "Galerie de photos",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5b04475f63df2",
             "label": "Contenu",
             "name": "",
@@ -26,7 +27,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -39,8 +40,26 @@
             "default_value": "manual",
             "layout": "vertical",
             "return_format": "value",
-            "translations": "copy_once",
             "save_other_choice": 0
+        },
+        {
+            "key": "field_602288fc72d23",
+            "label": "Autoriser en lightbox",
+            "name": "gallery_lightbox",
+            "type": "true_false",
+            "instructions": "Permet d'activer ou de désactiver l'ouverture de l'image dans une galerie lightbox.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         {
             "key": "field_5b04314f27b84",
@@ -99,7 +118,48 @@
                 "class": "",
                 "id": ""
             },
-            "choices": [],
+            "choices": {
+                "3221": "Gamme de couleur - Village",
+                "2261": "Lieux - Domaine skiable",
+                "2263": "Lieux - Front de neige",
+                "2259": "Lieux - La station",
+                "2253": "Lieux - Mont de lans",
+                "2255": "Lieux - Venosc",
+                "2257": "Lieux - Villages",
+                "2251": "Saisons - Beau temps",
+                "2237": "Saisons - Hiver",
+                "2249": "Saisons - Mauvais temps",
+                "2247": "Saisons - Météo",
+                "2245": "Saisons - Noël",
+                "2241": "Saisons - Périodes",
+                "2243": "Saisons - Toussaint",
+                "2239": "Saisons - Été",
+                "2279": "Thématiques - Activités hors ski",
+                "2273": "Thématiques - Bien être détente",
+                "2283": "Thématiques - Cibles",
+                "2277": "Thématiques - Déguster",
+                "2287": "Thématiques - En couple",
+                "2291": "Thématiques - Entre amis",
+                "2265": "Thématiques - Envies",
+                "2313": "Thématiques - Evénements ski",
+                "2267": "Thématiques - Expériences insolites",
+                "2285": "Thématiques - Famille",
+                "2275": "Thématiques - Je ne skie pas",
+                "2299": "Thématiques - Les offres",
+                "2297": "Thématiques - Les points de vues",
+                "2271": "Thématiques - Pratique du ski",
+                "2289": "Thématiques - Quinquado",
+                "2311": "Thématiques - Remontées Mécaniques fermées",
+                "2293": "Thématiques - Riders",
+                "2281": "Thématiques - Shopping",
+                "2269": "Thématiques - Station qui bouge",
+                "2295": "Thématiques - Topitos",
+                "2307": "Thématiques - offres activités",
+                "2309": "Thématiques - offres agenda",
+                "2303": "Thématiques - offres hébergements",
+                "2305": "Thématiques - offres restauration",
+                "2301": "Thématiques - offres touristiques"
+            },
             "default_value": [],
             "allow_null": 0,
             "multiple": 1,
@@ -396,11 +456,13 @@
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -408,7 +470,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "Elément de contenu (Liste de photos)",
-    "modified": 1591356955
+    "modified": 1612876546
 }
