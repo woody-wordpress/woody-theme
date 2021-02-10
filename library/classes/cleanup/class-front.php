@@ -117,7 +117,7 @@ class WoodyTheme_Cleanup_Front
         return array_merge($body_classes, [WP_ENV]);
     }
 
-    public function removePrivatePrefix($format)
+    public function removePrivatePrefix()
     {
         return '%s';
     }
