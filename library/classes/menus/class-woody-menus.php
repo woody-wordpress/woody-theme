@@ -161,13 +161,13 @@ class WoodyTheme_Menus
 
         if (!empty($posts) && is_array($posts)) {
             foreach ($posts as $post_key => $post) {
-                if (is_int($post)) {
-                    $post =  get_post($post);
+                if (is_int($post) && get_post_status($post) == 'publish') {
+                    $post = get_post($post);
                 }
                 if (!is_object($post)) {
                     if (is_array($post) && !empty($post['url'])) {
                         $postid = url_to_postid($post['url']);
-                        if (!empty($postid)) {
+                        if (!empty($postid) && get_post_status($post) == 'publish') {
                             $post = get_post($postid);
                         } else {
                             $return[$post_key] = [
@@ -183,7 +183,7 @@ class WoodyTheme_Menus
                         continue;
                     }
                 }
-                if (is_object($post)) {
+                if (is_object($post) && get_post_status($post) == 'publish') {
                     $return[$post_key] = [
                         'the_id' => $post->ID,
                         'the_url' => apply_filters('woody_get_permalink', $post->ID),

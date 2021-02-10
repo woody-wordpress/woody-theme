@@ -7,11 +7,14 @@
  * @since WoodyTheme 1.0.0
  */
 
+ use Woody\Services\Providers\Wp;
+
 class WoodyTheme_Permalink
 {
     public function __construct()
     {
         $this->registerHooks();
+        $this->wpProvider = new Wp;
     }
 
     protected function registerHooks()
@@ -55,7 +58,7 @@ class WoodyTheme_Permalink
                 preg_match('/-([a-z_]{2,})-([0-9]{5,})$/', $last_segment, $sheet_id);
                 if (!empty($sheet_id) && !empty($sheet_id[2])) {
                     $query_result = new \WP_Query([
-                        'lang' => pll_current_language(), // query all polylang languages
+                        'lang' => pll_current_language(), // query all polylang languages TODO:no lang to get all langs
                         'post_status' => ['publish'],
                         'posts_per_page' => 1,
                         'orderby' => 'ID',
@@ -71,6 +74,8 @@ class WoodyTheme_Permalink
                         ],
                     ]);
                 } else {
+                    //TODO: Retravailler/Supprimer ce cas qui génère des boucles de redirection
+                    // Pour les pages qui sont déplacées dans l'arborescence
                     $query_result = new \WP_Query([
                         'lang' => pll_current_language(),
                         'posts_per_page' => 1,
@@ -140,6 +145,22 @@ class WoodyTheme_Permalink
     public function savePost($post_id, $post, $update)
     {
         wp_cache_delete(sprintf('woody_get_permalink_%s', $post_id), 'woody');
+        $this->cacheDeleteChildrenPosts($post_id);
+    }
+
+    public function cacheDeleteChildrenPosts($post_id)
+    {
+        $has_children = $this->wpProvider->hasChildren($post_id);
+        if ($has_children) {
+            $children_pages = $this->wpProvider->getPages($post_id);
+            if (!empty($children_pages)) {
+                foreach ($children_pages as $children_page) {
+                    wp_cache_delete(sprintf('woody_get_permalink_%s', $children_page->ID), 'woody');
+                    // Recursively
+                    $this->cacheDeleteChildrenPosts($children_page->ID, $pre_post_update);
+                }
+            }
+        }
     }
 
     public function deletePost($post_id)
