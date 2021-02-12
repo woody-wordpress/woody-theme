@@ -119,7 +119,7 @@ class WoodyTheme_ACF
         $screen = get_current_screen();
         if (!empty($screen->id) && strpos($screen->id, 'acf-options') !== false) {
             // Purge all varnish cache on save menu
-            do_action('woody_flush_varnish');
+            do_action('woody_flush_varnish', ['', 'regex']);
         }
     }
 
@@ -228,7 +228,6 @@ class WoodyTheme_ACF
                 ));
 
                 foreach ($tax_terms as $term) {
-
                     if ($term->name == 'Uncategorized') {
                         continue;
                     }
