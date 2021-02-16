@@ -202,7 +202,7 @@ class WoodyTheme_ACF
         $terms = [];
 
         $lang = $this->getCurrentLang();
-        // $choices = wp_cache_get('woody_terms_choices', 'woody');
+        $choices = wp_cache_get('woody_terms_choices', 'woody');
         if (empty($choices[$lang])) {
             // Remove useless taxonomies
             $unset_taxonomies = [
