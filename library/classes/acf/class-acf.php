@@ -202,18 +202,24 @@ class WoodyTheme_ACF
         $terms = [];
 
         $lang = $this->getCurrentLang();
-        $choices = wp_cache_get('woody_terms_choices', 'woody');
+        // $choices = wp_cache_get('woody_terms_choices', 'woody');
         if (empty($choices[$lang])) {
-
-            // Get all site taxonomies and exclude those we don't want to use
-            $taxonomies = get_object_taxonomies('page', 'objects');
-
             // Remove useless taxonomies
             $unset_taxonomies = [
                 'page_type',
                 'post_translations', // Polylang
                 'language', // Polylang
             ];
+
+            // Get all site taxonomies and exclude those we don't want to use
+            if ($field['name'] === "gallery_tags") {
+                $taxonomies = get_object_taxonomies('attachment', 'objects');
+
+                // $unset_taxonomies[] = 'attachment_types';
+
+            } else {
+                $taxonomies = get_object_taxonomies('page', 'objects');
+            }
 
             foreach ($taxonomies as $taxonomy) {
                 // Remove useless taxonomies
