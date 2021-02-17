@@ -413,7 +413,8 @@ class WoodyTheme_WoodyGetters
             'woody_icon' => (!empty($item['woody_icon'])) ? $item['woody_icon'] : '',
             'icon_img' => (!empty($item['icon_img']['url'])) ? [
                 'sizes' => [
-                    'thumbnail' => $item['icon_img']['sizes']['medium']
+                    'thumbnail' => $item['icon_img']['sizes']['medium'],
+                    'ratio_free' => $item['icon_img']['sizes']['ratio_free']
                 ],
                 'alt' =>  $item['icon_img']['alt'],
 
