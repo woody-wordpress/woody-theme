@@ -580,7 +580,7 @@ class WoodyTheme_WoodyGetters
         $data['location']['lng'] = (!empty($sheet['gps'])) ? $sheet['gps']['longitude'] : '';
 
         // Parcourir tout le tableau de dates et afficher la 1ère date non passée
-        if (!empty($sheet['dates'])) {
+        if ($sheet['bordereau'] == 'FMA' && !empty($sheet['dates'])) {
             $today = time();
             foreach ($sheet['dates'] as $date) {
                 $enddate= strtotime($date['end']['endDate']);
