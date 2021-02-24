@@ -107,7 +107,7 @@ class WoodyTheme_Commands
         }
     }
 
-    public function flush_varnish($path, $method)
+    public function flush_varnish($path = '', $method = '')
     {
         // Flush All site if no page defined
         $path = (!empty($path)) ? $path : '/.*';

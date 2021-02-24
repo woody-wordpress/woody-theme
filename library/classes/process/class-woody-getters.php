@@ -413,7 +413,8 @@ class WoodyTheme_WoodyGetters
             'woody_icon' => (!empty($item['woody_icon'])) ? $item['woody_icon'] : '',
             'icon_img' => (!empty($item['icon_img']['url'])) ? [
                 'sizes' => [
-                    'thumbnail' => $item['icon_img']['sizes']['medium']
+                    'thumbnail' => $item['icon_img']['sizes']['medium'],
+                    'ratio_free' => $item['icon_img']['sizes']['ratio_free']
                 ],
                 'alt' =>  $item['icon_img']['alt'],
 
@@ -579,7 +580,7 @@ class WoodyTheme_WoodyGetters
         $data['location']['lng'] = (!empty($sheet['gps'])) ? $sheet['gps']['longitude'] : '';
 
         // Parcourir tout le tableau de dates et afficher la 1ère date non passée
-        if (!empty($sheet['dates'])) {
+        if ($sheet['bordereau'] == 'FMA' && !empty($sheet['dates'])) {
             $today = time();
             foreach ($sheet['dates'] as $date) {
                 $enddate= strtotime($date['end']['endDate']);

@@ -119,7 +119,7 @@ class WoodyTheme_ACF
         $screen = get_current_screen();
         if (!empty($screen->id) && strpos($screen->id, 'acf-options') !== false) {
             // Purge all varnish cache on save menu
-            do_action('woody_flush_varnish');
+            do_action('woody_flush_varnish', '/*', 'regex');
         }
     }
 
@@ -204,16 +204,22 @@ class WoodyTheme_ACF
         $lang = $this->getCurrentLang();
         $choices = wp_cache_get('woody_terms_choices', 'woody');
         if (empty($choices[$lang])) {
-
-            // Get all site taxonomies and exclude those we don't want to use
-            $taxonomies = get_object_taxonomies('page', 'objects');
-
             // Remove useless taxonomies
             $unset_taxonomies = [
                 'page_type',
                 'post_translations', // Polylang
                 'language', // Polylang
             ];
+
+            // Get all site taxonomies and exclude those we don't want to use
+            if ($field['name'] === "gallery_tags") {
+                $taxonomies = get_object_taxonomies('attachment', 'objects');
+
+                // $unset_taxonomies[] = 'attachment_types';
+
+            } else {
+                $taxonomies = get_object_taxonomies('page', 'objects');
+            }
 
             foreach ($taxonomies as $taxonomy) {
                 // Remove useless taxonomies
@@ -228,7 +234,6 @@ class WoodyTheme_ACF
                 ));
 
                 foreach ($tax_terms as $term) {
-
                     if ($term->name == 'Uncategorized') {
                         continue;
                     }
@@ -671,6 +676,7 @@ class WoodyTheme_ACF
                 'blocks-focus-tpl_303',
                 'blocks-focus-tpl_307',
                 'blocks-focus-tpl_311',
+                'blocks-focus-tpl_325',
                 'blocks-focus-tpl_314',
                 'blocks-focus-tpl_302',
                 'blocks-focus-tpl_305',
