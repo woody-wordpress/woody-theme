@@ -645,10 +645,10 @@ class WoodyTheme_WoodyCompilers
             $page_hero['the_classes'][] = (!empty($page_hero['pretitle'])) ? 'has-pretitle' : '';
             $page_hero['the_classes'][] = (!empty($page_hero['subtitle'])) ? 'has-subtitle' : '';
             $page_hero['the_classes'][] = (!empty($page_hero['description'])) ? 'has-description' : '';
+            $page_hero['the_classes'][] = (!empty($page_hero['created'])) ? 'has-created' : '';
             $page_hero['classes'] = (!empty($page_hero['the_classes'])) ? implode(' ', $page_hero['the_classes']) : '';
 
             $page_hero = apply_filters('woody_custom_page_hero', $page_hero, $context);
-
             return \Timber::compile($context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
         } else {
             return '';

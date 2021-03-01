@@ -300,6 +300,9 @@ class WoodyTheme_WoodyGetters
             if (in_array('description', $wrapper['display_elements'])) {
                 $data['description'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($item, 'focus_description', $item, 'field_5b2bbbfaec6b2'), $item->ID);
             }
+            if (in_array('created', $wrapper['display_elements'])) {
+                $data['created'] = get_the_date('', $item->ID);
+            }
             if (in_array('price', $wrapper['display_elements'])) {
                 $price_type = get_field('the_price_price_type', $item->ID);
                 if ($price_type == "component_based") {
