@@ -55,10 +55,13 @@ class WoodyTheme_Template_Sitemap
         switch ($this->mode) {
             case 'index':
                 $sitemap_index = get_option($sitemap_prefix);
+
+                // Define sitemaps urls based on WOODY_PERMALINK_STRUCTURE
+                $sitemapEndUrl = (WOODY_PERMALINK_STRUCTURE == '/%postname%') ? 'xml' : 'xml/' ;
                 $this->twig_tpl = 'sitemap/sitemapindex.xml.twig';
                 for ($i = 1; $i <= $sitemap_index; $i++) {
                     $this->context['sitemaps'][] = [
-                        'loc' => 'sitemap-' . $i . '.xml',
+                        'loc' => 'sitemap-' . $i . '.' . $sitemapEndUrl,
                         'lastmod' => date('c', time()),
                     ];
                 }
