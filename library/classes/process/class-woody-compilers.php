@@ -648,7 +648,6 @@ class WoodyTheme_WoodyCompilers
             $page_hero['classes'] = (!empty($page_hero['the_classes'])) ? implode(' ', $page_hero['the_classes']) : '';
 
             $page_hero = apply_filters('woody_custom_page_hero', $page_hero, $context);
-
             return \Timber::compile($context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
         } else {
             return '';

@@ -300,6 +300,9 @@ class WoodyTheme_WoodyGetters
             if (in_array('description', $wrapper['display_elements'])) {
                 $data['description'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($item, 'focus_description', $item, 'field_5b2bbbfaec6b2'), $item->ID);
             }
+            if (in_array('created', $wrapper['display_elements'])) {
+                $data['created'] = get_the_date('', $item->ID);
+            }
             if (in_array('price', $wrapper['display_elements'])) {
                 $price_type = get_field('the_price_price_type', $item->ID);
                 if ($price_type == "component_based") {
@@ -926,7 +929,7 @@ class WoodyTheme_WoodyGetters
             $formatted_expressions = $this->formatProfileExpressions($profile_expressions);
             foreach ($focus_expressions as $expression_id) {
                 if (!empty($formatted_expressions[$expression_id])) {
-                    $data[] = $formatted_expressions[$expression_id];
+                    $data[$formatted_expressions[$expression_id]['order']] = $formatted_expressions[$expression_id];
                 }
             }
         }
@@ -937,8 +940,9 @@ class WoodyTheme_WoodyGetters
     private function formatProfileExpressions($profile_expressions)
     {
         $data = [];
-        foreach ($profile_expressions as $expression) {
+        foreach ($profile_expressions as $exp_key => $expression) {
             $data[$expression['profile_expression_category']->term_id] = [
+                'order' => $exp_key,
                 'title' => $expression['profile_expression_category']->name,
                 'content' => (!empty($expression['profile_expression_content'])) ? $expression['profile_expression_content'] : ''
             ];
