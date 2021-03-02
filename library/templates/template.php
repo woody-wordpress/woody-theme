@@ -53,7 +53,6 @@ abstract class WoodyTheme_TemplateAbstract
 
     public function timberCompileData($data)
     {
-        $data['globals']['post'] = $this->context['post'];
         $data['globals']['post_title'] = $this->context['post_title'];
         $data['globals']['post_id'] = $this->context['post_id'];
         $data['globals']['page_type'] = $this->context['page_type'];
@@ -78,6 +77,7 @@ abstract class WoodyTheme_TemplateAbstract
             $terms = get_the_terms($post_id, $taxonomy);
             if ($terms != false && !is_wp_error($terms)) {
                 foreach ($terms as $term) {
+                    console_log($term, $term->name);
                     $return[$taxonomy][] = $term->name;
                 }
             }
