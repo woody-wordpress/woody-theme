@@ -15,29 +15,45 @@
     {% if item.link %}
         <a href="{{ item.link.url }}" target="{{ item.link.target|default('_self') }}" title="{{ item.link.title }}" class="{{ class }}">
             {% if item.woody_icon %}
-                {{ _self.icon(item.woody_icon) }}
+                <span class="wicon {{ item.woody_icon }}"></span>
             {% endif %}
             {% if with_title %}
-                {{ _self.title(item.link.title) }}
+                <span>{{ item.link.title }}</span>
             {% endif %}
         </a>
     {% else %}
         <a href="{{ item.url }}" target="{{ item.target|default('_self') }}" title="{{ item.title }}" class="{{ class }}">
             {% if item.woody_icon %}
-                {{ _self.icon(item.woody_icon) }}
+                <span class="wicon {{ item.woody_icon }}"></span>
             {% endif %}
             {% if with_title %}
-                {{ _self.title(item.title) }}
+                <span>{{ item.title }}</span>
             {% endif %}
         </a>
-    {% endif %}    
+    {% endif %}
 {% endmacro %}
 
 {# Menu #}
 {% macro menu(menu_name, menu_class, link_class, with_title = true) %}
     <ul class="menu {{ menu_class }}">
         {% for item in menu_name.links %}
-            <li>{{ _self.link(item, link_class, with_title, tooltip) }}</li>
+            <li>
+                {% if item.link %}
+                    <a href="{{ item.link.url }}" target="{{ item.link.target|default('_self') }}" title="{{ item.link.title }}" class="{{ link_class }}">
+                        {% if item.woody_icon %}
+                            <span class="wicon {{ item.woody_icon }}"></span>
+                        {% endif %}
+                        <span>{{ item.link.title }}</span>
+                    </a>
+                {% else %}
+                    <a href="{{ item.url }}" target="{{ item.target|default('_self') }}" title="{{ item.title }}" class="{{ link_class }}">
+                        {% if item.woody_icon %}
+                            <span class="wicon {{ item.woody_icon }}"></span>
+                        {% endif %}
+                        <span>{{ item.title }}</span>
+                    </a>
+                {% endif %}
+            </li>
         {% endfor %}
     </ul>
 {% endmacro %}
