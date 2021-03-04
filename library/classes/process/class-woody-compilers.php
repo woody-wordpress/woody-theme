@@ -591,10 +591,17 @@ class WoodyTheme_WoodyCompilers
         // Existing profile
         if (!empty($page_teaser['page_teaser_add_profile']) && !empty($page_teaser['profile']['use_profile']) && !empty($page_teaser['profile']['profile_post'])) {
             $profile_id = $page_teaser['profile']['profile_post'];
+
+            //Add Profil expression category if checked
+            if(!empty($page_teaser['profile']['use_profile_expression']) && !empty($page_teaser['profile']['profile_expression'])){
+                $profile_expressions=$this->getter->getProfileExpressions($page_teaser['profile']['profile_post'],$page_teaser['profile']['profile_expression']);
+            }
+
             $page_teaser['profile'] = [
                         'profile_title' => get_the_title($profile_id),
                         'profile_picture' => get_field('profile_picture', $profile_id),
-                        'profile_description' => get_field('profile_description', $profile_id)
+                        'profile_description' => get_field('profile_description', $profile_id),
+                        'profile_expressions' => (!empty($profile_expressions)) ? $profile_expressions : '',
                     ];
         }
 

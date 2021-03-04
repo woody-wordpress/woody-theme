@@ -919,7 +919,7 @@ class WoodyTheme_WoodyGetters
         return $data;
     }
 
-    private function getProfileExpressions($post_id, $focus_expressions)
+    public function getProfileExpressions($post_id, $focus_expressions)
     {
         $data = [];
 
