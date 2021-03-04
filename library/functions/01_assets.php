@@ -158,6 +158,7 @@ function woodyIconsFolder($folder)
             $return[$icon_class] = $icon_human_name;
         }
         $icons_folder[$folder] = $return;
+        asort($return);
         wp_cache_set('woody_icons_folder', $icons_folder, 'woody');
     } else {
         $return = $icons_folder[$folder];
