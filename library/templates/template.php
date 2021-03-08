@@ -124,6 +124,8 @@ abstract class WoodyTheme_TemplateAbstract
                 foreach ($terms as $term) {
                     if ($term->parent != 0) {
                         $return[$taxonomy][$all_terms[$term->parent]][] = $term->name;
+                    } else {
+                        $return[$taxonomy][] = $term->name;
                     }
                 }
             }
