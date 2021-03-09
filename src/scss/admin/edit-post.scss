@@ -372,3 +372,30 @@ textarea.notAllowed {
         bottom: 100px;
     }
 }
+
+.move-block-container {
+    position: relative;
+    display: block;
+    float: left;
+    margin: 0 0 0 5px;
+    height: 20px;
+}
+
+.move-block-tooltip {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    max-width: 150px;
+    width: 150px;
+    z-index: 999;
+    display: none;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    background-color: #f1f1f1;
+}
+
+.move-block-tooltip.open {
+    display: block;
+}
