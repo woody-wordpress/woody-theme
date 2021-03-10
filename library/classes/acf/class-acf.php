@@ -10,6 +10,7 @@
 
 use WoodyLibrary\Library\WoodyLibrary\WoodyLibrary;
 
+//TODO: Executer les fonction back en is_admin uniquement + screen_id post
 class WoodyTheme_ACF
 {
     const ACF = "acf-pro/acf.php";
@@ -215,8 +216,7 @@ class WoodyTheme_ACF
             if ($field['name'] === "gallery_tags") {
                 $taxonomies = get_object_taxonomies('attachment', 'objects');
 
-                // $unset_taxonomies[] = 'attachment_types';
-
+            // $unset_taxonomies[] = 'attachment_types';
             } else {
                 $taxonomies = get_object_taxonomies('page', 'objects');
             }
@@ -846,26 +846,19 @@ class WoodyTheme_ACF
             $woodyComponents = $woodyLibrary->getComponents();
 
             foreach ($woodyComponents as $key => $component) {
-                $fitted_for = (!empty($component['items_count'][0]['fitted_for'])) ? $component['items_count'][0]['fitted_for'] : '';
-                $accepts_max = (!empty($component['items_count'][0]['accepts_max'])) ? $component['items_count'][0]['accepts_max'] : '';
-                $count_data = [];
 
-                if (!empty($fitted_for)) {
-                    $count_data[] = 'data-fittedfor="' . $fitted_for . '"';
+
+                $display_options = '';
+                if (!empty($component['display'])) {
+                    $display_options = json_encode($component['display']);
                 }
-
-                if (!empty($accepts_max)) {
-                    $count_data[] = 'data-acceptsmax="' . $accepts_max . '"';
-                }
-
-                $count_data = implode(' ', $count_data);
 
                 $groups = !empty($component['acf_groups']) ? implode(" ", $component['acf_groups']) : '';
                 if (!empty($groups)) {
-                    $tplComponents[$key] = '<div class="tpl-choice-wrapper ' . $groups . '" '. $count_data . '  data-value="'. $key .'" >
-                    <img class="img-responsive lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="' . WP_HOME . '/app/dist/' . WP_SITE_KEY . '/img/woody-library/views/' . $component['thumbnails']['small'] . '?version=' . get_option('woody_theme_version') . '" alt="' . $key . '" width="150" height="150" />
-                    <h5 class="tpl-title">' . $component['name'] . '</h5>
-                    </div>';
+                    $tplComponents[$key] = "<div class='tpl-choice-wrapper " . $groups . "' data-value='". $key ."' data-display-options='". $display_options ."'>
+                    <img class='img-responsive lazyload' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' data-src='" . WP_HOME . "/app/dist/" . WP_SITE_KEY . "/img/woody-library/views/" . $component['thumbnails']['small'] . "?version=" . get_option("woody_theme_version") . "' alt='" . $key . "' width='150' height='150' />
+                    <h5 class='tpl-title'>" . $component["name"] . "</h5>
+                    </div>";
                 }
             }
 
