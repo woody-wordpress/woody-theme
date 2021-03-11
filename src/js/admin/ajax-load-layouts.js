@@ -63,6 +63,7 @@
                 let layouts = clone.find('div[data-layout="' + button.dataset.layout + '"]');
                 let none = true;
                 layouts.each(function(){
+                    // Si le layout est enfant de light section_content alors, ça ne compte pas ce n'est pas un clone qui nous intéresse
                     if($(this).closest('[data-name="light_section_content"]').length == 0) {
                         none = false;
                     }
@@ -111,9 +112,7 @@
 
                         }
                     });
-
-                  }
-
+                }
               });
 
               button.setAttribute('hasListener', true);

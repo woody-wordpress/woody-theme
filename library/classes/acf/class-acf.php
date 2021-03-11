@@ -898,19 +898,24 @@ class WoodyTheme_ACF
         $index = 1;
         $keys = array_keys($field['layouts']);
         foreach($field['layouts'] as $layout) {
+            $return = '';
             $layout_start = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="' . $layout['name'] . '">');
+            if($layout['name'] != "tabs_group") {
+                $layout_end = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="', $layout_start+1);
+                $layout_length = $layout_end - $layout_start;
+                $return =  substr($html_str, $layout_start, $layout_length);
 
-            if ($layout_start !== false) {
+                $html_str = substr_replace($html_str, "", $layout_start, $layout_length);
+            } else {
                 if (!empty($field['layouts'][$keys[$index]]) && !empty($field['layouts'][$keys[$index]]['name'])) {
+                    // error on layout length
                     $layout_length = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="' . $field['layouts'][$keys[$index]]['name'] . '">') - $layout_start;
                     $return = substr($html_str, $layout_start, $layout_length);
                 } else {
-                    // TODO: change that
                     $return = substr($html_str, $layout_start);
                 }
-
-                wp_cache_set('layout-' . $layout['name'], $return);
             }
+            wp_cache_set('layout-' . $layout['name'], $return);
 
             $index++;
         }
@@ -947,19 +952,25 @@ class WoodyTheme_ACF
             $keys = array_keys($field['layouts']);
             foreach($field['layouts'] as $layout) {
                 if ($layout['name'] == $layout_name) {
+                    $return = '';
                     $layout_start = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="' . $layout['name'] . '">');
+                    if($layout['name'] != "tabs_group") {
+                        $layout_end = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="', $layout_start+1);
+                        $layout_length = $layout_end - $layout_start;
+                        $return =  substr($html_str, $layout_start, $layout_length);
 
-                    if ($layout_start !== false) {
+                        $html_str = substr_replace($html_str, "", $layout_start, $layout_length);
+                    } else {
                         if (!empty($field['layouts'][$keys[$index]]) && !empty($field['layouts'][$keys[$index]]['name'])) {
+                            // error on layout length
                             $layout_length = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="' . $field['layouts'][$keys[$index]]['name'] . '">') - $layout_start;
                             $return = substr($html_str, $layout_start, $layout_length);
                         } else {
-                            // TODO:
                             $return = substr($html_str, $layout_start);
                         }
-
-                        wp_cache_set('layout-' . $layout['name'], $return);
                     }
+
+                    wp_cache_set('layout-' . $layout['name'], $return);
 
                     break;
                 }
