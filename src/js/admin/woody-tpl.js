@@ -173,7 +173,6 @@ $('#post').each(function() {
 
             $('#tpls_popin li .tpl-choice-wrapper').each(function() {
                 // Roadbook templates
-                //TODO: test on leaflets
                 if ($('#post_type').val() == 'woody_rdbk_leaflets' && $(this).data('display-options').length != 0 && $(this).data('display-options')[0].roadbook == false) {
                     $(this).parent().addClass('hidden');
                 }
