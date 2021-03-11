@@ -11,6 +11,9 @@ $('#post').each(function() {
 
     if (accepted_post.includes($('#post_type').val())) {
 
+        var tplFilterAction = {};
+        var tplFiltersValues = {};
+
         const fieldKeysFilters = {
             'focuses': [
                 'type',
@@ -26,7 +29,7 @@ $('#post').each(function() {
             'type': {
                 'callback': '',
                 'label': '<label for="tpl_type">Type</label>',
-                'markup': '<select data-filter="type" name="tpl_type" id="tpl_type" onchange="tplFilterAction(this);"><option value="all">Tous les types</option><option value="grid">Grille</option><option value="slider">Slider</option><option value="mozaic">Mosaïque</option></select>'
+                'markup': '<select data-filter="type" name="tpl_type" id="tpl_type"><option value="all">Tous les types</option><option value="grid">Grille</option><option value="slider">Slider</option><option value="mozaic">Mosaïque</option></select>'
             },
             'length': {
                 'callback': '',
@@ -55,9 +58,9 @@ $('#post').each(function() {
             }
         }
 
-        window.tplFilterAction = function(el) {
-            var filter = $(el).data('filter');
-            window.tplFiltersValues[$(el).data('filter')] = el.value;
+        tplFilterAction = function($el) {
+            var filter = $el.data('filter');
+            tplFiltersValues[$el.data('filter')] = $el.val();
             console.log(tplFiltersValues);
 
             $('#tpls_popin .tpl-choice-wrapper').each(function() {
@@ -66,13 +69,28 @@ $('#post').each(function() {
 
                 $this.parent().removeClass('filtered');
 
+                // Roadbook templates
+                //TODO: test on leaflets
+                if ($('#post_type').val() == 'woody_rdbk_leaflets' && displayOptions[0].roadbook == false) {
+                    $this.parent().addClass('hidden');
+                }
+
                 if (displayOptions.length == 0) {
                     $this.parent().addClass('filtered');
                 } else {
                     $.each(displayOptions[0], function(key, value) {
-                        if (window.tplFiltersValues[key] != 'all' && value != window.tplFiltersValues[key] && key != 'roadbook') {
-                            if (!$this.parent().hasClass('hidden'))
+                        if (key == 'roadbook') {
+                            return;
+                        } else if (key == 'img_ratio') {
+                            if (tplFiltersValues[key] != 'all' && value.includes(tplFiltersValues[key]) == false) {
+                                if (!$this.parent().hasClass('hidden')) {
+                                    $this.parent().addClass('filtered');
+                                }
+                            }
+                        } else if (tplFiltersValues[key] != 'all' && value != tplFiltersValues[key]) {
+                            if (!$this.parent().hasClass('hidden')) {
                                 $this.parent().addClass('filtered');
+                            }
                         }
                     });
                 }
@@ -104,6 +122,7 @@ $('#post').each(function() {
         });
 
         var getFilters = function(group) {
+            // On récupère et on append les filtres en fonctjon du type de bloc actif
             if (group == 'group_5b0d1ed32a384' || group == 'group_5b2788b48d04c' || group == 'group_5d7908eadaa46' || group == 'group_5b33890e6fa0b' || group == 'field_5d16118093cc1') {
                 var theFilters = fieldKeysFilters.focuses;
             }
@@ -115,9 +134,14 @@ $('#post').each(function() {
                 });
             }
 
-            window.tplFiltersValues = {};
             $('.tpl-filter select').each(function() {
-                window.tplFiltersValues[$(this).data('filter')] = ($(this).val());
+                // On met à jour l'objet contenant les filtres
+                tplFiltersValues[$(this).data('filter')] = ($(this).val());
+
+                // On applique le tri
+                $(this).on('change', function() {
+                    tplFilterAction($(this));
+                });
             });
 
             console.log(tplFiltersValues);

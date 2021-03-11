@@ -846,8 +846,6 @@ class WoodyTheme_ACF
             $woodyComponents = $woodyLibrary->getComponents();
 
             foreach ($woodyComponents as $key => $component) {
-
-
                 $display_options = '';
                 if (!empty($component['display'])) {
                     $display_options = json_encode($component['display']);
