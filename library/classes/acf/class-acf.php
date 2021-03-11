@@ -909,7 +909,7 @@ class WoodyTheme_ACF
                     $return = substr($html_str, $layout_start);
                 }
 
-                set_transient('layout-' . $layout['name'], $return);
+                wp_cache_set('layout-' . $layout['name'], $return);
             }
 
             $index++;
@@ -928,7 +928,7 @@ class WoodyTheme_ACF
         $key = filter_input(INPUT_GET, 'key', FILTER_SANITIZE_STRING);
         $layout_name = filter_input(INPUT_GET, 'layout', FILTER_SANITIZE_STRING);
 
-        $transient = get_transient('layout-' . $layout_name);
+        $transient = wp_cache_get('layout-' . $layout_name);
         if (!empty($transient)) {
             $return = $transient;
         } else {
@@ -958,7 +958,7 @@ class WoodyTheme_ACF
                             $return = substr($html_str, $layout_start);
                         }
 
-                        set_transient('layout-' . $layout['name'], $return);
+                        wp_cache_set('layout-' . $layout['name'], $return);
                     }
 
                     break;
