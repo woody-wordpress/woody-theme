@@ -884,6 +884,7 @@ class WoodyTheme_ACF
      */
     public function generateLayoutsTransients()
     {
+        add_filter('user_can_richedit', [$this, 'addUserRichedit']);
         $field = acf_get_field("field_5b043f0525968");
 
         $field['name'] = "#rowindex-name#";
@@ -913,6 +914,12 @@ class WoodyTheme_ACF
 
             $index++;
         }
+
+        remove_filter('user_can_richedit', [$this, 'addUserRichedit']);
+    }
+
+    public function addUserRichedit() {
+        return true;
     }
 
     public function getRenderedLayout()
