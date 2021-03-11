@@ -1,4 +1,5 @@
 !(function ($, undefined) {
+    var cloneEvent = new Event("cloneBlock");
     // This is dope
     var addBlock = function ( field,  args ) {
         var $el = acf.duplicate({
@@ -100,6 +101,9 @@
                             $el = addBlock(field, {
                                 layout: button.dataset.layout,
                             });
+
+                            cloneEvent.element = $el;
+                            window.dispatchEvent(cloneEvent);
                         },
                         error: function(error) {
 
@@ -117,4 +121,5 @@
         }
       }
     });
+
 })(jQuery);
