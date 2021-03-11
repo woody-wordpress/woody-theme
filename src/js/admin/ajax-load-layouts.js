@@ -102,9 +102,6 @@
                             $el = addBlock(field, {
                                 layout: button.dataset.layout,
                             });
-
-                            cloneEvent.element = $el;
-                            window.dispatchEvent(cloneEvent);
                         },
                         error: function(error) {
 
@@ -113,6 +110,8 @@
                         }
                     });
                 }
+
+                window.dispatchEvent(cloneEvent);
               });
 
               button.setAttribute('hasListener', true);
