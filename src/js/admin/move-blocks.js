@@ -73,11 +73,21 @@ const moveBlock = (element, section, tooltip = null) => {
     append: ($el, $el2) => {
       if (last) $(last).after($el2);
       else $(blocks).append($el2);
-    }
+    },
   });
   acf.remove($(element).parent());
 
+  // layout.find('[name^="acf[field_"]').each(function() {
+  //   let field_name = $(this).attr('name');
+  //   field_name = field_name.match(/\[([a-zA-Z0-9_-]+\])/g); // split name attribute
+  //   field_name[1] = '[' + sectionIndex + ']'; // set the new row name
+  //   field_name[3] = '[' + values.length + ']'; // set the new row name
+  //   let new_name = $(this).parent().hasClass('acf-gallery-attachment') ? 'acf' + field_name.join('') + '[]' : 'acf' + field_name.join('');
+  //   $(this).attr('name', new_name);
+  // });
+
   let fieldKey = `acf[field_5afd2c6916ecb][row-${sectionIndex}][field_5b043f0525968][row-${values.length}][acf_fc_layout]`;
+  console.log(fieldKey);
 
   const layoutMoveButton = layout.find('.move-button');
   const layoutMoveTooltip = layout.find('.move-block-tooltip');
@@ -99,7 +109,51 @@ const moveBlock = (element, section, tooltip = null) => {
   });
 
   // Reset tinyMCE editors
-  tinyMCE.execCommand("mceRepaint");
+  // tinyMCE.execCommand("mceRepaint");
+  console.log(layout.find('.mce-tinymce'));
+  console.log(layout.find('.wp-editor-area'));
+  layout.find('.acf-editor-wrap').each(function() {
+    var $wrap = $(this);
+    var $textarea = $(this).find('textarea');
+    var args = {
+      tinymce: true,
+      quicktags: true,
+      toolbar: $(this).data('toolbar'),
+      mode: 'textareas',
+    };
+    
+    // generate new id
+    var oldId = $textarea.attr('id');
+    var newId = acf.uniqueId('acf-editor-');
+    
+    // Backup textarea data.
+    var inputData = $textarea.data();
+    var inputVal = $textarea.val();
+    
+    // rename
+    acf.rename({
+      target: $wrap,
+      search: oldId,
+      replace: newId,
+      destructive: true
+    });	
+    
+    // update id
+    // this.set('id', newId, true);
+    
+    // apply data to new textarea (acf.rename creates a new textarea element due to destructive mode)
+    // fixes bug where conditional logic "disabled" is lost during "screen_check"
+    $textarea = $(this).find('textarea');
+    $textarea.data( inputData ).val( inputVal );
+    $textarea.attr('id', newId);
+
+    // initialize
+    acf.tinymce.initialize( newId, args );
+  });
+  // layout.find('.mce-tinymce').each(function() {
+  //   tinyMCE.execCommand('mceRemoveControl', true, $(this).attr('id'));
+  //   tinyMCE.execCommand('mceAddControl', true, $(this).attr('id'));
+  // });
 
   // Overwrite name with correct field key
   layout.children().first().attr("name", fieldKey);
