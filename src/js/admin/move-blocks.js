@@ -12,7 +12,7 @@ document.querySelectorAll(selector).forEach((element, index) => {
 
   // Creating a button to call the tooltip
   let button = document.createElement('a');
-  button.className = "acf-icon -duplicate small light acf-js-tooltip move-button";
+  button.className = "acf-icon -arrow-combo small light acf-js-tooltip move-button";
   button.href = "#";
   button.dataset.name = 'move-layout';
   button.title = 'Déplacer le bloc';
@@ -54,7 +54,7 @@ const moveBlock = (element, section, tooltip = null) => {
 
   // Select section
   const sections = document.querySelectorAll('div[data-name="section_content"]');
-  const sectionIndex = Math.min(Math.max(0, section), sections.length - 1); 
+  const sectionIndex = Math.min(Math.max(0, section), sections.length - 1);
   const values = sections[sectionIndex].querySelectorAll('.acf-flexible-content > .values');
   const blocks = values[values.length - 1];
   const last = blocks.lastElementChild;
@@ -64,12 +64,17 @@ const moveBlock = (element, section, tooltip = null) => {
   // Get field keys
   const prevKey = element.parent().data('id');
   const newKey = acf.uniqid('layout_');
-
   // Duplicate field and remove original
   let layout = acf.duplicate({
     $el: $(element).parent(),
     search: prevKey,
     replace: newKey,
+    rename: ( name, value, search, replace ) => {
+        // Replace section index
+        value = value.replace(/row-[0-9]+/, 'row-' + sectionIndex);
+        // replace layout key
+        return value.replace(search, replace);
+    },
     append: ($el, $el2) => {
       if (last) $(last).after($el2);
       else $(blocks).append($el2);
@@ -77,17 +82,7 @@ const moveBlock = (element, section, tooltip = null) => {
   });
   acf.remove($(element).parent());
 
-  // layout.find('[name^="acf[field_"]').each(function() {
-  //   let field_name = $(this).attr('name');
-  //   field_name = field_name.match(/\[([a-zA-Z0-9_-]+\])/g); // split name attribute
-  //   field_name[1] = '[' + sectionIndex + ']'; // set the new row name
-  //   field_name[3] = '[' + values.length + ']'; // set the new row name
-  //   let new_name = $(this).parent().hasClass('acf-gallery-attachment') ? 'acf' + field_name.join('') + '[]' : 'acf' + field_name.join('');
-  //   $(this).attr('name', new_name);
-  // });
-
-  let fieldKey = `acf[field_5afd2c6916ecb][row-${sectionIndex}][field_5b043f0525968][row-${values.length}][acf_fc_layout]`;
-  console.log(fieldKey);
+  let fieldKey = `acf[field_5afd2c6916ecb][row-${sectionIndex}][field_5b043f0525968][row-${newKey}][acf_fc_layout]`;
 
   const layoutMoveButton = layout.find('.move-button');
   const layoutMoveTooltip = layout.find('.move-block-tooltip');
@@ -101,59 +96,12 @@ const moveBlock = (element, section, tooltip = null) => {
   layoutMoveButton.on('click', e => { tooltipOpen = toggleMoveTooltip(tooltipOpen, fieldKey, layoutMoveTooltip[0], layoutMoveSelect[0]); });
 
   // Bind closing tooltip on click outside
-  window.addEventListener('click', e => {   
+  window.addEventListener('click', e => {
     if (!layoutMoveTooltip[0].contains(e.target) && tooltipOpen) {
       if (layoutMoveButton[0].contains(e.target)) return;
       tooltipOpen = toggleMoveTooltip(tooltipOpen, layoutMoveContainer.parent().parent()[0].firstElementChild.name, layoutMoveTooltip[0], layoutMoveSelect[0]);
     }
   });
-
-  // Reset tinyMCE editors
-  // tinyMCE.execCommand("mceRepaint");
-  console.log(layout.find('.mce-tinymce'));
-  console.log(layout.find('.wp-editor-area'));
-  layout.find('.acf-editor-wrap').each(function() {
-    var $wrap = $(this);
-    var $textarea = $(this).find('textarea');
-    var args = {
-      tinymce: true,
-      quicktags: true,
-      toolbar: $(this).data('toolbar'),
-      mode: 'textareas',
-    };
-    
-    // generate new id
-    var oldId = $textarea.attr('id');
-    var newId = acf.uniqueId('acf-editor-');
-    
-    // Backup textarea data.
-    var inputData = $textarea.data();
-    var inputVal = $textarea.val();
-    
-    // rename
-    acf.rename({
-      target: $wrap,
-      search: oldId,
-      replace: newId,
-      destructive: true
-    });	
-    
-    // update id
-    // this.set('id', newId, true);
-    
-    // apply data to new textarea (acf.rename creates a new textarea element due to destructive mode)
-    // fixes bug where conditional logic "disabled" is lost during "screen_check"
-    $textarea = $(this).find('textarea');
-    $textarea.data( inputData ).val( inputVal );
-    $textarea.attr('id', newId);
-
-    // initialize
-    acf.tinymce.initialize( newId, args );
-  });
-  // layout.find('.mce-tinymce').each(function() {
-  //   tinyMCE.execCommand('mceRemoveControl', true, $(this).attr('id'));
-  //   tinyMCE.execCommand('mceAddControl', true, $(this).attr('id'));
-  // });
 
   // Overwrite name with correct field key
   layout.children().first().attr("name", fieldKey);
