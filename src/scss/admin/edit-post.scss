@@ -379,6 +379,13 @@ textarea.notAllowed {
     float: left;
     margin: 0 0 0 5px;
     height: 20px;
+    visibility: hidden;
+}
+
+.layout:hover {
+    .move-block-container {
+        visibility: visible;
+    }
 }
 
 .move-block-tooltip {
