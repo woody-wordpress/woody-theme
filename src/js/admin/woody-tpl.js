@@ -22,6 +22,12 @@ $('#post').each(function() {
                 'card_type',
                 'img_ratio',
                 'text_align'
+            ],
+            'galleries': [
+                'type',
+                'length',
+                'infinite',
+                'img_ratio'
             ]
         };
 
@@ -33,7 +39,7 @@ $('#post').each(function() {
             },
             'length': {
                 'callback': '',
-                'label': '<label for="tpl_length">Eléments visibles</label>',
+                'label': '<label for="tpl_length">Eléments/Multiple</label>',
                 'markup': '<select data-filter="length" name="tpl_length" id="tpl_length"><option value="all">Choisir</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>',
             },
             'infinite': {
@@ -134,6 +140,8 @@ $('#post').each(function() {
             // On récupère et on append les filtres en fonctjon du type de bloc actif
             if (group == 'group_5b0d1ed32a384' || group == 'group_5b2788b48d04c' || group == 'group_5d7908eadaa46' || group == 'group_5b33890e6fa0b' || group == 'field_5d16118093cc1') {
                 theFilters = fieldKeysFilters.focuses;
+            } else if (group == 'group_5b04314e0ec21') {
+                theFilters = fieldKeysFilters.galleries;
             }
 
             if (theFilters != 'none' && $('.tpls_popin_filters').length == 0) {
