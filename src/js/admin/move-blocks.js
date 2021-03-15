@@ -1,54 +1,49 @@
-
 import $ from 'jquery';
 
-// Selector to get all layout controls in sections without getting those in tabs groups
-const selector = 'div[data-name="section_content"]>.acf-input>.acf-flexible-content>.values>.layout>.acf-fc-layout-controls';
+const createMoveBehavior = element => {
+  if (!element.querySelector('.move-block-container')) {
+    // Creating container for the button and the tooltip
+    let container = document.createElement('div');
+    container.classList.add('move-block-container');
 
-document.querySelectorAll(selector).forEach((element, index) => {
+    // Creating a button to call the tooltip
+    let button = document.createElement('a');
+    button.className = "acf-icon -arrow-combo small light acf-js-tooltip move-button";
+    button.href = "#";
+    button.dataset.name = 'move-layout';
+    button.title = 'Déplacer le bloc';
 
-  // Creating container for the button and the tooltip
-  let container = document.createElement('div');
-  container.classList.add('move-block-container');
+    // Creating the tooltip
+    let tooltip = document.createElement('div');
+    tooltip.classList.add('move-block-tooltip');
+    tooltip.innerHTML = `<label>Déplacer vers la section: </label>`
 
-  // Creating a button to call the tooltip
-  let button = document.createElement('a');
-  button.className = "acf-icon -arrow-combo small light acf-js-tooltip move-button";
-  button.href = "#";
-  button.dataset.name = 'move-layout';
-  button.title = 'Déplacer le bloc';
+    // Creating a select to specify the section to move the block to
+    let tooltipSelect = document.createElement('select');
+    tooltipSelect.classList.add('move-block-select');
+    tooltip.append(tooltipSelect);
+    let tooltipOpen = false;
 
-  // Creating the tooltip
-  let tooltip = document.createElement('div');
-  tooltip.classList.add('move-block-tooltip');
-  tooltip.innerHTML = `<label for="move-block-select-${index}">Déplacer vers la section: </label>`
+    // Binding events
+    tooltipSelect.addEventListener('change', e => { moveBlock($(element), tooltipSelect.value, tooltip); });
+    window.addEventListener('click', e => {
+      // If click is outside the tooltip and tooltip is open then toggle it
+      if (!tooltip.contains(e.target) && tooltipOpen) {
+        // Prevent tooltip from staying closed when clicking on the button
+        if (button.contains(e.target)) return;
+        tooltipOpen = toggleMoveTooltip(tooltipOpen, element.parentElement.firstElementChild.name, tooltip, tooltipSelect);
+      }
+    });
+    button.addEventListener('click', e => { tooltipOpen = toggleMoveTooltip(tooltipOpen, element.parentElement.firstElementChild.name, tooltip, tooltipSelect); });
 
-  // Creating a select to specify the section to move the block to
-  let tooltipSelect = document.createElement('select');
-  tooltipSelect.classList.add('move-block-select');
-  tooltipSelect.id = 'move-block-select-' + index;
-  tooltip.append(tooltipSelect);
-  let tooltipOpen = false;
-
-  // Binding events
-  tooltipSelect.addEventListener('change', e => { moveBlock($(element), tooltipSelect.value, tooltip); });
-  window.addEventListener('click', e => {
-    // If click is outside the tooltip and tooltip is open then toggle it
-    if (!tooltip.contains(e.target) && tooltipOpen) {
-      // Prevent tooltip from staying closed when clicking on the button
-      if (button.contains(e.target)) return;
-      tooltipOpen = toggleMoveTooltip(tooltipOpen, element.parentElement.firstElementChild.name, tooltip, tooltipSelect);
-    }
-  });
-  button.addEventListener('click', e => { tooltipOpen = toggleMoveTooltip(tooltipOpen, element.parentElement.firstElementChild.name, tooltip, tooltipSelect); });
-
-  // Adding elements to DOM
-  container.append(button);
-  container.append(tooltip);
-  element.prepend(container);
-});
+    // Adding elements to DOM
+    container.append(button);
+    container.append(tooltip);
+    element.prepend(container);
+  }
+}
 
 const moveBlock = (element, section, tooltip = null) => {
-
   // Close tooltip
   if (tooltip) $(tooltip).removeClass('open');
 
@@ -121,3 +116,25 @@ const toggleMoveTooltip = (open, key, tooltip, select) => {
   tooltip.classList.toggle('open');
   return !open;
 }
+
+
+// Selector to get all layout controls in sections without getting those in tabs groups
+const selector = 'div[data-name="section_content"]>.acf-input>.acf-flexible-content>.values>.layout>.acf-fc-layout-controls';
+
+// Observe if a block is added to section and add move behavior to the new block
+document.querySelectorAll('div[data-name="section_content"]>.acf-input>.acf-flexible-content>.values').forEach(section => {
+  let mutationObserver = new MutationObserver(mutationsList => {
+    if (mutationsList[0].addedNodes.length && mutationsList[0].addedNodes[0].classList.contains('layout')) {
+      const controls = mutationsList[0].addedNodes[0].querySelector('.acf-fc-layout-controls');
+      if (controls) {
+        createMoveBehavior(mutationsList[0].addedNodes[0].querySelector('.acf-fc-layout-controls'));
+      }
+    }
+  });
+  mutationObserver.observe(section, { childList: true });
+});
+
+// Add move behavior to current blocks
+document.querySelectorAll(selector).forEach(element => {
+  createMoveBehavior(element);
+});
