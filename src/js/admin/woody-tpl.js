@@ -1,4 +1,4 @@
-import $, { type } from 'jquery';
+import $ from 'jquery';
 
 $('#post').each(function() {
     const accepted_post = [
