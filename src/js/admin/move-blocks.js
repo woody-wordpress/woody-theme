@@ -108,7 +108,7 @@ const moveBlock = (element, section, tooltip = null) => {
     }
   });
 
-  let fieldKey = `acf[field_5afd2c6916ecb][row-${sectionIndex}][field_5b043f0525968][row-${newKey}][acf_fc_layout]`;
+  let fieldKey = `acf[field_5afd2c6916ecb][row-${sectionIndex}][field_5b043f0525968][${newKey}][acf_fc_layout]`;
 
   const layoutMoveButton = layout.find('.move-button');
   const layoutMoveTooltip = layout.find('.move-block-tooltip');
@@ -137,9 +137,8 @@ const moveBlock = (element, section, tooltip = null) => {
   if (
     (oldValues.lastElementChild.classList.contains('acf-temp-remove') && oldValues.children.length === 1)
     || oldValues.children.length === 0
-  ) 
+  )
     oldSection.classList.add('-empty');
-
 }
 
 const toggleMoveTooltip = (open, key, tooltip, select) => {
