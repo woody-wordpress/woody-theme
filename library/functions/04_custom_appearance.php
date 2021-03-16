@@ -18,6 +18,11 @@ function getActiveShares()
             'sharing_link' => 'https://twitter.com/intent/tweet/?url=' . $current_url,
             'sharing_icon' => file_get_contents($path_icons . 'twitter.svg')
         ],
+        'linkedin' => [
+            'sharing_message' => __('Partager sur LinkedIn', 'woody-theme'),
+            'sharing_link' => 'https://www.linkedin.com/shareArticle?mini=true&url=' . $current_url,
+            'sharing_icon' => file_get_contents($path_icons . 'linkedin.svg')
+        ],
         'whatsapp' => [
             'sharing_message' => __('Partager sur WhatsApp', 'woody-theme'),
             'sharing_link'=> 'whatsapp://send?text=' . $current_url,

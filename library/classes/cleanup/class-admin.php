@@ -201,7 +201,7 @@ class WoodyTheme_Cleanup_Admin
             // Permet d'être compatible avec tout les sites (anciens et nouveaux)
             $legacyMenus = class_exists('SubWoodyTheme_Admin') && method_exists('SubWoodyTheme_Admin', 'addMenuMainPages') ? false : true;
 
-            if ($legacyMenus && $lang == PLL_DEFAULT_LANG && defined('WOODY_GENERATE_MENU')) {
+            if ($legacyMenus && $lang == PLL_DEFAULT_LANG && !defined('WOODY_GENERATE_MENU')) {
                 // Première sous-page
                 acf_add_options_sub_page(array(
                     'page_title'    => 'Menu principal',
@@ -216,8 +216,11 @@ class WoodyTheme_Cleanup_Admin
     public function woodySettingsPage()
     {
         if (function_exists('acf_add_options_page')) {
-            // Page principale
-            acf_add_options_page(array(
+            $lang = (function_exists('pll_current_language')) ? pll_current_language() : PLL_DEFAULT_LANG;
+
+            if ($lang == PLL_DEFAULT_LANG) {
+                // Page principale
+                acf_add_options_page(array(
                 'page_title'    => 'Paramètres',
                 'menu_title'    => 'Paramètres',
                 'menu_slug'     => 'woody-settings',
@@ -225,6 +228,7 @@ class WoodyTheme_Cleanup_Admin
                 'icon_url'      => 'dashicons-admin-generic',
                 'position'      => 40,
             ));
+            }
         }
     }
 

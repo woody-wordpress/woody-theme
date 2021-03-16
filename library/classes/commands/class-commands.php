@@ -20,7 +20,7 @@ class WoodyTheme_Commands
 
     protected function registerHooks()
     {
-        add_action('woody_flush_varnish', [$this, 'flush_varnish']);
+        add_action('woody_flush_varnish', [$this, 'flush_varnish'], 10, 2);
     }
 
     protected function registerCommands()
@@ -107,8 +107,12 @@ class WoodyTheme_Commands
         }
     }
 
-    public function flush_varnish()
+    public function flush_varnish($path = '', $method = '')
     {
+        // Flush All site if no page defined
+        $path = (!empty($path)) ? $path : '/.*';
+        $method = (!empty($method)) ? $method : 'regex';
+
         // Options
         $varnish_caching_enable = get_option('varnish_caching_enable');
         if (!$varnish_caching_enable) {
@@ -141,8 +145,8 @@ class WoodyTheme_Commands
 
         foreach ($hosts as $lang => $host) {
             foreach ($vcaching_varnishIp as $ip) {
-                $purgeme = $schema . $ip . '/.*';
-                $headers = array('host' => $host, 'X-VC-Purge-Method' => 'regex', 'X-VC-Purge-Host' => $host);
+                $purgeme = $schema . $ip . $path;
+                $headers = array('host' => $host, 'X-VC-Purge-Method' => $method, 'X-VC-Purge-Host' => $host);
                 if (!is_null($vcaching_purgeKey)) {
                     $headers['X-VC-Purge-Key'] = $vcaching_purgeKey;
                 }

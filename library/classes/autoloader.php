@@ -32,7 +32,7 @@ if (WP_ENV == 'dev') {
 new WoodyTheme_ACF();
 new WoodyTheme_ACF_PrivateGroups();
 new WoodyTheme_ACF_Counter();
-new WoodyTheme_ACF_ShorLink();
+new WoodyTheme_ACF_ShortLink();
 
 // Cleanup
 new WoodyTheme_Cleanup_Admin();
@@ -64,7 +64,7 @@ new WoodyTheme_Seo();
 new WoodyTheme_SiteMap();
 new WoodyTheme_Taxonomy();
 new WoodyTheme_Tinymce();
-new WoodyTheme_Unpublisher();
+// new WoodyTheme_Unpublisher();
 new WoodyTheme_Varnish();
 new WoodyTheme_Shuffle();
 new WoodyTheme_Videos();
