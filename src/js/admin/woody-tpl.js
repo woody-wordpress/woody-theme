@@ -114,7 +114,7 @@ $('#post').each(function() {
 
         $('#post-body-content').append(`<div id="tpls_popin">
             <div class="tpls_popin_actions">
-                <span class="close">Fermer</span>
+                <span class="close">Annuler</span>
                 <span class="save">OK</span>
             </div>
             <ul></ul>
