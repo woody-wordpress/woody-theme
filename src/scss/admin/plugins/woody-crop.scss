@@ -1,0 +1,36 @@
+#yoimg-cropper-wrapper{
+    .media-modal-content{
+        .media-frame-content{
+            // Modification de l'ordre des éléments de la sidebar dans l'édition des formats de recadrage.
+            .attachment-details{
+                display: flex;
+                flex-direction:column;
+                h3:first-child{
+                    order:2;
+                }
+                &>img{
+                    order:3;
+                }
+                .yoimg-crop-smaller{
+                    order:4;
+                }
+                .yoimg-crop-retina-smaller{
+                    order:5;
+                }
+                #yoimg-cropper-preview-title{
+                    order:6;
+                }
+                #yoimg-cropper-preview{
+                    order:7;
+                }
+                .yoimg-cropper-quality-wrapper{
+                    order:8;
+                }
+                //Affichage du bouton "Recadrage" tout en haut de la sidebar.
+                .yoimg-crop-now-wrapper{
+                    order:1;
+                }
+            }
+        }
+    }
+}

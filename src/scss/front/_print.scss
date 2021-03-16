@@ -212,6 +212,10 @@ button,
 .woody-component-hero {
     height: auto !important;
     margin-bottom: 20px !important;
+
+    .fullcenterbox {
+        display: block !important;
+    }
 }
 
 .hero-titles {
@@ -226,7 +230,7 @@ button,
 }
 
 .hero-titles .hero-title {
-    font-size: 30pt !important;
+    font-size: 24pt !important;
     color: #1968B5 !important;
 }
 

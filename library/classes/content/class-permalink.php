@@ -30,6 +30,9 @@ class WoodyTheme_Permalink
     {
         if (empty($post_id)) {
             global $post;
+            if (!is_object($post)) {
+                return;
+            }
             $post_id = $post->ID;
         }
 

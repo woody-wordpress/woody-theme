@@ -107,6 +107,7 @@ class WoodyTheme_Polylang
         __('Départ', 'woody-theme');
         __('Arrivée', 'woody-theme');
         __('Etape', 'woody-theme');
+        __('Réserver', 'woody-theme');
 
         // Circuits
         __('J', 'woody-theme');
