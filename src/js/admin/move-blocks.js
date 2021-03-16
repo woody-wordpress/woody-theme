@@ -54,6 +54,9 @@ const moveBlock = (element, section, tooltip = null) => {
   const blocks = values[values.length - 1];
   const last = blocks.lastElementChild;
 
+  const oldValues = element[0].parentElement.parentElement;
+  const oldSection = oldValues.parentElement;
+
   $(blocks).closest('.acf-flexible-content').removeClass('-empty');
 
   // Get field keys
@@ -128,6 +131,15 @@ const moveBlock = (element, section, tooltip = null) => {
 
   // Overwrite name with correct field key
   layout.children().first().attr("name", fieldKey);
+
+  openSection(document.querySelector(`[data-id="row-${sectionIndex}"]`), sectionIndex);
+
+  if (
+    (oldValues.lastElementChild.classList.contains('acf-temp-remove') && oldValues.children.length === 1)
+    || oldValues.children.length === 0
+  ) 
+    oldSection.classList.add('-empty');
+
 }
 
 const toggleMoveTooltip = (open, key, tooltip, select) => {
@@ -143,6 +155,11 @@ const toggleMoveTooltip = (open, key, tooltip, select) => {
   select.value = (isInSection >= 0) ? isInSection : 0;
   tooltip.classList.toggle('open');
   return !open;
+}
+
+const openSection = (section) => {
+  if (section.classList.contains('-collapsed'))
+    section.classList.remove('-collapsed');
 }
 
 
