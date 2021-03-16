@@ -82,6 +82,34 @@ const moveBlock = (element, section, tooltip = null) => {
   });
   acf.remove($(element).parent());
 
+  // Reload TinyMCE
+  layout.find('.acf-field-wysiwyg').each(function(){
+    let wysiwyg = $(this);
+    let textarea = wysiwyg.find('textarea');
+    let inputVal = textarea.val();
+    let textarea_id = textarea.attr('id');
+
+    let iframe = layout.find('#' + textarea_id + '_ifr');
+    if (iframe) {
+        iframe.closest('.mce-tinymce.mce-container.mce-panel').remove();
+        acf.tinymce.destroy(textarea_id);
+        acf.tinymce.initialize(textarea_id, {
+            tinymce:	true,
+            quicktags:	true,
+            toolbar:	'full',
+            mode: "text",
+        });
+
+        textarea
+            .val(inputVal)
+            .removeAttr('style');
+
+        layout.find('switch-html').on('click', function(){
+            textarea.css({"display": "block", "min-height": "300px"});
+        });
+    }
+  });
+
   let fieldKey = `acf[field_5afd2c6916ecb][row-${sectionIndex}][field_5b043f0525968][row-${newKey}][acf_fc_layout]`;
 
   const layoutMoveButton = layout.find('.move-button');
