@@ -73,16 +73,45 @@
             }
         }
     }
+
+    .filtered {
+        display: none;
+    }
+}
+
+.tpls_popin_filters {
+    display: flex;
+    align-items: flex-end;
+
+    .tpl-filter {
+        &:not(:nth-last-of-type(1)) {
+            margin-right: 20px;
+        }
+
+        select {
+            font-size: 12px;
+        }
+
+        label {
+            font-size: 11px;
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+
+    }
 }
 
 .tpls_popin_actions {
     position: sticky;
     top: -18px;
-    padding: 25px 50px;
+    padding: 15px 50px;
     background: #fff;
     box-shadow: 0 5px 5px rgba(0, 0, 0, .15);
     z-index: 10000;
     display: flex;
+    align-items: center;
     margin: 0 -50px;
 
     >span {
