@@ -23,6 +23,8 @@ class WoodyTheme_ACF
     protected function registerHooks()
     {
         add_action('woody_theme_update', [$this, 'woodyThemeUpdate']);
+        add_action('woody_cache_warm', [$this, 'generateLayoutsTransients'], 100);
+
         if (WP_ENV == 'dev') {
             add_filter('woody_acf_save_paths', [$this, 'acfJsonSave']);
         }
@@ -78,6 +80,9 @@ class WoodyTheme_ACF
         add_filter('woody_get_fields_by_group', [$this, 'woodyGetFieldsByGroup'], 10, 3);
 
         add_action('wp_ajax_woody_tpls', [$this, 'woodyGetAllTemplates']);
+
+        // Ajax Call
+        add_action('wp_ajax_generate_layout_acf_clone', [$this, 'getRenderedLayout']);
     }
 
     public function woodyGetFieldOption($field_name = null)
@@ -882,5 +887,112 @@ class WoodyTheme_ACF
 
         wp_send_json($return);
         exit;
+    }
+
+    ////////////////////////////////////////////
+    //  Generate acf clones only when needed  //
+    ////////////////////////////////////////////
+
+    /**
+     * Set layouts transient on deploy
+     */
+    public function generateLayoutsTransients()
+    {
+        add_filter('user_can_richedit', [$this, 'addUserRichedit']);
+        $field = acf_get_field("field_5b043f0525968");
+
+        $field['name'] = "#rowindex-name#";
+        $field['display_layouts'] = true;
+
+        ob_start();
+        do_action('acf/render_field', $field);
+        $html_str = ob_get_contents();
+        ob_end_clean();
+
+        $index = 1;
+        $keys = array_keys($field['layouts']);
+        foreach($field['layouts'] as $layout) {
+            $return = '';
+            $layout_start = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="' . $layout['name'] . '">');
+            if($layout['name'] != "tabs_group") {
+                $layout_end = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="', $layout_start+1);
+                $layout_length = $layout_end - $layout_start;
+                $return =  substr($html_str, $layout_start, $layout_length);
+
+                $html_str = substr_replace($html_str, "", $layout_start, $layout_length);
+            } else {
+                if (!empty($field['layouts'][$keys[$index]]) && !empty($field['layouts'][$keys[$index]]['name'])) {
+                    // error on layout length
+                    $layout_length = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="' . $field['layouts'][$keys[$index]]['name'] . '">') - $layout_start;
+                    $return = substr($html_str, $layout_start, $layout_length);
+                } else {
+                    $return = substr($html_str, $layout_start);
+                }
+            }
+            wp_cache_set('layout-' . $layout['name'], $return);
+
+            $index++;
+        }
+
+        remove_filter('user_can_richedit', [$this, 'addUserRichedit']);
+    }
+
+    public function addUserRichedit() {
+        return true;
+    }
+
+    public function getRenderedLayout()
+    {
+        $return = '';
+        $key = filter_input(INPUT_GET, 'key', FILTER_SANITIZE_STRING);
+        $layout_name = filter_input(INPUT_GET, 'layout', FILTER_SANITIZE_STRING);
+
+        $transient = wp_cache_get('layout-' . $layout_name);
+        if (!empty($transient)) {
+            $return = $transient;
+        } else {
+            // field_5b043f0525968 == "section_content"
+            $field = acf_get_field($key);
+
+            $field['name'] = "#rowindex-name#";
+            $field['display_layouts'] = true;
+
+            ob_start();
+            do_action('acf/render_field', $field);
+            $html_str = ob_get_contents();
+            ob_end_clean();
+
+            $index = 1;
+            $keys = array_keys($field['layouts']);
+            foreach($field['layouts'] as $layout) {
+                if ($layout['name'] == $layout_name) {
+                    $return = '';
+                    $layout_start = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="' . $layout['name'] . '">');
+                    if($layout['name'] != "tabs_group") {
+                        $layout_end = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="', $layout_start+1);
+                        $layout_length = $layout_end - $layout_start;
+                        $return =  substr($html_str, $layout_start, $layout_length);
+
+                        $html_str = substr_replace($html_str, "", $layout_start, $layout_length);
+                    } else {
+                        if (!empty($field['layouts'][$keys[$index]]) && !empty($field['layouts'][$keys[$index]]['name'])) {
+                            // error on layout length
+                            $layout_length = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="' . $field['layouts'][$keys[$index]]['name'] . '">') - $layout_start;
+                            $return = substr($html_str, $layout_start, $layout_length);
+                        } else {
+                            $return = substr($html_str, $layout_start);
+                        }
+                    }
+
+                    wp_cache_set('layout-' . $layout['name'], $return);
+
+                    break;
+                }
+
+                $index++;
+            }
+        }
+
+        wp_send_json( $return );
     }
 }
