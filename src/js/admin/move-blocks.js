@@ -143,12 +143,14 @@ const moveBlock = (element, section, tooltip = null) => {
 
 const toggleMoveTooltip = (open, key, tooltip, select) => {
   select.innerHTML = "";
-  const sectionLength = document.querySelectorAll('div[data-name="section_content"]').length - 1;
+  const sections = document.querySelectorAll('[data-name="section_content"]');
+  const sectionLength = sections.length - 1;
   let isInSection = -1;
 
   for(let i = 0; i < sectionLength; ++i) {
+    const sectionTitle = sections[i].parentElement.querySelector('[data-name="bo_section_title"] input[type="text"]').value;
     if (key.startsWith(`acf[field_5afd2c6916ecb][row-${i}]`)) isInSection = i;
-    select.innerHTML += `<option value="${i}">${i + 1}</option>`;
+    select.innerHTML += `<option value="${i}">${sectionTitle || i + 1}</option>`;
   }
 
   select.value = (isInSection >= 0) ? isInSection : 0;
