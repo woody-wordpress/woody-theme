@@ -843,7 +843,7 @@ class WoodyTheme_WoodyGetters
         if ($wrapper['profile_auto_focus']) {
             $args = [
                 'post_type' => ['profile'],
-                'post_status' => ['publish'],
+                'post_status' => ['publish']
             ];
 
             if (!empty($wrapper['profile_focus_max'])) {
@@ -864,7 +864,6 @@ class WoodyTheme_WoodyGetters
                     ]
                 ];
             }
-
 
             $the_query = new \WP_Query($args);
             if (!empty($the_query->posts)) {
