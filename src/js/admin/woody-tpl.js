@@ -35,7 +35,7 @@ $('#post').each(function() {
             'type': {
                 'callback': '',
                 'label': '<label for="tpl_type">Type</label>',
-                'markup': '<select data-filter="type" name="tpl_type" id="tpl_type"><option value="all">Tous les types</option><option value="grid">Grille</option><option value="slider">Slider</option><option value="mozaic">Mosaïque</option></select>'
+                'markup': '<select data-filter="type" name="tpl_type" id="tpl_type"><option value="all">Tous les types</option><option value="grid">Grille</option><option value="slider">Slider</option><option value="mozaic">Mosaïque</option><option value="map">Carte</option></select>'
             },
             'length': {
                 'callback': '',
