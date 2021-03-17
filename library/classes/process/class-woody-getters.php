@@ -867,7 +867,6 @@ class WoodyTheme_WoodyGetters
 
 
             $the_query = new \WP_Query($args);
-            console_log($the_query);
             if (!empty($the_query->posts)) {
                 foreach ($the_query->posts as $post) {
                     $data['items'][] = $this->getProfilePreview($wrapper, $post);
