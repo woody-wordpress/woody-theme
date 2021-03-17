@@ -104,7 +104,7 @@
                 }]
             ],
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -116,6 +116,33 @@
             "return_format": "id",
             "multiple": 0,
             "allow_null": 0
+        },
+        {
+            "key": "field_6051dba9e7393",
+            "label": "Nombre de profils",
+            "name": "profile_focus_max",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [{
+                    "field": "field_5ee8dbb578446",
+                    "operator": "==",
+                    "value": "1"
+                }]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 10,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": 1,
+            "max": 50,
+            "step": 1
         },
         {
             "key": "field_5ee8dd4f78449",
