@@ -843,8 +843,12 @@ class WoodyTheme_WoodyGetters
         if ($wrapper['profile_auto_focus']) {
             $args = [
                 'post_type' => ['profile'],
-                'post_status' => ['publish']
+                'post_status' => ['publish'],
             ];
+
+            if (!empty($wrapper['profile_focus_max'])) {
+                $args['posts_per_page'] = $wrapper['profile_focus_max'];
+            }
 
             if (!empty($wrapper['profile_focus_category'])) {
                 foreach ($wrapper['profile_focus_category'] as $term_id) {
@@ -861,7 +865,9 @@ class WoodyTheme_WoodyGetters
                 ];
             }
 
+
             $the_query = new \WP_Query($args);
+            console_log($the_query);
             if (!empty($the_query->posts)) {
                 foreach ($the_query->posts as $post) {
                     $data['items'][] = $this->getProfilePreview($wrapper, $post);
