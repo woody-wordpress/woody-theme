@@ -46,8 +46,11 @@ class WoodyTheme_Robots
                 'Disallow: /*preview='
             ];
 
+            // Define sitemap urls based on WOODY_PERMALINK_STRUCTURE
+            $sitemapEndUrl = (WOODY_PERMALINK_STRUCTURE == '/%postname%') ? 'xml' : 'xml/' ;
+
             // Add Sitemap
-            $output[] = 'Sitemap: ' . str_replace('/wp', '/sitemap.xml', site_url());
+            $output[] = 'Sitemap: ' . str_replace('/wp', '/sitemap.' . $sitemapEndUrl, site_url());
         } else {
             $output = [
                 '# Woody Robots Private ' . WP_SITE_KEY . ' (' . WP_ENV . ')',

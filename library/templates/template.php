@@ -10,6 +10,7 @@
 abstract class WoodyTheme_TemplateAbstract
 {
     protected $context = [];
+    protected $globals = [];
 
     // Force les classes filles à définir cette méthode
     abstract protected function setTwigTpl();
@@ -53,32 +54,79 @@ abstract class WoodyTheme_TemplateAbstract
 
     public function timberCompileData($data)
     {
-        $data['globals']['post'] = $this->context['post'];
-        $data['globals']['post_title'] = $this->context['post_title'];
-        $data['globals']['post_id'] = $this->context['post_id'];
-        $data['globals']['page_type'] = $this->context['page_type'];
-        $data['globals']['sheet_id'] = $this->context['sheet_id'];
-        $data['globals']['woody_options_pages'] = $this->getWoodyOptionsPagesValues();
-        $data['globals']['tags'] = $this->getTags($data['globals']['post_id']);
-        $data['globals']['current_lang'] = apply_filters('woody_pll_current_language', null);
-        $data['globals']['current_season'] = apply_filters('woody_pll_current_season', null);
-        $data['globals']['current_locale'] = pll_current_language();
-        $data['globals']['languages'] = apply_filters('woody_pll_the_locales', null);
-
+        $this->setGlobals(); //TODO: To test if we can move this on construct
+        $data['globals'] = $this->globals;
         return $data;
     }
 
-    public function getTags($post_id)
+    private function setGlobals()
+    {
+        if (empty($this->globals['post_title']) && !empty($this->context['post_title'])) {
+            $this->globals['post_title'] = $this->context['post_title'];
+        }
+
+        if (empty($this->globals['post_id']) && !empty($this->context['post_id'])) {
+            $this->globals['post_id'] = $this->context['post_id'];
+        }
+
+        if (empty($this->globals['page_type']) && !empty($this->context['page_type'])) {
+            $this->globals['page_type'] = $this->context['page_type'];
+        }
+
+        if (empty($this->globals['sheet_id']) && !empty($this->context['sheet_id'])) {
+            $this->globals['sheet_id'] = $this->context['sheet_id'];
+        }
+
+        if (empty($this->globals['woody_options_pages'])) {
+            $this->globals['woody_options_pages'] = $this->getWoodyOptionsPagesValues();
+        }
+
+        if (empty($this->globals['tags'])) {
+            $this->globals['tags'] = $this->getTags($this->context['post_id']);
+        }
+
+        if (empty($this->globals['current_lang'])) {
+            $this->globals['current_lang'] = apply_filters('woody_pll_current_language', null);
+        }
+
+        if (empty($this->globals['current_season'])) {
+            $this->globals['current_season'] = apply_filters('woody_pll_current_season', null);
+        }
+
+        if (empty($this->globals['current_locale'])) {
+            $this->globals['current_locale'] = pll_current_language();
+        }
+
+        if (empty($this->globals['languages'])) {
+            $this->globals['languages'] = apply_filters('woody_pll_the_locales', null);
+        }
+    }
+
+    private function getTags($post_id)
     {
         $return = [];
         $taxonomies = ['places', 'seasons', 'themes'];
 
         foreach ($taxonomies as $taxonomy) {
+            $all_taxonomy = get_terms(array(
+                'taxonomy' => $taxonomy,
+                'hide_empty' => false,
+            ));
+
+            $all_terms = [];
+            foreach ($all_taxonomy as $term) {
+                $all_terms[$term->term_id] = $term->slug;
+            }
+
             $return[$taxonomy] = [];
             $terms = get_the_terms($post_id, $taxonomy);
             if ($terms != false && !is_wp_error($terms)) {
                 foreach ($terms as $term) {
-                    $return[$taxonomy][] = $term->name;
+                    if ($term->parent != 0) {
+                        $return[$taxonomy][$all_terms[$term->parent]][] = $term->name;
+                    } else {
+                        $return[$taxonomy][] = $term->name;
+                    }
                 }
             }
         }
@@ -86,7 +134,7 @@ abstract class WoodyTheme_TemplateAbstract
         return $return;
     }
 
-    public function getWoodyOptionsPagesValues()
+    private function getWoodyOptionsPagesValues()
     {
         $return = [];
 
