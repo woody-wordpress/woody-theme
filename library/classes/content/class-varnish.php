@@ -103,9 +103,7 @@ class WoodyTheme_Varnish
     {
         if ($section_content['acf_fc_layout'] == 'auto_focus_sheets' || $section_content['acf_fc_layout'] == 'manual_focus_minisheet') {
             return WOODY_VARNISH_CACHING_TTL_FOCUSSHEET;
-        } elseif ($section_content['acf_fc_layout'] == 'auto_focus' && $section_content['focused_sort'] == 'random') {
-            return WOODY_VARNISH_CACHING_TTL_FOCUSRANDOM;
-        } elseif ($section_content['acf_fc_layout'] == 'auto_focus_topics' && $section_content['focused_sort'] == 'random') {
+        } elseif ($section_content['acf_fc_layout'] == 'auto_focus' || $section_content['acf_fc_layout'] == 'auto_focus_topics') {
             return WOODY_VARNISH_CACHING_TTL_FOCUSRANDOM;
         } elseif ($section_content['acf_fc_layout'] == 'weather') {
             return WOODY_VARNISH_CACHING_TTL_WEATHERPAGE;
