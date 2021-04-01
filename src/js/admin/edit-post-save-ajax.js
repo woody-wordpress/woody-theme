@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 /**
  * Save a post without page reload using AJAX
  * @param {MouseEvent} e Click Event received by the listener
@@ -31,6 +33,11 @@ const savePost = (e, publish) => {
 
         // Reset unload event on ACF fields
         acf.unload.reset();
+
+        // Reset beforeunload event with vanilla
+        window.addEventListener('beforeunload', () => false);
+        // Reset beforeunload event with jquery
+        $(window).off('beforeunload');
 
     }).catch(err => {
         if (spinner) spinner.classList.remove('is-active');
