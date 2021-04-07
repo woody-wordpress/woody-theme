@@ -125,7 +125,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 'muted' => true,
                 'autoplay' => true,
                 'controls' => ['volume', 'mute'],
-                'loop' => ['active' => true]
+                'loop' => ['active' => true],
+                'youtube' => ['noCookie' => true]
             ];
 
             $home_slider['plyr_options'] = json_encode($plyr_options);

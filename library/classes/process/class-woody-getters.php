@@ -846,6 +846,10 @@ class WoodyTheme_WoodyGetters
                 'post_status' => ['publish']
             ];
 
+            if (!empty($wrapper['profile_focus_max'])) {
+                $args['posts_per_page'] = $wrapper['profile_focus_max'];
+            }
+
             if (!empty($wrapper['profile_focus_category'])) {
                 foreach ($wrapper['profile_focus_category'] as $term_id) {
                     $terms_ids[] = $term_id;
