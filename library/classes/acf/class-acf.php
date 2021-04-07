@@ -10,7 +10,6 @@
 
 use WoodyLibrary\Library\WoodyLibrary\WoodyLibrary;
 
-//TODO: Executer les fonction back en is_admin uniquement + screen_id post
 class WoodyTheme_ACF
 {
     const ACF = "acf-pro/acf.php";
@@ -50,9 +49,6 @@ class WoodyTheme_ACF
         add_filter('acf/load_field/name=gallery_tags', [$this, 'focusedTaxonomyTermsLoadField']);
         add_filter('acf/load_value/name=gallery_tags', [$this, 'termsLoadValue'], 10, 3);
 
-        add_filter('acf/load_field/name=display_elements', [$this, 'displayElementLoadField'], 10, 3);
-
-        add_filter('acf/fields/google_map/api', [$this, 'acfGoogleMapKey']);
         add_filter('acf/location/rule_types', [$this, 'woodyAcfAddPageTypeLocationRule']);
         add_filter('acf/location/rule_values/page_type_and_children', [$this, 'woodyAcfAddPageTypeChoices']);
         add_filter('acf/location/rule_match/page_type_and_children', [$this, 'woodyAcfPageTypeMatch'], 10, 3);
@@ -65,19 +61,26 @@ class WoodyTheme_ACF
 
         add_filter('acf/load_value/type=gallery', [$this, 'pllGalleryLoadField'], 10, 3);
 
-        add_filter('acf/load_field/name=section_content', [$this, 'sectionContentLoadField']);
-
         add_filter('acf/load_field/name=page_heading_tags', [$this, 'listAllPageTerms'], 10, 3);
 
         add_filter('acf/load_field/name=tags_primary', [$this, 'addPrimaryTagsFields'], 10, 3);
         add_filter('acf/load_field/key=field_5d91c4559736e', [$this, 'loadDisqusField'], 10, 3);
 
+        // Load ACF fields only in admin view
+        if (is_admin()) {
+            add_filter('acf/load_field/name=display_elements', [$this, 'displayElementLoadField'], 10, 3);
+
+            add_filter('acf/fields/google_map/api', [$this, 'acfGoogleMapKey']);
+
+            add_filter('acf/load_field/name=section_content', [$this, 'sectionContentLoadField']);
+
+            add_action('wp_ajax_woody_tpls', [$this, 'woodyGetAllTemplates']);
+        }
+
         // Custom Filter
         add_filter('woody_get_field_option', [$this, 'woodyGetFieldOption'], 10, 3);
         add_filter('woody_get_field_object', [$this, 'woodyGetFieldObject'], 10, 3);
         add_filter('woody_get_fields_by_group', [$this, 'woodyGetFieldsByGroup'], 10, 3);
-
-        add_action('wp_ajax_woody_tpls', [$this, 'woodyGetAllTemplates']);
     }
 
     public function woodyGetFieldOption($field_name = null)
@@ -391,6 +394,7 @@ class WoodyTheme_ACF
         foreach ($taxonomies as $key => $taxonomy) {
             $field['choices']['_' . $taxonomy->name] = (!empty($taxonomy->labels->singular_name)) ? $taxonomy->labels->singular_name . ' principal(e)</small>' : $taxonomy->label . ' <small>Tag principal</small>';
         }
+
         return $field;
     }
 
