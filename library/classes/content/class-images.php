@@ -372,13 +372,11 @@ class WoodyTheme_Images
 
     public function addAttachment($attachment_id)
     {
-        if (pll_get_post_language($attachment_id) == PLL_DEFAULT_LANG) {
-            // Added attachment_types
-            wp_set_object_terms($attachment_id, 'Média ajouté manuellement', 'attachment_types', false);
+        // Added attachment_types
+        wp_set_object_terms($attachment_id, 'Média ajouté manuellement', 'attachment_types', false);
 
-            // Duplicate all medias
-            $this->saveAttachment($attachment_id);
-        }
+        // Duplicate all medias
+        $this->saveAttachment($attachment_id);
     }
 
     public function deleteAttachment($attachment_id)
@@ -416,34 +414,21 @@ class WoodyTheme_Images
     public function saveAttachment($attachment_id)
     {
         if (wp_attachment_is_image($attachment_id)) {
-
-            // Only if current edit post is default (FR)
-            $languages = pll_languages_list();
+            $translations = pll_get_post_translations($attachment_id);
             $current_lang = pll_get_post_language($attachment_id);
 
-            if ($current_lang == PLL_DEFAULT_LANG) {
-                foreach ($languages as $lang) {
-                    if ($lang == PLL_DEFAULT_LANG) {
-                        continue;
-                    }
+            $languages = pll_languages_list();
+            foreach ($languages as $lang) {
 
-                    $t_attachment_id = pll_get_post($attachment_id, $lang);
-                    if (empty($t_attachment_id)) {
-                        // Duplicate media with Polylang Method
-                        $t_attachment_id = apply_filters('woody_pll_create_media_translation', $attachment_id, $lang);
-                    }
-
-                    // Sync Meta and fields
-                    if (!empty($t_attachment_id)) {
-                        $this->syncAttachmentMetadata($attachment_id, $t_attachment_id);
-                    }
+                // Duplicate media with Polylang Method
+                if (!array_key_exists($lang, $translations)) {
+                    $t_attachment_id = apply_filters('woody_pll_create_media_translation', $attachment_id, $lang);
+                } else {
+                    $t_attachment_id = $translations[$lang];
                 }
-            } else {
-                $t_attachment_id = $attachment_id;
-                $attachment_id = pll_get_post($t_attachment_id, PLL_DEFAULT_LANG);
 
                 // Sync Meta and fields
-                if (!empty($attachment_id)) {
+                if (!empty($t_attachment_id) && $current_lang != $lang) {
                     $this->syncAttachmentMetadata($attachment_id, $t_attachment_id);
                 }
             }
