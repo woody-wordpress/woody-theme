@@ -28,7 +28,6 @@ class WoodyTheme_Inclusions
     public function getIncs($query)
     {
         $inc = get_query_var('inc');
-        // rcd($inc, true);
         if (!empty($inc)) {
             if ($inc == 'inc_header') {
                 add_filter('template_include', function () {
