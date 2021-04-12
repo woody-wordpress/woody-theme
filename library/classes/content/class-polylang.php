@@ -131,6 +131,7 @@ class WoodyTheme_Polylang
         __("résultats", 'woody-theme');
         __('Aucun résultat', 'woody-theme');
         __("Voir la carte", 'woody-theme');
+        __("Partager sur", 'woody-theme');
         __("Partager sur Facebook", 'woody-theme');
         __("Partager sur Twitter", 'woody-theme');
         __("Partager sur LinkedIn", 'woody-theme');

@@ -110,8 +110,11 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     {
         $this->context['is_frontpage'] = false;
 
-        $social_shares = getActiveShares();
-        $this->context['social_shares'] = \Timber::compile($this->context['woody_components']['blocks-shares-tpl_01'], $social_shares);
+        /*********************************************
+         * Compilation des Liens de partage "actifs"
+         *********************************************/
+        $social_shares_vars = getSharesVars();
+        $this->context['social_shares'] = \Timber::compile($this->context['woody_components']['blocks-shares-tpl_01'], $social_shares_vars);
 
         /******************************************************************************
          * Compilation du Diaporama pour les pages de type "accueil" (!= frontpage)

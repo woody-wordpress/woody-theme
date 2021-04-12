@@ -1,11 +1,23 @@
 <?php
 
-function getActiveShares()
+/**
+ * Get active sharing links
+ * Get icon and label of sharing links button from Woody settings option page
+ *
+ * @return array
+ */
+function getSharesVars()
 {
-    $current_url = add_query_arg([$_GET], get_permalink());
+    // Sharing links
     $return['current_media'] = !empty(get_field('field_5b0e5ddfd4b1b')) ? get_field('field_5b0e5ddfd4b1b')['url'] : "";
+    $current_url = add_query_arg([$_GET], get_permalink());
     $active_shares = get_field('field_5ee9c784e017d', 'option');
     $path_icons = get_template_directory() . '/src/icons/shares/';
+
+    // Sharing button
+    $return['display_shares_on_click'] = get_field('field_60736b26fd303', 'option');
+    $return['shares_button_icon'] = get_field('field_6071aeb5fc64b', 'option');
+    $return['shares_button_label'] = get_field('field_6071a8b92161f', 'option');
 
     $shares = [
         'facebook' => [
