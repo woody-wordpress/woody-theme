@@ -87,7 +87,6 @@
                             // Add clone
                             clone.append(response);
 
-
                             let fields = acf.getFields({
                                 key: 'field_5b043f0525968'
                             });
