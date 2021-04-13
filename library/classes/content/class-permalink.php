@@ -48,7 +48,7 @@ class WoodyTheme_Permalink
     public function redirect404()
     {
         global $wp_query, $wp;
-        if ($wp_query->is_404 && !empty($wp->request)) {
+        if ($wp_query->is_404 && empty($wp_query->queried_object_id) && !empty($wp->request)) {
             $permalink = null;
             $post_id = url_to_postid($wp->request);
             if (!empty($post_id)) {
@@ -61,7 +61,7 @@ class WoodyTheme_Permalink
                 preg_match('/-([a-z_]{2,})-([0-9]{5,})$/', $last_segment, $sheet_id);
                 if (!empty($sheet_id) && !empty($sheet_id[2])) {
                     $query_result = new \WP_Query([
-                        'lang' => pll_current_language(), // query all polylang languages TODO:no lang to get all langs
+                        'lang' => pll_current_language(),
                         'post_status' => ['publish'],
                         'posts_per_page' => 1,
                         'orderby' => 'ID',
@@ -77,8 +77,6 @@ class WoodyTheme_Permalink
                         ],
                     ]);
                 } else {
-                    //TODO: Retravailler/Supprimer ce cas qui génère des boucles de redirection
-                    // Pour les pages qui sont déplacées dans l'arborescence
                     $query_result = new \WP_Query([
                         'lang' => pll_current_language(),
                         'posts_per_page' => 1,

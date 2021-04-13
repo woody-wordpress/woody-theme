@@ -62,19 +62,19 @@ class WoodyTheme_Seo
         $query = $this->getAllPages();
         $posts = (!empty($query->posts)) ? $query->posts : [];
         if (empty($posts)) {
-            \WP_CLI::warning('SORRY, WEBSITE SEEMS TO BE EMPTY OF PAGES');
+            output_warning('SORRY, WEBSITE SEEMS TO BE EMPTY OF PAGES');
         }
         $taxonomies = getPageTaxonomies();
 
         // Nombre de pages dans le site
-        \WP_CLI::log('## ' . $query->post_count . ' PAGES TO UPDATE');
+        output_log('## ' . $query->post_count . ' PAGES TO UPDATE');
 
         // On migre l'id de suivi google
-        \WP_CLI::log('## ' . 'UPDATING SITE METADATA');
+        output_log('## ' . 'UPDATING SITE METADATA');
         $this->migrateGoogleVerifCode();
 
         // On migre les meta (title, desc, og, twitter) de chaque page
-        \WP_CLI::log('## ' . 'UPDATING PAGES METADATA');
+        output_log('## ' . 'UPDATING PAGES METADATA');
         foreach ($posts as $post) {
             do_action('woody_async_add', 'woody_migrate_yoast_post_meta', $post, 'post_' . $post->ID);
             // $this->migrateYoastPostMeta($post);
@@ -82,7 +82,7 @@ class WoodyTheme_Seo
 
         // On migre les tags primary
 
-        \WP_CLI::log('## ' . 'UPDATING PRIMARY TAGS');
+        output_log('## ' . 'UPDATING PRIMARY TAGS');
         foreach ($posts as $post) {
             do_action('woody_async_add', 'woody_migrate_yoast_primary_tags', ['post' => $post, 'taxonomies' =>$taxonomies], 'post_' . $post->ID);
             // $this->migrateYoastPrimaryTags($post, $taxonomies);
@@ -108,19 +108,19 @@ class WoodyTheme_Seo
 
         $yoast = get_option('wpseo');
         if (empty($yoast)) {
-            \WP_CLI::warning('YOAST OPTION NOT FOUND');
+            output_warning('YOAST OPTION NOT FOUND');
         } else {
             $google_verif_code = (!empty($yoast['googleverify'])) ? $yoast['googleverify'] : '';
 
             if (empty($google_verif_code)) {
-                \WP_CLI::warning('GOOGLE\'S VERIFICATION CODE IS EMPTY');
+                output_warning('GOOGLE\'S VERIFICATION CODE IS EMPTY');
             } else {
                 $meta = '<meta name="google-site-verification" content="' . $google_verif_code . '" />';
                 $update = update_field('woody_custom_meta', $meta, 'option');
                 if ($update == true) {
-                    \WP_CLI::success('WOODY CUSTOM META UPDATED');
+                    output_success('WOODY CUSTOM META UPDATED');
                 } else {
-                    \WP_CLI::warning('AN ERROR WAS OCCURED WHEN UPDATING OPTION OR THE OPTION IS ALREADY SET');
+                    output_warning('AN ERROR WAS OCCURED WHEN UPDATING OPTION OR THE OPTION IS ALREADY SET');
                 }
             }
         }
@@ -184,11 +184,11 @@ class WoodyTheme_Seo
 
                 if ($update == true) {
                     // On log le nom de la meta mise à jour
-                    \WP_CLI::success($metadata_key . ' sucessfully updated');
+                    output_success($metadata_key . ' sucessfully updated');
                     $post_updated = true;
                 } else {
                     // On log la non mise à jour du champ car valeur identique à Yoast
-                    \WP_CLI::warning('The value of ' . $metadata['target'] . ' is already set as ' . $metadata['value']);
+                    output_warning('The value of ' . $metadata['target'] . ' is already set as ' . $metadata['value']);
                     $post_updated = false;
                 }
             }
@@ -196,9 +196,9 @@ class WoodyTheme_Seo
 
         // On log le résultat de la mise à jour du post
         if ($post_updated == true) {
-            \WP_CLI::success('POST UPDATED');
+            output_success('POST UPDATED');
         } else {
-            \WP_CLI::warning('NOTHING TO WRITE');
+            output_warning('NOTHING TO WRITE');
         }
     }
 
@@ -222,9 +222,9 @@ class WoodyTheme_Seo
 
         // On log le résultat de la mise à jour
         if ($update == true) {
-            \WP_CLI::success('POST '. $post->ID .' UPDATED');
+            output_success('POST '. $post->ID .' UPDATED');
         } else {
-            \WP_CLI::warning($post->ID . ' : NOTHING TO WRITE');
+            output_warning($post->ID . ' : NOTHING TO WRITE');
         }
     }
 
