@@ -372,3 +372,51 @@ textarea.notAllowed {
         bottom: 100px;
     }
 }
+
+@keyframes noticeSlideIn {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+#wpcontent {
+    position: relative;
+}
+
+.custom-notice {
+    background-color: #0085ba;
+    color: #fff;
+    padding: 0 0 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &>.notice-dismiss {
+        position: relative;
+        right: auto;
+        left: auto;
+        top: auto;
+        bottom: auto;
+        &::before {
+            color: #fff;
+        }
+    }
+
+    &.notice-error {
+        background-color: #ff0000;
+    }
+}
+
+.is-fixed {
+    position: fixed;
+    width: 100%;
+    box-sizing: border-box;
+    top: 32px;
+    left: 0;
+    z-index: 90000;
+    animation: noticeSlideIn 300ms 1 forwards;
+}

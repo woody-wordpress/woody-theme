@@ -56,9 +56,7 @@ class WoodyTheme_SiteMap
         if (!empty($this->existing_options)) {
             foreach ($this->existing_options as $option_name) {
                 delete_option($option_name);
-                if (defined('WP_CLI') && WP_CLI) {
-                    \WP_CLI::success('DELETE : ' . $option_name);
-                }
+                output_success('DELETE : ' . $option_name);
             }
         }
     }
@@ -170,9 +168,7 @@ class WoodyTheme_SiteMap
             if (!$merge_sitemap_lang) {
                 $option_name = sprintf('woody_sitemap_%s', $lang);
                 update_option($option_name, $nb_chunks, 'no');
-                if (defined('WP_CLI') && WP_CLI) {
-                    \WP_CLI::success('SAVE : ' . $option_name);
-                }
+                output_success('SAVE : ' . $option_name);
                 if (!empty($this->existing_options[$option_name])) {
                     unset($this->existing_options[$option_name]);
                 }
@@ -183,9 +179,7 @@ class WoodyTheme_SiteMap
         if ($merge_sitemap_lang) {
             $option_name = sprintf('woody_sitemap_%s', 'all');
             update_option($option_name, $nb_chunks, 'no');
-            if (defined('WP_CLI') && WP_CLI) {
-                \WP_CLI::success('SAVE : ' . $option_name);
-            }
+            output_success('SAVE : ' . $option_name);
             if (!empty($this->existing_options[$option_name])) {
                 unset($this->existing_options[$option_name]);
             }
@@ -218,9 +212,7 @@ class WoodyTheme_SiteMap
         }
 
         update_option($args['option_name'], $sitemap, 'no');
-        if (defined('WP_CLI') && WP_CLI) {
-            \WP_CLI::success('SAVE : ' . $args['option_name']);
-        }
+        output_success('SAVE : ' . $args['option_name']);
     }
 
     private function getPosts($lang = PLL_DEFAULT_LANG, $paged = 1, $posts_per_page = 1000)
@@ -385,9 +377,7 @@ class WoodyTheme_SiteMap
     {
         $sitemap = $this->getPostsByHierarchy(0, $args['lang']);
         update_option($args['option_name'], $sitemap, 'no');
-        if (defined('WP_CLI') && WP_CLI) {
-            \WP_CLI::success('SAVE : ' . $args['option_name']);
-        }
+        output_success('SAVE : ' . $args['option_name']);
     }
 
     private function getPostsByHierarchy($post_parent_id, $lang)

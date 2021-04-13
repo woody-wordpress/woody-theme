@@ -125,7 +125,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 'muted' => true,
                 'autoplay' => true,
                 'controls' => ['volume', 'mute'],
-                'loop' => ['active' => true]
+                'loop' => ['active' => true],
+                'youtube' => ['noCookie' => true]
             ];
 
             $home_slider['plyr_options'] = json_encode($plyr_options);
@@ -517,15 +518,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     ]
                 ];
             }
-        }
-
-        // Return template
-        if (empty($this->context['playlist_tourism']['content'])) {
-            $this->context['playlist_tourism']['content'] = '<center style="margin: 80px 0">Playlist vide</center>';
-            status_header('410');
-        } elseif (isset($this->context['playlist_tourism']['status'])) {
-            $code = intval($this->context['playlist_tourism']['status']);
-            status_header($code);
         }
     }
 
