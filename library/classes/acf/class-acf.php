@@ -968,6 +968,7 @@ class WoodyTheme_ACF
             $html_str = substr_replace($html_str, "", $valuespos);
             // remove last tag
             $return = substr($html_str, 0, -10);
+            wp_cache_set('layout-' . $layout_name, $return);
 
             remove_filter('user_can_richedit', [$this, 'addUserRichedit']);
             $user->remove_cap('upload_files');
