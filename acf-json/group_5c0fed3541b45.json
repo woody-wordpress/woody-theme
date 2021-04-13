@@ -1,8 +1,7 @@
 {
     "key": "group_5c0fed3541b45",
     "title": "Paramètres Woody",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5e43ca87a2e3e",
             "label": "Paramètres généraux",
             "name": "",
@@ -127,12 +126,29 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [
-                {
-                    "key": "field_5c10c08f62d6d",
-                    "label": "Pages suggérées",
-                    "name": "suggest_pages",
-                    "type": "repeater",
+            "sub_fields": [{
+                "key": "field_5c10c08f62d6d",
+                "label": "Pages suggérées",
+                "name": "suggest_pages",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "collapsed": "",
+                "min": 0,
+                "max": 4,
+                "layout": "block",
+                "button_label": "Ajouter une suggestion",
+                "sub_fields": [{
+                    "key": "field_5c10c0a162d6e",
+                    "label": "Page",
+                    "name": "suggest_page",
+                    "type": "post_object",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -141,37 +157,16 @@
                         "class": "",
                         "id": ""
                     },
-                    "collapsed": "",
-                    "min": 0,
-                    "max": 4,
-                    "layout": "block",
-                    "button_label": "Ajouter une suggestion",
-                    "sub_fields": [
-                        {
-                            "key": "field_5c10c0a162d6e",
-                            "label": "Page",
-                            "name": "suggest_page",
-                            "type": "post_object",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "post_type": [
-                                "page"
-                            ],
-                            "taxonomy": "",
-                            "allow_null": 1,
-                            "multiple": 0,
-                            "return_format": "id",
-                            "ui": 1
-                        }
-                    ]
-                }
-            ]
+                    "post_type": [
+                        "page"
+                    ],
+                    "taxonomy": "",
+                    "allow_null": 1,
+                    "multiple": 0,
+                    "return_format": "id",
+                    "ui": 1
+                }]
+            }]
         },
         {
             "key": "field_5d039af8a226f",
@@ -292,15 +287,6 @@
                 "wicon-062-crayon": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-062-crayon\"><\/span><span>Crayon<\/span><\/div>",
                 "wicon-060-favoris": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-060-favoris\"><\/span><span>Favoris<\/span><\/div>",
                 "wicon-061-corbeille": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-061-corbeille\"><\/span><span>Corbeille<\/span><\/div>",
-                "wicon--05-partenaires": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--05-partenaires\"><\/span><span>Partenaires<\/span><\/div>",
-                "wicon--03-dormir": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--03-dormir\"><\/span><span>Dormir<\/span><\/div>",
-                "wicon--08-savoir": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--08-savoir\"><\/span><span>Savoir<\/span><\/div>",
-                "wicon--06-plan": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--06-plan\"><\/span><span>Plan<\/span><\/div>",
-                "wicon--02-contact": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--02-contact\"><\/span><span>Contact<\/span><\/div>",
-                "wicon--00-billetterie": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--00-billetterie\"><\/span><span>Billetterie<\/span><\/div>",
-                "wicon--04-manger": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--04-manger\"><\/span><span>Manger<\/span><\/div>",
-                "wicon--01-brochures": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--01-brochures\"><\/span><span>Brochures<\/span><\/div>",
-                "wicon--07-presse": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--07-presse\"><\/span><span>Presse<\/span><\/div>"
             },
             "default_value": "wicon-032-coeur-contour",
             "allow_null": 1,
@@ -405,13 +391,11 @@
             "instructions": "Icône du bouton \"Partager\" pour les liens de partage.",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_60736b26fd303",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
+                [{
+                    "field": "field_60736b26fd303",
+                    "operator": "==",
+                    "value": "1"
+                }]
             ],
             "wrapper": {
                 "width": "33",
@@ -486,15 +470,6 @@
                 "wicon-062-crayon": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-062-crayon\"><\/span><span>Crayon<\/span><\/div>",
                 "wicon-060-favoris": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-060-favoris\"><\/span><span>Favoris<\/span><\/div>",
                 "wicon-061-corbeille": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon-061-corbeille\"><\/span><span>Corbeille<\/span><\/div>",
-                "wicon--05-partenaires": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--05-partenaires\"><\/span><span>Partenaires<\/span><\/div>",
-                "wicon--03-dormir": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--03-dormir\"><\/span><span>Dormir<\/span><\/div>",
-                "wicon--08-savoir": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--08-savoir\"><\/span><span>Savoir<\/span><\/div>",
-                "wicon--06-plan": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--06-plan\"><\/span><span>Plan<\/span><\/div>",
-                "wicon--02-contact": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--02-contact\"><\/span><span>Contact<\/span><\/div>",
-                "wicon--00-billetterie": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--00-billetterie\"><\/span><span>Billetterie<\/span><\/div>",
-                "wicon--04-manger": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--04-manger\"><\/span><span>Manger<\/span><\/div>",
-                "wicon--01-brochures": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--01-brochures\"><\/span><span>Brochures<\/span><\/div>",
-                "wicon--07-presse": "<div class=\"wicon-select\"><span class=\"wicon-woody-icons wicon--07-presse\"><\/span><span>Presse<\/span><\/div>"
             },
             "default_value": "wicon-042-lien",
             "allow_null": 1,
@@ -512,13 +487,11 @@
             "instructions": "Intitulé du bouton \"Partager\" pour les liens de partage.",
             "required": 0,
             "conditional_logic": [
-                [
-                    {
-                        "field": "field_60736b26fd303",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
+                [{
+                    "field": "field_60736b26fd303",
+                    "operator": "==",
+                    "value": "1"
+                }]
             ],
             "wrapper": {
                 "width": "33",
@@ -676,13 +649,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "options_page",
-                "operator": "==",
-                "value": "woody-settings"
-            }
-        ]
+        [{
+            "param": "options_page",
+            "operator": "==",
+            "value": "woody-settings"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
