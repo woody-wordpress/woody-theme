@@ -899,6 +899,9 @@ class WoodyTheme_ACF
     public function generateLayoutsTransients()
     {
         add_filter('user_can_richedit', [$this, 'addUserRichedit']);
+        $user = wp_get_current_user();
+        $user->add_cap('upload_files');
+
         $field = acf_get_field("field_5b043f0525968");
         $field['name'] = "#rowindex-name#";
         $field['display_layouts'] = true;
@@ -922,6 +925,7 @@ class WoodyTheme_ACF
         }
 
         remove_filter('user_can_richedit', [$this, 'addUserRichedit']);
+        $user->remove_cap('upload_files');
     }
 
     public function addUserRichedit() {
@@ -938,6 +942,10 @@ class WoodyTheme_ACF
         if (!empty($transient)) {
             $return = $transient;
         } else {
+            add_filter('user_can_richedit', [$this, 'addUserRichedit']);
+            $user = wp_get_current_user();
+            $user->add_cap('upload_files');
+
             // field_5b043f0525968 == "section_content"
             $field = acf_get_field($key);
             $field['name'] = "#rowindex-name#";
@@ -960,6 +968,9 @@ class WoodyTheme_ACF
             $html_str = substr_replace($html_str, "", $valuespos);
             // remove last tag
             $return = substr($html_str, 0, -10);
+
+            remove_filter('user_can_richedit', [$this, 'addUserRichedit']);
+            $user->remove_cap('upload_files');
         }
 
         wp_send_json( $return );
