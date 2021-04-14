@@ -304,8 +304,12 @@ function rc_xmlToArray($xmlstr)
     $doc->loadXML($xmlstr);
     $root = $doc->documentElement;
     $output = rc_domnodeToArray($root);
-    $output['@root'] = $root->tagName;
-    return $output;
+    if (!empty($output['@root'])) {
+        $output['@root'] = $root->tagName;
+    }
+    if ((is_array($output) || is_object($output))) {
+        return $output;
+    }
 }
 
 function rc_domnodeToArray($node)

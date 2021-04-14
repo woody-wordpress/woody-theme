@@ -533,6 +533,11 @@ class WoodyTheme_WoodyCompilers
             $context['post_id'] = $custom_post_id;
             $context['post_title'] = get_the_title($custom_post_id);
         }
+        if (!empty($context['mirror_id']) && is_numeric($context['mirror_id'])) {
+            $context['post'] = get_post($context['mirror_id']);
+            $context['post_id'] = $context['mirror_id'];
+            $context['post_title'] = get_the_title($context['mirror_id']);
+        }
 
         // On récupère les champs du groupe En-tête de page
         $page_teaser = getAcfGroupFields('group_5b2bbb46507bf', $context['post']);
