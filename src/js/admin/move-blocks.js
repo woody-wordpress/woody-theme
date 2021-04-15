@@ -68,10 +68,20 @@ const moveBlock = (element, section, tooltip = null) => {
     search: prevKey,
     replace: newKey,
     rename: ( name, value, search, replace ) => {
-        // Replace section index
-        value = value.replace(/row-[0-9]+/, 'row-' + sectionIndex);
-        // replace layout key
-        return value.replace(search, replace);
+        const matches = value.match(/row-[0-9]+/g);
+
+        if (prevKey.indexOf('row')) {
+            var nth = 0;
+            value = value.replace(/row-[0-9]+/g, function(match, pos, original) {
+                nth++;
+                return (nth === 2) ? newKey : match;
+            });
+            // Change the first row-index by row-sectionIndex
+            value = value.replace(matches[0], "row-" + sectionIndex);
+        } else {
+            value = value.replace(prevKey, newKey);
+        }
+        return value;
     },
     append: ($el, $el2) => {
       if (last) $(last).after($el2);
