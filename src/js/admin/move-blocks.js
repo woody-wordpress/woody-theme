@@ -49,13 +49,17 @@ const moveBlock = (element, section, tooltip = null) => {
 
   // Select section
   const sections = document.querySelectorAll('div[data-name="section_content"]');
+
   const sectionIndex = Math.min(Math.max(0, section), sections.length - 1);
+  const newSectionKey = sections[sectionIndex].parentElement.parentElement.getAttribute('data-id');
+
   const values = sections[sectionIndex].querySelectorAll('.acf-flexible-content > .values');
   const blocks = values[values.length - 1];
   const last = blocks.lastElementChild;
 
   const oldValues = element[0].parentElement.parentElement;
   const oldSection = oldValues.parentElement;
+  const prevSectionKey = oldSection.parentElement.parentElement.parentElement.parentElement.getAttribute('data-id');
 
   $(blocks).closest('.acf-flexible-content').removeClass('-empty');
 
@@ -68,19 +72,17 @@ const moveBlock = (element, section, tooltip = null) => {
     search: prevKey,
     replace: newKey,
     rename: ( name, value, search, replace ) => {
-        const matches = value.match(/row-[0-9]+/g);
-
-        if (prevKey.indexOf('row')) {
+        value = value.replace(prevSectionKey, newSectionKey);
+        if (prevSectionKey.indexOf('row') && prevKey.indexOf('row')) {
             var nth = 0;
             value = value.replace(/row-[0-9]+/g, function(match, pos, original) {
                 nth++;
                 return (nth === 2) ? newKey : match;
             });
-            // Change the first row-index by row-sectionIndex
-            value = value.replace(matches[0], "row-" + sectionIndex);
         } else {
             value = value.replace(prevKey, newKey);
         }
+
         return value;
     },
     append: ($el, $el2) => {
@@ -118,7 +120,7 @@ const moveBlock = (element, section, tooltip = null) => {
     }
   });
 
-  let fieldKey = `acf[field_5afd2c6916ecb][row-${sectionIndex}][field_5b043f0525968][${newKey}][acf_fc_layout]`;
+  let fieldKey = `acf[field_5afd2c6916ecb][${newSectionKey}][field_5b043f0525968][${newKey}][acf_fc_layout]`;
 
   const layoutMoveButton = layout.find('.move-button');
   const layoutMoveTooltip = layout.find('.move-block-tooltip');
