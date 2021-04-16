@@ -659,6 +659,7 @@ class WoodyTheme_ACF
                 'blocks-focus-tpl_128',
                 'blocks-focus-tpl_129',
                 'blocks-focus-tpl_130',
+                'blocks-focus-tpl_131',
                 'lists-list_grids-tpl_207',
                 'lists-list_grids-tpl_202',
                 'lists-list_grids-tpl_209',
@@ -911,10 +912,10 @@ class WoodyTheme_ACF
 
         $index = 1;
         $keys = array_keys($field['layouts']);
-        foreach($field['layouts'] as $layout) {
+        foreach ($field['layouts'] as $layout) {
             $return = '';
             $layout_start = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="' . $layout['name'] . '">');
-            if($layout['name'] != "tabs_group") {
+            if ($layout['name'] != "tabs_group") {
                 $layout_end = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="', $layout_start+1);
                 $layout_length = $layout_end - $layout_start;
                 $return =  substr($html_str, $layout_start, $layout_length);
@@ -937,7 +938,8 @@ class WoodyTheme_ACF
         remove_filter('user_can_richedit', [$this, 'addUserRichedit']);
     }
 
-    public function addUserRichedit() {
+    public function addUserRichedit()
+    {
         return true;
     }
 
@@ -964,11 +966,11 @@ class WoodyTheme_ACF
 
             $index = 1;
             $keys = array_keys($field['layouts']);
-            foreach($field['layouts'] as $layout) {
+            foreach ($field['layouts'] as $layout) {
                 if ($layout['name'] == $layout_name) {
                     $return = '';
                     $layout_start = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="' . $layout['name'] . '">');
-                    if($layout['name'] != "tabs_group") {
+                    if ($layout['name'] != "tabs_group") {
                         $layout_end = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="', $layout_start+1);
                         $layout_length = $layout_end - $layout_start;
                         $return =  substr($html_str, $layout_start, $layout_length);
@@ -993,6 +995,6 @@ class WoodyTheme_ACF
             }
         }
 
-        wp_send_json( $return );
+        wp_send_json($return);
     }
 }
