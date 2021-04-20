@@ -32,9 +32,10 @@ class WoodyTheme_Commands
         \WP_CLI::add_command('woody_flush_varnish', [$this, 'flush_varnish']);
         \WP_CLI::add_command('woody_flush_cloudflare', [$this, 'flush_cloudflare']);
         \WP_CLI::add_command('woody_cache_warm', [$this, 'cache_warm']);
+        \WP_CLI::add_command('woody_maintenance', [$this, 'maintenance']);
     }
 
-    public function flush($args)
+    public function flush()
     {
         $this->flush_site();
         $this->flush_core();
@@ -82,13 +83,31 @@ class WoodyTheme_Commands
         output_success('woody_cache_warm');
     }
 
+    public function maintenance($args, $assoc_args)
+    {
+        $status = (current($args) == 'true') ? true : false;
+
+        $fs = new Filesystem();
+        if (!$fs->exists(WP_MAINTENANCE_DIR)) {
+            $fs->mkdir(WP_MAINTENANCE_DIR, 0775);
+        }
+
+        if ($status) {
+            $fs->dumpFile(WP_MAINTENANCE_DIR . '/' . WP_SITE_KEY, date('Y-m-d H:i:s'));
+            output_success('woody_maintenance ON');
+        } else {
+            $fs->remove(WP_MAINTENANCE_DIR . '/' . WP_SITE_KEY);
+            output_success('woody_maintenance OFF');
+        }
+    }
+
     public function flush_twig()
     {
         if (WP_ENV != 'dev' && !WOODY_TWIG_CACHE_DISABLE) {
             try {
-                $filesystem = new Filesystem();
-                if (!$filesystem->exists(WP_TIMBER_DIR)) {
-                    $filesystem->mkdir(WP_TIMBER_DIR, 0775);
+                $fs = new Filesystem();
+                if (!$fs->exists(WP_TIMBER_DIR)) {
+                    $fs->mkdir(WP_TIMBER_DIR, 0775);
                 }
 
                 // Clear Twig Cache
