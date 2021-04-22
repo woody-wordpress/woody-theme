@@ -130,13 +130,8 @@ class WoodyTheme_Commands
                 }
 
                 // Clear Twig Cache
-                $cleared = $this->rmdir(WP_TIMBER_DIR);
-
-                if ($cleared) {
-                    output_success("woody_flush_twig");
-                } else {
-                    output_warning("woody_flush_twig");
-                }
+                exec(sprintf("rm -rf %s/*", escapeshellarg(WP_TIMBER_DIR)));
+                output_success("woody_flush_twig");
             } catch (IOExceptionInterface $exception) {
                 output_warning("Une erreur est survenue au moment de la création de " . $exception->getPath());
             }
@@ -219,32 +214,5 @@ class WoodyTheme_Commands
         } else {
             output_success(sprintf('woody_flush_cloudflare : %s', WOODY_CLOUDFLARE_URL));
         }
-    }
-
-    private function rmdir($dir, $inside_only = true)
-    {
-        if (!file_exists($dir)) {
-            return true;
-        }
-
-        if (!is_dir($dir)) {
-            return unlink($dir);
-        }
-
-        foreach (scandir($dir) as $item) {
-            if ($item == '.' || $item == '..') {
-                continue;
-            }
-
-            if (!$this->rmdir($dir . DIRECTORY_SEPARATOR . $item, false)) {
-                return false;
-            }
-        }
-
-        if ($inside_only) {
-            return true;
-        }
-
-        return rmdir($dir);
     }
 }

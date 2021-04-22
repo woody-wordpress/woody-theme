@@ -38,7 +38,7 @@ if (!class_exists('Timber')) {
                 $twig_dirs = apply_filters('timber_locations', array(WOODY_THEME_DIR . '/views', WOODY_SUBTHEME_DIR . '/views', $woodyLibrary->getTemplatesDirname()));
                 $twig_loader = new \Twig\Loader\FilesystemLoader($twig_dirs);
                 $twig_options = ['autoescape' => false];
-                if (!WOODY_TWIG_CACHE_DISABLE && !file_exists(WP_CACHE_DIR . '/deploy.lock') && WP_ENV != 'dev') {
+                if (!WOODY_TWIG_CACHE_DISABLE && WP_ENV != 'dev') {
                     $twig_options['cache'] = WP_TIMBER_DIR;
                 }
 
