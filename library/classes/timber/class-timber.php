@@ -108,6 +108,7 @@ if (!class_exists('Timber')) {
 
             if (!empty($vars['globals'])) {
                 $keys = ['options', 'post_title', 'post_id', 'page_type', 'sheet_id', 'woody_options_pages', 'tags', 'current_lang', 'current_locale', 'current_season'];
+                $keys = apply_filters('woody_globals_json', $keys);
                 foreach ($keys as $key) {
                     if (!empty($vars['globals'][$key])) {
                         $return[$key] = $vars['globals'][$key];
