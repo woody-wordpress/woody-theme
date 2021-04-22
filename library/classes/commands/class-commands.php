@@ -130,7 +130,9 @@ class WoodyTheme_Commands
                 }
 
                 // Clear Twig Cache
-                exec(sprintf("rm -rf %s/*", escapeshellarg(WP_TIMBER_DIR)));
+                $cmd = sprintf("rm -rf %s", WP_TIMBER_DIR . '/*');
+                exec($cmd);
+                output_log($cmd);
                 output_success("woody_flush_twig");
             } catch (IOExceptionInterface $exception) {
                 output_warning("Une erreur est survenue au moment de la création de " . $exception->getPath());
