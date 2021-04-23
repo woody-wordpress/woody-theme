@@ -123,6 +123,9 @@ $('#post').each(function() {
 
         let fieldKey = `acf[field_5afd2c6916ecb][${newSectionKey}][field_5b043f0525968][${newKey}][acf_fc_layout]`;
 
+        // Use ACF RENDER FUNCTION TO SORT NUMBERS
+        acf.getFields({type: 'flexible_content'}).forEach(element =>{element.render()})
+
         const layoutMoveButton = layout.find('.move-button');
         const layoutMoveTooltip = layout.find('.move-block-tooltip');
         const layoutMoveSelect = layout.find('.move-block-select');
