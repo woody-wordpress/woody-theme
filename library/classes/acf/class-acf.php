@@ -659,6 +659,7 @@ class WoodyTheme_ACF
                 'blocks-focus-tpl_128',
                 'blocks-focus-tpl_129',
                 'blocks-focus-tpl_130',
+                'blocks-focus-tpl_131',
                 'lists-list_grids-tpl_207',
                 'lists-list_grids-tpl_202',
                 'lists-list_grids-tpl_209',
@@ -928,7 +929,8 @@ class WoodyTheme_ACF
         $user->remove_cap('upload_files');
     }
 
-    public function addUserRichedit() {
+    public function addUserRichedit()
+    {
         return true;
     }
 
@@ -974,6 +976,6 @@ class WoodyTheme_ACF
             $user->remove_cap('upload_files');
         }
 
-        wp_send_json( $return );
+        wp_send_json($return);
     }
 }

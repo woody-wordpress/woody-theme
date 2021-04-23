@@ -513,7 +513,7 @@ class WoodyTheme_WoodyCompilers
         $sections = get_field('section', $post_id);
         if (!empty($sections) && is_array($sections)) {
             foreach ($sections as $s_key => $section) {
-                if (!empty($section['display_in_summary'])) {
+                if (!empty($section['display_in_summary']) && empty($section['hide_section'])) {
                     $items[] = [
                         'title' => (!empty($section['section_summary_title'])) ? $section['section_summary_title'] : 'Section ' . $s_key,
                         'anchor' => (!empty($section['section_summary_title'])) ? $permalink . '#summary-' . sanitize_title($section['section_summary_title']) : $permalink . '#pageSection-' . $s_key,
@@ -598,8 +598,8 @@ class WoodyTheme_WoodyCompilers
             $profile_id = $page_teaser['profile']['profile_post'];
 
             //Add Profil expression category if checked
-            if(!empty($page_teaser['profile']['use_profile_expression']) && !empty($page_teaser['profile']['profile_expression'])){
-                $profile_expressions=$this->getter->getProfileExpressions($page_teaser['profile']['profile_post'],$page_teaser['profile']['profile_expression']);
+            if (!empty($page_teaser['profile']['use_profile_expression']) && !empty($page_teaser['profile']['profile_expression'])) {
+                $profile_expressions=$this->getter->getProfileExpressions($page_teaser['profile']['profile_post'], $page_teaser['profile']['profile_expression']);
             }
 
             $page_teaser['profile'] = [
