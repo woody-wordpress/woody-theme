@@ -93,6 +93,8 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
                 }
             }
         }
+
+        $this->context = apply_filters('woody_sheet_context', $this->context);
     }
 
     public function filterTouristicSheetWoodySeoTitle($title)
