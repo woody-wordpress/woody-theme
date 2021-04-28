@@ -188,7 +188,6 @@ class WoodyTheme_WoodyProcessTools
             'post_status' => 'inherit',
             'post_mime_type' => 'image',
             'posts_per_page' => 14,
-            'nopaging' => true,
             'tax_query' => array(
                 array(
                     'taxonomy' => $taxonomy,
