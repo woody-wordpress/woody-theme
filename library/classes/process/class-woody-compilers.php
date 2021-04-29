@@ -76,9 +76,9 @@ class WoodyTheme_WoodyCompilers
             }
 
             if ($wrapper['acf_fc_layout'] == 'auto_focus_sheets') {
-                $the_items['block_titles'] = $this->tools->getFocusBlockTitles($wrapper, 'focus_block_title_');
+                $the_items['block_titles'] = $this->tools->getBlockTitles($wrapper, 'focus_block_title_');
             } else {
-                $the_items['block_titles'] = $this->tools->getFocusBlockTitles($wrapper);
+                $the_items['block_titles'] = $this->tools->getBlockTitles($wrapper);
             }
 
             $the_items['no_padding'] = (!empty($wrapper['focus_no_padding'])) ? $wrapper['focus_no_padding'] : '';
@@ -136,7 +136,7 @@ class WoodyTheme_WoodyCompilers
         $data = $this->getter->getManualFocusMinisheetData($wrapper);
 
         // Block titles
-        $data['block_titles'] = $this->tools->getFocusBlockTitles($wrapper);
+        $data['block_titles'] = $this->tools->getBlockTitles($wrapper);
         $data['block_titles']['display_options'] = $this->tools->getDisplayOptions($wrapper);
 
         // Display options
