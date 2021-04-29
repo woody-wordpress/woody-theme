@@ -176,7 +176,15 @@ class WoodyTheme_WoodyProcess
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
             case 'free_text':
+                $layout['block_titles'] = $this->tools->getBlockTitles($layout, '', 'generic_');
                 $layout['text'] = $this->tools->replacePattern($layout['text'], get_the_ID());
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            break;
+            case 'call_to_action':
+                $opts = [
+                    'hide_description' => true,
+                ];
+                $layout['block_titles'] = $this->tools->getBlockTitles($layout, '', 'generic_', $opts);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
             case 'quote':
