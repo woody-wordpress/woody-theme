@@ -1,7 +1,8 @@
 {
     "key": "group_5b042f5ad9ecc",
     "title": "Texte libre",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5b044711dcad5",
             "label": "Contenu",
             "name": "",
@@ -35,6 +36,69 @@
             "toolbar": "full",
             "media_upload": 1,
             "delay": 1
+        },
+        {
+            "key": "field_60867814eb20b",
+            "label": "Titre du bloc",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6086785aeb20c",
+            "label": "Titre du bloc",
+            "name": "generic_bloc_title",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "field_5b041d61adb72",
+                "field_5b041c6aadb71",
+                "field_5b041d79adb73",
+                "field_5b59bbd0e094c",
+                "field_5b72f56b6f4aa",
+                "field_5b59bc12e094d"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
+        },
+        {
+            "key": "field_608678e5eb20d",
+            "label": "Bouton(s) supplémentaire(s)",
+            "name": "generic_buttons",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5b043614df4a6"
+            ],
+            "display": "group",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
         },
         {
             "key": "field_5b0e8fb53447a",
@@ -202,11 +266,13 @@
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -214,7 +280,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "Elément de contenu (Editeur wysiwyg \/ code html",
-    "modified": 1569232496
+    "modified": 1619432485
 }

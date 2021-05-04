@@ -75,9 +75,14 @@ const createNotice = (type, message) => {
     document.querySelector('.wp-header-end').after(notice);
 }
 
-document.getElementById('publish').addEventListener('click', e => { savePost(e, true); });
-if (document.getElementById('save-post')) {
-    document.getElementById('save-post').addEventListener('click', e => { savePost(e, false); });
+if (!$('body').hasClass('post-type-acf-field-group')) { // Fix for acf field groups
+    if (document.getElementById('publish')) {
+        document.getElementById('publish').addEventListener('click', e => { savePost(e, true); });
+    }
+    if (document.getElementById('save-post')) {
+        document.getElementById('save-post').addEventListener('click', e => { savePost(e, false); });
+    }
+
+    window.onbeforeunload = null;
 }
 
-window.onbeforeunload = null;
