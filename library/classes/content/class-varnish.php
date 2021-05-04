@@ -22,6 +22,8 @@ class WoodyTheme_Varnish
         // Force remove varnish cookie if logout
         if (!is_user_logged_in() && !empty($_COOKIE[WOODY_VARNISH_CACHING_COOKIE])) {
             setcookie(WOODY_VARNISH_CACHING_COOKIE, null, time()-3600*24*100, COOKIEPATH, COOKIE_DOMAIN, false, true);
+            wp_redirect('/wp/wp-login.php');
+            exit;
         }
     }
 

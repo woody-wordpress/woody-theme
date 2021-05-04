@@ -351,6 +351,7 @@ class WoodyTheme_Plugins_Options
             'woody_claims',
         ];
         $this->updateOption('duplicate_post_types_enabled', $duplicate_post_types_enabled);
+        update_option('duplicate_post_show_notice', false);
 
         $duplicate_post_roles = [
             'administrator',

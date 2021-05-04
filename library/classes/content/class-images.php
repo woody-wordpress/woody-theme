@@ -36,7 +36,7 @@ class WoodyTheme_Images
         add_filter('wp_handle_upload_prefilter', [$this, 'maxUploadSize']);
         add_filter('upload_mimes', [$this, 'uploadMimes'], 10, 1);
         add_filter('big_image_size_threshold', [$this, 'bigImageSizeThreshold'], 10, 4);
-        // add_filter('wp_handle_upload', [$this, 'convertFileToGeoJSON'], 100, 1);
+        add_filter('wp_handle_upload_overrides', [$this, 'handleOverridesForGeoJSON'], 10, 2);
     }
 
     public function bigImageSizeThreshold()
@@ -60,6 +60,15 @@ class WoodyTheme_Images
         $mime_types['geojson'] = 'text/plain';
 
         return $mime_types;
+    }
+
+    public function handleOverridesForGeoJSON($overrides, $file)
+    {
+        if ($file['type'] == "application/geo+json") {
+            $overrides['test_type'] = false;
+        }
+
+        return $overrides;
     }
 
     public function addImageSizes()
