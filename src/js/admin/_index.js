@@ -17,3 +17,4 @@ import './woody-tpl.js';
 import './ajax-load-options';
 import './ajax-load-layouts';
 import './edit-post-save-ajax';
+import './acf-wysiwyg';

@@ -32,10 +32,10 @@ function getAutoFocusSheetData($wrapper, $playlist_params = [])
     return $getter->getAutoFocusSheetData($wrapper, $playlist_params);
 }
 
-function getFocusBlockTitles($wrapper)
+function getBlockTitles($wrapper)
 {
     $tools = new WoodyTheme_WoodyProcessTools;
-    return $tools->getFocusBlockTitles($wrapper);
+    return $tools->getBlockTitles($wrapper);
 }
 
 function getProfilePreview($wrapper, $post)
