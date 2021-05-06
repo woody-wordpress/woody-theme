@@ -184,16 +184,11 @@ $('#post').each(function() {
     const selector = 'div[data-name="section_content"]>.acf-input>.acf-flexible-content>.values>.layout>.acf-fc-layout-controls';
 
     // Observe if a block is added to section and add move behavior to the new block
-    document.querySelectorAll('div[data-name="section_content"]>.acf-input>.acf-flexible-content>.values').forEach(section => {
-        let mutationObserver = new MutationObserver(mutationsList => {
-          if (mutationsList[0].addedNodes.length && mutationsList[0].addedNodes[0].classList.contains('layout')) {
-            const controls = mutationsList[0].addedNodes[0].querySelector('.acf-fc-layout-controls');
-            if (controls) {
-              createMoveBehavior(mutationsList[0].addedNodes[0].querySelector('.acf-fc-layout-controls'));
-            }
-          }
-        });
-        mutationObserver.observe(section, { childList: true });
+    acf.addAction('append', function( $el ){
+        if ($el.hasClass('layout') && $el.find('.acf-fc-layout-controls')) {
+            console.log($el, 'el');
+            createMoveBehavior($el.find('.acf-fc-layout-controls')[0]);
+        }
     });
 
     // Add move behavior to current blocks
