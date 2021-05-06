@@ -73,18 +73,14 @@ $('#post').each(function() {
           search: prevKey,
           replace: newKey,
           rename: ( name, value, search, replace ) => {
-              value = value.replace(prevSectionKey, newSectionKey);
-              if (prevSectionKey.indexOf('row') && prevKey.indexOf('row')) {
-                  var nth = 0;
-                  value = value.replace(/row-[0-9]+/g, function(match, pos, original) {
-                      nth++;
-                      return (nth === 2) ? newKey : match;
-                  });
-              } else {
-                  value = value.replace(prevKey, newKey);
-              }
+            value = value.replace(prevSectionKey, newSectionKey);
 
-              return value;
+            const indexOfFirstKey = value.indexOf(newSectionKey);
+            const oldValueSubstr = value.substr(indexOfFirstKey + newSectionKey.length);
+            const newValueSubstr = oldValueSubstr.replace(prevKey, newKey);
+
+            value = value.replace(oldValueSubstr, newValueSubstr);
+            return value;
           },
           append: ($el, $el2) => {
             if (last) $(last).after($el2);
@@ -163,9 +159,10 @@ $('#post').each(function() {
         const sectionLength = sections.length - 1;
         let isInSection = -1;
 
-        for(let i = 0; i < sectionLength; ++i) {
+        for (let i = 0; i < sectionLength; ++i) {
           const sectionTitle = sections[i].parentElement.querySelector('[data-name="bo_section_title"] input[type="text"]').value;
-          if (key.startsWith(`acf[field_5afd2c6916ecb][row-${i}]`)) isInSection = i;
+          const sectionIndex = sections[i].parentElement.parentElement.getAttribute('data-id');
+          if (key.startsWith(`acf[field_5afd2c6916ecb][${sectionIndex}]`)) isInSection = i;
           select.innerHTML += `<option value="${i}">${sectionTitle || i + 1}</option>`;
         }
 
@@ -186,7 +183,6 @@ $('#post').each(function() {
     // Observe if a block is added to section and add move behavior to the new block
     acf.addAction('append', function( $el ){
         if ($el.hasClass('layout') && $el.find('.acf-fc-layout-controls')) {
-            console.log($el, 'el');
             createMoveBehavior($el.find('.acf-fc-layout-controls')[0]);
         }
     });
