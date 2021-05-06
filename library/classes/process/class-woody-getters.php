@@ -219,19 +219,25 @@ class WoodyTheme_WoodyGetters
             'post_type' => 'woody_topic',
             'meta_query' => array(
                 'relation' => 'AND',
-                array(
-                    'key' => 'woody_topic_category',
-                    'value' => $feeds,
-                    'compare' => 'IN'
-                ),
-                array(
-                    'key' => 'woody_topic_publication',
-                    'value' => $time,
-                    'compare' => '>'
-                )
             ),
             'tax_query' => !empty($tax_query) ? $tax_query : ''
         ];
+
+        if (!empty($time)) {
+            $args['meta_query'][] = array(
+                'key' => 'woody_topic_publication',
+                'value' => $time,
+                'compare' => '>'
+            );
+        }
+
+        if ($feeds) {
+            $args['meta_query'][] = array(
+                'key' => 'woody_topic_category',
+                'value' => $feeds,
+                'compare' => 'IN'
+            );
+        }
 
         if ($wrapper['focused_sort'] == 'title') {
             $args['orderby'] = 'title';
@@ -615,25 +621,29 @@ class WoodyTheme_WoodyGetters
             'subtitle'  => !empty($item->woody_topic_blogname) ? $item->woody_topic_blogname : ''
         ];
 
-        if (!empty($item->woody_topic_img) && !$item->woody_topic_attachment) {
+        $woody_topic_img = get_field('woody_topic_img', $item->ID);
+        $woody_topic_attachment = get_field('woody_topic_attachment', $item->ID);
+        if (!empty($woody_topic_img) && !$woody_topic_attachment) {
             $data['img'] = [
-                'url' =>  'https://api.cloudly.space/resize/crop/%width%/%height%/75/' .  str_replace(array("+", "/"), array("-", "_"), base64_encode($item->woody_topic_img)) . '/image.jpg',
+                'url' =>  'https://api.cloudly.space/resize/crop/%width%/%height%/75/' .  str_replace(array("+", "/"), array("-", "_"), base64_encode($woody_topic_img)) . '/image.jpg',
                 'resizer' => true
             ];
-        } elseif (!empty($item->woody_topic_attachment)) {
+        } elseif (!empty($woody_topic_attachment)) {
             $data['img'] = [
-                'url' => !empty(wp_get_attachment_image_src($item->woody_topic_attachment)) ? wp_get_attachment_image_src($item->woody_topic_attachment)[0] : '',
+                'url' => !empty(wp_get_attachment_image_src($woody_topic_attachment)) ? wp_get_attachment_image_src($woody_topic_attachment)[0] : '',
                 'resizer' => true
             ];
         }
 
-        if (!empty($item->woody_topic_desc)) {
-            $data['description'] = strlen($item->woody_topic_desc) > 256 ? substr($item->woody_topic_desc, 0, 256) : $item->woody_topic_desc ;
+        $desc = get_field('woody_topic_desc', $item->ID);
+        if (!empty($desc)) {
+            $data['description'] = strlen($desc) > 256 ? substr($desc, 0, 256) : $desc ;
         }
 
-        if (!empty($item->woody_topic_url)) {
+        $url = get_field('woody_topic_url', $item->ID);
+        if (!empty($url)) {
             $data['link'] = [
-                'url' => !empty($item->woody_topic_url) ? $item->woody_topic_url : '',
+                'url' => $url,
                 'title' => __('Découvrir', 'woody-theme'),
                 'link_label' => __('Découvrir', 'woody-theme'),
                 'target' => '_blank',
