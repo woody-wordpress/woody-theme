@@ -33,6 +33,7 @@ class WoodyTheme_Commands
         \WP_CLI::add_command('woody_flush_cloudflare', [$this, 'flush_cloudflare']);
         \WP_CLI::add_command('woody_cache_warm', [$this, 'cache_warm']);
         \WP_CLI::add_command('woody_maintenance', [$this, 'maintenance']);
+        \WP_CLI::add_command('woody_maintenance_core', [$this, 'maintenance_core']);
     }
 
     public function flush()
@@ -101,6 +102,24 @@ class WoodyTheme_Commands
         }
     }
 
+    public function maintenance_core($args, $assoc_args)
+    {
+        $status = (current($args) == 'true') ? true : false;
+
+        $fs = new Filesystem();
+        if (!$fs->exists(WP_MAINTENANCE_DIR)) {
+            $fs->mkdir(WP_MAINTENANCE_DIR, 0775);
+        }
+
+        if ($status) {
+            $fs->dumpFile(WP_MAINTENANCE_DIR . '/all', date('Y-m-d H:i:s'));
+            output_success('woody_maintenance_core ON');
+        } else {
+            $fs->remove(WP_MAINTENANCE_DIR . '/all');
+            output_success('woody_maintenance_core OFF');
+        }
+    }
+
     public function flush_twig()
     {
         if (WP_ENV != 'dev' && !WOODY_TWIG_CACHE_DISABLE) {
@@ -111,13 +130,10 @@ class WoodyTheme_Commands
                 }
 
                 // Clear Twig Cache
-                $cleared = $this->rmdir(WP_TIMBER_DIR);
-
-                if ($cleared) {
-                    output_success("woody_flush_twig");
-                } else {
-                    output_warning("woody_flush_twig");
-                }
+                $cmd = sprintf("rm -rf %s", WP_TIMBER_DIR . '/*');
+                exec($cmd);
+                output_log($cmd);
+                output_success("woody_flush_twig");
             } catch (IOExceptionInterface $exception) {
                 output_warning("Une erreur est survenue au moment de la création de " . $exception->getPath());
             }
@@ -200,32 +216,5 @@ class WoodyTheme_Commands
         } else {
             output_success(sprintf('woody_flush_cloudflare : %s', WOODY_CLOUDFLARE_URL));
         }
-    }
-
-    private function rmdir($dir, $inside_only = true)
-    {
-        if (!file_exists($dir)) {
-            return true;
-        }
-
-        if (!is_dir($dir)) {
-            return unlink($dir);
-        }
-
-        foreach (scandir($dir) as $item) {
-            if ($item == '.' || $item == '..') {
-                continue;
-            }
-
-            if (!$this->rmdir($dir . DIRECTORY_SEPARATOR . $item, false)) {
-                return false;
-            }
-        }
-
-        if ($inside_only) {
-            return true;
-        }
-
-        return rmdir($dir);
     }
 }
