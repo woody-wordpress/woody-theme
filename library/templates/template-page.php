@@ -243,11 +243,13 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         // Compilation de l'en tête de page et du visuel et accroche pour les pages qui ne sont pas de type "accueil"
         if (!empty($page_type[0]) && $page_type[0]->slug != 'front_page') {
             $this->context['page_teaser'] = $this->compilers->formatPageTeaser($this->context);
-            $this->context['page_hero'] = $this->compilers->formatPageHero($this->context);
-            // Add class "has-hero" to body if page hero is here
-            if (!empty($this->context['page_hero'])) {
-                $this->context['body_class'] = $this->context['body_class'] . ' has-hero';
+            $page_hero = $this->compilers->formatPageHero($this->context);
+            if (!empty($page_hero)) {
+                $this->context['page_hero'] = $page_hero['view'];
+                $this->context['body_class'] = $this->context['body_class'] . ' has-hero'; // Add Class has-hero
+                $this->context['body_class'] = $this->context['body_class'] . ' has-' . $page_hero['data']['heading_woody_tpl']; // Add Class has-hero-block-tpl
             }
+            // Add class "has-hero" to body if page hero is here
         }
 
         // Si on est sur la page favoris, on ajoute un bouton pour l'impression
