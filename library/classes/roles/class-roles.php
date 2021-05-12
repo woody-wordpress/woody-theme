@@ -496,6 +496,12 @@ class WoodyTheme_Roles
                 'contributor' => true,
                 'translator' => true,
             ],
+            'woody_brokenlinks' => [
+                'administrator' => true,
+                'editor' => true,
+                'contributor' => false,
+                'translator' => false,
+            ],
             'woody_process_importer' => [
                 'administrator' => true,
                 'editor' => false,
@@ -505,12 +511,6 @@ class WoodyTheme_Roles
             'woody_process_cleaning' => [
                 'administrator' => true,
                 'editor' => false,
-                'contributor' => false,
-                'translator' => false,
-            ],
-            'woody_process_checker' => [
-                'administrator' => true,
-                'editor' => true,
                 'contributor' => false,
                 'translator' => false,
             ],
