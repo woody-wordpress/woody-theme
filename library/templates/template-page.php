@@ -185,8 +185,10 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
             // Si le module groupe est activé
             if (in_array('groups', $this->context['enabled_woody_options'])) {
+                // Instancier GroupQuotation peut importe les conditions, à partir du moment ou le module groups est activé
+                $groupQuotation = new GroupQuotation;
+
                 if ($trip_infos['the_price']['price_type'] == 'component_based') {
-                    $groupQuotation = new GroupQuotation;
                     $trip_infos['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price']);
                 } elseif ($trip_infos['the_price']['price_type'] == 'no_tariff') {
                     $trip_infos['the_price']['price'] = "Sans tarif";
