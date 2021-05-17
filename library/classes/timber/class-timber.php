@@ -33,9 +33,18 @@ if (!class_exists('Timber')) {
             }
 
             if (class_exists('\WP') && !defined('TIMBER_LOADED')) {
-                $woodyLibrary = new WoodyLibrary();
                 // Init Twig Instance
-                $twig_dirs = apply_filters('timber_locations', array(WOODY_THEME_DIR . '/views', WOODY_SUBTHEME_DIR . '/views', $woodyLibrary->getTemplatesDirname()));
+                $dirs = [WOODY_THEME_DIR . '/views', WOODY_SUBTHEME_DIR . '/views'];
+
+                $woodyLibrary = new WoodyLibrary();
+                $library_dirs = $woodyLibrary->getTemplatesDirname();
+                if (is_array($library_dirs)) {
+                    $dirs = array_merge($dirs, $library_dirs);
+                } else {
+                    $dirs[] = $library_dirs;
+                }
+
+                $twig_dirs = apply_filters('timber_locations', $dirs);
                 $twig_loader = new \Twig\Loader\FilesystemLoader($twig_dirs);
                 $twig_options = ['autoescape' => false];
                 if (!WOODY_TWIG_CACHE_DISABLE && WP_ENV != 'dev') {

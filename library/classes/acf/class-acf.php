@@ -848,8 +848,9 @@ class WoodyTheme_ACF
         $return = wp_cache_get('woody_tpls_components', 'woody');
         if (empty($return)) {
             $tplComponents = [];
-            $woodyLibrary = new WoodyLibrary();
-            $woodyComponents = $woodyLibrary->getComponents();
+            //$woodyLibrary = new WoodyLibrary();
+            //$woodyComponents = $woodyLibrary->getComponents();
+            $woodyComponents = getWoodyComponents();
 
             foreach ($woodyComponents as $key => $component) {
                 $display_options = '';
