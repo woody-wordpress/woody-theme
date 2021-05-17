@@ -302,7 +302,7 @@
                     "display": "block",
                     "sub_fields": [
                         {
-                            "key": "field_609011d3e05c7",
+                            "key": "field_5c77e7bd6cbd3",
                             "label": "Carte",
                             "name": "geo_map",
                             "type": "clone",
@@ -333,7 +333,7 @@
                     "display": "block",
                     "sub_fields": [
                         {
-                            "key": "field_5c77e7bd6cbd3",
+                            "key": "field_609011d3e05c7",
                             "label": "Socialwall",
                             "name": "socialwall",
                             "type": "clone",
