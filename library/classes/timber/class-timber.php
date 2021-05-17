@@ -40,6 +40,8 @@ if (!class_exists('Timber')) {
                 $library_dirs = $woodyLibrary->getTemplatesDirname();
                 if (is_array($library_dirs)) {
                     $dirs = array_merge($dirs, $library_dirs);
+                } else {
+                    $dirs[] = $library_dirs;
                 }
 
                 $twig_dirs = apply_filters('timber_locations', $dirs);
