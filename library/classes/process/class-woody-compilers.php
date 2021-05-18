@@ -86,7 +86,7 @@ class WoodyTheme_WoodyCompilers
             $the_items['display_img'] = (!empty($wrapper['display_img'])) ? $wrapper['display_img'] : false;
             $the_items['default_marker'] = (!empty($wrapper['default_marker'])) ? $wrapper['default_marker'] : '';
             $the_items['visual_effects'] = $wrapper['visual_effects'];
-            $the_items['display_index'] = $wrapper['display_index'];
+            $the_items['display_index'] = (!empty($wrapper['display_index'])) ? $wrapper['display_index'] : false;
 
             // Responsive stuff
             if (!empty($wrapper['mobile_behaviour'])) {
