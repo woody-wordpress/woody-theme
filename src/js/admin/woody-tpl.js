@@ -6,7 +6,8 @@ $('#post').each(function() {
         'woody_claims',
         'woody_rdbk_leaflets',
         'woody_model',
-        'tourtrip_step'
+        'tourtrip_step',
+        'woody_section_model'
     ];
 
     if (accepted_post.includes($('#post_type').val())) {
