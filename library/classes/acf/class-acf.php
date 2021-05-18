@@ -848,8 +848,9 @@ class WoodyTheme_ACF
         $return = wp_cache_get('woody_tpls_components', 'woody');
         if (empty($return)) {
             $tplComponents = [];
-            $woodyLibrary = new WoodyLibrary();
-            $woodyComponents = $woodyLibrary->getComponents();
+            //$woodyLibrary = new WoodyLibrary();
+            //$woodyComponents = $woodyLibrary->getComponents();
+            $woodyComponents = getWoodyComponents();
 
             foreach ($woodyComponents as $key => $component) {
                 $display_options = '';
@@ -900,42 +901,33 @@ class WoodyTheme_ACF
     public function generateLayoutsTransients()
     {
         add_filter('user_can_richedit', [$this, 'addUserRichedit']);
-        $field = acf_get_field("field_5b043f0525968");
+        $user = wp_get_current_user();
+        $user->add_cap('upload_files');
 
+        $field = acf_get_field("field_5b043f0525968");
         $field['name'] = "#rowindex-name#";
         $field['display_layouts'] = true;
 
-        ob_start();
-        do_action('acf/render_field', $field);
-        $html_str = ob_get_contents();
-        ob_end_clean();
+        foreach($field['layouts'] as $key => $layout) {
+            $new_field = $field;
+            $new_field['layouts'] = [$layout];
 
-        $index = 1;
-        $keys = array_keys($field['layouts']);
-        foreach ($field['layouts'] as $layout) {
-            $return = '';
-            $layout_start = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="' . $layout['name'] . '">');
-            if ($layout['name'] != "tabs_group") {
-                $layout_end = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="', $layout_start+1);
-                $layout_length = $layout_end - $layout_start;
-                $return =  substr($html_str, $layout_start, $layout_length);
+            ob_start();
+            do_action('acf/render_field', $new_field);
+            $html_str = ob_get_contents();
+            ob_end_clean();
 
-                $html_str = substr_replace($html_str, "", $layout_start, $layout_length);
-            } else {
-                if (!empty($field['layouts'][$keys[$index]]) && !empty($field['layouts'][$keys[$index]]['name'])) {
-                    // error on layout length
-                    $layout_length = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="' . $field['layouts'][$keys[$index]]['name'] . '">') - $layout_start;
-                    $return = substr($html_str, $layout_start, $layout_length);
-                } else {
-                    $return = substr($html_str, $layout_start);
-                }
-            }
-            wp_cache_set('layout-' . $layout['name'], $return);
+            $clone_pos = strpos($html_str, '<div class="clones">') + 20;
+            $html_str = substr_replace($html_str, "", 0, $clone_pos);
+            $valuespos = strrpos($html_str, '<div class="values">');
+            $html_str = substr_replace($html_str, "", $valuespos);
+            $html_str = substr($html_str, 0, -10);
 
-            $index++;
+            wp_cache_set('layout-' . $layout['name'], $html_str);
         }
 
         remove_filter('user_can_richedit', [$this, 'addUserRichedit']);
+        $user->remove_cap('upload_files');
     }
 
     public function addUserRichedit()
@@ -953,46 +945,36 @@ class WoodyTheme_ACF
         if (!empty($transient)) {
             $return = $transient;
         } else {
+            add_filter('user_can_richedit', [$this, 'addUserRichedit']);
+            $user = wp_get_current_user();
+            $user->add_cap('upload_files');
+
             // field_5b043f0525968 == "section_content"
             $field = acf_get_field($key);
-
             $field['name'] = "#rowindex-name#";
             $field['display_layouts'] = true;
+
+            foreach ($field['layouts'] as $key => $layout) {
+                if ($layout['name'] != $layout_name) {
+                    unset($field['layouts'][$key]);
+                }
+            }
 
             ob_start();
             do_action('acf/render_field', $field);
             $html_str = ob_get_contents();
             ob_end_clean();
 
-            $index = 1;
-            $keys = array_keys($field['layouts']);
-            foreach ($field['layouts'] as $layout) {
-                if ($layout['name'] == $layout_name) {
-                    $return = '';
-                    $layout_start = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="' . $layout['name'] . '">');
-                    if ($layout['name'] != "tabs_group") {
-                        $layout_end = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="', $layout_start+1);
-                        $layout_length = $layout_end - $layout_start;
-                        $return =  substr($html_str, $layout_start, $layout_length);
+            $clone_pos = strpos($html_str, '<div class="clones">') + 20;
+            $html_str = substr_replace($html_str, "", 0, $clone_pos);
+            $valuespos = strrpos($html_str, '<div class="values">');
+            $html_str = substr_replace($html_str, "", $valuespos);
+            // remove last tag
+            $return = substr($html_str, 0, -10);
+            wp_cache_set('layout-' . $layout_name, $return);
 
-                        $html_str = substr_replace($html_str, "", $layout_start, $layout_length);
-                    } else {
-                        if (!empty($field['layouts'][$keys[$index]]) && !empty($field['layouts'][$keys[$index]]['name'])) {
-                            // error on layout length
-                            $layout_length = strpos($html_str, '<div class="layout acf-clone" data-id="acfcloneindex" data-layout="' . $field['layouts'][$keys[$index]]['name'] . '">') - $layout_start;
-                            $return = substr($html_str, $layout_start, $layout_length);
-                        } else {
-                            $return = substr($html_str, $layout_start);
-                        }
-                    }
-
-                    wp_cache_set('layout-' . $layout['name'], $return);
-
-                    break;
-                }
-
-                $index++;
-            }
+            remove_filter('user_can_richedit', [$this, 'addUserRichedit']);
+            $user->remove_cap('upload_files');
         }
 
         wp_send_json($return);

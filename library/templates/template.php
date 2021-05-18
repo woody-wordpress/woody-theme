@@ -55,7 +55,7 @@ abstract class WoodyTheme_TemplateAbstract
     public function timberCompileData($data)
     {
         $this->setGlobals(); //TODO: To test if we can move this on construct
-        $data['globals'] = $this->globals;
+        $data['globals'] = apply_filters('woody_timber_compile_globals', $this->globals);
         return $data;
     }
 

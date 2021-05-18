@@ -86,7 +86,7 @@ class WoodyTheme_WoodyCompilers
             $the_items['display_img'] = (!empty($wrapper['display_img'])) ? $wrapper['display_img'] : false;
             $the_items['default_marker'] = (!empty($wrapper['default_marker'])) ? $wrapper['default_marker'] : '';
             $the_items['visual_effects'] = $wrapper['visual_effects'];
-            $the_items['display_index'] = $wrapper['display_index'];
+            $the_items['display_index'] = (!empty($wrapper['display_index'])) ? $wrapper['display_index'] : false;
 
             // Responsive stuff
             if (!empty($wrapper['mobile_behaviour'])) {
@@ -123,6 +123,8 @@ class WoodyTheme_WoodyCompilers
                     }
                 }
             }
+
+            $the_items = apply_filters('woody_format_focuses_data', $the_items, $wrapper);
 
             $return = !empty($wrapper['woody_tpl']) ? \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items) : \Timber::compile($twigPaths['blocks-focus-tpl_103'], $the_items) ;
         }
@@ -660,7 +662,10 @@ class WoodyTheme_WoodyCompilers
             $page_hero['classes'] = (!empty($page_hero['the_classes'])) ? implode(' ', $page_hero['the_classes']) : '';
 
             $page_hero = apply_filters('woody_custom_page_hero', $page_hero, $context);
-            return \Timber::compile($context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
+            return [
+                'view' => \Timber::compile($context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero),
+                'data' => $page_hero,
+            ];
         } else {
             return '';
         }
