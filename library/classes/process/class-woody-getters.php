@@ -573,10 +573,8 @@ class WoodyTheme_WoodyGetters
         if (!empty($sheet['bordereau'])) {
             if ($sheet['bordereau'] === 'HOT' or $sheet['bordereau'] == 'HPA') {
                 $rating = [];
-                if (!empty($sheet['ratings'])) {
-                    for ($i = 0; $i < $sheet['ratings'][0]['value']; $i++) {
-                        $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
-                    }
+                for ($i = 0; $i < $sheet['ratings'][0]['value']; $i++) {
+                    $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
                 }
                 if (!empty($wrapper['display_elements']) && is_array($wrapper['display_elements'])) {
                     if (in_array('sheet_rating', $wrapper['display_elements'])) {
@@ -783,12 +781,12 @@ class WoodyTheme_WoodyGetters
         $data['link']['url'] = $sheet_url;
         $data['link']['target'] = !empty($sheet['targetBlank']) ? '_blank' : '';
 
-        // TODO : Récupérer les infos de réservation de la fiche
-        if ($sheet['booking']['central']) {
+        //TODO: Récupérer les infos de réservation de la fiche
+        /*if ($sheet['booking']['central']) {
             $data['booking']['prefix'] = 'TODO';
             $data['booking']['price'] = 'TODO';
             $data['booking']['link'] = 'TODO';
-        }
+        }*/
 
         // Display Imgs
         if (!empty($sheet['allImgs'])) {

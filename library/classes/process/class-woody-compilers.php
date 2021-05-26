@@ -137,8 +137,9 @@ class WoodyTheme_WoodyCompilers
         // Sheet item
         $data = $this->getter->getManualFocusMinisheetData($wrapper);
 
+
         // Block titles
-        $data['block_titles'] = $this->tools->getBlockTitles($wrapper);
+        $data['block_titles'] = $this->tools->getBlockTitles($wrapper, 'sheets_block_title_');
         $data['block_titles']['display_options'] = $this->tools->getDisplayOptions($wrapper);
 
         // Display options
