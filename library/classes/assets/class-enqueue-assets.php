@@ -45,7 +45,7 @@ class WoodyTheme_Enqueue_Assets
 
     protected function registerHooks()
     {
-        add_action('wp', [$this, 'init']);
+        add_action('wp', [$this, 'init']); // Use Hook to have global post context
         add_action('woody_theme_update', [$this, 'woodyThemeUpdate']);
         add_action('wp_enqueue_scripts', [$this, 'enqueueLibraries']);
         add_action('wp_enqueue_scripts', [$this, 'enqueueAssets']);
