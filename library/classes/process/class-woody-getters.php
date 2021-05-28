@@ -91,7 +91,7 @@ class WoodyTheme_WoodyGetters
 
                 // La donnée de la vignette est saisie en backoffice
                 if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
-                    $the_items['items'][$key] = $this->getCustomPreview($item_wrapper['custom_content'], $wrapper);
+                    $the_items['items'][$key] = $this->getCustomPreview($item_wrapper['custom_content'], $wrapper, $item_wrapper['content_selection_type']);
                 // La donnée de la vignette correspond à un post sélectionné
                 } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
                     $item = $item_wrapper['existing_content'];
@@ -118,7 +118,6 @@ class WoodyTheme_WoodyGetters
         if (!empty($the_items['items']) && is_array($the_items['items']) && $wrapper['focused_sort'] == 'random') {
             shuffle($the_items['items']);
         }
-
         return $the_items;
     }
 
@@ -411,9 +410,10 @@ class WoodyTheme_WoodyGetters
      * @return   data - Un tableau de données
      *
      */
-    public function getCustomPreview($item, $wrapper = null)
+    public function getCustomPreview($item, $wrapper = null, $content_type = null)
     {
         $data = [];
+        $remove_ellipsis = ((!empty($content_type)) && ($content_type == 'custom_content')) ? true : false;
         $data = [
             'title' => (!empty($item['title'])) ? $item['title'] : '',
             'pretitle' => (!empty($item['pretitle'])) ? $item['pretitle'] : '',
@@ -430,6 +430,7 @@ class WoodyTheme_WoodyGetters
             ] : '',
             'description' => (!empty($item['description'])) ? $item['description'] : '',
             'ellipsis' => 999,
+            'remove_ellipsis' => $remove_ellipsis,
             'location' => [
                 'lat' => !empty($item['latitude']) ? str_replace(',', '.', $item['latitude']) : '',
                 'lng' => !empty($item['longitude']) ? str_replace(',', '.', $item['longitude']) : ''
