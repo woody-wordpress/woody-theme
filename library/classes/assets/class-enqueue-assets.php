@@ -18,10 +18,7 @@ class WoodyTheme_Enqueue_Assets
 
     public function __construct()
     {
-        $this->siteConfig = $this->setSiteConfig();
-        $this->globalScriptString = $this->setGlobalScriptString();
         $this->assetPaths = $this->setAssetPaths();
-
         $this->registerHooks();
     }
 
@@ -48,6 +45,7 @@ class WoodyTheme_Enqueue_Assets
 
     protected function registerHooks()
     {
+        add_action('wp', [$this, 'init']);
         add_action('woody_theme_update', [$this, 'woodyThemeUpdate']);
         add_action('wp_enqueue_scripts', [$this, 'enqueueLibraries']);
         add_action('wp_enqueue_scripts', [$this, 'enqueueAssets']);
@@ -64,6 +62,12 @@ class WoodyTheme_Enqueue_Assets
 
         //plugin deferred labJS is activated
         add_action('wdjs_deferred_script_wait', [$this, 'labjsAfterMyScript'], 10, 2);
+    }
+
+    public function init()
+    {
+        $this->siteConfig = apply_filters('woody_theme_siteconfig', []);
+        $this->globalScriptString = $this->setGlobalScriptString();
     }
 
     // print inline scripts after specified scripts (labJS only)
@@ -386,13 +390,6 @@ class WoodyTheme_Enqueue_Assets
         }
 
         return $url;
-    }
-
-    protected function setSiteConfig()
-    {
-        // Added global vars
-        $siteConfig = apply_filters('woody_theme_siteconfig', []);
-        return $siteConfig;
     }
 
     protected function setAssetPaths()
