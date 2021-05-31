@@ -247,7 +247,8 @@ class WoodyTheme_ACF
                     $parent_name='';
                     if ($display_parent_tag_name) {
                         //Get the root ancestor of a term
-                        $root_parent_term_id = end(get_ancestors($term->term_id, $taxonomy->name));
+                        $ancestors = get_ancestors($term->term_id, $taxonomy->name);
+                        $root_parent_term_id = end($ancestors);
                         if (!empty($root_parent_term_id)) {
                             $root_parent_term = get_term($root_parent_term_id);
                             //Add root parent name
@@ -848,8 +849,9 @@ class WoodyTheme_ACF
         $return = wp_cache_get('woody_tpls_components', 'woody');
         if (empty($return)) {
             $tplComponents = [];
-            $woodyLibrary = new WoodyLibrary();
-            $woodyComponents = $woodyLibrary->getComponents();
+            //$woodyLibrary = new WoodyLibrary();
+            //$woodyComponents = $woodyLibrary->getComponents();
+            $woodyComponents = getWoodyComponents();
 
             foreach ($woodyComponents as $key => $component) {
                 $display_options = '';

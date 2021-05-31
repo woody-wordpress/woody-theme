@@ -325,6 +325,37 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_609011d3e05c6": {
+                    "key": "layout_609011d3e05c6",
+                    "name": "socialwall",
+                    "label": "Socialwall",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_609011d3e05c7",
+                            "label": "Socialwall",
+                            "name": "socialwall",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b5b2fbc3460d"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Ajouter un bloc",
@@ -347,7 +378,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "Ce champ est un allégé de groupe section utilisé dans les groupes d'onglets et de slides",
-    "modified": 1551363903
+    "modified": 1620054923
 }
