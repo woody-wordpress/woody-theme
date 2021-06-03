@@ -33,8 +33,8 @@ class WoodyTheme_CDN
 
     public function timberRender($render)
     {
-        $render = preg_replace('/("|\')\/app\/(dist|themes|uploads|plugins)\/([^.]*).(jpg|jpeg|png|js|css|gif|svg|woff|woff2|ttf|eot|mp3|m4a|mp4|wav|ogg|webm|txt|bmp|rtf|flv|swf|ico)/', '$1https://' . WOODY_CLOUDFLARE_URL . '/app/$2/$3.$4', $render);
-        $render = preg_replace('/http(s?):\/\/([a-zA-Z0-9-_.]*)\/app\/(dist|themes|uploads|plugins)\/([^.]*).(jpg|jpeg|png|js|css|gif|svg|woff|woff2|ttf|eot|mp3|m4a|mp4|wav|ogg|webm|txt|bmp|rtf|flv|swf|ico)/', 'https://' . WOODY_CLOUDFLARE_URL . '/app/$3/$4.$5', $render);
+        $render = preg_replace('/("|\')\/app\/(dist|themes|uploads|plugins)\/([^"\' ]*)/', '$1https://' . WOODY_CLOUDFLARE_URL . '/app/$2/$3', $render);
+        $render = preg_replace('/http(s?):\/\/([a-zA-Z0-9-_.]*)\/app\/(dist|themes|uploads|plugins)\/([^"\' ]*)/', 'https://' . WOODY_CLOUDFLARE_URL . '/app/$3/$4', $render);
         $render = preg_replace('/http(s?):\/\/([a-zA-Z0-9-_.]*)\/wp\/wp-includes\/([^"\' ]*)/', 'https://' . WOODY_CLOUDFLARE_URL . '/wp/wp-includes/$3', $render);
         return $render;
     }
