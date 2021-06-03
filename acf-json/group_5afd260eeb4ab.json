@@ -22,7 +22,8 @@
         "hide_collapse": 0,
         "collapse_all_repeater": 1,
         "btn-icon-only": 0,
-        "sub_fields": [{
+        "sub_fields": [
+            {
                 "key": "field_5b0d1dc8907e7",
                 "label": "Titre administration",
                 "name": "bo_section_title",
@@ -50,7 +51,7 @@
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "",
+                    "width": "25",
                     "class": "",
                     "id": ""
                 },
@@ -715,122 +716,6 @@
                 "max": ""
             },
             {
-                "key": "field_5f19a1ef8e102",
-                "label": "Plus d'options",
-                "name": "",
-                "type": "accordion",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "open": 0,
-                "multi_expand": 1,
-                "endpoint": 0
-            },
-            {
-                "key": "field_5f19a154a4ee3",
-                "label": "Masquer la section",
-                "name": "hide_section",
-                "type": "true_false",
-                "instructions": "Permet de masquer temporairement une section (brouillon)",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "30",
-                    "class": "",
-                    "id": ""
-                },
-                "message": "",
-                "default_value": 0,
-                "ui": 1,
-                "ui_on_text": "",
-                "ui_off_text": ""
-            },
-            {
-                "key": "field_5ed7a10730085",
-                "label": "Afficher dans le sommaire",
-                "name": "display_in_summary",
-                "type": "true_false",
-                "instructions": "Affiche une ancre vers cette section si un bloc sommaire a été ajouté à la page",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "40",
-                    "class": "",
-                    "id": ""
-                },
-                "message": "",
-                "default_value": 0,
-                "ui": 1,
-                "ui_on_text": "",
-                "ui_off_text": ""
-            },
-            {
-                "key": "field_5ed7a18630086",
-                "label": "Titre pour le sommaire",
-                "name": "section_summary_title",
-                "type": "text",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": [
-                    [{
-                        "field": "field_5ed7a10730085",
-                        "operator": "==",
-                        "value": "1"
-                    }]
-                ],
-                "wrapper": {
-                    "width": "15",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
-            },
-            {
-                "key": "field_5f509ba3b8d5a",
-                "label": "Class css",
-                "name": "section_class",
-                "type": "text",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "15",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
-            },
-            {
-                "key": "field_5f19a252decfd",
-                "label": "FIN",
-                "name": "",
-                "type": "accordion",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "open": 0,
-                "multi_expand": 0,
-                "endpoint": 1
-            },
-            {
                 "key": "field_5b051c3b6717b",
                 "label": "En-tête de section",
                 "name": "",
@@ -839,7 +724,7 @@
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "",
+                    "width": "25",
                     "class": "",
                     "id": ""
                 },
@@ -1229,6 +1114,121 @@
                         "return_format": "value"
                     }
                 ]
+            },
+            {
+                "key": "field_5e68Zre2f2t0a",
+                "label": "FIN",
+                "name": "",
+                "type": "accordion",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "open": 0,
+                "multi_expand": 0,
+                "endpoint": 1
+            },
+            {
+                "key": "field_5f19a1ef8e102",
+                "label": "Plus d'options",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "25",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5f19a154a4ee3",
+                "label": "Masquer la section",
+                "name": "hide_section",
+                "type": "true_false",
+                "instructions": "Permet de masquer temporairement une section (brouillon)",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "30",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5ed7a10730085",
+                "label": "Afficher dans le sommaire",
+                "name": "display_in_summary",
+                "type": "true_false",
+                "instructions": "Affiche une ancre vers cette section si un bloc sommaire a été ajouté à la page",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "40",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5ed7a18630086",
+                "label": "Titre pour le sommaire",
+                "name": "section_summary_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [{
+                        "field": "field_5ed7a10730085",
+                        "operator": "==",
+                        "value": "1"
+                    }]
+                ],
+                "wrapper": {
+                    "width": "15",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5f509ba3b8d5a",
+                "label": "Class css",
+                "name": "section_class",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "15",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
             }
         ]
     }],
