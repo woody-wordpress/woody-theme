@@ -31,7 +31,7 @@
 
 // Focus basic style
 $focus-shadow: 0 0 0 2px rgba(lighten($primary-color, 10%), .5) !default;
-
+/*
 .focus-keyboard {
     border-color: inherit;
     box-shadow: $focus-shadow;
@@ -55,3 +55,4 @@ textarea {
         @extend .focus-keyboard;
     }
 }
+*/

@@ -176,7 +176,15 @@ class WoodyTheme_WoodyProcess
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
             case 'free_text':
+                $layout['block_titles'] = $this->tools->getBlockTitles($layout, '', 'generic_');
                 $layout['text'] = $this->tools->replacePattern($layout['text'], get_the_ID());
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            break;
+            case 'call_to_action':
+                $opts = [
+                    'hide_description' => true,
+                ];
+                $layout['block_titles'] = $this->tools->getBlockTitles($layout, '', 'generic_', $opts);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
             case 'quote':
@@ -525,13 +533,22 @@ class WoodyTheme_WoodyProcess
                     $display['classes'] .=  ' ' . $section['section_class'];
                 }
 
+                // On récupère le titre du sommaire et on le formate pour être un id
+                if (!empty($section['display_in_summary']) && (!empty($section['section_summary_title']))) {
+                    $summary_id = sanitize_title($section['section_summary_title']);
+                }
+
                 // On ajoute les 3 parties compilées d'une section + ses paramètres d'affichage
                 // puis on compile le tout dans le template de section Woody
                 $the_section = [
                     'header' => $the_header,
                     'layout' => $the_layout,
-                    'display' => $display,
+                    'display' => $display
                 ];
+
+                if (!empty($summary_id)) {
+                    $the_section['summary_id'] = $summary_id;
+                }
                 if (!empty($section['section_banner'])) {
                     foreach ($section['section_banner'] as $banner) {
                         $the_section[$banner] = $this->tools->getSectionBannerFiles($banner);

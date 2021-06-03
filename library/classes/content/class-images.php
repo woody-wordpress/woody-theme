@@ -36,7 +36,7 @@ class WoodyTheme_Images
         add_filter('wp_handle_upload_prefilter', [$this, 'maxUploadSize']);
         add_filter('upload_mimes', [$this, 'uploadMimes'], 10, 1);
         add_filter('big_image_size_threshold', [$this, 'bigImageSizeThreshold'], 10, 4);
-        // add_filter('wp_handle_upload', [$this, 'convertFileToGeoJSON'], 100, 1);
+        add_filter('wp_handle_upload_overrides', [$this, 'handleOverridesForGeoJSON'], 10, 2);
     }
 
     public function bigImageSizeThreshold()
@@ -60,6 +60,15 @@ class WoodyTheme_Images
         $mime_types['geojson'] = 'text/plain';
 
         return $mime_types;
+    }
+
+    public function handleOverridesForGeoJSON($overrides, $file)
+    {
+        if ($file['type'] == "application/geo+json") {
+            $overrides['test_type'] = false;
+        }
+
+        return $overrides;
     }
 
     public function addImageSizes()
@@ -372,13 +381,11 @@ class WoodyTheme_Images
 
     public function addAttachment($attachment_id)
     {
-        if (pll_get_post_language($attachment_id) == PLL_DEFAULT_LANG) {
-            // Added attachment_types
-            wp_set_object_terms($attachment_id, 'Média ajouté manuellement', 'attachment_types', false);
+        // Added attachment_types
+        wp_set_object_terms($attachment_id, 'Média ajouté manuellement', 'attachment_types', false);
 
-            // Duplicate all medias
-            $this->saveAttachment($attachment_id);
-        }
+        // Duplicate all medias
+        $this->saveAttachment($attachment_id);
     }
 
     public function deleteAttachment($attachment_id)
@@ -416,34 +423,21 @@ class WoodyTheme_Images
     public function saveAttachment($attachment_id)
     {
         if (wp_attachment_is_image($attachment_id)) {
-
-            // Only if current edit post is default (FR)
-            $languages = pll_languages_list();
+            $translations = pll_get_post_translations($attachment_id);
             $current_lang = pll_get_post_language($attachment_id);
 
-            if ($current_lang == PLL_DEFAULT_LANG) {
-                foreach ($languages as $lang) {
-                    if ($lang == PLL_DEFAULT_LANG) {
-                        continue;
-                    }
+            $languages = pll_languages_list();
+            foreach ($languages as $lang) {
 
-                    $t_attachment_id = pll_get_post($attachment_id, $lang);
-                    if (empty($t_attachment_id)) {
-                        // Duplicate media with Polylang Method
-                        $t_attachment_id = apply_filters('woody_pll_create_media_translation', $attachment_id, $lang);
-                    }
-
-                    // Sync Meta and fields
-                    if (!empty($t_attachment_id)) {
-                        $this->syncAttachmentMetadata($attachment_id, $t_attachment_id);
-                    }
+                // Duplicate media with Polylang Method
+                if (!array_key_exists($lang, $translations)) {
+                    $t_attachment_id = apply_filters('woody_pll_create_media_translation', $attachment_id, $lang);
+                } else {
+                    $t_attachment_id = $translations[$lang];
                 }
-            } else {
-                $t_attachment_id = $attachment_id;
-                $attachment_id = pll_get_post($t_attachment_id, PLL_DEFAULT_LANG);
 
                 // Sync Meta and fields
-                if (!empty($attachment_id)) {
+                if (!empty($t_attachment_id) && $current_lang != $lang) {
                     $this->syncAttachmentMetadata($attachment_id, $t_attachment_id);
                 }
             }
@@ -581,28 +575,34 @@ class WoodyTheme_Images
 
                 if (!empty($metadata['image_meta']['keywords'])) {
                     $terms_attachment_categories = get_terms('attachment_categories', ['hide_empty' => false]);
-                    foreach ($terms_attachment_categories as $term_attachment_categories) {
-                        foreach ($metadata['image_meta']['keywords'] as $keyword) {
-                            if (sanitize_title($keyword) == $term_attachment_categories->slug) {
-                                wp_set_object_terms($attachment_id, $term_attachment_categories->slug, 'attachment_categories', true);
+                    if (!empty($terms_attachment_categories)) {
+                        foreach ($terms_attachment_categories as $term_attachment_categories) {
+                            foreach ($metadata['image_meta']['keywords'] as $keyword) {
+                                if (sanitize_title($keyword) == $term_attachment_categories->slug) {
+                                    wp_set_object_terms($attachment_id, $term_attachment_categories->slug, 'attachment_categories', true);
+                                }
                             }
                         }
                     }
 
                     $terms_themes = get_terms('themes', ['hide_empty' => false]);
-                    foreach ($terms_themes as $term_themes) {
-                        foreach ($metadata['image_meta']['keywords'] as $keyword) {
-                            if (sanitize_title($keyword) == $term_themes->slug) {
-                                wp_set_object_terms($attachment_id, $term_themes->slug, 'themes', true);
+                    if (!empty($terms_themes)) {
+                        foreach ($terms_themes as $term_themes) {
+                            foreach ($metadata['image_meta']['keywords'] as $keyword) {
+                                if (sanitize_title($keyword) == $term_themes->slug) {
+                                    wp_set_object_terms($attachment_id, $term_themes->slug, 'themes', true);
+                                }
                             }
                         }
                     }
 
                     $terms_seasons = get_terms('seasons', ['hide_empty' => false]);
-                    foreach ($terms_seasons as $term_seasons) {
-                        foreach ($metadata['image_meta']['keywords'] as $keyword) {
-                            if (sanitize_title($keyword) == $term_seasons->slug) {
-                                wp_set_object_terms($attachment_id, $term_seasons->slug, 'seasons', true);
+                    if (!empty($terms_seasons)) {
+                        foreach ($terms_seasons as $term_seasons) {
+                            foreach ($metadata['image_meta']['keywords'] as $keyword) {
+                                if (sanitize_title($keyword) == $term_seasons->slug) {
+                                    wp_set_object_terms($attachment_id, $term_seasons->slug, 'seasons', true);
+                                }
                             }
                         }
                     }

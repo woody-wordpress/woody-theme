@@ -91,7 +91,7 @@ class WoodyTheme_WoodyGetters
 
                 // La donnée de la vignette est saisie en backoffice
                 if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
-                    $the_items['items'][$key] = $this->getCustomPreview($item_wrapper['custom_content'], $wrapper);
+                    $the_items['items'][$key] = $this->getCustomPreview($item_wrapper['custom_content'], $wrapper, $item_wrapper['content_selection_type']);
                 // La donnée de la vignette correspond à un post sélectionné
                 } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
                     $item = $item_wrapper['existing_content'];
@@ -118,7 +118,6 @@ class WoodyTheme_WoodyGetters
         if (!empty($the_items['items']) && is_array($the_items['items']) && $wrapper['focused_sort'] == 'random') {
             shuffle($the_items['items']);
         }
-
         return $the_items;
     }
 
@@ -219,19 +218,25 @@ class WoodyTheme_WoodyGetters
             'post_type' => 'woody_topic',
             'meta_query' => array(
                 'relation' => 'AND',
-                array(
-                    'key' => 'woody_topic_category',
-                    'value' => $feeds,
-                    'compare' => 'IN'
-                ),
-                array(
-                    'key' => 'woody_topic_publication',
-                    'value' => $time,
-                    'compare' => '>'
-                )
             ),
             'tax_query' => !empty($tax_query) ? $tax_query : ''
         ];
+
+        if (!empty($time)) {
+            $args['meta_query'][] = array(
+                'key' => 'woody_topic_publication',
+                'value' => $time,
+                'compare' => '>'
+            );
+        }
+
+        if ($feeds) {
+            $args['meta_query'][] = array(
+                'key' => 'woody_topic_category',
+                'value' => $feeds,
+                'compare' => 'IN'
+            );
+        }
 
         if ($wrapper['focused_sort'] == 'title') {
             $args['orderby'] = 'title';
@@ -299,6 +304,9 @@ class WoodyTheme_WoodyGetters
             }
             if (in_array('description', $wrapper['display_elements'])) {
                 $data['description'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($item, 'focus_description', $item, 'field_5b2bbbfaec6b2'), $item->ID);
+            }
+            if (in_array('created', $wrapper['display_elements'])) {
+                $data['created'] = get_the_date('', $item->ID);
             }
             if (in_array('price', $wrapper['display_elements'])) {
                 $price_type = get_field('the_price_price_type', $item->ID);
@@ -402,9 +410,10 @@ class WoodyTheme_WoodyGetters
      * @return   data - Un tableau de données
      *
      */
-    public function getCustomPreview($item, $wrapper = null)
+    public function getCustomPreview($item, $wrapper = null, $content_type = null)
     {
         $data = [];
+        $remove_ellipsis = ((!empty($content_type)) && ($content_type == 'custom_content')) ? true : false;
         $data = [
             'title' => (!empty($item['title'])) ? $item['title'] : '',
             'pretitle' => (!empty($item['pretitle'])) ? $item['pretitle'] : '',
@@ -413,13 +422,15 @@ class WoodyTheme_WoodyGetters
             'woody_icon' => (!empty($item['woody_icon'])) ? $item['woody_icon'] : '',
             'icon_img' => (!empty($item['icon_img']['url'])) ? [
                 'sizes' => [
-                    'thumbnail' => $item['icon_img']['sizes']['medium']
+                    'thumbnail' => $item['icon_img']['sizes']['medium'],
+                    'ratio_free' => $item['icon_img']['sizes']['ratio_free']
                 ],
                 'alt' =>  $item['icon_img']['alt'],
 
             ] : '',
             'description' => (!empty($item['description'])) ? $item['description'] : '',
             'ellipsis' => 999,
+            'remove_ellipsis' => $remove_ellipsis,
             'location' => [
                 'lat' => !empty($item['latitude']) ? str_replace(',', '.', $item['latitude']) : '',
                 'lng' => !empty($item['longitude']) ? str_replace(',', '.', $item['longitude']) : ''
@@ -579,7 +590,7 @@ class WoodyTheme_WoodyGetters
         $data['location']['lng'] = (!empty($sheet['gps'])) ? $sheet['gps']['longitude'] : '';
 
         // Parcourir tout le tableau de dates et afficher la 1ère date non passée
-        if (!empty($sheet['dates'])) {
+        if ($sheet['bordereau'] == 'FMA' && !empty($sheet['dates'])) {
             $today = time();
             foreach ($sheet['dates'] as $date) {
                 $enddate= strtotime($date['end']['endDate']);
@@ -611,25 +622,29 @@ class WoodyTheme_WoodyGetters
             'subtitle'  => !empty($item->woody_topic_blogname) ? $item->woody_topic_blogname : ''
         ];
 
-        if (!empty($item->woody_topic_img) && !$item->woody_topic_attachment) {
+        $woody_topic_img = get_field('woody_topic_img', $item->ID);
+        $woody_topic_attachment = get_field('woody_topic_attachment', $item->ID);
+        if (!empty($woody_topic_img) && !$woody_topic_attachment) {
             $data['img'] = [
-                'url' =>  'https://api.cloudly.space/resize/crop/%width%/%height%/75/' .  str_replace(array("+", "/"), array("-", "_"), base64_encode($item->woody_topic_img)) . '/image.jpg',
+                'url' =>  'https://api.cloudly.space/resize/crop/%width%/%height%/75/' .  str_replace(array("+", "/"), array("-", "_"), base64_encode($woody_topic_img)) . '/image.jpg',
                 'resizer' => true
             ];
-        } elseif (!empty($item->woody_topic_attachment)) {
+        } elseif (!empty($woody_topic_attachment)) {
             $data['img'] = [
-                'url' => !empty(wp_get_attachment_image_src($item->woody_topic_attachment)) ? wp_get_attachment_image_src($item->woody_topic_attachment)[0] : '',
+                'url' => !empty(wp_get_attachment_image_src($woody_topic_attachment)) ? wp_get_attachment_image_src($woody_topic_attachment)[0] : '',
                 'resizer' => true
             ];
         }
 
-        if (!empty($item->woody_topic_desc)) {
-            $data['description'] = strlen($item->woody_topic_desc) > 256 ? substr($item->woody_topic_desc, 0, 256) : $item->woody_topic_desc ;
+        $desc = get_field('woody_topic_desc', $item->ID);
+        if (!empty($desc)) {
+            $data['description'] = strlen($desc) > 256 ? substr($desc, 0, 256) : $desc ;
         }
 
-        if (!empty($item->woody_topic_url)) {
+        $url = get_field('woody_topic_url', $item->ID);
+        if (!empty($url)) {
             $data['link'] = [
-                'url' => !empty($item->woody_topic_url) ? $item->woody_topic_url : '',
+                'url' => $url,
                 'title' => __('Découvrir', 'woody-theme'),
                 'link_label' => __('Découvrir', 'woody-theme'),
                 'target' => '_blank',
@@ -767,12 +782,12 @@ class WoodyTheme_WoodyGetters
         $data['link']['url'] = $sheet_url;
         $data['link']['target'] = !empty($sheet['targetBlank']) ? '_blank' : '';
 
-        // TODO : Récupérer les infos de réservation de la fiche
-        if ($sheet['booking']['central']) {
+        //TODO: Récupérer les infos de réservation de la fiche
+        /*if ($sheet['booking']['central']) {
             $data['booking']['prefix'] = 'TODO';
             $data['booking']['price'] = 'TODO';
             $data['booking']['link'] = 'TODO';
-        }
+        }*/
 
         // Display Imgs
         if (!empty($sheet['allImgs'])) {
@@ -841,6 +856,10 @@ class WoodyTheme_WoodyGetters
                 'post_type' => ['profile'],
                 'post_status' => ['publish']
             ];
+
+            if (!empty($wrapper['profile_focus_max'])) {
+                $args['posts_per_page'] = $wrapper['profile_focus_max'];
+            }
 
             if (!empty($wrapper['profile_focus_category'])) {
                 foreach ($wrapper['profile_focus_category'] as $term_id) {
@@ -915,7 +934,7 @@ class WoodyTheme_WoodyGetters
         return $data;
     }
 
-    private function getProfileExpressions($post_id, $focus_expressions)
+    public function getProfileExpressions($post_id, $focus_expressions)
     {
         $data = [];
 
@@ -925,7 +944,7 @@ class WoodyTheme_WoodyGetters
             $formatted_expressions = $this->formatProfileExpressions($profile_expressions);
             foreach ($focus_expressions as $expression_id) {
                 if (!empty($formatted_expressions[$expression_id])) {
-                    $data[] = $formatted_expressions[$expression_id];
+                    $data[$formatted_expressions[$expression_id]['order']] = $formatted_expressions[$expression_id];
                 }
             }
         }
@@ -936,8 +955,9 @@ class WoodyTheme_WoodyGetters
     private function formatProfileExpressions($profile_expressions)
     {
         $data = [];
-        foreach ($profile_expressions as $expression) {
+        foreach ($profile_expressions as $exp_key => $expression) {
             $data[$expression['profile_expression_category']->term_id] = [
+                'order' => $exp_key,
                 'title' => $expression['profile_expression_category']->name,
                 'content' => (!empty($expression['profile_expression_content'])) ? $expression['profile_expression_content'] : ''
             ];

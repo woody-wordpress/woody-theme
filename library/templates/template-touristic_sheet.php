@@ -85,7 +85,6 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
             }
 
             $woody_hawwwai_lang_disable = get_option('woody_hawwwai_lang_disable');
-
             if (is_array($woody_hawwwai_lang_disable) && !empty($this->context['metas'])) {
                 foreach ($this->context['metas'] as $meta_key => $meta) {
                     if (!empty($meta['#attributes']['content']) && in_array($meta['#attributes']['content'], $woody_hawwwai_lang_disable)) {
@@ -93,8 +92,6 @@ class WoodyTheme_Template_TouristicSheet extends WoodyTheme_TemplateAbstract
                     }
                 }
             }
-        } else {
-            status_header('410');
         }
     }
 

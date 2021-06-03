@@ -43,11 +43,16 @@ class WoodyTheme_Robots
                 'Disallow: /*listpage=1$',
                 'Disallow: /*preview_id=',
                 'Disallow: /*preview_nonce=',
-                'Disallow: /*preview='
+                'Disallow: /*preview=',
+                'Disallow: api',
+                'Disallow: ?query'
             ];
 
+            // Define sitemap urls based on WOODY_PERMALINK_STRUCTURE
+            $sitemapEndUrl = (WOODY_PERMALINK_STRUCTURE == '/%postname%') ? 'xml' : 'xml/' ;
+
             // Add Sitemap
-            $output[] = 'Sitemap: ' . str_replace('/wp', '/sitemap.xml', site_url());
+            $output[] = 'Sitemap: ' . str_replace('/wp', '/sitemap.' . $sitemapEndUrl, site_url());
         } else {
             $output = [
                 '# Woody Robots Private ' . WP_SITE_KEY . ' (' . WP_ENV . ')',

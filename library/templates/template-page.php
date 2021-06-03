@@ -125,7 +125,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 'muted' => true,
                 'autoplay' => true,
                 'controls' => ['volume', 'mute'],
-                'loop' => ['active' => true]
+                'loop' => ['active' => true],
+                'youtube' => ['noCookie' => true]
             ];
 
             $home_slider['plyr_options'] = json_encode($plyr_options);
@@ -184,8 +185,10 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
             // Si le module groupe est activé
             if (in_array('groups', $this->context['enabled_woody_options'])) {
+                // Instancier GroupQuotation peut importe les conditions, à partir du moment ou le module groups est activé
+                $groupQuotation = new GroupQuotation;
+
                 if ($trip_infos['the_price']['price_type'] == 'component_based') {
-                    $groupQuotation = new GroupQuotation;
                     $trip_infos['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price']);
                 } elseif ($trip_infos['the_price']['price_type'] == 'no_tariff') {
                     $trip_infos['the_price']['price'] = "Sans tarif";
@@ -242,7 +245,13 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         // Compilation de l'en tête de page et du visuel et accroche pour les pages qui ne sont pas de type "accueil"
         if (!empty($page_type[0]) && $page_type[0]->slug != 'front_page') {
             $this->context['page_teaser'] = $this->compilers->formatPageTeaser($this->context);
-            $this->context['page_hero'] = $this->compilers->formatPageHero($this->context);
+            $page_hero = $this->compilers->formatPageHero($this->context);
+            if (!empty($page_hero)) {
+                $this->context['page_hero'] = $page_hero['view'];
+                $this->context['body_class'] = $this->context['body_class'] . ' has-hero'; // Add Class has-hero
+                $this->context['body_class'] = $this->context['body_class'] . ' has-' . $page_hero['data']['heading_woody_tpl']; // Add Class has-hero-block-tpl
+            }
+            // Add class "has-hero" to body if page hero is here
         }
 
         // Si on est sur la page favoris, on ajoute un bouton pour l'impression
@@ -513,15 +522,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     ]
                 ];
             }
-        }
-
-        // Return template
-        if (empty($this->context['playlist_tourism']['content'])) {
-            $this->context['playlist_tourism']['content'] = '<center style="margin: 80px 0">Playlist vide</center>';
-            status_header('410');
-        } elseif (isset($this->context['playlist_tourism']['status'])) {
-            $code = intval($this->context['playlist_tourism']['status']);
-            status_header($code);
         }
     }
 

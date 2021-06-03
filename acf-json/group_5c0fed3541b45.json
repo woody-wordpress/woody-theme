@@ -1,7 +1,8 @@
 {
     "key": "group_5c0fed3541b45",
     "title": "Paramètres Woody",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5e43ca87a2e3e",
             "label": "Paramètres généraux",
             "name": "",
@@ -42,6 +43,25 @@
             "name": "display_default_lang_title",
             "type": "true_false",
             "instructions": "Si cette option est activée, le titre de page en langue par défaut sera affiché à la suite du titre traduit. \r\nS'applique sur la liste des pages et les mises en avant de contenu",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_601c25291a109",
+            "label": "Afficher le tag parent dans les champs de type taxonomie",
+            "name": "display_parent_tag_name",
+            "type": "true_false",
+            "instructions": "Si cette option est activée, le titre du parent sera affiché à la suite d'un tag sous la forme \"Enfant de [tag parent]\".",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -107,29 +127,12 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
-                "key": "field_5c10c08f62d6d",
-                "label": "Pages suggérées",
-                "name": "suggest_pages",
-                "type": "repeater",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "collapsed": "",
-                "min": 0,
-                "max": 4,
-                "layout": "block",
-                "button_label": "Ajouter une suggestion",
-                "sub_fields": [{
-                    "key": "field_5c10c0a162d6e",
-                    "label": "Page",
-                    "name": "suggest_page",
-                    "type": "post_object",
+            "sub_fields": [
+                {
+                    "key": "field_5c10c08f62d6d",
+                    "label": "Pages suggérées",
+                    "name": "suggest_pages",
+                    "type": "repeater",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -138,16 +141,37 @@
                         "class": "",
                         "id": ""
                     },
-                    "post_type": [
-                        "page"
-                    ],
-                    "taxonomy": "",
-                    "allow_null": 1,
-                    "multiple": 0,
-                    "return_format": "id",
-                    "ui": 1
-                }]
-            }]
+                    "collapsed": "",
+                    "min": 0,
+                    "max": 4,
+                    "layout": "block",
+                    "button_label": "Ajouter une suggestion",
+                    "sub_fields": [
+                        {
+                            "key": "field_5c10c0a162d6e",
+                            "label": "Page",
+                            "name": "suggest_page",
+                            "type": "post_object",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "post_type": [
+                                "page"
+                            ],
+                            "taxonomy": "",
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "return_format": "id",
+                            "ui": 1
+                        }
+                    ]
+                }
+            ]
         },
         {
             "key": "field_5d039af8a226f",
@@ -219,9 +243,10 @@
             "choices": {
                 "facebook": "Facebook",
                 "twitter": "Twitter",
+                "linkedin": "LinkedIn",
+                "whatsapp": "WhatsApp",
                 "pinterest": "Pinterest",
-                "mail": "Mail",
-                "whatsapp": "WhatsApp"
+                "mail": "Mail"
             },
             "allow_custom": 0,
             "default_value": [
@@ -380,11 +405,13 @@
         }
     ],
     "location": [
-        [{
-            "param": "options_page",
-            "operator": "==",
-            "value": "woody-settings"
-        }]
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "woody-settings"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -392,7 +419,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "",
-    "modified": 1581688717
+    "modified": 1612457764
 }

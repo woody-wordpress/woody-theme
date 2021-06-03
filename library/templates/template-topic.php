@@ -40,39 +40,10 @@ class WoodyTheme_Template_Topic extends WoodyTheme_TemplateAbstract
     public function timberCompileData($data)
     {
         $post = get_post();
-
-        $data['globals']['post']        = $post;
         $data['globals']['post_title']  = $post->post_title;
         $data['globals']['post_id']     = $post->ID;
         $data['globals']['page_type']   = $post->post_type;
-        $data['globals']['sheet_id']    = 0;
-        $data['globals']['woody_options_pages'] = [
-            'favorites_url'         => get_field('favorites_page_url', 'options'),
-            'search_url'            => get_field('es_search_page_url', 'options'),
-            'weather_url'           => get_field('weather_page_url', 'options'),
-            'disqus_instance_url'   => get_field('disqus_instance_url', 'options')
-        ];
-        $data['globals']['tags'] = $this->getTags($data['globals']['post_id']);
-
         return $data;
-    }
-
-    public function getTags($post_id)
-    {
-        $return = [];
-        $taxonomies = ['places', 'seasons', 'themes'];
-
-        foreach ($taxonomies as $taxonomy) {
-            $return[$taxonomy] = [];
-            $terms = get_the_terms($post_id, $taxonomy);
-            if ($terms != false && !is_wp_error($terms)) {
-                foreach ($terms as $term) {
-                    $return[$taxonomy][] = $term->name;
-                }
-            }
-        }
-
-        return $return;
     }
 
     protected function extendContext()

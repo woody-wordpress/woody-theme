@@ -76,9 +76,9 @@ class WoodyTheme_WoodyCompilers
             }
 
             if ($wrapper['acf_fc_layout'] == 'auto_focus_sheets') {
-                $the_items['block_titles'] = $this->tools->getFocusBlockTitles($wrapper, 'focus_block_title_');
+                $the_items['block_titles'] = $this->tools->getBlockTitles($wrapper, 'focus_block_title_');
             } else {
-                $the_items['block_titles'] = $this->tools->getFocusBlockTitles($wrapper);
+                $the_items['block_titles'] = $this->tools->getBlockTitles($wrapper);
             }
 
             $the_items['no_padding'] = (!empty($wrapper['focus_no_padding'])) ? $wrapper['focus_no_padding'] : '';
@@ -86,7 +86,7 @@ class WoodyTheme_WoodyCompilers
             $the_items['display_img'] = (!empty($wrapper['display_img'])) ? $wrapper['display_img'] : false;
             $the_items['default_marker'] = (!empty($wrapper['default_marker'])) ? $wrapper['default_marker'] : '';
             $the_items['visual_effects'] = $wrapper['visual_effects'];
-            $the_items['display_index'] = $wrapper['display_index'];
+            $the_items['display_index'] = (!empty($wrapper['display_index'])) ? $wrapper['display_index'] : false;
 
             // Responsive stuff
             if (!empty($wrapper['mobile_behaviour'])) {
@@ -124,6 +124,8 @@ class WoodyTheme_WoodyCompilers
                 }
             }
 
+            $the_items = apply_filters('woody_format_focuses_data', $the_items, $wrapper);
+
             $return = !empty($wrapper['woody_tpl']) ? \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items) : \Timber::compile($twigPaths['blocks-focus-tpl_103'], $the_items) ;
         }
 
@@ -135,8 +137,9 @@ class WoodyTheme_WoodyCompilers
         // Sheet item
         $data = $this->getter->getManualFocusMinisheetData($wrapper);
 
+
         // Block titles
-        $data['block_titles'] = $this->tools->getFocusBlockTitles($wrapper);
+        $data['block_titles'] = $this->tools->getBlockTitles($wrapper, 'sheets_block_title_');
         $data['block_titles']['display_options'] = $this->tools->getDisplayOptions($wrapper);
 
         // Display options
@@ -381,7 +384,10 @@ class WoodyTheme_WoodyCompilers
                 if (strpos($result_key, $the_list['uniqid']) !== false && strpos($result_key, 'tt') !== false) { // Taxonomy Terms
                     $input_value = (!is_array($input_value)) ? [$input_value] : $input_value;
                     foreach ($input_value as $single_value) {
-                        $list_el_wrapper['filtered_taxonomy_terms'][$result_key][] = $single_value;
+                        // Si on poste la value 'all', on ne filtre pas sur cet input
+                        if ($single_value !== 'all') {
+                            $list_el_wrapper['filtered_taxonomy_terms'][$result_key][] = $single_value;
+                        }
                     }
                 } elseif (strpos($result_key, $the_list['uniqid']) !== false && strpos($result_key, 'td') !== false) { // Trip Duration
                     if (strpos($result_key, 'max') !== false) {
@@ -513,10 +519,10 @@ class WoodyTheme_WoodyCompilers
         $sections = get_field('section', $post_id);
         if (!empty($sections) && is_array($sections)) {
             foreach ($sections as $s_key => $section) {
-                if (!empty($section['display_in_summary'])) {
+                if (!empty($section['display_in_summary']) && empty($section['hide_section'])) {
                     $items[] = [
                         'title' => (!empty($section['section_summary_title'])) ? $section['section_summary_title'] : 'Section ' . $s_key,
-                        'anchor' => $permalink . '#pageSection-' . $s_key,
+                        'anchor' => (!empty($section['section_summary_title'])) ? $permalink . '#summary-' . sanitize_title($section['section_summary_title']) : $permalink . '#pageSection-' . $s_key,
                         'id' => '#pageSection-' . $s_key
                     ];
                 }
@@ -532,6 +538,11 @@ class WoodyTheme_WoodyCompilers
             $context['post'] = get_post($custom_post_id);
             $context['post_id'] = $custom_post_id;
             $context['post_title'] = get_the_title($custom_post_id);
+        }
+        if (!empty($context['mirror_id']) && is_numeric($context['mirror_id'])) {
+            $context['post'] = get_post($context['mirror_id']);
+            $context['post_id'] = $context['mirror_id'];
+            $context['post_title'] = get_the_title($context['mirror_id']);
         }
 
         // On récupère les champs du groupe En-tête de page
@@ -591,10 +602,17 @@ class WoodyTheme_WoodyCompilers
         // Existing profile
         if (!empty($page_teaser['page_teaser_add_profile']) && !empty($page_teaser['profile']['use_profile']) && !empty($page_teaser['profile']['profile_post'])) {
             $profile_id = $page_teaser['profile']['profile_post'];
+
+            //Add Profil expression category if checked
+            if (!empty($page_teaser['profile']['use_profile_expression']) && !empty($page_teaser['profile']['profile_expression'])) {
+                $profile_expressions=$this->getter->getProfileExpressions($page_teaser['profile']['profile_post'], $page_teaser['profile']['profile_expression']);
+            }
+
             $page_teaser['profile'] = [
                         'profile_title' => get_the_title($profile_id),
                         'profile_picture' => get_field('profile_picture', $profile_id),
-                        'profile_description' => get_field('profile_description', $profile_id)
+                        'profile_description' => get_field('profile_description', $profile_id),
+                        'profile_expressions' => (!empty($profile_expressions)) ? $profile_expressions : '',
                     ];
         }
 
@@ -654,8 +672,10 @@ class WoodyTheme_WoodyCompilers
             $page_hero['classes'] = (!empty($page_hero['the_classes'])) ? implode(' ', $page_hero['the_classes']) : '';
 
             $page_hero = apply_filters('woody_custom_page_hero', $page_hero, $context);
-
-            return \Timber::compile($context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero);
+            return [
+                'view' => \Timber::compile($context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero),
+                'data' => $page_hero,
+            ];
         } else {
             return '';
         }

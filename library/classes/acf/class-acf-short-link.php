@@ -7,7 +7,7 @@
  * @since WoodyTheme 1.0.0
  */
 
-class WoodyTheme_ACF_ShorLink
+class WoodyTheme_ACF_ShortLink
 {
     public function __construct()
     {
@@ -16,27 +16,26 @@ class WoodyTheme_ACF_ShorLink
 
     protected function registerHooks()
     {
-        add_action('rest_api_init', function () {
-            register_rest_route('woody', 'short-link', array(
-                'methods' => 'POST',
-                'callback' => [$this, 'getShortLinkData'],
-            ));
-        });
+        add_action('wp_ajax_get_woody_shortlink', [$this, 'getShortLinkData']);
         add_action('template_redirect', array($this, 'redirectShortLink'));
     }
 
-    public function getShortLinkData(\WP_REST_Request $request)
+    public function getShortLinkData()
     {
-        $post_id = $request->get_body();
-        $cache_key = 'woody_shortLink_' . $post_id;
-        if (false === ($shortLinkData = wp_cache_get($cache_key, 'woody'))) {
-            $page_type_object = get_the_terms($post_id, 'page_type');
-            $shortLinkData['page_type'] = !empty($page_type_object[0]) ? $page_type_object[0]->slug : '';
-            $shortLinkData['conf_id'] = get_field('field_5b338ff331b17', $post_id);
-            wp_cache_set($cache_key, $shortLinkData, 'woody', 2*60);
+        $post_id = filter_input(INPUT_GET, 'post_id', FILTER_SANITIZE_STRING);
+        if (empty($post_id)) {
+            status_header(404);
+            exit();
         }
 
-        return $shortLinkData;
+        $shortLinkData['post_id'] = $post_id;
+
+        $page_type_object = get_the_terms($post_id, 'page_type');
+        $shortLinkData['page_type'] = !empty($page_type_object[0]) ? $page_type_object[0]->slug : null;
+
+        // Return JSON
+        wp_send_json(apply_filters('woody_shortlink_data', $shortLinkData));
+        exit;
     }
 
     public function redirectShortLink()
@@ -48,29 +47,17 @@ class WoodyTheme_ACF_ShorLink
             return;
         }
 
-        $autoselect_id = get_field('playlist_autoselection_id', $post_id);
-        $linked_url = get_field('short_link_page_url', $post_id);
-
-        if (is_numeric($linked_url)) {
-            $linked_id = $linked_url;
+        $short_link = get_field('short_link_page_url', $post_id);
+        if (is_numeric($short_link)) {
+            $linked_id = $short_link;
             $linked_url = apply_filters('woody_get_permalink', $linked_id);
         } else {
-            $linked_id = url_to_postid($linked_url);
+            $linked_id = url_to_postid($short_link);
+            $linked_url = $short_link;
         }
 
-        $linked_post_type = get_the_terms($linked_id, 'page_type');
-        if ($linked_post_type[0]->slug == 'playlist_tourism' && !empty($autoselect_id)) {
-            $playlist_map_display = get_field('playlist_map_display', $post_id);
-            if (!empty($playlist_map_display)) {
-                $short_link_final_url = $linked_url . '?autoselect_id=' . $autoselect_id . '#map';
-            } else {
-                $short_link_final_url = $linked_url . '?autoselect_id=' . $autoselect_id;
-            }
-        } else {
-            $short_link_final_url = $linked_url;
-        }
-
-        wp_redirect($short_link_final_url, 301, 'Woody ShortLink');
+        $linked_url = apply_filters('woody_shortlink_redirect', $linked_url, $linked_id, $post_id);
+        wp_redirect($linked_url, 301, 'Woody ShortLink');
         exit;
     }
 }

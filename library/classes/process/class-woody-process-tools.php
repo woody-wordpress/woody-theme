@@ -71,13 +71,14 @@ class WoodyTheme_WoodyProcessTools
      * Auteur : Benoit Bouchaud
      * Return : Retourne les données d'es champs titre du bloc
      * @param    layout - data du layout focus en tableau
+     * @param    name - prefix for buttons context
      * @return   data - Un tableau de données
      *
      */
-
-    public function getFocusBlockTitles($wrapper, $prefix = '')
+    public function getBlockTitles($wrapper, $prefix = '', $name = 'focus_', $opts = [])
     {
         $data = [];
+        $opts['hide_description'] = empty($opts['hide_description']) ? false : $opts['hide_description'];
 
         $data['title'] = (!empty($wrapper[$prefix . 'title'])) ? $wrapper[$prefix . 'title'] : '';
         $data['pretitle'] = (!empty($wrapper[$prefix . 'pretitle'])) ? $wrapper[$prefix . 'pretitle'] : '';
@@ -85,10 +86,12 @@ class WoodyTheme_WoodyProcessTools
         $data['icon_type'] = (!empty($wrapper[$prefix . 'icon_type'])) ? $wrapper[$prefix . 'icon_type'] : '';
         $data['icon_img'] = (!empty($wrapper[$prefix . 'icon_img'])) ? $wrapper[$prefix . 'icon_img'] : '';
         $data['woody_icon'] = (!empty($wrapper[$prefix . 'woody_icon'])) ? $wrapper[$prefix . 'woody_icon'] : '';
-        $data['description'] = (!empty($wrapper[$prefix . 'description'])) ? $wrapper[$prefix . 'description'] : '';
-        $data['fullwidth'] = (!empty($wrapper['focus_block_title_fullwidth'])) ? 'fullwidth' : false;
-        if (!empty($wrapper['focus_buttons']) && !empty($wrapper['focus_buttons']['links'])) {
-            $data['focus_buttons'] = $wrapper['focus_buttons'];
+        if ($opts['hide_description'] !== true) {
+            $data['description'] = (!empty($wrapper[$prefix . 'description'])) ? $wrapper[$prefix . 'description'] : '';
+        }
+        $data['fullwidth'] = (!empty($wrapper[$name.'block_title_fullwidth'])) ? 'fullwidth' : false;
+        if (!empty($wrapper[$name.'buttons']) && !empty($wrapper[$name.'buttons']['links'])) {
+            $data[$name.'buttons'] = $wrapper[$name.'buttons'];
         }
 
         return $data;
@@ -188,7 +191,6 @@ class WoodyTheme_WoodyProcessTools
             'post_status' => 'inherit',
             'post_mime_type' => 'image',
             'posts_per_page' => 14,
-            'nopaging' => true,
             'tax_query' => array(
                 array(
                     'taxonomy' => $taxonomy,
@@ -311,7 +313,11 @@ class WoodyTheme_WoodyProcessTools
      */
     public function getSectionBannerFiles($filename)
     {
-        if (file_exists(get_stylesheet_directory() . '/views/section_banner/section_' . $filename . '.twig')) {
+        $lang = pll_current_language();
+
+        if (file_exists(get_stylesheet_directory() . '/views/section_banner/'. $lang .'/section_' . $filename . '.twig')) {
+            $file = file_exists(get_stylesheet_directory() . '/views/section_banner/'. $lang .'/section_' . $filename . '.twig');
+        } elseif (file_exists(get_stylesheet_directory() . '/views/section_banner/section_' . $filename . '.twig')) {
             $file = file_get_contents(get_stylesheet_directory() . '/views/section_banner/section_' . $filename . '.twig');
         } else {
             $file = file_get_contents(get_template_directory() . '/views/section_banner/section_' . $filename . '.twig');

@@ -1,5 +1,6 @@
 // Admin
 import './attachment';
+import './move-blocks';
 // import './drag_drop_blocks';
 // import './edit-post-autofocus';
 import './edit-post-change-lang';
@@ -14,3 +15,6 @@ import './tags-primary';
 import './woody-seo.js';
 import './woody-tpl.js';
 import './ajax-load-options';
+import './ajax-load-layouts';
+import './edit-post-save-ajax';
+import './acf-wysiwyg';
