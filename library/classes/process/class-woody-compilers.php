@@ -137,8 +137,9 @@ class WoodyTheme_WoodyCompilers
         // Sheet item
         $data = $this->getter->getManualFocusMinisheetData($wrapper);
 
+
         // Block titles
-        $data['block_titles'] = $this->tools->getBlockTitles($wrapper);
+        $data['block_titles'] = $this->tools->getBlockTitles($wrapper, 'sheets_block_title_');
         $data['block_titles']['display_options'] = $this->tools->getDisplayOptions($wrapper);
 
         // Display options
@@ -383,7 +384,10 @@ class WoodyTheme_WoodyCompilers
                 if (strpos($result_key, $the_list['uniqid']) !== false && strpos($result_key, 'tt') !== false) { // Taxonomy Terms
                     $input_value = (!is_array($input_value)) ? [$input_value] : $input_value;
                     foreach ($input_value as $single_value) {
-                        $list_el_wrapper['filtered_taxonomy_terms'][$result_key][] = $single_value;
+                        // Si on poste la value 'all', on ne filtre pas sur cet input
+                        if ($single_value !== 'all') {
+                            $list_el_wrapper['filtered_taxonomy_terms'][$result_key][] = $single_value;
+                        }
                     }
                 } elseif (strpos($result_key, $the_list['uniqid']) !== false && strpos($result_key, 'td') !== false) { // Trip Duration
                     if (strpos($result_key, 'max') !== false) {
