@@ -43,7 +43,9 @@ class WoodyTheme_Robots
                 'Disallow: /*listpage=1$',
                 'Disallow: /*preview_id=',
                 'Disallow: /*preview_nonce=',
-                'Disallow: /*preview='
+                'Disallow: /*preview=',
+                'Disallow: api',
+                'Disallow: ?query'
             ];
 
             // Define sitemap urls based on WOODY_PERMALINK_STRUCTURE

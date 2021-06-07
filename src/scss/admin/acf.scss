@@ -942,3 +942,10 @@
         }
     }
 }
+
+.acf-field .select-disabled {
+    select {
+        pointer-events: none;
+        opacity: .4;
+    }
+}
