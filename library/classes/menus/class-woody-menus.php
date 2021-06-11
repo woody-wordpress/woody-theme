@@ -92,10 +92,10 @@ class WoodyTheme_Menus
                             foreach ($field as $field_data_key => $field_data) {
                                 if ($groups_nested_sublinks && !empty($field_data)) {
                                     foreach ($field_data as $data) {
-                                        $parts[$group_key][] = $data['submenu_links_objects'];
+                                        $parts[$group_key][] = apply_filters('woody_custom_submenu', $data['submenu_links_objects'], $data);
                                     }
                                 } else {
-                                    $parts[$group_key][] = $field_data['submenu_links_objects'];
+                                    $parts[$group_key][] = apply_filters('woody_custom_submenu', $field[$field_data_key]['submenu_links_objects'], $field_data);
                                 }
 
                                 if (!empty($field_data['submenu_sublinks'])) {
@@ -145,6 +145,8 @@ class WoodyTheme_Menus
      */
     public static function getMenuLinks($posts = [], $post_parent = 0, $limit = -1, $root_level = 1)
     {
+        // console_log($posts, 'return');
+
         $return = [];
         // TODO: empty($post) is usefull if depth_1 links are based on WoodyPage pages's weight +> to remove
         if (empty($posts)) {
@@ -241,6 +243,8 @@ class WoodyTheme_Menus
             $submenu['display'] = $menu_display[$menu_link['the_id']];
             $i = 0;
 
+
+
             foreach ($menu_link['submenu'] as $key => $part) {
                 if (!empty($part['links'])) {
                     $the_part = [];
@@ -251,10 +255,10 @@ class WoodyTheme_Menus
                             $link_display = $submenu['display']['parts'][$i]['links_tpl'];
                             if ($getChildren) {
                                 $args = [
-                                        'post_parent' => $link['the_id'],
-                                        'post_type'   => 'page',
-                                        'post_status' => 'publish'
-                                    ];
+                                    'post_parent' => $link['the_id'],
+                                    'post_type'   => 'page',
+                                    'post_status' => 'publish'
+                                ];
                                 $sublinks = get_children($args);
                                 $link['sublinks'] = !empty($sublinks) ? self::getMenuLinks($sublinks) : [];
                             }
