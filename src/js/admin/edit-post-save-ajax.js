@@ -44,8 +44,18 @@ const savePost = (e, publish) => {
     fetch(form.getAttribute("action"), {
         method: 'POST',
         body: data,
-        redirect: 'manual',
+        redirect: 'follow',
+        headers: {
+            'Access-Control-Allow-Headers': 'Location'
+        }
     }).then(res => {
+
+        if (res.url.includes('wp-login')) {
+            if (spinner) spinner.classList.remove('is-active');
+            createNotice('notice-error', `Impossible d'enregistrer la page, veuillez vous reconnecter.`);
+            return;
+        }
+
         if (spinner) spinner.classList.remove('is-active');
         createNotice('notice-success', 'Page mise à jour.');
 
@@ -77,10 +87,10 @@ const createNotice = (type, message) => {
     <button type="button" class="notice-dismiss">
       <span class="screen-reader-text">Dismiss this notice.</span>
     </button>`;
-
     notice.querySelector('.notice-dismiss').addEventListener('click', () => {
         notice.parentNode.removeChild(notice);
     });
+
     if (type !== 'notice-error') {
         setTimeout(() => {
             notice.animate([
