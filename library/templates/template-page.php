@@ -299,59 +299,61 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         /*********************************************
          * Compilation du bloc de réservation
          *********************************************/
-        $bookblock = [];
-        $bookblock = getAcfGroupFields('group_5c0e4121ee3ed', $this->context['post']);
+        if ($this->context['page_type'] === 'front_page') {
+            $bookblock = [];
+            $bookblock = getAcfGroupFields('group_5c0e4121ee3ed', $this->context['post']);
 
-        if (!empty($bookblock['bookblock_playlists'][0]['pl_post_id'])) {
-            $bookblock['the_classes'] = [];
-            $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_img_opacity'])) ? $bookblock['bookblock_bg_params']['background_img_opacity'] : '';
-            $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_color'])) ? $bookblock['bookblock_bg_params']['background_color'] : '';
-            $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['border_color'])) ? $bookblock['bookblock_bg_params']['border_color'] : '';
-            $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_img'])) ? 'isRel' : '';
-            if (!empty($bookblock['bookblock_bg_params']['background_img_opacity']) || !empty($bookblock['bookblock_bg_params']['background_color']) || !empty($bookblock['bookblock_bg_params']['border_color'])) {
-                $bookblock['the_classes'][] = 'padd-all-md';
-            }
-            $bookblock['classes'] = (!empty($bookblock['the_classes'])) ? implode(' ', $bookblock['the_classes']) : '';
-            if (!empty($bookblock['bookblock_playlists'])) {
-                foreach ($bookblock['bookblock_playlists'] as $pl_key => $pl) {
-                    $bookblock['bookblock_playlists'][$pl_key]['permalink'] = get_permalink($pl['pl_post_id']);
-                    $pl_confId = get_field('field_5b338ff331b17', $pl['pl_post_id']);
-                    $bookblock['bookblock_playlists'][$pl_key]['pl_conf_id'] = $pl_confId;
-                    if (!empty($pl_confId)) {
-                        $pl_lang = pll_get_post_language($pl['pl_post_id']);
-                        $pl_params = apply_filters('woody_hawwwai_playlist_render', $pl_confId, $pl_lang, [], 'json');
-                        $facets = (!empty($pl_params['filters'])) ? $pl_params['filters'] : '';
-                        if (!empty($facets)) {
-                            foreach ($facets as $facet) {
-                                if ($facet['type'] === 'daterangeWithAvailabilities') {
-                                    $bookblock['bookblock_playlists'][$pl_key]['filters']['id'] = $facet['id'];
-                                    $bookblock['bookblock_playlists'][$pl_key]['filters']['translations'] = (!empty($facet['TR'])) ? $facet['TR'] : '';
-                                    $bookblock['bookblock_playlists'][$pl_key]['filters']['display_options'] = (!empty($facet['display_options'])) ? $facet['display_options'] : '';
-                                    if (!empty($facet['display_options']['booking_range']['values'])) {
-                                        $range_values = $facet['display_options']['booking_range']['values'];
-                                        if ($range_values[0]['mode'] == 3 && !empty($range_values[0]['customValue'])) {
-                                            $bookblock['bookblock_playlists'][$pl_key]['filters']['singledate'] = true;
-                                            $bookblock['bookblock_playlists'][$pl_key]['filters']['periods'] = $range_values[0]['customValue'];
-                                        } else {
-                                            $bookblock['bookblock_playlists'][$pl_key]['filters']['daterange'] = true;
-                                        }
-                                    }
-                                    if (!empty($facet['display_options']['persons']['values'])) {
-                                        foreach ($facet['display_options']['persons']['values'] as $person) {
-                                            if (!empty($person['field'])) {
-                                                $bookblock['bookblock_playlists'][$pl_key]['filters'][$person['field']] = $person['display'];
+            if (!empty($bookblock['bookblock_playlists'][0]['pl_post_id'])) {
+                $bookblock['the_classes'] = [];
+                $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_img_opacity'])) ? $bookblock['bookblock_bg_params']['background_img_opacity'] : '';
+                $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_color'])) ? $bookblock['bookblock_bg_params']['background_color'] : '';
+                $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['border_color'])) ? $bookblock['bookblock_bg_params']['border_color'] : '';
+                $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_img'])) ? 'isRel' : '';
+                if (!empty($bookblock['bookblock_bg_params']['background_img_opacity']) || !empty($bookblock['bookblock_bg_params']['background_color']) || !empty($bookblock['bookblock_bg_params']['border_color'])) {
+                    $bookblock['the_classes'][] = 'padd-all-md';
+                }
+                $bookblock['classes'] = (!empty($bookblock['the_classes'])) ? implode(' ', $bookblock['the_classes']) : '';
+                if (!empty($bookblock['bookblock_playlists'])) {
+                    foreach ($bookblock['bookblock_playlists'] as $pl_key => $pl) {
+                        $bookblock['bookblock_playlists'][$pl_key]['permalink'] = get_permalink($pl['pl_post_id']);
+                        $pl_confId = get_field('field_5b338ff331b17', $pl['pl_post_id']);
+                        $bookblock['bookblock_playlists'][$pl_key]['pl_conf_id'] = $pl_confId;
+                        if (!empty($pl_confId)) {
+                            $pl_lang = pll_get_post_language($pl['pl_post_id']);
+                            $pl_params = apply_filters('woody_hawwwai_playlist_render', $pl_confId, $pl_lang, [], 'json');
+                            $facets = (!empty($pl_params['filters'])) ? $pl_params['filters'] : '';
+                            if (!empty($facets)) {
+                                foreach ($facets as $facet) {
+                                    if ($facet['type'] === 'daterangeWithAvailabilities') {
+                                        $bookblock['bookblock_playlists'][$pl_key]['filters']['id'] = $facet['id'];
+                                        $bookblock['bookblock_playlists'][$pl_key]['filters']['translations'] = (!empty($facet['TR'])) ? $facet['TR'] : '';
+                                        $bookblock['bookblock_playlists'][$pl_key]['filters']['display_options'] = (!empty($facet['display_options'])) ? $facet['display_options'] : '';
+                                        if (!empty($facet['display_options']['booking_range']['values'])) {
+                                            $range_values = $facet['display_options']['booking_range']['values'];
+                                            if ($range_values[0]['mode'] == 3 && !empty($range_values[0]['customValue'])) {
+                                                $bookblock['bookblock_playlists'][$pl_key]['filters']['singledate'] = true;
+                                                $bookblock['bookblock_playlists'][$pl_key]['filters']['periods'] = $range_values[0]['customValue'];
+                                            } else {
+                                                $bookblock['bookblock_playlists'][$pl_key]['filters']['daterange'] = true;
                                             }
                                         }
+                                        if (!empty($facet['display_options']['persons']['values'])) {
+                                            foreach ($facet['display_options']['persons']['values'] as $person) {
+                                                if (!empty($person['field'])) {
+                                                    $bookblock['bookblock_playlists'][$pl_key]['filters'][$person['field']] = $person['display'];
+                                                }
+                                            }
+                                        }
+                                        break;
                                     }
-                                    break;
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            $this->context['bookblock'] = \Timber::compile($this->context['woody_components'][$bookblock['bookblock_woody_tpl']], $bookblock);
+                $this->context['bookblock'] = \Timber::compile($this->context['woody_components'][$bookblock['bookblock_woody_tpl']], $bookblock);
+            }
         }
 
 
