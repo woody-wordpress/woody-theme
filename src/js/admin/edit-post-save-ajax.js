@@ -32,15 +32,6 @@ const savePost = (e, publish) => {
 
     e.preventDefault();
 
-    // check session
-    let session = getCookie("woody_sso_expiration_token") * 1000;
-    let now = new Date().getTime();
-    if (!session || session < now) {
-        if (spinner) spinner.classList.remove('is-active');
-        createNotice('notice-error', `La session a expiré, veuillez vous reconnecter.`);
-        return;
-    }
-
     fetch(form.getAttribute("action"), {
         method: 'POST',
         body: data,
