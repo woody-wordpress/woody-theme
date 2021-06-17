@@ -290,9 +290,11 @@ class Admin_Menus
      * @return void | Ajoute les champs au sous-menu en se basant sur un acf-json (group_submenus)
      *
      */
-    public function addSubmenuFieldGroups()
+    public function addSubmenuFieldGroups($page = null)
     {
-        $page = $this->pages_options['main-menu'];
+        if (!empty($page)) {
+            $page = $this->pages_options['main-menu'];
+        }
 
         $group = [
             'key' => 'group_' . $page['menu_slug'],
