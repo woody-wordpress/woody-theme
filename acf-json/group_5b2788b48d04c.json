@@ -1,6 +1,6 @@
 {
     "key": "group_5b2788b48d04c",
-    "title": "Mise en avant de pages (sélection automatique)",
+    "title": "Mise en avant de pages/documents (sélection automatique)",
     "fields": [{
             "key": "field_5b2788cc84ed1",
             "label": "Contenu",
@@ -18,10 +18,10 @@
             "endpoint": 0
         },
         {
-            "key": "field_5b27890c84ed3",
-            "label": "Types de publications",
-            "name": "focused_content_type",
-            "type": "taxonomy",
+            "key": "field_60cc8c88f2824",
+            "label": "Type de mise en avant",
+            "name": "focused_type",
+            "type": "radio",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -30,7 +30,65 @@
                 "class": "",
                 "id": ""
             },
+            "choices": {
+                "pages": "Pages",
+                "documents": "Documents à télécharger"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "pages",
+            "layout": "horizontal",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_5b27890c84ed3",
+            "label": "Types de publications",
+            "name": "focused_content_type",
+            "type": "taxonomy",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [{
+                    "field": "field_60cc8c88f2824",
+                    "operator": "==",
+                    "value": "pages"
+                }]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "taxonomy": "page_type",
+            "field_type": "checkbox",
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "multiple": 0,
+            "allow_null": 0
+        },
+        {
+            "key": "field_60cc8e1147740",
+            "label": "Catégorie de média",
+            "name": "focused_media_terms",
+            "type": "taxonomy",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [{
+                    "field": "field_60cc8c88f2824",
+                    "operator": "==",
+                    "value": "documents"
+                }]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "attachment_categories",
             "field_type": "checkbox",
             "add_term": 0,
             "save_terms": 0,
@@ -95,16 +153,10 @@
             "required": 0,
             "conditional_logic": [
                 [{
-                        "field": "field_5b27899284ed4",
-                        "operator": "!=",
-                        "value": "touristic_sheet"
-                    },
-                    {
-                        "field": "field_5b27899284ed4",
-                        "operator": "==",
-                        "value": "page"
-                    }
-                ]
+                    "field": "field_60cc8c88f2824",
+                    "operator": "==",
+                    "value": "pages"
+                }]
             ],
             "wrapper": {
                 "width": "",
@@ -177,7 +229,13 @@
             "type": "checkbox",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [{
+                    "field": "field_60cc8c88f2824",
+                    "operator": "==",
+                    "value": "pages"
+                }]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -232,7 +290,13 @@
             "type": "true_false",
             "instructions": "<small>Uniquement pour les pages avec plusieurs images de mise en avant<\/small>",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [{
+                    "field": "field_60cc8c88f2824",
+                    "operator": "==",
+                    "value": "pages"
+                }]
+            ],
             "wrapper": {
                 "width": "25",
                 "class": "",
@@ -251,7 +315,13 @@
             "type": "true_false",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [{
+                    "field": "field_60cc8c88f2824",
+                    "operator": "==",
+                    "value": "pages"
+                }]
+            ],
             "wrapper": {
                 "width": "25",
                 "class": "",
@@ -749,6 +819,5 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
-    "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1603986357
+    "description": "Mise en avant de contenus sélectionnés en fonctions de critères"
 }
