@@ -270,7 +270,7 @@ class WoodyTheme_WoodyGetters
 
     public function getAttachmentPreview($wrapper, $item)
     {
-        $return = [];
+        $data = [];
         if (is_object($item)) {
             $data = $this->getPagePreview($wrapper, $item, true, true);
 
