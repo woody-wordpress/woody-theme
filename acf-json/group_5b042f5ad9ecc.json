@@ -187,6 +187,27 @@
             "endpoint": 0
         },
         {
+            "key": "field_60cc5c6879b98",
+            "label": "Alignement vertical",
+            "name": "",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "field_60cb028b375c8"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
+        },
+        {
             "key": "field_5b8f9cbb9c97d",
             "label": "Paramètres du fond",
             "name": "custom_text_bg_params",
@@ -282,5 +303,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "Elément de contenu (Editeur wysiwyg \/ code html",
-    "modified": 1619432485
+    "modified": 1624005789
 }
