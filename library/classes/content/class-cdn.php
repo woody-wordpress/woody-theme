@@ -33,9 +33,48 @@ class WoodyTheme_CDN
 
     public function timberRender($render)
     {
-        $render = preg_replace('/("|\')\/app\/(dist|themes|uploads|plugins)\/([^"\' ]*)/', '$1https://' . WOODY_CLOUDFLARE_URL . '/app/$2/$3', $render);
-        $render = preg_replace('/http(s?):\/\/([a-zA-Z0-9-_.]*)\/app\/(dist|themes|uploads|plugins)\/([^"\' ]*)/', 'https://' . WOODY_CLOUDFLARE_URL . '/app/$3/$4', $render);
-        $render = preg_replace('/http(s?):\/\/([a-zA-Z0-9-_.]*)\/wp\/wp-includes\/([^"\' ]*)/', 'https://' . WOODY_CLOUDFLARE_URL . '/wp/wp-includes/$3', $render);
+        preg_match_all('/("|\')\/app\/(dist|themes|uploads|plugins)\/([^"\' ]*)/', $render, $matches);
+        $render = $this->replaceCDN($matches, $render);
+
+        preg_match_all('/http(s?):\/\/([a-zA-Z0-9-_.]*)\/app\/(dist|themes|uploads|plugins)\/([^"\' ]*)/', $render, $matches);
+        $render = $this->replaceCDN($matches, $render);
+
+        preg_match_all('/http(s?):\/\/([a-zA-Z0-9-_.]*)\/wp\/wp-includes\/([^"\' ]*)/', $render, $matches);
+        $render = $this->replaceCDN($matches, $render);
+
+        return $render;
+    }
+
+    private function replaceCDN($matches = [], $render = '')
+    {
+        $matches = (!empty($matches) && !empty($matches[0])) ? $matches[0] : $matches;
+        if (!empty($matches)) {
+            foreach ($matches as $url) {
+
+                // First regex return quote on first letter
+                $prefix = null;
+                if (substr($url, 0, 1) == '"' || substr($url, 0, 1) == "'") {
+                    $prefix = substr($url, 0, 1);
+                    $url = substr($url, 1);
+                }
+
+                $host = parse_url($url, PHP_URL_HOST);
+                $scheme = parse_url($url, PHP_URL_SCHEME);
+                $path = parse_url($url, PHP_URL_PATH);
+                $extension = pathinfo($path, PATHINFO_EXTENSION);
+
+                if (!empty($path) && !in_array($extension, ['pdf','docx','doc','xls','xlsx','ppt','ppt','zip','rar','gz'])) {
+                    if (empty($host)) {
+                        $new_url = 'https://' . WOODY_CLOUDFLARE_URL . $path;
+                    } else {
+                        $new_url = str_replace($host, WOODY_CLOUDFLARE_URL, $url);
+                        $new_url = str_replace($scheme, 'https', $new_url);
+                    }
+                    $render = str_replace($prefix.$url, $prefix.$new_url, $render);
+                }
+            }
+        }
+
         return $render;
     }
 }
