@@ -51,6 +51,11 @@ class WoodyTheme_CDN
         if (!empty($matches)) {
             foreach ($matches as $url) {
 
+                // If matches is empty, it's an array
+                if (is_array($url)) {
+                    continue;
+                }
+
                 // First regex return quote on first letter
                 $prefix = null;
                 if (substr($url, 0, 1) == '"' || substr($url, 0, 1) == "'") {
