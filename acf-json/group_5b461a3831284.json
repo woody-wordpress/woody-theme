@@ -274,6 +274,29 @@
             "endpoint": 0
         },
         {
+            "key": "field_60cb028b375c8",
+            "label": "Alignement vertical",
+            "name": "vertical_alignement",
+            "type": "button_group",
+            "instructions": "Comportement vertical",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "align-top": "En haut",
+                "align-center": "Au milieu",
+                "align-right": "En bas"
+            },
+            "allow_null": 0,
+            "default_value": "align-top",
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        {
             "key": "field_5b461b46131ba",
             "label": "Personnalisation du fond",
             "name": "bg_params",
