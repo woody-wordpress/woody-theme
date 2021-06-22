@@ -7,7 +7,7 @@ import './edit-post-change-lang';
 import './edit-post-close-acf';
 // import './edit-post-model';
 import './edit-post-page-teaser-media';
-// import './edit-post-sticky-actions';
+import './edit-post-sticky-actions';
 import './edit-post-unpublisher';
 import './global-admin';
 import './nav-menus-ui';
