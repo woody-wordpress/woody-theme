@@ -62,6 +62,7 @@ class WoodyTheme_Timber_Filters
         $twig->addFilter(new Twig_SimpleFilter('translate', [$this, 'translate']));
         $twig->addFilter(new Twig_SimpleFilter('json_encode', [$this, 'jsonEncode']));
         $twig->addFilter(new Twig_SimpleFilter('zeroise', [$this, 'zeroise']));
+        $twig->addFilter(new Twig_SimpleFilter('spacing', [$this, 'spacing']));
 
         // Debug Woody
         $twig->addFilter(new Twig_SimpleFilter('dump', [$this, 'dump']));
@@ -92,6 +93,10 @@ class WoodyTheme_Timber_Filters
     public function zeroise($value, $threshold)
     {
         return zeroise($value, $threshold);
+    }
+    public function spacing($text)
+    {
+        return preg_replace('/\s+/', ' ', $text);
     }
 
     public function phoneClick($text)
