@@ -174,6 +174,7 @@ class WoodyTheme_Polylang
         __('Télécharger', 'woody-theme');
         __("Aller à la page d'accueil", "woody-theme");
         __("Retour à la page d'accueil", 'woody-theme');
+        __("Tout", 'woody-theme');
 
         // Weather
         __('Bas', 'woody-theme');

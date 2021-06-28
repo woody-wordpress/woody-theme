@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.6.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2021-03-09T16:45:13+01:00\n"
-"PO-Revision-Date: 2021-03-09 16:54+0100\n"
+"POT-Creation-Date: 2021-06-28T12:10:04+02:00\n"
+"PO-Revision-Date: 2021-06-28 12:11+0200\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -174,7 +174,7 @@ msgid "Demander un devis"
 msgstr "Fordern Sie ein Angebot an"
 
 #: library/classes/content/class-polylang.php:105
-#: library/classes/content/class-polylang.php:266
+#: library/classes/content/class-polylang.php:267
 msgid "personne"
 msgstr "Person"
 
@@ -351,42 +351,42 @@ msgid "enfant(s)"
 msgstr "Kind(er)"
 
 #: library/classes/content/class-polylang.php:153
-#: library/classes/timber/class-timber-filters.php:275
+#: library/classes/timber/class-timber-filters.php:280
 #: library/functions/01_assets.php:91
 msgid "jour"
 msgstr "Tages"
 
 #: library/classes/content/class-polylang.php:154
-#: library/classes/timber/class-timber-filters.php:278
+#: library/classes/timber/class-timber-filters.php:283
 #: library/functions/01_assets.php:92
 msgid "jours"
 msgstr "Tage"
 
 #: library/classes/content/class-polylang.php:155
-#: library/classes/timber/class-timber-filters.php:281
+#: library/classes/timber/class-timber-filters.php:286
 #: library/functions/01_assets.php:89
 msgid "semaine"
 msgstr "Woche"
 
 #: library/classes/content/class-polylang.php:156
-#: library/classes/timber/class-timber-filters.php:284
+#: library/classes/timber/class-timber-filters.php:289
 #: library/functions/01_assets.php:90
 msgid "semaines"
 msgstr "Wochen"
 
 #: library/classes/content/class-polylang.php:157
-#: library/classes/timber/class-timber-filters.php:287
-#: library/classes/timber/class-timber-filters.php:290
+#: library/classes/timber/class-timber-filters.php:292
+#: library/classes/timber/class-timber-filters.php:295
 msgid "mois"
 msgstr "Monat"
 
 #: library/classes/content/class-polylang.php:158
-#: library/templates/template-page.php:475
+#: library/templates/template-page.php:482
 msgid "Sélection"
 msgstr "Auswahl"
 
 #: library/classes/content/class-polylang.php:159
-#: library/templates/template-page.php:479
+#: library/templates/template-page.php:486
 msgid "Page"
 msgstr "Seite"
 
@@ -427,8 +427,8 @@ msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "Die Seite die Sie suchen ist vielleicht hier?"
 
 #: library/classes/content/class-polylang.php:169
-#: library/classes/process/class-woody-getters.php:351
-#: library/classes/process/class-woody-getters.php:563
+#: library/classes/process/class-woody-getters.php:391
+#: library/classes/process/class-woody-getters.php:605
 msgid "Lire la suite"
 msgstr "Mehr erfahren"
 
@@ -449,7 +449,7 @@ msgid "Réservable"
 msgstr "Buchbar"
 
 #: library/classes/content/class-polylang.php:174
-#: library/classes/process/class-woody-getters.php:436
+#: library/classes/process/class-woody-getters.php:478
 msgid "Télécharger"
 msgstr "Herunterladen"
 
@@ -461,214 +461,218 @@ msgstr "Zurück zur Homepage"
 msgid "Retour à la page d'accueil"
 msgstr "Zurück zur Homepage"
 
-#: library/classes/content/class-polylang.php:179
+#: library/classes/content/class-polylang.php:177
+msgid "Tout"
+msgstr "Alle"
+
+#: library/classes/content/class-polylang.php:180
 msgid "Bas"
 msgstr "Unten"
 
-#: library/classes/content/class-polylang.php:180
+#: library/classes/content/class-polylang.php:181
 msgid "Haut"
 msgstr "Oben"
 
-#: library/classes/content/class-polylang.php:181
+#: library/classes/content/class-polylang.php:182
 msgid "Vent"
 msgstr "Wind"
 
-#: library/classes/content/class-polylang.php:182
+#: library/classes/content/class-polylang.php:183
 msgid "Température de la mer"
 msgstr "Meerestemperatur"
 
-#: library/classes/content/class-polylang.php:183
+#: library/classes/content/class-polylang.php:184
 msgid "Humidité"
 msgstr "Feuchtigkeit"
 
-#: library/classes/content/class-polylang.php:184
+#: library/classes/content/class-polylang.php:185
 msgid "ISO 0°"
 msgstr "ISO 0°"
 
-#: library/classes/content/class-polylang.php:185
+#: library/classes/content/class-polylang.php:186
 msgid "Limite Pluie/Neige"
 msgstr "Limit Regen/Schnee"
 
-#: library/classes/content/class-polylang.php:186
+#: library/classes/content/class-polylang.php:187
 msgid "Ensoleillé"
 msgstr "Sonnig"
 
-#: library/classes/content/class-polylang.php:187
+#: library/classes/content/class-polylang.php:188
 msgid "Pluie"
 msgstr "Niederschlag"
 
-#: library/classes/content/class-polylang.php:188
+#: library/classes/content/class-polylang.php:189
 msgid "Neige"
 msgstr "Schnee"
 
-#: library/classes/content/class-polylang.php:189
+#: library/classes/content/class-polylang.php:190
 msgid "Grésil"
 msgstr "Schneeregen"
 
-#: library/classes/content/class-polylang.php:190
+#: library/classes/content/class-polylang.php:191
 msgid "Venteux"
 msgstr "Windig"
 
-#: library/classes/content/class-polylang.php:191
+#: library/classes/content/class-polylang.php:192
 msgid "Brouillard"
 msgstr "Nebel"
 
-#: library/classes/content/class-polylang.php:192
+#: library/classes/content/class-polylang.php:193
 msgid "Nuageux"
 msgstr "Bewölkt"
 
-#: library/classes/content/class-polylang.php:193
+#: library/classes/content/class-polylang.php:194
 msgid "Éclaircies"
 msgstr "Leicht Bewölkt"
 
-#: library/classes/content/class-polylang.php:194
+#: library/classes/content/class-polylang.php:195
 msgid "Grêle"
 msgstr "Rufen"
 
-#: library/classes/content/class-polylang.php:195
+#: library/classes/content/class-polylang.php:196
 msgid "Tempête"
 msgstr "Storm"
 
-#: library/classes/content/class-polylang.php:196
+#: library/classes/content/class-polylang.php:197
 msgid "Verglas"
 msgstr "Eis auf der Straße"
 
-#: library/classes/content/class-polylang.php:199
+#: library/classes/content/class-polylang.php:200
 msgid "Nord Nord-Est"
 msgstr "Nord Nordosten"
 
-#: library/classes/content/class-polylang.php:200
+#: library/classes/content/class-polylang.php:201
 msgid "Nord-Est"
 msgstr "Nordosten"
 
-#: library/classes/content/class-polylang.php:201
+#: library/classes/content/class-polylang.php:202
 msgid "Est Nord-Est"
 msgstr "Ost Nordosten"
 
-#: library/classes/content/class-polylang.php:202
+#: library/classes/content/class-polylang.php:203
 msgid "Est"
 msgstr "Ost"
 
-#: library/classes/content/class-polylang.php:203
+#: library/classes/content/class-polylang.php:204
 msgid "Est Sud-Est"
 msgstr "Ost Südosten"
 
-#: library/classes/content/class-polylang.php:204
+#: library/classes/content/class-polylang.php:205
 msgid "Sud-Est"
 msgstr "Südosten"
 
-#: library/classes/content/class-polylang.php:205
+#: library/classes/content/class-polylang.php:206
 msgid "Sud Sud-Est"
 msgstr "Süd Südosten"
 
-#: library/classes/content/class-polylang.php:206
+#: library/classes/content/class-polylang.php:207
 msgid "Sud"
 msgstr "Süd"
 
-#: library/classes/content/class-polylang.php:207
+#: library/classes/content/class-polylang.php:208
 msgid "Sud Sud-Ouest"
 msgstr "Süd Südwest"
 
-#: library/classes/content/class-polylang.php:208
+#: library/classes/content/class-polylang.php:209
 msgid "Sud-Ouest"
 msgstr "Südwest"
 
-#: library/classes/content/class-polylang.php:209
+#: library/classes/content/class-polylang.php:210
 msgid "Ouest Sud-Ouest"
 msgstr "West Südwest"
 
-#: library/classes/content/class-polylang.php:210
+#: library/classes/content/class-polylang.php:211
 msgid "Ouest"
 msgstr "West"
 
-#: library/classes/content/class-polylang.php:211
+#: library/classes/content/class-polylang.php:212
 msgid "Ouest Nord-Ouest"
 msgstr "West Nordwest"
 
-#: library/classes/content/class-polylang.php:212
+#: library/classes/content/class-polylang.php:213
 msgid "Nord-Ouest"
 msgstr "Nordwest"
 
-#: library/classes/content/class-polylang.php:213
+#: library/classes/content/class-polylang.php:214
 msgid "Nord Nord-Ouest"
 msgstr "Nord Nordwest"
 
-#: library/classes/content/class-polylang.php:214
+#: library/classes/content/class-polylang.php:215
 msgid "Nord"
 msgstr "Nord"
 
-#: library/classes/content/class-polylang.php:217
-#: library/classes/content/class-polylang.php:235
-#: library/classes/content/class-polylang.php:308
+#: library/classes/content/class-polylang.php:218
+#: library/classes/content/class-polylang.php:236
+#: library/classes/content/class-polylang.php:309
 msgid "Matin"
 msgstr "Morgens"
 
-#: library/classes/content/class-polylang.php:218
-#: library/classes/content/class-polylang.php:309
+#: library/classes/content/class-polylang.php:219
+#: library/classes/content/class-polylang.php:310
 msgid "Après-midi"
 msgstr "Nachmittag"
 
-#: library/classes/content/class-polylang.php:219
+#: library/classes/content/class-polylang.php:220
 msgid "Soirée"
 msgstr "Abends"
 
-#: library/classes/content/class-polylang.php:220
+#: library/classes/content/class-polylang.php:221
 msgid "Nuit"
 msgstr "Nacht"
 
-#: library/classes/content/class-polylang.php:223
+#: library/classes/content/class-polylang.php:224
 msgid "Ajouter"
 msgstr "Hinzufügen"
 
-#: library/classes/content/class-polylang.php:224
+#: library/classes/content/class-polylang.php:225
 msgid "Supprimer"
 msgstr "Entfernen"
 
-#: library/classes/content/class-polylang.php:225
+#: library/classes/content/class-polylang.php:226
 msgid "Cette liste est vide actuellement. Naviguez et ajoutez des pages !"
 msgstr "Diese Liste ist jetzt leer. Seiten durchsuchen und hinzufügen!"
 
-#: library/classes/content/class-polylang.php:228
+#: library/classes/content/class-polylang.php:229
 msgid "Ajouter à mes favoris"
 msgstr "Zu meinen Favoriten hinzufügen"
 
-#: library/classes/content/class-polylang.php:229
+#: library/classes/content/class-polylang.php:230
 msgid "Imprimer/Exporter mes favoris"
 msgstr "Meine Favoriten drucken/exportieren"
 
-#: library/classes/content/class-polylang.php:232
+#: library/classes/content/class-polylang.php:233
 msgid "Dates"
 msgstr "Datum"
 
-#: library/classes/content/class-polylang.php:233
+#: library/classes/content/class-polylang.php:234
 msgid "Basse mer"
 msgstr "Niedrigwasser"
 
-#: library/classes/content/class-polylang.php:234
+#: library/classes/content/class-polylang.php:235
 msgid "Haute mer"
 msgstr "Hochwasser"
 
-#: library/classes/content/class-polylang.php:236
+#: library/classes/content/class-polylang.php:237
 msgid "Soir"
 msgstr "Abend"
 
-#: library/classes/content/class-polylang.php:237
+#: library/classes/content/class-polylang.php:238
 msgid "Heure"
 msgstr "Stunde"
 
-#: library/classes/content/class-polylang.php:238
+#: library/classes/content/class-polylang.php:239
 msgid "Coef"
 msgstr "Koeff"
 
-#: library/classes/content/class-polylang.php:239
+#: library/classes/content/class-polylang.php:240
 msgid "Retrouvez prochainement les horaires de marées pour ce mois !"
 msgstr "Finden Sie bald die Gezeitenpläne für diesen Monat !"
 
-#: library/classes/content/class-polylang.php:242
+#: library/classes/content/class-polylang.php:243
 msgid "Pour faire une demande de devis, veuillez choisir un séjour."
 msgstr "Um ein Angebot anzufordern, wählen Sie bitte einen Aufenthalt aus."
 
-#: library/classes/content/class-polylang.php:243
+#: library/classes/content/class-polylang.php:244
 msgid ""
 "Il semblerait qu'il n'y ait pas ou plus de séjours proposant une demande de "
 "devis disponibles sur le site"
@@ -676,113 +680,113 @@ msgstr ""
 "Es scheint, dass es keine oder keine Aufenthalte mehr gibt, die eine Anfrage "
 "nach Angeboten auf der Website anbieten"
 
-#: library/classes/content/class-polylang.php:244
+#: library/classes/content/class-polylang.php:245
 msgid "Séjours et activités"
 msgstr "Aufenthalte und Aktivitäten"
 
-#: library/classes/content/class-polylang.php:245
+#: library/classes/content/class-polylang.php:246
 msgid "Retour à l'offre"
 msgstr "Zurück zum Angebot"
 
-#: library/classes/content/class-polylang.php:246
+#: library/classes/content/class-polylang.php:247
 msgid "Récapitulatif"
 msgstr "Zusammenfassung"
 
-#: library/classes/content/class-polylang.php:247
+#: library/classes/content/class-polylang.php:248
 msgid "30 secondes"
 msgstr "30 Sekunden"
 
-#: library/classes/content/class-polylang.php:248
+#: library/classes/content/class-polylang.php:249
 msgid "Informations"
 msgstr "Informationen"
 
-#: library/classes/content/class-polylang.php:249
+#: library/classes/content/class-polylang.php:250
 msgid "Coordonnées"
 msgstr "Kontaktdaten"
 
-#: library/classes/content/class-polylang.php:250
+#: library/classes/content/class-polylang.php:251
 msgid "Mon devis"
 msgstr "Mein Angebot"
 
-#: library/classes/content/class-polylang.php:251
+#: library/classes/content/class-polylang.php:252
 msgid "Votre séjour/journée"
 msgstr "Ihr Aufenthalt / Tag"
 
-#: library/classes/content/class-polylang.php:252
+#: library/classes/content/class-polylang.php:253
 msgid "Comprenant"
 msgstr "Einschließlich"
 
-#: library/classes/content/class-polylang.php:253
-#: library/templates/template-page.php:209
+#: library/classes/content/class-polylang.php:254
+#: library/templates/template-page.php:212
 msgid "Gratuit"
 msgstr "Kostenlos"
 
-#: library/classes/content/class-polylang.php:254
+#: library/classes/content/class-polylang.php:255
 msgid "Nombre de personnes"
 msgstr "Anzahl der Personen"
 
-#: library/classes/content/class-polylang.php:256
+#: library/classes/content/class-polylang.php:257
 msgid "* Champs obligatoires"
 msgstr "Die mit * markierten Felder müssen ausgefüllt werden"
 
-#: library/classes/content/class-polylang.php:257
+#: library/classes/content/class-polylang.php:258
 msgid "Nom/Prénom"
 msgstr "Name/Vorname"
 
-#: library/classes/content/class-polylang.php:258
+#: library/classes/content/class-polylang.php:259
 msgid "Raison sociale"
 msgstr "Firmenname"
 
-#: library/classes/content/class-polylang.php:259
+#: library/classes/content/class-polylang.php:260
 msgid "Email"
 msgstr "E-Mail"
 
-#: library/classes/content/class-polylang.php:260
+#: library/classes/content/class-polylang.php:261
 msgid "Téléphone"
 msgstr "Telefon-Nummer"
 
-#: library/classes/content/class-polylang.php:261
+#: library/classes/content/class-polylang.php:262
 msgid "Votre commentaire"
 msgstr "Dein Kommentar"
 
-#: library/classes/content/class-polylang.php:262
+#: library/classes/content/class-polylang.php:263
 msgid "Valider ma demande de devis"
 msgstr "Meine Anfrage nach einem Angebot bestätigen"
 
-#: library/classes/content/class-polylang.php:263
+#: library/classes/content/class-polylang.php:264
 msgid "Mon panier"
 msgstr "Mein Warenkorb"
 
-#: library/classes/content/class-polylang.php:264
+#: library/classes/content/class-polylang.php:265
 msgid "TOTAL "
 msgstr "GESAMT "
 
-#: library/classes/content/class-polylang.php:265
+#: library/classes/content/class-polylang.php:266
 msgid "Base de"
 msgstr "Basis von"
 
-#: library/classes/content/class-polylang.php:269
+#: library/classes/content/class-polylang.php:270
 msgid "Publié le"
 msgstr "Veröffentlicht am"
 
-#: library/classes/content/class-polylang.php:270
-#: library/classes/process/class-woody-compilers.php:408
+#: library/classes/content/class-polylang.php:271
+#: library/classes/process/class-woody-compilers.php:414
 msgid "Désolé, aucun contenu ne correspond à votre recherche"
 msgstr "Es tut uns leid, kein Inhalt entspricht Ihrer Suche"
 
-#: library/classes/content/class-polylang.php:271
+#: library/classes/content/class-polylang.php:272
 msgid "Lire aussi"
 msgstr "Lesen Sie auch"
 
-#: library/classes/content/class-polylang.php:274
+#: library/classes/content/class-polylang.php:275
 msgid "Merci d'activer le javascript pour afficher"
 msgstr "Bitte aktivieren Sie Javascript, um die Anzeige zu ermöglichen"
 
-#: library/classes/content/class-polylang.php:275
+#: library/classes/content/class-polylang.php:276
 msgid "le bloc de commentaires Disqus"
 msgstr "der Disqus Kommentarblock"
 
-#: library/classes/content/class-polylang.php:276
+#: library/classes/content/class-polylang.php:277
 msgid ""
 "Une erreur est survenue lors de l'affichage des commentaires. Merci de "
 "contacter votre administrateur"
@@ -790,160 +794,160 @@ msgstr ""
 "Bei der Anzeige von Kommentaren ist ein Fehler aufgetreten. Bitte wenden Sie "
 "sich an Ihren Administrator"
 
-#: library/classes/content/class-polylang.php:279
+#: library/classes/content/class-polylang.php:280
 msgid "Remontées mécaniques"
 msgstr "Skilifte"
 
-#: library/classes/content/class-polylang.php:280
+#: library/classes/content/class-polylang.php:281
 msgid "Pistes"
 msgstr "Tracks"
 
-#: library/classes/content/class-polylang.php:281
+#: library/classes/content/class-polylang.php:282
 msgid "Domaine Alpin"
 msgstr "Alpine Domain"
 
-#: library/classes/content/class-polylang.php:282
+#: library/classes/content/class-polylang.php:283
 msgid "Domaine Nordique"
 msgstr "Nordische Domäne"
 
-#: library/classes/content/class-polylang.php:283
+#: library/classes/content/class-polylang.php:284
 msgid "Détails"
 msgstr "Details"
 
-#: library/classes/content/class-polylang.php:284
+#: library/classes/content/class-polylang.php:285
 msgid "Météo"
 msgstr "Wettervorhersage"
 
-#: library/classes/content/class-polylang.php:285
+#: library/classes/content/class-polylang.php:286
 msgid "Voir le bulletin météo"
 msgstr "Siehe den Wetterbericht"
 
-#: library/classes/content/class-polylang.php:286
+#: library/classes/content/class-polylang.php:287
 msgid "Bulletin complet"
 msgstr "Vollständiges Bulletin"
 
-#: library/classes/content/class-polylang.php:287
+#: library/classes/content/class-polylang.php:288
 msgid "Webcams"
 msgstr "Webcams"
 
-#: library/classes/content/class-polylang.php:288
+#: library/classes/content/class-polylang.php:289
 msgid "Voir les webcams"
 msgstr "Sehen Sie sich die Webcams an"
 
-#: library/classes/content/class-polylang.php:289
+#: library/classes/content/class-polylang.php:290
 msgid "Flux erroné !"
 msgstr "Falscher Feed!"
 
-#: library/classes/content/class-polylang.php:290
+#: library/classes/content/class-polylang.php:291
 msgid "Module Infoneige non configuré !"
 msgstr "Schnee-Modul nicht konfiguriert!"
 
-#: library/classes/content/class-polylang.php:291
+#: library/classes/content/class-polylang.php:292
 msgid "Enneigement"
 msgstr "Beschneiung"
 
-#: library/classes/content/class-polylang.php:292
+#: library/classes/content/class-polylang.php:293
 msgid "Hauteur"
 msgstr "Höhe"
 
-#: library/classes/content/class-polylang.php:293
+#: library/classes/content/class-polylang.php:294
 msgid "Pistes ouvertes"
 msgstr "Offene Spuren"
 
-#: library/classes/content/class-polylang.php:294
+#: library/classes/content/class-polylang.php:295
 msgid "Risque d'avalanche"
 msgstr "Lawinengefahr"
 
-#: library/classes/content/class-polylang.php:295
+#: library/classes/content/class-polylang.php:296
 msgid "Limité"
 msgstr "Begrenzt"
 
-#: library/classes/content/class-polylang.php:296
+#: library/classes/content/class-polylang.php:297
 msgid "Moyen"
 msgstr "Mittel"
 
-#: library/classes/content/class-polylang.php:297
+#: library/classes/content/class-polylang.php:298
 msgid "Élevé"
 msgstr "Hoch"
 
-#: library/classes/content/class-polylang.php:298
+#: library/classes/content/class-polylang.php:299
 msgid "Non spécifié"
 msgstr "Nicht spezifiziert"
 
-#: library/classes/content/class-polylang.php:299
+#: library/classes/content/class-polylang.php:300
 msgid "Qualité de la neige"
 msgstr "Schneequalität"
 
-#: library/classes/content/class-polylang.php:300
+#: library/classes/content/class-polylang.php:301
 msgid "En live"
 msgstr "Live"
 
-#: library/classes/content/class-polylang.php:301
+#: library/classes/content/class-polylang.php:302
 msgid "Toute l'info live"
 msgstr "Alle Live-Infos"
 
-#: library/classes/content/class-polylang.php:302
+#: library/classes/content/class-polylang.php:303
 msgid "Altitude"
 msgstr "Höhenlage"
 
-#: library/classes/content/class-polylang.php:303
+#: library/classes/content/class-polylang.php:304
 msgid "Fraîche"
 msgstr "Frisch"
 
-#: library/classes/content/class-polylang.php:304
+#: library/classes/content/class-polylang.php:305
 msgid "Douce"
 msgstr "Douce"
 
-#: library/classes/content/class-polylang.php:305
+#: library/classes/content/class-polylang.php:306
 msgid "Dure"
 msgstr "Hart"
 
-#: library/classes/content/class-polylang.php:306
+#: library/classes/content/class-polylang.php:307
 msgid "Humide"
 msgstr "Feucht"
 
-#: library/classes/content/class-polylang.php:307
+#: library/classes/content/class-polylang.php:308
 msgid "De printemps"
 msgstr "Von Frühling"
 
-#: library/classes/content/class-polylang.php:310
+#: library/classes/content/class-polylang.php:311
 msgid "Ouverte"
 msgstr "Öffnen Sie"
 
-#: library/classes/content/class-polylang.php:311
+#: library/classes/content/class-polylang.php:312
 msgid "Fermée"
 msgstr "Geschlossen"
 
-#: library/classes/content/class-polylang.php:312
+#: library/classes/content/class-polylang.php:313
 msgid "Prévision d'ouverture"
 msgstr "Eröffnungsprognose"
 
-#: library/classes/content/class-polylang.php:313
+#: library/classes/content/class-polylang.php:314
 msgid "Liaison"
 msgstr "Verbindung"
 
-#: library/classes/process/class-woody-getters.php:637
-#: library/classes/process/class-woody-getters.php:638
+#: library/classes/process/class-woody-getters.php:683
+#: library/classes/process/class-woody-getters.php:684
 msgid "Découvrir"
 msgstr "Entdecken"
 
-#: library/classes/process/class-woody-getters.php:797
+#: library/classes/process/class-woody-getters.php:843
 msgid "Informations prestataire"
 msgstr "Anbieter-Informationen"
 
-#: library/classes/process/class-woody-getters.php:802
+#: library/classes/process/class-woody-getters.php:848
 msgid "Horaires"
 msgstr "Zeitpläne"
 
-#: library/classes/process/class-woody-getters.php:807
+#: library/classes/process/class-woody-getters.php:853
 msgid "Carte"
 msgstr "Karte"
 
-#: library/classes/process/class-woody-getters.php:812
+#: library/classes/process/class-woody-getters.php:858
 msgid "Avis"
 msgstr "Meinung"
 
-#: library/classes/process/class-woody-getters.php:817
+#: library/classes/process/class-woody-getters.php:863
 msgid "Poser une question"
 msgstr "Unsere Vorschläge"
 
@@ -963,7 +967,7 @@ msgstr ""
 "Die gesuchte Seite wurde möglicherweise gelöscht oder ist vorübergehend "
 "nicht verfügbar."
 
-#: library/templates/template.php:771
+#: library/templates/template.php:773
 msgid "Nos suggestions"
 msgstr "Unsere Vorschläge"
 
