@@ -104,14 +104,14 @@ class WoodyTheme_WoodyGetters
                         continue;
                     }
                     switch ($item['content_selection']->post_type) {
-                        case 'page':
-                            $post_preview = $this->getPagePreview($wrapper, $item['content_selection'], $clickable);
-                            break;
                         case 'touristic_sheet':
                             $post_preview = $this->getTouristicSheetPreview($wrapper, $item['content_selection']);
                             break;
                         case 'woody_topic':
                             $post_preview = $this->getTopicPreview($wrapper, $item['content_selection']);
+                            break;
+                        default:
+                            $post_preview = $this->getPagePreview($wrapper, $item['content_selection'], $clickable);
                             break;
                     }
                     $the_items['items'][$key] = (!empty($post_preview)) ?  $post_preview : [];
