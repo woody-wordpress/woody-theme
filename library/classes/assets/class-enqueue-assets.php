@@ -316,6 +316,11 @@ class WoodyTheme_Enqueue_Assets
         $dependencies = apply_filters('woody_mainjs_dependencies', $dependencies);
         wp_enqueue_script('main-javascripts', $this->assetPath(WP_DIST_URL . '/js/main.js'), $dependencies, null);
 
+        // Enqueue utils Scripts
+        if (WP_ENV == 'dev') {
+            wp_enqueue_script('grid_utils', 'https://cdn.jsdelivr.net/gh/orpheebesson/grid-utils/src/grid-utils.min.js', [], null);
+        }
+
         // Enqueue the main Stylesheet.
         if ($this->isTouristicSheet || $this->isTouristicPlaylist) {
             $tourism_css = apply_filters('woody_theme_stylesheets', 'tourism');
