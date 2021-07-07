@@ -276,7 +276,7 @@ class WoodyTheme_WoodyProcess
         // Création du paramètre tax_query pour la wp_query
         // Référence : https://codex.wordpress.org/Class_Reference/WP_Query
         // Pour une mise en avant de page, on peut filtrer sur le type de publication
-        if ($query_form['focused_type'] != 'documents' && !empty($query_form['focused_content_type'])) {
+        if (((empty($query_form['focused_type'])) || $query_form['focused_type'] != 'documents') && !empty($query_form['focused_content_type'])) {
             $tax_query = [
                 'relation' => 'AND',
                 'page_type' => array(
@@ -289,7 +289,7 @@ class WoodyTheme_WoodyProcess
         }
 
         // Pour une mise en avant de documents, on peut filtrer sur la catégorie de média
-        if ($query_form['focused_type'] == 'documents' && !empty($query_form['focused_media_terms'])) {
+        if (((!empty($query_form['focused_type'])) || $query_form['focused_type'] == 'documents') && !empty($query_form['focused_media_terms'])) {
             $tax_query = [
                 'relation' => 'AND',
                 'page_type' => array(
@@ -446,12 +446,12 @@ class WoodyTheme_WoodyProcess
 
         // On créé la wp_query en fonction des choix faits dans le backoffice
         // NB : si aucun choix n'a été fait, on remonte automatiquement tous les contenus de type page
-        $post_type = ($query_form['focused_type'] == 'documents') ? 'attachment' : 'page';
+        $post_type = (!empty($query_form['focused_type']) && $query_form['focused_type'] == 'documents') ? 'attachment' : 'page';
 
         $the_query = [
             'post_type' => $post_type,
             'posts_per_page' => (!empty($query_form['focused_count'])) ? $query_form['focused_count'] : 12,
-            'post_status' => ($query_form['focused_type'] == 'documents') ? ['inherit', 'publish'] : 'publish',
+            'post_status' => (!empty($query_form['focused_type']) && $query_form['focused_type'] == 'documents') ? ['inherit', 'publish'] : 'publish',
             'post__not_in' => array($the_post->ID),
             'order' => $order,
             'orderby' => $orderby,
@@ -477,13 +477,13 @@ class WoodyTheme_WoodyProcess
 
         // Si Hiérarchie = Enfants directs de la page
         // On passe le post ID dans le paramètre post_parent de la query
-        if ($query_form['focused_type'] != 'documents' && $query_form['focused_hierarchy'] == 'child_of') {
+        if ((empty($query_form['focused_type']) || $query_form['focused_type'] != 'documents') && $query_form['focused_hierarchy'] == 'child_of') {
             $the_query['post_parent'] = $the_post->ID;
         }
 
         // Si Hiérarchie = Pages de même niveau
         // On passe le parent_post_ID dans le paramètre post_parent de la query
-        if ($query_form['focused_type'] != 'documents' && $query_form['focused_hierarchy'] == 'brother_of') {
+        if ((empty($query_form['focused_type']) || $query_form['focused_type'] != 'documents') && $query_form['focused_hierarchy'] == 'brother_of') {
             $the_query['post_parent'] = $the_post->post_parent;
         }
 
