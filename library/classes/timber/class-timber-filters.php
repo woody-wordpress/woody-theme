@@ -239,6 +239,10 @@ class WoodyTheme_Timber_Filters
             $locale = 'fr_FR';
         }
 
+        if ($locale == 'br_BR') {
+            $locale = 'fr_FR';
+        }
+
         // https://github.com/fightbulc/moment.php
         \Moment\Moment::setLocale($locale);
         $m = new \Moment\Moment(substr($date, 0, 19));

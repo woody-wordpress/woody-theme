@@ -232,25 +232,27 @@ class WoodyTheme_WoodyProcess
     public function processWoodySubLayouts($wrapper = [], $gridTplField, $uniqIid_prefix = '', $context)
     {
         $woodyTwigsPaths = getWoodyTwigPaths();
-        foreach ($wrapper as $grid_key => $grid) {
-            $grid_content = [];
-            if (!empty($uniqIid_prefix) && is_numeric($grid_key)) {
-                $wrapper[$grid_key]['el_id'] = $uniqIid_prefix . '-' . uniqid();
-            }
-
-            // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
-            if (!empty($grid['light_section_content']) && is_array($grid['light_section_content'])) {
-                foreach ($grid['light_section_content'] as $layout) {
-                    $grid_content['items'][] = $this->processWoodyLayouts($layout, $context);
+        if (!empty($wrapper)) {
+            foreach ($wrapper as $grid_key => $grid) {
+                $grid_content = [];
+                if (!empty($uniqIid_prefix) && is_numeric($grid_key)) {
+                    $wrapper[$grid_key]['el_id'] = $uniqIid_prefix . '-' . uniqid();
                 }
 
-                // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
-                $wrapper[$grid_key]['light_section_content'] = \Timber::compile($woodyTwigsPaths[$grid[$gridTplField]], $grid_content);
-            }
-        }
+                // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
+                if (!empty($grid['light_section_content']) && is_array($grid['light_section_content'])) {
+                    foreach ($grid['light_section_content'] as $layout) {
+                        $grid_content['items'][] = $this->processWoodyLayouts($layout, $context);
+                    }
 
-        if (!empty($uniqIid_prefix)) {
-            $wrapper['group_id'] = $uniqIid_prefix . '-' . uniqid();
+                    // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
+                    $wrapper[$grid_key]['light_section_content'] = \Timber::compile($woodyTwigsPaths[$grid[$gridTplField]], $grid_content);
+                }
+            }
+
+            if (!empty($uniqIid_prefix)) {
+                $wrapper['group_id'] = $uniqIid_prefix . '-' . uniqid();
+            }
         }
 
         return $wrapper;

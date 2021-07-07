@@ -949,3 +949,15 @@
         opacity: .4;
     }
 }
+
+// Retour à la ligne des options de couleur de fond dans Options avancées => Couleur de fond
+.acf-field-5b043ca4a6fe3 {
+    .acf-button-group {
+        flex-wrap: wrap;
+
+        label {
+            flex: 0 1;
+            margin: 0 0 4px -1px;
+        }
+    }
+}
