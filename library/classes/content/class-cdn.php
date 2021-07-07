@@ -33,6 +33,11 @@ class WoodyTheme_CDN
 
     public function timberRender($render)
     {
+        // Not apply on sitemap
+        if (strpos($_SERVER['REQUEST_URI'], 'sitemap') != false) {
+            return $render;
+        }
+
         preg_match_all('/("|\')\/app\/(dist|themes|uploads|plugins)\/([^"\' ]*)/', $render, $matches);
         $render = $this->replaceCDN($matches, $render);
 
