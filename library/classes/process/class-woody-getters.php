@@ -45,7 +45,7 @@ class WoodyTheme_WoodyGetters
             foreach ($query_result->posts as $key => $post) {
 
                 //On formate les données en fonction du type de mise en avant
-                if ($wrapper['focused_type'] == 'documents') {
+                if (!empty($wrapper['focused_type']) && $wrapper['focused_type'] == 'documents') {
                     $data = $this->getAttachmentPreview($wrapper, $post);
                 } else {
                     // On vérifie si la page est de type miroir
