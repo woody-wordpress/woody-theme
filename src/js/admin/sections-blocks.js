@@ -1,8 +1,4 @@
 !(function($, undefined) {
-    // $('.post-php').each(function() {
-    //
-    // });
-
     function blockListFilter(field) {
         field.$el.find('.button[data-name="add-layout"]').on('click', function() {
             var getfcTooltip = setInterval(function() {
