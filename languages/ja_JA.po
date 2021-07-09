@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 3.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2021-06-28T12:10:04+02:00\n"
-"PO-Revision-Date: 2021-06-28 12:13+0200\n"
+"POT-Creation-Date: 2021-07-09T10:58:04+02:00\n"
+"PO-Revision-Date: 2021-07-09 11:02+0200\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: ja_JP\n"
@@ -352,32 +352,32 @@ msgid "enfant(s)"
 msgstr "子供"
 
 #: library/classes/content/class-polylang.php:153
-#: library/classes/timber/class-timber-filters.php:280
+#: library/classes/timber/class-timber-filters.php:284
 #: library/functions/01_assets.php:91
 msgid "jour"
 msgstr "日"
 
 #: library/classes/content/class-polylang.php:154
-#: library/classes/timber/class-timber-filters.php:283
+#: library/classes/timber/class-timber-filters.php:287
 #: library/functions/01_assets.php:92
 msgid "jours"
 msgstr "日"
 
 #: library/classes/content/class-polylang.php:155
-#: library/classes/timber/class-timber-filters.php:286
+#: library/classes/timber/class-timber-filters.php:290
 #: library/functions/01_assets.php:89
 msgid "semaine"
 msgstr "週"
 
 #: library/classes/content/class-polylang.php:156
-#: library/classes/timber/class-timber-filters.php:289
+#: library/classes/timber/class-timber-filters.php:293
 #: library/functions/01_assets.php:90
 msgid "semaines"
 msgstr "週"
 
 #: library/classes/content/class-polylang.php:157
-#: library/classes/timber/class-timber-filters.php:292
-#: library/classes/timber/class-timber-filters.php:295
+#: library/classes/timber/class-timber-filters.php:296
+#: library/classes/timber/class-timber-filters.php:299
 msgid "mois"
 msgstr "月"
 
@@ -428,8 +428,8 @@ msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "あなたが探しているページはここにあるかもしれません"
 
 #: library/classes/content/class-polylang.php:169
-#: library/classes/process/class-woody-getters.php:391
-#: library/classes/process/class-woody-getters.php:605
+#: library/classes/process/class-woody-getters.php:397
+#: library/classes/process/class-woody-getters.php:611
 msgid "Lire la suite"
 msgstr "続きを読む"
 
@@ -450,7 +450,7 @@ msgid "Réservable"
 msgstr "予約可能"
 
 #: library/classes/content/class-polylang.php:174
-#: library/classes/process/class-woody-getters.php:478
+#: library/classes/process/class-woody-getters.php:484
 msgid "Télécharger"
 msgstr "ダウンロード"
 
@@ -604,12 +604,12 @@ msgstr "北"
 
 #: library/classes/content/class-polylang.php:218
 #: library/classes/content/class-polylang.php:236
-#: library/classes/content/class-polylang.php:309
+#: library/classes/content/class-polylang.php:310
 msgid "Matin"
 msgstr "朝"
 
 #: library/classes/content/class-polylang.php:219
-#: library/classes/content/class-polylang.php:310
+#: library/classes/content/class-polylang.php:311
 msgid "Après-midi"
 msgstr "午後"
 
@@ -765,192 +765,198 @@ msgid "Base de"
 msgstr "のベース"
 
 #: library/classes/content/class-polylang.php:270
+#: library/classes/process/class-woody-getters.php:348
 msgid "Publié le"
 msgstr "に投稿"
 
 #: library/classes/content/class-polylang.php:271
+#: library/classes/process/class-woody-getters.php:348
+msgid "Modifié le"
+msgstr "修正日"
+
+#: library/classes/content/class-polylang.php:272
 #: library/classes/process/class-woody-compilers.php:414
 msgid "Désolé, aucun contenu ne correspond à votre recherche"
 msgstr "申し訳ありませんが、検索に一致するページはありません"
 
-#: library/classes/content/class-polylang.php:272
+#: library/classes/content/class-polylang.php:273
 msgid "Lire aussi"
 msgstr "続きを読む"
 
-#: library/classes/content/class-polylang.php:275
+#: library/classes/content/class-polylang.php:276
 msgid "Merci d'activer le javascript pour afficher"
 msgstr "表示するにはJavaScriptを有効にしてください"
 
-#: library/classes/content/class-polylang.php:276
+#: library/classes/content/class-polylang.php:277
 msgid "le bloc de commentaires Disqus"
 msgstr "Disqusコメントブロック"
 
-#: library/classes/content/class-polylang.php:277
+#: library/classes/content/class-polylang.php:278
 msgid ""
 "Une erreur est survenue lors de l'affichage des commentaires. Merci de "
 "contacter votre administrateur"
 msgstr "コメントの表示中にエラーが発生しました。 管理者に連絡してください"
 
-#: library/classes/content/class-polylang.php:280
+#: library/classes/content/class-polylang.php:281
 msgid "Remontées mécaniques"
 msgstr "スキーリフト"
 
-#: library/classes/content/class-polylang.php:281
+#: library/classes/content/class-polylang.php:282
 msgid "Pistes"
 msgstr "トレイル"
 
-#: library/classes/content/class-polylang.php:282
+#: library/classes/content/class-polylang.php:283
 msgid "Domaine Alpin"
 msgstr "アルパインドメイン"
 
-#: library/classes/content/class-polylang.php:283
+#: library/classes/content/class-polylang.php:284
 msgid "Domaine Nordique"
 msgstr "北欧ドメイン"
 
-#: library/classes/content/class-polylang.php:284
+#: library/classes/content/class-polylang.php:285
 msgid "Détails"
 msgstr "細部"
 
-#: library/classes/content/class-polylang.php:285
+#: library/classes/content/class-polylang.php:286
 msgid "Météo"
 msgstr "天気"
 
-#: library/classes/content/class-polylang.php:286
+#: library/classes/content/class-polylang.php:287
 msgid "Voir le bulletin météo"
 msgstr "天気予報を見る"
 
-#: library/classes/content/class-polylang.php:287
+#: library/classes/content/class-polylang.php:288
 msgid "Bulletin complet"
 msgstr "速報"
 
-#: library/classes/content/class-polylang.php:288
+#: library/classes/content/class-polylang.php:289
 msgid "Webcams"
 msgstr "カム"
 
-#: library/classes/content/class-polylang.php:289
+#: library/classes/content/class-polylang.php:290
 msgid "Voir les webcams"
 msgstr "ウェブカメラを見る"
 
-#: library/classes/content/class-polylang.php:290
+#: library/classes/content/class-polylang.php:291
 msgid "Flux erroné !"
 msgstr "餌を間違えた！"
 
-#: library/classes/content/class-polylang.php:291
+#: library/classes/content/class-polylang.php:292
 msgid "Module Infoneige non configuré !"
 msgstr "スノーモジュールが設定されていません。"
 
-#: library/classes/content/class-polylang.php:292
+#: library/classes/content/class-polylang.php:293
 msgid "Enneigement"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:293
+#: library/classes/content/class-polylang.php:294
 #, fuzzy
 #| msgid "Haute mer"
 msgid "Hauteur"
 msgstr "公海"
 
-#: library/classes/content/class-polylang.php:294
+#: library/classes/content/class-polylang.php:295
 msgid "Pistes ouvertes"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:295
+#: library/classes/content/class-polylang.php:296
 msgid "Risque d'avalanche"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:296
+#: library/classes/content/class-polylang.php:297
 msgid "Limité"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:297
+#: library/classes/content/class-polylang.php:298
 msgid "Moyen"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:298
+#: library/classes/content/class-polylang.php:299
 msgid "Élevé"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:299
+#: library/classes/content/class-polylang.php:300
 msgid "Non spécifié"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:300
+#: library/classes/content/class-polylang.php:301
 msgid "Qualité de la neige"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:301
+#: library/classes/content/class-polylang.php:302
 msgid "En live"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:302
+#: library/classes/content/class-polylang.php:303
 msgid "Toute l'info live"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:303
+#: library/classes/content/class-polylang.php:304
 msgid "Altitude"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:304
+#: library/classes/content/class-polylang.php:305
 msgid "Fraîche"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:305
+#: library/classes/content/class-polylang.php:306
 msgid "Douce"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:306
+#: library/classes/content/class-polylang.php:307
 msgid "Dure"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:307
+#: library/classes/content/class-polylang.php:308
 #, fuzzy
 #| msgid "Humidité"
 msgid "Humide"
 msgstr "湿度"
 
-#: library/classes/content/class-polylang.php:308
+#: library/classes/content/class-polylang.php:309
 msgid "De printemps"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:311
+#: library/classes/content/class-polylang.php:312
 msgid "Ouverte"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:312
+#: library/classes/content/class-polylang.php:313
 #, fuzzy
 #| msgid "Fermer"
 msgid "Fermée"
 msgstr "閉じる"
 
-#: library/classes/content/class-polylang.php:313
+#: library/classes/content/class-polylang.php:314
 msgid "Prévision d'ouverture"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:314
+#: library/classes/content/class-polylang.php:315
 msgid "Liaison"
 msgstr ""
 
-#: library/classes/process/class-woody-getters.php:683
-#: library/classes/process/class-woody-getters.php:684
+#: library/classes/process/class-woody-getters.php:689
+#: library/classes/process/class-woody-getters.php:690
 msgid "Découvrir"
 msgstr "発見"
 
-#: library/classes/process/class-woody-getters.php:843
+#: library/classes/process/class-woody-getters.php:849
 msgid "Informations prestataire"
 msgstr "情報"
 
-#: library/classes/process/class-woody-getters.php:848
+#: library/classes/process/class-woody-getters.php:854
 msgid "Horaires"
 msgstr "タイムテーブル"
 
-#: library/classes/process/class-woody-getters.php:853
+#: library/classes/process/class-woody-getters.php:859
 msgid "Carte"
 msgstr "地図"
 
-#: library/classes/process/class-woody-getters.php:858
+#: library/classes/process/class-woody-getters.php:864
 msgid "Avis"
 msgstr "お知らせ"
 
-#: library/classes/process/class-woody-getters.php:863
+#: library/classes/process/class-woody-getters.php:869
 msgid "Poser une question"
 msgstr "私たちの提案"
 
