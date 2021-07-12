@@ -295,6 +295,37 @@
                     "min": "",
                     "max": ""
                 },
+                "layout_60ec5899ea4f6": {
+                    "key": "layout_60ec5899ea4f6",
+                    "name": "accordion",
+                    "label": "Accordéon (FAQ)",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_60ec5899ea4f7",
+                            "label": "Accordéon (FAQ)",
+                            "name": "accordion",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b0433ff0bb17"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
                 "layout_5c77e7ae6cbd2": {
                     "key": "layout_5c77e7ae6cbd2",
                     "name": "geo_map",
@@ -356,6 +387,24 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_5bfd05a7a542a": {
+                    "key": "layout_5bfd05a7a542a",
+                    "name": "auto_focus_sheets",
+                    "label": "Mise en avant de fiches SIT (sélection automatique)",
+                    "display": "block",
+                    "sub_fields": [],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_light_manual_focus_minisheet": {
+                    "key": "layout_light_manual_focus_minisheet",
+                    "name": "manual_focus_minisheet",
+                    "label": "Mini-fiche SIT",
+                    "display": "block",
+                    "sub_fields": [],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Ajouter un bloc",
@@ -380,5 +429,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "Ce champ est un allégé de groupe section utilisé dans les groupes d'onglets et de slides",
-    "modified": 1620054923
+    "modified": 1626102122
 }
