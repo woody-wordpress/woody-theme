@@ -398,8 +398,8 @@ class WoodyTheme_Enqueue_Assets
 
     protected function setAssetPaths()
     {
-        $assetPaths = wp_cache_get('woody_asset_paths', 'woody');
-        if (empty($assetPaths) || WP_ENV == 'dev') {
+        $assetPaths = (WP_ENV != 'dev') ? wp_cache_get('woody_asset_paths', 'woody') : [];
+        if (empty($assetPaths)) {
             $assetPaths = [];
 
             // Sources for Assets
@@ -426,7 +426,7 @@ class WoodyTheme_Enqueue_Assets
                 }
             }
 
-            if (!empty($assetPaths)) {
+            if (!empty($assetPaths) && WP_ENV != 'dev') {
                 wp_cache_set('woody_asset_paths', $assetPaths, 'woody');
             }
         }
