@@ -50,6 +50,15 @@ class WoodyTheme_Commands
     {
         do_action('woody_subtheme_update');
         output_success('woody_subtheme_update');
+
+        // VERSION file is used by memcached WP_CACHE_KEY_SALT
+        $fs = new Filesystem();
+        $version_file = WP_ROOT_DIR . '/web/app/themes/' . WP_SITE_KEY . '/VERSION';
+        if ($fs->exists($version_file)) {
+            $fs->remove($version_file);
+        }
+        $fs->dumpFile($version_file, time());
+        output_success('woody_flush_cache SITE');
     }
 
     public function flush_core()
@@ -61,21 +70,14 @@ class WoodyTheme_Commands
         do_action('woody_theme_update');
         output_success('woody_theme_update');
 
-        // Clear the cache to prevent an update_option() from saving a stale db_version to the cache
-        wp_cache_flush();
-        output_success('woody_flush_cache');
-
-        // (Not all cache back ends listen to 'flush')
-        global $wpdb;
-        $results = $wpdb->get_results("SELECT option_name FROM {$wpdb->prefix}options WHERE option_name LIKE '%options_%'");
-        if (!empty($results)) {
-            foreach ($results as $val) {
-                wp_cache_delete($val->option_name, 'options');
-            }
+        // VERSION file is used by memcached WP_CACHE_KEY_SALT
+        $fs = new Filesystem();
+        $version_file = WP_ROOT_DIR . '/VERSION';
+        if ($fs->exists($version_file)) {
+            $fs->remove($version_file);
         }
-        wp_cache_delete('alloptions', 'options');
-        wp_cache_delete('notoptions', 'options');
-        output_success('wp_cache_delete alloptions');
+        $fs->dumpFile($version_file, time());
+        output_success('woody_flush_cache CORE');
     }
 
     public function cache_warm()
