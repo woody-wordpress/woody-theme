@@ -62,7 +62,7 @@ class WoodyTheme_Commands
         output_success('woody_theme_update');
 
         global $wpdb;
-        $results = $wpdb->get_results("SELECT option_name FROM {$wpdb->prefix}options WHERE option_name LIKE '%options_%'");
+        $results = $wpdb->get_results("SELECT option_name FROM {$wpdb->prefix}options WHERE autoload='no'");
         if (!empty($results)) {
             foreach ($results as $val) {
                 wp_cache_delete($val->option_name, 'options');
