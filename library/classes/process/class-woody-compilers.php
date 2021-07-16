@@ -354,12 +354,12 @@ class WoodyTheme_WoodyCompilers
         }
 
         // On crée/update l'option qui liste les caches pour pouvoir les supprimer lors d'un save_post
-        $cache_list = get_option('woody_list_filters_cache');
+        $cache_list = dropzone_get('woody_list_filters_cache');
         if (empty($cache_list)) {
-            update_option('woody_list_filters_cache', [$cache_key], false);
-        } elseif (!array_key_exists($cache_key, $cache_list)) {
+            dropzone_set('woody_list_filters_cache', [$cache_key]);
+        } elseif (!in_array($cache_key, $cache_list)) {
             $cache_list[] = $cache_key;
-            update_option('woody_list_filters_cache', $cache_list, false);
+            dropzone_set('woody_list_filters_cache', $cache_list);
         }
 
         // On récupère les ids des posts non filtrés pour les passer au paramètre post__in de la query
@@ -443,12 +443,12 @@ class WoodyTheme_WoodyCompilers
 
     public function savePost()
     {
-        $cache_list = get_option('woody_list_filters_cache');
+        $cache_list = dropzone_get('woody_list_filters_cache');
         if (!empty($cache_list)) {
             foreach ($cache_list as $cache_key) {
                 wp_cache_delete($cache_key, 'woody');
             }
-            delete_option('woody_list_filters_cache');
+            dropzone_delete('woody_list_filters_cache');
         }
     }
 
