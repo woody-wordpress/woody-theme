@@ -345,7 +345,7 @@ class WoodyTheme_WoodyGetters
                 $modified = get_the_modified_date('', $item->ID);
 
                 $data['post_date'] = [
-                    'prefix' => ($created == $modified) ? __('Publié le', 'woody-theme') : __('Modifié le', 'woody-theme'),
+                    'prefix' => ($created == $modified) ? __('Publié le', 'woody-theme') : __('Mis à jour le', 'woody-theme'),
                     'value' => ($created == $modified) ? $created : $modified
                 ];
             }

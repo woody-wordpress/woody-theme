@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 3.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2021-07-09T10:58:04+02:00\n"
-"PO-Revision-Date: 2021-07-09 11:02+0200\n"
+"POT-Creation-Date: 2021-07-21T09:48:46+02:00\n"
+"PO-Revision-Date: 2021-07-21 09:52+0200\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: ja_JP\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 3.0\n"
 "X-Domain: woody-theme\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -771,8 +771,8 @@ msgstr "に投稿"
 
 #: library/classes/content/class-polylang.php:271
 #: library/classes/process/class-woody-getters.php:348
-msgid "Modifié le"
-msgstr "修正日"
+msgid "Mis à jour le"
+msgstr "更新日"
 
 #: library/classes/content/class-polylang.php:272
 #: library/classes/process/class-woody-compilers.php:414
@@ -977,6 +977,9 @@ msgstr "探しているページは削除されたか、一時的に利用でき
 #: library/templates/template.php:773
 msgid "Nos suggestions"
 msgstr "私たちの提案"
+
+#~ msgid "Modifié le"
+#~ msgstr "修正日"
 
 #~ msgid "Page non trouvée %%sep%% %%sitename%%"
 #~ msgstr "ページが見つかりません %%sep%% %%sitename%%"

@@ -268,7 +268,7 @@ class WoodyTheme_Polylang
 
         // Divers
         __('Publié le', 'woody-theme');
-        __('Modifié le', 'woody-theme');
+        __('Mis à jour le', 'woody-theme');
         __('Désolé, aucun contenu ne correspond à votre recherche', 'woody-theme');
         __('Lire aussi', 'woody-theme');
 
