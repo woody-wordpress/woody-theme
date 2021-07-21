@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.6.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2021-07-09T10:58:04+02:00\n"
-"PO-Revision-Date: 2021-07-09 11:00+0200\n"
+"POT-Creation-Date: 2021-07-21T09:48:46+02:00\n"
+"PO-Revision-Date: 2021-07-21 09:50+0200\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 3.0\n"
 "X-Domain: woody-theme\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -772,8 +772,8 @@ msgstr "Veröffentlicht am"
 
 #: library/classes/content/class-polylang.php:271
 #: library/classes/process/class-woody-getters.php:348
-msgid "Modifié le"
-msgstr "Geändert am"
+msgid "Mis à jour le"
+msgstr "Aktualisiert am"
 
 #: library/classes/content/class-polylang.php:272
 #: library/classes/process/class-woody-compilers.php:414
@@ -976,6 +976,9 @@ msgstr ""
 #: library/templates/template.php:773
 msgid "Nos suggestions"
 msgstr "Unsere Vorschläge"
+
+#~ msgid "Modifié le"
+#~ msgstr "Geändert am"
 
 #~ msgid "Mon carnet de voyage"
 #~ msgstr "Mein Reise-Notebook"
