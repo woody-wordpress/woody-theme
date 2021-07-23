@@ -44,7 +44,7 @@ class WoodyTheme_Robots
                 'Disallow: /*preview_id=',
                 'Disallow: /*preview_nonce=',
                 'Disallow: /*preview=',
-                'Disallow: api',
+                'Disallow: /api',
                 'Disallow: ?query'
             ];
 

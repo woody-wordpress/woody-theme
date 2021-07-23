@@ -44,19 +44,23 @@ class WoodyTheme_WoodyGetters
         if (!empty($query_result->posts)) {
             foreach ($query_result->posts as $key => $post) {
 
-                // On vérifie si la page est de type miroir
-                $page_type = get_the_terms($post->ID, 'page_type');
-                if ($page_type[0]->slug == 'mirror_page') {
-                    $mirror = get_field('mirror_page_reference', $post->ID);
-                    if (!empty(get_post($mirror))) {
-                        $post = get_post($mirror);
+                //On formate les données en fonction du type de mise en avant
+                if (!empty($wrapper['focused_type']) && $wrapper['focused_type'] == 'documents') {
+                    $data = $this->getAttachmentPreview($wrapper, $post);
+                } else {
+                    // On vérifie si la page est de type miroir
+                    $page_type = get_the_terms($post->ID, 'page_type');
+                    if ($page_type[0]->slug == 'mirror_page') {
+                        $mirror = get_field('mirror_page_reference', $post->ID);
+                        if (!empty(get_post($mirror))) {
+                            $post = get_post($mirror);
+                        }
                     }
+
+                    $data = $this->getPagePreview($wrapper, $post);
                 }
 
-                $data = [];
-                $data = $this->getPagePreview($wrapper, $post);
 
-                // $data['link']['title'] = (!empty($wrapper['links_label'])) ? $wrapper['links_label'] : '';
                 $the_items['items'][$key] = $data;
             }
             $the_items['max_num_pages'] = $query_result->max_num_pages;
@@ -100,14 +104,14 @@ class WoodyTheme_WoodyGetters
                         continue;
                     }
                     switch ($item['content_selection']->post_type) {
-                        case 'page':
-                            $post_preview = $this->getPagePreview($wrapper, $item['content_selection'], $clickable);
-                            break;
                         case 'touristic_sheet':
                             $post_preview = $this->getTouristicSheetPreview($wrapper, $item['content_selection']);
                             break;
                         case 'woody_topic':
                             $post_preview = $this->getTopicPreview($wrapper, $item['content_selection']);
+                            break;
+                        default:
+                            $post_preview = $this->getPagePreview($wrapper, $item['content_selection'], $clickable);
                             break;
                     }
                     $the_items['items'][$key] = (!empty($post_preview)) ?  $post_preview : [];
@@ -264,6 +268,37 @@ class WoodyTheme_WoodyGetters
         return $items;
     }
 
+    public function getAttachmentPreview($wrapper, $item)
+    {
+        $data = [];
+        if (is_object($item)) {
+            $data = $this->getPagePreview($wrapper, $item, true, true);
+
+            if (!empty($wrapper['display_elements']) && in_array('description', $wrapper['display_elements'])) {
+                $data['description'] = $item->post_content;
+            }
+
+            if (!empty($wrapper['display_img'])) {
+                if (wp_attachment_is_image($item->ID)) {
+                    $data['img'] = acf_get_attachment($item);
+                } else {
+                    $data['img'] = get_field('attachment_focus_img', $item->ID);
+                }
+                if (!empty($data['img'])) {
+                    $data['img']['attachment_more_data'] = $this->tools->getAttachmentMoreData($data['img']['ID']);
+                }
+            }
+
+            $data['link'] = [
+                'url' => get_attached_file($item->ID),
+                'link_label' => __('Télécharger')
+            ];
+
+            $data['page_type'] = 'attachment';
+        }
+        return $data;
+    }
+
     /**
      *
      * Nom : getPagePreview
@@ -274,7 +309,7 @@ class WoodyTheme_WoodyGetters
      * @return   data - Un tableau de données
      *
      */
-    public function getPagePreview($wrapper, $item, $clickable = true)
+    public function getPagePreview($wrapper, $item, $clickable = true, $is_attachment = false)
     {
         $data = [];
         if (!is_object($item)) {
@@ -292,23 +327,29 @@ class WoodyTheme_WoodyGetters
         }
 
         if (!empty($wrapper) && !empty($wrapper['display_elements']) && is_array($wrapper['display_elements'])) {
-            if (in_array('pretitle', $wrapper['display_elements'])) {
+            if (empty($is_attachment) && in_array('pretitle', $wrapper['display_elements'])) {
                 $data['pretitle'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($item, 'focus_pretitle', get_field('page_heading_heading', $item->ID), 'pretitle', $item, 'field_5b87f20257a1d'), $item->ID);
             }
-            if (in_array('subtitle', $wrapper['display_elements'])) {
+            if (empty($is_attachment) && in_array('subtitle', $wrapper['display_elements'])) {
                 $data['subtitle'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($item, 'focus_subtitle', get_field('page_heading_heading', $item->ID), 'subtitle', $item, 'field_5b87f23b57a1e'), $item->ID);
             }
-            if (in_array('icon', $wrapper['display_elements'])) {
+            if (empty($is_attachment) && in_array('icon', $wrapper['display_elements'])) {
                 $data['woody_icon'] = get_field('focus_woody_icon', $item->ID);
                 $data['icon_type'] = 'picto';
             }
-            if (in_array('description', $wrapper['display_elements'])) {
+            if (empty($is_attachment) && in_array('description', $wrapper['display_elements'])) {
                 $data['description'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($item, 'focus_description', $item, 'field_5b2bbbfaec6b2'), $item->ID);
             }
             if (in_array('created', $wrapper['display_elements'])) {
-                $data['created'] = get_the_date('', $item->ID);
+                $created = get_the_date('', $item->ID);
+                $modified = get_the_modified_date('', $item->ID);
+
+                $data['post_date'] = [
+                    'prefix' => ($created == $modified) ? __('Publié le', 'woody-theme') : __('Mis à jour le', 'woody-theme'),
+                    'value' => ($created == $modified) ? $created : $modified
+                ];
             }
-            if (in_array('price', $wrapper['display_elements'])) {
+            if (empty($is_attachment) && in_array('price', $wrapper['display_elements'])) {
                 $price_type = get_field('the_price_price_type', $item->ID);
                 if ($price_type == "component_based") {
                     $groupQuotation = new GroupQuotation;
@@ -318,13 +359,13 @@ class WoodyTheme_WoodyGetters
                     $data['the_price'] = get_field('field_5b6c670eb54f2', $item->ID);
                 }
             }
-            if (in_array('duration', $wrapper['display_elements'])) {
+            if (empty($is_attachment) && in_array('duration', $wrapper['display_elements'])) {
                 $data['the_duration'] = get_field('field_5b6c5e7cb54ee', $item->ID);
             }
-            if (in_array('length', $wrapper['display_elements'])) {
+            if (empty($is_attachment) && in_array('length', $wrapper['display_elements'])) {
                 $data['the_length'] = get_field('field_5b95423386e8f', $item->ID);
             }
-            if (in_array('linked_profil', $wrapper['display_elements'])) {
+            if (empty($is_attachment) && in_array('linked_profil', $wrapper['display_elements'])) {
                 $fields_profil = [
                     'name' => get_field('profil_name', $item->ID),
                     'img' => get_field('profil_img', $item->ID)
@@ -350,14 +391,14 @@ class WoodyTheme_WoodyGetters
 
         $data['the_peoples'] = get_field('field_5b6d54a10381f', $item->ID);
 
-        if ($clickable) {
+        if (empty($is_attachment) && $clickable) {
             $data['link']['link_label'] = $this->tools->replacePattern($this->tools->getFieldAndFallBack($item, 'focus_button_title', $item), $item->ID);
             if (empty($data['link']['link_label'])) {
                 $data['link']['link_label'] = __('Lire la suite', 'woody-theme');
             }
         }
 
-        if (!empty($wrapper['display_img'])) {
+        if (empty($is_attachment) && !empty($wrapper['display_img'])) {
             $data['img'] = $this->tools->getFieldAndFallback($item, 'focus_img', $item, 'field_5b0e5ddfd4b1b');
             if (empty($data['img'])) {
                 $video = $this->tools->getFieldAndFallback($item, 'field_5b0e5df0d4b1c', $item);
@@ -391,7 +432,7 @@ class WoodyTheme_WoodyGetters
         $data['location']['lat'] = (!empty($lat)) ? str_replace(',', '.', $lat) : '';
         $data['location']['lng'] = (!empty($lng)) ? str_replace(',', '.', $lng) : '';
 
-        if ($clickable) {
+        if (empty($is_attachment) && $clickable) {
             $data['link']['url'] = apply_filters('woody_get_permalink', $item->ID);
         }
 

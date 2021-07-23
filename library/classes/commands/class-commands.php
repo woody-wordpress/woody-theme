@@ -61,13 +61,8 @@ class WoodyTheme_Commands
         do_action('woody_theme_update');
         output_success('woody_theme_update');
 
-        // Clear the cache to prevent an update_option() from saving a stale db_version to the cache
-        wp_cache_flush();
-        output_success('woody_flush_cache');
-
-        // (Not all cache back ends listen to 'flush')
         global $wpdb;
-        $results = $wpdb->get_results("SELECT option_name FROM {$wpdb->prefix}options WHERE option_name LIKE '%options_%'");
+        $results = $wpdb->get_results("SELECT option_name FROM {$wpdb->prefix}options WHERE autoload='no'");
         if (!empty($results)) {
             foreach ($results as $val) {
                 wp_cache_delete($val->option_name, 'options');
@@ -75,7 +70,14 @@ class WoodyTheme_Commands
         }
         wp_cache_delete('alloptions', 'options');
         wp_cache_delete('notoptions', 'options');
+        wp_cache_delete('1:notoptions', 'site-options');
         output_success('wp_cache_delete alloptions');
+
+        wp_cache_delete('plugins', 'plugins');
+        output_success('wp_cache_delete plugins');
+
+        //TODO: Remove when execute one time
+        delete_option('woody_list_filters_cache');
     }
 
     public function cache_warm()

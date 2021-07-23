@@ -232,25 +232,27 @@ class WoodyTheme_WoodyProcess
     public function processWoodySubLayouts($wrapper = [], $gridTplField, $uniqIid_prefix = '', $context)
     {
         $woodyTwigsPaths = getWoodyTwigPaths();
-        foreach ($wrapper as $grid_key => $grid) {
-            $grid_content = [];
-            if (!empty($uniqIid_prefix) && is_numeric($grid_key)) {
-                $wrapper[$grid_key]['el_id'] = $uniqIid_prefix . '-' . uniqid();
-            }
-
-            // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
-            if (!empty($grid['light_section_content']) && is_array($grid['light_section_content'])) {
-                foreach ($grid['light_section_content'] as $layout) {
-                    $grid_content['items'][] = $this->processWoodyLayouts($layout, $context);
+        if (!empty($wrapper)) {
+            foreach ($wrapper as $grid_key => $grid) {
+                $grid_content = [];
+                if (!empty($uniqIid_prefix) && is_numeric($grid_key)) {
+                    $wrapper[$grid_key]['el_id'] = $uniqIid_prefix . '-' . uniqid();
                 }
 
-                // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
-                $wrapper[$grid_key]['light_section_content'] = \Timber::compile($woodyTwigsPaths[$grid[$gridTplField]], $grid_content);
-            }
-        }
+                // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
+                if (!empty($grid['light_section_content']) && is_array($grid['light_section_content'])) {
+                    foreach ($grid['light_section_content'] as $layout) {
+                        $grid_content['items'][] = $this->processWoodyLayouts($layout, $context);
+                    }
 
-        if (!empty($uniqIid_prefix)) {
-            $wrapper['group_id'] = $uniqIid_prefix . '-' . uniqid();
+                    // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
+                    $wrapper[$grid_key]['light_section_content'] = \Timber::compile($woodyTwigsPaths[$grid[$gridTplField]], $grid_content);
+                }
+            }
+
+            if (!empty($uniqIid_prefix)) {
+                $wrapper['group_id'] = $uniqIid_prefix . '-' . uniqid();
+            }
         }
 
         return $wrapper;
@@ -273,12 +275,26 @@ class WoodyTheme_WoodyProcess
 
         // Création du paramètre tax_query pour la wp_query
         // Référence : https://codex.wordpress.org/Class_Reference/WP_Query
-        if (!empty($query_form['focused_content_type'])) {
+        // Pour une mise en avant de page, on peut filtrer sur le type de publication
+        if (((empty($query_form['focused_type'])) || $query_form['focused_type'] != 'documents') && !empty($query_form['focused_content_type'])) {
             $tax_query = [
                 'relation' => 'AND',
                 'page_type' => array(
                     'taxonomy' => 'page_type',
                     'terms' => $query_form['focused_content_type'],
+                    'field' => 'term_id',
+                    'operator' => 'IN'
+                ),
+            ];
+        }
+
+        // Pour une mise en avant de documents, on peut filtrer sur la catégorie de média
+        if (((!empty($query_form['focused_type'])) || $query_form['focused_type'] == 'documents') && !empty($query_form['focused_media_terms'])) {
+            $tax_query = [
+                'relation' => 'AND',
+                'page_type' => array(
+                    'taxonomy' => 'attachment_categories',
+                    'terms' => $query_form['focused_media_terms'],
                     'field' => 'term_id',
                     'operator' => 'IN'
                 ),
@@ -430,10 +446,12 @@ class WoodyTheme_WoodyProcess
 
         // On créé la wp_query en fonction des choix faits dans le backoffice
         // NB : si aucun choix n'a été fait, on remonte automatiquement tous les contenus de type page
+        $post_type = (!empty($query_form['focused_type']) && $query_form['focused_type'] == 'documents') ? 'attachment' : 'page';
+
         $the_query = [
-            'post_type' => 'page',
+            'post_type' => $post_type,
             'posts_per_page' => (!empty($query_form['focused_count'])) ? $query_form['focused_count'] : 12,
-            'post_status' => 'publish',
+            'post_status' => (!empty($query_form['focused_type']) && $query_form['focused_type'] == 'documents') ? ['inherit', 'publish'] : 'publish',
             'post__not_in' => array($the_post->ID),
             'order' => $order,
             'orderby' => $orderby,
@@ -459,13 +477,13 @@ class WoodyTheme_WoodyProcess
 
         // Si Hiérarchie = Enfants directs de la page
         // On passe le post ID dans le paramètre post_parent de la query
-        if ($query_form['focused_hierarchy'] == 'child_of') {
+        if ((empty($query_form['focused_type']) || $query_form['focused_type'] != 'documents') && $query_form['focused_hierarchy'] == 'child_of') {
             $the_query['post_parent'] = $the_post->ID;
         }
 
         // Si Hiérarchie = Pages de même niveau
         // On passe le parent_post_ID dans le paramètre post_parent de la query
-        if ($query_form['focused_hierarchy'] == 'brother_of') {
+        if ((empty($query_form['focused_type']) || $query_form['focused_type'] != 'documents') && $query_form['focused_hierarchy'] == 'brother_of') {
             $the_query['post_parent'] = $the_post->post_parent;
         }
 
