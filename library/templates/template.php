@@ -138,10 +138,10 @@ abstract class WoodyTheme_TemplateAbstract
     {
         $return = [];
 
-        $return['favorites_url'] = get_field('favorites_page_url', 'options');
-        $return['search_url'] = get_field('es_search_page_url', 'options');
-        $return['weather_url'] = get_field('weather_page_url', 'options');
-        $return['tides_url']= get_field('tides_page_url', 'options');
+        $return['favorites_url'] = pll_get_post(get_field('favorites_page_url', 'options'));
+        $return['search_url'] = pll_get_post(get_field('es_search_page_url', 'options'));
+        $return['weather_url'] = pll_get_post(get_field('weather_page_url', 'options'));
+        $return['tides_url']= pll_get_post(get_field('tides_page_url', 'options'));
         $return['disqus_instance_url'] = get_field('disqus_instance_url', 'options');
 
         return $return;
