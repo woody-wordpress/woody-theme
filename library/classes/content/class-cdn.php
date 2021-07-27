@@ -73,7 +73,7 @@ class WoodyTheme_CDN
                 $path = parse_url($url, PHP_URL_PATH);
                 $extension = pathinfo($path, PATHINFO_EXTENSION);
 
-                if (!empty($path) && !in_array($extension, ['pdf','docx','doc','xls','xlsx','ppt','ppt','zip','rar','gz'])) {
+                if (!empty($path) && !in_array($extension, ['pdf','docx','doc','xls','xlsx','ppt','ppt','zip','rar','gz','html'])) {
                     if (empty($host)) {
                         $new_url = 'https://' . WOODY_CLOUDFLARE_URL . $path;
                     } else {
