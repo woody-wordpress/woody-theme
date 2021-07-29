@@ -67,6 +67,25 @@ class WoodyTheme_WoodyGetters
             $the_items['wp_query'] = $query_result;
         }
 
+        // On vérifie si du contenu épinglé a été ajouté
+        if ($wrapper['focused_pinnable'] == true && !empty($wrapper['pinnable_selection'])) {
+            switch ($wrapper['pinnable_selection']->post_type) {
+                case 'touristic_sheet':
+                    $post_preview = $this->getTouristicSheetPreview($wrapper, $wrapper['pinnable_selection']);
+                    break;
+                case 'woody_topic':
+                    $post_preview = $this->getTopicPreview($wrapper, $$wrapper['pinnable_selection']);
+                    break;
+                default:
+                    $post_preview = $this->getPagePreview($wrapper, $wrapper['pinnable_selection']);
+                    break;
+            }
+            $focused_pinnable[] = (!empty($post_preview)) ?  $post_preview : [];
+
+            // on ajoute le contenu épinglé au tableau
+            array_unshift($the_items['items'], $focused_pinnable[0]);
+        }
+
         return $the_items;
     }
 
