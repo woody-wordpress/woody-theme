@@ -64,7 +64,7 @@ class WoodyTheme_WoodyGetters
                     }
 
                     // On exclut le contenu épinglé du tableau
-                    if($pinned_content != $post->ID) {
+                    if ($pinned_content != $post->ID) {
                         $data = $this->getPagePreview($wrapper, $post);
                     }
                 }
@@ -82,7 +82,7 @@ class WoodyTheme_WoodyGetters
                     $post_preview = $this->getTouristicSheetPreview($wrapper, $wrapper['pinnable_selection']);
                     break;
                 case 'woody_topic':
-                    $post_preview = $this->getTopicPreview($wrapper, $$wrapper['pinnable_selection']);
+                    $post_preview = $this->getTopicPreview($wrapper, $wrapper['pinnable_selection']);
                     break;
                 default:
                     $post_preview = $this->getPagePreview($wrapper, $wrapper['pinnable_selection']);
