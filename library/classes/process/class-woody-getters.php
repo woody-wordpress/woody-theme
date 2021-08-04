@@ -39,6 +39,12 @@ class WoodyTheme_WoodyGetters
         $the_items = [];
         $process = new WoodyTheme_WoodyProcess;
         $query_result = $process->processWoodyQuery($current_post, $wrapper, $paginate, $uniqid, $ingore_maxnum, $posts_in, $filters);
+        $pinned_content = false;
+
+        // On vérifie si du contenu épinglé a été ajouté et on récupère son ID
+        if ($wrapper['focused_pinnable'] == true && !empty($wrapper['pinnable_selection'])) {
+            $pinned_content = $wrapper['pinnable_selection']->ID;
+        }
 
         // On transforme la donnée des posts récupérés pour coller aux templates de blocs Woody
         if (!empty($query_result->posts)) {
@@ -57,9 +63,11 @@ class WoodyTheme_WoodyGetters
                         }
                     }
 
-                    $data = $this->getPagePreview($wrapper, $post);
+                    // On exclut le contenu épinglé du tableau
+                    if($pinned_content != $post->ID) {
+                        $data = $this->getPagePreview($wrapper, $post);
+                    }
                 }
-
 
                 $the_items['items'][$key] = $data;
             }
@@ -67,7 +75,7 @@ class WoodyTheme_WoodyGetters
             $the_items['wp_query'] = $query_result;
         }
 
-        // On vérifie si du contenu épinglé a été ajouté
+        // On vérifie si du contenu épinglé a été ajouté et on traite les données
         if ($wrapper['focused_pinnable'] == true && !empty($wrapper['pinnable_selection'])) {
             switch ($wrapper['pinnable_selection']->post_type) {
                 case 'touristic_sheet':
@@ -82,8 +90,9 @@ class WoodyTheme_WoodyGetters
             }
             $focused_pinnable[] = (!empty($post_preview)) ?  $post_preview : [];
 
-            // on ajoute le contenu épinglé au tableau
+            // on ajoute le contenu épinglé au début du tableau
             array_unshift($the_items['items'], $focused_pinnable[0]);
+
         }
 
         return $the_items;
