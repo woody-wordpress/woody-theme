@@ -1,7 +1,8 @@
 {
     "key": "group_5b2788b48d04c",
-    "title": "Mise en avant de pages/documents (sélection automatique)",
-    "fields": [{
+    "title": "Mise en avant de pages\/documents (sélection automatique)",
+    "fields": [
+        {
             "key": "field_5b2788cc84ed1",
             "label": "Contenu",
             "name": "",
@@ -49,11 +50,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_60cc8c88f2824",
-                    "operator": "==",
-                    "value": "pages"
-                }]
+                [
+                    {
+                        "field": "field_60cc8c88f2824",
+                        "operator": "==",
+                        "value": "pages"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -77,11 +80,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_60cc8c88f2824",
-                    "operator": "==",
-                    "value": "documents"
-                }]
+                [
+                    {
+                        "field": "field_60cc8c88f2824",
+                        "operator": "==",
+                        "value": "documents"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -152,11 +157,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_60cc8c88f2824",
-                    "operator": "==",
-                    "value": "pages"
-                }]
+                [
+                    {
+                        "field": "field_60cc8c88f2824",
+                        "operator": "==",
+                        "value": "pages"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -230,11 +237,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_60cc8c88f2824",
-                    "operator": "==",
-                    "value": "pages"
-                }]
+                [
+                    {
+                        "field": "field_60cc8c88f2824",
+                        "operator": "==",
+                        "value": "pages"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -291,11 +300,13 @@
             "instructions": "<small>Uniquement pour les pages avec plusieurs images de mise en avant<\/small>",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_60cc8c88f2824",
-                    "operator": "==",
-                    "value": "pages"
-                }]
+                [
+                    {
+                        "field": "field_60cc8c88f2824",
+                        "operator": "==",
+                        "value": "pages"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "25",
@@ -316,11 +327,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_60cc8c88f2824",
-                    "operator": "==",
-                    "value": "pages"
-                }]
+                [
+                    {
+                        "field": "field_60cc8c88f2824",
+                        "operator": "==",
+                        "value": "pages"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "25",
@@ -351,6 +364,56 @@
             "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
+        },
+        {
+            "key": "field_61025d26c79bd",
+            "label": "Ajouter un contenu épinglé",
+            "name": "focused_pinnable",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_61026239c79be",
+            "label": "Choisir le contenu épinglé",
+            "name": "pinnable_selection",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_61025d26c79bd",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page",
+                "touristic_sheet"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "object",
+            "ui": 1
         },
         {
             "key": "field_5b87f2e8b2033",
@@ -590,7 +653,8 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5d1b28b9e0865",
                     "label": "Zoomer la carte automatiquement",
                     "name": "focus_map_zoom_auto",
@@ -806,11 +870,13 @@
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -819,5 +885,6 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
-    "description": "Mise en avant de contenus sélectionnés en fonctions de critères"
+    "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
+    "modified": 1627571913
 }
