@@ -39,11 +39,11 @@ class WoodyTheme_WoodyGetters
         $the_items = [];
         $process = new WoodyTheme_WoodyProcess;
         $query_result = $process->processWoodyQuery($current_post, $wrapper, $paginate, $uniqid, $ingore_maxnum, $posts_in, $filters);
-        $pinned_content = false;
+        $pinned_content_id = 0;
 
         // On vérifie si du contenu épinglé a été ajouté et on récupère son ID
-        if ($wrapper['focused_pinnable'] == true && !empty($wrapper['pinnable_selection'])) {
-            $pinned_content = $wrapper['pinnable_selection']->ID;
+        if (!empty($wrapper['focused_pinnable']) && !empty($wrapper['pinnable_selection'])) {
+            $pinned_content_id = $wrapper['pinnable_selection']->ID;
         }
 
         // On transforme la donnée des posts récupérés pour coller aux templates de blocs Woody
@@ -64,7 +64,7 @@ class WoodyTheme_WoodyGetters
                     }
 
                     // On exclut le contenu épinglé du tableau
-                    if ($pinned_content != $post->ID) {
+                    if ($pinned_content_id != $post->ID) {
                         $data = $this->getPagePreview($wrapper, $post);
                     }
                 }
@@ -76,23 +76,22 @@ class WoodyTheme_WoodyGetters
         }
 
         // On vérifie si du contenu épinglé a été ajouté et on traite les données
-        if ($wrapper['focused_pinnable'] == true && !empty($wrapper['pinnable_selection'])) {
+        if (!empty($pinned_content_id)) {
             switch ($wrapper['pinnable_selection']->post_type) {
                 case 'touristic_sheet':
-                    $post_preview = $this->getTouristicSheetPreview($wrapper, $wrapper['pinnable_selection']);
+                    $pinned_post_preview = $this->getTouristicSheetPreview($wrapper, $wrapper['pinnable_selection']);
                     break;
                 case 'woody_topic':
-                    $post_preview = $this->getTopicPreview($wrapper, $wrapper['pinnable_selection']);
+                    $pinned_post_preview = $this->getTopicPreview($wrapper, $wrapper['pinnable_selection']);
                     break;
                 default:
-                    $post_preview = $this->getPagePreview($wrapper, $wrapper['pinnable_selection']);
+                    $pinned_post_preview = $this->getPagePreview($wrapper, $wrapper['pinnable_selection']);
                     break;
             }
-            $focused_pinnable[] = (!empty($post_preview)) ?  $post_preview : [];
+            // $focused_pinnable[] = (!empty($pinned_post_preview)) ?  $pinned_post_preview : [];
 
             // on ajoute le contenu épinglé au début du tableau
-            array_unshift($the_items['items'], $focused_pinnable[0]);
-
+            array_unshift($the_items['items'], $pinned_post_preview);
         }
 
         return $the_items;
