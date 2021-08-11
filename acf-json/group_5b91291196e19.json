@@ -388,24 +388,6 @@
                     "min": "",
                     "max": ""
                 },
-                "layout_5bfd05a7a542a": {
-                    "key": "layout_5bfd05a7a542a",
-                    "name": "auto_focus_sheets",
-                    "label": "Mise en avant de fiches SIT (sélection automatique)",
-                    "display": "block",
-                    "sub_fields": [],
-                    "min": "",
-                    "max": ""
-                },
-                "layout_light_manual_focus_minisheet": {
-                    "key": "layout_light_manual_focus_minisheet",
-                    "name": "manual_focus_minisheet",
-                    "label": "Mini-fiche SIT",
-                    "display": "block",
-                    "sub_fields": [],
-                    "min": "",
-                    "max": ""
-                }
             },
             "button_label": "Ajouter un bloc",
             "min": "",
