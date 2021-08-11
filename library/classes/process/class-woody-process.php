@@ -289,7 +289,7 @@ class WoodyTheme_WoodyProcess
         }
 
         // Pour une mise en avant de documents, on peut filtrer sur la catégorie de média
-        if (((!empty($query_form['focused_type'])) || $query_form['focused_type'] == 'documents') && !empty($query_form['focused_media_terms'])) {
+        if (!empty($query_form['focused_type']) && $query_form['focused_type'] == 'documents' && !empty($query_form['focused_media_terms'])) {
             $tax_query = [
                 'relation' => 'AND',
                 'page_type' => array(
