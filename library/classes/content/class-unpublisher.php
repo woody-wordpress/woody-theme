@@ -59,7 +59,6 @@ class WoodyTheme_Unpublisher
             return $post_id;
         }
 
-
         update_post_meta($post_id, '_wUnpublisher_date', $_POST['wUnpublisher_date']);
     }
 

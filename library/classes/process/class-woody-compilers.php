@@ -28,7 +28,7 @@ class WoodyTheme_WoodyCompilers
 
     public function registerHooks()
     {
-        add_action('save_post', [$this, 'savePost']);
+        add_action('save_post', [$this, 'savePost'], 10, 3);
     }
 
     /**
@@ -441,14 +441,16 @@ class WoodyTheme_WoodyCompilers
         return $return;
     }
 
-    public function savePost()
+    public function savePost($post_id, $post, $update)
     {
-        $cache_list = dropzone_get('woody_list_filters_cache');
-        if (!empty($cache_list)) {
-            foreach ($cache_list as $cache_key) {
-                wp_cache_delete($cache_key, 'woody');
+        if (!empty($post) && $post->post_type == 'page') {
+            $cache_list = dropzone_get('woody_list_filters_cache');
+            if (!empty($cache_list)) {
+                foreach ($cache_list as $cache_key) {
+                    wp_cache_delete($cache_key, 'woody');
+                }
+                dropzone_delete('woody_list_filters_cache');
             }
-            dropzone_delete('woody_list_filters_cache');
         }
     }
 
