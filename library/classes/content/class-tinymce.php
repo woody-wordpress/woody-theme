@@ -57,6 +57,11 @@ class WoodyTheme_Tinymce
                 'classes' => 'list-unstyled list-wicon plus-icon'
             ),
             array(
+                'title' => 'Liste "Suivant"',
+                'selector' => 'ul',
+                'classes' => 'list-unstyled list-wicon next-icon'
+            ),
+            array(
                 'title' => 'Mega titre',
                 'selector' => 'h2',
                 'classes' => 'mega-title'
