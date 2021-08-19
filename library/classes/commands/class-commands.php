@@ -75,9 +75,6 @@ class WoodyTheme_Commands
 
         wp_cache_delete('plugins', 'plugins');
         output_success('wp_cache_delete plugins');
-
-        //TODO: Remove when execute one time
-        delete_option('woody_list_filters_cache');
     }
 
     public function cache_warm()
