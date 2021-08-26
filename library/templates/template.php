@@ -139,6 +139,7 @@ abstract class WoodyTheme_TemplateAbstract
         $return = [];
 
         $return['favorites_url'] = pll_get_post(get_field('favorites_page_url', 'options'));
+        $return['deals_url'] = pll_get_post(get_field('deals_page_url', 'options'));
         $return['search_url'] = pll_get_post(get_field('es_search_page_url', 'options'));
         $return['weather_url'] = pll_get_post(get_field('weather_page_url', 'options'));
         $return['tides_url']= pll_get_post(get_field('tides_page_url', 'options'));
@@ -263,6 +264,13 @@ abstract class WoodyTheme_TemplateAbstract
             $tools_blocks['favorites_block'] = $this->addFavoritesBlock();
             $this->context['favorites_block'] = apply_filters('favorites_block', $tools_blocks['favorites_block']);
             $this->context['favorites_block_mobile'] = apply_filters('favorites_block_mobile', $tools_blocks['favorites_block']);
+        }
+
+        // Add addDealsBlock
+        if (in_array('deals', $this->context['enabled_woody_options'])) {
+            $tools_blocks['deals_block'] = $this->addDealsBlock();
+            $this->context['deals_block'] = apply_filters('deals_block', $tools_blocks['deals_block']);
+            $this->context['deals_block_mobile'] = apply_filters('deals_block_mobile', $tools_blocks['deals_block']);
         }
 
         if (in_array('insitu', $this->context['enabled_woody_options'])) {
@@ -820,6 +828,24 @@ abstract class WoodyTheme_TemplateAbstract
 
             // Allow data override
             $data = apply_filters('favorites_block_data', $data);
+
+            return \Timber::compile($template, $data);
+        }
+    }
+
+    private function addDealsBlock()
+    {
+        $deals_post_id = apply_filters('woody_get_field_option', 'deals_page_url');
+        if (!empty($deals_post_id)) {
+            $data = [];
+            $data['deals_page_url'] = apply_filters('woody_get_permalink', pll_get_post($deals_post_id));
+
+            // Set a default template
+            $tpl = apply_filters('deals_block_tpl', null);
+            $template = !empty($tpl['template']) ? $tpl['template'] : $this->context['woody_components']['woody_widgets-deals_block-tpl_01'];
+
+            // Allow data override
+            $data = apply_filters('deals_block_data', $data);
 
             return \Timber::compile($template, $data);
         }

@@ -25,6 +25,9 @@
                     {% endif %}
                 {% endfor %}
             {% endif %}
+            {% if deals_block|default %}
+                <li>{{ deals_block }}</li>
+            {% endif %}
             {% if favorites_block|default %}
                 <li>{{ favorites_block }}</li>
             {% endif %}
