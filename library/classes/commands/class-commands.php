@@ -160,40 +160,30 @@ class WoodyTheme_Commands
         $vcaching_varnishIp = get_option($vcaching_prefix . 'ips');
         $vcaching_varnishIp = explode(',', $vcaching_varnishIp);
         $vcaching_varnishIp = apply_filters('vcaching_varnish_ips', $vcaching_varnishIp);
+        $vcaching_varnishHosts = get_option($vcaching_prefix . 'hosts');
+        $vcaching_varnishHosts = explode(',', $vcaching_varnishHosts);
+        $vcaching_varnishHosts = apply_filters('vcaching_varnish_hosts', $vcaching_varnishHosts);
 
         // Get schema
         $schema = apply_filters('vcaching_schema', $vcaching_useSsl ? 'https://' : 'http://');
 
-        // Get hosts
-        $hosts = [];
-        $polylang = get_option('polylang');
-        if ($polylang['force_lang'] == 3 && !empty($polylang['domains'])) {
-            foreach ($polylang['domains'] as $lang => $domain) {
-                $hosts[$lang] = parse_url($domain, PHP_URL_HOST);
+        foreach ($vcaching_varnishIp as $key => $ip) {
+            $purgeme = $schema . $ip . $path;
+            $headers = array('host' => $vcaching_varnishHosts[$key], 'X-VC-Purge-Method' => $method, 'X-VC-Purge-Host' => $vcaching_varnishHosts[$key]);
+            if (!is_null($vcaching_purgeKey)) {
+                $headers['X-VC-Purge-Key'] = $vcaching_purgeKey;
             }
-        } else {
-            $hosts['all'] = parse_url(WP_HOME, PHP_URL_HOST);
-        }
-
-        foreach ($hosts as $lang => $host) {
-            foreach ($vcaching_varnishIp as $ip) {
-                $purgeme = $schema . $ip . $path;
-                $headers = array('host' => $host, 'X-VC-Purge-Method' => $method, 'X-VC-Purge-Host' => $host);
-                if (!is_null($vcaching_purgeKey)) {
-                    $headers['X-VC-Purge-Key'] = $vcaching_purgeKey;
-                }
-                $response = wp_remote_request($purgeme, array('method' => 'PURGE', 'headers' => $headers, "sslverify" => false));
-                if ($response instanceof WP_Error) {
-                    foreach ($response->errors as $error => $errors) {
-                        $noticeMessage = 'Error ' . $error . ' : ';
-                        foreach ($errors as $error => $description) {
-                            $noticeMessage .= ' - ' . $description;
-                        }
-                        output_warning(['woody_flush_varnish' => $noticeMessage]);
+            $response = wp_remote_request($purgeme, array('method' => 'PURGE', 'headers' => $headers, "sslverify" => false));
+            if ($response instanceof WP_Error) {
+                foreach ($response->errors as $error => $errors) {
+                    $noticeMessage = 'Error ' . $error . ' : ';
+                    foreach ($errors as $error => $description) {
+                        $noticeMessage .= ' - ' . $description;
                     }
-                } else {
-                    output_success(sprintf('woody_flush_varnish : %s (%s)', WP_SCHEME . '://' . $host, $lang));
+                    output_warning(['woody_flush_varnish' => $noticeMessage]);
                 }
+            } else {
+                output_success(sprintf('woody_flush_varnish : %s', WP_SCHEME . '://' . $vcaching_varnishHosts[$key]));
             }
         }
     }
