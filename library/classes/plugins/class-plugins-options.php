@@ -365,16 +365,35 @@ class WoodyTheme_Plugins_Options
         update_option('varnish_caching_debug', WOODY_VARNISH_CACHING_DEBUG, true);
         update_option('varnish_caching_ttl', WOODY_VARNISH_CACHING_TTL, true);
         update_option('varnish_caching_homepage_ttl', WOODY_VARNISH_CACHING_TTL, true);
-        update_option('varnish_caching_ips', WOODY_VARNISH_CACHING_IPS, true);
         update_option('varnish_caching_purge_key', WOODY_VARNISH_CACHING_PURGE_KEY, true);
         update_option('varnish_caching_cookie', WOODY_VARNISH_CACHING_COOKIE, true);
-        update_option('varnish_caching_dynamic_host', true, true);
-        update_option('varnish_caching_hosts', '', true);
+        update_option('varnish_caching_dynamic_host', false, true);
         update_option('varnish_caching_override', '', true);
         update_option('varnish_caching_stats_json_file', '', true);
         update_option('varnish_caching_truncate_notice', '', true);
         update_option('varnish_caching_purge_menu_save', '', true);
         update_option('varnish_caching_ssl', '', true);
+
+        // Is the website multi domain
+        $hosts = [];
+        $polylang = get_option('polylang');
+        if ($polylang['force_lang'] == 3 && !empty($polylang['domains'])) {
+            foreach ($polylang['domains'] as $lang => $domain) {
+                $hosts[$lang] = parse_url($domain, PHP_URL_HOST);
+            }
+        } else {
+            $hosts['all'] = parse_url(WP_HOME, PHP_URL_HOST);
+        }
+
+        $varnish_caching_ips = [];
+        $varnish_caching_hosts = [];
+        foreach ($hosts as $lang => $host) {
+            $varnish_caching_ips[] = WOODY_VARNISH_CACHING_IPS;
+            $varnish_caching_hosts[] = $host;
+        }
+
+        update_option('varnish_caching_ips', implode(',', $varnish_caching_ips), true);
+        update_option('varnish_caching_hosts', implode(',', $varnish_caching_hosts), true);
     }
 
     private function updateOption($option_name, $settings, $autoload = true)
