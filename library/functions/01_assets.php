@@ -243,7 +243,7 @@ function getPrimaryTerm($taxonomy, $post_id, $fields = [])
 
     $fieldPrimaryTax = get_field('field_5d7bada38eedf', $post_id);
     if (!empty($fieldPrimaryTax['primary_' . $taxonomy])) {
-        $primary_term = get_term($fieldPrimaryTax['primary_' . $taxonomy]);
+        $primary_term = get_term(pll_get_term($fieldPrimaryTax['primary_' . $taxonomy]));
         if (!is_wp_error($primary_term) && !empty($primary_term)) {
             if (empty($fields)) {
                 $return = $primary_term;
