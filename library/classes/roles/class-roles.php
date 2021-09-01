@@ -766,7 +766,7 @@ class WoodyTheme_Roles
             'copy_posts' => [
                 'administrator' => true,
                 'editor' => true,
-                'contributor' => false,
+                'contributor' => true,
                 'translator' => false,
             ],
 
