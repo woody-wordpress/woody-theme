@@ -448,6 +448,9 @@ class WoodyTheme_WoodyProcess
         // NB : si aucun choix n'a été fait, on remonte automatiquement tous les contenus de type page
         $post_type = (!empty($query_form['focused_type']) && $query_form['focused_type'] == 'documents') ? 'attachment' : 'page';
 
+        // On récupère la langue du post courant
+        $current_post_lang = pll_get_post_language($the_post->ID);
+
         $the_query = [
             'post_type' => $post_type,
             'posts_per_page' => (!empty($query_form['focused_count'])) ? $query_form['focused_count'] : 12,
@@ -455,6 +458,7 @@ class WoodyTheme_WoodyProcess
             'post__not_in' => array($the_post->ID),
             'order' => $order,
             'orderby' => $orderby,
+            'lang' => $current_post_lang,
         ];
 
         if (!empty($posts_in)) {
@@ -501,6 +505,8 @@ class WoodyTheme_WoodyProcess
 
         // On créé la wp_query avec les paramètres définis
         $query_result = new \WP_Query($the_query);
+
+        // console_log($query_result);
 
         // Si on ordonne par geoloc, il faut trier les résultats reçus
         $query_result = apply_filters('custom_process_woody_query', $query_result, $query_form, $the_post);
