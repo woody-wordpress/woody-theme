@@ -448,9 +448,6 @@ class WoodyTheme_WoodyProcess
         // NB : si aucun choix n'a été fait, on remonte automatiquement tous les contenus de type page
         $post_type = (!empty($query_form['focused_type']) && $query_form['focused_type'] == 'documents') ? 'attachment' : 'page';
 
-        // On récupère la langue du post courant
-        $current_post_lang = pll_get_post_language($the_post->ID);
-
         $the_query = [
             'post_type' => $post_type,
             'posts_per_page' => (!empty($query_form['focused_count'])) ? $query_form['focused_count'] : 12,
@@ -458,7 +455,7 @@ class WoodyTheme_WoodyProcess
             'post__not_in' => array($the_post->ID),
             'order' => $order,
             'orderby' => $orderby,
-            'lang' => $current_post_lang,
+            'lang' => pll_get_post_language($the_post->ID),
         ];
 
         if (!empty($posts_in)) {
