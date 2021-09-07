@@ -42,10 +42,9 @@
                 "id": ""
             },
             "choices": {
+                "bgcolor-op90": "90%",
                 "bgcolor-op75": "75%",
-                "bgcolor-op50": "50%",
-                "bgcolor-op25": "25%",
-                "bgcolor-op10": "10%"
+                "bgcolor-op50": "50%"
             },
             "allow_null": 1,
             "default_value": "",
@@ -144,5 +143,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "Permet de personnaliser le fond d'une section (couleur \/ image)",
-    "modified": 1631008869
+    "modified": 1631021731
 }
