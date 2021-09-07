@@ -822,10 +822,12 @@ class WoodyTheme_WoodyGetters
             $return['open_auto'] = (!empty($filter_wrapper['listfilter_open_auto'])) ? $filter_wrapper['listfilter_open_auto'] : '';
             $return['display']['background_img'] = (!empty($filter_wrapper['background_img'])) ? $filter_wrapper['background_img'] : '';
             $return['display']['classes'][] = (!empty($filter_wrapper['background_color'])) ? $filter_wrapper['background_color'] : '';
+            $return['display']['classes'][] = (!empty($filter_wrapper['background_color_opacity'])) ? $filter_wrapper['background_color_opacity'] : '';
             $return['display']['classes'][] = (!empty($filter_wrapper['background_img_opacity'])) ? $filter_wrapper['background_img_opacity'] : '';
             $return['display']['classes'][] = (!empty($filter_wrapper['border_color'])) ? $filter_wrapper['border_color'] : '';
             $return['display']['classes'] = implode(' ', $return['display']['classes']);
         }
+
         return $return;
     }
 

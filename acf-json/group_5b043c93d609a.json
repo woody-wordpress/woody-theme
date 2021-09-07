@@ -1,7 +1,8 @@
 {
     "key": "group_5b043c93d609a",
     "title": "Background parameters",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5b043ca4a6fe3",
             "label": "Couleur de fond",
             "name": "background_color",
@@ -10,7 +11,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "75",
                 "class": "",
                 "id": ""
             },
@@ -21,6 +22,30 @@
                 "bg-darkgray": "Gris foncé",
                 "bg-lightgray": "Gris clair",
                 "bg-white": "Blanc"
+            },
+            "allow_null": 1,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        {
+            "key": "field_613627cd3b839",
+            "label": "Opacité de la couleur de fond",
+            "name": "background_color_opacity",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "bgcolor-op75": "75%",
+                "bgcolor-op50": "50%",
+                "bgcolor-op25": "25%",
+                "bgcolor-op10": "10%"
             },
             "allow_null": 1,
             "default_value": "",
@@ -103,11 +128,13 @@
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -115,7 +142,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "Permet de personnaliser le fond d'une section (couleur \/ image)",
-    "modified": 1558703753
+    "modified": 1631008869
 }

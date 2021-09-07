@@ -89,6 +89,7 @@ class WoodyTheme_Template_Topic extends WoodyTheme_TemplateAbstract
             'parallax'                  => !empty($args['parallax']) ? $args['parallax'] : false,
             'section_alignment'         => !empty($args['section_alignment']) ? $args['section_alignment'] : 'align-middle',
             'background_color'          => !empty($args['background_color']) ? $args['background_color'] : '',
+            'background_color_opacity'  => !empty($args['background_color_opacity']) ? $args['background_color_opacity'] : '',
             'border_color'              => !empty($args['border_color']) ? $args['border_color'] : '',
             'background_img'            => !empty($args['background_img']) ? $args['background_img'] : false,
             'background_img_opacity'    => !empty($args['background_img_opacity']) ? $args['background_img_opacity'] : '',
