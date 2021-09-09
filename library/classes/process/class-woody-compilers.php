@@ -124,6 +124,19 @@ class WoodyTheme_WoodyCompilers
                 }
             }
 
+            if (!empty($wrapper['route']) && !empty($wrapper['route']['route_file'])) {
+                $json = $this->getJsonFromRouteFile($wrapper['route']['route_file'], [
+                    "active" => $wrapper['route']['parameters'],
+                    "fill_color" => $wrapper['route']['fill_color'],
+                    "route_color" => $wrapper['route']['route_color'],
+                    "stroke_thickness" => $wrapper['route']['stroke_thickness'],
+                ]);
+
+                if (!empty($json)) {
+                    $the_items['route'] = $json;
+                }
+            }
+
             $the_items = apply_filters('woody_format_focuses_data', $the_items, $wrapper);
 
             $return = !empty($wrapper['woody_tpl']) ? \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items) : \Timber::compile($twigPaths['blocks-focus-tpl_103'], $the_items) ;
@@ -167,31 +180,12 @@ class WoodyTheme_WoodyCompilers
                     $route_color = $route['route_color'];
                     $stroke_thickness = $route['stroke_thickness'];
                     $parameters = $route['parameters'];
-
-                    if ($filetype['ext'] == 'json' || $filetype['ext'] == 'geojson') {
-                        $json = file_get_contents($filename);
-                        $route['route_file'] = $json;
-
-                        $wrapper['routes'][$key] = json_decode($route['route_file'], true);
-                        foreach ($wrapper['routes'][$key]['features'] as $f_key => $feature) {
-                            $wrapper['routes'][$key]['features'][$f_key]['route'] = true;
-
-                            if ($parameters === true) {
-                                $wrapper['routes'][$key]['features'][$f_key]['properties']['fill'] = $fill_color;
-                                $wrapper['routes'][$key]['features'][$f_key]['properties']['stroke'] = $route_color;
-                                $wrapper['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = $stroke_thickness;
-                            }
-                            $fill_opacity = isset($wrapper['routes'][$key]['features'][$f_key]['properties']['fill-opacity']) ? $wrapper['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] : 0;
-                            $wrapper['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] = $fill_opacity == 0 ? 0.5 : $fill_opacity;
-
-                            // Route Fields aren't supposed to have markers.
-                            if ($feature['geometry']['type'] == "Point") {
-                                unset($wrapper['routes'][$key]['features'][$f_key]);
-                            }
-                        }
-                        $wrapper['routes'][$key]['features'] = array_values($wrapper['routes'][$key]['features']);
-                        $wrapper['routes'][$key] = json_encode($wrapper['routes'][$key]);
-                    }
+                    $wrapper['routes'][$key] = $this->getJsonFromRouteFile($route['route_file'], [
+                        'fill_color' => $route['fill_color'],
+                        'route_color' => $route['route_color'],
+                        'stroke_thickness' => $route['stroke_thickness'],
+                        'active' => $route['parameters']
+                    ]);
                 } else {
                     unset($wrapper['routes'][$key]);
                 }
@@ -243,6 +237,47 @@ class WoodyTheme_WoodyCompilers
 
         $return = \Timber::compile($twigPaths[$wrapper['woody_tpl']], $wrapper);
         return $return;
+    }
+
+    /**
+     * @param route_file
+     */
+    private function getJsonFromRouteFile($route_file, $parameters)
+    {
+        $json = "";
+
+        $filename = get_attached_file($route_file['ID']);
+        $filetype = wp_check_filetype($filename);
+
+        // Parameters :
+        if ($filetype['ext'] == 'json' || $filetype['ext'] == 'geojson') {
+            $json = file_get_contents($filename);
+            $route['route_file'] = $json;
+
+            $content = json_decode($route['route_file'], true);
+
+            foreach ($content['features'] as $f_key => $feature) {
+                $content['features'][$f_key]['route'] = true;
+
+                if ($parameters['active'] === true) {
+                    $content['features'][$f_key]['properties']['fill'] = $parameters['fill_color'];
+                    $content['features'][$f_key]['properties']['stroke'] = $parameters['route_color'];
+                    $content['features'][$f_key]['properties']['stroke-width'] = $parameters['stroke_thickness'];
+                }
+                $fill_opacity = isset($content['features'][$f_key]['properties']['fill-opacity']) ? $content['features'][$f_key]['properties']['fill-opacity'] : 0;
+                $content['features'][$f_key]['properties']['fill-opacity'] = $fill_opacity == 0 ? 0.5 : $fill_opacity;
+
+                // Route Fields aren't supposed to have markers.
+                if ($feature['geometry']['type'] == "Point") {
+                    unset($content['features'][$f_key]);
+                }
+            }
+
+            $content['features'] = array_values($content['features']);
+            $json = json_encode($content);
+        }
+
+        return $json;
     }
 
     public function formatSemanticViewData($wrapper, $twigPaths)

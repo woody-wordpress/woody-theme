@@ -881,6 +881,44 @@
             "prefix_name": 0
         },
         {
+            "key": "field_2g75e1r3tb5az",
+            "label": "Ajouter un tracé",
+            "name": "route",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_3g75e1z31bea3",
+                    "label": "Ajouter un tracé",
+                    "name": "route",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_5d078a196a3e8"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                }
+            ]
+        },
+        {
             "key": "field_5b6821997df66",
             "label": "Options avancées",
             "name": "",
