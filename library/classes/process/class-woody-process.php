@@ -193,6 +193,7 @@ class WoodyTheme_WoodyProcess
             break;
             case 'feature':
                 $layout['display'] = $this->tools->getDisplayOptions($layout);
+                $layout['icon_img']['sizes']['ratio_free'] = $layout['icon_img']['sizes']['ratio_free_small'];
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
             case 'story':
