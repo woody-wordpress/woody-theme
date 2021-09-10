@@ -317,7 +317,7 @@ class WoodyTheme_WoodyGetters
             }
 
             $data['link'] = [
-                'url' => get_attached_file($item->ID),
+                'url' => wp_get_attachment_url($item->ID),
                 'link_label' => __('Télécharger')
             ];
 
