@@ -307,6 +307,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $bookblock['the_classes'] = [];
                 $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_img_opacity'])) ? $bookblock['bookblock_bg_params']['background_img_opacity'] : '';
                 $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_color'])) ? $bookblock['bookblock_bg_params']['background_color'] : '';
+                $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_color_opacity'])) ? $bookblock['bookblock_bg_params']['background_color_opacity'] : '';
                 $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['border_color'])) ? $bookblock['bookblock_bg_params']['border_color'] : '';
                 $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_img'])) ? 'isRel' : '';
                 if (!empty($bookblock['bookblock_bg_params']['background_img_opacity']) || !empty($bookblock['bookblock_bg_params']['background_color']) || !empty($bookblock['bookblock_bg_params']['border_color'])) {

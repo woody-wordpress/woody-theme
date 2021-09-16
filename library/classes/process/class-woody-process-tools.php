@@ -155,6 +155,7 @@ class WoodyTheme_WoodyProcessTools
         $display['parallax'] = (!empty($wrapper['parallax'])) ? $wrapper['parallax'] : '';
         $classes_array[] = (!empty($display['background_img'])) ? 'isRel' : '';
         $classes_array[] = (!empty($wrapper['background_color'])) ? $wrapper['background_color'] : '';
+        $classes_array[] = (!empty($wrapper['background_color_opacity'])) ? $wrapper['background_color_opacity'] : '';
         $classes_array[] = (!empty($wrapper['border_color'])) ? $wrapper['border_color'] : '';
         $classes_array[] = (!empty($wrapper['background_img_opacity'])) ? $wrapper['background_img_opacity'] : '';
         $classes_array[] = (!empty($wrapper['scope_paddings']['scope_padding_top'])) ? $wrapper['scope_paddings']['scope_padding_top'] : '';
