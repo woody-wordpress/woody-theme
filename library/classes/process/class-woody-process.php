@@ -69,18 +69,6 @@ class WoodyTheme_WoodyProcess
                 $the_weather['bg_img'] = $layout['weather_bg_img'];
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_weather);
                 break;
-            case 'infolive':
-                // TODO: le case Infolive doit être ajouté via le filtre woody_custom_layout depuis le plugin
-                $vars['resort'] = $layout['infolive_block_select_resort'];
-                $vars['display_custom'] = $layout['infolive_block_switch_display'];
-                $vars['display'] = $layout['infolive_block_display'];
-                $vars['lists'] = $layout['infolive_list_display'];
-                $vars['lists_mode'] = $layout['infolive_list_display_mode'];
-                $vars['list_all'] = $layout['infolive_list_display_all_zones'];
-                $vars['list_selected_zones'] = $layout['infolive_list_select_zones'];
-                $the_infolive = apply_filters('woody_infolive', $vars);
-                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_infolive);
-                break;
             case 'gallery':
                 // Ajout des données Instagram + champs personnalisés dans le contexte des images
                 $layout['gallery_type'] = !empty($layout['gallery_type']) ? $layout['gallery_type'] : "manual";
@@ -193,6 +181,7 @@ class WoodyTheme_WoodyProcess
             break;
             case 'feature':
                 $layout['display'] = $this->tools->getDisplayOptions($layout);
+                $layout['icon_img']['sizes']['ratio_free'] = $layout['icon_img']['sizes']['ratio_free_small'];
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
             case 'story':
@@ -206,6 +195,9 @@ class WoodyTheme_WoodyProcess
             default:
 
                 // On autorise le traitement des layouts depuis un code externe
+                // ! MUST Use if (is_array($layout)) in the add_filter or get a PHP WARNING when doing :
+                // ! if ($layout['acf_fc_layout'] == 'some_bloc..')
+                // ? Use : if (is_array($layout) && $layout['acf_fc_layout'] == 'some_bloc..') {}
                 $layout = apply_filters('woody_custom_layout', $layout, $context);
 
                 // On compile le $layout uniquement si ça n'a pas déjà été fait

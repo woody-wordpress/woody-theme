@@ -1,8 +1,7 @@
 {
     "key": "group_5c0fed3541b45",
     "title": "Paramètres Woody",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_5e43ca87a2e3e",
             "label": "Paramètres généraux",
             "name": "",
@@ -127,12 +126,29 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [
-                {
-                    "key": "field_5c10c08f62d6d",
-                    "label": "Pages suggérées",
-                    "name": "suggest_pages",
-                    "type": "repeater",
+            "sub_fields": [{
+                "key": "field_5c10c08f62d6d",
+                "label": "Pages suggérées",
+                "name": "suggest_pages",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "collapsed": "",
+                "min": 0,
+                "max": 4,
+                "layout": "block",
+                "button_label": "Ajouter une suggestion",
+                "sub_fields": [{
+                    "key": "field_5c10c0a162d6e",
+                    "label": "Page",
+                    "name": "suggest_page",
+                    "type": "post_object",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -141,37 +157,16 @@
                         "class": "",
                         "id": ""
                     },
-                    "collapsed": "",
-                    "min": 0,
-                    "max": 4,
-                    "layout": "block",
-                    "button_label": "Ajouter une suggestion",
-                    "sub_fields": [
-                        {
-                            "key": "field_5c10c0a162d6e",
-                            "label": "Page",
-                            "name": "suggest_page",
-                            "type": "post_object",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "post_type": [
-                                "page"
-                            ],
-                            "taxonomy": "",
-                            "allow_null": 1,
-                            "multiple": 0,
-                            "return_format": "id",
-                            "ui": 1
-                        }
-                    ]
-                }
-            ]
+                    "post_type": [
+                        "page"
+                    ],
+                    "taxonomy": "",
+                    "allow_null": 1,
+                    "multiple": 0,
+                    "return_format": "id",
+                    "ui": 1
+                }]
+            }]
         },
         {
             "key": "field_5d039af8a226f",
@@ -229,8 +224,30 @@
         },
         {
             "key": "field_611f65c4303f8",
-            "label": "Page des bons plans",
+            "label": "Page du panier des bons plans",
             "name": "deals_page_url",
+            "type": "post_object",
+            "instructions": "Si la page est traduite, les traductions seront automatiquement utilisées pour les langues correspondantes",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": "",
+            "allow_null": 1,
+            "multiple": 0,
+            "return_format": "id",
+            "ui": 1
+        },
+        {
+            "key": "field_611f65c4303f9",
+            "label": "Page des bons plans à imprimer",
+            "name": "deals_printable_page_url",
             "type": "post_object",
             "instructions": "Si la page est traduite, les traductions seront automatiquement utilisées pour les langues correspondantes",
             "required": 0,
@@ -443,13 +460,11 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "options_page",
-                "operator": "==",
-                "value": "woody-settings"
-            }
-        ]
+        [{
+            "param": "options_page",
+            "operator": "==",
+            "value": "woody-settings"
+        }]
     ],
     "menu_order": 0,
     "position": "normal",
