@@ -516,7 +516,7 @@ class WoodyTheme_WoodyProcess
                 $the_header = '';
                 $the_layout = '';
 
-                if (!empty($section['icon']) || !empty($section['pretitle']) || !empty($section['title']) || !empty($section['subtitle']) || !empty($section['description'])) {
+                if (!empty($section['woody_icon']) || !empty($section['icon_img']) || !empty($section['pretitle']) || !empty($section['title']) || !empty($section['subtitle']) || !empty($section['description'])) {
                     $the_header = \Timber::compile($context['woody_components']['section-section_header-tpl_01'], $section);
                 }
 
