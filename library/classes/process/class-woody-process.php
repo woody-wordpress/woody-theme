@@ -447,6 +447,7 @@ class WoodyTheme_WoodyProcess
             'post__not_in' => array($the_post->ID),
             'order' => $order,
             'orderby' => $orderby,
+            'lang' => pll_get_post_language($the_post->ID),
         ];
 
         if (!empty($posts_in)) {
