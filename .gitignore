@@ -1,7 +1,7 @@
 # Global
 .DS_Store
 ._.*
-
+.vscode/*
 # Composer
 bin
 vendor/*
