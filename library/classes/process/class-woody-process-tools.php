@@ -112,8 +112,29 @@ class WoodyTheme_WoodyProcessTools
     {
         $value = null;
 
+        $page_type = getTermsSlugs($item->ID, 'page_type', true);
+
         if (!empty($item) && is_object($item)) {
-            $value = get_field($field, $item->ID);
+            // On vérifie si la page est de type miroir
+            if ($page_type == 'mirror_page') {
+
+                // On retourne la page de référence de la page miroir
+                $mirror = get_field('mirror_page_reference', $item->ID);
+
+                if (!empty(get_post($mirror))) {
+                    $mirror_post = get_post($mirror);
+
+                    // Si le champ de la page miroir n'est pas vide, on le récupère
+                    if (!empty(get_field($field, $item->ID))) {
+                        $value = get_field($field, $item->ID);
+                    } else {
+                        // Sinon, on récupère le champ de sa page de référence
+                        $value = get_field($field, $mirror_post->ID);
+                    }
+                }
+            } else {
+                $value = get_field($field, $item->ID);
+            }
         }
 
         if (empty($value) && !empty($fallback_item) && !empty($fallback_field)) {

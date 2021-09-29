@@ -56,12 +56,6 @@ class WoodyTheme_WoodyGetters
                 } else {
                     // On vérifie si la page est de type miroir
                     $page_type = get_the_terms($post->ID, 'page_type');
-                    if ($page_type[0]->slug == 'mirror_page') {
-                        $mirror = get_field('mirror_page_reference', $post->ID);
-                        if (!empty(get_post($mirror))) {
-                            $post = get_post($mirror);
-                        }
-                    }
 
                     // On exclut le contenu épinglé du tableau
                     if ($pinned_content_id != $post->ID) {
@@ -343,7 +337,6 @@ class WoodyTheme_WoodyGetters
             return;
         }
 
-
         $data['page_type'] = getTermsSlugs($item->ID, 'page_type', true);
         $data['post_id'] = $item->ID;
 
@@ -361,7 +354,7 @@ class WoodyTheme_WoodyGetters
                 $data['subtitle'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($item, 'focus_subtitle', get_field('page_heading_heading', $item->ID), 'subtitle', $item, 'field_5b87f23b57a1e'), $item->ID);
             }
             if (empty($is_attachment) && in_array('icon', $wrapper['display_elements'])) {
-                $data['woody_icon'] = get_field('focus_woody_icon', $item->ID);
+                $data['woody_icon'] = $this->tools->getFieldAndFallback($item, 'focus_woody_icon', '');
                 $data['icon_type'] = 'picto';
             }
             if (empty($is_attachment) && in_array('description', $wrapper['display_elements'])) {
