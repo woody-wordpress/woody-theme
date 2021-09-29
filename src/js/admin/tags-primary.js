@@ -10,9 +10,9 @@ $('#post').each(function() {
     // On affiche/masque les boutons d'action
     var displayTermPrimaryButton = function($el, $box) {
         var checked = $box.find('input:checkbox:checked').length;
-        if ($el.attr('checked') == 'checked' && checked > 1) {
+        if ($el.prop('checked') && checked > 1) {
             $el.parent('.selectit').siblings('.set-primary-term').removeClass('hide');
-        } else if ($el.attr('checked') == 'checked' && checked == 1) {
+        } else if ($el.prop('checked') && checked == 1) {
             $el.parent('.selectit').addClass('is-primary-term');
             $el.parent('.selectit').siblings('.unset-primary-term').removeClass('hide');
         } else {

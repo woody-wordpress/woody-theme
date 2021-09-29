@@ -6,6 +6,7 @@ import './move-blocks';
 import './edit-post-change-lang';
 import './edit-post-close-acf';
 // import './edit-post-model';
+import './edit-post-new-acf';
 import './edit-post-page-teaser-media';
 import './edit-post-sticky-actions';
 import './edit-post-unpublisher';

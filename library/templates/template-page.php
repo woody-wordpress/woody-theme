@@ -145,7 +145,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                         $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img']['lazy'] = 'disabled';
                     }
                 }
-
+                $home_slider = apply_filters('woody_format_homeslider_data', $home_slider);
                 $this->context['home_slider'] = \Timber::compile($this->context['woody_components'][$home_slider['landswpr_woody_tpl']], $home_slider);
             }
 
@@ -307,6 +307,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $bookblock['the_classes'] = [];
                 $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_img_opacity'])) ? $bookblock['bookblock_bg_params']['background_img_opacity'] : '';
                 $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_color'])) ? $bookblock['bookblock_bg_params']['background_color'] : '';
+                $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_color_opacity'])) ? $bookblock['bookblock_bg_params']['background_color_opacity'] : '';
                 $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['border_color'])) ? $bookblock['bookblock_bg_params']['border_color'] : '';
                 $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_img'])) ? 'isRel' : '';
                 if (!empty($bookblock['bookblock_bg_params']['background_img_opacity']) || !empty($bookblock['bookblock_bg_params']['background_color']) || !empty($bookblock['bookblock_bg_params']['border_color'])) {
