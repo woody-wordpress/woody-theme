@@ -897,6 +897,7 @@
                     "layout": "horizontal",
                     "return_format": "value"
                 },
+
                 {
                     "key": "field_5afd2faf953bc",
                     "label": "Disposition des blocs",
