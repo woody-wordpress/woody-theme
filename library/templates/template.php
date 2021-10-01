@@ -100,6 +100,31 @@ abstract class WoodyTheme_TemplateAbstract
         if (empty($this->globals['languages'])) {
             $this->globals['languages'] = apply_filters('woody_pll_the_locales', null);
         }
+
+        if (empty($this->globals['ancestors'])) {
+            $this->globals['ancestors'] = $this->getAncestors($this->context['post_id']);
+        }
+    }
+
+    private function getAncestors($post_id)
+    {
+        $return = [];
+
+        // On ajoute toutes les pages parentes
+        $depth = 1;
+        $ancestors_ids = get_post_ancestors($post_id);
+        if (!empty($ancestors_ids) && is_array($ancestors_ids)) {
+            $ancestors_ids = array_reverse($ancestors_ids);
+            foreach ($ancestors_ids as $key => $ancestor_id) {
+                $return['chapter' . $depth] = get_the_title($ancestor_id);
+                $depth++;
+            }
+        }
+
+        // On ajoute la page courante
+        $return['chapter' . $depth] = get_the_title($post_id);
+
+        return $return;
     }
 
     private function getTags($post_id)

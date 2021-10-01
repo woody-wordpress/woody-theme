@@ -506,10 +506,11 @@ class WoodyTheme_WoodyProcess
         $return = [];
         if (!empty($sections) && is_array($sections)) {
             foreach ($sections as $section_id => $section) {
+                $section = apply_filters('section_data_before_render', $section);
                 $the_header = '';
                 $the_layout = '';
-
-                if (!empty($section['icon']) || !empty($section['pretitle']) || !empty($section['title']) || !empty($section['subtitle']) || !empty($section['description'])) {
+              
+                if (!empty($section['woody_icon']) || !empty($section['icon_img']) || !empty($section['pretitle']) || !empty($section['title']) || !empty($section['subtitle']) || !empty($section['description'])) {
                     $the_header = \Timber::compile($context['woody_components']['section-section_header-tpl_01'], $section);
                 }
 

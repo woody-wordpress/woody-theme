@@ -145,7 +145,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                         $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img']['lazy'] = 'disabled';
                     }
                 }
-
+                $home_slider = apply_filters('woody_format_homeslider_data', $home_slider);
                 $this->context['home_slider'] = \Timber::compile($this->context['woody_components'][$home_slider['landswpr_woody_tpl']], $home_slider);
             }
 
