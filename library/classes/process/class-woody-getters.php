@@ -333,6 +333,7 @@ class WoodyTheme_WoodyGetters
     public function getPagePreview($wrapper, $item, $clickable = true, $is_attachment = false)
     {
         $data = [];
+
         if (!is_object($item)) {
             return;
         }
@@ -346,19 +347,35 @@ class WoodyTheme_WoodyGetters
             $data['title'] = $this->tools->replacePattern(get_the_title($item->ID), $item->ID);
         }
 
+        $original_item = $item;
+
+        // On vérifie si la page est de type miroir
+        if ($data['page_type'] == 'mirror_page') {
+            
+            // On retourne la page de référence de la page miroir
+            $mirror = get_field('mirror_page_reference', $item->ID);
+            
+            if (!empty(get_post($mirror))) {
+                $mirror_post = get_post($mirror);
+                
+                // On remplace l'objet de post courant par l'objet de post de référence de la page miroir
+                $item = $mirror_post;
+            }
+        }
+
         if (!empty($wrapper) && !empty($wrapper['display_elements']) && is_array($wrapper['display_elements'])) {
             if (empty($is_attachment) && in_array('pretitle', $wrapper['display_elements'])) {
-                $data['pretitle'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($item, 'focus_pretitle', get_field('page_heading_heading', $item->ID), 'pretitle', $item, 'field_5b87f20257a1d'), $item->ID);
+                $data['pretitle'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($original_item, 'focus_pretitle', get_field('page_heading_heading', $item->ID), 'pretitle', $item, 'field_5b87f20257a1d', $data['page_type']), $original_item->ID);
             }
             if (empty($is_attachment) && in_array('subtitle', $wrapper['display_elements'])) {
-                $data['subtitle'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($item, 'focus_subtitle', get_field('page_heading_heading', $item->ID), 'subtitle', $item, 'field_5b87f23b57a1e'), $item->ID);
+                $data['subtitle'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($original_item, 'focus_subtitle', get_field('page_heading_heading', $item->ID), 'subtitle', $item, 'field_5b87f23b57a1e', $data['page_type']), $original_item->ID);
             }
             if (empty($is_attachment) && in_array('icon', $wrapper['display_elements'])) {
-                $data['woody_icon'] = $this->tools->getFieldAndFallback($item, 'focus_woody_icon', '');
+                $data['woody_icon'] = get_field('focus_woody_icon', $original_item->ID);
                 $data['icon_type'] = 'picto';
             }
             if (empty($is_attachment) && in_array('description', $wrapper['display_elements'])) {
-                $data['description'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($item, 'focus_description', $item, 'field_5b2bbbfaec6b2'), $item->ID);
+                $data['description'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($original_item, 'focus_description', '', '', $item, 'field_5b2bbbfaec6b2', $data['page_type']), $original_item->ID);
             }
             if (in_array('created', $wrapper['display_elements'])) {
                 $created = get_the_date('', $item->ID);
@@ -371,6 +388,7 @@ class WoodyTheme_WoodyGetters
             }
             if (empty($is_attachment) && in_array('price', $wrapper['display_elements'])) {
                 $price_type = get_field('the_price_price_type', $item->ID);
+                // TODO: passer par le filtre woody_custom_pagePreview dans l'addon-group-quotation
                 if ($price_type == "component_based") {
                     $groupQuotation = new GroupQuotation;
                     $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d', $item);
@@ -412,16 +430,16 @@ class WoodyTheme_WoodyGetters
         $data['the_peoples'] = get_field('field_5b6d54a10381f', $item->ID);
 
         if (empty($is_attachment) && $clickable) {
-            $data['link']['link_label'] = $this->tools->replacePattern($this->tools->getFieldAndFallBack($item, 'focus_button_title', $item), $item->ID);
+            $data['link']['link_label'] = $this->tools->replacePattern($this->tools->getFieldAndFallBack($original_item, 'focus_button_title', '', '', $item, '', $data['page_type']), $original_item->ID);
             if (empty($data['link']['link_label'])) {
                 $data['link']['link_label'] = __('Lire la suite', 'woody-theme');
             }
         }
 
         if (empty($is_attachment) && !empty($wrapper['display_img'])) {
-            $data['img'] = $this->tools->getFieldAndFallback($item, 'focus_img', $item, 'field_5b0e5ddfd4b1b');
+            $data['img'] = $this->tools->getFieldAndFallback($original_item, 'focus_img', '', '', $item, 'field_5b0e5ddfd4b1b', $data['page_type']);
             if (empty($data['img'])) {
-                $video = $this->tools->getFieldAndFallback($item, 'field_5b0e5df0d4b1c', $item);
+                $video = $this->tools->getFieldAndFallback($original_item, 'field_5b0e5df0d4b1c', '', '', $item, '', $data['page_type']);
                 $data['img'] = !empty($video) ? $video['movie_poster_file'] : '';
             }
             if (!empty($data['img'])) {
@@ -453,10 +471,12 @@ class WoodyTheme_WoodyGetters
         $data['location']['lng'] = (!empty($lng)) ? str_replace(',', '.', $lng) : '';
 
         if (empty($is_attachment) && $clickable) {
-            $data['link']['url'] = apply_filters('woody_get_permalink', $item->ID);
+            $data['link']['url'] = apply_filters('woody_get_permalink', $original_item->ID);
         }
 
         $data = apply_filters('woody_custom_pagePreview', $data, $wrapper);
+
+        console_log($data, 'data');
 
         return $data;
     }

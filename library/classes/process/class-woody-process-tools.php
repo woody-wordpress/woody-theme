@@ -108,33 +108,16 @@ class WoodyTheme_WoodyProcessTools
      * @return   data - Un tableau de données
      *
      **/
-    public function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = '', $lastfallback_item = '', $lastfallback_field = '')
+    public function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = '', $lastfallback_item = '', $lastfallback_field = '', $item_type = '')
     {
         $value = null;
 
-        $page_type = getTermsSlugs($item->ID, 'page_type', true);
-
         if (!empty($item) && is_object($item)) {
-            // On vérifie si la page est de type miroir
-            if ($page_type == 'mirror_page') {
+            $value = get_field($field, $item->ID);
+        }
 
-                // On retourne la page de référence de la page miroir
-                $mirror = get_field('mirror_page_reference', $item->ID);
-
-                if (!empty(get_post($mirror))) {
-                    $mirror_post = get_post($mirror);
-
-                    // Si le champ de la page miroir n'est pas vide, on le récupère
-                    if (!empty(get_field($field, $item->ID))) {
-                        $value = get_field($field, $item->ID);
-                    } else {
-                        // Sinon, on récupère le champ de sa page de référence
-                        $value = get_field($field, $mirror_post->ID);
-                    }
-                }
-            } else {
-                $value = get_field($field, $item->ID);
-            }
+        if (empty($value) && $item_type == 'mirror_page') {
+            $value = get_field($field, $lastfallback_item);
         }
 
         if (empty($value) && !empty($fallback_item) && !empty($fallback_field)) {
