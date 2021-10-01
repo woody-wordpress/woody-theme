@@ -476,8 +476,6 @@ class WoodyTheme_WoodyGetters
 
         $data = apply_filters('woody_custom_pagePreview', $data, $wrapper);
 
-        console_log($data, 'data');
-
         return $data;
     }
 
