@@ -192,6 +192,15 @@ class WoodyTheme_WoodyProcess
                 $layout = $this->compilers->formatTestimonials($layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
+            case 'social_shares':
+                if ($layout['default_parameters'] == 'true' ) {
+                    $social_shares = getActiveShares();
+                }
+                if ($layout['default_parameters'] == 'false' && !empty($layout['active_shares'])) {
+                    $social_shares = getActiveShares($layout['active_shares']);
+                };
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $social_shares);
+            break;
             default:
 
                 // On autorise le traitement des layouts depuis un code externe
@@ -509,7 +518,7 @@ class WoodyTheme_WoodyProcess
                 $section = apply_filters('section_data_before_render', $section);
                 $the_header = '';
                 $the_layout = '';
-              
+
                 if (!empty($section['woody_icon']) || !empty($section['icon_img']) || !empty($section['pretitle']) || !empty($section['title']) || !empty($section['subtitle']) || !empty($section['description'])) {
                     $the_header = \Timber::compile($context['woody_components']['section-section_header-tpl_01'], $section);
                 }
