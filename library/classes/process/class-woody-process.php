@@ -422,7 +422,7 @@ class WoodyTheme_WoodyProcess
                 $order = 'ASC';
                 break;
             case 'menu_order':
-                $orderby = 'menu_order';
+                $orderby = 'post_parent menu_order ID';
                 $order = 'ASC';
                 break;
             default:
@@ -456,6 +456,7 @@ class WoodyTheme_WoodyProcess
 
         // Retourne tous les posts correspondant à la query
         if ($ignore_maxnum === true) {
+            console_log($ignore_maxnum, 'ignore maxnum');
             $the_query['posts_per_page'] = -1;
         }
 
@@ -467,6 +468,8 @@ class WoodyTheme_WoodyProcess
 
         // On ajoute la tax_query
         $the_query['tax_query'] = (!empty($tax_query)) ? $tax_query : '';
+
+        console_log($the_query['tax_query']);
 
         // Si Hiérarchie = Enfants directs de la page
         // On passe le post ID dans le paramètre post_parent de la query
@@ -494,6 +497,8 @@ class WoodyTheme_WoodyProcess
 
         // On créé la wp_query avec les paramètres définis
         $query_result = new \WP_Query($the_query);
+
+        console_log($query_result, 'query result');
 
         // Si on ordonne par geoloc, il faut trier les résultats reçus
         $query_result = apply_filters('custom_process_woody_query', $query_result, $query_form, $the_post);
