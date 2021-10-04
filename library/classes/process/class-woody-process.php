@@ -422,7 +422,7 @@ class WoodyTheme_WoodyProcess
                 $order = 'ASC';
                 break;
             case 'menu_order':
-                $orderby = 'menu_order';
+                $orderby = 'post_parent menu_order ID';
                 $order = 'ASC';
                 break;
             default:
