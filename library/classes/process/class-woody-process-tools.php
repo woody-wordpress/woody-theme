@@ -108,12 +108,16 @@ class WoodyTheme_WoodyProcessTools
      * @return   data - Un tableau de données
      *
      **/
-    public function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = '', $lastfallback_item = '', $lastfallback_field = '')
+    public function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = '', $lastfallback_item = '', $lastfallback_field = '', $item_type = '')
     {
         $value = null;
 
         if (!empty($item) && is_object($item)) {
             $value = get_field($field, $item->ID);
+        }
+
+        if (empty($value) && $item_type == 'mirror_page') {
+            $value = get_field($field, $lastfallback_item);
         }
 
         if (empty($value) && !empty($fallback_item) && !empty($fallback_field)) {
