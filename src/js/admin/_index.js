@@ -20,3 +20,4 @@ import './ajax-load-layouts';
 import './edit-post-save-ajax';
 import './acf-wysiwyg';
 import './sections-blocks';
+import './edit-mode';
