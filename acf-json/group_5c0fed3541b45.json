@@ -75,6 +75,25 @@
             "ui_off_text": ""
         },
         {
+            "key": "field_global_lite_edit_mode",
+            "label": "Forcer le mode d'édition simplifié au chargement des pages",
+            "name": "global_lite_edit_mode",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_5c10c11662d6f",
             "label": "Recherche globale",
             "name": "",
