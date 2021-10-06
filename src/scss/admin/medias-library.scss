@@ -5,6 +5,14 @@
     height: calc(100% - 130px);
 }
 
+.media-frame.mode-select .attachments-browser .attachments {
+    overflow: scroll;
+    position: absolute;
+    left: 0;
+    height: calc(100% - 250px);
+    width: 100%;
+}
+
 .attachments-wrapper .load-more-wrapper {
     position: absolute;
     bottom: 0;
@@ -14,9 +22,5 @@
 
     .load-more-count {
         text-align: left;
-    }
-
-    .load-more-jump {
-        margin-left: 0;
     }
 }
