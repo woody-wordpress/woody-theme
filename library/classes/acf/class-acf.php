@@ -83,6 +83,8 @@ class WoodyTheme_ACF
 
         // Ajax Call
         add_action('wp_ajax_generate_layout_acf_clone', [$this, 'getRenderedLayout']);
+
+        add_filter('acf/load_value/name=edit_mode', [$this, 'editModeLoadField'], 10, 3);
     }
 
     public function woodyGetFieldOption($field_name = null)
@@ -583,6 +585,16 @@ class WoodyTheme_ACF
         }
 
         return $args;
+    }
+
+    public function editModeLoadField($value, $post_id, $field)
+    {
+        $global_lite_mode = get_field('global_lite_edit_mode', 'options');
+
+        if ($global_lite_mode && $value != 'lite') {
+            $value = 'lite';
+        }
+        return $value;
     }
 
     private function sortWoodyTpls()

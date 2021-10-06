@@ -3,7 +3,7 @@
     "title": "Mode d'édition",
     "fields": [{
         "key": "field_615ca0a92a510",
-        "label": "Interface",
+        "label": "Mode d'édition",
         "name": "edit_mode",
         "type": "button_group",
         "instructions": "",
@@ -16,7 +16,7 @@
         },
         "choices": {
             "lite": "Simple",
-            "advanced": "Expert"
+            "advanced": "Avancé"
         },
         "allow_null": 0,
         "default_value": "advanced",
@@ -36,9 +36,9 @@
             }
         ]
     ],
-    "menu_order": -2000,
+    "menu_order": -1,
     "position": "side",
-    "style": "default",
+    "style": "seamless",
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
