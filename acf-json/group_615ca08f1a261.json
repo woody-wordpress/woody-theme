@@ -15,8 +15,8 @@
             "id": ""
         },
         "choices": {
-            "lite": "Simplifiée",
-            "advanced": "Avancée"
+            "lite": "Simple",
+            "advanced": "Expert"
         },
         "allow_null": 0,
         "default_value": "advanced",
@@ -25,15 +25,21 @@
     }],
     "location": [
         [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "page"
-        }]
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            },
+            {
+                "param": "current_user_role",
+                "operator": "==",
+                "value": "administrator"
+            }
+        ]
     ],
-    "menu_order": -1,
-    "position": "acf_after_title",
-    "style": "seamless",
-    "label_placement": "left",
+    "menu_order": -2000,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
