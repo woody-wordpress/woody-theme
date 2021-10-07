@@ -27,6 +27,7 @@ class WoodyTheme_SiteMap
         add_filter('wp_sitemaps_enabled', '__return_false');
 
         // Adding a shortcode to display sitemap for humans
+        add_filter('woody_custom_layout', [$this, 'sitemapShortcode'], 10, 1);
         add_shortcode('woody_sitemap', [$this, 'sitemapShortcode']);
 
         // Cron + CLI
