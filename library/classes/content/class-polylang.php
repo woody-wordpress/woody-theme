@@ -141,6 +141,8 @@ class WoodyTheme_Polylang
         __("Partager par email", 'woody-theme');
         __("Voir sur Instagram", 'woody-theme');
         __("Accès au menu principal", 'woody-theme');
+        __("Titre de la vidéo manquant", 'woody-theme');
+        __("Légende de la vidéo manquante", 'woody-theme');
         __("Que recherchez-vous ?", "woody-theme");
         __('Vous cherchez quelque chose ?', 'woody-theme');
         __("Rechercher", 'woody-theme');
