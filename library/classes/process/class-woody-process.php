@@ -192,6 +192,11 @@ class WoodyTheme_WoodyProcess
                 $layout = $this->compilers->formatTestimonials($layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
+            case 'movie':
+                $layout['movie_thumbnail'] = embedProviderThumbnail($layout['movie']);
+                $layout['movie_uploadDate'] = $context['post']->post_modified;
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            break;
             default:
 
                 // On autorise le traitement des layouts depuis un code externe
