@@ -643,7 +643,7 @@ abstract class WoodyTheme_TemplateAbstract
 
     private function addGTM()
     {
-        $this->context['gtm'] = WOODY_GTM;
+        $this->context['gtm'] = (WP_ENV == 'prod') ? WOODY_GTM : null;
     }
 
     private function addIcons()
