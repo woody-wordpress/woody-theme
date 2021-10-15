@@ -342,6 +342,9 @@ function woody_untokenize($token)
     $token = str_replace('&nbsp; ', '', $token);
     $token = trim(html_entity_decode(strip_tags($token)));
 
+    // on formate ici notamment les guillemets
+    $token = wptexturize($token);
+
     // On limite la chaine à +/- 150 caractères sans couper de mot
     if (strlen($token) > 170) {
         $token = substr($token, 0, strpos($token, ' ', 150));
