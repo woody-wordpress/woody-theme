@@ -13,6 +13,12 @@
     width: 100%;
 }
 
+.media-frame.mode-select {
+    .media-sidebar {
+        display: none;
+    }
+}
+
 .attachments-wrapper .load-more-wrapper {
     position: absolute;
     bottom: 0;
