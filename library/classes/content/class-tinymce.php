@@ -65,6 +65,31 @@ class WoodyTheme_Tinymce
                 'title' => 'Mega titre',
                 'selector' => 'h2',
                 'classes' => 'mega-title'
+            ),
+            array(
+                'title' => 'Titre 2',
+                'selector' => 'p',
+                'classes' => 'h2'
+            ),
+            array(
+                'title' => 'Titre 3',
+                'selector' => 'p',
+                'classes' => 'h3'
+            ),
+            array(
+                'title' => 'Titre 4',
+                'selector' => 'p',
+                'classes' => 'h4'
+            ),
+            array(
+                'title' => 'Titre 5',
+                'selector' => 'p',
+                'classes' => 'h5'
+            ),
+            array(
+                'title' => 'Titre 6',
+                'selector' => 'p',
+                'classes' => 'h6'
             )
         );
 
