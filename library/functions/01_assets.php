@@ -322,14 +322,14 @@ function woody_untokenize($token)
 {
     // On définit les correspondances des tokens
     $patterns = [
-            '%site_name%' => get_bloginfo('name'),
-            '%post_title%' => get_the_title(),
-            '%hero_title%' => get_field('field_5b041d61adb72'),
-            '%hero_desc%' => get_field('field_5b041dbfadb74'),
-            '%teaser_desc%' => get_field('field_5b2bbbfaec6b2'),
-            '%focus_title%' => get_field('field_5b0d380e04203'),
-            '%focus_desc%' => get_field('field_5b0d382404204')
-        ];
+        '%site_name%' => get_bloginfo('name'),
+        '%post_title%' => get_the_title(),
+        '%hero_title%' => get_field('field_5b041d61adb72'),
+        '%hero_desc%' => get_field('field_5b041dbfadb74'),
+        '%teaser_desc%' => get_field('field_5b2bbbfaec6b2'),
+        '%focus_title%' => get_field('field_5b0d380e04203'),
+        '%focus_desc%' => get_field('field_5b0d382404204')
+    ];
 
     // On remplace les token par les valeurs des champs correspondants
     if (!empty($token)) {

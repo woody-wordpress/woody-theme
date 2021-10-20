@@ -62,7 +62,7 @@ abstract class WoodyTheme_TemplateAbstract
     private function setGlobals()
     {
         if (empty($this->globals['post_title']) && !empty($this->context['post_title'])) {
-            $this->globals['post_title'] = $this->context['post_title'];
+            $this->globals['post_title'] = html_entity_decode($this->context['post_title']);
         }
 
         if (empty($this->globals['post_id']) && !empty($this->context['post_id'])) {
@@ -116,13 +116,13 @@ abstract class WoodyTheme_TemplateAbstract
         if (!empty($ancestors_ids) && is_array($ancestors_ids)) {
             $ancestors_ids = array_reverse($ancestors_ids);
             foreach ($ancestors_ids as $key => $ancestor_id) {
-                $return['chapter' . $depth] = get_the_title($ancestor_id);
+                $return['chapter' . $depth] = html_entity_decode(get_the_title($ancestor_id));
                 $depth++;
             }
         }
 
         // On ajoute la page courante
-        $return['chapter' . $depth] = get_the_title($post_id);
+        $return['chapter' . $depth] = html_entity_decode(get_the_title($post_id));
 
         return $return;
     }
@@ -235,7 +235,7 @@ abstract class WoodyTheme_TemplateAbstract
         } else {
             $this->context['post'] = get_post();
             if (!empty($this->context['post'])) {
-                $this->context['post_title'] = $this->context['post']->post_title;
+                $this->context['post_title'] = get_the_title($this->context['post']->ID);
                 $this->context['post_id'] = $this->context['post']->ID;
                 if (!empty($this->context['post_id'])) {
                     $this->context['sheet_id'] = get_post_type($this->context['post_id']) === 'touristic_sheet' ? get_post_meta($this->context['post_id'], 'touristic_sheet_id')[0] : false;
