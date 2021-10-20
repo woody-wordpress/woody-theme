@@ -82,7 +82,7 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         if (empty($this->globals['tags'])) {
-            $this->globals['tags'] = $this->getTags($this->context['post_id']);
+            $this->globals['tags'] = $this->getTags($this->context['post']);
         }
 
         if (empty($this->globals['current_lang'])) {
@@ -102,17 +102,23 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         if (empty($this->globals['ancestors'])) {
-            $this->globals['ancestors'] = $this->getAncestors($this->context['post_id']);
+            $this->globals['ancestors'] = $this->getAncestors($this->context['post']);
         }
     }
 
-    private function getAncestors($post_id)
+    private function getAncestors($post)
     {
         $return = [];
+        $depth = 1;
+
+        // Si la page est une fiche SIT
+        if ($post->post_type == 'touristic_sheet') {
+            $return['chapter' . $depth] = 'Offres SIT';
+            $depth++;
+        }
 
         // On ajoute toutes les pages parentes
-        $depth = 1;
-        $ancestors_ids = get_post_ancestors($post_id);
+        $ancestors_ids = get_post_ancestors($post->ID);
         if (!empty($ancestors_ids) && is_array($ancestors_ids)) {
             $ancestors_ids = array_reverse($ancestors_ids);
             foreach ($ancestors_ids as $key => $ancestor_id) {
@@ -122,12 +128,12 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         // On ajoute la page courante
-        $return['chapter' . $depth] = html_entity_decode(get_the_title($post_id));
+        $return['chapter' . $depth] = html_entity_decode(get_the_title($post->ID));
 
         return $return;
     }
 
-    private function getTags($post_id)
+    private function getTags($post)
     {
         $return = [];
         $taxonomies = ['places', 'seasons', 'themes'];
@@ -144,7 +150,7 @@ abstract class WoodyTheme_TemplateAbstract
             }
 
             $return[$taxonomy] = [];
-            $terms = get_the_terms($post_id, $taxonomy);
+            $terms = get_the_terms($post->ID, $taxonomy);
             if ($terms != false && !is_wp_error($terms)) {
                 foreach ($terms as $term) {
                     if ($term->parent != 0) {
