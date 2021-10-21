@@ -40,6 +40,8 @@ function filterTabs(field) {
     }
 }
 
-// acf.addAction('load_field/type=tab', filterTabs);
-acf.addAction('append_field/type=tab', filterTabs);
-acf.addAction('load_field/name=edit_mode', setEditMode);
+if (typeof acf == 'object') {
+    // acf.addAction('load_field/type=tab', filterTabs);
+    acf.addAction('append_field/type=tab', filterTabs);
+    acf.addAction('load_field/name=edit_mode', setEditMode);
+}
