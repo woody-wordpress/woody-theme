@@ -219,6 +219,14 @@ class WoodyTheme_SiteMap
     {
         $args = [
             'post_type' => ['page', 'touristic_sheet'],
+            'tax_query' => [
+                array(
+                    'taxonomy' => 'page_type',
+                    'field' => 'slug',
+                    'terms' => ['mirror_page'],
+                    'operator' => 'NOT IN'
+                )
+            ],
             'orderby' => 'menu_order',
             'order'   => 'DESC',
             'lang' => $lang,
