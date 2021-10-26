@@ -12,4 +12,6 @@ function openCloseGroup(field) {
     });
 }
 
-acf.addAction('append', openCloseGroup);
+if (typeof acf == 'object') {
+    acf.addAction('append', openCloseGroup);
+}
