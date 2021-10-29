@@ -316,6 +316,7 @@ abstract class WoodyTheme_TemplateAbstract
 
     private function getCanonical($post_id)
     {
+<<<<<<< HEAD
         if (!empty($post_id)) {
             $post_type = get_post_type($post_id);
 
@@ -333,6 +334,22 @@ abstract class WoodyTheme_TemplateAbstract
         return $post_id;
     }
 
+=======
+        if (!empty($post_id) && get_post_type($post_id) == 'page') {
+            $page_type = getTermsSlugs($post_id, 'page_type', true);
+
+            // On vérifie si la page est de type miroir
+            if ($page_type == 'mirror_page') {
+                // On remplace l'id de post courant par l'id de post de référence de la page miroir
+                $post_id = get_field('mirror_page_reference', $post_id);
+            }
+        }
+
+        return apply_filters('woody_get_permalink', $post_id);
+    }
+
+
+>>>>>>> 2565528fd1dccfc78729780cafd4ddfc92457e0a
     private function setMetadata()
     {
         $return = [];
@@ -346,7 +363,11 @@ abstract class WoodyTheme_TemplateAbstract
                 '#tag' => 'link',
                 '#attributes' => [
                     'rel' => 'canonical',
+<<<<<<< HEAD
                     'href' => apply_filters('woody_get_permalink', $this->getCanonical($this->context['post_id']))
+=======
+                    'href' => $this->getCanonical($this->context['post_id'])
+>>>>>>> 2565528fd1dccfc78729780cafd4ddfc92457e0a
                 ]
             ],
             'charset' => [
