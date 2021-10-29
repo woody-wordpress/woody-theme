@@ -100,6 +100,10 @@ abstract class WoodyTheme_TemplateAbstract
         if (empty($this->globals['languages'])) {
             $this->globals['languages'] = apply_filters('woody_pll_the_locales', null);
         }
+
+        if (empty($this->globals['is_mobile'])) {
+            $this->globals['is_mobile'] = wp_is_mobile();
+        }
     }
 
     private function getTags($post_id)
