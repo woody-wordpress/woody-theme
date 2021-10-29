@@ -1,7 +1,8 @@
 {
     "key": "group_5b04314e0ec21",
     "title": "Galerie de photos",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5b04475f63df2",
             "label": "Contenu",
             "name": "",
@@ -68,11 +69,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5f869edef5d53",
-                    "operator": "==",
-                    "value": "manual"
-                }]
+                [
+                    {
+                        "field": "field_5f869edef5d53",
+                        "operator": "==",
+                        "value": "manual"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -102,11 +105,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5f869edef5d53",
-                    "operator": "==",
-                    "value": "auto"
-                }]
+                [
+                    {
+                        "field": "field_5f869edef5d53",
+                        "operator": "==",
+                        "value": "auto"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "33",
@@ -114,46 +119,34 @@
                 "id": ""
             },
             "choices": {
-                "3221": "Gamme de couleur - Village",
-                "2261": "Lieux - Domaine skiable",
-                "2263": "Lieux - Front de neige",
-                "2259": "Lieux - La station",
-                "2253": "Lieux - Mont de lans",
-                "2255": "Lieux - Venosc",
-                "2257": "Lieux - Villages",
-                "2251": "Saisons - Beau temps",
-                "2237": "Saisons - Hiver",
-                "2249": "Saisons - Mauvais temps",
-                "2247": "Saisons - Météo",
-                "2245": "Saisons - Noël",
-                "2241": "Saisons - Périodes",
-                "2243": "Saisons - Toussaint",
-                "2239": "Saisons - Été",
-                "2279": "Thématiques - Activités hors ski",
-                "2273": "Thématiques - Bien être détente",
-                "2283": "Thématiques - Cibles",
-                "2277": "Thématiques - Déguster",
-                "2287": "Thématiques - En couple",
-                "2291": "Thématiques - Entre amis",
-                "2265": "Thématiques - Envies",
-                "2313": "Thématiques - Evénements ski",
-                "2267": "Thématiques - Expériences insolites",
-                "2285": "Thématiques - Famille",
-                "2275": "Thématiques - Je ne skie pas",
-                "2299": "Thématiques - Les offres",
-                "2297": "Thématiques - Les points de vues",
-                "2271": "Thématiques - Pratique du ski",
-                "2289": "Thématiques - Quinquado",
-                "2311": "Thématiques - Remontées Mécaniques fermées",
-                "2293": "Thématiques - Riders",
-                "2281": "Thématiques - Shopping",
-                "2269": "Thématiques - Station qui bouge",
-                "2295": "Thématiques - Topitos",
-                "2307": "Thématiques - offres activités",
-                "2309": "Thématiques - offres agenda",
-                "2303": "Thématiques - offres hébergements",
-                "2305": "Thématiques - offres restauration",
-                "2301": "Thématiques - offres touristiques"
+                "903": "Lieux - Allemagne<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Europe )<\/small>",
+                "911": "Lieux - Belgique<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Europe )<\/small>",
+                "905": "Lieux - Espagne<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Europe )<\/small>",
+                "899": "Lieux - Europe",
+                "901": "Lieux - France<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Europe )<\/small>",
+                "907": "Lieux - Italie<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Europe )<\/small>",
+                "909": "Lieux - Royaume-Uni<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Europe )<\/small>",
+                "913": "Lieux - Suisse<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Europe )<\/small>",
+                "921": "Saisons - Automne",
+                "915": "Saisons - Eté",
+                "917": "Saisons - Hiver",
+                "919": "Saisons - Printemps",
+                "976": "Thématiques - Ambassadeurs<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Cibles )<\/small>",
+                "18": "Thématiques - Bien-être<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Thèmes )<\/small>",
+                "923": "Thématiques - Cibles",
+                "933": "Thématiques - Culture et Patrimoine<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Thèmes )<\/small>",
+                "959": "Thématiques - Envies",
+                "925": "Thématiques - Famille<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Cibles )<\/small>",
+                "965": "Thématiques - Fonctionnalité<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Envies )<\/small>",
+                "967": "Thématiques - Fonctionnalité<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Thèmes )<\/small>",
+                "978": "Thématiques - Formation",
+                "961": "Thématiques - Profiter du bord de mer<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Envies )<\/small>",
+                "16": "Thématiques - Quand il pleut<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Thèmes )<\/small>",
+                "929": "Thématiques - Sportifs<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Cibles )<\/small>",
+                "927": "Thématiques - Séniors<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Cibles )<\/small>",
+                "931": "Thématiques - Thèmes",
+                "980": "Thématiques - Webinaire",
+                "935": "Thématiques - Écotourisme<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Thèmes )<\/small>"
             },
             "default_value": [],
             "allow_null": 0,
@@ -172,11 +165,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5f869edef5d53",
-                    "operator": "==",
-                    "value": "auto"
-                }]
+                [
+                    {
+                        "field": "field_5f869edef5d53",
+                        "operator": "==",
+                        "value": "auto"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "33",
@@ -203,11 +198,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5f869edef5d53",
-                    "operator": "==",
-                    "value": "auto"
-                }]
+                [
+                    {
+                        "field": "field_5f869edef5d53",
+                        "operator": "==",
+                        "value": "auto"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "33",
@@ -444,14 +441,70 @@
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0
+        },
+        {
+            "key": "field_61791e4c0d70c",
+            "label": "FIN",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 1
+        },
+        {
+            "key": "field_5efcaafa5ea95",
+            "label": "Responsive",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5efcab155ea96",
+            "label": "Comportement mobile",
+            "name": "mobile_behaviour",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label",
+                "id": ""
+            },
+            "clone": [
+                "group_5efca9579270c"
+            ],
+            "display": "group",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -461,5 +514,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "Elément de contenu (Liste de photos)",
-    "modified": 1612876546
+    "modified": 1635327593
 }
