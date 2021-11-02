@@ -72,6 +72,8 @@ class WoodyTheme_WoodyProcess
             case 'gallery':
                 // Ajout des données Instagram + champs personnalisés dans le contexte des images
                 $layout['gallery_type'] = !empty($layout['gallery_type']) ? $layout['gallery_type'] : "manual";
+                $layout['swResp'] = $this->tools->getResponsiveOption($layout);
+                if ($layout['swResp'] === null ) { unset($layout['swResp']); }
 
                 switch ($layout['gallery_type']) {
                     case 'auto':
@@ -91,9 +93,7 @@ class WoodyTheme_WoodyProcess
                                 }
                             }
                         }
-                        $layout['swResp'] = $this->tools->getResponsiveOption($layout);
-                        if ($layout['swResp'] === null ) { unset($layout['swResp']); }
-                    break;
+                        break;
                 }
 
                 $layout['display'] = $this->tools->getDisplayOptions($layout);
