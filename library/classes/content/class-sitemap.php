@@ -41,8 +41,8 @@ class WoodyTheme_SiteMap
 
     public function sitemapLayout($layout)
     {
-        if ($layout['acf_fc_layout'] == 'sitemap') {
-            $layout = $this->sitemapShortcode($atts);
+        if (!empty($layout) && is_array($layout) && $layout['acf_fc_layout'] == 'sitemap') {
+            $layout = $this->sitemapShortcode();
         };
 
         return $layout;
@@ -357,7 +357,7 @@ class WoodyTheme_SiteMap
 
     // Shortcode
 
-    public function sitemapShortcode($atts)
+    public function sitemapShortcode()
     {
         $return = '';
 
