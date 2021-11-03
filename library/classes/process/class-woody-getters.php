@@ -647,8 +647,10 @@ class WoodyTheme_WoodyGetters
         if (!empty($sheet['bordereau'])) {
             if ($sheet['bordereau'] === 'HOT' or $sheet['bordereau'] == 'HPA') {
                 $rating = [];
-                for ($i = 0; $i < $sheet['ratings'][0]['value']; $i++) {
-                    $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
+                if (!empty($sheet['ratings'])) {
+                    for ($i = 0; $i < $sheet['ratings'][0]['value']; $i++) {
+                        $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
+                    }
                 }
                 if (!empty($wrapper['display_elements']) && is_array($wrapper['display_elements'])) {
                     if (in_array('sheet_rating', $wrapper['display_elements'])) {
