@@ -25,6 +25,7 @@ class WoodyTheme_Roles
             return 'manage_redirection';
         });
         add_filter('the_password_form', [$this, 'custom_password_form']);
+        add_filter('bsr_capability', [$this, 'betterSearchReplaceCapability']);
     }
 
     /**
@@ -843,5 +844,10 @@ class WoodyTheme_Roles
                 }
             }
         }
+    }
+
+    public function betterSearchReplaceCapability()
+    {
+        return 'activate_plugins';
     }
 }
