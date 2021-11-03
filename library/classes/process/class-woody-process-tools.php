@@ -165,8 +165,9 @@ class WoodyTheme_WoodyProcessTools
         $display['section_divider'] = (!empty($wrapper['section_divider'])) ? $wrapper['section_divider'] : '';
         $display['heading_alignment'] = (!empty($wrapper['heading_alignment'])) ? $wrapper['heading_alignment'] : 'center';
 
+
         // On transforme le tableau en une chaine de caractères
-        $display['classes'] = trim(implode(' ', $classes_array));
+        $display['classes'] = trim(implode(' ', $classes_array));li
 
         return $display;
     }
