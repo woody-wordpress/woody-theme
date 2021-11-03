@@ -333,6 +333,37 @@
                         "min": "",
                         "max": ""
                     },
+                    "layout_615dc5c7f7df9": {
+                        "key": "layout_615dc5c7f7df9",
+                        "name": "sitemap",
+                        "label": "Sitemap",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_615dc5c7f7dfa",
+                                "label": "Sitemap",
+                                "name": "sitemap",
+                                "type": "clone",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "hide-label",
+                                    "id": ""
+                                },
+                                "clone": [
+                                    "group_615dbea3b8aa7"
+                                ],
+                                "display": "seamless",
+                                "layout": "block",
+                                "prefix_label": 0,
+                                "prefix_name": 0
+                            }
+                        ],
+                        "min": "",
+                        "max": ""
+                    },
                     "5b043f22b981d": {
                         "key": "5b043f22b981d",
                         "name": "quote",

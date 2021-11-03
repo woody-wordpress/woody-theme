@@ -27,6 +27,7 @@ class WoodyTheme_SiteMap
         add_filter('wp_sitemaps_enabled', '__return_false');
 
         // Adding a shortcode to display sitemap for humans
+        add_filter('woody_custom_layout', [$this, 'sitemapLayout'], 10, 1);
         add_shortcode('woody_sitemap', [$this, 'sitemapShortcode']);
 
         // Cron + CLI
@@ -36,6 +37,15 @@ class WoodyTheme_SiteMap
 
         add_action('woody_sitemap_set_shortcode_by_lang', [$this, 'setShortcodeByLang']);
         add_action('woody_sitemap_update_sitemap_form_posts', [$this, 'updateSitemapFormPosts']);
+    }
+
+    public function sitemapLayout($layout)
+    {
+        if (!empty($layout) && is_array($layout) && $layout['acf_fc_layout'] == 'sitemap') {
+            $layout = $this->sitemapShortcode();
+        };
+
+        return $layout;
     }
 
     public function woodySitemap()
@@ -355,7 +365,7 @@ class WoodyTheme_SiteMap
 
     // Shortcode
 
-    public function sitemapShortcode($atts)
+    public function sitemapShortcode()
     {
         $return = '';
 
