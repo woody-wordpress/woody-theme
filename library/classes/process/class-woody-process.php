@@ -181,7 +181,9 @@ class WoodyTheme_WoodyProcess
             break;
             case 'feature':
                 $layout['display'] = $this->tools->getDisplayOptions($layout);
-                $layout['icon_img']['sizes']['ratio_free'] = $layout['icon_img']['sizes']['ratio_free_small'];
+                if (!empty($layout['icon_img']) && !empty($layout['icon_img']['sizes']) && !empty($layout['icon_img']['sizes']['ratio_free_small'])) {
+                    $layout['icon_img']['sizes']['ratio_free'] = $layout['icon_img']['sizes']['ratio_free_small'];
+                }
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
             case 'story':
@@ -514,7 +516,7 @@ class WoodyTheme_WoodyProcess
                 $section = apply_filters('section_data_before_render', $section);
                 $the_header = '';
                 $the_layout = '';
-              
+
                 if (!empty($section['woody_icon']) || !empty($section['icon_img']) || !empty($section['pretitle']) || !empty($section['title']) || !empty($section['subtitle']) || !empty($section['description'])) {
                     $the_header = \Timber::compile($context['woody_components']['section-section_header-tpl_01'], $section);
                 }
