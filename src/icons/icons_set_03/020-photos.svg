@@ -1,1 +1,5 @@
-<svg height="50" viewBox="0 0 50 50" width="50" xmlns="http://www.w3.org/2000/svg"><g fill="none"><g fill="#000" transform="translate(7.995 34.995238)"><path d="m6.5025 2.6297619v7.24472977h31.5075v-7.24472977z"/><path d="m.7391559.86028652-.01207799 7.20085409h8.43952326l.01207799-7.20085409z" transform="matrix(.98768834 -.15643447 .15643447 .98768834 -.636831 .82972)"/></g><g stroke="#0c0c0c" stroke-width="4"><path d="m15.995 36.8409201h28.005v-24.845682h-28.005z"/><path d="m12.4504387 34.4053716 23.3260056-20.6468605v-4.1988215h-28.00500003v24.845682z" transform="matrix(.98480775 -.17364818 .17364818 .98480775 -3.486431 4.11497)"/></g></g></svg>
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+    <path d="M35.9,10L35,5L3.5,10.6l5,28.4l0.1,0l0.7,4.7l4.8-0.8v2h32v-6h0V10H35.9z M31.8,9.6l0.1,0.4h-2.1L31.8,9.6z
+	 M11.8,34.3L8.1,13.8l6-1.1v20.7L13.7,34L11.8,34.3z M42.1,34.8h-24V14h24V34.8z"/>
+</svg>
