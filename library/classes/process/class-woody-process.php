@@ -181,7 +181,9 @@ class WoodyTheme_WoodyProcess
             break;
             case 'feature':
                 $layout['display'] = $this->tools->getDisplayOptions($layout);
-                $layout['icon_img']['sizes']['ratio_free'] = $layout['icon_img']['sizes']['ratio_free_small'];
+                if (!empty($layout['icon_img']) && !empty($layout['icon_img']['sizes']) && !empty($layout['icon_img']['sizes']['ratio_free_small'])) {
+                    $layout['icon_img']['sizes']['ratio_free'] = $layout['icon_img']['sizes']['ratio_free_small'];
+                }
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
             case 'story':
@@ -193,13 +195,18 @@ class WoodyTheme_WoodyProcess
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
             case 'social_shares':
-                if ($layout['default_parameters'] == 'true' ) {
+                if ($layout['default_parameters'] == 'true') {
                     $social_shares = getActiveShares();
                 }
                 if ($layout['default_parameters'] == 'false' && !empty($layout['active_shares'])) {
                     $social_shares = getActiveShares($layout['active_shares']);
                 };
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $social_shares);
+                // no break
+            case 'movie':
+                $layout['movie_thumbnail'] = embedProviderThumbnail($layout['movie']);
+                $layout['movie_uploadDate'] = $context['post']->post_modified;
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
             default:
 
@@ -431,7 +438,7 @@ class WoodyTheme_WoodyProcess
                 $order = 'ASC';
                 break;
             case 'menu_order':
-                $orderby = 'menu_order';
+                $orderby = 'post_parent menu_order ID';
                 $order = 'ASC';
                 break;
             default:

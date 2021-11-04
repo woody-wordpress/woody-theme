@@ -83,6 +83,8 @@ class WoodyTheme_ACF
 
         // Ajax Call
         add_action('wp_ajax_generate_layout_acf_clone', [$this, 'getRenderedLayout']);
+
+        add_filter('acf/load_value/name=edit_mode', [$this, 'editModeLoadField'], 10, 3);
     }
 
     public function woodyGetFieldOption($field_name = null)
@@ -585,6 +587,16 @@ class WoodyTheme_ACF
         return $args;
     }
 
+    public function editModeLoadField($value, $post_id, $field)
+    {
+        $global_lite_mode = get_field('global_lite_edit_mode', 'options');
+
+        if ($global_lite_mode && $value != 'lite') {
+            $value = 'lite';
+        }
+        return $value;
+    }
+
     private function sortWoodyTpls()
     {
         $woodyTpls = [
@@ -863,8 +875,14 @@ class WoodyTheme_ACF
 
                 $groups = !empty($component['acf_groups']) ? implode(" ", $component['acf_groups']) : '';
                 if (!empty($groups)) {
+                    if (strpos($component['thumbnails']['small'], 'custom_woody_tpls') === false) {
+                        $img_views_path = 'woody-library/views/';
+                    } else {
+                        $img_views_path = '/';
+                    }
+
                     $tplComponents[$key] = "<div class='tpl-choice-wrapper " . $groups . "' data-value='". $key ."' data-display-options='". $display_options ."'>
-                    <img class='img-responsive lazyload' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' data-src='" . WP_HOME . "/app/dist/" . WP_SITE_KEY . "/img/woody-library/views/" . $component['thumbnails']['small'] . "?version=" . get_option("woody_theme_version") . "' alt='" . $key . "' width='150' height='150' />
+                    <img class='img-responsive lazyload' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' data-src='" . WP_HOME . "/app/dist/" . WP_SITE_KEY . "/img/". $img_views_path . $component['thumbnails']['small'] . "?version=" . get_option("woody_theme_version") . "' alt='" . $key . "' width='150' height='150' />
                     <h5 class='tpl-title'>" . $component["name"] . "</h5>
                     </div>";
                 }
@@ -911,7 +929,7 @@ class WoodyTheme_ACF
         $field['name'] = "#rowindex-name#";
         $field['display_layouts'] = true;
 
-        foreach($field['layouts'] as $key => $layout) {
+        foreach ($field['layouts'] as $key => $layout) {
             $new_field = $field;
             $new_field['layouts'] = [$layout];
 

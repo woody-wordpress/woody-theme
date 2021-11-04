@@ -108,12 +108,16 @@ class WoodyTheme_WoodyProcessTools
      * @return   data - Un tableau de données
      *
      **/
-    public function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = '', $lastfallback_item = '', $lastfallback_field = '')
+    public function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = '', $lastfallback_item = '', $lastfallback_field = '', $item_type = '')
     {
         $value = null;
 
         if (!empty($item) && is_object($item)) {
             $value = get_field($field, $item->ID);
+        }
+
+        if (empty($value) && $item_type == 'mirror_page') {
+            $value = get_field($field, $lastfallback_item);
         }
 
         if (empty($value) && !empty($fallback_item) && !empty($fallback_field)) {
@@ -163,6 +167,7 @@ class WoodyTheme_WoodyProcessTools
         $classes_array[] = (!empty($wrapper['scope_margins']['scope_margin_top'])) ?  $wrapper['scope_margins']['scope_margin_top'] : '';
         $classes_array[] = (!empty($wrapper['scope_margins']['scope_margin_bottom'])) ? $wrapper['scope_margins']['scope_margin_bottom'] : '';
         $display['section_divider'] = (!empty($wrapper['section_divider'])) ? $wrapper['section_divider'] : '';
+        $display['heading_alignment'] = (!empty($wrapper['heading_alignment'])) ? $wrapper['heading_alignment'] : 'center';
 
         // On transforme le tableau en une chaine de caractères
         $display['classes'] = trim(implode(' ', $classes_array));
