@@ -287,14 +287,18 @@ class WoodyTheme_Plugins_Options
             ],
         ];
 
-        $polylang = apply_filters('woody_polylang_update_options', $polylang);
-
         // En dev on travaille toujours en prefix
         if (WP_ENV == 'dev') {
-            $polylang['force_lang'] = 0;
+            $polylang['force_lang'] = 1;
             $polylang['hide_default'] = 1;
         }
 
+        // HACK: Le site doit toujours avoir une default lang
+        if (empty($polylang['default_lang'])) {
+            $polylang['default_lang'] = 'fr';
+        }
+
+        $polylang = apply_filters('woody_polylang_update_options', $polylang);
         $this->updateOption('polylang', $polylang);
 
         // Redirections
@@ -410,8 +414,26 @@ class WoodyTheme_Plugins_Options
             $new_option = $settings;
         }
 
+        $new_option = $this->cleanUpOption($option_name, $new_option);
+
         if (strcmp(json_encode($option), json_encode($new_option)) !== 0) { // Update if different
             update_option($option_name, $new_option, $autoload);
         }
+    }
+
+    private function cleanUpOption($option_name, $option)
+    {
+        switch ($option_name) {
+            case 'polylang':
+                // On nettoie les doublons dans les posts types
+                $option['post_types'] = array_values(array_unique($option['post_types']));
+                $option['taxonomies'] = array_values(array_unique($option['taxonomies']));
+                break;
+            default:
+                # code...
+                break;
+        }
+
+        return $option;
     }
 }
