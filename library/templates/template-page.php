@@ -487,6 +487,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             $this->context['title'] .= sprintf(' | %s %s', __('Page', 'woody-theme'), $query['listpage']);
         }
 
+        $query = apply_filters('woody_hawwwai_playlist_query', $query);
+
         // Get from Apirender
         $this->context['playlist_tourism'] = apply_filters('woody_hawwwai_playlist_render', $playlistConfId, pll_current_language(), $query);
 

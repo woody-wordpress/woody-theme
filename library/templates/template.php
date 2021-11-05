@@ -62,7 +62,7 @@ abstract class WoodyTheme_TemplateAbstract
     private function setGlobals()
     {
         if (empty($this->globals['post_title']) && !empty($this->context['post_title'])) {
-            $this->globals['post_title'] = html_entity_decode($this->context['post_title']);
+            $this->globals['post_title'] = $this->context['post_title'];
         }
 
         if (empty($this->globals['post_id']) && !empty($this->context['post_id'])) {
@@ -82,7 +82,7 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         if (empty($this->globals['tags'])) {
-            $this->globals['tags'] = $this->getTags($this->context['post']);
+            $this->globals['tags'] = $this->getTags($this->context['post_id']);
         }
 
         if (empty($this->globals['current_lang'])) {
@@ -102,38 +102,32 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         if (empty($this->globals['ancestors'])) {
-            $this->globals['ancestors'] = $this->getAncestors($this->context['post']);
+            $this->globals['ancestors'] = $this->getAncestors($this->context['post_id']);
         }
     }
 
-    private function getAncestors($post)
+    private function getAncestors($post_id)
     {
         $return = [];
-        $depth = 1;
-
-        // Si la page est une fiche SIT
-        if ($post->post_type == 'touristic_sheet') {
-            $return['chapter' . $depth] = 'Offres SIT';
-            $depth++;
-        }
 
         // On ajoute toutes les pages parentes
-        $ancestors_ids = get_post_ancestors($post->ID);
+        $depth = 1;
+        $ancestors_ids = get_post_ancestors($post_id);
         if (!empty($ancestors_ids) && is_array($ancestors_ids)) {
             $ancestors_ids = array_reverse($ancestors_ids);
             foreach ($ancestors_ids as $key => $ancestor_id) {
-                $return['chapter' . $depth] = html_entity_decode(get_the_title($ancestor_id));
+                $return['chapter' . $depth] = get_the_title($ancestor_id);
                 $depth++;
             }
         }
 
         // On ajoute la page courante
-        $return['chapter' . $depth] = html_entity_decode(get_the_title($post->ID));
+        $return['chapter' . $depth] = get_the_title($post_id);
 
         return $return;
     }
 
-    private function getTags($post)
+    private function getTags($post_id)
     {
         $return = [];
         $taxonomies = ['places', 'seasons', 'themes'];
@@ -150,7 +144,7 @@ abstract class WoodyTheme_TemplateAbstract
             }
 
             $return[$taxonomy] = [];
-            $terms = get_the_terms($post->ID, $taxonomy);
+            $terms = get_the_terms($post_id, $taxonomy);
             if ($terms != false && !is_wp_error($terms)) {
                 foreach ($terms as $term) {
                     if ($term->parent != 0) {
@@ -241,7 +235,7 @@ abstract class WoodyTheme_TemplateAbstract
         } else {
             $this->context['post'] = get_post();
             if (!empty($this->context['post'])) {
-                $this->context['post_title'] = get_the_title($this->context['post']->ID);
+                $this->context['post_title'] = $this->context['post']->post_title;
                 $this->context['post_id'] = $this->context['post']->ID;
                 if (!empty($this->context['post_id'])) {
                     $this->context['sheet_id'] = get_post_type($this->context['post_id']) === 'touristic_sheet' ? get_post_meta($this->context['post_id'], 'touristic_sheet_id')[0] : false;
@@ -334,7 +328,6 @@ abstract class WoodyTheme_TemplateAbstract
 
         return apply_filters('woody_get_permalink', $post_id);
     }
-
 
     private function setMetadata()
     {
@@ -635,6 +628,7 @@ abstract class WoodyTheme_TemplateAbstract
 
         // On permet la surcharge des metadata
         $return = apply_filters('woody_seo_edit_metas_array', $return);
+
         return $return;
     }
 

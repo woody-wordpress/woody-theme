@@ -1,1 +1,5 @@
-<svg height="50" viewBox="0 0 50 50" width="50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><mask id="a" fill="#fff"><path d="m35.125 9h-21.875v33.125h-13.25v-42.125h35.125z" fill="#fff" fill-rule="evenodd"/></mask><g transform="translate(1.995 1.995238)"><path d="m12.5025 8.7238625v34.1506292h31.5075v-34.1506292zm29.7935083 27.0828158h-28.064513v-25.268753h28.064513z"/><path d="m4.4772129 5.27304107v34.15062913h31.5075v-34.15062913zm29.7935083 27.08281573h-28.06451303v-25.26875293h28.06451303z" mask="url(#a)" transform="matrix(.98768834 -.15643447 .15643447 .98768834 -3.246976 3.439965)"/></g></svg>
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+<path d="M14.5,10.7v34.2H46V10.7L14.5,10.7z M44.3,37.8H16.2V12.5h28.1V37.8z M13.2,43.1l-3.9,0.6L4,9.9L35.1,5l0.6,4.1H34l-0.3-2
+	l-12.9,2h-7.6v1.2L6,11.5l4,25l3.3-0.5V43.1z"/>
+</svg>
