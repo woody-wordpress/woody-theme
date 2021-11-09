@@ -65,6 +65,7 @@ class WoodyTheme_WoodyGetters
 
                 $the_items['items'][$key] = $data;
             }
+            $the_items['display_button'] = $wrapper['display_button'];
             $the_items['max_num_pages'] = $query_result->max_num_pages;
             $the_items['wp_query'] = $query_result;
         }
@@ -378,7 +379,13 @@ class WoodyTheme_WoodyGetters
                 $data['description'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($original_item, 'focus_description', '', '', $item, 'field_5b2bbbfaec6b2', $data['page_type']), $original_item->ID);
             }
             if (in_array('created', $wrapper['display_elements'])) {
-                $data['created'] = get_the_date('', $item->ID);
+                $created = get_the_date('', $item->ID);
+                $modified = get_the_modified_date('', $item->ID);
+
+                $data['post_date'] = [
+                    'prefix' => ($created == $modified) ? __('Publié le', 'woody-theme') : __('Mis à jour le', 'woody-theme'),
+                    'value' => ($created == $modified) ? $created : $modified
+                ];
             }
             if (empty($is_attachment) && in_array('price', $wrapper['display_elements'])) {
                 $price_type = get_field('the_price_price_type', $item->ID);
@@ -647,10 +654,8 @@ class WoodyTheme_WoodyGetters
         if (!empty($sheet['bordereau'])) {
             if ($sheet['bordereau'] === 'HOT' or $sheet['bordereau'] == 'HPA') {
                 $rating = [];
-                if (!empty($sheet['ratings'])) {
-                    for ($i = 0; $i < $sheet['ratings'][0]['value']; $i++) {
-                        $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
-                    }
+                for ($i = 0; $i < $sheet['ratings'][0]['value']; $i++) {
+                    $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
                 }
                 if (!empty($wrapper['display_elements']) && is_array($wrapper['display_elements'])) {
                     if (in_array('sheet_rating', $wrapper['display_elements'])) {
