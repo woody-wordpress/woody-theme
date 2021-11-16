@@ -20,7 +20,6 @@ class WoodyTheme_Commands
 
     protected function registerHooks()
     {
-        add_action('woody_flush_varnish', [$this, 'flush_varnish'], 10, 2);
     }
 
     protected function registerCommands()
