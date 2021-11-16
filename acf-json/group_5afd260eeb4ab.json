@@ -337,29 +337,27 @@
                         "name": "sitemap",
                         "label": "Sitemap",
                         "display": "block",
-                        "sub_fields": [
-                            {
-                                "key": "field_615dc5c7f7dfa",
-                                "label": "Sitemap",
-                                "name": "sitemap",
-                                "type": "clone",
-                                "instructions": "",
-                                "required": 0,
-                                "conditional_logic": 0,
-                                "wrapper": {
-                                    "width": "",
-                                    "class": "hide-label",
-                                    "id": ""
-                                },
-                                "clone": [
-                                    "group_615dbea3b8aa7"
-                                ],
-                                "display": "seamless",
-                                "layout": "block",
-                                "prefix_label": 0,
-                                "prefix_name": 0
-                            }
-                        ],
+                        "sub_fields": [{
+                            "key": "field_615dc5c7f7dfa",
+                            "label": "Sitemap",
+                            "name": "sitemap",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "hide-label",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_615dbea3b8aa7"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
                         "min": "",
                         "max": ""
                     },
@@ -787,7 +785,7 @@
                 "label": "Alignement de l'en-tête",
                 "name": "heading_alignment",
                 "type": "button_group",
-                "instructions": "",
+                "instructions": "Certains thèmes graphiques peuvent nécessiter une évolution pour permettre l'utilisation des valeurs droite/gauche",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
