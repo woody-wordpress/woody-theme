@@ -56,6 +56,7 @@ new WoodyTheme_CDN();
 new WoodyTheme_Cron();
 new WoodyTheme_Images();
 new WoodyTheme_Links();
+new WoodyTheme_Page();
 new WoodyTheme_Permalink();
 new WoodyTheme_Post_Type();
 new WoodyTheme_Profiles();
