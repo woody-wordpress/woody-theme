@@ -22,8 +22,7 @@
         "hide_collapse": 0,
         "collapse_all_repeater": 1,
         "btn-icon-only": 0,
-        "sub_fields": [
-            {
+        "sub_fields": [{
                 "key": "field_5b0d1dc8907e7",
                 "label": "Titre administration",
                 "name": "bo_section_title",
@@ -782,6 +781,29 @@
                 "layout": "block",
                 "prefix_label": 0,
                 "prefix_name": 0
+            },
+            {
+                "key": "field_61547b03acda8",
+                "label": "Alignement de l'en-tête",
+                "name": "heading_alignment",
+                "type": "button_group",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "100",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "left": "Gauche",
+                    "center": "Centrer",
+                    "right": "Droite"
+                },
+                "allow_null": 0,
+                "default_value": "center",
+                "layout": "horizontal",
+                "return_format": "value"
             },
             {
                 "key": "field_5afd2faf953bc",
