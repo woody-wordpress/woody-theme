@@ -18,6 +18,11 @@ class WoodyTheme_Commands
         $this->registerCommands();
     }
 
+    protected function registerHooks()
+    {
+        add_action('woody_flush_varnish', [$this, 'flush_varnish'], 10, 2);
+    }
+
     protected function registerCommands()
     {
         \WP_CLI::add_command('woody_flush', [$this, 'flush']);
