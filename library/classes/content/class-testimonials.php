@@ -17,7 +17,6 @@ class WoodyTheme_Testimonials
     protected function registerHooks()
     {
         add_action('init', array($this, 'registerPostType'));
-        add_action('woody_subtheme_update', [$this, 'updatePllOption']);
         add_filter('woody_polylang_update_options', [$this, 'woodyPolylangUpdateOptions']);
     }
 
