@@ -160,7 +160,7 @@ class WoodyTheme_WoodyGetters
         $items = [];
         if (!empty($wrapper['playlist_conf_id'])) {
             $confId = $wrapper['playlist_conf_id'];
-            $lang = pll_current_language();
+            $lang = apply_filters('woody_autofocus_sheet_lang', pll_current_language());
             $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), $playlist_params, 'json');
             if (!empty($playlist['items'])) {
                 foreach ($playlist['items'] as $key => $item) {
