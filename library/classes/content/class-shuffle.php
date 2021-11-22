@@ -67,6 +67,9 @@ class WoodyTheme_Shuffle
                     $return = $this->compilers->formatFocusesData($wrapper, $current_post, $twig_paths);
                 }
             }
+
+            // Send Varnish Headers
+            header('xkey: ' . WP_SITE_KEY . '_' . $post_id, false);
         }
 
         return $return;
