@@ -37,6 +37,7 @@ class WoodyTheme_WoodyProcess
      */
     public function processWoodyLayouts($layout, $context)
     {
+        console_log($layout);
         $return = '';
         $layout['default_marker'] = !empty($context['default_marker']) ? $context['default_marker'] : '';
         // Traitements spécifique en fonction du type de layout
@@ -194,15 +195,17 @@ class WoodyTheme_WoodyProcess
                 $layout = $this->compilers->formatTestimonials($layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
-            case 'social_shares':
-                if ($layout['default_parameters'] == 'true') {
-                    $social_shares = getActiveShares();
-                }
+            case 'link_social_shares':
                 if ($layout['default_parameters'] == 'false' && !empty($layout['active_shares'])) {
-                    $social_shares = getActiveShares($layout['active_shares']);
-                };
-                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $social_shares);
-                // no break
+                    $layout['active_shares'] = getActiveShares($layout['active_shares']);
+                }
+                else {
+                    $layout['active_shares'] = getActiveShares();
+                }
+                $layout['block_titles'] = $this->tools->getBlockTitles($layout, '', 'generic_');
+                $layout['display'] = $this->tools->getDisplayOptions($layout);
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            break;
             case 'movie':
                 $layout['movie_thumbnail'] = embedProviderThumbnail($layout['movie']);
                 $layout['movie_uploadDate'] = $context['post']->post_modified;

@@ -900,6 +900,12 @@
                     }
                 }
 
+                &[data-layout='link_social_shares'] {
+                    &:before {
+                        content: '\f242';
+                    }
+                }
+
                 &[data-layout='call_to_action'] {
                     &:before {
                         content: '\f534';

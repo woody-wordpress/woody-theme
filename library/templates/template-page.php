@@ -110,7 +110,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     {
         $this->context['is_frontpage'] = false;
 
-        $social_shares = getActiveShares();
+        $social_shares['active_shares'] = getActiveShares();
         $this->context['social_shares'] = \Timber::compile($this->context['woody_components']['blocks-shares-tpl_01'], $social_shares);
 
         /******************************************************************************
