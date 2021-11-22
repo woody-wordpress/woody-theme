@@ -37,7 +37,6 @@ class WoodyTheme_WoodyProcess
      */
     public function processWoodyLayouts($layout, $context)
     {
-        console_log($layout);
         $return = '';
         $layout['default_marker'] = !empty($context['default_marker']) ? $context['default_marker'] : '';
         // Traitements spécifique en fonction du type de layout
