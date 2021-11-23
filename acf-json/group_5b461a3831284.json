@@ -282,7 +282,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -290,6 +290,30 @@
                 "align-top": "En haut",
                 "align-center": "Au milieu",
                 "align-right": "En bas"
+            },
+            "allow_null": 0,
+            "default_value": "align-top",
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        {
+            "key": "field_61dc59647cc82",
+            "label": "Marges intérieures",
+            "name": "inner_margin",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "": "Aucune",
+                "padd-all-sm": "Petite",
+                "padd-all-md": "Moyenne",
+                "padd-all-lg": "Grande"
             },
             "allow_null": 0,
             "default_value": "align-top",
