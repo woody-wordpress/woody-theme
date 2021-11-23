@@ -1,7 +1,8 @@
 {
     "key": "group_5b04314e0ec21",
-    "title": "Galerie de photos",
-    "fields": [{
+    "title": "Galerie de médias mixtes",
+    "fields": [
+        {
             "key": "field_5b04475f63df2",
             "label": "Contenu",
             "name": "",
@@ -43,7 +44,7 @@
         },
         {
             "key": "field_602288fc72d23",
-            "label": "Photos cliquables",
+            "label": "Médias cliquables",
             "name": "gallery_lightbox",
             "type": "true_false",
             "instructions": "",
@@ -62,17 +63,19 @@
         },
         {
             "key": "field_5b04314f27b84",
-            "label": "Photos de la galerie",
+            "label": "Médias de la galerie",
             "name": "gallery_items",
             "type": "gallery",
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5f869edef5d53",
-                    "operator": "==",
-                    "value": "manual"
-                }]
+                [
+                    {
+                        "field": "field_5f869edef5d53",
+                        "operator": "==",
+                        "value": "manual"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -91,8 +94,7 @@
             "max_width": "",
             "max_height": "",
             "max_size": "",
-            "mime_types": "jpg, jpeg, png, gif, mp4, webm, ogg, ogv",
-            "translations": "copy_once"
+            "mime_types": "jpg, jpeg, png, gif, mp4, webm, ogg, ogv"
         },
         {
             "key": "field_5f869fa8f5d54",
@@ -102,11 +104,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5f869edef5d53",
-                    "operator": "==",
-                    "value": "auto"
-                }]
+                [
+                    {
+                        "field": "field_5f869edef5d53",
+                        "operator": "==",
+                        "value": "auto"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "33",
@@ -114,6 +118,40 @@
                 "id": ""
             },
             "choices": {
+                "971": "Catégories de média - SEO",
+                "970": "Catégories de média - Woody",
+                "35": "Hashtags - beach",
+                "958": "Hashtags - sun",
+                "903": "Lieux - Allemagne<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Europe )<\/small>",
+                "911": "Lieux - Belgique<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Europe )<\/small>",
+                "905": "Lieux - Espagne<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Europe )<\/small>",
+                "899": "Lieux - Europe",
+                "901": "Lieux - France<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Europe )<\/small>",
+                "907": "Lieux - Italie<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Europe )<\/small>",
+                "909": "Lieux - Royaume-Uni<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Europe )<\/small>",
+                "913": "Lieux - Suisse<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Europe )<\/small>",
+                "921": "Saisons - Automne",
+                "915": "Saisons - Eté",
+                "917": "Saisons - Hiver",
+                "919": "Saisons - Printemps",
+                "976": "Thématiques - Ambassadeurs<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Cibles )<\/small>",
+                "18": "Thématiques - Bien-être<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Thèmes )<\/small>",
+                "923": "Thématiques - Cibles",
+                "933": "Thématiques - Culture et Patrimoine<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Thèmes )<\/small>",
+                "959": "Thématiques - Envies",
+                "925": "Thématiques - Famille<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Cibles )<\/small>",
+                "965": "Thématiques - Fonctionnalité<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Envies )<\/small>",
+                "967": "Thématiques - Fonctionnalité<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Thèmes )<\/small>",
+                "978": "Thématiques - Formation",
+                "961": "Thématiques - Profiter du bord de mer<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Envies )<\/small>",
+                "16": "Thématiques - Quand il pleut<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Thèmes )<\/small>",
+                "929": "Thématiques - Sportifs<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Cibles )<\/small>",
+                "927": "Thématiques - Séniors<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Cibles )<\/small>",
+                "931": "Thématiques - Thèmes",
+                "980": "Thématiques - Webinaire",
+                "935": "Thématiques - Écotourisme<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Thèmes )<\/small>",
+                "11": "Types de média - Instagram",
+                "15": "Types de média - Média ajouté manuellement"
             },
             "default_value": [],
             "allow_null": 0,
@@ -126,17 +164,19 @@
         },
         {
             "key": "field_5f86a0c3f5d55",
-            "label": "Si les images sont tagués avec :",
+            "label": "Si les médias sont tagués avec :",
             "name": "gallery_taxonomy_terms_andor",
             "type": "radio",
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5f869edef5d53",
-                    "operator": "==",
-                    "value": "auto"
-                }]
+                [
+                    {
+                        "field": "field_5f869edef5d53",
+                        "operator": "==",
+                        "value": "auto"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "33",
@@ -152,7 +192,6 @@
             "default_value": "OR",
             "layout": "horizontal",
             "return_format": "value",
-            "translations": "copy_once",
             "save_other_choice": 0
         },
         {
@@ -163,11 +202,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5f869edef5d53",
-                    "operator": "==",
-                    "value": "auto"
-                }]
+                [
+                    {
+                        "field": "field_5f869edef5d53",
+                        "operator": "==",
+                        "value": "auto"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "33",
@@ -407,11 +448,13 @@
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -421,5 +464,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "Elément de contenu (Liste de photos)",
-    "modified": 1612876546
+    "modified": 1637663094
 }

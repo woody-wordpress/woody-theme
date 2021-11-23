@@ -133,7 +133,7 @@
                     "5b0443f146538": {
                         "key": "5b0443f146538",
                         "name": "gallery",
-                        "label": "Galerie photos",
+                        "label": "Galerie de médias mixtes",
                         "display": "block",
                         "sub_fields": [{
                             "key": "field_5b0443ff46539",
