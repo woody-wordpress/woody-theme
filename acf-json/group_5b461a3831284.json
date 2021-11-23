@@ -316,7 +316,7 @@
                 "padd-all-lg": "Grande"
             },
             "allow_null": 0,
-            "default_value": "align-top",
+            "default_value": "",
             "layout": "horizontal",
             "return_format": "value"
         },
