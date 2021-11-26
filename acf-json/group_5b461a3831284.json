@@ -282,7 +282,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "40",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -305,14 +305,12 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "60",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
             "choices": {
                 "": "Aucune",
-                "padd-all-sm": "Petite",
-                "padd-all-md": "Moyenne",
                 "padd-all-lg": "Grande",
                 "padd-all-xlg": "Très Grande"
             },
