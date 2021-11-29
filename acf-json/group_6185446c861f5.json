@@ -107,7 +107,7 @@
         {
             "key": "field_61854626df0f6",
             "label": "Bouton(s)",
-            "name": "shares_boutons",
+            "name": "shares_buttons",
             "type": "clone",
             "instructions": "",
             "required": 0,

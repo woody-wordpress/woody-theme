@@ -201,8 +201,9 @@ class WoodyTheme_WoodyProcess
                 else {
                     $layout['active_shares'] = getActiveShares();
                 }
-                $layout['block_titles'] = $this->tools->getBlockTitles($layout, '', 'generic_');
+                $layout['block_titles'] = $this->tools->getBlockTitles($layout, '', 'shares_');
                 $layout['display'] = $this->tools->getDisplayOptions($layout);
+                console_log($layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
             case 'movie':
