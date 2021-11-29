@@ -289,7 +289,7 @@
             "key": "field_5d8f242f92762",
             "label": "URL Canonique",
             "name": "woodyseo_canonical_url",
-            "type": "text",
+            "type": "url",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -299,10 +299,7 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "placeholder": ""
         }
     ],
     "location": [
