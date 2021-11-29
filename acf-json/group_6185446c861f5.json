@@ -214,7 +214,7 @@
         {
             "key": "field_61854aa6c7f0c",
             "label": "Paramètres du fond",
-            "name": "custom_text_bg_params",
+            "name": "share_links_bg_params",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -231,25 +231,6 @@
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0
-        },
-        {
-            "key": "field_61854ad0c7f0d",
-            "label": "Retirer les marges",
-            "name": "custom_text_no_padding",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
         },
         {
             "key": "field_61854af1c7f0e",
