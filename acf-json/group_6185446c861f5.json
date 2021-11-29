@@ -20,14 +20,14 @@
         },
         {
             "key": "field_618544a464396",
-            "label": "Utiliser les paramètres par défaut",
+            "label": "Afficher les réseaux définis dans les paramètres généraux",
             "name": "default_parameters",
             "type": "true_false",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "40",
                 "class": "",
                 "id": ""
             },
@@ -54,7 +54,7 @@
                 ]
             ],
             "wrapper": {
-                "width": "100",
+                "width": "60",
                 "class": "",
                 "id": ""
             },
@@ -210,27 +210,6 @@
             "open": 0,
             "multi_expand": 1,
             "endpoint": 0
-        },
-        {
-            "key": "field_61854a4fc7f0b",
-            "label": "Alignement vertical",
-            "name": "alignement_vertical",
-            "type": "clone",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "clone": [
-                "field_60cb028b375c8"
-            ],
-            "display": "seamless",
-            "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0
         },
         {
             "key": "field_61854aa6c7f0c",

@@ -195,7 +195,7 @@ class WoodyTheme_WoodyProcess
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
             case 'link_social_shares':
-                if ($layout['default_parameters'] == 'false' && !empty($layout['active_shares'])) {
+                if ($layout['default_parameters'] == false && !empty($layout['active_shares'])) {
                     $layout['active_shares'] = getActiveShares($layout['active_shares']);
                 }
                 else {

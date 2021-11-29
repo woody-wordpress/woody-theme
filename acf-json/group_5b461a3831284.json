@@ -278,7 +278,6 @@
             "label": "Alignement vertical",
             "name": "vertical_alignement",
             "type": "button_group",
-            "instructions": "Comportement vertical",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
