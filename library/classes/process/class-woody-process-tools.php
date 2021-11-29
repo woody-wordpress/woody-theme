@@ -381,6 +381,7 @@ class WoodyTheme_WoodyProcessTools
             $attachment_data['author'] = get_field('field_5b5585503c855', $attachment_id);
             $attachment_data['lat'] = get_field('field_5b55a88e70cbf', $attachment_id);
             $attachment_data['lng'] = get_field('field_5b55a89e70cc0', $attachment_id);
+            $attachment_data['linked_video'] = get_field('field_619f73e346813', $attachment_id);
         }
 
         return $attachment_data;

@@ -25,6 +25,7 @@ class WoodyTheme_Images
         add_action('delete_attachment', [$this, 'deleteAttachment'], 1);
         add_action('wp_ajax_get_all_tags', [$this, 'getAllTags']);
         add_action('wp_ajax_set_attachments_terms', [$this, 'setAttachmentsTerms']);
+        add_action('woody_theme_update', [$this, 'woodyInsertTerms']);
 
         // Filters
         add_filter('timber_render', [$this, 'timberRender'], 1);
@@ -430,6 +431,12 @@ class WoodyTheme_Images
 
     public function saveAttachment($attachment_id)
     {
+        // $mediaLinkedVideo = get_field('media_linked_video', $attachment_id);
+        // var_dump(get_the_terms($attachment_id, 'attachment_types'));die();
+        // if(!empty($mediaLinkedVideo)){
+        //     wp_set_object_terms($attachment_id, 'Vidéo externe', 'attachment_types', false);
+        // }
+
         if (wp_attachment_is_image($attachment_id)) {
             $translations = pll_get_post_translations($attachment_id);
             $current_lang = pll_get_post_language($attachment_id);
@@ -651,5 +658,9 @@ class WoodyTheme_Images
         }
 
         return $metadata;
+    }
+
+    function woodyInsertTerms() {
+        wp_insert_term('Vidéo externe', 'attachment_types', array('slug' => 'media_linked_video'));
     }
 }

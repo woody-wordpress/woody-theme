@@ -89,6 +89,10 @@ class WoodyTheme_WoodyProcess
                                 if (isset($context['print_rdbk']) && !empty($context['print_rdbk'])) {
                                     $layout['gallery_items'][$key]['lazy'] = 'disabled';
                                 }
+                                if (!empty($layout['gallery_items'][$key]['attachment_more_data']['linked_video'])){
+                                    $layout['gallery_items'][$key]['attachment_more_data']['linked_video_iframe'] = embedVideo($layout['gallery_items'][$key]['attachment_more_data']['linked_video']);
+                                    $layout['gallery_items'][$key]['attachment_more_data']['linked_video_thumbnail'] = embedThumbnail($layout['gallery_items'][$key]['attachment_more_data']['linked_video']);
+                                }
                             }
                         }
                     break;
