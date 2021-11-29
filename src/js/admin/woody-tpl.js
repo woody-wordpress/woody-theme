@@ -129,7 +129,7 @@ $('#post').each(function() {
         });
 
         $('#tpls_popin .save').on('click', function() {
-            button.parent().first('[data-name="woody_tpl"').find('input').val($('.tpl-choice-wrapper.selected').data('value'));
+            button.parent().find('[data-key="' + field_key + '"] input').val($('.tpl-choice-wrapper.selected').data('value'));
             $('#tpls_popin').removeClass('opened');
             $('.tpl-choice-wrapper.selected').removeClass('selected');
             $('#tpls_popin li').removeClass('hidden').removeClass('filtered');
