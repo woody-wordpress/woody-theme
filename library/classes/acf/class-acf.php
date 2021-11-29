@@ -878,7 +878,6 @@ class WoodyTheme_ACF
                     if (strpos($component['thumbnails']['small'], 'custom_woody_tpls') === false) {
                         $img_views_path = '/img/woody-library/views/';
                     } else {
-                        //$img_views_path = '/';
                         $img_views_path = apply_filters('custom_woody_tpls_thumbnails_path', '/img/', $component['thumbnails']['small']);
                     }
 
