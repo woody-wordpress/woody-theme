@@ -335,7 +335,7 @@ class WoodyTheme_Plugins_Options
             'expire_redirect' => -1,
             'expire_404' => 30,
             'newsletter' => false,
-            'redirect_cache' => 1,
+            'redirect_cache' => 0,
             'ip_logging' => 0,
             'last_group_id' => $monitor_post,
             'rest_api' => 0,
