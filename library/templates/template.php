@@ -235,7 +235,7 @@ abstract class WoodyTheme_TemplateAbstract
         } else {
             $this->context['post'] = get_post();
             if (!empty($this->context['post'])) {
-                $this->context['post_title'] = $this->context['post']->post_title;
+                $this->context['post_title'] = apply_filters('the_title', $this->context['post']->post_title);
                 $this->context['post_id'] = $this->context['post']->ID;
                 if (!empty($this->context['post_id'])) {
                     $this->context['sheet_id'] = get_post_type($this->context['post_id']) === 'touristic_sheet' ? get_post_meta($this->context['post_id'], 'touristic_sheet_id')[0] : false;

@@ -607,11 +607,11 @@ class WoodyTheme_WoodyCompilers
             }
 
             $page_teaser['profile'] = [
-                        'profile_title' => get_the_title($profile_id),
-                        'profile_picture' => get_field('profile_picture', $profile_id),
-                        'profile_description' => get_field('profile_description', $profile_id),
-                        'profile_expressions' => (!empty($profile_expressions)) ? $profile_expressions : '',
-                    ];
+                'profile_title' => get_the_title($profile_id),
+                'profile_picture' => get_field('profile_picture', $profile_id),
+                'profile_description' => get_field('profile_description', $profile_id),
+                'profile_expressions' => (!empty($profile_expressions)) ? $profile_expressions : '',
+            ];
         }
 
         $page_teaser = apply_filters('woody_custom_page_teaser', $page_teaser, $context);
