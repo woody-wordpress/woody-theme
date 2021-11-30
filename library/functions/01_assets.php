@@ -458,7 +458,7 @@ function embedThumbnail($embed)
             }
         break;
         case 'vimeo':
-            $regex = '/(.com/*)(.*)/';
+            $regex = '/(.com\/*)(.*)/';
             preg_match($regex, $embed, $matches);
             if (!empty($matches[0])) {
                 $vimeo_data = unserialize(file_get_contents('https://vimeo.com/api/v2/video/'. $matches[2] .'.php'));
