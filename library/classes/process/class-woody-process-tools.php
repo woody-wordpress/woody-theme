@@ -154,7 +154,6 @@ class WoodyTheme_WoodyProcessTools
         $display = [];
         $classes_array = [];
 
-        console_log($wrapper['section_container_size']);
         $display['gridContainer'] = (empty($wrapper['display_fullwidth'])) ? $wrapper['section_container_size'] : '';
         $display['background_img'] = (!empty($wrapper['background_img'])) ? $wrapper['background_img'] : '';
         $display['parallax'] = (!empty($wrapper['parallax'])) ? $wrapper['parallax'] : '';

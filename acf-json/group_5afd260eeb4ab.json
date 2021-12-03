@@ -144,6 +144,15 @@
                             "max": "",
                             "sub_fields": []
                         },
+                        "layout_6103a32a99f31": {
+                            "key": "layout_6103a32a99f31",
+                            "name": "deal",
+                            "label": "Bons plans",
+                            "display": "block",
+                            "sub_fields": [],
+                            "min": "",
+                            "max": ""
+                        },
                         "5b04449e46540": {
                             "key": "5b04449e46540",
                             "name": "links",
@@ -513,6 +522,15 @@
                             "min": "",
                             "max": ""
                         },
+                        "layout_5d7912723303c": {
+                            "key": "layout_5d7912723303c",
+                            "name": "auto_focus_topics",
+                            "label": "Mise en avant automatique de Topics",
+                            "display": "block",
+                            "sub_fields": [],
+                            "min": "",
+                            "max": ""
+                        },
                         "layout_5bc4870e9b087": {
                             "key": "layout_5bc4870e9b087",
                             "name": "auto_focus_sheets",
@@ -652,6 +670,15 @@
                                     "prefix_name": 0
                                 }
                             ],
+                            "min": "",
+                            "max": ""
+                        },
+                        "layout_5fc4b0a990813": {
+                            "key": "layout_5fc4b0a990813",
+                            "name": "socialize",
+                            "label": "Socialize",
+                            "display": "block",
+                            "sub_fields": [],
                             "min": "",
                             "max": ""
                         },
@@ -869,33 +896,6 @@
                                     "prefix_name": 0
                                 }
                             ],
-                            "min": "",
-                            "max": ""
-                        },
-                        "layout_6103a32a99f31": {
-                            "key": "layout_6103a32a99f31",
-                            "name": "deal",
-                            "label": "Bons plans",
-                            "display": "block",
-                            "sub_fields": [],
-                            "min": "",
-                            "max": ""
-                        },
-                        "layout_5fc4b0a990813": {
-                            "key": "layout_5fc4b0a990813",
-                            "name": "socialize",
-                            "label": "Socialize",
-                            "display": "block",
-                            "sub_fields": [],
-                            "min": "",
-                            "max": ""
-                        },
-                        "layout_5d7912723303c": {
-                            "key": "layout_5d7912723303c",
-                            "name": "auto_focus_topics",
-                            "label": "Mise en avant automatique de Topics",
-                            "display": "block",
-                            "sub_fields": [],
                             "min": "",
                             "max": ""
                         }
@@ -1150,8 +1150,7 @@
                     "choices": {
                         "grid-container-small": "Petite",
                         "grid-container": "Moyenne",
-                        "grid-container-large": "Grande",
-                        "grid-container-xlarge": "Trés grande"
+                        "grid-container-large": "Grande"
                     },
                     "allow_null": 0,
                     "default_value": "normal",
@@ -1551,5 +1550,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "Champ répéteur de sections (En-tête + Contenu flexible + Boutons)",
-    "modified": 1638279073
+    "modified": 1638537331
 }
