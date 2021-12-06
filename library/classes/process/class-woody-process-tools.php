@@ -154,7 +154,7 @@ class WoodyTheme_WoodyProcessTools
         $display = [];
         $classes_array = [];
 
-        $display['gridContainer'] = (empty($wrapper['display_fullwidth'])) ? $wrapper['section_container_size'] : '';
+        $display['gridContainer'] = (empty($wrapper['display_fullwidth'])) ? 'grid-container ' . $wrapper['section_container_size'] : '';
         $display['background_img'] = (!empty($wrapper['background_img'])) ? $wrapper['background_img'] : '';
         $display['parallax'] = (!empty($wrapper['parallax'])) ? $wrapper['parallax'] : '';
         $classes_array[] = (!empty($display['background_img'])) ? 'isRel' : '';

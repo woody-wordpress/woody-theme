@@ -1148,9 +1148,9 @@
                         "id": ""
                     },
                     "choices": {
-                        "grid-container-small": "Petite",
-                        "grid-container": "Moyenne",
-                        "grid-container-large": "Grande"
+                        "grid-small-container": "Petite",
+                        "grid-default": "Moyenne",
+                        "grid-large-container": "Grande"
                     },
                     "allow_null": 0,
                     "default_value": "normal",
