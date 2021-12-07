@@ -282,7 +282,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -293,6 +293,29 @@
             },
             "allow_null": 0,
             "default_value": "align-top",
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        {
+            "key": "field_61dc59647cc82",
+            "label": "Marge intérieure",
+            "name": "padding",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "": "Aucune",
+                "padd-all-lg": "Grande",
+                "padd-all-xlg": "Très Grande"
+            },
+            "allow_null": 0,
+            "default_value": "",
             "layout": "horizontal",
             "return_format": "value"
         },
