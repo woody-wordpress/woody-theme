@@ -153,8 +153,17 @@ class WoodyTheme_WoodyProcessTools
     {
         $display = [];
         $classes_array = [];
+        $container_classes='';
 
-        $display['gridContainer'] = (empty($wrapper['display_fullwidth'])) ? 'grid-container ' . $wrapper['section_container_size'] : '';
+        if(empty($wrapper['display_fullwidth'])){
+            if(!empty($wrapper['section_container_size'])){
+                $container_classes = 'grid-container ' . $wrapper['section_container_size'];
+            }else{
+                $container_classes = 'grid-container';
+            }
+        }
+
+        $display['gridContainer'] = $container_classes;
         $display['background_img'] = (!empty($wrapper['background_img'])) ? $wrapper['background_img'] : '';
         $display['parallax'] = (!empty($wrapper['parallax'])) ? $wrapper['parallax'] : '';
         $classes_array[] = (!empty($display['background_img'])) ? 'isRel' : '';

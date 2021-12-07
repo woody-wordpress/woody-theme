@@ -1153,7 +1153,7 @@
                         "grid-large-container": "Grande"
                     },
                     "allow_null": 0,
-                    "default_value": "normal",
+                    "default_value": "grid-default",
                     "layout": "horizontal",
                     "return_format": "value"
                 },
