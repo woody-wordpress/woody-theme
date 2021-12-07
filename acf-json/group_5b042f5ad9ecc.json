@@ -237,11 +237,30 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
             "message": "Utile lors de l'insertion de widgets",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_61adf409f0b0b",
+            "label": "Ajouter Bouton \"Afficher plus\"",
+            "name": "custom_text_show_more_button",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "Le message sera tronqué après 5 lignes",
             "default_value": 0,
             "ui": 1,
             "ui_on_text": "",
@@ -303,5 +322,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "Elément de contenu (Editeur wysiwyg \/ code html",
-    "modified": 1624005789
+    "modified": 1638790369
 }

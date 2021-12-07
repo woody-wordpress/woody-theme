@@ -85,12 +85,7 @@ class WoodyTheme_Tinymce
                 'title' => 'Style 5',
                 'selector' => 'p',
                 'classes' => 'h5'
-            ),
-            array(
-                'title' => 'Bouton "Voir plus"',
-                'selector' => 'p',
-                'classes' => 'show-more-target'
-            ),
+            )
         );
 
         $init_array['style_formats'] = json_encode($style_formats);
