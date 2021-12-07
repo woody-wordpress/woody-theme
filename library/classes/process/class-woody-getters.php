@@ -65,7 +65,6 @@ class WoodyTheme_WoodyGetters
 
                 $the_items['items'][$key] = $data;
             }
-            $the_items['display_button'] = (!empty($wrapper['display_button'])) ? $wrapper['display_button'] : false;
             $the_items['max_num_pages'] = $query_result->max_num_pages;
             $the_items['wp_query'] = $query_result;
         }
