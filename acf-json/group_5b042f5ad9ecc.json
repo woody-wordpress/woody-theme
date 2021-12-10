@@ -260,7 +260,7 @@
                 "class": "",
                 "id": ""
             },
-            "message": "Le message sera tronqué après 5 lignes",
+            "message": "",
             "default_value": 0,
             "ui": 1,
             "ui_on_text": "",
