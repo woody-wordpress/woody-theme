@@ -208,6 +208,27 @@
             "prefix_name": 0
         },
         {
+            "key": "field_60dd6D7080d98",
+            "label": "Marges intérieures",
+            "name": "",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "field_61dc59647cc82"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
+        },
+        {
             "key": "field_5b8f9cbb9c97d",
             "label": "Paramètres du fond",
             "name": "custom_text_bg_params",

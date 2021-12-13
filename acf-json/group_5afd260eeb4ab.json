@@ -966,6 +966,37 @@
                 "ui_off_text": ""
             },
             {
+                "key": "field_61a607264494e",
+                "label": "Largeur de la section",
+                "name": "section_container_size",
+                "type": "button_group",
+                "instructions": "Choisissez la largeur maximale que prendra la section",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_5afd2ce516ece",
+                            "operator": "!=",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "grid-small-container": "Petite",
+                    "grid-default": "Moyenne",
+                    "grid-large-container": "Grande"
+                },
+                "allow_null": 0,
+                "default_value": "grid-default",
+                "layout": "horizontal",
+                "return_format": "value"
+            },
+            {
                 "key": "field_5b9b68384b626",
                 "label": "Alignement",
                 "name": "section_alignment",
@@ -974,7 +1005,7 @@
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "",
+                    "width": "50",
                     "class": "",
                     "id": ""
                 },

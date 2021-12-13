@@ -324,17 +324,26 @@ abstract class WoodyTheme_TemplateAbstract
 
     private function getCanonical($post_id)
     {
-        if (!empty($post_id) && get_post_type($post_id) == 'page') {
-            $page_type = getTermsSlugs($post_id, 'page_type', true);
+        $return = '';
 
-            // On vérifie si la page est de type miroir
-            if ($page_type == 'mirror_page') {
-                // On remplace l'id de post courant par l'id de post de référence de la page miroir
-                $post_id = get_field('mirror_page_reference', $post_id);
+        if (!empty(get_field('woodyseo_canonical_url', $post_id))) {
+            // S'il y a une url canonique renseignée, elle est prioritaire
+            $return = get_field('woodyseo_canonical_url', $post_id);
+        } else {
+            if (!empty($post_id) && get_post_type($post_id) == 'page') {
+                $page_type = getTermsSlugs($post_id, 'page_type', true);
+
+                // On vérifie si la page est de type miroir
+                if ($page_type == 'mirror_page') {
+                    // On remplace l'id de post courant par l'id de post de référence de la page miroir
+                    $post_id = get_field('mirror_page_reference', $post_id);
+                }
             }
+
+            $return = apply_filters('woody_get_permalink', $post_id);
         }
 
-        return apply_filters('woody_get_permalink', $post_id);
+        return $return;
     }
 
     private function setMetadata()
