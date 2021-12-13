@@ -69,6 +69,14 @@ abstract class WoodyTheme_TemplateAbstract
             $this->globals['post_id'] = $this->context['post_id'];
         }
 
+        if (empty($this->globals['post_type']) && !empty($this->context['post_type'])) {
+            $this->globals['post_type'] = $this->context['post_type'];
+        }
+
+        if (empty($this->globals['post_image']) && !empty($this->context['metas']['og:image']['#attributes']['content'])) {
+            $this->globals['post_image'] = $this->context['metas']['og:image']['#attributes']['content'];
+        }
+
         if (empty($this->globals['page_type']) && !empty($this->context['page_type'])) {
             $this->globals['page_type'] = $this->context['page_type'];
         }
@@ -244,6 +252,7 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         if (!empty($this->context['post'])) {
+            $this->context['post_type'] = $this->context['post']->post_type;
             $this->context['page_type'] = getTermsSlugs($this->context['post_id'], 'page_type', true);
         }
 
