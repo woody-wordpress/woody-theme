@@ -110,17 +110,17 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         if (empty($this->globals['ancestors'])) {
-            $this->globals['ancestors'] = $this->getAncestors($this->context['post_id']);
+            $this->globals['ancestors'] = $this->getAncestors($this->context['post']);
         }
     }
 
-    private function getAncestors($post_id)
+    private function getAncestors($post)
     {
         $return = [];
 
         // On ajoute toutes les pages parentes
         $depth = 1;
-        $ancestors_ids = get_post_ancestors($post_id);
+        $ancestors_ids = get_post_ancestors($post->ID);
         if (!empty($ancestors_ids) && is_array($ancestors_ids)) {
             $ancestors_ids = array_reverse($ancestors_ids);
             foreach ($ancestors_ids as $key => $ancestor_id) {
@@ -129,8 +129,14 @@ abstract class WoodyTheme_TemplateAbstract
             }
         }
 
+        // Si il s'agit d'une fiche on range tout dans le Chapitre Offres SIT
+        if ($post->post_type === 'touristic_sheet') {
+            $return['chapter' . $depth] = 'Offres SIT';
+            $depth++;
+        }
+
         // On ajoute la page courante
-        $return['chapter' . $depth] = get_the_title($post_id);
+        $return['chapter' . $depth] = get_the_title($post->ID);
 
         return $return;
     }
