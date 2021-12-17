@@ -73,6 +73,7 @@ class WoodyTheme_ACF
 
         add_filter('acf/load_field/name=tags_primary', [$this, 'addPrimaryTagsFields'], 10, 3);
         add_filter('acf/load_field/key=field_5d91c4559736e', [$this, 'loadDisqusField'], 10, 3);
+        add_filter('acf/load_field/name=active_shares', [$this, 'addSocialChoices'], 10, 3);
 
         // Custom Filter
         add_filter('woody_get_field_option', [$this, 'woodyGetFieldOption'], 10, 3);
@@ -999,5 +1000,21 @@ class WoodyTheme_ACF
         }
 
         wp_send_json($return);
+    }
+
+    public function addSocialChoices($field)
+    {
+        if(empty($field['choices'])){
+            $field['choices'] = array (
+                "facebook" => "Facebook",
+                "twitter" => "Twitter",
+                "linkedin" => "LinkedIn",
+                "whatsapp" => "WhatsApp",
+                "pinterest" => "Pinterest",
+                "mail" => "Mail"
+            );
+        };
+
+        return $field;
     }
 }
