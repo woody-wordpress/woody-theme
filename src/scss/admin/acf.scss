@@ -972,6 +972,7 @@
                     }
                 }
 
+                &[data-layout='snowflake'],
                 &[data-layout='infolive'] {
                     &:before {
                         content: '\f239';
