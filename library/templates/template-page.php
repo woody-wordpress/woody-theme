@@ -487,6 +487,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             $this->context['title'] .= sprintf(' | %s %s', __('Page', 'woody-theme'), $query['listpage']);
         }
 
+        $query = apply_filters('woody_hawwwai_playlist_query', $query);
+
         // Get from Apirender
         $this->context['playlist_tourism'] = apply_filters('woody_hawwwai_playlist_render', $playlistConfId, pll_current_language(), $query);
 
@@ -539,10 +541,10 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             $headers['Last-Modified'] = gmdate('D, d M Y H:i:s', strtotime($this->context['playlist_tourism']['modified'])) . ' GMT';
         }
         if (!empty($this->context['playlist_tourism']['playlistId'])) {
-            $headers['xkey'][] = 'ts-idplaylist-' . $this->context['playlist_tourism']['playlistId'];
+            $headers['xkey'][] = 'x-ts-idplaylist-' . $this->context['playlist_tourism']['playlistId'];
         }
         if (!empty($this->context['playlist_tourism']['confId'])) {
-            $headers['xkey'][] = 'hawwwai-idconf-' . $this->context['playlist_tourism']['confId'];
+            $headers['xkey'][] = 'x-hawwwai-idconf-' . $this->context['playlist_tourism']['confId'];
         }
         if (!empty($this->context['playlist_tourism']['apirender_uri'])) {
             $headers['x-apirender-url'] = $this->context['playlist_tourism']['apirender_uri'];

@@ -223,6 +223,9 @@ class WoodyTheme_SiteMap
 
         update_option($args['option_name'], $sitemap, 'no');
         output_success('SAVE : ' . $args['option_name']);
+
+        // Purge endpoint varnish
+        do_action('woody_flush_varnish', 'sitemap');
     }
 
     private function getPosts($lang = PLL_DEFAULT_LANG, $paged = 1, $posts_per_page = 1000)

@@ -17,7 +17,7 @@ class WoodyTheme_Testimonials
     protected function registerHooks()
     {
         add_action('init', array($this, 'registerPostType'));
-        add_action('woody_subtheme_update', [$this, 'updatePllOption']);
+        add_filter('woody_polylang_update_options', [$this, 'woodyPolylangUpdateOptions']);
     }
 
     public function registerPostType()
@@ -55,13 +55,12 @@ class WoodyTheme_Testimonials
     /**
      * Ajout des témoignages aux posts types traduisibles
      */
-    public function updatePllOption()
+    public function woodyPolylangUpdateOptions($polylang)
     {
-        $pll_option = get_option('polylang');
-        $pll_option['post_types'][] = 'testimony';
+        if (!in_array('testimony', $polylang['post_types'])) {
+            $polylang['post_types'][] = 'testimony';
+        }
 
-        $pll_option = update_option('polylang', $pll_option);
-
-        return $pll_option;
+        return $polylang;
     }
 }

@@ -24,7 +24,9 @@
                 {% endif %}
             {% endblock %}
             {{ page_hero|default }}
-
+            {% if not home_slider and bookblock %}
+                {{ bookblock }}
+            {% endif %}
             {{ page_parts.after_hero|default }}
 
             {% block page_teaser %}

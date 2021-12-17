@@ -810,6 +810,29 @@
                 "prefix_name": 0
             },
             {
+                "key": "field_61547b03acda8",
+                "label": "Alignement de l'en-tête",
+                "name": "heading_alignment",
+                "type": "button_group",
+                "instructions": "Certains thèmes graphiques peuvent nécessiter une évolution pour permettre l'utilisation des valeurs droite/gauche",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "100",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "left": "Gauche",
+                    "center": "Centrer",
+                    "right": "Droite"
+                },
+                "allow_null": 0,
+                "default_value": "center",
+                "layout": "horizontal",
+                "return_format": "value"
+            },
+            {
                 "key": "field_5afd2faf953bc",
                 "label": "Disposition des blocs",
                 "name": "",
@@ -972,6 +995,37 @@
                 "ui_off_text": ""
             },
             {
+                "key": "field_61a607264494e",
+                "label": "Largeur de la section",
+                "name": "section_container_size",
+                "type": "button_group",
+                "instructions": "Choisissez la largeur maximale que prendra la section",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_5afd2ce516ece",
+                            "operator": "!=",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "grid-small-container": "Petite",
+                    "grid-default": "Moyenne",
+                    "grid-large-container": "Grande"
+                },
+                "allow_null": 0,
+                "default_value": "grid-default",
+                "layout": "horizontal",
+                "return_format": "value"
+            },
+            {
                 "key": "field_5b9b68384b626",
                 "label": "Alignement",
                 "name": "section_alignment",
@@ -980,7 +1034,7 @@
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "",
+                    "width": "50",
                     "class": "",
                     "id": ""
                 },
