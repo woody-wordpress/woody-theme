@@ -249,7 +249,7 @@
         },
         {
             "key": "field_61adf409f0b0b",
-            "label": "Ajouter Bouton \"Afficher plus\"",
+            "label": "Limiter la hauteur du bloc (Bouton \"Afficher plus\")",
             "name": "custom_text_show_more_button",
             "type": "true_false",
             "instructions": "",
