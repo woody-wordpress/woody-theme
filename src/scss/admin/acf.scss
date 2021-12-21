@@ -791,26 +791,32 @@
         flex-wrap: wrap;
 
         li {
-            width: calc(100% / 5);
+            width: calc(100% / 6);
 
             a {
                 height: 110px;
-                background-color: #23282d;
-                border-radius: 6px;
+                color: #23282d;
+                background-color: #f0f0f1;
+                border-radius: 3px;
                 margin: 10px;
-                font-weight: bold;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                font-size: 14px;
+                font-size: 13px;
                 white-space: break-spaces;
                 text-align: center;
-                transition: transform .3s, background-color .3s;
+                transition: transform .3s, background-color .3s, box-shadow .3s;
 
                 &:hover {
-                    background-color: #007cba;
+                    background-color: white;
+                    color: #23282d;
                     transform: scale(.95);
+                    box-shadow: 0 2px 12px rgba(0, 0, 0, .2);
+
+                    &:before {
+                        color: #007cba;
+                    }
                 }
 
                 &:before {
@@ -818,6 +824,7 @@
                     font-family: 'Dashicons';
                     font-size: 30px;
                     margin-bottom: 20px;
+                    color: #007cba;
                 }
 
                 &[data-layout='free_text'] {
@@ -858,13 +865,13 @@
                 &[data-layout='auto_focus'],
                 &[data-layout='manual_focus'] {
                     &:before {
-                        content: '\f314';
+                        content: '\f13c';
                     }
                 }
 
-                &[data-layout='manual_focus_minisheet'] {
+                &[data-layout='sheet_summary'] {
                     &:before {
-                        content: '\f181';
+                        content: '\f12b';
                     }
                 }
 
@@ -877,19 +884,25 @@
 
                 &[data-layout='accordion'] {
                     &:before {
-                        content: '\f156';
+                        content: '\f164';
                     }
                 }
 
                 &[data-layout='feature'] {
                     &:before {
-                        content: '\f155';
+                        content: '\f197';
                     }
                 }
 
                 &[data-layout='links'] {
                     &:before {
                         content: '\f103';
+                    }
+                }
+
+                &[data-layout='link_social_shares'] {
+                    &:before {
+                        content: '\f237';
                     }
                 }
 
@@ -901,7 +914,7 @@
 
                 &[data-layout='tabs_group'] {
                     &:before {
-                        content: '\f489';
+                        content: '\f15b';
                     }
                 }
 
@@ -919,7 +932,7 @@
 
                 &[data-layout='page_summary'] {
                     &:before {
-                        content: '\f163';
+                        content: '\f203';
                     }
                 }
 
@@ -931,13 +944,56 @@
 
                 &[data-layout='weather'] {
                     &:before {
-                        content: '\f449';
+                        content: '\f176';
                     }
                 }
 
                 &[data-layout='claims'] {
                     &:before {
                         content: '\f488';
+                    }
+                }
+
+                &[data-layout='quotation'] {
+                    &:before {
+                        content: '\f18e';
+                    }
+                }
+
+                &[data-layout='disqus_block'] {
+                    &:before {
+                        content: '\f473';
+                    }
+                }
+
+                &[data-layout='sitemap'] {
+                    &:before {
+                        content: '\f325';
+                    }
+                }
+
+                &[data-layout='socialize'] {
+                    &:before {
+                        content: '\f301';
+                    }
+                }
+
+                &[data-layout='snowflake'],
+                &[data-layout='infolive'] {
+                    &:before {
+                        content: '\f239';
+                    }
+                }
+
+                &[data-layout='favorites'] {
+                    &:before {
+                        content: '\f487';
+                    }
+                }
+
+                &[data-layout='tides'] {
+                    &:before {
+                        content: '\f168';
                     }
                 }
             }

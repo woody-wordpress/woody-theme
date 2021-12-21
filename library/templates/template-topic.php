@@ -40,7 +40,7 @@ class WoodyTheme_Template_Topic extends WoodyTheme_TemplateAbstract
     public function timberCompileData($data)
     {
         $post = get_post();
-        $data['globals']['post_title']  = $post->post_title;
+        $data['globals']['post_title']  = apply_filters('the_title', $post->post_title);
         $data['globals']['post_id']     = $post->ID;
         $data['globals']['page_type']   = $post->post_type;
         return $data;

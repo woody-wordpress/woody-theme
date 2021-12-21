@@ -28,6 +28,7 @@ class WoodyTheme_Template_Sitemap
             switch ($this->mode) {
                 case 'index':
                 case 'list':
+                    header('xkey: ' . WP_SITE_KEY . '_sitemap', false);
                     header('Content-Type: text/xml; charset=UTF-8');
                     break;
                 case 'xsl':

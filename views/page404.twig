@@ -33,27 +33,25 @@
             {% endif %}
 
             {% if content.custom.custom_links|default %}
-            {% if content.suggestions|default %}
-            <div class="custom_links  padd-bottom-md bg-lightgray">
-            {% else %}
-            <div class="custom_links marg-top-lg padd-top-md padd-bottom-md bg-lightgray">
-            {% endif %}
-                <div class="grid-container">
-                    <h3 class="marg-bottom-lg">{{ content.custom.custom_links.title }}</h3>
-                    <ul class="menu align-center align-middle">
-                        {% for link in content.custom.custom_links.links %}
-                        <li> <a class="button" target="{{ link.target | default('_self') }}" href="{{ link.url }}">{{ link.title }}</a></li>
-                        {% endfor %}
-                    </ul>
+                <div class="custom_links padd-bottom-md{% if not content.suggestions %} marg-top-lg padd-top-md {% endif %}bg-lightgray">
+                    <div class="grid-container">
+                        <h3 class="marg-bottom-lg">{{ content.custom.custom_links.title }}</h3>
+                        <ul class="menu align-center align-middle">
+                            {% for link in content.custom.custom_links.links %}
+                            <li> <a class="button" target="{{ link.target | default('_self') }}" href="{{ link.url }}">{{ link.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
-            </div>
+
                 {% if content.btn %}
-                <div class="button marg-top-md marg-bottom-md obf" data-obf="{{ home_url|base64Encode }}">{{ content.btn }}</div>
+                    <div class="button marg-top-md marg-bottom-md obf" data-obf="{{ home_url|base64Encode }}">{{ content.btn }}</div>
                 {% endif %}
 
             {% else %}
+            {{ _context|console_log() }}
                 <div class="button primary marg-top-md marg-bottom-md obf" data-obf="{{ home_url|base64Encode }}">{{ __("Aller à la page d'accueil", "woody-theme") }}</div>
-                <div class="button secondary marg-top-md marg-bottom-md obf" data-obf="{{ content.search|base64Encode }}">{{ __("Faire une recherche", "woody-theme") }}</div>
+                <div class="button secondary marg-top-md marg-bottom-md obf {% if not content.search %} esSearch-button{% endif %}"{% if content.search %} data-obf="{{ content.search|base64Encode }}"{% endif %}>{{ __("Faire une recherche", "woody-theme") }}</div>
             {% endif %}
 
         </div>

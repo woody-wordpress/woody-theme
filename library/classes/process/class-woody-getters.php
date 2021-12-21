@@ -49,6 +49,7 @@ class WoodyTheme_WoodyGetters
         // On transforme la donnée des posts récupérés pour coller aux templates de blocs Woody
         if (!empty($query_result->posts)) {
             foreach ($query_result->posts as $key => $post) {
+                $data = '';
 
                 //On formate les données en fonction du type de mise en avant
                 if (!empty($wrapper['focused_type']) && $wrapper['focused_type'] == 'documents') {
@@ -63,7 +64,9 @@ class WoodyTheme_WoodyGetters
                     }
                 }
 
-                $the_items['items'][$key] = $data;
+                if (!empty($data)) {
+                    $the_items['items'][$key] = $data;
+                }
             }
             $the_items['max_num_pages'] = $query_result->max_num_pages;
             $the_items['wp_query'] = $query_result;
@@ -160,7 +163,7 @@ class WoodyTheme_WoodyGetters
         $items = [];
         if (!empty($wrapper['playlist_conf_id'])) {
             $confId = $wrapper['playlist_conf_id'];
-            $lang = pll_current_language();
+            $lang = apply_filters('woody_autofocus_sheet_lang', pll_current_language());
             $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), $playlist_params, 'json');
             if (!empty($playlist['items'])) {
                 foreach ($playlist['items'] as $key => $item) {

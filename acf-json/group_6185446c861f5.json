@@ -1,9 +1,9 @@
 {
-    "key": "group_5b042f5ad9ecc",
-    "title": "Texte libre",
+    "key": "group_6185446c861f5",
+    "title": "Liens de partage",
     "fields": [
         {
-            "key": "field_5b044711dcad5",
+            "key": "field_6185447664395",
             "label": "Contenu",
             "name": "",
             "type": "tab",
@@ -19,27 +19,80 @@
             "endpoint": 0
         },
         {
-            "key": "field_5b042f9591390",
-            "label": "Texte \/ Code html",
-            "name": "text",
-            "type": "wysiwyg",
+            "key": "field_618544a464396",
+            "label": "Afficher les réseaux définis dans les paramètres généraux",
+            "name": "default_parameters",
+            "type": "true_false",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "30",
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 1
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         {
-            "key": "field_60867814eb20b",
-            "label": "Titre du bloc",
+            "key": "field_618544f164397",
+            "label": "Liens de partages",
+            "name": "active_shares",
+            "type": "checkbox",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_618544a464396",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "40",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+            },
+            "allow_custom": 0,
+            "default_value": [],
+            "layout": "horizontal",
+            "toggle": 0,
+            "return_format": "value",
+            "save_custom": 0
+        },
+        {
+            "key": "field_61bca2531a5b6",
+            "label": "Alignement",
+            "name": "shares_alignment",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "left": "Gauche",
+                "center": "Centré",
+                "right": "Droite"
+            },
+            "allow_null": 0,
+            "default_value": "center",
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        {
+            "key": "field_6185468edf0f7",
+            "label": "Mise en page",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -54,70 +107,7 @@
             "endpoint": 0
         },
         {
-            "key": "field_6086785aeb20c",
-            "label": "Titre du bloc",
-            "name": "generic_bloc_title",
-            "type": "clone",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "clone": [
-                "field_5b041d61adb72",
-                "field_5b041c6aadb71",
-                "field_5b041d79adb73",
-                "field_5b59bbd0e094c",
-                "field_5b72f56b6f4aa",
-                "field_5b59bc12e094d"
-            ],
-            "display": "seamless",
-            "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0
-        },
-        {
-            "key": "field_608678e5eb20d",
-            "label": "Bouton(s) supplémentaire(s)",
-            "name": "generic_buttons",
-            "type": "clone",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "clone": [
-                "group_5b043614df4a6"
-            ],
-            "display": "group",
-            "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 1
-        },
-        {
-            "key": "field_5b0e8fb53447a",
-            "label": "Mise en page",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "left",
-            "endpoint": 0
-        },
-        {
-            "key": "field_5c1ce35a071e8",
+            "key": "field_618546a3df0f8",
             "label": "Template",
             "name": "",
             "type": "accordion",
@@ -134,7 +124,7 @@
             "endpoint": 0
         },
         {
-            "key": "field_5b0e8fcf3447b",
+            "key": "field_618546c1df0f9",
             "label": "Template",
             "name": "woody_tpl",
             "type": "text",
@@ -146,14 +136,14 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "default_value": "blocks-custom_text-tpl_01",
+            "default_value": "blocks-shares-tpl_02",
             "placeholder": "",
             "prepend": "",
             "append": "",
             "maxlength": ""
         },
         {
-            "key": "button_field_5b0e8fcf3447b",
+            "key": "button_field_618546c1df0f9",
             "label": "Choisir une mise en page",
             "name": "",
             "type": "message",
@@ -162,7 +152,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "hide-label woody-tpl-button group_5b042f5ad9ecc",
+                "class": "hide-label woody-tpl-button group_6185446c861f5",
                 "id": ""
             },
             "message": "Choisir une mise en page",
@@ -170,7 +160,7 @@
             "esc_html": 0
         },
         {
-            "key": "field_5b8f9c899c97c",
+            "key": "field_61854a3fc7f0a",
             "label": "Options avancées",
             "name": "",
             "type": "accordion",
@@ -187,51 +177,9 @@
             "endpoint": 0
         },
         {
-            "key": "field_60cc5c6879b98",
-            "label": "Alignement vertical",
-            "name": "",
-            "type": "clone",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "clone": [
-                "field_60cb028b375c8"
-            ],
-            "display": "seamless",
-            "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0
-        },
-        {
-            "key": "field_60dd6D7080d98",
-            "label": "Marges intérieures",
-            "name": "",
-            "type": "clone",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "clone": [
-                "field_61dc59647cc82"
-            ],
-            "display": "seamless",
-            "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0
-        },
-        {
-            "key": "field_5b8f9cbb9c97d",
+            "key": "field_61854aa6c7f0c",
             "label": "Paramètres du fond",
-            "name": "custom_text_bg_params",
+            "name": "share_links_bg_params",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -250,45 +198,7 @@
             "prefix_name": 0
         },
         {
-            "key": "field_5d889564238dd",
-            "label": "Retirer les marges",
-            "name": "custom_text_no_padding",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "message": "Utile lors de l'insertion de widgets",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
-            "key": "field_61adf409f0b0b",
-            "label": "Limiter la hauteur du bloc (Bouton \"Afficher plus\")",
-            "name": "custom_text_show_more_button",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
-            "key": "field_5bc849d96f84e",
+            "key": "field_61854af1c7f0e",
             "label": "Effets visuels",
             "name": "",
             "type": "accordion",
@@ -305,7 +215,7 @@
             "endpoint": 0
         },
         {
-            "key": "field_5bc849eb6f84f",
+            "key": "field_61854b04c7f0f",
             "label": "Effets visuels",
             "name": "the_visuel_effects",
             "type": "clone",
@@ -342,6 +252,6 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
-    "description": "Elément de contenu (Editeur wysiwyg \/ code html",
-    "modified": 1638790369
+    "description": "",
+    "modified": 1636125552
 }

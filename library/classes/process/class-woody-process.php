@@ -198,6 +198,18 @@ class WoodyTheme_WoodyProcess
                 $layout = $this->compilers->formatTestimonials($layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
+            case 'link_social_shares':
+                if ($layout['default_parameters'] == false && !empty($layout['active_shares'])) {
+                    $layout['active_shares'] = getActiveShares($layout['active_shares']);
+                }
+                else {
+                    $layout['active_shares'] = getActiveShares();
+                }
+                $layout['block_titles'] = $this->tools->getBlockTitles($layout, '', 'shares_');
+                $layout['display'] = $this->tools->getDisplayOptions($layout);
+                console_log($layout);
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            break;
             case 'movie':
                 $layout['movie_thumbnail'] = embedProviderThumbnail($layout['movie']);
                 $layout['movie_uploadDate'] = $context['post']->post_modified;
