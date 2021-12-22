@@ -201,7 +201,7 @@ class WoodyTheme_Cleanup_Admin
             // Permet d'être compatible avec tout les sites (anciens et nouveaux)
             $legacyMenus = class_exists('SubWoodyTheme_Admin') && method_exists('SubWoodyTheme_Admin', 'addMenuMainPages') ? false : true;
 
-            if ($legacyMenus && $lang == PLL_DEFAULT_LANG && !defined('WOODY_GENERATE_MENU')) {
+            if ($legacyMenus && $lang == PLL_DEFAULT_LANG && !defined('WOODY_GENERATE_MENU') && !defined('WOODY_MENUS_V2')) {
                 // Première sous-page
                 acf_add_options_sub_page(array(
                     'page_title'    => 'Menu principal',

@@ -361,6 +361,35 @@
                         "min": "",
                         "max": ""
                     },
+                    "layout_615dc5c7f7dd1": {
+                        "key": "layout_615dc5c7f7dd2",
+                        "name": "link_social_shares",
+                        "label": "Liens de partage",
+                        "display": "block",
+                        "sub_fields": [{
+                            "key": "field_615dc5c7f7dd5",
+                            "label": "Liens de partage",
+                            "name": "social_shares",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "hide-label",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_6185446c861f5"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
+                        "min": "",
+                        "max": ""
+                    },
                     "5b043f22b981d": {
                         "key": "5b043f22b981d",
                         "name": "quote",
