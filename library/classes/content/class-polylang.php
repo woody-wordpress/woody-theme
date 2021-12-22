@@ -178,6 +178,8 @@ class WoodyTheme_Polylang
         __("Retour à la page d'accueil", 'woody-theme');
         __("Tout", 'woody-theme');
         __('Afficher tous les tarifs', 'woody-theme');
+        __('Afficher plus', 'woody-theme');
+        __('Afficher moins', 'woody-theme');
 
         // Weather
         __('Bas', 'woody-theme');

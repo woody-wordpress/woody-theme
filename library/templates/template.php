@@ -69,6 +69,14 @@ abstract class WoodyTheme_TemplateAbstract
             $this->globals['post_id'] = $this->context['post_id'];
         }
 
+        if (empty($this->globals['post_type']) && !empty($this->context['post_type'])) {
+            $this->globals['post_type'] = $this->context['post_type'];
+        }
+
+        if (empty($this->globals['post_image']) && !empty($this->context['metas']['og:image']['#attributes']['content'])) {
+            $this->globals['post_image'] = $this->context['metas']['og:image']['#attributes']['content'];
+        }
+
         if (empty($this->globals['page_type']) && !empty($this->context['page_type'])) {
             $this->globals['page_type'] = $this->context['page_type'];
         }
@@ -102,17 +110,17 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         if (empty($this->globals['ancestors'])) {
-            $this->globals['ancestors'] = $this->getAncestors($this->context['post_id']);
+            $this->globals['ancestors'] = $this->getAncestors($this->context['post']);
         }
     }
 
-    private function getAncestors($post_id)
+    private function getAncestors($post)
     {
         $return = [];
 
         // On ajoute toutes les pages parentes
         $depth = 1;
-        $ancestors_ids = get_post_ancestors($post_id);
+        $ancestors_ids = get_post_ancestors($post->ID);
         if (!empty($ancestors_ids) && is_array($ancestors_ids)) {
             $ancestors_ids = array_reverse($ancestors_ids);
             foreach ($ancestors_ids as $key => $ancestor_id) {
@@ -121,8 +129,14 @@ abstract class WoodyTheme_TemplateAbstract
             }
         }
 
+        // Si il s'agit d'une fiche on range tout dans le Chapitre Offres SIT
+        if ($post->post_type === 'touristic_sheet') {
+            $return['chapter' . $depth] = 'Offres SIT';
+            $depth++;
+        }
+
         // On ajoute la page courante
-        $return['chapter' . $depth] = get_the_title($post_id);
+        $return['chapter' . $depth] = get_the_title($post->ID);
 
         return $return;
     }
@@ -244,6 +258,7 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         if (!empty($this->context['post'])) {
+            $this->context['post_type'] = $this->context['post']->post_type;
             $this->context['page_type'] = getTermsSlugs($this->context['post_id'], 'page_type', true);
         }
 
@@ -316,17 +331,26 @@ abstract class WoodyTheme_TemplateAbstract
 
     private function getCanonical($post_id)
     {
-        if (!empty($post_id) && get_post_type($post_id) == 'page') {
-            $page_type = getTermsSlugs($post_id, 'page_type', true);
+        $return = '';
 
-            // On vérifie si la page est de type miroir
-            if ($page_type == 'mirror_page') {
-                // On remplace l'id de post courant par l'id de post de référence de la page miroir
-                $post_id = get_field('mirror_page_reference', $post_id);
+        if (!empty(get_field('woodyseo_canonical_url', $post_id))) {
+            // S'il y a une url canonique renseignée, elle est prioritaire
+            $return = get_field('woodyseo_canonical_url', $post_id);
+        } else {
+            if (!empty($post_id) && get_post_type($post_id) == 'page') {
+                $page_type = getTermsSlugs($post_id, 'page_type', true);
+
+                // On vérifie si la page est de type miroir
+                if ($page_type == 'mirror_page') {
+                    // On remplace l'id de post courant par l'id de post de référence de la page miroir
+                    $post_id = get_field('mirror_page_reference', $post_id);
+                }
             }
+
+            $return = apply_filters('woody_get_permalink', $post_id);
         }
 
-        return apply_filters('woody_get_permalink', $post_id);
+        return $return;
     }
 
     private function setMetadata()

@@ -900,6 +900,12 @@
                     }
                 }
 
+                &[data-layout='link_social_shares'] {
+                    &:before {
+                        content: '\f237';
+                    }
+                }
+
                 &[data-layout='call_to_action'] {
                     &:before {
                         content: '\f534';
@@ -972,6 +978,7 @@
                     }
                 }
 
+                &[data-layout='snowflake'],
                 &[data-layout='infolive'] {
                     &:before {
                         content: '\f239';
