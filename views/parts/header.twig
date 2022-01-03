@@ -57,6 +57,10 @@
 	{{ page_parts.side_menu|default }}
 {% endif %}
 
+{% if page_parts.preloader %}
+	{{ page_parts.preloader|default }}
+{% endif %}
+
 <div class="woody-component-mobilenavs">
     {{ page_parts.mobile_menu|default }}
     <ul class="tools list-unstyled flex-container align-middle hide-for-xlarge">
