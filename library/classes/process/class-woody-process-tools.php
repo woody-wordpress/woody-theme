@@ -448,4 +448,24 @@ class WoodyTheme_WoodyProcessTools
 
         return $sheet;
     }
+
+    /**
+     *
+     * Nom : getDeviceDisplayBlockResponsive
+     * Auteur : Orphée Besson
+     * Return : Retourne le device sélectionné pour l'affichage d'un bloc dans l'onglet "Responsive"
+     * @param    layout - array
+     * @return   device - string => 'desktop' || 'mobile'
+     *
+     */
+    public function getDeviceDisplayBlockResponsive($layout)
+    {
+        $device = '';
+
+        if(!empty($layout['display_block_responsive']) && $layout['display_block_responsive'] != 'all') {
+            $device = $layout['display_block_responsive'];
+        }
+
+        return $device;
+    }
 }

@@ -38,7 +38,9 @@ class WoodyTheme_WoodyProcess
     public function processWoodyLayouts($layout, $context)
     {
         $return = '';
+
         $layout['default_marker'] = !empty($context['default_marker']) ? $context['default_marker'] : '';
+
         // Traitements spécifique en fonction du type de layout
         switch ($layout['acf_fc_layout']) {
             case 'manual_focus':
@@ -203,7 +205,6 @@ class WoodyTheme_WoodyProcess
                 }
                 $layout['block_titles'] = $this->tools->getBlockTitles($layout, '', 'shares_');
                 $layout['display'] = $this->tools->getDisplayOptions($layout);
-                console_log($layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
             case 'movie':
@@ -253,7 +254,25 @@ class WoodyTheme_WoodyProcess
                 // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
                 if (!empty($grid['light_section_content']) && is_array($grid['light_section_content'])) {
                     foreach ($grid['light_section_content'] as $layout) {
-                        $grid_content['items'][] = $this->processWoodyLayouts($layout, $context);
+
+                        $device_display_block = $this->tools->getDeviceDisplayBlockResponsive($layout);
+
+                        switch ($device_display_block) {
+                            case 'mobile':
+                                if(wp_is_mobile()) {
+                                    $grid_content['items'][] = $this->processWoodyLayouts($layout, $context);
+                                }
+                                break;
+                            case 'desktop':
+                                if(!wp_is_mobile()) {
+                                    $grid_content['items'][] = $this->processWoodyLayouts($layout, $context);
+                                }
+                                break;
+                            // if $device_display_block is empty, we display the block for each device (mobile & desktop), so no test is required
+                            default:
+                                $grid_content['items'][] = $this->processWoodyLayouts($layout, $context);
+                                break;
+                        }
                     }
 
                     // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
@@ -523,6 +542,7 @@ class WoodyTheme_WoodyProcess
     public function processWoodySections($sections, $context)
     {
         $return = [];
+
         if (!empty($sections) && is_array($sections)) {
             foreach ($sections as $section_id => $section) {
                 $section = apply_filters('section_data_before_render', $section);
@@ -543,9 +563,28 @@ class WoodyTheme_WoodyProcess
                     foreach ($section['section_content'] as $layout_id => $layout) {
                         // On définit un uniqid court à utiliser dans les filtres de listes en paramètre GET
                         // Uniqid long : section . $section_id . '_section_content' . $layout_id
+
                         $layout['uniqid'] = 's' . $section_id . 'sc' . $layout_id;
                         $layout['visual_effects'] = (!empty($layout['visual_effects'])) ? $this->tools->formatVisualEffectData($layout['visual_effects']) : '';
-                        $components['items'][] = $this->processWoodyLayouts($layout, $context);
+
+                        $device_display_block = $this->tools->getDeviceDisplayBlockResponsive($layout);
+
+                        switch ($device_display_block) {
+                            case 'mobile':
+                                if(wp_is_mobile()) {
+                                    $components['items'][] = $this->processWoodyLayouts($layout, $context);
+                                }
+                                break;
+                            case 'desktop':
+                                if(!wp_is_mobile()) {
+                                    $components['items'][] = $this->processWoodyLayouts($layout, $context);
+                                }
+                                break;
+                            // if $device_display_block is empty, we display the block for each device (mobile & desktop), so no test is required
+                            default:
+                                $components['items'][] = $this->processWoodyLayouts($layout, $context);
+                                break;
+                        }
                     }
 
                     // On retire les items retournés vides par processWoodyLayouts
