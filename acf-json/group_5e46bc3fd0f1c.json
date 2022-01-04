@@ -1,7 +1,8 @@
 {
     "key": "group_5e46bc3fd0f1c",
     "title": "Témoignages",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5e46c25672de9",
             "label": "Contenu",
             "name": "",
@@ -35,7 +36,8 @@
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter un témoignage",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5e4a5597e2017",
                     "label": "Titre d'administration",
                     "name": "bo_testimony_title",
@@ -81,11 +83,13 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5ed10c2571049",
-                            "operator": "==",
-                            "value": 1
-                        }]
+                        [
+                            {
+                                "field": "field_5ed10c2571049",
+                                "operator": "==",
+                                "value": 1
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "50",
@@ -109,11 +113,13 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5ed10c2571049",
-                            "operator": "==",
-                            "value": 0
-                        }]
+                        [
+                            {
+                                "field": "field_5ed10c2571049",
+                                "operator": "==",
+                                "value": 0
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "60",
@@ -139,11 +145,13 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5ed10c2571049",
-                            "operator": "==",
-                            "value": 0
-                        }]
+                        [
+                            {
+                                "field": "field_5ed10c2571049",
+                                "operator": "==",
+                                "value": 0
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "40",
@@ -164,11 +172,13 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5ed10c2571049",
-                            "operator": "==",
-                            "value": 0
-                        }]
+                        [
+                            {
+                                "field": "field_5ed10c2571049",
+                                "operator": "==",
+                                "value": 0
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "75",
@@ -189,11 +199,13 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5ed10c2571049",
-                            "operator": "==",
-                            "value": 0
-                        }]
+                        [
+                            {
+                                "field": "field_5ed10c2571049",
+                                "operator": "==",
+                                "value": 0
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "100",
@@ -450,14 +462,70 @@
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0
+        },
+        {
+            "key": "field_61d402b423dd5",
+            "label": "FIN",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 1
+        },
+        {
+            "key": "field_61d402c323dd6",
+            "label": "Responsive",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_61d402d723dd7",
+            "label": "Afficher le bloc",
+            "name": "",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_61d30e86c3313"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -465,7 +533,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "Elément de contenu (Affichage de plusieurs témoignages)",
-    "modified": 1583858343
+    "modified": 1641284339
 }
