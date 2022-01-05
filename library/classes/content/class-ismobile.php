@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Profiles
+ * Is Mobile
  *
  * @package WoodyTheme
- * @since WoodyTheme 1.23.0
+ * @since WoodyTheme 1.46.3
  */
 
 class WoodyTheme_IsMobile
