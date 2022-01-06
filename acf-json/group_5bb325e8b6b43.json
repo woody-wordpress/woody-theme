@@ -362,7 +362,15 @@
                     "type": "true_false",
                     "instructions": "Cette vidéo pourra être visionnée grâce à un bouton \"Voir la vidéo\"",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5bb326b977f3b",
+                                "operator": "!=",
+                                "value": "embed"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -387,6 +395,11 @@
                                 "field": "field_61aa234624178",
                                 "operator": "==",
                                 "value": "1"
+                            },
+                            {
+                                "field": "field_5bb326b977f3b",
+                                "operator": "!=",
+                                "value": "embed"
                             }
                         ]
                     ],
