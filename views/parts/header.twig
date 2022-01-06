@@ -53,13 +53,8 @@
 	</div>
 {% endif %}
 
-{% if page_parts.side_menu %}
-	{{ page_parts.side_menu|default }}
-{% endif %}
-
-{% if page_parts.preloader %}
-	{{ page_parts.preloader|default }}
-{% endif %}
+{{ page_parts.side_menu|default }}
+{{ page_parts.preloader|default }}
 
 <div class="woody-component-mobilenavs">
     {{ page_parts.mobile_menu|default }}
