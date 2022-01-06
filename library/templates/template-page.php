@@ -152,6 +152,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
                             if (strpos($iframe_url, 'youtube') != false) {
                                 $yt_params_url = $iframe_url . '?&autoplay=0&rel=0';
+                                $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_has_social_movie'] = true;
                                 $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_social_movie'] = str_replace($iframe_url, $yt_params_url, $slide['landswpr_slide_social_movie']);
                             }
                         }
