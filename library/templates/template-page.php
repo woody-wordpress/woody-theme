@@ -20,9 +20,9 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
     public function __construct()
     {
-        $this->tools = new WoodyTheme_WoodyProcessTools;
-        $this->process = new WoodyTheme_WoodyProcess;
-        $this->compilers = new WoodyTheme_WoodyCompilers;
+        $this->tools = new WoodyTheme_WoodyProcessTools();
+        $this->process = new WoodyTheme_WoodyProcess();
+        $this->compilers = new WoodyTheme_WoodyCompilers();
         parent::__construct();
     }
 
@@ -199,7 +199,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             // Si le module groupe est activé
             if (in_array('groups', $this->context['enabled_woody_options'])) {
                 // Instancier GroupQuotation peut importe les conditions, à partir du moment ou le module groups est activé
-                $groupQuotation = new GroupQuotation;
+                $groupQuotation = new GroupQuotation();
 
                 if ($trip_infos['the_price']['price_type'] == 'component_based') {
                     $trip_infos['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price']);
