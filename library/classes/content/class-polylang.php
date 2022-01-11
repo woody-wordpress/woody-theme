@@ -190,16 +190,6 @@ class WoodyTheme_Polylang
         __('Ajouter à mes favoris', 'woody-theme');
         __('Imprimer/Exporter mes favoris', 'woody-theme');
 
-        // Tides
-        __('Dates', 'woody-theme');
-        __('Basse mer', 'woody-theme');
-        __('Haute mer', 'woody-theme');
-        __('Matin', 'woody-theme');
-        __('Soir', 'woody-theme');
-        __('Heure', 'woody-theme');
-        __('Coef', 'woody-theme');
-        __('Retrouvez prochainement les horaires de marées pour ce mois !', 'woody-theme');
-
         // Group quotation
         __('Pour faire une demande de devis, veuillez choisir un séjour.', 'woody-theme');
         __("Il semblerait qu'il n'y ait pas ou plus de séjours proposant une demande de devis disponibles sur le site", "woody-theme");
@@ -232,11 +222,6 @@ class WoodyTheme_Polylang
         __('Mis à jour le', 'woody-theme');
         __('Désolé, aucun contenu ne correspond à votre recherche', 'woody-theme');
         __('Lire aussi', 'woody-theme');
-
-        // Disqus
-        __('Merci d\'activer le javascript pour afficher', 'woody-theme');
-        __('le bloc de commentaires Disqus', 'woody-theme');
-        __('Une erreur est survenue lors de l\'affichage des commentaires. Merci de contacter votre administrateur', 'woody-theme');
 
         // Infolive
         //TODO: Remove after snowflake configs done
