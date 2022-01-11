@@ -181,50 +181,6 @@ class WoodyTheme_Polylang
         __('Afficher plus', 'woody-theme');
         __('Afficher moins', 'woody-theme');
 
-        // Weather
-        __('Bas', 'woody-theme');
-        __('Haut', 'woody-theme');
-        __('Vent', 'woody-theme');
-        __('Température de la mer', 'woody-theme');
-        __('Humidité', 'woody-theme');
-        __('ISO 0°', 'woody-theme');
-        __('Limite Pluie/Neige', 'woody-theme');
-        __('Ensoleillé', 'woody-theme');
-        __('Pluie', 'woody-theme');
-        __('Neige', 'woody-theme');
-        __('Grésil', 'woody-theme');
-        __('Venteux', 'woody-theme');
-        __('Brouillard', 'woody-theme');
-        __('Nuageux', 'woody-theme');
-        __('Éclaircies', 'woody-theme');
-        __('Grêle', 'woody-theme');
-        __('Tempête', 'woody-theme');
-        __('Verglas', 'woody-theme');
-
-        //Azimut (weather)
-        __('Nord Nord-Est', 'woody-theme');
-        __('Nord-Est', 'woody-theme');
-        __('Est Nord-Est', 'woody-theme');
-        __('Est', 'woody-theme');
-        __('Est Sud-Est', 'woody-theme');
-        __('Sud-Est', 'woody-theme');
-        __('Sud Sud-Est', 'woody-theme');
-        __('Sud', 'woody-theme');
-        __('Sud Sud-Ouest', 'woody-theme');
-        __('Sud-Ouest', 'woody-theme');
-        __('Ouest Sud-Ouest', 'woody-theme');
-        __('Ouest', 'woody-theme');
-        __('Ouest Nord-Ouest', 'woody-theme');
-        __('Nord-Ouest', 'woody-theme');
-        __('Nord Nord-Ouest', 'woody-theme');
-        __('Nord', 'woody-theme');
-
-        //Part of the day (weather)
-        __('Matin', 'woody-theme');
-        __('Après-midi', 'woody-theme');
-        __('Soirée', 'woody-theme');
-        __('Nuit', 'woody-theme');
-
         //Actions
         __('Ajouter', 'woody-theme');
         __('Supprimer', 'woody-theme');

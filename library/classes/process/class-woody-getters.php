@@ -22,7 +22,7 @@ class WoodyTheme_WoodyGetters
 
     public function __construct()
     {
-        $this->tools = new WoodyTheme_WoodyProcessTools;
+        $this->tools = new WoodyTheme_WoodyProcessTools();
     }
     /**
      *
@@ -37,7 +37,7 @@ class WoodyTheme_WoodyGetters
     public function getAutoFocusData($current_post, $wrapper, $paginate = false, $uniqid = 0, $ingore_maxnum = false, $posts_in = null, $filters = null)
     {
         $the_items = [];
-        $process = new WoodyTheme_WoodyProcess;
+        $process = new WoodyTheme_WoodyProcess();
         $query_result = $process->processWoodyQuery($current_post, $wrapper, $paginate, $uniqid, $ingore_maxnum, $posts_in, $filters);
         $pinned_content_id = 0;
 
@@ -138,7 +138,7 @@ class WoodyTheme_WoodyGetters
                             $post_preview = $this->getPagePreview($wrapper, $item['content_selection'], $clickable);
                             break;
                     }
-                    $the_items['items'][$key] = (!empty($post_preview)) ?  $post_preview : [];
+                    $the_items['items'][$key] = (!empty($post_preview)) ? $post_preview : [];
                 }
             }
         }
@@ -387,7 +387,7 @@ class WoodyTheme_WoodyGetters
                 $price_type = get_field('the_price_price_type', $item->ID);
                 // TODO: passer par le filtre woody_custom_pagePreview dans l'addon-group-quotation
                 if ($price_type == "component_based") {
-                    $groupQuotation = new GroupQuotation;
+                    $groupQuotation = new GroupQuotation();
                     $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d', $item);
                     $data['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price'], $item);
                 } else {
