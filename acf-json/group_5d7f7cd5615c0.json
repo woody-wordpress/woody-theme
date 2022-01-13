@@ -237,7 +237,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "33",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -256,7 +256,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "33",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -275,12 +275,31 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "32",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
             "message": "",
             "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_61d2c99cae892",
+            "label": "Inclus dans le plan du site",
+            "name": "woody_in_sitemap",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
             "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
@@ -317,7 +336,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "",
-    "modified": 1578582580
+    "modified": 1641220588
 }
