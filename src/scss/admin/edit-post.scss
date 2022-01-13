@@ -1,27 +1,3 @@
-.wp-core-ui .button {
-    // border-radius: 0;
-    // box-shadow: none;
-    // border: none;
-    // text-shadow: none;
-    // height: auto;
-    padding: 5px 10px;
-
-    // &.button-large {
-    //     height: auto;
-    //     padding: 5px 10px;
-    // }
-
-    &.edit-slug {
-        margin-left: 5px;
-        background: #fff;
-
-        &:hover {
-            color: #0085ba
-        }
-    }
-}
-
-
 #pageparentdiv {
 
     p:nth-of-type(2),
