@@ -539,6 +539,7 @@ class WoodyTheme_WoodyCompilers
                         if (!empty($item['location']) && !empty($item['location']['latitude']) && !empty($item['location']['longitude'])) {
                             $return['display_map'] = true;
                         }
+                        break;
                     }
                 }
             }
