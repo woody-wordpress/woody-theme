@@ -98,7 +98,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             'subtitle' =>  '404 - ' . __("Page non trouvée", 'woody-theme'),
             'text' => __("La page que vous recherchez a peut-être été supprimée ou est temporairement indisponible.", 'woody-theme'),
             'suggestions' => $suggestions,
-            'search' => apply_filters('woody_get_permalink', get_field('es_search_page_url', 'options'))
+            'search' => (!in_array('research', WOODY_OPTIONS)) ? apply_filters('woody_get_permalink', get_field('es_search_page_url', 'options')) : false,
         ];
 
         $custom = apply_filters('woody_404_custom', $vars);
@@ -110,7 +110,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     {
         $this->context['is_frontpage'] = false;
 
-        $social_shares = getActiveShares();
+        $social_shares['active_shares'] = getActiveShares();
         $this->context['social_shares'] = \Timber::compile($this->context['woody_components']['blocks-shares-tpl_01'], $social_shares);
 
         /******************************************************************************
@@ -143,6 +143,19 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
                     if (!empty($slide['landswpr_slide_media']) && $slide['landswpr_slide_media']['landswpr_slide_media_type'] == 'img' && !empty($slide['landswpr_slide_media']['landswpr_slide_img'])) {
                         $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img']['lazy'] = 'disabled';
+                    }
+
+                    if (!empty($slide['landswpr_slide_add_social_movie']) && !empty($slide['landswpr_slide_social_movie'])) {
+                        preg_match_all('@src="([^"]+)"@', $slide['landswpr_slide_social_movie'], $result);
+                        if (!empty($result[1]) && !empty($result[1][0])) {
+                            $iframe_url = $result[1][0];
+
+                            if (strpos($iframe_url, 'youtube') != false) {
+                                $yt_params_url = $iframe_url . '?&autoplay=0&rel=0';
+                                $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_has_social_movie'] = true;
+                                $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_social_movie'] = str_replace($iframe_url, $yt_params_url, $slide['landswpr_slide_social_movie']);
+                            }
+                        }
                     }
                 }
                 $home_slider = apply_filters('woody_format_homeslider_data', $home_slider);
