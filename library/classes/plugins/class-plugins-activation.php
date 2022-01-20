@@ -28,6 +28,8 @@ class WoodyTheme_Plugins_Activation
         $this->deactivate_plugins = [
             'wp-php-console/wp-php-console.php',
             'vcaching/vcaching.php',
+            'contact-form-7/wp-contact-form-7.php',
+            'contact-form-7-mailchimp-extension/chimpmatic-lite.php',
         ];
 
         $this->activate_plugins = [

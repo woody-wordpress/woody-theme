@@ -240,6 +240,18 @@ class WoodyTheme_SiteMap
                     'operator' => 'NOT IN'
                 )
             ],
+            'meta_query' => array(
+                'relation' => 'OR',
+                array(
+                    'key' => 'woody_in_sitemap',
+                    'value' => true,
+                    'compare' => '='
+                ),
+                array(
+                    'key' => 'woody_in_sitemap',
+                    'compare' => 'NOT EXISTS'
+                )
+            ),
             'orderby' => 'menu_order',
             'order'   => 'DESC',
             'lang' => $lang,
@@ -409,6 +421,18 @@ class WoodyTheme_SiteMap
         $args = array(
             'post_status' => array(
                 'publish'
+            ),
+            'meta_query' => array(
+                'relation' => 'OR',
+                array(
+                    'key' => 'woody_in_sitemap',
+                    'value' => true,
+                    'compare' => '='
+                ),
+                array(
+                    'key' => 'woody_in_sitemap',
+                    'compare' => 'NOT EXISTS'
+                )
             ),
             'post_parent' => $post_parent_id,
             'posts_per_page' => -1,

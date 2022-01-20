@@ -7,7 +7,7 @@
  * @since WoodyTheme 1.0.0
  */
 
-use \Woody\Services\Providers;
+use Woody\Services\Providers;
 
 class WoodyTheme_Shortcodes
 {
@@ -19,7 +19,6 @@ class WoodyTheme_Shortcodes
 
     protected function registerHooks()
     {
-        add_shortcode('woody_meteo', [$this, 'weatherShortCode']);
         add_shortcode('woody_recherche', [$this, 'searchShortCode']);
         add_shortcode('woody_anchor', [$this, 'anchorShortcode']);
     }

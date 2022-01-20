@@ -20,9 +20,9 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
     public function __construct()
     {
-        $this->tools = new WoodyTheme_WoodyProcessTools;
-        $this->process = new WoodyTheme_WoodyProcess;
-        $this->compilers = new WoodyTheme_WoodyCompilers;
+        $this->tools = new WoodyTheme_WoodyProcessTools();
+        $this->process = new WoodyTheme_WoodyProcess();
+        $this->compilers = new WoodyTheme_WoodyCompilers();
         parent::__construct();
     }
 
@@ -144,6 +144,19 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     if (!empty($slide['landswpr_slide_media']) && $slide['landswpr_slide_media']['landswpr_slide_media_type'] == 'img' && !empty($slide['landswpr_slide_media']['landswpr_slide_img'])) {
                         $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img']['lazy'] = 'disabled';
                     }
+
+                    if (!empty($slide['landswpr_slide_add_social_movie']) && !empty($slide['landswpr_slide_social_movie'])) {
+                        preg_match_all('@src="([^"]+)"@', $slide['landswpr_slide_social_movie'], $result);
+                        if (!empty($result[1]) && !empty($result[1][0])) {
+                            $iframe_url = $result[1][0];
+
+                            if (strpos($iframe_url, 'youtube') != false) {
+                                $yt_params_url = $iframe_url . '?&autoplay=0&rel=0';
+                                $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_has_social_movie'] = true;
+                                $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_social_movie'] = str_replace($iframe_url, $yt_params_url, $slide['landswpr_slide_social_movie']);
+                            }
+                        }
+                    }
                 }
                 $home_slider = apply_filters('woody_format_homeslider_data', $home_slider);
                 $this->context['home_slider'] = \Timber::compile($this->context['woody_components'][$home_slider['landswpr_woody_tpl']], $home_slider);
@@ -186,7 +199,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             // Si le module groupe est activé
             if (in_array('groups', $this->context['enabled_woody_options'])) {
                 // Instancier GroupQuotation peut importe les conditions, à partir du moment ou le module groups est activé
-                $groupQuotation = new GroupQuotation;
+                $groupQuotation = new GroupQuotation();
 
                 if ($trip_infos['the_price']['price_type'] == 'component_based') {
                     $trip_infos['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price']);

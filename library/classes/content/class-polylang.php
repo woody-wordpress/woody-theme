@@ -181,50 +181,6 @@ class WoodyTheme_Polylang
         __('Afficher plus', 'woody-theme');
         __('Afficher moins', 'woody-theme');
 
-        // Weather
-        __('Bas', 'woody-theme');
-        __('Haut', 'woody-theme');
-        __('Vent', 'woody-theme');
-        __('Température de la mer', 'woody-theme');
-        __('Humidité', 'woody-theme');
-        __('ISO 0°', 'woody-theme');
-        __('Limite Pluie/Neige', 'woody-theme');
-        __('Ensoleillé', 'woody-theme');
-        __('Pluie', 'woody-theme');
-        __('Neige', 'woody-theme');
-        __('Grésil', 'woody-theme');
-        __('Venteux', 'woody-theme');
-        __('Brouillard', 'woody-theme');
-        __('Nuageux', 'woody-theme');
-        __('Éclaircies', 'woody-theme');
-        __('Grêle', 'woody-theme');
-        __('Tempête', 'woody-theme');
-        __('Verglas', 'woody-theme');
-
-        //Azimut (weather)
-        __('Nord Nord-Est', 'woody-theme');
-        __('Nord-Est', 'woody-theme');
-        __('Est Nord-Est', 'woody-theme');
-        __('Est', 'woody-theme');
-        __('Est Sud-Est', 'woody-theme');
-        __('Sud-Est', 'woody-theme');
-        __('Sud Sud-Est', 'woody-theme');
-        __('Sud', 'woody-theme');
-        __('Sud Sud-Ouest', 'woody-theme');
-        __('Sud-Ouest', 'woody-theme');
-        __('Ouest Sud-Ouest', 'woody-theme');
-        __('Ouest', 'woody-theme');
-        __('Ouest Nord-Ouest', 'woody-theme');
-        __('Nord-Ouest', 'woody-theme');
-        __('Nord Nord-Ouest', 'woody-theme');
-        __('Nord', 'woody-theme');
-
-        //Part of the day (weather)
-        __('Matin', 'woody-theme');
-        __('Après-midi', 'woody-theme');
-        __('Soirée', 'woody-theme');
-        __('Nuit', 'woody-theme');
-
         //Actions
         __('Ajouter', 'woody-theme');
         __('Supprimer', 'woody-theme');
@@ -233,16 +189,6 @@ class WoodyTheme_Polylang
         // Favorites
         __('Ajouter à mes favoris', 'woody-theme');
         __('Imprimer/Exporter mes favoris', 'woody-theme');
-
-        // Tides
-        __('Dates', 'woody-theme');
-        __('Basse mer', 'woody-theme');
-        __('Haute mer', 'woody-theme');
-        __('Matin', 'woody-theme');
-        __('Soir', 'woody-theme');
-        __('Heure', 'woody-theme');
-        __('Coef', 'woody-theme');
-        __('Retrouvez prochainement les horaires de marées pour ce mois !', 'woody-theme');
 
         // Group quotation
         __('Pour faire une demande de devis, veuillez choisir un séjour.', 'woody-theme');
@@ -276,11 +222,6 @@ class WoodyTheme_Polylang
         __('Mis à jour le', 'woody-theme');
         __('Désolé, aucun contenu ne correspond à votre recherche', 'woody-theme');
         __('Lire aussi', 'woody-theme');
-
-        // Disqus
-        __('Merci d\'activer le javascript pour afficher', 'woody-theme');
-        __('le bloc de commentaires Disqus', 'woody-theme');
-        __('Une erreur est survenue lors de l\'affichage des commentaires. Merci de contacter votre administrateur', 'woody-theme');
 
         // Infolive
         //TODO: Remove after snowflake configs done
