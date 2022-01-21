@@ -309,11 +309,10 @@
                 "id": ""
             },
             "choices": {
-                "": "Aucune",
                 "padd-all-lg": "Grande",
                 "padd-all-xlg": "Très Grande"
             },
-            "allow_null": 0,
+            "allow_null": 1,
             "default_value": "",
             "layout": "horizontal",
             "return_format": "value"
