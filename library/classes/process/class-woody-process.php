@@ -151,7 +151,7 @@ class WoodyTheme_WoodyProcess
                 if (!empty($layout['summary_bg_params'])) {
                     $layout['display'] = $this->tools->getDisplayOptions($layout['summary_bg_params']);
                 }
-                $layout['items'] = $this->compilers->formatSummaryItems(get_the_ID());
+                $layout['summary'] = $this->compilers->formatSummaryItems(get_the_ID());
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
             case 'free_text':

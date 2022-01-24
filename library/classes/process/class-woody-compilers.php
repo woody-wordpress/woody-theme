@@ -519,22 +519,33 @@ class WoodyTheme_WoodyCompilers
 
     public function formatSummaryItems($post_id)
     {
-        $items = [];
+        $return = [];
         $permalink = apply_filters('woody_get_permalink', $post_id);
         $sections = get_field('section', $post_id);
         if (!empty($sections) && is_array($sections)) {
             foreach ($sections as $s_key => $section) {
                 if (!empty($section['display_in_summary']) && empty($section['hide_section'])) {
-                    $items[] = [
+                    $return['items'][] = [
                         'title' => (!empty($section['section_summary_title'])) ? $section['section_summary_title'] : 'Section ' . $s_key,
                         'anchor' => (!empty($section['section_summary_title'])) ? $permalink . '#summary-' . sanitize_title($section['section_summary_title']) : $permalink . '#pageSection-' . $s_key,
-                        'id' => '#pageSection-' . $s_key
+                        'id' => '#pageSection-' . $s_key,
+                        'location' => [
+                            'latitude' => (!empty($section['section_latitude'])) ? $section['section_latitude'] : '',
+                            'longitude' => (!empty($section['section_longitude'])) ? $section['section_longitude'] : ''
+                        ]
                     ];
+
+                    foreach ($return['items'] as $item) {
+                        if (!empty($item['location']) && !empty($item['location']['latitude']) && !empty($item['location']['longitude'])) {
+                            $return['display_map'] = true;
+                            break;
+                        }
+                    }
                 }
             }
         }
 
-        return $items;
+        return $return;
     }
 
     public function formatPageTeaser($context, $custom_post_id = null)

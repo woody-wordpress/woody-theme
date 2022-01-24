@@ -1342,16 +1342,51 @@
                 "maxlength": ""
             },
             {
-                "key": "field_5f509ba4c9e5b",
-                "label": "Animations",
-                "name": "section_animations",
+                "key": "field_61bb07bbb2a1b",
+                "label": "Latitude",
+                "name": "section_latitude",
                 "type": "text",
                 "instructions": "",
                 "required": 0,
-                "conditional_logic": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_5ed7a10730085",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
                 "wrapper": {
-                    "width": "30",
-                    "class": "show-for-admin",
+                    "width": "15",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_61bb07f4b2a1c",
+                "label": "Longitude",
+                "name": "section_longitude",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_5ed7a10730085",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "15",
+                    "class": "",
                     "id": ""
                 },
                 "default_value": "",
