@@ -89,7 +89,7 @@ class WoodyTheme_WoodyCompilers
             $the_items['display_index'] = (!empty($wrapper['display_index'])) ? $wrapper['display_index'] : false;
 
             // // Responsive stuff
-            $the_items['swResp'] = $this->tools->getResponsiveOption($wrapper);
+            $the_items['swResp'] = $this->tools->getResponsiveOptions($wrapper);
             $the_items['mobile_behaviour'] = $wrapper['mobile_behaviour'];
             if ($the_items['swResp'] === null ) { unset($the_items['swResp']); }
 

@@ -37,6 +37,7 @@ class WoodyTheme_WoodyProcess
      */
     public function processWoodyLayouts($layout, $context)
     {
+        console_log($layout, 'Layout');
         $return = '';
         $layout['default_marker'] = !empty($context['default_marker']) ? $context['default_marker'] : '';
         // Traitements spécifique en fonction du type de layout
@@ -72,7 +73,7 @@ class WoodyTheme_WoodyProcess
             case 'gallery':
                 // Ajout des données Instagram + champs personnalisés dans le contexte des images
                 $layout['gallery_type'] = !empty($layout['gallery_type']) ? $layout['gallery_type'] : "manual";
-                $layout['swResp'] = $this->tools->getResponsiveOption($layout);
+                $layout['swResp'] = $this->tools->getResponsiveOptions($layout);
                 if ($layout['swResp'] === null ) { unset($layout['swResp']); }
 
                 switch ($layout['gallery_type']) {

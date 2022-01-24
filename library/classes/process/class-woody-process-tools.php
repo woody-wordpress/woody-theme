@@ -440,13 +440,11 @@ class WoodyTheme_WoodyProcessTools
         return $sheet;
     }
 
-    public function getResponsiveOption($wrapper) {
-        if ($wrapper['mobile_behaviour']['mobile_grid'] == 'grid') {
-            $return = false;
-        }
+    public function getResponsiveOptions($wrapper) {
         if ($wrapper['mobile_behaviour']['mobile_grid'] == 'swiper') {
-            $return = true;
+            return true;
+        } else {
+            return false;
         }
-        return $return;
     }
 }
