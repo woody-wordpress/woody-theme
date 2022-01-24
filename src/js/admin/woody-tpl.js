@@ -10,7 +10,7 @@ $('#post').each(function() {
         'woody_section_model'
     ];
 
-    if (accepted_post.includes($('#post_type').val())) {
+    if (accepted_post.includes($('#post_type').val()) || $("[data-name=menu_items]").length) {
 
         var tplFilterAction = {};
         var tplFiltersValues = {};
@@ -29,6 +29,10 @@ $('#post').each(function() {
                 'length',
                 'infinite',
                 'img_ratio'
+            ],
+            'submenus': [
+                'img_ratio',
+                'text_align'
             ]
         };
 
@@ -113,7 +117,7 @@ $('#post').each(function() {
         var button = '';
         var field_key = '';
 
-        $('#post-body-content').append(`<div id="tpls_popin">
+        $('#wpbody-content').append(`<div id="tpls_popin">
             <div class="tpls_popin_actions">
                 <span class="close">Annuler</span>
                 <span class="save">OK</span>
@@ -143,6 +147,8 @@ $('#post').each(function() {
                 theFilters = fieldKeysFilters.focuses;
             } else if (group == 'group_5b04314e0ec21') {
                 theFilters = fieldKeysFilters.galleries;
+            } else if (group == 'group_613887bd0a56c') {
+                theFilters = fieldKeysFilters.submenus;
             }
 
             if (theFilters != 'none' && $('.tpls_popin_filters').length == 0) {

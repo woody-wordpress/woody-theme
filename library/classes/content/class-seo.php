@@ -30,7 +30,7 @@ class WoodyTheme_Seo
 
     public function woodySeoTransformPattern($string)
     {
-        $tools = new WoodyTheme_WoodyProcessTools;
+        $tools = new WoodyTheme_WoodyProcessTools();
         $string = $tools->replacePattern($string, get_the_ID());
         return $string;
     }
@@ -213,7 +213,7 @@ class WoodyTheme_Seo
         // Pour chaque taxonomie de la page, on vérifie s'il existe un tag primary
         foreach ($taxonomies as $tax_key => $tax) {
             $primary_term = get_post_meta($post->ID, '_yoast_wpseo_primary_' . $tax->name, true);
-            $field['primary_' . $tax->name ] = (!empty($primary_term)) ? $primary_term: '';
+            $field['primary_' . $tax->name ] = (!empty($primary_term)) ? $primary_term : '';
         }
 
         if (!empty($field)) {

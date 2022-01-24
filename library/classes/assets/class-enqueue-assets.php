@@ -188,9 +188,8 @@ class WoodyTheme_Enqueue_Assets
         wp_enqueue_script('jsdelivr_moment', 'https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js', [], null);
         wp_enqueue_script('jsdelivr_jscookie', 'https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js', [], null);
         wp_enqueue_script('jsdelivr_rellax', 'https://cdn.jsdelivr.net/npm/rellax@1.10.0/rellax.min.js', [], null);
-        wp_enqueue_script('jsdelivr_plyr', 'https://cdn.jsdelivr.net/npm/plyr@3.5.6/dist/plyr.min.js', [], null);
         wp_enqueue_style('jsdelivr_lightgallery', 'https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.3.0/css/lightgallery-bundle.min.css', [], null);
-
+        wp_enqueue_script('jsdelivr_plyr', 'https://cdn.jsdelivr.net/npm/plyr@3.6.8/dist/plyr.min.js', [], null);
 
         // Menus links obfuscation
         wp_enqueue_script('obf', get_template_directory_uri() . '/src/js/static/obf.min.js', [], null);

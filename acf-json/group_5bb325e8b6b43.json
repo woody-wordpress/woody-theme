@@ -354,6 +354,62 @@
                         "prefix_label": 0,
                         "prefix_name": 0
                     }]
+                },
+                {
+                    "key": "field_61aa234624178",
+                    "label": "Ajouter une vidéo de présentation (youtube, dailymotion, vimeo, ...)",
+                    "name": "landswpr_slide_add_social_movie",
+                    "type": "true_false",
+                    "instructions": "Cette vidéo pourra être visionnée grâce à un bouton \"Voir la vidéo\"",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5bb326b977f3b",
+                                "operator": "!=",
+                                "value": "embed"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_61aa23a224179",
+                    "label": "Vidéo de présentation",
+                    "name": "landswpr_slide_social_movie",
+                    "type": "oembed",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_61aa234624178",
+                                "operator": "==",
+                                "value": "1"
+                            },
+                            {
+                                "field": "field_5bb326b977f3b",
+                                "operator": "!=",
+                                "value": "embed"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "width": "",
+                    "height": ""
                 }
             ]
         },
