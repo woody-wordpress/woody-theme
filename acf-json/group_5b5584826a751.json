@@ -79,7 +79,7 @@
             "label": "Référence vidéo externe",
             "name": "media_linked_video",
             "type": "url",
-            "instructions": "Si remplis cette image sera considérée comme vidéo dans les galeries",
+            "instructions": "Si rempli cette image sera considérée comme vidéo dans les galeries",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
