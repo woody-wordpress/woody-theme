@@ -47,7 +47,7 @@ class WoodyTheme_Links
             $parent_id = getPostRootAncestor($result['ID']);
             if (!empty($parent_id)) {
                 $parent = get_post($parent_id);
-                $sufix = '<small style="color:#cfcfcf; font-style:italic">( Enfant de ' . $parent->post_title . ')</small>';
+                $sufix = '<small style="color:#cfcfcf; font-style:italic">( Enfant de ' . apply_filters('the_title', $parent->post_title) . ')</small>';
                 $results[$result_key]['title'] = $results[$result_key]['title'] . ' - ' . $sufix;
             }
         }

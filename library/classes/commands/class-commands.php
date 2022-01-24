@@ -20,7 +20,6 @@ class WoodyTheme_Commands
 
     protected function registerHooks()
     {
-        add_action('woody_flush_varnish', [$this, 'flush_varnish'], 10, 2);
     }
 
     protected function registerCommands()
@@ -141,51 +140,9 @@ class WoodyTheme_Commands
         }
     }
 
-    public function flush_varnish($path = '', $method = '')
+    public function flush_varnish()
     {
-        // Flush All site if no page defined
-        $path = (!empty($path)) ? $path : '/.*';
-        $method = (!empty($method)) ? $method : 'regex';
-
-        // Options
-        $varnish_caching_enable = get_option('varnish_caching_enable');
-        if (!$varnish_caching_enable) {
-            output_warning('Plugin Varnish non activé');
-            return;
-        }
-
-        $vcaching_prefix = 'varnish_caching_';
-        $vcaching_useSsl = get_option($vcaching_prefix . 'ssl');
-        $vcaching_purgeKey = ($purgeKey = trim(get_option($vcaching_prefix . 'purge_key'))) ? $purgeKey : null;
-        $vcaching_varnishIp = get_option($vcaching_prefix . 'ips');
-        $vcaching_varnishIp = explode(',', $vcaching_varnishIp);
-        $vcaching_varnishIp = apply_filters('vcaching_varnish_ips', $vcaching_varnishIp);
-        $vcaching_varnishHosts = get_option($vcaching_prefix . 'hosts');
-        $vcaching_varnishHosts = explode(',', $vcaching_varnishHosts);
-        $vcaching_varnishHosts = apply_filters('vcaching_varnish_hosts', $vcaching_varnishHosts);
-
-        // Get schema
-        $schema = apply_filters('vcaching_schema', $vcaching_useSsl ? 'https://' : 'http://');
-
-        foreach ($vcaching_varnishIp as $key => $ip) {
-            $purgeme = $schema . $ip . $path;
-            $headers = array('host' => $vcaching_varnishHosts[$key], 'X-VC-Purge-Method' => $method, 'X-VC-Purge-Host' => $vcaching_varnishHosts[$key]);
-            if (!is_null($vcaching_purgeKey)) {
-                $headers['X-VC-Purge-Key'] = $vcaching_purgeKey;
-            }
-            $response = wp_remote_request($purgeme, array('method' => 'PURGE', 'headers' => $headers, "sslverify" => false));
-            if ($response instanceof WP_Error) {
-                foreach ($response->errors as $error => $errors) {
-                    $noticeMessage = 'Error ' . $error . ' : ';
-                    foreach ($errors as $error => $description) {
-                        $noticeMessage .= ' - ' . $description;
-                    }
-                    output_warning(['woody_flush_varnish' => $noticeMessage]);
-                }
-            } else {
-                output_success(sprintf('woody_flush_varnish : %s', WP_SCHEME . '://' . $vcaching_varnishHosts[$key]));
-            }
-        }
+        do_action('woody_flush_varnish');
     }
 
     public function flush_cloudflare()
@@ -201,7 +158,7 @@ class WoodyTheme_Commands
         ]);
 
         if (is_wp_error($response)) {
-            output_warning(['woody_flush_varnish' => $response->get_error_message()]);
+            output_warning(['woody_flush_cloudflare' => $response->get_error_message()]);
         } else {
             output_success(sprintf('woody_flush_cloudflare : %s', WOODY_CLOUDFLARE_URL));
         }

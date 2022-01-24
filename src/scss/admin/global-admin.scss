@@ -56,3 +56,11 @@ body.themes-php .themes.single-theme .theme-actions {
         }
     }
 }
+
+.wp-list-table.languages .row-actions {
+
+    .disable,
+    .delete {
+        display: none;
+    }
+}

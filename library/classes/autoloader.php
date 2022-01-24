@@ -56,6 +56,7 @@ new WoodyTheme_CDN();
 new WoodyTheme_Cron();
 new WoodyTheme_Images();
 new WoodyTheme_Links();
+new WoodyTheme_Page();
 new WoodyTheme_Permalink();
 new WoodyTheme_Post_Type();
 new WoodyTheme_Profiles();
@@ -65,7 +66,6 @@ new WoodyTheme_SiteMap();
 new WoodyTheme_Taxonomy();
 new WoodyTheme_Tinymce();
 // new WoodyTheme_Unpublisher();
-new WoodyTheme_Varnish();
 new WoodyTheme_Shuffle();
 new WoodyTheme_Videos();
 new WoodyTheme_Testimonials();
@@ -74,9 +74,11 @@ new WoodyTheme_Testimonials();
 new WoodyTheme_Timber_Filters();
 
 // Menu
-new WoodyTheme_Menus();
-if (defined('WOODY_GENERATE_MENU')) {
-    new Woody\Menus\Admin_Menus();
+if (!defined('WOODY_MENUS_V2')) {
+    new WoodyTheme_Menus();
+    if (defined('WOODY_GENERATE_MENU')) {
+        new Woody\Menus\Admin_Menus();
+    }
 }
 
 // Shortcodes

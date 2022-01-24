@@ -49,6 +49,7 @@ class WoodyTheme_WoodyGetters
         // On transforme la donnée des posts récupérés pour coller aux templates de blocs Woody
         if (!empty($query_result->posts)) {
             foreach ($query_result->posts as $key => $post) {
+                $data = '';
 
                 //On formate les données en fonction du type de mise en avant
                 if (!empty($wrapper['focused_type']) && $wrapper['focused_type'] == 'documents') {
@@ -63,7 +64,9 @@ class WoodyTheme_WoodyGetters
                     }
                 }
 
-                $the_items['items'][$key] = $data;
+                if (!empty($data)) {
+                    $the_items['items'][$key] = $data;
+                }
             }
             $the_items['max_num_pages'] = $query_result->max_num_pages;
             $the_items['wp_query'] = $query_result;
@@ -160,7 +163,7 @@ class WoodyTheme_WoodyGetters
         $items = [];
         if (!empty($wrapper['playlist_conf_id'])) {
             $confId = $wrapper['playlist_conf_id'];
-            $lang = pll_current_language();
+            $lang = apply_filters('woody_autofocus_sheet_lang', pll_current_language());
             $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), $playlist_params, 'json');
             if (!empty($playlist['items'])) {
                 foreach ($playlist['items'] as $key => $item) {
@@ -351,13 +354,13 @@ class WoodyTheme_WoodyGetters
 
         // On vérifie si la page est de type miroir
         if ($data['page_type'] == 'mirror_page') {
-            
+
             // On retourne la page de référence de la page miroir
             $mirror = get_field('mirror_page_reference', $item->ID);
-            
+
             if (!empty(get_post($mirror))) {
                 $mirror_post = get_post($mirror);
-                
+
                 // On remplace l'objet de post courant par l'objet de post de référence de la page miroir
                 $item = $mirror_post;
             }
@@ -378,13 +381,7 @@ class WoodyTheme_WoodyGetters
                 $data['description'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($original_item, 'focus_description', '', '', $item, 'field_5b2bbbfaec6b2', $data['page_type']), $original_item->ID);
             }
             if (in_array('created', $wrapper['display_elements'])) {
-                $created = get_the_date('', $item->ID);
-                $modified = get_the_modified_date('', $item->ID);
-
-                $data['post_date'] = [
-                    'prefix' => ($created == $modified) ? __('Publié le', 'woody-theme') : __('Mis à jour le', 'woody-theme'),
-                    'value' => ($created == $modified) ? $created : $modified
-                ];
+                $data['created'] = get_the_date('', $item->ID);
             }
             if (empty($is_attachment) && in_array('price', $wrapper['display_elements'])) {
                 $price_type = get_field('the_price_price_type', $item->ID);
@@ -653,8 +650,10 @@ class WoodyTheme_WoodyGetters
         if (!empty($sheet['bordereau'])) {
             if ($sheet['bordereau'] === 'HOT' or $sheet['bordereau'] == 'HPA') {
                 $rating = [];
-                for ($i = 0; $i < $sheet['ratings'][0]['value']; $i++) {
-                    $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
+                if (!empty($sheet['ratings'])) {
+                    for ($i = 0; $i < $sheet['ratings'][0]['value']; $i++) {
+                        $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
+                    }
                 }
                 if (!empty($wrapper['display_elements']) && is_array($wrapper['display_elements'])) {
                     if (in_array('sheet_rating', $wrapper['display_elements'])) {

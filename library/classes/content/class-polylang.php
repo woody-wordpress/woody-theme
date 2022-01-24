@@ -281,6 +281,7 @@ class WoodyTheme_Polylang
         __('Une erreur est survenue lors de l\'affichage des commentaires. Merci de contacter votre administrateur', 'woody-theme');
 
         // Infolive
+        //TODO: Remove after snowflake configs done
         __('Remontées mécaniques', 'woody-theme');
         __('Pistes', 'woody-theme');
         __('Domaine Alpin', 'woody-theme');

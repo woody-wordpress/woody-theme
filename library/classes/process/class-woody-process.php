@@ -185,7 +185,9 @@ class WoodyTheme_WoodyProcess
             break;
             case 'feature':
                 $layout['display'] = $this->tools->getDisplayOptions($layout);
-                $layout['icon_img']['sizes']['ratio_free'] = $layout['icon_img']['sizes']['ratio_free_small'];
+                if (!empty($layout['icon_img']) && !empty($layout['icon_img']['sizes']) && !empty($layout['icon_img']['sizes']['ratio_free_small'])) {
+                    $layout['icon_img']['sizes']['ratio_free'] = $layout['icon_img']['sizes']['ratio_free_small'];
+                }
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
             case 'story':
@@ -194,6 +196,18 @@ class WoodyTheme_WoodyProcess
             break;
             case 'testimonials':
                 $layout = $this->compilers->formatTestimonials($layout);
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            break;
+            case 'link_social_shares':
+                if ($layout['default_parameters'] == false && !empty($layout['active_shares'])) {
+                    $layout['active_shares'] = getActiveShares($layout['active_shares']);
+                }
+                else {
+                    $layout['active_shares'] = getActiveShares();
+                }
+                $layout['block_titles'] = $this->tools->getBlockTitles($layout, '', 'shares_');
+                $layout['display'] = $this->tools->getDisplayOptions($layout);
+                console_log($layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
             case 'movie':

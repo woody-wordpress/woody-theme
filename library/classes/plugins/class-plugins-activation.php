@@ -25,7 +25,10 @@ class WoodyTheme_Plugins_Activation
 
     public function woodyThemeUpdate()
     {
-        $this->deactivate_plugins = [];
+        $this->deactivate_plugins = [
+            'wp-php-console/wp-php-console.php',
+            'vcaching/vcaching.php',
+        ];
 
         $this->activate_plugins = [
             'advanced-cron-manager/advanced-cron-manager.php',
@@ -45,31 +48,21 @@ class WoodyTheme_Plugins_Activation
             'woody-plugin/woody.php',
             'woody-sso/woody-sso.php',
             'wp-deferred-javascripts/wp-deferred-javascripts.php',
+            'better-search-replace/better-search-replace.php'
         ];
 
         switch (WP_ENV) {
             case 'dev':
                 // Enable
                 $this->activate_plugins[] = 'query-monitor/query-monitor.php';
-                $this->activate_plugins[] = 'wp-php-console/wp-php-console.php';
-
-                // Disable
-                $this->deactivate_plugins[] = 'vcaching/vcaching.php';
                 break;
 
             case 'preprod':
                 // Enable
-                $this->activate_plugins[] = 'vcaching/vcaching.php';
                 $this->activate_plugins[] = 'query-monitor/query-monitor.php';
-
-                // Disable
-                $this->deactivate_plugins[] = 'wp-php-console/wp-php-console.php';
                 break;
 
             case 'prod':
-                // Enable
-                $this->activate_plugins[] = 'vcaching/vcaching.php';
-
                 if (WOODY_ACCESS_STAGING) {
                     // Enable
                     $this->activate_plugins[] = 'query-monitor/query-monitor.php';
@@ -77,9 +70,6 @@ class WoodyTheme_Plugins_Activation
                     // Disable
                     $this->deactivate_plugins[] = 'query-monitor/query-monitor.php';
                 }
-
-                // Disable
-                $this->deactivate_plugins[] = 'wp-php-console/wp-php-console.php';
                 break;
         }
 
