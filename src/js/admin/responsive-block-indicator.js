@@ -46,20 +46,26 @@ if (posts.length > 0) {
                 case 'desktop':
                     desktopButtonElement.classList.add('active');
                     mobileButtonElement.classList.remove('active');
+                    desktopButtonElement.setAttribute('title', 'Visible sur desktop');
+                    mobileButtonElement.setAttribute('title', 'Invisible sur mobile');
                     break;
                 case 'mobile':
                     mobileButtonElement.classList.add('active');
                     desktopButtonElement.classList.remove('active');
+                    mobileButtonElement.setAttribute('title', 'Visible sur mobile');
+                    desktopButtonElement.setAttribute('title', 'Invisible sur desktop');
                     break;
                 default:
                     desktopButtonElement.classList.add('active');
                     mobileButtonElement.classList.add('active');
+                    desktopButtonElement.setAttribute('title', 'Visible sur desktop');
+                    mobileButtonElement.setAttribute('title', 'Visible sur mobile');
                     break;
             }
         }
 
         const getResponsiveIndicatorHtml = () => {
-            let html = `<span class="desktop active acf-js-tooltip" data-name="responsive-block" title="Visible uniquement sur desktop"></span><span class="mobile active acf-js-tooltip" data-name="responsive-block" title="Visible uniquement sur mobile"></span>`;
+            let html = `<span class="desktop active acf-js-tooltip" data-name="responsive-block"></span><span class="mobile active acf-js-tooltip" data-name="responsive-block"></span>`;
 
             return html;
         }
