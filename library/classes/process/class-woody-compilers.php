@@ -21,8 +21,8 @@ class WoodyTheme_WoodyCompilers
 
     public function __construct()
     {
-        $this->tools = new WoodyTheme_WoodyProcessTools;
-        $this->getter = new WoodyTheme_WoodyGetters;
+        $this->tools = new WoodyTheme_WoodyProcessTools();
+        $this->getter = new WoodyTheme_WoodyGetters();
         $this->registerHooks();
     }
 

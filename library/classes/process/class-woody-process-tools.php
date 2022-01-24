@@ -155,10 +155,10 @@ class WoodyTheme_WoodyProcessTools
         $classes_array = [];
         $container_classes='';
 
-        if(empty($wrapper['display_fullwidth'])){
-            if(!empty($wrapper['section_container_size'])){
+        if (empty($wrapper['display_fullwidth'])) {
+            if (!empty($wrapper['section_container_size'])) {
                 $container_classes = 'grid-container ' . $wrapper['section_container_size'];
-            }else{
+            } else {
                 $container_classes = 'grid-container';
             }
         }
@@ -173,10 +173,11 @@ class WoodyTheme_WoodyProcessTools
         $classes_array[] = (!empty($wrapper['background_img_opacity'])) ? $wrapper['background_img_opacity'] : '';
         $classes_array[] = (!empty($wrapper['scope_paddings']['scope_padding_top'])) ? $wrapper['scope_paddings']['scope_padding_top'] : '';
         $classes_array[] = (!empty($wrapper['scope_paddings']['scope_padding_bottom'])) ? $wrapper['scope_paddings']['scope_padding_bottom'] : '';
-        $classes_array[] = (!empty($wrapper['scope_margins']['scope_margin_top'])) ?  $wrapper['scope_margins']['scope_margin_top'] : '';
+        $classes_array[] = (!empty($wrapper['scope_margins']['scope_margin_top'])) ? $wrapper['scope_margins']['scope_margin_top'] : '';
         $classes_array[] = (!empty($wrapper['scope_margins']['scope_margin_bottom'])) ? $wrapper['scope_margins']['scope_margin_bottom'] : '';
         $display['section_divider'] = (!empty($wrapper['section_divider'])) ? $wrapper['section_divider'] : '';
         $display['heading_alignment'] = (!empty($wrapper['heading_alignment'])) ? $wrapper['heading_alignment'] : 'center';
+        $display['section_animations'] = (!empty($wrapper['section_animations'])) ? $wrapper['section_animations'] : '';
 
         // On transforme le tableau en une chaine de caractères
         $display['classes'] = trim(implode(' ', $classes_array));

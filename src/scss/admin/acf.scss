@@ -1001,6 +1001,12 @@
     }
 }
 
+.acf-field {
+    &.show-for-admin {
+        display: none;
+    }
+}
+
 .acf-field .select-disabled {
     select {
         pointer-events: none;

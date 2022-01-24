@@ -21,8 +21,8 @@ class WoodyTheme_WoodyProcess
 
     public function __construct()
     {
-        $this->tools = new WoodyTheme_WoodyProcessTools;
-        $this->compilers = new WoodyTheme_WoodyCompilers;
+        $this->tools = new WoodyTheme_WoodyProcessTools();
+        $this->compilers = new WoodyTheme_WoodyCompilers();
     }
 
     /**
@@ -59,15 +59,6 @@ class WoodyTheme_WoodyProcess
             case 'content_list':
                 $return = $this->compilers->formatListContent($layout, $context['post'], $context['woody_components']);
                 // $return = $this->compilers->formatFullContentList($layout, $context['post'], $context['woody_components']);
-                break;
-            case 'weather':
-                // TODO: le case Weather doit être ajouté via le filtre woody_custom_layout depuis le plugin
-                $vars['account'] = $layout['weather_account'];
-                $vars['nb_days'] = $layout['weather_count_days'];
-                $the_weather = apply_filters('woody_weather', $vars);
-                $the_weather['bg_color'] = (!empty($layout['weather_bg_params']['background_color'])) ? $layout['weather_bg_params']['background_color'] : '';
-                $the_weather['bg_img'] = $layout['weather_bg_img'];
-                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $the_weather);
                 break;
             case 'gallery':
                 // Ajout des données Instagram + champs personnalisés dans le contexte des images
@@ -197,13 +188,11 @@ class WoodyTheme_WoodyProcess
             case 'link_social_shares':
                 if ($layout['default_parameters'] == false && !empty($layout['active_shares'])) {
                     $layout['active_shares'] = getActiveShares($layout['active_shares']);
-                }
-                else {
+                } else {
                     $layout['active_shares'] = getActiveShares();
                 }
                 $layout['block_titles'] = $this->tools->getBlockTitles($layout, '', 'shares_');
                 $layout['display'] = $this->tools->getDisplayOptions($layout);
-                console_log($layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
             case 'movie':
@@ -562,6 +551,11 @@ class WoodyTheme_WoodyProcess
                 // On ajoute les class personnalisées de section dans la liste des class d'affichage
                 if (!empty($display['classes']) && !empty($section['section_class'])) {
                     $display['classes'] .=  ' ' . $section['section_class'];
+                }
+
+                // On ajoute les animations dans les données envoyées aux sections
+                if (!empty($display['section_animations']) && !empty($section['section_animations'])) {
+                    $display['animations'] = $section['section_animations'];
                 }
 
                 // On récupère le titre du sommaire et on le formate pour être un id
