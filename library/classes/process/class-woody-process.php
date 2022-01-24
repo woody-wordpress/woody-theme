@@ -553,6 +553,11 @@ class WoodyTheme_WoodyProcess
                     $display['classes'] .=  ' ' . $section['section_class'];
                 }
 
+                // On ajoute les animations dans les données envoyées aux sections
+                if (!empty($display['section_animations']) && !empty($section['section_animations'])) {
+                    $display['animations'] = $section['section_animations'];
+                }
+
                 // On récupère le titre du sommaire et on le formate pour être un id
                 if (!empty($section['display_in_summary']) && (!empty($section['section_summary_title']))) {
                     $summary_id = sanitize_title($section['section_summary_title']);

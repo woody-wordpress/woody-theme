@@ -66,6 +66,7 @@ class WoodyTheme_ACF
         add_filter('acf/load_value/type=gallery', [$this, 'pllGalleryLoadField'], 10, 3);
 
         add_filter('acf/load_field/name=section_content', [$this, 'sectionContentLoadField']);
+        add_filter('acf/load_field/name=section_animations', [$this, 'sectionAnimationsForAdmin']);
 
         add_filter('acf/load_field/name=page_heading_tags', [$this, 'listAllPageTerms'], 10, 3);
 
@@ -422,6 +423,24 @@ class WoodyTheme_ACF
         if (!in_array('ski_resort', WOODY_OPTIONS)) {
             // On retire l'option bloc infolive si le plugin n'est pas activé (par sécurité)
             unset($field['layouts']['layout_infolive']);
+        }
+
+        return $field;
+    }
+
+    /**
+     * Affichage du champs d'animations de sections seulement si l'utilisateur a le rôle administrateur
+     */
+    public function sectionAnimationsForAdmin($field) {
+        $user = wp_get_current_user();
+        if (in_array('administrator', $user->roles)) {
+            $is_administrator = true;
+        } else {
+            $is_administrator = false;
+        }
+
+        if ($is_administrator) {
+            $field['wrapper']['class'] = '';
         }
 
         return $field;
