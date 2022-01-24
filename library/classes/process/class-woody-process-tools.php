@@ -443,7 +443,8 @@ class WoodyTheme_WoodyProcessTools
     public function getResponsiveOptions($wrapper) {
         if ($wrapper['mobile_behaviour']['mobile_grid'] == 'swiper') {
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
