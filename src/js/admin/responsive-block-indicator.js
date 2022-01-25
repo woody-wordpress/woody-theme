@@ -13,7 +13,7 @@ if (sections.length > 0) {
                 let newNode = document.createElement('div');
                 newNode.classList.add('responsive-block-indicator');
                 newNode.innerHTML = getResponsiveIndicatorHtml();
-                referenceElement.append(newNode);
+                referenceElement.before(newNode);
 
                 let radios = fieldGroupResponsive.querySelectorAll("input[type=radio]");
 
@@ -36,7 +36,8 @@ if (sections.length > 0) {
                         }
                     });
 
-                    layout.querySelector('.acf-fc-layout-order').classList.add('has-responsive-block-indicator');
+                    // On ajoute une classe pour appliquer un décalage au titre du bloc si le layout possède le champ 'display_block_responsive'
+                    layout.querySelector('.acf-fc-layout-handle').classList.add('has-responsive-block-indicator');
                 }
             }
         }
@@ -73,8 +74,8 @@ if (sections.length > 0) {
         // Lorsqu'un nouveau bloc est ajouté dans une section, on ajoute l'indicateur responsive sur ce dernier
         if (acf !== undefined && acf !== null) {
             acf.addAction('append', function ($el) {
-                if ($el.find('.acf-fc-layout-handle')[0]) {
-                    createResponsiveIndicator($el.find('.acf-fc-layout-handle')[0]);
+                if ($el.find('.acf-fc-layout-controls')[0]) {
+                    createResponsiveIndicator($el.find('.acf-fc-layout-controls')[0]);
                 }
             });
         }
@@ -84,10 +85,10 @@ if (sections.length > 0) {
 
         if (blocks.length > 0) {
             blocks.forEach(block => {
-                let acfLayoutHandle = block.querySelector('.acf-fc-layout-handle');
+                let acfLayoutControls = block.querySelector('.acf-fc-layout-controls');
 
-                if (acfLayoutHandle != null) {
-                    createResponsiveIndicator(acfLayoutHandle);
+                if (acfLayoutControls != null) {
+                    createResponsiveIndicator(acfLayoutControls);
                 }
             });
         }

@@ -1025,14 +1025,16 @@
 }
 
 // Index de bloc à l'intérieur du répéteur d'une section
-.acf-flexible-content .layout .acf-fc-layout-order.has-responsive-block-indicator {
-    margin-right: 52px !important;
+.acf-flexible-content .layout .acf-fc-layout-handle.has-responsive-block-indicator {
+    .acf-fc-layout-order {
+        margin-right: 52px !important;
+    }
 }
 
 // Indicateur responsive (à côté de l'index d'un bloc)
 .responsive-block-indicator {
     position: absolute;
-    top: 8px;
+    top: 9px;
     left: 30px;
 
     span {
