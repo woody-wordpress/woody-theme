@@ -1,7 +1,7 @@
-const posts = document.querySelectorAll('#post');
+const sections = document.querySelectorAll(".acf-field[data-name='section']");
 
-if (posts.length > 0) {
-    posts.forEach(() => {
+if (sections.length > 0) {
+    sections.forEach(() => {
 
         const createResponsiveIndicator = (referenceElement) => {
             let layout = referenceElement.closest('.layout:not(.acf-clone)');
