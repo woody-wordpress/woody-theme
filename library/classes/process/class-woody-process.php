@@ -550,7 +550,7 @@ class WoodyTheme_WoodyProcess
                         $layout['uniqid'] = 's' . $section_id . 'sc' . $layout_id;
                         $layout['visual_effects'] = (!empty($layout['visual_effects'])) ? $this->tools->formatVisualEffectData($layout['visual_effects']) : '';
                         $components['items'][] = $this->processWoodyLayouts($layout, $context);
-                        $components['resp_order'][] = $resp_order[$layout_id];
+                        $components['resp_order'][] = (!empty($resp_order[$layout_id])) ? $resp_order[$layout_id] : '';
 
                     }
 
