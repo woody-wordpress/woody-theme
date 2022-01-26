@@ -23,3 +23,4 @@ import './acf-wysiwyg';
 import './sections-blocks';
 import './edit-mode';
 import './pll';
+import './responsive-block-order';

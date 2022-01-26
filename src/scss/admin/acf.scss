@@ -1030,6 +1030,45 @@
     display: none !important;
 }
 
+
+// Style de l'interface de gestion d'ordre des blocs en responsive
+[data-name="section_mobile_order"] {
+    .acf-input {
+        display: none;
+    }
+}
+
+.block-responsive-order {
+    .block-list {
+        >li {
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+
+            .responsive-layout-block {
+                width: 50%;
+                background-color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-right: 30px;
+
+                .responsive-layout-index {
+                    width: 20px;
+                    height: 20px;
+                    text-align: center;
+                    background-color: darken(#F9F9F9, 5%);
+                    border-radius: 50%;
+                }
+            }
+
+            .responsive-layout-input {
+                width: 60px;
+            }
+        }
+    }
+}
+
 // Index de bloc à l'intérieur du répéteur d'une section
 .acf-flexible-content .layout .acf-fc-layout-handle.has-responsive-block-indicator {
     .acf-fc-layout-order {

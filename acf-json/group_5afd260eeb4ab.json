@@ -1244,6 +1244,58 @@
                 "endpoint": 1
             },
             {
+                "key": "field_61e67f8d81ca3",
+                "label": "Responsive",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_61e993f5fc890",
+                "label": "Gestion de l'ordre des blocs en responsive",
+                "name": "",
+                "type": "message",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "30",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "Gestion de l'ordre des blocs dans la section en responsive.\r\nLe changement d'ordre des blocs ne fonctionne pas pour les grilles de sections de type \"Grille split\".",
+                "new_lines": "wpautop",
+                "esc_html": 0
+            },
+            {
+                "key": "field_61e6807a81ca4",
+                "label": "",
+                "name": "section_mobile_order",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "30",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
                 "key": "field_5f19a1ef8e102",
                 "label": "Plus d'options",
                 "name": "",

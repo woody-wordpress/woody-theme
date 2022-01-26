@@ -548,6 +548,11 @@ class WoodyTheme_WoodyProcess
                 $components['no_padding'] = $section['scope_no_padding'];
                 $components['alignment'] = (!empty($section['section_alignment'])) ? $section['section_alignment'] : '';
 
+                //Calcul de l'ordre des blocs en responsive
+                if (!empty($section['section_mobile_order'])) {
+                    $resp_order = explode("-", $section['section_mobile_order']);
+                }
+
                 if (!empty($section['section_content'])) {
                     foreach ($section['section_content'] as $layout_id => $layout) {
                         // On définit un uniqid court à utiliser dans les filtres de listes en paramètre GET
@@ -555,6 +560,9 @@ class WoodyTheme_WoodyProcess
 
                         $layout['uniqid'] = 's' . $section_id . 'sc' . $layout_id;
                         $layout['visual_effects'] = (!empty($layout['visual_effects'])) ? $this->tools->formatVisualEffectData($layout['visual_effects']) : '';
+
+                        $components['resp_order'][] = (!empty($resp_order[$layout_id])) ? $resp_order[$layout_id] : '';
+
 
                         $device_display_block = $this->tools->getDeviceDisplayBlockResponsive($layout);
 
