@@ -199,8 +199,7 @@ class WoodyTheme_WoodyProcess
             case 'link_social_shares':
                 if ($layout['default_parameters'] == false && !empty($layout['active_shares'])) {
                     $layout['active_shares'] = getActiveShares($layout['active_shares']);
-                }
-                else {
+                } else {
                     $layout['active_shares'] = getActiveShares();
                 }
                 $layout['block_titles'] = $this->tools->getBlockTitles($layout, '', 'shares_');
@@ -254,17 +253,16 @@ class WoodyTheme_WoodyProcess
                 // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
                 if (!empty($grid['light_section_content']) && is_array($grid['light_section_content'])) {
                     foreach ($grid['light_section_content'] as $layout) {
-
                         $device_display_block = $this->tools->getDeviceDisplayBlockResponsive($layout);
 
                         switch ($device_display_block) {
                             case 'mobile':
-                                if(wp_is_mobile()) {
+                                if (wp_is_mobile()) {
                                     $grid_content['items'][] = $this->processWoodyLayouts($layout, $context);
                                 }
                                 break;
                             case 'desktop':
-                                if(!wp_is_mobile()) {
+                                if (!wp_is_mobile()) {
                                     $grid_content['items'][] = $this->processWoodyLayouts($layout, $context);
                                 }
                                 break;
@@ -571,12 +569,12 @@ class WoodyTheme_WoodyProcess
 
                         switch ($device_display_block) {
                             case 'mobile':
-                                if(wp_is_mobile()) {
+                                if (wp_is_mobile()) {
                                     $components['items'][] = $this->processWoodyLayouts($layout, $context);
                                 }
                                 break;
                             case 'desktop':
-                                if(!wp_is_mobile()) {
+                                if (!wp_is_mobile()) {
                                     $components['items'][] = $this->processWoodyLayouts($layout, $context);
                                 }
                                 break;
@@ -588,7 +586,9 @@ class WoodyTheme_WoodyProcess
                     }
 
                     // On retire les items retournés vides par processWoodyLayouts
-                    $components['items'] = array_filter($components['items']);
+                    if (!empty($components['items'])) {
+                        $components['items'] = array_filter($components['items']);
+                    };
 
                     if (!empty($section['section_woody_tpl']) && !empty($components['items'])) {
                         $the_layout = \Timber::compile($context['woody_components'][$section['section_woody_tpl']], $components);
