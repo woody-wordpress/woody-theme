@@ -1,7 +1,8 @@
 {
     "key": "group_5ee8db016740c",
     "title": "Mise en avant de profils",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5ee8db1378440",
             "label": "Contenu",
             "name": "",
@@ -44,11 +45,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5ee8dbb578446",
-                    "operator": "!=",
-                    "value": "1"
-                }]
+                [
+                    {
+                        "field": "field_5ee8dbb578446",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -60,34 +63,38 @@
             "max": 0,
             "layout": "table",
             "button_label": "",
-            "sub_fields": [{
-                "key": "field_5ee8dea2b7007",
-                "label": "Profil",
-                "name": "manual_profile",
-                "type": "post_object",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": [
-                    [{
-                        "field": "field_5ee8dbb578446",
-                        "operator": "!=",
-                        "value": "1"
-                    }]
-                ],
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "post_type": [
-                    "profile"
-                ],
-                "taxonomy": "",
-                "allow_null": 0,
-                "multiple": 0,
-                "return_format": "object",
-                "ui": 1
-            }]
+            "sub_fields": [
+                {
+                    "key": "field_5ee8dea2b7007",
+                    "label": "Profil",
+                    "name": "manual_profile",
+                    "type": "post_object",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5ee8dbb578446",
+                                "operator": "!=",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": [
+                        "profile"
+                    ],
+                    "taxonomy": "",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "return_format": "object",
+                    "ui": 1
+                }
+            ]
         },
         {
             "key": "field_5ee8dc2978447",
@@ -97,11 +104,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5ee8dbb578446",
-                    "operator": "==",
-                    "value": "1"
-                }]
+                [
+                    {
+                        "field": "field_5ee8dbb578446",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "50",
@@ -125,11 +134,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5ee8dbb578446",
-                    "operator": "==",
-                    "value": "1"
-                }]
+                [
+                    {
+                        "field": "field_5ee8dbb578446",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "50",
@@ -442,14 +453,70 @@
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 1
+        },
+        {
+            "key": "field_61d4109bf8156",
+            "label": "FIN",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 1
+        },
+        {
+            "key": "field_61d410c5f8158",
+            "label": "Responsive",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_61d410a8f8157",
+            "label": "Afficher le bloc",
+            "name": "",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_61d30e86c3313"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -457,7 +524,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "",
-    "modified": 1592384678
+    "modified": 1641287913
 }

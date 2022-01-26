@@ -1,16 +1,17 @@
 {
     "key": "group_5efca9579270c",
-    "title": "Comportements mobiles",
-    "fields": [{
+    "title": "Comportements mobiles MEA",
+    "fields": [
+        {
             "key": "field_5efca967d9625",
-            "label": "Comportement des blocs",
+            "label": "Comportement des mises en avant",
             "name": "mobile_grid",
             "type": "radio",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "70",
+                "width": "60",
                 "class": "",
                 "id": ""
             },
@@ -36,7 +37,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "30",
-                "class": "",
+                "class": "hidden",
                 "id": ""
             },
             "message": "",
@@ -47,11 +48,13 @@
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -59,7 +62,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
-    "description": "",
-    "modified": 1593617477
+    "active": true,
+    "description": "Comportements mobiles appliquées aux blocs de mise en avant",
+    "modified": 1641315126
 }

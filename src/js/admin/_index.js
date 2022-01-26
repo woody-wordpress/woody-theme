@@ -12,6 +12,7 @@ import './edit-post-sticky-actions';
 import './edit-post-unpublisher';
 import './global-admin';
 import './nav-menus-ui';
+import './responsive-block-indicator';
 import './tags-primary';
 import './woody-seo.js';
 import './woody-tpl.js';

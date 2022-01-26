@@ -1,7 +1,8 @@
 {
     "key": "group_5b5b2fbc3460d",
     "title": "Socialwall",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5b5b3223e946f",
             "label": "Contenu",
             "name": "",
@@ -49,11 +50,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b5b310be946e",
-                    "operator": "==",
-                    "value": "auto"
-                }]
+                [
+                    {
+                        "field": "field_5b5b310be946e",
+                        "operator": "==",
+                        "value": "auto"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -77,11 +80,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b5b310be946e",
-                    "operator": "==",
-                    "value": "manual"
-                }]
+                [
+                    {
+                        "field": "field_5b5b310be946e",
+                        "operator": "==",
+                        "value": "manual"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -262,14 +267,70 @@
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0
+        },
+        {
+            "key": "field_61d40149a07e6",
+            "label": "FIN",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 1
+        },
+        {
+            "key": "field_61d40178a07e8",
+            "label": "Responsive",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_61d4015ca07e7",
+            "label": "Afficher le bloc",
+            "name": "",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_61d30e86c3313"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -277,7 +338,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "Une galerie, automatique ou manuelle avec des choix de grilles très spécifiques",
-    "modified": 1567691107
+    "modified": 1641283995
 }
