@@ -383,7 +383,7 @@ class WoodyTheme_SiteMap
     public function sitemapShortcode()
     {
         $return = '';
-
+        header('xkey: ' . WP_SITE_KEY . '_sitemap', false);
         $lang = pll_current_language();
         $sitemap['posts'] = get_option('woody_sitemap_shortcode_' . $lang);
         if (!empty($sitemap['posts'])) {

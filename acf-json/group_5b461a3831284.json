@@ -1,7 +1,8 @@
 {
     "key": "group_5b461a3831284",
     "title": "Appel à l'action",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5b461a2b131b3",
             "label": "Contenu",
             "name": "",
@@ -30,8 +31,9 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {},
-            "default_value": [],
+            "choices": {
+            },
+            "default_value": false,
             "allow_null": 1,
             "multiple": 0,
             "ui": 1,
@@ -106,11 +108,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5bd17939c12a7",
-                    "operator": "==",
-                    "value": "1"
-                }]
+                [
+                    {
+                        "field": "field_5bd17939c12a7",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "40",
@@ -131,11 +135,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5bd17939c12a7",
-                    "operator": "==",
-                    "value": "1"
-                }]
+                [
+                    {
+                        "field": "field_5bd17939c12a7",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "30",
@@ -278,6 +284,7 @@
             "label": "Alignement vertical",
             "name": "vertical_alignement",
             "type": "button_group",
+            "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -309,11 +316,10 @@
                 "id": ""
             },
             "choices": {
-                "": "Aucune",
                 "padd-all-lg": "Grande",
                 "padd-all-xlg": "Très Grande"
             },
-            "allow_null": 0,
+            "allow_null": 1,
             "default_value": "",
             "layout": "horizontal",
             "return_format": "value"
@@ -338,7 +344,8 @@
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0,
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "ID": 0,
                     "key": "field_5b461b46131ba_field_5b043ca4a6fe3",
                     "label": "Couleur de fond",
@@ -531,14 +538,70 @@
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0
+        },
+        {
+            "key": "field_61d3fabbfc1ab",
+            "label": "FIN",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 1
+        },
+        {
+            "key": "field_61d3fa2dfc1a9",
+            "label": "Responsive",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_61d3fa72fc1aa",
+            "label": "Afficher le bloc",
+            "name": "",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_61d30e86c3313"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -546,7 +609,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "Un bloc d'appel à laction avec texte et lien\/fichier + couleur de fond possible",
-    "modified": 1591358433
+    "modified": 1641282285
 }

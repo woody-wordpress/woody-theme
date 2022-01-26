@@ -1,7 +1,8 @@
 {
     "key": "group_5b0430471a3d6",
     "title": "Vidéo",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5b0ec0eda1e20",
             "label": "Contenu",
             "name": "",
@@ -122,14 +123,53 @@
             "message": "Choisir une mise en page",
             "new_lines": "wpautop",
             "esc_html": 0
+        },
+        {
+            "key": "field_61d40332fd10b",
+            "label": "Responsive",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_61d40317fd10a",
+            "label": "Afficher le bloc",
+            "name": "",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_61d30e86c3313"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -137,7 +177,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "Elément de contenu (Vidéo embed)",
-    "modified": 1567691360
+    "modified": 1641284415
 }
