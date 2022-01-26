@@ -13,7 +13,7 @@ use WoodyLibrary\Library\WoodyLibrary\WoodyLibrary;
 //TODO: Executer les fonction back en is_admin uniquement + screen_id post
 class WoodyTheme_ACF
 {
-    const ACF = "acf-pro/acf.php";
+    public const ACF = "acf-pro/acf.php";
 
     public function __construct()
     {
@@ -59,8 +59,6 @@ class WoodyTheme_ACF
         add_filter('acf/location/rule_values/page_type_and_children', [$this, 'woodyAcfAddPageTypeChoices']);
         add_filter('acf/location/rule_match/page_type_and_children', [$this, 'woodyAcfPageTypeMatch'], 10, 3);
 
-        add_filter('acf/load_field/name=weather_account', [$this, 'weatherAccountAcfLoadField'], 10, 3);
-
         add_filter('acf/fields/post_object/result', [$this, 'postObjectAcfResults'], 10, 4);
         add_filter('acf/fields/post_object/query', [$this, 'getPostObjectDefaultTranslation'], 10, 3);
         add_filter('acf/fields/page_link/result', [$this, 'postObjectAcfResults'], 10, 4);
@@ -68,6 +66,7 @@ class WoodyTheme_ACF
         add_filter('acf/load_value/type=gallery', [$this, 'pllGalleryLoadField'], 10, 3);
 
         add_filter('acf/load_field/name=section_content', [$this, 'sectionContentLoadField']);
+        add_filter('acf/load_field/name=section_animations', [$this, 'sectionAnimationsForAdmin']);
 
         add_filter('acf/load_field/name=page_heading_tags', [$this, 'listAllPageTerms'], 10, 3);
 
@@ -403,12 +402,6 @@ class WoodyTheme_ACF
         return $field;
     }
 
-    public function weatherAccountAcfLoadField($field)
-    {
-        $field['choices'] = apply_filters('woody_weather_accounts', $field['choices']);
-        return $field;
-    }
-
     public function sectionContentLoadField($field)
     {
         if (!in_array('topics', WOODY_OPTIONS)) {
@@ -430,6 +423,24 @@ class WoodyTheme_ACF
         if (!in_array('ski_resort', WOODY_OPTIONS)) {
             // On retire l'option bloc infolive si le plugin n'est pas activé (par sécurité)
             unset($field['layouts']['layout_infolive']);
+        }
+
+        return $field;
+    }
+
+    /**
+     * Affichage du champs d'animations de sections seulement si l'utilisateur a le rôle administrateur
+     */
+    public function sectionAnimationsForAdmin($field) {
+        $user = wp_get_current_user();
+        if (in_array('administrator', $user->roles)) {
+            $is_administrator = true;
+        } else {
+            $is_administrator = false;
+        }
+
+        if ($is_administrator) {
+            $field['wrapper']['class'] = '';
         }
 
         return $field;
@@ -1004,8 +1015,8 @@ class WoodyTheme_ACF
 
     public function addSocialChoices($field)
     {
-        if(empty($field['choices'])){
-            $field['choices'] = array (
+        if (empty($field['choices'])) {
+            $field['choices'] = array(
                 "facebook" => "Facebook",
                 "twitter" => "Twitter",
                 "linkedin" => "LinkedIn",

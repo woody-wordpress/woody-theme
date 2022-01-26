@@ -240,6 +240,18 @@ class WoodyTheme_SiteMap
                     'operator' => 'NOT IN'
                 )
             ],
+            'meta_query' => array(
+                'relation' => 'OR',
+                array(
+                    'key' => 'woody_in_sitemap',
+                    'value' => true,
+                    'compare' => '='
+                ),
+                array(
+                    'key' => 'woody_in_sitemap',
+                    'compare' => 'NOT EXISTS'
+                )
+            ),
             'orderby' => 'menu_order',
             'order'   => 'DESC',
             'lang' => $lang,
@@ -371,7 +383,7 @@ class WoodyTheme_SiteMap
     public function sitemapShortcode()
     {
         $return = '';
-
+        header('xkey: ' . WP_SITE_KEY . '_sitemap', false);
         $lang = pll_current_language();
         $sitemap['posts'] = get_option('woody_sitemap_shortcode_' . $lang);
         if (!empty($sitemap['posts'])) {
@@ -409,6 +421,18 @@ class WoodyTheme_SiteMap
         $args = array(
             'post_status' => array(
                 'publish'
+            ),
+            'meta_query' => array(
+                'relation' => 'OR',
+                array(
+                    'key' => 'woody_in_sitemap',
+                    'value' => true,
+                    'compare' => '='
+                ),
+                array(
+                    'key' => 'woody_in_sitemap',
+                    'compare' => 'NOT EXISTS'
+                )
             ),
             'post_parent' => $post_parent_id,
             'posts_per_page' => -1,

@@ -1,7 +1,8 @@
 {
     "key": "group_5d5bbac79ab7e",
     "title": "Galerie de photos interactive",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5d5bbac7a11c2",
             "label": "Contenu",
             "name": "",
@@ -35,7 +36,8 @@
             "max": 0,
             "layout": "block",
             "button_label": "",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5d5bbaea1e7fe",
                     "label": "Texte",
                     "name": "interactive_gallery_text",
@@ -283,14 +285,70 @@
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0
+        },
+        {
+            "key": "field_61d3ff4233d0f",
+            "label": "FIN",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 1
+        },
+        {
+            "key": "field_61d3ff4f33d10",
+            "label": "Responsive",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_61d3ff5e33d11",
+            "label": "Afficher le bloc",
+            "name": "",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_61d30e86c3313"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -298,7 +356,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "Elément de contenu (Liste de photos)",
-    "modified": 1569486177
+    "modified": 1641283456
 }

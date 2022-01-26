@@ -1316,11 +1316,11 @@
                 "label": "Masquer la section",
                 "name": "hide_section",
                 "type": "true_false",
-                "instructions": "Permet de masquer temporairement une section (brouillon)",
+                "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "30",
+                    "width": "20",
                     "class": "",
                     "id": ""
                 },
@@ -1335,11 +1335,11 @@
                 "label": "Afficher dans le sommaire",
                 "name": "display_in_summary",
                 "type": "true_false",
-                "instructions": "Affiche une ancre vers cette section si un bloc sommaire a été ajouté à la page",
+                "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "40",
+                    "width": "20",
                     "class": "",
                     "id": ""
                 },
@@ -1364,7 +1364,61 @@
                     }]
                 ],
                 "wrapper": {
-                    "width": "15",
+                    "width": "20",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_61bb07bbb2a1b",
+                "label": "Latitude",
+                "name": "section_latitude",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_5ed7a10730085",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "20",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_61bb07f4b2a1c",
+                "label": "Longitude",
+                "name": "section_longitude",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_5ed7a10730085",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "20",
                     "class": "",
                     "id": ""
                 },
@@ -1383,8 +1437,27 @@
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "15",
+                    "width": "20",
                     "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5f509ba4c9e5b",
+                "label": "Animations",
+                "name": "section_animations",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "20",
+                    "class": "show-for-admin",
                     "id": ""
                 },
                 "default_value": "",
