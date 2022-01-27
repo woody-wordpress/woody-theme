@@ -361,6 +361,35 @@
                         "min": "",
                         "max": ""
                     },
+                    "layout_61f24f1501fb5": {
+                        "key": "layout_61f24f1501fb5",
+                        "name": "spacer_block",
+                        "label": "Espacement",
+                        "display": "block",
+                        "sub_fields": [{
+                            "key": "field_61f24f4101fb6",
+                            "label": "Espacement",
+                            "name": "espacement",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_61f24dc3c8810"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
+                        "min": "",
+                        "max": ""
+                    },
                     "layout_615dc5c7f7dd1": {
                         "key": "layout_615dc5c7f7dd2",
                         "name": "link_social_shares",
@@ -1002,13 +1031,11 @@
                 "instructions": "Choisissez la largeur maximale que prendra la section",
                 "required": 0,
                 "conditional_logic": [
-                    [
-                        {
-                            "field": "field_5afd2ce516ece",
-                            "operator": "!=",
-                            "value": "1"
-                        }
-                    ]
+                    [{
+                        "field": "field_5afd2ce516ece",
+                        "operator": "!=",
+                        "value": "1"
+                    }]
                 ],
                 "wrapper": {
                     "width": "50",
@@ -1382,13 +1409,11 @@
                 "instructions": "",
                 "required": 0,
                 "conditional_logic": [
-                    [
-                        {
-                            "field": "field_5ed7a10730085",
-                            "operator": "==",
-                            "value": "1"
-                        }
-                    ]
+                    [{
+                        "field": "field_5ed7a10730085",
+                        "operator": "==",
+                        "value": "1"
+                    }]
                 ],
                 "wrapper": {
                     "width": "20",
@@ -1409,13 +1434,11 @@
                 "instructions": "",
                 "required": 0,
                 "conditional_logic": [
-                    [
-                        {
-                            "field": "field_5ed7a10730085",
-                            "operator": "==",
-                            "value": "1"
-                        }
-                    ]
+                    [{
+                        "field": "field_5ed7a10730085",
+                        "operator": "==",
+                        "value": "1"
+                    }]
                 ],
                 "wrapper": {
                     "width": "20",
