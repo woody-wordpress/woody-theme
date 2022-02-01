@@ -123,19 +123,21 @@ class WoodyTheme_WoodyGetters
                 // La donnée de la vignette correspond à un post sélectionné
                 } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
                     $item = $item_wrapper['existing_content'];
-                    $status = $item['content_selection']->post_status;
+                    $post = get_post($item['content_selection']);
+                    $status = $post->post_status;
+
                     if ($status !== 'publish') {
                         continue;
                     }
-                    switch ($item['content_selection']->post_type) {
+                    switch ($post->post_type) {
                         case 'touristic_sheet':
-                            $post_preview = $this->getTouristicSheetPreview($wrapper, $item['content_selection']);
+                            $post_preview = $this->getTouristicSheetPreview($wrapper, $post);
                             break;
                         case 'woody_topic':
-                            $post_preview = $this->getTopicPreview($wrapper, $item['content_selection']);
+                            $post_preview = $this->getTopicPreview($wrapper, $post);
                             break;
                         default:
-                            $post_preview = $this->getPagePreview($wrapper, $item['content_selection'], $clickable);
+                            $post_preview = $this->getPagePreview($wrapper, $post, $clickable);
                             break;
                     }
                     $the_items['items'][$key] = (!empty($post_preview)) ? $post_preview : [];
