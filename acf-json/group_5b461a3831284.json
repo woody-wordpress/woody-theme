@@ -316,8 +316,8 @@
                 "id": ""
             },
             "choices": {
-                "padd-all-lg": "Grande",
-                "padd-all-xlg": "Très Grande"
+                "padd-lg": "Grande",
+                "padd-xlg": "Très Grande"
             },
             "allow_null": 1,
             "default_value": "",
