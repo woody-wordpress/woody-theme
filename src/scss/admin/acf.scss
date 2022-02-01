@@ -996,6 +996,12 @@
                         content: '\f168';
                     }
                 }
+
+                &[data-layout='spacer_block'] {
+                    &:before {
+                        content: '\f169';
+                    }
+                }
             }
         }
     }

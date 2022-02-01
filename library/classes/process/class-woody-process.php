@@ -179,6 +179,9 @@ class WoodyTheme_WoodyProcess
                 }
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
+            case 'spacer_block':
+                $return = '<!-- WOODY-COMPONENT-SPACER -->';
+            break;
             case 'story':
                 $layout['display'] = $this->tools->getDisplayOptions($layout['story_bg_params']);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
