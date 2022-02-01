@@ -1272,7 +1272,7 @@
                     "class": "",
                     "id": ""
                 },
-                "message": "Gestion de l'ordre des blocs dans la section en responsive.\r\nLe changement d'ordre des blocs ne fonctionne pas pour les grilles de sections de type \"Grille split\".",
+                "message": "Gestion de l'ordre des blocs dans la section en responsive.\r\n  L'ordre est défini par le poids du bloc. Plus le chiffre est élevé, plus le bloc sera bas.\r\nLe changement d'ordre des blocs ne fonctionne pas pour les grilles de sections de type \"Grille split\".",
                 "new_lines": "wpautop",
                 "esc_html": 0
             },
