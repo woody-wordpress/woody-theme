@@ -426,28 +426,14 @@ class WoodyTheme_WoodyProcessTools
      * @return   data - array|false
      *
      */
-    public function getTouristicSheetData($post, $current_lang)
+    public function getTouristicSheetData($post)
     {
         $post = get_post($post);
         if (!$post && $post->post_type !== 'touristic_sheet') {
             return false;
         }
 
-        $sheet = [];
-        $raw_item = get_field('touristic_raw_item', $post->ID);
-
-        if (!empty($raw_item)) {
-            $sheet = json_decode(base64_decode($raw_item), true);
-        } else {
-            $sheet_id = get_field('touristic_sheet_id', $post->ID);
-            $items = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $current_lang, [], 'json', 'item');
-
-            if (!empty($items['items']) && is_array($items['items'])) {
-                $sheet = current($items['items']);
-            }
-        }
-
-        return $sheet;
+        return woody_hawwwai_item($post->ID);
     }
 
     /**
@@ -463,7 +449,7 @@ class WoodyTheme_WoodyProcessTools
     {
         $device = '';
 
-        if(!empty($layout['display_block_responsive']) && $layout['display_block_responsive'] != 'all') {
+        if (!empty($layout['display_block_responsive']) && $layout['display_block_responsive'] != 'all') {
             $device = $layout['display_block_responsive'];
         }
 

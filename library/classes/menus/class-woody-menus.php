@@ -83,7 +83,8 @@ class WoodyTheme_Menus
                         }
                         if (!is_array($field)) {
                             if (is_object($field)) {
-                                $return[$group_key]['part_title'] = (!empty(get_field('in_menu_title', $field->ID))) ? get_field('in_menu_title', $field->ID) : $field->post_title;
+                                $in_menu_title = get_field('in_menu_title', $field->ID);
+                                $return[$group_key]['part_title'] = (!empty($in_menu_title)) ? $in_menu_title : $field->post_title;
                                 $return[$group_key]['part_title_link'] = apply_filters('woody_get_permalink', $field->ID);
                             } else {
                                 $return[$group_key]['part_title'] = $field;
@@ -145,8 +146,6 @@ class WoodyTheme_Menus
      */
     public static function getMenuLinks($posts = [], $post_parent = 0, $limit = -1, $root_level = 1)
     {
-        // console_log($posts, 'return');
-
         $return = [];
         // TODO: empty($post) is usefull if depth_1 links are based on WoodyPage pages's weight +> to remove
         if (empty($posts)) {
@@ -163,29 +162,27 @@ class WoodyTheme_Menus
 
         if (!empty($posts) && is_array($posts)) {
             foreach ($posts as $post_key => $post) {
-                if (is_int($post) && get_post_status($post) == 'publish') {
+                if (is_int($post)) {
                     $post = get_post($post);
-                }
-                if (!is_object($post)) {
-                    if (is_array($post) && !empty($post['url'])) {
-                        $postid = url_to_postid($post['url']);
-                        if (!empty($postid) && get_post_status($post) == 'publish') {
-                            $post = get_post($postid);
-                        } else {
-                            $return[$post_key] = [
-                                'the_id' => 'external',
-                                'the_url' => $post['url'],
-                                'the_target' => '_blank',
-                                'the_fields' => [
-                                    'title' => (!empty($post['title'])) ? $post['title'] : '',
-                                ]
-                            ];
-                        }
+                } elseif (is_array($post) && !empty($post['url'])) {
+                    $post_id = url_to_postid($post['url']);
+                    if (!empty($post_id)) {
+                        $post = get_post($post_id);
                     } else {
-                        continue;
+                        $return[$post_key] = [
+                            'the_id' => 'external',
+                            'the_url' => $post['url'],
+                            'the_target' => '_blank',
+                            'the_fields' => [
+                                'title' => (!empty($post['title'])) ? $post['title'] : '',
+                            ]
+                        ];
                     }
+                } else {
+                    continue;
                 }
-                if (is_object($post) && get_post_status($post) == 'publish') {
+
+                if (is_object($post) && $post->post_status == 'publish') {
                     $return[$post_key] = [
                         'the_id' => $post->ID,
                         'the_url' => apply_filters('woody_get_permalink', $post->ID),
@@ -195,26 +192,31 @@ class WoodyTheme_Menus
                     $page_type = get_the_terms($post->ID, 'page_type');
                     if (!empty($page_type) && $page_type[0]->slug == 'mirror_page') {
                         $mirror = get_field('mirror_page_reference', $post->ID);
-                        if (!empty(get_post($mirror))) {
-                            $post = get_post($mirror);
+                        $mirror_post = get_post($mirror);
+                        if (!empty($mirror_post) && $mirror_post->post_status == 'publish') {
+                            $post = $mirror_post;
                         }
                     }
 
                     // On retire le bordereau, la commune et l'id de fiche du titre des fiches SIT
-                    if ($post->post_type == 'touristic_sheet' && !empty(get_field('touristic_raw_item', $post->ID))) {
-                        $sheet = json_decode(base64_decode(get_field('touristic_raw_item', $post->ID)), true);
+                    if ($post->post_type == 'touristic_sheet') {
+                        $sheet = woody_hawwwai_item($post->ID);
                         $return[$post_key]['the_fields']['title'] = (!empty($sheet['title'])) ? $sheet['title'] : '';
                     } else {
-                        $return[$post_key]['the_fields']['title'] = (!empty(get_field('in_menu_title', $post->ID))) ? get_field('in_menu_title', $post->ID) : $post->post_title;
+                        $in_menu_title = get_field('in_menu_title', $post->ID);
+                        $return[$post_key]['the_fields']['title'] = (!empty($in_menu_title)) ? $in_menu_title : $post->post_title;
                     }
 
-                    $return[$post_key]['the_fields']['woody_icon'] = (!empty(get_field('in_menu_woody_icon', $post->ID))) ? get_field('in_menu_woody_icon', $post->ID) : '';
+                    $return[$post_key]['the_fields']['woody_icon'] = get_field('in_menu_woody_icon', $post->ID);
                     $return[$post_key]['the_fields']['icon_type'] = 'picto';
-                    $return[$post_key]['the_fields']['pretitle'] = (!empty(get_field('in_menu_pretitle', $post->ID))) ? get_field('in_menu_pretitle', $post->ID) : '';
-                    $return[$post_key]['the_fields']['subtitle'] = (!empty(get_field('in_menu_subtitle', $post->ID))) ? get_field('in_menu_subtitle', $post->ID) : '';
-                    $return[$post_key]['img'] = (!empty(get_field('in_menu_img', $post->ID))) ? get_field('in_menu_img', $post->ID) : get_field('field_5b0e5ddfd4b1b', $post->ID);
+                    $return[$post_key]['the_fields']['pretitle'] = get_field('in_menu_pretitle', $post->ID);
+                    $return[$post_key]['the_fields']['subtitle'] = get_field('in_menu_subtitle', $post->ID);
+
+                    $in_menu_img = get_field('in_menu_img', $post->ID);
+                    $return[$post_key]['img'] = (!empty($in_menu_img)) ? $in_menu_img : get_field('field_5b0e5ddfd4b1b', $post->ID);
                 }
             }
+
             return $return;
         }
     }
@@ -242,8 +244,6 @@ class WoodyTheme_Menus
             $the_submenu['alignment'] = (!empty($menu_display[$menu_link['the_id']]['alignment'])) ? $menu_display[$menu_link['the_id']]['alignment'] : 'align-top';
             $submenu['display'] = $menu_display[$menu_link['the_id']];
             $i = 0;
-
-
 
             foreach ($menu_link['submenu'] as $key => $part) {
                 if (!empty($part['links'])) {

@@ -572,7 +572,7 @@ class WoodyTheme_WoodyGetters
         }
 
         $data = [];
-        $sheet = $this->tools->getTouristicSheetData($item, $current_lang);
+        $sheet = $this->tools->getTouristicSheetData($item);
 
         $data = [
             'title' => (!empty($sheet['title'])) ? $sheet['title'] : '',
@@ -856,8 +856,7 @@ class WoodyTheme_WoodyGetters
     {
         $data = [];
         $post = $wrapper['sheet_selection'];
-        $current_lang = pll_current_language();
-        $sheet = $this->tools->getTouristicSheetData($post, $current_lang);
+        $sheet = $this->tools->getTouristicSheetData($post);
         $sheet_url = apply_filters('woody_get_permalink', $post->ID);
 
         $data['title'] = !empty($sheet['title']) ? $sheet['title'] : '';
