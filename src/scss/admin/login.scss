@@ -5,4 +5,10 @@ body.login {
         height: 110px;
         width: 100px;
     }
+
+    // Woody SSO automaticly redirect to ?locale=fr
+    // TODO: remove this lines if we want to allow user to connect to another locale
+    #language-switcher{
+        display: none;
+    }
 }
