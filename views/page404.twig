@@ -49,7 +49,6 @@
                 {% endif %}
 
             {% else %}
-            {{ _context|console_log() }}
                 <div class="button primary marg-top-md marg-bottom-md obf" data-obf="{{ home_url|base64Encode }}">{{ __("Aller à la page d'accueil", "woody-theme") }}</div>
                 <div class="button secondary marg-top-md marg-bottom-md obf {% if not content.search %} esSearch-button{% endif %}"{% if content.search %} data-obf="{{ content.search|base64Encode }}"{% endif %}>{{ __("Faire une recherche", "woody-theme") }}</div>
             {% endif %}
