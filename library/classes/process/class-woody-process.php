@@ -23,6 +23,43 @@ class WoodyTheme_WoodyProcess
     {
         $this->tools = new WoodyTheme_WoodyProcessTools();
         $this->compilers = new WoodyTheme_WoodyCompilers();
+        $this->registerHooks();
+    }
+
+    protected function registerHooks()
+    {
+        add_filter('posts_orderby', [$this, 'postsOrderby'], 10, 2);
+    }
+
+    public function postsOrderby($args, $wp_query)
+    {
+        // On surcharge l'ordre quand on veut faire du tri par géolocalisation
+        if (!empty($wp_query->query['orderby']) && strpos($wp_query->query['orderby'], 'geoloc') !== false) {
+            $post_id = explode('_', $wp_query->query['orderby']);
+            $post_id = (is_array($post_id)) ? end($post_id) : null;
+            if (!empty($post_id)) {
+                $lat = get_field('post_latitude', $post_id);
+                $lon = get_field('post_longitude', $post_id);
+
+                if (!empty($lat) && !empty($lon) && !empty($wp_query->meta_query->queries)) {
+                    foreach ($wp_query->meta_query->queries as $key => $queries) {
+                        if (!empty($queries['key']) && $queries['key'] == 'post_latitude') {
+                            $lat_postmeta = ($key == 0) ? 'wp_postmeta' : 'mt' . $key;
+                        } elseif (!empty($queries['key']) && $queries['key'] == 'post_longitude') {
+                            $lon_postmeta = ($key == 0) ? 'wp_postmeta' : 'mt' . $key;
+                        }
+                    }
+
+                    if (!empty($lat_postmeta) && !empty($lat_postmeta)) {
+                        $lat_operator = ($lat < 0) ? '+' : '-';
+                        $lon_operator = ($lon < 0) ? '+' : '-';
+                        return sprintf('(POW((%s.meta_value%s%s),2) + POW((%s.meta_value%s%s),2))', $lat_postmeta, $lat_operator, abs($lat), $lon_postmeta, $lon_operator, abs($lon));
+                    }
+                }
+            }
+        }
+
+        return $args;
     }
 
     /**
@@ -454,6 +491,23 @@ class WoodyTheme_WoodyProcess
             case 'menu_order':
                 $orderby = 'post_parent menu_order ID';
                 $order = 'ASC';
+                break;
+            case 'geoloc':
+                $orderby = 'geoloc_' . $the_post->ID;
+                $order = 'ASC';
+
+                $the_meta_query[] = [
+                    'key'        => 'post_latitude',
+                    'compare' => '!=',
+                    'value' => ''
+                ];
+
+                $the_meta_query[] = [
+                    'key'        => 'post_longitude',
+                    'compare' => '!=',
+                    'value' => ''
+                ];
+
                 break;
             default:
                 $orderby = 'rand';
