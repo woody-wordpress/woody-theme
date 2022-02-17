@@ -220,7 +220,8 @@
                 "random": "Aléatoire",
                 "created_desc": "Du plus récent au plus ancien",
                 "created_asc": "Du plus ancien au plus récent",
-                "menu_order": "Suivre l'ordre défini dans Woody Pages"
+                "menu_order": "Suivre l'ordre défini dans Woody Pages",
+                "geoloc": "Du plus proche au plus lointain (via Géolocalisation)"
             },
             "allow_null": 0,
             "other_choice": 0,
