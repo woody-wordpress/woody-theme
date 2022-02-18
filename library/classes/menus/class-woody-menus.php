@@ -160,6 +160,7 @@ class WoodyTheme_Menus
             $posts = get_posts($args);
         }
 
+
         if (!empty($posts) && is_array($posts)) {
             foreach ($posts as $post_key => $post) {
                 if (is_int($post)) {
@@ -175,14 +176,14 @@ class WoodyTheme_Menus
                             'the_target' => '_blank',
                             'the_fields' => [
                                 'title' => (!empty($post['title'])) ? $post['title'] : '',
-                            ]
-                        ];
+                                ]
+                            ];
                     }
-                } else {
-                    continue;
                 }
 
                 if (is_object($post) && $post->post_status == 'publish') {
+                    console_log($post, 'post');
+                    console_log($post, 'post object');
                     $return[$post_key] = [
                         'the_id' => $post->ID,
                         'the_url' => apply_filters('woody_get_permalink', $post->ID),
