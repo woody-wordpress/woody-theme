@@ -419,25 +419,6 @@ class WoodyTheme_WoodyProcessTools
 
     /**
      *
-     * Nom : getTouristicSheetData
-     * Auteur : Thomas Navarro
-     * Return : Retourne les données d'une fiche SIT
-     * @param    post - INT|WP_Post
-     * @return   data - array|false
-     *
-     */
-    public function getTouristicSheetData($post)
-    {
-        $post = get_post($post);
-        if (!$post && $post->post_type !== 'touristic_sheet') {
-            return false;
-        }
-
-        return woody_hawwwai_item($post->ID);
-    }
-
-    /**
-     *
      * Nom : getDeviceDisplayBlockResponsive
      * Auteur : Orphée Besson
      * Return : Retourne le device sélectionné pour l'affichage d'un bloc dans l'onglet "Responsive"
