@@ -656,6 +656,7 @@ class WoodyTheme_ACF
                 'grids_basic-grid_2_cols-tpl_05',
                 'grids_basic-grid_2_cols-tpl_03',
                 'grids_basic-grid_2_cols-tpl_04',
+                'grids_basic-grid_2_cols-tpl_06',
                 'grids_basic-grid_3_cols-tpl_01',
                 'grids_basic-grid_3_cols-tpl_02',
                 'grids_basic-grid_3_cols-tpl_03',
