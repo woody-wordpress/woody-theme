@@ -14,10 +14,6 @@ class WoodyTheme_Seo
     public function __construct()
     {
         $this->registerHooks();
-
-        if (defined('WP_CLI') && WP_CLI) {
-            $this->registerCommands();
-        }
     }
 
     protected function registerHooks()
