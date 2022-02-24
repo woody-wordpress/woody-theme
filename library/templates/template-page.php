@@ -143,6 +143,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
                     if (!empty($slide['landswpr_slide_media']) && $slide['landswpr_slide_media']['landswpr_slide_media_type'] == 'img' && !empty($slide['landswpr_slide_media']['landswpr_slide_img'])) {
                         $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img']['lazy'] = 'disabled';
+                        $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img']['attachment_more_data'] = $this->tools->getAttachmentMoreData($home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img']['ID']);
                     }
 
                     if (!empty($slide['landswpr_slide_add_social_movie']) && !empty($slide['landswpr_slide_social_movie'])) {
