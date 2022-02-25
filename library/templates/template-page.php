@@ -99,6 +99,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             'text' => __("La page que vous recherchez a peut-être été supprimée ou est temporairement indisponible.", 'woody-theme'),
             'suggestions' => $suggestions,
             'search' => (!in_array('research', WOODY_OPTIONS)) ? apply_filters('woody_get_permalink', get_field('es_search_page_url', 'options')) : false,
+            'custom_html' => apply_filters('woody_404_custom_html', null)
         ];
 
         $custom = apply_filters('woody_404_custom', $vars);
