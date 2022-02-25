@@ -1288,7 +1288,7 @@
             },
             {
                 "key": "field_61e993f5fc890",
-                "label": "Gestion de l'ordre des blocs en responsive",
+                "label": "Gestion de l'ordre des blocs de la section en responsive",
                 "name": "",
                 "type": "message",
                 "instructions": "",
@@ -1299,7 +1299,7 @@
                     "class": "",
                     "id": ""
                 },
-                "message": "Gestion de l'ordre des blocs dans la section en responsive.\r\n  L'ordre est défini par le poids du bloc. Plus le chiffre est élevé, plus le bloc sera bas.\r\nLe changement d'ordre des blocs ne fonctionne pas pour les grilles de sections de type \"Grille split\".",
+                "message": "L'ordre est défini par le poids du bloc. Plus le poids est proche de 0, plus l'ordre du bloc sera prioritaire dans la section.\r\nLe changement d'ordre des blocs ne fonctionne pas pour les grilles de sections de type \"Grille split\".",
                 "new_lines": "wpautop",
                 "esc_html": 0
             },
