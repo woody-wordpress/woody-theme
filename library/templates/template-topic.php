@@ -13,7 +13,7 @@ class WoodyTheme_Template_Topic extends WoodyTheme_TemplateAbstract
 {
     public function __construct()
     {
-        $this->process = new WoodyTheme_WoodyProcess;
+        $this->process = new WoodyTheme_WoodyProcess();
         $this->registerHooks();
         $this->setTwigTpl();
         $this->extendContext();

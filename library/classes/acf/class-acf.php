@@ -13,7 +13,7 @@ use WoodyLibrary\Library\WoodyLibrary\WoodyLibrary;
 //TODO: Executer les fonction back en is_admin uniquement + screen_id post
 class WoodyTheme_ACF
 {
-    const ACF = "acf-pro/acf.php";
+    public const ACF = "acf-pro/acf.php";
 
     public function __construct()
     {
@@ -59,8 +59,6 @@ class WoodyTheme_ACF
         add_filter('acf/location/rule_values/page_type_and_children', [$this, 'woodyAcfAddPageTypeChoices']);
         add_filter('acf/location/rule_match/page_type_and_children', [$this, 'woodyAcfPageTypeMatch'], 10, 3);
 
-        add_filter('acf/load_field/name=weather_account', [$this, 'weatherAccountAcfLoadField'], 10, 3);
-
         add_filter('acf/fields/post_object/result', [$this, 'postObjectAcfResults'], 10, 4);
         add_filter('acf/fields/post_object/query', [$this, 'getPostObjectDefaultTranslation'], 10, 3);
         add_filter('acf/fields/page_link/result', [$this, 'postObjectAcfResults'], 10, 4);
@@ -68,6 +66,7 @@ class WoodyTheme_ACF
         add_filter('acf/load_value/type=gallery', [$this, 'pllGalleryLoadField'], 10, 3);
 
         add_filter('acf/load_field/name=section_content', [$this, 'sectionContentLoadField']);
+        add_filter('acf/load_field/name=section_animations', [$this, 'sectionAnimationsForAdmin']);
 
         add_filter('acf/load_field/name=page_heading_tags', [$this, 'listAllPageTerms'], 10, 3);
 
@@ -403,12 +402,6 @@ class WoodyTheme_ACF
         return $field;
     }
 
-    public function weatherAccountAcfLoadField($field)
-    {
-        $field['choices'] = apply_filters('woody_weather_accounts', $field['choices']);
-        return $field;
-    }
-
     public function sectionContentLoadField($field)
     {
         if (!in_array('topics', WOODY_OPTIONS)) {
@@ -430,6 +423,24 @@ class WoodyTheme_ACF
         if (!in_array('ski_resort', WOODY_OPTIONS)) {
             // On retire l'option bloc infolive si le plugin n'est pas activé (par sécurité)
             unset($field['layouts']['layout_infolive']);
+        }
+
+        return $field;
+    }
+
+    /**
+     * Affichage du champs d'animations de sections seulement si l'utilisateur a le rôle administrateur
+     */
+    public function sectionAnimationsForAdmin($field) {
+        $user = wp_get_current_user();
+        if (in_array('administrator', $user->roles)) {
+            $is_administrator = true;
+        } else {
+            $is_administrator = false;
+        }
+
+        if ($is_administrator) {
+            $field['wrapper']['class'] = '';
         }
 
         return $field;
@@ -606,20 +617,36 @@ class WoodyTheme_ACF
                 'swipers-landing_swipers-tpl_02',
                 'swipers-landing_swipers-tpl_03',
                 'swipers-landing_swipers-tpl_04',
+                'swipers-landing_swipers-tpl_09',
+                'swipers-landing_swipers-tpl_06',
+                'swipers-landing_swipers-tpl_08',
                 'swipers-landing_swipers-tpl_05',
-                'swipers-landing_swipers-tpl_06'
+                'swipers-landing_swipers-tpl_07'
             ],
             'heroes' => [
                 'blocks-hero-tpl_01',
+                'blocks-hero-tpl_11',
+                'blocks-hero-tpl_10',
+                'blocks-hero-tpl_14',
+                'blocks-hero-tpl_08',
+                'blocks-hero-tpl_12',
                 'blocks-hero-tpl_02',
+                'blocks-hero-tpl_09',
                 'blocks-hero-tpl_03',
-                'blocks-hero-tpl_04'
+                'blocks-hero-tpl_07',
+                'blocks-hero-tpl_04',
+                'blocks-hero-tpl_13',
+                'blocks-hero-tpl_06',
+                'blocks-hero-tpl_05'
             ],
             'teasers' => [
                 'blocks-page_teaser-tpl_01',
                 'blocks-page_teaser-tpl_02',
                 'blocks-page_teaser-tpl_03',
-                'blocks-page_teaser-tpl_04'
+                'blocks-page_teaser-tpl_04',
+                'blocks-page_teaser-tpl_07',
+                'blocks-page_teaser-tpl_06',
+                'blocks-page_teaser-tpl_05'
             ],
             'sections' => [
                 'grids_basic-grid_1_cols-tpl_01',
@@ -629,6 +656,7 @@ class WoodyTheme_ACF
                 'grids_basic-grid_2_cols-tpl_05',
                 'grids_basic-grid_2_cols-tpl_03',
                 'grids_basic-grid_2_cols-tpl_04',
+                'grids_basic-grid_2_cols-tpl_06',
                 'grids_basic-grid_3_cols-tpl_01',
                 'grids_basic-grid_3_cols-tpl_02',
                 'grids_basic-grid_3_cols-tpl_03',
@@ -670,10 +698,10 @@ class WoodyTheme_ACF
                 'blocks-focus-tpl_118',
                 'blocks-focus-tpl_125',
                 'blocks-focus-tpl_126',
+                'blocks-focus-tpl_131',
                 'blocks-focus-tpl_128',
                 'blocks-focus-tpl_129',
                 'blocks-focus-tpl_130',
-                'blocks-focus-tpl_131',
                 'lists-list_grids-tpl_207',
                 'lists-list_grids-tpl_202',
                 'lists-list_grids-tpl_209',
@@ -705,11 +733,27 @@ class WoodyTheme_ACF
                 'blocks-focus-tpl_318',
                 'blocks-focus-tpl_312',
                 'blocks-focus-tpl_320',
+                'blocks-focus-tpl_330',
+                'blocks-focus-tpl_331',
+                'blocks-focus-tpl_332',
+                'blocks-focus-tpl_333',
+                'blocks-focus-tpl_337',
+                'blocks-focus-tpl_338',
+                'blocks-focus-tpl_339',
+                'blocks-focus-tpl_340',
+                'blocks-focus-tpl_341',
                 'blocks-focus-tpl_321',
                 'blocks-focus-tpl_322',
                 'blocks-focus-tpl_319',
                 'blocks-focus-tpl_323',
                 'blocks-focus-tpl_324',
+                'blocks-focus-tpl_342',
+                'blocks-focus-tpl_343',
+                'blocks-focus-tpl_344',
+                'blocks-focus-tpl_345',
+                'blocks-focus-tpl_346',
+                'blocks-focus-tpl_335',
+                'blocks-focus-tpl_336',
                 'lists-list_grids-tpl_307',
                 'lists-list_grids-tpl_302',
                 'lists-list_grids-tpl_309',
@@ -730,6 +774,8 @@ class WoodyTheme_ACF
                 'blocks-focus-tpl_410',
                 'blocks-focus-tpl_412',
                 'blocks-focus-tpl_413',
+                'blocks-focus-tpl_420',
+                'blocks-focus-tpl_421',
                 'lists-list_grids-tpl_401',
                 'lists-list_grids-tpl_402',
                 'blocks-focus-tpl_501',
@@ -760,6 +806,11 @@ class WoodyTheme_ACF
                 'blocks-focus-tpl_412',
                 'blocks-focus_map-tpl_01',
                 'blocks-focus_map-tpl_02',
+                'blocks-focus_map-tpl_06',
+                'blocks-focus_map-tpl_07',
+                'blocks-focus_map-tpl_04',
+                'blocks-focus_map-tpl_05',
+                'blocks-focus_map-tpl_03',
                 'lists-list_full-tpl_101',
                 'lists-list_full-tpl_102',
                 'lists-list_full-tpl_105',
@@ -1004,8 +1055,8 @@ class WoodyTheme_ACF
 
     public function addSocialChoices($field)
     {
-        if(empty($field['choices'])){
-            $field['choices'] = array (
+        if (empty($field['choices'])) {
+            $field['choices'] = array(
                 "facebook" => "Facebook",
                 "twitter" => "Twitter",
                 "linkedin" => "LinkedIn",

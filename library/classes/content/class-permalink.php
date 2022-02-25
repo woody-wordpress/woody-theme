@@ -14,7 +14,7 @@ class WoodyTheme_Permalink
     public function __construct()
     {
         $this->registerHooks();
-        $this->wpProvider = new Wp;
+        $this->wpProvider = new Wp();
     }
 
     protected function registerHooks()
@@ -107,6 +107,11 @@ class WoodyTheme_Permalink
                                 $params = [
                                     'url' => $url,
                                     'match_url' => $match_url,
+                                    'match_data' => [
+                                        'source' => [
+                                            'flag_query' => 'ignore'
+                                        ]
+                                    ],
                                     'group_id' => (int) get_option('woody_auto_redirect'),
                                     'action_type' => 'url',
                                     'action_code' => 301,

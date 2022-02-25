@@ -55,6 +55,7 @@ new WoodyTheme_CDN();
 // Content
 new WoodyTheme_Cron();
 new WoodyTheme_Images();
+new WoodyTheme_IsMobile();
 new WoodyTheme_Links();
 new WoodyTheme_Page();
 new WoodyTheme_Permalink();
@@ -62,7 +63,6 @@ new WoodyTheme_Post_Type();
 new WoodyTheme_Profiles();
 new WoodyTheme_Robots();
 new WoodyTheme_Seo();
-new WoodyTheme_SiteMap();
 new WoodyTheme_Taxonomy();
 new WoodyTheme_Tinymce();
 // new WoodyTheme_Unpublisher();

@@ -1,0 +1,41 @@
+{
+    "key": "group_61f24dc3c8810",
+    "title": "Espacement",
+    "fields": [
+        {
+            "key": "field_61f24e4afb3ba",
+            "label": "",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Ce bloc permet de créer un espace dans les grilles où les blocs sont côte à côte. Il n'affiche aucun contenu.",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1643270833
+}

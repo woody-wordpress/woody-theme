@@ -402,7 +402,7 @@ class WoodyTheme_Images
         // Lors de la suppression d'une langue on doit supprimer tous ses médias pour éviter qu'ils ne passent dans la langue par défaut
         // Pour cela on passe par une commande CLI et on ne veut surtout pas supprimer les traductions des médias supprimés
         // On ne supprime pas les traductions d'une image si la suppression se fait en CLI
-        if (WP_CLI !== true) {
+        if (defined('WP_CLI') && WP_CLI) {
             output_log('Attachment ' . $attachment_id . ' has been delted manualy');
             if (wp_attachment_is_image($attachment_id) && is_array($deleted_attachement) && !in_array($attachment_id, $deleted_attachement)) {
                 // Remove translations

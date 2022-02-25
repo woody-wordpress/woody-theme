@@ -220,7 +220,8 @@
                 "random": "Aléatoire",
                 "created_desc": "Du plus récent au plus ancien",
                 "created_asc": "Du plus ancien au plus récent",
-                "menu_order": "Suivre l'ordre défini dans Woody Pages"
+                "menu_order": "Suivre l'ordre défini dans Woody Pages",
+                "geoloc": "Du plus proche au plus lointain (via Géolocalisation)"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -259,9 +260,9 @@
                 "duration": "Durée <small>(séjour uniquement)<\/small>",
                 "length": "Distance <small>(séjour uniquement)<\/small>",
                 "linked_profil": "Profil lié",
-                "_themes": "Thématique principal(e)",
-                "_places": "Lieu principal(e)",
-                "_seasons": "Saison principal(e)",
+                "_themes": "Thématique principal(e)<\/small>",
+                "_places": "Lieu principal(e)<\/small>",
+                "_seasons": "Saison principal(e)<\/small>",
                 "created": "Date de publication"
             },
             "allow_custom": 0,
@@ -848,6 +849,27 @@
             "endpoint": 0
         },
         {
+            "key": "field_61d47970b3b34",
+            "label": "Afficher le bloc",
+            "name": "",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_61d30e86c3313"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
+        },
+        {
             "key": "field_5efcab155ea96",
             "label": "Comportement mobile",
             "name": "mobile_behaviour",
@@ -886,5 +908,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "Mise en avant de contenus sélectionnés en fonctions de critères",
-    "modified": 1627571913
+    "modified": 1641315307
 }

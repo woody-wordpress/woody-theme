@@ -1,7 +1,8 @@
 {
     "key": "group_5b043b2171504",
     "title": "Carte géographique manuelle",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5bc594372f95a",
             "label": "Contenu",
             "name": "",
@@ -44,11 +45,13 @@
             "instructions": "Entre \"5\" et \"20\" (5 = éloigné \/ 20 = proche)",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5bd82b3c23a27",
-                    "operator": "!=",
-                    "value": "1"
-                }]
+                [
+                    {
+                        "field": "field_5bd82b3c23a27",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "50",
@@ -104,7 +107,8 @@
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter un marqueur",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5bc5905487dff",
                     "label": "Titre pour l'administration",
                     "name": "bo_marker_title",
@@ -164,27 +168,29 @@
             "max": 0,
             "layout": "row",
             "button_label": "Ajouter une zone",
-            "sub_fields": [{
-                "key": "field_5d078da95ea3c",
-                "label": "Ajouter une zone",
-                "name": "add_route",
-                "type": "clone",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "clone": [
-                    "group_5d078a196a3e8"
-                ],
-                "display": "seamless",
-                "layout": "block",
-                "prefix_label": 0,
-                "prefix_name": 0
-            }]
+            "sub_fields": [
+                {
+                    "key": "field_5d078da95ea3c",
+                    "label": "Ajouter une zone",
+                    "name": "add_route",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_5d078a196a3e8"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                }
+            ]
         },
         {
             "key": "field_5bc594402f95b",
@@ -237,14 +243,53 @@
             "message": "Choisir une mise en page",
             "new_lines": "wpautop",
             "esc_html": 0
+        },
+        {
+            "key": "field_61d3fce05ede5",
+            "label": "Responsive",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_61d3fced5ede6",
+            "label": "Afficher le bloc",
+            "name": "",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_61d30e86c3313"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -252,7 +297,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "Affiche une carte avec des marqueurs multiples",
-    "modified": 1591358597
+    "modified": 1641282838
 }

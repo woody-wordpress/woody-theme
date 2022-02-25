@@ -14,8 +14,8 @@ class WoodyTheme_Shuffle
 {
     public function __construct()
     {
-        $this->compilers = new WoodyTheme_WoodyCompilers;
-        $this->tools = new WoodyTheme_WoodyProcessTools;
+        $this->compilers = new WoodyTheme_WoodyCompilers();
+        $this->tools = new WoodyTheme_WoodyProcessTools();
 
         $this->registerHooks();
     }

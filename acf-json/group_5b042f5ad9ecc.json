@@ -271,7 +271,7 @@
         {
             "key": "field_61adf409f0b0b",
             "label": "Limiter la hauteur du bloc (Bouton \"Afficher plus\")",
-            "name": "custom_text_show_more_button",
+            "name": "show_more_button",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -324,6 +324,60 @@
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0
+        },
+        {
+            "key": "field_61d2fa23b6284",
+            "label": "FIN",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 1
+        },
+        {
+            "key": "field_61d2dcbe8dbfc",
+            "label": "Responsive",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_61d30f7821f44",
+            "label": "Afficher le bloc",
+            "name": "",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_61d30e86c3313"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
         }
     ],
     "location": [
@@ -343,5 +397,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "Elément de contenu (Editeur wysiwyg \/ code html",
-    "modified": 1638790369
+    "modified": 1641222301
 }
