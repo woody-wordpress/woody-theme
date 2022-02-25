@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-$('#post').each(function() {
+$('#post').each(function () {
     const accepted_post = [
         'page',
         'woody_claims',
@@ -31,6 +31,14 @@ $('#post').each(function() {
                 'img_ratio'
             ],
             'submenus': [
+                'img_ratio',
+                'text_align'
+            ],
+            'heroes': [
+                'img_ratio',
+                'text_align'
+            ],
+            'landswipers': [
                 'img_ratio',
                 'text_align'
             ]
@@ -65,11 +73,16 @@ $('#post').each(function() {
             'img_ratio': {
                 'callback': '',
                 'label': '<label for="img_ratio">Format d\'image</label>',
-                'markup': '<select data-filter="img_ratio" name="img_ratio" id="img_ratio"><option value="all">Tous les formats</option><option value="8_1">Pano A</option><option value="4_1">Pano B</option><option value="3_1">Pano C</option><option value="2_1">Paysage A</option><option value="16_9">Paysage B</option><option value="4_3">Paysage C</option><option value="square">Carré</option><option value="3_4">Portrait A</option><option value="10_16">Portrait B</option><option value="a4">A4</option></select>',
+                'markup': '<select data-filter="img_ratio" name="img_ratio" id="img_ratio"><option value="all">Tous les formats</option><option value="8_1">Pano A</option><option value="4_1">Pano B</option><option value="3_1">Pano C</option><option value="2_1">Paysage A</option><option value="16_9">Paysage B</option><option value="4_3">Paysage C</option><option value="square">Carré</option><option value="3_4">Portrait A</option><option value="10_16">Portrait B</option><option value="a4">A4</option><option value="free">Libre</option></select>',
+            },
+            'custom_tpl': {
+                'callback': '',
+                'label': '<label for="custom_tpl">Propre au site</label>',
+                'markup': '<select data-filter="custom_tpl" name="custom_tpl" id="custom_tpl"><option value="all">Peu importe</option><option value="true">Oui</option><option value="false">Non</option></select>',
             }
         }
 
-        tplFilterAction = function($el) {
+        tplFilterAction = function ($el) {
             var filter = $el.data('filter');
             tplFiltersValues[$el.data('filter')] = $el.val();
 
@@ -86,7 +99,7 @@ $('#post').each(function() {
                 }
             }
 
-            $('#tpls_popin .tpl-choice-wrapper').each(function() {
+            $('#tpls_popin .tpl-choice-wrapper').each(function () {
                 var $this = $(this);
                 var displayOptions = $this.data('display-options');
 
@@ -95,7 +108,8 @@ $('#post').each(function() {
                 if (displayOptions.length == 0 && !$this.parent().hasClass('hidden')) {
                     $this.parent().addClass('filtered');
                 } else {
-                    $.each(displayOptions[0], function(key, value) {
+                    $.each(displayOptions[0], function (key, value) {
+
                         if (key == 'roadbook') {
                             return;
                         } else if (key == 'img_ratio') {
@@ -125,14 +139,14 @@ $('#post').each(function() {
             <ul></ul>
         </div>`);
 
-        $('#tpls_popin .close').on('click', function() {
+        $('#tpls_popin .close').on('click', function () {
             $('#tpls_popin').removeClass('opened');
             $('.tpl-choice-wrapper.selected').removeClass('selected');
             $('#tpls_popin li').removeClass('hidden').removeClass('filtered');
             $('.tpls_popin_filters').remove();
         });
 
-        $('#tpls_popin .save').on('click', function() {
+        $('#tpls_popin .save').on('click', function () {
             button.parent().find('[data-key="' + field_key + '"] input').val($('.tpl-choice-wrapper.selected').data('value'));
             $('#tpls_popin').removeClass('opened');
             $('.tpl-choice-wrapper.selected').removeClass('selected');
@@ -140,7 +154,7 @@ $('#post').each(function() {
             $('.tpls_popin_filters').remove();
         });
 
-        var getFilters = function(group) {
+        var getFilters = function (group) {
             var theFilters = 'none';
             // On récupère et on append les filtres en fonctjon du type de bloc actif
             if (group == 'group_5b0d1ed32a384' || group == 'group_5b2788b48d04c' || group == 'group_5d7908eadaa46' || group == 'group_5b33890e6fa0b' || group == 'field_5d16118093cc1') {
@@ -149,30 +163,34 @@ $('#post').each(function() {
                 theFilters = fieldKeysFilters.galleries;
             } else if (group == 'group_613887bd0a56c') {
                 theFilters = fieldKeysFilters.submenus;
+            } else if (group == 'group_5b052bbee40a4') {
+                theFilters = fieldKeysFilters.heroes;
+            } else if (group == 'group_5bb325e8b6b43') {
+                theFilters = fieldKeysFilters.landswipers;
             }
 
             if (theFilters != 'none' && $('.tpls_popin_filters').length == 0) {
 
                 $('.tpls_popin_actions').prepend('<div class="tpls_popin_filters"></div>');
-                theFilters.forEach(function(element) {
+                theFilters.forEach(function (element) {
                     $('.tpls_popin_filters').append('<span class="tpl-filter">' + tplFilters[element].label + tplFilters[element].markup + '</span>');
                 });
             }
 
             if ($('.tpl-filter select').length != 0) {
-                $('.tpl-filter select').each(function() {
+                $('.tpl-filter select').each(function () {
                     // On met à jour l'objet contenant les filtres
                     tplFiltersValues[$(this).data('filter')] = ($(this).val());
 
                     // On applique le tri
-                    $(this).on('change', function() {
+                    $(this).on('change', function () {
                         tplFilterAction($(this));
                     });
                 });
             }
         }
 
-        var openTplChoices = function(button) {
+        var openTplChoices = function (button) {
             field_key = button.data('key').substr(7);
 
             let tpl_value = button.parent().find('[data-key="' + field_key + '"] input').val();
@@ -186,7 +204,7 @@ $('#post').each(function() {
                 group = res != 'undefined' && res != null ? res[0] : '';
             }
 
-            $('#tpls_popin li .tpl-choice-wrapper').each(function() {
+            $('#tpls_popin li .tpl-choice-wrapper').each(function () {
                 // Roadbook templates
                 if ($('#post_type').val() == 'woody_rdbk_leaflets' && $(this).data('display-options').length != 0 && $(this).data('display-options')[0].roadbook == false) {
                     $(this).parent().addClass('hidden');
@@ -205,10 +223,10 @@ $('#post').each(function() {
         }
 
         // AJAX to get all woody_tpl only the first time
-        $(document).one('click', '.woody-tpl-button', function() {
+        $(document).one('click', '.woody-tpl-button', function () {
             button = $(this);
             $('#tpls_popin').addClass('ajax-load');
-            $('#tpls_popin').each(function() {
+            $('#tpls_popin').each(function () {
                 $.ajax({
                     type: 'GET',
                     dataType: 'json',
@@ -216,11 +234,11 @@ $('#post').each(function() {
                     data: {
                         action: 'woody_tpls',
                     },
-                    success: function(data) {
+                    success: function (data) {
                         $('#tpls_popin ul').append(data);
                         $('#tpls_popin').removeClass('ajax-load');
 
-                        $('#tpls_popin li').on('click', function() {
+                        $('#tpls_popin li').on('click', function () {
                             let tpl = $(this).find('.tpl-choice-wrapper');
                             $('.tpl-choice-wrapper.selected').removeClass('selected');
                             tpl.addClass('selected');
@@ -228,14 +246,14 @@ $('#post').each(function() {
 
                         openTplChoices(button);
                     },
-                    error: function() {
+                    error: function () {
                         $('#tpls_popin').removeClass('ajax-load');
                     },
                 });
             });
         });
 
-        $(document).on('click', '.woody-tpl-button', function() {
+        $(document).on('click', '.woody-tpl-button', function () {
             button = $(this);
             openTplChoices($(this));
         });
