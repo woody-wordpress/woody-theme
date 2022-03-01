@@ -221,6 +221,7 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['title'] = apply_filters('woody_seo_transform_pattern', $this->context['title']);
         $this->context['metas'] = $this->setMetadata();
         $this->context['custom_meta'] = get_field('woody_custom_meta', 'options');
+        $this->context['is_tourist_information_center'] = (get_field('woody_tourist_information_center', 'options')) ? true : false;
 
         // Woody options pages
         $this->context['woody_options_pages'] = $this->getWoodyOptionsPagesValues();
