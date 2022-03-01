@@ -686,6 +686,9 @@ class WoodyTheme_WoodyProcess
                     }
                 }
 
+                //On permet de personnaliser la donnée de la section
+                $the_section = apply_filters('woody_section_custom_data', $the_section, $section);
+
                 // On récupère l'option "Masquer les sections vides"
                 $hide_empty_sections = get_field('hide_empty_sections', 'option');
 
