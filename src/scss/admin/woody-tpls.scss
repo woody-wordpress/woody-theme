@@ -32,6 +32,7 @@
 
     // On applique du style aux descritpions et titres des templates dans les champs woody_tpl
     .tpl-choice-wrapper {
+        position: relative;
         transition: transform .3s;
         cursor: pointer;
 
@@ -48,6 +49,24 @@
             font-size: 15px;
             color: lighten(black, 30%);
             line-height: 1.2em;
+            transition: color .3s;
+        }
+
+        .tpl-new {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 11px;
+            font-weight: 600;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: white;
+            background-color: #F89350;
+            margin: 0;
+            padding: 9px;
+            will-change: tansform;
+            transition: transform .3s;
         }
 
         &.selected,
@@ -56,7 +75,9 @@
                 transform: scale(.95);
             }
 
-
+            .tpl-new {
+                transform: translate(-9px, 9px);
+            }
         }
 
         &:hover {
