@@ -74,12 +74,51 @@ class WoodyTheme_Commands
 
         wp_cache_delete('plugins', 'plugins');
         output_success('wp_cache_delete plugins');
+
+        $this->add_default_language();
     }
 
     public function cache_warm()
     {
         do_action('woody_cache_warm');
         output_success('woody_cache_warm');
+    }
+
+    private function add_default_language()
+    {
+        // Create language if none exists
+        if (function_exists('pll_languages_list')) {
+            $pll_languages_list = pll_languages_list();
+            if (empty($pll_languages_list)) {
+                $options = get_option('polylang');
+                $model = new \PLL_Admin_Model($options);
+                $return = $model->add_language([
+                    'name' => 'Français',
+                    'slug' => 'fr',
+                    'locale' => 'fr_FR',
+                    'term_group' => 0,
+                    'rtl' => 0,
+                    'flag' => 'fr'
+                ]);
+
+                if ($return == true) {
+                    output_success('Ajout de la langue fr_FR');
+
+                    if ($nolang = $model->get_objects_with_no_lang()) {
+                        if (! empty($nolang['posts'])) {
+                            $model->set_language_in_mass('post', $nolang['posts'], 'fr');
+                            output_success(sprintf('Attribution de la langue par défaut (%s posts)', count($nolang['posts'])));
+                        }
+                        if (! empty($nolang['terms'])) {
+                            $model->set_language_in_mass('term', $nolang['terms'], 'fr');
+                            output_success(sprintf('Attribution de la langue par défaut (%s terms)', count($nolang['terms'])));
+                        }
+                    }
+                } else {
+                    output_error($return);
+                }
+            }
+        }
     }
 
     public function maintenance($args, $assoc_args)
