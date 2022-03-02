@@ -293,14 +293,9 @@ class WoodyTheme_Plugins_Options
             $polylang['hide_default'] = 1;
         }
 
-        // HACK: Le site doit toujours avoir une default lang
-        // Remove this hack cause $polylang['default_lang'] is always empty
-        // if (empty($polylang['default_lang'])) {
-        //     $polylang['default_lang'] = 'fr';
-        // }
-
         $polylang = apply_filters('woody_polylang_update_options', $polylang);
         $this->updateOption('polylang', $polylang);
+        $this->updateOption('pll_dismissed_notices', ['wizard']);
 
         // Redirections
         global $wpdb;
