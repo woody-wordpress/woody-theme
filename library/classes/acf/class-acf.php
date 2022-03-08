@@ -326,7 +326,6 @@ class WoodyTheme_ACF
         return $field;
     }
 
-
     public function woodyAcfAddPageTypeLocationRule($choices)
     {
         $choices['Woody']['page_type_and_children'] = 'Type de publication (et ses enfants)';
@@ -937,6 +936,8 @@ class WoodyTheme_ACF
                     $display_options = json_encode($component['display']);
                 }
 
+                $is_new_tpl = (!empty($component['creation']) && isWoodyNewTpl($component['creation'])) ? "<span class='tpl-new'>Nouveau</span>" : '';
+
                 $groups = !empty($component['acf_groups']) ? implode(" ", $component['acf_groups']) : '';
                 if (!empty($groups)) {
                     if (strpos($component['thumbnails']['small'], 'custom_woody_tpls') === false) {
@@ -947,8 +948,8 @@ class WoodyTheme_ACF
 
                     $tplComponents[$key] = "<div class='tpl-choice-wrapper " . $groups . "' data-value='". $key ."' data-display-options='". $display_options ."'>
                     <img class='img-responsive lazyload' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' data-src='" . WP_HOME . "/app/dist/" . WP_SITE_KEY . $img_views_path . $component['thumbnails']['small'] . "?version=" . get_option("woody_theme_version") . "' alt='" . $key . "' width='150' height='150' />
-                    <h5 class='tpl-title'>" . $component["name"] . "</h5>
-                    </div>";
+                    <h5 class='tpl-title'>" . $component["name"] . "</h5>" . $is_new_tpl .
+                    "</div>";
                 }
             }
 
