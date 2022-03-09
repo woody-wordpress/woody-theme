@@ -34,7 +34,7 @@
     @return $char;
 }
 
-@mixin <%= cssClass%>($filename, $insert: before, $extend: true) {
+@mixin <%= cssClass%>($filename, $insert: before, $extend: false) {
     &:#{$insert} {
         @if $extend {
             @extend %<%= cssClass%>;

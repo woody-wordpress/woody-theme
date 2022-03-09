@@ -326,7 +326,6 @@ class WoodyTheme_ACF
         return $field;
     }
 
-
     public function woodyAcfAddPageTypeLocationRule($choices)
     {
         $choices['Woody']['page_type_and_children'] = 'Type de publication (et ses enfants)';
@@ -652,11 +651,11 @@ class WoodyTheme_ACF
                 'grids_basic-grid_1_cols-tpl_01',
                 'grids_basic-grid_1_cols-tpl_02',
                 'grids_basic-grid_2_cols-tpl_01',
+                'grids_basic-grid_2_cols-tpl_06',
                 'grids_basic-grid_2_cols-tpl_02',
                 'grids_basic-grid_2_cols-tpl_05',
                 'grids_basic-grid_2_cols-tpl_03',
                 'grids_basic-grid_2_cols-tpl_04',
-                'grids_basic-grid_2_cols-tpl_06',
                 'grids_basic-grid_3_cols-tpl_01',
                 'grids_basic-grid_3_cols-tpl_02',
                 'grids_basic-grid_3_cols-tpl_03',
@@ -822,15 +821,19 @@ class WoodyTheme_ACF
             'galleries' => [
                 'blocks-media_gallery-tpl_102',
                 'blocks-media_gallery-tpl_110',
+                'blocks-media_gallery-tpl_111',
                 'blocks-media_gallery-tpl_103',
                 'blocks-media_gallery-tpl_104',
                 'blocks-media_gallery-tpl_101',
+                'blocks-media_gallery-tpl_115',
                 'blocks-media_gallery-tpl_105',
+                'blocks-media_gallery-tpl_113',
                 'blocks-media_gallery-tpl_107',
                 'blocks-media_gallery-tpl_108',
                 'blocks-media_gallery-tpl_106',
+                'blocks-media_gallery-tpl_112',
                 'blocks-media_gallery-tpl_109',
-                'blocks-media_gallery-tpl_111',
+                'blocks-media_gallery-tpl_114',
                 'blocks-media_gallery-tpl_202',
                 'blocks-media_gallery-tpl_203',
                 'blocks-media_gallery-tpl_204',
@@ -861,6 +864,9 @@ class WoodyTheme_ACF
                 'blocks-media_gallery-tpl_209',
                 'blocks-media_gallery-tpl_210',
                 'blocks-media_gallery-tpl_211',
+                'blocks-media_gallery-tpl_212',
+                'blocks-media_gallery-tpl_213',
+                'blocks-media_gallery-tpl_214',
             ],
             'cta' => [
                 'blocks-call_to_action-tpl_01',
@@ -893,6 +899,11 @@ class WoodyTheme_ACF
                 'blocks-quote-tpl_02',
                 'blocks-quote-tpl_01',
                 'blocks-quote-tpl_03',
+            ],
+            'summary' => [
+                'blocks-summary-tpl_01',
+                'blocks-summary-tpl_03',
+                'blocks-summary-tpl_02',
             ]
         ];
 
@@ -925,6 +936,8 @@ class WoodyTheme_ACF
                     $display_options = json_encode($component['display']);
                 }
 
+                $is_new_tpl = (!empty($component['creation']) && isWoodyNewTpl($component['creation'])) ? "<span class='tpl-new'>Nouveau</span>" : '';
+
                 $groups = !empty($component['acf_groups']) ? implode(" ", $component['acf_groups']) : '';
                 if (!empty($groups)) {
                     if (strpos($component['thumbnails']['small'], 'custom_woody_tpls') === false) {
@@ -935,8 +948,8 @@ class WoodyTheme_ACF
 
                     $tplComponents[$key] = "<div class='tpl-choice-wrapper " . $groups . "' data-value='". $key ."' data-display-options='". $display_options ."'>
                     <img class='img-responsive lazyload' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' data-src='" . WP_HOME . "/app/dist/" . WP_SITE_KEY . $img_views_path . $component['thumbnails']['small'] . "?version=" . get_option("woody_theme_version") . "' alt='" . $key . "' width='150' height='150' />
-                    <h5 class='tpl-title'>" . $component["name"] . "</h5>
-                    </div>";
+                    <h5 class='tpl-title'>" . $component["name"] . "</h5>" . $is_new_tpl .
+                    "</div>";
                 }
             }
 
