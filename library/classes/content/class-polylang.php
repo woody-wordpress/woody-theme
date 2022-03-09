@@ -180,8 +180,6 @@ class WoodyTheme_Polylang
         __('Afficher tous les tarifs', 'woody-theme');
         __('Afficher plus', 'woody-theme');
         __('Afficher moins', 'woody-theme');
-        __('Date de naissance', 'woody-theme');
-        __('Nationalité', 'woody-theme');
 
         //Actions
         __('Ajouter', 'woody-theme');
