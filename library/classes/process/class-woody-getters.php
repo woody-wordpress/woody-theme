@@ -124,23 +124,20 @@ class WoodyTheme_WoodyGetters
                 } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
                     $item = $item_wrapper['existing_content'];
                     $post = get_post($item['content_selection']);
-                    $status = $post->post_status;
-
-                    if ($status !== 'publish') {
-                        continue;
+                    if (!empty($post) && $post->post_status == 'publish') {
+                        switch ($post->post_type) {
+                            case 'touristic_sheet':
+                                $post_preview = $this->getTouristicSheetPreview($wrapper, $post);
+                                break;
+                            case 'woody_topic':
+                                $post_preview = $this->getTopicPreview($wrapper, $post);
+                                break;
+                            default:
+                                $post_preview = $this->getPagePreview($wrapper, $post, $clickable);
+                                break;
+                        }
+                        $the_items['items'][$key] = (!empty($post_preview)) ? $post_preview : [];
                     }
-                    switch ($post->post_type) {
-                        case 'touristic_sheet':
-                            $post_preview = $this->getTouristicSheetPreview($wrapper, $post);
-                            break;
-                        case 'woody_topic':
-                            $post_preview = $this->getTopicPreview($wrapper, $post);
-                            break;
-                        default:
-                            $post_preview = $this->getPagePreview($wrapper, $post, $clickable);
-                            break;
-                    }
-                    $the_items['items'][$key] = (!empty($post_preview)) ? $post_preview : [];
                 }
             }
         }
@@ -358,12 +355,11 @@ class WoodyTheme_WoodyGetters
         if ($data['page_type'] == 'mirror_page') {
 
             // On retourne la page de référence de la page miroir
-            $mirror = get_field('mirror_page_reference', $post->ID);
+            $mirror_id = get_field('mirror_page_reference', $post->ID);
+            $mirror_post = get_post($mirror_id);
 
-            if (!empty(get_post($mirror))) {
-                $mirror_post = get_post($mirror);
-
-                // On remplace l'objet de post courant par l'objet de post de référence de la page miroir
+            // On remplace l'objet de post courant par l'objet de post de référence de la page miroir
+            if (!empty($mirror_post) && $mirror_post->post_status == 'publish') {
                 $post = $mirror_post;
             }
         }
