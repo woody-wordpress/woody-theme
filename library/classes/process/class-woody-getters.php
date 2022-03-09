@@ -988,6 +988,12 @@ class WoodyTheme_WoodyGetters
             if (in_array('description', $wrapper['profile_focus_display'])) {
                 $data['description'] = get_field('profile_description', $post->ID);
             }
+            if (in_array('birth', $wrapper['profile_focus_display'])) {
+                $data['birth'] = get_field('profile_contacts_profile_birth', $post->ID);
+            }
+            if (in_array('nationality', $wrapper['profile_focus_display'])) {
+                $data['nationality'] = get_field('profile_contacts_profile_nationality', $post->ID);
+            }
             if (in_array('address', $wrapper['profile_focus_display'])) {
                 $data['contacts']['address'] = get_field('profile_contacts_profile_address', $post->ID);
             }
