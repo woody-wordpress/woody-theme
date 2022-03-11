@@ -7,14 +7,14 @@
  * @since WoodyTheme 1.0.0
  */
 
- use Woody\Services\Providers\Wp;
+//use Woody\Services\Providers\Wp;
 
 class WoodyTheme_Permalink
 {
     public function __construct()
     {
         $this->registerHooks();
-        $this->wpProvider = new Wp();
+        //$this->wpProvider = new Wp(); // Don't use because wp-plugin isn't opensource yet !
     }
 
     protected function registerHooks()
@@ -150,18 +150,18 @@ class WoodyTheme_Permalink
     // --------------------------------
     public function savePost($post_id, $post, $update)
     {
-        wp_cache_delete(sprintf('woody_get_permalink_%s', $post_id), 'woody');
+        $this->deletePost($post_id);
         $this->cacheDeleteChildrenPosts($post_id);
     }
 
     public function cacheDeleteChildrenPosts($post_id)
     {
-        $has_children = $this->wpProvider->hasChildren($post_id);
+        $has_children = $this->hasChildren($post_id);
         if ($has_children) {
-            $children_pages = $this->wpProvider->getPages($post_id);
+            $children_pages = $this->getPages($post_id);
             if (!empty($children_pages)) {
                 foreach ($children_pages as $children_page) {
-                    wp_cache_delete(sprintf('woody_get_permalink_%s', $children_page->ID), 'woody');
+                    $this->deletePost($children_page->ID);
                     // Recursively
                     $this->cacheDeleteChildrenPosts($children_page->ID, $pre_post_update);
                 }
@@ -172,5 +172,37 @@ class WoodyTheme_Permalink
     public function deletePost($post_id)
     {
         wp_cache_delete(sprintf('woody_get_permalink_%s', $post_id), 'woody');
+    }
+
+    // TODO: use wpProvider
+    private function getPages($parent_id = 0, $lang = null)
+    {
+        global $wpdb;
+        $pages = [];
+
+        if (function_exists('pll_current_language') && !is_null($lang)) {
+            // If Polylang Pro installed + pages de 1er niveau
+            $term_taxonomy_lang_id = $this->getLangTermId($lang);
+
+            if (!empty($term_taxonomy_lang_id)) {
+                $sql = "SELECT * FROM wp_posts p JOIN wp_term_relationships t ON p.ID = t.object_id WHERE (p.post_type = 'page' AND p.post_status IN ('publish', 'private', 'draft')) AND p.post_parent = %d AND t.term_taxonomy_id = %s ORDER BY p.menu_order ASC";
+                $pages = $wpdb->get_results($wpdb->prepare($sql, [$parent_id, $term_taxonomy_lang_id]));
+            }
+        } else {
+            // if no WPML
+            $sql = "SELECT * FROM wp_posts p WHERE (post_type = 'page' AND post_status IN ('publish', 'private', 'draft')) AND post_parent = %d ORDER BY menu_order ASC";
+            $pages = $wpdb->get_results($wpdb->prepare($sql, [$parent_id]));
+        }
+
+        return $pages;
+    }
+
+    // TODO: use wpProvider
+    public function hasChildren($id)
+    {
+        global $wpdb;
+        $sql = "SELECT count(*) FROM wp_posts WHERE (post_type = 'page' AND post_status IN ('publish', 'private', 'draft')) AND post_parent = %d";
+        $count = $wpdb->get_var($wpdb->prepare($sql, [$id]));
+        return ($count != 0) ? true : false;
     }
 }

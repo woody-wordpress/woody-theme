@@ -8,8 +8,6 @@
  * @since WoodyTheme 1.0.0
  */
 
-use WoodyLibrary\Library\WoodyLibrary\WoodyLibrary;
-
 //TODO: Executer les fonction back en is_admin uniquement + screen_id post
 class WoodyTheme_ACF
 {
@@ -926,8 +924,6 @@ class WoodyTheme_ACF
         $return = wp_cache_get('woody_tpls_components', 'woody');
         if (empty($return)) {
             $tplComponents = [];
-            //$woodyLibrary = new WoodyLibrary();
-            //$woodyComponents = $woodyLibrary->getComponents();
             $woodyComponents = getWoodyComponents();
 
             foreach ($woodyComponents as $key => $component) {
