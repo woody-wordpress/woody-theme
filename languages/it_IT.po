@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.6.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
 "POT-Creation-Date: 2022-02-28T17:46:45+01:00\n"
-"PO-Revision-Date: 2022-02-28 17:52+0100\n"
+"PO-Revision-Date: 2022-03-14 10:22+0100\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 2.4.1\n"
 "X-Domain: woody-theme\n"
 
 #. Theme Name of the theme
@@ -625,7 +625,7 @@ msgstr "Impianti di risalita"
 
 #: library/classes/content/class-polylang.php:230
 msgid "Pistes"
-msgstr "Tracce"
+msgstr "Piste"
 
 #: library/classes/content/class-polylang.php:231
 msgid "Domaine Alpin"
@@ -669,17 +669,15 @@ msgstr "Modulo neve non configurato!"
 
 #: library/classes/content/class-polylang.php:241
 msgid "Enneigement"
-msgstr "Inverno"
+msgstr "Innevamento"
 
 #: library/classes/content/class-polylang.php:242
-#, fuzzy
-#| msgid "Haute mer"
 msgid "Hauteur"
-msgstr "Alto mare"
+msgstr "Altezza"
 
 #: library/classes/content/class-polylang.php:243
 msgid "Pistes ouvertes"
-msgstr "Binari aperti"
+msgstr "Piste aperte"
 
 #: library/classes/content/class-polylang.php:244
 msgid "Risque d'avalanche"
