@@ -974,6 +974,8 @@ class WoodyTheme_WoodyGetters
 
         $data = [
             'title' => $post->post_title,
+            'firstname' => get_field('profile_firstname', $post->ID),
+            'lastname' => get_field('profile_lastname', $post->ID),
             'img' => get_field('profile_picture', $post->ID)
         ];
 

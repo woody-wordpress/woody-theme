@@ -1,7 +1,46 @@
 {
     "key": "group_5ed0c08a3ee10",
     "title": "Informations profil",
-    "fields": [{
+    "fields": [
+        {
+            "key": "field_622fb4351b1a9",
+            "label": "Prénom",
+            "name": "profile_firstname",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_622fb4401b1aa",
+            "label": "Nom",
+            "name": "profile_lastname",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_5ed0c0c49c0ac",
             "label": "Complément",
             "name": "profile_complement",
@@ -77,7 +116,8 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_62288c19f21a0",
                     "label": "Date de naissance",
                     "name": "profile_birth",
@@ -405,7 +445,8 @@
                         "id": ""
                     },
                     "layout": "table",
-                    "sub_fields": [{
+                    "sub_fields": [
+                        {
                             "key": "field_5ee8df5a9cec3",
                             "label": "LinkedIn",
                             "name": "profile_linkedin",
@@ -459,7 +500,8 @@
             "max": 0,
             "layout": "row",
             "button_label": "Ajouter une expression",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5ed0c2119c0b2",
                     "label": "Catégorie",
                     "name": "profile_expression_category",
@@ -504,11 +546,13 @@
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "profile"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "profile"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "acf_after_title",
@@ -519,5 +563,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1646825326
+    "modified": 1647293635
 }
