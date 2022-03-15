@@ -15,7 +15,7 @@ class WoodyTheme_Cleanup_OptimizeBDD
 
     protected function registerHooks()
     {
-        add_action('init', [$this, 'scheduleOptimizeBDD']);
+        add_action('woody_theme_update', [$this, 'scheduleOptimizeBDD']);
         add_action('woody_cleanup_optimize_bdd', [$this, 'cleanupOptimizeBDD']);
         \WP_CLI::add_command('woody:optimize_bdd', [$this, 'cleanupOptimizeBDD']);
     }
@@ -42,6 +42,7 @@ class WoodyTheme_Cleanup_OptimizeBDD
     {
         if (!wp_next_scheduled('woody_cleanup_optimize_bdd')) {
             wp_schedule_event(time(), 'weekly', 'woody_cleanup_optimize_bdd');
+            output_success(sprintf('+ Schedule %s', 'woody_cleanup_optimize_bdd'));
         }
     }
 }

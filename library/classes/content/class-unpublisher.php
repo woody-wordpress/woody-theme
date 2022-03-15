@@ -20,8 +20,8 @@ class WoodyTheme_Unpublisher
         add_action('add_meta_boxes', array($this, 'registerMetaBox'));
         add_action('save_post', array($this, 'saveUnpublisherParams'));
 
-        add_action('init', [$this, 'woody_unpublish_posts']);
-        add_action('woody_unpublish_posts', [$this, 'getPostUnpublishedValue']);
+        add_action('woody_theme_update', [$this, 'scheduleUnpublishPosts']);
+        add_action('woody_unpublish_posts', [$this, 'woodyUnpublishPosts']);
     }
 
     public function registerMetaBox()
@@ -62,14 +62,15 @@ class WoodyTheme_Unpublisher
         update_post_meta($post_id, '_wUnpublisher_date', $_POST['wUnpublisher_date']);
     }
 
-    public function woody_unpublish_posts()
+    public function scheduleUnpublishPosts()
     {
         if (!wp_next_scheduled('woody_unpublish_posts')) {
             wp_schedule_event(time(), 'hourly', 'woody_unpublish_posts');
+            output_success(sprintf('+ Schedule %s', 'woody_unpublish_posts'));
         }
     }
 
-    public function getPostUnpublishedValue()
+    public function woodyUnpublishPosts()
     {
         global $wpdb;
 
