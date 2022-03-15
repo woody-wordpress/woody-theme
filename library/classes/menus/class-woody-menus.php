@@ -166,7 +166,7 @@ class WoodyTheme_Menus
                     $post = get_post($post);
                 } elseif (is_array($post) && !empty($post['url'])) {
                     $post_id = url_to_postid($post['url']);
-                    if (!empty($post_id)) {
+                    if (empty($post['title']) && !empty($post_id)) {
                         $post = get_post($post_id);
                     } else {
                         $return[$post_key] = [
