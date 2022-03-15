@@ -15,6 +15,7 @@ import './nav-menus-ui';
 import './responsive-block-indicator';
 import './tags-primary';
 import './woody-seo.js';
+import './woody-modal-layouts';
 import './woody-tpl.js';
 import './ajax-load-options';
 import './ajax-load-layouts';
