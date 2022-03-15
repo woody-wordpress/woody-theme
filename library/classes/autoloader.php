@@ -38,7 +38,7 @@ new WoodyTheme_ACF_ShortLink();
 new WoodyTheme_Cleanup_Admin();
 new WoodyTheme_Cleanup_Front();
 new WoodyTheme_Cleanup_Minify();
-// new WoodyTheme_Cleanup_OptionsTable(); A supprimer après le merge de la feature RemovingYoast
+new WoodyTheme_Cleanup_OptimizeBDD();
 
 // Dashboard
 new WoodyTheme_Dashboard();

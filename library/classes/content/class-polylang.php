@@ -131,6 +131,7 @@ class WoodyTheme_Polylang
         __("résultats", 'woody-theme');
         __('Aucun résultat', 'woody-theme');
         __("Voir la carte", 'woody-theme');
+        __("Afficher la carte", 'woody-theme');
         __("Partager sur Facebook", 'woody-theme');
         __("Partager sur Twitter", 'woody-theme');
         __("Partager sur LinkedIn", 'woody-theme');
@@ -180,6 +181,8 @@ class WoodyTheme_Polylang
         __('Afficher tous les tarifs', 'woody-theme');
         __('Afficher plus', 'woody-theme');
         __('Afficher moins', 'woody-theme');
+        __('Date de naissance', 'woody-theme');
+        __('Nationalité', 'woody-theme');
 
         //Actions
         __('Ajouter', 'woody-theme');

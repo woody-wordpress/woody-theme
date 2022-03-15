@@ -451,9 +451,11 @@ class WoodyTheme_Enqueue_Assets
             'window.DrupalAngularConfig.mapProviderKeys' => (!empty($this->siteConfig['mapProviderKeys'])) ? json_encode($this->siteConfig['mapProviderKeys']) : '{}',
         ];
 
-        $map_keys = $this->siteConfig['mapProviderKeys'];
-        if (isset($map_keys['otmKey']) || isset($map_keys['ignKey'])) {
-            $globalScriptString['window.useLeafletLibrary'] = true;
+        if(!empty($this->siteConfig['mapProviderKeys'])) {
+            $map_keys = $this->siteConfig['mapProviderKeys'];
+            if (isset($map_keys['otmKey']) || isset($map_keys['ignKey'])) {
+                $globalScriptString['window.useLeafletLibrary'] = true;
+            }
         }
 
         // Ancienne méthode pour appeler les fonts en asynchrone voir ligne 227

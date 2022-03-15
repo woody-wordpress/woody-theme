@@ -206,6 +206,34 @@ function getWoodyComponents()
     return $woodyComponents;
 }
 
+/**
+ *
+ * Nom : isWoodyNewTpl
+ * Auteur : Orphée Besson
+ * Return : Booleen
+ * @param    string - La date à tester sous la forme 'YYYY-MM-DD'
+ * @param    string - La timezone
+ * @return   boolean
+ *
+ */
+function isWoodyNewTpl($date, $timezone = 'Europe/Paris')
+{
+    \Moment\Moment::setLocale('fr_FR');
+    $m = new \Moment\Moment($date);
+    $m->setTimezone($timezone);
+
+    $difference = $m->fromNow()->getMonths();
+    $direction = $m->fromNow()->getDirection();
+
+    // Si la différence est inférieure ou égale à 1 mois ou la date de création se trouve dans le futur par rapport à la date courante, le template est considéré comme nouveau
+    if($difference <= 1 || $direction == 'future') {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
 function getPageTaxonomies()
 {
     $taxonomies = wp_cache_get('woody_website_pages_taxonomies', 'woody');
