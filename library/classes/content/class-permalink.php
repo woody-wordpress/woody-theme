@@ -24,6 +24,11 @@ class WoodyTheme_Permalink
         add_action('pll_save_post', [$this, 'savePost'], 10, 3);
         add_action('delete_post', [$this, 'deletePost'], 10);
         add_action('template_redirect', [$this, 'redirect404'], 999);
+
+        // WP_SITE_KEY=site_key wp woody:flush_permalinks
+        \WP_CLI::add_command('woody:flush_permalinks', [$this, 'flush_permalinks']);
+
+        require_once(__DIR__ . '/../../helpers/helpers.php');
     }
 
     public function woodyGetPermalink($post_id = null)
@@ -52,7 +57,7 @@ class WoodyTheme_Permalink
             $permalink = null;
             $post_id = url_to_postid($wp->request);
             if (!empty($post_id)) {
-                $permalink = apply_filters('woody_get_permalink', $post_id);
+                $permalink = woody_get_permalink($post_id);
             } else {
                 $segments = explode('/', $wp->request);
                 $last_segment = end($segments);
@@ -90,7 +95,7 @@ class WoodyTheme_Permalink
 
                 if (!empty($query_result->posts)) {
                     $post = current($query_result->posts);
-                    $permalink = apply_filters('woody_get_permalink', $post->ID);
+                    $permalink = woody_get_permalink($post->ID);
 
                     if (!empty($permalink)) {
                         $parse_permalink = parse_url($permalink, PHP_URL_PATH);
@@ -139,14 +144,14 @@ class WoodyTheme_Permalink
             global $post, $page;
             $num_pages = substr_count($post->post_content, '<!--nextpage-->') + 1;
             if ($page > $num_pages) {
-                wp_redirect(apply_filters('woody_get_permalink', $post->ID), 301, 'Woody NexPage');
+                wp_redirect(woody_get_permalink($post->ID), 301, 'Woody NexPage');
                 exit;
             }
         }
     }
 
     // --------------------------------
-    // Clean Cache
+    // Save Post
     // --------------------------------
     public function savePost($post_id, $post, $update)
     {
@@ -204,5 +209,54 @@ class WoodyTheme_Permalink
         $sql = "SELECT count(*) FROM wp_posts WHERE (post_type = 'page' AND post_status IN ('publish', 'private', 'draft')) AND post_parent = %d";
         $count = $wpdb->get_var($wpdb->prepare($sql, [$id]));
         return ($count != 0) ? true : false;
+    }
+
+    // --------------------------------
+    // Clean Cache
+    // --------------------------------
+    public function flush_permalinks()
+    {
+        output_h1('Flush and Warm Permalinks');
+
+        // Si le site est alias, on fusionne toutes les pages dans le même sitemap
+        $languages = pll_languages_list();
+
+        // Get Posts
+        $index_lang = 1;
+        $nb_lang = is_countable($languages) ? count($languages) : 0;
+        foreach ($languages as $lang) {
+            $query_max = $this->getPosts($lang, 1, 1);
+            if (!empty($query_max) && !empty($query_max->found_posts)) {
+                $max_num_pages = ceil($query_max->found_posts / 10);
+                for ($page = 1; $page <= $max_num_pages; ++$page) {
+                    output_h2(sprintf('UPDATE %s/%s (lang %s - %s/%s)', $page, $max_num_pages, strtoupper($lang), $index_lang, $nb_lang));
+                    $query = $this->getPosts($lang, $page, 10);
+                    if (!empty($query->posts)) {
+                        foreach ($query->posts as $post_id) {
+                            $this->deletePost($post_id);
+                            $permalink = woody_get_permalink($post_id);
+                            output_success(sprintf('%s [%s]', $permalink, $post_id));
+                        }
+                    }
+                }
+            }
+
+            ++$index_lang;
+        }
+    }
+
+    private function getPosts($lang = PLL_DEFAULT_LANG, $paged = 1, $posts_per_page = 10)
+    {
+        $args = [
+            'lang' => $lang,
+            'posts_per_page' => $posts_per_page,
+            'paged' => $paged,
+            'fields' => 'ids'
+        ];
+
+        $query = new \WP_Query($args);
+        if ($query->have_posts()) {
+            return $query;
+        }
     }
 }

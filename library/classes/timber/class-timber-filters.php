@@ -253,7 +253,7 @@ class WoodyTheme_Timber_Filters
 
     public function getPermalink($post_id)
     {
-        return apply_filters('woody_get_permalink', $post_id);
+        return woody_get_permalink($post_id);
     }
 
     public function theRootAncestor($post_id)
