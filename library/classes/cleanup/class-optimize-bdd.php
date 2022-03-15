@@ -40,10 +40,10 @@ class WoodyTheme_Cleanup_OptimizeBDD
 
     public function scheduleOptimizeBDD()
     {
-        if (!wp_next_scheduled('woody_cleanup_optimize_bdd')) {
-            wp_schedule_event(time(), 'weekly', 'woody_cleanup_optimize_bdd');
-            output_success(sprintf('+ Schedule %s', 'woody_cleanup_optimize_bdd'));
-        }
+        // if (!wp_next_scheduled('woody_cleanup_optimize_bdd')) {
+        //     wp_schedule_event(time(), 'weekly', 'woody_cleanup_optimize_bdd');
+        //     output_success(sprintf('+ Schedule %s', 'woody_cleanup_optimize_bdd'));
+        // }
 
         if (wp_next_scheduled('woody_cleanup_optimize_bdd')) {
             wp_clear_scheduled_hook('woody_cleanup_optimize_bdd');
