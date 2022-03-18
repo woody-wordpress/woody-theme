@@ -171,6 +171,8 @@
             "choices": {
                 "complement": "Complément",
                 "description": "Description",
+                "birth": "Date de naissance",
+                "nationality": "Nationalité",
                 "address": "Adresse",
                 "mail": "Email",
                 "phone": "Téléphone fixe",

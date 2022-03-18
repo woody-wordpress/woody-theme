@@ -499,7 +499,7 @@ class WoodyTheme_Roles
             ],
             'woody_brokenlinks' => [
                 'administrator' => true,
-                'editor' => true,
+                'editor' => false,
                 'contributor' => false,
                 'translator' => false,
             ],
@@ -545,6 +545,18 @@ class WoodyTheme_Roles
                 'contributor' => false,
                 'translator' => false,
             ],
+            'woody_process_drupal_import' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
+            'woody_process_csv_edit' => [
+                'administrator' => true,
+                'editor' => false,
+                'contributor' => false,
+                'translator' => false,
+            ],
             'woody_hawwwai' => [
                 'administrator' => true,
                 'editor' => true,
@@ -554,19 +566,7 @@ class WoodyTheme_Roles
             'woody_process_convert_to_geojson' => [
                 'administrator' => true,
                 'editor' => true,
-                'contributor' => true,
-                'translator' => true,
-            ],
-            'woody_process_csv_edit' => [
-                'administrator' => true,
-                'editor' => false,
-                'contributor' => true,
-                'translator' => false,
-            ],
-            'woody_process_drupal_import' => [
-                'administrator' => true,
-                'editor' => true,
-                'contributor' => true,
+                'contributor' => false,
                 'translator' => false,
             ],
             'woody_topic' => [
@@ -671,6 +671,7 @@ class WoodyTheme_Roles
                 'administrator' => true,
                 'editor' => true,
                 'contributor' => true,
+                'translator' => false,
             ],
             'Configurer les hashtags' => [
                 'administrator' => true,
@@ -774,7 +775,7 @@ class WoodyTheme_Roles
             // Query Monitor
             'view_query_monitor' => [
                 'administrator' => true,
-                'editor' => true,
+                'editor' => false,
                 'contributor' => false,
                 'translator' => false,
             ],

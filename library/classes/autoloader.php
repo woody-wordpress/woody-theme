@@ -38,7 +38,9 @@ new WoodyTheme_ACF_ShortLink();
 new WoodyTheme_Cleanup_Admin();
 new WoodyTheme_Cleanup_Front();
 new WoodyTheme_Cleanup_Minify();
-// new WoodyTheme_Cleanup_OptionsTable(); A supprimer après le merge de la feature RemovingYoast
+new WoodyTheme_Cleanup_OptionsTable(); //Disable
+new WoodyTheme_Cleanup_OptimizeBDD();
+new WoodyTheme_Cleanup_Schedule();
 
 // Dashboard
 new WoodyTheme_Dashboard();
@@ -65,7 +67,7 @@ new WoodyTheme_Robots();
 new WoodyTheme_Seo();
 new WoodyTheme_Taxonomy();
 new WoodyTheme_Tinymce();
-// new WoodyTheme_Unpublisher();
+new WoodyTheme_Unpublisher(); //Disable
 new WoodyTheme_Shuffle();
 new WoodyTheme_Videos();
 new WoodyTheme_Testimonials();
