@@ -60,7 +60,7 @@ const savePost = (e, publish) => {
 
     }).catch(err => {
         if (spinner) spinner.classList.remove('is-active');
-        createNotice('notice-error', `Une erreur s'est produite lors de la mise à jour de la page.`);
+        createNotice('notice-error', `Une erreur s'est produite lors de la mise à jour de la page.</br>` + err);
     });
 };
 
