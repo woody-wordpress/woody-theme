@@ -1,7 +1,8 @@
 {
     "key": "group_5c4f2efaccd2f",
     "title": "Cocon sémantique",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5c4f2f676dfa5",
             "label": "Contenu",
             "name": "",
@@ -49,11 +50,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5d80fa64e4fa4",
-                    "operator": "==",
-                    "value": "manual"
-                }]
+                [
+                    {
+                        "field": "field_5d80fa64e4fa4",
+                        "operator": "==",
+                        "value": "manual"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -80,11 +83,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5d80fa64e4fa4",
-                    "operator": "==",
-                    "value": "auto"
-                }]
+                [
+                    {
+                        "field": "field_5d80fa64e4fa4",
+                        "operator": "==",
+                        "value": "auto"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -110,11 +115,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5d80fa64e4fa4",
-                    "operator": "==",
-                    "value": "auto"
-                }]
+                [
+                    {
+                        "field": "field_5d80fa64e4fa4",
+                        "operator": "==",
+                        "value": "auto"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -138,11 +145,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5d80fa64e4fa4",
-                    "operator": "==",
-                    "value": "auto"
-                }]
+                [
+                    {
+                        "field": "field_5d80fa64e4fa4",
+                        "operator": "==",
+                        "value": "auto"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -305,14 +314,53 @@
             "message": "Choisir une mise en page",
             "new_lines": "wpautop",
             "esc_html": 0
+        },
+        {
+            "key": "field_61d3fe23a3985",
+            "label": "Responsive",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_61d3fe2fa3986",
+            "label": "Afficher le bloc",
+            "name": "",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_61d30e86c3313"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -320,7 +368,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "",
-    "modified": 1591358718
+    "modified": 1641283157
 }

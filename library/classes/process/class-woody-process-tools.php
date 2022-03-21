@@ -177,6 +177,7 @@ class WoodyTheme_WoodyProcessTools
         $classes_array[] = (!empty($wrapper['scope_margins']['scope_margin_bottom'])) ? $wrapper['scope_margins']['scope_margin_bottom'] : '';
         $display['section_divider'] = (!empty($wrapper['section_divider'])) ? $wrapper['section_divider'] : '';
         $display['heading_alignment'] = (!empty($wrapper['heading_alignment'])) ? $wrapper['heading_alignment'] : 'center';
+        $display['section_animations'] = (!empty($wrapper['section_animations'])) ? $wrapper['section_animations'] : '';
 
         // On transforme le tableau en une chaine de caractères
         $display['classes'] = trim(implode(' ', $classes_array));
@@ -419,34 +420,21 @@ class WoodyTheme_WoodyProcessTools
 
     /**
      *
-     * Nom : getTouristicSheetData
-     * Auteur : Thomas Navarro
-     * Return : Retourne les données d'une fiche SIT
-     * @param    post - INT|WP_Post
-     * @return   data - array|false
+     * Nom : getDeviceDisplayBlockResponsive
+     * Auteur : Orphée Besson
+     * Return : Retourne le device sélectionné pour l'affichage d'un bloc dans l'onglet "Responsive"
+     * @param    layout - array
+     * @return   device - string => 'desktop' || 'mobile'
      *
      */
-    public function getTouristicSheetData($post, $current_lang)
+    public function getDeviceDisplayBlockResponsive($layout)
     {
-        $post = get_post($post);
-        if (!$post && $post->post_type !== 'touristic_sheet') {
-            return false;
+        $device = '';
+
+        if (!empty($layout['display_block_responsive']) && $layout['display_block_responsive'] != 'all') {
+            $device = $layout['display_block_responsive'];
         }
 
-        $sheet = [];
-        $raw_item = get_field('touristic_raw_item', $post->ID);
-
-        if (!empty($raw_item)) {
-            $sheet = json_decode(base64_decode($raw_item), true);
-        } else {
-            $sheet_id = get_field('touristic_sheet_id', $post->ID);
-            $items = apply_filters('woody_hawwwai_sheet_render', $sheet_id, $current_lang, [], 'json', 'item');
-
-            if (!empty($items['items']) && is_array($items['items'])) {
-                $sheet = current($items['items']);
-            }
-        }
-
-        return $sheet;
+        return $device;
     }
 }

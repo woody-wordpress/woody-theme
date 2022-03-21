@@ -94,7 +94,7 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         if (empty($this->globals['current_lang'])) {
-            $this->globals['current_lang'] = apply_filters('woody_pll_current_language', null);
+            $this->globals['current_lang'] = pll_current_language();
         }
 
         if (empty($this->globals['current_season'])) {
@@ -102,7 +102,7 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         if (empty($this->globals['current_locale'])) {
-            $this->globals['current_locale'] = pll_current_language();
+            $this->globals['current_locale'] = apply_filters('woody_pll_current_language', null);
         }
 
         if (empty($this->globals['languages'])) {

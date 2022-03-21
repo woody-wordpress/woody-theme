@@ -123,19 +123,21 @@ class WoodyTheme_WoodyGetters
                 // La donnée de la vignette correspond à un post sélectionné
                 } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
                     $item = $item_wrapper['existing_content'];
-                    $status = $item['content_selection']->post_status;
+                    $post = get_post($item['content_selection']);
+                    $status = $post->post_status;
+
                     if ($status !== 'publish') {
                         continue;
                     }
-                    switch ($item['content_selection']->post_type) {
+                    switch ($post->post_type) {
                         case 'touristic_sheet':
-                            $post_preview = $this->getTouristicSheetPreview($wrapper, $item['content_selection']);
+                            $post_preview = $this->getTouristicSheetPreview($wrapper, $post);
                             break;
                         case 'woody_topic':
-                            $post_preview = $this->getTopicPreview($wrapper, $item['content_selection']);
+                            $post_preview = $this->getTopicPreview($wrapper, $post);
                             break;
                         default:
-                            $post_preview = $this->getPagePreview($wrapper, $item['content_selection'], $clickable);
+                            $post_preview = $this->getPagePreview($wrapper, $post, $clickable);
                             break;
                     }
                     $the_items['items'][$key] = (!empty($post_preview)) ? $post_preview : [];
@@ -292,21 +294,21 @@ class WoodyTheme_WoodyGetters
         return $items;
     }
 
-    public function getAttachmentPreview($wrapper, $item)
+    public function getAttachmentPreview($wrapper, $post)
     {
         $data = [];
-        if (is_object($item)) {
-            $data = $this->getPagePreview($wrapper, $item, true, true);
+        if (is_object($post)) {
+            $data = $this->getPagePreview($wrapper, $post, true, true);
 
             if (!empty($wrapper['display_elements']) && in_array('description', $wrapper['display_elements'])) {
-                $data['description'] = $item->post_content;
+                $data['description'] = $post->post_content;
             }
 
             if (!empty($wrapper['display_img'])) {
-                if (wp_attachment_is_image($item->ID)) {
-                    $data['img'] = acf_get_attachment($item);
+                if (wp_attachment_is_image($post->ID)) {
+                    $data['img'] = acf_get_attachment($post);
                 } else {
-                    $data['img'] = get_field('attachment_focus_img', $item->ID);
+                    $data['img'] = get_field('attachment_focus_img', $post->ID);
                 }
                 if (!empty($data['img'])) {
                     $data['img']['attachment_more_data'] = $this->tools->getAttachmentMoreData($data['img']['ID']);
@@ -314,7 +316,7 @@ class WoodyTheme_WoodyGetters
             }
 
             $data['link'] = [
-                'url' => wp_get_attachment_url($item->ID),
+                'url' => wp_get_attachment_url($post->ID),
                 'link_label' => __('Télécharger')
             ];
 
@@ -333,77 +335,77 @@ class WoodyTheme_WoodyGetters
      * @return   data - Un tableau de données
      *
      */
-    public function getPagePreview($wrapper, $item, $clickable = true, $is_attachment = false)
+    public function getPagePreview($wrapper, $post, $clickable = true, $is_attachment = false)
     {
         $data = [];
 
-        if (!is_object($item)) {
+        if (!is_object($post)) {
             return;
         }
 
-        $data['page_type'] = getTermsSlugs($item->ID, 'page_type', true);
-        $data['post_id'] = $item->ID;
+        $data['page_type'] = getTermsSlugs($post->ID, 'page_type', true);
+        $data['post_id'] = $post->ID;
 
-        if (!empty(get_field('focus_title', $item->ID))) {
-            $data['title'] = $this->tools->replacePattern(get_field('focus_title', $item->ID), $item->ID);
-        } elseif (!empty(get_the_title($item->ID))) {
-            $data['title'] = $this->tools->replacePattern(get_the_title($item->ID), $item->ID);
+        if (!empty(get_field('focus_title', $post->ID))) {
+            $data['title'] = $this->tools->replacePattern(get_field('focus_title', $post->ID), $post->ID);
+        } elseif (!empty(get_the_title($post->ID))) {
+            $data['title'] = $this->tools->replacePattern(get_the_title($post->ID), $post->ID);
         }
 
-        $original_item = $item;
+        $original_item = $post;
 
         // On vérifie si la page est de type miroir
         if ($data['page_type'] == 'mirror_page') {
 
             // On retourne la page de référence de la page miroir
-            $mirror = get_field('mirror_page_reference', $item->ID);
+            $mirror = get_field('mirror_page_reference', $post->ID);
 
             if (!empty(get_post($mirror))) {
                 $mirror_post = get_post($mirror);
 
                 // On remplace l'objet de post courant par l'objet de post de référence de la page miroir
-                $item = $mirror_post;
+                $post = $mirror_post;
             }
         }
 
         if (!empty($wrapper) && !empty($wrapper['display_elements']) && is_array($wrapper['display_elements'])) {
             if (empty($is_attachment) && in_array('pretitle', $wrapper['display_elements'])) {
-                $data['pretitle'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($original_item, 'focus_pretitle', get_field('page_heading_heading', $item->ID), 'pretitle', $item, 'field_5b87f20257a1d', $data['page_type']), $original_item->ID);
+                $data['pretitle'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($original_item, 'focus_pretitle', get_field('page_heading_heading', $post->ID), 'pretitle', $post, 'field_5b87f20257a1d', $data['page_type']), $original_item->ID);
             }
             if (empty($is_attachment) && in_array('subtitle', $wrapper['display_elements'])) {
-                $data['subtitle'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($original_item, 'focus_subtitle', get_field('page_heading_heading', $item->ID), 'subtitle', $item, 'field_5b87f23b57a1e', $data['page_type']), $original_item->ID);
+                $data['subtitle'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($original_item, 'focus_subtitle', get_field('page_heading_heading', $post->ID), 'subtitle', $post, 'field_5b87f23b57a1e', $data['page_type']), $original_item->ID);
             }
             if (empty($is_attachment) && in_array('icon', $wrapper['display_elements'])) {
                 $data['woody_icon'] = get_field('focus_woody_icon', $original_item->ID);
                 $data['icon_type'] = 'picto';
             }
             if (empty($is_attachment) && in_array('description', $wrapper['display_elements'])) {
-                $data['description'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($original_item, 'focus_description', '', '', $item, 'field_5b2bbbfaec6b2', $data['page_type']), $original_item->ID);
+                $data['description'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($original_item, 'focus_description', '', '', $post, 'field_5b2bbbfaec6b2', $data['page_type']), $original_item->ID);
             }
             if (in_array('created', $wrapper['display_elements'])) {
-                $data['created'] = get_the_date('', $item->ID);
+                $data['created'] = get_the_date('', $post->ID);
             }
             if (empty($is_attachment) && in_array('price', $wrapper['display_elements'])) {
-                $price_type = get_field('the_price_price_type', $item->ID);
+                $price_type = get_field('the_price_price_type', $post->ID);
                 // TODO: passer par le filtre woody_custom_pagePreview dans l'addon-group-quotation
                 if ($price_type == "component_based") {
                     $groupQuotation = new GroupQuotation();
-                    $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d', $item);
-                    $data['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price'], $item);
+                    $trip_infos = getAcfGroupFields('group_5b6c5e6ff381d', $post);
+                    $data['the_price'] = $groupQuotation->calculTripPrice($trip_infos['the_price'], $post);
                 } else {
-                    $data['the_price'] = get_field('field_5b6c670eb54f2', $item->ID);
+                    $data['the_price'] = get_field('field_5b6c670eb54f2', $post->ID);
                 }
             }
             if (empty($is_attachment) && in_array('duration', $wrapper['display_elements'])) {
-                $data['the_duration'] = get_field('field_5b6c5e7cb54ee', $item->ID);
+                $data['the_duration'] = get_field('field_5b6c5e7cb54ee', $post->ID);
             }
             if (empty($is_attachment) && in_array('length', $wrapper['display_elements'])) {
-                $data['the_length'] = get_field('field_5b95423386e8f', $item->ID);
+                $data['the_length'] = get_field('field_5b95423386e8f', $post->ID);
             }
             if (empty($is_attachment) && in_array('linked_profil', $wrapper['display_elements'])) {
                 $fields_profil = [
-                    'name' => get_field('profil_name', $item->ID),
-                    'img' => get_field('profil_img', $item->ID)
+                    'name' => get_field('profil_name', $post->ID),
+                    'img' => get_field('profil_img', $post->ID)
                 ];
 
                 if ($fields_profil['img']) {
@@ -419,24 +421,24 @@ class WoodyTheme_WoodyGetters
             foreach ($wrapper['display_elements'] as $display) {
                 if (strpos($display, '_') === 0) {
                     $tax = ltrim($display, '_');
-                    $data['terms'][$tax] = getPrimaryTerm($tax, $item->ID, array('name', 'slug', 'term_id'));
+                    $data['terms'][$tax] = getPrimaryTerm($tax, $post->ID, array('name', 'slug', 'term_id'));
                 }
             }
         }
 
-        $data['the_peoples'] = get_field('field_5b6d54a10381f', $item->ID);
+        $data['the_peoples'] = get_field('field_5b6d54a10381f', $post->ID);
 
         if (empty($is_attachment) && $clickable) {
-            $data['link']['link_label'] = $this->tools->replacePattern($this->tools->getFieldAndFallBack($original_item, 'focus_button_title', '', '', $item, '', $data['page_type']), $original_item->ID);
+            $data['link']['link_label'] = $this->tools->replacePattern($this->tools->getFieldAndFallBack($original_item, 'focus_button_title', '', '', $post, '', $data['page_type']), $original_item->ID);
             if (empty($data['link']['link_label'])) {
                 $data['link']['link_label'] = __('Lire la suite', 'woody-theme');
             }
         }
 
         if (empty($is_attachment) && !empty($wrapper['display_img'])) {
-            $data['img'] = $this->tools->getFieldAndFallback($original_item, 'focus_img', '', '', $item, 'field_5b0e5ddfd4b1b', $data['page_type']);
+            $data['img'] = $this->tools->getFieldAndFallback($original_item, 'focus_img', '', '', $post, 'field_5b0e5ddfd4b1b', $data['page_type']);
             if (empty($data['img'])) {
-                $video = $this->tools->getFieldAndFallback($original_item, 'field_5b0e5df0d4b1c', '', '', $item, '', $data['page_type']);
+                $video = $this->tools->getFieldAndFallback($original_item, 'field_5b0e5df0d4b1c', '', '', $post, '', $data['page_type']);
                 $data['img'] = !empty($video) ? $video['movie_poster_file'] : '';
             }
             if (!empty($data['img'])) {
@@ -444,7 +446,7 @@ class WoodyTheme_WoodyGetters
 
                 // On génère un tableau des urls de toutes les images complémentaires de mise en avant
                 if (!empty($wrapper['display_slideshow'])) {
-                    $slideshow = get_field('focus_secondary_img', $item->ID);
+                    $slideshow = get_field('focus_secondary_img', $post->ID);
 
                     if (!empty($slideshow)) {
                         foreach ($slideshow as $slide_key => $slide) {
@@ -462,8 +464,8 @@ class WoodyTheme_WoodyGetters
         }
 
         $data['location'] = [];
-        $lat = get_field('post_latitude', $item->ID);
-        $lng = get_field('post_longitude', $item->ID);
+        $lat = get_field('post_latitude', $post->ID);
+        $lng = get_field('post_longitude', $post->ID);
         $data['location']['lat'] = (!empty($lat)) ? str_replace(',', '.', $lat) : '';
         $data['location']['lng'] = (!empty($lng)) ? str_replace(',', '.', $lng) : '';
 
@@ -553,9 +555,9 @@ class WoodyTheme_WoodyGetters
      * @return   data - Un tableau de données
      *
      */
-    public function getTouristicSheetPreview($wrapper = null, $item, $deal_index = 0)
+    public function getTouristicSheetPreview($wrapper = null, $post, $deal_index = 0)
     {
-        if (!is_object($item) || empty($item)) {
+        if (!is_object($post) || empty($post)) {
             return;
         }
 
@@ -570,73 +572,73 @@ class WoodyTheme_WoodyGetters
         }
 
         $data = [];
-        $sheet = $this->tools->getTouristicSheetData($item, $current_lang);
+        $sheet_item = woody_hawwwai_item($post->ID);
 
         $data = [
-            'title' => (!empty($sheet['title'])) ? $sheet['title'] : '',
+            'title' => (!empty($sheet_item['title'])) ? $sheet_item['title'] : '',
             'link' => [
-                'url' => apply_filters('woody_get_permalink', $item->ID),
-                'target' => (!empty($sheet['targetBlank'])) ? '_blank' : '',
+                'url' => apply_filters('woody_get_permalink', $post->ID),
+                'target' => (!empty($sheet_item['targetBlank'])) ? '_blank' : '',
             ],
         ];
         if (!empty($wrapper['display_img'])) {
             $data['img'] = [
                 'resizer' => true,
-                'url' => (!empty($sheet['img']['url']) && !empty($sheet['img']['url']['manual'])) ? str_replace('api.tourism-system.com', 'api.cloudly.space', $sheet['img']['url']['manual']) : '',
-                'alt' => (!empty($sheet['img']['alt'])) ? $sheet['img']['alt'] : '',
-                'title' => (!empty($sheet['img']['title'])) ? $sheet['img']['title'] : ''
+                'url' => (!empty($sheet_item['img']['url']) && !empty($sheet_item['img']['url']['manual'])) ? str_replace('api.tourism-system.com', 'api.cloudly.space', $sheet_item['img']['url']['manual']) : '',
+                'alt' => (!empty($sheet_item['img']['alt'])) ? $sheet_item['img']['alt'] : '',
+                'title' => (!empty($sheet_item['img']['title'])) ? $sheet_item['img']['title'] : ''
             ];
         }
         if (!empty($wrapper['deal_mode'])) {
-            if (!empty($sheet['deals'])) {
-                $data['title'] = $sheet['deals']['list'][$deal_index]['nom'][$current_lang];
+            if (!empty($sheet_item['deals'])) {
+                $data['title'] = $sheet_item['deals']['list'][$deal_index]['nom'][$current_lang];
             }
         }
         if (!empty($wrapper['display_elements']) && is_array($wrapper['display_elements'])) {
             if (in_array('sheet_type', $wrapper['display_elements'])) {
-                $data['sheet_type'] = (!empty($sheet['type'])) ? $sheet['type'] : '';
+                $data['sheet_type'] = (!empty($sheet_item['type'])) ? $sheet_item['type'] : '';
                 if (!empty($wrapper['deal_mode'])) {
-                    if (!empty($sheet['deals'])) {
-                        $data['sheet_type'] = $sheet['title'];
+                    if (!empty($sheet_item['deals'])) {
+                        $data['sheet_type'] = $sheet_item['title'];
                     }
                 }
             }
             if (in_array('description', $wrapper['display_elements'])) {
-                $data['description'] = (!empty($sheet['desc'])) ? $sheet['desc'] : '';
+                $data['description'] = (!empty($sheet_item['desc'])) ? $sheet_item['desc'] : '';
                 if (!empty($wrapper['deal_mode'])) {
-                    if (!empty($sheet['deals']['list'][$deal_index]['description'][$current_lang])) {
-                        $data['description'] = $sheet['deals']['list'][$deal_index]['description'][$current_lang];
+                    if (!empty($sheet_item['deals']['list'][$deal_index]['description'][$current_lang])) {
+                        $data['description'] = $sheet_item['deals']['list'][$deal_index]['description'][$current_lang];
                     }
                 }
             }
 
             if (in_array('sheet_itinerary', $wrapper['display_elements'])) {
-                $data['sheet_itinerary']['locomotions'] = (!empty($sheet['locomotions'])) ? $sheet['locomotions'] : '';
-                $data['sheet_itinerary']['length'] = (!empty($sheet['itineraryLength'])) ? $sheet['itineraryLength']['value'] . $sheet['itineraryLength']['unit'] : '';
+                $data['sheet_itinerary']['locomotions'] = (!empty($sheet_item['locomotions'])) ? $sheet_item['locomotions'] : '';
+                $data['sheet_itinerary']['length'] = (!empty($sheet_item['itineraryLength'])) ? $sheet_item['itineraryLength']['value'] . $sheet_item['itineraryLength']['unit'] : '';
             }
 
             if (in_array('sheet_town', $wrapper['display_elements'])) {
-                $data['sheet_town'] = (!empty($sheet['town'])) ? $sheet['town'] : '';
+                $data['sheet_town'] = (!empty($sheet_item['town'])) ? $sheet_item['town'] : '';
             }
 
             if (in_array('price', $wrapper['display_elements'])) {
-                $data['the_price']['price'] = (!empty($sheet['tariffs']['price'])) ? $sheet['tariffs']['price'] : '';
-                $data['the_price']['prefix_price'] = (!empty($sheet['tariffs']['label'])) ? $sheet['tariffs']['label'] : '';
+                $data['the_price']['price'] = (!empty($sheet_item['tariffs']['price'])) ? $sheet_item['tariffs']['price'] : '';
+                $data['the_price']['prefix_price'] = (!empty($sheet_item['tariffs']['label'])) ? $sheet_item['tariffs']['label'] : '';
             }
             if (in_array('bookable', $wrapper['display_elements'])) {
-                $data['booking'] = (!empty($sheet['booking']['link'])) ? $sheet['booking'] : '';
+                $data['booking'] = (!empty($sheet_item['booking']['link'])) ? $sheet_item['booking'] : '';
             }
 
             if (in_array('address', $wrapper['display_elements'])) {
-                $data['address'] = (!empty($sheet['address'])) ? $sheet['address'] : '';
+                $data['address'] = (!empty($sheet_item['address'])) ? $sheet_item['address'] : '';
             }
 
             if (in_array('phone', $wrapper['display_elements'])) {
-                $data['phone'] = (!empty($sheet['phone'])) ? $sheet['phone'] : '';
+                $data['phone'] = (!empty($sheet_item['phone'])) ? $sheet_item['phone'] : '';
             }
 
             if (in_array('website', $wrapper['display_elements'])) {
-                $data['website'] = (!empty($sheet['website'])) ? $sheet['website'] : '';
+                $data['website'] = (!empty($sheet_item['website'])) ? $sheet_item['website'] : '';
             }
         }
 
@@ -647,11 +649,11 @@ class WoodyTheme_WoodyGetters
             }
         }
 
-        if (!empty($sheet['bordereau'])) {
-            if ($sheet['bordereau'] === 'HOT' or $sheet['bordereau'] == 'HPA') {
+        if (!empty($sheet_item['bordereau'])) {
+            if ($sheet_item['bordereau'] === 'HOT' or $sheet_item['bordereau'] == 'HPA') {
                 $rating = [];
-                if (!empty($sheet['ratings'])) {
-                    for ($i = 0; $i < $sheet['ratings'][0]['value']; $i++) {
+                if (!empty($sheet_item['ratings'])) {
+                    for ($i = 0; $i < $sheet_item['ratings'][0]['value']; $i++) {
                         $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
                     }
                 }
@@ -664,13 +666,13 @@ class WoodyTheme_WoodyGetters
         }
 
         $data['location'] = [];
-        $data['location']['lat'] = (!empty($sheet['gps'])) ? $sheet['gps']['latitude'] : '';
-        $data['location']['lng'] = (!empty($sheet['gps'])) ? $sheet['gps']['longitude'] : '';
+        $data['location']['lat'] = (!empty($sheet_item['gps'])) ? $sheet_item['gps']['latitude'] : '';
+        $data['location']['lng'] = (!empty($sheet_item['gps'])) ? $sheet_item['gps']['longitude'] : '';
 
         // Parcourir tout le tableau de dates et afficher la 1ère date non passée
-        if ($sheet['bordereau'] == 'FMA' && !empty($sheet['dates'])) {
+        if ($sheet_item['bordereau'] == 'FMA' && !empty($sheet_item['dates'])) {
             $today = time();
-            foreach ($sheet['dates'] as $date) {
+            foreach ($sheet_item['dates'] as $date) {
                 $enddate= strtotime($date['end']['endDate']);
                 if ($today < $enddate) {
                     $data['date'] = $date;
@@ -679,9 +681,9 @@ class WoodyTheme_WoodyGetters
             }
         }
 
-        $data['sheet_id'] = get_field('touristic_sheet_id', $item->ID);
+        $data['sheet_id'] = get_field('touristic_sheet_id', $post->ID);
 
-        $data = apply_filters('woody_custom_sheetPreview', $data, $wrapper, $item);
+        $data = apply_filters('woody_custom_sheetPreview', $data, $wrapper, $post, $sheet_item);
 
         return $data;
     }
@@ -689,19 +691,19 @@ class WoodyTheme_WoodyGetters
     /**
      * @author Jérémy Legendre
      * @param   wrapper - Données du layout acf sous forme de tableau
-     * @param   item - Objet post wp
+     * @param   post - Objet post wp
      * @return  data - Un tableau de données
      */
-    public function getTopicPreview($wrapper, $item)
+    public function getTopicPreview($wrapper, $post)
     {
         $data = [
-            'post_id'   => $item->ID,
-            'title'     => !empty($item->post_title) ? $item->post_title : '',
-            'subtitle'  => !empty($item->woody_topic_blogname) ? $item->woody_topic_blogname : ''
+            'post_id'   => $post->ID,
+            'title'     => !empty($post->post_title) ? $post->post_title : '',
+            'subtitle'  => !empty($post->woody_topic_blogname) ? $post->woody_topic_blogname : ''
         ];
 
-        $woody_topic_img = get_field('woody_topic_img', $item->ID);
-        $woody_topic_attachment = get_field('woody_topic_attachment', $item->ID);
+        $woody_topic_img = get_field('woody_topic_img', $post->ID);
+        $woody_topic_attachment = get_field('woody_topic_attachment', $post->ID);
         if (!empty($woody_topic_img) && !$woody_topic_attachment) {
             $data['img'] = [
                 'url' =>  'https://api.cloudly.space/resize/crop/%width%/%height%/75/' .  str_replace(array("+", "/"), array("-", "_"), base64_encode($woody_topic_img)) . '/image.jpg',
@@ -714,12 +716,12 @@ class WoodyTheme_WoodyGetters
             ];
         }
 
-        $desc = get_field('woody_topic_desc', $item->ID);
+        $desc = get_field('woody_topic_desc', $post->ID);
         if (!empty($desc)) {
             $data['description'] = strlen($desc) > 256 ? substr($desc, 0, 256) : $desc ;
         }
 
-        $url = get_field('woody_topic_url', $item->ID);
+        $url = get_field('woody_topic_url', $post->ID);
         if (!empty($url)) {
             $data['link'] = [
                 'url' => $url,
@@ -729,8 +731,8 @@ class WoodyTheme_WoodyGetters
             ];
         }
 
-        $lat = get_field('post_latitude', $item->ID);
-        $lng = get_field('post_longitude', $item->ID);
+        $lat = get_field('post_latitude', $post->ID);
+        $lng = get_field('post_longitude', $post->ID);
         if (!empty($lat) && !empty($lng)) {
             $data['location'] = [];
             $data['location']['lat'] = (!empty($lat)) ? str_replace(',', '.', $lat) : '';
@@ -854,24 +856,23 @@ class WoodyTheme_WoodyGetters
     {
         $data = [];
         $post = $wrapper['sheet_selection'];
-        $current_lang = pll_current_language();
-        $sheet = $this->tools->getTouristicSheetData($post, $current_lang);
+        $sheet_item = woody_hawwwai_item($post->ID);
         $sheet_url = apply_filters('woody_get_permalink', $post->ID);
 
-        $data['title'] = !empty($sheet['title']) ? $sheet['title'] : '';
+        $data['title'] = !empty($sheet_item['title']) ? $sheet_item['title'] : '';
         $data['link']['url'] = $sheet_url;
-        $data['link']['target'] = !empty($sheet['targetBlank']) ? '_blank' : '';
+        $data['link']['target'] = !empty($sheet_item['targetBlank']) ? '_blank' : '';
 
         //TODO: Récupérer les infos de réservation de la fiche
-        /*if ($sheet['booking']['central']) {
+        /*if ($sheet_item['booking']['central']) {
             $data['booking']['prefix'] = 'TODO';
             $data['booking']['price'] = 'TODO';
             $data['booking']['link'] = 'TODO';
         }*/
 
         // Display Imgs
-        if (!empty($sheet['allImgs'])) {
-            foreach ($sheet['allImgs'] as $key => $img) {
+        if (!empty($sheet_item['allImgs'])) {
+            foreach ($sheet_item['allImgs'] as $key => $img) {
                 $data['imgs'][$key] = [
                     'resizer' => true,
                     'url' => $img['manual'],

@@ -132,11 +132,11 @@
                     "5b0443f146538": {
                         "key": "5b0443f146538",
                         "name": "gallery",
-                        "label": "Galerie de médias mixtes",
+                        "label": "Galerie de médias",
                         "display": "block",
                         "sub_fields": [{
                             "key": "field_5b0443ff46539",
-                            "label": "Galerie photos",
+                            "label": "Galerie de médias",
                             "name": "gallery",
                             "type": "clone",
                             "instructions": "",
@@ -161,11 +161,11 @@
                     "layout_5d5bbc680ccaf": {
                         "key": "layout_5d5bbc680ccaf",
                         "name": "interactive_gallery",
-                        "label": "Galerie photos interactive",
+                        "label": "Galerie de médias interactive",
                         "display": "block",
                         "sub_fields": [{
                             "key": "field_5d5bbc680ccb0",
-                            "label": "Galerie photos interactive",
+                            "label": "Galerie de médias interactive",
                             "name": "interactive_gallery",
                             "type": "clone",
                             "instructions": "",
@@ -352,6 +352,35 @@
                             },
                             "clone": [
                                 "group_615dbea3b8aa7"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }],
+                        "min": "",
+                        "max": ""
+                    },
+                    "layout_61f24f1501fb5": {
+                        "key": "layout_61f24f1501fb5",
+                        "name": "spacer_block",
+                        "label": "Espacement",
+                        "display": "block",
+                        "sub_fields": [{
+                            "key": "field_61f24f4101fb6",
+                            "label": "Espacement",
+                            "name": "espacement",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_61f24dc3c8810"
                             ],
                             "display": "seamless",
                             "layout": "block",
@@ -1002,13 +1031,11 @@
                 "instructions": "Choisissez la largeur maximale que prendra la section",
                 "required": 0,
                 "conditional_logic": [
-                    [
-                        {
-                            "field": "field_5afd2ce516ece",
-                            "operator": "!=",
-                            "value": "1"
-                        }
-                    ]
+                    [{
+                        "field": "field_5afd2ce516ece",
+                        "operator": "!=",
+                        "value": "1"
+                    }]
                 ],
                 "wrapper": {
                     "width": "50",
@@ -1244,6 +1271,58 @@
                 "endpoint": 1
             },
             {
+                "key": "field_61e67f8d81ca3",
+                "label": "Responsive",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_61e993f5fc890",
+                "label": "Gestion de l'ordre des blocs de la section en responsive",
+                "name": "",
+                "type": "message",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "30",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "L'ordre est défini par le poids du bloc. Plus le poids est proche de 0, plus l'ordre du bloc sera prioritaire dans la section.\r\nLe changement d'ordre des blocs ne fonctionne pas pour les grilles de sections de type \"Grille split\".",
+                "new_lines": "wpautop",
+                "esc_html": 0
+            },
+            {
+                "key": "field_61e6807a81ca4",
+                "label": "",
+                "name": "section_mobile_order",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "30",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
                 "key": "field_5f19a1ef8e102",
                 "label": "Plus d'options",
                 "name": "",
@@ -1264,11 +1343,11 @@
                 "label": "Masquer la section",
                 "name": "hide_section",
                 "type": "true_false",
-                "instructions": "Permet de masquer temporairement une section (brouillon)",
+                "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "30",
+                    "width": "20",
                     "class": "",
                     "id": ""
                 },
@@ -1283,11 +1362,11 @@
                 "label": "Afficher dans le sommaire",
                 "name": "display_in_summary",
                 "type": "true_false",
-                "instructions": "Affiche une ancre vers cette section si un bloc sommaire a été ajouté à la page",
+                "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "40",
+                    "width": "20",
                     "class": "",
                     "id": ""
                 },
@@ -1312,7 +1391,57 @@
                     }]
                 ],
                 "wrapper": {
-                    "width": "15",
+                    "width": "20",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_61bb07bbb2a1b",
+                "label": "Latitude",
+                "name": "section_latitude",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [{
+                        "field": "field_5ed7a10730085",
+                        "operator": "==",
+                        "value": "1"
+                    }]
+                ],
+                "wrapper": {
+                    "width": "20",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_61bb07f4b2a1c",
+                "label": "Longitude",
+                "name": "section_longitude",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [{
+                        "field": "field_5ed7a10730085",
+                        "operator": "==",
+                        "value": "1"
+                    }]
+                ],
+                "wrapper": {
+                    "width": "20",
                     "class": "",
                     "id": ""
                 },
@@ -1331,8 +1460,27 @@
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "15",
+                    "width": "20",
                     "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5f509ba4c9e5b",
+                "label": "Animations",
+                "name": "section_animations",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "20",
+                    "class": "show-for-admin",
                     "id": ""
                 },
                 "default_value": "",

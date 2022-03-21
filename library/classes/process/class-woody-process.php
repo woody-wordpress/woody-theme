@@ -23,6 +23,43 @@ class WoodyTheme_WoodyProcess
     {
         $this->tools = new WoodyTheme_WoodyProcessTools();
         $this->compilers = new WoodyTheme_WoodyCompilers();
+        $this->registerHooks();
+    }
+
+    protected function registerHooks()
+    {
+        add_filter('posts_orderby', [$this, 'postsOrderby'], 10, 2);
+    }
+
+    public function postsOrderby($args, $wp_query)
+    {
+        // On surcharge l'ordre quand on veut faire du tri par géolocalisation
+        if (!empty($wp_query->query['orderby']) && strpos($wp_query->query['orderby'], 'geoloc') !== false) {
+            $post_id = explode('_', $wp_query->query['orderby']);
+            $post_id = (is_array($post_id)) ? end($post_id) : null;
+            if (!empty($post_id)) {
+                $lat = get_field('post_latitude', $post_id);
+                $lon = get_field('post_longitude', $post_id);
+
+                if (!empty($lat) && !empty($lon) && !empty($wp_query->meta_query->queries)) {
+                    foreach ($wp_query->meta_query->queries as $key => $queries) {
+                        if (!empty($queries['key']) && $queries['key'] == 'post_latitude') {
+                            $lat_postmeta = ($key == 0) ? 'wp_postmeta' : 'mt' . $key;
+                        } elseif (!empty($queries['key']) && $queries['key'] == 'post_longitude') {
+                            $lon_postmeta = ($key == 0) ? 'wp_postmeta' : 'mt' . $key;
+                        }
+                    }
+
+                    if (!empty($lat_postmeta) && !empty($lat_postmeta)) {
+                        $lat_operator = ($lat < 0) ? '+' : '-';
+                        $lon_operator = ($lon < 0) ? '+' : '-';
+                        return sprintf('(POW((%s.meta_value%s%s),2) + POW((%s.meta_value%s%s),2))', $lat_postmeta, $lat_operator, abs($lat), $lon_postmeta, $lon_operator, abs($lon));
+                    }
+                }
+            }
+        }
+
+        return $args;
     }
 
     /**
@@ -38,7 +75,9 @@ class WoodyTheme_WoodyProcess
     public function processWoodyLayouts($layout, $context)
     {
         $return = '';
+
         $layout['default_marker'] = !empty($context['default_marker']) ? $context['default_marker'] : '';
+
         // Traitements spécifique en fonction du type de layout
         switch ($layout['acf_fc_layout']) {
             case 'manual_focus':
@@ -155,7 +194,7 @@ class WoodyTheme_WoodyProcess
                 if (!empty($layout['summary_bg_params'])) {
                     $layout['display'] = $this->tools->getDisplayOptions($layout['summary_bg_params']);
                 }
-                $layout['items'] = $this->compilers->formatSummaryItems(get_the_ID());
+                $layout['summary'] = $this->compilers->formatSummaryItems(get_the_ID());
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
             case 'free_text':
@@ -180,6 +219,9 @@ class WoodyTheme_WoodyProcess
                     $layout['icon_img']['sizes']['ratio_free'] = $layout['icon_img']['sizes']['ratio_free_small'];
                 }
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            break;
+            case 'spacer_block':
+                $return = '<!-- WOODY-COMPONENT-SPACER -->';
             break;
             case 'story':
                 $layout['display'] = $this->tools->getDisplayOptions($layout['story_bg_params']);
@@ -246,7 +288,24 @@ class WoodyTheme_WoodyProcess
                 // On compile les tpls woody pour chaque bloc ajouté dans l'onglet
                 if (!empty($grid['light_section_content']) && is_array($grid['light_section_content'])) {
                     foreach ($grid['light_section_content'] as $layout) {
-                        $grid_content['items'][] = $this->processWoodyLayouts($layout, $context);
+                        $device_display_block = $this->tools->getDeviceDisplayBlockResponsive($layout);
+
+                        switch ($device_display_block) {
+                            case 'mobile':
+                                if (wp_is_mobile()) {
+                                    $grid_content['items'][] = $this->processWoodyLayouts($layout, $context);
+                                }
+                                break;
+                            case 'desktop':
+                                if (!wp_is_mobile()) {
+                                    $grid_content['items'][] = $this->processWoodyLayouts($layout, $context);
+                                }
+                                break;
+                            // if $device_display_block is empty, we display the block for each device (mobile & desktop), so no test is required
+                            default:
+                                $grid_content['items'][] = $this->processWoodyLayouts($layout, $context);
+                                break;
+                        }
                     }
 
                     // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
@@ -437,6 +496,23 @@ class WoodyTheme_WoodyProcess
                 $orderby = 'post_parent menu_order ID';
                 $order = 'ASC';
                 break;
+            case 'geoloc':
+                $orderby = 'geoloc_' . $the_post->ID;
+                $order = 'ASC';
+
+                $the_meta_query[] = [
+                    'key'        => 'post_latitude',
+                    'compare' => '!=',
+                    'value' => ''
+                ];
+
+                $the_meta_query[] = [
+                    'key'        => 'post_longitude',
+                    'compare' => '!=',
+                    'value' => ''
+                ];
+
+                break;
             default:
                 $orderby = 'rand';
                 $order = 'ASC';
@@ -516,6 +592,7 @@ class WoodyTheme_WoodyProcess
     public function processWoodySections($sections, $context)
     {
         $return = [];
+
         if (!empty($sections) && is_array($sections)) {
             foreach ($sections as $section_id => $section) {
                 $section = apply_filters('section_data_before_render', $section);
@@ -532,17 +609,46 @@ class WoodyTheme_WoodyProcess
                 $components['no_padding'] = $section['scope_no_padding'];
                 $components['alignment'] = (!empty($section['section_alignment'])) ? $section['section_alignment'] : '';
 
+                //Calcul de l'ordre des blocs en responsive
+                if (!empty($section['section_mobile_order'])) {
+                    $resp_order = explode("-", $section['section_mobile_order']);
+                }
+
                 if (!empty($section['section_content'])) {
                     foreach ($section['section_content'] as $layout_id => $layout) {
                         // On définit un uniqid court à utiliser dans les filtres de listes en paramètre GET
                         // Uniqid long : section . $section_id . '_section_content' . $layout_id
+
                         $layout['uniqid'] = 's' . $section_id . 'sc' . $layout_id;
                         $layout['visual_effects'] = (!empty($layout['visual_effects'])) ? $this->tools->formatVisualEffectData($layout['visual_effects']) : '';
-                        $components['items'][] = $this->processWoodyLayouts($layout, $context);
+
+                        $components['resp_order'][] = (!empty($resp_order[$layout_id])) ? $resp_order[$layout_id] : '';
+
+
+                        $device_display_block = $this->tools->getDeviceDisplayBlockResponsive($layout);
+
+                        switch ($device_display_block) {
+                            case 'mobile':
+                                if (wp_is_mobile()) {
+                                    $components['items'][] = $this->processWoodyLayouts($layout, $context);
+                                }
+                                break;
+                            case 'desktop':
+                                if (!wp_is_mobile()) {
+                                    $components['items'][] = $this->processWoodyLayouts($layout, $context);
+                                }
+                                break;
+                            // if $device_display_block is empty, we display the block for each device (mobile & desktop), so no test is required
+                            default:
+                                $components['items'][] = $this->processWoodyLayouts($layout, $context);
+                                break;
+                        }
                     }
 
                     // On retire les items retournés vides par processWoodyLayouts
-                    $components['items'] = array_filter($components['items']);
+                    if (!empty($components['items'])) {
+                        $components['items'] = array_filter($components['items']);
+                    };
 
                     if (!empty($section['section_woody_tpl']) && !empty($components['items'])) {
                         $the_layout = \Timber::compile($context['woody_components'][$section['section_woody_tpl']], $components);
@@ -555,6 +661,11 @@ class WoodyTheme_WoodyProcess
                 // On ajoute les class personnalisées de section dans la liste des class d'affichage
                 if (!empty($display['classes']) && !empty($section['section_class'])) {
                     $display['classes'] .=  ' ' . $section['section_class'];
+                }
+
+                // On ajoute les animations dans les données envoyées aux sections
+                if (!empty($display['section_animations']) && !empty($section['section_animations'])) {
+                    $display['animations'] = $section['section_animations'];
                 }
 
                 // On récupère le titre du sommaire et on le formate pour être un id

@@ -371,7 +371,7 @@
                         "taxonomy": "",
                         "allow_null": 0,
                         "multiple": 0,
-                        "return_format": "object",
+                        "return_format": "id",
                         "ui": 1
                     }]
                 }
@@ -912,6 +912,27 @@
             "endpoint": 0
         },
         {
+            "key": "field_61d477ec3e3fa",
+            "label": "Afficher le bloc",
+            "name": "",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_61d30e86c3313"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
+        },
+        {
             "key": "field_5efcab155ea96",
             "label": "Comportement mobile",
             "name": "mobile_behaviour",
@@ -934,11 +955,13 @@
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -948,5 +971,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
-    "modified": 1603986147
+    "modified": 1641314310
 }
