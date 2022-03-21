@@ -9,6 +9,14 @@ function getCookie(name) {
     return cookie[name];
 }
 
+function handleErrors(response){
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+    console.log(res);
+    return response;
+}
+
 /**
  * Save a post without page reload using AJAX
  * @param {MouseEvent} e Click Event received by the listener
@@ -39,8 +47,10 @@ const savePost = (e, publish) => {
         headers: {
             'Access-Control-Allow-Headers': 'Location'
         }
-    }).then(res => {
-
+    })
+    .then(handleErrors)
+    .then(res => {
+        console.log(res);
         if (res.url.includes('wp-login')) {
             if (spinner) spinner.classList.remove('is-active');
             createNotice('notice-error', `Impossible d'enregistrer la page, veuillez vous reconnecter.`);
@@ -59,8 +69,9 @@ const savePost = (e, publish) => {
         $(window).off('beforeunload');
 
     }).catch(err => {
+        console.log(err);
         if (spinner) spinner.classList.remove('is-active');
-        createNotice('notice-error', `Une erreur s'est produite lors de la mise à jour de la page.</br>` + err);
+        createNotice('notice-error', `Une erreur s'est produite lors de la mise à jour de la page.</br>`);
     });
 };
 
