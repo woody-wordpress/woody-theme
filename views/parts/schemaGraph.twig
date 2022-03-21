@@ -29,6 +29,21 @@
                 "datePublished":"{{ post.post_date }}",
                 "dateModified":"{{ post.post_modified }}",
                 "description":"{{ description|trim }}"
+            },
+            {
+                "@type":"TouristInformationCenter",
+                "url":"{{ http_host }}",
+                "name":"{{ title|trim }}",
+                {% if country %}
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "{{ country }}"{% if region %},
+                    "addressRegion": "{{ region }}"{% endif %}{% if postalcode %},
+                    "postalCode": "{{ postalcode }}"{% endif %}{% if address %},
+                    "streetAddress": "{{ address }}"{% endif %}
+                },
+                {% endif %}
+                "description":"{{ description|trim }}"
             }
         ]
     }
