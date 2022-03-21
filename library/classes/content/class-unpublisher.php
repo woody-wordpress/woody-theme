@@ -21,7 +21,7 @@ class WoodyTheme_Unpublisher
         // add_action('save_post', array($this, 'saveUnpublisherParams'));
 
         add_action('woody_theme_update', [$this, 'scheduleUnpublishPosts']);
-        add_action('woody_unpublish_posts', [$this, 'woodyUnpublishPosts']);
+        // add_action('woody_unpublish_posts', [$this, 'woodyUnpublishPosts']);
     }
 
     // public function registerMetaBox()
