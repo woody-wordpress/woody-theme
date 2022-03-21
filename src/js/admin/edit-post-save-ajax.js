@@ -13,7 +13,7 @@ function handleErrors(response){
     if (!response.ok) {
         throw Error(response.statusText);
     }
-    console.log(res);
+    console.log(response);
     return response;
 }
 
