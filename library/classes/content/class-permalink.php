@@ -24,6 +24,7 @@ class WoodyTheme_Permalink
         add_action('pll_save_post', [$this, 'savePost'], 10, 3);
         add_action('delete_post', [$this, 'deletePost'], 10);
         add_action('template_redirect', [$this, 'redirect404'], 999);
+        add_action('delete_post', [$this, 'cleanRedirects']);
     }
 
     public function woodyGetPermalink($post_id = null)
@@ -49,8 +50,10 @@ class WoodyTheme_Permalink
     {
         global $wp_query, $wp;
         if ($wp_query->is_404 && empty($wp_query->queried_object_id) && !empty($wp->request)) {
+            output_log('$wp_query->is_404 : ' . $wp_query->is_404);
             $permalink = null;
             $post_id = url_to_postid($wp->request);
+            output_log('$post_id : ' . $post_id);
             if (!empty($post_id)) {
                 $permalink = apply_filters('woody_get_permalink', $post_id);
             } else {
@@ -88,6 +91,9 @@ class WoodyTheme_Permalink
                     ]);
                 }
 
+                output_log('$query_result->posts');
+                output_log($query_result->posts);
+
                 if (!empty($query_result->posts)) {
                     $post = current($query_result->posts);
                     $permalink = apply_filters('woody_get_permalink', $post->ID);
@@ -102,6 +108,8 @@ class WoodyTheme_Permalink
                                 $url = '/' . $wp->request . '/';
                                 $match_url = '/' . $wp->request;
                             }
+
+                            output_log('$url : ' . $url);
 
                             if ($url != $parse_permalink && $match_url != $parse_permalink) {
                                 $params = [
@@ -121,6 +129,9 @@ class WoodyTheme_Permalink
                                     'match_type'  => 'url',
                                     'regex'  => 0,
                                 ];
+
+                                output_log('$params');
+                                output_log($params);
 
                                 include WP_PLUGINS_DIR . '/redirection/models/group.php';
                                 Red_Item::create($params);
@@ -204,5 +215,14 @@ class WoodyTheme_Permalink
         $sql = "SELECT count(*) FROM wp_posts WHERE (post_type = 'page' AND post_status IN ('publish', 'private', 'draft')) AND post_parent = %d";
         $count = $wpdb->get_var($wpdb->prepare($sql, [$id]));
         return ($count != 0) ? true : false;
+    }
+
+    public function cleanRedirects($post_id)
+    {
+        $permalink = apply_filters('woody_get_permalink', $post_id);
+        $site_url = str_replace('/wp', '', site_url());
+        $action_data = str_replace($site_url, '', $permalink);
+        output_log($action_data);
+        // SELECT * FROM `wp_redirection_items` WHERE action_data="/accueil/mes-envies/"
     }
 }
