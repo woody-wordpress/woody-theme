@@ -39,7 +39,7 @@ new WoodyTheme_Cleanup_Admin();
 new WoodyTheme_Cleanup_Front();
 new WoodyTheme_Cleanup_Minify();
 new WoodyTheme_Cleanup_OptionsTable(); //Disable
-new WoodyTheme_Cleanup_OptimizeBDD();
+new WoodyTheme_Cleanup_OptimizeBDD(); // Disable
 new WoodyTheme_Cleanup_Schedule();
 
 // Dashboard

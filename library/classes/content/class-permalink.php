@@ -29,6 +29,7 @@ class WoodyTheme_Permalink
         \WP_CLI::add_command('woody:flush_permalinks', [$this, 'flush_permalinks']);
 
         require_once(__DIR__ . '/../../helpers/helpers.php');
+
     }
 
     public function woodyGetPermalink($post_id = null)
@@ -54,8 +55,10 @@ class WoodyTheme_Permalink
     {
         global $wp_query, $wp;
         if ($wp_query->is_404 && empty($wp_query->queried_object_id) && !empty($wp->request)) {
+            output_log('$wp_query->is_404 : ' . $wp_query->is_404);
             $permalink = null;
             $post_id = url_to_postid($wp->request);
+            output_log('$post_id : ' . $post_id);
             if (!empty($post_id)) {
                 $permalink = woody_get_permalink($post_id);
             } else {
@@ -93,6 +96,9 @@ class WoodyTheme_Permalink
                     ]);
                 }
 
+                output_log('$query_result->posts');
+                output_log($query_result->posts);
+
                 if (!empty($query_result->posts)) {
                     $post = current($query_result->posts);
                     $permalink = woody_get_permalink($post->ID);
@@ -107,6 +113,8 @@ class WoodyTheme_Permalink
                                 $url = '/' . $wp->request . '/';
                                 $match_url = '/' . $wp->request;
                             }
+
+                            output_log('$url : ' . $url);
 
                             if ($url != $parse_permalink && $match_url != $parse_permalink) {
                                 $params = [
@@ -126,6 +134,9 @@ class WoodyTheme_Permalink
                                     'match_type'  => 'url',
                                     'regex'  => 0,
                                 ];
+
+                                output_log('$params');
+                                output_log($params);
 
                                 include WP_PLUGINS_DIR . '/redirection/models/group.php';
                                 Red_Item::create($params);
