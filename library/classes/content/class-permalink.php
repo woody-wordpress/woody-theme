@@ -29,7 +29,6 @@ class WoodyTheme_Permalink
         \WP_CLI::add_command('woody:flush_permalinks', [$this, 'flush_permalinks']);
 
         require_once(__DIR__ . '/../../helpers/helpers.php');
-
     }
 
     public function woodyGetPermalink($post_id = null)
@@ -54,7 +53,8 @@ class WoodyTheme_Permalink
     public function redirect404()
     {
         global $wp_query, $wp;
-        if ($wp_query->is_404 && empty($wp_query->queried_object_id) && !empty($wp->request)) {
+        $pll_current_language = pll_current_language();
+        if ($wp_query->is_404 && empty($wp_query->queried_object_id) && !empty($wp->request) && !empty($pll_current_language)) {
             output_log('$wp_query->is_404 : ' . $wp_query->is_404);
             $permalink = null;
             $post_id = url_to_postid($wp->request);
@@ -69,7 +69,7 @@ class WoodyTheme_Permalink
                 preg_match('/-([a-z_]{2,})-([0-9]{5,})$/', $last_segment, $sheet_id);
                 if (!empty($sheet_id) && !empty($sheet_id[2])) {
                     $query_result = new \WP_Query([
-                        'lang' => pll_current_language(),
+                        'lang' => $pll_current_language,
                         'post_status' => ['publish'],
                         'posts_per_page' => 1,
                         'orderby' => 'ID',
@@ -86,7 +86,7 @@ class WoodyTheme_Permalink
                     ]);
                 } else {
                     $query_result = new \WP_Query([
-                        'lang' => pll_current_language(),
+                        'lang' => $pll_current_language,
                         'posts_per_page' => 1,
                         'post_status' => ['publish'],
                         'orderby' => 'ID',
