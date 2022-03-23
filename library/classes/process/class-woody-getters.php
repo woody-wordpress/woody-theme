@@ -466,7 +466,7 @@ class WoodyTheme_WoodyGetters
         $data['location']['lng'] = (!empty($lng)) ? str_replace(',', '.', $lng) : '';
 
         if (empty($is_attachment) && $clickable) {
-            $data['link']['url'] = apply_filters('woody_get_permalink', $original_item->ID);
+            $data['link']['url'] = woody_get_permalink($original_item->ID);
         }
 
         $data = apply_filters('woody_custom_pagePreview', $data, $wrapper);
@@ -573,7 +573,7 @@ class WoodyTheme_WoodyGetters
         $data = [
             'title' => (!empty($sheet_item['title'])) ? $sheet_item['title'] : '',
             'link' => [
-                'url' => apply_filters('woody_get_permalink', $post->ID),
+                'url' => woody_get_permalink($post->ID),
                 'target' => (!empty($sheet_item['targetBlank'])) ? '_blank' : '',
             ],
         ];
@@ -853,7 +853,7 @@ class WoodyTheme_WoodyGetters
         $data = [];
         $post = $wrapper['sheet_selection'];
         $sheet_item = woody_hawwwai_item($post->ID);
-        $sheet_url = apply_filters('woody_get_permalink', $post->ID);
+        $sheet_url = woody_get_permalink($post->ID);
 
         $data['title'] = !empty($sheet_item['title']) ? $sheet_item['title'] : '';
         $data['link']['url'] = $sheet_url;
