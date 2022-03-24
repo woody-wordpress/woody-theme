@@ -171,7 +171,6 @@ class WoodyTheme_Enqueue_Assets
             wp_enqueue_script('jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/default.min.js', ['jsdelivr_flatpickr'], null);
         }
 
-        //wp_enqueue_script('jsdelivr_webfontloader', 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js', [], null);
         wp_enqueue_script('jsdelivr_lightgallery', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/dist/js/lightgallery.min.js', ['jquery'], null);
         wp_enqueue_script('jsdelivr_lg-pager', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-pager.min.js', ['jsdelivr_lightgallery'], null);
         wp_enqueue_script('jsdelivr_lg-thumbnail', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-thumbnail.min.js', ['jsdelivr_lightgallery'], null);
@@ -301,6 +300,7 @@ class WoodyTheme_Enqueue_Assets
             'jsdelivr_lg-fullscreen',
             'jsdelivr_lg-pager',
             'jsdelivr_lg-thumbnail',
+            'jsdelivr_lg-autoplay',
             'jsdelivr_lg-video',
             'jsdelivr_lg-zoom',
             'jsdelivr_lightgallery',
