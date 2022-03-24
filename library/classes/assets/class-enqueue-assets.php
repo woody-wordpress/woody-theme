@@ -300,7 +300,6 @@ class WoodyTheme_Enqueue_Assets
             'jsdelivr_lg-fullscreen',
             'jsdelivr_lg-pager',
             'jsdelivr_lg-thumbnail',
-            'jsdelivr_lg-autoplay',
             'jsdelivr_lg-video',
             'jsdelivr_lg-zoom',
             'jsdelivr_lightgallery',
@@ -451,7 +450,7 @@ class WoodyTheme_Enqueue_Assets
             'window.DrupalAngularConfig.mapProviderKeys' => (!empty($this->siteConfig['mapProviderKeys'])) ? json_encode($this->siteConfig['mapProviderKeys']) : '{}',
         ];
 
-        if(!empty($this->siteConfig['mapProviderKeys'])) {
+        if (!empty($this->siteConfig['mapProviderKeys'])) {
             $map_keys = $this->siteConfig['mapProviderKeys'];
             if (isset($map_keys['otmKey']) || isset($map_keys['ignKey'])) {
                 $globalScriptString['window.useLeafletLibrary'] = true;
