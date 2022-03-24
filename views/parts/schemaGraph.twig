@@ -1,5 +1,4 @@
-{% if is_frontpage and is_tourist_information_center %}
-    <script type='application/ld+json' class='woody-schema-graph'>
+<script type='application/ld+json' class='woody-schema-graph'>
     {
         "@context":"https://schema.org",
         "@graph":
@@ -29,58 +28,22 @@
                 "datePublished":"{{ post.post_date }}",
                 "dateModified":"{{ post.post_modified }}",
                 "description":"{{ description|trim }}"
-            },
+            }{% if is_tourist_information_center %},
             {
                 "@type":"TouristInformationCenter",
                 "url":"{{ http_host }}",
                 "name":"{{ title|trim }}",
-                {% if country %}
+                {% if tourist_information_center.country %}
                 "address": {
                     "@type": "PostalAddress",
-                    "addressLocality": "{{ country }}"{% if region %},
-                    "addressRegion": "{{ region }}"{% endif %}{% if postalcode %},
-                    "postalCode": "{{ postalcode }}"{% endif %}{% if address %},
-                    "streetAddress": "{{ address }}"{% endif %}
+                    "addressLocality": "{{ tourist_information_center.country }}"{% if tourist_information_center.region %},
+                    "addressRegion": "{{ tourist_information_center.region }}"{% endif %}{% if tourist_information_center.postalcode %},
+                    "postalCode": "{{ tourist_information_center.postalcode }}"{% endif %}{% if tourist_information_center.address %},
+                    "streetAddress": "{{ tourist_information_center.address }}"{% endif %}
                 },
                 {% endif %}
                 "description":"{{ description|trim }}"
-            }
+            }{% endif %}
         ]
     }
-    </script>
-{% else %}
-    <script type='application/ld+json' class='woody-schema-graph'>
-    {
-        "@context":"https://schema.org",
-        "@graph":
-        [
-            {
-                "@type":"WebSite",
-                "@id":"{{ http_host }}/#website",
-                "url":"{{ http_host }}",
-                "name":"{{ site.name|trim }}",
-                "description":"{{ site.description|trim }}",
-                "potentialAction":
-                {
-                    "@type":"SearchAction",
-                    "target":"{{ woody_options_pages.search_url|getPermalink }}?query={search_term_string}",
-                    "query-input":"required name=search_term_string"
-                }
-            },
-            {
-                "@type":"WebPage",
-                "@id":"{{ http_host }}/#webpage",
-                "url":"{{ http_host }}",
-                "inLanguage":"{{ site.language }}",
-                "name":"{{ title|trim }}",
-                "isPartOf":{
-                    "@id":"{{ http_host }}/#website"
-                },
-                "datePublished":"{{ post.post_date }}",
-                "dateModified":"{{ post.post_modified }}",
-                "description":"{{ description|trim }}"
-            }
-        ]
-    }
-    </script>
-{% endif %}
+</script>
