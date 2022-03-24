@@ -25,11 +25,12 @@ class WoodyTheme_Permalink
         add_action('delete_post', [$this, 'deletePost'], 10);
         add_action('template_redirect', [$this, 'redirect404'], 999);
 
+        add_action('before_delete_post', [$this, 'cleanRedirects']);
+
         // WP_SITE_KEY=site_key wp woody:flush_permalinks
         \WP_CLI::add_command('woody:flush_permalinks', [$this, 'flush_permalinks']);
 
         require_once(__DIR__ . '/../../helpers/helpers.php');
-
     }
 
     public function woodyGetPermalink($post_id = null)
@@ -268,6 +269,17 @@ class WoodyTheme_Permalink
         $query = new \WP_Query($args);
         if ($query->have_posts()) {
             return $query;
+        }
+    }
+
+    public function cleanRedirects($post_id)
+    {
+        $slug = get_post_meta($post_id, '_wp_desired_post_slug', true);
+        if (!empty($slug)) {
+            global $wpdb;
+            $count_updated = $wpdb->query($wpdb->prepare("UPDATE wp_redirection_items SET status = 'disabled' WHERE action_data LIKE '%$slug' AND status = 'enabled'"));
+            $result = (!empty($count_updated)) ? 'before_delete_post : Disabling ' . $count_updated . ' redirect(s) to urls ending with ' . $slug : 'Found 0 redirection to this page';
+            output_log($result);
         }
     }
 }
