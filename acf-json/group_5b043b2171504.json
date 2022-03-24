@@ -243,43 +243,6 @@
             "message": "Choisir une mise en page",
             "new_lines": "wpautop",
             "esc_html": 0
-        },
-        {
-            "key": "field_61d3fce05ede5",
-            "label": "Responsive",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "left",
-            "endpoint": 0
-        },
-        {
-            "key": "field_61d3fced5ede6",
-            "label": "Afficher le bloc",
-            "name": "",
-            "type": "clone",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "clone": [
-                "group_61d30e86c3313"
-            ],
-            "display": "seamless",
-            "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0
         }
     ],
     "location": [
@@ -299,5 +262,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "Affiche une carte avec des marqueurs multiples",
-    "modified": 1641282838
+    "show_in_rest": 0,
+    "modified": 1647965734
 }

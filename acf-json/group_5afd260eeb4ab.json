@@ -132,11 +132,11 @@
                     "5b0443f146538": {
                         "key": "5b0443f146538",
                         "name": "gallery",
-                        "label": "Galerie photos",
+                        "label": "Galerie de médias",
                         "display": "block",
                         "sub_fields": [{
                             "key": "field_5b0443ff46539",
-                            "label": "Galerie photos",
+                            "label": "Galerie de médias",
                             "name": "gallery",
                             "type": "clone",
                             "instructions": "",
@@ -161,11 +161,11 @@
                     "layout_5d5bbc680ccaf": {
                         "key": "layout_5d5bbc680ccaf",
                         "name": "interactive_gallery",
-                        "label": "Galerie photos interactive",
+                        "label": "Galerie de médias interactive",
                         "display": "block",
                         "sub_fields": [{
                             "key": "field_5d5bbc680ccb0",
-                            "label": "Galerie photos interactive",
+                            "label": "Galerie de médias interactive",
                             "name": "interactive_gallery",
                             "type": "clone",
                             "instructions": "",

@@ -85,7 +85,7 @@ class WoodyTheme_Menus
                             if (is_object($field)) {
                                 $in_menu_title = get_field('in_menu_title', $field->ID);
                                 $return[$group_key]['part_title'] = (!empty($in_menu_title)) ? $in_menu_title : $field->post_title;
-                                $return[$group_key]['part_title_link'] = apply_filters('woody_get_permalink', $field->ID);
+                                $return[$group_key]['part_title_link'] = woody_get_permalink($field->ID);
                             } else {
                                 $return[$group_key]['part_title'] = $field;
                             }
@@ -183,7 +183,7 @@ class WoodyTheme_Menus
                 if (is_object($post) && $post->post_status == 'publish') {
                     $return[$post_key] = [
                         'the_id' => $post->ID,
-                        'the_url' => apply_filters('woody_get_permalink', $post->ID),
+                        'the_url' => woody_get_permalink($post->ID),
                     ];
 
                     // On vérifie si la page est de type mirroir

@@ -136,7 +136,7 @@ class WoodyTheme_Roles
                 'translator' => false,
             ],
             'edit_users' => [
-                'administrator' => true,
+                'administrator' => false,
                 'editor' => false,
                 'contributor' => false,
                 'translator' => false,
@@ -316,7 +316,7 @@ class WoodyTheme_Roles
                 'translator' => true,
             ],
             'delete_users' => [
-                'administrator' => false,
+                'administrator' => true,
                 'editor' => false,
                 'contributor' => false,
                 'translator' => false,
@@ -382,7 +382,7 @@ class WoodyTheme_Roles
                 'translator' => false,
             ],
             'remove_users' => [
-                'administrator' => false,
+                'administrator' => true,
                 'editor' => false,
                 'contributor' => false,
                 'translator' => false,
@@ -840,6 +840,8 @@ class WoodyTheme_Roles
                 'translator' => false,
             ],
         ];
+
+        $capabilities = apply_filters('woody_capabilities', $capabilities);
 
         foreach ($capabilities as $capability => $roles) {
             foreach ($roles as $role => $boolean) {

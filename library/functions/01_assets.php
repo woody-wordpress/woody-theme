@@ -391,6 +391,21 @@ function minuteConvert($num)
     return $convertedTime;
 }
 
+
+function foundEmbedProvider($url) {
+    // On définit le provider
+    if (strpos($url, 'youtu') != false) { // Match youtube.com & youtu.be
+        $provider = 'youtube';
+    } elseif (strpos($url, 'dailymotion') != false) {
+        $provider = 'dailymotion';
+    } elseif (strpos($url, 'vimeo') != false) {
+        $provider = 'vimeo';
+    } else {
+        $provider = 'unknown';
+    }
+    return $provider;
+}
+
 /**
  *
  * Nom : embedProviderThumbnail
@@ -408,16 +423,7 @@ function embedProviderThumbnail($embed)
     preg_match('/src="(.+?)"/', $embed, $embed_matches);
     $src = $embed_matches[1];
 
-    // On définit le provider
-    if (strpos($src, 'youtu') != false) { // Match youtube.com & youtu.be
-        $provider = 'youtube';
-    } elseif (strpos($src, 'dailymotion') != false) {
-        $provider = 'dailymotion';
-    } elseif (strpos($src, 'vimeo') != false) {
-        $provider = 'vimeo';
-    } else {
-        $provider = 'unknown';
-    }
+    $provider = foundEmbedProvider($src);
 
     // On définit l'url de la miniature en fonction du provider
     switch ($provider) {
@@ -451,5 +457,83 @@ function embedProviderThumbnail($embed)
         break;
     }
 
+    return $return;
+}
+
+function embedThumbnail($embed)
+{
+    $return = '';
+
+    $provider = foundEmbedProvider($embed);
+
+    // On définit l'url de la miniature en fonction du provider
+    switch ($provider) {
+        case 'unknown':
+            return;
+            break;
+        case 'youtube':
+            $regex = '/(v=*)(.*)/';
+            preg_match($regex, $embed, $matches);
+            if (!empty($matches[2])) {
+                $return = 'https://img.youtube.com/vi/' . $matches[2] . '/maxresdefault.jpg';
+            }
+        break;
+        case 'dailymotion':
+            $regex = '/(?<=\/video\/)(.*)/';
+            preg_match($regex, $embed, $matches);
+            if (!empty($matches[0])) {
+                $return = 'https://www.dailymotion.com/thumbnail/video/' . $matches[0];
+            }
+        break;
+        case 'vimeo':
+            $regex = '/(.com\/*)(.*)/';
+            preg_match($regex, $embed, $matches);
+            if (!empty($matches[0])) {
+                $vimeo_data = unserialize(file_get_contents('https://vimeo.com/api/v2/video/'. $matches[2] .'.php'));
+                if (empty($vimeo_data)) {
+                    return;
+                }
+                $return = $vimeo_data[0]['thumbnail_large'];
+            }
+        break;
+    }
+
+    return $return;
+}
+
+function embedVideo($embed)
+{
+    $return = '';
+
+    $provider = foundEmbedProvider($embed);
+
+    // On définit l'url de la miniature en fonction du provider
+    switch ($provider) {
+        case 'unknown':
+            return;
+            break;
+        case 'youtube':
+            $regex = '/(v=*)(.*)/';
+            preg_match($regex, $embed, $matches);
+            if (!empty($matches[2])) {
+                $return = '<iframe class="lazyloaded" width="640" height="360" data-src="https://www.youtube.com/embed/'.$matches[2].'" src="https://www.youtube.com/embed/'.$matches[2].'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>';
+            }
+        break;
+        case 'dailymotion':
+            $regex = '/(?<=\/video\/)(.*)/';
+            preg_match($regex, $embed, $matches);
+            if (!empty($matches[0])) {
+                $return = '<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;"> <iframe style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden" frameborder="0" type="text/html" src="https://www.dailymotion.com/embed/video/'.$matches[0].'" width="100%" height="100%" allowfullscreen > </iframe> </div>';
+            }
+        break;
+        case 'vimeo':
+            $regex = '/(.com\/*)(.*)/';
+            preg_match($regex, $embed, $matches);
+            if (!empty($matches[2])) {
+                $return = '<iframe src="https://player.vimeo.com/video/'.$matches[2].'?h=b2f1716794" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                    <p><a href="https://vimeo.com/'.$matches[2].'"></a> from <a href="https://vimeo.com/colibris"></a> on <a href="https://vimeo.com">Vimeo</a>.</p>';
+            }
+        break;
+    }
     return $return;
 }
