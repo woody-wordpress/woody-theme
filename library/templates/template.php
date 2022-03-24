@@ -356,7 +356,7 @@ abstract class WoodyTheme_TemplateAbstract
                 }
             }
 
-            $return = apply_filters('woody_get_permalink', $post_id);
+            $return = woody_get_permalink($post_id);
         }
 
         return $return;
@@ -849,7 +849,7 @@ abstract class WoodyTheme_TemplateAbstract
 
         if (!empty($search_post_id)) {
             $data = [];
-            $data['search_url'] = apply_filters('woody_get_permalink', pll_get_post($search_post_id));
+            $data['search_url'] = woody_get_permalink(pll_get_post($search_post_id));
 
             $suggest = apply_filters('woody_get_field_option', 'es_search_block_suggests');
             if (!empty($suggest) && !empty($suggest['suggest_pages'])) {
@@ -895,7 +895,7 @@ abstract class WoodyTheme_TemplateAbstract
         $favorites_post_id = apply_filters('woody_get_field_option', 'favorites_page_url');
         if (!empty($favorites_post_id)) {
             $data = [];
-            $data['favorites_page_url'] = apply_filters('woody_get_permalink', pll_get_post($favorites_post_id));
+            $data['favorites_page_url'] = woody_get_permalink(pll_get_post($favorites_post_id));
 
             // Set a default template
             $tpl = apply_filters('favorites_block_tpl', null);
@@ -913,7 +913,7 @@ abstract class WoodyTheme_TemplateAbstract
         $deals_post_id = apply_filters('woody_get_field_option', 'deals_page_url');
         if (!empty($deals_post_id)) {
             $data = [];
-            $data['deals_page_url'] = apply_filters('woody_get_permalink', pll_get_post($deals_post_id));
+            $data['deals_page_url'] = woody_get_permalink(pll_get_post($deals_post_id));
 
             // Set a default template
             $tpl = apply_filters('deals_block_tpl', null);

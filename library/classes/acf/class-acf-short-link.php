@@ -50,7 +50,7 @@ class WoodyTheme_ACF_ShortLink
         $short_link = get_field('short_link_page_url', $post_id);
         if (is_numeric($short_link)) {
             $linked_id = $short_link;
-            $linked_url = apply_filters('woody_get_permalink', $linked_id);
+            $linked_url = woody_get_permalink($linked_id);
         } else {
             $linked_id = url_to_postid($short_link);
             $linked_url = $short_link;
