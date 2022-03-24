@@ -183,6 +183,7 @@ class WoodyTheme_Polylang
         __('Afficher moins', 'woody-theme');
         __('Date de naissance', 'woody-theme');
         __('Nationalité', 'woody-theme');
+        __('Sommaire', 'woody-theme');
 
         //Actions
         __('Ajouter', 'woody-theme');
