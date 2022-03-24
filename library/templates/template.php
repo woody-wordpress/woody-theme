@@ -222,6 +222,19 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['metas'] = $this->setMetadata();
         $this->context['custom_meta'] = get_field('woody_custom_meta', 'options');
 
+        // Tourist Information Center
+        // Contexte seulement sur la page d'accueil
+        if (is_front_page()) {
+            $this->context['is_tourist_information_center'] = get_field('woody_tourist_information_center', 'options') ? true : false;
+            if ($this->context['is_tourist_information_center']) {
+                $woody_tourist_informations = get_field('woody_tourist_informations', 'options');
+                $this->context['tourist_information_center']['country'] = $woody_tourist_informations['woody_tourist_information_country'] ?: ''; // Pays/Localité
+                $this->context['tourist_information_center']['region'] = $woody_tourist_informations['woody_tourist_information_region'] ?: ''; // Région
+                $this->context['tourist_information_center']['postalcode'] = $woody_tourist_informations['woody_tourist_information_postal'] ?: ''; // Code postal
+                $this->context['tourist_information_center']['address'] = $woody_tourist_informations['woody_tourist_information_address'] ?: ''; // Adresse
+            }
+        }
+
         // Woody options pages
         $this->context['woody_options_pages'] = $this->getWoodyOptionsPagesValues();
 
