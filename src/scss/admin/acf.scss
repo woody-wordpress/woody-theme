@@ -960,12 +960,6 @@
                     }
                 }
 
-                &[data-layout='disqus_block'] {
-                    &:before {
-                        content: '\f473';
-                    }
-                }
-
                 &[data-layout='sitemap'] {
                     &:before {
                         content: '\f325';

@@ -119,7 +119,7 @@ class WoodyTheme_WoodyProcess
                                 if (isset($context['print_rdbk']) && !empty($context['print_rdbk'])) {
                                     $layout['gallery_items'][$key]['lazy'] = 'disabled';
                                 }
-                                if (!empty($layout['gallery_items'][$key]['attachment_more_data']['linked_video'])){
+                                if (!empty($layout['gallery_items'][$key]['attachment_more_data']['linked_video'])) {
                                     $layout['gallery_items'][$key]['attachment_more_data']['linked_video_iframe'] = embedVideo($layout['gallery_items'][$key]['attachment_more_data']['linked_video']);
                                     $layout['gallery_items'][$key]['attachment_more_data']['linked_video_thumbnail'] = embedThumbnail($layout['gallery_items'][$key]['attachment_more_data']['linked_video']);
                                 }
@@ -179,11 +179,6 @@ class WoodyTheme_WoodyProcess
                 break;
             case 'audio_player':
                 $layout['woody_tpl'] = 'blocks-audio-tpl_01';
-                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
-                break;
-            case 'disqus_block':
-                // TODO: le case Disqus block doit être ajouté via le filtre woody_custom_layout depuis le plugin
-                $layout['woody_tpl'] = 'blocks-disqus-tpl_01';
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             case 'eye_candy_img':

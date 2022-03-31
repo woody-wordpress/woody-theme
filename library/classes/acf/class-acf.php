@@ -69,7 +69,6 @@ class WoodyTheme_ACF
         add_filter('acf/load_field/name=page_heading_tags', [$this, 'listAllPageTerms'], 10, 3);
 
         add_filter('acf/load_field/name=tags_primary', [$this, 'addPrimaryTagsFields'], 10, 3);
-        add_filter('acf/load_field/key=field_5d91c4559736e', [$this, 'loadDisqusField'], 10, 3);
         add_filter('acf/load_field/name=active_shares', [$this, 'addSocialChoices'], 10, 3);
 
         // Custom Filter
@@ -401,6 +400,7 @@ class WoodyTheme_ACF
 
     public function sectionContentLoadField($field)
     {
+        //TODO: Move to woody-plugin
         if (!in_array('topics', WOODY_OPTIONS)) {
             // On retire le bloc de mise en avant de topic si le plugin n'est pas activé
             unset($field['layouts']['layout_5d7912723303c']);
@@ -428,7 +428,8 @@ class WoodyTheme_ACF
     /**
      * Affichage du champs d'animations de sections seulement si l'utilisateur a le rôle administrateur
      */
-    public function sectionAnimationsForAdmin($field) {
+    public function sectionAnimationsForAdmin($field)
+    {
         $user = wp_get_current_user();
         if (in_array('administrator', $user->roles)) {
             $is_administrator = true;
@@ -441,18 +442,6 @@ class WoodyTheme_ACF
         }
 
         return $field;
-    }
-
-    /**
-     * Suppression du champ de paramètres Disqus si le plugin n'est pas activé
-     */
-    public function loadDisqusField($field)
-    {
-        if (!in_array('disqus', WOODY_OPTIONS)) {
-            unset($field);
-        } else {
-            return $field;
-        }
     }
 
     public function getPageTypeTerms()
