@@ -39,7 +39,6 @@ class WoodyTheme_Plugins_Activation
             'disable-embeds/disable-embeds.php',
             'duplicate-post/duplicate-post.php',
             'enhanced-media-library/enhanced-media-library.php',
-            'mce-table-buttons/class-mce-table-buttons.php',
             'members/members.php',
             'polylang-pro/polylang.php',
             'publish-view/publish-view.php',

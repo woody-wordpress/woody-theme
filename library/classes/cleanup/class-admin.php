@@ -223,13 +223,13 @@ class WoodyTheme_Cleanup_Admin
             if ($lang == PLL_DEFAULT_LANG) {
                 // Page principale
                 acf_add_options_page(array(
-                'page_title'    => 'Paramètres',
-                'menu_title'    => 'Paramètres',
-                'menu_slug'     => 'woody-settings',
-                'capability'    => 'edit_pages',
-                'icon_url'      => 'dashicons-admin-generic',
-                'position'      => 40,
-            ));
+                    'page_title'    => 'Paramètres',
+                    'menu_title'    => 'Paramètres',
+                    'menu_slug'     => 'woody-settings',
+                    'capability'    => 'edit_pages',
+                    'icon_url'      => 'dashicons-admin-generic',
+                    'position'      => 40,
+                ));
             }
         }
     }
