@@ -32,17 +32,16 @@
             {
                 "@type":"TouristInformationCenter",
                 "url":"{{ http_host }}",
-                "name":"{{ title|trim }}",
-                {% if tourist_information_center.country %}
+                "name":"{{ title|trim }}"{% if tourist_information_center.city %},
                 "address": {
                     "@type": "PostalAddress",
-                    "addressLocality": "{{ tourist_information_center.country }}"{% if tourist_information_center.region %},
+                    "addressLocality": "{{ tourist_information_center.city }}"{% if tourist_information_center.country %},
+                    "addressCountry": "{{ tourist_information_center.country }}"{% endif %}{% if tourist_information_center.region %},
                     "addressRegion": "{{ tourist_information_center.region }}"{% endif %}{% if tourist_information_center.postalcode %},
                     "postalCode": "{{ tourist_information_center.postalcode }}"{% endif %}{% if tourist_information_center.address %},
                     "streetAddress": "{{ tourist_information_center.address }}"{% endif %}
-                },
-                {% endif %}
-                "description":"{{ description|trim }}"
+                }{% endif %}{% if tourist_information_center.more_informations %},
+                {{ tourist_information_center.more_informations }}{% endif %}
             }{% endif %}
         ]
     }
