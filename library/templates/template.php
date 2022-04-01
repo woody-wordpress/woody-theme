@@ -118,25 +118,27 @@ abstract class WoodyTheme_TemplateAbstract
     {
         $return = [];
 
-        // On ajoute toutes les pages parentes
-        $depth = 1;
-        $ancestors_ids = get_post_ancestors($post->ID);
-        if (!empty($ancestors_ids) && is_array($ancestors_ids)) {
-            $ancestors_ids = array_reverse($ancestors_ids);
-            foreach ($ancestors_ids as $key => $ancestor_id) {
-                $return['chapter' . $depth] = get_the_title($ancestor_id);
+        if (!empty($post) && is_object($post)) {
+            // On ajoute toutes les pages parentes
+            $depth = 1;
+            $ancestors_ids = get_post_ancestors($post->ID);
+            if (!empty($ancestors_ids) && is_array($ancestors_ids)) {
+                $ancestors_ids = array_reverse($ancestors_ids);
+                foreach ($ancestors_ids as $key => $ancestor_id) {
+                    $return['chapter' . $depth] = get_the_title($ancestor_id);
+                    $depth++;
+                }
+            }
+
+            // Si il s'agit d'une fiche on range tout dans le Chapitre Offres SIT
+            if ($post->post_type === 'touristic_sheet') {
+                $return['chapter' . $depth] = 'Offres SIT';
                 $depth++;
             }
-        }
 
-        // Si il s'agit d'une fiche on range tout dans le Chapitre Offres SIT
-        if ($post->post_type === 'touristic_sheet') {
-            $return['chapter' . $depth] = 'Offres SIT';
-            $depth++;
+            // On ajoute la page courante
+            $return['chapter' . $depth] = get_the_title($post->ID);
         }
-
-        // On ajoute la page courante
-        $return['chapter' . $depth] = get_the_title($post->ID);
 
         return $return;
     }
@@ -180,7 +182,6 @@ abstract class WoodyTheme_TemplateAbstract
         $return['favorites_url'] = pll_get_post(get_field('favorites_page_url', 'options'));
         $return['deals_url'] = pll_get_post(get_field('deals_page_url', 'options'));
         $return['deals_printable_url'] = pll_get_post(get_field('deals_printable_page_url', 'options'));
-        $return['search_url'] = pll_get_post(get_field('es_search_page_url', 'options'));
 
         return apply_filters('woody_options_pages', $return);
     }
@@ -295,7 +296,6 @@ abstract class WoodyTheme_TemplateAbstract
         $tools_blocks['lang_switcher_button'] = $this->addLanguageSwitcherButton();
         $this->context['lang_switcher_button'] = apply_filters('lang_switcher', $tools_blocks['lang_switcher_button']);
         $this->context['lang_switcher_button_mobile'] = apply_filters('lang_switcher_mobile', $tools_blocks['lang_switcher_button']);
-
         $this->context['lang_switcher_reveal'] = $this->addLanguageSwitcherReveal();
 
         // Add langSwitcher
@@ -307,7 +307,6 @@ abstract class WoodyTheme_TemplateAbstract
         $tools_blocks['es_search_button'] = $this->addEsSearchButton();
         $this->context['es_search_button'] = apply_filters('es_search_block', $tools_blocks['es_search_button']);
         $this->context['es_search_button_mobile'] = apply_filters('es_search_block_mobile', $tools_blocks['es_search_button']);
-
         $this->context['es_search_reveal'] = $this->addEsSearchReveal();
 
         // Add addFavoritesBlock
