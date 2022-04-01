@@ -181,7 +181,6 @@ abstract class WoodyTheme_TemplateAbstract
         $return['deals_url'] = pll_get_post(get_field('deals_page_url', 'options'));
         $return['deals_printable_url'] = pll_get_post(get_field('deals_printable_page_url', 'options'));
         $return['search_url'] = pll_get_post(get_field('es_search_page_url', 'options'));
-        $return['weather_url'] = pll_get_post(get_field('weather_page_url', 'options'));
 
         return apply_filters('woody_options_pages', $return);
     }
