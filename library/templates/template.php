@@ -679,13 +679,10 @@ abstract class WoodyTheme_TemplateAbstract
                 $this->context['website_logo'] = $SubWoodyTheme_TemplateParts->website_logo;
             }
 
-            $pll_options = get_option('polylang');
-
             $this->context['home_url'] = pll_home_url();
             $this->context['page_parts'] = $SubWoodyTheme_TemplateParts->getParts();
         }
     }
-
 
     private function addGTM()
     {
