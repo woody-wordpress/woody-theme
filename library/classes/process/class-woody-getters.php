@@ -466,7 +466,7 @@ class WoodyTheme_WoodyGetters
         $data['location']['lng'] = (!empty($lng)) ? str_replace(',', '.', $lng) : '';
 
         if (empty($is_attachment) && $clickable) {
-            $data['link']['url'] = apply_filters('woody_get_permalink', $original_item->ID);
+            $data['link']['url'] = woody_get_permalink($original_item->ID);
         }
 
         $data = apply_filters('woody_custom_pagePreview', $data, $wrapper);
@@ -573,7 +573,7 @@ class WoodyTheme_WoodyGetters
         $data = [
             'title' => (!empty($sheet_item['title'])) ? $sheet_item['title'] : '',
             'link' => [
-                'url' => apply_filters('woody_get_permalink', $post->ID),
+                'url' => woody_get_permalink($post->ID),
                 'target' => (!empty($sheet_item['targetBlank'])) ? '_blank' : '',
             ],
         ];
@@ -850,7 +850,7 @@ class WoodyTheme_WoodyGetters
         $data = [];
         $post = $wrapper['sheet_selection'];
         $sheet_item = woody_hawwwai_item($post->ID);
-        $sheet_url = apply_filters('woody_get_permalink', $post->ID);
+        $sheet_url = woody_get_permalink($post->ID);
 
         $data['title'] = !empty($sheet_item['title']) ? $sheet_item['title'] : '';
         $data['link']['url'] = $sheet_url;
@@ -971,6 +971,8 @@ class WoodyTheme_WoodyGetters
 
         $data = [
             'title' => $post->post_title,
+            'firstname' => get_field('profile_firstname', $post->ID),
+            'lastname' => get_field('profile_lastname', $post->ID),
             'img' => get_field('profile_picture', $post->ID)
         ];
 
@@ -980,6 +982,12 @@ class WoodyTheme_WoodyGetters
             }
             if (in_array('description', $wrapper['profile_focus_display'])) {
                 $data['description'] = get_field('profile_description', $post->ID);
+            }
+            if (in_array('birth', $wrapper['profile_focus_display'])) {
+                $data['birth'] = get_field('profile_contacts_profile_birth', $post->ID);
+            }
+            if (in_array('nationality', $wrapper['profile_focus_display'])) {
+                $data['nationality'] = get_field('profile_contacts_profile_nationality', $post->ID);
             }
             if (in_array('address', $wrapper['profile_focus_display'])) {
                 $data['contacts']['address'] = get_field('profile_contacts_profile_address', $post->ID);

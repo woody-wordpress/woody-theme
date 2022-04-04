@@ -124,9 +124,11 @@ class WoodyTheme_Cleanup_Admin
 
         // Modification du lien de l'entrée "Créer"
         $new_content_node = $wp_admin_bar->get_node('new-content');
-        $new_content_node->href = home_url() . 'wp/wp-admin/post-new.php?post_type=page';
-        $wp_admin_bar->remove_menu('new-content');
-        $wp_admin_bar->add_menu($new_content_node);
+        if (!empty($new_content_node)) {
+            $new_content_node->href = home_url() . 'wp/wp-admin/post-new.php?post_type=page';
+            $wp_admin_bar->remove_menu('new-content');
+            $wp_admin_bar->add_menu($new_content_node);
+        }
     }
 
     /**
@@ -221,13 +223,13 @@ class WoodyTheme_Cleanup_Admin
             if ($lang == PLL_DEFAULT_LANG) {
                 // Page principale
                 acf_add_options_page(array(
-                'page_title'    => 'Paramètres',
-                'menu_title'    => 'Paramètres',
-                'menu_slug'     => 'woody-settings',
-                'capability'    => 'edit_pages',
-                'icon_url'      => 'dashicons-admin-generic',
-                'position'      => 40,
-            ));
+                    'page_title'    => 'Paramètres',
+                    'menu_title'    => 'Paramètres',
+                    'menu_slug'     => 'woody-settings',
+                    'capability'    => 'edit_pages',
+                    'icon_url'      => 'dashicons-admin-generic',
+                    'position'      => 40,
+                ));
             }
         }
     }

@@ -282,7 +282,7 @@ class WoodyTheme_Taxonomy
                 foreach ($query_result->posts as $post) {
                     $posts['posts'][] = [
                         'ID' => $post->ID,
-                        'link' => apply_filters('woody_get_permalink', $post->ID),
+                        'link' => woody_get_permalink($post->ID),
                         'title' => $post->post_title
                     ];
                 }

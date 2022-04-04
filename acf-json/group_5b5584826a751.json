@@ -73,6 +73,22 @@
                 "id": ""
             },
             "return_format": "array"
+        },
+        {
+            "key": "field_619f73e346813",
+            "label": "Référence vidéo externe",
+            "name": "media_linked_video",
+            "type": "url",
+            "instructions": "Si rempli cette image sera considérée comme vidéo dans les galeries",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
         }
     ],
     "location": [
@@ -90,7 +106,7 @@
     "label_placement": "top",
     "instruction_placement": "field",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "Champs complémentaires pour les médias (auteur, localisation)",
-    "modified": 1543853017
+    "modified": 1637915457
 }

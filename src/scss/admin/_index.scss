@@ -1,6 +1,5 @@
 // Admin
 @import 'acf';
-@import 'login';
 @import 'loader';
 @import 'edit-post';
 @import 'edit-media';
@@ -8,6 +7,8 @@
 @import 'woody-seo';
 @import 'woody-tpls';
 @import 'polylang';
+
+@import 'legacy';
 
 // Others plugins
 @import './plugins/flatpickr';

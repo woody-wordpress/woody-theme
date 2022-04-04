@@ -942,12 +942,6 @@
                     }
                 }
 
-                &[data-layout='weather'] {
-                    &:before {
-                        content: '\f176';
-                    }
-                }
-
                 &[data-layout='claims'] {
                     &:before {
                         content: '\f488';
@@ -957,18 +951,6 @@
                 &[data-layout='quotation'] {
                     &:before {
                         content: '\f18e';
-                    }
-                }
-
-                &[data-layout='disqus_block'] {
-                    &:before {
-                        content: '\f473';
-                    }
-                }
-
-                &[data-layout='sitemap'] {
-                    &:before {
-                        content: '\f325';
                     }
                 }
 
@@ -988,12 +970,6 @@
                 &[data-layout='favorites'] {
                     &:before {
                         content: '\f487';
-                    }
-                }
-
-                &[data-layout='tides'] {
-                    &:before {
-                        content: '\f168';
                     }
                 }
 

@@ -171,7 +171,6 @@ class WoodyTheme_Enqueue_Assets
             wp_enqueue_script('jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/default.min.js', ['jsdelivr_flatpickr'], null);
         }
 
-        //wp_enqueue_script('jsdelivr_webfontloader', 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js', [], null);
         wp_enqueue_script('jsdelivr_lightgallery', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/dist/js/lightgallery.min.js', ['jquery'], null);
         wp_enqueue_script('jsdelivr_lg-pager', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-pager.min.js', ['jsdelivr_lightgallery'], null);
         wp_enqueue_script('jsdelivr_lg-thumbnail', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-thumbnail.min.js', ['jsdelivr_lightgallery'], null);
@@ -314,20 +313,20 @@ class WoodyTheme_Enqueue_Assets
             $dependencies[] = 'jsdelivr_swiper';
         }
         $dependencies = apply_filters('woody_mainjs_dependencies', $dependencies);
-        wp_enqueue_script('main-javascripts', $this->assetPath(WP_DIST_URL . '/js/main.js'), $dependencies, null);
+        wp_enqueue_script('main-javascripts', WP_DIST_URL . $this->assetPath('/js/main.js'), $dependencies, null);
 
         // Enqueue the main Stylesheet.
         if ($this->isTouristicSheet || $this->isTouristicPlaylist) {
             $tourism_css = apply_filters('woody_theme_stylesheets', 'tourism');
             $tourism_css = (!empty($tourism_css)) ? $tourism_css : 'tourism';
-            wp_enqueue_style('main-stylesheet', $this->assetPath(WP_DIST_URL . '/css/' . $tourism_css . '.css'), [], null, 'screen');
+            wp_enqueue_style('main-stylesheet', WP_DIST_URL . $this->assetPath('/css/' . $tourism_css . '.css'), [], null, 'screen');
         } else {
             $main_css = apply_filters('woody_theme_stylesheets', 'main');
             $main_css = (!empty($main_css)) ? $main_css : 'main';
-            wp_enqueue_style('main-stylesheet', $this->assetPath(WP_DIST_URL . '/css/' . $main_css . '.css'), [], null, 'screen');
+            wp_enqueue_style('main-stylesheet', WP_DIST_URL . $this->assetPath('/css/' . $main_css . '.css'), [], null, 'screen');
         }
 
-        wp_enqueue_style('print-stylesheet', $this->assetPath(WP_DIST_URL . '/css/print.css'), [], null, 'print');
+        wp_enqueue_style('print-stylesheet', WP_DIST_URL . $this->assetPath('/css/print.css'), [], null, 'print');
     }
 
     public function enqueueAdminAssets()
@@ -335,7 +334,7 @@ class WoodyTheme_Enqueue_Assets
         // Enqueue the main Scripts
         $dependencies = ['jquery', 'admin-jsdelivr-lazysizes', 'admin_jsdelivr_flatpickr', 'admin_jsdelivr_flatpickr_l10n'];
         wp_enqueue_script('admin-jsdelivr-lazysizes', 'https://cdn.jsdelivr.net/npm/lazysizes@4.1.2/lazysizes.min.js', [], null, true);
-        wp_enqueue_script('admin-javascripts', $this->assetPath(WP_DIST_URL . '/js/admin.js'), $dependencies, null, true);
+        wp_enqueue_script('admin-javascripts', WP_DIST_URL . $this->assetPath('/js/admin.js'), $dependencies, null, true);
         wp_enqueue_script('admin_jsdelivr_flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/flatpickr.min.js', [], null, true);
         wp_enqueue_script('admin_jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/fr.min.js', ['admin_jsdelivr_flatpickr'], null, true);
 
@@ -344,7 +343,7 @@ class WoodyTheme_Enqueue_Assets
         wp_add_inline_script('admin-javascripts', 'document.addEventListener("DOMContentLoaded",()=>{document.body.classList.add("windowReady")});', 'after');
 
         // Enqueue the main Stylesheet.
-        wp_enqueue_style('admin-stylesheet', $this->assetPath(WP_DIST_URL . '/css/admin.css'), [], null);
+        wp_enqueue_style('admin-stylesheet', WP_DIST_URL . $this->assetPath('/css/admin.css'), [], null);
     }
 
     public function heartbeatSettings()
@@ -359,7 +358,7 @@ class WoodyTheme_Enqueue_Assets
         $favicon_name = apply_filters('woody_favicon_name', 'favicon');
 
         foreach (['favicon', '16', '32', '64', '120', '128', '152', '167', '180', '192'] as $icon) {
-            $return[$icon] = $this->assetPath(WP_DIST_URL . '/favicon/' . $favicon_name . '/' . (($icon == 'favicon') ? $favicon_name . '.ico' : $favicon_name . '.' . $icon . 'w-' . $icon . 'h.png'));
+            $return[$icon] = WP_DIST_URL . $this->assetPath('/favicon/' . $favicon_name . '/' . (($icon == 'favicon') ? $favicon_name . '.ico' : $favicon_name . '.' . $icon . 'w-' . $icon . 'h.png'));
         }
 
         return $return;
@@ -414,7 +413,7 @@ class WoodyTheme_Enqueue_Assets
                     if (strpos($dir, 'http') !== false) {
                         $base_dir = $dir;
                     } else {
-                        $base_dir = WP_DIST_URL;
+                        $base_dir = '';
                     }
 
                     $assets = json_decode(file_get_contents($manifest_path), true);
@@ -451,7 +450,7 @@ class WoodyTheme_Enqueue_Assets
             'window.DrupalAngularConfig.mapProviderKeys' => (!empty($this->siteConfig['mapProviderKeys'])) ? json_encode($this->siteConfig['mapProviderKeys']) : '{}',
         ];
 
-        if(!empty($this->siteConfig['mapProviderKeys'])) {
+        if (!empty($this->siteConfig['mapProviderKeys'])) {
             $map_keys = $this->siteConfig['mapProviderKeys'];
             if (isset($map_keys['otmKey']) || isset($map_keys['ignKey'])) {
                 $globalScriptString['window.useLeafletLibrary'] = true;

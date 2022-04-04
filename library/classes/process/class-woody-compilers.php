@@ -309,7 +309,7 @@ class WoodyTheme_WoodyCompilers
                     if (!empty($matches[0])) {
                         foreach ($matches[0] as $match) {
                             $str = str_replace(['[', ']'], '', $match);
-                            $link = '<a href="' . apply_filters('woody_get_permalink', pll_get_post($post->ID)) . '">' . $str . '</a>';
+                            $link = '<a href="' . woody_get_permalink(pll_get_post($post->ID)) . '">' . $str . '</a>';
                             $data['description'] = str_replace($match, $link, $data['description']);
                         }
                     }
@@ -330,7 +330,7 @@ class WoodyTheme_WoodyCompilers
         $return = '';
 
         // On définit des variables de base
-        $the_list['permalink'] = apply_filters('woody_get_permalink', $current_post->ID);
+        $the_list['permalink'] = woody_get_permalink($current_post->ID);
         $the_list['uniqid'] = $wrapper['uniqid'];
         $the_list['has_map'] = false;
 
@@ -520,7 +520,7 @@ class WoodyTheme_WoodyCompilers
     public function formatSummaryItems($post_id)
     {
         $return = [];
-        $permalink = apply_filters('woody_get_permalink', $post_id);
+        $permalink = woody_get_permalink($post_id);
         $sections = get_field('section', $post_id);
         if (!empty($sections) && is_array($sections)) {
             foreach ($sections as $s_key => $section) {
@@ -700,7 +700,7 @@ class WoodyTheme_WoodyCompilers
         if (!empty($front_id)) {
             $data['items'][] = [
                 'title' => get_the_title($front_id),
-                'url' => apply_filters('woody_get_permalink', $front_id)
+                'url' => woody_get_permalink($front_id)
             ];
         }
 
@@ -711,7 +711,7 @@ class WoodyTheme_WoodyCompilers
             foreach ($ancestors_ids as $ancestor_id) {
                 $data['items'][] = [
                     'title' => get_the_title($ancestor_id),
-                    'url' => apply_filters('woody_get_permalink', $ancestor_id)
+                    'url' => woody_get_permalink($ancestor_id)
                 ];
             }
         }
@@ -719,7 +719,7 @@ class WoodyTheme_WoodyCompilers
         // On ajoute la page courante
         $data['items'][] = [
             'title' => get_the_title($current_post_id),
-            'url' => apply_filters('woody_get_permalink', $current_post_id)
+            'url' => woody_get_permalink($current_post_id)
         ];
 
         $tpl = apply_filters('breadcrumb_tpl', null);
