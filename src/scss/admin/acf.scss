@@ -540,7 +540,7 @@
 
 // On masque les tabs et le choix d'affichage sur le champ "Playlist" lorsque l'on est sur une page de type "Playlist"
 #acf-group_5b33890e6fa0b {
-
+    .acf-field-6227767c89d33, // Numéroter les résultats
     .acf-field-5d11c991b82fe,
     .acf-field-5ce2aea593cd7,
     .acf-field-5c821f9df381d,
@@ -939,12 +939,6 @@
                 &[data-layout='profile_focus'] {
                     &:before {
                         content: '\f12e';
-                    }
-                }
-
-                &[data-layout='weather'] {
-                    &:before {
-                        content: '\f176';
                     }
                 }
 

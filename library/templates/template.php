@@ -118,25 +118,27 @@ abstract class WoodyTheme_TemplateAbstract
     {
         $return = [];
 
-        // On ajoute toutes les pages parentes
-        $depth = 1;
-        $ancestors_ids = get_post_ancestors($post->ID);
-        if (!empty($ancestors_ids) && is_array($ancestors_ids)) {
-            $ancestors_ids = array_reverse($ancestors_ids);
-            foreach ($ancestors_ids as $key => $ancestor_id) {
-                $return['chapter' . $depth] = get_the_title($ancestor_id);
+        if (!empty($post) && is_object($post)) {
+            // On ajoute toutes les pages parentes
+            $depth = 1;
+            $ancestors_ids = get_post_ancestors($post->ID);
+            if (!empty($ancestors_ids) && is_array($ancestors_ids)) {
+                $ancestors_ids = array_reverse($ancestors_ids);
+                foreach ($ancestors_ids as $key => $ancestor_id) {
+                    $return['chapter' . $depth] = get_the_title($ancestor_id);
+                    $depth++;
+                }
+            }
+
+            // Si il s'agit d'une fiche on range tout dans le Chapitre Offres SIT
+            if ($post->post_type === 'touristic_sheet') {
+                $return['chapter' . $depth] = 'Offres SIT';
                 $depth++;
             }
-        }
 
-        // Si il s'agit d'une fiche on range tout dans le Chapitre Offres SIT
-        if ($post->post_type === 'touristic_sheet') {
-            $return['chapter' . $depth] = 'Offres SIT';
-            $depth++;
+            // On ajoute la page courante
+            $return['chapter' . $depth] = get_the_title($post->ID);
         }
-
-        // On ajoute la page courante
-        $return['chapter' . $depth] = get_the_title($post->ID);
 
         return $return;
     }
@@ -180,8 +182,6 @@ abstract class WoodyTheme_TemplateAbstract
         $return['favorites_url'] = pll_get_post(get_field('favorites_page_url', 'options'));
         $return['deals_url'] = pll_get_post(get_field('deals_page_url', 'options'));
         $return['deals_printable_url'] = pll_get_post(get_field('deals_printable_page_url', 'options'));
-        $return['search_url'] = pll_get_post(get_field('es_search_page_url', 'options'));
-        $return['weather_url'] = pll_get_post(get_field('weather_page_url', 'options'));
 
         return apply_filters('woody_options_pages', $return);
     }
@@ -226,10 +226,19 @@ abstract class WoodyTheme_TemplateAbstract
             $this->context['is_tourist_information_center'] = get_field('woody_tourist_information_center', 'options') ? true : false;
             if ($this->context['is_tourist_information_center']) {
                 $woody_tourist_informations = get_field('woody_tourist_informations', 'options');
+                 // Ajout d'infos supplémentaires au format JSON
+                $more_tourist_informations = apply_filters('woody_tourist_more_informations', '');
+
+                $this->context['tourist_information_center']['city'] = $woody_tourist_informations['woody_tourist_information_city'] ?: ''; // Ville
                 $this->context['tourist_information_center']['country'] = $woody_tourist_informations['woody_tourist_information_country'] ?: ''; // Pays/Localité
                 $this->context['tourist_information_center']['region'] = $woody_tourist_informations['woody_tourist_information_region'] ?: ''; // Région
                 $this->context['tourist_information_center']['postalcode'] = $woody_tourist_informations['woody_tourist_information_postal'] ?: ''; // Code postal
                 $this->context['tourist_information_center']['address'] = $woody_tourist_informations['woody_tourist_information_address'] ?: ''; // Adresse
+
+                // S'il y a des informations supplémentaires
+                if (!empty($more_tourist_informations)) {
+                    $this->context['tourist_information_center']['more_informations'] = $more_tourist_informations;
+                }
             }
         }
 
@@ -296,20 +305,12 @@ abstract class WoodyTheme_TemplateAbstract
         $tools_blocks['lang_switcher_button'] = $this->addLanguageSwitcherButton();
         $this->context['lang_switcher_button'] = apply_filters('lang_switcher', $tools_blocks['lang_switcher_button']);
         $this->context['lang_switcher_button_mobile'] = apply_filters('lang_switcher_mobile', $tools_blocks['lang_switcher_button']);
-
         $this->context['lang_switcher_reveal'] = $this->addLanguageSwitcherReveal();
 
         // Add langSwitcher
         $tools_blocks['season_switcher'] = $this->addSeasonSwitcher();
         $this->context['season_switcher'] = apply_filters('season_switcher', $tools_blocks['season_switcher']);
         $this->context['season_switcher_mobile'] = apply_filters('season_switcher_mobile', $tools_blocks['season_switcher']);
-
-        // Add addEsSearchBlock
-        $tools_blocks['es_search_button'] = $this->addEsSearchButton();
-        $this->context['es_search_button'] = apply_filters('es_search_block', $tools_blocks['es_search_button']);
-        $this->context['es_search_button_mobile'] = apply_filters('es_search_block_mobile', $tools_blocks['es_search_button']);
-
-        $this->context['es_search_reveal'] = $this->addEsSearchReveal();
 
         // Add addFavoritesBlock
         if (in_array('favorites', $this->context['enabled_woody_options'])) {
@@ -329,6 +330,9 @@ abstract class WoodyTheme_TemplateAbstract
             $tools_blocks['preparespot_switcher'] = $this->addPrepareSpotSwitcher();
             $this->context['preparespot_switcher'] = apply_filters('preparespot_switcher', $tools_blocks['preparespot_switcher']);
         }
+
+        // Added Tools from addons
+        $tools_blocks = apply_filters('woody_tools_blocks', $tools_blocks, $this->context);
 
         // Add more tools
         $this->context['subtheme_more_tools'] = apply_filters('more_tools', [], $tools_blocks);
@@ -684,13 +688,10 @@ abstract class WoodyTheme_TemplateAbstract
                 $this->context['website_logo'] = $SubWoodyTheme_TemplateParts->website_logo;
             }
 
-            $pll_options = get_option('polylang');
-
             $this->context['home_url'] = pll_home_url();
             $this->context['page_parts'] = $SubWoodyTheme_TemplateParts->getParts();
         }
     }
-
 
     private function addGTM()
     {
@@ -829,67 +830,6 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         return $data;
-    }
-
-    private function addEsSearchButton()
-    {
-        $search_post_id = apply_filters('woody_get_field_option', 'es_search_page_url');
-
-        if (!empty($search_post_id)) {
-
-            // Set a default template
-            $tpl = apply_filters('es_search_button', null);
-            $template = has_filter('es_search_button') ? $tpl['template'] : $this->context['woody_components']['woody_widgets-es_search_block-tpl_01'];
-
-            return \Timber::compile($template, []);
-        }
-    }
-
-    private function addEsSearchReveal()
-    {
-        $search_post_id = apply_filters('woody_get_field_option', 'es_search_page_url');
-
-        if (!empty($search_post_id)) {
-            $data = [];
-            $data['search_url'] = woody_get_permalink(pll_get_post($search_post_id));
-
-            $suggest = apply_filters('woody_get_field_option', 'es_search_block_suggests');
-            if (!empty($suggest) && !empty($suggest['suggest_pages'])) {
-                $data['suggest']['title'] = __('Nos suggestions', 'woody-theme');
-                foreach ($suggest['suggest_pages'] as $page) {
-                    $t_page = pll_get_post($page['suggest_page']);
-                    if (!empty($t_page)) {
-                        $post = get_post($t_page);
-                        if (!empty($post)) {
-                            $data['suggest']['pages'][] = getPagePreview(['display_img' => true], $post);
-                        }
-                    }
-                }
-            }
-
-            if (class_exists('SubWoodyTheme_esSearch')) {
-                $SubWoodyTheme_esSearch = new SubWoodyTheme_esSearch($this->context['woody_components']);
-                if (method_exists($SubWoodyTheme_esSearch, 'esSearchBlockCustomization')) {
-                    $esSearchBlockCustomization = $SubWoodyTheme_esSearch->esSearchBlockCustomization();
-                    if (!empty($esSearchBlockCustomization['template'])) {
-                        $template = $esSearchBlockCustomization['template'];
-                    }
-                }
-            }
-
-            // Set a default template
-            $tpl = apply_filters('es_search_reveal', null);
-            $template = has_filter('es_search_reveal') ? $tpl['template'] : $this->context['woody_components']['reveals-es_search_block-tpl_01'];
-
-            // Allow data override
-            $data['tags'] = !empty($tpl['tags']) ? $tpl['tags'] : '';
-            $data = apply_filters('es_search_block_data', $data);
-
-            $compile = \Timber::compile($template, $data);
-            $compile = apply_filters('es_search_compile', $compile);
-
-            return $compile;
-        }
     }
 
     private function addFavoritesBlock()

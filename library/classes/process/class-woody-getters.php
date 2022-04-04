@@ -639,10 +639,7 @@ class WoodyTheme_WoodyGetters
         }
 
         if (!empty($wrapper['display_button'])) {
-            $data['link']['link_label'] = get_field('sheet_button_title', 'options');
-            if (empty($data['link']['link_label'])) {
-                $data['link']['link_label'] = __('Lire la suite', 'woody-theme');
-            }
+            $data['link']['link_label'] = __('Lire la suite', 'woody-theme');
         }
 
         if (!empty($sheet_item['bordereau'])) {

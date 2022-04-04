@@ -411,11 +411,15 @@ class WoodyTheme_ACF
         }
         if (!in_array('weather', WOODY_OPTIONS)) {
             // On retire l'option bloc météo si le plugin n'est pas activé
-            unset($field['layouts']['layout_5c1b579ac3a87']);
+            unset($field['layouts']['layout_weather']);
+        }
+        if (!in_array('tides', WOODY_OPTIONS)) {
+            // On retire l'option bloc tides si le plugin n'est pas activé
+            unset($field['layouts']['layout_addon_tides']);
         }
         if (!in_array('disqus', WOODY_OPTIONS)) {
             // On retire l'option bloc commentaires si le plugin n'est pas activé
-            unset($field['layouts']['layout_5d91d7a234ca6']);
+            unset($field['layouts']['layout_addon_disqus']);
         }
         if (!in_array('ski_resort', WOODY_OPTIONS)) {
             // On retire l'option bloc infolive si le plugin n'est pas activé (par sécurité)

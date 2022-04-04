@@ -13,27 +13,8 @@
             <h2 class="msg404">{{ content.subtitle }}</h2>
             <p>{{ content.text }}</p>
 
-            {% if content.suggestions|default %}
-            <div class="suggestions marg-top-lg padd-top-md padd-bottom-md bg-lightgray">
-                <div class="grid-container">
-                    <h3 class="marg-bottom-lg">{{ __('La page que vous recherchez est peut-être ici ?', 'woody-theme') }}</h3>
-                    <div class="grid-x grid-padding-x medium-up-2 xlarge-up-4">
-                        {% for post in content.suggestions %}
-                        <div class="cell">
-                            {% include "cards/basic_card/tpl_01/tpl.twig" with {
-                            'item' : post,
-                            'image_style' : 'ratio_2_1',
-                            'page_type' : item.page_type
-                            } %}
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-            {% endif %}
-
             {% if content.custom.custom_links|default %}
-                <div class="custom_links padd-bottom-md{% if not content.suggestions %} marg-top-lg padd-top-md {% endif %}bg-lightgray">
+                <div class="custom_links padd-bottom-md marg-top-lg padd-top-md bg-lightgray">
                     <div class="grid-container">
                         <h3 class="marg-bottom-lg">{{ content.custom.custom_links.title }}</h3>
                         <ul class="menu align-center align-middle">
@@ -50,7 +31,6 @@
 
             {% else %}
                 <div class="button primary marg-top-md marg-bottom-md obf" data-obf="{{ home_url|base64Encode }}"><span class="button-label">{{ __("Aller à la page d'accueil", "woody-theme") }}</span></div>
-                <div class="button secondary marg-top-md marg-bottom-md obf {% if not content.search %} esSearch-button{% endif %}"{% if content.search %} data-obf="{{ content.search|base64Encode }}"{% endif %}><span class="button-label">{{ __("Faire une recherche", "woody-theme") }}</span></div>
             {% endif %}
 
         </div>

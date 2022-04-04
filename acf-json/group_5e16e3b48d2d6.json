@@ -64,6 +64,44 @@
             "layout": "block",
             "sub_fields": [
                 {
+                    "key": "field_5e17f4d29f5e9",
+                    "label": "Ville",
+                    "name": "woody_tourist_information_city",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5e17f4d29b6d8",
+                    "label": "Adresse",
+                    "name": "woody_tourist_information_address",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "66",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "50"
+                },
+                {
                     "key": "field_5e17f4d29e4f6",
                     "label": "Pays/Localité",
                     "name": "woody_tourist_information_country",
@@ -119,25 +157,6 @@
                     "prepend": "",
                     "append": "",
                     "maxlength": ""
-                },
-                {
-                    "key": "field_5e17f4d29b6d8",
-                    "label": "Adresse",
-                    "name": "woody_tourist_information_address",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": "20"
                 }
             ]
         }
