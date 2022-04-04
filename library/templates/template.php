@@ -312,12 +312,6 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['season_switcher'] = apply_filters('season_switcher', $tools_blocks['season_switcher']);
         $this->context['season_switcher_mobile'] = apply_filters('season_switcher_mobile', $tools_blocks['season_switcher']);
 
-        // Add addEsSearchBlock
-        $tools_blocks['es_search_button'] = $this->addEsSearchButton();
-        $this->context['es_search_button'] = apply_filters('es_search_block', $tools_blocks['es_search_button']);
-        $this->context['es_search_button_mobile'] = apply_filters('es_search_block_mobile', $tools_blocks['es_search_button']);
-        $this->context['es_search_reveal'] = $this->addEsSearchReveal();
-
         // Add addFavoritesBlock
         if (in_array('favorites', $this->context['enabled_woody_options'])) {
             $tools_blocks['favorites_block'] = $this->addFavoritesBlock();
@@ -336,6 +330,9 @@ abstract class WoodyTheme_TemplateAbstract
             $tools_blocks['preparespot_switcher'] = $this->addPrepareSpotSwitcher();
             $this->context['preparespot_switcher'] = apply_filters('preparespot_switcher', $tools_blocks['preparespot_switcher']);
         }
+
+        // Added Tools from addons
+        $tools_blocks = apply_filters('woody_tools_blocks', $tools_blocks, $this->context);
 
         // Add more tools
         $this->context['subtheme_more_tools'] = apply_filters('more_tools', [], $tools_blocks);
@@ -691,13 +688,10 @@ abstract class WoodyTheme_TemplateAbstract
                 $this->context['website_logo'] = $SubWoodyTheme_TemplateParts->website_logo;
             }
 
-            $pll_options = get_option('polylang');
-
             $this->context['home_url'] = pll_home_url();
             $this->context['page_parts'] = $SubWoodyTheme_TemplateParts->getParts();
         }
     }
-
 
     private function addGTM()
     {
@@ -836,67 +830,6 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         return $data;
-    }
-
-    private function addEsSearchButton()
-    {
-        $search_post_id = apply_filters('woody_get_field_option', 'es_search_page_url');
-
-        if (!empty($search_post_id)) {
-
-            // Set a default template
-            $tpl = apply_filters('es_search_button', null);
-            $template = has_filter('es_search_button') ? $tpl['template'] : $this->context['woody_components']['woody_widgets-es_search_block-tpl_01'];
-
-            return \Timber::compile($template, []);
-        }
-    }
-
-    private function addEsSearchReveal()
-    {
-        $search_post_id = apply_filters('woody_get_field_option', 'es_search_page_url');
-
-        if (!empty($search_post_id)) {
-            $data = [];
-            $data['search_url'] = woody_get_permalink(pll_get_post($search_post_id));
-
-            $suggest = apply_filters('woody_get_field_option', 'es_search_block_suggests');
-            if (!empty($suggest) && !empty($suggest['suggest_pages'])) {
-                $data['suggest']['title'] = __('Nos suggestions', 'woody-theme');
-                foreach ($suggest['suggest_pages'] as $page) {
-                    $t_page = pll_get_post($page['suggest_page']);
-                    if (!empty($t_page)) {
-                        $post = get_post($t_page);
-                        if (!empty($post)) {
-                            $data['suggest']['pages'][] = getPagePreview(['display_img' => true], $post);
-                        }
-                    }
-                }
-            }
-
-            if (class_exists('SubWoodyTheme_esSearch')) {
-                $SubWoodyTheme_esSearch = new SubWoodyTheme_esSearch($this->context['woody_components']);
-                if (method_exists($SubWoodyTheme_esSearch, 'esSearchBlockCustomization')) {
-                    $esSearchBlockCustomization = $SubWoodyTheme_esSearch->esSearchBlockCustomization();
-                    if (!empty($esSearchBlockCustomization['template'])) {
-                        $template = $esSearchBlockCustomization['template'];
-                    }
-                }
-            }
-
-            // Set a default template
-            $tpl = apply_filters('es_search_reveal', null);
-            $template = has_filter('es_search_reveal') ? $tpl['template'] : $this->context['woody_components']['reveals-es_search_block-tpl_01'];
-
-            // Allow data override
-            $data['tags'] = !empty($tpl['tags']) ? $tpl['tags'] : '';
-            $data = apply_filters('es_search_block_data', $data);
-
-            $compile = \Timber::compile($template, $data);
-            $compile = apply_filters('es_search_compile', $compile);
-
-            return $compile;
-        }
     }
 
     private function addFavoritesBlock()

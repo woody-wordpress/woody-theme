@@ -272,7 +272,6 @@ class WoodyTheme_WoodyProcess
      */
     public function processWoodySubLayouts($wrapper = [], $gridTplField, $uniqIid_prefix = '', $context)
     {
-        $woodyTwigsPaths = getWoodyTwigPaths();
         if (!empty($wrapper)) {
             foreach ($wrapper as $grid_key => $grid) {
                 $grid_content = [];
@@ -304,7 +303,7 @@ class WoodyTheme_WoodyProcess
                     }
 
                     // On compile le tpl de grille woody choisi avec le DOM de chaque bloc
-                    $wrapper[$grid_key]['light_section_content'] = \Timber::compile($woodyTwigsPaths[$grid[$gridTplField]], $grid_content);
+                    $wrapper[$grid_key]['light_section_content'] = \Timber::compile($context['woody_components'][$grid[$gridTplField]], $grid_content);
                 }
             }
 
