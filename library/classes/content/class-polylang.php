@@ -20,6 +20,18 @@ class WoodyTheme_Polylang
 
         add_filter('woody_pll_days', [$this, 'woodyPllDays'], 10);
         add_filter('woody_pll_months', [$this, 'woodyPllMonths'], 10);
+
+        add_filter('duplicate_post_taxonomies_excludelist_filter', [$this, 'excludePostTranslations']);
+        add_filter('republish_post_taxonomies_use_filters', '__return_true');
+        add_filter('duplicate_post_taxonomies_use_filters', '__return_true');
+
+    }
+
+    public function excludePostTranslations($tax){
+        if(!in_array('post_translations', $tax)){
+            $tax[] = 'post_translations';
+        }
+        return $tax;
     }
 
     public function loadThemeTextdomain()
