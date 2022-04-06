@@ -23,9 +23,6 @@ class WoodyTheme_ACF
         add_action('woody_theme_update', [$this, 'woodyThemeUpdate']);
         add_action('woody_cache_warm', [$this, 'generateLayoutsTransients'], 100);
 
-        if (WP_ENV == 'dev') {
-            add_filter('woody_acf_save_paths', [$this, 'acfJsonSave']);
-        }
         add_action('create_term', [$this, 'cleanTermsChoicesCache']);
         add_action('edit_term', [$this, 'cleanTermsChoicesCache']);
         add_action('delete_term', [$this, 'cleanTermsChoicesCache']);
@@ -33,6 +30,7 @@ class WoodyTheme_ACF
         add_action('acf/save_post', [$this, 'clearVarnishCache'], 20);
 
         add_filter('acf/settings/load_json', [$this, 'acfJsonLoad']);
+        add_filter('woody_acf_save_paths', [$this, 'acfJsonSave']);
         add_filter('acf/load_field/type=select', [$this, 'woodyIconLoadField']);
 
         add_filter('acf/load_field/name=focused_taxonomy_terms', [$this, 'focusedTaxonomyTermsLoadField']);
