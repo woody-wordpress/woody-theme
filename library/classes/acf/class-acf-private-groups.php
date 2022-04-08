@@ -13,9 +13,7 @@ class WoodyTheme_ACF_PrivateGroups
     public function __construct()
     {
         add_filter('acf/settings/load_json', array($this,'acfJsonLoad'));
-        if (WP_ENV == 'dev') {
-            add_filter('woody_acf_save_paths', array($this,'acfJsonSave'));
-        }
+        add_filter('woody_acf_save_paths', array($this,'acfJsonSave'));
     }
 
     /**

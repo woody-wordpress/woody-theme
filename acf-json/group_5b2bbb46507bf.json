@@ -1,7 +1,8 @@
 {
     "key": "group_5b2bbb46507bf",
     "title": "En-tête de page",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5b2bc0e256db0",
             "label": "Contenu",
             "name": "",
@@ -95,25 +96,6 @@
             "ajax": 1,
             "return_format": "value",
             "placeholder": ""
-        },
-        {
-            "key": "field_5b2bbc42ec6b3",
-            "label": "Afficher le bouton d'ajout aux favoris",
-            "name": "page_teaser_display_favs_btn",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "25",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 1,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
         },
         {
             "key": "field_5b2bbcadec6b4",
@@ -239,11 +221,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b44bfc2e2e21",
-                    "operator": "==",
-                    "value": "1"
-                }]
+                [
+                    {
+                        "field": "field_5b44bfc2e2e21",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "50",
@@ -271,7 +255,8 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
+                [
+                    {
                         "field": "field_5b44b9b274494",
                         "operator": "==",
                         "value": "img"
@@ -307,7 +292,8 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
+                [
+                    {
                         "field": "field_5b44bfc2e2e21",
                         "operator": "==",
                         "value": "1"
@@ -335,7 +321,8 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
+                [
+                    {
                         "field": "field_5b44b9b274494",
                         "operator": "==",
                         "value": "widget"
@@ -366,7 +353,8 @@
             "instructions": "Vous pouvez choisir un zoom entre \"5\" et \"20\" (5 étant très éloigné \/ 20 étant très proche)",
             "required": 0,
             "conditional_logic": [
-                [{
+                [
+                    {
                         "field": "field_5b44b9b274494",
                         "operator": "==",
                         "value": "map"
@@ -418,11 +406,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5c614d83a4e9b",
-                    "operator": "==",
-                    "value": "1"
-                }]
+                [
+                    {
+                        "field": "field_5c614d83a4e9b",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -430,7 +420,8 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5ed7ff144e739",
                     "label": "Utiliser un profil existant",
                     "name": "use_profile",
@@ -457,11 +448,13 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5ed7ff144e739",
-                            "operator": "==",
-                            "value": "1"
-                        }]
+                        [
+                            {
+                                "field": "field_5ed7ff144e739",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "",
@@ -542,11 +535,13 @@
                     "instructions": "Exemple : Rencontrez * Prénom *",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5ed7ff144e739",
-                            "operator": "!=",
-                            "value": "1"
-                        }]
+                        [
+                            {
+                                "field": "field_5ed7ff144e739",
+                                "operator": "!=",
+                                "value": "1"
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "25",
@@ -567,11 +562,13 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5ed7ff144e739",
-                            "operator": "!=",
-                            "value": "1"
-                        }]
+                        [
+                            {
+                                "field": "field_5ed7ff144e739",
+                                "operator": "!=",
+                                "value": "1"
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "25",
@@ -597,11 +594,13 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5ed7ff144e739",
-                            "operator": "!=",
-                            "value": "1"
-                        }]
+                        [
+                            {
+                                "field": "field_5ed7ff144e739",
+                                "operator": "!=",
+                                "value": "1"
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "50",
@@ -628,7 +627,8 @@
                         "id": ""
                     },
                     "layout": "block",
-                    "sub_fields": [{
+                    "sub_fields": [
+                        {
                             "key": "field_5c614fdaa4ea2",
                             "label": "Titre",
                             "name": "profile_favs_title",
@@ -689,7 +689,8 @@
                             "max": 4,
                             "layout": "block",
                             "button_label": "",
-                            "sub_fields": [{
+                            "sub_fields": [
+                                {
                                     "key": "field_5c61508ca4ea5",
                                     "label": "Icône",
                                     "name": "profile_fav_woody_icon",
@@ -697,11 +698,13 @@
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": [
-                                        [{
-                                            "field": "field_5c614ff7a4ea3",
-                                            "operator": "==",
-                                            "value": "icons"
-                                        }]
+                                        [
+                                            {
+                                                "field": "field_5c614ff7a4ea3",
+                                                "operator": "==",
+                                                "value": "icons"
+                                            }
+                                        ]
                                     ],
                                     "wrapper": {
                                         "width": "",
@@ -725,11 +728,13 @@
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": [
-                                        [{
-                                            "field": "field_5c614ff7a4ea3",
-                                            "operator": "==",
-                                            "value": "textes"
-                                        }]
+                                        [
+                                            {
+                                                "field": "field_5c614ff7a4ea3",
+                                                "operator": "==",
+                                                "value": "textes"
+                                            }
+                                        ]
                                     ],
                                     "wrapper": {
                                         "width": "",
@@ -903,7 +908,8 @@
         }
     ],
     "location": [
-        [{
+        [
+            {
                 "param": "post_type",
                 "operator": "==",
                 "value": "page"
@@ -924,7 +930,8 @@
                 "value": "custom_frontpage"
             }
         ],
-        [{
+        [
+            {
                 "param": "post_type",
                 "operator": "==",
                 "value": "woody_model"
@@ -940,7 +947,8 @@
                 "value": "mirror_page"
             }
         ],
-        [{
+        [
+            {
                 "param": "post_type",
                 "operator": "==",
                 "value": "woody_rdbk_leaflets"
