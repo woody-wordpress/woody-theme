@@ -95,44 +95,6 @@
             "ui_off_text": ""
         },
         {
-            "key": "field_5d039af8a226f",
-            "label": "Page des favoris",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "left",
-            "endpoint": 0
-        },
-        {
-            "key": "field_5d039af8a2286",
-            "label": "Page des favoris",
-            "name": "favorites_page_url",
-            "type": "post_object",
-            "instructions": "Si la page est traduite, les traductions seront automatiquement utilisées pour les langues correspondantes",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "page"
-            ],
-            "taxonomy": "",
-            "allow_null": 1,
-            "multiple": 0,
-            "return_format": "id",
-            "ui": 1
-        },
-        {
             "key": "field_611f6f55bc6de",
             "label": "Page des bons plans",
             "name": "",

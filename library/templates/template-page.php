@@ -241,12 +241,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             // Add class "has-hero" to body if page hero is here
         }
 
-        // Si on est sur la page favoris, on ajoute un bouton pour l'impression
-        $is_fav = apply_filters('woody_get_field_option', 'favorites_page_url');
-        if (!empty($is_fav) && $is_fav === $this->context['post_id']) {
-            $this->context['printable'] = true;
-        }
-
         $this->context = apply_filters('woody_page_context', $this->context);
     }
 
