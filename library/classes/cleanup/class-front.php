@@ -32,6 +32,8 @@ class WoodyTheme_Cleanup_Front
         // Remove private/protected prefixes
         add_filter('private_title_format', [$this, 'removePrivatePrefix']);
         add_filter('protected_title_format', [$this, 'removePrivatePrefix']);
+
+        add_filter('rewrite_rules_array', [$this, 'rewriteRulesArray']);
     }
 
     public function cleanupHead()
@@ -120,5 +122,24 @@ class WoodyTheme_Cleanup_Front
     public function removePrivatePrefix()
     {
         return '%s';
+    }
+
+    public function rewriteRulesArray($rules)
+    {
+        foreach ($rules as $rule => $rewrite) {
+            if (strpos($rule, '/feed/') !== false ||
+            strpos($rule, '/embed/') !== false ||
+            strpos($rule, '/trackback/') !== false ||
+            strpos($rule, '/page/') !== false ||
+            strpos($rule, '/category/') !== false ||
+            strpos($rule, '/themes/') !== false ||
+            strpos($rule, '/attachment/') !== false ||
+            strpos($rule, 'feed|rdf|rss|rss2|atom') !== false ||
+            strpos($rule, '&attachment=') !== false ||
+            strpos($rule, 'comment-page') !== false) {
+                unset($rules[$rule]);
+            }
+        }
+        return $rules;
     }
 }
