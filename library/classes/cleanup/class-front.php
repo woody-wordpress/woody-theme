@@ -135,7 +135,7 @@ class WoodyTheme_Cleanup_Front
             strpos($rule, '/themes/') !== false ||
             strpos($rule, '/attachment/') !== false ||
             strpos($rule, 'feed|rdf|rss|rss2|atom') !== false ||
-            strpos($rule, '&attachment=') !== false ||
+            strpos($rewrite, 'attachment=') !== false ||
             strpos($rule, 'comment-page') !== false) {
                 unset($rules[$rule]);
             }
