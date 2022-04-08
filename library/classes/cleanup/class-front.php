@@ -32,8 +32,8 @@ class WoodyTheme_Cleanup_Front
         // Remove private/protected prefixes
         add_filter('private_title_format', [$this, 'removePrivatePrefix']);
         add_filter('protected_title_format', [$this, 'removePrivatePrefix']);
-
-        add_filter('rewrite_rules_array', [$this, 'rewriteRulesArray']);
+        // Cleanup Rewrite Rules
+        add_filter('rewrite_rules_array', [$this, 'rewriteRulesArray'], 1);
     }
 
     public function cleanupHead()
