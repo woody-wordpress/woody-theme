@@ -179,7 +179,6 @@ abstract class WoodyTheme_TemplateAbstract
     {
         $return = [];
 
-        $return['favorites_url'] = pll_get_post(get_field('favorites_page_url', 'options'));
         $return['deals_url'] = pll_get_post(get_field('deals_page_url', 'options'));
         $return['deals_printable_url'] = pll_get_post(get_field('deals_printable_page_url', 'options'));
 
@@ -226,7 +225,7 @@ abstract class WoodyTheme_TemplateAbstract
             $this->context['is_tourist_information_center'] = get_field('woody_tourist_information_center', 'options') ? true : false;
             if ($this->context['is_tourist_information_center']) {
                 $woody_tourist_informations = get_field('woody_tourist_informations', 'options');
-                 // Ajout d'infos supplémentaires au format JSON
+                // Ajout d'infos supplémentaires au format JSON
                 $more_tourist_informations = apply_filters('woody_tourist_more_informations', '');
 
                 $this->context['tourist_information_center']['city'] = $woody_tourist_informations['woody_tourist_information_city'] ?: ''; // Ville
@@ -311,13 +310,6 @@ abstract class WoodyTheme_TemplateAbstract
         $tools_blocks['season_switcher'] = $this->addSeasonSwitcher();
         $this->context['season_switcher'] = apply_filters('season_switcher', $tools_blocks['season_switcher']);
         $this->context['season_switcher_mobile'] = apply_filters('season_switcher_mobile', $tools_blocks['season_switcher']);
-
-        // Add addFavoritesBlock
-        if (in_array('favorites', $this->context['enabled_woody_options'])) {
-            $tools_blocks['favorites_block'] = $this->addFavoritesBlock();
-            $this->context['favorites_block'] = apply_filters('favorites_block', $tools_blocks['favorites_block']);
-            $this->context['favorites_block_mobile'] = apply_filters('favorites_block_mobile', $tools_blocks['favorites_block']);
-        }
 
         // Add addDealsBlock
         if (in_array('deals', $this->context['enabled_woody_options'])) {
@@ -830,24 +822,6 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         return $data;
-    }
-
-    private function addFavoritesBlock()
-    {
-        $favorites_post_id = apply_filters('woody_get_field_option', 'favorites_page_url');
-        if (!empty($favorites_post_id)) {
-            $data = [];
-            $data['favorites_page_url'] = woody_get_permalink(pll_get_post($favorites_post_id));
-
-            // Set a default template
-            $tpl = apply_filters('favorites_block_tpl', null);
-            $template = !empty($tpl['template']) ? $tpl['template'] : $this->context['woody_components']['woody_widgets-favorites_block-tpl_01'];
-
-            // Allow data override
-            $data = apply_filters('favorites_block_data', $data);
-
-            return \Timber::compile($template, $data);
-        }
     }
 
     private function addDealsBlock()
