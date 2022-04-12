@@ -31,12 +31,6 @@ class WoodyTheme_Dashboard
         );
 
         wp_add_dashboard_widget(
-            'woody-tutoriel', // Widget slug.
-            'Tutoriel Woody Websites', // Title.
-            [$this, 'tutorielWoodyWidget'] // Display function.
-        );
-
-        wp_add_dashboard_widget(
             'woody-lestudio', // Widget slug.
             'Le Studio', // Title.
             [$this, 'leStudioWidget'] // Display function.
@@ -48,26 +42,11 @@ class WoodyTheme_Dashboard
         $vars = [
             'class' => 'raccourci-family',
             'cover' => get_template_directory_uri() . '/library/classes/dashboard/assets/cover-raccourci-family.jpg',
-            'title' => 'Groupe Facebook · 476 membres',
+            'title' => 'Groupe Facebook · 572 membres',
             'description' => 'Un lieu d&#039;échange de partage et de bonnes idées entre tous les membres de la Raccourci Family !',
             'button_link' => 'https://www.facebook.com/plugins/group/join/popup/?group_id=355097798174987&amp;source=email_campaign_plugin',
             'button_icon' => 'facebook',
             'button_text' => 'Rejoindre ce groupe',
-        ];
-
-        print $this->getWidgetTpl($vars);
-    }
-
-    public function tutorielWoodyWidget()
-    {
-        $vars = [
-            'class' => 'tutoriel-woody',
-            'cover' => get_template_directory_uri() . '/library/classes/dashboard/assets/cover-tutoriel-woody.jpg',
-            'title' => 'Tutoriel 2.0 - Woody Websites',
-            'description' => 'Conseils et astuces sur la prise en main de votre site réalisé avec Woody Website',
-            'button_link' => get_template_directory_uri() . '/library/classes/dashboard/assets/Tutoriel_Woody_Websites_by_Raccourci_Agency_2.0.pdf',
-            'button_icon' => 'download',
-            'button_text' => 'Télécharger le PDF',
         ];
 
         print $this->getWidgetTpl($vars);
