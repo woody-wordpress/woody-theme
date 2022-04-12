@@ -40,7 +40,7 @@ class WoodyTheme_Profiles
                 'not_found'           => 'Non trouvé',
                 'not_found_in_trash'  => 'Non trouvé dans la corbeille',
             ),
-            'hierarchical'        => true,
+            'hierarchical'        => false,
             'public'              => true,
             'show_ui'             => true,
             'supports'            => array('title', 'custom-fields', 'page-attributes'),
