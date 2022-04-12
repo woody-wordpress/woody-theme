@@ -112,6 +112,10 @@ abstract class WoodyTheme_TemplateAbstract
         if (empty($this->globals['ancestors'])) {
             $this->globals['ancestors'] = $this->getAncestors($this->context['post']);
         }
+
+        if(empty($this->globals['env'])){
+            $this->globals['env'] = WP_ENV;
+        }
     }
 
     private function getAncestors($post)
