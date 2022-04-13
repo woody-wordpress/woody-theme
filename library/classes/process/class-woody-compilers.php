@@ -563,11 +563,14 @@ class WoodyTheme_WoodyCompilers
 
         // On récupère le tpl du visuel & accroche pour ajouter du contexte à l'en-tête si besoin
         //TODO: Vérifier que le comportement est bon avec un fadingHero
-        $page_hero_tpl = substr(getAcfGroupFields('group_5b052bbee40a4', $context['post'])['heading_woody_tpl'], -6);
-        if ($page_hero_tpl == 'tpl_05' || $page_hero_tpl == 'tpl_06') {
-            $page_teaser['the_classes'][] = (empty($page_teaser['background_color'])) ? 'bg-transparent' : '';
-        }
 
+        if(!empty(getAcfGroupFields('group_5b052bbee40a4', $context['post'])['heading_woody_tpl'])) {
+            $page_hero_tpl = substr(getAcfGroupFields('group_5b052bbee40a4', $context['post'])['heading_woody_tpl'], -6);
+
+            if ($page_hero_tpl == 'tpl_05' || $page_hero_tpl == 'tpl_06') {
+                $page_teaser['the_classes'][] = (empty($page_teaser['background_color'])) ? 'bg-transparent' : '';
+            }
+        }
 
         $page_teaser['page_teaser_title'] = (!empty($page_teaser['page_teaser_display_title'])) ? str_replace('-', '&#8209', $context['post_title']) : '';
 
@@ -581,6 +584,7 @@ class WoodyTheme_WoodyCompilers
         $page_teaser['classes'] = (!empty($page_teaser['the_classes'])) ? implode(' ', $page_teaser['the_classes']) : '';
 
         $page_teaser['breadcrumb'] = $this->createBreadcrumb($context);
+
         $page_teaser['trip_infos'] = (!empty($context['trip_infos'])) ? $context['trip_infos'] : '';
         $page_teaser['social_shares'] = (!empty($context['social_shares'])) ? $context['social_shares'] : '';
 
