@@ -553,7 +553,7 @@ class WoodyTheme_Roles
             ],
             'woody_process_csv_edit' => [
                 'administrator' => true,
-                'editor' => false,
+                'editor' => true,
                 'contributor' => false,
                 'translator' => false,
             ],
