@@ -144,6 +144,7 @@ class WoodyTheme_Polylang
         __('Aucun résultat', 'woody-theme');
         __("Voir la carte", 'woody-theme');
         __("Afficher la carte", 'woody-theme');
+        __("Masquer la carte", 'woody-theme');
         __("Partager sur Facebook", 'woody-theme');
         __("Partager sur Twitter", 'woody-theme');
         __("Partager sur LinkedIn", 'woody-theme');

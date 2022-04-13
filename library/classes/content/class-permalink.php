@@ -23,6 +23,7 @@ class WoodyTheme_Permalink
 
         add_action('pll_save_post', [$this, 'savePost'], 10, 3);
         add_action('delete_post', [$this, 'deletePost'], 10);
+        add_action('template_redirect', [$this, 'templateRedirect'], 10);
         add_action('template_redirect', [$this, 'redirect404'], 999);
 
         add_action('before_delete_post', [$this, 'cleanRedirects']);
@@ -52,15 +53,27 @@ class WoodyTheme_Permalink
         return $permalink;
     }
 
+    public function templateRedirect()
+    {
+        global $wp, $post;
+        if (!empty($post)) {
+            $permalink = woody_get_permalink($post->ID);
+            if (!empty($permalink) && !empty($wp->request) && strpos($permalink, $wp->request) == false) {
+                wp_redirect($permalink, 301, 'Woody Permalink');
+                exit;
+            }
+        }
+    }
+
     public function redirect404()
     {
         global $wp_query, $wp;
         $pll_current_language = pll_current_language();
         if ($wp_query->is_404 && empty($wp_query->queried_object_id) && !empty($wp->request) && !empty($pll_current_language)) {
-            output_log('$wp_query->is_404 : ' . $wp_query->is_404);
+            // output_log('$wp_query->is_404 : ' . $wp_query->is_404);
             $permalink = null;
             $post_id = url_to_postid($wp->request);
-            output_log('$post_id : ' . $post_id);
+            // output_log('$post_id : ' . $post_id);
             if (!empty($post_id)) {
                 $permalink = woody_get_permalink($post_id);
             } else {
@@ -98,8 +111,8 @@ class WoodyTheme_Permalink
                     ]);
                 }
 
-                output_log('$query_result->posts');
-                output_log($query_result->posts);
+                // output_log('$query_result->posts');
+                // output_log($query_result->posts);
 
                 if (!empty($query_result->posts)) {
                     $post = current($query_result->posts);
@@ -116,7 +129,7 @@ class WoodyTheme_Permalink
                                 $match_url = '/' . $wp->request;
                             }
 
-                            output_log('$url : ' . $url);
+                            // output_log('$url : ' . $url);
 
                             if ($url != $parse_permalink && $match_url != $parse_permalink) {
                                 $params = [
@@ -137,8 +150,8 @@ class WoodyTheme_Permalink
                                     'regex'  => 0,
                                 ];
 
-                                output_log('$params');
-                                output_log($params);
+                                // output_log('$params');
+                                // output_log($params);
 
                                 include WP_PLUGINS_DIR . '/redirection/models/group.php';
                                 Red_Item::create($params);

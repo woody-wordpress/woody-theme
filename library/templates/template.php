@@ -112,6 +112,10 @@ abstract class WoodyTheme_TemplateAbstract
         if (empty($this->globals['ancestors'])) {
             $this->globals['ancestors'] = $this->getAncestors($this->context['post']);
         }
+
+        if(empty($this->globals['env'])){
+            $this->globals['env'] = WP_ENV;
+        }
     }
 
     private function getAncestors($post)
@@ -197,7 +201,7 @@ abstract class WoodyTheme_TemplateAbstract
     {
         $this->context = Timber::get_context();
         $this->context['post_id'] = get_the_ID();
-        $this->context['current_url'] = get_permalink();
+        $this->context['current_url'] = woody_get_permalink();
         $this->context['site_key'] = WP_SITE_KEY;
 
         // Default values

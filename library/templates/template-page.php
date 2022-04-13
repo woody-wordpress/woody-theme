@@ -115,7 +115,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     }
 
                     if (!empty($slide['landswpr_slide_media']) && $slide['landswpr_slide_media']['landswpr_slide_media_type'] == 'img' && !empty($slide['landswpr_slide_media']['landswpr_slide_img'])) {
-                        $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img']['lazy'] = 'disabled';
+                        $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img']['lazy'] = apply_filters('woody_landswpr_slide_img_lazy', 'disabled');
                         $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img']['attachment_more_data'] = $this->tools->getAttachmentMoreData($home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img']['ID']);
                     }
 
@@ -188,7 +188,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 if (!empty($trip_infos['the_price']['activate_quotation'])) {
                     $quotation_id = get_option("options_quotation_page_url");
                     $quotation_id = pll_get_post($quotation_id) !== false ? pll_get_post($quotation_id) : $quotation_id;
-                    $trip_infos['quotation_link']['link_label'] = get_permalink($quotation_id) . "?sejour=" . $this->context['post_id'];
+                    $trip_infos['quotation_link']['link_label'] = woody_get_permalink($quotation_id) . "?sejour=" . $this->context['post_id'];
                 }
                 if (!empty($trip_infos['the_duration']['duration_unit']) && $trip_infos['the_duration']['duration_unit'] == 'component_based') {
                     $trip_infos['the_duration'] = $groupQuotation->calculTripDuration($trip_infos['the_duration']);
@@ -297,7 +297,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $bookblock['classes'] = (!empty($bookblock['the_classes'])) ? implode(' ', $bookblock['the_classes']) : '';
                 if (!empty($bookblock['bookblock_playlists'])) {
                     foreach ($bookblock['bookblock_playlists'] as $pl_key => $pl) {
-                        $bookblock['bookblock_playlists'][$pl_key]['permalink'] = get_permalink($pl['pl_post_id']);
+                        $bookblock['bookblock_playlists'][$pl_key]['permalink'] = woody_get_permalink($pl['pl_post_id']);
                         $pl_confId = get_field('field_5b338ff331b17', $pl['pl_post_id']);
                         $bookblock['bookblock_playlists'][$pl_key]['pl_conf_id'] = $pl_confId;
                         if (!empty($pl_confId)) {

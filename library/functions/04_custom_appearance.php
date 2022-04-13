@@ -2,7 +2,7 @@
 
 function getActiveShares($values =[])
 {
-    $current_url = add_query_arg([$_GET], get_permalink());
+    $current_url = add_query_arg([$_GET], woody_get_permalink());
     // $return['current_media'] = !empty(get_field('field_5b0e5ddfd4b1b')) ? get_field('field_5b0e5ddfd4b1b')['url']:'';
     $active_shares = (!empty($values)) ? $values : get_field('field_5ee9c784e017d', 'option');
     $path_icons = get_template_directory() . '/src/icons/shares/';
