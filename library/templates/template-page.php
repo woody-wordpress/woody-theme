@@ -33,9 +33,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
     protected function getHeaders()
     {
-        if ($this->context['page_type'] === 'playlist_tourism') {
-            return $this->playlistHeaders();
-        }
+        $return = apply_filters('woody_page_headers', null, $this->context);
+        return $return;
     }
 
     protected function setTwigTpl()
@@ -57,8 +56,13 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             if (post_password_required($this->context['post'])) {
                 echo get_the_password_form($this->context['post']);
             } else {
+                if ($this->context['page_type'] == 'front_page') {
+                    $this->frontPageContext();
+                } else {
+                    $this->pageContext();
+                }
+
                 $this->commonContext();
-                $this->pageContext();
             }
         }
     }
@@ -79,70 +83,26 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $this->context['content'] = $custom;
     }
 
+    protected function frontPageContext()
+    {
+        $this->context['is_frontpage'] = true;
+
+        //  Compilation du Diaporama et du bloc de réservation pour les pages de type "accueil" (!= frontpage)
+        $this->context['home_slider'] = $this->compilers->formatHomeSlider($this->context['post_id'], $this->context['woody_components']);
+        $this->context['after_landswpr'] = !empty($this->context['page_parts']['after_landswpr']) ? $this->context['page_parts']['after_landswpr'] : '';
+        $this->context['bookblock'] = $this->compilers->formatBookBlock($this->context['post_id'], $this->context['woody_components']);
+    }
+
     protected function pageContext()
     {
         $this->context['is_frontpage'] = false;
-
         $social_shares['active_shares'] = getActiveShares();
         $this->context['social_shares'] = \Timber::compile($this->context['woody_components']['blocks-shares-tpl_01'], $social_shares);
-
-        /******************************************************************************
-         * Compilation du Diaporama pour les pages de type "accueil" (!= frontpage)
-         ******************************************************************************/
-        $page_type = wp_get_post_terms($this->context['post_id'], 'page_type');
-        if (!empty($page_type[0]) && $page_type[0]->slug == 'front_page') {
-            $this->context['is_frontpage'] = true;
-            $home_slider = getAcfGroupFields('group_5bb325e8b6b43', $this->context['post']);
-
-            $plyr_options = [
-                'muted' => true,
-                'autoplay' => true,
-                'controls' => ['volume', 'mute'],
-                'loop' => ['active' => true],
-                'youtube' => ['noCookie' => true]
-            ];
-
-            $home_slider['plyr_options'] = json_encode($plyr_options);
-
-            if (!empty($home_slider['landswpr_slides'])) {
-                foreach ($home_slider['landswpr_slides'] as $slide_key => $slide) {
-                    // Si on est dans le cas d'une vidéo oEmbed, on récupère la plus grande miniature possible
-                    // Permet d'afficher un poster le temps du chargement de Plyr
-                    if (!empty($slide['landswpr_slide_media']) && $slide['landswpr_slide_media']['landswpr_slide_media_type'] == 'embed' && !empty($slide['landswpr_slide_media']['landswpr_slide_embed'])) {
-                        if (!empty(embedProviderThumbnail($slide['landswpr_slide_media']['landswpr_slide_embed']))) {
-                            $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_embed_thumbnail_url'] = embedProviderThumbnail($slide['landswpr_slide_media']['landswpr_slide_embed']);
-                        }
-                    }
-
-                    if (!empty($slide['landswpr_slide_media']) && $slide['landswpr_slide_media']['landswpr_slide_media_type'] == 'img' && !empty($slide['landswpr_slide_media']['landswpr_slide_img'])) {
-                        $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img']['lazy'] = apply_filters('woody_landswpr_slide_img_lazy', 'disabled');
-                        $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img']['attachment_more_data'] = $this->tools->getAttachmentMoreData($home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img']['ID']);
-                    }
-
-                    if (!empty($slide['landswpr_slide_add_social_movie']) && !empty($slide['landswpr_slide_social_movie'])) {
-                        preg_match_all('@src="([^"]+)"@', $slide['landswpr_slide_social_movie'], $result);
-                        if (!empty($result[1]) && !empty($result[1][0])) {
-                            $iframe_url = $result[1][0];
-
-                            if (strpos($iframe_url, 'youtube') != false) {
-                                $yt_params_url = $iframe_url . '?&autoplay=0&rel=0';
-                                $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_has_social_movie'] = true;
-                                $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_social_movie'] = str_replace($iframe_url, $yt_params_url, $slide['landswpr_slide_social_movie']);
-                            }
-                        }
-                    }
-                }
-                $home_slider = apply_filters('woody_format_homeslider_data', $home_slider);
-                $this->context['home_slider'] = \Timber::compile($this->context['woody_components'][$home_slider['landswpr_woody_tpl']], $home_slider);
-            }
-
-            $this->context['after_landswpr'] = !empty($this->context['page_parts']['after_landswpr']) ? $this->context['page_parts']['after_landswpr'] : '';
-        }
 
         /*********************************************
          * Compilation du bloc prix
          *********************************************/
-
+        // TODO : Move this code
         $trip_types = [];
         $trip_term = get_term_by('slug', 'trip', 'page_type');
         if (!empty($trip_term)) {
@@ -229,16 +189,13 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             }
         }
 
-        // Compilation de l'en tête de page et du visuel et accroche pour les pages qui ne sont pas de type "accueil"
-        if (!empty($page_type[0]) && $page_type[0]->slug != 'front_page') {
-            $this->context['page_teaser'] = $this->compilers->formatPageTeaser($this->context);
-            $page_hero = $this->compilers->formatPageHero($this->context);
-            if (!empty($page_hero)) {
-                $this->context['page_hero'] = $page_hero['view'];
-                $this->context['body_class'] = $this->context['body_class'] . ' has-hero'; // Add Class has-hero
-                $this->context['body_class'] = $this->context['body_class'] . ' has-' . $page_hero['data']['heading_woody_tpl']; // Add Class has-hero-block-tpl
-            }
-            // Add class "has-hero" to body if page hero is here
+        // Compilation de l'en tête de page et du visuel et accroche
+        $this->context['page_teaser'] = $this->compilers->formatPageTeaser($this->context);
+        $page_hero = $this->compilers->formatPageHero($this->context);
+        if (!empty($page_hero)) {
+            $this->context['page_hero'] = $page_hero['view'];
+            $this->context['body_class'] = $this->context['body_class'] . ' has-hero'; // Add Class has-hero
+            $this->context['body_class'] = $this->context['body_class'] . ' has-' . $page_hero['data']['heading_woody_tpl']; // Add Class has-hero-block-tpl
         }
 
         $this->context = apply_filters('woody_page_context', $this->context);
@@ -247,18 +204,10 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     protected function commonContext()
     {
         $this->context['page_terms'] = implode(' ', getPageTerms($this->context['post_id']));
+        // TODO : Trouver toutes les utilisation du default marker et modifier/déplacer cette ligne
         $this->context['default_marker'] = file_get_contents($this->context['dist_dir'] . '/img/default-marker.svg');
+
         $this->context['hide_page_zones'] = get_field('hide_page_zones');
-        $this->context['is_pocketsite'] = !empty($this->context['mirror_id']) ? apply_filters('is_pocketsite', false, $this->context['mirror_id']) : apply_filters('is_pocketsite', false, $this->context['post_id']);
-
-        if ($this->context['is_pocketsite']) {
-            if (empty($this->context['hide_page_zones'])) {
-                $this->context['hide_page_zones'] = ['header', 'footer', 'breadcrumb'];
-            }
-            $id = !empty($this->context['mirror_id']) ? $this->context['mirror_id'] : $this->context['post_id'];
-            $this->context['pocketsite_menu'] = apply_filters('pocketsite_menu', '', $id);
-        }
-
         if (is_array($this->context['hide_page_zones'])) {
             if (in_array('header', $this->context['hide_page_zones'])) {
                 $this->context['body_class'] = $this->context['body_class'] . ' no-page-header';
@@ -269,75 +218,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         }
 
         $this->getParamsToNoIndex();
-
-        /*********************************************
-         * Check type de publication
-         *********************************************/
-        if ($this->context['page_type'] === 'playlist_tourism') {
-            $this->playlistContext();
-        }
-
-        /*********************************************
-         * Compilation du bloc de réservation
-         *********************************************/
-        if ($this->context['page_type'] === 'front_page') {
-            $bookblock = [];
-            $bookblock = getAcfGroupFields('group_5c0e4121ee3ed', $this->context['post']);
-
-            if (!empty($bookblock['bookblock_playlists'][0]['pl_post_id'])) {
-                $bookblock['the_classes'] = [];
-                $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_img_opacity'])) ? $bookblock['bookblock_bg_params']['background_img_opacity'] : '';
-                $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_color'])) ? $bookblock['bookblock_bg_params']['background_color'] : '';
-                $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_color_opacity'])) ? $bookblock['bookblock_bg_params']['background_color_opacity'] : '';
-                $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['border_color'])) ? $bookblock['bookblock_bg_params']['border_color'] : '';
-                $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_img'])) ? 'isRel' : '';
-                if (!empty($bookblock['bookblock_bg_params']['background_img_opacity']) || !empty($bookblock['bookblock_bg_params']['background_color']) || !empty($bookblock['bookblock_bg_params']['border_color'])) {
-                    $bookblock['the_classes'][] = 'padd-all-md';
-                }
-                $bookblock['classes'] = (!empty($bookblock['the_classes'])) ? implode(' ', $bookblock['the_classes']) : '';
-                if (!empty($bookblock['bookblock_playlists'])) {
-                    foreach ($bookblock['bookblock_playlists'] as $pl_key => $pl) {
-                        $bookblock['bookblock_playlists'][$pl_key]['permalink'] = woody_get_permalink($pl['pl_post_id']);
-                        $pl_confId = get_field('field_5b338ff331b17', $pl['pl_post_id']);
-                        $bookblock['bookblock_playlists'][$pl_key]['pl_conf_id'] = $pl_confId;
-                        if (!empty($pl_confId)) {
-                            $pl_lang = pll_get_post_language($pl['pl_post_id']);
-                            $pl_params = apply_filters('woody_hawwwai_playlist_render', $pl_confId, $pl_lang, [], 'json');
-                            $facets = (!empty($pl_params['filters'])) ? $pl_params['filters'] : '';
-                            if (!empty($facets)) {
-                                foreach ($facets as $facet) {
-                                    if ($facet['type'] === 'daterangeWithAvailabilities') {
-                                        $bookblock['bookblock_playlists'][$pl_key]['filters']['id'] = $facet['id'];
-                                        $bookblock['bookblock_playlists'][$pl_key]['filters']['translations'] = (!empty($facet['TR'])) ? $facet['TR'] : '';
-                                        $bookblock['bookblock_playlists'][$pl_key]['filters']['display_options'] = (!empty($facet['display_options'])) ? $facet['display_options'] : '';
-                                        if (!empty($facet['display_options']['booking_range']['values'])) {
-                                            $range_values = $facet['display_options']['booking_range']['values'];
-                                            if ($range_values[0]['mode'] == 3 && !empty($range_values[0]['customValue'])) {
-                                                $bookblock['bookblock_playlists'][$pl_key]['filters']['singledate'] = true;
-                                                $bookblock['bookblock_playlists'][$pl_key]['filters']['periods'] = $range_values[0]['customValue'];
-                                            } else {
-                                                $bookblock['bookblock_playlists'][$pl_key]['filters']['daterange'] = true;
-                                            }
-                                        }
-                                        if (!empty($facet['display_options']['persons']['values'])) {
-                                            foreach ($facet['display_options']['persons']['values'] as $person) {
-                                                if (!empty($person['field'])) {
-                                                    $bookblock['bookblock_playlists'][$pl_key]['filters'][$person['field']] = $person['display'];
-                                                }
-                                            }
-                                        }
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                $this->context['bookblock'] = \Timber::compile($this->context['woody_components'][$bookblock['bookblock_woody_tpl']], $bookblock);
-            }
-        }
-
 
         /*********************************************
          * Compilation des sections
@@ -398,139 +278,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             $id = $query_result->posts[0]->ID;
         }
         return $id;
-    }
-
-    protected function playlistContext()
-    {
-        $this->context['body_class'] .= ' apirender apirender-playlist apirender-wordpress';
-
-        /** ************************
-         * Vérification pré-cochage
-         ************************ **/
-        $playlist_type = get_field('field_5c7e59967f790', $this->context['post_id']);
-        $autoselect_id = '';
-        $existing_playlist = get_field('field_5c7e8bf42b9af', $this->context['post_id']);
-
-
-        if ($playlist_type == 'autoselect' && !empty($existing_playlist['existing_playlist_autoselect_url']) && !empty($existing_playlist['playlist_autoselect_id'])) {
-            $post_id = url_to_postid($existing_playlist['existing_playlist_autoselect_url']);
-
-            if ($post_id == 0 && is_plugin_active('custom-permalinks/custom-permalinks.php')) {
-                $post_id = $this->customPermalinkPlaylistId($existing_playlist['existing_playlist_autoselect_url']);
-            }
-
-            $playlistConfId = get_field('field_5b338ff331b17', $post_id);
-            $autoselect_id = $existing_playlist['playlist_autoselect_id'];
-        } else {
-            $autoselect_field = get_field('field_5c7e5bd174a2f', $this->context['post_id']);
-            if (!empty($autoselect_field['new_playlist_autoselect_id'])) {
-                $autoselect_id = $autoselect_field['new_playlist_autoselect_id'];
-            }
-            $playlistConfId = get_field('field_5b338ff331b17', $this->context['post_id']);
-        }
-
-        // allowed parameters for Wordpress playlists need to be added here
-        $checkMethod = !empty($_POST) ? INPUT_POST : INPUT_GET;
-        $checkQueryVars = [
-            // page number (12 items by page)
-            'listpage'   => [
-                'filter' => FILTER_VALIDATE_INT,
-                'flags'  => [FILTER_REQUIRE_SCALAR, FILTER_NULL_ON_FAILURE],
-                'options'   => ['min_range' => 1]
-            ],
-        ];
-        $checkAutoSelect = [
-            // id of created facet autoselection returning filtered playlist
-            'autoselect_id'   => [
-                'filter' => FILTER_VALIDATE_INT,
-                'flags'  => [FILTER_REQUIRE_SCALAR, FILTER_NULL_ON_FAILURE],
-            ],
-        ];
-
-        // build query in validated array
-        $query = filter_input_array($checkMethod, $checkAutoSelect, $add_non_existing = false);
-        $query_GQV = filter_input_array(INPUT_GET, $checkQueryVars, $add_non_existing = false);
-
-        $query = array_merge((array) $query, (array) $query_GQV);
-        foreach ($query as $key => $param) {
-            if (!$param) {
-                unset($query[$key]);
-            }
-        }
-
-        // Si un identifiant de précochage est présent, on le passe à l'apirender
-        if (!empty($autoselect_id)) {
-            $query['autoselect_id'] = $autoselect_id;
-            $this->context['title'] .= sprintf(' | %s %s', __('Sélection', 'woody-theme'), $autoselect_id);
-        }
-
-        if (!empty($query['listpage']) && is_numeric($query['listpage'])) {
-            $this->context['title'] .= sprintf(' | %s %s', __('Page', 'woody-theme'), $query['listpage']);
-        }
-
-        $query = apply_filters('woody_hawwwai_playlist_query', $query);
-
-        // Get from Apirender
-        $this->context['playlist_tourism'] = apply_filters('woody_hawwwai_playlist_render', $playlistConfId, pll_current_language(), $query);
-
-        // save confId
-        if (!empty($playlistConfId) && is_array($this->context['playlist_tourism'])) {
-            $this->context['playlist_tourism']['confId'] = $playlistConfId;
-        }
-
-        // Add next and prev rel link
-        if (!empty($this->context['playlist_tourism']['hasNextPage'])) {
-            $listpage = filter_input(INPUT_GET, 'listpage', FILTER_VALIDATE_INT);
-            if (!empty($listpage) && $listpage != 1) {
-                $prev = $listpage-1;
-                $next = $listpage+1;
-                $this->context['metas']['prev'] = [
-                    '#tag' => 'link',
-                    '#attributes' => [
-                        'href' => $prev != 1 ? $this->context['current_url'] . '?listpage=' . $prev : $this->context['current_url'],
-                        'rel' => "prev"
-                    ]
-                ];
-
-                $this->context['metas']['next'] = [
-                    '#tag' => 'link',
-                    '#attributes' => [
-                        'href' => $this->context['current_url'] . '?listpage=' . $next,
-                        'rel' => "next"
-                    ]
-                ];
-            } else {
-                $this->context['metas']['next'] = [
-                    '#tag' => 'link',
-                    '#attributes' => [
-                        'href' => $this->context['current_url'] . '?listpage=' . 2,
-                        'rel' => "next"
-                    ]
-                ];
-            }
-        }
-    }
-
-    /***************************
-     * Configuration des HTTP headers
-     *****************************/
-    public function playlistHeaders()
-    {
-        $headers = [];
-        $headers['xkey'] = [];
-        if (!empty($this->context['playlist_tourism']['modified'])) {
-            $headers['Last-Modified'] = gmdate('D, d M Y H:i:s', strtotime($this->context['playlist_tourism']['modified'])) . ' GMT';
-        }
-        if (!empty($this->context['playlist_tourism']['playlistId'])) {
-            $headers['xkey'][] = 'x-ts-idplaylist-' . $this->context['playlist_tourism']['playlistId'];
-        }
-        if (!empty($this->context['playlist_tourism']['confId'])) {
-            $headers['xkey'][] = 'x-hawwwai-idconf-' . $this->context['playlist_tourism']['confId'];
-        }
-        if (!empty($this->context['playlist_tourism']['apirender_uri'])) {
-            $headers['x-apirender-url'] = $this->context['playlist_tourism']['apirender_uri'];
-        }
-        return $headers;
     }
 
     /***************************
