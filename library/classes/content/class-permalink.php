@@ -23,7 +23,7 @@ class WoodyTheme_Permalink
 
         add_action('pll_save_post', [$this, 'savePost'], 10, 3);
         add_action('delete_post', [$this, 'deletePost'], 10);
-        // add_action('template_redirect', [$this, 'templateRedirect'], 10);
+        add_action('template_redirect', [$this, 'templateRedirect'], 10);
         add_action('template_redirect', [$this, 'redirect404'], 999);
 
         add_action('before_delete_post', [$this, 'cleanRedirects']);
@@ -53,17 +53,26 @@ class WoodyTheme_Permalink
         return $permalink;
     }
 
-    // public function templateRedirect()
-    // {
-    //     global $wp, $post;
-    //     if (!empty($post)) {
-    //         $permalink = woody_get_permalink($post->ID);
-    //         if (!empty($permalink) && !empty($wp->request) && strpos($permalink, $wp->request) == false) {
-    //             wp_redirect($permalink, 301, 'Woody Permalink');
-    //             exit;
-    //         }
-    //     }
-    // }
+    public function templateRedirect()
+    {
+        global $post;
+        if (!empty($post)) {
+            $permalink = woody_get_permalink($post->ID);
+            if (!empty($permalink) && !empty($_SERVER['REQUEST_URI'])) {
+                $permalink_path = parse_url($permalink, PHP_URL_PATH);
+                $permalink_path = (substr($permalink_path, -1) == '/') ? substr($permalink_path, 0, -1) : $permalink_path;
+
+                $request_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+                $request_path = (substr($request_path, -1) == '/') ? substr($request_path, 0, -1) : $request_path;
+
+                //console_log(['permalink_path' => $permalink_path, 'request_path' => $request_path]);
+                if ($permalink_path != $request_path) {
+                    wp_redirect($permalink, 301, 'Woody Permalink');
+                    exit;
+                }
+            }
+        }
+    }
 
     public function redirect404()
     {
