@@ -113,7 +113,7 @@ abstract class WoodyTheme_TemplateAbstract
             $this->globals['ancestors'] = $this->getAncestors($this->context['post']);
         }
 
-        if(empty($this->globals['env'])){
+        if (empty($this->globals['env'])) {
             $this->globals['env'] = WP_ENV;
         }
     }

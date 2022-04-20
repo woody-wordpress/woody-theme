@@ -752,4 +752,112 @@ class WoodyTheme_WoodyCompilers
 
         return $layout;
     }
+
+    public function formatHomeSlider($post_id, $woody_components)
+    {
+        $home_slider = getAcfGroupFields('group_5bb325e8b6b43', $post_id);
+
+        $plyr_options = [
+            'muted' => true,
+            'autoplay' => true,
+            'controls' => ['volume', 'mute'],
+            'loop' => ['active' => true],
+            'youtube' => ['noCookie' => true]
+        ];
+
+        $home_slider['plyr_options'] = json_encode($plyr_options);
+
+        if (!empty($home_slider) && !empty($home_slider['landswpr_slides'])) {
+            foreach ($home_slider['landswpr_slides'] as $slide_key => $slide) {
+                // Si on est dans le cas d'une vidéo oEmbed, on récupère la plus grande miniature possible
+                // Permet d'afficher un poster le temps du chargement de Plyr
+                if (!empty($slide['landswpr_slide_media']) && $slide['landswpr_slide_media']['landswpr_slide_media_type'] == 'embed' && !empty($slide['landswpr_slide_media']['landswpr_slide_embed'])) {
+                    if (!empty(embedProviderThumbnail($slide['landswpr_slide_media']['landswpr_slide_embed']))) {
+                        $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_embed_thumbnail_url'] = embedProviderThumbnail($slide['landswpr_slide_media']['landswpr_slide_embed']);
+                    }
+                }
+
+                if (!empty($slide['landswpr_slide_media']) && $slide['landswpr_slide_media']['landswpr_slide_media_type'] == 'img' && !empty($slide['landswpr_slide_media']['landswpr_slide_img'])) {
+                    $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img']['lazy'] = apply_filters('woody_landswpr_slide_img_lazy', 'disabled');
+                    $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img']['attachment_more_data'] = $this->tools->getAttachmentMoreData($home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img']['ID']);
+                }
+
+                if (!empty($slide['landswpr_slide_add_social_movie']) && !empty($slide['landswpr_slide_social_movie'])) {
+                    preg_match_all('@src="([^"]+)"@', $slide['landswpr_slide_social_movie'], $result);
+                    if (!empty($result[1]) && !empty($result[1][0])) {
+                        $iframe_url = $result[1][0];
+
+                        if (strpos($iframe_url, 'youtube') != false) {
+                            $yt_params_url = $iframe_url . '?&autoplay=0&rel=0';
+                            $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_has_social_movie'] = true;
+                            $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_social_movie'] = str_replace($iframe_url, $yt_params_url, $slide['landswpr_slide_social_movie']);
+                        }
+                    }
+                }
+            }
+
+            $home_slider = apply_filters('woody_format_homeslider_data', $home_slider);
+
+            return \Timber::compile($woody_components[$home_slider['landswpr_woody_tpl']], $home_slider);
+        }
+    }
+
+    public function formatBookBlock($post_id)
+    {
+        $bookblock = [];
+        $bookblock = getAcfGroupFields('group_5c0e4121ee3ed', $post_id);
+
+        if (!empty($bookblock['bookblock_playlists'][0]['pl_post_id'])) {
+            $bookblock['the_classes'] = [];
+            $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_img_opacity'])) ? $bookblock['bookblock_bg_params']['background_img_opacity'] : '';
+            $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_color'])) ? $bookblock['bookblock_bg_params']['background_color'] : '';
+            $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_color_opacity'])) ? $bookblock['bookblock_bg_params']['background_color_opacity'] : '';
+            $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['border_color'])) ? $bookblock['bookblock_bg_params']['border_color'] : '';
+            $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_img'])) ? 'isRel' : '';
+            if (!empty($bookblock['bookblock_bg_params']['background_img_opacity']) || !empty($bookblock['bookblock_bg_params']['background_color']) || !empty($bookblock['bookblock_bg_params']['border_color'])) {
+                $bookblock['the_classes'][] = 'padd-all-md';
+            }
+            $bookblock['classes'] = (!empty($bookblock['the_classes'])) ? implode(' ', $bookblock['the_classes']) : '';
+            if (!empty($bookblock['bookblock_playlists'])) {
+                foreach ($bookblock['bookblock_playlists'] as $pl_key => $pl) {
+                    $bookblock['bookblock_playlists'][$pl_key]['permalink'] = woody_get_permalink($pl['pl_post_id']);
+                    $pl_confId = get_field('field_5b338ff331b17', $pl['pl_post_id']);
+                    $bookblock['bookblock_playlists'][$pl_key]['pl_conf_id'] = $pl_confId;
+                    if (!empty($pl_confId)) {
+                        $pl_lang = pll_get_post_language($pl['pl_post_id']);
+                        $pl_params = apply_filters('woody_hawwwai_playlist_render', $pl_confId, $pl_lang, [], 'json');
+                        $facets = (!empty($pl_params['filters'])) ? $pl_params['filters'] : '';
+                        if (!empty($facets)) {
+                            foreach ($facets as $facet) {
+                                if ($facet['type'] === 'daterangeWithAvailabilities') {
+                                    $bookblock['bookblock_playlists'][$pl_key]['filters']['id'] = $facet['id'];
+                                    $bookblock['bookblock_playlists'][$pl_key]['filters']['translations'] = (!empty($facet['TR'])) ? $facet['TR'] : '';
+                                    $bookblock['bookblock_playlists'][$pl_key]['filters']['display_options'] = (!empty($facet['display_options'])) ? $facet['display_options'] : '';
+                                    if (!empty($facet['display_options']['booking_range']['values'])) {
+                                        $range_values = $facet['display_options']['booking_range']['values'];
+                                        if ($range_values[0]['mode'] == 3 && !empty($range_values[0]['customValue'])) {
+                                            $bookblock['bookblock_playlists'][$pl_key]['filters']['singledate'] = true;
+                                            $bookblock['bookblock_playlists'][$pl_key]['filters']['periods'] = $range_values[0]['customValue'];
+                                        } else {
+                                            $bookblock['bookblock_playlists'][$pl_key]['filters']['daterange'] = true;
+                                        }
+                                    }
+                                    if (!empty($facet['display_options']['persons']['values'])) {
+                                        foreach ($facet['display_options']['persons']['values'] as $person) {
+                                            if (!empty($person['field'])) {
+                                                $bookblock['bookblock_playlists'][$pl_key]['filters'][$person['field']] = $person['display'];
+                                            }
+                                        }
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return \Timber::compile($woody_components[$bookblock['bookblock_woody_tpl']], $bookblock);
+        }
+    }
 }
