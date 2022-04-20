@@ -564,7 +564,7 @@ class WoodyTheme_WoodyCompilers
         // On récupère le tpl du visuel & accroche pour ajouter du contexte à l'en-tête si besoin
         //TODO: Vérifier que le comportement est bon avec un fadingHero
 
-        if(!empty(getAcfGroupFields('group_5b052bbee40a4', $context['post'])['heading_woody_tpl'])) {
+        if (!empty(getAcfGroupFields('group_5b052bbee40a4', $context['post'])['heading_woody_tpl'])) {
             $page_hero_tpl = substr(getAcfGroupFields('group_5b052bbee40a4', $context['post'])['heading_woody_tpl'], -6);
 
             if ($page_hero_tpl == 'tpl_05' || $page_hero_tpl == 'tpl_06') {
@@ -753,9 +753,9 @@ class WoodyTheme_WoodyCompilers
         return $layout;
     }
 
-    public function formatHomeSlider($post_id, $woody_components)
+    public function formatHomeSlider($post, $woody_components)
     {
-        $home_slider = getAcfGroupFields('group_5bb325e8b6b43', $post_id);
+        $home_slider = getAcfGroupFields('group_5bb325e8b6b43', $post);
 
         $plyr_options = [
             'muted' => true,
@@ -802,10 +802,10 @@ class WoodyTheme_WoodyCompilers
         }
     }
 
-    public function formatBookBlock($post_id)
+    public function formatBookBlock($post, $woody_components)
     {
         $bookblock = [];
-        $bookblock = getAcfGroupFields('group_5c0e4121ee3ed', $post_id);
+        $bookblock = getAcfGroupFields('group_5c0e4121ee3ed', $post);
 
         if (!empty($bookblock['bookblock_playlists'][0]['pl_post_id'])) {
             $bookblock['the_classes'] = [];
