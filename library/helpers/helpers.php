@@ -6,7 +6,7 @@
  * @copyright Raccourci Agency 2022
  */
 
-function woody_get_permalink($post = null)
+function woody_get_permalink($post = null, $force = false)
 {
     if (is_int($post)) {
         $post_id = $post;
@@ -16,5 +16,5 @@ function woody_get_permalink($post = null)
         $post_id = null;
     }
 
-    return apply_filters('woody_get_permalink', $post_id);
+    return apply_filters('woody_get_permalink', $post_id, $force);
 }

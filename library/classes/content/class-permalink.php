@@ -19,7 +19,7 @@ class WoodyTheme_Permalink
 
     protected function registerHooks()
     {
-        add_filter('woody_get_permalink', [$this, 'woodyGetPermalink'], 10);
+        add_filter('woody_get_permalink', [$this, 'woodyGetPermalink'], 10, 2);
 
         add_action('pll_save_post', [$this, 'savePost'], 10, 3);
         add_action('delete_post', [$this, 'deletePost'], 10);
@@ -34,7 +34,7 @@ class WoodyTheme_Permalink
         require_once(__DIR__ . '/../../helpers/helpers.php');
     }
 
-    public function woodyGetPermalink($post_id = null)
+    public function woodyGetPermalink($post_id = null, $force = false)
     {
         if (empty($post_id)) {
             global $post;
@@ -44,7 +44,7 @@ class WoodyTheme_Permalink
             $post_id = $post->ID;
         }
 
-        $permalink = wp_cache_get(sprintf('woody_get_permalink_%s', $post_id), 'woody');
+        $permalink = (!$force) ? wp_cache_get(sprintf('woody_get_permalink_%s', $post_id), 'woody') : null;
         if (empty($permalink)) {
             $permalink = get_permalink($post_id);
             wp_cache_set(sprintf('woody_get_permalink_%s', $post_id), $permalink, 'woody');
