@@ -118,6 +118,42 @@
                 "id": ""
             },
             "choices": {
+                "971": "Catégories de média - SEO",
+                "970": "Catégories de média - Woody",
+                "35": "Hashtags - beach",
+                "958": "Hashtags - sun",
+                "903": "Lieux - Allemagne<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Europe )<\/small>",
+                "911": "Lieux - Belgique<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Europe )<\/small>",
+                "905": "Lieux - Espagne<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Europe )<\/small>",
+                "899": "Lieux - Europe",
+                "901": "Lieux - France<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Europe )<\/small>",
+                "907": "Lieux - Italie<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Europe )<\/small>",
+                "909": "Lieux - Royaume-Uni<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Europe )<\/small>",
+                "913": "Lieux - Suisse<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Europe )<\/small>",
+                "921": "Saisons - Automne",
+                "915": "Saisons - Eté",
+                "917": "Saisons - Hiver",
+                "919": "Saisons - Printemps",
+                "976": "Thématiques - Ambassadeurs<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Cibles )<\/small>",
+                "18": "Thématiques - Bien-être<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Thèmes )<\/small>",
+                "923": "Thématiques - Cibles",
+                "933": "Thématiques - Culture et Patrimoine<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Thèmes )<\/small>",
+                "959": "Thématiques - Envies",
+                "925": "Thématiques - Famille<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Cibles )<\/small>",
+                "965": "Thématiques - Fonctionnalité<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Envies )<\/small>",
+                "967": "Thématiques - Fonctionnalité<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Thèmes )<\/small>",
+                "978": "Thématiques - Formation",
+                "961": "Thématiques - Profiter du bord de mer<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Envies )<\/small>",
+                "16": "Thématiques - Quand il pleut<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Thèmes )<\/small>",
+                "929": "Thématiques - Sportifs<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Cibles )<\/small>",
+                "927": "Thématiques - Séniors<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Cibles )<\/small>",
+                "931": "Thématiques - Thèmes",
+                "980": "Thématiques - Webinaire",
+                "935": "Thématiques - Écotourisme<small style=\"color:#cfcfcf; font-style:italic\"> - ( Enfant de Thèmes )<\/small>",
+                "11": "Types de média - Instagram",
+                "15": "Types de média - Média ajouté manuellement",
+                "3167": "Types de média - Vidéo externe",
+                "3169": "Types de média - Vidéo externe"
             },
             "default_value": [],
             "allow_null": 0,
@@ -465,6 +501,27 @@
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0
+        },
+        {
+            "key": "field_62602868157c3",
+            "label": "Type d'affichage",
+            "name": "type_daffichage",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_6260275a1d42d"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
         }
     ],
     "location": [
@@ -484,5 +541,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "Elément de contenu (Liste de photos)",
-    "modified": 1641283342
+    "show_in_rest": 0,
+    "modified": 1650469030
 }
