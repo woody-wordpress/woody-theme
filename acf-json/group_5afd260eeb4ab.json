@@ -874,7 +874,7 @@
                     },
                     "choices": {
                         "left": "Gauche",
-                        "center": "Centrer",
+                        "center": "Centré",
                         "right": "Droite"
                     },
                     "allow_null": 0,
