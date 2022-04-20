@@ -19,7 +19,7 @@ class WoodyTheme_Permalink
 
     protected function registerHooks()
     {
-        add_filter('woody_get_permalink', [$this, 'woodyGetPermalink'], 10);
+        add_filter('woody_get_permalink', [$this, 'woodyGetPermalink'], 10, 2);
 
         add_action('pll_save_post', [$this, 'savePost'], 10, 3);
         add_action('delete_post', [$this, 'deletePost'], 10);
@@ -34,7 +34,7 @@ class WoodyTheme_Permalink
         require_once(__DIR__ . '/../../helpers/helpers.php');
     }
 
-    public function woodyGetPermalink($post_id = null)
+    public function woodyGetPermalink($post_id = null, $force = false)
     {
         if (empty($post_id)) {
             global $post;
@@ -44,7 +44,7 @@ class WoodyTheme_Permalink
             $post_id = $post->ID;
         }
 
-        $permalink = wp_cache_get(sprintf('woody_get_permalink_%s', $post_id), 'woody');
+        $permalink = (!$force) ? wp_cache_get(sprintf('woody_get_permalink_%s', $post_id), 'woody') : null;
         if (empty($permalink)) {
             $permalink = get_permalink($post_id);
             wp_cache_set(sprintf('woody_get_permalink_%s', $post_id), $permalink, 'woody');
@@ -55,34 +55,52 @@ class WoodyTheme_Permalink
 
     public function templateRedirect()
     {
-        global $wp, $post;
+        global $post;
         if (!empty($post)) {
             $permalink = woody_get_permalink($post->ID);
-            if (!empty($permalink) && !empty($wp->request) && strpos($permalink, $wp->request) == false) {
-                wp_redirect($permalink, 301, 'Woody Permalink');
-                exit;
+            if (!empty($permalink) && !empty($_SERVER['REQUEST_URI'])) {
+                $permalink_path = parse_url($permalink, PHP_URL_PATH);
+                $permalink_path = (substr($permalink_path, -1) == '/') ? substr($permalink_path, 0, -1) : $permalink_path;
+
+                $request_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+                $request_path = (substr($request_path, -1) == '/') ? substr($request_path, 0, -1) : $request_path;
+
+                //console_log(['permalink_path' => $permalink_path, 'request_path' => $request_path]);
+                if ($permalink_path != $request_path) {
+                    wp_redirect($permalink, 301, 'Woody Permalink');
+                    exit;
+                }
             }
         }
     }
 
     public function redirect404()
     {
-        global $wp_query, $wp;
+        global $wp_query;
         $pll_current_language = pll_current_language();
-        if ($wp_query->is_404 && empty($wp_query->queried_object_id) && !empty($wp->request) && !empty($pll_current_language)) {
-            // output_log('$wp_query->is_404 : ' . $wp_query->is_404);
+        if ($wp_query->is_404 && empty($wp_query->queried_object_id) && !empty($_SERVER['REQUEST_URI']) && !empty($pll_current_language)) {
             $permalink = null;
-            $post_id = url_to_postid($wp->request);
-            // output_log('$post_id : ' . $post_id);
+
+            // Get request path without / on the end
+            $request_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+            $request_path = (substr($request_path, -1) == '/') ? substr($request_path, 0, -1) : $request_path;
+
+            // Magic get post_id from $request_path
+            $post_id = url_to_postid($request_path);
+
             if (!empty($post_id)) {
                 $permalink = woody_get_permalink($post_id);
             } else {
-                $segments = explode('/', $wp->request);
+                $segments = explode('/', $request_path);
                 $last_segment = end($segments);
 
                 // Test if is sheet
-                preg_match('/-([a-z_]{2,})-([0-9]{5,})$/', $last_segment, $sheet_id);
-                if (!empty($sheet_id) && !empty($sheet_id[2])) {
+                $sheet_lang = null;
+                $sheet_id = null;
+                preg_match('/-([a-z_]{2,})-([0-9]{5,})$/', $last_segment, $sheet_match);
+                if (!empty($sheet_match) && !empty($sheet_match[1]) && !empty($sheet_match[2])) {
+                    $sheet_lang = $sheet_match[1];
+                    $sheet_id = $sheet_match[2];
                     $query_result = new \WP_Query([
                         'lang' => $pll_current_language,
                         'post_status' => ['publish'],
@@ -94,11 +112,11 @@ class WoodyTheme_Permalink
                             'relation' => 'AND',
                             [
                                 'key'     => 'touristic_sheet_id',
-                                'value'   => $sheet_id[2],
+                                'value'   => $sheet_id,
                                 'compare' => 'IN',
-                            ]
-                        ],
-                    ]);
+                                ]
+                            ],
+                        ]);
                 } else {
                     $query_result = new \WP_Query([
                         'lang' => $pll_current_language,
@@ -111,27 +129,34 @@ class WoodyTheme_Permalink
                     ]);
                 }
 
-                // output_log('$query_result->posts');
-                // output_log($query_result->posts);
-
                 if (!empty($query_result->posts)) {
                     $post = current($query_result->posts);
                     $permalink = woody_get_permalink($post->ID);
 
                     if (!empty($permalink)) {
                         $parse_permalink = parse_url($permalink, PHP_URL_PATH);
-                        if (!empty($parse_permalink) && $parse_permalink != '/') {
-                            if (substr($wp->request, -1) == '/') {
-                                $url = '/' . $wp->request;
-                                $match_url = '/' . substr($wp->request, 0, -1);
-                            } else {
-                                $url = '/' . $wp->request . '/';
-                                $match_url = '/' . $wp->request;
+                        $parse_permalink = (substr($parse_permalink, -1) == '/') ? substr($parse_permalink, 0, -1) : $parse_permalink;
+
+                        if (!empty($parse_permalink)) {
+
+                            // On teste si l'url trouvée est bien dans la même langue que celle d'origine (pour une fiche)
+                            if (!empty($sheet_lang)) {
+                                preg_match('/-([a-z_]{2,})-([0-9]{5,})$/', $parse_permalink, $sheet_match);
+                                if (!empty($sheet_match) && !empty($sheet_match[1]) && !empty($sheet_match[2]) && $sheet_match[1] != $sheet_lang) {
+                                    $permalink = null;
+                                    output_error('redirect404 ' . json_encode([
+                                        'request_path' => $request_path,
+                                        'parse_permalink' => $parse_permalink,
+                                        'pll_current_languag' => $pll_current_language
+                                    ]));
+                                }
                             }
 
-                            // output_log('$url : ' . $url);
+                            // On définit l'url d'origine
+                            $url = $request_path . (substr(WOODY_PERMALINK_STRUCTURE, -1) == '/' ? '/' : '');
+                            $match_url = $request_path;
 
-                            if ($url != $parse_permalink && $match_url != $parse_permalink) {
+                            if (!empty($permalink) && $url != $parse_permalink && $match_url != $parse_permalink) {
                                 $params = [
                                     'url' => $url,
                                     'match_url' => $match_url,
@@ -144,14 +169,11 @@ class WoodyTheme_Permalink
                                     'action_type' => 'url',
                                     'action_code' => 301,
                                     'action_data' => [
-                                        'url' => $parse_permalink
+                                        'url' => $parse_permalink . (substr(WOODY_PERMALINK_STRUCTURE, -1) == '/' ? '/' : '')
                                     ],
                                     'match_type'  => 'url',
                                     'regex'  => 0,
                                 ];
-
-                                // output_log('$params');
-                                // output_log($params);
 
                                 include WP_PLUGINS_DIR . '/redirection/models/group.php';
                                 Red_Item::create($params);
@@ -162,7 +184,9 @@ class WoodyTheme_Permalink
             }
 
             // Redirect if $permalink exist
-            if (!empty($permalink) && parse_url($permalink, PHP_URL_PATH) != '/' . $wp->request) {
+            $parse_permalink = parse_url($permalink, PHP_URL_PATH);
+            $parse_permalink = (substr($parse_permalink, -1) == '/') ? substr($parse_permalink, 0, -1) : $parse_permalink;
+            if (!empty($permalink) && !empty($parse_permalink) && $parse_permalink != $request_path) {
                 wp_redirect($permalink, 301, 'Woody Soft 404');
                 exit;
             }
