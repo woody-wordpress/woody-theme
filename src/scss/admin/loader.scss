@@ -6,7 +6,7 @@
         width: 100vw;
         height: 100vh;
         background-color: rgba(#fff, 0.9);
-        background-image: url('../img/wp-admin/loader_woody.png');
+        background-image: url('../img/loader_woody.png');
         background-repeat: no-repeat;
         background-size: 100px 110px;
         background-position: center center;
@@ -29,7 +29,7 @@
 
     &.windowError {
         &:after {
-            background-image: url('../img/wp-admin/loader_woody_error.png');
+            background-image: url('../img/loader_woody_error.png');
         }
     }
 }
