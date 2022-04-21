@@ -90,18 +90,19 @@ class WoodyTheme_Permalink
 
             if (!empty($post_id)) {
                 $permalink = woody_get_permalink($post_id);
-            } else {
+            } elseif (!empty($request_path)) {
                 $segments = explode('/', $request_path);
                 $last_segment = end($segments);
 
-                // Test if is sheet
-                $sheet_lang = null;
-                $sheet_id = null;
-                preg_match('/-([a-z_]{2,})-([0-9]{5,})$/', $last_segment, $sheet_match);
-                if (!empty($sheet_match) && !empty($sheet_match[1]) && !empty($sheet_match[2])) {
-                    $sheet_lang = $sheet_match[1];
-                    $sheet_id = $sheet_match[2];
-                    $query_result = new \WP_Query([
+                if (!empty($last_segment)) {
+                    // Test if is sheet
+                    $sheet_lang = null;
+                    $sheet_id = null;
+                    preg_match('/-([a-z_]{2,})-([0-9]{5,})$/', $last_segment, $sheet_match);
+                    if (!empty($sheet_match) && !empty($sheet_match[1]) && !empty($sheet_match[2])) {
+                        $sheet_lang = $sheet_match[1];
+                        $sheet_id = $sheet_match[2];
+                        $query_result = new \WP_Query([
                         'lang' => $pll_current_language,
                         'post_status' => ['publish'],
                         'posts_per_page' => 1,
@@ -117,8 +118,8 @@ class WoodyTheme_Permalink
                                 ]
                             ],
                         ]);
-                } else {
-                    $query_result = new \WP_Query([
+                    } else {
+                        $query_result = new \WP_Query([
                         'lang' => $pll_current_language,
                         'posts_per_page' => 1,
                         'post_status' => ['publish'],
@@ -127,9 +128,10 @@ class WoodyTheme_Permalink
                         'name' => $last_segment,
                         'post_type' => 'page'
                     ]);
+                    }
                 }
 
-                if (!empty($query_result->posts)) {
+                if (!empty($query_result) && !empty($query_result->posts)) {
                     $post = current($query_result->posts);
                     $permalink = woody_get_permalink($post->ID);
 
