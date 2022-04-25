@@ -90,11 +90,11 @@ class WoodyTheme_Permalink
 
             if (!empty($post_id)) {
                 $permalink = woody_get_permalink($post_id);
-            } elseif (!empty($request_path)) {
+            } elseif (!empty($request_path) && $request_path != '/') {
                 $segments = explode('/', $request_path);
                 $last_segment = end($segments);
 
-                if (!empty($last_segment)) {
+                if (!empty($last_segment) && $last_segment != '/') {
                     // Test if is sheet
                     $sheet_lang = null;
                     $sheet_id = null;
@@ -103,31 +103,31 @@ class WoodyTheme_Permalink
                         $sheet_lang = $sheet_match[1];
                         $sheet_id = $sheet_match[2];
                         $query_result = new \WP_Query([
-                        'lang' => $pll_current_language,
-                        'post_status' => ['publish'],
-                        'posts_per_page' => 1,
-                        'orderby' => 'ID',
-                        'order' => 'ASC',
-                        'post_type'   => 'touristic_sheet',
-                        'meta_query'  => [
-                            'relation' => 'AND',
-                            [
+                            'lang' => $pll_current_language,
+                            'post_status' => ['publish'],
+                            'posts_per_page' => 1,
+                            'orderby' => 'ID',
+                            'order' => 'ASC',
+                            'post_type'   => 'touristic_sheet',
+                            'meta_query'  => [
+                                'relation' => 'AND',
+                                [
                                 'key'     => 'touristic_sheet_id',
                                 'value'   => $sheet_id,
                                 'compare' => 'IN',
                                 ]
-                            ],
+                             ]
                         ]);
                     } else {
                         $query_result = new \WP_Query([
-                        'lang' => $pll_current_language,
-                        'posts_per_page' => 1,
-                        'post_status' => ['publish'],
-                        'orderby' => 'ID',
-                        'order' => 'ASC',
-                        'name' => $last_segment,
-                        'post_type' => 'page'
-                    ]);
+                            'lang' => $pll_current_language,
+                            'posts_per_page' => 1,
+                            'post_status' => ['publish'],
+                            'orderby' => 'ID',
+                            'order' => 'ASC',
+                            'name' => $last_segment,
+                            'post_type' => 'page'
+                        ]);
                     }
                 }
 
@@ -158,7 +158,7 @@ class WoodyTheme_Permalink
                             $url = $request_path . (substr(WOODY_PERMALINK_STRUCTURE, -1) == '/' ? '/' : '');
                             $match_url = $request_path;
 
-                            if (!empty($permalink) && $url != $parse_permalink && $match_url != $parse_permalink) {
+                            if (!empty($permalink) && $url != $parse_permalink && $match_url != $parse_permalink && $url != '/' && $match_url != '/') {
                                 $params = [
                                     'url' => $url,
                                     'match_url' => $match_url,
