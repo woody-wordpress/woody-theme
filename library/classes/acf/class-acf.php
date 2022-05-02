@@ -1119,17 +1119,18 @@ class WoodyTheme_ACF
     public function updateCurrentSeason($value, $post_id, $field)
     {
         // Si on est dans la page paramètres
-        if ($post_id == 'options') {
+        if (!empty($post_id) && $post_id == 'options') {
             // S'il s'agit du champ de saison courante
-            if ($field['name'] == 'current_season') {
+            if (!empty($field['name']) && $field['name'] == 'current_season') {
                 $current_season_field = $value; // Valeur du champ
                 $polylang_option = get_option('polylang'); // Option polylang
 
                 // Si la valeur du champ est différente de l'option active
-                if ($current_season_field !== $polylang_option['default_lang']) {
+                if (!empty($current_season_field) && !empty($polylang_option) && $current_season_field !== $polylang_option['default_lang']) {
                     $polylang_option['default_lang'] = $current_season_field; // On change la default_lang
                     update_option('polylang', $polylang_option); // Update option polylang
-                    wp_redirect(admin_url() . '/admin.php?page=woody-settings&lang=' . $current_season_field);
+                    // On redirige vers la page d'option dans la langue qui vient d'être enregistrée
+                    wp_redirect(admin_url() . 'admin.php?page=woody-settings&lang=' . $current_season_field);
                     exit;
                 }
             }
