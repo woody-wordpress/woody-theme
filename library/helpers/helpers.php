@@ -8,8 +8,8 @@
 
 function woody_get_permalink($post = null, $force = false)
 {
-    if (is_int($post)) {
-        $post_id = $post;
+    if (is_numeric($post)) {
+        $post_id = (int) $post;
     } elseif ($post instanceof WP_Post) {
         $post_id = $post->ID;
     } else {
