@@ -857,6 +857,24 @@ class WoodyTheme_WoodyCompilers
                 }
             }
 
+            $bookblock['texts'] = apply_filters('woody_bookblock_custom_texts', [
+                    'pl_select' => __('Que voulez-vous réserver ?', 'woody-theme'),
+                    'pl_default_option' => true,
+                    'pl_default_option_text' => __('Que voulez-vous réserver ?', 'woody-theme'),
+                    'daterange_input' => __('Choisissez vos dates de réservation', 'woody-theme'),
+                    'single_date_input' => __('Choisissez vos dates de réservation', 'woody-theme'),
+                    'duration_select' => __('Durée du séjour', 'woody-theme'),
+                    'duration_default_option' => __('Durée du séjour', 'woody-theme'),
+                    'placeholders' => [
+                        'daterange_input' => __('Choisissez vos dates', 'woody-theme'),
+                        'single_date_input' => __('Date d\'arrivée', 'woody-theme')
+                    ],
+                    'adults' => __('adulte(s)', 'woody-theme'),
+                    'children' => __('enfant(s)', 'woody-theme'),
+                    'search' => __('Rechercher', 'woody-theme')
+                ]
+            );
+
             return \Timber::compile($woody_components[$bookblock['bookblock_woody_tpl']], $bookblock);
         }
     }
