@@ -859,7 +859,7 @@ class WoodyTheme_WoodyCompilers
 
             $bookblock['texts'] = apply_filters('woody_bookblock_custom_texts', [
                     'pl_select' => __('Que voulez-vous réserver ?', 'woody-theme'),
-                    'pl_default_option' => true,
+                    'pl_default_option' => false,
                     'pl_default_option_text' => __('Que voulez-vous réserver ?', 'woody-theme'),
                     'daterange_input' => __('Choisissez vos dates de réservation', 'woody-theme'),
                     'single_date_input' => __('Choisissez vos dates de réservation', 'woody-theme'),
