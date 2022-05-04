@@ -1127,8 +1127,18 @@ class WoodyTheme_ACF
 
                 // Si la valeur du champ est différente de l'option active
                 if (!empty($current_season_field) && !empty($polylang_option) && $current_season_field !== $polylang_option['default_lang']) {
-                    $polylang_option['default_lang'] = $current_season_field; // On change la default_lang
-                    update_option('polylang', $polylang_option); // Update option polylang
+                    // On change la default_lang dans le tableau d'options polylang
+                    $polylang_option['default_lang'] = $current_season_field;
+
+                    // On met à jour les options polylang avec le précédent tableau
+                    update_option('polylang', $polylang_option);
+
+                    // On met à jour la "saison prioritaire" pour le calcul des canoniques
+                    update_option('woody_season_priority', $current_season_field);
+
+                    // On lance un rsdu
+                    do_action('woody_async_add', 'woody_hawwwai_rsdu');
+
                     // On redirige vers la page d'option dans la langue qui vient d'être enregistrée
                     wp_redirect(admin_url() . 'admin.php?page=woody-settings&lang=' . $current_season_field);
                     exit;
