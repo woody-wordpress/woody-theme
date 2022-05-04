@@ -55,6 +55,10 @@ class WoodyTheme_Permalink
 
     public function templateRedirect()
     {
+        /**
+         * Cette fonction permet de toujours rediriger un post vers son permalink.
+         * Utile dans le cas des fiches SIT où l'on change le parent
+         */
         global $post;
         if (!empty($post)) {
             $permalink = woody_get_permalink($post->ID);
@@ -65,7 +69,6 @@ class WoodyTheme_Permalink
                 $request_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
                 $request_path = (substr($request_path, -1) == '/') ? substr($request_path, 0, -1) : $request_path;
 
-                //console_log(['permalink_path' => $permalink_path, 'request_path' => $request_path]);
                 if ($permalink_path != $request_path) {
                     wp_redirect($permalink, 301, 'Woody Permalink');
                     exit;
@@ -149,7 +152,7 @@ class WoodyTheme_Permalink
                                     output_error('redirect404 ' . json_encode([
                                         'request_path' => $request_path,
                                         'parse_permalink' => $parse_permalink,
-                                        'pll_current_languag' => $pll_current_language
+                                        'pll_current_language' => $pll_current_language
                                     ]));
                                 }
                             }
