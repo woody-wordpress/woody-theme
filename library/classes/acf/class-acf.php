@@ -68,7 +68,7 @@ class WoodyTheme_ACF
 
         add_filter('acf/load_field/name=tags_primary', [$this, 'addPrimaryTagsFields'], 10, 3);
         add_filter('acf/load_field/name=active_shares', [$this, 'addSocialChoices'], 10, 3);
-        add_filter('acf/load_fields', [$this, 'addSeasonChoices'], 10, 3);
+        add_filter('acf/load_fields', [$this, 'addSeasonChoices'], 10, 2);
         add_filter('acf/update_value', [$this, 'updateCurrentSeason'], 10, 3);
 
         // Custom Filter
