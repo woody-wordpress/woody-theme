@@ -116,6 +116,10 @@ abstract class WoodyTheme_TemplateAbstract
         if (empty($this->globals['env'])) {
             $this->globals['env'] = WP_ENV;
         }
+
+        if (empty($this->globals['is_mobile'])) {
+            $this->globals['is_mobile'] = wp_is_mobile();
+        }
     }
 
     private function getAncestors($post)

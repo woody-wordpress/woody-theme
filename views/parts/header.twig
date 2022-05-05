@@ -1,3 +1,4 @@
+{% if globals.is_mobile == false %}
 <div class="woody-component-headnavs">
     {% if season_switcher|default %}
         {{ season_switcher }}
@@ -46,6 +47,7 @@
     {{ page_parts.top_header|default }}
     {{ page_parts.main_menu|default }}
 </div>
+{% endif %}
 
 {% if page_parts.sticky_bar %}
 	<div class="woody-component-stickybar">
@@ -56,6 +58,7 @@
 {{ page_parts.side_menu|default }}
 {{ page_parts.preloader|default }}
 
+{% if globals.is_mobile %}
 <div class="woody-component-mobilenavs">
     {{ page_parts.mobile_menu|default }}
     <ul class="tools list-unstyled flex-container align-middle hide-for-xlarge">
@@ -90,3 +93,4 @@
         {% endif %}
     </ul>
 </div>
+{% endif %}
