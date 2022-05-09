@@ -56,13 +56,12 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             if (post_password_required($this->context['post'])) {
                 echo get_the_password_form($this->context['post']);
             } else {
+                $this->commonContext();
                 if ($this->context['page_type'] == 'front_page') {
                     $this->frontPageContext();
                 } else {
                     $this->pageContext();
                 }
-
-                $this->commonContext();
             }
         }
     }
