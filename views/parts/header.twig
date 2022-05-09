@@ -61,7 +61,7 @@
 {{ page_parts.side_menu|default }}
 {{ page_parts.preloader|default }}
 
-{% if globals.is_mobile == true %}
+{% if globals.is_mobile == true or globals.is_mobile == null %}
 <div class="woody-component-mobilenavs">
     {{ page_parts.mobile_menu|default }}
     <ul class="tools list-unstyled flex-container align-middle hide-for-xlarge">
