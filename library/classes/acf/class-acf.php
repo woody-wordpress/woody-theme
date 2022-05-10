@@ -1136,6 +1136,9 @@ class WoodyTheme_ACF
                     // On met à jour la "saison prioritaire" pour le calcul des canoniques
                     update_option('woody_season_priority', $current_season_field);
 
+                    // On flush le varnish
+                    do_action('woody_flush_varnish');
+
                     // On lance un rsdu
                     do_action('woody_async_add', 'woody_hawwwai_rsdu');
 
