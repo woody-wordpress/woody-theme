@@ -68,6 +68,8 @@ class WoodyTheme_ACF
 
         add_filter('acf/load_field/name=tags_primary', [$this, 'addPrimaryTagsFields'], 10, 3);
         add_filter('acf/load_field/name=active_shares', [$this, 'addSocialChoices'], 10, 3);
+        add_filter('acf/load_fields', [$this, 'addSeasonChoices'], 10, 2);
+        add_filter('acf/update_value', [$this, 'updateCurrentSeason'], 10, 3);
 
         // Custom Filter
         add_filter('woody_get_field_option', [$this, 'woodyGetFieldOption'], 10, 3);
@@ -1067,5 +1069,86 @@ class WoodyTheme_ACF
         };
 
         return $field;
+    }
+
+    public function addSeasonChoices($fields, $parent)
+    {
+        // Si on est dans la page Paramètres
+        if ($parent['key'] == 'group_5c0fed3541b45') {
+            $seasons = apply_filters('woody_pll_the_seasons', 'auto');
+
+            // S'il y a des saisons
+            if (!empty($seasons)) {
+                // On récupère le group de paramètres de saison
+                $season_settings_fields = acf_get_fields('group_season_settings');
+
+                // Si les choices sont vides
+                if (empty($season_settings_fields[1]['choices'])) {
+                    // On traite chaque saison
+                    foreach ($seasons as $season) {
+                        // Saison courante
+                        if ($season['current_lang'] == true) {
+                            // Traitement pour toujours avoir la saison courant en premier
+                            if (empty($season_settings_fields[1]['choices'])) {
+                                // Si les choices sont vides, on l'ajoute directement
+                                $season_settings_fields[1]['choices'][$season['slug']] = $season['name'];
+                            } else {
+                                // S'il y a déjà des choices, on l'ajoute avant ceux-ci
+                                $current_lang_choice = [$season['slug'] => $season['name']];
+                                $season_settings_fields[1]['choices'] = $current_lang_choice + $season_settings_fields[1]['choices'];
+                            }
+                            // Default value sur la saison courante
+                            $season_settings_fields[1]['default_value'] = $season['slug'];
+                            // On met à jour le champ pour être sûr que la saison courante est sélectionnée de base
+                            update_field('current_season', $season['slug'], 'options');
+                        } else {
+                            // Saison non-courante
+                            $season_settings_fields[1]['choices'][$season['slug']] = $season['name'];
+                        }
+                    }
+                };
+
+                // On ajoute les champs de paramètres de saison
+                $fields = array_merge($fields, $season_settings_fields);
+            }
+        }
+
+        return $fields;
+    }
+
+    public function updateCurrentSeason($value, $post_id, $field)
+    {
+        // Si on est dans la page paramètres
+        if (!empty($post_id) && $post_id == 'options') {
+            // S'il s'agit du champ de saison courante
+            if (!empty($field['name']) && $field['name'] == 'current_season') {
+                $current_season_field = $value; // Valeur du champ
+                $polylang_option = get_option('polylang'); // Option polylang
+
+                // Si la valeur du champ est différente de l'option active
+                if (!empty($current_season_field) && !empty($polylang_option) && $current_season_field !== $polylang_option['default_lang']) {
+                    // On change la default_lang dans le tableau d'options polylang
+                    $polylang_option['default_lang'] = $current_season_field;
+
+                    // On met à jour les options polylang avec le précédent tableau
+                    update_option('polylang', $polylang_option);
+
+                    // On met à jour la "saison prioritaire" pour le calcul des canoniques
+                    update_option('woody_season_priority', $current_season_field);
+
+                    // On flush le varnish
+                    do_action('woody_flush_varnish');
+
+                    // On lance un rsdu
+                    do_action('woody_async_add', 'woody_hawwwai_rsdu');
+
+                    // On redirige vers la page d'option dans la langue qui vient d'être enregistrée
+                    wp_redirect(admin_url() . 'admin.php?page=woody-settings&lang=' . $current_season_field);
+                    exit;
+                }
+            }
+        }
+
+        return $value;
     }
 }
