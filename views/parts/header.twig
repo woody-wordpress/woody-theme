@@ -1,9 +1,9 @@
 <div class="woody-component-headnavs">
-    {% if globals.is_mobile == false %}
-        {% if season_switcher|default %}
-            {{ season_switcher }}
-        {% endif %}
+    {% if season_switcher|default %}
+        {{ season_switcher }}
+    {% endif %}
 
+    {% if globals.is_mobile == false %}
         {% if lang_switcher_button|default or es_search_button|default or subtheme_more_tools %}
             <ul class="tools list-unstyled flex-container align-middle show-for-xlarge">
                 {% if subtheme_more_tools %}
@@ -39,7 +39,7 @@
                     <li>{{ lang_switcher_button }}</li>
                 {% endif %}
                 {% if preparespot_switcher|default %}
-                    <li> {{ preparespot_switcher }} </li>
+                    <li>{{ preparespot_switcher }}</li>
                 {% endif %}
             </ul>
         {% endif %}
