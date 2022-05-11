@@ -1,56 +1,56 @@
-{% if globals.is_mobile == false %}
 <div class="woody-component-headnavs">
-    {% if season_switcher|default %}
-        {{ season_switcher }}
+    {% if globals.is_mobile == false %}
+        {% if season_switcher|default %}
+            {{ season_switcher }}
+        {% endif %}
+
+        {% if lang_switcher_button|default or es_search_button|default or subtheme_more_tools %}
+            <ul class="tools list-unstyled flex-container align-middle show-for-xlarge">
+                {% if subtheme_more_tools %}
+                    {% for tool in subtheme_more_tools %}
+                        {% if not tool.is_mobile %}
+                            <li {% if tool.list_class %}class="{{tool.list_class}}"{% endif %}>
+                                {% if tool.is_custom %}
+                                    {{ tool.render }}
+                                {% else %}
+                                    <a class="no-ext {{ tool.classes|default }}" href="{{ tool.url|default }}" target="{{ tool.target|default('_self') }}" title="{{ tool.title|default }}" {{ tool.custom_attr|default }}>
+                                        {% if tool.icon %}
+                                            <span class="wicon {{ tool.icon }}"></span>
+                                        {% endif %}
+                                        {% if tool.title and tool.display_title %}
+                                            <span>{{ tool.title }}</span>
+                                        {% endif %}
+                                    </a>
+                                {% endif %}
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                {% if deals_block|default %}
+                    <li>{{ deals_block }}</li>
+                {% endif %}
+                {% if favorites_block|default %}
+                    <li>{{ favorites_block }}</li>
+                {% endif %}
+                {% if es_search_button|default %}
+                    <li>{{ es_search_button }}</li>
+                {% endif %}
+                {% if lang_switcher_button|default %}
+                    <li>{{ lang_switcher_button }}</li>
+                {% endif %}
+                {% if preparespot_switcher|default %}
+                    <li> {{ preparespot_switcher }} </li>
+                {% endif %}
+            </ul>
+        {% endif %}
     {% endif %}
 
-    {% if lang_switcher_button|default or es_search_button|default or subtheme_more_tools %}
-        <ul class="tools list-unstyled flex-container align-middle show-for-xlarge">
-            {% if subtheme_more_tools %}
-                {% for tool in subtheme_more_tools %}
-                    {% if not tool.is_mobile %}
-                        <li {% if tool.list_class %}class="{{tool.list_class}}"{% endif %}>
-                            {% if tool.is_custom %}
-                                {{ tool.render }}
-                            {% else %}
-                                <a class="no-ext {{ tool.classes|default }}" href="{{ tool.url|default }}" target="{{ tool.target|default('_self') }}" title="{{ tool.title|default }}" {{ tool.custom_attr|default }}>
-                                    {% if tool.icon %}
-                                        <span class="wicon {{ tool.icon }}"></span>
-                                    {% endif %}
-                                    {% if tool.title and tool.display_title %}
-                                        <span>{{ tool.title }}</span>
-                                    {% endif %}
-                                </a>
-                            {% endif %}
-                        </li>
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
-            {% if deals_block|default %}
-                <li>{{ deals_block }}</li>
-            {% endif %}
-            {% if favorites_block|default %}
-                <li>{{ favorites_block }}</li>
-            {% endif %}
-            {% if es_search_button|default %}
-                <li>{{ es_search_button }}</li>
-            {% endif %}
-            {% if lang_switcher_button|default %}
-                <li>{{ lang_switcher_button }}</li>
-            {% endif %}
-            {% if preparespot_switcher|default %}
-                <li> {{ preparespot_switcher }} </li>
-            {% endif %}
-        </ul>
+    {{ page_parts.top_header|default }}
+
+    {% if globals.is_mobile == false %}
+        {{ page_parts.main_menu|default }}
     {% endif %}
-{% endif %}
-
-{{ page_parts.top_header|default }}
-
-{% if globals.is_mobile == false %}
-    {{ page_parts.main_menu|default }}
 </div>
-{% endif %}
 
 {% if page_parts.sticky_bar %}
 	<div class="woody-component-stickybar">
