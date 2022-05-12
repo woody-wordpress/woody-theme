@@ -468,7 +468,7 @@
         {
             "key": "field_62602868157c3",
             "label": "Type d'affichage",
-            "name": "type_daffichage",
+            "name": "display_type",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -479,7 +479,7 @@
                 "id": ""
             },
             "clone": [
-                "group_6260275a1d42d"
+                "group_5efca9579270c"
             ],
             "display": "seamless",
             "layout": "block",
