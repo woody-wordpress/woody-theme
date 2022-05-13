@@ -19,6 +19,8 @@ if (function_exists('pll_languages_list')) {
 
 // Commands & Helpers
 new WoodyTheme_Commands();
+new WoodyTheme_cleanDataBases();
+
 
 // Plugins
 new WoodyTheme_Plugins_Activation();
