@@ -657,6 +657,10 @@ class WoodyTheme_WoodyCompilers
                 $page_hero['page_heading_img']['attachment_more_data'] = (!empty($page_hero['page_heading_img']['ID'])) ? $this->tools->getAttachmentMoreData($page_hero['page_heading_img']['ID']) : [];
             }
 
+            if(!empty($page_hero['page_mobile_heading_img']) && is_array($page_hero['page_mobile_heading_img'])) {
+                $page_hero['page_mobile_heading_img']['attachment_more_data'] = (!empty($page_hero['page_heading_img']['ID'])) ? $this->tools->getAttachmentMoreData($page_hero['page_heading_img']['ID']) : [];
+            }
+
             if (!empty($page_hero['page_heading_add_social_movie']) && !empty($page_hero['page_heading_social_movie'])) {
                 preg_match_all('@src="([^"]+)"@', $page_hero['page_heading_social_movie'], $result);
                 if (!empty($result[1]) && !empty($result[1][0])) {

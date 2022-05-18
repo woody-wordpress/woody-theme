@@ -47,7 +47,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "30",
+                "width": "20",
                 "class": "",
                 "id": ""
             },
@@ -64,7 +64,7 @@
         },
         {
             "key": "field_5b0e5ddfd4b1b",
-            "label": "Image",
+            "label": "Image Desktop",
             "name": "page_heading_img",
             "type": "image",
             "instructions": "",
@@ -77,14 +77,44 @@
                 }]
             ],
             "wrapper": {
-                "width": "70",
-                "class": "hide-label",
+                "width": "40",
+                "class": "",
                 "id": ""
             },
             "return_format": "array",
             "preview_size": "ratio_16_9_small",
             "library": "all",
             "min_width": 640,
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "jpeg, jpg, png, gif"
+        },
+        {
+            "key": "field_5b0e5ddfd2e3f",
+            "label": "Image Mobile",
+            "name": "page_mobile_heading_img",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [{
+                    "field": "field_5b0e5cc3d4b1a",
+                    "operator": "==",
+                    "value": "img"
+                }]
+            ],
+            "wrapper": {
+                "width": "40",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "ratio_16_9_small",
+            "library": "all",
+            "min_width": 320,
             "min_height": "",
             "min_size": "",
             "max_width": "",
