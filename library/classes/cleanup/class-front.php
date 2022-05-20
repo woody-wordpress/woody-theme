@@ -34,6 +34,14 @@ class WoodyTheme_Cleanup_Front
         add_filter('protected_title_format', [$this, 'removePrivatePrefix']);
         // Cleanup Rewrite Rules
         add_filter('rewrite_rules_array', [$this, 'rewriteRulesArray'], 1);
+
+        add_filter('wp_robots', '__return_empty_array');
+    }
+
+    public function removeWpRobots($robots)
+    {
+        console_log($robots);
+        return [];
     }
 
     public function cleanupHead()
@@ -64,6 +72,8 @@ class WoodyTheme_Cleanup_Front
         remove_action('wp_head', 'print_emoji_detection_script', 7);
         // Emoji styles.
         remove_action('wp_print_styles', 'print_emoji_styles');
+
+        remove_action('wp_head', 'wp_robots', 12);
     }
 
     public function removeRssVersion()
