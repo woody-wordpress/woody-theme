@@ -441,7 +441,7 @@ class WoodyTheme_Images
 
                 // Duplicate media with Polylang Method
                 if (!array_key_exists($lang, $translations)) {
-                    $t_attachment_id = apply_filters('woody_pll_create_media_translation', $attachment_id, $lang);
+                    $t_attachment_id = woody_pll_create_media_translation($attachment_id, $lang);
                 } else {
                     $t_attachment_id = $translations[$lang];
                 }
