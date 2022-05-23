@@ -434,20 +434,20 @@ class WoodyTheme_Images
     {
         if (wp_attachment_is_image($attachment_id)) {
             $translations = pll_get_post_translations($attachment_id);
-            $current_lang = pll_get_post_language($attachment_id);
+            $source_lang = pll_get_post_language($attachment_id);
 
             $languages = pll_languages_list();
-            foreach ($languages as $lang) {
+            foreach ($languages as $target_lang) {
 
                 // Duplicate media with Polylang Method
-                if (!array_key_exists($lang, $translations)) {
-                    $t_attachment_id = woody_pll_create_media_translation($attachment_id, $lang);
+                if (!array_key_exists($target_lang, $translations)) {
+                    $t_attachment_id = woody_pll_create_media_translation($attachment_id, $source_lang, $target_lang);
                 } else {
-                    $t_attachment_id = $translations[$lang];
+                    $t_attachment_id = $translations[$target_lang];
                 }
 
                 // Sync Meta and fields
-                if (!empty($t_attachment_id) && $current_lang != $lang) {
+                if (!empty($t_attachment_id) && $source_lang != $target_lang) {
                     $this->syncAttachmentMetadata($attachment_id, $t_attachment_id);
                 }
             }
