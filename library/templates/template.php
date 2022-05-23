@@ -371,6 +371,7 @@ abstract class WoodyTheme_TemplateAbstract
     private function setMetadata()
     {
         $return = [];
+        $woody_lang_enable = (defined('WOODY_LANG_ENABLE') && is_array(WOODY_LANG_ENABLE)) ? WOODY_LANG_ENABLE : [];
 
         // ******************************* //
         // Définition des metas statiques
@@ -493,8 +494,7 @@ abstract class WoodyTheme_TemplateAbstract
         };
 
         // On récupère les langues activées pour ajouter une balise og:alternate dans les metas
-        $woody_lang_enable = get_option('woody_lang_enable');
-        if (is_array($woody_lang_enable)) {
+        if (!empty($woody_lang_enable)) {
             $current_lang = apply_filters('woody_pll_current_language', null);
             if (($key = array_search($current_lang, $woody_lang_enable)) !== false) {
                 unset($woody_lang_enable[$key]);
@@ -646,8 +646,7 @@ abstract class WoodyTheme_TemplateAbstract
             }
 
             // On ajoute un balise noindex/nofollow sur toutes les pages des langues non activées
-            $lang_enable = get_option('woody_lang_enable');
-            if (is_array($lang_enable) && !in_array(pll_current_language(), $lang_enable)) {
+            if (!empty($woody_lang_enable) && !in_array(pll_current_language(), $woody_lang_enable)) {
                 $robots_noindex = strpos($return['robots']['#attributes']['content'], 'noindex');
                 if (!$robots_noindex) {
                     $return['robots']['#attributes']['content'] = $return['robots']['#attributes']['content'] . ', noindex';
