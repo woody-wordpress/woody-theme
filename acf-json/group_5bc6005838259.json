@@ -2,156 +2,34 @@
     "key": "group_5bc6005838259",
     "title": "Elements de liste",
     "fields": [{
-            "key": "field_5bc60342c66b8",
-            "label": "Contenu",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0
+        "key": "field_5bc60269d172d",
+        "label": "Requête",
+        "name": "list_el_req_fields",
+        "type": "clone",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+            "width": "",
+            "class": "hide-label",
+            "id": ""
         },
-        {
-            "key": "field_5bc60269d172d",
-            "label": "Requête",
-            "name": "list_el_req_fields",
-            "type": "clone",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "hide-label",
-                "id": ""
-            },
-            "clone": [
-                "field_5b27890c84ed3",
-                "field_5b27a02e9d7c5",
-                "field_5b27a25103e43",
-                "field_5b28d791038fa",
-                "field_5b27a67203e48",
-                "field_5b27a3d703e44",
-                "field_5b2917f0ff061",
-                "field_5c814940fba28",
-                "field_5b88eae6c0adc"
-            ],
-            "display": "group",
-            "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0
-        },
-        {
-            "key": "field_5bc60356c66b9",
-            "label": "Mise en page",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
-            "key": "field_5cdec09776c95",
-            "label": "Templates",
-            "name": "",
-            "type": "accordion",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "open": 0,
-            "multi_expand": 0,
-            "endpoint": 0
-        },
-        {
-            "key": "field_5bc60362c66ba",
-            "label": "Template",
-            "name": "listgrid_woody_tpl",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "blocks-focus-tpl_103",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
-            "key": "button_field_5bc60362c66ba",
-            "label": "Choisir une mise en page",
-            "name": "",
-            "type": "message",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "hide-label woody-tpl-button group_5bc6005838259",
-                "id": ""
-            },
-            "message": "Choisir une mise en page",
-            "new_lines": "wpautop",
-            "esc_html": 0
-        },
-        {
-            "key": "field_5cdec0a976c96",
-            "label": "Options avancées",
-            "name": "",
-            "type": "accordion",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "open": 0,
-            "multi_expand": 0,
-            "endpoint": 0
-        },
-        {
-            "key": "field_5cdec0ba76c97",
-            "label": "Retirer les marges autour des mises en avant",
-            "name": "list_no_padding",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        }
-    ],
+        "clone": [
+            "field_5b27890c84ed3",
+            "field_5b27a02e9d7c5",
+            "field_5b27a25103e43",
+            "field_5b28d791038fa",
+            "field_5b27a67203e48",
+            "field_5b27a3d703e44",
+            "field_5b2917f0ff061",
+            "field_5c814940fba28",
+            "field_5b88eae6c0adc"
+        ],
+        "display": "group",
+        "layout": "block",
+        "prefix_label": 0,
+        "prefix_name": 0
+    }],
     "location": [
         [{
             "param": "post_type",
