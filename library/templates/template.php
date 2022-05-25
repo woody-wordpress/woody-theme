@@ -118,7 +118,7 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         if (empty($this->globals['is_mobile'])) {
-            $this->globals['is_mobile'] = (WP_ENV != 'dev') ? wp_is_mobile() : null;
+            $this->globals['is_mobile'] = (WP_ENV == 'dev' || is_user_logged_in()) ? null : wp_is_mobile();
         }
     }
 
