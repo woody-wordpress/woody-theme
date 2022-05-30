@@ -496,23 +496,20 @@ abstract class WoodyTheme_TemplateAbstract
         // On récupère les langues activées pour ajouter une balise og:alternate dans les metas
         if (!empty($woody_lang_enable)) {
             $current_lang = apply_filters('woody_pll_current_language', null);
-            if (($key = array_search($current_lang, $woody_lang_enable)) !== false) {
-                unset($woody_lang_enable[$key]);
-            }
-
-            if (!empty($woody_lang_enable)) {
-                foreach ($woody_lang_enable as $lang) {
-                    $pll_lang = get_term_by('slug', $lang, 'language');
-                    $pll_lang_data = (!empty($pll_lang)) ? maybe_unserialize($pll_lang->description) : '';
-                    $pll_locale = (!empty($pll_lang_data)) ? $pll_lang_data['locale'] : '';
-                    $return['og:locale:alternate_' . $lang] = [
+            foreach ($woody_lang_enable as $lang) {
+                if ($lang == $current_lang) {
+                    continue;
+                }
+                $pll_lang = get_term_by('slug', $lang, 'language');
+                $pll_lang_data = (!empty($pll_lang)) ? maybe_unserialize($pll_lang->description) : '';
+                $pll_locale = (!empty($pll_lang_data)) ? $pll_lang_data['locale'] : '';
+                $return['og:locale:alternate_' . $lang] = [
                     '#tag' => 'meta',
                     '#attributes' => [
                         'property' => 'og:locale:alternate',
                         'content' => $pll_locale
                         ]
                     ];
-                }
             }
         }
 
