@@ -8,23 +8,7 @@
         url('<%= fontPath %><%= fontName %>.svg<%= cacheBusterQueryString %>#<%= fontName %>') format('svg');
 }
 
-@mixin <%= cssClass%>-styles {
-    font-family: "<%= fontName %>";
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    // speak: none; // only necessary if not using the private unicode range (firstGlyph option)
-    text-decoration: none;
-    text-transform: none;
-}
-
-%<%= cssClass%> {
-    @include <%= cssClass%>-styles;
-}
-
-@function <%= cssClass%>-char($filename) {
+@function wicon-char($filename) {
     $char: "";
 <% _.each(glyphs, function(glyph) { %>
     @if $filename == <%= glyph.fileName %> {
@@ -34,18 +18,8 @@
     @return $char;
 }
 
-@mixin <%= cssClass%>($filename, $insert: before, $extend: false) {
-    &:#{$insert} {
-        @if $extend {
-            @extend %<%= cssClass%>;
-        } @else {
-            @include <%= cssClass%>-styles;
-        }
-        content: <%= cssClass%>-char($filename);
-    }
-}
-
-<% _.each(glyphs, function(glyph) { %>.<%= cssClass%>-<%= glyph.fileName %> {
-    @include <%= cssClass%>(<%= glyph.originalFileName ? glyph.originalFileName : glyph.fileName %>);
-}
-<% }); %>
+$wicons:(
+    <% _.each(glyphs, function(glyph) { %>
+    wicon-<%= glyph.fileName %> : "\<%= glyph.codePoint %>",
+    <% }); %>
+)
