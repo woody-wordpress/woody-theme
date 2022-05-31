@@ -22,4 +22,4 @@ $wicons:(
     <% _.each(glyphs, function(glyph) { %>
     wicon-<%= glyph.fileName %> : "\<%= glyph.codePoint %>",
     <% }); %>
-)
+);
