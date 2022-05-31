@@ -215,6 +215,10 @@ class WoodyTheme_WoodyProcess
                 }
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
+            case 'feature_v2':
+                $layout['display'] = $this->tools->getDisplayOptions($layout);
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            break;
             case 'spacer_block':
                 $return = '<!-- WOODY-COMPONENT-SPACER -->';
             break;

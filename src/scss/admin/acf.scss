@@ -890,7 +890,8 @@
                     }
                 }
 
-                &[data-layout='feature'] {
+                &[data-layout='feature'],
+                &[data-layout='feature_v2'] {
                     &:before {
                         content: '\f197';
                     }
