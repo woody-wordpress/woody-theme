@@ -117,8 +117,7 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-            },
+            "choices": {},
             "default_value": [],
             "allow_null": 0,
             "multiple": 1,
@@ -465,6 +464,27 @@
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0
+        },
+        {
+            "key": "field_62602868157c3",
+            "label": "Type d'affichage",
+            "name": "display_type",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5efca9579270c"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
         }
     ],
     "location": [
@@ -484,5 +504,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "Elément de contenu (Liste de photos)",
-    "modified": 1641283342
+    "show_in_rest": 0,
+    "modified": 1650469030
 }
