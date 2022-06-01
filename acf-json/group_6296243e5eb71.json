@@ -254,29 +254,8 @@
             "endpoint": 0
         },
         {
-            "key": "field_6296243e7885a",
-            "label": "Paramètres de fond",
-            "name": "feature_block_bg_params",
-            "type": "clone",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "clone": [
-                "group_5b043c93d609a"
-            ],
-            "display": "group",
-            "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 1
-        },
-        {
             "key": "field_6296243e788b2",
-            "label": "Retirer les marges autour des titres et icônes",
+            "label": "Retirer les marges autour des blocs",
             "name": "feature_no_padding",
             "type": "true_false",
             "instructions": "",
