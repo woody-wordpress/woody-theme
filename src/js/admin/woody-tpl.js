@@ -41,6 +41,10 @@ $('#post').each(function () {
             'landswipers': [
                 'img_ratio',
                 'text_align'
+            ],
+            'feature_v2': [
+                'length',
+                'text_align'
             ]
         };
 
@@ -167,6 +171,8 @@ $('#post').each(function () {
                 theFilters = fieldKeysFilters.heroes;
             } else if (group == 'group_5bb325e8b6b43') {
                 theFilters = fieldKeysFilters.landswipers;
+            } else if (group == 'group_6296243e5eb71') {
+                theFilters = fieldKeysFilters.feature_v2;
             }
 
             if (theFilters != 'none' && $('.tpls_popin_filters').length == 0) {
