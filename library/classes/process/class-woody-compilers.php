@@ -878,4 +878,32 @@ class WoodyTheme_WoodyCompilers
             return \Timber::compile($woody_components[$bookblock['bookblock_woody_tpl']], $bookblock);
         }
     }
+
+    /**
+     *
+     * Nom : formatFeatureItems
+     * Auteur : Orphée Besson
+     * Return : Retourne un tableau de données formaté
+     * @param    wrapper Le wrapper du champ de titre & icône
+     * @return   items - Un tableau de données
+     *
+     */
+    public function formatFeatureItems($wrapper)
+    {
+        $items = $wrapper['items'];
+
+        if(!empty($items)) {
+            foreach ($items as $key => $item) {
+                if (!empty($item['feature_bg_params'])) {
+                    $items[$key]['display'] = $this->tools->getDisplayOptions($item['feature_bg_params']);
+                }
+
+                if (!empty($item['icon_img']) && !empty($item['icon_img']['sizes']) && !empty($item['icon_img']['sizes']['ratio_free_small'])) {
+                    $items[$key]['icon_img']['sizes']['ratio_free'] = $item['icon_img']['sizes']['ratio_free_small'];
+                }
+            }
+        }
+
+        return $items;
+    }
 }

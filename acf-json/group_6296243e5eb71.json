@@ -20,8 +20,8 @@
         },
         {
             "key": "field_6296243e7816b",
-            "label": "Contenu",
-            "name": "content",
+            "label": "",
+            "name": "items",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -60,6 +60,22 @@
                     "maxlength": ""
                 },
                 {
+                    "key": "field_6296245f483125",
+                    "label": "Contenu",
+                    "name": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "placement": "top",
+                    "endpoint": 0
+                },
+                {
                     "key": "field_629627563f623",
                     "label": "Lien",
                     "name": "link",
@@ -94,6 +110,60 @@
                     "layout": "block",
                     "prefix_label": 0,
                     "prefix_name": 0
+                },
+                {
+                    "key": "field_2286241b481425",
+                    "label": "Mise en page",
+                    "name": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "placement": "top",
+                    "endpoint": 0
+                },
+                {
+                    "key": "field_6298243f78725",
+                    "label": "Options avancées",
+                    "name": "",
+                    "type": "accordion",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "open": 0,
+                    "multi_expand": 1,
+                    "endpoint": 0
+                },
+                {
+                    "key": "field_6246643e6285b",
+                    "label": "Paramètres de fond",
+                    "name": "feature_bg_params",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_5b043c93d609a"
+                    ],
+                    "display": "group",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 1
                 }
             ]
         },
@@ -143,7 +213,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "default_value": "blocks-feature-tpl_101",
+            "default_value": "blocks-feature_v2-tpl_101",
             "placeholder": "",
             "prepend": "",
             "append": "",
@@ -206,7 +276,7 @@
         },
         {
             "key": "field_6296243e788b2",
-            "label": "Retirer les marges autour des mises en avant",
+            "label": "Retirer les marges autour des titres et icônes",
             "name": "feature_no_padding",
             "type": "true_false",
             "instructions": "",
