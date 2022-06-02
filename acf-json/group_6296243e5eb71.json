@@ -1,6 +1,6 @@
 {
     "key": "group_6296243e5eb71",
-    "title": "Titre et icône V2",
+    "title": "Titre et icône",
     "fields": [
         {
             "key": "field_6296243e78111",
@@ -381,7 +381,7 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
-    "description": "Mise en avant de contenu, existant ou libre, sélectionné manuellement",
+    "description": "Liste de titre et icône V2",
     "show_in_rest": 0,
     "modified": 1654007709
 }
