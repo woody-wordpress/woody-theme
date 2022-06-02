@@ -890,6 +890,7 @@ class WoodyTheme_WoodyCompilers
      */
     public function formatFeatureItems($wrapper)
     {
+        $items = [];
         $items = $wrapper['items'];
 
         if(!empty($items)) {
