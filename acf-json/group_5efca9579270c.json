@@ -1,10 +1,10 @@
 {
     "key": "group_5efca9579270c",
-    "title": "Comportements mobiles MEA",
+    "title": "Comportements mobiles",
     "fields": [
         {
             "key": "field_5efca967d9625",
-            "label": "Comportement des mises en avant",
+            "label": "Comportement des blocs",
             "name": "mobile_grid",
             "type": "radio",
             "instructions": "",
@@ -63,6 +63,6 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
-    "description": "Comportements mobiles appliquées aux blocs de mise en avant",
+    "description": "Comportements mobiles appliqués aux blocs de mise en avant, galerie de médias et titre et icône",
     "modified": 1641315126
 }
