@@ -95,6 +95,7 @@ class WoodyTheme_WoodyCompilers
                 } elseif ($wrapper['mobile_behaviour']['mobile_grid'] == 'swiper') {
                     $the_items['swResp'] = true;
                 }
+                $the_items['nb_columns'] = (!empty($wrapper['mobile_behaviour']['nb_columns'])) ? $wrapper['mobile_behaviour']['nb_columns'] : '';
                 $the_items['mobile_behaviour'] = $wrapper['mobile_behaviour'];
             }
 

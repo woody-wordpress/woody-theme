@@ -11,18 +11,42 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "60",
+                "width": "40",
                 "class": "",
                 "id": ""
             },
             "choices": {
                 "default": "Par défaut",
-                "grid": "Empilement (blocs les uns sur les autres)",
+                "grid": "Grille",
                 "swiper": "Diaporama\/Slider"
             },
             "allow_null": 0,
             "other_choice": 0,
             "default_value": "default",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_629f53aa06919",
+            "label": "Colonnes / diapositives visibles",
+            "name": "nb_columns",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "20",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "1": "1",
+                "2": "2"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": 1,
             "layout": "vertical",
             "return_format": "value",
             "save_other_choice": 0
@@ -36,7 +60,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "30",
+                "width": "10",
                 "class": "hidden",
                 "id": ""
             },
@@ -64,5 +88,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "Comportements mobiles appliqués aux blocs de mise en avant, galerie de médias et titre et icône",
-    "modified": 1641315126
+    "show_in_rest": 0,
+    "modified": 1654609576
 }
