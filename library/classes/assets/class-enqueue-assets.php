@@ -316,6 +316,8 @@ class WoodyTheme_Enqueue_Assets
             wp_enqueue_style('main-stylesheet', WP_DIST_URL . $this->assetPath('/css/' . $main_css . '.css'), [], null, 'screen');
         }
 
+        // Enqueue css specificly for icons
+        wp_enqueue_style('wicon-stylesheet', WP_DIST_URL . $this->assetPath('/css/wicon.css'), [], null, 'screen');
         wp_enqueue_style('print-stylesheet', WP_DIST_URL . $this->assetPath('/css/print.css'), [], null, 'print');
     }
 
