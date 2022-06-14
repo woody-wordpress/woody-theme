@@ -146,6 +146,7 @@ $('#post').each(function () {
         $('#tpls_popin .close').on('click', function () {
             $('#tpls_popin').removeClass('opened');
             $('.tpl-choice-wrapper.selected').removeClass('selected');
+            $('li.first-choice-tpl').removeClass('first-choice-tpl');
             $('#tpls_popin li').removeClass('hidden').removeClass('filtered');
             $('.tpls_popin_filters').remove();
         });
@@ -154,6 +155,7 @@ $('#post').each(function () {
             button.parent().find('[data-key="' + field_key + '"] input').val($('.tpl-choice-wrapper.selected').data('value'));
             $('#tpls_popin').removeClass('opened');
             $('.tpl-choice-wrapper.selected').removeClass('selected');
+            $('li.first-choice-tpl').removeClass('first-choice-tpl');
             $('#tpls_popin li').removeClass('hidden').removeClass('filtered');
             $('.tpls_popin_filters').remove();
         });
@@ -220,6 +222,7 @@ $('#post').each(function () {
                     $(this).parent('li').addClass('hidden');
                 } else if ($(this).data('value') == tpl_value) {
                     $(this).addClass('selected');
+                    $(this).closest('li').addClass('first-choice-tpl');
                 }
             })
 
@@ -247,6 +250,7 @@ $('#post').each(function () {
                         $('#tpls_popin li').on('click', function () {
                             let tpl = $(this).find('.tpl-choice-wrapper');
                             $('.tpl-choice-wrapper.selected').removeClass('selected');
+                            $('li.first-choice-tpl').removeClass('first-choice-tpl');
                             tpl.addClass('selected');
                         });
 

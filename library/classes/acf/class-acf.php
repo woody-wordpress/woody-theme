@@ -316,7 +316,7 @@ class WoodyTheme_ACF
         if (strpos($field['name'], 'woody_icon') !== false) {
             $icons = getWoodyIcons();
             foreach ($icons as $key => $icon) {
-                $field['choices'][$key] = '<div class="wicon-select"><span class="wicon-woody-icons ' . $key . '"></span><span>' . $icon . '</span></div>';
+                $field['choices'][$key] = '<div class="wicon-select"><span class="wicon wicon-woody-icons ' . $key . '"></span><span>' . $icon . '</span></div>';
             }
         }
 

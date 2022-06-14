@@ -102,6 +102,7 @@ class WoodyTheme_WoodyProcess
             case 'gallery':
                 // Ajout des données Instagram + champs personnalisés dans le contexte des images
                 $layout['gallery_type'] = !empty($layout['gallery_type']) ? $layout['gallery_type'] : "manual";
+                $layout['is_mobile'] = wp_is_mobile();
 
                 switch ($layout['gallery_type']) {
                     case 'auto':
@@ -127,7 +128,6 @@ class WoodyTheme_WoodyProcess
                         }
                     break;
                 }
-
                 $layout['display'] = $this->tools->getDisplayOptions($layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
