@@ -1,0 +1,1642 @@
+$primaryWoody : #F95B59;
+$blackWoody : #23282d;
+$whiteWoody : #FFFFFF;
+$lightgrayWoody : #F1F1F1;
+$mediumgrayWoody : #5b6875;
+$darkgrayWoody : #404040;
+$transition : 0.3s;
+
+* {
+    font-family: 'Montserrat','Arial', sans-serif;
+}
+
+body {
+    background-color: $whiteWoody;
+}
+
+
+
+#poststuff{
+    .acf-field {
+        .acf-label {
+            margin: 0;
+            margin-bottom: 2.5px;
+
+            label {
+                font-weight: normal;
+            }
+        }
+
+        .acf-input {
+            input:not([type="radio"]):not([type="checkbox"]) {
+                border-radius: 0;
+                background: transparent;
+                transition: $transition;
+                color: $blackWoody;
+            }
+            select, input, textarea {
+                &:focus {
+                    box-shadow: none !important;
+                    border-color: $primaryWoody !important;
+                }
+            }
+        }
+    }
+}
+
+// Transformation de la barre de success
+.custom-notice.is-fixed.notice-success {
+    background-color: $primaryWoody;
+}
+
+// Transformation de toutes les flèches d'ouverture et fermeture
+.meta-box-sortables {
+    .postbox {
+        .postbox-header {
+            .handlediv {
+                .toggle-indicator {
+                    height: 20px;
+                    width: 20px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: relative;
+
+                    &::before, &::after {
+                        content: '';
+                        width: 10px;
+                        height: 1px;
+                        background-color: $blackWoody;
+                        position: absolute;
+                        top: 50%;
+                        transform: translateX(5px) rotate(45deg);
+                        transition : $transition;
+                    }
+
+                    &::after {
+                        transform: translateX(-1px) rotate(-45deg);
+                    }
+                }
+
+                &:focus {
+                    box-shadow: none !important;
+                }
+            }
+        }
+        &.closed {
+            .handlediv {
+                .toggle-indicator {
+                    &::before, &::after {
+                        transform: translateX(6px) rotate(-45deg);
+                        transition : $transition;
+                    }
+
+                    &::after {
+                        transform: translateX(-1px) rotate(45deg);
+                    }
+                }
+            }
+        }
+    }
+}
+.acf-field-accordion {
+    .acf-accordion-title {
+        .acf-accordion-icon {
+            &::before, &::after {
+                content: '';
+                width: 10px;
+                height: 1px;
+                background-color: $blackWoody;
+                position: absolute;
+                top: 50%;
+                transform: translateX(5px) rotate(-45deg);
+                transition : $transition;
+            }
+
+            &::after {
+                transform: translateX(-1px) rotate(45deg);
+            }
+        }
+    }
+    &.-open {
+        .acf-accordion-title {
+            .acf-accordion-icon {
+                &::before, &::after {
+                    transform: translateX(5px) rotate(45deg);
+                    transition : $transition;
+                }
+
+                &::after {
+                    transform: translateX(-1px) rotate(-45deg);
+                }
+            }
+        }
+    }
+}
+.woodyRowsCollapse {
+    .dashicons-arrow-up {
+        &::before, &::after {
+            content: '';
+            width: 8px;
+            height: 1px;
+            background-color: $blackWoody;
+            position: absolute;
+            top: 50%;
+            transform: translateX(3px) rotate(45deg) !important;
+            transition : $transition;
+        }
+
+        &::after {
+            transform: translateX(-3px) rotate(-45deg) !important;
+        }
+    }
+}
+.acf-input {
+    .acf-fc-layout-controls {
+        .-collapse {
+            &::before, &::after {
+                content: '';
+                width: 6px;
+                height: 1px;
+                background-color: $blackWoody;
+                position: absolute;
+                top: 50%;
+                transform: translateX(0px) rotate(45deg) !important;
+                transition : $transition;
+            }
+
+            &::after {
+                transform: translateX(-5px) rotate(-45deg) !important;
+            }
+        }
+    }
+
+    .select2 {
+        .select2-selection__arrow {
+            &::before, &::after {
+                content: '';
+                width: 8px;
+                height: 1px;
+                background-color: $blackWoody;
+                position: absolute;
+                top: 50%;
+                transform: translateX(3px) rotate(-45deg);
+                transition : $transition;
+            }
+
+            &::after {
+                transform: translateX(-3px) rotate(45deg);
+            }
+
+            b {
+                display: none;
+            }
+        }
+    }
+
+    .-collapse {
+        &::before, &::after {
+            content: '' !important;
+            width: 6px;
+            height: 1px;
+            background-color: $blackWoody;
+            position: absolute;
+            top: 50%;
+            transform: translateX(0px) rotate(-45deg);
+            transition : $transition;
+        }
+
+        &::after {
+            transform: translateX(-5px) rotate(45deg);
+        }
+    }
+}
+
+// Transformation du header de modification de la page
+.wp-heading-inline {
+    display: none !important;
+}
+#poststuff {
+    margin-top: 30px;
+
+    #post-body {
+        #titlediv {
+            display: flex;
+            align-items: center;
+
+            #titlewrap {
+                margin-bottom: 15px;
+                position: relative;
+                width: 50%;
+                margin-right: 30px;
+
+                #title-prompt-text {
+                    padding-left: 0;
+                    top: 3px;
+                }
+
+                input {
+                    border: 0;
+                    padding: 20px 10px;
+                    padding-left: 0;
+                    border-bottom: 1px solid $darkgrayWoody;
+                    border-radius: 0;
+                    background: transparent;
+                    transition: $transition;
+                    color: $blackWoody;
+
+
+                    &:focus {
+                        box-shadow: none;
+                        border-bottom-color: $primaryWoody;
+                    }
+                }
+
+                &::before {
+                    content : 'Modification de la page :';
+                    display: block;
+                    position: absolute;
+                    top: -15px;
+                    left: 0;
+                    color: $darkgrayWoody;
+                }
+            }
+
+            .inside {
+                position: relative;
+
+                strong {
+                    display: none;
+                }
+
+                #edit-slug-box {
+                    margin: 0;
+                    padding: 0;
+                    margin-top: 10px;
+
+                    #sample-permalink {
+                        a {
+                            color: $primaryWoody;
+                        }
+
+                        #new-post-slug {
+                            background-color: transparent;
+                            border-radius: 0;
+                            border: 0;
+                            border-bottom: 1px solid $blackWoody;
+
+                            &:focus {
+                                box-shadow: none;
+                                border-bottom-color: $primaryWoody;
+                            }
+                        }
+                    }
+
+                    #edit-slug-buttons {
+                        .button {
+                            margin-left: 15px;
+                            border-color: $primaryWoody;
+                            color: $primaryWoody;
+                            border-radius: 0;
+
+                            &:focus {
+                                box-shadow: none;
+                            }
+                        }
+                        .cancel {
+                            color: $primaryWoody;
+                            margin-left: 10px;
+                        }
+                    }
+                }
+
+                &::before {
+                    content : 'Permalien :';
+                    display: block;
+                    position: absolute;
+                    top: -15px;
+                    left: 0;
+                    color: $darkgrayWoody;
+                }
+            }
+        }
+    }
+}
+
+// Transformation du type de publication
+#acf-group_5a61fa1e0e50c {
+    .inside {
+        > div {
+            display: flex;
+            flex-direction: column;
+            width: fit-content;
+            padding: 0 12px;
+        }
+    }
+}
+
+// Transformation de l'admin menu
+#adminmenumain {
+    #adminmenuback {
+        width: 126px;
+        background-color: $lightgrayWoody;
+    }
+
+    #adminmenu {
+        background-color: darken($lightgrayWoody, 5%);
+        opacity: 0;
+        z-index: 1;
+        pointer-events: none;
+        padding: 20px;
+        padding-bottom: 125px;
+        margin: 0;
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 0 50px;
+        width: 25vw;
+        height: calc(100vh - 32px);
+        box-sizing: border-box;
+
+        > li {
+            width: calc(10vw - 20px);
+
+            &:hover {
+                background-color: darken($lightgrayWoody, 10%);
+                color: $blackWoody;
+
+                .wp-menu-image::before {
+                    color : $blackWoody
+                }
+            }
+
+            > a {
+                color: $blackWoody;
+
+                &:hover {
+                    box-shadow: none;
+                }
+
+                &:focus {
+                    background-color: darken($lightgrayWoody, 10%);
+                }
+
+                .wp-menu-image::before {
+                    color : $blackWoody
+                }
+            }
+
+            &.opensub {
+                &:hover {
+                    &::after {
+                        border-right-color : darken($lightgrayWoody, 0%)
+                    }
+                }
+
+                > a {
+                    background-color: darken($lightgrayWoody, 10%);
+                    color: $blackWoody;
+                }
+
+                .wp-submenu {
+                    background-color: darken($lightgrayWoody, 0%);
+                    box-shadow: none;
+                    border-right: 5px solid transparent;
+                    left: calc((20vw - 40px) / 2);
+
+                    a {
+                        color: $blackWoody;
+
+                        &:hover {
+                            color: $blackWoody;
+                            box-shadow: none;
+                            background-color: darken($lightgrayWoody, 5%);
+                        }
+                    }
+                }
+            }
+
+            &.current {
+                > a {
+                    background-color: $primaryWoody;
+                    color: $whiteWoody;
+
+                    &::after {
+                        display: none;
+                    }
+
+                    .wp-menu-image {
+                        &::before {
+                            color : $whiteWoody
+                        }
+                    }
+                }
+            }
+
+            &.wp-has-current-submenu {
+                > a {
+                    background-color: $primaryWoody;
+                    color: $whiteWoody;
+
+                    &::after {
+                        display: none;
+                    }
+
+                    .wp-menu-image {
+                        &::before {
+                            color : $whiteWoody
+                        }
+                    }
+                }
+
+                .wp-submenu {
+                    background-color: darken($lightgrayWoody, 10%);
+                    width: 100%;
+
+                    a {
+                        color: $blackWoody;
+
+                        &:hover {
+                            color: $blackWoody;
+                            box-shadow: none;
+                            background-color: darken($lightgrayWoody, 15%);
+                        }
+                    }
+                }
+            }
+
+            &#collapse-menu {
+                display: none;
+            }
+        }
+    }
+
+    #adminmenuwrap {
+        display: flex;
+        position: fixed;
+        flex-direction: column;
+        background-color: transparent;
+        left: 114px;
+        float: inherit;
+        width: 0;
+
+        .burger-menu {
+            order: -1;
+            top: 54px;
+            left: 20px;
+            background-color: $primaryWoody;
+            display: flex;
+            width: 84px;
+            height: 84px;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: $transition;
+            z-index: 10000;
+            position: fixed;
+
+            .burger {
+                width: 16px;
+                height: 1px;
+                background-color: $whiteWoody;
+                position: relative;
+                margin-bottom: 18px;
+                margin-top: 10px;
+                transform: translateY(-2px) translateX(-2px);
+                transition: $transition;
+
+                &::before, &::after {
+                    content: '';
+                    display: block;
+                    width: 20px;
+                    height: 1px;
+                    background-color: $whiteWoody;
+                    position: absolute;
+                    top: -8px;
+                    transition: $transition;
+                }
+
+                &::after {
+                    top: 8px;
+                }
+            }
+
+            .content {
+                color: $whiteWoody;
+                font-size: 0.9rem;
+                text-transform: uppercase;
+            }
+
+            &:hover {
+                background-color: darken($primaryWoody, 5%);
+            }
+        }
+
+        &.open {
+            z-index: 20000;
+            background-color: $lightgrayWoody;
+
+            #adminmenu {
+                z-index: 20000;
+                opacity: 1;
+                pointer-events: all;
+            }
+
+            .burger-menu {
+                .burger {
+                    width: 20px;
+                    transform: translateY(-2px) translateX(-2px) rotate(-45deg);
+
+                    &::before, &::after {
+                        top: 0;
+                        transform: rotate(90deg);
+                    }
+
+                    &::after {
+                        opacity: 0;
+                    }
+                }
+
+                &:hover {
+                    background-color: darken($primaryWoody, 5%);
+                }
+            }
+        }
+    }
+}
+body:not(.post-php) {
+    #adminmenumain {
+        .woody-tools-bar {
+            position: fixed;
+            top: 156px;
+            left: 20px;
+            align-items: center;
+            width: 84px !important;
+            background-color: none !important;
+            opacity: 1 !important;
+            z-index: 10000 !important;
+            pointer-events: all !important;
+            padding: 0 !important;
+            margin-left: 0 !important;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap !important;
+            gap: 0 !important;
+            height: inherit !important;
+            background-color: transparent !important;
+
+            > .menu-top:not(.fixedAtToolbar) {
+                width: 100% !important;
+                height: 74px;
+                margin-bottom: 10px;
+
+                > a {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100%;
+                    color: $mediumgrayWoody !important;
+
+                    .wp-menu-image {
+                        &::before {
+                            color: $mediumgrayWoody !important;
+                        }
+                    }
+
+                    .wp-menu-name {
+                        padding: 0;
+                        width: fit-content;
+                        text-align: center;
+                        text-transform: uppercase;
+                        font-size: 0.75rem;
+                        width: 90%;
+                    }
+                }
+
+                > .wp-submenu {
+                    left: calc(126px - 42px) !important;
+                    margin: 0;
+                }
+
+                &.opensub {
+                    > .wp-submenu {
+                        top: -20px !important;
+                    }
+                }
+            }
+
+            > .menu-top.fixedAtToolbar {
+                position: fixed;
+                left: 10px;
+                margin: 0;
+                top: 156px;
+                width: 104px !important;
+                height: 84px;
+                min-width: 84px;
+                z-index: 10000;
+                background-color: $lightgrayWoody;
+                transition: $transition;
+
+                &:hover  {
+                    background-color: $lightgrayWoody !important;
+                }
+
+                > a {
+                    display: none;
+                }
+
+                > .wp-submenu {
+                    background-color: transparent !important;
+                    a {
+                        text-align: center;
+                        padding: 5px;
+                        margin-bottom: 5px;
+                    }
+
+                    .current {
+                        a {
+                            color: $primaryWoody !important;
+                        }
+                    }
+                }
+            }
+        }
+
+
+    }
+}
+body:not(.role-administrator) {
+    #adminmenumain {
+        #adminmenu {
+            width: 15vw;
+        }
+    }
+}
+#wpcontent {
+    margin-left: 126px;
+    padding-left: 20px;
+    height: 90vh;
+    background-color: $whiteWoody;
+}
+#wpfooter {
+    margin-left: 126px;
+}
+
+// Transformation de l'outil woodyEditMode
+#acf-group_615ca08f1a261 {
+    position: fixed;
+    border : 1px solid $primaryWoody;
+    display: flex;
+    justify-content: center;
+    z-index: 10000;
+    align-items: center;
+    bottom: 20px;
+    left: 20px;
+    text-align: center;
+    margin: 0;
+    min-width: 84px;
+    width: 84px;
+    height: 100px;
+    transition: $transition;
+    cursor: pointer;
+
+    .inside {
+        width: 100%;
+
+        .acf-field {
+            padding: 0;
+            width: 100%;
+            height: 100%;
+
+            .acf-label {
+                margin-bottom: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+
+                label {
+                    font-weight: normal;
+                    margin-bottom: 0;
+                    font-size: 0.7rem;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    text-transform: uppercase;
+                    @include wicon(062-crayon, before);
+
+                    &::before {
+                        margin-bottom: 7px;
+                        font-size: 1.25rem;
+                    }
+                }
+            }
+
+            .acf-input {
+                .acf-button-group {
+                    flex-direction: column;
+                    display: flex;
+                    height: 15px;
+                    overflow: hidden;
+
+                    label {
+                        border-radius: 0;
+                        opacity: 0;
+
+                        &.selected {
+                            background: transparent;
+                            border: 0;
+                            color: $primaryWoody;
+                            order: -1;
+                            margin-top: -8px;
+                            font-weight: bold;
+                            opacity: 1;
+                        }
+
+                        &:not(.selected) {
+                            position: absolute;
+                            top: -75px;
+                            left: 0;
+                            z-index: 10001;
+                            height: 87px;
+                            width: 63px;
+                            opacity: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &:hover {
+        background-color: rgba($blackWoody, 0.05);
+    }
+}
+
+// Transformation de l'outil woodyModel
+#woody_model_metabox {
+    position: fixed;
+    left: 20px;
+    margin: 0;
+    top: 475px;
+    width: 84px;
+    height: 84px;
+    min-width: 84px;
+    z-index: 10000;
+    background-color: $lightgrayWoody;
+    transition: $transition;
+
+    &:hover  {
+        background-color: rgba($blackWoody, 0.05);
+    }
+
+    .postbox-header {
+        cursor: pointer;
+        border: 0;
+        height: 100%;
+
+        h2 {
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            font-weight: normal;
+            text-align: center;
+            color: $blackWoody;
+            pointer-events: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            @include wicon(062-crayon, before);
+
+            &::before {
+                margin-bottom: 7px;
+                font-size: 1.25rem;
+                content: '\f538';
+                font-family: 'dashicons';
+            }
+
+            &:hover {
+                color: $blackWoody !important;
+            }
+        }
+
+        .handle-actions {
+            display: none;
+        }
+    }
+
+    .inside {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+        background-color: darken($lightgrayWoody, 5%);
+        z-index: -1;
+        opacity: 0;
+        transition: $transition;
+        display: flex;
+        flex-direction: column;
+        pointer-events: none;
+
+        .woody-switcher {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            width: 350px;
+
+            &::after {
+                content: '';
+                display: block;
+                width: 90%;
+                height: 1px;
+                background-color: rgba($blackWoody, 0.15);
+                position: absolute;
+                bottom: 0;
+            }
+
+            .woody-btn {
+                border-radius: 0;
+                background-color: transparent;
+                border: 1px solid $primaryWoody;
+                padding: 5px 10px;
+                transition: $transition;
+                cursor: pointer;
+
+                &.active {
+                    background-color: $primaryWoody;
+                    color: $whiteWoody;
+                }
+
+                &:nth-of-type(2) {
+                    transform: translateX(-1px);
+                }
+            }
+        }
+
+        fieldset {
+            margin-top: 0 !important;
+            border: 0 !important;
+            padding: 35px !important;
+            padding-top: 25px !important;
+            display: none;
+
+            &.active {
+                display: block;
+            }
+
+            strong {
+                font-weight: normal;
+                margin-bottom: 0 !important;
+            }
+
+            a.button {
+                background-color: $primaryWoody;
+                border-color: $primaryWoody;
+            }
+
+            &:nth-child(1) {
+                input {
+                    background-color: transparent;
+                    border: 0;
+                    border-bottom: 1px solid $blackWoody;
+                    color: $blackWoody;
+                    transition: $transition;
+                    border-radius: 0;
+                    padding-left: 0 !important;
+                    padding-top: 0 !important;
+                    padding-bottom: 0 !important;
+                    box-shadow: none !important;
+
+                    &:focus {
+                        border-bottom-color: $primaryWoody;
+                        outline: none;
+                    }
+                }
+            }
+
+            &:nth-child(2) {
+                strong {
+                    margin-bottom: 5px !important;
+                }
+
+                select {
+                    width: 100%;
+
+                    &:focus {
+                        border-color: $primaryWoody;
+                        box-shadow: none;
+                    }
+                }
+            }
+        }
+    }
+
+    &:not(.closed) {
+        .inside {
+            left: 84px;
+            opacity: 1;
+            z-index: 10000;
+            pointer-events: all;
+        }
+    }
+}
+
+// Transformation de l'outil woodyParent
+#pageparentdiv {
+    position: fixed;
+    left: 20px;
+    margin: 0;
+    top: 574px;
+    width: 84px;
+    height: 84px;
+    min-width: 84px;
+    z-index: 10000;
+    background-color: $lightgrayWoody;
+    transition: $transition;
+
+    &:hover  {
+        background-color: rgba($blackWoody, 0.05);
+    }
+
+    .postbox-header {
+        cursor: pointer;
+        border: 0;
+        height: 100%;
+
+        h2 {
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            font-weight: normal;
+            text-align: center;
+            color: $blackWoody;
+            pointer-events: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            @include wicon(067-aller-retour, before);
+
+            &::before {
+                margin-bottom: 7px;
+                font-size: 1.25rem;
+            }
+
+            &:hover {
+                color: $blackWoody !important;
+            }
+        }
+
+        .handle-actions {
+            display: none;
+        }
+    }
+
+    .inside {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+        background-color: darken($lightgrayWoody, 5%);
+        z-index: -1;
+        opacity: 0;
+        transition: $transition;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        pointer-events: none;
+
+        .post-attributes-label-wrapper {
+            margin-bottom: 2.5px !important;
+            margin-top: 0;
+
+            label {
+                font-weight: normal;
+            }
+        }
+
+        select {
+            &:focus {
+                border-color: $primaryWoody;
+                box-shadow: none;
+            }
+        }
+    }
+
+    &:not(.closed) {
+        .inside {
+            left: 84px;
+            opacity: 1;
+            z-index: 10000;
+            pointer-events: all;
+        }
+    }
+}
+
+// Transformation de l'outil woodyCustomMenu
+#acf-group_5ba8ef4753801 {
+    position: fixed;
+    left: 20px;
+    margin: 0;
+    top: 376px;
+    width: 84px;
+    height: 84px;
+    min-width: 84px;
+    z-index: 10000;
+    background-color: $lightgrayWoody;
+    transition: $transition;
+
+    &:hover  {
+        background-color: rgba($blackWoody, 0.05);
+    }
+
+    .postbox-header {
+        cursor: pointer;
+        border: 0;
+        height: 100%;
+
+        h2 {
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            font-weight: normal;
+            text-align: center;
+            color: $blackWoody;
+            pointer-events: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            @include wicon(067-aller-retour, before);
+
+            &::before {
+                margin-bottom: 7px;
+                font-size: 1.25rem;
+                font-family: 'dashicons';
+                content: '\f212';
+            }
+
+            &:hover {
+                color: $blackWoody !important;
+            }
+        }
+
+        .handle-actions {
+            display: none;
+        }
+    }
+
+    .inside {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+        background-color: darken($lightgrayWoody, 5%);
+        z-index: -1;
+        opacity: 0;
+        width: 660px;
+        flex-wrap: wrap;
+        transition: $transition;
+        display: flex;
+        flex-direction: row;
+        padding: 20px !important;
+        pointer-events: none;
+
+        .acf-field {
+            padding: 0;
+            margin-right: 25px;
+            margin-bottom: 20px;
+            border: 0;
+
+            .acf-label {
+                margin-bottom: 5px;
+
+                label {
+                    font-weight: normal;
+                }
+            }
+        }
+
+        .acf-field-select {
+            width: 40%;
+        }
+
+        input {
+            &:focus {
+                border-color: $primaryWoody;
+                box-shadow: none;
+            }
+        }
+
+        .acf-button {
+            background-color: $primaryWoody;
+            border-color: $primaryWoody;
+        }
+    }
+
+    &:not(.closed) {
+        .inside {
+            left: 84px;
+            opacity: 1;
+            z-index: 10000;
+            pointer-events: all;
+        }
+    }
+}
+
+// Transformation de l'outil woodyCustomMEA
+#acf-group_5b0d380ce3492 {
+    position: fixed;
+    left: 20px;
+    margin: 0;
+    top: 256px;
+    width: 84px;
+    height: 104px;
+    min-width: 84px;
+    z-index: 10000;
+    background-color: $lightgrayWoody;
+    transition: $transition;
+
+    &:hover  {
+        background-color: rgba($blackWoody, 0.05);
+    }
+
+    .postbox-header {
+        cursor: pointer;
+        border: 0;
+        height: 100%;
+
+        h2 {
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            font-weight: normal;
+            text-align: center;
+            color: $blackWoody;
+            pointer-events: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            @include wicon(067-aller-retour, before);
+
+            &::before {
+                margin-bottom: 7px;
+                font-size: 1.25rem;
+                font-family: 'dashicons';
+                content: '\f161';
+            }
+
+            &:hover {
+                color: $blackWoody !important;
+            }
+        }
+
+        .handle-actions {
+            display: none;
+        }
+    }
+
+    .inside {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+        background-color: darken($lightgrayWoody, 5%);
+        z-index: -1;
+        opacity: 0;
+        width: 660px;
+        flex-wrap: wrap;
+        transition: $transition;
+        display: flex;
+        flex-direction: row;
+        padding: 20px !important;
+        pointer-events: none;
+
+        .acf-field {
+            padding: 0;
+            margin-right: 25px;
+            margin-bottom: 20px;
+            border: 0;
+
+            .acf-label {
+                margin-bottom: 5px;
+
+                label {
+                    font-weight: normal;
+                }
+            }
+        }
+
+        .acf-field-select {
+            width: 40%;
+        }
+
+        input {
+            &:focus {
+                border-color: $primaryWoody;
+                box-shadow: none;
+            }
+        }
+
+        .acf-button {
+            background-color: $primaryWoody;
+            border-color: $primaryWoody;
+        }
+
+        .acf-field-5b11394d9a268 {
+            .select2-selection__clear {
+                top: -2px;
+                left: -10px;
+            }
+        }
+
+        .textarea {
+            height: 120px;
+        }
+
+        .acf-gallery {
+            height: 200px !important;
+            width: 200px !important;
+        }
+    }
+
+    &:not(.closed) {
+        .inside {
+            left: 84px;
+            opacity: 1;
+            z-index: 10000;
+            pointer-events: all;
+        }
+    }
+}
+
+// Transformer de l'outil woodyLanguages
+#ml_box {
+    position: fixed;
+    left: 20px;
+    margin: 0;
+    top: 156px;
+    width: 84px;
+    height: 84px;
+    min-width: 84px;
+    z-index: 10000;
+    background-color: $lightgrayWoody;
+    transition: $transition;
+
+    &:hover  {
+        background-color: rgba($blackWoody, 0.05);
+    }
+
+    .postbox-header {
+        cursor: pointer;
+        border: 0;
+        height: 100%;
+
+        h2 {
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            font-weight: normal;
+            text-align: center;
+            color: $blackWoody;
+            pointer-events: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            @include wicon(067-aller-retour, before);
+
+            &::before {
+                margin-bottom: 7px;
+                font-size: 1.25rem;
+                font-family: 'dashicons';
+                content: '\f326';
+            }
+
+            &:hover {
+                color: $blackWoody !important;
+            }
+        }
+
+        .handle-actions {
+            display: none;
+        }
+    }
+
+    .inside {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+        background-color: darken($lightgrayWoody, 5%);
+        z-index: -1;
+        opacity: 0;
+        width: 660px;
+        flex-wrap: wrap;
+        transition: $transition;
+        display: flex;
+        flex-direction: row;
+        padding: 20px !important;
+        pointer-events: none;
+
+        p {
+            margin: 0;
+            height: fit-content;
+
+            strong {
+                font-weight: normal;
+            }
+        }
+
+        #select-post-language {
+            .pll-select-flag {
+                margin: 0;
+                padding: 0;
+                padding-left: 10px;
+                top: -3px;
+                position: relative;
+                padding-right: 10px;
+            }
+
+            .post_lang_choice {
+                position: relative;
+                top: -5px;
+            }
+
+            .button-lock {
+                position: relative;
+                top: -7px;
+                background-color: $primaryWoody;
+                border-color: $primaryWoody;
+            }
+        }
+
+        #pll-duplicate {
+            position: relative;
+            top: -10px;
+            color: $mediumgrayWoody;
+
+            &.wp-ui-text-highlight {
+                color: $primaryWoody;
+            }
+        }
+
+        input {
+            &:focus {
+                border-color: $primaryWoody;
+                box-shadow: none;
+            }
+        }
+
+        #post-translations {
+            tr {
+                .pll-edit-column {
+                    a {
+                        color: $primaryWoody;
+                    }
+                }
+            }
+        }
+    }
+
+    &:not(.closed) {
+        .inside {
+            left: 84px;
+            opacity: 1;
+            z-index: 10000;
+            pointer-events: all;
+        }
+    }
+}
+
+// Transformation de l'outil woodyPublish
+#submitdiv {
+    position: fixed;
+    width: 240px;
+    min-width: 240px;
+    right: 20px;
+    padding: 20px;
+    margin: 0;
+    bottom: 35px;
+    z-index: 10000;
+    background-color: $lightgrayWoody;
+
+    .postbox-header {
+        display: none;
+    }
+
+    .inside {
+        width: 100%;
+        position: relative;
+
+        #minor-publishing {
+            display: flex;
+            flex-direction: column;
+            pointer-events: none;
+            z-index: -1;
+            height: 0;
+            background-color: $lightgrayWoody;
+            opacity: 0;
+
+            #misc-publishing-actions {
+                padding: 0;
+                padding-bottom: 10px;
+                margin-bottom: 10px;
+                border-bottom: 1px solid rgba($blackWoody, 0.15);
+
+                .misc-pub-section {
+                    padding: 10px 0;
+
+                    a {
+                        margin-left: 10px;
+                    }
+                }
+            }
+
+            a:not(.submitdelete) {
+                color: $primaryWoody;
+            }
+
+            a.save-post-status, a.save-post-visibility, a.save-timestamp {
+                margin-left: 0 !important;
+                border-color: $primaryWoody;
+                background-color: transparent;
+            }
+
+            #post-visibility-select {
+                input[type=radio] {
+                    &:focus {
+                        border-color: $primaryWoody;
+                        box-shadow: none;
+                    }
+                }
+
+                input[type=radio]:checked::before {
+                    background-color: $primaryWoody;
+                }
+            }
+
+            .misc-pub-curtime {
+                select {
+                    width: inherit;
+                }
+            }
+        }
+
+        #major-publishing-actions {
+            padding: 0;
+            background: transparent;
+            border-top: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            #publishing-action {
+                float: inherit;
+                width: 100%;
+                order: 3;
+
+                .spinner {
+                    display: none;
+                }
+
+                .pv_wrap {
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    #publish {
+                        width: 80%;
+                    }
+
+                    #pv_publish {
+                        position: static;
+                        transition: $transition;
+                        width: 20%;
+                        border-radius: 0;
+                        height: 42px !important;
+                        width: 42px;
+                        border: 1px solid $primaryWoody;
+                        background: $primaryWoody;
+                        color: $whiteWoody;
+                        margin-left: 5px;
+
+                        &:hover {
+                            background-color: darken($primaryWoody, 5%);
+                        }
+                    }
+                }
+
+                #publish {
+                    font-size: 0.9rem;
+                    padding: 20px;
+                    width: 100%;
+                    border: 1px solid $primaryWoody;
+                    background: $primaryWoody;
+                    color: $whiteWoody;
+                    transition: $transition;
+                    line-height: 0;
+                    border-radius: 0;
+
+                    &:hover {
+                        background-color: darken($primaryWoody, 5%);
+                    }
+                }
+            }
+
+            #minor-publishing-actions {
+                padding: 0;
+                width: 100%;
+
+                .preview.button {
+                    margin-bottom: 5px;
+                    background-color: transparent;
+                    border: 1px solid $primaryWoody;
+                    transition: $transition;
+                    color: $blackWoody;
+
+                    &:hover {
+                        background-color: rgba($blackWoody, 0.05);
+                    }
+                }
+            }
+
+            .woody-more {
+                width: 100%;
+                padding-bottom: 10px;
+                border-bottom: 1px solid rgba($blackWoody, 0.15);
+                margin-bottom: 10px;
+                position: relative;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+
+                &::before, &::after {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    right: 0;
+                    width: 10px;
+                    height: 1px;
+                    background-color: $blackWoody;
+                    transform: rotate(45deg);
+                    transition: $transition;
+                }
+
+                &::after {
+                    transform: translateX(-7px) rotate(-45deg);
+                }
+            }
+        }
+
+        select, input {
+            width: 100%;
+            margin-bottom: 5px;
+
+            &:focus {
+                border-color: $primaryWoody;
+                box-shadow: none;
+            }
+        }
+
+        input {
+            margin-bottom: 0;
+            width: inherit;
+        }
+    }
+
+    &.open {
+        .inside {
+            #minor-publishing {
+                z-index: inherit;
+                padding-bottom: 20px;
+                pointer-events: all;
+                opacity: 1;
+                height: inherit;
+            }
+
+            #major-publishing-actions {
+                .woody-more {
+                    &::before {
+                        transform: rotate(-45deg);
+                    }
+
+                    &::after {
+                        transform: translateX(-7px) rotate(45deg);
+                    }
+                }
+            }
+        }
+    }
+}
