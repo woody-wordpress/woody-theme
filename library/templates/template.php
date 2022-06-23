@@ -118,7 +118,7 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         if (empty($this->globals['is_mobile'])) {
-            $this->globals['is_mobile'] = (WP_ENV != 'dev') ? wp_is_mobile() : null;
+            $this->globals['is_mobile'] = (WP_ENV == 'dev' || is_user_logged_in()) ? null : wp_is_mobile();
         }
     }
 
@@ -371,6 +371,7 @@ abstract class WoodyTheme_TemplateAbstract
     private function setMetadata()
     {
         $return = [];
+        $woody_lang_enable = (defined('WOODY_LANG_ENABLE') && is_array(WOODY_LANG_ENABLE)) ? WOODY_LANG_ENABLE : [];
 
         // ******************************* //
         // Définition des metas statiques
@@ -493,26 +494,22 @@ abstract class WoodyTheme_TemplateAbstract
         };
 
         // On récupère les langues activées pour ajouter une balise og:alternate dans les metas
-        $woody_lang_enable = get_option('woody_lang_enable');
-        if (is_array($woody_lang_enable)) {
+        if (!empty($woody_lang_enable)) {
             $current_lang = apply_filters('woody_pll_current_language', null);
-            if (($key = array_search($current_lang, $woody_lang_enable)) !== false) {
-                unset($woody_lang_enable[$key]);
-            }
-
-            if (!empty($woody_lang_enable)) {
-                foreach ($woody_lang_enable as $lang) {
-                    $pll_lang = get_term_by('slug', $lang, 'language');
-                    $pll_lang_data = (!empty($pll_lang)) ? maybe_unserialize($pll_lang->description) : '';
-                    $pll_locale = (!empty($pll_lang_data)) ? $pll_lang_data['locale'] : '';
-                    $return['og:locale:alternate_' . $lang] = [
+            foreach ($woody_lang_enable as $lang) {
+                if ($lang == $current_lang) {
+                    continue;
+                }
+                $pll_lang = get_term_by('slug', $lang, 'language');
+                $pll_lang_data = (!empty($pll_lang)) ? maybe_unserialize($pll_lang->description) : '';
+                $pll_locale = (!empty($pll_lang_data)) ? $pll_lang_data['locale'] : '';
+                $return['og:locale:alternate_' . $lang] = [
                     '#tag' => 'meta',
                     '#attributes' => [
                         'property' => 'og:locale:alternate',
                         'content' => $pll_locale
                         ]
                     ];
-                }
             }
         }
 
@@ -646,8 +643,7 @@ abstract class WoodyTheme_TemplateAbstract
             }
 
             // On ajoute un balise noindex/nofollow sur toutes les pages des langues non activées
-            $lang_enable = get_option('woody_lang_enable');
-            if (is_array($lang_enable) && !in_array(pll_current_language(), $lang_enable)) {
+            if (!empty($woody_lang_enable) && !in_array(pll_current_language(), $woody_lang_enable)) {
                 $robots_noindex = strpos($return['robots']['#attributes']['content'], 'noindex');
                 if (!$robots_noindex) {
                     $return['robots']['#attributes']['content'] = $return['robots']['#attributes']['content'] . ', noindex';

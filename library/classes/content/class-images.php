@@ -23,7 +23,14 @@ class WoodyTheme_Images
         add_filter('attachment_fields_to_save', [$this, 'attachmentFieldsToSave'], 12, 2); // Priority 12 ater polylang
         add_action('save_attachment', [$this, 'saveAttachment'], 50);
         add_action('edit_attachment', [$this, 'applyMediaTerms'], 50);
-        add_action('delete_attachment', [$this, 'deleteAttachment'], 1);
+
+        // Lors de la suppression d'une langue on doit supprimer tous ses médias pour éviter qu'ils ne passent dans la langue par défaut
+        // Pour cela on passe par une commande CLI et on ne veut surtout pas supprimer les traductions des médias supprimés
+        // On ne supprime pas les traductions d'une image si la suppression se fait en CLI
+        if (!defined('WP_CLI')) {
+            add_action('delete_attachment', [$this, 'deleteAttachment'], 1);
+        }
+
         add_action('wp_ajax_get_all_tags', [$this, 'getAllTags']);
         add_action('wp_ajax_set_attachments_terms', [$this, 'setAttachmentsTerms']);
         add_action('woody_theme_update', [$this, 'woodyInsertTerms']);
@@ -399,25 +406,17 @@ class WoodyTheme_Images
             $deleted_attachement = [];
         }
 
-        // Lors de la suppression d'une langue on doit supprimer tous ses médias pour éviter qu'ils ne passent dans la langue par défaut
-        // Pour cela on passe par une commande CLI et on ne veut surtout pas supprimer les traductions des médias supprimés
-        // On ne supprime pas les traductions d'une image si la suppression se fait en CLI
-        if (defined('WP_CLI') && WP_CLI) {
-            output_log('Attachment ' . $attachment_id . ' has been delted manualy');
-            if (wp_attachment_is_image($attachment_id) && is_array($deleted_attachement) && !in_array($attachment_id, $deleted_attachement)) {
-                // Remove translations
-                $translations = pll_get_post_translations($attachment_id);
-                $deleted_attachement = array_merge($deleted_attachement, array_values($translations));
-                wp_cache_set('woody_deleted_attachement', $deleted_attachement, 'woody');
+        if (wp_attachment_is_image($attachment_id) && is_array($deleted_attachement) && !in_array($attachment_id, $deleted_attachement)) {
+            // Remove translations
+            $translations = pll_get_post_translations($attachment_id);
+            $deleted_attachement = array_merge($deleted_attachement, array_values($translations));
+            wp_cache_set('woody_deleted_attachement', $deleted_attachement, 'woody');
 
-                foreach ($translations as $t_attachment_id) {
-                    if ($t_attachment_id != $attachment_id) {
-                        wp_delete_attachment($t_attachment_id);
-                    }
+            foreach ($translations as $t_attachment_id) {
+                if ($t_attachment_id != $attachment_id) {
+                    wp_delete_attachment($t_attachment_id);
                 }
             }
-        } else {
-            output_log('Attachment ' . $attachment_id . ' has been deleted by CLI');
         }
     }
 
@@ -434,20 +433,20 @@ class WoodyTheme_Images
     {
         if (wp_attachment_is_image($attachment_id)) {
             $translations = pll_get_post_translations($attachment_id);
-            $current_lang = pll_get_post_language($attachment_id);
+            $source_lang = pll_get_post_language($attachment_id);
 
             $languages = pll_languages_list();
-            foreach ($languages as $lang) {
+            foreach ($languages as $target_lang) {
 
                 // Duplicate media with Polylang Method
-                if (!array_key_exists($lang, $translations)) {
-                    $t_attachment_id = apply_filters('woody_pll_create_media_translation', $attachment_id, $lang);
+                if (!array_key_exists($target_lang, $translations)) {
+                    $t_attachment_id = woody_pll_create_media_translation($attachment_id, $source_lang, $target_lang);
                 } else {
-                    $t_attachment_id = $translations[$lang];
+                    $t_attachment_id = $translations[$target_lang];
                 }
 
                 // Sync Meta and fields
-                if (!empty($t_attachment_id) && $current_lang != $lang) {
+                if (!empty($t_attachment_id) && $source_lang != $target_lang) {
                     $this->syncAttachmentMetadata($attachment_id, $t_attachment_id);
                 }
             }
