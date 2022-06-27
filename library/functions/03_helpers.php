@@ -49,3 +49,9 @@ function woodyComponentGetDisplayOptions($wrapper)
     $tools = new WoodyTheme_WoodyProcessTools();
     return $tools->getDisplayOptions($wrapper);
 }
+
+function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = '', $lastfallback_item = '', $lastfallback_field = '', $item_type = '')
+{
+    $tools = new WoodyTheme_WoodyProcessTools();
+    return $tools->getFieldAndFallback($item, $field, $fallback_item, $fallback_field, $lastfallback_item, $lastfallback_field, $item_type);
+}
