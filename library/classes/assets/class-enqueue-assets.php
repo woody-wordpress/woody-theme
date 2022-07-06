@@ -147,7 +147,7 @@ class WoodyTheme_Enqueue_Assets
         }
 
         // CDN hosted jQuery placed in the header, as some plugins require that jQuery is loaded in the header.
-        $jQuery_version = '3.5.1';
+        $jQuery_version = '3.6.0';
         if ($this->isTouristicPlaylist || $this->isTouristicSheet) {
             $jQuery_version = '2.1.4';
         }
