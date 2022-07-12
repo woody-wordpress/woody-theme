@@ -233,6 +233,37 @@
                     "min": "",
                     "max": ""
                 },
+                "layout_5b913d3b59c35": {
+                    "key": "layout_5b913d3b59c35",
+                    "name": "feature_v2",
+                    "label": "Titre & Icône",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5b925c2969c35",
+                            "label": "",
+                            "name": "feature_v2",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_6296243e5eb71"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
                 "layout_5b912d5b59c34": {
                     "key": "layout_5b912d5b59c34",
                     "name": "links",
