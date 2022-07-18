@@ -447,13 +447,13 @@ class WoodyTheme_Images
 
                 // Sync Meta and fields
                 if (!empty($t_attachment_id) && $source_lang != $target_lang) {
-                    $this->syncAttachmentMetadata($attachment_id, $t_attachment_id);
+                    $this->syncAttachmentMetadata($attachment_id, $t_attachment_id, $target_lang);
                 }
             }
         }
     }
 
-    private function syncAttachmentMetadata($attachment_id = null, $t_attachment_id = null)
+    private function syncAttachmentMetadata($attachment_id, $t_attachment_id, $target_lang)
     {
         if (!empty($t_attachment_id) && !empty($attachment_id)) {
 
@@ -503,6 +503,11 @@ class WoodyTheme_Images
                 foreach ($tags as $taxonomy => $keywords) {
                     wp_set_post_terms($t_attachment_id, $keywords, $taxonomy, false);
                 }
+            }
+
+            // Si on lance une traduction en masse de la médiathèque, il faut lancer ce hook qui va synchroniser les taxonomies themes et places
+            if (defined('WP_CLI') && \WP_CLI) {
+                do_action('pll_translate_media', $attachment_id, $t_attachment_id, $target_lang);
             }
         }
     }
