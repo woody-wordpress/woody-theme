@@ -54,16 +54,20 @@ class WoodyTheme_Images
 
     public function mediaReplaced($target_url, $source_url, $post_id)
     {
-        $remove = sprintf('%s/app/uploads/%s/', home_url(), WP_SITE_KEY);
-        $path_parts = explode('/', str_replace($remove, '', $source_url));
+        if (wp_attachment_is_image($post_id)) {
+            $attachment_metadata = maybe_unserialize(wp_get_attachment_metadata($post_id));
+            if (!empty($attachment_metadata['file'])) {
+                $posts[] = [
+                    'id' => $post_id,
+                    'title' => get_the_title($post_id),
+                    'lang' => pll_get_post_language($post_id),
+                    'file' => $attachment_metadata['file'],
+                    'metadata' => $attachment_metadata
+                ];
+            }
 
-        $finder = new Finder();
-        $thumbs_path = sprintf('%s/%s/%s/thumbs', WP_UPLOAD_DIR, $path_parts[0], $path_parts[1]);
-        $filename = explode('.', $path_parts[2])[0];
-        output_log($filename);
-        $finder->files()->in($thumbs_path)->path($filename . '-');
-        foreach ($finder as $file) {
-            output_log($file->getPathname());
+            print_r($posts);
+            die;
         }
     }
 
@@ -369,7 +373,7 @@ class WoodyTheme_Images
                 'Hierarchical Keywords' => '<lr:hierarchicalSubject>\s*<rdf:Bag>\s*(.*?)\s*<\/rdf:Bag>\s*<\/lr:hierarchicalSubject>'
         ) as $key => $regex) {
 
-                // get a single text string
+            // get a single text string
             $xmp_arr[$key] = preg_match("/$regex/is", $xmp_data, $match) ? $match[1] : '';
 
             // if string contains a list, then re-assign the variable as an array with the list elements
