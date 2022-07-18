@@ -7,6 +7,7 @@
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
+use Symfony\Component\Finder\Finder;
 
 class WoodyTheme_Images
 {
@@ -35,6 +36,9 @@ class WoodyTheme_Images
         add_action('wp_ajax_set_attachments_terms', [$this, 'setAttachmentsTerms']);
         add_action('woody_theme_update', [$this, 'woodyInsertTerms']);
 
+        // Enable Media Replace Plugin
+        add_action('enable-media-replace-upload-done', [$this, 'mediaReplaced'], 10, 3);
+
         // Filters
         add_filter('timber_render', [$this, 'timberRender'], 1);
         add_filter('wp_image_editors', [$this, 'wpImageEditors']);
@@ -46,6 +50,21 @@ class WoodyTheme_Images
         add_filter('upload_mimes', [$this, 'uploadMimes'], 10, 1);
         add_filter('big_image_size_threshold', [$this, 'bigImageSizeThreshold'], 10, 4);
         add_filter('wp_handle_upload_overrides', [$this, 'handleOverridesForGeoJSON'], 10, 2);
+    }
+
+    public function mediaReplaced($target_url, $source_url, $post_id)
+    {
+        $remove = sprintf('%s/app/uploads/%s/', home_url(), WP_SITE_KEY);
+        $path_parts = explode('/', str_replace($remove, '', $source_url));
+
+        $finder = new Finder();
+        $thumbs_path = sprintf('%s/%s/%s/thumbs', WP_UPLOAD_DIR, $path_parts[0], $path_parts[1]);
+        $filename = explode('.', $path_parts[2])[0];
+        output_log($filename);
+        $finder->files()->in($thumbs_path)->path($filename . '-');
+        foreach ($finder as $file) {
+            output_log($file->getPathname());
+        }
     }
 
     public function bigImageSizeThreshold()
