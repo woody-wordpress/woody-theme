@@ -52,22 +52,27 @@ class WoodyTheme_Images
         add_filter('wp_handle_upload_overrides', [$this, 'handleOverridesForGeoJSON'], 10, 2);
     }
 
-    public function mediaReplaced($target_url, $source_url, $post_id)
+    public function mediaReplaced($target_url, $source_url, $attachment_id)
     {
-        if (wp_attachment_is_image($post_id)) {
-            $attachment_metadata = maybe_unserialize(wp_get_attachment_metadata($post_id));
+        if (wp_attachment_is_image($attachment_id)) {
+            $attachment_metadata = maybe_unserialize(wp_get_attachment_metadata($attachment_id));
             if (!empty($attachment_metadata['file'])) {
                 $posts[] = [
-                    'id' => $post_id,
-                    'title' => get_the_title($post_id),
-                    'lang' => pll_get_post_language($post_id),
+                    'id' => $attachment_id,
+                    'title' => get_the_title($attachment_id),
+                    'lang' => pll_get_post_language($attachment_id),
                     'file' => $attachment_metadata['file'],
                     'metadata' => $attachment_metadata
                 ];
             }
 
-            print_r($posts);
-            die;
+            if (function_exists('woodyCrop_resetMetas')) {
+                // Reset post meta and delete existing thumbnails
+                $cleaned_post = woodyCrop_resetMetas(true, $posts);
+
+                // Flush Varnish by xkey WP_SITE_KEY_$attachment_id (/wp-json/woody/crop/$attachment_id/{ratios})
+                do_action('woody_flush_varnish', $attachment_id);
+            }
         }
     }
 
