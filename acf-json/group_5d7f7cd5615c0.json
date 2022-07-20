@@ -336,6 +336,13 @@
                 "operator": "==",
                 "value": "page"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "touristic_sheet"
+            }
         ]
     ],
     "menu_order": 180,
@@ -346,5 +353,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1641220588
+    "show_in_rest": 0,
+    "modified": 1658235116
 }
