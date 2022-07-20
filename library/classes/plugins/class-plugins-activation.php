@@ -49,7 +49,8 @@ class WoodyTheme_Plugins_Activation
             'woody-plugin/woody.php',
             'woody-sso/woody-sso.php',
             'wp-deferred-javascripts/wp-deferred-javascripts.php',
-            'better-search-replace/better-search-replace.php'
+            'better-search-replace/better-search-replace.php',
+            'enable-media-replace/enable-media-replace.php'
         ];
 
         switch (WP_ENV) {
