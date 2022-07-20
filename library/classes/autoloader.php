@@ -96,6 +96,9 @@ new WoodyTheme_Roles();
 // Inclusions
 new WoodyTheme_Inclusions();
 
+// Mailer
+new WoodyTheme_Mailer();
+
 // Data Processing
 new WoodyProcess\Compilers\WoodyTheme_WoodyCompilers();
 new WoodyProcess\Getters\WoodyTheme_WoodyGetters();
