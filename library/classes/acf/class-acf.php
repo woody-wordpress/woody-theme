@@ -1167,7 +1167,7 @@ class WoodyTheme_ACF
                     do_action('woody_flush_varnish');
 
                     // On lance un rsdu
-                    do_action('woody_async_add', 'woody_hawwwai_rsdu');
+                    do_action('woody_async_add', 'woody_hawwwai_update_all_canonicals');
 
                     // On redirige vers la page d'option dans la langue qui vient d'être enregistrée
                     wp_redirect(admin_url() . 'admin.php?page=woody-settings&lang=' . $current_season_field);

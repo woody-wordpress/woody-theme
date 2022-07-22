@@ -3,11 +3,17 @@
     .wicon {
         -webkit-user-select: text;
         -moz-user-select: text;
-
+        font-family:"woody-icons";;
         &:before {
             font-size: 40px;
             -webkit-user-select: text;
             -moz-user-select: text;
         }
+    }
+}
+
+.mce-reset{
+    .wicon {
+        font-family:"woody-icons";
     }
 }
