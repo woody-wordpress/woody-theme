@@ -7,6 +7,7 @@
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
+use Symfony\Component\Finder\Finder;
 
 class WoodyTheme_Images
 {
@@ -35,6 +36,9 @@ class WoodyTheme_Images
         add_action('wp_ajax_set_attachments_terms', [$this, 'setAttachmentsTerms']);
         add_action('woody_theme_update', [$this, 'woodyInsertTerms']);
 
+        // Enable Media Replace Plugin
+        add_action('enable-media-replace-upload-done', [$this, 'mediaReplaced'], 10, 3);
+
         // Filters
         add_filter('timber_render', [$this, 'timberRender'], 1);
         add_filter('wp_image_editors', [$this, 'wpImageEditors']);
@@ -46,6 +50,46 @@ class WoodyTheme_Images
         add_filter('upload_mimes', [$this, 'uploadMimes'], 10, 1);
         add_filter('big_image_size_threshold', [$this, 'bigImageSizeThreshold'], 10, 4);
         add_filter('wp_handle_upload_overrides', [$this, 'handleOverridesForGeoJSON'], 10, 2);
+    }
+
+    /**
+    * Remplacement de média avec le plugin Enable Media Replace
+    * Lorsqu'une image est remplacée, on supprime toutes les thumbs générées et on vide la cache du endpoint de création des thumbs
+    * @param   $target_url : Url de la nouvelle image
+    * @param   $source_url : Url de l'ancienne image
+    * @param   $attachment_id : identifiant de l'attachment modifié
+    * @return  woody_flush_varnish
+    */
+    public function mediaReplaced($target_url, $source_url, $attachment_id)
+    {
+        if (wp_attachment_is_image($attachment_id)) {
+            $attachment_metadata = maybe_unserialize(wp_get_attachment_metadata($attachment_id));
+
+            if (!empty($attachment_metadata['file'])) {
+                $path_arr = explode('/', $attachment_metadata['file']);
+                $date = sprintf('%s/%s', $path_arr[0], $path_arr[1]);
+                $path_parts = pathinfo($path_arr[2]);
+                $name = $path_parts['filename'];
+                $extension = $path_parts['extension'];
+                $pattern = sprintf('/^%s-([0-9]*)x([0-9]*).%s/', $name, $extension);
+
+                $finder = new Finder;
+                $finder->files()->in(sprintf('%s/%s/thumbs', WP_UPLOAD_DIR, $date));
+
+                if (!empty($finder)) {
+                    foreach ($finder as $file) {
+                        preg_match($pattern, $file->getRelativePathname(), $matches);
+                        if (!empty($matches)) {
+                            unlink($file->getRealPath());
+                            output_log('Deleted file %s/thumbs/%s ', $date, $file->getRelativePathname());
+                        }
+                    }
+                }
+
+                // Flush Varnish by xkey WP_SITE_KEY_$attachment_id (/wp-json/woody/crop/$attachment_id/{ratios})
+                do_action('woody_flush_varnish', $attachment_id);
+            }
+        }
     }
 
     public function bigImageSizeThreshold()
@@ -350,7 +394,7 @@ class WoodyTheme_Images
                 'Hierarchical Keywords' => '<lr:hierarchicalSubject>\s*<rdf:Bag>\s*(.*?)\s*<\/rdf:Bag>\s*<\/lr:hierarchicalSubject>'
         ) as $key => $regex) {
 
-                // get a single text string
+            // get a single text string
             $xmp_arr[$key] = preg_match("/$regex/is", $xmp_data, $match) ? $match[1] : '';
 
             // if string contains a list, then re-assign the variable as an array with the list elements
@@ -447,13 +491,13 @@ class WoodyTheme_Images
 
                 // Sync Meta and fields
                 if (!empty($t_attachment_id) && $source_lang != $target_lang) {
-                    $this->syncAttachmentMetadata($attachment_id, $t_attachment_id);
+                    $this->syncAttachmentMetadata($attachment_id, $t_attachment_id, $target_lang);
                 }
             }
         }
     }
 
-    private function syncAttachmentMetadata($attachment_id = null, $t_attachment_id = null)
+    private function syncAttachmentMetadata($attachment_id, $t_attachment_id, $target_lang)
     {
         if (!empty($t_attachment_id) && !empty($attachment_id)) {
 
@@ -503,6 +547,11 @@ class WoodyTheme_Images
                 foreach ($tags as $taxonomy => $keywords) {
                     wp_set_post_terms($t_attachment_id, $keywords, $taxonomy, false);
                 }
+            }
+
+            // Si on lance une traduction en masse de la médiathèque, il faut lancer ce hook qui va synchroniser les taxonomies themes et places
+            if (defined('WP_CLI') && \WP_CLI) {
+                do_action('pll_translate_media', $attachment_id, $t_attachment_id, $target_lang);
             }
         }
     }

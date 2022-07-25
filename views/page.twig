@@ -17,6 +17,7 @@
                     {% else %}
                         <div class="mobile-header hide-for-xlarge title-bar">
                             <span class="brand-logo obf" data-obf="{{ home_url|base64Encode }}">
+                                <span class="no-visible-text menu-logo-site-name isAbs">{{ globals.site_name|default }}</span>
                                 {{ mobile_logo|default(website_logo) }}
                             </span>
                         </div>

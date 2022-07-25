@@ -222,8 +222,9 @@ class WoodyTheme_Plugins_Options
         $yoimg_crop_settings['crop_qualities'] = array(75);
         $yoimg_crop_settings['cachebusting_is_active'] = true;
         $yoimg_crop_settings['crop_sizes'] = [
-            'thumbnail'             => ['active' => false, 'name' => 'Miniature'],
-            'medium'                => ['active' => false, 'name' => 'Medium'],
+            'thumbnail'             => ['active' => true, 'name' => 'Miniature'],
+            'medium'                => ['active' => true, 'name' => 'Medium'],
+            'large'                 => ['active' => true, 'name' => 'Large'],
             'ratio_8_1_small'       => ['active' => true, 'name' => 'Pano A'],
             'ratio_8_1_medium'      => ['active' => true, 'name' => 'Pano A'],
             'ratio_8_1_large'       => ['active' => true, 'name' => 'Pano A'],
@@ -262,6 +263,19 @@ class WoodyTheme_Plugins_Options
             'ratio_square'          => ['active' => true, 'name' => 'Carr&eacute;'],
         ];
         $this->updateOption('yoimg_crop_settings', $yoimg_crop_settings);
+
+        // Set image default size
+        update_option('thumbnail_size_w', 300);
+        update_option('thumbnail_size_h', 300);
+        update_option('thumbnail_crop', 1);
+
+        update_option('medium_size_w', 300);
+        update_option('medium_size_h', 300);
+        update_option('medium_crop', 1);
+
+        update_option('large_size_w', 1024);
+        update_option('large_size_h', 1024);
+        update_option('large_crop', 1);
 
         // Polylang
         $polylang = [
