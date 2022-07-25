@@ -95,7 +95,7 @@
         {
             "key": "field_5b0e5ddfd2e3f",
             "label": "Image Mobile",
-            "name": "page_mobile_heading_img",
+            "name": "mobile_page_heading_img",
             "type": "image",
             "instructions": "",
             "required": 0,

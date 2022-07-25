@@ -657,8 +657,8 @@ class WoodyTheme_WoodyCompilers
                 if (!empty($page_hero['page_heading_img']) && is_array($page_hero['page_heading_img'])) {
                     $page_hero['page_heading_img']['attachment_more_data'] = (!empty($page_hero['page_heading_img']['ID'])) ? $this->tools->getAttachmentMoreData($page_hero['page_heading_img']['ID']) : [];
                 }
-                if(!empty($page_hero['page_mobile_heading_img']) && is_array($page_hero['page_mobile_heading_img'])) {
-                    $page_hero['page_mobile_heading_img']['attachment_more_data'] = (!empty($page_hero['page_mobile_heading_img']['ID'])) ? $this->tools->getAttachmentMoreData($page_hero['page_mobile_heading_img']['ID']) : [];
+                if(!empty($page_hero['mobile_page_heading_img']) && is_array($page_hero['mobile_page_heading_img'])) {
+                    $page_hero['mobile_page_heading_img']['attachment_more_data'] = (!empty($page_hero['mobile_page_heading_img']['ID'])) ? $this->tools->getAttachmentMoreData($page_hero['mobile_page_heading_img']['ID']) : [];
                 }
             }
 
