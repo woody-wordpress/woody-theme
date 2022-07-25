@@ -5,6 +5,7 @@
     <div class="content-wrapper {{ page_terms|default('no-terms') }}">
         <div class="mobile-header hide-for-xlarge title-bar">
             <div class="brand-logo obf" data-obf="{{ home_url|base64Encode }}">
+                <span class="no-visible-text menu-logo-site-name isAbs">{{ globals.site_name|default }}</span>
                 {{ website_logo|default('Website logo') }}
             </div>
         </div>

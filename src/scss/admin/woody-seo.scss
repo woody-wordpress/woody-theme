@@ -19,6 +19,7 @@
     }
 
     .tokens-div {
+        display: flex;
         padding: 4px 8px;
         margin: 0;
         box-sizing: border-box;
@@ -56,9 +57,11 @@
     }
 
     .editable {
-        min-width: 5px;
+        min-width: 100px;
         line-height: 1.6em;
+        border: 1px solid #eee;
         display: inline-block;
+        padding: 2px 6px;
 
         &:focus {
             outline: none;

@@ -448,12 +448,14 @@ class WoodyTheme_WoodyGetters
                         foreach ($slideshow as $slide_key => $slide) {
                             foreach ($slide['sizes'] as $size_key => $size) {
                                 if (strpos($size_key, 'height') === false and strpos($size_key, 'width') === false) {
-                                    $slideshow_srcs[$slide_key][$size_key] = $size;
+                                    $slideshow_data['srcs'][$slide_key][$size_key] = $size;
                                 }
                             }
+
+                            $slideshow_data['alts'][$slide_key] = $slide['alt'];
                         }
 
-                        $data['slideshow'] = $slideshow_srcs;
+                        $data['slideshow'] = $slideshow_data;
                     }
                 }
             }

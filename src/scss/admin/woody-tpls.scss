@@ -21,6 +21,10 @@
             width: 25%;
             padding: 15px;
             box-sizing: border-box;
+
+            &.first-choice-tpl {
+                order: -1;
+            }
         }
 
         div.hidden {

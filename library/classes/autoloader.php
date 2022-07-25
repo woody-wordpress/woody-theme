@@ -21,6 +21,8 @@ if (function_exists('pll_languages_list')) {
 new WoodyTheme_Commands();
 new WoodyTheme_cleanDataBases();
 
+// Query
+new WoodyTheme_Query();
 
 // Plugins
 new WoodyTheme_Plugins_Activation();
@@ -93,6 +95,9 @@ new WoodyTheme_Roles();
 
 // Inclusions
 new WoodyTheme_Inclusions();
+
+// Mailer
+new WoodyTheme_Mailer();
 
 // Data Processing
 new WoodyProcess\Compilers\WoodyTheme_WoodyCompilers();

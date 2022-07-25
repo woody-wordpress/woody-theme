@@ -41,6 +41,10 @@ $('#post').each(function () {
             'landswipers': [
                 'img_ratio',
                 'text_align'
+            ],
+            'feature_v2': [
+                'length',
+                'text_align'
             ]
         };
 
@@ -142,6 +146,7 @@ $('#post').each(function () {
         $('#tpls_popin .close').on('click', function () {
             $('#tpls_popin').removeClass('opened');
             $('.tpl-choice-wrapper.selected').removeClass('selected');
+            $('li.first-choice-tpl').removeClass('first-choice-tpl');
             $('#tpls_popin li').removeClass('hidden').removeClass('filtered');
             $('.tpls_popin_filters').remove();
         });
@@ -150,6 +155,7 @@ $('#post').each(function () {
             button.parent().find('[data-key="' + field_key + '"] input').val($('.tpl-choice-wrapper.selected').data('value'));
             $('#tpls_popin').removeClass('opened');
             $('.tpl-choice-wrapper.selected').removeClass('selected');
+            $('li.first-choice-tpl').removeClass('first-choice-tpl');
             $('#tpls_popin li').removeClass('hidden').removeClass('filtered');
             $('.tpls_popin_filters').remove();
         });
@@ -167,6 +173,8 @@ $('#post').each(function () {
                 theFilters = fieldKeysFilters.heroes;
             } else if (group == 'group_5bb325e8b6b43') {
                 theFilters = fieldKeysFilters.landswipers;
+            } else if (group == 'group_6296243e5eb71') {
+                theFilters = fieldKeysFilters.feature_v2;
             }
 
             if (theFilters != 'none' && $('.tpls_popin_filters').length == 0) {
@@ -214,6 +222,7 @@ $('#post').each(function () {
                     $(this).parent('li').addClass('hidden');
                 } else if ($(this).data('value') == tpl_value) {
                     $(this).addClass('selected');
+                    $(this).closest('li').addClass('first-choice-tpl');
                 }
             })
 
@@ -241,6 +250,7 @@ $('#post').each(function () {
                         $('#tpls_popin li').on('click', function () {
                             let tpl = $(this).find('.tpl-choice-wrapper');
                             $('.tpl-choice-wrapper.selected').removeClass('selected');
+                            $('li.first-choice-tpl').removeClass('first-choice-tpl');
                             tpl.addClass('selected');
                         });
 

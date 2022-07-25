@@ -102,6 +102,7 @@ class WoodyTheme_WoodyProcess
             case 'gallery':
                 // Ajout des données Instagram + champs personnalisés dans le contexte des images
                 $layout['gallery_type'] = !empty($layout['gallery_type']) ? $layout['gallery_type'] : "manual";
+                $layout['is_mobile'] = wp_is_mobile();
 
                 switch ($layout['gallery_type']) {
                     case 'auto':
@@ -127,7 +128,6 @@ class WoodyTheme_WoodyProcess
                         }
                     break;
                 }
-
                 $layout['display'] = $this->tools->getDisplayOptions($layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
@@ -213,6 +213,11 @@ class WoodyTheme_WoodyProcess
                 if (!empty($layout['icon_img']) && !empty($layout['icon_img']['sizes']) && !empty($layout['icon_img']['sizes']['ratio_free_small'])) {
                     $layout['icon_img']['sizes']['ratio_free'] = $layout['icon_img']['sizes']['ratio_free_small'];
                 }
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+            break;
+            case 'feature_v2':
+                $layout['display'] = $this->tools->getDisplayOptions($layout['feature_block_bg_params']);
+                $layout['items'] = $this->compilers->formatFeatureItems($layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
             break;
             case 'spacer_block':

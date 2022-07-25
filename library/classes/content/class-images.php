@@ -7,6 +7,7 @@
  * @package WoodyTheme
  * @since WoodyTheme 1.0.0
  */
+use Symfony\Component\Finder\Finder;
 
 class WoodyTheme_Images
 {
@@ -23,10 +24,20 @@ class WoodyTheme_Images
         add_filter('attachment_fields_to_save', [$this, 'attachmentFieldsToSave'], 12, 2); // Priority 12 ater polylang
         add_action('save_attachment', [$this, 'saveAttachment'], 50);
         add_action('edit_attachment', [$this, 'applyMediaTerms'], 50);
-        add_action('delete_attachment', [$this, 'deleteAttachment'], 1);
+
+        // Lors de la suppression d'une langue on doit supprimer tous ses médias pour éviter qu'ils ne passent dans la langue par défaut
+        // Pour cela on passe par une commande CLI et on ne veut surtout pas supprimer les traductions des médias supprimés
+        // On ne supprime pas les traductions d'une image si la suppression se fait en CLI
+        if (!defined('WP_CLI')) {
+            add_action('delete_attachment', [$this, 'deleteAttachment'], 1);
+        }
+
         add_action('wp_ajax_get_all_tags', [$this, 'getAllTags']);
         add_action('wp_ajax_set_attachments_terms', [$this, 'setAttachmentsTerms']);
         add_action('woody_theme_update', [$this, 'woodyInsertTerms']);
+
+        // Enable Media Replace Plugin
+        add_action('enable-media-replace-upload-done', [$this, 'mediaReplaced'], 10, 3);
 
         // Filters
         add_filter('timber_render', [$this, 'timberRender'], 1);
@@ -39,6 +50,46 @@ class WoodyTheme_Images
         add_filter('upload_mimes', [$this, 'uploadMimes'], 10, 1);
         add_filter('big_image_size_threshold', [$this, 'bigImageSizeThreshold'], 10, 4);
         add_filter('wp_handle_upload_overrides', [$this, 'handleOverridesForGeoJSON'], 10, 2);
+    }
+
+    /**
+    * Remplacement de média avec le plugin Enable Media Replace
+    * Lorsqu'une image est remplacée, on supprime toutes les thumbs générées et on vide la cache du endpoint de création des thumbs
+    * @param   $target_url : Url de la nouvelle image
+    * @param   $source_url : Url de l'ancienne image
+    * @param   $attachment_id : identifiant de l'attachment modifié
+    * @return  woody_flush_varnish
+    */
+    public function mediaReplaced($target_url, $source_url, $attachment_id)
+    {
+        if (wp_attachment_is_image($attachment_id)) {
+            $attachment_metadata = maybe_unserialize(wp_get_attachment_metadata($attachment_id));
+
+            if (!empty($attachment_metadata['file'])) {
+                $path_arr = explode('/', $attachment_metadata['file']);
+                $date = sprintf('%s/%s', $path_arr[0], $path_arr[1]);
+                $path_parts = pathinfo($path_arr[2]);
+                $name = $path_parts['filename'];
+                $extension = $path_parts['extension'];
+                $pattern = sprintf('/^%s-([0-9]*)x([0-9]*).%s/', $name, $extension);
+
+                $finder = new Finder;
+                $finder->files()->in(sprintf('%s/%s/thumbs', WP_UPLOAD_DIR, $date));
+
+                if (!empty($finder)) {
+                    foreach ($finder as $file) {
+                        preg_match($pattern, $file->getRelativePathname(), $matches);
+                        if (!empty($matches)) {
+                            unlink($file->getRealPath());
+                            output_log('Deleted file %s/thumbs/%s ', $date, $file->getRelativePathname());
+                        }
+                    }
+                }
+
+                // Flush Varnish by xkey WP_SITE_KEY_$attachment_id (/wp-json/woody/crop/$attachment_id/{ratios})
+                do_action('woody_flush_varnish', $attachment_id);
+            }
+        }
     }
 
     public function bigImageSizeThreshold()
@@ -343,7 +394,7 @@ class WoodyTheme_Images
                 'Hierarchical Keywords' => '<lr:hierarchicalSubject>\s*<rdf:Bag>\s*(.*?)\s*<\/rdf:Bag>\s*<\/lr:hierarchicalSubject>'
         ) as $key => $regex) {
 
-                // get a single text string
+            // get a single text string
             $xmp_arr[$key] = preg_match("/$regex/is", $xmp_data, $match) ? $match[1] : '';
 
             // if string contains a list, then re-assign the variable as an array with the list elements
@@ -399,25 +450,17 @@ class WoodyTheme_Images
             $deleted_attachement = [];
         }
 
-        // Lors de la suppression d'une langue on doit supprimer tous ses médias pour éviter qu'ils ne passent dans la langue par défaut
-        // Pour cela on passe par une commande CLI et on ne veut surtout pas supprimer les traductions des médias supprimés
-        // On ne supprime pas les traductions d'une image si la suppression se fait en CLI
-        if (defined('WP_CLI') && WP_CLI) {
-            output_log('Attachment ' . $attachment_id . ' has been delted manualy');
-            if (wp_attachment_is_image($attachment_id) && is_array($deleted_attachement) && !in_array($attachment_id, $deleted_attachement)) {
-                // Remove translations
-                $translations = pll_get_post_translations($attachment_id);
-                $deleted_attachement = array_merge($deleted_attachement, array_values($translations));
-                wp_cache_set('woody_deleted_attachement', $deleted_attachement, 'woody');
+        if (wp_attachment_is_image($attachment_id) && is_array($deleted_attachement) && !in_array($attachment_id, $deleted_attachement)) {
+            // Remove translations
+            $translations = pll_get_post_translations($attachment_id);
+            $deleted_attachement = array_merge($deleted_attachement, array_values($translations));
+            wp_cache_set('woody_deleted_attachement', $deleted_attachement, 'woody');
 
-                foreach ($translations as $t_attachment_id) {
-                    if ($t_attachment_id != $attachment_id) {
-                        wp_delete_attachment($t_attachment_id);
-                    }
+            foreach ($translations as $t_attachment_id) {
+                if ($t_attachment_id != $attachment_id) {
+                    wp_delete_attachment($t_attachment_id);
                 }
             }
-        } else {
-            output_log('Attachment ' . $attachment_id . ' has been deleted by CLI');
         }
     }
 
@@ -434,27 +477,27 @@ class WoodyTheme_Images
     {
         if (wp_attachment_is_image($attachment_id)) {
             $translations = pll_get_post_translations($attachment_id);
-            $current_lang = pll_get_post_language($attachment_id);
+            $source_lang = pll_get_post_language($attachment_id);
 
             $languages = pll_languages_list();
-            foreach ($languages as $lang) {
+            foreach ($languages as $target_lang) {
 
                 // Duplicate media with Polylang Method
-                if (!array_key_exists($lang, $translations)) {
-                    $t_attachment_id = apply_filters('woody_pll_create_media_translation', $attachment_id, $lang);
+                if (!array_key_exists($target_lang, $translations)) {
+                    $t_attachment_id = woody_pll_create_media_translation($attachment_id, $source_lang, $target_lang);
                 } else {
-                    $t_attachment_id = $translations[$lang];
+                    $t_attachment_id = $translations[$target_lang];
                 }
 
                 // Sync Meta and fields
-                if (!empty($t_attachment_id) && $current_lang != $lang) {
-                    $this->syncAttachmentMetadata($attachment_id, $t_attachment_id);
+                if (!empty($t_attachment_id) && $source_lang != $target_lang) {
+                    $this->syncAttachmentMetadata($attachment_id, $t_attachment_id, $target_lang);
                 }
             }
         }
     }
 
-    private function syncAttachmentMetadata($attachment_id = null, $t_attachment_id = null)
+    private function syncAttachmentMetadata($attachment_id, $t_attachment_id, $target_lang)
     {
         if (!empty($t_attachment_id) && !empty($attachment_id)) {
 
@@ -504,6 +547,11 @@ class WoodyTheme_Images
                 foreach ($tags as $taxonomy => $keywords) {
                     wp_set_post_terms($t_attachment_id, $keywords, $taxonomy, false);
                 }
+            }
+
+            // Si on lance une traduction en masse de la médiathèque, il faut lancer ce hook qui va synchroniser les taxonomies themes et places
+            if (defined('WP_CLI') && \WP_CLI) {
+                do_action('pll_translate_media', $attachment_id, $t_attachment_id, $target_lang);
             }
         }
     }
