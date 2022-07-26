@@ -52,23 +52,39 @@ class WoodyTheme_Images
         add_filter('wp_handle_upload_overrides', [$this, 'handleOverridesForGeoJSON'], 10, 2);
     }
 
+    /**
+    * Remplacement de média avec le plugin Enable Media Replace
+    * Lorsqu'une image est remplacée, on supprime toutes les thumbs générées et on vide la cache du endpoint de création des thumbs
+    * @param   $target_url : Url de la nouvelle image
+    * @param   $source_url : Url de l'ancienne image
+    * @param   $attachment_id : identifiant de l'attachment modifié
+    * @return  woody_flush_varnish
+    */
     public function mediaReplaced($target_url, $source_url, $attachment_id)
     {
         if (wp_attachment_is_image($attachment_id)) {
             $attachment_metadata = maybe_unserialize(wp_get_attachment_metadata($attachment_id));
-            if (!empty($attachment_metadata['file'])) {
-                $posts[] = [
-                    'id' => $attachment_id,
-                    'title' => get_the_title($attachment_id),
-                    'lang' => pll_get_post_language($attachment_id),
-                    'file' => $attachment_metadata['file'],
-                    'metadata' => $attachment_metadata
-                ];
-            }
 
-            if (function_exists('woodyCrop_resetMetas')) {
-                // Reset post meta and delete existing thumbnails
-                $cleaned_post = woodyCrop_resetMetas(true, $posts);
+            if (!empty($attachment_metadata['file'])) {
+                $path_arr = explode('/', $attachment_metadata['file']);
+                $date = sprintf('%s/%s', $path_arr[0], $path_arr[1]);
+                $path_parts = pathinfo($path_arr[2]);
+                $name = $path_parts['filename'];
+                $extension = $path_parts['extension'];
+                $pattern = sprintf('/^%s-([0-9]*)x([0-9]*).%s/', $name, $extension);
+
+                $finder = new Finder;
+                $finder->files()->in(sprintf('%s/%s/thumbs', WP_UPLOAD_DIR, $date));
+
+                if (!empty($finder)) {
+                    foreach ($finder as $file) {
+                        preg_match($pattern, $file->getRelativePathname(), $matches);
+                        if (!empty($matches)) {
+                            unlink($file->getRealPath());
+                            output_log('Deleted file %s/thumbs/%s ', $date, $file->getRelativePathname());
+                        }
+                    }
+                }
 
                 // Flush Varnish by xkey WP_SITE_KEY_$attachment_id (/wp-json/woody/crop/$attachment_id/{ratios})
                 do_action('woody_flush_varnish', $attachment_id);
