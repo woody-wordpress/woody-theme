@@ -21,7 +21,7 @@
                     'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','{{ gtm }}');</script>
     {% else %}
-    <script>window.dataLayer=[]</script>
+    <script>window.dataLayer = (window.dataLayer !== undefined) ? window.dataLayer : [];</script>
     {% endif %}
 
     {# WP Metas #}
