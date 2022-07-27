@@ -653,8 +653,13 @@ class WoodyTheme_WoodyCompilers
                 $page_hero['title_as_h1'] = true;
             }
 
-            if (!empty($page_hero['page_heading_img']) && is_array($page_hero['page_heading_img'])) {
-                $page_hero['page_heading_img']['attachment_more_data'] = (!empty($page_hero['page_heading_img']['ID'])) ? $this->tools->getAttachmentMoreData($page_hero['page_heading_img']['ID']) : [];
+            if($page_hero['page_heading_media_type'] == 'img') {
+                if (!empty($page_hero['page_heading_img']) && is_array($page_hero['page_heading_img'])) {
+                    $page_hero['page_heading_img']['attachment_more_data'] = (!empty($page_hero['page_heading_img']['ID'])) ? $this->tools->getAttachmentMoreData($page_hero['page_heading_img']['ID']) : [];
+                }
+                if(!empty($page_hero['mobile_page_heading_img']) && is_array($page_hero['mobile_page_heading_img'])) {
+                    $page_hero['mobile_page_heading_img']['attachment_more_data'] = (!empty($page_hero['mobile_page_heading_img']['ID'])) ? $this->tools->getAttachmentMoreData($page_hero['mobile_page_heading_img']['ID']) : [];
+                }
             }
 
             if (!empty($page_hero['page_heading_add_social_movie']) && !empty($page_hero['page_heading_social_movie'])) {
