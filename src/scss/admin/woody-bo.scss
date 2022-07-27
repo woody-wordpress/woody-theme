@@ -1,4 +1,4 @@
-$primaryWoody : #F95B59;
+$primaryWoody : #e72b28;
 $blackWoody : #23282d;
 $whiteWoody : #FFFFFF;
 $lightgrayWoody : #F1F1F1;
@@ -6,15 +6,13 @@ $mediumgrayWoody : #5b6875;
 $darkgrayWoody : #404040;
 $transition : 0.3s;
 
-* {
-    font-family: 'Montserrat','Arial', sans-serif;
+*:not(.ab-icon):not(.dashicons):not(input):not(.pll_icon_edit):not(.wicon ) {
+    font-family: 'Montserrat','Arial', sans-serif !important;
 }
 
 body {
     background-color: $whiteWoody;
 }
-
-
 
 #poststuff{
     .acf-field {
@@ -44,9 +42,14 @@ body {
     }
 }
 
+#screen-meta-links {
+    display: none;
+}
+
 // Transformation de la barre de success
 .custom-notice.is-fixed.notice-success {
-    background-color: $primaryWoody;
+    background-color: #92b590;
+    top: 0 !important;
 }
 
 // Transformation de toutes les flèches d'ouverture et fermeture
@@ -329,8 +332,207 @@ body {
         > div {
             display: flex;
             flex-direction: column;
-            width: fit-content;
             padding: 0 12px;
+            width: 50%;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+    }
+}
+
+// Transformation de la barre d'administration
+#wpadminbar {
+    background-color: $whiteWoody;
+    color: $blackWoody;
+    right: 0;
+    left: inherit;
+    width: fit-content;
+
+    #wp-admin-bar-my-account {
+        margin-left: 5px;
+        .ab-item {
+            transition: $transition;
+            img {
+                margin-left: 0 !important;
+            }
+        }
+
+        .ab-sub-wrapper {
+            background-color: $lightgrayWoody;
+            right: -4px;
+
+            #wp-admin-bar-user-actions {
+                padding: 10px;
+            }
+
+            #wp-admin-bar-user-info, #wp-admin-bar-edit-profile, #wp-admin-bar-logout {
+                margin: 0 !important;
+
+                .ab-item {
+                    color: $blackWoody;
+                    margin: 0;
+                    padding: 0 10px;
+
+                    img {
+                        display: none;
+                    }
+
+                    .display-name {
+                        line-height: 1;
+                        color: $primaryWoody;
+                    }
+                }
+            }
+
+            #wp-admin-bar-user-info {
+                padding-top: 5px;
+            }
+
+            ul {
+                li {
+                    transition: $transition;
+                    &:hover {
+                        background-color: darken($lightgrayWoody, 5%);
+                    }
+                }
+            }
+        }
+
+        &:hover, &.hover {
+            > .ab-item {
+                background-color: $primaryWoody;
+            }
+        }
+    }
+
+    #wp-admin-bar-languages {
+        & > .ab-item {
+            transition: $transition;
+            .ab-label {
+                color: $blackWoody !important;
+            }
+        }
+        &:hover, &.hover {
+            & > .ab-item {
+                background-color: $primaryWoody;
+                .ab-label {
+                    color: $whiteWoody !important;
+                }
+            }
+        }
+        .ab-sub-wrapper {
+            background-color: $lightgrayWoody;
+            ul {
+                padding: 10px;
+                li {
+                    transition: $transition;
+                    &:hover {
+                        background-color: darken($lightgrayWoody, 5%);
+                    }
+                }
+            }
+            #wp-admin-bar-all {
+                .ab-item {
+                    color: $blackWoody;
+                }
+                .ab-icon:before {
+                    color: $blackWoody;
+                }
+            }
+            .ab-item {
+                color: $blackWoody;
+            }
+        }
+
+    }
+
+    .tools {
+        position: relative;
+        display: flex;
+        width: 30px;
+        height: 32px;
+        justify-content: center;
+        right: 5px;
+        align-items: center;
+        transition: $transition;
+
+        .tool-icon {
+            height: fit-content;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .wrapper {
+            position: absolute;
+            width: 200px;
+            top: 30px;
+            right: 0;
+            background: $lightgrayWoody;
+            padding: 10px;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            pointer-events: none;
+            transition: $transition;
+
+            .title {
+                font-weight: 800;
+                color: $primaryWoody;
+                text-transform: uppercase;
+                font-size: 0.85rem;
+            }
+
+            a {
+                line-height: 1;
+                height: fit-content;
+                padding: 0;
+                color: $blackWoody;
+                padding: 5px;
+                transition: $transition;
+
+                &:hover {
+                    background-color: darken($lightgrayWoody, 5%);
+                }
+            }
+
+            #wp-admin-bar-query-monitor {
+                .ab-label {
+                    color: $blackWoody;
+                }
+                &:hover, &.hover {
+                    .ab-label {
+                        color: $blackWoody;
+                    }
+                    &.qm-notice {
+                        background-color: $primaryWoody !important;
+                    }
+                }
+                &.qm-notice {
+                    background-color: $primaryWoody !important;
+
+                    .ab-item {
+                        &:hover {
+                            background-color: transparent;
+                        }
+                    }
+                }
+            }
+        }
+
+        &:hover {
+            background-color: $primaryWoody;
+
+            .tool-icon {
+                svg {
+                    * {
+                        fill: $whiteWoody;
+                    }
+                }
+            }
+
+            .wrapper {
+                opacity: 1;
+                pointer-events: all;
+            }
         }
     }
 }
@@ -338,7 +540,7 @@ body {
 // Transformation de l'admin menu
 #adminmenumain {
     #adminmenuback {
-        width: 126px;
+        width: 125px;
         background-color: $lightgrayWoody;
     }
 
@@ -352,12 +554,15 @@ body {
         margin: 0;
         margin-left: 10px;
         display: flex;
+        position: fixed;
+        top: 0;
         flex-direction: column;
         flex-wrap: wrap;
         gap: 0 50px;
         width: 25vw;
-        height: calc(100vh - 32px);
+        height: 100vh;
         box-sizing: border-box;
+        transition: $transition;
 
         > li {
             width: calc(10vw - 20px);
@@ -481,16 +686,23 @@ body {
         float: inherit;
         width: 0;
 
+        .logo {
+            position: fixed;
+            width: 70px;
+            left: 27.5px;
+            top: 20px;
+            height: 60px;
+        }
+
         .burger-menu {
             order: -1;
-            top: 54px;
-            left: 20px;
+            top: 120px;
+            left: 10px;
             background-color: $primaryWoody;
             display: flex;
-            width: 84px;
-            height: 84px;
+            width: 105px;
+            height: 50px;
             justify-content: center;
-            flex-direction: column;
             align-items: center;
             cursor: pointer;
             transition: $transition;
@@ -498,35 +710,20 @@ body {
             position: fixed;
 
             .burger {
-                width: 16px;
-                height: 1px;
-                background-color: $whiteWoody;
-                position: relative;
-                margin-bottom: 18px;
-                margin-top: 10px;
-                transform: translateY(-2px) translateX(-2px);
-                transition: $transition;
+                line-height: 1.1;
+                margin-right: 8px;
 
-                &::before, &::after {
-                    content: '';
-                    display: block;
-                    width: 20px;
-                    height: 1px;
-                    background-color: $whiteWoody;
-                    position: absolute;
-                    top: -8px;
-                    transition: $transition;
-                }
-
-                &::after {
-                    top: 8px;
+                svg {
+                    height: 1.2rem;
+                    width: 1.2rem;
                 }
             }
 
             .content {
                 color: $whiteWoody;
-                font-size: 0.9rem;
+                font-size: 0.8rem;
                 text-transform: uppercase;
+                font-weight: 500;
             }
 
             &:hover {
@@ -545,20 +742,6 @@ body {
             }
 
             .burger-menu {
-                .burger {
-                    width: 20px;
-                    transform: translateY(-2px) translateX(-2px) rotate(-45deg);
-
-                    &::before, &::after {
-                        top: 0;
-                        transform: rotate(90deg);
-                    }
-
-                    &::after {
-                        opacity: 0;
-                    }
-                }
-
                 &:hover {
                     background-color: darken($primaryWoody, 5%);
                 }
@@ -569,8 +752,7 @@ body {
 body:not(.post-php) {
     #adminmenumain {
         .woody-tools-bar {
-            position: fixed;
-            top: 156px;
+            top: 190px !important;
             left: 20px;
             align-items: center;
             width: 84px !important;
@@ -617,7 +799,7 @@ body:not(.post-php) {
                 }
 
                 > .wp-submenu {
-                    left: calc(126px - 42px) !important;
+                    left: calc(125px - 42px) !important;
                     margin: 0;
                 }
 
@@ -676,13 +858,13 @@ body:not(.role-administrator) {
     }
 }
 #wpcontent {
-    margin-left: 126px;
+    margin-left: 125px;
     padding-left: 20px;
     height: 90vh;
     background-color: $whiteWoody;
 }
 #wpfooter {
-    margin-left: 126px;
+    margin-left: 125px;
 }
 
 // Transformation de l'outil woodyEditMode
@@ -783,7 +965,7 @@ body:not(.role-administrator) {
     position: fixed;
     left: 20px;
     margin: 0;
-    top: 475px;
+    top: 509px;
     width: 84px;
     height: 84px;
     min-width: 84px;
@@ -954,7 +1136,7 @@ body:not(.role-administrator) {
     position: fixed;
     left: 20px;
     margin: 0;
-    top: 574px;
+    top: 610px;
     width: 84px;
     height: 84px;
     min-width: 84px;
@@ -1046,7 +1228,7 @@ body:not(.role-administrator) {
     position: fixed;
     left: 20px;
     margin: 0;
-    top: 376px;
+    top: 410px;
     width: 84px;
     height: 84px;
     min-width: 84px;
@@ -1157,7 +1339,7 @@ body:not(.role-administrator) {
     position: fixed;
     left: 20px;
     margin: 0;
-    top: 256px;
+    top: 290px;
     width: 84px;
     height: 104px;
     min-width: 84px;
@@ -1284,7 +1466,7 @@ body:not(.role-administrator) {
     position: fixed;
     left: 20px;
     margin: 0;
-    top: 156px;
+    top: 190px;
     width: 84px;
     height: 84px;
     min-width: 84px;

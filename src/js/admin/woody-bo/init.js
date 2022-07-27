@@ -1,7 +1,8 @@
-import EditPageTool from './EditPageTool';
-import wooyModel from './woodyModel';
-import woodyMenu from './woodyMenu';
-import woodyPublish from './woodyPublish';
+import EditPageTool from './Objects/EditPageTool';
+import wooyModel from './Objects/woodyModel';
+import woodyMenu from './Objects/woodyMenu';
+import woodyPublish from './Objects/woodyPublish';
+import AdminTopBar from './Objects/AdminTopBar';
 
 // Construction des outils dans la page d'édition de page
 const woodyParent = new EditPageTool('#pageparentdiv');
@@ -15,3 +16,6 @@ const Menu = new woodyMenu();
 
 // Construction de la zone de publication
 const Publish = new woodyPublish();
+
+// Construction de la barre d'administration
+const AdminBar = new AdminTopBar();

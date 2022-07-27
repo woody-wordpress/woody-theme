@@ -1,0 +1,220 @@
+$primaryWoody : #F95B59;
+$blackWoody : #23282d;
+$whiteWoody : #FFFFFF;
+$lightgrayWoody : #F1F1F1;
+$mediumgrayWoody : #5b6875;
+$darkgrayWoody : #404040;
+$transition : 0.3s;
+
+// Transformation de la barre d'administration
+#wpadminbar {
+    background-color: $primaryWoody;
+    padding: 4px;
+    height: 40px;
+
+
+    * {
+        font-family: 'Montserrat','Arial', sans-serif;
+    }
+
+    #wp-toolbar {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #wp-admin-bar-root-default {
+        height: 32px;
+
+        .dashboard-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+            width: 30px;
+            cursor: pointer;
+            position: relative;
+            padding-right: 20px;
+
+            &::before, &::after {
+                content: '';
+                display: block;
+                position: absolute;
+                right: 10px;
+                width: 7px;
+                height: 1px;
+                background-color: $whiteWoody;
+                transform: rotate(45deg);
+                transition: $transition;
+            }
+
+            &::after {
+                right: 5px;
+                transform: rotate(-45deg);
+            }
+        }
+        .wrapper {
+            background-color: $whiteWoody;
+            margin-top: 6px;
+            margin-left: -4px;
+            padding: 15px;
+            padding-right: 75px;
+            transition: $transition;
+            opacity: 0;
+            pointer-events: none;
+
+            .actions, .infos {
+                margin-bottom: 15px;
+
+                .title {
+                    font-weight: 800;
+                    color: $primaryWoody;
+                    text-transform: uppercase;
+                    font-size: 0.85rem;
+                }
+
+                a {
+                    line-height: 1;
+                    height: fit-content;
+                    margin-bottom: 7px;
+                    padding: 0;
+                }
+
+                .ab-item {
+                    margin-bottom: 0;
+                    margin-top: -10px;
+
+                    .ab-label {
+                        color: $blackWoody;
+                        height: 24px;
+                    }
+                }
+
+                #wp-admin-bar-query-monitor {
+                    &.qm-notice {
+                        background-color: $primaryWoody !important;
+                    }
+                }
+            }
+        }
+        &.open {
+            .dashboard-icon {
+                &::before {
+                    transform: rotate(-45deg);
+                }
+                &::after {
+                    transform: rotate(45deg);
+                }
+            }
+            .wrapper {
+                opacity: 1;
+                pointer-events: all;
+            }
+        }
+    }
+
+    #wp-admin-bar-search {
+        display: none;
+    }
+    #wp-admin-bar-my-account {
+        .ab-item {
+            img {
+                margin-left: 0 !important;
+            }
+        }
+
+        .ab-sub-wrapper {
+            background-color: $lightgrayWoody;
+            right: -4px;
+
+            #wp-admin-bar-user-actions {
+                padding: 10px;
+            }
+
+            #wp-admin-bar-user-info, #wp-admin-bar-edit-profile, #wp-admin-bar-logout {
+                margin: 0 !important;
+
+                .ab-item {
+                    color: $blackWoody;
+                    margin: 0;
+                    padding: 0 10px;
+
+                    img {
+                        display: none;
+                    }
+
+                    .display-name {
+                        line-height: 1;
+                        color: $primaryWoody;
+                    }
+                }
+            }
+
+            #wp-admin-bar-user-info {
+                padding-top: 5px;
+            }
+
+            ul {
+                li {
+                    transition: $transition;
+                    &:hover {
+                        background-color: darken($lightgrayWoody, 5%);
+                    }
+                }
+            }
+        }
+
+        &:hover {
+            > .ab-item {
+                background-color: $primaryWoody;
+            }
+        }
+    }
+    #wp-admin-bar-woody-dev-tools {
+        > .ab-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row-reverse;
+            gap: 5px;
+            font-weight: 500;
+
+            svg {
+                height: 1.1rem;
+            }
+        }
+
+        .ab-sub-wrapper {
+            transition: $transition;
+            background-color: $lightgrayWoody;
+
+            ul {
+                padding-bottom: 0;
+            }
+
+            li {
+                transition: $transition;
+
+                .ab-item {
+                    color: $blackWoody;
+                }
+
+                &:hover {
+                    background-color: darken($lightgrayWoody, 5%);
+                    .ab-item {
+                        color: $blackWoody;
+                    }
+                }
+            }
+
+
+        }
+
+        &:hover {
+            > .ab-item {
+                background-color: $primaryWoody;
+                color: $whiteWoody;
+                transition: $transition;
+            }
+        }
+    }
+}

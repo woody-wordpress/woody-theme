@@ -3,3 +3,4 @@ import './framework/foundation-explicit-pieces';
 import './plugins/scroll_to_top';
 import './plugins/focus';
 
+import './woody-bo/init';
