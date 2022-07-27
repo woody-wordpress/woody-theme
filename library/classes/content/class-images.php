@@ -37,7 +37,8 @@ class WoodyTheme_Images
         add_action('woody_theme_update', [$this, 'woodyInsertTerms']);
 
         // Enable Media Replace Plugin
-        add_action('enable-media-replace-upload-done', [$this, 'mediaReplaced'], 10, 3);
+        //TODO: Activate when available
+        //add_action('enable-media-replace-upload-done', [$this, 'mediaReplaced'], 10, 3);
 
         // Filters
         add_filter('timber_render', [$this, 'timberRender'], 1);
@@ -60,8 +61,28 @@ class WoodyTheme_Images
     * @param   $attachment_id : identifiant de l'attachment modifié
     * @return  woody_flush_varnish
     */
+    //TODO : Deactivated
     public function mediaReplaced($target_url, $source_url, $attachment_id)
     {
+
+        //TODO : Requete trop lourde, trouver une autre solution pour update l chaine $source_url dans la BDD
+        // global $wpdb;
+        // $metas = $wpdb->get_results('SELECT post_id, meta_key, meta_value FROM wp_postmeta WHERE meta_key LIKE "%_text" OR meta_key LIKE "%_link"');
+        // if (!empty($metas)) {
+        //     foreach ($metas as $meta) {
+        //         if (strpos('_', $meta->meta_key) === 0) {
+        //             continue;
+        //         }
+
+        //         if (strpos($meta->meta_value, $source_url) !== false) {
+        //             update_post_meta($meta->post_id, $meta->meta_key, str_replace($source_url, $target_url, maybe_unserialize($meta->meta_value)));
+        //             clean_post_cache($meta->post_id);
+        //             do_action('woody_flush_varnish', $meta->post_id);
+        //         }
+        //     }
+        // }
+
+
         if (wp_attachment_is_image($attachment_id)) {
             $attachment_metadata = maybe_unserialize(wp_get_attachment_metadata($attachment_id));
 
