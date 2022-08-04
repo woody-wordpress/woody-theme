@@ -387,11 +387,17 @@ class WoodyTheme_WoodyProcessTools
                 $attachment_data['instagram_metadata'] = $this->getInstagramMetadata($attachment_id);
             }
 
-            $attachment_data['linked_page'] = get_field('field_5c0553157e6d0', $attachment_id);
-            $attachment_data['author'] = get_field('field_5b5585503c855', $attachment_id);
-            $attachment_data['lat'] = get_field('field_5b55a88e70cbf', $attachment_id);
-            $attachment_data['lng'] = get_field('field_5b55a89e70cc0', $attachment_id);
-            $attachment_data['linked_video'] = get_field('field_619f73e346813', $attachment_id);
+            $author = get_field('field_5b5585503c855', $attachment_id);
+            $lat = get_field('field_5b55a88e70cbf', $attachment_id);
+            $lng = get_field('field_5b55a89e70cc0', $attachment_id);
+            $linked_page = get_field('field_5c0553157e6d0', $attachment_id);
+            $linked_video = get_field('field_619f73e346813', $attachment_id);
+
+            $attachment_data['author'] = (empty($author)) ? '' : strip_tags($author);
+            $attachment_data['lat'] = (empty($lat)) ? '' : $lat;
+            $attachment_data['lng'] = (empty($lng)) ? '' : $lng;
+            $attachment_data['linked_page'] = (empty($linked_page)) ? [] : $linked_page;
+            $attachment_data['linked_video'] = (empty($linked_video)) ? [] : $linked_video;
         }
 
         return $attachment_data;
