@@ -27,19 +27,19 @@
                     {% endfor %}
                 {% endif %}
                 {% if deals_block|default %}
-                    <li>{{ deals_block }}</li>
+                    <li class="deals-tool">{{ deals_block }}</li>
                 {% endif %}
                 {% if favorites_block|default %}
-                    <li>{{ favorites_block }}</li>
+                    <li class="favorites-tool">{{ favorites_block }}</li>
                 {% endif %}
                 {% if es_search_button|default %}
-                    <li>{{ es_search_button }}</li>
+                    <li class="search-tool">{{ es_search_button }}</li>
                 {% endif %}
                 {% if lang_switcher_button|default %}
-                    <li>{{ lang_switcher_button }}</li>
+                    <li class="lang_switcher-tool">{{ lang_switcher_button }}</li>
                 {% endif %}
                 {% if preparespot_switcher|default %}
-                    <li>{{ preparespot_switcher }}</li>
+                    <li class="preparespot-tool">{{ preparespot_switcher }}</li>
                 {% endif %}
             </ul>
         {% endif %}
@@ -86,13 +86,13 @@
             {% endfor %}
         {% endif %}
         {% if favorites_block_mobile|default %}
-            <li>{{ favorites_block_mobile }}</li>
+            <li class="favorites-tool">{{ favorites_block_mobile }}</li>
         {% endif %}
         {% if es_search_button_mobile|default %}
-            <li>{{ es_search_button_mobile }}</li>
+            <li class="search-tool">{{ es_search_button_mobile }}</li>
         {% endif %}
         {% if lang_switcher_button_mobile|default %}
-            <li>{{ lang_switcher_button_mobile }}</li>
+            <li class="lang_switcher-tool">{{ lang_switcher_button_mobile }}</li>
         {% endif %}
     </ul>
 </div>
