@@ -16,6 +16,14 @@ class WoodyTheme_Dashboard
     protected function registerHooks()
     {
         add_action('wp_dashboard_setup', [$this, 'dashboardWidgets']);
+        add_filter('timber_locations', [$this, 'injectTimberLocation']);
+    }
+
+    public function injectTimberLocation($locations)
+    {
+        $locations[] = __DIR__ . '/widgets';
+
+        return $locations;
     }
 
     /**
@@ -34,6 +42,12 @@ class WoodyTheme_Dashboard
             'woody-lestudio', // Widget slug.
             'Le Studio', // Title.
             [$this, 'leStudioWidget'] // Display function.
+        );
+
+        wp_add_dashboard_widget(
+            'woody-update', // Widget slug.
+            'Changelog', // Title.
+            [$this, 'UpdateWoodyWidget'] // Display function.
         );
     }
 
@@ -67,12 +81,25 @@ class WoodyTheme_Dashboard
         print $this->getWidgetTpl($vars);
     }
 
-    private function getWidgetTpl($vars, $tpl_name = 'cover-link')
-    {
-        $data = file_get_contents(__DIR__ . '/widgets/' . $tpl_name . '.html');
-        foreach ($vars as $key => $val) {
-            $data = str_replace('{{ ' . $key . ' }}', $val, $data);
+    public function UpdateWoodyWidget() {
+        $date = '2022-08-22'; // TODO: Change for start
+        $endDate = new DateTime($date);$endDate->modify('+14 day');
+        $dayDate = new DateTime();
+
+        if(!$_COOKIE['woodyUpdate'] && $dayDate < $endDate) {
+            $updateDatas = json_decode(file_get_contents(__DIR__ . '/changelog.json', true),true);
+            $vars = [
+                'slides' => $updateDatas[$date],
+                'path' => get_template_directory_uri() . '/src/img/changelog/'
+            ];
+            $return = Timber::compile('changelog.twig', $vars);
+            print $return;
         }
-        return $data;
+    }
+
+    private function getWidgetTpl($vars, $tpl_name = 'cover-link.twig')
+    {
+        $return = Timber::compile($tpl_name, $vars);
+        return $return;
     }
 }

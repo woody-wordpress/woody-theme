@@ -1,0 +1,259 @@
+$primaryWoody : #e72b28;
+$blackWoody : #23282d;
+$whiteWoody : #FFFFFF;
+$lightgrayWoody : #F1F1F1;
+$mediumgrayWoody : #5b6875;
+$darkgrayWoody : #404040;
+$transition : 0.3s;
+
+#woody-update {
+    .postbox-header {
+        display: none;
+    }
+}
+
+body.openModalChangelog {
+    height: 100vh;
+    overflow-y: hidden;
+}
+
+#changelog {
+    --primary-color: hsl(1, 80%, 53%);
+    --darken-primary-color : hsl(1, 80%, 43%);
+
+    *::selection {
+        background-color: var(--primary-color);
+        color: $whiteWoody;
+    }
+
+    &.roadbook {
+        --primary-color : hsl(220, 63%, 34%);
+        --darken-primary-color : hsl(220, 63%, 24%);
+    }
+
+    &.hawwwai {
+        --primary-color : hsl(103, 50%, 54%);
+        --darken-primary-color : hsl(103, 50%, 44%);
+    }
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .transparentBack {
+        width: 100%;
+        height: 100%;
+        background-color: $blackWoody;
+        opacity: 0.75;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+
+    .modalContainer {
+        width: 42%;
+        aspect-ratio: 16/7;
+        background-color: $whiteWoody;
+        position: relative;
+        display: flex;
+        border-radius: 10px;
+
+        .closeModalContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 2;
+
+            &::before, &::after {
+                background-color: var(--primary-color);
+                width: 15px;
+                height: 2px;
+                content: '';
+                display: block;
+                position: absolute;
+                transform: rotate(45deg);
+            }
+            &::after {
+                transform: rotate(-45deg);
+            }
+        }
+
+        .imgContainer {
+            width: 35%;
+            height: 100%;
+            position: relative;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                position: absolute;
+                transition: $transition;
+                opacity: 0;
+                border-radius: 10px 0 0 10px;
+
+                &.active {
+                    opacity: 1;
+                }
+            }
+        }
+
+        .contentContainer {
+            padding: 40px;
+            width: 62%;
+            box-shadow: -5px 0 10px -2px rgba($blackWoody, 0.15);
+            position: relative;
+
+            .header {
+                display: flex;
+                flex-direction: column;
+                text-transform: uppercase;
+                margin-bottom: 20px;
+
+                .pretitle {
+                    color: var(--primary-color);
+                    font-size: 12px;
+                    margin-bottom: 5px;
+                    font-weight: 500;
+                }
+                .title {
+                    color: $blackWoody;
+                    font-weight: 800;
+                    font-size: 25px;
+                }
+            }
+
+            .desc {
+                width: 80%;
+            }
+
+            .buttons {
+                display: flex;
+                gap: 10px;
+                margin-top: 20px;
+
+                .button {
+                    padding: 10px 30px;
+                    border: none;
+                    text-transform: uppercase;
+                    font-weight: 500;
+
+                    &.primary {
+                        background-color: var(--primary-color);
+                        color: $whiteWoody;
+                        transition: $transition;
+
+                        &:hover {
+                            background-color: var(--darken-primary-color);
+                        }
+                    }
+
+                    &.secondary {
+                        border: 1px solid var(--primary-color);
+                        background-color: transparent;
+                        color: var(--primary-color);
+                        transition: $transition;
+
+                        &:hover {
+                            background-color: rgba($blackWoody, 0.05);
+                        }
+                    }
+                }
+            }
+
+            .slide {
+                position: absolute;
+                width: calc(100% - 80px);
+                transition: $transition;
+                opacity: 0;
+                z-index: -1;
+
+                &-active {
+                    opacity: 1;
+                    z-index: 0;
+                }
+            }
+
+            .actionsContainer {
+                display: flex;
+                position: absolute;
+                bottom: 25px;
+                width: calc(100% - 80px);
+                justify-content: space-between;
+
+                .skipContent {
+                    cursor: pointer;
+                    color: var(--primary-color);
+                    text-decoration: underline;
+                    text-decoration-color: var(--primary-color);
+                    text-decoration-thickness: 1px;
+                    text-underline-offset: 2px;
+                    transition: $transition;
+                }
+
+                .prevContent {
+                    color: var(--primary-color);
+                    cursor: pointer;
+                    transition: $transition;
+
+                    &.last {
+                        height: fit-content;
+                        margin-top: 20px;
+                    }
+                }
+
+                .nextContent {
+                    font-weight: 600;
+                    position: relative;
+                    color: $blackWoody;
+                    padding-right: 15px;
+                    cursor: pointer;
+                    transition: $transition;
+
+                    &::before, &::after {
+                        content: '';
+                        width: 0.5rem;
+                        height: 2px;
+                        background-color: $blackWoody;
+                        display: block;
+                        position: absolute;
+                        right: 0;
+                        top: 36.5%;
+                        transform: rotate(45deg);
+                        transition: $transition;
+                    }
+
+                    &::after {
+                        transform: translateY(5px) rotate(-45deg);
+                    }
+
+                    &.close {
+                        &::before, &::after {
+                            opacity: 0;
+                        }
+                        padding: 10px 15px;
+                        background-color: var(--primary-color);
+                        color: $whiteWoody;
+                        border-radius: 3px;
+
+                        &:hover {
+                            background-color: var(--darken-primary-color);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

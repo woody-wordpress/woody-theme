@@ -19,8 +19,25 @@ export default class woodyMenu {
         link.classList.add('logo');
         link.href = document.querySelector('#wp-admin-bar-site-name > a').href;
 
+        function UrlExists(url) {
+            var http = new XMLHttpRequest();
+            http.open('HEAD', url, false);
+            http.send();
+            if (http.status != 404)
+                return true;
+            else
+                return false;
+        }
+
         let logo = document.createElement('img');
-        logo.src = `${window.location.origin}/app/themes/${document.querySelector('#wp-admin-bar-woody-dev-tools .disturl').dataset.sitekey}/logo.svg`;
+        let fileSVG = `${window.location.origin}/app/themes/${document.querySelector('#wp-admin-bar-woody-dev-tools .disturl').dataset.sitekey}/logo.svg`;
+        let filePNG = `${window.location.origin}/app/themes/${document.querySelector('#wp-admin-bar-woody-dev-tools .disturl').dataset.sitekey}/logo.png`;
+        if (UrlExists(fileSVG)) {
+            logo.src = fileSVG;
+        }
+        else {
+            logo.src = filePNG;
+        }
 
         link.appendChild(logo);
         this.parent.appendChild(link);
@@ -64,15 +81,15 @@ export default class woodyMenu {
             let quickList = [];
             if(document.querySelector('body.role-administrator')) {
                 if(window.location.host.substr(-10) === 'rc-dev.com'){
-                    quickList = ['menu-pages','toplevel_page_main-menu', 'toplevel_page_footer-settings', 'toplevel_page_edit-post_type-acf-field-group', 'toplevel_page_mlang'];
+                    quickList = ['menu-pages','toplevel_page_main-menu', 'toplevel_page_acf-options-menu-principal', 'toplevel_page_acf-options-menu-principal-en', 'toplevel_page_acf-options-menu-principal-de', 'toplevel_page_acf-options-menu-principal-it', 'toplevel_page_acf-options-menu-principal-nl', 'toplevel_page_footer-settings', 'toplevel_page_edit-post_type-acf-field-group', 'toplevel_page_mlang'];
 
                 }
                 else {
-                    quickList = ['menu-pages','toplevel_page_main-menu', 'toplevel_page_footer-settings', 'menu-media', 'menu-tools'];
+                    quickList = ['menu-pages','toplevel_page_main-menu', 'toplevel_page_acf-options-menu-principal', 'toplevel_page_acf-options-menu-principal-en', 'toplevel_page_acf-options-menu-principal-de', 'toplevel_page_acf-options-menu-principal-it', 'toplevel_page_acf-options-menu-principal-nl', 'toplevel_page_footer-settings', 'menu-media', 'menu-tools'];
                 }
             }
             else {
-                quickList = ['menu-pages','toplevel_page_main-menu', 'toplevel_page_footer-settings', 'menu-media', 'toplevel_page_hawwwai_menu'];
+                quickList = ['menu-pages','toplevel_page_main-menu', 'toplevel_page_acf-options-menu-principal', 'toplevel_page_acf-options-menu-principal-en', 'toplevel_page_acf-options-menu-principal-de', 'toplevel_page_acf-options-menu-principal-it', 'toplevel_page_acf-options-menu-principal-nl', 'toplevel_page_footer-settings', 'menu-media', 'toplevel_page_hawwwai_menu'];
             };
             let toolsBar = document.createElement('div');
             toolsBar.classList.add('woody-tools-bar');

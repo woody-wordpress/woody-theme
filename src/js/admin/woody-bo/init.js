@@ -3,6 +3,8 @@ import wooyModel from './Objects/woodyModel';
 import woodyMenu from './Objects/woodyMenu';
 import woodyPublish from './Objects/woodyPublish';
 import AdminTopBar from './Objects/AdminTopBar';
+import ChangeLog from './Changelog/init';
+console.log('Refonte Woody-BO : ON');
 
 // Construction des outils dans la page d'édition de page
 const woodyParent = new EditPageTool('#pageparentdiv');
@@ -19,3 +21,11 @@ const Publish = new woodyPublish();
 
 // Construction de la barre d'administration
 const AdminBar = new AdminTopBar();
+
+if(window.location.href.substring(window.location.href.length-9) === 'index.php'
+   || window.location.href.substring(window.location.href.length-8) === '?lang=fr'
+   || window.location.href.substring(window.location.href.length-1) === '/') { //TODO: Find a better test
+    console.log('Beautify Changelog : ON');
+    const woodyChangeLog = new ChangeLog;
+}
+

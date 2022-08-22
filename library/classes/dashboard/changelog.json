@@ -1,0 +1,33 @@
+{
+    "2022-08-22" : [
+        {
+            "pretitle": "Nouveauté",
+            "title": "Les titres & icones",
+            "desc": "Quis censet nolo nostrae consectetur si etiam voluptatem est restatis contra illis cur non reges isto locus. Etiamsi non vos adiunxit quae quis ut etiamsi enim epicuro. Isto comparandis.</br></br>Per hoc ne ipse eius actione ei peripateticis quamquam nulla censet.",
+            "buttons": [
+                {"text": "Voir un exemple", "link": "https://sandbox-woody-wp.com", "style": "primary"},
+                {"text": "Essayez-les !", "link": "https://sandbox-woody-wp2.com", "style": "secondary"}
+            ],
+            "img": "titres-icones.png",
+            "product": "woody"
+        },
+        {
+            "pretitle": "Nouveauté",
+            "title": "Epingler un feuillet",
+            "desc": "Quis censet nolo nostrae consectetur si etiam voluptatem est restatis contra illis cur non reges isto locus. Etiamsi non vos adiunxit quae quis ut etiamsi enim epicuro. Isto comparandis.</br></br>Per hoc ne ipse eius actione ei peripateticis quamquam nulla censet.",
+            "buttons": [
+                {"text": "Découvrir", "link": "https://sandbox-woody-wp2.com", "style": "primary"}
+            ],
+            "img": "pin.png",
+            "product": "roadbook"
+        },
+        {
+            "pretitle": "Nouveauté",
+            "title": "Widget de mises à jour",
+            "desc": "Quis censet nolo nostrae consectetur si etiam voluptatem est restatis contra illis cur non reges isto locus. Etiamsi non vos adiunxit quae quis ut etiamsi enim epicuro. Isto comparandis.</br></br>Per hoc ne ipse eius actione ei peripateticis quamquam nulla censet.",
+            "img": "widgethawwwai.png",
+            "product": "hawwwai"
+        }
+    ]
+
+}

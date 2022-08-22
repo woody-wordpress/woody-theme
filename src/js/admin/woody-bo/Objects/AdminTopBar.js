@@ -20,8 +20,12 @@ export default class AdminTopBar {
         document.querySelector('#wp-admin-bar-woody-dev-tools').remove();
         document.querySelector('#wp-admin-bar-warm-all-dropzone').remove();
         document.querySelector('#wp-admin-bar-flush-varnish').remove();
-        document.querySelector('#wp-admin-bar-view').remove();
-        document.querySelector('#wp-admin-bar-duplicate-post').remove();
+        if(document.querySelector('#wp-admin-bar-view')) {
+            document.querySelector('#wp-admin-bar-view').remove();
+        }
+        if(document.querySelector('#wp-admin-bar-duplicate-post')) {
+            document.querySelector('#wp-admin-bar-duplicate-post').remove();
+        }
     }
 
     createTools() {

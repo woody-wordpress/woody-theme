@@ -1,0 +1,33 @@
+<section id="changelog" class="{% for slide in slides %}{% if loop.index == 1 %}{{slide.product}}{% endif %}{% endfor %}">
+    <span class="transparentBack"></span>
+    <section class="modalContainer">
+        <span class="closeModalContainer"></span>
+        <section class="imgContainer">
+            {% for slide in slides %}
+                <img src="{{path ~ slide.img}}" data-index="{{loop.index}}" {% if loop.index == 1 %}class="active"{% endif %}>
+            {% endfor %}
+        </section>
+        <section class="contentContainer">
+            {% for slide in slides %}
+                <section class="slide {{loop.index == 1 ? 'slide-active'}}" data-product="{{slide.product}}" data-index="{{loop.index}}">
+                    <header class="header">
+                        <span class="pretitle">{{slide.pretitle}} - {{slide.product}}</span>
+                        <span class="title">{{slide.title}}</span>
+                    </header>
+                    <span class="desc">{{slide.desc}}</span>
+                    {% if slide.buttons %}
+                        <span class="buttons">
+                            {% for button in slide.buttons %}
+                                <a class="button {{button.style}}" href="{{button.link}}" target="_blank">{{button.text}}</a>
+                            {% endfor %}
+                        </span>
+                    {% endif %}
+                </section>
+            {% endfor %}
+            <section class="actionsContainer">
+                <span class="skipContent"></span>
+                <span class="nextContent"></span>
+            </section>
+        </section>
+    </section>
+</section>
