@@ -48,7 +48,6 @@ const savePost = (e, publish) => {
             'Access-Control-Allow-Headers': 'Location'
         }
     })
-    .then(handleErrors)
     .then(res => {
         console.log(res);
         if (res.url.includes('wp-login')) {
