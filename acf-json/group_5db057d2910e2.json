@@ -43,6 +43,27 @@
             "mime_types": "jpg, jpeg, gif, png"
         },
         {
+            "key": "field_5b04231f7d07c",
+            "label": "Lien",
+            "name": "eye_candy_img_link",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [{
+                    "field": "field_5bd80bae735cb",
+                    "operator": "==",
+                    "value": "link"
+                }]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
             "key": "field_61d406710984f",
             "label": "Responsive",
             "name": "",
