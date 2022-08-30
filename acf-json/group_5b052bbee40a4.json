@@ -1,7 +1,8 @@
 {
     "key": "group_5b052bbee40a4",
     "title": "Visuel et accroche",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5b052d9aea19c",
             "label": "Contenu",
             "name": "",
@@ -70,11 +71,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b0e5cc3d4b1a",
-                    "operator": "==",
-                    "value": "img"
-                }]
+                [
+                    {
+                        "field": "field_5b0e5cc3d4b1a",
+                        "operator": "==",
+                        "value": "img"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "40",
@@ -100,11 +103,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b0e5cc3d4b1a",
-                    "operator": "==",
-                    "value": "img"
-                }]
+                [
+                    {
+                        "field": "field_5b0e5cc3d4b1a",
+                        "operator": "==",
+                        "value": "img"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "40",
@@ -123,6 +128,77 @@
             "mime_types": "jpeg, jpg, png, gif"
         },
         {
+            "key": "field_630c7d06bdf6b",
+            "label": "Images complémentaires",
+            "name": "page_heading_more_imgs",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_630c7d32bdf6c",
+                    "label": "Ajouter des images complémentaires",
+                    "name": "display_imgs",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_630c7d56bdf6d",
+                    "label": "Images complémentaires",
+                    "name": "imgs",
+                    "type": "gallery",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_630c7d32bdf6c",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "75",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "insert": "append",
+                    "library": "all",
+                    "min": "",
+                    "max": 10,
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "jpeg, jpg, gif, png"
+                }
+            ]
+        },
+        {
             "key": "field_5b0e5df0d4b1c",
             "label": "Vidéo d'habillage",
             "name": "page_heading_movie",
@@ -130,11 +206,13 @@
             "instructions": "Cette vidéo doit être courte, muette et peu mouvementée",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b0e5cc3d4b1a",
-                    "operator": "==",
-                    "value": "movie"
-                }]
+                [
+                    {
+                        "field": "field_5b0e5cc3d4b1a",
+                        "operator": "==",
+                        "value": "movie"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "70",
@@ -142,27 +220,29 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
-                "key": "field_5b16b2f2aa625",
-                "label": "Fichiers vidéos",
-                "name": "movie_files",
-                "type": "clone",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "clone": [
-                    "group_5b16b09337a33"
-                ],
-                "display": "seamless",
-                "layout": "block",
-                "prefix_label": 0,
-                "prefix_name": 0
-            }]
+            "sub_fields": [
+                {
+                    "key": "field_5b16b2f2aa625",
+                    "label": "Fichiers vidéos",
+                    "name": "movie_files",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_5b16b09337a33"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                }
+            ]
         },
         {
             "key": "field_5b44b7fedb880",
@@ -191,11 +271,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5b44b7fedb880",
-                    "operator": "==",
-                    "value": "1"
-                }]
+                [
+                    {
+                        "field": "field_5b44b7fedb880",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -382,11 +464,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5d6f6ed5e7906",
-                    "operator": "==",
-                    "value": "1"
-                }]
+                [
+                    {
+                        "field": "field_5d6f6ed5e7906",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "30",
@@ -401,7 +485,8 @@
         }
     ],
     "location": [
-        [{
+        [
+            {
                 "param": "post_type",
                 "operator": "==",
                 "value": "page"
@@ -419,10 +504,11 @@
             {
                 "param": "page_type_and_children",
                 "operator": "!=",
-                "value": "custom_frontpage"
+                "value": "tourtrip"
             }
         ],
-        [{
+        [
+            {
                 "param": "post_type",
                 "operator": "==",
                 "value": "woody_model"
@@ -438,7 +524,8 @@
                 "value": "mirror_page"
             }
         ],
-        [{
+        [
+            {
                 "param": "post_type",
                 "operator": "==",
                 "value": "woody_rdbk_leaflets"
@@ -456,7 +543,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "Le bloc en haut de page contenant un média et des textes d'accroche",
-    "modified": 1567605861
+    "show_in_rest": 0
 }
