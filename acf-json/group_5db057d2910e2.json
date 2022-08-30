@@ -47,7 +47,7 @@
             "label": "Lien",
             "name": "eye_candy_img_link",
             "type": "link",
-            "instructions": "",
+            "instructions": "Si renseigné, le clic sur le visuel renverra vers ce lien",
             "required": 0,
             "conditional_logic": [
                 [{
