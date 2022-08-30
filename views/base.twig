@@ -1,10 +1,15 @@
 <!doctype html>
 {% spaceless %}
 <html class="no-js" {{site.language_attributes}}>
-
 <head>
 
     <title>{{ title }}</title>
+
+    {# Head Top #}
+    {% if head_top %}
+        {% for head_top_inner in head_top %}{{ head_top_inner }}{% endfor %}
+    {% endif %}
+    {# /Head Top #}
 
     {% if gtm|default %}
     <script>(function(w,d,s,l,i) {
@@ -16,7 +21,7 @@
                     'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','{{ gtm }}');</script>
     {% else %}
-    <script>window.dataLayer=[]</script>
+    <script>window.dataLayer = (window.dataLayer !== undefined) ? window.dataLayer : [];</script>
     {% endif %}
 
     {# WP Metas #}
@@ -51,22 +56,22 @@
     {# WP Global Vars #}
     <script>var globals={{globals_json|json_encode }}</script>
     {# /WP Global Vars #}
-    {% endspaceless %}
 </head>
+{% endspaceless %}
 
 <body class="{{body_class}}">
-    {% if body_top %}
-    {% for html in body_top %}
-    {{ html }}
-    {% endfor %}
-    {% endif %}
-
     {% if gtm|default %}
     {# GTM (noscript) #}
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ gtm }}" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
     {# /GTM (noscript) #}
     {% endif %}
+
+    {# Body Top #}
+    {% if body_top %}
+        {% for body_top_inner in body_top %}{{ body_top_inner }}{% endfor %}
+    {% endif %}
+    {# /Body Top #}
 
     <div class="main-wrapper flex-container flex-dir-column large-flex-dir-column-reverse">
         <div class="site-content">
@@ -110,5 +115,4 @@
     {{ wp_footer }}
     {# /WP Footer #}
 </body>
-
 </html>

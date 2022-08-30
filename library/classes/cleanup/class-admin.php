@@ -36,6 +36,7 @@ class WoodyTheme_Cleanup_Admin
             if (!in_array('administrator', $user->roles)) {
                 add_action('admin_head', [$this, 'removeScreenOptions']);
                 add_filter('screen_options_show_screen', '__return_false');
+                add_filter('update_user_metadata', [$this, 'updateUserMetadata'], 10, 5);
             }
 
             add_action('pre_get_posts', [$this, 'custom_pre_get_posts']);
@@ -236,12 +237,25 @@ class WoodyTheme_Cleanup_Admin
 
     /**
      * Benoit Bouchaud
-     * On retire les tabs "Options de l'écran" et "Aide" pour les non admin
+     * On retire les tabs "Aide" pour les "non admin"
      */
     public function removeScreenOptions()
     {
         $screen = get_current_screen();
         $screen->remove_help_tabs();
+    }
+
+    /**
+    * Léo POIROUX
+    * Un "non admin" n'a pas le doit de sauvegarder un metabox hidden
+    */
+    public function updateUserMetadata($check, $object_id, $meta_key, $meta_value, $prev_value)
+    {
+        if (strpos($meta_key, 'metaboxhidden_') !== false) {
+            return false;
+        }
+
+        return $check;
     }
 
     /**

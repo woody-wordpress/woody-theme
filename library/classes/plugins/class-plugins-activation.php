@@ -35,7 +35,6 @@ class WoodyTheme_Plugins_Activation
         $this->activate_plugins = [
             'advanced-cron-manager/advanced-cron-manager.php',
             'advanced-custom-fields-pro/acf.php',
-            'bea-sanitize-filename/bea-sanitize-filename.php',
             'disable-embeds/disable-embeds.php',
             'duplicate-post/duplicate-post.php',
             'enhanced-media-library/enhanced-media-library.php',
@@ -49,7 +48,8 @@ class WoodyTheme_Plugins_Activation
             'woody-plugin/woody.php',
             'woody-sso/woody-sso.php',
             'wp-deferred-javascripts/wp-deferred-javascripts.php',
-            'better-search-replace/better-search-replace.php'
+            'better-search-replace/better-search-replace.php',
+            'enable-media-replace/enable-media-replace.php'
         ];
 
         switch (WP_ENV) {

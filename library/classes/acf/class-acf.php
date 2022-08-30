@@ -777,6 +777,10 @@ class WoodyTheme_ACF
                 'blocks-focus-tpl_507',
                 'blocks-focus-tpl_508',
                 'blocks-focus-tpl_509',
+                'blocks-focus-tpl_523',
+                'blocks-focus-tpl_521',
+                'blocks-focus-tpl_524',
+                'blocks-focus-tpl_522',
                 'blocks-focus-tpl_510',
                 'blocks-focus-tpl_511',
                 'blocks-focus-tpl_601',
@@ -885,6 +889,33 @@ class WoodyTheme_ACF
                 'blocks-feature-tpl_01',
                 'blocks-feature-tpl_02',
                 'blocks-feature-tpl_03',
+                'blocks-feature-tpl_04',
+            ],
+            'features_v2' => [
+                'blocks-feature_v2-tpl_101',
+                'blocks-feature_v2-tpl_102',
+                'blocks-feature_v2-tpl_103',
+                'blocks-feature_v2-tpl_104',
+                'blocks-feature_v2-tpl_201',
+                'blocks-feature_v2-tpl_202',
+                'blocks-feature_v2-tpl_203',
+                'blocks-feature_v2-tpl_204',
+                'blocks-feature_v2-tpl_301',
+                'blocks-feature_v2-tpl_302',
+                'blocks-feature_v2-tpl_303',
+                'blocks-feature_v2-tpl_304',
+                'blocks-feature_v2-tpl_401',
+                'blocks-feature_v2-tpl_402',
+                'blocks-feature_v2-tpl_403',
+                'blocks-feature_v2-tpl_404',
+                'blocks-feature_v2-tpl_501',
+                'blocks-feature_v2-tpl_502',
+                'blocks-feature_v2-tpl_503',
+                'blocks-feature_v2-tpl_504',
+                'blocks-feature_v2-tpl_601',
+                'blocks-feature_v2-tpl_602',
+                'blocks-feature_v2-tpl_603',
+                'blocks-feature_v2-tpl_604'
             ],
             'quote' => [
                 'blocks-quote-tpl_02',
@@ -1140,7 +1171,7 @@ class WoodyTheme_ACF
                     do_action('woody_flush_varnish');
 
                     // On lance un rsdu
-                    do_action('woody_async_add', 'woody_hawwwai_rsdu');
+                    do_action('woody_async_add', 'woody_hawwwai_update_all_canonicals');
 
                     // On redirige vers la page d'option dans la langue qui vient d'être enregistrée
                     wp_redirect(admin_url() . 'admin.php?page=woody-settings&lang=' . $current_season_field);
