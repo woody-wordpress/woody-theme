@@ -53,8 +53,9 @@ class WoodyTheme_Images
         add_filter('wp_handle_upload_overrides', [$this, 'handleOverridesForGeoJSON'], 10, 2);
 
         // List pages linked to an image
-        add_action('admin_menu', [$this, 'generatePagesList']);
-        add_filter('media_row_actions', [$this, 'addPageListLinks'], 10, 3);
+        //TODO : Revoir la methode de récupération des champs image en BDD => requête trop lourde
+        // add_action('admin_menu', [$this, 'generatePagesList']);
+        // add_filter('media_row_actions', [$this, 'addPageListLinks'], 10, 3);
     }
 
     /**
@@ -755,86 +756,86 @@ class WoodyTheme_Images
         }
     }
 
-    public function generatePagesList()
-    {
-        add_submenu_page(
-            null, // Creating page not displayed in menu by setting parent slug to null
-            'Pages utilisant le média',
-            'Pages utilisant le média',
-            'edit_posts',
-            'woody-pages-using-media',
-            [$this, 'ListPagesUsingMedia']
-        );
-    }
+    // public function generatePagesList()
+    // {
+    //     add_submenu_page(
+    //         null, // Creating page not displayed in menu by setting parent slug to null
+    //         'Pages utilisant le média',
+    //         'Pages utilisant le média',
+    //         'edit_posts',
+    //         'woody-pages-using-media',
+    //         [$this, 'ListPagesUsingMedia']
+    //     );
+    // }
 
-    public function addPageListLinks($actions, $post, $detached)
-    {
-        $mimetype = get_post_mime_type($post->ID);
-        if (strpos($mimetype, 'image') !== false) {
-            $actions['linked_pages_list'] = sprintf('<a href="/wp/wp-admin/admin.php?page=woody-pages-using-media&attachment_id=%s">Voir les pages utilisant l\'image</a>', $post->ID);
-        }
-        return $actions;
-    }
+    // public function addPageListLinks($actions, $post, $detached)
+    // {
+    //     $mimetype = get_post_mime_type($post->ID);
+    //     if (strpos($mimetype, 'image') !== false) {
+    //         $actions['linked_pages_list'] = sprintf('<a href="/wp/wp-admin/admin.php?page=woody-pages-using-media&attachment_id=%s">Voir les pages utilisant l\'image</a>', $post->ID);
+    //     }
+    //     return $actions;
+    // }
 
-    public function ListPagesUsingMedia()
-    {
-        global $wpdb;
-        $field_names = dropzone_get('woody_images_fields_names');
-        if (empty($field_names)) {
-            $field_names = $this->getImagesFieldNames();
-            dropzone_set('woody_images_fields_names', $field_names);
-        }
-        $att_id = filter_input(INPUT_GET, 'attachment_id', FILTER_SANITIZE_STRING);
-        $att_metadata = wp_get_attachment_metadata($att_id);
+    // public function ListPagesUsingMedia()
+    // {
+    //     global $wpdb;
+    //     $field_names = dropzone_get('woody_images_fields_names');
+    //     if (empty($field_names)) {
+    //         $field_names = $this->getImagesFieldNames();
+    //         dropzone_set('woody_images_fields_names', $field_names);
+    //     }
+    //     $att_id = filter_input(INPUT_GET, 'attachment_id', FILTER_SANITIZE_STRING);
+    //     $att_metadata = wp_get_attachment_metadata($att_id);
 
-        if (!empty($field_names)) {
-            foreach ($field_names as $field_name) {
-                $req_results = $wpdb->get_results($wpdb->prepare("SELECT p.post_type, p.post_title, pm.post_id, pm.meta_value FROM {$wpdb->prefix}postmeta as pm LEFT JOIN {$wpdb->prefix}posts as p ON pm.post_id = p.ID WHERE pm.meta_key LIKE '%$field_name' AND pm.meta_value != '' AND p.post_type != 'revision'"));
-                if (!empty($req_results)) {
-                    foreach ($req_results as $req_result) {
-                        if (strpos($req_result->meta_value, $att_id) !== false) {
-                            $results[$req_result->post_id] = $req_result;
-                        }
-                    }
-                }
-            }
-        }
+    //     if (!empty($field_names)) {
+    //         foreach ($field_names as $field_name) {
+    //             $req_results = $wpdb->get_results($wpdb->prepare("SELECT p.post_type, p.post_title, pm.post_id, pm.meta_value FROM {$wpdb->prefix}postmeta as pm LEFT JOIN {$wpdb->prefix}posts as p ON pm.post_id = p.ID WHERE pm.meta_key LIKE '%$field_name' AND pm.meta_value != '' AND p.post_type != 'revision'"));
+    //             if (!empty($req_results)) {
+    //                 foreach ($req_results as $req_result) {
+    //                     if (strpos($req_result->meta_value, $att_id) !== false) {
+    //                         $results[$req_result->post_id] = $req_result;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
 
 
-        require_once(WOODY_THEME_DIR . '/library/templates/media-pages-list.php');
-    }
+    //     require_once(WOODY_THEME_DIR . '/library/templates/media-pages-list.php');
+    // }
 
-    private function getImagesFieldNames()
-    {
-        $this->image_fields = [];
+    // private function getImagesFieldNames()
+    // {
+    //     $this->image_fields = [];
 
-        $json_paths = array_values(array_unique(apply_filters('woody_acf_save_paths', [])));
+    //     $json_paths = array_values(array_unique(apply_filters('woody_acf_save_paths', [])));
 
-        $finder = new Finder();
-        $finder->name('*.json')->files()->in($json_paths);
+    //     $finder = new Finder();
+    //     $finder->name('*.json')->files()->in($json_paths);
 
-        if (!empty($finder)) {
-            foreach ($finder as $file) {
-                $file_path = $file->getRealPath();
-                $data = json_decode(file_get_contents($file_path), true);
-                $this->getMatchingFields($data['fields']);
-            }
-        }
+    //     if (!empty($finder)) {
+    //         foreach ($finder as $file) {
+    //             $file_path = $file->getRealPath();
+    //             $data = json_decode(file_get_contents($file_path), true);
+    //             $this->getMatchingFields($data['fields']);
+    //         }
+    //     }
 
-        return array_unique($this->image_fields);
-    }
+    //     return array_unique($this->image_fields);
+    // }
 
-    private function getMatchingFields($fields)
-    {
-        $matching_types = ['image', 'gallery'];
-        if (is_array($fields) && !empty($fields)) {
-            foreach ($fields as $field) {
-                if ($field['type'] == 'group') {
-                    $this->getMatchingFields($field['sub_fields']);
-                } elseif (in_array($field['type'], $matching_types)) {
-                    $this->image_fields[] = $field['name'];
-                }
-            }
-        }
-    }
+    // private function getMatchingFields($fields)
+    // {
+    //     $matching_types = ['image', 'gallery'];
+    //     if (is_array($fields) && !empty($fields)) {
+    //         foreach ($fields as $field) {
+    //             if ($field['type'] == 'group') {
+    //                 $this->getMatchingFields($field['sub_fields']);
+    //             } elseif (in_array($field['type'], $matching_types)) {
+    //                 $this->image_fields[] = $field['name'];
+    //             }
+    //         }
+    //     }
+    // }
 }
