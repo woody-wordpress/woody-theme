@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Woody Addon Sitemap
+ * Woody Theme
  * @authorBenoit BOUCHAUD
- * @copyright Raccourci Agency 2020
+ * @copyright Raccourci Agency 2022
  */
 
 if (! defined('ABSPATH')) {
