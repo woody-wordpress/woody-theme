@@ -35,7 +35,6 @@ class WoodyTheme_Plugins_Activation
         $this->activate_plugins = [
             'advanced-cron-manager/advanced-cron-manager.php',
             'advanced-custom-fields-pro/acf.php',
-            'bea-sanitize-filename/bea-sanitize-filename.php',
             'disable-embeds/disable-embeds.php',
             'duplicate-post/duplicate-post.php',
             'enhanced-media-library/enhanced-media-library.php',
