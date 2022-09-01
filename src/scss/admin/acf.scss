@@ -428,7 +428,8 @@
 .acf-field-5bc6e6b0bd875,
 .acf-field-5beb046c93939,
 .acf-field-5dad73a7f4ccb,
-.acf-field-5e4a5597e2017 {
+.acf-field-5e4a5597e2017,
+.acf-field-6296243e85128 {
     input[type=text] {
         font-size: 1.4em !important;
         font-weight: bold;
@@ -890,7 +891,8 @@
                     }
                 }
 
-                &[data-layout='feature'] {
+                &[data-layout='feature'],
+                &[data-layout='feature_v2'] {
                     &:before {
                         content: '\f197';
                     }
@@ -1107,4 +1109,9 @@
             }
         }
     }
+}
+
+// Section models list
+.acf-field-6061dcdfc96ee {
+    overflow: scroll;
 }

@@ -1,0 +1,824 @@
+# Copyright (C) 2022 Raccourci Agency
+# This file is distributed under the .
+msgid ""
+msgstr ""
+"Project-Id-Version: Woody (Parent theme) 1.56.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
+"POT-Creation-Date: 2022-04-06T09:36:09+02:00\n"
+"PO-Revision-Date: 2022-06-13 10:24+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n"
+"%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Domain: woody-theme\n"
+
+#. Theme Name of the theme
+msgid "Woody (Parent theme)"
+msgstr "Woody (Temat dla rodziców)"
+
+#. Description of the theme
+msgid "Parent theme of the Raccourci Agency themes"
+msgstr "Temat macierzysty Agencji Raccourci Tematy"
+
+#. Author of the theme
+msgid "Raccourci Agency"
+msgstr "Raccourci Agency"
+
+#: library/classes/content/class-polylang.php:33
+#: library/classes/content/class-polylang.php:74
+msgid "Lundi"
+msgstr "Poniedziałek"
+
+#: library/classes/content/class-polylang.php:34
+#: library/classes/content/class-polylang.php:75
+msgid "Mardi"
+msgstr "Wtorek"
+
+#: library/classes/content/class-polylang.php:35
+#: library/classes/content/class-polylang.php:76
+msgid "Mercredi"
+msgstr "Środa"
+
+#: library/classes/content/class-polylang.php:36
+#: library/classes/content/class-polylang.php:77
+msgid "Jeudi"
+msgstr "Czwartek"
+
+#: library/classes/content/class-polylang.php:37
+#: library/classes/content/class-polylang.php:78
+msgid "Vendredi"
+msgstr "Piątek"
+
+#: library/classes/content/class-polylang.php:38
+#: library/classes/content/class-polylang.php:79
+msgid "Samedi"
+msgstr "Sobota"
+
+#: library/classes/content/class-polylang.php:39
+#: library/classes/content/class-polylang.php:80
+msgid "Dimanche"
+msgstr "Niedziela"
+
+#: library/classes/content/class-polylang.php:46
+#: library/classes/content/class-polylang.php:81
+msgid "Janvier"
+msgstr "Styczeń"
+
+#: library/classes/content/class-polylang.php:47
+#: library/classes/content/class-polylang.php:82
+msgid "Février"
+msgstr "Luty"
+
+#: library/classes/content/class-polylang.php:48
+#: library/classes/content/class-polylang.php:83
+msgid "Mars"
+msgstr "Marzec"
+
+#: library/classes/content/class-polylang.php:49
+#: library/classes/content/class-polylang.php:84
+msgid "Avril"
+msgstr "Kwiecień"
+
+#: library/classes/content/class-polylang.php:50
+#: library/classes/content/class-polylang.php:85
+msgid "Mai"
+msgstr "Maj"
+
+#: library/classes/content/class-polylang.php:51
+#: library/classes/content/class-polylang.php:86
+msgid "Juin"
+msgstr "Czerwiec"
+
+#: library/classes/content/class-polylang.php:52
+#: library/classes/content/class-polylang.php:87
+msgid "Juillet"
+msgstr "Lipiec"
+
+#: library/classes/content/class-polylang.php:53
+#: library/classes/content/class-polylang.php:88
+msgid "Août"
+msgstr "Sierpień"
+
+#: library/classes/content/class-polylang.php:54
+#: library/classes/content/class-polylang.php:89
+msgid "Septembre"
+msgstr "Wrzesień"
+
+#: library/classes/content/class-polylang.php:55
+#: library/classes/content/class-polylang.php:90
+msgid "Octobre"
+msgstr "Październik"
+
+#: library/classes/content/class-polylang.php:56
+#: library/classes/content/class-polylang.php:91
+msgid "Novembre"
+msgstr "Listopad"
+
+#: library/classes/content/class-polylang.php:57
+#: library/classes/content/class-polylang.php:92
+msgid "Décembre"
+msgstr "Grudzień"
+
+#: library/classes/content/class-polylang.php:70
+#: library/templates/template-page.php:72
+msgid "Page non trouvée"
+msgstr "Nie znaleziono strony"
+
+#: library/classes/content/class-polylang.php:71
+#: library/templates/template-page.php:78
+msgid "Erreur 404 : Page non trouvée"
+msgstr "Błąd 404: Nie znaleziono strony"
+
+#: library/classes/content/class-polylang.php:95
+msgid "À partir de"
+msgstr "Ze strony"
+
+#: library/classes/content/class-polylang.php:96
+msgid "à partir de"
+msgstr "ze strony"
+
+#: library/classes/content/class-polylang.php:97
+msgid "heure"
+msgstr "godzina"
+
+#: library/classes/content/class-polylang.php:98
+msgid "heures"
+msgstr "godziny"
+
+#: library/classes/content/class-polylang.php:99
+msgid "minute"
+msgstr "minuta"
+
+#: library/classes/content/class-polylang.php:100
+msgid "minutes"
+msgstr "minuty"
+
+#: library/classes/content/class-polylang.php:101
+msgid "min"
+msgstr "minimum"
+
+#: library/classes/content/class-polylang.php:102
+msgid "max"
+msgstr "maksimum"
+
+#: library/classes/content/class-polylang.php:103
+msgid "pers."
+msgstr "osob."
+
+#: library/classes/content/class-polylang.php:104
+msgid "Demander un devis"
+msgstr "Zapytaj o wycenę"
+
+#: library/classes/content/class-polylang.php:105
+#: library/classes/content/class-polylang.php:223
+msgid "personne"
+msgstr "osoba"
+
+#: library/classes/content/class-polylang.php:106
+msgid "personnes"
+msgstr "osoby"
+
+#: library/classes/content/class-polylang.php:107
+msgid "Départ"
+msgstr "Odjazd"
+
+#: library/classes/content/class-polylang.php:108
+msgid "Arrivée"
+msgstr "Przyjazd"
+
+#: library/classes/content/class-polylang.php:109
+msgid "Etape"
+msgstr "Krok"
+
+#: library/classes/content/class-polylang.php:110
+msgid "Réserver"
+msgstr "Książka"
+
+#: library/classes/content/class-polylang.php:113
+msgid "J"
+msgstr "J"
+
+#: library/classes/content/class-polylang.php:116
+msgid ""
+"Attention, vous n'avez pas saisi d'identifiant de playlist en paramètre du "
+"shortcode.\n"
+"            Pour rappel, le shortcode s'utilise par exemple de cette manière"
+msgstr ""
+"Zwróć uwagę, że nie wprowadziłeś identyfikatora listy odtwarzania jako "
+"parametru do shortcode.\n"
+"            Dla przypomnienia, shortcode jest używany na przykład w taki "
+"sposób"
+
+#: library/classes/content/class-polylang.php:118
+msgid "Année"
+msgstr "Rok"
+
+#: library/classes/content/class-polylang.php:119
+msgid "Établissement"
+msgstr "Zakładanie działalności"
+
+#: library/classes/content/class-polylang.php:120
+msgid "Établissement disponible"
+msgstr "Dostępna placówka"
+
+#: library/classes/content/class-polylang.php:121
+msgid "Établissement indisponible"
+msgstr "Instytucja niedostępna"
+
+#: library/classes/content/class-polylang.php:122
+msgid "Aucune information concernant cet établissement pour l'année en cours"
+msgstr "Brak informacji o tym zakładzie za bieżący rok"
+
+#: library/classes/content/class-polylang.php:125
+msgid "M'y rendre"
+msgstr "Dojazd"
+
+#: library/classes/content/class-polylang.php:126
+msgid "Voir l'itinéraire"
+msgstr "Zobacz plan podróży"
+
+#: library/classes/content/class-polylang.php:127
+msgid "Voir la vidéo"
+msgstr "Obejrzyj film"
+
+#: library/classes/content/class-polylang.php:128
+msgid "Affiner ma recherche"
+msgstr "Uściślij moje wyszukiwanie"
+
+#: library/classes/content/class-polylang.php:129
+msgid "Voir les résultats sur la carte"
+msgstr "Zobacz wyniki na mapie"
+
+#: library/classes/content/class-polylang.php:130
+msgid "résultat"
+msgstr "wynik"
+
+#: library/classes/content/class-polylang.php:131
+msgid "résultats"
+msgstr "wyniki"
+
+#: library/classes/content/class-polylang.php:132
+msgid "Aucun résultat"
+msgstr "Brak wyników"
+
+#: library/classes/content/class-polylang.php:133
+msgid "Voir la carte"
+msgstr "Zobacz mapę"
+
+#: library/classes/content/class-polylang.php:134
+msgid "Afficher la carte"
+msgstr "Wyświetl mapę"
+
+#: library/classes/content/class-polylang.php:135
+msgid "Masquer la carte"
+msgstr "Ukryj mapę"
+
+#: library/classes/content/class-polylang.php:136
+#: library/functions/04_custom_appearance.php:12
+msgid "Partager sur Facebook"
+msgstr "Udostępnij na Facebooku"
+
+#: library/classes/content/class-polylang.php:137
+#: library/functions/04_custom_appearance.php:17
+msgid "Partager sur Twitter"
+msgstr "Udostępnij na Twitterze"
+
+#: library/classes/content/class-polylang.php:138
+#: library/functions/04_custom_appearance.php:22
+msgid "Partager sur LinkedIn"
+msgstr "Udostępnij na LinkedIn"
+
+#: library/classes/content/class-polylang.php:139
+#: library/functions/04_custom_appearance.php:27
+msgid "Partager sur WhatsApp"
+msgstr "Udostępnij na WhatsApp"
+
+#: library/classes/content/class-polylang.php:140
+msgid "Partager sur Google+"
+msgstr "Udostępnij na Google+"
+
+#: library/classes/content/class-polylang.php:141
+msgid "Partager sur Instagram"
+msgstr "Udostępnij na Instagramie"
+
+#: library/classes/content/class-polylang.php:142
+#: library/functions/04_custom_appearance.php:32
+msgid "Partager sur Pinterest"
+msgstr "Udostępnij na Pintereście"
+
+#: library/classes/content/class-polylang.php:143
+msgid "Partager par email"
+msgstr "Udostępnij przez e-mail"
+
+#: library/classes/content/class-polylang.php:144
+msgid "Voir sur Instagram"
+msgstr "Zobacz na Instagramie"
+
+#: library/classes/content/class-polylang.php:145
+msgid "Accès au menu principal"
+msgstr "Dostęp do menu głównego"
+
+#: library/classes/content/class-polylang.php:146
+msgid "Titre de la vidéo manquant"
+msgstr "Brakujący tytuł filmu"
+
+#: library/classes/content/class-polylang.php:147
+msgid "Légende de la vidéo manquante"
+msgstr "Brakujące napisy do filmów"
+
+#: library/classes/content/class-polylang.php:148
+msgid "Que recherchez-vous ?"
+msgstr "Czego szukasz?"
+
+#: library/classes/content/class-polylang.php:149
+msgid "Vous cherchez quelque chose ?"
+msgstr "Czy czegoś szukasz?"
+
+#: library/classes/content/class-polylang.php:150
+msgid "Rechercher"
+msgstr "Szukaj na stronie"
+
+#: library/classes/content/class-polylang.php:151
+msgid "Réinitialiser"
+msgstr "Resetuj"
+
+#: library/classes/content/class-polylang.php:152
+msgid "Choisissez vos dates"
+msgstr "Wybierz swoje daty"
+
+#: library/classes/content/class-polylang.php:153
+msgid "Date d'arrivée"
+msgstr "Data przyjazdu"
+
+#: library/classes/content/class-polylang.php:154
+msgid "Durée du séjour"
+msgstr "Długość pobytu"
+
+#: library/classes/content/class-polylang.php:155
+msgid "adulte(s)"
+msgstr "dorosły(a)"
+
+#: library/classes/content/class-polylang.php:156
+msgid "enfant(s)"
+msgstr "dziecko (dzieci)"
+
+#: library/classes/content/class-polylang.php:157
+#: library/classes/timber/class-timber-filters.php:284
+#: library/functions/01_assets.php:91
+msgid "jour"
+msgstr "dzień"
+
+#: library/classes/content/class-polylang.php:158
+#: library/classes/timber/class-timber-filters.php:287
+#: library/functions/01_assets.php:92
+msgid "jours"
+msgstr "dni"
+
+#: library/classes/content/class-polylang.php:159
+#: library/classes/timber/class-timber-filters.php:290
+#: library/functions/01_assets.php:89
+msgid "semaine"
+msgstr "tydzień"
+
+#: library/classes/content/class-polylang.php:160
+#: library/classes/timber/class-timber-filters.php:293
+#: library/functions/01_assets.php:90
+msgid "semaines"
+msgstr "tygodnie"
+
+#: library/classes/content/class-polylang.php:161
+#: library/classes/timber/class-timber-filters.php:296
+#: library/classes/timber/class-timber-filters.php:299
+msgid "mois"
+msgstr "miesiąc"
+
+#: library/classes/content/class-polylang.php:162
+#: library/templates/template-page.php:470
+msgid "Sélection"
+msgstr "Wybór"
+
+#: library/classes/content/class-polylang.php:163
+#: library/templates/template-page.php:474
+msgid "Page"
+msgstr "Strona"
+
+#: library/classes/content/class-polylang.php:164
+msgid "Pages"
+msgstr "Strony"
+
+#: library/classes/content/class-polylang.php:165
+msgid "Offre touristique"
+msgstr "Oferta turystyczna"
+
+#: library/classes/content/class-polylang.php:166
+msgid "Désolé, aucun contenu touristique ne correspond à votre recherche"
+msgstr ""
+"Przepraszamy, nie ma treści turystycznych odpowiadających Twojemu "
+"wyszukiwaniu"
+
+#: library/classes/content/class-polylang.php:167
+msgid "Désolé, aucune page ne correspond à votre recherche"
+msgstr "Przepraszamy, żadna strona nie pasuje do Twojego wyszukiwania"
+
+#: library/classes/content/class-polylang.php:168
+msgid "Fermer"
+msgstr "Zamknij"
+
+#: library/classes/content/class-polylang.php:169
+msgid "Menu"
+msgstr "Menu"
+
+#: library/classes/content/class-polylang.php:170
+msgid "Merci de choisir une date"
+msgstr "Proszę wybrać datę"
+
+#: library/classes/content/class-polylang.php:171
+msgid "Comment venir ?"
+msgstr "Jak dojechać?"
+
+#: library/classes/content/class-polylang.php:172
+msgid "La page que vous recherchez est peut-être ici ?"
+msgstr "Być może strona, której szukasz, znajduje się tutaj?"
+
+#: library/classes/content/class-polylang.php:173
+#: library/classes/process/class-woody-getters.php:430
+#: library/classes/process/class-woody-getters.php:642
+msgid "Lire la suite"
+msgstr "Czytaj więcej"
+
+#: library/classes/content/class-polylang.php:174
+msgid "Que voulez-vous réserver ?"
+msgstr "Co chcesz zarezerwować?"
+
+#: library/classes/content/class-polylang.php:175
+msgid "Choisissez vos dates de réservation"
+msgstr "Wybierz daty rezerwacji"
+
+#: library/classes/content/class-polylang.php:176
+msgid "Changer de saison"
+msgstr "Zmieniające się pory roku"
+
+#: library/classes/content/class-polylang.php:177
+msgid "Réservable"
+msgstr "Możliwość rezerwacji"
+
+#: library/classes/content/class-polylang.php:178
+#: library/classes/process/class-woody-getters.php:517
+msgid "Télécharger"
+msgstr "Pobierz"
+
+#: library/classes/content/class-polylang.php:179
+msgid "Aller à la page d'accueil"
+msgstr "Przejdź do strony głównej"
+
+#: library/classes/content/class-polylang.php:180
+msgid "Retour à la page d'accueil"
+msgstr "Powrót do strony głównej"
+
+#: library/classes/content/class-polylang.php:181
+msgid "Tout"
+msgstr "Wszystkie"
+
+#: library/classes/content/class-polylang.php:182
+msgid "Afficher tous les tarifs"
+msgstr "Wyświetl wszystkie stawki"
+
+#: library/classes/content/class-polylang.php:183
+msgid "Afficher plus"
+msgstr "Zobacz więcej"
+
+#: library/classes/content/class-polylang.php:184
+msgid "Afficher moins"
+msgstr "Pokaż mniej"
+
+#: library/classes/content/class-polylang.php:185
+msgid "Date de naissance"
+msgstr "Data urodzenia"
+
+#: library/classes/content/class-polylang.php:186
+msgid "Nationalité"
+msgstr "Narodowość"
+
+#: library/classes/content/class-polylang.php:187
+msgid "Sommaire"
+msgstr "Spis treści"
+
+#: library/classes/content/class-polylang.php:190
+msgid "Ajouter"
+msgstr "Dodaj"
+
+#: library/classes/content/class-polylang.php:191
+msgid "Supprimer"
+msgstr "Usuń"
+
+#: library/classes/content/class-polylang.php:192
+msgid "Cette liste est vide actuellement. Naviguez et ajoutez des pages !"
+msgstr "Ta lista jest obecnie pusta. Przeglądaj i dodawaj strony!"
+
+#: library/classes/content/class-polylang.php:195
+msgid "Ajouter à mes favoris"
+msgstr "Dodaj do ulubionych"
+
+#: library/classes/content/class-polylang.php:196
+msgid "Imprimer/Exporter mes favoris"
+msgstr "Drukuj/eksportuj moje ulubione"
+
+#: library/classes/content/class-polylang.php:199
+msgid "Pour faire une demande de devis, veuillez choisir un séjour."
+msgstr "Aby złożyć zapytanie ofertowe, należy wybrać pobyt."
+
+#: library/classes/content/class-polylang.php:200
+msgid ""
+"Il semblerait qu'il n'y ait pas ou plus de séjours proposant une demande de "
+"devis disponibles sur le site"
+msgstr ""
+"Wygląda na to, że na stronie nie ma lub już nie ma pobytów oferujących "
+"zapytanie ofertowe"
+
+#: library/classes/content/class-polylang.php:201
+msgid "Séjours et activités"
+msgstr "Pobyty i zajęcia"
+
+#: library/classes/content/class-polylang.php:202
+msgid "Retour à l'offre"
+msgstr "Powrót do oferty"
+
+#: library/classes/content/class-polylang.php:203
+msgid "Récapitulatif"
+msgstr "Streszczenie"
+
+#: library/classes/content/class-polylang.php:204
+msgid "30 secondes"
+msgstr "30 sekund"
+
+#: library/classes/content/class-polylang.php:205
+msgid "Informations"
+msgstr "Informacje"
+
+#: library/classes/content/class-polylang.php:206
+msgid "Coordonnées"
+msgstr "Dane kontaktowe"
+
+#: library/classes/content/class-polylang.php:207
+msgid "Mon devis"
+msgstr "Mój cytat"
+
+#: library/classes/content/class-polylang.php:208
+msgid "Votre séjour/journée"
+msgstr "Twój pobyt/dzień"
+
+#: library/classes/content/class-polylang.php:209
+msgid "Comprenant"
+msgstr "W tym"
+
+#: library/classes/content/class-polylang.php:210
+#: library/templates/template-page.php:199
+msgid "Gratuit"
+msgstr "Bezpłatnie"
+
+#: library/classes/content/class-polylang.php:211
+msgid "Nombre de personnes"
+msgstr "Liczba osób"
+
+#: library/classes/content/class-polylang.php:213
+msgid "* Champs obligatoires"
+msgstr "* Pola obowiązkowe"
+
+#: library/classes/content/class-polylang.php:214
+msgid "Nom/Prénom"
+msgstr "Nazwisko/Imię"
+
+#: library/classes/content/class-polylang.php:215
+msgid "Raison sociale"
+msgstr "Nazwa firmy"
+
+#: library/classes/content/class-polylang.php:216
+msgid "Email"
+msgstr "E-mail"
+
+#: library/classes/content/class-polylang.php:217
+msgid "Téléphone"
+msgstr "Telefon"
+
+#: library/classes/content/class-polylang.php:218
+msgid "Votre commentaire"
+msgstr "Twój komentarz"
+
+#: library/classes/content/class-polylang.php:219
+msgid "Valider ma demande de devis"
+msgstr "Zatwierdź moje zapytanie o wycenę"
+
+#: library/classes/content/class-polylang.php:220
+msgid "Mon panier"
+msgstr "Mój koszyk"
+
+#: library/classes/content/class-polylang.php:221
+msgid "TOTAL "
+msgstr "OGÓŁEM "
+
+#: library/classes/content/class-polylang.php:222
+msgid "Base de"
+msgstr "Podstawa"
+
+#: library/classes/content/class-polylang.php:226
+msgid "Publié le"
+msgstr "Opublikowano dnia"
+
+#: library/classes/content/class-polylang.php:227
+msgid "Mis à jour le"
+msgstr "Zaktualizowano w dniu"
+
+#: library/classes/content/class-polylang.php:228
+#: library/classes/process/class-woody-compilers.php:414
+msgid "Désolé, aucun contenu ne correspond à votre recherche"
+msgstr "Przepraszamy, nie ma treści odpowiadającej Twojemu wyszukiwaniu"
+
+#: library/classes/content/class-polylang.php:229
+msgid "Lire aussi"
+msgstr "Czytaj także"
+
+#: library/classes/content/class-polylang.php:233
+msgid "Remontées mécaniques"
+msgstr "Wyciągi narciarskie"
+
+#: library/classes/content/class-polylang.php:234
+msgid "Pistes"
+msgstr "Ścieżki"
+
+#: library/classes/content/class-polylang.php:235
+msgid "Domaine Alpin"
+msgstr "Domena alpejska"
+
+#: library/classes/content/class-polylang.php:236
+msgid "Domaine Nordique"
+msgstr "Obszar nordycki"
+
+#: library/classes/content/class-polylang.php:237
+msgid "Détails"
+msgstr "Szczegóły"
+
+#: library/classes/content/class-polylang.php:238
+msgid "Météo"
+msgstr "Pogoda"
+
+#: library/classes/content/class-polylang.php:239
+msgid "Voir le bulletin météo"
+msgstr "Zobacz prognozę pogody"
+
+#: library/classes/content/class-polylang.php:240
+msgid "Bulletin complet"
+msgstr "Pełny biuletyn"
+
+#: library/classes/content/class-polylang.php:241
+msgid "Webcams"
+msgstr "Kamery internetowe"
+
+#: library/classes/content/class-polylang.php:242
+msgid "Voir les webcams"
+msgstr "Zobacz kamery internetowe"
+
+#: library/classes/content/class-polylang.php:243
+msgid "Flux erroné !"
+msgstr "Niewłaściwa pasza!"
+
+#: library/classes/content/class-polylang.php:244
+msgid "Module Infoneige non configuré !"
+msgstr "Moduł Infoneige nie jest skonfigurowany!"
+
+#: library/classes/content/class-polylang.php:245
+msgid "Enneigement"
+msgstr "Śnieżenie"
+
+#: library/classes/content/class-polylang.php:246
+msgid "Hauteur"
+msgstr "Wysokość"
+
+#: library/classes/content/class-polylang.php:247
+msgid "Pistes ouvertes"
+msgstr "Otwarte ścieżki"
+
+#: library/classes/content/class-polylang.php:248
+msgid "Risque d'avalanche"
+msgstr "Ryzyko lawinowe"
+
+#: library/classes/content/class-polylang.php:249
+msgid "Limité"
+msgstr "Ograniczona"
+
+#: library/classes/content/class-polylang.php:250
+msgid "Moyen"
+msgstr "Średnia"
+
+#: library/classes/content/class-polylang.php:251
+msgid "Élevé"
+msgstr "Wysoka"
+
+#: library/classes/content/class-polylang.php:252
+msgid "Non spécifié"
+msgstr "Nie określono"
+
+#: library/classes/content/class-polylang.php:253
+msgid "Qualité de la neige"
+msgstr "Jakość śniegu"
+
+#: library/classes/content/class-polylang.php:254
+msgid "En live"
+msgstr "Live"
+
+#: library/classes/content/class-polylang.php:255
+msgid "Toute l'info live"
+msgstr "Wszystkie wiadomości na żywo"
+
+#: library/classes/content/class-polylang.php:256
+msgid "Altitude"
+msgstr "Wysokość nad poziomem morza"
+
+#: library/classes/content/class-polylang.php:257
+msgid "Fraîche"
+msgstr "Świeża"
+
+#: library/classes/content/class-polylang.php:258
+msgid "Douce"
+msgstr "Słodka"
+
+#: library/classes/content/class-polylang.php:259
+msgid "Dure"
+msgstr "Tough"
+
+#: library/classes/content/class-polylang.php:260
+msgid "Humide"
+msgstr "Mokra"
+
+#: library/classes/content/class-polylang.php:261
+msgid "De printemps"
+msgstr "Wiosna"
+
+#: library/classes/content/class-polylang.php:262
+msgid "Matin"
+msgstr "Poranek"
+
+#: library/classes/content/class-polylang.php:263
+msgid "Après-midi"
+msgstr "Popołudnie"
+
+#: library/classes/content/class-polylang.php:264
+msgid "Ouverte"
+msgstr "Otwórz"
+
+#: library/classes/content/class-polylang.php:265
+msgid "Fermée"
+msgstr "Zamknięta"
+
+#: library/classes/content/class-polylang.php:266
+msgid "Prévision d'ouverture"
+msgstr "Prognoza otwarcia"
+
+#: library/classes/content/class-polylang.php:267
+msgid "Liaison"
+msgstr "Link"
+
+#: library/classes/process/class-woody-getters.php:721
+#: library/classes/process/class-woody-getters.php:722
+msgid "Découvrir"
+msgstr "Odkryj stronę"
+
+#: library/classes/process/class-woody-getters.php:882
+msgid "Informations prestataire"
+msgstr "Informacje o dostawcy"
+
+#: library/classes/process/class-woody-getters.php:887
+msgid "Horaires"
+msgstr "Plan lekcji"
+
+#: library/classes/process/class-woody-getters.php:892
+msgid "Carte"
+msgstr "Karta"
+
+#: library/classes/process/class-woody-getters.php:897
+msgid "Avis"
+msgstr "Uwaga"
+
+#: library/classes/process/class-woody-getters.php:902
+msgid "Poser une question"
+msgstr "Zadaj pytanie"
+
+#: library/functions/04_custom_appearance.php:37
+msgid "Partager par e-mail"
+msgstr "Udostępnij przez e-mail"
+
+#: library/templates/template-page.php:71
+msgid "Oups !"
+msgstr "Ups !"
+
+#: library/templates/template-page.php:73
+msgid ""
+"La page que vous recherchez a peut-être été supprimée ou est temporairement "
+"indisponible."
+msgstr ""
+"Strona, której szukasz, mogła zostać usunięta lub jest tymczasowo "
+"niedostępna."

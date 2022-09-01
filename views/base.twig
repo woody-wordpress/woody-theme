@@ -3,62 +3,75 @@
 <html class="no-js" {{site.language_attributes}}>
 <head>
 
-<title>{{ title }}</title>
+    <title>{{ title }}</title>
 
-{% if gtm|default %}
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','{{ gtm }}');</script>
-{% else %}
-<script>window.dataLayer = []</script>
-{% endif %}
-
-{# WP Metas #}
-    {% include 'parts/metas.twig' %}
-{# /WP Metas #}
-
-{# Schema Graph #}
-    {% include 'parts/schemaGraph.twig' %}
-{# Schema Graph #}
-
-{# WP Header #}
-{{ wp_head }}
-{# /WP Header #}
-
-{# WP Favicons #}
-<link rel='shortcut icon' type='image/x-icon' href="{{ icons.favicon }}"> {# Favicon ICO #}
-<link rel="shortcut icon" type="image/png" href="{{ icons.64 }}"> {# Favicon #}
-<link rel="apple-touch-icon" href="{{ icons.120 }}"> {# iPhone #}
-<link rel="apple-touch-icon" sizes="180x180" href="{{ icons.180 }}"> {# iPhone retina #}
-<link rel="apple-touch-icon" sizes="152x152" href="{{ icons.152 }}"> {# iPad #}
-<link rel="apple-touch-icon" sizes="167x167" href="{{ icons.167 }}"> {# iPad retina #}
-<link rel="icon" sizes="192x192" href="{{ icons.192 }}"> {# Chrome #}
-<link rel="icon" sizes="128x128" href="{{ icons.128 }}"> {# Chrome #}
-{# /WP Favicons #}
-
-{# WP Styles #}
-{% block styles %}{% endblock %}
-{# /WP Styles #}
-
-{# WP Global Vars #}
-<script>var globals = {{ globals_json|json_encode }}</script>
-{# /WP Global Vars #}
-{% endspaceless %}
-</head>
-<body class="{{body_class}}">
-    {% if body_top %}
-        {% for html in body_top %}
-            {{ html }}
-        {% endfor %}
+    {# Head Top #}
+    {% if head_top %}
+        {% for head_top_inner in head_top %}{{ head_top_inner }}{% endfor %}
     {% endif %}
+    {# /Head Top #}
 
     {% if gtm|default %}
+    <script>(function(w,d,s,l,i) {
+            w[l]=w[l]||[]; w[l].push({
+                'gtm.start':
+                    new Date().getTime(),event: 'gtm.js'
+            }); var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'? '&l='+l:''; j.async=true; j.src=
+                    'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','{{ gtm }}');</script>
+    {% else %}
+    <script>window.dataLayer = (window.dataLayer !== undefined) ? window.dataLayer : [];</script>
+    {% endif %}
+
+    {# WP Metas #}
+    {% include 'parts/metas.twig' %}
+    {# /WP Metas #}
+
+    {# Schema Graph #}
+    {% block schemaGraph %}
+    {% include 'parts/schemaGraph.twig' %}
+    {% endblock %}
+    {# Schema Graph #}
+
+    {# WP Header #}
+    {{ wp_head }}
+    {# /WP Header #}
+
+    {# WP Favicons #}
+    <link rel='shortcut icon' type='image/x-icon' href="{{ icons.favicon }}"> {# Favicon ICO #}
+    <link rel="shortcut icon" type="image/png" href="{{ icons.64 }}"> {# Favicon #}
+    <link rel="apple-touch-icon" href="{{ icons.120 }}"> {# iPhone #}
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ icons.180 }}"> {# iPhone retina #}
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ icons.152 }}"> {# iPad #}
+    <link rel="apple-touch-icon" sizes="167x167" href="{{ icons.167 }}"> {# iPad retina #}
+    <link rel="icon" sizes="192x192" href="{{ icons.192 }}"> {# Chrome #}
+    <link rel="icon" sizes="128x128" href="{{ icons.128 }}"> {# Chrome #}
+    {# /WP Favicons #}
+
+    {# WP Styles #}
+    {% block styles %}{% endblock %}
+    {# /WP Styles #}
+
+    {# WP Global Vars #}
+    <script>var globals={{globals_json|json_encode }}</script>
+    {# /WP Global Vars #}
+</head>
+{% endspaceless %}
+
+<body class="{{body_class}}">
+    {% if gtm|default %}
     {# GTM (noscript) #}
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ gtm }}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ gtm }}" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
     {# /GTM (noscript) #}
     {% endif %}
+
+    {# Body Top #}
+    {% if body_top %}
+        {% for body_top_inner in body_top %}{{ body_top_inner }}{% endfor %}
+    {% endif %}
+    {# /Body Top #}
 
     <div class="main-wrapper flex-container flex-dir-column large-flex-dir-column-reverse">
         <div class="site-content">
@@ -68,25 +81,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
             {# Theme Footer #}
             {% block page_footer %}
-                {% if 'footer' not in hide_page_zones %}
-                    {% include 'parts/footer.twig' %}
-                {% endif %}
+            {% if 'footer' not in hide_page_zones %}
+            {% include 'parts/footer.twig' %}
+            {% endif %}
             {% endblock %}
             {# /Theme Footer #}
         </div>
 
         {# Theme Header #}
         {% block page_header %}
-            {% if 'header' not in hide_page_zones %}
-                {% include 'parts/header.twig' %}
-            {% endif %}
+        {% if 'header' not in hide_page_zones %}
+        {% include 'parts/header.twig' %}
+        {% endif %}
         {% endblock %}
         {# /Theme Header #}
 
         {% if woody_access_staging %}
-            <div class="staging-banner">
-                <span class="staging-label">Préproduction</span>
-            </div>
+        <div class="staging-banner">
+            <span class="staging-label">Préproduction</span>
+        </div>
         {% endif %}
     </div>
 
