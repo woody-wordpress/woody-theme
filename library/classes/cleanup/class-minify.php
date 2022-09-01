@@ -16,7 +16,7 @@ class WoodyTheme_Cleanup_Minify
     protected function registerHooks()
     {
         $minify_html_active = get_option('minify_html_active');
-        if (!(defined('WP_CLI')) && $minify_html_active != 'no' && (!defined('DOING_AJAX') || !DOING_AJAX)) {
+        if (!(defined('WP_CLI')) && $minify_html_active != 'no' && (!defined('DOING_AJAX') || !DOING_AJAX) && (!defined('DOING_CRON') || !DOING_CRON)) {
             add_action('init', [$this, 'minifyHtml'], 1);
         }
     }
