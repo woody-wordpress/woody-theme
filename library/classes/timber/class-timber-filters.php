@@ -251,9 +251,13 @@ class WoodyTheme_Timber_Filters
         return $m->fromNow()->getRelative();
     }
 
-    public function getPermalink($post_id)
+    public function getPermalink($post_id, $pll = false)
     {
-        return woody_get_permalink($post_id);
+        if ($pll && function_exists('pll_get_post')) {
+            return woody_get_permalink(pll_get_post($post_id));
+        } else {
+            return woody_get_permalink($post_id);
+        }
     }
 
     public function theRootAncestor($post_id)
