@@ -250,7 +250,6 @@ $('#post').each(function () {
                         $('#tpls_popin li').on('click', function () {
                             let tpl = $(this).find('.tpl-choice-wrapper');
                             $('.tpl-choice-wrapper.selected').removeClass('selected');
-                            $('li.first-choice-tpl').removeClass('first-choice-tpl');
                             tpl.addClass('selected');
                         });
 
