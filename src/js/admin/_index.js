@@ -1,5 +1,5 @@
 // Admin
-import './attachment';
+// import './attachment';
 import './move-blocks';
 // import './drag_drop_blocks';
 // import './edit-post-autofocus';

@@ -14,28 +14,10 @@ class WoodyTheme_Images
     public function __construct()
     {
         $this->registerHooks();
-        $this->addImageSizes();
     }
 
     protected function registerHooks()
     {
-        // Actions
-        add_action('add_attachment', [$this, 'addAttachment'], 50);
-        add_filter('attachment_fields_to_save', [$this, 'attachmentFieldsToSave'], 12, 2); // Priority 12 ater polylang
-        add_action('save_attachment', [$this, 'saveAttachment'], 50);
-        add_action('edit_attachment', [$this, 'applyMediaTerms'], 50);
-
-        // Lors de la suppression d'une langue on doit supprimer tous ses médias pour éviter qu'ils ne passent dans la langue par défaut
-        // Pour cela on passe par une commande CLI et on ne veut surtout pas supprimer les traductions des médias supprimés
-        // On ne supprime pas les traductions d'une image si la suppression se fait en CLI
-        if (!defined('WP_CLI')) {
-            add_action('delete_attachment', [$this, 'deleteAttachment'], 1);
-        }
-
-        add_action('wp_ajax_get_all_tags', [$this, 'getAllTags']);
-        add_action('wp_ajax_set_attachments_terms', [$this, 'setAttachmentsTerms']);
-        add_action('woody_theme_update', [$this, 'woodyInsertTerms']);
-
         // Enable Media Replace Plugin
         //TODO: Activate when available
         //add_action('enable-media-replace-upload-done', [$this, 'mediaReplaced'], 10, 3);
@@ -149,71 +131,6 @@ class WoodyTheme_Images
         return $overrides;
     }
 
-    public function addImageSizes()
-    {
-        // Ratio 8:1 => Pano A
-        add_image_size('ratio_8_1_small', 360, 45, true);
-        add_image_size('ratio_8_1_medium', 640, 80, true);
-        add_image_size('ratio_8_1_large', 1200, 150, true);
-        add_image_size('ratio_8_1', 1920, 240, true);
-
-        // Ratio 4:1 => Pano B
-        add_image_size('ratio_4_1_small', 360, 90, true);
-        add_image_size('ratio_4_1_medium', 640, 160, true);
-        add_image_size('ratio_4_1_large', 1200, 300, true);
-        add_image_size('ratio_4_1', 1920, 480, true);
-
-        // Ratio 3:1 => Pano C
-        add_image_size('ratio_3_1_small', 360, 120, true);
-        add_image_size('ratio_3_1_medium', 640, 214, true);
-        add_image_size('ratio_3_1_large', 1200, 400, true);
-        add_image_size('ratio_3_1', 1920, 640, true);
-
-        // Ratio 2:1 => Paysage A
-        add_image_size('ratio_2_1_small', 360, 180, true);
-        add_image_size('ratio_2_1_medium', 640, 320, true);
-        add_image_size('ratio_2_1_large', 1200, 600, true);
-        add_image_size('ratio_2_1', 1920, 960, true);
-
-        // Ratio 16:9 => Paysage B
-        add_image_size('ratio_16_9_small', 360, 203, true);
-        add_image_size('ratio_16_9_medium', 640, 360, true);
-        add_image_size('ratio_16_9_large', 1200, 675, true);
-        add_image_size('ratio_16_9', 1920, 1080, true);
-
-        // Ratio 4:3 => Paysage C
-        add_image_size('ratio_4_3_small', 360, 270, true);
-        add_image_size('ratio_4_3_medium', 640, 480, true);
-        add_image_size('ratio_4_3_large', 1200, 900, true);
-        add_image_size('ratio_4_3', 1920, 1440, true);
-
-        // Ratio 3:4 => Portrait A
-        add_image_size('ratio_3_4_small', 360, 480, true);
-        add_image_size('ratio_3_4_medium', 640, 854, true);
-        add_image_size('ratio_3_4', 1200, 1600, true);
-
-        // Ratio 10:16 => Portrait B
-        add_image_size('ratio_10_16_small', 360, 576, true);
-        add_image_size('ratio_10_16_medium', 640, 1024, true);
-        add_image_size('ratio_10_16', 1200, 1920, true);
-
-        // Ratio A4 => Brochure papier
-        add_image_size('ratio_a4_small', 360, 509, true);
-        add_image_size('ratio_a4_medium', 640, 905, true);
-        add_image_size('ratio_a4', 1200, 1697, true);
-
-        // Carré
-        add_image_size('ratio_square_small', 360, 360, true);
-        add_image_size('ratio_square_medium', 640, 640, true);
-        add_image_size('ratio_square', 1200, 1200, true);
-
-        // Free => Proportions libre
-        add_image_size('ratio_free_small', 360);
-        add_image_size('ratio_free_medium', 640);
-        add_image_size('ratio_free_large', 1200);
-        add_image_size('ratio_free', 1920);
-    }
-
     // Remove default image sizes here.
     public function removeAutoThumbs($sizes, $metadata)
     {
@@ -244,52 +161,12 @@ class WoodyTheme_Images
     /**
      * Get all tags to create form
      */
-    public function getAllTags()
-    {
-        $tags = [];
-        $taxonomies = ['themes', 'places', 'seasons'];
 
-        foreach ($taxonomies as $taxonomy) {
-            $terms = get_terms(array(
-                'taxonomy' => $taxonomy,
-                'hide_empty' => false
-            ));
-            foreach ($terms as $term) {
-                if (!is_wp_error($term)) {
-                    $tags[$taxonomy][] = [
-                        'id' => $term->term_id,
-                        'name' => $term->name
-                    ];
-                }
-            }
-        }
-
-        wp_send_json($tags);
-    }
 
     /**
      * Add terms to attachment post
      */
-    public function setAttachmentsTerms()
-    {
-        $attach_ids = filter_input(INPUT_POST, 'attach_ids', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
-        $term_ids = filter_input(INPUT_POST, 'term_ids', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
 
-        if (!empty($attach_ids) && !empty($term_ids)) {
-            foreach ($attach_ids as $attach_id) {
-                foreach ($term_ids as $term_id) {
-                    $term = get_term($term_id);
-
-                    if (!is_wp_error($term)) {
-                        wp_set_post_terms($attach_id, $term->term_id, $term->taxonomy, true);
-                    }
-                }
-            }
-            wp_send_json(true);
-        } else {
-            wp_send_json(false);
-        }
-    }
 
     public function timberRender($render)
     {
@@ -456,128 +333,6 @@ class WoodyTheme_Images
     /* Sync attachment data     */
     /* ------------------------ */
 
-    public function addAttachment($attachment_id)
-    {
-        // Added attachment_types
-        wp_set_object_terms($attachment_id, 'Média ajouté manuellement', 'attachment_types', false);
-
-        // Duplicate all medias
-        $this->saveAttachment($attachment_id);
-    }
-
-    public function deleteAttachment($attachment_id)
-    {
-        remove_action('delete_attachment', [$this, 'deleteAttachment']);
-
-        $deleted_attachement = wp_cache_get('woody_deleted_attachement', 'woody');
-        if (empty($deleted_attachement)) {
-            $deleted_attachement = [];
-        }
-
-        if (wp_attachment_is_image($attachment_id) && is_array($deleted_attachement) && !in_array($attachment_id, $deleted_attachement)) {
-            // Remove translations
-            $translations = pll_get_post_translations($attachment_id);
-            $deleted_attachement = array_merge($deleted_attachement, array_values($translations));
-            wp_cache_set('woody_deleted_attachement', $deleted_attachement, 'woody');
-
-            foreach ($translations as $t_attachment_id) {
-                if ($t_attachment_id != $attachment_id) {
-                    wp_delete_attachment($t_attachment_id);
-                }
-            }
-        }
-    }
-
-    public function attachmentFieldsToSave($post, $attachment)
-    {
-        if (!empty($post['ID'])) {
-            $this->saveAttachment($post['ID']);
-        }
-
-        return $post;
-    }
-
-    public function saveAttachment($attachment_id)
-    {
-        if (wp_attachment_is_image($attachment_id)) {
-            $translations = pll_get_post_translations($attachment_id);
-            $source_lang = pll_get_post_language($attachment_id);
-
-            $languages = pll_languages_list();
-            foreach ($languages as $target_lang) {
-                // Duplicate media with Polylang Method
-                if (!array_key_exists($target_lang, $translations)) {
-                    $t_attachment_id = woody_pll_create_media_translation($attachment_id, $source_lang, $target_lang);
-                } else {
-                    $t_attachment_id = $translations[$target_lang];
-                }
-
-                // Sync Meta and fields
-                if (!empty($t_attachment_id) && $source_lang != $target_lang) {
-                    $this->syncAttachmentMetadata($attachment_id, $t_attachment_id, $target_lang);
-                }
-            }
-        }
-    }
-
-    private function syncAttachmentMetadata($attachment_id, $t_attachment_id, $target_lang)
-    {
-        if (!empty($t_attachment_id) && !empty($attachment_id)) {
-            // Get metadatas (crop sizes)
-            $attachment_metadata = wp_get_attachment_metadata($attachment_id);
-
-            // Updated metadatas (crop sizes)
-            if (!empty($attachment_metadata)) {
-                wp_update_attachment_metadata($t_attachment_id, $attachment_metadata);
-            }
-
-            // Get ACF Fields (Author, Lat, Lng)
-            $fields = get_fields($attachment_id);
-
-            // Update ACF Fields (Author, Lat, Lng)
-            if (!empty($fields)) {
-                foreach ($fields as $selector => $value) {
-                    if ($selector == 'media_linked_page') {
-                        continue;
-                    }
-                    update_field($selector, $value, $t_attachment_id);
-                }
-            }
-
-            // Sync attachment taxonomies
-            $tags = [];
-            $sync_taxonomies = ['attachment_types', 'attachment_hashtags', 'attachment_categories'];
-            foreach ($sync_taxonomies as $taxonomy) {
-                $terms = wp_get_post_terms($attachment_id, $taxonomy);
-                $tags[$taxonomy] = [];
-                if (!empty($terms)) {
-                    foreach ($terms as $term) {
-                        $tags[$taxonomy][] = $term->name;
-                    }
-
-                    // Si la photo a le tag Instagram, elle n'a que celui-là;
-                    if (in_array('Instagram', $tags[$taxonomy])) {
-                        $tags[$taxonomy] = ['Instagram'];
-                    }
-
-                    wp_set_post_terms($attachment_id, $tags[$taxonomy], $taxonomy, false);
-                }
-            }
-
-            // Synchro Terms
-            if (!empty($tags)) {
-                foreach ($tags as $taxonomy => $keywords) {
-                    wp_set_post_terms($t_attachment_id, $keywords, $taxonomy, false);
-                }
-            }
-
-            // Si on lance une traduction en masse de la médiathèque, il faut lancer ce hook qui va synchroniser les taxonomies themes et places
-            if (defined('WP_CLI') && \WP_CLI) {
-                do_action('pll_translate_media', $attachment_id, $t_attachment_id, $target_lang);
-            }
-        }
-    }
-
     /* ------------------------ */
     /* Default Metadatas        */
     /* ------------------------ */
@@ -722,38 +477,6 @@ class WoodyTheme_Images
         }
 
         return $metadata;
-    }
-
-    public function woodyInsertTerms()
-    {
-        wp_insert_term('Vidéo externe', 'attachment_types', array('slug' => 'media_linked_video'));
-    }
-
-    public function applyMediaTerms($attachment_id)
-    {
-        $mediaLinkedVideo = get_field('media_linked_video', $attachment_id);
-        $terms = get_the_terms($attachment_id, 'attachment_types');
-        $terms = (empty($terms)) ? [] : $terms;
-        $newTerms = [];
-
-        if (!empty($mediaLinkedVideo)) {
-            foreach ($terms as $term) {
-                if ($term->slug != 'media_linked_video') {
-                    array_push($newTerms, $term->name);
-                }
-            }
-            array_push($newTerms, 'Vidéo externe');
-            wp_set_object_terms($attachment_id, $newTerms, 'attachment_types', false);
-        } else {
-            foreach ($terms as $key => $term) {
-                if ($term->slug === 'media_linked_video') {
-                    unset($terms[$key]);
-                } else {
-                    array_push($newTerms, $term->name);
-                }
-            }
-            wp_set_object_terms($attachment_id, $newTerms, 'attachment_types', false);
-        }
     }
 
     // public function generatePagesList()

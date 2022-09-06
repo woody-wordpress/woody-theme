@@ -10,53 +10,6 @@ body.themes-php .themes.single-theme .theme-actions {
     display: block;
 }
 
-.add-medias-tag {
-    z-index: 1000;
-    background: white;
-    border: 1px solid #ddd;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    max-height: 80vh;
-    overflow-y: scroll;
-
-    .choices,
-    .actions {
-        display: flex;
-    }
-
-    .choices {
-        padding: 20px;
-
-        ul {
-            margin-top: 0;
-
-            p {
-                font-weight: bold;
-            }
-        }
-
-        .themes li,
-        .places li {
-            margin-right: 150px;
-        }
-    }
-
-    .actions {
-        position: sticky;
-        bottom: 0px;
-        justify-content: flex-end;
-        padding: 10px;
-        background: rgba(255, 255, 255, 0.9);
-
-        button {
-            margin: 0 5px;
-        }
-    }
-}
-
 .wp-list-table.languages .row-actions {
 
     .disable,
