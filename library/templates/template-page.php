@@ -248,37 +248,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         }
     }
 
-    // TODO : Move to addon-hawwwai with the playlist context
-    protected function customPermalinkPlaylistId($url)
-    {
-        $id = 0;
-
-        if (!empty($url)) {
-            $custom_permalink = str_replace(pll_home_url(), '', $url);
-            $query_result = new \WP_Query([
-                'lang' => pll_current_language(),
-                'post_type' => 'page',
-                'post_status' => 'publish',
-                'posts_per_page' => 1,
-                'meta_query'  => [
-                    'relation' => 'AND',
-                    [
-                        'key'     => 'custom_permalink',
-                        'value'   => $custom_permalink,
-                        'compare' => '=',
-                    ]
-                ]
-            ]);
-
-            if (empty($query_result->posts)) {
-                return $id;
-            }
-
-            $id = $query_result->posts[0]->ID;
-        }
-        return $id;
-    }
-
     /***************************
      * Overide Canonical
      *****************************/
