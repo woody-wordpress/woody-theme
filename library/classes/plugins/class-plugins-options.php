@@ -265,8 +265,8 @@ class WoodyTheme_Plugins_Options
         $this->updateOption('yoimg_crop_settings', $yoimg_crop_settings);
 
         // Set image default size
-        update_option('thumbnail_size_w', 300);
-        update_option('thumbnail_size_h', 300);
+        update_option('thumbnail_size_w', 150);
+        update_option('thumbnail_size_h', 150);
         update_option('thumbnail_crop', 1);
 
         update_option('medium_size_w', 300);
