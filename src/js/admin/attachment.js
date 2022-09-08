@@ -63,15 +63,21 @@ $(document).one('click', '.attachments .attachment', function () {
             action: 'get_all_tags',
         },
         success: function (data) {
-            data.themes.forEach(function (element) {
-                $('.add-medias-tag .themes').append('<li> <input type="checkbox" value="' + element.id + '"> ' + element.name + '</li>');
-            });
-            data.places.forEach(function (element) {
-                $('.add-medias-tag .places').append('<li> <input type="checkbox" value="' + element.id + '">' + element.name + '</li>');
-            });
-            data.seasons.forEach(function (element) {
-                $('.add-medias-tag .seasons').append('<li> <input type="checkbox" value="' + element.id + '">' + element.name + '</li>');
-            });
+            if (data.themes !== undefined) {
+                data.themes.forEach(function (element) {
+                    $('.add-medias-tag .themes').append('<li> <input type="checkbox" value="' + element.id + '"> ' + element.name + '</li>');
+                });
+            }
+            if (data.places !== undefined) {
+                data.places.forEach(function (element) {
+                    $('.add-medias-tag .places').append('<li> <input type="checkbox" value="' + element.id + '">' + element.name + '</li>');
+                });
+            }
+            if (data.seasons !== undefined) {
+                data.seasons.forEach(function (element) {
+                    $('.add-medias-tag .seasons').append('<li> <input type="checkbox" value="' + element.id + '">' + element.name + '</li>');
+                });
+            }
         }
     });
 
