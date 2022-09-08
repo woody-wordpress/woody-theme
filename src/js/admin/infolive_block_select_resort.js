@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-$('.acf-field-select[data-name="infolive_block_select_resort"] select').change(function(e) { 
+$('.acf-field-select[data-name="infolive_block_select_resort"] select').change(function (e) {
     if (typeof acf == 'undefined') {
         return;
     }
@@ -29,19 +29,19 @@ function update_zones_on_station_change(e, $, select) {
         data: data,
         type: 'post',
         dataType: 'json',
-        success: function(json) {
+        success: function (json) {
             if (!json) {
                 return;
-            }            
-            for (var i=0;i<json.length;i++) {
-                var id = acfkeying_id + '-' + json[i]['value'];                
+            }
+            for (var i = 0; i < json.length; i++) {
+                var id = acfkeying_id + '-' + json[i]['value'];
                 var zone_item = `<li><label><input id="${id}" name="${acfkeying_name}" type="checkbox" value="${json[i]['value']}"></input>${json[i]['label']}</label></li>`;
                 zonesList.append(zone_item);
             }
-            
+
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             console.log('Error..', xhr, status, error);
         }
-    })    
+    })
 }
