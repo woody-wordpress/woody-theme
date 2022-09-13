@@ -33,6 +33,16 @@ class WoodyTheme_Api_Rest
             header('xkey: ' . WP_SITE_KEY . '_' . $post_id, false);
             $post = get_post($post_id);
 
+            $wrapper = [
+                'display_img' => true,
+                'display_elements' => [
+                    'icon',
+                    'pretitle',
+                    'subtitle',
+                    'description'
+                ]
+            ];
+
             return getPagePreview($wrapper, $post);
         }
     }
