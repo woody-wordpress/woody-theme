@@ -22,26 +22,18 @@ class WoodyTheme_Api_Rest
                 'callback' => [$this, 'getPagePreviewApiRest']
             ));
         });
-        add_action('save_post', [$this, 'savePost'], 10, 3);
     }
 
     public function getPagePreviewApiRest() {
 
         # /wp-json/woody/page/preview?post=${id}
         $post_id = filter_input(INPUT_GET, 'post', FILTER_VALIDATE_INT);
-        header('xkey: ' . WP_SITE_KEY . '_page_preview', false);
 
         if(!empty($post_id)) {
+            header('xkey: ' . WP_SITE_KEY . '_' . $post_id, false);
             $post = get_post($post_id);
 
             return getPagePreview($wrapper, $post);
-        }
-    }
-
-    public function savePost($post_ID, $post, $update)
-    {
-        if (!empty($post)) {
-            do_action('woody_flush_varnish', 'page_preview');
         }
     }
 }
