@@ -40,7 +40,8 @@ class WoodyTheme_Api_Rest
                     'pretitle',
                     'subtitle',
                     'description'
-                ]
+                ],
+                'display_button' => true
             ];
 
             return getPagePreview($wrapper, $post);
