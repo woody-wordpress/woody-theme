@@ -60,7 +60,6 @@ new WoodyTheme_CDN();
 
 // Content
 new WoodyTheme_Cron();
-new WoodyTheme_Images();
 new WoodyTheme_IsMobile();
 new WoodyTheme_Links();
 new WoodyTheme_Page();
