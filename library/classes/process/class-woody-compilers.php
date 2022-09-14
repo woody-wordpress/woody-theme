@@ -51,21 +51,21 @@ class WoodyTheme_WoodyCompilers
             case 'manual_focus':
             case 'focus_trip_components':
                 $the_items = $this->getter->getManualFocusData($wrapper);
-            break;
+                break;
             case 'auto_focus':
                 $the_items = $this->getter->getAutoFocusData($current_post, $wrapper);
-            break;
+                break;
             case 'auto_focus_sheets':
                 if (!empty($wrapper['playlist_conf_id'])) {
                     $the_items = $this->getter->getAutoFocusSheetData($wrapper);
                 }
-            break;
+                break;
             case 'auto_focus_topics':
                 $the_items = $this->getter->getAutoFocusTopicsData($wrapper);
-            break;
+                break;
             case 'profile_focus':
                 $the_items = $this->getter->getProfileFocusData($wrapper);
-            break;
+                break;
         }
         $the_items['alert'] = apply_filters('add_admin_alert_message', '');
         if (!empty($the_items['items']) && is_array($the_items['items'])) {
@@ -95,6 +95,7 @@ class WoodyTheme_WoodyCompilers
                 } elseif ($wrapper['mobile_behaviour']['mobile_grid'] == 'swiper') {
                     $the_items['swResp'] = true;
                 }
+                $the_items['mobile_cols'] = (!empty($wrapper['mobile_behaviour']['mobile_cols'])) ? $wrapper['mobile_behaviour']['mobile_cols'] : '';
                 $the_items['mobile_behaviour'] = $wrapper['mobile_behaviour'];
             }
 
@@ -373,7 +374,6 @@ class WoodyTheme_WoodyCompilers
         // On récupère et on applique les valeurs des filtres si existantes
         $form_result = (!empty(filter_input_array(INPUT_GET))) ? filter_input_array(INPUT_GET) : [];
         if (!empty($form_result['uniqid'])) {
-
             // On supprimte ce qui est inutile pour les filtres car on a déjà une liste de posts correspondant à la requete du backoffice
             unset($list_el_wrapper['focused_taxonomy_terms']);
 

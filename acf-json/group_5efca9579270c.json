@@ -1,23 +1,23 @@
 {
     "key": "group_5efca9579270c",
-    "title": "Comportements mobiles MEA",
+    "title": "Comportements mobiles",
     "fields": [
         {
             "key": "field_5efca967d9625",
-            "label": "Comportement des mises en avant",
+            "label": "Comportement des blocs",
             "name": "mobile_grid",
             "type": "radio",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "60",
+                "width": "40",
                 "class": "",
                 "id": ""
             },
             "choices": {
                 "default": "Par défaut",
-                "grid": "Empilement (blocs les uns sur les autres)",
+                "grid": "Grille",
                 "swiper": "Diaporama\/Slider"
             },
             "allow_null": 0,
@@ -28,6 +28,47 @@
             "save_other_choice": 0
         },
         {
+            "key": "field_629f53aa06919",
+            "label": "Colonnes / diapositives visibles",
+            "name": "mobile_cols",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "20",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "1": "1",
+                "2": "2"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": 1,
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "responsive_stuff_message",
+            "label": "Information sur le comportement responsive",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label",
+                "id": ""
+            },
+            "message": "NB : Les options de comportement et nombre de colonnes ne sont pas compatibles avec les affichages de type carte géographique",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
             "key": "field_5efcaa19d9627",
             "label": "Masquer ce bloc en mobile",
             "name": "hide_for_mobile",
@@ -36,7 +77,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "30",
+                "width": "10",
                 "class": "hidden",
                 "id": ""
             },
@@ -63,6 +104,7 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
-    "description": "Comportements mobiles appliquées aux blocs de mise en avant",
-    "modified": 1641315126
+    "description": "Comportements mobiles appliqués aux blocs de mise en avant, galerie de médias et titre et icône",
+    "show_in_rest": 0,
+    "modified": 1654609576
 }
