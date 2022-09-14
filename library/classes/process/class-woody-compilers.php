@@ -68,7 +68,7 @@ class WoodyTheme_WoodyCompilers
                 break;
         }
         $the_items['alert'] = apply_filters('add_admin_alert_message', '');
-        if (is_array($the_items['items'])) {
+        if (!empty($the_items['items']) && is_array($the_items['items'])) {
             foreach ($the_items['items'] as $item_key => $item) {
                 if (!empty($item['description'])) {
                     $the_items['items'][$item_key]['description'] = str_replace(['[', ']'], '', $item['description']);
@@ -292,7 +292,7 @@ class WoodyTheme_WoodyCompilers
             ];
 
             // Si des pages ont été ajoutées dans le champ "Pages à exclure"
-            if (is_array($wrapper['semantic_view_exclude'])) {
+            if (!empty($wrapper['semantic_view_exclude']) && is_array($wrapper['semantic_view_exclude'])) {
                 foreach ($wrapper['semantic_view_exclude'] as $excluded_id) {
                     $the_query['post__not_in'][] = $excluded_id;
                 }
@@ -365,7 +365,7 @@ class WoodyTheme_WoodyCompilers
 
         // On récupère les ids des posts non filtrés pour les passer au paramètre post__in de la query
         $default_items_ids = [];
-        if (is_array($default_items['items'])) {
+        if (!empty($default_items['items']) && is_array($default_items['items'])) {
             foreach ($default_items['items'] as $item) {
                 $default_items_ids[] = $item['post_id'];
             }
@@ -490,7 +490,7 @@ class WoodyTheme_WoodyCompilers
     {
         $return = [];
 
-        if (is_array($items)) {
+        if (!empty($items['items']) && is_array($items['items'])) {
             foreach ($items['items'] as $item) {
                 if (!empty($item['location']['lat']) && !empty($item['location']['lng'])) {
                     $the_marker = [
@@ -772,7 +772,7 @@ class WoodyTheme_WoodyCompilers
 
         $home_slider['plyr_options'] = json_encode($plyr_options);
 
-        if (is_array($home_slider['landswpr_slides'])) {
+        if (!empty($home_slider['landswpr_slides']) && is_array($home_slider['landswpr_slides'])) {
             foreach ($home_slider['landswpr_slides'] as $slide_key => $slide) {
                 // Si on est dans le cas d'une vidéo oEmbed, on récupère la plus grande miniature possible
                 // Permet d'afficher un poster le temps du chargement de Plyr
@@ -823,7 +823,7 @@ class WoodyTheme_WoodyCompilers
                 $bookblock['the_classes'][] = 'padd-all-md';
             }
             $bookblock['classes'] = (!empty($bookblock['the_classes'])) ? implode(' ', $bookblock['the_classes']) : '';
-            if (is_array($bookblock['bookblock_playlists'])) {
+            if (!empty($bookblock['bookblock_playlists']) && is_array($bookblock['bookblock_playlists'])) {
                 foreach ($bookblock['bookblock_playlists'] as $pl_key => $pl) {
                     $bookblock['bookblock_playlists'][$pl_key]['permalink'] = woody_get_permalink($pl['pl_post_id']);
                     $pl_confId = get_field('field_5b338ff331b17', $pl['pl_post_id']);
