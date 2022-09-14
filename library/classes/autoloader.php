@@ -59,6 +59,7 @@ new WoodyTheme_Polylang();
 new WoodyTheme_CDN();
 
 // Content
+new WoodyTheme_Api_Rest();
 new WoodyTheme_Cron();
 new WoodyTheme_IsMobile();
 new WoodyTheme_Links();
