@@ -30,7 +30,7 @@
         {
             "key": "field_629f53aa06919",
             "label": "Colonnes / diapositives visibles",
-            "name": "nb_columns",
+            "name": "mobile_cols",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -50,6 +50,23 @@
             "layout": "vertical",
             "return_format": "value",
             "save_other_choice": 0
+        },
+        {
+            "key": "responsive_stuff_message",
+            "label": "Information sur le comportement responsive",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label",
+                "id": ""
+            },
+            "message": "NB : Les options de comportement et nombre de colonnes ne sont pas compatibles avec les affichages de type carte géographique",
+            "new_lines": "wpautop",
+            "esc_html": 0
         },
         {
             "key": "field_5efcaa19d9627",
