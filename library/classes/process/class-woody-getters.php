@@ -73,7 +73,7 @@ class WoodyTheme_WoodyGetters
         }
 
         // On vérifie si du contenu épinglé a été ajouté et on traite les données
-        if (!empty($pinned_content_id)) {
+        if (!empty($pinned_content_id) && is_array($the_items['items'])) {
             switch ($wrapper['pinnable_selection']->post_type) {
                 case 'touristic_sheet':
                     $pinned_post_preview = $this->getTouristicSheetPreview($wrapper, $wrapper['pinnable_selection']);
@@ -109,7 +109,6 @@ class WoodyTheme_WoodyGetters
         $clickable = true;
         if (!empty($wrapper['content_selection'])) {
             foreach ($wrapper['content_selection'] as $key => $item_wrapper) {
-
                 // Sommes-nous dans le cas d'une mise en avant de composants de séjours ?
                 $item_wrapper['content_selection_type'] = $wrapper['acf_fc_layout'] == 'focus_trip_components' ? 'existing_content' : $item_wrapper['content_selection_type'];
                 if (!empty($item_wrapper['existing_content']['trip_component'])) {
@@ -212,7 +211,6 @@ class WoodyTheme_WoodyGetters
         $tax_query = [];
         $custom_tax = [];
         if (!empty($wrapper['focused_taxonomy_terms'])) {
-
             // On récupère la relation choisie (ET/OU) entre les termes
             // et on génère un tableau de term_id pour chaque taxonomie
             $tax_query['relation'] = (!empty($wrapper['focused_taxonomy_terms_andor'])) ? $wrapper['focused_taxonomy_terms_andor'] : 'OR';
@@ -353,7 +351,6 @@ class WoodyTheme_WoodyGetters
 
         // On vérifie si la page est de type miroir
         if ($data['page_type'] == 'mirror_page') {
-
             // On retourne la page de référence de la page miroir
             $mirror_id = get_field('mirror_page_reference', $post->ID);
             $mirror_post = get_post($mirror_id);
