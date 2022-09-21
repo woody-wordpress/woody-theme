@@ -30,34 +30,33 @@ const createThumbnailPreview = (field) => {
             field.nextElementSibling.append(thumbnailWrapper);
         }
 
-        document.querySelectorAll('.woody-tpl-button').forEach(button => {
-            button.addEventListener('click', (event) => {
+        field.nextElementSibling.addEventListener('click', (event) => {
 
-                let buttonFieldWrapper = event.currentTarget;
+            let buttonFieldWrapper = event.currentTarget;
 
-                document.addEventListener('woodyTplUpdate', () => {
-                    let newTplValue = document.querySelector('.tpl-choice-wrapper.selected').getAttribute('data-value');
+            document.addEventListener('woodyTplUpdate', () => {
+                let newThumbnailUrl = document.querySelector('.tpl-choice-wrapper.selected img').getAttribute('src');
 
-                    if (newTplValue) {
-                        let newThumbnailUrl = `${thumbnailPrefixUrl}${newTplValue.replaceAll('-', '/')}/thumbnail.png?version=${themeVersion}`;
+                if (newThumbnailUrl) {
+                    buttonFieldWrapper.classList.remove('tpl-button-visible');
 
-                        buttonFieldWrapper.classList.remove('tpl-button-visible');
-
-                        fetch(thumbnailUrl)
-                            .then(response => {
-                                // Si l'URL de la thumbnail est valide, on met à jour la source de la preview dans le formulaire ACF
-                                if (response.ok) {
-                                    let thumbnailToUpdate = buttonFieldWrapper.querySelector('img');
-
-                                    if (thumbnailToUpdate !== null) {
-                                        thumbnailToUpdate.src = newThumbnailUrl;
-                                    }
+                    fetch(newThumbnailUrl)
+                        .then(response => {
+                            // Si l'URL de la thumbnail est valide, on met à jour la source de la preview dans le formulaire ACF
+                            if (response.ok) {
+                                if (!buttonFieldWrapper.querySelector('.woody-thumbnail-preview-wrapper img')) {
+                                    let thumbnailImage = document.createElement('img');
+                                    thumbnailImage.src = newThumbnailUrl;
+                                    thumbnailImage.classList.add('woody-thumbnail-preview');
+                                    buttonFieldWrapper.querySelector('.woody-thumbnail-preview-wrapper').append(thumbnailImage);
                                 } else {
-                                    buttonFieldWrapper.classList.add('tpl-button-visible');
+                                    buttonFieldWrapper.querySelector('.woody-thumbnail-preview-wrapper img').src = newThumbnailUrl;
                                 }
-                            }).catch(err => console.log('Error thumbnail preview : ', err));
-                    }
-                });
+                            } else {
+                                buttonFieldWrapper.classList.add('tpl-button-visible');
+                            }
+                        }).catch(err => console.log('Error thumbnail preview : ', err));
+                }
             });
         });
     }
