@@ -23,7 +23,7 @@ class WoodyTheme_Cleanup_Admin
             add_action('admin_menu', [$this, 'woodySettingsPage']);
             add_filter('admin_body_class', [$this, 'adminBodyClass']);
 
-            add_action('admin_footer_text', [$this, 'addThemeDistUrl']);
+            add_action('admin_footer_text', [$this, 'addThemeSettings']);
 
             add_action('wp_before_admin_bar_render', [$this, 'customAdminBarMenu']);
             add_action('wp_dashboard_setup', [$this, 'removeDashboardWidgets']);
@@ -328,7 +328,7 @@ class WoodyTheme_Cleanup_Admin
      *
      * @return string $data
      */
-    public function addThemeDistUrl($data) {
+    public function addThemeSettings($data) {
 
         $theme_version = wp_get_theme(get_template())->get('Version');
 
