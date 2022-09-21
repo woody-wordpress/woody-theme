@@ -152,6 +152,8 @@ $('#post').each(function () {
         });
 
         $('#tpls_popin .save').on('click', function () {
+            const event = new CustomEvent('woodyTplUpdate');
+            document.dispatchEvent(event);
             button.parent().find('[data-key="' + field_key + '"] input').val($('.tpl-choice-wrapper.selected').data('value'));
             $('#tpls_popin').removeClass('opened');
             $('.tpl-choice-wrapper.selected').removeClass('selected');

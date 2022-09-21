@@ -312,7 +312,7 @@
                 "class": "hide-label woody-tpl-button group_5b04314e0ec21",
                 "id": ""
             },
-            "message": "Choisir une mise en page",
+            "message": "Modifier",
             "new_lines": "wpautop",
             "esc_html": 0
         },

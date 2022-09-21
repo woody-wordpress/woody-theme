@@ -723,37 +723,63 @@
 }
 
 // Bouton choisir une mise en page
-.woody-tpl-button .acf-input {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 240px;
-    padding-left: 40px;
-    background: #23282d;
-    color: #fff;
-    font-weight: bold;
-    text-align: center;
-    cursor: pointer;
-    position: relative;
-    transition: background .3s;
-
-    &:before {
-        font-family: dashicons;
-        display: block;
-        content: '\f538';
-        font-size: 24px;
-        margin-right: 10px;
-        font-weight: normal;
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: calc(100% - 10px);
-        background: lighten(#23282d, 10%);
-        padding: 5px 10px;
+.woody-tpl-button {
+    &.tpl-button-visible {
+        .acf-input p {
+            opacity: 1;
+        }
     }
 
-    &:hover {
-        background: darken(#23282d, 10%);
+    .acf-input {
+        position: absolute !important;
+        top: 50%;
+        left: 12px;
+        transform: translateY(-50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(100% - 30px);
+        width: 200px;
+        z-index: 9;
+        cursor: pointer;
+        transition: .2s ease-in-out;
+
+        p {
+            margin: 0;
+            background: #23282d;
+            color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            opacity: 0;
+            transition: .2s ease-in-out;
+        }
+
+        &:hover {
+            p {
+                opacity: 1;
+            }
+        }
+
+        // &:before {
+        //     font-family: dashicons;
+        //     display: block;
+        //     content: '\f538';
+        //     font-size: 24px;
+        //     margin-right: 10px;
+        //     font-weight: normal;
+        //     position: absolute;
+        //     left: 0;
+        //     top: 0;
+        //     height: calc(100% - 10px);
+        //     background: lighten(#23282d, 10%);
+        //     padding: 5px 10px;
+        // }
+
+        // &:hover {
+        //     background: darken(#23282d, 10%);
+        // }
     }
 }
 
@@ -1114,4 +1140,18 @@
 // Section models list
 .acf-field-6061dcdfc96ee {
     overflow: scroll;
+}
+
+// Preview de thumbnail d'un template
+.woody-thumbnail-preview-wrapper {
+    height: 200px;
+    width: 200px;
+    background-color: #F0F0F0;
+    cursor: pointer;
+
+    .woody-thumbnail-preview {
+        height: 100%;
+        width: 100%;
+        transition: 0.2s ease-in-out;
+    }
 }
