@@ -84,11 +84,37 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "70",
                         "class": "",
                         "id": ""
                     },
                     "return_format": "array"
+                },
+                {
+                    "key": "field_632b19b06410a",
+                    "label": "Afficher un bouton",
+                    "name": "display_button",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_629627563f623",
+                                "operator": "!=empty"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "30",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
                 },
                 {
                     "key": "field_6296276a3f624",
@@ -478,6 +504,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "Liste de titre et icône V2",
-    "show_in_rest": 0,
-    "modified": 1654007709
+    "show_in_rest": 0
 }

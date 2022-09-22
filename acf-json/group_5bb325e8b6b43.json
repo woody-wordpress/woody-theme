@@ -223,6 +223,25 @@
                                     "min_size": "",
                                     "max_size": "",
                                     "mime_types": "ogg, ogv"
+                                },
+                                {
+                                    "key": "field_632ad55c5a2b4",
+                                    "label": "Ne pas lancer la vidéo sur mobile",
+                                    "name": "desktop_only",
+                                    "type": "true_false",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "message": "Si actif, la vidéo sera remplacée par le poster sur les appareils mobiles",
+                                    "default_value": 0,
+                                    "ui": 1,
+                                    "ui_on_text": "",
+                                    "ui_off_text": ""
                                 }
                             ]
                         },

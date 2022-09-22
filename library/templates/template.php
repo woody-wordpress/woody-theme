@@ -118,7 +118,7 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         if (empty($this->globals['is_mobile'])) {
-            $this->globals['is_mobile'] = (WP_ENV == 'dev' || is_user_logged_in()) ? null : wp_is_mobile();
+            $this->globals['is_mobile'] = wp_is_mobile();
         }
 
         if (empty($this->globals['site_name'])) {
@@ -564,18 +564,18 @@ abstract class WoodyTheme_TemplateAbstract
                         }
                         break;
                     case 'woodyseo_fb_description':
-                            $return['og:description'] = [
-                                '#tag' => 'meta',
-                                '#attributes' => [
-                                    'property' => 'og:description',
-                                ]
-                            ];
+                        $return['og:description'] = [
+                            '#tag' => 'meta',
+                            '#attributes' => [
+                                'property' => 'og:description',
+                            ]
+                        ];
 
-                            if (!empty($data)) {
-                                $return['og:description']['#attributes']['content'] = woody_untokenize($data);
-                            } else {
-                                $return['og:description']['#attributes']['content'] = $return['description']['#attributes']['content'];
-                            }
+                        if (!empty($data)) {
+                            $return['og:description']['#attributes']['content'] = woody_untokenize($data);
+                        } else {
+                            $return['og:description']['#attributes']['content'] = $return['description']['#attributes']['content'];
+                        }
                         break;
                     case 'woodyseo_fb_image':
                         if (!empty($data) && !empty($data['sizes'])) {
