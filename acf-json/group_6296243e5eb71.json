@@ -84,7 +84,7 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "70",
                         "class": "",
                         "id": ""
                     },
@@ -92,9 +92,9 @@
                 },
                 {
                     "key": "field_632b19b06410a",
-                    "label": "",
+                    "label": "Afficher un bouton",
                     "name": "display_button",
-                    "type": "checkbox",
+                    "type": "true_false",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
@@ -106,21 +106,15 @@
                         ]
                     ],
                     "wrapper": {
-                        "width": "",
+                        "width": "30",
                         "class": "",
                         "id": ""
                     },
-                    "choices": {
-                        "Afficher un bouton ?": "Afficher un bouton"
-                    },
-                    "allow_custom": 0,
-                    "default_value": [
-                        0
-                    ],
-                    "layout": "vertical",
-                    "toggle": 0,
-                    "return_format": "value",
-                    "save_custom": 0
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
                 },
                 {
                     "key": "field_6296276a3f624",
