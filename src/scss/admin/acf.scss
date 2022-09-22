@@ -1,3 +1,8 @@
+// Version 6.0.0 Fixes
+.acf-true-false:focus-within {
+    border: none !important;
+}
+
 // Type de publication
 .acf-field-5e281d6e084c5,
 .acf-field-5a61fa38b704f {
@@ -766,6 +771,7 @@
     overflow: scroll;
     padding: 40px 10px 10px !important;
     background-color: white;
+    max-width: none;
 
     &:before {
         display: none;
