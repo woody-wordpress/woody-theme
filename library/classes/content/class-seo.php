@@ -20,6 +20,7 @@ class WoodyTheme_Seo
     {
         add_filter('woody_seo_transform_pattern', [$this, 'woodySeoTransformPattern'], 10, 1);
         add_action('admin_menu', [$this, 'generateMenu'], 10);
+        add_action('acf/init', [$this, 'acfAddFields']);
     }
 
     public function woodySeoTransformPattern($string)
@@ -39,5 +40,22 @@ class WoodyTheme_Seo
             'icon_url'      => 'dashicons-awards',
             'position'      => 50
         ]);
+    }
+
+    public function acfAddFields()
+    {
+        $woody_custom_meta_field = get_field_object('field_5e16e3c18c1c3');
+
+        $languages = pll_languages_list();
+        foreach ($languages as $key => $lang) {
+            $new_field = $woody_custom_meta_field;
+            $new_field['key'] .= '_' . $lang;
+            $new_field['label'] .= ' (uniquement sur ' . strtoupper($lang) . ')';
+            $new_field['name'] .= '_' . $lang;
+            $new_field['_name'] .= '_' . $lang;
+            $new_field['value'] = get_field($new_field['name']);
+
+            acf_add_local_field($new_field);
+        }
     }
 }
