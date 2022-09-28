@@ -3,25 +3,6 @@
     "title": "Personnaliser les métadonnées",
     "fields": [
         {
-            "key": "field_5e16e3c18c1c3",
-            "label": "Métadonnées du site",
-            "name": "woody_custom_meta",
-            "type": "textarea",
-            "instructions": "Ajouter les metadonnées personnalisées au format html",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "<meta name=\"Woody\" content=\"Made with ❤ by Raccourci Agency\"\/>",
-            "maxlength": "",
-            "rows": 6,
-            "new_lines": ""
-        },
-        {
             "key": "field_5e17f4d29d2d4",
             "label": "Centre d'information touristique",
             "name": "woody_tourist_information_center",
@@ -159,6 +140,25 @@
                     "maxlength": ""
                 }
             ]
+        },
+        {
+            "key": "field_5e16e3c18c1c3",
+            "label": "Métadonnées du site",
+            "name": "woody_custom_meta",
+            "type": "textarea",
+            "instructions": "Ajouter les metadonnées personnalisées au format html",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "<meta name=\"Woody\" content=\"Made with ❤ by Raccourci Agency\"\/>",
+            "maxlength": "",
+            "rows": 6,
+            "new_lines": ""
         }
     ],
     "location": [
