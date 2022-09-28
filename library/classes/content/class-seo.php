@@ -44,18 +44,21 @@ class WoodyTheme_Seo
 
     public function acfAddFields()
     {
-        $woody_custom_meta_field = get_field_object('field_5e16e3c18c1c3');
+        global $pagenow;
+        if ($pagenow == 'admin.php' && !empty($_GET['page']) && $_GET['page'] == 'woodyseo_settings') {
+            $woody_custom_meta_field = get_field_object('field_5e16e3c18c1c3');
 
-        $languages = pll_languages_list();
-        foreach ($languages as $key => $lang) {
-            $new_field = $woody_custom_meta_field;
-            $new_field['key'] .= '_' . $lang;
-            $new_field['label'] .= ' (uniquement sur ' . strtoupper($lang) . ')';
-            $new_field['name'] .= '_' . $lang;
-            $new_field['_name'] .= '_' . $lang;
-            $new_field['value'] = get_field($new_field['name']);
+            $languages = pll_languages_list();
+            foreach ($languages as $key => $lang) {
+                $new_field = $woody_custom_meta_field;
+                $new_field['key'] .= '_' . $lang;
+                $new_field['label'] .= ' (uniquement sur ' . strtoupper($lang) . ')';
+                $new_field['name'] .= '_' . $lang;
+                $new_field['_name'] .= '_' . $lang;
+                $new_field['value'] = get_field($new_field['name']);
 
-            acf_add_local_field($new_field);
+                acf_add_local_field($new_field);
+            }
         }
     }
 }
