@@ -36,6 +36,7 @@ abstract class WoodyTheme_TemplateAbstract
         $this->initContext();
         $this->setTwigTpl();
         $this->extendContext();
+        $this->setGlobals();
 
         $headers = $this->getHeaders();
         if (!empty($headers)) {
@@ -54,76 +55,50 @@ abstract class WoodyTheme_TemplateAbstract
 
     public function timberCompileData($data)
     {
-        $this->setGlobals(); //TODO: To test if we can move this on construct
-        $data['globals'] = apply_filters('woody_timber_compile_globals', $this->globals);
+        $data['globals'] = $this->globals;
         return $data;
     }
 
     private function setGlobals()
     {
-        if (empty($this->globals['post_title']) && !empty($this->context['post_title'])) {
+        if (!empty($this->context['post_title'])) {
             $this->globals['post_title'] = $this->context['post_title'];
         }
 
-        if (empty($this->globals['post_id']) && !empty($this->context['post_id'])) {
+        if (!empty($this->context['post_id'])) {
             $this->globals['post_id'] = $this->context['post_id'];
         }
 
-        if (empty($this->globals['post_type']) && !empty($this->context['post_type'])) {
+        if (!empty($this->context['post_type'])) {
             $this->globals['post_type'] = $this->context['post_type'];
         }
 
-        if (empty($this->globals['post_image']) && !empty($this->context['metas']['og:image']['#attributes']['content'])) {
+        if (!empty($this->context['metas']['og:image']['#attributes']['content'])) {
             $this->globals['post_image'] = $this->context['metas']['og:image']['#attributes']['content'];
         }
 
-        if (empty($this->globals['page_type']) && !empty($this->context['page_type'])) {
+        if (!empty($this->context['page_type'])) {
             $this->globals['page_type'] = $this->context['page_type'];
         }
 
-        if (empty($this->globals['sheet_id']) && !empty($this->context['sheet_id'])) {
+        if (!empty($this->context['sheet_id'])) {
             $this->globals['sheet_id'] = $this->context['sheet_id'];
         }
 
-        if (empty($this->globals['woody_options_pages'])) {
-            $this->globals['woody_options_pages'] = $this->getWoodyOptionsPagesValues();
-        }
+        $this->globals['woody_options_pages'] = $this->context['woody_options_pages'];
+        $this->globals['tags'] = $this->getTags($this->context['post_id']);
+        $this->globals['area'] = apply_filters('woody_addon_search_area', '', $this->context['post']);
+        $this->globals['current_lang'] = pll_current_language();
+        $this->globals['current_season'] = apply_filters('woody_pll_current_season', null);
+        $this->globals['current_locale'] = apply_filters('woody_pll_current_language', null);
+        $this->globals['languages'] = apply_filters('woody_pll_the_locales', null);
+        $this->globals['ancestors'] = $this->getAncestors($this->context['post']);
+        $this->globals['env'] = WP_ENV;
+        $this->globals['is_mobile'] = wp_is_mobile();
+        $this->globals['site_name'] = get_bloginfo('name');
 
-        if (empty($this->globals['tags'])) {
-            $this->globals['tags'] = $this->getTags($this->context['post_id']);
-        }
-
-        if (empty($this->globals['current_lang'])) {
-            $this->globals['current_lang'] = pll_current_language();
-        }
-
-        if (empty($this->globals['current_season'])) {
-            $this->globals['current_season'] = apply_filters('woody_pll_current_season', null);
-        }
-
-        if (empty($this->globals['current_locale'])) {
-            $this->globals['current_locale'] = apply_filters('woody_pll_current_language', null);
-        }
-
-        if (empty($this->globals['languages'])) {
-            $this->globals['languages'] = apply_filters('woody_pll_the_locales', null);
-        }
-
-        if (empty($this->globals['ancestors'])) {
-            $this->globals['ancestors'] = $this->getAncestors($this->context['post']);
-        }
-
-        if (empty($this->globals['env'])) {
-            $this->globals['env'] = WP_ENV;
-        }
-
-        if (empty($this->globals['is_mobile'])) {
-            $this->globals['is_mobile'] = wp_is_mobile();
-        }
-
-        if (empty($this->globals['site_name'])) {
-            $this->globals['site_name'] = get_bloginfo('name');
-        }
+        // Filter to overide
+        $this->globals = apply_filters('woody_timber_compile_globals', $this->globals);
     }
 
     private function getAncestors($post)
