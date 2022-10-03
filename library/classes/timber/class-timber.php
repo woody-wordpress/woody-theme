@@ -116,7 +116,7 @@ if (!class_exists('Timber')) {
             $return = [];
 
             if (!empty($vars['globals'])) {
-                $keys = ['options', 'post_title', 'post_id', 'post_image', 'post_type', 'page_type', 'sheet_id', 'woody_options_pages', 'tags', 'current_lang', 'current_locale', 'current_season', 'ancestors', 'env'];
+                $keys = ['options', 'post_title', 'post_id', 'post_image', 'post_type', 'page_type', 'sheet_id', 'woody_options_pages', 'tags', 'area', 'current_lang', 'current_locale', 'current_season', 'ancestors', 'env'];
                 foreach ($keys as $key) {
                     if (!empty($vars['globals'][$key])) {
                         $return[$key] = $vars['globals'][$key];
