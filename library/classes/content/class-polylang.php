@@ -24,11 +24,11 @@ class WoodyTheme_Polylang
         add_filter('duplicate_post_taxonomies_excludelist_filter', [$this, 'excludePostTranslations']);
         add_filter('republish_post_taxonomies_use_filters', '__return_true');
         add_filter('duplicate_post_taxonomies_use_filters', '__return_true');
-
     }
 
-    public function excludePostTranslations($tax){
-        if(!in_array('post_translations', $tax)){
+    public function excludePostTranslations($tax)
+    {
+        if (!in_array('post_translations', $tax)) {
             $tax[] = 'post_translations';
         }
         return $tax;
@@ -153,6 +153,7 @@ class WoodyTheme_Polylang
         __("Partager sur Instagram", 'woody-theme');
         __("Partager sur Pinterest", 'woody-theme');
         __("Partager par email", 'woody-theme');
+        __("Partager", 'woody-theme');
         __("Voir sur Instagram", 'woody-theme');
         __("Accès au menu principal", 'woody-theme');
         __("Titre de la vidéo manquant", 'woody-theme');
