@@ -229,8 +229,10 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['title'] = (!empty($the_title)) ? woody_untokenize($the_title) : html_entity_decode(get_the_title()) . ' | ' . $this->context['site']['name'];
         $this->context['title'] = apply_filters('woody_seo_transform_pattern', $this->context['title']);
         $this->context['metas'] = $this->setMetadata();
-        $this->context['custom_meta'] = get_field('woody_custom_meta', 'options');
-        $this->context['custom_meta'] .= get_field('woody_custom_meta_' . pll_current_language(), 'options');
+
+        $this->context['head_top'] = (!empty($this->context['head_top'])) ? $this->context['head_top'] : [];
+        $this->context['head_top'][] = get_field('woody_custom_meta', 'options');
+        $this->context['head_top'][] = get_field('woody_custom_meta_' . pll_current_language(), 'options');
 
         // Tourist Information Center
         // Contexte seulement sur la page d'accueil
