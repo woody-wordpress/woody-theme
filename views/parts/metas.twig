@@ -1,4 +1,3 @@
 {% for meta in metas if meta is iterable %}
     <{{ attribute(meta, '#tag') }}{% for attrKey, attr in attribute(meta, '#attributes') %} {{ attrKey }}="{{ attr }}"{% endfor %}/>
 {% endfor %}
-    {{ custom_meta|default }}
