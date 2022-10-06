@@ -986,6 +986,16 @@
                         content: '\f169';
                     }
                 }
+                &[data-layout='event_block'] {
+                    &:before {
+                        content: '\f508';
+                    }
+                }
+                &[data-layout='search_block'] {
+                    &:before {
+                        content: '\f179';
+                    }
+                }
             }
         }
     }
