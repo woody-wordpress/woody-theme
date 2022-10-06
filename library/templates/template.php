@@ -36,7 +36,7 @@ abstract class WoodyTheme_TemplateAbstract
         $this->initContext();
         $this->setTwigTpl();
         $this->extendContext();
-        $this->setGlobals();
+        // $this->setGlobals();
 
         $headers = $this->getHeaders();
         if (!empty($headers)) {
@@ -55,7 +55,8 @@ abstract class WoodyTheme_TemplateAbstract
 
     public function timberCompileData($data)
     {
-        $data['globals'] = $this->globals;
+        $this->setGlobals(); //TODO: To test if we can move this on construct
+        $data['globals'] = apply_filters('woody_timber_compile_globals', $this->globals);
         return $data;
     }
 
