@@ -26,11 +26,22 @@ class WoodyTheme_Unpublisher
 
     public function registerMetaBox()
     {
+        $post_types = get_post_types(['public' => true, '_builtin' => false]);
+        $post_types['page'] = 'page';
+
+        $exclude = ['short_link', 'snowflake_config', 'testimony', 'touristic_sheet', 'woody_model', 'woody_section_model'];
+
+        foreach ($post_types as $post_type) {
+            if(in_array($post_type, $exclude)) {
+                unset($post_types[$post_type]);
+            }
+        }
+
         add_meta_box(
             'woody-unpublisher',
             'Planifier la dépublication',
             array($this, 'unpublisherMetaBoxTpl'),
-            'page',
+            $post_types,
             'side',
             'high'
         );
@@ -41,7 +52,7 @@ class WoodyTheme_Unpublisher
         $wUnpublisher_date_value = get_post_meta($post->ID, '_wUnpublisher_date', true);
         wp_nonce_field('saveUnpublisherParams', 'saveUnpublisherParams_nonce');
 
-        echo '<label for="wUnpublisher_date">Date de dépublication : </label>';
+        // echo '<label for="wUnpublisher_date">Date de dépublication : </label>';
         echo '<div class="input-wrapper">';
         echo '<input placeholder="Choisir une date" id="wUnpublisher_date" name="wUnpublisher_date" value="' . $wUnpublisher_date_value . '"/>';
         echo '<small class="unpublisher-reset-date">x</small>';
