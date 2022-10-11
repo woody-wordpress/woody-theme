@@ -17,37 +17,37 @@ class WoodyTheme_Unpublisher
 
     protected function registerHooks()
     {
-        // add_action('add_meta_boxes', array($this, 'registerMetaBox'));
+        add_action('add_meta_boxes', array($this, 'registerMetaBox'));
         // add_action('save_post', array($this, 'saveUnpublisherParams'));
 
         add_action('woody_theme_update', [$this, 'scheduleUnpublishPosts']);
         // add_action('woody_unpublish_posts', [$this, 'woodyUnpublishPosts']);
     }
 
-    // public function registerMetaBox()
-    // {
-    //     add_meta_box(
-    //         'woody-unpublisher',
-    //         'Planifier la dépublication',
-    //         array($this, 'unpublisherMetaBoxTpl'),
-    //         'page',
-    //         'side',
-    //         'high'
-    //     );
-    // }
+    public function registerMetaBox()
+    {
+        add_meta_box(
+            'woody-unpublisher',
+            'Planifier la dépublication',
+            array($this, 'unpublisherMetaBoxTpl'),
+            'page',
+            'side',
+            'high'
+        );
+    }
 
-    // public function unpublisherMetaBoxTpl($post)
-    // {
-    //     $wUnpublisher_date_value = get_post_meta($post->ID, '_wUnpublisher_date', true);
-    //     wp_nonce_field('saveUnpublisherParams', 'saveUnpublisherParams_nonce');
+    public function unpublisherMetaBoxTpl($post)
+    {
+        $wUnpublisher_date_value = get_post_meta($post->ID, '_wUnpublisher_date', true);
+        wp_nonce_field('saveUnpublisherParams', 'saveUnpublisherParams_nonce');
 
-    //     // echo '<label for="wUnpublisher_date">Date de dépublication : </label>';
-    //     echo '<div class="input-wrapper">';
-    //     echo '<input placeholder="Choisir une date" id="wUnpublisher_date" name="wUnpublisher_date" value="' . $wUnpublisher_date_value . '"/>';
-    //     echo '<small class="unpublisher-reset-date">x</small>';
-    //     echo '</div>';
-    //     echo '<div><small><i>À compter de la date choisie (+/- 1h), le contenu passe en brouillon</div></small></i>';
-    // }
+        echo '<label for="wUnpublisher_date">Date de dépublication : </label>';
+        echo '<div class="input-wrapper">';
+        echo '<input placeholder="Choisir une date" id="wUnpublisher_date" name="wUnpublisher_date" value="' . $wUnpublisher_date_value . '"/>';
+        echo '<small class="unpublisher-reset-date">x</small>';
+        echo '</div>';
+        echo '<div><small><i>À compter de la date choisie (+/- 1h), le contenu passe en brouillon</div></small></i>';
+    }
 
     // public function saveUnpublisherParams($post_id)
     // {
