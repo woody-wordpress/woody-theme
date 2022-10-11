@@ -254,7 +254,7 @@ class WoodyTheme_Permalink
                 foreach ($children_pages as $children_page) {
                     $this->deletePost($children_page->ID);
                     // Recursively
-                    $this->cacheDeleteChildrenPosts($children_page->ID, $pre_post_update);
+                    $this->cacheDeleteChildrenPosts($children_page->ID);
                 }
             }
         }
