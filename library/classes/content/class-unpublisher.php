@@ -87,8 +87,11 @@ class WoodyTheme_Unpublisher
     {
         global $wpdb;
 
-        // TODO: use WOODY_TIMEZONE to get the current date based on the right time zone
-        $today = date(DATE_ATOM);
+        \Moment\Moment::setLocale('fr_FR');
+        $m = new \Moment\Moment();
+        $m->setTimezone(WOODY_TIMEZONE);
+
+        $current_date = $m->format();
 
         // On récupère les posts publiés qui ont une date de dépublication inférieure à la date courante
         $results = $wpdb->get_results(
@@ -98,7 +101,7 @@ class WoodyTheme_Unpublisher
         AND {$wpdb->prefix}posts.post_status = 'publish'
         AND {$wpdb->prefix}postmeta.meta_key = '_wUnpublisher_date'
         AND {$wpdb->prefix}postmeta.meta_value != ''
-        AND {$wpdb->prefix}postmeta.meta_value < '{$today}'
+        AND {$wpdb->prefix}postmeta.meta_value < '{$current_date}'
         ");
 
         if (!empty($results)) {
