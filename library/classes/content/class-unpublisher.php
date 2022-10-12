@@ -29,11 +29,12 @@ class WoodyTheme_Unpublisher
         $post_types = get_post_types(['public' => true, '_builtin' => false]);
         $post_types['page'] = 'page';
 
-        // TODO: add apply filters
-        $exclude = ['short_link', 'snowflake_config', 'testimony', 'touristic_sheet', 'woody_model', 'woody_section_model'];
+        $excluded = ['short_link', 'snowflake_config', 'testimony', 'touristic_sheet', 'woody_model', 'woody_section_model'];
+
+        $excluded = apply_filters('woody/unpublisher/excluded_post_types', $excluded);
 
         foreach ($post_types as $post_type) {
-            if(in_array($post_type, $exclude)) {
+            if(in_array($post_type, $excluded)) {
                 unset($post_types[$post_type]);
             }
         }
