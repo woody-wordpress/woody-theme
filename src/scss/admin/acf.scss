@@ -1,3 +1,12 @@
+.acf-true-false:focus-within {
+    border: none !important;
+}
+
+.acf-input .acf-icon {
+    width: 26px !important;
+    height: 26px !important;
+}
+
 // Type de publication
 .acf-field-5e281d6e084c5,
 .acf-field-5a61fa38b704f {
@@ -785,13 +794,14 @@
 
 .acf-fc-popup {
     position: fixed;
-    top: 24px !important;
-    left: 160px !important;
+    top: 32px !important;
+    left: 168px !important;
     width: calc(100vw - 500px);
     height: calc(100vh - 82px) !important;
     overflow: scroll;
     padding: 40px 10px 10px !important;
     background-color: white;
+    max-width: none;
 
     &:before {
         display: none;
@@ -1000,6 +1010,16 @@
                 &[data-layout='spacer_block'] {
                     &:before {
                         content: '\f169';
+                    }
+                }
+                &[data-layout='event_block'] {
+                    &:before {
+                        content: '\f508';
+                    }
+                }
+                &[data-layout='search_block'] {
+                    &:before {
+                        content: '\f179';
                     }
                 }
             }

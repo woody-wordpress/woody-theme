@@ -54,7 +54,7 @@ abstract class WoodyTheme_TemplateAbstract
 
     public function timberCompileData($data)
     {
-        $this->setGlobals(); //TODO: To test if we can move this on construct
+        $this->setGlobals();
         $data['globals'] = apply_filters('woody_timber_compile_globals', $this->globals);
         return $data;
     }
@@ -91,6 +91,10 @@ abstract class WoodyTheme_TemplateAbstract
 
         if (empty($this->globals['tags'])) {
             $this->globals['tags'] = $this->getTags($this->context['post_id']);
+        }
+
+        if (empty($this->globals['area'])) {
+            $this->globals['area'] = apply_filters('woody_addon_search_area', '', $this->context['post']);
         }
 
         if (empty($this->globals['current_lang'])) {
@@ -229,7 +233,10 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['title'] = (!empty($the_title)) ? woody_untokenize($the_title) : html_entity_decode(get_the_title()) . ' | ' . $this->context['site']['name'];
         $this->context['title'] = apply_filters('woody_seo_transform_pattern', $this->context['title']);
         $this->context['metas'] = $this->setMetadata();
-        $this->context['custom_meta'] = get_field('woody_custom_meta', 'options');
+
+        $this->context['head_top'] = (!empty($this->context['head_top'])) ? $this->context['head_top'] : [];
+        $this->context['head_top'][] = get_field('woody_custom_meta', 'options');
+        $this->context['head_top'][] = get_field('woody_custom_meta_' . pll_current_language(), 'options');
 
         // Tourist Information Center
         // Contexte seulement sur la page d'accueil
