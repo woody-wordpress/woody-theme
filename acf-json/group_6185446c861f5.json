@@ -107,23 +107,6 @@
             "endpoint": 0
         },
         {
-            "key": "field_618546a3df0f8",
-            "label": "Template",
-            "name": "",
-            "type": "accordion",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "open": 1,
-            "multi_expand": 1,
-            "endpoint": 0
-        },
-        {
             "key": "field_618546c1df0f9",
             "label": "Template",
             "name": "woody_tpl",
@@ -144,7 +127,7 @@
         },
         {
             "key": "button_field_618546c1df0f9",
-            "label": "Choisir une mise en page",
+            "label": "Modifier",
             "name": "",
             "type": "message",
             "instructions": "",

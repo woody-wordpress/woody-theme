@@ -587,23 +587,6 @@
             "endpoint": 0
         },
         {
-            "key": "field_5c1ce41be7e07",
-            "label": "Template",
-            "name": "",
-            "type": "accordion",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "open": 1,
-            "multi_expand": 1,
-            "endpoint": 0
-        },
-        {
             "key": "field_5b6d616a9fe7f",
             "label": "Template",
             "name": "tripinfos_woody_tpl",
@@ -624,7 +607,7 @@
         },
         {
             "key": "button_field_5b6d616a9fe7f",
-            "label": "Choisir une mise en page",
+            "label": "Modifier",
             "name": "",
             "type": "message",
             "instructions": "",
