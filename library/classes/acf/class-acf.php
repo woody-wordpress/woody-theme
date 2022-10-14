@@ -479,7 +479,7 @@ class WoodyTheme_ACF
 
         if (!empty($terms)) {
             foreach ($terms as $term) {
-                $hasIcon = !empty($term->term_icon) ? '<span class="' . $term->term_icon . '"></span>' : '';
+                $hasIcon = !empty($term->term_icon) ? '<span class="wicon ' . $term->term_icon . '"></span>' : '';
                 $hero_terms[$term->term_id] = $hasIcon . '<span class="label">' . $term->name . '</span>';
             }
         }
