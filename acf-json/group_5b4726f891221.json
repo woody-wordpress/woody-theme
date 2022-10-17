@@ -113,6 +113,23 @@
             "endpoint": 0
         },
         {
+            "key": "field_634d14743ae21",
+            "label": "Grille",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
             "key": "field_5b4727c87809a",
             "label": "Grille pour le contenu de l'onglet",
             "name": "tab_woody_tpl",
@@ -122,7 +139,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hidden",
                 "id": ""
             },
             "default_value": "grids_basic-grid_1_cols-tpl_01",

@@ -289,7 +289,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hidden",
                 "id": ""
             },
             "default_value": "blocks-semantic_view-tpl_01",

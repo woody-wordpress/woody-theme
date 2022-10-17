@@ -294,7 +294,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "hide-label",
+                "class": "hidden",
                 "id": ""
             },
             "default_value": "blocks-feature_v2-tpl_101",
