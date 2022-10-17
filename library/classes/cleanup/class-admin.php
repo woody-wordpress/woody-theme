@@ -23,8 +23,6 @@ class WoodyTheme_Cleanup_Admin
             add_action('admin_menu', [$this, 'woodySettingsPage']);
             add_filter('admin_body_class', [$this, 'adminBodyClass']);
 
-            add_action('admin_footer_text', [$this, 'addThemeSettings']);
-
             add_action('wp_before_admin_bar_render', [$this, 'customAdminBarMenu']);
             add_action('wp_dashboard_setup', [$this, 'removeDashboardWidgets']);
             add_filter('tiny_mce_before_init', [$this, 'tiny_mce_remove_unused_formats']);
@@ -319,21 +317,5 @@ class WoodyTheme_Cleanup_Admin
         unset($actions['duplicate_post_clone']);
 
         return $actions;
-    }
-
-    /**
-     * Ajoute la version du thème et l'URL distante d'un sous-thème dans le DOM
-     *
-     * @param string $data
-     *
-     * @return string $data
-     */
-    public function addThemeSettings($data) {
-
-        $theme_version = wp_get_theme(get_template())->get('Version');
-
-        $data .= '<div id="woody-theme-settings-footer" data-version=' . $theme_version . ' data-theme-dist-url=' . WP_DIST_URL . '></div>';
-
-        return $data;
     }
 }
