@@ -14,9 +14,11 @@ class WoodyTheme_Tinymce
         add_filter('mce_buttons_2', array($this, 'tinymceAddButtons'));
         add_filter('mce_external_plugins', array($this, 'woodyAnchorButtonLoadJs'));
         add_filter('mce_external_plugins', array($this, 'woodyIconsButtonLoadJs'));
+        add_filter('mce_external_plugins', array($this, 'addTablePluginTinyMCE'));
         add_filter('tiny_mce_before_init', array($this, 'tinymceRegisterStyleSelect'));
         add_filter('tiny_mce_before_init', array($this, 'modifyValidMarkup'));
         add_filter('mce_buttons', array($this, 'remove_button_from_tinymce'));
+        add_filter('mce_buttons', array($this, 'add_button_from_tinymce'));
         add_action('init', array($this, 'tinymceAddStylesheet'));
 
         add_action('wp_ajax_woody_icons_list', [$this, 'woodyIconsList']);
@@ -108,6 +110,13 @@ class WoodyTheme_Tinymce
         return $plugins;
     }
 
+    public function addTablePluginTinyMCE($plugins)
+    {
+        $plugins['table'] = get_template_directory_uri() . '/src/js/admin/plugins/table.js'; // Version 4.1.0 - http://archive.tinymce.com/download/older.php
+
+        return $plugins;
+    }
+
     public function woodyIconsList()
     {
         $core_icons = woodyIconsFolder(get_template_directory() . '/src/icons/icons_set_01');
@@ -150,6 +159,20 @@ class WoodyTheme_Tinymce
                 unset($buttons[$button_key]);
             }
         }
+
+        return $buttons;
+    }
+
+    public function add_button_from_tinymce($buttons)
+    {
+        $add_buttons = array(
+            'table' // table plugin tinymce
+        );
+
+        foreach ($add_buttons as $button_value) {
+            array_push($buttons, $button_value);
+        }
+
         return $buttons;
     }
 

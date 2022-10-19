@@ -124,12 +124,9 @@ function getWoodyIcons()
     //TODO: Récupérer une variable globale en fonction du set d'icones choisis dans le thème pour remplacer '/src/icons/icons_set_01'
     $core_icons = woodyIconsFolder(get_template_directory() . '/src/icons/icons_set_01');
 
-    $stations = ['superot'];
-    $stations = apply_filters('woody_icons_stations', $stations);
 
     $station_icons = [];
-
-    if ((in_array(WP_SITE_KEY, $stations))) {
+    if ((in_array('ski_resort', WOODY_OPTIONS))) {
         $station_icons = woodyIconsFolder(get_template_directory() . '/src/icons/icons_set_stations');
     }
 

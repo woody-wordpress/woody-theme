@@ -396,10 +396,23 @@ class WoodyTheme_WoodyGetters
                 $data['the_length'] = get_field('field_5b95423386e8f', $post->ID);
             }
             if (empty($is_attachment) && in_array('linked_profil', $wrapper['display_elements'])) {
-                $fields_profil = [
-                    'name' => get_field('profil_name', $post->ID),
-                    'img' => get_field('profil_img', $post->ID)
-                ];
+                $profil_type = get_field('profil_type', $post->ID);
+
+                if($profil_type == 'existing_profile') {
+                    $existing_profile_id = get_field('linked_profile', $post->ID);
+
+                    if(!empty($existing_profile_id)) {
+                        $fields_profil = [
+                            'name' => get_the_title($existing_profile_id),
+                            'img' => get_field('profile_picture', $existing_profile_id),
+                        ];
+                    }
+                } else {
+                    $fields_profil = [
+                        'name' => get_field('profil_name', $post->ID),
+                        'img' => get_field('profil_img', $post->ID),
+                    ];
+                }
 
                 if ($fields_profil['img']) {
                     $data['profil']['img'] = $fields_profil['img'];
