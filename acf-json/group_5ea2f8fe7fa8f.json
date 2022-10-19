@@ -1,21 +1,53 @@
 {
     "key": "group_5ea2f8fe7fa8f",
     "title": "Profil lié",
-    "fields": [{
+    "fields": [
+        {
+            "key": "field_634eccf4d83db",
+            "label": "Type de profil",
+            "name": "profil_type",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label",
+                "id": ""
+            },
+            "choices": {
+                "custom_profile": "Profil personnalisé",
+                "existing_profile": "Profil existant"
+            },
+            "default_value": "custom_profile",
+            "return_format": "value",
+            "allow_null": 0,
+            "other_choice": 0,
+            "layout": "vertical",
+            "save_other_choice": 0
+        },
+        {
             "key": "field_5ea2f9ae7994c",
             "label": "Photo",
             "name": "profil_img",
             "type": "image",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_634eccf4d83db",
+                        "operator": "==",
+                        "value": "custom_profile"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
             "return_format": "array",
-            "preview_size": "thumbnail",
             "library": "all",
             "min_width": "",
             "min_height": "",
@@ -23,7 +55,8 @@
             "max_width": "",
             "max_height": "",
             "max_size": "",
-            "mime_types": ""
+            "mime_types": "",
+            "preview_size": "thumbnail"
         },
         {
             "key": "field_5ea2f9dc7994d",
@@ -32,25 +65,65 @@
             "type": "text",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_634eccf4d83db",
+                        "operator": "==",
+                        "value": "custom_profile"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
             "default_value": "",
+            "maxlength": "",
             "placeholder": "John Doe",
             "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "append": ""
+        },
+        {
+            "key": "field_634ecc101a4e6",
+            "label": "Profil existant lié",
+            "name": "linked_profile",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_634eccf4d83db",
+                        "operator": "==",
+                        "value": "existing_profile"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "hide-label",
+                "id": ""
+            },
+            "post_type": [
+                "profile"
+            ],
+            "taxonomy": "",
+            "return_format": "id",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 1
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "page"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
     ],
     "menu_order": -1,
     "position": "side",
@@ -58,7 +131,8 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "Profil lié à la page, la metabox s'affiche à droite en BO",
-    "modified": 1587975381
+    "show_in_rest": 0,
+    "modified": 1666109047
 }
