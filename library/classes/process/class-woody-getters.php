@@ -401,10 +401,12 @@ class WoodyTheme_WoodyGetters
                 if($profil_type == 'existing_profile') {
                     $existing_profile_id = get_field('linked_profile', $post->ID);
 
-                    $fields_profil = [
-                        'name' => get_the_title($existing_profile_id),
-                        'img' => get_field('profile_picture', $existing_profile_id),
-                    ];
+                    if(!empty($existing_profile_id)) {
+                        $fields_profil = [
+                            'name' => get_the_title($existing_profile_id),
+                            'img' => get_field('profile_picture', $existing_profile_id),
+                        ];
+                    }
                 } else {
                     $fields_profil = [
                         'name' => get_field('profil_name', $post->ID),
