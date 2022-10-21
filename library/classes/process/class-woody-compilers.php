@@ -128,7 +128,7 @@ class WoodyTheme_WoodyCompilers
             if(!empty($the_items['display_button'])) {
 
                 $the_items['button_primary'] = apply_filters('set_primary_button', false);
-                console_log($the_items);
+                //console_log($the_items);
             }
 
             $the_items = apply_filters('woody_format_focuses_data', $the_items, $wrapper);
