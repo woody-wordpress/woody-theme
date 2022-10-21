@@ -125,6 +125,12 @@ class WoodyTheme_WoodyCompilers
                 }
             }
 
+            if(!empty($the_items['display_button'])) {
+
+                $the_items['button_primary'] = apply_filters('set_primary_button', false);
+                console_log($the_items);
+            }
+
             $the_items = apply_filters('woody_format_focuses_data', $the_items, $wrapper);
 
             $return = !empty($wrapper['woody_tpl']) ? \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items) : \Timber::compile($twigPaths['blocks-focus-tpl_103'], $the_items) ;
