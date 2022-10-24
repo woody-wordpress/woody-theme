@@ -127,7 +127,7 @@ class WoodyTheme_WoodyCompilers
 
             if(!empty($the_items['display_button'])) {
 
-                $the_items['button_style'] = apply_filters('set_button_style', '');
+                $the_items['button_classes'] = apply_filters('woody_card_button_classes', '');
 
             }
 
