@@ -22,6 +22,11 @@ class WoodyTheme_Unpublisher
 
         add_action('woody_theme_update', [$this, 'scheduleUnpublishPosts']);
         add_action('woody_unpublish_posts', [$this, 'woodyUnpublishPosts']);
+
+        add_action('woody_theme_update', [$this, 'scheduleMissedPosts']);
+        add_action('woody_missed_posts', [$this, 'woodyMissedPosts']);
+
+        \WP_CLI::add_command('woody:missed_posts', [$this, 'woodyMissedPosts']);
     }
 
     public function registerMetaBox()
@@ -34,7 +39,7 @@ class WoodyTheme_Unpublisher
         $excluded = apply_filters('woody/unpublisher/excluded_post_types', $excluded);
 
         foreach ($post_types as $post_type) {
-            if(in_array($post_type, $excluded)) {
+            if (in_array($post_type, $excluded)) {
                 unset($post_types[$post_type]);
             }
         }
@@ -95,14 +100,15 @@ class WoodyTheme_Unpublisher
 
         // On récupère les posts publiés qui ont une date de dépublication inférieure à la date courante
         $results = $wpdb->get_results(
-        "SELECT {$wpdb->prefix}posts.ID
+            "SELECT {$wpdb->prefix}posts.ID
         FROM {$wpdb->prefix}posts, {$wpdb->prefix}postmeta
         WHERE {$wpdb->prefix}posts.ID = {$wpdb->prefix}postmeta.post_ID
         AND {$wpdb->prefix}posts.post_status = 'publish'
         AND {$wpdb->prefix}postmeta.meta_key = '_wUnpublisher_date'
         AND {$wpdb->prefix}postmeta.meta_value != ''
         AND {$wpdb->prefix}postmeta.meta_value < '{$current_date}'
-        ");
+        "
+        );
 
         if (!empty($results)) {
             foreach ($results as $result) {
@@ -113,6 +119,49 @@ class WoodyTheme_Unpublisher
                 update_post_meta($result->ID, '_wUnpublisher_date', '');
                 clean_post_cache($result->ID);
             }
+        }
+    }
+
+    public function scheduleMissedPosts()
+    {
+        if (!wp_next_scheduled('woody_missed_posts')) {
+            wp_schedule_event(time(), 'hourly', 'woody_missed_posts');
+            output_success(sprintf('- Schedule %s', 'woody_missed_posts'));
+        }
+    }
+
+    public function woodyMissedPosts()
+    {
+        global $wpdb;
+
+        $m = new \Moment\Moment();
+        $m->setTimezone(WOODY_TIMEZONE);
+        $now = $m->format('Y-m-d H:i:00');
+
+        $args=array(
+            'public'                => true,
+            'exclude_from_search'   => false,
+            '_builtin'              => false
+        );
+        $post_types = get_post_types($args, 'names', 'and');
+        $post_types_str=implode('\',\'', $post_types);
+
+        if ($post_types_str) {
+            $sql="SELECT ID from $wpdb->posts WHERE post_type in ('post','page','$post_types_str') AND post_status='future' AND post_date_gmt<'$now'";
+        } else {
+            $sql="SELECT ID from $wpdb->posts WHERE post_type in ('post','page') AND post_status='future' AND post_date_gmt<'$now'";
+        }
+
+        $results = $wpdb->get_results($sql);
+        $to_publish = [];
+        if ($results) {
+            foreach ($results as $result) {
+                output_log('Publishing post ' . $result->ID);
+                $to_publish[] = $result->ID;
+                wp_update_post(['ID' => $result->ID, 'post_status' => 'publish']);
+            }
+
+            output_success(sprintf('Future posts published : %s', implode(',', $to_publish)));
         }
     }
 }
