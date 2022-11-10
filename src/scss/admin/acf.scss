@@ -2,11 +2,6 @@
     border: none !important;
 }
 
-.acf-input .acf-icon {
-    width: 26px !important;
-    height: 26px !important;
-}
-
 // Type de publication
 .acf-field-5e281d6e084c5,
 .acf-field-5a61fa38b704f {
@@ -986,11 +981,13 @@
                         content: '\f169';
                     }
                 }
+
                 &[data-layout='event_block'] {
                     &:before {
                         content: '\f508';
                     }
                 }
+
                 &[data-layout='search_block'] {
                     &:before {
                         content: '\f179';
