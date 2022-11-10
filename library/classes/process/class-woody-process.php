@@ -111,7 +111,7 @@ class WoodyTheme_WoodyProcess
                         foreach ($layout['gallery_items'] as $key => $attachment) {
                             $layout['gallery_items'][$key]['attachment_more_data'] = $this->tools->getAttachmentMoreData($layout['gallery_items'][$key]['ID']);
                         }
-                    break;
+                        break;
                     case 'manual':
                     default:
                         if (!empty($layout['gallery_items'])) {
@@ -126,7 +126,7 @@ class WoodyTheme_WoodyProcess
                                 }
                             }
                         }
-                    break;
+                        break;
                 }
                 $layout['display'] = $this->tools->getDisplayOptions($layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
@@ -191,46 +191,47 @@ class WoodyTheme_WoodyProcess
                 }
                 $layout['summary'] = $this->compilers->formatSummaryItems(get_the_ID());
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
-            break;
+                break;
             case 'free_text':
                 $layout['block_titles'] = $this->tools->getBlockTitles($layout, '', 'generic_');
                 $layout['text'] = $this->tools->replacePattern($layout['text'], get_the_ID());
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
-            break;
+                break;
             case 'call_to_action':
                 $opts = [
                     'hide_description' => true,
                 ];
                 $layout['block_titles'] = $this->tools->getBlockTitles($layout, '', 'generic_', $opts);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
-            break;
+                break;
             case 'quote':
                 $layout['display'] = $this->tools->getDisplayOptions($layout['quote_bg_params']);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
-            break;
+                break;
             case 'feature':
                 $layout['display'] = $this->tools->getDisplayOptions($layout);
                 if (!empty($layout['icon_img']) && !empty($layout['icon_img']['sizes']) && !empty($layout['icon_img']['sizes']['ratio_free_small'])) {
                     $layout['icon_img']['sizes']['ratio_free'] = $layout['icon_img']['sizes']['ratio_free_small'];
                 }
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
-            break;
+                break;
             case 'feature_v2':
                 $layout['display'] = $this->tools->getDisplayOptions($layout['feature_block_bg_params']);
                 $layout['items'] = $this->compilers->formatFeatureItems($layout);
+                $layout['no_padding'] = $layout['feature_no_padding'];
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
-            break;
+                break;
             case 'spacer_block':
                 $return = '<!-- WOODY-COMPONENT-SPACER -->';
-            break;
+                break;
             case 'story':
                 $layout['display'] = $this->tools->getDisplayOptions($layout['story_bg_params']);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
-            break;
+                break;
             case 'testimonials':
                 $layout = $this->compilers->formatTestimonials($layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
-            break;
+                break;
             case 'link_social_shares':
                 if ($layout['default_parameters'] == false && !empty($layout['active_shares'])) {
                     $layout['active_shares'] = getActiveShares($layout['active_shares']);
@@ -240,12 +241,12 @@ class WoodyTheme_WoodyProcess
                 $layout['block_titles'] = $this->tools->getBlockTitles($layout, '', 'shares_');
                 $layout['display'] = $this->tools->getDisplayOptions($layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
-            break;
+                break;
             case 'movie':
                 $layout['movie_thumbnail'] = embedProviderThumbnail($layout['movie']);
                 $layout['movie_uploadDate'] = $context['post']->post_modified;
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
-            break;
+                break;
             default:
 
                 // On autorise le traitement des layouts depuis un code externe
@@ -300,7 +301,7 @@ class WoodyTheme_WoodyProcess
                                     $grid_content['items'][] = $this->processWoodyLayouts($layout, $context);
                                 }
                                 break;
-                            // if $device_display_block is empty, we display the block for each device (mobile & desktop), so no test is required
+                                // if $device_display_block is empty, we display the block for each device (mobile & desktop), so no test is required
                             default:
                                 $grid_content['items'][] = $this->processWoodyLayouts($layout, $context);
                                 break;
@@ -404,13 +405,11 @@ class WoodyTheme_WoodyProcess
                 }
             }
         } elseif (!empty($query_form['filtered_taxonomy_terms'])) { // Si des filtres de taxonomie ont été utilisés en front
-
             // On applique le comportement entre TOUS les filtres
             $tax_query['custom_tax']['relation'] = 'AND';
 
             // Pour chaque séléction de filtre envoyée, on créé une custom_tax
             foreach ($query_form['filtered_taxonomy_terms'] as $filter_key => $term_filter) {
-
                 // On récupère l'index du filtre dans la clé du param GET
                 $exploded_key = explode('_', $filter_key);
                 $index = $exploded_key[2];
@@ -637,7 +636,7 @@ class WoodyTheme_WoodyProcess
                                     $components['items'][] = $this->processWoodyLayouts($layout, $context);
                                 }
                                 break;
-                            // if $device_display_block is empty, we display the block for each device (mobile & desktop), so no test is required
+                                // if $device_display_block is empty, we display the block for each device (mobile & desktop), so no test is required
                             default:
                                 $components['items'][] = $this->processWoodyLayouts($layout, $context);
                                 break;
