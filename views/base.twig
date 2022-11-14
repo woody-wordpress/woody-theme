@@ -29,9 +29,9 @@
     {% endblock %}
     {# Schema Graph #}
 
-    {% if is_pwa %}
+    {% if pwa.manifest_url %}
     {# PWA #}
-        <link rel="manifest" href="{{ home_url }}pwa-manifest.json" />
+        <link rel="manifest" href="{{ pwa.manifest_url }}" />
         <script src="{{ home_url }}app/themes/woody-theme/pwa/sw-register.js"></script>
     {# end PWA #}
     {% endif %}
