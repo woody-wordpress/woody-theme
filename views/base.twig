@@ -29,6 +29,12 @@
     {% endblock %}
     {# Schema Graph #}
 
+    {% if is_pwa %}
+    {# PWA #}
+        <link rel="manifest" href="{{ home_url }}/pwa-manifest.json" />
+    {# end PWA #}
+    {% endif %}
+
     {# WP Header #}
     {{ wp_head }}
     {# /WP Header #}
