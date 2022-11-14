@@ -67,6 +67,7 @@ new WoodyTheme_Page();
 new WoodyTheme_Permalink();
 new WoodyTheme_Post_Type();
 new WoodyTheme_Profiles();
+new WoodyTheme_PWA();
 new WoodyTheme_Robots();
 new WoodyTheme_Seo();
 new WoodyTheme_Taxonomy();
