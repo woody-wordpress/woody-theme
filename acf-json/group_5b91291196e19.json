@@ -418,6 +418,37 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_637736b9aa594": {
+                    "key": "layout_637736b9aa594",
+                    "name": "spacer_block",
+                    "label": "Espacement",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_6377372c4e8bb",
+                            "label": "Espacement",
+                            "name": "spacer_block",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_61f24dc3c8810"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Ajouter un bloc",
