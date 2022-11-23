@@ -654,7 +654,7 @@ abstract class WoodyTheme_TemplateAbstract
             }
 
             // On ajoute un balise noindex/nofollow sur toutes les pages des langues non activées
-            if (!empty($woody_lang_enable) && !in_array(pll_current_language(), $woody_lang_enable)) {
+            if (empty($woody_lang_enable) || !in_array(pll_current_language(), $woody_lang_enable)) {
                 $robots_noindex = strpos($return['robots']['#attributes']['content'], 'noindex');
                 if (!$robots_noindex) {
                     $return['robots']['#attributes']['content'] = $return['robots']['#attributes']['content'] . ', noindex';
