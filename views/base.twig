@@ -29,12 +29,11 @@
     {% endblock %}
     {# Schema Graph #}
 
-    {% if pwa.manifest_url %}
-    {# PWA #}
+    {# TODO: Uncomment Register service worker and enqueue manifest url #}
+    {# {% if pwa.manifest_url %}
         <link rel="manifest" href="{{ pwa.manifest_url }}" />
         <script src="{{ home_url }}app/themes/woody-theme/pwa/sw-register.js"></script>
-    {# end PWA #}
-    {% endif %}
+    {% endif %} #}
 
     {# WP Header #}
     {{ wp_head }}
