@@ -237,6 +237,7 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['head_top'] = (!empty($this->context['head_top'])) ? $this->context['head_top'] : [];
         $this->context['head_top'][] = get_field('woody_custom_meta', 'options');
         $this->context['head_top'][] = get_field('woody_custom_meta_' . pll_current_language(), 'options');
+        $this->context['head_top'] = apply_filters('woody_custom_meta', $this->context['head_top']);
 
         // Tourist Information Center
         // Contexte seulement sur la page d'accueil
