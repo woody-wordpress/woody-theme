@@ -6,7 +6,7 @@ if ('serviceWorker' in navigator) {
         console.log('Registration failed with ' + error);
     });
 }
-
+let deferredPrompt = null;
 const isPWA = ['fullscreen', 'standalone', 'minimal-ui'].some((displayMode) => window.matchMedia('(display-mode: ' + displayMode + ')').matches);
 if (!isPWA) {
     // check if user has already refused to install PWA
@@ -26,9 +26,14 @@ if (!isPWA) {
 
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
+            deferredPrompt = e;
             // Afficher la modal ici
         });
     }
+}
+
+function installPWA() {
+    deferredPrompt.prompt();
 }
 
 function closeBanner() {
