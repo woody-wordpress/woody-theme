@@ -30,3 +30,13 @@ if (!isPWA) {
         });
     }
 }
+
+function closeBanner() {
+    // mask modal 
+
+    // set cookie if refused do not ask again.
+    const date = new Date();
+    date.setTime(date.getTime() + 365 * 24 * 60 * 60 * 1000);
+    let expires = 'expires' + date.toUTCString();
+    document.cookie = 'pwarefused' + '=1;' + expires + ';path=/';
+}
