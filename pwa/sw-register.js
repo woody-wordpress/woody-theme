@@ -26,8 +26,6 @@ if (!isPWA) {
 
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
-            deferredPrompt = e;
-
             // Afficher la modal ici
         });
     }
