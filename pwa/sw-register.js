@@ -46,10 +46,14 @@ if (!isPWA) {
 }
 
 function installPWA() {
+    console.log('Install app');
+
     deferredPrompt.prompt();
 }
 
 function closeBanner() {
+    console.log('Close banner');
+
     // mask modal
     pwaInstallBanner.remove();
 
