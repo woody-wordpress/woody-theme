@@ -21,17 +21,25 @@ if (!isPWA) {
     if (!refused) {
         window.addEventListener('appinstalled', () => {
             console.log('app has been installed on desktop !');
-            document.getElementById('pwaInstall').remove();
+            document.getElementById('pwaInstallBanner').remove();
         });
 
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
             if(window.innerWidth < 1024){
-                document.getElementById('pwaInstall').classList.remove('hide');
+                document.getElementById('pwaInstallBanner').classList.remove('hide');
             }
         });
     }
+
+    document.getElementById('closePwaInstallBanner').addEventListener('click', function(){
+        closeBanner();
+    });
+
+    document.getElementById('triggerPwaInstallBanner').addEventListener('click', function(){
+        installPWA();
+    });
 }
 
 function installPWA() {
@@ -40,10 +48,11 @@ function installPWA() {
 
 function closeBanner() {
     // mask modal
+    document.getElementById('pwaInstallBanner').remove();
 
     // set cookie if refused do not ask again.
     const date = new Date();
-    date.setTime(date.getTime() + 365 * 24 * 60 * 60 * 1000);
+    date.setTime(date.getTime() + 365 * 24 * 60 * 60);
     let expires = 'expires' + date.toUTCString();
     document.cookie = 'pwarefused' + '=1;' + expires + ';path=/';
 }
