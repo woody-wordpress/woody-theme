@@ -21,13 +21,15 @@ if (!isPWA) {
     if (!refused) {
         window.addEventListener('appinstalled', () => {
             console.log('app has been installed on desktop !');
-            // dans ce cas ne pas afficher la modal
+            document.getElementById('pwaInstall').remove();
         });
 
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            // Afficher la modal ici
+            if(window.innerWidth < 1024){
+                document.getElementById('pwaInstall').classList.remove('hide');
+            }
         });
     }
 }
@@ -37,7 +39,7 @@ function installPWA() {
 }
 
 function closeBanner() {
-    // mask modal 
+    // mask modal
 
     // set cookie if refused do not ask again.
     const date = new Date();

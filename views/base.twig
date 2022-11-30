@@ -30,10 +30,10 @@
     {# Schema Graph #}
 
     {# TODO: Uncomment Register service worker and enqueue manifest url #}
-    {# {% if pwa.manifest_url %}
+    {% if pwa.manifest_url %}
         <link rel="manifest" href="{{ pwa.manifest_url }}" />
         <script src="{{ home_url }}app/themes/woody-theme/pwa/sw-register.js"></script>
-    {% endif %} #}
+    {% endif %}
 
     {# WP Header #}
     {{ wp_head }}
@@ -73,6 +73,17 @@
         {% for body_top_inner in body_top %}{{ body_top_inner }}{% endfor %}
     {% endif %}
     {# /Body Top #}
+
+    {% if pwa.manifest_url %}
+        <div class="hide flex-container align-middle bg-lightgray" id="pwaInstall">
+        {{ _context|console_log('global context')}}
+            <img src="{{ icons.64 }}" width="64" height="64" />
+            <div class="install-wrapper">
+                <p>{{ __("Ajouter à votre écran d'accueil ?") }}</p>
+                <span class="install">{{ __('Ajouter') }}</span>
+            </div>
+        </div>
+    {% endif %}
 
     <div class="main-wrapper flex-container flex-dir-column large-flex-dir-column-reverse">
         <div class="site-content">
