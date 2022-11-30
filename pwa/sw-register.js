@@ -41,8 +41,8 @@ if (!isPWA) {
         });
     }
 
-    document.getElementById('closePwaInstallBanner').addEventListener('click', closeBanner());
-    document.getElementById('triggerPwaInstallBanner').addEventListener('click', installPWA());
+    document.getElementById('closePwaInstall').addEventListener('click', closeBanner());
+    document.getElementById('triggerPwaInstall').addEventListener('click', installPWA());
 }
 
 function installPWA() {
