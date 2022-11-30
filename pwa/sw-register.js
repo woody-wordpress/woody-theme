@@ -7,7 +7,7 @@ if ('serviceWorker' in navigator) {
     });
 }
 let deferredPrompt = null;
-const isPWA = ['fullscreen', 'standalone', 'minimal-ui'].some((displayMode) => window.matchMedia('(display-mode: ' + displayMode + ')').matches);
+const isPWA = ['standalone'].some((displayMode) => window.matchMedia('(display-mode: ' + displayMode + ')').matches);
 console.log({'isPwa' : isPWA});
 if (!isPWA) {
     // check if user has already refused to install PWA
