@@ -32,7 +32,7 @@ if (!isPWA) {
             deferredPrompt = e;
             if(window.innerWidth < 1024){
                 console.log('We are on mobile, show that banner');
-                document.getElementById('pwaInstallBanner').classList.remove('hide');
+                document.getElementById('pwaInstallBanner').classList.remove('invisible');
                 document.getElementById('closePwaInstall').addEventListener('click', closeBanner);
                 document.getElementById('triggerPwaInstall').addEventListener('click', installPWA);
             }
