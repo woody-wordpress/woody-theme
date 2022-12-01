@@ -35,12 +35,12 @@ if (!isPWA) {
             if(window.innerWidth < 1024){
                 console.log('We are on mobile, show that banner');
                 document.getElementById('pwaInstallBanner').classList.remove('hide');
+                document.getElementById('closePwaInstall').addEventListener('click', closeBanner());
+                document.getElementById('triggerPwaInstall').addEventListener('click', installPWA());
             }
         });
     }
 
-    document.getElementById('closePwaInstall').addEventListener('click', closeBanner());
-    document.getElementById('triggerPwaInstall').addEventListener('click', installPWA());
 }
 
 function installPWA() {

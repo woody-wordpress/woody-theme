@@ -77,10 +77,10 @@
     {% if pwa.manifest_url %}
         <div class="hide flex-container align-middle bg-lightgray" id="pwaInstallBanner">
             <img src="{{ icons.64 }}" width="64" height="64" />
-            <span id="closePwaInstall">
+            <div id="closePwaInstall">
                 <span></span>
                 <span></span>
-            </span>
+            </div>
             <div class="install-wrapper">
                 <p>{{ __("Ajouter l'app à votre écran d'accueil ?") }}</p>
                 <span class="install" id="triggerPwaInstall">{{ __('Ajouter') }}</span>
