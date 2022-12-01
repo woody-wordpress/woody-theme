@@ -11,8 +11,6 @@ const isPWA = ['standalone'].some((displayMode) => window.matchMedia('(display-m
 console.log({'isPwa' : isPWA});
 if (!isPWA) {
     // check if user has already refused to install PWA
-    let pwaInstallBanner = document.getElementById('pwaInstallBanner');
-
     let refused = false;
     const cookieName = 'pwarefused';
     document.cookie.split(';').forEach((cookie) => {
@@ -28,7 +26,7 @@ if (!isPWA) {
 
         window.addEventListener('appinstalled', () => {
             console.log('app has been installed on desktop !');
-            pwaInstallBanner.remove();
+            document.getElementById('pwaInstallBanner').remove();
         });
 
         window.addEventListener('beforeinstallprompt', (e) => {
@@ -36,7 +34,7 @@ if (!isPWA) {
             deferredPrompt = e;
             if(window.innerWidth < 1024){
                 console.log('We are on mobile, show that banner');
-                pwaInstallBanner.classList.remove('hide');
+                document.getElementById('pwaInstallBanner').classList.remove('hide');
             }
         });
     }
@@ -55,7 +53,7 @@ function closeBanner() {
     console.log('Close banner');
 
     // mask modal
-    pwaInstallBanner.remove();
+    document.getElementById('pwaInstallBanner').remove();
 
     // set cookie if refused do not ask again.
     const date = new Date();
