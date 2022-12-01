@@ -9,39 +9,38 @@ if ('serviceWorker' in navigator) {
 let deferredPrompt = null;
 const isPWA = ['standalone'].some((displayMode) => window.matchMedia('(display-mode: ' + displayMode + ')').matches);
 console.log({'isPwa' : isPWA});
-if (!isPWA) {
-    // check if user has already refused to install PWA
-    let refused = false;
-    const cookieName = 'pwarefused';
-    document.cookie.split(';').forEach((cookie) => {
-    if (cookie.includes(cookieName)) {
-        refused = true;
-    }
-    });
+// if (!isPWA) {
+//     // check if user has already refused to install PWA
+//     let refused = false;
+//     const cookieName = 'pwarefused';
+//     document.cookie.split(';').forEach((cookie) => {
+//     if (cookie.includes(cookieName)) {
+//         refused = true;
+//     }
+//     });
 
 
 
-    if (!refused) {
-        console.log('not refused by cookie');
+//     if (!refused) {
+//         console.log('not refused by cookie');
 
-        window.addEventListener('appinstalled', () => {
-            console.log('app has been installed on desktop !');
-            document.getElementById('pwaInstallBanner').remove();
-        });
+//         window.addEventListener('appinstalled', () => {
+//             console.log('app has been installed on desktop !');
+//             document.getElementById('pwaInstallBanner').remove();
+//         });
 
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            if(window.innerWidth < 1024){
-                console.log('We are on mobile, show that banner');
-                document.getElementById('pwaInstallBanner').classList.remove('hide');
-                document.getElementById('closePwaInstall').addEventListener('click', closeBanner());
-                document.getElementById('triggerPwaInstall').addEventListener('click', installPWA());
-            }
-        });
-    }
-
-}
+//         window.addEventListener('beforeinstallprompt', (e) => {
+//             e.preventDefault();
+//             deferredPrompt = e;
+//             if(window.innerWidth < 1024){
+//                 console.log('We are on mobile, show that banner');
+//                 document.getElementById('pwaInstallBanner').classList.remove('hide');
+//                 document.getElementById('closePwaInstall').addEventListener('click', closeBanner());
+//                 document.getElementById('triggerPwaInstall').addEventListener('click', installPWA());
+//             }
+//         });
+//     }
+// }
 
 function installPWA() {
     console.log('Install app');
