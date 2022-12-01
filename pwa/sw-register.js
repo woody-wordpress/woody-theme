@@ -19,8 +19,6 @@ if (!isPWA) {
     }
     });
 
-
-
     if (!refused) {
         console.log('not refused by cookie');
 
