@@ -76,6 +76,7 @@ new WoodyTheme_Unpublisher(); //Disable
 new WoodyTheme_Shuffle();
 new WoodyTheme_Videos();
 new WoodyTheme_Testimonials();
+new WoodyTheme_Users_Restrictions();
 
 // Timber
 new WoodyTheme_Timber_Filters();

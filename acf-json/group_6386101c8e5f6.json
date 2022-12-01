@@ -1,0 +1,159 @@
+[
+    {
+        "key": "group_6386101c8e5f6",
+        "title": "Personnaliser les restrictions d'accès",
+        "fields": [
+            {
+                "key": "field_63861a0f708bc",
+                "label": "Choisir à qui implémenter la règle",
+                "name": "users_restrictions",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "block",
+                "pagination": 1,
+                "rows_per_page": 10,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Ajouter un élément",
+                "sub_fields": [
+                    {
+                        "key": "field_63861a0f708bd",
+                        "label": "Utilisateurs",
+                        "name": "users",
+                        "aria-label": "",
+                        "type": "user",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "role": "",
+                        "return_format": "id",
+                        "multiple": 1,
+                        "allow_null": 0,
+                        "parent_repeater": "field_63861a0f708bc"
+                    },
+                    {
+                        "key": "field_63861a0f708be",
+                        "label": "Type de restriction :",
+                        "name": "restriction_type_choice",
+                        "aria-label": "",
+                        "type": "radio",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "choices": {
+                            "hierarchy": "Arborescence",
+                            "page_type": "Type de publication"
+                        },
+                        "default_value": "",
+                        "return_format": "value",
+                        "allow_null": 0,
+                        "other_choice": 0,
+                        "layout": "vertical",
+                        "save_other_choice": 0,
+                        "parent_repeater": "field_63861a0f708bc"
+                    },
+                    {
+                        "key": "field_63861a0f708bf",
+                        "label": "Type de publication autorisé",
+                        "name": "authorize_publication",
+                        "aria-label": "",
+                        "type": "taxonomy",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": [
+                            [
+                                {
+                                    "field": "field_63861a0f708be",
+                                    "operator": "==",
+                                    "value": "page_type"
+                                }
+                            ]
+                        ],
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "taxonomy": "page_type",
+                        "add_term": 0,
+                        "save_terms": 1,
+                        "load_terms": 0,
+                        "return_format": "id",
+                        "field_type": "select",
+                        "allow_null": 0,
+                        "multiple": 0,
+                        "parent_repeater": "field_63861a0f708bc"
+                    },
+                    {
+                        "key": "field_63861a0f708c0",
+                        "label": "Page autorisé",
+                        "name": "authorize_page",
+                        "aria-label": "",
+                        "type": "page_link",
+                        "instructions": "la page choisie et tous ses enfants seront accessibles pour les utilisateurs sélectionnés.",
+                        "required": 1,
+                        "conditional_logic": [
+                            [
+                                {
+                                    "field": "field_63861a0f708be",
+                                    "operator": "==",
+                                    "value": "hierarchy"
+                                }
+                            ]
+                        ],
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "post_type": [
+                            "page"
+                        ],
+                        "taxonomy": "",
+                        "allow_archives": 0,
+                        "multiple": 0,
+                        "allow_null": 0,
+                        "parent_repeater": "field_63861a0f708bc"
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "options_page",
+                    "operator": "==",
+                    "value": "woodyusers_restrictions_settings"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "",
+        "show_in_rest": 0
+    }
+]
