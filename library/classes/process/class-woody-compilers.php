@@ -731,9 +731,16 @@ class WoodyTheme_WoodyCompilers
             }
         }
 
+        if(get_post_type($current_post_id) == 'touristic_sheet') {
+            $sheet_item = woody_hawwwai_item($current_post_id);
+            $current_post_title = empty($sheet_item['title']) ? get_the_title($current_post_id) : $sheet_item['title'];
+        } else {
+            $current_post_title = get_the_title($current_post_id);
+        }
+
         // On ajoute la page courante
         $data['items'][] = [
-            'title' => get_the_title($current_post_id),
+            'title' => $current_post_title,
             'url' => woody_get_permalink($current_post_id)
         ];
 
