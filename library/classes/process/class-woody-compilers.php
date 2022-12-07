@@ -686,8 +686,6 @@ class WoodyTheme_WoodyCompilers
             $page_hero['subtitle'] = (!empty($page_hero['subtitle'])) ? $this->tools->replacePattern($page_hero['subtitle'], $context['post_id']) : '';
             $page_hero['description'] = (!empty($page_hero['description'])) ? $this->tools->replacePattern($page_hero['description'], $context['post_id']) : '';
 
-            $page_hero['title'] = (!empty($page_hero['title'])) ? str_replace('-', '&#8209', $page_hero['title']) : '';
-
             $page_hero['the_classes'] = [];
             $page_hero['the_classes'][] = (!empty($page_hero['title'])) ? 'has-title' : '';
             $page_hero['the_classes'][] = (!empty($page_hero['pretitle'])) ? 'has-pretitle' : '';
