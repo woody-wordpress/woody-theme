@@ -1602,18 +1602,6 @@
                 "operator": "==",
                 "value": "leaflet_type:rdbk_free_content"
             }
-        ],
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "woody_rdbk_leaflets"
-            },
-            {
-                "param": "post_taxonomy",
-                "operator": "==",
-                "value": "leaflet_type:rdbk_traveller_page"
-            }
         ]
     ],
     "menu_order": 15,
