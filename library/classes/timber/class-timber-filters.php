@@ -64,6 +64,7 @@ class WoodyTheme_Timber_Filters
         $twig->addFilter(new Twig_SimpleFilter('zeroise', [$this, 'zeroise']));
         $twig->addFilter(new Twig_SimpleFilter('spacing', [$this, 'spacing']));
         $twig->addFilter(new Twig_SimpleFilter('url_domain', [$this, 'url_domain']));
+        $twig->addFilter(new Twig_SimpleFilter('html_class', [$this, 'html_class']));
 
         // Debug Woody
         $twig->addFilter(new Twig_SimpleFilter('dump', [$this, 'dump']));
@@ -95,19 +96,25 @@ class WoodyTheme_Timber_Filters
     {
         return zeroise($value, $threshold);
     }
+
     public function spacing($text)
     {
         return preg_replace('/\s+/', ' ', $text);
+    }
+
+    public function html_class($val)
+    {
+        return (!empty($val)) ? ' ' . $val : '';
     }
 
     public function url_domain($url)
     {
         $return = $url;
 
-        if(!empty($url)) {
+        if (!empty($url)) {
             $url = parse_url($url);
 
-            if(!empty($url['host'])) {
+            if (!empty($url['host'])) {
                 $return = $url['host'];
             }
         }
