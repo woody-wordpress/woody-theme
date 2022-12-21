@@ -20,6 +20,7 @@ class WoodyTheme_Users_Restrictions
     {
         add_action('admin_menu', [$this, 'generateMenu'], 10);
         add_action('init', [$this, 'checkRules'], 10);
+        add_filter('acf/load_field/name=users', [$this, 'filterAdmin']);
     }
 
     public function generateMenu()
@@ -93,5 +94,13 @@ class WoodyTheme_Users_Restrictions
     {
         $content_type = get_field('content_type', $post_id);
         return !empty($content_type) ? $content_type->term_id == $granted_page_type_id : new \WP_Error();
+    }
+
+    public function filterAdmin($args){
+        global $wp_roles;
+        $roles = $wp_roles->role_names;
+        unset($roles['administrator']);
+        $args['role'] = array_keys($roles);
+        return $args;
     }
 }
