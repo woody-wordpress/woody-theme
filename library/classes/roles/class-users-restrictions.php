@@ -96,11 +96,11 @@ class WoodyTheme_Users_Restrictions
         return !empty($content_type) ? $content_type->term_id == $granted_page_type_id : new \WP_Error();
     }
 
-    public function filterAdmin($args){
+    public function filterAdmin($field){
         global $wp_roles;
         $roles = $wp_roles->role_names;
         unset($roles['administrator']);
-        $args['role'] = array_keys($roles);
-        return $args;
+        $field['role'] = array_keys($roles);
+        return $field;
     }
 }
