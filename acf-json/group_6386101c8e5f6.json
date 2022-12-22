@@ -57,7 +57,13 @@
                         "class": "",
                         "id": ""
                     },
-                    "role": "",
+                    "role": [
+                        "contributor",
+                        "author",
+                        "translator",
+                        "subscriber",
+                        "editor"
+                    ],
                     "return_format": "id",
                     "multiple": 1,
                     "allow_null": 0,
