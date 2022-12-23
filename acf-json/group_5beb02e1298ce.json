@@ -331,7 +331,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -343,6 +343,31 @@
             "allow_null": 0,
             "other_choice": 0,
             "default_value": "Bas droite",
+            "layout": "horizontal",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_63a56830db6a5",
+            "label": "Vitesse de défilement",
+            "name": "speed_claim",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "4000": "Rapide (4 secondes)",
+                "8000": "Normale (8 secondes)",
+                "12000": "Lente (12 secondes)"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": 8000,
             "layout": "horizontal",
             "return_format": "value",
             "save_other_choice": 0
