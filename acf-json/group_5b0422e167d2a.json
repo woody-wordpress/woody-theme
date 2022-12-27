@@ -1,7 +1,8 @@
 {
     "key": "group_5b0422e167d2a",
     "title": "Bouton \/ Lien",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5bd80bae735cb",
             "label": "Type d'action",
             "name": "button_type",
@@ -37,11 +38,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5bd80bae735cb",
-                    "operator": "==",
-                    "value": "link"
-                }]
+                [
+                    {
+                        "field": "field_5bd80bae735cb",
+                        "operator": "==",
+                        "value": "link"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -58,11 +61,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5bd80bae735cb",
-                    "operator": "==",
-                    "value": "file"
-                }]
+                [
+                    {
+                        "field": "field_5bd80bae735cb",
+                        "operator": "==",
+                        "value": "file"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -83,11 +88,13 @@
             "instructions": "Collez ici le code de votre widget",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5bd80bae735cb",
-                    "operator": "==",
-                    "value": "code"
-                }]
+                [
+                    {
+                        "field": "field_5bd80bae735cb",
+                        "operator": "==",
+                        "value": "code"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -124,17 +131,19 @@
         },
         {
             "key": "field_5bd80d03735d0",
-            "label": "Texte",
+            "label": "Intitulé du bouton",
             "name": "button_text",
             "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5bd80bae735cb",
-                    "operator": "!=",
-                    "value": "link"
-                }]
+                [
+                    {
+                        "field": "field_5bd80bae735cb",
+                        "operator": "!=",
+                        "value": "link"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "49",
@@ -205,11 +214,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5bd80bae735cb",
-                    "operator": "==",
-                    "value": "link"
-                }]
+                [
+                    {
+                        "field": "field_5bd80bae735cb",
+                        "operator": "==",
+                        "value": "link"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "50",
@@ -249,11 +260,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5c7939486526d",
-                    "operator": "==",
-                    "value": "1"
-                }]
+                [
+                    {
+                        "field": "field_5c7939486526d",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "70",
@@ -279,11 +292,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                [{
-                    "field": "field_5c7939486526d",
-                    "operator": "==",
-                    "value": "1"
-                }]
+                [
+                    {
+                        "field": "field_5c7939486526d",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
             ],
             "wrapper": {
                 "width": "30",
@@ -302,11 +317,13 @@
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",

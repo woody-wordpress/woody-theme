@@ -1,0 +1,183 @@
+{
+    "key": "group_6386101c8e5f6",
+    "title": "Personnaliser les restrictions d'accès",
+    "fields": [
+        {
+            "key": "field_63861a0f708bc",
+            "label": "Restrictions",
+            "name": "users_restrictions",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "pagination": 0,
+            "rows_per_page": 10,
+            "min": 0,
+            "max": 0,
+            "collapsed": "field_639058ada9224",
+            "button_label": "Ajouter une restriction",
+            "sub_fields": [
+                {
+                    "key": "field_639058ada9224",
+                    "label": "Nom de la règle",
+                    "name": "restriction_name",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "hide-label",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "Titre visible lorsque la règle est refermée (uniquement pour le backoffice)",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_63861a0f708bd",
+                    "label": "Utilisateurs concernés",
+                    "name": "users",
+                    "aria-label": "",
+                    "type": "user",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "role": [
+                        "contributor",
+                        "author",
+                        "translator",
+                        "subscriber",
+                        "editor"
+                    ],
+                    "return_format": "id",
+                    "multiple": 1,
+                    "allow_null": 0,
+                    "parent_repeater": "field_63861a0f708bc"
+                },
+                {
+                    "key": "field_63861a0f708be",
+                    "label": "Type de restriction :",
+                    "name": "restriction_type_choice",
+                    "aria-label": "",
+                    "type": "radio",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "hierarchy": "Arborescence",
+                        "page_type": "Type de publication"
+                    },
+                    "default_value": "",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "layout": "horizontal",
+                    "save_other_choice": 0,
+                    "parent_repeater": "field_63861a0f708bc"
+                },
+                {
+                    "key": "field_63861a0f708bf",
+                    "label": "Type de publication",
+                    "name": "granted_page_type_id",
+                    "aria-label": "",
+                    "type": "taxonomy",
+                    "instructions": "Seules les pages avec le type de publication sélectionné seront accessibles",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_63861a0f708be",
+                                "operator": "==",
+                                "value": "page_type"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "60",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "page_type",
+                    "add_term": 0,
+                    "save_terms": 1,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "field_type": "select",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "parent_repeater": "field_63861a0f708bc"
+                },
+                {
+                    "key": "field_63861a0f708c0",
+                    "label": "Page autorisée",
+                    "name": "granted_post_id",
+                    "aria-label": "",
+                    "type": "post_object",
+                    "instructions": "Seule la page sélectionnée et tous ses enfants (le cas échéant) seront accessibles",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_63861a0f708be",
+                                "operator": "==",
+                                "value": "hierarchy"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "60",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": [
+                        "page"
+                    ],
+                    "taxonomy": "",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "return_format": "id",
+                    "ui": 1,
+                    "parent_repeater": "field_63861a0f708bc"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "woodyusers_restrictions_settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

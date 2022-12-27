@@ -534,3 +534,25 @@ function embedVideo($embed)
     }
     return $return;
 }
+
+/**
+ * formatDate
+ *
+ * @param string $date
+ * @param string $format
+ * @return string $formated_date
+ *
+ * @link https://github.com/fightbulc/moment.php
+ * @link https://www.php.net/manual/fr/datetime.format.php
+ */
+function formatDate($date, $format = 'd F Y') {
+    $formated_date = '';
+    $locale = empty(pll_current_language()) ? PLL_DEFAULT_LOCALE : pll_current_language('locale');
+
+    \Moment\Moment::setLocale($locale);
+    $m = new \Moment\Moment($date);
+    $m->setTimezone(WOODY_TIMEZONE);
+    $formated_date = $m->format($format);
+
+    return $formated_date;
+}

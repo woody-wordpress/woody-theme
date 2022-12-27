@@ -661,6 +661,7 @@ class WoodyTheme_WoodyCompilers
 
             if ($page_hero['page_heading_media_type'] == 'img') {
                 if (!empty($page_hero['page_heading_img']) && is_array($page_hero['page_heading_img'])) {
+                    $page_hero['mobile_img_override_ratio'] = '';
                     $page_hero['page_heading_img']['attachment_more_data'] = (!empty($page_hero['page_heading_img']['ID'])) ? $this->tools->getAttachmentMoreData($page_hero['page_heading_img']['ID']) : [];
                 }
                 if (!empty($page_hero['mobile_page_heading_img']) && is_array($page_hero['mobile_page_heading_img'])) {
@@ -685,8 +686,6 @@ class WoodyTheme_WoodyCompilers
             $page_hero['subtitle'] = (!empty($page_hero['subtitle'])) ? $this->tools->replacePattern($page_hero['subtitle'], $context['post_id']) : '';
             $page_hero['description'] = (!empty($page_hero['description'])) ? $this->tools->replacePattern($page_hero['description'], $context['post_id']) : '';
 
-            $page_hero['title'] = (!empty($page_hero['title'])) ? str_replace('-', '&#8209', $page_hero['title']) : '';
-
             $page_hero['the_classes'] = [];
             $page_hero['the_classes'][] = (!empty($page_hero['title'])) ? 'has-title' : '';
             $page_hero['the_classes'][] = (!empty($page_hero['pretitle'])) ? 'has-pretitle' : '';
@@ -695,6 +694,7 @@ class WoodyTheme_WoodyCompilers
             $page_hero['classes'] = (!empty($page_hero['the_classes'])) ? implode(' ', $page_hero['the_classes']) : '';
 
             $page_hero = apply_filters('woody_custom_page_hero', $page_hero, $context);
+
             return [
                 'view' => \Timber::compile($context['woody_components'][$page_hero['heading_woody_tpl']], $page_hero),
                 'data' => $page_hero,
@@ -731,9 +731,16 @@ class WoodyTheme_WoodyCompilers
             }
         }
 
+        if(get_post_type($current_post_id) == 'touristic_sheet') {
+            $sheet_item = woody_hawwwai_item($current_post_id);
+            $current_post_title = empty($sheet_item['title']) ? get_the_title($current_post_id) : $sheet_item['title'];
+        } else {
+            $current_post_title = get_the_title($current_post_id);
+        }
+
         // On ajoute la page courante
         $data['items'][] = [
-            'title' => get_the_title($current_post_id),
+            'title' => $current_post_title,
             'url' => woody_get_permalink($current_post_id)
         ];
 
