@@ -107,11 +107,11 @@ class WoodyTheme_Commands
                     if ($nolang = $model->get_objects_with_no_lang()) {
                         if (! empty($nolang['posts'])) {
                             $model->set_language_in_mass('post', $nolang['posts'], 'fr');
-                            output_success(sprintf('Attribution de la langue par défaut (%s posts)', count($nolang['posts'])));
+                            output_success(sprintf('Attribution de la langue par défaut (%s posts)', is_countable($nolang['posts']) ? count($nolang['posts']) : 0));
                         }
                         if (! empty($nolang['terms'])) {
                             $model->set_language_in_mass('term', $nolang['terms'], 'fr');
-                            output_success(sprintf('Attribution de la langue par défaut (%s terms)', count($nolang['terms'])));
+                            output_success(sprintf('Attribution de la langue par défaut (%s terms)', is_countable($nolang['terms']) ? count($nolang['terms']) : 0));
                         }
                     }
                 } else {

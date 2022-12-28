@@ -551,6 +551,7 @@ class WoodyTheme_ACF
 
     public function getPostObjectDefaultTranslation($args, $field, $post_id)
     {
+        $default_lang_args = [];
         // Si l'option d'affichage des traductions dans les mises en avant est activée
         // On permet de rechercher les posts dans la langue par défaut
         $display_default_lang_title = apply_filters('woody_get_field_option', 'display_default_lang_title');
@@ -953,7 +954,7 @@ class WoodyTheme_ACF
             foreach ($woodyComponents as $key => $component) {
                 $display_options = '';
                 if (!empty($component['display'])) {
-                    $display_options = json_encode($component['display']);
+                    $display_options = json_encode($component['display'], JSON_THROW_ON_ERROR);
                 }
 
                 $is_new_tpl = (!empty($component['creation']) && isWoodyNewTpl($component['creation'])) ? "<span class='tpl-new'>Nouveau</span>" : '';

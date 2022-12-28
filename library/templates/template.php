@@ -732,7 +732,7 @@ abstract class WoodyTheme_TemplateAbstract
     {
         $languages = apply_filters('woody_pll_the_languages', 'auto');
 
-        if (!empty($languages) && count($languages) != 1) {
+        if (!empty($languages) && (is_countable($languages) ? count($languages) : 0) != 1) {
             $data = $this->createSwitcher($languages);
 
             // Set a default template
@@ -752,7 +752,7 @@ abstract class WoodyTheme_TemplateAbstract
         // Get polylang languages
         $languages = apply_filters('woody_pll_the_languages', 'auto');
 
-        if (!empty($languages) && count($languages) != 1) {
+        if (!empty($languages) && (is_countable($languages) ? count($languages) : 0) != 1) {
             $data = $this->createSwitcher($languages);
 
             // Set a default template

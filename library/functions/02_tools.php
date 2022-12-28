@@ -79,6 +79,7 @@ function rc_getVideoID($url, $type = '')
 */
 function rc_getVideoThumbnail($url, $type = '', $width = 427, $height = 240)
 {
+    $image = [];
     // If Type == 0 or 1 or 2
     if (is_numeric($type)) {
         $types = array('youtube', 'vimeo', 'dailymotion');
@@ -107,7 +108,7 @@ function rc_getVideoThumbnail($url, $type = '', $width = 427, $height = 240)
             case 'dailymotion':
             $curl = rc_curl("https://api.dailymotion.com/video/". $id ."?fields=thumbnail_large_url");
             if (!empty($curl)) {
-                $image = json_decode($curl);
+                $image = json_decode($curl, null, 512, JSON_THROW_ON_ERROR);
                 $image = $image->thumbnail_large_url;
             }
             break;

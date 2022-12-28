@@ -21,9 +21,7 @@ class WoodyTheme_Roles
         add_filter('auth_cookie_expiration', [$this, 'authCookieExpirationFilter'], 10, 3);
         add_action('members_register_cap_groups', [$this, 'registerMembersGroups']);
         add_action('members_register_caps', [$this, 'membersRegisterCaps']);
-        add_filter('redirection_role', function ($role) {
-            return 'manage_redirection';
-        });
+        add_filter('redirection_role', fn($role) => 'manage_redirection');
         add_filter('the_password_form', [$this, 'custom_password_form']);
         add_filter('bsr_capability', [$this, 'betterSearchReplaceCapability']);
     }
@@ -82,7 +80,7 @@ class WoodyTheme_Roles
         $vars = [
             'protected_form' => [
                 'titre' => __('Connectez-vous !'),
-                'label' =>  'pwbox-' . (empty($post->ID) ? rand() : $post->ID),
+                'label' =>  'pwbox-' . (empty($post->ID) ? random_int(0, mt_getrandmax()) : $post->ID),
                 'intro' => __('Cette page est protégée par un mot de passe. </br>Pour accéder à cette page, veuillez saisir un mot de passe :'),
                 'placeholder' => __('Votre mot de passe'),
                 'action' => esc_url(site_url('wp-login.php?action=postpass', 'login_post')),

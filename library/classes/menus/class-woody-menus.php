@@ -231,6 +231,7 @@ class WoodyTheme_Menus
      */
     public static function getCompiledSubmenu($menu_link, $menu_display, $getChildren = false)
     {
+        $submenu = [];
         $return = '';
         $twig_paths = getWoodyTwigPaths();
         if (!empty($menu_link['submenu']) && !empty($menu_display[$menu_link['the_id']])) {

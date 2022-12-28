@@ -299,7 +299,7 @@ function getPostRootAncestor($postID, $root_level = 1)
     $ancestors = get_post_ancestors($postID);
     if (!empty($ancestors)) {
         // Get last ancestors
-        $root = count($ancestors) - $root_level;
+        $root = (is_countable($ancestors) ? count($ancestors) : 0) - $root_level;
         if ($root < 0) {
             return;
         } else {
@@ -383,6 +383,7 @@ function woody_untokenize($token)
  *****************************/
 function minuteConvert($num)
 {
+    $convertedTime = [];
     $convertedTime['hours'] = floor($num / 60);
     $convertedTime['minutes'] = round((($num / 60) - $convertedTime['hours']) * 60);
     return $convertedTime;

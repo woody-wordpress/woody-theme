@@ -179,7 +179,7 @@ class WoodyTheme_WoodyCompilers
                         $json = file_get_contents($filename);
                         $route['route_file'] = $json;
 
-                        $wrapper['routes'][$key] = json_decode($route['route_file'], true);
+                        $wrapper['routes'][$key] = json_decode($route['route_file'], true, 512, JSON_THROW_ON_ERROR);
                         foreach ($wrapper['routes'][$key]['features'] as $f_key => $feature) {
                             $wrapper['routes'][$key]['features'][$f_key]['route'] = true;
 
@@ -188,7 +188,7 @@ class WoodyTheme_WoodyCompilers
                                 $wrapper['routes'][$key]['features'][$f_key]['properties']['stroke'] = $route_color;
                                 $wrapper['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = $stroke_thickness;
                             }
-                            $fill_opacity = isset($wrapper['routes'][$key]['features'][$f_key]['properties']['fill-opacity']) ? $wrapper['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] : 0;
+                            $fill_opacity = $wrapper['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] ?? 0;
                             $wrapper['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] = $fill_opacity == 0 ? 0.5 : $fill_opacity;
 
                             // Route Fields aren't supposed to have markers.
@@ -197,7 +197,7 @@ class WoodyTheme_WoodyCompilers
                             }
                         }
                         $wrapper['routes'][$key]['features'] = array_values($wrapper['routes'][$key]['features']);
-                        $wrapper['routes'][$key] = json_encode($wrapper['routes'][$key]);
+                        $wrapper['routes'][$key] = json_encode($wrapper['routes'][$key], JSON_THROW_ON_ERROR);
                     }
                 } else {
                     unset($wrapper['routes'][$key]);
@@ -219,8 +219,8 @@ class WoodyTheme_WoodyCompilers
                     $sum_lng += $marker['map_position']['lng'];
                 }
             }
-            $wrapper['default_lat'] = $sum_lat / count($wrapper['markers']);
-            $wrapper['default_lng'] = $sum_lng / count($wrapper['markers']);
+            $wrapper['default_lat'] = $sum_lat / (is_countable($wrapper['markers']) ? count($wrapper['markers']) : 0);
+            $wrapper['default_lng'] = $sum_lng / (is_countable($wrapper['markers']) ? count($wrapper['markers']) : 0);
 
             // Get markers
             foreach ($wrapper['markers'] as $key => $marker) {
@@ -334,6 +334,7 @@ class WoodyTheme_WoodyCompilers
 
     public function formatListContent($wrapper, $current_post, $twigPaths)
     {
+        $the_list = [];
         $return = '';
 
         // On définit des variables de base
@@ -387,7 +388,7 @@ class WoodyTheme_WoodyCompilers
             $list_el_wrapper['seed'] = (!empty($form_result['seed'])) ? $form_result['seed'] : null;
 
             foreach ($form_result as $result_key => $input_value) {
-                if (strpos($result_key, $the_list['uniqid']) !== false && strpos($result_key, 'tt') !== false) { // Taxonomy Terms
+                if (strpos($result_key, (string) $the_list['uniqid']) !== false && strpos($result_key, 'tt') !== false) { // Taxonomy Terms
                     $input_value = (!is_array($input_value)) ? [$input_value] : $input_value;
                     foreach ($input_value as $single_value) {
                         // Si on poste la value 'all', on ne filtre pas sur cet input
@@ -395,13 +396,13 @@ class WoodyTheme_WoodyCompilers
                             $list_el_wrapper['filtered_taxonomy_terms'][$result_key][] = $single_value;
                         }
                     }
-                } elseif (strpos($result_key, $the_list['uniqid']) !== false && strpos($result_key, 'td') !== false) { // Trip Duration
+                } elseif (strpos($result_key, (string) $the_list['uniqid']) !== false && strpos($result_key, 'td') !== false) { // Trip Duration
                     if (strpos($result_key, 'max') !== false) {
                         $list_el_wrapper['focused_trip_duration']['max'] = $input_value;
                     } else {
                         $list_el_wrapper['focused_trip_duration']['min'] = $input_value;
                     }
-                } elseif (strpos($result_key, $the_list['uniqid']) !== false && strpos($result_key, 'tp') !== false) { // Trip Price
+                } elseif (strpos($result_key, (string) $the_list['uniqid']) !== false && strpos($result_key, 'tp') !== false) { // Trip Price
                     if (strpos($result_key, 'max') !== false) {
                         $list_el_wrapper['focused_trip_price']['max'] = $input_value;
                     } else {

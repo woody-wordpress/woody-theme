@@ -12,7 +12,7 @@ class WoodyTheme_cleanDataBases
 
     public function registerHooks()
     {
-        \WP_CLI::add_command('woody:clean_db', [$this, 'cleanDB'], 10, 1);
+        \WP_CLI::add_command('woody:clean_db', [$this, 'cleanDB'], 10);
     }
 
     public function cleanDB($args, $assoc_args)

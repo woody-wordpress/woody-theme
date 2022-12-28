@@ -332,6 +332,7 @@ class WoodyTheme_WoodyGetters
      */
     public function getPagePreview($wrapper, $post, $clickable = true, $is_attachment = false)
     {
+        $fields_profil = [];
         $data = [];
 
         if (!is_object($post)) {
@@ -926,7 +927,7 @@ class WoodyTheme_WoodyGetters
 
         //  Removes image if sum of anchors and images > 8
         if (!empty($data['imgs']) && $data['anchors']) {
-            while (count($data['imgs']) + count($data['anchors']) > 8) {
+            while ((is_countable($data['imgs']) ? count($data['imgs']) : 0) + (is_countable($data['anchors']) ? count($data['anchors']) : 0) > 8) {
                 array_splice($data['imgs'], -1, 1);
             }
         }

@@ -35,7 +35,7 @@ class WoodyTheme_WoodyProcessTools
             $minmax['min'] = !empty($post_data[str_replace('max', 'min', $data_key)]) ? $post_data[str_replace('max', 'min', $data_key)] : 0;
         } else {
             $minmax['min'] = $post_data[$data_key];
-            $minmax['max'] = isset($post_data[str_replace('min', 'max', $data_key)]) ? $post_data[str_replace('min', 'max', $data_key)] : '';
+            $minmax['max'] = $post_data[str_replace('min', 'max', $data_key)] ?? '';
         }
 
         return $minmax;
@@ -364,7 +364,7 @@ class WoodyTheme_WoodyProcessTools
             $patterns = ['%nombre%', '%playlist_count%'];
 
             foreach ($patterns as $pattern) {
-                if (strpos($string, $pattern) !== false) {
+                if (strpos($string, (string) $pattern) !== false) {
                     $confId = get_field('playlist_conf_id', $post_id);
                     if (!empty($confId)) {
                         $playlist_count = apply_filters('woody_hawwwai_playlist_count', $confId, pll_current_language(), []);

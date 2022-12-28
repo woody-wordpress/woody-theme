@@ -88,7 +88,7 @@ class WoodyTheme_Timber_Filters
     public function jsonEncode($array)
     {
         if (!empty($array) && is_array($array)) {
-            return json_encode($array);
+            return json_encode($array, JSON_THROW_ON_ERROR);
         }
     }
 
@@ -129,11 +129,12 @@ class WoodyTheme_Timber_Filters
 
     public function humanizeFilesize($bytes, $decimals = 0)
     {
+        $sz = [];
         $factor = floor((strlen($bytes) - 1) / 3);
         if ($factor > 0) {
             $sz = 'KMGT';
         }
-        return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$sz[$factor - 1] . 'B';
+        return sprintf("%.{$decimals}f", $bytes / 1024 ** $factor) . @$sz[$factor - 1] . 'B';
     }
 
     public function ellipsis($text, $length = 100, $ending = '...', $exact = false, $considerHtml = true)
@@ -285,7 +286,7 @@ class WoodyTheme_Timber_Filters
 
     public function theRootAncestor($post_id)
     {
-        $root_id = getPostRootAncestor($post_id) ? getPostRootAncestor($post_id) : get_the_id();
+        $root_id = getPostRootAncestor($post_id) ?: get_the_id();
         return $root_id;
     }
 

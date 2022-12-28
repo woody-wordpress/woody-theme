@@ -7,7 +7,7 @@ class WoodyTheme_ACF_Save_Manager
 {
     // $groups is an array of field group key => path pairs
     // these will be set later
-    private $groups = [];
+    private array $groups = [];
 
     // this variable will store the current group key
     // that is being saved so that we can retrieve it later

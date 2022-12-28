@@ -28,6 +28,7 @@ class WoodyTheme_Plugins_Options
 
     public function defineOptions()
     {
+        $yoimg_crop_settings = [];
         // Plugins Settings
         update_option('timezone_string', WOODY_TIMEZONE, true);
         update_option('WPLANG', 'fr_FR', true);
@@ -412,7 +413,7 @@ class WoodyTheme_Plugins_Options
 
         $new_option = $this->cleanUpOption($option_name, $new_option);
 
-        if (strcmp(json_encode($option), json_encode($new_option)) !== 0) { // Update if different
+        if (strcmp(json_encode($option, JSON_THROW_ON_ERROR), json_encode($new_option, JSON_THROW_ON_ERROR)) !== 0) { // Update if different
             update_option($option_name, $new_option, $autoload);
         }
     }

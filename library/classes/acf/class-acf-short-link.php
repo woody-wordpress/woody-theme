@@ -22,6 +22,7 @@ class WoodyTheme_ACF_ShortLink
 
     public function getShortLinkData()
     {
+        $shortLinkData = [];
         $post_id = filter_input(INPUT_GET, 'post_id', FILTER_SANITIZE_STRING);
         if (empty($post_id)) {
             status_header(404);

@@ -39,7 +39,7 @@ class WoodyTheme_Cron
 
         // Adds once monthly to the existing schedules.
         $schedules['monthly'] = [
-            'interval' => 2592000,
+            'interval' => 2_592_000,
             'display' => __('Once Monthly')
         ];
 

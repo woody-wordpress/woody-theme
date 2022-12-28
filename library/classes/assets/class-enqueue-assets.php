@@ -284,7 +284,7 @@ class WoodyTheme_Enqueue_Assets
         // Nouvelle méthode pour appeler les fonts en synchrone voir ligne 342
         $webfonts = apply_filters('woody_theme_global_script_string', []);
         if (!empty($webfonts['window.WebFontConfig'])) {
-            $webfonts = json_decode($webfonts['window.WebFontConfig'], true);
+            $webfonts = json_decode($webfonts['window.WebFontConfig'], true, 512, JSON_THROW_ON_ERROR);
             if (!empty($webfonts['google']) && !empty($webfonts['google']['families'])) {
                 foreach ($webfonts['google']['families'] as $webfont) {
                     wp_enqueue_style('google-font-' . sanitize_title($webfont), 'https://fonts.googleapis.com/css?family=' . $webfont, [], null);
@@ -334,7 +334,7 @@ class WoodyTheme_Enqueue_Assets
         wp_enqueue_script('admin_jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/fr.min.js', ['admin_jsdelivr_flatpickr'], null, true);
 
         // Added global vars
-        wp_add_inline_script('admin-javascripts', 'var siteConfig = ' . json_encode($this->siteConfig) . ';', 'before');
+        wp_add_inline_script('admin-javascripts', 'var siteConfig = ' . json_encode($this->siteConfig, JSON_THROW_ON_ERROR) . ';', 'before');
         wp_add_inline_script('admin-javascripts', 'document.addEventListener("DOMContentLoaded",()=>{document.body.classList.add("windowReady")});', 'after');
 
         // Enqueue the main Stylesheet.
@@ -343,6 +343,7 @@ class WoodyTheme_Enqueue_Assets
 
     public function heartbeatSettings()
     {
+        $settings = [];
         $settings['interval'] = 120; // default 15
         return $settings;
     }
@@ -411,7 +412,7 @@ class WoodyTheme_Enqueue_Assets
                         $base_dir = '';
                     }
 
-                    $assets = json_decode(file_get_contents($manifest_path), true);
+                    $assets = json_decode(file_get_contents($manifest_path), true, 512, JSON_THROW_ON_ERROR);
                     if (!empty($assets)) {
                         foreach ($assets as $origin => $compile) {
                             $assetPaths[$base_dir . '/' . $origin] = $base_dir . '/' . $compile;
@@ -434,15 +435,15 @@ class WoodyTheme_Enqueue_Assets
             'window.useLeafletLibrary' => 0,
             'window.apirenderlistEnabled' => true,
             // inject siteConfig
-            'window.siteConfig' => json_encode($this->siteConfig),
+            'window.siteConfig' => json_encode($this->siteConfig, JSON_THROW_ON_ERROR),
             // init DrupalAngularConfig if doesn't exist
             'window.DrupalAngularConfig' => 'window.DrupalAngularConfig || {}',
             // fill DrupalAngularConfig (some properties may already exists)
             'window.DrupalAngularConfig.apiAccount' => 'window.DrupalAngularConfig.apiAccount || {}',
-            'window.DrupalAngularConfig.apiAccount.login' => (!empty($this->siteConfig['login'])) ? json_encode($this->siteConfig['login']) : '{}',
-            'window.DrupalAngularConfig.apiAccount.password' => (!empty($this->siteConfig['password'])) ? json_encode($this->siteConfig['password']) : '{}',
+            'window.DrupalAngularConfig.apiAccount.login' => (!empty($this->siteConfig['login'])) ? json_encode($this->siteConfig['login'], JSON_THROW_ON_ERROR) : '{}',
+            'window.DrupalAngularConfig.apiAccount.password' => (!empty($this->siteConfig['password'])) ? json_encode($this->siteConfig['password'], JSON_THROW_ON_ERROR) : '{}',
             // inject mapKeys in DrupalAngularAppConfig
-            'window.DrupalAngularConfig.mapProviderKeys' => (!empty($this->siteConfig['mapProviderKeys'])) ? json_encode($this->siteConfig['mapProviderKeys']) : '{}',
+            'window.DrupalAngularConfig.mapProviderKeys' => (!empty($this->siteConfig['mapProviderKeys'])) ? json_encode($this->siteConfig['mapProviderKeys'], JSON_THROW_ON_ERROR) : '{}',
         ];
 
         if (!empty($this->siteConfig['mapProviderKeys'])) {

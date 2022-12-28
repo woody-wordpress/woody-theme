@@ -33,6 +33,7 @@ class WoodyTheme_WoodyProcess
 
     public function postsOrderby($args, $wp_query)
     {
+        $lon_postmeta = null;
         // On surcharge l'ordre quand on veut faire du tri par géolocalisation
         if (!empty($wp_query->query['orderby']) && strpos($wp_query->query['orderby'], 'geoloc') !== false) {
             $post_id = explode('_', $wp_query->query['orderby']);
@@ -333,6 +334,7 @@ class WoodyTheme_WoodyProcess
      */
     public function processWoodyQuery($the_post, $query_form, $paginate = false, $uniqid = 0, $ignore_maxnum = false, $posts_in, $filters)
     {
+        $the_meta_query = [];
         $query_result = new \stdClass();
         $tax_query = [];
 
