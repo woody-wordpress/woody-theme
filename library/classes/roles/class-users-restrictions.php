@@ -81,19 +81,13 @@ class WoodyTheme_Users_Restrictions
         if ($post_id == $granted_id) {
             return true;
         }
-
-        foreach (get_post_ancestors($post_id) as $parent_id) {
-            if ($parent_id == $granted_id) {
-                return true;
-            }
-        }
-        return false;
+        return in_array($granted_id, get_post_ancestors($post_id));
     }
 
     public function checkType($granted_page_type_id, $post_id)
     {
         $content_type = get_field('content_type', $post_id);
-        return !empty($content_type) ? $content_type->term_id == $granted_page_type_id : new \WP_Error();
+        return empty($content_type) ? new \WP_Error() : $content_type->term_id == $granted_page_type_id;
     }
 
     public function filterAdmin($field){

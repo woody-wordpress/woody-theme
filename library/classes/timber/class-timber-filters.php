@@ -41,8 +41,7 @@ class WoodyTheme_Timber_Filters
         $twig->addFilter(new Twig_SimpleFilter('excerpt', 'wp_trim_words'));
         $twig->addFilter(new Twig_SimpleFilter('sanitize', 'sanitize_title'));
         $twig->addFilter(new Twig_SimpleFilter('shortcodes', 'do_shortcode'));
-        $twig->addFilter(new Twig_SimpleFilter('apply_filters', function () {
-            $args = func_get_args();
+        $twig->addFilter(new Twig_SimpleFilter('apply_filters', function (...$args) {
             $tag = current(array_splice($args, 1, 1));
             return apply_filters_ref_array($tag, $args);
         }));
@@ -81,8 +80,7 @@ class WoodyTheme_Timber_Filters
         if (is_array($arr)) {
             return $arr;
         }
-        $arr = array($arr);
-        return $arr;
+        return array($arr);
     }
 
     public function jsonEncode($array)
@@ -104,7 +102,7 @@ class WoodyTheme_Timber_Filters
 
     public function html_class($val)
     {
-        return (!empty($val)) ? ' ' . $val : '';
+        return (empty($val)) ? '' : ' ' . $val;
     }
 
     public function url_domain($url)
@@ -162,11 +160,11 @@ class WoodyTheme_Timber_Filters
                     }
                 }
                 $truncate .= $tag[1];
-                $contentLength = mb_strlen(preg_replace('/&[0-9a-z]{2,8};|&#[0-9]{1,7};|&#x[0-9a-f]{1,6};/i', ' ', $tag[3]));
+                $contentLength = mb_strlen(preg_replace('/&[0-9a-z]{2,8};|&#\d{1,7};|&#x[0-9a-f]{1,6};/i', ' ', $tag[3]));
                 if ($contentLength + $totalLength > $length) {
                     $left = $length - $totalLength;
                     $entitiesLength = 0;
-                    if (preg_match_all('/&[0-9a-z]{2,8};|&#[0-9]{1,7};|&#x[0-9a-f]{1,6};/i', $tag[3], $entities, PREG_OFFSET_CAPTURE)) {
+                    if (preg_match_all('/&[0-9a-z]{2,8};|&#\d{1,7};|&#x[0-9a-f]{1,6};/i', $tag[3], $entities, PREG_OFFSET_CAPTURE)) {
                         foreach ($entities[0] as $entity) {
                             if ($entity[1] + 1 - $entitiesLength <= $left) {
                                 $left--;
@@ -230,8 +228,7 @@ class WoodyTheme_Timber_Filters
         if (empty($text)) {
             return;
         }
-        $encoded = base64_encode($text);
-        return $encoded;
+        return base64_encode($text);
     }
 
     // Debug
@@ -257,11 +254,7 @@ class WoodyTheme_Timber_Filters
 
     public function createdFrom($date, $timezone = 'Europe/Paris')
     {
-        if (function_exists('pll_current_language')) {
-            $locale = pll_current_language('locale');
-        } else {
-            $locale = 'fr_FR';
-        }
+        $locale = function_exists('pll_current_language') ? pll_current_language('locale') : 'fr_FR';
 
         if ($locale == 'br_BR') {
             $locale = 'fr_FR';
@@ -286,8 +279,7 @@ class WoodyTheme_Timber_Filters
 
     public function theRootAncestor($post_id)
     {
-        $root_id = getPostRootAncestor($post_id) ?: get_the_id();
-        return $root_id;
+        return getPostRootAncestor($post_id) ?: get_the_id();
     }
 
     public function pluralizeUnit($amount, $singular_unit, $plural_unit = false)
@@ -300,9 +292,7 @@ class WoodyTheme_Timber_Filters
 
     public function seed($text)
     {
-        $seed = date("dmY");
-
-        return $seed;
+        return date("dmY");
     }
 
     public function translate($text)

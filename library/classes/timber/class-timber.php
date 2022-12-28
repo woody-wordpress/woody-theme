@@ -124,9 +124,7 @@ if (!class_exists('Timber')) {
                 }
             }
 
-            $return = apply_filters('woody_globals_json', $return);
-
-            return $return;
+            return apply_filters('woody_globals_json', $return);
         }
     }
 }

@@ -45,9 +45,8 @@ class WoodyTheme_CDN
         $render = $this->replaceCDN($matches, $render);
 
         preg_match_all('/http(s?):\/\/([a-zA-Z0-9-_.]*)\/wp\/wp-includes\/([^"\' ]*)/', $render, $matches);
-        $render = $this->replaceCDN($matches, $render);
 
-        return $render;
+        return $this->replaceCDN($matches, $render);
     }
 
     private function replaceCDN($matches = [], $render = '')

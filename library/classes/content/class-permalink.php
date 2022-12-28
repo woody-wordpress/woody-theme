@@ -44,7 +44,7 @@ class WoodyTheme_Permalink
             $post_id = $post->ID;
         }
 
-        $permalink = (!$force) ? wp_cache_get(sprintf('woody_get_permalink_%s', $post_id), 'woody') : null;
+        $permalink = ($force) ? null : wp_cache_get(sprintf('woody_get_permalink_%s', $post_id), 'woody');
         if (empty($permalink)) {
             $permalink = get_permalink($post_id);
             wp_cache_set(sprintf('woody_get_permalink_%s', $post_id), $permalink, 'woody');
@@ -69,7 +69,7 @@ class WoodyTheme_Permalink
                 $request_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
                 $request_path = (substr($request_path, -1) == '/') ? substr($request_path, 0, -1) : $request_path;
 
-                if ($permalink_path != $request_path) {
+                if ($permalink_path !== $request_path) {
                     wp_redirect($permalink, 301, 'Woody Permalink');
                     exit;
                 }
@@ -86,7 +86,7 @@ class WoodyTheme_Permalink
             if (!empty($request_path)) {
                 // Magic get post_id from $request_path
                 $post_id = url_to_postid($request_path);
-                $permalink = (!empty($post_id)) ? get_permalink($post_id) : null; // Ne pas remplacer par woody_get_permalink
+                $permalink = (empty($post_id)) ? null : get_permalink($post_id); // Ne pas remplacer par woody_get_permalink
                 if (!empty($permalink)) {
                     $this->saveAndRedirect($permalink, $request_path, 'Magic');
                     exit();
@@ -124,7 +124,7 @@ class WoodyTheme_Permalink
             $last_segment = end($request_path);
 
             if (!empty($last_segment)) {
-                preg_match('/-([a-z_]{2,})-([0-9]{5,})$/', $last_segment, $sheet_match);
+                preg_match('/-([a-z_]{2,})-(\d{5,})$/', $last_segment, $sheet_match);
                 $sheet_lang = (empty($sheet_match[1])) ? null : $this->isAvailableLang($sheet_match[1]);
                 $sheet_id = (empty($sheet_match[2])) ? null : $sheet_match[2];
 
@@ -294,7 +294,7 @@ class WoodyTheme_Permalink
         global $wpdb;
         $sql = "SELECT count(*) FROM wp_posts WHERE (post_type = 'page' AND post_status IN ('publish', 'private', 'draft')) AND post_parent = %d";
         $count = $wpdb->get_var($wpdb->prepare($sql, [$id]));
-        return ($count != 0) ? true : false;
+        return $count != 0;
     }
 
     // --------------------------------
@@ -352,7 +352,7 @@ class WoodyTheme_Permalink
         if (!empty($slug)) {
             global $wpdb;
             $count_updated = $wpdb->query($wpdb->prepare("UPDATE wp_redirection_items SET status = 'disabled' WHERE action_data LIKE '%$slug' AND status = 'enabled'"));
-            $result = (!empty($count_updated)) ? 'before_delete_post : Disabling ' . $count_updated . ' redirect(s) to urls ending with ' . $slug : 'Found 0 redirection to this page';
+            $result = (empty($count_updated)) ? 'Found 0 redirection to this page' : 'before_delete_post : Disabling ' . $count_updated . ' redirect(s) to urls ending with ' . $slug;
             output_log($result);
         }
     }

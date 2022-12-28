@@ -177,14 +177,14 @@ class Admin_Menus
     public function addMenusOptionsPages()
     {
         // Options page
-        if (function_exists('acf_add_options_page') and !empty($this->pages_options['pages'])) {
+        if (function_exists('acf_add_options_page') && !empty($this->pages_options['pages'])) {
             foreach ($this->pages_options['pages'] as $key => $page) {
                 acf_add_options_page($page);
             }
         }
 
         // Options subpage
-        if (function_exists('acf_add_options_sub_page') and !empty($this->pages_options['sub_pages'])) {
+        if (function_exists('acf_add_options_sub_page') && !empty($this->pages_options['sub_pages'])) {
             foreach ($this->pages_options['sub_pages'] as $key => $sub_page) {
                 acf_add_options_sub_page($sub_page);
             }
@@ -338,7 +338,7 @@ class Admin_Menus
                         'key' => $key,
                         'name' => $name,
                         'type' => 'group',
-                        'sub_fields' => (!empty($sub_fields[$index]['sub_fields'])) ? $sub_fields[$index]['sub_fields'] : ''
+                        'sub_fields' => (empty($sub_fields[$index]['sub_fields'])) ? '' : $sub_fields[$index]['sub_fields']
                     ];
                     $index+= 2;
                 }

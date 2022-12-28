@@ -77,7 +77,7 @@ class WoodyTheme_WoodyProcess
     {
         $return = '';
 
-        $layout['default_marker'] = !empty($context['default_marker']) ? $context['default_marker'] : '';
+        $layout['default_marker'] = empty($context['default_marker']) ? '' : $context['default_marker'];
 
         // Traitements spécifique en fonction du type de layout
         switch ($layout['acf_fc_layout']) {
@@ -102,7 +102,7 @@ class WoodyTheme_WoodyProcess
                 break;
             case 'gallery':
                 // Ajout des données Instagram + champs personnalisés dans le contexte des images
-                $layout['gallery_type'] = !empty($layout['gallery_type']) ? $layout['gallery_type'] : "manual";
+                $layout['gallery_type'] = empty($layout['gallery_type']) ? "manual" : $layout['gallery_type'];
                 $layout['is_mobile'] = wp_is_mobile();
 
                 switch ($layout['gallery_type']) {
@@ -136,7 +136,7 @@ class WoodyTheme_WoodyProcess
                 // Ajout des données Instagram + champs personnalisés dans le contexte des images
                 if (!empty($layout['interactive_gallery_items'])) {
                     foreach ($layout['interactive_gallery_items'] as $key => $media_item) {
-                        $layout['interactive_gallery_items'][$key]['img_mobile_url'] =  (!empty($layout['interactive_gallery_items'][$key]['interactive_gallery_photo']['sizes'])) ? $layout['interactive_gallery_items'][$key]['interactive_gallery_photo']['sizes']['ratio_4_3_medium'] : '';
+                        $layout['interactive_gallery_items'][$key]['img_mobile_url'] =  (empty($layout['interactive_gallery_items'][$key]['interactive_gallery_photo']['sizes'])) ? '' : $layout['interactive_gallery_items'][$key]['interactive_gallery_photo']['sizes']['ratio_4_3_medium'];
                         $layout['interactive_gallery_items'][$key]['interactive_gallery_photo']['attachment_more_data'] = $this->tools->getAttachmentMoreData($media_item['interactive_gallery_photo']['ID']);
                     }
                 }
@@ -166,7 +166,7 @@ class WoodyTheme_WoodyProcess
                     }
                 } elseif ($layout['socialwall_type'] == 'auto') {
                     // On récupère les images en fonction des termes sélectionnés
-                    $layout['gallery_items'] = (!empty($layout['socialwall_auto'])) ? $this->tools->getAttachmentsByTerms('attachment_hashtags', $layout['socialwall_auto']) : '';
+                    $layout['gallery_items'] = (empty($layout['socialwall_auto'])) ? '' : $this->tools->getAttachmentsByTerms('attachment_hashtags', $layout['socialwall_auto']);
                     if (!empty($layout['gallery_items'])) {
                         foreach ($layout['gallery_items'] as $key => $media_item) {
                             $layout['gallery_items'][$key]['attachment_more_data'] = $this->tools->getAttachmentMoreData($media_item['ID']);
@@ -257,11 +257,7 @@ class WoodyTheme_WoodyProcess
                 $layout = apply_filters('woody_custom_layout', $layout, $context);
 
                 // On compile le $layout uniquement si ça n'a pas déjà été fait
-                if (is_array($layout)) {
-                    $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
-                } else {
-                    $return = $layout;
-                }
+                $return = is_array($layout) ? \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout) : $layout;
         }
         return $return;
     }
@@ -379,7 +375,7 @@ class WoodyTheme_WoodyProcess
                 $tax_query['custom_tax']['relation'] = "AND";
                 $operator = "NOT IN";
             } else {
-                $tax_query['custom_tax']['relation'] = (!empty($query_form['focused_taxonomy_terms_andor'])) ? $query_form['focused_taxonomy_terms_andor'] : 'OR';
+                $tax_query['custom_tax']['relation'] = (empty($query_form['focused_taxonomy_terms_andor'])) ? 'OR' : $query_form['focused_taxonomy_terms_andor'];
             }
 
             // Si la valeur n'est pas un tableau (== int), on pousse cette valeur dans un tableau
@@ -420,11 +416,11 @@ class WoodyTheme_WoodyProcess
 
                 // On récupère la relation AND/OR choisie dans le backoffice
                 $tax_query['custom_tax'][$index] = [
-                    'relation' => (!empty($filters['list_filters'][$index]['list_filter_andor'])) ? $filters['list_filters'][$index]['list_filter_andor'] : 'OR'
+                    'relation' => (empty($filters['list_filters'][$index]['list_filter_andor'])) ? 'OR' : $filters['list_filters'][$index]['list_filter_andor']
                 ];
 
                 // Si on reçoit le paramètre en tant qu'identifiant (select/radio) => on le pousse dans un tableau
-                $term_filter = (!is_array($term_filter)) ? [$term_filter] : $term_filter;
+                $term_filter = (is_array($term_filter)) ? $term_filter : [$term_filter];
 
                 foreach ($term_filter as $term) {
                     $the_wp_term = get_term($term);
@@ -520,7 +516,7 @@ class WoodyTheme_WoodyProcess
 
         // On enregistre le tri aléatoire pour la journée en cours (pagination)
         if ($orderby == 'rand' && $paginate == true) {
-            $seed = (!empty($query_form['seed'])) ? $query_form['seed'] : date("dmY");
+            $seed = (empty($query_form['seed'])) ? date("dmY") : $query_form['seed'];
             $orderby = 'RAND(' . $seed . ')';
         }
 
@@ -530,7 +526,7 @@ class WoodyTheme_WoodyProcess
 
         $the_query = [
             'post_type' => $post_type,
-            'posts_per_page' => (!empty($query_form['focused_count'])) ? $query_form['focused_count'] : 12,
+            'posts_per_page' => (empty($query_form['focused_count'])) ? 12 : $query_form['focused_count'],
             'post_status' => (!empty($query_form['focused_type']) && $query_form['focused_type'] == 'documents') ? ['inherit', 'publish'] : 'publish',
             'post__not_in' => array($the_post->ID),
             'order' => $order,
@@ -549,12 +545,12 @@ class WoodyTheme_WoodyProcess
 
         // On récupère l'offset de la page
         if ($paginate == true) {
-            $the_page_offset = (!empty($_GET[$uniqid])) ? htmlentities(stripslashes($_GET[$uniqid])) : '';
-            $the_query['paged'] = (!empty($the_page_offset)) ? $the_page_offset : 1;
+            $the_page_offset = (empty($_GET[$uniqid])) ? '' : htmlentities(stripslashes($_GET[$uniqid]));
+            $the_query['paged'] = (empty($the_page_offset)) ? 1 : $the_page_offset;
         }
 
         // On ajoute la tax_query
-        $the_query['tax_query'] = (!empty($tax_query)) ? $tax_query : '';
+        $the_query['tax_query'] = (empty($tax_query)) ? '' : $tax_query;
 
         // Si Hiérarchie = Enfants directs de la page
         // On passe le post ID dans le paramètre post_parent de la query
@@ -607,7 +603,7 @@ class WoodyTheme_WoodyProcess
                 // Puis on les compile dans le template de grille Woody selectionné
                 $components = [];
                 $components['no_padding'] = $section['scope_no_padding'];
-                $components['alignment'] = (!empty($section['section_alignment'])) ? $section['section_alignment'] : '';
+                $components['alignment'] = (empty($section['section_alignment'])) ? '' : $section['section_alignment'];
 
                 //Calcul de l'ordre des blocs en responsive
                 if (!empty($section['section_mobile_order'])) {
@@ -620,9 +616,9 @@ class WoodyTheme_WoodyProcess
                         // Uniqid long : section . $section_id . '_section_content' . $layout_id
 
                         $layout['uniqid'] = 's' . $section_id . 'sc' . $layout_id;
-                        $layout['visual_effects'] = (!empty($layout['visual_effects'])) ? $this->tools->formatVisualEffectData($layout['visual_effects']) : '';
+                        $layout['visual_effects'] = (empty($layout['visual_effects'])) ? '' : $this->tools->formatVisualEffectData($layout['visual_effects']);
 
-                        $components['resp_order'][] = (!empty($resp_order[$layout_id])) ? $resp_order[$layout_id] : '';
+                        $components['resp_order'][] = (empty($resp_order[$layout_id])) ? '' : $resp_order[$layout_id];
 
 
                         $device_display_block = $this->tools->getDeviceDisplayBlockResponsive($layout);
@@ -700,22 +696,18 @@ class WoodyTheme_WoodyProcess
                 if ($section['hide_section']) {
                     $the_section['is_empty'] = true;
                     $return[] = \Timber::compile($context['woody_components']['section-section_full-tpl_01'], $the_section);
-                } else {
-                    if (!empty($the_section['layout'])) {
-                        $return[] = \Timber::compile($context['woody_components']['section-section_full-tpl_01'], $the_section);
+                } elseif (!empty($the_section['layout'])) {
+                    $return[] = \Timber::compile($context['woody_components']['section-section_full-tpl_01'], $the_section);
+                } elseif (!empty($hide_empty_sections)) {
+                    if (is_user_logged_in()) {
+                        // Si l'utilisateur est connecté, on compile le twig empty_section
+                        $return[] = \Timber::compile('parts/empty_section.twig', $the_section);
                     } else {
-                        if (!empty($hide_empty_sections)) {
-                            if (is_user_logged_in()) {
-                                // Si l'utilisateur est connecté, on compile le twig empty_section
-                                $return[] = \Timber::compile('parts/empty_section.twig', $the_section);
-                            } else {
-                                $the_section['is_empty'] = true;
-                                $return[] = \Timber::compile($context['woody_components']['section-section_full-tpl_01'], $the_section);
-                            }
-                        } else {
-                            $return[] = \Timber::compile($context['woody_components']['section-section_full-tpl_01'], $the_section);
-                        }
+                        $the_section['is_empty'] = true;
+                        $return[] = \Timber::compile($context['woody_components']['section-section_full-tpl_01'], $the_section);
                     }
+                } else {
+                    $return[] = \Timber::compile($context['woody_components']['section-section_full-tpl_01'], $the_section);
                 }
             }
         }

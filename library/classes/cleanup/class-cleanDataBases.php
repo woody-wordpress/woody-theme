@@ -2,6 +2,18 @@
 
 class WoodyTheme_cleanDataBases
 {
+    /**
+     * @var int|mixed
+     */
+    public $total;
+    /**
+     * @var int|mixed
+     */
+    public $count;
+    /**
+     * @var int|mixed
+     */
+    public $deleted;
     public function __construct()
     {
         $this->registerHooks();

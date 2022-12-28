@@ -9,6 +9,7 @@
 
 abstract class WoodyTheme_TemplateAbstract
 {
+    public $twig_tpl;
     protected $context = [];
     protected $globals = [];
 
@@ -230,11 +231,11 @@ abstract class WoodyTheme_TemplateAbstract
         $the_title = get_field('woodyseo_meta_title');
         // SEO Context
 
-        $this->context['title'] = (!empty($the_title)) ? woody_untokenize($the_title) : html_entity_decode(get_the_title()) . ' | ' . $this->context['site']['name'];
+        $this->context['title'] = (empty($the_title)) ? html_entity_decode(get_the_title()) . ' | ' . $this->context['site']['name'] : woody_untokenize($the_title);
         $this->context['title'] = apply_filters('woody_seo_transform_pattern', $this->context['title']);
         $this->context['metas'] = $this->setMetadata();
 
-        $this->context['head_top'] = (!empty($this->context['head_top'])) ? $this->context['head_top'] : [];
+        $this->context['head_top'] = (empty($this->context['head_top'])) ? [] : $this->context['head_top'];
         $this->context['head_top'][] = get_field('woody_custom_meta', 'options');
         $this->context['head_top'][] = get_field('woody_custom_meta_' . pll_current_language(), 'options');
         $this->context['head_top'] = apply_filters('woody_custom_meta', $this->context['head_top']);
@@ -242,7 +243,7 @@ abstract class WoodyTheme_TemplateAbstract
         // Tourist Information Center
         // Contexte seulement sur la page d'accueil
         if (is_front_page()) {
-            $this->context['is_tourist_information_center'] = get_field('woody_tourist_information_center', 'options') ? true : false;
+            $this->context['is_tourist_information_center'] = (bool) get_field('woody_tourist_information_center', 'options');
             if ($this->context['is_tourist_information_center']) {
                 $woody_tourist_informations = get_field('woody_tourist_informations', 'options');
                 // Ajout d'infos supplémentaires au format JSON
@@ -280,7 +281,7 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         $mirror_page = getAcfGroupFields('group_5c6432b3c0c45');
-        if ($is_mirror_page === true && !empty($mirror_page['mirror_page_reference'])) {
+        if ($is_mirror_page && !empty($mirror_page['mirror_page_reference'])) {
             $this->context['mirror_id'] = get_the_ID();
             $this->context['post_id'] = $mirror_page['mirror_page_reference'];
             $this->context['post'] = get_post($this->context['post_id']);
@@ -306,7 +307,7 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         if (!empty($this->context['woody_access_staging'])) {
-            $this->context['body_class'] = $this->context['body_class'] . ' woody_staging';
+            $this->context['body_class'] .= ' woody_staging';
         }
 
         // Define Woody Components
@@ -487,7 +488,7 @@ abstract class WoodyTheme_TemplateAbstract
                 '#tag' => 'meta',
                 '#attributes' => [
                     'property' => 'og:site_name',
-                    'content' => !(empty($this->context['site']['name'])) ? $this->context['site']['name'] : ''
+                    'content' => empty($this->context['site']['name']) ? '' : $this->context['site']['name']
                 ]
             ];
         }
@@ -513,8 +514,8 @@ abstract class WoodyTheme_TemplateAbstract
                     continue;
                 }
                 $pll_lang = get_term_by('slug', $lang, 'language');
-                $pll_lang_data = (!empty($pll_lang)) ? maybe_unserialize($pll_lang->description) : '';
-                $pll_locale = (!empty($pll_lang_data)) ? $pll_lang_data['locale'] : '';
+                $pll_lang_data = (empty($pll_lang)) ? '' : maybe_unserialize($pll_lang->description);
+                $pll_locale = (empty($pll_lang_data)) ? '' : $pll_lang_data['locale'];
                 $return['og:locale:alternate_' . $lang] = [
                     '#tag' => 'meta',
                     '#attributes' => [
@@ -641,11 +642,11 @@ abstract class WoodyTheme_TemplateAbstract
             }
 
             if ($woody_seo_data['woodyseo_index'] === false) {
-                $return['robots']['#attributes']['content'] = $return['robots']['#attributes']['content'] . ', noindex';
+                $return['robots']['#attributes']['content'] .= ', noindex';
             }
 
             if ($woody_seo_data['woodyseo_follow'] === false) {
-                $return['robots']['#attributes']['content'] = $return['robots']['#attributes']['content'] . ', nofollow';
+                $return['robots']['#attributes']['content'] .= ', nofollow';
             }
 
             // No index no follow sur tous les modèles
@@ -658,12 +659,12 @@ abstract class WoodyTheme_TemplateAbstract
             if (empty($woody_lang_enable) || !in_array(pll_current_language(), $woody_lang_enable)) {
                 $robots_noindex = strpos($return['robots']['#attributes']['content'], 'noindex');
                 if (!$robots_noindex) {
-                    $return['robots']['#attributes']['content'] = $return['robots']['#attributes']['content'] . ', noindex';
+                    $return['robots']['#attributes']['content'] .= ', noindex';
                 }
 
                 $robots_nofollow = strpos($return['robots']['#attributes']['content'], 'nofollow');
                 if (!$robots_nofollow) {
-                    $return['robots']['#attributes']['content'] = $return['robots']['#attributes']['content'] . ', nofollow';
+                    $return['robots']['#attributes']['content'] .= ', nofollow';
                 }
             }
         }
@@ -742,7 +743,7 @@ abstract class WoodyTheme_TemplateAbstract
             // Allow data override
             $data = apply_filters('lang_switcher_data', $data);
 
-            $return = (!empty($data)) ? \Timber::compile($template, $data) : '';
+            $return = (empty($data)) ? '' : \Timber::compile($template, $data);
             return $return;
         }
     }
@@ -774,12 +775,12 @@ abstract class WoodyTheme_TemplateAbstract
         $data = [];
 
         // Save the $_GET
-        $autoselect_id = !empty($_GET['autoselect_id']) ? 'autoselect_id=' . $_GET['autoselect_id'] : '';
-        $page = !empty($_GET['page']) ? 'page=' . $_GET['page'] : '';
-        $output_params = !empty($autoselect_id) ? $autoselect_id . '&' : '';
-        $output_params .= !empty($page) ? $page . '&' : '';
+        $autoselect_id = empty($_GET['autoselect_id']) ? '' : 'autoselect_id=' . $_GET['autoselect_id'];
+        $page = empty($_GET['page']) ? '' : 'page=' . $_GET['page'];
+        $output_params = empty($autoselect_id) ? '' : $autoselect_id . '&';
+        $output_params .= empty($page) ? '' : $page . '&';
         $output_params = substr($output_params, 0, -1);
-        $output_params = !empty($output_params) ? '?' . $output_params : '';
+        $output_params = empty($output_params) ? '' : '?' . $output_params;
 
         if (!empty($languages)) {
             foreach ($languages as $language) {
@@ -790,13 +791,13 @@ abstract class WoodyTheme_TemplateAbstract
                     $data['langs'][$language['slug']]['locale'] = substr($language['locale'], 0, 2);
                     $data['langs'][$language['slug']]['no_translation'] = $language['no_translation'];
                     $data['langs'][$language['slug']]['is_current'] = true;
-                    $data['langs'][$language['slug']]['season'] = !empty($language['season']) ? $language['season'] : '';
+                    $data['langs'][$language['slug']]['season'] = empty($language['season']) ? '' : $language['season'];
                 } else {
                     $data['langs'][$language['slug']]['url'] = $language['url'] . $output_params;
                     $data['langs'][$language['slug']]['name'] = strpos($language['name'], '(') ? substr($language['name'], 0, strpos($language['name'], '(')) : $language['name'];
                     $data['langs'][$language['slug']]['locale'] = substr($language['locale'], 0, 2);
                     $data['langs'][$language['slug']]['no_translation'] = $language['no_translation'];
-                    $data['langs'][$language['slug']]['season'] = !empty($language['season']) ? $language['season'] : '';
+                    $data['langs'][$language['slug']]['season'] = empty($language['season']) ? '' : $language['season'];
                 }
             }
         }
@@ -809,13 +810,13 @@ abstract class WoodyTheme_TemplateAbstract
                 // if (!empty($languages_customization['template'])) {
                 //     $template = $languages_customization['template'];
                 // }
-                $data['flags'] = (!empty($languages_customization['flags'])) ? $languages_customization['flags'] : false;
+                $data['flags'] = (empty($languages_customization['flags'])) ? false : $languages_customization['flags'];
                 if (!empty($languages_customization['external_langs'])) {
                     foreach ($languages_customization['external_langs'] as $lang_key => $language) {
                         if (!empty($data['langs'][$lang_key])) {
                             $data['langs'][$lang_key]['url'] = $language['url'];
                             $data['langs'][$lang_key]['name'] = $language['name'];
-                            $data['langs'][$lang_key]['locale'] = (!empty($language['locale'])) ? substr($language['locale'], 0, 2) : $lang_key;
+                            $data['langs'][$lang_key]['locale'] = (empty($language['locale'])) ? $lang_key : substr($language['locale'], 0, 2);
                             $data['langs'][$lang_key]['target'] = '_blank';
                         } elseif (!is_user_logged_in()) {
                             unset($data['langs'][$lang_key]);
@@ -823,7 +824,7 @@ abstract class WoodyTheme_TemplateAbstract
                     }
                 }
 
-                if (!is_user_logged_in() and !empty($languages_customization['hide_langs'])) {
+                if (!is_user_logged_in() && !empty($languages_customization['hide_langs'])) {
                     foreach ($data['langs'] as $lang_key => $language) {
                         if (in_array($language['locale'], $languages_customization['hide_langs'])) {
                             unset($data['langs'][$lang_key]);
@@ -849,7 +850,7 @@ abstract class WoodyTheme_TemplateAbstract
 
             // Set a default template
             $tpl = apply_filters('deals_block_tpl', null);
-            $template = !empty($tpl['template']) ? $tpl['template'] : $this->context['woody_components']['woody_widgets-deals_block-tpl_01'];
+            $template = empty($tpl['template']) ? $this->context['woody_components']['woody_widgets-deals_block-tpl_01'] : $tpl['template'];
 
             // Allow data override
             $data = apply_filters('deals_block_data', $data);

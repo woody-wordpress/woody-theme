@@ -50,7 +50,7 @@ class WoodyTheme_ACF_Counter
 
                 // On récupère la relation choisie (ET/OU) entre les termes
                     // et on génère un tableau de term_id pour chaque taxonomie
-                    $focused_taxonomy_terms_andor = (!empty($params['focused_taxonomy_terms_andor'])) ? current($params['focused_taxonomy_terms_andor']) : 'OR';
+                    $focused_taxonomy_terms_andor = (empty($params['focused_taxonomy_terms_andor'])) ? 'OR' : current($params['focused_taxonomy_terms_andor']);
                     if ($focused_taxonomy_terms_andor == 'OR') {
                         $tax_query['custom_tax']['relation'] = 'OR';
                         // Get terms
@@ -82,11 +82,11 @@ class WoodyTheme_ACF_Counter
                 // On créé la wp_query en fonction des choix faits dans le backoffice
                 // NB : si aucun choix n'a été fait, on remonte automatiquement tous les contenus de type page
                 $the_query = [
-                    'post_type' => (!empty($params['focused_post_type'])) ? $params['focused_post_type'] : 'page',
+                    'post_type' => (empty($params['focused_post_type'])) ? 'page' : $params['focused_post_type'],
                     'tax_query' => $tax_query,
                     'post_status' => 'publish',
                     'post__not_in' => array($params['current_post']),
-                    'posts_per_page' => (!empty($params['focused_count'])) ? intval(current($params['focused_count'])) : 16
+                    'posts_per_page' => (empty($params['focused_count'])) ? 16 : (int) current($params['focused_count'])
                 ];
 
                 if (!empty($params['focused_hierarchy'])) {

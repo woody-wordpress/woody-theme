@@ -170,7 +170,7 @@ class WoodyTheme_Tinymce
         );
 
         foreach ($add_buttons as $button_value) {
-            array_push($buttons, $button_value);
+            $buttons[] = $button_value;
         }
 
         return $buttons;

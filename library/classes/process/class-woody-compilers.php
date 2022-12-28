@@ -81,12 +81,12 @@ class WoodyTheme_WoodyCompilers
                 $the_items['block_titles'] = $this->tools->getBlockTitles($wrapper);
             }
 
-            $the_items['no_padding'] = (!empty($wrapper['focus_no_padding'])) ? $wrapper['focus_no_padding'] : '';
-            $the_items['display_button'] = (!empty($wrapper['display_button'])) ? $wrapper['display_button'] : false;
-            $the_items['display_img'] = (!empty($wrapper['display_img'])) ? $wrapper['display_img'] : false;
-            $the_items['default_marker'] = (!empty($wrapper['default_marker'])) ? $wrapper['default_marker'] : '';
+            $the_items['no_padding'] = (empty($wrapper['focus_no_padding'])) ? '' : $wrapper['focus_no_padding'];
+            $the_items['display_button'] = (empty($wrapper['display_button'])) ? false : $wrapper['display_button'];
+            $the_items['display_img'] = (empty($wrapper['display_img'])) ? false : $wrapper['display_img'];
+            $the_items['default_marker'] = (empty($wrapper['default_marker'])) ? '' : $wrapper['default_marker'];
             $the_items['visual_effects'] = $wrapper['visual_effects'];
-            $the_items['display_index'] = (!empty($wrapper['display_index'])) ? $wrapper['display_index'] : false;
+            $the_items['display_index'] = (empty($wrapper['display_index'])) ? false : $wrapper['display_index'];
 
             // Responsive stuff
             if (!empty($wrapper['mobile_behaviour'])) {
@@ -95,7 +95,7 @@ class WoodyTheme_WoodyCompilers
                 } elseif ($wrapper['mobile_behaviour']['mobile_grid'] == 'swiper') {
                     $the_items['swResp'] = true;
                 }
-                $the_items['mobile_cols'] = (!empty($wrapper['mobile_behaviour']['mobile_cols'])) ? $wrapper['mobile_behaviour']['mobile_cols'] : '';
+                $the_items['mobile_cols'] = (empty($wrapper['mobile_behaviour']['mobile_cols'])) ? '' : $wrapper['mobile_behaviour']['mobile_cols'];
                 $the_items['mobile_behaviour'] = $wrapper['mobile_behaviour'];
             }
 
@@ -118,10 +118,8 @@ class WoodyTheme_WoodyCompilers
                 if (!empty($wrapper['focus_map_params']['map_zoom_auto'])) {
                     $the_items['map_params']['map_zoom_auto'] = $wrapper['focus_map_params']['map_zoom_auto'];
                 }
-                if (!empty($wrapper['focus_map_params']['map_zoom'])) {
-                    if (empty($the_items['map_params']['map_zoom_auto']) || $the_items['map_params']['map_zoom_auto'] === false) {
-                        $the_items['map_params']['map_zoom'] = $wrapper['focus_map_params']['map_zoom'];
-                    }
+                if (!empty($wrapper['focus_map_params']['map_zoom']) && (empty($the_items['map_params']['map_zoom_auto']) || $the_items['map_params']['map_zoom_auto'] === false)) {
+                    $the_items['map_params']['map_zoom'] = $wrapper['focus_map_params']['map_zoom'];
                 }
             }
 
@@ -133,7 +131,7 @@ class WoodyTheme_WoodyCompilers
 
             $the_items = apply_filters('woody_format_focuses_data', $the_items, $wrapper);
 
-            $return = !empty($wrapper['woody_tpl']) ? \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items) : \Timber::compile($twigPaths['blocks-focus-tpl_103'], $the_items) ;
+            $return = empty($wrapper['woody_tpl']) ? \Timber::compile($twigPaths['blocks-focus-tpl_103'], $the_items) : \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items) ;
         }
 
         return $return;
@@ -150,10 +148,8 @@ class WoodyTheme_WoodyCompilers
         $data['block_titles']['display_options'] = $this->tools->getDisplayOptions($wrapper);
 
         // Display options
-        $data['display_options']['no_padding'] = (!empty($wrapper['sheet_no_padding'])) ? $wrapper['sheet_no_padding'] : 0;
-
-        $return = \Timber::compile($twigPaths[$wrapper['woody_tpl']], $data);
-        return $return;
+        $data['display_options']['no_padding'] = (empty($wrapper['sheet_no_padding'])) ? 0 : $wrapper['sheet_no_padding'];
+        return \Timber::compile($twigPaths[$wrapper['woody_tpl']], $data);
     }
 
     public function formatGeomapData($wrapper, $twigPaths)
@@ -232,13 +228,13 @@ class WoodyTheme_WoodyCompilers
                 $wrapper['markers'][$key]['compiled_marker']  = \Timber::compile('/_objects/markerObject.twig', $marker);
 
                 if (!empty($marker['title']) || !empty($marker['description']) || !empty($marker['img'])) {
-                    $the_marker['item']['title'] = (!empty($marker['title'])) ? $marker['title'] : '';
-                    $the_marker['item']['description'] = (!empty($marker['description'])) ? $marker['description'] : '';
+                    $the_marker['item']['title'] = (empty($marker['title'])) ? '' : $marker['title'];
+                    $the_marker['item']['description'] = (empty($marker['description'])) ? '' : $marker['description'];
                     if (!empty($marker['img'])) {
                         $the_marker['image_style'] = 'ratio_16_9';
                         $the_marker['item']['img'] = $marker['img'];
                     }
-                    $the_marker['item']['link'] = (!empty($marker['link'])) ? $marker['link'] : '';
+                    $the_marker['item']['link'] = (empty($marker['link'])) ? '' : $marker['link'];
                     $wrapper['markers'][$key]['marker_thumb_html']  = \Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker);
                 }
             }
@@ -247,9 +243,7 @@ class WoodyTheme_WoodyCompilers
         if (empty($wrapper['tmaps_confid']) && !empty(get_field('tmaps_confid', 'option'))) {
             $wrapper['tmaps_confid'] = get_field('tmaps_confid', 'option');
         }
-
-        $return = \Timber::compile($twigPaths[$wrapper['woody_tpl']], $wrapper);
-        return $return;
+        return \Timber::compile($twigPaths[$wrapper['woody_tpl']], $wrapper);
     }
 
     public function formatSemanticViewData($wrapper, $twigPaths)
@@ -267,11 +261,7 @@ class WoodyTheme_WoodyCompilers
                 $the_query['post__in'][] = $included_id;
             }
         } else {
-            if ($wrapper['semantic_view_type'] == 'sisters') {
-                $parent_id = wp_get_post_parent_id($post_id);
-            } else {
-                $parent_id = $post_id;
-            }
+            $parent_id = $wrapper['semantic_view_type'] == 'sisters' ? wp_get_post_parent_id($post_id) : $post_id;
 
             if (!empty($wrapper['semantic_view_page_types'])) {
                 $tax_query = [
@@ -285,13 +275,13 @@ class WoodyTheme_WoodyCompilers
                 ];
             }
 
-            $orderby = !empty($wrapper['semantic_view_order']) ? $wrapper['semantic_view_order'] : 'menu_order' ;
+            $orderby = empty($wrapper['semantic_view_order']) ? 'menu_order' : $wrapper['semantic_view_order'] ;
 
             $the_query = [
                 'post_type'     => 'page',
                 'post_parent'   => $parent_id,
                 'post__not_in'  => [$post_id, $front_id],
-                'tax_query'     => (!empty($tax_query)) ? $tax_query : '',
+                'tax_query'     => (empty($tax_query)) ? '' : $tax_query,
                 'posts_per_page' => -1,
                 'order'         => 'ASC',
                 'orderby'       => $orderby
@@ -343,7 +333,7 @@ class WoodyTheme_WoodyCompilers
         $the_list['has_map'] = false;
 
         // On récupère la pagination et sa position pour passer un paramètre à la query
-        $paginate = ($wrapper['the_list_pager']['list_pager_type'] == 'basic_pager') ? true : false;
+        $paginate = $wrapper['the_list_pager']['list_pager_type'] == 'basic_pager';
 
         if ($paginate) {
             $the_list['pager_position'] = $wrapper['the_list_pager']['list_pager_position'];
@@ -379,17 +369,17 @@ class WoodyTheme_WoodyCompilers
         }
 
         // On récupère et on applique les valeurs des filtres si existantes
-        $form_result = (!empty(filter_input_array(INPUT_GET))) ? filter_input_array(INPUT_GET) : [];
+        $form_result = (empty(filter_input_array(INPUT_GET))) ? [] : filter_input_array(INPUT_GET);
         if (!empty($form_result['uniqid'])) {
             // On supprimte ce qui est inutile pour les filtres car on a déjà une liste de posts correspondant à la requete du backoffice
             unset($list_el_wrapper['focused_taxonomy_terms']);
 
             // On surcharge le seed avec celui reçu dans les paramètres GET pour maitriser le random des listes
-            $list_el_wrapper['seed'] = (!empty($form_result['seed'])) ? $form_result['seed'] : null;
+            $list_el_wrapper['seed'] = (empty($form_result['seed'])) ? null : $form_result['seed'];
 
             foreach ($form_result as $result_key => $input_value) {
                 if (strpos($result_key, (string) $the_list['uniqid']) !== false && strpos($result_key, 'tt') !== false) { // Taxonomy Terms
-                    $input_value = (!is_array($input_value)) ? [$input_value] : $input_value;
+                    $input_value = (is_array($input_value)) ? $input_value : [$input_value];
                     foreach ($input_value as $single_value) {
                         // Si on poste la value 'all', on ne filtre pas sur cet input
                         if ($single_value !== 'all') {
@@ -422,7 +412,7 @@ class WoodyTheme_WoodyCompilers
         }
 
         // Show button
-        $the_items['display_button'] = (!empty($list_el_wrapper['display_button'])) ? $list_el_wrapper['display_button'] : false;
+        $the_items['display_button'] = (empty($list_el_wrapper['display_button'])) ? false : $list_el_wrapper['display_button'];
 
         // On compile la grille des éléments
         $the_list['the_grid'] = \Timber::compile($twigPaths[$wrapper['the_list_elements']['listgrid_woody_tpl']], $the_items);
@@ -446,9 +436,7 @@ class WoodyTheme_WoodyCompilers
         if ($paginate && !empty($the_items['max_num_pages'])) {
             $the_list['pager'] = $this->formatListPager($the_items['max_num_pages'], $wrapper['uniqid'], $list_el_wrapper['seed']);
         }
-
-        $return = \Timber::compile($twigPaths[$wrapper['the_list_filters']['listfilter_woody_tpl']], $the_list);
-        return $return;
+        return \Timber::compile($twigPaths[$wrapper['the_list_filters']['listfilter_woody_tpl']], $the_list);
     }
 
     public function savePost($post_id, $post, $update)
@@ -473,7 +461,7 @@ class WoodyTheme_WoodyCompilers
     public function formatListPager($max_num_pages, $uniqid, $seed)
     {
         $return = [];
-        $page_offset = (!empty($_GET[$uniqid])) ? htmlentities(stripslashes($_GET[$uniqid])) : 1;
+        $page_offset = (empty($_GET[$uniqid])) ? 1 : htmlentities(stripslashes($_GET[$uniqid]));
 
         $pager_args = [
             'total' => $max_num_pages,
@@ -482,9 +470,7 @@ class WoodyTheme_WoodyCompilers
             'mid_size' => 3,
             'type' => 'list'
         ];
-
-        $return = paginate_links($pager_args);
-        return $return;
+        return paginate_links($pager_args);
     }
 
     /**
@@ -533,12 +519,12 @@ class WoodyTheme_WoodyCompilers
             foreach ($sections as $s_key => $section) {
                 if (!empty($section['display_in_summary']) && empty($section['hide_section'])) {
                     $return['items'][] = [
-                        'title' => (!empty($section['section_summary_title'])) ? $section['section_summary_title'] : 'Section ' . $s_key,
-                        'anchor' => (!empty($section['section_summary_title'])) ? $permalink . '#summary-' . sanitize_title($section['section_summary_title']) : $permalink . '#pageSection-' . $s_key,
+                        'title' => (empty($section['section_summary_title'])) ? 'Section ' . $s_key : $section['section_summary_title'],
+                        'anchor' => (empty($section['section_summary_title'])) ? $permalink . '#pageSection-' . $s_key : $permalink . '#summary-' . sanitize_title($section['section_summary_title']),
                         'id' => '#pageSection-' . $s_key,
                         'location' => [
-                            'latitude' => (!empty($section['section_latitude'])) ? $section['section_latitude'] : '',
-                            'longitude' => (!empty($section['section_longitude'])) ? $section['section_longitude'] : ''
+                            'latitude' => (empty($section['section_latitude'])) ? '' : $section['section_latitude'],
+                            'longitude' => (empty($section['section_longitude'])) ? '' : $section['section_longitude']
                         ]
                     ];
 
@@ -579,21 +565,21 @@ class WoodyTheme_WoodyCompilers
             }
         }
 
-        $page_teaser['page_teaser_title'] = (!empty($page_teaser['page_teaser_display_title'])) ? str_replace('-', '&#8209', $context['post_title']) : '';
+        $page_teaser['page_teaser_title'] = (empty($page_teaser['page_teaser_display_title'])) ? '' : str_replace('-', '&#8209', $context['post_title']);
 
-        $page_teaser['the_classes'][] = (!empty($page_teaser['background_img_opacity'])) ? $page_teaser['background_img_opacity'] : '';
-        $page_teaser['the_classes'][] = (!empty($page_teaser['background_color_opacity'])) ? $page_teaser['background_color_opacity'] : '';
-        $page_teaser['the_classes'][] = (!empty($page_teaser['background_color'])) ? $page_teaser['background_color'] : '';
-        $page_teaser['the_classes'][] = (!empty($page_teaser['border_color'])) ? $page_teaser['border_color'] : '';
-        $page_teaser['the_classes'][] = (!empty($page_teaser['teaser_margin_bottom'])) ? $page_teaser['teaser_margin_bottom'] : '';
-        $page_teaser['the_classes'][] = (!empty($page_teaser['background_img'])) ? 'isRel' : '';
-        $page_teaser['the_classes'][] = (!empty($page_teaser['page_teaser_class'])) ? $page_teaser['page_teaser_class'] : '';
-        $page_teaser['classes'] = (!empty($page_teaser['the_classes'])) ? implode(' ', $page_teaser['the_classes']) : '';
+        $page_teaser['the_classes'][] = (empty($page_teaser['background_img_opacity'])) ? '' : $page_teaser['background_img_opacity'];
+        $page_teaser['the_classes'][] = (empty($page_teaser['background_color_opacity'])) ? '' : $page_teaser['background_color_opacity'];
+        $page_teaser['the_classes'][] = (empty($page_teaser['background_color'])) ? '' : $page_teaser['background_color'];
+        $page_teaser['the_classes'][] = (empty($page_teaser['border_color'])) ? '' : $page_teaser['border_color'];
+        $page_teaser['the_classes'][] = (empty($page_teaser['teaser_margin_bottom'])) ? '' : $page_teaser['teaser_margin_bottom'];
+        $page_teaser['the_classes'][] = (empty($page_teaser['background_img'])) ? '' : 'isRel';
+        $page_teaser['the_classes'][] = (empty($page_teaser['page_teaser_class'])) ? '' : $page_teaser['page_teaser_class'];
+        $page_teaser['classes'] = (empty($page_teaser['the_classes'])) ? '' : implode(' ', $page_teaser['the_classes']);
 
         $page_teaser['breadcrumb'] = $this->createBreadcrumb($context);
 
-        $page_teaser['trip_infos'] = (!empty($context['trip_infos'])) ? $context['trip_infos'] : '';
-        $page_teaser['social_shares'] = (!empty($context['social_shares'])) ? $context['social_shares'] : '';
+        $page_teaser['trip_infos'] = (empty($context['trip_infos'])) ? '' : $context['trip_infos'];
+        $page_teaser['social_shares'] = (empty($context['social_shares'])) ? '' : $context['social_shares'];
 
         if (!empty($page_teaser['page_teaser_add_media'])) {
             unset($page_teaser['profile']);
@@ -602,7 +588,7 @@ class WoodyTheme_WoodyCompilers
         }
 
         if (!empty($page_teaser['page_teaser_media_type']) && $page_teaser['page_teaser_media_type'] == 'map') {
-            $page_teaser['post_coordinates'] = (!empty(getAcfGroupFields('group_5b3635da6529e', $context['post']))) ? getAcfGroupFields('group_5b3635da6529e', $context['post']) : '';
+            $page_teaser['post_coordinates'] = (empty(getAcfGroupFields('group_5b3635da6529e', $context['post']))) ? '' : getAcfGroupFields('group_5b3635da6529e', $context['post']);
         }
 
         if (!empty($page_teaser['page_teaser_display_created'])) {
@@ -615,12 +601,12 @@ class WoodyTheme_WoodyCompilers
         }
 
         if (!empty($page_teaser['page_teaser_img']) && is_array($page_teaser['page_teaser_img'])) {
-            $page_teaser['page_teaser_img']['attachment_more_data'] = (!empty($page_teaser['page_teaser_img']['ID'])) ? $this->tools->getAttachmentMoreData($page_teaser['page_teaser_img']['ID']) : [];
+            $page_teaser['page_teaser_img']['attachment_more_data'] = (empty($page_teaser['page_teaser_img']['ID'])) ? [] : $this->tools->getAttachmentMoreData($page_teaser['page_teaser_img']['ID']);
         }
 
-        $page_teaser['page_teaser_pretitle'] = (!empty($page_teaser['page_teaser_pretitle'])) ? $this->tools->replacePattern($page_teaser['page_teaser_pretitle'], $context['post_id']) : '';
-        $page_teaser['page_teaser_subtitle'] = (!empty($page_teaser['page_teaser_subtitle'])) ? $this->tools->replacePattern($page_teaser['page_teaser_subtitle'], $context['post_id']) : '';
-        $page_teaser['page_teaser_desc'] = (!empty($page_teaser['page_teaser_desc'])) ? $this->tools->replacePattern($page_teaser['page_teaser_desc'], $context['post_id']) : '';
+        $page_teaser['page_teaser_pretitle'] = (empty($page_teaser['page_teaser_pretitle'])) ? '' : $this->tools->replacePattern($page_teaser['page_teaser_pretitle'], $context['post_id']);
+        $page_teaser['page_teaser_subtitle'] = (empty($page_teaser['page_teaser_subtitle'])) ? '' : $this->tools->replacePattern($page_teaser['page_teaser_subtitle'], $context['post_id']);
+        $page_teaser['page_teaser_desc'] = (empty($page_teaser['page_teaser_desc'])) ? '' : $this->tools->replacePattern($page_teaser['page_teaser_desc'], $context['post_id']);
 
         // Existing profile
         if (!empty($page_teaser['page_teaser_add_profile']) && !empty($page_teaser['profile']['use_profile']) && !empty($page_teaser['profile']['profile_post'])) {
@@ -635,7 +621,7 @@ class WoodyTheme_WoodyCompilers
                 'profile_title' => get_the_title($profile_id),
                 'profile_picture' => get_field('profile_picture', $profile_id),
                 'profile_description' => get_field('profile_description', $profile_id),
-                'profile_expressions' => (!empty($profile_expressions)) ? $profile_expressions : '',
+                'profile_expressions' => (empty($profile_expressions)) ? '' : $profile_expressions,
             ];
         }
 
@@ -663,10 +649,10 @@ class WoodyTheme_WoodyCompilers
             if ($page_hero['page_heading_media_type'] == 'img') {
                 if (!empty($page_hero['page_heading_img']) && is_array($page_hero['page_heading_img'])) {
                     $page_hero['mobile_img_override_ratio'] = '';
-                    $page_hero['page_heading_img']['attachment_more_data'] = (!empty($page_hero['page_heading_img']['ID'])) ? $this->tools->getAttachmentMoreData($page_hero['page_heading_img']['ID']) : [];
+                    $page_hero['page_heading_img']['attachment_more_data'] = (empty($page_hero['page_heading_img']['ID'])) ? [] : $this->tools->getAttachmentMoreData($page_hero['page_heading_img']['ID']);
                 }
                 if (!empty($page_hero['mobile_page_heading_img']) && is_array($page_hero['mobile_page_heading_img'])) {
-                    $page_hero['mobile_page_heading_img']['attachment_more_data'] = (!empty($page_hero['mobile_page_heading_img']['ID'])) ? $this->tools->getAttachmentMoreData($page_hero['mobile_page_heading_img']['ID']) : [];
+                    $page_hero['mobile_page_heading_img']['attachment_more_data'] = (empty($page_hero['mobile_page_heading_img']['ID'])) ? [] : $this->tools->getAttachmentMoreData($page_hero['mobile_page_heading_img']['ID']);
                 }
             }
 
@@ -681,18 +667,18 @@ class WoodyTheme_WoodyCompilers
                     }
                 }
             }
-            $page_hero['isfrontpage']= !empty(get_option('page_on_front')) && get_option('page_on_front') == pll_get_post($context['post_id']) ? true : false ;
-            $page_hero['title'] = (!empty($page_hero['title'])) ? $this->tools->replacePattern($page_hero['title'], $context['post_id']) : '';
-            $page_hero['pretitle'] = (!empty($page_hero['pretitle'])) ? $this->tools->replacePattern($page_hero['pretitle'], $context['post_id']) : '';
-            $page_hero['subtitle'] = (!empty($page_hero['subtitle'])) ? $this->tools->replacePattern($page_hero['subtitle'], $context['post_id']) : '';
-            $page_hero['description'] = (!empty($page_hero['description'])) ? $this->tools->replacePattern($page_hero['description'], $context['post_id']) : '';
+            $page_hero['isfrontpage']= !empty(get_option('page_on_front')) && get_option('page_on_front') == pll_get_post($context['post_id']) ;
+            $page_hero['title'] = (empty($page_hero['title'])) ? '' : $this->tools->replacePattern($page_hero['title'], $context['post_id']);
+            $page_hero['pretitle'] = (empty($page_hero['pretitle'])) ? '' : $this->tools->replacePattern($page_hero['pretitle'], $context['post_id']);
+            $page_hero['subtitle'] = (empty($page_hero['subtitle'])) ? '' : $this->tools->replacePattern($page_hero['subtitle'], $context['post_id']);
+            $page_hero['description'] = (empty($page_hero['description'])) ? '' : $this->tools->replacePattern($page_hero['description'], $context['post_id']);
 
             $page_hero['the_classes'] = [];
-            $page_hero['the_classes'][] = (!empty($page_hero['title'])) ? 'has-title' : '';
-            $page_hero['the_classes'][] = (!empty($page_hero['pretitle'])) ? 'has-pretitle' : '';
-            $page_hero['the_classes'][] = (!empty($page_hero['subtitle'])) ? 'has-subtitle' : '';
-            $page_hero['the_classes'][] = (!empty($page_hero['description'])) ? 'has-description' : '';
-            $page_hero['classes'] = (!empty($page_hero['the_classes'])) ? implode(' ', $page_hero['the_classes']) : '';
+            $page_hero['the_classes'][] = (empty($page_hero['title'])) ? '' : 'has-title';
+            $page_hero['the_classes'][] = (empty($page_hero['pretitle'])) ? '' : 'has-pretitle';
+            $page_hero['the_classes'][] = (empty($page_hero['subtitle'])) ? '' : 'has-subtitle';
+            $page_hero['the_classes'][] = (empty($page_hero['description'])) ? '' : 'has-description';
+            $page_hero['classes'] = (empty($page_hero['the_classes'])) ? '' : implode(' ', $page_hero['the_classes']);
 
             $page_hero = apply_filters('woody_custom_page_hero', $page_hero, $context);
 
@@ -709,7 +695,7 @@ class WoodyTheme_WoodyCompilers
     {
         $data = [];
         $breadcrumb = '';
-        $current_post_id = (!empty($context['mirror_id'])) ? $context['mirror_id'] : $context['post']->ID;
+        $current_post_id = (empty($context['mirror_id'])) ? $context['post']->ID : $context['mirror_id'];
 
         // On ajoute la page d'accueil
         $front_id = get_option('page_on_front');
@@ -748,9 +734,7 @@ class WoodyTheme_WoodyCompilers
         $tpl = apply_filters('breadcrumb_tpl', null);
         $template = (!empty($tpl['template']) && !empty($context['woody_components'][$tpl['template']])) ? $context['woody_components'][$tpl['template']] : $context['woody_components']['woody_widgets-breadcrumb-tpl_01'];
 
-        $breadcrumb = \Timber::compile($template, $data);
-
-        return $breadcrumb;
+        return \Timber::compile($template, $data);
     }
 
     public function formatTestimonials($layout)
@@ -790,10 +774,8 @@ class WoodyTheme_WoodyCompilers
             foreach ($home_slider['landswpr_slides'] as $slide_key => $slide) {
                 // Si on est dans le cas d'une vidéo oEmbed, on récupère la plus grande miniature possible
                 // Permet d'afficher un poster le temps du chargement de Plyr
-                if (!empty($slide['landswpr_slide_media']) && $slide['landswpr_slide_media']['landswpr_slide_media_type'] == 'embed' && !empty($slide['landswpr_slide_media']['landswpr_slide_embed'])) {
-                    if (!empty(embedProviderThumbnail($slide['landswpr_slide_media']['landswpr_slide_embed']))) {
-                        $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_embed_thumbnail_url'] = embedProviderThumbnail($slide['landswpr_slide_media']['landswpr_slide_embed']);
-                    }
+                if (!empty($slide['landswpr_slide_media']) && $slide['landswpr_slide_media']['landswpr_slide_media_type'] == 'embed' && !empty($slide['landswpr_slide_media']['landswpr_slide_embed']) && !empty(embedProviderThumbnail($slide['landswpr_slide_media']['landswpr_slide_embed']))) {
+                    $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_embed_thumbnail_url'] = embedProviderThumbnail($slide['landswpr_slide_media']['landswpr_slide_embed']);
                 }
 
                 if (!empty($slide['landswpr_slide_media']) && $slide['landswpr_slide_media']['landswpr_slide_media_type'] == 'img' && !empty($slide['landswpr_slide_media']['landswpr_slide_img'])) {
@@ -828,15 +810,15 @@ class WoodyTheme_WoodyCompilers
 
         if (!empty($bookblock['bookblock_playlists'][0]['pl_post_id'])) {
             $bookblock['the_classes'] = [];
-            $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_img_opacity'])) ? $bookblock['bookblock_bg_params']['background_img_opacity'] : '';
-            $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_color'])) ? $bookblock['bookblock_bg_params']['background_color'] : '';
-            $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_color_opacity'])) ? $bookblock['bookblock_bg_params']['background_color_opacity'] : '';
-            $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['border_color'])) ? $bookblock['bookblock_bg_params']['border_color'] : '';
-            $bookblock['the_classes'][] = (!empty($bookblock['bookblock_bg_params']['background_img'])) ? 'isRel' : '';
+            $bookblock['the_classes'][] = (empty($bookblock['bookblock_bg_params']['background_img_opacity'])) ? '' : $bookblock['bookblock_bg_params']['background_img_opacity'];
+            $bookblock['the_classes'][] = (empty($bookblock['bookblock_bg_params']['background_color'])) ? '' : $bookblock['bookblock_bg_params']['background_color'];
+            $bookblock['the_classes'][] = (empty($bookblock['bookblock_bg_params']['background_color_opacity'])) ? '' : $bookblock['bookblock_bg_params']['background_color_opacity'];
+            $bookblock['the_classes'][] = (empty($bookblock['bookblock_bg_params']['border_color'])) ? '' : $bookblock['bookblock_bg_params']['border_color'];
+            $bookblock['the_classes'][] = (empty($bookblock['bookblock_bg_params']['background_img'])) ? '' : 'isRel';
             if (!empty($bookblock['bookblock_bg_params']['background_img_opacity']) || !empty($bookblock['bookblock_bg_params']['background_color']) || !empty($bookblock['bookblock_bg_params']['border_color'])) {
                 $bookblock['the_classes'][] = 'padd-all-md';
             }
-            $bookblock['classes'] = (!empty($bookblock['the_classes'])) ? implode(' ', $bookblock['the_classes']) : '';
+            $bookblock['classes'] = (empty($bookblock['the_classes'])) ? '' : implode(' ', $bookblock['the_classes']);
             if (!empty($bookblock['bookblock_playlists']) && is_array($bookblock['bookblock_playlists'])) {
                 foreach ($bookblock['bookblock_playlists'] as $pl_key => $pl) {
                     $bookblock['bookblock_playlists'][$pl_key]['permalink'] = woody_get_permalink($pl['pl_post_id']);
@@ -845,13 +827,13 @@ class WoodyTheme_WoodyCompilers
                     if (!empty($pl_confId)) {
                         $pl_lang = pll_get_post_language($pl['pl_post_id']);
                         $pl_params = apply_filters('woody_hawwwai_playlist_render', $pl_confId, $pl_lang, [], 'json');
-                        $facets = (!empty($pl_params['filters'])) ? $pl_params['filters'] : '';
+                        $facets = (empty($pl_params['filters'])) ? '' : $pl_params['filters'];
                         if (is_array($facets)) {
                             foreach ($facets as $facet) {
                                 if ($facet['type'] === 'daterangeWithAvailabilities') {
                                     $bookblock['bookblock_playlists'][$pl_key]['filters']['id'] = $facet['id'];
-                                    $bookblock['bookblock_playlists'][$pl_key]['filters']['translations'] = (!empty($facet['TR'])) ? $facet['TR'] : '';
-                                    $bookblock['bookblock_playlists'][$pl_key]['filters']['display_options'] = (!empty($facet['display_options'])) ? $facet['display_options'] : '';
+                                    $bookblock['bookblock_playlists'][$pl_key]['filters']['translations'] = (empty($facet['TR'])) ? '' : $facet['TR'];
+                                    $bookblock['bookblock_playlists'][$pl_key]['filters']['display_options'] = (empty($facet['display_options'])) ? '' : $facet['display_options'];
                                     if (!empty($facet['display_options']['booking_range']['values'])) {
                                         $range_values = $facet['display_options']['booking_range']['values'];
                                         if ($range_values[0]['mode'] == 3 && !empty($range_values[0]['customValue'])) {

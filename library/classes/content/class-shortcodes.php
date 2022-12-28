@@ -30,10 +30,9 @@ class WoodyTheme_Shortcodes
             $atts,
             'woody_anchor'
         );
-        $output = sprintf(
+        return sprintf(
             '<span class="woody_anchor" id="%s"></span>',
             esc_attr($atts['id'])
         );
-        return $output;
     }
 }

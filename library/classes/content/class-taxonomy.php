@@ -35,11 +35,7 @@ class WoodyTheme_Taxonomy
     public function registerTaxonomy()
     {
         $user = wp_get_current_user();
-        if (in_array('administrator', $user->roles)) {
-            $is_administrator = true;
-        } else {
-            $is_administrator = false;
-        }
+        $is_administrator = in_array('administrator', $user->roles);
 
         // On créé la taxonomie "Type de publication"
         register_taxonomy(

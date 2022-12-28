@@ -199,8 +199,7 @@ function rc_getVideoType($url)
 function rc_getImageStyleByApi($image_style, $image_path)
 {
     $image_style_infos = rc_getImageStyle($image_style);
-    $thumbnail = rc_getImageResizedFromApi($image_style_infos['width'], $image_style_infos['height'], $image_path);
-    return $thumbnail;
+    return rc_getImageResizedFromApi($image_style_infos['width'], $image_style_infos['height'], $image_path);
 }
 
 /**
@@ -267,9 +266,8 @@ function rc_getAlias($str, $charset='utf-8')
     $str = preg_replace('#&[^;]+;#', '', $str); // supprime les autres caractères
     $str = strtolower($str);
     $str = preg_replace('@[^a-z0-9]+@', '-', $str);
-    $str = trim($str);
 
-    return $str;
+    return trim($str);
 }
 
 /**
@@ -325,7 +323,7 @@ function rc_domnodeToArray($node)
         for ($i=0, $m=$node->childNodes->length; $i<$m; $i++) {
             $child = $node->childNodes->item($i);
             $v = rc_domnodeToArray($child);
-            if (isset($child->tagName)) {
+            if (property_exists($child, 'tagName') && $child->tagName !== null) {
                 $t = $child->tagName;
                 if (!isset($output[$t])) {
                     $output[$t] = [];
@@ -347,7 +345,7 @@ function rc_domnodeToArray($node)
                 $output['@attributes'] = $a;
             }
             foreach ($output as $t => $v) {
-                if (is_array($v) && count($v)==1 && $t!='@attributes') {
+                if (is_array($v) && count($v)==1 && $t != '@attributes') {
                     $output[$t] = $v[0];
                 }
             }

@@ -146,7 +146,7 @@ class WoodyTheme_Unpublisher
         $post_types = get_post_types($args, 'names', 'and');
         $post_types_str=implode('\',\'', $post_types);
 
-        if ($post_types_str) {
+        if (!empty($post_types_str)) {
             $sql="SELECT ID from $wpdb->posts WHERE post_type in ('post','page','$post_types_str') AND post_status='future' AND post_date_gmt<'$now'";
         } else {
             $sql="SELECT ID from $wpdb->posts WHERE post_type in ('post','page') AND post_status='future' AND post_date_gmt<'$now'";

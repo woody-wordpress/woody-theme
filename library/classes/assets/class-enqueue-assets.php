@@ -9,6 +9,7 @@
 
 class WoodyTheme_Enqueue_Assets
 {
+    public $isRoadBookSheet;
     protected $siteConfig;
     protected $globalScriptString;
     protected $assetPaths;
@@ -31,7 +32,7 @@ class WoodyTheme_Enqueue_Assets
         // If page miroir, get page type of the referenced post
         if (in_array("mirror_page", $pageType)) {
             $mirror = get_field('mirror_page_reference', $post->ID);
-            $pageType = (!empty($mirror)) ? getTermsSlugs($mirror, 'page_type') : [];
+            $pageType = (empty($mirror)) ? [] : getTermsSlugs($mirror, 'page_type');
         }
 
         //TODO: Déplacer dans l'addon hawwwai
@@ -140,10 +141,8 @@ class WoodyTheme_Enqueue_Assets
         }
 
         // SHEET: need to load tangram always for now (bug in vendor angular)
-        if ($this->isTouristicSheet) {
-            if (!in_array('touristicmaps_tangram', $js_dependencies_rcmap)) {
-                array_push($js_dependencies_rcmap, 'touristicmaps_tangram');
-            }
+        if ($this->isTouristicSheet && !in_array('touristicmaps_tangram', $js_dependencies_rcmap)) {
+            $js_dependencies_rcmap[] = 'touristicmaps_tangram';
         }
 
         // CDN hosted jQuery placed in the header, as some plugins require that jQuery is loaded in the header.
@@ -223,7 +222,7 @@ class WoodyTheme_Enqueue_Assets
             //     $js_dependencies__playlist = apply_filters('js_dependencies__playlist', $js_dependencies__playlist);
             // }
             wp_enqueue_script('hawwwai_playlist', $apirender_base_uri . '/assets/scripts/raccourci/playlist.' . $jsModeSuffix . '.js', $js_dependencies__playlist, null);
-            $playlist_map_query = !empty($map_keys) ? '?' . http_build_query($map_keys) : '';
+            $playlist_map_query = empty($map_keys) ? '' : '?' . http_build_query($map_keys);
 
             if (isset($map_keys['gmKey']) && !isset($map_keys['otmKey']) && !isset($map_keys['ignKey'])) {
                 wp_enqueue_script('jsdelivr_rich_marker', 'https://cdn.jsdelivr.net/npm/rich-marker@0.0.1/index.min.js', array_merge($js_dependencies_rcmap, ['hawwwai_playlist']), $this->wThemeVersion, true);
@@ -311,11 +310,11 @@ class WoodyTheme_Enqueue_Assets
         // Enqueue the main Stylesheet.
         if (($this->isTouristicSheet && !defined('IS_WOODY_HAWWWAI_SHEET_ENABLE')) || $this->isTouristicPlaylist) {
             $tourism_css = apply_filters('woody_theme_stylesheets', 'tourism');
-            $tourism_css = (!empty($tourism_css)) ? $tourism_css : 'tourism';
+            $tourism_css = (empty($tourism_css)) ? 'tourism' : $tourism_css;
             wp_enqueue_style('main-stylesheet', WP_DIST_URL . $this->assetPath('/css/' . $tourism_css . '.css'), [], null, 'screen');
         } else {
             $main_css = apply_filters('woody_theme_stylesheets', 'main');
-            $main_css = (!empty($main_css)) ? $main_css : 'main';
+            $main_css = (empty($main_css)) ? 'main' : $main_css;
             wp_enqueue_style('main-stylesheet', WP_DIST_URL . $this->assetPath('/css/' . $main_css . '.css'), [], null, 'screen');
         }
 
@@ -343,9 +342,7 @@ class WoodyTheme_Enqueue_Assets
 
     public function heartbeatSettings()
     {
-        $settings = [];
-        $settings['interval'] = 120; // default 15
-        return $settings;
+        return ['interval' => 120];
     }
 
     public function enqueueFavicons()
@@ -406,11 +403,7 @@ class WoodyTheme_Enqueue_Assets
             foreach ($directories as $dir) {
                 $manifest_path = $dir . '/rev-manifest.json';
                 if (strpos($dir, 'http') !== false || file_exists($manifest_path)) {
-                    if (strpos($dir, 'http') !== false) {
-                        $base_dir = $dir;
-                    } else {
-                        $base_dir = '';
-                    }
+                    $base_dir = strpos($dir, 'http') !== false ? $dir : '';
 
                     $assets = json_decode(file_get_contents($manifest_path), true, 512, JSON_THROW_ON_ERROR);
                     if (!empty($assets)) {
@@ -440,10 +433,10 @@ class WoodyTheme_Enqueue_Assets
             'window.DrupalAngularConfig' => 'window.DrupalAngularConfig || {}',
             // fill DrupalAngularConfig (some properties may already exists)
             'window.DrupalAngularConfig.apiAccount' => 'window.DrupalAngularConfig.apiAccount || {}',
-            'window.DrupalAngularConfig.apiAccount.login' => (!empty($this->siteConfig['login'])) ? json_encode($this->siteConfig['login'], JSON_THROW_ON_ERROR) : '{}',
-            'window.DrupalAngularConfig.apiAccount.password' => (!empty($this->siteConfig['password'])) ? json_encode($this->siteConfig['password'], JSON_THROW_ON_ERROR) : '{}',
+            'window.DrupalAngularConfig.apiAccount.login' => (empty($this->siteConfig['login'])) ? '{}' : json_encode($this->siteConfig['login'], JSON_THROW_ON_ERROR),
+            'window.DrupalAngularConfig.apiAccount.password' => (empty($this->siteConfig['password'])) ? '{}' : json_encode($this->siteConfig['password'], JSON_THROW_ON_ERROR),
             // inject mapKeys in DrupalAngularAppConfig
-            'window.DrupalAngularConfig.mapProviderKeys' => (!empty($this->siteConfig['mapProviderKeys'])) ? json_encode($this->siteConfig['mapProviderKeys'], JSON_THROW_ON_ERROR) : '{}',
+            'window.DrupalAngularConfig.mapProviderKeys' => (empty($this->siteConfig['mapProviderKeys'])) ? '{}' : json_encode($this->siteConfig['mapProviderKeys'], JSON_THROW_ON_ERROR),
         ];
 
         if (!empty($this->siteConfig['mapProviderKeys'])) {
@@ -461,8 +454,7 @@ class WoodyTheme_Enqueue_Assets
         foreach ($globalScriptString as $name => $val) {
             $return .= $name . '=' . $val . ';';
         }
-        $return .= "}";
 
-        return $return;
+        return $return . "}";
     }
 }

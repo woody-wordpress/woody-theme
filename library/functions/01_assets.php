@@ -93,17 +93,11 @@ function humanDays($number)
 
     if ($number % 7 === 0) {
         $week_number = $number / 7;
-        if ($week_number > 1) {
-            $return = $week_number . ' ' . $weeks;
-        } else {
-            $return = $week_number . ' ' . $week;
-        }
+        $return = $week_number > 1 ? $week_number . ' ' . $weeks : $week_number . ' ' . $week;
+    } elseif ($number > 1) {
+        $return = $number . ' ' . $days;
     } else {
-        if ($number > 1) {
-            $return = $number . ' ' . $days;
-        } else {
-            $return = $number . ' ' . $day;
-        }
+        $return = $number . ' ' . $day;
     }
 
     return $return;
@@ -223,7 +217,7 @@ function isWoodyNewTpl($date, $timezone = 'Europe/Paris')
     $direction = $m->fromNow()->getDirection();
 
     // Si la différence est inférieure ou égale à 1 mois ou la date de création se trouve dans le futur par rapport à la date courante, le template est considéré comme nouveau
-    if($difference <= 1 || $direction == 'future') {
+    if ($difference <= 1 || $direction == 'future') {
         return true;
     } else {
         return false;
@@ -383,14 +377,15 @@ function woody_untokenize($token)
  *****************************/
 function minuteConvert($num)
 {
-    $convertedTime = [];
-    $convertedTime['hours'] = floor($num / 60);
-    $convertedTime['minutes'] = round((($num / 60) - $convertedTime['hours']) * 60);
-    return $convertedTime;
+    return [
+        'hours' => floor($num / 60),
+        'minutes' => round((($num / 60) - $convertedTime['hours']) * 60)
+    ];
 }
 
 
-function foundEmbedProvider($url) {
+function foundEmbedProvider($url)
+{
     // On définit le provider
     if (strpos($url, 'youtu') != false) { // Match youtube.com & youtu.be
         $provider = 'youtube';
@@ -434,14 +429,14 @@ function embedProviderThumbnail($embed)
             if (!empty($matches[0])) {
                 $return = 'https://img.youtube.com/vi/' . $matches[0] . '/maxresdefault.jpg';
             }
-        break;
+            break;
         case 'dailymotion':
             $regex = '/(?<=\/video\/)(.*)/';
             preg_match($regex, $src, $matches);
             if (!empty($matches[0])) {
                 $return = 'https://www.dailymotion.com/thumbnail/video/' . $matches[0];
             }
-        break;
+            break;
         case 'vimeo':
             $regex = '/(?<=\/video\/)(.*)(?=\?dnt)/';
             preg_match($regex, $src, $matches);
@@ -452,7 +447,7 @@ function embedProviderThumbnail($embed)
                 }
                 $return = $vimeo_data[0]['thumbnail_large'];
             }
-        break;
+            break;
     }
 
     return $return;
@@ -475,14 +470,14 @@ function embedThumbnail($embed)
             if (!empty($matches[2])) {
                 $return = 'https://img.youtube.com/vi/' . $matches[2] . '/maxresdefault.jpg';
             }
-        break;
+            break;
         case 'dailymotion':
             $regex = '/(?<=\/video\/)(.*)/';
             preg_match($regex, $embed, $matches);
             if (!empty($matches[0])) {
                 $return = 'https://www.dailymotion.com/thumbnail/video/' . $matches[0];
             }
-        break;
+            break;
         case 'vimeo':
             $regex = '/(.com\/*)(.*)/';
             preg_match($regex, $embed, $matches);
@@ -493,7 +488,7 @@ function embedThumbnail($embed)
                 }
                 $return = $vimeo_data[0]['thumbnail_large'];
             }
-        break;
+            break;
     }
 
     return $return;
@@ -516,14 +511,14 @@ function embedVideo($embed)
             if (!empty($matches[2])) {
                 $return = '<iframe class="lazyloaded" width="640" height="360" data-src="https://www.youtube.com/embed/'.$matches[2].'" src="https://www.youtube.com/embed/'.$matches[2].'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>';
             }
-        break;
+            break;
         case 'dailymotion':
             $regex = '/(?<=\/video\/)(.*)/';
             preg_match($regex, $embed, $matches);
             if (!empty($matches[0])) {
                 $return = '<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;"> <iframe style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden" frameborder="0" type="text/html" src="https://www.dailymotion.com/embed/video/'.$matches[0].'" width="100%" height="100%" allowfullscreen > </iframe> </div>';
             }
-        break;
+            break;
         case 'vimeo':
             $regex = '/(.com\/*)(.*)/';
             preg_match($regex, $embed, $matches);
@@ -531,7 +526,7 @@ function embedVideo($embed)
                 $return = '<iframe src="https://player.vimeo.com/video/'.$matches[2].'?h=b2f1716794" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                     <p><a href="https://vimeo.com/'.$matches[2].'"></a> from <a href="https://vimeo.com/colibris"></a> on <a href="https://vimeo.com">Vimeo</a>.</p>';
             }
-        break;
+            break;
     }
     return $return;
 }
@@ -546,14 +541,14 @@ function embedVideo($embed)
  * @link https://github.com/fightbulc/moment.php
  * @link https://www.php.net/manual/fr/datetime.format.php
  */
-function formatDate($date, $format = 'd F Y') {
+function formatDate($date, $format = 'd F Y')
+{
     $formated_date = '';
     $locale = empty(pll_current_language()) ? PLL_DEFAULT_LOCALE : pll_current_language('locale');
 
     \Moment\Moment::setLocale($locale);
     $m = new \Moment\Moment($date);
     $m->setTimezone(WOODY_TIMEZONE);
-    $formated_date = $m->format($format);
 
-    return $formated_date;
+    return $m->format($format);
 }

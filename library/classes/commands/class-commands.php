@@ -123,7 +123,7 @@ class WoodyTheme_Commands
 
     public function maintenance($args, $assoc_args)
     {
-        $status = (current($args) == 'true') ? true : false;
+        $status = current($args) == 'true';
 
         $fs = new Filesystem();
         if (!$fs->exists(WP_MAINTENANCE_DIR)) {
@@ -141,7 +141,7 @@ class WoodyTheme_Commands
 
     public function maintenance_core($args, $assoc_args)
     {
-        $status = (current($args) == 'true') ? true : false;
+        $status = current($args) == 'true';
 
         $fs = new Filesystem();
         if (!$fs->exists(WP_MAINTENANCE_DIR)) {

@@ -405,11 +405,7 @@ class WoodyTheme_Plugins_Options
             $option = [];
         }
 
-        if (is_array($settings)) {
-            $new_option = array_replace_recursive($option, $settings);
-        } else {
-            $new_option = $settings;
-        }
+        $new_option = is_array($settings) ? array_replace_recursive($option, $settings) : $settings;
 
         $new_option = $this->cleanUpOption($option_name, $new_option);
 

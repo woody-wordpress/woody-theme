@@ -71,8 +71,8 @@ class WoodyTheme_Cleanup_Admin
     public function sideMetaboxOrder($order)
     {
         add_meta_box('pageparentdiv', __('Déplacer la page'), 'page_attributes_meta_box', 'page', 'side');
-        $box_order = array(
-            'side' => join(
+        return array(
+            'side' => implode(
                 ",",
                 array(
                     'submitdiv',
@@ -81,7 +81,6 @@ class WoodyTheme_Cleanup_Admin
                 )
             ),
         );
-        return $box_order;
     }
 
     /**
@@ -173,7 +172,7 @@ class WoodyTheme_Cleanup_Admin
      */
     public function custom_pre_get_posts(WP_Query $wp_query)
     {
-        if (in_array($wp_query->get('post_type'), array('page'))) {
+        if ($wp_query->get('post_type') == 'page') {
             $wp_query->set('update_post_meta_cache', false);
         }
     }

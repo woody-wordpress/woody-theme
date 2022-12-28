@@ -12,6 +12,14 @@ use WoodyProcess\Tools\WoodyTheme_WoodyProcessTools;
 
 class WoodyTheme_Shuffle
 {
+    /**
+     * @var \WoodyProcess\Compilers\WoodyTheme_WoodyCompilers|mixed
+     */
+    public $compilers;
+    /**
+     * @var \WoodyProcess\Tools\WoodyTheme_WoodyProcessTools|mixed
+     */
+    public $tools;
     public function __construct()
     {
         $this->compilers = new WoodyTheme_WoodyCompilers();
@@ -47,9 +55,7 @@ class WoodyTheme_Shuffle
                 $wrapper['focused_taxonomy_terms'] = [];
                 $focused_terms = get_post_meta($post_id, 'section_'. $section_index .'_section_content_'. $block_index .'_focused_taxonomy_terms');
                 if (!empty($focused_terms) && !empty($focused_terms[0])) {
-                    foreach ($focused_terms[0] as $term_id) {
-                        $wrapper['focused_taxonomy_terms'][] = $term_id;
-                    }
+                    $wrapper['focused_taxonomy_terms'] = $focused_terms[0];
                 }
 
                 if (!empty($wrapper)) {
