@@ -58,6 +58,7 @@ class WoodyTheme_ACF_Counter
                             $focused_term = get_term($focused_term_id);
                             $custom_tax[$focused_term->taxonomy][] = $focused_term_id;
                         }
+
                         foreach ($custom_tax as $taxo => $terms) {
                             $tax_query['custom_tax'][] = array(
                                 'taxonomy' => $taxo,

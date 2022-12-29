@@ -26,7 +26,7 @@ class WoodyTheme_Taxonomy
     public function woodyThemeUpdate()
     {
         // On inclut les termes génériques à la taxo
-        wp_insert_term('Page d\'accueil', 'page_type', array('slug' => 'front_page'));
+        wp_insert_term("Page d'accueil", 'page_type', array('slug' => 'front_page'));
         wp_insert_term('Page de contenu', 'page_type', array('slug' => 'basic_page'));
         wp_insert_term('Page miroir', 'page_type', array('slug' => 'mirror_page'));
         wp_insert_term('Séjour', 'page_type', array('slug' => 'trip'));
@@ -282,6 +282,7 @@ class WoodyTheme_Taxonomy
                         'title' => $post->post_title
                     ];
                 }
+
                 $posts['term'] = $term->name;
             }
         }

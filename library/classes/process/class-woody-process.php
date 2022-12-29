@@ -17,6 +17,7 @@ use WoodyProcess\Compilers\WoodyTheme_WoodyCompilers;
 class WoodyTheme_WoodyProcess
 {
     protected $tools;
+
     protected $compilers;
 
     public function __construct()
@@ -112,6 +113,7 @@ class WoodyTheme_WoodyProcess
                         foreach ($layout['gallery_items'] as $key => $attachment) {
                             $layout['gallery_items'][$key]['attachment_more_data'] = $this->tools->getAttachmentMoreData($layout['gallery_items'][$key]['ID']);
                         }
+
                         break;
                     case 'manual':
                     default:
@@ -121,14 +123,17 @@ class WoodyTheme_WoodyProcess
                                 if (isset($context['print_rdbk']) && !empty($context['print_rdbk'])) {
                                     $layout['gallery_items'][$key]['lazy'] = 'disabled';
                                 }
+
                                 if (!empty($layout['gallery_items'][$key]['attachment_more_data']['linked_video'])) {
                                     $layout['gallery_items'][$key]['attachment_more_data']['linked_video_iframe'] = embedVideo($layout['gallery_items'][$key]['attachment_more_data']['linked_video']);
                                     $layout['gallery_items'][$key]['attachment_more_data']['linked_video_thumbnail'] = embedThumbnail($layout['gallery_items'][$key]['attachment_more_data']['linked_video']);
                                 }
                             }
                         }
+
                         break;
                 }
+
                 $layout['display'] = $this->tools->getDisplayOptions($layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
@@ -140,6 +145,7 @@ class WoodyTheme_WoodyProcess
                         $layout['interactive_gallery_items'][$key]['interactive_gallery_photo']['attachment_more_data'] = $this->tools->getAttachmentMoreData($media_item['interactive_gallery_photo']['ID']);
                     }
                 }
+
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             case 'links':
@@ -173,6 +179,7 @@ class WoodyTheme_WoodyProcess
                         }
                     }
                 }
+
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             case 'semantic_view':
@@ -190,6 +197,7 @@ class WoodyTheme_WoodyProcess
                 if (!empty($layout['summary_bg_params'])) {
                     $layout['display'] = $this->tools->getDisplayOptions($layout['summary_bg_params']);
                 }
+
                 $layout['summary'] = $this->compilers->formatSummaryItems(get_the_ID());
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
@@ -214,6 +222,7 @@ class WoodyTheme_WoodyProcess
                 if (!empty($layout['icon_img']) && !empty($layout['icon_img']['sizes']) && !empty($layout['icon_img']['sizes']['ratio_free_small'])) {
                     $layout['icon_img']['sizes']['ratio_free'] = $layout['icon_img']['sizes']['ratio_free_small'];
                 }
+
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             case 'feature_v2':
@@ -239,6 +248,7 @@ class WoodyTheme_WoodyProcess
                 } else {
                     $layout['active_shares'] = getActiveShares();
                 }
+
                 $layout['block_titles'] = $this->tools->getBlockTitles($layout, '', 'shares_');
                 $layout['display'] = $this->tools->getDisplayOptions($layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
@@ -259,6 +269,7 @@ class WoodyTheme_WoodyProcess
                 // On compile le $layout uniquement si ça n'a pas déjà été fait
                 $return = is_array($layout) ? \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout) : $layout;
         }
+
         return $return;
     }
 
@@ -292,11 +303,13 @@ class WoodyTheme_WoodyProcess
                                 if (wp_is_mobile()) {
                                     $grid_content['items'][] = $this->processWoodyLayouts($layout, $context);
                                 }
+
                                 break;
                             case 'desktop':
                                 if (!wp_is_mobile()) {
                                     $grid_content['items'][] = $this->processWoodyLayouts($layout, $context);
                                 }
+
                                 break;
                                 // if $device_display_block is empty, we display the block for each device (mobile & desktop), so no test is required
                             default:
@@ -444,6 +457,7 @@ class WoodyTheme_WoodyProcess
                     'compare'    => '>='
                 ];
             }
+
             if (!empty($query_form['focused_trip_price']['max'])) {
                 $the_meta_query[] = [
                     'key'        => 'the_price_price',
@@ -464,6 +478,7 @@ class WoodyTheme_WoodyProcess
                     'compare'    => '>='
                 ];
             }
+
             if (!empty($query_form['focused_trip_duration']['max'])) {
                 $the_meta_query[] = [
                     'key'        => 'the_duration_count_days',
@@ -628,11 +643,13 @@ class WoodyTheme_WoodyProcess
                                 if (wp_is_mobile()) {
                                     $components['items'][] = $this->processWoodyLayouts($layout, $context);
                                 }
+
                                 break;
                             case 'desktop':
                                 if (!wp_is_mobile()) {
                                     $components['items'][] = $this->processWoodyLayouts($layout, $context);
                                 }
+
                                 break;
                                 // if $device_display_block is empty, we display the block for each device (mobile & desktop), so no test is required
                             default:
@@ -680,6 +697,7 @@ class WoodyTheme_WoodyProcess
                 if (!empty($summary_id)) {
                     $the_section['summary_id'] = $summary_id;
                 }
+
                 if (!empty($section['section_banner'])) {
                     foreach ($section['section_banner'] as $banner) {
                         $the_section[$banner] = $this->tools->getSectionBannerFiles($banner);

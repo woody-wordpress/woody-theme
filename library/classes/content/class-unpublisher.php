@@ -136,6 +136,7 @@ class WoodyTheme_Unpublisher
 
         $m = new \Moment\Moment();
         $m->setTimezone(WOODY_TIMEZONE);
+
         $now = $m->format('Y-m-d H:i:00');
 
         $args=array(
@@ -144,12 +145,12 @@ class WoodyTheme_Unpublisher
             '_builtin'              => false
         );
         $post_types = get_post_types($args, 'names', 'and');
-        $post_types_str=implode('\',\'', $post_types);
+        $post_types_str=implode("','", $post_types);
 
         if (!empty($post_types_str)) {
-            $sql="SELECT ID from $wpdb->posts WHERE post_type in ('post','page','$post_types_str') AND post_status='future' AND post_date_gmt<'$now'";
+            $sql="SELECT ID from $wpdb->posts WHERE post_type in ('post','page','{$post_types_str}') AND post_status='future' AND post_date_gmt<'{$now}'";
         } else {
-            $sql="SELECT ID from $wpdb->posts WHERE post_type in ('post','page') AND post_status='future' AND post_date_gmt<'$now'";
+            $sql="SELECT ID from $wpdb->posts WHERE post_type in ('post','page') AND post_status='future' AND post_date_gmt<'{$now}'";
         }
 
         $results = $wpdb->get_results($sql);

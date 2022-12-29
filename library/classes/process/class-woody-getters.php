@@ -24,6 +24,7 @@ class WoodyTheme_WoodyGetters
     {
         $this->tools = new WoodyTheme_WoodyProcessTools();
     }
+
     /**
      *
      * Nom : getAutoFocus_data
@@ -55,9 +56,6 @@ class WoodyTheme_WoodyGetters
                 if (!empty($wrapper['focused_type']) && $wrapper['focused_type'] == 'documents') {
                     $data = $this->getAttachmentPreview($wrapper, $post);
                 } else {
-                    // On vérifie si la page est de type miroir
-                    $page_type = get_the_terms($post->ID, 'page_type');
-
                     // On exclut le contenu épinglé du tableau
                     if ($pinned_content_id != $post->ID) {
                         $data = $this->getPagePreview($wrapper, $post);
@@ -68,6 +66,7 @@ class WoodyTheme_WoodyGetters
                     $the_items['items'][$key] = $data;
                 }
             }
+
             $the_items['max_num_pages'] = $query_result->max_num_pages;
             $the_items['wp_query'] = $query_result;
         }
@@ -85,6 +84,7 @@ class WoodyTheme_WoodyGetters
                     $pinned_post_preview = $this->getPagePreview($wrapper, $wrapper['pinnable_selection']);
                     break;
             }
+
             // $focused_pinnable[] = (!empty($pinned_post_preview)) ?  $pinned_post_preview : [];
 
             // on ajoute le contenu épinglé au début du tableau
@@ -135,6 +135,7 @@ class WoodyTheme_WoodyGetters
                                 $post_preview = $this->getPagePreview($wrapper, $post, $clickable);
                                 break;
                         }
+
                         $the_items['items'][$key] = (empty($post_preview)) ? [] : $post_preview;
                     }
                 }
@@ -144,6 +145,7 @@ class WoodyTheme_WoodyGetters
         if (!empty($the_items['items']) && is_array($the_items['items']) && $wrapper['focused_sort'] == 'random') {
             shuffle($the_items['items']);
         }
+
         return $the_items;
     }
 
@@ -164,7 +166,7 @@ class WoodyTheme_WoodyGetters
             $lang = apply_filters('woody_autofocus_sheet_lang', pll_current_language());
             $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), $playlist_params, 'json');
             if (!empty($playlist['items'])) {
-                foreach ($playlist['items'] as $key => $item) {
+                foreach ($playlist['items'] as $item) {
                     $wpSheetNode = apply_filters('woody_hawwwai_get_post_by_sheet_id', $item['sheetId'], $lang, ['publish']);
                     if (!empty($wpSheetNode)) {
                         if (is_array($wpSheetNode)) {
@@ -283,6 +285,7 @@ class WoodyTheme_WoodyGetters
             foreach ($items['items'] as $key => $item) {
                 $date[$key] = $item['date'];
             }
+
             array_multisort($date, SORT_DESC, $items['items']);
         }
 
@@ -305,6 +308,7 @@ class WoodyTheme_WoodyGetters
                 } else {
                     $data['img'] = get_field('attachment_focus_img', $post->ID);
                 }
+
                 if (!empty($data['img'])) {
                     $data['img']['attachment_more_data'] = $this->tools->getAttachmentMoreData($data['img']['ID']);
                 }
@@ -317,6 +321,7 @@ class WoodyTheme_WoodyGetters
 
             $data['page_type'] = 'attachment';
         }
+
         return $data;
     }
 
@@ -366,19 +371,24 @@ class WoodyTheme_WoodyGetters
             if (empty($is_attachment) && in_array('pretitle', $wrapper['display_elements'])) {
                 $data['pretitle'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($original_item, 'focus_pretitle', get_field('page_heading_heading', $post->ID), 'pretitle', $post, 'field_5b87f20257a1d', $data['page_type']), $original_item->ID);
             }
+
             if (empty($is_attachment) && in_array('subtitle', $wrapper['display_elements'])) {
                 $data['subtitle'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($original_item, 'focus_subtitle', get_field('page_heading_heading', $post->ID), 'subtitle', $post, 'field_5b87f23b57a1e', $data['page_type']), $original_item->ID);
             }
+
             if (empty($is_attachment) && in_array('icon', $wrapper['display_elements'])) {
                 $data['woody_icon'] = get_field('focus_woody_icon', $original_item->ID);
                 $data['icon_type'] = 'picto';
             }
+
             if (empty($is_attachment) && in_array('description', $wrapper['display_elements'])) {
                 $data['description'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($original_item, 'focus_description', '', '', $post, 'field_5b2bbbfaec6b2', $data['page_type']), $original_item->ID);
             }
+
             if (in_array('created', $wrapper['display_elements'])) {
                 $data['created'] = get_the_date('', $post->ID);
             }
+
             if (empty($is_attachment) && in_array('price', $wrapper['display_elements'])) {
                 $price_type = get_field('the_price_price_type', $post->ID);
                 // TODO: passer par le filtre woody_custom_pagePreview dans l'addon-group-quotation
@@ -390,12 +400,15 @@ class WoodyTheme_WoodyGetters
                     $data['the_price'] = get_field('field_5b6c670eb54f2', $post->ID);
                 }
             }
+
             if (empty($is_attachment) && in_array('duration', $wrapper['display_elements'])) {
                 $data['the_duration'] = get_field('field_5b6c5e7cb54ee', $post->ID);
             }
+
             if (empty($is_attachment) && in_array('length', $wrapper['display_elements'])) {
                 $data['the_length'] = get_field('field_5b95423386e8f', $post->ID);
             }
+
             if (empty($is_attachment) && in_array('linked_profil', $wrapper['display_elements'])) {
                 $profil_type = get_field('profil_type', $post->ID);
 
@@ -448,6 +461,7 @@ class WoodyTheme_WoodyGetters
                 $video = $this->tools->getFieldAndFallback($original_item, 'field_5b0e5df0d4b1c', '', '', $post, '', $data['page_type']);
                 $data['img'] = empty($video) ? '' : $video['movie_poster_file'];
             }
+
             if (!empty($data['img'])) {
                 $data['img']['attachment_more_data'] = $this->tools->getAttachmentMoreData($data['img']['ID']);
 
@@ -497,7 +511,6 @@ class WoodyTheme_WoodyGetters
      */
     public function getCustomPreview($item, $wrapper = null, $content_type = null)
     {
-        $data = [];
         $remove_ellipsis = (!empty($content_type)) && ($content_type == 'custom_content');
         $data = [
             'title' => (empty($item['title'])) ? '' : $item['title'],
@@ -549,6 +562,7 @@ class WoodyTheme_WoodyGetters
         } elseif ($item['media_type'] == 'movie' && !empty($item['movie'])) {
             $data['movie'] = $item['movie'];
         }
+
         return $data;
     }
 
@@ -578,7 +592,6 @@ class WoodyTheme_WoodyGetters
             }
         }
 
-        $data = [];
         $sheet_item = woody_hawwwai_item($post->ID);
 
         $data = [
@@ -596,9 +609,11 @@ class WoodyTheme_WoodyGetters
                 'title' => (empty($sheet_item['img']['title'])) ? '' : $sheet_item['img']['title']
             ];
         }
+
         if (!empty($wrapper['deal_mode']) && !empty($sheet_item['deals'])) {
             $data['title'] = $sheet_item['deals']['list'][$deal_index]['nom'][$current_lang];
         }
+
         if (!empty($wrapper['display_elements']) && is_array($wrapper['display_elements'])) {
             if (in_array('sheet_type', $wrapper['display_elements'])) {
                 $data['sheet_type'] = (empty($sheet_item['type'])) ? '' : $sheet_item['type'];
@@ -606,6 +621,7 @@ class WoodyTheme_WoodyGetters
                     $data['sheet_type'] = $sheet_item['title'];
                 }
             }
+
             if (in_array('description', $wrapper['display_elements'])) {
                 $data['description'] = (empty($sheet_item['desc'])) ? '' : $sheet_item['desc'];
                 if (!empty($wrapper['deal_mode']) && !empty($sheet_item['deals']['list'][$deal_index]['description'][$current_lang])) {
@@ -626,6 +642,7 @@ class WoodyTheme_WoodyGetters
                 $data['the_price']['price'] = (empty($sheet_item['tariffs']['price'])) ? '' : $sheet_item['tariffs']['price'];
                 $data['the_price']['prefix_price'] = (empty($sheet_item['tariffs']['label'])) ? '' : $sheet_item['tariffs']['label'];
             }
+
             if (in_array('bookable', $wrapper['display_elements'])) {
                 $data['booking'] = (empty($sheet_item['booking']['link'])) ? '' : $sheet_item['booking'];
             }
@@ -650,10 +667,11 @@ class WoodyTheme_WoodyGetters
         if (!empty($sheet_item['bordereau']) && ($sheet_item['bordereau'] === 'HOT' || $sheet_item['bordereau'] == 'HPA')) {
             $rating = [];
             if (!empty($sheet_item['ratings'])) {
-                for ($i = 0; $i < $sheet_item['ratings'][0]['value']; $i++) {
+                for ($i = 0; $i < $sheet_item['ratings'][0]['value']; ++$i) {
                     $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
                 }
             }
+
             if (!empty($wrapper['display_elements']) && is_array($wrapper['display_elements']) && in_array('sheet_rating', $wrapper['display_elements'])) {
                 $data['sheet_rating'] = implode('', $rating);
             }
@@ -769,6 +787,7 @@ class WoodyTheme_WoodyGetters
                                 }
                             }
                         }
+
                         $return[$key]['filter_name'] = $filter['list_filter_name'];
                         break;
 
@@ -791,6 +810,7 @@ class WoodyTheme_WoodyGetters
                                 }
                             }
                         }
+
                         $return[$key]['filter_name'] = $filter['list_filter_name'];
                         break;
 
@@ -817,10 +837,12 @@ class WoodyTheme_WoodyGetters
                             $return[$key]['minmax']['default_max'] = (empty($active_filters['focused_trip_' . $filter['list_filter_type']]['max'])) ? false : $active_filters['focused_trip_' . $filter['list_filter_type']]['max'];
                             $return[$key]['minmax']['default_min'] = (empty($active_filters['focused_trip_' . $filter['list_filter_type']]['min'])) ? false : $active_filters['focused_trip_' . $filter['list_filter_type']]['min'];
                         }
+
                         $return[$key]['filter_name'] = $filter['list_filter_name'];
                         break;
                 }
             }
+
             $return['button'] = (empty($filter_wrapper['filter_button'])) ? '' : $filter_wrapper['filter_button'];
             $return['reset'] = (empty($filter_wrapper['reset_button'])) ? '' : $filter_wrapper['reset_button'];
             $return['open_auto'] = (empty($filter_wrapper['listfilter_open_auto'])) ? '' : $filter_wrapper['listfilter_open_auto'];
@@ -938,6 +960,7 @@ class WoodyTheme_WoodyGetters
                 foreach ($wrapper['profile_focus_category'] as $term_id) {
                     $terms_ids[] = $term_id;
                 }
+
                 $args['tax_query'] = [                     //(array) - use taxonomy parameters (available with Version 3.1).
                     'relation' => 'OR',                      //(string) - Possible values are 'AND' or 'OR' and is the equivalent of running a JOIN for each taxonomy
                     [
@@ -966,8 +989,6 @@ class WoodyTheme_WoodyGetters
 
     public function getProfilePreview($wrapper, $post)
     {
-        $data = [];
-
         $data = [
             'title' => $post->post_title,
             'firstname' => get_field('profile_firstname', $post->ID),
@@ -979,30 +1000,39 @@ class WoodyTheme_WoodyGetters
             if (in_array('complement', $wrapper['profile_focus_display'])) {
                 $data['complement'] = get_field('profile_complement', $post->ID);
             }
+
             if (in_array('description', $wrapper['profile_focus_display'])) {
                 $data['description'] = get_field('profile_description', $post->ID);
             }
+
             if (in_array('birth', $wrapper['profile_focus_display'])) {
                 $data['birth'] = get_field('profile_contacts_profile_birth', $post->ID);
             }
+
             if (in_array('nationality', $wrapper['profile_focus_display'])) {
                 $data['nationality'] = get_field('profile_contacts_profile_nationality', $post->ID);
             }
+
             if (in_array('address', $wrapper['profile_focus_display'])) {
                 $data['contacts']['address'] = get_field('profile_contacts_profile_address', $post->ID);
             }
+
             if (in_array('mail', $wrapper['profile_focus_display'])) {
                 $data['contacts']['mail'] = get_field('profile_contacts_profile_mail', $post->ID);
             }
+
             if (in_array('phone', $wrapper['profile_focus_display'])) {
                 $data['contacts']['phone'] = get_field('profile_contacts_profile_phone', $post->ID);
             }
+
             if (in_array('mobile', $wrapper['profile_focus_display'])) {
                 $data['contacts']['mobile'] = get_field('profile_contacts_profile_mobile', $post->ID);
             }
+
             if (in_array('linkedin', $wrapper['profile_focus_display'])) {
                 $data['socials']['linkedin'] = get_field('profile_contacts_profile_socials_profile_linkedin', $post->ID);
             }
+
             if (in_array('twitter', $wrapper['profile_focus_display'])) {
                 $data['socials']['twitter'] = get_field('profile_contacts_profile_socials_profile_twitter', $post->ID);
             }

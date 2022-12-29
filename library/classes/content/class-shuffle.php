@@ -16,10 +16,12 @@ class WoodyTheme_Shuffle
      * @var \WoodyProcess\Compilers\WoodyTheme_WoodyCompilers|mixed
      */
     public $compilers;
+
     /**
      * @var \WoodyProcess\Tools\WoodyTheme_WoodyProcessTools|mixed
      */
     public $tools;
+
     public function __construct()
     {
         $this->compilers = new WoodyTheme_WoodyCompilers();

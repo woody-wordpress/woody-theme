@@ -42,7 +42,6 @@ class WoodyTheme_Menus
         if (!empty($woody_menus_cache[$menu_cache_key])) {
             $return = $woody_menus_cache[$menu_cache_key];
         } else {
-            $return = [];
             if (!empty($depth_1_ids)) {
                 $return = self::getMenuLinks($depth_1_ids, 0, $limit, $root_level);
             } else {
@@ -72,15 +71,18 @@ class WoodyTheme_Menus
             if (empty($fields_groups)) {
                 continue;
             }
+
             foreach ($fields_groups as $group_key => $field_group) {
                 if (empty($field_group)) {
                     continue;
                 }
+
                 if (is_array($field_group)) {
                     foreach ($field_group as $field) {
                         if (empty($field)) {
                             continue;
                         }
+
                         if (!is_array($field)) {
                             if (is_object($field)) {
                                 $in_menu_title = get_field('in_menu_title', $field->ID);
@@ -130,6 +132,7 @@ class WoodyTheme_Menus
         if (!empty($post_id) && is_numeric($post_id)) {
             $return['submenu_' . $post_id] = apply_filters('woody_get_field_option', 'submenu_' . $post_id);
         }
+
         return $return;
     }
 
@@ -261,6 +264,7 @@ class WoodyTheme_Menus
                                 $sublinks = get_children($args);
                                 $link['sublinks'] = empty($sublinks) ? [] : self::getMenuLinks($sublinks);
                             }
+
                             $part['links'][$link_key] = \Timber::compile($twig_paths[$link_display], $link);
                         }
                     }
@@ -281,7 +285,8 @@ class WoodyTheme_Menus
                 if (!empty($menu_link['submenu'][$key])) {
                     $the_submenu['items'][] = $menu_link['submenu'][$key];
                 }
-                $i++;
+
+                ++$i;
             }
 
             $return = \Timber::compile($twig_paths[$submenu['display']['grid_tpl']], $the_submenu);

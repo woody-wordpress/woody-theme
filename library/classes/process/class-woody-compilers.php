@@ -17,6 +17,7 @@ use WoodyProcess\Tools\WoodyTheme_WoodyProcessTools;
 class WoodyTheme_WoodyCompilers
 {
     protected $tools;
+
     protected $getter;
 
     public function __construct()
@@ -59,6 +60,7 @@ class WoodyTheme_WoodyCompilers
                 if (!empty($wrapper['playlist_conf_id'])) {
                     $the_items = $this->getter->getAutoFocusSheetData($wrapper);
                 }
+
                 break;
             case 'auto_focus_topics':
                 $the_items = $this->getter->getAutoFocusTopicsData($wrapper);
@@ -67,6 +69,7 @@ class WoodyTheme_WoodyCompilers
                 $the_items = $this->getter->getProfileFocusData($wrapper);
                 break;
         }
+
         $the_items['alert'] = apply_filters('add_admin_alert_message', '');
         if (!empty($the_items['items']) && is_array($the_items['items'])) {
             foreach ($the_items['items'] as $item_key => $item) {
@@ -95,6 +98,7 @@ class WoodyTheme_WoodyCompilers
                 } elseif ($wrapper['mobile_behaviour']['mobile_grid'] == 'swiper') {
                     $the_items['swResp'] = true;
                 }
+
                 $the_items['mobile_cols'] = (empty($wrapper['mobile_behaviour']['mobile_cols'])) ? '' : $wrapper['mobile_behaviour']['mobile_cols'];
                 $the_items['mobile_behaviour'] = $wrapper['mobile_behaviour'];
             }
@@ -102,6 +106,7 @@ class WoodyTheme_WoodyCompilers
             if (!empty($wrapper['focus_block_title_bg_params'])) {
                 $the_items['display_block_titles'] = $this->tools->getDisplayOptions($wrapper['focus_block_title_bg_params']);
             }
+
             if (!empty($wrapper['focus_block_bg_params'])) {
                 $the_items['display'] = $this->tools->getDisplayOptions($wrapper['focus_block_bg_params']);
             }
@@ -112,12 +117,15 @@ class WoodyTheme_WoodyCompilers
                 } elseif (!empty(get_field('tmaps_confid', 'option'))) {
                     $the_items['map_params']['tmaps_confid'] = get_field('tmaps_confid', 'option');
                 }
+
                 if (!empty($wrapper['focus_map_params']['map_height'])) {
                     $the_items['map_params']['map_height'] = $wrapper['focus_map_params']['map_height'];
                 }
+
                 if (!empty($wrapper['focus_map_params']['map_zoom_auto'])) {
                     $the_items['map_params']['map_zoom_auto'] = $wrapper['focus_map_params']['map_zoom_auto'];
                 }
+
                 if (!empty($wrapper['focus_map_params']['map_zoom']) && (empty($the_items['map_params']['map_zoom_auto']) || $the_items['map_params']['map_zoom_auto'] === false)) {
                     $the_items['map_params']['map_zoom'] = $wrapper['focus_map_params']['map_zoom'];
                 }
@@ -154,7 +162,6 @@ class WoodyTheme_WoodyCompilers
 
     public function formatGeomapData($wrapper, $twigPaths)
     {
-        $return = '';
         if (empty($wrapper['markers']) && empty($wrapper['routes'])) {
             return;
         }
@@ -184,6 +191,7 @@ class WoodyTheme_WoodyCompilers
                                 $wrapper['routes'][$key]['features'][$f_key]['properties']['stroke'] = $route_color;
                                 $wrapper['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = $stroke_thickness;
                             }
+
                             $fill_opacity = $wrapper['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] ?? 0;
                             $wrapper['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] = $fill_opacity == 0 ? 0.5 : $fill_opacity;
 
@@ -192,6 +200,7 @@ class WoodyTheme_WoodyCompilers
                                 unset($wrapper['routes'][$key]['features'][$f_key]);
                             }
                         }
+
                         $wrapper['routes'][$key]['features'] = array_values($wrapper['routes'][$key]['features']);
                         $wrapper['routes'][$key] = json_encode($wrapper['routes'][$key], JSON_THROW_ON_ERROR);
                     }
@@ -206,15 +215,18 @@ class WoodyTheme_WoodyCompilers
             $wrapper['map_zoom_auto'] = ($wrapper['map_zoom_auto']) ? 'true' : 'false';
 
             // Calcul center of map
-            $sum_lat = $sum_lng = 0;
-            foreach ($wrapper['markers'] as $key => $marker) {
+            $sum_lat = 0;
+            $sum_lng = 0;
+            foreach ($wrapper['markers'] as $marker) {
                 if (!empty($marker['map_position']['lat'])) {
                     $sum_lat += $marker['map_position']['lat'];
                 }
+
                 if (!empty($marker['map_position']['lng'])) {
                     $sum_lng += $marker['map_position']['lng'];
                 }
             }
+
             $wrapper['default_lat'] = $sum_lat / (is_countable($wrapper['markers']) ? count($wrapper['markers']) : 0);
             $wrapper['default_lng'] = $sum_lng / (is_countable($wrapper['markers']) ? count($wrapper['markers']) : 0);
 
@@ -225,6 +237,7 @@ class WoodyTheme_WoodyCompilers
                 if (empty($marker['title']) && empty($marker['description']) && empty($marker['img']) && !empty($marker['link']['url'])) {
                     $wrapper['markers'][$key]['marker_as_link'] = true;
                 }
+
                 $wrapper['markers'][$key]['compiled_marker']  = \Timber::compile('/_objects/markerObject.twig', $marker);
 
                 if (!empty($marker['title']) || !empty($marker['description']) || !empty($marker['img'])) {
@@ -234,6 +247,7 @@ class WoodyTheme_WoodyCompilers
                         $the_marker['image_style'] = 'ratio_16_9';
                         $the_marker['item']['img'] = $marker['img'];
                     }
+
                     $the_marker['item']['link'] = (empty($marker['link'])) ? '' : $marker['link'];
                     $wrapper['markers'][$key]['marker_thumb_html']  = \Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker);
                 }
@@ -243,6 +257,7 @@ class WoodyTheme_WoodyCompilers
         if (empty($wrapper['tmaps_confid']) && !empty(get_field('tmaps_confid', 'option'))) {
             $wrapper['tmaps_confid'] = get_field('tmaps_confid', 'option');
         }
+
         return \Timber::compile($twigPaths[$wrapper['woody_tpl']], $wrapper);
     }
 
@@ -299,10 +314,9 @@ class WoodyTheme_WoodyCompilers
 
         if (!empty($query_result->posts)) {
             foreach ($query_result->posts as $key => $post) {
-                $data = [];
                 $data = getPagePreview($wrapper, $post);
                 if (!empty($data['description'])) {
-                    preg_match_all("/\[[^\]]*\]/", $data['description'], $matches);
+                    preg_match_all("#\[[^\]]*\]#", $data['description'], $matches);
                     if (!empty($matches[0])) {
                         foreach ($matches[0] as $match) {
                             $str = str_replace(['[', ']'], '', $match);
@@ -311,6 +325,7 @@ class WoodyTheme_WoodyCompilers
                         }
                     }
                 }
+
                 $the_items['items'][$key] = $data;
             }
         }
@@ -325,7 +340,6 @@ class WoodyTheme_WoodyCompilers
     public function formatListContent($wrapper, $current_post, $twigPaths)
     {
         $the_list = [];
-        $return = '';
 
         // On définit des variables de base
         $the_list['permalink'] = woody_get_permalink($current_post->ID);
@@ -338,6 +352,7 @@ class WoodyTheme_WoodyCompilers
         if ($paginate) {
             $the_list['pager_position'] = $wrapper['the_list_pager']['list_pager_position'];
         }
+
         // On récupère les champs du formulaire de requete du backoffice
         $list_el_wrapper = $wrapper['the_list_elements']['list_el_req_fields'];
 
@@ -436,6 +451,7 @@ class WoodyTheme_WoodyCompilers
         if ($paginate && !empty($the_items['max_num_pages'])) {
             $the_list['pager'] = $this->formatListPager($the_items['max_num_pages'], $wrapper['uniqid'], $list_el_wrapper['seed']);
         }
+
         return \Timber::compile($twigPaths[$wrapper['the_list_filters']['listfilter_woody_tpl']], $the_list);
     }
 
@@ -447,6 +463,7 @@ class WoodyTheme_WoodyCompilers
                 foreach ($cache_list as $cache_key) {
                     wp_cache_delete($cache_key, 'woody');
                 }
+
                 dropzone_delete('woody_list_filters_cache');
             }
         }
@@ -460,7 +477,6 @@ class WoodyTheme_WoodyCompilers
      */
     public function formatListPager($max_num_pages, $uniqid, $seed)
     {
-        $return = [];
         $page_offset = (empty($_GET[$uniqid])) ? 1 : htmlentities(stripslashes($_GET[$uniqid]));
 
         $pager_args = [
@@ -507,6 +523,7 @@ class WoodyTheme_WoodyCompilers
                 }
             }
         }
+
         return $return;
     }
 
@@ -651,13 +668,14 @@ class WoodyTheme_WoodyCompilers
                     $page_hero['mobile_img_override_ratio'] = '';
                     $page_hero['page_heading_img']['attachment_more_data'] = (empty($page_hero['page_heading_img']['ID'])) ? [] : $this->tools->getAttachmentMoreData($page_hero['page_heading_img']['ID']);
                 }
+
                 if (!empty($page_hero['mobile_page_heading_img']) && is_array($page_hero['mobile_page_heading_img'])) {
                     $page_hero['mobile_page_heading_img']['attachment_more_data'] = (empty($page_hero['mobile_page_heading_img']['ID'])) ? [] : $this->tools->getAttachmentMoreData($page_hero['mobile_page_heading_img']['ID']);
                 }
             }
 
             if (!empty($page_hero['page_heading_add_social_movie']) && !empty($page_hero['page_heading_social_movie'])) {
-                preg_match_all('@src="([^"]+)"@', $page_hero['page_heading_social_movie'], $result);
+                preg_match_all('#src="([^"]+)"#', $page_hero['page_heading_social_movie'], $result);
                 if (!empty($result[1]) && !empty($result[1][0])) {
                     $iframe_url = $result[1][0];
 
@@ -667,6 +685,7 @@ class WoodyTheme_WoodyCompilers
                     }
                 }
             }
+
             $page_hero['isfrontpage']= !empty(get_option('page_on_front')) && get_option('page_on_front') == pll_get_post($context['post_id']) ;
             $page_hero['title'] = (empty($page_hero['title'])) ? '' : $this->tools->replacePattern($page_hero['title'], $context['post_id']);
             $page_hero['pretitle'] = (empty($page_hero['pretitle'])) ? '' : $this->tools->replacePattern($page_hero['pretitle'], $context['post_id']);
@@ -694,7 +713,6 @@ class WoodyTheme_WoodyCompilers
     protected function createBreadcrumb($context)
     {
         $data = [];
-        $breadcrumb = '';
         $current_post_id = (empty($context['mirror_id'])) ? $context['post']->ID : $context['mirror_id'];
 
         // On ajoute la page d'accueil
@@ -784,7 +802,7 @@ class WoodyTheme_WoodyCompilers
                 }
 
                 if (!empty($slide['landswpr_slide_add_social_movie']) && !empty($slide['landswpr_slide_social_movie'])) {
-                    preg_match_all('@src="([^"]+)"@', $slide['landswpr_slide_social_movie'], $result);
+                    preg_match_all('#src="([^"]+)"#', $slide['landswpr_slide_social_movie'], $result);
                     if (!empty($result[1]) && !empty($result[1][0])) {
                         $iframe_url = $result[1][0];
 
@@ -805,7 +823,6 @@ class WoodyTheme_WoodyCompilers
 
     public function formatBookBlock($post, $woody_components)
     {
-        $bookblock = [];
         $bookblock = getAcfGroupFields('group_5c0e4121ee3ed', $post);
 
         if (!empty($bookblock['bookblock_playlists'][0]['pl_post_id'])) {
@@ -818,6 +835,7 @@ class WoodyTheme_WoodyCompilers
             if (!empty($bookblock['bookblock_bg_params']['background_img_opacity']) || !empty($bookblock['bookblock_bg_params']['background_color']) || !empty($bookblock['bookblock_bg_params']['border_color'])) {
                 $bookblock['the_classes'][] = 'padd-all-md';
             }
+
             $bookblock['classes'] = (empty($bookblock['the_classes'])) ? '' : implode(' ', $bookblock['the_classes']);
             if (!empty($bookblock['bookblock_playlists']) && is_array($bookblock['bookblock_playlists'])) {
                 foreach ($bookblock['bookblock_playlists'] as $pl_key => $pl) {
@@ -843,6 +861,7 @@ class WoodyTheme_WoodyCompilers
                                             $bookblock['bookblock_playlists'][$pl_key]['filters']['daterange'] = true;
                                         }
                                     }
+
                                     if (!empty($facet['display_options']['persons']['values'])) {
                                         foreach ($facet['display_options']['persons']['values'] as $person) {
                                             if (!empty($person['field'])) {
@@ -850,6 +869,7 @@ class WoodyTheme_WoodyCompilers
                                             }
                                         }
                                     }
+
                                     break;
                                 }
                             }
@@ -870,7 +890,7 @@ class WoodyTheme_WoodyCompilers
                     'duration_default_option' => __('Durée du séjour', 'woody-theme'),
                     'placeholders' => [
                         'daterange_input' => __('Choisissez vos dates', 'woody-theme'),
-                        'single_date_input' => __('Date d\'arrivée', 'woody-theme')
+                        'single_date_input' => __("Date d'arrivée", 'woody-theme')
                     ],
                     'adults' => __('adulte(s)', 'woody-theme'),
                     'children' => __('enfant(s)', 'woody-theme'),
@@ -893,7 +913,6 @@ class WoodyTheme_WoodyCompilers
      */
     public function formatFeatureItems($wrapper)
     {
-        $items = [];
         $items = $wrapper['items'];
 
         if (is_array($items)) {

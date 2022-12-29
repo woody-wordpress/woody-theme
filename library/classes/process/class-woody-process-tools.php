@@ -49,6 +49,7 @@ class WoodyTheme_WoodyProcessTools
         if (empty($query_vars) || empty($field)) {
             return;
         }
+
         $query_vars['meta_key'] = $field;
         $query_vars['posts_per_page'] = 1;
         $query_vars['paged'] = false;
@@ -89,6 +90,7 @@ class WoodyTheme_WoodyProcessTools
         if ($opts['hide_description'] !== true) {
             $data['description'] = (empty($wrapper[$prefix . 'description'])) ? '' : $wrapper[$prefix . 'description'];
         }
+
         $data['fullwidth'] = (empty($wrapper[$name.'block_title_fullwidth'])) ? false : 'fullwidth';
         if (!empty($wrapper[$name.'buttons']) && !empty($wrapper[$name.'buttons']['links'])) {
             $data[$name.'buttons'] = $wrapper[$name.'buttons'];
@@ -222,11 +224,12 @@ class WoodyTheme_WoodyProcessTools
         $attachments = new \WP_Query($query_args);
 
         $acf_attachements = [];
-        foreach ($attachments->posts as $key => $attachment) {
+        foreach ($attachments->posts as $attachment) {
             // On transforme chacune des images en objet image ACF pour être compatible avec le tpl Woody
             $acf_attachment = acf_get_attachment($attachment);
             $acf_attachements[] = $acf_attachment;
         }
+
         return $acf_attachements;
     }
 
@@ -336,6 +339,7 @@ class WoodyTheme_WoodyProcessTools
         } else {
             $file = file_get_contents(get_template_directory() . '/views/section_banner/section_' . $filename . '.twig');
         }
+
         return $file;
     }
 
@@ -367,6 +371,7 @@ class WoodyTheme_WoodyProcessTools
                     if (!empty($confId)) {
                         $playlist_count = apply_filters('woody_hawwwai_playlist_count', $confId, pll_current_language(), []);
                     }
+
                     $string = str_replace($pattern, $playlist_count, $string);
                 }
             }

@@ -115,12 +115,6 @@ class WoodyTheme_Roles
                 'contributor' => false,
                 'translator' => false,
             ],
-            'edit_theme_options' => [
-                'administrator' => false,
-                'editor' => false,
-                'contributor' => false,
-                'translator' => false,
-            ],
             'activate_plugins' => [
                 'administrator' => true,
                 'editor' => false,
@@ -713,25 +707,25 @@ class WoodyTheme_Roles
                 'contributor' => false,
                 'translator' => false,
             ],
-            'Configurer les catégories d\'expression' => [
+            "Configurer les catégories d'expression" => [
                 'administrator' => true,
                 'editor' => true,
                 'contributor' => false,
                 'translator' => false,
             ],
-            'Editer les catégories d\'expression' => [
+            "Editer les catégories d'expression" => [
                 'administrator' => true,
                 'editor' => true,
                 'contributor' => true,
                 'translator' => false,
             ],
-            'Supprimer les catégories d\'expression' => [
+            "Supprimer les catégories d'expression" => [
                 'administrator' => true,
                 'editor' => true,
                 'contributor' => true,
                 'translator' => false,
             ],
-            'Assigner les catégories d\'expression' => [
+            "Assigner les catégories d'expression" => [
                 'administrator' => true,
                 'editor' => true,
                 'contributor' => true,

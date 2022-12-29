@@ -15,7 +15,7 @@ class WoodyTheme_Query
         }
 
         if (is_string($post_like)) {
-            return $where .= ' AND ' . $wpdb->posts . '.post_title LIKE \'%' . esc_sql($wpdb->esc_like($post_like)) . '%\'';
+            return $where .= ' AND ' . $wpdb->posts . ".post_title LIKE '%" . esc_sql($wpdb->esc_like($post_like)) . "%'";
         }
 
         if (!is_array($post_like)) {
@@ -35,14 +35,14 @@ class WoodyTheme_Query
         $post_title_like_array[] = $post_like[0];
 
         if (is_array($post_like[0])) {
-            $post_title_like_array = array();
             $post_title_like_array = $post_like[0];
         }
 
         $where_addon = array();
         foreach ($post_title_like_array as $keyword) {
-            $where_addon[] = $wpdb->posts . '.' . $post_like['column'] . ' LIKE \'%' . esc_sql($wpdb->esc_like($keyword)) . '%\'';
+            $where_addon[] = $wpdb->posts . '.' . $post_like['column'] . " LIKE '%" . esc_sql($wpdb->esc_like($keyword)) . "%'";
         }
+
         return $where . (' AND ( ' . implode(' ' . $post_like['relation'] . ' ', $where_addon) . ' )');
     }
 

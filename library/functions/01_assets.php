@@ -113,8 +113,6 @@ function humanDays($number)
  */
 function getWoodyIcons()
 {
-    $return = [];
-
     //TODO: Récupérer une variable globale en fonction du set d'icones choisis dans le thème pour remplacer '/src/icons/icons_set_01'
     $core_icons = woodyIconsFolder(get_template_directory() . '/src/icons/icons_set_01');
 
@@ -140,7 +138,7 @@ function woodyIconsFolder($folder)
     if (empty($icons_folder) || !array_key_exists($folder, $icons_folder)) {
         $icons_finder = new Finder();
         $icons_finder->files()->name('*.svg')->in($folder);
-        foreach ($icons_finder as $key => $icon) {
+        foreach ($icons_finder as $icon) {
             $icon_name = str_replace('.svg', '', $icon->getRelativePathname());
             $icon_class = 'wicon-' . $icon_name;
             $icon_human_name = str_replace('-', ' ', $icon_name);
@@ -148,6 +146,7 @@ function woodyIconsFolder($folder)
             $icon_human_name = ucfirst($icon_human_name);
             $return[$icon_class] = $icon_human_name;
         }
+
         $icons_folder[$folder] = $return;
         asort($return);
         wp_cache_set('woody_icons_folder', $icons_folder, 'woody');
@@ -175,6 +174,7 @@ function getWoodyTwigPaths()
         $woodyTwigsPaths = $woodyLibrary->getTwigsPaths($woodyComponents);
         wp_cache_set('woody_twig_paths', $woodyTwigsPaths, 'woody');
     }
+
     return $woodyTwigsPaths;
 }
 
@@ -194,6 +194,7 @@ function getWoodyComponents()
         $woodyComponents = $woodyLibrary->getComponents();
         wp_cache_set('woody_components', $woodyComponents, 'woody');
     }
+
     return $woodyComponents;
 }
 
@@ -372,14 +373,16 @@ function woody_untokenize($token)
     return $token;
 }
 
-/***************************
- * Minutes to Hours converter
- *****************************/
+/*
+ * @noRector
+ ** Minutes to Hours converter
+*/
 function minuteConvert($num)
 {
+    $hours = floor($num / 60);
     return [
-        'hours' => floor($num / 60),
-        'minutes' => round((($num / 60) - $convertedTime['hours']) * 60)
+        'hours' => $hours,
+        'minutes' => round((($num / 60) - $hours) * 60)
     ];
 }
 
@@ -396,6 +399,7 @@ function foundEmbedProvider($url)
     } else {
         $provider = 'unknown';
     }
+
     return $provider;
 }
 
@@ -413,7 +417,7 @@ function embedProviderThumbnail($embed)
     $return = '';
 
     // On récupère l'attribut src de l'iframe
-    preg_match('/src="(.+?)"/', $embed, $embed_matches);
+    preg_match('#src="(.+?)"#', $embed, $embed_matches);
     $src = $embed_matches[1];
 
     $provider = foundEmbedProvider($src);
@@ -422,13 +426,13 @@ function embedProviderThumbnail($embed)
     switch ($provider) {
         case 'unknown':
             return;
-            break;
         case 'youtube':
             $regex = '/(?<=\/embed\/)(.*)(?=\?feature)/';
             preg_match($regex, $src, $matches);
             if (!empty($matches[0])) {
                 $return = 'https://img.youtube.com/vi/' . $matches[0] . '/maxresdefault.jpg';
             }
+
             break;
         case 'dailymotion':
             $regex = '/(?<=\/video\/)(.*)/';
@@ -436,6 +440,7 @@ function embedProviderThumbnail($embed)
             if (!empty($matches[0])) {
                 $return = 'https://www.dailymotion.com/thumbnail/video/' . $matches[0];
             }
+
             break;
         case 'vimeo':
             $regex = '/(?<=\/video\/)(.*)(?=\?dnt)/';
@@ -445,8 +450,10 @@ function embedProviderThumbnail($embed)
                 if (empty($vimeo_data)) {
                     return;
                 }
+
                 $return = $vimeo_data[0]['thumbnail_large'];
             }
+
             break;
     }
 
@@ -463,13 +470,13 @@ function embedThumbnail($embed)
     switch ($provider) {
         case 'unknown':
             return;
-            break;
         case 'youtube':
             $regex = '/(v=*)(.*)/';
             preg_match($regex, $embed, $matches);
             if (!empty($matches[2])) {
                 $return = 'https://img.youtube.com/vi/' . $matches[2] . '/maxresdefault.jpg';
             }
+
             break;
         case 'dailymotion':
             $regex = '/(?<=\/video\/)(.*)/';
@@ -477,6 +484,7 @@ function embedThumbnail($embed)
             if (!empty($matches[0])) {
                 $return = 'https://www.dailymotion.com/thumbnail/video/' . $matches[0];
             }
+
             break;
         case 'vimeo':
             $regex = '/(.com\/*)(.*)/';
@@ -486,8 +494,10 @@ function embedThumbnail($embed)
                 if (empty($vimeo_data)) {
                     return;
                 }
+
                 $return = $vimeo_data[0]['thumbnail_large'];
             }
+
             break;
     }
 
@@ -504,13 +514,13 @@ function embedVideo($embed)
     switch ($provider) {
         case 'unknown':
             return;
-            break;
         case 'youtube':
             $regex = '/(v=*)(.*)/';
             preg_match($regex, $embed, $matches);
             if (!empty($matches[2])) {
                 $return = '<iframe class="lazyloaded" width="640" height="360" data-src="https://www.youtube.com/embed/'.$matches[2].'" src="https://www.youtube.com/embed/'.$matches[2].'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>';
             }
+
             break;
         case 'dailymotion':
             $regex = '/(?<=\/video\/)(.*)/';
@@ -518,6 +528,7 @@ function embedVideo($embed)
             if (!empty($matches[0])) {
                 $return = '<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;"> <iframe style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden" frameborder="0" type="text/html" src="https://www.dailymotion.com/embed/video/'.$matches[0].'" width="100%" height="100%" allowfullscreen > </iframe> </div>';
             }
+
             break;
         case 'vimeo':
             $regex = '/(.com\/*)(.*)/';
@@ -526,8 +537,10 @@ function embedVideo($embed)
                 $return = '<iframe src="https://player.vimeo.com/video/'.$matches[2].'?h=b2f1716794" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                     <p><a href="https://vimeo.com/'.$matches[2].'"></a> from <a href="https://vimeo.com/colibris"></a> on <a href="https://vimeo.com">Vimeo</a>.</p>';
             }
+
             break;
     }
+
     return $return;
 }
 

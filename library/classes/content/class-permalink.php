@@ -41,6 +41,7 @@ class WoodyTheme_Permalink
             if (!is_object($post)) {
                 return;
             }
+
             $post_id = $post->ID;
         }
 
@@ -124,7 +125,7 @@ class WoodyTheme_Permalink
             $last_segment = end($request_path);
 
             if (!empty($last_segment)) {
-                preg_match('/-([a-z_]{2,})-(\d{5,})$/', $last_segment, $sheet_match);
+                preg_match('#-([a-z_]{2,})-(\d{5,})$#', $last_segment, $sheet_match);
                 $sheet_lang = (empty($sheet_match[1])) ? null : $this->isAvailableLang($sheet_match[1]);
                 $sheet_id = (empty($sheet_match[2])) ? null : $sheet_match[2];
 
@@ -351,7 +352,7 @@ class WoodyTheme_Permalink
         $slug = get_post_meta($post_id, '_wp_desired_post_slug', true);
         if (!empty($slug)) {
             global $wpdb;
-            $count_updated = $wpdb->query($wpdb->prepare("UPDATE wp_redirection_items SET status = 'disabled' WHERE action_data LIKE '%$slug' AND status = 'enabled'"));
+            $count_updated = $wpdb->query($wpdb->prepare("UPDATE wp_redirection_items SET status = 'disabled' WHERE action_data LIKE '%{$slug}' AND status = 'enabled'"));
             $result = (empty($count_updated)) ? 'Found 0 redirection to this page' : 'before_delete_post : Disabling ' . $count_updated . ' redirect(s) to urls ending with ' . $slug;
             output_log($result);
         }

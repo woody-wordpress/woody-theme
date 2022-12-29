@@ -11,6 +11,9 @@
 //TODO: Executer les fonction back en is_admin uniquement + screen_id post
 class WoodyTheme_ACF
 {
+    /**
+     * @var string
+     */
     public const ACF = "acf-pro/acf.php";
 
     public function __construct()
@@ -180,6 +183,7 @@ class WoodyTheme_ACF
                 $value[$id_key] = pll_get_post($id);
             }
         }
+
         return $value;
     }
 
@@ -204,7 +208,6 @@ class WoodyTheme_ACF
     {
         // Reset field's choices + create $terms for future choices
         $choices = [];
-        $terms = [];
 
         $lang = $this->getCurrentLang();
         $choices = wp_cache_get('woody_terms_choices', 'woody');
@@ -280,7 +283,7 @@ class WoodyTheme_ACF
         if (empty($choices[$lang])) {
             $taxonomies = get_object_taxonomies('page', 'objects');
 
-            foreach ($taxonomies as $key => $taxonomy) {
+            foreach ($taxonomies as $taxonomy) {
                 $choices[$lang][$taxonomy->name] = $taxonomy->label;
             }
 
@@ -332,9 +335,10 @@ class WoodyTheme_ACF
     public function woodyAcfAddPageTypeChoices($choices)
     {
         $page_types = $this->getPageTypeTerms();
-        foreach ($page_types as $key => $type) {
+        foreach ($page_types as $type) {
             $choices[$type->slug] = $type->name;
         }
+
         return $choices;
     }
 
@@ -392,9 +396,10 @@ class WoodyTheme_ACF
         }
 
         $taxonomies = getPageTaxonomies();
-        foreach ($taxonomies as $key => $taxonomy) {
+        foreach ($taxonomies as $taxonomy) {
             $field['choices']['_' . $taxonomy->name] = (empty($taxonomy->labels->singular_name)) ? $taxonomy->label . ' <small>Tag principal</small>' : $taxonomy->labels->singular_name . ' principal(e)</small>';
         }
+
         return $field;
     }
 
@@ -405,22 +410,27 @@ class WoodyTheme_ACF
             // On retire le bloc de mise en avant de topic si le plugin n'est pas activé
             unset($field['layouts']['layout_5d7912723303c']);
         }
+
         if (!in_array('groups', WOODY_OPTIONS)) {
             // On retire le bloc de mise en avant de composant de séjour si le plugin n'est pas activé
             unset($field['layouts']['5d148175d0510']);
         }
+
         if (!in_array('weather', WOODY_OPTIONS)) {
             // On retire l'option bloc météo si le plugin n'est pas activé
             unset($field['layouts']['layout_weather']);
         }
+
         if (!in_array('tides', WOODY_OPTIONS)) {
             // On retire l'option bloc tides si le plugin n'est pas activé
             unset($field['layouts']['layout_addon_tides']);
         }
+
         if (!in_array('disqus', WOODY_OPTIONS)) {
             // On retire l'option bloc commentaires si le plugin n'est pas activé
             unset($field['layouts']['layout_addon_disqus']);
         }
+
         if (!in_array('ski_resort', WOODY_OPTIONS)) {
             // On retire l'option bloc infolive si le plugin n'est pas activé (par sécurité)
             unset($field['layouts']['layout_infolive']);
@@ -553,30 +563,25 @@ class WoodyTheme_ACF
             $page_lang = apply_filters('woody_pll_get_post_language', $post_id);
             $default_lang = apply_filters('woody_pll_default_lang_code', null);
             // Si l'on est pas sur langue par défaut du site
-            if ($page_lang !== $default_lang) {
-                $searched_ids = [];
-
-                // Si l'utilisateur fait une recherche
-                if (!empty($args['s'])) {
-                    // On lance une WP_query identique à ACF en forçant la langue => langue par défaut
-                    $default_lang_args['lang'] = pll_default_language();
-                    $new_args = array_merge($default_lang_args, $args);
-                    $new_args['post_type'] = 'page';
-                    $default_lang_query = new WP_Query($new_args);
-
-                    // Si on obtient des résultats dans la langue par défaut,
-                    // On récupère l'id de la traduction de ce contenu dans la langue courante
-                    if (!empty($default_lang_query->posts)) {
-                        foreach ($default_lang_query->posts as $post) {
-                            $translations[] = pll_get_post($post->ID);
-                        }
+            // Si l'utilisateur fait une recherche
+            if ($page_lang !== $default_lang && !empty($args['s'])) {
+                // On lance une WP_query identique à ACF en forçant la langue => langue par défaut
+                $default_lang_args['lang'] = pll_default_language();
+                $new_args = array_merge($default_lang_args, $args);
+                $new_args['post_type'] = 'page';
+                $default_lang_query = new WP_Query($new_args);
+                // Si on obtient des résultats dans la langue par défaut,
+                // On récupère l'id de la traduction de ce contenu dans la langue courante
+                if (!empty($default_lang_query->posts)) {
+                    foreach ($default_lang_query->posts as $post) {
+                        $translations[] = pll_get_post($post->ID);
                     }
+                }
 
-                    // On limite la recherche de posts aux id des traductions et on reset le paramètre de recherche
-                    if (!empty($translations)) {
-                        $args['post__in'] = $translations;
-                        $args['s'] = '';
-                    }
+                // On limite la recherche de posts aux id des traductions et on reset le paramètre de recherche
+                if (!empty($translations)) {
+                    $args['post__in'] = $translations;
+                    $args['s'] = '';
                 }
             }
         }
@@ -591,6 +596,7 @@ class WoodyTheme_ACF
         if ($global_lite_mode && $value != 'lite') {
             $value = 'lite';
         }
+
         return $value;
     }
 
@@ -928,7 +934,7 @@ class WoodyTheme_ACF
             $index = 1;
             foreach ($woodyComponent as $componentTpl) {
                 $return[$componentName . '_' . $index] = $componentTpl;
-                $index++;
+                ++$index;
             }
         }
 
@@ -982,9 +988,10 @@ class WoodyTheme_ACF
 
             $tplComponents = array_merge($woody_tpls_order, $tplComponents);
 
-            foreach ($tplComponents as $key => $value) {
+            foreach ($tplComponents as $value) {
                 $return .= '<li>' . $value . '</li>' ;
             }
+
             wp_cache_set('woody_tpls_components', $return, 'woody');
         }
 
@@ -1009,7 +1016,7 @@ class WoodyTheme_ACF
         $field['name'] = "#rowindex-name#";
         $field['display_layouts'] = true;
 
-        foreach ($field['layouts'] as $key => $layout) {
+        foreach ($field['layouts'] as $layout) {
             $new_field = $field;
             $new_field['layouts'] = [$layout];
 
@@ -1123,6 +1130,7 @@ class WoodyTheme_ACF
                                 $current_lang_choice = [$season['slug'] => $season['name']];
                                 $season_settings_fields[1]['choices'] = $current_lang_choice + $season_settings_fields[1]['choices'];
                             }
+
                             // Default value sur la saison courante
                             $season_settings_fields[1]['default_value'] = $season['slug'];
                             // On met à jour le champ pour être sûr que la saison courante est sélectionnée de base

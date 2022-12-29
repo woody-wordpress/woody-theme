@@ -12,7 +12,8 @@ use WoodyLibrary\Library\WoodyLibrary\WoodyLibrary;
 if (!class_exists('Timber')) {
     class Timber
     {
-        private static $twig = null;
+        private static $twig;
+
         private static array $context_cache = [];
 
         /**

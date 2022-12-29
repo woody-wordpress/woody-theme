@@ -48,7 +48,7 @@ class WoodyTheme_Seo
             $woody_custom_meta_field = get_field_object('field_5e16e3c18c1c3');
 
             $languages = pll_languages_list();
-            foreach ($languages as $key => $lang) {
+            foreach ($languages as $lang) {
                 $new_field = $woody_custom_meta_field;
                 $new_field['key'] .= '_' . $lang;
                 $new_field['label'] .= ' (uniquement sur ' . strtoupper($lang) . ')';

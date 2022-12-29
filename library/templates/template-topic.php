@@ -15,7 +15,9 @@ class WoodyTheme_Template_Topic extends WoodyTheme_TemplateAbstract
      * @var \WoodyProcess\Process\WoodyTheme_WoodyProcess|mixed
      */
     public $process;
+
     public string $twig_tpl;
+
     public function __construct()
     {
         $this->process = new WoodyTheme_WoodyProcess();

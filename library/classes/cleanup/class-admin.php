@@ -290,6 +290,7 @@ class WoodyTheme_Cleanup_Admin
         if ($domain == 'acf' && $context == 'Name for the Text editor tab (formerly HTML)') {
             $translated = 'Code HTML';
         }
+
         return $translated;
     }
 

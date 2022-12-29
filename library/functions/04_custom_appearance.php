@@ -48,5 +48,6 @@ function getActiveShares($values =[])
             }
         }
     }
+
     return $return;
 }

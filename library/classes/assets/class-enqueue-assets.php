@@ -10,11 +10,17 @@
 class WoodyTheme_Enqueue_Assets
 {
     public $isRoadBookSheet;
+
     protected $siteConfig;
+
     protected $globalScriptString;
+
     protected $assetPaths;
+
     protected $isTouristicPlaylist;
+
     protected $isTouristicSheet;
+
     protected $wThemeVersion;
 
     public function __construct()
@@ -109,9 +115,7 @@ class WoodyTheme_Enqueue_Assets
             case 'dev':
                 $jsModeSuffix = 'debug';
                 $apirender_base_uri = 'https://api.tourism-system.com/render';
-                // \PC::Debug($js_dependencies_rcmap);
                 // $apirender_base_uri = 'https://api.tourism-system.rc-preprod.com/render';
-                // $apirender_base_uri = 'http://127.0.0.1:8000'; // use localhost apirender (gulp serve)
                 break;
             case 'preprod':
                 $jsModeSuffix = 'debug';
@@ -133,9 +137,11 @@ class WoodyTheme_Enqueue_Assets
         if (!empty($map_keys)) {
             $map_keys['v'] = $this->wThemeVersion;
         }
+
         if (isset($map_keys['otmKey'])) {
             $js_dependencies_rcmap[] = 'touristicmaps_tangram';
         }
+
         if (isset($map_keys['gmKey'])) {
             $js_dependencies_rcmap[] = 'gg_maps';
         }
@@ -150,6 +156,7 @@ class WoodyTheme_Enqueue_Assets
         if ($this->isTouristicPlaylist || ($this->isTouristicSheet && !defined('IS_WOODY_HAWWWAI_SHEET_ENABLE'))) {
             $jQuery_version = '2.1.4';
         }
+
         wp_enqueue_script('jquery', 'https://cdn.jsdelivr.net/npm/jquery@' . $jQuery_version . '/dist/jquery.min.js', [], null);
 
         if (!$this->isTouristicSheet || defined('IS_WOODY_HAWWWAI_SHEET_ENABLE')) {
@@ -234,7 +241,7 @@ class WoodyTheme_Enqueue_Assets
 
         // Sheet libraries
         elseif ($this->isTouristicSheet) {
-            if(!defined('IS_WOODY_HAWWWAI_SHEET_ENABLE')){
+            if (!defined('IS_WOODY_HAWWWAI_SHEET_ENABLE')) {
                 // CSS Libraries (todo replace when possible)
                 wp_enqueue_style('hawwwai_font_css', $this->assetPath('https://api.cloudly.space/static/assets/fonts/raccourci-font.min.css'), [], null);
                 wp_enqueue_style('hawwwai_fresco_css', 'https://api.tourism-system.com/render/assets/styles/lib/fresco.css', [], null);
@@ -265,8 +272,6 @@ class WoodyTheme_Enqueue_Assets
             wp_enqueue_script('jsdelivr_slick', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', ['jquery'], null);
             wp_enqueue_script('jsdelivr_match8', 'https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js', ['jquery'], null);
             wp_enqueue_script('jsdelivr_highcharts', 'https://cdn.jsdelivr.net/npm/highcharts@6.2.0/highcharts.min.js', ['jquery'], null);
-
-
         }
 
         // Add the comment-reply library on pages where it is necessary
@@ -304,6 +309,7 @@ class WoodyTheme_Enqueue_Assets
         if (!$this->isTouristicSheet || defined('IS_WOODY_HAWWWAI_SHEET_ENABLE')) {
             $dependencies[] = 'jsdelivr_swiper';
         }
+
         $dependencies = apply_filters('woody_mainjs_dependencies', $dependencies);
         wp_enqueue_script('main-javascripts', WP_DIST_URL . $this->assetPath('/js/main.js'), $dependencies, null);
 
@@ -379,7 +385,7 @@ class WoodyTheme_Enqueue_Assets
             'googleapis.com', // googlemap js needle
             'assets/scripts/raccourci/playlist-map', // rc playlist-map js needle
         ];
-        foreach ($jsWithGetParams as $key => $jsScriptNeedle) {
+        foreach ($jsWithGetParams as $jsScriptNeedle) {
             if (strstr($url, $jsScriptNeedle) !== false) {
                 $url = str_replace("&#038;", "&", $url); // or $url = $original_url
             }

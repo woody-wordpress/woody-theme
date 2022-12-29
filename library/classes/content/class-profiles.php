@@ -59,28 +59,28 @@ class WoodyTheme_Profiles
             'expression_category',
             'profile',
             array(
-                'label' => 'Catégorie d\'expression',
+                'label' => "Catégorie d'expression",
                 'labels' => [
-                    'name' => 'Catégorie d\'expression',
-                    'singular_name' => 'Catégorie d\'expression',
-                    'menu_name' => 'Catégorie d\'expression',
-                    'all_items' => 'Toutes les catégories d\'expression',
-                    'edit_item' => 'Modifier les catégories d\'expression',
-                    'view_item' => 'Voir les catégories d\'expression',
-                    'update_item' => 'Mettre à jour les catégories d\'expression',
-                    'new_item_name' => 'Nouvelle catégorie d\'expression',
-                    'search_items' => 'Rechercher parmi les catégories d\'expression',
-                    'popular_items' => 'Catégories d\'expression les plus utilisés'
+                    'name' => "Catégorie d'expression",
+                    'singular_name' => "Catégorie d'expression",
+                    'menu_name' => "Catégorie d'expression",
+                    'all_items' => "Toutes les catégories d'expression",
+                    'edit_item' => "Modifier les catégories d'expression",
+                    'view_item' => "Voir les catégories d'expression",
+                    'update_item' => "Mettre à jour les catégories d'expression",
+                    'new_item_name' => "Nouvelle catégorie d'expression",
+                    'search_items' => "Rechercher parmi les catégories d'expression",
+                    'popular_items' => "Catégories d'expression les plus utilisés"
                 ],
                 'hierarchical' => false,
                 'show_ui' => true,
                 'show_in_menu' => true,
                 'meta_box_cb' => false,
                 'capabilities' => [
-                    'manage_terms' => 'Configurer les catégories d\'expression',
-                    'edit_terms' => 'Editer les catégories d\'expression',
-                    'delete_terms' => 'Supprimer les catégories d\'expression',
-                    'assign_terms' => 'Assigner les catégories d\'expression'
+                    'manage_terms' => "Configurer les catégories d'expression",
+                    'edit_terms' => "Editer les catégories d'expression",
+                    'delete_terms' => "Supprimer les catégories d'expression",
+                    'assign_terms' => "Assigner les catégories d'expression"
                 ]
             )
         );

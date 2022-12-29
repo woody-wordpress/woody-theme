@@ -10,13 +10,18 @@
 abstract class WoodyTheme_TemplateAbstract
 {
     public $twig_tpl;
+
     protected $context = [];
+
     protected $globals = [];
 
     // Force les classes filles à définir cette méthode
     abstract protected function setTwigTpl();
+
     abstract protected function extendContext();
+
     abstract protected function registerHooks();
+
     abstract protected function getHeaders();
 
     public function __construct()
@@ -43,7 +48,7 @@ abstract class WoodyTheme_TemplateAbstract
             foreach ($headers as $key => $val) {
                 // allow val to be an array of value to set
                 if (is_array($val)) {
-                    foreach ($val as $key2 => $val2) {
+                    foreach ($val as $val2) {
                         header($key . ': ' . $val2, false);
                     }
                 } else {
@@ -141,16 +146,16 @@ abstract class WoodyTheme_TemplateAbstract
             $ancestors_ids = get_post_ancestors($post->ID);
             if (!empty($ancestors_ids) && is_array($ancestors_ids)) {
                 $ancestors_ids = array_reverse($ancestors_ids);
-                foreach ($ancestors_ids as $key => $ancestor_id) {
+                foreach ($ancestors_ids as $ancestor_id) {
                     $return['chapter' . $depth] = get_the_title($ancestor_id);
-                    $depth++;
+                    ++$depth;
                 }
             }
 
             // Si il s'agit d'une fiche on range tout dans le Chapitre Offres SIT
             if ($post->post_type === 'touristic_sheet') {
                 $return['chapter' . $depth] = 'Offres SIT';
-                $depth++;
+                ++$depth;
             }
 
             // On ajoute la page courante
@@ -359,8 +364,6 @@ abstract class WoodyTheme_TemplateAbstract
 
     private function getCanonical($post_id)
     {
-        $return = '';
-
         if (!empty(get_field('woodyseo_canonical_url', $post_id))) {
             // S'il y a une url canonique renseignée, elle est prioritaire
             $return = get_field('woodyseo_canonical_url', $post_id);
@@ -513,6 +516,7 @@ abstract class WoodyTheme_TemplateAbstract
                 if ($lang == $current_lang) {
                     continue;
                 }
+
                 $pll_lang = get_term_by('slug', $lang, 'language');
                 $pll_lang_data = (empty($pll_lang)) ? '' : maybe_unserialize($pll_lang->description);
                 $pll_locale = (empty($pll_lang_data)) ? '' : $pll_lang_data['locale'];
@@ -571,6 +575,7 @@ abstract class WoodyTheme_TemplateAbstract
                         } else {
                             $return['og:title']['#attributes']['content'] = get_the_title() . ' | ' . $this->context['site']['name'];
                         }
+
                         break;
                     case 'woodyseo_fb_description':
                         $return['og:description'] = [
@@ -585,6 +590,7 @@ abstract class WoodyTheme_TemplateAbstract
                         } else {
                             $return['og:description']['#attributes']['content'] = $return['description']['#attributes']['content'];
                         }
+
                         break;
                     case 'woodyseo_fb_image':
                         if (!empty($data) && !empty($data['sizes'])) {
@@ -596,6 +602,7 @@ abstract class WoodyTheme_TemplateAbstract
                                 ]
                             ];
                         }
+
                         break;
                     case 'woodyseo_twitter_title':
                         $return['twitter:title'] = [
@@ -612,6 +619,7 @@ abstract class WoodyTheme_TemplateAbstract
                         } else {
                             $return['twitter:title']['#attributes']['content'] = get_the_title() . ' | ' . $this->context['site']['name'];
                         }
+
                         break;
                     case 'woodyseo_twitter_description':
                         $return['twitter:description'] = [
@@ -626,6 +634,7 @@ abstract class WoodyTheme_TemplateAbstract
                         } else {
                             $return['twitter:description']['#attributes']['content'] = $return['description']['#attributes']['content'];
                         }
+
                         break;
                     case 'woodyseo_twitter_image':
                         if (!empty($data) && !empty($data['sizes'])) {
@@ -637,6 +646,7 @@ abstract class WoodyTheme_TemplateAbstract
                                 ]
                             ];
                         }
+
                         break;
                 }
             }
@@ -693,6 +703,7 @@ abstract class WoodyTheme_TemplateAbstract
             if (!empty($SubWoodyTheme_TemplateParts->mobile_logo)) {
                 $this->context['mobile_logo'] = $SubWoodyTheme_TemplateParts->mobile_logo;
             }
+
             if (!empty($SubWoodyTheme_TemplateParts->website_logo)) {
                 $this->context['website_logo'] = $SubWoodyTheme_TemplateParts->website_logo;
             }
@@ -865,6 +876,7 @@ abstract class WoodyTheme_TemplateAbstract
         if (!empty($this->context['post'])) {
             $data['switch'] = get_field('field_5e7a17ad5c29a', $this->context['post']->ID) ;
         }
+
         $template = $this->context['woody_components']['woody_widgets-prepare_onspot_switcher-tpl_01'];
         return Timber::compile($template, $data);
     }

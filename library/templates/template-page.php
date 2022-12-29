@@ -18,8 +18,11 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
      * @var \WoodyProcess\Compilers\WoodyTheme_WoodyCompilers|mixed
      */
     public $compilers;
+
     public $twig_tpl = '';
+
     protected $tools;
+
     protected $process;
 
     public function __construct()
@@ -109,6 +112,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         if (!empty($trip_term)) {
             $trip_types[] = $trip_term->slug;
         }
+
         $trip_children = get_terms('page_type', ['child_of' => $trip_term->term_id, 'hide_empty' => false, 'hierarchical' => true]);
 
         if (!is_wp_error($trip_children) && !empty($trip_children)) {
@@ -151,10 +155,12 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     $quotation_id = pll_get_post($quotation_id) !== false ? pll_get_post($quotation_id) : $quotation_id;
                     $trip_infos['quotation_link']['link_label'] = woody_get_permalink($quotation_id) . "?sejour=" . $this->context['post_id'];
                 }
+
                 if (!empty($trip_infos['the_duration']['duration_unit']) && $trip_infos['the_duration']['duration_unit'] == 'component_based') {
                     $trip_infos['the_duration'] = $groupQuotation->calculTripDuration($trip_infos['the_duration']);
                 }
             }
+
             // If price equals 0, replace elements to display Free
             if (isset($trip_infos['the_price']['price']) && $trip_infos['the_price']['price'] === 0) {
                 $trip_infos['the_price']['price'] = __("Gratuit", "woody-theme");
@@ -162,6 +168,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $trip_infos['the_price']['suffix_price'] = "";
                 $trip_infos['the_price']['currency'] = "none";
             }
+
             // If empty people min and people max, unset people
             if (empty($trip_infos['the_peoples']['peoples_min']) && empty($trip_infos['the_peoples']['peoples_max'])) {
                 unset($trip_infos['the_peoples']);
@@ -213,6 +220,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             if (in_array('header', $this->context['hide_page_zones'])) {
                 $this->context['body_class'] .= ' no-page-header';
             }
+
             if (in_array('footer', $this->context['hide_page_zones'])) {
                 $this->context['body_class'] .= ' no-page-footer';
             }
@@ -260,6 +268,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         if (!empty($post_type) && $post_type[0]->slug === 'playlist_tourism' && !empty($listpage) && is_numeric($listpage) && !empty($metas['canonical']) && !empty($metas['canonical']['#attributes']) && !empty($metas['canonical']['#attributes']['href'])) {
             $metas['canonical']['#attributes']['href'] = $metas['canonical']['#attributes']['href'] . '?listpage=' . $listpage;
         }
+
         return $metas;
     }
 }
