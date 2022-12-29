@@ -67,6 +67,7 @@ class WoodyTheme_Commands
                 wp_cache_delete($val->option_name, 'options');
             }
         }
+
         wp_cache_delete('alloptions', 'options');
         wp_cache_delete('notoptions', 'options');
         wp_cache_delete('1:notoptions', 'site-options');
@@ -109,6 +110,7 @@ class WoodyTheme_Commands
                             $model->set_language_in_mass('post', $nolang['posts'], 'fr');
                             output_success(sprintf('Attribution de la langue par défaut (%s posts)', is_countable($nolang['posts']) ? count($nolang['posts']) : 0));
                         }
+
                         if (! empty($nolang['terms'])) {
                             $model->set_language_in_mass('term', $nolang['terms'], 'fr');
                             output_success(sprintf('Attribution de la langue par défaut (%s terms)', is_countable($nolang['terms']) ? count($nolang['terms']) : 0));
@@ -123,7 +125,7 @@ class WoodyTheme_Commands
 
     public function maintenance($args, $assoc_args)
     {
-        $status = (current($args) == 'true') ? true : false;
+        $status = current($args) == 'true';
 
         $fs = new Filesystem();
         if (!$fs->exists(WP_MAINTENANCE_DIR)) {
@@ -141,7 +143,7 @@ class WoodyTheme_Commands
 
     public function maintenance_core($args, $assoc_args)
     {
-        $status = (current($args) == 'true') ? true : false;
+        $status = current($args) == 'true';
 
         $fs = new Filesystem();
         if (!$fs->exists(WP_MAINTENANCE_DIR)) {
@@ -171,8 +173,8 @@ class WoodyTheme_Commands
                 exec($cmd);
                 output_log($cmd);
                 output_success("woody_flush_twig");
-            } catch (IOExceptionInterface $exception) {
-                output_warning("Une erreur est survenue au moment de la création de " . $exception->getPath());
+            } catch (IOExceptionInterface $ioException) {
+                output_warning("Une erreur est survenue au moment de la création de " . $ioException->getPath());
             }
         } else {
             output_warning("Twig cache désactivé");

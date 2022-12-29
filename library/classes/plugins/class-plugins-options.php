@@ -405,11 +405,7 @@ class WoodyTheme_Plugins_Options
             $option = [];
         }
 
-        if (is_array($settings)) {
-            $new_option = array_replace_recursive($option, $settings);
-        } else {
-            $new_option = $settings;
-        }
+        $new_option = is_array($settings) ? array_replace_recursive($option, $settings) : $settings;
 
         $new_option = $this->cleanUpOption($option_name, $new_option);
 
@@ -420,15 +416,10 @@ class WoodyTheme_Plugins_Options
 
     private function cleanUpOption($option_name, $option)
     {
-        switch ($option_name) {
-            case 'polylang':
-                // On nettoie les doublons dans les posts types
-                $option['post_types'] = array_values(array_unique($option['post_types']));
-                $option['taxonomies'] = array_values(array_unique($option['taxonomies']));
-                break;
-            default:
-                # code...
-                break;
+        if ($option_name == 'polylang') {
+            // On nettoie les doublons dans les posts types
+            $option['post_types'] = array_values(array_unique($option['post_types']));
+            $option['taxonomies'] = array_values(array_unique($option['taxonomies']));
         }
 
         return $option;

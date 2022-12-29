@@ -29,7 +29,7 @@ class WoodyTheme_Cleanup_Minify
     public function minifyHtmlOutput($buffer)
     {
         // Supprime les commentaires HTML
-        $buffer = preg_replace('/<!--(.|\s)*?-->/', '', $buffer);
+        $buffer = preg_replace('#<!--(.|\s)*?-->#', '', $buffer);
 
         // Supprime les espaces entre les balises html
         //$buffer = trim(preg_replace('/>\s+</', '><', $buffer));

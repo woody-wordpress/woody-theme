@@ -73,6 +73,7 @@ class WoodyTheme_Dashboard
         foreach ($vars as $key => $val) {
             $data = str_replace('{{ ' . $key . ' }}', $val, $data);
         }
+
         return $data;
     }
 }

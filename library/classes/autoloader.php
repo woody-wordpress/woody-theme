@@ -13,6 +13,7 @@ if (function_exists('pll_languages_list')) {
             break;
         }
     }
+
     define('PLL_DEFAULT_LOCALE', $default_locale);
 }
 
@@ -33,6 +34,7 @@ new WoodyTheme_Plugins_Order();
 if (WP_ENV == 'dev') {
     new WoodyTheme_ACF_Save_Manager();
 }
+
 new WoodyTheme_ACF();
 new WoodyTheme_ACF_PrivateGroups();
 new WoodyTheme_ACF_Counter();

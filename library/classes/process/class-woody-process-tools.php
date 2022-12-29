@@ -32,7 +32,7 @@ class WoodyTheme_WoodyProcessTools
         ];
         if (strpos($data_key, 'max')) {
             $minmax['max'] = $post_data[$data_key];
-            $minmax['min'] = !empty($post_data[str_replace('max', 'min', $data_key)]) ? $post_data[str_replace('max', 'min', $data_key)] : 0;
+            $minmax['min'] = empty($post_data[str_replace('max', 'min', $data_key)]) ? 0 : $post_data[str_replace('max', 'min', $data_key)];
         } else {
             $minmax['min'] = $post_data[$data_key];
             $minmax['max'] = $post_data[str_replace('min', 'max', $data_key)] ?? '';
@@ -49,6 +49,7 @@ class WoodyTheme_WoodyProcessTools
         if (empty($query_vars) || empty($field)) {
             return;
         }
+
         $query_vars['meta_key'] = $field;
         $query_vars['posts_per_page'] = 1;
         $query_vars['paged'] = false;
@@ -80,16 +81,17 @@ class WoodyTheme_WoodyProcessTools
         $data = [];
         $opts['hide_description'] = empty($opts['hide_description']) ? false : $opts['hide_description'];
 
-        $data['title'] = (!empty($wrapper[$prefix . 'title'])) ? $wrapper[$prefix . 'title'] : '';
-        $data['pretitle'] = (!empty($wrapper[$prefix . 'pretitle'])) ? $wrapper[$prefix . 'pretitle'] : '';
-        $data['subtitle'] = (!empty($wrapper[$prefix . 'subtitle'])) ? $wrapper[$prefix . 'subtitle'] : '';
-        $data['icon_type'] = (!empty($wrapper[$prefix . 'icon_type'])) ? $wrapper[$prefix . 'icon_type'] : '';
-        $data['icon_img'] = (!empty($wrapper[$prefix . 'icon_img'])) ? $wrapper[$prefix . 'icon_img'] : '';
-        $data['woody_icon'] = (!empty($wrapper[$prefix . 'woody_icon'])) ? $wrapper[$prefix . 'woody_icon'] : '';
+        $data['title'] = (empty($wrapper[$prefix . 'title'])) ? '' : $wrapper[$prefix . 'title'];
+        $data['pretitle'] = (empty($wrapper[$prefix . 'pretitle'])) ? '' : $wrapper[$prefix . 'pretitle'];
+        $data['subtitle'] = (empty($wrapper[$prefix . 'subtitle'])) ? '' : $wrapper[$prefix . 'subtitle'];
+        $data['icon_type'] = (empty($wrapper[$prefix . 'icon_type'])) ? '' : $wrapper[$prefix . 'icon_type'];
+        $data['icon_img'] = (empty($wrapper[$prefix . 'icon_img'])) ? '' : $wrapper[$prefix . 'icon_img'];
+        $data['woody_icon'] = (empty($wrapper[$prefix . 'woody_icon'])) ? '' : $wrapper[$prefix . 'woody_icon'];
         if ($opts['hide_description'] !== true) {
-            $data['description'] = (!empty($wrapper[$prefix . 'description'])) ? $wrapper[$prefix . 'description'] : '';
+            $data['description'] = (empty($wrapper[$prefix . 'description'])) ? '' : $wrapper[$prefix . 'description'];
         }
-        $data['fullwidth'] = (!empty($wrapper[$name.'block_title_fullwidth'])) ? 'fullwidth' : false;
+
+        $data['fullwidth'] = (empty($wrapper[$name.'block_title_fullwidth'])) ? false : 'fullwidth';
         if (!empty($wrapper[$name.'buttons']) && !empty($wrapper[$name.'buttons']['links'])) {
             $data[$name.'buttons'] = $wrapper[$name.'buttons'];
         }
@@ -164,20 +166,20 @@ class WoodyTheme_WoodyProcessTools
         }
 
         $display['gridContainer'] = $container_classes;
-        $display['background_img'] = (!empty($wrapper['background_img'])) ? $wrapper['background_img'] : '';
-        $display['parallax'] = (!empty($wrapper['parallax'])) ? $wrapper['parallax'] : '';
-        $classes_array[] = (!empty($display['background_img'])) ? 'isRel' : '';
-        $classes_array[] = (!empty($wrapper['background_color'])) ? $wrapper['background_color'] : '';
-        $classes_array[] = (!empty($wrapper['background_color_opacity'])) ? $wrapper['background_color_opacity'] : '';
-        $classes_array[] = (!empty($wrapper['border_color'])) ? $wrapper['border_color'] : '';
-        $classes_array[] = (!empty($wrapper['background_img_opacity'])) ? $wrapper['background_img_opacity'] : '';
-        $classes_array[] = (!empty($wrapper['scope_paddings']['scope_padding_top'])) ? $wrapper['scope_paddings']['scope_padding_top'] : '';
-        $classes_array[] = (!empty($wrapper['scope_paddings']['scope_padding_bottom'])) ? $wrapper['scope_paddings']['scope_padding_bottom'] : '';
-        $classes_array[] = (!empty($wrapper['scope_margins']['scope_margin_top'])) ? $wrapper['scope_margins']['scope_margin_top'] : '';
-        $classes_array[] = (!empty($wrapper['scope_margins']['scope_margin_bottom'])) ? $wrapper['scope_margins']['scope_margin_bottom'] : '';
-        $display['section_divider'] = (!empty($wrapper['section_divider'])) ? $wrapper['section_divider'] : '';
-        $display['heading_alignment'] = (!empty($wrapper['heading_alignment'])) ? $wrapper['heading_alignment'] : 'center';
-        $display['section_animations'] = (!empty($wrapper['section_animations'])) ? $wrapper['section_animations'] : '';
+        $display['background_img'] = (empty($wrapper['background_img'])) ? '' : $wrapper['background_img'];
+        $display['parallax'] = (empty($wrapper['parallax'])) ? '' : $wrapper['parallax'];
+        $classes_array[] = (empty($display['background_img'])) ? '' : 'isRel';
+        $classes_array[] = (empty($wrapper['background_color'])) ? '' : $wrapper['background_color'];
+        $classes_array[] = (empty($wrapper['background_color_opacity'])) ? '' : $wrapper['background_color_opacity'];
+        $classes_array[] = (empty($wrapper['border_color'])) ? '' : $wrapper['border_color'];
+        $classes_array[] = (empty($wrapper['background_img_opacity'])) ? '' : $wrapper['background_img_opacity'];
+        $classes_array[] = (empty($wrapper['scope_paddings']['scope_padding_top'])) ? '' : $wrapper['scope_paddings']['scope_padding_top'];
+        $classes_array[] = (empty($wrapper['scope_paddings']['scope_padding_bottom'])) ? '' : $wrapper['scope_paddings']['scope_padding_bottom'];
+        $classes_array[] = (empty($wrapper['scope_margins']['scope_margin_top'])) ? '' : $wrapper['scope_margins']['scope_margin_top'];
+        $classes_array[] = (empty($wrapper['scope_margins']['scope_margin_bottom'])) ? '' : $wrapper['scope_margins']['scope_margin_bottom'];
+        $display['section_divider'] = (empty($wrapper['section_divider'])) ? '' : $wrapper['section_divider'];
+        $display['heading_alignment'] = (empty($wrapper['heading_alignment'])) ? 'center' : $wrapper['heading_alignment'];
+        $display['section_animations'] = (empty($wrapper['section_animations'])) ? '' : $wrapper['section_animations'];
 
         // On transforme le tableau en une chaine de caractères
         $display['classes'] = trim(implode(' ', $classes_array));
@@ -222,11 +224,12 @@ class WoodyTheme_WoodyProcessTools
         $attachments = new \WP_Query($query_args);
 
         $acf_attachements = [];
-        foreach ($attachments->posts as $key => $attachment) {
+        foreach ($attachments->posts as $attachment) {
             // On transforme chacune des images en objet image ACF pour être compatible avec le tpl Woody
             $acf_attachment = acf_get_attachment($attachment);
             $acf_attachements[] = $acf_attachment;
         }
+
         return $acf_attachements;
     }
 
@@ -287,23 +290,21 @@ class WoodyTheme_WoodyProcessTools
         foreach ($effects as $effect_key => $effect) {
             if (!empty($effect)) {
                 if (is_array($effect)) {
-                    switch ($effect_key) {
-                        case 'transform':
-                            foreach ($effect as $transform) {
-                                switch ($transform['transform_type']) {
-                                    case 'trnslt-top':
-                                    case 'trnslt-bottom':
-                                    case 'trnslt-left':
-                                    case 'trnslt-right':
-                                        $return['transform'][] = $transform['transform_type'] . '-' . $transform['transform_trnslt_value'];
-                                        break;
-                                    case 'rotate-left':
-                                    case 'rotate-right':
-                                        $return['transform'][] = $transform['transform_type'] . '-' . $transform['transform_rotate_value'];
-                                        break;
-                                }
+                    if ($effect_key === 'transform') {
+                        foreach ($effect as $transform) {
+                            switch ($transform['transform_type']) {
+                                case 'trnslt-top':
+                                case 'trnslt-bottom':
+                                case 'trnslt-left':
+                                case 'trnslt-right':
+                                    $return['transform'][] = $transform['transform_type'] . '-' . $transform['transform_trnslt_value'];
+                                    break;
+                                case 'rotate-left':
+                                case 'rotate-right':
+                                    $return['transform'][] = $transform['transform_type'] . '-' . $transform['transform_rotate_value'];
+                                    break;
                             }
-                            break;
+                        }
                     }
                 } elseif ($effect_key == 'deep') {
                     $return['deep'] = 'deep-'.$effect;
@@ -338,6 +339,7 @@ class WoodyTheme_WoodyProcessTools
         } else {
             $file = file_get_contents(get_template_directory() . '/views/section_banner/section_' . $filename . '.twig');
         }
+
         return $file;
     }
 
@@ -369,6 +371,7 @@ class WoodyTheme_WoodyProcessTools
                     if (!empty($confId)) {
                         $playlist_count = apply_filters('woody_hawwwai_playlist_count', $confId, pll_current_language(), []);
                     }
+
                     $string = str_replace($pattern, $playlist_count, $string);
                 }
             }
@@ -407,8 +410,8 @@ class WoodyTheme_WoodyProcessTools
     {
         if (!empty($attachment_id) && is_int($attachment_id)) {
             $img_all_data = get_post_meta($attachment_id);
-            $img_all_metadata = (!empty($img_all_data['_wp_attachment_metadata'][0])) ? maybe_unserialize($img_all_data['_wp_attachment_metadata'][0]) : '';
-            return (!empty($img_all_metadata['woody-instagram'])) ? $img_all_metadata['woody-instagram'] : '';
+            $img_all_metadata = (empty($img_all_data['_wp_attachment_metadata'][0])) ? '' : maybe_unserialize($img_all_data['_wp_attachment_metadata'][0]);
+            return (empty($img_all_metadata['woody-instagram'])) ? '' : $img_all_metadata['woody-instagram'];
         }
     }
 

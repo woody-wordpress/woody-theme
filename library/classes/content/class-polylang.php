@@ -31,6 +31,7 @@ class WoodyTheme_Polylang
         if (!in_array('post_translations', $tax)) {
             $tax[] = 'post_translations';
         }
+
         return $tax;
     }
 
@@ -71,6 +72,7 @@ class WoodyTheme_Polylang
     }
 
     /**
+     * * @noRector
      * Commande pour créer automatiquement woody-theme.pot
      * A ouvrir ensuite avec PoEdit.app sous Mac
      * cd ~/www/wordpress/current/web/app/themes/woody-theme
@@ -242,7 +244,7 @@ class WoodyTheme_Polylang
         __('Lire aussi', 'woody-theme');
 
         // Infolive
-        //TODO: Remove after snowflake configs done
+        //TODO: Remove after infolive plugin deletion
         __('Remontées mécaniques', 'woody-theme');
         __('Pistes', 'woody-theme');
         __('Domaine Alpin', 'woody-theme');

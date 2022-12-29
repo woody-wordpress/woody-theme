@@ -35,13 +35,7 @@ class WoodyTheme_ACF_Save_Manager
         // change the location where this group is saved
         // and if we to to add a filter to alter the save path
         // first check to see if this is one of our groups
-        if (!isset($this->groups[$group['key']])) {
-            // store the group key and add action
-            $this->current_group_being_saved = 'default';
-        } else {
-            // store the group key and add action
-            $this->current_group_being_saved = $group['key'];
-        }
+        $this->current_group_being_saved = isset($this->groups[$group['key']]) ? $group['key'] : 'default';
 
         // store the group key and add action
         add_action('acf/settings/save_json', array($this, 'override_json_location'), 9999);

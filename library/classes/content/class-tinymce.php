@@ -126,16 +126,6 @@ class WoodyTheme_Tinymce
         wp_send_json($icons);
     }
 
-    private function findIcons($finder)
-    {
-        $icons = [];
-        foreach ($finder as $icon_file) {
-            $icons[] = str_replace('.svg', '', $icon_file->getRelativePathname());
-        }
-
-        return $icons;
-    }
-
     public function modifyValidMarkup($settings)
     {
         // Command separated string of extended elements
@@ -146,6 +136,7 @@ class WoodyTheme_Tinymce
         } else {
             $settings['extended_valid_elements'] = $ext;
         }
+
         return $settings;
     }
 
@@ -170,7 +161,7 @@ class WoodyTheme_Tinymce
         );
 
         foreach ($add_buttons as $button_value) {
-            array_push($buttons, $button_value);
+            $buttons[] = $button_value;
         }
 
         return $buttons;
