@@ -131,10 +131,8 @@ class WoodyTheme_WoodyCompilers
                 }
             }
 
-            if(!empty($the_items['display_button'])) {
-
+            if (!empty($the_items['display_button'])) {
                 $the_items['button_classes'] = apply_filters('woody_card_button_classes', '');
-
             }
 
             $the_items = apply_filters('woody_format_focuses_data', $the_items, $wrapper);
@@ -505,10 +503,10 @@ class WoodyTheme_WoodyCompilers
                     $the_marker = [
                         'image_style' => 'ratio_16_9',
                         'item' => [
-                            'title' => $item['title'],
-                            'description' => $item['description'],
-                            'img' => $item['img'],
-                            'link' => $item['link']
+                            'title' => (empty($item['title'])) ? '' : $item['title'],
+                            'description' => (empty($item['description'])) ? '' : $item['description'],
+                            'img' => (empty($item['img'])) ? [] : $item['img'],
+                            'link' => (empty($item['link'])) ? [] : $item['link']
                         ]
                     ];
 
@@ -736,7 +734,7 @@ class WoodyTheme_WoodyCompilers
             }
         }
 
-        if(get_post_type($current_post_id) == 'touristic_sheet') {
+        if (get_post_type($current_post_id) == 'touristic_sheet') {
             $sheet_item = woody_hawwwai_item($current_post_id);
             $current_post_title = empty($sheet_item['title']) ? get_the_title($current_post_id) : $sheet_item['title'];
         } else {
