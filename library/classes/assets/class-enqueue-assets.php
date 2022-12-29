@@ -111,12 +111,9 @@ class WoodyTheme_Enqueue_Assets
         wp_deregister_script('jquery-migrate');
 
         // define apiurl according to WP_ENV
+        // If preprod render is eneeded use $apirender_base_uri = 'https://api.tourism-system.rc-preprod.com/render';
         switch (WP_ENV) {
             case 'dev':
-                $jsModeSuffix = 'debug';
-                $apirender_base_uri = 'https://api.tourism-system.com/render';
-                // $apirender_base_uri = 'https://api.tourism-system.rc-preprod.com/render';
-                break;
             case 'preprod':
                 $jsModeSuffix = 'debug';
                 $apirender_base_uri = 'https://api.tourism-system.com/render';

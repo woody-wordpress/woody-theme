@@ -55,11 +55,8 @@ class WoodyTheme_WoodyGetters
                 //On formate les données en fonction du type de mise en avant
                 if (!empty($wrapper['focused_type']) && $wrapper['focused_type'] == 'documents') {
                     $data = $this->getAttachmentPreview($wrapper, $post);
-                } else {
-                    // On exclut le contenu épinglé du tableau
-                    if ($pinned_content_id != $post->ID) {
-                        $data = $this->getPagePreview($wrapper, $post);
-                    }
+                } elseif ($pinned_content_id != $post->ID) {
+                    $data = $this->getPagePreview($wrapper, $post);
                 }
 
                 if (!empty($data)) {

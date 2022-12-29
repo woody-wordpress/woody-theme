@@ -72,7 +72,7 @@ class WoodyTheme_Polylang
     }
 
     /**
-     * * @noRector
+     * @noRector
      * Commande pour créer automatiquement woody-theme.pot
      * A ouvrir ensuite avec PoEdit.app sous Mac
      * cd ~/www/wordpress/current/web/app/themes/woody-theme
