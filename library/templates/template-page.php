@@ -18,7 +18,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
      * @var \WoodyProcess\Compilers\WoodyTheme_WoodyCompilers|mixed
      */
     public $compilers;
-    protected $twig_tpl = '';
+    public $twig_tpl = '';
     protected $tools;
     protected $process;
 
