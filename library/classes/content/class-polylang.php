@@ -133,7 +133,7 @@ class WoodyTheme_Polylang
         __('Établissement', 'woody-theme');
         __('Établissement disponible', 'woody-theme');
         __('Établissement indisponible', 'woody-theme');
-        __('Aucune information concernant cet établissement pour l\'année en cours', 'woody-theme');
+        __("Aucune information concernant cet établissement pour l'année en cours", 'woody-theme');
 
         // Woody blocs
         __("M'y rendre", 'woody-theme');
@@ -165,7 +165,7 @@ class WoodyTheme_Polylang
         __("Rechercher", 'woody-theme');
         __("Réinitialiser", 'woody-theme');
         __("Choisissez vos dates", 'woody-theme');
-        __('Date d\'arrivée', 'woody-theme');
+        __("Date d'arrivée", 'woody-theme');
         __('Durée du séjour', 'woody-theme');
         __("adulte(s)", 'woody-theme');
         __("enfant(s)", 'woody-theme');
@@ -214,7 +214,7 @@ class WoodyTheme_Polylang
         __('Pour faire une demande de devis, veuillez choisir un séjour.', 'woody-theme');
         __("Il semblerait qu'il n'y ait pas ou plus de séjours proposant une demande de devis disponibles sur le site", "woody-theme");
         __("Séjours et activités", "woody-theme");
-        __('Retour à l\'offre', 'woody-theme');
+        __("Retour à l'offre", 'woody-theme');
         __('Récapitulatif', 'woody-theme');
         __('30 secondes', 'woody-theme');
         __('Informations', 'woody-theme');
@@ -260,14 +260,14 @@ class WoodyTheme_Polylang
         __('Enneigement', 'woody-theme');
         __('Hauteur', 'woody-theme');
         __('Pistes ouvertes', 'woody-theme');
-        __('Risque d\'avalanche', 'woody-theme');
+        __("Risque d'avalanche", 'woody-theme');
         __('Limité', 'woody-theme');
         __('Moyen', 'woody-theme');
         __('Élevé', 'woody-theme');
         __('Non spécifié', 'woody-theme');
         __('Qualité de la neige', 'woody-theme');
         __('En live', 'woody-theme');
-        __('Toute l\'info live', 'woody-theme');
+        __("Toute l'info live", 'woody-theme');
         __('Altitude', 'woody-theme');
         __('Fraîche', 'woody-theme');
         __('Douce', 'woody-theme');
@@ -278,7 +278,7 @@ class WoodyTheme_Polylang
         __('Après-midi', 'woody-theme');
         __('Ouverte', 'woody-theme');
         __('Fermée', 'woody-theme');
-        __('Prévision d\'ouverture', 'woody-theme');
+        __("Prévision d'ouverture", 'woody-theme');
         __('Liaison', 'woody-theme');
     }
 }
