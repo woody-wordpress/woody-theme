@@ -16,7 +16,7 @@ class WoodyTheme_Template_Topic extends WoodyTheme_TemplateAbstract
      */
     public $process;
 
-    public string $twig_tpl;
+    protected string $twig_tpl;
 
     public function __construct()
     {

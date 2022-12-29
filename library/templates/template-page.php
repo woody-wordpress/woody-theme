@@ -19,7 +19,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
      */
     public $compilers;
 
-    public $twig_tpl = '';
+    protected $twig_tpl = '';
 
     protected $tools;
 

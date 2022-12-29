@@ -9,7 +9,7 @@
 
 abstract class WoodyTheme_TemplateAbstract
 {
-    public $twig_tpl;
+    protected $twig_tpl;
 
     protected $context = [];
 
