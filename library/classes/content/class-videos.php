@@ -23,8 +23,7 @@ class WoodyTheme_Videos
     public function timberRender($render)
     {
         //TODO: added ?dnt=1 after vimeo url
-        $render = preg_replace('/<iframe ([^>]*) src="https:\/\/(www.youtube.com|youtube.com|youtu.be|vimeo.com|www.vimeo.com|player.vimeo.com|www.dailymotion.com|dailymotion.com)/', '<iframe class="lazyload" $1 data-src="https://$2', $render);
-        $render = preg_replace('/youtube.com\/embed|youtu.be\/embed/', 'youtube-nocookie.com/embed', $render);
-        return $render;
+        $render = preg_replace('#<iframe ([^>]*) src="https:\/\/(www.youtube.com|youtube.com|youtu.be|vimeo.com|www.vimeo.com|player.vimeo.com|www.dailymotion.com|dailymotion.com)#', '<iframe class="lazyload" $1 data-src="https://$2', $render);
+        return preg_replace('#youtube.com\/embed|youtu.be\/embed#', 'youtube-nocookie.com/embed', $render);
     }
 }

@@ -12,8 +12,9 @@ use WoodyLibrary\Library\WoodyLibrary\WoodyLibrary;
 if (!class_exists('Timber')) {
     class Timber
     {
-        private static $twig = null;
-        private static $context_cache = [];
+        private static $twig;
+
+        private static array $context_cache = [];
 
         /**
          * Constructeur de la classe
@@ -124,9 +125,7 @@ if (!class_exists('Timber')) {
                 }
             }
 
-            $return = apply_filters('woody_globals_json', $return);
-
-            return $return;
+            return apply_filters('woody_globals_json', $return);
         }
     }
 }

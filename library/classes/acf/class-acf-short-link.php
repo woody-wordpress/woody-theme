@@ -22,6 +22,7 @@ class WoodyTheme_ACF_ShortLink
 
     public function getShortLinkData()
     {
+        $shortLinkData = [];
         $post_id = filter_input(INPUT_GET, 'post_id', FILTER_SANITIZE_STRING);
         if (empty($post_id)) {
             status_header(404);
@@ -31,7 +32,7 @@ class WoodyTheme_ACF_ShortLink
         $shortLinkData['post_id'] = $post_id;
 
         $page_type_object = get_the_terms($post_id, 'page_type');
-        $shortLinkData['page_type'] = !empty($page_type_object[0]) ? $page_type_object[0]->slug : null;
+        $shortLinkData['page_type'] = empty($page_type_object[0]) ? null : $page_type_object[0]->slug;
 
         // Return JSON
         wp_send_json(apply_filters('woody_shortlink_data', $shortLinkData));

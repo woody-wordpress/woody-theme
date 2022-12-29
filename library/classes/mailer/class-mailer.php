@@ -11,8 +11,8 @@ class WoodyTheme_Mailer
     {
         if(!empty(WOODY_SMTP_HOSTNAME) && !empty(WOODY_SMTP_USERNAME) && !empty(WOODY_SMTP_PASSWORD) && !empty(WOODY_SMTP_SENDER) && !empty(WOODY_SMTP_SENDER_NAME)) {
             add_action('phpmailer_init', [$this, 'phpmailerInit']);
-            add_filter( 'wp_mail_from', function( $email ) { return WOODY_SMTP_SENDER; });
-            add_filter( 'wp_mail_from_name', function( $name ) { return WOODY_SMTP_SENDER_NAME; });
+            add_filter( 'wp_mail_from', fn($email) => WOODY_SMTP_SENDER);
+            add_filter( 'wp_mail_from_name', fn($name) => WOODY_SMTP_SENDER_NAME);
         }
     }
 

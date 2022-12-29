@@ -28,6 +28,7 @@ class WoodyTheme_Plugins_Options
 
     public function defineOptions()
     {
+        $yoimg_crop_settings = [];
         // Plugins Settings
         update_option('timezone_string', WOODY_TIMEZONE, true);
         update_option('WPLANG', 'fr_FR', true);
@@ -404,30 +405,21 @@ class WoodyTheme_Plugins_Options
             $option = [];
         }
 
-        if (is_array($settings)) {
-            $new_option = array_replace_recursive($option, $settings);
-        } else {
-            $new_option = $settings;
-        }
+        $new_option = is_array($settings) ? array_replace_recursive($option, $settings) : $settings;
 
         $new_option = $this->cleanUpOption($option_name, $new_option);
 
-        if (strcmp(json_encode($option), json_encode($new_option)) !== 0) { // Update if different
+        if (strcmp(json_encode($option, JSON_THROW_ON_ERROR), json_encode($new_option, JSON_THROW_ON_ERROR)) !== 0) { // Update if different
             update_option($option_name, $new_option, $autoload);
         }
     }
 
     private function cleanUpOption($option_name, $option)
     {
-        switch ($option_name) {
-            case 'polylang':
-                // On nettoie les doublons dans les posts types
-                $option['post_types'] = array_values(array_unique($option['post_types']));
-                $option['taxonomies'] = array_values(array_unique($option['taxonomies']));
-                break;
-            default:
-                # code...
-                break;
+        if ($option_name == 'polylang') {
+            // On nettoie les doublons dans les posts types
+            $option['post_types'] = array_values(array_unique($option['post_types']));
+            $option['taxonomies'] = array_values(array_unique($option['taxonomies']));
         }
 
         return $option;

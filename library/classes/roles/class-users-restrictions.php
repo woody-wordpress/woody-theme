@@ -26,8 +26,8 @@ class WoodyTheme_Users_Restrictions
     public function generateMenu()
     {
         acf_add_options_page([
-            'page_title' => 'Paramètres restrictions d\'accès',
-            'menu_title' => 'Restriction d\'accès',
+            'page_title' => "Paramètres restrictions d'accès",
+            'menu_title' => "Restriction d'accès",
             'menu_slug' => 'woodyusers_restrictions_settings',
             'capability'    => 'edit_pages',
             'icon_url'      => 'dashicons-admin-users',
@@ -52,18 +52,16 @@ class WoodyTheme_Users_Restrictions
                         $verif_hierarchy = [];
                         foreach ($restrictions_list as $restriction) {
                             if (in_array(get_current_user_id(), $restriction['users'])) {
-                                switch($restriction['restriction_type_choice']) {
-                                    case 'hierarchy':
-                                        $verif_hierarchy[] = $this->checkPage($restriction['granted_post_id'], $post_id);
-                                        break;
-                                    case 'page_type':
-                                        $verif_page_type[] = $this->checkType($restriction['granted_page_type_id'], $post_id);
-                                        break;
+                                if ($restriction['restriction_type_choice'] == 'hierarchy') {
+                                    $verif_hierarchy[] = $this->checkPage($restriction['granted_post_id'], $post_id);
+                                } elseif ($restriction['restriction_type_choice'] == 'page_type') {
+                                    $verif_page_type[] = $this->checkType($restriction['granted_page_type_id'], $post_id);
                                 }
                             }
                         }
+
                         if ((!in_array(true, $verif_hierarchy) && !empty($verif_hierarchy))  || (!in_array(true, $verif_page_type) && !empty($verif_page_type))) {
-                            wp_die('Désolé, vous ne possédez pas l\'autorisation pour accéder à cette page');
+                            wp_die("Désolé, vous ne possédez pas l'autorisation pour accéder à cette page");
                         }
                     }
                 }
@@ -82,18 +80,13 @@ class WoodyTheme_Users_Restrictions
             return true;
         }
 
-        foreach (get_post_ancestors($post_id) as $parent_id) {
-            if ($parent_id == $granted_id) {
-                return true;
-            }
-        }
-        return false;
+        return in_array($granted_id, get_post_ancestors($post_id));
     }
 
     public function checkType($granted_page_type_id, $post_id)
     {
         $content_type = get_field('content_type', $post_id);
-        return !empty($content_type) ? $content_type->term_id == $granted_page_type_id : new \WP_Error();
+        return empty($content_type) ? new \WP_Error() : $content_type->term_id == $granted_page_type_id;
     }
 
     public function filterAdmin($field){

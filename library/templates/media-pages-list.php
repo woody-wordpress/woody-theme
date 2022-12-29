@@ -8,7 +8,9 @@
 
 if (! defined('ABSPATH')) {
     exit;
-} // Exit if accessed directly
+}
+
+ // Exit if accessed directly
 ?>
 
 <header class="woody-mediapageslist-header woody-sitemap">
@@ -47,10 +49,11 @@ if (! defined('ABSPATH')) {
                     echo '<td><a href="' . woody_get_permalink($result->post_id) . '" target="_blank">Voir la page</a></td>';
                     echo '</tr>';
                 }
+
                 echo '</tbody>';
                 echo '</table>';
             } else {
-                echo '<h3>Cette image n\'est utilisée dans aucune page</h3>';
+                echo "<h3>Cette image n'est utilisée dans aucune page</h3>";
             }
 ?>
     </section>
