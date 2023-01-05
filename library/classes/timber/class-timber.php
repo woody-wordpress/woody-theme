@@ -86,6 +86,7 @@ if (!class_exists('Timber')) {
                 self::init();
                 $vars = apply_filters('timber_compile_data', $vars);
                 $vars['globals_json'] = self::get_globals_json($vars);
+                $vars['gtm']['datalayer'] = self::get_datalayer($vars);
                 echo apply_filters('timber_render', self::compile($tpl, $vars));
             }
         }
@@ -126,6 +127,29 @@ if (!class_exists('Timber')) {
             }
 
             return apply_filters('woody_globals_json', $return);
+        }
+
+        private static function get_datalayer($vars)
+        {
+            $datalayer = [
+                'event' => 'globals',
+                'data' => [
+                    'lang' => $vars['globals']['current_locale'],
+                    'season' => $vars['globals']['current_season'],
+                    'area' => $vars['globals']['area'],
+                    'page' => [
+                        'id_page' => $vars['globals']['post_id'],
+                        'name' => $vars['globals']['post_title'],
+                        'page_type' => $vars['globals']['page_type'],
+                        'tags' => $vars['globals']['tags'],
+                        // 'lang' => $vars['globals']['current_locale'],
+                        // 'season' => $vars['globals']['current_season'],
+                        // 'area' => $vars['globals']['area'],
+                    ]
+                ]
+            ];
+
+            return apply_filters('woody_gtm_datalayer', $datalayer, $vars);
         }
     }
 }

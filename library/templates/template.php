@@ -100,7 +100,7 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         if (empty($this->globals['area'])) {
-            $this->globals['area'] = apply_filters('woody_addon_search_area', '', $this->context['post']);
+            $this->globals['area'] = apply_filters('woody_addon_search_area', null, $this->context['post']);
         }
 
         if (empty($this->globals['current_lang'])) {
@@ -223,10 +223,10 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['site_key'] = WP_SITE_KEY;
 
         // Default values
-        $this->context['post'] = false;
-        $this->context['post_title'] = false;
-        $this->context['sheet_id'] = false;
-        $this->context['page_type'] = false;
+        $this->context['post'] = null;
+        $this->context['post_title'] = null;
+        $this->context['sheet_id'] = null;
+        $this->context['page_type'] = null;
         $this->context['metas'] = [];
 
         $this->context['enabled_woody_options'] = WOODY_OPTIONS;
@@ -297,7 +297,7 @@ abstract class WoodyTheme_TemplateAbstract
                 $this->context['post_title'] = apply_filters('the_title', $this->context['post']->post_title);
                 $this->context['post_id'] = $this->context['post']->ID;
                 if (!empty($this->context['post_id'])) {
-                    $this->context['sheet_id'] = get_post_type($this->context['post_id']) === 'touristic_sheet' ? get_post_meta($this->context['post_id'], 'touristic_sheet_id')[0] : false;
+                    $this->context['sheet_id'] = get_post_type($this->context['post_id']) === 'touristic_sheet' ? (int) get_post_meta($this->context['post_id'], 'touristic_sheet_id')[0] : false;
                 }
             }
         }
@@ -715,7 +715,10 @@ abstract class WoodyTheme_TemplateAbstract
 
     private function addGTM()
     {
-        $this->context['gtm'] = (WP_ENV == 'prod') ? WOODY_GTM : null;
+        $this->context['gtm'] = [
+            'id' => (WP_ENV == 'prod' || WP_SITE_KEY == 'woody-sandbox') ? WOODY_GTM : null,
+            'datalayer' => []
+        ];
     }
 
     private function addIcons()
