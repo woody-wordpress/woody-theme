@@ -39,15 +39,15 @@ class WoodyTheme_Robots
                 'Disallow: /*__hspf=*',
                 'Disallow: /*/feed',
                 'Disallow: /*/comments',
-                'Disallow: /*/page_id=',
+                'Disallow: /*page_id=',
                 'Disallow: /*listpage=1$',
                 'Disallow: /*preview_id=',
                 'Disallow: /*preview_nonce=',
                 'Disallow: /*preview=',
                 'Disallow: /*query=',
+                'Disallow: /*fav=',
                 'Disallow: /api/',
                 'Disallow: /wp-json/woody/crop-url/*',
-                'Disallow: /*/?fav=',
             ];
 
             // Define sitemap urls based on WOODY_PERMALINK_STRUCTURE
