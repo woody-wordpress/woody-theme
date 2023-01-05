@@ -723,7 +723,12 @@ class WoodyTheme_WoodyCompilers
         }
 
         // On ajoute toutes les pages parentes
-        $ancestors_ids = get_post_ancestors($current_post_id);
+        if (get_post_type($current_post_id) == 'touristic_sheet') {
+            $ancestors_ids = apply_filters('woody_breadcrumb_post_ancestors', get_post_ancestors($current_post_id), $context);
+        } else {
+            $ancestors_ids = get_post_ancestors($current_post_id);
+        }
+
         if (is_array($ancestors_ids)) {
             $ancestors_ids = array_reverse($ancestors_ids);
             foreach ($ancestors_ids as $ancestor_id) {
