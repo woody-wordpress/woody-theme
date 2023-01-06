@@ -38,16 +38,15 @@ class WoodyTheme_CDN
             return $render;
         }
 
-        preg_match_all('/("|\')\/app\/(dist|themes|uploads|plugins)\/([^"\' ]*)/', $render, $matches);
+        preg_match_all('#("|\')\/app\/(dist|themes|uploads|plugins)\/([^"\' ]*)#', $render, $matches);
         $render = $this->replaceCDN($matches, $render);
 
-        preg_match_all('/http(s?):\/\/([a-zA-Z0-9-_.]*)\/app\/(dist|themes|uploads|plugins)\/([^"\' ]*)/', $render, $matches);
+        preg_match_all('#http(s?):\/\/([a-zA-Z0-9-_.]*)\/app\/(dist|themes|uploads|plugins)\/([^"\' ]*)#', $render, $matches);
         $render = $this->replaceCDN($matches, $render);
 
-        preg_match_all('/http(s?):\/\/([a-zA-Z0-9-_.]*)\/wp\/wp-includes\/([^"\' ]*)/', $render, $matches);
-        $render = $this->replaceCDN($matches, $render);
+        preg_match_all('#http(s?):\/\/([a-zA-Z0-9-_.]*)\/wp\/wp-includes\/([^"\' ]*)#', $render, $matches);
 
-        return $render;
+        return $this->replaceCDN($matches, $render);
     }
 
     private function replaceCDN($matches = [], $render = '')
@@ -80,6 +79,7 @@ class WoodyTheme_CDN
                         $new_url = str_replace($host, WOODY_CLOUDFLARE_URL, $url);
                         $new_url = str_replace($scheme, 'https', $new_url);
                     }
+
                     $render = str_replace($prefix.$url, $prefix.$new_url, $render);
                 }
             }

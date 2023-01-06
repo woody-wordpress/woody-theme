@@ -150,6 +150,7 @@ class WoodyTheme_Cleanup_Front
                 unset($rules[$rule]);
             }
         }
+
         return $rules;
     }
 }

@@ -39,4 +39,5 @@ $finder->files()->in(WOODY_THEME_DIR . '/library/classes/*')->name('*.php')->not
 foreach ($finder as $file) {
     require_once($file->getPathname());
 }
+
 require_once(WOODY_THEME_DIR . '/library/classes/autoloader.php');

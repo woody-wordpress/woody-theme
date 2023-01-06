@@ -5,6 +5,10 @@
 
     <title>{{ title }}</title>
 
+    {# WP Global Vars #}
+    <script>window.globals={{globals_json|json_encode }}</script>
+    {# /WP Global Vars #}
+
     {# Head Top #}
     {% if head_top %}
         {% for head_top_inner in head_top %}{{ head_top_inner }}{% endfor %}
@@ -12,11 +16,8 @@
     {# /Head Top #}
 
     {# GTM #}
-    {% if gtm|default %}
-    <script>(function(w,d,s,l,i) { w[l]=w[l]||[]; w[l].push({ 'gtm.start': new Date().getTime(),event: 'gtm.js' }); var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'? '&l='+l:''; j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','{{ gtm }}');</script>
-    {% else %}
-    <script>window.dataLayer = (window.dataLayer !== undefined) ? window.dataLayer : [];</script>
-    {% endif %}
+    <script>window.dataLayer=window.dataLayer?window.dataLayer:[];{% if gtm.datalayer|default %}window.dataLayer.push({{ gtm.datalayer|json_encode }});{% endif %}</script>
+    {% if gtm.id|default %}<script>(function(w,d,s,l,i) { w[l]=w[l]||[]; w[l].push({ 'gtm.start': new Date().getTime(),event: 'gtm.js' }); var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'? '&l='+l:''; j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','{{ gtm.id }}');</script>{% endif %}
     {# /GTM #}
 
     {# WP Metas #}
@@ -53,20 +54,15 @@
     {# WP Styles #}
     {% block styles %}{% endblock %}
     {# /WP Styles #}
-
-    {# WP Global Vars #}
-    <script>var globals={{globals_json|json_encode }}</script>
-    {# /WP Global Vars #}
 </head>
 {% endspaceless %}
 
 <body class="{{body_class}}">
-    {% if gtm|default %}
     {# GTM (noscript) #}
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ gtm }}" height="0" width="0"
-            style="display:none;visibility:hidden"></iframe></noscript>
-    {# /GTM (noscript) #}
+    {% if gtm.id|default %}
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ gtm.id }}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     {% endif %}
+    {# /GTM (noscript) #}
 
     {# Body Top #}
     {% if body_top %}

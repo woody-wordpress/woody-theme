@@ -20,7 +20,7 @@ class WoodyTheme_Cron
 
         // Cron force Disable HTTP
         add_action('init', function () {
-            if (defined('DOING_CRON') && DOING_CRON && php_sapi_name() != 'cli') {
+            if (defined('DOING_CRON') && DOING_CRON && PHP_SAPI != 'cli') {
                 print "No way !!!";
                 die();
             }
@@ -39,7 +39,7 @@ class WoodyTheme_Cron
 
         // Adds once monthly to the existing schedules.
         $schedules['monthly'] = [
-            'interval' => 2592000,
+            'interval' => 2_592_000,
             'display' => __('Once Monthly')
         ];
 

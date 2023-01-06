@@ -11,6 +11,7 @@
 class WoodyTheme_Plugins_Activation
 {
     public $activate_plugins;
+
     public $deactivate_plugins;
 
     public function __construct()
@@ -54,9 +55,6 @@ class WoodyTheme_Plugins_Activation
 
         switch (WP_ENV) {
             case 'dev':
-                // Enable
-                $this->activate_plugins[] = 'query-monitor/query-monitor.php';
-                break;
 
             case 'preprod':
                 // Enable
@@ -71,6 +69,7 @@ class WoodyTheme_Plugins_Activation
                     // Disable
                     $this->deactivate_plugins[] = 'query-monitor/query-monitor.php';
                 }
+
                 break;
         }
 
@@ -89,11 +88,12 @@ class WoodyTheme_Plugins_Activation
                     });
                 } else {
                     add_action('admin_notices', function () use ($plugin) {
-                        echo '<div class="notice notice-error"><p>' . sprintf('<strong>%s</strong> plugin can\'t be auto-enabled by the current theme.', $plugin) . '</p></div>';
+                        echo '<div class="notice notice-error"><p>' . sprintf("<strong>%s</strong> plugin can't be auto-enabled by the current theme.", $plugin) . '</p></div>';
                     });
                 }
             }
         }
+
         deactivate_plugins($this->deactivate_plugins);
     }
 }

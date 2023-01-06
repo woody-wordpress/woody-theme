@@ -14,8 +14,15 @@ use WoodyProcess\Compilers\WoodyTheme_WoodyCompilers;
 
 class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 {
+    /**
+     * @var \WoodyProcess\Compilers\WoodyTheme_WoodyCompilers|mixed
+     */
+    public $compilers;
+
     protected $twig_tpl = '';
+
     protected $tools;
+
     protected $process;
 
     public function __construct()
@@ -33,8 +40,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
     protected function getHeaders()
     {
-        $return = apply_filters('woody_page_headers', null, $this->context);
-        return $return;
+        return apply_filters('woody_page_headers', null, $this->context);
     }
 
     protected function setTwigTpl()
@@ -52,16 +58,14 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     {
         if (is_404()) {
             $this->page404Context();
+        } elseif (post_password_required($this->context['post'])) {
+            echo get_the_password_form($this->context['post']);
         } else {
-            if (post_password_required($this->context['post'])) {
-                echo get_the_password_form($this->context['post']);
+            $this->commonContext();
+            if ($this->context['page_type'] == 'front_page') {
+                $this->frontPageContext();
             } else {
-                $this->commonContext();
-                if ($this->context['page_type'] == 'front_page') {
-                    $this->frontPageContext();
-                } else {
-                    $this->pageContext();
-                }
+                $this->pageContext();
             }
         }
     }
@@ -88,12 +92,13 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
         //  Compilation du Diaporama et du bloc de réservation pour les pages de type "accueil" (!= frontpage)
         $this->context['home_slider'] = $this->compilers->formatHomeSlider($this->context['post'], $this->context['woody_components']);
-        $this->context['after_landswpr'] = !empty($this->context['page_parts']['after_landswpr']) ? $this->context['page_parts']['after_landswpr'] : '';
+        $this->context['after_landswpr'] = empty($this->context['page_parts']['after_landswpr']) ? '' : $this->context['page_parts']['after_landswpr'];
         $this->context['bookblock'] = $this->compilers->formatBookBlock($this->context['post'], $this->context['woody_components']);
     }
 
     protected function pageContext()
     {
+        $social_shares = [];
         $this->context['is_frontpage'] = false;
         $social_shares['active_shares'] = getActiveShares();
         $this->context['social_shares'] = \Timber::compile($this->context['woody_components']['blocks-shares-tpl_01'], $social_shares);
@@ -107,6 +112,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         if (!empty($trip_term)) {
             $trip_types[] = $trip_term->slug;
         }
+
         $trip_children = get_terms('page_type', ['child_of' => $trip_term->term_id, 'hide_empty' => false, 'hierarchical' => true]);
 
         if (!is_wp_error($trip_children) && !empty($trip_children)) {
@@ -149,10 +155,12 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                     $quotation_id = pll_get_post($quotation_id) !== false ? pll_get_post($quotation_id) : $quotation_id;
                     $trip_infos['quotation_link']['link_label'] = woody_get_permalink($quotation_id) . "?sejour=" . $this->context['post_id'];
                 }
+
                 if (!empty($trip_infos['the_duration']['duration_unit']) && $trip_infos['the_duration']['duration_unit'] == 'component_based') {
                     $trip_infos['the_duration'] = $groupQuotation->calculTripDuration($trip_infos['the_duration']);
                 }
             }
+
             // If price equals 0, replace elements to display Free
             if (isset($trip_infos['the_price']['price']) && $trip_infos['the_price']['price'] === 0) {
                 $trip_infos['the_price']['price'] = __("Gratuit", "woody-theme");
@@ -160,6 +168,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
                 $trip_infos['the_price']['suffix_price'] = "";
                 $trip_infos['the_price']['currency'] = "none";
             }
+
             // If empty people min and people max, unset people
             if (empty($trip_infos['the_peoples']['peoples_min']) && empty($trip_infos['the_peoples']['peoples_max'])) {
                 unset($trip_infos['the_peoples']);
@@ -167,12 +176,12 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 
             // Convert minutes to hours if > 60
             if ($trip_infos['the_duration']['duration_unit'] === 'minutes') {
-                $minutes_num = intval($trip_infos['the_duration']['count_minutes']);
+                $minutes_num = (int) $trip_infos['the_duration']['count_minutes'];
                 if ($minutes_num >= 60) {
                     $trip_infos['the_duration']['duration_unit'] = 'hours';
                     $convertedTime = minuteConvert($minutes_num);
-                    $trip_infos['the_duration']['count_hours'] = (!empty($convertedTime['hours'])) ? strval($convertedTime['hours']) : '';
-                    $trip_infos['the_duration']['count_minutes'] = (!empty($convertedTime['minutes'])) ? strval($convertedTime['minutes']) : '';
+                    $trip_infos['the_duration']['count_hours'] = (empty($convertedTime['hours'])) ? '' : strval($convertedTime['hours']);
+                    $trip_infos['the_duration']['count_minutes'] = (empty($convertedTime['minutes'])) ? '' : strval($convertedTime['minutes']);
                 }
             } elseif ($trip_infos['the_duration']['duration_unit'] === 'hours') {
                 $trip_infos['the_duration']['count_minutes'] = '';
@@ -181,7 +190,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             if (!empty($trip_infos['the_duration']['count_days']) || !empty($trip_infos['the_length']['length']) || !empty($trip_infos['the_price']['price'])) {
                 //TODO: Gérer le fichier gps pour affichage s/ carte
                 $trip_infos['the_duration']['count_days'] = ($trip_infos['the_duration']['count_days']) ? humanDays($trip_infos['the_duration']['count_days']) : '';
-                $trip_infos['the_price']['price'] = (!empty($trip_infos['the_price']['price'])) ? str_replace('.', ',', $trip_infos['the_price']['price']) : '';
+                $trip_infos['the_price']['price'] = (empty($trip_infos['the_price']['price'])) ? '' : str_replace('.', ',', $trip_infos['the_price']['price']);
                 $this->context['trip_infos'] = \Timber::compile($this->context['woody_components'][$trip_infos['tripinfos_woody_tpl']], $trip_infos);
             } else {
                 $trip_infos = [];
@@ -193,7 +202,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $page_hero = $this->compilers->formatPageHero($this->context);
         if (!empty($page_hero)) {
             $this->context['page_hero'] = $page_hero['view'];
-            $this->context['body_class'] = $this->context['body_class'] . ' has-hero'; // Add Class has-hero
+            $this->context['body_class'] .= ' has-hero'; // Add Class has-hero
             $this->context['body_class'] = $this->context['body_class'] . ' has-' . $page_hero['data']['heading_woody_tpl']; // Add Class has-hero-block-tpl
         }
 
@@ -209,10 +218,11 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $this->context['hide_page_zones'] = get_field('hide_page_zones');
         if (is_array($this->context['hide_page_zones'])) {
             if (in_array('header', $this->context['hide_page_zones'])) {
-                $this->context['body_class'] = $this->context['body_class'] . ' no-page-header';
+                $this->context['body_class'] .= ' no-page-header';
             }
+
             if (in_array('footer', $this->context['hide_page_zones'])) {
-                $this->context['body_class'] = $this->context['body_class'] . ' no-page-footer';
+                $this->context['body_class'] .= ' no-page-footer';
             }
         }
 
@@ -233,7 +243,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $get = $_GET;
         $noindex = false;
         if (!empty($get)) {
-            foreach ($get as $key => $value) {
+            foreach (array_keys($get) as $key) {
                 if (strpos($key, 'section_') !== false || $key == 'listpage' || $key == 'autoselect_id') {
                     $noindex = true;
                 }
@@ -258,6 +268,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         if (!empty($post_type) && $post_type[0]->slug === 'playlist_tourism' && !empty($listpage) && is_numeric($listpage) && !empty($metas['canonical']) && !empty($metas['canonical']['#attributes']) && !empty($metas['canonical']['#attributes']['href'])) {
             $metas['canonical']['#attributes']['href'] = $metas['canonical']['#attributes']['href'] . '?listpage=' . $listpage;
         }
+
         return $metas;
     }
 }

@@ -23,7 +23,7 @@ class WoodyTheme_Post_Type
     {
         $short_link = array(
             'label'               => 'Liens rapides',
-            'description'         => 'Création d\'urls courtes / playlists préfiltrées',
+            'description'         => "Création d'urls courtes / playlists préfiltrées",
             'labels'              => array(
                 'name'                => 'Lien rapide',
                 'singular_name'       => 'Lien rapide',

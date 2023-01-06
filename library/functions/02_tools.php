@@ -41,6 +41,7 @@ function rc_getVideoID($url, $type = '')
                     }
                 }
             }
+
             break;
             // Vimeo
             case 'vimeo':
@@ -50,6 +51,7 @@ function rc_getVideoID($url, $type = '')
                     $id = $path[1];
                 }
             }
+
             break;
             // Dailymotion : ne fonctionne pas avec fresco.js
             case 'dailymotion':
@@ -60,6 +62,7 @@ function rc_getVideoID($url, $type = '')
                     $id = current($videoname);
                 }
             }
+
             break;
             default:
             break;
@@ -79,6 +82,7 @@ function rc_getVideoID($url, $type = '')
 */
 function rc_getVideoThumbnail($url, $type = '', $width = 427, $height = 240)
 {
+    $image = [];
     // If Type == 0 or 1 or 2
     if (is_numeric($type)) {
         $types = array('youtube', 'vimeo', 'dailymotion');
@@ -102,14 +106,16 @@ function rc_getVideoThumbnail($url, $type = '', $width = 427, $height = 240)
                 $image = unserialize($curl);
                 $image = $image[0]['thumbnail_large'];
             }
+
             break;
             // Dailymotion : ne fonctionne pas avec fresco.js
             case 'dailymotion':
             $curl = rc_curl("https://api.dailymotion.com/video/". $id ."?fields=thumbnail_large_url");
             if (!empty($curl)) {
-                $image = json_decode($curl);
+                $image = json_decode($curl, null, 512, JSON_THROW_ON_ERROR);
                 $image = $image->thumbnail_large_url;
             }
+
             break;
             default:
             break;
@@ -150,6 +156,7 @@ function rc_getVideoIframe($url, $type = '', $autoplay = false)
                 if ($autoplay) {
                     $embed_url .= '&autoplay=1&showinfo=0&modestbranding=1';
                 }
+
                 break;
                 // Vimeo
                 case 'vimeo':
@@ -157,6 +164,7 @@ function rc_getVideoIframe($url, $type = '', $autoplay = false)
                 if ($autoplay) {
                     $embed_url .= '?autoplay=1';
                 }
+
                 break;
                 // Dailymotion : ne fonctionne pas avec fresco.js
                 case 'dailymotion':
@@ -164,6 +172,7 @@ function rc_getVideoIframe($url, $type = '', $autoplay = false)
                 if ($autoplay) {
                     $embed_url .= '?autoPlay=1';
                 }
+
                 break;
                 default:
                 break;
@@ -198,8 +207,7 @@ function rc_getVideoType($url)
 function rc_getImageStyleByApi($image_style, $image_path)
 {
     $image_style_infos = rc_getImageStyle($image_style);
-    $thumbnail = rc_getImageResizedFromApi($image_style_infos['width'], $image_style_infos['height'], $image_path);
-    return $thumbnail;
+    return rc_getImageResizedFromApi($image_style_infos['width'], $image_style_infos['height'], $image_path);
 }
 
 /**
@@ -240,7 +248,7 @@ function rc_curl($url)
 
     try {
         $data = curl_exec($ch);
-    } catch (Exception $e) {
+    } catch (Exception $exception) {
         $data = '';
     }
 
@@ -265,10 +273,9 @@ function rc_getAlias($str, $charset='utf-8')
     $str = preg_replace('#&([A-za-z]{2})(?:lig);#', '\1', $str); // pour les ligatures e.g. '&oelig;'
     $str = preg_replace('#&[^;]+;#', '', $str); // supprime les autres caractères
     $str = strtolower($str);
-    $str = preg_replace('@[^a-z0-9]+@', '-', $str);
-    $str = trim($str);
+    $str = preg_replace('#[^a-z0-9]+#', '-', $str);
 
-    return $str;
+    return trim($str);
 }
 
 /**
@@ -302,11 +309,13 @@ function rc_xmlToArray($xmlstr)
 {
     $doc = new DOMDocument();
     $doc->loadXML($xmlstr);
+
     $root = $doc->documentElement;
     $output = rc_domnodeToArray($root);
     if (!empty($output['@root'])) {
         $output['@root'] = $root->tagName;
     }
+
     if ((is_array($output) || is_object($output))) {
         return $output;
     }
@@ -321,37 +330,44 @@ function rc_domnodeToArray($node)
         $output = trim($node->textContent);
         break;
         case XML_ELEMENT_NODE:
-        for ($i=0, $m=$node->childNodes->length; $i<$m; $i++) {
+        for ($i=0, $m=$node->childNodes->length; $i<$m; ++$i) {
             $child = $node->childNodes->item($i);
             $v = rc_domnodeToArray($child);
-            if (isset($child->tagName)) {
+            if (property_exists($child, 'tagName') && $child->tagName !== null) {
                 $t = $child->tagName;
                 if (!isset($output[$t])) {
                     $output[$t] = [];
                 }
+
                 $output[$t][] = $v;
             } elseif ($v || $v === '0') {
                 $output = (string) $v;
             }
         }
+
         if ($node->attributes->length && !is_array($output)) { //Has attributes but isn't an array
             $output = array('@content'=>$output); //Change output into an array.
         }
+
         if (is_array($output)) {
             if ($node->attributes->length) {
                 $a = [];
                 foreach ($node->attributes as $attrName => $attrNode) {
                     $a[$attrName] = (string) $attrNode->value;
                 }
+
                 $output['@attributes'] = $a;
             }
+
             foreach ($output as $t => $v) {
-                if (is_array($v) && count($v)==1 && $t!='@attributes') {
+                if (is_array($v) && count($v)==1 && $t != '@attributes') {
                     $output[$t] = $v[0];
                 }
             }
         }
+
         break;
     }
+
     return $output;
 }
