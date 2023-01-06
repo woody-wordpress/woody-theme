@@ -30,7 +30,6 @@
     {% endblock %}
     {# Schema Graph #}
 
-    {# TODO: Uncomment Register service worker and enqueue manifest url #}
     {% if pwa.manifest_url %}
         <link rel="manifest" href="{{ pwa.manifest_url }}" />
         <script src="{{ home_url }}app/themes/woody-theme/pwa/sw-register.js"></script>
@@ -71,7 +70,6 @@
     {# /Body Top #}
 
     {% if pwa.manifest_url %}
-    {{ _context|console_log() }}
         <div class="invisible flex-container align-middle" id="pwaInstallBanner">
             <img src="{{ icons.32 }}" width="32" height="32" />
             <div class="install-wrapper flex-container align-middle">
