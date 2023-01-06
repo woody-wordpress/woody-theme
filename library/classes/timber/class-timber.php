@@ -140,7 +140,7 @@ if (!class_exists('Timber')) {
                     'page' => [
                         'id_page' => $vars['globals']['post_id'],
                         'name' => $vars['globals']['post_title'],
-                        'page_type' => $vars['globals']['page_type'],
+                        'page_type' => $vars['page_type'],
                         'tags' => $vars['globals']['tags'],
                         // 'lang' => $vars['globals']['current_locale'],
                         // 'season' => $vars['globals']['current_season'],
