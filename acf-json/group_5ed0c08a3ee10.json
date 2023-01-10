@@ -1,8 +1,7 @@
 {
     "key": "group_5ed0c08a3ee10",
     "title": "Informations profil",
-    "fields": [
-        {
+    "fields": [{
             "key": "field_622fb4351b1a9",
             "label": "Prénom",
             "name": "profile_firstname",
@@ -116,8 +115,7 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [
-                {
+            "sub_fields": [{
                     "key": "field_62288c19f21a0",
                     "label": "Date de naissance",
                     "name": "profile_birth",
@@ -445,8 +443,7 @@
                         "id": ""
                     },
                     "layout": "table",
-                    "sub_fields": [
-                        {
+                    "sub_fields": [{
                             "key": "field_5ee8df5a9cec3",
                             "label": "LinkedIn",
                             "name": "profile_linkedin",
@@ -500,8 +497,7 @@
             "max": 0,
             "layout": "row",
             "button_label": "Ajouter une expression",
-            "sub_fields": [
-                {
+            "sub_fields": [{
                     "key": "field_5ed0c2119c0b2",
                     "label": "Catégorie",
                     "name": "profile_expression_category",
@@ -543,16 +539,38 @@
                     "delay": 0
                 }
             ]
+        },
+        {
+            "key": "field_63bd95b1d04a1",
+            "label": "Type",
+            "name": "profile_type",
+            "type": "radio",
+            "instructions": "Définit si le profil est une personne physique ou une entité",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "physical": "Physique",
+                "entity": "Entitaire"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "physical",
+            "layout": "horizontal",
+            "return_format": "value",
+            "save_other_choice": 0
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "profile"
-            }
-        ]
+        [{
+            "param": "post_type",
+            "operator": "==",
+            "value": "profile"
+        }]
     ],
     "menu_order": 0,
     "position": "acf_after_title",
