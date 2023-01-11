@@ -619,6 +619,13 @@ class WoodyTheme_WoodyCompilers
             $page_teaser['page_teaser_img']['attachment_more_data'] = (empty($page_teaser['page_teaser_img']['ID'])) ? [] : $this->tools->getAttachmentMoreData($page_teaser['page_teaser_img']['ID']);
         }
 
+        if (!empty($page_teaser['background_img']) && is_array($page_teaser['background_img'])) {
+            $page_teaser['has_copyright'] = apply_filters('page_teaser_background_more_data', false);
+            if($page_teaser['has_copyright']) {
+                $page_teaser['background_img']['attachment_more_data'] = (empty($page_teaser['background_img']['ID'])) ? [] : $this->tools->getAttachmentMoreData($page_teaser['background_img']['ID']);
+            }
+        }
+
         $page_teaser['page_teaser_pretitle'] = (empty($page_teaser['page_teaser_pretitle'])) ? '' : $this->tools->replacePattern($page_teaser['page_teaser_pretitle'], $context['post_id']);
         $page_teaser['page_teaser_subtitle'] = (empty($page_teaser['page_teaser_subtitle'])) ? '' : $this->tools->replacePattern($page_teaser['page_teaser_subtitle'], $context['post_id']);
         $page_teaser['page_teaser_desc'] = (empty($page_teaser['page_teaser_desc'])) ? '' : $this->tools->replacePattern($page_teaser['page_teaser_desc'], $context['post_id']);
