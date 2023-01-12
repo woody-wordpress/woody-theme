@@ -1018,6 +1018,11 @@ class WoodyTheme_WoodyGetters
                 $data['contacts']['mail'] = get_field('profile_contacts_profile_mail', $post->ID);
             }
 
+            if (in_array('mailto', $wrapper['profile_focus_display'])) {
+                $email = empty($data['contacts']['mail']) ? get_field('profile_contacts_profile_mail', $post->ID) : $data['contacts']['mail'];
+                $data['contacts']['mailto'] = base64_encode($email);
+            }
+
             if (in_array('phone', $wrapper['profile_focus_display'])) {
                 $data['contacts']['phone'] = get_field('profile_contacts_profile_phone', $post->ID);
             }
