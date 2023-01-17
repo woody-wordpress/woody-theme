@@ -593,6 +593,7 @@ class WoodyTheme_WoodyGetters
 
         $data = [
             'title' => (empty($sheet_item['title'])) ? '' : $sheet_item['title'],
+            'post_id' => $post->ID,
             'link' => [
                 'url' => woody_get_permalink($post->ID),
                 'target' => (empty($sheet_item['targetBlank'])) ? '' : '_blank',
