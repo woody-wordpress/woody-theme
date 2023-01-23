@@ -44,7 +44,20 @@ class WoodyTheme_Api_Rest
                 'display_button' => true
             ];
 
-            return getPagePreview($wrapper, $post);
+            if ($post->post_status == 'publish') {
+                $post_preview = [];
+
+                switch ($post->post_type) {
+                    case 'touristic_sheet':
+                        $post_preview = getTouristicSheetPreview($wrapper, $post);
+                        break;
+                    default:
+                        $post_preview = getPagePreview($wrapper, $post);
+                        break;
+                }
+            }
+
+            return $post_preview;
         }
     }
 }
