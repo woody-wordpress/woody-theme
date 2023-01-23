@@ -20,6 +20,7 @@ class WoodyTheme_Testimonials
         add_filter('woody_polylang_update_options', [$this, 'woodyPolylangUpdateOptions']);
     }
 
+    //ANCHOR - Legacy content type => ne peut être supprimé car utilisé sur certains sites
     public function registerPostType()
     {
         $testimony = array(
@@ -41,9 +42,9 @@ class WoodyTheme_Testimonials
             ),
             'hierarchical'        => false,
             'public'              => true,
-            'show_ui'             => true,
+            'show_ui'             => false,
             'supports'            => array('title', 'custom-fields'),
-            'show_in_menu'        => true,
+            'show_in_menu'        => false,
             'menu_icon'           => 'dashicons-testimonial',
             'menu_position'       => 31,
             'show_in_nav_menus'   => false

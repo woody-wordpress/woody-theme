@@ -593,6 +593,7 @@ class WoodyTheme_WoodyGetters
 
         $data = [
             'title' => (empty($sheet_item['title'])) ? '' : $sheet_item['title'],
+            'post_id' => $post->ID,
             'link' => [
                 'url' => woody_get_permalink($post->ID),
                 'target' => (empty($sheet_item['targetBlank'])) ? '' : '_blank',
@@ -1016,6 +1017,11 @@ class WoodyTheme_WoodyGetters
 
             if (in_array('mail', $wrapper['profile_focus_display'])) {
                 $data['contacts']['mail'] = get_field('profile_contacts_profile_mail', $post->ID);
+            }
+
+            if (in_array('mailto', $wrapper['profile_focus_display'])) {
+                $email = empty($data['contacts']['mail']) ? get_field('profile_contacts_profile_mail', $post->ID) : $data['contacts']['mail'];
+                $data['contacts']['mailto'] = base64_encode($email);
             }
 
             if (in_array('phone', $wrapper['profile_focus_display'])) {

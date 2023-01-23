@@ -55,3 +55,9 @@ function getFieldAndFallback($item, $field, $fallback_item, $fallback_field = ''
     $tools = new WoodyTheme_WoodyProcessTools();
     return $tools->getFieldAndFallback($item, $field, $fallback_item, $fallback_field, $lastfallback_item, $lastfallback_field, $item_type);
 }
+
+function getAttachmentMoreData($attachment_id)
+{
+    $tools = new WoodyTheme_WoodyProcessTools();
+    return $tools->getAttachmentMoreData($attachment_id);
+}
