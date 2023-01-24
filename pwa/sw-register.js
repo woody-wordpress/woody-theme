@@ -19,11 +19,12 @@ if (!isPWA) {
     });
 
     if (!refused) {
-        console.log('not refused by cookie');
+
+        pwaBanner = document.getElementById('pwaInstallBanner');
 
         window.addEventListener('appinstalled', () => {
             console.log('app has been installed on desktop !');
-            document.getElementById('pwaInstallBanner').remove();
+            pwaBanner.remove();
         });
 
         window.addEventListener('beforeinstallprompt', (e) => {
@@ -31,23 +32,41 @@ if (!isPWA) {
             deferredPrompt = e;
             if(window.innerWidth < 1024){
                 console.log('We are on mobile, show that banner');
-                document.getElementById('pwaInstallBanner').classList.remove('invisible');
+                pwaBanner.classList.remove('invisible');
                 document.getElementById('closePwaInstall').addEventListener('click', closeBanner);
                 document.getElementById('triggerPwaInstall').addEventListener('click', installPWA);
             }
         });
+
+        let iOS = !window.MSStream && /iPad|iPhone|iPod/.test(navigator.userAgent); // fails on iPad iOS 13
+        if(iOS){
+            console.log('is iOS');
+            var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+            console.log({'safari' : isSafari});
+            if(isSafari){
+                howToInstallPwa();
+            } else {
+                useSafariToInstallPwa();
+            }
+        } else {
+
+        }
     }
 }
 
-function installPWA() {
-    console.log('Install app');
+function howToInstallPwa(pwaBanner){
 
+}
+
+function useSafariToInstallPwa(pwaBanner){
+
+}
+
+function installPWA() {
     deferredPrompt.prompt();
 }
 
 function closeBanner() {
-    console.log('Close banner');
-
     // mask modal
     document.getElementById('pwaInstallBanner').remove();
 
