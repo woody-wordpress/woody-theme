@@ -132,7 +132,7 @@ class WoodyTheme_WoodyCompilers
             }
 
             if (!empty($the_items['display_button'])) {
-                $the_items['button_classes'] = apply_filters('woody_card_button_classes', '');
+                $the_items['button_classes'] = apply_filters('woody_card_button_classes', '', $wrapper);
             }
 
             $the_items = apply_filters('woody_format_focuses_data', $the_items, $wrapper);
