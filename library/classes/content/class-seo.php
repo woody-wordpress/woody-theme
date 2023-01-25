@@ -21,6 +21,7 @@ class WoodyTheme_Seo
         add_filter('woody_seo_transform_pattern', [$this, 'woodySeoTransformPattern'], 10, 1);
         add_action('admin_menu', [$this, 'generateMenu'], 10);
         add_action('acf/init', [$this, 'acfAddFields']);
+        add_action('members_register_caps', [$this, 'membersRegisterCaps']);
     }
 
     public function woodySeoTransformPattern($string)
@@ -29,13 +30,21 @@ class WoodyTheme_Seo
         return $tools->replacePattern($string, get_the_ID());
     }
 
+    public function membersRegisterCaps()
+    {
+        members_register_cap('woody_seo', array(
+            'label' => _x('Woody SEO', '', 'woody'),
+            'group' => 'woody',
+        ));
+    }
+
     public function generateMenu()
     {
         acf_add_options_page([
             'page_title' => 'Paramètres Woody SEO',
             'menu_title' => 'Woody SEO',
             'menu_slug' => 'woodyseo_settings',
-            'capability'    => 'edit_pages',
+            'capability'    => 'woody_seo',
             'icon_url'      => 'dashicons-awards',
             'position'      => 50
         ]);

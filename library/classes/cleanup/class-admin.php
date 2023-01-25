@@ -21,6 +21,8 @@ class WoodyTheme_Cleanup_Admin
             add_action('admin_menu', [$this, 'removeAdminMenu']);
             add_action('admin_menu', [$this, 'customMenusPage']);
             add_action('admin_menu', [$this, 'woodySettingsPage']);
+            add_action('members_register_caps', [$this, 'membersRegisterCaps']);
+
             add_filter('admin_body_class', [$this, 'adminBodyClass']);
 
             add_action('wp_before_admin_bar_render', [$this, 'customAdminBarMenu']);
@@ -177,6 +179,19 @@ class WoodyTheme_Cleanup_Admin
         }
     }
 
+    public function membersRegisterCaps()
+    {
+        members_register_cap('woody_settings', array(
+            'label' => _x('Paramètres Woody', '', 'woody'),
+            'group' => 'woody',
+        ));
+
+        members_register_cap('woody_menus', array(
+            'label' => _x('Woody Menus', '', 'woody'),
+            'group' => 'woody',
+        ));
+    }
+
     /**
      * customMenusPage
      *
@@ -194,7 +209,7 @@ class WoodyTheme_Cleanup_Admin
                 'page_title'    => 'Personnalisation des menus',
                 'menu_title'    => 'Menus',
                 'menu_slug'     => 'custom-menus',
-                'capability'    => 'edit_pages',
+                'capability'    => 'woody_menus',
                 'icon_url'      => 'dashicons-menu',
                 'position'      => 30,
                 'redirect'      => true,
@@ -209,7 +224,7 @@ class WoodyTheme_Cleanup_Admin
                     'page_title'    => 'Menu principal',
                     'menu_title'    => 'Menu principal',
                     'parent_slug'   => 'custom-menus',
-                    'capability'    => 'edit_pages',
+                    'capability'    => 'woody_menus',
                 ));
             }
         }
@@ -226,7 +241,7 @@ class WoodyTheme_Cleanup_Admin
                     'page_title'    => 'Paramètres',
                     'menu_title'    => 'Paramètres',
                     'menu_slug'     => 'woody-settings',
-                    'capability'    => 'edit_pages',
+                    'capability'    => 'woody_settings',
                     'icon_url'      => 'dashicons-admin-generic',
                     'position'      => 40,
                 ));

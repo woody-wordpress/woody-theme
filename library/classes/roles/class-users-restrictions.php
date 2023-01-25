@@ -21,6 +21,15 @@ class WoodyTheme_Users_Restrictions
         add_action('admin_menu', [$this, 'generateMenu'], 10);
         add_action('init', [$this, 'checkRules'], 10);
         add_filter('acf/load_field/name=users', [$this, 'filterAdmin']);
+        add_action('members_register_caps', [$this, 'membersRegisterCaps']);
+    }
+
+    public function membersRegisterCaps()
+    {
+        members_register_cap('woody_seo', array(
+            'label' => _x('woody_restrictions', '', 'woody'),
+            'group' => 'woody',
+        ));
     }
 
     public function generateMenu()
@@ -29,7 +38,7 @@ class WoodyTheme_Users_Restrictions
             'page_title' => "Paramètres restrictions d'accès",
             'menu_title' => "Restriction d'accès",
             'menu_slug' => 'woodyusers_restrictions_settings',
-            'capability'    => 'edit_pages',
+            'capability'    => 'woody_restrictions',
             'icon_url'      => 'dashicons-admin-users',
             'position'      => 99
         ]);
@@ -89,7 +98,8 @@ class WoodyTheme_Users_Restrictions
         return empty($content_type) ? new \WP_Error() : $content_type->term_id == $granted_page_type_id;
     }
 
-    public function filterAdmin($field){
+    public function filterAdmin($field)
+    {
         global $wp_roles;
         $roles = $wp_roles->role_names;
         unset($roles['administrator']);
