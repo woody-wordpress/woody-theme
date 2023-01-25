@@ -112,7 +112,7 @@ class Admin_Menus
                 'menu_title'    => 'Menu principal',
                 'menu_slug'     => 'main-menu-' . $this->current_lang,
                 'parent_slug'   => 'custom-menus',
-                'capability'    => 'edit_pages',
+                'capability'    => 'woody_menus',
                 'acf_group_key' => $acf_json_store['submenus']['acf_key']
             ],
             'sub_pages' => [
@@ -121,7 +121,7 @@ class Admin_Menus
                     'menu_title'    => 'Menu infos légales',
                     'menu_slug'     => 'legal-menu-' . $this->current_lang,
                     'parent_slug'   => 'custom-menus',
-                    'capability'    => 'edit_pages',
+                    'capability'    => 'woody_menus',
                     'acf_group_key' => $acf_json_store['link']['acf_key'],
                 ],
                 'pro-menu' => [
@@ -129,7 +129,7 @@ class Admin_Menus
                     'menu_title'    => 'Menu pro',
                     'menu_slug'     => 'pro-menu-' . $this->current_lang,
                     'parent_slug'   => 'custom-menus',
-                    'capability'    => 'edit_pages',
+                    'capability'    => 'woody_menus',
                     'acf_group_key' => $acf_json_store['link']['acf_key'],
                 ],
                 'social-menu' => [
@@ -137,7 +137,7 @@ class Admin_Menus
                     'menu_title'    => 'Réseaux sociaux',
                     'menu_slug'     => 'social-menu-' . $this->current_lang,
                     'parent_slug'   => 'custom-menus',
-                    'capability'    => 'edit_pages',
+                    'capability'    => 'woody_menus',
                     'acf_group_key' => $acf_json_store['link_icon']['acf_key'],
                 ]
             ],
