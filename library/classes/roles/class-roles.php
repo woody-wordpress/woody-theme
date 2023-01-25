@@ -246,7 +246,7 @@ class WoodyTheme_Roles
                 'administrator' => true,
                 'editor' => true,
                 'redactor' => true,
-                'contributor' => false,
+                'contributor' => true,
                 'translator' => true,
             ],
             'edit_published_pages' => [
