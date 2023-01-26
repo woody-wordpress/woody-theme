@@ -26,8 +26,8 @@ class WoodyTheme_Users_Restrictions
 
     public function membersRegisterCaps()
     {
-        members_register_cap('woody_seo', array(
-            'label' => _x('woody_restrictions', '', 'woody'),
+        members_register_cap('woody_restrictions', array(
+            'label' => _x('Restrictions d\'usage', '', 'woody'),
             'group' => 'woody',
         ));
     }
