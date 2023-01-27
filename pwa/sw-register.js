@@ -31,7 +31,7 @@ if (!isPWA && window.innerWidth < 1024) {
         if(iOS){
             window.addEventListener('DOMContentLoaded', () => {
                 let lang = document.documentElement.lang.substring(0, 2)
-                let iOSSafari = iOS && !(/CriOS/).test(userAgent) && !(/FxiOS/).test(userAgent) && !(/OPiOS/).test(userAgent) && !(/mercury/).test(userAgent);
+                let iOSSafari = iOS && !(/CriOS/).test(ua) && !(/FxiOS/).test(ua) && !(/OPiOS/).test(ua) && !(/mercury/).test(ua);
                 howToInstallPwa(lang, iOSSafari);
                 displayBanner();
             });
