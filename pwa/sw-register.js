@@ -26,10 +26,12 @@ if (!isPWA && window.innerWidth < 1024) {
         });
 
         if(!window.MSStream && /iPad|iPhone|iPod/.test(navigator.userAgent)){
-            let lang = document.documentElement.lang.substring(0, 2)
-            let isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-            howToInstallPwa(lang, isSafari);
-            displayBanner();
+            window.addEventListener('DOMContentLoaded', () => {
+                let lang = document.documentElement.lang.substring(0, 2)
+                let isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+                howToInstallPwa(lang, isSafari);
+                displayBanner();
+            });
         } else {
             window.addEventListener('beforeinstallprompt', (deferredPrompt) => {
                 e.preventDefault();
