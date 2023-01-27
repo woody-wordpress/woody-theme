@@ -71,14 +71,14 @@
 
     {% if pwa.manifest_url %}
         <div class="invisible flex-container align-middle" id="pwaInstallBanner">
-            <img src="{{ icons.32 }}" width="32" height="32" />
+            <img class="appicon" src="{{ icons.32 }}" width="32" height="32" />
             <div class="install-wrapper flex-container align-middle">
                 <div class="texts">
                     <p>{{ __('Installer') }} {{ globals.site_name }}</p>
                     <p><small>{{ http_host }}</small></p>
                 </div>
                 <div class="actions">
-                    <span id="closePwaInstall">{{ __('Refuser') }}</span>
+                    <span id="closePwaInstall">{{ __('Fermer') }}</span>
                     <span id="triggerPwaInstall">{{ __('Installer') }}</span>
                 </div>
             </div>
