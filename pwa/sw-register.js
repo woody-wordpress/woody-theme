@@ -53,7 +53,7 @@ if (!isPWA && window.innerWidth < 1024) {
                 pwaInstallBanner.querySelector('.notSafari').remove();
             }
         } else {
-            pwaInstallBanner.querySelector('#.iosOnly').remove();
+            pwaInstallBanner.querySelector('.iosOnly').remove();
         }
 
         if(deferredPrompt){
