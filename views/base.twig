@@ -70,14 +70,21 @@
     {# /Body Top #}
 
     {% if pwa.manifest_url %}
-        <div class="invisible flex-container align-middle" id="pwaInstallBanner">
-            <img class="appicon" src="{{ icons.32 }}" width="32" height="32" />
-            <div class="install-wrapper flex-container align-middle">
-                <div class="texts">
-                    <p>{{ __('Installer') }} {{ globals.site_name }}</p>
-                    <p><small>{{ http_host }}</small></p>
+        <div class="invisible flex-container align-middle flex-dir-column align-center" id="pwaInstallBanner">
+            <div class="appicon-wrapper">
+                <img class="appicon" src="{{ icons.120 }}" width="32" height="32" />
+            </div>
+            <div class="flex-container flex-dir-column aling-middle align-center bg-white text-center">
+                <span class="title">{{ __('Installer') }} {{ globals.site_name }}</span>
+                {# <small>{{ http_host }}</small> #}
+                <span class="desc">{{ __('Installez cette application sur votre écran d\'accueil pour un accès rapide et facile lorsque vous êtes en déplacement.', 'woody-theme') }}</span>
+            </div>
+            <div class="actions text-center">
+                <div class="iosOnly flex-container align-center align-middle flex-dir-column">
+                    <span class="notSafari flex-container align-middle">{{ __('Ouvrez Safari') }} <img width="24" height="24" src="/app/themes/woody-theme/pwa/icons/safari-icon.png" /></span>
+                    <span>{{ __('Cliquez sur') }} <img width="24" height="24" src="/app/themes/woody-theme/pwa/icons/apple-share.svg" /> {{ __('puis "Sur l\'écran d\'accueil"') }}</span>
                 </div>
-                <div class="actions">
+                <div class="buttons">
                     <span id="closePwaInstall">{{ __('Fermer') }}</span>
                     <span id="triggerPwaInstall">{{ __('Installer') }}</span>
                 </div>
