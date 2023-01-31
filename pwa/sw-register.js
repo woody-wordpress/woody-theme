@@ -33,7 +33,7 @@ if (!isPWA && window.innerWidth < 1024) {
             });
         } else {
             window.addEventListener('beforeinstallprompt', (deferredPrompt) => {
-                e.preventDefault();
+                deferredPrompt.preventDefault();
                 displayBanner(deferredPrompt);
             });
         }
