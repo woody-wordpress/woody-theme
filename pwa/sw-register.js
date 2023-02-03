@@ -32,7 +32,11 @@ if (!isPWA && window.innerWidth < 1024) {
                 displayBanner(null, iOS);
             });
         } else {
-            window.addEventListener('beforeinstallprompt', (deferredPrompt) => {
+            let deferredPrompt;
+            console.log('Not iOS mobile');
+            window.addEventListener('beforeinstallprompt', (e) => {
+                deferredPrompt = e;
+                console.log('beforeinstallprompt');
                 deferredPrompt.preventDefault();
                 displayBanner(deferredPrompt);
             });
@@ -57,7 +61,9 @@ if (!isPWA && window.innerWidth < 1024) {
         }
 
         if(deferredPrompt){
+            console.log('bind install click');
             document.getElementById('triggerPwaInstall').addEventListener('click', function(){
+                console.log('Click install');
                 installPWA(deferredPrompt)
             });
         }
