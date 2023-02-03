@@ -21,8 +21,7 @@ if (!isPWA && window.innerWidth < 1024) {
     if (!refused) {
 
         window.addEventListener('appinstalled', () => {
-            console.log('app has been installed on desktop !');
-            pwaBanner.remove();
+            document.getElementById('pwaInstallBanner').remove();
         });
 
         let iOS = !!window.navigator.userAgent.match(/iPad/i) || !!window.navigator.userAgent.match(/iPhone/i);
