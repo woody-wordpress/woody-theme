@@ -580,7 +580,7 @@ class WoodyTheme_WoodyCompilers
             }
         }
 
-        $page_teaser['page_teaser_title'] = (empty($page_teaser['page_teaser_display_title'])) ? '' : str_replace('-', '&#8209', $context['post_title']);
+        $page_teaser['page_teaser_title'] = (empty($page_teaser['page_teaser_display_title'])) ? '' : $context['post_title'];
 
         $page_teaser['the_classes'][] = (empty($page_teaser['background_img_opacity'])) ? '' : $page_teaser['background_img_opacity'];
         $page_teaser['the_classes'][] = (empty($page_teaser['background_color_opacity'])) ? '' : $page_teaser['background_color_opacity'];

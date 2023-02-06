@@ -675,6 +675,10 @@ class WoodyTheme_WoodyGetters
             }
         }
 
+        if (in_array('grade', $wrapper['display_elements'])) {
+            $data['grade'] = true;
+        }
+
         $data['location'] = [];
         $data['location']['lat'] = (empty($sheet_item['gps'])) ? '' : $sheet_item['gps']['latitude'];
         $data['location']['lng'] = (empty($sheet_item['gps'])) ? '' : $sheet_item['gps']['longitude'];

@@ -21,8 +21,7 @@ if (!isPWA && window.innerWidth < 1024) {
     if (!refused) {
 
         window.addEventListener('appinstalled', () => {
-            console.log('app has been installed on desktop !');
-            pwaBanner.remove();
+            document.getElementById('pwaInstallBanner').remove();
         });
 
         let iOS = !!window.navigator.userAgent.match(/iPad/i) || !!window.navigator.userAgent.match(/iPhone/i);
@@ -32,8 +31,10 @@ if (!isPWA && window.innerWidth < 1024) {
                 displayBanner(null, iOS);
             });
         } else {
-            window.addEventListener('beforeinstallprompt', (deferredPrompt) => {
-                e.preventDefault();
+            let deferredPrompt;
+            window.addEventListener('beforeinstallprompt', (e) => {
+                deferredPrompt = e;
+                deferredPrompt.preventDefault();
                 displayBanner(deferredPrompt);
             });
         }
@@ -47,7 +48,7 @@ if (!isPWA && window.innerWidth < 1024) {
         document.getElementById('closePwaInstall').addEventListener('click', closeBanner);
 
         if(iOS){
-            let iOSSafari = iOS && !(/CriOS/).test(window.navigator.userAgent) && !(/FxiOS/).test(window.navigator.userAgent) && !(/OPiOS/).test(window.navigator.userAgent) && !(/mercury/).test(window.navigator.userAgent);
+            let iOSSafari = iOS && window.safari !== undefined;
             pwaInstallBanner.querySelector('#triggerPwaInstall').remove();
             if(iOSSafari){
                 pwaInstallBanner.querySelector('.notSafari').remove();
