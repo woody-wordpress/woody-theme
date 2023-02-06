@@ -1,10 +1,12 @@
 {
     "key": "group_5bb325e8b6b43",
     "title": "Diaporama",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5bb3260577f37",
             "label": "Contenu",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -21,6 +23,7 @@
             "key": "field_5bb3262577f39",
             "label": "Slides",
             "name": "landswpr_slides",
+            "aria-label": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -35,10 +38,13 @@
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter un slide",
-            "sub_fields": [{
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
                     "key": "field_5bbcac7027b56",
                     "label": "Titre d'administration",
                     "name": "bo_landswpr_title",
+                    "aria-label": "",
                     "type": "text",
                     "instructions": "",
                     "required": 0,
@@ -52,12 +58,14 @@
                     "placeholder": "Titre visible lorsque le slide est refermé (uniquement pour le backoffice)",
                     "prepend": "",
                     "append": "",
-                    "maxlength": ""
+                    "maxlength": "",
+                    "parent_repeater": "field_5bb3262577f39"
                 },
                 {
                     "key": "field_5bb3266177f3a",
                     "label": "Média",
                     "name": "landswpr_slide_media",
+                    "aria-label": "",
                     "type": "group",
                     "instructions": "",
                     "required": 0,
@@ -68,10 +76,12 @@
                         "id": ""
                     },
                     "layout": "block",
-                    "sub_fields": [{
+                    "sub_fields": [
+                        {
                             "key": "field_5bb326b977f3b",
                             "label": "Type de média",
                             "name": "landswpr_slide_media_type",
+                            "aria-label": "",
                             "type": "radio",
                             "instructions": "",
                             "required": 0,
@@ -97,15 +107,18 @@
                             "key": "field_5bb3274577f3c",
                             "label": "Image",
                             "name": "landswpr_slide_img",
+                            "aria-label": "",
                             "type": "image",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": [
-                                [{
-                                    "field": "field_5bb326b977f3b",
-                                    "operator": "==",
-                                    "value": "img"
-                                }]
+                                [
+                                    {
+                                        "field": "field_5bb326b977f3b",
+                                        "operator": "==",
+                                        "value": "img"
+                                    }
+                                ]
                             ],
                             "wrapper": {
                                 "width": "",
@@ -127,15 +140,18 @@
                             "key": "field_5bb327a477f3d",
                             "label": "Vidéo",
                             "name": "landswpr_slide_movie",
+                            "aria-label": "",
                             "type": "group",
                             "instructions": "Une vidéo muette, courte et légère.\r\nSi votre vidéo comporte du son, il sera coupé afin de respecter les standards en vigueur et autoriser l'autoplay.",
                             "required": 0,
                             "conditional_logic": [
-                                [{
-                                    "field": "field_5bb326b977f3b",
-                                    "operator": "==",
-                                    "value": "movie"
-                                }]
+                                [
+                                    {
+                                        "field": "field_5bb326b977f3b",
+                                        "operator": "==",
+                                        "value": "movie"
+                                    }
+                                ]
                             ],
                             "wrapper": {
                                 "width": "",
@@ -143,10 +159,12 @@
                                 "id": ""
                             },
                             "layout": "block",
-                            "sub_fields": [{
+                            "sub_fields": [
+                                {
                                     "key": "field_5bb3283377f3e",
                                     "label": "Poster",
                                     "name": "movie_poster_file",
+                                    "aria-label": "",
                                     "type": "image",
                                     "instructions": "Impératif pour l'affichage de la vidéo.\r\nCorrespond généralement à la première image de la vidéo",
                                     "required": 0,
@@ -171,6 +189,7 @@
                                     "key": "field_5bb3287f77f3f",
                                     "label": "Vidéo mp4",
                                     "name": "mp4_movie_file",
+                                    "aria-label": "",
                                     "type": "file",
                                     "instructions": "",
                                     "required": 0,
@@ -190,6 +209,7 @@
                                     "key": "field_5bb328ab77f40",
                                     "label": "Vidéo Webm",
                                     "name": "movie_webm_file",
+                                    "aria-label": "",
                                     "type": "file",
                                     "instructions": "",
                                     "required": 0,
@@ -209,6 +229,7 @@
                                     "key": "field_5bb328d077f41",
                                     "label": "Vidéo OGG\/OGV",
                                     "name": "movi_ogg_file",
+                                    "aria-label": "",
                                     "type": "file",
                                     "instructions": "",
                                     "required": 0,
@@ -228,16 +249,37 @@
                                     "key": "field_632ad55c5a2b4",
                                     "label": "Ne pas lancer la vidéo sur mobile",
                                     "name": "desktop_only",
+                                    "aria-label": "",
                                     "type": "true_false",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
                                     "wrapper": {
-                                        "width": "",
+                                        "width": "50",
                                         "class": "",
                                         "id": ""
                                     },
                                     "message": "Si actif, la vidéo sera remplacée par le poster sur les appareils mobiles",
+                                    "default_value": 0,
+                                    "ui_on_text": "",
+                                    "ui_off_text": "",
+                                    "ui": 1
+                                },
+                                {
+                                    "key": "field_63e11ac98f981",
+                                    "label": "Autoriser les utilisateurs à activer le son",
+                                    "name": "allow_movie_sound_on",
+                                    "aria-label": "",
+                                    "type": "true_false",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "message": "",
                                     "default_value": 0,
                                     "ui": 1,
                                     "ui_on_text": "",
@@ -249,15 +291,18 @@
                             "key": "field_5e425fc24d874",
                             "label": "Vidéo Youtube",
                             "name": "landswpr_slide_embed",
+                            "aria-label": "",
                             "type": "oembed",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": [
-                                [{
-                                    "field": "field_5bb326b977f3b",
-                                    "operator": "==",
-                                    "value": "embed"
-                                }]
+                                [
+                                    {
+                                        "field": "field_5bb326b977f3b",
+                                        "operator": "==",
+                                        "value": "embed"
+                                    }
+                                ]
                             ],
                             "wrapper": {
                                 "width": "",
@@ -271,6 +316,7 @@
                             "key": "field_5c111bf05e17f",
                             "label": "Opacité du média",
                             "name": "landswpr_media_op",
+                            "aria-label": "",
                             "type": "button_group",
                             "instructions": "",
                             "required": 0,
@@ -290,12 +336,14 @@
                             "layout": "horizontal",
                             "return_format": "value"
                         }
-                    ]
+                    ],
+                    "parent_repeater": "field_5bb3262577f39"
                 },
                 {
                     "key": "field_5bb3294777f42",
                     "label": "Textes",
                     "name": "landswpr_slide_texts",
+                    "aria-label": "",
                     "type": "clone",
                     "instructions": "",
                     "required": 0,
@@ -311,12 +359,14 @@
                     "display": "seamless",
                     "layout": "block",
                     "prefix_label": 0,
-                    "prefix_name": 0
+                    "prefix_name": 0,
+                    "parent_repeater": "field_5bb3262577f39"
                 },
                 {
                     "key": "field_5bd816cd77cd7",
                     "label": "Bouton(s)",
                     "name": "landswpr_slide_smart_links",
+                    "aria-label": "",
                     "type": "clone",
                     "instructions": "",
                     "required": 0,
@@ -332,12 +382,14 @@
                     "display": "group",
                     "layout": "block",
                     "prefix_label": 0,
-                    "prefix_name": 0
+                    "prefix_name": 0,
+                    "parent_repeater": "field_5bb3262577f39"
                 },
                 {
                     "key": "field_5bb3297e77f43",
                     "label": "! ANCIENS ! Lien(s)",
                     "name": "landswpr_slide_links",
+                    "aria-label": "",
                     "type": "repeater",
                     "instructions": "",
                     "required": 0,
@@ -352,32 +404,39 @@
                     "max": 0,
                     "layout": "block",
                     "button_label": "Ajouter un bouton",
-                    "sub_fields": [{
-                        "key": "field_5bbcaab563652",
-                        "label": "Bouton(s)",
-                        "name": "landswpr_slide_link",
-                        "type": "clone",
-                        "instructions": "",
-                        "required": 0,
-                        "conditional_logic": 0,
-                        "wrapper": {
-                            "width": "",
-                            "class": "hide-label",
-                            "id": ""
-                        },
-                        "clone": [
-                            "group_5b0422e167d2a"
-                        ],
-                        "display": "seamless",
-                        "layout": "block",
-                        "prefix_label": 0,
-                        "prefix_name": 0
-                    }]
+                    "rows_per_page": 20,
+                    "sub_fields": [
+                        {
+                            "key": "field_5bbcaab563652",
+                            "label": "Bouton(s)",
+                            "name": "landswpr_slide_link",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "hide-label",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b0422e167d2a"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0,
+                            "parent_repeater": "field_5bb3297e77f43"
+                        }
+                    ],
+                    "parent_repeater": "field_5bb3262577f39"
                 },
                 {
                     "key": "field_61aa234624178",
                     "label": "Ajouter une vidéo de présentation (youtube, dailymotion, vimeo, ...)",
                     "name": "landswpr_slide_add_social_movie",
+                    "aria-label": "",
                     "type": "true_false",
                     "instructions": "Cette vidéo pourra être visionnée grâce à un bouton \"Voir la vidéo\"",
                     "required": 0,
@@ -399,12 +458,14 @@
                     "default_value": 0,
                     "ui": 1,
                     "ui_on_text": "",
-                    "ui_off_text": ""
+                    "ui_off_text": "",
+                    "parent_repeater": "field_5bb3262577f39"
                 },
                 {
                     "key": "field_61aa23a224179",
                     "label": "Vidéo de présentation",
                     "name": "landswpr_slide_social_movie",
+                    "aria-label": "",
                     "type": "oembed",
                     "instructions": "",
                     "required": 0,
@@ -428,7 +489,8 @@
                         "id": ""
                     },
                     "width": "",
-                    "height": ""
+                    "height": "",
+                    "parent_repeater": "field_5bb3262577f39"
                 }
             ]
         },
@@ -436,6 +498,7 @@
             "key": "field_5bb3261577f38",
             "label": "Mise en page",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -452,6 +515,7 @@
             "key": "field_5bb33637168ed",
             "label": "Template",
             "name": "landswpr_woody_tpl",
+            "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -471,6 +535,7 @@
             "key": "button_field_5bb33637168ed",
             "label": "Choisir une mise en page",
             "name": "",
+            "aria-label": "",
             "type": "message",
             "instructions": "",
             "required": 0,
@@ -488,6 +553,7 @@
             "key": "field_5c94bf88922fe",
             "label": "Options avancées",
             "name": "",
+            "aria-label": "",
             "type": "accordion",
             "instructions": "",
             "required": 0,
@@ -505,6 +571,7 @@
             "key": "field_5c94bfe0922ff",
             "label": "Lien vers le contenu",
             "name": "landswpr_scroll_down",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -522,7 +589,8 @@
         }
     ],
     "location": [
-        [{
+        [
+            {
                 "param": "post_type",
                 "operator": "==",
                 "value": "page"
@@ -540,7 +608,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "Diaporama de slides (image ou video) en page d'accueil",
-    "modified": 1581417138
+    "show_in_rest": 0
 }
