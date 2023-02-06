@@ -245,25 +245,6 @@
             "ui_off_text": ""
         },
         {
-            "key": "field_5c51a4b00e895",
-            "label": "Afficher les boutons \"Lire la suite\"",
-            "name": "display_button",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "25",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 1,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
             "key": "field_5c4f30e26dfa9",
             "label": "Mise en page",
             "name": "",
