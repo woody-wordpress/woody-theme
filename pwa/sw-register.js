@@ -48,7 +48,7 @@ if (!isPWA && window.innerWidth < 1024) {
         document.getElementById('closePwaInstall').addEventListener('click', closeBanner);
 
         if(iOS){
-            let iOSSafari = iOS && !(/CriOS/).test(window.navigator.userAgent) && !(/FxiOS/).test(window.navigator.userAgent) && !(/OPiOS/).test(window.navigator.userAgent) && !(/mercury/).test(window.navigator.userAgent);
+            let iOSSafari = iOS && window.safari !== undefined;
             pwaInstallBanner.querySelector('#triggerPwaInstall').remove();
             if(iOSSafari){
                 pwaInstallBanner.querySelector('.notSafari').remove();
