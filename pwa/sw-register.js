@@ -8,6 +8,8 @@ if ('serviceWorker' in navigator) {
 let deferredPrompt = null;
 const isPWA = ['standalone'].some((displayMode) => window.matchMedia('(display-mode: ' + displayMode + ')').matches);
 if (!isPWA && window.innerWidth < 1024) {
+    console.log('Not PWA');
+    console.log('Mobile device');
 
     // check if user has already refused to install PWA
     let refused = false;
@@ -20,16 +22,22 @@ if (!isPWA && window.innerWidth < 1024) {
 
     if (!refused) {
 
+        console.log('check if app is installed');
+
         window.addEventListener('appinstalled', () => {
+            console.log('App is installed');
             document.getElementById('pwaInstallBanner').remove();
         });
 
         let iOS = !!window.navigator.userAgent.match(/iPad/i) || !!window.navigator.userAgent.match(/iPhone/i);
 
         if(iOS){
+            console.log('is iOS');
             displayBanner(null, iOS);
         } else {
+            console.log('isn\'t iOS');
             window.addEventListener('beforeinstallprompt', (deferredPrompt) => {
+                console.log('beforeinstallprompt');
                 deferredPrompt.preventDefault();
                 displayBanner(deferredPrompt);
             });
@@ -38,8 +46,14 @@ if (!isPWA && window.innerWidth < 1024) {
     }
 
     function displayBanner(deferredPrompt = null, iOS = false){
+        console.log('displayBanner');
         window.addEventListener('DOMContentLoaded', () => {
+
+            console.log('DOMContentLoaded');
+
             let pwaInstallBanner = document.getElementById('pwaInstallBanner');
+
+            console.log(pwaInstallBanner);
 
             pwaInstallBanner.classList.remove('invisible');
             document.getElementById('closePwaInstall').addEventListener('click', closeBanner);
@@ -55,6 +69,7 @@ if (!isPWA && window.innerWidth < 1024) {
             }
 
             if(deferredPrompt){
+                console.log('Bind triggerPwaInstall');
                 document.getElementById('triggerPwaInstall').addEventListener('click', function(){
                     installPWA(deferredPrompt)
                 });
