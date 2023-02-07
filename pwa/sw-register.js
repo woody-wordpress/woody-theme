@@ -32,8 +32,10 @@ if (!isPWA && window.innerWidth < 1024) {
         let iOS = !!window.navigator.userAgent.match(/iPad/i) || !!window.navigator.userAgent.match(/iPhone/i);
 
         if(iOS){
-            console.log('is iOS');
-            displayBanner(null, iOS);
+            window.addEventListener('DOMContentLoaded', () => {
+                console.log('is iOS');
+                displayBanner(null, iOS);
+            });
         } else {
             console.log('isn\'t iOS');
             window.addEventListener('beforeinstallprompt', (deferredPrompt) => {
@@ -47,34 +49,33 @@ if (!isPWA && window.innerWidth < 1024) {
 
     function displayBanner(deferredPrompt = null, iOS = false){
         console.log('displayBanner');
-        window.addEventListener('DOMContentLoaded', () => {
 
-            console.log('DOMContentLoaded');
+        console.log('DOMContentLoaded');
 
-            let pwaInstallBanner = document.getElementById('pwaInstallBanner');
+        let pwaInstallBanner = document.getElementById('pwaInstallBanner');
 
-            console.log(pwaInstallBanner);
+        console.log(pwaInstallBanner);
 
-            pwaInstallBanner.classList.remove('invisible');
-            document.getElementById('closePwaInstall').addEventListener('click', closeBanner);
+        pwaInstallBanner.classList.remove('invisible');
+        document.getElementById('closePwaInstall').addEventListener('click', closeBanner);
 
-            if(iOS){
-                let iOSSafari = iOS && window.safari !== undefined;
-                pwaInstallBanner.querySelector('#triggerPwaInstall').remove();
-                if(iOSSafari){
-                    pwaInstallBanner.querySelector('.notSafari').remove();
-                }
-            } else {
-                pwaInstallBanner.querySelector('.iosOnly').remove();
+        if(iOS){
+            let iOSSafari = iOS && window.safari !== undefined;
+            pwaInstallBanner.querySelector('#triggerPwaInstall').remove();
+            if(iOSSafari){
+                pwaInstallBanner.querySelector('.notSafari').remove();
             }
+        } else {
+            pwaInstallBanner.querySelector('.iosOnly').remove();
+        }
 
-            if(deferredPrompt){
-                console.log('Bind triggerPwaInstall');
-                document.getElementById('triggerPwaInstall').addEventListener('click', function(){
-                    installPWA(deferredPrompt)
-                });
-            }
-        });
+        if(deferredPrompt){
+            console.log('Bind triggerPwaInstall');
+            document.getElementById('triggerPwaInstall').addEventListener('click', function(){
+                installPWA(deferredPrompt)
+            });
+        }
+
     }
 
     function installPWA(deferredPrompt) {
