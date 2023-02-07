@@ -1,29 +1,12 @@
 {
     "key": "group_5b16b09337a33",
     "title": "HTML5 Vidéo",
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "Fichiers pour ajout de vidéo (poster, mp4, ogg\/ogv, webm)",
-    "modified": 1536232425,
     "fields": [
         {
             "key": "field_5b16b13c06118",
             "label": "Poster",
             "name": "movie_poster_file",
+            "aria-label": "",
             "type": "image",
             "instructions": "Cette image sera affichée en attendant le chargement de la vidéo. Elle est INDISPENSABLE pour un rendu de qualité",
             "required": 0,
@@ -48,6 +31,7 @@
             "key": "field_5b16b09606115",
             "label": "Video MP4",
             "name": "mp4_movie_file",
+            "aria-label": "",
             "type": "file",
             "instructions": "",
             "required": 0,
@@ -67,6 +51,7 @@
             "key": "field_5b16b0cb06116",
             "label": "Vidéo WEBM",
             "name": "movie_webm_file",
+            "aria-label": "",
             "type": "file",
             "instructions": "",
             "required": 0,
@@ -86,6 +71,7 @@
             "key": "field_5b16b0fc06117",
             "label": "Vidéo OGG \/ OGV",
             "name": "movie_ogg_file",
+            "aria-label": "",
             "type": "file",
             "instructions": "",
             "required": 0,
@@ -100,6 +86,44 @@
             "min_size": "",
             "max_size": "",
             "mime_types": "ogg, ogv"
+        },
+        {
+            "key": "field_63e11c5a0aa2c",
+            "label": "Autoriser les utilisateurs à activer le son",
+            "name": "allow_movie_sound_on",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
-    ]
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Fichiers pour ajout de vidéo (poster, mp4, ogg\/ogv, webm)",
+    "show_in_rest": 0
 }
