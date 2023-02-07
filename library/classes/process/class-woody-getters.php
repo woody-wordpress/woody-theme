@@ -675,7 +675,7 @@ class WoodyTheme_WoodyGetters
             }
         }
 
-        if (in_array('grade', $wrapper['display_elements'])) {
+        if (is_array($wrapper['display_elements']) && in_array('grade', $wrapper['display_elements'])) {
             $data['grade'] = true;
         }
 
