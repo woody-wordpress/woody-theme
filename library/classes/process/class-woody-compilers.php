@@ -643,8 +643,9 @@ class WoodyTheme_WoodyCompilers
         $page_teaser['tmaps_confid'] = get_field('tmaps_confid', 'option');
 
         $page_teaser = apply_filters('woody_custom_page_teaser', $page_teaser, $context);
-
-        return \Timber::compile($context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
+        if (!empty($page_teaser['page_teaser_woody_tpl'])) {
+            return \Timber::compile($context['woody_components'][$page_teaser['page_teaser_woody_tpl']], $page_teaser);
+        }
     }
 
     public function formatPageHero($context, $custom_post_id = null)
