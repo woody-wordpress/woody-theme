@@ -747,6 +747,9 @@ abstract class WoodyTheme_TemplateAbstract
     {
         $languages = apply_filters('woody_pll_the_languages', 'auto');
 
+        // Add external languages
+        $languages = apply_filters('woody_langs_data', $languages);
+
         if (!empty($languages) && (is_countable($languages) ? count($languages) : 0) != 1) {
             $data = $this->createSwitcher($languages);
 
@@ -766,6 +769,9 @@ abstract class WoodyTheme_TemplateAbstract
     {
         // Get polylang languages
         $languages = apply_filters('woody_pll_the_languages', 'auto');
+
+        // Add external languages
+        $languages = apply_filters('woody_langs_data', $languages);
 
         if (!empty($languages) && (is_countable($languages) ? count($languages) : 0) != 1) {
             $data = $this->createSwitcher($languages);
