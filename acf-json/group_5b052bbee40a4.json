@@ -503,7 +503,7 @@
             },
             {
                 "param": "page_type_and_children",
-                "operator": "!=",
+                "operator": "==",
                 "value": "tourtrip"
             }
         ],
