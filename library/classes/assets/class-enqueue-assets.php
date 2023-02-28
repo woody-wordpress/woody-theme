@@ -63,6 +63,7 @@ class WoodyTheme_Enqueue_Assets
         add_action('login_enqueue_scripts', [$this, 'enqueueAdminAssets']);
         add_filter('heartbeat_settings', [$this, 'heartbeatSettings']);
         add_filter('woody_enqueue_favicons', [$this, 'enqueueFavicons']);
+        add_filter('wp_resource_hints', [$this, 'wpResourceHints'], 10, 2);
 
         // Si vous utilisez HTML5, wdjs_use_html5 est un filtre qui enlève l’attribut type="text/javascript"
         add_filter('wdjs_use_html5', '__return_true');
@@ -71,7 +72,8 @@ class WoodyTheme_Enqueue_Assets
         add_filter('clean_url', [$this, 'so_handle_038'], 99, 3);
 
         //plugin deferred labJS is activated
-        add_action('wdjs_deferred_script_wait', [$this, 'labjsAfterMyScript'], 10, 2);
+        //add_action('wdjs_deferred_script_wait', [$this, 'labjsAfterMyScript'], 10, 2);
+        add_filter('script_loader_tag', [$this, 'scriptLoaderTag'], 10, 2);
     }
 
     public function init()
@@ -81,18 +83,23 @@ class WoodyTheme_Enqueue_Assets
     }
 
     // print inline scripts after specified scripts (labJS only)
-    public function labjsAfterMyScript($wait, $handle)
-    {
-        // after jQuery => add globalScript
-        if ('jquery' === $handle) {
-            $wait = $this->globalScriptString;
-        }
-        // after ngScripts => bootstrap angular app
-        elseif ('hawwwai_ng_scripts' === $handle) {
-            $wait = "function(){angular.bootstrap(document, ['drupalAngularApp']);}";
-        }
+    // public function labjsAfterMyScript($wait, $handle)
+    // {
+    //     // after jQuery => add globalScript
+    //     if ('jquery' === $handle) {
+    //         $wait = $this->globalScriptString;
+    //     }
+    //     // after ngScripts => bootstrap angular app
+    //     elseif ('hawwwai_ng_scripts' === $handle) {
+    //         $wait = "function(){angular.bootstrap(document, ['drupalAngularApp']);}";
+    //     }
 
-        return $wait;
+    //     return $wait;
+    // }
+
+    public function scriptLoaderTag($tag, $handle)
+    {
+        return str_replace(' src', ' defer="defer" src', $tag);
     }
 
     public function enqueueLibraries()
@@ -104,11 +111,16 @@ class WoodyTheme_Enqueue_Assets
         wp_deregister_script('heartbeat');
 
         // Remove Gutenberg CSS
+        wp_dequeue_style('global-styles');
         wp_dequeue_style('wp-block-library');
+        wp_dequeue_style('classic-theme-styles'); // /wp/wp-includes/css/classic-themes.min.css?ver=1
 
         // Deregister the jquery version bundled with WordPress & define another
         wp_deregister_script('jquery');
         wp_deregister_script('jquery-migrate');
+        wp_deregister_script('wp-polyfill');
+        wp_deregister_script('regenerator-runtime');
+        wp_deregister_script('hooks');
 
         // define apiurl according to WP_ENV
         // If preprod render is eneeded use $apirender_base_uri = 'https://api.tourism-system.rc-preprod.com/render';
@@ -155,6 +167,7 @@ class WoodyTheme_Enqueue_Assets
         }
 
         wp_enqueue_script('jquery', 'https://cdn.jsdelivr.net/npm/jquery@' . $jQuery_version . '/dist/jquery.min.js', [], null);
+        wp_add_inline_script('jquery', $this->globalScriptString, 'before');
 
         if (!$this->isTouristicSheet || defined('IS_WOODY_HAWWWAI_SHEET_ENABLE')) {
             wp_enqueue_script('jsdelivr_swiper', 'https://cdn.jsdelivr.net/npm/swiper@4.4.1/dist/js/swiper.min.js', [], null);
@@ -360,6 +373,15 @@ class WoodyTheme_Enqueue_Assets
         return $return;
     }
 
+    public function wpResourceHints($hints, $relation_type)
+    {
+        if ($relation_type == 'dns-prefetch') {
+            $hints[] = 'https://www.googletagmanager.com';
+        }
+
+        return $hints;
+    }
+
     public function woodyThemeUpdate()
     {
         // Delete Cache
@@ -453,11 +475,10 @@ class WoodyTheme_Enqueue_Assets
         //$globalScriptString = apply_filters('woody_theme_global_script_string', $globalScriptString);
 
         // Create inline script
-        $return = "function(){";
         foreach ($globalScriptString as $name => $val) {
             $return .= $name . '=' . $val . ';';
         }
 
-        return $return . "}";
+        return $return;
     }
 }
