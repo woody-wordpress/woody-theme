@@ -673,6 +673,12 @@ class WoodyTheme_WoodyCompilers
                 }
             }
 
+            if(!empty($page_hero['page_heading_more_imgs']) && !empty($page_hero['page_heading_more_imgs']['display_imgs']) && !empty($page_hero['page_heading_more_imgs']['imgs'])) {
+                foreach ($page_hero['page_heading_more_imgs']['imgs'] as $more_img_key => $more_img) {
+                    $page_hero['page_heading_more_imgs']['imgs'][$more_img_key]['attachment_more_data'] = (empty($page_hero['page_heading_more_imgs']['imgs'][$more_img_key]['ID'])) ? [] : $this->tools->getAttachmentMoreData($page_hero['page_heading_more_imgs']['imgs'][$more_img_key]['ID']);
+                }
+            }
+
             if (!empty($page_hero['page_heading_add_social_movie']) && !empty($page_hero['page_heading_social_movie'])) {
                 preg_match_all('#src="([^"]+)"#', $page_hero['page_heading_social_movie'], $result);
                 if (!empty($result[1]) && !empty($result[1][0])) {
