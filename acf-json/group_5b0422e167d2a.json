@@ -108,6 +108,43 @@
             "new_lines": ""
         },
         {
+            "key": "field_6405a5bc177ce",
+            "label": "Taille de la fenêtre contextuelle",
+            "name": "modal_size",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5bd80bae735cb",
+                        "operator": "==",
+                        "value": "code"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "tiny": "Très petite",
+                "small": "Petite",
+                "large": "Grande",
+                "full": "Très grande"
+            },
+            "default_value": [
+                "large"
+            ],
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
             "key": "field_5b0422ed7d07b",
             "label": "Icône",
             "name": "button_woody_icon",
