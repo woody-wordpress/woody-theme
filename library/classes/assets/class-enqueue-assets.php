@@ -104,11 +104,18 @@ class WoodyTheme_Enqueue_Assets
         wp_deregister_script('heartbeat');
 
         // Remove Gutenberg CSS
+        wp_dequeue_style('global-styles');
         wp_dequeue_style('wp-block-library');
+        wp_dequeue_style('classic-theme-styles'); // /wp/wp-includes/css/classic-themes.min.css?ver=1
 
         // Deregister the jquery version bundled with WordPress & define another
         wp_deregister_script('jquery');
         wp_deregister_script('jquery-migrate');
+
+        // REVIEW: A décommenter si nous arrêtons d'utiliser i18n
+        // wp_deregister_script('wp-polyfill');
+        // wp_deregister_script('regenerator-runtime');
+        // wp_deregister_script('hooks');
 
         // define apiurl according to WP_ENV
         // If preprod render is eneeded use $apirender_base_uri = 'https://api.tourism-system.rc-preprod.com/render';

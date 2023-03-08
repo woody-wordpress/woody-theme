@@ -360,7 +360,7 @@ class WoodyTheme_Plugins_Options
         $this->updateOption('redirection_options', $redirection_options);
 
         // Duplicate Post
-        $duplicate_post_types_enabled = [
+        $duplicate_post_types_enabled = apply_filters('woody_duplicate_post_types_enabled', [
             'post',
             'page',
             'profile',
@@ -368,8 +368,7 @@ class WoodyTheme_Plugins_Options
             'testimony',
             'woody_model',
             'woody_section_model',
-            'woody_claims',
-        ];
+        ]);
         $this->updateOption('duplicate_post_types_enabled', $duplicate_post_types_enabled);
         update_option('duplicate_post_show_notice', false);
 
@@ -406,7 +405,6 @@ class WoodyTheme_Plugins_Options
         }
 
         $new_option = is_array($settings) ? array_replace_recursive($option, $settings) : $settings;
-
         $new_option = $this->cleanUpOption($option_name, $new_option);
 
         if (strcmp(json_encode($option, JSON_THROW_ON_ERROR), json_encode($new_option, JSON_THROW_ON_ERROR)) !== 0) { // Update if different

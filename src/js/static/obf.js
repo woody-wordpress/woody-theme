@@ -1,22 +1,28 @@
-!(function ($, undefined) {
+// Iterate through the elements with class obf
+document.querySelectorAll('.obf').forEach(function (el) {
+    if (el.dataset.obf !== undefined) {
+        // Set href attribute of el to its [data-obf] attribute
+        el.setAttribute('href', atob(el.dataset.obf));
+        // Remove data-obf from element
+        el.removeAttribute('data-obf');
 
-    $('.obf').each(function () {
-        var $this = $(this);
-        var href = atob($this.data('obf'));
-        var attrs = '';
-        // On concatène chacun des attributs de l'élément pour les réapliquer au lien
-        $.each(this.attributes, function () {
-            if (this.specified) {
-                if (this.name != 'data-obf' && this.name != 'data-target') {
-                    attrs += this.name + '="' + this.value + '" ';
-                }
-                if (this.name == 'data-target') {
-                    attrs += 'target="' + this.value + '" ';
-                }
-            }
-        });
+        // Check for [data-target] attribute and set value to target attribute of el
+        if (el.dataset.target !== undefined) {
+            el.setAttribute('target', el.dataset.target);
+            // Remove data-target from element
+            el.removeAttribute('data-target');
+        }
 
-        $this.replaceWith('<a href="' + href + '" ' + attrs + '>' + $this[0].innerHTML + '</a>');
-    });
+        // Create a link
+        let link = document.createElement("a");
+        // Set innerHTML of link to el's innerHTML
+        link.innerHTML = el.innerHTML;
+        // Transfer attributes of el to link element
+        for (let i = 0; i < el.attributes.length; i++) {
+            link.setAttribute(el.attributes[i].name, el.attributes[i].value);
+        }
+        // Replace el with link
+        el.parentNode.replaceChild(link, el);
+    }
+});
 
-})(jQuery);
