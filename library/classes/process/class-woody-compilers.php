@@ -607,6 +607,7 @@ class WoodyTheme_WoodyCompilers
         }
 
         if (!empty($page_teaser['page_teaser_display_created'])) {
+            $page_teaser['page_teaser_display_label_date'] = !empty($page_teaser['page_teaser_display_label_date']) ? $page_teaser['page_teaser_display_label_date'] : __('Publié le', 'woody-theme');
             $page_teaser['created'] = get_the_date();
         }
 
