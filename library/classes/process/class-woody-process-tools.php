@@ -396,7 +396,7 @@ class WoodyTheme_WoodyProcessTools
             $linked_page = get_field('field_5c0553157e6d0', $attachment_id);
             $linked_video = get_field('field_619f73e346813', $attachment_id);
 
-            $attachment_data['author'] = (empty($author)) ? '' : strip_tags($author);
+            $attachment_data['author'] = (!empty($author) && is_string($author)) ? strip_tags($author) : '';
             $attachment_data['lat'] = (empty($lat)) ? '' : $lat;
             $attachment_data['lng'] = (empty($lng)) ? '' : $lng;
             $attachment_data['linked_page'] = (empty($linked_page)) ? [] : $linked_page;
