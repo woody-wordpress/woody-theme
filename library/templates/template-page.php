@@ -234,6 +234,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $this->context['sections'] = [];
         if (!empty($this->context['post'])) {
             $sections = get_field('section', $this->context['post']->ID);
+            $sections = apply_filters('woody_custom_sections', $sections);
             $this->context['the_sections'] = $this->process->processWoodySections($sections, $this->context);
         }
     }
