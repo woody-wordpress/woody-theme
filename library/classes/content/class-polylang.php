@@ -210,6 +210,9 @@ class WoodyTheme_Polylang
         __('Ajouter à mes favoris', 'woody-theme');
         __('Imprimer/Exporter mes favoris', 'woody-theme');
 
+        // Langue
+        __('Langue', 'woody-theme');
+
         // Group quotation
         __('Pour faire une demande de devis, veuillez choisir un séjour.', 'woody-theme');
         __("Il semblerait qu'il n'y ait pas ou plus de séjours proposant une demande de devis disponibles sur le site", "woody-theme");
