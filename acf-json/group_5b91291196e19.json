@@ -202,37 +202,6 @@
                     "min": "",
                     "max": ""
                 },
-                "layout_5b912d1a59c32": {
-                    "key": "layout_5b912d1a59c32",
-                    "name": "feature",
-                    "label": "Titre & Icône",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_5b912d2859c33",
-                            "label": "En-tête",
-                            "name": "feature",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "clone": [
-                                "group_5b0ec29dbd905"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
-                },
                 "layout_5b913d3b59c35": {
                     "key": "layout_5b913d3b59c35",
                     "name": "feature_v2",
