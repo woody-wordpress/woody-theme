@@ -99,7 +99,7 @@ class WoodyTheme_Enqueue_Assets
 
     public function scriptLoaderTag($tag, $handle)
     {
-        return str_replace(' src', ' defer="defer" src', $tag);
+        return str_replace(' src', ' defer src', $tag);
     }
 
     public function enqueueLibraries()
@@ -118,9 +118,6 @@ class WoodyTheme_Enqueue_Assets
         // Deregister the jquery version bundled with WordPress & define another
         wp_deregister_script('jquery');
         wp_deregister_script('jquery-migrate');
-        wp_deregister_script('wp-polyfill');
-        wp_deregister_script('regenerator-runtime');
-        wp_deregister_script('hooks');
 
         // REVIEW: A décommenter si nous arrêtons d'utiliser i18n
         // wp_deregister_script('wp-polyfill');
@@ -480,10 +477,11 @@ class WoodyTheme_Enqueue_Assets
         //$globalScriptString = apply_filters('woody_theme_global_script_string', $globalScriptString);
 
         // Create inline script
+        $return = [];
         foreach ($globalScriptString as $name => $val) {
-            $return .= $name . '=' . $val . ';';
+            $return[] = $name . '=' . $val . ';';
         }
 
-        return $return;
+        return implode('', $return);
     }
 }
