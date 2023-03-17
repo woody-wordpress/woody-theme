@@ -607,6 +607,7 @@ class WoodyTheme_WoodyCompilers
         }
 
         if (!empty($page_teaser['page_teaser_display_created'])) {
+            $page_teaser['page_teaser_display_label_date'] = !empty($page_teaser['page_teaser_display_label_date']) ? $page_teaser['page_teaser_display_label_date'] : __('Publié le', 'woody-theme');
             $page_teaser['created'] = get_the_date();
         }
 
@@ -670,6 +671,12 @@ class WoodyTheme_WoodyCompilers
 
                 if (!empty($page_hero['mobile_page_heading_img']) && is_array($page_hero['mobile_page_heading_img'])) {
                     $page_hero['mobile_page_heading_img']['attachment_more_data'] = (empty($page_hero['mobile_page_heading_img']['ID'])) ? [] : $this->tools->getAttachmentMoreData($page_hero['mobile_page_heading_img']['ID']);
+                }
+            }
+
+            if(!empty($page_hero['page_heading_more_imgs']) && !empty($page_hero['page_heading_more_imgs']['display_imgs']) && !empty($page_hero['page_heading_more_imgs']['imgs'])) {
+                foreach ($page_hero['page_heading_more_imgs']['imgs'] as $more_img_key => $more_img) {
+                    $page_hero['page_heading_more_imgs']['imgs'][$more_img_key]['attachment_more_data'] = (empty($page_hero['page_heading_more_imgs']['imgs'][$more_img_key]['ID'])) ? [] : $this->tools->getAttachmentMoreData($page_hero['page_heading_more_imgs']['imgs'][$more_img_key]['ID']);
                 }
             }
 

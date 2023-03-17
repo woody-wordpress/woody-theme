@@ -136,6 +136,31 @@
             "ui_off_text": ""
         },
         {
+            "key": "field_64073bb087b59",
+            "label": "Libellé de date",
+            "name": "page_teaser_display_label_date",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                {
+                    "field": "field_5d9209b23a9d1",
+                    "operator": "==",
+                    "value": "1"
+                }
+            ],
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": "",
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_5fae9dfc36cb5",
             "label": "Class css",
             "name": "page_teaser_class",
