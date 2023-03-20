@@ -128,6 +128,10 @@ class WoodyTheme_Enqueue_Assets
         wp_deregister_script('jquery');
         wp_deregister_script('jquery-migrate');
 
+        // Remove Gutenberg JS
+        wp_deregister_script('masonry');
+        wp_deregister_script('imagesloaded');
+
         // REVIEW: A décommenter si nous arrêtons d'utiliser i18n
         // wp_deregister_script('wp-polyfill');
         // wp_deregister_script('regenerator-runtime');
