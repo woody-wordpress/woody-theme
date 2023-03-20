@@ -89,6 +89,23 @@
             },
             "default_value": "",
             "placeholder": ""
+        },
+        {
+            "key": "field_63f783977aa13",
+            "label": "Date d'expiration",
+            "name": "attachment_expire",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d\/m\/Y",
+            "return_format": "d\/m\/Y",
+            "first_day": 1
         }
     ],
     "location": [
