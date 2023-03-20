@@ -55,6 +55,7 @@ class WoodyTheme_Enqueue_Assets
     {
         add_action('wp_enqueue_scripts', [$this, 'init'], 1); // Use Hook to have global post context
         add_action('admin_enqueue_scripts', [$this, 'init'], 1); // Use Hook to have global post context
+        add_action('wp_print_scripts', [$this, 'wpPrintScripts'], 100); // Use Hook to have global post context
 
         add_action('woody_theme_update', [$this, 'woodyThemeUpdate']);
         add_action('wp_enqueue_scripts', [$this, 'enqueueLibraries']);
@@ -80,6 +81,14 @@ class WoodyTheme_Enqueue_Assets
     {
         $this->siteConfig = apply_filters('woody_theme_siteconfig', []);
         $this->globalScriptString = $this->setGlobalScriptString();
+    }
+
+    public function wpPrintScripts()
+    {
+        global $wp_scripts;
+
+        // Replace external file i18n-ltr.min.js
+        unset($wp_scripts->registered['wp-i18n']->extra);
     }
 
     // print inline scripts after specified scripts (labJS only)
@@ -189,6 +198,9 @@ class WoodyTheme_Enqueue_Assets
         wp_enqueue_script('jsdelivr_jscookie', 'https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js', [], null);
         wp_enqueue_script('jsdelivr_rellax', 'https://cdn.jsdelivr.net/npm/rellax@1.10.0/rellax.min.js', [], null);
         wp_enqueue_script('jsdelivr_plyr', 'https://cdn.jsdelivr.net/npm/plyr@3.6.8/dist/plyr.min.js', [], null);
+
+        // HACK : i18n LTR (replace the inline added by Core)
+        wp_enqueue_script('i18n-ltr', get_template_directory_uri() . '/src/js/static/i18n-ltr.min.js', ['wp-i18n'], null);
 
         // Menus links obfuscation
         wp_enqueue_script('obf', get_template_directory_uri() . '/src/js/static/obf.min.js', [], null);
