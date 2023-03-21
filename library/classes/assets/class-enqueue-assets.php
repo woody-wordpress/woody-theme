@@ -204,7 +204,7 @@ class WoodyTheme_Enqueue_Assets
         wp_enqueue_script('jsdelivr_plyr', 'https://cdn.jsdelivr.net/npm/plyr@3.6.8/dist/plyr.min.js', [], null);
 
         // HACK : i18n LTR (replace the inline added by Core)
-        wp_enqueue_script('i18n-ltr', get_template_directory_uri() . '/src/js/static/i18n-ltr.min.js', ['wp-i18n'], null);
+        wp_enqueue_script('wp-i18n-ltr', get_template_directory_uri() . '/src/js/static/i18n-ltr.min.js', ['wp-i18n'], null);
 
         // Menus links obfuscation
         wp_enqueue_script('obf', get_template_directory_uri() . '/src/js/static/obf.min.js', [], null);
