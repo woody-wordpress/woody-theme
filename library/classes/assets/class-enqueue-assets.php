@@ -13,7 +13,7 @@ class WoodyTheme_Enqueue_Assets
 
     protected $siteConfig;
 
-    protected $globalScriptString;
+    protected $drupalAngularConfig;
 
     protected $assetPaths;
 
@@ -72,15 +72,16 @@ class WoodyTheme_Enqueue_Assets
         // hack for googlemap script enqueuing
         add_filter('clean_url', [$this, 'so_handle_038'], 99, 3);
 
-        //plugin deferred labJS is activated
-        //add_action('wdjs_deferred_script_wait', [$this, 'labjsAfterMyScript'], 10, 2);
-        add_filter('script_loader_tag', [$this, 'scriptLoaderTag'], 10, 2);
+        // Added defer on front
+        if (!is_admin()) {
+            add_filter('script_loader_tag', [$this, 'scriptLoaderTag'], 10, 2);
+        }
     }
 
     public function init()
     {
         $this->siteConfig = apply_filters('woody_theme_siteconfig', []);
-        $this->globalScriptString = $this->setGlobalScriptString();
+        $this->drupalAngularConfig = $this->setDrupalAngularConfig();
     }
 
     public function wpPrintScripts()
@@ -90,21 +91,6 @@ class WoodyTheme_Enqueue_Assets
         // Replace external file i18n-ltr.min.js
         unset($wp_scripts->registered['wp-i18n']->extra);
     }
-
-    // print inline scripts after specified scripts (labJS only)
-    // public function labjsAfterMyScript($wait, $handle)
-    // {
-    //     // after jQuery => add globalScript
-    //     if ('jquery' === $handle) {
-    //         $wait = $this->globalScriptString;
-    //     }
-    //     // after ngScripts => bootstrap angular app
-    //     elseif ('hawwwai_ng_scripts' === $handle) {
-    //         $wait = "function(){angular.bootstrap(document, ['drupalAngularApp']);}";
-    //     }
-
-    //     return $wait;
-    // }
 
     public function scriptLoaderTag($tag, $handle)
     {
@@ -182,7 +168,7 @@ class WoodyTheme_Enqueue_Assets
         }
 
         wp_enqueue_script('jquery', 'https://cdn.jsdelivr.net/npm/jquery@' . $jQuery_version . '/dist/jquery.min.js', [], null);
-        wp_add_inline_script('jquery', $this->globalScriptString, 'before');
+        wp_add_inline_script('jquery', 'window.siteConfig = ' . json_encode($this->siteConfig, JSON_THROW_ON_ERROR) . ';', 'before');
 
         if (!$this->isTouristicSheet || defined('IS_WOODY_HAWWWAI_SHEET_ENABLE')) {
             wp_enqueue_script('jsdelivr_swiper', 'https://cdn.jsdelivr.net/npm/swiper@4.4.1/dist/js/swiper.min.js', [], null);
@@ -265,41 +251,41 @@ class WoodyTheme_Enqueue_Assets
             } else {
                 wp_enqueue_script('hawwwai_playlist_map', $apirender_base_uri . '/assets/scripts/raccourci/playlist-map.leafletV2.' . $jsModeSuffix . '.js' . $playlist_map_query, array_merge($js_dependencies_rcmap, ['hawwwai_playlist']), $this->wThemeVersion, true);
             }
-        }
 
-        // Sheet libraries
-        elseif ($this->isTouristicSheet) {
-            if (!defined('IS_WOODY_HAWWWAI_SHEET_ENABLE')) {
-                // CSS Libraries (todo replace when possible)
-                wp_enqueue_style('hawwwai_font_css', $this->assetPath('https://api.cloudly.space/static/assets/fonts/raccourci-font.min.css'), [], null);
-                wp_enqueue_style('hawwwai_fresco_css', 'https://api.tourism-system.com/render/assets/styles/lib/fresco.css', [], null);
-                wp_enqueue_style('jsdelivr_leaflet_css', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.min.css', [], null);
-                wp_enqueue_style('jsdelivr_slick_css', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css', [], null);
-                wp_enqueue_style('jsdelivr_bootstrap_css', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css', [], null);
+            wp_enqueue_script('hawwwai_sheet_footer', get_template_directory_uri() . '/src/js/static/angular-config.min.js', [], null, true);
+            wp_add_inline_script('hawwwai_sheet_footer', $this->drupalAngularConfig, 'after');
+        } elseif ($this->isTouristicSheet && !defined('IS_WOODY_HAWWWAI_SHEET_ENABLE')) {
+            // CSS Libraries (todo replace when possible)
+            wp_enqueue_style('hawwwai_font_css', $this->assetPath('https://api.cloudly.space/static/assets/fonts/raccourci-font.min.css'), [], null);
+            wp_enqueue_style('hawwwai_fresco_css', 'https://api.tourism-system.com/render/assets/styles/lib/fresco.css', [], null);
+            wp_enqueue_style('jsdelivr_leaflet_css', 'https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.min.css', [], null);
+            wp_enqueue_style('jsdelivr_slick_css', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css', [], null);
+            wp_enqueue_style('jsdelivr_bootstrap_css', 'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css', [], null);
 
-                wp_enqueue_script('jsdelivr_lightgallery', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/dist/js/lightgallery.min.js', ['jquery'], null);
-                wp_enqueue_script('jsdelivr_lg-pager', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-pager.min.js', ['jsdelivr_lightgallery'], null);
-                wp_enqueue_script('jsdelivr_lg-thumbnail', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-thumbnail.min.js', ['jsdelivr_lightgallery'], null);
-                wp_enqueue_script('jsdelivr_lg-video', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-video.min.js', ['jsdelivr_lightgallery'], null);
-                wp_enqueue_script('jsdelivr_lg-zoom', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-zoom.min.js', ['jsdelivr_lightgallery'], null);
-                wp_enqueue_script('jsdelivr_lg-fullscreen', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-fullscreen.min.js', ['jsdelivr_lightgallery'], null);
-
-                wp_enqueue_script('hawwwai_ng_vendor', $apirender_base_uri . '/assets/scripts/vendor.js', [], null);
-                wp_enqueue_script('hawwwai_ng_libs', $apirender_base_uri . '/assets/scripts/misclibs.js', [], null);
-                wp_enqueue_script('hawwwai_ng_app', $apirender_base_uri . '/assets/app.js', [], null);
-                wp_enqueue_script('hawwwai_ng_scripts', $apirender_base_uri . '/assets/scripts/scriptsV2.js', [], null);
-                wp_enqueue_script('hawwwai_sheet_item', $apirender_base_uri . '/assets/scripts/raccourci/sheet_item.' . $jsModeSuffix . '.js', ['jsdelivr_match8'], null);
-                wp_enqueue_script('hawwwai_itinerary', $apirender_base_uri . '/assets/scripts/raccourci/itinerary.' . $jsModeSuffix . '.js', ['jquery', 'hawwwai_ng_scripts'], null);
-                wp_enqueue_script('hawwwai_fresco', $apirender_base_uri . '/assets/scripts/lib/fresco.js', ['jquery'], null);
-            }
-
-            // JS Libraries
+            wp_enqueue_script('jsdelivr_lightgallery', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/dist/js/lightgallery.min.js', ['jquery'], null);
+            wp_enqueue_script('jsdelivr_lg-pager', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-pager.min.js', ['jsdelivr_lightgallery'], null);
+            wp_enqueue_script('jsdelivr_lg-thumbnail', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-thumbnail.min.js', ['jsdelivr_lightgallery'], null);
+            wp_enqueue_script('jsdelivr_lg-video', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-video.min.js', ['jsdelivr_lightgallery'], null);
+            wp_enqueue_script('jsdelivr_lg-zoom', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-zoom.min.js', ['jsdelivr_lightgallery'], null);
+            wp_enqueue_script('jsdelivr_lg-fullscreen', 'https://cdn.jsdelivr.net/npm/lightgallery@1.6.11/modules/lg-fullscreen.min.js', ['jsdelivr_lightgallery'], null);
             wp_enqueue_script('jsapi', 'https://www.google.com/jsapi', [], null);
             wp_enqueue_script('google_recaptcha', 'https://www.google.com/recaptcha/api.js', [], null);
             wp_enqueue_script('jsdelivr_lodash', 'https://cdn.jsdelivr.net/npm/lodash@3.8.0/index.min.js"', [], null);
             wp_enqueue_script('jsdelivr_slick', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', ['jquery'], null);
             wp_enqueue_script('jsdelivr_match8', 'https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js', ['jquery'], null);
             wp_enqueue_script('jsdelivr_highcharts', 'https://cdn.jsdelivr.net/npm/highcharts@6.2.0/highcharts.min.js', ['jquery'], null);
+
+            wp_enqueue_script('hawwwai_ng_vendor', $apirender_base_uri . '/assets/scripts/vendor.js', [], null);
+            wp_enqueue_script('hawwwai_ng_libs', $apirender_base_uri . '/assets/scripts/misclibs.js', [], null);
+            wp_enqueue_script('hawwwai_ng_app', $apirender_base_uri . '/assets/app.js', [], null);
+            wp_enqueue_script('hawwwai_ng_scripts', $apirender_base_uri . '/assets/scripts/scriptsV2.js', [], null);
+            wp_enqueue_script('hawwwai_sheet_item', $apirender_base_uri . '/assets/scripts/raccourci/sheet_item.' . $jsModeSuffix . '.js', ['jsdelivr_match8'], null);
+            wp_enqueue_script('hawwwai_itinerary', $apirender_base_uri . '/assets/scripts/raccourci/itinerary.' . $jsModeSuffix . '.js', ['jquery', 'hawwwai_ng_scripts'], null);
+            wp_enqueue_script('hawwwai_fresco', $apirender_base_uri . '/assets/scripts/lib/fresco.js', ['jquery'], null);
+            wp_enqueue_script('hawwwai_ng_init', get_template_directory_uri() . '/src/js/static/ng_init.min.js', ['hawwwai_ng_scripts'], null);
+
+            wp_enqueue_script('hawwwai_sheet_footer', get_template_directory_uri() . '/src/js/static/angular-config.min.js', [], null, true);
+            wp_add_inline_script('hawwwai_sheet_footer', $this->drupalAngularConfig, 'after');
         }
 
         // Add the comment-reply library on pages where it is necessary
@@ -367,7 +353,7 @@ class WoodyTheme_Enqueue_Assets
         wp_enqueue_script('admin_jsdelivr_flatpickr_l10n', 'https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/l10n/fr.min.js', ['admin_jsdelivr_flatpickr'], null, true);
 
         // Added global vars
-        wp_add_inline_script('admin-javascripts', 'var siteConfig = ' . json_encode($this->siteConfig, JSON_THROW_ON_ERROR) . ';', 'before');
+        wp_add_inline_script('admin-javascripts', 'window.siteConfig = ' . json_encode($this->siteConfig, JSON_THROW_ON_ERROR) . ';', 'before');
         wp_add_inline_script('admin-javascripts', 'document.addEventListener("DOMContentLoaded",()=>{document.body.classList.add("windowReady")});', 'after');
 
         // Enqueue the main Stylesheet.
@@ -465,13 +451,11 @@ class WoodyTheme_Enqueue_Assets
         return $assetPaths;
     }
 
-    protected function setGlobalScriptString()
+    private function setDrupalAngularConfig()
     {
-        $globalScriptString = [
+        $drupalAngularConfig = [
             'window.useLeafletLibrary' => 0,
             'window.apirenderlistEnabled' => true,
-            // inject siteConfig
-            'window.siteConfig' => json_encode($this->siteConfig, JSON_THROW_ON_ERROR),
             // init DrupalAngularConfig if doesn't exist
             'window.DrupalAngularConfig' => 'window.DrupalAngularConfig || {}',
             // fill DrupalAngularConfig (some properties may already exists)
@@ -485,16 +469,16 @@ class WoodyTheme_Enqueue_Assets
         if (!empty($this->siteConfig['mapProviderKeys'])) {
             $map_keys = $this->siteConfig['mapProviderKeys'];
             if (isset($map_keys['otmKey']) || isset($map_keys['ignKey'])) {
-                $globalScriptString['window.useLeafletLibrary'] = true;
+                $drupalAngularConfig['window.useLeafletLibrary'] = true;
             }
         }
 
         // Ancienne méthode pour appeler les fonts en asynchrone voir ligne 227
-        //$globalScriptString = apply_filters('woody_theme_global_script_string', $globalScriptString);
+        //$drupalAngularConfig = apply_filters('woody_theme_global_script_string', $drupalAngularConfig);
 
         // Create inline script
         $return = [];
-        foreach ($globalScriptString as $name => $val) {
+        foreach ($drupalAngularConfig as $name => $val) {
             $return[] = $name . '=' . $val . ';';
         }
 
