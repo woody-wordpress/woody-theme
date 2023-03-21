@@ -15,6 +15,8 @@ class WoodyTheme_Enqueue_Assets
 
     protected $drupalAngularConfig;
 
+    protected $drupalAngularConfigHawwwai;
+
     protected $assetPaths;
 
     protected $isTouristicPlaylist;
@@ -82,6 +84,7 @@ class WoodyTheme_Enqueue_Assets
     {
         $this->siteConfig = apply_filters('woody_theme_siteconfig', []);
         $this->drupalAngularConfig = $this->setDrupalAngularConfig();
+        $this->drupalAngularConfigHawwwai = $this->setDrupalAngularConfigHawwwai();
     }
 
     public function wpPrintScripts()
@@ -251,9 +254,6 @@ class WoodyTheme_Enqueue_Assets
             } else {
                 wp_enqueue_script('hawwwai_playlist_map', $apirender_base_uri . '/assets/scripts/raccourci/playlist-map.leafletV2.' . $jsModeSuffix . '.js' . $playlist_map_query, array_merge($js_dependencies_rcmap, ['hawwwai_playlist']), $this->wThemeVersion, true);
             }
-
-            wp_enqueue_script('hawwwai_sheet_footer', get_template_directory_uri() . '/src/js/static/angular-config.min.js', [], null, true);
-            wp_add_inline_script('hawwwai_sheet_footer', $this->drupalAngularConfig, 'after');
         } elseif ($this->isTouristicSheet && !defined('IS_WOODY_HAWWWAI_SHEET_ENABLE')) {
             // CSS Libraries (todo replace when possible)
             wp_enqueue_style('hawwwai_font_css', $this->assetPath('https://api.cloudly.space/static/assets/fonts/raccourci-font.min.css'), [], null);
@@ -283,9 +283,15 @@ class WoodyTheme_Enqueue_Assets
             wp_enqueue_script('hawwwai_itinerary', $apirender_base_uri . '/assets/scripts/raccourci/itinerary.' . $jsModeSuffix . '.js', ['jquery', 'hawwwai_ng_scripts'], null);
             wp_enqueue_script('hawwwai_fresco', $apirender_base_uri . '/assets/scripts/lib/fresco.js', ['jquery'], null);
             wp_enqueue_script('hawwwai_ng_init', get_template_directory_uri() . '/src/js/static/ng_init.min.js', ['hawwwai_ng_scripts'], null);
+        }
 
-            wp_enqueue_script('hawwwai_sheet_footer', get_template_directory_uri() . '/src/js/static/angular-config.min.js', [], null, true);
-            wp_add_inline_script('hawwwai_sheet_footer', $this->drupalAngularConfig, 'after');
+        // window.DrupalAngularConfig.mapProviderKeys
+        wp_add_inline_script('jquery', $this->drupalAngularConfig, 'before');
+
+        // window.DrupalAngularConfig.apiAccount
+        if ($this->isTouristicPlaylist || ($this->isTouristicSheet && !defined('IS_WOODY_HAWWWAI_SHEET_ENABLE'))) {
+            wp_enqueue_script('hawwwai_angular_config_footer', get_template_directory_uri() . '/src/js/static/angular-config.min.js', [], null, true);
+            wp_add_inline_script('hawwwai_angular_config_footer', $this->drupalAngularConfigHawwwai, 'after');
         }
 
         // Add the comment-reply library on pages where it is necessary
@@ -453,32 +459,41 @@ class WoodyTheme_Enqueue_Assets
 
     private function setDrupalAngularConfig()
     {
-        $drupalAngularConfig = [
+        $config = [
             'window.useLeafletLibrary' => 0,
-            'window.apirenderlistEnabled' => true,
-            // init DrupalAngularConfig if doesn't exist
             'window.DrupalAngularConfig' => 'window.DrupalAngularConfig || {}',
-            // fill DrupalAngularConfig (some properties may already exists)
-            'window.DrupalAngularConfig.apiAccount' => 'window.DrupalAngularConfig.apiAccount || {}',
-            'window.DrupalAngularConfig.apiAccount.login' => (empty($this->siteConfig['login'])) ? '{}' : json_encode($this->siteConfig['login'], JSON_THROW_ON_ERROR),
-            'window.DrupalAngularConfig.apiAccount.password' => (empty($this->siteConfig['password'])) ? '{}' : json_encode($this->siteConfig['password'], JSON_THROW_ON_ERROR),
-            // inject mapKeys in DrupalAngularAppConfig
             'window.DrupalAngularConfig.mapProviderKeys' => (empty($this->siteConfig['mapProviderKeys'])) ? '{}' : json_encode($this->siteConfig['mapProviderKeys'], JSON_THROW_ON_ERROR),
         ];
 
         if (!empty($this->siteConfig['mapProviderKeys'])) {
             $map_keys = $this->siteConfig['mapProviderKeys'];
             if (isset($map_keys['otmKey']) || isset($map_keys['ignKey'])) {
-                $drupalAngularConfig['window.useLeafletLibrary'] = true;
+                $config['window.useLeafletLibrary'] = 1;
             }
         }
 
-        // Ancienne méthode pour appeler les fonts en asynchrone voir ligne 227
-        //$drupalAngularConfig = apply_filters('woody_theme_global_script_string', $drupalAngularConfig);
+        // Create inline script
+        $return = [];
+        foreach ($config as $name => $val) {
+            $return[] = $name . '=' . $val . ';';
+        }
+
+        return implode('', $return);
+    }
+
+    private function setDrupalAngularConfigHawwwai()
+    {
+        // mapProviderKeys est présent dans le header et le footer car Render écrase DrupalAngularConfig, il faut donc le redéfinir
+        $config = [
+            'window.DrupalAngularConfig.apiAccount' => 'window.DrupalAngularConfig.apiAccount || {}',
+            'window.DrupalAngularConfig.apiAccount.login' => (empty($this->siteConfig['login'])) ? '{}' : json_encode($this->siteConfig['login'], JSON_THROW_ON_ERROR),
+            'window.DrupalAngularConfig.apiAccount.password' => (empty($this->siteConfig['password'])) ? '{}' : json_encode($this->siteConfig['password'], JSON_THROW_ON_ERROR),
+            'window.DrupalAngularConfig.mapProviderKeys' => (empty($this->siteConfig['mapProviderKeys'])) ? '{}' : json_encode($this->siteConfig['mapProviderKeys'], JSON_THROW_ON_ERROR),
+        ];
 
         // Create inline script
         $return = [];
-        foreach ($drupalAngularConfig as $name => $val) {
+        foreach ($config as $name => $val) {
             $return[] = $name . '=' . $val . ';';
         }
 
