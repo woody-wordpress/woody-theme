@@ -629,7 +629,8 @@
     >a[data-layout="manual_focus_minisheet"],
     >a[data-layout="story"],
     >a[data-layout="files"],
-    >a[data-layout="slides_group"] {
+    >a[data-layout="slides_group"],
+    >a[data-layout="feature"] {
         display: none;
     }
 }
