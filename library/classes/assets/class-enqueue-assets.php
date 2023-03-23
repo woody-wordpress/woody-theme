@@ -354,7 +354,7 @@ class WoodyTheme_Enqueue_Assets
     public function enqueueAdminAssets()
     {
         // Enqueue the main Scripts
-        $dependencies = ['jquery', 'admin-jsdelivr-lazysizes', 'admin_jsdelivr_flatpickr', 'admin_jsdelivr_flatpickr_l10n'];
+        $dependencies = ['jquery', 'admin-jsdelivr_lazysizes', 'admin-jsdelivr_flatpickr', 'admin-jsdelivr_flatpickr_l10n'];
         wp_enqueue_script('admin-javascripts', WP_DIST_URL . $this->assetPath('/js/admin.js'), $dependencies, null, true);
         wp_enqueue_script('admin-jsdelivr_lazysizes', get_template_directory_uri() . '/src/jsdelivr/lazysizes@4.1.2.min.js', [], null, true); // TODO: Latest 5.3.2
         wp_enqueue_script('admin-jsdelivr_flatpickr', get_template_directory_uri() . '/src/jsdelivr/flatpickr@4.5.7.min.js', [], null, true); // TODO: Latest 4.6.13
