@@ -31,13 +31,16 @@ class WoodyTheme_Plugins_Activation
             'vcaching/vcaching.php',
             'contact-form-7/wp-contact-form-7.php',
             'contact-form-7-mailchimp-extension/chimpmatic-lite.php',
+            'wp-deferred-javascripts/wp-deferred-javascripts.php',
         ];
 
         $this->activate_plugins = [
             'advanced-cron-manager/advanced-cron-manager.php',
             'advanced-custom-fields-pro/acf.php',
+            'better-search-replace/better-search-replace.php',
             'disable-embeds/disable-embeds.php',
             'duplicate-post/duplicate-post.php',
+            'enable-media-replace/enable-media-replace.php',
             'enhanced-media-library/enhanced-media-library.php',
             'members/members.php',
             'polylang-pro/polylang.php',
@@ -48,9 +51,6 @@ class WoodyTheme_Plugins_Activation
             'woody-crop/woody-crop.php',
             'woody-plugin/woody.php',
             'woody-sso/woody-sso.php',
-            'wp-deferred-javascripts/wp-deferred-javascripts.php',
-            'better-search-replace/better-search-replace.php',
-            'enable-media-replace/enable-media-replace.php'
         ];
 
         switch (WP_ENV) {
