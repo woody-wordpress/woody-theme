@@ -99,6 +99,10 @@ abstract class WoodyTheme_TemplateAbstract
             $this->globals['tags'] = $this->getTags($this->context['post_id']);
         }
 
+        if (empty($this->globals['areas'])) {
+            $this->globals['areas'] = apply_filters('woody_addon_search_list_areas', null, $this->context['post']);
+        }
+
         if (empty($this->globals['area'])) {
             $this->globals['area'] = apply_filters('woody_addon_search_area', null, $this->context['post']);
         }
