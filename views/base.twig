@@ -3,10 +3,14 @@
 <html class="no-js" {{site.language_attributes}}>
 <head>
 
+    {% if title %}
     <title>{{ title }}</title>
+    {% endif %}
 
     {# WP Global Vars #}
+    {% if globals_json %}
     <script>window.globals={{globals_json|json_encode }}</script>
+    {% endif %}
     {# /WP Global Vars #}
 
     {# Head Top #}
@@ -16,7 +20,7 @@
     {# /Head Top #}
 
     {# GTM #}
-    <script>window.dataLayer=window.dataLayer?window.dataLayer:[];{% if gtm.datalayer|default %}window.dataLayer.push({{ gtm.datalayer|json_encode }});{% endif %}</script>
+    {% if gtm.datalayer|default %}<script>window.dataLayer=window.dataLayer?window.dataLayer:[];window.dataLayer.push({{ gtm.datalayer|json_encode }});</script>{% endif %}
     {% if gtm.id|default %}<script>(function(w,d,s,l,i) { w[l]=w[l]||[]; w[l].push({ 'gtm.start': new Date().getTime(),event: 'gtm.js' }); var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'? '&l='+l:''; j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','{{ gtm.id }}');</script>{% endif %}
     {# /GTM #}
 
@@ -40,7 +44,8 @@
     {# /WP Header #}
 
     {# WP Favicons #}
-    <link rel='shortcut icon' type='image/x-icon' href="{{ icons.favicon }}"> {# Favicon ICO #}
+    {% if icons %}
+    <link rel="shortcut icon" type="image/x-icon" href="{{ icons.favicon }}"> {# Favicon ICO #}
     <link rel="shortcut icon" type="image/png" href="{{ icons.64 }}"> {# Favicon #}
     <link rel="apple-touch-icon" href="{{ icons.120 }}"> {# iPhone #}
     <link rel="apple-touch-icon" sizes="180x180" href="{{ icons.180 }}"> {# iPhone retina #}
@@ -48,14 +53,13 @@
     <link rel="apple-touch-icon" sizes="167x167" href="{{ icons.167 }}"> {# iPad retina #}
     <link rel="icon" sizes="192x192" href="{{ icons.192 }}"> {# Chrome #}
     <link rel="icon" sizes="128x128" href="{{ icons.128 }}"> {# Chrome #}
+    {% endif %}
     {# /WP Favicons #}
 
     {# WP Styles #}
     {% block styles %}{% endblock %}
     {# /WP Styles #}
 </head>
-{% endspaceless %}
-
 <body class="{{body_class}}">
     {# GTM (noscript) #}
     {% if gtm.id|default %}
@@ -135,3 +139,4 @@
     {# /WP Footer #}
 </body>
 </html>
+{% endspaceless %}
