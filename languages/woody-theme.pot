@@ -2,14 +2,14 @@
 # This file is distributed under the .
 msgid ""
 msgstr ""
-"Project-Id-Version: Woody (Parent theme) 1.72.19\n"
+"Project-Id-Version: Woody (Parent theme) 1.73.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-03-16T10:24:35+01:00\n"
+"POT-Creation-Date: 2023-03-28T16:37:07+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: woody-theme\n"
@@ -643,146 +643,6 @@ msgstr ""
 
 #: library/classes/content/class-polylang.php:247
 msgid "Lire aussi"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:251
-msgid "Remontées mécaniques"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:252
-msgid "Pistes"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:253
-msgid "Domaine Alpin"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:254
-msgid "Domaine Nordique"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:255
-msgid "Détails"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:256
-msgid "Météo"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:257
-msgid "Voir le bulletin météo"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:258
-msgid "Bulletin complet"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:259
-msgid "Webcams"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:260
-msgid "Voir les webcams"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:261
-msgid "Flux erroné !"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:262
-msgid "Module Infoneige non configuré !"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:263
-msgid "Enneigement"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:264
-msgid "Hauteur"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:265
-msgid "Pistes ouvertes"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:266
-msgid "Risque d'avalanche"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:267
-msgid "Limité"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:268
-msgid "Moyen"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:269
-msgid "Élevé"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:270
-msgid "Non spécifié"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:271
-msgid "Qualité de la neige"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:272
-msgid "En live"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:273
-msgid "Toute l'info live"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:274
-msgid "Altitude"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:275
-msgid "Fraîche"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:276
-msgid "Douce"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:277
-msgid "Dure"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:278
-msgid "Humide"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:279
-msgid "De printemps"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:280
-msgid "Matin"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:281
-msgid "Après-midi"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:282
-msgid "Ouverte"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:283
-msgid "Fermée"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:284
-msgid "Prévision d'ouverture"
-msgstr ""
-
-#: library/classes/content/class-polylang.php:285
-msgid "Liaison"
 msgstr ""
 
 #: library/classes/process/class-woody-getters.php:740
