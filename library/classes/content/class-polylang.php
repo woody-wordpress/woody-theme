@@ -245,43 +245,5 @@ class WoodyTheme_Polylang
         __('Mis à jour le', 'woody-theme');
         __('Désolé, aucun contenu ne correspond à votre recherche', 'woody-theme');
         __('Lire aussi', 'woody-theme');
-
-        // Infolive
-        //TODO: Remove after infolive plugin deletion
-        __('Remontées mécaniques', 'woody-theme');
-        __('Pistes', 'woody-theme');
-        __('Domaine Alpin', 'woody-theme');
-        __('Domaine Nordique', 'woody-theme');
-        __('Détails', 'woody-theme');
-        __('Météo', 'woody-theme');
-        __('Voir le bulletin météo', 'woody-theme');
-        __('Bulletin complet', 'woody-theme');
-        __('Webcams', 'woody-theme');
-        __('Voir les webcams', 'woody-theme');
-        __('Flux erroné !', 'woody-theme');
-        __('Module Infoneige non configuré !', 'woody-theme');
-        __('Enneigement', 'woody-theme');
-        __('Hauteur', 'woody-theme');
-        __('Pistes ouvertes', 'woody-theme');
-        __("Risque d'avalanche", 'woody-theme');
-        __('Limité', 'woody-theme');
-        __('Moyen', 'woody-theme');
-        __('Élevé', 'woody-theme');
-        __('Non spécifié', 'woody-theme');
-        __('Qualité de la neige', 'woody-theme');
-        __('En live', 'woody-theme');
-        __("Toute l'info live", 'woody-theme');
-        __('Altitude', 'woody-theme');
-        __('Fraîche', 'woody-theme');
-        __('Douce', 'woody-theme');
-        __('Dure', 'woody-theme');
-        __('Humide', 'woody-theme');
-        __('De printemps', 'woody-theme');
-        __('Matin', 'woody-theme');
-        __('Après-midi', 'woody-theme');
-        __('Ouverte', 'woody-theme');
-        __('Fermée', 'woody-theme');
-        __("Prévision d'ouverture", 'woody-theme');
-        __('Liaison', 'woody-theme');
     }
 }
