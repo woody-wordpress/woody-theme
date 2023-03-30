@@ -686,11 +686,25 @@ class WoodyTheme_WoodyGetters
         // Parcourir tout le tableau de dates et afficher la 1ère date non passée
         if ($sheet_item['bordereau'] == 'FMA' && !empty($sheet_item['dates'])) {
             $today = time();
-            foreach ($sheet_item['dates'] as $date) {
-                $enddate= strtotime($date['end']['endDate']);
-                if ($today < $enddate) {
-                    $data['date'] = $date;
-                    break 1 ;
+
+            // On teste si il y a plusieurs dates (plusieurs jours avec des horaires différents par exemple)
+            if(count($sheet_item['dates']) > 1) {
+                $firstDate = array_shift($sheet_item['dates']); // Première date de la liste
+                $lastDate = end($sheet_item['dates']); // Dernière date de la liste
+
+                $enddate = strtotime($lastDate['end']['endDate']);
+
+                if ($today < $enddate) { // Si la dernière date n'est pas passée
+                    $data['date'] = $lastDate;
+                    $data['date']['start'] = $firstDate['start'];
+                    $data['date']['oneday'] = false;
+                }
+            } else {
+                foreach ($sheet_item['dates'] as $date) {
+                    $enddate = strtotime($date['end']['endDate']);
+                    if ($today < $enddate) {
+                        $data['date'] = $date;
+                    }
                 }
             }
         }
