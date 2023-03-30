@@ -699,12 +699,10 @@ class WoodyTheme_WoodyGetters
                     $data['date']['start'] = $firstDate['start'];
                     $data['date']['oneday'] = false;
                 }
-            } else {
-                foreach ($sheet_item['dates'] as $date) {
-                    $enddate = strtotime($date['end']['endDate']);
-                    if ($today < $enddate) {
-                        $data['date'] = $date;
-                    }
+            } else { // Si il n'y a qu'une seule date
+                $enddate = strtotime($sheet_item['dates']['0']['end']['endDate']);
+                if ($today < $enddate) {
+                    $data['date'] = $sheet_item['dates']['0'];
                 }
             }
         }
