@@ -1,0 +1,833 @@
+# Copyright (C) 2018 Raccourci Agency
+# This file is distributed under the .
+msgid ""
+msgstr ""
+"Project-Id-Version: Woody (Thème parent) 2.4.7\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
+"POT-Creation-Date: 2023-03-16T10:24:35+01:00\n"
+"PO-Revision-Date: 2023-03-16 10:35+0100\n"
+"Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+"X-Domain: woody-theme\n"
+
+#. Theme Name of the theme
+msgid "Woody (Parent theme)"
+msgstr "우디(부모 테마)"
+
+#. Description of the theme
+msgid "Parent theme of the Raccourci Agency themes"
+msgstr "라쿠르치 에이전시 테마의 상위 테마"
+
+#. Author of the theme
+msgid "Raccourci Agency"
+msgstr "라쿠르치 에이전시"
+
+#: library/classes/content/class-polylang.php:46
+#: library/classes/content/class-polylang.php:88
+msgid "Lundi"
+msgstr "월요일"
+
+#: library/classes/content/class-polylang.php:47
+#: library/classes/content/class-polylang.php:89
+msgid "Mardi"
+msgstr "화요일"
+
+#: library/classes/content/class-polylang.php:48
+#: library/classes/content/class-polylang.php:90
+msgid "Mercredi"
+msgstr "수요일"
+
+#: library/classes/content/class-polylang.php:49
+#: library/classes/content/class-polylang.php:91
+msgid "Jeudi"
+msgstr "목요일"
+
+#: library/classes/content/class-polylang.php:50
+#: library/classes/content/class-polylang.php:92
+msgid "Vendredi"
+msgstr "금요일"
+
+#: library/classes/content/class-polylang.php:51
+#: library/classes/content/class-polylang.php:93
+msgid "Samedi"
+msgstr "토요일"
+
+#: library/classes/content/class-polylang.php:52
+#: library/classes/content/class-polylang.php:94
+msgid "Dimanche"
+msgstr "일요일"
+
+#: library/classes/content/class-polylang.php:59
+#: library/classes/content/class-polylang.php:95
+msgid "Janvier"
+msgstr "1월"
+
+#: library/classes/content/class-polylang.php:60
+#: library/classes/content/class-polylang.php:96
+msgid "Février"
+msgstr "2월"
+
+#: library/classes/content/class-polylang.php:61
+#: library/classes/content/class-polylang.php:97
+msgid "Mars"
+msgstr "3월"
+
+#: library/classes/content/class-polylang.php:62
+#: library/classes/content/class-polylang.php:98
+msgid "Avril"
+msgstr "4월"
+
+#: library/classes/content/class-polylang.php:63
+#: library/classes/content/class-polylang.php:99
+msgid "Mai"
+msgstr "5월"
+
+#: library/classes/content/class-polylang.php:64
+#: library/classes/content/class-polylang.php:100
+msgid "Juin"
+msgstr "6월"
+
+#: library/classes/content/class-polylang.php:65
+#: library/classes/content/class-polylang.php:101
+msgid "Juillet"
+msgstr "7월"
+
+#: library/classes/content/class-polylang.php:66
+#: library/classes/content/class-polylang.php:102
+msgid "Août"
+msgstr "8월"
+
+#: library/classes/content/class-polylang.php:67
+#: library/classes/content/class-polylang.php:103
+msgid "Septembre"
+msgstr "9월"
+
+#: library/classes/content/class-polylang.php:68
+#: library/classes/content/class-polylang.php:104
+msgid "Octobre"
+msgstr "10월"
+
+#: library/classes/content/class-polylang.php:69
+#: library/classes/content/class-polylang.php:105
+msgid "Novembre"
+msgstr "11월"
+
+#: library/classes/content/class-polylang.php:70
+#: library/classes/content/class-polylang.php:106
+msgid "Décembre"
+msgstr "12월"
+
+#: library/classes/content/class-polylang.php:84
+#: library/templates/template-page.php:79
+msgid "Page non trouvée"
+msgstr "페이지를 찾을 수 없습니다."
+
+#: library/classes/content/class-polylang.php:85
+#: library/templates/template-page.php:85
+msgid "Erreur 404 : Page non trouvée"
+msgstr "오류 404 : 페이지를 찾을 수 없음"
+
+#: library/classes/content/class-polylang.php:109
+msgid "À partir de"
+msgstr "에서"
+
+#: library/classes/content/class-polylang.php:110
+msgid "à partir de"
+msgstr "에서"
+
+#: library/classes/content/class-polylang.php:111
+msgid "heure"
+msgstr "시간"
+
+#: library/classes/content/class-polylang.php:112
+msgid "heures"
+msgstr "시간"
+
+#: library/classes/content/class-polylang.php:113
+msgid "minute"
+msgstr "분"
+
+#: library/classes/content/class-polylang.php:114
+msgid "minutes"
+msgstr "분"
+
+#: library/classes/content/class-polylang.php:115
+msgid "min"
+msgstr "분"
+
+#: library/classes/content/class-polylang.php:116
+msgid "max"
+msgstr "최대"
+
+#: library/classes/content/class-polylang.php:117
+msgid "pers."
+msgstr "명"
+
+#: library/classes/content/class-polylang.php:118
+msgid "Demander un devis"
+msgstr "견적 요청하기"
+
+#: library/classes/content/class-polylang.php:119
+#: library/classes/content/class-polylang.php:241
+msgid "personne"
+msgstr "사람"
+
+#: library/classes/content/class-polylang.php:120
+msgid "personnes"
+msgstr "사람들"
+
+#: library/classes/content/class-polylang.php:121
+msgid "Départ"
+msgstr "출발"
+
+#: library/classes/content/class-polylang.php:122
+msgid "Arrivée"
+msgstr "도착"
+
+#: library/classes/content/class-polylang.php:123
+msgid "Etape"
+msgstr "단계"
+
+#: library/classes/content/class-polylang.php:124
+msgid "Réserver"
+msgstr "예약"
+
+#: library/classes/content/class-polylang.php:127
+msgid "J"
+msgstr "일"
+
+#: library/classes/content/class-polylang.php:130
+msgid ""
+"Attention, vous n'avez pas saisi d'identifiant de playlist en paramètre du "
+"shortcode.\n"
+"            Pour rappel, le shortcode s'utilise par exemple de cette manière"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:132
+msgid "Année"
+msgstr "연도"
+
+#: library/classes/content/class-polylang.php:133
+msgid "Établissement"
+msgstr "설립"
+
+#: library/classes/content/class-polylang.php:134
+msgid "Établissement disponible"
+msgstr "설립 가능"
+
+#: library/classes/content/class-polylang.php:135
+msgid "Établissement indisponible"
+msgstr "교육기관을 사용할 수 없음"
+
+#: library/classes/content/class-polylang.php:136
+msgid "Aucune information concernant cet établissement pour l'année en cours"
+msgstr "해당 연도의 이 시설에 대한 정보가 없습니다."
+
+#: library/classes/content/class-polylang.php:139
+msgid "M'y rendre"
+msgstr "도착하기"
+
+#: library/classes/content/class-polylang.php:140
+msgid "Voir l'itinéraire"
+msgstr "여정 보기"
+
+#: library/classes/content/class-polylang.php:141
+msgid "Voir la vidéo"
+msgstr "동영상 보기"
+
+#: library/classes/content/class-polylang.php:142
+msgid "Affiner ma recherche"
+msgstr "검색 추가하기"
+
+#: library/classes/content/class-polylang.php:143
+msgid "Voir les résultats sur la carte"
+msgstr "지도에서 결과 보기"
+
+#: library/classes/content/class-polylang.php:144
+msgid "résultat"
+msgstr "결과"
+
+#: library/classes/content/class-polylang.php:145
+msgid "résultats"
+msgstr "결과"
+
+#: library/classes/content/class-polylang.php:146
+msgid "Aucun résultat"
+msgstr "결과 없음"
+
+#: library/classes/content/class-polylang.php:147
+msgid "Voir la carte"
+msgstr "지도 보기"
+
+#: library/classes/content/class-polylang.php:148
+msgid "Afficher la carte"
+msgstr "지도 보기"
+
+#: library/classes/content/class-polylang.php:149
+msgid "Masquer la carte"
+msgstr "지도 숨기기"
+
+#: library/classes/content/class-polylang.php:150
+#: library/functions/04_custom_appearance.php:13
+msgid "Partager sur Facebook"
+msgstr "페이스북에 공유"
+
+#: library/classes/content/class-polylang.php:151
+#: library/functions/04_custom_appearance.php:18
+msgid "Partager sur Twitter"
+msgstr "트위터에서 공유"
+
+#: library/classes/content/class-polylang.php:152
+#: library/functions/04_custom_appearance.php:23
+msgid "Partager sur LinkedIn"
+msgstr "LinkedIn에서 공유"
+
+#: library/classes/content/class-polylang.php:153
+#: library/functions/04_custom_appearance.php:28
+msgid "Partager sur WhatsApp"
+msgstr "WhatsApp에서 공유"
+
+#: library/classes/content/class-polylang.php:154
+msgid "Partager sur Google+"
+msgstr "Google+에서 공유하세요."
+
+#: library/classes/content/class-polylang.php:155
+msgid "Partager sur Instagram"
+msgstr "인스타그램에 공유"
+
+#: library/classes/content/class-polylang.php:156
+#: library/functions/04_custom_appearance.php:33
+msgid "Partager sur Pinterest"
+msgstr "Pinterest에 공유"
+
+#: library/classes/content/class-polylang.php:157
+msgid "Partager par email"
+msgstr "이메일로 공유"
+
+#: library/classes/content/class-polylang.php:158
+msgid "Partager"
+msgstr "공유"
+
+#: library/classes/content/class-polylang.php:159
+msgid "Voir sur Instagram"
+msgstr "인스타그램에서 보기"
+
+#: library/classes/content/class-polylang.php:160
+msgid "Accès au menu principal"
+msgstr "메인 메뉴에 액세스"
+
+#: library/classes/content/class-polylang.php:161
+msgid "Titre de la vidéo manquant"
+msgstr "누락된 동영상 제목"
+
+#: library/classes/content/class-polylang.php:162
+msgid "Légende de la vidéo manquante"
+msgstr "누락된 동영상 캡션"
+
+#: library/classes/content/class-polylang.php:163
+msgid "Que recherchez-vous ?"
+msgstr "무엇을 찾고 계신가요?"
+
+#: library/classes/content/class-polylang.php:164
+msgid "Vous cherchez quelque chose ?"
+msgstr "찾고 있는 것이 있나요?"
+
+#: library/classes/content/class-polylang.php:165
+#: library/classes/process/class-woody-compilers.php:908
+msgid "Rechercher"
+msgstr "연구원"
+
+#: library/classes/content/class-polylang.php:166
+msgid "Réinitialiser"
+msgstr "초기화"
+
+#: library/classes/content/class-polylang.php:167
+#: library/classes/process/class-woody-compilers.php:903
+msgid "Choisissez vos dates"
+msgstr "날짜 선택"
+
+#: library/classes/content/class-polylang.php:168
+#: library/classes/process/class-woody-compilers.php:904
+msgid "Date d'arrivée"
+msgstr "도착 날짜"
+
+#: library/classes/content/class-polylang.php:169
+#: library/classes/process/class-woody-compilers.php:900
+#: library/classes/process/class-woody-compilers.php:901
+msgid "Durée du séjour"
+msgstr "체류 기간"
+
+#: library/classes/content/class-polylang.php:170
+#: library/classes/process/class-woody-compilers.php:906
+msgid "adulte(s)"
+msgstr "성인"
+
+#: library/classes/content/class-polylang.php:171
+#: library/classes/process/class-woody-compilers.php:907
+msgid "enfant(s)"
+msgstr "자녀(들)"
+
+#: library/classes/content/class-polylang.php:172
+#: library/classes/timber/class-timber-filters.php:315
+#: library/functions/01_assets.php:91
+msgid "jour"
+msgstr "일"
+
+#: library/classes/content/class-polylang.php:173
+#: library/classes/timber/class-timber-filters.php:318
+#: library/functions/01_assets.php:92
+msgid "jours"
+msgstr "일"
+
+#: library/classes/content/class-polylang.php:174
+#: library/classes/timber/class-timber-filters.php:321
+#: library/functions/01_assets.php:89
+msgid "semaine"
+msgstr "semaine"
+
+#: library/classes/content/class-polylang.php:175
+#: library/classes/timber/class-timber-filters.php:324
+#: library/functions/01_assets.php:90
+msgid "semaines"
+msgstr "세메인"
+
+#: library/classes/content/class-polylang.php:176
+#: library/classes/timber/class-timber-filters.php:328
+msgid "mois"
+msgstr "월"
+
+#: library/classes/content/class-polylang.php:177
+msgid "Sélection"
+msgstr "선택"
+
+#: library/classes/content/class-polylang.php:178
+msgid "Page"
+msgstr "페이지"
+
+#: library/classes/content/class-polylang.php:179
+msgid "Pages"
+msgstr "페이지"
+
+#: library/classes/content/class-polylang.php:180
+msgid "Offre touristique"
+msgstr "관광 상품"
+
+#: library/classes/content/class-polylang.php:181
+msgid "Désolé, aucun contenu touristique ne correspond à votre recherche"
+msgstr "검색어와 일치하는 관광 콘텐츠가 없습니다."
+
+#: library/classes/content/class-polylang.php:182
+msgid "Désolé, aucune page ne correspond à votre recherche"
+msgstr "검색어와 일치하는 페이지가 없습니다."
+
+#: library/classes/content/class-polylang.php:183
+msgid "Fermer"
+msgstr "닫기"
+
+#: library/classes/content/class-polylang.php:184
+msgid "Menu"
+msgstr "메뉴"
+
+#: library/classes/content/class-polylang.php:185
+msgid "Merci de choisir une date"
+msgstr "날짜를 선택하세요."
+
+#: library/classes/content/class-polylang.php:186
+msgid "Comment venir ?"
+msgstr "어떻게 가나요?"
+
+#: library/classes/content/class-polylang.php:187
+msgid "La page que vous recherchez est peut-être ici ?"
+msgstr "찾고 계신 페이지가 여기에 있나요?"
+
+#: library/classes/content/class-polylang.php:188
+#: library/classes/process/class-woody-getters.php:451
+#: library/classes/process/class-woody-getters.php:662
+msgid "Lire la suite"
+msgstr "자세히 보기"
+
+#: library/classes/content/class-polylang.php:189
+#: library/classes/process/class-woody-compilers.php:895
+#: library/classes/process/class-woody-compilers.php:897
+msgid "Que voulez-vous réserver ?"
+msgstr "무엇을 예약하시겠습니까?"
+
+#: library/classes/content/class-polylang.php:190
+#: library/classes/process/class-woody-compilers.php:898
+#: library/classes/process/class-woody-compilers.php:899
+msgid "Choisissez vos dates de réservation"
+msgstr "예약 날짜 선택"
+
+#: library/classes/content/class-polylang.php:191
+msgid "Changer de saison"
+msgstr "계절의 변화"
+
+#: library/classes/content/class-polylang.php:192
+msgid "Réservable"
+msgstr "예약 가능"
+
+#: library/classes/content/class-polylang.php:193
+#: library/classes/process/class-woody-getters.php:538
+msgid "Télécharger"
+msgstr "다운로드"
+
+#: library/classes/content/class-polylang.php:194
+msgid "Aller à la page d'accueil"
+msgstr "홈 페이지로 이동"
+
+#: library/classes/content/class-polylang.php:195
+msgid "Retour à la page d'accueil"
+msgstr "홈 페이지로 돌아가기"
+
+#: library/classes/content/class-polylang.php:196
+msgid "Tout"
+msgstr "모두"
+
+#: library/classes/content/class-polylang.php:197
+msgid "Afficher tous les tarifs"
+msgstr "모든 요금 보기"
+
+#: library/classes/content/class-polylang.php:198
+msgid "Afficher plus"
+msgstr "자세히 보기"
+
+#: library/classes/content/class-polylang.php:199
+msgid "Afficher moins"
+msgstr "덜 보기"
+
+#: library/classes/content/class-polylang.php:200
+msgid "Date de naissance"
+msgstr "생년월일"
+
+#: library/classes/content/class-polylang.php:201
+msgid "Nationalité"
+msgstr "국적"
+
+#: library/classes/content/class-polylang.php:202
+msgid "Sommaire"
+msgstr "콘텐츠"
+
+#: library/classes/content/class-polylang.php:205
+msgid "Ajouter"
+msgstr "추가"
+
+#: library/classes/content/class-polylang.php:206
+msgid "Supprimer"
+msgstr "삭제"
+
+#: library/classes/content/class-polylang.php:207
+msgid "Cette liste est vide actuellement. Naviguez et ajoutez des pages !"
+msgstr "이 목록은 현재 비어 있습니다. 페이지를 찾아보고 추가하세요!"
+
+#: library/classes/content/class-polylang.php:210
+msgid "Ajouter à mes favoris"
+msgstr "즐겨찾기에 추가"
+
+#: library/classes/content/class-polylang.php:211
+msgid "Imprimer/Exporter mes favoris"
+msgstr "내가 좋아하는 인쇄기/수출기"
+
+#: library/classes/content/class-polylang.php:214
+msgid "Langue"
+msgstr "언어"
+
+#: library/classes/content/class-polylang.php:217
+msgid "Pour faire une demande de devis, veuillez choisir un séjour."
+msgstr "견적을 요청하려면 숙박을 선택해 주세요."
+
+#: library/classes/content/class-polylang.php:218
+msgid ""
+"Il semblerait qu'il n'y ait pas ou plus de séjours proposant une demande de "
+"devis disponibles sur le site"
+msgstr "사이트에 견적 요청을 제공하는 숙소가 없거나 더 이상 없는 것 같습니다."
+
+#: library/classes/content/class-polylang.php:219
+msgid "Séjours et activités"
+msgstr "숙박 및 액티비티"
+
+#: library/classes/content/class-polylang.php:220
+msgid "Retour à l'offre"
+msgstr "오퍼로 돌아가기"
+
+#: library/classes/content/class-polylang.php:221
+msgid "Récapitulatif"
+msgstr "콘텐츠"
+
+#: library/classes/content/class-polylang.php:222
+msgid "30 secondes"
+msgstr "30초"
+
+#: library/classes/content/class-polylang.php:223
+msgid "Informations"
+msgstr "정보"
+
+#: library/classes/content/class-polylang.php:224
+msgid "Coordonnées"
+msgstr "연락처 세부 정보"
+
+#: library/classes/content/class-polylang.php:225
+msgid "Mon devis"
+msgstr "내 견적"
+
+#: library/classes/content/class-polylang.php:226
+msgid "Votre séjour/journée"
+msgstr "숙박/일"
+
+#: library/classes/content/class-polylang.php:227
+msgid "Comprenant"
+msgstr "다음을 포함합니다."
+
+#: library/classes/content/class-polylang.php:228
+#: library/templates/template-page.php:166
+msgid "Gratuit"
+msgstr "무료"
+
+#: library/classes/content/class-polylang.php:229
+msgid "Nombre de personnes"
+msgstr "인원 수"
+
+#: library/classes/content/class-polylang.php:231
+msgid "* Champs obligatoires"
+msgstr "별표(*)로 표시된 필드는 필수 입력 항목입니다."
+
+#: library/classes/content/class-polylang.php:232
+msgid "Nom/Prénom"
+msgstr "이름/성명"
+
+#: library/classes/content/class-polylang.php:233
+msgid "Raison sociale"
+msgstr "회사 이름"
+
+#: library/classes/content/class-polylang.php:234
+msgid "Email"
+msgstr "이메일"
+
+#: library/classes/content/class-polylang.php:235
+msgid "Téléphone"
+msgstr "전화"
+
+#: library/classes/content/class-polylang.php:236
+msgid "Votre commentaire"
+msgstr "귀하의 코멘트"
+
+#: library/classes/content/class-polylang.php:237
+msgid "Valider ma demande de devis"
+msgstr "내 개발 요구 사항 확인"
+
+#: library/classes/content/class-polylang.php:238
+msgid "Mon panier"
+msgstr "내 장바구니"
+
+#: library/classes/content/class-polylang.php:239
+msgid "TOTAL "
+msgstr "총계"
+
+#: library/classes/content/class-polylang.php:240
+msgid "Base de"
+msgstr "기준"
+
+#: library/classes/content/class-polylang.php:244
+#: library/classes/process/class-woody-compilers.php:610
+msgid "Publié le"
+msgstr "에 게시됨"
+
+#: library/classes/content/class-polylang.php:245
+msgid "Mis à jour le"
+msgstr "업데이트된 날짜"
+
+#: library/classes/content/class-polylang.php:246
+#: library/classes/process/class-woody-compilers.php:424
+msgid "Désolé, aucun contenu ne correspond à votre recherche"
+msgstr "검색어와 일치하는 콘텐츠가 없습니다."
+
+#: library/classes/content/class-polylang.php:247
+msgid "Lire aussi"
+msgstr "또한 읽기"
+
+#: library/classes/content/class-polylang.php:251
+msgid "Remontées mécaniques"
+msgstr "스키 리프트"
+
+#: library/classes/content/class-polylang.php:252
+msgid "Pistes"
+msgstr "피스트"
+
+#: library/classes/content/class-polylang.php:253
+msgid "Domaine Alpin"
+msgstr "알파인 도메인"
+
+#: library/classes/content/class-polylang.php:254
+msgid "Domaine Nordique"
+msgstr "도멘 노르딕"
+
+#: library/classes/content/class-polylang.php:255
+msgid "Détails"
+msgstr "세부 정보"
+
+#: library/classes/content/class-polylang.php:256
+msgid "Météo"
+msgstr "날씨"
+
+#: library/classes/content/class-polylang.php:257
+msgid "Voir le bulletin météo"
+msgstr "일기 예보 보기"
+
+#: library/classes/content/class-polylang.php:258
+msgid "Bulletin complet"
+msgstr "게시판 완료"
+
+#: library/classes/content/class-polylang.php:259
+msgid "Webcams"
+msgstr "웹캠"
+
+#: library/classes/content/class-polylang.php:260
+msgid "Voir les webcams"
+msgstr "웹캠 보기"
+
+#: library/classes/content/class-polylang.php:261
+msgid "Flux erroné !"
+msgstr "잘못된 피드!"
+
+#: library/classes/content/class-polylang.php:262
+msgid "Module Infoneige non configuré !"
+msgstr "인포네이즈 모듈이 구성되지 않았습니다!"
+
+#: library/classes/content/class-polylang.php:263
+msgid "Enneigement"
+msgstr "Enneigement"
+
+#: library/classes/content/class-polylang.php:264
+msgid "Hauteur"
+msgstr "높이"
+
+#: library/classes/content/class-polylang.php:265
+msgid "Pistes ouvertes"
+msgstr "트랙 열기"
+
+#: library/classes/content/class-polylang.php:266
+msgid "Risque d'avalanche"
+msgstr "눈사태 위험"
+
+#: library/classes/content/class-polylang.php:267
+msgid "Limité"
+msgstr "제한적"
+
+#: library/classes/content/class-polylang.php:268
+msgid "Moyen"
+msgstr "Medium"
+
+#: library/classes/content/class-polylang.php:269
+msgid "Élevé"
+msgstr "Élevé"
+
+#: library/classes/content/class-polylang.php:270
+msgid "Non spécifié"
+msgstr "지정되지 않음"
+
+#: library/classes/content/class-polylang.php:271
+msgid "Qualité de la neige"
+msgstr "눈 품질"
+
+#: library/classes/content/class-polylang.php:272
+msgid "En live"
+msgstr "그리고 라이브"
+
+#: library/classes/content/class-polylang.php:273
+msgid "Toute l'info live"
+msgstr "모든 실시간 뉴스"
+
+#: library/classes/content/class-polylang.php:274
+msgid "Altitude"
+msgstr "고도"
+
+#: library/classes/content/class-polylang.php:275
+msgid "Fraîche"
+msgstr "프레쉬"
+
+#: library/classes/content/class-polylang.php:276
+msgid "Douce"
+msgstr "두스"
+
+#: library/classes/content/class-polylang.php:277
+msgid "Dure"
+msgstr "두레"
+
+#: library/classes/content/class-polylang.php:278
+msgid "Humide"
+msgstr "습도"
+
+#: library/classes/content/class-polylang.php:279
+msgid "De printemps"
+msgstr "봄"
+
+#: library/classes/content/class-polylang.php:280
+msgid "Matin"
+msgstr "아침"
+
+#: library/classes/content/class-polylang.php:281
+msgid "Après-midi"
+msgstr "오후"
+
+#: library/classes/content/class-polylang.php:282
+msgid "Ouverte"
+msgstr "열기"
+
+#: library/classes/content/class-polylang.php:283
+msgid "Fermée"
+msgstr "닫힘"
+
+#: library/classes/content/class-polylang.php:284
+msgid "Prévision d'ouverture"
+msgstr "오프닝 예측"
+
+#: library/classes/content/class-polylang.php:285
+msgid "Liaison"
+msgstr "링크"
+
+#: library/classes/process/class-woody-getters.php:740
+#: library/classes/process/class-woody-getters.php:741
+msgid "Découvrir"
+msgstr "알아보기"
+
+#: library/classes/process/class-woody-getters.php:905
+msgid "Informations prestataire"
+msgstr "제공자 정보"
+
+#: library/classes/process/class-woody-getters.php:910
+msgid "Horaires"
+msgstr "시간표"
+
+#: library/classes/process/class-woody-getters.php:915
+msgid "Carte"
+msgstr "장바구니"
+
+#: library/classes/process/class-woody-getters.php:920
+msgid "Avis"
+msgstr "공지 사항"
+
+#: library/classes/process/class-woody-getters.php:925
+msgid "Poser une question"
+msgstr "질문하기"
+
+#: library/functions/04_custom_appearance.php:38
+msgid "Partager par e-mail"
+msgstr "이메일로 공유"
+
+#: library/templates/template-page.php:78
+msgid "Oups !"
+msgstr "Oops!"
+
+#: library/templates/template-page.php:80
+msgid ""
+"La page que vous recherchez a peut-être été supprimée ou est temporairement "
+"indisponible."
+msgstr "찾고 계신 페이지가 삭제되었거나 일시적으로 사용할 수 없는 상태일 수 있습니다."
+
+#~ msgid "Nos suggestions"
+#~ msgstr "질문하기"
