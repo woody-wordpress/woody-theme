@@ -8,6 +8,8 @@
  */
 
 use WoodyLibrary\Library\WoodyLibrary\WoodyLibrary;
+use voku\helper\HtmlMin;
+use voku\twig\MinifyHtmlExtension;
 
 if (!class_exists('Timber')) {
     class Timber
@@ -54,6 +56,7 @@ if (!class_exists('Timber')) {
 
                 // Instance
                 self::$twig = new \Twig\Environment($twig_loader, $twig_options);
+                self::$twig->addExtension(new MinifyHtmlExtension(new HtmlMin()));
 
                 // Functions & Filters
                 self::$twig = apply_filters('timber/twig', self::$twig);
