@@ -851,7 +851,7 @@
                         "layout_642e7ff2b62b0": {
                             "key": "layout_642e7ff2b62b0",
                             "name": "booking_block",
-                            "label": "Bloc de résa",
+                            "label": "Bloc de réservation",
                             "display": "block",
                             "sub_fields": [
                                 {
