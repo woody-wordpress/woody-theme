@@ -136,7 +136,7 @@
             "endpoint": 0
         },
         {
-            "key": "field_642ec7805040b",
+            "key": "field_5c0e416429057",
             "label": "Template",
             "name": "bookblock_woody_tpl",
             "type": "text",
@@ -155,7 +155,7 @@
             "maxlength": ""
         },
         {
-            "key": "button_field_642ec7805040b",
+            "key": "button_field_5c0e416429057",
             "label": "Choisir une mise en page",
             "name": "",
             "type": "message",
@@ -164,7 +164,7 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "hide-label woody-tpl-button",
+                "class": "hide-label woody-tpl-button field_5c0e416429057",
                 "id": ""
             },
             "message": "Choisir une mise en page",
