@@ -258,6 +258,9 @@ class WoodyTheme_WoodyProcess
                 $layout['movie_uploadDate'] = $context['post']->post_modified;
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
+            case 'booking_block':
+                $return = $this->compilers->formatBookBlock($context['post'], $context['woody_components'], $layout);
+                break;
             default:
 
                 // On autorise le traitement des layouts depuis un code externe
