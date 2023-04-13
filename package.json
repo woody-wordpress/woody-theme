@@ -4,7 +4,7 @@
     "title": "Woody Theme by Raccourci Agency",
     "author": "Raccourci Agency",
     "scripts": {
-        "download": "yarn install --modules-folder ./src/lib && yarn autoclean --modules-folder ./src/lib --force"
+        "download": "yarn install --modules-folder ./src/lib/ && yarn autoclean --modules-folder ./src/lib --force"
     },
     "dependencies": {
         "arrive": "2.4.1",
