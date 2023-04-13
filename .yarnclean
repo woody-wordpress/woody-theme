@@ -1,45 +1,41 @@
-# test directories
-__tests__
-test
-tests
-powered-test
+# dependencies
+dom7
+core-js
+custom-event-polyfill
+rangetouch
+url-polyfill
+ssr-window
+bootstrap/js
+flatpickr/src
+swiper/src
+swiper/scripts
 
 # asset directories
 docs
 doc
+__tests__
+test
+tests
+powered-test
 grunt
 less
-
-# examples
+tasks
 example
 examples
-
-# code coverage directories
 coverage
 .nyc_output
-
-# build scripts
 Makefile
 Gulpfile.js
 Gruntfile.js
 package.js
 build
 debug
-
-# configs
 README
 LICENSE
 AUTHORS
-LICENSE.txt
-AUTHORS.txt
-package.json
-bower.json
+.nvmrc
+.prettierrc
 .npmignore
-appveyor.yml
-circle.yml
-codeship-services.yml
-codeship-steps.yml
-wercker.yml
 .tern-project
 .gitattributes
 .editorconfig
@@ -49,23 +45,15 @@ wercker.yml
 .jshintrc
 .jshintrc.js
 .flowconfig
-.documentup.json
-.yarn-metadata.json
-.travis.yml
 
 # misc
 *.md
+*.txt
 *.json
 *.xml
+*.yml
 *.ts
 *.less
 *.scss
 *.html
-
-# dependencies
-dom7
-ssr-window
-bootstrap/js
-flatpickr/src
-swiper/src
-swiper/scripts
+*.log

@@ -191,7 +191,7 @@ class WoodyTheme_Enqueue_Assets
         wp_enqueue_script('jsdelivr_moment', get_template_directory_uri() . '/src/lib/custom/moment-with-locales@2.22.2.min.js', [], null); // TODO: Latest 2.29.4
         wp_enqueue_script('jsdelivr_jscookie', get_template_directory_uri() . '/src/lib/custom/js.cookie@2.2.1.min.js', [], null);
         wp_enqueue_script('jsdelivr_rellax', get_template_directory_uri() . '/src/lib/custom/rellax@1.10.1.min.js', [], null); // TODO: Latest 1.12.1
-        wp_enqueue_script('jsdelivr_plyr', get_template_directory_uri() . '/src/lib/custom/plyr@3.6.8.min.js', [], null); // TODO: Latest 3.7.7
+        wp_enqueue_script('jsdelivr_plyr', get_template_directory_uri() . '/src/lib/npm/plyr/dist/plyr.min.js', [], '3.6.8'); // TODO: Latest 3.7.7
 
         // HACK : i18n LTR (replace the inline added by Core)
         wp_enqueue_script('wp-i18n-ltr', get_template_directory_uri() . '/src/js/static/i18n-ltr.min.js', ['wp-i18n'], null);
