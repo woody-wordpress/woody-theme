@@ -258,7 +258,7 @@ class WoodyTheme_Enqueue_Assets
         } elseif ($this->isTouristicSheet && !defined('IS_WOODY_HAWWWAI_SHEET_ENABLE')) {
             // CSS Libraries (todo replace when possible)
             wp_enqueue_style('hawwwai_font_css', $this->assetPath('https://api.cloudly.space/static/assets/fonts/raccourci-font.min.css'), [], null);
-            wp_enqueue_style('hawwwai_fresco_css', 'https://api.cloudly.space/render/assets/styles/lib/fresco.css', [], null);
+            wp_enqueue_style('hawwwai_fresco_css', 'https://api.cloudly.space/render/assets/styles/lib/fresco.min.css', [], null);
 
             wp_enqueue_style('jsdelivr_leaflet_css', get_template_directory_uri() . '/src/jsdelivr/leaflet@0.7.7.min.css', [], null);
             wp_enqueue_style('jsdelivr_slick_css', get_template_directory_uri() . '/src/jsdelivr/slick@1.8.1.min.css', [], null);
