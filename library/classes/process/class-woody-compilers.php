@@ -361,6 +361,7 @@ class WoodyTheme_WoodyCompilers
         $default_items = wp_cache_get($cache_key, 'woody');
         if (empty($default_items)) {
             $default_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid'], true);
+            //TODO: Corriger Allowed memory size of 268435456 bytes exhausted
             wp_cache_set($cache_key, $default_items, 'woody');
         }
 
@@ -674,7 +675,7 @@ class WoodyTheme_WoodyCompilers
                 }
             }
 
-            if(!empty($page_hero['page_heading_more_imgs']) && !empty($page_hero['page_heading_more_imgs']['display_imgs']) && !empty($page_hero['page_heading_more_imgs']['imgs'])) {
+            if (!empty($page_hero['page_heading_more_imgs']) && !empty($page_hero['page_heading_more_imgs']['display_imgs']) && !empty($page_hero['page_heading_more_imgs']['imgs'])) {
                 foreach ($page_hero['page_heading_more_imgs']['imgs'] as $more_img_key => $more_img) {
                     $page_hero['page_heading_more_imgs']['imgs'][$more_img_key]['attachment_more_data'] = (empty($page_hero['page_heading_more_imgs']['imgs'][$more_img_key]['ID'])) ? [] : $this->tools->getAttachmentMoreData($page_hero['page_heading_more_imgs']['imgs'][$more_img_key]['ID']);
                 }
