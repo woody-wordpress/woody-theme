@@ -1,6 +1,7 @@
 # dependencies
 dom7
 core-js
+loadjs
 custom-event-polyfill
 rangetouch
 url-polyfill
