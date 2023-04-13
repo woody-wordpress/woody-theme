@@ -7,7 +7,7 @@
         "download": "yarn install --ignore-optional --modules-folder ./src/lib/npm && yarn autoclean --modules-folder ./src/lib/npm --force"
     },
     "dependencies": {
-        "bootstrap": "3.3.7",
+        "bootstrap": "3.4.1",
         "flatpickr": "4.5.7",
         "swiper": "4.5.1",
         "plyr": "3.6.8"
