@@ -1,0 +1,64 @@
+# test directories
+__tests__
+test
+tests
+powered-test
+
+# asset directories
+docs
+doc
+website
+images
+assets
+src
+grunt
+less
+
+# examples
+example
+examples
+
+# code coverage directories
+coverage
+.nyc_output
+
+# build scripts
+Makefile
+Gulpfile.js
+Gruntfile.js
+package.js
+build
+debug
+
+# configs
+README
+LICENSE
+AUTHORS
+LICENSE.txt
+AUTHORS.txt
+package.json
+bower.json
+.npmignore
+appveyor.yml
+circle.yml
+codeship-services.yml
+codeship-steps.yml
+wercker.yml
+.tern-project
+.gitattributes
+.editorconfig
+.*ignore
+.eslintrc
+.jshintrc
+.flowconfig
+.documentup.json
+.yarn-metadata.json
+.travis.yml
+
+# misc
+*.md
+*.xml
+*.ts
+*.less
+*.scss
+*.html
