@@ -7,10 +7,6 @@ powered-test
 # asset directories
 docs
 doc
-website
-images
-assets
-src
 grunt
 less
 
