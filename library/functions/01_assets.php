@@ -414,7 +414,7 @@ function foundEmbedProvider($url)
  */
 function embedProviderThumbnail($embed)
 {
-    $return = '';
+    $return = null;
 
     // On récupère l'attribut src de l'iframe
     preg_match('#src="(.+?)"#', $embed, $embed_matches);
@@ -424,8 +424,6 @@ function embedProviderThumbnail($embed)
 
     // On définit l'url de la miniature en fonction du provider
     switch ($provider) {
-        case 'unknown':
-            return;
         case 'youtube':
             $regex = '/(?<=\/embed\/)(.*)(?=\?feature)/';
             preg_match($regex, $src, $matches);
@@ -455,6 +453,10 @@ function embedProviderThumbnail($embed)
             }
 
             break;
+    }
+
+    if (empty($return)) {
+        $return = 'https://api.cloudly.space/resize/crop/640/360/75/aHR0cHM6Ly9hcGkudG91cmlzbS1zeXN0ZW0uY29tL3N0YXRpYy9hc3NldHMvaW1hZ2VzL3Jlc2l6ZXIvd29vZHlfNDA0LmpwZw==/404.jpg';
     }
 
     return $return;
