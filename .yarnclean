@@ -45,7 +45,9 @@ wercker.yml
 .editorconfig
 .*ignore
 .eslintrc
+.eslintrc.js
 .jshintrc
+.jshintrc.js
 .flowconfig
 .documentup.json
 .yarn-metadata.json
@@ -53,8 +55,17 @@ wercker.yml
 
 # misc
 *.md
+*.json
 *.xml
 *.ts
 *.less
 *.scss
 *.html
+
+# dependencies
+dom7
+ssr-window
+bootstrap/js
+flatpickr/src
+swiper/src
+swiper/scripts
