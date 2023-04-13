@@ -9,7 +9,7 @@
     "dependencies": {
         "bootstrap": "3.3.7",
         "flatpickr": "4.5.7",
-        "swiper": "4.4.1",
+        "swiper": "4.5.1",
         "plyr": "3.6.8"
     }
 }

@@ -175,7 +175,7 @@ class WoodyTheme_Enqueue_Assets
         wp_add_inline_script('jquery', 'window.siteConfig = ' . json_encode($this->siteConfig, JSON_THROW_ON_ERROR) . ';', 'before');
 
         if (!$this->isTouristicSheet || defined('IS_WOODY_HAWWWAI_SHEET_ENABLE')) {
-            wp_enqueue_script('jsdelivr_swiper', get_template_directory_uri() . '/src/lib/npm/swiper/dist/js/swiper.min.js', [], '4.4.1'); // TODO: Latest 4.5.2
+            wp_enqueue_script('jsdelivr_swiper', get_template_directory_uri() . '/src/lib/npm/swiper/dist/js/swiper.min.js', [], '4.5.1');
         }
 
         $current_lang = apply_filters('woody_pll_current_language', null);
