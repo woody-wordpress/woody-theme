@@ -417,9 +417,9 @@ function embedProviderThumbnail($embed)
     $return = null;
 
     // On récupère l'attribut src de l'iframe
-    preg_match('#src="(.+?)"#', $embed, $embed_matches);
-    $src = $embed_matches[1];
+    $src = embedProviderUrl($embed);
 
+    // On cherche à savoir si c'est Youtube ou Dailymotion ou Vimeo
     $provider = foundEmbedProvider($src);
 
     // On définit l'url de la miniature en fonction du provider
@@ -462,48 +462,34 @@ function embedProviderThumbnail($embed)
     return $return;
 }
 
-function embedThumbnail($embed)
+/**
+ *
+ * Nom : embedProviderUrl
+ * Return : Retourne le titre d'une vidéo YT, DailyMotion ou Vimeo
+ */
+function embedProviderTitle($embed)
 {
-    $return = '';
+    // On récupère l'attribut src de l'iframe
+    if (strpos($embed, 'title=') !== false) {
+        preg_match('#title="(.+?)"#', $embed, $embed_matches);
+        return $embed_matches[1];
+    }
+}
 
-    $provider = foundEmbedProvider($embed);
-
-    // On définit l'url de la miniature en fonction du provider
-    switch ($provider) {
-        case 'unknown':
-            return;
-        case 'youtube':
-            $regex = '/(v=*)(.*)/';
-            preg_match($regex, $embed, $matches);
-            if (!empty($matches[2])) {
-                $return = 'https://img.youtube.com/vi/' . $matches[2] . '/maxresdefault.jpg';
-            }
-
-            break;
-        case 'dailymotion':
-            $regex = '/(?<=\/video\/)(.*)/';
-            preg_match($regex, $embed, $matches);
-            if (!empty($matches[0])) {
-                $return = 'https://www.dailymotion.com/thumbnail/video/' . $matches[0];
-            }
-
-            break;
-        case 'vimeo':
-            $regex = '/(.com\/*)(.*)/';
-            preg_match($regex, $embed, $matches);
-            if (!empty($matches[0])) {
-                $vimeo_data = unserialize(file_get_contents('https://vimeo.com/api/v2/video/'. $matches[2] .'.php'));
-                if (empty($vimeo_data)) {
-                    return;
-                }
-
-                $return = $vimeo_data[0]['thumbnail_large'];
-            }
-
-            break;
+/**
+ *
+ * Nom : embedProviderUrl
+ * Return : Retourne l'url d'une vidéo YT, DailyMotion ou Vimeo
+ */
+function embedProviderUrl($embed)
+{
+    // On récupère l'attribut src de l'iframe
+    if (strpos($embed, 'src=') !== false) {
+        preg_match('#src="(.+?)"#', $embed, $embed_matches);
+        return $embed_matches[1];
     }
 
-    return $return;
+    return $embed;
 }
 
 function embedVideo($embed)

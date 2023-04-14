@@ -387,8 +387,8 @@ class WoodyTheme_Enqueue_Assets
 
     public function wpResourceHints($hints, $relation_type)
     {
-        if ($relation_type == 'dns-prefetch') {
-            $hints[] = 'https://www.googletagmanager.com';
+        if ($relation_type == 'dns-prefetch' || $relation_type == 'preconnect') {
+            $hints[] = '//www.googletagmanager.com';
         }
 
         return $hints;

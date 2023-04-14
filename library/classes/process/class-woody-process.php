@@ -126,7 +126,7 @@ class WoodyTheme_WoodyProcess
 
                                 if (!empty($layout['gallery_items'][$key]['attachment_more_data']['linked_video'])) {
                                     $layout['gallery_items'][$key]['attachment_more_data']['linked_video_iframe'] = embedVideo($layout['gallery_items'][$key]['attachment_more_data']['linked_video']);
-                                    $layout['gallery_items'][$key]['attachment_more_data']['linked_video_thumbnail'] = embedThumbnail($layout['gallery_items'][$key]['attachment_more_data']['linked_video']);
+                                    $layout['gallery_items'][$key]['attachment_more_data']['linked_video_thumbnail'] = embedProviderThumbnail($layout['gallery_items'][$key]['attachment_more_data']['linked_video']);
                                 }
                             }
                         }
@@ -254,7 +254,10 @@ class WoodyTheme_WoodyProcess
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             case 'movie':
+                $layout['movie_url'] = embedProviderUrl($layout['movie']);
                 $layout['movie_thumbnail'] = embedProviderThumbnail($layout['movie']);
+                $layout['movie_title_fallback'] = (empty($layout['movie_title'])) ? embedProviderTitle($layout['movie']) : __("Titre de la vidéo manquant", 'woody-theme');
+                $layout['movie_caption_fallback'] = (empty($layout['movie_caption'])) ? embedProviderTitle($layout['movie']) : __("Légende de la vidéo manquante", 'woody-theme');
                 $layout['movie_uploadDate'] = $context['post']->post_modified;
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
