@@ -61,7 +61,7 @@ class WoodyTheme_Enqueue_Assets
 
         add_action('woody_theme_update', [$this, 'woodyThemeUpdate']);
         add_action('wp_enqueue_scripts', [$this, 'enqueueLibraries']);
-        add_action('wp_enqueue_scripts', [$this, 'enqueueAssets']);
+        add_action('wp_enqueue_scripts', [$this, 'enqueueAssets'], 1);
         add_action('admin_enqueue_scripts', [$this, 'enqueueAdminAssets']);
         add_action('login_enqueue_scripts', [$this, 'enqueueAdminAssets']);
         add_filter('heartbeat_settings', [$this, 'heartbeatSettings']);
@@ -77,6 +77,7 @@ class WoodyTheme_Enqueue_Assets
         // Added defer on front
         if (!is_admin()) {
             add_filter('script_loader_tag', [$this, 'scriptLoaderTag'], 10, 2);
+            add_filter('style_loader_tag', [$this, 'styleLoaderTag'], 10, 2);
         }
     }
 
@@ -98,6 +99,16 @@ class WoodyTheme_Enqueue_Assets
     public function scriptLoaderTag($tag, $handle)
     {
         return str_replace(' src', ' defer src', $tag);
+    }
+
+    public function styleLoaderTag($html, $handle)
+    {
+        if (strpos($handle, 'addon') !== false || strpos($handle, 'leaflet') !== false || strpos($handle, 'google') !== false || strpos($handle, 'wicon') !== false) {
+            $fallback = '<noscript>' . $html . '</noscript>';
+            $preload = str_replace("rel='stylesheet'", "rel='preload' as='style' onload='this.onload=null;this.rel=\"stylesheet\"'", $html);
+            $html = $preload . $fallback;
+        }
+        return $html;
     }
 
     public function enqueueLibraries()
