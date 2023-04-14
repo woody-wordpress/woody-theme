@@ -24,8 +24,8 @@ class WoodyTheme_CDN
 
     public function wpResourceHints($hints, $relation_type)
     {
-        if ($relation_type == 'dns-prefetch') {
-            $hints[] = 'https://' . WOODY_CLOUDFLARE_URL;
+        if ($relation_type == 'dns-prefetch' || $relation_type == 'preconnect') {
+            $hints[] = '//' . WOODY_CLOUDFLARE_URL;
         }
 
         return $hints;
