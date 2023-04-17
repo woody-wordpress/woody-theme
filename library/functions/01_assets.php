@@ -445,17 +445,15 @@ function embedProviderThumbnail($embed)
 
             break;
         case 'vimeo':
-            $regex = '/(?<=\/video\/)(.*)(?=\?dnt)/';
+            $regex = '/([0-9]+)/';
             preg_match($regex, $src, $matches);
             if (!empty($matches[0])) {
-                $vimeo_data = unserialize(file_get_contents('https://vimeo.com/api/v2/video/'. $matches[0] .'.php'));
-                if (empty($vimeo_data)) {
-                    return;
+                $vimeo_data = file_get_contents('https://vimeo.com/api/v2/video/'. $matches[0] .'.json');
+                if (!empty($vimeo_data)) {
+                    $vimeo_data = json_decode($vimeo_data);
+                    $return = $vimeo_data[0]->thumbnail_large;
                 }
-
-                $return = $vimeo_data[0]['thumbnail_large'];
             }
-
             break;
     }
 
