@@ -34,7 +34,7 @@ class WoodyTheme_CDN
     public function timberRender($render)
     {
         // Not apply on sitemap
-        if (strpos($_SERVER['REQUEST_URI'], 'sitemap') != false) {
+        if (strpos($_SERVER['REQUEST_URI'], 'sitemap') !== false || strpos($_SERVER['REQUEST_URI'], 'wp-json') !== false) {
             return $render;
         }
 

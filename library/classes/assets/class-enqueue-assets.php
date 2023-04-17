@@ -77,6 +77,7 @@ class WoodyTheme_Enqueue_Assets
         // Added defer on front
         if (!is_admin()) {
             add_filter('script_loader_tag', [$this, 'scriptLoaderTag'], 10, 2);
+            add_filter('style_loader_tag', [$this, 'styleLoaderTag'], 10, 2);
         }
     }
 
@@ -98,6 +99,16 @@ class WoodyTheme_Enqueue_Assets
     public function scriptLoaderTag($tag, $handle)
     {
         return str_replace(' src', ' defer src', $tag);
+    }
+
+    public function styleLoaderTag($html, $handle)
+    {
+        if (strpos($handle, 'addon') !== false || strpos($handle, 'jsdelivr') !== false || strpos($handle, 'hawwwai') !== false || strpos($handle, 'leaflet') !== false || strpos($handle, 'google') !== false || strpos($handle, 'wicon') !== false) {
+            $fallback = '<noscript>' . $html . '</noscript>';
+            $preload = str_replace("rel='stylesheet'", "rel='preload' as='style' onload='this.onload=null;this.rel=\"stylesheet\"'", $html);
+            $html = $preload . $fallback;
+        }
+        return $html;
     }
 
     public function enqueueLibraries()
