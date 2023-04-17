@@ -429,6 +429,10 @@ function embedProviderThumbnail($embed)
             preg_match($regex, $src, $matches);
             if (!empty($matches[0])) {
                 $return = 'https://img.youtube.com/vi/' . $matches[0] . '/maxresdefault.jpg';
+                $response = wp_remote_head($url);
+                if (is_wp_error($response) || wp_remote_retrieve_response_code($response) === 404) {
+                    $return = 'https://img.youtube.com/vi/' . $matches[0] . '/hqdefault.jpg';
+                }
             }
 
             break;
