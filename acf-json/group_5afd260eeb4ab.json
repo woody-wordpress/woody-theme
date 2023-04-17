@@ -851,12 +851,12 @@
                         "layout_642e7ff2b62b0": {
                             "key": "layout_642e7ff2b62b0",
                             "name": "booking_block",
-                            "label": "Bloc de réservation",
+                            "label": "Formulaire de réservation",
                             "display": "block",
                             "sub_fields": [
                                 {
                                     "key": "field_642e801b71e82",
-                                    "label": "Bloc de réservation",
+                                    "label": "Formulaire de réservation",
                                     "name": "booking_block",
                                     "type": "clone",
                                     "instructions": "",
