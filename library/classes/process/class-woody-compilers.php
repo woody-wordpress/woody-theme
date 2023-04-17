@@ -833,9 +833,9 @@ class WoodyTheme_WoodyCompilers
         }
     }
 
-    public function formatBookBlock($post, $woody_components)
+    public function formatBookBlock($post, $woody_components, $wrapper)
     {
-        $bookblock = getAcfGroupFields('group_5c0e4121ee3ed', $post);
+        $bookblock = (empty($wrapper['bookblock_woody_tpl'])) ? getAcfGroupFields('group_5c0e4121ee3ed', $post) : $wrapper;
 
         if (!empty($bookblock['bookblock_playlists'][0]['pl_post_id'])) {
             $bookblock['the_classes'] = [];
@@ -909,7 +909,6 @@ class WoodyTheme_WoodyCompilers
                     'search' => __('Rechercher', 'woody-theme')
                 ]
             );
-
             return \Timber::compile($woody_components[$bookblock['bookblock_woody_tpl']], $bookblock);
         }
     }
