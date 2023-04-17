@@ -978,7 +978,8 @@
                     }
                 }
 
-                &[data-layout='event_block'] {
+                &[data-layout='event_block'],
+                &[data-layout='booking_block'] {
                     &:before {
                         content: '\f508';
                     }
@@ -989,6 +990,7 @@
                         content: '\f179';
                     }
                 }
+
             }
         }
     }
