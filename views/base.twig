@@ -1,5 +1,4 @@
 <!doctype html>
-{% spaceless %}
 <html class="no-js" {{site.language_attributes}}>
 <head>
 
@@ -60,7 +59,6 @@
     {% block styles %}{% endblock %}
     {# /WP Styles #}
 </head>
-{% endspaceless %}
 <body class="{{body_class}}">
     {# GTM (noscript) #}
     {% if gtm.id|default %}
