@@ -425,13 +425,13 @@ function embedProviderThumbnail($embed)
     // On définit l'url de la miniature en fonction du provider
     switch ($provider) {
         case 'youtube':
-            $regex = '/(?<=\/embed\/)(.*)(?=\?feature)/';
+            $regex = '/^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/';
             preg_match($regex, $src, $matches);
-            if (!empty($matches[0])) {
-                $return = 'https://img.youtube.com/vi/' . $matches[0] . '/maxresdefault.jpg';
+            if (!empty($matches[1])) {
+                $return = 'https://img.youtube.com/vi/' . $matches[1] . '/maxresdefault.jpg';
                 $response = wp_remote_head($url);
                 if (is_wp_error($response) || wp_remote_retrieve_response_code($response) === 404) {
-                    $return = 'https://img.youtube.com/vi/' . $matches[0] . '/hqdefault.jpg';
+                    $return = 'https://img.youtube.com/vi/' . $matches[1] . '/hqdefault.jpg';
                 }
             }
 
