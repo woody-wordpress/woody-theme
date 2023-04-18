@@ -77,7 +77,7 @@ class WoodyTheme_Enqueue_Assets
         // Added defer on front
         if (!is_admin()) {
             add_filter('script_loader_tag', [$this, 'scriptLoaderTag'], 10, 2);
-            add_filter('style_loader_tag', [$this, 'styleLoaderTag'], 10, 2);
+            //add_filter('style_loader_tag', [$this, 'styleLoaderTag'], 10, 2);
         }
     }
 
