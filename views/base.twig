@@ -34,10 +34,16 @@
     {% endblock %}
     {# Schema Graph #}
 
-    {% if pwa.manifest_url %}
-        <link rel="manifest" href="{{ pwa.manifest_url }}" />
-        <script src="{{ home_url }}app/themes/woody-theme/pwa/sw-register.js"></script>
+    {# {% if pwa.manifest_url %}
+    <link rel="manifest" href="{{ pwa.manifest_url }}" />
+    <script src="{{ home_url }}app/themes/woody-theme/pwa/sw-register.js"></script>
+    {% endif %} #}
+
+    {# Head Top #}
+    {% if importmap %}
+    <script type="importmap">{{ importmap|json_encode }}</script>
     {% endif %}
+    {# /Head Top #}
 
     {# WP Header #}
     {{ wp_head }}

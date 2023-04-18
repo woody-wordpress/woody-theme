@@ -249,6 +249,9 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['head_top'][] = get_field('woody_custom_meta_' . pll_current_language(), 'options');
         $this->context['head_top'] = apply_filters('woody_custom_meta', $this->context['head_top']);
 
+        $this->context['importmap'] = (empty($this->context['importmap'])) ? [] : $this->context['importmap'];
+        $this->context['importmap'] = apply_filters('woody_loader_importmap', $this->context['importmap']);
+
         // Tourist Information Center
         // Contexte seulement sur la page d'accueil
         if (is_front_page()) {

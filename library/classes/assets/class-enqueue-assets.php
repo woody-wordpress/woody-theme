@@ -329,6 +329,18 @@ class WoodyTheme_Enqueue_Assets
             }
         }
 
+        // Méthode pour appeler des JS si une div existe
+        $woody_loader_js_deps = [];
+        $woody_loader_js = apply_filters('woody_loader_js', []);
+        foreach ($woody_loader_js as $key => $config) {
+            if (!empty($config['dependencies'])) {
+                $woody_loader_js_deps = array_merge($woody_loader_js_deps, $config['dependencies']);
+                unset($woody_loader_js[$key]['dependencies']);
+            }
+        }
+        wp_enqueue_script('woody-loader-js', get_template_directory_uri() . '/src/js/static/loader.js', array_unique($woody_loader_js_deps), null);
+        wp_add_inline_script('woody-loader-js', 'var woody_loader_js=' . json_encode($woody_loader_js), 'before');
+
         // Enqueue the main Scripts
         $dependencies = [
             'jquery',
