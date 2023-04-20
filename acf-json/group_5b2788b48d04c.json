@@ -275,6 +275,23 @@
             "save_custom": 0
         },
         {
+            "key": "field_643eba9377103",
+            "label": "Plus d'options",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 1,
+            "endpoint": 0
+        },
+        {
             "key": "field_5c814940fba28",
             "label": "Afficher l'image",
             "name": "display_img",
@@ -367,6 +384,25 @@
             "ui_off_text": ""
         },
         {
+            "key": "field_643ebad7e69ec",
+            "label": "Live preview",
+            "name": "live_preview",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_61025d26c79bd",
             "label": "Ajouter un contenu épinglé",
             "name": "focused_pinnable",
@@ -415,6 +451,23 @@
             "multiple": 0,
             "return_format": "object",
             "ui": 1
+        },
+        {
+            "key": "field_643ebac43c712",
+            "label": "FIN",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 1
         },
         {
             "key": "field_5b87f2e8b2033",
