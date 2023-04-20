@@ -493,7 +493,46 @@ class WoodyTheme_WoodyGetters
             $data['link']['url'] = woody_get_permalink($original_item->ID);
         }
 
+        if($wrapper['live_preview']) {
+            // Le live preview permet de visualiser le média principal de la page + description et bouton au clic sur la mise en avant
+            // Si aucun média n'est retourné par la fonction getLivePreview, cette fonctionnalité est inutile
+            // Sinon, les champs affichés dans le live preview sont supprimés de la $data d'origine
+            $data['live_preview'] = $this->getLivePreview($original_item, $post, $data);
+            if($data['live_preview']['att_id']) {
+                unset($data['link']);
+                unset($data['description']);
+            } else {
+                unset($data['live_preview']);
+            }
+        }
+
         return apply_filters('woody_custom_pagePreview', $data, $wrapper);
+    }
+
+    private function getLivePreview($original_item, $post, $data)
+    {
+        $return = [
+            'title' => $original_item->post_title,
+            'description' => $data['description'],
+            'link' => $data['link'],
+        ];
+
+        $movie = $this->tools->getFieldAndFallback($original_item, 'field_5b0e5df0d4b1c', '', '', $post, '', $data['page_type']);
+        if(!empty($movie['mp4_movie_file']) && !empty($movie['mp4_movie_file']['ID'])) {
+            $return['att_id'] = $movie['mp4_movie_file']['ID'];
+            $return['media_type'] = 'movie';
+        } elseif(!empty($movie['movie_webm_file']) && !empty($movie['movie_webm_file']['ID'])) {
+            $return['att_id'] = $movie['movie_webm_file']['ID'];
+            $return['media_type'] = 'movie';
+        } else {
+            $img = getFieldAndFallback($original_item, 'field_5b0e5ddfd4b1b', $post, 'focus_img', '', '', $data['page_type']);
+            if(!empty($img) && !empty($img['ID'])) {
+                $return['att_id'] = $img['ID'];
+                $return['media_type'] = 'img';
+            }
+        }
+
+        return $return;
     }
 
     /**
