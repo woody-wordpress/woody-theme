@@ -520,12 +520,15 @@ class WoodyTheme_WoodyGetters
         $movie = $this->tools->getFieldAndFallback($original_item, 'field_5b0e5df0d4b1c', '', '', $post, '', $data['page_type']);
         if(!empty($movie['mp4_movie_file']) && !empty($movie['mp4_movie_file']['ID'])) {
             $return['att_id'] = $movie['mp4_movie_file']['ID'];
+            $return['media_type'] = 'movie';
         } elseif(!empty($movie['movie_webm_file']) && !empty($movie['movie_webm_file']['ID'])) {
             $return['att_id'] = $movie['movie_webm_file']['ID'];
+            $return['media_type'] = 'movie';
         } else {
             $img = getFieldAndFallback($original_item, 'field_5b0e5ddfd4b1b', $post, 'focus_img', '', '', $data['page_type']);
             if(!empty($img) && !empty($img['ID'])) {
                 $return['att_id'] = $img['ID'];
+                $return['media_type'] = 'img';
             }
         }
 
