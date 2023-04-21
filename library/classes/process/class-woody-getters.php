@@ -493,7 +493,7 @@ class WoodyTheme_WoodyGetters
             $data['link']['url'] = woody_get_permalink($original_item->ID);
         }
 
-        if($wrapper['live_preview']) {
+        if(!empty($wrapper['live_preview'])) {
             // Le live preview permet de visualiser le média principal de la page + description et bouton au clic sur la mise en avant
             // Si aucun média n'est retourné par la fonction getLivePreview, cette fonctionnalité est inutile
             // Sinon, les champs affichés dans le live preview sont supprimés de la $data d'origine
