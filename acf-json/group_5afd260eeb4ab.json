@@ -878,6 +878,37 @@
                             ],
                             "min": "",
                             "max": ""
+                        },
+                        "layout_64427b8cd1227": {
+                            "key": "layout_64427b8cd1227",
+                            "name": "timeline",
+                            "label": "Timeline",
+                            "display": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_64427bab8e1cb",
+                                    "label": "Timeline",
+                                    "name": "timeline",
+                                    "type": "clone",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "hide-label",
+                                        "id": ""
+                                    },
+                                    "clone": [
+                                        "group_6442795be9222"
+                                    ],
+                                    "display": "seamless",
+                                    "layout": "block",
+                                    "prefix_label": 0,
+                                    "prefix_name": 0
+                                }
+                            ],
+                            "min": "",
+                            "max": ""
                         }
                     },
                     "button_label": "Ajouter un bloc",
