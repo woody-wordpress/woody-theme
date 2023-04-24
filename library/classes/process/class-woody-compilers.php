@@ -623,7 +623,7 @@ class WoodyTheme_WoodyCompilers
 
         $page_teaser['page_teaser_pretitle'] = (empty($page_teaser['page_teaser_pretitle'])) ? '' : $this->tools->replacePattern($page_teaser['page_teaser_pretitle'], $context['post_id']);
         $page_teaser['page_teaser_subtitle'] = (empty($page_teaser['page_teaser_subtitle'])) ? '' : $this->tools->replacePattern($page_teaser['page_teaser_subtitle'], $context['post_id']);
-        $page_teaser['page_teaser_desc'] = (empty($page_teaser['page_teaser_desc'])) ? '' : $this->tools->replacePattern($page_teaser['page_teaser_desc'], $context['post_id']);
+        $page_teaser['page_teaser_desc'] = (empty($page_teaser['page_teaser_desc'])) ? '' : apply_filters('woody_page_tease_desc', $this->tools->replacePattern($page_teaser['page_teaser_desc'], $context['post_id']), $context);
 
         // Existing profile
         if (!empty($page_teaser['page_teaser_add_profile']) && !empty($page_teaser['profile']['use_profile']) && !empty($page_teaser['profile']['profile_post'])) {
