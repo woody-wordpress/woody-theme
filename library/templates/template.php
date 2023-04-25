@@ -203,12 +203,7 @@ abstract class WoodyTheme_TemplateAbstract
 
     private function getWoodyOptionsPagesValues()
     {
-        $return = [];
-
-        $return['deals_url'] = pll_get_post(get_field('deals_page_url', 'options'));
-        $return['deals_printable_url'] = pll_get_post(get_field('deals_printable_page_url', 'options'));
-
-        return apply_filters('woody_options_pages', $return);
+        return apply_filters('woody_options_pages', []);
     }
 
     public function render()
