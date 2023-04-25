@@ -255,7 +255,7 @@
         {
             "key": "field_64427b56d8f35",
             "label": "Paramètres de fond",
-            "name": "feature_block_bg_params",
+            "name": "timeline_bg_params",
             "type": "clone",
             "instructions": "",
             "required": 0,

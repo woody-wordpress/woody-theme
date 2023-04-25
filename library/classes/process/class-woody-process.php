@@ -264,7 +264,12 @@ class WoodyTheme_WoodyProcess
             case 'booking_block':
                 $return = $this->compilers->formatBookBlock($context['post'], $context['woody_components'], $layout);
                 break;
+            case 'timeline':
+                $layout['display'] = $this->tools->getDisplayOptions($layout['timeline_bg_params']);
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                break;
             default:
+
 
                 // On autorise le traitement des layouts depuis un code externe
                 // ! MUST Use if (is_array($layout)) in the add_filter or get a PHP WARNING when doing :
