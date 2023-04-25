@@ -434,6 +434,7 @@
 .acf-field-5beb046c93939,
 .acf-field-5dad73a7f4ccb,
 .acf-field-5e4a5597e2017,
+.acf-field-64428055a6907,
 .acf-field-6296243e85128 {
     input[type=text] {
         font-size: 1.4em !important;
@@ -988,6 +989,12 @@
                 &[data-layout='search_block'] {
                     &:before {
                         content: '\f179';
+                    }
+                }
+
+                &[data-layout='timeline'] {
+                    &:before {
+                        content: '\f11c';
                     }
                 }
 
