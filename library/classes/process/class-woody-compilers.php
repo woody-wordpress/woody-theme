@@ -412,8 +412,42 @@ class WoodyTheme_WoodyCompilers
                     } else {
                         $list_el_wrapper['focused_trip_price']['min'] = $input_value;
                     }
-                } elseif(strpos($result_key, (string) $the_list['uniqid']) !== false && strpos($result_key, 'pc') !== false) {
-                    console_log('Post created filter selected');
+                } elseif(strpos($result_key, (string) $the_list['uniqid']) !== false && strpos($result_key, 'cbtw') !== false) {
+                    $dates = explode(" au ", $input_value);
+
+                    if(!empty($dates)) {
+                        foreach ($dates as $date_key => $date) {
+                            $safe_date = \DateTime::createFromFormat('d/m/Y', $date);
+                            $dates[$date_key] = strtotime($safe_date->format('Y-m-d'));
+                        }
+                        $list_el_wrapper['focus_date_query'] = [
+                            [
+                                'after' => date('Y-m-d', $dates[0]),
+                                'before' => date('Y-m-d', $dates[1]),
+                                'inclusive' => true
+                            ]
+                        ];
+                    }
+                } elseif(strpos($result_key, (string) $the_list['uniqid']) !== false && strpos($result_key, 'cto') !== false) {
+                    $safe_date = \DateTime::createFromFormat('d/m/Y', $input_value);
+
+                    $list_el_wrapper['focus_date_query'] = [
+                        [
+                            'after' => '',
+                            'before' => date('Y-m-d', strtotime($safe_date->format('Y-m-d'))),
+                            'inclusive' => true
+                        ]
+                    ];
+                } elseif(strpos($result_key, (string) $the_list['uniqid']) !== false && strpos($result_key, 'cfrom') !== false) {
+                    $safe_date = \DateTime::createFromFormat('d/m/Y', $input_value);
+
+                    $list_el_wrapper['focus_date_query'] = [
+                        [
+                            'after' => date('Y-m-d', strtotime($safe_date->format('Y-m-d'))),
+                            'before' => '',
+                            'inclusive' => true
+                        ]
+                    ];
                 }
             }
 

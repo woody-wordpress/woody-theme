@@ -574,6 +574,9 @@ class WoodyTheme_WoodyProcess
             $the_query['paged'] = (empty($the_page_offset)) ? 1 : $the_page_offset;
         }
 
+        // On ajoute la date_query
+        $the_query['date_query'] = (empty($query_form['focus_date_query'])) ? '' : $query_form['focus_date_query'];
+
         // On ajoute la tax_query
         $the_query['tax_query'] = (empty($tax_query)) ? '' : $tax_query;
 

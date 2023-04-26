@@ -122,7 +122,7 @@
                 },
                 {
                     "key": "field_6448e798787a1",
-                    "label": "Sélecteur de date",
+                    "label": "Comportement du sélecteur de date",
                     "name": "datepicker_type",
                     "type": "radio",
                     "instructions": "",
@@ -140,9 +140,9 @@
                         "id": ""
                     },
                     "choices": {
-                        "daterange" : "Entre 2 dates",
-                        "from_single" : "À partir de la date",
-                        "to_signle" : "Jusqu'à la date"
+                        "daterange" : "Contenus publiés entre 2 dates",
+                        "from_single" : "Contenu publiés après la date",
+                        "to_single" : "Contenus publiés avant la date"
                     },
                     "allow_null": 0,
                     "other_choice": 0,
