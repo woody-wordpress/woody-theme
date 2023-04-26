@@ -99,7 +99,6 @@ class WoodyTheme_WoodyProcess
                 break;
             case 'content_list':
                 $return = $this->compilers->formatListContent($layout, $context['post'], $context['woody_components']);
-                // $return = $this->compilers->formatFullContentList($layout, $context['post'], $context['woody_components']);
                 break;
             case 'gallery':
                 // Ajout des données Instagram + champs personnalisés dans le contexte des images

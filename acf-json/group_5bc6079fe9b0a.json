@@ -72,7 +72,8 @@
                         "custom_terms": "Groupe de tags personnalisé",
                         "price": "Prix séjour",
                         "duration": "Durée séjour",
-                        "map": "Carte"
+                        "map": "Carte",
+                        "created": "Date de publication"
                     },
                     "default_value": [
                         "taxonomy"
@@ -118,6 +119,37 @@
                     "ajax": 1,
                     "return_format": "value",
                     "placeholder": ""
+                },
+                {
+                    "key": "field_6448e798787a1",
+                    "label": "Sélecteur de date",
+                    "name": "datepicker_type",
+                    "type": "radio",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [{
+                            "field": "field_5bc607c62a89b",
+                            "operator": "==",
+                            "value": "created"
+                        }]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "daterange" : "Entre 2 dates",
+                        "from_single" : "À partir de la date",
+                        "to_signle" : "Jusqu'à la date"
+                    },
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "default_value": "daterange",
+                    "layout": "horizontal",
+                    "return_format": "value",
+                    "save_other_choice": 0
                 },
                 {
                     "key": "field_5bc60f5b6c8a8",

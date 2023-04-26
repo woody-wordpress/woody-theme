@@ -412,6 +412,8 @@ class WoodyTheme_WoodyCompilers
                     } else {
                         $list_el_wrapper['focused_trip_price']['min'] = $input_value;
                     }
+                } elseif(strpos($result_key, (string) $the_list['uniqid']) !== false && strpos($result_key, 'pc') !== false) {
+                    console_log('Post created filter selected');
                 }
             }
 

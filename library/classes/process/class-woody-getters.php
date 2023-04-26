@@ -804,9 +804,14 @@ class WoodyTheme_WoodyGetters
         }
 
         if (!empty($filter_wrapper) && !empty($filter_wrapper['list_filters'])) {
-            // TAXONOMY | DURATION | PRICE | CUSTOM TERM
+            // TAXONOMY | DURATION | PRICE | CUSTOM TERM | POST_CREATED
             foreach ($filter_wrapper['list_filters'] as $key => $filter) {
                 switch ($filter['list_filter_type']) {
+                    case 'created':
+                        $return[$key] = ['filter_type' => 'created'];
+                        console_log($filter, 'filter');
+                        console_log('Needs to display a datepicker in content list filters');
+                        break;
                     case 'taxonomy':
                         $return[$key] = ['filter_type' => 'custom_terms'];
 
