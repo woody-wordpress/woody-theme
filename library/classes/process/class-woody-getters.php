@@ -810,6 +810,21 @@ class WoodyTheme_WoodyGetters
                     case 'created':
                         $return[$key] = ['filter_type' => 'created'];
                         console_log($filter, 'filter');
+                        switch ($filter['datepicker_type']) {
+                            case 'from_single':
+                                $return[$key]['datepicker_type'] = 'single';
+                                $return[$key]['inputname'] = 'cfrom';
+                                break;
+                            case 'to_single':
+                                $return[$key]['datepicker_type'] = 'single';
+                                $return[$key]['inputname'] = 'cto';
+                                break;
+                            default:
+                                $return[$key]['datepicker_type'] = 'daterange';
+                                $return[$key]['inputname'] = 'cbtw';
+
+                                break;
+                        }
                         console_log('Needs to display a datepicker in content list filters');
                         break;
                     case 'taxonomy':
