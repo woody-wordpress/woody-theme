@@ -12,65 +12,65 @@
 * @param  string $type [Type de la vidéo]
 * @return string       [Retourne l'id]
 */
-function rc_getVideoID($url, $type = '')
-{
-    // If Type == 0 or 1 or 2
-    if (is_numeric($type)) {
-        $types = array('youtube', 'vimeo', 'dailymotion');
-        $type = $types[$type];
-    } else {
-        $type = rc_getVideoType($url);
-    }
+// function rc_getVideoID($url, $type = '')
+// {
+//     // If Type == 0 or 1 or 2
+//     if (is_numeric($type)) {
+//         $types = array('youtube', 'vimeo', 'dailymotion');
+//         $type = $types[$type];
+//     } else {
+//         $type = rc_getVideoType($url);
+//     }
 
-    $id = '';
-    if (strpos($url, 'http') !== false) {
-        $url = parse_url($url);
-        switch ($type) {
-            // Youtube
-            case 'youtube':
-            if ($url['host'] == 'youtu.be') {
-                $id = str_replace('/', '', $url['path']);
-            } elseif (strpos($url['path'], 'embed') !== false) {
-                $id = str_replace('/embed/', '', $url['path']);
-            } elseif (!empty($url['query'])) {
-                $query = explode('&', $url['query']);
-                foreach ($query as $param) {
-                    if (strpos($param, 'v=') !== false) {
-                        $id = str_replace('v=', '', $param);
-                        break;
-                    }
-                }
-            }
+//     $id = '';
+//     if (strpos($url, 'http') !== false) {
+//         $url = parse_url($url);
+//         switch ($type) {
+//             // Youtube
+//             case 'youtube':
+//             if ($url['host'] == 'youtu.be') {
+//                 $id = str_replace('/', '', $url['path']);
+//             } elseif (strpos($url['path'], 'embed') !== false) {
+//                 $id = str_replace('/embed/', '', $url['path']);
+//             } elseif (!empty($url['query'])) {
+//                 $query = explode('&', $url['query']);
+//                 foreach ($query as $param) {
+//                     if (strpos($param, 'v=') !== false) {
+//                         $id = str_replace('v=', '', $param);
+//                         break;
+//                     }
+//                 }
+//             }
 
-            break;
-            // Vimeo
-            case 'vimeo':
-            if (!empty($url['path'])) {
-                $path = explode('/', $url['path']);
-                if (!empty($path[1])) {
-                    $id = $path[1];
-                }
-            }
+//             break;
+//             // Vimeo
+//             case 'vimeo':
+//             if (!empty($url['path'])) {
+//                 $path = explode('/', $url['path']);
+//                 if (!empty($path[1])) {
+//                     $id = $path[1];
+//                 }
+//             }
 
-            break;
-            // Dailymotion : ne fonctionne pas avec fresco.js
-            case 'dailymotion':
-            if (!empty($url['path'])) {
-                $path = explode('/', $url['path']);
-                if (!empty(end($path))) {
-                    $videoname = explode('_', end($path));
-                    $id = current($videoname);
-                }
-            }
+//             break;
+//             // Dailymotion : ne fonctionne pas avec fresco.js
+//             case 'dailymotion':
+//             if (!empty($url['path'])) {
+//                 $path = explode('/', $url['path']);
+//                 if (!empty(end($path))) {
+//                     $videoname = explode('_', end($path));
+//                     $id = current($videoname);
+//                 }
+//             }
 
-            break;
-            default:
-            break;
-        }
-    }
+//             break;
+//             default:
+//             break;
+//         }
+//     }
 
-    return $id;
-}
+//     return $id;
+// }
 
 /**
 * [rc_getVideoThumbnail Récupérer la miniature d'une vidéo]
@@ -80,52 +80,52 @@ function rc_getVideoID($url, $type = '')
 * @param  integer $height [Hauteur de la vidéo]
 * @return string          [Retourne l'url de la miniature]
 */
-function rc_getVideoThumbnail($url, $type = '', $width = 427, $height = 240)
-{
-    $image = [];
-    // If Type == 0 or 1 or 2
-    if (is_numeric($type)) {
-        $types = array('youtube', 'vimeo', 'dailymotion');
-        $type = $types[$type];
-    } else {
-        $type = rc_getVideoType($url);
-    }
+// function rc_getVideoThumbnail($url, $type = '', $width = 427, $height = 240)
+// {
+//     $image = [];
+//     // If Type == 0 or 1 or 2
+//     if (is_numeric($type)) {
+//         $types = array('youtube', 'vimeo', 'dailymotion');
+//         $type = $types[$type];
+//     } else {
+//         $type = rc_getVideoType($url);
+//     }
 
-    $thumbnail = '';
-    $id = rc_getVideoID($url, $type);
-    if (!empty($id)) {
-        switch ($type) {
-            // Youtube
-            case 'youtube':
-            $image = 'https://img.youtube.com/vi/'. $id .'/hqdefault.jpg';
-            break;
-            // Vimeo
-            case 'vimeo':
-            $curl = rc_curl("https://vimeo.com/api/v2/video/". $id .".php");
-            if (!empty($curl)) {
-                $image = unserialize($curl);
-                $image = $image[0]['thumbnail_large'];
-            }
+//     $thumbnail = '';
+//     $id = rc_getVideoID($url, $type);
+//     if (!empty($id)) {
+//         switch ($type) {
+//             // Youtube
+//             case 'youtube':
+//             $image = 'https://img.youtube.com/vi/'. $id .'/hqdefault.jpg';
+//             break;
+//             // Vimeo
+//             case 'vimeo':
+//             $curl = rc_curl("https://vimeo.com/api/v2/video/". $id .".php");
+//             if (!empty($curl)) {
+//                 $image = unserialize($curl);
+//                 $image = $image[0]['thumbnail_large'];
+//             }
 
-            break;
-            // Dailymotion : ne fonctionne pas avec fresco.js
-            case 'dailymotion':
-            $curl = rc_curl("https://api.dailymotion.com/video/". $id ."?fields=thumbnail_large_url");
-            if (!empty($curl)) {
-                $image = json_decode($curl, null, 512, JSON_THROW_ON_ERROR);
-                $image = $image->thumbnail_large_url;
-            }
+//             break;
+//             // Dailymotion : ne fonctionne pas avec fresco.js
+//             case 'dailymotion':
+//             $curl = rc_curl("https://api.dailymotion.com/video/". $id ."?fields=thumbnail_large_url");
+//             if (!empty($curl)) {
+//                 $image = json_decode($curl, null, 512, JSON_THROW_ON_ERROR);
+//                 $image = $image->thumbnail_large_url;
+//             }
 
-            break;
-            default:
-            break;
-        }
+//             break;
+//             default:
+//             break;
+//         }
 
-        $thumbnail = rc_getImageResizedFromApi($width, $height, $image);
-    }
+//         $thumbnail = rc_getImageResizedFromApi($width, $height, $image);
+//     }
 
-    return $thumbnail;
-}
+//     return $thumbnail;
+// }
 
 /**
 * [rc_getVideoIframe Récupérer l'iframe' d'une vidéo]
@@ -134,69 +134,69 @@ function rc_getVideoThumbnail($url, $type = '', $width = 427, $height = 240)
 * @param  boolean $autoplay [Ajoute l'autoplay si vrai]
 * @return string            [Retourne l'url source de l'iframe]
 */
-function rc_getVideoIframe($url, $type = '', $autoplay = false)
-{
-    $embed_url = '';
+// function rc_getVideoIframe($url, $type = '', $autoplay = false)
+// {
+//     $embed_url = '';
 
-    // If Type == 0 or 1 or 2
-    if (is_numeric($type)) {
-        $types = array('youtube', 'vimeo', 'dailymotion');
-        $type = $types[$type];
-    } else {
-        $type = rc_getVideoType($url);
-    }
+//     // If Type == 0 or 1 or 2
+//     if (is_numeric($type)) {
+//         $types = array('youtube', 'vimeo', 'dailymotion');
+//         $type = $types[$type];
+//     } else {
+//         $type = rc_getVideoType($url);
+//     }
 
-    if (!empty($type)) {
-        $id = rc_getVideoID($url, $type);
-        if (!empty($id)) {
-            switch ($type) {
-                // Youtube
-                case 'youtube':
-                $embed_url = '//www.youtube.com/embed/'. $id .'?rel=0';
-                if ($autoplay) {
-                    $embed_url .= '&autoplay=1&showinfo=0&modestbranding=1';
-                }
+//     if (!empty($type)) {
+//         $id = rc_getVideoID($url, $type);
+//         if (!empty($id)) {
+//             switch ($type) {
+//                 // Youtube
+//                 case 'youtube':
+//                 $embed_url = '//www.youtube.com/embed/'. $id .'?rel=0';
+//                 if ($autoplay) {
+//                     $embed_url .= '&autoplay=1&showinfo=0&modestbranding=1';
+//                 }
 
-                break;
-                // Vimeo
-                case 'vimeo':
-                $embed_url = '//player.vimeo.com/video/' . $id;
-                if ($autoplay) {
-                    $embed_url .= '?autoplay=1';
-                }
+//                 break;
+//                 // Vimeo
+//                 case 'vimeo':
+//                 $embed_url = '//player.vimeo.com/video/' . $id;
+//                 if ($autoplay) {
+//                     $embed_url .= '?autoplay=1';
+//                 }
 
-                break;
-                // Dailymotion : ne fonctionne pas avec fresco.js
-                case 'dailymotion':
-                $embed_url = '//www.dailymotion.com/embed/video/' . $id;
-                if ($autoplay) {
-                    $embed_url .= '?autoPlay=1';
-                }
+//                 break;
+//                 // Dailymotion : ne fonctionne pas avec fresco.js
+//                 case 'dailymotion':
+//                 $embed_url = '//www.dailymotion.com/embed/video/' . $id;
+//                 if ($autoplay) {
+//                     $embed_url .= '?autoPlay=1';
+//                 }
 
-                break;
-                default:
-                break;
-            }
-        }
-    }
+//                 break;
+//                 default:
+//                 break;
+//             }
+//         }
+//     }
 
-    return $embed_url;
-}
+//     return $embed_url;
+// }
 
-function rc_getVideoType($url)
-{
-    $type = false;
+// function rc_getVideoType($url)
+// {
+//     $type = false;
 
-    if (strpos($url, 'youtu') !== false) {
-        $type = 'youtube';
-    } elseif (strpos($url, 'vimeo') !== false) {
-        $type = 'vimeo';
-    } elseif (strpos($url, 'dailymotion') !== false || strpos($url, 'dai.ly') !== false) {
-        $type = 'dailymotion';
-    }
+//     if (strpos($url, 'youtu') !== false) {
+//         $type = 'youtube';
+//     } elseif (strpos($url, 'vimeo') !== false) {
+//         $type = 'vimeo';
+//     } elseif (strpos($url, 'dailymotion') !== false || strpos($url, 'dai.ly') !== false) {
+//         $type = 'dailymotion';
+//     }
 
-    return $type;
-}
+//     return $type;
+// }
 
 /**
 * [rc_getImageResizedFromApi  Redimensionner une image via l'API]
@@ -204,11 +204,11 @@ function rc_getVideoType($url)
 * @param  string $image_path  [Url de l'image]
 * @return string              [Url de l'image redimensionnée]
 */
-function rc_getImageStyleByApi($image_style, $image_path)
-{
-    $image_style_infos = rc_getImageStyle($image_style);
-    return rc_getImageResizedFromApi($image_style_infos['width'], $image_style_infos['height'], $image_path);
-}
+// function rc_getImageStyleByApi($image_style, $image_path)
+// {
+//     $image_style_infos = rc_getImageStyle($image_style);
+//     return rc_getImageResizedFromApi($image_style_infos['width'], $image_style_infos['height'], $image_path);
+// }
 
 /**
 * [rc_getImageResizedFromApi description]
@@ -216,21 +216,21 @@ function rc_getImageStyleByApi($image_style, $image_path)
 * @param  [type] $image       [description]
 * @return [type]              [description]
 */
-function rc_getImageResizedFromApi($width, $height, $image_path = null, $quality = '75')
-{
-    if (empty($image_path) || strpos($image_path, 'http') == false) {
-        $image_path = 'https://api.cloudly.space/static/assets/images/resizer/img_404.jpg';
-    }
+// function rc_getImageResizedFromApi($width, $height, $image_path = null, $quality = '75')
+// {
+//     if (empty($image_path) || strpos($image_path, 'http') == false) {
+//         $image_path = 'https://api.cloudly.space/static/assets/images/resizer/img_404.jpg';
+//     }
 
-    if (strpos($image_path, 'rc-dev') == false) {
-        $hash_path = str_replace(array("+", "/"), array("-", "_"), base64_encode($image_path));
-        $image_croped_path = 'https://api.cloudly.space/resize/crop/' . $width . '/' . $height . '/' . $quality . '/' . $hash_path . '/image.jpg';
-    } else {
-        $image_croped_path = $image_path;
-    }
+//     if (strpos($image_path, 'rc-dev') == false) {
+//         $hash_path = str_replace(array("+", "/"), array("-", "_"), base64_encode($image_path));
+//         $image_croped_path = 'https://api.cloudly.space/resize/crop/' . $width . '/' . $height . '/' . $quality . '/' . $hash_path . '/image.jpg';
+//     } else {
+//         $image_croped_path = $image_path;
+//     }
 
-    return $image_croped_path;
-}
+//     return $image_croped_path;
+// }
 
 
 /**

@@ -448,11 +448,12 @@ function embedProviderThumbnail($embed)
             $regex = '/([0-9]+)/';
             preg_match($regex, $src, $matches);
             if (!empty($matches[0])) {
-                $vimeo_data = file_get_contents('https://vimeo.com/api/v2/video/'. $matches[0] .'.json');
-                if (!empty($vimeo_data)) {
-                    $vimeo_data = json_decode($vimeo_data);
-                    $return = $vimeo_data[0]->thumbnail_large;
-                }
+                return 'https://vumbnail.com/' . $matches[0] . '.jpg';
+                // $vimeo_data = file_get_contents('https://vimeo.com/api/v2/video/'. $matches[0] .'.json');
+                // if (!empty($vimeo_data)) {
+                //     $vimeo_data = json_decode($vimeo_data);
+                //     $return = $vimeo_data[0]->thumbnail_large;
+                // }
             }
             break;
     }
