@@ -809,7 +809,6 @@ class WoodyTheme_WoodyGetters
                 switch ($filter['list_filter_type']) {
                     case 'created':
                         $return[$key] = ['filter_type' => 'created'];
-                        console_log($filter, 'filter');
                         switch ($filter['datepicker_type']) {
                             case 'from_single':
                                 $return[$key]['datepicker_type'] = 'single';
@@ -825,7 +824,8 @@ class WoodyTheme_WoodyGetters
 
                                 break;
                         }
-                        console_log('Needs to display a datepicker in content list filters');
+
+                        $return[$key]['filter_name'] = $filter['list_filter_name'];
                         break;
                     case 'taxonomy':
                         $return[$key] = ['filter_type' => 'custom_terms'];
