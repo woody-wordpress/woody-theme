@@ -327,6 +327,98 @@
             },
             "default_value": "",
             "placeholder": ""
+        },
+        {
+            "key": "field_6448d2131e901",
+            "label": "Balises hreflang",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6448d5d32f59e",
+            "label": "Avertissement",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Chaque langue ajoutée permet de créer une balise <link rel='alternate' href='[URL]' hreflang='[CODE LANGUE]'/>. Ces balises sont créées automatiquement si votre Woody est multilingue. Si vous ajoutez une url pour une langue activée sur votre Woody, celle-ci viendra écraser la balise existante",
+            "new_lines": "wpautop",
+            "esc_html": 1
+        },
+        {
+            "key": "field_6448d21fbf8bf",
+            "label": "Langues",
+            "name": "woody_hreflangs",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "field_6448d25734d91",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "Ajouter une langue",
+            "sub_fields": [
+                {
+                    "key": "field_6448d28e8260a",
+                    "label": "Code langue",
+                    "name": "langcode",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "10",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_6448d2d043f3b",
+                    "label": "Url",
+                    "name": "url",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "90",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                }
+            ]
         }
     ],
     "location": [
