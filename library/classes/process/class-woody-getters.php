@@ -804,9 +804,29 @@ class WoodyTheme_WoodyGetters
         }
 
         if (!empty($filter_wrapper) && !empty($filter_wrapper['list_filters'])) {
-            // TAXONOMY | DURATION | PRICE | CUSTOM TERM
+            // TAXONOMY | DURATION | PRICE | CUSTOM TERM | POST_CREATED
             foreach ($filter_wrapper['list_filters'] as $key => $filter) {
                 switch ($filter['list_filter_type']) {
+                    case 'created':
+                        $return[$key] = ['filter_type' => 'created'];
+                        switch ($filter['datepicker_type']) {
+                            case 'from_single':
+                                $return[$key]['datepicker_type'] = 'single';
+                                $return[$key]['inputname'] = 'cfrom';
+                                break;
+                            case 'to_single':
+                                $return[$key]['datepicker_type'] = 'single';
+                                $return[$key]['inputname'] = 'cto';
+                                break;
+                            default:
+                                $return[$key]['datepicker_type'] = 'daterange';
+                                $return[$key]['inputname'] = 'cbtw';
+
+                                break;
+                        }
+
+                        $return[$key]['filter_name'] = $filter['list_filter_name'];
+                        break;
                     case 'taxonomy':
                         $return[$key] = ['filter_type' => 'custom_terms'];
 
