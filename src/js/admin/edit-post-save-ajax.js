@@ -49,30 +49,45 @@ const savePost = (e, publish) => {
         }
     })
     .then(res => {
-        console.log(res);
+        deleteNotices();
+
         if (res.url.includes('wp-login')) {
             if (spinner) spinner.classList.remove('is-active');
-            createNotice('notice-error', `Impossible d'enregistrer la page, veuillez vous reconnecter.`);
+            createNotice('notice-error', 'Impossible d\'enregistrer la page, d\'après vos cookies, vous êtes déconnecté. Ne quittez pas cette page ou vos modifications seront perdues.</br>Pas de panique, il suffit de vous reconnecter à partir d\'un autre onglet puis d\'enregistrer cette page.');
             return;
         }
 
-        if (spinner) spinner.classList.remove('is-active');
-        createNotice('notice-success', 'Page mise à jour.');
+        if(res.status == 200){
+            if (spinner) spinner.classList.remove('is-active');
+            createNotice('notice-success', 'Page mise à jour. Vos modifications ont été enregistrées correctement');
 
-        // Reset unload event on ACF fields
-        acf.unload.reset();
+            // Reset unload event on ACF fields
+            acf.unload.reset();
 
-        // Reset beforeunload event with vanilla
-        window.addEventListener('beforeunload', () => false);
-        // Reset beforeunload event with jquery
-        $(window).off('beforeunload');
+            // Reset beforeunload event with vanilla
+            window.addEventListener('beforeunload', () => false);
+            // Reset beforeunload event with jquery
+            $(window).off('beforeunload');
+        } else {
+            createNotice('notice-error', 'Une erreur s\'est produite.</br>Code erreur : ' + res.status + ' - Statut : ' + res.statusText + '</br>Dans le cas d\'une erreur 500 Internal Server Error, vérifiez que vous êtes toujours connecté à internet');
+        }
 
     }).catch(err => {
         console.log(err);
+        deleteNotices();
         if (spinner) spinner.classList.remove('is-active');
-        createNotice('notice-error', `Une erreur s'est produite lors de la mise à jour de la page.</br>`);
+        createNotice('notice-error', 'Vos modification n\'ont pas pu être enregistrées en raison d\'une erreur.</br>Code erreur : ' + err.status + ' - Statut : ' + err.statusText);
     });
 };
+
+const deleteNotices = () => {
+    let notices = document.querySelectorAll('#wpbody-content>.wrap>.custom-notice');
+    if(notices.length > 0){
+        notices.forEach(notice => {
+            notice.remove();
+        });
+    }
+}
 
 /**
  * Creates a notice and displays it below "wp-header-end".
