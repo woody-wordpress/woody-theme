@@ -99,7 +99,6 @@ class WoodyTheme_WoodyProcess
                 break;
             case 'content_list':
                 $return = $this->compilers->formatListContent($layout, $context['post'], $context['woody_components']);
-                // $return = $this->compilers->formatFullContentList($layout, $context['post'], $context['woody_components']);
                 break;
             case 'gallery':
                 // Ajout des données Instagram + champs personnalisés dans le contexte des images
@@ -574,6 +573,9 @@ class WoodyTheme_WoodyProcess
             $the_page_offset = (empty($_GET[$uniqid])) ? '' : htmlentities(stripslashes($_GET[$uniqid]));
             $the_query['paged'] = (empty($the_page_offset)) ? 1 : $the_page_offset;
         }
+
+        // On ajoute la date_query
+        $the_query['date_query'] = (empty($query_form['focus_date_query'])) ? '' : $query_form['focus_date_query'];
 
         // On ajoute la tax_query
         $the_query['tax_query'] = (empty($tax_query)) ? '' : $tax_query;
