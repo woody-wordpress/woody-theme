@@ -412,7 +412,7 @@ class WoodyTheme_WoodyCompilers
                     } else {
                         $list_el_wrapper['focused_trip_price']['min'] = $input_value;
                     }
-                } elseif(strpos($result_key, (string) $the_list['uniqid']) !== false && strpos($result_key, 'cbtw') !== false) {
+                } elseif(strpos($result_key, (string) $the_list['uniqid']) !== false && strpos($result_key, 'cbtw') !== false && !empty($input_value)) {
                     $dates = explode(" au ", $input_value);
 
                     if(!empty($dates)) {
@@ -428,7 +428,7 @@ class WoodyTheme_WoodyCompilers
                             ]
                         ];
                     }
-                } elseif(strpos($result_key, (string) $the_list['uniqid']) !== false && strpos($result_key, 'cto') !== false) {
+                } elseif(strpos($result_key, (string) $the_list['uniqid']) !== false && strpos($result_key, 'cto') !== false && !empty($input_value)) {
                     $safe_date = \DateTime::createFromFormat('d/m/Y', $input_value);
 
                     $list_el_wrapper['focus_date_query'] = [
@@ -438,7 +438,7 @@ class WoodyTheme_WoodyCompilers
                             'inclusive' => true
                         ]
                     ];
-                } elseif(strpos($result_key, (string) $the_list['uniqid']) !== false && strpos($result_key, 'cfrom') !== false) {
+                } elseif(strpos($result_key, (string) $the_list['uniqid']) !== false && strpos($result_key, 'cfrom') !== false  && !empty($input_value)) {
                     $safe_date = \DateTime::createFromFormat('d/m/Y', $input_value);
 
                     $list_el_wrapper['focus_date_query'] = [
