@@ -551,8 +551,9 @@ function formatDate($date, $format = 'd F Y')
     $locale = empty(pll_current_language()) ? PLL_DEFAULT_LOCALE : pll_current_language('locale');
 
     \Moment\Moment::setLocale($locale);
-    $m = new \Moment\Moment($date);
-    $m->setTimezone(WOODY_TIMEZONE);
+    $m = new \Moment\Moment();
+    $m->setTimezone(date_default_timezone_get());
+    $m->setTimestamp(strtotime($date));
 
     return $m->format($format);
 }
