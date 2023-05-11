@@ -336,6 +336,7 @@ class WoodyTheme_Enqueue_Assets
             'jsdelivr_flatpickr_l10n',
             'jsdelivr_plyr',
             'jsdelivr_jscookie',
+            'jsdelivr_rellax',
             'wp-i18n',
         ];
 
