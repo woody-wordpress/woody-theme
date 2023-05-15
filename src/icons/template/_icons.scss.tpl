@@ -1,5 +1,6 @@
 @font-face {
     font-family: "<%= fontName %>";
+    font-display: swap;
     src: url('<%= fontPath %><%= fontName %>.eot<%= cacheBusterQueryString %>');
     src: url('<%= fontPath %><%= fontName %>.eot?<%= cacheBuster %>#iefix') format('eot'),
         url('<%= fontPath %><%= fontName %>.woff2<%= cacheBusterQueryString %>') format('woff2'),
