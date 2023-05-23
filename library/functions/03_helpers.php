@@ -3,6 +3,7 @@
 use WoodyProcess\Getters\WoodyTheme_WoodyGetters;
 use WoodyProcess\Compilers\WoodyTheme_WoodyCompilers;
 use WoodyProcess\Tools\WoodyTheme_WoodyProcessTools;
+use WoodyProcess\Process\WoodyTheme_WoodyProcess;
 
 // ***************************************************************************************//
 // Get previews - Retournent des tableaux de données compatibles avec les templates Woody //
@@ -60,4 +61,10 @@ function getAttachmentMoreData($attachment_id)
 {
     $tools = new WoodyTheme_WoodyProcessTools();
     return $tools->getAttachmentMoreData($attachment_id);
+}
+
+function processWoodySections($sections, $context)
+{
+    $tools = new WoodyTheme_WoodyProcess();
+    return $tools->processWoodySections($sections, $context);
 }
