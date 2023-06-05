@@ -299,6 +299,7 @@ class WoodyTheme_WoodyProcess
         if (!empty($wrapper)) {
             foreach ($wrapper as $grid_key => $grid) {
                 $grid_content = [];
+                $grid_content['no_padding'] = empty($grid['scope_no_padding']) ? false : $grid['scope_no_padding'];
                 if (!empty($uniqIid_prefix) && is_numeric($grid_key)) {
                     $wrapper[$grid_key]['el_id'] = $uniqIid_prefix . '-' . uniqid();
                 }
