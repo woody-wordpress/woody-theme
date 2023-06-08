@@ -182,9 +182,9 @@ class WoodyTheme_Taxonomy
                     'search_items' => 'Rechercher parmi les types de média',
                     'popular_items' => 'Types de média les plus utilisés'
                 ],
-                'hierarchical' => false,
+                'hierarchical' => true,
                 'show_ui' => false,
-                'show_in_menu' => false,
+                'show_in_menu' => false
             )
         );
 
