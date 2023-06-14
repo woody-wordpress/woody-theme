@@ -22,7 +22,7 @@ class WoodyTheme_Seo
         add_action('admin_menu', [$this, 'generateMenu'], 10);
         add_action('acf/init', [$this, 'acfAddFields']);
         add_action('members_register_caps', [$this, 'membersRegisterCaps']);
-        add_action('acf/save_post', [$this, 'test']);
+        add_action('acf/save_post', [$this, 'saveTranslation']);
     }
 
     public function woodySeoTransformPattern($string)
@@ -115,60 +115,88 @@ class WoodyTheme_Seo
     }
 
 
-    public function test($post)
+    public function saveTranslation($post)
     {
-
-        $args = array(
-            'post_type' => 'polylang_mo',
-            'post_status' => array('private'),
-        );
+        $test = [];
         if($post == 'options') {
+            error_log('test de passage',3,'/tmp/sleepy');
             if(get_current_screen()->id == 'toplevel_page_woodyseo_settings') {
-                $languages = pll_languages_list();
+                $languages = pll_the_languages(array('raw'=>1));
+
+                //TEST
+                $test['Liste langue'] = $languages;
+
                 $blog_name = get_field_object('field_64887499e6961');
                 $blog_description = get_field_object('field_64887519e6962');
                 $touristic_sheet = get_field_object('field_64887531e6963');
-                foreach ($languages as $lang) {
-                    $blog_name['name'] .= '_' . $lang;
-                    $blog_description['name'] .= '_' . $lang;
-                    $touristic_sheet['name'] .= '_' . $lang;
+                $base_title = get_bloginfo('name');
+                $base_description = get_bloginfo('description');
+                foreach ($languages as $key->$lang) {
+
+                    $blog_name_lang = $blog_name['name']. '_' . $lang['slug'];
+                    $blog_description_lang = $blog_description['name']. '_' . $lang['slug'];
+                    $touristic_sheet_lang = $touristic_sheet['name']. '_' . $lang['slug'];
+                    $args = array(
+                        'post_type' => 'polylang_mo',
+                        'post_status' => array('private'),
+                        'name' => 'polylang_mo_'.$lang['id']
+                    );
+
+                    $query = new \WP_Query($args);
+
+                    //TEST
+                    $test['Liste posts'][$lang['slug']] = $query->posts;
+                    $test['Liste args'][$lang['slug']] = $args;
+
+                    $post = $query->have_posts();
+                    error_log(var_export('toto',true),3,'/tmp/sleepy20');
+                    error_log(var_export($lang,true),3,'/tmp/sleepy20');
+                    $new_sheet = true;
+                    $new_title = true;
+                    $new_description = true;
+                    $string_translations = maybe_unserialize(get_post_meta($post->ID,'',true)['_pll_strings_translations'][0]);
+
+                    // TEST
+                    $test[$lang['slug']]['lang'] = [get_field($blog_name_lang,'options'),get_field($blog_description_lang,'options'),get_field($touristic_sheet_lang,'options')];
+                    $test[$lang['slug']]['base'] = [$base_description,$base_title,'touristic_sheet'];
+                    $test[] = 'test de passage';
+
+                    foreach($string_translations as &$string_translation) {
+
+                        if( in_array('touristic_sheet',$string_translation)){
+                            $string_translation[1] = get_field($touristic_sheet_lang,'options');
+                            $new_sheet = false;
+                        }
+                        if( in_array($base_title,$string_translation)){
+                            $string_translation[1] = get_field($blog_name_lang,'options');
+                            $new_title = false;
+                        }
+                        if( in_array($base_description,$string_translation)){
+                            $string_translation[1] = get_field($blog_description_lang,'options');
+                            $new_description = false;
+                        }
+                    }
+                    if($new_sheet) {
+                        error_log('test de passage sheet',3,'/tmp/sleepy11');
+                        $string_translations[] = ['touristic_sheet',get_field($touristic_sheet_lang,'options')];
+                    }
+                    if($new_title) {
+                        error_log('test de passage title',3,'/tmp/sleepy11');
+                        $string_translations[] = [$base_title,get_field($blog_name_lang,'options')];
+                    }
+                    if($new_description) {
+                        error_log('test de passage description',3,'/tmp/sleepy11');
+                        $string_translations[] = [$base_description,get_field($blog_description_lang,'options')];
+                    }
+
+                    //TEST
+                    $test['post ID'][$lang->slug] = $post->ID;
+
+                    update_post_meta($post->ID,'_pll_strings_translations',$string_translations);
                 }
+                error_log(print_r($test,true),3,'/tmp/sleepy19');
             }
         }
-        error_log(print_r(get_current_screen(),true),3,'/tmp/sleep1');
-        error_log(print_r(get_fields($post->ID),true),3,'/tmp/sleep');
-        // $query = new \WP_Query($args);
-        // $title = get_bloginfo('name');
-        // $description = get_bloginfo('description');
-        // $test4 = [];
-        // foreach($query->posts as $post) {
-        //     $test3 = maybe_unserialize(get_post_meta($post->ID,'',true)['_pll_strings_translations'][0]);
-        //     foreach($test3 as &$field) {
-        //         if( in_array('touristic_sheet',$field)){
-        //             $field[1] = get_field();
-        //             $new_sheet = false;
-        //         }
-        //         if( in_array($title,$field)){
-        //             $field[1] = get_field();
-        //             $new_title = false;
-        //         }
-        //         if( in_array($description,$field)){
-        //             $field[1] = get_field();
-        //             $new_description = false;
-        //         }
-        //     }
-        //     if($new_sheet) {
-        //         $test3[] = ['touristic_sheet',get_field()];
-        //     }
-        //     if($new_title) {
-        //         $test3[] = [$title,get_field()];
-        //     }
-        //     if($new_description) {
-        //         $test3[] = [$description,get_field()];
-        //     }
-        //     update_post_meta($post->ID,'_pll_strings_translations',$test3);
-        //     $test4[] = maybe_unserialize(get_post_meta($post->ID,'',true)['_pll_strings_translations'][0]);
-        // }
     }
 
 }
