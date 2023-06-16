@@ -1,11 +1,30 @@
+
 {
     "key": "group_5e16e3b48d2d6",
     "title": "Personnaliser les métadonnées",
     "fields": [
         {
+            "key": "field_64871ca5ab8e4",
+            "label": "métadonnée",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
             "key": "field_5e17f4d29d2d4",
-            "label": "Centre d'information touristique",
+            "label": "Centre d'information touristique test",
             "name": "woody_tourist_information_center",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "Activation des micro-données \"TouristInformationCenter\" en page d'accueil",
             "required": 0,
@@ -16,15 +35,16 @@
                 "id": ""
             },
             "message": "",
-            "default_value": false,
-            "ui": 1,
+            "default_value": 0,
             "ui_on_text": "",
-            "ui_off_text": ""
+            "ui_off_text": "",
+            "ui": 1
         },
         {
             "key": "field_5e17f4d29d3e5",
             "label": "Informations supplémentaires \"TouristInformationCenter\"",
             "name": "woody_tourist_informations",
+            "aria-label": "",
             "type": "group",
             "instructions": "",
             "required": 0,
@@ -48,6 +68,7 @@
                     "key": "field_5e17f4d29f5e9",
                     "label": "Ville",
                     "name": "woody_tourist_information_city",
+                    "aria-label": "",
                     "type": "text",
                     "instructions": "",
                     "required": 0,
@@ -67,6 +88,7 @@
                     "key": "field_5e17f4d29b6d8",
                     "label": "Adresse",
                     "name": "woody_tourist_information_address",
+                    "aria-label": "",
                     "type": "text",
                     "instructions": "",
                     "required": 0,
@@ -80,12 +102,13 @@
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
-                    "maxlength": "50"
+                    "maxlength": 50
                 },
                 {
                     "key": "field_5e17f4d29e4f6",
-                    "label": "Pays/Localité",
+                    "label": "Pays\/Localité",
                     "name": "woody_tourist_information_country",
+                    "aria-label": "",
                     "type": "text",
                     "instructions": "",
                     "required": 0,
@@ -105,6 +128,7 @@
                     "key": "field_5e17f5d30d3d8",
                     "label": "Région",
                     "name": "woody_tourist_information_region",
+                    "aria-label": "",
                     "type": "text",
                     "instructions": "",
                     "required": 0,
@@ -124,6 +148,7 @@
                     "key": "field_5e17f4d29f5f7",
                     "label": "Code postal",
                     "name": "woody_tourist_information_postal",
+                    "aria-label": "",
                     "type": "text",
                     "instructions": "",
                     "required": 0,
@@ -145,6 +170,7 @@
             "key": "field_5e16e3c18c1c3",
             "label": "Métadonnées du site",
             "name": "woody_custom_meta",
+            "aria-label": "",
             "type": "textarea",
             "instructions": "Ajouter les metadonnées personnalisées au format html",
             "required": 0,
@@ -159,6 +185,23 @@
             "maxlength": "",
             "rows": 6,
             "new_lines": ""
+        },
+        {
+            "key": "field_64871396346a3",
+            "label": "Traduction",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
         }
     ],
     "location": [
@@ -176,7 +219,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "",
-    "modified": 1578559206
+    "show_in_rest": 0
 }
