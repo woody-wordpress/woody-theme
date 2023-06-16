@@ -70,40 +70,12 @@ class WoodyTheme_Seo
             }
 
 
-            $woody_custom_meta_field = get_field_object('field_64887499e6961');
+            $woody_main_data_field = get_field_object('field_648c24a4dddad');
 
             foreach ($languages as $lang) {
-                $new_field = $woody_custom_meta_field;
+                $new_field = $woody_main_data_field;
                 $new_field['key'] .= '_' . $lang;
-                $new_field['label'] .= ' (uniquement sur ' . strtoupper($lang) . ')';
-                $new_field['name'] .= '_' . $lang;
-                $new_field['_name'] .= '_' . $lang;
-                $new_field['value'] = get_field($new_field['name']);
-                $new_field['parent'] = 'group_5e16e3b48d2d6';
-
-                acf_add_local_field($new_field);
-            }
-
-            $woody_custom_meta_field = get_field_object('field_64887519e6962');
-
-            foreach ($languages as $lang) {
-                $new_field = $woody_custom_meta_field;
-                $new_field['key'] .= '_' . $lang;
-                $new_field['label'] .= ' (uniquement sur ' . strtoupper($lang) . ')';
-                $new_field['name'] .= '_' . $lang;
-                $new_field['_name'] .= '_' . $lang;
-                $new_field['value'] = get_field($new_field['name']);
-                $new_field['parent'] = 'group_5e16e3b48d2d6';
-
-                acf_add_local_field($new_field);
-            }
-
-            $woody_custom_meta_field = get_field_object('field_64887531e6963');
-
-            foreach ($languages as $lang) {
-                $new_field = $woody_custom_meta_field;
-                $new_field['key'] .= '_' . $lang;
-                $new_field['label'] .= ' (uniquement sur ' . strtoupper($lang) . ')';
+                $new_field['label'] .= ' ' . strtoupper($lang);
                 $new_field['name'] .= '_' . $lang;
                 $new_field['_name'] .= '_' . $lang;
                 $new_field['value'] = get_field($new_field['name']);
@@ -119,7 +91,7 @@ class WoodyTheme_Seo
     {
         $test = [];
         if($post == 'options') {
-            error_log('test de passage',3,'/tmp/sleepy');
+            error_log('test de passage', 3, '/tmp/sleepy');
             if(get_current_screen()->id == 'toplevel_page_woodyseo_settings') {
                 $languages = pll_the_languages(array('raw'=>1));
 
@@ -149,52 +121,52 @@ class WoodyTheme_Seo
                     $test['Liste args'][$lang['slug']] = $args;
 
                     $post = $query->have_posts();
-                    error_log(var_export('toto',true),3,'/tmp/sleepy20');
-                    error_log(var_export($lang,true),3,'/tmp/sleepy20');
+                    error_log(var_export('toto', true), 3, '/tmp/sleepy20');
+                    error_log(var_export($lang, true), 3, '/tmp/sleepy20');
                     $new_sheet = true;
                     $new_title = true;
                     $new_description = true;
-                    $string_translations = maybe_unserialize(get_post_meta($post->ID,'',true)['_pll_strings_translations'][0]);
+                    $string_translations = maybe_unserialize(get_post_meta($post->ID, '', true)['_pll_strings_translations'][0]);
 
                     // TEST
-                    $test[$lang['slug']]['lang'] = [get_field($blog_name_lang,'options'),get_field($blog_description_lang,'options'),get_field($touristic_sheet_lang,'options')];
+                    $test[$lang['slug']]['lang'] = [get_field($blog_name_lang, 'options'),get_field($blog_description_lang, 'options'),get_field($touristic_sheet_lang, 'options')];
                     $test[$lang['slug']]['base'] = [$base_description,$base_title,'touristic_sheet'];
                     $test[] = 'test de passage';
 
                     foreach($string_translations as &$string_translation) {
 
-                        if( in_array('touristic_sheet',$string_translation)){
-                            $string_translation[1] = get_field($touristic_sheet_lang,'options');
+                        if(in_array('touristic_sheet', $string_translation)) {
+                            $string_translation[1] = get_field($touristic_sheet_lang, 'options');
                             $new_sheet = false;
                         }
-                        if( in_array($base_title,$string_translation)){
-                            $string_translation[1] = get_field($blog_name_lang,'options');
+                        if(in_array($base_title, $string_translation)) {
+                            $string_translation[1] = get_field($blog_name_lang, 'options');
                             $new_title = false;
                         }
-                        if( in_array($base_description,$string_translation)){
-                            $string_translation[1] = get_field($blog_description_lang,'options');
+                        if(in_array($base_description, $string_translation)) {
+                            $string_translation[1] = get_field($blog_description_lang, 'options');
                             $new_description = false;
                         }
                     }
                     if($new_sheet) {
-                        error_log('test de passage sheet',3,'/tmp/sleepy11');
-                        $string_translations[] = ['touristic_sheet',get_field($touristic_sheet_lang,'options')];
+                        error_log('test de passage sheet', 3, '/tmp/sleepy11');
+                        $string_translations[] = ['touristic_sheet',get_field($touristic_sheet_lang, 'options')];
                     }
                     if($new_title) {
-                        error_log('test de passage title',3,'/tmp/sleepy11');
-                        $string_translations[] = [$base_title,get_field($blog_name_lang,'options')];
+                        error_log('test de passage title', 3, '/tmp/sleepy11');
+                        $string_translations[] = [$base_title,get_field($blog_name_lang, 'options')];
                     }
                     if($new_description) {
-                        error_log('test de passage description',3,'/tmp/sleepy11');
-                        $string_translations[] = [$base_description,get_field($blog_description_lang,'options')];
+                        error_log('test de passage description', 3, '/tmp/sleepy11');
+                        $string_translations[] = [$base_description,get_field($blog_description_lang, 'options')];
                     }
 
                     //TEST
                     $test['post ID'][$lang->slug] = $post->ID;
 
-                    update_post_meta($post->ID,'_pll_strings_translations',$string_translations);
+                    update_post_meta($post->ID, '_pll_strings_translations', $string_translations);
                 }
-                error_log(print_r($test,true),3,'/tmp/sleepy19');
+                error_log(print_r($test, true), 3, '/tmp/sleepy19');
             }
         }
     }
