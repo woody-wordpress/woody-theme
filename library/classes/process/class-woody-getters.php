@@ -116,7 +116,7 @@ class WoodyTheme_WoodyGetters
                 // La donnée de la vignette est saisie en backoffice
                 if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
                     $the_items['items'][$key] = $this->getCustomPreview($item_wrapper['custom_content'], $wrapper, $item_wrapper['content_selection_type']);
-                // La donnée de la vignette correspond à un post sélectionné
+                    // La donnée de la vignette correspond à un post sélectionné
                 } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
                     $item = $item_wrapper['existing_content'];
                     $post = get_post($item['content_selection']);
@@ -161,6 +161,12 @@ class WoodyTheme_WoodyGetters
         if (!empty($wrapper['playlist_conf_id'])) {
             $confId = $wrapper['playlist_conf_id'];
             $lang = apply_filters('woody_autofocus_sheet_lang', pll_current_language());
+
+            // On vérifie si la playlist choisie est précochée pour filtrer les fiches retournées
+            if(!empty($wrapper['autoselect_id'])) {
+                $playlist_params['autoselect_id'] = $wrapper['autoselect_id'];
+            }
+
             $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), $playlist_params, 'json');
             if (!empty($playlist['items'])) {
                 foreach ($playlist['items'] as $item) {
