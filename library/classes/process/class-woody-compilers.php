@@ -269,11 +269,13 @@ class WoodyTheme_WoodyCompilers
         if ($wrapper['semantic_view_type'] == 'manual' && !empty($wrapper['semantic_view_include'])) {
             $the_query = [
                 'post_type' => 'page',
+                'orderby' => 'post__in'
             ];
             foreach ($wrapper['semantic_view_include'] as $included_id) {
                 $the_query['post__in'][] = $included_id;
             }
-        } else {
+        }
+        else {
             $parent_id = $wrapper['semantic_view_type'] == 'sisters' ? wp_get_post_parent_id($post_id) : $post_id;
 
             if (!empty($wrapper['semantic_view_page_types'])) {

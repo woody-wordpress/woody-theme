@@ -208,7 +208,15 @@
             "type": "radio",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5d80fa64e4fa4",
+                        "operator": "==",
+                        "value": "auto"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
                 "class": "",
