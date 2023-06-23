@@ -245,7 +245,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $noindex = false;
         if (!empty($get)) {
             foreach (array_keys($get) as $key) {
-                if (strpos($key, 'section_') !== false || $key == 'autoselect_id') {
+                if (strpos($key, 'section_') !== false || $key == 'autoselect_id' || $key == 'fav') {
                     $noindex = true;
                 }
             }
