@@ -90,6 +90,52 @@
             "return_format": "value"
         },
         {
+            "key": "field_6098edcc04e32",
+            "label": "Fond de carte",
+            "name": "map_provider",
+            "type": "radio",
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "tm": "Touristicmaps",
+                "ign": "IGN"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "parent": "group_5b043b2171504",
+            "default_value": "tm",
+            "layout": "horizontal",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_5c989085888ee",
+            "label": "Paramètres Touristic Maps",
+            "name": "",
+            "type": "message",
+            "wrapper": {
+                "width": 60,
+                "class": "hide-label",
+                "id": ""
+            },
+            "message": "Paramètres Touristic Maps",
+            "new_lines": "wpautop"
+        },
+        {
+            "key": "field_5c9891e2c9133",
+            "label": "Id conf TouristicMaps",
+            "name": "tmaps_confid",
+            "type": "text",
+            "wrapper": {
+                "width": 40,
+                "class": "",
+                "id": ""
+            }
+        },
+        {
             "key": "field_5b043b28ab46a",
             "label": "Marqueurs",
             "name": "markers",
