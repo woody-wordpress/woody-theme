@@ -770,6 +770,58 @@
                     "layout": "block",
                     "prefix_label": 0,
                     "prefix_name": 0
+                },
+                {
+                    "key": "field_6098ef2647ddf",
+                    "label": "Fond de carte",
+                    "name": "map_provider",
+                    "type": "radio",
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "tm": "Touristicmaps",
+                        "ign": "IGN"
+                    },
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "default_value": "tm",
+                    "layout": "horizontal",
+                    "return_format": "value",
+                    "save_other_choice": 0
+                },
+                {
+                    "key": "field_5d1b2b6006044",
+                    "label": "Paramètres Touristic Maps",
+                    "name": "focus_tmaps_params",
+                    "type": "clone",
+                    "wrapper": {
+                        "width": 60,
+                        "class": "hide-label",
+                        "id": ""
+                    },
+                    "clone": [
+                        "field_5c989085888ee"
+                    ],
+                    "new_lines": "wpautop",
+                    "display": "seamless"
+                },
+                {
+                    "key": "field_5d1b2bc606045",
+                    "label": "Identifiant de conf Touristic Maps",
+                    "name": "focus_tmaps_confid",
+                    "type": "clone",
+                    "wrapper":{
+                        "width": 40,
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "field_5c9891e2c9133"
+                    ],
+                    "display": "seamless"
                 }
             ]
         },
