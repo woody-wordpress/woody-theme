@@ -49,8 +49,8 @@ Foundation.addToJquery( $ );
 // import { AccordionMenu } from 'foundation-sites/js/foundation.accordionMenu';
 // Foundation.plugin(AccordionMenu, 'AccordionMenu');
 
-// import { Drilldown } from 'foundation-sites/js/foundation.drilldown';
-// Foundation.plugin(Drilldown, 'Drilldown');
+import { Drilldown } from 'foundation-sites/js/foundation.drilldown';
+Foundation.plugin(Drilldown, 'Drilldown');
 
 import { Dropdown } from 'foundation-sites/js/foundation.dropdown';
 Foundation.plugin( Dropdown, 'Dropdown' );
