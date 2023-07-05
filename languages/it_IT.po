@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.6.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
 "POT-Creation-Date: 2023-03-16T10:24:35+01:00\n"
-"PO-Revision-Date: 2023-03-16 10:37+0100\n"
+"PO-Revision-Date: 2023-06-30 10:38+0200\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.1\n"
 "X-Domain: woody-theme\n"
 
 #. Theme Name of the theme
@@ -428,7 +428,7 @@ msgstr "Spiacente, nessuna pagina corrisponde alla tua ricerca"
 
 #: library/classes/content/class-polylang.php:183
 msgid "Fermer"
-msgstr "Chiudi"
+msgstr "Chiudere"
 
 #: library/classes/content/class-polylang.php:184
 msgid "Menu"
