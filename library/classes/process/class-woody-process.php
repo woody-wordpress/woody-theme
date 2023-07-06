@@ -550,11 +550,13 @@ class WoodyTheme_WoodyProcess
         // NB : si aucun choix n'a été fait, on remonte automatiquement tous les contenus de type page
         $post_type = (!empty($query_form['focused_type']) && $query_form['focused_type'] == 'documents') ? 'attachment' : 'page';
 
+        $excluded_posts = ($query_form['exclude_post'] && !empty($query_form['excluded_posts'])) ? $query_form['excluded_posts'] : [];
+
         $the_query = [
             'post_type' => $post_type,
             'posts_per_page' => (empty($query_form['focused_count'])) ? 12 : $query_form['focused_count'],
             'post_status' => (!empty($query_form['focused_type']) && $query_form['focused_type'] == 'documents') ? ['inherit', 'publish'] : 'publish',
-            'post__not_in' => array($the_post->ID),
+            'post__not_in' => !empty($excluded_posts) ? array_merge(array($the_post->ID), $excluded_posts) : array($the_post->ID),
             'order' => $order,
             'orderby' => $orderby,
             'lang' => pll_get_post_language($the_post->ID),
