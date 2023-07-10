@@ -63,8 +63,8 @@ class WoodyTheme_Plugins_Options
         delete_option('permalink-manager-uris_backup');
         delete_option('permalink-manager-redirects_backup');
 
-        // Force Disable indexation
-        if (WP_ENV != 'dev' || (WP_ENV == 'dev' && empty(get_option('upload_url_path')))) {
+        // Force upload_url_path
+        if (WP_ENV == 'prod' || empty(get_option('upload_url_path'))) {
             update_option('upload_url_path', WP_UPLOAD_URL, true);
         }
 

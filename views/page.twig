@@ -1,8 +1,7 @@
 {% extends "base.twig" %}
 {% block content %}
     {% if is_frontpage %}
-        <h1 class="frontpage-htitle">
-            {{ site.title|default }}</h1>
+        <h1 class="frontpage-htitle">{{ frontpage_title|default(site.title) }}</h1>
     {% endif %}
     <main class="content-type-page {{ page_type|default }}" id="main-content">
 
