@@ -94,6 +94,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $this->context['home_slider'] = $this->compilers->formatHomeSlider($this->context['post'], $this->context['woody_components']);
         $this->context['after_landswpr'] = empty($this->context['page_parts']['after_landswpr']) ? '' : $this->context['page_parts']['after_landswpr'];
         $this->context['bookblock'] = $this->compilers->formatBookBlock($this->context['post'], $this->context['woody_components'], $layout = []);
+        $this->context['frontpage_title'] = get_field(sprintf('blog_data_%s_frontpage_title', pll_current_language()), 'options');
     }
 
     protected function pageContext()
