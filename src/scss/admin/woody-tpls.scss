@@ -56,22 +56,34 @@
             transition: color .3s;
         }
 
-        .tpl-new {
+        .tpl-badges {
             position: absolute;
             top: 10px;
             right: 10px;
+            display: flex;
+            gap: 10px;
+            will-change: tansform;
+            transition: transform .3s;
+        }
+
+        .tpl-badge {
             font-size: 10px;
             font-weight: 600;
             text-align: center;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: white;
-            background-color: #50c054;
             border-radius: 30px;
             margin: 0;
             padding: 5px 10px;
-            will-change: tansform;
-            transition: transform .3s;
+
+            &.tpl-new {
+                background-color: #50c054;
+            }
+
+            &.tpl-custom-theme {
+                background-color: #23282d;
+            }
         }
 
         &.selected,
@@ -80,7 +92,7 @@
                 transform: scale(.95);
             }
 
-            .tpl-new {
+            .tpl-badges {
                 transform: translate(-9px, 9px);
             }
         }
