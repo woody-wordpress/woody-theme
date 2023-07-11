@@ -131,6 +131,10 @@ abstract class WoodyTheme_TemplateAbstract
             $this->globals['env'] = WP_ENV;
         }
 
+        if (empty($this->globals['site_key'])) {
+            $this->globals['site_key'] = WP_SITE_KEY;
+        }
+
         if (empty($this->globals['is_mobile'])) {
             $this->globals['is_mobile'] = wp_is_mobile();
         }
