@@ -623,12 +623,20 @@ class WoodyTheme_ACF
                 'blocks-hero-tpl_12',
                 'blocks-hero-tpl_02',
                 'blocks-hero-tpl_09',
+                'blocks-hero-tpl_20',
                 'blocks-hero-tpl_03',
                 'blocks-hero-tpl_07',
                 'blocks-hero-tpl_04',
                 'blocks-hero-tpl_13',
                 'blocks-hero-tpl_06',
-                'blocks-hero-tpl_05'
+                'blocks-hero-tpl_05',
+                'blocks-hero-tpl_18',
+                'blocks-hero-tpl_19',
+                'blocks-hero-tpl_15',
+                'blocks-hero-tpl_16',
+                'blocks-hero-tpl_21',
+                'blocks-hero-tpl_22',
+                'blocks-hero-tpl_17'
             ],
             'teasers' => [
                 'blocks-page_teaser-tpl_01',
