@@ -592,6 +592,8 @@ class WoodyTheme_WoodyCompilers
             }
         }
 
+        $return = apply_filters('woody_custom_summary', $return);
+
         return $return;
     }
 
