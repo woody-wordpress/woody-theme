@@ -463,8 +463,11 @@ class WoodyTheme_WoodyCompilers
             $the_items['empty'] = __('Désolé, aucun contenu ne correspond à votre recherche', 'woody-theme');
         }
 
-        // Show button
         $the_items['display_button'] = (empty($list_el_wrapper['display_button'])) ? false : $list_el_wrapper['display_button'];
+
+        if (!empty($the_items['display_button'])) {
+            $the_items['button_classes'] = apply_filters('woody_card_button_classes', '', $wrapper);
+        }
 
         // On compile la grille des éléments
         $the_list['the_grid'] = \Timber::compile($twigPaths[$wrapper['the_list_elements']['listgrid_woody_tpl']], $the_items);
