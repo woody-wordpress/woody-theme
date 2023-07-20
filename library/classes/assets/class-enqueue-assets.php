@@ -76,7 +76,7 @@ class WoodyTheme_Enqueue_Assets
 
         // Added defer on front
         if (!is_admin()) {
-            add_filter('script_loader_tag', [$this, 'scriptLoaderTag'], 10, 2);
+            add_filter('script_loader_tag', [$this, 'scriptLoaderTag'], 10, 3);
             add_filter('style_loader_tag', [$this, 'styleLoaderTag'], 10, 2);
         }
     }
@@ -96,8 +96,12 @@ class WoodyTheme_Enqueue_Assets
         unset($wp_scripts->registered['wp-i18n']->extra);
     }
 
-    public function scriptLoaderTag($tag, $handle)
+    public function scriptLoaderTag($tag, $handle, $src)
     {
+        if($handle === 'delayed_script') {
+            return '<script type="module" src="' . esc_url($src) . '"></script>';
+        }
+
         return str_replace(' src', ' defer src', $tag);
     }
 
@@ -152,30 +156,6 @@ class WoodyTheme_Enqueue_Assets
                 break;
         }
 
-        // dependencies for raccourci map js
-        $js_dependencies_rcmap = [
-            'jquery', 'touristicmaps_leaflet',
-        ];
-
-        // get map keys
-        $map_keys = $this->siteConfig['mapProviderKeys'];
-        if (!empty($map_keys)) {
-            $map_keys['v'] = $this->wThemeVersion;
-        }
-
-        if (isset($map_keys['otmKey'])) {
-            $js_dependencies_rcmap[] = 'touristicmaps_tangram';
-        }
-
-        if (isset($map_keys['gmKey'])) {
-            $js_dependencies_rcmap[] = 'gg_maps';
-        }
-
-        // SHEET: need to load tangram always for now (bug in vendor angular)
-        if ($this->isTouristicSheet && !in_array('touristicmaps_tangram', $js_dependencies_rcmap)) {
-            $js_dependencies_rcmap[] = 'touristicmaps_tangram';
-        }
-
         // CDN hosted jQuery placed in the header, as some plugins require that jQuery is loaded in the header.
         $jQuery_version = '3.6.4';
         if ($this->isTouristicPlaylist || ($this->isTouristicSheet && !defined('IS_WOODY_HAWWWAI_SHEET_ENABLE'))) {
@@ -210,27 +190,7 @@ class WoodyTheme_Enqueue_Assets
         // Menus links obfuscation
         wp_enqueue_script('obf', get_template_directory_uri() . '/src/js/static/obf.min.js', [], null);
 
-        // Touristic maps libraries
-        wp_enqueue_script('touristicmaps_leaflet', 'https://tiles.touristicmaps.com/libs/leaflet.min.js', [], null);
-        wp_enqueue_style('leaflet_css', 'https://tiles.touristicmaps.com/libs/tmaps.min.css', [], null);
-
-        //TODO: fix bug with Gmap and Universal Map
-        // if (isset($map_keys['otmKey']) || isset($map_keys['ignKey']) || $this->isTouristicSheet || $this->isRoadBookSheet) {
-        // need to load tangram always in TOURISTIC SHEET for now (bug in vendor angular) ↓
-        wp_enqueue_script('touristicmaps_tangram', 'https://tiles.touristicmaps.com/libs/tangram.min.js', [], null);
-        wp_enqueue_script('touristicmaps_cluster', 'https://tiles.touristicmaps.com/libs/markercluster.min.js', [], null);
-        wp_enqueue_script('touristicmaps_locate', 'https://tiles.touristicmaps.com/libs/locate.min.js', [], null);
-        wp_enqueue_script('touristicmaps_geocoder', 'https://tiles.touristicmaps.com/libs/geocoder.min.js', [], null);
-        wp_enqueue_script('touristicmaps_fullscreen', 'https://tiles.touristicmaps.com/libs/fullscreen.min.js', [], null);
-        // }
-
-        if (isset($map_keys['gmKey'])) {
-            wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?key=' . $map_keys['gmKey'] . '&v=3.33&libraries=geometry,places', [], null);
-        } elseif ($this->isTouristicSheet || $this->isRoadBookSheet) { // absolutely needed in angular
-            wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?v=3.33&libraries=geometry,places', [], null);
-        }
-
-        wp_enqueue_script('hawwwai_universal_map', $apirender_base_uri . '/assets/scripts/raccourci/universal-mapV2.' . $jsModeSuffix . '.js', $js_dependencies_rcmap, null);
+        wp_enqueue_script('delayed_script', 'https://tmaps.rc.preprod:8181/v2/delayed-script.mjs', [], null);
 
         // Playlist libraries
         if ($this->isTouristicPlaylist) {
@@ -259,6 +219,54 @@ class WoodyTheme_Enqueue_Assets
             // }
             wp_enqueue_script('hawwwai_playlist', $apirender_base_uri . '/assets/scripts/raccourci/playlist.' . $jsModeSuffix . '.js', $js_dependencies__playlist, null);
             $playlist_map_query = empty($map_keys) ? '' : '?' . http_build_query($map_keys);
+
+            // Touristic maps libraries
+            // dependencies for raccourci map js
+            $js_dependencies_rcmap = [
+                'jquery', 'touristicmaps_leaflet',
+            ];
+
+            // get map keys
+            $map_keys = $this->siteConfig['mapProviderKeys'];
+            if (!empty($map_keys)) {
+                $map_keys['v'] = $this->wThemeVersion;
+            }
+
+            if (isset($map_keys['otmKey'])) {
+                $js_dependencies_rcmap[] = 'touristicmaps_tangram';
+            }
+
+            if (isset($map_keys['gmKey'])) {
+                $js_dependencies_rcmap[] = 'gg_maps';
+            }
+
+            // SHEET: need to load tangram always for now (bug in vendor angular)
+            if ($this->isTouristicSheet && !in_array('touristicmaps_tangram', $js_dependencies_rcmap)) {
+                $js_dependencies_rcmap[] = 'touristicmaps_tangram';
+            }
+
+
+            wp_enqueue_script('touristicmaps_leaflet', 'https://tiles.touristicmaps.com/libs/leaflet.min.js', [], null);
+            wp_enqueue_style('leaflet_css', 'https://tiles.touristicmaps.com/libs/tmaps.min.css', [], null);
+
+            //TODO: fix bug with Gmap and Universal Map
+            // if (isset($map_keys['otmKey']) || isset($map_keys['ignKey']) || $this->isTouristicSheet || $this->isRoadBookSheet) {
+            // need to load tangram always in TOURISTIC SHEET for now (bug in vendor angular) ↓
+            wp_enqueue_script('touristicmaps_tangram', 'https://tiles.touristicmaps.com/libs/tangram.min.js', [], null);
+            wp_enqueue_script('touristicmaps_cluster', 'https://tiles.touristicmaps.com/libs/markercluster.min.js', [], null);
+            wp_enqueue_script('touristicmaps_locate', 'https://tiles.touristicmaps.com/libs/locate.min.js', [], null);
+            wp_enqueue_script('touristicmaps_geocoder', 'https://tiles.touristicmaps.com/libs/geocoder.min.js', [], null);
+            wp_enqueue_script('touristicmaps_fullscreen', 'https://tiles.touristicmaps.com/libs/fullscreen.min.js', [], null);
+            // }
+
+            if (isset($map_keys['gmKey'])) {
+                wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?key=' . $map_keys['gmKey'] . '&v=3.33&libraries=geometry,places', [], null);
+            } elseif ($this->isTouristicSheet || $this->isRoadBookSheet) { // absolutely needed in angular
+                wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?v=3.33&libraries=geometry,places', [], null);
+            }
+
+            wp_enqueue_script('hawwwai_universal_map', $apirender_base_uri . '/assets/scripts/raccourci/universal-mapV2.' . $jsModeSuffix . '.js', $js_dependencies_rcmap, null);
+
 
             if (isset($map_keys['gmKey']) && !isset($map_keys['otmKey']) && !isset($map_keys['ignKey'])) {
                 wp_enqueue_script('jsdelivr_rich_marker', get_template_directory_uri() . '/src/lib/custom/rich-marker@0.0.1.min.js', array_merge($js_dependencies_rcmap, ['hawwwai_playlist']), null);
@@ -296,6 +304,53 @@ class WoodyTheme_Enqueue_Assets
             wp_enqueue_script('hawwwai_itinerary', $apirender_base_uri . '/assets/scripts/raccourci/itinerary.' . $jsModeSuffix . '.js', ['jquery', 'hawwwai_ng_scripts'], null);
             wp_enqueue_script('hawwwai_fresco', $apirender_base_uri . '/assets/scripts/lib/fresco.js', ['jquery'], null);
             wp_enqueue_script('hawwwai_ng_init', get_template_directory_uri() . '/src/js/static/ng_init.min.js', ['hawwwai_ng_scripts'], null);
+
+            // Touristic maps libraries
+            wp_enqueue_script('touristicmaps_leaflet', 'https://tiles.touristicmaps.com/libs/leaflet.min.js', [], null);
+            wp_enqueue_style('leaflet_css', 'https://tiles.touristicmaps.com/libs/tmaps.min.css', [], null);
+
+            //TODO: fix bug with Gmap and Universal Map
+            // if (isset($map_keys['otmKey']) || isset($map_keys['ignKey']) || $this->isTouristicSheet || $this->isRoadBookSheet) {
+            // need to load tangram always in TOURISTIC SHEET for now (bug in vendor angular) ↓
+            wp_enqueue_script('touristicmaps_tangram', 'https://tiles.touristicmaps.com/libs/tangram.min.js', [], null);
+            wp_enqueue_script('touristicmaps_cluster', 'https://tiles.touristicmaps.com/libs/markercluster.min.js', [], null);
+            wp_enqueue_script('touristicmaps_locate', 'https://tiles.touristicmaps.com/libs/locate.min.js', [], null);
+            wp_enqueue_script('touristicmaps_geocoder', 'https://tiles.touristicmaps.com/libs/geocoder.min.js', [], null);
+            wp_enqueue_script('touristicmaps_fullscreen', 'https://tiles.touristicmaps.com/libs/fullscreen.min.js', [], null);
+            // }
+
+            if (isset($map_keys['gmKey'])) {
+                wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?key=' . $map_keys['gmKey'] . '&v=3.33&libraries=geometry,places', [], null);
+            } elseif ($this->isTouristicSheet || $this->isRoadBookSheet) { // absolutely needed in angular
+                wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?v=3.33&libraries=geometry,places', [], null);
+            }
+
+            wp_enqueue_script('hawwwai_universal_map', $apirender_base_uri . '/assets/scripts/raccourci/universal-mapV2.' . $jsModeSuffix . '.js', $js_dependencies_rcmap, null);
+
+            // dependencies for raccourci map js
+            $js_dependencies_rcmap = [
+                'jquery', 'touristicmaps_leaflet',
+            ];
+
+            // get map keys
+            $map_keys = $this->siteConfig['mapProviderKeys'];
+            if (!empty($map_keys)) {
+                $map_keys['v'] = $this->wThemeVersion;
+            }
+
+            if (isset($map_keys['otmKey'])) {
+                $js_dependencies_rcmap[] = 'touristicmaps_tangram';
+            }
+
+            if (isset($map_keys['gmKey'])) {
+                $js_dependencies_rcmap[] = 'gg_maps';
+            }
+
+            // SHEET: need to load tangram always for now (bug in vendor angular)
+            if ($this->isTouristicSheet && !in_array('touristicmaps_tangram', $js_dependencies_rcmap)) {
+                $js_dependencies_rcmap[] = 'touristicmaps_tangram';
+            }
+
         }
 
         // window.DrupalAngularConfig.mapProviderKeys
