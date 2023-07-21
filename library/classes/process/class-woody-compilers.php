@@ -68,6 +68,8 @@ class WoodyTheme_WoodyCompilers
             case 'profile_focus':
                 $the_items = $this->getter->getProfileFocusData($wrapper);
                 break;
+            default:
+                $the_items = apply_filters( 'woody_custom_focus_items', [], $wrapper );
         }
 
         $the_items['alert'] = apply_filters('add_admin_alert_message', '');
@@ -136,7 +138,7 @@ class WoodyTheme_WoodyCompilers
             }
 
             $the_items = apply_filters('woody_format_focuses_data', $the_items, $wrapper);
-
+            console_log($the_items,'function items');
             $return = empty($wrapper['woody_tpl']) ? \Timber::compile($twigPaths['blocks-focus-tpl_103'], $the_items) : \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items) ;
         }
 
