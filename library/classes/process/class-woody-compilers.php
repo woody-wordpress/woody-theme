@@ -69,7 +69,7 @@ class WoodyTheme_WoodyCompilers
                 $the_items = $this->getter->getProfileFocusData($wrapper);
                 break;
             default:
-                $the_items = apply_filters( 'woody_custom_focus_items', [], $wrapper );
+                $the_items = apply_filters('woody_custom_focus_items', [], $wrapper);
         }
 
         $the_items['alert'] = apply_filters('add_admin_alert_message', '');
@@ -77,6 +77,17 @@ class WoodyTheme_WoodyCompilers
             foreach ($the_items['items'] as $item_key => $item) {
                 if (!empty($item['description'])) {
                     $the_items['items'][$item_key]['description'] = str_replace(['[', ']'], '', $item['description']);
+                }
+
+                if($item['location'] && $item['location']['lat'] && $item['location']['lng']) {
+                    $the_items['markers'][] = [
+                        'title' => $item['title'],
+                        'post_id' => $item['post_id'],
+                        'map_position' => [
+                            'lat' => $item['location']['lat'],
+                            'lng' => $item['location']['lng']
+                        ]
+                    ];
                 }
             }
 
