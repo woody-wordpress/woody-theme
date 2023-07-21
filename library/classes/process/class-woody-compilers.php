@@ -68,6 +68,8 @@ class WoodyTheme_WoodyCompilers
             case 'profile_focus':
                 $the_items = $this->getter->getProfileFocusData($wrapper);
                 break;
+            default:
+                $the_items = apply_filters( 'woody_custom_focus_items', [], $wrapper );
         }
 
         $the_items['alert'] = apply_filters('add_admin_alert_message', '');
@@ -136,7 +138,6 @@ class WoodyTheme_WoodyCompilers
             }
 
             $the_items = apply_filters('woody_format_focuses_data', $the_items, $wrapper);
-
             $return = empty($wrapper['woody_tpl']) ? \Timber::compile($twigPaths['blocks-focus-tpl_103'], $the_items) : \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items) ;
         }
 
@@ -462,8 +463,11 @@ class WoodyTheme_WoodyCompilers
             $the_items['empty'] = __('Désolé, aucun contenu ne correspond à votre recherche', 'woody-theme');
         }
 
-        // Show button
         $the_items['display_button'] = (empty($list_el_wrapper['display_button'])) ? false : $list_el_wrapper['display_button'];
+
+        if (!empty($the_items['display_button'])) {
+            $the_items['button_classes'] = apply_filters('woody_card_button_classes', '', $wrapper);
+        }
 
         // On compile la grille des éléments
         $the_list['the_grid'] = \Timber::compile($twigPaths[$wrapper['the_list_elements']['listgrid_woody_tpl']], $the_items);
