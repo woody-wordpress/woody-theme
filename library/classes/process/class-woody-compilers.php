@@ -274,8 +274,7 @@ class WoodyTheme_WoodyCompilers
             foreach ($wrapper['semantic_view_include'] as $included_id) {
                 $the_query['post__in'][] = $included_id;
             }
-        }
-        else {
+        } else {
             $parent_id = $wrapper['semantic_view_type'] == 'sisters' ? wp_get_post_parent_id($post_id) : $post_id;
 
             if (!empty($wrapper['semantic_view_page_types'])) {
@@ -679,6 +678,21 @@ class WoodyTheme_WoodyCompilers
                 'profile_picture' => get_field('profile_picture', $profile_id),
                 'profile_description' => get_field('profile_description', $profile_id),
                 'profile_expressions' => (empty($profile_expressions)) ? '' : $profile_expressions,
+            ];
+        }
+
+        // Set marker for page_teaser map
+        $post_latitude = get_field('post_latitude', $context['post_id']);
+        $post_longitude = get_field('post_longitude', $context['post_id']);
+        if(!empty($post_latitude) && !empty($post_longitude)) {
+            $page_teaser['markers'] = [
+                [
+                    'title' => $context['post_title'],
+                    'map_position' => [
+                        'lat' => $post_latitude,
+                        'lng' => $post_longitude
+                    ]
+                ]
             ];
         }
 
