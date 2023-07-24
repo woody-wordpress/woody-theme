@@ -184,10 +184,10 @@ class WoodyTheme_WoodyProcessTools
         $display['section_animations'] = (empty($wrapper['section_animations'])) ? '' : $wrapper['section_animations'];
 
         if($wrapper['custom_resp_button'] && wp_is_mobile()) {
-            $mobile_spacing_array[] = (empty($wrapper['mobile_scope_paddings']['scope_padding_top'])) ? '' : $wrapper['mobile_scope_paddings']['scope_padding_top'];
-            $mobile_spacing_array[] = (empty($wrapper['mobile_scope_paddings']['scope_padding_bottom'])) ? '' : $wrapper['mobile_scope_paddings']['scope_padding_bottom'];
-            $mobile_spacing_array[] = (empty($wrapper['mobile_scope_margins']['scope_margin_top'])) ? '' : $wrapper['mobile_scope_margins']['scope_margin_top'];
-            $mobile_spacing_array[] = (empty($wrapper['mobile_scope_margins']['scope_margin_bottom'])) ? '' : $wrapper['mobile_scope_margins']['scope_margin_bottom'];
+            $mobile_spacing_array[] = (empty($wrapper['mobile_scope_paddings']['mobile_scope_padding_top'])) ? '' : $wrapper['mobile_scope_paddings']['mobile_scope_padding_top'];
+            $mobile_spacing_array[] = (empty($wrapper['mobile_scope_paddings']['mobile_scope_padding_bottom'])) ? '' : $wrapper['mobile_scope_paddings']['mobile_scope_padding_bottom'];
+            $mobile_spacing_array[] = (empty($wrapper['mobile_scope_margins']['mobile_scope_margin_top'])) ? '' : $wrapper['mobile_scope_margins']['mobile_scope_margin_top'];
+            $mobile_spacing_array[] = (empty($wrapper['mobile_scope_margins']['mobile_scope_margin_bottom'])) ? '' : $wrapper['mobile_scope_margins']['mobile_scope_margin_bottom'];
             $display['mobile_spacing_classes'] = trim(implode(' ', $mobile_spacing_array));
         }
 
