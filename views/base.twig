@@ -36,7 +36,8 @@
 
     {% if pwa.manifest_url %}
         <link rel="manifest" href="{{ pwa.manifest_url }}" />
-        <script src="{{ home_url }}app/themes/woody-theme/pwa/sw-register.js"></script>
+        {# TODO: Appeler le service worker  de l'api #}
+        <script type="module" src="{{ home_url }}app/themes/woody-theme/pwa/pwa.mjs"></script>
     {% endif %}
 
     {# WP Header #}
