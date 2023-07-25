@@ -15,7 +15,16 @@
 use Symfony\Component\Finder\Finder;
 
 // Theme Support
-add_theme_support('html5');
+add_theme_support('html5', [
+    'search-form',
+    'comment-form',
+    'comment-list',
+    'gallery',
+    'caption',
+    'meta',
+    'style',
+    'script',
+]);
 
 // Added Global Group Woody Cache
 if (function_exists('wp_cache_add_global_groups')) {

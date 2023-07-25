@@ -10,16 +10,18 @@
         {% endif %}
         <div class="content-wrapper {{ page_terms|default('no-terms') }}">
             {% block mobile_header %}
-                {% if 'header' not in hide_page_zones %}
-                    {% if page_parts.mobile_header_custom %}
-                        {{ page_parts.mobile_header_custom }}
-                    {% else %}
-                        <div class="mobile-header hide-for-xlarge title-bar">
-                            <span class="brand-logo obf" data-obf="{{ home_url|base64Encode }}">
-                                <span class="no-visible-text menu-logo-site-name isAbs">{{ globals.site_name|default }}</span>
-                                {{ mobile_logo|default(website_logo) }}
-                            </span>
-                        </div>
+                {% if globals.is_mobile %}
+                    {% if 'header' not in hide_page_zones %}
+                        {% if page_parts.mobile_header_custom %}
+                            {{ page_parts.mobile_header_custom }}
+                        {% else %}
+                            <div class="mobile-header title-bar">
+                                <span class="brand-logo obf" data-obf="{{ home_url|base64Encode }}">
+                                    <span class="no-visible-text menu-logo-site-name isAbs">{{ globals.site_name|default }}</span>
+                                    {{ mobile_logo|default(website_logo) }}
+                                </span>
+                            </div>
+                        {% endif %}
                     {% endif %}
                 {% endif %}
             {% endblock %}
