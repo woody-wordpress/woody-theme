@@ -173,13 +173,23 @@ class WoodyTheme_WoodyProcessTools
         $classes_array[] = (empty($wrapper['background_color_opacity'])) ? '' : $wrapper['background_color_opacity'];
         $classes_array[] = (empty($wrapper['border_color'])) ? '' : $wrapper['border_color'];
         $classes_array[] = (empty($wrapper['background_img_opacity'])) ? '' : $wrapper['background_img_opacity'];
-        $classes_array[] = (empty($wrapper['scope_paddings']['scope_padding_top'])) ? '' : $wrapper['scope_paddings']['scope_padding_top'];
-        $classes_array[] = (empty($wrapper['scope_paddings']['scope_padding_bottom'])) ? '' : $wrapper['scope_paddings']['scope_padding_bottom'];
-        $classes_array[] = (empty($wrapper['scope_margins']['scope_margin_top'])) ? '' : $wrapper['scope_margins']['scope_margin_top'];
-        $classes_array[] = (empty($wrapper['scope_margins']['scope_margin_bottom'])) ? '' : $wrapper['scope_margins']['scope_margin_bottom'];
+        $spacing_array[] = (empty($wrapper['scope_paddings']['scope_padding_top'])) ? '' : $wrapper['scope_paddings']['scope_padding_top'];
+        $spacing_array[] = (empty($wrapper['scope_paddings']['scope_padding_bottom'])) ? '' : $wrapper['scope_paddings']['scope_padding_bottom'];
+        $spacing_array[] = (empty($wrapper['scope_margins']['scope_margin_top'])) ? '' : $wrapper['scope_margins']['scope_margin_top'];
+        $spacing_array[] = (empty($wrapper['scope_margins']['scope_margin_bottom'])) ? '' : $wrapper['scope_margins']['scope_margin_bottom'];
+        $display['spacing_classes'] = trim(implode(' ', $spacing_array));
+        $display['mobile_spacing_classes'] = trim(implode(' ', $spacing_array));
         $display['section_divider'] = (empty($wrapper['section_divider'])) ? '' : $wrapper['section_divider'];
         $display['heading_alignment'] = (empty($wrapper['heading_alignment'])) ? 'center' : $wrapper['heading_alignment'];
         $display['section_animations'] = (empty($wrapper['section_animations'])) ? '' : $wrapper['section_animations'];
+
+        if($wrapper['custom_resp_button'] && wp_is_mobile()) {
+            $mobile_spacing_array[] = (empty($wrapper['mobile_scope_paddings']['mobile_scope_padding_top'])) ? '' : $wrapper['mobile_scope_paddings']['mobile_scope_padding_top'];
+            $mobile_spacing_array[] = (empty($wrapper['mobile_scope_paddings']['mobile_scope_padding_bottom'])) ? '' : $wrapper['mobile_scope_paddings']['mobile_scope_padding_bottom'];
+            $mobile_spacing_array[] = (empty($wrapper['mobile_scope_margins']['mobile_scope_margin_top'])) ? '' : $wrapper['mobile_scope_margins']['mobile_scope_margin_top'];
+            $mobile_spacing_array[] = (empty($wrapper['mobile_scope_margins']['mobile_scope_margin_bottom'])) ? '' : $wrapper['mobile_scope_margins']['mobile_scope_margin_bottom'];
+            $display['mobile_spacing_classes'] = trim(implode(' ', $mobile_spacing_array));
+        }
 
         // On transforme le tableau en une chaine de caractères
         $display['classes'] = trim(implode(' ', $classes_array));
