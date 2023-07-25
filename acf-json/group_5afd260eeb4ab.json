@@ -1501,53 +1501,45 @@
                     "sub_fields": [
                         {
                             "key": "field_64b90909389fa",
-                            "label": "Au dessus",
-                            "name": "mobile_scope_padding_top",
-                            "type": "button_group",
+                            "label": "",
+                            "name": "",
+                            "type": "clone",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "50",
+                                "width": "",
                                 "class": "",
                                 "id": ""
                             },
-                            "choices": {
-                                "padd-top-none": "Aucune",
-                                "padd-top-sm": "Petite",
-                                "padd-top-md": "Moyenne",
-                                "padd-top-lg": "Grande",
-                                "padd-top-xlg": "Très grande"
-                            },
-                            "allow_null": 0,
-                            "default_value": "padd-top-sm",
-                            "layout": "horizontal",
-                            "return_format": "value"
+                            "clone": [
+                                "field_5b052c3b36231"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
                         },
                         {
                             "key": "field_64b9091054034",
-                            "label": "En dessous",
-                            "name": "mobile_scope_padding_bottom",
-                            "type": "button_group",
+                            "label": "",
+                            "name": "",
+                            "type": "clone",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "50",
+                                "width": "",
                                 "class": "",
                                 "id": ""
                             },
-                            "choices": {
-                                "padd-bottom-none": "Aucune",
-                                "padd-bottom-sm": "Petite",
-                                "padd-bottom-md": "Moyenne",
-                                "padd-bottom-lg": "Grande",
-                                "padd-bottom-xlg": "Très grande"
-                            },
-                            "allow_null": 0,
-                            "default_value": "padd-bottom-sm",
-                            "layout": "horizontal",
-                            "return_format": "value"
+                            "clone": [
+                                "field_5b052c9136232"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
                         }
                     ]
                 },
@@ -1576,53 +1568,45 @@
                     "sub_fields": [
                         {
                             "key": "field_64b909bb42536",
-                            "label": "Au dessus",
-                            "name": "mobile_scope_margin_top",
-                            "type": "button_group",
+                            "label": "",
+                            "name": "",
+                            "type": "clone",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "50",
+                                "width": "",
                                 "class": "",
                                 "id": ""
                             },
-                            "choices": {
-                                "marg-top-none": "Aucune",
-                                "marg-top-sm": "Petite",
-                                "marg-top-md": "Moyenne",
-                                "marg-top-lg": "Grande",
-                                "marg-top-xlg": "Très grande"
-                            },
-                            "allow_null": 0,
-                            "default_value": "marg-top-none",
-                            "layout": "horizontal",
-                            "return_format": "value"
+                            "clone": [
+                                "field_5b052ccf36234"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
                         },
                         {
                             "key": "field_64b909cd5aff3",
-                            "label": "En dessous",
-                            "name": "mobile_scope_margin_bottom",
-                            "type": "button_group",
+                            "label": "",
+                            "name": "",
+                            "type": "clone",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "50",
+                                "width": "",
                                 "class": "",
                                 "id": ""
                             },
-                            "choices": {
-                                "marg-bottom-none": "Aucune",
-                                "marg-bottom-sm": "Petite",
-                                "marg-bottom-md": "Moyenne",
-                                "marg-bottom-lg": "Grande",
-                                "marg-bottom-xlg": "Très grande"
-                            },
-                            "allow_null": 0,
-                            "default_value": "marg-bottom-none",
-                            "layout": "horizontal",
-                            "return_format": "value"
+                            "clone": [
+                                "field_5b052cfd36235"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
                         }
                     ]
                 },
