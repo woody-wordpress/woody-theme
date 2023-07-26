@@ -36,7 +36,6 @@
 
     {% if pwa.manifest_url %}
         <link rel="manifest" href="{{ pwa.manifest_url }}" />
-        {# TODO: Appeler le service worker  de l'api #}
         <script type="module" src="{{ home_url }}app/themes/woody-theme/pwa/pwa.mjs"></script>
     {% endif %}
 

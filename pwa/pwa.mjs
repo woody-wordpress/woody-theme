@@ -1,5 +1,7 @@
 import {installServiceWorker, subscribeNotif, installPwa} from 'https://api.tourism-system.rc-preprod.com/v2/notif/client.mjs';
 
+console.log('Here is the pwa.mjs');
+
 if(await installServiceWorker(new URL('../woody-sw.js', import.meta.url))){
     console.log('Service worker is running');
     if(await installPwa(new URL('../woody-sw.js', import.meta.url))){
