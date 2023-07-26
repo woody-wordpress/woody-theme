@@ -686,8 +686,12 @@ class WoodyTheme_WoodyProcess
                 $display = $this->tools->getDisplayOptions($section);
 
                 // On ajoute les class personnalisées de section dans la liste des class d'affichage
-                if (!empty($display['classes']) && !empty($section['section_class'])) {
-                    $display['classes'] .=  ' ' . $section['section_class'];
+                if(!empty($section['section_class'])) {
+                    if(empty($display['classes'])) {
+                        $display['classes'] = $section['section_class'];
+                    } else {
+                        $display['classes'] .=  ' ' . $section['section_class'];
+                    }
                 }
 
                 // On ajoute les animations dans les données envoyées aux sections
