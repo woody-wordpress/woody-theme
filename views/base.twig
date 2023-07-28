@@ -34,9 +34,8 @@
     {% endblock %}
     {# Schema Graph #}
 
-    {% if pwa.manifest_url %}
-        <link rel="manifest" href="{{ pwa.manifest_url }}" />
-        <script type="module" src="{{ home_url }}app/themes/woody-theme/pwa/pwa.js"></script>
+    {% if woody_pwa %}
+         {% include 'notify_front/notifyHeader.twig' %}
     {% endif %}
 
     {# WP Header #}
@@ -74,13 +73,8 @@
     {% endif %}
     {# /Body Top #}
 
-    {% if pwa.manifest_url %}
-        {% include 'parts/installPwa.twig' %}
-    {% endif %}
-
-    {{ pwa.notify|console_log('pwa.notify') }}
-    {% if pwa.notify %}
-        {% include 'notify_front/banner.twig' %}
+    {% if woody_pwa %}
+         {% include 'notify_front/notifyBanners.twig' %}
     {% endif %}
 
     <div class="main-wrapper flex-container flex-dir-column large-flex-dir-column-reverse">
