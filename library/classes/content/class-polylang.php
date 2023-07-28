@@ -200,6 +200,7 @@ class WoodyTheme_Polylang
         __('Date de naissance', 'woody-theme');
         __('Nationalité', 'woody-theme');
         __('Sommaire', 'woody-theme');
+        __('Envoyer un email', 'woody-theme');
 
         //Actions
         __('Ajouter', 'woody-theme');
