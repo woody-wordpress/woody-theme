@@ -60,8 +60,8 @@ class WoodyTheme_CDN
                     continue;
                 }
 
-                // Exclude wp-json
-                if (strpos($url, 'wp-json') !== false) {
+                // Exclude wp-json and woody-addon-notify (relative imports path inside)
+                if (strpos($url, 'wp-json') !== false || strpos($url, 'woody-addon-notify') !== false) {
                     continue;
                 }
 
