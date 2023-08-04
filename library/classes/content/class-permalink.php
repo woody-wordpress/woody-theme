@@ -26,12 +26,22 @@ class WoodyTheme_Permalink
         add_action('template_redirect', [$this, 'templateRedirect'], 10);
         add_action('template_redirect', [$this, 'redirect404'], 999);
 
+        add_action('init', [$this, 'checkUrl']);
+
         add_action('before_delete_post', [$this, 'cleanRedirects']);
 
         // WP_SITE_KEY=site_key wp woody:flush_permalinks
         \WP_CLI::add_command('woody:flush_permalinks', [$this, 'flush_permalinks']);
 
         require_once(__DIR__ . '/../../helpers/helpers.php');
+    }
+
+    public function checkUrl()
+    {
+        if($_SERVER['REQUEST_URI'] === '/wp-json/wp/v2/users') {
+            header('HTTP/1.0 403 Forbidden');
+            die('You are not allowed to access this url.');
+        }
     }
 
     public function woodyGetPermalink($post_id = null, $force = false)
