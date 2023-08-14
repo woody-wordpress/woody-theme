@@ -243,7 +243,7 @@
                     "label": "Précision",
                     "name": "suffix_price",
                     "type": "text",
-                    "instructions": "<small>Si laissé vide, valeur par défaut : \"par personne\" ou \"forfait groupe\" en fonction du type de prix<\/small>",
+                    "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -252,7 +252,7 @@
                         "id": ""
                     },
                     "default_value": "",
-                    "placeholder": "",
+                    "placeholder": "Ex : Par personne, Par groupe, Forfait groupe, ...",
                     "prepend": "",
                     "append": "",
                     "maxlength": ""
