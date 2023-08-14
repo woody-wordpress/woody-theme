@@ -223,7 +223,7 @@ class WoodyTheme_ACF
             if ($field['name'] === "gallery_tags") {
                 $taxonomies = get_object_taxonomies('attachment', 'objects');
 
-            // $unset_taxonomies[] = 'attachment_types';
+                // $unset_taxonomies[] = 'attachment_types';
             } else {
                 $taxonomies = get_object_taxonomies('page', 'objects');
             }
@@ -483,7 +483,7 @@ class WoodyTheme_ACF
 
         if (!empty($terms)) {
             foreach ($terms as $term) {
-                $hasIcon = empty($term->term_icon) ? '' : '<span class="' . $term->term_icon . '"></span>';
+                $hasIcon = empty($term->term_icon) ? '' : '<span class="wicon ' . $term->term_icon . '"></span>';
                 $hero_terms[$term->term_id] = $hasIcon . '<span class="label">' . $term->name . '</span>';
             }
         }
