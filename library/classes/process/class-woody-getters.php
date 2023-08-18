@@ -1039,6 +1039,27 @@ class WoodyTheme_WoodyGetters
                 ];
             }
 
+            if (!empty($wrapper['profile_focus_order'])) {
+                switch ($wrapper['profile_focus_order']) {
+                    case 'created_desc':
+                        $args['orderby'] = 'date';
+                        $args['order'] = 'DESC';
+                    break;
+                    case 'created_asc':
+                        $args['orderby'] = 'date';
+                        $args['order'] = 'ASC';
+                    break;
+                    case 'alphabetical_order':
+                        $args['orderby'] = 'title';
+                        $args['order'] = 'ASC';
+                    break;
+                    default:
+                        $args['orderby'] = 'rand';
+                        $args['order'] = 'ASC';
+                    break;
+                }
+            }
+
             $the_query = new \WP_Query($args);
             if (!empty($the_query->posts)) {
                 foreach ($the_query->posts as $post) {

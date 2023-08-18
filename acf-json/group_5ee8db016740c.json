@@ -62,7 +62,7 @@
             "min": 0,
             "max": 0,
             "layout": "table",
-            "button_label": "",
+            "button_label": "Ajouter un profil",
             "sub_fields": [
                 {
                     "key": "field_5ee8dea2b7007",
@@ -92,7 +92,8 @@
                     "allow_null": 0,
                     "multiple": 0,
                     "return_format": "object",
-                    "ui": 1
+                    "ui": 1,
+                    "parent_repeater": "field_5ee8de82b7006"
                 }
             ]
         },
@@ -156,6 +157,40 @@
             "step": 1
         },
         {
+            "key": "field_64df5e9a12a3c",
+            "label": "Ordre de tri",
+            "name": "profile_focus_order",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5ee8dbb578446",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "created_desc": "Du plus récent au plus ancien",
+                "created_asc": "Du plus ancien au plus récent",
+                "alphabetical_order": "Ordre alphabétique",
+                "rand": "Aléatoire"
+            },
+            "default_value": "",
+            "return_format": "value",
+            "allow_null": 0,
+            "other_choice": 0,
+            "layout": "horizontal",
+            "save_other_choice": 0
+        },
+        {
             "key": "field_5ee8dd4f78449",
             "label": "Afficher les champs",
             "name": "profile_focus_display",
@@ -185,7 +220,7 @@
             },
             "allow_custom": 0,
             "default_value": [],
-            "layout": "vertical",
+            "layout": "horizontal",
             "toggle": 0,
             "return_format": "value",
             "save_custom": 0
@@ -531,5 +566,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1641287913
+    "modified": 1692360672
 }
