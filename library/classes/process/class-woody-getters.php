@@ -1114,7 +1114,6 @@ class WoodyTheme_WoodyGetters
             }
 
             if (in_array('website', $wrapper['profile_focus_display'])) {
-                console_log('website');
                 $data['socials']['website'] = get_field('profile_contacts_profile_socials_profile_website', $post->ID);
             }
         }
