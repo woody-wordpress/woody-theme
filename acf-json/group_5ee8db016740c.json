@@ -68,6 +68,7 @@
                     "key": "field_5ee8dea2b7007",
                     "label": "Profil",
                     "name": "manual_profile",
+
                     "type": "post_object",
                     "instructions": "",
                     "required": 0,
@@ -246,6 +247,109 @@
             "return_format": "id",
             "multiple": 0,
             "allow_null": 0
+        },
+        {
+            "key": "field_64df69efa0b1e",
+            "label": "Filtres",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_64df6ae5b4e14",
+            "label": "Filtres",
+            "name": "profiles_filters",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "field_64df6b5b72e63",
+            "button_label": "Ajouter un filtre",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_64df6b5b72e63",
+                    "label": "Nom du filtre",
+                    "name": "name",
+
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_64df6ae5b4e14"
+                },
+                {
+                    "key": "field_64df6f207ac69",
+                    "label": "Catégorie parente",
+                    "name": "profiles_parent_category",
+
+                    "type": "taxonomy",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "profile_category",
+                    "add_term": 0,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "field_type": "select",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "parent_repeater": "field_64df6ae5b4e14"
+                }
+            ]
+        },
+        {
+            "key": "field_64df6af601e4e",
+            "label": "Bouton \"Réinitialiser\"",
+            "name": "reset_button",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         {
             "key": "field_5eea072a9f62c",
@@ -566,5 +670,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1692360672
+    "modified": 1692366339
 }

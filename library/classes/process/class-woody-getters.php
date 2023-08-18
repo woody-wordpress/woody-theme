@@ -1072,6 +1072,32 @@ class WoodyTheme_WoodyGetters
             }
         }
 
+        if(!empty($wrapper['profiles_filters'])) {
+            foreach ($wrapper['profiles_filters'] as $key_filter => $filter) {
+                $data['filters'][$key_filter] = [
+                    'parent' => [
+                        'name' => empty($filter['name']) ? get_term($filter['profiles_parent_category'], 'profile_category')->name : $filter['name']
+                    ]
+                ];
+
+                $children_filters = get_terms('profile_category', [
+                    'parent' => $filter['profiles_parent_category'],
+                    'orderby' => 'name',
+                    'order' => 'ASC',
+                    'hide_empty' => false
+                ]);
+
+                if (!empty($children_filters)) {
+                    foreach ($children_filters as $key_children_filter => $children_filter) {
+                        $data['filters'][$key_filter]['children'][$key_children_filter] = [
+                            'name' => $children_filter->name,
+                            'term_id' => $children_filter->term_id
+                        ];
+                    }
+                }
+            }
+        }
+
         return $data;
     }
 

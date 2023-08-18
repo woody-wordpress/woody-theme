@@ -74,6 +74,8 @@ class WoodyTheme_ACF
         add_filter('acf/load_fields', [$this, 'addSeasonChoices'], 10, 2);
         add_filter('acf/update_value', [$this, 'updateCurrentSeason'], 10, 3);
 
+        add_filter('acf/fields/taxonomy/query', [$this, 'hideProfileChildTaxonomies'], 10, 3);
+
         // Custom Filter
         add_filter('woody_get_field_option', [$this, 'woodyGetFieldOption'], 10, 3);
         add_filter('woody_get_field_object', [$this, 'woodyGetFieldObject'], 10, 3);
@@ -1196,5 +1198,14 @@ class WoodyTheme_ACF
         }
 
         return $value;
+    }
+
+    public function hideProfileChildTaxonomies($args, $field, $post_id)
+    {
+        if($field['_name'] == 'profiles_parent_category') {
+            $args['parent'] = 0;
+        }
+
+        return $args;
     }
 }
