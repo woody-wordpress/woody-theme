@@ -342,17 +342,21 @@ class WoodyTheme_WoodyProcessTools
      */
     public function getSectionBannerFiles($filename)
     {
-        $lang = pll_current_language();
+        if(is_string($filename)) {
 
-        if (file_exists(get_stylesheet_directory() . '/views/section_banner/'. $lang .'/section_' . $filename . '.twig')) {
-            $file = file_exists(get_stylesheet_directory() . '/views/section_banner/'. $lang .'/section_' . $filename . '.twig');
-        } elseif (file_exists(get_stylesheet_directory() . '/views/section_banner/section_' . $filename . '.twig')) {
-            $file = file_get_contents(get_stylesheet_directory() . '/views/section_banner/section_' . $filename . '.twig');
-        } else {
-            $file = file_get_contents(get_template_directory() . '/views/section_banner/section_' . $filename . '.twig');
+            $lang = pll_current_language();
+            $banner_paths = [
+                get_stylesheet_directory() . '/views/section_banner/'. $lang .'/section_' . $filename . '.twig',
+                get_stylesheet_directory() . '/views/section_banner/section_' . $filename . '.twig',
+                get_template_directory() . '/views/section_banner/section_' . $filename . '.twig',
+            ];
+
+            foreach ($banner_paths as $path) {
+                if (file_exists($path)) {
+                    return file_get_contents($path);
+                }
+            }
         }
-
-        return $file;
     }
 
     /**
