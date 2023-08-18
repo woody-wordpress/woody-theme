@@ -1068,6 +1068,10 @@ class WoodyTheme_WoodyGetters
                 $data['complement'] = get_field('profile_complement', $post->ID);
             }
 
+            if (in_array('label', $wrapper['profile_focus_display'])) {
+                $data['label'] = get_field('profile_label', $post->ID);
+            }
+
             if (in_array('description', $wrapper['profile_focus_display'])) {
                 $data['description'] = get_field('profile_description', $post->ID);
             }
@@ -1107,6 +1111,11 @@ class WoodyTheme_WoodyGetters
 
             if (in_array('twitter', $wrapper['profile_focus_display'])) {
                 $data['socials']['twitter'] = get_field('profile_contacts_profile_socials_profile_twitter', $post->ID);
+            }
+
+            if (in_array('website', $wrapper['profile_focus_display'])) {
+                console_log('website');
+                $data['socials']['website'] = get_field('profile_contacts_profile_socials_profile_website', $post->ID);
             }
         }
 

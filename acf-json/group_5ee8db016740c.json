@@ -170,6 +170,7 @@
             },
             "choices": {
                 "complement": "Complément",
+                "label": "Label",
                 "description": "Description",
                 "birth": "Date de naissance",
                 "nationality": "Nationalité",
@@ -179,7 +180,8 @@
                 "phone": "Téléphone fixe",
                 "mobile": "Téléphone mobile",
                 "linkedin": "LinkedIn",
-                "twitter": "Twitter"
+                "twitter": "Twitter",
+                "website": "Site web"
             },
             "allow_custom": 0,
             "default_value": [],
