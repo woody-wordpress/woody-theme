@@ -1096,6 +1096,8 @@ class WoodyTheme_WoodyGetters
                     }
                 }
             }
+
+            $data['reset_button'] = $wrapper['reset_button'];
         }
 
         return $data;
@@ -1109,6 +1111,14 @@ class WoodyTheme_WoodyGetters
             'lastname' => get_field('profile_lastname', $post->ID),
             'img' => get_field('profile_picture', $post->ID)
         ];
+
+        $data['terms_ids'] = '';
+
+        $profile_categories_terms = get_the_terms($post, 'profile_category');
+
+        if(!empty($profile_categories_terms)) {
+            $data['terms_ids'] = implode(', ', wp_list_pluck($profile_categories_terms, 'term_id'));
+        }
 
         if (!empty($wrapper['profile_focus_display'])) {
             if (in_array('complement', $wrapper['profile_focus_display'])) {
