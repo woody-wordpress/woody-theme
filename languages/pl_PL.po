@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Parent theme) 1.56.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2023-07-28T11:52:06+02:00\n"
-"PO-Revision-Date: 2023-07-28 12:02+0200\n"
+"POT-Creation-Date: 2023-08-21T14:52:45+02:00\n"
+"PO-Revision-Date: 2023-08-21 15:13+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl_PL\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 "
 "|| n%100>14) ? 1 : 2);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.1.1\n"
 "X-Domain: woody-theme\n"
 
 #. Theme Name of the theme
@@ -664,6 +664,10 @@ msgstr "Przepraszamy, nie ma treści odpowiadającej Twojemu wyszukiwaniu"
 #: library/classes/content/class-polylang.php:248
 msgid "Lire aussi"
 msgstr "Czytaj także"
+
+#: library/classes/content/class-polylang.php:249
+msgid "Classement"
+msgstr "Zaszeregowanie"
 
 #: library/classes/process/class-woody-getters.php:785
 #: library/classes/process/class-woody-getters.php:786
