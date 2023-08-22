@@ -1039,6 +1039,27 @@ class WoodyTheme_WoodyGetters
                 ];
             }
 
+            if (!empty($wrapper['profile_focus_order'])) {
+                switch ($wrapper['profile_focus_order']) {
+                    case 'created_desc':
+                        $args['orderby'] = 'date';
+                        $args['order'] = 'DESC';
+                    break;
+                    case 'created_asc':
+                        $args['orderby'] = 'date';
+                        $args['order'] = 'ASC';
+                    break;
+                    case 'alphabetical_order':
+                        $args['orderby'] = 'title';
+                        $args['order'] = 'ASC';
+                    break;
+                    default:
+                        $args['orderby'] = 'rand';
+                        $args['order'] = 'ASC';
+                    break;
+                }
+            }
+
             $the_query = new \WP_Query($args);
             if (!empty($the_query->posts)) {
                 foreach ($the_query->posts as $post) {
@@ -1049,6 +1070,34 @@ class WoodyTheme_WoodyGetters
             foreach ($wrapper['manual_profile_focus'] as $manual_profile) {
                 $data['items'][] = $this->getProfilePreview($wrapper, $manual_profile['manual_profile']);
             }
+        }
+
+        if(!empty($wrapper['profiles_filters'])) {
+            foreach ($wrapper['profiles_filters'] as $key_filter => $filter) {
+                $data['filters'][$key_filter] = [
+                    'parent' => [
+                        'name' => empty($filter['name']) ? get_term($filter['profiles_parent_category'], 'profile_category')->name : $filter['name']
+                    ]
+                ];
+
+                $children_filters = get_terms('profile_category', [
+                    'parent' => $filter['profiles_parent_category'],
+                    'orderby' => 'name',
+                    'order' => 'ASC',
+                    'hide_empty' => false
+                ]);
+
+                if (!empty($children_filters)) {
+                    foreach ($children_filters as $key_children_filter => $children_filter) {
+                        $data['filters'][$key_filter]['children'][$key_children_filter] = [
+                            'name' => $children_filter->name,
+                            'term_id' => $children_filter->term_id
+                        ];
+                    }
+                }
+            }
+
+            $data['reset_button'] = $wrapper['reset_button'];
         }
 
         return $data;
@@ -1063,9 +1112,21 @@ class WoodyTheme_WoodyGetters
             'img' => get_field('profile_picture', $post->ID)
         ];
 
+        $data['terms_ids'] = '';
+
+        $profile_categories_terms = get_the_terms($post, 'profile_category');
+
+        if(!empty($profile_categories_terms)) {
+            $data['terms_ids'] = implode(', ', wp_list_pluck($profile_categories_terms, 'term_id'));
+        }
+
         if (!empty($wrapper['profile_focus_display'])) {
             if (in_array('complement', $wrapper['profile_focus_display'])) {
                 $data['complement'] = get_field('profile_complement', $post->ID);
+            }
+
+            if (in_array('label', $wrapper['profile_focus_display'])) {
+                $data['label'] = get_field('profile_label', $post->ID);
             }
 
             if (in_array('description', $wrapper['profile_focus_display'])) {
@@ -1107,6 +1168,10 @@ class WoodyTheme_WoodyGetters
 
             if (in_array('twitter', $wrapper['profile_focus_display'])) {
                 $data['socials']['twitter'] = get_field('profile_contacts_profile_socials_profile_twitter', $post->ID);
+            }
+
+            if (in_array('website', $wrapper['profile_focus_display'])) {
+                $data['socials']['website'] = get_field('profile_contacts_profile_socials_profile_website', $post->ID);
             }
         }
 

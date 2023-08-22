@@ -246,5 +246,6 @@ class WoodyTheme_Polylang
         __('Mis à jour le', 'woody-theme');
         __('Désolé, aucun contenu ne correspond à votre recherche', 'woody-theme');
         __('Lire aussi', 'woody-theme');
+        __('Classement', 'woody-theme');
     }
 }
