@@ -182,7 +182,7 @@
                 "created_desc": "Du plus récent au plus ancien",
                 "created_asc": "Du plus ancien au plus récent",
                 "alphabetical_order": "Ordre alphabétique",
-                "rand": "Aléatoire"
+                "random": "Aléatoire"
             },
             "default_value": "",
             "return_format": "value",
