@@ -182,7 +182,7 @@
                 "created_desc": "Du plus récent au plus ancien",
                 "created_asc": "Du plus ancien au plus récent",
                 "alphabetical_order": "Ordre alphabétique",
-                "random": "Aléatoire"
+                "rand": "Aléatoire"
             },
             "default_value": "",
             "return_format": "value",
@@ -580,7 +580,7 @@
         {
             "key": "field_5ee8db7a78445",
             "label": "Paramètres de fond",
-            "name": "focus_bg_params",
+            "name": "focus_block_bg_params",
             "type": "clone",
             "instructions": "",
             "required": 0,
