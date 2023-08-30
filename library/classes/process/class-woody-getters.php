@@ -1053,6 +1053,10 @@ class WoodyTheme_WoodyGetters
                         $args['orderby'] = 'title';
                         $args['order'] = 'ASC';
                     break;
+                    case 'random':
+                        $args['orderby'] = 'rand';
+                        $args['order'] = 'ASC';
+                     break;
                     default:
                         $args['orderby'] = 'rand';
                         $args['order'] = 'ASC';
