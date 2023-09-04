@@ -267,6 +267,10 @@ class WoodyTheme_WoodyProcess
                 $layout['display'] = $this->tools->getDisplayOptions($layout['timeline_bg_params']);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
+            case 'accordion':
+                $layout['woody_tpl'] = 'blocks-accordion-tpl_01';
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                break;
             default:
 
 
