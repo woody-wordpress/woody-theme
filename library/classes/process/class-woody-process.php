@@ -36,6 +36,7 @@ class WoodyTheme_WoodyProcess
     {
         $lon_postmeta = null;
         // On surcharge l'ordre quand on veut faire du tri par géolocalisation
+        //TODO: $wp_query->query['orderby'] peut être un tableau (si vide peut-être)? Génère un warning
         if (!empty($wp_query->query['orderby']) && strpos($wp_query->query['orderby'], 'geoloc') !== false) {
             $post_id = explode('_', $wp_query->query['orderby']);
             $post_id = (is_array($post_id)) ? end($post_id) : null;
@@ -265,10 +266,6 @@ class WoodyTheme_WoodyProcess
                 break;
             case 'timeline':
                 $layout['display'] = $this->tools->getDisplayOptions($layout['timeline_bg_params']);
-                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
-                break;
-            case 'accordion':
-                $layout['woody_tpl'] = 'blocks-accordion-tpl_01';
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             default:
