@@ -95,6 +95,25 @@
             "ui_off_text": ""
         },
         {
+            "key": "field_64f9cb7966f5c",
+            "label": "Afficher l'aspect des fiches dans les champs de recherche",
+            "name": "display_sheet_aspect",
+            "type": "true_false",
+            "instructions": "Si cette option est activée, l'aspect de la fiche sera affiché à la suite du titre",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_611f6f55bc6de",
             "label": "Page des bons plans",
             "name": "",

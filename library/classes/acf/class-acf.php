@@ -62,6 +62,16 @@ class WoodyTheme_ACF
         add_filter('acf/fields/post_object/query', [$this, 'getPostObjectDefaultTranslation'], 10, 3);
         add_filter('acf/fields/page_link/result', [$this, 'postObjectAcfResults'], 10, 4);
 
+        if (get_field('display_default_lang_title', 'options')) {
+            add_filter('acf/fields/post_object/result', [$this, 'translatePostTitleResult'], 10, 4);
+            add_filter('acf/fields/page_link/result', [$this, 'translatePostTitleResult'], 10, 4);
+        }
+
+        if (get_field('display_sheet_aspect', 'options')) {
+            add_filter('acf/fields/post_object/result', [$this, 'getAspectPostTitleResult'], 10, 4);
+            add_filter('acf/fields/page_link/result', [$this, 'getAspectPostTitleResult'], 10, 4);
+        }
+
         add_filter('acf/load_value/type=gallery', [$this, 'pllGalleryLoadField'], 10, 3);
 
         add_filter('acf/load_field/name=section_content', [$this, 'sectionContentLoadField']);
@@ -534,7 +544,15 @@ class WoodyTheme_ACF
     {
         $parent_id = getPostRootAncestor($post->ID);
 
-        $display_default_lang_title = apply_filters('woody_get_field_option', 'display_default_lang_title');
+        if (!empty($parent_id)) {
+            $parent = get_post($parent_id);
+            $title = $title . '<small style="color:#cfcfcf; font-style:italic"> - ( Enfant de ' . $parent->post_title . ' )</small>';
+        }
+
+        return $title;
+    }
+
+    public function translatePostTitleResult($title, $post, $field, $post_id) {
         if ($display_default_lang_title) {
             $post_lang = apply_filters('woody_pll_get_post_language', $post->ID);
             $default_lang = apply_filters('woody_pll_default_lang_code', null);
@@ -547,9 +565,16 @@ class WoodyTheme_ACF
             }
         }
 
-        if (!empty($parent_id)) {
-            $parent = get_post($parent_id);
-            $title = $title . '<small style="color:#cfcfcf; font-style:italic"> - ( Enfant de ' . $parent->post_title . ' )</small>';
+        return $title;
+    }
+
+    public function getAspectPostTitleResult($title, $post, $field, $post_id) {
+        if ($display_sheet_aspect) {
+            if ($post->post_type == 'touristic_sheet') {
+                $meta_value = get_post_meta($post->ID)['touristic_source_identifier'];
+                $sheet_lang = explode('-', $meta_value[0])[0];
+                $title = $title . '<small style="color:#cfcfcf; font-style:italic">' . $sheet_lang . '</small>';
+            }
         }
 
         return $title;
