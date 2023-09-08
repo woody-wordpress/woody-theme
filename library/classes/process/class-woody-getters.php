@@ -128,8 +128,11 @@ class WoodyTheme_WoodyGetters
                             case 'woody_topic':
                                 $post_preview = $this->getTopicPreview($wrapper, $post);
                                 break;
-                            default:
+                            case 'page':
                                 $post_preview = $this->getPagePreview($wrapper, $post, $clickable);
+                                break;
+                            default:
+                                $post_preview = apply_filters( 'woody_custom_manual_focus', $post->ID, $wrapper['display_elements']);
                                 break;
                         }
 
