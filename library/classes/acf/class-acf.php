@@ -553,15 +553,13 @@ class WoodyTheme_ACF
     }
 
     public function translatePostTitleResult($title, $post, $field, $post_id) {
-        if ($display_default_lang_title) {
-            $post_lang = apply_filters('woody_pll_get_post_language', $post->ID);
-            $default_lang = apply_filters('woody_pll_default_lang_code', null);
+        $post_lang = apply_filters('woody_pll_get_post_language', $post->ID);
+        $default_lang = apply_filters('woody_pll_default_lang_code', null);
 
-            if ($post_lang !== $default_lang) {
-                $translation = apply_filters('woody_default_lang_post_title', $post->ID);
-                if (!empty($translation)) {
-                    $title = $title . '<small style="color:#cfcfcf; font-style:italic"> - ( ' . $default_lang . ': ' . $translation . ' )</small>';
-                }
+        if ($post_lang !== $default_lang) {
+            $translation = apply_filters('woody_default_lang_post_title', $post->ID);
+            if (!empty($translation)) {
+                $title = $title . '<small style="color:#cfcfcf; font-style:italic"> - ( ' . $default_lang . ': ' . $translation . ' )</small>';
             }
         }
 
@@ -569,12 +567,10 @@ class WoodyTheme_ACF
     }
 
     public function getAspectPostTitleResult($title, $post, $field, $post_id) {
-        if ($display_sheet_aspect) {
-            if ($post->post_type == 'touristic_sheet') {
-                $meta_value = get_post_meta($post->ID)['touristic_source_identifier'];
-                $sheet_lang = explode('-', $meta_value[0])[0];
-                $title = $title . '<small style="color:#cfcfcf; font-style:italic">' . $sheet_lang . '</small>';
-            }
+        if ($post->post_type == 'touristic_sheet') {
+            $meta_value = get_post_meta($post->ID)['touristic_source_identifier'];
+            $sheet_lang = explode('-', $meta_value[0])[0];
+            $title = $title . '<small style="color:#cfcfcf; font-style:italic; text-transform: uppercase"> - ' . $sheet_lang . '</small>';
         }
 
         return $title;
