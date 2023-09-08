@@ -132,7 +132,7 @@ class WoodyTheme_WoodyGetters
                                 $post_preview = $this->getPagePreview($wrapper, $post, $clickable);
                                 break;
                             default:
-                                $post_preview = $post_preview = apply_filters( 'woody_custom_manual_focus', $post->ID, $wrapper['display_elements']);
+                                $post_preview = apply_filters( 'woody_custom_manual_focus', $post->ID, $wrapper['display_elements']);
                                 break;
                         }
 
