@@ -1,7 +1,8 @@
 {
     "key": "group_5bc6005838259",
     "title": "Elements de liste",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5bc60342c66b8",
             "label": "Contenu",
             "name": "",
@@ -31,14 +32,15 @@
                 "id": ""
             },
             "clone": [
+                "field_60cc8c88f2824",
+                "field_60cc8e1147740",
                 "field_5b27890c84ed3",
                 "field_5b27a02e9d7c5",
                 "field_5b27a25103e43",
                 "field_5b28d791038fa",
-                "field_5b27a67203e48",
                 "field_5b27a3d703e44",
+                "field_5b27a67203e48",
                 "field_5b2917f0ff061",
-                "field_5c814940fba28",
                 "field_5b88eae6c0adc"
             ],
             "display": "group",
@@ -153,11 +155,13 @@
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",
