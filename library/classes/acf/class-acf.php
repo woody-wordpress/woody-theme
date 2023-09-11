@@ -962,6 +962,10 @@ class WoodyTheme_ACF
     public function woodyGetAllTemplates()
     {
         $return = wp_cache_get('woody_tpls_components', 'woody');
+
+        $user = wp_get_current_user();
+        $is_administrator = in_array('administrator', $user->roles);
+
         if (empty($return)) {
             $tplComponents = [];
             $woodyComponents = getWoodyComponents();
@@ -972,9 +976,9 @@ class WoodyTheme_ACF
                     $display_options = json_encode($component['display'], JSON_THROW_ON_ERROR);
                 }
 
+                $lib_design = !empty($component['lib_design']) ? $component['lib_design'] : '';
                 $is_new_tpl = (!empty($component['creation']) && isWoodyNewTpl($component['creation'])) ? "<span class='tpl-badge tpl-new'>Nouveau</span>" : '';
                 $is_custom_tpl = !empty($component['custom_theme']) ? "<span class='tpl-badge tpl-custom-theme'>Personnalisé</span>" : '';
-
                 $groups = empty($component['acf_groups']) ? '' : implode(" ", $component['acf_groups']);
                 if (!empty($groups)) {
                     if (strpos($component['thumbnails']['small'], 'custom_woody_tpls') === false) {
@@ -983,10 +987,12 @@ class WoodyTheme_ACF
                         $img_views_path = apply_filters('custom_woody_tpls_thumbnails_path', '/img/', $component['thumbnails']['small']);
                     }
 
-                    $tplComponents[$key] = "<div class='tpl-choice-wrapper " . $groups . "' data-value='". $key ."' data-display-options='". $display_options ."'>
-                    <img class='img-responsive lazyload' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' data-src='" . WP_HOME . "/app/dist/" . WP_SITE_KEY . $img_views_path . $component['thumbnails']['small'] . "?version=" . get_option("woody_theme_version") . "' alt='" . $key . "' width='150' height='150' />
-                    <h5 class='tpl-title'>" . $component["name"] . "</h5><div class='tpl-badges'>" . $is_new_tpl . $is_custom_tpl . "</div>" .
-                    "</div>";
+                    if ($is_administrator || !$is_administrator && $lib_design != 'TODO' || empty($lib_design)) {
+                        $tplComponents[$key] = "<div class='tpl-choice-wrapper " . $groups . "' data-value='". $key ."' data-display-options='". $display_options ."'>
+                        <img class='img-responsive lazyload' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' data-src='" . WP_HOME . "/app/dist/" . WP_SITE_KEY . $img_views_path . $component['thumbnails']['small'] . "?version=" . get_option("woody_theme_version") . "' alt='" . $key . "' width='150' height='150' />
+                        <h5 class='tpl-title'>" . $component["name"] . "</h5><div class='tpl-badges'>" . $is_new_tpl . $is_custom_tpl . "</div>" .
+                        "</div>";
+                    }
                 }
             }
 
