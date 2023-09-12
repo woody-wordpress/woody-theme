@@ -568,10 +568,10 @@ class WoodyTheme_ACF
 
     public function getAspectPostTitleResult($title, $post, $field, $post_id) {
         if ($post->post_type == 'touristic_sheet') {
-            $meta_value = get_field('touristic_source_identifier', $post->ID);
+            $touristic_source_identifier = get_field('touristic_source_identifier', $post->ID);
 
-            if (!empty($meta_value)) {
-                $sheet_aspect = explode('-', $meta_value)[0];
+            if (!empty($touristic_source_identifier)) {
+                $sheet_aspect = explode('-', $touristic_source_identifier)[0];
                 $title = $title . '<small style="color:#cfcfcf; font-style:italic; text-transform: uppercase"> - ' . $sheet_aspect . '</small>';
             }
         }
