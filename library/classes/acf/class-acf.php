@@ -571,8 +571,11 @@ class WoodyTheme_ACF
             $touristic_source_identifier = get_field('touristic_source_identifier', $post->ID);
 
             if (!empty($touristic_source_identifier)) {
-                $sheet_aspect = explode('-', $touristic_source_identifier)[0];
-                $title = $title . '<small style="color:#cfcfcf; font-style:italic; text-transform: uppercase"> - ' . $sheet_aspect . '</small>';
+                $sheet_aspect = sizeof(explode('-', $touristic_source_identifier)) > 1 ? explode('-', $touristic_source_identifier)[0] : null;
+
+                if (!empty($sheet_aspect)) {
+                    $title = $title . '<small style="color:#cfcfcf; font-style:italic; text-transform: uppercase"> - ' . $sheet_aspect . '</small>';
+                }
             }
         }
 
