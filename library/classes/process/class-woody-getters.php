@@ -374,7 +374,6 @@ class WoodyTheme_WoodyGetters
         }
 
         if (!empty($wrapper) && !empty($wrapper['display_elements']) && is_array($wrapper['display_elements'])) {
-            console_log($wrapper, 'WRAPPER');
             if (empty($is_attachment) && in_array('pretitle', $wrapper['display_elements'])) {
                 $data['pretitle'] = $this->tools->replacePattern($this->tools->getFieldAndFallback($original_item, 'focus_pretitle', get_field('page_heading_heading', $post->ID), 'pretitle', $post, 'field_5b87f20257a1d', $data['page_type']), $original_item->ID);
             }
@@ -515,8 +514,6 @@ class WoodyTheme_WoodyGetters
                 unset($data['live_preview']);
             }
         }
-
-        console_log($data);
 
         return apply_filters('woody_custom_pagePreview', $data, $wrapper);
     }
