@@ -411,7 +411,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -438,7 +438,7 @@
                 ]
             ],
             "wrapper": {
-                "width": "50",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -451,6 +451,66 @@
             "multiple": 0,
             "return_format": "object",
             "ui": 1
+        },
+        {
+            "key": "field_64a6d058750f8",
+            "label": "Exclure des pages",
+            "name": "exclude_post",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_60cc8c88f2824",
+                        "operator": "==",
+                        "value": "pages"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_64a6d2200183b",
+            "label": "Pages à Exlure",
+            "name": "excluded_posts",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_64a6d058750f8",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "id"
         },
         {
             "key": "field_643ebac43c712",
@@ -813,7 +873,7 @@
                     "label": "Identifiant de conf Touristic Maps",
                     "name": "focus_tmaps_confid",
                     "type": "clone",
-                    "wrapper":{
+                    "wrapper": {
                         "width": 40,
                         "class": "",
                         "id": ""
