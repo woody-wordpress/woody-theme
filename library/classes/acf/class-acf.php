@@ -62,6 +62,16 @@ class WoodyTheme_ACF
         add_filter('acf/fields/post_object/query', [$this, 'getPostObjectDefaultTranslation'], 10, 3);
         add_filter('acf/fields/page_link/result', [$this, 'postObjectAcfResults'], 10, 4);
 
+        if (get_field('display_default_lang_title', 'options')) {
+            add_filter('acf/fields/post_object/result', [$this, 'translatePostTitleResult'], 10, 4);
+            add_filter('acf/fields/page_link/result', [$this, 'translatePostTitleResult'], 10, 4);
+        }
+
+        if (get_field('display_sheet_aspect', 'options')) {
+            add_filter('acf/fields/post_object/result', [$this, 'getAspectPostTitleResult'], 10, 4);
+            add_filter('acf/fields/page_link/result', [$this, 'getAspectPostTitleResult'], 10, 4);
+        }
+
         add_filter('acf/load_value/type=gallery', [$this, 'pllGalleryLoadField'], 10, 3);
 
         add_filter('acf/load_field/name=section_content', [$this, 'sectionContentLoadField']);
@@ -534,22 +544,40 @@ class WoodyTheme_ACF
     {
         $parent_id = getPostRootAncestor($post->ID);
 
-        $display_default_lang_title = apply_filters('woody_get_field_option', 'display_default_lang_title');
-        if ($display_default_lang_title) {
-            $post_lang = apply_filters('woody_pll_get_post_language', $post->ID);
-            $default_lang = apply_filters('woody_pll_default_lang_code', null);
-
-            if ($post_lang !== $default_lang) {
-                $translation = apply_filters('woody_default_lang_post_title', $post->ID);
-                if (!empty($translation)) {
-                    $title = $title . '<small style="color:#cfcfcf; font-style:italic"> - ( ' . $default_lang . ': ' . $translation . ' )</small>';
-                }
-            }
-        }
-
         if (!empty($parent_id)) {
             $parent = get_post($parent_id);
             $title = $title . '<small style="color:#cfcfcf; font-style:italic"> - ( Enfant de ' . $parent->post_title . ' )</small>';
+        }
+
+        return $title;
+    }
+
+    public function translatePostTitleResult($title, $post, $field, $post_id) {
+        $post_lang = apply_filters('woody_pll_get_post_language', $post->ID);
+        $default_lang = apply_filters('woody_pll_default_lang_code', null);
+
+        if ($post_lang !== $default_lang) {
+            $translation = apply_filters('woody_default_lang_post_title', $post->ID);
+            if (!empty($translation)) {
+                $title = $title . '<small style="color:#cfcfcf; font-style:italic"> - ( ' . $default_lang . ': ' . $translation . ' )</small>';
+            }
+        }
+
+        return $title;
+    }
+
+    public function getAspectPostTitleResult($title, $post, $field, $post_id) {
+        if ($post->post_type == 'touristic_sheet') {
+            $touristic_source_identifier = get_field('touristic_source_identifier', $post->ID);
+
+            if (!empty($touristic_source_identifier)) {
+                $get_aspect = explode('-', $touristic_source_identifier);
+                $sheet_aspect = sizeof($get_aspect) > 1 ? $get_aspect[0] : null;
+
+                if (!empty($sheet_aspect)) {
+                    $title = $title . '<small style="color:#cfcfcf; font-style:italic; text-transform: uppercase"> - ' . $sheet_aspect . '</small>';
+                }
+            }
         }
 
         return $title;
