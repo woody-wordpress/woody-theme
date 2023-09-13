@@ -166,6 +166,7 @@ class WoodyTheme_WoodyProcessTools
         }
 
         $display['gridContainer'] = $container_classes;
+        $display['display_fullwidth'] = $wrapper['display_fullwidth'];
         $display['background_img'] = (empty($wrapper['background_img'])) ? '' : $wrapper['background_img'];
         $display['parallax'] = (empty($wrapper['parallax'])) ? '' : $wrapper['parallax'];
         $classes_array[] = (empty($display['background_img'])) ? '' : 'isRel';

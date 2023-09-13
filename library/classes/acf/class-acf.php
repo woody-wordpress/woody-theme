@@ -30,6 +30,8 @@ class WoodyTheme_ACF
         add_action('edit_term', [$this, 'cleanTermsChoicesCache']);
         add_action('delete_term', [$this, 'cleanTermsChoicesCache']);
 
+        add_action('acf/init', [$this, 'registerHooksAfterAcfInit']);
+
         add_action('acf/save_post', [$this, 'clearVarnishCache'], 20);
 
         add_filter('acf/settings/load_json', [$this, 'acfJsonLoad']);
@@ -87,6 +89,19 @@ class WoodyTheme_ACF
         add_action('wp_ajax_generate_layout_acf_clone', [$this, 'getRenderedLayout']);
 
         add_filter('acf/load_value/name=edit_mode', [$this, 'editModeLoadField'], 10, 3);
+    }
+
+    public function registerHooksAfterAcfInit()
+    {
+        if (get_field('display_default_lang_title', 'options')) {
+            add_filter('acf/fields/post_object/result', [$this, 'translatePostTitleResult'], 10, 4);
+            add_filter('acf/fields/page_link/result', [$this, 'translatePostTitleResult'], 10, 4);
+        }
+
+        if (get_field('display_sheet_aspect', 'options')) {
+            add_filter('acf/fields/post_object/result', [$this, 'getAspectPostTitleResult'], 10, 4);
+            add_filter('acf/fields/page_link/result', [$this, 'getAspectPostTitleResult'], 10, 4);
+        }
     }
 
     public function woodyGetFieldOption($field_name = null)
@@ -534,22 +549,40 @@ class WoodyTheme_ACF
     {
         $parent_id = getPostRootAncestor($post->ID);
 
-        $display_default_lang_title = apply_filters('woody_get_field_option', 'display_default_lang_title');
-        if ($display_default_lang_title) {
-            $post_lang = apply_filters('woody_pll_get_post_language', $post->ID);
-            $default_lang = apply_filters('woody_pll_default_lang_code', null);
-
-            if ($post_lang !== $default_lang) {
-                $translation = apply_filters('woody_default_lang_post_title', $post->ID);
-                if (!empty($translation)) {
-                    $title = $title . '<small style="color:#cfcfcf; font-style:italic"> - ( ' . $default_lang . ': ' . $translation . ' )</small>';
-                }
-            }
-        }
-
         if (!empty($parent_id)) {
             $parent = get_post($parent_id);
             $title = $title . '<small style="color:#cfcfcf; font-style:italic"> - ( Enfant de ' . $parent->post_title . ' )</small>';
+        }
+
+        return $title;
+    }
+
+    public function translatePostTitleResult($title, $post, $field, $post_id) {
+        $post_lang = apply_filters('woody_pll_get_post_language', $post->ID);
+        $default_lang = apply_filters('woody_pll_default_lang_code', null);
+
+        if ($post_lang !== $default_lang) {
+            $translation = apply_filters('woody_default_lang_post_title', $post->ID);
+            if (!empty($translation)) {
+                $title = $title . '<small style="color:#cfcfcf; font-style:italic"> - ( ' . $default_lang . ': ' . $translation . ' )</small>';
+            }
+        }
+
+        return $title;
+    }
+
+    public function getAspectPostTitleResult($title, $post, $field, $post_id) {
+        if ($post->post_type == 'touristic_sheet') {
+            $touristic_source_identifier = get_field('touristic_source_identifier', $post->ID);
+
+            if (!empty($touristic_source_identifier)) {
+                $get_aspect = explode('-', $touristic_source_identifier);
+                $sheet_aspect = sizeof($get_aspect) > 1 ? $get_aspect[0] : null;
+
+                if (!empty($sheet_aspect)) {
+                    $title = $title . '<small style="color:#cfcfcf; font-style:italic; text-transform: uppercase"> - ' . $sheet_aspect . '</small>';
+                }
+            }
         }
 
         return $title;
@@ -962,6 +995,10 @@ class WoodyTheme_ACF
     public function woodyGetAllTemplates()
     {
         $return = wp_cache_get('woody_tpls_components', 'woody');
+
+        $user = wp_get_current_user();
+        $is_administrator = in_array('administrator', $user->roles);
+
         if (empty($return)) {
             $tplComponents = [];
             $woodyComponents = getWoodyComponents();
@@ -972,9 +1009,9 @@ class WoodyTheme_ACF
                     $display_options = json_encode($component['display'], JSON_THROW_ON_ERROR);
                 }
 
+                $lib_design = !empty($component['lib_design']) ? $component['lib_design'] : '';
                 $is_new_tpl = (!empty($component['creation']) && isWoodyNewTpl($component['creation'])) ? "<span class='tpl-badge tpl-new'>Nouveau</span>" : '';
                 $is_custom_tpl = !empty($component['custom_theme']) ? "<span class='tpl-badge tpl-custom-theme'>Personnalisé</span>" : '';
-
                 $groups = empty($component['acf_groups']) ? '' : implode(" ", $component['acf_groups']);
                 if (!empty($groups)) {
                     if (strpos($component['thumbnails']['small'], 'custom_woody_tpls') === false) {
@@ -983,10 +1020,12 @@ class WoodyTheme_ACF
                         $img_views_path = apply_filters('custom_woody_tpls_thumbnails_path', '/img/', $component['thumbnails']['small']);
                     }
 
-                    $tplComponents[$key] = "<div class='tpl-choice-wrapper " . $groups . "' data-value='". $key ."' data-display-options='". $display_options ."'>
-                    <img class='img-responsive lazyload' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' data-src='" . WP_HOME . "/app/dist/" . WP_SITE_KEY . $img_views_path . $component['thumbnails']['small'] . "?version=" . get_option("woody_theme_version") . "' alt='" . $key . "' width='150' height='150' />
-                    <h5 class='tpl-title'>" . $component["name"] . "</h5><div class='tpl-badges'>" . $is_new_tpl . $is_custom_tpl . "</div>" .
-                    "</div>";
+                    if ($is_administrator || !$is_administrator && $lib_design != 'TODO' || empty($lib_design)) {
+                        $tplComponents[$key] = "<div class='tpl-choice-wrapper " . $groups . "' data-value='". $key ."' data-display-options='". $display_options ."'>
+                        <img class='img-responsive lazyload' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' data-src='" . WP_HOME . "/app/dist/" . WP_SITE_KEY . $img_views_path . $component['thumbnails']['small'] . "?version=" . get_option("woody_theme_version") . "' alt='" . $key . "' width='150' height='150' />
+                        <h5 class='tpl-title'>" . $component["name"] . "</h5><div class='tpl-badges'>" . $is_new_tpl . $is_custom_tpl . "</div>" .
+                        "</div>";
+                    }
                 }
             }
 
