@@ -30,6 +30,8 @@ class WoodyTheme_ACF
         add_action('edit_term', [$this, 'cleanTermsChoicesCache']);
         add_action('delete_term', [$this, 'cleanTermsChoicesCache']);
 
+        add_action('acf/init', [$this, 'registerHooksAfterAcfInit']);
+
         add_action('acf/save_post', [$this, 'clearVarnishCache'], 20);
 
         add_filter('acf/settings/load_json', [$this, 'acfJsonLoad']);
@@ -62,16 +64,6 @@ class WoodyTheme_ACF
         add_filter('acf/fields/post_object/query', [$this, 'getPostObjectDefaultTranslation'], 10, 3);
         add_filter('acf/fields/page_link/result', [$this, 'postObjectAcfResults'], 10, 4);
 
-        if (get_field('display_default_lang_title', 'options')) {
-            add_filter('acf/fields/post_object/result', [$this, 'translatePostTitleResult'], 10, 4);
-            add_filter('acf/fields/page_link/result', [$this, 'translatePostTitleResult'], 10, 4);
-        }
-
-        if (get_field('display_sheet_aspect', 'options')) {
-            add_filter('acf/fields/post_object/result', [$this, 'getAspectPostTitleResult'], 10, 4);
-            add_filter('acf/fields/page_link/result', [$this, 'getAspectPostTitleResult'], 10, 4);
-        }
-
         add_filter('acf/load_value/type=gallery', [$this, 'pllGalleryLoadField'], 10, 3);
 
         add_filter('acf/load_field/name=section_content', [$this, 'sectionContentLoadField']);
@@ -97,6 +89,19 @@ class WoodyTheme_ACF
         add_action('wp_ajax_generate_layout_acf_clone', [$this, 'getRenderedLayout']);
 
         add_filter('acf/load_value/name=edit_mode', [$this, 'editModeLoadField'], 10, 3);
+    }
+
+    public function registerHooksAfterAcfInit()
+    {
+        if (get_field('display_default_lang_title', 'options')) {
+            add_filter('acf/fields/post_object/result', [$this, 'translatePostTitleResult'], 10, 4);
+            add_filter('acf/fields/page_link/result', [$this, 'translatePostTitleResult'], 10, 4);
+        }
+
+        if (get_field('display_sheet_aspect', 'options')) {
+            add_filter('acf/fields/post_object/result', [$this, 'getAspectPostTitleResult'], 10, 4);
+            add_filter('acf/fields/page_link/result', [$this, 'getAspectPostTitleResult'], 10, 4);
+        }
     }
 
     public function woodyGetFieldOption($field_name = null)
