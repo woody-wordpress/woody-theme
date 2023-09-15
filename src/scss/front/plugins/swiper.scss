@@ -1,7 +1,9 @@
-@import "src/swiper";
-@import "src/components/navigation/navigation";
-@import "src/components/pagination/pagination";
-@import "src/components/lazy/lazy";
+// @import "src/components/lazy/lazy";
+
+@import "../../../../../../../../gulp/node_modules/swiper/swiper.scss";
+
+@import "../../../../../../../../gulp/node_modules/swiper/modules/navigation.scss";
+@import "../../../../../../../../gulp/node_modules/swiper/modules/pagination.scss";
 
 .swiper-container {
     width: 100%;
