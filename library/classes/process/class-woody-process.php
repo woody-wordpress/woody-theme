@@ -36,8 +36,7 @@ class WoodyTheme_WoodyProcess
     {
         $lon_postmeta = null;
         // On surcharge l'ordre quand on veut faire du tri par géolocalisation
-        //TODO: $wp_query->query['orderby'] peut être un tableau (si vide peut-être)? Génère un warning
-        if (!empty($wp_query->query['orderby']) && strpos($wp_query->query['orderby'], 'geoloc') !== false) {
+        if (!empty($wp_query->query['orderby']) && is_string($wp_query->query['orderby']) && strpos($wp_query->query['orderby'], 'geoloc') !== false) {
             $post_id = explode('_', $wp_query->query['orderby']);
             $post_id = (is_array($post_id)) ? end($post_id) : null;
             if (!empty($post_id)) {
