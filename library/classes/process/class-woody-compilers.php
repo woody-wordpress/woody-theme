@@ -113,6 +113,13 @@ class WoodyTheme_WoodyCompilers
                 $the_items['display'] = $this->tools->getDisplayOptions($wrapper['focus_block_bg_params']);
             }
 
+            if (!empty($wrapper['analytics_event'])) {
+                $the_items['analytics'] = [
+                    'name' => $wrapper['analytics_event'],
+                    'event' => str_replace('-', '_', sanitize_title($wrapper['analytics_event']))
+                ];
+            }
+
             if (!empty($wrapper['focus_map_params'])) {
                 if (!empty($wrapper['focus_map_params']['tmaps_confid'])) {
                     $the_items['map_params']['tmaps_confid'] = $wrapper['focus_map_params']['tmaps_confid'];
