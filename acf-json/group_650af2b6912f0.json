@@ -1,0 +1,43 @@
+{
+    "key": "group_650af2b6912f0",
+    "title": "Analytics",
+    "fields": [
+        {
+            "key": "field_650af2f88f702",
+            "label": "Nom de l'évènement Analytics",
+            "name": "analytics_event",
+            "type": "text",
+            "instructions": "Permet de surcharger le nom de l'évènement rattaché au clic sur une mise en avant.<br>Dans Google Analytics, les données seront présentées sous la forme :<br>Name : Nom de l'évènement<br>Label : Titre de la page - URL",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "Nom de l'évènement",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1641313543
+}
