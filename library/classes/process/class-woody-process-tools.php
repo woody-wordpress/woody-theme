@@ -166,7 +166,7 @@ class WoodyTheme_WoodyProcessTools
         }
 
         $display['gridContainer'] = $container_classes;
-        $display['display_fullwidth'] = $wrapper['display_fullwidth'];
+        $display['display_fullwidth'] = empty($wrapper['display_fullwidth']) ? '' : $wrapper['display_fullwidth'];
         $display['background_img'] = (empty($wrapper['background_img'])) ? '' : $wrapper['background_img'];
         $display['parallax'] = (empty($wrapper['parallax'])) ? '' : $wrapper['parallax'];
         $classes_array[] = (empty($display['background_img'])) ? '' : 'isRel';
@@ -185,7 +185,7 @@ class WoodyTheme_WoodyProcessTools
         $display['section_animations'] = (empty($wrapper['section_animations'])) ? '' : $wrapper['section_animations'];
 
         if(!empty($wrapper['custom_resp_button'])) {
-            if($wrapper['custom_resp_button'] && wp_is_mobile()) {
+            if(wp_is_mobile()) {
                 $mobile_spacing_array[] = (empty($wrapper['mobile_scope_paddings']['scope_padding_top'])) ? '' : $wrapper['mobile_scope_paddings']['scope_padding_top'];
                 $mobile_spacing_array[] = (empty($wrapper['mobile_scope_paddings']['scope_padding_bottom'])) ? '' : $wrapper['mobile_scope_paddings']['scope_padding_bottom'];
                 $mobile_spacing_array[] = (empty($wrapper['mobile_scope_margins']['scope_margin_top'])) ? '' : $wrapper['mobile_scope_margins']['scope_margin_top'];
