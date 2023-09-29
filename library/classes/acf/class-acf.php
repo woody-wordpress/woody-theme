@@ -1102,7 +1102,6 @@ class WoodyTheme_ACF
             case 'themes':
             case 'places':
                 wp_cache_delete('layout-auto_focus');
-                wp_cache_delete('layout-manual_focus');
                 wp_cache_delete('layout-content_list');
                 wp_cache_delete('layout-gallery');
                 break;
