@@ -1112,13 +1112,6 @@ class WoodyTheme_ACF
             default:
                 break;
         }
-
-        // $field = acf_get_field("field_5b043f0525968");
-
-        // foreach ($field['layouts'] as $layout) {
-        //     console_log($layout['name']);
-        //     // wp_cache_delete('layout-' . $layout['name']);
-        // }
     }
 
     public function addUserRichedit()
