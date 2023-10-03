@@ -3,13 +3,13 @@ import $, { timers } from 'jquery';
 function getCookie(name) {
     let cookie = {};
     document.cookie.split(';').forEach(function(el) {
-        let [k,v] = el.split('=');
+        let [k, v] = el.split('=');
         cookie[k.trim()] = v;
     });
     return cookie[name];
 }
 
-function handleErrors(response){
+function handleErrors(response) {
     if (!response.ok) {
         throw Error(response.statusText);
     }
@@ -24,6 +24,10 @@ function handleErrors(response){
  */
 const savePost = (e, publish) => {
     const form = document.querySelector('#post');
+    const requiredFields = form.querySelectorAll('.is-required'); // Champs obligatoires
+    // const requiredFieldsTextValidate = form.querySelectorAll('.is-required .acf-input input'); // Champs de texte obligatoires remplis
+    const requiredFieldsValidate = form.querySelectorAll('.is-required .acf-selection'); // Champs de selection obligatoires remplis
+    const validate = requiredFields.length <= requiredFieldsValidate.length ? true : false; // <= car un champs peu avoir plusieurs valeur (ex : claims)
     const data = new FormData(form);
 
     let spinner = publish ?
@@ -41,48 +45,69 @@ const savePost = (e, publish) => {
     e.preventDefault();
 
     fetch(form.getAttribute("action"), {
-        method: 'POST',
-        body: data,
-        redirect: 'follow',
-        headers: {
-            'Access-Control-Allow-Headers': 'Location'
-        }
-    })
-    .then(res => {
-        deleteNotices();
+            method: 'POST',
+            body: data,
+            redirect: 'follow',
+            headers: {
+                'Access-Control-Allow-Headers': 'Location'
+            }
+        })
+        .then(res => {
+            deleteNotices();
+            const fieldErrorNotices = document.querySelectorAll('.acf-notice.acf-error-message');
+            if (fieldErrorNotices.length > 0) {
+                fieldErrorNotices.forEach(errorNotice => errorNotice.remove());
+            }
 
-        if (res.url.includes('wp-login')) {
+            if (res.url.includes('wp-login')) {
+                if (spinner) spinner.classList.remove('is-active');
+                createNotice('notice-error', 'Impossible d\'enregistrer la page, d\'après vos cookies, vous êtes déconnecté. Ne quittez pas cette page ou vos modifications seront perdues.</br>Pas de panique, il suffit de vous reconnecter à partir d\'un autre onglet puis d\'enregistrer cette page.');
+                return;
+            }
+
+            if (!validate) {
+                if (spinner) spinner.classList.remove('is-active');
+                const invalidFields = Math.abs(requiredFields - requiredFieldsValidate);
+                createNotice('notice-error', `Impossible d\'enregistrer la page, ${invalidFields} champs obligatoires ne sont pas remplis.`);
+
+                requiredFields.forEach((field) => {
+                    if (field.querySelector('.acf-notice.acf-error-message') === null && field.querySelectorAll('.acf-selection').length == 0) {
+                        let errorDetails = document.createElement("div");
+                        errorDetails.classList.add("acf-notice", "-error", "acf-error-message");
+                        errorDetails.innerHTML = "<p>Ce champ est obligatoire</p>";
+                        field.querySelector('.acf-label').appendChild(errorDetails);
+                    }
+                })
+                return;
+            }
+
+            if (res.status == 200) {
+                deleteNotices();
+                if (spinner) spinner.classList.remove('is-active');
+                createNotice('notice-success', 'Page mise à jour. Vos modifications ont été enregistrées correctement');
+
+                // Reset unload event on ACF fields
+                acf.unload.reset();
+
+                // Reset beforeunload event with vanilla
+                window.addEventListener('beforeunload', () => false);
+                // Reset beforeunload event with jquery
+                $(window).off('beforeunload');
+            } else {
+                createNotice('notice-error', 'Une erreur s\'est produite.</br>Code erreur : ' + res.status + ' - Statut : ' + res.statusText + '</br>Dans le cas d\'une erreur 500 Internal Server Error, vérifiez que vous êtes toujours connecté à internet');
+            }
+
+        }).catch(err => {
+            console.log(err);
+            deleteNotices();
             if (spinner) spinner.classList.remove('is-active');
-            createNotice('notice-error', 'Impossible d\'enregistrer la page, d\'après vos cookies, vous êtes déconnecté. Ne quittez pas cette page ou vos modifications seront perdues.</br>Pas de panique, il suffit de vous reconnecter à partir d\'un autre onglet puis d\'enregistrer cette page.');
-            return;
-        }
-
-        if(res.status == 200){
-            if (spinner) spinner.classList.remove('is-active');
-            createNotice('notice-success', 'Page mise à jour. Vos modifications ont été enregistrées correctement');
-
-            // Reset unload event on ACF fields
-            acf.unload.reset();
-
-            // Reset beforeunload event with vanilla
-            window.addEventListener('beforeunload', () => false);
-            // Reset beforeunload event with jquery
-            $(window).off('beforeunload');
-        } else {
-            createNotice('notice-error', 'Une erreur s\'est produite.</br>Code erreur : ' + res.status + ' - Statut : ' + res.statusText + '</br>Dans le cas d\'une erreur 500 Internal Server Error, vérifiez que vous êtes toujours connecté à internet');
-        }
-
-    }).catch(err => {
-        console.log(err);
-        deleteNotices();
-        if (spinner) spinner.classList.remove('is-active');
-        createNotice('notice-error', 'Vos modification n\'ont pas pu être enregistrées en raison d\'une erreur.</br>Code erreur : ' + err.status + ' - Statut : ' + err.statusText);
-    });
+            createNotice('notice-error', 'Vos modification n\'ont pas pu être enregistrées en raison d\'une erreur.</br>Code erreur : ' + err.status + ' - Statut : ' + err.statusText);
+        });
 };
 
 const deleteNotices = () => {
     let notices = document.querySelectorAll('#wpbody-content>.wrap>.custom-notice');
-    if(notices.length > 0){
+    if (notices.length > 0) {
         notices.forEach(notice => {
             notice.remove();
         });
@@ -129,4 +154,3 @@ if (!$('body').hasClass('post-type-acf-field-group')) { // Fix for acf field gro
 
     window.onbeforeunload = null;
 }
-
