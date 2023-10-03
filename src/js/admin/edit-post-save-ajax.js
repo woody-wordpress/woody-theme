@@ -25,10 +25,19 @@ function handleErrors(response) {
 const savePost = (e, publish) => {
     const form = document.querySelector('#post');
     const requiredFields = form.querySelectorAll('.is-required'); // Champs obligatoires
-    // const requiredFieldsTextValidate = form.querySelectorAll('.is-required .acf-input input'); // Champs de texte obligatoires remplis
-    const requiredFieldsValidate = form.querySelectorAll('.is-required .acf-selection'); // Champs de selection obligatoires remplis
-    const validate = requiredFields.length <= requiredFieldsValidate.length ? true : false; // <= car un champs peu avoir plusieurs valeur (ex : claims)
+    const requiredFieldsText = form.querySelectorAll('.is-required .acf-input .acf-input-wrap>input'); // Champs de texte obligatoires remplis
+    const validRequiredFields = form.querySelectorAll('.is-required .acf-selection'); // Champs de selection obligatoires remplis
+    let totalValidFields = validRequiredFields.length; // Total de champs valides
     const data = new FormData(form);
+
+    // On ajoute 1 pour chaque champs de texte require qui possède une value
+    requiredFieldsText.forEach(field => {
+        if (field.value != '') {
+            totalValidFields++;
+        }
+    });
+
+    const isValid = requiredFields.length <= totalValidFields ? true : false; // <= car un champs peu avoir plusieurs valeurs en même temps (ex : tags)
 
     let spinner = publish ?
         document.querySelector('#publishing-action>.spinner') :
@@ -65,17 +74,31 @@ const savePost = (e, publish) => {
                 return;
             }
 
-            if (!validate) {
+            if (!isValid) {
                 if (spinner) spinner.classList.remove('is-active');
-                const invalidFields = Math.abs(requiredFields - requiredFieldsValidate);
-                createNotice('notice-error', `Impossible d\'enregistrer la page, ${invalidFields} champs obligatoires ne sont pas remplis.`);
+                const invalidFields = Math.abs(requiredFields.length - validRequiredFields.length);
+                // notice d'erreur
+                invalidFields === 1 ? createNotice('notice-error', `Impossible d\'enregistrer la page, un champ obligatoire n'est pas rempli.`) : createNotice('notice-error', `Impossible d\'enregistrer la page, ${invalidFields} champs obligatoires ne sont pas remplis.`);
 
+                // Affichage d'une erreur au dessus des champs
                 requiredFields.forEach((field) => {
-                    if (field.querySelector('.acf-notice.acf-error-message') === null && field.querySelectorAll('.acf-selection').length == 0) {
-                        let errorDetails = document.createElement("div");
-                        errorDetails.classList.add("acf-notice", "-error", "acf-error-message");
-                        errorDetails.innerHTML = "<p>Ce champ est obligatoire</p>";
-                        field.querySelector('.acf-label').appendChild(errorDetails);
+                    if (field.querySelector('.acf-notice.acf-error-message') === null) {
+                        switch (field.getAttribute('data-type')) {
+                            case 'taxonomy':
+                            case 'select':
+                                if (field.querySelectorAll('.acf-selection').length == 0) {
+                                    invalidField(field);
+                                    console.log(field);
+                                }
+                                break;
+                            case 'text':
+                                if (field.querySelector('.acf-input .acf-input-wrap>input').value == '') {
+                                    invalidField(field);
+                                }
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 })
                 return;
@@ -104,6 +127,13 @@ const savePost = (e, publish) => {
             createNotice('notice-error', 'Vos modification n\'ont pas pu être enregistrées en raison d\'une erreur.</br>Code erreur : ' + err.status + ' - Statut : ' + err.statusText);
         });
 };
+
+const invalidField = (field) => {
+    let errorDetails = document.createElement("div");
+    errorDetails.classList.add("acf-notice", "-error", "acf-error-message");
+    errorDetails.innerHTML = "<p>Ce champ est obligatoire</p>";
+    return field.querySelector('.acf-label').appendChild(errorDetails);
+}
 
 const deleteNotices = () => {
     let notices = document.querySelectorAll('#wpbody-content>.wrap>.custom-notice');
