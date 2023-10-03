@@ -88,7 +88,20 @@ const savePost = (e, publish) => {
                             case 'select':
                                 if (field.querySelectorAll('.acf-selection').length == 0) {
                                     invalidField(field);
-                                    console.log(field);
+
+                                    // uncollapse bloc
+                                    while (field !== null && !field.classList.contains('acf-row')) {
+                                        if (field.classList.contains('layout')) {
+                                            field.classList.remove('-collapsed');
+                                        }
+
+                                        field = field.parentElement;
+                                    }
+
+                                    // uncollaspe section
+                                    if (field.classList.contains('-collapsed')) {
+                                        field.classList.remove('-collapsed');
+                                    }
                                 }
                                 break;
                             case 'text':
