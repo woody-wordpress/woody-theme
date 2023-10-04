@@ -25,19 +25,19 @@ function handleErrors(response) {
 const savePost = (e, publish) => {
     const form = document.querySelector('#post');
     const requiredFields = form.querySelectorAll('.is-required'); // Champs obligatoires
-    const requiredFieldsText = form.querySelectorAll('.is-required .acf-input .acf-input-wrap>input'); // Champs de texte obligatoires remplis
-    const validRequiredFields = form.querySelectorAll('.is-required .acf-selection'); // Champs de selection obligatoires remplis
-    let totalValidFields = validRequiredFields.length; // Total de champs valides
     const data = new FormData(form);
+    let isValid = true;
+    let invalidField;
 
-    // On ajoute 1 pour chaque champs de texte require qui possède une value
-    requiredFieldsText.forEach(field => {
-        if (field.value != '') {
-            totalValidFields++;
+    // On parcours les champs obligatoires et on s'arrête si un n'est pas rempli
+    for (let i = 0; i < requiredFields.length; i++) {
+        const field = requiredFields[i].querySelector('.acf-input select') ? requiredFields[i].querySelector('.acf-input select') : requiredFields[i].querySelector('.acf-input input[type="text"]');
+        if (field.value === '') {
+            isValid = false;
+            invalidField = requiredFields[i];
+            break;
         }
-    });
-
-    const isValid = requiredFields.length <= totalValidFields ? true : false; // <= car un champs peu avoir plusieurs valeurs en même temps (ex : tags)
+    }
 
     let spinner = publish ?
         document.querySelector('#publishing-action>.spinner') :
@@ -53,6 +53,34 @@ const savePost = (e, publish) => {
 
     e.preventDefault();
 
+    if (!isValid) {
+        const fieldErrorNotices = document.querySelectorAll('.acf-notice.acf-error-message');
+        if (fieldErrorNotices.length > 0) {
+            fieldErrorNotices.forEach(errorNotice => errorNotice.remove());
+        }
+
+        if (spinner) spinner.classList.remove('is-active');
+        // notice d'erreur
+        createNotice('notice-error', `Impossible d\'enregistrer la page, un champ obligatoire nécessite votre attention.`);
+        invalidFieldNotice(invalidField);
+
+        // uncollapse bloc
+        while (invalidField !== null && !invalidField.classList.contains('acf-row')) {
+            if (invalidField.classList.contains('layout')) {
+                invalidField.classList.remove('-collapsed');
+            }
+
+            invalidField = invalidField.parentElement;
+        }
+
+        // uncollaspe section
+        if (invalidField.classList.contains('-collapsed')) {
+            invalidField.classList.remove('-collapsed');
+        }
+
+        return;
+    }
+
     fetch(form.getAttribute("action"), {
             method: 'POST',
             body: data,
@@ -63,57 +91,10 @@ const savePost = (e, publish) => {
         })
         .then(res => {
             deleteNotices();
-            const fieldErrorNotices = document.querySelectorAll('.acf-notice.acf-error-message');
-            if (fieldErrorNotices.length > 0) {
-                fieldErrorNotices.forEach(errorNotice => errorNotice.remove());
-            }
 
             if (res.url.includes('wp-login')) {
                 if (spinner) spinner.classList.remove('is-active');
                 createNotice('notice-error', 'Impossible d\'enregistrer la page, d\'après vos cookies, vous êtes déconnecté. Ne quittez pas cette page ou vos modifications seront perdues.</br>Pas de panique, il suffit de vous reconnecter à partir d\'un autre onglet puis d\'enregistrer cette page.');
-                return;
-            }
-
-            if (!isValid) {
-                if (spinner) spinner.classList.remove('is-active');
-                const invalidFields = Math.abs(requiredFields.length - validRequiredFields.length);
-                // notice d'erreur
-                invalidFields === 1 ? createNotice('notice-error', `Impossible d\'enregistrer la page, un champ obligatoire n'est pas rempli.`) : createNotice('notice-error', `Impossible d\'enregistrer la page, ${invalidFields} champs obligatoires ne sont pas remplis.`);
-
-                // Affichage d'une erreur au dessus des champs
-                requiredFields.forEach((field) => {
-                    if (field.querySelector('.acf-notice.acf-error-message') === null) {
-                        switch (field.getAttribute('data-type')) {
-                            case 'taxonomy':
-                            case 'select':
-                                if (field.querySelectorAll('.acf-selection').length == 0) {
-                                    invalidField(field);
-
-                                    // uncollapse bloc
-                                    while (field !== null && !field.classList.contains('acf-row')) {
-                                        if (field.classList.contains('layout')) {
-                                            field.classList.remove('-collapsed');
-                                        }
-
-                                        field = field.parentElement;
-                                    }
-
-                                    // uncollaspe section
-                                    if (field.classList.contains('-collapsed')) {
-                                        field.classList.remove('-collapsed');
-                                    }
-                                }
-                                break;
-                            case 'text':
-                                if (field.querySelector('.acf-input .acf-input-wrap>input').value == '') {
-                                    invalidField(field);
-                                }
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                })
                 return;
             }
 
@@ -141,7 +122,7 @@ const savePost = (e, publish) => {
         });
 };
 
-const invalidField = (field) => {
+const invalidFieldNotice = (field) => {
     let errorDetails = document.createElement("div");
     errorDetails.classList.add("acf-notice", "-error", "acf-error-message");
     errorDetails.innerHTML = "<p>Ce champ est obligatoire</p>";
