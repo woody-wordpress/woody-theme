@@ -64,6 +64,8 @@ class WoodyTheme_Timber_Filters
         $twig->addFilter(new Twig_SimpleFilter('spacing', [$this, 'spacing']));
         $twig->addFilter(new Twig_SimpleFilter('url_domain', [$this, 'url_domain']));
         $twig->addFilter(new Twig_SimpleFilter('html_class', [$this, 'html_class']));
+        $twig->addFilter(new Twig_SimpleFilter('hidePhoneNumber', [$this, 'hidePhoneNumber']));
+        $twig->addFilter(new Twig_SimpleFilter('beautifyPhoneNumber', [$this, 'beautifyPhoneNumber']));
 
         // Debug Woody
         $twig->addFilter(new Twig_SimpleFilter('dump', [$this, 'dump']));
@@ -124,6 +126,24 @@ class WoodyTheme_Timber_Filters
     public function phoneClick($text)
     {
         return substr($text, 0, -2) . '<span class="hidden-number">▒▒</span>';
+    }
+
+    public function hidePhoneNumber($phoneNumber, $count)
+    {
+        $phoneNumber = $this->beautifyPhoneNumber($phoneNumber);
+        $phoneNumber = substr($phoneNumber, 0, -$count);
+
+        return $phoneNumber;
+    }
+
+    public function beautifyPhoneNumber($phoneNumber)
+    {
+        if (strlen($phoneNumber) == 10) {
+            $phoneNumber = str_replace(' ', '', $phoneNumber);
+            $phoneNumber = wordwrap($phoneNumber, 2, ' ', true);
+        }
+
+        return $phoneNumber;
     }
 
     public function humanizeFilesize($bytes, $decimals = 0)
