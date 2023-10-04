@@ -53,18 +53,22 @@ const savePost = (e, publish) => {
 
     e.preventDefault();
 
-    if (!isValid) {
-        const fieldErrorNotices = document.querySelectorAll('.acf-notice.acf-error-message');
-        if (fieldErrorNotices.length > 0) {
-            fieldErrorNotices.forEach(errorNotice => errorNotice.remove());
-        }
+    // Si une erreur est déjà affichée on l'enève
+    const fieldErrorNotices = document.querySelectorAll('.acf-notice.acf-error-message');
+    if (fieldErrorNotices.length > 0) {
+        fieldErrorNotices.forEach(errorNotice => errorNotice.remove());
+    }
 
+    // Si un champs obligatoire n'a pas été rempli
+    if (!isValid) {
+        // Arrêt du spinner
         if (spinner) spinner.classList.remove('is-active');
-        // notice d'erreur
+        // Ajout de la notice d'erreur en haut de l'écran
         createNotice('notice-error', `Impossible d\'enregistrer la page, un champ obligatoire nécessite votre attention.`);
         invalidFieldNotice(invalidField);
 
-        // uncollapse bloc
+        // Ouverture des éléments pour repérer facilement l'erreur
+        // Bloc
         while (invalidField !== null && !invalidField.classList.contains('acf-row')) {
             if (invalidField.classList.contains('layout')) {
                 invalidField.classList.remove('-collapsed');
@@ -73,7 +77,7 @@ const savePost = (e, publish) => {
             invalidField = invalidField.parentElement;
         }
 
-        // uncollaspe section
+        // Section
         if (invalidField.classList.contains('-collapsed')) {
             invalidField.classList.remove('-collapsed');
         }
