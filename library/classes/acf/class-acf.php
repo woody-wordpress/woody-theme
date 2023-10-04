@@ -29,6 +29,8 @@ class WoodyTheme_ACF
         add_action('create_term', [$this, 'cleanTermsChoicesCache']);
         add_action('edit_term', [$this, 'cleanTermsChoicesCache']);
         add_action('delete_term', [$this, 'cleanTermsChoicesCache']);
+        // Suppression du cache des blocs pour mettre à jour les termes des taxonomies
+        add_action('saved_term', [$this, 'deleteTermCache'], 10, 4);
 
         add_action('acf/init', [$this, 'registerHooksAfterAcfInit']);
 
@@ -1091,6 +1093,24 @@ class WoodyTheme_ACF
 
         remove_filter('user_can_richedit', [$this, 'addUserRichedit']);
         $user->remove_cap('upload_files');
+    }
+
+    public function deleteTermCache($term_id, $tt_id, $taxonomy, $update) {
+        switch($taxonomy) {
+            case 'seasons':
+            case 'attachment_categorie':
+            case 'themes':
+            case 'places':
+                wp_cache_delete('layout-auto_focus');
+                wp_cache_delete('layout-content_list');
+                wp_cache_delete('layout-gallery');
+                break;
+            case 'attachment_hashtags':
+                wp_cache_delete('layout-socialwall');
+                break;
+            default:
+                break;
+        }
     }
 
     public function addUserRichedit()
