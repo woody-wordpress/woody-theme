@@ -39,7 +39,9 @@ class WoodyTheme_Api_Rest
                     'icon',
                     'pretitle',
                     'subtitle',
-                    'description'
+                    'description',
+                    'sheet_type',
+                    'sheet_town'
                 ],
                 'display_button' => true
             ];
