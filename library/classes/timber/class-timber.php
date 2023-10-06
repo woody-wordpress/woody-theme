@@ -118,7 +118,7 @@ if (!class_exists('Timber')) {
             $return = [];
 
             if (!empty($vars['globals'])) {
-                $keys = ['options', 'post_title', 'post_id', 'post_image', 'post_type', 'page_type', 'sheet_id', 'woody_options_pages', 'tags', 'area', 'current_lang', 'current_locale', 'current_season', 'ancestors', 'env'];
+                $keys = ['options', 'post_title', 'post_id', 'post_image', 'post_type', 'page_type', 'sheet_id', 'woody_options_pages', 'tags', 'area', 'current_lang', 'current_locale', 'current_season', 'ancestors', 'env', 'site_key'];
                 foreach ($keys as $key) {
                     if (!empty($vars['globals'][$key])) {
                         $return[$key] = $vars['globals'][$key];
@@ -134,14 +134,16 @@ if (!class_exists('Timber')) {
             $datalayer = [
                 'event' => 'globals',
                 'data' => [
-                    'lang' => $vars['globals']['current_locale'],
-                    'season' => $vars['globals']['current_season'],
-                    'area' => $vars['globals']['area'],
+                    'env' => (empty($vars['globals']['env'])) ? null : $vars['globals']['env'],
+                    'site_key' => (empty($vars['globals']['site_key'])) ? null : $vars['globals']['site_key'],
+                    'lang' => (empty($vars['globals']['current_locale'])) ? null : $vars['globals']['current_locale'],
+                    'season' => (empty($vars['globals']['current_season'])) ? null : $vars['globals']['current_season'],
+                    'area' => (empty($vars['globals']['area'])) ? null : $vars['globals']['area'],
                     'page' => [
-                        'id_page' => $vars['globals']['post_id'],
-                        'name' => $vars['globals']['post_title'],
-                        'page_type' => (!empty($vars['globals']['page_type'])) ? $vars['globals']['page_type'] : $vars['globals']['post_type'],
-                        'tags' => $vars['globals']['tags'],
+                        'id_page' => (empty($vars['globals']['post_id'])) ? null : $vars['globals']['post_id'],
+                        'name' => (empty($vars['globals']['post_title'])) ? null : $vars['globals']['post_title'],
+                        'page_type' => (empty($vars['globals']['page_type'])) ? $vars['globals']['post_type'] : $vars['globals']['page_type'],
+                        'tags' => (empty($vars['globals']['tags'])) ? null : $vars['globals']['tags'],
                         // 'lang' => $vars['globals']['current_locale'],
                         // 'season' => $vars['globals']['current_season'],
                         // 'area' => $vars['globals']['area'],

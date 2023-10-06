@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Parent theme) 1.47.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2023-03-16T10:24:35+01:00\n"
-"PO-Revision-Date: 2023-03-16 10:46+0100\n"
+"POT-Creation-Date: 2023-08-21T14:52:45+02:00\n"
+"PO-Revision-Date: 2023-08-21 15:17+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -175,7 +175,7 @@ msgid "Demander un devis"
 msgstr "Запрос цитаты"
 
 #: library/classes/content/class-polylang.php:119
-#: library/classes/content/class-polylang.php:241
+#: library/classes/content/class-polylang.php:242
 msgid "personne"
 msgstr "человек"
 
@@ -330,10 +330,12 @@ msgid "Accès au menu principal"
 msgstr "Доступ к главному меню"
 
 #: library/classes/content/class-polylang.php:161
+#: library/classes/process/class-woody-process.php:258
 msgid "Titre de la vidéo manquant"
 msgstr "Отсутствующее название видео"
 
 #: library/classes/content/class-polylang.php:162
+#: library/classes/process/class-woody-process.php:259
 msgid "Légende de la vidéo manquante"
 msgstr "Отсутствующая надпись к видео"
 
@@ -346,7 +348,7 @@ msgid "Vous cherchez quelque chose ?"
 msgstr "Вы что-то ищете?"
 
 #: library/classes/content/class-polylang.php:165
-#: library/classes/process/class-woody-compilers.php:908
+#: library/classes/process/class-woody-compilers.php:953
 msgid "Rechercher"
 msgstr "Поиск"
 
@@ -355,28 +357,28 @@ msgid "Réinitialiser"
 msgstr "Сброс"
 
 #: library/classes/content/class-polylang.php:167
-#: library/classes/process/class-woody-compilers.php:903
+#: library/classes/process/class-woody-compilers.php:948
 msgid "Choisissez vos dates"
 msgstr "Выберите даты"
 
 #: library/classes/content/class-polylang.php:168
-#: library/classes/process/class-woody-compilers.php:904
+#: library/classes/process/class-woody-compilers.php:949
 msgid "Date d'arrivée"
 msgstr "Дата прибытия"
 
 #: library/classes/content/class-polylang.php:169
-#: library/classes/process/class-woody-compilers.php:900
-#: library/classes/process/class-woody-compilers.php:901
+#: library/classes/process/class-woody-compilers.php:945
+#: library/classes/process/class-woody-compilers.php:946
 msgid "Durée du séjour"
 msgstr "Продолжительность пребывания"
 
 #: library/classes/content/class-polylang.php:170
-#: library/classes/process/class-woody-compilers.php:906
+#: library/classes/process/class-woody-compilers.php:951
 msgid "adulte(s)"
 msgstr "взрослый(ая)"
 
 #: library/classes/content/class-polylang.php:171
-#: library/classes/process/class-woody-compilers.php:907
+#: library/classes/process/class-woody-compilers.php:952
 msgid "enfant(s)"
 msgstr "ребёнок (дети)"
 
@@ -455,20 +457,20 @@ msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "Возможно, страница, которую вы ищете, находится здесь?"
 
 #: library/classes/content/class-polylang.php:188
-#: library/classes/process/class-woody-getters.php:451
-#: library/classes/process/class-woody-getters.php:662
+#: library/classes/process/class-woody-getters.php:457
+#: library/classes/process/class-woody-getters.php:707
 msgid "Lire la suite"
 msgstr "Читать далее"
 
 #: library/classes/content/class-polylang.php:189
-#: library/classes/process/class-woody-compilers.php:895
-#: library/classes/process/class-woody-compilers.php:897
+#: library/classes/process/class-woody-compilers.php:940
+#: library/classes/process/class-woody-compilers.php:942
 msgid "Que voulez-vous réserver ?"
 msgstr "Что вы хотите заказать ?"
 
 #: library/classes/content/class-polylang.php:190
-#: library/classes/process/class-woody-compilers.php:898
-#: library/classes/process/class-woody-compilers.php:899
+#: library/classes/process/class-woody-compilers.php:943
+#: library/classes/process/class-woody-compilers.php:944
 msgid "Choisissez vos dates de réservation"
 msgstr "Выберите даты бронирования"
 
@@ -481,7 +483,7 @@ msgid "Réservable"
 msgstr "Бронируемый"
 
 #: library/classes/content/class-polylang.php:193
-#: library/classes/process/class-woody-getters.php:538
+#: library/classes/process/class-woody-getters.php:583
 msgid "Télécharger"
 msgstr "Скачать"
 
@@ -521,36 +523,40 @@ msgstr "Национальность"
 msgid "Sommaire"
 msgstr "Содержание"
 
-#: library/classes/content/class-polylang.php:205
+#: library/classes/content/class-polylang.php:203
+msgid "Envoyer un email"
+msgstr "Отправить письмо"
+
+#: library/classes/content/class-polylang.php:206
 msgid "Ajouter"
 msgstr "Добавить"
 
-#: library/classes/content/class-polylang.php:206
+#: library/classes/content/class-polylang.php:207
 msgid "Supprimer"
 msgstr "Удалить"
 
-#: library/classes/content/class-polylang.php:207
+#: library/classes/content/class-polylang.php:208
 msgid "Cette liste est vide actuellement. Naviguez et ajoutez des pages !"
 msgstr ""
 "В настоящее время этот список пуст. Просматривайте и добавляйте страницы!"
 
-#: library/classes/content/class-polylang.php:210
+#: library/classes/content/class-polylang.php:211
 msgid "Ajouter à mes favoris"
 msgstr "Добавить в избранное"
 
-#: library/classes/content/class-polylang.php:211
+#: library/classes/content/class-polylang.php:212
 msgid "Imprimer/Exporter mes favoris"
 msgstr "распечатать/экспортировать избранное"
 
-#: library/classes/content/class-polylang.php:214
+#: library/classes/content/class-polylang.php:215
 msgid "Langue"
 msgstr ""
 
-#: library/classes/content/class-polylang.php:217
+#: library/classes/content/class-polylang.php:218
 msgid "Pour faire une demande de devis, veuillez choisir un séjour."
 msgstr "Чтобы запросить цену, пожалуйста, выберите место пребывания."
 
-#: library/classes/content/class-polylang.php:218
+#: library/classes/content/class-polylang.php:219
 msgid ""
 "Il semblerait qu'il n'y ait pas ou plus de séjours proposant une demande de "
 "devis disponibles sur le site"
@@ -558,271 +564,135 @@ msgstr ""
 "Похоже, что на сайте нет или уже не осталось мест, предлагающих запрос "
 "котировок"
 
-#: library/classes/content/class-polylang.php:219
+#: library/classes/content/class-polylang.php:220
 msgid "Séjours et activités"
 msgstr "Пребывание и деятельность"
 
-#: library/classes/content/class-polylang.php:220
+#: library/classes/content/class-polylang.php:221
 msgid "Retour à l'offre"
 msgstr "Вернуться к предложению"
 
-#: library/classes/content/class-polylang.php:221
+#: library/classes/content/class-polylang.php:222
 msgid "Récapitulatif"
 msgstr "Резюме"
 
-#: library/classes/content/class-polylang.php:222
+#: library/classes/content/class-polylang.php:223
 msgid "30 secondes"
 msgstr "30 секунд"
 
-#: library/classes/content/class-polylang.php:223
+#: library/classes/content/class-polylang.php:224
 msgid "Informations"
 msgstr "Информация"
 
-#: library/classes/content/class-polylang.php:224
+#: library/classes/content/class-polylang.php:225
 msgid "Coordonnées"
 msgstr "Контактная информация"
 
-#: library/classes/content/class-polylang.php:225
+#: library/classes/content/class-polylang.php:226
 msgid "Mon devis"
 msgstr "Моя цитата"
 
-#: library/classes/content/class-polylang.php:226
+#: library/classes/content/class-polylang.php:227
 msgid "Votre séjour/journée"
 msgstr "Ваше пребывание/день"
 
-#: library/classes/content/class-polylang.php:227
+#: library/classes/content/class-polylang.php:228
 msgid "Comprenant"
 msgstr "В том числе"
 
-#: library/classes/content/class-polylang.php:228
-#: library/templates/template-page.php:166
+#: library/classes/content/class-polylang.php:229
+#: library/templates/template-page.php:167
 msgid "Gratuit"
 msgstr "Бесплатно"
 
-#: library/classes/content/class-polylang.php:229
+#: library/classes/content/class-polylang.php:230
 msgid "Nombre de personnes"
 msgstr "Количество человек"
 
-#: library/classes/content/class-polylang.php:231
+#: library/classes/content/class-polylang.php:232
 msgid "* Champs obligatoires"
 msgstr "Обязательные поля"
 
-#: library/classes/content/class-polylang.php:232
+#: library/classes/content/class-polylang.php:233
 msgid "Nom/Prénom"
 msgstr "Имя/Фамилия"
 
-#: library/classes/content/class-polylang.php:233
+#: library/classes/content/class-polylang.php:234
 msgid "Raison sociale"
 msgstr "Название компании"
 
-#: library/classes/content/class-polylang.php:234
+#: library/classes/content/class-polylang.php:235
 msgid "Email"
 msgstr "Электронная почта"
 
-#: library/classes/content/class-polylang.php:235
+#: library/classes/content/class-polylang.php:236
 msgid "Téléphone"
 msgstr "Телефон"
 
-#: library/classes/content/class-polylang.php:236
+#: library/classes/content/class-polylang.php:237
 msgid "Votre commentaire"
 msgstr "Ваш комментарий"
 
-#: library/classes/content/class-polylang.php:237
+#: library/classes/content/class-polylang.php:238
 msgid "Valider ma demande de devis"
 msgstr "Удостоверить мой запрос котировок"
 
-#: library/classes/content/class-polylang.php:238
+#: library/classes/content/class-polylang.php:239
 msgid "Mon panier"
 msgstr "Моя корзина"
 
-#: library/classes/content/class-polylang.php:239
+#: library/classes/content/class-polylang.php:240
 msgid "TOTAL "
 msgstr "ВСЕГО "
 
-#: library/classes/content/class-polylang.php:240
+#: library/classes/content/class-polylang.php:241
 msgid "Base de"
 msgstr "Основа"
 
-#: library/classes/content/class-polylang.php:244
-#: library/classes/process/class-woody-compilers.php:610
+#: library/classes/content/class-polylang.php:245
+#: library/classes/process/class-woody-compilers.php:655
 msgid "Publié le"
 msgstr "Опубликовано на"
 
-#: library/classes/content/class-polylang.php:245
+#: library/classes/content/class-polylang.php:246
 msgid "Mis à jour le"
 msgstr "Обновлено на"
 
-#: library/classes/content/class-polylang.php:246
-#: library/classes/process/class-woody-compilers.php:424
+#: library/classes/content/class-polylang.php:247
+#: library/classes/process/class-woody-compilers.php:464
 msgid "Désolé, aucun contenu ne correspond à votre recherche"
 msgstr "Извините, нет материалов, соответствующих вашему поиску"
 
-#: library/classes/content/class-polylang.php:247
+#: library/classes/content/class-polylang.php:248
 msgid "Lire aussi"
 msgstr "Читайте также"
 
-#: library/classes/content/class-polylang.php:251
-msgid "Remontées mécaniques"
-msgstr "Лыжные подъемники"
+#: library/classes/content/class-polylang.php:249
+msgid "Classement"
+msgstr "Рейтинг"
 
-#: library/classes/content/class-polylang.php:252
-msgid "Pistes"
-msgstr "Треки"
-
-#: library/classes/content/class-polylang.php:253
-msgid "Domaine Alpin"
-msgstr "Альпийский домен"
-
-#: library/classes/content/class-polylang.php:254
-msgid "Domaine Nordique"
-msgstr "Домен Нордик"
-
-#: library/classes/content/class-polylang.php:255
-msgid "Détails"
-msgstr "Подробности"
-
-#: library/classes/content/class-polylang.php:256
-msgid "Météo"
-msgstr "Погода"
-
-#: library/classes/content/class-polylang.php:257
-msgid "Voir le bulletin météo"
-msgstr "Смотрите прогноз погоды"
-
-#: library/classes/content/class-polylang.php:258
-msgid "Bulletin complet"
-msgstr "Полный бюллетень"
-
-#: library/classes/content/class-polylang.php:259
-msgid "Webcams"
-msgstr "Веб-камеры"
-
-#: library/classes/content/class-polylang.php:260
-msgid "Voir les webcams"
-msgstr "Смотрите веб-камеры"
-
-#: library/classes/content/class-polylang.php:261
-msgid "Flux erroné !"
-msgstr "Неправильный корм!"
-
-#: library/classes/content/class-polylang.php:262
-msgid "Module Infoneige non configuré !"
-msgstr "Модуль Infoneige не настроен!"
-
-#: library/classes/content/class-polylang.php:263
-msgid "Enneigement"
-msgstr "Производство снега"
-
-#: library/classes/content/class-polylang.php:264
-msgid "Hauteur"
-msgstr "Высота"
-
-#: library/classes/content/class-polylang.php:265
-msgid "Pistes ouvertes"
-msgstr "Открытые дорожки"
-
-#: library/classes/content/class-polylang.php:266
-msgid "Risque d'avalanche"
-msgstr "Лавиноопасность"
-
-#: library/classes/content/class-polylang.php:267
-msgid "Limité"
-msgstr "Ограниченный"
-
-#: library/classes/content/class-polylang.php:268
-msgid "Moyen"
-msgstr "Средний"
-
-#: library/classes/content/class-polylang.php:269
-msgid "Élevé"
-msgstr "Высокий"
-
-#: library/classes/content/class-polylang.php:270
-msgid "Non spécifié"
-msgstr "Не указано"
-
-#: library/classes/content/class-polylang.php:271
-msgid "Qualité de la neige"
-msgstr "Качество снега"
-
-#: library/classes/content/class-polylang.php:272
-msgid "En live"
-msgstr "Прямой эфир"
-
-#: library/classes/content/class-polylang.php:273
-msgid "Toute l'info live"
-msgstr "Все новости в прямом эфире"
-
-#: library/classes/content/class-polylang.php:274
-msgid "Altitude"
-msgstr "Высота"
-
-#: library/classes/content/class-polylang.php:275
-msgid "Fraîche"
-msgstr "Свежие"
-
-#: library/classes/content/class-polylang.php:276
-msgid "Douce"
-msgstr "Сладкий"
-
-#: library/classes/content/class-polylang.php:277
-msgid "Dure"
-msgstr "Жесткий"
-
-#: library/classes/content/class-polylang.php:278
-msgid "Humide"
-msgstr "Влажный"
-
-#: library/classes/content/class-polylang.php:279
-msgid "De printemps"
-msgstr "Весна"
-
-#: library/classes/content/class-polylang.php:280
-msgid "Matin"
-msgstr "Утро"
-
-#: library/classes/content/class-polylang.php:281
-msgid "Après-midi"
-msgstr "После обеда"
-
-#: library/classes/content/class-polylang.php:282
-msgid "Ouverte"
-msgstr "Открыть"
-
-#: library/classes/content/class-polylang.php:283
-msgid "Fermée"
-msgstr "Закрытый"
-
-#: library/classes/content/class-polylang.php:284
-msgid "Prévision d'ouverture"
-msgstr "Прогноз на открытие"
-
-#: library/classes/content/class-polylang.php:285
-msgid "Liaison"
-msgstr "Ссылка"
-
-#: library/classes/process/class-woody-getters.php:740
-#: library/classes/process/class-woody-getters.php:741
+#: library/classes/process/class-woody-getters.php:785
+#: library/classes/process/class-woody-getters.php:786
 msgid "Découvrir"
 msgstr "Откройте для себя"
 
-#: library/classes/process/class-woody-getters.php:905
+#: library/classes/process/class-woody-getters.php:970
 msgid "Informations prestataire"
 msgstr "Информация о поставщике"
 
-#: library/classes/process/class-woody-getters.php:910
+#: library/classes/process/class-woody-getters.php:975
 msgid "Horaires"
 msgstr "Расписание"
 
-#: library/classes/process/class-woody-getters.php:915
+#: library/classes/process/class-woody-getters.php:980
 msgid "Carte"
 msgstr "Карта"
 
-#: library/classes/process/class-woody-getters.php:920
+#: library/classes/process/class-woody-getters.php:985
 msgid "Avis"
 msgstr "Уведомление"
 
-#: library/classes/process/class-woody-getters.php:925
+#: library/classes/process/class-woody-getters.php:990
 msgid "Poser une question"
 msgstr "Задать вопрос"
 
@@ -840,6 +710,111 @@ msgid ""
 "indisponible."
 msgstr ""
 "Страница, которую вы ищете, возможно, была удалена или временно недоступна."
+
+#~ msgid "Remontées mécaniques"
+#~ msgstr "Лыжные подъемники"
+
+#~ msgid "Pistes"
+#~ msgstr "Треки"
+
+#~ msgid "Domaine Alpin"
+#~ msgstr "Альпийский домен"
+
+#~ msgid "Domaine Nordique"
+#~ msgstr "Домен Нордик"
+
+#~ msgid "Détails"
+#~ msgstr "Подробности"
+
+#~ msgid "Météo"
+#~ msgstr "Погода"
+
+#~ msgid "Voir le bulletin météo"
+#~ msgstr "Смотрите прогноз погоды"
+
+#~ msgid "Bulletin complet"
+#~ msgstr "Полный бюллетень"
+
+#~ msgid "Webcams"
+#~ msgstr "Веб-камеры"
+
+#~ msgid "Voir les webcams"
+#~ msgstr "Смотрите веб-камеры"
+
+#~ msgid "Flux erroné !"
+#~ msgstr "Неправильный корм!"
+
+#~ msgid "Module Infoneige non configuré !"
+#~ msgstr "Модуль Infoneige не настроен!"
+
+#~ msgid "Enneigement"
+#~ msgstr "Производство снега"
+
+#~ msgid "Hauteur"
+#~ msgstr "Высота"
+
+#~ msgid "Pistes ouvertes"
+#~ msgstr "Открытые дорожки"
+
+#~ msgid "Risque d'avalanche"
+#~ msgstr "Лавиноопасность"
+
+#~ msgid "Limité"
+#~ msgstr "Ограниченный"
+
+#~ msgid "Moyen"
+#~ msgstr "Средний"
+
+#~ msgid "Élevé"
+#~ msgstr "Высокий"
+
+#~ msgid "Non spécifié"
+#~ msgstr "Не указано"
+
+#~ msgid "Qualité de la neige"
+#~ msgstr "Качество снега"
+
+#~ msgid "En live"
+#~ msgstr "Прямой эфир"
+
+#~ msgid "Toute l'info live"
+#~ msgstr "Все новости в прямом эфире"
+
+#~ msgid "Altitude"
+#~ msgstr "Высота"
+
+#~ msgid "Fraîche"
+#~ msgstr "Свежие"
+
+#~ msgid "Douce"
+#~ msgstr "Сладкий"
+
+#~ msgid "Dure"
+#~ msgstr "Жесткий"
+
+#~ msgid "Humide"
+#~ msgstr "Влажный"
+
+#~ msgid "De printemps"
+#~ msgstr "Весна"
+
+#~ msgid "Matin"
+#~ msgstr "Утро"
+
+#~ msgid "Après-midi"
+#~ msgstr "После обеда"
+
+#~ msgid "Ouverte"
+#~ msgstr "Открыть"
+
+#~ msgid "Fermée"
+#~ msgstr "Закрытый"
+
+#~ msgid "Prévision d'ouverture"
+#~ msgstr "Прогноз на открытие"
+
+#~ msgid "Liaison"
+#~ msgstr "Ссылка"
 
 #~ msgid "Nos suggestions"
 #~ msgstr "Наши предложения"

@@ -62,12 +62,13 @@
             "min": 0,
             "max": 0,
             "layout": "table",
-            "button_label": "",
+            "button_label": "Ajouter un profil",
             "sub_fields": [
                 {
                     "key": "field_5ee8dea2b7007",
                     "label": "Profil",
                     "name": "manual_profile",
+
                     "type": "post_object",
                     "instructions": "",
                     "required": 0,
@@ -92,7 +93,8 @@
                     "allow_null": 0,
                     "multiple": 0,
                     "return_format": "object",
-                    "ui": 1
+                    "ui": 1,
+                    "parent_repeater": "field_5ee8de82b7006"
                 }
             ]
         },
@@ -156,6 +158,40 @@
             "step": 1
         },
         {
+            "key": "field_64df5e9a12a3c",
+            "label": "Ordre de tri",
+            "name": "profile_focus_order",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5ee8dbb578446",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "created_desc": "Du plus récent au plus ancien",
+                "created_asc": "Du plus ancien au plus récent",
+                "alphabetical_order": "Ordre alphabétique",
+                "rand": "Aléatoire"
+            },
+            "default_value": "",
+            "return_format": "value",
+            "allow_null": 0,
+            "other_choice": 0,
+            "layout": "horizontal",
+            "save_other_choice": 0
+        },
+        {
             "key": "field_5ee8dd4f78449",
             "label": "Afficher les champs",
             "name": "profile_focus_display",
@@ -170,6 +206,7 @@
             },
             "choices": {
                 "complement": "Complément",
+                "label": "Label",
                 "description": "Description",
                 "birth": "Date de naissance",
                 "nationality": "Nationalité",
@@ -179,11 +216,12 @@
                 "phone": "Téléphone fixe",
                 "mobile": "Téléphone mobile",
                 "linkedin": "LinkedIn",
-                "twitter": "Twitter"
+                "twitter": "Twitter",
+                "website": "Site web"
             },
             "allow_custom": 0,
             "default_value": [],
-            "layout": "vertical",
+            "layout": "horizontal",
             "toggle": 0,
             "return_format": "value",
             "save_custom": 0
@@ -209,6 +247,109 @@
             "return_format": "id",
             "multiple": 0,
             "allow_null": 0
+        },
+        {
+            "key": "field_64df69efa0b1e",
+            "label": "Filtres",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_64df6ae5b4e14",
+            "label": "Filtres",
+            "name": "profiles_filters",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "field_64df6b5b72e63",
+            "button_label": "Ajouter un filtre",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_64df6b5b72e63",
+                    "label": "Nom du filtre",
+                    "name": "name",
+
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_64df6ae5b4e14"
+                },
+                {
+                    "key": "field_64df6f207ac69",
+                    "label": "Catégorie parente",
+                    "name": "profiles_parent_category",
+
+                    "type": "taxonomy",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "profile_category",
+                    "add_term": 0,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "field_type": "select",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "parent_repeater": "field_64df6ae5b4e14"
+                }
+            ]
+        },
+        {
+            "key": "field_64df6af601e4e",
+            "label": "Bouton \"Réinitialiser\"",
+            "name": "reset_button",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         {
             "key": "field_5eea072a9f62c",
@@ -439,7 +580,7 @@
         {
             "key": "field_5ee8db7a78445",
             "label": "Paramètres de fond",
-            "name": "focus_bg_params",
+            "name": "focus_block_bg_params",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -529,5 +670,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1641287913
+    "modified": 1692366339
 }

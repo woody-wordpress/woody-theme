@@ -94,6 +94,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $this->context['home_slider'] = $this->compilers->formatHomeSlider($this->context['post'], $this->context['woody_components']);
         $this->context['after_landswpr'] = empty($this->context['page_parts']['after_landswpr']) ? '' : $this->context['page_parts']['after_landswpr'];
         $this->context['bookblock'] = $this->compilers->formatBookBlock($this->context['post'], $this->context['woody_components'], $layout = []);
+        $this->context['frontpage_title'] = get_field(sprintf('blog_data_%s_frontpage_title', pll_current_language()), 'options');
     }
 
     protected function pageContext()
@@ -245,7 +246,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         $noindex = false;
         if (!empty($get)) {
             foreach (array_keys($get) as $key) {
-                if (strpos($key, 'section_') !== false || $key == 'listpage' || $key == 'autoselect_id') {
+                if (strpos($key, 'section_') !== false || $key == 'autoselect_id' || $key == 'fav') {
                     $noindex = true;
                 }
             }
@@ -266,7 +267,7 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     {
         $listpage = filter_input(INPUT_GET, 'listpage', FILTER_VALIDATE_INT);
         $post_type = get_the_terms(get_the_ID(), 'page_type');
-        if (!empty($post_type) && $post_type[0]->slug === 'playlist_tourism' && !empty($listpage) && is_numeric($listpage) && !empty($metas['canonical']) && !empty($metas['canonical']['#attributes']) && !empty($metas['canonical']['#attributes']['href'])) {
+        if (!empty($post_type) && $post_type[0]->slug === 'playlist_tourism' && !empty($listpage) && is_numeric($listpage) && $listpage != '1' && !empty($metas['canonical']) && !empty($metas['canonical']['#attributes']) && !empty($metas['canonical']['#attributes']['href'])) {
             $metas['canonical']['#attributes']['href'] = $metas['canonical']['#attributes']['href'] . '?listpage=' . $listpage;
         }
 

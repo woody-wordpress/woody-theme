@@ -29,6 +29,10 @@ class WoodyTheme_ACF
         add_action('create_term', [$this, 'cleanTermsChoicesCache']);
         add_action('edit_term', [$this, 'cleanTermsChoicesCache']);
         add_action('delete_term', [$this, 'cleanTermsChoicesCache']);
+        // Suppression du cache des blocs pour mettre à jour les termes des taxonomies
+        add_action('saved_term', [$this, 'deleteTermCache'], 10, 4);
+
+        add_action('acf/init', [$this, 'registerHooksAfterAcfInit']);
 
         add_action('acf/save_post', [$this, 'clearVarnishCache'], 20);
 
@@ -74,6 +78,8 @@ class WoodyTheme_ACF
         add_filter('acf/load_fields', [$this, 'addSeasonChoices'], 10, 2);
         add_filter('acf/update_value', [$this, 'updateCurrentSeason'], 10, 3);
 
+        add_filter('acf/fields/taxonomy/query', [$this, 'hideProfileChildTaxonomies'], 10, 3);
+
         // Custom Filter
         add_filter('woody_get_field_option', [$this, 'woodyGetFieldOption'], 10, 3);
         add_filter('woody_get_field_object', [$this, 'woodyGetFieldObject'], 10, 3);
@@ -85,6 +91,19 @@ class WoodyTheme_ACF
         add_action('wp_ajax_generate_layout_acf_clone', [$this, 'getRenderedLayout']);
 
         add_filter('acf/load_value/name=edit_mode', [$this, 'editModeLoadField'], 10, 3);
+    }
+
+    public function registerHooksAfterAcfInit()
+    {
+        if (get_field('display_default_lang_title', 'options')) {
+            add_filter('acf/fields/post_object/result', [$this, 'translatePostTitleResult'], 10, 4);
+            add_filter('acf/fields/page_link/result', [$this, 'translatePostTitleResult'], 10, 4);
+        }
+
+        if (get_field('display_sheet_aspect', 'options')) {
+            add_filter('acf/fields/post_object/result', [$this, 'getAspectPostTitleResult'], 10, 4);
+            add_filter('acf/fields/page_link/result', [$this, 'getAspectPostTitleResult'], 10, 4);
+        }
     }
 
     public function woodyGetFieldOption($field_name = null)
@@ -223,7 +242,7 @@ class WoodyTheme_ACF
             if ($field['name'] === "gallery_tags") {
                 $taxonomies = get_object_taxonomies('attachment', 'objects');
 
-            // $unset_taxonomies[] = 'attachment_types';
+                // $unset_taxonomies[] = 'attachment_types';
             } else {
                 $taxonomies = get_object_taxonomies('page', 'objects');
             }
@@ -483,7 +502,7 @@ class WoodyTheme_ACF
 
         if (!empty($terms)) {
             foreach ($terms as $term) {
-                $hasIcon = empty($term->term_icon) ? '' : '<span class="' . $term->term_icon . '"></span>';
+                $hasIcon = empty($term->term_icon) ? '' : '<span class="wicon ' . $term->term_icon . '"></span>';
                 $hero_terms[$term->term_id] = $hasIcon . '<span class="label">' . $term->name . '</span>';
             }
         }
@@ -532,22 +551,40 @@ class WoodyTheme_ACF
     {
         $parent_id = getPostRootAncestor($post->ID);
 
-        $display_default_lang_title = apply_filters('woody_get_field_option', 'display_default_lang_title');
-        if ($display_default_lang_title) {
-            $post_lang = apply_filters('woody_pll_get_post_language', $post->ID);
-            $default_lang = apply_filters('woody_pll_default_lang_code', null);
-
-            if ($post_lang !== $default_lang) {
-                $translation = apply_filters('woody_default_lang_post_title', $post->ID);
-                if (!empty($translation)) {
-                    $title = $title . '<small style="color:#cfcfcf; font-style:italic"> - ( ' . $default_lang . ': ' . $translation . ' )</small>';
-                }
-            }
-        }
-
         if (!empty($parent_id)) {
             $parent = get_post($parent_id);
             $title = $title . '<small style="color:#cfcfcf; font-style:italic"> - ( Enfant de ' . $parent->post_title . ' )</small>';
+        }
+
+        return $title;
+    }
+
+    public function translatePostTitleResult($title, $post, $field, $post_id) {
+        $post_lang = apply_filters('woody_pll_get_post_language', $post->ID);
+        $default_lang = apply_filters('woody_pll_default_lang_code', null);
+
+        if ($post_lang !== $default_lang) {
+            $translation = apply_filters('woody_default_lang_post_title', $post->ID);
+            if (!empty($translation)) {
+                $title = $title . '<small style="color:#cfcfcf; font-style:italic"> - ( ' . $default_lang . ': ' . $translation . ' )</small>';
+            }
+        }
+
+        return $title;
+    }
+
+    public function getAspectPostTitleResult($title, $post, $field, $post_id) {
+        if ($post->post_type == 'touristic_sheet') {
+            $touristic_source_identifier = get_field('touristic_source_identifier', $post->ID);
+
+            if (!empty($touristic_source_identifier)) {
+                $get_aspect = explode('-', $touristic_source_identifier);
+                $sheet_aspect = sizeof($get_aspect) > 1 ? $get_aspect[0] : null;
+
+                if (!empty($sheet_aspect)) {
+                    $title = $title . '<small style="color:#cfcfcf; font-style:italic; text-transform: uppercase"> - ' . $sheet_aspect . '</small>';
+                }
+            }
         }
 
         return $title;
@@ -623,12 +660,20 @@ class WoodyTheme_ACF
                 'blocks-hero-tpl_12',
                 'blocks-hero-tpl_02',
                 'blocks-hero-tpl_09',
+                'blocks-hero-tpl_20',
                 'blocks-hero-tpl_03',
                 'blocks-hero-tpl_07',
                 'blocks-hero-tpl_04',
                 'blocks-hero-tpl_13',
                 'blocks-hero-tpl_06',
-                'blocks-hero-tpl_05'
+                'blocks-hero-tpl_05',
+                'blocks-hero-tpl_18',
+                'blocks-hero-tpl_19',
+                'blocks-hero-tpl_15',
+                'blocks-hero-tpl_16',
+                'blocks-hero-tpl_21',
+                'blocks-hero-tpl_22',
+                'blocks-hero-tpl_17'
             ],
             'teasers' => [
                 'blocks-page_teaser-tpl_01',
@@ -952,6 +997,10 @@ class WoodyTheme_ACF
     public function woodyGetAllTemplates()
     {
         $return = wp_cache_get('woody_tpls_components', 'woody');
+
+        $user = wp_get_current_user();
+        $is_administrator = in_array('administrator', $user->roles);
+
         if (empty($return)) {
             $tplComponents = [];
             $woodyComponents = getWoodyComponents();
@@ -962,8 +1011,9 @@ class WoodyTheme_ACF
                     $display_options = json_encode($component['display'], JSON_THROW_ON_ERROR);
                 }
 
-                $is_new_tpl = (!empty($component['creation']) && isWoodyNewTpl($component['creation'])) ? "<span class='tpl-new'>Nouveau</span>" : '';
-
+                $lib_design = !empty($component['lib_design']) ? $component['lib_design'] : '';
+                $is_new_tpl = (!empty($component['creation']) && isWoodyNewTpl($component['creation'])) ? "<span class='tpl-badge tpl-new'>Nouveau</span>" : '';
+                $is_custom_tpl = !empty($component['custom_theme']) ? "<span class='tpl-badge tpl-custom-theme'>Personnalisé</span>" : '';
                 $groups = empty($component['acf_groups']) ? '' : implode(" ", $component['acf_groups']);
                 if (!empty($groups)) {
                     if (strpos($component['thumbnails']['small'], 'custom_woody_tpls') === false) {
@@ -972,10 +1022,12 @@ class WoodyTheme_ACF
                         $img_views_path = apply_filters('custom_woody_tpls_thumbnails_path', '/img/', $component['thumbnails']['small']);
                     }
 
-                    $tplComponents[$key] = "<div class='tpl-choice-wrapper " . $groups . "' data-value='". $key ."' data-display-options='". $display_options ."'>
-                    <img class='img-responsive lazyload' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' data-src='" . WP_HOME . "/app/dist/" . WP_SITE_KEY . $img_views_path . $component['thumbnails']['small'] . "?version=" . get_option("woody_theme_version") . "' alt='" . $key . "' width='150' height='150' />
-                    <h5 class='tpl-title'>" . $component["name"] . "</h5>" . $is_new_tpl .
-                    "</div>";
+                    if ($is_administrator || !$is_administrator && $lib_design != 'TODO' || empty($lib_design)) {
+                        $tplComponents[$key] = "<div class='tpl-choice-wrapper " . $groups . "' data-value='". $key ."' data-display-options='". $display_options ."'>
+                        <img class='img-responsive lazyload' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' data-src='" . WP_HOME . "/app/dist/" . WP_SITE_KEY . $img_views_path . $component['thumbnails']['small'] . "?version=" . get_option("woody_theme_version") . "' alt='" . $key . "' width='150' height='150' />
+                        <h5 class='tpl-title'>" . $component["name"] . "</h5><div class='tpl-badges'>" . $is_new_tpl . $is_custom_tpl . "</div>" .
+                        "</div>";
+                    }
                 }
             }
 
@@ -1041,6 +1093,24 @@ class WoodyTheme_ACF
 
         remove_filter('user_can_richedit', [$this, 'addUserRichedit']);
         $user->remove_cap('upload_files');
+    }
+
+    public function deleteTermCache($term_id, $tt_id, $taxonomy, $update) {
+        switch($taxonomy) {
+            case 'seasons':
+            case 'attachment_categorie':
+            case 'themes':
+            case 'places':
+                wp_cache_delete('layout-auto_focus');
+                wp_cache_delete('layout-content_list');
+                wp_cache_delete('layout-gallery');
+                break;
+            case 'attachment_hashtags':
+                wp_cache_delete('layout-socialwall');
+                break;
+            default:
+                break;
+        }
     }
 
     public function addUserRichedit()
@@ -1187,5 +1257,14 @@ class WoodyTheme_ACF
         }
 
         return $value;
+    }
+
+    public function hideProfileChildTaxonomies($args, $field, $post_id)
+    {
+        if($field['_name'] == 'profiles_parent_category') {
+            $args['parent'] = 0;
+        }
+
+        return $args;
     }
 }

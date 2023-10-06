@@ -36,7 +36,7 @@ class WoodyTheme_WoodyProcess
     {
         $lon_postmeta = null;
         // On surcharge l'ordre quand on veut faire du tri par géolocalisation
-        if (!empty($wp_query->query['orderby']) && strpos($wp_query->query['orderby'], 'geoloc') !== false) {
+        if (!empty($wp_query->query['orderby']) && is_string($wp_query->query['orderby']) && strpos($wp_query->query['orderby'], 'geoloc') !== false) {
             $post_id = explode('_', $wp_query->query['orderby']);
             $post_id = (is_array($post_id)) ? end($post_id) : null;
             if (!empty($post_id)) {
@@ -550,11 +550,13 @@ class WoodyTheme_WoodyProcess
         // NB : si aucun choix n'a été fait, on remonte automatiquement tous les contenus de type page
         $post_type = (!empty($query_form['focused_type']) && $query_form['focused_type'] == 'documents') ? 'attachment' : 'page';
 
+        $excluded_posts = ($query_form['exclude_post'] && !empty($query_form['excluded_posts'])) ? $query_form['excluded_posts'] : [];
+
         $the_query = [
             'post_type' => $post_type,
             'posts_per_page' => (empty($query_form['focused_count'])) ? 12 : $query_form['focused_count'],
             'post_status' => (!empty($query_form['focused_type']) && $query_form['focused_type'] == 'documents') ? ['inherit', 'publish'] : 'publish',
-            'post__not_in' => array($the_post->ID),
+            'post__not_in' => !empty($excluded_posts) ? array_merge(array($the_post->ID), $excluded_posts) : array($the_post->ID),
             'order' => $order,
             'orderby' => $orderby,
             'lang' => pll_get_post_language($the_post->ID),
@@ -686,8 +688,12 @@ class WoodyTheme_WoodyProcess
                 $display = $this->tools->getDisplayOptions($section);
 
                 // On ajoute les class personnalisées de section dans la liste des class d'affichage
-                if (!empty($display['classes']) && !empty($section['section_class'])) {
-                    $display['classes'] .=  ' ' . $section['section_class'];
+                if(!empty($section['section_class'])) {
+                    if(empty($display['classes'])) {
+                        $display['classes'] = $section['section_class'];
+                    } else {
+                        $display['classes'] .=  ' ' . $section['section_class'];
+                    }
                 }
 
                 // On ajoute les animations dans les données envoyées aux sections

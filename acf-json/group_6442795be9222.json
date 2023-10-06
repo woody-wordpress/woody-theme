@@ -111,12 +111,36 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "60",
                         "class": "",
                         "id": ""
                     },
                     "return_format": "array",
                     "parent_repeater": "field_6442795cbee54"
+                },
+                {
+                    "key": "field_64d113ba04636",
+                    "label": "Image",
+                    "name": "img",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "jpeg, jpg, png"
                 },
                 {
                     "key": "field_64427a05bee57",

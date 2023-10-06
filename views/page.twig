@@ -1,8 +1,7 @@
 {% extends "base.twig" %}
 {% block content %}
     {% if is_frontpage %}
-        <h1 class="frontpage-htitle">
-            {{ site.title|default }}</h1>
+        <h1 class="frontpage-htitle">{{ frontpage_title|default(site.title) }}</h1>
     {% endif %}
     <main class="content-type-page {{ page_type|default }}" id="main-content">
 
@@ -11,16 +10,18 @@
         {% endif %}
         <div class="content-wrapper {{ page_terms|default('no-terms') }}">
             {% block mobile_header %}
-                {% if 'header' not in hide_page_zones %}
-                    {% if page_parts.mobile_header_custom %}
-                        {{ page_parts.mobile_header_custom }}
-                    {% else %}
-                        <div class="mobile-header hide-for-xlarge title-bar">
-                            <span class="brand-logo obf" data-obf="{{ home_url|base64Encode }}">
-                                <span class="no-visible-text menu-logo-site-name isAbs">{{ globals.site_name|default }}</span>
-                                {{ mobile_logo|default(website_logo) }}
-                            </span>
-                        </div>
+                {% if globals.is_mobile %}
+                    {% if 'header' not in hide_page_zones %}
+                        {% if page_parts.mobile_header_custom %}
+                            {{ page_parts.mobile_header_custom }}
+                        {% else %}
+                            <div class="mobile-header title-bar">
+                                <span class="brand-logo obf" data-obf="{{ home_url|base64Encode }}">
+                                    <span class="no-visible-text menu-logo-site-name isAbs">{{ globals.site_name|default }}</span>
+                                    {{ mobile_logo|default(website_logo) }}
+                                </span>
+                            </div>
+                        {% endif %}
                     {% endif %}
                 {% endif %}
             {% endblock %}
@@ -29,20 +30,6 @@
                 {{ bookblock }}
             {% endif %}
             {{ page_parts.after_hero|default }}
-
-            {% block page_teaser %}
-                <header class="page-teaser" id="the-page-teaser">
-                    {{ page_teaser }}
-                </header>
-            {% endblock %}
-
-            {% block after_page_teaser %}
-                {% if page_parts.after_page_teaser %}
-                    <div class="after-page-teaser">
-                        {{ page_parts.after_page_teaser }}
-                    </div>
-                {% endif %}
-            {% endblock %}
 
             {% block home_slider %}
                 {% if home_slider|default %}
@@ -65,6 +52,20 @@
                 {% if after_landswpr|default %}
                     <div class="after-landswpr">
                         {{ after_landswpr }}
+                    </div>
+                {% endif %}
+            {% endblock %}
+
+            {% block page_teaser %}
+                <header class="page-teaser" id="the-page-teaser">
+                    {{ page_teaser }}
+                </header>
+            {% endblock %}
+
+            {% block after_page_teaser %}
+                {% if page_parts.after_page_teaser %}
+                    <div class="after-page-teaser">
+                        {{ page_parts.after_page_teaser }}
                     </div>
                 {% endif %}
             {% endblock %}

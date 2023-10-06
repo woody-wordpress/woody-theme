@@ -68,6 +68,8 @@ class WoodyTheme_WoodyCompilers
             case 'profile_focus':
                 $the_items = $this->getter->getProfileFocusData($wrapper);
                 break;
+            default:
+                $the_items = apply_filters( 'woody_custom_focus_items', [], $wrapper );
         }
 
         $the_items['alert'] = apply_filters('add_admin_alert_message', '');
@@ -111,6 +113,13 @@ class WoodyTheme_WoodyCompilers
                 $the_items['display'] = $this->tools->getDisplayOptions($wrapper['focus_block_bg_params']);
             }
 
+            if (!empty($wrapper['analytics_event'])) {
+                $the_items['analytics'] = [
+                    'name' => $wrapper['analytics_event'],
+                    'event' => str_replace('-', '_', sanitize_title($wrapper['analytics_event']))
+                ];
+            }
+
             if (!empty($wrapper['focus_map_params'])) {
                 if (!empty($wrapper['focus_map_params']['tmaps_confid'])) {
                     $the_items['map_params']['tmaps_confid'] = $wrapper['focus_map_params']['tmaps_confid'];
@@ -136,7 +145,6 @@ class WoodyTheme_WoodyCompilers
             }
 
             $the_items = apply_filters('woody_format_focuses_data', $the_items, $wrapper);
-
             $return = empty($wrapper['woody_tpl']) ? \Timber::compile($twigPaths['blocks-focus-tpl_103'], $the_items) : \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items) ;
         }
 
@@ -269,11 +277,13 @@ class WoodyTheme_WoodyCompilers
         if ($wrapper['semantic_view_type'] == 'manual' && !empty($wrapper['semantic_view_include'])) {
             $the_query = [
                 'post_type' => 'page',
+                'orderby' => 'post__in'
             ];
             foreach ($wrapper['semantic_view_include'] as $included_id) {
                 $the_query['post__in'][] = $included_id;
             }
-        } else {
+        }
+        else {
             $parent_id = $wrapper['semantic_view_type'] == 'sisters' ? wp_get_post_parent_id($post_id) : $post_id;
 
             if (!empty($wrapper['semantic_view_page_types'])) {
@@ -461,8 +471,11 @@ class WoodyTheme_WoodyCompilers
             $the_items['empty'] = __('Désolé, aucun contenu ne correspond à votre recherche', 'woody-theme');
         }
 
-        // Show button
         $the_items['display_button'] = (empty($list_el_wrapper['display_button'])) ? false : $list_el_wrapper['display_button'];
+
+        if (!empty($the_items['display_button'])) {
+            $the_items['button_classes'] = apply_filters('woody_card_button_classes', '', $wrapper);
+        }
 
         // On compile la grille des éléments
         $the_list['the_grid'] = \Timber::compile($twigPaths[$wrapper['the_list_elements']['listgrid_woody_tpl']], $the_items);
@@ -589,6 +602,8 @@ class WoodyTheme_WoodyCompilers
                 }
             }
         }
+
+        $return = apply_filters('woody_custom_summary', $return);
 
         return $return;
     }

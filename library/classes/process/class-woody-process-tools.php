@@ -166,6 +166,7 @@ class WoodyTheme_WoodyProcessTools
         }
 
         $display['gridContainer'] = $container_classes;
+        $display['display_fullwidth'] = empty($wrapper['display_fullwidth']) ? '' : $wrapper['display_fullwidth'];
         $display['background_img'] = (empty($wrapper['background_img'])) ? '' : $wrapper['background_img'];
         $display['parallax'] = (empty($wrapper['parallax'])) ? '' : $wrapper['parallax'];
         $classes_array[] = (empty($display['background_img'])) ? '' : 'isRel';
@@ -173,13 +174,25 @@ class WoodyTheme_WoodyProcessTools
         $classes_array[] = (empty($wrapper['background_color_opacity'])) ? '' : $wrapper['background_color_opacity'];
         $classes_array[] = (empty($wrapper['border_color'])) ? '' : $wrapper['border_color'];
         $classes_array[] = (empty($wrapper['background_img_opacity'])) ? '' : $wrapper['background_img_opacity'];
-        $classes_array[] = (empty($wrapper['scope_paddings']['scope_padding_top'])) ? '' : $wrapper['scope_paddings']['scope_padding_top'];
-        $classes_array[] = (empty($wrapper['scope_paddings']['scope_padding_bottom'])) ? '' : $wrapper['scope_paddings']['scope_padding_bottom'];
-        $classes_array[] = (empty($wrapper['scope_margins']['scope_margin_top'])) ? '' : $wrapper['scope_margins']['scope_margin_top'];
-        $classes_array[] = (empty($wrapper['scope_margins']['scope_margin_bottom'])) ? '' : $wrapper['scope_margins']['scope_margin_bottom'];
+        $spacing_array[] = (empty($wrapper['scope_paddings']['scope_padding_top'])) ? '' : $wrapper['scope_paddings']['scope_padding_top'];
+        $spacing_array[] = (empty($wrapper['scope_paddings']['scope_padding_bottom'])) ? '' : $wrapper['scope_paddings']['scope_padding_bottom'];
+        $spacing_array[] = (empty($wrapper['scope_margins']['scope_margin_top'])) ? '' : $wrapper['scope_margins']['scope_margin_top'];
+        $spacing_array[] = (empty($wrapper['scope_margins']['scope_margin_bottom'])) ? '' : $wrapper['scope_margins']['scope_margin_bottom'];
+        $display['spacing_classes'] = trim(implode(' ', $spacing_array));
+        $display['mobile_spacing_classes'] = trim(implode(' ', $spacing_array));
         $display['section_divider'] = (empty($wrapper['section_divider'])) ? '' : $wrapper['section_divider'];
         $display['heading_alignment'] = (empty($wrapper['heading_alignment'])) ? 'center' : $wrapper['heading_alignment'];
         $display['section_animations'] = (empty($wrapper['section_animations'])) ? '' : $wrapper['section_animations'];
+
+        if(!empty($wrapper['custom_resp_button'])) {
+            if(wp_is_mobile()) {
+                $mobile_spacing_array[] = (empty($wrapper['mobile_scope_paddings']['scope_padding_top'])) ? '' : $wrapper['mobile_scope_paddings']['scope_padding_top'];
+                $mobile_spacing_array[] = (empty($wrapper['mobile_scope_paddings']['scope_padding_bottom'])) ? '' : $wrapper['mobile_scope_paddings']['scope_padding_bottom'];
+                $mobile_spacing_array[] = (empty($wrapper['mobile_scope_margins']['scope_margin_top'])) ? '' : $wrapper['mobile_scope_margins']['scope_margin_top'];
+                $mobile_spacing_array[] = (empty($wrapper['mobile_scope_margins']['scope_margin_bottom'])) ? '' : $wrapper['mobile_scope_margins']['scope_margin_bottom'];
+                $display['mobile_spacing_classes'] = trim(implode(' ', $mobile_spacing_array));
+            }
+        }
 
         // On transforme le tableau en une chaine de caractères
         $display['classes'] = trim(implode(' ', $classes_array));
@@ -261,7 +274,7 @@ class WoodyTheme_WoodyProcessTools
         $query_results = new \WP_Query(array(
             'posts_per_page'    => $limit,
             'post_type'         => 'attachment',
-            'post_status'       => 'publish',
+            'post_status'       => 'inherit',
             'tax_query'         => array(
                 'relation' =>  $andor,
                 $tax_query[0]
@@ -330,17 +343,21 @@ class WoodyTheme_WoodyProcessTools
      */
     public function getSectionBannerFiles($filename)
     {
-        $lang = pll_current_language();
+        if(is_string($filename)) {
 
-        if (file_exists(get_stylesheet_directory() . '/views/section_banner/'. $lang .'/section_' . $filename . '.twig')) {
-            $file = file_exists(get_stylesheet_directory() . '/views/section_banner/'. $lang .'/section_' . $filename . '.twig');
-        } elseif (file_exists(get_stylesheet_directory() . '/views/section_banner/section_' . $filename . '.twig')) {
-            $file = file_get_contents(get_stylesheet_directory() . '/views/section_banner/section_' . $filename . '.twig');
-        } else {
-            $file = file_get_contents(get_template_directory() . '/views/section_banner/section_' . $filename . '.twig');
+            $lang = pll_current_language();
+            $banner_paths = [
+                get_stylesheet_directory() . '/views/section_banner/'. $lang .'/section_' . $filename . '.twig',
+                get_stylesheet_directory() . '/views/section_banner/section_' . $filename . '.twig',
+                get_template_directory() . '/views/section_banner/section_' . $filename . '.twig',
+            ];
+
+            foreach ($banner_paths as $path) {
+                if (file_exists($path)) {
+                    return file_get_contents($path);
+                }
+            }
         }
-
-        return $file;
     }
 
     /**

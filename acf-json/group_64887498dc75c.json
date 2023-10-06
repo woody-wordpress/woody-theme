@@ -76,16 +76,36 @@
                         "new_lines": ""
                     },
                     {
-                        "key": "field_64887531e6963",
-                        "label": "Slug des fiches SIT",
-                        "name": "touristic_sheet",
+                        "key": "field_64abf9740d63a",
+                        "label": "Titre H1 de la page d'accueil",
+                        "name": "frontpage_title",
                         "aria-label": "",
                         "type": "text",
-                        "instructions": "Affiché après le nom domaine du site dans l'url des fiches",
+                        "instructions": "",
                         "required": 0,
                         "conditional_logic": 0,
                         "wrapper": {
                             "width": "30",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "rows": "",
+                        "placeholder": "",
+                        "new_lines": ""
+                    },
+                    {
+                        "key": "field_64887531e6963",
+                        "label": "Slug des fiches SIT (Affiché après le nom domaine du site dans l'url des fiches)",
+                        "name": "touristic_sheet",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "70",
                             "class": "",
                             "id": ""
                         },
