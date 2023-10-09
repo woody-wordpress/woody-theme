@@ -335,6 +335,7 @@ class WoodyTheme_Enqueue_Assets
             'jquery',
             'jsdelivr_flatpickr',
             'jsdelivr_flatpickr_l10n',
+            'jsdelivr_iframeresizer',
             'jsdelivr_plyr',
             'jsdelivr_jscookie',
             'jsdelivr_rellax',
