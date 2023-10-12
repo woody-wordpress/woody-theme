@@ -200,6 +200,7 @@ class WoodyTheme_Enqueue_Assets
         wp_enqueue_script('jsdelivr_nouislider', get_template_directory_uri() . '/src/lib/custom/nouislider@10.1.0.min.js', ['jquery'], null); // TODO: Latest 14.7.0
         wp_enqueue_script('jsdelivr_lazysizes', get_template_directory_uri() . '/src/lib/custom/lazysizes@4.1.2.min.js', [], null); // TODO: Latest 5.3.2
         wp_enqueue_script('jsdelivr_moment', get_template_directory_uri() . '/src/lib/custom/moment-with-locales@2.22.2.min.js', [], null); // TODO: Latest 2.29.4
+        wp_enqueue_script('jsdelivr_moment_tz', get_template_directory_uri() . '/src/lib/custom/moment-timezone-with-data.min.js', ['jsdelivr_moment'], null);
         wp_enqueue_script('jsdelivr_jscookie', get_template_directory_uri() . '/src/lib/custom/js.cookie@2.2.1.min.js', [], null);
         wp_enqueue_script('jsdelivr_rellax', get_template_directory_uri() . '/src/lib/custom/rellax@1.10.1.min.js', [], null); // TODO: Latest 1.12.1
         wp_enqueue_script('jsdelivr_iframeresizer', get_template_directory_uri() . '/src/lib/custom/iframeResizer@4.3.7.min.js', [], '4.3.7');
