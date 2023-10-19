@@ -1,7 +1,8 @@
 {
     "key": "group_5bc6079fe9b0a",
     "title": "Filtres de liste",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5bc607f02a89c",
             "label": "Contenu",
             "name": "",
@@ -35,7 +36,8 @@
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter un filtre",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5bc85c363dc30",
                     "label": "Nom du filtre",
                     "name": "list_filter_name",
@@ -73,7 +75,8 @@
                         "price": "Prix séjour",
                         "duration": "Durée séjour",
                         "map": "Carte",
-                        "created": "Date de publication"
+                        "created": "Date de publication",
+                        "keyword": "Mots clés"
                     },
                     "default_value": [
                         "taxonomy"
@@ -93,11 +96,13 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5bc607c62a89b",
-                            "operator": "==",
-                            "value": "taxonomy"
-                        }]
+                        [
+                            {
+                                "field": "field_5bc607c62a89b",
+                                "operator": "==",
+                                "value": "taxonomy"
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "",
@@ -128,11 +133,13 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5bc607c62a89b",
-                            "operator": "==",
-                            "value": "created"
-                        }]
+                        [
+                            {
+                                "field": "field_5bc607c62a89b",
+                                "operator": "==",
+                                "value": "created"
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "",
@@ -140,9 +147,9 @@
                         "id": ""
                     },
                     "choices": {
-                        "daterange" : "Contenus publiés entre 2 dates",
-                        "from_single" : "Contenu publiés après la date",
-                        "to_single" : "Contenus publiés avant la date"
+                        "daterange": "Contenus publiés entre 2 dates",
+                        "from_single": "Contenu publiés après la date",
+                        "to_single": "Contenus publiés avant la date"
                     },
                     "allow_null": 0,
                     "other_choice": 0,
@@ -159,11 +166,13 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5bc607c62a89b",
-                            "operator": "==",
-                            "value": "custom_terms"
-                        }]
+                        [
+                            {
+                                "field": "field_5bc607c62a89b",
+                                "operator": "==",
+                                "value": "custom_terms"
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "",
@@ -187,16 +196,20 @@
                     "instructions": "(Comportement lorsque l'utilisateur coche plusieurs tags)",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5bc607c62a89b",
-                            "operator": "==",
-                            "value": "taxonomy"
-                        }],
-                        [{
-                            "field": "field_5bc607c62a89b",
-                            "operator": "==",
-                            "value": "custom_terms"
-                        }]
+                        [
+                            {
+                                "field": "field_5bc607c62a89b",
+                                "operator": "==",
+                                "value": "taxonomy"
+                            }
+                        ],
+                        [
+                            {
+                                "field": "field_5bc607c62a89b",
+                                "operator": "==",
+                                "value": "custom_terms"
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "",
@@ -222,11 +235,13 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5bc607c62a89b",
-                            "operator": "==",
-                            "value": "map"
-                        }]
+                        [
+                            {
+                                "field": "field_5bc607c62a89b",
+                                "operator": "==",
+                                "value": "map"
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "",
@@ -234,7 +249,8 @@
                         "id": ""
                     },
                     "layout": "block",
-                    "sub_fields": [{
+                    "sub_fields": [
+                        {
                             "key": "field_5be167b1ca075",
                             "label": "Hauteur de la carte",
                             "name": "map_zoom",
@@ -311,7 +327,7 @@
                                 "field_5c989085888ee"
                             ],
                             "new_lines": "wpautop",
-                            "display"  : "seamless"
+                            "display": "seamless"
                         },
                         {
                             "key": "field_5bl1j7f9cd075",
@@ -346,25 +362,27 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
-                "key": "field_5bd871bd4bace",
-                "label": "Texte",
-                "name": "filter_button_text",
-                "type": "text",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "50",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "Rechercher",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
-            }]
+            "sub_fields": [
+                {
+                    "key": "field_5bd871bd4bace",
+                    "label": "Texte",
+                    "name": "filter_button_text",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "Rechercher",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                }
+            ]
         },
         {
             "key": "field_5c0935b0aba59",
@@ -513,11 +531,13 @@
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",

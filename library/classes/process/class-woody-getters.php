@@ -910,6 +910,10 @@ class WoodyTheme_WoodyGetters
 
                         $return[$key]['filter_name'] = $filter['list_filter_name'];
                         break;
+                    case 'keyword':
+                        console_log($filter, 'php debug');
+                        $return[$key]['filter_name'] = $filter['list_filter_name'];
+                        break;
                 }
             }
 
