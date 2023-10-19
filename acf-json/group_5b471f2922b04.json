@@ -54,7 +54,7 @@
                         "id": ""
                     },
                     "default_value": "",
-                    "placeholder": "Titre visible lorsque l'onglet est refermé (uniquement pour l'adlinistration)",
+                    "placeholder": "Titre visible lorsque l'onglet est refermé (uniquement pour l'administration)",
                     "prepend": "",
                     "append": "",
                     "maxlength": ""
