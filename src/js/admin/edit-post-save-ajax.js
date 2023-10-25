@@ -3,13 +3,13 @@ import $, { timers } from 'jquery';
 function getCookie(name) {
     let cookie = {};
     document.cookie.split(';').forEach(function(el) {
-        let [k,v] = el.split('=');
+        let [k, v] = el.split('=');
         cookie[k.trim()] = v;
     });
     return cookie[name];
 }
 
-function handleErrors(response){
+function handleErrors(response) {
     if (!response.ok) {
         throw Error(response.statusText);
     }
@@ -24,7 +24,20 @@ function handleErrors(response){
  */
 const savePost = (e, publish) => {
     const form = document.querySelector('#post');
+    const requiredFields = form.querySelectorAll('.is-required'); // Champs obligatoires
     const data = new FormData(form);
+    let isValid = true;
+    let invalidField;
+
+    // On parcours les champs obligatoires et on s'arrête si un n'est pas rempli
+    for (let i = 0; i < requiredFields.length; i++) {
+        const field = requiredFields[i].querySelector('.acf-input select') ? requiredFields[i].querySelector('.acf-input select') : requiredFields[i].querySelector('.acf-input input[type="text"]');
+        if (field.value === '') {
+            isValid = false;
+            invalidField = requiredFields[i];
+            break;
+        }
+    }
 
     let spinner = publish ?
         document.querySelector('#publishing-action>.spinner') :
@@ -40,49 +53,89 @@ const savePost = (e, publish) => {
 
     e.preventDefault();
 
-    fetch(form.getAttribute("action"), {
-        method: 'POST',
-        body: data,
-        redirect: 'follow',
-        headers: {
-            'Access-Control-Allow-Headers': 'Location'
-        }
-    })
-    .then(res => {
-        deleteNotices();
+    // Si une erreur est déjà affichée on l'enève
+    const fieldErrorNotices = document.querySelectorAll('.acf-notice.acf-error-message');
+    if (fieldErrorNotices.length > 0) {
+        fieldErrorNotices.forEach(errorNotice => errorNotice.remove());
+    }
 
-        if (res.url.includes('wp-login')) {
-            if (spinner) spinner.classList.remove('is-active');
-            createNotice('notice-error', 'Impossible d\'enregistrer la page, d\'après vos cookies, vous êtes déconnecté. Ne quittez pas cette page ou vos modifications seront perdues.</br>Pas de panique, il suffit de vous reconnecter à partir d\'un autre onglet puis d\'enregistrer cette page.');
-            return;
-        }
-
-        if(res.status == 200){
-            if (spinner) spinner.classList.remove('is-active');
-            createNotice('notice-success', 'Page mise à jour. Vos modifications ont été enregistrées correctement');
-
-            // Reset unload event on ACF fields
-            acf.unload.reset();
-
-            // Reset beforeunload event with vanilla
-            window.addEventListener('beforeunload', () => false);
-            // Reset beforeunload event with jquery
-            $(window).off('beforeunload');
-        } else {
-            createNotice('notice-error', 'Une erreur s\'est produite.</br>Code erreur : ' + res.status + ' - Statut : ' + res.statusText + '</br>Dans le cas d\'une erreur 500 Internal Server Error, vérifiez que vous êtes toujours connecté à internet');
-        }
-
-    }).catch(err => {
-        console.log(err);
-        deleteNotices();
+    // Si un champs obligatoire n'a pas été rempli
+    if (!isValid) {
+        // Arrêt du spinner
         if (spinner) spinner.classList.remove('is-active');
-        createNotice('notice-error', 'Vos modification n\'ont pas pu être enregistrées en raison d\'une erreur.</br>Code erreur : ' + err.status + ' - Statut : ' + err.statusText);
-    });
+        // Ajout de la notice d'erreur en haut de l'écran
+        createNotice('notice-error', `Impossible d\'enregistrer la page, un champ obligatoire nécessite votre attention.`);
+        invalidFieldNotice(invalidField);
+
+        // Ouverture des éléments pour repérer facilement l'erreur
+        // Bloc
+        while (invalidField !== null && !invalidField.classList.contains('acf-row')) {
+            if (invalidField.classList.contains('layout')) {
+                invalidField.classList.remove('-collapsed');
+            }
+
+            invalidField = invalidField.parentElement;
+        }
+
+        // Section
+        if (invalidField.classList.contains('-collapsed')) {
+            invalidField.classList.remove('-collapsed');
+        }
+
+        return;
+    }
+
+    fetch(form.getAttribute("action"), {
+            method: 'POST',
+            body: data,
+            redirect: 'follow',
+            headers: {
+                'Access-Control-Allow-Headers': 'Location'
+            }
+        })
+        .then(res => {
+            deleteNotices();
+
+            if (res.url.includes('wp-login')) {
+                if (spinner) spinner.classList.remove('is-active');
+                createNotice('notice-error', 'Impossible d\'enregistrer la page, d\'après vos cookies, vous êtes déconnecté. Ne quittez pas cette page ou vos modifications seront perdues.</br>Pas de panique, il suffit de vous reconnecter à partir d\'un autre onglet puis d\'enregistrer cette page.');
+                return;
+            }
+
+            if (res.status == 200) {
+                deleteNotices();
+                if (spinner) spinner.classList.remove('is-active');
+                createNotice('notice-success', 'Page mise à jour. Vos modifications ont été enregistrées correctement');
+
+                // Reset unload event on ACF fields
+                acf.unload.reset();
+
+                // Reset beforeunload event with vanilla
+                window.addEventListener('beforeunload', () => false);
+                // Reset beforeunload event with jquery
+                $(window).off('beforeunload');
+            } else {
+                createNotice('notice-error', 'Une erreur s\'est produite.</br>Code erreur : ' + res.status + ' - Statut : ' + res.statusText + '</br>Dans le cas d\'une erreur 500 Internal Server Error, vérifiez que vous êtes toujours connecté à internet');
+            }
+
+        }).catch(err => {
+            console.log(err);
+            deleteNotices();
+            if (spinner) spinner.classList.remove('is-active');
+            createNotice('notice-error', 'Vos modification n\'ont pas pu être enregistrées en raison d\'une erreur.</br>Code erreur : ' + err.status + ' - Statut : ' + err.statusText);
+        });
 };
+
+const invalidFieldNotice = (field) => {
+    let errorDetails = document.createElement("div");
+    errorDetails.classList.add("acf-notice", "-error", "acf-error-message");
+    errorDetails.innerHTML = "<p>Ce champ est obligatoire</p>";
+    return field.querySelector('.acf-label').appendChild(errorDetails);
+}
 
 const deleteNotices = () => {
     let notices = document.querySelectorAll('#wpbody-content>.wrap>.custom-notice');
-    if(notices.length > 0){
+    if (notices.length > 0) {
         notices.forEach(notice => {
             notice.remove();
         });
@@ -129,4 +182,3 @@ if (!$('body').hasClass('post-type-acf-field-group')) { // Fix for acf field gro
 
     window.onbeforeunload = null;
 }
-
