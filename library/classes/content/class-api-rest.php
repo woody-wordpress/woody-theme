@@ -26,25 +26,36 @@ class WoodyTheme_Api_Rest
 
     public function getPagePreviewApiRest() {
 
-        # /wp-json/woody/page/preview?post=${id}
+        # /wp-json/woody/page/preview?post=${id}&field=${field}&current_id=${current_id}
         $post_id = filter_input(INPUT_GET, 'post', FILTER_VALIDATE_INT);
+        $field = filter_input(INPUT_GET, 'field');
+        $current_id = filter_input(INPUT_GET, 'current_id', FILTER_VALIDATE_INT);
 
-        if(!empty($post_id)) {
+        $wrapper = [
+            'display_img' => true,
+            'display_elements' => [
+                'icon',
+                'pretitle',
+                'subtitle',
+                'description',
+                'sheet_type',
+                'sheet_town'
+            ],
+            'display_button' => true
+        ];
+
+        // Cas d'une mise en avant contenu libre
+        if(empty($post_id) && !empty($field) && !empty($current_id)) {
+            // On récupère le contenu de l'item par rapport à son index de section, son index de bloc et son post id
+            $item = get_field($field, $current_id);
+
+            $post_preview = empty($item) ? '' : getCustomPreview($item, $wrapper);
+
+            return $post_preview;
+        // Cas d'une mise en avant contenu existant
+        } elseif(!empty($post_id) && empty($field)) {
             header('xkey: ' . WP_SITE_KEY . '_' . $post_id, false);
             $post = get_post($post_id);
-
-            $wrapper = [
-                'display_img' => true,
-                'display_elements' => [
-                    'icon',
-                    'pretitle',
-                    'subtitle',
-                    'description',
-                    'sheet_type',
-                    'sheet_town'
-                ],
-                'display_button' => true
-            ];
 
             if ($post->post_status == 'publish') {
                 $post_preview = [];
@@ -60,6 +71,8 @@ class WoodyTheme_Api_Rest
             }
 
             return $post_preview;
+        } else {
+            return 'getPagePreviewApiRest : erreur dans les paramètres';
         }
     }
 }
