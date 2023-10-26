@@ -44,16 +44,8 @@ class WoodyTheme_Api_Rest
             'display_button' => true
         ];
 
-        // Cas d'une mise en avant contenu libre
-        if(empty($post_id) && !empty($field) && !empty($current_id)) {
-            // On récupère le contenu de l'item par rapport à son index de section, son index de bloc et son post id
-            $item = get_field($field, $current_id);
-
-            $post_preview = empty($item) ? '' : getCustomPreview($item, $wrapper);
-
-            return $post_preview;
         // Cas d'une mise en avant contenu existant
-        } elseif(!empty($post_id) && empty($field)) {
+        if(!empty($post_id)) {
             header('xkey: ' . WP_SITE_KEY . '_' . $post_id, false);
             $post = get_post($post_id);
 
@@ -69,6 +61,14 @@ class WoodyTheme_Api_Rest
                         break;
                 }
             }
+
+            return $post_preview;
+        // Cas d'une mise en avant contenu libre
+        } elseif(!empty($field) && !empty($current_id)) {
+            // On récupère le contenu de l'item par rapport à son index de section, son index de bloc et son post id
+            $item = get_field($field, $current_id);
+
+            $post_preview = empty($item) ? '' : getCustomPreview($item, $wrapper);
 
             return $post_preview;
         } else {
