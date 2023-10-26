@@ -428,10 +428,17 @@ function embedProviderThumbnail($embed)
             $regex = '/^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/';
             preg_match($regex, $src, $matches);
             if (!empty($matches[1])) {
-                $return = 'https://img.youtube.com/vi/' . $matches[1] . '/maxresdefault.jpg';
-                $response = wp_remote_head($url);
+                $return = 'https://i.ytimg.com/vi_webp/' . $matches[1] . '/maxresdefault.webp';
+                $response = wp_remote_head($return);
+
                 if (is_wp_error($response) || wp_remote_retrieve_response_code($response) === 404) {
-                    $return = 'https://img.youtube.com/vi/' . $matches[1] . '/hqdefault.jpg';
+                    $return = 'https://i.ytimg.com/vi_webp/' . $matches[1] . '/sddefault.webp';
+
+                    $response = wp_remote_head($return);
+
+                    if (is_wp_error($response) || wp_remote_retrieve_response_code($response) === 404) {
+                        $return = 'https://i.ytimg.com/vi/' . $matches[1] . '/hqdefault.jpg';
+                    }
                 }
             }
 
