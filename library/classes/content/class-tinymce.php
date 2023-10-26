@@ -37,18 +37,6 @@ class WoodyTheme_Tinymce
     {
         $style_formats = array(
             array(
-                'title' => 'Bouton principal',
-                'selector' => 'a',
-                'classes' => 'button primary',
-                'exact' => true
-            ),
-            array(
-                'title' => 'Bouton secondaire',
-                'selector' => 'a',
-                'classes' => 'button secondary',
-                'exact' => true
-            ),
-            array(
                 'title' => 'Liste "On aime"',
                 'selector' => 'ul',
                 'classes' => 'list-unstyled list-wicon love-icon'
