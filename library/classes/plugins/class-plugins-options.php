@@ -263,6 +263,9 @@ class WoodyTheme_Plugins_Options
             'ratio_square_medium'   => ['active' => true, 'name' => 'Carr&eacute;'],
             'ratio_square'          => ['active' => true, 'name' => 'Carr&eacute;'],
         ];
+
+        $yoimg_crop_settings['crop_qualities'] = apply_filters('yoimg_update_crop_settings', $yoimg_crop_settings['crop_qualities']);
+
         $this->updateOption('yoimg_crop_settings', $yoimg_crop_settings);
 
         // Set image default size
