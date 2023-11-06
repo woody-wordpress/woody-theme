@@ -91,6 +91,9 @@ class WoodyTheme_ACF
         add_action('wp_ajax_generate_layout_acf_clone', [$this, 'getRenderedLayout']);
 
         add_filter('acf/load_value/name=edit_mode', [$this, 'editModeLoadField'], 10, 3);
+
+        // Commands
+        \WP_CLI::add_command('woody:orphans_metas', [$this, 'orphansMetas']);
     }
 
     public function registerHooksAfterAcfInit()
@@ -104,6 +107,53 @@ class WoodyTheme_ACF
             add_filter('acf/fields/post_object/result', [$this, 'getAspectPostTitleResult'], 10, 4);
             add_filter('acf/fields/page_link/result', [$this, 'getAspectPostTitleResult'], 10, 4);
         }
+    }
+
+    public function orphansMetas($args, $assoc_args)
+    {
+        global $wpdb;
+        output_h1('Orphans Fields');
+
+        output_h2('Toutes ces pages doivent être enregistrées manuellement dans la back-office');
+        $query = "SELECT ID, post_title FROM wp_posts WHERE post_type = 'page' AND ID NOT IN (SELECT post_id FROM wp_postmeta WHERE meta_key = '_title') AND ID NOT IN (SELECT post_id FROM wp_postmeta WHERE meta_key = 'content_type' AND meta_value = 4)";
+        $results = $wpdb->get_results($query);
+        foreach ($results as $post) {
+            output_log(sprintf('- %s (N° %s)', $post->post_title, $post->ID));
+        }
+
+        output_h2('Analyse des métas des pages');
+        $query = "SELECT ID, post_title FROM wp_posts WHERE post_type = 'page' AND ID NOT IN (SELECT ID FROM wp_posts WHERE post_type = 'page' AND ID NOT IN (SELECT post_id FROM wp_postmeta WHERE meta_key = '_title') AND ID NOT IN (SELECT post_id FROM wp_postmeta WHERE meta_key = 'content_type' AND meta_value = 4))";
+        $results = $wpdb->get_results($query);
+
+        $i = 1;
+        $total = count($results);
+        $post_cleaned = 0;
+        $meta_deleted = 0;
+        foreach ($results as $post) {
+            if($i % 100 == 0) {
+                output_log(sprintf('%s/%s', $i, $total));
+            }
+            $query = "SELECT meta_id, meta_key FROM wp_postmeta WHERE post_id = " . $post->ID . " AND meta_key != 'arbo_id' AND meta_key NOT LIKE '\_%' AND CONCAT('_', meta_key) NOT IN (SELECT meta_key FROM wp_postmeta WHERE post_id = " . $post->ID . ")";
+            $orphans_metas = $wpdb->get_results($query);
+            if(!empty($orphans_metas)) {
+                output_h3(sprintf('- %s (N° %s)', $post->post_title, $post->ID));
+                foreach ($orphans_metas as $meta) {
+                    //output_log(sprintf('- Suppression "%s"', $meta->meta_key));
+                    //
+                    if(!empty($assoc_args['force']) && $assoc_args['force'] == true) {
+                        delete_post_meta($post->ID, $meta->meta_key);
+                    }
+                    ++$meta_deleted;
+                }
+                output_log(sprintf('%s metas supprimées', count($orphans_metas)));
+                ++$post_cleaned;
+            }
+            ++$i;
+        }
+
+        output_h2('Statistiques');
+        output_log(sprintf('%s posts nettoyés', $post_cleaned));
+        output_log(sprintf('%s metas supprimées', $meta_deleted));
     }
 
     public function woodyGetFieldOption($field_name = null)
@@ -559,7 +609,8 @@ class WoodyTheme_ACF
         return $title;
     }
 
-    public function translatePostTitleResult($title, $post, $field, $post_id) {
+    public function translatePostTitleResult($title, $post, $field, $post_id)
+    {
         $post_lang = apply_filters('woody_pll_get_post_language', $post->ID);
         $default_lang = apply_filters('woody_pll_default_lang_code', null);
 
@@ -573,7 +624,8 @@ class WoodyTheme_ACF
         return $title;
     }
 
-    public function getAspectPostTitleResult($title, $post, $field, $post_id) {
+    public function getAspectPostTitleResult($title, $post, $field, $post_id)
+    {
         if ($post->post_type == 'touristic_sheet') {
             $touristic_source_identifier = get_field('touristic_source_identifier', $post->ID);
 
@@ -1095,7 +1147,8 @@ class WoodyTheme_ACF
         $user->remove_cap('upload_files');
     }
 
-    public function deleteTermCache($term_id, $tt_id, $taxonomy, $update) {
+    public function deleteTermCache($term_id, $tt_id, $taxonomy, $update)
+    {
         switch($taxonomy) {
             case 'seasons':
             case 'attachment_categorie':
