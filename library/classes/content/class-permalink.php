@@ -144,9 +144,8 @@ class WoodyTheme_Permalink
                             'relation' => 'AND', [
                                 'key'     => 'touristic_sheet_id',
                                 'value'   => $sheet_id,
-                                'compare' => 'IN',
-                                ]
                             ]
+                        ]
                     ]);
 
                     if (!empty($query_result) && !empty($query_result->posts)) {
@@ -211,26 +210,28 @@ class WoodyTheme_Permalink
         $request_path = (empty($request_path)) ? $this->getPath($_SERVER['REQUEST_URI']) : $request_path;
 
         if (!empty($permalink_path) && !empty($request_path) && $permalink_path != $request_path) {
-            $params = [
-                'url' => $request_path . (substr(WOODY_PERMALINK_STRUCTURE, -1) == '/' ? '/' : ''),
-                'match_url' => $request_path,
-                'match_data' => [
-                    'source' => [
-                        'flag_query' => 'ignore'
-                    ]
-                ],
-                'group_id' => (int) get_option('woody_auto_redirect'),
-                'action_type' => 'url',
-                'action_code' => 301,
-                'action_data' => [
-                    'url' => $permalink_path . (substr(WOODY_PERMALINK_STRUCTURE, -1) == '/' ? '/' : '')
-                ],
-                'match_type'  => 'url',
-                'regex'  => 0,
-            ];
 
-            include WP_PLUGINS_DIR . '/redirection/models/group.php';
-            Red_Item::create($params);
+            // NOTE: On désactive la sauvegarde des redirections Soft 404 car cela génère des problèmes par moment.
+            // $params = [
+            //     'url' => $request_path . (substr(WOODY_PERMALINK_STRUCTURE, -1) == '/' ? '/' : ''),
+            //     'match_url' => $request_path,
+            //     'match_data' => [
+            //         'source' => [
+            //             'flag_query' => 'ignore'
+            //         ]
+            //     ],
+            //     'group_id' => (int) get_option('woody_auto_redirect'),
+            //     'action_type' => 'url',
+            //     'action_code' => 301,
+            //     'action_data' => [
+            //         'url' => $permalink_path . (substr(WOODY_PERMALINK_STRUCTURE, -1) == '/' ? '/' : '')
+            //     ],
+            //     'match_type'  => 'url',
+            //     'regex'  => 0,
+            // ];
+
+            // include WP_PLUGINS_DIR . '/redirection/models/group.php';
+            // Red_Item::create($params);
 
             wp_redirect($permalink, 301, 'Woody Soft 404 (' . $type . ')');
             exit;
