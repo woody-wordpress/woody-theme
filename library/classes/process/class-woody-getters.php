@@ -745,6 +745,15 @@ class WoodyTheme_WoodyGetters
 
         $data['sheet_id'] = get_field('touristic_sheet_id', $post->ID);
 
+        // Critère
+        if (!empty($sheet_item['itemData'])) {
+            foreach ($sheet_item['itemData'] as $item) {
+                if (array_key_exists('criteria', $item)) {
+                    $data['criteria'] = $item['criteria'];
+                }
+            }
+        }
+
         return apply_filters('woody_custom_sheetPreview', $data, $wrapper, $post, $sheet_item);
     }
 
