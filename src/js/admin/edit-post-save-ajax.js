@@ -24,20 +24,20 @@ function handleErrors(response) {
  */
 const savePost = (e, publish) => {
     const form = document.querySelector('#post');
-    const requiredFields = form.querySelectorAll('.is-required'); // Champs obligatoires
+    // const requiredFields = form.querySelectorAll('.is-required'); // Champs obligatoires
     const data = new FormData(form);
-    let isValid = true;
-    let invalidField;
+    // let isValid = true;
+    // let invalidField;
 
     // On parcours les champs obligatoires et on s'arrête si un n'est pas rempli
-    for (let i = 0; i < requiredFields.length; i++) {
-        const field = requiredFields[i].querySelector('.acf-input select') ? requiredFields[i].querySelector('.acf-input select') : requiredFields[i].querySelector('.acf-input input[type="text"]');
-        if (field.value === '') {
-            isValid = false;
-            invalidField = requiredFields[i];
-            break;
-        }
-    }
+    // for (let i = 0; i < requiredFields.length; i++) {
+    //     const field = requiredFields[i].querySelector('.acf-input select') ? requiredFields[i].querySelector('.acf-input select') : requiredFields[i].querySelector('.acf-input input[type="text"]');
+    //     if (field.value === '') {
+    //         isValid = false;
+    //         invalidField = requiredFields[i];
+    //         break;
+    //     }
+    // }
 
     let spinner = publish ?
         document.querySelector('#publishing-action>.spinner') :
@@ -60,30 +60,30 @@ const savePost = (e, publish) => {
     }
 
     // Si un champs obligatoire n'a pas été rempli
-    if (!isValid) {
-        // Arrêt du spinner
-        if (spinner) spinner.classList.remove('is-active');
-        // Ajout de la notice d'erreur en haut de l'écran
-        createNotice('notice-error', `Impossible d\'enregistrer la page, un champ obligatoire nécessite votre attention.`);
-        invalidFieldNotice(invalidField);
+    // if (!isValid) {
+    //     // Arrêt du spinner
+    //     if (spinner) spinner.classList.remove('is-active');
+    //     // Ajout de la notice d'erreur en haut de l'écran
+    //     createNotice('notice-error', `Impossible d\'enregistrer la page, un champ obligatoire nécessite votre attention.`);
+    //     invalidFieldNotice(invalidField);
 
-        // Ouverture des éléments pour repérer facilement l'erreur
-        // Bloc
-        while (invalidField !== null && !invalidField.classList.contains('acf-row')) {
-            if (invalidField.classList.contains('layout')) {
-                invalidField.classList.remove('-collapsed');
-            }
+    //     // Ouverture des éléments pour repérer facilement l'erreur
+    //     // Bloc
+    //     while (invalidField !== null && !invalidField.classList.contains('acf-row')) {
+    //         if (invalidField.classList.contains('layout')) {
+    //             invalidField.classList.remove('-collapsed');
+    //         }
 
-            invalidField = invalidField.parentElement;
-        }
+    //         invalidField = invalidField.parentElement;
+    //     }
 
-        // Section
-        if (invalidField.classList.contains('-collapsed')) {
-            invalidField.classList.remove('-collapsed');
-        }
+    //     // Section
+    //     if (invalidField.classList.contains('-collapsed')) {
+    //         invalidField.classList.remove('-collapsed');
+    //     }
 
-        return;
-    }
+    //     return;
+    // }
 
     fetch(form.getAttribute("action"), {
             method: 'POST',
@@ -126,12 +126,12 @@ const savePost = (e, publish) => {
         });
 };
 
-const invalidFieldNotice = (field) => {
-    let errorDetails = document.createElement("div");
-    errorDetails.classList.add("acf-notice", "-error", "acf-error-message");
-    errorDetails.innerHTML = "<p>Ce champ est obligatoire</p>";
-    return field.querySelector('.acf-label').appendChild(errorDetails);
-}
+// const invalidFieldNotice = (field) => {
+//     let errorDetails = document.createElement("div");
+//     errorDetails.classList.add("acf-notice", "-error", "acf-error-message");
+//     errorDetails.innerHTML = "<p>Ce champ est obligatoire</p>";
+//     return field.querySelector('.acf-label').appendChild(errorDetails);
+// }
 
 const deleteNotices = () => {
     let notices = document.querySelectorAll('#wpbody-content>.wrap>.custom-notice');
