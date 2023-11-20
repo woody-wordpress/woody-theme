@@ -401,6 +401,9 @@ class WoodyTheme_WoodyCompilers
             // On surcharge le seed avec celui reçu dans les paramètres GET pour maitriser le random des listes
             $list_el_wrapper['seed'] = (empty($form_result['seed'])) ? null : $form_result['seed'];
 
+            // On surcharge les keywords reçus dans les paramètres GET
+            $list_el_wrapper[$form_result['uniqid'].'_keywords'] = (empty($form_result[$form_result['uniqid'].'_keywords'])) ? null : $form_result[$form_result['uniqid'].'_keywords'];
+
             foreach ($form_result as $result_key => $input_value) {
                 if (strpos($result_key, (string) $the_list['uniqid']) !== false && strpos($result_key, 'tt') !== false) { // Taxonomy Terms
                     $input_value = (is_array($input_value)) ? $input_value : [$input_value];
