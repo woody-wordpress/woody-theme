@@ -562,6 +562,10 @@ class WoodyTheme_WoodyProcess
             'lang' => pll_get_post_language($the_post->ID),
         ];
 
+        if (!empty($query_form[$uniqid.'_keywords'])) {
+            $the_query['s'] = $query_form[$uniqid.'_keywords'];
+        }
+
         if (!empty($posts_in)) {
             $the_query['post__in'] = $posts_in;
         }
