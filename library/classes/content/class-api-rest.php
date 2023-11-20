@@ -24,12 +24,15 @@ class WoodyTheme_Api_Rest
         });
     }
 
-    public function getPagePreviewApiRest() {
-
-        # /wp-json/woody/page/preview?post=${id}&field=${field}&current_id=${current_id}
+    public function getPagePreviewApiRest()
+    {
+        # /wp-json/woody/page/preview?post=${id}&field=${field}&current_id=${current_id}&html_format=${html_format}&tpl_twig=${tpl_twig}&ratio=${ratio}
         $post_id = filter_input(INPUT_GET, 'post', FILTER_VALIDATE_INT);
         $field = filter_input(INPUT_GET, 'field');
         $current_id = filter_input(INPUT_GET, 'current_id', FILTER_VALIDATE_INT);
+        $html_format = filter_input(INPUT_GET, 'html_format', FILTER_VALIDATE_BOOLEAN);
+        $tpl_twig = filter_input(INPUT_GET, 'tpl_twig');
+        $ratio = filter_input(INPUT_GET, 'ratio');
 
         $wrapper = [
             'display_img' => true,
@@ -62,17 +65,23 @@ class WoodyTheme_Api_Rest
                 }
             }
 
-            return $post_preview;
         // Cas d'une mise en avant contenu libre
         } elseif(!empty($field) && !empty($current_id)) {
             // On récupère le contenu de l'item par rapport à son index de section, son index de bloc et son post id
             $item = get_field($field, $current_id);
 
             $post_preview = empty($item) ? '' : getCustomPreview($item, $wrapper);
-
-            return $post_preview;
         } else {
             return 'getPagePreviewApiRest : erreur dans les paramètres';
+        }
+
+        if ($html_format == true && !empty($tpl_twig)) {
+            return Timber::compile('cards/' . $tpl_twig . '/tpl.twig', [
+                'item' => $post_preview,
+                'image_style' => $ratio
+            ]);
+        } else {
+            return $post_preview;
         }
     }
 }
