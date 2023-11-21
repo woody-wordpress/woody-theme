@@ -26,26 +26,25 @@ class WoodyTheme_Api_Rest
 
     public function getPagePreviewApiRest()
     {
-        # /wp-json/woody/page/preview?post=${id}&field=${field}&current_id=${current_id}&html_format=${html_format}&tpl_twig=${tpl_twig}&ratio=${ratio}
+        # /wp-json/woody/page/preview?post=${id}&field=${field}&current_id=${current_id}&html_format=${html_format}&tpl_twig=${tpl_twig}&ratio=${ratio}&display=${display}
         $post_id = filter_input(INPUT_GET, 'post', FILTER_VALIDATE_INT);
         $field = filter_input(INPUT_GET, 'field');
         $current_id = filter_input(INPUT_GET, 'current_id', FILTER_VALIDATE_INT);
         $html_format = filter_input(INPUT_GET, 'html_format', FILTER_VALIDATE_BOOLEAN);
         $tpl_twig = filter_input(INPUT_GET, 'tpl_twig');
         $ratio = filter_input(INPUT_GET, 'ratio');
+        $display = filter_input(INPUT_GET, 'display');
 
-        $wrapper = [
-            'display_img' => true,
-            'display_elements' => [
-                'icon',
-                'pretitle',
-                'subtitle',
-                'description',
-                'sheet_type',
-                'sheet_town'
-            ],
-            'display_button' => true
-        ];
+        $display_decoded = json_decode(base64_decode($display), true);
+
+        if (empty($display_decoded)) {
+            $wrapper = [
+                'display_img' => true,
+                'display_button' => false
+            ];
+        } else {
+            $wrapper = $display_decoded;
+        }
 
         // Cas d'une mise en avant contenu existant
         if(!empty($post_id)) {

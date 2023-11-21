@@ -515,6 +515,8 @@ class WoodyTheme_WoodyGetters
             }
         }
 
+        $data['cardDisplayOptions'] = $wrapper;
+
         return apply_filters('woody_custom_pagePreview', $data, $wrapper);
     }
 
