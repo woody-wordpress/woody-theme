@@ -36,15 +36,8 @@ class WoodyTheme_Api_Rest
         $display = filter_input(INPUT_GET, 'display');
 
         $display_decoded = json_decode(base64_decode($display), true);
-
-        if (empty($display_decoded)) {
-            $wrapper = [
-                'display_img' => true,
-                'display_button' => false
-            ];
-        } else {
-            $wrapper = $display_decoded;
-        }
+        $wrapper = empty($display_decoded) ? ['display_img' => true, 'display_button' => false] : $display_decoded;
+        $post_preview = [];
 
         // Cas d'une mise en avant contenu existant
         if(!empty($post_id)) {
@@ -52,8 +45,6 @@ class WoodyTheme_Api_Rest
             $post = get_post($post_id);
 
             if ($post->post_status == 'publish') {
-                $post_preview = [];
-
                 switch ($post->post_type) {
                     case 'touristic_sheet':
                         $post_preview = getTouristicSheetPreview($wrapper, $post);
@@ -69,12 +60,12 @@ class WoodyTheme_Api_Rest
             // On récupère le contenu de l'item par rapport à son index de section, son index de bloc et son post id
             $item = get_field($field, $current_id);
 
-            $post_preview = empty($item) ? '' : getCustomPreview($item, $wrapper);
+            $post_preview = empty($item) ? [] : getCustomPreview($item, $wrapper);
         } else {
             return 'getPagePreviewApiRest : erreur dans les paramètres';
         }
 
-        if ($html_format == true && !empty($tpl_twig)) {
+        if ($html_format && !empty($tpl_twig)) {
             return Timber::compile('cards/' . $tpl_twig . '/tpl.twig', [
                 'item' => $post_preview,
                 'image_style' => $ratio
