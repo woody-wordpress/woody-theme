@@ -610,6 +610,8 @@ class WoodyTheme_WoodyGetters
             $data['movie'] = $item['movie'];
         }
 
+        $data['cardDisplayOptions'] = $wrapper;
+
         return $data;
     }
 
@@ -755,6 +757,8 @@ class WoodyTheme_WoodyGetters
                 }
             }
         }
+
+        $data['cardDisplayOptions'] = $wrapper;
 
         return apply_filters('woody_custom_sheetPreview', $data, $wrapper, $post, $sheet_item);
     }
