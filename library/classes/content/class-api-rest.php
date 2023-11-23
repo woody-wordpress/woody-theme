@@ -36,7 +36,17 @@ class WoodyTheme_Api_Rest
         $display = filter_input(INPUT_GET, 'display');
 
         $display_decoded = json_decode(base64_decode($display), true);
-        $wrapper = empty($display_decoded) ? ['display_img' => true, 'display_button' => false] : $display_decoded;
+
+        if (empty($display_decoded)) {
+            $wrapper = ['display_img' => true, 'display_button' => false];
+        } else if (!empty($display_decoded) && empty($ratio)) {
+            $display_decoded['display_img'] = false;
+            $wrapper = $display_decoded;
+        } else {
+            $display_decoded['display_img'] = true;
+            $wrapper = $display_decoded;
+        }
+
         $post_preview = [];
 
         // Cas d'une mise en avant contenu existant

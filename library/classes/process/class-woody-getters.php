@@ -515,7 +515,7 @@ class WoodyTheme_WoodyGetters
             }
         }
 
-        $data['cardDisplayOptions'] = $wrapper;
+        $data['cardDisplayOptions'] = $wrapper['display_elements'];
 
         return apply_filters('woody_custom_pagePreview', $data, $wrapper);
     }
@@ -610,7 +610,7 @@ class WoodyTheme_WoodyGetters
             $data['movie'] = $item['movie'];
         }
 
-        $data['cardDisplayOptions'] = $wrapper;
+        $data['cardDisplayOptions'] = $wrapper['display_elements'];
 
         return $data;
     }
@@ -758,7 +758,7 @@ class WoodyTheme_WoodyGetters
             }
         }
 
-        $data['cardDisplayOptions'] = $wrapper;
+        $data['cardDisplayOptions'] = $wrapper['display_elements'];
 
         return apply_filters('woody_custom_sheetPreview', $data, $wrapper, $post, $sheet_item);
     }
