@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.4.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2023-08-21T14:52:45+02:00\n"
-"PO-Revision-Date: 2023-08-21 15:09+0200\n"
+"POT-Creation-Date: 2023-11-24T14:36:15+01:00\n"
+"PO-Revision-Date: 2023-11-24 14:42+0100\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.4.1\n"
 "X-Domain: woody-theme\n"
 
 #. Theme Name of the theme
@@ -341,7 +341,7 @@ msgid "Vous cherchez quelque chose ?"
 msgstr "찾고 있는 것이 있나요?"
 
 #: library/classes/content/class-polylang.php:165
-#: library/classes/process/class-woody-compilers.php:953
+#: library/classes/process/class-woody-compilers.php:963
 msgid "Rechercher"
 msgstr "연구원"
 
@@ -350,57 +350,57 @@ msgid "Réinitialiser"
 msgstr "초기화"
 
 #: library/classes/content/class-polylang.php:167
-#: library/classes/process/class-woody-compilers.php:948
+#: library/classes/process/class-woody-compilers.php:958
 msgid "Choisissez vos dates"
 msgstr "날짜 선택"
 
 #: library/classes/content/class-polylang.php:168
-#: library/classes/process/class-woody-compilers.php:949
+#: library/classes/process/class-woody-compilers.php:959
 msgid "Date d'arrivée"
 msgstr "도착 날짜"
 
 #: library/classes/content/class-polylang.php:169
-#: library/classes/process/class-woody-compilers.php:945
-#: library/classes/process/class-woody-compilers.php:946
+#: library/classes/process/class-woody-compilers.php:955
+#: library/classes/process/class-woody-compilers.php:956
 msgid "Durée du séjour"
 msgstr "체류 기간"
 
 #: library/classes/content/class-polylang.php:170
-#: library/classes/process/class-woody-compilers.php:951
+#: library/classes/process/class-woody-compilers.php:961
 msgid "adulte(s)"
 msgstr "성인"
 
 #: library/classes/content/class-polylang.php:171
-#: library/classes/process/class-woody-compilers.php:952
+#: library/classes/process/class-woody-compilers.php:962
 msgid "enfant(s)"
 msgstr "자녀(들)"
 
 #: library/classes/content/class-polylang.php:172
-#: library/classes/timber/class-timber-filters.php:315
+#: library/classes/timber/class-timber-filters.php:335
 #: library/functions/01_assets.php:91
 msgid "jour"
 msgstr "일"
 
 #: library/classes/content/class-polylang.php:173
-#: library/classes/timber/class-timber-filters.php:318
+#: library/classes/timber/class-timber-filters.php:338
 #: library/functions/01_assets.php:92
 msgid "jours"
 msgstr "일"
 
 #: library/classes/content/class-polylang.php:174
-#: library/classes/timber/class-timber-filters.php:321
+#: library/classes/timber/class-timber-filters.php:341
 #: library/functions/01_assets.php:89
 msgid "semaine"
 msgstr "semaine"
 
 #: library/classes/content/class-polylang.php:175
-#: library/classes/timber/class-timber-filters.php:324
+#: library/classes/timber/class-timber-filters.php:344
 #: library/functions/01_assets.php:90
 msgid "semaines"
 msgstr "세메인"
 
 #: library/classes/content/class-polylang.php:176
-#: library/classes/timber/class-timber-filters.php:328
+#: library/classes/timber/class-timber-filters.php:348
 msgid "mois"
 msgstr "월"
 
@@ -449,20 +449,20 @@ msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "찾고 계신 페이지가 여기에 있나요?"
 
 #: library/classes/content/class-polylang.php:188
-#: library/classes/process/class-woody-getters.php:457
-#: library/classes/process/class-woody-getters.php:707
+#: library/classes/process/class-woody-getters.php:460
+#: library/classes/process/class-woody-getters.php:714
 msgid "Lire la suite"
 msgstr "자세히 보기"
 
 #: library/classes/content/class-polylang.php:189
-#: library/classes/process/class-woody-compilers.php:940
-#: library/classes/process/class-woody-compilers.php:942
+#: library/classes/process/class-woody-compilers.php:950
+#: library/classes/process/class-woody-compilers.php:952
 msgid "Que voulez-vous réserver ?"
 msgstr "무엇을 예약하시겠습니까?"
 
 #: library/classes/content/class-polylang.php:190
-#: library/classes/process/class-woody-compilers.php:943
-#: library/classes/process/class-woody-compilers.php:944
+#: library/classes/process/class-woody-compilers.php:953
+#: library/classes/process/class-woody-compilers.php:954
 msgid "Choisissez vos dates de réservation"
 msgstr "예약 날짜 선택"
 
@@ -475,7 +475,8 @@ msgid "Réservable"
 msgstr "예약 가능"
 
 #: library/classes/content/class-polylang.php:193
-#: library/classes/process/class-woody-getters.php:583
+#: library/classes/process/class-woody-getters.php:325
+#: library/classes/process/class-woody-getters.php:588
 msgid "Télécharger"
 msgstr "다운로드"
 
@@ -639,7 +640,7 @@ msgid "Base de"
 msgstr "기준"
 
 #: library/classes/content/class-polylang.php:245
-#: library/classes/process/class-woody-compilers.php:655
+#: library/classes/process/class-woody-compilers.php:665
 msgid "Publié le"
 msgstr "에 게시됨"
 
@@ -648,7 +649,7 @@ msgid "Mis à jour le"
 msgstr "업데이트된 날짜"
 
 #: library/classes/content/class-polylang.php:247
-#: library/classes/process/class-woody-compilers.php:464
+#: library/classes/process/class-woody-compilers.php:474
 msgid "Désolé, aucun contenu ne correspond à votre recherche"
 msgstr "검색어와 일치하는 콘텐츠가 없습니다."
 
@@ -660,28 +661,28 @@ msgstr "또한 읽기"
 msgid "Classement"
 msgstr "랭킹"
 
-#: library/classes/process/class-woody-getters.php:785
-#: library/classes/process/class-woody-getters.php:786
+#: library/classes/process/class-woody-getters.php:803
+#: library/classes/process/class-woody-getters.php:804
 msgid "Découvrir"
 msgstr "알아보기"
 
-#: library/classes/process/class-woody-getters.php:970
+#: library/classes/process/class-woody-getters.php:992
 msgid "Informations prestataire"
 msgstr "제공자 정보"
 
-#: library/classes/process/class-woody-getters.php:975
+#: library/classes/process/class-woody-getters.php:997
 msgid "Horaires"
 msgstr "시간표"
 
-#: library/classes/process/class-woody-getters.php:980
+#: library/classes/process/class-woody-getters.php:1002
 msgid "Carte"
 msgstr "장바구니"
 
-#: library/classes/process/class-woody-getters.php:985
+#: library/classes/process/class-woody-getters.php:1007
 msgid "Avis"
 msgstr "공지 사항"
 
-#: library/classes/process/class-woody-getters.php:990
+#: library/classes/process/class-woody-getters.php:1012
 msgid "Poser une question"
 msgstr "질문하기"
 
