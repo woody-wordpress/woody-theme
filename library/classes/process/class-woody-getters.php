@@ -322,7 +322,7 @@ class WoodyTheme_WoodyGetters
 
             $data['link'] = [
                 'url' => wp_get_attachment_url($post->ID),
-                'link_label' => __('Télécharger')
+                'link_label' => __('Télécharger', 'woody-theme')
             ];
 
             $data['page_type'] = 'attachment';
