@@ -290,6 +290,8 @@ class WoodyTheme_Timber_Filters
 
         if ($locale == 'br_BR') {
             $locale = 'fr_FR';
+        } elseif($locale == 'en_AU' || $locale == 'en_NZ' || $locale == 'en_SG'){
+            $locale = 'en_GB';
         }
 
         // https://github.com/fightbulc/moment.php
