@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.6.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2023-08-21T14:52:45+02:00\n"
-"PO-Revision-Date: 2023-08-21 15:03+0200\n"
+"POT-Creation-Date: 2023-11-24T14:57:46+01:00\n"
+"PO-Revision-Date: 2023-11-24 14:59+0100\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.4.1\n"
 "X-Domain: woody-theme\n"
 
 #. Theme Name of the theme
@@ -345,7 +345,7 @@ msgid "Vous cherchez quelque chose ?"
 msgstr "Suchst du etwas?"
 
 #: library/classes/content/class-polylang.php:165
-#: library/classes/process/class-woody-compilers.php:953
+#: library/classes/process/class-woody-compilers.php:963
 msgid "Rechercher"
 msgstr "Suchen"
 
@@ -354,57 +354,57 @@ msgid "Réinitialiser"
 msgstr "Zurücksetzen"
 
 #: library/classes/content/class-polylang.php:167
-#: library/classes/process/class-woody-compilers.php:948
+#: library/classes/process/class-woody-compilers.php:958
 msgid "Choisissez vos dates"
 msgstr "Datum aussuchen"
 
 #: library/classes/content/class-polylang.php:168
-#: library/classes/process/class-woody-compilers.php:949
+#: library/classes/process/class-woody-compilers.php:959
 msgid "Date d'arrivée"
 msgstr "Ankunftsdatum"
 
 #: library/classes/content/class-polylang.php:169
-#: library/classes/process/class-woody-compilers.php:945
-#: library/classes/process/class-woody-compilers.php:946
+#: library/classes/process/class-woody-compilers.php:955
+#: library/classes/process/class-woody-compilers.php:956
 msgid "Durée du séjour"
 msgstr "Aufenthaltsdauer"
 
 #: library/classes/content/class-polylang.php:170
-#: library/classes/process/class-woody-compilers.php:951
+#: library/classes/process/class-woody-compilers.php:961
 msgid "adulte(s)"
 msgstr "Erwachsene(r)"
 
 #: library/classes/content/class-polylang.php:171
-#: library/classes/process/class-woody-compilers.php:952
+#: library/classes/process/class-woody-compilers.php:962
 msgid "enfant(s)"
 msgstr "Kind(er)"
 
 #: library/classes/content/class-polylang.php:172
-#: library/classes/timber/class-timber-filters.php:315
+#: library/classes/timber/class-timber-filters.php:335
 #: library/functions/01_assets.php:91
 msgid "jour"
 msgstr "Tages"
 
 #: library/classes/content/class-polylang.php:173
-#: library/classes/timber/class-timber-filters.php:318
+#: library/classes/timber/class-timber-filters.php:338
 #: library/functions/01_assets.php:92
 msgid "jours"
 msgstr "Tage"
 
 #: library/classes/content/class-polylang.php:174
-#: library/classes/timber/class-timber-filters.php:321
+#: library/classes/timber/class-timber-filters.php:341
 #: library/functions/01_assets.php:89
 msgid "semaine"
 msgstr "Woche"
 
 #: library/classes/content/class-polylang.php:175
-#: library/classes/timber/class-timber-filters.php:324
+#: library/classes/timber/class-timber-filters.php:344
 #: library/functions/01_assets.php:90
 msgid "semaines"
 msgstr "Wochen"
 
 #: library/classes/content/class-polylang.php:176
-#: library/classes/timber/class-timber-filters.php:328
+#: library/classes/timber/class-timber-filters.php:348
 msgid "mois"
 msgstr "Monat"
 
@@ -453,20 +453,20 @@ msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "Die Seite die Sie suchen ist vielleicht hier?"
 
 #: library/classes/content/class-polylang.php:188
-#: library/classes/process/class-woody-getters.php:457
-#: library/classes/process/class-woody-getters.php:707
+#: library/classes/process/class-woody-getters.php:460
+#: library/classes/process/class-woody-getters.php:710
 msgid "Lire la suite"
 msgstr "Mehr erfahren"
 
 #: library/classes/content/class-polylang.php:189
-#: library/classes/process/class-woody-compilers.php:940
-#: library/classes/process/class-woody-compilers.php:942
+#: library/classes/process/class-woody-compilers.php:950
+#: library/classes/process/class-woody-compilers.php:952
 msgid "Que voulez-vous réserver ?"
 msgstr "Was möchtest du buchen?"
 
 #: library/classes/content/class-polylang.php:190
-#: library/classes/process/class-woody-compilers.php:943
-#: library/classes/process/class-woody-compilers.php:944
+#: library/classes/process/class-woody-compilers.php:953
+#: library/classes/process/class-woody-compilers.php:954
 msgid "Choisissez vos dates de réservation"
 msgstr "Datum aussuchen"
 
@@ -479,7 +479,8 @@ msgid "Réservable"
 msgstr "Buchbar"
 
 #: library/classes/content/class-polylang.php:193
-#: library/classes/process/class-woody-getters.php:583
+#: library/classes/process/class-woody-getters.php:325
+#: library/classes/process/class-woody-getters.php:586
 msgid "Télécharger"
 msgstr "Herunterladen"
 
@@ -645,7 +646,7 @@ msgid "Base de"
 msgstr "Basis von"
 
 #: library/classes/content/class-polylang.php:245
-#: library/classes/process/class-woody-compilers.php:655
+#: library/classes/process/class-woody-compilers.php:665
 msgid "Publié le"
 msgstr "Veröffentlicht am"
 
@@ -654,7 +655,7 @@ msgid "Mis à jour le"
 msgstr "Aktualisiert am"
 
 #: library/classes/content/class-polylang.php:247
-#: library/classes/process/class-woody-compilers.php:464
+#: library/classes/process/class-woody-compilers.php:474
 msgid "Désolé, aucun contenu ne correspond à votre recherche"
 msgstr "Es tut uns leid, kein Inhalt entspricht Ihrer Suche"
 
@@ -666,28 +667,28 @@ msgstr "Lesen Sie auch"
 msgid "Classement"
 msgstr "Rangliste"
 
-#: library/classes/process/class-woody-getters.php:785
-#: library/classes/process/class-woody-getters.php:786
+#: library/classes/process/class-woody-getters.php:797
+#: library/classes/process/class-woody-getters.php:798
 msgid "Découvrir"
 msgstr "Entdecken"
 
-#: library/classes/process/class-woody-getters.php:970
+#: library/classes/process/class-woody-getters.php:986
 msgid "Informations prestataire"
 msgstr "Anbieter-Informationen"
 
-#: library/classes/process/class-woody-getters.php:975
+#: library/classes/process/class-woody-getters.php:991
 msgid "Horaires"
 msgstr "Zeitpläne"
 
-#: library/classes/process/class-woody-getters.php:980
+#: library/classes/process/class-woody-getters.php:996
 msgid "Carte"
 msgstr "Karte"
 
-#: library/classes/process/class-woody-getters.php:985
+#: library/classes/process/class-woody-getters.php:1001
 msgid "Avis"
 msgstr "Meinung"
 
-#: library/classes/process/class-woody-getters.php:990
+#: library/classes/process/class-woody-getters.php:1006
 msgid "Poser une question"
 msgstr "Unsere Vorschläge"
 
