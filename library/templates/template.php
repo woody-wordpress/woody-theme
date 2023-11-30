@@ -804,11 +804,11 @@ abstract class WoodyTheme_TemplateAbstract
         $output_params .= empty($page) ? '' : $page . '&';
         $output_params = substr($output_params, 0, -1);
         $output_params = empty($output_params) ? '' : '?' . $output_params;
+        $woody_lang_enable = (defined('WOODY_LANG_ENABLE') && is_array(WOODY_LANG_ENABLE)) ? WOODY_LANG_ENABLE : [];
 
         if (!empty($languages)) {
             foreach ($languages as $language) {
-                $woody_lang_enable = (defined('WOODY_LANG_ENABLE') && is_array(WOODY_LANG_ENABLE)) ? WOODY_LANG_ENABLE : [];
-                
+
                 if (in_array($language['slug'], $woody_lang_enable) || is_user_logged_in()) {
                     if (!empty($language['current_lang'])) {
                         $data['current_lang'] = substr($language['locale'], 0, 2);
@@ -840,13 +840,11 @@ abstract class WoodyTheme_TemplateAbstract
                 $data['flags'] = (empty($languages_customization['flags'])) ? false : $languages_customization['flags'];
                 if (!empty($languages_customization['external_langs'])) {
                     foreach ($languages_customization['external_langs'] as $lang_key => $language) {
-                        if (!empty($data['langs'][$lang_key])) {
+                        if (!empty($data['langs'][$lang_key]) && (in_array($lang_key, $woody_lang_enable) || is_user_logged_in())) {
                             $data['langs'][$lang_key]['url'] = $language['url'];
                             $data['langs'][$lang_key]['name'] = $language['name'];
                             $data['langs'][$lang_key]['locale'] = (empty($language['locale'])) ? $lang_key : substr($language['locale'], 0, 2);
                             $data['langs'][$lang_key]['target'] = '_blank';
-                        } elseif (!is_user_logged_in()) {
-                            unset($data['langs'][$lang_key]);
                         }
                     }
                 }
