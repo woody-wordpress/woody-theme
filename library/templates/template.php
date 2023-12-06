@@ -840,7 +840,7 @@ abstract class WoodyTheme_TemplateAbstract
                 $data['flags'] = (empty($languages_customization['flags'])) ? false : $languages_customization['flags'];
                 if (!empty($languages_customization['external_langs'])) {
                     foreach ($languages_customization['external_langs'] as $lang_key => $language) {
-                        if (!empty($data['langs'][$lang_key]) && (in_array($lang_key, $woody_lang_enable) || is_user_logged_in())) {
+                        if (!empty($data['langs'][$lang_key])) {
                             $data['langs'][$lang_key]['url'] = $language['url'];
                             $data['langs'][$lang_key]['name'] = $language['name'];
                             $data['langs'][$lang_key]['locale'] = (empty($language['locale'])) ? $lang_key : substr($language['locale'], 0, 2);
