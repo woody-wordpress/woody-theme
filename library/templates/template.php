@@ -119,6 +119,10 @@ abstract class WoodyTheme_TemplateAbstract
             $this->globals['current_locale'] = apply_filters('woody_pll_current_language', null);
         }
 
+        if (empty($this->globals['current_locale_region'])) {
+            $this->globals['current_locale_region'] = pll_current_language('locale');
+        }
+
         if (empty($this->globals['languages'])) {
             $this->globals['languages'] = apply_filters('woody_pll_the_locales', null);
         }
