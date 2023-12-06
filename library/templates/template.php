@@ -804,11 +804,11 @@ abstract class WoodyTheme_TemplateAbstract
         $output_params .= empty($page) ? '' : $page . '&';
         $output_params = substr($output_params, 0, -1);
         $output_params = empty($output_params) ? '' : '?' . $output_params;
+        $woody_lang_enable = (defined('WOODY_LANG_ENABLE') && is_array(WOODY_LANG_ENABLE)) ? WOODY_LANG_ENABLE : [];
 
         if (!empty($languages)) {
             foreach ($languages as $language) {
-                $woody_lang_enable = (defined('WOODY_LANG_ENABLE') && is_array(WOODY_LANG_ENABLE)) ? WOODY_LANG_ENABLE : [];
-                
+
                 if (in_array($language['slug'], $woody_lang_enable) || is_user_logged_in()) {
                     if (!empty($language['current_lang'])) {
                         $data['current_lang'] = substr($language['locale'], 0, 2);
@@ -845,8 +845,6 @@ abstract class WoodyTheme_TemplateAbstract
                             $data['langs'][$lang_key]['name'] = $language['name'];
                             $data['langs'][$lang_key]['locale'] = (empty($language['locale'])) ? $lang_key : substr($language['locale'], 0, 2);
                             $data['langs'][$lang_key]['target'] = '_blank';
-                        } elseif (!is_user_logged_in()) {
-                            unset($data['langs'][$lang_key]);
                         }
                     }
                 }
