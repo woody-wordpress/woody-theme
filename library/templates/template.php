@@ -812,23 +812,22 @@ abstract class WoodyTheme_TemplateAbstract
 
         if (!empty($languages)) {
             foreach ($languages as $language) {
-
-                if (in_array($language['slug'], $woody_lang_enable) || is_user_logged_in()) {
-                    if (!empty($language['current_lang'])) {
-                        $data['current_lang'] = substr($language['locale'], 0, 2);
-                        $data['langs'][$language['slug']]['url'] = $language['url'] . $output_params;
-                        $data['langs'][$language['slug']]['name'] = strpos($language['name'], '(') ? substr($language['name'], 0, strpos($language['name'], '(')) : $language['name'];
-                        $data['langs'][$language['slug']]['locale'] = substr($language['locale'], 0, 2);
-                        $data['langs'][$language['slug']]['no_translation'] = $language['no_translation'];
-                        $data['langs'][$language['slug']]['is_current'] = true;
-                        $data['langs'][$language['slug']]['season'] = empty($language['season']) ? '' : $language['season'];
-                    } else {
-                        $data['langs'][$language['slug']]['url'] = $language['url'] . $output_params;
-                        $data['langs'][$language['slug']]['name'] = strpos($language['name'], '(') ? substr($language['name'], 0, strpos($language['name'], '(')) : $language['name'];
-                        $data['langs'][$language['slug']]['locale'] = substr($language['locale'], 0, 2);
-                        $data['langs'][$language['slug']]['no_translation'] = $language['no_translation'];
-                        $data['langs'][$language['slug']]['season'] = empty($language['season']) ? '' : $language['season'];
-                    }
+                if (!empty($language['current_lang'])) {
+                    $data['current_lang'] = substr($language['locale'], 0, 2);
+                    $data['langs'][$language['slug']]['url'] = $language['url'] . $output_params;
+                    $data['langs'][$language['slug']]['name'] = strpos($language['name'], '(') ? substr($language['name'], 0, strpos($language['name'], '(')) : $language['name'];
+                    $data['langs'][$language['slug']]['locale'] = substr($language['locale'], 0, 2);
+                    $data['langs'][$language['slug']]['no_translation'] = $language['no_translation'];
+                    $data['langs'][$language['slug']]['is_current'] = true;
+                    $data['langs'][$language['slug']]['season'] = empty($language['season']) ? '' : $language['season'];
+                    $data['langs'][$language['slug']]['external'] = false;
+                } else {
+                    $data['langs'][$language['slug']]['url'] = $language['url'] . $output_params;
+                    $data['langs'][$language['slug']]['name'] = strpos($language['name'], '(') ? substr($language['name'], 0, strpos($language['name'], '(')) : $language['name'];
+                    $data['langs'][$language['slug']]['locale'] = substr($language['locale'], 0, 2);
+                    $data['langs'][$language['slug']]['no_translation'] = $language['no_translation'];
+                    $data['langs'][$language['slug']]['season'] = empty($language['season']) ? '' : $language['season'];
+                    $data['langs'][$language['slug']]['external'] = false;
                 }
             }
         }
@@ -849,6 +848,9 @@ abstract class WoodyTheme_TemplateAbstract
                             $data['langs'][$lang_key]['name'] = $language['name'];
                             $data['langs'][$lang_key]['locale'] = (empty($language['locale'])) ? $lang_key : substr($language['locale'], 0, 2);
                             $data['langs'][$lang_key]['target'] = '_blank';
+                            $data['langs'][$lang_key]['external'] = true;
+                        } elseif (!is_user_logged_in()) {
+                            unset($data['langs'][$lang_key]);
                         }
                     }
                 }
@@ -863,11 +865,28 @@ abstract class WoodyTheme_TemplateAbstract
             }
         }
 
+        if(!empty($data['langs'])) {
+            foreach ($data['langs'] as $lang_key => $language) {
+                $is_in_switcher = is_user_logged_in() || in_array($lang_key, $woody_lang_enable) || $this->isExternalLanguage($language);
+                if(!$is_in_switcher) {
+                    unset($data['langs'][$lang_key]);
+                }
+            }
+        }
+
         if (!empty($data['langs']) && count($data['langs']) == 1) {
             return[];
         }
 
         return $data;
+    }
+
+    private function isExternalLanguage($language) {
+        if(!empty($language['external'])) {
+            return true;
+        }
+
+        return false;
     }
 
     private function addDealsBlock()
