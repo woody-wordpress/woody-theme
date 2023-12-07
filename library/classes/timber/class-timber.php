@@ -170,8 +170,8 @@ if (!class_exists('Timber')) {
                 $datalayer['data']['lang'] = $vars['globals']['current_lang'];
             }
 
-            if(!empty($vars['globals']['season'])) {
-                $datalayer['data']['season'] = $vars['globals']['season'];
+            if(!empty($vars['globals']['current_season'])) {
+                $datalayer['data']['season'] = $vars['globals']['current_season'];
             }
 
             if(!empty($vars['globals']['area'])) {
