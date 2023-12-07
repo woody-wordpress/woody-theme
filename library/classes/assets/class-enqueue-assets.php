@@ -393,8 +393,17 @@ class WoodyTheme_Enqueue_Assets
         $return = [];
         $favicon_name = apply_filters('woody_favicon_name', 'favicon');
 
-        foreach (['favicon', '16', '32', '64', '120', '128', '152', '167', '180', '192'] as $icon) {
-            $return[$icon] = WP_DIST_URL . $this->assetPath('/favicon/' . $favicon_name . '/' . (($icon == 'favicon') ? $favicon_name . '.ico' : $favicon_name . '.' . $icon . 'w-' . $icon . 'h.png'));
+        // rel="icon" type="image/x-icon"
+        $return['favicon'] = WP_DIST_URL . $this->assetPath(sprintf('/favicon/%s/favicon.ico', $favicon_name));
+
+        // rel="icon" type="image/png"
+        foreach (['16', '32', '48'] as $size) {
+            $return['icon'][$size] = WP_DIST_URL . $this->assetPath(sprintf('/favicon/%s/favicon-%sx%s.png', $favicon_name, $size, $size));
+        }
+
+        // rel="apple-touch-icon"
+        foreach (['57', '60', '72', '76', '114', '120', '144', '152', '167', '180', '1024'] as $size) {
+            $return['apple'][$size] = WP_DIST_URL . $this->assetPath(sprintf('/favicon/%s/apple-touch-icon-%sx%s.png', $favicon_name, $size, $size));
         }
 
         return $return;
