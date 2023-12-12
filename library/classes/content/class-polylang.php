@@ -201,6 +201,7 @@ class WoodyTheme_Polylang
         __('Nationalité', 'woody-theme');
         __('Sommaire', 'woody-theme');
         __('Envoyer un email', 'woody-theme');
+        __('Choisissez une option', 'woody-theme');
 
         //Actions
         __('Ajouter', 'woody-theme');
