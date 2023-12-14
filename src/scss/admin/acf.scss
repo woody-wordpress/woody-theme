@@ -972,6 +972,12 @@
                         content: '\f239';
                     }
                 }
+                
+                &[data-layout='snowflake_weather'] {
+                    &:before {
+                        content: '\f176';
+                    }
+                }
 
                 &[data-layout='spacer_block'] {
                     &:before {
