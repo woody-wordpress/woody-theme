@@ -552,10 +552,10 @@ function embedVideo($embed)
  * @link https://github.com/fightbulc/moment.php
  * @link https://www.php.net/manual/fr/datetime.format.php
  */
-function formatDate($date, $format = 'd F Y')
+function formatDate($date, $format = 'd F Y', $locale = null)
 {
     $formated_date = '';
-    $locale = empty(pll_current_language()) ? PLL_DEFAULT_LOCALE : pll_current_language('locale');
+    $locale !== null ? '' : $locale = empty(pll_current_language()) ? PLL_DEFAULT_LOCALE : pll_current_language('locale');
 
     \Moment\Moment::setLocale($locale);
     $m = new \Moment\Moment();
