@@ -92,6 +92,7 @@ class WoodyTheme_WoodyCompilers
             $the_items['default_marker'] = (empty($wrapper['default_marker'])) ? '' : $wrapper['default_marker'];
             $the_items['visual_effects'] = $wrapper['visual_effects'];
             $the_items['display_index'] = (empty($wrapper['display_index'])) ? false : $wrapper['display_index'];
+            $the_items['display_sessions'] = (empty($wrapper['display_sessions'])) ? false : $wrapper['display_sessions'];
 
             // Responsive stuff
             if (!empty($wrapper['mobile_behaviour'])) {
