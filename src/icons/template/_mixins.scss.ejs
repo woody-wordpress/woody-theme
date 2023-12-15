@@ -1,0 +1,29 @@
+@function wicon-char($filename) {
+    $char: "";
+    <% Object.entries(glyphs).forEach(function ([name, glyph]) { %>@if $filename == "<%= name %>" { $char: "<%= glyph.encodedCode %>"; }
+    <% }) %>
+    @return $char;
+}
+
+$wicons:(
+    <% Object.entries(glyphs).forEach(function ([name, glyph]) { %>wicon-<%= name %>: "<%= glyph.encodedCode %>",
+    <% }) %>
+);
+
+@mixin wicon-styles {
+    font-family: "woody-icons";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    text-decoration: none;
+    text-transform: none;
+}
+
+@mixin wicon($filename, $insert: before) {
+    &:#{$insert} {
+        @include wicon-styles;
+        content: wicon-char($filename);
+    }
+}

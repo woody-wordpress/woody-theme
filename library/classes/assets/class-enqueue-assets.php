@@ -381,6 +381,9 @@ class WoodyTheme_Enqueue_Assets
 
         // Enqueue the main Stylesheet.
         wp_enqueue_style('admin-stylesheet', WP_DIST_URL . $this->assetPath('/css/admin.css'), [], null);
+
+        // Enqueue css specificly for icons
+        wp_enqueue_style('wicon-stylesheet', WP_DIST_URL . $this->assetPath('/css/wicon.css'), [], null, 'screen');
     }
 
     public function heartbeatSettings()

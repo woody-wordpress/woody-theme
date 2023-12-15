@@ -8,3 +8,14 @@
     url('<%= cssPath %><%= fontname %>.ttf?t=<%= timestamp %>') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
     url('<%= cssPath %><%= fontname %>.svg?t=<%= timestamp %>#<%= fontname %>') format('svg'); /* iOS 4.1- */
 }
+
+.wicon {
+    @include wicon-styles;
+}
+
+
+@each $icon, $char in $wicons {
+    .#{$icon}:before {
+        content: $char;
+    }
+}
