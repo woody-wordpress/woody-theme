@@ -715,7 +715,7 @@ abstract class WoodyTheme_TemplateAbstract
                 $this->context['website_logo'] = $SubWoodyTheme_TemplateParts->website_logo;
             }
 
-            $this->context['home_url'] = pll_home_url();
+            $this->context['home_url'] = ($SubWoodyTheme_TemplateParts->home_url) ? $SubWoodyTheme_TemplateParts->home_url : pll_home_url();
             $this->context['page_parts'] = $SubWoodyTheme_TemplateParts->getParts();
         }
     }
