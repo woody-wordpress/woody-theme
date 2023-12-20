@@ -258,6 +258,7 @@ class WoodyTheme_WoodyProcess
                 $layout['movie_title_fallback'] = (empty($layout['movie_title'])) ? embedProviderTitle($layout['movie']) : __("Titre de la vidéo manquant", 'woody-theme');
                 $layout['movie_caption_fallback'] = (empty($layout['movie_caption'])) ? embedProviderTitle($layout['movie']) : __("Légende de la vidéo manquante", 'woody-theme');
                 $layout['movie_uploadDate'] = $context['post']->post_modified;
+                $layout['movie_ratio'] = (empty($layout['movie_ratio'])) ? '16_9' : $layout['movie_ratio'];
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             case 'booking_block':
