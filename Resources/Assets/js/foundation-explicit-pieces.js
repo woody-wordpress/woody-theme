@@ -37,11 +37,8 @@ import { Foundation } from 'foundation-sites/js/foundation.core';
 // import { Abide } from 'foundation-sites/js/foundation.abide';
 // Foundation.plugin(Abide, 'Abide');
 
-// ------------------------------------------------------------------
-// L'instanciation des accordions est faites depuis Woody Library (accordion.js) pour le support des ancres dans les accordions
-// ------------------------------------------------------------------
-// import { Accordion } from 'foundation-sites/js/foundation.accordion';
-// Foundation.plugin( Accordion, 'Accordion' );
+import { Accordion } from 'foundation-sites/js/foundation.accordion';
+Foundation.plugin(Accordion, 'Accordion');
 
 // import { AccordionMenu } from 'foundation-sites/js/foundation.accordionMenu';
 // Foundation.plugin(AccordionMenu, 'AccordionMenu');

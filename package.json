@@ -4,12 +4,15 @@
     "title": "Woody Theme by Raccourci Agency",
     "author": "Raccourci Agency",
     "scripts": {
-        "download": "yarn install --ignore-optional --modules-folder ./src/lib/npm && yarn autoclean --modules-folder ./src/lib/npm --force"
+        "download": "yarn install --ignore-optional --modules-folder ./src/lib/npm && yarn autoclean --modules-folder ./src/lib/npm --force",
+        "build": "node build.mjs -a build -e prod",
+        "watch": "node build.mjs -a watch"
     },
     "dependencies": {
         "bootstrap": "3.3.7",
         "flatpickr": "4.5.7",
         "swiper": "4.5.1",
         "plyr": "3.6.8"
-    }
+    },
+    "packageManager": "yarn@1.22.21"
 }
