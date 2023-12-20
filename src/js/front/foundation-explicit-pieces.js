@@ -1,4 +1,7 @@
+import $ from 'jquery';
+
 import { Foundation } from 'foundation-sites/js/foundation.core';
+Foundation.addToJquery($);
 
 // Add Foundation Utils to Foundation global namespace for backwards
 // compatibility.
@@ -37,8 +40,11 @@ import { Foundation } from 'foundation-sites/js/foundation.core';
 // import { Abide } from 'foundation-sites/js/foundation.abide';
 // Foundation.plugin(Abide, 'Abide');
 
-import { Accordion } from 'foundation-sites/js/foundation.accordion';
-Foundation.plugin(Accordion, 'Accordion');
+// ------------------------------------------------------------------
+// L'instanciation des accordions est faites depuis Woody Library (accordion.js) pour le support des ancres dans les accordions
+// ------------------------------------------------------------------
+// import { Accordion } from 'foundation-sites/js/foundation.accordion';
+// Foundation.plugin( Accordion, 'Accordion' );
 
 // import { AccordionMenu } from 'foundation-sites/js/foundation.accordionMenu';
 // Foundation.plugin(AccordionMenu, 'AccordionMenu');
@@ -97,7 +103,4 @@ Foundation.plugin(Tooltip, 'Tooltip');
 // import { ResponsiveAccordionTabs } from 'foundation-sites/js/foundation.responsiveAccordionTabs';
 // Foundation.plugin(ResponsiveAccordionTabs, 'ResponsiveAccordionTabs');
 
-!(function ($) {
-    Foundation.addToJquery($);
-    $(document).foundation();
-})(jQuery);
+$(document).foundation();

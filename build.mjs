@@ -11,7 +11,8 @@ pipe({
                 'source': ['Resources/Assets/js/*.+(js|mjs)'],
                 'bundle': true,
                 'revision': false,
-                'format': 'iife',
+                'format': 'esm',
+                'minify': true,
                 'target': 'js',
                 'external': [
                     'jquery',

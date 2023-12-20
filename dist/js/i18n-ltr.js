@@ -1,1 +1,1 @@
-(()=>{wp.i18n.setLocaleData({"text directionltr":["ltr"]});})();
+wp.i18n.setLocaleData({"text directionltr":["ltr"]});

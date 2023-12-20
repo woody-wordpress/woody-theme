@@ -1,1 +1,1 @@
-(()=>{angular.bootstrap(document,["drupalAngularApp"]);})();
+angular.bootstrap(document,["drupalAngularApp"]);
