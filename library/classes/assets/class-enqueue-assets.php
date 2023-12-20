@@ -74,6 +74,9 @@ class WoodyTheme_Enqueue_Assets
         // hack for googlemap script enqueuing
         add_filter('clean_url', [$this, 'so_handle_038'], 99, 3);
 
+        // Enqueue
+        //add_filter('woody_custom_meta', [$this, 'woodyCustomMeta'], 1, 1);
+
         // Added defer on front
         if (!is_admin()) {
             add_filter('script_loader_tag', [$this, 'scriptLoaderTag'], 10, 2);
@@ -98,6 +101,9 @@ class WoodyTheme_Enqueue_Assets
 
     public function scriptLoaderTag($tag, $handle)
     {
+        if(strpos($tag, '.mjs') !== false) {
+            $tag = str_replace(' src', ' type="module" src', $tag);
+        }
         return str_replace(' src', ' defer src', $tag);
     }
 
@@ -110,6 +116,25 @@ class WoodyTheme_Enqueue_Assets
         }
         return $html;
     }
+
+    // public function woodyCustomMeta($head_top)
+    // {
+    //     // CDN hosted jQuery placed in the header, as some plugins require that jQuery is loaded in the header.
+    //     $jQuery_version = '3.6.4';
+    //     if ($this->isTouristicPlaylist || ($this->isTouristicSheet && !defined('IS_WOODY_HAWWWAI_SHEET_ENABLE'))) {
+    //         $jQuery_version = '2.1.4';
+    //     }
+
+    //     $importmap = [
+    //         'jquery' => get_template_directory_uri() . '/src/lib/custom/jquery@' . $jQuery_version . '.mjs',
+    //         'flatpickr' => get_template_directory_uri() . '/src/lib/npm/flatpickr/dist/flatpickr.min.js',
+    //         'swiper' => get_template_directory_uri() . '/src/lib/npm/swiper/dist/js/swiper.min.js',
+    //     ];
+
+    //     $head_top[] = '<script type="importmap">' . json_encode(['imports' => $importmap]) . '</script>';
+
+    //     return $head_top;
+    // }
 
     public function enqueueLibraries()
     {
@@ -348,7 +373,7 @@ class WoodyTheme_Enqueue_Assets
         }
 
         $dependencies = apply_filters('woody_mainjs_dependencies', $dependencies);
-        wp_enqueue_script('main-javascripts', WP_DIST_URL . $this->assetPath('/js/main.js'), $dependencies, null);
+        wp_enqueue_script('main-javascripts', WP_DIST_URL . $this->assetPath('/js/main.mjs'), $dependencies, null);
 
         // Enqueue the main Stylesheet.
         if (($this->isTouristicSheet && !defined('IS_WOODY_HAWWWAI_SHEET_ENABLE')) || $this->isTouristicPlaylist) {
