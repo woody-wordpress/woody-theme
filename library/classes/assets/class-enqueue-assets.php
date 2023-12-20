@@ -75,7 +75,7 @@ class WoodyTheme_Enqueue_Assets
         add_filter('clean_url', [$this, 'so_handle_038'], 99, 3);
 
         // Enqueue
-        //add_filter('woody_custom_meta', [$this, 'woodyCustomMeta'], 1, 1);
+        add_filter('woody_custom_meta', [$this, 'woodyCustomMeta'], 1, 1);
 
         // Added defer on front
         if (!is_admin()) {
@@ -117,24 +117,22 @@ class WoodyTheme_Enqueue_Assets
         return $html;
     }
 
-    // public function woodyCustomMeta($head_top)
-    // {
-    //     // CDN hosted jQuery placed in the header, as some plugins require that jQuery is loaded in the header.
-    //     $jQuery_version = '3.6.4';
-    //     if ($this->isTouristicPlaylist || ($this->isTouristicSheet && !defined('IS_WOODY_HAWWWAI_SHEET_ENABLE'))) {
-    //         $jQuery_version = '2.1.4';
-    //     }
+    public function woodyCustomMeta($head_top)
+    {
+        // CDN hosted jQuery placed in the header, as some plugins require that jQuery is loaded in the header.
+        $jQuery_version = '3.6.4';
+        if ($this->isTouristicPlaylist || ($this->isTouristicSheet && !defined('IS_WOODY_HAWWWAI_SHEET_ENABLE'))) {
+            $jQuery_version = '2.1.4';
+        }
 
-    //     $importmap = [
-    //         'jquery' => get_template_directory_uri() . '/src/lib/custom/jquery@' . $jQuery_version . '.mjs',
-    //         'flatpickr' => get_template_directory_uri() . '/src/lib/npm/flatpickr/dist/flatpickr.min.js',
-    //         'swiper' => get_template_directory_uri() . '/src/lib/npm/swiper/dist/js/swiper.min.js',
-    //     ];
+        $importmap = [
+            'jquery' => get_template_directory_uri() . '/src/lib/custom/jquery@' . $jQuery_version . '.min.mjs',
+        ];
 
-    //     $head_top[] = '<script type="importmap">' . json_encode(['imports' => $importmap]) . '</script>';
+        $head_top[] = '<script type="importmap">' . json_encode(['imports' => $importmap]) . '</script>';
 
-    //     return $head_top;
-    // }
+        return $head_top;
+    }
 
     public function enqueueLibraries()
     {
@@ -207,7 +205,7 @@ class WoodyTheme_Enqueue_Assets
             $jQuery_version = '2.1.4';
         }
 
-        wp_enqueue_script('jquery', get_template_directory_uri() . '/src/lib/custom/jquery@' . $jQuery_version . '.min.js', [], null); // TODO: Latest 3.7.1
+        wp_enqueue_script('jquery', get_template_directory_uri() . '/src/lib/custom/jquery@' . $jQuery_version . '.min.mjs', [], null); // TODO: Latest 3.7.1
         wp_add_inline_script('jquery', 'window.siteConfig = ' . json_encode($this->siteConfig, JSON_THROW_ON_ERROR) . ';', 'before');
 
         if (!$this->isTouristicSheet || defined('IS_WOODY_HAWWWAI_SHEET_ENABLE')) {
