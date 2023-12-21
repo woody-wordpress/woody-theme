@@ -1,7 +1,7 @@
 {
     "name": "woody-wordpress/woody-theme",
     "type": "wordpress-theme",
-    "version": "1.80.16",
+    "version": "1.80.17",
     "description": "Parent theme of Woody Wordpresss Builder",
     "license": "GPL-2.0",
     "authors": [
