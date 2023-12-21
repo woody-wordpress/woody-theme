@@ -979,6 +979,12 @@
                     }
                 }
 
+                &[data-layout='snowflake_weather_bulletin'] {
+                    &:before {
+                        content: '\f121';
+                    }
+                }
+
                 &[data-layout='spacer_block'] {
                     &:before {
                         content: '\f169';
