@@ -67,6 +67,7 @@ class WoodyTheme_Enqueue_Assets
         add_filter('heartbeat_settings', [$this, 'heartbeatSettings']);
         add_filter('woody_enqueue_favicons', [$this, 'enqueueFavicons']);
         add_filter('wp_resource_hints', [$this, 'wpResourceHints'], 10, 2);
+        add_action('init', [$this, 'tinymceAddStylesheet']);
 
         // Si vous utilisez HTML5, wdjs_use_html5 est un filtre qui enlève l’attribut type="text/javascript"
         add_filter('wdjs_use_html5', '__return_true');
@@ -408,6 +409,11 @@ class WoodyTheme_Enqueue_Assets
 
         // Enqueue css specificly for icons
         wp_enqueue_style('wicon-stylesheet', WP_DIST_URL . $this->assetPath('/css/wicon.css'), [], null, 'screen');
+    }
+
+    public function tinymceAddStylesheet()
+    {
+        add_editor_style(WP_DIST_URL . $this->assetPath('/css/admin.css'));
     }
 
     public function heartbeatSettings()

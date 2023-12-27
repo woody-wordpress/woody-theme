@@ -19,7 +19,6 @@ class WoodyTheme_Tinymce
         add_filter('tiny_mce_before_init', array($this, 'modifyValidMarkup'));
         add_filter('mce_buttons', array($this, 'remove_button_from_tinymce'));
         add_filter('mce_buttons', array($this, 'add_button_from_tinymce'));
-        add_action('init', array($this, 'tinymceAddStylesheet'));
 
         add_action('wp_ajax_woody_icons_list', [$this, 'woodyIconsList']);
     }
@@ -153,10 +152,5 @@ class WoodyTheme_Tinymce
         }
 
         return $buttons;
-    }
-
-    public function tinymceAddStylesheet()
-    {
-        add_editor_style(WP_DIST_URL . '/css/admin.css');
     }
 }
