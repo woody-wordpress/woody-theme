@@ -1,7 +1,4 @@
-import flatpickr from "flatpickr";
-import { French } from "flatpickr/dist/l10n/fr.js"
-
-!(function ($) {
+!(function ($, flatpickr) {
     $('#post').each(function () {
 
         // Add Flatpickr to Unpublish metabox
@@ -12,7 +9,7 @@ import { French } from "flatpickr/dist/l10n/fr.js"
                 dateFormat: 'Y-m-dTH:i',
                 altInput: true,
                 altFormat: 'j F Y à H:i',
-                locale: French,
+                locale: flatpickr.l10ns.fr,
                 time_24hr: true,
                 minDate: 'today'
             });
@@ -23,4 +20,4 @@ import { French } from "flatpickr/dist/l10n/fr.js"
         });
 
     });
-})(jQuery);
+})(jQuery, flatpickr);

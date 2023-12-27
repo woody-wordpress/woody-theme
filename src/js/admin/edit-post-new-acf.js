@@ -1,4 +1,4 @@
-!(function ($, acf) {
+!(function () {
     function openCloseGroup(field) {
         field.on('click', '.postbox-header > *', function () {
             if (!field.hasClass('closed')) {
@@ -14,4 +14,4 @@
     if (typeof acf == 'object') {
         acf.addAction('append', openCloseGroup);
     }
-})(jQuery, acf);
+})();
