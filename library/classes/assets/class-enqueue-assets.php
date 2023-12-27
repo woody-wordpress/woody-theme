@@ -230,10 +230,10 @@ class WoodyTheme_Enqueue_Assets
         wp_enqueue_script('jsdelivr_plyr', get_template_directory_uri() . '/src/lib/npm/plyr/dist/plyr.min.js', [], '3.6.8'); // TODO: Latest 3.7.8
 
         // HACK : i18n LTR (replace the inline added by Core)
-        wp_enqueue_script('wp-i18n-ltr', get_template_directory_uri() . '/dist/js/i18n-ltr.js', ['wp-i18n'], $this->wThemeVersion);
+        wp_enqueue_script('wp-i18n-ltr', get_template_directory_uri() . '/src/js/static/i18n-ltr.min.js', ['wp-i18n'], $this->wThemeVersion);
 
         // Menus links obfuscation
-        wp_enqueue_script('obf', get_template_directory_uri() . '/dist/js/obf.js', [], $this->wThemeVersion);
+        wp_enqueue_script('obf', get_template_directory_uri() . '/src/js/static/obf.min.js', [], $this->wThemeVersion);
 
         // Touristic maps libraries
         wp_enqueue_script('touristicmaps_leaflet', 'https://tiles.touristicmaps.com/libs/leaflet.min.js', [], null);
@@ -320,7 +320,7 @@ class WoodyTheme_Enqueue_Assets
             wp_enqueue_script('hawwwai_sheet_item', $apirender_base_uri . '/assets/scripts/raccourci/sheet_item.' . $jsModeSuffix . '.js', ['jsdelivr_match8'], null);
             wp_enqueue_script('hawwwai_itinerary', $apirender_base_uri . '/assets/scripts/raccourci/itinerary.' . $jsModeSuffix . '.js', ['jquery', 'hawwwai_ng_scripts'], null);
             wp_enqueue_script('hawwwai_fresco', $apirender_base_uri . '/assets/scripts/lib/fresco.js', ['jquery'], null);
-            wp_enqueue_script('hawwwai_ng_init', get_template_directory_uri() . '/dist/js/ng_init.js', ['hawwwai_ng_scripts'], $this->wThemeVersion);
+            wp_enqueue_script('hawwwai_ng_init', get_template_directory_uri() . '/src/js/static/ng_init.min.js', ['hawwwai_ng_scripts'], $this->wThemeVersion);
         }
 
         // window.DrupalAngularConfig.mapProviderKeys
@@ -328,7 +328,7 @@ class WoodyTheme_Enqueue_Assets
 
         // window.DrupalAngularConfig.apiAccount
         if ($this->isTouristicPlaylist || ($this->isTouristicSheet && !defined('IS_WOODY_HAWWWAI_SHEET_ENABLE'))) {
-            wp_enqueue_script('hawwwai_angular_config_footer', get_template_directory_uri() . '/dist/js/angular-config.js', [], null, true);
+            wp_enqueue_script('hawwwai_angular_config_footer', get_template_directory_uri() . '/src/js/static/angular-config.min.js', [], null, true);
             wp_add_inline_script('hawwwai_angular_config_footer', $this->drupalAngularConfigHawwwai, 'after');
         }
 
