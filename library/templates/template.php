@@ -79,6 +79,10 @@ abstract class WoodyTheme_TemplateAbstract
             $this->globals['post_type'] = $this->context['post_type'];
         }
 
+        if (empty($this->globals['post_modified']) && !empty($this->context['post']->post_modified)) {
+            $this->globals['post_modified'] = $this->context['post']->post_modified;
+        }
+
         if (empty($this->globals['post_image']) && !empty($this->context['metas']['og:image']['#attributes']['content'])) {
             $this->globals['post_image'] = $this->context['metas']['og:image']['#attributes']['content'];
         }

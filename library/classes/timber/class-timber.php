@@ -133,6 +133,7 @@ if (!class_exists('Timber')) {
                     'post_image',
                     'post_title',
                     'post_type',
+                    'post_modified',
                     'sheet_id',
                     'site_key',
                     'tags',
