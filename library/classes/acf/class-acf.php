@@ -159,13 +159,47 @@ class WoodyTheme_ACF
 
     public function orphansMetasPlus($args, $assoc_args)
     {
-        global $wpdb;
-        output_h1('Orphans Metas Plus');
-        $post_cleaned = 0;
-        $meta_deleted = 0;
+        output_h1('Supprime toutes les métadonnées fantômes des pages');
 
-        $post_id = 19632;
-        $post = get_post($post_id);
+        global $wpdb;
+        $offset = 3;
+        $count_pages = $wpdb->get_var("SELECT COUNT(ID) FROM $wpdb->posts WHERE post_type = 'page'");
+        output_h2('Nettoyage de ' . $count_pages . ' pages');
+        if (empty($wpdb->last_error)) {
+            for ($i = 0; $i <= $count_pages; $i += $offset) {
+                $results = $wpdb->get_results("SELECT ID FROM $wpdb->posts WHERE post_type = 'page' LIMIT $offset OFFSET $i");
+                if (empty($wpdb->last_error)) {
+                    $post_ids = [];
+                    foreach ($results as $result) {
+                        $post_ids[] = $result->ID;
+                    }
+
+                    if(!empty($post_ids)) {
+                        foreach ($post_ids as $post_id) {
+                            $count_orphans = $this->cleanOrphansMetasPlus($post_id);
+                            $post_cleaned += (!empty($orphans)) ? 1 : 0;
+                            $meta_deleted += $count_orphans;
+                        }
+
+                        $pourcent = ($i + $offset) / $count_pages * 100;
+                        $pourcent = ($pourcent > 100) ? 100 : round($pourcent);
+                        output_log(' - Progression ' . $pourcent . '%');
+                    }
+                }
+            }
+        }
+
+        output_h2('Statistiques');
+        output_log(sprintf('%s posts nettoyés', $post_cleaned));
+        output_log(sprintf('%s metas supprimées', $meta_deleted));
+    }
+
+    private function cleanOrphansMetasPlus($post_id)
+    {
+        output_log(' - Nettoyage de la page "' . $post_id . '"');
+
+        // Metas orphans à supprimer
+        $orphans = [];
 
         // Récupérer toutes les métadonnées du post
         $all_metas = get_post_meta($post_id);
@@ -174,23 +208,22 @@ class WoodyTheme_ACF
 
         // Récupérer tous les champs ACF
         $acf_fields = get_fields($post_id);
-        $result = $this->flattenArrayKeys($acf_fields);
-        foreach ($result as $val) {
-            $result[] = '_' . $val;
-        }
-
-        $orphans = [];
-        foreach ($all_section_metas as $meta) {
-            if(!in_array($meta, $result)) {
-                $orphans[] = $meta;
+        if(is_array($acf_fields)) {
+            $result = $this->flattenArrayKeys($acf_fields);
+            foreach ($result as $val) {
+                $result[] = '_' . $val;
             }
+
+            foreach ($all_section_metas as $meta) {
+                if(!in_array($meta, $result)) {
+                    $orphans[] = $meta;
+                }
+            }
+
+            clean_post_cache($post_id);
         }
 
-        print_r($orphans);
-
-        output_h2('Statistiques');
-        output_log(sprintf('%s posts nettoyés', $post_cleaned));
-        output_log(sprintf('%s metas supprimées', $meta_deleted));
+        return count($orphans);
     }
 
     private function onlySections($array)
