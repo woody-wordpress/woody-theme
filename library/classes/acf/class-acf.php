@@ -94,6 +94,7 @@ class WoodyTheme_ACF
 
         // Commands
         \WP_CLI::add_command('woody:orphans_metas', [$this, 'orphansMetas']);
+        \WP_CLI::add_command('woody:orphans_metas_plus', [$this, 'orphansMetasPlus']);
     }
 
     public function registerHooksAfterAcfInit()
@@ -112,7 +113,7 @@ class WoodyTheme_ACF
     public function orphansMetas($args, $assoc_args)
     {
         global $wpdb;
-        output_h1('Orphans Fields');
+        output_h1('Orphans Metas');
 
         output_h2('Toutes ces pages doivent être enregistrées manuellement dans la back-office');
         $query = "SELECT ID, post_title FROM wp_posts WHERE post_type = 'page' AND ID NOT IN (SELECT post_id FROM wp_postmeta WHERE meta_key = '_title') AND ID NOT IN (SELECT post_id FROM wp_postmeta WHERE meta_key = 'content_type' AND meta_value = 4)";
@@ -154,6 +155,69 @@ class WoodyTheme_ACF
         output_h2('Statistiques');
         output_log(sprintf('%s posts nettoyés', $post_cleaned));
         output_log(sprintf('%s metas supprimées', $meta_deleted));
+    }
+
+    public function orphansMetasPlus($args, $assoc_args)
+    {
+        global $wpdb;
+        output_h1('Orphans Metas Plus');
+        $post_cleaned = 0;
+        $meta_deleted = 0;
+
+        $post_id = 19632;
+        $post = get_post($post_id);
+
+        // Récupérer toutes les métadonnées du post
+        $all_metas = get_post_meta($post_id);
+        $all_metas = array_keys($all_metas);
+        $all_section_metas = $this->onlySections($all_metas);
+
+        // Récupérer tous les champs ACF
+        $acf_fields = get_fields($post_id);
+        $result = $this->flattenArrayKeys($acf_fields);
+        foreach ($result as $val) {
+            $result[] = '_' . $val;
+        }
+
+        $orphans = [];
+        foreach ($all_section_metas as $meta) {
+            if(!in_array($meta, $result)) {
+                $orphans[] = $meta;
+            }
+        }
+
+        print_r($orphans);
+
+        output_h2('Statistiques');
+        output_log(sprintf('%s posts nettoyés', $post_cleaned));
+        output_log(sprintf('%s metas supprimées', $meta_deleted));
+    }
+
+    private function onlySections($array)
+    {
+        $return = [];
+        foreach ($array as $key => $val) {
+            if(substr($val, 0, 7) == 'section' || substr($val, 0, 8) == '_section') {
+                $return[] = $val;
+            }
+        }
+        return $return;
+    }
+
+    private function flattenArrayKeys($array, $parentKey = null, $flexible = false, &$result = [])
+    {
+        foreach ($array as $key => $value) {
+            $currentKey = $parentKey !== null ? "{$parentKey}_$key" : $key;
+
+            if (is_array($value)) {
+                $result[] = $currentKey;
+                $this->flattenArrayKeys($value, $currentKey, $flexible, $result);
+            } else {
+                $result[] = $currentKey;
+            }
+        }
+
+        return $result;
     }
 
     public function woodyGetFieldOption($field_name = null)
@@ -292,7 +356,7 @@ class WoodyTheme_ACF
             if ($field['name'] === "gallery_tags") {
                 $taxonomies = get_object_taxonomies('attachment', 'objects');
 
-                // $unset_taxonomies[] = 'attachment_types';
+            // $unset_taxonomies[] = 'attachment_types';
             } else {
                 $taxonomies = get_object_taxonomies('page', 'objects');
             }
@@ -315,7 +379,7 @@ class WoodyTheme_ACF
                     }
 
                     $display_parent_tag_name = get_field('display_parent_tag_name', 'options');
-                    $parent_name='';
+                    $parent_name = '';
                     if ($display_parent_tag_name) {
                         //Get the root ancestor of a term
                         $ancestors = get_ancestors($term->term_id, $taxonomy->name);
