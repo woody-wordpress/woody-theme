@@ -177,7 +177,7 @@ class WoodyTheme_ACF
                     if(!empty($post_ids)) {
                         foreach ($post_ids as $post_id) {
                             $count_orphans = $this->cleanOrphansMetasPlus($post_id);
-                            $post_cleaned += (!empty($orphans)) ? 1 : 0;
+                            $post_cleaned += (!empty($count_orphans)) ? 1 : 0;
                             $meta_deleted += $count_orphans;
                         }
 
