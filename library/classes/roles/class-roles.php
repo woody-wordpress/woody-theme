@@ -241,6 +241,7 @@ class WoodyTheme_Roles
                 'redactor' => true,
                 'contributor' => true,
                 'translator' => true,
+                'mediatheque' => true,
             ],
             'edit_others_pages' => [
                 'administrator' => true,
@@ -367,6 +368,7 @@ class WoodyTheme_Roles
                 'redactor' => true,
                 'contributor' => true,
                 'translator' => true,
+                'mediatheque' => true,
             ],
             'edit_dashboard' => [
                 'administrator' => true,

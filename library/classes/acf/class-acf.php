@@ -94,6 +94,7 @@ class WoodyTheme_ACF
 
         // Commands
         \WP_CLI::add_command('woody:orphans_metas', [$this, 'orphansMetas']);
+        \WP_CLI::add_command('woody:orphans_metas_plus', [$this, 'orphansMetasPlus']);
     }
 
     public function registerHooksAfterAcfInit()
@@ -112,7 +113,7 @@ class WoodyTheme_ACF
     public function orphansMetas($args, $assoc_args)
     {
         global $wpdb;
-        output_h1('Orphans Fields');
+        output_h1('Orphans Metas');
 
         output_h2('Toutes ces pages doivent être enregistrées manuellement dans la back-office');
         $query = "SELECT ID, post_title FROM wp_posts WHERE post_type = 'page' AND ID NOT IN (SELECT post_id FROM wp_postmeta WHERE meta_key = '_title') AND ID NOT IN (SELECT post_id FROM wp_postmeta WHERE meta_key = 'content_type' AND meta_value = 4)";
@@ -154,6 +155,120 @@ class WoodyTheme_ACF
         output_h2('Statistiques');
         output_log(sprintf('%s posts nettoyés', $post_cleaned));
         output_log(sprintf('%s metas supprimées', $meta_deleted));
+    }
+
+    public function orphansMetasPlus($args, $assoc_args)
+    {
+        output_h1('Supprime toutes les métadonnées fantômes des pages');
+
+        $post_cleaned = 0;
+        $meta_deleted = 0;
+
+        // Test $dry_mode
+        $dry_mode = (!empty($assoc_args['dry'])) ? true : false;
+
+        // Si on précise un post en particulier
+        if(!empty($assoc_args['post']) && is_numeric($assoc_args['post'])) {
+            $post_id = trim($assoc_args['post']);
+            $count_orphans = $this->cleanOrphansMetasPlus($post_id, $dry_mode);
+            $post_cleaned += (!empty($count_orphans)) ? 1 : 0;
+            $meta_deleted += $count_orphans;
+        } else {
+            global $wpdb;
+            $offset = 3;
+            $count_pages = $wpdb->get_var("SELECT COUNT(ID) FROM $wpdb->posts WHERE post_type = 'page'");
+            output_h2('Nettoyage de ' . $count_pages . ' pages');
+            if (empty($wpdb->last_error)) {
+                for ($i = 0; $i <= $count_pages; $i += $offset) {
+                    $results = $wpdb->get_results("SELECT ID FROM $wpdb->posts WHERE post_type = 'page' LIMIT $offset OFFSET $i");
+                    if (empty($wpdb->last_error)) {
+                        $post_ids = [];
+                        foreach ($results as $result) {
+                            $post_ids[] = $result->ID;
+                        }
+
+                        if(!empty($post_ids)) {
+                            foreach ($post_ids as $post_id) {
+                                $count_orphans = $this->cleanOrphansMetasPlus($post_id, $dry_mode);
+                                $post_cleaned += (!empty($count_orphans)) ? 1 : 0;
+                                $meta_deleted += $count_orphans;
+                            }
+
+                            $pourcent = ($i + $offset) / $count_pages * 100;
+                            $pourcent = ($pourcent > 100) ? 100 : round($pourcent);
+                            output_log(' - Progression ' . $pourcent . '%');
+                        }
+                    }
+                }
+            }
+        }
+
+        output_h2('Statistiques');
+        output_log(sprintf('%s posts nettoyés', $post_cleaned));
+        output_log(sprintf('%s metas supprimées', $meta_deleted));
+    }
+
+    private function cleanOrphansMetasPlus($post_id, $dry_mode)
+    {
+        output_log(' - Nettoyage de la page "' . $post_id . '"');
+
+        // Metas orphans à supprimer
+        $orphans = [];
+
+        // Récupérer toutes les métadonnées du post
+        $all_metas = get_post_meta($post_id);
+        $all_metas = array_keys($all_metas);
+        $all_section_metas = $this->onlySections($all_metas);
+
+        // Récupérer tous les champs ACF
+        $acf_fields = get_fields($post_id);
+        if(is_array($acf_fields)) {
+            $result = $this->flattenArrayKeys($acf_fields);
+            foreach ($result as $val) {
+                $result[] = '_' . $val;
+            }
+
+            foreach ($all_section_metas as $meta_key) {
+                if(!in_array($meta_key, $result)) {
+                    $orphans[] = $meta_key;
+
+                    if(!$dry_mode) {
+                        delete_post_meta($post_id, $meta_key);
+                    }
+                }
+            }
+
+            clean_post_cache($post_id);
+        }
+
+        return count($orphans);
+    }
+
+    private function onlySections($array)
+    {
+        $return = [];
+        foreach ($array as $key => $val) {
+            if(substr($val, 0, 7) == 'section' || substr($val, 0, 8) == '_section') {
+                $return[] = $val;
+            }
+        }
+        return $return;
+    }
+
+    private function flattenArrayKeys($array, $parentKey = null, $flexible = false, &$result = [])
+    {
+        foreach ($array as $key => $value) {
+            $currentKey = $parentKey !== null ? "{$parentKey}_$key" : $key;
+
+            if (is_array($value)) {
+                $result[] = $currentKey;
+                $this->flattenArrayKeys($value, $currentKey, $flexible, $result);
+            } else {
+                $result[] = $currentKey;
+            }
+        }
+
+        return $result;
     }
 
     public function woodyGetFieldOption($field_name = null)
@@ -292,7 +407,7 @@ class WoodyTheme_ACF
             if ($field['name'] === "gallery_tags") {
                 $taxonomies = get_object_taxonomies('attachment', 'objects');
 
-                // $unset_taxonomies[] = 'attachment_types';
+            // $unset_taxonomies[] = 'attachment_types';
             } else {
                 $taxonomies = get_object_taxonomies('page', 'objects');
             }
@@ -315,7 +430,7 @@ class WoodyTheme_ACF
                     }
 
                     $display_parent_tag_name = get_field('display_parent_tag_name', 'options');
-                    $parent_name='';
+                    $parent_name = '';
                     if ($display_parent_tag_name) {
                         //Get the root ancestor of a term
                         $ancestors = get_ancestors($term->term_id, $taxonomy->name);
