@@ -985,6 +985,12 @@
                     }
                 }
 
+                &[data-layout="snowflake_road_infos"] {
+                    &:before {
+                        content: "\f14c";
+                    }
+                }
+
                 &[data-layout='spacer_block'] {
                     &:before {
                         content: '\f169';
