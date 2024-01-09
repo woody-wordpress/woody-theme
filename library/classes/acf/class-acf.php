@@ -161,29 +161,43 @@ class WoodyTheme_ACF
     {
         output_h1('Supprime toutes les métadonnées fantômes des pages');
 
-        global $wpdb;
-        $offset = 3;
-        $count_pages = $wpdb->get_var("SELECT COUNT(ID) FROM $wpdb->posts WHERE post_type = 'page'");
-        output_h2('Nettoyage de ' . $count_pages . ' pages');
-        if (empty($wpdb->last_error)) {
-            for ($i = 0; $i <= $count_pages; $i += $offset) {
-                $results = $wpdb->get_results("SELECT ID FROM $wpdb->posts WHERE post_type = 'page' LIMIT $offset OFFSET $i");
-                if (empty($wpdb->last_error)) {
-                    $post_ids = [];
-                    foreach ($results as $result) {
-                        $post_ids[] = $result->ID;
-                    }
+        $post_cleaned = 0;
+        $meta_deleted = 0;
 
-                    if(!empty($post_ids)) {
-                        foreach ($post_ids as $post_id) {
-                            $count_orphans = $this->cleanOrphansMetasPlus($post_id);
-                            $post_cleaned += (!empty($count_orphans)) ? 1 : 0;
-                            $meta_deleted += $count_orphans;
+        // Test $dry_mode
+        $dry_mode = (!empty($assoc_args['dry'])) ? true : false;
+
+        // Si on précise un post en particulier
+        if(!empty($assoc_args['post']) && is_numeric($assoc_args['post'])) {
+            $post_id = trim($assoc_args['post']);
+            $count_orphans = $this->cleanOrphansMetasPlus($post_id, $dry_mode);
+            $post_cleaned += (!empty($count_orphans)) ? 1 : 0;
+            $meta_deleted += $count_orphans;
+        } else {
+            global $wpdb;
+            $offset = 3;
+            $count_pages = $wpdb->get_var("SELECT COUNT(ID) FROM $wpdb->posts WHERE post_type = 'page'");
+            output_h2('Nettoyage de ' . $count_pages . ' pages');
+            if (empty($wpdb->last_error)) {
+                for ($i = 0; $i <= $count_pages; $i += $offset) {
+                    $results = $wpdb->get_results("SELECT ID FROM $wpdb->posts WHERE post_type = 'page' LIMIT $offset OFFSET $i");
+                    if (empty($wpdb->last_error)) {
+                        $post_ids = [];
+                        foreach ($results as $result) {
+                            $post_ids[] = $result->ID;
                         }
 
-                        $pourcent = ($i + $offset) / $count_pages * 100;
-                        $pourcent = ($pourcent > 100) ? 100 : round($pourcent);
-                        output_log(' - Progression ' . $pourcent . '%');
+                        if(!empty($post_ids)) {
+                            foreach ($post_ids as $post_id) {
+                                $count_orphans = $this->cleanOrphansMetasPlus($post_id, $dry_mode);
+                                $post_cleaned += (!empty($count_orphans)) ? 1 : 0;
+                                $meta_deleted += $count_orphans;
+                            }
+
+                            $pourcent = ($i + $offset) / $count_pages * 100;
+                            $pourcent = ($pourcent > 100) ? 100 : round($pourcent);
+                            output_log(' - Progression ' . $pourcent . '%');
+                        }
                     }
                 }
             }
@@ -194,7 +208,7 @@ class WoodyTheme_ACF
         output_log(sprintf('%s metas supprimées', $meta_deleted));
     }
 
-    private function cleanOrphansMetasPlus($post_id)
+    private function cleanOrphansMetasPlus($post_id, $dry_mode)
     {
         output_log(' - Nettoyage de la page "' . $post_id . '"');
 
@@ -214,9 +228,13 @@ class WoodyTheme_ACF
                 $result[] = '_' . $val;
             }
 
-            foreach ($all_section_metas as $meta) {
-                if(!in_array($meta, $result)) {
-                    $orphans[] = $meta;
+            foreach ($all_section_metas as $meta_key) {
+                if(!in_array($meta_key, $result)) {
+                    $orphans[] = $meta_key;
+
+                    if(!$dry_mode) {
+                        delete_post_meta($post_id, $meta_key);
+                    }
                 }
             }
 
