@@ -29,7 +29,8 @@ class WoodyTheme_Permalink
         add_action('before_delete_post', [$this, 'cleanRedirects']);
 
         // WP_SITE_KEY=site_key wp woody:flush_permalinks
-        \WP_CLI::add_command('woody:flush_permalinks', [$this, 'flush_permalinks']);
+        \WP_CLI::add_command('woody:flush_permalinks', [$this, 'flushPermalinks']);
+        \WP_CLI::add_command('woody:export_permalinks', [$this, 'exportPermalinks']);
 
         require_once(__DIR__ . '/../../helpers/helpers.php');
     }
@@ -302,7 +303,7 @@ class WoodyTheme_Permalink
     // --------------------------------
     // Clean Cache
     // --------------------------------
-    public function flush_permalinks()
+    public function flushPermalinks()
     {
         output_h1('Flush and Warm Permalinks');
 
@@ -357,5 +358,83 @@ class WoodyTheme_Permalink
             $result = (empty($count_updated)) ? 'Found 0 redirection to this page' : 'before_delete_post : Disabling ' . $count_updated . ' redirect(s) to urls ending with ' . $slug;
             output_log($result);
         }
+    }
+
+    // --------------------------------
+    // List Permalinks
+    // --------------------------------
+    public function exportPermalinks($args, $assoc_args)
+    {
+        // WP_SITE_KEY=superot wp woody:export_permalinks
+
+        output_h1('Exports Permalinks');
+
+        $old_filepath = dropzone_get('woody_export_permalinks');
+        if(!empty($old_filepath)) {
+            unlink($old_filepath);
+            output_log('Suppression de ' . $old_filepath);
+        }
+
+        if(empty($assoc_args['source'])) {
+            output_error('Argument --source nécessaire (sous la forme d\'un code langue (ex: en)');
+            exit();
+        } else {
+            $source_lang = $assoc_args['source'];
+        }
+
+        if(empty($assoc_args['target'])) {
+            output_error('Argument --target nécessaire (sous la forme d\'un code langue (ex: fr)');
+            exit();
+        } else {
+            $target_lang = $assoc_args['target'];
+        }
+
+        // Upload file
+        $filename = 'permalinks_' . $source_lang . '-' . $target_lang . '_' . date('Y-m-d_H-i-s') .'.csv';
+        $filepath = sprintf('%s/%s', WP_UPLOAD_DIR, $filename);
+        $fileurl = sprintf('%s/%s', WP_UPLOAD_URL, $filename);
+
+        // Export CSV
+        file_put_contents($filepath, $source_lang . ',' . $target_lang . "\n");
+
+        // Get Posts
+        $query_max = $this->getPosts($source_lang, 1, 1);
+        if (!empty($query_max) && !empty($query_max->found_posts)) {
+            $max_num_pages = ceil($query_max->found_posts / 10);
+            for ($page = 1; $page <= $max_num_pages; ++$page) {
+                output_h2(sprintf('EXPORT %s/%s (lang %s > %s)', $page, $max_num_pages, strtoupper($source_lang), strtoupper($target_lang)));
+                $query = $this->getPosts($source_lang, $page, 10);
+                if (!empty($query->posts)) {
+                    foreach ($query->posts as $post_id) {
+
+                        $source_post = get_post($post_id);
+                        if($source_post->post_status != 'publish') {
+                            output_log(sprintf('SKIP source unpublish %s [%s]', $source_post->post_title, $source_post->ID));
+                            continue;
+                        }
+
+                        $tr_ids = pll_get_post_translations($post_id);
+                        if(!empty($tr_ids[$target_lang])) {
+                            $target_post_id = $tr_ids[$target_lang];
+                            $target_post = get_post($target_post_id);
+
+                            if($target_post->post_status == 'publish') {
+                                $line = woody_get_permalink($post_id) . ',' . woody_get_permalink($target_post_id);
+                                file_put_contents($filepath, $line . "\n", FILE_APPEND);
+                                output_log(sprintf('ADD %s', $line));
+                            } else {
+                                output_log(sprintf('SKIP target unpublish %s [%s]', $source_post->post_title, $source_post->ID));
+                            }
+                        } else {
+                            output_log(sprintf('SKIP no translation %s [%s]', $source_post->post_title, $source_post->ID));
+                        }
+                    }
+                }
+            }
+        }
+
+        output_h2('Finalisation');
+        output_success('Télécharger l\'export des permalinks : ' . $fileurl);
+        dropzone_set('woody_export_permalinks', $filepath);
     }
 }
