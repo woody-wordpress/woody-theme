@@ -739,9 +739,10 @@ class WoodyTheme_WoodyGetters
         if ($sheet_item['bordereau'] == 'FMA' && !empty($sheet_item['dates'])) {
             $today = time();
             foreach ($sheet_item['dates'] as $date) {
-                $enddate= strtotime($date['end']['endDate']);
+                $enddate = strtotime($date['end']['endDate']);
                 if ($today < $enddate) {
                     $data['date'] = $date;
+                    $data['date']['display_year'] = !empty($date['end']['year'])  ? true : false;
                     break 1 ;
                 }
             }
