@@ -365,7 +365,7 @@ class WoodyTheme_Permalink
     // --------------------------------
     public function exportPermalinks($args, $assoc_args)
     {
-        // WP_SITE_KEY=superot wp woody:export_permalinks
+        // WP_SITE_KEY=superot wp woody:export_permalinks --source=en --target=fr
 
         output_h1('Exports Permalinks');
 
