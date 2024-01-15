@@ -7,7 +7,7 @@
             "label": "Nom de l'évènement Analytics",
             "name": "analytics_event",
             "type": "text",
-            "instructions": "Permet de surcharger le nom de l'évènement rattaché au clic sur une mise en avant.<br>Dans Google Analytics, les données seront présentées sous la forme :<br>Name : Nom de l'évènement<br>Label : Titre de la page - URL",
+            "instructions": "Permet de surcharger le nom de l'évènement rattaché au clic sur une mise en avant ou un bouton.<br>Dans Google Analytics, les données seront présentées sous la forme :<br>Name : Nom de l'évènement<br>Label : Titre de la page - URL",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
