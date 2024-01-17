@@ -7,7 +7,7 @@
                     if ($acfFcPopupEl.length > 0) {
                         clearInterval(getfcTooltip);
                         $acfFcPopupEl.each(function () {
-                            if ($(this).data('layout') == 'manual_focus_minisheet' || $(this).data('layout') == 'story' || $(this).data('layout') == 'testimonials' || $(this).data('layout') == 'feature') {
+                            if ($(this).data('layout') == 'manual_focus_minisheet' || $(this).data('layout') == 'story' || $(this).data('layout') == 'testimonials' || $(this).data('layout') == 'feature' || $(this).data('layout') == 'snowflake_weather') {
                                 $(this).parent('li').css('display', 'none');
                             }
                         });

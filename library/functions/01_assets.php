@@ -557,6 +557,16 @@ function formatDate($date, $format = 'd F Y', $locale = null)
     $formated_date = '';
     $locale !== null ? '' : $locale = empty(pll_current_language()) ? PLL_DEFAULT_LOCALE : pll_current_language('locale');
 
+    if (preg_match('#([a-z]{2}_[A-Z]{2})#i', $locale, $matches)) {
+        if (in_array($matches[0], ['en_AU', 'en_NZ', 'en_SG'])) {
+            $locale = 'en_GB';
+        } elseif (in_array($matches[0], ['fr_BE', 'fr_CH'])) {
+            $locale = 'fr_FR';
+        } else {
+            $locale = $locale;
+        }
+    }
+
     \Moment\Moment::setLocale($locale);
     $m = new \Moment\Moment();
     $m->setTimezone(date_default_timezone_get());
