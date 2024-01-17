@@ -80,6 +80,8 @@ class WoodyTheme_ACF
 
         add_filter('acf/fields/taxonomy/query', [$this, 'hideProfileChildTaxonomies'], 10, 3);
 
+        add_filter('acf/validate_post_id', [$this, 'fix_acf_field_post_id_on_preview'], 10, 3);
+
         // Custom Filter
         add_filter('woody_get_field_option', [$this, 'woodyGetFieldOption'], 10, 3);
         add_filter('woody_get_field_object', [$this, 'woodyGetFieldObject'], 10, 3);
@@ -1434,5 +1436,33 @@ class WoodyTheme_ACF
         }
 
         return $args;
+    }
+
+    // Bugfix get_field on preview
+    // https://support.advancedcustomfields.com/forums/topic/custom-fields-on-post-preview/
+    public function fix_acf_field_post_id_on_preview($post_id, $original_post_id)
+    {
+        // Don't do anything to options
+        if (is_string($post_id) && str_contains($post_id, 'option')) {
+            return $post_id;
+        }
+        // Don't do anything to blocks
+        if (is_string($original_post_id) && str_contains($original_post_id, 'block')) {
+            return $post_id;
+        }
+
+        // This should only affect on post meta fields
+        if (is_preview()) {
+            if ($original_post_id !== $post_id) {
+                // Check if $post_id is a revision
+                $parent_post_id = wp_is_post_revision($post_id);
+
+                if ($parent_post_id === $original_post_id) {
+                    return get_the_ID();
+                }
+            }
+        }
+
+        return $post_id;
     }
 }
