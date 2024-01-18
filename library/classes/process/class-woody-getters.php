@@ -738,11 +738,13 @@ class WoodyTheme_WoodyGetters
         // Parcourir tout le tableau de dates et afficher la 1ère date non passée
         if ($sheet_item['bordereau'] == 'FMA' && !empty($sheet_item['dates'])) {
             $today = time();
+            $current_year = getdate()['year'];
             foreach ($sheet_item['dates'] as $date) {
                 $enddate = strtotime($date['end']['endDate']);
+
                 if ($today < $enddate) {
                     $data['date'] = $date;
-                    $data['date']['display_year'] = !empty($date['end']['year'])  ? true : false;
+                    $data['date']['display_year'] = !empty($date['end']['year']) && $date['end']['year'] > $current_year  ? true : false;
                     break 1 ;
                 }
             }
