@@ -737,6 +737,7 @@ class WoodyTheme_WoodyGetters
 
         // Parcourir tout le tableau de dates et afficher la 1ère date non passée
         $woody_sheet_bordereaux_with_dates = get_field('hawwwai_sheet_bordereaux_with_dates', 'options');
+        $woody_sheet_bordereaux_with_dates = empty($woody_sheet_bordereaux_with_dates) ? [] : $woody_sheet_bordereaux_with_dates;
         if (($sheet_item['bordereau'] == 'FMA' || in_array($sheet_item['bordereau'], $woody_sheet_bordereaux_with_dates)) && !empty($sheet_item['dates'])) {
             $today = time();
             $current_year = getdate()['year'];
