@@ -127,9 +127,9 @@ class WoodyTheme_Enqueue_Assets
             $jQuery_version = '2.1.4';
         }
 
-        $importmap = [
+        $importmap = apply_filters('woody_importmap_js', [
             'jquery' => get_template_directory_uri() . '/src/lib/custom/jquery@' . $jQuery_version . '.min.mjs',
-        ];
+        ]);
 
         $head_top[] = '<script type="importmap">' . json_encode(['imports' => $importmap]) . '</script>';
 
