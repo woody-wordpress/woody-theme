@@ -131,7 +131,9 @@ class WoodyTheme_Enqueue_Assets
             'jquery' => get_template_directory_uri() . '/src/lib/custom/jquery@' . $jQuery_version . '.min.mjs',
         ]);
 
-        $head_top[] = '<script type="importmap">' . json_encode(['imports' => $importmap]) . '</script>';
+        if(!empty($importmap)) {
+            $head_top[] = '<script type="importmap">' . json_encode(['imports' => $importmap]) . '</script>';
+        }
 
         return $head_top;
     }
