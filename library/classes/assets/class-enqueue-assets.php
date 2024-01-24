@@ -114,6 +114,15 @@ class WoodyTheme_Enqueue_Assets
         return $html;
     }
 
+    public function woodyCustomMeta($head_top)
+    {
+        $importmap = apply_filters('woody_importmap_js', []);
+
+        $head_top[] = '<script type="importmap">' . json_encode(['imports' => $importmap]) . '</script>';
+
+        return $head_top;
+    }
+
     public function enqueueLibraries()
     {
         // Define $this->isTouristicPlaylist, $this->isTouristicSheet et $this->wThemeVersion
