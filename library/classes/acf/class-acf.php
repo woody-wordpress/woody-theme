@@ -1451,15 +1451,10 @@ class WoodyTheme_ACF
             return $post_id;
         }
 
-        // This should only affect on post meta fields
         if (is_preview()) {
-            if ($original_post_id !== $post_id) {
-                // Check if $post_id is a revision
-                $parent_post_id = wp_is_post_revision($post_id);
-
-                if ($parent_post_id === $original_post_id) {
-                    return get_the_ID();
-                }
+            $post = get_post();
+            if ($post->post_status == 'draft') {
+                return $original_post_id;
             }
         }
 

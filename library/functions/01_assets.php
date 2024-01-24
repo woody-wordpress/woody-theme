@@ -555,7 +555,9 @@ function embedVideo($embed)
 function formatDate($date, $format = 'd F Y', $locale = null)
 {
     $formated_date = '';
-    $locale !== null ? '' : $locale = empty(pll_current_language()) ? PLL_DEFAULT_LOCALE : pll_current_language('locale');
+    if (empty($locale)) {
+        $locale = empty(pll_current_language()) ? PLL_DEFAULT_LOCALE : pll_current_language('locale');
+    }
 
     if (preg_match('#([a-z]{2}_[A-Z]{2})#i', $locale, $matches)) {
         if (in_array($matches[0], ['en_AU', 'en_NZ', 'en_SG'])) {
