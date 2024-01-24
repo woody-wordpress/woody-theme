@@ -74,6 +74,9 @@ class WoodyTheme_Enqueue_Assets
         // hack for googlemap script enqueuing
         add_filter('clean_url', [$this, 'so_handle_038'], 99, 3);
 
+        // Enqueue
+        add_filter('woody_custom_meta', [$this, 'woodyCustomMeta'], 1, 1);
+
         // Added defer on front
         if (!is_admin()) {
             add_filter('script_loader_tag', [$this, 'scriptLoaderTag'], 10, 2);
@@ -118,7 +121,9 @@ class WoodyTheme_Enqueue_Assets
     {
         $importmap = apply_filters('woody_importmap_js', []);
 
-        $head_top[] = '<script type="importmap">' . json_encode(['imports' => $importmap]) . '</script>';
+        if(!empty($importmap)) {
+            $head_top[] = '<script type="importmap">' . json_encode(['imports' => $importmap]) . '</script>';
+        }
 
         return $head_top;
     }
