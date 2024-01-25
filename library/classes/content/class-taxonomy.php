@@ -161,7 +161,36 @@ class WoodyTheme_Taxonomy
             )
         );
 
-
+        // On créé la taxonomie "Cibles"
+        register_taxonomy(
+            'targets',
+            ['page', 'attachment', 'woody_topic'],
+            array(
+                'label' => 'Cibles',
+                'labels' => [
+                    'name' => 'Cibles',
+                    'singular_name' => 'Cible',
+                    'menu_name' => 'Cibles',
+                    'all_items' => 'Toutes les cibles',
+                    'edit_item' => 'Modifier les cibles',
+                    'view_item' => 'Voir les cibles',
+                    'update_item' => 'Mettre à jour les cibles',
+                    'add_new_item' => 'Ajouter une cible',
+                    'new_item_name' => 'Nouvelle cible',
+                    'search_items' => 'Rechercher parmi les cibles',
+                    'popular_items' => 'Cibles les plus utilisées'
+                ],
+                'hierarchical' => true,
+                'show_ui' => true,
+                'show_in_menu' => true,
+                'capabilities' => [
+                    'manage_terms' => 'Configurer les cibles',
+                    'edit_terms' => 'Editer les cibles',
+                    'delete_terms' => 'Supprimer les cibles',
+                    'assign_terms' => 'Assigner les cibles'
+                ]
+            )
+        );
 
         // On créé la taxonomie "Types de média"
         register_taxonomy(

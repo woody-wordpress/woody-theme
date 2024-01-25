@@ -115,7 +115,8 @@
                         "page_type": "Types de publications",
                         "themes": "Thématiques",
                         "places": "Lieux",
-                        "seasons": "Circonstances"
+                        "seasons": "Circonstances",
+                        "targets": "Cibles"
                     },
                     "default_value": [],
                     "allow_null": 0,

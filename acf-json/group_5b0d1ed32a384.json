@@ -450,6 +450,7 @@
                 "_themes": "Thématique principal(e)",
                 "_places": "Lieu principal(e)",
                 "_seasons": "Circonstance principal(e)",
+                "_targets": "Cible principal(e)",
                 "created": "Date de publication"
             },
             "allow_custom": 0,

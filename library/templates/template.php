@@ -184,7 +184,7 @@ abstract class WoodyTheme_TemplateAbstract
     private function getTags($post_id)
     {
         $return = [];
-        $taxonomies = ['places', 'seasons', 'themes'];
+        $taxonomies = ['places', 'seasons', 'themes', 'targets'];
 
         foreach ($taxonomies as $taxonomy) {
             $all_taxonomy = get_terms(array(
