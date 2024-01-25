@@ -74,6 +74,9 @@ class WoodyTheme_Enqueue_Assets
         // hack for googlemap script enqueuing
         add_filter('clean_url', [$this, 'so_handle_038'], 99, 3);
 
+        // Enqueue
+        add_filter('woody_custom_meta', [$this, 'woodyCustomMeta'], 1, 1);
+
         // Added defer on front
         if (!is_admin()) {
             add_filter('script_loader_tag', [$this, 'scriptLoaderTag'], 10, 2);
@@ -98,6 +101,9 @@ class WoodyTheme_Enqueue_Assets
 
     public function scriptLoaderTag($tag, $handle)
     {
+        if(strpos($tag, '.mjs') !== false) {
+            $tag = str_replace(' src', ' type="module" src', $tag);
+        }
         return str_replace(' src', ' defer src', $tag);
     }
 
@@ -109,6 +115,17 @@ class WoodyTheme_Enqueue_Assets
             $html = $preload . $fallback;
         }
         return $html;
+    }
+
+    public function woodyCustomMeta($head_top)
+    {
+        $importmap = apply_filters('woody_importmap_js', []);
+
+        if(!empty($importmap)) {
+            $head_top[] = '<script type="importmap">' . json_encode(['imports' => $importmap]) . '</script>';
+        }
+
+        return $head_top;
     }
 
     public function enqueueLibraries()
