@@ -115,7 +115,7 @@
                         "page_type": "Types de publications",
                         "themes": "Thématiques",
                         "places": "Lieux",
-                        "seasons": "Saisons"
+                        "seasons": "Circonstances"
                     },
                     "default_value": [],
                     "allow_null": 0,

@@ -1,7 +1,8 @@
 {
     "key": "group_5b0d1ed32a384",
     "title": "Mise en avant (sélection manuelle)",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5d72757527c99",
             "label": "Contenu",
             "name": "",
@@ -38,7 +39,8 @@
             "hide_collapse": 0,
             "collapse_all_repeater": 1,
             "btn-icon-only": 0,
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5b22415792db0",
                     "label": "Titre administration",
                     "name": "bo_selection_title",
@@ -89,11 +91,13 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5b0d2800bb187",
-                            "operator": "==",
-                            "value": "custom_content"
-                        }]
+                        [
+                            {
+                                "field": "field_5b0d2800bb187",
+                                "operator": "==",
+                                "value": "custom_content"
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "",
@@ -101,7 +105,8 @@
                         "id": ""
                     },
                     "layout": "block",
-                    "sub_fields": [{
+                    "sub_fields": [
+                        {
                             "key": "field_5b0d28dabb18a",
                             "label": "En-tête",
                             "name": "heading",
@@ -155,11 +160,13 @@
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": [
-                                [{
-                                    "field": "field_5d0a3c8834254",
-                                    "operator": "==",
-                                    "value": "link"
-                                }]
+                                [
+                                    {
+                                        "field": "field_5d0a3c8834254",
+                                        "operator": "==",
+                                        "value": "link"
+                                    }
+                                ]
                             ],
                             "wrapper": {
                                 "width": "50",
@@ -176,11 +183,13 @@
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": [
-                                [{
-                                    "field": "field_5d0a3c8834254",
-                                    "operator": "==",
-                                    "value": "file"
-                                }]
+                                [
+                                    {
+                                        "field": "field_5d0a3c8834254",
+                                        "operator": "==",
+                                        "value": "file"
+                                    }
+                                ]
                             ],
                             "wrapper": {
                                 "width": "50",
@@ -225,11 +234,13 @@
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": [
-                                [{
-                                    "field": "field_5b0d28f9bb18b",
-                                    "operator": "==",
-                                    "value": "img"
-                                }]
+                                [
+                                    {
+                                        "field": "field_5b0d28f9bb18b",
+                                        "operator": "==",
+                                        "value": "img"
+                                    }
+                                ]
                             ],
                             "wrapper": {
                                 "width": "70",
@@ -255,11 +266,13 @@
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": [
-                                [{
-                                    "field": "field_5b0d28f9bb18b",
-                                    "operator": "==",
-                                    "value": "movie"
-                                }]
+                                [
+                                    {
+                                        "field": "field_5b0d28f9bb18b",
+                                        "operator": "==",
+                                        "value": "movie"
+                                    }
+                                ]
                             ],
                             "wrapper": {
                                 "width": "70",
@@ -267,7 +280,8 @@
                                 "id": ""
                             },
                             "layout": "block",
-                            "sub_fields": [{
+                            "sub_fields": [
+                                {
                                     "key": "field_5b16b2b2d0f42",
                                     "label": "Fichiers vidéos",
                                     "name": "movie_field",
@@ -338,11 +352,13 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5b0d2800bb187",
-                            "operator": "==",
-                            "value": "existing_content"
-                        }]
+                        [
+                            {
+                                "field": "field_5b0d2800bb187",
+                                "operator": "==",
+                                "value": "existing_content"
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "",
@@ -350,30 +366,32 @@
                         "id": ""
                     },
                     "layout": "block",
-                    "sub_fields": [{
-                        "key": "field_5b0d38ed1cdfb",
-                        "label": "Choix de la page",
-                        "name": "content_selection",
-                        "type": "post_object",
-                        "instructions": "",
-                        "required": 0,
-                        "conditional_logic": 0,
-                        "wrapper": {
-                            "width": "",
-                            "class": "",
-                            "id": ""
-                        },
-                        "post_type": [
-                            "page",
-                            "touristic_sheet",
-                            "woody_topic"
-                        ],
-                        "taxonomy": "",
-                        "allow_null": 0,
-                        "multiple": 0,
-                        "return_format": "id",
-                        "ui": 1
-                    }]
+                    "sub_fields": [
+                        {
+                            "key": "field_5b0d38ed1cdfb",
+                            "label": "Choix de la page",
+                            "name": "content_selection",
+                            "type": "post_object",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "post_type": [
+                                "page",
+                                "touristic_sheet",
+                                "woody_topic"
+                            ],
+                            "taxonomy": "",
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "return_format": "id",
+                            "ui": 1
+                        }
+                    ]
                 }
             ]
         },
@@ -431,7 +449,7 @@
                 "linked_profil": "Profil lié",
                 "_themes": "Thématique principal(e)",
                 "_places": "Lieu principal(e)",
-                "_seasons": "Saison principal(e)",
+                "_seasons": "Circonstance principal(e)",
                 "created": "Date de publication"
             },
             "allow_custom": 0,
