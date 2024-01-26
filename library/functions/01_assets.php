@@ -562,7 +562,7 @@ function formatDate($date, $format = 'd F Y', $locale = null)
     if (preg_match('#([a-z]{2}_[A-Z]{2})#i', $locale, $matches)) {
         if (in_array($matches[0], ['en_AU', 'en_NZ', 'en_SG'])) {
             $locale = 'en_GB';
-        } elseif (in_array($matches[0], ['fr_BE', 'fr_CH'])) {
+        } elseif (in_array($matches[0], ['fr_BE', 'fr_CH', 'br_BR'])) {
             $locale = 'fr_FR';
         } else {
             $locale = $locale;
