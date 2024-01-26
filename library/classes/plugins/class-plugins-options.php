@@ -307,6 +307,7 @@ class WoodyTheme_Plugins_Options
                 'themes',
                 'places',
                 'seasons',
+                'targets',
                 'expression_category',
                 'profile_category',
             ],
