@@ -262,7 +262,8 @@
                 "linked_profil": "Profil lié",
                 "_themes": "Thématique principal(e)<\/small>",
                 "_places": "Lieu principal(e)<\/small>",
-                "_seasons": "Saison principal(e)<\/small>",
+                "_seasons": "Circonstance principal(e)<\/small>",
+                "_targets": "Cible principal(e)<\/small>",
                 "created": "Date de publication"
             },
             "allow_custom": 0,

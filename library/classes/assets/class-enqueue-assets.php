@@ -121,15 +121,7 @@ class WoodyTheme_Enqueue_Assets
 
     public function woodyCustomMeta($head_top)
     {
-        // CDN hosted jQuery placed in the header, as some plugins require that jQuery is loaded in the header.
-        $jQuery_version = '3.6.4';
-        if ($this->isTouristicPlaylist || ($this->isTouristicSheet && !defined('IS_WOODY_HAWWWAI_SHEET_ENABLE'))) {
-            $jQuery_version = '2.1.4';
-        }
-
-        $importmap = apply_filters('woody_importmap_js', [
-            'jquery' => get_template_directory_uri() . '/src/lib/custom/jquery@' . $jQuery_version . '.min.mjs',
-        ]);
+        $importmap = apply_filters('woody_importmap_js', []);
 
         if(!empty($importmap)) {
             $head_top[] = '<script type="importmap">' . json_encode(['imports' => $importmap]) . '</script>';

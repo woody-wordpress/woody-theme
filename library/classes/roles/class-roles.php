@@ -689,28 +689,60 @@ class WoodyTheme_Roles
                 'contributor' => true,
                 'translator' => true,
             ],
-            'Configurer les saisons' => [
+            'Configurer les circonstances' => [
                 'administrator' => true,
                 'editor' => true,
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
             ],
-            'Editer les saisons' => [
+            'Editer les circonstances' => [
                 'administrator' => true,
                 'editor' => true,
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
             ],
-            'Supprimer les saisons' => [
+            'Supprimer les circonstances' => [
                 'administrator' => true,
                 'editor' => true,
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
             ],
-            'Assigner les saisons' => [
+            'Assigner les circonstances' => [
+                'administrator' => true,
+                'editor' => true,
+                'redactor' => true,
+                'contributor' => true,
+                'translator' => true,
+                'mediatheque' => false,
+            ],
+            'Configurer les cibles' => [
+                'administrator' => true,
+                'editor' => true,
+                'redactor' => false,
+                'contributor' => false,
+                'translator' => false,
+                'mediatheque' => false,
+            ],
+            'Editer les cibles' => [
+                'administrator' => true,
+                'editor' => true,
+                'redactor' => false,
+                'contributor' => false,
+                'translator' => false,
+                'mediatheque' => false,
+            ],
+            'Supprimer les cibles' => [
+                'administrator' => true,
+                'editor' => true,
+                'redactor' => false,
+                'contributor' => false,
+                'translator' => false,
+                'mediatheque' => false,
+            ],
+            'Assigner les cibles' => [
                 'administrator' => true,
                 'editor' => true,
                 'redactor' => true,

@@ -659,7 +659,7 @@ class WoodyTheme_ACF
         $displayIcon = get_field('page_heading_term_icon'); // With plugin
 
         foreach ($taxonomies as $taxonomy) {
-            if (($taxonomy == 'places' || $taxonomy == 'seasons' || $taxonomy == 'themes') && is_array(get_the_terms(get_the_id(), $taxonomy))) {
+            if (($taxonomy == 'places' || $taxonomy == 'seasons' || $taxonomy == 'themes' || $taxonomy == 'targets') && is_array(get_the_terms(get_the_id(), $taxonomy))) {
                 $terms = array_merge($terms, get_the_terms(get_the_id(), $taxonomy));
                 if ($displayIcon) {
                     $terms = apply_filters('woody_taxonomies_with_icons', $terms);
@@ -1271,6 +1271,7 @@ class WoodyTheme_ACF
             case 'attachment_categorie':
             case 'themes':
             case 'places':
+            case 'targets':
                 wp_cache_delete('layout-auto_focus');
                 wp_cache_delete('layout-content_list');
                 wp_cache_delete('layout-gallery');

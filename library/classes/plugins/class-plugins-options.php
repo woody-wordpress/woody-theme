@@ -143,6 +143,14 @@ class WoodyTheme_Plugins_Options
                 'media_uploader_filter' => true,
                 'media_popup_taxonomy_edit' => false,
             ],
+            'targets' => [
+                'assigned' => true,
+                'eml_media' => false,
+                'taxonomy_auto_assign' => false,
+                'admin_filter' => true,
+                'media_uploader_filter' => true,
+                'media_popup_taxonomy_edit' => false,
+            ],
             'language' => [
                 'eml_media' => false,
                 'taxonomy_auto_assign' => false,
@@ -299,6 +307,7 @@ class WoodyTheme_Plugins_Options
                 'themes',
                 'places',
                 'seasons',
+                'targets',
                 'expression_category',
                 'profile_category',
             ],

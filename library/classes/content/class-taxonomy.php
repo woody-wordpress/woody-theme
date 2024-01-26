@@ -130,38 +130,67 @@ class WoodyTheme_Taxonomy
             )
         );
 
-        // On créé la taxonomie "Saisons"
+        // On créé la taxonomie "Circonstances" (anciennement "Saisons")
         register_taxonomy(
             'seasons',
             ['page', 'attachment', 'woody_topic'],
             array(
-                'label' => 'Saisons',
+                'label' => 'Circonstances',
                 'labels' => [
-                    'name' => 'Saisons',
-                    'singular_name' => 'Saison',
-                    'menu_name' => 'Saisons',
-                    'all_items' => 'Toutes les saisons',
-                    'edit_item' => 'Modifier les saisons',
-                    'view_item' => 'Voir les saisons',
-                    'update_item' => 'Mettre à jour les saisons',
-                    'add_new_item' => 'Ajouter une saison',
-                    'new_item_name' => 'Nouvelle saison',
-                    'search_items' => 'Rechercher parmi les saisons',
-                    'popular_items' => 'Saisons les plus utilisées'
+                    'name' => 'Circonstances',
+                    'singular_name' => 'Circonstance',
+                    'menu_name' => 'Circonstances',
+                    'all_items' => 'Toutes les circonstances',
+                    'edit_item' => 'Modifier les circonstances',
+                    'view_item' => 'Voir les circonstances',
+                    'update_item' => 'Mettre à jour les circonstances',
+                    'add_new_item' => 'Ajouter une circonstance',
+                    'new_item_name' => 'Nouvelle circonstance',
+                    'search_items' => 'Rechercher parmi les circonstances',
+                    'popular_items' => 'Circonstances les plus utilisées'
                 ],
                 'hierarchical' => true,
                 'show_ui' => true,
                 'show_in_menu' => true,
                 'capabilities' => [
-                    'manage_terms' => 'Configurer les saisons',
-                    'edit_terms' => 'Editer les saisons',
-                    'delete_terms' => 'Supprimer les saisons',
-                    'assign_terms' => 'Assigner les saisons'
+                    'manage_terms' => 'Configurer les circonstances',
+                    'edit_terms' => 'Editer les circonstances',
+                    'delete_terms' => 'Supprimer les circonstances',
+                    'assign_terms' => 'Assigner les circonstances'
                 ]
             )
         );
 
-
+        // On créé la taxonomie "Cibles"
+        register_taxonomy(
+            'targets',
+            ['page', 'attachment', 'woody_topic'],
+            array(
+                'label' => 'Cibles',
+                'labels' => [
+                    'name' => 'Cibles',
+                    'singular_name' => 'Cible',
+                    'menu_name' => 'Cibles',
+                    'all_items' => 'Toutes les cibles',
+                    'edit_item' => 'Modifier les cibles',
+                    'view_item' => 'Voir les cibles',
+                    'update_item' => 'Mettre à jour les cibles',
+                    'add_new_item' => 'Ajouter une cible',
+                    'new_item_name' => 'Nouvelle cible',
+                    'search_items' => 'Rechercher parmi les cibles',
+                    'popular_items' => 'Cibles les plus utilisées'
+                ],
+                'hierarchical' => true,
+                'show_ui' => true,
+                'show_in_menu' => true,
+                'capabilities' => [
+                    'manage_terms' => 'Configurer les cibles',
+                    'edit_terms' => 'Editer les cibles',
+                    'delete_terms' => 'Supprimer les cibles',
+                    'assign_terms' => 'Assigner les cibles'
+                ]
+            )
+        );
 
         // On créé la taxonomie "Types de média"
         register_taxonomy(
