@@ -1,0 +1,11 @@
+{
+    "window.title": "${dirty} woody_theme",
+    "files.watcherExclude": {
+        "node_modules/**": true,
+        "dist/**": true
+    },
+    "search.exclude": {
+        "node_modules/**": true,
+        "dist/**": true
+    }
+}
