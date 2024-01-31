@@ -121,7 +121,9 @@ class WoodyTheme_Enqueue_Assets
 
     public function woodyCustomMeta($head_top)
     {
-        $importmap = apply_filters('woody_importmap_js', []);
+        $importmap = apply_filters('woody_importmap_js', [
+            'jquery' => get_template_directory_uri() . '/src/lib/custom/jquery@' . $jQuery_version . '.min.mjs',
+        ]);
 
         if(!empty($importmap)) {
             $head_top[] = '<script type="importmap">' . json_encode(['imports' => $importmap]) . '</script>';
