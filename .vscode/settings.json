@@ -1,5 +1,5 @@
 {
-    "window.title": "${dirty} woody_theme",
+    "window.title": "${dirty} woody_theme ${folderPath}",
     "files.watcherExclude": {
         "node_modules/**": true,
         "dist/**": true
