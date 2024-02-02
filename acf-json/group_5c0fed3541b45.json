@@ -115,7 +115,7 @@
         },
         {
             "key": "field_65bd063d177e6",
-            "label": "Site mode zoning",
+            "label": "Wireframes / Zoning",
             "name": "display_zoning_mode",
             "type": "true_false",
             "instructions": "Si cette option est activée, le thème graphique sera désactivé pour les utilisateurs connectés (wireframes)",
