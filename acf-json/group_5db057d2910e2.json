@@ -49,13 +49,7 @@
             "type": "link",
             "instructions": "Si renseigné, le clic sur le visuel renverra vers ce lien",
             "required": 0,
-            "conditional_logic": [
-                [{
-                    "field": "field_5bd80bae735cb",
-                    "operator": "==",
-                    "value": "link"
-                }]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
