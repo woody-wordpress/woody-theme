@@ -235,7 +235,7 @@ class WoodyTheme_ACF
                     $orphans[] = $meta_key;
 
                     if(!$dry_mode) {
-                        delete_post_meta($post_id, $meta_key);
+                        //delete_post_meta($post_id, $meta_key);
                     }
                 }
             }
