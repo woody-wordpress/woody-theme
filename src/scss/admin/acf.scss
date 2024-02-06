@@ -1151,6 +1151,13 @@
     }
 }
 
+// Ticket 66755 : https://mantis.raccourci.fr/view.php?id=66755 (la solution aurait été de modifier la clé du champ, sauf qu'elle ferait sauter la data sur tous les sites ayant renseigné un lien dans le bloc "Logo d'illustration")
+div[data-layout="eye_candy_img"] {
+    .acf-field-5b04231f7d07c {
+        display: block !important;
+    }
+}
+
 // Section models list
 .acf-field-6061dcdfc96ee {
     overflow: scroll;

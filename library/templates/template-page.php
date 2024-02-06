@@ -227,6 +227,11 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
             }
         }
 
+        $zoning_mode = get_field('display_zoning_mode', 'options');
+        if($zoning_mode && is_user_logged_in()) {
+            $this->context['body_class'] .= ' zoning-style';
+        }
+
         $this->getParamsToNoIndex();
 
         /*********************************************

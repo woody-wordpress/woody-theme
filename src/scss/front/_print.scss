@@ -75,7 +75,7 @@ a {
 }
 
 a:after {
-    content: " ["attr(href) "] ";
+    content: " [" attr(href) "] ";
     font-size: 10px;
     color: gray;
     font-family: 'Courier New', Courier, monospace;
@@ -101,6 +101,8 @@ iframe,
 ins,
 embed,
 button,
+.noprint,
+.no-print,
 .reveal,
 .reveal-overlay,
 .site-footer-container,
@@ -117,6 +119,7 @@ button,
 .sharing-links,
 .direction-map-wrapper,
 .woody-component-focus .imageObject,
+.woody-component-search,
 .mobile-header,
 .embed-youtube,
 .embed-responsive,
