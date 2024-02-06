@@ -116,7 +116,6 @@ if (!class_exists('Timber')) {
         private static function get_globals_json($vars)
         {
             $return = [];
-
             if (!empty($vars['globals'])) {
                 $keys = [
                     'ancestors',
@@ -126,6 +125,7 @@ if (!class_exists('Timber')) {
                     'current_locale_region',
                     'current_season',
                     'env',
+                    'is_mobile',
                     'languages',
                     'options',
                     'page_type',
