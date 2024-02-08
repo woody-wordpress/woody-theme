@@ -75,10 +75,6 @@ class WoodyTheme_Enqueue_Assets
         // hack for googlemap script enqueuing
         add_filter('clean_url', [$this, 'so_handle_038'], 99, 3);
 
-        // Addon Asset Path
-        add_filter('woody_addon_asset_path', [$this, 'woodyAddonAssetPath'], 1, 2);
-        add_filter('woody_addon_asset_content', [$this, 'woodyAddonAssetContent'], 1, 2);
-
         // Enqueue
         add_filter('woody_custom_meta', [$this, 'woodyCustomMeta'], 1, 1);
 
@@ -570,35 +566,5 @@ class WoodyTheme_Enqueue_Assets
         }
 
         return implode('', $return);
-    }
-
-    public function woodyAddonAssetPath($addon, $filename)
-    {
-        $manifest = [];
-        $manifest_path = WP_DIST_DIR . '/addons/' . $addon .'/rev-manifest.json';
-        if (file_exists($manifest_path)) {
-            $manifest = json_decode(file_get_contents($manifest_path), true, 512, JSON_THROW_ON_ERROR);
-
-            if (!empty($manifest[$filename])) {
-                $filename = $manifest[$filename];
-            }
-        }
-
-        return WP_DIST_URL . '/addons/' . $addon .'/' . $filename;
-    }
-
-    public function woodyAddonAssetContent($addon, $filename)
-    {
-        $manifest = [];
-        $manifest_path = WP_DIST_DIR . '/addons/' . $addon .'/rev-manifest.json';
-        if (file_exists($manifest_path)) {
-            $manifest = json_decode(file_get_contents($manifest_path), true, 512, JSON_THROW_ON_ERROR);
-
-            if (!empty($manifest[$filename])) {
-                $filename = $manifest[$filename];
-            }
-        }
-
-        return file_get_contents(WP_DIST_DIR . '/addons/' . $addon .'/' . $filename);
     }
 }
