@@ -218,21 +218,31 @@ class WoodyTheme_ACF
         $orphans = [];
 
         // Récupérer toutes les métadonnées du post
-        $all_metas = get_post_meta($post_id);
+        $all_metas = acf_get_meta($post_id);
         $all_metas = array_keys($all_metas);
         $all_section_metas = $this->onlySections($all_metas);
 
         // Récupérer tous les champs ACF
         $acf_fields = get_fields($post_id);
+
+        // print_r($acf_fields['section'][6]['section_content']);
+        // exit();
+
         if(is_array($acf_fields)) {
             $result = $this->flattenArrayKeys($acf_fields);
-            foreach ($result as $val) {
+            foreach ($result as $key => $val) {
+                $val = str_replace(['_the_list_elements_', '_list_el_req_fields_', '_the_list_filters_', '_the_list_pager_'], '_', $val);
+                $result[$key] = $val;
                 $result[] = '_' . $val;
             }
+
+            // print_r($result);
+            // exit();
 
             foreach ($all_section_metas as $meta_key) {
                 if(!in_array($meta_key, $result)) {
                     $orphans[] = $meta_key;
+                    output_log($meta_key);
 
                     if(!$dry_mode) {
                         //delete_post_meta($post_id, $meta_key);
