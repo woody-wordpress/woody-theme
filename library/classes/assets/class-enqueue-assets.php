@@ -29,6 +29,8 @@ class WoodyTheme_Enqueue_Assets
     {
         $this->assetPaths = $this->setAssetPaths();
         $this->registerHooks();
+
+        require_once(__DIR__ . '/../../helpers/assets.php');
     }
 
     private function setGlobalVars()

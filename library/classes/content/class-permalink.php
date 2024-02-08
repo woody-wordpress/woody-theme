@@ -32,7 +32,7 @@ class WoodyTheme_Permalink
         \WP_CLI::add_command('woody:flush_permalinks', [$this, 'flushPermalinks']);
         \WP_CLI::add_command('woody:export_permalinks', [$this, 'exportPermalinks']);
 
-        require_once(__DIR__ . '/../../helpers/helpers.php');
+        require_once(__DIR__ . '/../../helpers/permalinks.php');
     }
 
     public function woodyGetPermalink($post_id = null, $force = false)

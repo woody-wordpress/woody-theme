@@ -18,13 +18,3 @@ function woody_get_permalink($post = null, $force = false)
 
     return apply_filters('woody_get_permalink', $post_id, $force);
 }
-
-function woody_addon_asset_path($addon, $filename)
-{
-    return apply_filters('woody_addon_asset_path', $addon, $filename);
-}
-
-function woody_addon_asset_content($addon, $filename)
-{
-    return apply_filters('woody_addon_asset_content', $addon, $filename);
-}
