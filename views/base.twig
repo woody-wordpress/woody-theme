@@ -76,7 +76,7 @@
          {% include 'notify_front/notifyBanners.twig' %}
     {% endif %}
 
-    <div class="main-wrapper flex-container flex-dir-column large-flex-dir-column-reverse">
+    <div class="main-wrapper flex-container flex-dir-column {{ globals.is_mobile ? 'flex-dir-column-reverse' : ''}}">
         <div class="site-content">
             {# Theme Content #}
             {% block content %}{% endblock %}
