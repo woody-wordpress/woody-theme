@@ -1,7 +1,8 @@
 {
     "key": "group_5b6c5e6ff381d",
     "title": "Informations séjour",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5b6d613b9fe7d",
             "label": "Contenu",
             "name": "",
@@ -31,7 +32,8 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5b6d47c62d0ab",
                     "label": "Type",
                     "name": "price_type",
@@ -119,11 +121,13 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5b6d47c62d0ab",
-                            "operator": "==",
-                            "value": "evolving_single"
-                        }]
+                        [
+                            {
+                                "field": "field_5b6d47c62d0ab",
+                                "operator": "==",
+                                "value": "evolving_single"
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "20",
@@ -146,11 +150,13 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5b6d47c62d0ab",
-                            "operator": "==",
-                            "value": "evolving_package"
-                        }]
+                        [
+                            {
+                                "field": "field_5b6d47c62d0ab",
+                                "operator": "==",
+                                "value": "evolving_package"
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "20",
@@ -173,11 +179,13 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5b6d47c62d0ab",
-                            "operator": "==",
-                            "value": "evolving_single"
-                        }]
+                        [
+                            {
+                                "field": "field_5b6d47c62d0ab",
+                                "operator": "==",
+                                "value": "evolving_single"
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "25",
@@ -200,11 +208,13 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5b6d47c62d0ab",
-                            "operator": "==",
-                            "value": "evolving_package"
-                        }]
+                        [
+                            {
+                                "field": "field_5b6d47c62d0ab",
+                                "operator": "==",
+                                "value": "evolving_package"
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "25",
@@ -273,7 +283,8 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5b6c66b2b54f0",
                     "label": "Accroche",
                     "name": "prefix_days",
@@ -328,11 +339,13 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5d131da457834",
-                            "operator": "==",
-                            "value": "days"
-                        }]
+                        [
+                            {
+                                "field": "field_5d131da457834",
+                                "operator": "==",
+                                "value": "days"
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "34",
@@ -355,11 +368,13 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5d131da457834",
-                            "operator": "==",
-                            "value": "hours"
-                        }]
+                        [
+                            {
+                                "field": "field_5d131da457834",
+                                "operator": "==",
+                                "value": "hours"
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "34",
@@ -382,11 +397,13 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5d131da457834",
-                            "operator": "==",
-                            "value": "minutes"
-                        }]
+                        [
+                            {
+                                "field": "field_5d131da457834",
+                                "operator": "==",
+                                "value": "minutes"
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "34",
@@ -436,7 +453,8 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5b95428e86e91",
                     "label": "Préfixe",
                     "name": "length_prefix",
@@ -490,7 +508,8 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5b6d54b703820",
                     "label": "Minimum",
                     "name": "peoples_min",
@@ -616,7 +635,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "default_value": "",
+            "default_value": "blocks-trip_infos-tpl_01",
             "placeholder": "",
             "prepend": "",
             "append": "",
@@ -683,16 +702,20 @@
         }
     ],
     "location": [
-        [{
-            "param": "page_type_and_children",
-            "operator": "==",
-            "value": "trip"
-        }],
-        [{
-            "param": "page_type_and_children",
-            "operator": "==",
-            "value": "tourtrip"
-        }]
+        [
+            {
+                "param": "page_type_and_children",
+                "operator": "==",
+                "value": "trip"
+            }
+        ],
+        [
+            {
+                "param": "page_type_and_children",
+                "operator": "==",
+                "value": "tourtrip"
+            }
+        ]
     ],
     "menu_order": 11,
     "position": "acf_after_title",

@@ -101,9 +101,10 @@ class WoodyTheme_Enqueue_Assets
     public function scriptLoaderTag($tag, $handle)
     {
         if(strpos($tag, '.mjs') !== false) {
-            $tag = str_replace(' src', ' type="module" src', $tag);
+            return str_replace(' src', ' type="module" src', $tag);
+        } else {
+            return str_replace(' src', ' defer src', $tag);
         }
-        return str_replace(' src', ' defer src', $tag);
     }
 
     public function styleLoaderTag($html, $handle)
