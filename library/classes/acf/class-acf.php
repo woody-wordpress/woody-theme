@@ -587,7 +587,7 @@ class WoodyTheme_ACF
 
     public function displayElementLoadField($field)
     {
-        if ($field['key'] == 'field_5bfeaaf039785') {
+        if ($field['key'] == 'field_5bfeaaf039785' || $field['key'] == 'field_65ca1b33dda06') {
             return $field;
         }
 
