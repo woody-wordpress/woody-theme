@@ -21,8 +21,8 @@
         },
         {
             "key": "field_65ca0203afef7",
-            "label": "Mise en avant automatique (pages)",
-            "name": "display_focus_pages",
+            "label": "Remontée de pages automatique",
+            "name": "landswpr_auto_focus",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -653,46 +653,6 @@
             "save_other_choice": 0
         },
         {
-            "key": "field_65ca1ada2510a",
-            "label": "Hiérarchie \/ Arborescence",
-            "name": "focused_hierarchy",
-            "type": "radio",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_65ca0203afef7",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ],
-                [
-                    {
-                        "field": "field_65ca19c639cce",
-                        "operator": "==",
-                        "value": "pages"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "no_hierarchy": "Pas de hierarchie",
-                "child_of": "Enfants directs de la page",
-                "brother_of": "Pages de même niveau"
-            },
-            "allow_null": 0,
-            "other_choice": 0,
-            "default_value": "no_hierarchy",
-            "layout": "horizontal",
-            "return_format": "value",
-            "save_other_choice": 0
-        },
-        {
             "key": "field_65ca1ae73bce4",
             "label": "Nombre d'éléments max",
             "name": "focused_count",
@@ -713,12 +673,12 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": 3,
+            "default_value": "",
             "placeholder": "",
             "prepend": "",
             "append": "",
             "min": 1,
-            "max": 6,
+            "max": "",
             "step": ""
         },
         {
@@ -787,22 +747,11 @@
             "choices": {
                 "icon": "Icône",
                 "pretitle": "Surtitre",
-                "price": "Prix <small>(fiche et séjour uniquement)<\/small>",
                 "subtitle": "Sous-titre",
-                "description": "Description",
-                "duration": "Durée <small>(séjour uniquement)<\/small>",
-                "length": "Distance <small>(séjour uniquement)<\/small>",
-                "linked_profil": "Profil lié",
-                "_themes": "Thématique principal(e)<\/small>",
-                "_places": "Lieu principal(e)<\/small>",
-                "_seasons": "Circonstance principal(e)<\/small>",
-                "_targets": "Cible principal(e)<\/small>",
-                "created": "Date de publication"
+                "description": "Description"
             },
             "allow_custom": 0,
-            "default_value": [
-                "description"
-            ],
+            "default_value": "",
             "layout": "horizontal",
             "toggle": 0,
             "return_format": "value",

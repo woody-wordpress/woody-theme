@@ -845,10 +845,12 @@ class WoodyTheme_WoodyCompilers
     {
         $home_slider = getAcfGroupFields('group_5bb325e8b6b43', $post);
 
-        if (!empty($home_slider['display_focus_pages'])) {
+        if (!empty($home_slider['landswpr_auto_focus'])) {
             $home_slider['display_img'] = true;
-            $wrapper = $this->getter->getAutoFocusData($post,  $home_slider);
-            $home_slider['landswpr_slides'] = $wrapper['items'];
+            $wrapper = $this->getter->getAutoFocusData($post, $home_slider);
+            if(!empty($wrapper) && !empty($wrapper['items'])) {
+                $home_slider['landswpr_slides'] = $wrapper['items'];
+            }
         }
 
         $plyr_options = [
@@ -864,10 +866,11 @@ class WoodyTheme_WoodyCompilers
         if (!empty($home_slider['landswpr_slides']) && is_array($home_slider['landswpr_slides'])) {
             foreach ($home_slider['landswpr_slides'] as $slide_key => $slide) {
                 // Si on est dans le cas d'une mise en avant automatique
-                if (!empty($home_slider['display_focus_pages'])) {
+                if (!empty($home_slider['landswpr_auto_focus'])) {
                     $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_media_type'] = 'img';
                     $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img'] = $slide['img'];
                 }
+
                 // Si on est dans le cas d'une vidéo oEmbed, on récupère la plus grande miniature possible
                 // Permet d'afficher un poster le temps du chargement de Plyr
                 if (!empty($slide['landswpr_slide_media']) && $slide['landswpr_slide_media']['landswpr_slide_media_type'] == 'embed' && !empty($slide['landswpr_slide_media']['landswpr_slide_embed']) && !empty(embedProviderThumbnail($slide['landswpr_slide_media']['landswpr_slide_embed']))) {
