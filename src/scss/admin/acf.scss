@@ -985,7 +985,8 @@
                     }
                 }
 
-                &[data-layout="snowflake_road_infos"] {
+                &[data-layout="snowflake_road_infos"],
+                &[data-layout="snowflake_alert_message"] {
                     &:before {
                         content: "\f14c";
                     }
