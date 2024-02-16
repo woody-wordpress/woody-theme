@@ -225,9 +225,6 @@ class WoodyTheme_ACF
         // Récupérer tous les champs ACF
         $acf_fields = get_fields($post_id);
 
-        // print_r($acf_fields['section'][6]['section_content']);
-        // exit();
-
         if(is_array($acf_fields)) {
             $result = $this->flattenArrayKeys($acf_fields);
             foreach ($result as $key => $val) {
@@ -236,16 +233,13 @@ class WoodyTheme_ACF
                 $result[] = '_' . $val;
             }
 
-            // print_r($result);
-            // exit();
-
             foreach ($all_section_metas as $meta_key) {
                 if(!in_array($meta_key, $result)) {
                     $orphans[] = $meta_key;
                     output_log($meta_key);
 
                     if(!$dry_mode) {
-                        //delete_post_meta($post_id, $meta_key);
+                        delete_post_meta($post_id, $meta_key);
                     }
                 }
             }
