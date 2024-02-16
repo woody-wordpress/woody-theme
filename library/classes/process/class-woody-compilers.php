@@ -899,7 +899,11 @@ class WoodyTheme_WoodyCompilers
 
         $home_slider = apply_filters('woody_format_homeslider_data', $home_slider);
 
-        return \Timber::compile($woody_components[$home_slider['landswpr_woody_tpl']], $home_slider);
+        if(empty($home_slider['landswpr_slides'])) {
+            return;
+        } else {
+            return \Timber::compile($woody_components[$home_slider['landswpr_woody_tpl']], $home_slider);
+        }
     }
 
     public function formatBookBlock($post, $woody_components, $wrapper)
