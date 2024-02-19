@@ -865,10 +865,21 @@ class WoodyTheme_WoodyCompilers
 
         if (!empty($home_slider['landswpr_slides']) && is_array($home_slider['landswpr_slides'])) {
             foreach ($home_slider['landswpr_slides'] as $slide_key => $slide) {
+                $post = $home_slider['landswpr_slides'][$slide_key];
                 // Si on est dans le cas d'une mise en avant automatique
                 if (!empty($home_slider['landswpr_auto_focus'])) {
                     $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_media_type'] = 'img';
                     $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img'] = $slide['img'];
+                    if (!empty($home_slider['landswpr_auto_display_button'])) {
+                        $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_smart_links']['links'][] = [
+                            'button_type' => 'link',
+                            'link' => [
+                                'title' => $post['link']['link_label'],
+                                'url' => $post['link']['url'],
+                                'target' => '_self'
+                            ],
+                        ];
+                    }
                 }
 
                 // Si on est dans le cas d'une vidéo oEmbed, on récupère la plus grande miniature possible
