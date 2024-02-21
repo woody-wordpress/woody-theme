@@ -1447,22 +1447,28 @@ class WoodyTheme_ACF
     // https://support.advancedcustomfields.com/forums/topic/custom-fields-on-post-preview/
     public function fix_acf_field_post_id_on_preview($post_id, $original_post_id)
     {
+        $id = $post_id;
+
         // Don't do anything to options
         if (is_string($post_id) && str_contains($post_id, 'option')) {
-            return $post_id;
+            $id = $post_id;
         }
         // Don't do anything to blocks
         if (is_string($original_post_id) && str_contains($original_post_id, 'block')) {
-            return $post_id;
+            $id = $post_id;
         }
 
         if (is_preview()) {
             $post = get_post();
             if ($post->post_status == 'draft') {
-                return $original_post_id;
+                $id = $original_post_id;
             }
         }
 
-        return $post_id;
+        if (is_object($id) && isset($id->ID)) {
+            $id = $id->ID;
+        }
+
+        return $id;
     }
 }
