@@ -116,6 +116,7 @@ class WoodyTheme_WoodyGetters
                 // La donnée de la vignette est saisie en backoffice
                 if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
                     $the_items['items'][$key] = $this->getCustomPreview($item_wrapper['custom_content'], $wrapper, $item_wrapper['content_selection_type']);
+                    $the_items['items'][$key]['real_index'] = $key;
                     // La donnée de la vignette correspond à un post sélectionné
                 } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
                     $item = $item_wrapper['existing_content'];
@@ -137,6 +138,7 @@ class WoodyTheme_WoodyGetters
                         }
 
                         $the_items['items'][$key] = (empty($post_preview)) ? [] : $post_preview;
+                        $the_items['items'][$key]['real_index'] = $key;
                     }
                 }
             }
@@ -515,7 +517,7 @@ class WoodyTheme_WoodyGetters
             }
         }
 
-        $data['cardDisplayOptions'] = $wrapper['display_elements'];
+        $data['cardDisplayOptions'] = empty($wrapper['display_elements']) ? [] : $wrapper['display_elements'];
 
         return apply_filters('woody_custom_pagePreview', $data, $wrapper);
     }

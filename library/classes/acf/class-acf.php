@@ -225,9 +225,6 @@ class WoodyTheme_ACF
         // Récupérer tous les champs ACF
         $acf_fields = get_fields($post_id);
 
-        // print_r($acf_fields['section'][6]['section_content']);
-        // exit();
-
         if(is_array($acf_fields)) {
             $result = $this->flattenArrayKeys($acf_fields);
             foreach ($result as $key => $val) {
@@ -236,16 +233,13 @@ class WoodyTheme_ACF
                 $result[] = '_' . $val;
             }
 
-            // print_r($result);
-            // exit();
-
             foreach ($all_section_metas as $meta_key) {
                 if(!in_array($meta_key, $result)) {
                     $orphans[] = $meta_key;
                     output_log($meta_key);
 
                     if(!$dry_mode) {
-                        //delete_post_meta($post_id, $meta_key);
+                        delete_post_meta($post_id, $meta_key);
                     }
                 }
             }
@@ -587,7 +581,7 @@ class WoodyTheme_ACF
 
     public function displayElementLoadField($field)
     {
-        if ($field['key'] == 'field_5bfeaaf039785') {
+        if ($field['key'] == 'field_5bfeaaf039785' || $field['key'] == 'field_65ca1b33dda06') {
             return $field;
         }
 
@@ -1453,22 +1447,28 @@ class WoodyTheme_ACF
     // https://support.advancedcustomfields.com/forums/topic/custom-fields-on-post-preview/
     public function fix_acf_field_post_id_on_preview($post_id, $original_post_id)
     {
+        $id = $post_id;
+
         // Don't do anything to options
         if (is_string($post_id) && str_contains($post_id, 'option')) {
-            return $post_id;
+            $id = $post_id;
         }
         // Don't do anything to blocks
         if (is_string($original_post_id) && str_contains($original_post_id, 'block')) {
-            return $post_id;
+            $id = $post_id;
         }
 
         if (is_preview()) {
             $post = get_post();
             if ($post->post_status == 'draft') {
-                return $original_post_id;
+                $id = $original_post_id;
             }
         }
 
-        return $post_id;
+        if (is_object($id) && isset($id->ID)) {
+            $id = $id->ID;
+        }
+
+        return $id;
     }
 }

@@ -598,13 +598,13 @@ class WoodyTheme_WoodyProcess
 
         // Si Hiérarchie = Enfants directs de la page
         // On passe le post ID dans le paramètre post_parent de la query
-        if ((empty($query_form['focused_type']) || $query_form['focused_type'] != 'documents') && $query_form['focused_hierarchy'] == 'child_of') {
+        if ((empty($query_form['focused_type']) || $query_form['focused_type'] != 'documents') && !empty($query_form['focused_hierarchy']) && $query_form['focused_hierarchy'] == 'child_of') {
             $the_query['post_parent'] = $the_post->ID;
         }
 
         // Si Hiérarchie = Pages de même niveau
         // On passe le parent_post_ID dans le paramètre post_parent de la query
-        if ((empty($query_form['focused_type']) || $query_form['focused_type'] != 'documents') && $query_form['focused_hierarchy'] == 'brother_of') {
+        if ((empty($query_form['focused_type']) || $query_form['focused_type'] != 'documents') && !empty($query_form['focused_hierarchy']) && $query_form['focused_hierarchy'] == 'brother_of') {
             $the_query['post_parent'] = $the_post->post_parent;
         }
 
