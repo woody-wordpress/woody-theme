@@ -353,6 +353,8 @@ class WoodyTheme_Plugins_Options
                 'touristic_sheet',
                 'short_link',
                 'trash',
+                'woody_rdbk_leaflets',
+                'woody_rdbk_feeds',
             ],
             'associated_redirect' => '',
             'auto_target' => '',
