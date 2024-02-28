@@ -351,6 +351,11 @@ class WoodyTheme_Plugins_Options
             update_field('redirection_log_404', $log_404_end_date, 'options');
         }
 
+        if((!empty($log_404_end_date) && date('Ymd') > $log_404_end_date)) {
+            $wpdb->query("TRUNCATE TABLE {$wpdb->prefix}redirection_404");
+            output_success('clean redirection_404');
+        }
+
         $redirection_options = [
             'support' => false,
             'monitor_post' => $monitor_post,
