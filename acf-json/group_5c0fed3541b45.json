@@ -6,6 +6,7 @@
             "key": "field_5e43ca87a2e3e",
             "label": "Paramètres généraux",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -22,6 +23,7 @@
             "key": "field_5e296d4d4597d",
             "label": "Masquer les sections vide",
             "name": "hide_empty_sections",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "Si cette option est activée, les sections sans blocs, ou dont les blocs sont vides, ne seront plus affichées sur le site",
             "required": 0,
@@ -41,6 +43,7 @@
             "key": "field_5e43cab9a2e3f",
             "label": "Afficher la traduction en langue par défaut des titres de pages dans le backoffice",
             "name": "display_default_lang_title",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "Si cette option est activée, le titre de page en langue par défaut sera affiché à la suite du titre traduit. \r\nS'applique sur la liste des pages et les mises en avant de contenu",
             "required": 0,
@@ -60,6 +63,7 @@
             "key": "field_601c25291a109",
             "label": "Afficher le tag parent dans les champs de type taxonomie",
             "name": "display_parent_tag_name",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "Si cette option est activée, le titre du parent sera affiché à la suite d'un tag sous la forme \"Enfant de [tag parent]\".",
             "required": 0,
@@ -79,6 +83,7 @@
             "key": "field_global_lite_edit_mode",
             "label": "Forcer le mode d'édition simplifié au chargement des pages",
             "name": "global_lite_edit_mode",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -98,6 +103,7 @@
             "key": "field_64f9cb7966f5c",
             "label": "Afficher l'aspect des fiches dans les champs de recherche",
             "name": "display_sheet_aspect",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "Si cette option est activée, l'aspect de la fiche sera affiché à la suite du titre",
             "required": 0,
@@ -115,8 +121,9 @@
         },
         {
             "key": "field_65bd063d177e6",
-            "label": "Wireframes / Zoning",
+            "label": "Wireframes \/ Zoning",
             "name": "display_zoning_mode",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "Si cette option est activée, le thème graphique sera désactivé pour les utilisateurs connectés (wireframes)",
             "required": 0,
@@ -133,9 +140,28 @@
             "ui_off_text": ""
         },
         {
+            "key": "field_65dee47541b03",
+            "label": "Fin d'analyse des 404",
+            "name": "redirection_log_404",
+            "aria-label": "",
+            "type": "date_picker",
+            "instructions": "Cette date est automatiquement calculée en fonction de la date d'activation du site. A modifier si vous souhaitez continuer à analyser les 404 dans le module \"Redirections\", après l'ajout d'une langue étrangère par exemple.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d\/m\/Y",
+            "return_format": "Ymd",
+            "first_day": 1
+        },
+        {
             "key": "field_611f6f55bc6de",
             "label": "Page des bons plans",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -152,6 +178,7 @@
             "key": "field_611f65c4303f8",
             "label": "Page du panier des bons plans",
             "name": "deals_page_url",
+            "aria-label": "",
             "type": "post_object",
             "instructions": "Si la page est traduite, les traductions seront automatiquement utilisées pour les langues correspondantes",
             "required": 0,
@@ -168,12 +195,14 @@
             "allow_null": 1,
             "multiple": 0,
             "return_format": "id",
-            "ui": 1
+            "ui": 1,
+            "bidirectional_target": []
         },
         {
             "key": "field_611f65c4303f9",
             "label": "Page des bons plans à imprimer",
             "name": "deals_printable_page_url",
+            "aria-label": "",
             "type": "post_object",
             "instructions": "Si la page est traduite, les traductions seront automatiquement utilisées pour les langues correspondantes",
             "required": 0,
@@ -190,12 +219,14 @@
             "allow_null": 1,
             "multiple": 0,
             "return_format": "id",
-            "ui": 1
+            "ui": 1,
+            "bidirectional_target": []
         },
         {
             "key": "field_5ee9c741e017c",
             "label": "Liens de partage",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -212,6 +243,7 @@
             "key": "field_5ee9c784e017d",
             "label": "Afficher \/ masquer les liens de partage",
             "name": "active_shares",
+            "aria-label": "",
             "type": "checkbox",
             "instructions": "Si cette option est désactivée, l'icône de partage ne sera plus affichée sur le site.",
             "required": 0,
@@ -232,7 +264,8 @@
             "layout": "horizontal",
             "toggle": 0,
             "return_format": "value",
-            "save_custom": 0
+            "save_custom": 0,
+            "custom_choice_button_text": "Ajouter un nouveau choix"
         }
     ],
     "location": [
@@ -252,5 +285,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1612457764
+    "show_in_rest": 0,
+    "modified": 1709106529
 }

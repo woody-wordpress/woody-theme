@@ -344,6 +344,13 @@ class WoodyTheme_Plugins_Options
             $this->updateOption('woody_auto_redirect', $wpdb->insert_id);
         }
 
+        $log_404_end_date = get_field('redirection_log_404', 'options');
+        if(empty($log_404_end_date) && defined('WOODY_ACTIVATION_DATE') && !empty(WOODY_ACTIVATION_DATE)) {
+            $woody_activation_date = new \Moment\Moment(WOODY_ACTIVATION_DATE);
+            $log_404_end_date = $woody_activation_date->addDays(120)->format('Ymd');
+            update_field('redirection_log_404', $log_404_end_date, 'options');
+        }
+
         $redirection_options = [
             'support' => false,
             'monitor_post' => $monitor_post,
@@ -353,11 +360,13 @@ class WoodyTheme_Plugins_Options
                 'touristic_sheet',
                 'short_link',
                 'trash',
+                'woody_rdbk_leaflets',
+                'woody_rdbk_feeds',
             ],
             'associated_redirect' => '',
             'auto_target' => '',
             'expire_redirect' => -1,
-            'expire_404' => 30,
+            'expire_404' => (!empty($log_404_end_date) && date('Ymd') > $log_404_end_date) ? -1 : 30,
             'newsletter' => false,
             'redirect_cache' => 0,
             'ip_logging' => 0,
