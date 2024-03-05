@@ -175,7 +175,8 @@ textarea.notAllowed {
 #page_typediv,
 #themesdiv,
 #placesdiv,
-#seasonsdiv {
+#seasonsdiv,
+#targetsdiv {
     .ui-sortable-handle {
         display: flex;
         color: lighten(#23282d, 25%);
