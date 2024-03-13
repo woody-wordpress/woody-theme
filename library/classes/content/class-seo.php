@@ -149,11 +149,11 @@ class WoodyTheme_Seo
                 }
 
                 if($lang['slug'] !== PLL_DEFAULT_LANG) {
-                    if($translation[0] == $blogname) {
+                    if(html_entity_decode($translation[0]) == $blogname) {
                         $blogname_exists = true;
                         $translations[$translation_key][1] = $blogdata['blogname'];
                     }
-                    if($translation[0] == $blogdescription) {
+                    if(html_entity_decode($translation[0]) == $blogdescription) {
                         $blogdescription_exists = true;
                         $translations[$translation_key][1] = $blogdata['blogdescription'];
                     }
