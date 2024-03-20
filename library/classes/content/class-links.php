@@ -35,6 +35,9 @@ class WoodyTheme_Links
             } elseif (strpos($query['s'], '#topic') !== false) {
                 $query['s'] = str_replace('#topic', '', $query['s']);
                 $query['post_type'] = array('woody_topic');
+            } elseif (strpos($query['s'], '#youbook') !== false) {
+                $query['s'] = str_replace('#youbook', '', $query['s']);
+                $query['post_type'] = array('youbook_product');
             }
         }
 
