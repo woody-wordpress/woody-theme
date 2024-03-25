@@ -236,6 +236,14 @@ class WoodyTheme_WoodyProcess
                 $layout['display'] = $this->tools->getDisplayOptions($layout['feature_block_bg_params']);
                 $layout['items'] = $this->compilers->formatFeatureItems($layout);
                 $layout['no_padding'] = $layout['feature_no_padding'];
+                if (!empty($layout['analytics_event'])) {
+                    $layout['analytics'] = [
+                        'name' => $layout['analytics_event'],
+                        'event' => str_replace('-', '_', sanitize_title($layout['analytics_event']))
+                    ];
+
+                    unset($layout['analytics_event']);
+                }
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             case 'spacer_block':
