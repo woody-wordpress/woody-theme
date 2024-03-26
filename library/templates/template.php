@@ -825,6 +825,7 @@ abstract class WoodyTheme_TemplateAbstract
                     $data['langs'][$language['slug']]['is_current'] = true;
                     $data['langs'][$language['slug']]['season'] = empty($language['season']) ? '' : $language['season'];
                     $data['langs'][$language['slug']]['external'] = false;
+                    $data['langs'][$language['slug']]['flag_class'] = woody_pll_get_lang_by_slug($language['slug']);
                 } else {
                     $data['langs'][$language['slug']]['url'] = $language['url'] . $output_params;
                     $data['langs'][$language['slug']]['name'] = strpos($language['name'], '(') ? substr($language['name'], 0, strpos($language['name'], '(')) : $language['name'];
@@ -832,6 +833,7 @@ abstract class WoodyTheme_TemplateAbstract
                     $data['langs'][$language['slug']]['no_translation'] = $language['no_translation'];
                     $data['langs'][$language['slug']]['season'] = empty($language['season']) ? '' : $language['season'];
                     $data['langs'][$language['slug']]['external'] = false;
+                    $data['langs'][$language['slug']]['flag_class'] = woody_pll_get_lang_by_slug($language['slug']);
                 }
             }
         }
