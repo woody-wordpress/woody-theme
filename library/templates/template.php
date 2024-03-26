@@ -813,7 +813,6 @@ abstract class WoodyTheme_TemplateAbstract
         $output_params = substr($output_params, 0, -1);
         $output_params = empty($output_params) ? '' : '?' . $output_params;
         $woody_lang_enable = (defined('WOODY_LANG_ENABLE') && is_array(WOODY_LANG_ENABLE)) ? WOODY_LANG_ENABLE : [];
-
         if (!empty($languages)) {
             foreach ($languages as $language) {
                 if (!empty($language['current_lang'])) {
@@ -825,7 +824,7 @@ abstract class WoodyTheme_TemplateAbstract
                     $data['langs'][$language['slug']]['is_current'] = true;
                     $data['langs'][$language['slug']]['season'] = empty($language['season']) ? '' : $language['season'];
                     $data['langs'][$language['slug']]['external'] = false;
-                    $data['langs'][$language['slug']]['flag_class'] = woody_pll_get_lang_by_slug($language['slug']);
+                    $data['langs'][$language['slug']]['flag_class'] = woody_pll_get_lang_by_locale($language['locale']);
                 } else {
                     $data['langs'][$language['slug']]['url'] = $language['url'] . $output_params;
                     $data['langs'][$language['slug']]['name'] = strpos($language['name'], '(') ? substr($language['name'], 0, strpos($language['name'], '(')) : $language['name'];
@@ -833,7 +832,7 @@ abstract class WoodyTheme_TemplateAbstract
                     $data['langs'][$language['slug']]['no_translation'] = $language['no_translation'];
                     $data['langs'][$language['slug']]['season'] = empty($language['season']) ? '' : $language['season'];
                     $data['langs'][$language['slug']]['external'] = false;
-                    $data['langs'][$language['slug']]['flag_class'] = woody_pll_get_lang_by_slug($language['slug']);
+                    $data['langs'][$language['slug']]['flag_class'] = woody_pll_get_lang_by_locale($language['locale']);
                 }
             }
         }
