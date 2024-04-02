@@ -214,7 +214,7 @@
         },
         {
             "key": "field_5d7f7dd820bb0",
-            "label": "Paramètres avancés",
+            "label": "Indexation",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -419,6 +419,50 @@
                     "maxlength": ""
                 }
             ]
+        },
+        {
+            "key": "field_660bc842a8122",
+            "label": "Données structurées",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_660bc842a814b",
+            "label": "Type de structure",
+            "name": "woodyseo_schema_type",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "WebPage": "WebPage",
+                "Article": "Article",
+                "NewsArticle": "NewsArticle",
+                "BlogPosting": "BlogPosting",
+                "Recipe": "Recipe"
+            },
+            "default_value": "WebPage",
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
         }
     ],
     "location": [

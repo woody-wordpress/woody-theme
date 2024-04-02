@@ -243,40 +243,15 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['enabled_woody_options'] = WOODY_OPTIONS;
         $this->context['woody_access_staging'] = WOODY_ACCESS_STAGING;
 
-
-        $the_title = get_field('woodyseo_meta_title');
         // SEO Context
-
+        $the_title = get_field('woodyseo_meta_title');
         $this->context['title'] = (empty($the_title)) ? html_entity_decode(get_the_title()) . ' | ' . $this->context['site']['name'] : woody_untokenize($the_title);
         $this->context['title'] = apply_filters('woody_seo_transform_pattern', $this->context['title']);
         $this->context['metas'] = $this->setMetadata();
-
         $this->context['head_top'] = (empty($this->context['head_top'])) ? [] : $this->context['head_top'];
         $this->context['head_top'][] = get_field('woody_custom_meta', 'options');
         $this->context['head_top'][] = get_field('woody_custom_meta_' . pll_current_language(), 'options');
         $this->context['head_top'] = apply_filters('woody_custom_meta', $this->context['head_top']);
-
-        // Tourist Information Center
-        // Contexte seulement sur la page d'accueil
-        if (is_front_page()) {
-            $this->context['is_tourist_information_center'] = (bool) get_field('woody_tourist_information_center', 'options');
-            if ($this->context['is_tourist_information_center']) {
-                $woody_tourist_informations = get_field('woody_tourist_informations', 'options');
-                // Ajout d'infos supplémentaires au format JSON
-                $more_tourist_informations = apply_filters('woody_tourist_more_informations', '');
-
-                $this->context['tourist_information_center']['city'] = $woody_tourist_informations['woody_tourist_information_city'] ?: ''; // Ville
-                $this->context['tourist_information_center']['country'] = $woody_tourist_informations['woody_tourist_information_country'] ?: ''; // Pays/Localité
-                $this->context['tourist_information_center']['region'] = $woody_tourist_informations['woody_tourist_information_region'] ?: ''; // Région
-                $this->context['tourist_information_center']['postalcode'] = $woody_tourist_informations['woody_tourist_information_postal'] ?: ''; // Code postal
-                $this->context['tourist_information_center']['address'] = $woody_tourist_informations['woody_tourist_information_address'] ?: ''; // Adresse
-
-                // S'il y a des informations supplémentaires
-                if (!empty($more_tourist_informations)) {
-                    $this->context['tourist_information_center']['more_informations'] = $more_tourist_informations;
-                }
-            }
-        }
 
         // Woody options pages
         $this->context['woody_options_pages'] = $this->getWoodyOptionsPagesValues();
@@ -331,6 +306,9 @@ abstract class WoodyTheme_TemplateAbstract
 
         // GTM
         $this->addGTM();
+
+        // Schema Graph
+        $this->addSchemaGraph();
 
         // Added Icons
         $this->addIcons();
@@ -732,6 +710,111 @@ abstract class WoodyTheme_TemplateAbstract
         ];
     }
 
+    private function addSchemaGraph()
+    {
+        $schema_graph = [
+            "@context" => "https://schema.org",
+            "@graph" => []
+        ];
+
+        // Main Website
+        $website = [
+            "@type" => "WebSite",
+            "url" => $this->context['http_host'],
+            "name" => trim($this->context['site']['name']),
+            "description" => trim($this->context['site']['description']),
+        ];
+
+        if(!empty($this->context['woody_options_pages']['search_url'])) {
+            $website['potentialAction'] = empty($website['potentialAction']) ? [] : $website['potentialAction'];
+            $website['potentialAction'][] = [
+                "@type" => "SearchAction",
+                "target" => woody_get_permalink($this->context['woody_options_pages']['search_url']) . "?query={search_term_string}",
+                "query-input" => "required name=search_term_string"
+            ];
+        }
+
+        // Add to graph
+        $schema_graph["@graph"][] = $website;
+
+        // Tourist Information Center
+        if (is_front_page()) {
+            $is_tourist_information_center = (bool) get_field('woody_tourist_information_center', 'options');
+            if ($is_tourist_information_center) {
+
+                $touristic_center = [
+                    "@type" => "TouristInformationCenter",
+                    "url" => $this->context['http_host'],
+                    "name" => trim($this->context['title'])
+                ];
+
+                $woody_tourist_informations = get_field('woody_tourist_informations', 'options');
+                if(!empty($woody_tourist_informations['woody_tourist_information_city'])) {
+                    $touristic_center['address'] = [];
+                    $touristic_center['address'][] = [
+                        "@type" => "PostalAddress",
+                        "addressLocality" => $woody_tourist_informations['woody_tourist_information_city'],
+                        "addressCountry" => $woody_tourist_informations['woody_tourist_information_country'],
+                        "addressRegion" => $woody_tourist_informations['woody_tourist_information_region'],
+                        "postalCode" => $woody_tourist_informations['woody_tourist_information_postal'],
+                        "streetAddress" => $woody_tourist_informations['woody_tourist_information_address'],
+                    ];
+                }
+
+                //TODO: Utilisé par les 2 alpes
+                $more_tourist_informations = apply_filters('woody_tourist_more_informations', '');
+
+                // Add to graph
+                $schema_graph["@graph"][] = $touristic_center;
+            }
+        } else {
+            $schema_type = get_field('woodyseo_schema_type');
+            $schema_type = (empty($schema_type)) ? "WebPage" : $schema_type;
+
+            $webpage = [
+                "@type" => $schema_type,
+                "url" => $this->context['current_url'],
+                "headline" => trim($this->context['title']),
+                "inLanguage" => $this->context['site']['language'],
+                "datePublished" => $this->context['post']->post_date,
+                "dateModified" => $this->context['post']->post_modified,
+                "description" => $this->context['description'],
+            ];
+
+            // Get Image
+            $image = get_field('focus_img');
+            $image = (empty($image)) ? get_field('field_5b0e5ddfd4b1b') : $image;
+            if (!empty($image) && !empty($image['sizes']) && !empty($image['sizes']['ratio_2_1'])) {
+                $webpage['image'][] = $image['sizes']['ratio_2_1'];
+            }
+
+            // Get Author
+            $profil_name = null;
+            $profil_type = get_field('profil_type');
+            if (!empty($profil_type) && $profil_type == 'existing_profile') {
+                $existing_profile_id = get_field('linked_profile');
+                if (!empty($existing_profile_id)) {
+                    $profil_name = get_the_title($existing_profile_id);
+                }
+            } else {
+                $profil_name = get_field('profil_name');
+            }
+
+            if(!empty($profil_name)) {
+                $webpage['author'] = [];
+                $webpage['author'][] = [
+                    "@type" => "Person",
+                    "@name" => $profil_name
+                ];
+            }
+
+            // Add to graph
+            $schema_graph["@graph"][] = $webpage;
+        }
+
+        $this->context['schema_graph'] = apply_filters('woody_seo_schema_graph', $schema_graph);
+    }
+
     private function addIcons()
     {
         $this->context['icons'] = apply_filters('woody_enqueue_favicons', null);
@@ -886,7 +969,8 @@ abstract class WoodyTheme_TemplateAbstract
         return $data;
     }
 
-    private function isExternalLanguage($language) {
+    private function isExternalLanguage($language)
+    {
         if(!empty($language['external'])) {
             return true;
         }
