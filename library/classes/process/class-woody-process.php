@@ -187,6 +187,12 @@ class WoodyTheme_WoodyProcess
                     }
                 }
 
+                $more_content = apply_filters('woody_add_socialwall_content', '');
+
+                if (!empty($more_content)) {
+                    $layout['more_content'] = $more_content;
+                }
+
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             case 'semantic_view':
