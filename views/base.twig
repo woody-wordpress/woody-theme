@@ -29,9 +29,9 @@
     {# /WP Metas #}
 
     {# Schema Graph #}
-    {% block schemaGraph %}
-    {% include 'parts/schemaGraph.twig' %}
-    {% endblock %}
+    {% if schema_graph %}
+    <script type="application/ld+json" class="woody-schema-graph">{{schema_graph|json_encode }}</script>
+    {% endif %}
     {# Schema Graph #}
 
     {% if woody_pwa %}
