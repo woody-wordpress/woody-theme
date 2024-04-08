@@ -189,10 +189,7 @@ abstract class WoodyTheme_TemplateAbstract
     {
         $return = [];
         $taxonomies = ['places', 'seasons', 'themes', 'targets'];
-
-        if($this->context['post_type'] == 'woody_rdbk_leaflets'){
-            $taxonomies = apply_filters( 'woody_datalayer_tags', $taxonomies );
-        }
+        $taxonomies = apply_filters('woody_datalayer_tags', $taxonomies);
 
         foreach ($taxonomies as $taxonomy) {
             $all_taxonomy = get_terms(array(
@@ -1017,7 +1014,7 @@ abstract class WoodyTheme_TemplateAbstract
 
     private function getGlobalContext($post_type)
     {
-        if($post_type == 'woody_rdbk_leaflets' || ( $post_type == 'touristic_sheet' && $_GET['roadbook'])){
+        if($post_type == 'woody_rdbk_leaflets' || ($post_type == 'touristic_sheet' && $_GET['roadbook'])){
             return 'tipy';
         }
         return 'website';
