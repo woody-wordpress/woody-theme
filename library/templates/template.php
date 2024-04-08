@@ -150,6 +150,10 @@ abstract class WoodyTheme_TemplateAbstract
         if (empty($this->globals['site_name'])) {
             $this->globals['site_name'] = get_bloginfo('name');
         }
+
+        if (empty($this->globals['context']) && !empty($this->context['page_type'])) {
+            $this->globals['context'] = $this->getGlobalContext($this->context['page_type']);
+        }
     }
 
     private function getAncestors($post)
@@ -185,6 +189,9 @@ abstract class WoodyTheme_TemplateAbstract
     {
         $return = [];
         $taxonomies = ['places', 'seasons', 'themes', 'targets'];
+        if($this->context['post_type'] == 'woody_rdbk_leaflets'){
+            $taxonomies = apply_filters( 'woody_datalayer_tags', $taxonomies );
+        }
 
         foreach ($taxonomies as $taxonomy) {
             $all_taxonomy = get_terms(array(
@@ -314,7 +321,6 @@ abstract class WoodyTheme_TemplateAbstract
         }
 
         if (!empty($this->context['post'])) {
-            $this->context['post_type'] = $this->context['post']->post_type;
             $this->context['page_type'] = getTermsSlugs($this->context['post_id'], 'page_type', true);
         }
 
@@ -824,7 +830,7 @@ abstract class WoodyTheme_TemplateAbstract
                     $data['langs'][$language['slug']]['is_current'] = true;
                     $data['langs'][$language['slug']]['season'] = empty($language['season']) ? '' : $language['season'];
                     $data['langs'][$language['slug']]['external'] = false;
-                    $data['langs'][$language['slug']]['flag_class'] = woody_pll_get_lang_by_locale($language['locale']);
+                    // $data['langs'][$language['slug']]['flag_class'] = woody_pll_get_lang_by_locale($language['locale']);
                 } else {
                     $data['langs'][$language['slug']]['url'] = $language['url'] . $output_params;
                     $data['langs'][$language['slug']]['name'] = strpos($language['name'], '(') ? substr($language['name'], 0, strpos($language['name'], '(')) : $language['name'];
@@ -832,7 +838,7 @@ abstract class WoodyTheme_TemplateAbstract
                     $data['langs'][$language['slug']]['no_translation'] = $language['no_translation'];
                     $data['langs'][$language['slug']]['season'] = empty($language['season']) ? '' : $language['season'];
                     $data['langs'][$language['slug']]['external'] = false;
-                    $data['langs'][$language['slug']]['flag_class'] = woody_pll_get_lang_by_locale($language['locale']);
+                    // $data['langs'][$language['slug']]['flag_class'] = woody_pll_get_lang_by_locale($language['locale']);
                 }
             }
         }
@@ -921,5 +927,13 @@ abstract class WoodyTheme_TemplateAbstract
 
         $template = $this->context['woody_components']['woody_widgets-prepare_onspot_switcher-tpl_01'];
         return Timber::compile($template, $data);
+    }
+
+    private function getGlobalContext($post_type)
+    {
+        if($post_type == 'woody_rdbk_leaflets' || ( $post_type == 'touristic_sheet' && $_GET['roadbook'])){
+            return 'tipy';
+        }
+        return 'website';
     }
 }
