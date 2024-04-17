@@ -217,6 +217,14 @@ class WoodyTheme_WoodyProcess
             case 'free_text':
                 $layout['block_titles'] = $this->tools->getBlockTitles($layout, '', 'generic_');
                 $layout['text'] = $this->tools->replacePattern($layout['text'], get_the_ID());
+                if (!empty($layout['analytics_event'])) {
+                    $layout['analytics'] = [
+                        'name' => $layout['analytics_event'],
+                        'event' => str_replace('-', '_', sanitize_title($layout['analytics_event']))
+                    ];
+
+                    unset($layout['analytics_event']);
+                }
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             case 'call_to_action':
@@ -224,6 +232,14 @@ class WoodyTheme_WoodyProcess
                     'hide_description' => true,
                 ];
                 $layout['block_titles'] = $this->tools->getBlockTitles($layout, '', 'generic_', $opts);
+                if (!empty($layout['analytics_event'])) {
+                    $layout['analytics'] = [
+                        'name' => $layout['analytics_event'],
+                        'event' => str_replace('-', '_', sanitize_title($layout['analytics_event']))
+                    ];
+
+                    unset($layout['analytics_event']);
+                }
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             case 'quote':
