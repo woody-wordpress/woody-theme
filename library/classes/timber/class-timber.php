@@ -120,6 +120,7 @@ if (!class_exists('Timber')) {
                 $keys = [
                     'ancestors',
                     'area',
+                    'context',
                     'current_lang',
                     'current_locale',
                     'current_locale_region',

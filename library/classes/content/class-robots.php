@@ -45,6 +45,8 @@ class WoodyTheme_Robots
                 'Disallow: /*preview_nonce=',
                 'Disallow: /*preview=',
                 'Disallow: /*query=',
+                'Disallow: /api/myaccount',
+                'Disallow: /api/content/ts/*/sheets',
                 'Disallow: /wp-json/woody/crop-url/*',
             ];
 

@@ -27,7 +27,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "30",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -54,18 +54,36 @@
                 ]
             ],
             "wrapper": {
-                "width": "40",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
-            "choices": {
-            },
+            "choices": {},
             "allow_custom": 0,
             "default_value": [],
             "layout": "horizontal",
             "toggle": 0,
             "return_format": "value",
             "save_custom": 0
+        },
+        {
+            "key": "field_66179814095ea",
+            "label": "Afficher le bouton d'ajout aux favoris",
+            "name": "display_favorites_button",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         {
             "key": "field_61bca2531a5b6",
@@ -76,7 +94,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "30",
+                "width": "25",
                 "class": "",
                 "id": ""
             },

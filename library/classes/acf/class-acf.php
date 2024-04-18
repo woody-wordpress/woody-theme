@@ -493,7 +493,11 @@ class WoodyTheme_ACF
         $lang = $this->getCurrentLang();
         if (!empty($value) && is_array($value) && function_exists('pll_get_term')) {
             foreach ($value as $key => $term_id) {
-                $value[$key] = pll_get_term($term_id, $lang);
+                $term = get_term($term_id);
+                $taxonomy = $term->taxonomy;
+                if ($taxonomy != 'attachment_categories') {
+                    $value[$key] = pll_get_term($term_id, $lang);
+                }
             }
         }
 
@@ -1272,7 +1276,7 @@ class WoodyTheme_ACF
     {
         switch($taxonomy) {
             case 'seasons':
-            case 'attachment_categorie':
+            case 'attachment_categories':
             case 'themes':
             case 'places':
             case 'targets':
