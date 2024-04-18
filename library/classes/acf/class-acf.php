@@ -1272,7 +1272,7 @@ class WoodyTheme_ACF
     {
         switch($taxonomy) {
             case 'seasons':
-            case 'attachment_categorie':
+            case 'attachment_categories':
             case 'themes':
             case 'places':
             case 'targets':
