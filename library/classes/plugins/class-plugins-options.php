@@ -310,7 +310,6 @@ class WoodyTheme_Plugins_Options
                 'targets',
                 'expression_category',
                 'profile_category',
-                'attachment_categories'
             ],
             'media' => [
                 'duplicate' => 0,
