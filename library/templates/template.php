@@ -143,7 +143,9 @@ abstract class WoodyTheme_TemplateAbstract
             $this->globals['site_key'] = WP_SITE_KEY;
         }
 
-        if (empty($this->globals['is_mobile'])) {
+        if (!empty($data['is_mobile']) && is_bool($data['is_mobile'])) {
+            $this->globals['is_mobile'] = $data['is_mobile'];
+        } elseif (empty($this->globals['is_mobile'])) {
             $this->globals['is_mobile'] = wp_is_mobile();
         }
 
@@ -1014,7 +1016,7 @@ abstract class WoodyTheme_TemplateAbstract
 
     private function getGlobalContext($post_type)
     {
-        if($post_type == 'woody_rdbk_leaflets' || ($post_type == 'touristic_sheet' && $_GET['roadbook'])){
+        if($post_type == 'woody_rdbk_leaflets' || ($post_type == 'touristic_sheet' && $_GET['roadbook'])) {
             return 'tipy';
         }
         return 'website';
