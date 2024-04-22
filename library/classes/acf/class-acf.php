@@ -80,7 +80,7 @@ class WoodyTheme_ACF
 
         add_filter('acf/fields/taxonomy/query', [$this, 'hideProfileChildTaxonomies'], 10, 3);
 
-        add_filter('acf/validate_post_id', [$this, 'fix_acf_field_post_id_on_preview'], 10, 3);
+        // add_filter('acf/validate_post_id', [$this, 'fix_acf_field_post_id_on_preview'], 10, 3);
 
         // Custom Filter
         add_filter('woody_get_field_option', [$this, 'woodyGetFieldOption'], 10, 3);

@@ -654,9 +654,10 @@ class WoodyTheme_WoodyGetters
             ],
         ];
         if (!empty($wrapper['display_img'])) {
+            $url = (!empty($sheet_item['img']['url']) && !empty($sheet_item['img']['url']['manual'])) ? str_replace('api.tourism-system.com', 'api.cloudly.space', $sheet_item['img']['url']['manual']) : '';
             $data['img'] = [
                 'resizer' => true,
-                'url' => (!empty($sheet_item['img']['url']) && !empty($sheet_item['img']['url']['manual'])) ? str_replace('api.tourism-system.com', 'api.cloudly.space', $sheet_item['img']['url']['manual']) : '',
+                'url' => !empty($url) ? str_replace('cropratioresize', 'clip', $url) : '',
                 'alt' => (empty($sheet_item['img']['alt'])) ? '' : $sheet_item['img']['alt'],
                 'title' => (empty($sheet_item['img']['title'])) ? '' : $sheet_item['img']['title']
             ];
