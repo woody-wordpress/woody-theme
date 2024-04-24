@@ -30,9 +30,9 @@ class WoodyTheme_Inclusions
         $inc = get_query_var('inc');
         if (!empty($inc)) {
             if ($inc == 'inc_header') {
-                add_filter('template_include', fn() => get_template_directory() . '/library/templates/inc_header.php');
+                add_filter('template_include', fn () => get_template_directory() . '/library/templates/inc_header.php');
             } elseif ($inc == 'inc_footer') {
-                add_filter('template_include', fn() => get_template_directory() . '/library/templates/inc_footer.php');
+                add_filter('template_include', fn () => get_template_directory() . '/library/templates/inc_footer.php');
             }
         }
     }
