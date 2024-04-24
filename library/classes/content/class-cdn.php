@@ -20,6 +20,7 @@ class WoodyTheme_CDN
     {
         add_filter('wp_resource_hints', [$this, 'wpResourceHints'], 10, 2);
         add_filter('timber_render', [$this, 'timberRender'], 10);
+        add_filter('woody_importmap_js', [$this, 'woodyImportmapJs'], 99);
     }
 
     public function wpResourceHints($hints, $relation_type)
@@ -47,6 +48,28 @@ class WoodyTheme_CDN
         preg_match_all('#http(s?):\/\/([a-zA-Z0-9-_.]*)\/wp\/wp-includes\/([^"\' ]*)#', $render, $matches);
 
         return $this->replaceCDN($matches, $render);
+    }
+
+    public function woodyImportmapJs($importmap = [])
+    {
+        foreach ($importmap as $key => $url) {
+            $host = parse_url($url, PHP_URL_HOST);
+            $scheme = parse_url($url, PHP_URL_SCHEME);
+            $path = parse_url($url, PHP_URL_PATH);
+
+            if (!empty($path)) {
+                if (empty($host)) {
+                    $url = 'https://' . WOODY_CLOUDFLARE_URL . $path;
+                } else {
+                    $url = str_replace($host, WOODY_CLOUDFLARE_URL, $url);
+                    $url = str_replace($scheme, 'https', $url);
+                }
+            }
+
+            $importmap[$key] = $url;
+        }
+
+        return $importmap;
     }
 
     private function replaceCDN($matches = [], $render = '')
