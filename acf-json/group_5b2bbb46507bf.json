@@ -180,6 +180,25 @@
             "maxlength": ""
         },
         {
+            "key": "field_662a52cec3b2c",
+            "label": "Contributeur",
+            "name": "page_teaser_contributor",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_5b2bbbfaec6b2",
             "label": "Description de la page",
             "name": "page_teaser_desc",
