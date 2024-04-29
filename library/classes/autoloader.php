@@ -57,9 +57,6 @@ new WoodyTheme_Enqueue_Assets();
 // Langs
 new WoodyTheme_Polylang();
 
-// Clouflare CDN
-new WoodyTheme_CDN();
-
 // Content
 new WoodyTheme_Api_Rest();
 new WoodyTheme_Cron();
