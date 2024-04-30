@@ -317,7 +317,8 @@ class WoodyTheme_ACF
         $screen = get_current_screen();
         if (!empty($screen->id) && strpos($screen->id, 'acf-options') !== false) {
             // Purge all varnish cache on save menu
-            do_action('woody_flush_varnish');
+            woody_flush_varnish();
+            woody_flush_cdn();
         }
     }
 
@@ -1424,7 +1425,10 @@ class WoodyTheme_ACF
                 update_option('woody_season_priority', $current_season_field);
 
                 // On flush le varnish
-                do_action('woody_flush_varnish');
+                woody_flush_varnish();
+
+                // On flush le cdn
+                woody_flush_cdn();
 
                 // On lance un rsdu
                 do_action('woody_async_add', 'woody_hawwwai_update_all_canonicals');
