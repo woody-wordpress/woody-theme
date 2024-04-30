@@ -29,7 +29,7 @@ class WoodyTheme_Commands
         \WP_CLI::add_command('woody_flush_site', [$this, 'flush_site']);
         \WP_CLI::add_command('woody_flush_twig', [$this, 'flush_twig']);
         \WP_CLI::add_command('woody_flush_varnish', [$this, 'flush_varnish']);
-        \WP_CLI::add_command('woody_flush_cloudflare', [$this, 'flush_cloudflare']);
+        \WP_CLI::add_command('woody_flush_cdn', [$this, 'flush_cdn']);
         \WP_CLI::add_command('woody_cache_warm', [$this, 'cache_warm']);
         \WP_CLI::add_command('woody_maintenance', [$this, 'maintenance']);
         \WP_CLI::add_command('woody_maintenance_core', [$this, 'maintenance_core']);
@@ -42,7 +42,7 @@ class WoodyTheme_Commands
         $this->cache_warm();
         $this->flush_twig();
         $this->flush_varnish();
-        $this->flush_cloudflare();
+        $this->flush_cdn();
     }
 
     public function flush_site()
@@ -106,12 +106,12 @@ class WoodyTheme_Commands
                     output_success('Ajout de la langue fr_FR');
 
                     if ($nolang = $model->get_objects_with_no_lang()) {
-                        if (! empty($nolang['posts'])) {
+                        if (!empty($nolang['posts'])) {
                             $model->set_language_in_mass('post', $nolang['posts'], 'fr');
                             output_success(sprintf('Attribution de la langue par défaut (%s posts)', is_countable($nolang['posts']) ? count($nolang['posts']) : 0));
                         }
 
-                        if (! empty($nolang['terms'])) {
+                        if (!empty($nolang['terms'])) {
                             $model->set_language_in_mass('term', $nolang['terms'], 'fr');
                             output_success(sprintf('Attribution de la langue par défaut (%s terms)', is_countable($nolang['terms']) ? count($nolang['terms']) : 0));
                         }
@@ -183,25 +183,11 @@ class WoodyTheme_Commands
 
     public function flush_varnish()
     {
-        do_action('woody_flush_varnish');
+        woody_flush_varnish();
     }
 
-    public function flush_cloudflare()
+    public function flush_cdn()
     {
-        if (WP_ENV != 'prod' || empty(WOODY_CLOUDFLARE_URL) || empty(WOODY_CLOUDFLARE_ZONE) || empty(WOODY_CLOUDFLARE_TOKEN)) {
-            output_warning('Plugin CDN CloudFlare non activé');
-            return;
-        }
-
-        $response = wp_remote_post('https://api.cloudflare.com/client/v4/zones/' . WOODY_CLOUDFLARE_ZONE . '/purge_cache', [
-            'headers' => ['Authorization' => 'Bearer ' . WOODY_CLOUDFLARE_TOKEN],
-            'body' => '{"purge_everything":true}'
-        ]);
-
-        if (is_wp_error($response)) {
-            output_warning(['woody_flush_cloudflare' => $response->get_error_message()]);
-        } else {
-            output_success(sprintf('woody_flush_cloudflare : %s', WOODY_CLOUDFLARE_URL));
-        }
+        woody_flush_cdn();
     }
 }

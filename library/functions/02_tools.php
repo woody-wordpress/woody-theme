@@ -224,7 +224,7 @@
 
 //     if (strpos($image_path, 'rc-dev') == false) {
 //         $hash_path = str_replace(array("+", "/"), array("-", "_"), base64_encode($image_path));
-//         $image_croped_path = 'https://api.cloudly.space/resize/crop/' . $width . '/' . $height . '/' . $quality . '/' . $hash_path . '/image.jpg';
+//         $image_croped_path = 'https://api.cloudly.space/resize/crop/' . $width . '/' . $height . '/' . $quality . '/' . $hash_path . '/image.webp';
 //     } else {
 //         $image_croped_path = $image_path;
 //     }
@@ -255,7 +255,7 @@ function rc_curl($url)
     $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
 
-    if ($httpcode>=200 && $httpcode<300) {
+    if ($httpcode >= 200 && $httpcode < 300) {
         return $data;
     }
 }
@@ -266,7 +266,7 @@ function rc_curl($url)
 * @param  string $charset [Charset]
 * @return string          [Alias de la chaine d'origine]
 */
-function rc_getAlias($str, $charset='utf-8')
+function rc_getAlias($str, $charset = 'utf-8')
 {
     $str = htmlentities($str, ENT_NOQUOTES, $charset);
     $str = preg_replace('#&([A-za-z])(?:acute|cedil|caron|circ|grave|orn|ring|slash|th|tilde|uml);#', '\1', $str);
@@ -327,46 +327,46 @@ function rc_domnodeToArray($node)
     switch ($node->nodeType) {
         case XML_CDATA_SECTION_NODE:
         case XML_TEXT_NODE:
-        $output = trim($node->textContent);
-        break;
+            $output = trim($node->textContent);
+            break;
         case XML_ELEMENT_NODE:
-        for ($i=0, $m=$node->childNodes->length; $i<$m; ++$i) {
-            $child = $node->childNodes->item($i);
-            $v = rc_domnodeToArray($child);
-            if (property_exists($child, 'tagName') && $child->tagName !== null) {
-                $t = $child->tagName;
-                if (!isset($output[$t])) {
-                    $output[$t] = [];
-                }
+            for ($i = 0, $m = $node->childNodes->length; $i < $m; ++$i) {
+                $child = $node->childNodes->item($i);
+                $v = rc_domnodeToArray($child);
+                if (property_exists($child, 'tagName') && $child->tagName !== null) {
+                    $t = $child->tagName;
+                    if (!isset($output[$t])) {
+                        $output[$t] = [];
+                    }
 
-                $output[$t][] = $v;
-            } elseif ($v || $v === '0') {
-                $output = (string) $v;
-            }
-        }
-
-        if ($node->attributes->length && !is_array($output)) { //Has attributes but isn't an array
-            $output = array('@content'=>$output); //Change output into an array.
-        }
-
-        if (is_array($output)) {
-            if ($node->attributes->length) {
-                $a = [];
-                foreach ($node->attributes as $attrName => $attrNode) {
-                    $a[$attrName] = (string) $attrNode->value;
-                }
-
-                $output['@attributes'] = $a;
-            }
-
-            foreach ($output as $t => $v) {
-                if (is_array($v) && count($v)==1 && $t != '@attributes') {
-                    $output[$t] = $v[0];
+                    $output[$t][] = $v;
+                } elseif ($v || $v === '0') {
+                    $output = (string) $v;
                 }
             }
-        }
 
-        break;
+            if ($node->attributes->length && !is_array($output)) { //Has attributes but isn't an array
+                $output = array('@content' => $output); //Change output into an array.
+            }
+
+            if (is_array($output)) {
+                if ($node->attributes->length) {
+                    $a = [];
+                    foreach ($node->attributes as $attrName => $attrNode) {
+                        $a[$attrName] = (string) $attrNode->value;
+                    }
+
+                    $output['@attributes'] = $a;
+                }
+
+                foreach ($output as $t => $v) {
+                    if (is_array($v) && count($v) == 1 && $t != '@attributes') {
+                        $output[$t] = $v[0];
+                    }
+                }
+            }
+
+            break;
     }
 
     return $output;

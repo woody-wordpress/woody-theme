@@ -117,7 +117,7 @@ class WoodyTheme_WoodyGetters
                 if ($item_wrapper['content_selection_type'] == 'custom_content' && !empty($item_wrapper['custom_content'])) {
                     $the_items['items'][$key] = $this->getCustomPreview($item_wrapper['custom_content'], $wrapper, $item_wrapper['content_selection_type']);
                     $the_items['items'][$key]['real_index'] = $key;
-                    // La donnée de la vignette correspond à un post sélectionné
+                // La donnée de la vignette correspond à un post sélectionné
                 } elseif ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
                     $item = $item_wrapper['existing_content'];
                     $post = get_post($item['content_selection']);
@@ -133,7 +133,7 @@ class WoodyTheme_WoodyGetters
                                 $post_preview = $this->getPagePreview($wrapper, $post, $clickable);
                                 break;
                             default:
-                                $post_preview = apply_filters( 'woody_custom_manual_focus', $post->ID, $wrapper);
+                                $post_preview = apply_filters('woody_custom_manual_focus', $post->ID, $wrapper);
                                 break;
                         }
 
@@ -749,7 +749,7 @@ class WoodyTheme_WoodyGetters
 
                 if ($today < $enddate) {
                     $data['date'] = $date;
-                    $data['date']['display_year'] = !empty($date['end']['year']) && $date['end']['year'] > $current_year  ? true : false;
+                    $data['date']['display_year'] = !empty($date['end']['year']) && $date['end']['year'] > $current_year ? true : false;
                     break 1 ;
                 }
             }
@@ -789,7 +789,7 @@ class WoodyTheme_WoodyGetters
         $woody_topic_attachment = get_field('woody_topic_attachment', $post->ID);
         if (!empty($woody_topic_img) && !$woody_topic_attachment) {
             $data['img'] = [
-                'url' =>  'https://api.cloudly.space/resize/crop/%width%/%height%/75/' .  str_replace(array("+", "/"), array("-", "_"), base64_encode($woody_topic_img)) . '/image.jpg',
+                'url' =>  'https://api.cloudly.space/resize/crop/%width%/%height%/75/' .  str_replace(array("+", "/"), array("-", "_"), base64_encode($woody_topic_img)) . '/image.webp',
                 'resizer' => true
             ];
         } elseif (!empty($woody_topic_attachment)) {
@@ -1074,23 +1074,23 @@ class WoodyTheme_WoodyGetters
                     case 'created_desc':
                         $args['orderby'] = 'date';
                         $args['order'] = 'DESC';
-                    break;
+                        break;
                     case 'created_asc':
                         $args['orderby'] = 'date';
                         $args['order'] = 'ASC';
-                    break;
+                        break;
                     case 'alphabetical_order':
                         $args['orderby'] = 'title';
                         $args['order'] = 'ASC';
-                    break;
+                        break;
                     case 'random':
                         $args['orderby'] = 'rand';
                         $args['order'] = 'ASC';
-                     break;
+                        break;
                     default:
                         $args['orderby'] = 'rand';
                         $args['order'] = 'ASC';
-                    break;
+                        break;
                 }
             }
 
