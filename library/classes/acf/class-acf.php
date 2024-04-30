@@ -34,7 +34,7 @@ class WoodyTheme_ACF
 
         add_action('acf/init', [$this, 'registerHooksAfterAcfInit']);
 
-        add_action('acf/save_post', [$this, 'clearVarnishCache'], 20);
+        add_action('acf/save_post', [$this, 'clearVarnishCDNCache'], 20);
 
         add_filter('acf/settings/load_json', [$this, 'acfJsonLoad']);
         add_filter('woody_acf_save_paths', [$this, 'acfJsonSave']);
@@ -312,7 +312,7 @@ class WoodyTheme_ACF
         return $paths;
     }
 
-    public function clearVarnishCache()
+    public function clearVarnishCDNCache()
     {
         $screen = get_current_screen();
         if (!empty($screen->id) && strpos($screen->id, 'acf-options') !== false) {
