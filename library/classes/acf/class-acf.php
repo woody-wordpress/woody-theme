@@ -34,7 +34,7 @@ class WoodyTheme_ACF
 
         add_action('acf/init', [$this, 'registerHooksAfterAcfInit']);
 
-        add_action('acf/save_post', [$this, 'clearVarnishCDNCache'], 20);
+        add_action('acf/save_post', [$this, 'clearVarnishCache'], 20);
 
         add_filter('acf/settings/load_json', [$this, 'acfJsonLoad']);
         add_filter('woody_acf_save_paths', [$this, 'acfJsonSave']);
@@ -312,13 +312,12 @@ class WoodyTheme_ACF
         return $paths;
     }
 
-    public function clearVarnishCDNCache()
+    public function clearVarnishCache()
     {
         $screen = get_current_screen();
         if (!empty($screen->id) && strpos($screen->id, 'acf-options') !== false) {
             // Purge all varnish cache on save menu
-            woody_flush_varnish();
-            woody_flush_cdn();
+            do_action('woody_flush_varnish');
         }
     }
 
@@ -1425,10 +1424,7 @@ class WoodyTheme_ACF
                 update_option('woody_season_priority', $current_season_field);
 
                 // On flush le varnish
-                woody_flush_varnish();
-
-                // On flush le cdn
-                woody_flush_cdn();
+                do_action('woody_flush_varnish');
 
                 // On lance un rsdu
                 do_action('woody_async_add', 'woody_hawwwai_update_all_canonicals');
