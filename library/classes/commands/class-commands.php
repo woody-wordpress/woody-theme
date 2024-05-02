@@ -28,7 +28,6 @@ class WoodyTheme_Commands
         \WP_CLI::add_command('woody_flush_core', [$this, 'flush_core']);
         \WP_CLI::add_command('woody_flush_site', [$this, 'flush_site']);
         \WP_CLI::add_command('woody_flush_twig', [$this, 'flush_twig']);
-        \WP_CLI::add_command('woody_flush_varnish', [$this, 'flush_varnish']);
         \WP_CLI::add_command('woody_cache_warm', [$this, 'cache_warm']);
         \WP_CLI::add_command('woody_maintenance', [$this, 'maintenance']);
         \WP_CLI::add_command('woody_maintenance_core', [$this, 'maintenance_core']);
