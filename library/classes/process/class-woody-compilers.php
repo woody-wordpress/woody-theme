@@ -361,7 +361,6 @@ class WoodyTheme_WoodyCompilers
         if ($paginate) {
             $the_list['pager_position'] = $wrapper['the_list_pager']['list_pager_position'];
         }
-
         // On récupère les champs du formulaire de requete du backoffice
         $list_el_wrapper = $wrapper['the_list_elements']['list_el_req_fields'];
 
@@ -502,6 +501,13 @@ class WoodyTheme_WoodyCompilers
         // Récupère la pagination compilée
         if ($paginate && !empty($the_items['max_num_pages'])) {
             $the_list['pager'] = $this->formatListPager($the_items['max_num_pages'], $wrapper['uniqid'], $list_el_wrapper['seed']);
+        }
+
+        if (!empty($wrapper['analytics_event'])) {
+            $the_list['analytics'] = [
+                'name' => $wrapper['analytics_event'],
+                'event' => str_replace('-', '_', sanitize_title($wrapper['analytics_event']))
+            ];
         }
 
         return \Timber::compile($twigPaths[$wrapper['the_list_filters']['listfilter_woody_tpl']], $the_list);
