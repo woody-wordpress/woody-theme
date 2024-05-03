@@ -60,7 +60,7 @@ class WoodyTheme_Roles
         add_role('redactor', 'Rédacteur');
         add_role('contributor', 'Contributeur');
         add_role('translator', 'Traducteur');
-        add_role('mediatheque','Médiathèque');
+        add_role('mediatheque', 'Médiathèque');
     }
 
     public function authCookieExpirationFilter($expiration, $user_id, $remember)
@@ -1083,10 +1083,12 @@ class WoodyTheme_Roles
         foreach ($capabilities as $capability => $roles) {
             foreach ($roles as $role => $boolean) {
                 $current_role = get_role($role);
-                if ($boolean) {
-                    $current_role->add_cap($capability);
-                } else {
-                    $current_role->remove_cap($capability);
+                if(!empty($current_role)) {
+                    if ($boolean) {
+                        $current_role->add_cap($capability);
+                    } else {
+                        $current_role->remove_cap($capability);
+                    }
                 }
             }
         }
