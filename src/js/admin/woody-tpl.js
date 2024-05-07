@@ -163,7 +163,7 @@ $('#post').each(function () {
         var getFilters = function (group) {
             var theFilters = 'none';
             // On récupère et on append les filtres en fonctjon du type de bloc actif
-            if (group == 'group_5b0d1ed32a384' || group == 'group_5b2788b48d04c' || group == 'group_5d7908eadaa46' || group == 'group_5b33890e6fa0b' || group == 'field_5d16118093cc1') {
+            if (group == 'group_5b0d1ed32a384' || group == 'group_5b2788b48d04c' || group == 'group_5d7908eadaa46' || group == 'group_5b33890e6fa0b' || group == 'field_5d16118093cc1' || group == 'group_manual_leaflets_shared') {
                 theFilters = fieldKeysFilters.focuses;
             } else if (group == 'group_5b04314e0ec21') {
                 theFilters = fieldKeysFilters.galleries;
