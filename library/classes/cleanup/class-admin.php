@@ -119,11 +119,6 @@ class WoodyTheme_Cleanup_Admin
         $wp_admin_bar->remove_node('new-post');
         $wp_admin_bar->remove_node('new-touristic_sheet');
 
-        $post_type = get_post_type(get_the_ID());
-        if ($post_type == 'touristic_sheet') {
-            $wp_admin_bar->remove_node('edit');
-        }
-
         // Modification du lien de l'entrée "Créer"
         $new_content_node = $wp_admin_bar->get_node('new-content');
         if (!empty($new_content_node)) {
@@ -143,7 +138,6 @@ class WoodyTheme_Cleanup_Admin
         if (!in_array('administrator', $user->roles)) {
             remove_menu_page('themes.php'); // Apparence
             remove_menu_page('profile.php'); // Profil
-            remove_menu_page('edit.php?post_type=touristic_sheet'); // Fiches SIT
         }
 
         if (!in_array('administrator', $user->roles) && !in_array('editor', $user->roles)) {

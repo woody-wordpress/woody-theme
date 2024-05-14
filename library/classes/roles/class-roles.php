@@ -60,6 +60,7 @@ class WoodyTheme_Roles
         add_role('redactor', 'Rédacteur');
         add_role('contributor', 'Contributeur');
         add_role('translator', 'Traducteur');
+        add_role('mediatheque', 'Médiathèque');
     }
 
     public function authCookieExpirationFilter($expiration, $user_id, $remember)

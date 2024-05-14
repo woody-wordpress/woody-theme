@@ -6,6 +6,7 @@
             "key": "field_5bc6ed66bea43",
             "label": "Elements à lister",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -22,6 +23,7 @@
             "key": "field_5bc6ecfbbea42",
             "label": "Elements",
             "name": "the_list_elements",
+            "aria-label": "",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -43,6 +45,7 @@
             "key": "field_5bc6ed7ebea44",
             "label": "Filtres",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -59,6 +62,7 @@
             "key": "field_5bc6ed8ebea45",
             "label": "Filtres",
             "name": "the_list_filters",
+            "aria-label": "",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -80,6 +84,7 @@
             "key": "field_5bc6edeebea46",
             "label": "Pagination",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -96,6 +101,7 @@
             "key": "field_5bc6ee1abea47",
             "label": "Pagination",
             "name": "the_list_pager",
+            "aria-label": "",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -117,6 +123,7 @@
             "key": "field_61d419c11e776",
             "label": "Responsive",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -133,6 +140,7 @@
             "key": "field_61d419c91e777",
             "label": "Afficher le bloc",
             "name": "",
+            "aria-label": "",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -144,6 +152,45 @@
             },
             "clone": [
                 "group_61d30e86c3313"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
+        },
+        {
+            "key": "field_6630bf5dbc411",
+            "label": "Analytics",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6630bf6bbc412",
+            "label": "Analytics",
+            "name": "analytics",
+            "aria-label": "",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_650af2b6912f0"
             ],
             "display": "seamless",
             "layout": "block",
@@ -168,5 +215,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "Rassemblement des elements, filtres et templates des listes de contenu",
-    "modified": 1641290208
+    "show_in_rest": 0,
+    "modified": 1714470830
 }
