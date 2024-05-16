@@ -510,6 +510,13 @@ class WoodyTheme_WoodyCompilers
             $the_list['pager'] = $this->formatListPager($the_items['max_num_pages'], $wrapper['uniqid'], $list_el_wrapper['seed']);
         }
 
+        if (!empty($wrapper['analytics_event'])) {
+            $the_list['analytics'] = [
+                'name' => $wrapper['analytics_event'],
+                'event' => str_replace('-', '_', sanitize_title($wrapper['analytics_event']))
+            ];
+        }
+
         return \Timber::compile($twigPaths[$wrapper['the_list_filters']['listfilter_woody_tpl']], $the_list);
     }
 
