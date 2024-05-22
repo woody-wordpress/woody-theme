@@ -41,7 +41,8 @@ Foundation.addToJquery($);
 // Foundation.plugin(Abide, 'Abide');
 
 // ------------------------------------------------------------------
-// L'instanciation des accordions est faites depuis Woody Library (accordion.js) pour le support des ancres dans les accordions
+// TODO: L'instanciation des accordions était faites depuis Woody Library (accordion.js) pour le support des ancres dans les accordions
+// Cela ne fonctionnait plus avec la nouvelle compilation JS. A voir pour le remettre en place
 // ------------------------------------------------------------------
 import { Accordion } from 'foundation-sites/js/foundation.accordion';
 Foundation.plugin(Accordion, 'Accordion');
