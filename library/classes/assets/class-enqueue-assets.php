@@ -129,7 +129,7 @@ class WoodyTheme_Enqueue_Assets
         }
 
         $importmap = apply_filters('woody_importmap_js', [
-            'jquery' => get_template_directory_uri() . '/src/lib/custom/jquery@' . $jQuery_version . '.min.mjs?' . $this->wThemeVersion,
+            'jquery' => get_template_directory_uri() . '/src/lib/custom/jquery@' . $jQuery_version . '.min.mjs',
         ]);
 
         if(!empty($importmap)) {
@@ -211,7 +211,7 @@ class WoodyTheme_Enqueue_Assets
             $jQuery_version = '3.7.1';
         }
 
-        wp_enqueue_script('jquery', get_template_directory_uri() . '/src/lib/custom/jquery@' . $jQuery_version . '.min.mjs', [], $this->wThemeVersion); // TODO: Latest 3.7.1
+        wp_enqueue_script('jquery', get_template_directory_uri() . '/src/lib/custom/jquery@' . $jQuery_version . '.min.mjs', [], null); // TODO: Latest 3.7.1
         wp_add_inline_script('jquery', 'window.siteConfig = ' . json_encode($this->siteConfig, JSON_THROW_ON_ERROR) . ';', 'before');
 
         if (!$this->isTouristicSheet || defined('IS_WOODY_HAWWWAI_SHEET_ENABLE')) {
