@@ -979,6 +979,7 @@
                     }
                 }
 
+                &[data-layout="snowflake_resort_messages"],
                 &[data-layout='snowflake_weather_bulletin'] {
                     &:before {
                         content: '\f121';
