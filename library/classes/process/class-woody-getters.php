@@ -750,6 +750,9 @@ class WoodyTheme_WoodyGetters
                 if ($today < $enddate) {
                     $data['date'] = $date;
                     $data['date']['display_year'] = !empty($date['end']['year']) && $date['end']['year'] > $current_year ? true : false;
+                    if (!empty($data['date']['display_year']) && empty($data['date']['start']['year'])) {
+                        $data['date']['start']['year'] = formatDate($data['date']['start']['startDate'], 'Y');
+                    }
                     break 1 ;
                 }
             }
