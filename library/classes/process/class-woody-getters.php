@@ -692,6 +692,7 @@ class WoodyTheme_WoodyGetters
             }
 
             if (in_array('price', $wrapper['display_elements'])) {
+                $data['the_price']['free'] = isset($sheet_item['tariffs']['price']) && $sheet_item['tariffs']['price'] == '0';
                 $data['the_price']['price'] = (empty($sheet_item['tariffs']['price'])) ? '' : $sheet_item['tariffs']['price'];
                 $data['the_price']['prefix_price'] = (empty($sheet_item['tariffs']['label'])) ? '' : $sheet_item['tariffs']['label'];
             }
