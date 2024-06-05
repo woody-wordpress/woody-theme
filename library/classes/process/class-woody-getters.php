@@ -692,6 +692,7 @@ class WoodyTheme_WoodyGetters
             }
 
             if (in_array('price', $wrapper['display_elements'])) {
+                $data['the_price']['free'] = isset($sheet_item['tariffs']['price']) && $sheet_item['tariffs']['price'] == '0';
                 $data['the_price']['price'] = (empty($sheet_item['tariffs']['price'])) ? '' : $sheet_item['tariffs']['price'];
                 $data['the_price']['prefix_price'] = (empty($sheet_item['tariffs']['label'])) ? '' : $sheet_item['tariffs']['label'];
             }
@@ -749,7 +750,11 @@ class WoodyTheme_WoodyGetters
 
                 if ($today < $enddate) {
                     $data['date'] = $date;
+                    $data['date']['display_time'] = false;
                     $data['date']['display_year'] = !empty($date['end']['year']) && $date['end']['year'] > $current_year ? true : false;
+                    if (!empty($data['date']['display_year']) && empty($data['date']['start']['year'])) {
+                        $data['date']['start']['year'] = formatDate($data['date']['start']['startDate'], 'Y');
+                    }
                     break 1 ;
                 }
             }
