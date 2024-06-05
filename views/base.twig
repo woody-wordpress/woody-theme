@@ -46,7 +46,9 @@
     {% if icons %}
     <link rel="shortcut icon" type="image/x-icon" href="{{ icons.favicon }}"> {# Favicon ICO #}
     <link rel="shortcut icon" type="image/png" href="{{ icons.64 }}"> {# Favicon #}
-    <link rel="apple-touch-icon" href="{{ icons.120 }}"> {# iPhone #}
+    <link rel="apple-touch-icon" sizes="32x32" href="{{ icons.32 }}"> 
+    <link rel="apple-touch-icon" sizes="64x64" href="{{ icons.64 }}"> 
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ icons.120 }}"> {# iPhone #}
     <link rel="apple-touch-icon" sizes="180x180" href="{{ icons.180 }}"> {# iPhone retina #}
     <link rel="apple-touch-icon" sizes="152x152" href="{{ icons.152 }}"> {# iPad #}
     <link rel="apple-touch-icon" sizes="167x167" href="{{ icons.167 }}"> {# iPad retina #}
