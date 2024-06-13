@@ -48,6 +48,7 @@ class WoodyTheme_Robots
                 'Disallow: /api/myaccount',
                 'Disallow: /api/content/ts/*/sheets',
                 'Disallow: /wp-json/woody/crop-url/*',
+                'Disallow: /woody_model/'
             ];
 
             // Define sitemap urls based on WOODY_PERMALINK_STRUCTURE
