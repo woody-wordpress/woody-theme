@@ -213,9 +213,6 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
     protected function commonContext()
     {
         $this->context['page_terms'] = implode(' ', getPageTerms($this->context['post_id']));
-        // TODO : Trouver toutes les utilisation du default marker et modifier/déplacer cette ligne
-        $this->context['default_marker'] = file_get_contents($this->context['dist_dir'] . '/img/default-marker.svg');
-
         $this->context['hide_page_zones'] = get_field('hide_page_zones');
         if (is_array($this->context['hide_page_zones'])) {
             if (in_array('header', $this->context['hide_page_zones'])) {

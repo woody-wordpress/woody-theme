@@ -143,6 +143,14 @@ abstract class WoodyTheme_TemplateAbstract
             $this->globals['site_key'] = WP_SITE_KEY;
         }
 
+        if (empty($this->globals['dist_dir'])) {
+            $this->globals['dist_dir'] = WP_DIST_DIR;
+        }
+
+        if (empty($this->globals['dist_url'])) {
+            $this->globals['dist_url'] = WP_DIST_URL;
+        }
+
         if (!empty($data['is_mobile']) && is_bool($data['is_mobile'])) {
             $this->globals['is_mobile'] = $data['is_mobile'];
         } elseif (empty($this->globals['is_mobile'])) {

@@ -69,7 +69,7 @@ class WoodyTheme_WoodyCompilers
                 $the_items = $this->getter->getProfileFocusData($wrapper);
                 break;
             default:
-                $the_items = apply_filters( 'woody_custom_focus_items', [], $wrapper );
+                $the_items = apply_filters('woody_custom_focus_items', [], $wrapper);
         }
 
         $the_items['alert'] = apply_filters('add_admin_alert_message', '');
@@ -89,7 +89,6 @@ class WoodyTheme_WoodyCompilers
             $the_items['no_padding'] = (empty($wrapper['focus_no_padding'])) ? '' : $wrapper['focus_no_padding'];
             $the_items['display_button'] = (empty($wrapper['display_button'])) ? false : $wrapper['display_button'];
             $the_items['display_img'] = (empty($wrapper['display_img'])) ? false : $wrapper['display_img'];
-            $the_items['default_marker'] = (empty($wrapper['default_marker'])) ? '' : $wrapper['default_marker'];
             $the_items['visual_effects'] = $wrapper['visual_effects'];
             $the_items['display_index'] = (empty($wrapper['display_index'])) ? false : $wrapper['display_index'];
             $the_items['display_sessions'] = (empty($wrapper['display_sessions'])) ? false : $wrapper['display_sessions'];
@@ -240,7 +239,6 @@ class WoodyTheme_WoodyCompilers
             // Get markers
             foreach ($wrapper['markers'] as $key => $marker) {
                 $the_marker = [];
-                $marker['default_marker'] = $wrapper['default_marker'];
                 if (empty($marker['title']) && empty($marker['description']) && empty($marker['img']) && !empty($marker['link']['url'])) {
                     $wrapper['markers'][$key]['marker_as_link'] = true;
                 }
@@ -283,8 +281,7 @@ class WoodyTheme_WoodyCompilers
             foreach ($wrapper['semantic_view_include'] as $included_id) {
                 $the_query['post__in'][] = $included_id;
             }
-        }
-        else {
+        } else {
             $parent_id = $wrapper['semantic_view_type'] == 'sisters' ? wp_get_post_parent_id($post_id) : $post_id;
 
             if (!empty($wrapper['semantic_view_page_types'])) {
@@ -500,7 +497,7 @@ class WoodyTheme_WoodyCompilers
             if (isset($the_list['filters']['the_map'])) {
                 $map_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid'], true, $default_items_ids, $wrapper['the_list_filters']);
 
-                $the_list['filters']['the_map']['markers'] = $this->formatListMapFilter($map_items, $wrapper['default_marker'], $twigPaths);
+                $the_list['filters']['the_map']['markers'] = $this->formatListMapFilter($map_items, $twigPaths);
                 $the_list['has_map'] = true;
             }
         }
@@ -560,7 +557,7 @@ class WoodyTheme_WoodyCompilers
      * @param   uniqid          section id of list content
      * @return  return          pagination html elements
      */
-    public function formatListMapFilter($items, $marker, $twigPaths)
+    public function formatListMapFilter($items, $twigPaths)
     {
         $return = [];
 
@@ -582,7 +579,7 @@ class WoodyTheme_WoodyCompilers
                             'lat' => $item['location']['lat'],
                             'lng' => $item['location']['lng']
                         ],
-                        'compiled_marker' => $marker,
+                        'compiled_marker' => '', //TODO: anciennement default_marker
                         'marker_thumb_html' => \Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker)
                     ];
                 }
@@ -699,7 +696,7 @@ class WoodyTheme_WoodyCompilers
 
             //Add Profil expression category if checked
             if (!empty($page_teaser['profile']['use_profile_expression']) && !empty($page_teaser['profile']['profile_expression'])) {
-                $profile_expressions=$this->getter->getProfileExpressions($page_teaser['profile']['profile_post'], $page_teaser['profile']['profile_expression']);
+                $profile_expressions = $this->getter->getProfileExpressions($page_teaser['profile']['profile_post'], $page_teaser['profile']['profile_expression']);
             }
 
             $page_teaser['profile'] = [
@@ -761,7 +758,7 @@ class WoodyTheme_WoodyCompilers
                 }
             }
 
-            $page_hero['isfrontpage']= !empty(get_option('page_on_front')) && get_option('page_on_front') == pll_get_post($context['post_id']) ;
+            $page_hero['isfrontpage'] = !empty(get_option('page_on_front')) && get_option('page_on_front') == pll_get_post($context['post_id']) ;
             $page_hero['title'] = (empty($page_hero['title'])) ? '' : $this->tools->replacePattern($page_hero['title'], $context['post_id']);
             $page_hero['pretitle'] = (empty($page_hero['pretitle'])) ? '' : $this->tools->replacePattern($page_hero['pretitle'], $context['post_id']);
             $page_hero['subtitle'] = (empty($page_hero['subtitle'])) ? '' : $this->tools->replacePattern($page_hero['subtitle'], $context['post_id']);

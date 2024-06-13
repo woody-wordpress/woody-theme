@@ -78,8 +78,6 @@ class WoodyTheme_WoodyProcess
     {
         $return = '';
 
-        $layout['default_marker'] = empty($context['default_marker']) ? '' : $context['default_marker'];
-
         // Traitements spécifique en fonction du type de layout
         switch ($layout['acf_fc_layout']) {
             case 'manual_focus':

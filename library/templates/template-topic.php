@@ -62,8 +62,6 @@ class WoodyTheme_Template_Topic extends WoodyTheme_TemplateAbstract
 
         // Set a global dist dir
         $this->context['dist_dir'] = WP_DIST_DIR;
-        $this->context['default_marker'] = file_get_contents($this->context['dist_dir'] . '/img/default-marker.svg');
-
         $this->context['woody_components'] = getWoodyTwigPaths();
 
         $this->context['sections'] = [];
