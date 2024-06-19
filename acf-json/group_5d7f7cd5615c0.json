@@ -479,6 +479,13 @@
                 "operator": "==",
                 "value": "touristic_sheet"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "woody_rdbk_leaflets"
+            }
         ]
     ],
     "menu_order": 180,
