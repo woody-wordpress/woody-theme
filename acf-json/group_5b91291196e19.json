@@ -109,6 +109,37 @@
                     "min": "",
                     "max": ""
                 },
+                "layout_666c48b35c13f": {
+                    "key": "layout_666c48b35c13f",
+                    "name": "profile_focus",
+                    "label": "Mise en avant de profils",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_666c4907bc1cc",
+                            "label": "Mise en avant de profils",
+                            "name": "profile_focus",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5ee8db016740c"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
                 "layout_5b912c0659c2c": {
                     "key": "layout_5b912c0659c2c",
                     "name": "free_text",
