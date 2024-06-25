@@ -830,6 +830,65 @@ class WoodyTheme_WoodyGetters
         return $data;
     }
 
+    /**
+     * @author Orphée Besson
+     * @param   wrapper - Données du layout acf sous forme de tableau
+     * @param   post_id - ID du post
+     * @return  data - Un tableau de données
+     */
+    public function getYoubookPreview($wrapper, $post_id)
+    {
+        $data = [];
+
+        if(!empty($post_id) || is_numeric($post_id)) {
+            $post_id = is_int($post_id) ? $post_id : $post_id['post_id'];
+            $product = woody_youbook_item($post_id);
+            $explode = explode('/', $product['images'][0]['url']);
+            $data = [
+                'page_type' => 'youbook',
+                'product_id' => $product['id'],
+                'title' => $product['name'],
+                'img' => [
+                    'url' => 'https://api.cloudly.space/resize/crop/%width%/%height%/75/'.base64_encode($product['images'][0]['url']).'/'.end($explode),
+                    'resizer' => true,
+                    'alt' => $product['name'],
+                ],
+            ];
+
+            if(in_array('description', $wrapper['display_elements']) && (!empty($product['descriptions']) && !empty($product['descriptions'][0]) && !empty($product['descriptions'][0]['content']))) {
+                $data['description'] = $product['descriptions'][0]['content'];
+            }
+
+            if(is_array($product['meetingPoint']['location']) && !empty($product['meetingPoint']['location']['locality']) && in_array('town', $wrapper['display_elements'])) {
+                $data['sheet_town'] = $product['meetingPoint']['location']['locality'];
+            }
+
+            $data['display_button'] = true;
+            $data['link'] = [
+                'title' => __('Réserver', 'woody-theme'),
+                'url' => woody_get_permalink($post_id),
+                'target' => '_blank'
+            ];
+
+            if(!empty($product['priceFrom']) && in_array('price', $wrapper['display_elements'])) {
+                $data['the_price'] = [
+                    'price' => $product['priceFrom'],
+                    'prefix_price' => true,
+                    'suffix_price' => __('par personne', 'woody-theme'),
+                    'currency' => [
+                        'label' => !empty($product['currency']) && $product['currency'] === 'EUR' ? '€' : ''
+                    ]
+                ];
+            }
+
+            if(in_array('display_button', $wrapper)) {
+                $data['link']['link_label'] = __('Réserver', 'woody-theme');
+            }
+        }
+
+        return $data;
+    }
+
     public function getListFilters($filter_wrapper, $active_filters, $default_items)
     {
         $return = [];
