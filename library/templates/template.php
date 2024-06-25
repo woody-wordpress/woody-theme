@@ -774,7 +774,7 @@ abstract class WoodyTheme_TemplateAbstract
                 // Add to graph
                 $schema_graph["@graph"][] = $touristic_center;
             }
-        } else {
+        } elseif(!empty($this->context['post'])) {
             $schema_type = get_field('woodyseo_schema_type');
             $schema_type = (empty($schema_type)) ? "WebPage" : $schema_type;
 
