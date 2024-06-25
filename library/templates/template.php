@@ -103,11 +103,11 @@ abstract class WoodyTheme_TemplateAbstract
             $this->globals['tags'] = $this->getTags($this->context['post_id']);
         }
 
-        if (empty($this->globals['areas'])) {
+        if (empty($this->globals['areas']) && !empty($this->context['post'])) {
             $this->globals['areas'] = apply_filters('woody_addon_search_list_areas', null, $this->context['post']);
         }
 
-        if (empty($this->globals['area'])) {
+        if (empty($this->globals['area']) && !empty($this->context['post'])) {
             $this->globals['area'] = apply_filters('woody_addon_search_area', null, $this->context['post']);
         }
 
@@ -131,7 +131,7 @@ abstract class WoodyTheme_TemplateAbstract
             $this->globals['languages'] = apply_filters('woody_pll_the_locales', null);
         }
 
-        if (empty($this->globals['ancestors'])) {
+        if (empty($this->globals['ancestors']) && !empty($this->context['post'])) {
             $this->globals['ancestors'] = $this->getAncestors($this->context['post']);
         }
 
@@ -774,7 +774,7 @@ abstract class WoodyTheme_TemplateAbstract
                 // Add to graph
                 $schema_graph["@graph"][] = $touristic_center;
             }
-        } else {
+        } elseif(!empty($this->context['post'])) {
             $schema_type = get_field('woodyseo_schema_type');
             $schema_type = (empty($schema_type)) ? "WebPage" : $schema_type;
 

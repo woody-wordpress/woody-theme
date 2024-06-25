@@ -5,7 +5,7 @@
 
     {% if globals.is_mobile == false %}
         {% if lang_switcher_button|default or es_search_button|default or subtheme_more_tools %}
-            <ul class="tools list-unstyled flex-container align-middle">
+            <ul class="tools list-unstyled flex-container align-middle show-for-xlarge">
                 {% if subtheme_more_tools %}
                     {% for tool in subtheme_more_tools %}
                         {% if not tool.is_mobile %}
@@ -62,7 +62,7 @@
 {{ page_parts.preloader|default }}
 
 {% if globals.is_mobile == true %}
-<div class="woody-component-mobilenavs">
+<div class="woody-component-mobilenavs hide-for-xlarge">
     {{ page_parts.mobile_menu|default }}
     <ul class="tools list-unstyled flex-container align-middle">
         {% if subtheme_more_tools %}
