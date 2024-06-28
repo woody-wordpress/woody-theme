@@ -863,6 +863,10 @@ class WoodyTheme_WoodyGetters
                 $data['sheet_town'] = $product['meetingPoint']['location']['locality'];
             }
 
+            if(!empty($wrapper['display_wishlist_button'])) {
+                $data['display_wishlist_button'] = true;
+            }
+
             $data['display_button'] = true;
             $data['link'] = [
                 'title' => __('Réserver', 'woody-theme'),
