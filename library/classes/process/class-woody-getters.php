@@ -863,8 +863,8 @@ class WoodyTheme_WoodyGetters
                 $data['sheet_town'] = $product['meetingPoint']['location']['locality'];
             }
 
-            if(!empty($wrapper['display_wishlist_button'])) {
-                $data['display_wishlist_button'] = true;
+            if(in_array('favorites', $wrapper['display_elements'])) {
+                $data['favorites'] = true;
             }
 
             $data['display_button'] = true;
@@ -890,7 +890,7 @@ class WoodyTheme_WoodyGetters
             }
         }
 
-        return $data;
+        return apply_filters('woody_custom_productPreview', $data, $wrapper, $post_id, $product);
     }
 
     public function getListFilters($filter_wrapper, $active_filters, $default_items)
