@@ -846,6 +846,7 @@ class WoodyTheme_WoodyGetters
             $explode = explode('/', $product['images'][0]['url']);
             $data = [
                 'page_type' => 'youbook',
+                'post_id' => $post_id,
                 'product_id' => $product['id'],
                 'title' => $product['name'],
                 'img' => [
