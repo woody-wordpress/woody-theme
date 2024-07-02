@@ -1,6 +1,6 @@
 {
     "key": "group_5b043614df4a6",
-    "title": "Boutons \/ Liens",
+    "title": "Boutons / Liens",
     "fields": [
         {
             "key": "field_65a4ebec339c0",
@@ -20,7 +20,7 @@
         },
         {
             "key": "field_5b0436150b9d4",
-            "label": "Boutons \/ Liens",
+            "label": "Boutons / Liens",
             "name": "links",
             "type": "repeater",
             "instructions": "",
@@ -58,7 +58,7 @@
                 },
                 {
                     "key": "field_5b0436670b9d6",
-                    "label": "Bouton \/ Lien",
+                    "label": "Bouton / Lien",
                     "name": "link",
                     "type": "clone",
                     "instructions": "",
@@ -69,9 +69,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "clone": [
-                        "group_5b0422e167d2a"
-                    ],
+                    "clone": ["group_5b0422e167d2a"],
                     "display": "seamless",
                     "layout": "block",
                     "prefix_label": 0,
@@ -129,6 +127,58 @@
             "save_other_choice": 0
         },
         {
+            "key": "field_6682ced8b1289",
+            "label": "Modifier l'alignement mobile",
+            "name": "mobile_align",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_6682ced15e49a",
+            "label": "Justification des liens en mobile",
+            "name": "mobile_justify",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6682ced8b1289",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "left": "Gauche",
+                "center": "Centré",
+                "right": "Droite"
+            },
+            "default_value": "center",
+            "return_format": "value",
+            "allow_null": 0,
+            "other_choice": 0,
+            "layout": "vertical",
+            "save_other_choice": 0
+        },
+        {
             "key": "field_65a4ebdcd5f7d",
             "label": "Analytics",
             "name": "",
@@ -157,9 +207,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "clone": [
-                "group_650af2b6912f0"
-            ],
+            "clone": ["group_650af2b6912f0"],
             "display": "seamless",
             "layout": "block",
             "prefix_label": 0,
@@ -182,6 +230,6 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
-    "description": "Répète le groupe \"Bouton \/ Lien\"",
+    "description": "Répète le groupe \"Bouton / Lien\"",
     "modified": 1641294658
 }
