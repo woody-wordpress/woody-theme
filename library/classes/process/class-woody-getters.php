@@ -126,6 +126,9 @@ class WoodyTheme_WoodyGetters
                             case 'touristic_sheet':
                                 $post_preview = $this->getTouristicSheetPreview($wrapper, $post);
                                 break;
+                            case 'youbook_product':
+                                $post_preview = $this->getYoubookPreview($wrapper, $post->ID);
+                                break;
                             case 'woody_topic':
                                 $post_preview = $this->getTopicPreview($wrapper, $post);
                                 break;
