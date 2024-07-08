@@ -27,6 +27,12 @@ function getTouristicSheetPreview($wrapper = null, $item)
     return $getter->getTouristicSheetPreview($wrapper, $item);
 }
 
+function getYoubookPreview($wrapper = null, $post_id)
+{
+    $getter = new WoodyTheme_WoodyGetters();
+    return $getter->getYoubookPreview($wrapper, $post_id);
+}
+
 function getAutoFocusSheetData($wrapper, $playlist_params = [])
 {
     $getter = new WoodyTheme_WoodyGetters();

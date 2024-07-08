@@ -576,6 +576,25 @@
             "ui_off_text": ""
         },
         {
+            "key": "field_668ba2f6e4a81",
+            "label": "Afficher les prochaines disponibilités",
+            "name": "display_sessions",
+            "type": "true_false",
+            "instructions": "<small>Uniquement pour les produits<\/small>",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "20",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_644103ac5f889",
             "label": "Live preview",
             "name": "live_preview",
