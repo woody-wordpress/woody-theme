@@ -267,9 +267,7 @@
                 "created": "Date de publication"
             },
             "allow_custom": 0,
-            "default_value": [
-                "description"
-            ],
+            "default_value": [],
             "layout": "horizontal",
             "toggle": 0,
             "return_format": "value",
@@ -360,7 +358,7 @@
                 "id": ""
             },
             "message": "",
-            "default_value": 1,
+            "default_value": 0,
             "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
