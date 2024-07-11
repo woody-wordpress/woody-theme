@@ -455,7 +455,6 @@
             },
             "allow_custom": 0,
             "default_value": [
-                "description",
                 "img"
             ],
             "layout": "horizontal",
@@ -532,7 +531,7 @@
                 "id": ""
             },
             "message": "",
-            "default_value": 1,
+            "default_value": 0,
             "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
