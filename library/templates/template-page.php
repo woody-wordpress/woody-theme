@@ -52,6 +52,8 @@ class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
         } else {
             $this->twig_tpl = 'page.twig';
         }
+
+        $this->twig_tpl = apply_filters('woody_twig_tpl', $this->twig_tpl);
     }
 
     protected function extendContext()
