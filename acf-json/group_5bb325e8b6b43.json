@@ -134,7 +134,7 @@
                         },
                         {
                             "key": "field_5bb3274577f3c",
-                            "label": "Image",
+                            "label": "Image Desktop",
                             "name": "landswpr_slide_img",
                             "aria-label": "",
                             "type": "image",
@@ -150,8 +150,8 @@
                                 ]
                             ],
                             "wrapper": {
-                                "width": "",
-                                "class": "hide-label",
+                                "width": "50",
+                                "class": "",
                                 "id": ""
                             },
                             "return_format": "array",
@@ -168,7 +168,7 @@
                         {
                             "key": "field_6686add5160d8",
                             "label": "Image Mobile",
-                            "name": "mobile_landswpr_slide_img",
+                            "name": "landswpr_slide_img_mobile",
                             "aria-label": "",
                             "type": "image",
                             "instructions": "",
@@ -183,7 +183,7 @@
                                 ]
                             ],
                             "wrapper": {
-                                "width": "40",
+                                "width": "50",
                                 "class": "",
                                 "id": ""
                             },
@@ -850,8 +850,7 @@
             "layout": "horizontal",
             "toggle": 0,
             "return_format": "value",
-            "save_custom": 0,
-            "custom_choice_button_text": "Ajouter un nouveau choix"
+            "save_custom": 0
         },
         {
             "key": "field_65d30ca5a731e",

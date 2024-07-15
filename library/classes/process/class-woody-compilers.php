@@ -901,13 +901,16 @@ class WoodyTheme_WoodyCompilers
                     $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_embed_thumbnail_url'] = embedProviderThumbnail($slide['landswpr_slide_media']['landswpr_slide_embed']);
                 }
 
-                if (!empty($slide['landswpr_slide_media']) && $slide['landswpr_slide_media']['landswpr_slide_media_type'] == 'img' && !empty($slide['landswpr_slide_media']['landswpr_slide_img'])) {
-                    $home_slider['landswpr_slides'][0]['landswpr_slide_media']['landswpr_slide_img']['lazy'] = apply_filters('woody_landswpr_slide_img_lazy', 'disabled');
-                    $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img']['attachment_more_data'] = $this->tools->getAttachmentMoreData($home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img']['ID']);
-                }
+                if (!empty($slide['landswpr_slide_media']) && $slide['landswpr_slide_media']['landswpr_slide_media_type'] == 'img') {
+                    if(!empty($slide['landswpr_slide_media']['landswpr_slide_img'])) {
+                        $home_slider['mobile_img_override_ratio'] = '';
+                        $home_slider['landswpr_slides'][0]['landswpr_slide_media']['landswpr_slide_img']['lazy'] = apply_filters('woody_landswpr_slide_img_lazy', 'disabled');
+                        $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img']['attachment_more_data'] = $this->tools->getAttachmentMoreData($home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img']['ID']);
+                    }
 
-                if (!empty($slide['landswpr_slide_media']) && $slide['landswpr_slide_media']['landswpr_slide_media_type'] == 'img' && !empty($slide['landswpr_slide_media']['mobile_landswpr_slide_img'])) {
-                    $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['mobile_landswpr_slide_img']['attachment_more_data'] = $this->tools->getAttachmentMoreData($home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['mobile_landswpr_slide_img']['ID']);
+                    if (!empty($slide['landswpr_slide_media']['landswpr_slide_img_mobile']) && is_array($slide['landswpr_slide_media']['landswpr_slide_img_mobile'])) {
+                        $home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img_mobile']['attachment_more_data'] = $this->tools->getAttachmentMoreData($home_slider['landswpr_slides'][$slide_key]['landswpr_slide_media']['landswpr_slide_img_mobile']['ID']);
+                    }
                 }
 
                 if (!empty($slide['landswpr_slide_add_social_movie']) && !empty($slide['landswpr_slide_social_movie'])) {
