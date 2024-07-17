@@ -93,6 +93,57 @@ class WoodyTheme_WoodyGetters
 
     /**
      *
+     * Nom : getMixedFocusData
+     * Auteur : Orphée Besson
+     * Return : Retourne un ensemble de posts sous forme de tableau avec une donnée compatbile Woody
+     * @param    current_post - Un objet Timber\Post
+     * @param    wrapper - Un tableau des champs
+     * @return   the_items - Tableau de contenus compilés + infos complémentaires
+     *
+     */
+    public function getMixedFocusData($current_post, $wrapper, $paginate = false, $uniqid = 0, $ingore_maxnum = false, $posts_in = null, $filters = null)
+    {
+        $the_items = [];
+        
+        console_log($wrapper, 'wrapper');
+
+        // Formatage des pages parentes (contenu manuel uniquement autorisé)
+        $the_items = $this->getManualFocusData($wrapper);
+
+        // Formatage des pages enfantes (contenu manuel ou automaique autorisé)
+        if(!empty($the_items) && !empty($the_items['items'])) {
+            foreach ($the_items['items'] as $key_parent_item => $parent_item) {
+                $the_items['items'][$key_parent_item]['children'] = [];
+                if (!empty($wrapper['content_selection'][$key_parent_item]) && !empty($wrapper['content_selection'][$key_parent_item]['subpages'])) {
+                    $subwrapper = $wrapper['content_selection'][$key_parent_item]['subpages'];
+
+                    // Contenu personnalisé
+                    if ($subwrapper['subpages_content_selection_type'] == 'custom_content' && !empty($subwrapper['custom_content'])) {
+                        console_log('passed custom content');
+                        // $the_items['items'][$key] = $this->getCustomPreview($subwrapper['custom_content'], $wrapper, $subwrapper['subpages_content_selection_type']);
+                        // $the_items['items'][$key]['real_index'] = $key;
+                    // Contenu existant
+                    } elseif ($subwrapper['subpages_content_selection_type'] == 'existing_content' && !empty($subwrapper['existing_content']['content_selection'])) {
+                        console_log('passed existing content');
+                        // Contenu automatique
+                    } elseif ($subwrapper['subpages_content_selection_type'] == 'auto_content' && !empty($subwrapper['auto_content'])) {
+                        console_log('passed auto content');
+                        // On récupère les variables utiles à la query et on les merge dans un seul tableau
+                        $params = empty($subwrapper['auto_content']) ? $subwrapper : array_merge($subwrapper, $subwrapper['auto_content']);
+                        unset($params['auto_content']);
+                        $the_items['items'][$key_parent_item]['children'] = $this->getAutoFocusData($current_post, $params, $paginate, $uniqid, $ingore_maxnum, $posts_in, $filters);
+                    }
+
+                    $the_items['items'][$key_parent_item]['children']['wrapper'] = $subwrapper;
+                }
+            }
+        }
+
+        return $the_items;
+    }
+
+    /**
+     *
      * Nom : getManualFocus_data
      * Auteur : Benoit Bouchaud
      * Return : Retourne un ensemble de posts sous forme de tableau avec une donnée compatbile Woody

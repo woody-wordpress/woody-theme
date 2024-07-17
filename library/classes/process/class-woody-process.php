@@ -84,6 +84,7 @@ class WoodyTheme_WoodyProcess
         switch ($layout['acf_fc_layout']) {
             case 'manual_focus':
             case 'auto_focus':
+            case 'mixed_focus':
             case 'auto_focus_sheets':
             case 'auto_focus_topics':
             case 'focus_trip_components':

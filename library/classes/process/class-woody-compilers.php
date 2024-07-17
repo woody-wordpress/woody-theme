@@ -56,6 +56,10 @@ class WoodyTheme_WoodyCompilers
             case 'auto_focus':
                 $the_items = $this->getter->getAutoFocusData($current_post, $wrapper);
                 break;
+            case 'mixed_focus':
+                $the_items = $this->getter->getMixedFocusData($current_post, $wrapper);
+                console_log($the_items, '$the_items first');
+                break;
             case 'auto_focus_sheets':
                 if (!empty($wrapper['playlist_conf_id'])) {
                     $the_items = $this->getter->getAutoFocusSheetData($wrapper);
@@ -74,81 +78,96 @@ class WoodyTheme_WoodyCompilers
 
         $the_items['alert'] = apply_filters('add_admin_alert_message', '');
         if (!empty($the_items['items']) && is_array($the_items['items'])) {
-            foreach ($the_items['items'] as $item_key => $item) {
-                if (!empty($item['description'])) {
-                    $the_items['items'][$item_key]['description'] = str_replace(['[', ']'], '', $item['description']);
-                }
-            }
-
-            if ($wrapper['acf_fc_layout'] == 'auto_focus_sheets') {
-                $the_items['block_titles'] = $this->tools->getBlockTitles($wrapper, 'focus_block_title_');
-            } else {
-                $the_items['block_titles'] = $this->tools->getBlockTitles($wrapper);
-            }
-
-            $the_items['no_padding'] = (empty($wrapper['focus_no_padding'])) ? '' : $wrapper['focus_no_padding'];
-            $the_items['display_button'] = (empty($wrapper['display_button'])) ? false : $wrapper['display_button'];
-            $the_items['display_img'] = (empty($wrapper['display_img'])) ? false : $wrapper['display_img'];
-            $the_items['default_marker'] = (empty($wrapper['default_marker'])) ? '' : $wrapper['default_marker'];
-            $the_items['visual_effects'] = $wrapper['visual_effects'];
-            $the_items['display_index'] = (empty($wrapper['display_index'])) ? false : $wrapper['display_index'];
-            $the_items['display_sessions'] = (empty($wrapper['display_sessions'])) ? false : $wrapper['display_sessions'];
-
-            // Responsive stuff
-            if (!empty($wrapper['mobile_behaviour'])) {
-                if ($wrapper['mobile_behaviour']['mobile_grid'] == 'grid') {
-                    $the_items['swResp'] = false;
-                } elseif ($wrapper['mobile_behaviour']['mobile_grid'] == 'swiper') {
-                    $the_items['swResp'] = true;
-                }
-
-                $the_items['mobile_cols'] = (empty($wrapper['mobile_behaviour']['mobile_cols'])) ? '' : $wrapper['mobile_behaviour']['mobile_cols'];
-                $the_items['mobile_behaviour'] = $wrapper['mobile_behaviour'];
-            }
-
-            if (!empty($wrapper['focus_block_title_bg_params'])) {
-                $the_items['display_block_titles'] = $this->tools->getDisplayOptions($wrapper['focus_block_title_bg_params']);
-            }
-
-            if (!empty($wrapper['focus_block_bg_params'])) {
-                $the_items['display'] = $this->tools->getDisplayOptions($wrapper['focus_block_bg_params']);
-            }
-
-            if (!empty($wrapper['analytics_event'])) {
-                $the_items['analytics'] = [
-                    'name' => $wrapper['analytics_event'],
-                    'event' => str_replace('-', '_', sanitize_title($wrapper['analytics_event']))
-                ];
-            }
-
-            if (!empty($wrapper['focus_map_params'])) {
-                if (!empty($wrapper['focus_map_params']['tmaps_confid'])) {
-                    $the_items['map_params']['tmaps_confid'] = $wrapper['focus_map_params']['tmaps_confid'];
-                } elseif (!empty(get_field('tmaps_confid', 'option'))) {
-                    $the_items['map_params']['tmaps_confid'] = get_field('tmaps_confid', 'option');
-                }
-
-                if (!empty($wrapper['focus_map_params']['map_height'])) {
-                    $the_items['map_params']['map_height'] = $wrapper['focus_map_params']['map_height'];
-                }
-
-                if (!empty($wrapper['focus_map_params']['map_zoom_auto'])) {
-                    $the_items['map_params']['map_zoom_auto'] = $wrapper['focus_map_params']['map_zoom_auto'];
-                }
-
-                if (!empty($wrapper['focus_map_params']['map_zoom']) && (empty($the_items['map_params']['map_zoom_auto']) || $the_items['map_params']['map_zoom_auto'] === false)) {
-                    $the_items['map_params']['map_zoom'] = $wrapper['focus_map_params']['map_zoom'];
-                }
-            }
-
-            if (!empty($the_items['display_button'])) {
-                $the_items['button_classes'] = apply_filters('woody_card_button_classes', '', $wrapper);
-            }
-
-            $the_items = apply_filters('woody_format_focuses_data', $the_items, $wrapper);
-            $return = empty($wrapper['woody_tpl']) ? \Timber::compile($twigPaths['blocks-focus-tpl_103'], $the_items) : \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items) ;
+            $return = $this->compileFocusesLayouts($the_items, $wrapper, $twigPaths);
         }
 
+        return $return;
+    }
+
+    public function compileFocusesLayouts($the_items, $wrapper, $twigPaths)
+    {
+        $return = '';
+
+        foreach ($the_items['items'] as $item_key => $item) {
+            if (!empty($item['description'])) {
+                $the_items['items'][$item_key]['description'] = str_replace(['[', ']'], '', $item['description']);
+            }
+        }
+
+        if (!empty($wrapper['acf_fc_layout']) && $wrapper['acf_fc_layout'] == 'auto_focus_sheets') {
+            $the_items['block_titles'] = $this->tools->getBlockTitles($wrapper, 'focus_block_title_');
+        } else {
+            $the_items['block_titles'] = $this->tools->getBlockTitles($wrapper);
+        }
+
+        $the_items['no_padding'] = (empty($wrapper['focus_no_padding'])) ? '' : $wrapper['focus_no_padding'];
+        $the_items['display_button'] = (empty($wrapper['display_button'])) ? false : $wrapper['display_button'];
+        $the_items['display_img'] = (empty($wrapper['display_img'])) ? false : $wrapper['display_img'];
+        $the_items['default_marker'] = (empty($wrapper['default_marker'])) ? '' : $wrapper['default_marker'];
+        $the_items['visual_effects'] = (empty($wrapper['visual_effects'])) ? [] : $wrapper['visual_effects'];
+        $the_items['display_index'] = (empty($wrapper['display_index'])) ? false : $wrapper['display_index'];
+        $the_items['display_sessions'] = (empty($wrapper['display_sessions'])) ? false : $wrapper['display_sessions'];
+
+        // Responsive stuff
+        if (!empty($wrapper['mobile_behaviour'])) {
+            if ($wrapper['mobile_behaviour']['mobile_grid'] == 'grid') {
+                $the_items['swResp'] = false;
+            } elseif ($wrapper['mobile_behaviour']['mobile_grid'] == 'swiper') {
+                $the_items['swResp'] = true;
+            }
+
+            $the_items['mobile_cols'] = (empty($wrapper['mobile_behaviour']['mobile_cols'])) ? '' : $wrapper['mobile_behaviour']['mobile_cols'];
+            $the_items['mobile_behaviour'] = $wrapper['mobile_behaviour'];
+        }
+
+        if (!empty($wrapper['focus_block_title_bg_params'])) {
+            $the_items['display_block_titles'] = $this->tools->getDisplayOptions($wrapper['focus_block_title_bg_params']);
+        }
+
+        if (!empty($wrapper['focus_block_bg_params'])) {
+            $the_items['display'] = $this->tools->getDisplayOptions($wrapper['focus_block_bg_params']);
+        }
+
+        if (!empty($wrapper['analytics_event'])) {
+            $the_items['analytics'] = [
+                'name' => $wrapper['analytics_event'],
+                'event' => str_replace('-', '_', sanitize_title($wrapper['analytics_event']))
+            ];
+        }
+
+        if (!empty($wrapper['focus_map_params'])) {
+            if (!empty($wrapper['focus_map_params']['tmaps_confid'])) {
+                $the_items['map_params']['tmaps_confid'] = $wrapper['focus_map_params']['tmaps_confid'];
+            } elseif (!empty(get_field('tmaps_confid', 'option'))) {
+                $the_items['map_params']['tmaps_confid'] = get_field('tmaps_confid', 'option');
+            }
+
+            if (!empty($wrapper['focus_map_params']['map_height'])) {
+                $the_items['map_params']['map_height'] = $wrapper['focus_map_params']['map_height'];
+            }
+
+            if (!empty($wrapper['focus_map_params']['map_zoom_auto'])) {
+                $the_items['map_params']['map_zoom_auto'] = $wrapper['focus_map_params']['map_zoom_auto'];
+            }
+
+            if (!empty($wrapper['focus_map_params']['map_zoom']) && (empty($the_items['map_params']['map_zoom_auto']) || $the_items['map_params']['map_zoom_auto'] === false)) {
+                $the_items['map_params']['map_zoom'] = $wrapper['focus_map_params']['map_zoom'];
+            }
+        }
+
+        if (!empty($the_items['display_button'])) {
+            $the_items['button_classes'] = apply_filters('woody_card_button_classes', '', $wrapper);
+        }
+
+        $the_items = apply_filters('woody_format_focuses_data', $the_items, $wrapper);
+        $return = empty($wrapper['woody_tpl']) ? \Timber::compile($twigPaths['blocks-focus-tpl_103'], $the_items) : \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items) ;
+
+        foreach ($the_items['items'] as $key_item => $item) {
+            if (!empty($item['children']) && !empty($item['children']['items']) && is_array($item['children']['items']) && !empty($item['children']['wrapper'])) {
+                $this->compileFocusesLayouts($item['children'], $item['children']['wrapper'], $twigPaths);
+            }
+        }
+        
         return $return;
     }
 
