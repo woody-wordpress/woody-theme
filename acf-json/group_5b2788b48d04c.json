@@ -480,7 +480,7 @@
         },
         {
             "key": "field_64a6d2200183b",
-            "label": "Pages à Exlure",
+            "label": "Pages à exclure",
             "name": "excluded_posts",
             "type": "relationship",
             "instructions": "",
