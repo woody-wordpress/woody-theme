@@ -105,8 +105,6 @@ class WoodyTheme_WoodyGetters
     {
         $the_items = [];
         
-        console_log($wrapper, 'wrapper');
-
         // Formatage des pages parentes (contenu manuel uniquement autorisé)
         $the_items = $this->getManualFocusData($wrapper);
 
@@ -116,20 +114,24 @@ class WoodyTheme_WoodyGetters
                 $the_items['items'][$key_parent_item]['subcontent'] = [];
                 if (!empty($wrapper['content_selection'][$key_parent_item]) && !empty($wrapper['content_selection'][$key_parent_item]['subcontent'])) {
                     $subwrapper = $wrapper['content_selection'][$key_parent_item]['subcontent'];
-                    console_log($subwrapper, 'subwrapper');
                     // Contenu personnalisé
                     if ($subwrapper['subcontent_selection_type'] == 'custom_content' && !empty($subwrapper['custom_content']) && !empty($subwrapper['custom_content']['content_selection'])) {
-                        console_log('passed custom content');
                         foreach ($subwrapper['custom_content']['content_selection'] as $key => $item_wrapper) {
                             $the_items['items'][$key_parent_item]['subcontent']['items'][$key] = $this->getCustomPreview($item_wrapper, $subwrapper, $subwrapper['subcontent_selection_type']);
                             $the_items['items'][$key_parent_item]['subcontent']['items'][$key]['real_index'] = $key;
                         }
                     // Contenu existant
-                    } elseif ($subwrapper['subcontent_selection_type'] == 'existing_content' && !empty($subwrapper['existing_content']['content_selection'])) {
-                        console_log('passed existing content');
+                    } elseif ($subwrapper['subcontent_selection_type'] == 'existing_content' && !empty($subwrapper['existing_content']) && !empty($subwrapper['existing_content']['content_selection'])) {
+                        foreach ($subwrapper['existing_content']['content_selection'] as $key => $item) {
+                            $post = get_post($item['content_selection']);
+                            if (!empty($post) && $post->post_status == 'publish') {
+                                $post_preview = $this->getAnyPostPreview($wrapper, $post);
+                                $the_items['items'][$key_parent_item]['subcontent']['items'][$key] = $post_preview;
+                                $the_items['items'][$key_parent_item]['subcontent']['items'][$key]['real_index'] = $key;
+                            }
+                        }
                         // Contenu automatique
                     } elseif ($subwrapper['subcontent_selection_type'] == 'auto_content' && !empty($subwrapper['auto_content'])) {
-                        console_log('passed auto content');
                         // On récupère les variables utiles à la query et on les merge dans un seul tableau
                         $params = empty($subwrapper['auto_content']) ? $subwrapper : array_merge($subwrapper, $subwrapper['auto_content']);
                         unset($params['auto_content']);
@@ -177,7 +179,7 @@ class WoodyTheme_WoodyGetters
                     if (!empty($post) && $post->post_status == 'publish') {
                         $post_preview = $this->getAnyPostPreview($wrapper, $post, $clickable);
 
-                        $the_items['items'][$key] = (empty($post_preview)) ? [] : $post_preview;
+                        $the_items['items'][$key] = $post_preview;
                         $the_items['items'][$key]['real_index'] = $key;
                     }
                 }
@@ -384,7 +386,7 @@ class WoodyTheme_WoodyGetters
      * @return   post_preview - Un tableau de données
      *
      */
-    public function getAnyPostPreview($wrapper, $post, $clickable)
+    public function getAnyPostPreview($wrapper, $post, $clickable = true)
     {
         $post_preview = [];
 

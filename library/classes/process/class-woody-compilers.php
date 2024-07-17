@@ -58,7 +58,6 @@ class WoodyTheme_WoodyCompilers
                 break;
             case 'mixed_focus':
                 $the_items = $this->getter->getMixedFocusData($current_post, $wrapper);
-                console_log($the_items, '$the_items first');
                 break;
             case 'auto_focus_sheets':
                 if (!empty($wrapper['playlist_conf_id'])) {
