@@ -428,7 +428,7 @@
                 {
                     "key": "field_66977eb92b7df",
                     "label": "Pages enfantes",
-                    "name": "subpages",
+                    "name": "subcontent",
                     "aria-label": "",
                     "type": "group",
                     "instructions": "",
@@ -460,7 +460,7 @@
                         {
                             "key": "field_669781c647fb3",
                             "label": "Type",
-                            "name": "subpages_content_selection_type",
+                            "name": "subcontent_selection_type",
                             "aria-label": "",
                             "type": "radio",
                             "instructions": "",

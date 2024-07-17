@@ -163,8 +163,8 @@ class WoodyTheme_WoodyCompilers
         $return = empty($wrapper['woody_tpl']) ? \Timber::compile($twigPaths['blocks-focus-tpl_103'], $the_items) : \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items) ;
 
         foreach ($the_items['items'] as $key_item => $item) {
-            if (!empty($item['children']) && !empty($item['children']['items']) && is_array($item['children']['items']) && !empty($item['children']['wrapper'])) {
-                $this->compileFocusesLayouts($item['children'], $item['children']['wrapper'], $twigPaths);
+            if (!empty($item['subcontent']) && !empty($item['subcontent']['items']) && is_array($item['subcontent']['items']) && !empty($item['subcontent']['wrapper'])) {
+                $this->compileFocusesLayouts($item['subcontent'], $item['subcontent']['wrapper'], $twigPaths);
             }
         }
         
