@@ -358,7 +358,9 @@
 
 .acf-field-5b0d20457c829>.acf-input>.acf-repeater,
 .acf-field-5b043f0525968>.acf-input>.acf-flexible-content,
-.acf-field-5afd2c6916ecb>.acf-input>.acf-repeater {
+.acf-field-5afd2c6916ecb>.acf-input>.acf-repeater,
+.acf-field-66978cb6e54a5>.acf-input>.acf-repeater,
+.acf-field-66978e1108e68>.acf-input>.acf-repeater {
     >.acf-actions {
         .acf-button.button.button-primary {
             width: 100%;
@@ -409,7 +411,9 @@
 }
 
 // Ajouter un contenu
-.acf-field-5b0d20457c829>.acf-input>.acf-repeater {
+.acf-field-5b0d20457c829>.acf-input>.acf-repeater,
+.acf-field-66978cb6e54a5>.acf-input>.acf-repeater,
+.acf-field-66978e1108e68>.acf-input>.acf-repeater {
     >.acf-actions {
         .acf-button.button.button-primary {
             background-color: #00a0d2;
