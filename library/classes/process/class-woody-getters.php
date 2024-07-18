@@ -101,7 +101,7 @@ class WoodyTheme_WoodyGetters
      * @return   the_items - Tableau de contenus compilés + infos complémentaires
      *
      */
-    public function getCatalogFocusData($current_post, $wrapper, $paginate = false, $uniqid = 0, $ingore_maxnum = false, $posts_in = null, $filters = null)
+    public function getCatalogFocusData($current_post, $wrapper, $twigPaths, $paginate = false, $uniqid = 0, $ingore_maxnum = false, $posts_in = null, $filters = null)
     {
         $the_items = [];
         
@@ -132,7 +132,10 @@ class WoodyTheme_WoodyGetters
                         $the_items['items'][$key_parent_item]['subcontent'] = $this->getAutoFocusData($current_post, $params, $paginate, $uniqid, $ingore_maxnum, $posts_in, $filters);
                     }
 
-                    $the_items['items'][$key_parent_item]['subcontent']['wrapper'] = $subwrapper;
+                    // On compile le template
+                    if (!empty($the_items['items'][$key_parent_item]['subcontent']['items']) && is_array($the_items['items'][$key_parent_item]['subcontent']['items']) && !empty($subwrapper)) {
+                        $the_items['items'][$key_parent_item]['subcontent']['html'] = compileFocusesLayouts($the_items['items'][$key_parent_item]['subcontent'], $subwrapper, $twigPaths);
+                    }
                 }
             }
         }

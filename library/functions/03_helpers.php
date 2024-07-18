@@ -9,6 +9,12 @@ use WoodyProcess\Process\WoodyTheme_WoodyProcess;
 // Get previews - Retournent des tableaux de données compatibles avec les templates Woody //
 // ***************************************************************************************//
 
+function getAnyPostPreview($wrapper, $post, $clickable = true)
+{
+    $getter = new WoodyTheme_WoodyGetters();
+    return $getter->getAnyPostPreview($wrapper, $post, $clickable);
+}
+
 function getCustomPreview($item, $wrapper = null)
 {
     $getter = new WoodyTheme_WoodyGetters();
@@ -73,4 +79,10 @@ function processWoodySections($sections, $context)
 {
     $tools = new WoodyTheme_WoodyProcess();
     return $tools->processWoodySections($sections, $context);
+}
+
+function compileFocusesLayouts($the_items, $wrapper, $twigPaths)
+{
+    $compilers = new WoodyTheme_WoodyCompilers();
+    return $compilers->compileFocusesLayouts($the_items, $wrapper, $twigPaths);
 }
