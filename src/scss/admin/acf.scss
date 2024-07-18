@@ -880,7 +880,7 @@
                 &[data-layout='semantic_view'],
                 &[data-layout='auto_focus'],
                 &[data-layout='manual_focus'],
-                &[data-layout='mixed_focus'] {
+                &[data-layout='catalog_focus'] {
                     &:before {
                         content: '\f13c';
                     }

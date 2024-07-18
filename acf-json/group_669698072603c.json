@@ -1,6 +1,6 @@
 {
     "key": "group_669698072603c",
-    "title": "Mise en avant (sélection mixte)",
+    "title": "Mise en avant catalogue",
     "fields": [
         {
             "key": "field_669769adaf314",
@@ -61,7 +61,7 @@
                 },
                 {
                     "key": "field_669785b1d5c16",
-                    "label": "Page parente",
+                    "label": "Couverture",
                     "name": "",
                     "type": "tab",
                     "instructions": "",
@@ -411,7 +411,7 @@
                 },
                 {
                     "key": "field_6697857597c80",
-                    "label": "Pages enfantes",
+                    "label": "Contenu",
                     "name": "",
                     "type": "tab",
                     "instructions": "",
@@ -427,7 +427,7 @@
                 },
                 {
                     "key": "field_66977eb92b7df",
-                    "label": "Pages enfantes",
+                    "label": "Contenu",
                     "name": "subcontent",
                     "aria-label": "",
                     "type": "group",
@@ -472,7 +472,6 @@
                                 "id": ""
                             },
                             "choices": {
-                                "custom_content": "Contenu libre",
                                 "existing_content": "Contenu existant",
                                 "auto_content": "Contenu automatique"
                             },
@@ -482,291 +481,6 @@
                             "other_choice": 0,
                             "layout": "vertical",
                             "save_other_choice": 0
-                        },
-                        {
-                            "key": "field_669781d82b194",
-                            "label": "Contenu libre",
-                            "name": "custom_content",
-                            "type": "group",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": [
-                                [
-                                    {
-                                        "field": "field_669781c647fb3",
-                                        "operator": "==",
-                                        "value": "custom_content"
-                                    }
-                                ]
-                            ],
-                            "wrapper": {
-                                "width": "",
-                                "class": "hide-label",
-                                "id": ""
-                            },
-                            "layout": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_66978cb6e54a5",
-                                    "label": "Contenu",
-                                    "name": "content_selection",
-                                    "type": "repeater",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "collapsed": "field_669769ca7b3d1",
-                                    "min": 1,
-                                    "max": "",
-                                    "layout": "block",
-                                    "button_label": "Ajouter un contenu",
-                                    "hide_collapse": 0,
-                                    "collapse_all_repeater": 1,
-                                    "btn-icon-only": 0,
-                                    "sub_fields": [
-                                        {
-                                            "key": "field_669781e79870b",
-                                            "label": "En-tête",
-                                            "name": "heading",
-                                            "type": "clone",
-                                            "instructions": "",
-                                            "required": 0,
-                                            "conditional_logic": 0,
-                                            "wrapper": {
-                                                "width": "",
-                                                "class": "",
-                                                "id": ""
-                                            },
-                                            "clone": [
-                                                "group_5b041c24d0dd7"
-                                            ],
-                                            "display": "seamless",
-                                            "layout": "block",
-                                            "prefix_label": 0,
-                                            "prefix_name": 0
-                                        },
-                                        {
-                                            "key": "field_669781f09b2c3",
-                                            "label": "Type d'action",
-                                            "name": "action_type",
-                                            "type": "select",
-                                            "instructions": "",
-                                            "required": 0,
-                                            "conditional_logic": 0,
-                                            "wrapper": {
-                                                "width": "50",
-                                                "class": "",
-                                                "id": ""
-                                            },
-                                            "choices": {
-                                                "link": "Lien",
-                                                "file": "Fichier"
-                                            },
-                                            "default_value": "link",
-                                            "allow_null": 0,
-                                            "multiple": 0,
-                                            "ui": 0,
-                                            "return_format": "value",
-                                            "ajax": 0,
-                                            "placeholder": ""
-                                        },
-                                        {
-                                            "key": "field_669781f78a202",
-                                            "label": "Lien",
-                                            "name": "link",
-                                            "type": "link",
-                                            "instructions": "",
-                                            "required": 0,
-                                            "conditional_logic": [
-                                                [
-                                                    {
-                                                        "field": "field_669781f09b2c3",
-                                                        "operator": "==",
-                                                        "value": "link"
-                                                    }
-                                                ]
-                                            ],
-                                            "wrapper": {
-                                                "width": "50",
-                                                "class": "",
-                                                "id": ""
-                                            },
-                                            "return_format": "array"
-                                        },
-                                        {
-                                            "key": "field_6697820dcd162",
-                                            "label": "Fichier",
-                                            "name": "file",
-                                            "type": "file",
-                                            "instructions": "",
-                                            "required": 0,
-                                            "conditional_logic": [
-                                                [
-                                                    {
-                                                        "field": "field_669781f09b2c3",
-                                                        "operator": "==",
-                                                        "value": "file"
-                                                    }
-                                                ]
-                                            ],
-                                            "wrapper": {
-                                                "width": "50",
-                                                "class": "",
-                                                "id": ""
-                                            },
-                                            "return_format": "array",
-                                            "library": "all",
-                                            "min_size": "",
-                                            "max_size": "",
-                                            "mime_types": ""
-                                        },
-                                        {
-                                            "key": "field_6697821a0804b",
-                                            "label": "Média",
-                                            "name": "media_type",
-                                            "type": "radio",
-                                            "instructions": "",
-                                            "required": 0,
-                                            "conditional_logic": 0,
-                                            "wrapper": {
-                                                "width": "30",
-                                                "class": "",
-                                                "id": ""
-                                            },
-                                            "choices": {
-                                                "img": "Image",
-                                                "movie": "Vidéo"
-                                            },
-                                            "allow_null": 0,
-                                            "other_choice": 0,
-                                            "save_other_choice": 0,
-                                            "default_value": "",
-                                            "layout": "vertical",
-                                            "return_format": "value"
-                                        },
-                                        {
-                                            "key": "field_66978221882bc",
-                                            "label": "Image",
-                                            "name": "img",
-                                            "type": "image",
-                                            "instructions": "",
-                                            "required": 0,
-                                            "conditional_logic": [
-                                                [
-                                                    {
-                                                        "field": "field_6697821a0804b",
-                                                        "operator": "==",
-                                                        "value": "img"
-                                                    }
-                                                ]
-                                            ],
-                                            "wrapper": {
-                                                "width": "70",
-                                                "class": "",
-                                                "id": ""
-                                            },
-                                            "return_format": "array",
-                                            "preview_size": "thumbnail",
-                                            "library": "all",
-                                            "min_width": 640,
-                                            "min_height": "",
-                                            "min_size": "",
-                                            "max_width": "",
-                                            "max_height": "",
-                                            "max_size": "",
-                                            "mime_types": "jpeg, jpg, png, gif"
-                                        },
-                                        {
-                                            "key": "field_669782312acaf",
-                                            "label": "Vidéo",
-                                            "name": "movie",
-                                            "type": "group",
-                                            "instructions": "",
-                                            "required": 0,
-                                            "conditional_logic": [
-                                                [
-                                                    {
-                                                        "field": "field_6697821a0804b",
-                                                        "operator": "==",
-                                                        "value": "movie"
-                                                    }
-                                                ]
-                                            ],
-                                            "wrapper": {
-                                                "width": "70",
-                                                "class": "",
-                                                "id": ""
-                                            },
-                                            "layout": "block",
-                                            "sub_fields": [
-                                                {
-                                                    "key": "field_6697823dcf767",
-                                                    "label": "Fichiers vidéos",
-                                                    "name": "movie_field",
-                                                    "type": "clone",
-                                                    "instructions": "",
-                                                    "required": 0,
-                                                    "conditional_logic": 0,
-                                                    "wrapper": {
-                                                        "width": "",
-                                                        "class": "",
-                                                        "id": ""
-                                                    },
-                                                    "clone": [
-                                                        "group_5b16b09337a33"
-                                                    ],
-                                                    "display": "seamless",
-                                                    "layout": "block",
-                                                    "prefix_label": 0,
-                                                    "prefix_name": 0
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "key": "field_66978244df045",
-                                            "label": "Latitude",
-                                            "name": "latitude",
-                                            "type": "text",
-                                            "instructions": "",
-                                            "required": 0,
-                                            "conditional_logic": 0,
-                                            "wrapper": {
-                                                "width": "50",
-                                                "class": "",
-                                                "id": ""
-                                            },
-                                            "default_value": "",
-                                            "placeholder": "",
-                                            "prepend": "",
-                                            "append": "",
-                                            "maxlength": ""
-                                        },
-                                        {
-                                            "key": "field_6697824b4b365",
-                                            "label": "Longitude",
-                                            "name": "longitude",
-                                            "type": "text",
-                                            "instructions": "",
-                                            "required": 0,
-                                            "conditional_logic": 0,
-                                            "wrapper": {
-                                                "width": "50",
-                                                "class": "",
-                                                "id": ""
-                                            },
-                                            "default_value": "",
-                                            "placeholder": "",
-                                            "prepend": "",
-                                            "append": "",
-                                            "maxlength": ""
-                                        }
-                                    ]
-                                }
-                            ]
                         },
                         {
                             "key": "field_66978256923c9",
@@ -795,7 +509,7 @@
                                     "key": "field_66978e1108e68",
                                     "label": "Contenu",
                                     "name": "content_selection",
-                                    "type": "repeater",
+                                    "type": "relationship",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
@@ -804,40 +518,21 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "collapsed": "field_66978282c2bd2",
-                                    "min": 1,
+                                    "post_type": [
+                                        "page",
+                                        "touristic_sheet",
+                                        "woody_topic"
+                                    ],
+                                    "taxonomy": "",
+                                    "filters": [
+                                        "search",
+                                        "post_type",
+                                        "taxonomy"
+                                    ],
+                                    "elements": "",
+                                    "min": "",
                                     "max": "",
-                                    "layout": "block",
-                                    "button_label": "Ajouter un contenu",
-                                    "hide_collapse": 0,
-                                    "collapse_all_repeater": 1,
-                                    "btn-icon-only": 0,
-                                    "sub_fields": [
-                                        {
-                                            "key": "field_66978282c2bd2",
-                                            "label": "Choix de la page",
-                                            "name": "content_selection",
-                                            "type": "post_object",
-                                            "instructions": "",
-                                            "required": 0,
-                                            "conditional_logic": 0,
-                                            "wrapper": {
-                                                "width": "",
-                                                "class": "",
-                                                "id": ""
-                                            },
-                                            "post_type": [
-                                                "page",
-                                                "touristic_sheet",
-                                                "woody_topic"
-                                            ],
-                                            "taxonomy": "",
-                                            "allow_null": 0,
-                                            "multiple": 0,
-                                            "return_format": "id",
-                                            "ui": 1
-                                        }
-                                    ]
+                                    "return_format": "id"
                                 }
                             ]
                         },
@@ -1505,27 +1200,6 @@
                             "endpoint": 0
                         },
                         {
-                            "key": "field_6697937a922ad",
-                            "label": "Paramètres de fond",
-                            "name": "focus_block_bg_params",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "clone": [
-                                "group_5b043c93d609a"
-                            ],
-                            "display": "group",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 1
-                        },
-                        {
                             "key": "field_66979381bfb77",
                             "label": "Retirer les marges autour des mises en avant",
                             "name": "focus_no_padding",
@@ -1946,7 +1620,7 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "default_value": "blocks-focus_mixed-tpl_301",
+            "default_value": "blocks-focus_catalog-tpl_301",
             "placeholder": "",
             "prepend": "",
             "append": "",

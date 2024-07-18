@@ -93,7 +93,7 @@ class WoodyTheme_WoodyGetters
 
     /**
      *
-     * Nom : getMixedFocusData
+     * Nom : getCatalogFocusData
      * Auteur : Orphée Besson
      * Return : Retourne un ensemble de posts sous forme de tableau avec une donnée compatbile Woody
      * @param    current_post - Un objet Timber\Post
@@ -101,7 +101,7 @@ class WoodyTheme_WoodyGetters
      * @return   the_items - Tableau de contenus compilés + infos complémentaires
      *
      */
-    public function getMixedFocusData($current_post, $wrapper, $paginate = false, $uniqid = 0, $ingore_maxnum = false, $posts_in = null, $filters = null)
+    public function getCatalogFocusData($current_post, $wrapper, $paginate = false, $uniqid = 0, $ingore_maxnum = false, $posts_in = null, $filters = null)
     {
         $the_items = [];
         
@@ -114,23 +114,17 @@ class WoodyTheme_WoodyGetters
                 $the_items['items'][$key_parent_item]['subcontent'] = [];
                 if (!empty($wrapper['content_selection'][$key_parent_item]) && !empty($wrapper['content_selection'][$key_parent_item]['subcontent'])) {
                     $subwrapper = $wrapper['content_selection'][$key_parent_item]['subcontent'];
-                    // Contenu personnalisé
-                    if ($subwrapper['subcontent_selection_type'] == 'custom_content' && !empty($subwrapper['custom_content']) && !empty($subwrapper['custom_content']['content_selection'])) {
-                        foreach ($subwrapper['custom_content']['content_selection'] as $key => $item_wrapper) {
-                            $the_items['items'][$key_parent_item]['subcontent']['items'][$key] = $this->getCustomPreview($item_wrapper, $subwrapper, $subwrapper['subcontent_selection_type']);
-                            $the_items['items'][$key_parent_item]['subcontent']['items'][$key]['real_index'] = $key;
-                        }
                     // Contenu existant
-                    } elseif ($subwrapper['subcontent_selection_type'] == 'existing_content' && !empty($subwrapper['existing_content']) && !empty($subwrapper['existing_content']['content_selection'])) {
-                        foreach ($subwrapper['existing_content']['content_selection'] as $key => $item) {
-                            $post = get_post($item['content_selection']);
+                    if ($subwrapper['subcontent_selection_type'] == 'existing_content' && !empty($subwrapper['existing_content']) && !empty($subwrapper['existing_content']['content_selection'])) {
+                        foreach ($subwrapper['existing_content']['content_selection'] as $key => $post_id) {
+                            $post = get_post($post_id);
                             if (!empty($post) && $post->post_status == 'publish') {
                                 $post_preview = $this->getAnyPostPreview($wrapper, $post);
                                 $the_items['items'][$key_parent_item]['subcontent']['items'][$key] = $post_preview;
                                 $the_items['items'][$key_parent_item]['subcontent']['items'][$key]['real_index'] = $key;
                             }
                         }
-                        // Contenu automatique
+                    // Contenu automatique
                     } elseif ($subwrapper['subcontent_selection_type'] == 'auto_content' && !empty($subwrapper['auto_content'])) {
                         // On récupère les variables utiles à la query et on les merge dans un seul tableau
                         $params = empty($subwrapper['auto_content']) ? $subwrapper : array_merge($subwrapper, $subwrapper['auto_content']);

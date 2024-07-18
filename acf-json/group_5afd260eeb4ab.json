@@ -323,14 +323,14 @@
                         },
                         "layout_6696978689320": {
                             "key": "layout_6696978689320",
-                            "name": "mixed_focus",
-                            "label": "Mise en avant (sélection mixte)",
+                            "name": "catalog_focus",
+                            "label": "Mise en avant catalogue",
                             "display": "block",
                             "sub_fields": [
                                 {
                                     "key": "field_669697ce6670c",
-                                    "label": "Mise en avant (sélection mixte)",
-                                    "name": "mixed_focus",
+                                    "label": "Mise en avant catalogue",
+                                    "name": "catalog_focus",
                                     "type": "clone",
                                     "instructions": "",
                                     "required": 0,

@@ -56,8 +56,8 @@ class WoodyTheme_WoodyCompilers
             case 'auto_focus':
                 $the_items = $this->getter->getAutoFocusData($current_post, $wrapper);
                 break;
-            case 'mixed_focus':
-                $the_items = $this->getter->getMixedFocusData($current_post, $wrapper);
+            case 'catalog_focus':
+                $the_items = $this->getter->getCatalogFocusData($current_post, $wrapper);
                 break;
             case 'auto_focus_sheets':
                 if (!empty($wrapper['playlist_conf_id'])) {
