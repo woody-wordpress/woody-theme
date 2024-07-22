@@ -93,6 +93,58 @@ class WoodyTheme_WoodyGetters
 
     /**
      *
+     * Nom : getCatalogFocusData
+     * Auteur : Orphée Besson
+     * Return : Retourne un ensemble de posts sous forme de tableau avec une donnée compatbile Woody
+     * @param    current_post - Un objet Timber\Post
+     * @param    wrapper - Un tableau des champs
+     * @return   the_items - Tableau de contenus compilés + infos complémentaires
+     *
+     */
+    public function getCatalogFocusData($current_post, $wrapper, $twigPaths, $paginate = false, $uniqid = 0, $ingore_maxnum = false, $posts_in = null, $filters = null)
+    {
+        $the_items = [];
+        
+        // Formatage des pages parentes (contenu manuel uniquement autorisé)
+        $the_items = $this->getManualFocusData($wrapper);
+
+        // Formatage des pages enfantes (contenu manuel ou automaique autorisé)
+        if(!empty($the_items) && !empty($the_items['items'])) {
+            foreach ($the_items['items'] as $key_parent_item => $parent_item) {
+                $the_items['items'][$key_parent_item]['subcontent'] = [];
+                if (!empty($wrapper['content_selection'][$key_parent_item]) && !empty($wrapper['content_selection'][$key_parent_item]['subcontent'])) {
+                    $subwrapper = $wrapper['content_selection'][$key_parent_item]['subcontent'];
+                    // Contenu existant
+                    if ($subwrapper['subcontent_selection_type'] == 'existing_content' && !empty($subwrapper['existing_content']) && !empty($subwrapper['existing_content']['content_selection'])) {
+                        foreach ($subwrapper['existing_content']['content_selection'] as $key => $post_id) {
+                            $post = get_post($post_id);
+                            if (!empty($post) && $post->post_status == 'publish') {
+                                $post_preview = $this->getAnyPostPreview($wrapper, $post);
+                                $the_items['items'][$key_parent_item]['subcontent']['items'][$key] = $post_preview;
+                                $the_items['items'][$key_parent_item]['subcontent']['items'][$key]['real_index'] = $key;
+                            }
+                        }
+                    // Contenu automatique
+                    } elseif ($subwrapper['subcontent_selection_type'] == 'auto_content' && !empty($subwrapper['auto_content'])) {
+                        // On récupère les variables utiles à la query et on les merge dans un seul tableau
+                        $params = empty($subwrapper['auto_content']) ? $subwrapper : array_merge($subwrapper, $subwrapper['auto_content']);
+                        unset($params['auto_content']);
+                        $the_items['items'][$key_parent_item]['subcontent'] = $this->getAutoFocusData($current_post, $params, $paginate, $uniqid, $ingore_maxnum, $posts_in, $filters);
+                    }
+
+                    // On compile le template
+                    if (!empty($the_items['items'][$key_parent_item]['subcontent']['items']) && is_array($the_items['items'][$key_parent_item]['subcontent']['items']) && !empty($subwrapper)) {
+                        $the_items['items'][$key_parent_item]['subcontent']['html'] = compileFocusesLayouts($the_items['items'][$key_parent_item]['subcontent'], $subwrapper, $twigPaths);
+                    }
+                }
+            }
+        }
+
+        return $the_items;
+    }
+
+    /**
+     *
      * Nom : getManualFocus_data
      * Auteur : Benoit Bouchaud
      * Return : Retourne un ensemble de posts sous forme de tableau avec une donnée compatbile Woody
@@ -122,25 +174,9 @@ class WoodyTheme_WoodyGetters
                     $item = $item_wrapper['existing_content'];
                     $post = get_post($item['content_selection']);
                     if (!empty($post) && $post->post_status == 'publish') {
-                        switch ($post->post_type) {
-                            case 'touristic_sheet':
-                                $post_preview = $this->getTouristicSheetPreview($wrapper, $post);
-                                break;
-                            case 'youbook_product':
-                                $post_preview = $this->getYoubookPreview($wrapper, $post->ID);
-                                break;
-                            case 'woody_topic':
-                                $post_preview = $this->getTopicPreview($wrapper, $post);
-                                break;
-                            case 'page':
-                                $post_preview = $this->getPagePreview($wrapper, $post, $clickable);
-                                break;
-                            default:
-                                $post_preview = apply_filters('woody_custom_manual_focus', $post->ID, $wrapper);
-                                break;
-                        }
+                        $post_preview = $this->getAnyPostPreview($wrapper, $post, $clickable);
 
-                        $the_items['items'][$key] = (empty($post_preview)) ? [] : $post_preview;
+                        $the_items['items'][$key] = $post_preview;
                         $the_items['items'][$key]['real_index'] = $key;
                     }
                 }
@@ -334,6 +370,42 @@ class WoodyTheme_WoodyGetters
         }
 
         return $data;
+    }
+
+    /**
+     *
+     * Nom : getAnyPostPreview
+     * Auteur : Orphée Besson
+     * Return : Retourne la donnée de base d'un post pour afficher une preview selon le post_type
+     * @param    wrapper - Données du layout acf sous forme de tableau
+     * @param    post - Un objet Timber\Post
+     * @param    clickable - Un booléen
+     * @return   post_preview - Un tableau de données
+     *
+     */
+    public function getAnyPostPreview($wrapper, $post, $clickable = true)
+    {
+        $post_preview = [];
+
+        switch ($post->post_type) {
+            case 'touristic_sheet':
+                $post_preview = $this->getTouristicSheetPreview($wrapper, $post);
+                break;
+            case 'youbook_product':
+                $post_preview = $this->getYoubookPreview($wrapper, $post->ID);
+                break;
+            case 'woody_topic':
+                $post_preview = $this->getTopicPreview($wrapper, $post);
+                break;
+            case 'page':
+                $post_preview = $this->getPagePreview($wrapper, $post, $clickable);
+                break;
+            default:
+                $post_preview = apply_filters('woody_custom_manual_focus', $post->ID, $wrapper);
+                break;
+        }
+
+        return $post_preview;
     }
 
     /**

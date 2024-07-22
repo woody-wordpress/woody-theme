@@ -40,7 +40,6 @@ class WoodyTheme_Cleanup_Front
 
     public function removeWpRobots($robots)
     {
-        console_log($robots);
         return [];
     }
 
