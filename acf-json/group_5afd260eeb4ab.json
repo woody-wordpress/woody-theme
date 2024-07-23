@@ -940,6 +940,37 @@
                             ],
                             "min": "",
                             "max": ""
+                        },
+                        "layout_669e145c77a88": {
+                            "key": "layout_669e145c77a88",
+                            "name": "menus",
+                            "label": "Menus",
+                            "display": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_64427bab8e1cb",
+                                    "label": "Menus",
+                                    "name": "menus",
+                                    "type": "clone",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "hide-label",
+                                        "id": ""
+                                    },
+                                    "clone": [
+                                        "group_669e0870bab60"
+                                    ],
+                                    "display": "seamless",
+                                    "layout": "block",
+                                    "prefix_label": 0,
+                                    "prefix_name": 0
+                                }
+                            ],
+                            "min": "",
+                            "max": ""
                         }
                     },
                     "button_label": "Ajouter un bloc",

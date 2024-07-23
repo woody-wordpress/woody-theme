@@ -245,6 +245,7 @@ class WoodyTheme_WoodyProcess
                 break;
             case 'quote':
                 $layout['display'] = $this->tools->getDisplayOptions($layout['quote_bg_params']);
+                console_log($layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             case 'feature':
@@ -305,6 +306,15 @@ class WoodyTheme_WoodyProcess
                 break;
             case 'timeline':
                 $layout['display'] = $this->tools->getDisplayOptions($layout['timeline_bg_params']);
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                break;
+            case 'menus':
+                $current_lang = function_exists('pll_current_language') ? pll_current_language() : 'fr';
+                $layout['block_titles'] = $this->tools->getBlockTitles($layout);
+                if (!empty($layout['menu_type'])) {
+                    $menu_content = get_field(sprintf("%s_%s", $layout['menu_type'], $current_lang), 'options');
+                    $layout['items'] = !empty($menu_content['links']) ? $menu_content['links'] : '';
+                }
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             default:

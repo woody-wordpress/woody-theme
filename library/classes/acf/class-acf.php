@@ -630,6 +630,28 @@ class WoodyTheme_ACF
             unset($field['layouts']['layout_infolive']);
         }
 
+        if (in_array('menus_v2', WOODY_OPTIONS)) {
+            // On complète la liste de menu dans le backoffice
+            if (!empty($field['layouts']['layout_669e145c77a88']['sub_fields'])) {
+                foreach ($field['layouts']['layout_669e145c77a88']['sub_fields'] as $menu_field_key => $menu_field) {
+                    if ($menu_field['name'] == "menu_type") {
+                        $registerMenusClass = new \Woody\Addon\Menus\Services\RegisterMenus();
+                        $menus = $registerMenusClass->setPagesOptions();
+                        
+                        if (!empty($menus['sub_pages'])) {
+                            foreach ($menus['sub_pages'] as $subpage_key => $subpage) {
+                                if ($subpage['translate_type'] != "tree_menu") {
+                                    $field['layouts']['layout_669e145c77a88']['sub_fields'][$menu_field_key]['choices'][$subpage_key] = $subpage['menu_title'];
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            unset($field['layouts']['layout_669e145c77a88']);
+        }
+
         return $field;
     }
 
@@ -1154,6 +1176,9 @@ class WoodyTheme_ACF
                 'blocks-summary-tpl_01',
                 'blocks-summary-tpl_03',
                 'blocks-summary-tpl_02',
+            ],
+            'menus' => [
+                'blocks-menu-tpl_01'
             ]
         ];
 
