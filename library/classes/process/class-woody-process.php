@@ -245,7 +245,6 @@ class WoodyTheme_WoodyProcess
                 break;
             case 'quote':
                 $layout['display'] = $this->tools->getDisplayOptions($layout['quote_bg_params']);
-                console_log($layout);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             case 'feature':
