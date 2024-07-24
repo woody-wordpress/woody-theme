@@ -104,7 +104,7 @@
         {
             "key": "field_669e150e5b394",
             "label": "Bouton(s) supplémentaire(s)",
-            "name": "focus_buttons",
+            "name": "menus_buttons",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -140,7 +140,7 @@
         {
             "key": "field_669e151e1e24d",
             "label": "Personnalisation du fond",
-            "name": "focus_block_title_bg_params",
+            "name": "menus_block_title_bg_params",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -159,7 +159,7 @@
         {
             "key": "field_669e152d9775d",
             "label": "Afficher le titre en pleine largeur",
-            "name": "focus_block_title_fullwidth",
+            "name": "menus_block_title_fullwidth",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -281,7 +281,7 @@
         {
             "key": "field_669e158607ca4",
             "label": "Paramètres de fond",
-            "name": "focus_block_bg_params",
+            "name": "menus_block_bg_params",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -300,7 +300,7 @@
         {
             "key": "field_669e159576e6c",
             "label": "Retirer les marges autour des mises en avant",
-            "name": "focus_no_padding",
+            "name": "menus_no_padding",
             "type": "true_false",
             "instructions": "",
             "required": 0,
