@@ -314,9 +314,11 @@ class WoodyTheme_WoodyProcess
 
                 if (!empty($layout['menu_type'])) {
                     $menu_content = get_field(sprintf("%s_%s", $layout['menu_type'], $current_lang), 'options');
-                    // Le filtre permet de modifier le wrapper qui englobe les liens
-                    $items = apply_filters('woody_section_menu_modifier', $menu_content["links"], $layout['menu_type'], $menu_content);
-                    $layout['items'] = !empty($items) ? $items : '';
+                    if(!empty($menu_content)) {
+                        // Le filtre permet de modifier le wrapper qui englobe les liens
+                        $items = apply_filters('woody_section_menu_modifier', $menu_content['links'], $layout['menu_type'], $menu_content);
+                        $layout['items'] = !empty($items) ? $items : '';
+                    }
                 }
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
