@@ -631,17 +631,19 @@ class WoodyTheme_ACF
         }
 
         if (in_array('menus_v2', WOODY_OPTIONS)) {
-            // On complète la liste de menu dans le backoffice
+            // On complète la liste de menus dans le backoffice
             if (!empty($field['layouts']['layout_669e145c77a88']['sub_fields'])) {
                 foreach ($field['layouts']['layout_669e145c77a88']['sub_fields'] as $menu_field_key => $menu_field) {
                     if ($menu_field['name'] == "menu_type") {
                         $registerMenusClass = new \Woody\Addon\Menus\Services\RegisterMenus();
                         $menus = $registerMenusClass->setPagesOptions();
                         
-                        if (!empty($menus['sub_pages'])) {
-                            foreach ($menus['sub_pages'] as $subpage_key => $subpage) {
-                                if ($subpage['translate_type'] != "tree_menu") {
-                                    $field['layouts']['layout_669e145c77a88']['sub_fields'][$menu_field_key]['choices'][$subpage_key] = $subpage['menu_title'];
+                        if(!empty($menus) && !empty($menus['sub_pages'])) {
+                            if (!empty($menus['sub_pages'])) {
+                                foreach ($menus['sub_pages'] as $subpage_key => $subpage) {
+                                    if ($subpage['translate_type'] != 'tree_menu') {
+                                        $field['layouts']['layout_669e145c77a88']['sub_fields'][$menu_field_key]['choices'][$subpage_key] = $subpage['menu_title'];
+                                    }
                                 }
                             }
                         }
