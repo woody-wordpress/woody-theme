@@ -307,6 +307,21 @@ class WoodyTheme_WoodyProcess
                 $layout['display'] = $this->tools->getDisplayOptions($layout['timeline_bg_params']);
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
+            case 'menus':
+                $layout['display'] = $this->tools->getDisplayOptions($layout['menus_block_bg_params']);
+                $layout['block_titles'] = $this->tools->getBlockTitles($layout);
+                $current_lang = function_exists('pll_current_language') ? pll_current_language() : 'fr';
+
+                if (!empty($layout['menu_type'])) {
+                    $menu_content = get_field(sprintf("%s_%s", $layout['menu_type'], $current_lang), 'options');
+                    if(!empty($menu_content)) {
+                        // Le filtre permet de modifier le wrapper qui englobe les liens
+                        $items = apply_filters('woody_section_menu_modifier', $menu_content['links'], $layout['menu_type'], $menu_content);
+                        $layout['items'] = !empty($items) ? $items : '';
+                    }
+                }
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                break;
             default:
 
 
