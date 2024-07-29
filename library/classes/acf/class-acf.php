@@ -69,6 +69,7 @@ class WoodyTheme_ACF
         add_filter('acf/load_value/type=gallery', [$this, 'pllGalleryLoadField'], 10, 3);
 
         add_filter('acf/load_field/name=section_content', [$this, 'sectionContentLoadField']);
+        add_filter('acf/load_field/name=menu_type', [$this, 'menuTypeLoadField']);
         add_filter('acf/load_field/name=section_animations', [$this, 'sectionAnimationsForAdmin']);
 
         add_filter('acf/load_field/name=page_heading_tags', [$this, 'listAllPageTerms'], 10, 3);
@@ -630,26 +631,24 @@ class WoodyTheme_ACF
             unset($field['layouts']['layout_infolive']);
         }
 
+        return $field;
+    }
+
+    public function menuTypeLoadField($field) {
         if (in_array('menus_v2', WOODY_OPTIONS)) {
-            // On complète la liste de menus dans le backoffice
-            if (!empty($field['layouts']['layout_669e145c77a88']['sub_fields'])) {
-                foreach ($field['layouts']['layout_669e145c77a88']['sub_fields'] as $menu_field_key => $menu_field) {
-                    if ($menu_field['name'] == "menu_type") {
+            // On complète la liste de menu dans le backoffice
+                    if ($field['name'] == "menu_type") {
                         $registerMenusClass = new \Woody\Addon\Menus\Services\RegisterMenus();
                         $menus = $registerMenusClass->setPagesOptions();
                         
-                        if(!empty($menus) && !empty($menus['sub_pages'])) {
-                            if (!empty($menus['sub_pages'])) {
-                                foreach ($menus['sub_pages'] as $subpage_key => $subpage) {
-                                    if ($subpage['translate_type'] != 'tree_menu') {
-                                        $field['layouts']['layout_669e145c77a88']['sub_fields'][$menu_field_key]['choices'][$subpage_key] = $subpage['menu_title'];
-                                    }
+                        if (!empty($menus['sub_pages'])) {
+                            foreach ($menus['sub_pages'] as $subpage_key => $subpage) {
+                                if ($subpage['translate_type'] != "tree_menu") {
+                                    $field['choices'][$subpage_key] = $subpage['menu_title'];
                                 }
                             }
                         }
                     }
-                }
-            }
         } else {
             unset($field['layouts']['layout_669e145c77a88']);
         }
