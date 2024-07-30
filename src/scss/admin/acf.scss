@@ -1024,6 +1024,11 @@
                     }
                 }
 
+                &[data-layout='menus'] {
+                    &:before {
+                        content: '\f333';
+                    }
+                }
             }
         }
     }
