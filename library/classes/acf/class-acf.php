@@ -637,13 +637,13 @@ class WoodyTheme_ACF
     public function menuTypeLoadField($field) {
         if (in_array('menus_v2', WOODY_OPTIONS)) {
             // On complète la liste de menu dans le backoffice
-                    if ($field['name'] == "menu_type") {
+                    if ($field['name'] == 'menu_type') {
                         $registerMenusClass = new \Woody\Addon\Menus\Services\RegisterMenus();
                         $menus = $registerMenusClass->setPagesOptions();
                         
                         if (!empty($menus['sub_pages'])) {
                             foreach ($menus['sub_pages'] as $subpage_key => $subpage) {
-                                if ($subpage['translate_type'] != "tree_menu") {
+                                if (!empty($subpage['translate_type']) && $subpage['translate_type'] != 'tree_menu') {
                                     $field['choices'][$subpage_key] = $subpage['menu_title'];
                                 }
                             }
