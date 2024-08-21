@@ -23,6 +23,25 @@ function handleErrors(response) {
  * @param {Boolean} publish Publish if original post status & post status are "draft"
  */
 const savePost = (e, publish) => {
+    $('#acf-group_5d7f7cd5615c0').each(function() {
+        var $this = $(this);
+        var input = $this.find('span[class="editable"]');
+        var errorArray = [];
+        var error = true;
+        input.each(function(){
+            var span = $(this);
+            var textConent = span[0].textContent;
+            if(textConent.replace(/\s+/g, '').length === 0){
+                if(span[0].nextElementSibling !== null) {
+                    errorArray.push(span[0].nextElementSibling.textContent.substring(0, span[0].nextElementSibling.textContent.length - 1));
+                    error = false;
+                }
+            }
+        })
+        if(!error){
+            alert("Les champs SEO " + errorArray.join(", ") + " ne sont pas remplis. Cela va impacter le SEO de votre site.");
+        }
+    })
     const form = document.querySelector('#post');
     // const requiredFields = form.querySelectorAll('.is-required'); // Champs obligatoires
     const data = new FormData(form);
