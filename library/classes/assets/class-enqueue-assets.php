@@ -134,6 +134,7 @@ class WoodyTheme_Enqueue_Assets
 
         if(!empty($importmap)) {
             $head_top[] = '<script type="importmap">' . json_encode(['imports' => $importmap]) . '</script>';
+            $head_top[] = '<script>const WOODY_IMPORTMAP = ' . json_encode(['imports' => $importmap]) . '</script>';
         }
 
         return $head_top;
@@ -419,6 +420,11 @@ class WoodyTheme_Enqueue_Assets
     {
         $favicons = $this->enqueueFavicons();
         echo '<link rel="shortcut icon" href="' . $favicons['favicon'] . '" />';
+
+        $importmap = apply_filters('woody_admin_importmap_js', []);
+        if(!empty($importmap)) {
+            echo '<script type="importmap">' . json_encode(['imports' => $importmap]) . '</script>';
+        }
     }
 
     public function tinymceAddStylesheet()
