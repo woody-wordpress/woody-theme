@@ -22,3 +22,4 @@ import './acf-wysiwyg';
 import './sections-blocks';
 import './edit-mode';
 import './responsive-block-order';
+import './check-seo-field';
