@@ -18,86 +18,84 @@ if (function_exists('pll_languages_list')) {
 }
 
 
-// Commands & Helpers
-new WoodyTheme_Commands();
-new WoodyTheme_cleanDataBases();
+// Commands
+new Woody\WoodyTheme\library\classes\content\commands\Commands();
 
 // Query
-new WoodyTheme_Query();
+new Woody\WoodyTheme\library\classes\content\query\Query();
 
 // Plugins
-new WoodyTheme_Plugins_Activation();
-new WoodyTheme_Plugins_Options();
-new WoodyTheme_Plugins_Order();
+new Woody\WoodyTheme\library\classes\content\plugins\Activation();
+new Woody\WoodyTheme\library\classes\content\plugins\Options();
+new Woody\WoodyTheme\library\classes\content\plugins\Order();
 
 // ACF
 if (WP_ENV == 'dev') {
-    new WoodyTheme_ACF_Save_Manager();
+    new Woody\WoodyTheme\library\classes\content\acf\SaveManager();
 }
 
-new WoodyTheme_ACF();
-new WoodyTheme_ACF_PrivateGroups();
-new WoodyTheme_ACF_Counter();
-new WoodyTheme_ACF_ShortLink();
+new Woody\WoodyTheme\library\classes\content\acf\Main();
+new Woody\WoodyTheme\library\classes\content\acf\PrivateGroups();
+new Woody\WoodyTheme\library\classes\content\acf\Counter();
+new Woody\WoodyTheme\library\classes\content\acf\ShortLink();
 
 // Cleanup
-new WoodyTheme_Cleanup_Admin();
-new WoodyTheme_Cleanup_Front();
-new WoodyTheme_Cleanup_Minify();
-new WoodyTheme_Cleanup_OptionsTable(); //Disable
-new WoodyTheme_Cleanup_OptimizeBDD(); // Disable
-new WoodyTheme_Cleanup_Schedule();
+new Woody\WoodyTheme\library\classes\content\cleanup\Admin();
+new Woody\WoodyTheme\library\classes\content\cleanup\Front();
+new Woody\WoodyTheme\library\classes\content\cleanup\Minify();
+// new Woody\WoodyTheme\library\classes\content\cleanup\OptionsTable(); //Disable
+// new Woody\WoodyTheme\library\classes\content\cleanup\OptimizeBDD(); // Disable
+new Woody\WoodyTheme\library\classes\content\cleanup\Schedule();
+new Woody\WoodyTheme\library\classes\content\cleanup\DataBases();
 
 // Dashboard
-new WoodyTheme_Dashboard();
+new Woody\WoodyTheme\library\classes\content\dashboard\Dashboard();
 
 // Assets
-new WoodyTheme_Enqueue_Assets();
+new Woody\WoodyTheme\library\classes\assets\Enqueue();
 
 // Langs
-new WoodyTheme_Polylang();
+new Woody\WoodyTheme\library\classes\content\Polylang();
 
 // Content
-new WoodyTheme_Api_Rest();
-new WoodyTheme_Cron();
-new WoodyTheme_IsMobile();
-new WoodyTheme_Links();
-new WoodyTheme_Page();
-new WoodyTheme_Permalink();
-new WoodyTheme_Post_Type();
-new WoodyTheme_Profiles();
-new WoodyTheme_Robots();
-new WoodyTheme_Seo();
-new WoodyTheme_Taxonomy();
-new WoodyTheme_Tinymce();
-new WoodyTheme_Unpublisher(); //Disable
-new WoodyTheme_Shuffle();
-new WoodyTheme_Videos();
-new WoodyTheme_Testimonials();
-new WoodyTheme_Users_Restrictions();
+new Woody\WoodyTheme\library\classes\content\ApiRest();
+new Woody\WoodyTheme\library\classes\content\Cron();
+new Woody\WoodyTheme\library\classes\content\IsMobile();
+new Woody\WoodyTheme\library\classes\content\Links();
+new Woody\WoodyTheme\library\classes\content\Page();
+new Woody\WoodyTheme\library\classes\content\Permalink();
+new Woody\WoodyTheme\library\classes\content\PostType();
+new Woody\WoodyTheme\library\classes\content\Profiles();
+new Woody\WoodyTheme\library\classes\content\Robots();
+new Woody\WoodyTheme\library\classes\content\Seo();
+new Woody\WoodyTheme\library\classes\content\Taxonomy();
+new Woody\WoodyTheme\library\classes\content\TinyMCE();
+new Woody\WoodyTheme\library\classes\content\Unpublisher();
+new Woody\WoodyTheme\library\classes\content\Shuffle();
+new Woody\WoodyTheme\library\classes\content\Videos();
+new Woody\WoodyTheme\library\classes\content\Testimonials();
+new Woody\WoodyTheme\library\classes\content\Shortcodes();
 
 // Timber
-new WoodyTheme_Timber_Filters();
+new Woody\WoodyTheme\library\classes\timber\Filters();
 
 // Menu
 if (!defined('WOODY_MENUS_V2')) {
-    new WoodyTheme_Menus();
+    new Woody\WoodyTheme\library\classes\menus\Menus();
     if (defined('WOODY_GENERATE_MENU')) {
-        new Woody\Menus\Admin_Menus();
+        new Woody\WoodyTheme\library\classes\menus\Admin();
     }
 }
 
-// Shortcodes
-new WoodyTheme_Shortcodes();
-
 // Roles
-new WoodyTheme_Roles();
+new Woody\WoodyTheme\library\classes\roles\Roles();
+new Woody\WoodyTheme\library\classes\roles\UsersRestrictions();
 
 // Inclusions
-new WoodyTheme_Inclusions();
+new Woody\WoodyTheme\library\classes\inclusions\Inclusions();
 
 // Mailer
-new WoodyTheme_Mailer();
+new Woody\WoodyTheme\library\classes\mailer\Mailer();
 
 // Data Processing
 new WoodyProcess\Compilers\WoodyTheme_WoodyCompilers();
