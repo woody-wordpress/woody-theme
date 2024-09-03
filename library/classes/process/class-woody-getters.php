@@ -104,7 +104,7 @@ class WoodyTheme_WoodyGetters
     public function getCatalogFocusData($current_post, $wrapper, $twigPaths, $paginate = false, $uniqid = 0, $ingore_maxnum = false, $posts_in = null, $filters = null)
     {
         $the_items = [];
-        
+
         // Formatage des pages parentes (contenu manuel uniquement autorisé)
         $the_items = $this->getManualFocusData($wrapper);
 
@@ -345,7 +345,7 @@ class WoodyTheme_WoodyGetters
         if (is_object($post)) {
             $data = $this->getPagePreview($wrapper, $post, true, true);
 
-            if (!empty($wrapper['display_elements']) && in_array('description', $wrapper['display_elements'])) {
+            if (!empty($wrapper['display_elements_documents']) && in_array('description', $wrapper['display_elements_documents'])) {
                 $data['description'] = $post->post_content;
             }
 
