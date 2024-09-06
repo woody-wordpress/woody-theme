@@ -1,11 +1,11 @@
-!(function($, undefined) {
-    $('#post').each(function() {
+!(function ($, undefined) {
+    $('#post').each(function () {
         var cloneEvent = new Event("cloneBlock");
         // This is dope
-        var addBlock = function(field, args) {
+        var addBlock = function (field, args) {
             var $el = acf.duplicate({
-                target: field.$clone(args.layout),
-                append: field.proxy(function($el, $el2) {
+                target: field.$clone(args.layout), //TODO: Revoir ce JS qui génère une erreur Cannot read properties of undefined (reading '$clone')
+                append: field.proxy(function ($el, $el2) {
 
                     // append
                     if (args.before) {
@@ -31,7 +31,7 @@
         var id = "";
         var clone;
 
-        $(document).on('click', '.acf-button[data-name="add-layout"]', function() {
+        $(document).on('click', '.acf-button[data-name="add-layout"]', function () {
             addlayoutbutton = $(this);
             name = addlayoutbutton.closest('.acf-flexible-content').find('input[type="hidden"]').attr('name');
             clone = addlayoutbutton.closest('.acf-flexible-content').find('.clones');
@@ -48,7 +48,7 @@
             for (const button of buttons) {
                 let layouts = clone.find('div[data-layout="' + button.dataset.layout + '"]');
                 let none = true;
-                layouts.each(function() {
+                layouts.each(function () {
                     if ($(this).closest('[data-name="light_section_content"]').length == 0) {
                         none = false;
                     }
@@ -61,7 +61,7 @@
 
                             let layouts = clone.find('div[data-layout="' + button.dataset.layout + '"]');
                             let none = true;
-                            layouts.each(function() {
+                            layouts.each(function () {
                                 // Si le layout est enfant de light section_content alors, ça ne compte pas ce n'est pas un clone qui nous intéresse
                                 if ($(this).closest('[data-name="light_section_content"]').length == 0) {
                                     none = false;
@@ -77,7 +77,7 @@
                                         key: 'field_5b043f0525968'
                                     },
                                     type: 'GET',
-                                    success: function(response) {
+                                    success: function (response) {
                                         response = response.replace(/name="#rowindex-name#/g, 'name="' + name);
                                         response = response.replace(/for="#rowindex-name#/g, 'for="' + id);
                                         response = response.replace(/id="#rowindex-name#/g, 'id="' + id);
@@ -98,7 +98,7 @@
                                             layout: button.dataset.layout,
                                         });
                                     },
-                                    error: function(error) {
+                                    error: function (error) {
                                         console.warn(error);
                                     }
                                 });

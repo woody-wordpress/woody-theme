@@ -74,6 +74,16 @@ class WoodyTheme_Tinymce
                 'title' => 'Style 5',
                 'selector' => 'p',
                 'classes' => 'h5'
+            ),
+            array(
+                'title' => 'Indice',
+                'inline' => 'sub',  
+                'classes' => 'sub'
+            ),
+            array(
+                'title' => 'Exposant',
+                'inline' => 'sup',  
+                'classes' => 'sup'
             )
         );
 

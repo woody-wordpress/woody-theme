@@ -274,6 +274,38 @@
             "save_custom": 0
         },
         {
+            "key": "field_5b2917f0ff06112",
+            "label": "Affichage",
+            "name": "display_elements_documents",
+            "type": "checkbox",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_60cc8c88f2824",
+                        "operator": "==",
+                        "value": "documents"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "description": "Description"
+            },
+            "allow_custom": 0,
+            "default_value": ["description"],
+            "layout": "horizontal",
+            "toggle": 0,
+            "return_format": "value",
+            "save_custom": 0
+        },
+
+        {
             "key": "field_643eba9377103",
             "label": "Plus d'options",
             "name": "",
