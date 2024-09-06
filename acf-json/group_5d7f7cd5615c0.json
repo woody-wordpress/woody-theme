@@ -484,6 +484,13 @@
             {
                 "param": "post_type",
                 "operator": "==",
+                "value": "youbook_product"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
                 "value": "woody_rdbk_leaflets"
             }
         ]
