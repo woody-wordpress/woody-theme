@@ -57,14 +57,7 @@ class ApiRest
             $post = get_post($post_id);
 
             if ($post->post_status == 'publish') {
-                switch ($post->post_type) {
-                    case 'touristic_sheet':
-                        $post_preview = getTouristicSheetPreview($wrapper, $post);
-                        break;
-                    default:
-                        $post_preview = getPagePreview($wrapper, $post);
-                        break;
-                }
+                $post_preview = getAnyPostPreview($wrapper, $post);
             }
 
             // Cas d'une mise en avant contenu libre
