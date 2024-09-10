@@ -447,7 +447,8 @@ function embedProviderThumbnail($embed)
             $regex = '/(?<=\/video\/)(.*)/';
             preg_match($regex, $src, $matches);
             if (!empty($matches[0])) {
-                $return = 'https://www.dailymotion.com/thumbnail/video/' . $matches[0];
+                $hash = json_decode(file_get_contents('https://api.dailymotion.com/video/' . $matches[0] . '?fields=id,thumbnail_720_url,title&thumbnail_ratio=widescreen'), true);
+                $return = $hash['thumbnail_720_url'];
             }
 
             break;

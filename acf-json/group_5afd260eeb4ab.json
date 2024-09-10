@@ -321,6 +321,37 @@
                             "min": "",
                             "max": ""
                         },
+                        "layout_6696978689320": {
+                            "key": "layout_6696978689320",
+                            "name": "catalog_focus",
+                            "label": "Mise en avant catalogue",
+                            "display": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_669697ce6670c",
+                                    "label": "Mise en avant catalogue",
+                                    "name": "catalog_focus",
+                                    "type": "clone",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "hide-label",
+                                        "id": ""
+                                    },
+                                    "clone": [
+                                        "group_669698072603c"
+                                    ],
+                                    "display": "seamless",
+                                    "layout": "block",
+                                    "prefix_label": 0,
+                                    "prefix_name": 0
+                                }
+                            ],
+                            "min": "",
+                            "max": ""
+                        },
                         "layout_5bc6eeaf0b4f3": {
                             "key": "layout_5bc6eeaf0b4f3",
                             "name": "content_list",
@@ -900,6 +931,37 @@
                                     },
                                     "clone": [
                                         "group_6442795be9222"
+                                    ],
+                                    "display": "seamless",
+                                    "layout": "block",
+                                    "prefix_label": 0,
+                                    "prefix_name": 0
+                                }
+                            ],
+                            "min": "",
+                            "max": ""
+                        },
+                        "layout_66b0cf9551c56": {
+                            "key": "layout_66b0cf9551c56",
+                            "name": "menus",
+                            "label": "Menus",
+                            "display": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_66a3b5aa8be89",
+                                    "label": "Menus",
+                                    "name": "menus",
+                                    "type": "clone",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "hide-label",
+                                        "id": ""
+                                    },
+                                    "clone": [
+                                        "group_669e0870bab60"
                                     ],
                                     "display": "seamless",
                                     "layout": "block",

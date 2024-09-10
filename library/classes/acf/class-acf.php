@@ -69,6 +69,7 @@ class WoodyTheme_ACF
         add_filter('acf/load_value/type=gallery', [$this, 'pllGalleryLoadField'], 10, 3);
 
         add_filter('acf/load_field/name=section_content', [$this, 'sectionContentLoadField']);
+        add_filter('acf/load_field/name=menu_type', [$this, 'menuTypeLoadField']);
         add_filter('acf/load_field/name=section_animations', [$this, 'sectionAnimationsForAdmin']);
 
         add_filter('acf/load_field/name=page_heading_tags', [$this, 'listAllPageTerms'], 10, 3);
@@ -80,7 +81,7 @@ class WoodyTheme_ACF
 
         add_filter('acf/fields/taxonomy/query', [$this, 'hideProfileChildTaxonomies'], 10, 3);
 
-        // add_filter('acf/validate_post_id', [$this, 'fix_acf_field_post_id_on_preview'], 10, 3);
+        add_filter('acf/validate_post_id', [$this, 'fix_acf_field_post_id_on_preview'], 10, 3);
 
         // Custom Filter
         add_filter('woody_get_field_option', [$this, 'woodyGetFieldOption'], 10, 3);
@@ -633,6 +634,28 @@ class WoodyTheme_ACF
         return $field;
     }
 
+    public function menuTypeLoadField($field) {
+        if (in_array('menus_v2', WOODY_OPTIONS)) {
+            // On complète la liste de menu dans le backoffice
+                    if ($field['name'] == 'menu_type') {
+                        $registerMenusClass = new \Woody\Addon\Menus\Services\RegisterMenus();
+                        $menus = $registerMenusClass->setPagesOptions();
+                        
+                        if (!empty($menus['sub_pages'])) {
+                            foreach ($menus['sub_pages'] as $subpage_key => $subpage) {
+                                if (!empty($subpage['translate_type']) && $subpage['translate_type'] != 'tree_menu') {
+                                    $field['choices'][$subpage_key] = $subpage['menu_title'];
+                                }
+                            }
+                        }
+                    }
+        } else {
+            unset($field['layouts']['layout_669e145c77a88']);
+        }
+
+        return $field;
+    }
+
     /**
      * Affichage du champs d'animations de sections seulement si l'utilisateur a le rôle administrateur
      */
@@ -1154,6 +1177,9 @@ class WoodyTheme_ACF
                 'blocks-summary-tpl_01',
                 'blocks-summary-tpl_03',
                 'blocks-summary-tpl_02',
+            ],
+            'menus' => [
+                'blocks-menu-tpl_01'
             ]
         ];
 

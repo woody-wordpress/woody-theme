@@ -131,6 +131,7 @@ class WoodyTheme_Enqueue_Assets
         $jQuery_version = $this->getJqueryVersion();
         $importmap = apply_filters('woody_importmap_js', [
             'jquery' => get_template_directory_uri() . '/src/lib/custom/jquery@' . $jQuery_version . '.min.mjs',
+            'woody_lib_utils' => woody_addon_asset_path('woody-lib-utils', 'js/woody-lib-utils.mjs')
         ]);
 
         if(!empty($importmap)) {
@@ -422,6 +423,13 @@ class WoodyTheme_Enqueue_Assets
     {
         $favicons = $this->enqueueFavicons();
         echo '<link rel="shortcut icon" href="' . $favicons['favicon'] . '" />';
+
+        $importmap = apply_filters('woody_admin_importmap_js', [
+            'woody_lib_utils' => woody_addon_asset_path('woody-lib-utils', 'js/woody-lib-utils.mjs')
+        ]);
+        if(!empty($importmap)) {
+            echo '<script type="importmap">' . json_encode(['imports' => $importmap]) . '</script>';
+        }
     }
 
     public function tinymceAddStylesheet()

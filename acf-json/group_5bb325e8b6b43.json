@@ -23,6 +23,7 @@
             "key": "field_65ca0203afef7",
             "label": "Remontée de pages automatique",
             "name": "landswpr_auto_focus",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -103,6 +104,7 @@
                         "id": ""
                     },
                     "layout": "block",
+                    "parent_repeater": "field_5bb3262577f39",
                     "sub_fields": [
                         {
                             "key": "field_5bb326b977f3b",
@@ -132,7 +134,7 @@
                         },
                         {
                             "key": "field_5bb3274577f3c",
-                            "label": "Image",
+                            "label": "Image Desktop",
                             "name": "landswpr_slide_img",
                             "aria-label": "",
                             "type": "image",
@@ -148,8 +150,8 @@
                                 ]
                             ],
                             "wrapper": {
-                                "width": "",
-                                "class": "hide-label",
+                                "width": "50",
+                                "class": "",
                                 "id": ""
                             },
                             "return_format": "array",
@@ -162,6 +164,39 @@
                             "max_height": "",
                             "max_size": "",
                             "mime_types": ""
+                        },
+                        {
+                            "key": "field_6686add5160d8",
+                            "label": "Image Mobile",
+                            "name": "landswpr_slide_img_mobile",
+                            "aria-label": "",
+                            "type": "image",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_5bb326b977f3b",
+                                        "operator": "==",
+                                        "value": "img"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "library": "all",
+                            "min_width": 320,
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": "jpeg, jpg, png, gif",
+                            "preview_size": "thumbnail"
                         },
                         {
                             "key": "field_5bb327a477f3d",
@@ -363,8 +398,7 @@
                             "layout": "horizontal",
                             "return_format": "value"
                         }
-                    ],
-                    "parent_repeater": "field_5bb3262577f39"
+                    ]
                 },
                 {
                     "key": "field_5bb3294777f42",
@@ -432,6 +466,7 @@
                     "layout": "block",
                     "button_label": "Ajouter un bouton",
                     "rows_per_page": 20,
+                    "parent_repeater": "field_5bb3262577f39",
                     "sub_fields": [
                         {
                             "key": "field_5bbcaab563652",
@@ -456,8 +491,7 @@
                             "prefix_name": 0,
                             "parent_repeater": "field_5bb3297e77f43"
                         }
-                    ],
-                    "parent_repeater": "field_5bb3262577f39"
+                    ]
                 },
                 {
                     "key": "field_61aa234624178",
@@ -525,6 +559,7 @@
             "key": "field_65ca19c639cce",
             "label": "Type de mise en avant",
             "name": "focused_type",
+            "aria-label": "",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -556,6 +591,7 @@
             "key": "field_65ca1a0a3606e",
             "label": "Types de publications",
             "name": "focused_content_type",
+            "aria-label": "",
             "type": "taxonomy",
             "instructions": "",
             "required": 0,
@@ -587,12 +623,14 @@
             "load_terms": 0,
             "return_format": "id",
             "multiple": 0,
-            "allow_null": 0
+            "allow_null": 0,
+            "bidirectional_target": []
         },
         {
             "key": "field_65ca1a688a77c",
             "label": "Tags",
             "name": "focused_taxonomy_terms",
+            "aria-label": "",
             "type": "select",
             "instructions": "",
             "required": 0,
@@ -610,7 +648,60 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {},
+            "choices": {
+                "128": "Catégories de média - Illustration",
+                "101": "Catégories de média - Pdf",
+                "99": "Catégories de média - Photo",
+                "100": "Catégories de média - Vidéo",
+                "107": "Circonstances - Automne",
+                "103": "Circonstances - Hiver",
+                "109": "Circonstances - Printemps",
+                "105": "Circonstances - Été",
+                "189": "Hashtags - Angers",
+                "191": "Hashtags - Bateau",
+                "190": "Hashtags - Maine",
+                "192": "Hashtags - Montgolfière",
+                "193": "Hashtags - Mosaïque",
+                "161": "Hashtags - brochure",
+                "188": "Hashtags - carte",
+                "183": "Hashtags - conciergerie",
+                "182": "Hashtags - tram",
+                "194": "Hashtags - troglodyte",
+                "111": "Lieux - Angers",
+                "119": "Lieux - Brissac",
+                "151": "Lieux - Béhuard",
+                "186": "Lieux - Longuenée-en-Anjou",
+                "122": "Lieux - Rives-du-Loir-en-Anjou",
+                "129": "Lieux - Saint-Barthélemy-d'Anjou",
+                "147": "Lieux - Savennières",
+                "131": "Lieux - Trélazé",
+                "149": "Lieux - Verrières-en-Anjou",
+                "126": "Lieux - Écouflant",
+                "115": "Lieux - Écuillé",
+                "93": "Thématiques - Activités",
+                "137": "Thématiques - Aire de camping-car",
+                "139": "Thématiques - Camping",
+                "143": "Thématiques - Chambre d'hôte",
+                "87": "Thématiques - Château",
+                "135": "Thématiques - Culture",
+                "33": "Thématiques - Gravel",
+                "141": "Thématiques - Gîte",
+                "97": "Thématiques - Hotel",
+                "95": "Thématiques - Hébergement",
+                "145": "Thématiques - Hébergement de groupe",
+                "89": "Thématiques - Loire et Nature",
+                "133": "Thématiques - Marche et randonnée",
+                "113": "Thématiques - Musée",
+                "85": "Thématiques - Patrimoine",
+                "124": "Thématiques - Sur et dans l'eau",
+                "91": "Thématiques - Vignoble et gastronomie",
+                "153": "Thématiques - Visite guidée",
+                "31": "Thématiques - Vélo",
+                "41195": "Types de média - Instagram",
+                "30": "Types de média - Média ajouté manuellement",
+                "2026": "Types de média - Vidéo externe",
+                "37640": "Types de média - roadBOOK Pros"
+            },
             "default_value": [],
             "allow_null": 0,
             "multiple": 1,
@@ -623,6 +714,7 @@
             "key": "field_65ca1a89645af",
             "label": "Si les contenus sont tagués avec :",
             "name": "focused_taxonomy_terms_andor",
+            "aria-label": "",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -656,6 +748,7 @@
             "key": "field_65ca1ae73bce4",
             "label": "Nombre d'éléments max",
             "name": "focused_count",
+            "aria-label": "",
             "type": "number",
             "instructions": "",
             "required": 0,
@@ -685,6 +778,7 @@
             "key": "field_65ca1b400ba26",
             "label": "Ordre de tri",
             "name": "focused_sort",
+            "aria-label": "",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -720,6 +814,7 @@
             "key": "field_65ca1b33dda06",
             "label": "Affichage",
             "name": "display_elements",
+            "aria-label": "",
             "type": "checkbox",
             "instructions": "",
             "required": 0,
@@ -751,7 +846,7 @@
                 "description": "Description"
             },
             "allow_custom": 0,
-            "default_value": "",
+            "default_value": [],
             "layout": "horizontal",
             "toggle": 0,
             "return_format": "value",
@@ -761,6 +856,7 @@
             "key": "field_65d30ca5a731e",
             "label": "Afficher les boutons \"Lire la suite\"",
             "name": "landswpr_auto_display_button",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -907,5 +1003,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "Diaporama de slides (image ou video) en page d'accueil",
-    "show_in_rest": 0
+    "show_in_rest": 0,
+    "modified": 1720171778
 }

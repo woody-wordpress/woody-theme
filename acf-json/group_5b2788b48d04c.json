@@ -267,14 +267,44 @@
                 "created": "Date de publication"
             },
             "allow_custom": 0,
-            "default_value": [
-                "description"
-            ],
+            "default_value": [],
             "layout": "horizontal",
             "toggle": 0,
             "return_format": "value",
             "save_custom": 0
         },
+        {
+            "key": "field_5b2917f0ff06112",
+            "label": "Affichage",
+            "name": "display_elements_documents",
+            "type": "checkbox",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_60cc8c88f2824",
+                        "operator": "==",
+                        "value": "documents"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "description": "Description"
+            },
+            "allow_custom": 0,
+            "default_value": ["description"],
+            "layout": "horizontal",
+            "toggle": 0,
+            "return_format": "value",
+            "save_custom": 0
+        },
+
         {
             "key": "field_643eba9377103",
             "label": "Plus d'options",
@@ -360,7 +390,7 @@
                 "id": ""
             },
             "message": "",
-            "default_value": 1,
+            "default_value": 0,
             "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
@@ -482,7 +512,7 @@
         },
         {
             "key": "field_64a6d2200183b",
-            "label": "Pages à Exlure",
+            "label": "Pages à exclure",
             "name": "excluded_posts",
             "type": "relationship",
             "instructions": "",
