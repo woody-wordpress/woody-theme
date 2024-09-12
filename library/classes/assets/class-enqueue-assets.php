@@ -425,7 +425,8 @@ class WoodyTheme_Enqueue_Assets
         echo '<link rel="shortcut icon" href="' . $favicons['favicon'] . '" />';
 
         $importmap = apply_filters('woody_admin_importmap_js', [
-            'woody_lib_utils' => woody_addon_asset_path('woody-lib-utils', 'js/woody-lib-utils.mjs')
+            // 'woody_lib_utils' => woody_addon_asset_path('woody-lib-utils', 'js/woody-lib-utils.mjs'),
+            'woody_library_interactive_map' => woody_addon_asset_path('woody-lib-utils', 'js/.../woody-...mjs'),
         ]);
         if(!empty($importmap)) {
             echo '<script type="importmap">' . json_encode(['imports' => $importmap]) . '</script>';
