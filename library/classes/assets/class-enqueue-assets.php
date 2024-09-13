@@ -131,8 +131,8 @@ class WoodyTheme_Enqueue_Assets
         $jQuery_version = $this->getJqueryVersion();
         $importmap = apply_filters('woody_importmap_js', [
             'jquery' => get_template_directory_uri() . '/src/lib/custom/jquery@' . $jQuery_version . '.min.mjs',
-            'woody_library_interactive_manager' => woody_addon_asset_path('woody-library', 'js/interactive-manager.mjs'),
-            'woody_library_interactive_manager_focuscard' => woody_addon_asset_path('woody-library', 'js/interactive-manager-focuscard.mjs'),
+            'woody_library_manager_interactive' => woody_addon_asset_path('woody-library', 'js/manager-interactive.mjs'),
+            'woody_library_manager_focuscard' => woody_addon_asset_path('woody-library', 'js/manager-focuscard.mjs'),
         ]);
 
         if(!empty($importmap)) {
