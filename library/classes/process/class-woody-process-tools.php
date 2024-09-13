@@ -270,14 +270,13 @@ class WoodyTheme_WoodyProcessTools
             }
         }
 
-
         $query_results = new \WP_Query(array(
             'posts_per_page'    => $limit,
             'post_type'         => 'attachment',
             'post_status'       => 'inherit',
             'tax_query'         => array(
                 'relation' =>  $andor,
-                $tax_query[0]
+                $tax_query
             )
         ));
 
