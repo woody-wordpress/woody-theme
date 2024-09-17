@@ -131,8 +131,9 @@ class WoodyTheme_Enqueue_Assets
         $jQuery_version = $this->getJqueryVersion();
         $importmap = apply_filters('woody_importmap_js', [
             'jquery' => get_template_directory_uri() . '/src/lib/custom/jquery@' . $jQuery_version . '.min.mjs',
-            'woody_library_manager_interactive' => woody_addon_asset_path('woody-library', 'js/manager-interactive.mjs'),
-            'woody_library_manager_focuscard' => woody_addon_asset_path('woody-library', 'js/manager-focuscard.mjs'),
+            'woody_library_component_focus_card_map' => woody_addon_asset_path('woody-library', 'js/component-focus-card-map.mjs'),
+            'woody_library_manager_focus_card' => woody_addon_asset_path('woody-library', 'js/manager-focus-card.mjs'),
+            'woody_library_manager_focus_map' => woody_addon_asset_path('woody-library', 'js/manager-focus-map.mjs'),
         ]);
 
         if(!empty($importmap)) {
@@ -170,11 +171,11 @@ class WoodyTheme_Enqueue_Assets
         // define apiurl according to WP_ENV
         // If preprod render is eneeded use $apirender_base_uri = 'https://api.tourism-system.rc-preprod.com/render';
         switch (WP_ENV) {
-            case 'dev':
             case 'preprod':
                 $jsModeSuffix = 'debug';
                 $apirender_base_uri = 'https://api.tourism-system.com/render';
                 break;
+            case 'dev':
             default:
                 $jsModeSuffix = 'min';
                 $apirender_base_uri = 'https://api.tourism-system.com/render';
