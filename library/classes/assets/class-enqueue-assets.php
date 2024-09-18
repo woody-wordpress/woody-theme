@@ -131,9 +131,10 @@ class WoodyTheme_Enqueue_Assets
         $jQuery_version = $this->getJqueryVersion();
         $importmap = apply_filters('woody_importmap_js', [
             'jquery' => get_template_directory_uri() . '/src/lib/custom/jquery@' . $jQuery_version . '.min.mjs',
-            'woody_library_component_focus_card_map' => woody_addon_asset_path('woody-library', 'js/component-focus-card-map.mjs'),
-            'woody_library_manager_focus_card' => woody_addon_asset_path('woody-library', 'js/manager-focus-card.mjs'),
-            'woody_library_manager_focus_map' => woody_addon_asset_path('woody-library', 'js/manager-focus-map.mjs'),
+            'woody_library_component_map' => woody_addon_asset_path('woody-library', 'js/modules/components/component-map.mjs'),
+            'woody_library_component_focus_card_map' => woody_addon_asset_path('woody-library', 'js/modules/components/component-focus-card-map.mjs'),
+            'woody_library_manager_focus_card' => woody_addon_asset_path('woody-library', 'js/modules/managers/manager-focus-card.mjs'),
+            'woody_library_manager_focus_map' => woody_addon_asset_path('woody-library', 'js/modules/managers/manager-focus-map.mjs'),
         ]);
 
         if(!empty($importmap)) {
@@ -170,8 +171,7 @@ class WoodyTheme_Enqueue_Assets
 
         // define apiurl according to WP_ENV
         // If preprod render is eneeded use $apirender_base_uri = 'https://api.tourism-system.rc-preprod.com/render';
-        // TODO : fix bug JS "hwConfig undefined" lorsque $jsModeSuffix = 'debug'; en WP_ENV == 'dev'
-        // => en attendant nous fixons $jsModeSuffix = 'min'; en WP_ENV == 'dev' (déplacement du case)
+        // TODO : in DEV, if jsModeSuffix is 'debug', "hwConfig undefined" error occurs - @rudy
         switch (WP_ENV) {
             case 'preprod':
                 $jsModeSuffix = 'debug';
