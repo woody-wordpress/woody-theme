@@ -170,6 +170,8 @@ class WoodyTheme_Enqueue_Assets
 
         // define apiurl according to WP_ENV
         // If preprod render is eneeded use $apirender_base_uri = 'https://api.tourism-system.rc-preprod.com/render';
+        // TODO : fix bug JS "hwConfig undefined" lorsque $jsModeSuffix = 'debug'; en WP_ENV == 'dev'
+        // => en attendant nous fixons $jsModeSuffix = 'min'; en WP_ENV == 'dev' (déplacement du case)
         switch (WP_ENV) {
             case 'preprod':
                 $jsModeSuffix = 'debug';
