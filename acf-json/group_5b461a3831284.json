@@ -31,8 +31,7 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-            },
+            "choices": {},
             "default_value": false,
             "allow_null": 1,
             "multiple": 0,
@@ -316,8 +315,12 @@
                 "id": ""
             },
             "choices": {
-                "padd-lg": "Grande",
-                "padd-xlg": "Très Grande"
+                "padd-lg": "Grande (autour)",
+                "padd-xlg": "Très Grande (autour)",
+                "padd-left-lg": "Grande (à gauche)",
+                "padd-left-xlg": "Très Grande (à gauche)",
+                "padd-right-lg": "Grande (à droite)",
+                "padd-right-xlg": "Très Grande (à droite)"
             },
             "allow_null": 1,
             "default_value": "",
