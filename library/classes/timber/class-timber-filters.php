@@ -34,6 +34,7 @@ class WoodyTheme_Timber_Filters
         $twig->addFunction(new Twig_SimpleFunction('_nx_noop', '_nx_noop'));
         $twig->addFunction(new Twig_SimpleFunction('translate_nooped_plural', 'translate_nooped_plural'));
         $twig->addFunction(new Twig_SimpleFunction('shortcode', 'do_shortcode'));
+        $twig->addFunction(new Twig_SimpleFunction('woodyAddonAssetPath', 'woody_addon_asset_path'));
 
         // Filters Native WP
         $twig->addFilter(new Twig_SimpleFilter('stripshortcodes', 'strip_shortcodes'));

@@ -131,10 +131,14 @@ class WoodyTheme_Enqueue_Assets
         $jQuery_version = $this->getJqueryVersion();
         $importmap = apply_filters('woody_importmap_js', [
             'jquery' => get_template_directory_uri() . '/src/lib/custom/jquery@' . $jQuery_version . '.min.mjs',
-            'woody_library_component_map' => woody_addon_asset_path('woody-library', 'js/modules/components/component-map.mjs'),
-            'woody_library_component_focus_card_map' => woody_addon_asset_path('woody-library', 'js/modules/components/component-focus-card-map.mjs'),
-            'woody_library_manager_focus_card' => woody_addon_asset_path('woody-library', 'js/modules/managers/manager-focus-card.mjs'),
-            'woody_library_manager_focus_map' => woody_addon_asset_path('woody-library', 'js/modules/managers/manager-focus-map.mjs'),
+            'woody_library_filter' => woody_addon_asset_path('woody-library', 'js/filter.js'),
+            'woody_library_summary_component' => woody_addon_asset_path('woody-library', 'js/modules/components/summary/summary-component.mjs'),
+            'woody_library_summary_accordion_manager' => woody_addon_asset_path('woody-library', 'js/modules/managers/summary/summary-accordion-manager.mjs'),
+            'woody_library_map_component' => woody_addon_asset_path('woody-library', 'js/modules/components/map/map-component.mjs'),
+            'woody_library_card_map_toggler_component' => woody_addon_asset_path('woody-library', 'js/modules/components/card/card-map-toggler-component.mjs'),
+            'woody_library_card_manager' => woody_addon_asset_path('woody-library', 'js/modules/managers/card/card-manager.mjs'),
+            'woody_library_card_toggler_manager' => woody_addon_asset_path('woody-library', 'js/modules/managers/card/card-toggler-manager.mjs'),
+            'woody_library_card_map_manager' => woody_addon_asset_path('woody-library', 'js/modules/managers/card/card-map-manager.mjs'),
         ]);
 
         if(!empty($importmap)) {
