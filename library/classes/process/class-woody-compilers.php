@@ -209,7 +209,7 @@ class WoodyTheme_WoodyCompilers
                             if ($parameters === true) {
                                 $wrapper['routes'][$key]['features'][$f_key]['properties']['fill'] = $fill_color;
                                 $wrapper['routes'][$key]['features'][$f_key]['properties']['stroke'] = $route_color;
-                                $wrapper['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = $stroke_thickness;
+                                $wrapper['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = (float) $stroke_thickness;
                             }
 
                             $fill_opacity = $wrapper['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] ?? 0;

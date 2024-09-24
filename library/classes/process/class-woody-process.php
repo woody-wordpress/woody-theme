@@ -79,6 +79,7 @@ class WoodyTheme_WoodyProcess
         $return = '';
 
         // Traitements spécifique en fonction du type de layout
+
         switch ($layout['acf_fc_layout']) {
             case 'manual_focus':
             case 'auto_focus':
