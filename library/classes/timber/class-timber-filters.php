@@ -67,6 +67,7 @@ class WoodyTheme_Timber_Filters
         $twig->addFilter(new Twig_SimpleFilter('html_class', [$this, 'html_class']));
         $twig->addFilter(new Twig_SimpleFilter('hidePhoneNumber', [$this, 'hidePhoneNumber']));
         $twig->addFilter(new Twig_SimpleFilter('beautifyPhoneNumber', [$this, 'beautifyPhoneNumber']));
+        $twig->addFilter(new Twig_SimpleFilter('parseColor', [$this, 'parseColor']));
 
         // Debug Woody
         $twig->addFilter(new Twig_SimpleFilter('dump', [$this, 'dump']));
@@ -122,6 +123,21 @@ class WoodyTheme_Timber_Filters
         }
 
         return $return;
+    }
+
+    /**
+     * Parse color : try to get corresponding css var name (that is globaly exposed in DOM) if necessary
+     */
+    public function parseColor (string $color): string {
+        $color_mapping = [
+            "primary" => "var(--primary-color)",
+            "secondary" => "var(--secondary-color)",
+            "black" => "var(--black)",
+            "darkgray" => "var(--dark-gray)",
+            "lightgray" => "var(--light-gray)",
+            "white" => "var(--white)"
+        ];
+        return array_key_exists($color, $color_mapping) ? $color_mapping[$color] : $color;
     }
 
     public function phoneClick($text)
