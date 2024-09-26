@@ -257,8 +257,6 @@ class WoodyTheme_WoodyCompilers
                     $wrapper['markers'][$key]['marker_as_link'] = true;
                 }
 
-                $wrapper['markers'][$key]['compiled_marker']  = \Timber::compile('/_objects/markerObject.twig', $marker);
-
                 if (!empty($marker['title']) || !empty($marker['description']) || !empty($marker['img'])) {
                     $the_marker['item']['title'] = (empty($marker['title'])) ? '' : $marker['title'];
                     $the_marker['item']['description'] = (empty($marker['description'])) ? '' : $marker['description'];
@@ -268,6 +266,7 @@ class WoodyTheme_WoodyCompilers
                     }
 
                     $the_marker['item']['link'] = (empty($marker['link'])) ? '' : $marker['link'];
+                    // TODO tmapsv2_refactoring
                     $wrapper['markers'][$key]['marker_thumb_html']  = \Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker);
                 }
             }
@@ -593,7 +592,7 @@ class WoodyTheme_WoodyCompilers
                             'lat' => $item['location']['lat'],
                             'lng' => $item['location']['lng']
                         ],
-                        'compiled_marker' => '', //TODO: anciennement default_marker
+                        // TODO tmapsv2_refactoring
                         'marker_thumb_html' => \Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker)
                     ];
                 }

@@ -35,6 +35,7 @@ class WoodyTheme_Timber_Filters
         $twig->addFunction(new Twig_SimpleFunction('translate_nooped_plural', 'translate_nooped_plural'));
         $twig->addFunction(new Twig_SimpleFunction('shortcode', 'do_shortcode'));
         $twig->addFunction(new Twig_SimpleFunction('woodyAddonAssetPath', 'woody_addon_asset_path'));
+        $twig->addFunction(new Twig_SimpleFunction('getSvgSymbolHref', [$this, 'getSvgSymbolHref']));
 
         // Filters Native WP
         $twig->addFilter(new Twig_SimpleFilter('stripshortcodes', 'strip_shortcodes'));
@@ -68,6 +69,7 @@ class WoodyTheme_Timber_Filters
         $twig->addFilter(new Twig_SimpleFilter('hidePhoneNumber', [$this, 'hidePhoneNumber']));
         $twig->addFilter(new Twig_SimpleFilter('beautifyPhoneNumber', [$this, 'beautifyPhoneNumber']));
         $twig->addFilter(new Twig_SimpleFilter('parseColor', [$this, 'parseColor']));
+        $twig->addFilter(new Twig_SimpleFilter('getWoodyIconSvgHref', [$this, 'getWoodyIconSvgHref']));
 
         // Debug Woody
         $twig->addFilter(new Twig_SimpleFilter('dump', [$this, 'dump']));
@@ -126,7 +128,28 @@ class WoodyTheme_Timber_Filters
     }
 
     /**
+     * Retrieve SVG symbol Href for specified symbol name
+     * @author Sébastien Chandonay
+     */
+    public function getSvgSymbolHref (string $symbolName) {
+        return woody_addon_asset_path('woody-library', "static/symbols.svg#" . $symbolName);
+    }
+
+    /**
+     * Retrieve SVG Symbol public URL for specified Woody Icon
+     * @author Sébastien Chandonay
+     */
+    public function getWoodyIconSvgHref (string $woodyIcon): string {
+        if (empty($woodyIcon)) {
+            return '';
+        }
+        // TODO tmapsv2_refactoring - implement this method : create dynamic endpoint that serve WoodyIcon as a SVG Symbol
+        return $this->getSvgSymbolHref('eiffel');
+    }
+
+    /**
      * Parse color : try to get corresponding css var name (that is globaly exposed in DOM) if necessary
+     * @author Sébastien Chandonay
      */
     public function parseColor (string $color): string {
         $color_mapping = [
