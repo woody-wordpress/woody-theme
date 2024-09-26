@@ -524,7 +524,10 @@ class WoodyTheme_WoodyGetters
             foreach ($wrapper['display_elements'] as $display) {
                 if (strpos($display, '_') === 0) {
                     $tax = ltrim($display, '_');
-                    $data['terms'][$tax] = getPrimaryTerm($tax, $post->ID, array('name', 'slug', 'term_id'));
+                    $primary_term = getPrimaryTerm($tax, $post->ID, array('name', 'slug', 'term_id'));
+                    if (!empty($primary_term)) {
+                        $data['terms'][$tax] = $primary_term;
+                    }
                 }
             }
         }
