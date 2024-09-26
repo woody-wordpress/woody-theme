@@ -131,7 +131,7 @@ class WoodyTheme_Timber_Filters
      * Retrieve SVG symbol Href for specified symbol name
      * @author Sébastien Chandonay
      */
-    public function getSvgSymbolHref (string $symbolName) {
+    public function getSvgSymbolHref (string $symbolName): string {
         return woody_addon_asset_path('woody-library', "static/symbols.svg#" . $symbolName);
     }
 
