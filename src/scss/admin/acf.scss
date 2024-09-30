@@ -1029,6 +1029,12 @@
                         content: '\f333';
                     }
                 }
+
+                &[data-layout='highlights'] {
+                    &:before {
+                        content: '\f177';
+                    }
+                }
             }
         }
     }
