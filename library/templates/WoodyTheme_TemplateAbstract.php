@@ -7,6 +7,8 @@
  * @since WoodyTheme 1.0.0
  */
 
+namespace Woody\WoodyTheme\library\templates;
+
 abstract class WoodyTheme_TemplateAbstract
 {
     protected $twig_tpl;

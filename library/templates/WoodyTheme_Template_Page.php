@@ -7,10 +7,13 @@
  * @since WoodyTheme 1.0.0
  */
 
+namespace Woody\WoodyTheme\library\templates;
+
 use Woody\Modules\GroupQuotation\GroupQuotation;
 use WoodyProcess\Tools\WoodyTheme_WoodyProcessTools;
 use WoodyProcess\Process\WoodyTheme_WoodyProcess;
 use WoodyProcess\Compilers\WoodyTheme_WoodyCompilers;
+use Woody\WoodyTheme\library\templates\WoodyTheme_TemplateAbstract;
 
 class WoodyTheme_Template_Page extends WoodyTheme_TemplateAbstract
 {

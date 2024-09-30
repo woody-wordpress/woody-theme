@@ -7,7 +7,10 @@
  * @since WoodyTheme 1.17.7
  */
 
+namespace Woody\WoodyTheme\library\templates;
+
 use WoodyProcess\Process\WoodyTheme_WoodyProcess;
+use Woody\WoodyTheme\library\templates\WoodyTheme_TemplateAbstract;
 
 class WoodyTheme_Template_Topic extends WoodyTheme_TemplateAbstract
 {

@@ -6,6 +6,8 @@
  * @since WoodyTheme 1.0.0
  */
 
+namespace Woody\WoodyTheme\library\templates;
+
 class WoodyTheme_Template_Archive
 {
     public function __construct()
