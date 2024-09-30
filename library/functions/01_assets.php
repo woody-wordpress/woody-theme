@@ -458,7 +458,7 @@ function embedProviderThumbnail($embed)
             if (!empty($matches[0])) {
                 $response = wp_remote_get('https://vimeo.com/' .$matches[0]);
                 if (is_wp_error($response) || wp_remote_retrieve_response_code($response) === 200) {
-                    if (preg_match('/<meta property="og:image" content="(.*?)"/', $html, $matches)) {
+                    if (preg_match('/<meta property="og:image" content="(.*?)"/', $response['body'], $matches)) {
                         return $matches[1];
                     }
                 }
