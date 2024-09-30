@@ -96,6 +96,42 @@
                     "maxlength": ""
                 },
                 {
+                    "key": "field_66faa5b6f09dd",
+                    "label": "Date de début du temps fort",
+                    "name": "highlight_start_date",
+                    "aria-label": "",
+                    "type": "date_picker",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "display_format": "d\/m\/Y",
+                    "return_format": "d/m/Y",
+                    "first_day": 1
+                },
+                {
+                    "key": "field_66faa5bdf317a",
+                    "label": "Date de fin du temps fort",
+                    "name": "highlight_end_date",
+                    "aria-label": "",
+                    "type": "date_picker",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "display_format": "d\/m\/Y",
+                    "return_format": "d/m/Y",
+                    "first_day": 1
+                },
+                {
                     "key": "field_66fa9580c1a33",
                     "label": "Type",
                     "name": "content_selection_type",
@@ -164,42 +200,6 @@
                             "multiple": 0,
                             "return_format": "id",
                             "ui": 1
-                        },
-                        {
-                            "key": "field_66faa5b6f09dd",
-                            "label": "Date de début du temps fort",
-                            "name": "highlight_start_date",
-                            "aria-label": "",
-                            "type": "date_picker",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "50",
-                                "class": "",
-                                "id": ""
-                            },
-                            "display_format": "d\/m\/Y",
-                            "return_format": "d/m/Y",
-                            "first_day": 1
-                        },
-                        {
-                            "key": "field_66faa5bdf317a",
-                            "label": "Date de fin du temps fort",
-                            "name": "highlight_end_date",
-                            "aria-label": "",
-                            "type": "date_picker",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "50",
-                                "class": "",
-                                "id": ""
-                            },
-                            "display_format": "d\/m\/Y",
-                            "return_format": "d/m/Y",
-                            "first_day": 1
                         }
                     ]
                 }

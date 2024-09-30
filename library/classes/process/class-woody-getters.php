@@ -252,6 +252,7 @@ class WoodyTheme_WoodyGetters
         $the_items = [];
 
         $the_items = $this->getManualFocusData($wrapper);
+        console_log($wrapper, 'wrapper');
 
         if(!empty($the_items) && !empty($the_items['items'])) {
             foreach ($the_items['items'] as $key_item => $item) {

@@ -67,7 +67,6 @@ class WoodyTheme_WoodyCompilers
                     break;
             case 'highlights':
                 $the_items = $this->getter->getHighlightsFocusData($wrapper);
-                console_log($the_items, 'passed highlights');
                 break;
             case 'auto_focus_topics':
                 $the_items = $this->getter->getAutoFocusTopicsData($wrapper);
