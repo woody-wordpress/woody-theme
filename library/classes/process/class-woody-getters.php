@@ -238,6 +238,31 @@ class WoodyTheme_WoodyGetters
     }
 
     /**
+     *
+     * Nom : getHighlightsFocusData
+     * Auteur : Orphée Besson
+     * Return : Retourne un ensemble de posts sous forme de tableau avec une donnée compatbile Woody
+     * @param    current_post - Un objet Timber\Post
+     * @param    wrapper - Un tableau des champs
+     * @return   the_items - Tableau de contenus compilés + infos complémentaires
+     *
+     */
+    public function getHighlightsFocusData($wrapper)
+    {
+        $the_items = [];
+
+        $the_items = $this->getManualFocusData($wrapper);
+
+        if(!empty($the_items) && !empty($the_items['items'])) {
+            foreach ($the_items['items'] as $key_item => $item) {
+                console_log($item, 'item');
+            }
+        }
+
+        return $the_items;
+    }
+
+    /**
      * @author: Jérémy Legendre
      * Retourne un tableau de données relatives au Topics
      * @param wrapper - Données du layout acf sous forme de tableau
