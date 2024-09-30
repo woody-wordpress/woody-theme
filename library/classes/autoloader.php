@@ -19,37 +19,37 @@ if (function_exists('pll_languages_list')) {
 
 
 // Commands
-new Woody\WoodyTheme\library\classes\content\commands\Commands();
+new Woody\WoodyTheme\library\classes\commands\Commands();
 
 // Query
-new Woody\WoodyTheme\library\classes\content\query\Query();
+new Woody\WoodyTheme\library\classes\query\Query();
 
 // Plugins
-new Woody\WoodyTheme\library\classes\content\plugins\Activation();
-new Woody\WoodyTheme\library\classes\content\plugins\Options();
-new Woody\WoodyTheme\library\classes\content\plugins\Order();
+new Woody\WoodyTheme\library\classes\plugins\Activation();
+new Woody\WoodyTheme\library\classes\plugins\Options();
+new Woody\WoodyTheme\library\classes\plugins\Order();
 
 // ACF
 if (WP_ENV == 'dev') {
-    new Woody\WoodyTheme\library\classes\content\acf\SaveManager();
+    new Woody\WoodyTheme\library\classes\acf\SaveManager();
 }
 
-new Woody\WoodyTheme\library\classes\content\acf\Main();
-new Woody\WoodyTheme\library\classes\content\acf\PrivateGroups();
-new Woody\WoodyTheme\library\classes\content\acf\Counter();
-new Woody\WoodyTheme\library\classes\content\acf\ShortLink();
+new Woody\WoodyTheme\library\classes\acf\Main();
+new Woody\WoodyTheme\library\classes\acf\PrivateGroups();
+new Woody\WoodyTheme\library\classes\acf\Counter();
+new Woody\WoodyTheme\library\classes\acf\ShortLink();
 
 // Cleanup
-new Woody\WoodyTheme\library\classes\content\cleanup\Admin();
-new Woody\WoodyTheme\library\classes\content\cleanup\Front();
-new Woody\WoodyTheme\library\classes\content\cleanup\Minify();
-// new Woody\WoodyTheme\library\classes\content\cleanup\OptionsTable(); //Disable
-// new Woody\WoodyTheme\library\classes\content\cleanup\OptimizeBDD(); // Disable
-new Woody\WoodyTheme\library\classes\content\cleanup\Schedule();
-new Woody\WoodyTheme\library\classes\content\cleanup\DataBases();
+new Woody\WoodyTheme\library\classes\cleanup\Admin();
+new Woody\WoodyTheme\library\classes\cleanup\Front();
+new Woody\WoodyTheme\library\classes\cleanup\Minify();
+// new Woody\WoodyTheme\library\classes\cleanup\OptionsTable(); //Disable
+// new Woody\WoodyTheme\library\classes\cleanup\OptimizeBDD(); // Disable
+new Woody\WoodyTheme\library\classes\cleanup\Schedule();
+new Woody\WoodyTheme\library\classes\cleanup\DataBases();
 
 // Dashboard
-new Woody\WoodyTheme\library\classes\content\dashboard\Dashboard();
+new Woody\WoodyTheme\library\classes\dashboard\Dashboard();
 
 // Assets
 new Woody\WoodyTheme\library\classes\assets\Enqueue();
