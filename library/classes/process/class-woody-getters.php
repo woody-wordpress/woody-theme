@@ -183,7 +183,7 @@ class WoodyTheme_WoodyGetters
             }
         }
 
-        if (!empty($the_items['items']) && is_array($the_items['items']) && $wrapper['focused_sort'] == 'random') {
+        if (!empty($the_items['items']) && is_array($the_items['items']) && (!empty($wrapper['focused_sort']) && $wrapper['focused_sort'] == 'random')) {
             shuffle($the_items['items']);
         }
 

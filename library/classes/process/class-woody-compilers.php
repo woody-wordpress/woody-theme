@@ -59,11 +59,15 @@ class WoodyTheme_WoodyCompilers
             case 'catalog_focus':
                 $the_items = $this->getter->getCatalogFocusData($current_post, $wrapper, $twigPaths);
                 break;
-            case 'auto_focus_sheets':
-                if (!empty($wrapper['playlist_conf_id'])) {
-                    $the_items = $this->getter->getAutoFocusSheetData($wrapper);
-                }
-
+                case 'auto_focus_sheets':
+                    if (!empty($wrapper['playlist_conf_id'])) {
+                        $the_items = $this->getter->getAutoFocusSheetData($wrapper);
+                    }
+                    
+                    break;
+            case 'highlights':
+                $the_items = $this->getter->getManualFocusData($wrapper);
+                console_log($the_items, 'passed highlights');
                 break;
             case 'auto_focus_topics':
                 $the_items = $this->getter->getAutoFocusTopicsData($wrapper);
