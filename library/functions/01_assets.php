@@ -456,12 +456,12 @@ function embedProviderThumbnail($embed)
             $regex = '/([0-9]+)/';
             preg_match($regex, $src, $matches);
             if (!empty($matches[0])) {
-                return 'https://vumbnail.com/' . $matches[0] . '.jpg';
-                // $vimeo_data = file_get_contents('https://vimeo.com/api/v2/video/'. $matches[0] .'.json');
-                // if (!empty($vimeo_data)) {
-                //     $vimeo_data = json_decode($vimeo_data);
-                //     $return = $vimeo_data[0]->thumbnail_large;
-                // }
+                $response = wp_remote_get('https://vimeo.com/' .$matches[0]);
+                if (is_wp_error($response) || wp_remote_retrieve_response_code($response) === 200) {
+                    if (preg_match('/<meta property="og:image" content="(.*?)"/', $html, $matches)) {
+                        return $matches[1];
+                    }
+                }
             }
             break;
     }
