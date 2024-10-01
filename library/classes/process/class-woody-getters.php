@@ -297,6 +297,27 @@ class WoodyTheme_WoodyGetters
     }
 
     /**
+     *
+     * Nom : formatHighlightsTimeline
+     * Auteur : Orphée Besson
+     * Return : Retourne un tableau formaté pour la timeline du bloc "Temps forts"
+     * @param    wrapper - Un tableau des champs
+     * @return   return - Tableau de contenus compilés
+     *
+     */
+    public function formatHighlightsTimeline($wrapper)
+    {
+        $return = [];
+        
+        if(!empty($wrapper['highlights_start_date']) && !empty($wrapper['highlights_end_date'])) {
+            $return['start_date'] = formatDate($wrapper['highlights_start_date'], 'M Y');
+            $return['end_date'] = formatDate($wrapper['highlights_end_date'], 'M Y');
+        }
+
+        return $return;
+    }
+
+    /**
      * @author: Jérémy Legendre
      * Retourne un tableau de données relatives au Topics
      * @param wrapper - Données du layout acf sous forme de tableau

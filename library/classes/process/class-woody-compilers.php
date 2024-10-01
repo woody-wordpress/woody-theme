@@ -161,7 +161,13 @@ class WoodyTheme_WoodyCompilers
             $the_items['button_classes'] = apply_filters('woody_card_button_classes', '', $wrapper);
         }
 
+        if(!empty($wrapper['acf_fc_layout']) && $wrapper['acf_fc_layout'] == 'highlights') {
+            $the_items['timeline'] = $this->getter->formatHighlightsTimeline($wrapper);
+        }
+
         $the_items = apply_filters('woody_format_focuses_data', $the_items, $wrapper);
+
+        console_log($the_items, 'the items');
 
         $return = empty($wrapper['woody_tpl']) ? \Timber::compile($twigPaths['blocks-focus-tpl_103'], $the_items) : \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items) ;
         
