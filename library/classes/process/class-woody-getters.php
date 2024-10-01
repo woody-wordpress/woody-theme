@@ -250,13 +250,46 @@ class WoodyTheme_WoodyGetters
     public function getHighlightsFocusData($wrapper)
     {
         $the_items = [];
+        $clickable = true;
 
-        $the_items = $this->getManualFocusData($wrapper);
-        console_log($wrapper, 'wrapper');
+        if (!empty($wrapper['content_selection'])) {
+            foreach ($wrapper['content_selection'] as $key => $item_wrapper) {
+                // Sommes-nous dans le cas d'une mise en avant de composants de séjours ?
+                $item_wrapper['content_selection_type'] = $wrapper['acf_fc_layout'] == 'focus_trip_components' ? 'existing_content' : $item_wrapper['content_selection_type'];
+                if (!empty($item_wrapper['existing_content']['trip_component'])) {
+                    $item_wrapper['existing_content']['content_selection'] = $item_wrapper['existing_content']['trip_component'];
+                    $clickable = !empty($item_wrapper['existing_content']['clickable_component']);
+                }
 
-        if(!empty($the_items) && !empty($the_items['items'])) {
-            foreach ($the_items['items'] as $key_item => $item) {
-                console_log($item, 'item');
+                // La donnée de la vignette correspond à un post sélectionné
+                if ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
+                    $item = $item_wrapper['existing_content'];
+                    $post = get_post($item['content_selection']);
+                    if (!empty($post) && $post->post_status == 'publish') {
+                        $post_preview = $this->getAnyPostPreview($wrapper, $post, $clickable);
+
+                        $the_items['items'][$key] = $post_preview;
+                        $the_items['items'][$key]['real_index'] = $key;
+
+                        if(!empty($item_wrapper['highlight_start_date'])) {
+                            $pretitle = '';
+                            $formatted_start_date = formatDate($item_wrapper['highlight_start_date'], 'l d F Y');
+
+                            if(!empty($formatted_start_date)) {
+                                $pretitle = __('Le', 'woody-theme') . ' ' . $formatted_start_date;
+                            }
+
+                            if(!empty($item_wrapper['highlight_end_date'])) {
+                                $formatted_end_date = formatDate($item_wrapper['highlight_end_date'], 'l d F Y');
+                                if(!empty($formatted_end_date)) {
+                                    $pretitle = __('Du', 'woody-theme') . ' ' . $formatted_start_date . ' ' . __('au', 'woody-theme') . ' ' . $formatted_end_date;
+                                }
+                            }
+
+                            $the_items['items'][$key]['pretitle'] = $pretitle;
+                        }
+                    }
+                }
             }
         }
 
