@@ -308,10 +308,22 @@ class WoodyTheme_WoodyGetters
     public function formatHighlightsTimeline($wrapper)
     {
         $return = [];
-        
+
         if(!empty($wrapper['highlights_start_date']) && !empty($wrapper['highlights_end_date'])) {
-            $return['start_date'] = formatDate($wrapper['highlights_start_date'], 'M Y');
-            $return['end_date'] = formatDate($wrapper['highlights_end_date'], 'M Y');
+            $return['start_date'] = [
+                'raw' => $wrapper['highlights_start_date'],
+                'formatted' => formatDate($wrapper['highlights_start_date'], 'M Y')
+            ];
+            $return['end_date'] = [
+                'raw' => $wrapper['highlights_end_date'],
+                'formatted' => formatDate($wrapper['highlights_end_date'], 'M Y')
+            ];
+
+            if (!empty($wrapper['content_selection'])) {
+                foreach ($wrapper['content_selection'] as $key => $item_wrapper) {
+                    $return['items'][$key] = empty($item_wrapper['highlight_start_date']) ? '' : $item_wrapper['highlight_start_date'];
+                }
+            }
         }
 
         return $return;
