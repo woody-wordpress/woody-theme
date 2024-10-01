@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Thème parent) 2.4.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2024-02-01T17:52:16+01:00\n"
-"PO-Revision-Date: 2024-02-01 17:54+0100\n"
+"POT-Creation-Date: 2024-10-01T10:00:31+02:00\n"
+"PO-Revision-Date: 2024-10-01 10:07+0200\n"
 "Last-Translator: Léo POIROUX <leo@raccourci.fr>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -13,18 +13,21 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1\n"
+"X-Generator: Poedit 3.2\n"
 "X-Domain: woody-theme\n"
 
 #. Theme Name of the theme
+#: style.css
 msgid "Woody (Parent theme)"
 msgstr "Woody (Parent theme)"
 
 #. Description of the theme
+#: style.css
 msgid "Parent theme of the Raccourci Agency themes"
 msgstr "Parent theme of the Raccourci Agency themes"
 
 #. Author of the theme
+#: style.css
 msgid "Raccourci Agency"
 msgstr "Raccourci Agency"
 
@@ -124,12 +127,12 @@ msgid "Décembre"
 msgstr "December"
 
 #: library/classes/content/class-polylang.php:84
-#: library/templates/template-page.php:79
+#: library/templates/template-page.php:81
 msgid "Page non trouvée"
 msgstr "Page not found"
 
 #: library/classes/content/class-polylang.php:85
-#: library/templates/template-page.php:85
+#: library/templates/template-page.php:87
 msgid "Erreur 404 : Page non trouvée"
 msgstr "Error 404 : Page not found"
 
@@ -195,6 +198,8 @@ msgid "Etape"
 msgstr "Step"
 
 #: library/classes/content/class-polylang.php:124
+#: library/classes/process/class-woody-getters.php:1010
+#: library/classes/process/class-woody-getters.php:1027
 msgid "Réserver"
 msgstr "Book"
 
@@ -334,12 +339,12 @@ msgid "Accès au menu principal"
 msgstr "Go to main menu"
 
 #: library/classes/content/class-polylang.php:163
-#: library/classes/process/class-woody-process.php:266
+#: library/classes/process/class-woody-process.php:298
 msgid "Titre de la vidéo manquant"
 msgstr "Missing video title"
 
 #: library/classes/content/class-polylang.php:164
-#: library/classes/process/class-woody-process.php:267
+#: library/classes/process/class-woody-process.php:299
 msgid "Légende de la vidéo manquante"
 msgstr "Missing video caption"
 
@@ -352,7 +357,7 @@ msgid "Vous cherchez quelque chose ?"
 msgstr "Are you looking for something ?"
 
 #: library/classes/content/class-polylang.php:167
-#: library/classes/process/class-woody-compilers.php:964
+#: library/classes/process/class-woody-compilers.php:1032
 msgid "Rechercher"
 msgstr "Search"
 
@@ -361,28 +366,28 @@ msgid "Réinitialiser"
 msgstr "Reset"
 
 #: library/classes/content/class-polylang.php:169
-#: library/classes/process/class-woody-compilers.php:959
+#: library/classes/process/class-woody-compilers.php:1027
 msgid "Choisissez vos dates"
 msgstr "Choose your dates"
 
 #: library/classes/content/class-polylang.php:170
-#: library/classes/process/class-woody-compilers.php:960
+#: library/classes/process/class-woody-compilers.php:1028
 msgid "Date d'arrivée"
 msgstr "Arrival date"
 
 #: library/classes/content/class-polylang.php:171
-#: library/classes/process/class-woody-compilers.php:956
-#: library/classes/process/class-woody-compilers.php:957
+#: library/classes/process/class-woody-compilers.php:1024
+#: library/classes/process/class-woody-compilers.php:1025
 msgid "Durée du séjour"
 msgstr "Length of stay"
 
 #: library/classes/content/class-polylang.php:172
-#: library/classes/process/class-woody-compilers.php:962
+#: library/classes/process/class-woody-compilers.php:1030
 msgid "adulte(s)"
 msgstr "adult(s)"
 
 #: library/classes/content/class-polylang.php:173
-#: library/classes/process/class-woody-compilers.php:963
+#: library/classes/process/class-woody-compilers.php:1031
 msgid "enfant(s)"
 msgstr "child(s)"
 
@@ -460,20 +465,20 @@ msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "Maybe the page you are looking for is here ?"
 
 #: library/classes/content/class-polylang.php:190
-#: library/classes/process/class-woody-getters.php:460
-#: library/classes/process/class-woody-getters.php:714
+#: library/classes/process/class-woody-getters.php:599
+#: library/classes/process/class-woody-getters.php:855
 msgid "Lire la suite"
 msgstr "Read more"
 
 #: library/classes/content/class-polylang.php:191
-#: library/classes/process/class-woody-compilers.php:951
-#: library/classes/process/class-woody-compilers.php:953
+#: library/classes/process/class-woody-compilers.php:1019
+#: library/classes/process/class-woody-compilers.php:1021
 msgid "Que voulez-vous réserver ?"
 msgstr "What do you want to book ?"
 
 #: library/classes/content/class-polylang.php:192
-#: library/classes/process/class-woody-compilers.php:954
-#: library/classes/process/class-woody-compilers.php:955
+#: library/classes/process/class-woody-compilers.php:1022
+#: library/classes/process/class-woody-compilers.php:1023
 msgid "Choisissez vos dates de réservation"
 msgstr "Choose your booking dates"
 
@@ -486,8 +491,8 @@ msgid "Réservable"
 msgstr "Bookable"
 
 #: library/classes/content/class-polylang.php:195
-#: library/classes/process/class-woody-getters.php:325
-#: library/classes/process/class-woody-getters.php:588
+#: library/classes/process/class-woody-getters.php:425
+#: library/classes/process/class-woody-getters.php:727
 msgid "Télécharger"
 msgstr "Download"
 
@@ -608,7 +613,7 @@ msgid "Comprenant"
 msgstr "Including"
 
 #: library/classes/content/class-polylang.php:232
-#: library/templates/template-page.php:167
+#: library/templates/template-page.php:169
 msgid "Gratuit"
 msgstr "Free"
 
@@ -657,7 +662,7 @@ msgid "Base de"
 msgstr "Based on"
 
 #: library/classes/content/class-polylang.php:248
-#: library/classes/process/class-woody-compilers.php:666
+#: library/classes/process/class-woody-compilers.php:695
 msgid "Publié le"
 msgstr "Published on"
 
@@ -666,7 +671,7 @@ msgid "Mis à jour le"
 msgstr "Updated on"
 
 #: library/classes/content/class-polylang.php:250
-#: library/classes/process/class-woody-compilers.php:475
+#: library/classes/process/class-woody-compilers.php:490
 msgid "Désolé, aucun contenu ne correspond à votre recherche"
 msgstr "Sorry, no content matches your search"
 
@@ -678,28 +683,49 @@ msgstr "Read also"
 msgid "Classement"
 msgstr "Ranking"
 
-#: library/classes/process/class-woody-getters.php:808
-#: library/classes/process/class-woody-getters.php:809
+#: library/classes/content/class-polylang.php:253
+#: library/classes/process/class-woody-getters.php:279
+msgid "Le"
+msgstr "The"
+
+#: library/classes/content/class-polylang.php:254
+#: library/classes/process/class-woody-getters.php:285
+msgid "Du"
+msgstr "From"
+
+#: library/classes/content/class-polylang.php:255
+#: library/classes/process/class-woody-getters.php:285
+msgid "au"
+msgstr "To"
+
+#: library/classes/process/class-woody-getters.php:953
+#: library/classes/process/class-woody-getters.php:954
 msgid "Découvrir"
 msgstr "Discover"
 
-#: library/classes/process/class-woody-getters.php:997
+#: library/classes/process/class-woody-getters.php:1019
+#, fuzzy
+#| msgid "personne"
+msgid "par personne"
+msgstr "person"
+
+#: library/classes/process/class-woody-getters.php:1206
 msgid "Informations prestataire"
 msgstr "Provider information"
 
-#: library/classes/process/class-woody-getters.php:1002
+#: library/classes/process/class-woody-getters.php:1211
 msgid "Horaires"
 msgstr "Schedules"
 
-#: library/classes/process/class-woody-getters.php:1007
+#: library/classes/process/class-woody-getters.php:1216
 msgid "Carte"
 msgstr "Map"
 
-#: library/classes/process/class-woody-getters.php:1012
+#: library/classes/process/class-woody-getters.php:1221
 msgid "Avis"
 msgstr "Advice"
 
-#: library/classes/process/class-woody-getters.php:1017
+#: library/classes/process/class-woody-getters.php:1226
 msgid "Poser une question"
 msgstr "Our suggestions"
 
@@ -707,11 +733,11 @@ msgstr "Our suggestions"
 msgid "Partager par e-mail"
 msgstr "Share by email"
 
-#: library/templates/template-page.php:78
+#: library/templates/template-page.php:80
 msgid "Oups !"
 msgstr "Oops!"
 
-#: library/templates/template-page.php:80
+#: library/templates/template-page.php:82
 msgid ""
 "La page que vous recherchez a peut-être été supprimée ou est temporairement "
 "indisponible."
@@ -796,9 +822,6 @@ msgstr ""
 
 #~ msgid "Douce"
 #~ msgstr "Soft"
-
-#~ msgid "Dure"
-#~ msgstr "Hard"
 
 #~ msgid "Humide"
 #~ msgstr "Wet"
