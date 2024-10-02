@@ -404,7 +404,7 @@
         {
             "key": "field_66fa97d152416",
             "label": "Bouton(s) supplémentaire(s)",
-            "name": "highlights_buttons",
+            "name": "focus_buttons",
             "type": "clone",
             "instructions": "",
             "required": 0,
