@@ -250,5 +250,8 @@ class WoodyTheme_Polylang
         __('Désolé, aucun contenu ne correspond à votre recherche', 'woody-theme');
         __('Lire aussi', 'woody-theme');
         __('Classement', 'woody-theme');
+        __('Le', 'woody-theme');
+        __('Du', 'woody-theme');
+        __('au', 'woody-theme');
     }
 }

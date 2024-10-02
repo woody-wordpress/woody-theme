@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woody (Parent theme) 1.47.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/woody-theme\n"
-"POT-Creation-Date: 2024-02-01T17:52:16+01:00\n"
-"PO-Revision-Date: 2024-02-01 18:01+0100\n"
+"POT-Creation-Date: 2024-10-01T10:00:31+02:00\n"
+"PO-Revision-Date: 2024-10-01 10:21+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -14,18 +14,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"X-Generator: Poedit 3.1\n"
+"X-Generator: Poedit 3.2\n"
 "X-Domain: woody-theme\n"
 
 #. Theme Name of the theme
+#: style.css
 msgid "Woody (Parent theme)"
 msgstr "Язык"
 
 #. Description of the theme
+#: style.css
 msgid "Parent theme of the Raccourci Agency themes"
 msgstr ""
 
 #. Author of the theme
+#: style.css
 msgid "Raccourci Agency"
 msgstr ""
 
@@ -125,12 +128,12 @@ msgid "Décembre"
 msgstr "Декабрь"
 
 #: library/classes/content/class-polylang.php:84
-#: library/templates/template-page.php:79
+#: library/templates/template-page.php:81
 msgid "Page non trouvée"
 msgstr "Страница не найдена"
 
 #: library/classes/content/class-polylang.php:85
-#: library/templates/template-page.php:85
+#: library/templates/template-page.php:87
 msgid "Erreur 404 : Page non trouvée"
 msgstr "Ошибка 404: Страница не найдена"
 
@@ -196,6 +199,8 @@ msgid "Etape"
 msgstr "Шаг"
 
 #: library/classes/content/class-polylang.php:124
+#: library/classes/process/class-woody-getters.php:1010
+#: library/classes/process/class-woody-getters.php:1027
 msgid "Réserver"
 msgstr "Книга"
 
@@ -338,12 +343,12 @@ msgid "Accès au menu principal"
 msgstr "Доступ к главному меню"
 
 #: library/classes/content/class-polylang.php:163
-#: library/classes/process/class-woody-process.php:266
+#: library/classes/process/class-woody-process.php:298
 msgid "Titre de la vidéo manquant"
 msgstr "Отсутствующее название видео"
 
 #: library/classes/content/class-polylang.php:164
-#: library/classes/process/class-woody-process.php:267
+#: library/classes/process/class-woody-process.php:299
 msgid "Légende de la vidéo manquante"
 msgstr "Отсутствующая надпись к видео"
 
@@ -356,7 +361,7 @@ msgid "Vous cherchez quelque chose ?"
 msgstr "Вы что-то ищете?"
 
 #: library/classes/content/class-polylang.php:167
-#: library/classes/process/class-woody-compilers.php:964
+#: library/classes/process/class-woody-compilers.php:1032
 msgid "Rechercher"
 msgstr "Поиск"
 
@@ -365,28 +370,28 @@ msgid "Réinitialiser"
 msgstr "Сброс"
 
 #: library/classes/content/class-polylang.php:169
-#: library/classes/process/class-woody-compilers.php:959
+#: library/classes/process/class-woody-compilers.php:1027
 msgid "Choisissez vos dates"
 msgstr "Выберите даты"
 
 #: library/classes/content/class-polylang.php:170
-#: library/classes/process/class-woody-compilers.php:960
+#: library/classes/process/class-woody-compilers.php:1028
 msgid "Date d'arrivée"
 msgstr "Дата прибытия"
 
 #: library/classes/content/class-polylang.php:171
-#: library/classes/process/class-woody-compilers.php:956
-#: library/classes/process/class-woody-compilers.php:957
+#: library/classes/process/class-woody-compilers.php:1024
+#: library/classes/process/class-woody-compilers.php:1025
 msgid "Durée du séjour"
 msgstr "Продолжительность пребывания"
 
 #: library/classes/content/class-polylang.php:172
-#: library/classes/process/class-woody-compilers.php:962
+#: library/classes/process/class-woody-compilers.php:1030
 msgid "adulte(s)"
 msgstr "взрослый(ая)"
 
 #: library/classes/content/class-polylang.php:173
-#: library/classes/process/class-woody-compilers.php:963
+#: library/classes/process/class-woody-compilers.php:1031
 msgid "enfant(s)"
 msgstr "ребёнок (дети)"
 
@@ -465,20 +470,20 @@ msgid "La page que vous recherchez est peut-être ici ?"
 msgstr "Возможно, страница, которую вы ищете, находится здесь?"
 
 #: library/classes/content/class-polylang.php:190
-#: library/classes/process/class-woody-getters.php:460
-#: library/classes/process/class-woody-getters.php:714
+#: library/classes/process/class-woody-getters.php:599
+#: library/classes/process/class-woody-getters.php:855
 msgid "Lire la suite"
 msgstr "Читать далее"
 
 #: library/classes/content/class-polylang.php:191
-#: library/classes/process/class-woody-compilers.php:951
-#: library/classes/process/class-woody-compilers.php:953
+#: library/classes/process/class-woody-compilers.php:1019
+#: library/classes/process/class-woody-compilers.php:1021
 msgid "Que voulez-vous réserver ?"
 msgstr "Что вы хотите заказать ?"
 
 #: library/classes/content/class-polylang.php:192
-#: library/classes/process/class-woody-compilers.php:954
-#: library/classes/process/class-woody-compilers.php:955
+#: library/classes/process/class-woody-compilers.php:1022
+#: library/classes/process/class-woody-compilers.php:1023
 msgid "Choisissez vos dates de réservation"
 msgstr "Выберите даты бронирования"
 
@@ -491,8 +496,8 @@ msgid "Réservable"
 msgstr "Бронируемый"
 
 #: library/classes/content/class-polylang.php:195
-#: library/classes/process/class-woody-getters.php:325
-#: library/classes/process/class-woody-getters.php:588
+#: library/classes/process/class-woody-getters.php:425
+#: library/classes/process/class-woody-getters.php:727
 msgid "Télécharger"
 msgstr "Скачать"
 
@@ -614,7 +619,7 @@ msgid "Comprenant"
 msgstr "В том числе"
 
 #: library/classes/content/class-polylang.php:232
-#: library/templates/template-page.php:167
+#: library/templates/template-page.php:169
 msgid "Gratuit"
 msgstr "Бесплатно"
 
@@ -663,7 +668,7 @@ msgid "Base de"
 msgstr "Основа"
 
 #: library/classes/content/class-polylang.php:248
-#: library/classes/process/class-woody-compilers.php:666
+#: library/classes/process/class-woody-compilers.php:695
 msgid "Publié le"
 msgstr "Опубликовано на"
 
@@ -672,7 +677,7 @@ msgid "Mis à jour le"
 msgstr "Обновлено на"
 
 #: library/classes/content/class-polylang.php:250
-#: library/classes/process/class-woody-compilers.php:475
+#: library/classes/process/class-woody-compilers.php:490
 msgid "Désolé, aucun contenu ne correspond à votre recherche"
 msgstr "Извините, нет материалов, соответствующих вашему поиску"
 
@@ -684,28 +689,49 @@ msgstr "Читайте также"
 msgid "Classement"
 msgstr "Рейтинг"
 
-#: library/classes/process/class-woody-getters.php:808
-#: library/classes/process/class-woody-getters.php:809
+#: library/classes/content/class-polylang.php:253
+#: library/classes/process/class-woody-getters.php:279
+msgid "Le"
+msgstr ""
+
+#: library/classes/content/class-polylang.php:254
+#: library/classes/process/class-woody-getters.php:285
+msgid "Du"
+msgstr "С"
+
+#: library/classes/content/class-polylang.php:255
+#: library/classes/process/class-woody-getters.php:285
+msgid "au"
+msgstr "по"
+
+#: library/classes/process/class-woody-getters.php:953
+#: library/classes/process/class-woody-getters.php:954
 msgid "Découvrir"
 msgstr "Откройте для себя"
 
-#: library/classes/process/class-woody-getters.php:997
+#: library/classes/process/class-woody-getters.php:1019
+#, fuzzy
+#| msgid "personne"
+msgid "par personne"
+msgstr "человек"
+
+#: library/classes/process/class-woody-getters.php:1206
 msgid "Informations prestataire"
 msgstr "Информация о поставщике"
 
-#: library/classes/process/class-woody-getters.php:1002
+#: library/classes/process/class-woody-getters.php:1211
 msgid "Horaires"
 msgstr "Расписание"
 
-#: library/classes/process/class-woody-getters.php:1007
+#: library/classes/process/class-woody-getters.php:1216
 msgid "Carte"
 msgstr "Карта"
 
-#: library/classes/process/class-woody-getters.php:1012
+#: library/classes/process/class-woody-getters.php:1221
 msgid "Avis"
 msgstr "Уведомление"
 
-#: library/classes/process/class-woody-getters.php:1017
+#: library/classes/process/class-woody-getters.php:1226
 msgid "Poser une question"
 msgstr "Задать вопрос"
 
@@ -713,11 +739,11 @@ msgstr "Задать вопрос"
 msgid "Partager par e-mail"
 msgstr "Поделиться по e-mail"
 
-#: library/templates/template-page.php:78
+#: library/templates/template-page.php:80
 msgid "Oups !"
 msgstr "Упс!"
 
-#: library/templates/template-page.php:80
+#: library/templates/template-page.php:82
 msgid ""
 "La page que vous recherchez a peut-être été supprimée ou est temporairement "
 "indisponible."
@@ -801,9 +827,6 @@ msgstr ""
 
 #~ msgid "Douce"
 #~ msgstr "Сладкий"
-
-#~ msgid "Dure"
-#~ msgstr "Жесткий"
 
 #~ msgid "Humide"
 #~ msgstr "Влажный"
