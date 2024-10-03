@@ -168,7 +168,7 @@ class Admin
      * Disable Posts' meta from being preloaded
      * This fixes memory problems in the WordPress Admin
      */
-    public function custom_pre_get_posts(WP_Query $wp_query)
+    public function custom_pre_get_posts($wp_query)
     {
         if ($wp_query->get('post_type') == 'page') {
             $wp_query->set('update_post_meta_cache', false);
