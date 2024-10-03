@@ -1029,6 +1029,12 @@
                         content: '\f333';
                     }
                 }
+
+                &[data-layout='highlights'] {
+                    &:before {
+                        content: '\f177';
+                    }
+                }
             }
         }
     }
@@ -1169,4 +1175,9 @@
 // Section models list
 .acf-field-6061dcdfc96ee {
     overflow: scroll;
+}
+
+// Bloc de réservation dans les pages d'accueil
+#acf-group_5c0e4121ee3ed {
+    display: none !important;
 }

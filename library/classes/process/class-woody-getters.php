@@ -183,7 +183,7 @@ class WoodyTheme_WoodyGetters
             }
         }
 
-        if (!empty($the_items['items']) && is_array($the_items['items']) && $wrapper['focused_sort'] == 'random') {
+        if (!empty($the_items['items']) && is_array($the_items['items']) && (!empty($wrapper['focused_sort']) && $wrapper['focused_sort'] == 'random')) {
             shuffle($the_items['items']);
         }
 
@@ -235,6 +235,114 @@ class WoodyTheme_WoodyGetters
         }
 
         return $items;
+    }
+
+    /**
+     *
+     * Nom : getHighlightsFocusData
+     * Auteur : Orphée Besson
+     * Return : Retourne un ensemble de posts sous forme de tableau avec une donnée compatbile Woody
+     * @param    current_post - Un objet Timber\Post
+     * @param    wrapper - Un tableau des champs
+     * @return   the_items - Tableau de contenus compilés + infos complémentaires
+     *
+     */
+    public function getHighlightsFocusData($wrapper)
+    {
+        $the_items = [];
+        $clickable = true;
+
+        if (!empty($wrapper['content_selection'])) {
+            foreach ($wrapper['content_selection'] as $key => $item_wrapper) {
+                // Sommes-nous dans le cas d'une mise en avant de composants de séjours ?
+                $item_wrapper['content_selection_type'] = $wrapper['acf_fc_layout'] == 'focus_trip_components' ? 'existing_content' : $item_wrapper['content_selection_type'];
+                if (!empty($item_wrapper['existing_content']['trip_component'])) {
+                    $item_wrapper['existing_content']['content_selection'] = $item_wrapper['existing_content']['trip_component'];
+                    $clickable = !empty($item_wrapper['existing_content']['clickable_component']);
+                }
+
+                // La donnée de la vignette correspond à un post sélectionné
+                if ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
+                    $item = $item_wrapper['existing_content'];
+                    $post = get_post($item['content_selection']);
+                    if (!empty($post) && $post->post_status == 'publish') {
+                        $post_preview = $this->getAnyPostPreview($wrapper, $post, $clickable);
+
+                        $the_items['items'][$key] = $post_preview;
+                        $the_items['items'][$key]['real_index'] = $key;
+
+                        if(!empty($item_wrapper['highlight_start_date'])) {
+                            $pretitle = '';
+                            $formatted_start_date = formatDate($item_wrapper['highlight_start_date'], 'l d F Y');
+
+                            $start_day = formatDate($item_wrapper['highlight_start_date'], 'l d');
+                            $start_month = formatDate($item_wrapper['highlight_start_date'], 'F');
+                            $start_year = formatDate($item_wrapper['highlight_start_date'], 'Y');
+    
+                            $pretitle = __('Le', 'woody-theme') . ' ' . $start_day . ' ' . $start_month . ' ' . $start_year;
+    
+                            if(!empty($item_wrapper['highlight_end_date'])) {
+                                $formatted_end_date = formatDate($item_wrapper['highlight_end_date'], 'l d F Y');
+                                
+                                $end_day = formatDate($item_wrapper['highlight_end_date'], 'l d');
+                                $end_month = formatDate($item_wrapper['highlight_end_date'], 'F');
+                                $end_year = formatDate($item_wrapper['highlight_end_date'], 'Y');
+                                
+                                // On vérifie si les dates sont dans la même année
+                                if($start_year === $end_year) {
+                                    // On vérifie si les dates sont dans le même mois
+                                    if($start_month === $end_month) {
+                                        $pretitle = __('Du', 'woody-theme') . ' ' . $start_day . ' ' . __('au', 'woody-theme') . ' ' . $end_day . ' ' . $start_month . ' ' . $start_year;
+                                    } else {
+                                        $pretitle = __('Du', 'woody-theme') . ' ' . $start_day . ' ' . $start_month . ' ' . __('au', 'woody-theme') . ' ' . $end_day . ' ' . $end_month . ' ' . $start_year;
+                                    }
+                                } else {
+                                    // Si les années sont différentes
+                                    $pretitle = __('Du', 'woody-theme') . ' ' . $formatted_start_date . ' ' . __('au', 'woody-theme') . ' ' . $formatted_end_date;
+                                }
+                            }
+
+                            $the_items['items'][$key]['pretitle'] = $pretitle;
+                        }
+                    }
+                }
+            }
+        }
+
+        return $the_items;
+    }
+
+    /**
+     *
+     * Nom : formatHighlightsTimeline
+     * Auteur : Orphée Besson
+     * Return : Retourne un tableau formaté pour la timeline du bloc "Temps forts"
+     * @param    wrapper - Un tableau des champs
+     * @return   return - Tableau de contenus compilés
+     *
+     */
+    public function formatHighlightsTimeline($wrapper)
+    {
+        $return = [];
+
+        if(!empty($wrapper['highlights_start_date']) && !empty($wrapper['highlights_end_date'])) {
+            $return['start_date'] = [
+                'raw' => $wrapper['highlights_start_date'],
+                'formatted' => formatDate($wrapper['highlights_start_date'], 'M Y')
+            ];
+            $return['end_date'] = [
+                'raw' => $wrapper['highlights_end_date'],
+                'formatted' => formatDate($wrapper['highlights_end_date'], 'M Y')
+            ];
+
+            if (!empty($wrapper['content_selection'])) {
+                foreach ($wrapper['content_selection'] as $key => $item_wrapper) {
+                    $return['items'][$key] = empty($item_wrapper['highlight_start_date']) ? '' : $item_wrapper['highlight_start_date'];
+                }
+            }
+        }
+
+        return $return;
     }
 
     /**

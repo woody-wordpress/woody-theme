@@ -24,6 +24,14 @@ $('#post').each(function () {
                 'img_ratio',
                 'text_align'
             ],
+            'highlights': [
+                'type',
+                'length',
+                'infinite',
+                'card_type',
+                'img_ratio',
+                'text_align'
+            ],
             'galleries': [
                 'type',
                 'length',
@@ -165,6 +173,8 @@ $('#post').each(function () {
             // On récupère et on append les filtres en fonctjon du type de bloc actif
             if (group == 'group_5b0d1ed32a384' || group == 'group_5b2788b48d04c' || group == 'group_5d7908eadaa46' || group == 'group_5b33890e6fa0b' || group == 'field_5d16118093cc1' || group == 'group_shared_leaflets' || group == 'group_auto_focus_leaflets') {
                 theFilters = fieldKeysFilters.focuses;
+            } else if (group == 'group_66fa7944c5427') {
+                theFilters = fieldKeysFilters.highlights;
             } else if (group == 'group_5b04314e0ec21') {
                 theFilters = fieldKeysFilters.galleries;
             } else if (group == 'group_613887bd0a56c') {

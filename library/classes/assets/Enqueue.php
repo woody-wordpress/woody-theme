@@ -68,6 +68,8 @@ class Enqueue
         add_filter('heartbeat_settings', [$this, 'heartbeatSettings']);
         add_filter('woody_enqueue_favicons', [$this, 'enqueueFavicons']);
         add_filter('wp_resource_hints', [$this, 'wpResourceHints'], 10, 2);
+        add_action('admin_head', [$this, 'adminHead']);
+        add_action('init', [$this, 'tinymceAddStylesheet']);
 
         // Si vous utilisez HTML5, wdjs_use_html5 est un filtre qui enlève l’attribut type="text/javascript"
         add_filter('wdjs_use_html5', '__return_true');
@@ -130,6 +132,7 @@ class Enqueue
 
         $importmap = apply_filters('woody_importmap_js', [
             'jquery' => get_template_directory_uri() . '/src/lib/custom/jquery@' . $jQuery_version . '.min.mjs',
+            'woody_lib_utils' => woody_addon_asset_path('woody-lib-utils', 'js/woody-lib-utils.mjs')
         ]);
 
         if(!empty($importmap)) {
@@ -168,11 +171,11 @@ class Enqueue
         // define apiurl according to WP_ENV
         // If preprod render is eneeded use $apirender_base_uri = 'https://api.tourism-system.rc-preprod.com/render';
         switch (WP_ENV) {
-            case 'dev':
             case 'preprod':
                 $jsModeSuffix = 'debug';
                 $apirender_base_uri = 'https://api.tourism-system.com/render';
                 break;
+            case 'dev':
             default:
                 $jsModeSuffix = 'min';
                 $apirender_base_uri = 'https://api.tourism-system.com/render';
@@ -410,6 +413,27 @@ class Enqueue
 
         // Enqueue the main Stylesheet.
         wp_enqueue_style('admin-stylesheet', WP_DIST_URL . $this->assetPath('/css/admin.css'), [], null);
+
+        // Enqueue css specificly for icons
+        wp_enqueue_style('wicon-stylesheet', WP_DIST_URL . $this->assetPath('/css/wicon.css'), [], null, 'screen');
+    }
+
+    public function adminHead()
+    {
+        $favicons = $this->enqueueFavicons();
+        echo '<link rel="shortcut icon" href="' . $favicons['favicon'] . '" />';
+
+        $importmap = apply_filters('woody_admin_importmap_js', [
+            'woody_lib_utils' => woody_addon_asset_path('woody-lib-utils', 'js/woody-lib-utils.mjs')
+        ]);
+        if(!empty($importmap)) {
+            echo '<script type="importmap">' . json_encode(['imports' => $importmap]) . '</script>';
+        }
+    }
+
+    public function tinymceAddStylesheet()
+    {
+        add_editor_style(WP_DIST_URL . $this->assetPath('/css/admin.css'));
     }
 
     public function heartbeatSettings()
@@ -422,8 +446,17 @@ class Enqueue
         $return = [];
         $favicon_name = apply_filters('woody_favicon_name', 'favicon');
 
-        foreach (['favicon', '16', '32', '64', '120', '128', '152', '167', '180', '192'] as $icon) {
-            $return[$icon] = WP_DIST_URL . $this->assetPath('/favicon/' . $favicon_name . '/' . (($icon == 'favicon') ? $favicon_name . '.ico' : $favicon_name . '.' . $icon . 'w-' . $icon . 'h.png'));
+        // rel="icon" type="image/x-icon"
+        $return['favicon'] = WP_DIST_URL . $this->assetPath(sprintf('/favicon/%s/favicon.ico', $favicon_name));
+
+        // rel="icon" type="image/png"
+        foreach (['16', '32', '48'] as $size) {
+            $return['icon'][$size] = WP_DIST_URL . $this->assetPath(sprintf('/favicon/%s/favicon-%sx%s.png', $favicon_name, $size, $size));
+        }
+
+        // rel="apple-touch-icon"
+        foreach (['57', '60', '72', '76', '114', '120', '144', '152', '167', '180', '1024'] as $size) {
+            $return['apple'][$size] = WP_DIST_URL . $this->assetPath(sprintf('/favicon/%s/apple-touch-icon-%sx%s.png', $favicon_name, $size, $size));
         }
 
         return $return;
