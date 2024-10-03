@@ -194,7 +194,7 @@ class WoodyTheme_WoodyCompilers
                 }
                 $filename = get_attached_file($route['route_file']['ID']);
                 if (!file_exists($filename)) {
-                    throw new Exception("GeoJson file {$filename} no such file ", 1);
+                    throw new \Exception("GeoJson file {$filename} no such file ", 1);
                 }
                 $filetype = wp_check_filetype($filename);
 
