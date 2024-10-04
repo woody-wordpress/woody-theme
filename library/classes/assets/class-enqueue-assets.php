@@ -136,9 +136,9 @@ class WoodyTheme_Enqueue_Assets
             'woody_library_summary_map_manager' => woody_addon_asset_path('woody-library', 'js/modules/managers/summary/summary-map-manager.mjs'),
             'woody_library_summary_accordion_manager' => woody_addon_asset_path('woody-library', 'js/modules/managers/summary/summary-accordion-manager.mjs'),
             'woody_library_card_toggler_component' => woody_addon_asset_path('woody-library', 'js/modules/components/card/card-toggler-component.mjs'),
+            'woody_library_card_slider_component' => woody_addon_asset_path('woody-library', 'js/modules/components/card/card-slider-component.mjs'),
             'woody_library_card_map_toggler_component' => woody_addon_asset_path('woody-library', 'js/modules/components/card/card-map-toggler-component.mjs'),
-            'woody_library_card_manager' => woody_addon_asset_path('woody-library', 'js/modules/managers/card/card-manager.mjs'),
-            'woody_library_card_toggler_manager' => woody_addon_asset_path('woody-library', 'js/modules/managers/card/card-toggler-manager.mjs'),
+            'woody_library_card_map_slider_component' => woody_addon_asset_path('woody-library', 'js/modules/components/card/card-map-slider-component.mjs'),
             'woody_library_card_map_manager' => woody_addon_asset_path('woody-library', 'js/modules/managers/card/card-map-manager.mjs'),
         ]);
 
