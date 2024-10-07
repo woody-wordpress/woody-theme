@@ -163,7 +163,7 @@ class WoodyTheme_Template_Topic extends WoodyTheme_TemplateAbstract
                 'map_zoom_auto' => true,
                 'map_zoom' => '',
                 'map_height' => 'md',
-                'tmaps_confid' => '',
+                'map_provider' => '',
             ],
             'focus_no_padding' => false,
             'visual_effects' => [

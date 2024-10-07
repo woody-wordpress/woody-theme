@@ -135,10 +135,11 @@ class WoodyTheme_WoodyCompilers
         }
 
         if (!empty($wrapper['focus_map_params'])) {
-            if (!empty($wrapper['focus_map_params']['tmaps_confid'])) {
-                $the_items['map_params']['tmaps_confid'] = $wrapper['focus_map_params']['tmaps_confid'];
-            } elseif (!empty(get_field('tmaps_confid', 'option'))) {
-                $the_items['map_params']['tmaps_confid'] = get_field('tmaps_confid', 'option');
+            // REVIEW tmapsV2_refactoring : remove tmaps_confid
+            if (!empty($wrapper['focus_map_params']['map_provider'])) {
+                $the_items['map_params']['map_provider'] = $wrapper['focus_map_params']['map_provider'];
+            } elseif (!empty(get_field('map_provider', 'option'))) {
+                $the_items['map_params']['map_provider'] = get_field('map_provider', 'option');
             }
 
             if (!empty($wrapper['focus_map_params']['map_height'])) {
@@ -275,8 +276,9 @@ class WoodyTheme_WoodyCompilers
             }
         }
 
-        if (empty($wrapper['tmaps_confid']) && !empty(get_field('tmaps_confid', 'option'))) {
-            $wrapper['tmaps_confid'] = get_field('tmaps_confid', 'option');
+        // REVIEW tmapsV2_refactoring : remove tmaps_confid
+        if (empty($wrapper['map_provider']) && !empty(get_field('map_provider', 'option'))) {
+            $wrapper['mep_provider'] = get_field('map_provider', 'option');
         }
 
         return \Timber::compile($twigPaths[$wrapper['woody_tpl']], $wrapper);
@@ -723,7 +725,8 @@ class WoodyTheme_WoodyCompilers
             ];
         }
 
-        $page_teaser['tmaps_confid'] = get_field('tmaps_confid', 'option');
+        // REVIEW tmapsV2_refactoring : remove tmaps_confid
+        $page_teaser['map_provider'] = get_field('map_provider', 'option');
 
         $page_teaser = apply_filters('woody_custom_page_teaser', $page_teaser, $context);
         if (!empty($page_teaser['page_teaser_woody_tpl'])) {

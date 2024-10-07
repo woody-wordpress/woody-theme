@@ -315,35 +315,23 @@
                             "prefix_name": 0
                         },
                         {
-                            "key": "field_5be1j7h6cd075",
-                            "label": "Paramètres Touristic Maps",
-                            "name": "focus_tmaps_params",
-                            "type": "clone",
+                            "key": "field_9099ed2650ddz",
+                            "label": "Fond de carte",
+                            "instructions": "Par défaut, le réglage global du site s'applique",
+                            "name": "map_provider",
+                            "type": "radio",
                             "wrapper": {
-                                "width": 60,
-                                "class": "hide-label",
-                                "id": ""
-                            },
-                            "clone": [
-                                "field_5c989085888ee"
-                            ],
-                            "new_lines": "wpautop",
-                            "display": "seamless"
-                        },
-                        {
-                            "key": "field_5bl1j7f9cd075",
-                            "label": "Identifiant de conf Touristic Maps",
-                            "name": "focus_tmaps_confid",
-                            "type": "clone",
-                            "wrapper": {
-                                "width": 40,
+                                "width": "",
                                 "class": "",
                                 "id": ""
                             },
-                            "clone": [
-                                "field_5c9891e2c9133"
-                            ],
-                            "display": "seamless"
+                            "choices": {},
+                            "allow_null": 1,
+                            "other_choice": 0,
+                            "default_value": "",
+                            "layout": "horizontal",
+                            "return_format": "value",
+                            "save_other_choice": 0
                         }
                     ]
                 }

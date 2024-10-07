@@ -1055,8 +1055,10 @@ class WoodyTheme_WoodyGetters
                         break;
 
                     case 'map':
-                        if (empty($filter['list_filter_map_params']['tmaps_confid']) && !empty(get_field('tmaps_confid', 'option'))) {
-                            $filter['list_filter_map_params']['tmaps_confid'] = get_field('tmaps_confid', 'option');
+
+                        // REVIEW tmapsV2_refactoring : remove tmaps_confid
+                        if (empty($filter['list_filter_map_params']['map_provider']) && !empty(get_field('map_provider', 'option'))) {
+                            $filter['list_filter_map_params']['map_provider'] = get_field('map_provider', 'option');
                         }
 
                         $return['the_map'] = $filter;
