@@ -132,6 +132,8 @@ class WoodyTheme_Enqueue_Assets
         $importmap = apply_filters('woody_importmap_js', [
             'jquery' => get_template_directory_uri() . '/src/lib/custom/jquery@' . $jQuery_version . '.min.mjs',
             'woody_library_filter' => woody_addon_asset_path('woody-library', 'js/filter.js'),
+            'woody_library_woody_component' => woody_addon_asset_path('woody-library', 'js/modules/components/woody-component.mjs'),
+            'woody_library_interactive_svg_component' => woody_addon_asset_path('woody-library', 'js/modules/components/interactive-svg/interactive-svg-component.mjs'),
             'woody_library_summary_component' => woody_addon_asset_path('woody-library', 'js/modules/components/summary/summary-component.mjs'),
             'woody_library_summary_map_manager' => woody_addon_asset_path('woody-library', 'js/modules/managers/summary/summary-map-manager.mjs'),
             'woody_library_summary_accordion_manager' => woody_addon_asset_path('woody-library', 'js/modules/managers/summary/summary-accordion-manager.mjs'),
