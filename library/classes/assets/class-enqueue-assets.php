@@ -142,8 +142,10 @@ class WoodyTheme_Enqueue_Assets
             'woody_library_card_slider_component' => woody_addon_asset_path('woody-library', 'js/modules/components/card/card-slider-component.mjs'),
             'woody_library_card_map_slider_component' => woody_addon_asset_path('woody-library', 'js/modules/components/card/card-map-slider-component.mjs'),
             'woody_library_card_map_manager' => woody_addon_asset_path('woody-library', 'js/modules/managers/card/card-map-manager.mjs'),
-            'woody_library_focus_map_controller' => woody_addon_asset_path('woody-library', 'js/modules/controllers/focus-map-controller.mjs'),
-            'woody_library_focus_svg_controller' => woody_addon_asset_path('woody-library', 'js/modules/controllers/focus-svg-controller.mjs'),
+            'woody_library_woody_controller' => woody_addon_asset_path('woody-library', 'js/modules/controllers/woody-controller.mjs'),
+            'woody_library_focus_controller' => woody_addon_asset_path('woody-library', 'js/modules/controllers/focus/focus-controller.mjs'),
+            'woody_library_focus_map_controller' => woody_addon_asset_path('woody-library', 'js/modules/controllers/focus/focus-map-controller.mjs'),
+            'woody_library_focus_svg_controller' => woody_addon_asset_path('woody-library', 'js/modules/controllers/focus/focus-svg-controller.mjs'),
         ]);
 
         if(!empty($importmap)) {
