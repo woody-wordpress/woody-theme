@@ -837,7 +837,7 @@ class WoodyTheme_WoodyCompilers
         }
 
         if (get_post_type($current_post_id) == 'touristic_sheet') {
-            $sheet_item = woody_hawwwai_item($current_post_id);
+            $sheet_item = woody_hawwwailib_item($current_post_id);
             $current_post_title = empty($sheet_item['title']) ? get_the_title($current_post_id) : $sheet_item['title'];
         } elseif(get_post_type($current_post_id) == 'youbook_product') {
             $current_post_title = get_the_title($current_post_id);

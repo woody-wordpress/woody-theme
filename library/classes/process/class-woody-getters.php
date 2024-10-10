@@ -829,7 +829,9 @@ class WoodyTheme_WoodyGetters
             }
         }
 
-        $sheet_item = woody_hawwwai_item($post->ID);
+        $sheet_item = woody_hawwwailib_item($post->ID);
+
+        console_log($sheet_item, 'sheet item');
 
         $data = [
             'title' => (empty($sheet_item['title'])) ? '' : $sheet_item['title'],
@@ -922,8 +924,8 @@ class WoodyTheme_WoodyGetters
         }
 
         $data['location'] = [];
-        $data['location']['lat'] = (empty($sheet_item['gps'])) ? '' : $sheet_item['gps']['latitude'];
-        $data['location']['lng'] = (empty($sheet_item['gps'])) ? '' : $sheet_item['gps']['longitude'];
+        $data['location']['lat'] = (empty($sheet_item['geolocations'])) ? '' : $sheet_item['geolocations']['latitude'];
+        $data['location']['lng'] = (empty($sheet_item['geolocations'])) ? '' : $sheet_item['geolocations']['longitude'];
 
         // Parcourir tout le tableau de dates et afficher la 1ère date non passée
         $woody_sheet_bordereaux_with_dates = get_field('hawwwai_sheet_bordereaux_with_dates', 'options');
@@ -1222,7 +1224,7 @@ class WoodyTheme_WoodyGetters
     {
         $data = [];
         $post = $wrapper['sheet_selection'];
-        $sheet_item = woody_hawwwai_item($post->ID);
+        $sheet_item = woody_hawwwailib_item($post->ID);
         $sheet_url = woody_get_permalink($post->ID);
 
         $data['title'] = empty($sheet_item['title']) ? '' : $sheet_item['title'];

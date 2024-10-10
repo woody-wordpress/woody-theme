@@ -203,7 +203,7 @@ class Menus
 
                     // On retire le bordereau, la commune et l'id de fiche du titre des fiches SIT
                     if ($post->post_type == 'touristic_sheet') {
-                        $sheet = woody_hawwwai_item($post->ID);
+                        $sheet = woody_hawwwailib_item($post->ID);
                         $return[$post_key]['the_fields']['title'] = (empty($sheet['title'])) ? '' : $sheet['title'];
                     } else {
                         $in_menu_title = get_field('in_menu_title', $post->ID);
