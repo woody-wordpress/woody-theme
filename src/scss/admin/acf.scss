@@ -843,7 +843,8 @@
                     color: #007cba;
                 }
 
-                &[data-layout='free_text'] {
+                &[data-layout='free_text'],
+                &[data-layout='text'] {
                     &:before {
                         content: '\f206';
                     }
@@ -880,6 +881,7 @@
                 &[data-layout='semantic_view'],
                 &[data-layout='auto_focus'],
                 &[data-layout='manual_focus'],
+                &[data-layout='focus_sheetList'],
                 &[data-layout='catalog_focus'] {
                     &:before {
                         content: '\f13c';
@@ -899,7 +901,8 @@
                     }
                 }
 
-                &[data-layout='accordion'] {
+                &[data-layout='accordion'],
+                &[data-layout='faq'] {
                     &:before {
                         content: '\f164';
                     }
