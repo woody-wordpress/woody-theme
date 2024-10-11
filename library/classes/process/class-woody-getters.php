@@ -112,6 +112,7 @@ class WoodyTheme_WoodyGetters
         if(!empty($the_items) && !empty($the_items['items'])) {
             foreach ($the_items['items'] as $key_parent_item => $parent_item) {
                 $the_items['items'][$key_parent_item]['subcontent'] = [];
+
                 if (!empty($wrapper['content_selection'][$key_parent_item]) && !empty($wrapper['content_selection'][$key_parent_item]['subcontent'])) {
                     $subwrapper = $wrapper['content_selection'][$key_parent_item]['subcontent'];
                     // Contenu existant
@@ -130,6 +131,10 @@ class WoodyTheme_WoodyGetters
                         $params = empty($subwrapper['auto_content']) ? $subwrapper : array_merge($subwrapper, $subwrapper['auto_content']);
                         unset($params['auto_content']);
                         $the_items['items'][$key_parent_item]['subcontent'] = $this->getAutoFocusData($current_post, $params, $paginate, $uniqid, $ingore_maxnum, $posts_in, $filters);
+                    }
+
+                    if (!empty($wrapper['mobile_behaviour'])) {
+                        $subwrapper['mobile_behaviour'] = $wrapper['mobile_behaviour'];
                     }
 
                     // On compile le template
