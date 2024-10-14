@@ -829,12 +829,7 @@ class WoodyTheme_WoodyGetters
             }
         }
 
-        $sheet_item_old = woody_hawwwai_item($post->ID);
-        console_log($sheet_item_old, 'sheet item old');
-
-        // TODO: remapping variables
         $sheet_item = woody_hawwwailib_item($post->ID);
-        console_log($sheet_item, 'sheet item');
 
         $sheet_title = empty($sheet_item['businessName']) ? '' : $sheet_item['businessName'];
 
@@ -882,7 +877,6 @@ class WoodyTheme_WoodyGetters
                 }
             }
 
-            // TODO: update variables
             if (in_array('sheet_itinerary', $wrapper['display_elements'])) {
                 $data['sheet_itinerary']['locomotions'] = (empty($sheet_item['locomotions'])) ? '' : $sheet_item['locomotions'];
                 $data['sheet_itinerary']['length'] = (empty($sheet_item['itineraryLength'])) ? '' : $sheet_item['itineraryLength']['value'] . $sheet_item['itineraryLength']['unit'];
@@ -892,11 +886,10 @@ class WoodyTheme_WoodyGetters
                 $data['sheet_town'] = (empty($sheet_item['locality'])) ? '' : $sheet_item['locality'];
             }
 
-            // TODO: update variables
             if (in_array('price', $wrapper['display_elements'])) {
-                $data['the_price']['free'] = isset($sheet_item['tariffs']['price']) && $sheet_item['tariffs']['price'] == '0';
-                $data['the_price']['price'] = (empty($sheet_item['tariffs']['price'])) ? '' : $sheet_item['tariffs']['price'];
-                $data['the_price']['prefix_price'] = (empty($sheet_item['tariffs']['label'])) ? '' : $sheet_item['tariffs']['label'];
+                $data['the_price']['free'] = isset($sheet_item['referenceTariff']['price']) && $sheet_item['referenceTariff']['price'] == '0';
+                $data['the_price']['price'] = (empty($sheet_item['referenceTariff']['price'])) ? '' : $sheet_item['referenceTariff']['price'];
+                $data['the_price']['prefix_price'] = (empty($sheet_item['referenceTariff']['label'])) ? '' : $sheet_item['referenceTariff']['label'];
             }
 
             if (in_array('bookable', $wrapper['display_elements'])) {
@@ -954,7 +947,6 @@ class WoodyTheme_WoodyGetters
         $data['location']['lat'] = empty($sheet_item['geolocations']) && empty($sheet_item['geolocations']['latitude']) ? '' : $sheet_item['geolocations']['latitude'];
         $data['location']['lng'] = empty($sheet_item['geolocations']) && empty($sheet_item['geolocations']['longitude']) ? '' : $sheet_item['geolocations']['longitude'];
 
-        // TODO: update variables
         // Parcourir tout le tableau de dates et afficher la 1ère date non passée
         $woody_sheet_bordereaux_with_dates = get_field('hawwwai_sheet_bordereaux_with_dates', 'options');
         $woody_sheet_bordereaux_with_dates = empty($woody_sheet_bordereaux_with_dates) ? [] : $woody_sheet_bordereaux_with_dates;
@@ -978,7 +970,6 @@ class WoodyTheme_WoodyGetters
 
         $data['sheet_id'] = get_field('touristic_sheet_id', $post->ID);
 
-        // TODO: update variables
         // Critère
         if (!empty($sheet_item['itemData'])) {
             foreach ($sheet_item['itemData'] as $item) {
