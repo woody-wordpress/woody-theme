@@ -164,6 +164,10 @@ abstract class WoodyTheme_TemplateAbstract
         if (empty($this->globals['context']) && !empty($this->context['page_type'])) {
             $this->globals['context'] = $this->getGlobalContext($this->context['page_type']);
         }
+
+        if (empty($this->globals['map_keys'])) {
+            $this->globals['map_keys'] = Woody\Modules\Plugin\Plugin::getMapKeys();
+        }
     }
 
     private function getAncestors($post)
