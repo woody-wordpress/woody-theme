@@ -843,7 +843,8 @@
                     color: #007cba;
                 }
 
-                &[data-layout='free_text'] {
+                &[data-layout='free_text'],
+                &[data-layout='text'] {
                     &:before {
                         content: '\f206';
                     }
@@ -880,6 +881,7 @@
                 &[data-layout='semantic_view'],
                 &[data-layout='auto_focus'],
                 &[data-layout='manual_focus'],
+                &[data-layout='focus_sheetList'],
                 &[data-layout='catalog_focus'] {
                     &:before {
                         content: '\f13c';
@@ -899,7 +901,8 @@
                     }
                 }
 
-                &[data-layout='accordion'] {
+                &[data-layout='accordion'],
+                &[data-layout='faq'] {
                     &:before {
                         content: '\f164';
                     }
@@ -1027,6 +1030,12 @@
                 &[data-layout='menus'] {
                     &:before {
                         content: '\f333';
+                    }
+                }
+
+                &[data-layout='highlights'] {
+                    &:before {
+                        content: '\f177';
                     }
                 }
             }
@@ -1169,4 +1178,9 @@
 // Section models list
 .acf-field-6061dcdfc96ee {
     overflow: scroll;
+}
+
+// Bloc de réservation dans les pages d'accueil
+#acf-group_5c0e4121ee3ed {
+    display: none !important;
 }

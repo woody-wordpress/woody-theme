@@ -88,6 +88,7 @@ class WoodyTheme_WoodyProcess
             case 'auto_focus_topics':
             case 'focus_trip_components':
             case 'profile_focus':
+            case 'highlights':
                 // TODO: les cases auto_focus_topics + auto_focus_sheets + focus_trip_components doivent être ajoutés via le filtre woody_custom_layout depuis leurs addons respectifs
                 $return = $this->compilers->formatFocusesData($layout, $context['post'], $context['woody_components']);
                 break;

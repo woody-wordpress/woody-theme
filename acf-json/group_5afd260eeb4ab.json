@@ -971,6 +971,37 @@
                             ],
                             "min": "",
                             "max": ""
+                        },
+                        "layout_66fa78efdfbb1": {
+                            "key": "layout_66fa78efdfbb1",
+                            "name": "highlights",
+                            "label": "Temps forts",
+                            "display": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_66fa793a446de",
+                                    "label": "Temps forts",
+                                    "name": "highlights",
+                                    "type": "clone",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "hide-label",
+                                        "id": ""
+                                    },
+                                    "clone": [
+                                        "group_66fa7944c5427"
+                                    ],
+                                    "display": "seamless",
+                                    "layout": "block",
+                                    "prefix_label": 0,
+                                    "prefix_name": 0
+                                }
+                            ],
+                            "min": "",
+                            "max": ""
                         }
                     },
                     "button_label": "Ajouter un bloc",
