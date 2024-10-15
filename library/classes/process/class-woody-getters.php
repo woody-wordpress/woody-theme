@@ -852,7 +852,6 @@ class WoodyTheme_WoodyGetters
             ];
         }
 
-        // TODO: update variables
         if (!empty($wrapper['deal_mode']) && !empty($sheet_item['deals'])) {
             $data['title'] = $sheet_item['deals']['list'][$deal_index]['nom'][$current_lang];
         }
@@ -861,7 +860,6 @@ class WoodyTheme_WoodyGetters
             if (in_array('sheet_type', $wrapper['display_elements'])) {
                 $criterias = empty($sheet_item['criterias']) ? [] : $sheet_item['criterias'];
                 $data['sheet_type'] = empty($criterias) ? '' : mb_strtoupper($criterias[0]['_criterion']);
-                // TODO: update variables
                 if (!empty($wrapper['deal_mode']) && !empty($sheet_item['deals'])) {
                     $data['sheet_type'] = $sheet_title;
                 }
@@ -871,7 +869,6 @@ class WoodyTheme_WoodyGetters
                 $sheet_description = empty($sheet_item['description']) ? '' : strip_tags(mb_convert_encoding($sheet_item['description'], 'UTF-8', 'UTF-8'));
                 $sheet_slogan = empty($sheet_item['slogan']) ? '' : mb_convert_encoding($sheet_item['slogan'], 'UTF-8', 'UTF-8');
                 $data['description'] = empty($sheet_slogan) ? $sheet_description : $sheet_slogan;
-                // TODO: update variables
                 if (!empty($wrapper['deal_mode']) && !empty($sheet_item['deals']['list'][$deal_index]['description'][$current_lang])) {
                     $data['description'] = $sheet_item['deals']['list'][$deal_index]['description'][$current_lang];
                 }
