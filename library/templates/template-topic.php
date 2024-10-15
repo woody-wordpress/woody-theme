@@ -159,11 +159,12 @@ class WoodyTheme_Template_Topic extends WoodyTheme_TemplateAbstract
             'display_button' => true,
             'deal_mode' => false,
             'woody_tpl' => 'blocks-focus-tpl_103',
-            'focus_map_params' => [
+            'map_params_enabled' => false,
+            'map_params' => [
                 'map_zoom_auto' => true,
-                'map_zoom' => '',
+                'map_zoom' => '10',
                 'map_height' => 'md',
-                'map_provider' => '',
+                'map_provider' => 'tm',
             ],
             'focus_no_padding' => false,
             'visual_effects' => [

@@ -249,7 +249,7 @@
                     "layout": "block",
                     "prefix_label": 0,
                     "prefix_name": 0,
-                    "_old_fields_explaination": "Liste des anciens champs utilisés pour le réglage de la carte, peut être utilisé pour du fallback",
+                    "_old_fields_description": "Liste des anciens champs utilisés pour le réglage de la carte, peut être utilisé pour du fallback",
                     "_old_fields": [
                         {
                             "key": "field_5be167a6ca074",

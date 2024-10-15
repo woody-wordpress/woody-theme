@@ -63,7 +63,7 @@ class WoodyTheme_WoodyCompilers
                     if (!empty($wrapper['playlist_conf_id'])) {
                         $the_items = $this->getter->getAutoFocusSheetData($wrapper);
                     }
-                    
+
                     break;
             case 'highlights':
                 $the_items = $this->getter->getHighlightsFocusData($wrapper);
@@ -137,7 +137,7 @@ class WoodyTheme_WoodyCompilers
             ];
         }
 
-        // REVIEW tmapsV2_refactoring
+        // REVIEW tmapsV2_refactoring : remove tmaps_confid / parse map_params
         $the_items['map_params'] = $this->tools->getMapParams($wrapper);
 
         if (!empty($the_items['display_button'])) {
@@ -264,9 +264,12 @@ class WoodyTheme_WoodyCompilers
             }
         }
 
-        // REVIEW tmapsV2_refactoring : remove tmaps_confid
-        // REVIEW tmapsV2_refactoring : parse map_params
-        $wrapper['map_params'] = $this->tools->getMapParams();
+        // REVIEW tmapsV2_refactoring : remove tmaps_confid / parse map_params
+        console_log("====> formatGeomapData - wrapper : " . var_export($wrapper, true));
+
+        $wrapper['map_params'] = $this->tools->getMapParams($wrapper);
+
+        console_log("====> formatGeomapData - wrapper['map_params'] : " . var_export($wrapper['map_params'], true));
 
         return \Timber::compile($twigPaths[$wrapper['woody_tpl']], $wrapper);
     }
