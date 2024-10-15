@@ -265,11 +265,7 @@ class WoodyTheme_WoodyCompilers
         }
 
         // REVIEW tmapsV2_refactoring : remove tmaps_confid / parse map_params
-        console_log("====> formatGeomapData - wrapper : " . var_export($wrapper, true));
-
         $wrapper['map_params'] = $this->tools->getMapParams($wrapper);
-
-        console_log("====> formatGeomapData - wrapper['map_params'] : " . var_export($wrapper['map_params'], true));
 
         return \Timber::compile($twigPaths[$wrapper['woody_tpl']], $wrapper);
     }
@@ -504,7 +500,6 @@ class WoodyTheme_WoodyCompilers
             // Si on a trouvé un filtre de carte, on remplit le tableau the_map
             if (isset($the_list['filters']['the_map'])) {
                 $map_items = $this->getter->getAutoFocusData($current_post, $list_el_wrapper, $paginate, $wrapper['uniqid'], true, $default_items_ids, $wrapper['the_list_filters']);
-
                 $the_list['filters']['the_map']['markers'] = $this->formatListMapFilter($map_items, $twigPaths);
                 $the_list['has_map'] = true;
             }
@@ -715,7 +710,7 @@ class WoodyTheme_WoodyCompilers
         }
 
         // REVIEW tmapsV2_refactoring : remove tmaps_confid / parse map_params
-        $page_teaser['map_params'] = $this->tools->getMapParams();
+        $page_teaser['map_params'] = $this->tools->getMapParams(isset($page_teaser['page_teaser_map']) ? $page_teaser['page_teaser_map'] : []);
 
         $page_teaser = apply_filters('woody_custom_page_teaser', $page_teaser, $context);
         if (!empty($page_teaser['page_teaser_woody_tpl'])) {

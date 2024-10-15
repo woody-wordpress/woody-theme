@@ -283,16 +283,16 @@ class WoodyTheme_WoodyGetters
                             $start_day = formatDate($item_wrapper['highlight_start_date'], 'l d');
                             $start_month = formatDate($item_wrapper['highlight_start_date'], 'F');
                             $start_year = formatDate($item_wrapper['highlight_start_date'], 'Y');
-    
+
                             $pretitle = __('Le', 'woody-theme') . ' ' . $start_day . ' ' . $start_month . ' ' . $start_year;
-    
+
                             if(!empty($item_wrapper['highlight_end_date'])) {
                                 $formatted_end_date = formatDate($item_wrapper['highlight_end_date'], 'l d F Y');
-                                
+
                                 $end_day = formatDate($item_wrapper['highlight_end_date'], 'l d');
                                 $end_month = formatDate($item_wrapper['highlight_end_date'], 'F');
                                 $end_year = formatDate($item_wrapper['highlight_end_date'], 'Y');
-                                
+
                                 // On vérifie si les dates sont dans la même année
                                 if($start_year === $end_year) {
                                     // On vérifie si les dates sont dans le même mois
@@ -1188,7 +1188,8 @@ class WoodyTheme_WoodyGetters
 
                     case 'map':
 
-                        // REVIEW tmapsV2_refactoring : remove tmaps_confid / parse map_params
+                        // TODO tmapsV2_refactoring : remove tmaps_confid / parse map_params
+                        console_log("getListFilters - filter : " . var_export($filter, true));
                         $filter['map_params'] = $this->tools->getMapParams($filter);
 
                         $return['the_map'] = $filter;

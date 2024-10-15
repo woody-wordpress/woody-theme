@@ -73,6 +73,75 @@
             ]
         },
         {
+            "key": "field_5b043b217mp80",
+            "label": "Régler la carte",
+            "name": "map_params_enabled",
+            "type": "true_false",
+            "instructions": "Par défaut, les paramètres du site s'appliquent",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5b043b217mp81",
+            "label": "Réglages de la carte",
+            "name": "map_params",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b043b217mp80",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_5b043b217mp82",
+                    "label": "Clone",
+                    "name": "clone",
+                    "aria-label": "",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "field_5b043b217mp74",
+                        "field_5b043b217mp75",
+                        "field_5b043b217mp77"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                }
+            ]
+        },
+        {
             "key": "field_5b043b217mp74",
             "label": "Zoomer la carte automatiquement",
             "name": "map_zoom_auto",
