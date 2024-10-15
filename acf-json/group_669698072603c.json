@@ -1088,25 +1088,37 @@
                             "endpoint": 0
                         },
                         {
-                            "key": "field_6697936984719",
-                            "label": "Paramètres de carte",
-                            "name": "focus_map_params",
+                            "key": "field_670e400106578",
+                            "label": "Bloc de réglage de carte générique",
+                            "name": "",
                             "type": "clone",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "",
+                                "width": "65",
                                 "class": "",
                                 "id": ""
                             },
                             "clone": [
-                                "field_5c9e22f9f8ea2"
+                                "field_5b043b217mp70",
+                                "field_5b043b217mp71"
                             ],
                             "display": "seamless",
                             "layout": "block",
                             "prefix_label": 0,
-                            "prefix_name": 0
+                            "prefix_name": 0,
+                            "_old_fields_explaination": "Liste des anciens champs utilisés pour le réglage de la carte, peut être utilisé pour du fallback",
+                            "_old_fields": [
+                                {
+                                    "key": "field_6697936984719",
+                                    "name": "focus_map_params",
+                                    "type": "clone",
+                                    "clone": [
+                                        "field_5c9e22f9f8ea2"
+                                    ]
+                                }
+                            ]
                         },
                         {
                             "key": "field_66979372d0350",

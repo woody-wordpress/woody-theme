@@ -134,26 +134,8 @@ class WoodyTheme_WoodyCompilers
             ];
         }
 
-        if (!empty($wrapper['focus_map_params'])) {
-            // REVIEW tmapsV2_refactoring : remove tmaps_confid
-            if (!empty($wrapper['focus_map_params']['map_provider'])) {
-                $the_items['map_params']['map_provider'] = $wrapper['focus_map_params']['map_provider'];
-            } elseif (!empty(get_field('map_provider', 'option'))) {
-                $the_items['map_params']['map_provider'] = get_field('map_provider', 'option');
-            }
-
-            if (!empty($wrapper['focus_map_params']['map_height'])) {
-                $the_items['map_params']['map_height'] = $wrapper['focus_map_params']['map_height'];
-            }
-
-            if (!empty($wrapper['focus_map_params']['map_zoom_auto'])) {
-                $the_items['map_params']['map_zoom_auto'] = $wrapper['focus_map_params']['map_zoom_auto'];
-            }
-
-            if (!empty($wrapper['focus_map_params']['map_zoom']) && (empty($the_items['map_params']['map_zoom_auto']) || $the_items['map_params']['map_zoom_auto'] === false)) {
-                $the_items['map_params']['map_zoom'] = $wrapper['focus_map_params']['map_zoom'];
-            }
-        }
+        // REVIEW tmapsV2_refactoring
+        $the_items['map_params'] = $this->tools->getMapParams($wrapper);
 
         if (!empty($the_items['display_button'])) {
             $the_items['button_classes'] = apply_filters('woody_card_button_classes', '', $wrapper);
@@ -270,16 +252,14 @@ class WoodyTheme_WoodyCompilers
                     }
 
                     $the_marker['item']['link'] = (empty($marker['link'])) ? '' : $marker['link'];
-                    // TODO tmapsv2_refactoring
                     $wrapper['markers'][$key]['marker_thumb_html']  = \Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker);
                 }
             }
         }
 
         // REVIEW tmapsV2_refactoring : remove tmaps_confid
-        if (empty($wrapper['map_provider']) && !empty(get_field('map_provider', 'option'))) {
-            $wrapper['mep_provider'] = get_field('map_provider', 'option');
-        }
+        // REVIEW tmapsV2_refactoring : parse map_params
+        $wrapper['map_params'] = $this->tools->getMapParams();
 
         return \Timber::compile($twigPaths[$wrapper['woody_tpl']], $wrapper);
     }
@@ -597,7 +577,6 @@ class WoodyTheme_WoodyCompilers
                             'lat' => $item['location']['lat'],
                             'lng' => $item['location']['lng']
                         ],
-                        // TODO tmapsv2_refactoring
                         'marker_thumb_html' => \Timber::compile($twigPaths['cards-geomap_card-tpl_01'], $the_marker)
                     ];
                 }
@@ -725,8 +704,8 @@ class WoodyTheme_WoodyCompilers
             ];
         }
 
-        // REVIEW tmapsV2_refactoring : remove tmaps_confid
-        $page_teaser['map_provider'] = get_field('map_provider', 'option');
+        // REVIEW tmapsV2_refactoring : remove tmaps_confid / parse map_params
+        $page_teaser['map_params'] = $this->tools->getMapParams();
 
         $page_teaser = apply_filters('woody_custom_page_teaser', $page_teaser, $context);
         if (!empty($page_teaser['page_teaser_woody_tpl'])) {

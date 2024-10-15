@@ -1056,10 +1056,8 @@ class WoodyTheme_WoodyGetters
 
                     case 'map':
 
-                        // REVIEW tmapsV2_refactoring : remove tmaps_confid
-                        if (empty($filter['list_filter_map_params']['map_provider']) && !empty(get_field('map_provider', 'option'))) {
-                            $filter['list_filter_map_params']['map_provider'] = get_field('map_provider', 'option');
-                        }
+                        // REVIEW tmapsV2_refactoring : remove tmaps_confid / parse map_params
+                        $filter['map_params'] = $this->tools->getMapParams($filter);
 
                         $return['the_map'] = $filter;
                         unset($filter_wrapper['list_filters'][$key]);

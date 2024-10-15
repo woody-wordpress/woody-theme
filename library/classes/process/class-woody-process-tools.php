@@ -462,4 +462,63 @@ class WoodyTheme_WoodyProcessTools
 
         return $device;
     }
+
+    /**
+     * Retrieve map's params from acf wrapper
+     * @param array $wrapper
+     * @author Sébastien Chandonay
+     */
+    public function getMapParams($wrapper = []) {
+
+        // globals map params
+        $map_zoom_auto = get_field('map_zoom_auto', 'option');
+        $map_params = [
+            'map_zoom_auto' => $map_zoom_auto,
+            'map_zoom' => $map_zoom_auto === false ? get_field('map_zoom', 'option') : null,
+            'map_provider' => get_field('map_provider', 'option'),
+        ];
+
+        console_log("getMapParams - wrapper : " . var_export($wrapper, true));
+
+        // specific map_params
+        if (isset($wrapper['map_params_enabled']) && $wrapper['map_params_enabled'] == true) {
+            // specific map zoom
+            $map_zoom_auto = isset($wrapper['map_params']['map_zoom_auto']) ? $wrapper['map_params']['map_zoom_auto'] : false;
+            $map_params['map_zoom_auto'] = $map_zoom_auto;
+            $map_params['map_zoom'] = $map_zoom_auto === false ? $wrapper['focus_map_params']['map_zoom'] : null;
+
+            // specific map height
+            if (!empty($wrapper['focus_map_params']['map_height'])) {
+                // $map_params['map_height'] = isset($wrapper['map_params']['map_height'];
+            }
+
+            // specific map provider
+
+        }
+
+
+        return $map_params;
+
+        if (!empty($wrapper['map_params'])) {
+            // REVIEW tmapsV2_refactoring : remove tmaps_confid
+            // TODO tmapsV2_refactoring : parse map_params
+            if (!empty($wrapper['focus_map_params']['map_provider'])) {
+                $the_items['map_params']['map_provider'] = $wrapper['focus_map_params']['map_provider'];
+            } elseif (!empty(get_field('map_provider', 'option'))) {
+                $the_items['map_params']['map_provider'] = get_field('map_provider', 'option');
+            }
+
+            if (!empty($wrapper['focus_map_params']['map_height'])) {
+                $the_items['map_params']['map_height'] = $wrapper['focus_map_params']['map_height'];
+            }
+
+            if (!empty($wrapper['focus_map_params']['map_zoom_auto'])) {
+                $the_items['map_params']['map_zoom_auto'] = $wrapper['focus_map_params']['map_zoom_auto'];
+            }
+
+            if (!empty($wrapper['focus_map_params']['map_zoom']) && (empty($the_items['map_params']['map_zoom_auto']) || $the_items['map_params']['map_zoom_auto'] === false)) {
+                $the_items['map_params']['map_zoom'] = $wrapper['focus_map_params']['map_zoom'];
+            }
+        }
+    }
 }
