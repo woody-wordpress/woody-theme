@@ -84,7 +84,7 @@ class ApiRest
         }
 
         if ($html_format && !empty($tpl_twig)) {
-            return Timber::compile('cards/' . $tpl_twig . '/tpl.twig', [
+            return \Timber::compile('cards/' . $tpl_twig . '/tpl.twig', [
                 'item' => $post_preview,
                 'image_style' => $ratio,
                 'display_button' => empty($wrapper['display_button']) ? false : $wrapper['display_button']
