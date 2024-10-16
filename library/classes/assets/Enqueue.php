@@ -257,25 +257,32 @@ class Enqueue
             }
 
             // Touristic maps libraries
+            /* REVIEW tmapsV2_refactoring : remove old map libraries
             wp_enqueue_script('touristicmaps_leaflet', 'https://tiles.touristicmaps.com/libs/leaflet.min.js', [], null);
             wp_enqueue_style('leaflet_css', 'https://tiles.touristicmaps.com/libs/tmaps.min.css', [], null);
+            */
 
             //TODO: fix bug with Gmap and Universal Map
             // if (isset($map_keys['otmKey']) || isset($map_keys['ignKey']) || $this->isTouristicSheet || $this->isRoadBookSheet) {
             // need to load tangram always in TOURISTIC SHEET for now (bug in vendor angular) ↓
+            /* REVIEW tmapsV2_refactoring : remove old map libraries
             wp_enqueue_script('touristicmaps_tangram', 'https://tiles.touristicmaps.com/libs/tangram.min.js', [], null);
             wp_enqueue_script('touristicmaps_cluster', 'https://tiles.touristicmaps.com/libs/markercluster.min.js', [], null);
             wp_enqueue_script('touristicmaps_locate', 'https://tiles.touristicmaps.com/libs/locate.min.js', [], null);
             wp_enqueue_script('touristicmaps_geocoder', 'https://tiles.touristicmaps.com/libs/geocoder.min.js', [], null);
             wp_enqueue_script('touristicmaps_fullscreen', 'https://tiles.touristicmaps.com/libs/fullscreen.min.js', [], null);
+            */
             // }
 
+            /* REVIEW tmapsV2_refactoring : remove old map libraries
             if (isset($map_keys['gmKey'])) {
                 wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?key=' . $map_keys['gmKey'] . '&v=3.33&libraries=geometry,places', [], null);
             } elseif ($this->isTouristicSheet || $this->isRoadBookSheet) { // absolutely needed in angular
                 wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?v=3.33&libraries=geometry,places', [], null);
             }
+            */
 
+            // REVIEW tmapsV2_refactoring : remove old map libraries
             // wp_enqueue_script('hawwwai_universal_map', $apirender_base_uri . '/assets/scripts/raccourci/universal-mapV2.' . $jsModeSuffix . '.js', $js_dependencies_rcmap, null);
         }
 
