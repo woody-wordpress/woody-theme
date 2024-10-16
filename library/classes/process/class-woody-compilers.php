@@ -137,7 +137,7 @@ class WoodyTheme_WoodyCompilers
         }
 
         // REVIEW tmapsV2_refactoring : remove tmaps_confid / parse map_params
-        $the_items['map_params'] = $this->tools->getMapParams($wrapper);
+        $the_items['map_params'] = WoodyTheme_WoodyProcessTools::getMapParams($wrapper);
 
         if (!empty($the_items['display_button'])) {
             $the_items['button_classes'] = apply_filters('woody_card_button_classes', '', $wrapper);
@@ -264,7 +264,7 @@ class WoodyTheme_WoodyCompilers
         }
 
         // REVIEW tmapsV2_refactoring : remove tmaps_confid / parse map_params
-        $wrapper['map_params'] = $this->tools->getMapParams($wrapper);
+        $wrapper['map_params'] = WoodyTheme_WoodyProcessTools::getMapParams($wrapper);
 
         return \Timber::compile($twigPaths[$wrapper['woody_tpl']], $wrapper);
     }
@@ -611,7 +611,7 @@ class WoodyTheme_WoodyCompilers
                     foreach ($return['items'] as $item) {
                         if (!empty($item['location']) && !empty($item['location']['latitude']) && !empty($item['location']['longitude'])) {
                             // REVIEW tmapsV2_refactoring : parse map_params
-                            $return['map_params'] = $this->tools->getMapParams();
+                            $return['map_params'] = WoodyTheme_WoodyProcessTools::getMapParams();
                             $return['display_map'] = true;
                             break;
                         }
@@ -711,7 +711,7 @@ class WoodyTheme_WoodyCompilers
         }
 
         // REVIEW tmapsV2_refactoring : remove tmaps_confid / parse map_params
-        $page_teaser['map_params'] = $this->tools->getMapParams(isset($page_teaser['page_teaser_map']) ? $page_teaser['page_teaser_map'] : []);
+        $page_teaser['map_params'] = WoodyTheme_WoodyProcessTools::getMapParams(isset($page_teaser['page_teaser_map']) ? $page_teaser['page_teaser_map'] : []);
 
         $page_teaser = apply_filters('woody_custom_page_teaser', $page_teaser, $context);
         if (!empty($page_teaser['page_teaser_woody_tpl'])) {

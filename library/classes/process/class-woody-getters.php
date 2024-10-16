@@ -1188,7 +1188,7 @@ class WoodyTheme_WoodyGetters
 
                     case 'map':
                         // REVIEW tmapsV2_refactoring : remove tmaps_confid / parse map_params
-                        $filter['map_params'] = $this->tools->getMapParams($filter['list_filter_map']);
+                        $filter['map_params'] = WoodyTheme_WoodyProcessTools::getMapParams($filter['list_filter_map']);
                         $return['the_map'] = $filter;
                         unset($filter_wrapper['list_filters'][$key]);
                         break;

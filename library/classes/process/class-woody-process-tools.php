@@ -470,7 +470,7 @@ class WoodyTheme_WoodyProcessTools
      * @param array $context
      * @return array map params
      */
-    public function getMapParams($context = []) {
+    public static function getMapParams($context = []) {
 
         // globals params
         $map_zoom_auto = get_field('map_zoom_auto', 'option');
