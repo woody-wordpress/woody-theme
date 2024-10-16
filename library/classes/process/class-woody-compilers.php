@@ -610,6 +610,8 @@ class WoodyTheme_WoodyCompilers
 
                     foreach ($return['items'] as $item) {
                         if (!empty($item['location']) && !empty($item['location']['latitude']) && !empty($item['location']['longitude'])) {
+                            // REVIEW tmapsV2_refactoring : parse map_params
+                            $return['map_params'] = $this->tools->getMapParams();
                             $return['display_map'] = true;
                             break;
                         }

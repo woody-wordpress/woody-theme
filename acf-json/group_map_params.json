@@ -62,6 +62,7 @@
                     "clone": [
                         "field_5b043b217mp74",
                         "field_5b043b217mp75",
+                        "field_5b043b217mp78",
                         "field_5b043b217mp76",
                         "field_5b043b217mp77"
                     ],
@@ -132,6 +133,7 @@
                     "clone": [
                         "field_5b043b217mp74",
                         "field_5b043b217mp75",
+                        "field_5b043b217mp78",
                         "field_5b043b217mp77"
                     ],
                     "display": "seamless",
@@ -143,10 +145,10 @@
         },
         {
             "key": "field_5b043b217mp74",
-            "label": "Zoomer la carte automatiquement (générique)",
+            "label": "Zoom automatique en fonction des marqueurs",
             "name": "map_zoom_auto",
             "type": "true_false",
-            "instructions": "Zoom automatique en fonction des marqueurs",
+            "instructions": "La carte est automatiquement zoomée au chargement, afin que tous les marqueurs soient visibles.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -162,10 +164,10 @@
         },
         {
             "key": "field_5b043b217mp75",
-            "label": "Zoom de la carte (générique)",
+            "label": "Zoom de la carte",
             "name": "map_zoom",
             "type": "number",
-            "instructions": "Entre \"5\" et \"20\" (5 = éloigné \/ 20 = proche)",
+            "instructions": "Entre \"5\" et \"20\" (5 = éloigné \/ 20 = proche) - Niveau de zoom initial appliqué au chargement de la carte.",
             "required": 0,
             "conditional_logic": [
                 [
@@ -181,7 +183,36 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
+            "default_value": "7",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": 5,
+            "max": 20,
+            "step": 1
+        },
+        {
+            "key": "field_5b043b217mp78",
+            "label": "Niveau max du zoom automatique",
+            "name": "map_zoom_auto_max",
+            "type": "number",
+            "instructions": "Entre \"5\" et \"20\" (5 = éloigné \/ 20 = proche) - Cette limite est notamment utile lors d'un zoom automatique, alors que la carte ne compte qu'un seul marqueur, pour garder un point de vue large.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b043b217mp74",
+                        "operator": "!=",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "15",
             "placeholder": "",
             "prepend": "",
             "append": "",
@@ -191,7 +222,7 @@
         },
         {
             "key": "field_5b043b217mp76",
-            "label": "Hauteur de la carte (générique)",
+            "label": "Hauteur de la carte",
             "name": "map_height",
             "type": "button_group",
             "instructions": "",
@@ -214,7 +245,7 @@
         },
         {
             "key": "field_5b043b217mp77",
-            "label": "Fond de carte (générique)",
+            "label": "Fond de carte",
             "name": "map_provider",
             "type": "radio",
             "wrapper": {

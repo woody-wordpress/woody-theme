@@ -476,9 +476,10 @@ class WoodyTheme_WoodyProcessTools
         $map_zoom_auto = get_field('map_zoom_auto', 'option');
         $map_zoom = get_field('map_zoom', 'option');
         $map_provider = get_field('map_provider', 'option');
+        $map_zoom_auto_max = get_field('map_zoom_auto_max', 'option');
         $map_params = [
             'map_zoom_auto' => $map_zoom_auto,
-            'map_zoom' => $map_zoom_auto === false && !empty($map_zoom) ? $map_zoom : null,
+            'map_zoom' => $map_zoom_auto === false ? $map_zoom : $map_zoom_auto_max,
             'map_provider' => !empty($map_provider) ? $map_provider : null
         ];
 
@@ -487,8 +488,9 @@ class WoodyTheme_WoodyProcessTools
             // map zoom
             $map_zoom_auto = isset($context['map_params']['map_zoom_auto']) ? $context['map_params']['map_zoom_auto'] : false;
             $map_zoom = isset($context['map_params']['map_zoom']) ? $context['map_params']['map_zoom'] : null;
+            $map_zoom_auto_max = isset($context['map_params']['map_zoom_auto_max']) ? $context['map_params']['map_zoom_auto_max'] : null;
             $map_params['map_zoom_auto'] = $map_zoom_auto;
-            $map_params['map_zoom'] = $map_zoom_auto === false ? $map_zoom : null;
+            $map_params['map_zoom'] = $map_zoom_auto === false ? $map_zoom : $map_zoom_auto_max;
 
             // map height
             if (isset($context['map_params']['map_height']) && !empty($context['map_params']['map_height'])) {
