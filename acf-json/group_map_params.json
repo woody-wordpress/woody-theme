@@ -143,7 +143,7 @@
         },
         {
             "key": "field_5b043b217mp74",
-            "label": "Zoomer la carte automatiquement",
+            "label": "Zoomer la carte automatiquement (générique)",
             "name": "map_zoom_auto",
             "type": "true_false",
             "instructions": "Zoom automatique en fonction des marqueurs",
@@ -162,7 +162,7 @@
         },
         {
             "key": "field_5b043b217mp75",
-            "label": "Zoom de la carte",
+            "label": "Zoom de la carte (générique)",
             "name": "map_zoom",
             "type": "number",
             "instructions": "Entre \"5\" et \"20\" (5 = éloigné \/ 20 = proche)",
@@ -191,7 +191,7 @@
         },
         {
             "key": "field_5b043b217mp76",
-            "label": "Hauteur de la carte",
+            "label": "Hauteur de la carte (générique)",
             "name": "map_height",
             "type": "button_group",
             "instructions": "",
@@ -214,7 +214,7 @@
         },
         {
             "key": "field_5b043b217mp77",
-            "label": "Fond de carte",
+            "label": "Fond de carte (générique)",
             "name": "map_provider",
             "type": "radio",
             "wrapper": {

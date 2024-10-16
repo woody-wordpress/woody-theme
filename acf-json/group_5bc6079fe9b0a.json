@@ -229,26 +229,52 @@
                     "save_other_choice": 0
                 },
                 {
-                    "key": "field_670e3f1a44369",
-                    "label": "Bloc de réglage de carte générique",
-                    "name": "",
-                    "type": "clone",
+                    "key": "field_670f6aeb6f039",
+                    "label": "Paramètres de carte",
+                    "name": "list_filter_map",
+                    "aria-label": "",
+                    "type": "group",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5bc607c62a89b",
+                                "operator": "==",
+                                "value": "map"
+                            }
+                        ]
+                    ],
                     "wrapper": {
-                        "width": "65",
+                        "width": "",
                         "class": "",
                         "id": ""
                     },
-                    "clone": [
-                        "field_5b043b217mp70",
-                        "field_5b043b217mp71"
-                    ],
-                    "display": "seamless",
                     "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0,
+                    "sub_fields": [
+                        {
+                            "key": "field_670f6afa80834",
+                            "label": "Bloc de réglage de carte générique",
+                            "name": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "65",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "field_5b043b217mp70",
+                                "field_5b043b217mp71"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
                     "_old_fields_description": "Liste des anciens champs utilisés pour le réglage de la carte, peut être utilisé pour du fallback",
                     "_old_fields": [
                         {

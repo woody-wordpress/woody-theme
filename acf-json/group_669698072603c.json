@@ -1583,7 +1583,7 @@
         },
         {
             "key": "field_66976c04c671e",
-            "label": "Paramètres de la carte",
+            "label": "Paramètres de la carte (TODO replace with new map_params)",
             "name": "",
             "type": "accordion",
             "instructions": "",
@@ -1600,7 +1600,7 @@
         },
         {
             "key": "field_66976c0bba786",
-            "label": "Paramètres de carte",
+            "label": "Paramètres de carte (TODO replace with new map_params)",
             "name": "focus_map_params",
             "type": "clone",
             "instructions": "",
