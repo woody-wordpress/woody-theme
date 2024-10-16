@@ -162,6 +162,7 @@ class WoodyTheme_Template_Topic extends WoodyTheme_TemplateAbstract
             'map_params_enabled' => false,
             'map_params' => [
                 'map_zoom_auto' => true,
+                'map_zoom_auto_max' => '15',
                 'map_zoom' => '10',
                 'map_height' => 'md',
                 'map_provider' => 'tm',
