@@ -59,12 +59,11 @@ class WoodyTheme_WoodyCompilers
             case 'catalog_focus':
                 $the_items = $this->getter->getCatalogFocusData($current_post, $wrapper, $twigPaths);
                 break;
-                case 'auto_focus_sheets':
-                    if (!empty($wrapper['playlist_conf_id'])) {
-                        $the_items = $this->getter->getAutoFocusSheetData($wrapper);
-                    }
-                    
-                    break;
+            case 'auto_focus_sheets':
+                if (!empty($wrapper['playlist_conf_id'])) {
+                    $the_items = $this->getter->getAutoFocusSheetData($wrapper);
+                }
+                break;
             case 'highlights':
                 $the_items = $this->getter->getHighlightsFocusData($wrapper);
                 break;
@@ -837,8 +836,8 @@ class WoodyTheme_WoodyCompilers
         }
 
         if (get_post_type($current_post_id) == 'touristic_sheet') {
-            $sheet_item = woody_hawwwai_item($current_post_id);
-            $current_post_title = empty($sheet_item['title']) ? get_the_title($current_post_id) : $sheet_item['title'];
+            $sheet_item = woody_hawwwailib_item($current_post_id);
+            $current_post_title = empty($sheet_item['businessName']) ? get_the_title($current_post_id) : $sheet_item['businessName'];
         } elseif(get_post_type($current_post_id) == 'youbook_product') {
             $current_post_title = get_the_title($current_post_id);
             $current_post_title = preg_replace('/ #[\w]+/', '', $current_post_title);

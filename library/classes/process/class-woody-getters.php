@@ -112,6 +112,7 @@ class WoodyTheme_WoodyGetters
         if(!empty($the_items) && !empty($the_items['items'])) {
             foreach ($the_items['items'] as $key_parent_item => $parent_item) {
                 $the_items['items'][$key_parent_item]['subcontent'] = [];
+
                 if (!empty($wrapper['content_selection'][$key_parent_item]) && !empty($wrapper['content_selection'][$key_parent_item]['subcontent'])) {
                     $subwrapper = $wrapper['content_selection'][$key_parent_item]['subcontent'];
                     // Contenu existant
@@ -130,6 +131,10 @@ class WoodyTheme_WoodyGetters
                         $params = empty($subwrapper['auto_content']) ? $subwrapper : array_merge($subwrapper, $subwrapper['auto_content']);
                         unset($params['auto_content']);
                         $the_items['items'][$key_parent_item]['subcontent'] = $this->getAutoFocusData($current_post, $params, $paginate, $uniqid, $ingore_maxnum, $posts_in, $filters);
+                    }
+
+                    if (!empty($wrapper['mobile_behaviour'])) {
+                        $subwrapper['mobile_behaviour'] = $wrapper['mobile_behaviour'];
                     }
 
                     // On compile le template
@@ -829,23 +834,26 @@ class WoodyTheme_WoodyGetters
             }
         }
 
-        $sheet_item = woody_hawwwai_item($post->ID);
+        $sheet_item = woody_hawwwailib_item($post->ID);
+
+        $sheet_title = empty($sheet_item['businessName']) ? '' : $sheet_item['businessName'];
 
         $data = [
-            'title' => (empty($sheet_item['title'])) ? '' : $sheet_item['title'],
+            'title' => $sheet_title,
             'post_id' => $post->ID,
             'link' => [
                 'url' => woody_get_permalink($post->ID),
                 'target' => (empty($sheet_item['targetBlank'])) ? '' : '_blank',
             ],
         ];
+
         if (!empty($wrapper['display_img'])) {
-            $url = (!empty($sheet_item['img']['url']) && !empty($sheet_item['img']['url']['manual'])) ? str_replace('api.tourism-system.com', 'api.cloudly.space', $sheet_item['img']['url']['manual']) : '';
+            $url = (!empty($sheet_item['mainImg']) && !empty($sheet_item['mainImg']['url']) && !empty($sheet_item['mainImg']['url']['manual'])) ? str_replace('api.tourism-system.com', 'api.cloudly.space', $sheet_item['mainImg']['url']['manual']) : '';
             $data['img'] = [
                 'resizer' => true,
                 'url' => !empty($url) ? $url : '',
-                'alt' => (empty($sheet_item['img']['alt'])) ? '' : $sheet_item['img']['alt'],
-                'title' => (empty($sheet_item['img']['title'])) ? '' : $sheet_item['img']['title']
+                'alt' => (empty($sheet_item['mainImg']['alt'])) ? '' : $sheet_item['mainImg']['alt'],
+                'title' => (empty($sheet_item['mainImg']['title'])) ? '' : $sheet_item['mainImg']['title']
             ];
         }
 
@@ -855,14 +863,17 @@ class WoodyTheme_WoodyGetters
 
         if (!empty($wrapper['display_elements']) && is_array($wrapper['display_elements'])) {
             if (in_array('sheet_type', $wrapper['display_elements'])) {
-                $data['sheet_type'] = (empty($sheet_item['type'])) ? '' : $sheet_item['type'];
+                $criterias = empty($sheet_item['criterias']) ? [] : $sheet_item['criterias'];
+                $data['sheet_type'] = empty($criterias) ? '' : mb_strtoupper($criterias[0]['_criterion']);
                 if (!empty($wrapper['deal_mode']) && !empty($sheet_item['deals'])) {
-                    $data['sheet_type'] = $sheet_item['title'];
+                    $data['sheet_type'] = $sheet_title;
                 }
             }
 
             if (in_array('description', $wrapper['display_elements'])) {
-                $data['description'] = (empty($sheet_item['desc'])) ? '' : $sheet_item['desc'];
+                $sheet_description = empty($sheet_item['description']) ? '' : strip_tags(mb_convert_encoding($sheet_item['description'], 'UTF-8', 'UTF-8'));
+                $sheet_slogan = empty($sheet_item['slogan']) ? '' : mb_convert_encoding($sheet_item['slogan'], 'UTF-8', 'UTF-8');
+                $data['description'] = empty($sheet_slogan) ? $sheet_description : $sheet_slogan;
                 if (!empty($wrapper['deal_mode']) && !empty($sheet_item['deals']['list'][$deal_index]['description'][$current_lang])) {
                     $data['description'] = $sheet_item['deals']['list'][$deal_index]['description'][$current_lang];
                 }
@@ -874,29 +885,42 @@ class WoodyTheme_WoodyGetters
             }
 
             if (in_array('sheet_town', $wrapper['display_elements'])) {
-                $data['sheet_town'] = (empty($sheet_item['town'])) ? '' : $sheet_item['town'];
+                $data['sheet_town'] = (empty($sheet_item['locality'])) ? '' : $sheet_item['locality'];
             }
 
             if (in_array('price', $wrapper['display_elements'])) {
-                $data['the_price']['free'] = isset($sheet_item['tariffs']['price']) && $sheet_item['tariffs']['price'] == '0';
-                $data['the_price']['price'] = (empty($sheet_item['tariffs']['price'])) ? '' : $sheet_item['tariffs']['price'];
-                $data['the_price']['prefix_price'] = (empty($sheet_item['tariffs']['label'])) ? '' : $sheet_item['tariffs']['label'];
+                $data['the_price']['free'] = isset($sheet_item['referenceTariff']['price']) && $sheet_item['referenceTariff']['price'] == '0';
+                $data['the_price']['price'] = (empty($sheet_item['referenceTariff']['price'])) ? '' : $sheet_item['referenceTariff']['price'];
+                $data['the_price']['prefix_price'] = (empty($sheet_item['referenceTariff']['label'])) ? '' : $sheet_item['referenceTariff']['label'];
             }
 
             if (in_array('bookable', $wrapper['display_elements'])) {
-                $data['booking'] = (empty($sheet_item['booking']['link'])) ? '' : $sheet_item['booking'];
+                $data['booking'] = [
+                    'link' => (empty($sheet_item['bookingUrl'])) ? '' : $sheet_item['bookingUrl']
+                ];
             }
 
             if (in_array('address', $wrapper['display_elements'])) {
-                $data['address'] = (empty($sheet_item['address'])) ? '' : $sheet_item['address'];
+                $address = array_filter([$sheet_item['contacts']['establishment']['address1'], $sheet_item['contacts']['establishment']['address2'], $sheet_item['contacts']['establishment']['address3'], $sheet_item['contacts']['establishment']['zipCode']]);
+
+                $fullAddress = implode(' ', $address);
+
+                $data['address'] = (empty($fullAddress)) ? '' : $fullAddress;
             }
 
             if (in_array('phone', $wrapper['display_elements'])) {
-                $data['phone'] = (empty($sheet_item['phone'])) ? '' : $sheet_item['phone'];
+                if (!empty($sheet_item['contacts']['establishment']['phones']) && !empty($sheet_item['contacts']['establishment']['phones'][0])) {
+                    $data['phone'] = [
+                        'number' => $sheet_item['contacts']['establishment']['phones'][0],
+                        'text' => __('Appeler', 'woody-theme')
+                    ];
+                }
             }
 
             if (in_array('website', $wrapper['display_elements'])) {
-                $data['website'] = (empty($sheet_item['website'])) ? '' : $sheet_item['website'];
+                if (!empty($sheet_item['contacts']['establishment']['websites']) && !empty($sheet_item['contacts']['establishment']['websites'][0])) {
+                    $data['website'] = $sheet_item['contacts']['establishment']['websites'][0];
+                }
             }
         }
 
@@ -906,8 +930,8 @@ class WoodyTheme_WoodyGetters
 
         if (!empty($sheet_item['bordereau']) && ($sheet_item['bordereau'] === 'HOT' || $sheet_item['bordereau'] == 'HPA')) {
             $rating = [];
-            if (!empty($sheet_item['ratings'])) {
-                for ($i = 0; $i < $sheet_item['ratings'][0]['value']; ++$i) {
+            if (!empty($sheet_item['labelRatings']) && !empty($sheet_item['labelRatings']['610.06.04.01.04.04'])) {
+                for ($i = 0; $i < $sheet_item['labelRatings']['610.06.04.01.04.04']['repeated']; ++$i) {
                     $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
                 }
             }
@@ -922,8 +946,8 @@ class WoodyTheme_WoodyGetters
         }
 
         $data['location'] = [];
-        $data['location']['lat'] = (empty($sheet_item['gps'])) ? '' : $sheet_item['gps']['latitude'];
-        $data['location']['lng'] = (empty($sheet_item['gps'])) ? '' : $sheet_item['gps']['longitude'];
+        $data['location']['lat'] = empty($sheet_item['geolocations']) && empty($sheet_item['geolocations']['latitude']) ? '' : $sheet_item['geolocations']['latitude'];
+        $data['location']['lng'] = empty($sheet_item['geolocations']) && empty($sheet_item['geolocations']['longitude']) ? '' : $sheet_item['geolocations']['longitude'];
 
         // Parcourir tout le tableau de dates et afficher la 1ère date non passée
         $woody_sheet_bordereaux_with_dates = get_field('hawwwai_sheet_bordereaux_with_dates', 'options');
@@ -1222,19 +1246,12 @@ class WoodyTheme_WoodyGetters
     {
         $data = [];
         $post = $wrapper['sheet_selection'];
-        $sheet_item = woody_hawwwai_item($post->ID);
+        $sheet_item = woody_hawwwailib_item($post->ID);
         $sheet_url = woody_get_permalink($post->ID);
 
-        $data['title'] = empty($sheet_item['title']) ? '' : $sheet_item['title'];
+        $data['title'] = empty($sheet_item['businessName']) ? '' : $sheet_item['businessName'];
         $data['link']['url'] = $sheet_url;
         $data['link']['target'] = empty($sheet_item['targetBlank']) ? '' : '_blank';
-
-        //TODO: Récupérer les infos de réservation de la fiche
-        /*if ($sheet_item['booking']['central']) {
-            $data['booking']['prefix'] = 'TODO';
-            $data['booking']['price'] = 'TODO';
-            $data['booking']['link'] = 'TODO';
-        }*/
 
         // Display Imgs
         if (!empty($sheet_item['allImgs'])) {
