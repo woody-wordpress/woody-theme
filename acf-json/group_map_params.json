@@ -3,6 +3,51 @@
     "title": "Paramètres de la carte",
     "fields": [
         {
+            "key": "field_5b043b217mp60",
+            "label": "Réglages de la carte",
+            "_comment": "Cet ensemble propose tous les réglages possibles.",
+            "name": "map_params",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_5b043b217mp61",
+                    "label": "Clone",
+                    "name": "clone",
+                    "aria-label": "",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "field_5b043b217mp74",
+                        "field_5b043b217mp75",
+                        "field_5b043b217mp78",
+                        "field_5b043b217mp76",
+                        "field_5b043b217mp77"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                }
+            ]
+        },
+        {
             "key": "field_5b043b217mp70",
             "label": "Régler la carte",
             "name": "map_params_enabled",
@@ -24,6 +69,7 @@
         {
             "key": "field_5b043b217mp71",
             "label": "Réglages de la carte",
+            "_comment": "Cet ensemble propose tous les réglages possibles. Avec l'activation du réglage comme condition.",
             "name": "map_params",
             "aria-label": "",
             "type": "group",
@@ -95,6 +141,7 @@
         {
             "key": "field_5b043b217mp81",
             "label": "Réglages de la carte",
+            "_comment": "Cet ensemble propose tous les réglages, excepté la hauteur de carte. Avec l'activation du réglage comme condition.",
             "name": "map_params",
             "aria-label": "",
             "type": "group",
