@@ -464,13 +464,17 @@ class WoodyTheme_WoodyProcessTools
     }
 
     /**
-     * Retrieve map params from acf context - Load global map params and override them if necessary from acf context
+     * Retrieve map params from acf context.
+     * Load global map params from options and override them if necessary.
      *
      * @author Sébastien Chandonay
-     * @param array $context
+     * @param array $context acf context
      * @return array map params
      */
     public static function getMapParams($context = []) {
+
+        // map_zoom_auto_max : Useful when automatic zooming (fitBounds) is enabled.
+        // TmapsV2 library respects the initial map zoom has max level during automatic zooming when there is only one marker.
 
         // globals params
         $map_zoom_auto = get_field('map_zoom_auto', 'option');
