@@ -380,7 +380,7 @@ class Enqueue
         }
 
         $dependencies = apply_filters('woody_mainjs_dependencies', $dependencies);
-        wp_enqueue_script('main-javascripts', WP_DIST_URL . $this->assetPath('/js/main.js'), $dependencies, null);
+        wp_enqueue_script_module('main-javascripts', WP_DIST_URL . $this->assetPath('/js/main.mjs'), $dependencies, null);
 
         // Enqueue the main Stylesheet.
         if (($this->isTouristicSheet && !defined('IS_WOODY_HAWWWAI_SHEET_ENABLE')) || $this->isTouristicPlaylist) {
