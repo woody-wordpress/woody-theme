@@ -111,6 +111,21 @@ abstract class WoodyTheme_TemplateAbstract
             $this->globals['area'] = apply_filters('woody_addon_search_area', null, $this->context['post']);
         }
 
+        if (empty($this->globals['page_types']) && !empty($this->context['post'])) {
+            $page_types = [
+                'all_posts' =>  __('Tout', 'woody-theme'),
+                'basic_page' => __('Articles', 'woody-theme'),
+                'playlist_tourism' => __('Listes', 'woody-theme'),
+                'FMA' => __('Agenda', 'woody-theme')
+            ];
+
+            if (in_array('youbook', WOODY_OPTIONS)) {
+                $return['youbook_product'] = __('Activités youBOOK', 'woody-theme');
+            }
+
+            $this->globals['page_types'] = apply_filters('woody_addon_search_list_types', $page_types, $this->context['post']);
+        }
+
         if (empty($this->globals['current_lang'])) {
             $this->globals['current_lang'] = pll_current_language();
         }
