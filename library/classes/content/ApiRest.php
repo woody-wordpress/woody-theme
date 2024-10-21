@@ -168,16 +168,18 @@ class ApiRest
         # /wp-json/woody/svg/symbol?text=J1
         # /wp-json/woody/svg/symbol?icon=shoes
         $text = filter_input(INPUT_GET, 'text');
-        $icon = filter_input(INPUT_GET, 'icon');
+        $name = filter_input(INPUT_GET, 'name');
+
+        // TODO tmapsv2_refactoring : try https://www.npmjs.com/package/svg-symbol-sprite to spriting all theme icons
 
         $res = "";
-        if (!empty($icon)) {
-            // récupération du symbole
-            $symbol = self::get_svg_symbol_by_id(WP_DIST_DIR . '/addons/woody-library/static/symbols.svg', "monument");
+        if (!empty($name)) {
+            // récupération du symbol
+            $symbol = self::get_svg_symbol_by_id(WP_DIST_DIR . '/addons/woody-library/static/symbols.svg', $name);
             if (is_wp_error($symbol)) {
                 return $symbol;
             }
-            $res = '<svg xmlns="http://www.w3.org/2000/svg">'  .$symbol . '</svg>';
+            $res = '<svg style="display:none" xmlns="http://www.w3.org/2000/svg">' . $symbol . '</svg>';
 
             // insertion du texte le cas échéant
             if (!empty($text)) {
