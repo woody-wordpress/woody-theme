@@ -134,7 +134,11 @@ class Filters
      * @author Sébastien Chandonay
      */
     public function getSvgSymbolHref (string $symbolName): string {
-        return woody_addon_asset_path('woody-library', "static/symbols.svg#" . $symbolName);
+        // woody serve svg symbol via custom endpoint
+        return get_site_url(null, '/wp-json/woody/svg/symbol?name='. $symbolName);
+
+        // TODO remove SVG the following temporary symbol file (no longer used)
+        // return woody_addon_asset_path('woody-library', "static/symbols.svg#" . $symbolName);
     }
 
     /**

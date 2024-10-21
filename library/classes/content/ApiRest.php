@@ -37,6 +37,13 @@ class ApiRest
                 'callback' => [$this, 'compileFocusApiRest'],
             ));
         });
+
+        add_action('rest_api_init', function () {
+            register_rest_route('woody', 'svg/symbol', array(
+                'methods' => 'GET',
+                'callback' => [$this, 'getSvgSymbol'],
+            ));
+        });
     }
 
     public function getPagePreviewApiRest()
@@ -154,5 +161,53 @@ class ApiRest
         }
 
         return $return;
+    }
+
+    public function getSvgSymbol(\WP_REST_Request $req)
+    {
+        # /wp-json/woody/svg/symbol?text=J1
+        # /wp-json/woody/svg/symbol?icon=shoes
+        $text = filter_input(INPUT_GET, 'text');
+        $icon = filter_input(INPUT_GET, 'icon');
+
+        $res = "";
+        if (!empty($icon)) {
+            // récupération du symbole
+            $symbol = self::get_svg_symbol_by_id(WP_DIST_DIR . '/addons/woody-library/static/symbols.svg', "monument");
+            if (is_wp_error($symbol)) {
+                return $symbol;
+            }
+            $res = '<svg xmlns="http://www.w3.org/2000/svg">'  .$symbol . '</svg>';
+
+            // insertion du texte le cas échéant
+            if (!empty($text)) {
+                // $res='<svg>text : '.$text.'</svg>';
+            }
+
+            // header('xkey: ' . WP_SITE_KEY);
+            header('content-type: image/svg+xml');
+            header('cache-control: no-cache');
+            header('content-length: ' . strlen($res));
+
+            echo $res;
+            exit;
+
+        }
+
+        return new \WP_Error('400', esc_html__('Missed params', 'woody'), array('status' => 400));
+    }
+
+    public static function get_svg_symbol_by_id($file_path, $symbol_id) {
+        if (!file_exists($file_path)) {
+            return new \WP_Error('400', esc_html__('SVG file not found', 'woody'), array('status' => 404));
+        }
+        $svg_content = file_get_contents($file_path);
+        $svg_content = str_replace('xmlns="http://www.w3.org/2000/svg"', '', $svg_content);
+        $svg_xml = new \SimpleXMLElement($svg_content);
+        $result = $svg_xml->xpath("//symbol[@id='{$symbol_id}']");
+        if (empty($result)) {
+            return new \WP_Error('400', esc_html__('SVG symbol not found : ' . woody_addon_asset_path('woody-library', "static/symbols.svg"), 'woody'), array('status' => 404));
+        }
+        return $result[0]->asXML();
     }
 }
