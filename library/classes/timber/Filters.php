@@ -71,7 +71,6 @@ class Filters
         $twig->addFilter(new \Twig\TwigFilter('hidePhoneNumber', [$this, 'hidePhoneNumber']));
         $twig->addFilter(new \Twig\TwigFilter('beautifyPhoneNumber', [$this, 'beautifyPhoneNumber']));
         $twig->addFilter(new \Twig\TwigFilter('parseColor', [$this, 'parseColor']));
-        $twig->addFilter(new \Twig\TwigFilter('getWoodyIconSvgHref', [$this, 'getWoodyIconSvgHref']));
 
         // Debug Woody
         $twig->addFilter(new \Twig\TwigFilter('dump', [$this, 'dump']));
@@ -130,26 +129,25 @@ class Filters
     }
 
     /**
-     * Retrieve SVG symbol Href for specified symbol name
+     * Retrieve SVG Symbol public URL for specified name
+     * Note : symbol name might be a woody svg icon name
      * @author Sébastien Chandonay
      */
-    public function getSvgSymbolHref (string $symbolName): string {
-        return trailingslashit(WP_HOME) . 'wp-json/woody/svg/symbol?name=' . $symbolName . '#' . $symbolName;
-
-        // TODO tmapsv2_refactoring : remove SVG the following temporary symbol file (no longer used)
-        // return woody_addon_asset_path('woody-library', "static/symbols.svg#" . $symbolName);
-    }
-
-    /**
-     * Retrieve SVG Symbol public URL for specified Woody Icon
-     * @author Sébastien Chandonay
-     */
-    public function getWoodyIconSvgHref (string $woodyIcon): string {
-        if (empty($woodyIcon)) {
+    public function getSvgSymbolHref (?string $name, ?string $text = null, ?string $filter = null): string {
+        if (empty($symbolName)) {
             return '';
         }
-        // TODO tmapsv2_refactoring - implement this method : create dynamic endpoint that serve WoodyIcon as a SVG Symbol
-        return $this->getSvgSymbolHref('eiffel');
+
+        // remove 'wicon' from symbol name (acf wicon select support)
+        $name = str_replace('wicon-', '', $name);
+
+        $querystring = '?name=' . $name;
+        if (!empty($filter)) {
+            $querystring .= '&filter=';
+        }
+
+        // svg symbols are served via a custom endpoint
+        return trailingslashit(WP_HOME) . 'wp-json/woody/svg/symbol?name=' . $name .'&filter=' . $filter . '&text' . '#' . $symbolName;
     }
 
     /**

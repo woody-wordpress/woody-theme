@@ -165,28 +165,28 @@ class ApiRest
 
     public function getSvgSymbol(\WP_REST_Request $req)
     {
-        # /wp-json/woody/svg/symbol?text=J1
-        # /wp-json/woody/svg/symbol?icon=shoes
-        $text = filter_input(INPUT_GET, 'text');
+        # /wp-json/woody/svg/symbol?name=shoes&text=J1
         $name = filter_input(INPUT_GET, 'name');
-
-        // TODO tmapsv2_refactoring : try https://www.npmjs.com/package/svg-symbol-sprite to spriting all theme icons
+        $text = filter_input(INPUT_GET, 'text');
 
         $res = "";
         if (!empty($name)) {
-            // récupération du symbol
-            $symbol = self::get_svg_symbol_by_id(WP_DIST_DIR . '/addons/woody-library/static/symbols.svg', $name);
+
+            // récupération du symbol depuis le sprite de toutes les icônes du site
+            $symbol = self::get_svg_symbol_by_id(WP_DIST_DIR . '/icons/sprite-symbols.svg', $name);
             if (is_wp_error($symbol)) {
                 return $symbol;
             }
-            $res = '<svg style="display:none" xmlns="http://www.w3.org/2000/svg">' . $symbol . '</svg>';
 
             // insertion du texte le cas échéant
             if (!empty($text)) {
-                // $res='<svg>text : '.$text.'</svg>';
+                $symbol = str_replace("%text%", $text, $symbol);
             }
 
-            // header('xkey: ' . WP_SITE_KEY);
+            // montage du mini sprite
+            $res = '<svg style="display:none" xmlns="http://www.w3.org/2000/svg">' . $symbol . '</svg>';
+
+            // réponse
             header('content-type: image/svg+xml');
             header('content-length: ' . strlen($res));
             if(WP_ENV == 'dev') {
@@ -194,10 +194,8 @@ class ApiRest
             } else {
                 header('X-VC-TTL: 31536000');
             }
-
             echo $res;
             exit;
-
         }
 
         return new \WP_Error('400', esc_html__('Missed params', 'woody'), array('status' => 400));
@@ -205,14 +203,14 @@ class ApiRest
 
     public static function get_svg_symbol_by_id($file_path, $symbol_id) {
         if (!file_exists($file_path)) {
-            return new \WP_Error('400', esc_html__('SVG file not found', 'woody'), array('status' => 404));
+            return new \WP_Error('404', esc_html__('SVG file not found', 'woody'), array('status' => 404));
         }
         $svg_content = file_get_contents($file_path);
         $svg_content = str_replace('xmlns="http://www.w3.org/2000/svg"', '', $svg_content);
         $svg_xml = new \SimpleXMLElement($svg_content);
         $result = $svg_xml->xpath("//symbol[@id='{$symbol_id}']");
         if (empty($result)) {
-            return new \WP_Error('400', esc_html__('SVG symbol not found : ' . woody_addon_asset_path('woody-library', "static/symbols.svg"), 'woody'), array('status' => 404));
+            return new \WP_Error('404', esc_html__('SVG symbol not found : ' . woody_addon_asset_path('woody-library', "static/symbols.svg"), 'woody'), array('status' => 404));
         }
         return $result[0]->asXML();
     }
