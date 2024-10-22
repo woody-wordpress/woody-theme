@@ -120,7 +120,7 @@ abstract class WoodyTheme_TemplateAbstract
             ];
 
             if (in_array('youbook', WOODY_OPTIONS)) {
-                $return['youbook_product'] = __('Activités youBOOK', 'woody-theme');
+                $page_types['youbook_product'] = __('Activités youBOOK', 'woody-theme');
             }
 
             $this->globals['page_types'] = apply_filters('woody_addon_search_list_types', $page_types, $this->context['post']);
