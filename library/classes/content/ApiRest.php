@@ -188,8 +188,12 @@ class ApiRest
 
             // header('xkey: ' . WP_SITE_KEY);
             header('content-type: image/svg+xml');
-            header('cache-control: no-cache');
             header('content-length: ' . strlen($res));
+            if(WP_ENV == 'dev') {
+                header('X-VC-TTL: 0');
+            } else {
+                header('X-VC-TTL: 31536000');
+            }
 
             echo $res;
             exit;
