@@ -134,20 +134,23 @@ class Filters
      * @author Sébastien Chandonay
      */
     public function getSvgSymbolHref (?string $name, ?string $text = null, ?string $filter = null): string {
-        if (empty($symbolName)) {
+        if (empty($name)) {
             return '';
         }
 
         // remove 'wicon' from symbol name (acf wicon select support)
         $name = str_replace('wicon-', '', $name);
 
-        $querystring = '?name=' . $name;
+        $querystring = ['name' => $name];
         if (!empty($filter)) {
-            $querystring .= '&filter=';
+            $querystring['filter'] = $filter;
+        }
+        if (!empty($text)) {
+            $querystring['text'] = $text;
         }
 
-        // svg symbols are served via a custom endpoint
-        return trailingslashit(WP_HOME) . 'wp-json/woody/svg/symbol?name=' . $name .'&filter=' . $filter . '&text' . '#' . $symbolName;
+        // svg symbols are served via a custom endpoint (note that #anchor is very important)
+        return trailingslashit(WP_HOME) . 'wp-json/woody/svg/symbol?' . http_build_query($querystring) . '#' . $name;
     }
 
     /**

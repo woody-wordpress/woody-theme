@@ -168,12 +168,18 @@ class ApiRest
         # /wp-json/woody/svg/symbol?name=shoes&text=J1
         $name = filter_input(INPUT_GET, 'name');
         $text = filter_input(INPUT_GET, 'text');
+        $filter = filter_input(INPUT_GET, 'filter');
 
         $res = "";
         if (!empty($name)) {
 
+            // filtre permettant de spécifier un symbol n'existant pas dans le sprite du site
+            $symbol = apply_filters('woody_svg_symbol_get', null, $name, $text);
+
             // récupération du symbol depuis le sprite de toutes les icônes du site
-            $symbol = self::get_svg_symbol_by_id(WP_DIST_DIR . '/icons/sprite-symbols.svg', $name);
+            if (empty($symbol)) {
+                $symbol = self::get_svg_symbol_by_id(WP_DIST_DIR . '/icons/sprite-symbols.svg', $name);
+            }
             if (is_wp_error($symbol)) {
                 return $symbol;
             }
@@ -183,8 +189,13 @@ class ApiRest
                 $symbol = str_replace("%text%", $text, $symbol);
             }
 
+            // application d'un filtre le cas échéant
+            if (!empty($filter)) {
+                $symbol = apply_filters('woody_svg_symbol_' . $filter, $symbol, $name, $text);
+            }
+
             // montage du mini sprite
-            $res = '<svg style="display:none" xmlns="http://www.w3.org/2000/svg">' . $symbol . '</svg>';
+            $res = '<svg xmlns="http://www.w3.org/2000/svg">' . $symbol . '</svg>';
 
             // réponse
             header('content-type: image/svg+xml');
