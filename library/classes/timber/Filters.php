@@ -148,6 +148,10 @@ class Filters
         if (!empty($text)) {
             $querystring['text'] = $text;
         }
+        if (WP_ENV == 'dev') {
+            // maybe tmapsVé manage his own svg cache
+            $querystring['nocache'] = time();
+        }
 
         // svg symbols are served via a custom endpoint (note that #anchor is very important)
         return trailingslashit(WP_HOME) . 'wp-json/woody/svg/symbol?' . http_build_query($querystring) . '#' . $name;

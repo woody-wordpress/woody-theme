@@ -174,7 +174,10 @@ class ApiRest
         if (!empty($name)) {
 
             // filtre permettant de spécifier un symbol n'existant pas dans le sprite du site
-            $symbol = apply_filters('woody_svg_symbol_get', null, $name, $text);
+            $symbol = apply_filters('woody_svg_symbol_get', null, $name);
+            if (is_wp_error($symbol)) {
+                return $symbol;
+            }
 
             // récupération du symbol depuis le sprite de toutes les icônes du site
             if (empty($symbol)) {
