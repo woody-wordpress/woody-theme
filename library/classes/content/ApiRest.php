@@ -193,9 +193,7 @@ class ApiRest
             }
 
             // application d'un filtre le cas échéant
-            error_log("getSvgSymbol - filter : " . $filter . "\n");
             if (!empty($filter)) {
-                error_log("getSvgSymbol - call filter : " . $filter . "\n");
                 $symbol = apply_filters('woody_svg_symbol_filter_' . $filter, $symbol, $name, $text);
             }
 
