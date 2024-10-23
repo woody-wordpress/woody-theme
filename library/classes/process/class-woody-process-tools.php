@@ -476,15 +476,23 @@ class WoodyTheme_WoodyProcessTools
         // map_zoom_auto_max : Useful when automatic zooming (fitBounds) is enabled.
         // TmapsV2 library respects the initial map zoom has max level during automatic zooming when there is only one marker.
 
-        // globals params
+        // globals params with defaults
         $map_zoom_auto = get_field('map_zoom_auto', 'option');
+        $map_zoom_auto = $map_zoom_auto !== true && $map_zoom_auto !== false ? true : $map_zoom_auto;
+
         $map_zoom = get_field('map_zoom', 'option');
-        $map_provider = get_field('map_provider', 'option');
+        $map_zoom = empty($map_zoom) ? 15 : $map_zoom;
+
         $map_zoom_auto_max = get_field('map_zoom_auto_max', 'option');
+        $map_zoom_auto_max = empty($map_zoom_auto_max) ? 15 : $map_zoom_auto_max;
+
+        $map_provider = get_field('map_provider', 'option');
+        $map_provider = empty($map_provider) ? 'tm' : $map_provider;
+
         $map_params = [
             'map_zoom_auto' => $map_zoom_auto,
             'map_zoom' => $map_zoom_auto === false ? $map_zoom : $map_zoom_auto_max,
-            'map_provider' => !empty($map_provider) ? $map_provider : null
+            'map_provider' => $map_provider
         ];
 
         // specific params
