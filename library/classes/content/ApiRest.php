@@ -194,7 +194,7 @@ class ApiRest
 
             // application d'un filtre le cas échéant
             if (!empty($filter)) {
-                $symbol = apply_filters('woody_svg_symbol_' . $filter, $symbol, $name, $text);
+                $symbol = apply_filters('woody_svg_symbol_filter_' . $filter, $symbol, $name, $text);
             }
 
             // montage du mini sprite
