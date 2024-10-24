@@ -11,5 +11,6 @@
         "flatpickr": "4.5.7",
         "swiper": "4.5.1",
         "plyr": "3.6.8"
-    }
+    },
+    "packageManager": "yarn@1.22.21"
 }
