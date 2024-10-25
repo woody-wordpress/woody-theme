@@ -467,11 +467,11 @@ class Enqueue
         $favicon_name = apply_filters('woody_favicon_name', 'favicon');
 
         // rel="icon" type="image/x-icon"
-        $return['favicon'] = WP_DIST_URL . $this->assetPath(sprintf('/favicon/%s/favicon.ico', $favicon_name));
+        $return['favicon'] = WP_DIST_URL . $this->assetPath(sprintf('/favicon/%s/%s.ico', $favicon_name, $favicon_name));
 
         // rel="icon" type="image/png"
         foreach (['16', '32', '48'] as $size) {
-            $return['icon'][$size] = WP_DIST_URL . $this->assetPath(sprintf('/favicon/%s/favicon-%sx%s.png', $favicon_name, $size, $size));
+            $return['icon'][$size] = WP_DIST_URL . $this->assetPath(sprintf('/favicon/%s/%s-%sx%s.png', $favicon_name, $favicon_name, $size, $size));
         }
 
         // rel="apple-touch-icon"
