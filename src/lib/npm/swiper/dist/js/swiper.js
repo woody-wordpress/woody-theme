@@ -6977,50 +6977,14 @@
     },
   };
 
-  let prevSlideMessage = '';
-  let nextSlideMessage = '';
-
-  switch (globals.current_locale) {
-    case 'fr':
-      prevSlideMessage = 'Diapositive précédente';
-      nextSlideMessage = 'Diapositive suivante';
-      break;
-
-    case 'es':
-      prevSlideMessage = 'Diapositiva anterior'
-      nextSlideMessage = 'Diapositiva siguiente'
-      break;
-
-    case 'it':
-      prevSlideMessage = 'Diapositiva precedente';
-      nextSlideMessage = 'Diapositiva successiva';
-      break;
-
-    case 'de':
-      prevSlideMessage = 'Vorherige Folie';
-      nextSlideMessage = 'Nächste Folie';
-      break;
-
-    case 'nl':
-      prevSlideMessage = 'Vorige dia';
-      nextSlideMessage = 'Volgende dia';
-      break;
-
-    case 'en':
-    default:
-      prevSlideMessage = 'Previous slide';
-      nextSlideMessage = 'Next slide';
-      break;
-  }
-
   var A11y = {
     name: 'a11y',
     params: {
       a11y: {
         enabled: true,
         notificationClass: 'swiper-notification',
-        prevSlideMessage: prevSlideMessage,
-        nextSlideMessage: nextSlideMessage,
+        prevSlideMessage: 'Previous slide',
+        nextSlideMessage: 'Next slide',
         firstSlideMessage: 'This is the first slide',
         lastSlideMessage: 'This is the last slide',
         paginationBulletMessage: 'Go to slide {{index}}',
