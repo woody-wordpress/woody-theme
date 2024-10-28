@@ -1,0 +1,327 @@
+{
+    "key": "group_map_params",
+    "title": "Paramètres de la carte",
+    "fields": [
+        {
+            "key": "field_5b043b217mp60",
+            "label": "Réglages de la carte",
+            "_comment": "Cet ensemble propose tous les réglages possibles.",
+            "name": "map_params",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_5b043b217mp61",
+                    "label": "Clone",
+                    "name": "clone",
+                    "aria-label": "",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "field_5b043b217mp74",
+                        "field_5b043b217mp75",
+                        "field_5b043b217mp78",
+                        "field_5b043b217mp76",
+                        "field_5b043b217mp77"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                }
+            ]
+        },
+        {
+            "key": "field_5b043b217mp70",
+            "label": "Régler la carte",
+            "name": "map_params_enabled",
+            "type": "true_false",
+            "instructions": "Par défaut, les paramètres du site s'appliquent",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5b043b217mp71",
+            "label": "Réglages de la carte",
+            "_comment": "Cet ensemble propose tous les réglages possibles. Avec l'activation du réglage comme condition.",
+            "name": "map_params",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b043b217mp70",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_5b043b217mp72",
+                    "label": "Clone",
+                    "name": "clone",
+                    "aria-label": "",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "field_5b043b217mp74",
+                        "field_5b043b217mp75",
+                        "field_5b043b217mp78",
+                        "field_5b043b217mp76",
+                        "field_5b043b217mp77"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                }
+            ]
+        },
+        {
+            "key": "field_5b043b217mp80",
+            "label": "Régler la carte",
+            "name": "map_params_enabled",
+            "type": "true_false",
+            "instructions": "Par défaut, les paramètres du site s'appliquent",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5b043b217mp81",
+            "label": "Réglages de la carte",
+            "_comment": "Cet ensemble propose tous les réglages, excepté la hauteur de carte. Avec l'activation du réglage comme condition.",
+            "name": "map_params",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b043b217mp80",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_5b043b217mp82",
+                    "label": "Clone",
+                    "name": "clone",
+                    "aria-label": "",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "field_5b043b217mp74",
+                        "field_5b043b217mp75",
+                        "field_5b043b217mp78",
+                        "field_5b043b217mp77"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                }
+            ]
+        },
+        {
+            "key": "field_5b043b217mp74",
+            "label": "Zoom automatique en fonction des marqueurs",
+            "name": "map_zoom_auto",
+            "type": "true_false",
+            "instructions": "La carte est automatiquement zoomée au chargement, afin que tous les marqueurs soient visibles.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5b043b217mp75",
+            "label": "Zoom de la carte",
+            "name": "map_zoom",
+            "type": "number",
+            "instructions": "Entre \"5\" et \"20\" (5 = éloigné \/ 20 = proche) - Niveau de zoom initial appliqué au chargement de la carte.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b043b217mp74",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "7",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": 5,
+            "max": 20,
+            "step": 1
+        },
+        {
+            "key": "field_5b043b217mp78",
+            "label": "Niveau max du zoom automatique",
+            "name": "map_zoom_auto_max",
+            "type": "number",
+            "instructions": "Entre \"5\" et \"20\" (5 = éloigné \/ 20 = proche) - Cette limite est notamment utile lors d'un zoom automatique, alors que la carte ne compte qu'un seul marqueur, pour garder un point de vue large.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b043b217mp74",
+                        "operator": "!=",
+                        "value": "0"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "15",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": 5,
+            "max": 20,
+            "step": 1
+        },
+        {
+            "key": "field_5b043b217mp76",
+            "label": "Hauteur de la carte",
+            "name": "map_height",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "sm": "Petite",
+                "md": "Moyenne",
+                "lg": "Grande"
+            },
+            "allow_null": 0,
+            "default_value": "md",
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        {
+            "key": "field_5b043b217mp77",
+            "label": "Fond de carte",
+            "name": "map_provider",
+            "type": "radio",
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "tm": "Touristicmaps"
+            },
+            "allow_null": 1,
+            "other_choice": 0,
+            "default_value": "tm",
+            "layout": "horizontal",
+            "return_format": "value",
+            "save_other_choice": 0
+        }
+    ],
+    "location": [
+        []
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Paramètres génériques des cartes du site",
+    "show_in_rest": 0,
+    "modified": 1647965734
+}

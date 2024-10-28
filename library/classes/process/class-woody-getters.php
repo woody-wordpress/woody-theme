@@ -283,16 +283,16 @@ class WoodyTheme_WoodyGetters
                             $start_day = formatDate($item_wrapper['highlight_start_date'], 'l d');
                             $start_month = formatDate($item_wrapper['highlight_start_date'], 'F');
                             $start_year = formatDate($item_wrapper['highlight_start_date'], 'Y');
-    
+
                             $pretitle = __('Le', 'woody-theme') . ' ' . $start_day . ' ' . $start_month . ' ' . $start_year;
-    
+
                             if(!empty($item_wrapper['highlight_end_date'])) {
                                 $formatted_end_date = formatDate($item_wrapper['highlight_end_date'], 'l d F Y');
-                                
+
                                 $end_day = formatDate($item_wrapper['highlight_end_date'], 'l d');
                                 $end_month = formatDate($item_wrapper['highlight_end_date'], 'F');
                                 $end_year = formatDate($item_wrapper['highlight_end_date'], 'Y');
-                                
+
                                 // On vérifie si les dates sont dans la même année
                                 if($start_year === $end_year) {
                                     // On vérifie si les dates sont dans le même mois
@@ -1187,10 +1187,8 @@ class WoodyTheme_WoodyGetters
                         break;
 
                     case 'map':
-                        if (empty($filter['list_filter_map_params']['tmaps_confid']) && !empty(get_field('tmaps_confid', 'option'))) {
-                            $filter['list_filter_map_params']['tmaps_confid'] = get_field('tmaps_confid', 'option');
-                        }
-
+                        // REVIEW tmapsV2_refactoring : remove tmaps_confid / parse map_params
+                        $filter['map_params'] = WoodyTheme_WoodyProcessTools::getMapParams($filter['list_filter_map']);
                         $return['the_map'] = $filter;
                         unset($filter_wrapper['list_filters'][$key]);
                         break;

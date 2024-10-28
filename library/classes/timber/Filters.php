@@ -36,6 +36,8 @@ class Filters
         $twig->addFunction(new \Twig\TwigFunction('_nx_noop', '_nx_noop'));
         $twig->addFunction(new \Twig\TwigFunction('translate_nooped_plural', 'translate_nooped_plural'));
         $twig->addFunction(new \Twig\TwigFunction('shortcode', 'do_shortcode'));
+        $twig->addFunction(new \Twig\TwigFunction('woodyAddonAssetPath', 'woody_addon_asset_path'));
+        $twig->addFunction(new \Twig\TwigFunction('getSvgSymbolHref', [$this, 'getSvgSymbolHref']));
 
         // Filters Native WP
         $twig->addFilter(new \Twig\TwigFilter('stripshortcodes', 'strip_shortcodes'));
@@ -68,6 +70,7 @@ class Filters
         $twig->addFilter(new \Twig\TwigFilter('html_class', [$this, 'html_class']));
         $twig->addFilter(new \Twig\TwigFilter('hidePhoneNumber', [$this, 'hidePhoneNumber']));
         $twig->addFilter(new \Twig\TwigFilter('beautifyPhoneNumber', [$this, 'beautifyPhoneNumber']));
+        $twig->addFilter(new \Twig\TwigFilter('parseColor', [$this, 'parseColor']));
 
         // Debug Woody
         $twig->addFilter(new \Twig\TwigFilter('dump', [$this, 'dump']));
@@ -123,6 +126,51 @@ class Filters
         }
 
         return $return;
+    }
+
+    /**
+     * Retrieve SVG Symbol public URL for specified name
+     * Note : symbol name might be a woody svg icon name
+     * @author Sébastien Chandonay
+     */
+    public function getSvgSymbolHref (?string $name, ?string $text = null, ?string $filter = null): string {
+        if (empty($name)) {
+            return '';
+        }
+
+        // remove 'wicon' from symbol name (acf wicon select support)
+        $name = str_replace('wicon-', '', $name);
+
+        $querystring = ['name' => $name];
+        if (!empty($filter)) {
+            $querystring['filter'] = $filter;
+        }
+        if (!empty($text)) {
+            $querystring['text'] = $text;
+        }
+        if (WP_ENV == 'dev') {
+            // maybe tmapsVé manage his own svg cache
+            $querystring['nocache'] = time();
+        }
+
+        // svg symbols are served via a custom endpoint (note that #anchor is very important)
+        return trailingslashit(WP_HOME) . 'wp-json/woody/svg/symbol?' . http_build_query($querystring) . '#' . $name;
+    }
+
+    /**
+     * Parse color : try to get corresponding css var name (that is globaly exposed in DOM) if necessary
+     * @author Sébastien Chandonay
+     */
+    public function parseColor (string $color): string {
+        $color_mapping = [
+            "primary" => "var(--primary-color)",
+            "secondary" => "var(--secondary-color)",
+            "black" => "var(--black)",
+            "darkgray" => "var(--dark-gray)",
+            "lightgray" => "var(--light-gray)",
+            "white" => "var(--white)"
+        ];
+        return array_key_exists($color, $color_mapping) ? $color_mapping[$color] : $color;
     }
 
     public function phoneClick($text)

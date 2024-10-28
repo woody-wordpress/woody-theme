@@ -19,121 +19,49 @@
             "endpoint": 0
         },
         {
-            "key": "field_5bd82b3c23a27",
-            "label": "Zoomer la carte automatiquement",
-            "name": "map_zoom_auto",
-            "type": "true_false",
-            "instructions": "Zoom automatique en fonction des marqueurs",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 1,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
-            "key": "field_5bd82a1523a26",
-            "label": "Zoom de la carte",
-            "name": "map_zoom",
-            "type": "number",
-            "instructions": "Entre \"5\" et \"20\" (5 = éloigné \/ 20 = proche)",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_5bd82b3c23a27",
-                        "operator": "!=",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "min": 5,
-            "max": 20,
-            "step": 1
-        },
-        {
-            "key": "field_5bd884d5c6d0d",
-            "label": "Hauteur de la carte",
-            "name": "map_height",
-            "type": "button_group",
+            "key": "field_670e3c5122705",
+            "label": "Bloc de réglage de carte générique",
+            "name": "",
+            "type": "clone",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "65",
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "sm": "Petite",
-                "md": "Moyenne",
-                "lg": "Grande"
-            },
-            "allow_null": 0,
-            "default_value": "md",
-            "layout": "horizontal",
-            "return_format": "value"
-        },
-        {
-            "key": "field_6098edcc04e32",
-            "label": "Fond de carte",
-            "name": "map_provider",
-            "type": "radio",
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "tm": "Touristicmaps",
-                "ign": "IGN"
-            },
-            "allow_null": 0,
-            "other_choice": 0,
-            "parent": "group_5b043b2171504",
-            "default_value": "tm",
-            "layout": "horizontal",
-            "return_format": "value",
-            "save_other_choice": 0
-        },
-        {
-            "key": "field_5c989085888ee",
-            "label": "Paramètres Touristic Maps",
-            "name": "",
-            "type": "message",
-            "wrapper": {
-                "width": 60,
-                "class": "hide-label",
-                "id": ""
-            },
-            "message": "Paramètres Touristic Maps",
-            "new_lines": "wpautop"
-        },
-        {
-            "key": "field_5c9891e2c9133",
-            "label": "Id conf TouristicMaps",
-            "name": "tmaps_confid",
-            "type": "text",
-            "wrapper": {
-                "width": 40,
-                "class": "",
-                "id": ""
-            }
+            "clone": [
+                "field_5b043b217mp70",
+                "field_5b043b217mp71"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0,
+            "_old_fields_description": "Liste des anciens champs utilisés pour le réglage de la carte, peut être utilisé pour du fallback",
+            "_old_fields": [
+                {
+                    "key": "field_5bd82b3c23a27",
+                    "name": "map_zoom_auto",
+                    "type": "true_false"
+                },
+                {
+                    "key": "field_5bd82a1523a26",
+                    "name": "map_zoom",
+                    "type": "number"
+                },
+                {
+                    "key": "field_5bd884d5c6d0d",
+                    "name": "map_height",
+                    "type": "button_group"
+                },
+                {
+                    "key": "field_6098edcc04e32",
+                    "name": "map_provider",
+                    "type": "radio"
+                }
+            ]
         },
         {
             "key": "field_5b043b28ab46a",
