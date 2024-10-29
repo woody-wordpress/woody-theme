@@ -111,19 +111,32 @@ abstract class WoodyTheme_TemplateAbstract
             $this->globals['area'] = apply_filters('woody_addon_search_area', null, $this->context['post']);
         }
 
-        if (empty($this->globals['page_types']) && !empty($this->context['post'])) {
-            $page_types = [
-                'all_posts' =>  __('Tout', 'woody-theme'),
-                'basic_page' => __('Articles', 'woody-theme'),
-                'playlist_tourism' => __('Listes', 'woody-theme'),
-                'FMA' => __('Agenda', 'woody-theme')
+        if (empty($this->globals['search_filters']) && !empty($this->context['post'])) {
+            $search_filters = [
+                'all_posts' => [
+                    'label' => __('Tout', 'woody-theme'),
+                    'field' => 'subtype'
+                ],
+                'basic_page' => [
+                    'label' => __('Articles', 'woody-theme'),
+                    'field' => 'subtype'
+                ],
+                'playlist_tourism' => [
+                    'label' => __('Listes', 'woody-theme'),
+                    'field' => 'subtype'
+                ],
+                'FMA' => [
+                    'label' => __('Agenda', 'woody-theme'),
+                    'field' => 'subtype'
+                ],
             ];
-
             if (in_array('youbook', WOODY_OPTIONS)) {
-                $page_types['youbook_product'] = __('Activités youBOOK', 'woody-theme');
+                $search_filters['youbook_product'] = [
+                    'label' => __('Activités youBOOK', 'woody-theme'),
+                    'field' => 'type'
+                ];
             }
-
-            $this->globals['page_types'] = apply_filters('woody_addon_search_list_types', $page_types, $this->context['post']);
+            $this->globals['search_filters'] = apply_filters('woody_addon_search_filters', $search_filters, $this->context['post']);
         }
 
         if (empty($this->globals['current_lang'])) {
