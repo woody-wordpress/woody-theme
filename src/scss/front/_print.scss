@@ -526,6 +526,12 @@ a.mediaCard:after {
             color: black;
         }
 
+        &.basicCard {
+            .card-texts span {
+                display: block !important;
+            }
+        }
+
         &.splitCard .card-link>.grid-x,
         &.basicCard .card-link {
             display: flex;
