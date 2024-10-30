@@ -851,6 +851,8 @@ class WoodyTheme_WoodyCompilers
             'url' => woody_get_permalink($current_post_id)
         ];
 
+        $data['after_breadcrumb'] = apply_filters('woody_after_breadcrumb_content', null, $context);
+
         $tpl = apply_filters('breadcrumb_tpl', null);
         $template = (!empty($tpl['template']) && !empty($context['woody_components'][$tpl['template']])) ? $context['woody_components'][$tpl['template']] : $context['woody_components']['woody_widgets-breadcrumb-tpl_01'];
 

@@ -112,6 +112,7 @@ class Main
         if (get_field('display_sheet_aspect', 'options')) {
             add_filter('acf/fields/post_object/result', [$this, 'getAspectPostTitleResult'], 10, 4);
             add_filter('acf/fields/page_link/result', [$this, 'getAspectPostTitleResult'], 10, 4);
+            add_filter('wp_link_query', [$this, 'getAspectPostTitleResultLinkQuery'], 10, 2);
         }
     }
 
@@ -791,6 +792,28 @@ class Main
         }
 
         return $title;
+    }
+
+    public function getAspectPostTitleResultLinkQuery($results, $query)
+    {
+        foreach ($results as &$result) {
+            $post = get_post($result['ID']);
+            
+            if ($post && $post->post_type == 'touristic_sheet') {
+                $touristic_source_identifier = get_field('touristic_source_identifier', $post->ID);
+    
+                if (!empty($touristic_source_identifier)) {
+                    $get_aspect = explode('-', $touristic_source_identifier);
+                    $sheet_aspect = sizeof($get_aspect) > 1 ? $get_aspect[0] : null;
+    
+                    if (!empty($sheet_aspect)) {
+                        $result['title'] .= '<small style="color:#cfcfcf; font-style:italic; text-transform: uppercase"> - ' . $sheet_aspect . '</small>';
+                    }
+                }
+            }
+        }
+
+        return $results;
     }
 
     public function getPostObjectDefaultTranslation($args, $field, $post_id)
