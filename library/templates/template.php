@@ -95,6 +95,10 @@ abstract class WoodyTheme_TemplateAbstract
             $this->globals['sheet_id'] = $this->context['sheet_id'];
         }
 
+        if (empty($this->globals['sheet_current_aspect']) && !empty($this->context['sheet_current_aspect'])) {
+            $this->globals['sheet_current_aspect'] = $this->context['sheet_current_aspect'];
+        }
+
         if (empty($this->globals['woody_options_pages'])) {
             $this->globals['woody_options_pages'] = $this->getWoodyOptionsPagesValues();
         }
