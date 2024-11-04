@@ -450,6 +450,45 @@
             "endpoint": 1
         },
         {
+            "key": "field_67234202ba7a1",
+            "label": "Seo",
+            "name": "",
+
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_672342082ec7e",
+            "label": "seo_title_type",
+            "name": "seo_title_type",
+
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_672242f0139b6"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
+        },
+        {
             "key": "field_6296243e789de",
             "label": "Responsive",
             "name": "",

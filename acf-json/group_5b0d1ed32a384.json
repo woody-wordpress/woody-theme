@@ -987,6 +987,45 @@
             "endpoint": 1
         },
         {
+            "key": "field_6722458d93ddb",
+            "label": "Seo",
+            "name": "",
+
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_672245af93ddc",
+            "label": "seo_title_type",
+            "name": "seo_title_type",
+
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_672242f0139b6"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
+        },
+        {
             "key": "field_5efcaafa5ea95",
             "label": "Responsive",
             "name": "",
