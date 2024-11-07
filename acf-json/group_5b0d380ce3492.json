@@ -1,7 +1,8 @@
 {
     "key": "group_5b0d380ce3492",
     "title": "Personnaliser : mise en avant",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5b169fab55db0",
             "label": "Image",
             "name": "focus_img",
@@ -23,7 +24,7 @@
             "max_width": "",
             "max_height": "",
             "max_size": "",
-            "mime_types": "jpeg, jpg, png, gif"
+            "mime_types": "jpeg, jpg, png, gif, webp"
         },
         {
             "key": "field_5b11394d9a268",
@@ -167,25 +168,31 @@
             "max_width": "",
             "max_height": "",
             "max_size": "",
-            "mime_types": "jpeg, jpg, gif, png"
+            "mime_types": "jpeg, jpg, gif, png, webp"
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "page"
-        }],
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }],
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "woody_rdbk_leaflets"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "woody_rdbk_leaflets"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "side",

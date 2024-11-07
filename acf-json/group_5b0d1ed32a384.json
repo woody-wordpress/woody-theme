@@ -256,7 +256,7 @@
                             "max_width": "",
                             "max_height": "",
                             "max_size": "",
-                            "mime_types": "jpeg, jpg, png, gif"
+                            "mime_types": "jpeg, jpg, png, gif, webp"
                         },
                         {
                             "key": "field_5b0d293ebb18d",

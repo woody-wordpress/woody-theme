@@ -93,7 +93,7 @@
             "max_width": "",
             "max_height": "",
             "max_size": "",
-            "mime_types": "jpeg, jpg, png, gif"
+            "mime_types": "jpeg, jpg, png, gif, webp"
         },
         {
             "key": "field_5b0e5ddfd2e3f",
@@ -125,7 +125,7 @@
             "max_width": "",
             "max_height": "",
             "max_size": "",
-            "mime_types": "jpeg, jpg, png, gif"
+            "mime_types": "jpeg, jpg, png, gif, webp"
         },
         {
             "key": "field_630c7d06bdf6b",
@@ -194,7 +194,7 @@
                     "max_width": "",
                     "max_height": "",
                     "max_size": "",
-                    "mime_types": "jpeg, jpg, gif, png"
+                    "mime_types": "jpeg, jpg, gif, png, webp"
                 }
             ]
         },
