@@ -458,7 +458,7 @@
                     "max_width": "",
                     "max_height": "",
                     "max_size": "",
-                    "mime_types": "jpeg, jpg, png, gif",
+                    "mime_types": "jpeg, jpg, png, gif, webp",
                     "_clone": "field_5b461b46131ba",
                     "__key": "field_5b043d94a6fe4",
                     "__name": "background_img",

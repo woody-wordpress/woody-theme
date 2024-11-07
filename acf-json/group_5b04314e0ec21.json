@@ -94,7 +94,7 @@
             "max_width": "",
             "max_height": "",
             "max_size": "",
-            "mime_types": "jpg, jpeg, png, gif, mp4, webm, ogg, ogv"
+            "mime_types": "jpg, jpeg, png, gif, webp, mp4, webm, ogg, ogv"
         },
         {
             "key": "field_5f869fa8f5d54",
