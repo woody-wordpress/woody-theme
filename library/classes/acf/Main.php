@@ -798,14 +798,14 @@ class Main
     {
         foreach ($results as &$result) {
             $post = get_post($result['ID']);
-            
+
             if ($post && $post->post_type == 'touristic_sheet') {
                 $touristic_source_identifier = get_field('touristic_source_identifier', $post->ID);
-    
+
                 if (!empty($touristic_source_identifier)) {
                     $get_aspect = explode('-', $touristic_source_identifier);
                     $sheet_aspect = sizeof($get_aspect) > 1 ? $get_aspect[0] : null;
-    
+
                     if (!empty($sheet_aspect)) {
                         $result['title'] .= '<small style="color:#cfcfcf; font-style:italic; text-transform: uppercase"> - ' . $sheet_aspect . '</small>';
                     }
@@ -832,7 +832,7 @@ class Main
                 $default_lang_args['lang'] = pll_default_language();
                 $new_args = array_merge($default_lang_args, $args);
                 $new_args['post_type'] = 'page';
-                $default_lang_query = new WP_Query($new_args);
+                $default_lang_query = new \WP_Query($new_args);
                 // Si on obtient des résultats dans la langue par défaut,
                 // On récupère l'id de la traduction de ce contenu dans la langue courante
                 if (!empty($default_lang_query->posts)) {
