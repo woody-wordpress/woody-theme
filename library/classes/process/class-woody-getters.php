@@ -283,16 +283,16 @@ class WoodyTheme_WoodyGetters
                             $start_day = formatDate($item_wrapper['highlight_start_date'], 'l d');
                             $start_month = formatDate($item_wrapper['highlight_start_date'], 'F');
                             $start_year = formatDate($item_wrapper['highlight_start_date'], 'Y');
-    
+
                             $pretitle = __('Le', 'woody-theme') . ' ' . $start_day . ' ' . $start_month . ' ' . $start_year;
-    
+
                             if(!empty($item_wrapper['highlight_end_date'])) {
                                 $formatted_end_date = formatDate($item_wrapper['highlight_end_date'], 'l d F Y');
-                                
+
                                 $end_day = formatDate($item_wrapper['highlight_end_date'], 'l d');
                                 $end_month = formatDate($item_wrapper['highlight_end_date'], 'F');
                                 $end_year = formatDate($item_wrapper['highlight_end_date'], 'Y');
-                                
+
                                 // On vérifie si les dates sont dans la même année
                                 if($start_year === $end_year) {
                                     // On vérifie si les dates sont dans le même mois
@@ -772,7 +772,7 @@ class WoodyTheme_WoodyGetters
             'location' => [
                 'lat' => empty($item['latitude']) ? '' : str_replace(',', '.', $item['latitude']),
                 'lng' => empty($item['longitude']) ? '' : str_replace(',', '.', $item['longitude'])
-            ]
+            ],
         ];
 
         if ($item['action_type'] == 'file' && !empty($item['file']['url'])) {
