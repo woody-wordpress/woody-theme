@@ -109,6 +109,8 @@ class WoodyTheme_WoodyCompilers
         $the_items['display_index'] = (empty($wrapper['display_index'])) ? false : $wrapper['display_index'];
         $the_items['display_sessions'] = (empty($wrapper['display_sessions'])) ? false : $wrapper['display_sessions'];
 
+        $the_items['seo_type_title'] = (empty($wrapper['seo_type_title'])) ? 'span' : $wrapper['seo_type_title'];
+
         // Responsive stuff
         if (!empty($wrapper['mobile_behaviour'])) {
             if ($wrapper['mobile_behaviour']['mobile_grid'] == 'grid') {
@@ -167,7 +169,7 @@ class WoodyTheme_WoodyCompilers
         $the_items = apply_filters('woody_format_focuses_data', $the_items, $wrapper);
 
         $return = empty($wrapper['woody_tpl']) ? \Timber::compile($twigPaths['blocks-focus-tpl_103'], $the_items) : \Timber::compile($twigPaths[$wrapper['woody_tpl']], $the_items) ;
-        
+
         return $return;
     }
 
