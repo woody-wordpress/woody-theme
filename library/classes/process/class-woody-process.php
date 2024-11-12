@@ -591,6 +591,10 @@ class WoodyTheme_WoodyProcess
                 ];
 
                 break;
+            case 'title_asc':
+                $orderby = 'title';
+                $order = 'ASC';
+                break;
             default:
                 $orderby = 'rand';
                 $order = 'ASC';
