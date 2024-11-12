@@ -79,7 +79,7 @@
          {% include 'notify_front/notifyBanners.twig' %}
     {% endif %}
 
-    <div class="main-wrapper flex-container flex-dir-column {{ not globals.is_mobile ? 'flex-dir-column-reverse' : '' }}">
+    <div class="main-wrapper flex-container flex-dir-column">
         {# Theme Header #}
         {% block page_header %}
         {% if 'header' not in hide_page_zones %}
