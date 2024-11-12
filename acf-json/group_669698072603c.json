@@ -692,7 +692,8 @@
                                         "created_desc": "Du plus récent au plus ancien",
                                         "created_asc": "Du plus ancien au plus récent",
                                         "menu_order": "Suivre l'ordre défini dans Woody Pages",
-                                        "geoloc": "Du plus proche au plus lointain (via Géolocalisation)"
+                                        "geoloc": "Du plus proche au plus lointain (via Géolocalisation)",
+                                        "title_asc": "Alphabétique"
                                     },
                                     "allow_null": 0,
                                     "other_choice": 0,
