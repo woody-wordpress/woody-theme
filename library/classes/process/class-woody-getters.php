@@ -772,7 +772,7 @@ class WoodyTheme_WoodyGetters
             'location' => [
                 'lat' => empty($item['latitude']) ? '' : str_replace(',', '.', $item['latitude']),
                 'lng' => empty($item['longitude']) ? '' : str_replace(',', '.', $item['longitude'])
-            ]
+            ],
         ];
 
         if ($item['action_type'] == 'file' && !empty($item['file']['url'])) {
