@@ -1,7 +1,8 @@
 {
     "key": "group_5ee381150e584",
     "title": "Story",
-    "fields": [{
+    "fields": [
+        {
             "key": "field_5ee3884e325f1",
             "label": "Contenu",
             "name": "",
@@ -58,7 +59,7 @@
             "max_width": "",
             "max_height": "",
             "max_size": "",
-            "mime_types": "jpeg, jpg, gif, png"
+            "mime_types": "jpeg, jpg, gif, png, webp"
         },
         {
             "key": "field_5ee387cd11e24",
@@ -91,7 +92,8 @@
                 "id": ""
             },
             "layout": "block",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5ee381cfa9a4f",
                     "label": "Utiliser un profil existant",
                     "name": "story_use_existing_profile",
@@ -118,11 +120,13 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5ee381cfa9a4f",
-                            "operator": "==",
-                            "value": "1"
-                        }]
+                        [
+                            {
+                                "field": "field_5ee381cfa9a4f",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "",
@@ -146,11 +150,13 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5ee381cfa9a4f",
-                            "operator": "!=",
-                            "value": "1"
-                        }]
+                        [
+                            {
+                                "field": "field_5ee381cfa9a4f",
+                                "operator": "!=",
+                                "value": "1"
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "50",
@@ -171,11 +177,13 @@
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": [
-                        [{
-                            "field": "field_5ee381cfa9a4f",
-                            "operator": "!=",
-                            "value": "1"
-                        }]
+                        [
+                            {
+                                "field": "field_5ee381cfa9a4f",
+                                "operator": "!=",
+                                "value": "1"
+                            }
+                        ]
                     ],
                     "wrapper": {
                         "width": "50",
@@ -230,7 +238,8 @@
             "max": 0,
             "layout": "block",
             "button_label": "Ajouter un chapitre",
-            "sub_fields": [{
+            "sub_fields": [
+                {
                     "key": "field_5ee3837da9a56",
                     "label": "Titre",
                     "name": "story_chapter_title",
@@ -271,7 +280,7 @@
                     "max_width": "",
                     "max_height": "",
                     "max_size": "",
-                    "mime_types": "jpeg, jpg, gif, png"
+                    "mime_types": "jpeg, jpg, gif, png, webp"
                 },
                 {
                     "key": "field_5ee38395a9a57",
@@ -462,11 +471,13 @@
         }
     ],
     "location": [
-        [{
-            "param": "post_type",
-            "operator": "==",
-            "value": "post"
-        }]
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "normal",

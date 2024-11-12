@@ -221,7 +221,8 @@
                 "created_desc": "Du plus récent au plus ancien",
                 "created_asc": "Du plus ancien au plus récent",
                 "menu_order": "Suivre l'ordre défini dans Woody Pages",
-                "geoloc": "Du plus proche au plus lointain (via Géolocalisation)"
+                "geoloc": "Du plus proche au plus lointain (via Géolocalisation)",
+                "title_asc": "Alphabétique"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -298,13 +299,14 @@
                 "description": "Description"
             },
             "allow_custom": 0,
-            "default_value": ["description"],
+            "default_value": [
+                "description"
+            ],
             "layout": "horizontal",
             "toggle": 0,
             "return_format": "value",
             "save_custom": 0
         },
-
         {
             "key": "field_643eba9377103",
             "label": "Plus d'options",
@@ -1027,6 +1029,43 @@
             "open": 0,
             "multi_expand": 0,
             "endpoint": 1
+        },
+        {
+            "key": "field_67233cc560f00",
+            "label": "Seo",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_67233cd07e62c",
+            "label": "Niveau de titre hiérarchique",
+            "name": "seo_title_type",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_672242f0139b6"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
         },
         {
             "key": "field_5efcaafa5ea95",
