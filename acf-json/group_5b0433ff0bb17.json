@@ -152,7 +152,6 @@
             "key": "field_672342c17762f",
             "label": "Seo",
             "name": "",
-
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -167,9 +166,8 @@
         },
         {
             "key": "field_672342bcd239e",
-            "label": "seo_title_type",
+            "label": "Niveau de titre hiérarchique",
             "name": "seo_title_type",
-
             "type": "clone",
             "instructions": "",
             "required": 0,

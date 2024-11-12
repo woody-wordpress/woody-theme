@@ -990,7 +990,6 @@
             "key": "field_6722458d93ddb",
             "label": "Seo",
             "name": "",
-
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -1005,9 +1004,8 @@
         },
         {
             "key": "field_672245af93ddc",
-            "label": "seo_title_type",
+            "label": "Niveau de titre hiérarchique",
             "name": "seo_title_type",
-
             "type": "clone",
             "instructions": "",
             "required": 0,

@@ -184,8 +184,6 @@ class WoodyTheme_WoodyProcessTools
         $display['heading_alignment'] = (empty($wrapper['heading_alignment'])) ? 'center' : $wrapper['heading_alignment'];
         $display['section_animations'] = (empty($wrapper['section_animations'])) ? '' : $wrapper['section_animations'];
 
-        $display['seo_type_title'] = (empty($wrapper['seo_type_title'])) ? 'p' : $wrapper['seo_type_title'];
-
         if(!empty($wrapper['custom_resp_button'])) {
             if(wp_is_mobile()) {
                 $mobile_spacing_array[] = (empty($wrapper['mobile_scope_paddings']['scope_padding_top'])) ? '' : $wrapper['mobile_scope_paddings']['scope_padding_top'];

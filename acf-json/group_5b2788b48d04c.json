@@ -298,13 +298,14 @@
                 "description": "Description"
             },
             "allow_custom": 0,
-            "default_value": ["description"],
+            "default_value": [
+                "description"
+            ],
             "layout": "horizontal",
             "toggle": 0,
             "return_format": "value",
             "save_custom": 0
         },
-
         {
             "key": "field_643eba9377103",
             "label": "Plus d'options",
@@ -1032,7 +1033,6 @@
             "key": "field_67233cc560f00",
             "label": "Seo",
             "name": "",
-
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -1047,9 +1047,8 @@
         },
         {
             "key": "field_67233cd07e62c",
-            "label": "seo_title_type",
+            "label": "Niveau de titre hiérarchique",
             "name": "seo_title_type",
-
             "type": "clone",
             "instructions": "",
             "required": 0,

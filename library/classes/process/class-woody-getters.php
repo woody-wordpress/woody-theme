@@ -773,7 +773,6 @@ class WoodyTheme_WoodyGetters
                 'lat' => empty($item['latitude']) ? '' : str_replace(',', '.', $item['latitude']),
                 'lng' => empty($item['longitude']) ? '' : str_replace(',', '.', $item['longitude'])
             ],
-            'seo_type_title' => (empty($wrapper['seo_type_title'])) ? 'span' : $wrapper['seo_type_title']
         ];
 
         if ($item['action_type'] == 'file' && !empty($item['file']['url'])) {

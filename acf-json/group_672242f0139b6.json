@@ -1,10 +1,10 @@
 {
     "key": "group_672242f0139b6",
-    "title": "Comportements titre seo",
+    "title": "Comportements niveaux de titre hiérarchique",
     "fields": [
         {
             "key": "field_672242f059f27",
-            "label": "seo_type_title",
+            "label": "Niveau de titre hiérarchique",
             "name": "seo_type_title",
             "aria-label": "",
             "type": "select",
@@ -18,10 +18,10 @@
             },
             "choices": {
                 "span": "Aucun",
-                "h3": "h3",
-                "h4": "h4",
-                "h5": "h5",
-                "h6": "h6"
+                "h3": "H3",
+                "h4": "H4",
+                "h5": "H5",
+                "h6": "H6"
             },
             "default_value": "span",
             "return_format": "value",
@@ -51,4 +51,3 @@
     "description": "",
     "show_in_rest": 0
 }
-
