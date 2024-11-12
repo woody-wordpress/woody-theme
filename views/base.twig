@@ -79,7 +79,15 @@
          {% include 'notify_front/notifyBanners.twig' %}
     {% endif %}
 
-    <div class="main-wrapper flex-container flex-dir-column {{ not globals.is_mobile ? 'flex-dir-column-reverse' : '' }}">
+    <div class="main-wrapper flex-container flex-dir-column">
+        {# Theme Header #}
+        {% block page_header %}
+        {% if 'header' not in hide_page_zones %}
+        {% include 'parts/header.twig' %}
+        {% endif %}
+        {% endblock %}
+        {# /Theme Header #}
+        
         <div class="site-content">
             {# Theme Content #}
             {% block content %}{% endblock %}
@@ -93,14 +101,6 @@
             {% endblock %}
             {# /Theme Footer #}
         </div>
-
-        {# Theme Header #}
-        {% block page_header %}
-        {% if 'header' not in hide_page_zones %}
-        {% include 'parts/header.twig' %}
-        {% endif %}
-        {% endblock %}
-        {# /Theme Header #}
 
         {% if woody_access_staging %}
         <div class="staging-banner">
