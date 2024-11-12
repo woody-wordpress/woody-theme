@@ -415,7 +415,6 @@ class WoodyTheme_WoodyCompilers
 
         // On récupère et on applique les valeurs des filtres si existantes
         $form_result = (empty(filter_input_array(INPUT_GET))) ? [] : filter_input_array(INPUT_GET);
-        console_log($form_result);
         if (!empty($form_result['uniqid'])) {
             // On supprimte ce qui est inutile pour les filtres car on a déjà une liste de posts correspondant à la requete du backoffice
             unset($list_el_wrapper['focused_taxonomy_terms']);
