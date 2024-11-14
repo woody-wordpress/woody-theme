@@ -427,16 +427,29 @@ function embedProviderThumbnail($embed)
         case 'youtube':
             $regex = '/^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/';
             preg_match($regex, $src, $matches);
-            if (!empty($matches[1]) && empty(wp_cache_get('thumbnail_youtube_' . $matches[1]))) {
-                $return = 'https://i.ytimg.com/vi_webp/' . $matches[1] . '/maxresdefault.webp';
-                $response = wp_remote_head($return);
-                if (is_wp_error($response) || wp_remote_retrieve_response_code($response) === 404) {
-                    $return = 'https://i.ytimg.com/vi_webp/' . $matches[1] . '/sddefault.webp';
-                    wp_cache_set('thumbnail_youtube_' . $matches[1], $return);
-                    $response = wp_remote_head($return);
-                    if (is_wp_error($response) || wp_remote_retrieve_response_code($response) === 404) {
-                        $return = 'https://i.ytimg.com/vi/' . $matches[1] . '/hqdefault.jpg';
-                        wp_cache_set('thumbnail_youtube_' . $matches[1], $return);
+            $video_id = !empty($matches[1]) ? $matches[1] : null;
+            if (!empty($video_id)) {
+                $return = wp_cache_get('thumbnail_youtube_' . $video_id);
+                if (empty($return)) {
+                    $thumb_url = 'https://i.ytimg.com/vi_webp/' . $video_id . '/maxresdefault.webp';
+                    $response = wp_remote_head($thumb_url);
+                    if (!is_wp_error($response) && wp_remote_retrieve_response_code($response) === 200) {
+                        $return = $thumb_url;
+                        wp_cache_set('thumbnail_youtube_' . $video_id, $return);
+                    } else {
+                        $thumb_url = 'https://i.ytimg.com/vi_webp/' . $video_id . '/sddefault.webp';
+                        $response = wp_remote_head($thumb_url);
+                        if (!is_wp_error($response) && wp_remote_retrieve_response_code($response) === 200) {
+                            $return = $thumb_url;
+                            wp_cache_set('thumbnail_youtube_' . $video_id, $return);
+                        } else {
+                            $thumb_url = 'https://i.ytimg.com/vi/' . $video_id . '/hqdefault.jpg';
+                            $response = wp_remote_head($thumb_url);
+                            if (!is_wp_error($response) && wp_remote_retrieve_response_code($response) === 200) {
+                                $return = $thumb_url;
+                                wp_cache_set('thumbnail_youtube_' . $video_id, $return);
+                            }
+                        }
                     }
                 }
             }
@@ -445,12 +458,16 @@ function embedProviderThumbnail($embed)
         case 'dailymotion':
             $regex = '/(?<=\/video\/)(.*)/';
             preg_match($regex, $src, $matches);
-            if (!empty($matches[0]) && empty(wp_cache_get('thumbnail_dailymotion_' . $matches[0]))) {
-                $response = wp_remote_get('https://api.dailymotion.com/video/' . $matches[0] . '?fields=id,thumbnail_720_url,title&thumbnail_ratio=widescreen');
-                if (is_wp_error($response) || wp_remote_retrieve_response_code($response) === 200) {
-                    $hash = json_decode($response['body'], true);
-                    $return = $hash['thumbnail_720_url'];
-                    wp_cache_set('thumbnail_dailymotion_' . $matches[0], $return);
+            $video_id = !empty($matches[0]) ? $matches[0] : null;
+            if (!empty($video_id)) {
+                $return = wp_cache_get('thumbnail_dailymotion_' . $video_id);
+                if (empty($return)) {
+                    $response = wp_remote_get('https://api.dailymotion.com/video/' . $video_id . '?fields=id,thumbnail_720_url,title&thumbnail_ratio=widescreen');
+                    if (is_wp_error($response) || wp_remote_retrieve_response_code($response) === 200) {
+                        $hash = json_decode($response['body'], true);
+                        $return = $hash['thumbnail_720_url'];
+                        wp_cache_set('thumbnail_dailymotion_' . $video_id, $return);
+                    }
                 }
             }
 
@@ -458,12 +475,16 @@ function embedProviderThumbnail($embed)
         case 'vimeo':
             $regex = '/([0-9]+)/';
             preg_match($regex, $src, $matches);
-            if (!empty($matches[0]) && empty(wp_cache_get('thumbnail_vimeo_' . $matches[0]))) {
-                $response = wp_remote_get('https://vimeo.com/' . $matches[0]);
-                if (is_wp_error($response) || wp_remote_retrieve_response_code($response) === 200) {
-                    if (preg_match('/<meta property="og:image" content="(.*?)"/', $response['body'], $matches)) {
-                        $return = $matches[1];
-                        wp_cache_set('thumbnail_vimeo_' . $matches[0], $return);
+            $video_id = !empty($matches[0]) ? $matches[0] : null;
+            if (!empty($video_id)) {
+                $return = wp_cache_get('thumbnail_vimeo_' . $video_id);
+                if (empty($return)) {
+                    $response = wp_remote_get('https://vimeo.com/' . $video_id);
+                    if (is_wp_error($response) || wp_remote_retrieve_response_code($response) === 200) {
+                        if (preg_match('/<meta property="og:image" content="(.*?)"/', $response['body'], $matches)) {
+                            $return = $matches[1];
+                            wp_cache_set('thumbnail_vimeo_' . $video_id, $return);
+                        }
                     }
                 }
             }
