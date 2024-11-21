@@ -3,11 +3,10 @@
     "title": "Compte à rebours",
     "fields": [
         {
-            "key": "field_673eec36a1a90",
-            "label": "Date et heure",
-            "name": "time",
-            "aria-label": "",
-            "type": "date_time_picker",
+            "key": "field_669e14e7c3957",
+            "label": "Contenu",
+            "name": "",
+            "type": "tab",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -16,69 +15,300 @@
                 "class": "",
                 "id": ""
             },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_673f1980c620d",
+            "label": "Titre",
+            "name": "countdown_title",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_673eec36a1a90",
+            "label": "Date et heure",
+            "name": "target_date",
+            "aria-label": "",
+            "type": "date_time_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
             "display_format": "Y-m-d H:i:s",
             "return_format": "Y-m-d H:i:s",
             "first_day": 1
         },
         {
-            "key": "field_673eecc5a1a91",
-            "label": "Afficher les heures",
-            "name": "display_hour",
+            "key": "field_673f3425296ac",
+            "label": "Afficher les jours",
+            "name": "display_days",
             "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "33",
+                "width": "18",
                 "class": "",
                 "id": ""
             },
             "message": "",
-            "default_value": 0,
-            "ui": 0,
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_673eecc5a1a91",
+            "label": "Afficher les heures",
+            "name": "display_hours",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "18",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
         },
         {
             "key": "field_673eecf3a1a93",
             "label": "Afficher les minutes",
-            "name": "display_minute",
+            "name": "display_minutes",
             "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "33",
+                "width": "18",
                 "class": "",
                 "id": ""
             },
             "message": "",
-            "default_value": 0,
-            "ui": 0,
+            "default_value": 1,
+            "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
         },
         {
             "key": "field_673eecf3a1a92",
             "label": "Afficher les secondes",
-            "name": "display_second",
+            "name": "display_seconds",
             "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "33",
+                "width": "18",
                 "class": "",
                 "id": ""
             },
             "message": "",
-            "default_value": 0,
-            "ui": 0,
+            "default_value": 1,
+            "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
+        },
+        {
+            "key": "field_673f0cb2e7624",
+            "label": "FIN",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 1
+        },
+        {
+            "key": "field_673f0d025058c",
+            "label": "Mise en page",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_673f0d029646e",
+            "label": "Template",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 1,
+            "multi_expand": 1,
+            "endpoint": 0
+        },
+        {
+            "key": "field_673f0d02cee15",
+            "label": "Template",
+            "name": "woody_tpl",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label",
+                "id": ""
+            },
+            "default_value": "blocks-countdown-tpl_01",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "button_field_673f0d02cee15",
+            "label": "Choisir une mise en page",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label woody-tpl-button group_673eec34989c6",
+                "id": ""
+            },
+            "message": "Choisir une mise en page",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_673f0d2098bbe",
+            "label": "Options avancées",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 1,
+            "endpoint": 0
+        },
+        {
+            "key": "field_673f0d272aaa2",
+            "label": "Paramètres de fond",
+            "name": "countdown_bg_params",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": ["group_5b043c93d609a"],
+            "display": "group",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
+            "key": "field_673f0d341f3f1",
+            "label": "Effets visuels",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
+            "key": "field_673f0d44af3a0",
+            "label": "Effets visuels",
+            "name": "visual_effects",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": ["group_5bc845beeae52"],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
+        },
+        {
+            "key": "field_673f0d446eca6",
+            "label": "FIN",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 1
         }
     ],
     "location": [
