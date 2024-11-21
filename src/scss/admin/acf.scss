@@ -1057,9 +1057,13 @@
 }
 
 // Retour à la ligne des options de couleur de fond dans Options avancées => Couleur de fond
+// Retour à la ligne des options de couleur de bouton dans Options avancées => Couleur de bouton
+// Retour à la ligne des options de couleur de bordure dans Options avancées => Couleur de bordure
 // Retour à la ligne des options de marge intérieure dans Options avancées => Marge intérieure
 .acf-field-5b043ca4a6fe3,
-.acf-field-61dc59647cc82 {
+.acf-field-61dc59647cc82,
+.acf-field-5c79387a6526b,
+.acf-field-5b978a13feaa6 {
     .acf-button-group {
         flex-wrap: wrap;
 
