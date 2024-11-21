@@ -92,9 +92,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_5b042f5ad9ecc"
-                                    ],
+                                    "clone": ["group_5b042f5ad9ecc"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -123,9 +121,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_5e46bc3fd0f1c"
-                                    ],
+                                    "clone": ["group_5e46bc3fd0f1c"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -154,9 +150,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_5b04314e0ec21"
-                                    ],
+                                    "clone": ["group_5b04314e0ec21"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -185,9 +179,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_5d5bbac79ab7e"
-                                    ],
+                                    "clone": ["group_5d5bbac79ab7e"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -216,9 +208,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_5b0430471a3d6"
-                                    ],
+                                    "clone": ["group_5b0430471a3d6"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -247,9 +237,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_5d8c62865c326"
-                                    ],
+                                    "clone": ["group_5d8c62865c326"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -278,9 +266,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_5b0d1ed32a384"
-                                    ],
+                                    "clone": ["group_5b0d1ed32a384"],
                                     "display": "seamless",
                                     "layout": "",
                                     "prefix_label": 0,
@@ -309,9 +295,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_5b2788b48d04c"
-                                    ],
+                                    "clone": ["group_5b2788b48d04c"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -340,9 +324,7 @@
                                         "class": "hide-label",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_669698072603c"
-                                    ],
+                                    "clone": ["group_669698072603c"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -371,9 +353,7 @@
                                         "class": "hide-label",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_5bc6ece98595c"
-                                    ],
+                                    "clone": ["group_5bc6ece98595c"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -402,9 +382,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_61f24dc3c8810"
-                                    ],
+                                    "clone": ["group_61f24dc3c8810"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -433,9 +411,7 @@
                                         "class": "hide-label",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_6185446c861f5"
-                                    ],
+                                    "clone": ["group_6185446c861f5"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -464,9 +440,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_5b042e516ef62"
-                                    ],
+                                    "clone": ["group_5b042e516ef62"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -495,9 +469,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_5b0433ff0bb17"
-                                    ],
+                                    "clone": ["group_5b0433ff0bb17"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -526,9 +498,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_5b0ec29dbd905"
-                                    ],
+                                    "clone": ["group_5b0ec29dbd905"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -557,9 +527,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_6296243e5eb71"
-                                    ],
+                                    "clone": ["group_6296243e5eb71"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -577,7 +545,7 @@
                             "sub_fields": [
                                 {
                                     "key": "field_5b0444ac46541",
-                                    "label": "Bouton(s) \/ Lien(s)",
+                                    "label": "Bouton(s) / Lien(s)",
                                     "name": "links",
                                     "type": "clone",
                                     "instructions": "",
@@ -588,9 +556,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_5b043614df4a6"
-                                    ],
+                                    "clone": ["group_5b043614df4a6"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -619,9 +585,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_5b461a3831284"
-                                    ],
+                                    "clone": ["group_5b461a3831284"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -650,9 +614,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_5b471f2922b04"
-                                    ],
+                                    "clone": ["group_5b471f2922b04"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -681,9 +643,7 @@
                                         "class": "hide-label",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_5b5b2fbc3460d"
-                                    ],
+                                    "clone": ["group_5b5b2fbc3460d"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -712,9 +672,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_5b043b2171504"
-                                    ],
+                                    "clone": ["group_5b043b2171504"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -743,9 +701,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_5c4f2efaccd2f"
-                                    ],
+                                    "clone": ["group_5c4f2efaccd2f"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -758,12 +714,12 @@
                         "layout_5db0598355e0f": {
                             "key": "layout_5db0598355e0f",
                             "name": "eye_candy_img",
-                            "label": "Logo \/ Image d'illustration",
+                            "label": "Logo / Image d'illustration",
                             "display": "block",
                             "sub_fields": [
                                 {
                                     "key": "field_5db059d955e10",
-                                    "label": "Logo \/ Image d'illustration",
+                                    "label": "Logo / Image d'illustration",
                                     "name": "eye_candy_img",
                                     "type": "clone",
                                     "instructions": "",
@@ -774,9 +730,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_5db057d2910e2"
-                                    ],
+                                    "clone": ["group_5db057d2910e2"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -805,9 +759,7 @@
                                         "class": "hide-label",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_5ed7a3b9c0e0e"
-                                    ],
+                                    "clone": ["group_5ed7a3b9c0e0e"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -836,9 +788,7 @@
                                         "class": "hide-label",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_5ee381150e584"
-                                    ],
+                                    "clone": ["group_5ee381150e584"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -867,9 +817,7 @@
                                         "class": "hide-label",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_5ee8db016740c"
-                                    ],
+                                    "clone": ["group_5ee8db016740c"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -898,9 +846,7 @@
                                         "class": "hide-label",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_booking_block"
-                                    ],
+                                    "clone": ["group_booking_block"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -929,9 +875,7 @@
                                         "class": "hide-label",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_6442795be9222"
-                                    ],
+                                    "clone": ["group_6442795be9222"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -960,9 +904,7 @@
                                         "class": "hide-label",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_669e0870bab60"
-                                    ],
+                                    "clone": ["group_669e0870bab60"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -991,9 +933,36 @@
                                         "class": "hide-label",
                                         "id": ""
                                     },
-                                    "clone": [
-                                        "group_66fa7944c5427"
-                                    ],
+                                    "clone": ["group_66fa7944c5427"],
+                                    "display": "seamless",
+                                    "layout": "block",
+                                    "prefix_label": 0,
+                                    "prefix_name": 0
+                                }
+                            ],
+                            "min": "",
+                            "max": ""
+                        },
+                        "layout_673eeeece9ad3": {
+                            "key": "layout_673eeeece9ad3",
+                            "name": "countdown",
+                            "label": "Compte à rebours",
+                            "display": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_673eef2b6d19e",
+                                    "label": "Compte à rebours",
+                                    "name": "countdown",
+                                    "type": "clone",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "hide-label",
+                                        "id": ""
+                                    },
+                                    "clone": ["group_673eec34989c6"],
                                     "display": "seamless",
                                     "layout": "block",
                                     "prefix_label": 0,
@@ -1037,9 +1006,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "clone": [
-                        "group_5b041c24d0dd7"
-                    ],
+                    "clone": ["group_5b041c24d0dd7"],
                     "display": "seamless",
                     "layout": "block",
                     "prefix_label": 0,
@@ -1298,9 +1265,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "clone": [
-                        "group_5b043c93d609a"
-                    ],
+                    "clone": ["group_5b043c93d609a"],
                     "display": "seamless",
                     "layout": "block",
                     "prefix_label": 0,
@@ -1605,9 +1570,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "clone": [
-                                "field_5b052c3b36231"
-                            ],
+                            "clone": ["field_5b052c3b36231"],
                             "display": "seamless",
                             "layout": "block",
                             "prefix_label": 0,
@@ -1626,9 +1589,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "clone": [
-                                "field_5b052c9136232"
-                            ],
+                            "clone": ["field_5b052c9136232"],
                             "display": "seamless",
                             "layout": "block",
                             "prefix_label": 0,
@@ -1672,9 +1633,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "clone": [
-                                "field_5b052ccf36234"
-                            ],
+                            "clone": ["field_5b052ccf36234"],
                             "display": "seamless",
                             "layout": "block",
                             "prefix_label": 0,
@@ -1693,9 +1652,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "clone": [
-                                "field_5b052cfd36235"
-                            ],
+                            "clone": ["field_5b052cfd36235"],
                             "display": "seamless",
                             "layout": "block",
                             "prefix_label": 0,
