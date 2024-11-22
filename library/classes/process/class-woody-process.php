@@ -325,30 +325,6 @@ class WoodyTheme_WoodyProcess
                 break;
             case 'countdown':
                 $layout['display'] = $this->tools->getDisplayOptions($layout['countdown_bg_params']);
-                
-                if (!empty($layout['target_date'])) {
-                    // Days
-                    $target_obj = new \DateTime($layout['target_date']);
-                    $now = new \DateTime();
-                    $interval = $now->diff($target_obj);
-                    
-                    $layout['time']['days'] = $interval->days;
-                    
-                    if (!$layout['display_days']) {
-                        $layout['time']['hours'] = $interval->h + $layout['time']['days'] * 24;
-                    } else {
-                        $layout['time']['hours'] = $interval->h;
-                    }
-
-                    if (!$layout['display_hours']) {
-                        $layout['time']['minutes'] = $interval->h + $layout['time']['hours'] * 60;
-                    } else {
-                        $layout['time']['minutes'] = $interval->h;
-                    }
-                    
-                    $layout['time']['seconds'] = $interval->s;
-                }
-                
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
             default:
