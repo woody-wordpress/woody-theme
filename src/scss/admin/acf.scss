@@ -1038,6 +1038,12 @@
                         content: '\f177';
                     }
                 }
+                
+                &[data-layout='countdown'] {
+                    &:before {
+                        content: '\f469';
+                    }
+                }
             }
         }
     }
