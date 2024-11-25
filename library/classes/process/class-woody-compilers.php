@@ -48,6 +48,8 @@ class WoodyTheme_WoodyCompilers
         $return = '';
         $the_items = [];
 
+        error_log("acf wrapper layout : " . $wrapper['acf_fc_layout'] . PHP_EOL);
+
         switch ($wrapper['acf_fc_layout']) {
             case 'manual_focus':
             case 'focus_trip_components':
