@@ -731,6 +731,7 @@ class Main
         // Clean Cache
         wp_cache_delete('woody_tpls_order', 'woody');
         wp_cache_delete('woody_tpls_components', 'woody');
+        wp_cache_delete('woody_tpls_components_admin', 'woody');
         wp_cache_delete('woody_terms_page_type', 'woody');
         wp_cache_delete('woody_website_pages_taxonomies', 'woody');
         wp_cache_delete('woody_page_taxonomies_choices', 'woody');
@@ -1225,10 +1226,21 @@ class Main
      */
     public function woodyGetAllTemplates()
     {
-        $return = wp_cache_get('woody_tpls_components', 'woody');
+
+        // NOTE : on crée un cache séparé pour les admins. Certains templates ne sont disponibles que pour les admins (en "lib_design":"TODO"), or si, après un vidage memcached,
+        // c'est un admin qui passe le premier dans cette méthode, alors tous les templates seraient memcached et donc disponibles ensuite par les non-admin...
 
         $user = wp_get_current_user();
         $is_administrator = in_array('administrator', $user->roles);
+
+        $tpls_cache_key = 'woody_tpls_components';
+        if ($is_administrator) {
+            $tpls_cache_key = 'woody_tpls_components_admin';
+        }
+
+        if ($is_administrator) {
+            $return = wp_cache_get($tpls_cache_key, 'woody');
+        }
 
         if (empty($return)) {
             $tplComponents = [];
@@ -1278,7 +1290,7 @@ class Main
                 $return .= '<li>' . $value . '</li>' ;
             }
 
-            wp_cache_set('woody_tpls_components', $return, 'woody');
+            wp_cache_set($tpls_cache_key, $return, 'woody');
         }
 
         wp_send_json($return);
