@@ -772,7 +772,7 @@ class WoodyTheme_WoodyGetters
             'location' => [
                 'lat' => empty($item['latitude']) ? '' : str_replace(',', '.', $item['latitude']),
                 'lng' => empty($item['longitude']) ? '' : str_replace(',', '.', $item['longitude'])
-            ]
+            ],
         ];
 
         if ($item['action_type'] == 'file' && !empty($item['file']['url'])) {
@@ -928,10 +928,10 @@ class WoodyTheme_WoodyGetters
             $data['link']['link_label'] = __('Lire la suite', 'woody-theme');
         }
 
-        if (!empty($sheet_item['bordereau']) && ($sheet_item['bordereau'] === 'HOT' || $sheet_item['bordereau'] == 'HPA')) {
+        if (!empty($sheet_item['bordereau']) && ($sheet_item['bordereau'] === 'HOT' || $sheet_item['bordereau'] == 'HPA' || $sheet_item['bordereau'] == 'HLO')) {
             $rating = [];
-            if (!empty($sheet_item['labelRatings']) && !empty($sheet_item['labelRatings']['610.06.04.01.04.04'])) {
-                for ($i = 0; $i < $sheet_item['labelRatings']['610.06.04.01.04.04']['repeated']; ++$i) {
+            if (!empty($sheet_item['labelRatings']) && (!empty(current($sheet_item['labelRatings'])))) {
+                for ($i = 0; $i < current($sheet_item['labelRatings'])['repeated']; ++$i) {
                     $rating[] = '<span class="wicon wicon-031-etoile-pleine"><span>';
                 }
             }

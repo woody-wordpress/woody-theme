@@ -1,46 +1,54 @@
 {
     "key": "group_60cc9792af6e7",
     "title": "Personnalisation : mise en avant",
-    "fields": [{
-        "key": "field_60cc97a199a42",
-        "label": "Image de mise en avant",
-        "name": "attachment_focus_img",
-        "type": "image",
-        "instructions": "",
-        "required": 0,
-        "conditional_logic": 0,
-        "wrapper": {
-            "width": "",
-            "class": "",
-            "id": ""
-        },
-        "return_format": "array",
-        "preview_size": "thumbnail",
-        "library": "all",
-        "min_width": "",
-        "min_height": "",
-        "min_size": "",
-        "max_width": "",
-        "max_height": "",
-        "max_size": "",
-        "mime_types": "jpeg, jpg, gif, png"
-    }],
+    "fields": [
+        {
+            "key": "field_60cc97a199a42",
+            "label": "Image de mise en avant",
+            "name": "attachment_focus_img",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "jpeg, jpg, gif, png, webp"
+        }
+    ],
     "location": [
-        [{
-            "param": "attachment",
-            "operator": "==",
-            "value": "text"
-        }],
-        [{
-            "param": "attachment",
-            "operator": "==",
-            "value": "application"
-        }],
-        [{
-            "param": "attachment",
-            "operator": "==",
-            "value": "video"
-        }]
+        [
+            {
+                "param": "attachment",
+                "operator": "==",
+                "value": "text"
+            }
+        ],
+        [
+            {
+                "param": "attachment",
+                "operator": "==",
+                "value": "application"
+            }
+        ],
+        [
+            {
+                "param": "attachment",
+                "operator": "==",
+                "value": "video"
+            }
+        ]
     ],
     "menu_order": 0,
     "position": "side",

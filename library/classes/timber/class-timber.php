@@ -136,6 +136,7 @@ if (!class_exists('Timber')) {
                     'post_type',
                     'post_modified',
                     'sheet_id',
+                    'sheet_current_aspect',
                     'site_key',
                     'tags',
                     'woody_options_pages',

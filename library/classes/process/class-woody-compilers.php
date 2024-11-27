@@ -109,6 +109,8 @@ class WoodyTheme_WoodyCompilers
         $the_items['display_index'] = (empty($wrapper['display_index'])) ? false : $wrapper['display_index'];
         $the_items['display_sessions'] = (empty($wrapper['display_sessions'])) ? false : $wrapper['display_sessions'];
 
+        $the_items['seo_type_title'] = (empty($wrapper['seo_type_title'])) ? 'span' : $wrapper['seo_type_title'];
+
         // Responsive stuff
         if (!empty($wrapper['mobile_behaviour'])) {
             if ($wrapper['mobile_behaviour']['mobile_grid'] == 'grid') {
@@ -832,6 +834,8 @@ class WoodyTheme_WoodyCompilers
             'title' => $current_post_title,
             'url' => woody_get_permalink($current_post_id)
         ];
+
+        $data['after_breadcrumb'] = apply_filters('woody_after_breadcrumb_content', null, $context);
 
         $tpl = apply_filters('breadcrumb_tpl', null);
         $template = (!empty($tpl['template']) && !empty($context['woody_components'][$tpl['template']])) ? $context['woody_components'][$tpl['template']] : $context['woody_components']['woody_widgets-breadcrumb-tpl_01'];

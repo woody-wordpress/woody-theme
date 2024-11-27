@@ -112,6 +112,7 @@ class Main
         if (get_field('display_sheet_aspect', 'options')) {
             add_filter('acf/fields/post_object/result', [$this, 'getAspectPostTitleResult'], 10, 4);
             add_filter('acf/fields/page_link/result', [$this, 'getAspectPostTitleResult'], 10, 4);
+            add_filter('wp_link_query', [$this, 'getAspectPostTitleResultLinkQuery'], 10, 2);
         }
     }
 
@@ -730,6 +731,7 @@ class Main
         // Clean Cache
         wp_cache_delete('woody_tpls_order', 'woody');
         wp_cache_delete('woody_tpls_components', 'woody');
+        wp_cache_delete('woody_tpls_components_admin', 'woody');
         wp_cache_delete('woody_terms_page_type', 'woody');
         wp_cache_delete('woody_website_pages_taxonomies', 'woody');
         wp_cache_delete('woody_page_taxonomies_choices', 'woody');
@@ -793,6 +795,28 @@ class Main
         return $title;
     }
 
+    public function getAspectPostTitleResultLinkQuery($results, $query)
+    {
+        foreach ($results as &$result) {
+            $post = get_post($result['ID']);
+
+            if ($post && $post->post_type == 'touristic_sheet') {
+                $touristic_source_identifier = get_field('touristic_source_identifier', $post->ID);
+
+                if (!empty($touristic_source_identifier)) {
+                    $get_aspect = explode('-', $touristic_source_identifier);
+                    $sheet_aspect = sizeof($get_aspect) > 1 ? $get_aspect[0] : null;
+
+                    if (!empty($sheet_aspect)) {
+                        $result['title'] .= '<small style="color:#cfcfcf; font-style:italic; text-transform: uppercase"> - ' . $sheet_aspect . '</small>';
+                    }
+                }
+            }
+        }
+
+        return $results;
+    }
+
     public function getPostObjectDefaultTranslation($args, $field, $post_id)
     {
         $default_lang_args = [];
@@ -809,7 +833,7 @@ class Main
                 $default_lang_args['lang'] = pll_default_language();
                 $new_args = array_merge($default_lang_args, $args);
                 $new_args['post_type'] = 'page';
-                $default_lang_query = new WP_Query($new_args);
+                $default_lang_query = new \WP_Query($new_args);
                 // Si on obtient des résultats dans la langue par défaut,
                 // On récupère l'id de la traduction de ce contenu dans la langue courante
                 if (!empty($default_lang_query->posts)) {
@@ -1202,10 +1226,21 @@ class Main
      */
     public function woodyGetAllTemplates()
     {
-        $return = wp_cache_get('woody_tpls_components', 'woody');
+
+        // NOTE : on crée un cache séparé pour les admins. Certains templates ne sont disponibles que pour les admins (en "lib_design":"TODO"), or si, après un vidage memcached,
+        // c'est un admin qui passe le premier dans cette méthode, alors tous les templates seraient memcached et donc disponibles ensuite par les non-admin...
 
         $user = wp_get_current_user();
         $is_administrator = in_array('administrator', $user->roles);
+
+        $tpls_cache_key = 'woody_tpls_components';
+        if ($is_administrator) {
+            $tpls_cache_key = 'woody_tpls_components_admin';
+        }
+
+        if ($is_administrator) {
+            $return = wp_cache_get($tpls_cache_key, 'woody');
+        }
 
         if (empty($return)) {
             $tplComponents = [];
@@ -1255,7 +1290,7 @@ class Main
                 $return .= '<li>' . $value . '</li>' ;
             }
 
-            wp_cache_set('woody_tpls_components', $return, 'woody');
+            wp_cache_set($tpls_cache_key, $return, 'woody');
         }
 
         wp_send_json($return);
