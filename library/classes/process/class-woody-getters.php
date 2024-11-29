@@ -266,8 +266,9 @@ class WoodyTheme_WoodyGetters
                     $clickable = !empty($item_wrapper['existing_content']['clickable_component']);
                 }
 
-                // La donnée de la vignette correspond à un post sélectionné
+                // La donnée de la vignette
                 if ($item_wrapper['content_selection_type'] == 'existing_content' && !empty($item_wrapper['existing_content']['content_selection'])) {
+                    // La donnée de la vignette correspond à un post sélectionné
                     $item = $item_wrapper['existing_content'];
                     $post = get_post($item['content_selection']);
                     if (!empty($post) && $post->post_status == 'publish') {
@@ -309,6 +310,44 @@ class WoodyTheme_WoodyGetters
 
                             $the_items['items'][$key]['pretitle'] = $pretitle;
                         }
+                    }
+                } else if ($item_wrapper['content_selection_type'] == 'custom_content') {
+                    // La donnée de la vignette correspond à un contenu libre
+                    $the_items['items'][$key] = $this->getCustomPreview($item_wrapper['custom_content'], $wrapper, $item_wrapper['content_selection_type']);
+                    $the_items['items'][$key]['real_index'] = $key;
+
+                    if(!empty($item_wrapper['highlight_start_date'])) {
+                        $pretitle = '';
+                        $formatted_start_date = formatDate($item_wrapper['highlight_start_date'], 'l d F Y');
+
+                        $start_day = formatDate($item_wrapper['highlight_start_date'], 'l d');
+                        $start_month = formatDate($item_wrapper['highlight_start_date'], 'F');
+                        $start_year = formatDate($item_wrapper['highlight_start_date'], 'Y');
+
+                        $pretitle = __('Le', 'woody-theme') . ' ' . $start_day . ' ' . $start_month . ' ' . $start_year;
+
+                        if(!empty($item_wrapper['highlight_end_date'])) {
+                            $formatted_end_date = formatDate($item_wrapper['highlight_end_date'], 'l d F Y');
+
+                            $end_day = formatDate($item_wrapper['highlight_end_date'], 'l d');
+                            $end_month = formatDate($item_wrapper['highlight_end_date'], 'F');
+                            $end_year = formatDate($item_wrapper['highlight_end_date'], 'Y');
+
+                            // On vérifie si les dates sont dans la même année
+                            if($start_year === $end_year) {
+                                // On vérifie si les dates sont dans le même mois
+                                if($start_month === $end_month) {
+                                    $pretitle = __('Du', 'woody-theme') . ' ' . $start_day . ' ' . __('au', 'woody-theme') . ' ' . $end_day . ' ' . $start_month . ' ' . $start_year;
+                                } else {
+                                    $pretitle = __('Du', 'woody-theme') . ' ' . $start_day . ' ' . $start_month . ' ' . __('au', 'woody-theme') . ' ' . $end_day . ' ' . $end_month . ' ' . $start_year;
+                                }
+                            } else {
+                                // Si les années sont différentes
+                                $pretitle = __('Du', 'woody-theme') . ' ' . $formatted_start_date . ' ' . __('au', 'woody-theme') . ' ' . $formatted_end_date;
+                            }
+                        }
+
+                        $the_items['items'][$key]['pretitle'] = $pretitle;
                     }
                 }
             }
