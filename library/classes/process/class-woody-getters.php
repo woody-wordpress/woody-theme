@@ -313,7 +313,7 @@ class WoodyTheme_WoodyGetters
                             $the_items['items'][$key]['pretitle'] = $pretitle;
                         }
                     }
-                } else if ($item_wrapper['content_selection_type'] == 'custom_content___') {
+                } else if ($item_wrapper['content_selection_type'] == 'custom_content') {
                     // La donnée de la vignette correspond à un contenu libre
                     $the_items['items'][$key] = $this->getCustomPreview($item_wrapper['custom_content'], $wrapper, $item_wrapper['content_selection_type']);
                     $the_items['items'][$key]['real_index'] = $key;
