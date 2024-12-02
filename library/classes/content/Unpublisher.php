@@ -122,6 +122,9 @@ class Unpublisher
                 clean_post_cache($result->ID);
             }
         }
+
+        // On invalide le varnish pour pas que les pages dépubliées remontes
+        do_action('woody_flush_varnish');
     }
 
     public function scheduleMissedPosts()
