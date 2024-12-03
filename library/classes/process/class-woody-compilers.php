@@ -164,6 +164,9 @@ class WoodyTheme_WoodyCompilers
 
         if(!empty($wrapper['acf_fc_layout']) && $wrapper['acf_fc_layout'] == 'highlights') {
             $the_items['timeline'] = $this->getter->formatHighlightsTimeline($wrapper);
+            if (empty($wrapper['woody_tpl'])) {
+                $wrapper['woody_tpl'] = 'blocks-highlights-tpl_101'; // template 'temps forts' par defaut
+            }
         }
 
         $the_items = apply_filters('woody_format_focuses_data', $the_items, $wrapper);
