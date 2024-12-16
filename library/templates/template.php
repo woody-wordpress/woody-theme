@@ -147,9 +147,7 @@ abstract class WoodyTheme_TemplateAbstract
             $this->globals['site_key'] = WP_SITE_KEY;
         }
 
-        if (!empty($data['is_mobile']) && is_bool($data['is_mobile'])) {
-            $this->globals['is_mobile'] = $data['is_mobile'];
-        } elseif (empty($this->globals['is_mobile'])) {
+        if (empty($this->globals['is_mobile'])) {
             $this->globals['is_mobile'] = wp_is_mobile();
         }
 
@@ -310,6 +308,10 @@ abstract class WoodyTheme_TemplateAbstract
 
         if (!empty($this->context['woody_access_staging'])) {
             $this->context['body_class'] .= ' woody_staging';
+        }
+
+        if (wp_is_mobile()) {
+            $this->context['body_class'] .= ' is_mobile';
         }
 
         // Define Woody Components
