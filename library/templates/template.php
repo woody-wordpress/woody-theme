@@ -155,8 +155,8 @@ abstract class WoodyTheme_TemplateAbstract
             $this->globals['dist_url'] = WP_DIST_URL;
         }
 
-        if (empty($this->globals['is_mobile'])) {
-            $this->globals['is_mobile'] = wp_is_mobile();
+        if (!array_key_exists('is_mobile', $this->globals) || !is_bool($this->globals['is_mobile'])) {
+            $this->globals['is_mobile'] = $this->context['is_mobile'];
         }
 
         if (empty($this->globals['site_name'])) {
@@ -260,6 +260,7 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['sheet_id'] = null;
         $this->context['page_type'] = null;
         $this->context['metas'] = [];
+        $this->context['is_mobile'] = wp_is_mobile();
 
         $this->context['enabled_woody_options'] = WOODY_OPTIONS;
         $this->context['woody_access_staging'] = WOODY_ACCESS_STAGING;
@@ -322,7 +323,7 @@ abstract class WoodyTheme_TemplateAbstract
             $this->context['body_class'] .= ' woody_staging';
         }
 
-        if (wp_is_mobile()) {
+        if ($this->context['is_mobile'] === true) {
             $this->context['body_class'] .= ' is_mobile';
         }
 
