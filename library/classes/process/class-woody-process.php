@@ -322,6 +322,10 @@ class WoodyTheme_WoodyProcess
                 }
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
+            case 'countdown':
+                $layout['display'] = $this->tools->getDisplayOptions($layout['countdown_bg_params']);
+                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
+                break;
             default:
 
 
