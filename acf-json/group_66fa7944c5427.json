@@ -6,6 +6,7 @@
             "key": "field_66fa954d2c228",
             "label": "Contenu",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -24,7 +25,7 @@
             "name": "highlights_start_date",
             "aria-label": "",
             "type": "date_picker",
-            "instructions": "Pour la date 15/09/2024, le mois de début correspond à \"Sept 2024\"",
+            "instructions": "Pour la date 15\/09\/2024, le mois de début correspond à \"Sept 2024\"",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -42,7 +43,7 @@
             "name": "highlights_end_date",
             "aria-label": "",
             "type": "date_picker",
-            "instructions": "Pour la date 28/12/2024, le mois de fin correspond à \"Déc 2024\"",
+            "instructions": "Pour la date 28\/12\/2024, le mois de fin correspond à \"Déc 2024\"",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -58,6 +59,7 @@
             "key": "field_66fa9559217a1",
             "label": "Contenu",
             "name": "content_selection",
+            "aria-label": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -75,11 +77,13 @@
             "hide_collapse": 0,
             "collapse_all_repeater": 1,
             "btn-icon-only": 0,
+            "rows_per_page": 20,
             "sub_fields": [
                 {
                     "key": "field_66fa956cd1d1d",
                     "label": "Titre administration",
                     "name": "bo_selection_title",
+                    "aria-label": "",
                     "type": "text",
                     "instructions": "",
                     "required": 0,
@@ -93,7 +97,8 @@
                     "placeholder": "Titre visible lorsque le contenu est refermé (uniquement pour le backoffice)",
                     "prepend": "",
                     "append": "",
-                    "maxlength": ""
+                    "maxlength": "",
+                    "parent_repeater": "field_66fa9559217a1"
                 },
                 {
                     "key": "field_66faa5b6f09dd",
@@ -111,7 +116,8 @@
                     },
                     "display_format": "d\/m\/Y",
                     "return_format": "Y-m-d",
-                    "first_day": 1
+                    "first_day": 1,
+                    "parent_repeater": "field_66fa9559217a1"
                 },
                 {
                     "key": "field_66faa5bdf317a",
@@ -129,12 +135,14 @@
                     },
                     "display_format": "d\/m\/Y",
                     "return_format": "Y-m-d",
-                    "first_day": 1
+                    "first_day": 1,
+                    "parent_repeater": "field_66fa9559217a1"
                 },
                 {
                     "key": "field_66fa9580c1a33",
                     "label": "Type",
                     "name": "content_selection_type",
+                    "aria-label": "",
                     "type": "radio",
                     "instructions": "Le contenu existant permet de mettre en avant des pages du site",
                     "required": 0,
@@ -145,19 +153,22 @@
                         "id": ""
                     },
                     "choices": {
-                        "existing_content": "Contenu existant"
+                        "existing_content": "Contenu existant",
+                        "custom_content": "Contenu libre"
                     },
+                    "default_value": "existing_content",
+                    "return_format": "value",
                     "allow_null": 0,
                     "other_choice": 0,
-                    "default_value": "existing_content",
                     "layout": "vertical",
-                    "return_format": "value",
-                    "save_other_choice": 0
+                    "save_other_choice": 0,
+                    "parent_repeater": "field_66fa9559217a1"
                 },
                 {
                     "key": "field_66fa95d24012a",
                     "label": "Contenu existant",
                     "name": "existing_content",
+                    "aria-label": "",
                     "type": "group",
                     "instructions": "",
                     "required": 0,
@@ -176,11 +187,13 @@
                         "id": ""
                     },
                     "layout": "block",
+                    "parent_repeater": "field_66fa9559217a1",
                     "sub_fields": [
                         {
                             "key": "field_66fa95ee767f5",
                             "label": "Choix de la page",
                             "name": "content_selection",
+                            "aria-label": "",
                             "type": "post_object",
                             "instructions": "",
                             "required": 0,
@@ -199,7 +212,281 @@
                             "allow_null": 0,
                             "multiple": 0,
                             "return_format": "id",
-                            "ui": 1
+                            "ui": 1,
+                            "bidirectional_target": []
+                        }
+                    ]
+                },
+                {
+                    "key": "field_6749920b7853c",
+                    "label": "Contenu libre",
+                    "name": "custom_content",
+                    "aria-label": "",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_66fa9580c1a33",
+                                "operator": "==",
+                                "value": "custom_content"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "hide-label",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "parent_repeater": "field_66fa9559217a1",
+                    "sub_fields": [
+                        {
+                            "key": "field_6749991d28002",
+                            "label": "En-tête",
+                            "name": "heading",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b041c24d0dd7"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        },
+                        {
+                            "key": "field_67499928e5c6f",
+                            "label": "Type d'action",
+                            "name": "action_type",
+                            "aria-label": "",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "link": "Lien",
+                                "file": "Fichier"
+                            },
+                            "default_value": "link",
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_6749993ac8030",
+                            "label": "Lien",
+                            "name": "link",
+                            "aria-label": "",
+                            "type": "link",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_67499928e5c6f",
+                                        "operator": "==",
+                                        "value": "link"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array"
+                        },
+                        {
+                            "key": "field_67499947d2e1b",
+                            "label": "Fichier",
+                            "name": "file",
+                            "aria-label": "",
+                            "type": "file",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_67499928e5c6f",
+                                        "operator": "==",
+                                        "value": "file"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "library": "all",
+                            "min_size": "",
+                            "max_size": "",
+                            "mime_types": ""
+                        },
+                        {
+                            "key": "field_67499954c7f42",
+                            "label": "Média",
+                            "name": "media_type",
+                            "aria-label": "",
+                            "type": "radio",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "30",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "img": "Image",
+                                "movie": "Vidéo"
+                            },
+                            "allow_null": 0,
+                            "other_choice": 0,
+                            "save_other_choice": 0,
+                            "default_value": "",
+                            "layout": "vertical",
+                            "return_format": "value"
+                        },
+                        {
+                            "key": "field_67499965e4ad6",
+                            "label": "Image",
+                            "name": "img",
+                            "aria-label": "",
+                            "type": "image",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_67499954c7f42",
+                                        "operator": "==",
+                                        "value": "img"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "70",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "preview_size": "thumbnail",
+                            "library": "all",
+                            "min_width": 640,
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": "jpeg, jpg, png, gif, webp"
+                        },
+                        {
+                            "key": "field_67499973ae0df",
+                            "label": "Vidéo",
+                            "name": "movie",
+                            "aria-label": "",
+                            "type": "group",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_67499954c7f42",
+                                        "operator": "==",
+                                        "value": "movie"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "70",
+                                "class": "",
+                                "id": ""
+                            },
+                            "layout": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_6749998708aff",
+                                    "label": "Fichiers vidéos",
+                                    "name": "movie_field",
+                                    "aria-label": "",
+                                    "type": "clone",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "clone": [
+                                        "group_5b16b09337a33"
+                                    ],
+                                    "display": "seamless",
+                                    "layout": "block",
+                                    "prefix_label": 0,
+                                    "prefix_name": 0
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_6749999361eb9",
+                            "label": "Latitude",
+                            "name": "latitude",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_6749999e1a3ef",
+                            "label": "Longitude",
+                            "name": "longitude",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
                         }
                     ]
                 }
@@ -209,6 +496,7 @@
             "key": "field_66fa97130b192",
             "label": "Affichage",
             "name": "display_elements",
+            "aria-label": "",
             "type": "checkbox",
             "instructions": "Pour les contenus existants uniquement",
             "required": 0,
@@ -233,10 +521,10 @@
                 "bookable": "Réservable <small>(fiche uniquement)<\/small>",
                 "grade": "Note <small>(fiche uniquement)<\/small>",
                 "linked_profil": "Profil lié",
-                "_themes": "Thématique principal(e)",
-                "_places": "Lieu principal(e)",
-                "_seasons": "Circonstance principal(e)",
-                "_targets": "Cible principal(e)",
+                "_themes": "Thématique principal(e)<\/small>",
+                "_places": "Lieu principal(e)<\/small>",
+                "_seasons": "Circonstance principal(e)<\/small>",
+                "_targets": "Cible principal(e)<\/small>",
                 "created": "Date de publication"
             },
             "allow_custom": 0,
@@ -246,12 +534,14 @@
             "layout": "horizontal",
             "toggle": 0,
             "return_format": "value",
-            "save_custom": 0
+            "save_custom": 0,
+            "custom_choice_button_text": "Ajouter un nouveau choix"
         },
         {
             "key": "field_66fa9738ecae7",
             "label": "Plus d'options",
             "name": "",
+            "aria-label": "",
             "type": "accordion",
             "instructions": "",
             "required": 0,
@@ -269,6 +559,7 @@
             "key": "field_66fa97456b0d6",
             "label": "Afficher l'image",
             "name": "display_img",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -288,6 +579,7 @@
             "key": "field_66fa974eeaf43",
             "label": "Diaporama d'images",
             "name": "display_slideshow",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "<small>Uniquement pour les pages avec plusieurs images de mise en avant<\/small>",
             "required": 0,
@@ -307,6 +599,7 @@
             "key": "field_66fa9763938b4",
             "label": "Afficher les boutons \"Lire la suite\"",
             "name": "display_button",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "<small>ne s'applique qu'aux contenus existants<\/small>",
             "required": 0,
@@ -326,6 +619,7 @@
             "key": "field_66fa97757f650",
             "label": "Numéroter les résultats",
             "name": "display_index",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -345,6 +639,7 @@
             "key": "field_66fa979ce6f0a",
             "label": "FIN",
             "name": "",
+            "aria-label": "",
             "type": "accordion",
             "instructions": "",
             "required": 0,
@@ -362,6 +657,7 @@
             "key": "field_66fa97a653675",
             "label": "Titre du bloc",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -378,6 +674,7 @@
             "key": "field_66fa97be69c91",
             "label": "Titre du bloc",
             "name": "highlights_block_title",
+            "aria-label": "",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -405,6 +702,7 @@
             "key": "field_66fa97d152416",
             "label": "Bouton(s) supplémentaire(s)",
             "name": "focus_buttons",
+            "aria-label": "",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -426,6 +724,7 @@
             "key": "field_66fa9874db8f7",
             "label": "Mise en page",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -442,6 +741,7 @@
             "key": "field_66fa987f6fd87",
             "label": "Template",
             "name": "",
+            "aria-label": "",
             "type": "accordion",
             "instructions": "",
             "required": 0,
@@ -459,6 +759,7 @@
             "key": "field_66fa988d07590",
             "label": "Template",
             "name": "woody_tpl",
+            "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -478,6 +779,7 @@
             "key": "button_field_66fa988d07590",
             "label": "Choisir une mise en page",
             "name": "",
+            "aria-label": "",
             "type": "message",
             "instructions": "",
             "required": 0,
@@ -495,6 +797,7 @@
             "key": "field_66fa99322128f",
             "label": "Options avancées",
             "name": "",
+            "aria-label": "",
             "type": "accordion",
             "instructions": "",
             "required": 0,
@@ -512,6 +815,7 @@
             "key": "field_66fa99593027d",
             "label": "Retirer les marges autour des mises en avant",
             "name": "highlights_no_padding",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -531,6 +835,7 @@
             "key": "field_66fa9b105666f",
             "label": "FIN",
             "name": "",
+            "aria-label": "",
             "type": "accordion",
             "instructions": "",
             "required": 0,
@@ -548,6 +853,7 @@
             "key": "field_66fa9a00c6a67",
             "label": "Responsive",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -564,6 +870,7 @@
             "key": "field_66fa9a08b1b49",
             "label": "Afficher le bloc",
             "name": "",
+            "aria-label": "",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -585,6 +892,7 @@
             "key": "field_66fa9a1b74930",
             "label": "Comportement mobile",
             "name": "mobile_behaviour",
+            "aria-label": "",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -606,6 +914,7 @@
             "key": "field_66fa9a7de793e",
             "label": "Analytics",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -622,6 +931,7 @@
             "key": "field_66fa9a86d603a",
             "label": "Analytics",
             "name": "analytics",
+            "aria-label": "",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -657,5 +967,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "Bloc temps forts",
-    "modified": 1641222301
+    "show_in_rest": 0
 }
