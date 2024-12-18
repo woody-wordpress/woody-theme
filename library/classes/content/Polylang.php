@@ -255,5 +255,9 @@ class Polylang
         __('Le', 'woody-theme');
         __('Du', 'woody-theme');
         __('au', 'woody-theme');
+
+        // Countdown
+        __('seconde', 'woody-theme');
+        __('secondes', 'woody-theme');
     }
 }
