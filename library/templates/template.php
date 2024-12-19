@@ -147,10 +147,8 @@ abstract class WoodyTheme_TemplateAbstract
             $this->globals['site_key'] = WP_SITE_KEY;
         }
 
-        if (!empty($data['is_mobile']) && is_bool($data['is_mobile'])) {
-            $this->globals['is_mobile'] = $data['is_mobile'];
-        } elseif (empty($this->globals['is_mobile'])) {
-            $this->globals['is_mobile'] = wp_is_mobile();
+        if (!array_key_exists('is_mobile', $this->globals) || !is_bool($this->globals['is_mobile'])) {
+            $this->globals['is_mobile'] = $this->context['is_mobile'];
         }
 
         if (empty($this->globals['site_name'])) {
@@ -250,6 +248,7 @@ abstract class WoodyTheme_TemplateAbstract
         $this->context['sheet_id'] = null;
         $this->context['page_type'] = null;
         $this->context['metas'] = [];
+        $this->context['is_mobile'] = wp_is_mobile();
 
         $this->context['enabled_woody_options'] = WOODY_OPTIONS;
         $this->context['woody_access_staging'] = WOODY_ACCESS_STAGING;
@@ -310,6 +309,10 @@ abstract class WoodyTheme_TemplateAbstract
 
         if (!empty($this->context['woody_access_staging'])) {
             $this->context['body_class'] .= ' woody_staging';
+        }
+
+        if ($this->context['is_mobile'] === true) {
+            $this->context['body_class'] .= ' is_mobile';
         }
 
         // Define Woody Components
