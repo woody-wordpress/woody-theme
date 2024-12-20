@@ -52,6 +52,9 @@ class ApiRest
 
         $display_decoded = json_decode(base64_decode($display), true);
 
+        output_error("getPagePreviewApiRest - pll_current_language : " . pll_current_language('locale'), 1);
+        // https://wordpress.org/support/topic/polylang-and-custom-wp-rest-api-endpoints/
+
         if (empty($display_decoded)) {
             $wrapper = ['display_img' => true, 'display_button' => false];
         } elseif (!empty($display_decoded) && empty($ratio)) {
