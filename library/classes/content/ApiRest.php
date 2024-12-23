@@ -50,6 +50,9 @@ class ApiRest
         $ratio = filter_input(INPUT_GET, 'ratio');
         $display = filter_input(INPUT_GET, 'display');
 
+        // set current local to WP to enable __() _e() => 'lang' parameter must be set
+        switch_to_locale(woody_pll_current_locale());
+
         $display_decoded = json_decode(base64_decode($display), true);
 
         if (empty($display_decoded)) {
