@@ -50,10 +50,10 @@ class ApiRest
         $ratio = filter_input(INPUT_GET, 'ratio');
         $display = filter_input(INPUT_GET, 'display');
 
-        $display_decoded = json_decode(base64_decode($display), true);
+        // set current local to WP to enable __() _e() => 'lang' parameter must be set
+        switch_to_locale(woody_pll_current_locale());
 
-        output_error("getPagePreviewApiRest - pll_current_language : " . pll_current_language('locale'), 1);
-        // https://wordpress.org/support/topic/polylang-and-custom-wp-rest-api-endpoints/
+        $display_decoded = json_decode(base64_decode($display), true);
 
         if (empty($display_decoded)) {
             $wrapper = ['display_img' => true, 'display_button' => false];
