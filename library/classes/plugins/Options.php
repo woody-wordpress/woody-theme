@@ -364,7 +364,6 @@ class Options
             'monitor_types' => [
                 'post',
                 'page',
-                'touristic_sheet',
                 'short_link',
                 'trash',
                 'woody_rdbk_leaflets',

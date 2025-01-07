@@ -105,6 +105,8 @@ class Roles
             }
         }
 
+        $vars = apply_filters("woody_protected_form_data", $vars);
+
         return \Timber::compile('parts\protected_post.twig', $vars);
     }
 
