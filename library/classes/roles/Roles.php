@@ -120,7 +120,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'edit_themes' => [
                 'administrator' => false,
@@ -128,7 +127,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'activate_plugins' => [
                 'administrator' => true,
@@ -136,7 +134,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'edit_plugins' => [
                 'administrator' => true,
@@ -144,7 +141,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'edit_users' => [
                 'administrator' => false,
@@ -152,7 +148,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'edit_files' => [
                 'administrator' => true,
@@ -160,7 +155,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'manage_options' => [
                 'administrator' => true,
@@ -168,7 +162,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'moderate_comments' => [
                 'administrator' => false,
@@ -176,7 +169,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'manage_categories' => [
                 'administrator' => true,
@@ -184,7 +176,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'manage_links' => [
                 'administrator' => false,
@@ -192,7 +183,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'upload_files' => [
                 'administrator' => true,
@@ -200,7 +190,6 @@ class Roles
                 'redactor' => true,
                 'contributor' => true,
                 'translator' => true,
-                'mediatheque' => true,
             ],
             'import' => [
                 'administrator' => false,
@@ -208,7 +197,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'unfiltered_html' => [
                 'administrator' => true,
@@ -216,7 +204,6 @@ class Roles
                 'redactor' => true,
                 'contributor' => true,
                 'translator' => true,
-                'mediatheque' => false,
             ],
             'edit_posts' => [
                 'administrator' => true,
@@ -224,7 +211,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => true,
-                'mediatheque' => false,
             ],
             'edit_others_posts' => [
                 'administrator' => true,
@@ -232,7 +218,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => true,
-                'mediatheque' => false,
             ],
             'edit_published_posts' => [
                 'administrator' => true,
@@ -240,7 +225,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => true,
-                'mediatheque' => false,
             ],
             'publish_posts' => [
                 'administrator' => true,
@@ -248,7 +232,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => true,
-                'mediatheque' => false,
             ],
             'edit_pages' => [
                 'administrator' => true,
@@ -256,7 +239,6 @@ class Roles
                 'redactor' => true,
                 'contributor' => true,
                 'translator' => true,
-                'mediatheque' => false,
             ],
             'read' => [
                 'administrator' => true,
@@ -272,7 +254,6 @@ class Roles
                 'redactor' => true,
                 'contributor' => true,
                 'translator' => true,
-                'mediatheque' => false,
             ],
             'edit_published_pages' => [
                 'administrator' => true,
@@ -280,7 +261,6 @@ class Roles
                 'redactor' => true,
                 'contributor' => true,
                 'translator' => true,
-                'mediatheque' => false,
             ],
             'publish_pages' => [
                 'administrator' => true,
@@ -288,7 +268,6 @@ class Roles
                 'redactor' => true,
                 'contributor' => false,
                 'translator' => true,
-                'mediatheque' => false,
             ],
             'delete_pages' => [
                 'administrator' => true,
@@ -296,7 +275,6 @@ class Roles
                 'redactor' => true,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'delete_others_pages' => [
                 'administrator' => true,
@@ -304,7 +282,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'delete_published_pages' => [
                 'administrator' => true,
@@ -312,7 +289,6 @@ class Roles
                 'redactor' => true,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'delete_posts' => [
                 'administrator' => true,
@@ -320,7 +296,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'delete_others_posts' => [
                 'administrator' => true,
@@ -328,7 +303,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'delete_published_posts' => [
                 'administrator' => true,
@@ -336,7 +310,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'delete_private_posts' => [
                 'administrator' => true,
@@ -344,7 +317,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'edit_private_posts' => [
                 'administrator' => true,
@@ -352,7 +324,6 @@ class Roles
                 'redactor' => true,
                 'contributor' => true,
                 'translator' => true,
-                'mediatheque' => false,
             ],
             'read_private_posts' => [
                 'administrator' => true,
@@ -360,7 +331,6 @@ class Roles
                 'redactor' => true,
                 'contributor' => false,
                 'translator' => true,
-                'mediatheque' => false,
             ],
             'delete_private_pages' => [
                 'administrator' => true,
@@ -368,7 +338,6 @@ class Roles
                 'redactor' => true,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'edit_private_pages' => [
                 'administrator' => true,
@@ -376,7 +345,6 @@ class Roles
                 'redactor' => true,
                 'contributor' => true,
                 'translator' => true,
-                'mediatheque' => false,
             ],
             'read_private_pages' => [
                 'administrator' => true,
@@ -384,7 +352,6 @@ class Roles
                 'redactor' => true,
                 'contributor' => false,
                 'translator' => true,
-                'mediatheque' => false,
             ],
             'delete_users' => [
                 'administrator' => true,
@@ -392,7 +359,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'create_users' => [
                 'administrator' => false,
@@ -400,7 +366,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'unfiltered_upload' => [
                 'administrator' => true,
@@ -416,7 +381,6 @@ class Roles
                 'redactor' => true,
                 'contributor' => false,
                 'translator' => true,
-                'mediatheque' => false,
             ],
             'update_plugins' => [
                 'administrator' => false,
@@ -424,7 +388,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'delete_plugins' => [
                 'administrator' => false,
@@ -432,7 +395,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'install_plugins' => [
                 'administrator' => false,
@@ -440,7 +402,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'update_themes' => [
                 'administrator' => false,
@@ -448,7 +409,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'install_themes' => [
                 'administrator' => false,
@@ -456,7 +416,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'update_core' => [
                 'administrator' => false,
@@ -464,7 +423,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'list_users' => [
                 'administrator' => true,
@@ -472,7 +430,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'remove_users' => [
                 'administrator' => true,
@@ -480,7 +437,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'add_users' => [
                 'administrator' => false,
@@ -488,7 +444,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'promote_users' => [
                 'administrator' => false,
@@ -496,7 +451,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'edit_theme_options' => [
                 'administrator' => true,
@@ -504,7 +458,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'delete_themes' => [
                 'administrator' => false,
@@ -512,7 +465,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'export' => [
                 'administrator' => false,
@@ -520,7 +472,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'edit_comment' => [
                 'administrator' => false,
@@ -528,7 +479,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'approve_comment' => [
                 'administrator' => false,
@@ -536,7 +486,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'unapprove_comment' => [
                 'administrator' => false,
@@ -544,7 +493,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'reply_comment' => [
                 'administrator' => false,
@@ -552,7 +500,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'quick_edit_comment' => [
                 'administrator' => false,
@@ -560,7 +507,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'spam_comment' => [
                 'administrator' => false,
@@ -568,7 +514,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'unspam_comment' => [
                 'administrator' => false,
@@ -576,7 +521,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'trash_comment' => [
                 'administrator' => false,
@@ -584,7 +528,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'untrash_comment' => [
                 'administrator' => false,
@@ -592,7 +535,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'delete_comment' => [
                 'administrator' => false,
@@ -600,7 +542,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'edit_permalink' => [
                 'administrator' => true,
@@ -608,7 +549,6 @@ class Roles
                 'redactor' => true,
                 'contributor' => true,
                 'translator' => true,
-                'mediatheque' => false,
             ],
 
             // Woody Caps
@@ -618,7 +558,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'woody_instagram' => [
                 'administrator' => true,
@@ -626,7 +565,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'woody_pages' => [
                 'administrator' => true,
@@ -634,7 +572,6 @@ class Roles
                 'redactor' => true,
                 'contributor' => true,
                 'translator' => true,
-                'mediatheque' => false,
             ],
             'woody_process_drupal_import' => [
                 'administrator' => true,
@@ -642,7 +579,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'woody_process_csv_edit' => [
                 'administrator' => true,
@@ -650,7 +586,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'woody_hawwwai' => [
                 'administrator' => true,
@@ -658,7 +593,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'woody_process_convert_to_geojson' => [
                 'administrator' => true,
@@ -666,7 +600,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'woody_topic' => [
                 'administrator' => true,
@@ -674,7 +607,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'woody_restrictions' => [
                 'administrator' => true,
@@ -682,7 +614,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'woody_seo' => [
                 'administrator' => true,
@@ -690,7 +621,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'woody_settings' => [
                 'administrator' => true,
@@ -698,7 +628,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'woody_menus' => [
                 'administrator' => true,
@@ -706,7 +635,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
 
             // Taxonomies
@@ -716,7 +644,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'Editer les thématiques' => [
                 'administrator' => true,
@@ -724,7 +651,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'Supprimer les thématiques' => [
                 'administrator' => true,
@@ -732,7 +658,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'Assigner les thématiques' => [
                 'administrator' => true,
@@ -740,7 +665,6 @@ class Roles
                 'redactor' => true,
                 'contributor' => true,
                 'translator' => true,
-                'mediatheque' => false,
             ],
             'Configurer les lieux' => [
                 'administrator' => true,
@@ -748,7 +672,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'Editer les lieux' => [
                 'administrator' => true,
@@ -756,7 +679,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'Supprimer les lieux' => [
                 'administrator' => true,
@@ -764,7 +686,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'Assigner les lieux' => [
                 'administrator' => true,
@@ -772,7 +693,6 @@ class Roles
                 'redactor' => true,
                 'contributor' => true,
                 'translator' => true,
-                'mediatheque' => false,
             ],
             'Configurer les circonstances' => [
                 'administrator' => true,
@@ -780,7 +700,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'Editer les circonstances' => [
                 'administrator' => true,
@@ -788,7 +707,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'Supprimer les circonstances' => [
                 'administrator' => true,
@@ -796,7 +714,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'Assigner les circonstances' => [
                 'administrator' => true,
@@ -836,7 +753,6 @@ class Roles
                 'redactor' => true,
                 'contributor' => true,
                 'translator' => true,
-                'mediatheque' => false,
             ],
             'Configurer les catégories de médias' => [
                 'administrator' => true,
@@ -844,7 +760,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'Editer les catégories de médias' => [
                 'administrator' => true,
@@ -852,7 +767,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'Supprimer les catégories de médias' => [
                 'administrator' => true,
@@ -860,7 +774,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'Assigner les catégories de médias' => [
                 'administrator' => true,
@@ -868,7 +781,6 @@ class Roles
                 'redactor' => true,
                 'contributor' => true,
                 'translator' => false,
-                'mediatheque' => true,
             ],
             'Configurer les hashtags' => [
                 'administrator' => true,
@@ -876,7 +788,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'Editer les hashtags' => [
                 'administrator' => true,
@@ -884,7 +795,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'Supprimer les hashtags' => [
                 'administrator' => true,
@@ -892,7 +802,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'Assigner les hashtags' => [
                 'administrator' => true,
@@ -900,7 +809,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'Configurer les types de publications' => [
                 'administrator' => true,
@@ -908,7 +816,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'Editer les types de publications' => [
                 'administrator' => true,
@@ -916,7 +823,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'Supprimer les types de publications' => [
                 'administrator' => true,
@@ -924,7 +830,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             "Configurer les catégories d'expression" => [
                 'administrator' => true,
@@ -932,7 +837,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             "Editer les catégories d'expression" => [
                 'administrator' => true,
@@ -940,7 +844,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             "Supprimer les catégories d'expression" => [
                 'administrator' => true,
@@ -948,7 +851,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             "Assigner les catégories d'expression" => [
                 'administrator' => true,
@@ -956,7 +858,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'Configurer les catégories de profil' => [
                 'administrator' => true,
@@ -964,7 +865,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'Editer les catégories de profil' => [
                 'administrator' => true,
@@ -972,7 +872,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'Supprimer les catégories de profil' => [
                 'administrator' => true,
@@ -980,7 +879,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'Assigner les catégories de profil' => [
                 'administrator' => true,
@@ -988,7 +886,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
 
             // Duplicate
@@ -998,7 +895,6 @@ class Roles
                 'redactor' => true,
                 'contributor' => true,
                 'translator' => false,
-                'mediatheque' => false,
             ],
 
             // Query Monitor
@@ -1008,7 +904,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
 
             // Members
@@ -1018,7 +913,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'list_roles' => [
                 'administrator' => true,
@@ -1026,7 +920,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'create_roles' => [
                 'administrator' => false,
@@ -1034,7 +927,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'delete_roles' => [
                 'administrator' => false,
@@ -1042,7 +934,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'edit_roles' => [
                 'administrator' => true,
@@ -1050,7 +941,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
 
             // Custom
@@ -1060,7 +950,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
             'customize' => [
                 'administrator' => false,
@@ -1068,7 +957,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
 
             // Redirection
@@ -1078,7 +966,6 @@ class Roles
                 'redactor' => false,
                 'contributor' => false,
                 'translator' => false,
-                'mediatheque' => false,
             ],
         ];
 

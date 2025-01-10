@@ -1072,44 +1072,6 @@
                             "maxlength": ""
                         },
                         {
-                            "key": "field_6697935e06ca8",
-                            "label": "Paramètres de la carte",
-                            "name": "",
-                            "type": "accordion",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "open": 0,
-                            "multi_expand": 0,
-                            "endpoint": 0
-                        },
-                        {
-                            "key": "field_6697936984719",
-                            "label": "Paramètres de carte",
-                            "name": "focus_map_params",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "clone": [
-                                "field_5c9e22f9f8ea2"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        },
-                        {
                             "key": "field_66979372d0350",
                             "label": "Options avancées",
                             "name": "",
@@ -1569,44 +1531,6 @@
             "message": "Choisir une mise en page",
             "new_lines": "wpautop",
             "esc_html": 0
-        },
-        {
-            "key": "field_66976c04c671e",
-            "label": "Paramètres de la carte",
-            "name": "",
-            "type": "accordion",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "open": 0,
-            "multi_expand": 0,
-            "endpoint": 0
-        },
-        {
-            "key": "field_66976c0bba786",
-            "label": "Paramètres de carte",
-            "name": "focus_map_params",
-            "type": "clone",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "clone": [
-                "field_5c9e22f9f8ea2"
-            ],
-            "display": "seamless",
-            "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0
         },
         {
             "key": "field_66976c127bfac",

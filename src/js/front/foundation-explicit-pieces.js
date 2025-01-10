@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
 import { Foundation } from 'foundation-sites/js/foundation.core';
-Foundation.addToJquery( $ );
+Foundation.addToJquery($);
 
 // Add Foundation Utils to Foundation global namespace for backwards
 // compatibility.
@@ -41,10 +41,11 @@ Foundation.addToJquery( $ );
 // Foundation.plugin(Abide, 'Abide');
 
 // ------------------------------------------------------------------
-// L'instanciation des accordions est faites depuis Woody Library (accordion.js) pour le support des ancres dans les accordions
+// TODO: L'instanciation des accordions était faites depuis Woody Library (accordion.js) pour le support des ancres dans les accordions
+// Cela ne fonctionnait plus avec la nouvelle compilation JS. A voir pour le remettre en place
 // ------------------------------------------------------------------
-// import { Accordion } from 'foundation-sites/js/foundation.accordion';
-// Foundation.plugin( Accordion, 'Accordion' );
+import { Accordion } from 'foundation-sites/js/foundation.accordion';
+Foundation.plugin(Accordion, 'Accordion');
 
 // import { AccordionMenu } from 'foundation-sites/js/foundation.accordionMenu';
 // Foundation.plugin(AccordionMenu, 'AccordionMenu');
@@ -53,10 +54,10 @@ import { Drilldown } from 'foundation-sites/js/foundation.drilldown';
 Foundation.plugin(Drilldown, 'Drilldown');
 
 import { Dropdown } from 'foundation-sites/js/foundation.dropdown';
-Foundation.plugin( Dropdown, 'Dropdown' );
+Foundation.plugin(Dropdown, 'Dropdown');
 
 import { DropdownMenu } from 'foundation-sites/js/foundation.dropdownMenu';
-Foundation.plugin( DropdownMenu, 'DropdownMenu' );
+Foundation.plugin(DropdownMenu, 'DropdownMenu');
 
 // import { Equalizer } from 'foundation-sites/js/foundation.equalizer';
 // Foundation.plugin( Equalizer, 'Equalizer' );
@@ -68,19 +69,19 @@ Foundation.plugin( DropdownMenu, 'DropdownMenu' );
 // Foundation.plugin(Magellan, 'Magellan');
 
 import { OffCanvas } from 'foundation-sites/js/foundation.offcanvas';
-Foundation.plugin( OffCanvas, 'OffCanvas' );
+Foundation.plugin(OffCanvas, 'OffCanvas');
 
 // import { Orbit } from 'foundation-sites/js/foundation.orbit';
 // Foundation.plugin(Orbit, 'Orbit');
 
 import { ResponsiveMenu } from 'foundation-sites/js/foundation.responsiveMenu';
-Foundation.plugin( ResponsiveMenu, 'ResponsiveMenu' );
+Foundation.plugin(ResponsiveMenu, 'ResponsiveMenu');
 
 import { ResponsiveToggle } from 'foundation-sites/js/foundation.responsiveToggle';
-Foundation.plugin( ResponsiveToggle, 'ResponsiveToggle' );
+Foundation.plugin(ResponsiveToggle, 'ResponsiveToggle');
 
 import { Reveal } from 'foundation-sites/js/foundation.reveal';
-Foundation.plugin( Reveal, 'Reveal' );
+Foundation.plugin(Reveal, 'Reveal');
 
 // import { Slider } from 'foundation-sites/js/foundation.slider';
 // Foundation.plugin(Slider, 'Slider');
@@ -89,18 +90,18 @@ Foundation.plugin( Reveal, 'Reveal' );
 // Foundation.plugin(SmoothScroll, 'SmoothScroll');
 
 import { Sticky } from 'foundation-sites/js/foundation.sticky';
-Foundation.plugin( Sticky, 'Sticky' );
+Foundation.plugin(Sticky, 'Sticky');
 
 import { Tabs } from 'foundation-sites/js/foundation.tabs';
-Foundation.plugin( Tabs, 'Tabs' );
+Foundation.plugin(Tabs, 'Tabs');
 
 // import { Toggler } from 'foundation-sites/js/foundation.toggler';
 // Foundation.plugin(Toggler, 'Toggler');
 
 import { Tooltip } from 'foundation-sites/js/foundation.tooltip';
-Foundation.plugin( Tooltip, 'Tooltip' );
+Foundation.plugin(Tooltip, 'Tooltip');
 
 // import { ResponsiveAccordionTabs } from 'foundation-sites/js/foundation.responsiveAccordionTabs';
 // Foundation.plugin(ResponsiveAccordionTabs, 'ResponsiveAccordionTabs');
 
-$( document ).foundation();
+$(document).foundation();

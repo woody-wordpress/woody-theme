@@ -147,6 +147,14 @@ abstract class WoodyTheme_TemplateAbstract
             $this->globals['site_key'] = WP_SITE_KEY;
         }
 
+        if (empty($this->globals['dist_dir'])) {
+            $this->globals['dist_dir'] = WP_DIST_DIR;
+        }
+
+        if (empty($this->globals['dist_url'])) {
+            $this->globals['dist_url'] = WP_DIST_URL;
+        }
+
         if (!array_key_exists('is_mobile', $this->globals) || !is_bool($this->globals['is_mobile'])) {
             $this->globals['is_mobile'] = $this->context['is_mobile'];
         }
@@ -157,6 +165,10 @@ abstract class WoodyTheme_TemplateAbstract
 
         if (empty($this->globals['context']) && !empty($this->context['page_type'])) {
             $this->globals['context'] = $this->getGlobalContext($this->context['page_type']);
+        }
+
+        if (empty($this->globals['map_keys'])) {
+            $this->globals['map_keys'] = Woody\Modules\Plugin\Plugin::getMapKeys();
         }
     }
 

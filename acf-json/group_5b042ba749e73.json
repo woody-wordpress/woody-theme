@@ -59,34 +59,6 @@
             "placeholder": ""
         },
         {
-            "key": "field_5b042c530f9e4",
-            "label": "Style du marqueur",
-            "name": "marker_style",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "round": "Rond",
-                "pin": "Pin Google Map",
-                "icon_only": "Icône seule"
-            },
-            "default_value": [
-                "pin"
-            ],
-            "allow_null": 0,
-            "multiple": 0,
-            "ui": 1,
-            "ajax": 1,
-            "return_format": "value",
-            "placeholder": ""
-        },
-        {
             "key": "field_5bc5b3fd37205",
             "label": "Couleur du marqueur",
             "name": "marker_color",

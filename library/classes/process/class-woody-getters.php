@@ -1197,10 +1197,8 @@ class WoodyTheme_WoodyGetters
                         break;
 
                     case 'map':
-                        if (empty($filter['list_filter_map_params']['tmaps_confid']) && !empty(get_field('tmaps_confid', 'option'))) {
-                            $filter['list_filter_map_params']['tmaps_confid'] = get_field('tmaps_confid', 'option');
-                        }
-
+                        // REVIEW tmapsV2_refactoring : remove tmaps_confid / parse map_params
+                        $filter['map_params'] = WoodyTheme_WoodyProcessTools::getMapParams($filter['list_filter_map']);
                         $return['the_map'] = $filter;
                         unset($filter_wrapper['list_filters'][$key]);
                         break;

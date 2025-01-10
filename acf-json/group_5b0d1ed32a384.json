@@ -838,7 +838,7 @@
         },
         {
             "key": "field_5c9e2515be493",
-            "label": "Paramètres de la carte",
+            "label": "Carte",
             "name": "",
             "type": "accordion",
             "instructions": "",
@@ -854,25 +854,37 @@
             "endpoint": 0
         },
         {
-            "key": "field_5c9e2538be494",
-            "label": "Paramètres de carte",
-            "name": "focus_map_params",
+            "key": "field_670e3f6d1bced",
+            "label": "Bloc de réglage de carte générique",
+            "name": "",
             "type": "clone",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "65",
                 "class": "",
                 "id": ""
             },
             "clone": [
-                "field_5c9e22f9f8ea2"
+                "field_5b043b217mp70",
+                "field_5b043b217mp71"
             ],
             "display": "seamless",
             "layout": "block",
             "prefix_label": 0,
-            "prefix_name": 0
+            "prefix_name": 0,
+            "_old_fields_description": "Liste des anciens champs utilisés pour le réglage de la carte, peut être utilisé pour du fallback",
+            "_old_fields": [
+                {
+                    "key": "field_5c9e2538be494",
+                    "name": "focus_map_params",
+                    "type": "clone",
+                    "clone": [
+                        "field_5c9e22f9f8ea2"
+                    ]
+                }
+            ]
         },
         {
             "key": "field_5b6821997df66",

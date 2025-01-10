@@ -62,8 +62,6 @@ class WoodyTheme_Template_Topic extends WoodyTheme_TemplateAbstract
 
         // Set a global dist dir
         $this->context['dist_dir'] = WP_DIST_DIR;
-        $this->context['default_marker'] = file_get_contents($this->context['dist_dir'] . '/img/default-marker.svg');
-
         $this->context['woody_components'] = getWoodyTwigPaths();
 
         $this->context['sections'] = [];
@@ -161,11 +159,13 @@ class WoodyTheme_Template_Topic extends WoodyTheme_TemplateAbstract
             'display_button' => true,
             'deal_mode' => false,
             'woody_tpl' => 'blocks-focus-tpl_103',
-            'focus_map_params' => [
+            'map_params_enabled' => false,
+            'map_params' => [
                 'map_zoom_auto' => true,
-                'map_zoom' => '',
+                'map_zoom_auto_max' => '15',
+                'map_zoom' => '10',
                 'map_height' => 'md',
-                'tmaps_confid' => '',
+                'map_provider' => 'tm',
             ],
             'focus_no_padding' => false,
             'visual_effects' => [
