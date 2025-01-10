@@ -479,10 +479,13 @@ function embedProviderThumbnail($embed)
             if (!empty($video_id)) {
                 $return = wp_cache_get('thumbnail_vimeo_' . $video_id);
                 if (empty($return)) {
-                    $response = wp_remote_get('https://vimeo.com/' . $video_id);
+                    $response = wp_remote_get('https://vimeo.com/api/oembed.json?url=https://vimeo.com/' . $video_id);
                     if (is_wp_error($response) || wp_remote_retrieve_response_code($response) === 200) {
-                        if (preg_match('/<meta property="og:image" content="(.*?)"/', $response['body'], $matches)) {
-                            $return = $matches[1];
+                        $response = json_decode($response['body'], true);
+                        if(!empty($response['thumbnail_url'])) {
+                            $return = $response['thumbnail_url'];
+                            $return = preg_replace('/_\\d+x\\d+$/', '', $return);
+                            $return .= '_1024';
                             wp_cache_set('thumbnail_vimeo_' . $video_id, $return);
                         }
                     }
