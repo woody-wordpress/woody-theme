@@ -479,10 +479,13 @@ function embedProviderThumbnail($embed)
             if (!empty($video_id)) {
                 $return = wp_cache_get('thumbnail_vimeo_' . $video_id);
                 if (empty($return)) {
-                    $response = wp_remote_get('https://vimeo.com/' . $video_id);
+                    $response = wp_remote_get('https://vimeo.com/api/oembed.json?url=https://vimeo.com/' . $video_id);
                     if (is_wp_error($response) || wp_remote_retrieve_response_code($response) === 200) {
-                        if (preg_match('/<meta property="og:image" content="(.*?)"/', $response['body'], $matches)) {
-                            $return = $matches[1];
+                        $response = json_decode($response['body'], true);
+                        if(!empty($response['thumbnail_url'])) {
+                            $return = $response['thumbnail_url'];
+                            $return = preg_replace('/_\\d+x\\d+$/', '', $return);
+                            $return .= '_1024';
                             wp_cache_set('thumbnail_vimeo_' . $video_id, $return);
                         }
                     }
@@ -550,7 +553,7 @@ function embedVideo($embed)
             $regex = '/(?<=\/video\/)(.*)/';
             preg_match($regex, $embed, $matches);
             if (!empty($matches[0])) {
-                $return = '<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;"> <iframe style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden" frameborder="0" type="text/html" src="https://www.dailymotion.com/embed/video/'.$matches[0].'" width="100%" height="100%" allowfullscreen > </iframe> </div>';
+                $return = '<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;"> <iframe style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden" frameborder="0" type="text/html" src="https://www.dailymotion.com/embed/video/'.$matches[0].'" width="100%" height="100%" allowfullscreen></iframe></div>';
             }
 
             break;
@@ -558,8 +561,7 @@ function embedVideo($embed)
             $regex = '/(.com\/*)(.*)/';
             preg_match($regex, $embed, $matches);
             if (!empty($matches[2])) {
-                $return = '<iframe src="https://player.vimeo.com/video/'.$matches[2].'?h=b2f1716794" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                    <p><a href="https://vimeo.com/'.$matches[2].'"></a> from <a href="https://vimeo.com/colibris"></a> on <a href="https://vimeo.com">Vimeo</a>.</p>';
+                $return = '<iframe src="https://player.vimeo.com/video/'.$matches[2].'" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
             }
 
             break;
