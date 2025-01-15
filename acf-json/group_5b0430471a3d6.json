@@ -27,7 +27,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "33",
                 "class": "",
                 "id": ""
             },
@@ -46,7 +46,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "33",
                 "class": "",
                 "id": ""
             },
@@ -55,6 +55,30 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "field_657c15a5808a7",
+            "label": "Format",
+            "name": "movie_ratio",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "16_9": "Horizontal (16:9)",
+                "9_16": "Vertical (9:16)"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "16_9",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
         },
         {
             "key": "field_5b043061435ea",
