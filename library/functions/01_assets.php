@@ -485,6 +485,7 @@ function embedProviderThumbnail($embed)
                         if(!empty($response['thumbnail_url'])) {
                             $return = $response['thumbnail_url'];
                             $return = preg_replace('/_\\d+x\\d+$/', '', $return);
+                            $return = preg_replace('/_\\d+$/', '', $return);
                             $return .= '_1024';
                             wp_cache_set('thumbnail_vimeo_' . $video_id, $return);
                         }
