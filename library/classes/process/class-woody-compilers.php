@@ -731,6 +731,7 @@ class WoodyTheme_WoodyCompilers
                 'profile_picture' => get_field('profile_picture', $profile_id),
                 'profile_description' => get_field('profile_description', $profile_id),
                 'profile_expressions' => (empty($profile_expressions)) ? '' : $profile_expressions,
+                'links' => (empty($page_teaser['profile']['links'])) ? [] : $page_teaser['profile']['links']
             ];
         }
 
