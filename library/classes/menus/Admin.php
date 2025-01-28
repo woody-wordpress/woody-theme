@@ -36,6 +36,8 @@ class Admin
         add_action('acf/init', [$this, 'addOptionsPagesFields'], 11);
         add_action('acf/init', [$this, 'addSubmenuFieldGroups'], 11);
 
+        add_action('acf/save_post', [$this, 'saveOptions'], 20);
+
         // TODO: Décommenter pour l'administration en back-office
         // add_action('acf/init', [$this, 'addMenuFieldGroups'], 11);
     }
@@ -355,5 +357,31 @@ class Admin
         }
 
         acf_add_local_field_group($group);
+    }
+
+    public function saveOptions($post_id)
+    {
+        $screen = get_current_screen();
+
+        $acf_pages_options = array_merge($this->pages_options['pages'], $this->pages_options['sub_pages']);
+
+        if(empty($acf_pages_options)) {
+            return;
+        }
+
+        $slugs = array_keys($acf_pages_options);
+
+        if (!empty($screen->id)) {
+            foreach ($slugs as $slug) {
+                if (strpos($screen->id, (string) $slug) !== false) {
+                    $current_id = $slug;
+
+                    if(!empty($current_id)) {
+                        // Purge varnish
+                        do_action('woody_flush_varnish');
+                    }
+                }
+            }
+        }
     }
 }
