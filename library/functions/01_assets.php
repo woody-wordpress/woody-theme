@@ -581,7 +581,7 @@ function embedVideo($embed)
  * @link https://github.com/fightbulc/moment.php
  * @link https://www.php.net/manual/fr/datetime.format.php
  */
-function formatDate($date, $format = 'd F Y', $locale = null)
+function formatDate($date, $format = 'd F Y', $locale = null, $esc_time = null)
 {
     $formated_date = '';
     if (empty($locale)) {
@@ -599,9 +599,14 @@ function formatDate($date, $format = 'd F Y', $locale = null)
     }
 
     \Moment\Moment::setLocale($locale);
-    $m = new \Moment\Moment();
-    $m->setTimezone(date_default_timezone_get());
-    $m->setTimestamp(strtotime($date));
+    if (empty($esc_time)) {
+        $m = new \Moment\Moment();
+        $m->setTimezone(date_default_timezone_get());
+        $m->setTimestamp(strtotime($date));
+    } else {
+        // strtotime creates dates difference: 2025-03-15T00:00:00+01:00 -> 2025-03-14 23:00:00.000000
+        $m = new \Moment\Moment($date);
+    }
 
     return $m->format($format);
 }

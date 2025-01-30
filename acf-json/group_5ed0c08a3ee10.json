@@ -172,6 +172,7 @@
                         "id": ""
                     },
                     "choices": {
+                        "none": "Non renseignée",
                         "AF": "Afghane",
                         "AL": "Albanaise",
                         "DZ": "Algerienne",
@@ -371,7 +372,7 @@
                         "ZM": "Zambienne",
                         "ZW": "Zimbabweenne"
                     },
-                    "default_value": "FR",
+                    "default_value": "none",
                     "allow_null": 0,
                     "multiple": 0,
                     "ui": 1,
