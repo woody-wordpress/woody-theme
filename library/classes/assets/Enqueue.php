@@ -133,6 +133,7 @@ class Enqueue
         $jQuery_version = $this->getJqueryVersion();
         $importmap = apply_filters('woody_importmap_js', [
             'jquery' => get_template_directory_uri() . '/src/lib/custom/jquery@' . $jQuery_version . '.min.mjs',
+            'highcharts' => get_template_directory_uri() . '/src/lib/custom/highcharts-12.1.2/code/es-modules/masters/highcharts.src.js',
             'woody_library_filter' => woody_addon_asset_path('woody-library', 'js/filter.js'),
             'woody_library_woody_component' => woody_addon_asset_path('woody-library', 'js/modules/components/woody-component.mjs'),
             'woody_library_interactive_svg_component' => woody_addon_asset_path('woody-library', 'js/modules/components/interactive-svg/interactive-svg-component.mjs'),
