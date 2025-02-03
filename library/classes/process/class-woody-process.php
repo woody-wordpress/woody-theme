@@ -78,8 +78,9 @@ class WoodyTheme_WoodyProcess
     {
         $return = '';
 
-        // Traitements spécifique en fonction du type de layout
+        $layout['default_marker'] = empty($context['default_marker']) ? '' : $context['default_marker'];
 
+        // Traitements spécifique en fonction du type de layout
         switch ($layout['acf_fc_layout']) {
             case 'manual_focus':
             case 'auto_focus':
@@ -88,7 +89,6 @@ class WoodyTheme_WoodyProcess
             case 'auto_focus_topics':
             case 'focus_trip_components':
             case 'profile_focus':
-            case 'highlights':
                 // TODO: les cases auto_focus_topics + auto_focus_sheets + focus_trip_components doivent être ajoutés via le filtre woody_custom_layout depuis leurs addons respectifs
                 $return = $this->compilers->formatFocusesData($layout, $context['post'], $context['woody_components']);
                 break;
@@ -322,10 +322,6 @@ class WoodyTheme_WoodyProcess
                 }
                 $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
                 break;
-            case 'countdown':
-                $layout['display'] = $this->tools->getDisplayOptions($layout['countdown_bg_params']);
-                $return = \Timber::compile($context['woody_components'][$layout['woody_tpl']], $layout);
-                break;
             default:
 
 
@@ -413,6 +409,7 @@ class WoodyTheme_WoodyProcess
      */
     public function processWoodyQuery($the_post, $query_form, $paginate = false, $uniqid = 0, $ignore_maxnum = false, $posts_in, $filters)
     {
+
         $the_meta_query = [];
         $query_result = new \stdClass();
         $tax_query = [];
@@ -559,6 +556,14 @@ class WoodyTheme_WoodyProcess
             }
         }
 
+        // On retourne les contenus dont le profil est lié
+        if (!empty($query_form['profil_query'])) {
+            $the_meta_query[] = [
+                'key'        => 'linked_profile',
+                'value'        => $query_form['profil_query']
+            ];
+        }
+
         // On trie les contenus en fonction d'un ordre donné
         switch ($query_form['focused_sort']) {
             case 'random':
@@ -593,10 +598,6 @@ class WoodyTheme_WoodyProcess
                     'value' => ''
                 ];
 
-                break;
-            case 'title_asc':
-                $orderby = 'title';
-                $order = 'ASC';
                 break;
             default:
                 $orderby = 'rand';
@@ -679,7 +680,6 @@ class WoodyTheme_WoodyProcess
 
         // Si on ordonne par geoloc, il faut trier les résultats reçus
         $query_result = apply_filters('custom_process_woody_query', $query_result, $query_form, $the_post);
-
         return $query_result;
     }
 
