@@ -384,7 +384,7 @@ abstract class WoodyTheme_TemplateAbstract
             $return = woody_get_permalink($post_id);
         }
 
-        return $return;
+        return apply_filters('woody_canonical_url', $return);
     }
 
     private function setMetadata()
