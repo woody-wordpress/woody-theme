@@ -466,6 +466,8 @@ class WoodyTheme_WoodyCompilers
                             'inclusive' => true
                         ]
                     ];
+                } elseif(strpos($result_key, (string) $the_list['uniqid']) !== false && strpos($result_key, 'lp') !== false  && !empty($input_value)) {
+                    $list_el_wrapper['profil_query'] = $input_value;
                 }
             }
 

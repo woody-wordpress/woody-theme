@@ -559,6 +559,14 @@ class WoodyTheme_WoodyProcess
             }
         }
 
+        // On retourne les contenus dont le profil est lié
+        if (!empty($query_form['profil_query'])) {
+            $the_meta_query[] = [
+                'key'        => 'linked_profile',
+                'value'        => $query_form['profil_query']
+            ];
+        }
+
         // On trie les contenus en fonction d'un ordre donné
         switch ($query_form['focused_sort']) {
             case 'random':
