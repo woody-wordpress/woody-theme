@@ -1224,6 +1224,17 @@ class WoodyTheme_WoodyGetters
                         $return[$key]['filter_name'] = $filter['list_filter_name'];
                         $return[$key]['filter_type'] = $filter['list_filter_type'];
                         break;
+                    case 'profil':
+                        $return[$key]['filter_name'] = $filter['list_filter_name'];
+                        $return[$key]['filter_type'] = $filter['list_filter_type'];
+                        foreach ($filter['list_filter_profil'] as $profil_key => $profil_id) {
+                            $profil = get_post_meta($profil_id);
+                            $return[$key]['list_filter_profil'][$profil_key] = [
+                                'value' => $profil_id,
+                                'label' => $profil['profile_firstname'][0] . ' ' . $profil['profile_lastname'][0],
+                            ];
+                        }
+                        break;
                 }
             }
 

@@ -76,7 +76,8 @@
                         "duration": "Durée séjour",
                         "map": "Carte",
                         "created": "Date de publication",
-                        "keyword": "Mots clés"
+                        "keyword": "Mots clés",
+                        "profil": "Profil"
                     },
                     "default_value": [
                         "taxonomy"
@@ -188,6 +189,36 @@
                     "ajax": 1,
                     "return_format": "array",
                     "placeholder": ""
+                },
+                {
+                    "key": "field_5bc60f5b6c8a8profil",
+                    "label": "Profils liés",
+                    "name": "list_filter_profil",
+                    "type": "post_object",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5bc607c62a89b",
+                                "operator": "==",
+                                "value": "profil"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": [
+                        "profile"
+                    ],
+                    "taxonomy": "",
+                    "return_format": "id",
+                    "multiple": 1,
+                    "allow_null": 0,
+                    "ui": 1
                 },
                 {
                     "key": "field_5bc6e583bd874",
