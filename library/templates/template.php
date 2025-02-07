@@ -369,7 +369,7 @@ abstract class WoodyTheme_TemplateAbstract
     {
         if (!empty(get_field('woodyseo_canonical_url', $post_id))) {
             // S'il y a une url canonique renseignée, elle est prioritaire
-            $return = get_field('woodyseo_canonical_url', $post_id);
+            $permalink = get_field('woodyseo_canonical_url', $post_id);
         } else {
             if (!empty($post_id) && get_post_type($post_id) == 'page') {
                 $page_type = getTermsSlugs($post_id, 'page_type', true);
@@ -381,10 +381,10 @@ abstract class WoodyTheme_TemplateAbstract
                 }
             }
 
-            $return = woody_get_permalink($post_id);
+            $permalink = woody_get_permalink($post_id);
         }
 
-        return apply_filters('woody_canonical_url', $return);
+        return apply_filters('woody_canonical_url', $permalink, $post_id);
     }
 
     private function setMetadata()
