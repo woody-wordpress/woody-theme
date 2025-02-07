@@ -127,30 +127,120 @@ class Enqueue
         return $html;
     }
 
+    /**
+     * Retrieve all declared Woody's JS modules
+     * - their modules will be added to importmap
+     * - 'component' modules will automaticaly be defined when necessary
+     * - 'controller' modules will automaticaly be instanciated when necessary
+     */
+    private function get_woody_js_modules() {
+        static $woody_js_modules = null;
+        if (is_null($woody_js_modules)) {
+            // CDN hosted jQuery placed in the header, as some plugins require that jQuery is loaded in the header.
+            $jQuery_version = $this->getJqueryVersion();
+            $woody_js_modules = [
+                'jquery' => [
+                    'path' => get_template_directory_uri() . '/src/lib/custom/jquery@' . $jQuery_version . '.min.mjs',
+                ],
+                'highcharts' => [
+                    'path' => get_template_directory_uri() . '/src/lib/custom/highcharts-12.1.2/code/es-modules/masters/highcharts.src.js',
+                ],
+                'woody_library_filter' => [
+                    'path' => woody_addon_asset_path('woody-library', 'js/filter.js'),
+                ],
+                'woody_library_summary_component' => [
+                    'path' => woody_addon_asset_path('woody-library', 'js/modules/components/summary/summary-component.mjs'),
+                    // not a really Web Component
+                ],
+                'woody_library_summary_map_manager' => [
+                    'path' => woody_addon_asset_path('woody-library', 'js/modules/managers/summary/summary-map-manager.mjs'),
+                ],
+                'woody_library_summary_accordion_manager' => [
+                    'path' => woody_addon_asset_path('woody-library', 'js/modules/managers/summary/summary-accordion-manager.mjs'),
+                ],
+                'woody_library_woody_component' => [
+                    'path' => woody_addon_asset_path('woody-library', 'js/modules/components/woody-component.mjs'),
+                    // super class - has not to be instanciated directly
+                ],
+                'woody_library_interactive_svg_component' => [
+                    'path' => woody_addon_asset_path('woody-library', 'js/modules/components/interactive-svg/interactive-svg-component.mjs'),
+                    'component' => 'woody-interactive-svg',
+                ],
+                'woody_library_card_uniq_component' => [
+                    'path' => woody_addon_asset_path('woody-library', 'js/modules/components/card/card-uniq-component.mjs'),
+                    'component' => 'woody-card-uniq',
+                ],
+                'woody_library_card_toggler_component' => [
+                    'path' => woody_addon_asset_path('woody-library', 'js/modules/components/card/card-toggler-component.mjs'),
+                    'component' => 'woody-card-toggler',
+                ],
+                'woody_library_card_slider_component' => [
+                    'path' => woody_addon_asset_path('woody-library', 'js/modules/components/card/card-slider-component.mjs'),
+                    'component' => 'woody-card-slider',
+                ],
+                'woody_library_card_map_slider_component' => [
+                    'path' => woody_addon_asset_path('woody-library', 'js/modules/components/card/card-map-slider-component.mjs'),
+                    'component' => 'woody-card-map-slider',
+                ],
+                'woody_library_card_map_manager' => [
+                    'path' => woody_addon_asset_path('woody-library', 'js/modules/managers/card/card-map-manager.mjs'),
+                ],
+                'woody_library_woody_controller' => [
+                    'path' => woody_addon_asset_path('woody-library', 'js/modules/controllers/woody-controller.mjs'),
+                    // super class - has not to be instanciated directly
+                ],
+                'woody_library_focus_controller' => [
+                    'path' => woody_addon_asset_path('woody-library', 'js/modules/controllers/focus/focus-controller.mjs'),
+                    'controller' => 'woody_library_focus_controller',
+                ],
+                'woody_library_focus_map_controller' => [
+                    'path' => woody_addon_asset_path('woody-library', 'js/modules/controllers/focus/focus-map-controller.mjs'),
+                    'controller' => 'woody_library_focus_map_controller',
+                ],
+                'woody_library_focus_svg_controller' => [
+                    'path' => woody_addon_asset_path('woody-library', 'js/modules/controllers/focus/focus-svg-controller.mjs'),
+                    'controller' => 'woody_library_focus_svg_controller',
+                ],
+            ];
+            $woody_js_modules = apply_filters('woody_js_modules', $woody_js_modules);
+        }
+        return $woody_js_modules;
+    }
+
+    /**
+     * Retrieve all declared Woody's JS module components
+     */
+    private function get_woody_js_module_components() {
+        $woody_js_modules = $this->get_woody_js_modules();
+        return array_filter($woody_js_modules, function ($module) {
+            return array_key_exists('component', $module);
+        });
+    }
+
+    /**
+     * Retrieve all declared Woody's JS module controllers
+     */
+    private function get_woody_js_module_controllers() {
+        $woody_js_modules = $this->get_woody_js_modules();
+        return array_filter($woody_js_modules, function ($module) {
+            return array_key_exists('controller', $module);
+        });
+    }
+
     public function woodyCustomMeta($head_top)
     {
-        // CDN hosted jQuery placed in the header, as some plugins require that jQuery is loaded in the header.
-        $jQuery_version = $this->getJqueryVersion();
-        $importmap = apply_filters('woody_importmap_js', [
-            'jquery' => get_template_directory_uri() . '/src/lib/custom/jquery@' . $jQuery_version . '.min.mjs',
-            'highcharts' => get_template_directory_uri() . '/src/lib/custom/highcharts-12.1.2/code/es-modules/masters/highcharts.src.js',
-            'woody_library_filter' => woody_addon_asset_path('woody-library', 'js/filter.js'),
-            'woody_library_woody_component' => woody_addon_asset_path('woody-library', 'js/modules/components/woody-component.mjs'),
-            'woody_library_interactive_svg_component' => woody_addon_asset_path('woody-library', 'js/modules/components/interactive-svg/interactive-svg-component.mjs'),
-            'woody_library_summary_component' => woody_addon_asset_path('woody-library', 'js/modules/components/summary/summary-component.mjs'),
-            'woody_library_summary_map_manager' => woody_addon_asset_path('woody-library', 'js/modules/managers/summary/summary-map-manager.mjs'),
-            'woody_library_summary_accordion_manager' => woody_addon_asset_path('woody-library', 'js/modules/managers/summary/summary-accordion-manager.mjs'),
-            'woody_library_card_uniq_component' => woody_addon_asset_path('woody-library', 'js/modules/components/card/card-uniq-component.mjs'),
-            'woody_library_card_toggler_component' => woody_addon_asset_path('woody-library', 'js/modules/components/card/card-toggler-component.mjs'),
-            'woody_library_card_slider_component' => woody_addon_asset_path('woody-library', 'js/modules/components/card/card-slider-component.mjs'),
-            'woody_library_card_map_slider_component' => woody_addon_asset_path('woody-library', 'js/modules/components/card/card-map-slider-component.mjs'),
-            'woody_library_card_map_manager' => woody_addon_asset_path('woody-library', 'js/modules/managers/card/card-map-manager.mjs'),
-            'woody_library_woody_controller' => woody_addon_asset_path('woody-library', 'js/modules/controllers/woody-controller.mjs'),
-            'woody_library_focus_controller' => woody_addon_asset_path('woody-library', 'js/modules/controllers/focus/focus-controller.mjs'),
-            'woody_library_focus_map_controller' => woody_addon_asset_path('woody-library', 'js/modules/controllers/focus/focus-map-controller.mjs'),
-            'woody_library_focus_svg_controller' => woody_addon_asset_path('woody-library', 'js/modules/controllers/focus/focus-svg-controller.mjs'),
-        ]);
-
+        // JS modules importmap
+        $woody_js_modules = $this->get_woody_js_modules();
+        $importmap = [];
+        if (!empty($woody_js_modules)) {
+            foreach ($woody_js_modules as $slug => $module) {
+                if (!isset($module['path'])) {
+                    error_log("Woody JS module '".$slug."' -> path is missed");
+                }
+                $importmap[$slug] = $module['path'];
+            }
+        }
+        $importmap = apply_filters('woody_importmap_js', $importmap);
         if(!empty($importmap)) {
             $head_top[] = '<script type="importmap">' . json_encode(['imports' => $importmap]) . '</script>';
         }
@@ -386,7 +476,17 @@ class Enqueue
             }
         }
 
-        // Enqueue the main Scripts
+        // Enqueue the main modules
+        $main_modules_dependencies = [];
+        $main_modules_dependencies = apply_filters('woody_mainjs_modules_dependencies', $main_modules_dependencies);
+        wp_enqueue_script('main-modules', woody_addon_asset_path('woody-library', 'js/modules/main.mjs'), $main_modules_dependencies, null);
+
+        wp_localize_script('main-modules', 'WoodyMainJsModules', [
+            'components' => $this->get_woody_js_module_components(),
+            'controllers' => $this->get_woody_js_module_controllers(),
+        ]);
+
+        // Enqueue the main scripts
         $dependencies = [
             'jquery',
             'jsdelivr_flatpickr',
@@ -396,12 +496,11 @@ class Enqueue
             'jsdelivr_jscookie',
             'jsdelivr_rellax',
             'wp-i18n',
+            'main-modules',
         ];
-
         if (!$this->isTouristicSheet2018) {
             $dependencies[] = 'jsdelivr_swiper';
         }
-
         $dependencies = apply_filters('woody_mainjs_dependencies', $dependencies);
         wp_enqueue_script('main-javascripts', WP_DIST_URL . $this->assetPath('/js/main.mjs'), $dependencies, null);
 
