@@ -477,8 +477,7 @@ class Enqueue
         }
 
         // Enqueue the main modules
-        $main_modules_dependencies = [];
-        $main_modules_dependencies = apply_filters('woody_mainjs_modules_dependencies', $main_modules_dependencies);
+        $main_modules_dependencies = apply_filters('woody_mainjs_modules_dependencies', []);
         wp_enqueue_script('main-modules', woody_addon_asset_path('woody-library', 'js/modules/main.mjs'), $main_modules_dependencies, null);
 
         wp_localize_script('main-modules', 'WoodyMainJsModules', [
