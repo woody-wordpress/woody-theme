@@ -237,6 +237,9 @@ class Enqueue
                 if (!isset($module['path'])) {
                     error_log("Woody JS module '".$slug."' -> path is missed");
                 }
+                if (isset($module['importmap']) && $module['importmap'] === false) {
+                    continue;
+                }
                 $importmap[$slug] = $module['path'];
             }
         }
