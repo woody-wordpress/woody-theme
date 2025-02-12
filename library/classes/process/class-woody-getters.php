@@ -932,6 +932,13 @@ class WoodyTheme_WoodyGetters
                     $data['website'] = $sheet_item['contacts']['establishment']['websites'][0];
                 }
             }
+
+            if (in_array('phone', $wrapper['display_elements'])) {
+                console_log($sheet_item);
+                if (!empty($sheet_item['contacts']['establishment']['phones']) && !empty($sheet_item['contacts']['establishment']['phones'][0])) {
+                    $data['phone'] = $sheet_item['contacts']['establishment']['phones'][0];
+                }
+            }
         }
 
         if (!empty($wrapper['display_button'])) {
