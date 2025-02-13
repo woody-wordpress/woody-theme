@@ -148,19 +148,19 @@ class Enqueue
                 'woody_library_filter' => [
                     'path' => woody_addon_asset_path('woody-library', 'js/filter.js'),
                 ],
-                'woody_library_summary_component' => [
-                    'path' => woody_addon_asset_path('woody-library', 'js/modules/components/summary/summary-component.mjs'),
-                    // not a really Web Component
+                'woody_library_woody_component' => [
+                    'path' => woody_addon_asset_path('woody-library', 'js/modules/components/woody-component.mjs'),
+                    // super class - has not to be instanciated directly
+                ],
+                'woody_library_woody_controller' => [
+                    'path' => woody_addon_asset_path('woody-library', 'js/modules/controllers/woody-controller.mjs'),
+                    // super class - has not to be instanciated directly
                 ],
                 'woody_library_summary_map_manager' => [
                     'path' => woody_addon_asset_path('woody-library', 'js/modules/managers/summary/summary-map-manager.mjs'),
                 ],
                 'woody_library_summary_accordion_manager' => [
                     'path' => woody_addon_asset_path('woody-library', 'js/modules/managers/summary/summary-accordion-manager.mjs'),
-                ],
-                'woody_library_woody_component' => [
-                    'path' => woody_addon_asset_path('woody-library', 'js/modules/components/woody-component.mjs'),
-                    // super class - has not to be instanciated directly
                 ],
                 'woody_library_interactive_svg_component' => [
                     'path' => woody_addon_asset_path('woody-library', 'js/modules/components/interactive-svg/interactive-svg-component.mjs'),
@@ -185,9 +185,9 @@ class Enqueue
                 'woody_library_card_map_manager' => [
                     'path' => woody_addon_asset_path('woody-library', 'js/modules/managers/card/card-map-manager.mjs'),
                 ],
-                'woody_library_woody_controller' => [
-                    'path' => woody_addon_asset_path('woody-library', 'js/modules/controllers/woody-controller.mjs'),
-                    // super class - has not to be instanciated directly
+                'woody_library_summary_controller' => [
+                    'path' => woody_addon_asset_path('woody-library', 'js/modules/controllers/summary/summary-controller.mjs'),
+                    'controller' => 'woody_library_summary_controller'
                 ],
                 'woody_library_focus_controller' => [
                     'path' => woody_addon_asset_path('woody-library', 'js/modules/controllers/focus/focus-controller.mjs'),
@@ -205,26 +205,6 @@ class Enqueue
             $woody_js_modules = apply_filters('woody_js_modules', $woody_js_modules);
         }
         return $woody_js_modules;
-    }
-
-    /**
-     * Retrieve all declared Woody's JS module components
-     */
-    private function get_woody_js_module_components() {
-        $woody_js_modules = $this->get_woody_js_modules();
-        return array_filter($woody_js_modules, function ($module) {
-            return array_key_exists('component', $module);
-        });
-    }
-
-    /**
-     * Retrieve all declared Woody's JS module controllers
-     */
-    private function get_woody_js_module_controllers() {
-        $woody_js_modules = $this->get_woody_js_modules();
-        return array_filter($woody_js_modules, function ($module) {
-            return array_key_exists('controller', $module);
-        });
     }
 
     public function woodyCustomMeta($head_top)
@@ -482,11 +462,7 @@ class Enqueue
         // Enqueue the main modules
         $main_modules_dependencies = apply_filters('woody_mainjs_modules_dependencies', []);
         wp_enqueue_script('main-modules', woody_addon_asset_path('woody-library', 'js/modules/main.mjs'), $main_modules_dependencies, null);
-
-        wp_localize_script('main-modules', 'WoodyMainJsModules', [
-            'components' => $this->get_woody_js_module_components(),
-            'controllers' => $this->get_woody_js_module_controllers(),
-        ]);
+        wp_localize_script('main-modules', 'WoodyMainJsModules', $this->get_woody_js_modules());
 
         // Enqueue the main scripts
         $dependencies = [
