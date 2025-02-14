@@ -206,14 +206,19 @@ class WoodyTheme_WoodyCompilers
                     foreach ($wrapper['routes'][$key]['features'] as $f_key => $feature) {
                         $wrapper['routes'][$key]['features'][$f_key]['route'] = true;
 
+                        // default styles (based on :root css variables)
+                        $wrapper['routes'][$key]['features'][$f_key]['properties']['fill'] = "--geojson-fill-color";
+                        $wrapper['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] = "--geojson-fill-opacity";
+                        $wrapper['routes'][$key]['features'][$f_key]['properties']['stroke'] = "--geojson-stroke-color";
+                        $wrapper['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = "--geojson-stroke-width";
+                        $wrapper['routes'][$key]['features'][$f_key]['properties']['stroke-opacity'] = "--geojson-stroke-opacity";
+
+                        // overrided styles
                         if ($parameters === true) {
                             $wrapper['routes'][$key]['features'][$f_key]['properties']['fill'] = $fill_color;
                             $wrapper['routes'][$key]['features'][$f_key]['properties']['stroke'] = $route_color;
                             $wrapper['routes'][$key]['features'][$f_key]['properties']['stroke-width'] = (float) $stroke_thickness;
                         }
-
-                        $fill_opacity = $wrapper['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] ?? 0;
-                        $wrapper['routes'][$key]['features'][$f_key]['properties']['fill-opacity'] = $fill_opacity == 0 ? 0.5 : $fill_opacity;
 
                         // Route Fields aren't supposed to have markers.
                         if ($feature['geometry']['type'] == "Point") {
