@@ -451,7 +451,8 @@
                 "_places": "Lieu principal(e)",
                 "_seasons": "Circonstance principal(e)",
                 "_targets": "Cible principal(e)",
-                "created": "Date de publication"
+                "created": "Date de publication",
+                "favorites": "Favoris"
             },
             "allow_custom": 0,
             "default_value": [
