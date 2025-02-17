@@ -644,6 +644,11 @@ class WoodyTheme_WoodyGetters
                 }
             }
 
+            // Ajout du coeur de favoris
+            if (in_array('favorites', $wrapper['display_elements'])) {
+                $data['favorites'] = true;
+            }
+
             foreach ($wrapper['display_elements'] as $display) {
                 if (strpos($display, '_') === 0) {
                     $tax = ltrim($display, '_');
@@ -813,6 +818,11 @@ class WoodyTheme_WoodyGetters
             $data['movie'] = $item['movie'];
         }
 
+        // Ajout du coeur de favoris
+        if (in_array('favorites', $wrapper['display_elements'])) {
+            $data['favorites'] = true;
+        }
+
         $data['cardDisplayOptions'] = $wrapper['display_elements'];
 
         return $data;
@@ -925,6 +935,11 @@ class WoodyTheme_WoodyGetters
                         'text' => __('Appeler', 'woody-theme')
                     ];
                 }
+            }
+
+            // Ajout du coeur de favoris
+            if (in_array('favorites', $wrapper['display_elements'])) {
+                $data['favorites'] = true;
             }
 
             if (in_array('website', $wrapper['display_elements'])) {
