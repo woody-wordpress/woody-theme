@@ -348,7 +348,7 @@ class Enqueue
 
             // TODO tmapsV2_refactoring : remove old map libraries
             if (isset($map_keys['gmKey'])) {
-                if (!$this->isTouristicPlaylist) {
+                if (!$this->isTouristicPlaylist) { // do not load gmaps on playlist => improve performance
                     wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?key=' . $map_keys['gmKey'] . '&v=3.33&libraries=geometry,places', [], null);
                 }
             } elseif ($this->isTouristicSheet || $this->isRoadBookSheet) { // absolutely needed in angular
