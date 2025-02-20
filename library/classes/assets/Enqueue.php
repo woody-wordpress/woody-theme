@@ -348,7 +348,9 @@ class Enqueue
 
             // TODO tmapsV2_refactoring : remove old map libraries
             if (isset($map_keys['gmKey'])) {
-                wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?key=' . $map_keys['gmKey'] . '&v=3.33&libraries=geometry,places', [], null);
+                if (!$this->isTouristicPlaylist) {
+                    wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?key=' . $map_keys['gmKey'] . '&v=3.33&libraries=geometry,places', [], null);
+                }
             } elseif ($this->isTouristicSheet || $this->isRoadBookSheet) { // absolutely needed in angular
                 wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?v=3.33&libraries=geometry,places', [], null);
             }
