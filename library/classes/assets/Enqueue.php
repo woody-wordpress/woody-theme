@@ -172,7 +172,8 @@ class Enqueue
         // If preprod render is eneeded use $apirender_base_uri = 'https://api.tourism-system.rc-preprod.com/render';
         switch (WP_ENV) {
             case 'preprod':
-                $jsModeSuffix = 'debug';
+                // $jsModeSuffix = 'debug'; => bug bretagne preprod
+                $jsModeSuffix = 'min';
                 $apirender_base_uri = 'https://api.tourism-system.com/render';
                 break;
             case 'dev':
