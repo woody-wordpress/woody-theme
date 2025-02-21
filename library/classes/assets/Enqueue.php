@@ -261,7 +261,8 @@ class Enqueue
         // TODO : in DEV, if jsModeSuffix is 'debug', "hwConfig undefined" error occurs - @rudy
         switch (WP_ENV) {
             case 'preprod':
-                $jsModeSuffix = 'debug';
+                // $jsModeSuffix = 'debug'; => bug bretagne preprod
+                $jsModeSuffix = 'min';
                 $apirender_base_uri = 'https://api.tourism-system.com/render';
                 break;
             case 'dev':
@@ -348,7 +349,8 @@ class Enqueue
 
             // TODO tmapsV2_refactoring : remove old map libraries
             if (isset($map_keys['gmKey'])) {
-                wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?key=' . $map_keys['gmKey'] . '&v=3.33&libraries=geometry,places', [], null);
+                // do not load gmaps => improve performance and it's no longer used by tmaps
+                // wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?key=' . $map_keys['gmKey'] . '&v=3.33&libraries=geometry,places', [], null);
             } elseif ($this->isTouristicSheet || $this->isRoadBookSheet) { // absolutely needed in angular
                 wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?v=3.33&libraries=geometry,places', [], null);
             }
