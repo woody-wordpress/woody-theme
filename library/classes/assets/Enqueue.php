@@ -261,7 +261,8 @@ class Enqueue
         // TODO : in DEV, if jsModeSuffix is 'debug', "hwConfig undefined" error occurs - @rudy
         switch (WP_ENV) {
             case 'preprod':
-                $jsModeSuffix = 'debug';
+                // $jsModeSuffix = 'debug'; => bug bretagne preprod
+                $jsModeSuffix = 'min';
                 $apirender_base_uri = 'https://api.tourism-system.com/render';
                 break;
             case 'dev':
