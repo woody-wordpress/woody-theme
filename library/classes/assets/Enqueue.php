@@ -172,7 +172,8 @@ class Enqueue
         // If preprod render is eneeded use $apirender_base_uri = 'https://api.tourism-system.rc-preprod.com/render';
         switch (WP_ENV) {
             case 'preprod':
-                $jsModeSuffix = 'debug';
+                // $jsModeSuffix = 'debug'; => bug bretagne preprod
+                $jsModeSuffix = 'min';
                 $apirender_base_uri = 'https://api.tourism-system.com/render';
                 break;
             case 'dev':
@@ -259,7 +260,9 @@ class Enqueue
         // }
 
         if (isset($map_keys['gmKey'])) {
-            wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?key=' . $map_keys['gmKey'] . '&v=3.33&libraries=geometry,places', [], null);
+            if (!$this->isTouristicPlaylist) { // do not load gmaps on playlist => improve performance
+                wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?key=' . $map_keys['gmKey'] . '&v=3.33&libraries=geometry,places', [], null);
+            }
         } elseif ($this->isTouristicSheet || $this->isRoadBookSheet) { // absolutely needed in angular
             wp_enqueue_script('gg_maps', 'https://maps.googleapis.com/maps/api/js?v=3.33&libraries=geometry,places', [], null);
         }
