@@ -30,9 +30,11 @@
         var name = "";
         var id = "";
         var clone;
+        let in_light_section = false;
 
         $(document).on('click', '.acf-button[data-name="add-layout"]', function () {
             addlayoutbutton = $(this);
+            in_light_section = addlayoutbutton.closest('[data-name="light_section_content"]').length > 0 ? true : false;
             name = addlayoutbutton.closest('.acf-flexible-content').find('input[type="hidden"]').attr('name');
             clone = addlayoutbutton.closest('.acf-flexible-content').find('.clones');
             id = name.replace(/\]\[/g, '-');
@@ -55,12 +57,11 @@
                 });
 
                 if (layouts.length <= 0 || none) {
-
                     if (!button.getAttribute('hasListener')) {
                         button.addEventListener('click', (e) => {
-
                             let layouts = clone.find('div[data-layout="' + button.dataset.layout + '"]');
                             let none = true;
+                            let acf_key = in_light_section ? 'field_5b91294459c24' : 'field_5b043f0525968';
                             layouts.each(function () {
                                 // Si le layout est enfant de light section_content alors, ça ne compte pas ce n'est pas un clone qui nous intéresse
                                 if ($(this).closest('[data-name="light_section_content"]').length == 0) {
@@ -68,13 +69,15 @@
                                 }
                             });
 
-                            if (layouts.length <= 0 || none) {
+                            // Si on a pas de clone, on fait un appel ajax pour les récupérer
+                            // On ne fait pas d'appel Ajax quand on est dans le cas d'une section content (on a déjà tous les clones)
+                            if ((layouts.length <= 0 || none) && !in_light_section && false) {
                                 $.ajax({
                                     url: ajaxurl,
                                     data: {
                                         action: 'generate_layout_acf_clone',
                                         layout: button.dataset.layout,
-                                        key: 'field_5b043f0525968'
+                                        key: acf_key
                                     },
                                     type: 'GET',
                                     success: function (response) {
@@ -85,7 +88,7 @@
                                         // Add clone
                                         clone.append(response);
 
-                                        let fields = acf.getFields({ key: 'field_5b043f0525968' });
+                                        let fields = acf.getFields({ key: acf_key });
                                         let field;
                                         fields.forEach(element => {
                                             if (element.$el[0] == clone.closest('.acf-field-flexible-content')[0]) {
