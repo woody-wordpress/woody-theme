@@ -200,7 +200,9 @@ class Enqueue
         }
 
         if (isset($map_keys['gmKey'])) {
-            $js_dependencies_rcmap[] = 'gg_maps';
+            if (!$this->isTouristicPlaylist) { // do not load gmaps on playlist => improve performance
+                $js_dependencies_rcmap[] = 'gg_maps';
+            }
         }
 
         // SHEET: need to load tangram always for now (bug in vendor angular)
