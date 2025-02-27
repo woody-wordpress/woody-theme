@@ -216,6 +216,8 @@ class WoodyTheme_WoodyGetters
                 $playlist_params['autoselect_id'] = $wrapper['autoselect_id'];
             }
 
+            // TODO optimization 'outOfMemory' : remplacer un appel sur l'api standard qui nous renverrait juste les IDs des fiches de la playliste (plustôt que de formater la donnée)
+            // de toute façon l'item sera formater via la lib-hawwwai (on le fait donc actuellement 2 fois)
             $playlist = apply_filters('woody_hawwwai_playlist_render', $confId, pll_current_language(), $playlist_params, 'json');
             if (!empty($playlist['items'])) {
                 foreach ($playlist['items'] as $item) {
