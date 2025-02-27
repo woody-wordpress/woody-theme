@@ -481,6 +481,35 @@
                     "min": "",
                     "max": ""
                 },
+                "layout_642e7ff2b62b0": {
+                    "key": "layout_642e7ff2b62b0",
+                    "name": "booking_block",
+                    "label": "Formulaire de réservation",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_642e801b71e82",
+                            "label": "Formulaire de réservation",
+                            "name": "booking_block",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "hide-label",
+                                "id": ""
+                            },
+                            "clone": ["group_booking_block"],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
                 "layout_66b0cfb4b9bb4": {
                     "key": "layout_66b0cfb4b9bb4",
                     "name": "menus",
