@@ -119,7 +119,7 @@ class Front
         $class = trim('wp-caption ' . $atts['align'] . ' ' . $atts['class']);
 
         if (current_theme_supports('html5', 'caption')) {
-            return '<figure ' . $atts['id'] . ' class="' . esc_attr($class) . '">'
+            return '<figure role="figure "' . $atts['id'] . ' class="' . esc_attr($class) . '">'
                 . do_shortcode($content) . '<figcaption class="wp-caption-text">' . $atts['caption'] . '</figcaption></figure>';
         }
     }
