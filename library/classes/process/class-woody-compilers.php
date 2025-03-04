@@ -577,7 +577,36 @@ class WoodyTheme_WoodyCompilers
             'mid_size' => 3,
             'type' => 'list'
         ];
+
+        $pager_output = paginate_links($pager_args);
+        add_filter('paginate_links_output', [$this, 'links_output_aria_element'], $pager_output);
+
         return paginate_links($pager_args);
+    }
+
+    public function links_output_aria_element($pager_output) {
+        // Ajout d'un aria-label="Page X" pour chaque lien de pagination
+        $pager_output = preg_replace_callback(
+            '/<a([^>]*)href=["\']([^"\']+)["\']([^>]*)>(\d+)<\/a>/',
+            function ($matches) {
+                $aria_label = ' aria-label="' . __("Page", "woody-theme") . ' ' . $matches[4] . '"';
+                return '<a' . $matches[1] . ' href="' . $matches[2] . '"' . $aria_label . $matches[3] . '>' . $matches[4] . '</a>';
+            },
+            $pager_output
+        );
+
+        // Ajouter aria-label pour "Précédent" et "Suivant"
+        $pager_output = preg_replace_callback(
+            '/<a([^>]*)href=["\']([^"\']+)["\']([^>]*)>(«\s*Précédent|Suivant\s*»)<\/a>/u',
+            function ( $matches ) {
+                $label = (strpos($matches[4], 'Précédent') !== false) ? __("Page précédente", "woody-theme") : __("Page suivante", "woody-theme");
+                $aria_label = ' aria-label="' . $label . '"';
+                return '<a' . $matches[1] . ' href="' . $matches[2] . '"' . $aria_label . $matches[3] . '>' . $matches[4] . '</a>';
+            },
+            $pager_output
+        );
+
+        return $pager_output;
     }
 
     /**
