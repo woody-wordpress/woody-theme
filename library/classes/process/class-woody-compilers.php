@@ -578,8 +578,8 @@ class WoodyTheme_WoodyCompilers
             'type' => 'list'
         ];
 
+        add_filter('paginate_links_output', [$this, 'links_output_aria_element']);
         $pager_output = paginate_links($pager_args);
-        add_filter('paginate_links_output', [$this, 'links_output_aria_element'], $pager_output);
 
         return paginate_links($pager_args);
     }
