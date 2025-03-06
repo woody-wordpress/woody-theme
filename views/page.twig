@@ -3,7 +3,7 @@
     {% if is_frontpage %}
         <h1 class="frontpage-htitle">{{ frontpage_title|default(site.title) }}</h1>
     {% endif %}
-    <main class="content-type-page {{ page_type|default }}" id="main-content">
+    <main role="main" class="content-type-page {{ page_type|default }}" id="main-content">
 
         {% if is_pocketsite %}
             {{pocketsite_menu}}
